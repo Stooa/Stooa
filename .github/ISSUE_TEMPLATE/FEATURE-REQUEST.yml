@@ -7,18 +7,10 @@ body:
     attributes:
       value: |
         Thanks for taking the time to ask for new features :tada:!
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
   - type: textarea
     id: idea
     attributes:
-      label: "Tell us your idea :smile:"
+      label: "Tell us your idea"
       description: We are really excited for you to share your ideas with the community!
       placeholder: Tell us what you miss!
       value: "A flying car!"
