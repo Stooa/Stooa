@@ -2,8 +2,6 @@ name: Bug Report
 description: File a bug report
 title: "[Bug]: "
 labels: ["bug", "triage"]
-assignees:
-  - octocat
 body:
   - type: markdown
     attributes:
@@ -27,16 +25,6 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: version
-    attributes:
-      label: Version
-      description: What version of our software are you running?
-      options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
-    validations:
-      required: true
-  - type: dropdown
     id: browsers
     attributes:
       label: What browsers are you seeing the problem on?
@@ -46,6 +34,14 @@ body:
         - Chrome
         - Safari
         - Microsoft Edge
+        - Other
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version are you running?
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
