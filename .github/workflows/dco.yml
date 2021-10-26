@@ -7,7 +7,7 @@ on:
     types: [opened, closed, synchronize]
 
 jobs:
-  CLAssistant:
+  DCOAssistant:
     runs-on: ubuntu-latest
     steps:
       - name: DCO Assistant
@@ -23,3 +23,7 @@ jobs:
           remote-organization-name: Stooa
           remote-repository-name: DCO-signatures
           use-dco-flag: true
+          create-file-commit-message: 'Creating file for storing DCO Signatures'
+          signed-commit-message: '$contributorName has signed the DCO in #$pullRequestNo' 
+          custom-allsigned-prcomment: '**DCO Assistant** All Contributors have signed the DCO. 📝 ✅ ' 
+
