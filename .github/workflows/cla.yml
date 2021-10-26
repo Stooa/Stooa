@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "DCO Assistant"
-        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the [DCO Document](https://github.com/Stooa/Stooa/DCOLICENSE.md) and I hereby sign the DCO') || github.event_name == 'pull_request_target'
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the DCO Document and I hereby sign the DCO') || github.event_name == 'pull_request_target'
         # Beta Release
         uses: cla-assistant/github-action@v2.1.3-beta
         env:
@@ -19,7 +19,7 @@ jobs:
           PERSONAL_ACCESS_TOKEN : ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
           path-to-signatures: 'signatures/version1/dco.json'
-          path-to-document: 'https://github.com/Stooa/Stooa/DCOLICENSE.md' # e.g. a CLA or a DCO document
+          path-to-document: 'https://github.com/Stooa/Stooa/DCOLICENSE.md'
           # branch should not be protected
           branch: 'main'
           # allowlist: 
@@ -33,5 +33,4 @@ jobs:
           #custom-pr-sign-comment: 'The signature to be committed in order to sign the CLA'
           #custom-allsigned-prcomment: 'pull request comment when all contributors has signed, defaults to **CLA Assistant Lite bot** All Contributors have signed the CLA.'
           #lock-pullrequest-aftermerge: false - if you don't want this bot to automatically lock the pull request after merging (default - true)
-          #use-dco-flag: true - If you are using DCO instead of CLA
-
+          use-dco-flag: true
