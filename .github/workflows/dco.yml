@@ -7,7 +7,7 @@ on:
     types: [opened, closed, synchronize]
 
 jobs:
-  DCOAssistant:
+  Signature:
     runs-on: ubuntu-latest
     steps:
       - name: DCO Assistant
