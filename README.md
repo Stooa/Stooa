@@ -25,3 +25,5 @@ Please [read carefully our license][license] and ask us if you have any question
 [license]: LICENSE
 [contribute]: https://github.com/Stooa/Documentation/blob/main/CONTRIBUTING.md
 [conduct]: https://github.com/Stooa/Documentation/blob/main/CODE_OF_CONDUCT.md
+
+I changed the readme
