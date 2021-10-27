@@ -18,8 +18,8 @@ on:
 
 jobs:
   signature:
-    name: Sign Developer Certificate of Origin (DCO)
-    
+    name: Signature
+
     runs-on: ubuntu-latest
 
     steps:
