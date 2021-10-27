@@ -1603,7 +1603,7 @@
     style-dictionary "^2.10.2"
     yargs-parser "^20.2.4"
 
-"@runroom/npm-scripts@^1.0.8":
+"@runroom/npm-scripts@1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@runroom/npm-scripts/-/npm-scripts-1.0.8.tgz#6fbd5d5a073f4d6483bcd5c92ba2efadd206a15a"
   integrity sha512-1TYEzCHjRgoMCEQ7efJq7DWY/GxYbdZ4CzrG9UTEeIZVcd6C14B8khMz/fT3s0kahjjXQUF15B6G5PmKqDzzWg==
