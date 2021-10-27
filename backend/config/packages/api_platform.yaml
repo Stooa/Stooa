@@ -1,0 +1,22 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+api_platform:
+    enable_entrypoint: false
+    enable_docs: false
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Entity'
+            - '%kernel.project_dir%/src/Model'
+    patch_formats:
+        json: ['application/merge-patch+json']
+    graphql:
+        enabled: true
+        graphql_playground:
+            enabled: false
+        graphiql:
+            enabled: false

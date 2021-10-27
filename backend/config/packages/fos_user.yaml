@@ -1,0 +1,19 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+fos_user:
+    db_driver: orm
+    firewall_name: admin
+    user_class: App\Entity\SonataUserUser
+    from_email:
+        address: '%env(MAILER_FROM)%'
+        sender_name: Backoffice
+    group:
+        group_class: App\Entity\SonataUserGroup
+        group_manager: sonata.user.orm.group_manager
+    service:
+        user_manager: sonata.user.orm.user_manager

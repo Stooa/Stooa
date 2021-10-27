@@ -1,0 +1,55 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+# This workflow will install PHP with all composer dependencies and checks any .php, .twig or .yaml linting error.
+
+name: Backend lint
+
+on:
+  pull_request:
+
+jobs:
+  backend-lint:
+    name: PHP ${{ matrix.php }}
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    strategy:
+      matrix:
+        php: ['7.4']
+
+    steps:
+      - name: Checkout the repository to Github workspace
+        uses: actions/checkout@v2
+
+      - name: Setup the PHP environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: cs2pr, composer
+
+      - name: Install all Composer dependencies
+        uses: ramsey/composer-install@v1
+        with:
+          composer-options: --working-dir=backend --prefer-dist --no-scripts
+
+      - name: Execute PHP CS Fixer to ensure coding standards
+        run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
+
+      - name: Executes Composer normalize to ensure that composer file is correctly generated
+        run: composer normalize --dry-run
+
+      - name: Ensure that all the .yaml files are linted correctly
+        run: composer lint-yaml
+
+      - name: Ensure that all the .twig files are linted correctly
+        run: composer lint-twig

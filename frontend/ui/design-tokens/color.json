@@ -1,0 +1,106 @@
+{
+  "colors": {
+    "neutral100": {
+      "value": "#fff"
+    },
+    "neutral200": {
+      "value": "#faf8f5"
+    },
+    "neutral300": {
+      "value": "#f4efe7"
+    },
+    "neutral400": {
+      "value": "#ebe5dd"
+    },
+    "neutral500": {
+      "value": "#f0e3d3"
+    },
+    "neutral600": {
+      "value": "#bda28f"
+    },
+    "neutral700": {
+      "value": "#90766f"
+    },
+    "neutral800": {
+      "value": "#442c16"
+    },
+    "neutral900": {
+      "value": "#151008"
+    },
+    "bPurple100": {
+      "value": "#f6edf9"
+    },
+    "bPurple200": {
+      "value": "#efdff5"
+    },
+    "bPurple300": {
+      "value": "#d5ace3"
+    },
+    "bPurple400": {
+      "value": "#b958db"
+    },
+    "bPurple500": {
+      "value": "#7d13a3"
+    },
+    "empty-name": {
+      "value": "empty-value"
+    },
+    "bPurple800": {
+      "value": "#381146"
+    },
+    "bPurple900": {
+      "value": "#230030"
+    },
+    "bGreen100": {
+      "value": "#eaf6f4"
+    },
+    "bGreen200": {
+      "value": "#b3dfd7"
+    },
+    "bGreen400": {
+      "value": "#5ddbd0"
+    },
+    "bGreen500": {
+      "value": "#2ec4b6"
+    },
+    "bGreen600": {
+      "value": "#0da8a1"
+    },
+    "bGreen900": {
+      "value": "#023530"
+    },
+    "bRed100": {
+      "value": "#ffebe5"
+    },
+    "bRed200": {
+      "value": "#ffdad8"
+    },
+    "bRed400": {
+      "value": "#ff988a"
+    },
+    "bRed500": {
+      "value": "#fa6969"
+    },
+    "bRed600": {
+      "value": "#c72835"
+    },
+    "bRed900": {
+      "value": "#681510"
+    },
+    "bYellow100": {
+      "value": "#fbf5da"
+    },
+    "bYellow200": {
+      "value": "#ffec99"
+    },
+    "bYellow300": {
+      "value": "#f8dbaf"
+    },
+    "bYellow500": {
+      "value": "#ffdd6e"
+    },
+    "bYellow900": {
+      "value": "#472400"
+    }
+  }
+}

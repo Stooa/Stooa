@@ -1,0 +1,52 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+emails:
+  from: Stooa
+  welcome_email:
+    subject: Bienvenido/a a Stooa!
+    title: Bienvenido/a a Stooa
+    subtitle:
+      Stooa es una herramienta de conferencias abiertas online. Todo el mundo tiene voz. Únete,
+      escucha y comparte tu conocimiento.
+    cta: Crea ahora un fishbowl
+    delete:
+      'Si quieres eliminar tu cuenta de Stooa, por favor, envíanos un email <a
+      href="mailto:stooa@stooa.com?subject=Delete Stooa account">aquí</a>'
+  reset_password_email:
+    subject: '¡Hola %name%! Hemos recibido una solicitud para restablecer tu contraseña de Stooa'
+    title: '¡Hola %name%!'
+    description: 'Para restablecer tu contraseña, sigue el siguiente enlace:'
+    expire_text: 'Recuerda que este enlace expirará en 1h.'
+    button_text: 'Restablece tu contraseña'
+    information_text:
+      "Si ignoras este mensaje tu contraseña no cambiará.<br>Si no has solicitado un cambio de
+      contraseña, <a href='mailto:%email%'>avísanos</a>."
+    information_help_text:
+      'Si esta no es tu cuenta, puedes borrar tu email de ella. <br>Por favor, no contestes a este
+      email con tu contraseña. Nosotros nunca te pediremos tu contraseña y te recomendamos que no la
+      compartas con nadie.'
+  fishbowl_created_email:
+    subject: '¡Hola %name%! Has creado un nuevo fishbowl'
+    title: ¡Bien hecho!
+    description: 'Revisa los detalles de tu nuevo fishbowl:'
+    info_title: Título
+    info_duration: Duración
+    info_description: Descripción
+    info_language: Idioma
+    info_start_date: Fecha de inicio
+    info_start_time: Hora de inicio
+    info_invite: Enlace para invitar los asistentes
+    info_url: Clica aquí para acceder al fishbowl
+    delete:
+      'Si quieres borrar este fishbowl, por favor, envíanos un email <a
+      href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl
+      event with id: %id%">aquí</a>'
+    languages:
+      es: 'Español'
+      ca: 'Catalán'
+      en: 'Inglés'
