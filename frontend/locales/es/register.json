@@ -1,14 +1,14 @@
 {
-    "title": "Regístrate para empezar",
-    "shareAccount": "Si quieres compartir tu perfil de <strong>Twitter</strong> o <strong>Linkedin</strong> con el resto de asistentes, completa los siguientes campos.",
-    "linkedin": "Linkedin URL (opcional)",
-    "twitter": "Twitter URL (opcional)",
-    "linkedinHelp": "Copia y pega la URL de tu perfil de Linkedin",
-    "twitterHelp": "Copia y pega la URL de tu perfil de Twitter",
-    "haveAccount": "¿Ya tienes una cuenta?",
-    "button": {
-        "register": "Regístrate gratis",
-        "login": "Entra"
-    },
-    "terms": "Con la creación de esta cuenta, estás aceptando nuestros <a>Términos y Condiciones y la Política de Privacidad</a>."
+  "title": "Cambio de contraseña",
+  "shareAccount": "Si quieres compartir tu perfil de <strong>Twitter</strong> o <strong>Linkedin</strong> con el resto de asistentes, completa los siguientes campos.",
+  "linkedin": "Linkedin URL (opcional)",
+  "twitter": "Twitter URL (opcional)",
+  "linkedinHelp": "Copia y pega la URL de tu perfil de Linkedin",
+  "twitterHelp": "Copia y pega la URL de tu perfil de Twitter",
+  "haveAccount": "¿Ya tienes una cuenta?",
+  "button": {
+    "register": "Regístrate gratis",
+    "login": "Entra"
+  },
+  "terms": "Con la creación de esta cuenta, estás aceptando nuestros <a>Términos y Condiciones y la Política de Privacidad</a>."
 }
