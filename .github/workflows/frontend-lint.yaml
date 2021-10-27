@@ -7,7 +7,7 @@
 
 # This workflow ensures that all the Javascript code is linted and styled correctly.
 
-name: Frontend lint and Style
+name: Frontend lint and style
 
 on:
   pull_request:
