@@ -23,7 +23,7 @@ import {
   COLOR_RED_100,
   COLOR_RED_200,
   COLOR_RED_600,
-  COLOR_YELLOW_100,
+  COLOR_YELLOW_100
 } from 'ui/settings';
 import { TEXT_SM, TEXT_LG } from 'ui/Texts';
 

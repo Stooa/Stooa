@@ -37,17 +37,17 @@ type IIconProps = {
 
 const Icon: React.FC<IIconProps> = ({ className = '', variant }) => {
   const iconVariant = {
-    avatar: Avatar,
-    calendar: Calendar,
-    checkmark: Checkmark,
+    'avatar': Avatar,
+    'calendar': Calendar,
+    'checkmark': Checkmark,
     'chevron-down': ChevronDown,
-    cross: Cross,
-    clock: Clock,
-    hourglass: Hourglass,
-    language: Language,
-    lock: Lock,
-    mail: Mail,
-    world: World,
+    'cross': Cross,
+    'clock': Clock,
+    'hourglass': Hourglass,
+    'language': Language,
+    'lock': Lock,
+    'mail': Mail,
+    'world': World
   };
 
   const IconComponent = iconVariant[variant];

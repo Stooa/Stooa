@@ -15,7 +15,7 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_NEUTRO_800,
+  COLOR_NEUTRO_800
 } from 'ui/settings';
 
 const OnboardingWrapper = styled.div`

@@ -21,7 +21,7 @@ import {
   ROUTE_RECOVER_PASSWORD,
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
-  ROUTE_RESET_PASSWORD,
+  ROUTE_RESET_PASSWORD
 } from 'app.config';
 
 import {
@@ -30,7 +30,7 @@ import {
   COOKIE_TOKEN,
   getAuthToken,
   setRefreshToken,
-  setToken,
+  setToken
 } from 'lib/auth';
 
 import api from 'lib/api';
@@ -44,14 +44,14 @@ const authenticatedRoutes = [
   ROUTE_FISHBOWL_DETAIL,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_EDIT_PROFILE,
-  ROUTE_CHANGE_PASSWORD,
+  ROUTE_CHANGE_PASSWORD
 ];
 
 const unauthenticatedRoutes = [
   ROUTE_SIGN_IN,
   ROUTE_REGISTER,
   ROUTE_RECOVER_PASSWORD,
-  ROUTE_RESET_PASSWORD,
+  ROUTE_RESET_PASSWORD
 ];
 
 export type AuthContextType = {
@@ -79,7 +79,7 @@ const AuthContext = createContext<AuthContextType>({
   logout: voidFunction,
   updateUser: voidFunction,
   updateLogingStatus: voidFunction,
-  updateCreateFishbowl: voidFunction,
+  updateCreateFishbowl: voidFunction
 });
 
 const AuthProvider = ({ children }) => {
@@ -116,7 +116,7 @@ const AuthProvider = ({ children }) => {
         const user = auth ? auth.user : null;
         const status = {
           type: 'Success',
-          data,
+          data
         };
 
         if (user) setUser(user);
@@ -133,13 +133,13 @@ const AuthProvider = ({ children }) => {
       })
       .catch(error => {
         const {
-          response: { data },
+          response: { data }
         } = error;
         setLoading(false);
 
         const status = {
           type: 'Error',
-          data,
+          data
         };
 
         setLoginStatus(status);
@@ -181,9 +181,8 @@ const AuthProvider = ({ children }) => {
         logout,
         updateUser,
         updateLogingStatus,
-        updateCreateFishbowl,
-      }}
-    >
+        updateCreateFishbowl
+      }}>
       {children}
     </AuthContext.Provider>
   );

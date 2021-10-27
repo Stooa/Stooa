@@ -45,8 +45,7 @@ const CopyUrl: React.FC<IProps> = ({ data, className = '', variant = 'default' }
     <Share
       className={`${copySuccess ? 'success' : ''} ${
         variant === 'left' ? 'align-left' : ''
-      } ${className}`}
-    >
+      } ${className}`}>
       <button className={`button`} onClick={copyToClipboard} disabled={copySuccess}>
         {!copySuccess ? (
           <span ref={linkRef} data-url={fbUrl}>

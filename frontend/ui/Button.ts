@@ -17,7 +17,7 @@ import {
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
   COLOR_RED_400,
-  COLOR_RED_500,
+  COLOR_RED_500
 } from 'ui/settings';
 import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from 'ui/Texts';
 import { hover, rems, space } from 'ui/helpers';
@@ -143,6 +143,6 @@ export {
   ButtonSmall,
   ButtonTransp,
   ButtonLink,
-  ButtonLinkApp,
+  ButtonLinkApp
 };
 export default Button;

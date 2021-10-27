@@ -56,7 +56,7 @@ const initialValues = {
   terms: false,
   linkedin: '',
   twitter: '',
-  isSubmitting: false,
+  isSubmitting: false
 };
 
 const Form = (props: FormikProps<IFormValues>) => {
@@ -93,7 +93,7 @@ const Form = (props: FormikProps<IFormValues>) => {
           <Trans
             i18nKey="register:terms"
             components={{
-              a: <a href={privacyLink} target="_blank" rel="noreferrer noopener nofollow" />,
+              a: <a href={privacyLink} target="_blank" rel="noreferrer noopener nofollow" />
             }}
           />
         </Checkbox>
@@ -123,7 +123,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
       password: Yup.string().min(6, props.minlength).required(props.required),
       terms: Yup.boolean().required(props.required).oneOf([true], props.terms),
       linkedin: Yup.string().url(props.url),
-      twitter: Yup.string().url(props.url),
+      twitter: Yup.string().url(props.url)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
@@ -139,9 +139,9 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
             plainPassword: values.password,
             privacyPolicy: !!values.terms,
             locale: props.locale,
-            allowShareData: values.linkedin !== '' || values.twitter !== '',
-          },
-        },
+            allowShareData: values.linkedin !== '' || values.twitter !== ''
+          }
+        }
       })
       .then(res => {
         setSubmitting(false);
@@ -152,10 +152,10 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
         setSubmitting(false);
         props.onSubmit({
           type: 'Error',
-          data: error,
+          data: error
         });
       });
-  },
+  }
 })(Form);
 
 const Register = () => {
@@ -177,13 +177,13 @@ const Register = () => {
     } else {
       await login(values.email, values.password).then(res => {
         const {
-          data: { username },
+          data: { username }
         } = res;
 
         dataLayerPush({
           dataLayerPush: 'GAPageView',
           pageViewUrl: '/user-registered',
-          pageViewTitle: `User registered ${username}`,
+          pageViewTitle: `User registered ${username}`
         });
       });
     }

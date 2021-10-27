@@ -19,7 +19,7 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_RED_400,
-  COLOR_RED_500,
+  COLOR_RED_500
 } from 'ui/settings';
 import { rems } from 'ui/helpers';
 

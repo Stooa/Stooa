@@ -36,7 +36,7 @@ const DevicesProvider = ({ children }) => {
   const [devices, setDevices] = useState<DevicesInterface>({
     audioOutputDevices: [],
     audioInputDevices: [],
-    videoDevices: [],
+    videoDevices: []
   });
   const [audioOutputDevice, setAudioOutputDevice] = useState<MediaDeviceInfo | null>(
     userRepository.getUserAudioOutput()
@@ -158,9 +158,8 @@ const DevicesProvider = ({ children }) => {
         audioOutputDevice,
         audioInputDevice,
         videoDevice,
-        devices,
-      }}
-    >
+        devices
+      }}>
       {children}
     </DevicesContext.Provider>
   );

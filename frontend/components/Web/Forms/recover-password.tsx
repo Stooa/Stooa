@@ -35,7 +35,7 @@ interface IFormProps {
 }
 
 const initialValues = {
-  email: '',
+  email: ''
 };
 
 const Form = (props: FormikProps<IFormValues>) => {
@@ -64,7 +64,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
-      email: Yup.string().email(props.email).required(props.required),
+      email: Yup.string().email(props.email).required(props.required)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
@@ -73,9 +73,9 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
         variables: {
           input: {
             email: values.email,
-            locale: props.locale,
-          },
-        },
+            locale: props.locale
+          }
+        }
       })
       .then(res => {
         setSubmitting(false);
@@ -86,10 +86,10 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
         setSubmitting(false);
         props.onSubmit({
           type: 'Error',
-          data: error,
+          data: error
         });
       });
-  },
+  }
 })(Form);
 
 const RecoverPassword = () => {

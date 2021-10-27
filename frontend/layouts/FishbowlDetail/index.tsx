@@ -17,7 +17,7 @@ import {
   Header as HeaderStyled,
   Footer as FooterStyled,
   Decoration as DecorationStyled,
-  Main,
+  Main
 } from 'layouts/Default/styles';
 
 interface IProps {
