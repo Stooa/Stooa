@@ -1,0 +1,52 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+emails:
+  from: Stooa
+  welcome_email:
+    subject: Welcome to Stooa!
+    title: Welcome to Stooa
+    subtitle:
+      Stooa is an unconference online tool. Everyone has a voice. Join, listen and Share your
+      knowledge with others.
+    cta: Create a fishbowl now
+    delete:
+      'If you want to delete your Stooa account please email us <a
+      href="mailto:stooa@stooa.com?subject=Delete Stooa account">here</a>'
+  reset_password_email:
+    subject: 'Hello %name%! We got a request to reset your Stooa password'
+    title: 'Hello %name%!'
+    description: 'To reset your password, please visit the following link:'
+    expire_text: 'Remember that this link will expire in 1h.'
+    button_text: 'Reset your password'
+    information_text:
+      "If you ignore this message, your password won't be changed.<br>If you didn't request a
+      password reset, <a href='mailto:%email%'>let us know</a>."
+    information_help_text:
+      'If this is not your account you can remove your email from it. <br>Please do not reply to
+      this email with your password. We will never ask for your password, and we strongly discourage
+      you from sharing it with anyone.'
+  fishbowl_created_email:
+    subject: 'Hello %name%! You have created a new fishbowl'
+    title: Well done!
+    description: 'Check out the details of your new fishbowl:'
+    info_title: Title
+    info_duration: Duration
+    info_description: Description
+    info_language: Language
+    info_start_date: Start date
+    info_start_time: Start time
+    info_invite: Link to invite attendees
+    info_url: Click here to access the fishbowl
+    delete:
+      'If you want to delete this fishbowl please email us <a
+      href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl
+      event with id: %id%">here</a>'
+    languages:
+      es: 'Spanish'
+      ca: 'Catalan'
+      en: 'English'

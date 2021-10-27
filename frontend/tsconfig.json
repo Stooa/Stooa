@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/jitsi/*": ["lib/jitsi-modules/*"],
+      "@/lib/*": ["lib/*"],
+      "@/graphql/*": ["lib/gql/*"],
+      "@/pages/*": ["pages/*"],
+      "@/components/*": ["components/*"],
+    },
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "typeRoots": ["./node_modules/@types/*", "./customTypes/*.d.ts"]
+  },
+  "exclude": ["node_modules"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Jitsi/index.jsx"]
+}

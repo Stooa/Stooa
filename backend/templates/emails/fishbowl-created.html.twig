@@ -1,0 +1,90 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+{% extends '/emails/templates/email-base.html.twig' %}
+
+{% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
+{% set fishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
+
+{% block title %}
+    {{ 'emails.fishbowl_created_email.title'|trans({}, null, locale) }}
+{% endblock %}
+
+{% block body %}
+    {{ macros.title('emails.fishbowl_created_email.title'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.spaceRow(20) }}
+    {{ macros.text('emails.fishbowl_created_email.description'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.spaceRow(30) }}
+
+    <tr>
+        <td align="center">
+            <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 100%;">
+                {{ macros.dl(
+                    'emails.fishbowl_created_email.info_title'|trans({}, null, locale),
+                    fishbowlName,
+                    emailConfig
+                ) }}
+                {{ macros.spaceRow(10, 2) }}
+                {% if fishbowlDescription %}
+                    {{ macros.dl(
+                        'emails.fishbowl_created_email.info_description'|trans({}, null, locale),
+                        fishbowlDescription,
+                        emailConfig
+                    ) }}
+                    {{ macros.spaceRow(10, 2) }}
+                {% endif %}
+                {{ macros.dl(
+                    'emails.fishbowl_created_email.info_language'|trans({}, null, locale),
+                    ('emails.fishbowl_created_email.languages.' ~ locale)|trans({}, null, locale),
+                    emailConfig
+                ) }}
+                {{ macros.spaceRow(10, 2) }}
+                {{ macros.dl(
+                    'emails.fishbowl_created_email.info_start_date'|trans({}, null, locale),
+                    fishbowlStartDate,
+                    emailConfig
+                ) }}
+                {{ macros.spaceRow(10, 2) }}
+                {{ macros.dl(
+                    'emails.fishbowl_created_email.info_start_time'|trans({}, null, locale),
+                    fishbowlStartTime,
+                    emailConfig
+                ) }}
+                {{ macros.spaceRow(10, 2) }}
+                {{ macros.dl(
+                    'emails.fishbowl_created_email.info_duration'|trans({}, null, locale),
+                    fishbowlDuration ~ ' h',
+                    emailConfig
+                ) }}
+                {{ macros.spaceRow(10, 2) }}
+                {{ macros.dl(
+                    'emails.fishbowl_created_email.info_invite'|trans({}, null, locale),
+                    urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.link.styles }),
+                    emailConfig
+                ) }}
+            </table>
+        </td>
+    </tr>
+
+    {{ macros.spaceRow(55) }}
+    <tr>
+        <td align="center">
+            {% include '/emails/components/email-button.html.twig' with {
+                link: fishbowlLink,
+                label: 'emails.fishbowl_created_email.info_url'|trans({}, null, locale)
+            } %}
+        </td>
+    </tr>
+    {{ macros.spaceRow(55) }}
+    {{ macros.note('emails.fishbowl_created_email.delete'|trans({'%id%': fishbowlId, '%styles%': emailConfig.link.styles}, null, locale), emailConfig) }}
+    {{ macros.spaceRow(25) }}
+{% endblock %}

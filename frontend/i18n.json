@@ -1,0 +1,22 @@
+{
+  "locales": ["en", "ca", "es"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["common"],
+    "/": ["home"],
+    "/_error": ["_error", "home"],
+    "/404": ["_error", "home"],
+    "/cookies-policy": ["legals"],
+    "/privacy-policy": ["legals"],
+    "/change-password": ["change-password", "password", "form"],
+    "/reset-password/[token]": ["form", "password"],
+    "/edit-profile": ["form", "edit-profile", "register", "password"],
+    "/log-in": ["form", "login"],
+    "/recover-password": ["form", "recover"],
+    "/register": ["form", "register"],
+    "/fb/[fid]": ["fishbowl", "app", "form", "on-boarding"],
+    "/fishbowl/create": ["fishbowl", "form"],
+    "/fishbowl/detail/[fid]": ["fishbowl", "form"],
+    "/fishbowl/thankyou/[fid]": ["fishbowl", "form", "home"]
+  }
+}

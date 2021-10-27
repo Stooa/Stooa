@@ -1,0 +1,22 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+admin_security:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+
+fos_user_resetting_reset:
+    path: /admin/reset/{token}
+    controller: Sonata\UserBundle\Controller\AdminResettingController::resetAction
+
+symfonycast_reset_pass:
+    path: /admin/reset-password
+    controller: App\Controller\ResetPasswordController::request

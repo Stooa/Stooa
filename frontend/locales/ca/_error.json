@@ -1,0 +1,10 @@
+{
+  "pageTitle": "Error",
+  "title": "Error",
+  "description": "Si us plau, <a>envia'm un email</a> si et sembla que alguna cosa que no funciona.",
+  "404": {
+    "pageTitle": "404",
+    "title": "Sembla que aquí no hi ha res (ni ningú 👀).",
+    "text": "De totes maneres, aquí tens alguns enllaços útils:"
+  }
+}

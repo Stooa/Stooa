@@ -1,0 +1,9 @@
+{
+    "title": "Recover your password",
+    "description": "Enter your email and we will send you instructions to generate a new password.",
+    "email": "Email",
+    "placeholder": "Email",
+    "button": "Send instructions",
+    "back": "Back to Log in",
+    "sent": "We have just sent you an email with the instructions to recover your password."
+}

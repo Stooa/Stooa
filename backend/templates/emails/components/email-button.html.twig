@@ -1,0 +1,31 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% set backgroundColor = emailConfig.button.background %}
+{% set padding = emailConfig.button.padding|default('8px 10px 6px') %}
+{% set buttonRadius = emailConfig.button.radius|default(false) %}
+{% set rounded = buttonRadius ? '-webkit-border-radius: ' ~ buttonRadius ~ '; -moz-border-radius: ' ~ buttonRadius ~ '; border-radius: ' ~ buttonRadius ~ ';' : '' %}
+
+<table border="0" cellspacing="0" cellpadding="5">
+    <tr>
+        <td align="center" style="{{ rounded }} background-color: {{ backgroundColor }};" bgcolor="{{ backgroundColor }}">
+            <table border="0" cellspacing="0" cellpadding="0" style="{{ rounded }} background-color: {{ backgroundColor }};" bgcolor="{{ backgroundColor }}">
+                <tr>
+                    <td style="{{ rounded }} background-color: {{ backgroundColor }}; color: {{ emailConfig.button.color }}; {{ emailConfig.button.styles }} padding: {{ padding }};" bgcolor="{{ backgroundColor }}">
+                        <a class="button" href="{{ link }}" style="{{ rounded }} background-color: {{ backgroundColor }}; color: {{ emailConfig.button.color }}; text-decoration: none; {{ emailConfig.button.styles }}">
+                            {{ label }}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

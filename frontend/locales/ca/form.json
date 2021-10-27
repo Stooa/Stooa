@@ -1,0 +1,45 @@
+{
+  "firstname": "Nom",
+  "lastname": "Cognom",
+  "email": "Email",
+  "password": "Contrasenya",
+  "name": "El teu nom",
+  "haveAccount": "Ja tens un compte?",
+  "noAccount": "No tens compte?",
+  "fishbowl": {
+    "topic": "Tema de conversa",
+    "day": "Data",
+    "selectDay": "Selecciona el dia",
+    "time": "Comença a les",
+    "selectTime": "Selecciona l'hora",
+    "selectLanguage": "Selecciona l'idioma",
+    "hours": "h",
+    "minutes": "m",
+    "duration": "Durada",
+    "selectDuration": "Selecciona una durada",
+    "description": "Descripció (opcional)",
+    "timezone": "Zona horària",
+    "selectTimeZone": "Selecciona zona horària"
+  },
+  "button": {
+    "login": "Entra",
+    "register": "Següent",
+    "createAccount": "Crea un compte!",
+    "createFishbowl": "Crear fishbowl",
+    "modifyFishbowl": "Modificar fishbowl",
+    "recoverPassword": "Envia un enllaç de recuperació",
+    "enterFishbowl": "Entrar",
+    "save": "Guardar",
+    "changePassword": "Canviar la contrasenya"
+  },
+  "validation": {
+    "required": "Aquest camp és necessari",
+    "email": "Adreça invàlida",
+    "date": "El format de la data és invàlid: dd/mm/aaaa",
+    "passwordLength": "La contrasenya ha de tenir 6 caràcters o més",
+    "terms": "Has d'acceptar els termes i condicions",
+    "url": "Aquesta url no és vàlida",
+    "twitter": "L'usiari de Twitter ha de començar per @",
+    "equalPassword": "Les dues contrasenyes han de ser iguals"
+  }
+}

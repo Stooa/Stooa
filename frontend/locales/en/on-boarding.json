@@ -1,0 +1,26 @@
+{
+    "skip": "Skip to the fishbowl",
+    "done": "I’m all set!",
+    "new": {
+        "title": "New in here? Don’t worry!",
+        "text": "<p>In a fishbowl, there are 5 seats available where conversation takes place. If there is a free seat you can join the conversation at any time. Just one rule: <strong>there must always be a seat available.</strong></p><p>If all 5 seats are occupied and you have already participated, leave your seat free so that the rest can contribute as well.</p>"
+    },
+    "hostIntroduction": {
+        "title": "What happens now?",
+        "preTitle": "Host introduction",
+        "hostText": "<p>When you start the fishbowl, <strong>you can start by making an introduction.</strong> The camera and microphone will be active just for you. When you're done, <strong>don't forget to allow attendees to join the conversation.</strong></p>",
+        "participantText": "<p>When the fishbowl starts, <strong>the host can make an introduction.</strong> After this, all participants will have permission to join the conversation.</p>"
+    },
+    "appControls": {
+        "title": "How can I interact?",
+        "preTitle": "In-App Controls",
+        "text": "<div><ul><li><strong>Join the conversation</strong> and <strong>exit the conversation</strong> using the green and red buttons.</li><li>Control the microphone using the button <strong>Unmute/Mute</strong>.</li><li>Connect <strong>with attendees</strong> by accessing their Linkedin and Twitter profiles (if they have provided them).</li></ul></div>"
+    },
+    "end": {
+        "title": "All good things have an end...",
+        "preTitle": "The end of the Fishbowl",
+        "hostText": "<p>You will see a notification in the upper right when <strong> there is 1 minute </strong> for the fishbowl to finish. When this happens, <strong>access to join the conversation will be closed</strong> for all attendees except for you. It is time to close the fishbowl and say goodbye to the participants.</p>",
+        "participantText": "<p>You’ll notice on the top right when the fishbowl has <strong>1 minute left.</strong> Once this happens, the <strong>access to join the conversation will be closed to all attendees</strong> except for the host.</p>"
+    },
+    "tooltip": "👆🏼 You can check the introductory guide here at any time."
+}

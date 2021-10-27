@@ -1,0 +1,50 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends '/emails/templates/email-base.html.twig' %}
+
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+
+{% block title 'Título de cabecera' %}
+{% block preview %}
+    {{ macros.previewText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet sagittis lacus. Mauris sed augue enim. Donec elementum scelerisque facilisis.', emailConfig) }}
+{% endblock %}
+
+{% block body %}
+    {{ macros.title('Este es un titular', emailConfig) }}
+    {{ macros.spaceRow(28) }}
+    {{ macros.text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet sagittis lacus. Mauris sed augue enim. Donec elementum scelerisque facilisis.', emailConfig) }}
+    {{ macros.spaceRow(14) }}
+    {{ macros.text('Fusce tempus venenatis turpis, vel tincidunt velit ornare vel. Cras lacus mi, condimentum at gravida nec, gravida id risus. Nulla facilisi. Aenean fermentum eros id malesuada rhoncus.', emailConfig) }}
+    {{ macros.spaceRow(56) }}
+    <tr>
+        <td>
+            {% include '/emails/components/comment.html.twig' with {
+                comment: 'I, not events, have the power to make me happy or unhappy today. I can choose which it shall be. Yesterday is dead, tomorrow hasn\'t arrived yet. I have just one day, today, and I\'m going to be happy in it.',
+                cite: 'Groucho Marx'
+            } %}
+        </td>
+    </tr>
+    {{ macros.spaceRow(56) }}
+    {{ macros.text('Fusce tempus venenatis turpis, vel tincidunt velit ornare vel. Cras lacus mi, condimentum at gravida nec, gravida id risus. Nulla facilisi. Aenean fermentum eros id malesuada rhoncus.', emailConfig) }}
+    {{ macros.spaceRow(56) }}
+    <tr>
+        <td align="center">
+            {% include '/emails/components/email-button.html.twig' with {
+                link: 'https://acme.io',
+                label: 'Botón de ejemplo'
+            } %}
+        </td>
+    </tr>
+    {{ macros.spaceRow(56) }}
+    {{ macros.note('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet sagittis lacus. Mauris sed augue enim. Donec elementum scelerisque facilisis.', emailConfig) }}
+    {{ macros.spaceRow(56) }}
+{% endblock %}

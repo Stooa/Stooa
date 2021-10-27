@@ -1,0 +1,52 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% macro previewText(preview, config) %}{% apply spaceless %}
+{% if preview is defined and preview != '' %}
+<div style="display:none;font-size:1px;color:{{ config.background.content }};line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+    {{ preview }}
+    {% for i in 1.. (300 - preview|length) %}·{% endfor %}
+</div>
+{% endif %}
+{% endapply %}{% endmacro %}
+
+{% macro text(text, config, styles = '', type = 'regular') %}{% apply spaceless %}
+    <tr>
+        <td style="{{ config.font[type] }}{{ styles }}">{{ text|raw }}</td>
+    </tr>
+{% endapply %}{% endmacro %}
+
+{% macro title(text, config, styles = '') %}{% apply spaceless %}
+    {% import _self as macros %}
+    {{ macros.text(text, config, styles, 'title') }}
+{% endapply %}{% endmacro %}
+
+{% macro note(text, config, styles = '') %}{% apply spaceless %}
+    {% import _self as macros %}
+    {{ macros.text(text, config, styles, 'note') }}
+{% endapply %}{% endmacro %}
+
+{% macro dl(label, text, config, styles = '', type = 'regular') %}{% apply spaceless %}
+    <tr>
+        <td valign="top" class="col200 fullwidth" style="{{ config.font[type] }}{{ styles }}"><b>{{ label|raw }}</b></td>
+        <td valign="top" class="fullwidth" style="{{ config.font[type] }}{{ styles }}">{{ text|raw }}</td>
+    </tr>
+{% endapply %}{% endmacro %}
+
+{% macro spaceRow(height, colspan, class) %}{% apply spaceless %}
+    <tr>
+        <td{% if class %} class="{{ class }}"{% endif %} height="{{ height }}" {% if colspan %} colspan="{{ colspan }}"{% endif %} style="height: {{ height }}px; font-size: 1px; line-height: 1;">&nbsp;</td>
+    </tr>
+{% endapply %}{% endmacro %}
+
+{% macro spaceCell(width, class) %}{% apply spaceless %}
+    <td{% if class %} class="{{ class }}"{% endif %} width="{{ width }}" style="font-size: 1px; line-height: 1; width: {{ width }}px;">&nbsp;</td>
+{% endapply %}{% endmacro %}

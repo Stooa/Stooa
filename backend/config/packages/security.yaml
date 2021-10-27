@@ -1,0 +1,79 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: auto
+        App\Entity\User: auto
+
+    access_control:
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
+
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/refresh-token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/docs$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/graphql/graphql_playground$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_USER
+            - ROLE_SONATA_ADMIN
+            - ROLE_SONATA_USER_ADMIN_USER_VIEW
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
+    access_decision_manager:
+        strategy: unanimous
+    providers:
+        admin:
+            id: fos_user.user_provider.username
+        api:
+            entity:
+                class: App\Entity\User
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        admin:
+            anonymous: lazy
+            pattern: /admin(.*)
+            provider: admin
+            context: user
+            switch_user: true
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login_check
+                default_target_path: sonata_admin_dashboard
+            logout:
+                path: /admin/logout
+                target: /admin/login
+            remember_me:
+                secret: '%env(APP_SECRET)%'
+                lifetime: 2629746
+                path: /admin
+        refresh:
+            pattern: ^/refresh-token
+            stateless: true
+            anonymous: true
+        api:
+            anonymous: lazy
+            pattern: /(.*)
+            provider: api
+            stateless: true
+            json_login:
+                check_path: /login
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator

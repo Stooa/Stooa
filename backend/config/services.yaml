@@ -1,0 +1,83 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+    locale: en
+    container.dumper.inline_factories: true
+    container.dumper.inline_class_loader: true
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Vendors
+    Gedmo\Timestampable\TimestampableListener:
+        tags: [doctrine.event_subscriber]
+        calls:
+            - [setAnnotationReader, ['@annotation_reader']]
+
+    # App
+    App\:
+        resource: ../src/
+        exclude:
+            - ../src/DependencyInjection/
+            - ../src/Entity/
+            - ../src/Kernel.php
+
+    App\Controller\:
+        resource: ../src/Controller/
+        tags: [controller.service_arguments]
+
+    App\Swagger\SwaggerDecorator:
+        decorates: api_platform.swagger.normalizer.documentation
+        autoconfigure: false
+
+    App\DataPersister\UserDataPersister:
+        decorates: api_platform.doctrine.orm.data_persister
+
+    App\DataPersister\FishbowlDataPersister:
+        decorates: api_platform.doctrine.orm.data_persister
+
+    App\Service\MailerService:
+        bind:
+            $from: '%env(MAILER_FROM)%'
+            $appUrl: '%env(APP_URL)%'
+
+    App\Stage\FishbowlValidateStage:
+        decorates: api_platform.graphql.resolver.stage.validate
+
+    # Admin
+    App\Admin\UserAdmin:
+        arguments: [null, App\Entity\User, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Users }
+        calls:
+            - [setPasswordEncoder, ['@App\Security\PasswordEncoderService']]
+            - [setMailerService, ['@App\Service\MailerService']]
+
+    App\Admin\FishbowlAdmin:
+        arguments: [null, App\Entity\Fishbowl, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Fishbowls }
+        calls:
+            - [setFishbowlService, ['@App\Service\FishbowlService']]
+
+    App\Admin\ResetPasswordRequestAdmin:
+        arguments: [null, App\Entity\ResetPasswordRequest, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Reset Password Requests }
+
+    App\Admin\ParticipantAdmin:
+        arguments: [null, App\Entity\Participant, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Participants }
+
+    App\Admin\GuestAdmin:
+        arguments: [null, App\Entity\Guest, null]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Guests }

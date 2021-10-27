@@ -1,0 +1,20 @@
+{
+  "signin": "Log in",
+  "signout": "Surt",
+  "register": "Registre gratuït",
+  "cancel": "Cancel·la",
+  "createEvent": "Crear un fishbowl gratuït",
+  "editProfile": "Edita el teu perfil",
+  "changePassword": "Canvia la contrasenya",
+  "goHome": "Ves a la pàgina d'inici",
+  "privacyPolicy": "Política de privacitat",
+  "cookiesPolicy": "Política de Cookies",
+  "copyright": "Stooa © %year%. Tots els drets reservats",
+  "og-title": "El fishbowl online",
+  "og-description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
+  "languages": {
+    "en": "Anglès",
+    "es": "Castellà",
+    "ca": "Català"
+  }
+}
