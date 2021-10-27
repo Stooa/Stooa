@@ -1,28 +1,28 @@
 {
-    "title": "El fishbowl online",
-    "description": "Stooa permite una conversación fluida y participativa con facilitación automática basada en el método fishbowl.",
-    "cta": "Crear un fishbowl gratis",
-    "definition": {
-        "title": "¿Qué es un fishbowl?",
-        "description": "<p>Un fishbowl es una <strong>dinámica de grupo</strong> que facilita las conversaciones, debates y cualquier tipo de actividad en el que <strong>la participación es esencial para su desarrollo </strong>.</p><p>Es un método de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.</p>"
+  "title": "Cambio de contraseña",
+  "description": "Stooa permite una conversación fluida y participativa con facilitación automática basada en el método fishbowl.",
+  "cta": "Crear un fishbowl gratis",
+  "definition": {
+    "title": "¿Qué es un fishbowl?",
+    "description": "<p>Un fishbowl es una <strong>dinámica de grupo</strong> que facilita las conversaciones, debates y cualquier tipo de actividad en el que <strong>la participación es esencial para su desarrollo </strong>.</p><p>Es un método de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.</p>"
+  },
+  "keybenefits": {
+    "first": {
+      "title": "Más participación",
+      "description": "Todos los participantes se sienten involucrados, mantienen la atención y pueden entrar y salir del fishbowl a medida que quieran tomar parte en la conversación. La jerarquía desaparece y el nivel de implicación de los participantes crece."
     },
-    "keybenefits": {
-        "first": {
-            "title": "Más participación",
-            "description": "Todos los participantes se sienten involucrados, mantienen la atención y pueden entrar y salir del fishbowl a medida que quieran tomar parte en la conversación. La jerarquía desaparece y el nivel de implicación de los participantes crece."
-        },
-        "second": {
-            "title": "Fluidez y facilitación automática",
-            "description": "La conversación entre asistentes se produce espontáneamente sin la necesidad de un moderador. La herramienta se adapta al método y guía al usuario, indicando los tiempos y los pasos a seguir."
-        },
-        "third": {
-            "title": "Conocimiento compartido",
-            "description": "Las opiniones de los participantes emergen a medida que la conversación avanza, y los temas que despiertan más interés se exploran en profundidad desde distintos puntos de vista."
-        },
-        "fourth": {
-            "title": "Conexiones informales",
-            "description": "Los asistentes pueden compartir experiencias, conocer al resto de participantes y construir su propia red de contactos informales o profesionales."
-        }
+    "second": {
+      "title": "Fluidez y facilitación automática",
+      "description": "La conversación entre asistentes se produce espontáneamente sin la necesidad de un moderador. La herramienta se adapta al método y guía al usuario, indicando los tiempos y los pasos a seguir."
     },
-    "banner": "Crea tu fishbowl gratuito e invita a los participantes. ¡Que comience la conversación!"
+    "third": {
+      "title": "Conocimiento compartido",
+      "description": "Las opiniones de los participantes emergen a medida que la conversación avanza, y los temas que despiertan más interés se exploran en profundidad desde distintos puntos de vista."
+    },
+    "fourth": {
+      "title": "Conexiones informales",
+      "description": "Los asistentes pueden compartir experiencias, conocer al resto de participantes y construir su propia red de contactos informales o profesionales."
+    }
+  },
+  "banner": "Crea tu fishbowl gratuito e invita a los participantes. ¡Que comience la conversación!"
 }
