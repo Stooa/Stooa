@@ -1,7 +1,7 @@
 {
-    "title": "Log in",
-    "forgotPassword": "Has oblidat la contrasenya?",
-    "noAccount": "Encara no tens compte?",
-    "createAccount": "Crea un compte gratuït",
-    "button": "Enviar"
+  "title": "Canvi de contrasenya",
+  "forgotPassword": "Has oblidat la contrasenya?",
+  "noAccount": "Encara no tens compte?",
+  "createAccount": "Crea un compte gratuït",
+  "button": "Enviar"
 }
