@@ -1,0 +1,59 @@
+{
+    "participant": [
+        {
+            "title": "on-boarding:new.title",
+            "text": "on-boarding:new.text",
+            "img1": "/img/onBoarding/1-fishbowl-example.png",
+            "img2": "/img/onBoarding/1-join-leave.png"
+        },
+        {
+            "title": "on-boarding:hostIntroduction.title",
+            "preTitle": "on-boarding:hostIntroduction.preTitle",
+            "text": "on-boarding:hostIntroduction.participantText",
+            "img1": "/img/onBoarding/2-participant-join-after.png",
+            "img2": "/img/onBoarding/2-participant-host-talking.png"
+        },
+        {
+            "title": "on-boarding:appControls.title",
+            "preTitle": "on-boarding:appControls.preTitle",
+            "text": "on-boarding:appControls.text",
+            "img1": "/img/onBoarding/3-participant-list.png",
+            "img2": "/img/onBoarding/3-app-controls.png"
+        },
+        {
+            "title": "on-boarding:end.title",
+            "preTitle": "on-boarding:end.preTitle",
+            "text": "on-boarding:end.participantText",
+            "img1": "/img/onBoarding/4-participant-minute-left.png"
+        }
+    ],
+    "moderator": [
+        {
+            "title": "on-boarding:new.title",
+            "text": "on-boarding:new.text",
+            "img1": "/img/onBoarding/1-fishbowl-example.png",
+            "img2": "/img/onBoarding/1-join-leave.png"
+        },
+        {
+            "title": "on-boarding:hostIntroduction.title",
+            "preTitle": "on-boarding:hostIntroduction.preTitle",
+            "text": "on-boarding:hostIntroduction.hostText",
+            "img1": "/img/onBoarding/2-allow-users.png",
+            "img2": "/img/onBoarding/2-introduction-host.png"
+        },
+        {
+            "title": "on-boarding:appControls.title",
+            "preTitle": "on-boarding:appControls.preTitle",
+            "text": "on-boarding:appControls.text",
+            "img1": "/img/onBoarding/3-participant-list.png",
+            "img2": "/img/onBoarding/3-app-controls.png"
+        },
+        {
+            "title": "on-boarding:end.title",
+            "preTitle": "on-boarding:end.preTitle",
+            "text": "on-boarding:end.hostText",
+            "img1": "/img/onBoarding/4-end-fishbowl.png",
+            "img2": "/img/onBoarding/4-confirm-end.png"
+        }
+    ]
+}

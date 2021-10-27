@@ -1,0 +1,24 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends '/emails/templates/email-container.html.twig' %}
+
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+
+{% block content %}
+    {{ macros.spaceRow(20) }}
+    <tr>
+        <td align="center" width="100%">
+            <img src="{{ emailConfig.footer.image.src }}" width="{{ emailConfig.footer.image.width }}" height="{{ emailConfig.footer.image.height }}" border="0" alt="{{ emailConfig.footer.image.alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; {{ emailConfig.font.regular }}">
+        </td>
+    </tr>
+{% endblock %}
+

@@ -1,0 +1,26 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[{*.js,*.jsx,*.ts,*.tsx}]
+max_line_length = 100
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab

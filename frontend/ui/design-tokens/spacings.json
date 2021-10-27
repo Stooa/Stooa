@@ -1,0 +1,25 @@
+{
+  "spacings": {
+    "spacer/8": {
+      "value": "332px"
+    },
+    "spacer/16": {
+      "value": "332px"
+    },
+    "spacer/24": {
+      "value": "332px"
+    },
+    "spacer/32": {
+      "value": "332px"
+    },
+    "spacer/48": {
+      "value": "332px"
+    },
+    "spacer/64": {
+      "value": "332px"
+    },
+    "spacer/80": {
+      "value": "332px"
+    }
+  }
+}

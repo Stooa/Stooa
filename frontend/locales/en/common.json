@@ -1,0 +1,20 @@
+{
+  "signin": "Log in",
+  "signout": "Log out",
+  "register": "Register for free",
+  "cancel": "Cancel",
+  "createEvent": "Create a free fishbowl",
+  "editProfile": "Edit profile",
+  "changePassword": "Change password",
+  "goHome": "Go to Home page",
+  "privacyPolicy": "Privacy policy",
+  "cookiesPolicy": "Cookies policy",
+  "copyright": "Stooa © %year%. All rights reserved",
+  "og-title": "The online fishbowl tool",
+  "og-description": "Stooa enables fluent and participatory conversation with automatic facilitation based on the fishbowl method.",
+  "languages": {
+    "en": "English",
+    "es": "Spanish",
+    "ca": "Catalan"
+  }
+}

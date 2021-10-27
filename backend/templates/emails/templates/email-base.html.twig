@@ -1,0 +1,106 @@
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+
+{% set path = appUrl %}
+{% set imagesPath = path ~ '/img/email/' %}
+{% set fontFamilyDefault = 'Geomanist, Helvetica, sans-serif' %}
+
+{% set colorNeutro100 = '#fff' %}
+{% set colorNeutro200 = '#FAF8F5' %}
+{% set colorNeutro700 = '#90766F' %}
+{% set colorPurple500 = '#7D13A3' %}
+
+{% set emailConfig = {
+    background: {
+        base: colorNeutro100,
+        content: colorNeutro100
+    },
+    font: {
+        color: colorNeutro700,
+        family: fontFamilyDefault,
+        regular: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 16px; font-weight: 400; color:' ~ colorNeutro700 ~ '; line-height: 1.5; text-align: left;',
+        title: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 61px; font-weight: 600; color:' ~ colorNeutro700 ~ '; line-height: 1.13; letter-spacing: -2px; text-align: left;',
+        note: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 12px; color:' ~ colorNeutro700 ~ '; line-height: 1.2; text-align: left;'
+    },
+    link: {
+        color: colorPurple500,
+        styles: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: inherit; color:' ~ colorPurple500 ~ '; line-height: inherit; text-decoration: underline;'
+    },
+    container: {
+        padding: 25,
+        width: 600
+    },
+    content: {
+        padding: 25,
+        width: 550
+    },
+    header: {
+        link: path,
+        image: {
+            src: imagesPath ~ 'logo.png',
+            height: 24,
+            width: 56,
+            alt: ''
+        }
+    },
+    footer: {
+        image: {
+            src: imagesPath ~ 'footer.jpg',
+            height: 129,
+            width: 600,
+            alt: ''
+        }
+    },
+    button: {
+        background: colorPurple500,
+        color: '#ffffff',
+        padding: '15px 0px',
+        radius: '25px',
+        styles: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 16px; line-height: 1; font-weight: 500; padding: 15px 35px; text-align: center;'
+    }
+} %}
+{% set contentWidth = emailConfig.container.padding ? emailConfig.container.width - (emailConfig.container.padding * 2) : emailConfig.container.width %}
+{% set contentBackground = emailConfig.background.content %}
+{% set contentStyle = '' %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="format-detection" content="date=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>{% block title %}{% endblock %}</title>
+        {% include '/emails/components/email-styles.html.twig' %}
+    </head>
+    <body style="margin:0; padding:0; width: 100%;" bgcolor="{{ emailConfig.background.base }}">
+        {% block preview %}{% endblock %}
+        {% include '/emails/components/email-header.html.twig' %}
+        <table role="presentation" class="w100pc" width="{{ emailConfig.container.width }}" align="center" border="0" cellpadding="0" cellspacing="0" bgcolor="{{ contentBackground }}" style="max-width: {{ emailConfig.container.width }}px; width: {{ emailConfig.container.width }}px;">
+            <tr>
+                {% if emailConfig.container.padding %}
+                    {{ macros.spaceCell(emailConfig.container.padding) }}
+                {% endif %}
+                <td width="{{ contentWidth }}" align="center">
+                    <!--[if (mso)|(IE)]>
+                    <table width="{{ contentWidth }}" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="{{ contentBackground }}">
+                        <tr>
+                            <td align="left">
+                    <![endif]-->
+                    <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" width="{{ contentWidth }}" bgcolor="{{ contentBackground }}" style="width: {{ contentWidth }}px; max-width: {{ contentWidth }}px; {{ contentStyle }}">
+                        {% block body %}{% endblock %}
+                    </table>
+                    <!--[if (mso)|(IE)]>
+                            </td>
+                        </tr>
+                    </table>
+                    <![endif]-->
+                </td>
+                {% if emailConfig.container.padding %}
+                    {{ macros.spaceCell(emailConfig.container.padding) }}
+                {% endif %}
+            </tr>
+        </table>
+        {% include '/emails/components/email-footer.html.twig' %}
+    </body>
+</html>

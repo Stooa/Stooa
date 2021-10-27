@@ -1,0 +1,40 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+App\Entity\Fishbowl:
+  fishbowl:
+    id: 'e5bebe22-4d79-498e-88eb-0bc84f71ae45'
+    name: '<name()>'
+    slug: 'fishbowl-name'
+    start_date_time: '<date_create()>'
+    timezone: '<timezone()>'
+    duration: '<date_create()>'
+    locale: '<locale()>'
+
+App\Entity\User:
+  user:
+    id: 'cb81a530-5b01-4832-b5c4-01984431fac2'
+    name: '<name()>'
+    surnames: '<name()>'
+    email: '<email()>'
+    password: '<password()>'
+    locale: '<locale()>'
+
+App\Entity\Guest:
+  guest:
+    id: '98d901d7-44b2-4b03-9c86-9005ce95ee29'
+    name: '<name()>'
+
+App\Entity\Participant:
+  participant_user:
+    user: '@user'
+    fishbowl: '@fishbowl'
+    last_ping: '<date_create()>'
+  participant_guest:
+    guest: '@guest'
+    fishbowl: '@fishbowl'
+    last_ping: '<date_create()>'

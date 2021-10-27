@@ -1,0 +1,27 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if 'not_started' in workflow_marked_places(object) %}
+        <span class="label label-danger">Not started</span>
+    {% endif %}
+    {% if 'introduction' in workflow_marked_places(object) %}
+        <span class="label label-warning">Introduction</span>
+    {% endif %}
+    {% if 'running' in workflow_marked_places(object) %}
+        <span class="label label-warning">Running</span>
+    {% endif %}
+    {% if 'finished' in workflow_marked_places(object) %}
+        <span class="label label-success">Finished</span>
+    {% endif %}
+{% endblock %}
