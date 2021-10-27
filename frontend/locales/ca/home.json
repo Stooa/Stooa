@@ -1,28 +1,28 @@
 {
-    "title": "El fishbowl online",
-    "description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
-    "cta": "Crear un fishbowl gratis",
-    "definition": {
-        "title": "Què és un fishbowl?",
-        "description": "<p>Un fishbowl és una <strong>dinàmica de grup</strong> que facilita converses, debats y qualsevol tipus d'activitat on la <strong>participació és essencial per al seu desenvolupament</strong>.</p><p>És un mètode de diàleg ideal per a comunitats, entorns educatius, o empreses que busquen millorar l'experiència dels treballadors.</p>"
+  "title": "Canvi de contrasenya",
+  "description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
+  "cta": "Crear un fishbowl gratis",
+  "definition": {
+    "title": "Què és un fishbowl?",
+    "description": "<p>Un fishbowl és una <strong>dinàmica de grup</strong> que facilita converses, debats y qualsevol tipus d'activitat on la <strong>participació és essencial per al seu desenvolupament</strong>.</p><p>És un mètode de diàleg ideal per a comunitats, entorns educatius, o empreses que busquen millorar l'experiència dels treballadors.</p>"
+  },
+  "keybenefits": {
+    "first": {
+      "title": "Més participació",
+      "description": "Tots els participats se senten involucrats, mantenen l'atenció i poden entrar i sortir del fishbowl a mesura que vulguin formar part de la conversa. La jerarquia desapareix i el nivell d'implicació dels participants creix."
     },
-    "keybenefits": {
-        "first": {
-            "title": "Més participació",
-            "description": "Tots els participats se senten involucrats, mantenen l'atenció i poden entrar i sortir del fishbowl a mesura que vulguin formar part de la conversa. La jerarquia desapareix i el nivell d'implicació dels participants creix."
-        },
-        "second": {
-            "title": "Fluïdesa i facilitació automàtica",
-            "description": "La conversa entre els assistents es produeix de forma espontània sense necessitat d'un moderador. L'eina s'adapta al mètode i guia a l'usuari, indicant-li els temps i els passos a seguir."
-        },
-        "third": {
-            "title": "Coneixement compartit",
-            "description": "Les opinions dels participants emergeixen a mesura que la conversa avança, i els temes que desperten més interès s'exploren en profunditat des de diferents punts de vista."
-        },
-        "fourth": {
-            "title": "Connexions informals",
-            "description": "Els assistents poden compartir experiències, conèixer a la resta de participants i construir la seva pròpia xarxa de contactes informals o professionals."
-        }
+    "second": {
+      "title": "Fluïdesa i facilitació automàtica",
+      "description": "La conversa entre els assistents es produeix de forma espontània sense necessitat d'un moderador. L'eina s'adapta al mètode i guia a l'usuari, indicant-li els temps i els passos a seguir."
     },
-    "banner": "Crea el teu fishbowl gratuït i convida als participants. Que comenci la conversa!"
+    "third": {
+      "title": "Coneixement compartit",
+      "description": "Les opinions dels participants emergeixen a mesura que la conversa avança, i els temes que desperten més interès s'exploren en profunditat des de diferents punts de vista."
+    },
+    "fourth": {
+      "title": "Connexions informals",
+      "description": "Els assistents poden compartir experiències, conèixer a la resta de participants i construir la seva pròpia xarxa de contactes informals o professionals."
+    }
+  },
+  "banner": "Crea el teu fishbowl gratuït i convida als participants. Que comenci la conversa!"
 }
