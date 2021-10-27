@@ -17,8 +17,9 @@ on:
     types: [opened, closed, synchronize]
 
 jobs:
-  Signature:
-
+  signature:
+    name: Sign Developer Certificate of Origin (DCO)
+    
     runs-on: ubuntu-latest
 
     steps:
