@@ -1,20 +1,20 @@
 {
-    "signin": "Log in",
-    "signout": "Salir",
-    "register": "Registro gratuito",
-    "cancel": "Cancela",
-    "createEvent": "Crear un fishbowl gratis",
-    "editProfile": "Edita tu perfil",
-    "changePassword": "Cambia la contraseña",
-    "goHome": "Ves a la página de inicio.",
-    "privacyPolicy": "Política de privacidad",
-    "cookiesPolicy": "Política de Cookies",
-    "copyright": "Stooa © %year%. Todos los derechos reservados",
-    "og-title": "El fishbowl online",
-    "og-description": "Stooa permite una conversación fluida y participativa con facilitación automática basada en el método fishbowl.",
-    "languages": {
-        "en": "Inglés",
-        "es": "Castellano",
-        "ca": "Catalán"
-    }
+  "signin": "Log in",
+  "signout": "Salir",
+  "register": "Registro gratuito",
+  "cancel": "Cancela",
+  "createEvent": "Crear un fishbowl gratis",
+  "editProfile": "Edita tu perfil",
+  "changePassword": "Cambia la contraseña",
+  "goHome": "Ves a la página de inicio",
+  "privacyPolicy": "Política de privacidad",
+  "cookiesPolicy": "Política de Cookies",
+  "copyright": "Stooa © %year%. Todos los derechos reservados",
+  "og-title": "El fishbowl online",
+  "og-description": "Stooa permite una conversación fluida y participativa con facilitación automática basada en el método fishbowl.",
+  "languages": {
+    "en": "Inglés",
+    "es": "Castellano",
+    "ca": "Catalán"
+  }
 }
