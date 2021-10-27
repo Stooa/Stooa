@@ -17,7 +17,11 @@ const RedirectLink = ({ href, children, ...props }) => {
   } = router;
   const url = redirect ? `${href}?redirect=${redirect}` : href;
 
-  return <Link href={url} {...props}>{children}</Link>;
+  return (
+    <Link href={url} {...props}>
+      {children}
+    </Link>
+  );
 };
 
 export default RedirectLink;

@@ -20,7 +20,7 @@ import {
   COLOR_RED_100,
   COLOR_RED_200,
   COLOR_RED_500,
-  COLOR_RED_600,
+  COLOR_RED_600
 } from 'ui/settings';
 
 const Button = styled(ActionButton)`

@@ -46,8 +46,7 @@ const Header: React.FC = () => {
     <AvatarStyled ref={wrapperRef}>
       <button
         className={`avatar medium text-sm ${active ? 'active' : ''}`}
-        onClick={toggleDropdown}
-      >
+        onClick={toggleDropdown}>
         <AvatarIcon />
         <span>{user.name}</span>
         <ChevronDown />

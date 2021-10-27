@@ -16,13 +16,13 @@ const reducer = (state, action) => {
     'FISHBOWL_READY',
     'FISHBOWL_STATUS',
     'JOIN_GUEST',
-    'JOIN_USER',
+    'JOIN_USER'
   ];
 
   if (allowedActions.includes(action.type)) {
     return {
       ...state,
-      ...action,
+      ...action
     };
   }
 
@@ -34,7 +34,7 @@ const initialState = {
   fishbowlStarted: false,
   isGuest: false,
   prejoin: true,
-  conferenceStatus: IConferenceStatus?.NOT_STARTED,
+  conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
 const StateContext = createContext(undefined);

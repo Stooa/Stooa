@@ -28,7 +28,7 @@ const Banner: React.FC = () => {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      assetsPath: `img/animations/banner-morph/`,
+      assetsPath: `img/animations/banner-morph/`
     });
   }, []);
 

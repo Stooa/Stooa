@@ -35,7 +35,7 @@ const ButtonVideo: React.FC<IProps> = ({ handleVideo, joined, disabled, unlabele
     GAEvent({
       action: muted ? 'Video Unmute' : 'Video Mute',
       category: 'Buttons',
-      label: window.location.href,
+      label: window.location.href
     });
 
     userRepository.setUserVideoMuted(!currentMutedState);
@@ -49,8 +49,7 @@ const ButtonVideo: React.FC<IProps> = ({ handleVideo, joined, disabled, unlabele
       className={`text-sm ${muted ? 'muted' : ''}`}
       onClick={handleOnClick}
       disabled={disabled}
-      active={active}
-    >
+      active={active}>
       <div className="button">{muted || disabled ? <VideoMutedIcon /> : <VideoIcon />}</div>
       {!unlabeled && (
         <span className="text medium">{!joined || muted ? t('videoUnmute') : t('videoMute')}</span>

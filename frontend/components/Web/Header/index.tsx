@@ -45,9 +45,8 @@ const Header: React.FC<IProps> = ({ navigation = true }) => {
                     event={{
                       category: 'Create Fishbowl',
                       action: 'Header',
-                      label: window.location.href,
-                    }}
-                  >
+                      label: window.location.href
+                    }}>
                     <span>{t('createEvent')}</span>
                     <ArrowRight />
                   </GAButton>

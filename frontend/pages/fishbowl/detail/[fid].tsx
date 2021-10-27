@@ -20,10 +20,10 @@ import { dataLayerPush } from 'lib/analytics';
 import Alert from 'ui/Alert';
 
 const FishbowlDetail = dynamic(import('components/Web/FishbowlDetail'), {
-  loading: () => <div />,
+  loading: () => <div />
 });
 const JoinFishbowl = dynamic(import('components/Web/JoinFishbowl'), {
-  loading: () => <div />,
+  loading: () => <div />
 });
 const Layout = dynamic(import('layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('components/Web/Loader'), { loading: () => <div /> });
@@ -52,7 +52,7 @@ const Detail = () => {
   dataLayerPush({
     event: 'GAPageView',
     pageViewUrl: `/fishbowl-created`,
-    pageViewTitle: `Fishbowl created ${fid}`,
+    pageViewTitle: `Fishbowl created ${fid}`
   });
 
   return (
@@ -80,7 +80,7 @@ export default Detail;
  */
 export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: {},
+    props: {}
   };
 };
 
@@ -92,6 +92,6 @@ export const getStaticProps: GetStaticProps = async () => {
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
     paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking', //indicates the type of fallback
+    fallback: 'blocking' //indicates the type of fallback
   };
 };

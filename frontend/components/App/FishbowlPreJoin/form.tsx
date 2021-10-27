@@ -29,7 +29,7 @@ interface IFormProps {
 }
 
 const initialValues = {
-  name: userRepository.getUserNickname(),
+  name: userRepository.getUserNickname()
 };
 
 const Form = (props: FormikProps<IFormValues>) => {
@@ -49,14 +49,14 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
-      name: Yup.string().required(props.required),
+      name: Yup.string().required(props.required)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
     setSubmitting(false);
     resetForm({ values: initialValues });
     props.onSubmit(values);
-  },
+  }
 })(Form);
 
 const Nickname = () => {
@@ -71,21 +71,21 @@ const Nickname = () => {
     createGuest({
       variables: {
         input: {
-          name,
-        },
-      },
+          name
+        }
+      }
     })
       .then(res => {
         const {
           data: {
             createGuest: {
-              guest: { id },
-            },
-          },
+              guest: { id }
+            }
+          }
         } = res;
 
         userRepository.setUser({
-          guestId: id.replace('/guests/', ''),
+          guestId: id.replace('/guests/', '')
         });
 
         console.log('[STOOA] CreateGuest response', res);
@@ -95,13 +95,13 @@ const Nickname = () => {
       });
 
     userRepository.setUser({
-      nickname: name,
+      nickname: name
     });
 
     dispatch({
       type: 'JOIN_GUEST',
       isGuest: true,
-      prejoin: false,
+      prejoin: false
     });
   };
 

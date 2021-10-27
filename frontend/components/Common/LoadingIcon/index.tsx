@@ -20,7 +20,7 @@ const LoadingIcon = () => {
       animationData: LoaderJson,
       renderer: 'svg',
       loop: true,
-      autoplay: true,
+      autoplay: true
     });
   }, []);
 

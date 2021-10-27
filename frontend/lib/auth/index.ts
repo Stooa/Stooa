@@ -38,7 +38,7 @@ const setOnBoardingCookie = (isModerator: boolean) => {
 
   cookie.set(cookieName, COOKIE_ON_BOARDING_VALUE, {
     ...COOKIE_OPTIONS,
-    expires: COOKIE_ON_BOARDING_DAYS,
+    expires: COOKIE_ON_BOARDING_DAYS
   });
 };
 
@@ -98,7 +98,7 @@ const ping = async (lang: string, slug: string) => {
 
   api
     .post(`${lang}/ping/${slug}`, params, {
-      headers: { Authorization: `${auth ? auth.authorizationString : null}` },
+      headers: { Authorization: `${auth ? auth.authorizationString : null}` }
     })
     .catch(err => {
       const { message, response } = err;
@@ -112,7 +112,7 @@ const getParticipants = async (lang: string, slug: string) => {
   const auth = await getAuthToken();
 
   return api.get(`${lang}/fishbowl-participants/${slug}`, {
-    headers: { Authorization: `${auth ? auth.authorizationString : null}` },
+    headers: { Authorization: `${auth ? auth.authorizationString : null}` }
   });
 };
 
@@ -131,5 +131,5 @@ export {
   ping,
   setOnBoardingCookie,
   setRefreshToken,
-  setToken,
+  setToken
 };

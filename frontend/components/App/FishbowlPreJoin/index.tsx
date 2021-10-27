@@ -32,28 +32,28 @@ import {
   Devices,
   DevicesToolbar,
   Form,
-  VideoContainer,
+  VideoContainer
 } from 'components/App/FishbowlPreJoin/styles';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from 'contexts/DevicesContext';
 
 const FishbowlPreJoin: React.FC = () => {
   const localTracks = useRef([]);
-  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(userRepository.getUserVideoMuted());
+  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(
+    userRepository.getUserVideoMuted()
+  );
   const router = useRouter();
   const { t, lang } = useTranslation('common');
   const { isAuthenticated, user } = useAuth();
 
-  const {
-    videoDevice,
-  } = useDevices();
+  const { videoDevice } = useDevices();
 
   const configButtonRef = useRef(null);
 
   const disposeLocalTracks = () => {
     for (let index = 0; index < localTracks.current.length; index++) {
       const localTrack = localTracks.current[index];
-      const track =  localTrack.getTrack();
+      const track = localTrack.getTrack();
 
       // This is needed to prevent a bug on Firefox
       // https://bugzilla.mozilla.org/show_bug.cgi?id=1400488
@@ -78,11 +78,14 @@ const FishbowlPreJoin: React.FC = () => {
         if (video) {
           localTrack.attach(video);
 
-          video.play().then(() => {
-            console.log('[STOOA] Playing track', localTrack.deviceId);
-          }).catch(error => {
-            console.log('[STOOA] Problem with auto play', error);
-          });
+          video
+            .play()
+            .then(() => {
+              console.log('[STOOA] Playing track', localTrack.deviceId);
+            })
+            .catch(error => {
+              console.log('[STOOA] Problem with auto play', error);
+            });
         }
       }
     }

@@ -31,7 +31,7 @@ import Morph2BillAnimPath from 'ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from 'ui/animations/home/keybenefit2-morph.json';
 
 const Benefits = dynamic(import('components/Web/HomeSections/Benefits'), {
-  loading: () => <div />,
+  loading: () => <div />
 });
 const Banner = dynamic(import('components/Web/HomeSections/Banner'), { loading: () => <div /> });
 
@@ -41,16 +41,16 @@ const Home = () => {
     {
       id: 'animated-billboard-desktop',
       path: BillboardDeskAnimPath,
-      assetsPath: 'img/animations/billboard/',
+      assetsPath: 'img/animations/billboard/'
     },
     {
       id: 'animated-billboard-mobile',
       path: BillboardMobAnimPath,
-      assetsPath: 'img/animations/billboard/',
+      assetsPath: 'img/animations/billboard/'
     },
     { id: 'animated-billboard-morph', path: MorphBillAnimPath },
     { id: 'animated-billboard-morph2', path: Morph2BillAnimPath },
-    { id: 'animated-keybenefit2-morph', path: KeyBenefit2MorphPath },
+    { id: 'animated-keybenefit2-morph', path: KeyBenefit2MorphPath }
   ];
 
   const lazyMovinAnimations = [
@@ -59,16 +59,16 @@ const Home = () => {
       name: 'first',
       reverse: true,
       path: 'keybenefit1',
-      assetsPath: 'img/animations/keybenefit1/',
+      assetsPath: 'img/animations/keybenefit1/'
     },
     {
       id: 'animated-keybenefit2',
       name: 'second',
       path: 'keybenefit2',
-      morph: 'animated-keybenefit2-morph',
+      morph: 'animated-keybenefit2-morph'
     },
     { id: 'animated-keybenefit3', name: 'third', reverse: true, path: 'keybenefit3' },
-    { id: 'animated-keybenefit4', name: 'fourth', path: 'keybenefit4' },
+    { id: 'animated-keybenefit4', name: 'fourth', path: 'keybenefit4' }
   ];
 
   const handleAnimation = (targetClass = 'animate', delay = 0.6) => {
@@ -86,7 +86,7 @@ const Home = () => {
             opacity: 1,
             y: 0,
             ease: 'Power3.easeOut',
-            delay: delay + 0.15 * i,
+            delay: delay + 0.15 * i
           });
         });
 
@@ -103,7 +103,7 @@ const Home = () => {
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        assetsPath: item.assetsPath,
+        assetsPath: item.assetsPath
       });
     }, []);
 
@@ -132,9 +132,8 @@ const Home = () => {
             event={{
               category: 'Create Fishbowl',
               action: 'Billboard',
-              label: 'Home',
-            }}
-          >
+              label: 'Home'
+            }}>
             <span>{t('cta')}</span>
             <ArrowRight />
           </GAButton>
@@ -188,6 +187,6 @@ export default Home;
  */
 export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: {},
+    props: {}
   };
 };

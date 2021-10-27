@@ -15,7 +15,7 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800,
-  COLOR_NEUTRO_900,
+  COLOR_NEUTRO_900
 } from 'ui/settings';
 
 const flexCenter = css`

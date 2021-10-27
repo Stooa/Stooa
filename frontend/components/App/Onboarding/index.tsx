@@ -73,14 +73,14 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
     },
     afterChange: (current: number) => {
       showSlide(current);
-    },
+    }
   };
 
   const toggleOnBoarding = () => {
     GAEvent({
       action: active ? 'OnBoarding close' : 'OnBoarding open',
       category: 'Header',
-      label: window.location.href,
+      label: window.location.href
     });
 
     setActive(!active);
@@ -117,7 +117,7 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
         opacity: 0,
         y: 30,
         ease: 'none',
-        delay,
+        delay
       });
     });
   };
@@ -130,7 +130,7 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
         opacity: 1,
         y: 0,
         ease: 'Power3.easeOut',
-        delay: delay + 0.1 * i,
+        delay: delay + 0.1 * i
       });
     });
   };
@@ -157,8 +157,7 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
             onClick={() => {
               setActiveTooltip(false);
               setAlreadySeen(true);
-            }}
-          >
+            }}>
             <Cross />
           </button>
         </Tooltip>
@@ -170,8 +169,7 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
               <Slide
                 key={`slide-${i}`}
                 className={`${isModerator ? 'moderator' : 'participant'} slide slide-${i}`}
-                data-slide={i}
-              >
+                data-slide={i}>
                 <div className="left">
                   <div className="animate">
                     {item.pretitle && <p>{t(item.preTitle)}</p>}
@@ -184,7 +182,7 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
                           p: <p />,
                           ul: <ul />,
                           li: <li />,
-                          strong: <strong />,
+                          strong: <strong />
                         }}
                       />
                     )}
