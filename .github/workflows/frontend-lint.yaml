@@ -5,9 +5,9 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-# This workflow ensures that all the Javascript code is linted correctly.
+# This workflow ensures that all the Javascript code is linted and styled correctly.
 
-name: Frontend lint
+name: Frontend lint and Style
 
 on:
   pull_request:
@@ -51,3 +51,6 @@ jobs:
 
       - name: Run ESLint to ensure Javascript coding standards
         run: yarn run eslint components contexts customTypes hooks layouts lib pages ui
+
+      - name: Prettify code
+        run: yarn run prettier --write **/*.{ts,tsx}
