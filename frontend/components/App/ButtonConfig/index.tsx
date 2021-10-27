@@ -32,7 +32,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
     videoDevice,
     selectAudioOutputDevice,
     selectAudioInputDevice,
-    selectVideoDevice,
+    selectVideoDevice
   } = useDevices();
   const { t } = useTranslation('fishbowl');
 
@@ -62,7 +62,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
   // Used imperativeHandle to make the parents able to call the handleShowDevices
   // this way we keep the state inside the button config component
   useImperativeHandle(ref, () => ({
-    handleShowDevices,
+    handleShowDevices
   }));
 
   return (
@@ -71,8 +71,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
         id="config-button"
         className="text-sm"
         onClick={() => handleShowDevices()}
-        active={true}
-      >
+        active={true}>
         <div className="button">
           <SettingsIcon />
         </div>
@@ -94,8 +93,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
                       className="text-sm"
                       selected={audioInputDevice.deviceId === deviceId}
                       onClick={handleAudioInput}
-                      value={deviceId}
-                    >
+                      value={deviceId}>
                       <CheckIcon />{' '}
                       <span>
                         {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
@@ -116,8 +114,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
                       className="text-sm"
                       selected={audioOutputDevice.deviceId === deviceId}
                       onClick={handleAudioOutput}
-                      value={deviceId}
-                    >
+                      value={deviceId}>
                       <CheckIcon />{' '}
                       <span>
                         {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
@@ -138,8 +135,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
                       className="text-sm"
                       selected={videoDevice.deviceId === deviceId}
                       onClick={handleVideoInput}
-                      value={deviceId}
-                    >
+                      value={deviceId}>
                       <CheckIcon />{' '}
                       <span>
                         {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}

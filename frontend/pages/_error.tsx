@@ -34,7 +34,7 @@ const ErrorPage = ({ statusCode }: IProps) => {
         <Trans
           i18nKey="_error:description"
           components={{
-            a: <a href={`mailto:${CONTACT_EMAIL}`} />,
+            a: <a href={`mailto:${CONTACT_EMAIL}`} />
           }}
         />
       </p>

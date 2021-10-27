@@ -34,8 +34,7 @@ const Input: React.FC<IInputProps> = ({ label, variant = 'default', icon, ...pro
 
   return (
     <DatePickerStyled
-      className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}
-    >
+      className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}>
       {icon && <Icon variant={icon} className="icon" />}
       <DatePicker
         {...field}

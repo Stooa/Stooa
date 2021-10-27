@@ -44,7 +44,7 @@ const JoinFishbowl: React.FC<IProps> = ({ data, joinAsGuest }) => {
 
       dispatch({
         type: 'FISHBOWL_READY',
-        fishbowlReady: true,
+        fishbowlReady: true
       });
     } else {
       console.log('[STOOA] More than 1 hour to start fishbowl');

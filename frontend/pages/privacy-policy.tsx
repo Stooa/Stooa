@@ -32,7 +32,7 @@ const Page = () => {
             delete: (
               <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Fishbowl event url: " />
             ),
-            unsub: <a href="mailto:stooa@stooa.com?subject=Delete Stooa account" />,
+            unsub: <a href="mailto:stooa@stooa.com?subject=Delete Stooa account" />
           }}
         />
       </Wysiwyg>

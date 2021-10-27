@@ -25,7 +25,7 @@ class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -37,7 +37,7 @@ class MyDocument extends Document {
             {initialProps.styles}
             {sheet.getStyleElement()}
           </>
-        ),
+        )
       };
     } finally {
       sheet.seal();
@@ -63,7 +63,7 @@ class MyDocument extends Document {
 
               gtag('set', 'ads_data_redaction', true);
               gtag('set', 'url_passthrough', true);
-            `,
+            `
             }}
           />
           <script
@@ -78,7 +78,7 @@ class MyDocument extends Document {
               gtag('config', '${process.env.NEXT_PUBLIC_GTM_CODE}', {
                 page_path: window.location.pathname,
               });
-            `,
+            `
             }}
           />
         </Head>

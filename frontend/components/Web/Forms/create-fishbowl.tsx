@@ -57,7 +57,7 @@ const initialValues = {
   hours: '',
   description: '',
   language: '',
-  timezone: '',
+  timezone: ''
 };
 
 const Form = (props: IFormProps & FormikProps<IFormValues>) => {
@@ -103,8 +103,7 @@ const Form = (props: IFormProps & FormikProps<IFormValues>) => {
           name="hours"
           variant="sm"
           icon="hourglass"
-          autoComplete="off"
-        >
+          autoComplete="off">
           {[...Array(9)].map((e, i) => {
             if (i === 0) {
               return (
@@ -124,8 +123,7 @@ const Form = (props: IFormProps & FormikProps<IFormValues>) => {
               <option
                 defaultValue={(time === props.values.hours).toString()}
                 key={`hour_${time}`}
-                value={time}
-              >{`${time} ${t('fishbowl.hours')}`}</option>
+                value={time}>{`${time} ${t('fishbowl.hours')}`}</option>
             );
           })}
         </Select>
@@ -145,8 +143,7 @@ const Form = (props: IFormProps & FormikProps<IFormValues>) => {
           label={t('fishbowl.selectLanguage')}
           name="language"
           icon="language"
-          autoComplete="off"
-        >
+          autoComplete="off">
           <option value="">{t('fishbowl.selectLanguage')}</option>
           {locales.map(locale => (
             <option value={locale} key={`locale-${locale}`}>
@@ -169,7 +166,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     language: props.currentLanguage,
-    timezone: props.currentTimezone,
+    timezone: props.currentTimezone
   }),
   validationSchema: props => {
     return Yup.object({
@@ -179,7 +176,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
       day: Yup.string().required(props.required),
       time: Yup.string().required(props.required),
       hours: Yup.string().required(props.required),
-      timezone: Yup.string().required(props.required),
+      timezone: Yup.string().required(props.required)
     });
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
@@ -195,9 +192,9 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
             startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
             timezone: values.timezone,
             duration: values.hours,
-            locale: values.language,
-          },
-        },
+            locale: values.language
+          }
+        }
       })
       .then(res => {
         setSubmitting(false);
@@ -207,10 +204,10 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
         setSubmitting(false);
         props.onSubmit({
           type: 'Error',
-          data: error,
+          data: error
         });
       });
-  },
+  }
 })(Form);
 
 const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
@@ -232,8 +229,8 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
     } else {
       const {
         data: {
-          createFishbowl: { fishbowl },
-        },
+          createFishbowl: { fishbowl }
+        }
       } = res;
 
       const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
@@ -254,7 +251,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
       hours: selectedFishbowl.durationFormatted,
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
-      timezone: timezone,
+      timezone: timezone
     };
   }
 

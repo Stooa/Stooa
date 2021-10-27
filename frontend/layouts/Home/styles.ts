@@ -14,7 +14,7 @@ import Animations from 'ui/Animations';
 import {
   Main as MainDefault,
   Container as ContainerDefault,
-  Header as HeaderDefault,
+  Header as HeaderDefault
 } from 'layouts/Default/styles';
 import { COLOR_NEUTRO_100 } from 'ui/settings';
 

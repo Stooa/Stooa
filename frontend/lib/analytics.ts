@@ -29,7 +29,7 @@ const GAEvent = ({ action = '', category = '', label = '', value = '' }: IGAEven
     eventCategory: category,
     eventAction: action,
     eventLabel: label,
-    eventValue: value,
+    eventValue: value
   };
 
   dataLayerPush(event);
@@ -39,7 +39,7 @@ const GTMPageView = ({ url, title }: IGTMPageView) => {
   const pageEvent = {
     event: 'GAPageView',
     pageViewUrl: url,
-    pageViewTitle: title,
+    pageViewTitle: title
   };
 
   dataLayerPush(pageEvent);
