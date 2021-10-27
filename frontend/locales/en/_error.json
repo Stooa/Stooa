@@ -1,0 +1,10 @@
+{
+  "pageTitle": "Page error",
+  "title": "Page error",
+  "description": "Please <a>send me an email</a> if you think that something is broken.",
+  "404": {
+    "pageTitle": "404",
+    "title": "We can’t seem to find anything (or anyone 👀) in here.",
+    "text": "Here are some helpful links instead:"
+  }
+}

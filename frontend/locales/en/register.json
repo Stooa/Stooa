@@ -1,0 +1,14 @@
+{
+    "title": "Register to get started",
+    "shareAccount": "If you would like to share your <strong>Twitter</strong> or <strong>Linkedin</strong> profiles with other attendees, fill in the following fields.",
+    "linkedin": "Linkedin URL (optional)",
+    "twitter": "Twitter URL (optional)",
+    "linkedinHelp": "Copy & paste your Linkedin URL profile",
+    "twitterHelp": "Copy & paste your Twitter URL profile",
+    "haveAccount": "Already registered?",
+    "button": {
+        "register": "Register for free",
+        "login": "Log in"
+    },
+    "terms": "By creating this account, you agree to our <a>Term & Conditions and the Privacy Policy</a>."
+}

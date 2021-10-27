@@ -1,0 +1,28 @@
+{
+    "title": "The online fishbowl tool",
+    "description": "Stooa enables a fluent and participatory conversation with automatic facilitation based on the fishbowl method.",
+    "cta": "Create a free fishbowl",
+    "definition": {
+        "title": "What is a fishbowl?",
+        "description": "<p>A fishbowl is a <strong>group dynamic</strong> that facilitates conversations, debates and any type of activity in which <strong>participation is essential for its development</strong>.</p><p>It is an ideal dialogue method for communities, educational environements, or companies looking to improve their employee experience.</p>"
+    },
+    "keybenefits": {
+        "first": {
+            "title": "More participation",
+            "description": "All participants feel engaged, maintain attention, and can move in and out of the fishbowl as they wish to enter the conversation. The hierarchy is removed and the level of engagement of the participants increases."
+        },
+        "second": {
+            "title": "Fluency & automatic facilitation",
+            "description": "The conversation between the attendees occurs spontaneously without the need for a moderator. The tool adapts to the method and guides the user, indicating the times and the steps to follow."
+        },
+        "third": {
+            "title": "Shared knowledge",
+            "description": "Participants' opinions emerge as the conversation progresses, and the topics of greatest interest are explored in depth from different points of view."
+        },
+        "fourth": {
+            "title": "Informal connections",
+            "description": "Attendees can share experiences, meet the rest of the participants and build their own network of informal or professional contacts."
+        }
+    },
+    "banner": "Create your free fishbowl activity and invite participants. Let the conversation begin!"
+}

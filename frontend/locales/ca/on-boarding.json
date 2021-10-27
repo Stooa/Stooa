@@ -1,0 +1,26 @@
+{
+    "skip": "Anar al fishbowl",
+    "done": "Ho tinc tot a punt!",
+    "new": {
+        "title": "Ets nou per aquí? No pateixis!",
+        "text": "<p>En un fishbowl, hi ha 5 seients disponibles en els quals té lloc la conversa. Si hi ha un seient lliure pots unir-te a la conversa en qualsevol moment. Només una regla: <strong>sempre hi ha d'haver un seient disponible.</strong></p><p>Si estan ocupats els 5 seients i ja has participat, deixa el teu seient lliure perquè la resta també pugui contribuir.</p>"
+    },
+    "hostIntroduction": {
+        "title": "I ara què passa?",
+        "preTitle": "Introducció de l'organitzador",
+        "hostText": "<p>Quan iniciïs el Fishbowl, <strong>podràs començar fent una introducció.</strong> La càmera i el micròfon estaran actius només per a tu. Quan acabis, <strong>no oblidis permetre als assistents unir-se a la conversa.</strong></p>",
+        "participantText": "<p>Quan comença el Fishbowl, <strong>l'organitzador pot fer una introducció.</strong> Després d'aquesta, tots els participants tindran permís per unir-se a la conversa.</p>"
+    },
+    "appControls": {
+        "title": "Com puc interactuar?",
+        "preTitle": "Controls de l'aplicació",
+        "text": "<div><ul><li><strong>Uneix-te a la conversa</strong> i <strong>surt de la conversa</strong> fent servir els botons verd i vermell.</li><li>Controla el micròfon usant el botó <strong>Activar/Silenciar</strong>.</li><li>Connecta <strong>amb els assistents</strong> accedint als seus perfils de Linkedin i Twitter (en cas que els hagin proporcionat).</li></ul></div>"
+    },
+    "end": {
+        "title": "Totes les coses bones tenen un final...",
+        "preTitle": "El final del Fishbowl",
+        "hostText": "<p>Veuràs una notificació a la part superior dreta quan <strong>falti 1 minut</strong> perquè acabi el Fishbowl. Quan això passi, <strong>l'accés per a unir-se a la conversa quedarà tancat</strong> per a tots els assistents excepte per a tu. És el moment de tancar el Fishbowl i dir adéu als participants.</p>",
+        "participantText": "<p>Veuràs una notificació a la part dreta superior quan <strong>falti 1 minut</strong> per a que acabi el fishbowl. Quan això passi, <strong>l'accés per unirse a la conversa quedarà tancat per a tots els assistents</strong> excepte per a l'organitzador.</p>"
+    },
+    "tooltip": "👆🏼 Pots consultar la guia introductòria aquí en qualsevol moment."
+}

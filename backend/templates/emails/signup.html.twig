@@ -1,0 +1,43 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends '/emails/templates/email-base.html.twig' %}
+
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+
+{% block title %}{{ 'emails.welcome_email.subject'|trans({}, null, locale) }}{% endblock %}
+
+{% block body %}
+    {{ macros.title('emails.welcome_email.title'|trans({}, null, locale), emailConfig) }}
+    {{ macros.spaceRow(20) }}
+    {{ macros.text('emails.welcome_email.subtitle'|trans({}, null, locale), emailConfig) }}
+    {{ macros.spaceRow(45) }}
+    <tr>
+        <td align="center">
+            {% include '/emails/components/email-image.html.twig' with {
+                src: imagesPath ~ 'fishbowl-preview.jpg',
+                alt: 'emails.welcome_email.title'|trans({}, null, locale)
+            } %}
+        </td>
+    </tr>
+    {{ macros.spaceRow(40) }}
+    <tr>
+        <td align="center">
+            {% include '/emails/components/email-button.html.twig' with {
+                link: appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/create',
+                label: 'emails.welcome_email.cta'|trans({}, null, locale)
+            } %}
+        </td>
+    </tr>
+    {{ macros.spaceRow(55) }}
+    {{ macros.note('emails.welcome_email.delete'|trans({'%styles%': emailConfig.link.styles}, null, locale), emailConfig) }}
+    {{ macros.spaceRow(25) }}
+{% endblock %}
