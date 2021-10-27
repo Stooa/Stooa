@@ -47,7 +47,7 @@ const initialParticipant = {
   guestId: '',
   joined: false,
   isMuted: false,
-  isVideoMuted: false,
+  isVideoMuted: false
 };
 
 interface IParticipantsProps {
@@ -63,7 +63,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
   const [active, setActive] = useState(false);
   const [participants, setParticipants] = useState<IParticipant[]>([initialParticipant]);
   const [speakingParticipants, setSpeakingParticipants] = useState<IParticipant[]>([
-    initialParticipant,
+    initialParticipant
   ]);
   const [roomParticipants, setRoomParticipants] = useState<IParticipant[]>([initialParticipant]);
 
@@ -93,7 +93,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
     GAEvent({
       action: active ? 'Participants close' : 'Participants open',
       category: 'Header',
-      label: window.location.href,
+      label: window.location.href
     });
 
     setActive(!active);

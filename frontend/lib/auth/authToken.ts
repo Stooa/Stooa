@@ -12,18 +12,21 @@ import jwtDecode from 'jwt-decode';
 export type DecodedToken = {
   readonly context: {
     user: {
-      email: string
-      name: string
-      twitter: string
-      linkedin: string
-    }
+      email: string;
+      name: string;
+      twitter: string;
+      linkedin: string;
+    };
   };
   readonly exp: number;
-}
+};
 
 export class AuthToken {
   readonly _decodedToken: DecodedToken;
-  readonly _initialValues: DecodedToken = { context: { user: { email: '', name: '', twitter: '', linkedin: '' } }, exp: 0 };
+  readonly _initialValues: DecodedToken = {
+    context: { user: { email: '', name: '', twitter: '', linkedin: '' } },
+    exp: 0
+  };
 
   constructor(readonly _token?: string) {
     this._decodedToken = this._initialValues;
@@ -49,7 +52,7 @@ export class AuthToken {
   }
 
   get authorizationString() {
-    return this._token ? `Bearer ${this._token}` : "";
+    return this._token ? `Bearer ${this._token}` : '';
   }
 
   get token() {

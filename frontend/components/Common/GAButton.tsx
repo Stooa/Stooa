@@ -16,7 +16,7 @@ const buttonVariant = {
   button: Button,
   small: ButtonSmall,
   default: Button,
-  link: 'a',
+  link: 'a'
 };
 
 const GAButton = (props: any, ref: any) => {

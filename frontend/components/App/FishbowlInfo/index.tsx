@@ -26,7 +26,7 @@ const Info: React.FC<IProps> = ({ data }) => {
     GAEvent({
       action: active ? 'Info close' : 'Info open',
       category: 'Header',
-      label: window.location.href,
+      label: window.location.href
     });
 
     setActive(!active);

@@ -64,7 +64,7 @@ const CountDown: React.FC<IProps> = ({ isModerator, data, timeStatus, conference
           ? `${zeroPad(hours)}${hoursText}:${zeroPad(minutes + 1)}`
           : Math.ceil(total / 60_000);
       timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-        time: `${time}${minutesText}`,
+        time: `${time}${minutesText}`
       });
     }
 

@@ -14,7 +14,7 @@ import {
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_600,
-  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_700
 } from 'ui/settings';
 
 const Billboard = styled.div`

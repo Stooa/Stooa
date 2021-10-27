@@ -29,7 +29,7 @@ const LanguageSwitcher = () => {
     GAEvent({
       action: 'Language Change',
       category: 'Footer',
-      label: value,
+      label: value
     });
 
     await setLanguage(value);

@@ -35,7 +35,7 @@ const ButtonMic: React.FC<IProps> = ({ handleMic, joined, disabled, unlabeled })
     GAEvent({
       action: muted ? 'Unmute' : 'Mute',
       category: 'Buttons',
-      label: window.location.href,
+      label: window.location.href
     });
 
     userRepository.setUserAudioMuted(!currentMutedState);
@@ -49,8 +49,7 @@ const ButtonMic: React.FC<IProps> = ({ handleMic, joined, disabled, unlabeled })
       className={`text-sm ${muted ? 'muted' : ''}`}
       onClick={handleOnClick}
       disabled={disabled}
-      active={active}
-    >
+      active={active}>
       <div className="button">{muted || disabled ? <MicMutedIcon /> : <MicIcon />}</div>
       {!unlabeled && (
         <span className="text medium">{!joined || muted ? t('unmute') : t('mute')}</span>

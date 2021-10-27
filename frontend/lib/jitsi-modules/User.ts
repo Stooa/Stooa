@@ -11,7 +11,7 @@ import seatsRepository from '@/jitsi/Seats';
 import { removeItem } from 'lib/helpers';
 
 export interface UserInterface {
-  id?: string|boolean; // TODO: is boolean a valid id? Where the boolean comes from?
+  id?: string | boolean; // TODO: is boolean a valid id? Where the boolean comes from?
   guestId?: string;
   nickname?: string;
   audioInput?: MediaDeviceInfo;
@@ -24,12 +24,12 @@ export interface UserInterface {
 interface UserRepositoryInterface {
   clearUser: () => void;
   getUser: () => UserInterface;
-  getUserAudioInput: () => MediaDeviceInfo|null;
+  getUserAudioInput: () => MediaDeviceInfo | null;
   getUserAudioMuted: () => boolean;
-  getUserAudioOutput: () => MediaDeviceInfo|null;
-  getUserGuestId: () => string|null;
-  getUserNickname: () => string|null;
-  getUserVideoInput: () => MediaDeviceInfo|null;
+  getUserAudioOutput: () => MediaDeviceInfo | null;
+  getUserGuestId: () => string | null;
+  getUserNickname: () => string | null;
+  getUserVideoInput: () => MediaDeviceInfo | null;
   getUserVideoMuted: () => boolean;
   handleUserJoin: (id: string, user: UserInterface) => void;
   handleUserLeft: (id: string, user: UserInterface) => void;
@@ -58,7 +58,7 @@ const userRepository = (): UserRepositoryInterface => {
     const user = getUser();
     const updatedUser = {
       ...user,
-      ...value,
+      ...value
     };
 
     sessionStorage.setItem('user', JSON.stringify(updatedUser));
@@ -70,11 +70,11 @@ const userRepository = (): UserRepositoryInterface => {
     return user ? JSON.parse(user) : {};
   };
 
-  const getUserGuestId = (): string|null => _getUserValue('guestId');
-  const getUserNickname = (): string|null => _getUserValue('nickname');
-  const getUserAudioInput = (): MediaDeviceInfo|null => _getUserValue('audioInput', null);
-  const getUserAudioOutput = (): MediaDeviceInfo|null => _getUserValue('audioOutput', null);
-  const getUserVideoInput = (): MediaDeviceInfo|null => _getUserValue('videoInput', null);
+  const getUserGuestId = (): string | null => _getUserValue('guestId');
+  const getUserNickname = (): string | null => _getUserValue('nickname');
+  const getUserAudioInput = (): MediaDeviceInfo | null => _getUserValue('audioInput', null);
+  const getUserAudioOutput = (): MediaDeviceInfo | null => _getUserValue('audioOutput', null);
+  const getUserVideoInput = (): MediaDeviceInfo | null => _getUserValue('videoInput', null);
   const getUserAudioMuted = (): boolean => _getUserValue('audioMuted', false);
   const getUserVideoMuted = (): boolean => _getUserValue('videoMuted', false);
 
@@ -114,7 +114,7 @@ const userRepository = (): UserRepositoryInterface => {
     setUserAudioMuted,
     setUserAudioOutput,
     setUserVideoInput,
-    setUserVideoMuted,
+    setUserVideoMuted
   };
 };
 

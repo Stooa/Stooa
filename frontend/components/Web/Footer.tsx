@@ -16,7 +16,7 @@ import {
   TWITTER_USER,
   INSTAGRAM_USER,
   LINKEDIN_USER,
-  FACEBOOK_USER,
+  FACEBOOK_USER
 } from 'app.config';
 import Facebook from 'ui/svg/RRSS-facebook.svg';
 import Instagram from 'ui/svg/RRSS-instagram.svg';
@@ -40,9 +40,8 @@ const Footer: React.FC = () => {
             event={{
               category: 'Footer',
               action: 'RRSS',
-              label: 'Twitter',
-            }}
-          >
+              label: 'Twitter'
+            }}>
             <Twitter />
           </GAButton>
         </Link>
@@ -54,9 +53,8 @@ const Footer: React.FC = () => {
             event={{
               category: 'Footer',
               action: 'RRSS',
-              label: 'Instagram',
-            }}
-          >
+              label: 'Instagram'
+            }}>
             <Instagram />
           </GAButton>
         </Link>
@@ -68,9 +66,8 @@ const Footer: React.FC = () => {
             event={{
               category: 'Footer',
               action: 'RRSS',
-              label: 'Linkedin',
-            }}
-          >
+              label: 'Linkedin'
+            }}>
             <Linkedin />
           </GAButton>
         </Link>
@@ -82,9 +79,8 @@ const Footer: React.FC = () => {
             event={{
               category: 'Footer',
               action: 'RRSS',
-              label: 'Facebook',
-            }}
-          >
+              label: 'Facebook'
+            }}>
             <Facebook />
           </GAButton>
         </Link>

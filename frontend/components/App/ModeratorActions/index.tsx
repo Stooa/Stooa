@@ -48,7 +48,7 @@ const ModeratorActions: React.FC<IProps> = ({ fid, conferenceStatus }) => {
 
     dispatch({
       type: 'FISHBOWL_STARTED',
-      fishbowlStarted: true,
+      fishbowlStarted: true
     });
   };
 
@@ -58,9 +58,9 @@ const ModeratorActions: React.FC<IProps> = ({ fid, conferenceStatus }) => {
     runFishbowl({
       variables: {
         input: {
-          slug: fid,
-        },
-      },
+          slug: fid
+        }
+      }
     })
       .then(() => {
         console.log('[STOOA] allowing users in');
@@ -80,9 +80,9 @@ const ModeratorActions: React.FC<IProps> = ({ fid, conferenceStatus }) => {
     endFishbowl({
       variables: {
         input: {
-          slug: fid,
-        },
-      },
+          slug: fid
+        }
+      }
     })
       .then(() => {
         console.log('[STOOA] Finished fishbowl. redirecting to thankyou page');

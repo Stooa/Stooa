@@ -15,7 +15,7 @@ import {
   COLOR_NEUTRO_100,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
-  COLOR_PURPLE_800,
+  COLOR_PURPLE_800
 } from 'ui/settings';
 
 const ThankYouStyled = styled.div`

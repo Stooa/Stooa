@@ -32,7 +32,7 @@ const Benefits = ({ item }: IProps): JSX.Element => {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      assetsPath: `img/animations/${item.path}/`,
+      assetsPath: `img/animations/${item.path}/`
     });
   }, []);
 

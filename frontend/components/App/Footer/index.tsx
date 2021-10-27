@@ -18,7 +18,7 @@ import { Alert } from 'components/App/Footer/styles';
 const ToolBar = dynamic(import('components/App/ToolBar'), { loading: () => <div /> });
 const Logo = dynamic(import('components/Common/Logo'), { loading: () => <div /> });
 const ModeratorActions = dynamic(import('components/App/ModeratorActions'), {
-  loading: () => <div />,
+  loading: () => <div />
 });
 
 interface IProps {

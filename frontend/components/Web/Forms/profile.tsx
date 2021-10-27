@@ -87,7 +87,7 @@ const Form = (props: FormikProps<IFormValues>) => {
 const FormValidation = withFormik<IFormProps, IFormValues>({
   mapPropsToValues: props => {
     const {
-      initialValues: { email, linkedinProfile, name, surnames, twitterProfile },
+      initialValues: { email, linkedinProfile, name, surnames, twitterProfile }
     } = props;
 
     return {
@@ -96,7 +96,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
       email,
       linkedin: linkedinProfile,
       twitter: twitterProfile,
-      isSubmitting: false,
+      isSubmitting: false
     };
   },
   validationSchema: props => {
@@ -105,12 +105,12 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
       lastname: Yup.string().required(props.required),
       email: Yup.string().email(props.email).required(props.required),
       linkedin: Yup.string().nullable().url(props.url),
-      twitter: Yup.string().nullable().url(props.url),
+      twitter: Yup.string().nullable().url(props.url)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
     const {
-      initialValues: { id },
+      initialValues: { id }
     } = props;
 
     await props
@@ -121,9 +121,9 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
             name: values.firstname,
             surnames: values.lastname,
             linkedinProfile: values.linkedin,
-            twitterProfile: values.twitter,
-          },
-        },
+            twitterProfile: values.twitter
+          }
+        }
       })
       .then(async (res: any) => {
         await getAuthToken(true);
@@ -135,10 +135,10 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
         setSubmitting(false);
         props.onSubmit({
           type: 'Error',
-          data: error,
+          data: error
         });
       });
-  },
+  }
 })(Form);
 
 const Profile = ({ userData, refetch }) => {
@@ -160,13 +160,13 @@ const Profile = ({ userData, refetch }) => {
     } else {
       const {
         data: {
-          updateUser: { user: dataUser },
-        },
+          updateUser: { user: dataUser }
+        }
       } = res;
 
       contextUpdateUser({
         ...user,
-        name: `${dataUser.name} ${dataUser.surnames}`,
+        name: `${dataUser.name} ${dataUser.surnames}`
       });
 
       refetch();

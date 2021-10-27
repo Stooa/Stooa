@@ -23,7 +23,7 @@ import { IParticipant } from 'components/App/Participants';
 
 const Participant: React.FC<{ participant: IParticipant; speaker?: boolean }> = ({
   participant,
-  speaker = false,
+  speaker = false
 }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = isCurrentUser || isCurrentGuest(guestId);
@@ -59,9 +59,8 @@ const Participant: React.FC<{ participant: IParticipant; speaker?: boolean }> = 
               event={{
                 action: 'Twitter',
                 category: 'Participants',
-                label: window.location.href,
-              }}
-            >
+                label: window.location.href
+              }}>
               <Twitter />
             </GAButton>
           </Link>
@@ -80,9 +79,8 @@ const Participant: React.FC<{ participant: IParticipant; speaker?: boolean }> = 
               event={{
                 action: 'Linkedin',
                 category: 'Participants',
-                label: window.location.href,
-              }}
-            >
+                label: window.location.href
+              }}>
               <Linkedin />
             </GAButton>
           </Link>

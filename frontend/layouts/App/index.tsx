@@ -21,7 +21,7 @@ import Seo from 'components/Web/Seo';
 
 const scripts = [
   'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
-  '/vendor/lib-jitsi-meet.min.js',
+  '/vendor/lib-jitsi-meet.min.js'
 ];
 
 interface IProps {
@@ -36,14 +36,14 @@ const Layout: React.FC<IProps> = ({
   children,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
-  title,
+  title
 }) => {
   const router = useRouter();
   const { fid } = router.query;
   const {
     loading,
     error,
-    data: fbCreatorData,
+    data: fbCreatorData
   } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
 
   if (!scriptsLoaded) return <Loader />;

@@ -19,7 +19,7 @@ import {
   CONFERENCE_START,
   NOTIFICATION,
   NOTIFICATION_CLOSE,
-  USER_MUST_LEAVE,
+  USER_MUST_LEAVE
 } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL } from 'lib/gql/Fishbowl';
@@ -61,9 +61,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
       introduceFishbowl({
         variables: {
           input: {
-            slug: fid,
-          },
-        },
+            slug: fid
+          }
+        }
       });
     } catch (error) {
       console.error(`[STOOA] Error introduction: ${error}`);
@@ -88,7 +88,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       .then(({ data: { status } }) => {
         dispatch({
           type: 'FISHBOWL_STATUS',
-          conferenceStatus: status,
+          conferenceStatus: status
         });
       })
       .catch(error => {
@@ -135,7 +135,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
       router.push(route, route, { locale: lang });
     }
 
-    if (!initConnection && ((isModerator && fishbowlStarted) || (!conferenceReady && conferenceStatus !== IConferenceStatus.NOT_STARTED))) {
+    if (
+      !initConnection &&
+      ((isModerator && fishbowlStarted) ||
+        (!conferenceReady && conferenceStatus !== IConferenceStatus.NOT_STARTED))
+    ) {
       initializeConnection(fid, isModerator);
 
       window.addEventListener('beforeunload', unload);
@@ -176,9 +180,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
         data,
         isModerator,
         onIntroduction,
-        timeStatus,
-      }}
-    >
+        timeStatus
+      }}>
       {children}
     </StooaContext.Provider>
   );

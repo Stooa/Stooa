@@ -14,12 +14,15 @@ interface DevicesRepositoryInterface {
   changeDevice: (device: MediaDeviceInfo) => Promise<void>;
   loadDevices: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
   clean: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
-};
+}
 
 const devicesRepository = (): DevicesRepositoryInterface => {
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
     const kind = device.kind === 'audioinput' ? 'audio' : 'video';
-    const oldTrack = kind === 'audio' ? conferenceRepository.getLocalAudioTrack() : conferenceRepository.getLocalVideoTrack();
+    const oldTrack =
+      kind === 'audio'
+        ? conferenceRepository.getLocalAudioTrack()
+        : conferenceRepository.getLocalVideoTrack();
 
     if (oldTrack !== undefined) {
       oldTrack.getTrack().stop();
@@ -46,11 +49,14 @@ const devicesRepository = (): DevicesRepositoryInterface => {
     console.log('[STOOA] Audio Output Device changed ', device);
 
     return JitsiMeetJS.mediaDevices.setAudioOutputDevice(device.deviceId);
-  }
+  };
 
-  const changeDevice = (device: MediaDeviceInfo): Promise<void> => device.kind === 'audiooutput' ? _changeOutputDevice(device) : _changeInputDevice(device);
+  const changeDevice = (device: MediaDeviceInfo): Promise<void> =>
+    device.kind === 'audiooutput' ? _changeOutputDevice(device) : _changeInputDevice(device);
 
-  const loadDevices = (callback: (newDevices: MediaDeviceInfo[]) => void): Promise<MediaDeviceInfo[]> => {
+  const loadDevices = (
+    callback: (newDevices: MediaDeviceInfo[]) => void
+  ): Promise<MediaDeviceInfo[]> => {
     JitsiMeetJS.mediaDevices.addEventListener(
       JitsiMeetJS.events.mediaDevices.DEVICE_LIST_CHANGED,
       callback

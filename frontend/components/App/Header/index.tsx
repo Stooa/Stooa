@@ -16,7 +16,7 @@ import { Header as HeaderStyled } from 'layouts/App/styles';
 const Logo = dynamic(import('components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('components/App/StatusBar'), { loading: () => <div /> });
 const ModeratorActions = dynamic(import('components/App/ModeratorActions'), {
-  loading: () => <div />,
+  loading: () => <div />
 });
 const Participants = dynamic(import('components/App/Participants'), { loading: () => <div /> });
 const FishbowlInfo = dynamic(import('components/App/FishbowlInfo'), { loading: () => <div /> });
