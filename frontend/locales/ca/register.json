@@ -1,14 +1,14 @@
 {
-    "title": "Registra't per començar",
-    "shareAccount": "Si vols compartir el teu perfil de <strong>Twitter</strong> o <strong>Linkedin</strong> amb la resta d'assistents, omple els següents camps.",
-    "linkedin": "Linkedin URL (opcional)",
-    "twitter": "Twitter URL (opcional)",
-    "linkedinHelp": "Copia i enganxa la URL del teu perfil de Linkedin",
-    "twitterHelp": "Copia i enganxa la URL del teu perfil de Twitter",
-    "haveAccount": "Ja tens un compte?",
-    "button": {
-        "register": "Registra't de forma gratuïta",
-        "login": "Entra"
-    },
-    "terms": "Amb la creació d'aquest compte, estàs acceptant els nostres <a>Termes i Condicions i la Política de Privacitat</a>."
+  "title": "Canvi de contrasenya",
+  "shareAccount": "Si vols compartir el teu perfil de <strong>Twitter</strong> o <strong>Linkedin</strong> amb la resta d'assistents, omple els següents camps.",
+  "linkedin": "Linkedin URL (opcional)",
+  "twitter": "Twitter URL (opcional)",
+  "linkedinHelp": "Copia i enganxa la URL del teu perfil de Linkedin",
+  "twitterHelp": "Copia i enganxa la URL del teu perfil de Twitter",
+  "haveAccount": "Ja tens un compte?",
+  "button": {
+    "register": "Registra't de forma gratuïta",
+    "login": "Entra"
+  },
+  "terms": "Amb la creació d'aquest compte, estàs acceptant els nostres <a>Termes i Condicions i la Política de Privacitat</a>."
 }
