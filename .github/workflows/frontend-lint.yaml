@@ -52,5 +52,5 @@ jobs:
       - name: Run ESLint to ensure Javascript coding standards
         run: yarn run eslint components contexts customTypes hooks layouts lib pages ui
 
-      - name: Prettify code
+      - name: Run Prettier to ensure Javascript styling
         run: yarn run prettier --write **/*.{ts,tsx}
