@@ -1,26 +1,26 @@
 {
-    "skip": "Saltar al fishbowl",
-    "done": "¡Lo tengo todo listo!",
-    "new": {
-        "title": "¿Eres nuevo por aquí? ¡No te preocupes!",
-        "text": "<p>En un fishbowl, hay 5 asientos disponibles en los que tiene lugar la conversación. Si hay un asiento libre puedes unirte a la conversación en cualquier momento. Solo una regla: <strong>siempre tiene que haber un asiento disponible.</strong></p><p> Si están ocupados los 5 asientos y ya has participado, deja tu asiento libre para que el resto también pueda contribuir.</p>"
-    },
-    "hostIntroduction": {
-        "title": "¿Qué pasa ahora??",
-        "preTitle": "Introducción del organizador",
-        "hostText": "<p>Cuando inicies el fishbowl, <strong>podrás comenzar haciendo una introducción.</strong> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <strong>no olvides permitir a los asistentes unirse a la conversación.</strong></p>",
-        "participantText": "<p>Cuando empieza el fishbowl, <strong>el organizador puede hacer una introducción.</strong> Después de esta, todos los participantes tendrán permiso para unirse a la conversación.</p>"
-    },
-    "appControls": {
-        "title": "¿Cómo puedo interactuar?",
-        "preTitle": "Controles de la aplicación",
-        "text": "<div><ul><li><strong>Únete a la conversación</strong> y <strong>sal de la conversación</strong> usando los botones verde y rojo.</li><li>Controla el micrófono usando el botón <strong>Activar/Silenciar</strong>.</li><li>Conecta <strong>con los asistentes</strong> accediendo a sus perfiles de Linkedin y Twitter (en caso de que los hayan proporcionado).</li></ul></div>"
-    },
-    "end": {
-        "title": "Todas las cosas buenas tienen un final...",
-        "preTitle": "El final del fishbowl",
-        "hostText": "<p>Verás una notificación en la parte superior derecha cuando <strong>falte 1 minuto</strong>  para que termine el fishbowl. Cuando esto pase, <strong>el acceso para unirse a la conversación quedará cerrado</strong> para todos los asistentes excepto para ti. Es el momento de cerrar el fishbowl y decir adiós a los participantes.</p>",
-        "participantText": "<p>Verás una notificación en la parte superior derecha cuando <strong>falte 1 minuto</strong> para que termine el fishbowl. Cuando pase esto, <strong>el acceso para unirse a la conversación quedará cerrado para todos los asistentes</strong> excepto para el organizador.</p>"
-    },
-    "tooltip": "👆🏼 Puedes consultar la guía introductoria aquí en cualquier momento."
+  "skip": "Saltar al fishbowl",
+  "done": "¡Lo tengo todo listo!",
+  "new": {
+    "title": "¿Eres nuevo por aquí? ¡No te preocupes!",
+    "text": "<p>En un fishbowl, hay 5 asientos disponibles en los que tiene lugar la conversación. Si hay un asiento libre puedes unirte a la conversación en cualquier momento. Solo una regla: <strong>siempre tiene que haber un asiento disponible.</strong></p><p> Si están ocupados los 5 asientos y ya has participado, deja tu asiento libre para que el resto también pueda contribuir.</p>"
+  },
+  "hostIntroduction": {
+    "title": "¿Qué pasa ahora??",
+    "preTitle": "Introducción del organizador",
+    "hostText": "<p>Cuando inicies el fishbowl, <strong>podrás comenzar haciendo una introducción.</strong> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <strong>no olvides permitir a los asistentes unirse a la conversación.</strong></p>",
+    "participantText": "<p>Cuando empieza el fishbowl, <strong>el organizador puede hacer una introducción.</strong> Después de esta, todos los participantes tendrán permiso para unirse a la conversación.</p>"
+  },
+  "appControls": {
+    "title": "¿Cómo puedo interactuar?",
+    "preTitle": "Controles de la aplicación",
+    "text": "<div><ul><li><strong>Únete a la conversación</strong> y <strong>sal de la conversación</strong> usando los botones verde y rojo.</li><li>Controla el micrófono usando el botón <strong>Activar/Silenciar</strong>.</li><li>Conecta <strong>con los asistentes</strong> accediendo a sus perfiles de Linkedin y Twitter (en caso de que los hayan proporcionado).</li></ul></div>"
+  },
+  "end": {
+    "title": "Todas las cosas buenas tienen un final...",
+    "preTitle": "El final del fishbowl",
+    "hostText": "<p>Verás una notificación en la parte superior derecha cuando <strong>falte 1 minuto</strong>  para que termine el fishbowl. Cuando esto pase, <strong>el acceso para unirse a la conversación quedará cerrado</strong> para todos los asistentes excepto para ti. Es el momento de cerrar el fishbowl y decir adiós a los participantes.</p>",
+    "participantText": "<p>Verás una notificación en la parte superior derecha cuando <strong>falte 1 minuto</strong> para que termine el fishbowl. Cuando pase esto, <strong>el acceso para unirse a la conversación quedará cerrado para todos los asistentes</strong> excepto para el organizador.</p>"
+  },
+  "tooltip": "👆🏼 Puedes consultar la guía introductoria aquí en cualquier momento."
 }
