@@ -53,4 +53,4 @@ jobs:
         run: composer phpstan
 
       - name: Run Psalm
-        run: composer psalm -- --threads=$(nproc) --output-format=github
+        run: composer psalm -- --threads=$(nproc) --output-format=github --shepherd
