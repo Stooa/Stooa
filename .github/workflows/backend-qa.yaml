@@ -12,6 +12,10 @@ name: Backend quality assurance
 on:
   pull_request:
 
+  push:
+    branches:
+      - main
+
 jobs:
   backend-qa:
     name: PHP ${{ matrix.php }}
