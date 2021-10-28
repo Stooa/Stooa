@@ -16,9 +16,9 @@ It is an ideal dialogue method for communities, educational environements, or co
 
 Help us keep the Stooa Community open and inclusive. Please read and follow our [Code of Conduct][conduct].
 
-## Configure development environment
+## Setup development environment
 
-[This document explains][development] how to configure and run a development environment.
+[This document explains][development] how to setup and run a development environment.
 
 ## License
 
