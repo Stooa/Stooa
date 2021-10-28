@@ -12,6 +12,10 @@ name: Frontend lint and style
 on:
   pull_request:
 
+  push:
+    branches:
+      - main
+
 jobs:
   frontend-lint:
     name: Node ${{ matrix.node }}
