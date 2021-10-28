@@ -2,6 +2,7 @@
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)][conduct]
 [![Weblate](https://hosted.weblate.org/widgets/stooa/-/svg-badge.svg)](https://hosted.weblate.org/projects/stooa/)
+
 ## The online fishbowl tool
 
 Stooa enables a fluent and participatory conversation with automatic facilitation based on the fishbowl method.
