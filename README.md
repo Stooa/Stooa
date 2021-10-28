@@ -16,6 +16,10 @@ It is an ideal dialogue method for communities, educational environements, or co
 
 Help us keep the Stooa Community open and inclusive. Please read and follow our [Code of Conduct][conduct].
 
+## Configure development environment
+
+[This document explains][development] how to configure and run a development environment.
+
 ## License
 
 Every code patch accepted in Stooa codebase is licensed under [MPL 2.0][license]. You must be careful to not include any code that can not be licensed under this license.
@@ -25,3 +29,4 @@ Please [read carefully our license][license] and ask us if you have any question
 [license]: LICENSE
 [contribute]: https://github.com/Stooa/Documentation/blob/main/CONTRIBUTING.md
 [conduct]: https://github.com/Stooa/Documentation/blob/main/CODE_OF_CONDUCT.md
+[development]: https://docs.stooa.com/documentation/development
