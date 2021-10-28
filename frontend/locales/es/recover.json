@@ -1,9 +1,9 @@
 {
-  "title": "Recupera tu contraseña",
-  "description": "Indica tu correo electrónico y te enviaremos las instrucciones para generar una nueva contraseña.",
-  "email": "Email",
-  "placeholder": "Email",
-  "button": "Envía las instrucciones",
-  "back": "Vuelve a entrar",
-  "sent": "Acabamos de enviarte un email con las instrucciones para recuperar tu contraseña."
+    "title": "Recupera tu contraseña",
+    "description": "Indica tu correo electrónico y te enviaremos las instrucciones para generar una nueva contraseña.",
+    "email": "Email",
+    "placeholder": "Email",
+    "button": "Envía las instrucciones",
+    "back": "Vuelve a entrar",
+    "sent": "Acabamos de enviarte un email con las instrucciones para recuperar tu contraseña."
 }
