@@ -12,10 +12,14 @@ name: Frontend tests
 on:
   pull_request:
 
+  push:
+    branches:
+      - main
+
 jobs:
   frontend-test:
     name: Node ${{ matrix.node }}
-    
+
     runs-on: ubuntu-latest
 
     defaults:

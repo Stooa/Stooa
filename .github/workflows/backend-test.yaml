@@ -12,6 +12,10 @@ name: Backend tests
 on:
   pull_request:
 
+  push:
+    branches:
+      - main
+
 jobs:
   backend-tests:
     name: PHP ${{ matrix.php }}
