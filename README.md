@@ -19,7 +19,7 @@ Help us keep the Stooa Community open and inclusive. Please read and follow our 
 
 ## Setup development environment
 
-[This document explains][development] how to setup and run a development environment.
+[How to setup and run a development environment][development].
 
 ## License
 
