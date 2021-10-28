@@ -17,7 +17,7 @@ emails:
         subject: ¡Hola %name%! Hemos recibido una solicitud para restablecer tu contraseña de Stooa
         title: ¡Hola %name%!
         description: 'Para restablecer tu contraseña, sigue el siguiente enlace:'
-        expire_text: Recuerda que este enlace expirará en 1h.
+        expire_text: Recuerda que este enlace expirará en 1h
         button_text: Restablece tu contraseña
         information_text: Si ignoras este mensaje tu contraseña no cambiará.<br>Si no has solicitado un cambio de contraseña, <a href='mailto:%email%'>avísanos</a>.
         information_help_text: Si esta no es tu cuenta, puedes borrar tu email de ella. <br>Por favor, no contestes a este email con tu contraseña. Nosotros nunca te pediremos tu contraseña y te recomendamos que no la compartas con nadie.
