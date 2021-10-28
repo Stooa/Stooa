@@ -1,9 +1,9 @@
 {
-  "title": "Recupera la teva contrasenya",
-  "description": "Indica el teu correu electrònic i t'enviarem les instruccions per a generar una nova contrasenya.",
-  "email": "Email",
-  "placeholder": "Email",
-  "button": "Envia les instruccions",
-  "back": "Tornar a entrar",
-  "sent": "Acabem d'enviar-te un email amb les instruccions per recuperar la teva contrasenya."
+    "title": "Recupera la teva contrasenya",
+    "description": "Indica el teu correu electrònic i t'enviarem les instruccions per a generar una nova contrasenya.",
+    "email": "Email",
+    "placeholder": "Email",
+    "button": "Envia les instruccions",
+    "back": "Tornar a entrar",
+    "sent": "Acabem d'enviar-te un email amb les instruccions per recuperar la teva contrasenya."
 }
