@@ -106,6 +106,11 @@ class Fishbowl
     public const STATUS_RUNNING = 'running';
     public const STATUS_FINISHED = 'finished';
 
+    /**
+     * @var array<string, string>
+     *
+     * @phpstan-var array<string, Fishbowl::STATUS_*> $statusChoices
+     */
     public static array $statusChoices = [
         'Not Started' => self::STATUS_NOT_STARTED,
         'Introduction' => self::STATUS_INTRODUCTION,

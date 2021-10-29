@@ -29,7 +29,10 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
         $this->security = $security;
     }
 
-    /** @param Fishbowl|null $item */
+    /**
+     * @param Fishbowl|null $item
+     * @param array<string, mixed> $context
+     */
     public function __invoke($item, array $context): ?Fishbowl
     {
         $user = $this->security->getUser();
