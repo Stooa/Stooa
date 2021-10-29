@@ -34,7 +34,10 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         $this->mailerService = $mailerService;
     }
 
-    /** @param mixed $data */
+    /**
+     * @param mixed $data
+     * @param array<string, mixed> $context
+     */
     public function supports($data, array $context = []): bool
     {
         return $this->decorated->supports($data, $context);
@@ -42,6 +45,7 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * @param mixed $data
+     * @param array<string, mixed> $context
      *
      * @return object|void
      */
@@ -68,7 +72,10 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         return $result;
     }
 
-    /** @param mixed $data */
+    /**
+     * @param mixed $data
+     * @param array<string, mixed> $context
+     */
     public function remove($data, array $context = []): void
     {
         $this->decorated->remove($data, $context);

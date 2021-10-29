@@ -27,7 +27,10 @@ class UserResolver implements QueryItemResolverInterface
         $this->security = $security;
     }
 
-    /** @param User|null $item */
+    /**
+     * @param User|null $item
+     * @param array<string, mixed> $context
+     */
     public function __invoke($item, array $context): ?User
     {
         $user = $this->security->getUser();
