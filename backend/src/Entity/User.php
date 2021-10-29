@@ -133,7 +133,11 @@ class User implements UserInterface
      */
     private ?string $email = null;
 
-    /** @ORM\Column(type="json") */
+    /**
+     * @var string[]
+     *
+     * @ORM\Column(type="json")
+     */
     private array $roles = [];
 
     /** @ORM\Column(type="string") */
@@ -279,6 +283,7 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /** @param string[] $roles */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
