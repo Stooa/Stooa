@@ -30,7 +30,10 @@ class FishbowlRunMutationResolver implements MutationResolverInterface
         $this->fishbowlStateMachine = $fishbowlStateMachine;
     }
 
-    /** @param Fishbowl|null $item */
+    /**
+     * @param Fishbowl|null $item
+     * @param array<string, mixed> $context
+     */
     public function __invoke($item, array $context): ?Fishbowl
     {
         $fishbowl = $this->repository->findBySlug($context['args']['input']['slug']);

@@ -26,7 +26,10 @@ class FishbowlResolver implements QueryItemResolverInterface
         $this->repository = $repository;
     }
 
-    /** @param Fishbowl|null $item */
+    /**
+     * @param Fishbowl|null $item
+     * @param array<string, mixed> $context
+     */
     public function __invoke($item, array $context): ?Fishbowl
     {
         if (null === $item) {
