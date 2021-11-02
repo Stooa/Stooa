@@ -21,6 +21,13 @@ class FishbowlRepositoryTest extends DoctrineTestCase
 {
     private FishbowlRepository $fishbowlRepository;
 
+    /**
+     * @psalm-suppress InternalMethod
+     * @psalm-suppress PropertyTypeCoercion
+     *
+     * $container->get() is considered internal and is not well detected by Psalm,
+     * this will change once we migrate to Foundry and remove our DoctrineTestCase
+     */
     protected function setUp(): void
     {
         parent::setUp();

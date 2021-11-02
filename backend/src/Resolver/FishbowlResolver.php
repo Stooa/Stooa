@@ -16,6 +16,7 @@ namespace App\Resolver;
 use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Entity\Fishbowl;
 use App\Repository\FishbowlRepository;
+use Webmozart\Assert\Assert;
 
 class FishbowlResolver implements QueryItemResolverInterface
 {
@@ -27,14 +28,20 @@ class FishbowlResolver implements QueryItemResolverInterface
     }
 
     /**
-     * @param Fishbowl|null $item
-     * @param array<string, mixed> $context
+     * @param mixed[] $context
+     *
+     * @psalm-suppress ImplementedReturnTypeMismatch
+     *
+     * QueryItemResolverInterface forces you to not return null, but this is the only way
+     * to tell ApiPlatform that this Resolver can't return a value with this $context
      */
     public function __invoke($item, array $context): ?Fishbowl
     {
         if (null === $item) {
             return $this->repository->findBySlug($context['args']['slug']);
         }
+
+        Assert::isInstanceOf($item, Fishbowl::class);
 
         return $item;
     }

@@ -73,6 +73,6 @@ class ParticipantRepository extends ServiceEntityRepository
     public function persist(Participant $participant): void
     {
         $this->_em->persist($participant);
-        $this->_em->flush($participant);
+        $this->_em->flush();
     }
 }
