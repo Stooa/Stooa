@@ -66,9 +66,9 @@ class FishbowlAdmin extends AbstractAdmin
         $sortValues['_sort_order'] = 'DESC';
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('name')
             ->add('host', ModelAutocompleteFilter::class, [], null, [
                 'property' => 'email',
@@ -79,9 +79,9 @@ class FishbowlAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->add('createdAt')
             ->addIdentifier('name')
             ->add('description')
@@ -97,9 +97,9 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('slug');
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('Fishbowl')
                 ->add('name')
                 ->add('description')

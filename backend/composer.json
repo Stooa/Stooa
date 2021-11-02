@@ -69,8 +69,8 @@
         "phpstan/phpstan-symfony": "1.0.0",
         "phpstan/phpstan-webmozart-assert": "1.0.0",
         "phpunit/phpunit": "9.5.4",
-        "psalm/plugin-phpunit": "0.15.1",
-        "psalm/plugin-symfony": "2.3.0",
+        "psalm/plugin-phpunit": "0.16.1",
+        "psalm/plugin-symfony": "3.0.4",
         "runroom-packages/testing": "0.9.3",
         "symfony/debug-bundle": "4.4.20",
         "symfony/maker-bundle": "1.31.1",
@@ -78,8 +78,8 @@
         "symfony/stopwatch": "5.2.7",
         "symfony/var-dumper": "5.2.8",
         "symfony/web-profiler-bundle": "4.4.23",
-        "vimeo/psalm": "4.7.2",
-        "weirdan/doctrine-psalm-plugin": "1.0.0"
+        "vimeo/psalm": "4.11.2",
+        "weirdan/doctrine-psalm-plugin": "2.0.0"
     },
     "config": {
         "optimize-autoloader": true,

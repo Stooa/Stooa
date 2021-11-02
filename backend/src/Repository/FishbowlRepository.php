@@ -39,6 +39,6 @@ class FishbowlRepository extends ServiceEntityRepository
     public function persist(Fishbowl $fishbowl): void
     {
         $this->_em->persist($fishbowl);
-        $this->_em->flush($fishbowl);
+        $this->_em->flush();
     }
 }

@@ -75,17 +75,17 @@ class UserAdmin extends AbstractAdmin
         $sortValues['_sort_order'] = 'DESC';
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('name')
             ->add('surnames')
             ->add('email');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->add('createdAt')
             ->addIdentifier('email')
             ->add('name')
@@ -100,11 +100,11 @@ class UserAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
         $user = $this->getSubject();
 
-        $formMapper
+        $form
             ->add('email', EmailType::class, [
                 'disabled' => null !== $user && null !== $user->getId(),
             ])
