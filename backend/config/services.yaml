@@ -33,8 +33,10 @@ services:
         resource: ../src/Controller/
         tags: [controller.service_arguments]
 
-    App\Swagger\SwaggerDecorator:
-        decorates: api_platform.swagger.normalizer.documentation
+    App\OpenApi\OpenApiFactory:
+        decorates: api_platform.openapi.factory
+        arguments:
+            - '@App\OpenApi\OpenApiFactory.inner'
         autoconfigure: false
 
     App\DataPersister\UserDataPersister:
