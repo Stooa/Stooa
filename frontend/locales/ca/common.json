@@ -4,6 +4,7 @@
   "register": "Registre gratuït",
   "cancel": "Cancel·la",
   "createEvent": "Crear un fishbowl gratuït",
+  "cta": "Crear un fishbowl",
   "editProfile": "Edita el teu perfil",
   "changePassword": "Canvia la contrasenya",
   "goHome": "Ves a la pàgina d'inici",
@@ -16,5 +17,11 @@
     "en": "Anglès",
     "es": "Castellà",
     "ca": "Català"
-  }
+  },
+  "roadmap": "Roadmap",
+  "documentation": "Documentació",
+  "conductCode": "Codi de conducta",
+  "githubIssues": "Github Issues",
+  "help": "Ajuda",
+  "legal": "Legal"
 }

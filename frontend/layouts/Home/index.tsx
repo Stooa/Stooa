@@ -13,7 +13,6 @@ import Seo from 'components/Web/Seo';
 import Footer from 'components/Web/Footer';
 import Header from 'components/Web/Header';
 import { Main, Container, Header as HeaderStyled } from 'layouts/Home/styles';
-import { Footer as FooterStyled } from 'layouts/Default/styles';
 
 interface IProps {
   title?: string;
@@ -29,9 +28,7 @@ const Page: React.FC<IProps> = ({ children, title = '' }) => {
         </HeaderStyled>
         <Main>{children}</Main>
       </Container>
-      <FooterStyled>
-        <Footer />
-      </FooterStyled>
+      <Footer />
     </>
   );
 };
