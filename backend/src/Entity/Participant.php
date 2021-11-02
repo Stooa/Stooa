@@ -141,14 +141,19 @@ class Participant
 
     public function getUserName(): string
     {
-        if (null !== $this->getUser()) {
-            return $this->getUser()->getFullName();
+        $user = $this->getUser();
+
+        if (null !== $user) {
+            return $user->getFullName();
         }
 
-        if (null !== $this->getGuest()) {
-            MAssert::notNull($this->getGuest()->getName());
+        $guest = $this->getGuest();
 
-            return $this->getGuest()->getName();
+        if (null !== $guest) {
+            $guestName = $guest->getName();
+            MAssert::notNull($guestName);
+
+            return $guestName;
         }
 
         return '';
@@ -156,8 +161,10 @@ class Participant
 
     public function getPublicTwitterProfile(): ?string
     {
-        if (null !== $this->getUser()) {
-            return $this->getUser()->getPublicTwitterProfile();
+        $user = $this->getUser();
+
+        if (null !== $user) {
+            return $user->getPublicTwitterProfile();
         }
 
         return null;
@@ -165,8 +172,10 @@ class Participant
 
     public function getPublicLinkedinAccount(): ?string
     {
-        if (null !== $this->getUser()) {
-            return $this->getUser()->getPublicLinkedinProfile();
+        $user = $this->getUser();
+
+        if (null !== $user) {
+            return $user->getPublicLinkedinProfile();
         }
 
         return null;
@@ -174,8 +183,10 @@ class Participant
 
     public function isModerator(Fishbowl $fishbowl): bool
     {
+        $user = $this->getUser();
+
         if (null !== $this->getUser()) {
-            return $fishbowl->getHost() === $this->getUser();
+            return $fishbowl->getHost() === $user;
         }
 
         return false;
@@ -192,8 +203,10 @@ class Participant
 
     public function getGuestId(): ?string
     {
-        if (null !== $this->getGuest()) {
-            $uid = $this->getGuest()->getId();
+        $guest = $this->getGuest();
+
+        if (null !== $guest) {
+            $uid = $guest->getId();
 
             if (null !== $uid) {
                 return $uid->toString();

@@ -17,7 +17,6 @@ use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
 use App\Entity\Fishbowl;
 use App\Repository\FishbowlRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
-use Webmozart\Assert\Assert;
 
 class FishbowlRunMutationResolver implements MutationResolverInterface
 {
@@ -30,10 +29,7 @@ class FishbowlRunMutationResolver implements MutationResolverInterface
         $this->fishbowlStateMachine = $fishbowlStateMachine;
     }
 
-    /**
-     * @param Fishbowl|null $item
-     * @param array<string, mixed> $context
-     */
+    /** @param mixed[] $context */
     public function __invoke($item, array $context): ?Fishbowl
     {
         $fishbowl = $this->repository->findBySlug($context['args']['input']['slug']);
@@ -41,8 +37,6 @@ class FishbowlRunMutationResolver implements MutationResolverInterface
         if (null === $fishbowl) {
             return null;
         }
-
-        Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
         if (!$this->fishbowlStateMachine->can($fishbowl, FISHBOWL::TRANSITION_RUN)) {
             return null;

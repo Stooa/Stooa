@@ -15,6 +15,7 @@ namespace App\Swagger;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 final class SwaggerDecorator implements NormalizerInterface
 {
@@ -30,10 +31,11 @@ final class SwaggerDecorator implements NormalizerInterface
         return $this->decorated->supportsNormalization($data, $format);
     }
 
-    /** @return mixed[] */
     public function normalize($object, string $format = null, array $context = [])
     {
         $docs = $this->decorated->normalize($object, $format, $context);
+
+        Assert::isArray($docs);
 
         $docs['components']['schemas']['Token'] = [
             'type' => 'object',
@@ -77,61 +79,28 @@ final class SwaggerDecorator implements NormalizerInterface
             ],
         ];
 
-        $tokenDocumentation = [
-            'paths' => [
-                '/login' => [
-                    'post' => [
-                        'tags' => ['Token'],
-                        'operationId' => 'postCredentialsItem',
-                        'summary' => 'Get JWT token to login.',
-                        'requestBody' => [
-                            'description' => 'Create new JWT Token',
-                            'content' => [
-                                'application/json' => [
-                                    'schema' => [
-                                        '$ref' => '#/components/schemas/Credentials',
-                                    ],
-                                ],
-                            ],
-                        ],
-                        'responses' => [
-                            Response::HTTP_OK => [
-                                'description' => 'Get JWT token',
-                                'content' => [
-                                    'application/json' => [
-                                        'schema' => [
-                                            '$ref' => '#/components/schemas/Token',
-                                        ],
-                                    ],
-                                ],
+        $docs['paths']['/login'] = [
+            'post' => [
+                'tags' => ['Token'],
+                'operationId' => 'postCredentialsItem',
+                'summary' => 'Get JWT token to login.',
+                'requestBody' => [
+                    'description' => 'Create new JWT Token',
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                '$ref' => '#/components/schemas/Credentials',
                             ],
                         ],
                     ],
                 ],
-                '/refresh-token' => [
-                    'post' => [
-                        'tags' => ['Token'],
-                        'operationId' => 'postRefreshCredentialsItem',
-                        'summary' => 'Get JWT token.',
-                        'requestBody' => [
-                            'description' => 'Create new JWT Token given a refresh token',
-                            'content' => [
-                                'application/json' => [
-                                    'schema' => [
-                                        '$ref' => '#/components/schemas/RefreshToken',
-                                    ],
-                                ],
-                            ],
-                        ],
-                        'responses' => [
-                            Response::HTTP_OK => [
-                                'description' => 'Get JWT token',
-                                'content' => [
-                                    'application/json' => [
-                                        'schema' => [
-                                            '$ref' => '#/components/schemas/Token',
-                                        ],
-                                    ],
+                'responses' => [
+                    Response::HTTP_OK => [
+                        'description' => 'Get JWT token',
+                        'content' => [
+                            'application/json' => [
+                                'schema' => [
+                                    '$ref' => '#/components/schemas/Token',
                                 ],
                             ],
                         ],
@@ -140,6 +109,36 @@ final class SwaggerDecorator implements NormalizerInterface
             ],
         ];
 
-        return array_merge_recursive($docs, $tokenDocumentation);
+        $docs['paths']['/refresh-token'] = [
+            'post' => [
+                'tags' => ['Token'],
+                'operationId' => 'postRefreshCredentialsItem',
+                'summary' => 'Get JWT token.',
+                'requestBody' => [
+                    'description' => 'Create new JWT Token given a refresh token',
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                '$ref' => '#/components/schemas/RefreshToken',
+                            ],
+                        ],
+                    ],
+                ],
+                'responses' => [
+                    Response::HTTP_OK => [
+                        'description' => 'Get JWT token',
+                        'content' => [
+                            'application/json' => [
+                                'schema' => [
+                                    '$ref' => '#/components/schemas/Token',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        return $docs;
     }
 }

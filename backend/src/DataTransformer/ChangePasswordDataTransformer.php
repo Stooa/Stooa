@@ -37,7 +37,7 @@ class ChangePasswordDataTransformer implements DataTransformerInterface
         $this->validator = $validator;
     }
 
-    /** @param array<string, mixed> $context */
+    /** @param mixed[] $context */
     public function transform($object, string $to, array $context = [])
     {
         $this->validator->validate($object);
@@ -58,8 +58,8 @@ class ChangePasswordDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * @param object|array<string, mixed> $data
-     * @param array<string, mixed> $context
+     * @param object|mixed[] $data
+     * @param mixed[] $context
      */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {

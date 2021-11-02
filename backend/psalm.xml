@@ -12,7 +12,7 @@ file that was distributed with this source code.
 -->
 
 <psalm
-    errorLevel="6"
+    errorLevel="3"
     resolveFromConfigFile="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
@@ -29,7 +29,15 @@ file that was distributed with this source code.
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+            <containerXml>var/cache/test/srcApp_KernelTestDebugContainer.xml</containerXml>
+        </pluginClass>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
     </plugins>
+
+    <issueHandlers>
+        <!-- Psalm equivalent of PHPStan config `treatPhpDocTypesAsCertain: false` -->
+        <DocblockTypeContradiction errorLevel="suppress"/>
+        <RedundantConditionGivenDocblockType errorLevel="suppress"/>
+    </issueHandlers>
 </psalm>
