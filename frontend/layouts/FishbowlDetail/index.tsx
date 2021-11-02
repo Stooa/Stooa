@@ -15,7 +15,6 @@ import Decoration from 'components/Web/Decoration';
 import {
   Container,
   Header as HeaderStyled,
-  Footer as FooterStyled,
   Decoration as DecorationStyled,
   Main
 } from 'layouts/Default/styles';
@@ -37,9 +36,7 @@ const Page: React.FC<IProps> = ({ children, data }) => {
           <Decoration />
         </DecorationStyled>
       </Container>
-      <FooterStyled>
-        <Footer />
-      </FooterStyled>
+      <Footer />
     </>
   );
 };
