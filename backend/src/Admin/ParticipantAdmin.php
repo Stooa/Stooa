@@ -38,9 +38,9 @@ class ParticipantAdmin extends AbstractAdmin
         $collection->remove('create');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('user', ModelAutocompleteFilter::class, [], null, [
                 'property' => 'email',
                 'callback' => FishbowlAdmin::hostCallbackFunction(),
@@ -56,18 +56,18 @@ class ParticipantAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->add('user')
             ->add('guest')
             ->add('fishbowl')
             ->add('lastPing');
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('user')
             ->add('guest')
             ->add('fishbowl')

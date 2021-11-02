@@ -36,7 +36,7 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * @param mixed $data
-     * @param array<string, mixed> $context
+     * @param mixed[] $context
      */
     public function supports($data, array $context = []): bool
     {
@@ -45,7 +45,7 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * @param mixed $data
-     * @param array<string, mixed> $context
+     * @param mixed[] $context
      *
      * @return object|void
      */
@@ -74,7 +74,7 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * @param mixed $data
-     * @param array<string, mixed> $context
+     * @param mixed[] $context
      */
     public function remove($data, array $context = []): void
     {
