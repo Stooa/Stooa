@@ -14,7 +14,8 @@ import Texts from 'ui/Texts';
 import Titles from 'ui/Titles';
 import Overrides from 'ui/Overrides';
 import { media, space } from 'ui/helpers';
-import { FONT_BASE_SIZE, FONT_PRIMARY } from 'ui/settings';
+import { COLOR_NEUTRO_700, FONT_BASE_SIZE, FONT_PRIMARY } from 'ui/settings';
+import { getIconCSS } from 'ui/Icons';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -145,11 +146,6 @@ const GlobalStyle = createGlobalStyle`
   .prewrap { white-space: pre-wrap; }
   .centered { text-align: center; }
 
-  .icon-small {
-    height: ${space(2)};
-    width: ${space(2)};
-  }
-
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
@@ -169,6 +165,19 @@ const GlobalStyle = createGlobalStyle`
     ${media.min('tablet')`
       display: none !important;
     `}
+  }
+
+  .icon {
+    ${getIconCSS()};
+    color: ${COLOR_NEUTRO_700};
+    height: ${space(4)};
+    margin: 0 ${space(0.25)};
+    width: ${space(4)};
+  }
+
+  .icon-small {
+    height: ${space(2)};
+    width: ${space(2)};
   }
 `;
 
