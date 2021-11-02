@@ -12,10 +12,7 @@ import styled, { css } from 'styled-components';
 import { space, media } from 'ui/helpers';
 import {
   COLOR_NEUTRO_200,
-  COLOR_NEUTRO_400,
-  COLOR_NEUTRO_700,
-  COLOR_NEUTRO_800,
-  COLOR_NEUTRO_900
+  COLOR_NEUTRO_700
 } from 'ui/settings';
 
 const flexCenter = css`
@@ -72,91 +69,6 @@ const Header = styled.header`
   justify-content: space-between;
 `;
 
-const Footer = styled.footer`
-  align-items: center;
-  background-color: ${COLOR_NEUTRO_400};
-  color: ${COLOR_NEUTRO_800};
-  display: flex;
-  height: ${space(6)};
-  justify-content: space-between;
-  line-height: 1.2;
-  padding: 0 ${space(3)};
-
-  ${media.max('phone')`
-    height: auto;
-    flex-direction: column-reverse;
-    padding: ${space(2)} ${space(3)};
-
-    p,
-    div {
-      display: flex;
-      flex-direction: column;
-    }
-
-    p,
-    div a {
-      margin: ${space(1.5)} 0 !important;
-    }
-
-    .rrss {
-      flex-direction: row;
-      margin: ${space(2)} 0;
-
-      a { margin: 0 ${space(1.25)} !important; }
-    }
-  `}
-
-  ${media.min('tablet')`
-    padding: 0 ${space(6)};
-  `}
-
-  ${media.min('phone')`
-    .legals {
-      margin: 0 ${space(2)};
-      padding: 0 ${space(2)};
-      position: relative;
-
-      &::after,
-      &::before {
-        background-color: ${COLOR_NEUTRO_800};
-        content: '';
-        display: block;
-        height: 8px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 1px;
-      }
-
-      &::after { left: 0; }
-      &::before { right: 0; }
-
-      a:first-child { margin-right: ${space(2)}; }
-    }
-  `}
-
-  div {
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
-
-    a {
-      text-decoration: underline;
-    }
-  }
-
-  .copyright {
-    color: ${COLOR_NEUTRO_900};
-  }
-
-  .rrss a {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-right: ${space()};
-  }
-`;
-
 const Main = styled.main<{ center?: boolean }>`
   color: ${COLOR_NEUTRO_700};
   grid-area: Main;
@@ -168,4 +80,4 @@ const Main = styled.main<{ center?: boolean }>`
   ${props => (props.center ? flexCenter : '')}
 `;
 
-export { Container, Decoration, Header, Main, Footer };
+export { Container, Decoration, Header, Main };
