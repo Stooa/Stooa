@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -18,6 +17,7 @@ import {
   ROUTE_SIGN_IN,
   ROUTE_COOKIES_POLICY,
   ROUTE_PRIVACY_POLICY,
+  ROUTE_REGISTER,
   TWITTER_USER,
   INSTAGRAM_USER,
   LINKEDIN_USER,
@@ -88,13 +88,6 @@ const Footer: React.FC = () => {
         <Nav>
           <NavTitle className="text-md bold">{APP_NAME}</NavTitle>
           <NavList>
-            {!isAuthenticated && (
-              <li className="text-sm">
-                <RedirectLink href={ROUTE_SIGN_IN} passHref>
-                  <a data-testid="footer-login">{t('signin')}</a>
-                </RedirectLink>
-              </li>
-            )}
             <li className="text-sm">
               <Link href={ROUTE_FISHBOWL_CREATE} passHref>
                 <GAButton
@@ -107,6 +100,35 @@ const Footer: React.FC = () => {
                 >
                   <span>{t('cta')}</span>
                 </GAButton>
+              </Link>
+            </li>
+            <li className="text-sm">
+              <Link href={`${ROUTE_REGISTER}`} passHref>
+                <a>{t('register')}</a>
+              </Link>
+            </li>
+            {!isAuthenticated && (
+              <li className="text-sm">
+                <RedirectLink href={ROUTE_SIGN_IN} passHref>
+                  <a data-testid="footer-login">{t('signin')}</a>
+                </RedirectLink>
+              </li>
+            )}
+          </NavList>
+        </Nav>
+        <Nav>
+          <NavTitle className="text-md bold">{t('help')}</NavTitle>
+          <NavList>
+            <li className="text-sm">
+              <Link href={GITHUB_ISSUES} passHref>
+                <a target="_blank" rel="noreferrer noopener">
+                  {t('githubIssues')}
+                </a>
+              </Link>
+            </li>
+            <li className="text-sm">
+              <Link href={`mailto:${SUPPORT_EMAIL}`} passHref>
+                <a>{SUPPORT_EMAIL}</a>
               </Link>
             </li>
             <li className="text-sm">
@@ -128,23 +150,6 @@ const Footer: React.FC = () => {
                 <a target="_blank" rel="noreferrer noopener">
                   {t('conductCode')}
                 </a>
-              </Link>
-            </li>
-          </NavList>
-        </Nav>
-        <Nav>
-          <NavTitle className="text-md bold">{t('help')}</NavTitle>
-          <NavList>
-            <li className="text-sm">
-              <Link href={GITHUB_ISSUES} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('githubIssues')}
-                </a>
-              </Link>
-            </li>
-            <li className="text-sm">
-              <Link href={`mailto:${SUPPORT_EMAIL}`} passHref>
-                <a>{SUPPORT_EMAIL}</a>
               </Link>
             </li>
           </NavList>
