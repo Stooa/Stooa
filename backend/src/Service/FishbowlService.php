@@ -164,7 +164,7 @@ class FishbowlService
         $guestId = $request->request->get('guestId');
 
         if (null !== $guestId) {
-            return $this->guestRepository->findById($guestId);
+            return $this->guestRepository->find($guestId);
         }
 
         return null;
