@@ -9,6 +9,4 @@
 
 sleep 10;
 
-console cache:warmup --no-interaction
-
 console messenger:consume -vv >&1
