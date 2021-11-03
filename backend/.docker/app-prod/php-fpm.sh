@@ -9,7 +9,7 @@
 
 console cache:warmup --no-interaction
 
-if [ "${APP_RESET_ON_BUILD:-}" = true ]; then
+if [ "${RESET_DATABASE:-}" = true ]; then
     console doctrine:database:drop --no-interaction --force
     console doctrine:database:create --no-interaction
 fi
