@@ -7,13 +7,29 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-console cache:warmup --no-interaction
-
+# Can be used on staging environments to destroy the database each time you deploy
+# the application, to ensure you start with the initial data each time
 if [ "${RESET_DATABASE:-}" = true ]; then
+    # Install development dependencies to be able to use doctrine/doctrine-fixtures-bundle
+    # console commands to load fixtures after database creation
+    composer install --prefer-dist --no-progress --no-interaction
+
     console doctrine:database:drop --no-interaction --force
     console doctrine:database:create --no-interaction
+    console doctrine:schema:update --no-interaction --force
+    console doctrine:fixtures:load --no-interaction
+
+    exit 0;
 fi
 
-console doctrine:migrations:migrate --no-interaction --allow-no-migration
+# Can be used on production environments to apply migrations to the database each time
+# you deploy the application, to ensure you start with the database in a correct state
+if [ "${MIGRATE_DATABASE:-}" = true ]; then
+    console doctrine:migrations:migrate --no-interaction --allow-no-migration
+
+    # Our current arquitecture for production server does not allow to run sidecar containers
+    # to perform this operation on a separate container, so we have to run it before launching php-fpm
+    # exit 0;
+fi
 
 php-fpm --allow-to-run-as-root
