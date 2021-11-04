@@ -22,7 +22,6 @@ const Languages = styled.div`
     color: inherit;
     cursor: pointer;
     line-height 1.2;
-    margin-left: ${space(-0.5)};
     padding-right: ${space(2.5)};
 
     &:focus {
