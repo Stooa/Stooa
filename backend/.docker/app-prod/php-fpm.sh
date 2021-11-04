@@ -27,6 +27,10 @@ if [ "${RESET_DATABASE:-}" = true ]; then
 
     # Install production dependencies (due to our limitations in infrastructure)
     composer install --prefer-dist --no-progress --no-interaction --no-dev --classmap-authoritative
+
+    # Regenerate cache to avoid problems with dev or missing dependencies
+    rm -rf var/cache/*
+    console cache:warmup
 fi
 
 # Can be used on production environments to apply migrations to the database each time
