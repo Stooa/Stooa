@@ -19,7 +19,12 @@ if [ "${RESET_DATABASE:-}" = true ]; then
     console doctrine:schema:update --no-interaction --force
     console doctrine:fixtures:load --no-interaction
 
-    exit 0;
+    # Our current infrastructure does not allow to run sidecar containers to perform
+    # this operation on a separate container, so we have to run it before launching php-fpm
+    # exit 0;
+
+    # Install production dependencies (due to our limitations in infrastructure)
+    composer install --prefer-dist --no-progress --no-dev --no-interaction
 fi
 
 # Can be used on production environments to apply migrations to the database each time
@@ -27,8 +32,8 @@ fi
 if [ "${MIGRATE_DATABASE:-}" = true ]; then
     console doctrine:migrations:migrate --no-interaction --allow-no-migration
 
-    # Our current arquitecture for production server does not allow to run sidecar containers
-    # to perform this operation on a separate container, so we have to run it before launching php-fpm
+    # Our current infrastructure does not allow to run sidecar containers to perform
+    # this operation on a separate container, so we have to run it before launching php-fpm
     # exit 0;
 fi
 
