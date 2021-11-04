@@ -83,7 +83,8 @@
         "symfony/web-profiler-bundle": "4.4.31",
         "theofidry/alice-data-fixtures": "1.4.0",
         "vimeo/psalm": "4.11.2",
-        "weirdan/doctrine-psalm-plugin": "2.0.0"
+        "weirdan/doctrine-psalm-plugin": "2.0.0",
+        "zenstruck/foundry": "1.13.4"
     },
     "config": {
         "optimize-autoloader": true,
