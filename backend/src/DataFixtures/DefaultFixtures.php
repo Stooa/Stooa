@@ -30,7 +30,7 @@ class DefaultFixtures extends Fixture
         $user = new SonataUserUser();
         $user->setUsername('admin');
         $user->setEmail('admin@localhost');
-        $user->setPassword(static::ADMIN_PASSWORD);
+        $user->setPassword(self::ADMIN_PASSWORD);
         $user->setEnabled(true);
         $user->setSuperAdmin(true);
 
