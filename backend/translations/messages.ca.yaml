@@ -14,7 +14,7 @@ emails:
         cta: Crea ara un fishbowl
         delete: Si vols eliminar el teu compte de Stooa, si us plau, envia''ns un email <a href="mailto:stooa@stooa.com?subject=Delete Stooa account">aquí</a>
     reset_password_email:
-        subject: Hola %name%! Hem rebut una sol·licitud per a restablir la teva contrasenya de Stooa
+        subject: Hola %name%! Hem rebut una sol·licitud per a restablir la teva contrasenya de Stooa.
         title: Hola %name%!
         description: 'Per restablir la seva contrasenya, segueix el següent enllaç:'
         expire_text: Recorda que aquest enllaç expirarà en 1h.
