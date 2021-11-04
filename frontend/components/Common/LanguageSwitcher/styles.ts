@@ -8,9 +8,11 @@
  */
 
 import styled from 'styled-components';
-import { space, media } from 'ui/helpers';
+import { space, media, rems } from 'ui/helpers';
 
 const Languages = styled.div`
+  display: inline-block;
+  padding: ${space()} 0;
   position: relative;
 
   select {
@@ -28,9 +30,12 @@ const Languages = styled.div`
   }
 
   svg {
+    height: ${space(1.5)};
     position: absolute;
     pointer-events: none;
     right: 0;
+    top: ${rems('10px')};
+    width: ${space(1.5)};
 
     path { fill: currentColor; }
   }

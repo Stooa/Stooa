@@ -23,7 +23,7 @@ use Sonata\UserBundle\Entity\BaseGroup;
 class SonataUserGroup extends BaseGroup
 {
     /**
-     * @var int|null
+     * @var mixed
      *
      * @ORM\Id
      * @ORM\GeneratedValue

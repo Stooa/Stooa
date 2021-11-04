@@ -9,7 +9,9 @@
 
 export const APP_NAME = 'Stooa';
 export const CONTACT_EMAIL = 'stooa@stooa.com';
-export const LINKEDIN_USER = 'stooa';
+export const SUPPORT_EMAIL = 'support@stooa.com';
+export const CONDUCT_EMAIL = 'conduct@stooa.com';
+export const LINKEDIN_USER = 'wearestooa';
 export const FACEBOOK_USER = 'WeareStooa-113144984147194';
 export const INSTAGRAM_USER = 'wearestooa';
 export const TWITTER_USER = 'WeareStooa';
@@ -27,3 +29,8 @@ export const ROUTE_EDIT_PROFILE = '/edit-profile';
 export const ROUTE_CHANGE_PASSWORD = '/change-password';
 export const ROUTE_COOKIES_POLICY = '/cookies-policy';
 export const ROUTE_PRIVACY_POLICY = '/privacy-policy';
+export const GITHUB_BASE = 'https://github.com/Stooa';
+export const GITHUB_ISSUES = `${GITHUB_BASE}/Stooa/issues`;
+export const GITHUB_ROADMAP = `${GITHUB_BASE}/Stooa/projects/1`;
+export const GITBOOK_DOCUMENTATION = `https://docs.stooa.com`;
+export const GITBOOK_CONDUCT = `https://docs.stooa.com/documentation/code_of_conduct`;

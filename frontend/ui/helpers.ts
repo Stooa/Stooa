@@ -145,7 +145,7 @@ const generateMedia = () => {
   return {
     between,
     max,
-    min,
+    min
   };
 };
 

@@ -12,6 +12,10 @@ name: Backend quality assurance
 on:
   pull_request:
 
+  push:
+    branches:
+      - main
+
 jobs:
   backend-qa:
     name: PHP ${{ matrix.php }}
@@ -49,4 +53,4 @@ jobs:
         run: composer phpstan
 
       - name: Run Psalm
-        run: composer psalm -- --threads=$(nproc) --output-format=github
+        run: composer psalm -- --threads=$(nproc) --output-format=github --shepherd

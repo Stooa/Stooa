@@ -14,9 +14,8 @@ import Seo from 'components/Web/Seo';
 import {
   Container,
   Header as HeaderStyled,
-  Footer as FooterStyled,
   Decoration as DecorationStyled,
-  Main,
+  Main
 } from 'layouts/Default/styles';
 
 interface IProps {
@@ -31,7 +30,7 @@ const Page: React.FC<IProps> = ({
   center = true,
   decorated = false,
   navigation = true,
-  title = '',
+  title = ''
 }) => (
   <>
     <Seo title={title} />
@@ -46,9 +45,7 @@ const Page: React.FC<IProps> = ({
         </DecorationStyled>
       )}
     </Container>
-    <FooterStyled>
-      <Footer />
-    </FooterStyled>
+    <Footer />
   </>
 );
 

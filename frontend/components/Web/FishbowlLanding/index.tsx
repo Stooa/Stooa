@@ -33,8 +33,7 @@ const FishbowlDetail: React.FC<IProps> = ({ data }) => {
       <Time
         as="time"
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-        className="highlight"
-      >
+        className="highlight">
         <p className="text-md medium">{t('dateandtime')}</p>
         <div className="text-lg">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${

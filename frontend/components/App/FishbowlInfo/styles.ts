@@ -15,7 +15,7 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
-  BORDER_RADIUS,
+  BORDER_RADIUS
 } from 'ui/settings';
 
 const InfoStyled = styled.div`

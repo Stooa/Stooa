@@ -33,6 +33,7 @@ class ChangePasswordLoggedDataTransformer implements DataTransformerInterface
         $this->security = $security;
     }
 
+    /** @param mixed[] $context */
     public function transform($object, string $to, array $context = [])
     {
         $this->validator->validate($object);
@@ -48,6 +49,10 @@ class ChangePasswordLoggedDataTransformer implements DataTransformerInterface
         return $user;
     }
 
+    /**
+     * @param object|mixed[] $data
+     * @param mixed[] $context
+     */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
         return User::class === $to && ChangePasswordLoggedInput::class === ($context['input']['class'] ?? null);

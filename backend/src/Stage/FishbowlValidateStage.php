@@ -36,6 +36,7 @@ class FishbowlValidateStage implements ValidateStageInterface
         $this->service = $service;
     }
 
+    /** @param mixed[] $context */
     public function __invoke($object, string $resourceClass, string $operationName, array $context): void
     {
         if ($object instanceof Fishbowl && null === $object->getId()) {

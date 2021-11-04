@@ -21,6 +21,7 @@ use App\Repository\FishbowlRepository;
 use App\Repository\GuestRepository;
 use App\Repository\ParticipantRepository;
 use Hashids\Hashids;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
@@ -29,6 +30,20 @@ use function Symfony\Component\String\s;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Webmozart\Assert\Assert;
 
+/**
+ * @psalm-type RawParticipant = array{
+ *     id: UuidInterface|null,
+ *     lastPing: \DateTimeInterface|null,
+ *     name: string|null,
+ *     twitter: string|null,
+ *     linkedin: string|null,
+ *     isModerator: bool,
+ *     isCurrentUser: bool,
+ *     guestId: string|null,
+ *     joined: bool,
+ *     isMuted: bool
+ * }
+ */
 class FishbowlService
 {
     protected FishbowlRepository $fishbowlRepository;
@@ -74,6 +89,7 @@ class FishbowlService
         return (null !== $fishbowl) ? strtoupper($fishbowl->getCurrentStatus()) : null;
     }
 
+    /** @return RawParticipant[] */
     public function getParticipants(string $slug): array
     {
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
@@ -148,7 +164,7 @@ class FishbowlService
         $guestId = $request->request->get('guestId');
 
         if (null !== $guestId) {
-            return $this->guestRepository->findById($guestId);
+            return $this->guestRepository->find($guestId);
         }
 
         return null;
@@ -180,6 +196,11 @@ class FishbowlService
         return $participant;
     }
 
+    /**
+     * @param Participant[] $participants
+     *
+     * @return RawParticipant[]
+     */
     private function buildParticipants(array $participants, Fishbowl $fishbowl, ?UserInterface $currentUser): array
     {
         return array_map(function (Participant $participant) use ($fishbowl, $currentUser) {

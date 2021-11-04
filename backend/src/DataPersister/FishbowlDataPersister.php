@@ -30,7 +30,10 @@ class FishbowlDataPersister implements ContextAwareDataPersisterInterface
         $this->mailerService = $mailerService;
     }
 
-    /** @param mixed $data */
+    /**
+     * @param mixed $data
+     * @param mixed[] $context
+     */
     public function supports($data, array $context = []): bool
     {
         return $this->decorated->supports($data, $context);
@@ -38,6 +41,7 @@ class FishbowlDataPersister implements ContextAwareDataPersisterInterface
 
     /**
      * @param mixed $data
+     * @param mixed[] $context
      *
      * @return object|void
      */
@@ -55,7 +59,10 @@ class FishbowlDataPersister implements ContextAwareDataPersisterInterface
         return $result;
     }
 
-    /** @param mixed $data */
+    /**
+     * @param mixed $data
+     * @param mixed[] $context
+     */
     public function remove($data, array $context = []): void
     {
         $this->decorated->remove($data, $context);

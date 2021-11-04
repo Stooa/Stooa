@@ -27,7 +27,14 @@ class UserResolver implements QueryItemResolverInterface
         $this->security = $security;
     }
 
-    /** @param User|null $item */
+    /**
+     * @param mixed[] $context
+     *
+     * @psalm-suppress ImplementedReturnTypeMismatch
+     *
+     * QueryItemResolverInterface forces you to not return null, but this is the only way
+     * to tell ApiPlatform that this Resolver can't return a value with this $context
+     */
     public function __invoke($item, array $context): ?User
     {
         $user = $this->security->getUser();

@@ -61,7 +61,7 @@ class FishbowlServiceTest extends TestCase
 
         $slug = $this->service->generateRandomSlug($fishbowl);
 
-        $this->assertIsString($slug);
+        $this->assertStringContainsString('fishbowl-name', $slug);
     }
 
     /** @test */
@@ -212,7 +212,7 @@ class FishbowlServiceTest extends TestCase
         $participant = new Participant();
 
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
-        $this->guestRepository->method('findById')->with('1')->willReturn($guest);
+        $this->guestRepository->method('find')->with('1')->willReturn($guest);
 
         $this->participantRepository->method('findGuestInFishbowl')->with($fishbowl, $guest)->willReturn($participant);
 
@@ -284,7 +284,7 @@ class FishbowlServiceTest extends TestCase
         $guest->setName('test');
 
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
-        $this->guestRepository->method('findById')->with('1')->willReturn($guest);
+        $this->guestRepository->method('find')->with('1')->willReturn($guest);
 
         $this->participantRepository->method('findGuestInFishbowl')->with($fishbowl, $guest)->willReturn(null);
 

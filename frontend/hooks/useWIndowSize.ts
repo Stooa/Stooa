@@ -21,7 +21,7 @@ export const useWindowSize = (): Size => {
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
   const [windowSize, setWindowSize] = useState<Size>({
     width: undefined,
-    height: undefined,
+    height: undefined
   });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const useWindowSize = (): Size => {
       // Set window width/height to state
       setWindowSize({
         width: window.innerWidth,
-        height: window.innerHeight,
+        height: window.innerHeight
       });
     }
 

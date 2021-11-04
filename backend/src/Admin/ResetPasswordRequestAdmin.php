@@ -35,24 +35,24 @@ class ResetPasswordRequestAdmin extends AbstractAdmin
         $collection->remove('create');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('user');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->add('hashedToken')
             ->add('requestedAt')
             ->add('expiresAt')
             ->add('user');
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('hashedToken')
             ->add('requestedAt')
             ->add('expiresAt')

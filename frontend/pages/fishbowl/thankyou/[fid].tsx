@@ -34,7 +34,7 @@ const ThankYou = () => {
 
   const router = useRouter();
   const {
-    query: { fid },
+    query: { fid }
   } = router;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
@@ -54,7 +54,7 @@ const ThankYou = () => {
   dataLayerPush({
     event: 'GAPageView',
     pageViewUrl: `/thank-you/${fid}`,
-    pageViewTitle: `Thank you page ${fid}`,
+    pageViewTitle: `Thank you page ${fid}`
   });
 
   const shareTitle = `Stooa: ${t('home:title')}`;
@@ -64,8 +64,7 @@ const ThankYou = () => {
       <Time
         as="time"
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-        className="error"
-      >
+        className="error">
         <p className="title-sm medium">{t('finishedEvent')}</p>
         <div className="text-sm">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
@@ -82,8 +81,7 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`whatsapp://send?text=${shareTitle} ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref
-              >
+                passHref>
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
@@ -91,9 +89,8 @@ const ThankYou = () => {
                   event={{
                     category: 'Share',
                     action: 'Whastapp',
-                    label: `fishbowl/thankyou/${fid}`,
-                  }}
-                >
+                    label: `fishbowl/thankyou/${fid}`
+                  }}>
                   <Whatsapp />
                 </GAButton>
               </Link>
@@ -101,8 +98,7 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
-                passHref
-              >
+                passHref>
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
@@ -110,9 +106,8 @@ const ThankYou = () => {
                   event={{
                     category: 'Share',
                     action: 'Linkedin',
-                    label: `fishbowl/thankyou/${fid}`,
-                  }}
-                >
+                    label: `fishbowl/thankyou/${fid}`
+                  }}>
                   <Linkedin />
                 </GAButton>
               </Link>
@@ -120,8 +115,7 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref
-              >
+                passHref>
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
@@ -129,9 +123,8 @@ const ThankYou = () => {
                   event={{
                     category: 'Share',
                     action: 'Twitter',
-                    label: `fishbowl/thankyou/${fid}`,
-                  }}
-                >
+                    label: `fishbowl/thankyou/${fid}`
+                  }}>
                   <Twitter />
                 </GAButton>
               </Link>
@@ -139,8 +132,7 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref
-              >
+                passHref>
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
@@ -148,9 +140,8 @@ const ThankYou = () => {
                   event={{
                     category: 'Share',
                     action: 'Mail',
-                    label: `fishbowl/thankyou/${fid}`,
-                  }}
-                >
+                    label: `fishbowl/thankyou/${fid}`
+                  }}>
                   <Mail />
                 </GAButton>
               </Link>
@@ -164,9 +155,8 @@ const ThankYou = () => {
             event={{
               category: 'Create Fishbowl',
               action: 'ThankYou-Page',
-              label: `fishbowl/thankyou/${fid}`,
-            }}
-          >
+              label: `fishbowl/thankyou/${fid}`
+            }}>
             <span>{t('common:createEvent')}</span>
             <ArrowRight />
           </GAButton>

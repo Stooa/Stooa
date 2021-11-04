@@ -30,7 +30,7 @@ const ButtonJoin: React.FC<IProps> = ({ joined, join, leave, disabled, children 
     GAEvent({
       action: joined ? 'Leave' : 'Join',
       category: 'Buttons',
-      label: window.location.href,
+      label: window.location.href
     });
 
     const userSettings = userRepository.getUser();
@@ -45,8 +45,7 @@ const ButtonJoin: React.FC<IProps> = ({ joined, join, leave, disabled, children 
       className={`text-sm medium ${joined ? 'joined' : ''}`}
       onClick={handleJoinClick}
       disabled={disabled}
-      active={active}
-    >
+      active={active}>
       <div className="button">{joined ? <ArrowDownIcon /> : <ArrowUpIcon />}</div>
       <div className="text">{children}</div>
     </Button>

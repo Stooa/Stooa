@@ -36,7 +36,7 @@ interface IFormProps {
 const initialValues = {
   email: '',
   password: '',
-  isSubmitting: false,
+  isSubmitting: false
 };
 
 const Form = (props: FormikProps<IFormValues>) => {
@@ -71,12 +71,12 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
   validationSchema: props =>
     Yup.object({
       email: Yup.string().email(props.email).required(props.required),
-      password: Yup.string().required(props.required),
+      password: Yup.string().required(props.required)
     }),
   handleSubmit: async (values, { props, setSubmitting }) => {
     setSubmitting(false);
     await props.login(values.email, values.password);
-  },
+  }
 })(Form);
 
 const LogIn = () => {

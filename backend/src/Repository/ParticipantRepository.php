@@ -21,7 +21,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
-/** @extends ServiceEntityRepository<Guest> */
+/** @extends ServiceEntityRepository<Participant> */
 class ParticipantRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -53,6 +53,7 @@ class ParticipantRepository extends ServiceEntityRepository
         return $query->getOneOrNullResult();
     }
 
+    /** @return Participant[] */
     public function getParticipants(Fishbowl $fishbowl): array
     {
         $now = new \DateTimeImmutable();
@@ -72,6 +73,6 @@ class ParticipantRepository extends ServiceEntityRepository
     public function persist(Participant $participant): void
     {
         $this->_em->persist($participant);
-        $this->_em->flush($participant);
+        $this->_em->flush();
     }
 }

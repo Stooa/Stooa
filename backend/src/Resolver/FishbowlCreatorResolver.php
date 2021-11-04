@@ -17,6 +17,7 @@ use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Entity\Fishbowl;
 use App\Repository\FishbowlRepository;
 use Symfony\Component\Security\Core\Security;
+use Webmozart\Assert\Assert;
 
 class FishbowlCreatorResolver implements QueryItemResolverInterface
 {
@@ -29,7 +30,14 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
         $this->security = $security;
     }
 
-    /** @param Fishbowl|null $item */
+    /**
+     * @param mixed[] $context
+     *
+     * @psalm-suppress ImplementedReturnTypeMismatch
+     *
+     * QueryItemResolverInterface forces you to not return null, but this is the only way
+     * to tell ApiPlatform that this Resolver can't return a value with this $context
+     */
     public function __invoke($item, array $context): ?Fishbowl
     {
         $user = $this->security->getUser();
@@ -41,6 +49,8 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
                 return $fishbowl;
             }
         }
+
+        Assert::isInstanceOf($item, Fishbowl::class);
 
         return $item;
     }

@@ -21,7 +21,7 @@ import {
   COLOR_NEUTRO_700,
   COLOR_PURPLE_500,
   COLOR_RED_500,
-  FONT_BASE_SIZE,
+  FONT_BASE_SIZE
 } from 'ui/settings';
 import { TEXT_SM, TEXT_XXS } from 'ui/Texts';
 
