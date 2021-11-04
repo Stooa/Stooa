@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
     {
       name: 'LinkedIn',
       component: <LinkedIn className="icon" />,
-      url: `https://www.linkedin.com/showcase/${LINKEDIN_USER}/`,
+      url: `https://www.linkedin.com/company/${LINKEDIN_USER}/`,
     },
     {
       name: 'Facebook',
