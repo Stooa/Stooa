@@ -34,7 +34,6 @@ final class UserFactory extends ModelFactory
             'locale' => self::faker()->languageCode(),
             'createdAt' => self::faker()->dateTime(),
             'updatedAt' => self::faker()->dateTime(),
-            'fishbowls' => [FishbowlFactory::new()],
         ];
     }
 
