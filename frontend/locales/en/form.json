@@ -1,45 +1,45 @@
 {
-  "firstname": "First Name",
-  "lastname": "Last name",
-  "email": "Email",
-  "password": "Password",
-  "name": "Your name",
-  "haveAccount": "Already have an account?",
-  "noAccount": "No account?",
-  "fishbowl": {
-    "topic": "Conversation topic",
-    "day": "Date",
-    "selectDay": "Select day",
-    "time": "Starts at",
-    "selectTime": "Select time",
-    "selectLanguage": "Select language",
-    "hours": "h",
-    "minutes": "m",
-    "duration": "Duration",
-    "selectDuration": "Select Duration",
-    "description": "Description (optional)",
-    "timezone": "Time Zone",
-    "selectTimeZone": "Select Time Zone"
-  },
-  "button": {
-    "login": "Log in",
-    "register": "Next",
-    "createAccount": "Create one!",
-    "createFishbowl": "Create fishbowl",
-    "modifyFishbowl": "Modify fishbowl",
-    "recoverPassword": "Send reset link",
-    "enterFishbowl": "Enter",
-    "save": "Save",
-    "changePassword": "Change password"
-  },
-  "validation": {
-    "required": "This field is required",
-    "email": "Invalid email addresss",
-    "date": "Format of the date is invalid: dd/mm/yyyy",
-    "passwordLength": "The password must have 6 characters or more",
-    "terms": "You must accept the terms and conditions",
-    "url": "This is not a valid url",
-    "twitter": "The twitter username should start with @",
-    "equalPassword": "The two passwords must be equal"
-  }
+    "firstname": "First Name",
+    "lastname": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "name": "Your name",
+    "haveAccount": "Already have an account?",
+    "noAccount": "No account?",
+    "fishbowl": {
+        "topic": "Conversation topic",
+        "day": "Date",
+        "selectDay": "Select day",
+        "time": "Starts at",
+        "selectTime": "Select time",
+        "selectLanguage": "Select language",
+        "hours": "h",
+        "minutes": "m",
+        "duration": "Duration",
+        "selectDuration": "Select Duration",
+        "description": "Description (optional)",
+        "timezone": "Time Zone",
+        "selectTimeZone": "Select Time Zone"
+    },
+    "button": {
+        "login": "Log in",
+        "register": "Next",
+        "createAccount": "Create one!",
+        "createFishbowl": "Create fishbowl",
+        "modifyFishbowl": "Modify fishbowl",
+        "recoverPassword": "Send reset link",
+        "enterFishbowl": "Enter",
+        "save": "Save",
+        "changePassword": "Change password"
+    },
+    "validation": {
+        "required": "This field is required",
+        "email": "Invalid email addresss",
+        "date": "Format of the date is invalid: dd/mm/yyyy",
+        "passwordLength": "The password must have 6 characters or more",
+        "terms": "You must accept the terms and conditions",
+        "url": "This is not a valid url",
+        "twitter": "The twitter username should start with @",
+        "equalPassword": "The two passwords must be equal"
+    }
 }
