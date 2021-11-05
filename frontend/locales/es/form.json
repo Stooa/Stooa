@@ -1,45 +1,45 @@
 {
-  "firstname": "Nombre",
-  "lastname": "Apellido",
-  "email": "Email",
-  "password": "Contraseña",
-  "name": "Tu nombre",
-  "haveAccount": "¿Ya tienes una cuenta?",
-  "noAccount": "¿No tienes cuenta?",
-  "fishbowl": {
-    "topic": "Tema de conversación",
-    "day": "Fecha",
-    "selectDay": "Selecciona el día",
-    "time": "Empieza a las",
-    "selectTime": "Selecciona la hora",
-    "selectLanguage": "Selecciona el idioma",
-    "hours": "h",
-    "minutes": "m",
-    "duration": "Duración",
-    "selectDuration": "Selecciona la duración",
-    "description": "Descripción (opcional)",
-    "timezone": "Zona horaria",
-    "selectTimeZone": "Selecciona zona horaria"
-  },
-  "button": {
-    "login": "Entra",
-    "register": "Siguiente",
-    "createAccount": "¡Crea una cuenta!",
-    "createFishbowl": "Crear fishbowl",
-    "modifyFishbowl": "Modificar fishbowl",
-    "recoverPassword": "Envía un enlace de recuperación",
-    "enterFishbowl": "Entrar",
-    "save": "Guardar",
-    "changePassword": "Cambiar la contraseña"
-  },
-  "validation": {
-    "required": "Este campo es necesario",
-    "email": "Dirección de email no válida",
-    "date": "Formato de fecha no válido: dd/mm/aaaa",
-    "passwordLength": "La contraseña debe tener 6 caracteres o más",
-    "terms": "Debes aceptar los términos y condiciones",
-    "url": "La url no es válida",
-    "twitter": "El usuario de Twitter debe comenzar por @",
-    "equalPassword": "Las dos contraseñas deben ser iguales"
-  }
+    "firstname": "Nombre",
+    "lastname": "Apellido",
+    "email": "Email",
+    "password": "Contraseña",
+    "name": "Tu nombre",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "noAccount": "¿No tienes cuenta?",
+    "fishbowl": {
+        "topic": "Tema de conversación",
+        "day": "Fecha",
+        "selectDay": "Selecciona el día",
+        "time": "Empieza a las",
+        "selectTime": "Selecciona la hora",
+        "selectLanguage": "Selecciona el idioma",
+        "hours": "h",
+        "minutes": "m",
+        "duration": "Duración",
+        "selectDuration": "Selecciona la duración",
+        "description": "Descripción (opcional)",
+        "timezone": "Zona horaria",
+        "selectTimeZone": "Selecciona zona horaria"
+    },
+    "button": {
+        "login": "Entra",
+        "register": "Siguiente",
+        "createAccount": "¡Crea una cuenta!",
+        "createFishbowl": "Crear fishbowl",
+        "modifyFishbowl": "Modificar fishbowl",
+        "recoverPassword": "Envía un enlace de recuperación",
+        "enterFishbowl": "Entrar",
+        "save": "Guardar",
+        "changePassword": "Cambiar la contraseña"
+    },
+    "validation": {
+        "required": "Este campo es necesario",
+        "email": "Dirección de email no válida",
+        "date": "Formato de fecha no válido: dd/mm/aaaa",
+        "passwordLength": "La contraseña debe tener 6 caracteres o más",
+        "terms": "Debes aceptar los términos y condiciones",
+        "url": "La url no es válida",
+        "twitter": "El usuario de Twitter debe comenzar por @",
+        "equalPassword": "Las dos contraseñas deben ser iguales"
+    }
 }

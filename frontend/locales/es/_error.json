@@ -1,10 +1,10 @@
 {
-  "pageTitle": "Error",
-  "title": "Error",
-  "description": "Por favor <a>envíame un email</a> si crees que algo no funciona.",
-  "404": {
-    "pageTitle": "404",
-    "title": "Parece que aquí no hay nada (ni nadie 👀).",
-    "text": "De todos modos, aquí tienes algunos enlaces útiles:"
-  }
+    "pageTitle": "Error",
+    "title": "Error",
+    "description": "Por favor <a>envíame un email</a> si crees que algo no funciona.",
+    "404": {
+        "pageTitle": "404",
+        "title": "Parece que aquí no hay nada (ni nadie 👀).",
+        "text": "De todos modos, aquí tienes algunos enlaces útiles:"
+    }
 }
