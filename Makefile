@@ -86,8 +86,8 @@ assets:
 database:
 	$(call docker-exec-backend,console doctrine:database:drop --no-interaction --force)
 	$(call docker-exec-backend,console doctrine:database:create --no-interaction)
-	# $(call docker-exec-backend,console doctrine:database:import docker/dump.sql)
-	$(call docker-exec-backend,console doctrine:migrations:migrate --no-interaction)
+	$(call docker-exec-backend,console doctrine:schema:update --no-interaction --force)
+	$(call docker-exec-backend,console doctrine:fixtures:load --no-interaction --append)
 
 # JITSI
 $(JITSI_CONFIG):
