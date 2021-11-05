@@ -48,6 +48,8 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
             if (null !== $fishbowl && $user === $fishbowl->getHost()) {
                 return $fishbowl;
             }
+
+            return null;
         }
 
         Assert::isInstanceOf($item, Fishbowl::class);
