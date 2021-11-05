@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Fixtures\SonataUserUserFactory;
+use App\Fixtures\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use FOS\UserBundle\Model\User;

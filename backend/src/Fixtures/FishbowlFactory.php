@@ -28,6 +28,7 @@ final class FishbowlFactory extends ModelFactory
             'locale' => self::faker()->languageCode(),
             'duration' => self::faker()->dateTime(),
             'currentStatus' => self::faker()->randomElement(Fishbowl::$statusChoices),
+            'slug' => self::faker()->slug(),
         ];
     }
 
