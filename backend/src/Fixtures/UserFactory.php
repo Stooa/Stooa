@@ -24,7 +24,6 @@ final class UserFactory extends ModelFactory
             'name' => self::faker()->firstName(),
             'surnames' => self::faker()->lastName(),
             'email' => self::faker()->unique()->email(),
-            'roles' => [],
             'password' => self::faker()->password(),
             'plainPassword' => self::faker()->word(),
             'privacyPolicy' => self::faker()->boolean(),

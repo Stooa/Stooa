@@ -24,8 +24,7 @@ final class SonataUserUserFactory extends ModelFactory
             'username' => self::faker()->unique()->userName(),
             'email' => self::faker()->unique()->email(),
             'password' => self::faker()->password(),
-            'enabled' => self::faker()->boolean,
-            'roles' => [],
+            'enabled' => self::faker()->boolean(),
         ];
     }
 
