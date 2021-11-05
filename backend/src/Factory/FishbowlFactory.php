@@ -11,13 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fixtures;
+namespace App\Factory;
 
 use App\Entity\Fishbowl;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<Fishbowl> */
 final class FishbowlFactory extends ModelFactory
 {
+    /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
         return [
@@ -25,7 +27,7 @@ final class FishbowlFactory extends ModelFactory
             'description' => self::faker()->sentence(),
             'startDateTime' => self::faker()->dateTime(),
             'timezone' => self::faker()->timezone(),
-            'locale' => self::faker()->languageCode(),
+            'locale' => 'en',
             'duration' => self::faker()->dateTime(),
             'currentStatus' => self::faker()->randomElement(Fishbowl::$statusChoices),
             'slug' => self::faker()->slug(),

@@ -13,15 +13,22 @@ declare(strict_types=1);
 
 namespace App\Integration;
 
-use App\Entity\Fishbowl;
-use App\Entity\Guest;
 use App\Entity\Participant;
-use App\Entity\User;
+use App\Factory\FishbowlFactory;
+use App\Factory\GuestFactory;
+use App\Factory\ParticipantFactory;
+use App\Factory\UserFactory;
 use App\Repository\ParticipantRepository;
 use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ParticipantRepositoryTest extends DoctrineTestCase
+class ParticipantRepositoryTest extends KernelTestCase
 {
+    use Factories;
+    use ResetDatabase;
+
     private ParticipantRepository $participantRepository;
 
     /**
@@ -33,7 +40,7 @@ class ParticipantRepositoryTest extends DoctrineTestCase
      */
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
 
         $this->participantRepository = self::$container->get(ParticipantRepository::class);
     }
@@ -41,11 +48,13 @@ class ParticipantRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itFindsParticipantInFishbowlByUser(): void
     {
-        $fishbowl = new Fishbowl();
-        $fishbowl->setId('e5bebe22-4d79-498e-88eb-0bc84f71ae45');
+        $fishbowl = FishbowlFactory::createOne()->object();
+        $user = UserFactory::createOne()->object();
 
-        $user = new User();
-        $user->setId('cb81a530-5b01-4832-b5c4-01984431fac2');
+        ParticipantFactory::createOne([
+           'fishbowl' => $fishbowl,
+           'user' => $user,
+        ]);
 
         $participant = $this->participantRepository->findUserInFishbowl($fishbowl, $user);
         $this->assertInstanceOf(Participant::class, $participant);
@@ -54,18 +63,15 @@ class ParticipantRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itFindsParticipantInFishbowlByGuest(): void
     {
-        $fishbowl = new Fishbowl();
-        $fishbowl->setId('e5bebe22-4d79-498e-88eb-0bc84f71ae45');
+        $fishbowl = FishbowlFactory::createOne()->object();
+        $guest = GuestFactory::createOne()->object();
 
-        $guest = new Guest();
-        $guest->setId('98d901d7-44b2-4b03-9c86-9005ce95ee29');
+        ParticipantFactory::createOne([
+            'fishbowl' => $fishbowl,
+            'guest' => $guest,
+        ]);
 
         $participant = $this->participantRepository->findGuestInFishbowl($fishbowl, $guest);
         $this->assertInstanceOf(Participant::class, $participant);
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['participant.yaml'];
     }
 }

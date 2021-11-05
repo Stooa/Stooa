@@ -236,19 +236,6 @@
     "namshi/jose": {
         "version": "7.2.3"
     },
-    "nelmio/alice": {
-        "version": "3.8",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.2",
-            "ref": "0b9900ece737bec7752e4155c0164639dd9b0cb0"
-        },
-        "files": [
-            "config/packages/test/nelmio_alice.yaml",
-            "config/packages/dev/nelmio_alice.yaml"
-        ]
-    },
     "nelmio/cors-bundle": {
         "version": "1.5",
         "recipe": {
@@ -876,15 +863,6 @@
         "files": [
             "config/packages/reset_password.yaml"
         ]
-    },
-    "theofidry/alice-data-fixtures": {
-        "version": "1.4",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
-        }
     },
     "theseer/tokenizer": {
         "version": "1.2.0"

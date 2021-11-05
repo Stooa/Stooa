@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Fishbowl;
-use App\Fixtures\FishbowlFactory;
-use App\Fixtures\SonataUserUserFactory;
-use App\Fixtures\UserFactory;
+use App\Factory\FishbowlFactory;
+use App\Factory\SonataUserUserFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use FOS\UserBundle\Model\User;
@@ -42,25 +42,19 @@ class DefaultFixtures extends Fixture
         UserFactory::createOne([
            'email' => 'user@stooa.com',
            'password' => self::ADMIN_PASSWORD,
-            'locale' => 'es',
             'active' => true,
-            'fishbowls' => [],
-            'createdAt' => new \DateTime(),
         ]);
 
-        $now = new \DateTime();
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
-            'locale' => 'es',
-            'duration' => $now->add(new \DateInterval('PT1H')),
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00') ,
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
         ])->object();
 
         UserFactory::createOne([
             'email' => 'host@stooa.com',
             'password' => self::ADMIN_PASSWORD,
-            'locale' => 'es',
             'active' => true,
             'fishbowls' => [$fishbowl],
             'createdAt' => new \DateTime(),

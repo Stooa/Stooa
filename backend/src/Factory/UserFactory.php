@@ -11,13 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fixtures;
+namespace App\Factory;
 
 use App\Entity\User;
 use Zenstruck\Foundry\ModelFactory;
 
+/** @extends ModelFactory<User> */
 final class UserFactory extends ModelFactory
 {
+    /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
         return [
@@ -31,7 +33,7 @@ final class UserFactory extends ModelFactory
             'active' => self::faker()->boolean(),
             'linkedinProfile' => self::faker()->boolean(),
             'twitterProfile' => self::faker()->boolean(),
-            'locale' => self::faker()->languageCode(),
+            'locale' => 'en',
             'createdAt' => self::faker()->dateTime(),
             'updatedAt' => self::faker()->dateTime(),
         ];

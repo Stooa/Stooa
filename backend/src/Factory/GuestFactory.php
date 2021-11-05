@@ -11,25 +11,24 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fixtures;
+namespace App\Factory;
 
-use App\Entity\SonataUserUser;
+use App\Entity\Guest;
 use Zenstruck\Foundry\ModelFactory;
 
-final class SonataUserUserFactory extends ModelFactory
+/** @extends ModelFactory<Guest> */
+final class GuestFactory extends ModelFactory
 {
+    /** @return array<string, mixed> */
     protected function getDefaults(): array
     {
         return [
-            'username' => self::faker()->unique()->userName(),
-            'email' => self::faker()->unique()->email(),
-            'password' => self::faker()->password(),
-            'enabled' => self::faker()->boolean(),
+            'name' => self::faker()->firstName(),
         ];
     }
 
     protected static function getClass(): string
     {
-        return SonataUserUser::class;
+        return Guest::class;
     }
 }
