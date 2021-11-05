@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\SonataUserUser;
+use App\Entity\Fishbowl;
+use App\Factory\FishbowlFactory;
+use App\Factory\SonataUserUserFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use FOS\UserBundle\Model\User;
 
 class DefaultFixtures extends Fixture
 {
@@ -27,14 +31,33 @@ class DefaultFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $user = new SonataUserUser();
-        $user->setUsername('admin');
-        $user->setEmail('admin@localhost');
-        $user->setPassword(self::ADMIN_PASSWORD);
-        $user->setEnabled(true);
-        $user->setSuperAdmin(true);
+        SonataUserUserFactory::createOne([
+            'username' => 'admin',
+            'email' => 'admin@localhost',
+            'password' => self::ADMIN_PASSWORD,
+            'enabled' => true,
+            'roles' => [User::ROLE_SUPER_ADMIN],
+        ]);
 
-        $manager->persist($user);
-        $manager->flush();
+        UserFactory::createOne([
+           'email' => 'user@stooa.com',
+           'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+        ]);
+
+        $fishbowl = FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+        ])->object();
+
+        UserFactory::createOne([
+            'email' => 'host@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+            'fishbowls' => [$fishbowl],
+            'createdAt' => new \DateTime(),
+        ]);
     }
 }

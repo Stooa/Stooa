@@ -14,11 +14,17 @@ declare(strict_types=1);
 namespace Tests\Integration;
 
 use App\Entity\Fishbowl;
+use App\Factory\FishbowlFactory;
 use App\Repository\FishbowlRepository;
-use Runroom\Testing\TestCase\DoctrineTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
-class FishbowlRepositoryTest extends DoctrineTestCase
+class FishbowlRepositoryTest extends KernelTestCase
 {
+    use Factories;
+    use ResetDatabase;
+
     private FishbowlRepository $fishbowlRepository;
 
     /**
@@ -30,7 +36,7 @@ class FishbowlRepositoryTest extends DoctrineTestCase
      */
     protected function setUp(): void
     {
-        parent::setUp();
+        parent::bootKernel();
 
         $this->fishbowlRepository = self::$container->get(FishbowlRepository::class);
     }
@@ -45,12 +51,11 @@ class FishbowlRepositoryTest extends DoctrineTestCase
     /** @test */
     public function itFindBySlug(): void
     {
+        FishbowlFactory::createOne([
+            'slug' => 'fishbowl-name',
+        ]);
+
         $fishbowl = $this->fishbowlRepository->findBySlug('fishbowl-name');
         $this->assertInstanceOf(Fishbowl::class, $fishbowl);
-    }
-
-    protected function getDataFixtures(): array
-    {
-        return ['fishbowl.yaml'];
     }
 }
