@@ -5,11 +5,5 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-App\Entity\Fishbowl:
-  fishwbol:
-    name: '<name()>'
-    slug: 'fishbowl-name'
-    start_date_time: '<date_create()>'
-    timezone: '<timezone()>'
-    duration: '<date_create()>'
-    locale: '<locale()>'
+zenstruck_foundry:
+    auto_refresh_proxies: true

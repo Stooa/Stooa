@@ -65,7 +65,6 @@
         "doctrine/doctrine-fixtures-bundle": "3.4.1",
         "ergebnis/composer-normalize": "2.15.0",
         "friendsofphp/php-cs-fixer": "3.2.1",
-        "nelmio/alice": "3.9.0",
         "phpstan/phpstan": "1.0.1",
         "phpstan/phpstan-doctrine": "1.0.1",
         "phpstan/phpstan-phpunit": "1.0.0",
@@ -81,9 +80,9 @@
         "symfony/stopwatch": "5.3.4",
         "symfony/var-dumper": "5.3.10",
         "symfony/web-profiler-bundle": "4.4.31",
-        "theofidry/alice-data-fixtures": "1.4.0",
         "vimeo/psalm": "4.11.2",
-        "weirdan/doctrine-psalm-plugin": "2.0.0"
+        "weirdan/doctrine-psalm-plugin": "2.0.0",
+        "zenstruck/foundry": "1.13.4"
     },
     "config": {
         "optimize-autoloader": true,
