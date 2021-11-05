@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\SonataUserUser;
+use App\Fixtures\SonataUserUserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use FOS\UserBundle\Model\User;
 
 class DefaultFixtures extends Fixture
 {
@@ -27,14 +28,12 @@ class DefaultFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $user = new SonataUserUser();
-        $user->setUsername('admin');
-        $user->setEmail('admin@localhost');
-        $user->setPassword(self::ADMIN_PASSWORD);
-        $user->setEnabled(true);
-        $user->setSuperAdmin(true);
-
-        $manager->persist($user);
-        $manager->flush();
+        SonataUserUserFactory::createOne([
+            'username' => 'admin',
+            'email' => 'admin@localhost',
+            'password' => self::ADMIN_PASSWORD,
+            'enabled' => true,
+            'roles' => [User::ROLE_SUPER_ADMIN],
+        ]);
     }
 }

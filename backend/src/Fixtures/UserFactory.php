@@ -1,6 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /*
-namespace App\Factory;
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Fixtures;
 
 use App\Entity\User;
 use Zenstruck\Foundry\ModelFactory;
@@ -10,27 +21,21 @@ final class UserFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-name
-surnames
-email
-roles
-password
-privacyPolicy
-allowShareData
-active
-linkedinProfile
-twitterProfile
-locale
-fishbowls
-plainPassword
-
-            'name' => self::faker()->title(),
-            'description' => self::faker()->sentence(),
-            'startDateTime' => self::faker()->dateTime(),
-            'timezone' => self::faker()->timezone(),
+            'name' => self::faker()->name(),
+            'surnames' => self::faker()->firstName(),
+            'email' => self::faker()->unique()->email(),
+            'roles' => [],
+            'password' => self::faker()->password(),
+            'plainPassword' => self::faker()->word(),
+            'privacyPolicy' => self::faker()->boolean(),
+            'allowShareData' => self::faker()->boolean(),
+            'active' => self::faker()->boolean(),
+            'linkedinProfile' => self::faker()->boolean(),
+            'twitterProfile' => self::faker()->boolean(),
             'locale' => self::faker()->languageCode(),
-            'duration' => self::faker()->dateTime(),
-            'currentStatus' => self::faker()->randomElement(Fishbowl::$statusChoices),
+            'createdAt' => self::faker()->dateTime(),
+            'updatedAt' => self::faker()->dateTime(),
+            'fishbowls' => FishbowlFactory::new(),
         ];
     }
 
@@ -38,4 +43,4 @@ plainPassword
     {
         return User::class;
     }
-} -->
+}
