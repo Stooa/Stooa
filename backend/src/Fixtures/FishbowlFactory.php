@@ -21,7 +21,7 @@ final class FishbowlFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'name' => self::faker()->title(),
+            'name' => self::faker()->words(3, true),
             'description' => self::faker()->sentence(),
             'startDateTime' => self::faker()->dateTime(),
             'timezone' => self::faker()->timezone(),
