@@ -48,7 +48,7 @@ class DefaultFixtures extends Fixture
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00') ,
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
         ])->object();
 
