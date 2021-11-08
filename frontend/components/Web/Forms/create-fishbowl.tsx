@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 import countriesAndTimezones from 'countries-and-timezones';
 
 import { ROUTE_FISHBOWL_DETAIL } from 'app.config';
-import { locales } from 'i18n.json';
+import { locales } from 'i18n';
 import { useAuth } from 'contexts/AuthContext';
 import { CREATE_FISHBOWL } from 'lib/gql/Fishbowl';
 import { formatDateTime } from 'lib/helpers';
