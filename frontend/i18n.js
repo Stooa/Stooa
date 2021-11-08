@@ -1,6 +1,8 @@
-{
+const DEFAULT_LOCALE = 'en';
+
+module.exports = {
   "locales": ["en", "ca", "es"],
-  "defaultLocale": "en",
+  "defaultLocale": DEFAULT_LOCALE,
   "pages": {
     "*": ["common"],
     "/": ["home"],
@@ -18,5 +20,10 @@
     "/fishbowl/create": ["fishbowl", "form"],
     "/fishbowl/detail/[fid]": ["fishbowl", "form"],
     "/fishbowl/thankyou/[fid]": ["fishbowl", "form", "home"]
+  },
+  "loadLocaleFrom": async (lang, ns) => {
+    const locales = await import(`./locales/${lang}/${ns}.json`).then((m) => m.default);
+    const defaultLocales = await import(`./locales/${DEFAULT_LOCALE}/${ns}.json`).then((m) => m.default);
+    return { ...defaultLocales, ...locales };
   }
-}
+};

@@ -11,7 +11,7 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL } from 'app.config';
-import { defaultLocale } from 'i18n.json';
+import { defaultLocale } from 'i18n';
 import Copy from 'ui/svg/copy.svg';
 import Share from 'components/Common/CopyUrl/styles';
 

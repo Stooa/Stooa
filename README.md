@@ -31,6 +31,7 @@ Every code patch accepted in Stooa codebase is licensed under [MPL 2.0][license]
 
 Please [read carefully our license][license] and ask us if you have any questions as well as the [Contribution policy][contribute].
 
+<<<<<<< HEAD
 ## App Stats
 
 ![Backend lint](https://github.com/Stooa/Stooa/actions/workflows/backend-lint.yaml/badge.svg)
@@ -40,6 +41,8 @@ Please [read carefully our license][license] and ask us if you have any question
 ![Frontend lint](https://github.com/Stooa/Stooa/actions/workflows/frontend-lint.yaml/badge.svg)
 ![Frontend test](https://github.com/Stooa/Stooa/actions/workflows/frontend-test.yaml/badge.svg)
 
+=======
+>>>>>>> 3f001ed (Remove extra space)
 [license]: LICENSE
 [contribute]: https://docs.stooa.com/documentation/contributing
 [conduct]: https://docs.stooa.com/documentation/code_of_conduct
