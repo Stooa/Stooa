@@ -32,6 +32,7 @@ if [ "${RESET_DATABASE:-}" = true ]; then
 
     # Regenerate cache to avoid problems with dev or missing dependencies
     rm -rf var/cache/*
+    console cache:warmup
 fi
 
 # Can be used on production environments to apply migrations to the database each time
