@@ -17,7 +17,7 @@ A fishbowl is a **group dynamic** that facilitates conversations, debates and an
 
 It is an ideal dialogue method for communities, educational environements, or companies looking to improve their employee experience.
 
-Create your first fishbowl for free in www.stooa.com/.
+Create your first fishbowl for free in www.stooa.com.
 
 ## Code of Conduct
 
