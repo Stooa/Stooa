@@ -7,6 +7,7 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
+# Cache generation can't be moved to the Dockerfile because some env vars are not solved correctly
 console cache:warmup
 
 # Can be used on staging environments to destroy the database each time you deploy
