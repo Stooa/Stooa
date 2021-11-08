@@ -45,4 +45,14 @@ if [ "${MIGRATE_DATABASE:-}" = true ]; then
     # exit 0;
 fi
 
+# Can be used on production environments to run Symfony Messenger workers
+# to consume queued messages. For example: emails or long processing tasks
+if [ "${CONSUME_MESSAGES:-}" = true ]; then
+    echo 'Consume messages...'
+
+    console messenger:consume --time-limit=3600 -vv >&1
+
+    exit 0;
+fi
+
 php-fpm --allow-to-run-as-root

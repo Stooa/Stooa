@@ -64,12 +64,6 @@ RUN install-php-extensions pcov xdebug
 CMD ["php-fpm", "--allow-to-run-as-root"]
 
 
-# CONSUMER
-FROM fpm as consumer
-
-ENTRYPOINT ["bash", "/usr/app/.docker/app-prod/messenger-consume.sh"]
-
-
 # NGINX
 FROM nginx:1.20 as nginx
 
