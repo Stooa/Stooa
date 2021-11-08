@@ -14,11 +14,11 @@ import Footer from 'components/Web/Footer';
 import Header from 'components/Web/Header';
 import { Main, Container, Header as HeaderStyled } from 'layouts/Home/styles';
 
-interface IProps {
+interface Props {
   title?: string;
 }
 
-const Page: React.FC<IProps> = ({ children, title = '' }) => {
+const Page: React.FC<Props> = ({ children, title = '' }) => {
   return (
     <>
       <Seo title={title} />

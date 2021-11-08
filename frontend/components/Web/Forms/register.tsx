@@ -26,7 +26,7 @@ import RedirectLink from 'components/Web/RedirectLink';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   firstname: string;
   lastname: string;
   email: string;
@@ -37,7 +37,7 @@ interface IFormValues {
   isSubmitting: boolean;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
   terms: string;
@@ -59,7 +59,7 @@ const initialValues = {
   isSubmitting: false
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t, lang } = useTranslation('form');
   const privacyLink =
     lang === i18nConfig.defaultLocale ? ROUTE_PRIVACY_POLICY : `/${lang}${ROUTE_PRIVACY_POLICY}`;
@@ -113,7 +113,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({

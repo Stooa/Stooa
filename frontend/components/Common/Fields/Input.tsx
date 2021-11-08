@@ -14,7 +14,7 @@ import { InputStyled } from 'ui/Form';
 import { ValidationError, ValidationIcon } from 'ui/Validation';
 import Icon from 'components/Common/Fields/Icon';
 
-export type IInputProps = {
+export type Props = {
   label: string;
   variant?: 'default' | 'sm';
   help?: string;
@@ -24,7 +24,7 @@ export type IInputProps = {
   autocomplete?: string;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Input: React.FC<IInputProps> = ({
+const Input: React.FC<Props> = ({
   className = '',
   label,
   variant = 'default',
@@ -32,7 +32,6 @@ const Input: React.FC<IInputProps> = ({
   icon,
   as = 'input',
   validation = true,
-  autocomplete = '',
   ...props
 }) => {
   const [field, meta] = useField(props);

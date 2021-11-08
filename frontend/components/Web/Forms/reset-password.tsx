@@ -20,18 +20,18 @@ import FormikForm from 'ui/Form';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   password: string;
   passwordConfirmation: string;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   equalPassword: string;
   minlength: string;
   onSubmit: any;
   resetPassword: any;
-  token: any;
+  token: string;
 }
 
 const initialValues = {
@@ -39,7 +39,7 @@ const initialValues = {
   passwordConfirmation: ''
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('password');
 
   return (
@@ -60,7 +60,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({

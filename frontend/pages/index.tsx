@@ -21,6 +21,7 @@ import GAButton from 'components/Common/GAButton';
 import Layout from 'layouts/Home';
 import { Billboard, Content, Description, Row, Sections, Wrapper } from 'ui/pages';
 
+import { Lottie } from '@/types/animations';
 import ArrowRight from 'ui/svg/arrow-right.svg';
 import WaveMobile from 'ui/svg/wave-mobile.svg';
 import WaveDesktop from 'ui/svg/wave-desktop.svg';
@@ -37,23 +38,8 @@ const Banner = dynamic(import('components/Web/HomeSections/Banner'), { loading: 
 
 const Home = () => {
   const { t } = useTranslation('home');
-  const bodyMovinanimations = [
-    {
-      id: 'animated-billboard-desktop',
-      path: BillboardDeskAnimPath,
-      assetsPath: 'img/animations/billboard/'
-    },
-    {
-      id: 'animated-billboard-mobile',
-      path: BillboardMobAnimPath,
-      assetsPath: 'img/animations/billboard/'
-    },
-    { id: 'animated-billboard-morph', path: MorphBillAnimPath },
-    { id: 'animated-billboard-morph2', path: Morph2BillAnimPath },
-    { id: 'animated-keybenefit2-morph', path: KeyBenefit2MorphPath }
-  ];
 
-  const lazyMovinAnimations = [
+  const lazyMovinAnimations: Lottie[] = [
     {
       id: 'animated-keybenefit1',
       name: 'first',
@@ -77,11 +63,11 @@ const Home = () => {
     const items = [].slice.call(document.querySelectorAll(`.${targetClass}`));
     const top = window.innerHeight;
 
-    items.map((item: any) => {
+    items.map((item: HTMLElement) => {
       if (!item.classList.contains(HANDLED_CLASS) && item.getBoundingClientRect().top < top) {
         const animations = [].slice.call(item.querySelectorAll(`.${ANIMATION_ITEM_CLASS}`));
 
-        animations.map((anim: any, i: number) => {
+        animations.map((anim: HTMLElement, i: number) => {
           TweenMax.to(anim, 1, {
             opacity: 1,
             y: 0,
@@ -96,6 +82,22 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const bodyMovinanimations = [
+      {
+        id: 'animated-billboard-desktop',
+        path: BillboardDeskAnimPath,
+        assetsPath: 'img/animations/billboard/'
+      },
+      {
+        id: 'animated-billboard-mobile',
+        path: BillboardMobAnimPath,
+        assetsPath: 'img/animations/billboard/'
+      },
+      { id: 'animated-billboard-morph', path: MorphBillAnimPath },
+      { id: 'animated-billboard-morph2', path: Morph2BillAnimPath },
+      { id: 'animated-keybenefit2-morph', path: KeyBenefit2MorphPath }
+    ];
+
     bodyMovinanimations.map(item => {
       lottie.loadAnimation({
         container: document.getElementById(item.id),
@@ -157,7 +159,7 @@ const Home = () => {
           </Description>
         </Row>
         <Sections>
-          {lazyMovinAnimations.map((item: any, i: number) => {
+          {lazyMovinAnimations.map((item: Lottie, i: number) => {
             return (
               <div data-testid={`benefit-${i + 1}`} key={item.id}>
                 {item.morph && (

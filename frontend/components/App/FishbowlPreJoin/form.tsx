@@ -19,20 +19,22 @@ import FormikForm from 'ui/Form';
 import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 
-interface IFormValues {
+interface FormValues {
   name: string;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
-  onSubmit: any;
+  onSubmit: {
+    name: string;
+  };
 }
 
 const initialValues = {
   name: userRepository.getUserNickname()
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
@@ -45,7 +47,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({

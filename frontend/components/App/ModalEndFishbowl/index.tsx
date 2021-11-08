@@ -7,19 +7,20 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Modal from 'ui/Modal';
 import { ButtonApp, ButtonLinkApp } from 'ui/Button';
 import Cross from 'ui/svg/cross.svg';
 
-interface IProps {
+interface Props {
   closeModal: () => void;
   endFishbowl: () => void;
   disabled: boolean;
 }
 
-const EndFishbowl: React.FC<IProps> = ({ closeModal, endFishbowl, disabled }) => {
+const EndFishbowl: React.FC<Props> = ({ closeModal, endFishbowl, disabled }) => {
   const { t } = useTranslation('fishbowl');
 
   return (

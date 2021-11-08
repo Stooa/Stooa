@@ -24,7 +24,7 @@ import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   firstname: string;
   lastname: string;
   email: string;
@@ -33,7 +33,7 @@ interface IFormValues {
   isSubmitting: boolean;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
   minlength: string;
@@ -43,7 +43,7 @@ interface IFormProps {
   updateUser: any;
 }
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
@@ -84,7 +84,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => {
     const {
       initialValues: { email, linkedinProfile, name, surnames, twitterProfile }

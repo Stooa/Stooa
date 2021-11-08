@@ -29,7 +29,7 @@ const conferenceRepository = () => {
     if (id === undefined || id === null) {
       id = conference.myUserId();
     }
-    const seat = seatsRepository.join(id, user);
+    const seat = seatsRepository.join(id);
     tracksRepository.createTracks(id, seat, user);
     conference.selectParticipants(seatsRepository.getIds());
 

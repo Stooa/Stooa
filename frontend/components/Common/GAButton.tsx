@@ -12,6 +12,15 @@ import { forwardRef } from 'react';
 import { pushEventDataLayer } from 'lib/analytics';
 import Button, { ButtonSmall } from 'ui/Button';
 
+interface Props {
+  event: {
+    category: string;
+    action: string;
+    label: string;
+  },
+  variant?: 'button'|'small'|'default'|'link';
+}
+
 const buttonVariant = {
   button: Button,
   small: ButtonSmall,
@@ -19,8 +28,7 @@ const buttonVariant = {
   link: 'a'
 };
 
-const GAButton = (props: any, ref: any) => {
-  const { event, children, variant = 'default', ...other } = props;
+const GAButton = ({ event, variant = 'default', children, ...other }, ref): Props => {
   const ButtonComponent = buttonVariant[variant];
 
   const onClick = () => {

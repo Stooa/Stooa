@@ -13,13 +13,11 @@ import { Field, FieldAttributes, useField } from 'formik';
 import { CheckboxStyled } from 'ui/Form';
 import { ValidationError } from 'ui/Validation';
 
-// Having label & children comes from the need of using in cases html tags, in other cases a translation component
-type ICheckboxProps = {
-  label?: any;
-  children?: any;
+type CheckboxProps = {
+  label?: string;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Checkbox: React.FC<ICheckboxProps> = ({ label, children, ...props }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ label, children, ...props }) => {
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
 
   return (
