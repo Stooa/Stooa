@@ -50,7 +50,7 @@ COPY . /usr/app
 RUN composer dump-autoload --classmap-authoritative
 RUN composer symfony:dump-env prod
 
-# Temporary removed from build
+# Temporaly removed from build
 # RUN console cache:warmup
 RUN console assets:install public
 
