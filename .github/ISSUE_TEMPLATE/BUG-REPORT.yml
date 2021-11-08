@@ -27,13 +27,6 @@ body:
         - Safari
         - Microsoft Edge
         - Other
-  - type: input
-    id: version
-    attributes:
-      label: Version
-      description: What version are you running?
-    validations:
-      required: true
   - type: textarea
     id: logs
     attributes:
