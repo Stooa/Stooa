@@ -1,7 +1,7 @@
 /*!
- * This file is part of the Stooa.
+ * This file is part of the Stooa codebase.
  *
- * (c) Stooa Team 2021
+ * (c) 2020 - present Runroom SL
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
