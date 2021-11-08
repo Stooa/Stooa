@@ -15,7 +15,7 @@ import Dots from 'ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from 'components/App/FishbowlInfo/styles';
 
 interface IProps {
-  data: any;
+  data: IFishbowl
 }
 
 const Info: React.FC<IProps> = ({ data }) => {
@@ -32,19 +32,19 @@ const Info: React.FC<IProps> = ({ data }) => {
     setActive(!active);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      toggleInfo();
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        toggleInfo();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [wrapperRef, active]);
+  }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <InfoStyled ref={wrapperRef}>

@@ -25,7 +25,9 @@ interface IFormValues {
 
 interface IFormProps {
   required: string;
-  onSubmit: any;
+  onSubmit: {
+    name: string;
+  };
 }
 
 const initialValues = {

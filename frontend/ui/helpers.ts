@@ -10,12 +10,6 @@
 import { css } from 'styled-components';
 import { BREAKPOINTS, FONT_BASE_SIZE, SPACE } from 'ui/settings';
 
-const hover = (...args: any[]) => css`
-  &:hover {
-    ${css.call(null, ...args)};
-  }
-`;
-
 const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
   if (hex[0] === '#') {
     hex = hex.substr(1);
@@ -85,9 +79,9 @@ const columns = (number: number, spaces = 1, direction = 'default') => `
  *
  * @param {integer|string} n — Number to transform
  */
-const rems = (n: any) => `${parseInt(n, 10) / FONT_BASE_SIZE}rem`;
+const rems = (n: number|string) => `${parseInt(n, 10) / FONT_BASE_SIZE}rem`;
 
-const pixelate = (n: any) => (n !== 0 ? `${n}px` : n);
+const pixelate = (n: number|string) => (n !== 0 ? `${n}px` : n);
 
 /**
  * Space
@@ -98,13 +92,10 @@ const pixelate = (n: any) => (n !== 0 ? `${n}px` : n);
  */
 const space = (n = 1) => rems(SPACE * n);
 
-const getSizeFromBreakpoint = (value: any, max = false) => {
+const getSizeFromBreakpoint = (value: string, max = false) => {
   let mq;
   if (BREAKPOINTS[value]) {
     mq = max ? BREAKPOINTS[value] - 1 : BREAKPOINTS[value];
-    // tslint:disable-next-line:radix
-  } else if (parseInt(value)) {
-    mq = max ? value - 1 : value;
   } else {
     // tslint:disable-next-line:no-console
     console.error('No valid breakpoint or size specified for media.');
@@ -114,8 +105,8 @@ const getSizeFromBreakpoint = (value: any, max = false) => {
 
 const generateMedia = () => {
   const max =
-    (breakpoint: any) =>
-    (...args: any[]) =>
+    (breakpoint: string) =>
+    (...args: string[]) =>
       css`
         @media (max-width: ${getSizeFromBreakpoint(breakpoint, true)}) {
           ${css.call(null, ...args)};
@@ -123,8 +114,8 @@ const generateMedia = () => {
       `;
 
   const min =
-    (breakpoint: any) =>
-    (...args: any[]) =>
+    (breakpoint: string) =>
+    (...args: string[]) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(breakpoint)}) {
           ${css.call(null, ...args)};
@@ -132,8 +123,8 @@ const generateMedia = () => {
       `;
 
   const between =
-    (firstBreakpoint: any, secondBreakpoint: any) =>
-    (...args: any[]) =>
+    (firstBreakpoint: string, secondBreakpoint: string) =>
+    (...args: string[]) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(
             firstBreakpoint
@@ -151,4 +142,4 @@ const generateMedia = () => {
 
 const media = generateMedia();
 
-export { bgGradient, columns, getRatio, hexToRgb, hover, media, pixelate, rems, rgbToHex, space };
+export { bgGradient, columns, getRatio, hexToRgb, media, pixelate, rems, rgbToHex, space };

@@ -34,7 +34,7 @@ import {
 } from 'lib/auth';
 
 import api from 'lib/api';
-import { AuthToken } from 'lib/auth/authToken';
+import { AuthToken, User } from 'lib/auth/authToken';
 import Layout from 'layouts/Clean';
 import LoadingIcon from 'components/Common/LoadingIcon';
 import useTranslation from 'next-translate/useTranslation';
@@ -56,7 +56,7 @@ const unauthenticatedRoutes = [
 
 export type AuthContextType = {
   isAuthenticated: boolean;
-  user: any;
+  user: User;
   login: (email: string, password: string) => any;
   loginStatus: any;
   loading: boolean;

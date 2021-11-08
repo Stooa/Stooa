@@ -19,12 +19,11 @@ import {
   Main
 } from 'layouts/Default/styles';
 
-interface IProps {
-  children: any;
-  data: any;
+type TProps = {
+  data: IFishbowl;
 }
 
-const Page: React.FC<IProps> = ({ children, data }) => {
+const Page: React.FC<TProps> = ({ children, data }) => {
   return (
     <>
       <Container>

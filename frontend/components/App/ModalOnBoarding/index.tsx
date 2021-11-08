@@ -13,7 +13,6 @@ import OnboardingModal from 'components/App/ModalOnBoarding/styles';
 interface IProps {
   show: boolean;
   closeModal: () => void;
-  children: any;
 }
 
 const Onboarding: React.FC<IProps> = ({ show, closeModal, children }) => {

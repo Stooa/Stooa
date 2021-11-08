@@ -138,7 +138,7 @@ const DevicesProvider = ({ children }) => {
       userRepository.setUserVideoInput(devices.videoDevices[0]);
       setVideoDevice(devices.videoDevices[0]);
     }
-  }, [devices]);
+  }, [devices]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     devicesRepository.loadDevices(_devicesChangedEvent);

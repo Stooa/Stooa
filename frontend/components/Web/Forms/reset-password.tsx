@@ -31,7 +31,7 @@ interface IFormProps {
   minlength: string;
   onSubmit: any;
   resetPassword: any;
-  token: any;
+  token: string;
 }
 
 const initialValues = {

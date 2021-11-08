@@ -25,7 +25,7 @@ const scripts = [
 ];
 
 interface IProps {
-  data: any;
+  data: IFishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;
@@ -33,7 +33,6 @@ interface IProps {
 
 const Layout: React.FC<IProps> = ({
   data,
-  children,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
   title

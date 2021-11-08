@@ -8,24 +8,31 @@
  */
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import lottie from 'lottie-web';
 
 import { Column, Description, Row, Wrapper } from 'ui/pages';
 
-interface IProps {
-  item: any;
-}
-
-const importAnimation = (path: string) => {
-  return require(`ui/animations/home/${path}`);
+export interface LazyMovin {
+  id: string;
+  name: string;
+  path: string;
+  morph?: string;
+  reverse?: boolean;
+  assetsPath?: string;
 };
+
+interface IProps {
+  item: LazyMovin;
+}
 
 const Benefits = ({ item }: IProps): JSX.Element => {
   const { t } = useTranslation('home');
-  const AnimPath = importAnimation(item.path);
 
   useEffect(() => {
+    const AnimPath = dynamic(import(`ui/animations/home/${item.path}`), { loading: () => ({}) });
+
     lottie.loadAnimation({
       container: document.getElementById(item.id),
       animationData: AnimPath,
@@ -34,7 +41,7 @@ const Benefits = ({ item }: IProps): JSX.Element => {
       autoplay: true,
       assetsPath: `img/animations/${item.path}/`
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Wrapper>

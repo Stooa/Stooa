@@ -11,7 +11,7 @@ import seatsRepository from '@/jitsi/Seats';
 import { removeItem } from 'lib/helpers';
 
 export interface UserInterface {
-  id?: string | boolean; // TODO: is boolean a valid id? Where the boolean comes from?
+  id?: string|boolean; // TODO: is boolean a valid id? Where the boolean comes from?
   guestId?: string;
   nickname?: string;
   audioInput?: MediaDeviceInfo;
@@ -24,12 +24,12 @@ export interface UserInterface {
 interface UserRepositoryInterface {
   clearUser: () => void;
   getUser: () => UserInterface;
-  getUserAudioInput: () => MediaDeviceInfo | null;
+  getUserAudioInput: () => MediaDeviceInfo|null;
   getUserAudioMuted: () => boolean;
-  getUserAudioOutput: () => MediaDeviceInfo | null;
-  getUserGuestId: () => string | null;
-  getUserNickname: () => string | null;
-  getUserVideoInput: () => MediaDeviceInfo | null;
+  getUserAudioOutput: () => MediaDeviceInfo|null;
+  getUserGuestId: () => string|null;
+  getUserNickname: () => string|null;
+  getUserVideoInput: () => MediaDeviceInfo|null;
   getUserVideoMuted: () => boolean;
   handleUserJoin: (id: string, user: UserInterface) => void;
   handleUserLeft: (id: string, user: UserInterface) => void;
@@ -44,7 +44,7 @@ interface UserRepositoryInterface {
 const userRepository = (): UserRepositoryInterface => {
   let users: UserInterface[] = [];
 
-  const _getUserValue = (value: keyof UserInterface, defaultValue: any = ''): any => {
+  const _getUserValue = (value: keyof UserInterface, defaultValue: string|boolean|MediaDeviceInfo = ''): string|boolean|MediaDeviceInfo => {
     const user = getUser();
 
     return user?.[value] || defaultValue;
@@ -70,13 +70,13 @@ const userRepository = (): UserRepositoryInterface => {
     return user ? JSON.parse(user) : {};
   };
 
-  const getUserGuestId = (): string | null => _getUserValue('guestId');
-  const getUserNickname = (): string | null => _getUserValue('nickname');
-  const getUserAudioInput = (): MediaDeviceInfo | null => _getUserValue('audioInput', null);
-  const getUserAudioOutput = (): MediaDeviceInfo | null => _getUserValue('audioOutput', null);
-  const getUserVideoInput = (): MediaDeviceInfo | null => _getUserValue('videoInput', null);
-  const getUserAudioMuted = (): boolean => _getUserValue('audioMuted', false);
-  const getUserVideoMuted = (): boolean => _getUserValue('videoMuted', false);
+  const getUserGuestId = () => _getUserValue('guestId');
+  const getUserNickname = () => _getUserValue('nickname');
+  const getUserAudioInput = () => _getUserValue('audioInput', null);
+  const getUserAudioOutput = () => _getUserValue('audioOutput', null);
+  const getUserVideoInput = () => _getUserValue('videoInput', null);
+  const getUserAudioMuted = () => _getUserValue('audioMuted', false);
+  const getUserVideoMuted = () => _getUserValue('videoMuted', false);
 
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });

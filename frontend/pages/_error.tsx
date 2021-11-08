@@ -15,7 +15,6 @@ import { CONTACT_EMAIL } from 'app.config';
 
 interface IProps {
   statusCode?: number;
-  namespacesRequired: any;
 }
 
 const ErrorPage = ({ statusCode }: IProps) => {

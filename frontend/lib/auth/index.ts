@@ -22,14 +22,14 @@ const COOKIE_REFRESH_DAYS = 30;
 const COOKIE_ON_BOARDING_DAYS = 30;
 const COOKIE_OPTIONS = { path: '/', domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN };
 
-const setToken = (token: any) => {
+const setToken = (token: string) => {
   const auth = new AuthToken(token);
   if (auth) {
     cookie.set(COOKIE_TOKEN, token, { ...COOKIE_OPTIONS, expires: auth.decodedToken.exp });
   }
 };
 
-const setRefreshToken = (value: any) => {
+const setRefreshToken = (value: string) => {
   cookie.set(COOKIE_REFRESH, value, { ...COOKIE_OPTIONS, expires: COOKIE_REFRESH_DAYS });
 };
 
@@ -116,7 +116,7 @@ const getParticipants = async (lang: string, slug: string) => {
   });
 };
 
-const isCurrentGuest = (guestId: any) => {
+const isCurrentGuest = (guestId: string|null) => {
   return guestId !== null && userRepository.getUserGuestId() === guestId;
 };
 
