@@ -45,11 +45,14 @@ if [ "${MIGRATE_DATABASE:-}" = true ]; then
     # exit 0;
 fi
 
-# In production environments we use Symfony Messenger component bus to send queued messages. For example: emails
+# Can be used on production environments to run Symfony Messenger workers
+# to consume queued messages. For example: emails or long processing tasks
 if [ "${CONSUME_MESSAGES:-}" = true ]; then
-    echo 'Send queued messages...'
+    echo 'Consume messages...'
 
     console messenger:consume -vv >&1
+
+    exit 0;
 fi
 
 php-fpm --allow-to-run-as-root
