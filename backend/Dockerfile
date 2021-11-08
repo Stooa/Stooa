@@ -50,8 +50,6 @@ COPY . /usr/app
 RUN composer dump-autoload --classmap-authoritative
 RUN composer symfony:dump-env prod
 
-# Temporaly removed from build
-# RUN console cache:warmup
 RUN console assets:install public
 
 ENTRYPOINT ["bash", "/usr/app/.docker/app-prod/php-fpm.sh"]
