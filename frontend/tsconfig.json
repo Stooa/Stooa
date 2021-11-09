@@ -10,6 +10,7 @@
       "@/graphql/*": ["lib/gql/*"],
       "@/pages/*": ["pages/*"],
       "@/components/*": ["components/*"],
+      "@/types/*": ["types/*"]
     },
     "skipLibCheck": true,
     "strict": false,
@@ -22,7 +23,7 @@
     "isolatedModules": true,
     "sourceMap": true,
     "jsx": "preserve",
-    "typeRoots": ["./node_modules/@types/*", "./customTypes/*.d.ts"]
+    "typeRoots": ["./node_modules/@types/*", "./*.d.ts", "./types/*"]
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Jitsi/index.jsx"]

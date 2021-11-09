@@ -17,12 +17,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import OpenGraphDefault from 'components/Common/OpenGraphDefault';
 import { StateProvider } from 'contexts/AppContext';
 import { AuthProvider, ProtectRoute } from 'contexts/AuthContext';
-import { GTMPageView } from 'lib/analytics';
+import { pushPageViewDataLayer } from 'lib/analytics';
 import DataProvider from 'lib/apollo-client';
 import GlobalStyles from 'ui/Globals';
 
 const MyApp = ({ Component, pageProps }) => {
-  const handleRouteChange = (url: string) => GTMPageView({ url });
+  const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
@@ -30,7 +30,7 @@ const MyApp = ({ Component, pageProps }) => {
         // Not empty function
       };
 
-      GTMPageView({ url: window.location.pathname });
+      pushPageViewDataLayer({ url: window.location.pathname });
       Router.events.on('routeChangeComplete', handleRouteChange);
     }
 

@@ -10,7 +10,7 @@
 import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import userRepository from '@/jitsi/User';
 import MicMutedIcon from 'ui/svg/mic-muted.svg';
 import MicIcon from 'ui/svg/mic.svg';
@@ -32,7 +32,7 @@ const ButtonMic: React.FC<IProps> = ({ handleMic, joined, disabled, unlabeled })
     const currentMutedState = muted;
     setActive(false);
 
-    GAEvent({
+    pushEventDataLayer({
       action: muted ? 'Unmute' : 'Mute',
       category: 'Buttons',
       label: window.location.href
