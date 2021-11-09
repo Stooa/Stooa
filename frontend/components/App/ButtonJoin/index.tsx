@@ -9,7 +9,7 @@
 
 import { useState } from 'react';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import userRepository, { UserInterface } from '@/jitsi/User';
 
 import ArrowDownIcon from 'ui/svg/arrow-down.svg';
@@ -27,7 +27,7 @@ const ButtonJoin: React.FC<IProps> = ({ joined, join, leave, disabled, children 
   const [active, setActive] = useState(true);
 
   const handleJoinClick = async () => {
-    GAEvent({
+    pushEventDataLayer({
       action: joined ? 'Leave' : 'Join',
       category: 'Buttons',
       label: window.location.href

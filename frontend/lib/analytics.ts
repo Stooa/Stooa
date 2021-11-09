@@ -7,23 +7,13 @@
  * file that was distributed with this source code.
  */
 
-interface IGAEvents {
-  action?: string;
-  category?: string;
-  label?: string;
-  value?: string;
-}
-
-interface IGTMPageView {
-  url?: string;
-  title?: string;
-}
+import { UAPageView, UAEvent } from '@/types/analytics';
 
 const dataLayerPush = (data: Record<string, unknown>) => {
   window?.dataLayer && window.dataLayer.push(data);
 };
 
-const GAEvent = ({ action = '', category = '', label = '', value = '' }: IGAEvents) => {
+const pushEventDataLayer = ({ action = '', category = '', label = '', value = '' }: UAEvent) => {
   const event = {
     event: 'GAEvent',
     eventCategory: category,
@@ -35,7 +25,7 @@ const GAEvent = ({ action = '', category = '', label = '', value = '' }: IGAEven
   dataLayerPush(event);
 };
 
-const GTMPageView = ({ url, title }: IGTMPageView) => {
+const pushPageViewDataLayer = ({ url, title }: UAPageView) => {
   const pageEvent = {
     event: 'GAPageView',
     pageViewUrl: url,
@@ -45,4 +35,4 @@ const GTMPageView = ({ url, title }: IGTMPageView) => {
   dataLayerPush(pageEvent);
 };
 
-export { GAEvent, dataLayerPush, GTMPageView };
+export { dataLayerPush, pushEventDataLayer, pushPageViewDataLayer };

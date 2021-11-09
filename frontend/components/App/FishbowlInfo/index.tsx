@@ -9,7 +9,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import CopyUrl from 'components/Common/CopyUrl';
 import Dots from 'ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from 'components/App/FishbowlInfo/styles';
@@ -23,7 +23,7 @@ const Info: React.FC<IProps> = ({ data }) => {
   const [active, setActive] = useState(false);
 
   const toggleInfo = () => {
-    GAEvent({
+    pushEventDataLayer({
       action: active ? 'Info close' : 'Info open',
       category: 'Header',
       label: window.location.href

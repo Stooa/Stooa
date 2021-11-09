@@ -9,7 +9,7 @@
 
 import { forwardRef } from 'react';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import Button, { ButtonSmall } from 'ui/Button';
 
 const buttonVariant = {
@@ -24,7 +24,7 @@ const GAButton = (props: any, ref: any) => {
   const ButtonComponent = buttonVariant[variant];
 
   const onClick = () => {
-    GAEvent(event);
+    pushEventDataLayer(event);
   };
 
   return (
