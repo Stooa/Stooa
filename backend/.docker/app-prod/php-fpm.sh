@@ -23,7 +23,7 @@ if [ "${RESET_DATABASE:-}" = true ]; then
 
     # Our current infrastructure does not allow to run sidecar containers to perform
     # this operation on a separate container, so we have to run it before launching php-fpm
-    # exit 0;
+    # exit 0
 
     # Install production dependencies (due to our limitations in infrastructure)
     composer install --prefer-dist --no-progress --no-interaction --no-dev --classmap-authoritative
@@ -42,7 +42,7 @@ if [ "${MIGRATE_DATABASE:-}" = true ]; then
 
     # Our current infrastructure does not allow to run sidecar containers to perform
     # this operation on a separate container, so we have to run it before launching php-fpm
-    # exit 0;
+    # exit 0
 fi
 
 # Can be used on production environments to run Symfony Messenger workers
@@ -50,9 +50,9 @@ fi
 if [ "${CONSUME_MESSAGES:-}" = true ]; then
     echo 'Consume messages...'
 
-    console messenger:consume --time-limit=3600 -vv >&1
+    console messenger:consume async --time-limit=3600 -vv >&1
 
-    exit 0;
+    exit 0
 fi
 
 php-fpm --allow-to-run-as-root
