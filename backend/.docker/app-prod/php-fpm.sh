@@ -50,9 +50,9 @@ fi
 if [ "${CONSUME_MESSAGES:-}" = true ]; then
     echo 'Consume messages...'
 
-    console messenger:consume --time-limit=3600 -vv >&1
+    console messenger:consume async --time-limit=3600 -vv >&1
 
-    exit 0;
+    exit 0
 fi
 
 php-fpm --allow-to-run-as-root
