@@ -10,7 +10,7 @@
 import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import userRepository from '@/jitsi/User';
 import VideoIcon from 'ui/svg/video.svg';
 import VideoMutedIcon from 'ui/svg/video-muted.svg';
@@ -32,7 +32,7 @@ const ButtonVideo: React.FC<IProps> = ({ handleVideo, joined, disabled, unlabele
     const currentMutedState = muted;
     setActive(false);
 
-    GAEvent({
+    pushEventDataLayer({
       action: muted ? 'Video Unmute' : 'Video Mute',
       category: 'Buttons',
       label: window.location.href

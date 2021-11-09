@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 import setLanguage from 'next-translate/setLanguage';
 
 import usePersistLocaleCookie from 'hooks/usePersistLocaleCookie';
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import i18nConfig from 'i18n';
 import ChevronDown from 'ui/svg/chevron-down.svg';
 
@@ -26,7 +26,7 @@ const LanguageSwitcher = () => {
   const changeLanguage = async (event: any) => {
     const { value } = event.currentTarget;
 
-    GAEvent({
+    pushEventDataLayer({
       action: 'Language Change',
       category: 'Footer',
       label: value
