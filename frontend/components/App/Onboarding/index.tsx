@@ -15,7 +15,7 @@ import { TweenMax } from 'gsap';
 
 import ModalOnBoarding from 'components/App/ModalOnBoarding';
 import { getOnBoardingCookie, setOnBoardingCookie } from 'lib/auth';
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import { ButtonApp, ButtonLinkApp } from 'ui/Button';
 
 import ArrowPrev from 'ui/svg/arrow-prev.svg';
@@ -77,7 +77,7 @@ const Onboarding: React.FC<IProps> = ({ isModerator }) => {
   };
 
   const toggleOnBoarding = () => {
-    GAEvent({
+    pushEventDataLayer({
       action: active ? 'OnBoarding close' : 'OnBoarding open',
       category: 'Header',
       label: window.location.href

@@ -10,7 +10,7 @@
 import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import { getParticipants, ping } from 'lib/auth';
 import { getParticipantList } from 'lib/jitsi';
 import Participant from 'components/App/Participants/Participant';
@@ -90,7 +90,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
   };
 
   const toggleDrawer = () => {
-    GAEvent({
+    pushEventDataLayer({
       action: active ? 'Participants close' : 'Participants open',
       category: 'Header',
       label: window.location.href

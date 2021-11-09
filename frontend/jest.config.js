@@ -21,6 +21,7 @@ module.exports = {
     '^@/graphql(.*)$': '<rootDir>/lib/gql$1',
     '^@/pages(.*)$': '<rootDir>/pages$1',
     '^@/components(.*)$': '<rootDir>/components$1',
+    '^@/types(.*)$': '<rootDir>/types$1'
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
