@@ -12,8 +12,7 @@ services:
             context: backend
             target: fpm-dev
         depends_on:
-            mysql:
-                condition: service_started
+            - mysql
         volumes:
             - ./backend:/usr/app/:cached
             - /usr/app/var/
@@ -22,9 +21,6 @@ services:
             - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
         environment:
             - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
-        healthcheck:
-            test: ['CMD', 'healthcheck']
-            start_period: 1m
         networks:
             meet.jitsi:
                 aliases:
@@ -32,8 +28,7 @@ services:
     backend-nginx:
         image: nginx:1.20
         depends_on:
-            backend:
-                condition: service_healthy
+            - backend
         ports:
             - 8080:80
             - 8443:443
@@ -57,9 +52,6 @@ services:
             - ./frontend:/usr/app/:cached
             - /usr/app/.next/
             - /usr/app/node_modules/
-        healthcheck:
-            test: curl -f http://localhost:3000/api/healthcheck || exit 1
-            start_period: 1m
         networks:
             meet.jitsi:
                 aliases:
@@ -67,12 +59,9 @@ services:
     frontend-nginx:
         image: nginx:1.20
         depends_on:
-            frontend:
-                condition: service_healthy
-            jvb:
-                condition: service_healthy
-            xmpp:
-                condition: service_started
+            - frontend
+            - jvb
+            - xmpp
         ports:
             - 8380:80
             - 8343:443
@@ -155,8 +144,7 @@ services:
     focus:
         image: jitsi/jicofo:stable-5870
         depends_on:
-            xmpp:
-                condition: service_started
+            - xmpp
         volumes:
             - ${CONFIG}/jicofo:/config:Z
         environment:
@@ -194,9 +182,6 @@ services:
             - XMPP_INTERNAL_MUC_DOMAIN
             - XMPP_MUC_DOMAIN
             - XMPP_SERVER
-        healthcheck:
-            test: wget --no-verbose --tries=1 --spider http://localhost:8888/about/health || exit 1
-            start_period: 30s
         networks:
             meet.jitsi:
                 aliases:
@@ -204,8 +189,7 @@ services:
     jvb:
         image: jitsi/jvb:stable-5870
         depends_on:
-            xmpp:
-                condition: service_started
+            - xmpp
         ports:
             - '${JVB_PORT}:${JVB_PORT}/udp'
             - '${JVB_TCP_PORT}:${JVB_TCP_PORT}'
@@ -235,9 +219,6 @@ services:
             - JVB_OCTO_BIND_PORT
             - JVB_OCTO_REGION
             - TZ
-        healthcheck:
-            test: curl -f http://localhost:8080/about/health || exit 1
-            start_period: 30s
         networks:
             meet.jitsi:
                 aliases:
