@@ -21,10 +21,7 @@ security:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/refresh-token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/docs$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - {
-              path: ^/graphql/graphql_playground$,
-              roles: IS_AUTHENTICATED_ANONYMOUSLY,
-          }
+        - { path: ^/graphql/graphql_playground$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     role_hierarchy:
         ROLE_ADMIN:
             - ROLE_USER

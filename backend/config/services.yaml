@@ -72,11 +72,7 @@ services:
     App\Admin\ResetPasswordRequestAdmin:
         arguments: [null, App\Entity\ResetPasswordRequest, null]
         tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  label: Reset Password Requests,
-              }
+            - { name: sonata.admin, manager_type: orm, label: Reset Password Requests }
 
     App\Admin\ParticipantAdmin:
         arguments: [null, App\Entity\Participant, null]
