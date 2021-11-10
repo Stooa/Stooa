@@ -1,4 +1,5 @@
-# [Stooa](https://www.stooa.com)
+![Stooa](https://raw.githubusercontent.com/Stooa/.github/main/profile/assets/img/stooa-header-logo.png)
+
 
 [![License](https://img.shields.io/github/license/Stooa/Stooa)][license]
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)][issues]
@@ -11,17 +12,33 @@
 
 Stooa enables a fluent and participatory conversation with automatic facilitation based on the fishbowl method.
 
+![Fishbowl](https://raw.githubusercontent.com/Stooa/.github/main/profile/assets/img/capture.jpg)
+
 ### What is a fishbowl?
 
 A fishbowl is a **group dynamic** that facilitates conversations, debates and any type of activity in which **participation is essential for its development**.
 
 It is an ideal dialogue method for communities, educational environements, or companies looking to improve their employee experience.
 
-Create your first fishbowl for free in www.stooa.com.
+🏛 [Start using Stooa](www.stooa.com)
 
 ## Code of Conduct
 
 Help us keep the Stooa Community open and inclusive. Please read and follow our [Code of Conduct][conduct].
+
+## Contributing
+
+We love open source community, and we love contributions even more. Stooa is open to contributions, get to know more in our [contributing documentation](https://github.com/Stooa/Stooa/blob/main/CONTRIBUTING.md)
+
+## Give feedback
+
+You can give feedback through:
+
+👥 [Github's discussion](https://github.com/Stooa/Stooa/discussions)
+
+🐦 [Twitter](https://twitter.com/WeareStooa)
+
+✉️ [Mail](mailto:stooa@runroom.com)
 
 ## Setup development environment
 
@@ -41,6 +58,8 @@ Please [read carefully our license][license] and ask us if you have any question
 ![Frontend build](https://github.com/Stooa/Stooa/actions/workflows/frontend-build.yaml/badge.svg)
 ![Frontend lint](https://github.com/Stooa/Stooa/actions/workflows/frontend-lint.yaml/badge.svg)
 ![Frontend test](https://github.com/Stooa/Stooa/actions/workflows/frontend-test.yaml/badge.svg)
+
+![Footer](https://raw.githubusercontent.com/Stooa/.github/main/profile/assets/img/footer-colors.png)
 
 [license]: LICENSE
 [contribute]: https://docs.stooa.com/documentation/contributing
