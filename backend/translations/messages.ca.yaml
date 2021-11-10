@@ -16,7 +16,7 @@ emails:
     reset_password_email:
         subject: Hola %name%! Hem rebut una sol·licitud per a restablir la teva contrasenya de Stooa
         title: Hola %name%!
-        description: "Per restablir la seva contrasenya, segueix el següent enllaç:"
+        description: 'Per restablir la seva contrasenya, segueix el següent enllaç:'
         expire_text: Recorda que aquest enllaç expirarà en 1h.
         button_text: Restableix la teva contrasenya
         information_text: Si ignores aquest missatge, la teva contrasenya no canviarà.<br>Si no has sol·licitat un canvi de contrasenya, <a href='mailto:%email%'>avisa'ns</a>.
@@ -24,7 +24,7 @@ emails:
     fishbowl_created_email:
         subject: Hola %name%! Has creat un nou fishbowl
         title: Ben fet!
-        description: "Revisa els detalls del teu nou fishbowl:"
+        description: 'Revisa els detalls del teu nou fishbowl:'
         info_title: Títol
         info_duration: Durada
         info_description: Descripció

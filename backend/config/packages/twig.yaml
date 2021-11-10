@@ -6,8 +6,8 @@
 # file that was distributed with this source code.
 
 twig:
-    strict_variables: "%kernel.debug%"
-    default_path: "%kernel.project_dir%/templates"
+    strict_variables: '%kernel.debug%'
+    default_path: '%kernel.project_dir%/templates'
     exception_controller: null
     form_themes:
-        - "@SonataForm/Form/datepicker.html.twig"
+        - '@SonataForm/Form/datepicker.html.twig'

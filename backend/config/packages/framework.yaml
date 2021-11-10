@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 framework:
-    secret: "%env(APP_SECRET)%"
+    secret: '%env(APP_SECRET)%'
     session:
         handler_id: null
         cookie_secure: auto

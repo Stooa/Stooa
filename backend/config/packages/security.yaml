@@ -59,7 +59,7 @@ security:
                 path: /admin/logout
                 target: /admin/login
             remember_me:
-                secret: "%env(APP_SECRET)%"
+                secret: '%env(APP_SECRET)%'
                 lifetime: 2629746
                 path: /admin
         refresh:

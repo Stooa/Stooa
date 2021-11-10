@@ -1,7 +1,7 @@
 name: Feature Request
 description: Request a feature for Stooa.
-title: "[Feature]: "
-labels: ["feature-request"]
+title: '[Feature]: '
+labels: ['feature-request']
 body:
     - type: markdown
       attributes:
@@ -10,10 +10,10 @@ body:
     - type: textarea
       id: idea
       attributes:
-          label: "Tell us your idea"
+          label: 'Tell us your idea'
           description: We are really excited for you to share your ideas with the community!
           placeholder: Tell us what you miss!
-          value: "A flying car!"
+          value: 'A flying car!'
       validations:
           required: true
     - type: checkboxes

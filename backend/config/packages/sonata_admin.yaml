@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 sonata_admin:
-    title: "Stooa"
+    title: 'Stooa'
     show_mosaic_button: false
     security:
         handler: sonata.admin.security.handler.role

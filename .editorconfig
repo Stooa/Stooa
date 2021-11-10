@@ -20,6 +20,9 @@ quote_type = single
 max_line_length = 100
 indent_size = 2
 
+[{*.yml,*.yaml}]
+quote_type = single
+
 [*.md]
 trim_trailing_whitespace = false
 

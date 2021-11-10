@@ -16,7 +16,7 @@ emails:
     reset_password_email:
         subject: Hello %name%! We got a request to reset your Stooa password
         title: Hello %name%!
-        description: "To reset your password, please visit the following link:"
+        description: 'To reset your password, please visit the following link:'
         expire_text: Remember that this link will expire in 1h.
         button_text: Reset your password
         information_text: If you ignore this message, your password won't be changed.<br>If you didn't request a password reset, <a href='mailto:%email%'>let us know</a>.
@@ -24,7 +24,7 @@ emails:
     fishbowl_created_email:
         subject: Hello %name%! You have created a new fishbowl
         title: Well done!
-        description: "Check out the details of your new fishbowl:"
+        description: 'Check out the details of your new fishbowl:'
         info_title: Title
         info_duration: Duration
         info_description: Description

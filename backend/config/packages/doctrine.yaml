@@ -7,7 +7,7 @@
 
 doctrine:
     dbal:
-        url: "%env(resolve:DATABASE_URL)%"
+        url: '%env(resolve:DATABASE_URL)%'
         types:
             uuid: Ramsey\Uuid\Doctrine\UuidType
     orm:
@@ -18,6 +18,6 @@ doctrine:
             App:
                 is_bundle: false
                 type: annotation
-                dir: "%kernel.project_dir%/src/Entity"
+                dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App

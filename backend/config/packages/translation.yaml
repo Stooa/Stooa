@@ -6,8 +6,8 @@
 # file that was distributed with this source code.
 
 framework:
-    default_locale: "%locale%"
+    default_locale: '%locale%'
     translator:
-        default_path: "%kernel.project_dir%/translations"
+        default_path: '%kernel.project_dir%/translations'
         fallbacks:
-            - "%locale%"
+            - '%locale%'

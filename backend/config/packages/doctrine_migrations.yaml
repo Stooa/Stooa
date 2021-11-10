@@ -7,4 +7,4 @@
 
 doctrine_migrations:
     migrations_paths:
-        "DoctrineMigrations": "%kernel.project_dir%/migrations"
+        'DoctrineMigrations': '%kernel.project_dir%/migrations'

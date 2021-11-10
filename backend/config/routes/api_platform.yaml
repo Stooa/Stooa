@@ -7,7 +7,7 @@
 
 api_login:
     path: /login
-    methods: ["POST"]
+    methods: ['POST']
 
 api_platform:
     resource: .
