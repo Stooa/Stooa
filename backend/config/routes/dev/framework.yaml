@@ -6,5 +6,5 @@
 # file that was distributed with this source code.
 
 _errors:
-    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+    resource: "@FrameworkBundle/Resources/config/routing/errors.xml"
     prefix: /_error

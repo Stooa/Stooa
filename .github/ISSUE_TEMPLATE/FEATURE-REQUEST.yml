@@ -3,24 +3,24 @@ description: Request a feature for Stooa.
 title: "[Feature]: "
 labels: ["feature-request"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to ask for new features :tada:!
-  - type: textarea
-    id: idea
-    attributes:
-      label: "Tell us your idea"
-      description: We are really excited for you to share your ideas with the community!
-      placeholder: Tell us what you miss!
-      value: "A flying car!"
-    validations:
-      required: true
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
-      options:
-        - label: I agree to follow this project's Code of Conduct
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to ask for new features :tada:!
+    - type: textarea
+      id: idea
+      attributes:
+          label: "Tell us your idea"
+          description: We are really excited for you to share your ideas with the community!
+          placeholder: Tell us what you miss!
+          value: "A flying car!"
+      validations:
           required: true
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Code of Conduct
+          description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+          options:
+              - label: I agree to follow this project's Code of Conduct
+                required: true

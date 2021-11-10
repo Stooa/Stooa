@@ -8,12 +8,12 @@
 framework:
     workflows:
         fishbowl:
-            type: 'state_machine'
+            type: "state_machine"
             audit_trail:
                 enabled: true
             marking_store:
-                type: 'method'
-                property: 'currentStatus'
+                type: "method"
+                property: "currentStatus"
             supports:
                 - App\Entity\Fishbowl
             initial_marking: not_started

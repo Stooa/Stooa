@@ -16,7 +16,7 @@ emails:
     reset_password_email:
         subject: ¡Hola %name%! Hemos recibido una solicitud para restablecer tu contraseña de Stooa
         title: ¡Hola %name%!
-        description: 'Para restablecer tu contraseña, sigue el siguiente enlace:'
+        description: "Para restablecer tu contraseña, sigue el siguiente enlace:"
         expire_text: Recuerda que este enlace expirará en 1h.
         button_text: Restablece tu contraseña
         information_text: Si ignoras este mensaje tu contraseña no cambiará.<br>Si no has solicitado un cambio de contraseña, <a href='mailto:%email%'>avísanos</a>.
@@ -24,7 +24,7 @@ emails:
     fishbowl_created_email:
         subject: ¡Hola %name%! Has creado un nuevo fishbowl
         title: ¡Bien hecho!
-        description: 'Revisa los detalles de tu nuevo fishbowl:'
+        description: "Revisa los detalles de tu nuevo fishbowl:"
         info_title: Título
         info_duration: Duración
         info_description: Descripción

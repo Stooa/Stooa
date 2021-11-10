@@ -10,7 +10,7 @@ fos_user:
     firewall_name: admin
     user_class: App\Entity\SonataUserUser
     from_email:
-        address: '%env(MAILER_FROM)%'
+        address: "%env(MAILER_FROM)%"
         sender_name: Backoffice
     group:
         group_class: App\Entity\SonataUserGroup

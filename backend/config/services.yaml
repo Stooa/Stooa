@@ -19,7 +19,7 @@ services:
     Gedmo\Timestampable\TimestampableListener:
         tags: [doctrine.event_subscriber]
         calls:
-            - [setAnnotationReader, ['@annotation_reader']]
+            - [setAnnotationReader, ["@annotation_reader"]]
 
     # App
     App\:
@@ -47,8 +47,8 @@ services:
 
     App\Service\MailerService:
         bind:
-            $from: '%env(MAILER_FROM)%'
-            $appUrl: '%env(APP_URL)%'
+            $from: "%env(MAILER_FROM)%"
+            $appUrl: "%env(APP_URL)%"
 
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
@@ -72,7 +72,11 @@ services:
     App\Admin\ResetPasswordRequestAdmin:
         arguments: [null, App\Entity\ResetPasswordRequest, null]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Reset Password Requests }
+            - {
+                  name: sonata.admin,
+                  manager_type: orm,
+                  label: Reset Password Requests,
+              }
 
     App\Admin\ParticipantAdmin:
         arguments: [null, App\Entity\Participant, null]

@@ -10,47 +10,47 @@
 name: Backend quality assurance
 
 on:
-  pull_request:
+    pull_request:
 
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  backend-qa:
-    name: PHP ${{ matrix.php }}
+    backend-qa:
+        name: PHP ${{ matrix.php }}
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: backend
+        defaults:
+            run:
+                working-directory: backend
 
-    strategy:
-      matrix:
-        php: ['7.4']
+        strategy:
+            matrix:
+                php: ["7.4"]
 
-    steps:
-      - name: Checkout the repository to Github workspace
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout the repository to Github workspace
+              uses: actions/checkout@v2
 
-      - name: Setup the PHP environment
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          coverage: none
-          tools: cs2pr, composer
+            - name: Setup the PHP environment
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  coverage: none
+                  tools: cs2pr, composer
 
-      - name: Install all Composer dependencies
-        uses: ramsey/composer-install@v1
-        with:
-          composer-options: --working-dir=backend --prefer-dist --no-scripts
+            - name: Install all Composer dependencies
+              uses: ramsey/composer-install@v1
+              with:
+                  composer-options: --working-dir=backend --prefer-dist --no-scripts
 
-      - name: Run PHPUnit to generate a compiled container for PHPStan
-        run: vendor/bin/phpunit
+            - name: Run PHPUnit to generate a compiled container for PHPStan
+              run: vendor/bin/phpunit
 
-      - name: Run PHPStan
-        run: composer phpstan
+            - name: Run PHPStan
+              run: composer phpstan
 
-      - name: Run Psalm
-        run: composer psalm -- --threads=$(nproc) --output-format=github --shepherd
+            - name: Run Psalm
+              run: composer psalm -- --threads=$(nproc) --output-format=github --shepherd
