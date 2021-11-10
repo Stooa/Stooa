@@ -12,4 +12,4 @@ framework:
             async: '%env(MESSENGER_TRANSPORT_DSN)%'
             failed: 'doctrine://default?queue_name=failed'
         routing:
-            Symfony\Component\Mailer\Messenger\SendEmailMessage:  async
+            Symfony\Component\Mailer\Messenger\SendEmailMessage: async

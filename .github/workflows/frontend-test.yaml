@@ -10,48 +10,48 @@
 name: Frontend tests
 
 on:
-  pull_request:
+    pull_request:
 
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 jobs:
-  frontend-test:
-    name: Node ${{ matrix.node }}
+    frontend-test:
+        name: Node ${{ matrix.node }}
 
-    runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: frontend
+        defaults:
+            run:
+                working-directory: frontend
 
-    strategy:
-      matrix:
-        node: ['14.15']
+        strategy:
+            matrix:
+                node: ['14.15']
 
-    steps:
-      - name: Checkout the repository to Github workspace
-        uses: actions/checkout@v2
+        steps:
+            - name: Checkout the repository to Github workspace
+              uses: actions/checkout@v2
 
-      - name: Setup the Node environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
+            - name: Setup the Node environment
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node }}
 
-      - name: Find Yarn cache directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+            - name: Find Yarn cache directory
+              id: yarn-cache
+              run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Recover Yarn cache to speed up builds
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
+            - name: Recover Yarn cache to speed up builds
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.yarn-cache.outputs.dir }}
+                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: ${{ runner.os }}-yarn-
 
-      - name: Install all NPM dependencies
-        run: yarn install --frozen-lockfile
+            - name: Install all NPM dependencies
+              run: yarn install --frozen-lockfile
 
-      - name: Execute Jest Javascript tests
-        run: yarn run test
+            - name: Execute Jest Javascript tests
+              run: yarn run test
