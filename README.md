@@ -28,7 +28,7 @@ Help us keep the Stooa Community open and inclusive. Please read and follow our 
 
 ## Contributing
 
-We love the open source community that's why your contributions and feeback are more than welcome in Stooa, get to know more in our [contributing documentation](https://github.com/Stooa/Stooa/blob/main/CONTRIBUTING.md)
+We love the open source community, that's why your contributions and feeback are more than welcome in Stooa, get to know more in our [contributing documentation](https://github.com/Stooa/Stooa/blob/main/CONTRIBUTING.md)
 
 ## Give feedback
 
