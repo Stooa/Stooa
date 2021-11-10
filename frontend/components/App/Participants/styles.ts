@@ -125,6 +125,7 @@ const ParticipantsDrawer = styled.div`
 
     .info {
       display: flex;
+      align-items: center;
       width: 100%;
       overflow: hidden;
 
