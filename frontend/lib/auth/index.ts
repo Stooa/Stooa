@@ -51,7 +51,7 @@ const getOnBoardingCookie = (isModerator: boolean) => {
 const getToken = () => cookie.get(COOKIE_TOKEN);
 const getRefreshToken = () => cookie.get(COOKIE_REFRESH);
 
-const getAuthToken = async (force = false) => {
+const getAuthToken = async (force = false, roomName = '') => {
   const token = getToken();
   if (!token) return null;
 
@@ -60,15 +60,19 @@ const getAuthToken = async (force = false) => {
   if (force || (auth && auth.isExpired)) {
     const refreshToken = getRefreshToken();
     if (!refreshToken) return null;
-    return await getRefreshedToken(auth.user.email, refreshToken);
+    return await getRefreshedToken(auth.user.email, refreshToken, roomName);
   }
   return auth;
 };
 
-const getRefreshedToken = async (email: string, refresh_token: string) => {
+const getRefreshedToken = async (email: string, refresh_token: string, roomName = '') => {
   const params = new FormData();
   params.append('email', email);
   params.append('refresh_token', refresh_token);
+
+  if ('' !== roomName) {
+    params.append('slug', roomName);
+  }
 
   return await api
     .post('refresh-token', params)

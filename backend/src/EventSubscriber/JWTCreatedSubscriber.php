@@ -84,14 +84,8 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
             return null;
         }
 
-        $requestContent = json_decode($currentRequest->getContent(), true);
-
-        if (isset($requestContent['slug'])) {
-            $slug = $requestContent['slug'];
-
-            if ($this->fishbowlService->isFishbowlHappening($slug, $user)) {
-                return $slug;
-            }
+        if ((null !== $slug = $currentRequest->get('slug')) && $this->fishbowlService->canFishbowlStart($slug, $user)) {
+            return $slug;
         }
 
         return null;

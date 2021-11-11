@@ -66,6 +66,17 @@ class FishbowlService
         $this->participantRepository = $participantRepository;
     }
 
+    public function canFishbowlStart(string $slug, User $host): bool
+    {
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
+
+        if (null !== $fishbowl && $fishbowl->getHost() === $host && !$fishbowl->isFinished()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function generateRandomSlug(Fishbowl $fishbowl): string
     {
         $slugger = new AsciiSlugger();
@@ -157,17 +168,6 @@ class FishbowlService
         }
 
         return true;
-    }
-
-    public function isFishbowlHappening(string $slug, User $user): bool
-    {
-        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
-
-        if (null !== $fishbowl && $fishbowl->getHost() === $user && !$fishbowl->isFinished() && $fishbowl->isHappeningNow()) {
-            return true;
-        }
-
-        return false;
     }
 
     private function getGuest(Request $request): ?Guest
