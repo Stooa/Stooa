@@ -71,7 +71,7 @@ const getRefreshedToken = async (email: string, refresh_token: string, roomName 
   params.append('refresh_token', refresh_token);
 
   if ('' !== roomName) {
-    params.append('slug', roomName);
+    params.append('room', roomName);
   }
 
   return await api
