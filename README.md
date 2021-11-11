@@ -34,11 +34,11 @@ We love the open source community, that's why your contributions and feeback are
 
 You can give feedback through:
 
-👥 [Github's discussion](https://github.com/Stooa/Stooa/discussions)
+👥 &nbsp;[Github's discussion](https://github.com/Stooa/Stooa/discussions)
 
-🐦 [Twitter](https://twitter.com/WeareStooa)
+🐦 &nbsp;[Twitter](https://twitter.com/WeareStooa)
 
-✉️ [Mail](mailto:stooa@runroom.com)
+✉️ &nbsp;[Mail](mailto:stooa@runroom.com)
 
 ## Setup development environment
 
