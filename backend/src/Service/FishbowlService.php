@@ -170,6 +170,17 @@ class FishbowlService
         return null;
     }
 
+    public function isFishbowlHappening(string $slug): bool
+    {
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
+
+        if (null !== $fishbowl && !$fishbowl->isFinished() && $fishbowl->isHappeningNow()) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function createParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
     {
         $participant = $this->createParticipant($fishbowl);

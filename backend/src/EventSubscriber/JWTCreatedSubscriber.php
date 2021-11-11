@@ -14,12 +14,23 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\User;
+use App\Service\FishbowlService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class JWTCreatedSubscriber implements EventSubscriberInterface
 {
+    private RequestStack $requestStack;
+    private FishbowlService $fishbowlService;
+
+    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
+    {
+        $this->requestStack = $requestStack;
+        $this->fishbowlService = $fishbowlService;
+    }
+
     /** @return array<string, string> */
     public static function getSubscribedEvents(): array
     {
@@ -52,6 +63,12 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
 
     private function buildRoomPermission(User $user): string
     {
+        $slug = $this->getRoomFromRequest();
+
+        if (null !== $slug) {
+            return $slug;
+        }
+
         $currentFishbowl = $user->getCurrentFishbowl();
 
         if (null !== $currentFishbowl) {
@@ -59,5 +76,24 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         }
 
         return '';
+    }
+
+    private function getRoomFromRequest(): ?string
+    {
+        if (null === $currentRequest = $this->requestStack->getCurrentRequest()) {
+            return null;
+        }
+
+        $requestContent = json_decode($currentRequest->getContent(), true);
+
+        if (isset($requestContent['slug'])) {
+            $slug = $requestContent['slug'];
+
+            if ($this->fishbowlService->isFishbowlHappening($slug)) {
+                return $slug;
+            }
+        }
+
+        return null;
     }
 }
