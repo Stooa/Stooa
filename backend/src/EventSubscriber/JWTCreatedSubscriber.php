@@ -63,7 +63,7 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
 
     private function buildRoomPermission(User $user): string
     {
-        $slug = $this->getRoomFromRequest();
+        $slug = $this->getRoomFromRequest($user);
 
         if (null !== $slug) {
             return $slug;
@@ -78,7 +78,7 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         return '';
     }
 
-    private function getRoomFromRequest(): ?string
+    private function getRoomFromRequest(User $user): ?string
     {
         if (null === $currentRequest = $this->requestStack->getCurrentRequest()) {
             return null;
@@ -89,7 +89,7 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         if (isset($requestContent['slug'])) {
             $slug = $requestContent['slug'];
 
-            if ($this->fishbowlService->isFishbowlHappening($slug)) {
+            if ($this->fishbowlService->isFishbowlHappening($slug, $user)) {
                 return $slug;
             }
         }

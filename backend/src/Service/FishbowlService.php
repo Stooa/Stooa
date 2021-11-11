@@ -159,6 +159,17 @@ class FishbowlService
         return true;
     }
 
+    public function isFishbowlHappening(string $slug, User $user): bool
+    {
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
+
+        if (null !== $fishbowl && $fishbowl->getHost() === $user && !$fishbowl->isFinished() && $fishbowl->isHappeningNow()) {
+            return true;
+        }
+
+        return false;
+    }
+
     private function getGuest(Request $request): ?Guest
     {
         $guestId = $request->request->get('guestId');
@@ -168,17 +179,6 @@ class FishbowlService
         }
 
         return null;
-    }
-
-    public function isFishbowlHappening(string $slug): bool
-    {
-        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
-
-        if (null !== $fishbowl && !$fishbowl->isFinished() && $fishbowl->isHappeningNow()) {
-            return true;
-        }
-
-        return false;
     }
 
     private function createParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
