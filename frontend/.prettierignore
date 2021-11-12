@@ -10,3 +10,4 @@
 *.json
 *.min.css
 *.module.css
+node_modules/*
