@@ -10,11 +10,12 @@
 import { useEffect, useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
+import { User } from '@/types/user';
 import { join, leave } from 'lib/jitsi';
 import tracksRepository from '@/jitsi/Tracks';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import devicesRepository from '@/jitsi/Devices';
-import userRepository, { UserInterface } from '@/jitsi/User';
+import userRepository from '@/jitsi/User';
 import { useStooa } from 'contexts/StooaManager';
 import useSeatsAvailable from 'hooks/useSeatsAvailable';
 import ButtonJoin from 'components/App/ButtonJoin';
@@ -33,7 +34,7 @@ const ToolBar = () => {
 
   const configButtonRef = useRef(null);
 
-  const joinSeat = (user: UserInterface) => {
+  const joinSeat = (user: User) => {
     if (!joined) {
       setJoined(true);
       join(user);

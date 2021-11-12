@@ -7,44 +7,16 @@
  * file that was distributed with this source code.
  */
 
+import { User, UserRepository } from '@/types/user';
 import seatsRepository from '@/jitsi/Seats';
 import { removeItem } from 'lib/helpers';
 
-export interface UserInterface {
-  id?: string|boolean; // TODO: is boolean a valid id? Where the boolean comes from?
-  guestId?: string;
-  nickname?: string;
-  audioInput?: MediaDeviceInfo;
-  audioOutput?: MediaDeviceInfo;
-  videoInput?: MediaDeviceInfo;
-  audioMuted?: boolean;
-  videoMuted?: boolean;
-}
+type StorageValue = string|boolean|MediaDeviceInfo;
 
-interface UserRepositoryInterface {
-  clearUser: () => void;
-  getUser: () => UserInterface;
-  getUserAudioInput: () => MediaDeviceInfo|null;
-  getUserAudioMuted: () => boolean;
-  getUserAudioOutput: () => MediaDeviceInfo|null;
-  getUserGuestId: () => string|null;
-  getUserNickname: () => string|null;
-  getUserVideoInput: () => MediaDeviceInfo|null;
-  getUserVideoMuted: () => boolean;
-  handleUserJoin: (id: string, user: UserInterface) => void;
-  handleUserLeft: (id: string, user: UserInterface) => void;
-  setUser: (value: UserInterface) => void;
-  setUserAudioInput: (audioInput: MediaDeviceInfo) => void;
-  setUserAudioMuted: (audioMuted: boolean) => void;
-  setUserAudioOutput: (audioOutput: MediaDeviceInfo) => void;
-  setUserVideoInput: (videoInput: MediaDeviceInfo) => void;
-  setUserVideoMuted: (videoMuted: boolean) => void;
-}
+const userRepository = (): UserRepository => {
+  let users: User[] = [];
 
-const userRepository = (): UserRepositoryInterface => {
-  let users: UserInterface[] = [];
-
-  const _getUserValue = (value: keyof UserInterface, defaultValue: string|boolean|MediaDeviceInfo = ''): string|boolean|MediaDeviceInfo => {
+  const _getUserValue = (value: keyof User, defaultValue: StorageValue = ''): StorageValue => {
     const user = getUser();
 
     return user?.[value] || defaultValue;
@@ -54,7 +26,7 @@ const userRepository = (): UserRepositoryInterface => {
     sessionStorage.removeItem('user');
   };
 
-  const setUser = (value: UserInterface): void => {
+  const setUser = (value: User): void => {
     const user = getUser();
     const updatedUser = {
       ...user,
@@ -64,7 +36,7 @@ const userRepository = (): UserRepositoryInterface => {
     sessionStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
-  const getUser = (): UserInterface => {
+  const getUser = (): User => {
     if (typeof sessionStorage === 'undefined') return {};
     const user = sessionStorage.getItem('user');
     return user ? JSON.parse(user) : {};
@@ -84,13 +56,13 @@ const userRepository = (): UserRepositoryInterface => {
   const setUserAudioMuted = (audioMuted: boolean): void => setUser({ audioMuted });
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
 
-  const handleUserJoin = (id: string, user: UserInterface): void => {
+  const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
 
     console.log('[STOOA] Handle userRepository join', user);
   };
 
-  const handleUserLeft = (id: string, user: UserInterface): void => {
+  const handleUserLeft = (id: string, user: User): void => {
     users = removeItem(users, user);
     seatsRepository.leave(id);
 

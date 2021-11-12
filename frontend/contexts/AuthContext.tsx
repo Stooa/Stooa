@@ -9,6 +9,7 @@
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
 
 import {
@@ -33,11 +34,11 @@ import {
   setToken
 } from 'lib/auth';
 
+import { Auth, StatusPayload } from '@/types/auth-context';
 import api from 'lib/api';
-import { AuthToken, User } from 'lib/auth/authToken';
+import { AuthToken } from 'lib/auth/authToken';
 import Layout from 'layouts/Clean';
 import LoadingIcon from 'components/Common/LoadingIcon';
-import useTranslation from 'next-translate/useTranslation';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -54,22 +55,9 @@ const unauthenticatedRoutes = [
   ROUTE_RESET_PASSWORD
 ];
 
-export type AuthContextType = {
-  isAuthenticated: boolean;
-  user: User;
-  login: (email: string, password: string) => any;
-  loginStatus: any;
-  loading: boolean;
-  createFishbowl: boolean;
-  logout: () => void;
-  updateUser: (user: any) => void;
-  updateLogingStatus: () => void;
-  updateCreateFishbowl: (val: boolean) => void;
-};
-
 const voidFunction = () => console.log('[STOOA] Context not initialized yet');
 
-const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext<Auth>({
   isAuthenticated: false,
   user: {},
   login: voidFunction,
@@ -87,7 +75,7 @@ const AuthProvider = ({ children }) => {
   const { lang } = useTranslation();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loginStatus, setLoginStatus] = useState(null);
+  const [loginStatus, setLoginStatus] = useState<null|StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
 
   useEffect(() => {
@@ -105,7 +93,7 @@ const AuthProvider = ({ children }) => {
     loadUserFromCookies();
   }, []);
 
-  const login = async (email: any, password: any) => {
+  const login = async (email: string, password: string) => {
     setLoading(true);
 
     return await api
@@ -114,7 +102,7 @@ const AuthProvider = ({ children }) => {
         const pathname = router.query.redirect || ROUTE_HOME;
         const auth = new AuthToken(data.token);
         const user = auth ? auth.user : null;
-        const status = {
+        const status: StatusPayload = {
           type: 'Success',
           data
         };
@@ -137,7 +125,7 @@ const AuthProvider = ({ children }) => {
         } = error;
         setLoading(false);
 
-        const status = {
+        const status: StatusPayload = {
           type: 'Error',
           data
         };
@@ -209,7 +197,7 @@ const ProtectRoute = ({ children }) => {
   };
 
   handleRedirection();
-  useEffect(handleRedirection, [loading]);
+  useEffect(handleRedirection, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading || protectedRoutes) {
     return (
