@@ -20,20 +20,24 @@ use App\Service\FishbowlService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class JWTCreatedSubscriberTest extends TestCase
 {
     private JWTCreatedSubscriber $subscriber;
-    private MockObject $requestStack;
+    private RequestStack $requestStack;
     private MockObject $fishbowlService;
     private User $user;
     /** @var array<string, mixed> */
     private array $data;
+    private Fishbowl $fishbowl;
 
     protected function setUp(): void
     {
-        $this->requestStack = $this->createMock(RequestStack::class);
+        $request = new Request([], [], [], [], [], [], []);
+        $this->requestStack = new RequestStack();
+        $this->requestStack->push($request);
         $this->fishbowlService = $this->createMock(FishbowlService::class);
         $this->subscriber = new JWTCreatedSubscriber($this->requestStack, $this->fishbowlService);
 
@@ -43,6 +47,13 @@ class JWTCreatedSubscriberTest extends TestCase
         $this->user->setEmail('email');
         $this->user->setTwitterProfile('twitter');
         $this->user->setLinkedinProfile('linkedin');
+
+        $this->fishbowl = new Fishbowl();
+        $this->fishbowl->setStartDateTime(new \DateTime());
+        $this->fishbowl->setTimezone('Europe/madrid');
+        $this->fishbowl->setDuration(new \DateTime('+ 30 minutes'));
+        $this->fishbowl->setCurrentStatus(Fishbowl::STATUS_RUNNING);
+        $this->fishbowl->setSlug('fishbowl-slug');
 
         $this->data = [
             'iss' => 'api_client',
@@ -72,16 +83,26 @@ class JWTCreatedSubscriberTest extends TestCase
     /** @test */
     public function itCreatesPayloadDataWithUserFishbowlSlug(): void
     {
-        $fishbowl = new Fishbowl();
-        $fishbowl->setStartDateTime(new \DateTime());
-        $fishbowl->setTimezone('Europe/madrid');
-        $fishbowl->setDuration(new \DateTime('+ 30 minutes'));
-        $fishbowl->setCurrentStatus(Fishbowl::STATUS_RUNNING);
-        $fishbowl->setSlug('fishbowl-slug');
-
-        $this->user->addFishbowl($fishbowl);
+        $this->user->addFishbowl($this->fishbowl);
 
         $event = new JWTCreatedEvent([], $this->user, []);
+
+        $this->subscriber->onJWTCreated($event);
+
+        $this->data['room'] = 'fishbowl-slug';
+        $this->assertSame($this->data, $event->getData());
+    }
+
+    /** @test */
+    public function itCreatesPayloadDataWithUserFishbowlSlugFromRequest(): void
+    {
+        $request = new Request([], ['room' => 'fishbowl-slug'], [], [], [], [], []);
+        $this->requestStack->push($request);
+        $this->subscriber = new JWTCreatedSubscriber($this->requestStack, $this->fishbowlService);
+
+        $event = new JWTCreatedEvent([], $this->user, []);
+
+        $this->fishbowlService->method('canFishbowlStart')->willReturn(true);
 
         $this->subscriber->onJWTCreated($event);
 
