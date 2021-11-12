@@ -74,13 +74,13 @@ const ToolBar = () => {
     if (joined && null !== audioInputDevice) {
       devicesRepository.changeDevice(audioInputDevice);
     }
-  }, [audioInputDevice]);
+  }, [audioInputDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (joined && null !== videoDevice) {
       devicesRepository.changeDevice(videoDevice);
     }
-  }, [videoDevice]);
+  }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isModerator && conferenceReady && conferenceStatus !== IConferenceStatus.RUNNING) {
@@ -88,7 +88,7 @@ const ToolBar = () => {
       const userSettings = userRepository.getUser();
       joinSeat(userSettings);
     }
-  }, [conferenceReady, conferenceStatus]);
+  }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||

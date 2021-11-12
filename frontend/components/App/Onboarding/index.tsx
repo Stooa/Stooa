@@ -8,6 +8,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
@@ -36,13 +37,13 @@ const SlickButtonFix = ({ children, ...props }) => (
   </button>
 );
 
-const PrevArrow = ({ currentSlide, slideCount, children, ...props }: any) => (
+const PrevArrow = props => (
   <SlickButtonFix {...props}>
     <ArrowPrev />
   </SlickButtonFix>
 );
 
-const NextArrow = ({ currentSlide, slideCount, children, ...props }: any) => (
+const NextArrow = props => (
   <SlickButtonFix {...props}>
     <ArrowNext />
   </SlickButtonFix>
@@ -138,7 +139,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
   useEffect(() => {
     setData(onBoardingData[isModerator ? 'moderator' : 'participant']);
     shouldShow();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!active) sliderRef.current.slickGoTo(0);
@@ -194,8 +195,8 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                   </div>
                 </div>
                 <div className="right">
-                  {item.img1 && <img className="animate img-1" src={item.img1} />}
-                  {item.img2 && <img className="animate img-2" src={item.img2} />}
+                  {item.img1 && <Image className="animate img-1" src={item.img1} alt="" />}
+                  {item.img2 && <Image className="animate img-2" src={item.img2} alt="" />}
                 </div>
               </Slide>
             ))}

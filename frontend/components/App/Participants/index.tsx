@@ -49,14 +49,13 @@ const PING_TIMEOUT = 3500;
 const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants }) => {
   const { t, lang } = useTranslation('fishbowl');
   const [active, setActive] = useState(false);
+  const [pingInterval, setPingInterval] = useState<number>(0);
+  const [getParticipantsInterval, setGetParticipantsInterval] = useState<number>(0);
   const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);
   const [speakingParticipants, setSpeakingParticipants] = useState<Participant[]>([
     initialParticipant
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
-
-  let getParticipantsInterval: number;
-  let pingInterval: number;
 
   const pingParticipant = () => {
     ping(lang, fid);
@@ -121,15 +120,15 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       pingParticipant();
       getApiParticipants();
 
-      pingInterval = window.setInterval(pingParticipant, PING_TIMEOUT);
-      getParticipantsInterval = window.setInterval(getApiParticipants, PING_TIMEOUT);
+      setPingInterval(window.setInterval(pingParticipant, PING_TIMEOUT));
+      setGetParticipantsInterval(window.setInterval(getApiParticipants, PING_TIMEOUT));
     } else {
       window.clearInterval(pingInterval);
       window.clearInterval(getParticipantsInterval);
 
       setTimeout(() => {
         // Each 1 second it will fetch users from Jitsi to show the sidebar and user count correctly
-        getParticipantsInterval = window.setInterval(getConferenceParticipants, 1000);
+        setGetParticipantsInterval(window.setInterval(getConferenceParticipants, 1000));
       }, PING_TIMEOUT);
     }
 
@@ -137,7 +136,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       window.clearInterval(pingInterval);
       window.clearInterval(getParticipantsInterval);
     };
-  }, [initialized]);
+  }, [initialized]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const tempSpeakingParticipants = participants
@@ -153,7 +152,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
 
   useEffect(() => {
     handleShowMutedIcons();
-  }, [speakingParticipants, roomParticipants]);
+  }, [speakingParticipants, roomParticipants]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
