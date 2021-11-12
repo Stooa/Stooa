@@ -10,10 +10,7 @@
 import styled, { css } from 'styled-components';
 
 import { space, media } from 'ui/helpers';
-import {
-  COLOR_NEUTRO_200,
-  COLOR_NEUTRO_700
-} from 'ui/settings';
+import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from 'ui/settings';
 
 const flexCenter = css`
   align-items: center;

@@ -20,7 +20,9 @@ interface IProps {
 const Logo = ({ href = '', ...props }: IProps) => {
   return href ? (
     <Link href={href} passHref>
-      <LogoStyled as="a" {...props}>{APP_NAME}</LogoStyled>
+      <LogoStyled as="a" {...props}>
+        {APP_NAME}
+      </LogoStyled>
     </Link>
   ) : (
     <LogoAppStyled className="logo">{APP_NAME}</LogoAppStyled>
