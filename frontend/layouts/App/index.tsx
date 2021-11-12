@@ -11,6 +11,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
+import { Fishbowl } from '@/types/api-platform';
 import { IS_FISHBOWL_CREATOR } from 'lib/gql/Fishbowl';
 import { StooaProvider } from 'contexts/StooaManager';
 import ScriptLoader from 'hocs/withScriptLoader';
@@ -26,7 +27,7 @@ const scripts = [
 ];
 
 interface Props {
-  data: IFishbowl;
+  data: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;

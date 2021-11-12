@@ -11,6 +11,7 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
+import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from 'app.config';
 import { useStateValue } from 'contexts/AppContext';
 import { useAuth } from 'contexts/AuthContext';
@@ -20,7 +21,7 @@ import Button, { ButtonHollow } from 'ui/Button';
 import { JoinFishbowlStyled } from 'components/Web/JoinFishbowl/styles';
 
 interface Props {
-  data: IFishbowl;
+  data: Fishbowl;
   joinAsGuest?: () => void;
   isCreator?: boolean;
 }

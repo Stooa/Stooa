@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import setLanguage from 'next-translate/setLanguage';
 
@@ -21,23 +21,22 @@ const { locales } = i18nConfig;
 
 const LanguageSwitcher = () => {
   const { t, lang } = useTranslation('common');
+  const selectRef = useRef();
   usePersistLocaleCookie();
 
-  const changeLanguage = async (event: any) => {
-    const { value } = event.currentTarget;
-
+  const changeLanguage = async () => {
     pushEventDataLayer({
       action: 'Language Change',
       category: 'Footer',
-      label: value
+      label: selectRef.current.value
     });
 
-    await setLanguage(value);
+    await setLanguage(selectRef.current.value);
   };
 
   return (
     <Languages>
-      <select onChange={changeLanguage} value={lang}>
+      <select ref={selectRef} onChange={changeLanguage} value={lang}>
         <option value={lang}>{t(`languages.${lang}`)}</option>
         {locales
           .filter(l => l !== lang)
