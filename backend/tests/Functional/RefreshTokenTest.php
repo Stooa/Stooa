@@ -15,7 +15,6 @@ namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Fishbowl;
-use App\Entity\User;
 use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
