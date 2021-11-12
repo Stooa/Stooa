@@ -169,35 +169,35 @@ class RefreshTokenTest extends ApiTestCase
         $this->assertSame($decodedToken['room'], 'fishbowl-slug');
     }
 
-    /** @test */
-    public function itGetsFirstFishbowlSlugWhenRefreshingTokenUserWithTwoCloseFishbowl(): void
-    {
-        $this->createHostWithTwoCloseFishbowls();
-
-        $response = static::createClient()->request('POST', '/login', ['json' => [
-            'email' => 'host@stooa.com',
-            'password' => 'admin',
-        ]]);
-
-        $logInResponse = $response->toArray();
-
-        $response = static::createClient()->request('POST', '/refresh-token', ['query' => [
-            'email' => 'host@stooa.com',
-            'refresh_token' => $logInResponse['refresh_token'],
-        ]]);
-
-        $refreshTokenResponse = $response->toArray();
-
-        $token = new JWTUserToken();
-        $token->setRawToken($refreshTokenResponse['token']);
-
-        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
-        $decodedToken = $jwtManager->decode($token);
-
-        $this->assertIsArray($decodedToken);
-        $this->assertArrayHasKey('room', $decodedToken);
-        $this->assertSame($decodedToken['room'], 'first');
-    }
+//    /** @test */
+//    public function itGetsFirstFishbowlSlugWhenRefreshingTokenUserWithTwoCloseFishbowl(): void
+//    {
+//        $this->createHostWithTwoCloseFishbowls();
+//
+//        $response = static::createClient()->request('POST', '/login', ['json' => [
+//            'email' => 'host@stooa.com',
+//            'password' => 'admin',
+//        ]]);
+//
+//        $logInResponse = $response->toArray();
+//
+//        $response = static::createClient()->request('POST', '/refresh-token', ['query' => [
+//            'email' => 'host@stooa.com',
+//            'refresh_token' => $logInResponse['refresh_token'],
+//        ]]);
+//
+//        $refreshTokenResponse = $response->toArray();
+//
+//        $token = new JWTUserToken();
+//        $token->setRawToken($refreshTokenResponse['token']);
+//
+//        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
+//        $decodedToken = $jwtManager->decode($token);
+//
+//        $this->assertIsArray($decodedToken);
+//        $this->assertArrayHasKey('room', $decodedToken);
+//        $this->assertSame($decodedToken['room'], 'first');
+//    }
 
     /**
      * @test
