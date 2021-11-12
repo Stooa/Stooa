@@ -90,7 +90,7 @@ const getParticipantList = () => {
       isCurrentUser: false,
       joined: participant.getProperty('joined') === 'yes',
       isMuted: tracksRepository.isParticipantMuted(participant, 'audio'),
-      isVideoMuted: tracksRepository.isParticipantMuted(participant, 'video'),
+      isVideoMuted: tracksRepository.isParticipantMuted(participant, 'video')
     });
   });
 
@@ -105,5 +105,5 @@ export {
   initializeConnection,
   join,
   leave,
-  unload,
+  unload
 };

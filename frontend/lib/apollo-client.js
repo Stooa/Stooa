@@ -12,7 +12,7 @@ import { setContext } from '@apollo/client/link/context';
 import { getAuthToken } from 'lib/auth';
 
 const httpLink = createHttpLink({
-  uri: `${process.env.NEXT_PUBLIC_API_DOMAIN}/graphql`,
+  uri: `${process.env.NEXT_PUBLIC_API_DOMAIN}/graphql`
 });
 
 const authLink = setContext(async (_, { headers }) => {
@@ -21,15 +21,15 @@ const authLink = setContext(async (_, { headers }) => {
   return {
     headers: {
       ...currentHeaders,
-      authorization: auth ? auth.authorizationString : null,
-    },
+      authorization: auth ? auth.authorizationString : null
+    }
   };
 });
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   connectToDevTools: true,
-  link: authLink.concat(httpLink),
+  link: authLink.concat(httpLink)
 });
 
 const DataProvider = ({ children }) => <ApolloProvider client={client}>{children}</ApolloProvider>;
