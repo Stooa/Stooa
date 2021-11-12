@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Integration;
+namespace App\Tests\Integration;
 
 use App\Entity\Participant;
 use App\Factory\FishbowlFactory;
@@ -19,7 +19,6 @@ use App\Factory\GuestFactory;
 use App\Factory\ParticipantFactory;
 use App\Factory\UserFactory;
 use App\Repository\ParticipantRepository;
-use Runroom\Testing\TestCase\DoctrineTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
