@@ -28,6 +28,7 @@ class JWTCreatedSubscriberTest extends TestCase
     private MockObject $requestStack;
     private MockObject $fishbowlService;
     private User $user;
+    /** @var array<string, mixed> */
     private array $data;
 
     protected function setUp(): void
