@@ -23,11 +23,11 @@ export interface LazyMovin {
   assetsPath?: string;
 };
 
-interface IProps {
+interface Props {
   item: LazyMovin;
 }
 
-const Benefits = ({ item }: IProps): JSX.Element => {
+const Benefits = ({ item }: Props): JSX.Element => {
   const { t } = useTranslation('home');
 
   useEffect(() => {

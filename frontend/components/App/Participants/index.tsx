@@ -7,13 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
+import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from 'lib/analytics';
 import { getParticipants, ping } from 'lib/auth';
 import { getParticipantList } from 'lib/jitsi';
-import Participant from 'components/App/Participants/Participant';
+import ParticipantCard from 'components/App/Participants/Participant';
 
 import ChevronLeft from 'ui/svg/chevron-left.svg';
 import ChevronRight from 'ui/svg/chevron-right.svg';
@@ -23,19 +24,6 @@ import Curve from 'ui/svg/participants-curve.svg';
 import MicMuted from 'ui/svg/mic-muted.svg';
 import VideoMuted from 'ui/svg/video-muted.svg';
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from 'components/App/Participants/styles';
-
-export interface IParticipant {
-  id: string;
-  name: string;
-  linkedin: string;
-  twitter: string;
-  isModerator: boolean;
-  isCurrentUser: boolean;
-  guestId?: string;
-  joined: boolean;
-  isMuted: boolean;
-  isVideoMuted: boolean;
-}
 
 const initialParticipant = {
   id: '',
@@ -50,7 +38,7 @@ const initialParticipant = {
   isVideoMuted: false
 };
 
-interface IParticipantsProps {
+interface Props {
   initialized: boolean;
   fid: string;
   toggleParticipants: () => void;
@@ -58,14 +46,14 @@ interface IParticipantsProps {
 
 const PING_TIMEOUT = 3500;
 
-const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, toggleParticipants }) => {
+const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants }) => {
   const { t, lang } = useTranslation('fishbowl');
   const [active, setActive] = useState(false);
-  const [participants, setParticipants] = useState<IParticipant[]>([initialParticipant]);
-  const [speakingParticipants, setSpeakingParticipants] = useState<IParticipant[]>([
+  const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);
+  const [speakingParticipants, setSpeakingParticipants] = useState<Participant[]>([
     initialParticipant
   ]);
-  const [roomParticipants, setRoomParticipants] = useState<IParticipant[]>([initialParticipant]);
+  const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
   let getParticipantsInterval: number;
   let pingInterval: number;
@@ -85,7 +73,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
   };
 
   const getConferenceParticipants = () => {
-    const typedParticipants = getParticipantList() as unknown as IParticipant[];
+    const typedParticipants = getParticipantList() as unknown as Participant[];
     setParticipants(typedParticipants);
   };
 
@@ -100,7 +88,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
     toggleParticipants();
   };
 
-  const sortHost = (a: IParticipant, b: IParticipant) => {
+  const sortHost = (a: Participant, b: Participant) => {
     if (a.isModerator) return -1;
     if (b.isModerator) return 1;
     return 0;
@@ -188,7 +176,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
             <h3 className="app-sm medium caps">{t('fishbowl:participants.speaking')}</h3>
             <ul>
               {speakingParticipants.map((participant, i) => (
-                <Participant
+                <ParticipantCard
                   participant={participant}
                   key={`participant-speaking-${i}`}
                   speaker={true}
@@ -206,7 +194,7 @@ const Participants: React.FC<IParticipantsProps> = ({ initialized, fid, togglePa
             </h3>
             <ul>
               {roomParticipants.map((participant, i) => (
-                <Participant participant={participant} key={`participant-room-${i}`} />
+                <ParticipantCard participant={participant} key={`participant-room-${i}`} />
               ))}
             </ul>
           </div>

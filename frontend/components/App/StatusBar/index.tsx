@@ -8,21 +8,21 @@
  */
 
 import Countdown, { zeroPad } from 'react-countdown';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { StatusBox } from 'components/App/Fishbowl/styles';
 import HourGlass from 'ui/svg/hourglass-countdown.svg';
 
-interface IProps {
+interface Props {
   isModerator: boolean;
   data: any;
   timeStatus: ITimeStatus;
   conferenceStatus: IConferenceStatus;
 }
 
-const CountDown: React.FC<IProps> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
+const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
   const [statusClass, setStatusClass] = useState('warning');
   const { t } = useTranslation('fishbowl');
 

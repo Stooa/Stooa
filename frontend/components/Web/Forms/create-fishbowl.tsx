@@ -28,7 +28,7 @@ import DatePicker from 'components/Common/Fields/DatePicker';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormProps {
+interface FormProps {
   required: string;
   date: string;
   createFishbowl: any;
@@ -36,11 +36,11 @@ interface IFormProps {
   currentLanguage: string;
   currentTimezone: string;
   enableReinitialize?: boolean;
-  selectedFishbowl?: IFormValues | null;
+  selectedFishbowl?: FormValues | null;
   full: boolean;
 }
 
-interface IFormValues {
+interface FormValues {
   title: string;
   day: Date;
   time: string;
@@ -60,7 +60,7 @@ const initialValues = {
   timezone: ''
 };
 
-const Form = (props: IFormProps & FormikProps<IFormValues>) => {
+const Form = (props: FormProps & FormikProps<FormValues>) => {
   const { isSubmitting } = props;
 
   const { t } = useTranslation('form');
@@ -162,7 +162,7 @@ const Form = (props: IFormProps & FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     language: props.currentLanguage,

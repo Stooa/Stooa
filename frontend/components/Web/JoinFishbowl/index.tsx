@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -19,7 +19,7 @@ import { isTimeLessThanNMinutes } from 'lib/helpers';
 import Button, { ButtonHollow } from 'ui/Button';
 import { JoinFishbowlStyled } from 'components/Web/JoinFishbowl/styles';
 
-interface IProps {
+interface Props {
   data: IFishbowl;
   joinAsGuest?: () => void;
   isCreator?: boolean;
@@ -28,7 +28,7 @@ interface IProps {
 const MINUTE = 60 * 1000;
 const MINUTES_TO_START_FISHBOWL = 60;
 
-const JoinFishbowl: React.FC<IProps> = ({ data, joinAsGuest }) => {
+const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('fishbowl');

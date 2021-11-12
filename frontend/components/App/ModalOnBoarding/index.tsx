@@ -7,15 +7,17 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
+
 import Cross from 'ui/svg/cross.svg';
 import OnboardingModal from 'components/App/ModalOnBoarding/styles';
 
-interface IProps {
+interface Props {
   show: boolean;
   closeModal: () => void;
 }
 
-const Onboarding: React.FC<IProps> = ({ show, closeModal, children }) => {
+const Onboarding: React.FC<Props> = ({ show, closeModal, children }) => {
   return (
     <OnboardingModal className={!show ? 'hide' : 'show'}>
       <div className="content">

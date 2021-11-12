@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -18,11 +19,11 @@ import AvatarIcon from 'ui/svg/avatar.svg';
 import Logo from 'components/Common/Logo';
 import Navigation, { Avatar } from 'components/Web/FishbowlDetailHeader/styles';
 
-interface IProps {
+interface Props {
   data: any;
 }
 
-const Header: React.FC<IProps> = ({ data }) => {
+const Header: React.FC<Props> = ({ data }) => {
   const { logout, isAuthenticated, user } = useAuth();
   const { t } = useTranslation('common');
   const redirectPath = `${ROUTE_FISHBOWL}/${data.slug}`;

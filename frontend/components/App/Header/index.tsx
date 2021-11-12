@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -22,11 +23,11 @@ const Participants = dynamic(import('components/App/Participants'), { loading: (
 const FishbowlInfo = dynamic(import('components/App/FishbowlInfo'), { loading: () => <div /> });
 const Onboarding = dynamic(import('components/App/Onboarding'), { loading: () => <div /> });
 
-interface IProps {
+interface Props {
   toggleParticipants: () => void;
 }
 
-const Header: React.FC<IProps> = ({ toggleParticipants }) => {
+const Header: React.FC<Props> = ({ toggleParticipants }) => {
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const router = useRouter();
   const { fid } = router.query;

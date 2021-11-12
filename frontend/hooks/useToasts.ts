@@ -9,12 +9,12 @@
 
 import { useState } from 'react';
 
-export interface IContent {
+export interface Content {
   type: string;
   message: string;
 }
 
-export interface IToast {
+export interface Toast {
   id: number;
   type: string;
   message: string;
@@ -25,7 +25,7 @@ let toastsList = [];
 let delayedToasts = {};
 
 const useToasts = () => {
-  const [toasts, setToasts] = useState<IToast[]>([]);
+  const [toasts, setToasts] = useState<Toast[]>([]);
 
   const removeById = (id: number) => {
     const newToasts = toastsList.filter(t => t.id !== id);
@@ -49,7 +49,7 @@ const useToasts = () => {
     }
   };
 
-  const addToast = (content: IContent, delay = 0, autoclose = 0) => {
+  const addToast = (content: Content, delay = 0, autoclose = 0) => {
     const id = toastCount++;
     const toast = { ...content, id };
     const toastExists = toastsList.filter(t => t.type === toast.type);

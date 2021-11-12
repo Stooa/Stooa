@@ -7,18 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { pushEventDataLayer } from 'lib/analytics';
 import CopyUrl from 'components/Common/CopyUrl';
 import Dots from 'ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from 'components/App/Info/styles';
 
-interface IProps {
+interface Props {
   data: IFishbowl;
 }
 
-const Info: React.FC<IProps> = ({ data }) => {
+const Info: React.FC<Props> = ({ data }) => {
   const wrapperRef = useRef(null);
   const [active, setActive] = useState(false);
 

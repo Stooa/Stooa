@@ -22,11 +22,11 @@ import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   email: string;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
   onSubmit: any;
@@ -38,7 +38,7 @@ const initialValues = {
   email: ''
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
@@ -60,7 +60,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({

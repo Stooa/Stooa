@@ -25,13 +25,13 @@ import {
 } from 'ui/settings';
 import { TEXT_SM, TEXT_XXS } from 'ui/Texts';
 
-interface IStyleFormProps {
+interface StyleFormProps {
   full?: boolean;
 }
 
 const FormikForm = styled(Form)`
   margin-top: ${space(4)};
-  max-width: ${(props: IStyleFormProps) => (props.full ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${(props: StyleFormProps) => (props.full ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 

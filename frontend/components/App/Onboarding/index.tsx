@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
@@ -25,7 +25,7 @@ import QuestionMark from 'ui/svg/questionmark.svg';
 import OnboardingWrapper, { Icon, Slider, Slide, Tooltip } from 'components/App/Onboarding/styles';
 import onBoardingData from 'components/App/Onboarding/data.json';
 
-interface IProps {
+interface Props {
   initialized: boolean;
   isModerator: boolean;
 }
@@ -48,7 +48,7 @@ const NextArrow = ({ currentSlide, slideCount, children, ...props }: any) => (
   </SlickButtonFix>
 );
 
-const Onboarding: React.FC<IProps> = ({ isModerator }) => {
+const Onboarding: React.FC<Props> = ({ isModerator }) => {
   const sliderRef = useRef(null);
   const [active, setActive] = useState(false);
   const [alreadySeen, setAlreadySeen] = useState(false);

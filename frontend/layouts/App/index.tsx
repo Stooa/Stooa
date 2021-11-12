@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
@@ -24,14 +25,14 @@ const scripts = [
   '/vendor/lib-jitsi-meet.min.js'
 ];
 
-interface IProps {
+interface Props {
   data: IFishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;
 }
 
-const Layout: React.FC<IProps> = ({
+const Layout: React.FC<Props> = ({
   data,
   scriptsLoaded,
   scriptsLoadedSuccessfully,

@@ -16,11 +16,11 @@ import { formatDateTime } from 'lib/helpers';
 import CopyUrl from 'components/Common/CopyUrl';
 import { Container, TimeLeft } from 'ui/pages/fishbowl-detail';
 
-interface IProps {
+interface Props {
   data: any;
 }
 
-const FishbowlDetail: React.FC<IProps> = ({ data }) => {
+const FishbowlDetail: React.FC<Props> = ({ data }) => {
   const [{ fishbowlReady }] = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);
