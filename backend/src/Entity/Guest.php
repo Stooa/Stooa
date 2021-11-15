@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *             "read"=false,
  *             "output"=false,
  *         },
- *        "post"
+ *         "post"
  *     },
  *     itemOperations={"get"},
  *     graphql={
