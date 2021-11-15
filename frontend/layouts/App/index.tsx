@@ -37,7 +37,8 @@ const Layout: React.FC<Props> = ({
   data,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
-  title
+  title,
+  children
 }) => {
   const router = useRouter();
   const { fid } = router.query;

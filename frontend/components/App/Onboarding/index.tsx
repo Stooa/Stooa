@@ -8,7 +8,6 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
@@ -195,8 +194,8 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                   </div>
                 </div>
                 <div className="right">
-                  {item.img1 && <Image className="animate img-1" src={item.img1} alt="" />}
-                  {item.img2 && <Image className="animate img-2" src={item.img2} alt="" />}
+                  {item.img1 && <img className="animate img-1" src={item.img1} alt="" />} {/* eslint-disable-line @next/next/no-img-element */}
+                  {item.img2 && <img className="animate img-2" src={item.img2} alt="" />} {/* eslint-disable-line @next/next/no-img-element */}
                 </div>
               </Slide>
             ))}
