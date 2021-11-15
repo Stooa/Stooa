@@ -28,7 +28,7 @@ import {
   GITBOOK_CONDUCT,
   SUPPORT_EMAIL,
   GITHUB_BASE,
-  APP_NAME,
+  APP_NAME
 } from 'app.config';
 import { useAuth } from 'contexts/AuthContext';
 import Logo from 'components/Common/Logo';
@@ -57,28 +57,28 @@ const Footer: React.FC = () => {
     {
       name: 'Twitter',
       component: <Twitter className="icon" />,
-      url: `https://twitter.com/${TWITTER_USER}/`,
+      url: `https://twitter.com/${TWITTER_USER}/`
     },
     {
       name: 'Instagram',
       component: <Instagram className="icon" />,
-      url: `https://www.instagram.com/${INSTAGRAM_USER}`,
+      url: `https://www.instagram.com/${INSTAGRAM_USER}`
     },
     {
       name: 'LinkedIn',
       component: <LinkedIn className="icon" />,
-      url: `https://www.linkedin.com/company/${LINKEDIN_USER}/`,
+      url: `https://www.linkedin.com/company/${LINKEDIN_USER}/`
     },
     {
       name: 'Facebook',
       component: <Facebook className="icon" />,
-      url: `https://www.facebook.com/${FACEBOOK_USER}/`,
+      url: `https://www.facebook.com/${FACEBOOK_USER}/`
     },
     {
       name: 'Github',
       component: <Github className="icon" />,
-      url: GITHUB_BASE,
-    },
+      url: GITHUB_BASE
+    }
   ];
 
   return (
@@ -95,9 +95,8 @@ const Footer: React.FC = () => {
                   event={{
                     category: 'Create Fishbowl',
                     action: 'Footer',
-                    label: 'Footer',
-                  }}
-                >
+                    label: 'Footer'
+                  }}>
                   <span>{t('cta')}</span>
                 </GAButton>
               </Link>
@@ -179,9 +178,8 @@ const Footer: React.FC = () => {
                 event={{
                   category: 'Footer',
                   action: 'RRSS',
-                  label: name,
-                }}
-              >
+                  label: name
+                }}>
                 {component}
               </GAButton>
             </Link>

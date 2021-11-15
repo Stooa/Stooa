@@ -67,7 +67,7 @@ const formatDateTime = date => {
     year,
     date: [year, month, day].join('-'),
     time: [hour, minutes].join(':'),
-    timezone: getTimeZoneName(d),
+    timezone: getTimeZoneName(d)
   };
 };
 
@@ -104,5 +104,5 @@ export {
   isTimeLessThanNMinutes,
   isTimeUp,
   parseDevices,
-  removeItem,
+  removeItem
 };
