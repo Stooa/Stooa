@@ -15,9 +15,12 @@ namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Fishbowl;
+use App\Entity\User;
 use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
+use FOS\UserBundle\Model\FosUserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
+use Sonata\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -33,9 +36,14 @@ class RefreshTokenTest extends ApiTestCase
         parent::setUp();
 
         UserFactory::createOne([
+            'name' => 'Name',
+            'surnames' => 'Surnames',
             'email' => 'user@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
+            'linkedinProfile' => 'https://www.linkedin.com/test',
+            'twitterProfile' => 'https//www.twitter.com/test',
+            'allowShareData' => true,
         ]);
     }
 
@@ -85,7 +93,7 @@ class RefreshTokenTest extends ApiTestCase
     }
 
     /** @test */
-    public function itRefreshTokenUserWithoutFishbowl(): void
+    public function itRefreshUserToken(): void
     {
         self::bootKernel();
 
@@ -119,12 +127,26 @@ class RefreshTokenTest extends ApiTestCase
         $decodedToken = $jwtManager->decode($token);
 
         $this->assertIsArray($decodedToken);
+
         $this->assertArrayHasKey('room', $decodedToken);
+        $this->assertArrayHasKey('username', $decodedToken);
+        $this->assertArrayHasKey('roles', $decodedToken);
+        $this->assertArrayHasKey('context', $decodedToken);
         $this->assertSame($decodedToken['room'], '');
+        $this->assertSame($decodedToken['username'], 'user@stooa.com');
+        $this->assertSame($decodedToken['roles'], [FosUserInterface::ROLE_DEFAULT]);
+        $this->assertSame($decodedToken['context'], [
+            'user' => [
+                'name' => 'Name Surnames',
+                'email' => 'user@stooa.com',
+                'twitter' => 'https//www.twitter.com/test',
+                'linkedin' => 'https://www.linkedin.com/test',
+            ]
+        ]);
     }
 
     /** @test */
-    public function itRefreshTokenUserWithOneFishbowl(): void
+    public function itRefreshUserTokenWithOneFishbowl(): void
     {
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
