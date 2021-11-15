@@ -8,7 +8,6 @@
  */
 
 import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import lottie from 'lottie-web';
 
@@ -19,11 +18,13 @@ interface Props {
   item: Lottie;
 }
 
+const importAnimatiom = (path: string) => require(`ui/animations/home/${path}`);
+
 const Benefits = ({ item }: Props): JSX.Element => {
   const { t } = useTranslation('home');
 
   useEffect(() => {
-    const AnimPath = require(`ui/animations/home/${item.path}`);
+    const AnimPath = importAnimatiom(item.path);
 
     lottie.loadAnimation({
       container: document.getElementById(item.id),
