@@ -9,7 +9,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -31,8 +36,10 @@ interface FormProps {
   required: string;
   equalPassword: string;
   minlength: string;
-  onSubmit: any;
-  changePassword: any;
+  onSubmit: (any) => void;
+  changePassword: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
 }
 
 const initialValues = {
@@ -42,7 +49,7 @@ const initialValues = {
 };
 
 const Form = (props: FormikProps<FormValues>) => {
-  const { t, lang } = useTranslation('form');
+  const { t } = useTranslation('form');
 
   return (
     <FormikForm>

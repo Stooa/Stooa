@@ -9,7 +9,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
+import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -28,11 +28,26 @@ import DatePicker from 'components/Common/Fields/DatePicker';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
+type createFishbowlAttrs = {
+  variables: {
+    input: {
+      name: string;
+      description: string;
+      startDateTime: string;
+      timezone: string;
+      duration: string;
+      locale: string;
+    };
+  };
+};
+
 interface FormProps {
   required: string;
   date: string;
-  createFishbowl: any;
-  onSubmit: any;
+  createFishbowl: (
+    options?: createFishbowlAttrs
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  onSubmit: (any) => void;
   currentLanguage: string;
   currentTimezone: string;
   enableReinitialize?: boolean;

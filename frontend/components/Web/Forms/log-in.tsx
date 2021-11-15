@@ -30,7 +30,7 @@ interface FormValues {
 interface FormProps {
   required: string;
   email: string;
-  login: (email: string, password: string) => any;
+  login: (email: string, password: string) => void;
 }
 
 const initialValues = {

@@ -57,10 +57,10 @@ const unauthenticatedRoutes = [
 
 const voidFunction = () => console.log('[STOOA] Context not initialized yet');
 
-const AuthContext = createContext<Auth>({
+const AuthContext = createContext<Auth | null>({
   isAuthenticated: false,
   user: {},
-  login: voidFunction,
+  login: () => Promise.resolve(),
   loginStatus: {},
   loading: true,
   createFishbowl: false,
@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
   const { lang } = useTranslation();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loginStatus, setLoginStatus] = useState<null|StatusPayload>(null);
+  const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
 
   useEffect(() => {

@@ -8,7 +8,12 @@
  */
 
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
@@ -44,8 +49,10 @@ interface FormProps {
   minlength: string;
   locale: string;
   url: string;
-  createUser: any;
-  onSubmit: any;
+  createUser: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  onSubmit: (res: unknown, values?: unknown) => Promise<void>;
 }
 
 const initialValues = {

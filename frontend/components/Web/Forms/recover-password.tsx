@@ -9,7 +9,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -29,8 +34,10 @@ interface FormValues {
 interface FormProps {
   required: string;
   email: string;
-  onSubmit: any;
-  recoverPassword: any;
+  onSubmit: (any) => Promise<void>;
+  recoverPassword: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   locale: string;
 }
 

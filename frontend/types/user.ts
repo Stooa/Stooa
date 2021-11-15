@@ -11,6 +11,7 @@ export interface User {
   id?: string;
   guestId?: string;
   nickname?: string;
+  name?: string;
   audioInput?: MediaDeviceInfo;
   audioOutput?: MediaDeviceInfo;
   videoInput?: MediaDeviceInfo;
@@ -21,12 +22,12 @@ export interface User {
 export interface UserRepository {
   clearUser: () => void;
   getUser: () => User;
-  getUserAudioInput: () => MediaDeviceInfo|null;
+  getUserAudioInput: () => MediaDeviceInfo | null;
   getUserAudioMuted: () => boolean;
-  getUserAudioOutput: () => MediaDeviceInfo|null;
-  getUserGuestId: () => string|null;
-  getUserNickname: () => string|null;
-  getUserVideoInput: () => MediaDeviceInfo|null;
+  getUserAudioOutput: () => MediaDeviceInfo | null;
+  getUserGuestId: () => string | null;
+  getUserNickname: () => string | null;
+  getUserVideoInput: () => MediaDeviceInfo | null;
   getUserVideoMuted: () => boolean;
   handleUserJoin: (id: string, user: User) => void;
   handleUserLeft: (id: string, user: User) => void;
