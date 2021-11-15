@@ -267,9 +267,10 @@ class RefreshTokenTest extends ApiTestCase
 
     private function createHostWithTwoCloseFishbowls(): void
     {
-        $firstDate = new \DateTime();
+        $timeZone = new \DateTimeZone('Europe/Madrid');
+
+        $firstDate = new \DateTime('now', $timeZone);
         $firstFishbowl = FishbowlFactory::createOne([
-            'id' => Uuid::fromString('b91dbea4-45f1-11ec-81d3-0242ac130003'),
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '00:02'),
@@ -277,12 +278,11 @@ class RefreshTokenTest extends ApiTestCase
             'slug' => 'first',
         ])->object();
 
-        $secondDate = new \DateTime('+ 2 minutes');
+        $secondDate = new \DateTime('+ 2 minutes', $timeZone);
         $secondFishbowl = FishbowlFactory::createOne([
-            'id' => Uuid::fromString('c17603b8-45f1-11ec-81d3-0242ac130003'),
             'startDateTime' => $secondDate,
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '00:30'),
+            'duration' => \DateTime::createFromFormat('!H:i', '00:30', $timeZone),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'slug' => 'second',
         ])->object();
@@ -292,7 +292,7 @@ class RefreshTokenTest extends ApiTestCase
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
             'fishbowls' => [$firstFishbowl, $secondFishbowl],
-            'createdAt' => new \DateTime(),
+            'createdAt' => new \DateTime('now', $timeZone),
         ]);
     }
 }
