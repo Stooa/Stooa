@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\FishbowlRepository;
@@ -40,8 +41,12 @@ use Webmozart\Assert\Assert as MAssert;
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
  *     collectionOperations={
- *         "get",
- *         "post"={"security"="is_granted('ROLE_USER')"},
+ *         "get"={
+ *             "controller"=NotFoundAction::class,
+ *             "read"=false,
+ *             "output"=false,
+ *         },
+ *         "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     itemOperations={
  *         "get",
