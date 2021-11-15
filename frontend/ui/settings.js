@@ -18,7 +18,7 @@ const BREAKPOINTS = {
   phone: 480,
   reader: 550,
   tablet: 768,
-  tabletLarge: 992,
+  tabletLarge: 992
 };
 
 const BORDER_RADIUS = '5px';
@@ -131,5 +131,5 @@ export {
   COLOR_YELLOW_900,
   FONT_BASE_SIZE,
   FONT_PRIMARY,
-  SPACE,
+  SPACE
 };

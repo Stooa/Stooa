@@ -7,33 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
 
+import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
 import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from 'lib/helpers';
 
-interface DevicesInterface {
-  audioOutputDevices: MediaDeviceInfo[];
-  audioInputDevices: MediaDeviceInfo[];
-  videoDevices: MediaDeviceInfo[];
-}
-
-interface DevicesContextInterface {
-  selectAudioOutputDevice: (deviceId: string) => void;
-  selectAudioInputDevice: (deviceId: string) => void;
-  selectVideoDevice: (deviceId: string) => void;
-  setDevices: Dispatch<SetStateAction<DevicesInterface>>;
-  audioOutputDevice: MediaDeviceInfo;
-  audioInputDevice: MediaDeviceInfo;
-  videoDevice: MediaDeviceInfo;
-  devices: DevicesInterface;
-}
-
-const DevicesContext = createContext<DevicesContextInterface>(undefined);
+const DevicesContext = createContext<DevicesCtx>(undefined);
 
 const DevicesProvider = ({ children }) => {
-  const [devices, setDevices] = useState<DevicesInterface>({
+  const [devices, setDevices] = useState<Devices>({
     audioOutputDevices: [],
     audioInputDevices: [],
     videoDevices: []
@@ -165,7 +149,7 @@ const DevicesProvider = ({ children }) => {
   );
 };
 
-const useDevices = (): DevicesContextInterface =>
-  useContext<DevicesContextInterface>(DevicesContext);
+const useDevices = (): DevicesCtx =>
+  useContext<DevicesCtx>(DevicesContext);
 
 export { DevicesProvider, useDevices };

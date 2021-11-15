@@ -12,19 +12,11 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import lottie from 'lottie-web';
 
+import { Lottie } from '@/types/animations';
 import { Column, Description, Row, Wrapper } from 'ui/pages';
 
-export interface LazyMovin {
-  id: string;
-  name: string;
-  path: string;
-  morph?: string;
-  reverse?: boolean;
-  assetsPath?: string;
-};
-
 interface Props {
-  item: LazyMovin;
+  item: Lottie;
 }
 
 const Benefits = ({ item }: Props): JSX.Element => {

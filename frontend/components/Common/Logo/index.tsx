@@ -20,7 +20,9 @@ interface Props {
 const Logo = ({ href = '', ...props }: Props) => {
   return href ? (
     <Link href={href} passHref>
-      <LogoStyled as="a" {...props}>{APP_NAME}</LogoStyled>
+      <LogoStyled as="a" {...props}>
+        {APP_NAME}
+      </LogoStyled>
     </Link>
   ) : (
     <LogoAppStyled className="logo">{APP_NAME}</LogoAppStyled>

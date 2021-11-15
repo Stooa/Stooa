@@ -21,6 +21,7 @@ import GAButton from 'components/Common/GAButton';
 import Layout from 'layouts/Home';
 import { Billboard, Content, Description, Row, Sections, Wrapper } from 'ui/pages';
 
+import { Lottie } from '@/types/animations';
 import ArrowRight from 'ui/svg/arrow-right.svg';
 import WaveMobile from 'ui/svg/wave-mobile.svg';
 import WaveDesktop from 'ui/svg/wave-desktop.svg';
@@ -39,7 +40,7 @@ const Banner = dynamic(import('components/Web/HomeSections/Banner'), { loading: 
 const Home = () => {
   const { t } = useTranslation('home');
 
-  const lazyMovinAnimations: LazyMovin[] = [
+  const lazyMovinAnimations: Lottie[] = [
     {
       id: 'animated-keybenefit1',
       name: 'first',
@@ -159,7 +160,7 @@ const Home = () => {
           </Description>
         </Row>
         <Sections>
-          {lazyMovinAnimations.map((item: LazyMovin, i: number) => {
+          {lazyMovinAnimations.map((item: Lottie, i: number) => {
             return (
               <div data-testid={`benefit-${i + 1}`} key={item.id}>
                 {item.morph && (

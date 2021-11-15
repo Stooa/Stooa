@@ -9,6 +9,7 @@
     "design-tokens": "design-tokens",
     "test": "jest --env=jsdom",
     "test-watch": "jest --watch --env=jsdom",
+    "prettify": "prettier --write **/*.{js,ts,tsx}",
     "lint:js": "eslint components contexts types hooks layouts lib pages ui"
   },
   "dependencies": {

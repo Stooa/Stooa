@@ -9,16 +9,7 @@
 
 import { useState } from 'react';
 
-export interface Content {
-  type: string;
-  message: string;
-}
-
-export interface Toast {
-  id: number;
-  type: string;
-  message: string;
-}
+import { Toast, ToastContent } from '@/types/toasts';
 
 let toastCount = 0;
 let toastsList = [];
@@ -49,7 +40,7 @@ const useToasts = () => {
     }
   };
 
-  const addToast = (content: Content, delay = 0, autoclose = 0) => {
+  const addToast = (content: ToastContent, delay = 0, autoclose = 0) => {
     const id = toastCount++;
     const toast = { ...content, id };
     const toastExists = toastsList.filter(t => t.type === toast.type);
