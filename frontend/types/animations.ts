@@ -14,4 +14,4 @@ export interface Lottie {
   morph?: string;
   reverse?: boolean;
   assetsPath?: string;
-};
+}

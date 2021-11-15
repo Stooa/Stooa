@@ -149,7 +149,6 @@ const DevicesProvider = ({ children }) => {
   );
 };
 
-const useDevices = (): DevicesCtx =>
-  useContext<DevicesCtx>(DevicesContext);
+const useDevices = (): DevicesCtx => useContext<DevicesCtx>(DevicesContext);
 
 export { DevicesProvider, useDevices };

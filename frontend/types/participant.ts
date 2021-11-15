@@ -18,4 +18,4 @@ export interface Participant {
   joined: boolean;
   isMuted: boolean;
   isVideoMuted: boolean;
-};
+}
