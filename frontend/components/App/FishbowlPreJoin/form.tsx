@@ -25,9 +25,7 @@ interface FormValues {
 
 interface FormProps {
   required: string;
-  onSubmit: {
-    name: string;
-  };
+  onSubmit: (values: FormValues) => void;
 }
 
 const initialValues = {

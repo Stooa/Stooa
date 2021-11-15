@@ -30,7 +30,6 @@ import BillboardMobAnimPath from 'ui/animations/home/billboard-mobile.json';
 import MorphBillAnimPath from 'ui/animations/home/billboard-morph.json';
 import Morph2BillAnimPath from 'ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from 'ui/animations/home/keybenefit2-morph.json';
-import { LazyMovin } from 'components/Web/HomeSections/Benefits';
 
 const Benefits = dynamic(import('components/Web/HomeSections/Benefits'), {
   loading: () => <div />
