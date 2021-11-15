@@ -19,6 +19,7 @@ use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
 use FOS\UserBundle\Model\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
+use Ramsey\Uuid\Uuid;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -268,6 +269,7 @@ class RefreshTokenTest extends ApiTestCase
     {
         $firstDate = new \DateTime();
         $firstFishbowl = FishbowlFactory::createOne([
+            'id' => Uuid::fromString('first'),
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '00:02'),
@@ -277,6 +279,7 @@ class RefreshTokenTest extends ApiTestCase
 
         $secondDate = new \DateTime('+ 2 minutes');
         $secondFishbowl = FishbowlFactory::createOne([
+            'id' => Uuid::fromString('second'),
             'startDateTime' => $secondDate,
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '00:30'),
