@@ -36,10 +36,10 @@ const rgbToHex = (r: number, g: number, b: number): string => {
     .join('');
 };
 
-const bgGradient = (rotation: string, color1: string, color2: string): string =>
+const bgGradient = (rotation: string, color1: string, color2: string) =>
   `linear-gradient(${rotation}, ${color1} 0%, ${color2} 100%)`;
 
-const getRatio = (originalWidth: number, originalHeight: number, width = 0, height = 0): string => {
+const getRatio = (originalWidth: number, originalHeight: number, width = 0, height = 0) => {
   let finalHeight;
   let finalWidth;
 
@@ -72,10 +72,9 @@ const columns = (number: number, spaces = 1, direction = 'default') => `
   }
 `;
 
-const rems = (n: number | string) =>
-  typeof n === 'string' ? `${parseInt(n, 10) / FONT_BASE_SIZE}rem` : `${n / FONT_BASE_SIZE}rem`;
+const rems = (n: number|string) => (typeof n === 'string') ? `${parseInt(n, 10) / FONT_BASE_SIZE}rem` : `${n / FONT_BASE_SIZE}rem`;
 
-const pixelate = (n: number | string): number | string => (n !== 0 ? `${n}px` : n);
+const pixelate = (n: number|string) => (n !== 0 ? `${n}px` : n);
 
 const space = (n = 1) => rems(SPACE * n);
 
@@ -93,7 +92,7 @@ const getSizeFromBreakpoint = (value: string, max = false) => {
 const generateMedia = () => {
   const max =
     (breakpoint: string) =>
-    (...args: TemplateStringsArray[]) =>
+    (...args) =>
       css`
         @media (max-width: ${getSizeFromBreakpoint(breakpoint, true)}) {
           ${css.call(null, ...args)};
@@ -102,7 +101,7 @@ const generateMedia = () => {
 
   const min =
     (breakpoint: string) =>
-    (...args: TemplateStringsArray[]) =>
+    (...args) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(breakpoint)}) {
           ${css.call(null, ...args)};
@@ -111,7 +110,7 @@ const generateMedia = () => {
 
   const between =
     (firstBreakpoint: string, secondBreakpoint: string) =>
-    (...args: TemplateStringsArray[]) =>
+    (...args) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(
             firstBreakpoint

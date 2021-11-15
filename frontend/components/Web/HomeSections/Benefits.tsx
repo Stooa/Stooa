@@ -23,7 +23,7 @@ const Benefits = ({ item }: Props): JSX.Element => {
   const { t } = useTranslation('home');
 
   useEffect(() => {
-    const AnimPath = dynamic(import(`ui/animations/home/${item.path}`), { loading: () => ({}) });
+    const AnimPath = require(`ui/animations/home/${item.path}`);
 
     lottie.loadAnimation({
       container: document.getElementById(item.id),

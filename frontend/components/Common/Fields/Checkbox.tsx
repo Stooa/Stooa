@@ -13,11 +13,11 @@ import { Field, FieldAttributes, useField } from 'formik';
 import { CheckboxStyled } from 'ui/Form';
 import { ValidationError } from 'ui/Validation';
 
-type CheckboxProps = {
+type Props = {
   label?: string;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, children, ...props }) => {
+const Checkbox: React.FC<Props> = ({ label, children, ...props }) => {
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
 
   return (

@@ -21,7 +21,8 @@ const { locales } = i18nConfig;
 
 const LanguageSwitcher = () => {
   const { t, lang } = useTranslation('common');
-  const selectRef = useRef();
+  const selectRef = useRef<HTMLSelectElement>(null);
+
   usePersistLocaleCookie();
 
   const changeLanguage = async () => {

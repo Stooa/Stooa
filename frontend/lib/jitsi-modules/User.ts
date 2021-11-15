@@ -11,16 +11,8 @@ import { User, UserRepository } from '@/types/user';
 import seatsRepository from '@/jitsi/Seats';
 import { removeItem } from 'lib/helpers';
 
-type StorageValue = string|boolean|MediaDeviceInfo;
-
 const userRepository = (): UserRepository => {
   let users: User[] = [];
-
-  const _getUserValue = (value: keyof User, defaultValue: StorageValue = ''): StorageValue => {
-    const user = getUser();
-
-    return user?.[value] || defaultValue;
-  };
 
   const clearUser = (): void => {
     sessionStorage.removeItem('user');
@@ -42,13 +34,13 @@ const userRepository = (): UserRepository => {
     return user ? JSON.parse(user) : {};
   };
 
-  const getUserGuestId = () => _getUserValue('guestId');
-  const getUserNickname = () => _getUserValue('nickname');
-  const getUserAudioInput = () => _getUserValue('audioInput', null);
-  const getUserAudioOutput = () => _getUserValue('audioOutput', null);
-  const getUserVideoInput = () => _getUserValue('videoInput', null);
-  const getUserAudioMuted = () => _getUserValue('audioMuted', false);
-  const getUserVideoMuted = () => _getUserValue('videoMuted', false);
+  const getUserGuestId = () => getUser()?.guestId;
+  const getUserNickname = () => getUser()?.nickname;
+  const getUserAudioInput = () => getUser()?.audioInput || null;
+  const getUserAudioOutput = () => getUser()?.audioOutput || null;
+  const getUserVideoInput = () => getUser()?.videoInput || null;
+  const getUserAudioMuted = () => getUser()?.audioMuted || false;
+  const getUserVideoMuted = () => getUser()?.videoMuted || false;
 
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
