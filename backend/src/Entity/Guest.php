@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *     normalizationContext={"groups"={"guest:read"}},
  *     denormalizationContext={"groups"={"guest:write"}},
- *     collectionOperations={"post"},
+ *     collectionOperations={"get", "post"},
  *     itemOperations={"get"},
  *     graphql={
  *         "create"={

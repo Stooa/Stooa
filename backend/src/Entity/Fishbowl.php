@@ -40,7 +40,8 @@ use Webmozart\Assert\Assert as MAssert;
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
  *     collectionOperations={
- *         "post"={"security"="is_granted('ROLE_USER')"}
+ *         "get",
+ *         "post"={"security"="is_granted('ROLE_USER')"},
  *     },
  *     itemOperations={
  *         "get",
