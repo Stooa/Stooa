@@ -269,7 +269,7 @@ class RefreshTokenTest extends ApiTestCase
     {
         $firstDate = new \DateTime();
         $firstFishbowl = FishbowlFactory::createOne([
-            'id' => Uuid::fromString('first'),
+            'id' => Uuid::fromString('b91dbea4-45f1-11ec-81d3-0242ac130003'),
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '00:02'),
@@ -279,7 +279,7 @@ class RefreshTokenTest extends ApiTestCase
 
         $secondDate = new \DateTime('+ 2 minutes');
         $secondFishbowl = FishbowlFactory::createOne([
-            'id' => Uuid::fromString('second'),
+            'id' => Uuid::fromString('c17603b8-45f1-11ec-81d3-0242ac130003'),
             'startDateTime' => $secondDate,
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '00:30'),
