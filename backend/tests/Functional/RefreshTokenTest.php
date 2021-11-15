@@ -272,7 +272,7 @@ class RefreshTokenTest extends ApiTestCase
         $firstFishbowl = FishbowlFactory::createOne([
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '00:02'),
+            'duration' => \DateTime::createFromFormat('!H:i', '00:02', $timeZone),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'slug' => 'first',
         ])->object();
