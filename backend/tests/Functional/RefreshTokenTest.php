@@ -19,7 +19,6 @@ use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
 use FOS\UserBundle\Model\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
-use Ramsey\Uuid\Uuid;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
