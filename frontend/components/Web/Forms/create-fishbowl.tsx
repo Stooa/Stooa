@@ -254,7 +254,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
     }
   };
 
-  let selectedFishbowlValues: any;
+  let selectedFishbowlValues: FormValues;
 
   if (selectedFishbowl) {
     const { timezone } = formatDateTime(selectedFishbowl.startDateTimeTz);
