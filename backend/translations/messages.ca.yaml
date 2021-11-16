@@ -40,4 +40,4 @@ emails:
             en: Anglès
 
 login:
-    failure: 'test ca'
+    failure: 'Credencials no vàlides'
