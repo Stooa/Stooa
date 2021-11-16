@@ -72,9 +72,10 @@ const columns = (number: number, spaces = 1, direction = 'default') => `
   }
 `;
 
-const rems = (n: number|string) => (typeof n === 'string') ? `${parseInt(n, 10) / FONT_BASE_SIZE}rem` : `${n / FONT_BASE_SIZE}rem`;
+const rems = (n: number | string) =>
+  typeof n === 'string' ? `${parseInt(n, 10) / FONT_BASE_SIZE}rem` : `${n / FONT_BASE_SIZE}rem`;
 
-const pixelate = (n: number|string) => (n !== 0 ? `${n}px` : n);
+const pixelate = (n: number | string) => (n !== 0 ? `${n}px` : n);
 
 const space = (n = 1) => rems(SPACE * n);
 
