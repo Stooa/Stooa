@@ -129,7 +129,6 @@ const Home = () => {
         </Description>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
           <GAButton
-            as="a"
             className="animate-item cta-create-fishbowl"
             event={{
               category: 'Create Fishbowl',

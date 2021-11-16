@@ -22,7 +22,7 @@ import {
 import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from 'ui/Texts';
 import { rems, space } from 'ui/helpers';
 
-const Button = styled.button<{ full?: boolean }>`
+const Button = styled.button<{ full?: boolean; as?: string }>`
   ${TEXT_MD}
 
   align-items: center;

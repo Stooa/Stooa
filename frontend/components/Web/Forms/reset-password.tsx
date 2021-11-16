@@ -38,7 +38,7 @@ interface FormProps {
   resetPassword: (
     options?: MutationFunctionOptions<unknown, OperationVariables>
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  token: { token: string };
+  token: any;
 }
 
 const initialValues = {
@@ -82,7 +82,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
       .resetPassword({
         variables: {
           input: {
-            token: props.token.token,
+            token: props.token,
             password: values.password,
             passwordConfirmation: values.passwordConfirmation
           }
@@ -103,7 +103,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const ResetPassword = (token: { token: string }) => {
+const ResetPassword = ({ token }) => {
   const [resetPassword] = useMutation(RESET_PASSWORD);
   const [error, setError] = useState(null);
   const { login } = useAuth();

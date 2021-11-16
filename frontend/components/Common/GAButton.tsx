@@ -17,13 +17,13 @@ interface Props {
     category: string;
     action: string;
     label: string;
-  },
-  children?: React.ReactNode;
-  variant?: 'button'|'small'|'default'|'link';
+  };
+  children: React.ReactNode;
+  variant?: 'button' | 'small' | 'default' | 'link';
   target?: string;
   rel?: string;
   className?: string;
-};
+}
 
 const buttonVariant = {
   button: Button,
@@ -32,7 +32,7 @@ const buttonVariant = {
   link: 'a'
 };
 
-const GAButton: React.FC = ({ event, variant = 'default', children, ...other }: Props, ref) => {
+const GAButton = ({ event, variant = 'default', children, ...props }: Props, ref) => {
   const ButtonComponent = buttonVariant[variant];
 
   const onClick = () => {
@@ -40,7 +40,7 @@ const GAButton: React.FC = ({ event, variant = 'default', children, ...other }: 
   };
 
   return (
-    <ButtonComponent ref={ref} {...other} onClick={onClick}>
+    <ButtonComponent ref={ref} {...props} onClick={onClick}>
       {children}
     </ButtonComponent>
   );
