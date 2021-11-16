@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\AcceptHeader;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -31,8 +32,12 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        if ($request->headers->has('Accept-Language') && null !== $locale = $request->headers->get('Accept-Language')) {
-            $request->setLocale($locale);
+        if ($request->headers->has('Accept-Language') && null !== $locales = $request->headers->get('Accept-Language')) {
+            $locale = AcceptHeader::fromString($locales)->first() ?: null;
+
+            if (null !== $locale) {
+                $request->setLocale($locale->getValue());
+            }
         }
     }
 }
