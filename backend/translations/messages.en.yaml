@@ -40,4 +40,4 @@ emails:
             en: English
 
 login:
-    failure: 'Invalid credentials'
+    failure: Invalid credentials

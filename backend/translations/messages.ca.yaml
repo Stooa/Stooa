@@ -40,4 +40,4 @@ emails:
             en: Anglès
 
 login:
-    failure: 'Credencials no vàlides'
+    failure: Credencials no vàlides

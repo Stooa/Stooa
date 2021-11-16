@@ -1,2 +1,7 @@
 fishbowl:
-    overlap: 'Ya existe un Fishbowl creado en ese mismo momento.'
+    overlap: Ya existe un Fishbowl creado en ese mismo momento.
+    future: The fishbowl start date is already past.
+
+user:
+    same_user: La contraseña no coincide con su contraseña actual.
+    valid_token: El token no es válido o está caducado.

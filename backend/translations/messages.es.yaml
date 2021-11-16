@@ -40,5 +40,5 @@ emails:
             en: Inglés
 
 login:
-    failure: 'Credenciales no válidas'
+    failure: Credenciales no válidas
 

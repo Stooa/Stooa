@@ -1,2 +1,7 @@
 fishbowl:
-    overlap: 'The fishbowl gets overlapped with another one.'
+    overlap: The fishbowl gets overlapped with another one.
+    future: The fishbowl start date is already past.
+
+user:
+    same_user: The password does not match your current password.
+    valid_token: The token is not valid or is expired.

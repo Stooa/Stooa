@@ -1,2 +1,7 @@
 fishbowl:
-    overlap: 'Ja existeix un Fishbowl creat en aquest mateix moment.'
+    overlap: Ja existeix un Fishbowl creat en aquest mateix moment.
+    future: La data d'inici de la peixera ja va passar.
+
+user:
+    same_user: La contrasenya no coincideix amb la vostra contrasenya actual.
+    valid_token: El testimoni no és vàlid o està caducat.
