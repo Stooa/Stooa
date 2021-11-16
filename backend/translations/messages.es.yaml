@@ -38,3 +38,7 @@ emails:
             es: Español
             ca: Catalán
             en: Inglés
+
+login:
+    failure: 'ojobrujula es'
+
