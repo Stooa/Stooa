@@ -40,5 +40,5 @@ emails:
             en: Inglés
 
 login:
-    failure: 'ojobrujula es'
+    failure: 'test es'
 
