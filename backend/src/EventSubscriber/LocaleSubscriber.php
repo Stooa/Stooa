@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {
-    /** @return array<string, string> */
+    /** @return array<string, array<int, array<int, int|string>>> */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -31,8 +31,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
-        if ($request->headers->has('Accept-Language')) {
-            $locale = $request->headers->get('Accept-Language');
+        if ($request->headers->has('Accept-Language') && null !== $locale = $request->headers->get('Accept-Language')) {
             $request->setLocale($locale);
         }
     }
