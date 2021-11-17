@@ -78,16 +78,20 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         return '';
     }
 
-    // When a host has multiple fishbowls created we want to specify the room name via endpoint everytime we want to
-    // refresh the token
+    /**
+     * When a host has multiple fishbowls created we want to specify the room name via endpoint everytime we want to
+     * refresh the token.
+     */
     private function getRoomFromRequest(User $user): ?string
     {
         $currentRequest = $this->requestStack->getCurrentRequest();
 
-        if ((null !== $currentRequest && null !== $slug = $currentRequest->get('room')) && $this->fishbowlService->canFishbowlStart($slug, $user)) {
-            return $slug;
-        }
+        if (null !== $currentRequest) {
+            $slug = $currentRequest->get('room');
 
-        return null;
+            if (null !== $slug && $this->fishbowlService->canFishbowlStart($slug, $user)) {
+                return $slug;
+            }
+        }
     }
 }
