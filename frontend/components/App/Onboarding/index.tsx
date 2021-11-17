@@ -30,19 +30,27 @@ interface Props {
   isModerator: boolean;
 }
 
+interface Arrow {
+  currentSlide?: number;
+  slideCount?: number;
+  children?: React.ReactElement;
+}
+
 const SlickButtonFix = ({ children, ...props }) => (
   <button className="arrow prev" {...props}>
     {children}
   </button>
 );
 
-const PrevArrow = props => (
+// This props are required to fix the issue with the SlickSlider component
+// ref: https://github.com/akiran/react-slick/issues/1195
+const PrevArrow = ({ currentSlide, slideCount, children, ...props }: Arrow) => (
   <SlickButtonFix {...props}>
     <ArrowPrev />
   </SlickButtonFix>
 );
 
-const NextArrow = props => (
+const NextArrow = ({ currentSlide, slideCount, children, ...props }: Arrow) => (
   <SlickButtonFix {...props}>
     <ArrowNext />
   </SlickButtonFix>
@@ -194,8 +202,10 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                   </div>
                 </div>
                 <div className="right">
-                  {item.img1 && <img className="animate img-1" src={item.img1} alt="" />} {/* eslint-disable-line @next/next/no-img-element */}
-                  {item.img2 && <img className="animate img-2" src={item.img2} alt="" />} {/* eslint-disable-line @next/next/no-img-element */}
+                  {item.img1 && <img className="animate img-1" src={item.img1} alt="" />}{' '}
+                  {/* eslint-disable-line @next/next/no-img-element */}
+                  {item.img2 && <img className="animate img-2" src={item.img2} alt="" />}{' '}
+                  {/* eslint-disable-line @next/next/no-img-element */}
                 </div>
               </Slide>
             ))}
