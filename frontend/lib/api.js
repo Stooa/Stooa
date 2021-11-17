@@ -8,14 +8,14 @@
  */
 
 import Axios from 'axios';
-import { getCurrentLocaleCookie } from "@/lib/locale-cookie";
+import { getCurrentLocaleCookie } from '@/lib/locale-cookie';
 
 const api = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_DOMAIN,
   headers: {
     'Accept': 'application/json',
     'Accept-Language': getCurrentLocaleCookie(),
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   }
 });
 

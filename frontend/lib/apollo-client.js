@@ -10,7 +10,7 @@
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { getAuthToken } from 'lib/auth';
-import { getCurrentLocaleCookie } from "@/lib/locale-cookie";
+import { getCurrentLocaleCookie } from '@/lib/locale-cookie';
 
 const httpLink = createHttpLink({
   uri: `${process.env.NEXT_PUBLIC_API_DOMAIN}/graphql`
@@ -22,8 +22,8 @@ const authLink = setContext(async (_, { headers }) => {
   return {
     headers: {
       ...currentHeaders,
-      authorization: auth ? auth.authorizationString : null,
-      'Accept-Language': getCurrentLocaleCookie(),
+      'authorization': auth ? auth.authorizationString : null,
+      'Accept-Language': getCurrentLocaleCookie()
     }
   };
 });
