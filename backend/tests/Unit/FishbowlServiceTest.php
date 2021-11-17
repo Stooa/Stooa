@@ -295,4 +295,47 @@ class FishbowlServiceTest extends TestCase
 
         $this->assertTrue($response);
     }
+
+    /** @test */
+    public function itCantStartFishbowlWhenFishbowlDoesntExists(): void
+    {
+        $user = new User();
+
+        $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn(null);
+
+        $response = $this->service->canFishbowlStart('fishbowl-slug', $user);
+
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itCantStartFishbowlWhenFishbowlHostIsNotTheSame(): void
+    {
+        $user = new User();
+        $host = new User();
+
+        $fishbowl = new Fishbowl();
+        $fishbowl->setHost($host);
+
+        $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
+
+        $response = $this->service->canFishbowlStart('fishbowl-slug', $user);
+
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itCanStartFishbowl(): void
+    {
+        $host = new User();
+
+        $fishbowl = new Fishbowl();
+        $fishbowl->setHost($host);
+
+        $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
+
+        $response = $this->service->canFishbowlStart('fishbowl-slug', $host);
+
+        $this->assertTrue($response);
+    }
 }
