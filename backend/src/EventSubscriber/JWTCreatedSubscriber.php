@@ -93,5 +93,7 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
                 return $slug;
             }
         }
+
+        return null;
     }
 }

@@ -51,7 +51,7 @@ const getOnBoardingCookie = (isModerator: boolean) => {
 const getToken = () => cookie.get(COOKIE_TOKEN);
 const getRefreshToken = () => cookie.get(COOKIE_REFRESH);
 
-const getAuthToken = async (force = false, roomName = '') => {
+const getAuthToken = async (force?: boolean, roomName?: string) => {
   const token = getToken();
   if (!token) return null;
 
@@ -65,12 +65,12 @@ const getAuthToken = async (force = false, roomName = '') => {
   return auth;
 };
 
-const getRefreshedToken = async (email: string, refresh_token: string, roomName = '') => {
+const getRefreshedToken = async (email: string, refresh_token: string, roomName?: string) => {
   const params = new FormData();
   params.append('email', email);
   params.append('refresh_token', refresh_token);
 
-  if ('' !== roomName) {
+  if (roomName) {
     params.append('room', roomName);
   }
 
