@@ -44,12 +44,14 @@ const SlickButtonFix = ({ children, ...props }) => (
 
 // This props are required to fix the issue with the SlickSlider component
 // ref: https://github.com/akiran/react-slick/issues/1195
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PrevArrow = ({ currentSlide, slideCount, children, ...props }: Arrow) => (
   <SlickButtonFix {...props}>
     <ArrowPrev />
   </SlickButtonFix>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const NextArrow = ({ currentSlide, slideCount, children, ...props }: Arrow) => (
   <SlickButtonFix {...props}>
     <ArrowNext />
