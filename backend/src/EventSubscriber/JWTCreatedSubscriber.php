@@ -14,12 +14,23 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\User;
+use App\Service\FishbowlService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class JWTCreatedSubscriber implements EventSubscriberInterface
 {
+    private RequestStack $requestStack;
+    private FishbowlService $fishbowlService;
+
+    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
+    {
+        $this->requestStack = $requestStack;
+        $this->fishbowlService = $fishbowlService;
+    }
+
     /** @return array<string, string> */
     public static function getSubscribedEvents(): array
     {
@@ -52,6 +63,12 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
 
     private function buildRoomPermission(User $user): string
     {
+        $slug = $this->getRoomFromRequest($user);
+
+        if (null !== $slug) {
+            return $slug;
+        }
+
         $currentFishbowl = $user->getCurrentFishbowl();
 
         if (null !== $currentFishbowl) {
@@ -59,5 +76,24 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         }
 
         return '';
+    }
+
+    /**
+     * When a host has multiple fishbowls created we want to specify the room name via endpoint everytime we want to
+     * refresh the token.
+     */
+    private function getRoomFromRequest(User $user): ?string
+    {
+        $currentRequest = $this->requestStack->getCurrentRequest();
+
+        if (null !== $currentRequest) {
+            $slug = $currentRequest->get('room');
+
+            if (null !== $slug && $this->fishbowlService->canFishbowlStart($slug, $user)) {
+                return $slug;
+            }
+        }
+
+        return null;
     }
 }
