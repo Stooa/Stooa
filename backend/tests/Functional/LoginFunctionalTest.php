@@ -69,7 +69,7 @@ class LoginFunctionalTest extends ApiTestCase
 
         $this->assertResponseStatusCodeSame(401);
     }
-    
+
     /**
      * @test
      * @dataProvider errorMessageProvider
