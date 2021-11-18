@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -20,11 +21,11 @@ import Avatar from 'components/Web/Avatar';
 import RedirectLink from 'components/Web/RedirectLink';
 import Navigation from 'components/Web/Header/styles';
 
-interface IProps {
+interface Props {
   navigation?: boolean;
 }
 
-const Header: React.FC<IProps> = ({ navigation = true }) => {
+const Header: React.FC<Props> = ({ navigation = true }) => {
   const { createFishbowl, isAuthenticated } = useAuth();
   const { t, lang } = useTranslation('common');
   const { pathname } = useRouter();
@@ -39,7 +40,6 @@ const Header: React.FC<IProps> = ({ navigation = true }) => {
               {!createFishbowl && pathname !== ROUTE_FISHBOWL_CREATE && (
                 <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                   <GAButton
-                    as="a"
                     variant="small"
                     className="secondary"
                     event={{

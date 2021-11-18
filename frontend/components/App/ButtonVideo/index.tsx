@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from 'lib/analytics';
@@ -16,14 +16,14 @@ import VideoIcon from 'ui/svg/video.svg';
 import VideoMutedIcon from 'ui/svg/video-muted.svg';
 import Button from 'components/App/ButtonVideo/styles';
 
-interface IProps {
+interface Props {
   joined: boolean;
   disabled: boolean;
   unlabeled?: boolean;
   handleVideo?: (value?: boolean) => void;
 }
 
-const ButtonVideo: React.FC<IProps> = ({ handleVideo, joined, disabled, unlabeled }) => {
+const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled }) => {
   const [active, setActive] = useState(true);
   const [muted, setMuted] = useState(userRepository.getUserVideoMuted());
   const { t } = useTranslation('fishbowl');

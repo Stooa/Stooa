@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
+
 import Decoration from 'components/Web/Decoration';
 import Footer from 'components/Web/Footer';
 import Header from 'components/Web/Header';
@@ -18,14 +20,14 @@ import {
   Main
 } from 'layouts/Default/styles';
 
-interface IProps {
+interface Props {
   center?: boolean;
   decorated?: boolean;
   navigation?: boolean;
   title?: string;
 }
 
-const Page: React.FC<IProps> = ({
+const Page: React.FC<Props> = ({
   children,
   center = true,
   decorated = false,

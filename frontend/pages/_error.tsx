@@ -13,12 +13,11 @@ import Trans from 'next-translate/Trans';
 
 import { CONTACT_EMAIL } from 'app.config';
 
-interface IProps {
+interface Props {
   statusCode?: number;
-  namespacesRequired: any;
 }
 
-const ErrorPage = ({ statusCode }: IProps) => {
+const ErrorPage = ({ statusCode }: Props) => {
   const { t } = useTranslation('_error');
 
   return (

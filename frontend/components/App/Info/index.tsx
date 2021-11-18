@@ -7,18 +7,19 @@
  * file that was distributed with this source code.
  */
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
+import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from 'lib/analytics';
 import CopyUrl from 'components/Common/CopyUrl';
 import Dots from 'ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from 'components/App/Info/styles';
 
-interface IProps {
-  data: any;
+interface Props {
+  data: Fishbowl;
 }
 
-const Info: React.FC<IProps> = ({ data }) => {
+const Info: React.FC<Props> = ({ data }) => {
   const wrapperRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -32,19 +33,19 @@ const Info: React.FC<IProps> = ({ data }) => {
     setActive(!active);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      toggleInfo();
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        toggleInfo();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [wrapperRef, active]);
+  }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <InfoStyled ref={wrapperRef}>

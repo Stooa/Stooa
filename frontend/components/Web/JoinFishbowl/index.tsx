@@ -7,10 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
+import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from 'app.config';
 import { useStateValue } from 'contexts/AppContext';
 import { useAuth } from 'contexts/AuthContext';
@@ -19,8 +20,8 @@ import { isTimeLessThanNMinutes } from 'lib/helpers';
 import Button, { ButtonHollow } from 'ui/Button';
 import { JoinFishbowlStyled } from 'components/Web/JoinFishbowl/styles';
 
-interface IProps {
-  data: any;
+interface Props {
+  data: Fishbowl;
   joinAsGuest?: () => void;
   isCreator?: boolean;
 }
@@ -28,19 +29,19 @@ interface IProps {
 const MINUTE = 60 * 1000;
 const MINUTES_TO_START_FISHBOWL = 60;
 
-const JoinFishbowl: React.FC<IProps> = ({ data, joinAsGuest }) => {
+const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('fishbowl');
+  const intervalRef = useRef(null);
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
-  let intervalId;
 
   const evaluateFishbowlReady = () => {
     const isReady = isTimeLessThanNMinutes(data.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
 
     if (isReady) {
-      window.clearInterval(intervalId);
+      window.clearInterval(intervalRef.current);
 
       dispatch({
         type: 'FISHBOWL_READY',
@@ -54,17 +55,17 @@ const JoinFishbowl: React.FC<IProps> = ({ data, joinAsGuest }) => {
   useEffect(() => {
     evaluateFishbowlReady();
 
-    intervalId = window.setInterval(evaluateFishbowlReady, MINUTE);
+    intervalRef.current = window.setInterval(evaluateFishbowlReady, MINUTE);
 
-    return () => window.clearInterval(intervalId);
-  }, []);
+    return () => window.clearInterval(intervalRef.current);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       <JoinFishbowlStyled>
         {isAuthenticated && fishbowlReady && (
           <div className="join-buttons">
-            <Link href={fbRoute} locale={data.locale}>
+            <Link href={fbRoute} locale={data.locale} passHref>
               <ButtonHollow as="a">{t('joinFishbowl')}</ButtonHollow>
             </Link>
           </div>

@@ -9,7 +9,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
@@ -24,7 +29,7 @@ import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   firstname: string;
   lastname: string;
   email: string;
@@ -33,17 +38,25 @@ interface IFormValues {
   isSubmitting: boolean;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
   minlength: string;
   url: string;
-  onSubmit: any;
-  initialValues: any;
-  updateUser: any;
+  onSubmit: (any) => Promise<void>;
+  initialValues: {
+    id: string;
+    linkedinProfile: string;
+    name: string;
+    surnames: string;
+    twitterProfile: string;
+  } & FormValues;
+  updateUser: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
 }
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
@@ -84,7 +97,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => {
     const {
       initialValues: { email, linkedinProfile, name, surnames, twitterProfile }
@@ -113,6 +126,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
       initialValues: { id }
     } = props;
 
+    // TODO: make the values same name as initial props
     await props
       .updateUser({
         variables: {
@@ -125,7 +139,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
           }
         }
       })
-      .then(async (res: any) => {
+      .then(async res => {
         await getAuthToken(true);
 
         resetForm({ values });

@@ -20,9 +20,9 @@ import {
   COLOR_RED_500
 } from 'ui/settings';
 import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from 'ui/Texts';
-import { hover, rems, space } from 'ui/helpers';
+import { rems, space } from 'ui/helpers';
 
-const Button = styled.button<{ full?: boolean }>`
+const Button = styled.button<{ full?: boolean; as?: string }>`
   ${TEXT_MD}
 
   align-items: center;
@@ -65,11 +65,11 @@ const Button = styled.button<{ full?: boolean }>`
     color: ${COLOR_PURPLE_500};
   }
 
-  ${hover`
+  &:hover {
     background: ${COLOR_PURPLE_400};
     border-color: ${COLOR_PURPLE_400};
     color: ${COLOR_NEUTRO_100};
-  `}
+  }
 `;
 
 const ButtonSmall = styled(Button)`
@@ -89,10 +89,10 @@ const ButtonApp = styled(Button)`
     background: ${COLOR_RED_500};
     border-color: ${COLOR_RED_500};
 
-    ${hover`
+    &:hover {
       background: ${COLOR_RED_400};
       border-color: ${COLOR_RED_400};
-    `}
+    }
   }
 `;
 
@@ -119,9 +119,9 @@ const ButtonTransp = styled.button`
   transition: color 0.1s ease-out;
   will-change: color;
 
-  ${hover`
+  &:hover {
     color: ${COLOR_PURPLE_400};
-  `}
+  }
 `;
 
 const ButtonLink = styled.button`

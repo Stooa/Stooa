@@ -7,21 +7,22 @@
  * file that was distributed with this source code.
  */
 
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
+import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL } from 'app.config';
 import { defaultLocale } from 'i18n';
 import Copy from 'ui/svg/copy.svg';
 import Share from 'components/Common/CopyUrl/styles';
 
-interface IProps {
-  data: any;
+interface Props {
+  data: Fishbowl;
   className?: string;
   variant?: 'default' | 'left';
 }
 
-const CopyUrl: React.FC<IProps> = ({ data, className = '', variant = 'default' }) => {
+const CopyUrl: React.FC<Props> = ({ data, className = '', variant = 'default' }) => {
   const linkRef = useRef(null);
   const [copySuccess, setCopySuccess] = useState(false);
   const { t } = useTranslation('fishbowl');

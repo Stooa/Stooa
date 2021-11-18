@@ -9,7 +9,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -22,15 +27,17 @@ import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   email: string;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
-  onSubmit: any;
-  recoverPassword: any;
+  onSubmit: (any) => Promise<void>;
+  recoverPassword: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   locale: string;
 }
 
@@ -38,7 +45,7 @@ const initialValues = {
   email: ''
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
@@ -60,7 +67,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
