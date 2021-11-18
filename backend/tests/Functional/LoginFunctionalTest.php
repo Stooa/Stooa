@@ -18,7 +18,7 @@ use App\Factory\UserFactory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class LocaleHeadersTest extends ApiTestCase
+class LoginFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -38,6 +38,38 @@ class LocaleHeadersTest extends ApiTestCase
         ]);
     }
 
+    /** @test */
+    public function itLogsInCorrectly(): void
+    {
+        self::bootKernel();
+
+        $response = static::createClient()->request('POST', '/login', ['json' => [
+            'email' => 'user@stooa.com',
+            'password' => 'admin',
+        ]]);
+
+        $logInResponse = $response->toArray();
+
+        $this->assertArrayHasKey('token', $logInResponse);
+        $this->assertArrayHasKey('refresh_token', $logInResponse);
+        $this->assertNotEmpty($logInResponse['token']);
+        $this->assertNotEmpty($logInResponse['refresh_token']);
+        $this->assertResponseIsSuccessful();
+    }
+
+    /** @test */
+    public function itReturns401WithWrongPasswordLogin(): void
+    {
+        self::bootKernel();
+
+        $response = static::createClient()->request('POST', '/login', ['json' => [
+            'email' => 'user@stooa.com',
+            'password' => '',
+        ]]);
+
+        $this->assertResponseStatusCodeSame(401);
+    }
+    
     /**
      * @test
      * @dataProvider errorMessageProvider
