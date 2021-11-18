@@ -86,7 +86,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     }
  * )
  *
- * @UniqueEntity(fields={"email"})
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="user.email"
+ * )
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */

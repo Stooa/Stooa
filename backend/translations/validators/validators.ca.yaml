@@ -5,3 +5,4 @@ fishbowl:
 user:
     same_user: La contrasenya no coincideix amb la vostra contrasenya actual.
     valid_token: El testimoni no és vàlid o està caducat.
+    email: Ja existeix un usuari amb el correu electrònic introduït.

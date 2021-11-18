@@ -5,3 +5,4 @@ fishbowl:
 user:
     same_user: La contraseña no coincide con su contraseña actual.
     valid_token: El token no es válido o está caducado.
+    email: Ya existe un usuario con el email introducido.
