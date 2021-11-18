@@ -13,16 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\Entity\Fishbowl;
-use App\Entity\User;
-use App\EventSubscriber\JWTCreatedSubscriber;
 use App\EventSubscriber\LocaleSubscriber;
-use App\Service\FishbowlService;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
@@ -31,12 +24,11 @@ class LocaleSubscriberTest extends TestCase
 {
     private RequestEvent $event;
     private LocaleSubscriber $subscriber;
-    private array $locales;
 
     protected function setUp(): void
     {
-        $this->locales = ['en', 'es', 'ca'];
-        $this->subscriber = new LocaleSubscriber($this->locales);
+        $locales = ['en', 'es', 'ca'];
+        $this->subscriber = new LocaleSubscriber($locales);
     }
 
     /** @test */
