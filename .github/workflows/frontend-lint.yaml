@@ -57,4 +57,4 @@ jobs:
               run: yarn run eslint components contexts types hooks layouts lib pages ui
 
             - name: Run Prettier to ensure Javascript styling
-              run: yarn run prettier --write **/*.{js,ts,tsx}
+              run: yarn run prettier --check **/*.{js,ts,tsx}
