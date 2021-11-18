@@ -72,10 +72,10 @@ class LocaleSubscriberTest extends TestCase
     }
 
     /** @test */
-    public function foo(): void
+    public function itSetsCorrectLocaleWithNavigatorHeaders(): void
     {
         $request = new Request();
-        $request->headers->add(['Accept-Language' => 'es']);
+        $request->headers->add(['Accept-Language' => 'es,en;q=0.9,en-US;q=0.8,ca;q=0.7,eu;q=0.6,nb;q=0.5,ru;q=0.4,ja;q=0.3,fr;q=0.2,de;q=0.1']);
         $this->event = new RequestEvent($this->createStub(Kernel::class), $request, HttpKernelInterface::MASTER_REQUEST);
         $this->subscriber->onKernelRequest($this->event);
 
