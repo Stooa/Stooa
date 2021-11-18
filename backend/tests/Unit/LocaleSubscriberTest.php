@@ -1,0 +1,84 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Tests\Unit;
+
+use App\Entity\Fishbowl;
+use App\Entity\User;
+use App\EventSubscriber\JWTCreatedSubscriber;
+use App\EventSubscriber\LocaleSubscriber;
+use App\Service\FishbowlService;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\Kernel;
+
+class LocaleSubscriberTest extends TestCase
+{
+    private RequestEvent $event;
+    private LocaleSubscriber $subscriber;
+    private array $locales;
+
+    protected function setUp(): void
+    {
+        $this->locales = ['en', 'es', 'ca'];
+        $this->subscriber = new LocaleSubscriber($this->locales);
+    }
+
+    /** @test */
+    public function itGetsDefaultLocaleWithoutHeaders(): void
+    {
+        $request = new Request();
+        $this->event = new RequestEvent($this->createStub(Kernel::class), $request, HttpKernelInterface::MASTER_REQUEST);
+        $this->subscriber->onKernelRequest($this->event);
+
+        static::assertSame('en', $this->event->getRequest()->getLocale());
+    }
+
+    /** @test */
+    public function itGetsDefaultLocaleWithWrongLocale(): void
+    {
+        $request = new Request();
+        $request->headers->add(['Accept-Language' => 'fr']);
+        $this->event = new RequestEvent($this->createStub(Kernel::class), $request, HttpKernelInterface::MASTER_REQUEST);
+        $this->subscriber->onKernelRequest($this->event);
+
+        static::assertSame('en', $this->event->getRequest()->getLocale());
+    }
+
+    /** @test */
+    public function itSetsCorrectLocaleWithHeaders(): void
+    {
+        $request = new Request();
+        $request->headers->add(['Accept-Language' => 'es']);
+        $this->event = new RequestEvent($this->createStub(Kernel::class), $request, HttpKernelInterface::MASTER_REQUEST);
+        $this->subscriber->onKernelRequest($this->event);
+
+        static::assertSame('es', $this->event->getRequest()->getLocale());
+    }
+
+    /** @test */
+    public function foo(): void
+    {
+        $request = new Request();
+        $request->headers->add(['Accept-Language' => 'es']);
+        $this->event = new RequestEvent($this->createStub(Kernel::class), $request, HttpKernelInterface::MASTER_REQUEST);
+        $this->subscriber->onKernelRequest($this->event);
+
+        static::assertSame('es', $this->event->getRequest()->getLocale());
+    }
+}
