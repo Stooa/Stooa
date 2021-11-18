@@ -18,6 +18,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Webmozart\Assert\Assert;
 
 class TranslateJWTAuthenticationFailureResponse implements EventSubscriberInterface
 {
@@ -38,13 +39,10 @@ class TranslateJWTAuthenticationFailureResponse implements EventSubscriberInterf
 
     public function onAuthenticationFailureResponse(AuthenticationFailureEvent $event): void
     {
-        /** @var JWTAuthenticationFailureResponse $response */
         $response = $event->getResponse();
 
-        $response->setMessage(
-            $this->translator->trans(
-                'login.failure'
-            )
-        );
+        Assert::isInstanceOf($response, JWTAuthenticationFailureResponse::class);
+
+        $response->setMessage($this->translator->trans('login.failure'));
     }
 }
