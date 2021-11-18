@@ -104,7 +104,7 @@ const Description = styled.div<{ center?: boolean }>`
   text-align: left;
 
   a {
-     text-decoration: underline;
+    text-decoration: underline;
   }
 
   ${media.min('tablet')`

@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -21,11 +22,11 @@ const ModeratorActions = dynamic(import('components/App/ModeratorActions'), {
   loading: () => <div />
 });
 
-interface IProps {
+interface Props {
   participantsActive: boolean;
 }
 
-const Footer: React.FC<IProps> = ({ participantsActive }) => {
+const Footer: React.FC<Props> = ({ participantsActive }) => {
   const { onIntroduction, isModerator, conferenceStatus } = useStooa();
   const { t } = useTranslation('app');
   const router = useRouter();

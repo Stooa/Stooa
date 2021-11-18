@@ -18,11 +18,11 @@ import CheckIcon from 'ui/svg/checkmark.svg';
 import { Button, Container, Item, List, Selector } from 'components/App/ButtonConfig/styles';
 import { useDevices } from 'contexts/DevicesContext';
 
-interface IProps {
+interface Props {
   unlabeled?: boolean;
 }
 
-const ButtonConfig = forwardRef(({ unlabeled }: IProps, ref) => {
+const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
   const [showDevices, setShowDevices] = useState(false);
 
   const {

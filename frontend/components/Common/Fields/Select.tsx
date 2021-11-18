@@ -8,21 +8,14 @@
  */
 
 import React from 'react';
-import { Field, FieldAttributes, useField } from 'formik';
+import { Field, useField } from 'formik';
 
 import { InputStyled } from 'ui/Form';
 import { ValidationError } from 'ui/Validation';
 import Icon from 'components/Common/Fields/Icon';
+import { Input } from '@/types/input';
 
-export type IInputProps = {
-  label: string;
-  variant?: 'default' | 'sm';
-  help?: string;
-  icon?: 'calendar' | 'clock' | 'hourglass' | 'lock' | 'mail' | 'world' | 'language';
-  validation?: boolean;
-} & FieldAttributes<Record<string, unknown>>;
-
-const Input: React.FC<IInputProps> = ({
+const InputField: React.FC<Input> = ({
   label,
   variant = 'default',
   help,
@@ -51,4 +44,4 @@ const Input: React.FC<IInputProps> = ({
   );
 };
 
-export default Input;
+export default InputField;

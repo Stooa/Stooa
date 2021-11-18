@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { hover, media, space, rems } from 'ui/helpers';
+import { media, space, rems } from 'ui/helpers';
 import { COLOR_NEUTRO_200, COLOR_NEUTRO_400, COLOR_NEUTRO_700, BORDER_RADIUS } from 'ui/settings';
 
 const Avatar = styled.div`
@@ -64,9 +64,9 @@ const Avatar = styled.div`
     .avatar {
       transition: .1s ease-out;
 
-      ${hover`
+      &:hover {
         background-color: ${COLOR_NEUTRO_400};
-      `}
+      }
     }
   `}
 `;

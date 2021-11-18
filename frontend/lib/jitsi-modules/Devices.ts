@@ -7,16 +7,11 @@
  * file that was distributed with this source code.
  */
 
+import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
 
-interface DevicesRepositoryInterface {
-  changeDevice: (device: MediaDeviceInfo) => Promise<void>;
-  loadDevices: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
-  clean: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
-}
-
-const devicesRepository = (): DevicesRepositoryInterface => {
+const devicesRepository = (): DevicesRepository => {
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
     const kind = device.kind === 'audioinput' ? 'audio' : 'video';
     const oldTrack =

@@ -10,7 +10,7 @@
 import styled from 'styled-components';
 
 import Alert from 'ui/Alert';
-import { space, rems, hover } from 'ui/helpers';
+import { space, rems } from 'ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_PURPLE_400,
@@ -45,9 +45,9 @@ const ThankYouStyled = styled.div`
       transition: 0.1s ease-out;
       width: ${space(4)};
 
-      ${hover`
+      &:hover {
         background: ${COLOR_PURPLE_400};
-      `}
+      }
     }
 
     svg path {
