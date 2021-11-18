@@ -150,7 +150,7 @@ const ThankYou = () => {
         </div>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
           <GAButton
-            variant="link"
+            variant="small"
             className="secondary"
             event={{
               category: 'Create Fishbowl',
