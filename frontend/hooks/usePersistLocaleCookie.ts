@@ -9,14 +9,14 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { setLocaleCookie } from '@/lib/locale-cookie';
+import LocaleCookie from '@/lib/LocaleCookie';
 
 const usePersistLocaleCookie = () => {
   const { locale, defaultLocale } = useRouter();
 
   useEffect(() => {
     if (locale !== defaultLocale) {
-      setLocaleCookie(locale);
+      LocaleCookie.setLocaleCookie(locale);
     }
   }, [locale, defaultLocale]);
 };
