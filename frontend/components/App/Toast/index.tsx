@@ -7,17 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CrossIcon from 'ui/svg/cross.svg';
 import { Container, Cross } from 'components/App/Toast/styles';
 
-interface IProps {
+interface Props {
   message: string;
   onDismiss: () => void;
 }
 
-const Toast: React.FC<IProps> = ({ message, onDismiss }) => {
+const Toast: React.FC<Props> = ({ message, onDismiss }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {

@@ -64,33 +64,6 @@ const FishbowlPreJoin: React.FC = () => {
     localTracks.current = [];
   };
 
-  const createLocalTracks = async () => {
-    disposeLocalTracks();
-
-    localTracks.current = await LocalTracks.createLocalTracks();
-
-    for (let index = 0; index < localTracks.current.length; index++) {
-      const localTrack = localTracks.current[index];
-
-      if (!localTrack.isAudioTrack()) {
-        const video = document.querySelector('video');
-
-        if (video) {
-          localTrack.attach(video);
-
-          video
-            .play()
-            .then(() => {
-              console.log('[STOOA] Playing track', localTrack.deviceId);
-            })
-            .catch(error => {
-              console.log('[STOOA] Problem with auto play', error);
-            });
-        }
-      }
-    }
-  };
-
   const handleParentClick = event => {
     if (event.target.id !== 'config-button') {
       configButtonRef.current.handleShowDevices(false);
@@ -106,6 +79,33 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   useEffect(() => {
+    const createLocalTracks = async () => {
+      disposeLocalTracks();
+
+      localTracks.current = await LocalTracks.createLocalTracks();
+
+      for (let index = 0; index < localTracks.current.length; index++) {
+        const localTrack = localTracks.current[index];
+
+        if (!localTrack.isAudioTrack()) {
+          const video = document.querySelector('video');
+
+          if (video) {
+            localTrack.attach(video);
+
+            video
+              .play()
+              .then(() => {
+                console.log('[STOOA] Playing track', localTrack.deviceId);
+              })
+              .catch(error => {
+                console.log('[STOOA] Problem with auto play', error);
+              });
+          }
+        }
+      }
+    };
+
     // This prevents a bug on Pre Join when you enter for the first time
     // and your camera doesn't shut down after going to the Fishbowl.
     if (videoDevice !== null) {

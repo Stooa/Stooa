@@ -9,7 +9,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
+import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -28,19 +28,34 @@ import DatePicker from 'components/Common/Fields/DatePicker';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormProps {
+type createFishbowlAttrs = {
+  variables: {
+    input: {
+      name: string;
+      description: string;
+      startDateTime: string;
+      timezone: string;
+      duration: string;
+      locale: string;
+    };
+  };
+};
+
+interface FormProps {
   required: string;
   date: string;
-  createFishbowl: any;
-  onSubmit: any;
+  createFishbowl: (
+    options?: createFishbowlAttrs
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  onSubmit: (any) => void;
   currentLanguage: string;
   currentTimezone: string;
   enableReinitialize?: boolean;
-  selectedFishbowl?: IFormValues | null;
+  selectedFishbowl?: FormValues | null;
   full: boolean;
 }
 
-interface IFormValues {
+interface FormValues {
   title: string;
   day: Date;
   time: string;
@@ -60,7 +75,7 @@ const initialValues = {
   timezone: ''
 };
 
-const Form = (props: IFormProps & FormikProps<IFormValues>) => {
+const Form = (props: FormProps & FormikProps<FormValues>) => {
   const { isSubmitting } = props;
 
   const { t } = useTranslation('form');
@@ -162,7 +177,7 @@ const Form = (props: IFormProps & FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     language: props.currentLanguage,
@@ -239,7 +254,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
     }
   };
 
-  let selectedFishbowlValues: any;
+  let selectedFishbowlValues: FormValues;
 
   if (selectedFishbowl) {
     const { timezone } = formatDateTime(selectedFishbowl.startDateTimeTz);

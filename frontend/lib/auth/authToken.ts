@@ -9,14 +9,16 @@
 
 import jwtDecode from 'jwt-decode';
 
+export type User = {
+  email: string;
+  name: string;
+  twitter: string;
+  linkedin: string;
+}
+
 export type DecodedToken = {
   readonly context: {
-    user: {
-      email: string;
-      name: string;
-      twitter: string;
-      linkedin: string;
-    };
+    user: User;
   };
   readonly exp: number;
 };
