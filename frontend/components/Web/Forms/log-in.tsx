@@ -21,16 +21,16 @@ import RedirectLink from 'components/Web/RedirectLink';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   email: string;
   password: string;
   isSubmitting: boolean;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
-  login: (email: string, password: string) => any;
+  login: (email: string, password: string) => void;
 }
 
 const initialValues = {
@@ -39,7 +39,7 @@ const initialValues = {
   isSubmitting: false
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
@@ -66,7 +66,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props =>
     Yup.object({
@@ -92,7 +92,7 @@ const LogIn = () => {
       setError(loginStatus.data);
       updateLogingStatus();
     }
-  }, [loginStatus]);
+  }, [loginStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

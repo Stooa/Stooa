@@ -8,26 +8,15 @@
  */
 
 import React from 'react';
-import { FieldAttributes, useField, useFormikContext } from 'formik';
-import DatePicker from 'react-datepicker';
+import { useField, useFormikContext } from 'formik';
+import DatePickerField from 'react-datepicker';
 
+import { DatePicker } from '@/types/input';
 import { DatePickerStyled } from 'ui/Form';
 import { ValidationError } from 'ui/Validation';
 import Icon from 'components/Common/Fields/Icon';
 
-export type IInputProps = {
-  label: string;
-  variant?: 'default' | 'sm';
-  icon?: 'calendar' | 'clock' | 'hourglass' | 'lock' | 'mail' | 'world';
-  minDate?: Date;
-  placeholderText: string;
-  showTimeSelect?: boolean;
-  showTimeSelectOnly?: boolean;
-  timeIntervals?: number;
-  dateFormat?: string;
-} & FieldAttributes<Record<string, unknown>>;
-
-const Input: React.FC<IInputProps> = ({ label, variant = 'default', icon, ...props }) => {
+const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, ...props }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(props);
   const isInvalid = meta.touched && meta.error;
@@ -36,7 +25,7 @@ const Input: React.FC<IInputProps> = ({ label, variant = 'default', icon, ...pro
     <DatePickerStyled
       className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}>
       {icon && <Icon variant={icon} className="icon" />}
-      <DatePicker
+      <DatePickerField
         {...field}
         {...props}
         selected={field.value || null}

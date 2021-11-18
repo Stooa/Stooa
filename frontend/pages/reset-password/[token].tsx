@@ -20,12 +20,14 @@ const ChangePassword = () => {
   const router = useRouter();
   const { token } = router.query;
 
+  const userToken = token as string;
+
   return loading ? (
     <></>
   ) : (
     <Layout title={t('title')} decorated>
       <h1 className="title-md">{t('title')}</h1>
-      <ResetPasswordForm token={token} />
+      <ResetPasswordForm token={userToken} />
     </Layout>
   );
 };

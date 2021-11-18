@@ -8,7 +8,12 @@
  */
 
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
@@ -20,18 +25,20 @@ import FormikForm from 'ui/Form';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   password: string;
   passwordConfirmation: string;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   equalPassword: string;
   minlength: string;
-  onSubmit: any;
-  resetPassword: any;
-  token: any;
+  onSubmit: (res: unknown, any?) => Promise<void>;
+  resetPassword: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  token: string;
 }
 
 const initialValues = {
@@ -39,7 +46,7 @@ const initialValues = {
   passwordConfirmation: ''
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('password');
 
   return (
@@ -60,7 +67,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
@@ -75,7 +82,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
       .resetPassword({
         variables: {
           input: {
-            token: props.token.token,
+            token: props.token,
             password: values.password,
             passwordConfirmation: values.passwordConfirmation
           }
@@ -96,7 +103,7 @@ const FormValidation = withFormik<IFormProps, IFormValues>({
   }
 })(Form);
 
-const ResetPassword = token => {
+const ResetPassword = ({ token }: { token: string }) => {
   const [resetPassword] = useMutation(RESET_PASSWORD);
   const [error, setError] = useState(null);
   const { login } = useAuth();

@@ -8,10 +8,10 @@
  */
 
 declare global {
-  let JitsiMeetJS: any;
+  let JitsiMeetJS: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   interface Window {
-    dataLayer: Record<string, any>[];
+    dataLayer: Record<string, any>[]; // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 }
 
