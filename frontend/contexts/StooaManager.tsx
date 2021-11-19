@@ -27,6 +27,7 @@ import { isTimeLessThanNMinutes, isTimeUp } from 'lib/helpers';
 import { useStateValue } from 'contexts/AppContext';
 import useEventListener from 'hooks/useEventListener';
 import useToasts from 'hooks/useToasts';
+import LocaleCookie from '@/lib/LocaleCookie';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -83,7 +84,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   const checkApIConferenceStatus = () => {
     api
-      .get(`${lang}/fishbowl-status/${fid}`)
+      .get(`${lang}/fishbowl-status/${fid}`, {
+        headers: { 'Accept-Language': LocaleCookie.getCurrentLocaleCookie() }
+      })
       .then(({ data: { status } }) => {
         dispatch({
           type: 'FISHBOWL_STATUS',

@@ -39,6 +39,7 @@ import api from 'lib/api';
 import { AuthToken } from 'lib/auth/authToken';
 import Layout from 'layouts/Clean';
 import LoadingIcon from 'components/Common/LoadingIcon';
+import LocaleCookie from '@/lib/LocaleCookie';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -97,7 +98,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
 
     return await api
-      .post('login', { email, password })
+      .post(
+        'login',
+        { email, password },
+        {
+          headers: { 'Accept-Language': LocaleCookie.getCurrentLocaleCookie() }
+        }
+      )
       .then(({ data }) => {
         const pathname = router.query.redirect || ROUTE_HOME;
         const auth = new AuthToken(data.token);
