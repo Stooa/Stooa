@@ -6,3 +6,5 @@ user:
     same_user: La contrasenya no coincideix amb la vostra contrasenya actual.
     valid_token: El testimoni no és vàlid o està caducat.
     email: Ja existeix un usuari amb el correu electrònic introduït.
+    password: La contrasenya actual no és correcta
+    participant: Participant should have a User or a Guest

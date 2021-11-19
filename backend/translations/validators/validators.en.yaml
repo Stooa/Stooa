@@ -6,3 +6,5 @@ user:
     same_user: The password does not match your current password.
     valid_token: The token is not valid or is expired.
     email: There is already a user with the email entered.
+    password: The current password doesn't match
+    participant: Participant should have a User or a Guest
