@@ -60,7 +60,7 @@ const Texts = css`
   }
 
   .app-lg {
-    font-size: 25px
+    font-size: 25px;
     font-weight: 500;
     line-height: 1.2;
   }
@@ -74,21 +74,27 @@ const Texts = css`
   }
 
   .app-sm-caps {
-    font-size: 11px:
+    font-size: 11px;
     font-weight: 500;
-    line-heignt: 1.2727;
+    line-height: 1.2727;
     text-transform: uppercase;
   }
 
-  .bold { font-weight: 600; }
-  .medium { font-weight: 500; }
+  .bold {
+    font-weight: 600;
+  }
+  .medium {
+    font-weight: 500;
+  }
 
   .bold,
   .medium {
-    letter-spacing: .15px;
+    letter-spacing: 0.15px;
   }
 
-  .caps { text-transform: uppercase; }
+  .caps {
+    text-transform: uppercase;
+  }
 `;
 
 export { APP_SM, APP_MD, TEXT_LG, TEXT_MD, TEXT_SM, TEXT_XXS };
