@@ -101,9 +101,7 @@ const AuthProvider = ({ children }) => {
       .post(
         'login',
         { email, password },
-        {
-          headers: { 'Accept-Language': locale }
-        }
+        { headers: { 'Accept-Language': locale } }
       )
       .then(({ data }) => {
         const pathname = router.query.redirect || ROUTE_HOME;
