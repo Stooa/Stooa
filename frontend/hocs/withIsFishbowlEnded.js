@@ -25,12 +25,11 @@ const withIsFishbowlEnded = WrappedComponent => props => {
   const router = useRouter();
   const { lang } = useTranslation();
   const { fid } = router.query;
-  const { locale } = useRouter();
 
   useEffect(() => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
-        headers: { 'Accept-Language': locale }
+        headers: { 'Accept-Language': lang }
       })
       .then(({ data }) => {
         dispatch({

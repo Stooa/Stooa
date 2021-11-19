@@ -44,7 +44,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [conferenceReady, setConferenceReady] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
-  const { locale } = useRouter();
 
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
@@ -85,7 +84,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
-        headers: { 'Accept-Language': locale }
+        headers: { 'Accept-Language': lang }
       })
       .then(({ data: { status } }) => {
         dispatch({
