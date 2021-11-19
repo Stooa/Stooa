@@ -15,9 +15,7 @@ const usePersistLocaleCookie = () => {
   const { locale, defaultLocale } = useRouter();
 
   useEffect(() => {
-    if (locale !== defaultLocale) {
-      LocaleCookie.setLocaleCookie(locale);
-    }
+    LocaleCookie.setLocaleCookie(locale);
   }, [locale, defaultLocale]);
 };
 

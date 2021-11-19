@@ -17,7 +17,6 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import Loader from 'components/Web/Loader';
 import Error from 'components/Common/Error';
 import { useStateValue } from 'contexts/AppContext';
-import LocaleCookie from '@/lib/LocaleCookie';
 
 const withIsFishbowlEnded = WrappedComponent => props => {
   const [loaded, setLoaded] = useState(false);
@@ -26,11 +25,12 @@ const withIsFishbowlEnded = WrappedComponent => props => {
   const router = useRouter();
   const { lang } = useTranslation();
   const { fid } = router.query;
+  const { locale } = useRouter();
 
   useEffect(() => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
-        headers: { 'Accept-Language': LocaleCookie.getCurrentLocaleCookie() }
+        headers: { 'Accept-Language': locale }
       })
       .then(({ data }) => {
         dispatch({

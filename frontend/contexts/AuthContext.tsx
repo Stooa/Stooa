@@ -39,7 +39,6 @@ import api from 'lib/api';
 import { AuthToken } from 'lib/auth/authToken';
 import Layout from 'layouts/Clean';
 import LoadingIcon from 'components/Common/LoadingIcon';
-import LocaleCookie from '@/lib/LocaleCookie';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -78,6 +77,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
+  const { locale } = useRouter();
 
   useEffect(() => {
     const loadUserFromCookies = async () => {
@@ -102,7 +102,7 @@ const AuthProvider = ({ children }) => {
         'login',
         { email, password },
         {
-          headers: { 'Accept-Language': LocaleCookie.getCurrentLocaleCookie() }
+          headers: { 'Accept-Language': locale }
         }
       )
       .then(({ data }) => {
