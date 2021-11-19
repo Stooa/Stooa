@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Model\ChangePasswordInput;
 use App\Model\ChangePasswordLoggedInput;
@@ -35,6 +36,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}},
  *     collectionOperations={
+ *         "get"={
+ *             "controller"=NotFoundAction::class,
+ *             "read"=false,
+ *             "output"=false,
+ *         },
  *         "post"={
  *             "validation_groups"={"Default", "user:create"},
  *             "denormalization_context"={"groups"={"user:write", "user:create"}}
