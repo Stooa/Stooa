@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import {
   COLOR_NEUTRO_100,
@@ -71,9 +71,9 @@ const buttonStyles = css`
   }
 `;
 
-const Button = styled.button<{ full: boolean; variant: string }>`
+const Button = styled.button<{ full?: boolean; variant?: string }>`
   width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${buttonStyles}
+  ${variant => variant === 'button' && buttonStyles};
 `;
 
 const ButtonSmall = styled(Button)`
@@ -137,7 +137,7 @@ const ButtonLink = styled.button`
   ${linkStyles}
 `;
 
-const StyledLink = styled.a<{ full: boolean; variant: string }>`
+const StyledLink = styled.a<{ full?: boolean; variant?: string }>`
   width: ${({ full }) => (full ? '100%' : 'auto')};
   ${({ variant }) => (variant === 'button' ? buttonStyles : linkStyles)}
 `;

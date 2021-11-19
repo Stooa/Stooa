@@ -48,10 +48,6 @@ const Billboard = styled.div`
     min-height: 55vh;
   `}
 
-  a {
-    margin-top: ${space(3)};
-  }
-
   #animated-billboard-morph,
   #animated-billboard-morph2 {
     height: ${rems(160)};
@@ -108,7 +104,8 @@ const Description = styled.div<{ center?: boolean }>`
   }
 
   ${media.min('tablet')`
-    margin: ${({ center }) => (center ? `${space(2)} auto 0` : `${space(2)} 0`)};
+    margin: ${({ center }) =>
+      center ? `${space(2)} auto ${space(3)}}` : `${space(2)} 0 ${space(3)}}`};
     max-width: ${rems(700)};
     text-align: ${({ center }) => (center ? 'center' : 'left')};
   `}

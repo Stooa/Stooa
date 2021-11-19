@@ -52,6 +52,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
         {twitter ? (
           <Link href={twitter} passHref>
             <GAButton
+              asElement="a"
               target="_blank"
               rel="noreferrer"
               className="icon"
@@ -72,6 +73,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
         {linkedin ? (
           <Link href={linkedin} passHref>
             <GAButton
+              asElement="a"
               target="_blank"
               rel="noreferrer"
               className="icon"

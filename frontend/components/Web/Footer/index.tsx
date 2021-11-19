@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
             <li className="text-sm">
               <Link href={ROUTE_FISHBOWL_CREATE} passHref>
                 <GAButton
-                  variant="link"
+                  asElement="a"
                   event={{
                     category: 'Create Fishbowl',
                     action: 'Footer',

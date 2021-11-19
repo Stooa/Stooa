@@ -10,7 +10,7 @@
 import React, { forwardRef } from 'react';
 
 import { pushEventDataLayer } from 'lib/analytics';
-import Button, { ButtonSmall, ButtonStyledLink } from 'ui/Button';
+import Button, { ButtonLink, ButtonSmall, StyledLink } from 'ui/Button';
 
 interface Props {
   event: {
@@ -19,7 +19,9 @@ interface Props {
     label: string;
   };
   children: React.ReactNode;
-  variant?: 'button' | 'small' | 'default' | 'link';
+  variant?: 'button' | 'small' | 'link';
+  asElement?: 'button' | 'a';
+  href?: string;
   target?: string;
   rel?: string;
   className?: string;
@@ -28,28 +30,22 @@ interface Props {
 const buttonVariant = {
   button: Button,
   small: ButtonSmall,
-  default: Button,
-  link: 'a'
+  link: ButtonLink
 };
 
-const GAButton = (
-  { event, variant = 'button', asElement = 'button', children, ...props }: Props,
-  ref
-) => {
-  const ButtonComponent = () => {
-    //if it is 'link' return link component
-    if (asElement === 'a') {
-      return Link;
-    } else {
-    }
-  };
+const GAButton = ({ event, children, variant = 'button', asElement, ...props }: Props, ref) => {
+  const ButtonComponent = buttonVariant[variant];
 
   const onClick = () => {
     pushEventDataLayer(event);
   };
 
-  return (
-    <ButtonComponent ref={ref} {...props} onClick={onClick}>
+  return asElement === 'a' ? (
+    <StyledLink variant={variant} ref={ref} {...props} onClick={onClick}>
+      {children}
+    </StyledLink>
+  ) : (
+    <ButtonComponent variant={variant} ref={ref} {...props} onClick={onClick}>
       {children}
     </ButtonComponent>
   );
