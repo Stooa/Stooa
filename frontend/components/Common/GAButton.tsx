@@ -10,7 +10,7 @@
 import React, { forwardRef } from 'react';
 
 import { pushEventDataLayer } from 'lib/analytics';
-import Button, { ButtonSmall } from 'ui/Button';
+import Button, { ButtonSmall, ButtonStyledLink } from 'ui/Button';
 
 interface Props {
   event: {
@@ -32,8 +32,17 @@ const buttonVariant = {
   link: 'a'
 };
 
-const GAButton = ({ event, variant = 'default', children, ...props }: Props, ref) => {
-  const ButtonComponent = buttonVariant[variant];
+const GAButton = (
+  { event, variant = 'button', asElement = 'button', children, ...props }: Props,
+  ref
+) => {
+  const ButtonComponent = () => {
+    //if it is 'link' return link component
+    if (asElement === 'a') {
+      return Link;
+    } else {
+    }
+  };
 
   const onClick = () => {
     pushEventDataLayer(event);

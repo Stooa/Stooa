@@ -22,7 +22,7 @@ import {
 import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from 'ui/Texts';
 import { rems, space } from 'ui/helpers';
 
-const Button = styled.button<{ full?: boolean; as?: string }>`
+const buttonStyles = css`
   ${TEXT_MD}
 
   align-items: center;
@@ -40,7 +40,6 @@ const Button = styled.button<{ full?: boolean; as?: string }>`
   padding: ${space(1.85)} ${space(4)} ${space(1.65)};
   text-decoration: none;
   transition: 0.1s ease-out;
-  width: ${({ full }) => (full ? '100%' : 'auto')};
   will-change: background, color;
 
   &:disabled {
@@ -70,6 +69,11 @@ const Button = styled.button<{ full?: boolean; as?: string }>`
     border-color: ${COLOR_PURPLE_400};
     color: ${COLOR_NEUTRO_100};
   }
+`;
+
+const Button = styled.button<{ full: boolean; variant: string }>`
+  width: ${({ full }) => (full ? '100%' : 'auto')};
+  ${buttonStyles}
 `;
 
 const ButtonSmall = styled(Button)`
@@ -124,16 +128,23 @@ const ButtonTransp = styled.button`
   }
 `;
 
-const ButtonLink = styled.button`
+const linkStyles = css`
   cursor: pointer;
   text-decoration: underline;
 `;
 
+const ButtonLink = styled.button`
+  ${linkStyles}
+`;
+
+const StyledLink = styled.a<{ full: boolean; variant: string }>`
+  width: ${({ full }) => (full ? '100%' : 'auto')};
+  ${({ variant }) => (variant === 'button' ? buttonStyles : linkStyles)}
+`;
+
 const ButtonLinkApp = styled.button`
   ${APP_MD}
-
-  cursor: pointer;
-  text-decoration: underline;
+  ${linkStyles}
 `;
 
 export {
@@ -143,6 +154,7 @@ export {
   ButtonSmall,
   ButtonTransp,
   ButtonLink,
+  StyledLink,
   ButtonLinkApp
 };
 export default Button;
