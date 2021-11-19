@@ -11,11 +11,7 @@ import React from 'react';
 
 import { Container, Main } from 'layouts/Default/styles';
 
-interface IProps {
-  children: any;
-}
-
-const Page: React.FC<IProps> = ({ children }) => {
+const Page: React.FC = ({ children }) => {
   return (
     <Container>
       <Main center>{children}</Main>

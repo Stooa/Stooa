@@ -7,9 +7,11 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
+import { Fishbowl } from '@/types/api-platform';
 import { IS_FISHBOWL_CREATOR } from 'lib/gql/Fishbowl';
 import { StooaProvider } from 'contexts/StooaManager';
 import ScriptLoader from 'hocs/withScriptLoader';
@@ -24,19 +26,19 @@ const scripts = [
   '/vendor/lib-jitsi-meet.min.js'
 ];
 
-interface IProps {
-  data: any;
+interface Props {
+  data: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;
 }
 
-const Layout: React.FC<IProps> = ({
+const Layout: React.FC<Props> = ({
   data,
-  children,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
-  title
+  title,
+  children
 }) => {
   const router = useRouter();
   const { fid } = router.query;

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -19,12 +19,12 @@ import ModalEndFishbowl from 'components/App/ModalEndFishbowl';
 
 import { ButtonAppSmall } from 'ui/Button';
 
-interface IProps {
+interface Props {
   fid: string;
   conferenceStatus: IConferenceStatus;
 }
 
-const ModeratorActions: React.FC<IProps> = ({ fid, conferenceStatus }) => {
+const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [{}, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);

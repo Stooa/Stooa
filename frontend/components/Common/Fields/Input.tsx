@@ -8,23 +8,14 @@
  */
 
 import React from 'react';
-import { Field, FieldAttributes, useField } from 'formik';
+import { Field, useField } from 'formik';
 
+import { Input } from '@/types/input';
 import { InputStyled } from 'ui/Form';
 import { ValidationError, ValidationIcon } from 'ui/Validation';
 import Icon from 'components/Common/Fields/Icon';
 
-export type IInputProps = {
-  label: string;
-  variant?: 'default' | 'sm';
-  help?: string;
-  icon?: 'calendar' | 'clock' | 'hourglass' | 'lock' | 'mail' | 'world';
-  as?: 'input' | 'select' | 'textarea';
-  validation?: boolean;
-  autocomplete?: string;
-} & FieldAttributes<Record<string, unknown>>;
-
-const Input: React.FC<IInputProps> = ({
+const InputField: React.FC<Input> = ({
   className = '',
   label,
   variant = 'default',
@@ -32,7 +23,6 @@ const Input: React.FC<IInputProps> = ({
   icon,
   as = 'input',
   validation = true,
-  autocomplete = '',
   ...props
 }) => {
   const [field, meta] = useField(props);
@@ -69,4 +59,4 @@ const Input: React.FC<IInputProps> = ({
   );
 };
 
-export default Input;
+export default InputField;

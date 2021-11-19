@@ -7,17 +7,18 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ButtonLink } from 'ui/Button';
 import Modal from 'ui/Modal';
 import Cross from 'ui/svg/cross.svg';
 
-interface IProps {
+interface Props {
   toggleModal: () => void;
 }
 
-const Nickname: React.FC<IProps> = ({ toggleModal }) => {
+const Nickname: React.FC<Props> = ({ toggleModal }) => {
   const { t } = useTranslation('common');
 
   return (

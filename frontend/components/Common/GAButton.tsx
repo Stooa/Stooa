@@ -7,10 +7,23 @@
  * file that was distributed with this source code.
  */
 
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import { pushEventDataLayer } from 'lib/analytics';
 import Button, { ButtonSmall } from 'ui/Button';
+
+interface Props {
+  event: {
+    category: string;
+    action: string;
+    label: string;
+  };
+  children: React.ReactNode;
+  variant?: 'button' | 'small' | 'default' | 'link';
+  target?: string;
+  rel?: string;
+  className?: string;
+}
 
 const buttonVariant = {
   button: Button,
@@ -19,8 +32,7 @@ const buttonVariant = {
   link: 'a'
 };
 
-const GAButton = (props: any, ref: any) => {
-  const { event, children, variant = 'default', ...other } = props;
+const GAButton = ({ event, variant = 'default', children, ...props }: Props, ref) => {
   const ButtonComponent = buttonVariant[variant];
 
   const onClick = () => {
@@ -28,7 +40,7 @@ const GAButton = (props: any, ref: any) => {
   };
 
   return (
-    <ButtonComponent ref={ref} {...other} onClick={onClick}>
+    <ButtonComponent ref={ref} {...props} onClick={onClick}>
       {children}
     </ButtonComponent>
   );

@@ -22,14 +22,14 @@ const COOKIE_REFRESH_DAYS = 30;
 const COOKIE_ON_BOARDING_DAYS = 30;
 const COOKIE_OPTIONS = { path: '/', domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN };
 
-const setToken = (token: any) => {
+const setToken = (token: string) => {
   const auth = new AuthToken(token);
   if (auth) {
     cookie.set(COOKIE_TOKEN, token, { ...COOKIE_OPTIONS, expires: auth.decodedToken.exp });
   }
 };
 
-const setRefreshToken = (value: any) => {
+const setRefreshToken = (value: string) => {
   cookie.set(COOKIE_REFRESH, value, { ...COOKIE_OPTIONS, expires: COOKIE_REFRESH_DAYS });
 };
 
@@ -51,7 +51,7 @@ const getOnBoardingCookie = (isModerator: boolean) => {
 const getToken = () => cookie.get(COOKIE_TOKEN);
 const getRefreshToken = () => cookie.get(COOKIE_REFRESH);
 
-const getAuthToken = async (force = false) => {
+const getAuthToken = async (force?: boolean, roomName?: string) => {
   const token = getToken();
   if (!token) return null;
 
@@ -60,15 +60,19 @@ const getAuthToken = async (force = false) => {
   if (force || (auth && auth.isExpired)) {
     const refreshToken = getRefreshToken();
     if (!refreshToken) return null;
-    return await getRefreshedToken(auth.user.email, refreshToken);
+    return await getRefreshedToken(auth.user.email, refreshToken, roomName);
   }
   return auth;
 };
 
-const getRefreshedToken = async (email: string, refresh_token: string) => {
+const getRefreshedToken = async (email: string, refresh_token: string, roomName?: string) => {
   const params = new FormData();
   params.append('email', email);
   params.append('refresh_token', refresh_token);
+
+  if (roomName) {
+    params.append('room', roomName);
+  }
 
   return await api
     .post('refresh-token', params)
@@ -116,7 +120,7 @@ const getParticipants = async (lang: string, slug: string) => {
   });
 };
 
-const isCurrentGuest = (guestId: any) => {
+const isCurrentGuest = (guestId: string|null) => {
   return guestId !== null && userRepository.getUserGuestId() === guestId;
 };
 
