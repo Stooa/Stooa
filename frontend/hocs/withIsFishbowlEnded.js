@@ -28,7 +28,9 @@ const withIsFishbowlEnded = WrappedComponent => props => {
 
   useEffect(() => {
     api
-      .get(`${lang}/fishbowl-status/${fid}`)
+      .get(`${lang}/fishbowl-status/${fid}`, {
+        headers: { 'Accept-Language': lang }
+      })
       .then(({ data }) => {
         dispatch({
           type: 'FISHBOWL_STATUS',

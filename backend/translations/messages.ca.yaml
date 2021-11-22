@@ -38,3 +38,6 @@ emails:
             es: Espanyol
             ca: Català
             en: Anglès
+
+login:
+    failure: Credencials no vàlides
