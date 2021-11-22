@@ -20,5 +20,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class ValidResetPasswordToken extends Constraint
 {
-    public string $message = 'The token is not valid or is expired.';
+    public string $message = 'user.valid_token';
 }

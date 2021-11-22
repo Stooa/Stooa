@@ -7,6 +7,7 @@
 
 parameters:
     locale: en
+    locales: [ en, es, ca ]
     container.dumper.inline_factories: true
     container.dumper.inline_class_loader: true
 
@@ -32,6 +33,10 @@ services:
     App\Controller\:
         resource: ../src/Controller/
         tags: [controller.service_arguments]
+
+    App\EventSubscriber\LocaleSubscriber:
+        bind:
+            $locales: '%locales%'
 
     App\OpenApi\OpenApiFactory:
         decorates: api_platform.openapi.factory

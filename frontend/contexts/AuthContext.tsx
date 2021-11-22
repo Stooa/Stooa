@@ -97,7 +97,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
 
     return await api
-      .post('login', { email, password })
+      .post('login', { email, password }, { headers: { 'Accept-Language': lang } })
       .then(({ data }) => {
         const pathname = router.query.redirect || ROUTE_HOME;
         const auth = new AuthToken(data.token);
