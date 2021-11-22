@@ -85,6 +85,7 @@ const ThankYou = () => {
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
+                  asElement="a"
                   variant="link"
                   event={{
                     category: 'Share',
@@ -102,6 +103,7 @@ const ThankYou = () => {
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
+                  asElement="a"
                   variant="link"
                   event={{
                     category: 'Share',
@@ -119,6 +121,7 @@ const ThankYou = () => {
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
+                  asElement="a"
                   variant="link"
                   event={{
                     category: 'Share',
@@ -136,6 +139,7 @@ const ThankYou = () => {
                 <GAButton
                   target="_blank"
                   rel="noreferrer"
+                  asElement="a"
                   variant="link"
                   event={{
                     category: 'Share',
@@ -150,7 +154,8 @@ const ThankYou = () => {
         </div>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
           <GAButton
-            variant="link"
+            asElement="a"
+            variant="small"
             className="secondary"
             event={{
               category: 'Create Fishbowl',

@@ -92,6 +92,7 @@ const Footer: React.FC = () => {
               <Link href={ROUTE_FISHBOWL_CREATE} passHref>
                 <GAButton
                   asElement="a"
+                  variant="link"
                   event={{
                     category: 'Create Fishbowl',
                     action: 'Footer',
@@ -172,6 +173,7 @@ const Footer: React.FC = () => {
           {socialNetworks.map(({ name, url, component }) => (
             <Link href={url} passHref key={name}>
               <GAButton
+                asElement="a"
                 target="_blank"
                 rel="noreferrer"
                 variant="link"

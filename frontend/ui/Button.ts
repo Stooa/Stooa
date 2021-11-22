@@ -71,9 +71,9 @@ const buttonStyles = css`
   }
 `;
 
-const Button = styled.button<{ full?: boolean; variant?: string }>`
+const Button = styled.button<{ full?: boolean }>`
   width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${variant => variant === 'button' && buttonStyles};
+  ${buttonStyles};
 `;
 
 const ButtonSmall = styled(Button)`
@@ -137,9 +137,20 @@ const ButtonLink = styled.button`
   ${linkStyles}
 `;
 
-const StyledLink = styled.a<{ full?: boolean; variant?: string }>`
+const ButtonStyledLink = styled.a<{ full?: boolean }>`
   width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${({ variant }) => (variant === 'button' ? buttonStyles : linkStyles)}
+  ${buttonStyles};
+`;
+
+const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
+  ${TEXT_SM}
+
+  border-width: 1px;
+  padding: ${space(1.1)} ${space(3)} ${space(0.8)};
+`;
+
+const StyledLink = styled.a`
+  ${linkStyles}
 `;
 
 const ButtonLinkApp = styled.button`
@@ -154,7 +165,9 @@ export {
   ButtonSmall,
   ButtonTransp,
   ButtonLink,
-  StyledLink,
-  ButtonLinkApp
+  ButtonLinkApp,
+  ButtonStyledLink,
+  ButtonStyledLinkSmall,
+  StyledLink
 };
 export default Button;

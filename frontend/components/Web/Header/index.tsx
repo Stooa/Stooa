@@ -40,6 +40,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
               {!createFishbowl && pathname !== ROUTE_FISHBOWL_CREATE && (
                 <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                   <GAButton
+                    asElement="a"
                     variant="small"
                     className="secondary"
                     event={{
