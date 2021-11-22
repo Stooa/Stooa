@@ -83,7 +83,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   const checkApIConferenceStatus = () => {
     api
-      .get(`${lang}/fishbowl-status/${fid}`)
+      .get(`${lang}/fishbowl-status/${fid}`, {
+        headers: { 'Accept-Language': lang }
+      })
       .then(({ data: { status } }) => {
         dispatch({
           type: 'FISHBOWL_STATUS',

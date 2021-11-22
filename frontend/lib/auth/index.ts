@@ -12,6 +12,7 @@ import cookie from 'js-cookie';
 import api from 'lib/api';
 import { AuthToken } from 'lib/auth/authToken';
 import userRepository from '@/jitsi/User';
+import LocaleCookie from "@/lib/LocaleCookie";
 
 const COOKIE_TOKEN = 'token';
 const COOKIE_REFRESH = 'refresh_token';
@@ -75,7 +76,9 @@ const getRefreshedToken = async (email: string, refresh_token: string, roomName?
   }
 
   return await api
-    .post('refresh-token', params)
+    .post('refresh-token', params, {
+      headers: { 'Accept-Language': LocaleCookie.getCurrentLocaleCookie() }
+    })
     .then(({ data }) => {
       console.log('[STOOA] Token refreshed successfully!');
       setToken(data.token);
@@ -102,7 +105,10 @@ const ping = async (lang: string, slug: string) => {
 
   api
     .post(`${lang}/ping/${slug}`, params, {
-      headers: { Authorization: `${auth ? auth.authorizationString : null}` }
+      headers: {
+        'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
+        Authorization: `${auth ? auth.authorizationString : null}`
+      },
     })
     .catch(err => {
       const { message, response } = err;
@@ -116,7 +122,10 @@ const getParticipants = async (lang: string, slug: string) => {
   const auth = await getAuthToken();
 
   return api.get(`${lang}/fishbowl-participants/${slug}`, {
-    headers: { Authorization: `${auth ? auth.authorizationString : null}` }
+    headers: {
+      'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
+      Authorization: `${auth ? auth.authorizationString : null}`
+    }
   });
 };
 

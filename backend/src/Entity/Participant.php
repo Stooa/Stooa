@@ -32,7 +32,7 @@ use Webmozart\Assert\Assert as MAssert;
  *
  * @Assert\Expression(
  *     "this.getUser() or this.getGuest()",
- *     message="Participant should have a User or a Guest"
+ *     message="user.participant"
  * )
  *
  * @ORM\Entity
