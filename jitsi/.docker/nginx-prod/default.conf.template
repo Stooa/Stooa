@@ -10,8 +10,6 @@ server {
     listen [::]:80;
     server_name localhost;
 
-    ${NGINX_CUSTOM_FRONTEND_CONFIG}
-
     # WebSockets
     location = /xmpp-websocket {
         proxy_pass http://${XMPP_SERVER}:5280/xmpp-websocket;
