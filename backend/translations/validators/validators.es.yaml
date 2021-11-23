@@ -1,0 +1,10 @@
+fishbowl:
+    overlap: Ya existe un Fishbowl creado en ese mismo momento.
+    future: La fecha inicio del fishbowl ya ha pasado.
+
+user:
+    same_user: La contraseña no coincide con su contraseña actual.
+    valid_token: El token no es válido o está caducado.
+    email: Ya existe un usuario con el email introducido.
+    password: La contraseña actual no es correcta
+    participant: Un participant deu tenir un objecte User o Guest

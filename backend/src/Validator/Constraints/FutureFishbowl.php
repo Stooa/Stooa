@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class FutureFishbowl extends Constraint
 {
-    public string $message = 'The fishbowl start date is already past.';
+    public string $message = 'fishbowl.future';
 
     public function getTargets()
     {
