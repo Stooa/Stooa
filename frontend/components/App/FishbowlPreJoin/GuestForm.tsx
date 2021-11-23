@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import * as React from 'react';
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
@@ -32,14 +33,14 @@ const initialValues = {
   name: userRepository.getUserNickname()
 };
 
-const Form = (props: FormikProps<FormValues>) => {
+const Form: React.FC<FormikProps<FormValues>> = ({ isSubmitting }) => {
   const { t } = useTranslation('form');
 
   return (
     <FormikForm>
       <Input label={t('name')} name="name" type="text" />
       <fieldset>
-        <SubmitBtn text={t('button.enterFishbowl')} disabled={props.isSubmitting} />
+        <SubmitBtn text={t('button.enterFishbowl')} disabled={isSubmitting} />
       </fieldset>
     </FormikForm>
   );
@@ -59,14 +60,14 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const Nickname = () => {
+const GuestUserForm: React.FC = () => {
   const [{}, dispatch] = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
 
   const requiredError = t('validation.required');
 
-  const handleOnSubmit = async values => {
+  const handleOnSubmit = async (values): Promise<void> => {
     const { name = '' } = values;
     createGuest({
       variables: {
@@ -108,4 +109,4 @@ const Nickname = () => {
   return <FormValidation required={requiredError} onSubmit={handleOnSubmit} />;
 };
 
-export default Nickname;
+export default GuestUserForm;

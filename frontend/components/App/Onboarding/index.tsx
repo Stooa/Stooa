@@ -204,10 +204,10 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                   </div>
                 </div>
                 <div className="right">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   {item.img1 && <img className="animate img-1" src={item.img1} alt="" />}{' '}
-                  {/* eslint-disable-line @next/next/no-img-element */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   {item.img2 && <img className="animate img-2" src={item.img2} alt="" />}{' '}
-                  {/* eslint-disable-line @next/next/no-img-element */}
                 </div>
               </Slide>
             ))}

@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -22,8 +23,8 @@ import VideoPlaceholder from 'components/App/VideoPlaceholder';
 import ButtonConfig from 'components/App/ButtonConfig';
 import ButtonMic from 'components/App/ButtonMic';
 import ButtonVideo from 'components/App/ButtonVideo';
-import NicknameForm from 'components/App/FishbowlPreJoin/form';
-import AuthUser from 'components/App/FishbowlPreJoin/form-auth';
+import GuestForm from '@/components/App/FishbowlPreJoin/GuestForm';
+import AuthUserForm from '@/components/App/FishbowlPreJoin/AuthUserForm';
 
 import Modal from 'ui/Modal';
 import { ButtonLink } from 'ui/Button';
@@ -34,23 +35,23 @@ import {
   Form,
   VideoContainer
 } from 'components/App/FishbowlPreJoin/styles';
+import { JitsiTrack } from '@/types/jitsi-meet/jitsi-track';
+import { AppButtonConfig } from '@/types/button-config';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from 'contexts/DevicesContext';
 
 const FishbowlPreJoin: React.FC = () => {
-  const localTracks = useRef([]);
+  const localTracks = useRef<JitsiTrack[]>([]);
+  const configButtonRef = useRef<AppButtonConfig>(null);
   const [showPlaceholder, setShowPlaceholder] = useState<boolean>(
     userRepository.getUserVideoMuted()
   );
   const router = useRouter();
   const { t, lang } = useTranslation('common');
   const { isAuthenticated, user } = useAuth();
-
   const { videoDevice } = useDevices();
 
-  const configButtonRef = useRef(null);
-
-  const disposeLocalTracks = () => {
+  const disposeLocalTracks = (): void => {
     for (let index = 0; index < localTracks.current.length; index++) {
       const localTrack = localTracks.current[index];
       const track = localTrack.getTrack();
@@ -64,22 +65,22 @@ const FishbowlPreJoin: React.FC = () => {
     localTracks.current = [];
   };
 
-  const handleParentClick = event => {
-    if (event.target.id !== 'config-button') {
+  const handleParentClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+    if ((event.target as HTMLDivElement).id !== 'config-button') {
       configButtonRef.current.handleShowDevices(false);
     }
   };
 
-  const handleVideo = () => {
+  const handleVideo = (): void => {
     setShowPlaceholder(!showPlaceholder);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
   };
 
   useEffect(() => {
-    const createLocalTracks = async () => {
+    const createLocalTracks = async (): Promise<void> => {
       disposeLocalTracks();
 
       localTracks.current = await LocalTracks.createLocalTracks();
@@ -95,10 +96,10 @@ const FishbowlPreJoin: React.FC = () => {
 
             video
               .play()
-              .then(() => {
+              .then((): void => {
                 console.log('[STOOA] Playing track', localTrack.deviceId);
               })
-              .catch(error => {
+              .catch((error): void => {
                 console.log('[STOOA] Problem with auto play', error);
               });
           }
@@ -142,7 +143,7 @@ const FishbowlPreJoin: React.FC = () => {
           </Devices>
           <Form>
             <h2 className="title-md">{t('fishbowl:nickname.title')}</h2>
-            {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
+            {isAuthenticated ? <AuthUserForm name={user.name} /> : <GuestForm />}
             <ButtonLink className="text-sm" onClick={handleCancel}>
               {t('cancel')}
             </ButtonLink>

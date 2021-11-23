@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import * as React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import userRepository from '@/jitsi/User';
@@ -16,15 +17,15 @@ import { InputStyled } from 'ui/Form';
 import Button from 'ui/Button';
 import FormikForm from 'ui/Form';
 
-type TProps = {
+interface Props {
   name: string;
 };
 
-const AuthUser = ({ name }: TProps) => {
+const AuthUser: React.FC<Props> = ({ name }) => {
   const [{}, dispatch] = useStateValue();
   const { t } = useTranslation('form');
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (): void => {
     dispatch({
       type: 'JOIN_USER',
       prejoin: false

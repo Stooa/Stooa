@@ -10,6 +10,7 @@
     "test": "jest --env=jsdom",
     "test-watch": "jest --watch --env=jsdom",
     "prettify": "prettier --write **/*.{js,ts,tsx}",
+    "lint": "next lint",
     "lint:js": "eslint components contexts types hooks layouts lib pages ui",
     "lint:fix": "eslint components contexts types hooks hocs layouts lib pages types ui --fix"
   },
