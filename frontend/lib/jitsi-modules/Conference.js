@@ -29,7 +29,7 @@ const conferenceRepository = () => {
     if (id === undefined || id === null) {
       id = conference.myUserId();
     }
-    const seat = seatsRepository.join(id, user);
+    const seat = seatsRepository.join(id);
     tracksRepository.createTracks(id, seat, user);
     conference.selectParticipants(seatsRepository.getIds());
 
@@ -221,8 +221,7 @@ const conferenceRepository = () => {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED },
       },
     } = JitsiMeetJS;
-
-    const auth = await getAuthToken(true);
+    const auth = await getAuthToken(true, rawRoomName);
     isModerator = isUserModerator;
 
     setUsername(auth ? auth.user : null);

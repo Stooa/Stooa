@@ -40,7 +40,7 @@ const Header: React.FC = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [wrapperRef, active]);
+  }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AvatarStyled ref={wrapperRef}>

@@ -23,7 +23,7 @@ class ChangePasswordLoggedInput
      * @Groups({"user:write"})
      *
      * @Assert\NotBlank
-     * @SecurityAssert\UserPassword(message = "The current password doesn't match")
+     * @SecurityAssert\UserPassword(message="user.password")
      */
     private ?string $password = null;
 

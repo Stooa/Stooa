@@ -8,7 +8,12 @@
  */
 
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import {
+  FetchResult,
+  MutationFunctionOptions,
+  OperationVariables,
+  useMutation
+} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
@@ -26,7 +31,7 @@ import RedirectLink from 'components/Web/RedirectLink';
 import SubmitBtn from 'components/Web/SubmitBtn';
 import FormError from 'components/Web/Forms/FormError';
 
-interface IFormValues {
+interface FormValues {
   firstname: string;
   lastname: string;
   email: string;
@@ -37,15 +42,17 @@ interface IFormValues {
   isSubmitting: boolean;
 }
 
-interface IFormProps {
+interface FormProps {
   required: string;
   email: string;
   terms: string;
   minlength: string;
   locale: string;
   url: string;
-  createUser: any;
-  onSubmit: any;
+  createUser: (
+    options?: MutationFunctionOptions<unknown, OperationVariables>
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  onSubmit: (res: unknown, values?: unknown) => Promise<void>;
 }
 
 const initialValues = {
@@ -59,7 +66,7 @@ const initialValues = {
   isSubmitting: false
 };
 
-const Form = (props: FormikProps<IFormValues>) => {
+const Form = (props: FormikProps<FormValues>) => {
   const { t, lang } = useTranslation('form');
   const privacyLink =
     lang === i18nConfig.defaultLocale ? ROUTE_PRIVACY_POLICY : `/${lang}${ROUTE_PRIVACY_POLICY}`;
@@ -113,7 +120,7 @@ const Form = (props: FormikProps<IFormValues>) => {
   );
 };
 
-const FormValidation = withFormik<IFormProps, IFormValues>({
+const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({

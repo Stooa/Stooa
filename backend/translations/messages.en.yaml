@@ -38,3 +38,6 @@ emails:
             es: Spanish
             ca: Catalan
             en: English
+
+login:
+    failure: Invalid credentials

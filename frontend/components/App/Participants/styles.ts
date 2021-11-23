@@ -70,15 +70,15 @@ const ParticipantsDrawer = styled.div`
       }
     }
 
-    &.participant-list--speaking .participant .name {
-      max-width: ${rems(142)};
+    .participant .name {
+      display: inline-block;
     }
   }
 
   .participant {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 4fr minmax(70px, 1fr);
+    column-gap: ${space(2)};
     margin: ${space(2)} 0;
 
     &:last-child {
@@ -91,11 +91,10 @@ const ParticipantsDrawer = styled.div`
 
     .roles,
     .social {
-      min-width: ${rems(64)};
+      justify-self: end;
     }
 
     .name {
-      max-width: ${rems(160)};
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -127,7 +126,8 @@ const ParticipantsDrawer = styled.div`
     .info {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      width: 100%;
+      overflow: hidden;
 
       *:not(:last-child) {
         margin-right: ${space()};

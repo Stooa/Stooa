@@ -7,10 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import Input, { IInputProps } from 'components/Common/Fields/Input';
+import React from 'react';
 
-const Textarea: React.FC<IInputProps> = props => (
-  <Input className="textarea" as="textarea" {...props} />
+import { Input } from '@/types/input';
+import InputField from 'components/Common/Fields/Input';
+
+const Textarea: React.FC<Input> = props => (
+  <InputField className="textarea" as="textarea" {...props} />
 );
 
 export default Textarea;

@@ -19,9 +19,9 @@ import Mic from 'ui/svg/mic.svg';
 import MicMuted from 'ui/svg/mic-muted.svg';
 import Video from 'ui/svg/video.svg';
 import VideoMuted from 'ui/svg/video-muted.svg';
-import { IParticipant } from 'components/App/Participants';
+import { Participant } from '@/types/participant';
 
-const Participant: React.FC<{ participant: IParticipant; speaker?: boolean }> = ({
+const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
   speaker = false
 }) => {
@@ -94,4 +94,4 @@ const Participant: React.FC<{ participant: IParticipant; speaker?: boolean }> = 
   );
 };
 
-export default Participant;
+export default ParticipantComponent;

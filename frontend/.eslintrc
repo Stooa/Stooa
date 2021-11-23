@@ -33,7 +33,8 @@
           ["@/lib]", "./lib]"],
           ["@/graphql]", "./lib/gql]"],
           ["@/pages]", "./pages]"],
-          ["@/components", "./components"]
+          ["@/components", "./components"],
+          ["@/types", "./types"]
       ]
     }
   }

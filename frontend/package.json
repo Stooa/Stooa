@@ -8,7 +8,10 @@
     "build-start": "next build && next start",
     "design-tokens": "design-tokens",
     "test": "jest --env=jsdom",
-    "test-watch": "jest --watch --env=jsdom"
+    "test-watch": "jest --watch --env=jsdom",
+    "prettify": "prettier --write **/*.{js,ts,tsx}",
+    "lint:js": "eslint components contexts types hooks layouts lib pages ui",
+    "lint:fix": "eslint components contexts types hooks hocs layouts lib pages types ui --fix"
   },
   "dependencies": {
     "@apollo/client": "3.3.18",

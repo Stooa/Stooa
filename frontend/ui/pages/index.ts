@@ -100,15 +100,15 @@ const Billboard = styled.div`
 `;
 
 const Description = styled.div<{ center?: boolean }>`
-  margin-top: ${space(2)};
+  margin: ${space(2)} 0;
   text-align: left;
 
   a {
-     text-decoration: underline;
+    text-decoration: underline;
   }
 
   ${media.min('tablet')`
-    margin: ${({ center }) => (center ? `${space(2)} auto 0` : `${space(2)} 0`)};
+    margin: ${({ center }) => (center ? `${space(2)} auto` : `${space(2)} 0`)};
     max-width: ${rems(700)};
     text-align: ${({ center }) => (center ? 'center' : 'left')};
   `}
@@ -300,10 +300,6 @@ const Banner = styled.div`
   position: relative;
   text-align: center;
 
-  a {
-    margin-top: ${space(5)};
-  }
-
   #animated-banner-morph {
     height: ${rems(160)};
     position: absolute;
@@ -323,7 +319,7 @@ const Banner = styled.div`
     padding: ${space(15)} ${space(2)};
 
     .text-lg {
-      margin: 0 auto;
+      margin: 0 auto ${space(5)};
       max-width: ${rems(550)};
     }
   `}

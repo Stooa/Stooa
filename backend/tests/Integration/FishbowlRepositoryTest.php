@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Integration;
+namespace App\Tests\Integration;
 
 use App\Entity\Fishbowl;
 use App\Factory\FishbowlFactory;

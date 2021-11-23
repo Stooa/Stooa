@@ -7,23 +7,23 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { GAEvent } from 'lib/analytics';
+import { pushEventDataLayer } from 'lib/analytics';
 import userRepository from '@/jitsi/User';
 import MicMutedIcon from 'ui/svg/mic-muted.svg';
 import MicIcon from 'ui/svg/mic.svg';
 import Button from 'components/App/ButtonMic/styles';
 
-interface IProps {
+interface Props {
   joined: boolean;
   disabled: boolean;
   unlabeled?: boolean;
   handleMic?: (value?: boolean) => void;
 }
 
-const ButtonMic: React.FC<IProps> = ({ handleMic, joined, disabled, unlabeled }) => {
+const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) => {
   const [active, setActive] = useState(true);
   const [muted, setMuted] = useState(userRepository.getUserAudioMuted());
   const { t } = useTranslation('fishbowl');
@@ -32,7 +32,7 @@ const ButtonMic: React.FC<IProps> = ({ handleMic, joined, disabled, unlabeled })
     const currentMutedState = muted;
     setActive(false);
 
-    GAEvent({
+    pushEventDataLayer({
       action: muted ? 'Unmute' : 'Mute',
       category: 'Buttons',
       label: window.location.href

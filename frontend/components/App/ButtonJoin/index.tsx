@@ -7,27 +7,28 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { GAEvent } from 'lib/analytics';
-import userRepository, { UserInterface } from '@/jitsi/User';
+import { User } from '@/types/user';
+import { pushEventDataLayer } from 'lib/analytics';
+import userRepository from '@/jitsi/User';
 
 import ArrowDownIcon from 'ui/svg/arrow-down.svg';
 import ArrowUpIcon from 'ui/svg/arrow-up.svg';
 import Button from 'components/App/ButtonJoin/styles';
 
-interface IProps {
-  join: (user: UserInterface) => void;
+interface Props {
+  join: (user: User) => void;
   leave: () => void;
   joined: boolean;
   disabled: boolean;
 }
 
-const ButtonJoin: React.FC<IProps> = ({ joined, join, leave, disabled, children }) => {
+const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, children }) => {
   const [active, setActive] = useState(true);
 
   const handleJoinClick = async () => {
-    GAEvent({
+    pushEventDataLayer({
       action: joined ? 'Leave' : 'Join',
       category: 'Buttons',
       label: window.location.href

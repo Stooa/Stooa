@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class OverlapFishbowl extends Constraint
 {
-    public string $message = 'The fishbowl gets overlapped with another one.';
+    public string $message = 'fishbowl.overlap';
 
     public function getTargets()
     {

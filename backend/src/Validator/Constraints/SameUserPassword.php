@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class SameUserPassword extends Constraint
 {
-    public string $message = 'The password does not match your current password';
+    public string $message = 'user.same';
 
     public function getTargets()
     {

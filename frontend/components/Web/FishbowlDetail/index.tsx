@@ -11,16 +11,17 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
+import { Fishbowl } from '@/types/api-platform';
 import { useStateValue } from 'contexts/AppContext';
 import { formatDateTime } from 'lib/helpers';
 import CopyUrl from 'components/Common/CopyUrl';
 import { Container, TimeLeft } from 'ui/pages/fishbowl-detail';
 
-interface IProps {
-  data: any;
+interface Props {
+  data: Fishbowl;
 }
 
-const FishbowlDetail: React.FC<IProps> = ({ data }) => {
+const FishbowlDetail: React.FC<Props> = ({ data }) => {
   const [{ fishbowlReady }] = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);

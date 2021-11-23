@@ -39,6 +39,8 @@ let initConnection = false;
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
+  const [apiInterval, setApiInterval] = useState<number>(null);
+  const [timeUpInterval, setTimeUpInterval] = useState<number>(null);
   const [conferenceReady, setConferenceReady] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
@@ -47,9 +49,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
-
-  let apiInterval: number;
-  let timeUpInterval: number;
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
@@ -84,7 +83,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   const checkApIConferenceStatus = () => {
     api
-      .get(`${lang}/fishbowl-status/${fid}`)
+      .get(`${lang}/fishbowl-status/${fid}`, {
+        headers: { 'Accept-Language': lang }
+      })
       .then(({ data: { status } }) => {
         dispatch({
           type: 'FISHBOWL_STATUS',
@@ -156,19 +157,19 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.removeEventListener('mousedown', initialInteraction);
       window.removeEventListener('keydown', initialInteraction);
     };
-  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]);
+  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     checkIsTimeUp();
 
-    timeUpInterval = window.setInterval(checkIsTimeUp, 1500);
-    apiInterval = window.setInterval(checkApIConferenceStatus, 6000);
+    setTimeUpInterval(window.setInterval(checkIsTimeUp, 1500));
+    setApiInterval(window.setInterval(checkApIConferenceStatus, 6000));
 
     return () => {
       window.clearInterval(timeUpInterval);
       window.clearInterval(apiInterval);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 

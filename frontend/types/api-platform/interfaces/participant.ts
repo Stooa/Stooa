@@ -7,12 +7,10 @@
  * file that was distributed with this source code.
  */
 
-declare global {
-  let JitsiMeetJS: any;
-
-  interface Window {
-    dataLayer: Record<string, any>[];
-  }
+export interface Participant {
+  "@id"?: string;
+  readonly user?: string;
+  readonly guest?: string;
+  readonly lastPing?: Date;
+  readonly fishbowl?: string;
 }
-
-export {};
