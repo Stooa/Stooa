@@ -15,11 +15,11 @@ import { ROUTE_HOME, ROUTE_SIGN_IN, ROUTE_REGISTER, ROUTE_FISHBOWL_CREATE } from
 import { useAuth } from 'contexts/AuthContext';
 import { ButtonSmall, ButtonTransp } from 'ui/Button';
 import ArrowRight from 'ui/svg/arrow-right.svg';
-import GAButton from 'components/Common/GAButton';
 import Logo from 'components/Common/Logo';
 import Avatar from 'components/Web/Avatar';
 import RedirectLink from 'components/Web/RedirectLink';
 import Navigation from 'components/Web/Header/styles';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 interface Props {
   navigation?: boolean;
@@ -39,18 +39,18 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
             <>
               {!createFishbowl && pathname !== ROUTE_FISHBOWL_CREATE && (
                 <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
-                  <GAButton
-                    asElement="a"
-                    variant="small"
+                  <ButtonSmall
                     className="secondary"
-                    event={{
-                      category: 'Create Fishbowl',
-                      action: 'Header',
-                      label: window.location.href
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Create Fishbowl',
+                        action: 'Header',
+                        label: window.location.href
+                      });
                     }}>
                     <span>{t('createEvent')}</span>
                     <ArrowRight />
-                  </GAButton>
+                  </ButtonSmall>
                 </RedirectLink>
               )}
               <Avatar />

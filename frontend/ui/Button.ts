@@ -149,10 +149,6 @@ const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
   padding: ${space(1.1)} ${space(3)} ${space(0.8)};
 `;
 
-const StyledLink = styled.a`
-  ${linkStyles}
-`;
-
 const ButtonLinkApp = styled.button`
   ${APP_MD}
   ${linkStyles}
@@ -167,7 +163,6 @@ export {
   ButtonLink,
   ButtonLinkApp,
   ButtonStyledLink,
-  ButtonStyledLinkSmall,
-  StyledLink
+  ButtonStyledLinkSmall
 };
 export default Button;

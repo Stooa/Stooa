@@ -17,7 +17,6 @@ import lottie from 'lottie-web';
 import { TweenMax } from 'gsap';
 
 import { ROUTE_FISHBOWL_CREATE } from 'app.config';
-import GAButton from 'components/Common/GAButton';
 import Layout from 'layouts/Home';
 import { Billboard, Content, Description, Row, Sections, Wrapper } from 'ui/pages';
 
@@ -30,6 +29,8 @@ import BillboardMobAnimPath from 'ui/animations/home/billboard-mobile.json';
 import MorphBillAnimPath from 'ui/animations/home/billboard-morph.json';
 import Morph2BillAnimPath from 'ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from 'ui/animations/home/keybenefit2-morph.json';
+import Button, { ButtonStyledLink } from 'ui/Button';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const Benefits = dynamic(import('components/Web/HomeSections/Benefits'), {
   loading: () => <div />
@@ -128,17 +129,18 @@ const Home = () => {
           {t('description')}
         </Description>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-          <GAButton
-            asElement="a"
+          <ButtonStyledLink
             className="animate-item cta-create-fishbowl"
-            event={{
-              category: 'Create Fishbowl',
-              action: 'Billboard',
-              label: 'Home'
+            onClick={() => {
+              pushEventDataLayer({
+                category: 'Create Fishbowl',
+                action: 'Billboard',
+                label: 'Home'
+              });
             }}>
             <span>{t('cta')}</span>
             <ArrowRight />
-          </GAButton>
+          </ButtonStyledLink>
         </Link>
         <div id="animated-billboard-morph2"></div>
       </Billboard>
