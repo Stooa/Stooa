@@ -63,7 +63,6 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
               target="_blank"
               rel="noreferrer"
               className="icon">
-              {' '}
               <Twitter />
             </a>
           </Link>
