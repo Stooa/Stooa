@@ -11,6 +11,8 @@ import React from 'react';
 import Link from 'next/link';
 
 import { isCurrentGuest } from 'lib/auth';
+import { pushEventDataLayer } from '@/lib/analytics';
+
 import Linkedin from 'ui/svg/linkedin.svg';
 import Twitter from 'ui/svg/twitter.svg';
 import Mic from 'ui/svg/mic.svg';
@@ -18,7 +20,6 @@ import MicMuted from 'ui/svg/mic-muted.svg';
 import Video from 'ui/svg/video.svg';
 import VideoMuted from 'ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
-import { pushEventDataLayer } from '@/lib/analytics';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
@@ -84,8 +85,6 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
               target="_blank"
               rel="noreferrer"
               className="icon">
-              {' '}
-              index
               <Linkedin />
             </a>
           </Link>

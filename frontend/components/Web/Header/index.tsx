@@ -11,6 +11,8 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import { pushEventDataLayer } from '@/lib/analytics';
+
 import { ROUTE_HOME, ROUTE_SIGN_IN, ROUTE_REGISTER, ROUTE_FISHBOWL_CREATE } from 'app.config';
 import { useAuth } from 'contexts/AuthContext';
 import { ButtonSmall, ButtonTransp } from 'ui/Button';
@@ -19,7 +21,6 @@ import Logo from 'components/Common/Logo';
 import Avatar from 'components/Web/Avatar';
 import RedirectLink from 'components/Web/RedirectLink';
 import Navigation from 'components/Web/Header/styles';
-import { pushEventDataLayer } from '@/lib/analytics';
 
 interface Props {
   navigation?: boolean;
