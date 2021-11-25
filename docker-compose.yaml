@@ -229,6 +229,7 @@ services:
             - ./jitsi/.docker/nginx-dev/default.conf.template:/etc/nginx/templates/default.conf.template
             - ./.certs:/usr/app/.certs:ro,cached
         environment:
+            - NGINX_CUSTOM_JITSI_CORS_URL
             - XMPP_SERVER
             - XMPP_DOMAIN
         networks:
