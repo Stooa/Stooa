@@ -1,0 +1,9 @@
+{
+    "title": "Récupérer votre mot de passe",
+    "description": "Saisissez votre adresse électronique et nous vous enverrons des instructions pour générer un nouveau mot de passe.",
+    "email": "Courriel",
+    "sent": "Nous venons de vous envoyer un courriel contenant les instructions pour récupérer votre mot de passe.",
+    "placeholder": "Courriel",
+    "button": "Envoyer les instructions",
+    "back": "Retour à Connexion"
+}
