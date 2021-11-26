@@ -12,7 +12,8 @@
     "languages": {
         "ca": "catalan",
         "en": "anglais",
-        "es": "espagnol"
+        "es": "espagnol",
+        "fr": "français"
     },
     "conductCode": "Code de conduite",
     "githubIssues": "Problèmes Github",
