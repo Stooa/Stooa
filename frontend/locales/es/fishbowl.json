@@ -15,7 +15,8 @@
         "duration": "Duración",
         "description": "Descripción",
         "startDate": "Fecha de inicio",
-        "startTime": "Hora de inicio"
+        "startTime": "Hora de inicio",
+        "language": "Idioma"
     },
     "months": {
         "01": "Enero",

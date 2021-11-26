@@ -1,0 +1,45 @@
+{
+    "fishbowl": {
+        "topic": "Sujet de conversation",
+        "selectDay": "Sélectionnez le jour",
+        "selectLanguage": "Sélectionnez la langue",
+        "day": "Date",
+        "time": "Commence à",
+        "selectTime": "Sélectionner l'heure",
+        "hours": "h",
+        "minutes": "min",
+        "duration": "Durée",
+        "selectDuration": "Sélectionnez la durée",
+        "description": "Description (facultatif)",
+        "timezone": "Fuseau horaire",
+        "selectTimeZone": "Sélectionnez le fuseau horaire"
+    },
+    "button": {
+        "createAccount": "Créez-en un !",
+        "createFishbowl": "Créer un fishbowl",
+        "recoverPassword": "Envoyer le lien de réinitialisation",
+        "save": "Enregistrer",
+        "login": "Se connecter",
+        "register": "Suivant",
+        "changePassword": "Changer le mot de passe",
+        "modifyFishbowl": "Modifier le fishbowl",
+        "enterFishbowl": "Entrer"
+    },
+    "firstname": "Prénom",
+    "lastname": "Nom de famille",
+    "password": "Mot de passe",
+    "email": "Courriel",
+    "noAccount": "Pas de compte ?",
+    "name": "Votre nom",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "validation": {
+        "passwordLength": "Le mot de passe doit comporter 6 caractères ou plus",
+        "email": "Adresse électronique invalide",
+        "required": "Ce champ est obligatoire",
+        "date": "Le format de la date est invalide : jj/mm/aaaa",
+        "terms": "Vous devez accepter les termes et conditions",
+        "url": "Ce n'est pas une URL valide",
+        "twitter": "Le nom d'utilisateur Twitter doit commencer par @",
+        "equalPassword": "Les deux mots de passe doivent correspondre"
+    }
+}
