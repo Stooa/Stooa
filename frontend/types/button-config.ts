@@ -14,4 +14,4 @@ export interface AppButtonConfig {
   handleAudioOutput: (event: React.MouseEvent) => void;
   handleVideoInput: (event: React.MouseEvent) => void;
   handleShowDevices: (shouldShowDevices?: boolean) => void;
-};
+}

@@ -11,8 +11,8 @@ import { gql } from '@apollo/client';
 
 const RECOVER_PASSWORD = gql`
   mutation CreateResetPassword($input: createResetPasswordInput!) {
-     createResetPassword(input: $input) {
-       resetPassword {
+    createResetPassword(input: $input) {
+      resetPassword {
         email
       }
     }
@@ -21,8 +21,8 @@ const RECOVER_PASSWORD = gql`
 
 const RESET_PASSWORD = gql`
   mutation ChangePassword($input: changePasswordUserInput!) {
-     changePasswordUser(input: $input) {
-       user {
+    changePasswordUser(input: $input) {
+      user {
         email
       }
     }
@@ -31,8 +31,8 @@ const RESET_PASSWORD = gql`
 
 const RESET_LOGGED_PASSWORD = gql`
   mutation ChangePasswordLogged($input: changePasswordLoggedUserInput!) {
-     changePasswordLoggedUser(input: $input) {
-       user {
+    changePasswordLoggedUser(input: $input) {
+      user {
         email
       }
     }

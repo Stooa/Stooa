@@ -19,7 +19,7 @@ import FormikForm from 'ui/Form';
 
 interface Props {
   name: string;
-};
+}
 
 const AuthUser: React.FC<Props> = ({ name }) => {
   const [{}, dispatch] = useStateValue();

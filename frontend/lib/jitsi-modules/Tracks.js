@@ -14,11 +14,14 @@ const tracksRepository = () => {
   let tracks = [];
 
   const _playTrackHtml = trackHtml => {
-    trackHtml.play().then(() => {
-      console.log('[STOOA] Playing track', trackHtml.id);
-    }).catch(error => {
-      console.log('[STOOA] Problem with auto play', error);
-    });
+    trackHtml
+      .play()
+      .then(() => {
+        console.log('[STOOA] Playing track', trackHtml.id);
+      })
+      .catch(error => {
+        console.log('[STOOA] Problem with auto play', error);
+      });
   };
 
   const _getTrackHtml = track => {
@@ -270,7 +273,7 @@ const tracksRepository = () => {
     removeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
-    syncSessionStorageTrack,
+    syncSessionStorageTrack
   };
 };
 

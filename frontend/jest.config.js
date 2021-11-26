@@ -26,9 +26,9 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/__setups__/fileTransformer.js',
+      '<rootDir>/__setups__/fileTransformer.js'
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['./__setups__/jest.setup.js', './__setups__/canvas.js'],
+  setupFilesAfterEnv: ['./__setups__/jest.setup.js', './__setups__/canvas.js']
 };

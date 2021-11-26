@@ -9,15 +9,15 @@
 
 export interface JitsiTrack {
   deviceId: string;
-  attach: (container: HTMLAudioElement|HTMLVideoElement) => void;
-  detach: (container: HTMLAudioElement|HTMLVideoElement) => void;
+  attach: (container: HTMLAudioElement | HTMLVideoElement) => void;
+  detach: (container: HTMLAudioElement | HTMLVideoElement) => void;
   dispose: () => Promise<void>;
-  getId: () => string|null;
-  getMSID: () => string|null;
+  getId: () => string | null;
+  getMSID: () => string | null;
   getOriginalStream: () => MediaStream;
-  getStreamId: () => string|null;
+  getStreamId: () => string | null;
   getTrack: () => MediaStreamTrack;
-  getTrackId: () => string|null;
+  getTrackId: () => string | null;
   getTrackLabel: () => string;
   getType: () => string;
   getUsageLabel: () => string;

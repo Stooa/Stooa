@@ -12,7 +12,7 @@ import cookie from 'js-cookie';
 import api from 'lib/api';
 import { AuthToken } from 'lib/auth/authToken';
 import userRepository from '@/jitsi/User';
-import LocaleCookie from "@/lib/LocaleCookie";
+import LocaleCookie from '@/lib/LocaleCookie';
 
 const COOKIE_TOKEN = 'token';
 const COOKIE_REFRESH = 'refresh_token';
@@ -107,8 +107,8 @@ const ping = async (lang: string, slug: string) => {
     .post(`${lang}/ping/${slug}`, params, {
       headers: {
         'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
-        Authorization: `${auth ? auth.authorizationString : null}`
-      },
+        'Authorization': `${auth ? auth.authorizationString : null}`
+      }
     })
     .catch(err => {
       const { message, response } = err;
@@ -124,12 +124,12 @@ const getParticipants = async (lang: string, slug: string) => {
   return api.get(`${lang}/fishbowl-participants/${slug}`, {
     headers: {
       'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
-      Authorization: `${auth ? auth.authorizationString : null}`
+      'Authorization': `${auth ? auth.authorizationString : null}`
     }
   });
 };
 
-const isCurrentGuest = (guestId: string|null) => {
+const isCurrentGuest = (guestId: string | null) => {
   return guestId !== null && userRepository.getUserGuestId() === guestId;
 };
 
