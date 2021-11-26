@@ -38,4 +38,5 @@ emails:
         info_title: Titre
         info_start_time: Heure de début
         delete: 'Si vous souhaitez supprimer cet évènement, veuillez nous envoyer un courriel <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id : %id%">ici</a>'
-login: {}
+login:
+    failure: Les informations d'identification invalides
