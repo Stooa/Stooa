@@ -21,7 +21,7 @@ interface Props {
   name: string;
 }
 
-const AuthUser: React.FC<Props> = ({ name }) => {
+const AuthUserForm: React.FC<Props> = ({ name }) => {
   const [{}, dispatch] = useStateValue();
   const { t } = useTranslation('form');
 
@@ -49,4 +49,4 @@ const AuthUser: React.FC<Props> = ({ name }) => {
   );
 };
 
-export default AuthUser;
+export default AuthUserForm;
