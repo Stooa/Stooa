@@ -102,6 +102,6 @@ class LoginFunctionalTest extends ApiTestCase
         yield ['es', 'Credenciales no válidas'];
         yield ['en', 'Invalid credentials'];
         yield ['ca', 'Credencials no vàlides'];
-        yield ['fr', 'Les informations d\'identification invalides'];
+        yield ['fr', 'Informations d\'identification invalides.'];
     }
 }
