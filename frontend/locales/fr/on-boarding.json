@@ -1,0 +1,26 @@
+{
+    "new": {
+        "title": "Vous êtes novice ? Ne vous inquiétez pas !",
+        "text": "<p>Dans un fishbowl, il y a 5 sièges disponibles où se déroule la conversation. S'il y a un siège libre, vous pouvez rejoindre la conversation à tout moment. Une seule règle : <strong>Il doit toujours y avoir un siège disponible.</strong></p><p>Si les 5 sièges sont occupés et que vous avez déjà participé, laissez votre siège libre pour que les autres puissent également contribuer.</p>"
+    },
+    "hostIntroduction": {
+        "title": "Que se passe-t-il maintenant ?",
+        "preTitle": "Introduction de l’hôte",
+        "participantText": "<p>Lorsque le fishbowl commence, <strong>l’hôte peut faire une introduction.</strong>Après quoi, tous les participants auront la permission de rejoindre la conversation.</p>",
+        "hostText": "<p>Lorsque vous démarrez le fishbowl, <strong>vous pouvez commencer par faire une introduction.</strong>La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <strong>n’oubliez pas d’autoriser les participants à rejoindre la conversation.</strong></p>"
+    },
+    "skip": "Aller directement au fishbowl",
+    "done": "C’est tout bon !",
+    "appControls": {
+        "title": "Comment puis-je interagir ?",
+        "preTitle": "Contrôles intégrés à l’appli",
+        "text": "<div><ul><li><strong>Rejoignez la conversation</strong> et <strong>quittez la conversation</strong> à l’aide des boutons vert et rouge.</li><li>Contrôlez le microphone à l’aide du bouton <strong>Activer/Désactiver le son</strong>.</li><li>Connectez-vous <strong>avec les participants</strong> en accédant à leurs profils Linkedin et Twitter (s’ils les ont fournis).</li></ul></div>"
+    },
+    "end": {
+        "preTitle": "La fin du fishbowl",
+        "title": "Toutes les bonnes choses ont une fin…",
+        "hostText": "<p>Vous verrez une notification en haut à droite quand <strong>il restera 1 minute</strong> pour que le fishbowl se termine. Lorsque ceci se produit, <strong>l’accès pour rejoindre la conversation sera fermé</strong> pour tous les participants, sauf pour vous. Il est temps de fermer le fishbowl et de dire au revoir aux participants.</p>",
+        "participantText": "<p>Vous remarquerez en haut à droite quand il restera <strong>1 minute</strong> au fishbowl. Une fois que c’est le cas, l’<strong>accès pour rejoindre la conversation sera fermé à tous les participants</strong> sauf pour l’hôte.</p>"
+    },
+    "tooltip": "👆🏼 Vous pouvez consulter le guide d’introduction ici à tout moment."
+}
