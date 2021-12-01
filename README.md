@@ -34,7 +34,7 @@ We love the open source community, that's why your contributions and feeback are
 
 Project translated with [Weblate](https://hosted.weblate.org/projects/).
 <br/>
-Feel free to contribute or view existing translations [at the existing hosted project by Weblate](https://hosted.weblate.org/engage/stooa/). Or follow our [documentation on how to translate Stooa](https://docs.stooa.com/documentation/contributing/translations).
+Feel free to contribute or check existing translations [in the project hosted by Weblate](https://hosted.weblate.org/engage/stooa/). You can follow our [documentation on how to translate Stooa](https://docs.stooa.com/documentation/contributing/translations).
 
 ## Give feedback
 
