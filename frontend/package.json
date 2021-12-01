@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@apollo/client": "3.3.18",
-    "@svgr/webpack": "5.5.0",
     "@types/node": "15.3.0",
     "@types/react": "17.0.5",
     "@types/styled-components": "5.1.9",
@@ -49,6 +48,7 @@
   "devDependencies": {
     "@runroom/design-tokens": "0.9.3",
     "@runroom/npm-scripts": "1.0.8",
+    "@svgr/webpack": "^6.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.0.2",
