@@ -28,6 +28,7 @@ emails:
             es: espagnol
             ca: catalan
             en: anglais
+            fr: française
         subject: Bonjour %name% ! Vous avez créé un nouveau fishbowl
         title: Bien joué !
         info_duration: Durée
