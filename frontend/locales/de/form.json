@@ -1,0 +1,43 @@
+{
+    "validation": {
+        "terms": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren",
+        "email": "Ungültige E-Mail-Adresse",
+        "twitter": "Der Twitter-Benutzername sollte mit @ beginnen",
+        "required": "Dieses Feld wird benötigt",
+        "date": "Das Format des Datums ist ungültig: tt.mm.jjjj",
+        "passwordLength": "Das Passwort muss mindestens 6 Zeichen lang sein",
+        "url": "Dies ist keine gültige URL",
+        "equalPassword": "Die beiden Passwörter müssen gleich sein"
+    },
+    "fishbowl": {
+        "selectLanguage": "Wählen Sie eine Sprache",
+        "hours": "St.",
+        "minutes": "Min.",
+        "duration": "Dauer",
+        "selectDuration": "Wählen Sie die Dauer",
+        "description": "Beschreibung (optional)",
+        "timezone": "Zeitzone",
+        "selectTimeZone": "Wählen Sie eine Zeitzone aus",
+        "day": "Datum",
+        "selectTime": "Wählen Sie eine Uhrzeit aus",
+        "selectDay": "Wählen Sie ein Tag aus",
+        "topic": "Gesprächsthema",
+        "time": "Beginnt um"
+    },
+    "button": {
+        "login": "Anmelden",
+        "register": "Nächste",
+        "createAccount": "Erstellen Sie eines!",
+        "recoverPassword": "Link zum Zurücksetzen senden",
+        "enterFishbowl": "Eintreten",
+        "save": "Speichern",
+        "changePassword": "Passwort ändern"
+    },
+    "name": "Ihr Name",
+    "lastname": "Nachname",
+    "email": "E-Mail",
+    "haveAccount": "Sie haben bereits ein Konto?",
+    "firstname": "Vorname",
+    "password": "Passwort",
+    "noAccount": "Kein Konto?"
+}

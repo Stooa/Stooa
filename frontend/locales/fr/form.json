@@ -36,7 +36,7 @@
         "passwordLength": "Le mot de passe doit comporter 6 caractères ou plus",
         "email": "Adresse électronique invalide",
         "required": "Ce champ est obligatoire",
-        "date": "Le format de la date est invalide : jj/mm/aaaa",
+        "date": "Le format de la date est invalide : jj/mm/aaaa",
         "terms": "Vous devez accepter les termes et conditions",
         "url": "Ce n'est pas une URL valide",
         "twitter": "Le nom d'utilisateur Twitter doit commencer par @",

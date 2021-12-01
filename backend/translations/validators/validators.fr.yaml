@@ -12,5 +12,5 @@ user:
     same_user: Le mot de passe ne correspond pas à votre mot de passe actuel.
     participant: Le participant doit avoir un Utilisateur ou un Invité
 fishbowl:
-    overlap: Le fishbowl chevauche un autre.
+    overlap: Le fishbowl en chevauche un autre.
     future: La date de début de l'opération est déjà passée.
