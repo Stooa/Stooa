@@ -16,7 +16,7 @@ emails:
     reset_password_email:
         title: 'Bonjour %name% !'
         description: 'Pour réinitialiser votre mot de passe, veuillez consulter le lien suivant :'
-        subject: Bonjour %nom% ! Nous avons reçu une demande de réinitialisation de votre mot de passe Stooa
+        subject: Bonjour %name% ! Nous avons reçu une demande de réinitialisation de votre mot de passe Stooa
         expire_text: N’oubliez pas que ce lien expirera dans 1 heure.
         button_text: Réinitialiser votre mot de passe
         information_text: Si vous ignorez ce message, votre mot de passe ne sera pas modifié.<br>Si vous n’avez pas demandé la réinitialisation de votre mot de passe, <a href="mailto:%email%">faites-le-nous savoir</a>.
