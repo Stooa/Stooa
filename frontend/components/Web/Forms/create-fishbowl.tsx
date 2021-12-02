@@ -17,16 +17,16 @@ import countriesAndTimezones from 'countries-and-timezones';
 
 import { ROUTE_FISHBOWL_DETAIL } from 'app.config';
 import { locales } from 'i18n';
-import { useAuth } from 'contexts/AuthContext';
-import { CREATE_FISHBOWL } from 'lib/gql/Fishbowl';
-import { formatDateTime } from 'lib/helpers';
-import FormikForm from 'ui/Form';
-import Input from 'components/Common/Fields/Input';
-import Textarea from 'components/Common/Fields/Textarea';
-import Select from 'components/Common/Fields/Select';
-import DatePicker from 'components/Common/Fields/DatePicker';
-import SubmitBtn from 'components/Web/SubmitBtn';
-import FormError from 'components/Web/Forms/FormError';
+import { useAuth } from '@/contexts/AuthContext';
+import { CREATE_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { formatDateTime } from '@/lib/helpers';
+import FormikForm from '@/ui/Form';
+import Input from '@/components/Common/Fields/Input';
+import Textarea from '@/components/Common/Fields/Textarea';
+import Select from '@/components/Common/Fields/Select';
+import DatePicker from '@/components/Common/Fields/DatePicker';
+import SubmitBtn from '@/components/Web/SubmitBtn';
+import FormError from '@/components/Web/Forms/FormError';
 
 type createFishbowlAttrs = {
   variables: {

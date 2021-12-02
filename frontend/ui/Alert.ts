@@ -9,7 +9,7 @@
 
 import styled, { css } from 'styled-components';
 
-import { space } from 'ui/helpers';
+import { space } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   COLOR_GREEN_100,
@@ -24,8 +24,8 @@ import {
   COLOR_RED_200,
   COLOR_RED_600,
   COLOR_YELLOW_100
-} from 'ui/settings';
-import { TEXT_SM, TEXT_LG } from 'ui/Texts';
+} from '@/ui/settings';
+import { TEXT_SM, TEXT_LG } from '@/ui/Texts';
 
 const ERROR_STYLES = css`
   background: ${COLOR_RED_100};

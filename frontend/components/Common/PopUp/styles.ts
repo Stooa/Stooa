@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR_NEUTRO_900, COLOR_NEUTRO_100 } from 'ui/settings';
-import { hexToRgb, space, rems } from 'ui/helpers';
+import { BORDER_RADIUS, COLOR_NEUTRO_900, COLOR_NEUTRO_100 } from '@/ui/settings';
+import { hexToRgb, space, rems } from '@/ui/helpers';
 
 const bg = hexToRgb(COLOR_NEUTRO_900);
 

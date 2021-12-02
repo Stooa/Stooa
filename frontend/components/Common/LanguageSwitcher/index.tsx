@@ -11,12 +11,12 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import setLanguage from 'next-translate/setLanguage';
 
-import usePersistLocaleCookie from 'hooks/usePersistLocaleCookie';
-import { pushEventDataLayer } from 'lib/analytics';
+import usePersistLocaleCookie from '@/hooks/usePersistLocaleCookie';
+import { pushEventDataLayer } from '@/lib/analytics';
 import i18nConfig from 'i18n';
-import ChevronDown from 'ui/svg/chevron-down.svg';
+import ChevronDown from '@/ui/svg/chevron-down.svg';
 
-import Languages from 'components/Common/LanguageSwitcher/styles';
+import Languages from '@/components/Common/LanguageSwitcher/styles';
 const { locales } = i18nConfig;
 
 const LanguageSwitcher = () => {

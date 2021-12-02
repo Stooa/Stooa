@@ -14,21 +14,21 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
 import { ROUTE_NOT_FOUND } from 'app.config';
-import { GET_FISHBOWL } from 'lib/gql/Fishbowl';
-import withIsFishbowlEnded from 'hocs/withIsFishbowlEnded';
-import { useStateValue } from 'contexts/AppContext';
-import { useAuth } from 'contexts/AuthContext';
-import Error from 'components/Common/Error';
-import Loader from 'components/Web/Loader';
+import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
+import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
+import { useStateValue } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
+import Error from '@/components/Common/Error';
+import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 
 const loading = { loading: () => <div /> };
-const Layout = dynamic(import('layouts/App'), loading);
-const LayoutWeb = dynamic(import('layouts/FishbowlDetail'), loading);
-const Fishbowl = dynamic(import('components/App/Fishbowl'), loading);
-const FishbowlLanding = dynamic(import('components/Web/FishbowlLanding'), loading);
-const JoinFishbowl = dynamic(import('components/Web/JoinFishbowl'), loading);
-const FishbowlPreJoin = dynamic(import('components/App/FishbowlPreJoin'), loading);
+const Layout = dynamic(import('@/layouts/App'), loading);
+const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), loading);
+const Fishbowl = dynamic(import('@/components/App/Fishbowl'), loading);
+const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), loading);
+const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), loading);
+const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), loading);
 
 const Page = () => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);

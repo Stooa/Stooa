@@ -13,12 +13,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from 'app.config';
-import { useStateValue } from 'contexts/AppContext';
-import { useAuth } from 'contexts/AuthContext';
-import { isTimeLessThanNMinutes } from 'lib/helpers';
+import { useStateValue } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
-import Button, { ButtonHollow } from 'ui/Button';
-import { JoinFishbowlStyled } from 'components/Web/JoinFishbowl/styles';
+import Button, { ButtonHollow } from '@/ui/Button';
+import { JoinFishbowlStyled } from '@/components/Web/JoinFishbowl/styles';
 
 interface Props {
   data: Fishbowl;

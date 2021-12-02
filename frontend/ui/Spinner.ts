@@ -9,8 +9,8 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { space } from 'ui/helpers';
-import SVG from 'ui/svg/spinner.svg';
+import { space } from '@/ui/helpers';
+import SVG from '@/ui/svg/spinner.svg';
 
 const rotate = keyframes`
   100% {

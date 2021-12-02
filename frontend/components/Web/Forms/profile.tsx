@@ -21,13 +21,13 @@ import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { ROUTE_HOME } from 'app.config';
-import { useAuth } from 'contexts/AuthContext';
-import FormikForm from 'ui/Form';
-import { getAuthToken } from 'lib/auth';
-import { UPDATE_USER } from 'lib/gql/User';
-import Input from 'components/Common/Fields/Input';
-import SubmitBtn from 'components/Web/SubmitBtn';
-import FormError from 'components/Web/Forms/FormError';
+import { useAuth } from '@/contexts/AuthContext';
+import FormikForm from '@/ui/Form';
+import { getAuthToken } from '@/lib/auth';
+import { UPDATE_USER } from '@/lib/gql/User';
+import Input from '@/components/Common/Fields/Input';
+import SubmitBtn from '@/components/Web/SubmitBtn';
+import FormError from '@/components/Web/Forms/FormError';
 
 interface FormValues {
   firstname: string;

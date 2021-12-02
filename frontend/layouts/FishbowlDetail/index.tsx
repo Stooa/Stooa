@@ -10,15 +10,15 @@
 import React from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
-import Header from 'components/Web/FishbowlDetailHeader';
-import Footer from 'components/Web/Footer';
-import Decoration from 'components/Web/Decoration';
+import Header from '@/components/Web/FishbowlDetailHeader';
+import Footer from '@/components/Web/Footer';
+import Decoration from '@/components/Web/Decoration';
 import {
   Container,
   Header as HeaderStyled,
   Decoration as DecorationStyled,
   Main
-} from 'layouts/Default/styles';
+} from '@/layouts/Default/styles';
 
 interface Props {
   data: Fishbowl;

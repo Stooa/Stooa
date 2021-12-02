@@ -12,14 +12,14 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
 import { Fishbowl } from '@/types/api-platform';
-import { IS_FISHBOWL_CREATOR } from 'lib/gql/Fishbowl';
-import { StooaProvider } from 'contexts/StooaManager';
-import ScriptLoader from 'hocs/withScriptLoader';
-import Error from 'components/Common/Error';
-import Loader from 'components/Web/Loader';
-import { Container } from 'layouts/App/styles';
-import { DevicesProvider } from 'contexts/DevicesContext';
-import Seo from 'components/Web/Seo';
+import { IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
+import { StooaProvider } from '@/contexts/StooaManager';
+import ScriptLoader from '@/hocs/withScriptLoader';
+import Error from '@/components/Common/Error';
+import Loader from '@/components/Web/Loader';
+import { Container } from '@/layouts/App/styles';
+import { DevicesProvider } from '@/contexts/DevicesContext';
+import Seo from '@/components/Web/Seo';
 
 const scripts = [
   'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',

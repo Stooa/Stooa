@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import { COLOR_NEUTRO_100, BORDER_RADIUS } from 'ui/settings';
-import { rems, space } from 'ui/helpers';
+import { COLOR_NEUTRO_100, BORDER_RADIUS } from '@/ui/settings';
+import { rems, space } from '@/ui/helpers';
 
 const Container = styled.div`
   background-color: ${COLOR_NEUTRO_100};

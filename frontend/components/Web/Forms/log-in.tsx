@@ -13,13 +13,13 @@ import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { useAuth } from 'contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { ROUTE_REGISTER, ROUTE_RECOVER_PASSWORD } from 'app.config';
-import FormikForm from 'ui/Form';
-import Input from 'components/Common/Fields/Input';
-import RedirectLink from 'components/Web/RedirectLink';
-import SubmitBtn from 'components/Web/SubmitBtn';
-import FormError from 'components/Web/Forms/FormError';
+import FormikForm from '@/ui/Form';
+import Input from '@/components/Common/Fields/Input';
+import RedirectLink from '@/components/Web/RedirectLink';
+import SubmitBtn from '@/components/Web/SubmitBtn';
+import FormError from '@/components/Web/Forms/FormError';
 
 interface FormValues {
   email: string;

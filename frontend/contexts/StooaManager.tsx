@@ -13,8 +13,8 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_THANKYOU } from 'app.config';
-import api from 'lib/api';
-import { initialInteraction, initializeJitsi, initializeConnection, unload } from 'lib/jitsi';
+import api from '@/lib/api';
+import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
 import {
   CONFERENCE_START,
   NOTIFICATION,
@@ -22,11 +22,11 @@ import {
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import { INTRODUCE_FISHBOWL } from 'lib/gql/Fishbowl';
-import { isTimeLessThanNMinutes, isTimeUp } from 'lib/helpers';
-import { useStateValue } from 'contexts/AppContext';
-import useEventListener from 'hooks/useEventListener';
-import useToasts from 'hooks/useToasts';
+import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
+import { useStateValue } from '@/contexts/AppContext';
+import useEventListener from '@/hooks/useEventListener';
+import useToasts from '@/hooks/useToasts';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;

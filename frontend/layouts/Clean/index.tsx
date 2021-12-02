@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-import { Container, Main } from 'layouts/Default/styles';
+import { Container, Main } from '@/layouts/Default/styles';
 
 const Page: React.FC = ({ children }) => {
   return (

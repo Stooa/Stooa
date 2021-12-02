@@ -9,8 +9,8 @@
 
 import { css } from 'styled-components';
 
-import { rems } from 'ui/helpers';
-import { FONT_BASE_SIZE } from 'ui/settings';
+import { rems } from '@/ui/helpers';
+import { FONT_BASE_SIZE } from '@/ui/settings';
 
 const TEXT_LG = css`
   font-size: ${rems(20)};

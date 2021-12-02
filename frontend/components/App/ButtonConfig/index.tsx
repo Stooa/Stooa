@@ -10,13 +10,13 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import SettingsIcon from 'ui/svg/settings.svg';
-import MicIcon from 'ui/svg/mic.svg';
-import SpeakerIcon from 'ui/svg/speaker.svg';
-import VideoIcon from 'ui/svg/video.svg';
-import CheckIcon from 'ui/svg/checkmark.svg';
-import { Button, Container, Item, List, Selector } from 'components/App/ButtonConfig/styles';
-import { useDevices } from 'contexts/DevicesContext';
+import SettingsIcon from '@/ui/svg/settings.svg';
+import MicIcon from '@/ui/svg/mic.svg';
+import SpeakerIcon from '@/ui/svg/speaker.svg';
+import VideoIcon from '@/ui/svg/video.svg';
+import CheckIcon from '@/ui/svg/checkmark.svg';
+import { Button, Container, Item, List, Selector } from '@/components/App/ButtonConfig/styles';
+import { useDevices } from '@/contexts/DevicesContext';
 
 interface Props {
   unlabeled?: boolean;

@@ -32,13 +32,13 @@ import {
   getAuthToken,
   setRefreshToken,
   setToken
-} from 'lib/auth';
+} from '@/lib/auth';
 
 import { Auth, StatusPayload } from '@/types/auth-context';
-import api from 'lib/api';
-import { AuthToken } from 'lib/auth/authToken';
-import Layout from 'layouts/Clean';
-import LoadingIcon from 'components/Common/LoadingIcon';
+import api from '@/lib/api';
+import { AuthToken } from '@/lib/auth/authToken';
+import Layout from '@/layouts/Clean';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,

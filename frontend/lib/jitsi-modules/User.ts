@@ -9,7 +9,7 @@
 
 import { User, UserRepository } from '@/types/user';
 import seatsRepository from '@/jitsi/Seats';
-import { removeItem } from 'lib/helpers';
+import { removeItem } from '@/lib/helpers';
 
 const userRepository = (): UserRepository => {
   let users: User[] = [];

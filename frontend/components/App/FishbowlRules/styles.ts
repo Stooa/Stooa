@@ -9,9 +9,9 @@
 
 import styled from 'styled-components';
 
-import { COLOR_NEUTRO_900, COLOR_NEUTRO_100 } from 'ui/settings';
-import { TEXT_SM } from 'ui/Texts';
-import { space } from 'ui/helpers';
+import { COLOR_NEUTRO_900, COLOR_NEUTRO_100 } from '@/ui/settings';
+import { TEXT_SM } from '@/ui/Texts';
+import { space } from '@/ui/helpers';
 
 const Title = styled.div`
   margin: 0 0 ${space(3)};

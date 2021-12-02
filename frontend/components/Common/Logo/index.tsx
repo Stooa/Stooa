@@ -10,7 +10,7 @@
 import Link from 'next/link';
 
 import { APP_NAME } from 'app.config';
-import LogoStyled, { LogoAppStyled } from 'components/Common/Logo/styles';
+import LogoStyled, { LogoAppStyled } from '@/components/Common/Logo/styles';
 
 interface Props {
   href?: string;

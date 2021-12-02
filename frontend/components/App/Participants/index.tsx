@@ -11,19 +11,19 @@ import React, { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
-import { pushEventDataLayer } from 'lib/analytics';
-import { getParticipants, ping } from 'lib/auth';
-import { getParticipantList } from 'lib/jitsi';
-import ParticipantCard from 'components/App/Participants/Participant';
+import { pushEventDataLayer } from '@/lib/analytics';
+import { getParticipants, ping } from '@/lib/auth';
+import { getParticipantList } from '@/lib/jitsi';
+import ParticipantCard from '@/components/App/Participants/Participant';
 
-import ChevronLeft from 'ui/svg/chevron-left.svg';
-import ChevronRight from 'ui/svg/chevron-right.svg';
-import Cross from 'ui/svg/cross.svg';
-import People from 'ui/svg/people.svg';
-import Curve from 'ui/svg/participants-curve.svg';
-import MicMuted from 'ui/svg/mic-muted.svg';
-import VideoMuted from 'ui/svg/video-muted.svg';
-import { ParticipantsDrawer, ParticipantsToggle, Icon } from 'components/App/Participants/styles';
+import ChevronLeft from '@/ui/svg/chevron-left.svg';
+import ChevronRight from '@/ui/svg/chevron-right.svg';
+import Cross from '@/ui/svg/cross.svg';
+import People from '@/ui/svg/people.svg';
+import Curve from '@/ui/svg/participants-curve.svg';
+import MicMuted from '@/ui/svg/mic-muted.svg';
+import VideoMuted from '@/ui/svg/video-muted.svg';
+import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 
 const initialParticipant = {
   id: '',

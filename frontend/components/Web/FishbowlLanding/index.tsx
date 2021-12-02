@@ -12,10 +12,10 @@ import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
 import { Fishbowl } from '@/types/api-platform';
-import { useStateValue } from 'contexts/AppContext';
-import { formatDateTime } from 'lib/helpers';
-import CopyUrl from 'components/Common/CopyUrl';
-import { Container, Description, Time, TimeLeft } from 'ui/pages/fishbowl-detail';
+import { useStateValue } from '@/contexts/AppContext';
+import { formatDateTime } from '@/lib/helpers';
+import CopyUrl from '@/components/Common/CopyUrl';
+import { Container, Description, Time, TimeLeft } from '@/ui/pages/fishbowl-detail';
 
 interface Props {
   data: Fishbowl;

@@ -13,8 +13,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL } from 'app.config';
 import { defaultLocale } from 'i18n';
-import Copy from 'ui/svg/copy.svg';
-import Share from 'components/Common/CopyUrl/styles';
+import Copy from '@/ui/svg/copy.svg';
+import Share from '@/components/Common/CopyUrl/styles';
 
 interface Props {
   data: Fishbowl;

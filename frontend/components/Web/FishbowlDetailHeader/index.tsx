@@ -13,12 +13,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_HOME, ROUTE_FISHBOWL, ROUTE_SIGN_IN, ROUTE_REGISTER } from 'app.config';
-import { useAuth } from 'contexts/AuthContext';
-import { ButtonSmall, ButtonTransp } from 'ui/Button';
-import ArrowRight from 'ui/svg/arrow-right.svg';
-import AvatarIcon from 'ui/svg/avatar.svg';
-import Logo from 'components/Common/Logo';
-import Navigation, { Avatar } from 'components/Web/FishbowlDetailHeader/styles';
+import { useAuth } from '@/contexts/AuthContext';
+import { ButtonSmall, ButtonTransp } from '@/ui/Button';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
+import AvatarIcon from '@/ui/svg/avatar.svg';
+import Logo from '@/components/Common/Logo';
+import Navigation, { Avatar } from '@/components/Web/FishbowlDetailHeader/styles';
 
 interface Props {
   data: Fishbowl;

@@ -12,30 +12,30 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_HOME } from 'app.config';
-import { useAuth } from 'contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import userRepository from '@/jitsi/User';
 
-import { Header as HeaderStyled, Decoration as DecorationStyled } from 'layouts/Default/styles';
-import Decoration from 'components/Web/Decoration';
-import Header from 'components/Web/Header';
-import VideoPlaceholder from 'components/App/VideoPlaceholder';
-import ButtonConfig from 'components/App/ButtonConfig';
-import ButtonMic from 'components/App/ButtonMic';
-import ButtonVideo from 'components/App/ButtonVideo';
-import NicknameForm from 'components/App/FishbowlPreJoin/form';
-import AuthUser from 'components/App/FishbowlPreJoin/form-auth';
+import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layouts/Default/styles';
+import Decoration from '@/components/Web/Decoration';
+import Header from '@/components/Web/Header';
+import VideoPlaceholder from '@/components/App/VideoPlaceholder';
+import ButtonConfig from '@/components/App/ButtonConfig';
+import ButtonMic from '@/components/App/ButtonMic';
+import ButtonVideo from '@/components/App/ButtonVideo';
+import NicknameForm from '@/components/App/FishbowlPreJoin/form';
+import AuthUser from '@/components/App/FishbowlPreJoin/form-auth';
 
-import Modal from 'ui/Modal';
-import { ButtonLink } from 'ui/Button';
+import Modal from '@/ui/Modal';
+import { ButtonLink } from '@/ui/Button';
 import {
   Container,
   Devices,
   DevicesToolbar,
   Form,
   VideoContainer
-} from 'components/App/FishbowlPreJoin/styles';
+} from '@/components/App/FishbowlPreJoin/styles';
 import LocalTracks from '@/jitsi/LocalTracks';
-import { useDevices } from 'contexts/DevicesContext';
+import { useDevices } from '@/contexts/DevicesContext';
 
 const FishbowlPreJoin: React.FC = () => {
   const localTracks = useRef([]);

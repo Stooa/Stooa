@@ -9,8 +9,8 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Layout from 'layouts/Default';
-import CreateFishbowlForm from 'components/Web/Forms/create-fishbowl';
+import Layout from '@/layouts/Default';
+import CreateFishbowlForm from '@/components/Web/Forms/create-fishbowl';
 
 const Create = () => {
   const { t } = useTranslation('fishbowl');

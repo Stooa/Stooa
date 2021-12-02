@@ -9,8 +9,8 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import PasswordForm from 'components/Web/Forms/change-password';
-import Layout from 'layouts/Default';
+import PasswordForm from '@/components/Web/Forms/change-password';
+import Layout from '@/layouts/Default';
 
 const EditProfile = () => {
   const { t } = useTranslation('change-password');
