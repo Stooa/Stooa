@@ -16,12 +16,16 @@ module.exports = {
   coverageDirectory: '.coverage',
   moduleNameMapper: {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
-    '^@/jitsi(.*)$': '<rootDir>/lib/jitsi-modules$1',
-    '^@/lib(.*)$': '<rootDir>/lib$1',
-    '^@/graphql(.*)$': '<rootDir>/lib/gql$1',
-    '^@/pages(.*)$': '<rootDir>/pages$1',
-    '^@/components(.*)$': '<rootDir>/components$1',
-    '^@/types(.*)$': '<rootDir>/types$1'
+    '^@/jitsi/(.*)$': '<rootDir>/lib/jitsi-modules/$1',
+    '^@/graphql/(.*)$': '<rootDir>/lib/gql/$1',
+    '^@/components/(.*)': '<rootDir>/components/$1',
+    '^@/contexts/(.*)': '<rootDir>/contexts/$1',
+    '^@/layouts/(.*)': '<rootDir>/layouts/$1',
+    '^@/lib/(.*)': '<rootDir>/lib/$1',
+    '^@/hooks/(.*)': '<rootDir>/hooks/$1',
+    '^@/hocs/(.*)': '<rootDir>/hocs/$1',
+    '^@/pages/(.*)': '<rootDir>/pages/$1',
+    '^@/ui/(.*)': '<rootDir>/ui/$1',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
