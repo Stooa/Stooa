@@ -12,6 +12,12 @@ server {
 
     add_header Access-Control-Allow-Origin ${NGINX_CUSTOM_JITSI_CORS_URL};
 
+    # Default
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+
     # WebSockets
     location = /xmpp-websocket {
         proxy_pass http://${XMPP_SERVER}:5280/xmpp-websocket;
