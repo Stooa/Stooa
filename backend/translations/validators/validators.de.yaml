@@ -1,0 +1,5 @@
+user:
+    password: Das aktuelle Passwort stimmt nicht überein
+    same_user: Das Passwort stimmt nicht mit Ihrem aktuellen Passwort überein.
+    valid_token: Das Token ist ungültig oder abgelaufen.
+    participant: Teilnehmer sollte einen Benutzer oder einen Gast haben

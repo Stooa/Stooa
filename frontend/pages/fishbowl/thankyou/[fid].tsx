@@ -14,7 +14,7 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND } from 'app.config';
-import { dataLayerPush } from 'lib/analytics';
+import { dataLayerPush, pushEventDataLayer } from 'lib/analytics';
 import { GET_FISHBOWL } from 'lib/gql/Fishbowl';
 import { formatDateTime } from 'lib/helpers';
 import ThankYouStyled, { Description, Time } from 'ui/pages/thank-you';
@@ -23,11 +23,11 @@ import Linkedin from 'ui/svg/share-linkedin.svg';
 import Mail from 'ui/svg/share-mail.svg';
 import Twitter from 'ui/svg/share-twitter.svg';
 import Whatsapp from 'ui/svg/share-whatsapp.svg';
+import { ButtonStyledLinkSmall } from 'ui/Button';
 
 const Layout = dynamic(import('layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('components/Web/Loader'), { loading: () => <div /> });
 const Error = dynamic(import('components/Common/Error'), { loading: () => <div /> });
-const GAButton = dynamic(import('components/Common/GAButton'), { loading: () => <div /> });
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');
@@ -82,83 +82,89 @@ const ThankYou = () => {
               <Link
                 href={`whatsapp://send?text=${shareTitle} ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
                 passHref>
-                <GAButton
+                <a
                   target="_blank"
                   rel="noreferrer"
-                  variant="link"
-                  event={{
-                    category: 'Share',
-                    action: 'Whastapp',
-                    label: `fishbowl/thankyou/${fid}`
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Share',
+                      action: 'Whastapp',
+                      label: `fishbowl/thankyou/${fid}`
+                    });
                   }}>
                   <Whatsapp />
-                </GAButton>
+                </a>
               </Link>
             </li>
             <li>
               <Link
                 href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
                 passHref>
-                <GAButton
+                <a
                   target="_blank"
                   rel="noreferrer"
-                  variant="link"
-                  event={{
-                    category: 'Share',
-                    action: 'Linkedin',
-                    label: `fishbowl/thankyou/${fid}`
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Share',
+                      action: 'Linkedin',
+                      label: `fishbowl/thankyou/${fid}`
+                    });
                   }}>
                   <Linkedin />
-                </GAButton>
+                </a>
               </Link>
             </li>
             <li>
               <Link
                 href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
                 passHref>
-                <GAButton
+                <a
                   target="_blank"
                   rel="noreferrer"
-                  variant="link"
-                  event={{
-                    category: 'Share',
-                    action: 'Twitter',
-                    label: `fishbowl/thankyou/${fid}`
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Share',
+                      action: 'Twitter',
+                      label: `fishbowl/thankyou/${fid}`
+                    });
                   }}>
                   <Twitter />
-                </GAButton>
+                </a>
               </Link>
             </li>
             <li>
               <Link
                 href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
                 passHref>
-                <GAButton
+                <a
                   target="_blank"
                   rel="noreferrer"
-                  variant="link"
-                  event={{
-                    category: 'Share',
-                    action: 'Mail',
-                    label: `fishbowl/thankyou/${fid}`
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Share',
+                      action: 'Mail',
+                      label: `fishbowl/thankyou/${fid}`
+                    });
                   }}>
                   <Mail />
-                </GAButton>
+                </a>
               </Link>
             </li>
           </ul>
         </div>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-          <GAButton
+          <ButtonStyledLinkSmall
             className="secondary"
-            event={{
-              category: 'Create Fishbowl',
-              action: 'ThankYou-Page',
-              label: `fishbowl/thankyou/${fid}`
+            onClick={() => {
+              pushEventDataLayer({
+                category: 'Create Fishbowl',
+                action: 'ThankYou-Page',
+                label: `fishbowl/thankyou/${fid}`
+              });
             }}>
             <span>{t('common:createEvent')}</span>
             <ArrowRight />
-          </GAButton>
+          </ButtonStyledLinkSmall>
         </Link>
       </ThankYouStyled>
     </Layout>

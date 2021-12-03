@@ -1,0 +1,19 @@
+emails:
+    reset_password_email:
+        expire_text: Denken Sie daran, dass dieser Link in 1 Stunde abläuft.
+        title: Hallo %name%!
+        button_text: Ihr Passwort zurücksetzen
+        description: 'Um Ihr Passwort zurückzusetzen, besuchen Sie bitte den folgenden Link:'
+    from: Stooa
+    welcome_email:
+        subject: Willkommen bei Stooa!
+        title: Willkommen bei Stooa
+        subtitle: Stooa ist ein Online-Werkzeug für Unkonferenzen. Jeder hat eine Stimme. Nehmen Sie teil, hören Sie zu und teilen Sie Ihr Wissen mit anderen.
+    fishbowl_created_email:
+        info_title: Titel
+        info_language: Sprache
+        info_start_date: Startdatum
+        info_start_time: Startzeit
+        info_invite: Link zur Einladung der Teilnehmer
+        info_duration: Dauer
+        info_description: Beschreibung

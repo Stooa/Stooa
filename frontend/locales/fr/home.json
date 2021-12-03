@@ -1,0 +1,28 @@
+{
+    "keybenefits": {
+        "first": {
+            "description": "Tous les participants se sentent engagés, maintiennent leur attention et peuvent entrer et sortir du fishbowl comme ils le souhaitent pour participer à la conversation. La hiérarchie est supprimée et le niveau d'engagement des participants augmente.",
+            "title": "Plus de participation"
+        },
+        "third": {
+            "description": "Les opinions des participants émergent au fur et à mesure de la conversation, et les sujets les plus intéressants sont explorés en profondeur selon différents points de vue.",
+            "title": "Connaissances partagées"
+        },
+        "fourth": {
+            "title": "Connexions informelles",
+            "description": "Les participants peuvent partager leurs expériences, rencontrer le reste des participants et construire leur propre réseau de contacts informels ou professionnels."
+        },
+        "second": {
+            "title": "Fluidité et facilitation automatique",
+            "description": "La conversation entre les participants se déroule de manière spontanée, sans qu'un modérateur soit nécessaire. L'outil s'adapte à la méthode et guide l'utilisateur en lui indiquant les moments et les étapes à suivre."
+        }
+    },
+    "definition": {
+        "title": "Qu'est-ce que la méthode du fishbowl ?",
+        "description": "<p></p><p>Un fishbowl est une <strong>dynamique de groupe</strong> qui facilite les conversations, les débats et tout type d'activité dans laquelle la <strong>participation est essentielle pour son développement</strong>.</p><p>C'est une méthode de dialogue idéale pour les communautés, les environnements éducatifs ou les entreprises qui cherchent à améliorer l'expérience de leurs employés.</p><p></p>"
+    },
+    "description": "Stooa permet une conversation fluide et participative avec une facilitation automatique basée sur la méthode du fishbowl.",
+    "banner": "Créez votre activité gratuite en forme de fishbowl et invitez les participants. Que la conversation commence !",
+    "title": "L'outil de fishbowl en ligne",
+    "cta": "Créer un fishbowl gratuit"
+}

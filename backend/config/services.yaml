@@ -7,7 +7,7 @@
 
 parameters:
     locale: en
-    locales: [ en, es, ca ]
+    locales: [ en, es, ca, fr ]
     container.dumper.inline_factories: true
     container.dumper.inline_class_loader: true
 
