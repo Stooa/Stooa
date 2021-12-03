@@ -10,7 +10,7 @@ server {
     listen [::]:80;
     server_name localhost;
 
-    add_header Access-Control-Allow-Origin ${NGINX_CUSTOM_JITSI_CORS_URL};
+    add_header Access-Control-Allow-Origin *;
 
     # Default
     location / {
