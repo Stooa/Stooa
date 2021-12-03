@@ -67,7 +67,7 @@ const GuestUserForm: React.FC = () => {
 
   const requiredError = t('validation.required');
 
-  const handleOnSubmit = async (values): Promise<void> => {
+  const handleOnSubmit = async (values: FormValues): Promise<void> => {
     const { name = '' } = values;
     createGuest({
       variables: {
