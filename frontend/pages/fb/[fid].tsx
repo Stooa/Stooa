@@ -34,7 +34,9 @@ const Page = () => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
   const { lang } = useTranslation();
-  const [{ fishbowlReady, isGuest, prejoin }] = useStateValue();
+  const {
+    state: { fishbowlReady, isGuest, prejoin }
+  } = useStateValue();
   const { isAuthenticated } = useAuth();
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });

@@ -29,7 +29,7 @@ export enum Types {
   JoinUser = 'JOIN_USER'
 }
 
-type FishbowlType = {
+type FishbowlStatusType = {
   fishbowlReady: boolean;
   fishbowlStarted: boolean;
   isGuest: boolean;
@@ -58,22 +58,14 @@ type FishbowlPayload = {
 
 export type FishbowlActions = ActionMap<FishbowlPayload>[keyof ActionMap<FishbowlPayload>];
 
-interface Provider {
-  updateState: Record<string, unknown>;
-}
-
-const reducer = (state: FishbowlType[], action: FishbowlActions) => {
+const reducer = (state: FishbowlStatusType, action: FishbowlActions) => {
   if (action.type) {
-    return {
-      ...state,
-      ...action
-    };
+    return { ...state, ...action.payload };
   }
-
   return state;
 };
 
-const initialState = {
+const initialState: FishbowlStatusType = {
   fishbowlReady: false,
   fishbowlStarted: false,
   isGuest: false,
@@ -82,12 +74,12 @@ const initialState = {
 };
 
 const StateContext = createContext<{
-  state: FishbowlType;
+  state: FishbowlStatusType;
   dispatch: Dispatch<FishbowlActions>;
 }>({ state: initialState, dispatch: () => null });
 
-const StateProvider: React.FC<Provider> = ({ updateState = {}, children }) => {
-  const [state, dispatch] = useReducer(reducer, { ...initialState, ...updateState });
+const StateProvider: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, { ...initialState });
 
   return <StateContext.Provider value={{ state, dispatch }}>{children}</StateContext.Provider>;
 };

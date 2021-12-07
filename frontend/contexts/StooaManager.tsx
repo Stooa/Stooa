@@ -24,7 +24,7 @@ import {
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL } from 'lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from 'lib/helpers';
-import { useStateValue } from 'contexts/AppContext';
+import { Types, useStateValue } from 'contexts/AppContext';
 import useEventListener from 'hooks/useEventListener';
 import useToasts from 'hooks/useToasts';
 
@@ -46,7 +46,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const { t, lang } = useTranslation('app');
 
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
-  const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
+  const {
+    state: { fishbowlStarted, conferenceStatus, prejoin },
+    dispatch
+  } = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
 
@@ -88,8 +91,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
       })
       .then(({ data: { status } }) => {
         dispatch({
-          type: 'FISHBOWL_STATUS',
-          conferenceStatus: status
+          type: Types.Status,
+          payload: { conferenceStatus: status }
         });
       })
       .catch(error => {
