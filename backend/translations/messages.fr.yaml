@@ -8,28 +8,29 @@
 emails:
     from: 'Stooa'
     welcome_email:
-        subject: 'Bienvenue dans Stooa !'
+        subject: 'Bienvenue dans Stooa !'
         title: Bienvenue dans Stooa
         cta: Créez un fishbowl maintenant
         subtitle: Stooa est un outil en ligne de non-conférence. Tout le monde peut s’exprimer. Rejoignez, écoutez et partagez vos connaissances avec d’autres.
         delete: Si vous souhaitez supprimer votre compte Stooa, veuillez nous envoyer un courriel <a href="mailto:stooa@stooa.com?subject=Delete Stooa account">ici</a>
     reset_password_email:
-        title: 'Bonjour %name% !'
-        description: 'Pour réinitialiser votre mot de passe, veuillez consulter le lien suivant :'
-        subject: Bonjour %nom% ! Nous avons reçu une demande de réinitialisation de votre mot de passe Stooa
+        title: 'Bonjour %name% !'
+        description: 'Pour réinitialiser votre mot de passe, veuillez consulter le lien suivant :'
+        subject: Bonjour %name% ! Nous avons reçu une demande de réinitialisation de votre mot de passe Stooa
         expire_text: N’oubliez pas que ce lien expirera dans 1 heure.
         button_text: Réinitialiser votre mot de passe
         information_text: Si vous ignorez ce message, votre mot de passe ne sera pas modifié.<br>Si vous n’avez pas demandé la réinitialisation de votre mot de passe, <a href="mailto:%email%">faites-le-nous savoir</a>.
         information_help_text: Si ce n’est pas votre compte, vous pouvez supprimer votre adresse électronique de celui-ci. <br>Veuillez ne pas répondre à ce courriel avec votre mot de passe. Nous ne vous demanderons jamais votre mot de passe, et nous vous déconseillons fortement de le partager avec qui que ce soit.
     fishbowl_created_email:
-        description: 'Vérifiez les détails de votre nouveau fishbowl :'
+        description: 'Vérifiez les détails de votre nouveau fishbowl :'
         info_url: 'Cliquez ici pour accéder au fishbowl'
         languages:
             es: espagnol
             ca: catalan
             en: anglais
-        subject: Bonjour %name% ! Vous avez créé un nouveau fishbowl
-        title: Bien joué !
+            fr: française
+        subject: Bonjour %name% ! Vous avez créé un nouveau fishbowl
+        title: Bien joué !
         info_duration: Durée
         info_description: Description
         info_language: Langue
@@ -38,4 +39,6 @@ emails:
         info_title: Titre
         info_start_time: Heure de début
         delete: 'Si vous souhaitez supprimer cet évènement, veuillez nous envoyer un courriel <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id : %id%">ici</a>'
-login: {}
+login:
+    failure: Informations d'identification invalides.
+

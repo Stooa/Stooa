@@ -16,7 +16,8 @@
     "languages": {
         "en": "English",
         "es": "Spanish",
-        "ca": "Catalan"
+        "ca": "Catalan",
+        "fr": "French"
     },
     "roadmap": "Roadmap",
     "documentation": "Documentation",

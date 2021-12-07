@@ -1,0 +1,28 @@
+{
+    "keybenefits": {
+        "fourth": {
+            "title": "Informelle Verbindungen",
+            "description": "Die Teilnehmer können Erfahrungen austauschen, die anderen Teilnehmer kennen lernen und ihr eigenes Netz informeller oder beruflicher Kontakte aufbauen."
+        },
+        "third": {
+            "title": "Geteiltes Wissen",
+            "description": "Die Meinungen der Teilnehmer kommen im Laufe des Gesprächs zum Vorschein, und die Themen, die von größtem Interesse sind, werden aus verschiedenen Blickwinkeln eingehend erörtert."
+        },
+        "first": {
+            "title": "Mehr Beteiligung",
+            "description": "Alle Teilnehmer fühlen sich angesprochen, behalten ihre Aufmerksamkeit und können sich nach Belieben in das Gespräch einbringen und es wieder verlassen. Die Hierarchie wird aufgehoben und das Engagement der Teilnehmer steigt."
+        },
+        "second": {
+            "title": "Geläufigkeit und automatische Erleichterung",
+            "description": "Das Gespräch zwischen den Teilnehmern findet spontan statt, ohne dass ein Moderator erforderlich ist. Die Plattform passt sich an die Methode an und führt den Benutzer durch die Zeiten und die zu befolgenden Schritte."
+        }
+    },
+    "cta": "Ein kostenloses fishbowl erstellen",
+    "definition": {
+        "title": "Was ist ein fishbowl?",
+        "description": "<p>Die Fishbowl-Methode ist eine <strong>Gruppendynamik</strong>, die Gespräche, Debatten und jede Art von Aktivität erleichtert, bei der <strong>Beteiligung für die Entwicklung wesentlich ist</strong>.</p><p>Es ist eine ideale Dialogmethode für Gemeinden, Bildungseinrichtungen oder Unternehmen, die ihre Mitarbeitererfahrung verbessern wollen.</p>"
+    },
+    "title": "Das Online-Fishbowl-Werkzeug",
+    "description": "Stooa ermöglicht eine flüssige und partizipative Konversation mit automatischer Moderation auf der Grundlage der Fishbowl-Methode.",
+    "banner": "Erstellen Sie Ihre kostenlose Fishbowl-Aktivität und laden Sie Teilnehmer ein. Das Gespräch kann beginnen!"
+}
