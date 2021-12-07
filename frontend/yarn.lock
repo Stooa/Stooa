@@ -1730,7 +1730,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@runroom/design-tokens@^1.0.0":
+"@runroom/design-tokens@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@runroom/design-tokens/-/design-tokens-1.0.0.tgz#eb2e8f7b425ed446a8b7ecb167c953269ba78d74"
   integrity sha512-MpFiTpbTrKeWJf6AsWvvwsIs1pZV7sksSY1gbGzgmtfVrl4Mi0pgbCRBcWICPL8fvCn8Wv5C8x2ingyHnCwMFQ==
@@ -5106,15 +5106,14 @@ jest-worker@^27.4.2:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-
 jest@27.2.4:
   version "27.2.4"
   resolved "https://registry.yarnpkg.com/jest/-/jest-27.2.4.tgz#70e27bef873138afc123aa4769f7124c50ad3efb"
   integrity sha512-h4uqb1EQLfPulWyUFFWv9e9Nn8sCqsJ/j3wk/KCY0p4s4s0ICCfP3iMf6hRf5hEhsDyvyrCgKiZXma63gMz16A==
   dependencies:
-    "@jest/core" "^27.4.2"
+    "@jest/core" "^27.2.4"
     import-local "^3.0.2"
-    jest-cli "^27.4.2"
+    jest-cli "^27.2.4"
 
 js-cookie@2.2.1:
   version "2.2.1"
