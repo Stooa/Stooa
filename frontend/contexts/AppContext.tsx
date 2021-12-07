@@ -7,19 +7,63 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, Dispatch } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-const reducer = (state, action) => {
-  const allowedActions = [
-    'FISHBOWL_STARTED',
-    'FISHBOWL_READY',
-    'FISHBOWL_STATUS',
-    'JOIN_GUEST',
-    'JOIN_USER'
-  ];
+type ActionMap<M extends { [index: string]: any }> = {
+  [Key in keyof M]: M[Key] extends undefined
+    ? {
+        type: Key;
+      }
+    : {
+        type: Key;
+        payload: M[Key];
+      };
+};
 
-  if (allowedActions.includes(action.type)) {
+export enum Types {
+  Start = 'FISHBOWL_STARTED',
+  Ready = 'FISHBOWL_READY',
+  Status = 'FISHBOWL_STATUS',
+  JoinGuest = 'JOIN_GUEST',
+  JoinUser = 'JOIN_USER'
+}
+
+type FishbowlType = {
+  fishbowlReady: boolean;
+  fishbowlStarted: boolean;
+  isGuest: boolean;
+  prejoin: boolean;
+  conferenceStatus: IConferenceStatus;
+};
+
+type FishbowlPayload = {
+  [Types.Start]: {
+    fishbowlStarted: boolean;
+  };
+  [Types.Ready]: {
+    fishbowlReady: boolean;
+  };
+  [Types.Status]: {
+    conferenceStatus: IConferenceStatus;
+  };
+  [Types.JoinGuest]: {
+    isGuest: boolean;
+    prejoin: boolean;
+  };
+  [Types.JoinUser]: {
+    prejoin: boolean;
+  };
+};
+
+export type FishbowlActions = ActionMap<FishbowlPayload>[keyof ActionMap<FishbowlPayload>];
+
+interface Provider {
+  updateState: Record<string, unknown>;
+}
+
+const reducer = (state: FishbowlType[], action: FishbowlActions) => {
+  if (action.type) {
     return {
       ...state,
       ...action
@@ -37,13 +81,16 @@ const initialState = {
   conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
-const StateContext = createContext(undefined);
+const StateContext = createContext<{
+  state: FishbowlType;
+  dispatch: Dispatch<FishbowlActions>;
+}>({ state: initialState, dispatch: () => null });
 
-const StateProvider = ({ updateState = {}, children }) => (
-  <StateContext.Provider value={useReducer(reducer, { ...initialState, ...updateState })}>
-    {children}
-  </StateContext.Provider>
-);
+const StateProvider: React.FC<Provider> = ({ updateState = {}, children }) => {
+  const [state, dispatch] = useReducer(reducer, { ...initialState, ...updateState });
+
+  return <StateContext.Provider value={{ state, dispatch }}>{children}</StateContext.Provider>;
+};
 
 const useStateValue = () => useContext(StateContext);
 

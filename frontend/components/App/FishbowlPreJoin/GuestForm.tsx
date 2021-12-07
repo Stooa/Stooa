@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { useStateValue } from 'contexts/AppContext';
+import { Types, useStateValue } from 'contexts/AppContext';
 import { CREATE_GUEST } from 'lib/gql/Fishbowl';
 import userRepository from '@/jitsi/User';
 import FormikForm from 'ui/Form';
@@ -21,7 +21,7 @@ import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 
 interface FormValues {
-  name: string;
+  name: string | null;
 }
 
 interface FormProps {
@@ -61,7 +61,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const GuestUserForm: React.FC = () => {
-  const [{}, dispatch] = useStateValue();
+  const { dispatch } = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
 
@@ -100,9 +100,11 @@ const GuestUserForm: React.FC = () => {
     });
 
     dispatch({
-      type: 'JOIN_GUEST',
-      isGuest: true,
-      prejoin: false
+      type: Types.JoinGuest,
+      payload: {
+        isGuest: true,
+        prejoin: false
+      }
     });
   };
 
