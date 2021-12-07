@@ -21,7 +21,7 @@ import Input from 'components/Common/Fields/Input';
 import SubmitBtn from 'components/Web/SubmitBtn';
 
 interface FormValues {
-  name: string | null;
+  name: string | undefined;
 }
 
 interface FormProps {
@@ -48,7 +48,7 @@ const Form: React.FC<FormikProps<FormValues>> = ({ isSubmitting }) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       name: Yup.string().required(props.required)
     });
