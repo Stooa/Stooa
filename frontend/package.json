@@ -15,13 +15,11 @@
   },
   "dependencies": {
     "@apollo/client": "3.3.18",
-    "@runroom/design-tokens": "0.9.3",
-    "@svgr/webpack": "5.5.0",
     "@types/node": "15.3.0",
     "@types/react": "17.0.5",
     "@types/styled-components": "5.1.9",
     "@types/yup": "0.29.11",
-    "axios": "0.21.1",
+    "axios": "0.24.0",
     "babel-plugin-styled-components": "1.12.0",
     "countries-and-timezones": "2.4.0",
     "file-loader": "6.2.0",
@@ -48,7 +46,9 @@
     "yup": "0.32.9"
   },
   "devDependencies": {
+    "@runroom/design-tokens": "1.0.0",
     "@runroom/npm-scripts": "1.0.8",
+    "@svgr/webpack": "^6.0.0",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.1.2",
     "@types/jest": "27.0.2",
@@ -65,5 +65,9 @@
     "jest-css-modules": "2.1.0",
     "jest-next-dynamic": "1.0.1",
     "prettier": "2.3.2"
+  },
+  "resolutions": {
+    "path-parse": "1.0.7",
+    "ansi-regex": "5.0.1"
   }
 }
