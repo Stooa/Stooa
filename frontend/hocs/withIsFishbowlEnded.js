@@ -34,7 +34,7 @@ const withIsFishbowlEnded = WrappedComponent => props => {
       .then(({ data }) => {
         dispatch({
           type: Types.Status,
-          payload:{ conferenceStatus: data.status }
+          payload: { conferenceStatus: data.status }
         });
 
         if (data.status === IConferenceStatus.FINISHED) {
