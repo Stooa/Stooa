@@ -16,6 +16,12 @@ server {
 
     client_max_body_size 0;
 
+    # Default
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+
     # WebSockets
     location = /xmpp-websocket {
         proxy_pass http://${XMPP_SERVER}:5280/xmpp-websocket;
