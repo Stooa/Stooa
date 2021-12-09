@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import { ROUTE_NOT_FOUND } from 'app.config';
+import { ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';

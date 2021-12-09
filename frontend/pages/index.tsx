@@ -16,7 +16,7 @@ import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
 import { TweenMax } from 'gsap';
 
-import { ROUTE_FISHBOWL_CREATE } from 'app.config';
+import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
 import Layout from '@/layouts/Home';
 
 import { Lottie } from '@/types/animations';

@@ -23,7 +23,7 @@ import {
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
   ROUTE_RESET_PASSWORD
-} from 'app.config';
+} from '@/app.config';
 
 import {
   COOKIE_OPTIONS,

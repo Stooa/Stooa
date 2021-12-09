@@ -14,7 +14,7 @@ import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { ROUTE_REGISTER, ROUTE_RECOVER_PASSWORD } from 'app.config';
+import { ROUTE_REGISTER, ROUTE_RECOVER_PASSWORD } from '@/app.config';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import RedirectLink from '@/components/Web/RedirectLink';

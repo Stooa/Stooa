@@ -11,7 +11,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_HOME } from 'app.config';
+import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import userRepository from '@/jitsi/User';
 

@@ -29,7 +29,7 @@ import {
   SUPPORT_EMAIL,
   GITHUB_BASE,
   APP_NAME
-} from 'app.config';
+} from '@/app.config';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 

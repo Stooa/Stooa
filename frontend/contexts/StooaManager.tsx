@@ -12,7 +12,7 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_THANKYOU } from 'app.config';
+import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
 import {

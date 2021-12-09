@@ -13,7 +13,7 @@ import setLanguage from 'next-translate/setLanguage';
 
 import usePersistLocaleCookie from '@/hooks/usePersistLocaleCookie';
 import { pushEventDataLayer } from '@/lib/analytics';
-import i18nConfig from 'i18n';
+import i18nConfig from '@/i18n';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
 
 import Languages from '@/components/Common/LanguageSwitcher/styles';

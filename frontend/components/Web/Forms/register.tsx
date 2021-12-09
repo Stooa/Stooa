@@ -19,8 +19,8 @@ import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from 'app.config';
-import i18nConfig from 'i18n';
+import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from '@/app.config';
+import i18nConfig from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { dataLayerPush } from '@/lib/analytics';
 import { CREATE_USER } from '@/lib/gql/User';

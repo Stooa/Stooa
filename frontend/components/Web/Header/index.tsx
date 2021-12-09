@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import { ROUTE_HOME, ROUTE_SIGN_IN, ROUTE_REGISTER, ROUTE_FISHBOWL_CREATE } from 'app.config';
+import { ROUTE_HOME, ROUTE_SIGN_IN, ROUTE_REGISTER, ROUTE_FISHBOWL_CREATE } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import { ButtonSmall, ButtonTransp } from '@/ui/Button';
 import ArrowRight from '@/ui/svg/arrow-right.svg';

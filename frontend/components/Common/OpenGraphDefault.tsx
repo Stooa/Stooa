@@ -10,7 +10,7 @@
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
-import { APP_NAME, TWITTER_USER, ROUTE_HOME } from 'app.config';
+import { APP_NAME, TWITTER_USER, ROUTE_HOME } from '@/app.config';
 
 const OpenGraphDefault = () => {
   const { t } = useTranslation('common');

@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_NOT_FOUND } from 'app.config';
+import { ROUTE_NOT_FOUND } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { dataLayerPush } from '@/lib/analytics';

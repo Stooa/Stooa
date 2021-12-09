@@ -11,7 +11,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD } from 'app.config';
+import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
 import ChevronDown from '@/ui/svg/chevron-down.svg';

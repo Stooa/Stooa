@@ -20,7 +20,7 @@ import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { ROUTE_HOME } from 'app.config';
+import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import FormikForm from '@/ui/Form';
 import { getAuthToken } from '@/lib/auth';

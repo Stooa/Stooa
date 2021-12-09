@@ -19,7 +19,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { ROUTE_SIGN_IN } from 'app.config';
+import { ROUTE_SIGN_IN } from '@/app.config';
 import { RECOVER_PASSWORD } from '@/lib/gql/Password';
 import FormikForm from '@/ui/Form';
 import Alert from '@/ui/Alert';

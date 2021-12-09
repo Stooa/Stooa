@@ -12,7 +12,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
-import { ROUTE_HOME, ROUTE_FISHBOWL, ROUTE_SIGN_IN, ROUTE_REGISTER } from 'app.config';
+import { ROUTE_HOME, ROUTE_FISHBOWL, ROUTE_SIGN_IN, ROUTE_REGISTER } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import { ButtonSmall, ButtonTransp } from '@/ui/Button';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
