@@ -1,0 +1,9 @@
+{
+    "title": "Ihr Passwort wiederherstellen",
+    "description": "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen Anweisungen, um ein neues Passwort zu generieren.",
+    "email": "E-Mail",
+    "placeholder": "E-Mail",
+    "button": "Anweisungen senden",
+    "back": "Zurück zur Anmeldung",
+    "sent": "Wir haben Ihnen soeben eine E-Mail mit den Anweisungen zur Wiederherstellung Ihres Passworts geschickt."
+}

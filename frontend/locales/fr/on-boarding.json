@@ -1,7 +1,7 @@
 {
     "new": {
         "title": "Vous êtes novice ? Ne vous inquiétez pas !",
-        "text": "<p>Dans un fishbowl, il y a 5 sièges disponibles où se déroule la conversation. S'il y a un siège libre, vous pouvez rejoindre la conversation à tout moment. Une seule règle : <strong>Il doit toujours y avoir un siège disponible.</strong></p><p>Si les 5 sièges sont occupés et que vous avez déjà participé, laissez votre siège libre pour que les autres puissent également contribuer.</p>"
+        "text": "<p>Dans un fishbowl, il y a 5 sièges disponibles où se déroule la conversation. S'il y a un siège libre, vous pouvez rejoindre la conversation à tout moment. Une seule règle : <strong>Il doit toujours y avoir un siège disponible.</strong></p><p>Si les 5 sièges sont occupés et que vous avez déjà participé, laissez votre siège libre pour que les autres puissent également contribuer.</p>"
     },
     "hostIntroduction": {
         "title": "Que se passe-t-il maintenant ?",

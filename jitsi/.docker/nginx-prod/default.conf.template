@@ -10,7 +10,13 @@ server {
     listen [::]:80;
     server_name localhost;
 
-    ${NGINX_CUSTOM_FRONTEND_CONFIG}
+    add_header Access-Control-Allow-Origin ${NGINX_CUSTOM_JITSI_CORS_URL};
+
+    # Default
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
 
     # WebSockets
     location = /xmpp-websocket {
@@ -38,15 +44,4 @@ server {
 
         tcp_nodelay on;
     }
-
-    location / {
-        proxy_pass http://${FRONTEND}:3000;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_cache_valid 5m;
-    }
-
-    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
-    add_header X-Content-Type-Options nosniff always;
-    add_header X-Frame-Options SAMEORIGIN always;
-    add_header X-XSS-Protection "1; mode=block" always;
 }
