@@ -1,0 +1,14 @@
+{
+    "title": "Registrieren Sie sich, um loszulegen",
+    "linkedinHelp": "Kopieren Sie Ihr Linkedin-URL-Profil und fügen Sie es ein",
+    "twitterHelp": "Kopieren Sie Ihr Twitter-URL-Profil und fügen Sie es ein",
+    "haveAccount": "Bereits registriert?",
+    "shareAccount": "Wenn Sie Ihre <strong>Twitter</strong>- oder <strong>Linkedin</strong>-Profile mit anderen Teilnehmern teilen möchten, füllen Sie bitte die folgenden Felder aus.",
+    "twitter": "Twitter-URL (optional)",
+    "linkedin": "Linkedin-URL (optional)",
+    "button": {
+        "register": "Kostenlos registrieren",
+        "login": "Anmelden"
+    },
+    "terms": "Mit der Erstellung dieses Kontos stimmen Sie unseren <a>Geschäftsbedingungen und der Datenschutzrichtlinie</a> zu."
+}
