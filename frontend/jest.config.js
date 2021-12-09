@@ -26,6 +26,8 @@ module.exports = {
     '^@/hocs/(.*)': '<rootDir>/hocs/$1',
     '^@/pages/(.*)': '<rootDir>/pages/$1',
     '^@/ui/(.*)': '<rootDir>/ui/$1',
+    '^@/app.config': '<rootDir>/app.config.ts',
+    '^@/i18n': '<rootDir>/i18n.js',
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
