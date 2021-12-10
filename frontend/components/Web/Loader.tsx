@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import Layout from 'layouts/Default';
+import Layout from '@/layouts/Default';
 
-import LoadingIcon from 'components/Common/LoadingIcon';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const Loading = () => {
   return (

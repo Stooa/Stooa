@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space, rems } from 'ui/helpers';
+import { space, rems } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   COLOR_GREEN_100,
@@ -21,8 +21,8 @@ import {
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
   COLOR_PURPLE_900
-} from 'ui/settings';
-import { TEXT_XXS } from 'ui/Texts';
+} from '@/ui/settings';
+import { TEXT_XXS } from '@/ui/Texts';
 
 const Share = styled.div`
   ${TEXT_XXS}

@@ -6,11 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@/jitsi/*": ["lib/jitsi-modules/*"],
-      "@/lib/*": ["lib/*"],
       "@/graphql/*": ["lib/gql/*"],
-      "@/pages/*": ["pages/*"],
-      "@/components/*": ["components/*"],
-      "@/types/*": ["types/*"]
+      "@/*": ["./*"]
     },
     "skipLibCheck": true,
     "strict": false,

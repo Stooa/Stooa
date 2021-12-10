@@ -9,14 +9,14 @@
 
 import styled from 'styled-components';
 
-import { space, media } from 'ui/helpers';
-import Animations from 'ui/Animations';
+import { space, media } from '@/ui/helpers';
+import Animations from '@/ui/Animations';
 import {
   Main as MainDefault,
   Container as ContainerDefault,
   Header as HeaderDefault
-} from 'layouts/Default/styles';
-import { COLOR_NEUTRO_100 } from 'ui/settings';
+} from '@/layouts/Default/styles';
+import { COLOR_NEUTRO_100 } from '@/ui/settings';
 
 const Container = styled(ContainerDefault)`
   background-color: ${COLOR_NEUTRO_100};

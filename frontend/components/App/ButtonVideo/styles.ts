@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import ActionButton from 'ui/ActionButton';
+import ActionButton from '@/ui/ActionButton';
 import {
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
@@ -21,7 +21,7 @@ import {
   COLOR_RED_200,
   COLOR_RED_500,
   COLOR_RED_600
-} from 'ui/settings';
+} from '@/ui/settings';
 
 const Button = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}

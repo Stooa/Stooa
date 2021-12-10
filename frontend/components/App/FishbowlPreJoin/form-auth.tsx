@@ -10,11 +10,11 @@
 import useTranslation from 'next-translate/useTranslation';
 
 import userRepository from '@/jitsi/User';
-import { useStateValue } from 'contexts/AppContext';
+import { useStateValue } from '@/contexts/AppContext';
 
-import { InputStyled } from 'ui/Form';
-import Button from 'ui/Button';
-import FormikForm from 'ui/Form';
+import { InputStyled } from '@/ui/Form';
+import Button from '@/ui/Button';
+import FormikForm from '@/ui/Form';
 
 type TProps = {
   name: string;

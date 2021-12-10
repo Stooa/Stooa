@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space, media } from 'ui/helpers';
+import { space, media } from '@/ui/helpers';
 
 const JoinFishbowlStyled = styled.div`
   .join-buttons {

@@ -10,12 +10,12 @@
 import React, { useState } from 'react';
 
 import { User } from '@/types/user';
-import { pushEventDataLayer } from 'lib/analytics';
+import { pushEventDataLayer } from '@/lib/analytics';
 import userRepository from '@/jitsi/User';
 
-import ArrowDownIcon from 'ui/svg/arrow-down.svg';
-import ArrowUpIcon from 'ui/svg/arrow-up.svg';
-import Button from 'components/App/ButtonJoin/styles';
+import ArrowDownIcon from '@/ui/svg/arrow-down.svg';
+import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
+import Button from '@/components/App/ButtonJoin/styles';
 
 interface Props {
   join: (user: User) => void;

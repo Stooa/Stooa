@@ -9,14 +9,14 @@
 
 import styled from 'styled-components';
 
-import { space, rems } from 'ui/helpers';
+import { space, rems } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   BORDER_RADIUS
-} from 'ui/settings';
+} from '@/ui/settings';
 
 const InfoStyled = styled.div`
   align-items: center;

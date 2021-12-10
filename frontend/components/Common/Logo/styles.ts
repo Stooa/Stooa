@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { COLOR_NEUTRO_700 } from 'ui/settings';
+import { COLOR_NEUTRO_700 } from '@/ui/settings';
 
 const LogoStyled = styled.div`
   color: ${COLOR_NEUTRO_700};

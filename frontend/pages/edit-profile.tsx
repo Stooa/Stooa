@@ -11,12 +11,12 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { GET_SELF_USER } from 'lib/gql/User';
+import { GET_SELF_USER } from '@/lib/gql/User';
 
-const ProfileForm = dynamic(import('components/Web/Forms/profile'), { loading: () => <div /> });
-const Layout = dynamic(import('layouts/Default'), { loading: () => <div /> });
-const Loader = dynamic(import('components/Web/Loader'), { loading: () => <div /> });
-const Error = dynamic(import('components/Common/Error'), { loading: () => <div /> });
+const ProfileForm = dynamic(import('@/components/Web/Forms/profile'), { loading: () => <div /> });
+const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
+const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
+const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div /> });
 
 const EditProfile = () => {
   const { t } = useTranslation('edit-profile');

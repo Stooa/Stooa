@@ -9,8 +9,8 @@
 
 import React, { useEffect, useState } from 'react';
 
-import CrossIcon from 'ui/svg/cross.svg';
-import { Container, Cross } from 'components/App/Toast/styles';
+import CrossIcon from '@/ui/svg/cross.svg';
+import { Container, Cross } from '@/components/App/Toast/styles';
 
 interface Props {
   message: string;

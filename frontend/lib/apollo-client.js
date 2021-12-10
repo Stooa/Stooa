@@ -9,7 +9,7 @@
 
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { getAuthToken } from 'lib/auth';
+import { getAuthToken } from '@/lib/auth';
 import LocaleCookie from '@/lib/LocaleCookie';
 
 const httpLink = createHttpLink({
