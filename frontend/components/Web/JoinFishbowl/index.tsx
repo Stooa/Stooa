@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from 'app.config';
-import { PayloadTypes, useStateValue } from 'contexts/AppContext';
+import { ActionTypes, useStateValue } from 'contexts/AppContext';
 import { useAuth } from 'contexts/AuthContext';
 import { isTimeLessThanNMinutes } from 'lib/helpers';
 
@@ -47,7 +47,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
       window.clearInterval(intervalRef.current);
 
       dispatch({
-        type: PayloadTypes.Ready,
+        type: ActionTypes.Ready,
         payload: { fishbowlReady: true }
       });
     } else {

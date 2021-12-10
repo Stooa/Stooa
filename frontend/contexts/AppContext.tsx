@@ -17,7 +17,7 @@ type ActionMap<M> = {
   };
 };
 
-export enum PayloadTypes {
+export enum ActionTypes {
   Start = 'FISHBOWL_STARTED',
   Ready = 'FISHBOWL_READY',
   Status = 'FISHBOWL_STATUS',
@@ -34,20 +34,20 @@ interface FishbowlStatusType {
 }
 
 interface FishbowlPayload {
-  [PayloadTypes.Start]: {
+  [ActionTypes.Start]: {
     fishbowlStarted: boolean;
   };
-  [PayloadTypes.Ready]: {
+  [ActionTypes.Ready]: {
     fishbowlReady: boolean;
   };
-  [PayloadTypes.Status]: {
+  [ActionTypes.Status]: {
     conferenceStatus: IConferenceStatus;
   };
-  [PayloadTypes.JoinGuest]: {
+  [ActionTypes.JoinGuest]: {
     isGuest: boolean;
     prejoin: boolean;
   };
-  [PayloadTypes.JoinUser]: {
+  [ActionTypes.JoinUser]: {
     prejoin: boolean;
   };
 }
