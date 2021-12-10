@@ -10,9 +10,9 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Modal from 'ui/Modal';
-import { ButtonApp, ButtonLinkApp } from 'ui/Button';
-import Cross from 'ui/svg/cross.svg';
+import Modal from '@/ui/Modal';
+import { ButtonApp, ButtonLinkApp } from '@/ui/Button';
+import Cross from '@/ui/svg/cross.svg';
 
 interface Props {
   closeModal: () => void;

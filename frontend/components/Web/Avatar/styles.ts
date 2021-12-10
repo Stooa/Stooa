@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import { media, space, rems } from 'ui/helpers';
-import { COLOR_NEUTRO_200, COLOR_NEUTRO_400, COLOR_NEUTRO_700, BORDER_RADIUS } from 'ui/settings';
+import { media, space, rems } from '@/ui/helpers';
+import { COLOR_NEUTRO_200, COLOR_NEUTRO_400, COLOR_NEUTRO_700, BORDER_RADIUS } from '@/ui/settings';
 
 const Avatar = styled.div`
   color: ${COLOR_NEUTRO_700};

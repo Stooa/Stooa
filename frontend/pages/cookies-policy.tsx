@@ -10,8 +10,8 @@
 import { useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Layout from 'layouts/Default';
-import Wysiwyg from 'ui/Wysiwyg';
+import Layout from '@/layouts/Default';
+import Wysiwyg from '@/ui/Wysiwyg';
 
 const CookiesPolicy = () => {
   const { t } = useTranslation('legals');

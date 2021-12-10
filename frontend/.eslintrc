@@ -30,11 +30,8 @@
     "import/resolver": {
       "alias": [
           ["@/jitsi]", "./lib/jitsi-modules]"],
-          ["@/lib]", "./lib]"],
           ["@/graphql]", "./lib/gql]"],
-          ["@/pages]", "./pages]"],
-          ["@/components", "./components"],
-          ["@/types", "./types"]
+          ["@/*]", "./*]"]
       ]
     }
   }

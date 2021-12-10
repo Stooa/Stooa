@@ -14,12 +14,12 @@ import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import OpenGraphDefault from 'components/Common/OpenGraphDefault';
-import { StateProvider } from 'contexts/AppContext';
-import { AuthProvider, ProtectRoute } from 'contexts/AuthContext';
-import { pushPageViewDataLayer } from 'lib/analytics';
-import DataProvider from 'lib/apollo-client';
-import GlobalStyles from 'ui/Globals';
+import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
+import { StateProvider } from '@/contexts/AppContext';
+import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
+import { pushPageViewDataLayer } from '@/lib/analytics';
+import DataProvider from '@/lib/apollo-client';
+import GlobalStyles from '@/ui/Globals';
 
 const MyApp = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });

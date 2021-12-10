@@ -12,13 +12,13 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { useStooa } from 'contexts/StooaManager';
-import { Footer as FooterStyled } from 'layouts/App/styles';
-import { Alert } from 'components/App/Footer/styles';
+import { useStooa } from '@/contexts/StooaManager';
+import { Footer as FooterStyled } from '@/layouts/App/styles';
+import { Alert } from '@/components/App/Footer/styles';
 
-const ToolBar = dynamic(import('components/App/ToolBar'), { loading: () => <div /> });
-const Logo = dynamic(import('components/Common/Logo'), { loading: () => <div /> });
-const ModeratorActions = dynamic(import('components/App/ModeratorActions'), {
+const ToolBar = dynamic(import('@/components/App/ToolBar'), { loading: () => <div /> });
+const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
+const ModeratorActions = dynamic(import('@/components/App/ModeratorActions'), {
   loading: () => <div />
 });
 

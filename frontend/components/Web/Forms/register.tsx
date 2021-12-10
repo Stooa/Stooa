@@ -19,17 +19,17 @@ import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from 'app.config';
-import i18nConfig from 'i18n';
-import { useAuth } from 'contexts/AuthContext';
-import { dataLayerPush } from 'lib/analytics';
-import { CREATE_USER } from 'lib/gql/User';
-import FormikForm from 'ui/Form';
-import Input from 'components/Common/Fields/Input';
-import Checkbox from 'components/Common/Fields/Checkbox';
-import RedirectLink from 'components/Web/RedirectLink';
-import SubmitBtn from 'components/Web/SubmitBtn';
-import FormError from 'components/Web/Forms/FormError';
+import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from '@/app.config';
+import i18nConfig from '@/i18n';
+import { useAuth } from '@/contexts/AuthContext';
+import { dataLayerPush } from '@/lib/analytics';
+import { CREATE_USER } from '@/lib/gql/User';
+import FormikForm from '@/ui/Form';
+import Input from '@/components/Common/Fields/Input';
+import Checkbox from '@/components/Common/Fields/Checkbox';
+import RedirectLink from '@/components/Web/RedirectLink';
+import SubmitBtn from '@/components/Web/SubmitBtn';
+import FormError from '@/components/Web/Forms/FormError';
 
 interface FormValues {
   firstname: string;

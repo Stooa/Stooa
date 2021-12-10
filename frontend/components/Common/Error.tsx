@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import Layout from 'layouts/Default';
+import Layout from '@/layouts/Default';
 
 const Error = ({ message }) => {
   return (

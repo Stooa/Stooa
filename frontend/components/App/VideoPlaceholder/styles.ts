@@ -8,7 +8,7 @@
  */
 
 import styled from 'styled-components';
-import { COLOR_NEUTRO_600 } from 'ui/settings';
+import { COLOR_NEUTRO_600 } from '@/ui/settings';
 
 const Placeholder = styled.div`
   align-items: center;

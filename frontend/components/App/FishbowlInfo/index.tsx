@@ -10,10 +10,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
-import { pushEventDataLayer } from 'lib/analytics';
-import CopyUrl from 'components/Common/CopyUrl';
-import Dots from 'ui/svg/dots.svg';
-import InfoStyled, { Description, Icon } from 'components/App/FishbowlInfo/styles';
+import { pushEventDataLayer } from '@/lib/analytics';
+import CopyUrl from '@/components/Common/CopyUrl';
+import Dots from '@/ui/svg/dots.svg';
+import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 
 interface Props {
   data: Fishbowl;

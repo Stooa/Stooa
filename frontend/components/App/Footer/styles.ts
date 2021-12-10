@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import AlertStyled from 'ui/Alert';
-import { media, rems, space } from 'ui/helpers';
+import AlertStyled from '@/ui/Alert';
+import { media, rems, space } from '@/ui/helpers';
 
 const Alert = styled(AlertStyled)`
   bottom: 100%;

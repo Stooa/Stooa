@@ -10,8 +10,8 @@
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
-import Layout from 'layouts/Default';
-import Wysiwyg from 'ui/Wysiwyg';
+import Layout from '@/layouts/Default';
+import Wysiwyg from '@/ui/Wysiwyg';
 
 const Page = () => {
   const { t } = useTranslation('legals');

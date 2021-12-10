@@ -9,9 +9,9 @@
 
 import styled from 'styled-components';
 
-import { BORDER_RADIUS } from 'ui/settings';
-import { WARNING_STYLES } from 'ui/Alert';
-import { rems, space } from 'ui/helpers';
+import { BORDER_RADIUS } from '@/ui/settings';
+import { WARNING_STYLES } from '@/ui/Alert';
+import { rems, space } from '@/ui/helpers';
 
 const Container = styled.div<{ show: boolean }>`
   ${WARNING_STYLES}

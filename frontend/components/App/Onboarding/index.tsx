@@ -13,17 +13,22 @@ import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
 import { TweenMax } from 'gsap';
 
-import ModalOnBoarding from 'components/App/ModalOnBoarding';
-import { getOnBoardingCookie, setOnBoardingCookie } from 'lib/auth';
-import { pushEventDataLayer } from 'lib/analytics';
-import { ButtonApp, ButtonLinkApp } from 'ui/Button';
+import ModalOnBoarding from '@/components/App/ModalOnBoarding';
+import { getOnBoardingCookie, setOnBoardingCookie } from '@/lib/auth';
+import { pushEventDataLayer } from '@/lib/analytics';
+import { ButtonApp, ButtonLinkApp } from '@/ui/Button';
 
-import ArrowPrev from 'ui/svg/arrow-prev.svg';
-import ArrowNext from 'ui/svg/arrow-next.svg';
-import Cross from 'ui/svg/cross.svg';
-import QuestionMark from 'ui/svg/questionmark.svg';
-import OnboardingWrapper, { Icon, Slider, Slide, Tooltip } from 'components/App/Onboarding/styles';
-import onBoardingData from 'components/App/Onboarding/data.json';
+import ArrowPrev from '@/ui/svg/arrow-prev.svg';
+import ArrowNext from '@/ui/svg/arrow-next.svg';
+import Cross from '@/ui/svg/cross.svg';
+import QuestionMark from '@/ui/svg/questionmark.svg';
+import OnboardingWrapper, {
+  Icon,
+  Slider,
+  Slide,
+  Tooltip
+} from '@/components/App/Onboarding/styles';
+import onBoardingData from '@/components/App/Onboarding/data.json';
 
 interface Props {
   initialized: boolean;

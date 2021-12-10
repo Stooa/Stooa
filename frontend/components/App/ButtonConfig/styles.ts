@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import ActionButton from 'ui/ActionButton';
+import ActionButton from '@/ui/ActionButton';
 import {
   BORDER_RADIUS,
   COLOR_NEUTRO_100,
@@ -17,8 +17,8 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
-} from 'ui/settings';
-import { rems, space } from 'ui/helpers';
+} from '@/ui/settings';
+import { rems, space } from '@/ui/helpers';
 
 const Button = styled(ActionButton)`
   .button {

@@ -9,10 +9,10 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import { useAuth } from 'contexts/AuthContext';
-import RecoverPasswordForm from 'components/Web/Forms/recover-password';
-import Layout from 'layouts/Default';
-import { Description } from 'ui/pages';
+import { useAuth } from '@/contexts/AuthContext';
+import RecoverPasswordForm from '@/components/Web/Forms/recover-password';
+import Layout from '@/layouts/Default';
+import { Description } from '@/ui/pages';
 
 const RecoverPassword = () => {
   const { t } = useTranslation('recover');
