@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { Types, useStateValue } from 'contexts/AppContext';
+import { PayloadTypes, useStateValue } from 'contexts/AppContext';
 import { CREATE_GUEST } from 'lib/gql/Fishbowl';
 import userRepository from '@/jitsi/User';
 import FormikForm from 'ui/Form';
@@ -100,7 +100,7 @@ const GuestUserForm: React.FC = () => {
     });
 
     dispatch({
-      type: Types.JoinGuest,
+      type: PayloadTypes.JoinGuest,
       payload: {
         isGuest: true,
         prejoin: false

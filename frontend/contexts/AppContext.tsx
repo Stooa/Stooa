@@ -10,7 +10,7 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-type ActionMap<M extends { [index: string]: any }> = {
+type ActionMap<M> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
         type: Key;
@@ -21,7 +21,7 @@ type ActionMap<M extends { [index: string]: any }> = {
       };
 };
 
-export enum Types {
+export enum PayloadTypes {
   Start = 'FISHBOWL_STARTED',
   Ready = 'FISHBOWL_READY',
   Status = 'FISHBOWL_STATUS',
@@ -29,32 +29,32 @@ export enum Types {
   JoinUser = 'JOIN_USER'
 }
 
-type FishbowlStatusType = {
+interface FishbowlStatusType {
   fishbowlReady: boolean;
   fishbowlStarted: boolean;
   isGuest: boolean;
   prejoin: boolean;
   conferenceStatus: IConferenceStatus;
-};
+}
 
-type FishbowlPayload = {
-  [Types.Start]: {
+interface FishbowlPayload {
+  [PayloadTypes.Start]: {
     fishbowlStarted: boolean;
   };
-  [Types.Ready]: {
+  [PayloadTypes.Ready]: {
     fishbowlReady: boolean;
   };
-  [Types.Status]: {
+  [PayloadTypes.Status]: {
     conferenceStatus: IConferenceStatus;
   };
-  [Types.JoinGuest]: {
+  [PayloadTypes.JoinGuest]: {
     isGuest: boolean;
     prejoin: boolean;
   };
-  [Types.JoinUser]: {
+  [PayloadTypes.JoinUser]: {
     prejoin: boolean;
   };
-};
+}
 
 export type FishbowlActions = ActionMap<FishbowlPayload>[keyof ActionMap<FishbowlPayload>];
 

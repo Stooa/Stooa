@@ -11,7 +11,7 @@ import * as React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import userRepository from '@/jitsi/User';
-import { Types, useStateValue } from 'contexts/AppContext';
+import { PayloadTypes, useStateValue } from 'contexts/AppContext';
 
 import { InputStyled } from 'ui/Form';
 import Button from 'ui/Button';
@@ -27,7 +27,7 @@ const AuthUserForm: React.FC<Props> = ({ name }) => {
 
   const handleOnSubmit = (): void => {
     dispatch({
-      type: Types.JoinUser,
+      type: PayloadTypes.JoinUser,
       payload: {
         prejoin: false
       }

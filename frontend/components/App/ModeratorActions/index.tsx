@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { RUN_FISHBOWL, FINISH_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
-import { Types, useStateValue } from 'contexts/AppContext';
+import { PayloadTypes, useStateValue } from 'contexts/AppContext';
 import ModalStartIntroduction from 'components/App/ModalStartIntroduction';
 import ModalEndFishbowl from 'components/App/ModalEndFishbowl';
 
@@ -47,7 +47,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     setLoading(true);
 
     dispatch({
-      type: Types.Start,
+      type: PayloadTypes.Start,
       payload: {
         fishbowlStarted: true
       }

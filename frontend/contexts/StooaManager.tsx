@@ -24,7 +24,7 @@ import {
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL } from 'lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from 'lib/helpers';
-import { Types, useStateValue } from 'contexts/AppContext';
+import { PayloadTypes, useStateValue } from 'contexts/AppContext';
 import useEventListener from 'hooks/useEventListener';
 import useToasts from 'hooks/useToasts';
 
@@ -91,7 +91,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       })
       .then(({ data: { status } }) => {
         dispatch({
-          type: Types.Status,
+          type: PayloadTypes.Status,
           payload: { conferenceStatus: status }
         });
       })

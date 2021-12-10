@@ -16,7 +16,7 @@ import api from 'lib/api';
 import { IConferenceStatus } from '@/jitsi/Status';
 import Loader from 'components/Web/Loader';
 import Error from 'components/Common/Error';
-import { Types, useStateValue } from 'contexts/AppContext';
+import { PayloadTypes, useStateValue } from 'contexts/AppContext';
 
 const withIsFishbowlEnded = WrappedComponent => props => {
   const [loaded, setLoaded] = useState(false);
@@ -33,7 +33,7 @@ const withIsFishbowlEnded = WrappedComponent => props => {
       })
       .then(({ data }) => {
         dispatch({
-          type: Types.Status,
+          type: PayloadTypes.Status,
           payload: { conferenceStatus: data.status }
         });
 
