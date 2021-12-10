@@ -11,14 +11,10 @@ import React, { createContext, useContext, useReducer, Dispatch } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 
 type ActionMap<M> = {
-  [Key in keyof M]: M[Key] extends undefined
-    ? {
-        type: Key;
-      }
-    : {
-        type: Key;
-        payload: M[Key];
-      };
+  [Key in keyof M]: {
+    type: Key;
+    payload: M[Key];
+  };
 };
 
 export enum PayloadTypes {
