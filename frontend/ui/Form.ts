@@ -10,8 +10,8 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
 
-import Alert from 'ui/Alert';
-import { space, media, rems } from 'ui/helpers';
+import Alert from '@/ui/Alert';
+import { space, media, rems } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
@@ -22,8 +22,8 @@ import {
   COLOR_PURPLE_500,
   COLOR_RED_500,
   FONT_BASE_SIZE
-} from 'ui/settings';
-import { TEXT_SM, TEXT_XXS } from 'ui/Texts';
+} from '@/ui/settings';
+import { TEXT_SM, TEXT_XXS } from '@/ui/Texts';
 
 interface Props {
   full?: boolean;

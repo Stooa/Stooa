@@ -9,11 +9,11 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import VideoPlaceholder from 'components/App/VideoPlaceholder';
-import SeatImage from 'ui/svg/seat.svg';
-import MicMuted from 'ui/svg/mic-muted.svg';
-import VideoMuted from 'ui/svg/video-muted.svg';
-import SeatsStyled, { Free, Seat } from 'components/App/Seats/styles';
+import VideoPlaceholder from '@/components/App/VideoPlaceholder';
+import SeatImage from '@/ui/svg/seat.svg';
+import MicMuted from '@/ui/svg/mic-muted.svg';
+import VideoMuted from '@/ui/svg/video-muted.svg';
+import SeatsStyled, { Free, Seat } from '@/components/App/Seats/styles';
 
 const Seats = () => {
   const { t } = useTranslation('app');

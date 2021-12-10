@@ -8,14 +8,14 @@
  */
 
 import styled from 'styled-components';
-import { space, rems, media } from 'ui/helpers';
+import { space, rems, media } from '@/ui/helpers';
 
 import {
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
-} from 'ui/settings';
+} from '@/ui/settings';
 
 const Billboard = styled.div`
   display: flex;

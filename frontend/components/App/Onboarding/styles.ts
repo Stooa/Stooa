@@ -9,14 +9,14 @@
 
 import styled, { css } from 'styled-components';
 
-import Alert from 'ui/Alert';
-import { space, media, rems } from 'ui/helpers';
+import Alert from '@/ui/Alert';
+import { space, media, rems } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_800
-} from 'ui/settings';
+} from '@/ui/settings';
 
 const OnboardingWrapper = styled.div`
   position: relative;

@@ -19,12 +19,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import { ROUTE_HOME } from 'app.config';
-import { RESET_LOGGED_PASSWORD } from 'lib/gql/Password';
-import FormikForm from 'ui/Form';
-import Input from 'components/Common/Fields/Input';
-import SubmitBtn from 'components/Web/SubmitBtn';
-import FormError from 'components/Web/Forms/FormError';
+import { ROUTE_HOME } from '@/app.config';
+import { RESET_LOGGED_PASSWORD } from '@/lib/gql/Password';
+import FormikForm from '@/ui/Form';
+import Input from '@/components/Common/Fields/Input';
+import SubmitBtn from '@/components/Web/SubmitBtn';
+import FormError from '@/components/Web/Forms/FormError';
 
 interface FormValues {
   password: string;

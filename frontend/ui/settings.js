@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { colors } from 'ui/design-tokens/color.json';
+import { colors } from '@/ui/design-tokens/color.json';
 
 const BREAKPOINTS = {
   desktop: 1024,

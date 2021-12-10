@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import FooterColors from 'ui/svg/footer-colors.svg';
+import FooterColors from '@/ui/svg/footer-colors.svg';
 
 const Decoration = () => {
   return <FooterColors />;

@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { getAuthToken } from 'lib/auth';
-import { getBackendSafeRoomName, dispatchEvent } from 'lib/helpers';
+import { getAuthToken } from '@/lib/auth';
+import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
 import { CONFERENCE_START } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';

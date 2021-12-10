@@ -11,9 +11,9 @@ import React from 'react';
 import { Field, useField } from 'formik';
 
 import { Input } from '@/types/input';
-import { InputStyled } from 'ui/Form';
-import { ValidationError, ValidationIcon } from 'ui/Validation';
-import Icon from 'components/Common/Fields/Icon';
+import { InputStyled } from '@/ui/Form';
+import { ValidationError, ValidationIcon } from '@/ui/Validation';
+import Icon from '@/components/Common/Fields/Icon';
 
 const InputField: React.FC<Input> = ({
   className = '',

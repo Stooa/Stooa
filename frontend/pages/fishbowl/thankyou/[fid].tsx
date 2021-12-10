@@ -13,21 +13,21 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND } from 'app.config';
-import { dataLayerPush, pushEventDataLayer } from 'lib/analytics';
-import { GET_FISHBOWL } from 'lib/gql/Fishbowl';
-import { formatDateTime } from 'lib/helpers';
-import ThankYouStyled, { Description, Time } from 'ui/pages/thank-you';
-import ArrowRight from 'ui/svg/arrow-right.svg';
-import Linkedin from 'ui/svg/share-linkedin.svg';
-import Mail from 'ui/svg/share-mail.svg';
-import Twitter from 'ui/svg/share-twitter.svg';
-import Whatsapp from 'ui/svg/share-whatsapp.svg';
-import { ButtonStyledLinkSmall } from 'ui/Button';
+import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND } from '@/app.config';
+import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
+import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { formatDateTime } from '@/lib/helpers';
+import ThankYouStyled, { Description, Time } from '@/ui/pages/thank-you';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
+import Linkedin from '@/ui/svg/share-linkedin.svg';
+import Mail from '@/ui/svg/share-mail.svg';
+import Twitter from '@/ui/svg/share-twitter.svg';
+import Whatsapp from '@/ui/svg/share-whatsapp.svg';
+import { ButtonStyledLinkSmall } from '@/ui/Button';
 
-const Layout = dynamic(import('layouts/Default'), { loading: () => <div /> });
-const Loader = dynamic(import('components/Web/Loader'), { loading: () => <div /> });
-const Error = dynamic(import('components/Common/Error'), { loading: () => <div /> });
+const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
+const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
+const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div /> });
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');

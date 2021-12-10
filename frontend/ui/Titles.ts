@@ -9,7 +9,7 @@
 
 import { css } from 'styled-components';
 
-import { rems } from 'ui/helpers';
+import { rems } from '@/ui/helpers';
 
 const Titles = css`
   .title-xl {

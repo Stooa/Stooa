@@ -8,7 +8,7 @@
  */
 
 import { css } from 'styled-components';
-import { BREAKPOINTS, FONT_BASE_SIZE, SPACE } from 'ui/settings';
+import { BREAKPOINTS, FONT_BASE_SIZE, SPACE } from '@/ui/settings';
 
 const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
   if (hex[0] === '#') {

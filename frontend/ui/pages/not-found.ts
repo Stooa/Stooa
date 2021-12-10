@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space, media } from 'ui/helpers';
+import { space, media } from '@/ui/helpers';
 
 const NotFoundStyled = styled.div`
   .not-found-img {

@@ -8,7 +8,7 @@
  */
 
 import styled from 'styled-components';
-import { space } from 'ui/helpers';
+import { space } from '@/ui/helpers';
 
 const ActionButton = styled.button<{ disabled?: boolean; active: boolean }>`
   cursor: pointer;

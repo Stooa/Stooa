@@ -9,7 +9,7 @@
 
 import { css } from 'styled-components';
 
-import { media } from 'ui/helpers';
+import { media } from '@/ui/helpers';
 
 const Animations = css`
   .animate .animate-item,

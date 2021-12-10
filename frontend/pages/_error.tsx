@@ -11,7 +11,7 @@ import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
-import { CONTACT_EMAIL } from 'app.config';
+import { CONTACT_EMAIL } from '@/app.config';
 
 interface Props {
   statusCode?: number;

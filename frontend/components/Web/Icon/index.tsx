@@ -7,17 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import Avatar from 'ui/svg/avatar.svg';
-import Checkmark from 'ui/svg/checkmark.svg';
-import Calendar from 'ui/svg/calendar.svg';
-import Clock from 'ui/svg/clock.svg';
-import Cross from 'ui/svg/cross.svg';
-import Hourglass from 'ui/svg/hourglass.svg';
-import Lock from 'ui/svg/lock.svg';
-import Mail from 'ui/svg/mail.svg';
-import World from 'ui/svg/world.svg';
-import ChevronDown from 'ui/svg/chevron-down.svg';
-import Language from 'ui/svg/language.svg';
+import Avatar from '@/ui/svg/avatar.svg';
+import Checkmark from '@/ui/svg/checkmark.svg';
+import Calendar from '@/ui/svg/calendar.svg';
+import Clock from '@/ui/svg/clock.svg';
+import Cross from '@/ui/svg/cross.svg';
+import Hourglass from '@/ui/svg/hourglass.svg';
+import Lock from '@/ui/svg/lock.svg';
+import Mail from '@/ui/svg/mail.svg';
+import World from '@/ui/svg/world.svg';
+import ChevronDown from '@/ui/svg/chevron-down.svg';
+import Language from '@/ui/svg/language.svg';
 
 type IIconProps = {
   className?: string;

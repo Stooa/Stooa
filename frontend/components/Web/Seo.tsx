@@ -10,7 +10,7 @@
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
-import { APP_NAME } from 'app.config';
+import { APP_NAME } from '@/app.config';
 
 const Seo: React.FC<{ title: string }> = ({ title = '' }) => {
   const { t } = useTranslation('common');

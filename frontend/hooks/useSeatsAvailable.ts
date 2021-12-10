@@ -10,7 +10,7 @@
 import { useState } from 'react';
 
 import { SEATS_CHANGE } from '@/jitsi/Events';
-import useEventListener from 'hooks/useEventListener';
+import useEventListener from '@/hooks/useEventListener';
 
 type IProps = {
   detail: {

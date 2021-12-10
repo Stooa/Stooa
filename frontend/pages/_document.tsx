@@ -9,7 +9,7 @@
 
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import i18nConfig from 'i18n';
+import i18nConfig from '@/i18n';
 
 function documentLang({ __NEXT_DATA__ }) {
   const { locale } = __NEXT_DATA__;

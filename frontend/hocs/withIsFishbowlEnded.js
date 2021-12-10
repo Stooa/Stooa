@@ -11,12 +11,12 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_THANKYOU } from 'app.config';
-import api from 'lib/api';
+import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
+import api from '@/lib/api';
 import { IConferenceStatus } from '@/jitsi/Status';
-import Loader from 'components/Web/Loader';
-import Error from 'components/Common/Error';
-import { useStateValue } from 'contexts/AppContext';
+import Loader from '@/components/Web/Loader';
+import Error from '@/components/Common/Error';
+import { useStateValue } from '@/contexts/AppContext';
 
 const withIsFishbowlEnded = WrappedComponent => props => {
   const [loaded, setLoaded] = useState(false);
