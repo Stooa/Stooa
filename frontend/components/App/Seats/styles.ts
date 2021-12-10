@@ -17,9 +17,9 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_YELLOW_500
-} from 'ui/settings';
-import { APP_SM } from 'ui/Texts';
-import { media, space } from 'ui/helpers';
+} from '@/ui/settings';
+import { APP_SM } from '@/ui/Texts';
+import { media, space } from '@/ui/helpers';
 
 const SeatsStyled = styled.div`
   align-items: center;

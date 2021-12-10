@@ -10,9 +10,9 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ButtonLink } from 'ui/Button';
-import Modal from 'ui/Modal';
-import Cross from 'ui/svg/cross.svg';
+import { ButtonLink } from '@/ui/Button';
+import Modal from '@/ui/Modal';
+import Cross from '@/ui/svg/cross.svg';
 
 interface Props {
   toggleModal: () => void;

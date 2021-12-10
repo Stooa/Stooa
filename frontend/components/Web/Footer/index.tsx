@@ -29,21 +29,21 @@ import {
   SUPPORT_EMAIL,
   GITHUB_BASE,
   APP_NAME
-} from 'app.config';
+} from '@/app.config';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import { useAuth } from 'contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 
-import Logo from 'components/Common/Logo';
-import LanguageSwitcher from 'components/Common/LanguageSwitcher';
-import RedirectLink from 'components/Web/RedirectLink';
+import Logo from '@/components/Common/Logo';
+import LanguageSwitcher from '@/components/Common/LanguageSwitcher';
+import RedirectLink from '@/components/Web/RedirectLink';
 
-import Facebook from 'ui/svg/RRSS-facebook.svg';
-import Github from 'ui/svg/RRSS-github.svg';
-import Instagram from 'ui/svg/RRSS-instagram.svg';
-import LinkedIn from 'ui/svg/RRSS-linkedin.svg';
-import Twitter from 'ui/svg/RRSS-twitter.svg';
+import Facebook from '@/ui/svg/RRSS-facebook.svg';
+import Github from '@/ui/svg/RRSS-github.svg';
+import Instagram from '@/ui/svg/RRSS-instagram.svg';
+import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
+import Twitter from '@/ui/svg/RRSS-twitter.svg';
 import { Container, FooterCopyright, FooterNav, Nav, NavList, NavTitle } from './styles';
 
 type TSocial = {

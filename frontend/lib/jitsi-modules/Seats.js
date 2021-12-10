@@ -9,7 +9,7 @@
 
 import { SEATS_CHANGE, NOTIFICATION, NOTIFICATION_CLOSE, USER_MUST_LEAVE } from '@/jitsi/Events';
 import conferenceRepository from '@/jitsi/Conference';
-import { dispatchEvent, removeItem } from 'lib/helpers';
+import { dispatchEvent, removeItem } from '@/lib/helpers';
 
 const seatsRepository = () => {
   let seats = [];

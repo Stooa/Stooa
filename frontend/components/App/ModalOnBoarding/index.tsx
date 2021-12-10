@@ -9,8 +9,8 @@
 
 import React from 'react';
 
-import Cross from 'ui/svg/cross.svg';
-import OnboardingModal from 'components/App/ModalOnBoarding/styles';
+import Cross from '@/ui/svg/cross.svg';
+import OnboardingModal from '@/components/App/ModalOnBoarding/styles';
 
 interface Props {
   show: boolean;

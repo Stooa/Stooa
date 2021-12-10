@@ -10,12 +10,12 @@
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_HOME } from 'app.config';
-import Layout from 'layouts/Default';
-import Button from 'ui/Button';
-import ArrowRight from 'ui/svg/arrow-right.svg';
-import NotFoundImg from 'ui/svg/not-found.svg';
-import NotFoundStyled from 'ui/pages/not-found';
+import { ROUTE_FISHBOWL_CREATE, ROUTE_HOME } from '@/app.config';
+import Layout from '@/layouts/Default';
+import Button from '@/ui/Button';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
+import NotFoundImg from '@/ui/svg/not-found.svg';
+import NotFoundStyled from '@/ui/pages/not-found';
 
 const Page404 = () => {
   const { t } = useTranslation('_error');

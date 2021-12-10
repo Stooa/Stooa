@@ -10,9 +10,9 @@
 import React from 'react';
 import { Field, useField } from 'formik';
 
-import { InputStyled } from 'ui/Form';
-import { ValidationError } from 'ui/Validation';
-import Icon from 'components/Common/Fields/Icon';
+import { InputStyled } from '@/ui/Form';
+import { ValidationError } from '@/ui/Validation';
+import Icon from '@/components/Common/Fields/Icon';
 import { Input } from '@/types/input';
 
 const InputField: React.FC<Input> = ({

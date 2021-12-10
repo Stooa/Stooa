@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space, rems } from 'ui/helpers';
+import { space, rems } from '@/ui/helpers';
 
 const Wysiwyg = styled.div`
   margin: ${space(4)} auto 0;

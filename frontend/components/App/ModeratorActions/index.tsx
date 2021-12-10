@@ -13,11 +13,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { RUN_FISHBOWL, FINISH_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
-import { useStateValue } from 'contexts/AppContext';
-import ModalStartIntroduction from 'components/App/ModalStartIntroduction';
-import ModalEndFishbowl from 'components/App/ModalEndFishbowl';
+import { useStateValue } from '@/contexts/AppContext';
+import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
+import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 
-import { ButtonAppSmall } from 'ui/Button';
+import { ButtonAppSmall } from '@/ui/Button';
 
 interface Props {
   fid: string;

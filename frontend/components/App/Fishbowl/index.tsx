@@ -12,12 +12,12 @@ import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
 import { CONFERENCE_START } from '@/jitsi/Events';
-import useEventListener from 'hooks/useEventListener';
-import { useStooa } from 'contexts/StooaManager';
-import useToasts from 'hooks/useToasts';
+import useEventListener from '@/hooks/useEventListener';
+import { useStooa } from '@/contexts/StooaManager';
+import useToasts from '@/hooks/useToasts';
 
-import { Main } from 'layouts/App/styles';
-import { Notifications } from 'components/App/Fishbowl/styles';
+import { Main } from '@/layouts/App/styles';
+import { Notifications } from '@/components/App/Fishbowl/styles';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });

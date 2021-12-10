@@ -8,7 +8,7 @@
  */
 
 import styled from 'styled-components';
-import { space, media, rems } from 'ui/helpers';
+import { space, media, rems } from '@/ui/helpers';
 
 const Languages = styled.div`
   display: inline-block;

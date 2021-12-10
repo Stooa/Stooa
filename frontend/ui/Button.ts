@@ -18,9 +18,9 @@ import {
   COLOR_PURPLE_500,
   COLOR_RED_400,
   COLOR_RED_500
-} from 'ui/settings';
-import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from 'ui/Texts';
-import { rems, space } from 'ui/helpers';
+} from '@/ui/settings';
+import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from '@/ui/Texts';
+import { rems, space } from '@/ui/helpers';
 
 const buttonStyles = css`
   ${TEXT_MD}

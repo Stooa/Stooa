@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { media } from 'ui/helpers';
+import { media } from '@/ui/helpers';
 
 const Container = styled.div`
   display: grid;

@@ -9,9 +9,9 @@
 
 import styled from 'styled-components';
 
-import { StatusBox } from 'components/App/Fishbowl/styles';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from 'ui/settings';
-import { space, rems, media } from 'ui/helpers';
+import { StatusBox } from '@/components/App/Fishbowl/styles';
+import { COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { space, rems, media } from '@/ui/helpers';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};

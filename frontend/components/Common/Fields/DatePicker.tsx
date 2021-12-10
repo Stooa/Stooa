@@ -12,9 +12,9 @@ import { useField, useFormikContext } from 'formik';
 import DatePickerField from 'react-datepicker';
 
 import { DatePicker } from '@/types/input';
-import { DatePickerStyled } from 'ui/Form';
-import { ValidationError } from 'ui/Validation';
-import Icon from 'components/Common/Fields/Icon';
+import { DatePickerStyled } from '@/ui/Form';
+import { ValidationError } from '@/ui/Validation';
+import Icon from '@/components/Common/Fields/Icon';
 
 const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, ...props }) => {
   const { setFieldValue } = useFormikContext();
