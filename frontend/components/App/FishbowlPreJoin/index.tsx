@@ -88,7 +88,7 @@ const FishbowlPreJoin: React.FC = () => {
         const localTrack = localTracks.current[index];
 
         if (!localTrack.isAudioTrack()) {
-          const video = document.querySelector('video');
+          const video: HTMLVideoElement = document.querySelector('#prejoin');
 
           if (video) {
             localTrack.attach(video);
@@ -127,7 +127,7 @@ const FishbowlPreJoin: React.FC = () => {
           <Devices>
             <VideoContainer>
               {showPlaceholder && <VideoPlaceholder />}
-              <video autoPlay muted className="video" playsInline />
+              <video id="prejoin" autoPlay muted className="video" playsInline />
             </VideoContainer>
             <DevicesToolbar>
               <ButtonVideo
