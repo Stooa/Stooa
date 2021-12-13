@@ -29,17 +29,21 @@ import {
   SUPPORT_EMAIL,
   GITHUB_BASE,
   APP_NAME
-} from 'app.config';
-import { useAuth } from 'contexts/AuthContext';
-import Logo from 'components/Common/Logo';
-import GAButton from 'components/Common/GAButton';
-import LanguageSwitcher from 'components/Common/LanguageSwitcher';
-import RedirectLink from 'components/Web/RedirectLink';
-import Facebook from 'ui/svg/RRSS-facebook.svg';
-import Github from 'ui/svg/RRSS-github.svg';
-import Instagram from 'ui/svg/RRSS-instagram.svg';
-import LinkedIn from 'ui/svg/RRSS-linkedin.svg';
-import Twitter from 'ui/svg/RRSS-twitter.svg';
+} from '@/app.config';
+
+import { pushEventDataLayer } from '@/lib/analytics';
+
+import { useAuth } from '@/contexts/AuthContext';
+
+import Logo from '@/components/Common/Logo';
+import LanguageSwitcher from '@/components/Common/LanguageSwitcher';
+import RedirectLink from '@/components/Web/RedirectLink';
+
+import Facebook from '@/ui/svg/RRSS-facebook.svg';
+import Github from '@/ui/svg/RRSS-github.svg';
+import Instagram from '@/ui/svg/RRSS-instagram.svg';
+import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
+import Twitter from '@/ui/svg/RRSS-twitter.svg';
 import { Container, FooterCopyright, FooterNav, Nav, NavList, NavTitle } from './styles';
 
 type TSocial = {
@@ -90,15 +94,16 @@ const Footer: React.FC = () => {
           <NavList>
             <li className="text-sm">
               <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-                <GAButton
-                  variant="link"
-                  event={{
-                    category: 'Create Fishbowl',
-                    action: 'Footer',
-                    label: 'Footer'
+                <a
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Create Fishbowl',
+                      action: 'Footer',
+                      label: 'Footer'
+                    });
                   }}>
                   <span>{t('cta')}</span>
-                </GAButton>
+                </a>
               </Link>
             </li>
             <li className="text-sm">
@@ -171,17 +176,18 @@ const Footer: React.FC = () => {
         <Nav className="social">
           {socialNetworks.map(({ name, url, component }) => (
             <Link href={url} passHref key={name}>
-              <GAButton
+              <a
                 target="_blank"
                 rel="noreferrer"
-                variant="link"
-                event={{
-                  category: 'Footer',
-                  action: 'RRSS',
-                  label: name
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Footer',
+                    action: 'RRSS',
+                    label: name
+                  });
                 }}>
                 {component}
-              </GAButton>
+              </a>
             </Link>
           ))}
         </Nav>

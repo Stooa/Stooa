@@ -9,9 +9,9 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import { Container, Main, Overlay } from 'layouts/App/styles';
-import LoadingIcon from 'components/Common/LoadingIcon';
-import Seats from 'components/App/Seats';
+import { Container, Main, Overlay } from '@/layouts/App/styles';
+import LoadingIcon from '@/components/Common/LoadingIcon';
+import Seats from '@/components/App/Seats';
 
 const Loading = () => {
   const { t } = useTranslation('app');

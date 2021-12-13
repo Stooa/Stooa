@@ -10,15 +10,15 @@
 import React from 'react';
 import Link from 'next/link';
 
-import GAButton from 'components/Common/GAButton';
+import { isCurrentGuest } from '@/lib/auth';
+import { pushEventDataLayer } from '@/lib/analytics';
 
-import { isCurrentGuest } from 'lib/auth';
-import Linkedin from 'ui/svg/linkedin.svg';
-import Twitter from 'ui/svg/twitter.svg';
-import Mic from 'ui/svg/mic.svg';
-import MicMuted from 'ui/svg/mic-muted.svg';
-import Video from 'ui/svg/video.svg';
-import VideoMuted from 'ui/svg/video-muted.svg';
+import Linkedin from '@/ui/svg/linkedin.svg';
+import Twitter from '@/ui/svg/twitter.svg';
+import Mic from '@/ui/svg/mic.svg';
+import MicMuted from '@/ui/svg/mic-muted.svg';
+import Video from '@/ui/svg/video.svg';
+import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
@@ -51,18 +51,20 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
-            <GAButton
+            <a
+              onClick={() => {
+                pushEventDataLayer({
+                  action: 'Twitter',
+                  category: 'Participants',
+                  label: window.location.href
+                });
+              }}
+              href={twitter}
               target="_blank"
               rel="noreferrer"
-              className="icon"
-              variant="link"
-              event={{
-                action: 'Twitter',
-                category: 'Participants',
-                label: window.location.href
-              }}>
+              className="icon">
               <Twitter />
-            </GAButton>
+            </a>
           </Link>
         ) : (
           <span className="icon">
@@ -71,18 +73,19 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
         )}
         {linkedin ? (
           <Link href={linkedin} passHref>
-            <GAButton
+            <a
+              onClick={() => {
+                pushEventDataLayer({
+                  action: 'Linkedin',
+                  category: 'Participants',
+                  label: window.location.href
+                });
+              }}
               target="_blank"
               rel="noreferrer"
-              className="icon"
-              variant="link"
-              event={{
-                action: 'Linkedin',
-                category: 'Participants',
-                label: window.location.href
-              }}>
+              className="icon">
               <Linkedin />
-            </GAButton>
+            </a>
           </Link>
         ) : (
           <span className="icon">

@@ -13,8 +13,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import { StatusBox } from 'components/App/Fishbowl/styles';
-import HourGlass from 'ui/svg/hourglass-countdown.svg';
+import { StatusBox } from '@/components/App/Fishbowl/styles';
+import HourGlass from '@/ui/svg/hourglass-countdown.svg';
 
 interface Props {
   isModerator: boolean;

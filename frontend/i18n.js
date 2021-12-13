@@ -10,7 +10,7 @@
 const DEFAULT_LOCALE = 'en';
 
 module.exports = {
-  locales: ['en', 'ca', 'es'],
+  locales: ['en', 'ca', 'es', 'fr'],
   defaultLocale: DEFAULT_LOCALE,
   pages: {
     '*': ['common'],

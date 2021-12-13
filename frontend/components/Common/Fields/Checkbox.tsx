@@ -10,8 +10,8 @@
 import React from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
-import { CheckboxStyled } from 'ui/Form';
-import { ValidationError } from 'ui/Validation';
+import { CheckboxStyled } from '@/ui/Form';
+import { ValidationError } from '@/ui/Validation';
 
 type Props = {
   label?: string;

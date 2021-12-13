@@ -12,36 +12,14 @@ server {
 
     ${NGINX_CUSTOM_FRONTEND_CONFIG}
 
-    # WebSockets
-    location = /xmpp-websocket {
-        proxy_pass http://${XMPP_SERVER}:5280/xmpp-websocket;
-        proxy_http_version 1.1;
-        proxy_cache_valid 5m;
-
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Upgrade $http_upgrade;
-
-        proxy_set_header Host ${XMPP_DOMAIN};
-        proxy_set_header X-Forwarded-For $remote_addr;
-
-        tcp_nodelay on;
-    }
-
-    # JVB WebSockets
-    location ~ ^/colibri-ws/([a-zA-Z0-9-\.]+)/(.*) {
-        proxy_pass http://$1:9090/colibri-ws/$1/$2$is_args$args;
-        proxy_http_version 1.1;
-        proxy_cache_valid 5m;
-
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Upgrade $http_upgrade;
-
-        tcp_nodelay on;
-    }
-
     location / {
         proxy_pass http://${FRONTEND}:3000;
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_cache_valid 5m;
     }
+
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options SAMEORIGIN always;
+    add_header X-XSS-Protection "1; mode=block" always;
 }

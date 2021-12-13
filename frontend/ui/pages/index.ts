@@ -8,14 +8,14 @@
  */
 
 import styled from 'styled-components';
-import { space, rems, media } from 'ui/helpers';
+import { space, rems, media } from '@/ui/helpers';
 
 import {
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
-} from 'ui/settings';
+} from '@/ui/settings';
 
 const Billboard = styled.div`
   display: flex;
@@ -47,10 +47,6 @@ const Billboard = styled.div`
   ${media.min('desktopLarge')`
     min-height: 55vh;
   `}
-
-  a {
-    margin-top: ${space(3)};
-  }
 
   #animated-billboard-morph,
   #animated-billboard-morph2 {
@@ -108,7 +104,8 @@ const Description = styled.div<{ center?: boolean }>`
   }
 
   ${media.min('tablet')`
-    margin: ${({ center }) => (center ? `${space(2)} auto` : `${space(2)} 0`)};
+    margin: ${({ center }) =>
+      center ? `${space(2)} auto ${space(3)}}` : `${space(2)} 0 ${space(3)}}`};
     max-width: ${rems(700)};
     text-align: ${({ center }) => (center ? 'center' : 'left')};
   `}

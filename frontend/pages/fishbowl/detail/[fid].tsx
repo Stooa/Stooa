@@ -13,21 +13,21 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_NOT_FOUND } from 'app.config';
-import { useAuth } from 'contexts/AuthContext';
-import { GET_FISHBOWL } from 'lib/gql/Fishbowl';
-import { dataLayerPush } from 'lib/analytics';
-import Alert from 'ui/Alert';
+import { ROUTE_NOT_FOUND } from '@/app.config';
+import { useAuth } from '@/contexts/AuthContext';
+import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { dataLayerPush } from '@/lib/analytics';
+import Alert from '@/ui/Alert';
 
-const FishbowlDetail = dynamic(import('components/Web/FishbowlDetail'), {
+const FishbowlDetail = dynamic(import('@/components/Web/FishbowlDetail'), {
   loading: () => <div />
 });
-const JoinFishbowl = dynamic(import('components/Web/JoinFishbowl'), {
+const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), {
   loading: () => <div />
 });
-const Layout = dynamic(import('layouts/Default'), { loading: () => <div /> });
-const Loader = dynamic(import('components/Web/Loader'), { loading: () => <div /> });
-const Error = dynamic(import('components/Common/Error'), { loading: () => <div /> });
+const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
+const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
+const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div /> });
 
 const Detail = () => {
   const { t } = useTranslation('fishbowl');

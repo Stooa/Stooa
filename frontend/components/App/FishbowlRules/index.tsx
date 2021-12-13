@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import Button from 'ui/Button';
-import ArrowRight from 'ui/svg/arrow-right.svg';
-import { List, Title } from 'components/App/FishbowlRules/styles';
+import Button from '@/ui/Button';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
+import { List, Title } from '@/components/App/FishbowlRules/styles';
 
 const FishbowlRules = ({ action }) => {
   return (

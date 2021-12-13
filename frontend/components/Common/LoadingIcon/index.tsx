@@ -10,8 +10,8 @@
 import lottie from 'lottie-web';
 import { useEffect } from 'react';
 
-import { IconWrapper } from 'components/Common/LoadingIcon/styles';
-import LoaderJson from 'ui/animations/loader/loader.json';
+import { IconWrapper } from '@/components/Common/LoadingIcon/styles';
+import LoaderJson from '@/ui/animations/loader/loader.json';
 
 const LoadingIcon = () => {
   useEffect(() => {

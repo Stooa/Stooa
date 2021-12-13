@@ -60,8 +60,6 @@ services:
         image: nginx:1.20
         depends_on:
             - frontend
-            - jvb
-            - xmpp
         ports:
             - 8380:80
             - 8343:443
@@ -70,12 +68,8 @@ services:
             - ./.certs:/usr/app/.certs:ro,cached
         environment:
             - FRONTEND
-            - XMPP_SERVER
-            - XMPP_DOMAIN
         networks:
             meet.jitsi:
-                aliases:
-                    - ${XMPP_DOMAIN}
 
     # JITSI
     xmpp:
@@ -223,6 +217,25 @@ services:
             meet.jitsi:
                 aliases:
                     - ${JVB_SERVER}
+    jitsi-nginx:
+        image: nginx:1.20
+        depends_on:
+            - jvb
+            - xmpp
+        ports:
+            - 8280:80
+            - 8243:443
+        volumes:
+            - ./jitsi/.docker/nginx-dev/default.conf.template:/etc/nginx/templates/default.conf.template
+            - ./.certs:/usr/app/.certs:ro,cached
+        environment:
+            - NGINX_CUSTOM_JITSI_CORS_URL
+            - XMPP_SERVER
+            - XMPP_DOMAIN
+        networks:
+            meet.jitsi:
+                aliases:
+                    - ${XMPP_DOMAIN}
 
     # EXTRA
     mysql:

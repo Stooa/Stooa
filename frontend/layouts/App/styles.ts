@@ -9,8 +9,8 @@
 
 import styled, { keyframes } from 'styled-components';
 
-import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from 'ui/settings';
-import { space, rems, media } from 'ui/helpers';
+import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { space, rems, media } from '@/ui/helpers';
 
 const Container = styled.div<{ drawer?: boolean }>`
   background: ${COLOR_NEUTRO_200};

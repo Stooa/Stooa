@@ -18,7 +18,7 @@ Stooa enables a fluent and participatory conversation with automatic facilitatio
 
 A fishbowl is a **group dynamic** that facilitates conversations, debates and any type of activity in which **participation is essential for its development**.
 
-It is an ideal dialogue method for communities, educational environements, or companies looking to improve their employee experience.
+It is an ideal dialogue method for communities, educational environments or companies looking to improve their employee experience.
 
 🏛 [Start using Stooa](https://www.stooa.com)
 
@@ -28,7 +28,13 @@ Help us keep the Stooa Community open and inclusive. Please read and follow our 
 
 ## Contributing
 
-We love the open source community, that's why your contributions and feeback are more than welcome in Stooa, get to know more in our [contributing documentation](https://github.com/Stooa/Stooa/blob/main/CONTRIBUTING.md)
+We love the open source community, that's why your contributions and feedback are more than welcome in Stooa, get to know more in our [contributing documentation](https://github.com/Stooa/Stooa/blob/main/CONTRIBUTING.md)
+
+## Translations
+
+Project translated with [Weblate](https://hosted.weblate.org/projects/).
+<br/>
+Feel free to contribute or check existing translations [in the project hosted by Weblate](https://hosted.weblate.org/engage/stooa/). You can follow our [documentation on how to translate Stooa](https://docs.stooa.com/documentation/contributing/translations).
 
 ## Give feedback
 
@@ -49,6 +55,7 @@ You can give feedback through:
 Every code patch accepted in Stooa codebase is licensed under [MPL 2.0][license]. You must be careful to not include any code that can not be licensed under this license.
 
 Please [read carefully our license][license] and ask us if you have any questions as well as the [Contribution policy][contribute].
+
 
 ## App Stats
 

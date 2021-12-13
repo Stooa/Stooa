@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import {
   COLOR_NEUTRO_100,
@@ -18,11 +18,11 @@ import {
   COLOR_PURPLE_500,
   COLOR_RED_400,
   COLOR_RED_500
-} from 'ui/settings';
-import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from 'ui/Texts';
-import { rems, space } from 'ui/helpers';
+} from '@/ui/settings';
+import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from '@/ui/Texts';
+import { rems, space } from '@/ui/helpers';
 
-const Button = styled.button<{ full?: boolean; as?: string }>`
+const buttonStyles = css`
   ${TEXT_MD}
 
   align-items: center;
@@ -40,7 +40,6 @@ const Button = styled.button<{ full?: boolean; as?: string }>`
   padding: ${space(1.85)} ${space(4)} ${space(1.65)};
   text-decoration: none;
   transition: 0.1s ease-out;
-  width: ${({ full }) => (full ? '100%' : 'auto')};
   will-change: background, color;
 
   &:disabled {
@@ -70,6 +69,11 @@ const Button = styled.button<{ full?: boolean; as?: string }>`
     border-color: ${COLOR_PURPLE_400};
     color: ${COLOR_NEUTRO_100};
   }
+`;
+
+const Button = styled.button<{ full?: boolean }>`
+  width: ${({ full }) => (full ? '100%' : 'auto')};
+  ${buttonStyles};
 `;
 
 const ButtonSmall = styled(Button)`
@@ -124,16 +128,30 @@ const ButtonTransp = styled.button`
   }
 `;
 
-const ButtonLink = styled.button`
+const linkStyles = css`
   cursor: pointer;
   text-decoration: underline;
 `;
 
+const ButtonLink = styled.button`
+  ${linkStyles}
+`;
+
+const ButtonStyledLink = styled.a<{ full?: boolean }>`
+  width: ${({ full }) => (full ? '100%' : 'auto')};
+  ${buttonStyles};
+`;
+
+const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
+  ${TEXT_SM}
+
+  border-width: 1px;
+  padding: ${space(1.1)} ${space(3)} ${space(0.8)};
+`;
+
 const ButtonLinkApp = styled.button`
   ${APP_MD}
-
-  cursor: pointer;
-  text-decoration: underline;
+  ${linkStyles}
 `;
 
 export {
@@ -143,6 +161,8 @@ export {
   ButtonSmall,
   ButtonTransp,
   ButtonLink,
-  ButtonLinkApp
+  ButtonLinkApp,
+  ButtonStyledLink,
+  ButtonStyledLinkSmall
 };
 export default Button;

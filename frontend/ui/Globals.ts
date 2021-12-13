@@ -9,13 +9,13 @@
 
 import { createGlobalStyle } from 'styled-components';
 
-import { Button } from 'ui/Resets';
-import Texts from 'ui/Texts';
-import Titles from 'ui/Titles';
-import Overrides from 'ui/Overrides';
-import { media, space } from 'ui/helpers';
-import { COLOR_NEUTRO_700, FONT_BASE_SIZE, FONT_PRIMARY } from 'ui/settings';
-import { getIconCSS } from 'ui/Icons';
+import { Button } from '@/ui/Resets';
+import Texts from '@/ui/Texts';
+import Titles from '@/ui/Titles';
+import Overrides from '@/ui/Overrides';
+import { media, space } from '@/ui/helpers';
+import { COLOR_NEUTRO_700, FONT_BASE_SIZE, FONT_PRIMARY } from '@/ui/settings';
+import { getIconCSS } from '@/ui/Icons';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {

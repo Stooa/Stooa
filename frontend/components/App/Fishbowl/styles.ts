@@ -9,10 +9,10 @@
 
 import styled from 'styled-components';
 
-import Alert from 'ui/Alert';
-import { COLOR_NEUTRO_600 } from 'ui/settings';
-import { APP_SM } from 'ui/Texts';
-import { space } from 'ui/helpers';
+import Alert from '@/ui/Alert';
+import { COLOR_NEUTRO_600 } from '@/ui/settings';
+import { APP_SM } from '@/ui/Texts';
+import { space } from '@/ui/helpers';
 
 const StatusBox = styled(Alert)`
   ${APP_SM}

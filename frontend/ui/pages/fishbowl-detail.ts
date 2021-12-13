@@ -9,9 +9,9 @@
 
 import styled from 'styled-components';
 
-import Alert from 'ui/Alert';
-import { BREAKPOINTS } from 'ui/settings';
-import { space, rems } from 'ui/helpers';
+import Alert from '@/ui/Alert';
+import { BREAKPOINTS } from '@/ui/settings';
+import { space, rems } from '@/ui/helpers';
 
 const Container = styled.div<{ centered?: boolean }>`
   margin: ${space(4)} 0 ${space(2)};

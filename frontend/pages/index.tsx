@@ -16,25 +16,28 @@ import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
 import { TweenMax } from 'gsap';
 
-import { ROUTE_FISHBOWL_CREATE } from 'app.config';
-import GAButton from 'components/Common/GAButton';
-import Layout from 'layouts/Home';
-import { Billboard, Content, Description, Row, Sections, Wrapper } from 'ui/pages';
+import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
+import Layout from '@/layouts/Home';
 
 import { Lottie } from '@/types/animations';
-import ArrowRight from 'ui/svg/arrow-right.svg';
-import WaveMobile from 'ui/svg/wave-mobile.svg';
-import WaveDesktop from 'ui/svg/wave-desktop.svg';
-import BillboardDeskAnimPath from 'ui/animations/home/billboard-desktop.json';
-import BillboardMobAnimPath from 'ui/animations/home/billboard-mobile.json';
-import MorphBillAnimPath from 'ui/animations/home/billboard-morph.json';
-import Morph2BillAnimPath from 'ui/animations/home/billboard-morph-2.json';
-import KeyBenefit2MorphPath from 'ui/animations/home/keybenefit2-morph.json';
 
-const Benefits = dynamic(import('components/Web/HomeSections/Benefits'), {
+import { pushEventDataLayer } from '@/lib/analytics';
+
+import { Billboard, Content, Description, Row, Sections, Wrapper } from '@/ui/pages';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
+import WaveMobile from '@/ui/svg/wave-mobile.svg';
+import WaveDesktop from '@/ui/svg/wave-desktop.svg';
+import BillboardDeskAnimPath from '@/ui/animations/home/billboard-desktop.json';
+import BillboardMobAnimPath from '@/ui/animations/home/billboard-mobile.json';
+import MorphBillAnimPath from '@/ui/animations/home/billboard-morph.json';
+import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
+import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
+import { ButtonStyledLink } from '@/ui/Button';
+
+const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
   loading: () => <div />
 });
-const Banner = dynamic(import('components/Web/HomeSections/Banner'), { loading: () => <div /> });
+const Banner = dynamic(import('@/components/Web/HomeSections/Banner'), { loading: () => <div /> });
 
 const Home = () => {
   const { t } = useTranslation('home');
@@ -128,16 +131,18 @@ const Home = () => {
           {t('description')}
         </Description>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-          <GAButton
+          <ButtonStyledLink
             className="animate-item cta-create-fishbowl"
-            event={{
-              category: 'Create Fishbowl',
-              action: 'Billboard',
-              label: 'Home'
+            onClick={() => {
+              pushEventDataLayer({
+                category: 'Create Fishbowl',
+                action: 'Billboard',
+                label: 'Home'
+              });
             }}>
             <span>{t('cta')}</span>
             <ArrowRight />
-          </GAButton>
+          </ButtonStyledLink>
         </Link>
         <div id="animated-billboard-morph2"></div>
       </Billboard>

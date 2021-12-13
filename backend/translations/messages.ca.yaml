@@ -38,6 +38,7 @@ emails:
             es: Espanyol
             ca: Català
             en: Anglès
+            fr: Francès
 
 login:
     failure: Credencials no vàlides

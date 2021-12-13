@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import { TEXT_SM } from 'ui/Texts';
-import { media, space } from 'ui/helpers';
+import { TEXT_SM } from '@/ui/Texts';
+import { media, space } from '@/ui/helpers';
 
 const Navigation = styled.nav`
   align-items: center;

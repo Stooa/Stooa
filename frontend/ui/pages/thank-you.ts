@@ -9,14 +9,14 @@
 
 import styled from 'styled-components';
 
-import Alert from 'ui/Alert';
-import { space, rems } from 'ui/helpers';
+import Alert from '@/ui/Alert';
+import { space, rems } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
   COLOR_PURPLE_800
-} from 'ui/settings';
+} from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
   margin-top: ${space(9)};

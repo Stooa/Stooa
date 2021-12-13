@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import { rems, media } from 'ui/helpers';
-import Modal from 'ui/Modal';
+import { rems, media } from '@/ui/helpers';
+import Modal from '@/ui/Modal';
 
 const OnboardingModal = styled(Modal)`
   &.hide {

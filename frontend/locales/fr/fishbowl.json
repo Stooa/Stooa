@@ -1,0 +1,77 @@
+{
+    "mic": "Microphone",
+    "timeToStart": "{{time}} pour commencer",
+    "startFishbowl": "Démarrer le fishbowl",
+    "speaker": "Haut-parleur",
+    "cam": "Caméra",
+    "timeLeft_one": "Il reste {{time}}",
+    "nickname": {
+        "title": "Comment les autres participants doivent-ils vous appeler ?"
+    },
+    "waiting": "Attendre que l'hôte démarre le fishbowl",
+    "finishedEvent": "Le fishbowl est terminé",
+    "endModal": {
+        "title": "Terminer le fishbowl",
+        "button": "Confirmer",
+        "description": "Voulez-vous vraiment terminer ce fishbowl ?"
+    },
+    "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
+    "introduceModal": {
+        "title": "Faites une introduction",
+        "description": "Vous pouvez dire quelques mots d'introduction, la caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, n'oubliez pas d'autoriser les participants à se joindre à la conversation.",
+        "button": "Démarrer"
+    },
+    "participants": {
+        "attendees": "Auditeurs",
+        "title": "Participants du fishbowl",
+        "speaking": "En train de parler"
+    },
+    "joinMemberNote": "* Vous permet de contacter le reste des participants",
+    "joinFishbowl": "Aller au fishbowl",
+    "joinMember": "Rejoindre en tant qu'utilisateur enregistré *",
+    "joinGuest": "Rejoindre en tant qu'utilisateur invité",
+    "share": "Faites connaître Stooa !",
+    "preTitle": "Bien joué !",
+    "allowUsers": "Permettre aux participants de rejoindre la conversation",
+    "videoUnmute": "Démarrer la vidéo",
+    "preSubtitle": "Vérifiez les détails de votre nouveau fishbowl :",
+    "detail": {
+        "title": "Titre",
+        "startDate": "Date de début",
+        "duration": "Durée",
+        "description": "Description",
+        "language": "Langue",
+        "startTime": "Heure de début"
+    },
+    "months": {
+        "10": "octobre",
+        "01": "janvier",
+        "02": "février",
+        "06": "juin",
+        "07": "juillet",
+        "03": "mars",
+        "04": "avril",
+        "05": "mai",
+        "08": "août",
+        "11": "novembre",
+        "12": "décembre",
+        "09": "septembre"
+    },
+    "dateandtime": "Date et heure",
+    "title": "Créer un fishbowl gratuit",
+    "accessMsg": "L'accès au fishbowl sera autorisé <strong>une heure</strong> avant l'heure de début prévue.",
+    "copyText": "Copiez et partagez le lien du fishbowl avec les participants",
+    "copySuccess": "Lien copié dans le presse-papiers !",
+    "timeLeft_other": "Il reste {{time}}",
+    "lastMinute": "Dernière minute",
+    "endFishbowl": "Terminer le fishbowl",
+    "full": "Plein",
+    "join": "Rejoindre la conversation",
+    "sameAsSystem": "Suivre le système",
+    "settings": "Paramètres",
+    "leave": "Quitter la conversation",
+    "timesUp": "Le temps est écoulé",
+    "unmute": "Activer le son",
+    "mute": "Mettre en sourdine",
+    "videoMute": "Arrêter la vidéo"
+}

@@ -11,14 +11,14 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD } from 'app.config';
-import { useAuth } from 'contexts/AuthContext';
-import AvatarIcon from 'ui/svg/avatar.svg';
-import ChevronDown from 'ui/svg/chevron-down.svg';
-import Logout from 'ui/svg/logout.svg';
-import Lock from 'ui/svg/lock.svg';
-import Pencil from 'ui/svg/pencil.svg';
-import { Avatar as AvatarStyled, Dropdown } from 'components/Web/Avatar/styles';
+import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD } from '@/app.config';
+import { useAuth } from '@/contexts/AuthContext';
+import AvatarIcon from '@/ui/svg/avatar.svg';
+import ChevronDown from '@/ui/svg/chevron-down.svg';
+import Logout from '@/ui/svg/logout.svg';
+import Lock from '@/ui/svg/lock.svg';
+import Pencil from '@/ui/svg/pencil.svg';
+import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
 
 const Header: React.FC = () => {
   const wrapperRef = useRef(null);

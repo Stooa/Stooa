@@ -10,9 +10,9 @@
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { useAuth } from 'contexts/AuthContext';
-import ResetPasswordForm from 'components/Web/Forms/reset-password';
-import Layout from 'layouts/Default';
+import { useAuth } from '@/contexts/AuthContext';
+import ResetPasswordForm from '@/components/Web/Forms/reset-password';
+import Layout from '@/layouts/Default';
 
 const ChangePassword = () => {
   const { loading } = useAuth();

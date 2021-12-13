@@ -15,7 +15,8 @@
         "duration": "Durada",
         "description": "Descripció",
         "startDate": "Data d'inici",
-        "startTime": "Hora d'inici"
+        "startTime": "Hora d'inici",
+        "language": "Idioma"
     },
     "months": {
         "01": "Gener",

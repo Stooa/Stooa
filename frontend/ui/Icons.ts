@@ -9,8 +9,8 @@
 
 import styled, { css } from 'styled-components';
 
-import Delete from 'ui/svg/delete.svg';
-import { rems, space } from 'ui/helpers';
+import Delete from '@/ui/svg/delete.svg';
+import { rems, space } from '@/ui/helpers';
 
 type TProps = {
   left?: boolean;

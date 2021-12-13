@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { media, space } from 'ui/helpers';
+import { media, space } from '@/ui/helpers';
 
 const Wrapper = styled.div<{ small?: boolean; reader?: boolean }>`
   margin: 0 auto;

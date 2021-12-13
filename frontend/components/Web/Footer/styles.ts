@@ -9,8 +9,8 @@
 
 import styled from 'styled-components';
 
-import { media, space } from 'ui/helpers';
-import { COLOR_NEUTRO_400, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from 'ui/settings';
+import { media, space } from '@/ui/helpers';
+import { COLOR_NEUTRO_400, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
 
 const Container = styled.footer`
   background-color: ${COLOR_NEUTRO_400};
