@@ -31,7 +31,7 @@
     "jwt-decode": "3.1.2",
     "lottie-web": "5.7.8",
     "next": "12.0.7",
-    "next-translate": "^1.1.1",
+    "next-translate": "1.1.1",
     "react": "17.0.2",
     "react-countdown": "2.3.2",
     "react-datepicker": "3.8.0",
