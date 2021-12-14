@@ -166,6 +166,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     setApiInterval(window.setInterval(checkApIConferenceStatus, 6000));
 
     return () => {
+      console.log('-----[TestingCountdown] - Clearing intervals -----');
       window.clearInterval(timeUpInterval);
       window.clearInterval(apiInterval);
     };
