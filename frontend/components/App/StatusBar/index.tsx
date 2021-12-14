@@ -45,6 +45,7 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
   }, [timeStatus, conferenceStatus]);
 
   const rendererCountdown = ({ hours, minutes, completed, total }) => {
+    console.log('----- Renderer: ', minutes, '-----');
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
     let timeLeftText;
 
