@@ -45,7 +45,6 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
   }, [timeStatus, conferenceStatus]);
 
   const rendererCountdown = ({ hours, minutes, completed, total }) => {
-    console.log('----- Renderer: ', minutes, '-----');
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
     let timeLeftText;
 
@@ -62,9 +61,7 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
       const hoursText = t('form:fishbowl.hours');
       const minutesText = t('form:fishbowl.minutes');
       const time =
-        hours > 0
-          ? `${zeroPad(hours)}${hoursText}:${zeroPad(minutes + 1)}`
-          : Math.ceil(total / 60_000);
+        hours > 0 ? `${zeroPad(hours)}${hoursText}:${zeroPad(minutes)}` : Math.ceil(total / 60_000);
       timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
         time: `${time}${minutesText}`
       });
