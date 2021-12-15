@@ -26,7 +26,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
   speaker = false
 }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
-  const isMyself = isCurrentUser || isCurrentGuest(guestId);
+  const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
   return (
     <li className={`participant app-md`} data-id={id} title={name}>
