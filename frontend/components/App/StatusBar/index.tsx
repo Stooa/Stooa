@@ -55,7 +55,7 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
       timeLeftText = t('timesUp');
     } else if (timeStatus === ITimeStatus.TIME_UP) {
       timeLeftText = t('lastMinute');
-    } else if (minutes === 0) {
+    } else if (minutes === 0 && hours === 0) {
       const time = `1${t('form:fishbowl.minutes')}`;
       timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_one', { time });
     } else {
