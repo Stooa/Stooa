@@ -52,8 +52,6 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
         timeStatus={timeStatus}
         conferenceStatus={conferenceStatus}
       />
-      {/* <div className="countdown">{displayTime}</div> */}
-      {/* <Countdown date={date} renderer={rendererCountdown} /> */}
     </StatusBox>
   );
 };
