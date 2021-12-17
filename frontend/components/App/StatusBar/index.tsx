@@ -26,7 +26,10 @@ interface Props {
 const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
   const [statusClass, setStatusClass] = useState('warning');
   const [displayTime, setDisplayTime] = useState<string>('');
-  const [dateToCheck, setDateToCheck] = useState<string>();
+  const [dateToCheck, setDateToCheck] = useState<string>(() => {
+    const date = IConferenceStatus?.NOT_STARTED ? data.startDateTimeTz : data.endDateTimeTz;
+    return date;
+  });
   const [completed, setCompleted] = useState(() => {
     if (conferenceStatus === IConferenceStatus.FINISHED) {
       return true;
@@ -36,7 +39,7 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
   const { t } = useTranslation('fishbowl');
 
   const { time, pause } = useTimer({
-    initialTime: (Date.parse(dateToCheck) - Date.now()) / 1000,
+    initialTime: Math.abs((Date.parse(dateToCheck) - Date.now()) / 1000),
     timerType: 'DECREMENTAL',
     autostart: true,
     onTimeUpdate: (time: number) => {
