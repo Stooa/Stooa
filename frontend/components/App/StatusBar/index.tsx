@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import Countdown, { zeroPad } from 'react-countdown';
 import React, { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -15,6 +14,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import HourGlass from '@/ui/svg/hourglass-countdown.svg';
+import { useTimer } from 'use-timer';
 
 interface Props {
   isModerator: boolean;
@@ -25,7 +25,62 @@ interface Props {
 
 const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
   const [statusClass, setStatusClass] = useState('warning');
+  const [displayTime, setDisplayTime] = useState<string>('');
+  const [dateToCheck, setDateToCheck] = useState<string>();
+  const [completed, setCompleted] = useState(() => {
+    if (conferenceStatus === IConferenceStatus.FINISHED) {
+      return true;
+    }
+    return false;
+  });
   const { t } = useTranslation('fishbowl');
+
+  const { time, pause } = useTimer({
+    initialTime: (Date.parse(dateToCheck) - Date.now()) / 1000,
+    timerType: 'DECREMENTAL',
+    autostart: true,
+    onTimeUpdate: (time: number) => {
+      const stringCountdown = rendererCountdown(time);
+      setDisplayTime(stringCountdown);
+    }
+  });
+
+  const rendererCountdown = (duration: number): string => {
+    const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
+    let timeLeftText;
+
+    console.log('--- Renderer countdown running ---');
+    console.log(duration);
+
+    if (duration <= 0 || isNaN(duration)) {
+      console.log('--- Renderer countdown finished ---');
+      setCompleted(true);
+      pause();
+    }
+
+    const minutes: number = Math.floor(duration / 60) % 60,
+      hours: number = Math.floor(duration / 3600);
+
+    if (completed && conferenceNotStarted) {
+      timeLeftText = isModerator ? t('waitingHost') : t('waiting');
+    } else if (completed) {
+      timeLeftText = t('timesUp');
+    } else if (timeStatus === ITimeStatus.TIME_UP) {
+      timeLeftText = t('lastMinute');
+    } else if (minutes === 0 && hours === 0) {
+      const time = `1${t('form:fishbowl.minutes')}`;
+      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_one', { time });
+    } else {
+      const hoursText = t('form:fishbowl.hours');
+      const minutesText = t('form:fishbowl.minutes');
+      const time = hours > 0 ? `${hours}${hoursText}:${minutes}` : Math.ceil(duration / 60);
+      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
+        time: `${time}${minutesText}`
+      });
+    }
+
+    return timeLeftText;
+  };
 
   useEffect(() => {
     if (
@@ -44,39 +99,20 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
     }
   }, [timeStatus, conferenceStatus]);
 
-  const rendererCountdown = ({ hours, minutes, completed, total }) => {
-    const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
-    let timeLeftText;
+  useEffect(() => {
+    const date = IConferenceStatus?.NOT_STARTED ? data.startDateTimeTz : data.endDateTimeTz;
+    setDateToCheck(date);
+  }, []);
 
-    if (completed && conferenceNotStarted) {
-      timeLeftText = isModerator ? t('waitingHost') : t('waiting');
-    } else if (completed) {
-      timeLeftText = t('timesUp');
-    } else if (timeStatus === ITimeStatus.TIME_UP) {
-      timeLeftText = t('lastMinute');
-    } else if (minutes === 0 && hours === 0) {
-      const time = `1${t('form:fishbowl.minutes')}`;
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_one', { time });
-    } else {
-      const hoursText = t('form:fishbowl.hours');
-      const minutesText = t('form:fishbowl.minutes');
-      const time =
-        hours > 0 ? `${zeroPad(hours)}${hoursText}:${zeroPad(minutes)}` : Math.ceil(total / 60_000);
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-        time: `${time}${minutesText}`
-      });
-    }
-
-    return <span>{timeLeftText}</span>;
-  };
-
-  const date =
-    conferenceStatus === IConferenceStatus?.NOT_STARTED ? data.startDateTimeTz : data.endDateTimeTz;
+  useEffect(() => {
+    rendererCountdown(time);
+  }, [completed]);
 
   return (
     <StatusBox className={statusClass}>
       <HourGlass />
-      <Countdown date={date} renderer={rendererCountdown} />
+      <div className="countdown">{displayTime}</div>
+      {/* <Countdown date={date} renderer={rendererCountdown} /> */}
     </StatusBox>
   );
 };
