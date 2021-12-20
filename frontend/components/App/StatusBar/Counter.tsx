@@ -41,7 +41,8 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   };
 
   useEffect(() => {
-    console.log('esto no va');
+    console.log('--- Changed Conference Status ---');
+    clearInterval(intervalTimer);
     setfishbowlDate(() => {
       return conferenceStatus === IConferenceStatus?.NOT_STARTED
         ? Date.parse(fishbowlData.startDateTimeTz)
@@ -50,37 +51,35 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   }, [conferenceStatus]);
 
   useEffect(() => {
-    const dateNow = Date.now();
-
-    const isFinished = checkIfFinished(dateNow, fishbowlDate);
+    const currentDate = Date.now();
+    const isFinished = checkIfFinished(currentDate, fishbowlDate);
 
     if (!isFinished) {
       setIntervalTimer(
         setInterval(() => {
-          setTimeToDisplay(rendererCountdown(checkSecondsToDate(dateNow, fishbowlDate)));
+          setTimeToDisplay(rendererCountdown());
         }, 1000)
       );
-    } else {
+    } else if (isFinished && conferenceStatus === IConferenceStatus?.FINISHED) {
       setCompletedTime(true);
       setTimeToDisplay(t('timesUp'));
       clearInterval(intervalTimer);
+    } else {
+      setTimeToDisplay(rendererCountdown());
     }
 
     return () => clearInterval(intervalTimer);
   }, [fishbowlDate]);
 
-  useEffect(() => {
-    return () => clearInterval(intervalTimer);
-  }, []);
-
-  const rendererCountdown = (duration: number): string => {
+  const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
+    const currentDate = Date.now();
     let timeLeftText;
 
-    // console.log('Completed:', completedTime);
-    // console.log('Time Status: ', timeStatus);
-    // console.log('Conference Status: ', conferenceStatus);
-    // console.log('Duration: ', duration);
+    const duration = checkSecondsToDate(currentDate, fishbowlDate);
+
+    console.log('--- Rendering Countdown ---');
+    console.log(`Duration: ${duration}`);
 
     const minutes: number = Math.floor(duration / 60) % 60,
       hours: number = Math.floor(duration / 3600);
