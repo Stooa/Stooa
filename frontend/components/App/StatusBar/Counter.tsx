@@ -22,18 +22,23 @@ interface Props {
 
 export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerator }: Props) => {
   const [completedTime, setCompletedTime] = useState<boolean>(false);
-  const [timeToDisplay, setTimeToDisplay] = useState<string>();
+  const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading...');
+  const [intervalTimer, setIntervalTimer] = useState<NodeJS.Timeout>();
   const [fishbowlDate, setfishbowlDate] = useState(() => {
     return conferenceStatus === IConferenceStatus?.NOT_STARTED
       ? Date.parse(fishbowlData.startDateTimeTz)
       : Date.parse(fishbowlData.endDateTimeTz);
   });
-  const [intervalTimer, setIntervalTimer] = useState<NodeJS.Timeout>();
 
   const { t } = useTranslation('fishbowl');
 
   const checkSecondsToDate = (currentDate: number, fishbowlDate: number): number => {
-    return Math.ceil(Math.abs((fishbowlDate - currentDate) / 1000));
+    const difference = (fishbowlDate - currentDate) / 1000;
+    if (difference < 0) {
+      setCompletedTime(true);
+      return 0;
+    }
+    return Math.ceil(difference);
   };
 
   const checkIfFinished = (currentDate: number, dateToCompare: number): boolean => {
@@ -42,12 +47,17 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
   useEffect(() => {
     console.log('--- Changed Conference Status ---');
-    clearInterval(intervalTimer);
+    if (conferenceStatus === IConferenceStatus.RUNNING) {
+      setCompletedTime(false);
+    }
+
     setfishbowlDate(() => {
       return conferenceStatus === IConferenceStatus?.NOT_STARTED
         ? Date.parse(fishbowlData.startDateTimeTz)
         : Date.parse(fishbowlData.endDateTimeTz);
     });
+
+    return () => clearInterval(intervalTimer);
   }, [conferenceStatus]);
 
   useEffect(() => {
@@ -55,21 +65,21 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     const isFinished = checkIfFinished(currentDate, fishbowlDate);
 
     if (!isFinished) {
-      setIntervalTimer(
+      setIntervalTimer(value =>
         setInterval(() => {
+          if (value) {
+            clearInterval(intervalTimer);
+          }
           setTimeToDisplay(rendererCountdown());
         }, 1000)
       );
-    } else if (isFinished && conferenceStatus === IConferenceStatus?.FINISHED) {
-      setCompletedTime(true);
-      setTimeToDisplay(t('timesUp'));
-      clearInterval(intervalTimer);
     } else {
+      setCompletedTime(true);
       setTimeToDisplay(rendererCountdown());
     }
 
     return () => clearInterval(intervalTimer);
-  }, [fishbowlDate]);
+  }, [fishbowlDate, completedTime, timeStatus]);
 
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
@@ -78,15 +88,17 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
     const duration = checkSecondsToDate(currentDate, fishbowlDate);
 
-    console.log('--- Rendering Countdown ---');
-    console.log(`Duration: ${duration}`);
+    if (checkIfFinished(currentDate, fishbowlDate) || duration === 0) {
+      console.log('--- Time is up ---');
+      clearInterval(intervalTimer);
+    }
 
     const minutes: number = Math.floor(duration / 60) % 60,
       hours: number = Math.floor(duration / 3600);
 
-    if (completedTime && conferenceNotStarted) {
+    if (duration === 0 && conferenceNotStarted) {
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
-    } else if (completedTime && timeStatus === ITimeStatus.TIME_UP) {
+    } else if (duration === 0 && timeStatus === ITimeStatus.TIME_UP) {
       timeLeftText = t('timesUp');
     } else if (timeStatus === ITimeStatus.TIME_UP) {
       timeLeftText = t('lastMinute');
