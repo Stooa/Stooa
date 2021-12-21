@@ -8,7 +8,6 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
@@ -23,7 +22,7 @@ interface Props {
   conferenceStatus: IConferenceStatus;
 }
 
-const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
+const StatusBar: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
   const [statusClass, setStatusClass] = useState('warning');
 
   useEffect(() => {
@@ -56,4 +55,4 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
   );
 };
 
-export default CountDown;
+export default StatusBar;
