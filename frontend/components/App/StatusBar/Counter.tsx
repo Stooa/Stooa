@@ -32,7 +32,8 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
   const { t } = useTranslation('fishbowl');
 
-  const calculateDuration = (currentDate: number, fishbowlDate: number): number => {
+  const checkSecondsToDate = (fishbowlDate: number): number => {
+    const currentDate = Date.now();
     const difference = (fishbowlDate - currentDate) / 1000;
     if (difference < 0) {
       return 0;
@@ -40,7 +41,8 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     return Math.ceil(difference);
   };
 
-  const checkIfFinished = (currentDate: number, dateToCompare: number): boolean => {
+  const checkIfFinished = (dateToCompare: number): boolean => {
+    const currentDate = Date.now();
     return currentDate >= dateToCompare;
   };
 
@@ -60,8 +62,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   }, [conferenceStatus]);
 
   useEffect(() => {
-    const currentDate = Date.now();
-    const isFinished = checkIfFinished(currentDate, fishbowlDate);
+    const isFinished = checkIfFinished(fishbowlDate);
 
     if (!isFinished) {
       setIntervalTimer(value =>
@@ -82,12 +83,11 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
-    const currentDate = Date.now();
     let timeLeftText;
 
-    const duration = calculateDuration(currentDate, fishbowlDate);
+    const duration = checkSecondsToDate(fishbowlDate);
 
-    if (checkIfFinished(currentDate, fishbowlDate) || duration === 0) {
+    if (checkIfFinished(fishbowlDate) || duration === 0) {
       console.log('--- Time is up ---');
       clearInterval(intervalTimer);
     }
