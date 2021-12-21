@@ -23,7 +23,7 @@ interface Props {
 export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerator }: Props) => {
   const [completedTime, setCompletedTime] = useState<boolean>(false);
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading...');
-  const [intervalTimer, setIntervalTimer] = useState<NodeJS.Timeout>();
+  const [intervalTimer, setIntervalTimer] = useState<number>();
   const [fishbowlDate, setfishbowlDate] = useState(() => {
     return conferenceStatus === IConferenceStatus?.NOT_STARTED
       ? Date.parse(fishbowlData.startDateTimeTz)
@@ -66,7 +66,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
     if (!isFinished) {
       setIntervalTimer(value =>
-        setInterval(() => {
+        window.setInterval(() => {
           if (value) {
             clearInterval(intervalTimer);
           }
