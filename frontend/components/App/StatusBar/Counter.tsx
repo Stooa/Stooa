@@ -35,7 +35,6 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   const calculateDuration = (currentDate: number, fishbowlDate: number): number => {
     const difference = (fishbowlDate - currentDate) / 1000;
     if (difference < 0) {
-      setCompletedTime(true);
       return 0;
     }
     return Math.ceil(difference);
