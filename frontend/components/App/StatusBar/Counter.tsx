@@ -32,7 +32,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
   const { t } = useTranslation('fishbowl');
 
-  const checkSecondsToDate = (currentDate: number, fishbowlDate: number): number => {
+  const calculateDuration = (currentDate: number, fishbowlDate: number): number => {
     const difference = (fishbowlDate - currentDate) / 1000;
     if (difference < 0) {
       setCompletedTime(true);
@@ -86,7 +86,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     const currentDate = Date.now();
     let timeLeftText;
 
-    const duration = checkSecondsToDate(currentDate, fishbowlDate);
+    const duration = calculateDuration(currentDate, fishbowlDate);
 
     if (checkIfFinished(currentDate, fishbowlDate) || duration === 0) {
       console.log('--- Time is up ---');
