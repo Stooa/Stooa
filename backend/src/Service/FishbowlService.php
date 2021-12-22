@@ -79,11 +79,9 @@ class FishbowlService
 
     public function generateRandomSlug(Fishbowl $fishbowl): string
     {
-        $slugger = new AsciiSlugger();
         $hashids = new Hashids('', 10);
 
-        return $slugger->slug(s((string) $fishbowl->getName())->lower()->toString()) . '-' .
-            $hashids->encode(random_int(1, 1_000_000_000));
+        return $hashids->encode(random_int(1, 1_000_000_000));
     }
 
     public function getFishbowlStatus(string $slug): ?string
