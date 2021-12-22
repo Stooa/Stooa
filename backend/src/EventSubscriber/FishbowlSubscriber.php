@@ -56,6 +56,10 @@ class FishbowlSubscriber implements EventSubscriberInterface
 
             $object->setSlug($this->service->generateRandomSlug($object));
 
+            if (empty($object->getName())) {
+                $object->setName($this->service->generateDefaultTitle($object));
+            }
+
             $event->setControllerResult($object);
         }
     }

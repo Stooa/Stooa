@@ -135,7 +135,6 @@ class Fishbowl
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
      *
-     * @Assert\NotBlank
      * @Assert\Length(max=255)
      *
      * @ORM\Column(type="string")

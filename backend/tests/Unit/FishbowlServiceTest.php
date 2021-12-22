@@ -60,7 +60,7 @@ class FishbowlServiceTest extends TestCase
         $slug = $this->service->generateRandomSlug($fishbowl);
 
         $this->assertIsString($slug);
-        $this->assertSame(10, strlen($slug));
+        $this->assertSame(10, \strlen($slug));
     }
 
     /** @test */
