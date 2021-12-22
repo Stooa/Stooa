@@ -38,7 +38,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     if (difference <= 0) {
       return 0;
     }
-    return Math.ceil(difference);
+    return Math.floor(difference);
   };
 
   const checkIfFinished = (dateToCompare: number): boolean => {
@@ -86,8 +86,12 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
       clearInterval(intervalTimer);
     }
 
-    const minutes: number = Math.floor(seconds / 60) % 60;
+    const minutes: number = Math.ceil(seconds / 60) % 60;
     const hours: number = Math.floor(seconds / 3600);
+
+    console.log('Seconds', seconds);
+    console.log('Minutes', minutes);
+    console.log('Hours', hours);
 
     if (seconds === 0 && conferenceNotStarted) {
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
