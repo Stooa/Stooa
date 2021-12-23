@@ -88,14 +88,12 @@ class FishbowlService
 
     public function generateDefaultTitle(Fishbowl $fishbowl): Fishbowl
     {
-        if (!empty($fishbowl->getName()) || null === $fishbowl->getHost()) {
+        if (!empty($fishbowl->getName())) {
             return $fishbowl;
         }
 
         return $fishbowl->setName(
-            $this->translator->trans(
-                'fishbowl.default_title', ['%name%' => $fishbowl->getHost()->getName()], null, $fishbowl->getLocale()
-            )
+            $this->translator->trans('fishbowl.default_title', ['%name%' => $fishbowl->getHostName()], null, $fishbowl->getLocale())
         );
     }
 

@@ -531,4 +531,21 @@ class Fishbowl
     {
         return self::STATUS_FINISHED === $this->getCurrentStatus();
     }
+
+    public function getHostName(): ?string
+    {
+        if (null === $this->getHost()) {
+            return '';
+        }
+
+        $host = $this->getHost();
+
+        MAssert::isInstanceOf($host, User::class);
+
+        if (null === $host->getName()) {
+            return '';
+        }
+
+        return $host->getName();
+    }
 }
