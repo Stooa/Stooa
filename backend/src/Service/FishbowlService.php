@@ -50,7 +50,7 @@ class FishbowlService
     protected Security $security;
     protected GuestRepository $guestRepository;
     protected ParticipantRepository $participantRepository;
-    private TranslatorInterface $translator;
+    protected TranslatorInterface $translator;
 
     public function __construct(
         FishbowlRepository $fishbowlRepository,
@@ -86,10 +86,17 @@ class FishbowlService
         return $hashids->encode(random_int(1, 1_000_000_000));
     }
 
-    public function generateDefaultTitle(Fishbowl $fishbowl): string
+    public function generateDefaultTitle(Fishbowl $fishbowl): Fishbowl
     {
-        return $this->translator->trans(
-            'fishbowl.default_title', ['name' => $fishbowl->getHost()->getName()], null, $fishbowl->getLocale());
+        if (!empty($fishbowl->getName()) || null === $fishbowl->getHost()) {
+            return $fishbowl;
+        }
+
+        return $fishbowl->setName(
+            $this->translator->trans(
+                'fishbowl.default_title', ['name' => $fishbowl->getHost()->getName()], null, $fishbowl->getLocale()
+            )
+        );
     }
 
     public function getFishbowlStatus(string $slug): ?string
