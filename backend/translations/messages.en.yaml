@@ -44,4 +44,4 @@ login:
     failure: Invalid credentials
 
 fishbowl:
-    default_title: 'Fishbowl Meeting - %name'
+    default_title: 'Fishbowl Meeting - %name%'

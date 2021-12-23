@@ -94,7 +94,7 @@ class FishbowlService
 
         return $fishbowl->setName(
             $this->translator->trans(
-                'fishbowl.default_title', ['name' => $fishbowl->getHost()->getName()], null, $fishbowl->getLocale()
+                'fishbowl.default_title', ['%name%' => $fishbowl->getHost()->getName()], null, $fishbowl->getLocale()
             )
         );
     }

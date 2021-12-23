@@ -45,4 +45,4 @@ login:
 
 
 fishbowl:
-    default_title: 'Reunió Fishbowl - %name'
+    default_title: 'Reunió Fishbowl - %name%'

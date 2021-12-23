@@ -19,4 +19,4 @@ emails:
         info_description: Beschreibung
 
 fishbowl:
-    default_title: 'Termin Fishbowl - %name'
+    default_title: 'Termin Fishbowl - %name%'

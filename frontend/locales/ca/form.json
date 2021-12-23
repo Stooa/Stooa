@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Reunió Fishbowl - {{name}}",
     "firstname": "Nom",
     "lastname": "Cognom",
     "email": "Email",

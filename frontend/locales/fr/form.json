@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Rencontre Fishbowl - {{name}}",
     "fishbowl": {
         "topic": "Sujet de conversation",
         "selectDay": "Sélectionnez le jour",

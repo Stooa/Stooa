@@ -44,4 +44,4 @@ login:
     failure: Credenciales no válidas
 
 fishbowl:
-    default_title: 'Reunión Fishbowl - %name'
+    default_title: 'Reunión Fishbowl - %name%'

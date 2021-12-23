@@ -44,4 +44,4 @@ login:
 
 
 fishbowl:
-    default_title: 'Rencontre Fishbowl - %name'
+    default_title: 'Rencontre Fishbowl - %name%'

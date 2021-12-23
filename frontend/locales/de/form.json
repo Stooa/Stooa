@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Termin Fishbowl - {{name}}",
     "validation": {
         "terms": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren",
         "email": "Ungültige E-Mail-Adresse",
