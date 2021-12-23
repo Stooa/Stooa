@@ -40,7 +40,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </>
         )}
         <span className="name">{name}</span>
-        {(isModerator || isCurrentUser) && (
+        {(isModerator || isCurrentUser || isMyself) && (
           <span className="roles">
             ({isModerator && 'Host'}
             {isModerator && isMyself && ', '}
