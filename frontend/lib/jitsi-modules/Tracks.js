@@ -72,6 +72,8 @@ const tracksRepository = () => {
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);
 
+    console.log('Inside _create', track)
+
     trackHtml.autoplay = true;
     trackHtml.id = track.getParticipantId() + trackType;
 
@@ -172,11 +174,12 @@ const tracksRepository = () => {
     const seat = seatsRepository.getSeat(id);
 
     if (seat > 0) {
-      if (!track.isLocalAudioTrack()) {
+      // REMINDER: I think this wasn't checking what we thought we were checking
+      // if (!track.isLocalAudioTrack()) {
         _create(seat, track);
-      } else {
-        handleElementsMutedClass(seat, track);
-      }
+      // } else {
+      //   handleElementsMutedClass(seat, track);
+      // }
     }
 
     console.log('[STOOA] Handle track added', track, seat);
