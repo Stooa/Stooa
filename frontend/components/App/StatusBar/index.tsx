@@ -7,14 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import Countdown, { zeroPad } from 'react-countdown';
 import React, { useEffect, useState } from 'react';
-import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import HourGlass from '@/ui/svg/hourglass-countdown.svg';
+import { Counter } from '@/components/App/StatusBar/Counter';
 
 interface Props {
   isModerator: boolean;
@@ -23,9 +22,8 @@ interface Props {
   conferenceStatus: IConferenceStatus;
 }
 
-const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
+const StatusBar: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
   const [statusClass, setStatusClass] = useState('warning');
-  const { t } = useTranslation('fishbowl');
 
   useEffect(() => {
     if (
@@ -44,41 +42,17 @@ const CountDown: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
     }
   }, [timeStatus, conferenceStatus]);
 
-  const rendererCountdown = ({ hours, minutes, completed, total }) => {
-    const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
-    let timeLeftText;
-
-    if (completed && conferenceNotStarted) {
-      timeLeftText = isModerator ? t('waitingHost') : t('waiting');
-    } else if (completed) {
-      timeLeftText = t('timesUp');
-    } else if (timeStatus === ITimeStatus.TIME_UP) {
-      timeLeftText = t('lastMinute');
-    } else if (minutes === 0 && hours === 0) {
-      const time = `1${t('form:fishbowl.minutes')}`;
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_one', { time });
-    } else {
-      const hoursText = t('form:fishbowl.hours');
-      const minutesText = t('form:fishbowl.minutes');
-      const time =
-        hours > 0 ? `${zeroPad(hours)}${hoursText}:${zeroPad(minutes)}` : Math.ceil(total / 60_000);
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-        time: `${time}${minutesText}`
-      });
-    }
-
-    return <span>{timeLeftText}</span>;
-  };
-
-  const date =
-    conferenceStatus === IConferenceStatus?.NOT_STARTED ? data.startDateTimeTz : data.endDateTimeTz;
-
   return (
     <StatusBox className={statusClass}>
       <HourGlass />
-      <Countdown date={date} renderer={rendererCountdown} />
+      <Counter
+        isModerator={isModerator}
+        fishbowlData={data}
+        timeStatus={timeStatus}
+        conferenceStatus={conferenceStatus}
+      />
     </StatusBox>
   );
 };
 
-export default CountDown;
+export default StatusBar;
