@@ -23,7 +23,6 @@ use App\Resolver\FishbowlIntroduceMutationResolver;
 use App\Resolver\FishbowlResolver;
 use App\Resolver\FishbowlRunMutationResolver;
 use App\Validator\Constraints\FutureFishbowl;
-use App\Validator\Constraints\OverlapFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -95,7 +94,6 @@ use Webmozart\Assert\Assert as MAssert;
  *
  * @UniqueEntity(fields={"slug"})
  * @FutureFishbowl(groups={"fishbowl:create", "fishbowl:update"})
- * @OverlapFishbowl
  *
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
