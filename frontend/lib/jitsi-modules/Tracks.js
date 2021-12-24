@@ -46,6 +46,12 @@ const tracksRepository = () => {
   const syncSessionStorageTrack = async (track, user) => {
     const trackType = track.getType();
 
+    if (!user) {
+      user = JSON.parse(sessionStorage.getItem('user'));
+    }
+
+    console.log('Tipo de traco', trackType);
+
     if (user && track.isLocal()) {
       const userIsMuted = trackType === 'video' ? user.videoMuted : user.audioMuted;
 
