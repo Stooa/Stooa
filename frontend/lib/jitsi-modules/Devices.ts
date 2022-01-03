@@ -19,8 +19,6 @@ const devicesRepository = (): DevicesRepository => {
         ? conferenceRepository.getLocalAudioTrack()
         : conferenceRepository.getLocalVideoTrack();
 
-    console.log('This is the old track', oldTrack);
-
     if (oldTrack !== undefined) {
       oldTrack.getTrack().stop();
     }
