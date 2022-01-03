@@ -72,9 +72,10 @@ const tracksRepository = () => {
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);
 
-    console.log('Inside _create', track)
+    if(!track.isLocalAudioTrack()){
+      trackHtml.autoplay = true;
+    }
 
-    trackHtml.autoplay = true;
     trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
@@ -89,7 +90,9 @@ const tracksRepository = () => {
     seatHtml.appendChild(trackHtml);
     track.attach(trackHtml);
 
-    _playTrackHtml(trackHtml);
+    if(!track.isLocalAudioTrack()){
+      _playTrackHtml(trackHtml);
+    }
   };
 
   const _remove = track => {
@@ -138,11 +141,7 @@ const tracksRepository = () => {
         await tracks[id][index].mute();
       }
 
-      if (!track.isLocalAudioTrack()) {
-        _create(seat, track, user);
-      } else {
-        handleElementsMutedClass(seat, track);
-      }
+      _create(seat, track, user);
     }
 
     console.log('[STOOA] Html tracks created', id);
@@ -174,12 +173,7 @@ const tracksRepository = () => {
     const seat = seatsRepository.getSeat(id);
 
     if (seat > 0) {
-      // REMINDER: I think this wasn't checking what we thought we were checking
-      // if (!track.isLocalAudioTrack()) {
         _create(seat, track);
-      // } else {
-      //   handleElementsMutedClass(seat, track);
-      // }
     }
 
     console.log('[STOOA] Handle track added', track, seat);
