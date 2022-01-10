@@ -107,13 +107,13 @@ const StooaProvider = ({ data, isModerator, children }) => {
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
       if (conferenceStatus === IConferenceStatus.RUNNING) {
         const message = t('notification.oneMinuteLeft');
-        addToast({ type: ITimeStatus.LAST_MINUTE, message, id: 0 }, 5000);
+        addToast({ type: ITimeStatus.LAST_MINUTE, message }, 5000, 5000);
       }
       setTimeStatus(ITimeStatus.ENDING);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
       if (conferenceStatus === IConferenceStatus.RUNNING) {
         const message = t('notification.tenMinutesLeft');
-        addToast({ type: ITimeStatus.ENDING, message, id: 0 }, 3000);
+        addToast({ type: ITimeStatus.ENDING, message }, 3000, 5000);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
@@ -175,7 +175,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    addToast({ type: 'WARNING', message: 'I just want you to work', id: 0 }, 5000);
+    addToast({ type: 'WARNING', message: 'I just want you to work' }, 5000);
   }, []);
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;

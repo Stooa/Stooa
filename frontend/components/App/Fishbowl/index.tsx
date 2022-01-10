@@ -39,7 +39,7 @@ const Fishbowl: FC = () => {
   };
 
   useEffect(() => {
-    console.log('There is toasts?', toasts);
+    console.log('Toasts updated', toasts);
   }, [toasts]);
 
   return (

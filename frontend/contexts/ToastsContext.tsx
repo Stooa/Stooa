@@ -33,49 +33,48 @@ const ToastsContext = createContext<ToastContext>({
 
 const ToastsProvider: React.FC = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
-  const [toastCount, setToastCount] = useState(0);
-  const [toastsList, setToastsList] = useState([]);
-  const [delayedToasts, setDelayedToasts] = useState({});
+
+  let toastCount = 0;
+  let toastsList = [];
+  let delayedToasts = {};
 
   const removeById = (id: number) => {
     const newToasts = toastsList.filter(t => t.id !== id);
-    setToastsList(newToasts);
+    toastsList = newToasts;
     setToasts(toastsList);
   };
 
   const clearDelayed = (type: string) => {
     const toast = delayedToasts[type];
     if (toast) {
-      setDelayedToasts(delayedToasts => delete delayedToasts[type]);
+      delete delayedToasts[type];
     }
   };
 
   const callDelayedToasts = (type: string) => {
     const toast = delayedToasts[type];
     if (toast) {
-      setToastsList([...toastsList, toast]);
+      toastsList = [...toastsList, toast];
       setToasts(toastsList);
       clearDelayed(toast.type);
     }
   };
 
   const addToast = (content: ToastContent, delay = 0, autoclose = 0) => {
-    const id = toastCount + 1;
+    const id = toastCount++;
     const toast = { ...content, id };
     const toastExists = toastsList.filter(t => t.type === toast.type);
 
     if (toastExists.length) return;
 
-    setToastCount(toastCount + 1);
-
     if (delay) {
-      setDelayedToasts({ ...delayedToasts, [toast.type]: toast });
+      delayedToasts = { ...delayedToasts, [toast.type]: toast };
 
       setTimeout(() => {
         callDelayedToasts(toast.type);
       }, delay);
     } else {
-      setToastsList([...toastsList, toast]);
+      toastsList = [...toastsList, toast];
       setToasts(toastsList);
     }
 
@@ -96,12 +95,6 @@ const ToastsProvider: React.FC = ({ children }) => {
   );
 };
 
-const useToasts = () => {
-  const context = useContext(ToastsContext);
-  if (context === undefined) {
-    throw new Error('useCount must be used within a CountProvider');
-  }
-  return context;
-};
+const useToasts = () => useContext(ToastsContext);
 
 export { ToastsProvider, useToasts };
