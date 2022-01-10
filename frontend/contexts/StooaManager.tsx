@@ -174,10 +174,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    addToast({ type: 'WARNING', message: 'I just want you to work' }, 5000);
-  }, []);
-
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
   return (

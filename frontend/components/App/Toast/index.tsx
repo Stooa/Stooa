@@ -14,7 +14,7 @@ import { Container, Cross } from '@/components/App/Toast/styles';
 
 interface Props {
   message: string;
-  onDismiss: void;
+  onDismiss: () => void;
 }
 
 const Toast: React.FC<Props> = ({ message, onDismiss }) => {

@@ -86,7 +86,7 @@ const ToastsProvider: React.FC = ({ children }) => {
   };
 
   // avoid creating a new fn on every render
-  const onDismiss = (id: number) => () => removeById(id);
+  const onDismiss = (id: number) => removeById(id);
 
   return (
     <ToastsContext.Provider value={{ toasts, addToast, onDismiss, clearDelayed }}>
