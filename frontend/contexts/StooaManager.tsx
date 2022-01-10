@@ -26,7 +26,7 @@ import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
-import useToasts from '@/hooks/useToasts';
+import { useToasts } from '@/contexts/ToastsContext';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -74,7 +74,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     if (seats.includes(myUserId)) {
       const delay = type === USER_MUST_LEAVE ? 8000 : 0;
       const autoclose = type === USER_MUST_LEAVE ? 15000 : 0;
-      addToast({ type, message }, delay, autoclose);
+      addToast({ type, message, id: 0 }, delay, autoclose);
     }
   });
 
@@ -107,13 +107,13 @@ const StooaProvider = ({ data, isModerator, children }) => {
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
       if (conferenceStatus === IConferenceStatus.RUNNING) {
         const message = t('notification.oneMinuteLeft');
-        addToast({ type: ITimeStatus.LAST_MINUTE, message }, 5000);
+        addToast({ type: ITimeStatus.LAST_MINUTE, message, id: 0 }, 5000);
       }
       setTimeStatus(ITimeStatus.ENDING);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
       if (conferenceStatus === IConferenceStatus.RUNNING) {
         const message = t('notification.tenMinutesLeft');
-        addToast({ type: ITimeStatus.ENDING, message }, 3000);
+        addToast({ type: ITimeStatus.ENDING, message, id: 0 }, 3000);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
@@ -174,6 +174,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    addToast({ type: 'WARNING', message: 'I just want you to work', id: 0 }, 5000);
+  }, []);
+
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
   return (
@@ -191,6 +195,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
   );
 };
 
-const useStooa = () => useContext(StooaContext);
+const useStooa = () => {
+  const context = useContext(StooaContext);
+  if (context === undefined) {
+    throw new Error('useCount must be used within a CountProvider');
+  }
+  return context;
+};
 
 export { StooaProvider, useStooa };

@@ -17,9 +17,10 @@ import { StooaProvider } from '@/contexts/StooaManager';
 import ScriptLoader from '@/hocs/withScriptLoader';
 import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
+import Seo from '@/components/Web/Seo';
 import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
-import Seo from '@/components/Web/Seo';
+import { ToastsProvider } from '@/contexts/ToastsContext';
 
 const scripts = [
   'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
@@ -57,12 +58,14 @@ const Layout: React.FC<Props> = ({
   const isModerator = !!fbCreatorData.isCreatorOfFishbowl;
 
   return (
-    <StooaProvider data={data} isModerator={isModerator}>
-      <DevicesProvider>
-        <Seo title={title} />
-        <Container>{children}</Container>
-      </DevicesProvider>
-    </StooaProvider>
+    <ToastsProvider>
+      <StooaProvider data={data} isModerator={isModerator}>
+        <DevicesProvider>
+          <Seo title={title} />
+          <Container>{children}</Container>
+        </DevicesProvider>
+      </StooaProvider>
+    </ToastsProvider>
   );
 };
 

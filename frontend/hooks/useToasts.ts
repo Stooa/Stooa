@@ -58,7 +58,7 @@ const useToasts = () => {
       }, delay);
     } else {
       toastsList = [...toastsList, toast];
-      console.log('List', toastsList);
+      console.log('ToastList', toastsList);
       setToasts(toastsList);
     }
 

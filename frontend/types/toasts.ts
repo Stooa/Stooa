@@ -13,7 +13,7 @@ export interface ToastContent {
 }
 
 export interface Toast {
-  id: number;
+  id?: number;
   type: string;
   message: string;
 }

@@ -14,10 +14,10 @@ import useSound from 'use-sound';
 import { CONFERENCE_START } from '@/jitsi/Events';
 import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
-import useToasts from '@/hooks/useToasts';
 
 import { Main } from '@/layouts/App/styles';
 import { Notifications } from '@/components/App/Fishbowl/styles';
+import { useToasts } from '@/contexts/ToastsContext';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -39,8 +39,7 @@ const Fishbowl: FC = () => {
   };
 
   useEffect(() => {
-    console.log('Rerender Fishbowl');
-    console.log(toasts);
+    console.log('There is toasts?', toasts);
   }, [toasts]);
 
   return (
@@ -48,10 +47,12 @@ const Fishbowl: FC = () => {
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <Seats />
-        <Notifications>
-          {toasts.map(({ message, id }) => (
-            <Toast key={`toast-${id}`} message={message} onDismiss={onDismiss(id)} />
-          ))}
+        <Notifications className="notifications-wrapper">
+          {toasts
+            ? toasts.map(({ message, id }) => (
+                <Toast key={`toast-${id}`} message={message} onDismiss={() => onDismiss(id)} />
+              ))
+            : null}
         </Notifications>
       </Main>
       <Footer participantsActive={participantsActive} />
