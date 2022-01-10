@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Toast, ToastContent } from '@/types/toasts';
 
@@ -50,11 +50,15 @@ const useToasts = () => {
     if (delay) {
       delayedToasts = { ...delayedToasts, [toast.type]: toast };
 
+      console.log('Delayed', delayedToasts);
+
       setTimeout(() => {
+        console.log('Calling delayed', toast.type);
         callDelayedToasts(toast.type);
       }, delay);
     } else {
       toastsList = [...toastsList, toast];
+      console.log('List', toastsList);
       setToasts(toastsList);
     }
 
@@ -67,6 +71,10 @@ const useToasts = () => {
 
   // avoid creating a new fn on every render
   const onDismiss = (id: number) => () => removeById(id);
+
+  useEffect(() => {
+    console.log('Toast set', toasts);
+  }, [toasts]);
 
   return { toasts, addToast, onDismiss, clearDelayed };
 };

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -37,6 +37,11 @@ const Fishbowl: FC = () => {
   const toggleParticipants = () => {
     setParticipantsActive(!participantsActive);
   };
+
+  useEffect(() => {
+    console.log('Rerender Fishbowl');
+    console.log(toasts);
+  }, [toasts]);
 
   return (
     <>
