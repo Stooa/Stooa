@@ -76,16 +76,6 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     return () => clearInterval(intervalTimer);
   }, [fishbowlDate, completedTime, timeStatus]);
 
-  // const getHours = (seconds: number): number => {
-  //   let hours = 0;
-  //   if (seconds === 3599) {
-  //     hours = Math.floor(seconds / 3600) - 1;
-  //   } else {
-  //     hours = Math.floor(seconds / 3600);
-  //   }
-  //   return hours;
-  // };
-
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
     let timeLeftText;
