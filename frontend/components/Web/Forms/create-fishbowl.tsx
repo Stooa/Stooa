@@ -19,7 +19,7 @@ import { ROUTE_FISHBOWL_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { CREATE_FISHBOWL } from '@/lib/gql/Fishbowl';
-import { formatDateTime } from '@/lib/helpers';
+import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Textarea from '@/components/Common/Fields/Textarea';
@@ -77,7 +77,6 @@ const initialValues = {
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
   const { isSubmitting } = props;
-
   const { t } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
 
@@ -107,6 +106,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="time"
           showTimeSelect
           showTimeSelectOnly
+          selected={nearestQuarterHour()}
           timeIntervals={15}
           dateFormat="H:mm"
           icon="clock"
@@ -181,7 +181,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     language: props.currentLanguage,
-    timezone: props.currentTimezone
+    timezone: props.currentTimezone,
+    hours: props.defaultHourValue
   }),
   validationSchema: props => {
     return Yup.object({
@@ -280,6 +281,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
         date={dateError}
         createFishbowl={createFishbowl}
         onSubmit={handleOnSubmit}
+        defaultHourValue="01:00"
         currentLanguage={lang}
         currentTimezone={currentUserTimezoneName}
         selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
