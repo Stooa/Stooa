@@ -53,6 +53,7 @@ interface FormProps {
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues | null;
   full: boolean;
+  defaultHourValue: string;
 }
 
 interface FormValues {
