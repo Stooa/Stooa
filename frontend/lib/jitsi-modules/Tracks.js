@@ -57,10 +57,12 @@ const tracksRepository = () => {
       if (track.isMuted() && !userIsMuted) {
         await track.unmute().then(() => {
           console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          return track;
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
           console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          return track;
         });
       }
     }
@@ -171,7 +173,7 @@ const tracksRepository = () => {
     const seat = seatsRepository.getSeat(id);
 
     if (seat > 0) {
-        _create(seat, track);
+      _create(seat, track);
     }
 
     console.log('[STOOA] Handle track added', track, seat);
