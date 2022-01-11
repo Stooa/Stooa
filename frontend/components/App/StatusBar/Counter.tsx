@@ -99,6 +99,9 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     const minutes: number = Math.floor((seconds / 60) % 60);
     const hours: number = getHours(seconds);
 
+    console.log(hours, minutes);
+    console.log(seconds);
+
     if (seconds === 0 && conferenceNotStarted) {
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
     } else if (seconds === 0 && timeStatus === ITimeStatus.TIME_UP) {
@@ -114,7 +117,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
       const time =
         hours > 0
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
-          : Math.ceil(seconds / 60);
+          : Math.floor(seconds / 60);
       timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
         time: `${time}${minutesText}`
       });
