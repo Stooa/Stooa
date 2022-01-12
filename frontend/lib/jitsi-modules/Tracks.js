@@ -201,6 +201,7 @@ const tracksRepository = () => {
 
     if (mutedId === userId) return;
 
+    await syncSessionStorageTrack(track)
     handleElementsMutedClass(seat, track);
 
     console.log('[STOOA] Handle track mute changed', track);

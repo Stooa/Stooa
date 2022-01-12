@@ -131,12 +131,6 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
-  const _handleTrackMuteChanged = async track => {
-    await tracksRepository.syncSessionStorageTrack(track);
-
-    tracksRepository.handleTrackMuteChanged(track);
-  }
-
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -165,7 +159,7 @@ const conferenceRepository = () => {
     conference.on(PARTICIPANT_PROPERTY_CHANGED, _handleParticipantPropertyChanged);
     conference.on(TRACK_ADDED, tracksRepository.handleTrackAdded);
     conference.on(TRACK_REMOVED, tracksRepository.handleTrackRemoved);
-    conference.on(TRACK_MUTE_CHANGED, _handleTrackMuteChanged);
+    conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
     conference.on(USER_JOINED, userRepository.handleUserJoin);
     conference.on(USER_LEFT, userRepository.handleUserLeft);
     conference.on(KICKED, userRepository.handleUserLeft);
