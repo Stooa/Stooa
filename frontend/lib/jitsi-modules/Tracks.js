@@ -195,13 +195,13 @@ const tracksRepository = () => {
   };
 
   const handleTrackMuteChanged = async track => {
+    await syncSessionStorageTrack(track)
     const mutedId = track.getParticipantId();
     const userId = conferenceRepository.getMyUserId();
     const seat = seatsRepository.getSeat(mutedId);
 
     if (mutedId === userId) return;
 
-    await syncSessionStorageTrack(track)
     handleElementsMutedClass(seat, track);
 
     console.log('[STOOA] Handle track mute changed', track);
