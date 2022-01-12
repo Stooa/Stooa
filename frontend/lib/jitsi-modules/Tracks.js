@@ -194,7 +194,7 @@ const tracksRepository = () => {
     console.log('[STOOA] Handle track removed', track, seat);
   };
 
-  const handleTrackMuteChanged = track => {
+  const handleTrackMuteChanged = async track => {
     const mutedId = track.getParticipantId();
     const userId = conferenceRepository.getMyUserId();
     const seat = seatsRepository.getSeat(mutedId);
