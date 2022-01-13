@@ -341,14 +341,17 @@ class FishbowlServiceTest extends TestCase
         $this->assertTrue($response);
     }
 
-    /** @test */
-    public function itGeneratesDefaultTitle(): void
+    /**
+     * @test
+     * @dataProvider fishbowlTitleProvider
+     */
+    public function itGeneratesDefaultTitle(string $fishbowlTitle): void
     {
         $user = new User();
         $user->setName('Name');
 
         $fishbowl = new Fishbowl();
-        $fishbowl->setName('');
+        $fishbowl->setName($fishbowlTitle);
         $fishbowl->setLocale('en');
         $fishbowl->setHost($user);
         $expectedName = 'Fishbowl Meeting - Name';
@@ -359,22 +362,11 @@ class FishbowlServiceTest extends TestCase
         $this->assertSame($expectedName, $fishbowlResponse->getName());
     }
 
-    /** @test */
-    public function itGeneratesDefaultTitleWhenNameAreWhiteSpaces(): void
+    /** @return iterable<array{string}> */
+    public function fishbowlTitleProvider(): iterable
     {
-        $user = new User();
-        $user->setName('Name');
-
-        $fishbowl = new Fishbowl();
-        $fishbowl->setName('   ');
-        $fishbowl->setLocale('en');
-        $fishbowl->setHost($user);
-        $expectedName = 'Fishbowl Meeting - Name';
-
-        $this->translator->method('trans')->willReturn($expectedName);
-        $fishbowlResponse = $this->service->generateDefaultTitle($fishbowl);
-
-        $this->assertSame($expectedName, $fishbowlResponse->getName());
+        yield [''];
+        yield ['   '];
     }
 
     /** @test */
