@@ -46,6 +46,10 @@ const tracksRepository = () => {
   const syncSessionStorageTrack = async (track, user) => {
     const trackType = track.getType();
 
+    if (!user) {
+      user = JSON.parse(sessionStorage.getItem('user'));
+    }
+
     if (user && track.isLocal()) {
       const userIsMuted = trackType === 'video' ? user.videoMuted : user.audioMuted;
 
@@ -53,10 +57,12 @@ const tracksRepository = () => {
       if (track.isMuted() && !userIsMuted) {
         await track.unmute().then(() => {
           console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          return track;
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
           console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          return track;
         });
       }
     }
@@ -66,7 +72,10 @@ const tracksRepository = () => {
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);
 
-    trackHtml.autoplay = true;
+    if(!track.isLocalAudioTrack()){
+      trackHtml.autoplay = true;
+    }
+
     trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
@@ -81,7 +90,9 @@ const tracksRepository = () => {
     seatHtml.appendChild(trackHtml);
     track.attach(trackHtml);
 
-    _playTrackHtml(trackHtml);
+    if(!track.isLocalAudioTrack()){
+      _playTrackHtml(trackHtml);
+    }
   };
 
   const _remove = track => {
@@ -130,11 +141,7 @@ const tracksRepository = () => {
         await tracks[id][index].mute();
       }
 
-      if (!track.isLocalAudioTrack()) {
-        _create(seat, track, user);
-      } else {
-        handleElementsMutedClass(seat, track);
-      }
+      _create(seat, track, user);
     }
 
     console.log('[STOOA] Html tracks created', id);
@@ -166,11 +173,7 @@ const tracksRepository = () => {
     const seat = seatsRepository.getSeat(id);
 
     if (seat > 0) {
-      if (!track.isLocalAudioTrack()) {
-        _create(seat, track);
-      } else {
-        handleElementsMutedClass(seat, track);
-      }
+      _create(seat, track);
     }
 
     console.log('[STOOA] Handle track added', track, seat);
@@ -191,7 +194,8 @@ const tracksRepository = () => {
     console.log('[STOOA] Handle track removed', track, seat);
   };
 
-  const handleTrackMuteChanged = track => {
+  const handleTrackMuteChanged = async track => {
+    await syncSessionStorageTrack(track)
     const mutedId = track.getParticipantId();
     const userId = conferenceRepository.getMyUserId();
     const seat = seatsRepository.getSeat(mutedId);
