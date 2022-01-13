@@ -43,7 +43,7 @@ const Fishbowl: FC = () => {
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <Seats />
-        <Notifications className="notifications-wrapper">
+        <Notifications>
           {toasts &&
             toasts.map(({ message, id, dismissed, shown }) => {
               if (!dismissed || !shown) {
