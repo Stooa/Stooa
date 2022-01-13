@@ -360,6 +360,24 @@ class FishbowlServiceTest extends TestCase
     }
 
     /** @test */
+    public function itGeneratesDefaultTitleWhenNameAreWhiteSpaces(): void
+    {
+        $user = new User();
+        $user->setName('Name');
+
+        $fishbowl = new Fishbowl();
+        $fishbowl->setName('   ');
+        $fishbowl->setLocale('en');
+        $fishbowl->setHost($user);
+        $expectedName = 'Fishbowl Meeting - Name';
+
+        $this->translator->method('trans')->willReturn($expectedName);
+        $fishbowlResponse = $this->service->generateDefaultTitle($fishbowl);
+
+        $this->assertSame($expectedName, $fishbowlResponse->getName());
+    }
+
+    /** @test */
     public function itReturnsSameTitleWhenGeneratingDefaultTitle(): void
     {
         $fishbowl = new Fishbowl();
