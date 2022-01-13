@@ -15,7 +15,7 @@ interface ToastContext {
   toasts: Toast[];
   addToast: (toast: Toast, delay?: number, autoclose?: number) => void;
   onDismiss: (id: number) => void;
-  clearDelayed: (type: string) => void;
+  clearDelayed: (Toast: Toast) => void;
 }
 
 const ToastsContext = createContext<ToastContext>({
@@ -39,33 +39,35 @@ const ToastsProvider: React.FC = ({ children }) => {
   let delayedToasts = {};
 
   const removeById = (id: number) => {
-    const newToasts = toastsList.filter(t => t.id !== id);
+    const newToasts = toastsList.map((toast: Toast) =>
+      toast.id === id ? { ...toast, dismissed: true } : toast
+    );
     toastsList = newToasts;
     setToasts(toastsList);
   };
 
-  const clearDelayed = (type: string) => {
-    const toast = delayedToasts[type];
-    if (toast) {
-      delete delayedToasts[type];
-    }
+  const clearDelayed = (toast: Toast) => {
+    toast.shown = true;
+    setToasts(toasts => toasts.map((t: Toast) => (t.id === toast.id ? toast : t)));
+    delete delayedToasts[toast.type];
   };
 
   const callDelayedToasts = (type: string) => {
-    const toast = delayedToasts[type];
+    const toast: Toast = delayedToasts[type];
     if (toast) {
       toastsList = [...toastsList, toast];
       setToasts(toastsList);
-      clearDelayed(toast.type);
+      clearDelayed(toast);
     }
   };
 
   const addToast = (content: ToastContent, delay = 0, autoclose = 0) => {
-    const id = toastCount++;
-    const toast = { ...content, id };
-    const toastExists = toastsList.filter(t => t.type === toast.type);
+    toastCount++;
+    const id = toastCount;
+    const toast: Toast = { ...content, id, dismissed: false, shown: false };
+    const toastExists = toastsList.some((toast: Toast) => toast.type === content.type);
 
-    if (toastExists.length) return;
+    if (toastExists) return;
 
     if (delay) {
       delayedToasts = { ...delayedToasts, [toast.type]: toast };

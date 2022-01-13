@@ -14,10 +14,10 @@ import useSound from 'use-sound';
 import { CONFERENCE_START } from '@/jitsi/Events';
 import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
+import { useToasts } from '@/contexts/ToastsContext';
 
 import { Main } from '@/layouts/App/styles';
 import { Notifications } from '@/components/App/Fishbowl/styles';
-import { useToasts } from '@/contexts/ToastsContext';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -38,21 +38,20 @@ const Fishbowl: FC = () => {
     setParticipantsActive(!participantsActive);
   };
 
-  useEffect(() => {
-    console.log('Toasts updated', toasts);
-  }, [toasts]);
-
   return (
     <>
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <Seats />
         <Notifications className="notifications-wrapper">
-          {toasts
-            ? toasts.map(({ message, id }) => (
-                <Toast key={`toast-${id}`} message={message} onDismiss={() => onDismiss(id)} />
-              ))
-            : null}
+          {toasts &&
+            toasts.map(({ message, id, dismissed, shown }) => {
+              if (!dismissed || !shown) {
+                return (
+                  <Toast key={`toast-${id}`} message={message} onDismiss={() => onDismiss(id)} />
+                );
+              }
+            })}
         </Notifications>
       </Main>
       <Footer participantsActive={participantsActive} />
