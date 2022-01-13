@@ -15,7 +15,7 @@ interface ToastContext {
   toasts: Toast[];
   addToast: (toast: Toast, delay?: number, autoclose?: number) => void;
   onDismiss: (id: number) => void;
-  clearDelayed: (Toast: Toast) => void;
+  clearDelayed: (type: string) => void;
 }
 
 const ToastsContext = createContext<ToastContext>({
@@ -46,10 +46,9 @@ const ToastsProvider: React.FC = ({ children }) => {
     setToasts(toastsList);
   };
 
-  const clearDelayed = (toast: Toast) => {
-    toast.shown = true;
-    setToasts(toasts => toasts.map((t: Toast) => (t.id === toast.id ? toast : t)));
-    delete delayedToasts[toast.type];
+  const clearDelayed = (type: string) => {
+    setToasts(toasts => toasts.map((t: Toast) => (t.type === type ? { ...t, shown: true } : t)));
+    delete delayedToasts[type];
   };
 
   const callDelayedToasts = (type: string) => {
@@ -57,7 +56,7 @@ const ToastsProvider: React.FC = ({ children }) => {
     if (toast) {
       toastsList = [...toastsList, toast];
       setToasts(toastsList);
-      clearDelayed(toast);
+      clearDelayed(type);
     }
   };
 
