@@ -88,7 +88,9 @@ class FishbowlService
 
     public function generateDefaultTitle(Fishbowl $fishbowl): Fishbowl
     {
-        if (!empty($fishbowl->getName()) && !ctype_space($fishbowl->getName())) {
+        $fishbowlName = $fishbowl->getName();
+
+        if (!empty($fishbowlName) && !ctype_space($fishbowlName)) {
             return $fishbowl;
         }
 
