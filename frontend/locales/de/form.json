@@ -26,6 +26,7 @@
         "time": "Beginnt um"
     },
     "button": {
+        "title": "Ungültiger Titel",
         "login": "Anmelden",
         "register": "Nächste",
         "createAccount": "Erstellen Sie eines!",
