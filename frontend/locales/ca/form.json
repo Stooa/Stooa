@@ -34,7 +34,7 @@
         "changePassword": "Canviar la contrasenya"
     },
     "validation": {
-        "title": "Títol no vàlid. Si us plau, inseriu el tema de la conversa",
+        "title": "Títol no vàlid. Si us plau, inseriu un tema de conversa",
         "required": "Aquest camp és necessari",
         "email": "Adreça invàlida",
         "date": "El format de la data és invàlid: dd/mm/aaaa",
