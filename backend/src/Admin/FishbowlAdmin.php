@@ -42,6 +42,8 @@ class FishbowlAdmin extends AbstractAdmin
     {
         if (null !== $this->fishbowlService) {
             $object->setSlug($this->fishbowlService->generateRandomSlug($object));
+
+            $this->fishbowlService->generateDefaultTitle($object);
         }
     }
 

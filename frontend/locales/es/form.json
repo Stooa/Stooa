@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Reunión Fishbowl - {{name}}",
     "firstname": "Nombre",
     "lastname": "Apellido",
     "email": "Email",
@@ -33,6 +34,7 @@
         "changePassword": "Cambiar la contraseña"
     },
     "validation": {
+        "title": "Título inválido. Por favor inserta un tema de conversación",
         "required": "Este campo es necesario",
         "email": "Dirección de email no válida",
         "date": "Formato de fecha no válido: dd/mm/aaaa",
