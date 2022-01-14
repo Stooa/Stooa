@@ -62,7 +62,7 @@ interface FormProps {
 interface FormValues {
   title: string;
   day: Date;
-  time: string;
+  time: Date;
   hours: string;
   description: string;
   language: string;
