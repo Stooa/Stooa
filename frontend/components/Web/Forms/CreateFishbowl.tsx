@@ -55,6 +55,7 @@ interface FormProps {
   selectedFishbowl?: FormValues | null;
   full: boolean;
   defaultHourValue: string;
+  defaultTime: string;
 }
 
 interface FormValues {
@@ -108,7 +109,6 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           icon="calendar"
           autoComplete="off"
         />
-
         <DatePicker
           label={t('fishbowl.time')}
           placeholderText={t('fishbowl.selectTime')}
@@ -191,7 +191,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     language: props.currentLanguage,
     timezone: props.currentTimezone,
-    hours: props.defaultHourValue
+    hours: props.defaultHourValue,
+    time: props.defaultTime
   }),
   validationSchema: props => {
     return Yup.object({
@@ -294,6 +295,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
         date={dateError}
         createFishbowl={createFishbowl}
         onSubmit={handleOnSubmit}
+        defaultTime={nearestQuarterHour()}
         defaultHourValue="01:00"
         currentLanguage={lang}
         currentTimezone={currentUserTimezoneName}
