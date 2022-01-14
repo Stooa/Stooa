@@ -34,7 +34,7 @@
         "changePassword": "Change password"
     },
     "validation": {
-        "title": "Invalid title",
+        "title": "Invalid title. Please insert conversation topic",
         "required": "This field is required",
         "email": "Invalid email addresss",
         "date": "Format of the date is invalid: dd/mm/yyyy",
