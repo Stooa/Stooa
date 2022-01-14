@@ -27,6 +27,7 @@ import Select from '@/components/Common/Fields/Select';
 import DatePicker from '@/components/Common/Fields/DatePicker';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import datePicker from "@/components/Common/Fields/DatePicker";
 
 type createFishbowlAttrs = {
   variables: {
@@ -55,7 +56,7 @@ interface FormProps {
   selectedFishbowl?: FormValues | null;
   full: boolean;
   defaultHourValue: string;
-  defaultTime: string;
+  defaultTime: Date;
 }
 
 interface FormValues {
