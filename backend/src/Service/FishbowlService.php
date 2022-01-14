@@ -26,8 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
-use function Symfony\Component\String\s;
-use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -51,19 +50,22 @@ class FishbowlService
     protected Security $security;
     protected GuestRepository $guestRepository;
     protected ParticipantRepository $participantRepository;
+    protected TranslatorInterface $translator;
 
     public function __construct(
         FishbowlRepository $fishbowlRepository,
         RequestStack $requestStack,
         Security $security,
         GuestRepository $guestRepository,
-        ParticipantRepository $participantRepository
+        ParticipantRepository $participantRepository,
+        TranslatorInterface $translator
     ) {
         $this->fishbowlRepository = $fishbowlRepository;
         $this->requestStack = $requestStack;
         $this->security = $security;
         $this->guestRepository = $guestRepository;
         $this->participantRepository = $participantRepository;
+        $this->translator = $translator;
     }
 
     public function canFishbowlStart(string $slug, User $host): bool
@@ -79,11 +81,22 @@ class FishbowlService
 
     public function generateRandomSlug(Fishbowl $fishbowl): string
     {
-        $slugger = new AsciiSlugger();
         $hashids = new Hashids('', 10);
 
-        return $slugger->slug(s((string) $fishbowl->getName())->lower()->toString()) . '-' .
-            $hashids->encode(random_int(1, 1_000_000_000));
+        return $hashids->encode(random_int(1, 1_000_000_000));
+    }
+
+    public function generateDefaultTitle(Fishbowl $fishbowl): Fishbowl
+    {
+        $fishbowlName = $fishbowl->getName();
+
+        if (!empty($fishbowlName) && !ctype_space($fishbowlName)) {
+            return $fishbowl;
+        }
+
+        return $fishbowl->setName(
+            $this->translator->trans('fishbowl.default_title', ['%name%' => $fishbowl->getHostName()], null, $fishbowl->getLocale())
+        );
     }
 
     public function getFishbowlStatus(string $slug): ?string

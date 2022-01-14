@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Fishbowl Meeting - {{name}}",
     "firstname": "First Name",
     "lastname": "Last name",
     "email": "Email",
@@ -33,6 +34,7 @@
         "changePassword": "Change password"
     },
     "validation": {
+        "title": "Invalid title. Please insert a conversation topic",
         "required": "This field is required",
         "email": "Invalid email addresss",
         "date": "Format of the date is invalid: dd/mm/yyyy",

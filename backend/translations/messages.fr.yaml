@@ -42,3 +42,6 @@ emails:
 login:
     failure: Informations d'identification invalides.
 
+
+fishbowl:
+    default_title: 'Rencontre Fishbowl - %name%'

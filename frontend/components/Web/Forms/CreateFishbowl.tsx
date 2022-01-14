@@ -44,6 +44,7 @@ type createFishbowlAttrs = {
 interface FormProps {
   required: string;
   date: string;
+  title: string;
   createFishbowl: (
     options?: createFishbowlAttrs
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
@@ -80,11 +81,18 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 
   const { t } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
+  const { user } = useAuth();
 
   return (
     <FormikForm full={props.full ? props.full : undefined}>
       <fieldset className="fieldset-inline">
-        <Input label={t('fishbowl.topic')} name="title" type="text" autoComplete="off" />
+        <Input
+          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : ''})}
+          label={t('fishbowl.topic')}
+          name="title"
+          type="text"
+          autoComplete="off"
+        />
         <Textarea
           label={t('fishbowl.description')}
           name="description"
@@ -185,7 +193,10 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }),
   validationSchema: props => {
     return Yup.object({
-      title: Yup.string().required(props.required),
+      title: Yup.string().matches(/[^-\s]/, {
+        excludeEmptyString: true,
+        message: props.title
+      }),
       description: Yup.string().nullable(),
       language: Yup.string().required(props.required),
       day: Yup.string().required(props.required),
@@ -197,7 +208,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
-
     await props
       .createFishbowl({
         variables: {
@@ -234,6 +244,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
 
   const requiredError = t('validation.required');
   const dateError = t('validation.date');
+  const titleError = t('validation.title');
 
   const currentUserTimezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -275,6 +286,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
       {error && <FormError errors={error} />}
       <FormValidation
         full={full}
+        title={titleError}
         enableReinitialize
         required={requiredError}
         date={dateError}

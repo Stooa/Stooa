@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Rencontre Fishbowl - {{name}}",
     "fishbowl": {
         "topic": "Sujet de conversation",
         "selectDay": "Sélectionnez le jour",
@@ -33,6 +34,7 @@
     "name": "Votre nom",
     "haveAccount": "Vous avez déjà un compte ?",
     "validation": {
+        "title": "Titre invalide. Veuillez insérer un sujet de conversation",
         "passwordLength": "Le mot de passe doit comporter 6 caractères ou plus",
         "email": "Adresse électronique invalide",
         "required": "Ce champ est obligatoire",
