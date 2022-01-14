@@ -42,3 +42,6 @@ emails:
 
 login:
     failure: Invalid credentials
+
+fishbowl:
+    default_title: 'Fishbowl Meeting - %name%'

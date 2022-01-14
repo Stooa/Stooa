@@ -26,6 +26,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Translation\Translator;
 
 class FishbowlServiceTest extends TestCase
 {
@@ -35,6 +36,7 @@ class FishbowlServiceTest extends TestCase
     private MockObject $guestRepository;
     private MockObject $participantRepository;
     private MockObject $security;
+    private MockObject $translator;
 
     protected function setUp(): void
     {
@@ -43,13 +45,15 @@ class FishbowlServiceTest extends TestCase
         $this->participantRepository = $this->createMock(ParticipantRepository::class);
         $this->requestStack = new RequestStack();
         $this->security = $this->createMock(Security::class);
+        $this->translator = $this->createMock(Translator::class);
 
         $this->service = new FishbowlService(
             $this->fishbowlRepository,
             $this->requestStack,
             $this->security,
             $this->guestRepository,
-            $this->participantRepository
+            $this->participantRepository,
+            $this->translator
         );
     }
 
@@ -57,11 +61,9 @@ class FishbowlServiceTest extends TestCase
     public function itGeneratesRandomSlug(): void
     {
         $fishbowl = new Fishbowl();
-        $fishbowl->setName('fishbowl name');
-
         $slug = $this->service->generateRandomSlug($fishbowl);
 
-        $this->assertStringContainsString('fishbowl-name', $slug);
+        $this->assertSame(10, \strlen($slug));
     }
 
     /** @test */
@@ -337,5 +339,44 @@ class FishbowlServiceTest extends TestCase
         $response = $this->service->canFishbowlStart('fishbowl-slug', $host);
 
         $this->assertTrue($response);
+    }
+
+    /**
+     * @test
+     * @dataProvider fishbowlTitleProvider
+     */
+    public function itGeneratesDefaultTitle(string $fishbowlTitle): void
+    {
+        $user = new User();
+        $user->setName('Name');
+
+        $fishbowl = new Fishbowl();
+        $fishbowl->setName($fishbowlTitle);
+        $fishbowl->setLocale('en');
+        $fishbowl->setHost($user);
+        $expectedName = 'Fishbowl Meeting - Name';
+
+        $this->translator->method('trans')->willReturn($expectedName);
+        $fishbowlResponse = $this->service->generateDefaultTitle($fishbowl);
+
+        $this->assertSame($expectedName, $fishbowlResponse->getName());
+    }
+
+    /** @return iterable<array{string}> */
+    public function fishbowlTitleProvider(): iterable
+    {
+        yield [''];
+        yield ['   '];
+    }
+
+    /** @test */
+    public function itReturnsSameTitleWhenGeneratingDefaultTitle(): void
+    {
+        $fishbowl = new Fishbowl();
+        $fishbowl->setName('Fishbowl test name');
+
+        $response = $this->service->generateDefaultTitle($fishbowl);
+
+        $this->assertSame($fishbowl->getName(), $response->getName());
     }
 }
