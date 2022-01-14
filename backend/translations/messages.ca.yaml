@@ -42,3 +42,7 @@ emails:
 
 login:
     failure: Credencials no vàlides
+
+
+fishbowl:
+    default_title: 'Reunió Fishbowl - %name%'

@@ -49,6 +49,8 @@ class FishbowlValidateStage implements ValidateStageInterface
             }
 
             $object->setSlug($this->service->generateRandomSlug($object));
+
+            $object = $this->service->generateDefaultTitle($object);
         }
 
         ($this->decorated)($object, $resourceClass, $operationName, $context);

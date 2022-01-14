@@ -133,7 +133,6 @@ class Fishbowl
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
      *
-     * @Assert\NotBlank
      * @Assert\Length(max=255)
      *
      * @ORM\Column(type="string")
@@ -529,5 +528,22 @@ class Fishbowl
     public function isFinished(): bool
     {
         return self::STATUS_FINISHED === $this->getCurrentStatus();
+    }
+
+    public function getHostName(): ?string
+    {
+        if (null === $this->getHost()) {
+            return '';
+        }
+
+        $host = $this->getHost();
+
+        MAssert::isInstanceOf($host, User::class);
+
+        if (null === $host->getName()) {
+            return '';
+        }
+
+        return $host->getName();
     }
 }

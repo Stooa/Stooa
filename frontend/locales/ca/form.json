@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Reunió Fishbowl - {{name}}",
     "firstname": "Nom",
     "lastname": "Cognom",
     "email": "Email",
@@ -33,6 +34,7 @@
         "changePassword": "Canviar la contrasenya"
     },
     "validation": {
+        "title": "Títol no vàlid. Si us plau, inseriu un tema de conversa",
         "required": "Aquest camp és necessari",
         "email": "Adreça invàlida",
         "date": "El format de la data és invàlid: dd/mm/aaaa",

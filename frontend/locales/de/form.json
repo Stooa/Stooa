@@ -1,4 +1,5 @@
 {
+    "defaultTitle": "Termin Fishbowl - {{name}}",
     "validation": {
         "terms": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren",
         "email": "Ungültige E-Mail-Adresse",
@@ -25,6 +26,7 @@
         "time": "Beginnt um"
     },
     "button": {
+        "title": "Ungültiger titel. Bitte fügen Sie ein Gesprächsthema ein",
         "login": "Anmelden",
         "register": "Nächste",
         "createAccount": "Erstellen Sie eines!",

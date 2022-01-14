@@ -38,7 +38,7 @@ const InputField: React.FC<Input> = ({
         {...field}
         {...props}
         as={as}
-        className={`${isFilled ? 'filled' : ''} ${isInvalid ? 'invalid' : ''}`}
+        className={`${isFilled || props.placeholder ? 'filled' : ''} ${isInvalid ? 'invalid' : ''}`}
       />
       <label htmlFor={props.id || props.name}>{label}</label>
       {isValid && (
