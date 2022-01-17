@@ -9,6 +9,7 @@
     "noAccount": "¿No tienes cuenta?",
     "fishbowl": {
         "topic": "Tema de conversación",
+        "title": "Título",
         "day": "Fecha",
         "selectDay": "Selecciona el día",
         "time": "Empieza a las",

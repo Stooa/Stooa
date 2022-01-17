@@ -9,6 +9,7 @@
     "noAccount": "No account?",
     "fishbowl": {
         "topic": "Conversation topic",
+        "title": "Title",
         "day": "Date",
         "selectDay": "Select day",
         "time": "Starts at",

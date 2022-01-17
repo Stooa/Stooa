@@ -8,6 +8,7 @@
     "haveAccount": "Ja tens un compte?",
     "noAccount": "No tens compte?",
     "fishbowl": {
+        "title": "Titul",
         "topic": "Tema de conversa",
         "day": "Data",
         "selectDay": "Selecciona el dia",
