@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
