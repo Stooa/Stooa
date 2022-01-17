@@ -88,8 +88,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
     <FormikForm full={props.full ? props.full : undefined}>
       <fieldset className="fieldset-inline">
         <Input
-          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : ''})}
-          label={t('fishbowl.topic')}
+          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' })}
+          label={t('fishbowl.title')}
           name="title"
           type="text"
           autoComplete="off"
@@ -108,6 +108,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           dateFormat="dd/MM/yyyy"
           icon="calendar"
           autoComplete="off"
+          variant="sm"
         />
         <DatePicker
           label={t('fishbowl.time')}
@@ -151,6 +152,12 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             );
           })}
         </Select>
+      </fieldset>
+      <fieldset className="fieldset-inline">
+        <TextDivider>
+          <p>{t('fishbowl.advancedOptions')}</p>
+          <span></span>
+        </TextDivider>
         <Select label={t('fishbowl.timezone')} name="timezone" icon="world" autoComplete="off">
           <option value="">{t('fishbowl.selectTimeZone')}</option>
           {/* TODO: NORMALIZE TIMEZONE VALUES */}

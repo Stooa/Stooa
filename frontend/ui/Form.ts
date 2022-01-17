@@ -52,6 +52,10 @@ const FormikForm = styled(Form)`
     > *:not(:last-child) {
       margin-bottom: ${space(2)};
     }
+
+    > .textarea {
+      margin-bottom: ${space(4)};
+    }
   }
 
   .form__footer {
@@ -81,6 +85,8 @@ const InputStyled = styled.div`
   position: relative;
   width: 100%;
 
+  &.half { width: 50%; }
+
   ${media.min('tablet')`
     &.sm {
       width: calc(50% - ${space(0.5)});
@@ -106,7 +112,6 @@ const InputStyled = styled.div`
   .icon,
   .dropdown-icon {
     z-index: 1;
-
   }
 
   &.disabled {
@@ -145,7 +150,6 @@ const InputStyled = styled.div`
 
   &.textarea {
     height: ${space(14)};
-
   }
 
   input,
@@ -199,7 +203,7 @@ const InputStyled = styled.div`
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
-      ${TEXT_XXS}
+      ${TEXT_XXS};
     }
   }
 
@@ -208,7 +212,7 @@ const InputStyled = styled.div`
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
-      ${TEXT_XXS}
+      ${TEXT_XXS};
     }
   }
 
@@ -285,5 +289,27 @@ const FormError = styled(Alert)`
   margin-top: ${space(2)};
 `;
 
-export { CheckboxStyled, DatePickerStyled, FormError, InputStyled };
+const TextDivider = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: ${FONT_BASE_SIZE}px;
+  font-weight: 200;
+  width: 100%;
+
+  p {
+    margin-right: ${space(2)};
+  }
+
+  span {
+    flex-grow: 1;
+    position: inline-block;
+    vertical-align: middle;
+    height: 1px;
+    width: auto;
+    background-color: ${COLOR_NEUTRO_500};
+  }
+`;
+
+export { CheckboxStyled, DatePickerStyled, FormError, InputStyled, TextDivider };
 export default FormikForm;

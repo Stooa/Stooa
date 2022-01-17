@@ -14,7 +14,8 @@
         "selectDuration": "Sélectionnez la durée",
         "description": "Description (facultatif)",
         "timezone": "Fuseau horaire",
-        "selectTimeZone": "Sélectionnez le fuseau horaire"
+        "selectTimeZone": "Sélectionnez le fuseau horaire",
+        "advancedOptions": "Options avancées"
     },
     "button": {
         "createAccount": "Créez-en un !",

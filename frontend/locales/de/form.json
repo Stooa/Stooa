@@ -24,7 +24,8 @@
         "selectDay": "Wählen Sie ein Tag aus",
         "title": "Titel",
         "topic": "Gesprächsthema",
-        "time": "Beginnt um"
+        "time": "Beginnt um",
+        "advancedOptions": "Erweiterte optionen"
     },
     "button": {
         "title": "Ungültiger titel. Bitte fügen Sie ein Gesprächsthema ein",

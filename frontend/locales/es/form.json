@@ -21,7 +21,8 @@
         "selectDuration": "Selecciona la duración",
         "description": "Descripción (opcional)",
         "timezone": "Zona horaria",
-        "selectTimeZone": "Selecciona zona horaria"
+        "selectTimeZone": "Selecciona zona horaria",
+        "advancedOptions": "Opciones avanzadas"
     },
     "button": {
         "login": "Entra",
