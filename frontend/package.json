@@ -67,6 +67,7 @@
   },
   "resolutions": {
     "path-parse": "1.0.7",
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "5.0.1",
+    "follow-redirects": "1.14.7"
   }
 }
