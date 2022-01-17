@@ -39,8 +39,6 @@ let initConnection = false;
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
-  const [apiInterval, setApiInterval] = useState<number>(null);
-  const [timeUpInterval, setTimeUpInterval] = useState<number>(null);
   const [conferenceReady, setConferenceReady] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
@@ -99,7 +97,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   const checkIsTimeUp = () => {
     if (isTimeUp(data.endDateTimeTz)) {
-      window.clearInterval(timeUpInterval);
       setTimeStatus(ITimeStatus.TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE)) {
       setTimeStatus(ITimeStatus.LAST_MINUTE);
@@ -131,7 +128,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
     if (conferenceStatus === IConferenceStatus.FINISHED) {
       unload();
-
       const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
       router.push(route, route, { locale: lang });
     }
@@ -161,13 +157,15 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   useEffect(() => {
     checkIsTimeUp();
-
-    setTimeUpInterval(window.setInterval(checkIsTimeUp, 1500));
-    setApiInterval(window.setInterval(checkApIConferenceStatus, 6000));
-
+    const timeUpInterval = setInterval(() => {
+      checkIsTimeUp();
+    }, 1500);
+    const apiInterval = setInterval(() => {
+      checkApIConferenceStatus();
+    }, 6000);
     return () => {
-      window.clearInterval(timeUpInterval);
-      window.clearInterval(apiInterval);
+      clearInterval(timeUpInterval);
+      clearInterval(apiInterval);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
