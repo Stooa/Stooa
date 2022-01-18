@@ -96,6 +96,11 @@ const parseDevices = devices => {
   return { audioOutputDevices, audioInputDevices, videoDevices };
 };
 
+const nearestQuarterHour = () => {
+  const quarter = 15 * 60 * 1000;
+  return new Date(Math.ceil(new Date().getTime() / quarter) * quarter);
+};
+
 export {
   dateDifferenceFromNow,
   dispatchEvent,
@@ -104,5 +109,6 @@ export {
   isTimeLessThanNMinutes,
   isTimeUp,
   parseDevices,
-  removeItem
+  removeItem,
+  nearestQuarterHour
 };
