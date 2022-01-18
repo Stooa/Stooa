@@ -16,19 +16,19 @@ import { DatePickerStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
 import Icon from '@/components/Common/Fields/Icon';
 
-const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, ...props }) => {
+const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, selected, ...props }) => {
   const { setFieldValue } = useFormikContext();
   const [field, meta] = useField(props);
   const isInvalid = meta.touched && meta.error;
+  const selectedValue = field.value ? field.value : selected;
 
   return (
     <DatePickerStyled
       className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}>
       {icon && <Icon variant={icon} className="icon" />}
       <DatePickerField
-        {...field}
         {...props}
-        selected={field.value || null}
+        selected={selectedValue}
         onChange={val => setFieldValue(field.name, val)}
         className={isInvalid ? 'invalid' : ''}
       />
