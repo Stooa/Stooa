@@ -19,6 +19,8 @@ const join = async user => {
 
   conferenceRepository.sendJoinEvent(user);
 
+  console.log('SAURA VAMOS JODER localTracksCreated', localTracksCreated);
+
   if (!localTracksCreated) {
     await localTracksRepository.createLocalTracks().then(tracks => {
       tracks.forEach(async track => {
@@ -37,6 +39,8 @@ const leave = async () => {
 
 const unload = () => {
   console.log('[STOOA] Unload');
+
+  localTracksCreated = false;
 
   conferenceRepository.leave();
 

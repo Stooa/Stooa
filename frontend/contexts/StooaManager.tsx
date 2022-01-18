@@ -24,7 +24,7 @@ import {
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
-import { useStateValue } from '@/contexts/AppContext';
+import { ActionTypes, useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
 import useToasts from '@/hooks/useToasts';
 
@@ -33,13 +33,12 @@ const ONE_MINUTE = 1;
 
 const StooaContext = createContext(undefined);
 
-let initJitsi = false;
-let initConnection = false;
-
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [conferenceReady, setConferenceReady] = useState(false);
+  const [initJitsi, setInitJitsi] = useState(false);
+  const [initConnection, setInitConnection] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
 
@@ -47,7 +46,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const timeUpInterval = useRef<number>();
 
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
-  const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
+  const {
+    state: { fishbowlStarted, conferenceStatus, prejoin },
+    dispatch
+  } = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
 
@@ -90,8 +92,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
       })
       .then(({ data: { status } }) => {
         dispatch({
-          type: 'FISHBOWL_STATUS',
-          conferenceStatus: status
+          type: ActionTypes.Status,
+          payload: {
+            conferenceStatus: status
+          }
         });
       })
       .catch(error => {
@@ -122,10 +126,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   useEffect(() => {
+    console.log('----STOOA MANAGER COSITAS SAURA-----');
     if (!initJitsi) {
       initializeJitsi();
 
-      initJitsi = true;
+      setInitJitsi(true);
     }
 
     if (prejoin) {
@@ -136,9 +141,19 @@ const StooaProvider = ({ data, isModerator, children }) => {
       console.log('IN STOOA MANAGER REDIRECT');
       unload();
 
+      setInitConnection(false);
+      setInitJitsi(false);
+
       const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
       router.push(route, route, { locale: lang });
     }
+
+    console.table({
+      InitConnection: initConnection,
+      conferenceStatus: conferenceStatus,
+      fishbowlStarted: fishbowlStarted,
+      isModerator: isModerator
+    });
 
     if (
       !initConnection &&
@@ -152,7 +167,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
 
-      initConnection = true;
+      setInitConnection(true);
     }
 
     return () => {

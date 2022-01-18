@@ -12,22 +12,24 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Layout from '@/layouts/Default';
 import CreateFishbowlForm from '@/components/Web/Forms/CreateFishbowl';
-import { useStateValue } from '@/contexts/AppContext';
+import { ActionTypes, useStateValue } from '@/contexts/AppContext';
 
 import { IConferenceStatus } from '@/jitsi/Status';
 
 const Create = () => {
   const { t } = useTranslation('fishbowl');
-  const [{}, dispatch] = useStateValue();
+  const { dispatch } = useStateValue();
 
   useEffect(() => {
     dispatch({
-      type: 'FISHBOWL_STATUS',
-      fishbowlReady: false,
-      fishbowlStarted: false,
-      isGuest: false,
-      prejoin: true,
-      conferenceStatus: IConferenceStatus?.NOT_STARTED
+      type: ActionTypes.Initialize,
+      payload: {
+        fishbowlReady: false,
+        fishbowlStarted: false,
+        isGuest: false,
+        prejoin: true,
+        conferenceStatus: IConferenceStatus?.NOT_STARTED
+      }
     });
   }, []);
 

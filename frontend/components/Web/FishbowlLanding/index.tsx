@@ -21,8 +21,10 @@ interface Props {
   data: Fishbowl;
 }
 
-const FishbowlDetail: React.FC<Props> = ({ data }) => {
-  const [{ fishbowlReady }] = useStateValue();
+const FishbowlLanding: React.FC<Props> = ({ data }) => {
+  const {
+    state: { fishbowlReady }
+  } = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);
   const endDate = formatDateTime(data.endDateTimeTz);
@@ -54,4 +56,4 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default FishbowlDetail;
+export default FishbowlLanding;

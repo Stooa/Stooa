@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from '@/app.config';
-import { useStateValue } from '@/contexts/AppContext';
+import { ActionTypes, useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
@@ -30,7 +30,10 @@ const MINUTE = 60 * 1000;
 const MINUTES_TO_START_FISHBOWL = 60;
 
 const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
-  const [{ fishbowlReady }, dispatch] = useStateValue();
+  const {
+    state: { fishbowlReady },
+    dispatch
+  } = useStateValue();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('fishbowl');
   const intervalRef = useRef(null);
@@ -44,8 +47,8 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
       window.clearInterval(intervalRef.current);
 
       dispatch({
-        type: 'FISHBOWL_READY',
-        fishbowlReady: true
+        type: ActionTypes.Ready,
+        payload: { fishbowlReady: true }
       });
     } else {
       console.log('[STOOA] More than 1 hour to start fishbowl');

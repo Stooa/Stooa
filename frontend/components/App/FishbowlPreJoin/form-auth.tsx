@@ -10,7 +10,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
 import userRepository from '@/jitsi/User';
-import { useStateValue } from '@/contexts/AppContext';
+import { ActionTypes, useStateValue } from '@/contexts/AppContext';
 
 import { InputStyled } from '@/ui/Form';
 import Button from '@/ui/Button';
@@ -21,13 +21,15 @@ type TProps = {
 };
 
 const AuthUser = ({ name }: TProps) => {
-  const [{}, dispatch] = useStateValue();
+  const { dispatch } = useStateValue();
   const { t } = useTranslation('form');
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (): void => {
     dispatch({
-      type: 'JOIN_USER',
-      prejoin: false
+      type: ActionTypes.JoinUser,
+      payload: {
+        prejoin: false
+      }
     });
   };
 
