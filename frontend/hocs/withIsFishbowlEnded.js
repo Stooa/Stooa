@@ -26,7 +26,6 @@ const withIsFishbowlEnded = WrappedComponent => props => {
   const { lang } = useTranslation();
   const { fid } = router.query;
   useEffect(() => {
-
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
         headers: { 'Accept-Language': lang }
