@@ -8,12 +8,20 @@ body:
           value: |
               Thanks for taking the time to ask for new features :tada:!
     - type: textarea
-      id: idea
+      id: feature
       attributes:
-          label: 'Tell us your idea'
+          label: 'Description of the feature'
           description: We are really excited for you to share your ideas with the community!
           placeholder: Tell us what you miss!
           value: 'A flying car!'
+      validations:
+          required: true
+    - type: textarea
+      id: idea
+      attributes:
+          label: 'Description of the solution'
+          description: What do you think it can be done to solve this.
+          placeholder: Tell usyour idea.
       validations:
           required: true
     - type: checkboxes
