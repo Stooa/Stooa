@@ -52,7 +52,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const { fid } = router.query;
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
-    console.log('Listener start', conferenceStatus);
     setMyUserId(myUserId);
     setConferenceReady(true);
 
@@ -100,7 +99,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   const checkIsTimeUp = () => {
-    console.log('timeup function running');
     if (isTimeUp(data.endDateTimeTz)) {
       clearInterval(timeUpInterval.current);
       setTimeStatus(ITimeStatus.TIME_UP);
@@ -172,6 +170,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
     return () => {
       clearInterval(timeUpInterval.current);
       clearInterval(apiInterval.current);
+      initJitsi = false;
+      initConnection = false;
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
