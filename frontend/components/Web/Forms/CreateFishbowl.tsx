@@ -20,7 +20,7 @@ import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { CREATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
-import FormikForm from '@/ui/Form';
+import FormikForm, { TextDivider } from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Textarea from '@/components/Common/Fields/Textarea';
 import Select from '@/components/Common/Fields/Select';
