@@ -23,6 +23,7 @@
     "babel-plugin-styled-components": "1.12.0",
     "countries-and-timezones": "2.4.0",
     "file-loader": "6.2.0",
+    "follow-redirects": "1.14.7",
     "formik": "2.2.6",
     "graphql": "15.5.0",
     "gsap": "3.6.1",
@@ -67,7 +68,6 @@
   },
   "resolutions": {
     "path-parse": "1.0.7",
-    "ansi-regex": "5.0.1",
-    "follow-redirects": "1.14.7"
+    "ansi-regex": "5.0.1"
   }
 }
