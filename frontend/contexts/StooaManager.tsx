@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useEffect, useState } from 'react';
+import { useContext, createContext, useEffect, useState, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -39,11 +39,12 @@ let initConnection = false;
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
-  const [apiInterval, setApiInterval] = useState<number>(null);
-  const [timeUpInterval, setTimeUpInterval] = useState<number>(null);
   const [conferenceReady, setConferenceReady] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
+
+  const apiInterval = useRef<number>();
+  const timeUpInterval = useRef<number>();
 
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
@@ -51,6 +52,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const { fid } = router.query;
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
+    console.log('Listener start', conferenceStatus);
     setMyUserId(myUserId);
     setConferenceReady(true);
 
@@ -98,8 +100,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   const checkIsTimeUp = () => {
+    console.log('timeup function running');
     if (isTimeUp(data.endDateTimeTz)) {
-      window.clearInterval(timeUpInterval);
+      clearInterval(timeUpInterval.current);
       setTimeStatus(ITimeStatus.TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE)) {
       setTimeStatus(ITimeStatus.LAST_MINUTE);
@@ -130,6 +133,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
 
     if (conferenceStatus === IConferenceStatus.FINISHED) {
+      console.log('IN STOOA MANAGER REDIRECT');
       unload();
 
       const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
@@ -162,12 +166,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
   useEffect(() => {
     checkIsTimeUp();
 
-    setTimeUpInterval(window.setInterval(checkIsTimeUp, 1500));
-    setApiInterval(window.setInterval(checkApIConferenceStatus, 6000));
+    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1500);
+    apiInterval.current = window.setInterval(checkApIConferenceStatus, 6000);
 
     return () => {
-      window.clearInterval(timeUpInterval);
-      window.clearInterval(apiInterval);
+      clearInterval(timeUpInterval.current);
+      clearInterval(apiInterval.current);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

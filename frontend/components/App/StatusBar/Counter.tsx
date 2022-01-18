@@ -46,7 +46,6 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   };
 
   useEffect(() => {
-    console.log('--- Changed Conference Status ---');
     if (conferenceStatus === IConferenceStatus.RUNNING) {
       setCompletedTime(false);
     }
@@ -88,9 +87,6 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
     const minutes: number = Math.floor((seconds / 60) % 60);
     const hours: number = Math.floor(seconds / 3600);
-
-    console.log(hours, minutes);
-    console.log(seconds);
 
     if (seconds === 0 && conferenceNotStarted) {
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
