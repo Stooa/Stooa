@@ -20,9 +20,6 @@ const reducer = (state, action) => {
     'JOIN_USER'
   ];
 
-  console.log('Action', action);
-  console.log('State', state);
-
   if (allowedActions.includes(action.type)) {
     const { type, ...actionData } = action;
     return {
