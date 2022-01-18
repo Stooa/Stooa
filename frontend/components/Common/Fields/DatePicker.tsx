@@ -28,7 +28,7 @@ const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, selecte
       {icon && <Icon variant={icon} className="icon" />}
       <DatePickerField
         {...props}
-        selected={selectedValue || null}
+        selected={selectedValue}
         onChange={val => setFieldValue(field.name, val)}
         className={isInvalid ? 'invalid' : ''}
       />
