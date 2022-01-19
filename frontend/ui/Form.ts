@@ -42,10 +42,6 @@ const FormikForm = styled(Form)`
   fieldset {
     margin-bottom: ${space(3.5)};
 
-    &.advanced-options {
-      margin-bottom: ${space(1)};
-    }
-
     &:first-child {
       margin-top: 0;
     }
