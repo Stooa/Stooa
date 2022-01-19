@@ -29,7 +29,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   const [completedTime, setCompletedTime] = useState<boolean>(false);
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading...');
   const [intervalTimer, setIntervalTimer] = useState<number>();
-  const [fishbowlDate, setfishbowlDate] = useState(getDateByStatus());
+  const [fishbowlDate, setFishbowlDate] = useState(getDateByStatus());
 
   const { t } = useTranslation('fishbowl');
 
@@ -50,10 +50,10 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
       setCompletedTime(false);
     }
 
-    setfishbowlDate(getDateByStatus());
+    setFishbowlDate(getDateByStatus());
 
     return () => clearInterval(intervalTimer);
-  }, [conferenceStatus]);
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const isFinished = checkIfFinished(fishbowlDate);
@@ -73,7 +73,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     }
 
     return () => clearInterval(intervalTimer);
-  }, [fishbowlDate, completedTime, timeStatus]);
+  }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
