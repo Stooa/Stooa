@@ -19,9 +19,9 @@ const reducer = (state, action) => {
     'JOIN_GUEST',
     'JOIN_USER'
   ];
+  const { type, ...actionData } = action;
 
-  if (allowedActions.includes(action.type)) {
-    const { type, ...actionData } = action;
+  if (allowedActions.includes(type)) {
     return {
       ...state,
       ...actionData

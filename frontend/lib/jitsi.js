@@ -40,6 +40,7 @@ const unload = () => {
 
   conferenceRepository.leave();
   localTracksCreated = false;
+
   window.removeEventListener('beforeunload', unload);
   window.removeEventListener('unload', unload);
 };
