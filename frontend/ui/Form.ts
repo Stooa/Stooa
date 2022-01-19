@@ -35,12 +35,16 @@ const FormikForm = styled(Form)`
   text-align: left;
   width: 100%;
 
-  &:not(:last-child)  {
+  &:not(:last-child) {
     margin-bottom: ${space(4)};
   }
 
   fieldset {
-    margin: ${space(3.5)} 0;
+    margin-bottom: ${space(3.5)};
+
+    &.advanced-options {
+      margin-bottom: ${space(1)};
+    }
 
     &:first-child {
       margin-top: 0;
@@ -52,7 +56,6 @@ const FormikForm = styled(Form)`
     > *:not(:last-child) {
       margin-bottom: ${space(2)};
     }
-
     > .textarea {
       margin-bottom: ${space(4)};
     }
@@ -84,8 +87,6 @@ const FormikForm = styled(Form)`
 const InputStyled = styled.div`
   position: relative;
   width: 100%;
-
-  &.half { width: 50%; }
 
   ${media.min('tablet')`
     &.sm {
@@ -193,6 +194,10 @@ const InputStyled = styled.div`
     position: absolute;
     top: ${space(2.25)};
     transition: .1s ease-out;
+  }
+
+  input::placeholder {
+    color: ${COLOR_NEUTRO_700};
   }
 
   input:focus,

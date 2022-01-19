@@ -11,7 +11,7 @@
         "equalPassword": "Die beiden Passwörter müssen gleich sein"
     },
     "fishbowl": {
-        "selectLanguage": "Wählen Sie eine Sprache",
+        "language": "Sprache",
         "hours": "St.",
         "minutes": "Min.",
         "duration": "Dauer",

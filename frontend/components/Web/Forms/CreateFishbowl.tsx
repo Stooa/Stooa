@@ -153,28 +153,35 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           })}
         </Select>
       </fieldset>
-      <fieldset className="fieldset-inline">
+      <fieldset className="fieldset-inline advanced-options">
         <TextDivider>
           <p>{t('fishbowl.advancedOptions')}</p>
           <span></span>
         </TextDivider>
-        <Select label={t('fishbowl.timezone')} name="timezone" icon="world" autoComplete="off">
+        <Select
+          className="select"
+          variant="sm"
+          label={t('fishbowl.timezone')}
+          name="timezone"
+          icon="world"
+          autoComplete="off">
           <option value="">{t('fishbowl.selectTimeZone')}</option>
-          {/* TODO: NORMALIZE TIMEZONE VALUES */}
           {Object.keys(timezones).map((zone, index) => {
             const text = `(GTM${timezones[zone].utcOffsetStr}) ${timezones[zone].name}`;
             return (
-              <option key={`zone_${index}`} value={zone}>
+              <option key={`zone_${index}`} label={timezones[zone].name} value={zone}>
                 {text}
               </option>
             );
           })}
         </Select>
         <Select
-          label={t('fishbowl.selectLanguage')}
+          className="select"
+          label={t('fishbowl.language')}
           name="language"
           icon="language"
-          autoComplete="off">
+          autoComplete="off"
+          variant="sm">
           <option value="">{t('fishbowl.selectLanguage')}</option>
           {locales.map(locale => (
             <option value={locale} key={`locale-${locale}`}>
