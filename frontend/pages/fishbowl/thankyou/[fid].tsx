@@ -24,6 +24,7 @@ import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import { ButtonStyledLinkSmall } from '@/ui/Button';
+import RedirectLink from '@/components/Web/RedirectLink';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -152,7 +153,7 @@ const ThankYou = () => {
             </li>
           </ul>
         </div>
-        <Link href={ROUTE_FISHBOWL_CREATE} passHref>
+        <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
           <ButtonStyledLinkSmall
             className="secondary"
             onClick={() => {
@@ -165,7 +166,7 @@ const ThankYou = () => {
             <span>{t('common:createEvent')}</span>
             <ArrowRight />
           </ButtonStyledLinkSmall>
-        </Link>
+        </RedirectLink>
       </ThankYouStyled>
     </Layout>
   );

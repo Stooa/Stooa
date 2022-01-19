@@ -83,7 +83,12 @@ const ToolBar = () => {
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (isModerator && conferenceReady && conferenceStatus !== IConferenceStatus.RUNNING) {
+    if (
+      isModerator &&
+      conferenceReady &&
+      conferenceStatus !== IConferenceStatus.RUNNING &&
+      conferenceStatus !== IConferenceStatus.FINISHED
+    ) {
       console.log('[STOOA] starting introduction');
       const userSettings = userRepository.getUser();
       joinSeat(userSettings);

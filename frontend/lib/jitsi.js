@@ -39,6 +39,7 @@ const unload = () => {
   console.log('[STOOA] Unload');
 
   conferenceRepository.leave();
+  localTracksCreated = false;
 
   window.removeEventListener('beforeunload', unload);
   window.removeEventListener('unload', unload);
