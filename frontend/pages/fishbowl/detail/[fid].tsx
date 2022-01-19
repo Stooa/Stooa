@@ -33,6 +33,7 @@ const Detail = props => {
   const router = useRouter();
   const { lang } = useTranslation();
   const { createFishbowl } = useAuth();
+  const referer = props.referer ? props.referer : '';
 
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
@@ -48,7 +49,7 @@ const Detail = props => {
     return <Loader />;
   }
 
-  if (!props.referer.includes('/create')) {
+  if (!referer.includes('/create')) {
     const route = `${ROUTE_FISHBOWL}/${fid}`;
     router.push(route, route, { locale: lang });
     return <Loader />;
@@ -77,8 +78,8 @@ const Detail = props => {
 export default Detail;
 
 export async function getServerSideProps(context) {
-  const refererValue = context.req.headers.referer;
+  const referer = context.req.headers.referer || null;
   return {
-    props: { referer: refererValue }
+    props: { referer }
   };
 }
