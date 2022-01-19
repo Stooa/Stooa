@@ -77,8 +77,8 @@ const Detail = props => {
 export default Detail;
 
 export async function getServerSideProps(context) {
-  const referer = context.req.headers.referer;
+  const refererValue = context.req.headers.referer;
   return {
-    props: { referer }
+    props: { referer: refererValue }
   };
 }
