@@ -131,7 +131,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
 
     if (conferenceStatus === IConferenceStatus.FINISHED) {
-      console.log('IN STOOA MANAGER REDIRECT');
       unload();
 
       const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
