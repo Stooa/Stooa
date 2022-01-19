@@ -15,14 +15,16 @@ const reducer = (state, action) => {
     'FISHBOWL_STARTED',
     'FISHBOWL_READY',
     'FISHBOWL_STATUS',
+    'FISHBOWL_ENDED',
     'JOIN_GUEST',
     'JOIN_USER'
   ];
+  const { type, ...actionData } = action;
 
-  if (allowedActions.includes(action.type)) {
+  if (allowedActions.includes(type)) {
     return {
       ...state,
-      ...action
+      ...actionData
     };
   }
 
