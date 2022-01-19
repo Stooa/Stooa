@@ -76,31 +76,6 @@ const Detail = props => {
 
 export default Detail;
 
-/**
- * Workaround for:
- * [next-translate] In Next 10.x.x there is an issue related to i18n and getInitialProps.
- * We recommend to replace getInitialProps to getServerSideProps on /index.tsx.
- *
- * https://github.com/vercel/next.js/discussions/18396
- */
-// export const getStaticProps: GetStaticProps = async props => {
-//   return {
-//     props: { props }
-//   };
-// };
-
-/**
- * Error: getStaticPaths is required for dynamic SSG pages and is missing for
- * '/fishbowl/detail/[fid]'.
- * Read more: https://nextjs.org/docs/messages/invalid-getstaticpaths-value
- */
-// export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-//   return {
-//     paths: [], //indicates that no page needs be created at build time
-//     fallback: 'blocking' //indicates the type of fallback
-//   };
-// };
-
 export async function getServerSideProps(context) {
   const referer = context.req.headers.referer;
   return {
