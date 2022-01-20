@@ -180,7 +180,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="language"
           icon="language"
           autoComplete="off">
-          <option value="">{t('fishbowl.selectLanguage')}</option>
+          <option value="">{t('fishbowl.selectLanguageLabel')}</option>
           {locales.map(locale => (
             <option value={locale} key={`locale-${locale}`}>
               {t(`common:languages.${locale}`)}
