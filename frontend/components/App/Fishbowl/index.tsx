@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -45,8 +45,8 @@ const Fishbowl: FC = () => {
         <Seats />
         <Notifications>
           {toasts &&
-            toasts.map(({ message, id, dismissed, shown }) => {
-              if (!dismissed || !shown) {
+            toasts.map(({ message, id, dismissed }) => {
+              if (!dismissed) {
                 return (
                   <Toast key={`toast-${id}`} message={message} onDismiss={() => onDismiss(id)} />
                 );

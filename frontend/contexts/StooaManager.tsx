@@ -104,16 +104,14 @@ const StooaProvider = ({ data, isModerator, children }) => {
       setTimeStatus(ITimeStatus.TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE)) {
       setTimeStatus(ITimeStatus.LAST_MINUTE);
-    } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
       if (conferenceStatus === IConferenceStatus.RUNNING) {
         const message = t('notification.oneMinuteLeft');
-        addToast({ type: ITimeStatus.LAST_MINUTE, message }, 5000, 5000);
+        addToast({ type: ITimeStatus.LAST_MINUTE, message }, 5000, 7000);
       }
-      setTimeStatus(ITimeStatus.ENDING);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
       if (conferenceStatus === IConferenceStatus.RUNNING) {
         const message = t('notification.tenMinutesLeft');
-        addToast({ type: ITimeStatus.ENDING, message }, 3000, 5000);
+        addToast({ type: ITimeStatus.ENDING, message }, 3000, 7000);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }

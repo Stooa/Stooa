@@ -47,7 +47,9 @@ const ToastsProvider: React.FC = ({ children }) => {
   };
 
   const clearDelayed = (type: string) => {
-    setToasts(toasts => toasts.map((t: Toast) => (t.type === type ? { ...t, shown: true } : t)));
+    setToasts(toasts =>
+      toasts.map((t: Toast) => (t.type === type ? { ...t, dismissed: true } : t))
+    );
     delete delayedToasts[type];
   };
 
@@ -60,10 +62,10 @@ const ToastsProvider: React.FC = ({ children }) => {
     }
   };
 
-  const addToast = (content: ToastContent, delay = 0, autoclose = 0) => {
+  const addToast = (content: ToastContent, delay = 0, autoclose = 5000) => {
     toastCount++;
     const id = toastCount;
-    const toast: Toast = { ...content, id, dismissed: false, shown: false };
+    const toast: Toast = { ...content, id, dismissed: false, autoClose: autoclose };
     const toastExists = toastsList.some((toast: Toast) => toast.type === content.type);
 
     if (toastExists) return;

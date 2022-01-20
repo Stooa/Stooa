@@ -16,6 +16,6 @@ export interface Toast {
   id?: number;
   type: string;
   message: string;
-  shown?: boolean;
   dismissed?: boolean;
+  autoClose?: number;
 }
