@@ -26,7 +26,7 @@ import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
-// import useToasts from '@/hooks/useToasts';
+
 import { toast } from 'react-toastify';
 
 const TEN_MINUTES = 10;
@@ -38,7 +38,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
   const [conferenceReady, setConferenceReady] = useState(false);
-  // const { addToast, clearDelayed } = useToasts();
+  const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
+  const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const { t, lang } = useTranslation('app');
 
   const apiInterval = useRef<number>();
@@ -106,7 +107,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       clearInterval(timeUpInterval.current);
       setTimeStatus(ITimeStatus.TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING) {
+      if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
         const message = t('notification.oneMinuteLeft');
         toast(message, {
           type: 'warning',
@@ -114,10 +115,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
           delay: 5000,
           autoClose: 5000
         });
+        setLastMinuteToastSent(true);
       }
       setTimeStatus(ITimeStatus.LAST_MINUTE);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING) {
+      if (conferenceStatus === IConferenceStatus.RUNNING && !tenMinuteToastSent) {
         const message = t('notification.tenMinutesLeft');
         toast(message, {
           type: 'warning',
@@ -125,6 +127,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
           delay: 3000,
           autoClose: 5000
         });
+        seTenMinuteToastSent(true);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
@@ -185,6 +188,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.clearInterval(apiInterval.current);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    clearInterval(timeUpInterval.current);
+    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1500);
+  }, [tenMinuteToastSent, lastMinuteToastSent]);
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 

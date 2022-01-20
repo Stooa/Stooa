@@ -17,8 +17,6 @@ import { useStooa } from '@/contexts/StooaManager';
 
 import { Main } from '@/layouts/App/styles';
 
-import { ToastContainer } from 'react-toastify';
-
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
 const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
@@ -41,7 +39,6 @@ const Fishbowl: FC = () => {
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <Seats />
-        <ToastContainer></ToastContainer>
       </Main>
       <Footer participantsActive={participantsActive} />
     </>

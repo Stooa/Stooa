@@ -22,6 +22,9 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 const loading = { loading: () => <div /> };
 const Layout = dynamic(import('@/layouts/App'), loading);
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), loading);
@@ -58,7 +61,14 @@ const Page = () => {
 
   return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
     <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>
-      {shoulPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
+      {shoulPrintPreJoinPage ? (
+        <FishbowlPreJoin />
+      ) : (
+        <>
+          <Fishbowl />
+          <ToastContainer />
+        </>
+      )}
     </Layout>
   ) : (
     <LayoutWeb data={fb}>
