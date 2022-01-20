@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { COLOR_NEUTRO_100, BORDER_RADIUS } from '@/ui/settings';
+import { COLOR_NEUTRO_100, BORDER_RADIUS, COLOR_NEUTRO_700 } from '@/ui/settings';
 import { rems, space } from '@/ui/helpers';
 
 const Container = styled.div`
@@ -41,6 +41,14 @@ const Form = styled.div`
   padding: ${space(6)};
   text-align: center;
   width: 100%;
+
+  & input {
+    margin-bottom: ${space(2)};
+  }
+
+  & h2 {
+    color: ${COLOR_NEUTRO_700};
+  }
 `;
 
 const VideoContainer = styled.div`
