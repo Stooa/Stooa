@@ -251,6 +251,13 @@ class Fishbowl
      */
     private Collection $participants;
 
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private bool $hasIntroduction = false;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -521,6 +528,18 @@ class Fishbowl
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
         }
+
+        return $this;
+    }
+
+    public function getHasIntroduction(): bool
+    {
+        return $this->hasIntroduction;
+    }
+
+    public function setHasIntroduction(bool $hasIntroduction): self
+    {
+        $this->hasIntroduction = $hasIntroduction;
 
         return $this;
     }

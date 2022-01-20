@@ -29,6 +29,9 @@ framework:
                 run:
                     from: introduction
                     to: running
+                no_intro_run:
+                    from: not_started
+                    to: running
                 finish:
                     from: running
                     to: finished
