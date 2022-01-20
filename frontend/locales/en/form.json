@@ -9,18 +9,20 @@
     "noAccount": "No account?",
     "fishbowl": {
         "topic": "Conversation topic",
+        "title": "Title",
         "day": "Date",
         "selectDay": "Select day",
         "time": "Starts at",
         "selectTime": "Select time",
-        "selectLanguage": "Select language",
+        "language": "Language",
         "hours": "h",
         "minutes": "m",
         "duration": "Duration",
         "selectDuration": "Select Duration",
         "description": "Description (optional)",
         "timezone": "Time Zone",
-        "selectTimeZone": "Select Time Zone"
+        "selectTimeZone": "Select Time Zone",
+        "advancedOptions": "Advanced Options"
     },
     "button": {
         "login": "Log in",
