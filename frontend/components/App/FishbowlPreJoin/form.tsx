@@ -36,7 +36,7 @@ const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
-    <FormikForm>
+    <FormikForm className="prejoin">
       <Input label={t('name')} name="name" type="text" />
       <fieldset>
         <SubmitBtn text={t('button.enterFishbowl')} disabled={props.isSubmitting} />
