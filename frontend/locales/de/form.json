@@ -11,7 +11,7 @@
         "equalPassword": "Die beiden Passwörter müssen gleich sein"
     },
     "fishbowl": {
-        "selectLanguage": "Wählen Sie eine Sprache",
+        "language": "Sprache",
         "hours": "St.",
         "minutes": "Min.",
         "duration": "Dauer",
@@ -22,8 +22,10 @@
         "day": "Datum",
         "selectTime": "Wählen Sie eine Uhrzeit aus",
         "selectDay": "Wählen Sie ein Tag aus",
+        "title": "Titel",
         "topic": "Gesprächsthema",
-        "time": "Beginnt um"
+        "time": "Beginnt um",
+        "advancedOptions": "Erweiterte optionen"
     },
     "button": {
         "title": "Ungültiger titel. Bitte fügen Sie ein Gesprächsthema ein",

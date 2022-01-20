@@ -2,8 +2,9 @@
     "defaultTitle": "Rencontre Fishbowl - {{name}}",
     "fishbowl": {
         "topic": "Sujet de conversation",
+        "title": "Titre",
         "selectDay": "Sélectionnez le jour",
-        "selectLanguage": "Sélectionnez la langue",
+        "language": "Langue",
         "day": "Date",
         "time": "Commence à",
         "selectTime": "Sélectionner l'heure",
@@ -13,7 +14,8 @@
         "selectDuration": "Sélectionnez la durée",
         "description": "Description (facultatif)",
         "timezone": "Fuseau horaire",
-        "selectTimeZone": "Sélectionnez le fuseau horaire"
+        "selectTimeZone": "Sélectionnez le fuseau horaire",
+        "advancedOptions": "Options avancées"
     },
     "button": {
         "createAccount": "Créez-en un !",

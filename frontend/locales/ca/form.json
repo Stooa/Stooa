@@ -8,19 +8,21 @@
     "haveAccount": "Ja tens un compte?",
     "noAccount": "No tens compte?",
     "fishbowl": {
+        "title": "Titul",
         "topic": "Tema de conversa",
         "day": "Data",
         "selectDay": "Selecciona el dia",
         "time": "Comença a les",
         "selectTime": "Selecciona l'hora",
-        "selectLanguage": "Selecciona l'idioma",
+        "language": "Idioma",
         "hours": "h",
         "minutes": "m",
         "duration": "Durada",
         "selectDuration": "Selecciona una durada",
         "description": "Descripció (opcional)",
         "timezone": "Zona horària",
-        "selectTimeZone": "Selecciona zona horària"
+        "selectTimeZone": "Selecciona zona horària",
+        "advancedOptions": "Opcions avançades"
     },
     "button": {
         "login": "Entra",
