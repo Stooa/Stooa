@@ -14,6 +14,7 @@
         "time": "Empieza a las",
         "selectTime": "Selecciona la hora",
         "language": "Idioma",
+        "selectLanguageLabel": "Selecciona el idioma",
         "hours": "h",
         "minutes": "m",
         "duration": "Duración",
