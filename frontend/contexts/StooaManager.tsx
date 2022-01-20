@@ -110,12 +110,13 @@ const StooaProvider = ({ data, isModerator, children }) => {
       if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
         const message = t('notification.oneMinuteLeft');
         toast(message, {
-          type: 'warning',
+          type: 'error',
           position: 'bottom-center',
           delay: 5000,
           autoClose: 5000
         });
         setLastMinuteToastSent(true);
+        clearInterval(timeUpInterval.current);
       }
       setTimeStatus(ITimeStatus.LAST_MINUTE);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
@@ -128,6 +129,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
           autoClose: 5000
         });
         seTenMinuteToastSent(true);
+        clearInterval(timeUpInterval.current);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
