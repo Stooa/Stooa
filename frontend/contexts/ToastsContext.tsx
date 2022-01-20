@@ -84,7 +84,7 @@ const ToastsProvider: React.FC = ({ children }) => {
     if (autoclose) {
       setTimeout(() => {
         removeById(id);
-      }, autoclose + delay);
+      }, autoclose + delay + 2000);
     }
   };
 
