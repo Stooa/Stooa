@@ -43,7 +43,7 @@ const Form = styled.div`
   width: 100%;
 
   & input {
-    margin-bottom: ${space(2)};
+    margin-bottom: ${space(3)};
   }
 
   & h2 {
