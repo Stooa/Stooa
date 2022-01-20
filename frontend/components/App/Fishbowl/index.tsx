@@ -14,19 +14,17 @@ import useSound from 'use-sound';
 import { CONFERENCE_START } from '@/jitsi/Events';
 import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
-import useToasts from '@/hooks/useToasts';
 
 import { Main } from '@/layouts/App/styles';
-import { Notifications } from '@/components/App/Fishbowl/styles';
+
+import { ToastContainer } from 'react-toastify';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
 const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
-const Toast = dynamic(import('../Toast'), { loading: () => <div /> });
 
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
-  const { onDismiss, toasts } = useToasts();
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
   const { isModerator } = useStooa();
 
@@ -43,11 +41,7 @@ const Fishbowl: FC = () => {
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <Seats />
-        <Notifications>
-          {toasts.map(({ message, id }) => (
-            <Toast key={`toast-${id}`} message={message} onDismiss={onDismiss(id)} />
-          ))}
-        </Notifications>
+        <ToastContainer></ToastContainer>
       </Main>
       <Footer participantsActive={participantsActive} />
     </>
