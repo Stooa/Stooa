@@ -20,7 +20,7 @@ import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { CREATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
-import FormikForm from '@/ui/Form';
+import FormikForm, { TextDivider } from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Textarea from '@/components/Common/Fields/Textarea';
 import Select from '@/components/Common/Fields/Select';
@@ -88,8 +88,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
     <FormikForm full={props.full ? props.full : undefined}>
       <fieldset className="fieldset-inline">
         <Input
-          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : ''})}
-          label={t('fishbowl.topic')}
+          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' })}
+          label={t('fishbowl.title')}
           name="title"
           type="text"
           autoComplete="off"
@@ -108,6 +108,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           dateFormat="dd/MM/yyyy"
           icon="calendar"
           autoComplete="off"
+          variant="sm"
         />
         <DatePicker
           label={t('fishbowl.time')}
@@ -151,9 +152,19 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             );
           })}
         </Select>
-        <Select label={t('fishbowl.timezone')} name="timezone" icon="world" autoComplete="off">
+      </fieldset>
+      <fieldset className="fieldset-inline advanced-options">
+        <TextDivider>
+          <p>{t('fishbowl.advancedOptions')}</p>
+          <span></span>
+        </TextDivider>
+        <Select
+          className="select"
+          label={t('fishbowl.timezone')}
+          name="timezone"
+          icon="world"
+          autoComplete="off">
           <option value="">{t('fishbowl.selectTimeZone')}</option>
-          {/* TODO: NORMALIZE TIMEZONE VALUES */}
           {Object.keys(timezones).map((zone, index) => {
             const text = `(GTM${timezones[zone].utcOffsetStr}) ${timezones[zone].name}`;
             return (
@@ -164,7 +175,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           })}
         </Select>
         <Select
-          label={t('fishbowl.selectLanguage')}
+          className="select"
+          label={t('fishbowl.language')}
           name="language"
           icon="language"
           autoComplete="off">

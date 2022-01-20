@@ -35,12 +35,12 @@ const FormikForm = styled(Form)`
   text-align: left;
   width: 100%;
 
-  &:not(:last-child)  {
+  &:not(:last-child) {
     margin-bottom: ${space(4)};
   }
 
   fieldset {
-    margin: ${space(3.5)} 0;
+    margin-bottom: ${space(3.5)};
 
     &:first-child {
       margin-top: 0;
@@ -51,6 +51,9 @@ const FormikForm = styled(Form)`
 
     > *:not(:last-child) {
       margin-bottom: ${space(2)};
+    }
+    > .textarea {
+      margin-bottom: ${space(4)};
     }
   }
 
@@ -106,7 +109,6 @@ const InputStyled = styled.div`
   .icon,
   .dropdown-icon {
     z-index: 1;
-
   }
 
   &.disabled {
@@ -145,7 +147,6 @@ const InputStyled = styled.div`
 
   &.textarea {
     height: ${space(14)};
-
   }
 
   input,
@@ -191,6 +192,10 @@ const InputStyled = styled.div`
     transition: .1s ease-out;
   }
 
+  input::placeholder {
+    color: ${COLOR_NEUTRO_700};
+  }
+
   input:focus,
   input.filled,
   textarea:focus,
@@ -199,7 +204,7 @@ const InputStyled = styled.div`
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
-      ${TEXT_XXS}
+      ${TEXT_XXS};
     }
   }
 
@@ -208,7 +213,7 @@ const InputStyled = styled.div`
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
-      ${TEXT_XXS}
+      ${TEXT_XXS};
     }
   }
 
@@ -285,5 +290,27 @@ const FormError = styled(Alert)`
   margin-top: ${space(2)};
 `;
 
-export { CheckboxStyled, DatePickerStyled, FormError, InputStyled };
+const TextDivider = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-size: ${FONT_BASE_SIZE}px;
+  font-weight: 200;
+  width: 100%;
+
+  p {
+    margin-right: ${space(2)};
+  }
+
+  span {
+    flex-grow: 1;
+    position: inline-block;
+    vertical-align: middle;
+    height: 1px;
+    width: auto;
+    background-color: ${COLOR_NEUTRO_500};
+  }
+`;
+
+export { CheckboxStyled, DatePickerStyled, FormError, InputStyled, TextDivider };
 export default FormikForm;
