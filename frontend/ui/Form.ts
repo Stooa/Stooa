@@ -96,7 +96,10 @@ const InputStyled = styled.div`
     }
   `}
 
-  svg { pointer-events: none; }
+  svg {
+    pointer-events: none;
+    color: ${COLOR_NEUTRO_600};
+  }
 
   .dropdown-icon {
     height: ${rems(16)};
@@ -113,7 +116,9 @@ const InputStyled = styled.div`
 
   &.disabled {
     .icon path,
-    .dropdown-icon path { fill: ${COLOR_NEUTRO_500}; }
+    .dropdown-icon path {
+      fill: ${COLOR_NEUTRO_500};
+    }
 
     input:disabled,
     textarea:disabled,
@@ -121,7 +126,9 @@ const InputStyled = styled.div`
       border: 1px solid ${COLOR_NEUTRO_300};
       color: ${COLOR_NEUTRO_600};
 
-      & + label { color: ${COLOR_NEUTRO_600}; }
+      & + label {
+        color: ${COLOR_NEUTRO_600};
+      }
 
       .icon path {
         color: ${COLOR_NEUTRO_500};
@@ -132,9 +139,13 @@ const InputStyled = styled.div`
   &.withicon {
     input,
     select,
-    &.datepicker input { padding-left: ${space(6)}; }
+    &.datepicker input {
+      padding-left: ${space(6)};
+    }
 
-    label { left: ${space(6)}; }
+    label {
+      left: ${space(6)};
+    }
 
     .icon {
       height: ${space(4)};
@@ -168,11 +179,15 @@ const InputStyled = styled.div`
       border: 1px solid ${COLOR_NEUTRO_700};
     }
 
-    &.invalid { border-color: ${COLOR_RED_500}; }
+    &.invalid {
+      border-color: ${COLOR_RED_500};
+    }
   }
 
   input,
-  select { height: ${space(6.5)}; }
+  select {
+    height: ${space(6.5)};
+  }
 
   textarea {
     height: 100%;
@@ -189,7 +204,7 @@ const InputStyled = styled.div`
     pointer-events: none;
     position: absolute;
     top: ${space(2.25)};
-    transition: .1s ease-out;
+    transition: 0.1s ease-out;
   }
 
   input::placeholder {
@@ -210,11 +225,10 @@ const InputStyled = styled.div`
 
   select + label,
   &.datepicker label.small {
-      color: ${COLOR_NEUTRO_700};
-      top: ${space(1.3)};
+    color: ${COLOR_NEUTRO_700};
+    top: ${space(1.3)};
 
-      ${TEXT_XXS};
-    }
+    ${TEXT_XXS};
   }
 
   .help {
@@ -225,7 +239,7 @@ const InputStyled = styled.div`
 
   &:not(:last-child) .help {
     margin-bottom: ${space(2)};
-    }
+  }
 `;
 
 const DatePickerStyled = styled(InputStyled)`
