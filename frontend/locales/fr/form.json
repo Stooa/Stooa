@@ -1,7 +1,6 @@
 {
     "defaultTitle": "Rencontre Fishbowl - {{name}}",
     "fishbowl": {
-        "topic": "Sujet de conversation",
         "title": "Titre",
         "selectDay": "Sélectionnez le jour",
         "language": "Langue",
@@ -18,7 +17,7 @@
         "advancedOptions": "Options avancées"
     },
     "button": {
-        "createAccount": "Créez-en un !",
+        "createAccount": "Créez-en un !",
         "createFishbowl": "Créer un fishbowl",
         "recoverPassword": "Envoyer le lien de réinitialisation",
         "save": "Enregistrer",
