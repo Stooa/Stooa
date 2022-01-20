@@ -47,9 +47,7 @@ const ToastsProvider: React.FC = ({ children }) => {
   };
 
   const clearDelayed = (type: string) => {
-    setToasts(toasts =>
-      toasts.map((t: Toast) => (t.type === type ? { ...t, dismissed: true } : t))
-    );
+    setToasts(toasts => toasts.map((t: Toast) => (t.type === type ? { ...t } : t)));
     delete delayedToasts[type];
   };
 
@@ -84,7 +82,7 @@ const ToastsProvider: React.FC = ({ children }) => {
     if (autoclose) {
       setTimeout(() => {
         removeById(id);
-      }, autoclose + delay + 2000);
+      }, autoclose + delay);
     }
   };
 
