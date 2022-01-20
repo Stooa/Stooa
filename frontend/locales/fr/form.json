@@ -1,7 +1,6 @@
 {
     "defaultTitle": "Rencontre Fishbowl - {{name}}",
     "fishbowl": {
-        "topic": "Sujet de conversation",
         "title": "Titre",
         "selectDay": "Sélectionnez le jour",
         "language": "Langue",

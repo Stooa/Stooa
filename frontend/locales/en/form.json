@@ -8,7 +8,6 @@
     "haveAccount": "Already have an account?",
     "noAccount": "No account?",
     "fishbowl": {
-        "topic": "Conversation topic",
         "title": "Title",
         "day": "Date",
         "selectDay": "Select day",
@@ -18,10 +17,10 @@
         "hours": "h",
         "minutes": "m",
         "duration": "Duration",
-        "selectDuration": "Select Duration",
+        "selectDuration": "Duration",
         "description": "Description (optional)",
         "timezone": "Time Zone",
-        "selectTimeZone": "Select Time Zone",
+        "selectTimeZone": "Time Zone",
         "advancedOptions": "Advanced Options"
     },
     "button": {
