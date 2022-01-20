@@ -18,12 +18,11 @@
         "selectDuration": "Wählen Sie die Dauer",
         "description": "Beschreibung (optional)",
         "timezone": "Zeitzone",
-        "selectTimeZone": "Wählen Sie eine Zeitzone aus",
+        "selectTimeZone": "Zeitzone",
         "day": "Datum",
         "selectTime": "Wählen Sie eine Uhrzeit aus",
         "selectDay": "Wählen Sie ein Tag aus",
         "title": "Titel",
-        "topic": "Gesprächsthema",
         "time": "Beginnt um",
         "advancedOptions": "Erweiterte optionen"
     },
