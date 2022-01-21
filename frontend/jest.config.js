@@ -14,6 +14,11 @@ module.exports = {
   clearMocks: true,
   // The directory where Jest should output its coverage files
   coverageDirectory: '.coverage',
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**",
+    "!**/.coverage/**",
+  ],
   moduleNameMapper: {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
     '^@/jitsi/(.*)$': '<rootDir>/lib/jitsi-modules/$1',
