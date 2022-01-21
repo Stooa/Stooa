@@ -28,7 +28,7 @@ use Symfony\Component\Workflow\WorkflowInterface;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Test\Factories;
 
-class MutationResolverTest extends TestCase
+class WorkflowMutationResolverTest extends TestCase
 {
     use Factories;
 
