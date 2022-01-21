@@ -66,7 +66,7 @@ const Layout: React.FC<Props> = ({
         <Seo title={title} />
         <Container>{children}</Container>
       </DevicesProvider>
-      <ToastContainer hideProgressBar />
+      <ToastContainer hideProgressBar className="toastify-custom" />
     </StooaProvider>
   );
 };
