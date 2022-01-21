@@ -82,10 +82,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   });
 
-  // useEventListener(NOTIFICATION_CLOSE, ({ detail: { type } }) => {
-  //   clearDelayed(type);
-  // });
-
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
