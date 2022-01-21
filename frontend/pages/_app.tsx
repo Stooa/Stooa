@@ -45,18 +45,20 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <DataProvider>
-      <GlobalStyles />
-      <OpenGraphDefault />
-      <StateProvider>
-        <AuthProvider>
-          <ProtectRoute>
-            <Component {...pageProps} />
-            <ToastContainer />
-          </ProtectRoute>
-        </AuthProvider>
-      </StateProvider>
-    </DataProvider>
+    <>
+      <DataProvider>
+        <GlobalStyles />
+        <OpenGraphDefault />
+        <StateProvider>
+          <AuthProvider>
+            <ProtectRoute>
+              <Component {...pageProps} />
+            </ProtectRoute>
+          </AuthProvider>
+        </StateProvider>
+      </DataProvider>
+      <ToastContainer />
+    </>
   );
 };
 

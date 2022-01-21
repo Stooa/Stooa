@@ -58,13 +58,7 @@ const Page = () => {
 
   return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
     <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>
-      {shoulPrintPreJoinPage ? (
-        <FishbowlPreJoin />
-      ) : (
-        <>
-          <Fishbowl />
-        </>
-      )}
+      {shoulPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
     </Layout>
   ) : (
     <LayoutWeb data={fb}>
