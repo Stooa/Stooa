@@ -14,15 +14,15 @@ import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
 import { StateProvider } from '@/contexts/AppContext';
 import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
 import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
-
-import { ToastContainer } from 'react-toastify';
-import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css';
 
 const MyApp = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
