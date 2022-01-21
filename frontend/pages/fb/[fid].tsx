@@ -22,9 +22,6 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-
 const loading = { loading: () => <div /> };
 const Layout = dynamic(import('@/layouts/App'), loading);
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), loading);
@@ -66,7 +63,6 @@ const Page = () => {
       ) : (
         <>
           <Fishbowl />
-          <ToastContainer />
         </>
       )}
     </Layout>

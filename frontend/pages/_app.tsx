@@ -21,6 +21,9 @@ import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
 
+import { ToastContainer } from 'react-toastify';
+import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css';
+
 const MyApp = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
 
@@ -49,6 +52,7 @@ const MyApp = ({ Component, pageProps }) => {
         <AuthProvider>
           <ProtectRoute>
             <Component {...pageProps} />
+            <ToastContainer />
           </ProtectRoute>
         </AuthProvider>
       </StateProvider>
