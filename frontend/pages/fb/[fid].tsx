@@ -53,8 +53,8 @@ const Page = () => {
     setJoinAsGuest(true);
   };
 
-  const shoulPrintPreJoinPage = (joinAsGuest || isAuthenticated) && prejoin;
-  const shoulPrintFishbowlPage = fishbowlReady && (isAuthenticated || isGuest);
+  const shoulPrintPreJoinPage: boolean = (joinAsGuest || isAuthenticated) && prejoin;
+  const shoulPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
 
   return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
     <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>

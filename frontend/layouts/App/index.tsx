@@ -34,6 +34,7 @@ interface Props {
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;
+  prejoin: boolean;
 }
 
 const Layout: React.FC<Props> = ({
