@@ -4,6 +4,7 @@
         "title": "Titre",
         "selectDay": "Sélectionnez le jour",
         "language": "Langue",
+        "selectLanguageLabel": "Sélectionnez la langue",
         "day": "Date",
         "time": "Commence à",
         "selectTime": "Sélectionner l'heure",
