@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
@@ -49,8 +49,8 @@ const PING_TIMEOUT = 3500;
 const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants }) => {
   const { t, lang } = useTranslation('fishbowl');
   const [active, setActive] = useState(false);
-  const [pingInterval, setPingInterval] = useState<number>(0);
-  const [getParticipantsInterval, setGetParticipantsInterval] = useState<number>(0);
+  const pingInterval = useRef<number>();
+  const getParticipantsInterval = useRef<number>();
   const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);
   const [speakingParticipants, setSpeakingParticipants] = useState<Participant[]>([
     initialParticipant
@@ -120,21 +120,21 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       pingParticipant();
       getApiParticipants();
 
-      setPingInterval(window.setInterval(pingParticipant, PING_TIMEOUT));
-      setGetParticipantsInterval(window.setInterval(getApiParticipants, PING_TIMEOUT));
+      pingInterval.current = window.setInterval(pingParticipant, PING_TIMEOUT);
+      getParticipantsInterval.current = window.setInterval(getApiParticipants, PING_TIMEOUT);
     } else {
-      window.clearInterval(pingInterval);
-      window.clearInterval(getParticipantsInterval);
+      window.clearInterval(pingInterval.current);
+      window.clearInterval(getParticipantsInterval.current);
 
       setTimeout(() => {
         // Each 1 second it will fetch users from Jitsi to show the sidebar and user count correctly
-        setGetParticipantsInterval(window.setInterval(getConferenceParticipants, 1000));
+        getParticipantsInterval.current = window.setInterval(getConferenceParticipants, 1000);
       }, PING_TIMEOUT);
     }
 
     return () => {
-      window.clearInterval(pingInterval);
-      window.clearInterval(getParticipantsInterval);
+      window.clearInterval(pingInterval.current);
+      window.clearInterval(getParticipantsInterval.current);
     };
   }, [initialized]); // eslint-disable-line react-hooks/exhaustive-deps
 
