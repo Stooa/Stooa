@@ -90,7 +90,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
     if (seconds === 0 && conferenceNotStarted) {
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
-    } else if (seconds === 0 && timeStatus === ITimeStatus.TIME_UP) {
+    } else if (seconds < 2) {
       timeLeftText = t('timesUp');
     } else if ((minutes === 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
       timeLeftText = t('lastMinute');
