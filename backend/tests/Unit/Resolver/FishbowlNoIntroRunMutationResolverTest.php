@@ -32,24 +32,25 @@ class FishbowlNoIntroRunMutationResolverTest extends TestCase
     /** @var MockObject&WorkflowInterface */
     private MockObject $stateMachine;
     private FishbowlNoIntroRunMutationResolver $resolver;
+    /** @var array<string, mixed> */
     private array $context;
 
     protected function setUp(): void
     {
         $this->repository = $this->createStub(FishbowlRepository::class);
-        $this->stateMachine = $this->createStub(WorkflowInterface::class);
+        $this->stateMachine = $this->createMock(WorkflowInterface::class);
         $this->context = ['args' => ['input' => ['slug' => 'test']]];
-    }
-
-    /** @test */
-    public function itGetsNullFishbowlWhenFishbowlSlugDontExists()
-    {
-        $this->repository->method('findBySlug')->willReturn(null);
 
         $this->resolver = new FishbowlNoIntroRunMutationResolver(
             $this->repository,
             $this->stateMachine
         );
+    }
+
+    /** @test */
+    public function itGetsNullWhenContextIsEmpty(): void
+    {
+        $this->context = [];
 
         $returnedFishbowl = ($this->resolver)(null, $this->context);
 
@@ -57,17 +58,21 @@ class FishbowlNoIntroRunMutationResolverTest extends TestCase
     }
 
     /** @test */
-    public function itGetsNullWhenFishbowlCantChangeWorkflowStatus()
+    public function itGetsNullFishbowlWhenFishbowlSlugDontExists(): void
+    {
+        $this->repository->method('findBySlug')->willReturn(null);
+
+        $returnedFishbowl = ($this->resolver)(null, $this->context);
+
+        $this->assertNull($returnedFishbowl);
+    }
+
+    /** @test */
+    public function itGetsNullWhenFishbowlCantChangeWorkflowStatus(): void
     {
         $fishbowl = FishbowlFactory::createOne()->object();
-
         $this->repository->method('findBySlug')->willReturn($fishbowl);
         $this->stateMachine->method('can')->willReturn(false)->with($fishbowl, Fishbowl::TRANSITION_NO_INTRO_RUN);
-
-        $this->resolver = new FishbowlNoIntroRunMutationResolver(
-            $this->repository,
-            $this->stateMachine
-        );
 
         $returnedFishbowl = ($this->resolver)(null, $this->context);
 
@@ -76,18 +81,12 @@ class FishbowlNoIntroRunMutationResolverTest extends TestCase
     }
 
     /** @test */
-    public function foo()
+    public function itGetsCorrectFishbowl(): void
     {
         $fishbowl = FishbowlFactory::createOne()->object();
 
         $this->repository->method('findBySlug')->willReturn($fishbowl);
         $this->stateMachine->method('can')->willReturn(true)->with($fishbowl, Fishbowl::TRANSITION_NO_INTRO_RUN);
-
-        $this->resolver = new FishbowlNoIntroRunMutationResolver(
-            $this->repository,
-            $this->stateMachine
-        );
-
         $this->stateMachine->expects($this->once())->method('apply')->with($fishbowl, Fishbowl::TRANSITION_NO_INTRO_RUN);
 
         $returnedFishbowl = ($this->resolver)(null, $this->context);
