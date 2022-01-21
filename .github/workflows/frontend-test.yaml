@@ -54,4 +54,7 @@ jobs:
               run: yarn install --frozen-lockfile
 
             - name: Execute Jest Javascript tests
-              run: yarn run test
+              run: yarn run test --coverage
+
+            - name: Send coverage to Codecov
+              uses: codecov/codecov-action@v2
