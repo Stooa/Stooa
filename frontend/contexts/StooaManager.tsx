@@ -73,7 +73,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     if (seats.includes(myUserId)) {
       const delay = type === USER_MUST_LEAVE ? 8000 : 0;
       const autoClose = type === USER_MUST_LEAVE ? 15000 : 0;
-      toast(message, {
+      toast(t(message), {
         type: 'warning',
         position: 'bottom-center',
         delay,
