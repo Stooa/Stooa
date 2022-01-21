@@ -44,25 +44,24 @@ const tracksRepository = () => {
   };
 
   const syncSessionStorageTrack = async (track, user) => {
-    const trackType = track.getType();
-
     if (!user) {
       user = JSON.parse(sessionStorage.getItem('user'));
     }
 
-    if (user && track.isLocal()) {
+    const seat = seatsRepository.getSeat();
+
+    if (user && seat > 0 && track.isLocal()) {
+      const trackType = track.getType();
       const userIsMuted = trackType === 'video' ? user.videoMuted : user.audioMuted;
 
       // This is checking also the user
       if (track.isMuted() && !userIsMuted) {
         await track.unmute().then(() => {
           console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
-          return track;
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
           console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
-          return track;
         });
       }
     }
@@ -196,11 +195,10 @@ const tracksRepository = () => {
 
   const handleTrackMuteChanged = async track => {
     await syncSessionStorageTrack(track)
-    const mutedId = track.getParticipantId();
-    const userId = conferenceRepository.getMyUserId();
-    const seat = seatsRepository.getSeat(mutedId);
 
-    if (mutedId === userId) return;
+    if (track.isLocal()) return;
+
+    const seat = seatsRepository.getSeat(track.getParticipantId());
 
     handleElementsMutedClass(seat, track);
 
