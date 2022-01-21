@@ -18,6 +18,8 @@ services:
             - /usr/app/var/
             - ./backend/.docker/app-dev/extra.ini:/usr/local/etc/php/conf.d/extra.ini
             - ./backend/.docker/app-dev/www.conf:/usr/local/etc/php-fpm.d/www.conf
+        extra_hosts:
+            - host.docker.internal:host-gateway
         networks:
             meet.jitsi:
                 aliases:

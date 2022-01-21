@@ -86,6 +86,11 @@
         "zenstruck/foundry": "1.13.4"
     },
     "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "ergebnis/composer-normalize": true,
+            "symfony/flex": true
+        },
         "optimize-autoloader": true,
         "sort-packages": true
     },
