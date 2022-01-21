@@ -5,14 +5,12 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-UNAME := $(shell uname)
-
 AUTOLOAD = backend/vendor/autoload.php
 JITSI_CONFIG = jitsi-meet-cfg/jvb/logging.properties
 CERTS_DIR = .certs
 
-docker-exec-backend = docker-compose exec backend /bin/bash -c "$1"
-docker-exec-frontend = docker-compose exec frontend /bin/bash -c "$1"
+docker-exec-backend = docker compose exec backend /bin/bash -c "$1"
+docker-exec-frontend = docker compose exec frontend /bin/bash -c "$1"
 
 .PHONY: up composer build halt destroy ssh ssh-front certs provision provision-backend \
 		composer-install composer-normalize phpstan php-cs-fixer phpunit phpunit-coverage \
@@ -22,26 +20,22 @@ docker-exec-frontend = docker-compose exec frontend /bin/bash -c "$1"
 up: $(JITSI_CONFIG) compose $(AUTOLOAD)
 
 compose: $(CERTS_DIR)
-ifeq ($(UNAME), Darwin)
-	XDEBUG_CONFIG="client_host=host.docker.internal" docker-compose up -d
-else
-	docker-compose up -d
-endif
+	docker compose up -d
 
 build: halt
-	docker-compose build
+	docker compose build
 
 halt:
-	docker-compose stop
+	docker compose stop
 
 destroy:
-	docker-compose down --remove-orphans
+	docker compose down --remove-orphans
 
 ssh:
-	docker-compose exec backend /bin/bash
+	docker compose exec backend /bin/bash
 
 ssh-front:
-	docker-compose exec frontend /bin/bash
+	docker compose exec frontend /bin/bash
 
 $(CERTS_DIR):
 	$(MAKE) certs
