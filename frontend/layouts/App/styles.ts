@@ -29,9 +29,6 @@ const Container = styled.div<{ drawer?: boolean }>`
     grid-template-rows: ${space(10)} 1fr ${space(10)};
     padding: 0 ${space(3)};
   `}
-
-  /* ADD CUSTOM TOASTS STYLES */
-  --toastify-color-light: ${COLOR_NEUTRO_200};
 `;
 
 const Header = styled.header`

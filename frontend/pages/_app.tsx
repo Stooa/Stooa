@@ -14,9 +14,6 @@ import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
 import { StateProvider } from '@/contexts/AppContext';
 import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
@@ -45,20 +42,17 @@ const MyApp = ({ Component, pageProps }) => {
   }, []);
 
   return (
-    <>
-      <DataProvider>
-        <GlobalStyles />
-        <OpenGraphDefault />
-        <StateProvider>
-          <AuthProvider>
-            <ProtectRoute>
-              <Component {...pageProps} />
-            </ProtectRoute>
-          </AuthProvider>
-        </StateProvider>
-      </DataProvider>
-      <ToastContainer />
-    </>
+    <DataProvider>
+      <GlobalStyles />
+      <OpenGraphDefault />
+      <StateProvider>
+        <AuthProvider>
+          <ProtectRoute>
+            <Component {...pageProps} />
+          </ProtectRoute>
+        </AuthProvider>
+      </StateProvider>
+    </DataProvider>
   );
 };
 

@@ -14,7 +14,13 @@ import Texts from '@/ui/Texts';
 import Titles from '@/ui/Titles';
 import Overrides from '@/ui/Overrides';
 import { media, space } from '@/ui/helpers';
-import { COLOR_NEUTRO_700, FONT_BASE_SIZE, FONT_PRIMARY } from '@/ui/settings';
+import {
+  COLOR_NEUTRO_200,
+  COLOR_NEUTRO_700,
+  COLOR_YELLOW_100,
+  FONT_BASE_SIZE,
+  FONT_PRIMARY
+} from '@/ui/settings';
 import { getIconCSS } from '@/ui/Icons';
 
 const GlobalStyle = createGlobalStyle`
@@ -179,6 +185,25 @@ const GlobalStyle = createGlobalStyle`
     height: ${space(2)};
     width: ${space(2)};
   }
+
+  /*  CUSTOM TOASTS STYLES */
+  :root {
+    --toastify-color-light: ${COLOR_YELLOW_100};
+    --toastify-text-color-light: ${COLOR_NEUTRO_700};
+    --toastify-toast-width: minmax(320px, 50%);
+    }
+
+    .Toastify__toast-container--bottom-center {
+      bottom: ${space(10)}
+    }
+
+    .Toastify__toast-body {
+      padding-right: ${space(3)};
+    }
+
+    .Toastify__close-button {
+      align-self: center;
+    }
 `;
 
 export default GlobalStyle;

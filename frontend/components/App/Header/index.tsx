@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Header as HeaderStyled } from '@/layouts/App/styles';
+import { toast } from 'react-toastify';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
