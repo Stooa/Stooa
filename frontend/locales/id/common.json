@@ -1,0 +1,27 @@
+{
+    "signin": "Masuk",
+    "register": "Daftar secara gratis",
+    "signout": "Keluar",
+    "createEvent": "Buat sebuah fishbowl yang gratis",
+    "cta": "Buat sebuah fishbowl",
+    "changePassword": "Ubah kata sandi",
+    "goHome": "Pergi ke Beranda",
+    "privacyPolicy": "Kebijakan Privasi",
+    "cookiesPolicy": "Kebijakan Kuki",
+    "copyright": "Stooa © %year%. Hak cipta dimiliki",
+    "og-title": "Alat fishbowl daring",
+    "languages": {
+        "en": "Inggris",
+        "es": "Spanyol",
+        "ca": "Katala"
+    },
+    "roadmap": "Peta rencana",
+    "documentation": "Dokumentasi",
+    "githubIssues": "Isu GitHub",
+    "help": "Bantuan",
+    "legal": "Legal",
+    "cancel": "Batal",
+    "conductCode": "Kode Etik",
+    "editProfile": "Sunting profil",
+    "og-description": "Stooa memungkinkan pembicaraan yang lancar dan partisipatif dengan fasilitas otomatis yang berdasarkan metode fishbowl."
+}
