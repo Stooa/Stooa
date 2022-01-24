@@ -192,16 +192,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   /*  CUSTOM TOASTS STYLES */
-  :root{
-    --toastify-text-color-light: ${COLOR_NEUTRO_700};
-    --toastify-color-success: ${COLOR_GREEN_500};
-    --toastify-text-color-success: ${COLOR_GREEN_800};
-    --toastify-color-warning: ${COLOR_YELLOW_500};
-    --toastify-color-error: ${COLOR_RED_600};
+  :root {
+    --toastify-toast-width: fit-content !important;
+
+    --toastify-text-color-light: ${COLOR_NEUTRO_700} !important;
+    --toastify-color-success: ${COLOR_GREEN_500} !important;
+    --toastify-text-color-success: ${COLOR_GREEN_800} !important;
+    --toastify-color-warning: ${COLOR_YELLOW_500} !important;
+    --toastify-color-error: ${COLOR_RED_600} !important;
   }
 
   .toastify-custom {
-    --toastify-toast-width: fit-content !important;
 
       & .Toastify__toast {
         padding: ${space(0)} ${space(2)};
