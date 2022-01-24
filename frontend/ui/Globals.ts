@@ -193,7 +193,6 @@ const GlobalStyle = createGlobalStyle`
 
   /*  CUSTOM TOASTS STYLES */
   :root{
-    --toastify-toast-width: fit-content;
     --toastify-text-color-light: ${COLOR_NEUTRO_700};
     --toastify-color-success: ${COLOR_GREEN_500};
     --toastify-text-color-success: ${COLOR_GREEN_800};
@@ -202,6 +201,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .toastify-custom {
+    --toastify-toast-width: fit-content !important;
 
       & .Toastify__toast {
         padding: ${space(0)} ${space(2)};
