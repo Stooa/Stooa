@@ -130,21 +130,38 @@ const Home = () => {
         <Description className="text-lg animate-item" center>
           {t('description')}
         </Description>
-        <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-          <ButtonStyledLink
-            className="animate-item cta-create-fishbowl"
-            onClick={() => {
-              pushEventDataLayer({
-                category: 'Create Fishbowl',
-                action: 'Billboard',
-                label: 'Home'
-              });
-            }}
-          >
-            <span>{t('cta')}</span>
-            <ArrowRight />
-          </ButtonStyledLink>
-        </Link>
+        <div className="cta-wrapper">
+          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
+            <ButtonStyledLink
+              className="animate-item cta-create-fishbowl"
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Create Fishbowl',
+                  action: 'Billboard',
+                  label: 'Home'
+                });
+              }}
+            >
+              <span>{t('cta')}</span>
+              <ArrowRight />
+            </ButtonStyledLink>
+          </Link>
+          <Link href={`${ROUTE_FISHBOWL_CREATE}?method=now`} passHref>
+            <ButtonStyledLink
+              className="animate-item cta-create-fishbowl"
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Create Fishbowl',
+                  action: 'Billboard',
+                  label: 'Home'
+                });
+              }}
+            >
+              <span>Host fishbowl now</span>
+              <ArrowRight />
+            </ButtonStyledLink>
+          </Link>
+        </div>
         <div id="animated-billboard-morph2"></div>
       </Billboard>
       <Content>

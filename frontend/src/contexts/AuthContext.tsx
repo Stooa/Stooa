@@ -189,9 +189,14 @@ const ProtectRoute = ({ children }) => {
 
   const handleRedirection = () => {
     if (!loading && protectedRoutes) {
-      const pathname = isAuthenticated
-        ? router.query.redirect || ROUTE_HOME
-        : `${ROUTE_REGISTER}?redirect=${router.pathname}`;
+      let pathname;
+
+      if (isAuthenticated) {
+        const { ...paramValues } = router.query;
+        pathname = paramValues || ROUTE_HOME;
+      } else {
+        pathname = `${ROUTE_REGISTER}?redirect=${router.pathname}`;
+      }
       const route = pathname.toString();
       router.push(route, route, { locale: lang });
     }
