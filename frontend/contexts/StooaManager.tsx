@@ -135,10 +135,18 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.removeEventListener('mousedown', initialInteraction);
       window.removeEventListener('keydown', initialInteraction);
     };
-  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]);
 
   useEffect(() => {
     initializeJitsi();
+
+    window.addEventListener('beforeunload', unload);
+    window.addEventListener('unload', unload);
+
+    return () => {
+      window.removeEventListener('beforeunload', unload);
+      window.removeEventListener('unload', unload);
+    };
   }, []);
 
   useEffect(() => {
@@ -148,17 +156,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
         router.push(route, route, { locale: lang });
       });
     }
-  }, [conferenceStatus]);
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', unload);
-    window.addEventListener('unload', unload);
-
-    return () => {
-      window.removeEventListener('beforeunload', unload);
-      window.removeEventListener('unload', unload);
-    };
-  }, []);
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     checkIsTimeUp();
