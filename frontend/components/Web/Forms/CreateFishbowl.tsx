@@ -66,6 +66,7 @@ interface FormValues {
   description: string;
   language: string;
   timezone: string;
+  hasIntroduction: boolean;
 }
 
 const initialValues = {
@@ -75,7 +76,8 @@ const initialValues = {
   hours: '',
   description: '',
   language: '',
-  timezone: ''
+  timezone: '',
+  hasIntroduction: false,
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -232,7 +234,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
             startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
             timezone: values.timezone,
             duration: values.hours,
-            locale: values.language
+            locale: values.language,
+            hasIntroduction: false,
           }
         }
       })

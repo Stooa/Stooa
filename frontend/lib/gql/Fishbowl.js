@@ -20,6 +20,7 @@ const CREATE_FISHBOWL = gql`
         locale
         startDateTimeTz
         endDateTimeTz
+        hasIntroduction
       }
     }
   }
@@ -63,6 +64,7 @@ const GET_FISHBOWL = gql`
       endDateTimeTz
       durationFormatted
       slug
+      hasIntroduction
     }
   }
 `;
