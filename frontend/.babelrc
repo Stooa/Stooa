@@ -2,7 +2,7 @@
   "presets": ["next/babel"],
   "env": {
     "test": {
-      "plugins": ["transform-dynamic-import"]
+      "plugins": ["transform-dynamic-import", "istanbul"]
     }
   },
   "plugins": [["styled-components", { "ssr": true }]]
