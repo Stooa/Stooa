@@ -33,7 +33,6 @@ const ONE_MINUTE = 1;
 
 const StooaContext = createContext(undefined);
 
-let initJitsi = false;
 let initConnection = false;
 
 const StooaProvider = ({ data, isModerator, children }) => {
@@ -120,12 +119,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   useEffect(() => {
-    if (!initJitsi) {
-      initializeJitsi();
-
-      initJitsi = true;
-    }
-
     if (
       !prejoin &&
       !initConnection &&
@@ -147,11 +140,17 @@ const StooaProvider = ({ data, isModerator, children }) => {
   }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (conferenceStatus === IConferenceStatus.FINISHED) {
-      unload();
+    initializeJitsi();
 
-      const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
-      router.push(route, route, { locale: lang });
+    initConnection = false;
+  }, []);
+
+  useEffect(() => {
+    if (conferenceStatus === IConferenceStatus.FINISHED) {
+      unload().then(function() {
+        const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
+        router.push(route, route, { locale: lang });
+      });
     }
   }, [conferenceStatus]);
 
@@ -172,10 +171,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
     apiInterval.current = window.setInterval(checkApIConferenceStatus, 6000);
 
     return () => {
-      clearInterval(timeUpInterval.current);
-      clearInterval(apiInterval.current);
-      initJitsi = false;
-      initConnection = false;
+      window.clearInterval(timeUpInterval.current);
+      window.clearInterval(apiInterval.current);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
