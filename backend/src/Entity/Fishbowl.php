@@ -75,7 +75,7 @@ use Webmozart\Assert\Assert as MAssert;
  *             },
  *             "validation_groups"={"Default"}
  *          },
- *         "runNoIntro"={
+ *         "noIntroRun"={
  *             "mutation"=FishbowlNoIntroRunMutationResolver::class,
  *             "args"={
  *                 "slug"={"type"="String!"}
