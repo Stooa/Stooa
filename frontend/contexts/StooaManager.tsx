@@ -193,7 +193,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   useEffect(() => {
     clearInterval(timeUpInterval.current);
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1500);
-  }, [tenMinuteToastSent, lastMinuteToastSent]);
+  }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
