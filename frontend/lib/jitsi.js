@@ -39,7 +39,8 @@ const unload = async () => {
   console.log('[STOOA] Unload');
 
   await tracksRepository.disposeTracks();
-  await conferenceRepository.leave();
+
+  conferenceRepository.leave();
 
   localTracksCreated = false;
 };
