@@ -1724,13 +1724,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@runroom/design-tokens@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@runroom/design-tokens/-/design-tokens-2.0.2.tgz#c41b38a7f8510bdaf7be4b3a33abb6eae8366932"
-  integrity sha512-k03MmPbhkyvwP8nz1KjXnNxwEFovHU7DKpkGOPJ9i+5HgXPn69ygn8KpyWbhJ/nktZo3/nM0kGkFAfbbr6d9hQ==
+"@runroom/design-tokens@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@runroom/design-tokens/-/design-tokens-1.0.0.tgz#eb2e8f7b425ed446a8b7ecb167c953269ba78d74"
+  integrity sha512-MpFiTpbTrKeWJf6AsWvvwsIs1pZV7sksSY1gbGzgmtfVrl4Mi0pgbCRBcWICPL8fvCn8Wv5C8x2ingyHnCwMFQ==
   dependencies:
     node-fetch "^3.1.0"
-    style-dictionary "^3.1.1"
+    style-dictionary "^3.0.3"
     yargs-parser "^21.0.0"
 
 "@runroom/npm-scripts@1.0.8":
@@ -6228,7 +6228,7 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-style-dictionary@^3.1.1:
+style-dictionary@^3.0.3:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-3.1.1.tgz#780ffebc64a537b877ee5580bd9a937a4ea9ae0a"
   integrity sha512-Dpugx2wH3ElMvq1GOaSsfUChr8dwujx2/eBUUd0vaSFkP16LRp5XOJMTHF0f8QuPGkpBfVPXDWCkb3oJ3oJjxg==

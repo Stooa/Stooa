@@ -46,7 +46,7 @@
     "yup": "0.32.9"
   },
   "devDependencies": {
-    "@runroom/design-tokens": "2.0.2",
+    "@runroom/design-tokens": "1.0.0",
     "@runroom/npm-scripts": "1.0.8",
     "@svgr/webpack": "^6.0.0",
     "@testing-library/jest-dom": "5.14.1",
