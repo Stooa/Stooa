@@ -74,6 +74,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       const delay = type === USER_MUST_LEAVE ? 8000 : 0;
       const autoClose = type === USER_MUST_LEAVE ? 15000 : 0;
       toast(t(message), {
+        icon: '⚠️',
         type: 'warning',
         position: 'bottom-center',
         delay,
@@ -106,6 +107,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
         const message = t('notification.oneMinuteLeft');
         toast(message, {
+          icon: '⏳',
           type: 'error',
           position: 'bottom-center',
           delay: 5000,
@@ -119,6 +121,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       if (conferenceStatus === IConferenceStatus.RUNNING && !tenMinuteToastSent) {
         const message = t('notification.tenMinutesLeft');
         toast(message, {
+          icon: '⏳',
           type: 'warning',
           position: 'bottom-center',
           delay: 3000,
