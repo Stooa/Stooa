@@ -125,6 +125,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
           (conferenceStatus === IConferenceStatus.INTRODUCTION ||
             conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
+      console.log('Test Im trying to connect again');
+      console.log(conferenceStatus);
+      console.log(initConnection);
+
       initializeConnection(fid, isModerator);
 
       window.addEventListener('mousedown', initialInteraction);
