@@ -30,14 +30,12 @@ import useToasts from '@/hooks/useToasts';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-
 const StooaContext = createContext(undefined);
-
-let initConnection = false;
 
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
+  const [initConnection, setInitConnection] = useState(false);
   const [conferenceReady, setConferenceReady] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
@@ -123,14 +121,14 @@ const StooaProvider = ({ data, isModerator, children }) => {
       !prejoin &&
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
-        (!conferenceReady && conferenceStatus !== IConferenceStatus.NOT_STARTED))
+        (!conferenceReady && (conferenceStatus === IConferenceStatus.INTRODUCTION || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       initializeConnection(fid, isModerator);
 
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
 
-      initConnection = true;
+      setInitConnection(true);
     }
 
     return () => {
@@ -141,8 +139,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   useEffect(() => {
     initializeJitsi();
-
-    initConnection = false;
   }, []);
 
   useEffect(() => {
