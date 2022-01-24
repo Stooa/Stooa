@@ -75,6 +75,16 @@ const IS_FISHBOWL_CREATOR = gql`
   }
 `;
 
+const NO_INTRO_RUN_FISHBOWL = gql`
+  mutation NoIntroRunFishbowl($input: introduceFishbowlInput!) {
+    noIntroRunFishbowl(input: $input) {
+      fishbowl {
+        currentStatus
+      }
+    }
+  }
+`;
+
 const INTRODUCE_FISHBOWL = gql`
   mutation IntroduceFishbowl($input: introduceFishbowlInput!) {
     introduceFishbowl(input: $input) {
