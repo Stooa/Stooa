@@ -121,7 +121,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
       !prejoin &&
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
-        (!conferenceReady && (conferenceStatus === IConferenceStatus.INTRODUCTION || conferenceStatus === IConferenceStatus.RUNNING)))
+        (!conferenceReady &&
+          (conferenceStatus === IConferenceStatus.INTRODUCTION ||
+            conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       initializeConnection(fid, isModerator);
 
@@ -135,7 +137,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.removeEventListener('mousedown', initialInteraction);
       window.removeEventListener('keydown', initialInteraction);
     };
-  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]);
+  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     initializeJitsi();
@@ -151,7 +153,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   useEffect(() => {
     if (conferenceStatus === IConferenceStatus.FINISHED) {
-      unload().then(function() {
+      unload().then(function () {
         const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
         router.push(route, route, { locale: lang });
       });
