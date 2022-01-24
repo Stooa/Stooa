@@ -126,18 +126,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
       initJitsi = true;
     }
 
-    if (prejoin) {
-      return;
-    }
-
-    if (conferenceStatus === IConferenceStatus.FINISHED) {
-      unload().then(() => {
-        const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
-        router.push(route, route, { locale: lang });
-      });
-    }
-
     if (
+      !prejoin &&
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
         (!conferenceReady && conferenceStatus !== IConferenceStatus.NOT_STARTED))
@@ -155,6 +145,15 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.removeEventListener('keydown', initialInteraction);
     };
   }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (conferenceStatus === IConferenceStatus.FINISHED) {
+      unload();
+
+      const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
+      router.push(route, route, { locale: lang });
+    }
+  }, [conferenceStatus]);
 
   useEffect(() => {
     window.addEventListener('beforeunload', unload);
