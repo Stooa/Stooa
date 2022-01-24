@@ -160,6 +160,18 @@ const tracksRepository = () => {
     console.log('[STOOA] Html tracks removed', id);
   };
 
+  const disposeTracks = async () => {
+    const id = conferenceRepository.getMyUserId();
+
+    if (tracks[id] === undefined) return;
+
+    for (let index = 0; index < tracks[id].length; index++) {
+      await tracks[id][index].dispose();
+    }
+
+    console.log('[STOOA] Tracks disposed', id);
+  }
+
   const handleTrackAdded = track => {
     const id = track.getParticipantId();
 
@@ -270,6 +282,7 @@ const tracksRepository = () => {
     isParticipantMuted,
     playTracks,
     removeTracks,
+    disposeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
     syncSessionStorageTrack,

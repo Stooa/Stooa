@@ -35,14 +35,14 @@ const leave = async () => {
   conferenceRepository.sendLeaveEvent();
 };
 
-const unload = () => {
+const unload = async () => {
   console.log('[STOOA] Unload');
 
-  conferenceRepository.leave();
-  localTracksCreated = false;
+  await tracksRepository.disposeTracks();
 
-  window.removeEventListener('beforeunload', unload);
-  window.removeEventListener('unload', unload);
+  conferenceRepository.leave();
+
+  localTracksCreated = false;
 };
 
 const initializeJitsi = () => {
