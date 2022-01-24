@@ -294,8 +294,7 @@ const conferenceRepository = () => {
       isJoined = false;
 
       await conference.leave();
-
-      connection.disconnect();
+      await connection.disconnect();
     }
   };
 

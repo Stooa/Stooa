@@ -131,10 +131,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
 
     if (conferenceStatus === IConferenceStatus.FINISHED) {
-      unload();
-
-      const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
-      router.push(route, route, { locale: lang });
+      unload().then(() => {
+        const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
+        router.push(route, route, { locale: lang });
+      });
     }
 
     if (
@@ -144,8 +144,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     ) {
       initializeConnection(fid, isModerator);
 
-      window.addEventListener('beforeunload', unload);
-      window.addEventListener('unload', unload);
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
 
@@ -153,12 +151,20 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
 
     return () => {
-      window.removeEventListener('beforeunload', unload);
-      window.removeEventListener('unload', unload);
       window.removeEventListener('mousedown', initialInteraction);
       window.removeEventListener('keydown', initialInteraction);
     };
   }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', unload);
+    window.addEventListener('unload', unload);
+
+    return () => {
+      window.removeEventListener('beforeunload', unload);
+      window.removeEventListener('unload', unload);
+    };
+  }, []);
 
   useEffect(() => {
     checkIsTimeUp();
