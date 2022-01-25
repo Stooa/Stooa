@@ -3,7 +3,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
-    "dev-test": "NODE_ENV=test next dev",
+    "dev-e2e": "NODE_ENV=e2e next dev",
     "build": "next build",
     "start": "next start",
     "build-start": "next build && next start",
