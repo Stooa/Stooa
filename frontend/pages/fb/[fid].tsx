@@ -48,7 +48,7 @@ const Page = () => {
     router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
     return <Loader />;
   }
-  console.log('----------------->fb', fb);
+
   const handleJoinAsGuest = () => {
     setJoinAsGuest(true);
   };

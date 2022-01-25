@@ -54,18 +54,24 @@ const ToolBar: React.FC<ToolBarProps> = ({hasIntroduction}) => {
     }
   };
 
-  useEventListener(CONFERENCE_START, () => {
-    if (
+  const hasModeratorToSeatDuringIntroduction = (): boolean => {
+    return (
+      hasIntroduction &&
+      isModerator &&
+      conferenceReady &&
+      conferenceStatus !== IConferenceStatus.RUNNING &&
+      conferenceStatus !== IConferenceStatus.FINISHED
+    );
+  };
+
+  const hasModeratorToSeatDuringRunning = (): boolean => {
+    return (
       !hasIntroduction &&
       isModerator &&
       conferenceReady &&
       conferenceStatus !== IConferenceStatus.FINISHED
-    ) {
-      setJoined(true);
-      const userSettings = userRepository.getUser();
-      joinSeat(userSettings);
-    }
-  });
+    );
+  }
 
   const handleMic = () => {
     configButtonRef.current.handleShowDevices(false);
@@ -102,16 +108,9 @@ const ToolBar: React.FC<ToolBarProps> = ({hasIntroduction}) => {
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (
-      hasIntroduction &&
-      isModerator &&
-      conferenceReady &&
-      conferenceStatus !== IConferenceStatus.RUNNING &&
-      conferenceStatus !== IConferenceStatus.FINISHED
-    ) {
-      console.log('[STOOA] starting introduction');
-      const userSettings = userRepository.getUser();
-      joinSeat(userSettings);
+    if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
+      console.log('[STOOA] Moderator join seat');
+      joinSeat(userRepository.getUser());
     }
   }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
