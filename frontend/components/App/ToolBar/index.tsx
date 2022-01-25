@@ -25,7 +25,6 @@ import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 
-
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
   const { isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
