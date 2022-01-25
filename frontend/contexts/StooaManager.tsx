@@ -106,7 +106,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
           type: 'error',
           position: 'bottom-center',
           delay: 5000,
-          autoClose: 5000
+          autoClose: 10000
         });
         setLastMinuteToastSent(true);
         clearInterval(timeUpInterval.current);
@@ -120,7 +120,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
           type: 'warning',
           position: 'bottom-center',
           delay: 3000,
-          autoClose: 5000
+          autoClose: 10000
         });
         seTenMinuteToastSent(true);
         clearInterval(timeUpInterval.current);
