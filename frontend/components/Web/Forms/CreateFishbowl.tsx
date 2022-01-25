@@ -37,6 +37,7 @@ type createFishbowlAttrs = {
       timezone: string;
       duration: string;
       locale: string;
+      hasIntroduction: boolean;
     };
   };
 };
@@ -295,7 +296,8 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
       hours: selectedFishbowl.durationFormatted,
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
-      timezone: timezone
+      timezone: timezone,
+      hasIntroduction: false,
     };
   }
 

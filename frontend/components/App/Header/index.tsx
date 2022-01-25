@@ -50,7 +50,7 @@ const Header: React.FC<Props> = ({ toggleParticipants }) => {
       <div className="header-actions">
         {isModerator && (
           <div className="hide-mobile">
-            <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} />
+            <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} hasIntroduction={data.hasIntroduction}/>
           </div>
         )}
         <div className="hide-mobile">

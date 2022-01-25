@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
-import { RUN_FISHBOWL, FINISH_FISHBOWL } from '@/graphql/Fishbowl';
+import {RUN_FISHBOWL, FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL} from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
@@ -22,9 +22,10 @@ import { ButtonAppSmall } from '@/ui/Button';
 interface Props {
   fid: string;
   conferenceStatus: IConferenceStatus;
+  hasIntroduction: boolean;
 }
 
-const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
+const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduction }) => {
   const [{}, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
@@ -33,6 +34,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [showFinishModal, setShowFinishModal] = useState(false);
   const [runFishbowl] = useMutation(RUN_FISHBOWL);
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
+  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
 
   const toggleIntroductionModal = () => {
@@ -54,24 +56,37 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
 
   const startFishbowl = () => {
     setLoading(true);
+    const slug = {variables: {input: {slug: fid}}};
 
-    runFishbowl({
-      variables: {
-        input: {
-          slug: fid
-        }
+    if (hasIntroduction) {
+      runFishbowl(slug)
+        .then(() => {
+          console.log('[STOOA] allowing users in');
+          setRunning(true);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error(error);
+          setLoading(false);
+        });
+    } else {
+      try {
+        runWithoutIntroFishbowl(slug)
+          .then(() => {
+            console.log('[STOOA] allowing users in');
+            setIntroduction(false);
+            setRunning(true);
+            setLoading(false);
+          })
+          .catch(error => {
+            console.error(error);
+            setLoading(false);
+          });
+      } catch (error) {
+        console.error(`[STOOA] Error introduction: ${error}`);
       }
-    })
-      .then(() => {
-        console.log('[STOOA] allowing users in');
-        setIntroduction(false);
-        setRunning(true);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error(error);
-        setLoading(false);
-      });
+    }
+
   };
 
   const finishFishbowl = () => {
@@ -128,7 +143,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           </ButtonAppSmall>
         )}
         {!running &&
-          (!introduction ? (
+          (!introduction && hasIntroduction ? (
             <ButtonAppSmall className="app-sm button" onClick={toggleIntroductionModal}>
               <span className="text">{t('startFishbowl')}</span>
             </ButtonAppSmall>

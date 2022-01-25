@@ -78,7 +78,7 @@ const IS_FISHBOWL_CREATOR = gql`
 `;
 
 const NO_INTRO_RUN_FISHBOWL = gql`
-  mutation NoIntroRunFishbowl($input: introduceFishbowlInput!) {
+  mutation NoIntroRunFishbowl($input: noIntroRunFishbowlInput!) {
     noIntroRunFishbowl(input: $input) {
       fishbowl {
         currentStatus
@@ -127,4 +127,4 @@ const CREATE_GUEST = gql`
   }
 `;
 
-export { CREATE_FISHBOWL, CREATE_GUEST, DELETE_FISHBOWL, GET_FISHBOWL, FINISH_FISHBOWL, INTRODUCE_FISHBOWL, IS_FISHBOWL_CREATOR, RUN_FISHBOWL, UPDATE_FISHBOWL };
+export { CREATE_FISHBOWL, CREATE_GUEST, DELETE_FISHBOWL, GET_FISHBOWL, FINISH_FISHBOWL, INTRODUCE_FISHBOWL, IS_FISHBOWL_CREATOR, RUN_FISHBOWL, UPDATE_FISHBOWL, NO_INTRO_RUN_FISHBOWL };
