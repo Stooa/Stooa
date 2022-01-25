@@ -1,11 +1,12 @@
 {
+  "root": true,
   "plugins": ["@typescript-eslint", "header"],
   "extends": [
     "next",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "prettier"
   ],
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
