@@ -27,11 +27,10 @@ import { useDevices } from '@/contexts/DevicesContext';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
-  const { isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
+  const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
-  const { data } = useStooa();
 
   const configButtonRef = useRef(null);
 
