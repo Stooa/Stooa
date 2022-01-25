@@ -15,12 +15,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
-import {
-  CONFERENCE_START,
-  NOTIFICATION,
-  NOTIFICATION_CLOSE,
-  USER_MUST_LEAVE
-} from '@/jitsi/Events';
+import { CONFERENCE_START, NOTIFICATION, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
