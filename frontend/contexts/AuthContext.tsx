@@ -190,7 +190,7 @@ const ProtectRoute = ({ children }) => {
     if (!loading && protectedRoutes) {
       const pathname = isAuthenticated
         ? router.query.redirect || ROUTE_HOME
-        : `${ROUTE_SIGN_IN}?redirect=${router.pathname}`;
+        : `${ROUTE_REGISTER}?redirect=${router.pathname}`;
       const route = pathname.toString();
       router.push(route, route, { locale: lang });
     }
