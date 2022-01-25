@@ -18,14 +18,14 @@ import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 
 import { ButtonAppSmall } from '@/ui/Button';
+import { useStooa } from "@/contexts/StooaManager";
 
 interface Props {
   fid: string;
   conferenceStatus: IConferenceStatus;
-  hasIntroduction: boolean;
 }
 
-const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduction }) => {
+const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [{}, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
@@ -36,6 +36,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduct
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
+  const { data } = useStooa();
 
   const toggleIntroductionModal = () => {
     setShowIntroductionModal(!showIntroductionModal);
@@ -58,7 +59,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduct
     setLoading(true);
     const slug = {variables: {input: {slug: fid}}};
 
-    if (hasIntroduction) {
+    if (data.hasIntroduction) {
       runFishbowl(slug)
         .then(() => {
           console.log('[STOOA] allowing users in');
@@ -143,13 +144,13 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduct
           </ButtonAppSmall>
         )}
         {!running &&
-          (!introduction && hasIntroduction ? (
+          (!introduction && data.hasIntroduction ? (
             <ButtonAppSmall className="app-sm button" onClick={toggleIntroductionModal}>
               <span className="text">{t('startFishbowl')}</span>
             </ButtonAppSmall>
           ) : (
             <ButtonAppSmall className="app-sm button" onClick={startFishbowl} disabled={loading}>
-              <span className="text">{hasIntroduction ? t('allowUsers') : t('startFishbowl')}</span>
+              <span className="text">{data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}</span>
             </ButtonAppSmall>
           ))}
       </div>

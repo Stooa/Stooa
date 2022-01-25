@@ -24,11 +24,9 @@ const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
 const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Toast = dynamic(import('../Toast'), { loading: () => <div /> });
 
-interface FishbowlProps {
-  hasIntroduction: boolean;
-}
 
-const Fishbowl: FC<FishbowlProps> = ({hasIntroduction}) => {
+
+const Fishbowl = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const { onDismiss, toasts } = useToasts();
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
@@ -53,7 +51,7 @@ const Fishbowl: FC<FishbowlProps> = ({hasIntroduction}) => {
           ))}
         </Notifications>
       </Main>
-      <Footer participantsActive={participantsActive} hasIntroduction={hasIntroduction} />
+      <Footer participantsActive={participantsActive} />
     </>
   );
 };

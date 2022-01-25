@@ -24,19 +24,15 @@ import ButtonVideo from '@/components/App/ButtonVideo';
 import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
-import useEventListener from "@/hooks/useEventListener";
-import {CONFERENCE_START} from "@/jitsi/Events";
 
-interface ToolBarProps {
-  hasIntroduction: boolean;
-}
 
-const ToolBar: React.FC<ToolBarProps> = ({hasIntroduction}) => {
+const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
   const { isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
+  const { data } = useStooa();
 
   const configButtonRef = useRef(null);
 
@@ -56,7 +52,7 @@ const ToolBar: React.FC<ToolBarProps> = ({hasIntroduction}) => {
 
   const hasModeratorToSeatDuringIntroduction = (): boolean => {
     return (
-      hasIntroduction &&
+      data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
       conferenceStatus !== IConferenceStatus.RUNNING &&
@@ -66,7 +62,7 @@ const ToolBar: React.FC<ToolBarProps> = ({hasIntroduction}) => {
 
   const hasModeratorToSeatDuringRunning = (): boolean => {
     return (
-      !hasIntroduction &&
+      !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
       conferenceStatus !== IConferenceStatus.FINISHED

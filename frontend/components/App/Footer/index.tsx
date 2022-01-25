@@ -24,10 +24,9 @@ const ModeratorActions = dynamic(import('@/components/App/ModeratorActions'), {
 
 interface Props {
   participantsActive: boolean;
-  hasIntroduction: boolean;
 }
 
-const Footer: React.FC<Props> = ({ participantsActive , hasIntroduction}) => {
+const Footer: React.FC<Props> = ({ participantsActive }) => {
   const { onIntroduction, isModerator, conferenceStatus } = useStooa();
   const { t } = useTranslation('app');
   const router = useRouter();
@@ -40,12 +39,12 @@ const Footer: React.FC<Props> = ({ participantsActive , hasIntroduction}) => {
         <Logo />
       </div>
       <div className="col-mid">
-        <ToolBar hasIntroduction={hasIntroduction} />
+        <ToolBar />
       </div>
       <div className="col-right">
         {isModerator && (
           <div className="hide-desktop moderator-actions">
-            <ModeratorActions hasIntroduction={hasIntroduction} fid={fid as string} conferenceStatus={conferenceStatus} />
+            <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} />
           </div>
         )}
       </div>
