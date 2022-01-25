@@ -1,14 +1,23 @@
-const browserify = require('@cypress/browserify-preprocessor');
-const coverage = require('@cypress/code-coverage/task');
-const cucumber = require('cypress-cucumber-preprocessor').default;
-const resolve = require('resolve');
+/*!
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-module.exports = (on, config) => {
+import { defaultOptions } from '@cypress/browserify-preprocessor';
+import coverage from '@cypress/code-coverage/task';
+import cucumber from 'cypress-cucumber-preprocessor';
+import { sync } from 'resolve';
+
+export default function handler(on, config) {
   coverage(on, config);
 
   const options = {
-    ...browserify.defaultOptions,
-    typescript: resolve.sync('typescript', { baseDir: config.projectRoot }),
+    ...defaultOptions,
+    typescript: sync('typescript', { baseDir: config.projectRoot })
   };
 
   on('file:preprocessor', cucumber(options));
