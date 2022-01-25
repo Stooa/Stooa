@@ -28,7 +28,9 @@ import OnboardingWrapper, {
   Slide,
   Tooltip
 } from '@/components/App/Onboarding/styles';
-import onBoardingData from '@/components/App/Onboarding/data.json';
+import onBoardingDataWithIntroduction from '@/components/App/Onboarding/dataWithIntroduction.json';
+import onBoardingDataWithoutIntroduction from '@/components/App/Onboarding/dataWithoutIntroduction.json';
+import { useStooa} from "@/contexts/StooaManager";
 
 interface Props {
   initialized: boolean;
@@ -68,6 +70,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
   const [active, setActive] = useState(false);
   const [alreadySeen, setAlreadySeen] = useState(false);
   const [activeTooltip, setActiveTooltip] = useState(false);
+  const { data : fishbowlData } = useStooa();
   const [data, setData] = useState([]);
   const { t } = useTranslation('on-boarding');
 
@@ -151,7 +154,12 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
   };
 
   useEffect(() => {
-    setData(onBoardingData[isModerator ? 'moderator' : 'participant']);
+    if (fishbowlData.hasIntroduction) {
+      setData(onBoardingDataWithIntroduction[isModerator ? 'moderator' : 'participant']);
+    } else {
+      setData(onBoardingDataWithoutIntroduction[isModerator ? 'moderator' : 'participant']);
+    }
+
     shouldShow();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

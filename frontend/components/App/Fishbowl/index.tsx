@@ -24,8 +24,6 @@ const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
 const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Toast = dynamic(import('../Toast'), { loading: () => <div /> });
 
-
-
 const Fishbowl = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const { onDismiss, toasts } = useToasts();
