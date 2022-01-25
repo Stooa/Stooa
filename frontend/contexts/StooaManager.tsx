@@ -53,10 +53,16 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const { fid } = router.query;
 
   const startFishbowl = () => {
+    const slug = {variables: {input: {slug: fid}}};
     if (data.hasIntroduction) {
-      const slug = {variables: {input: {slug: fid}}};
       try {
         introduceFishbowl(slug);
+      } catch (error) {
+        console.error(`[STOOA] Error introduction: ${error}`);
+      }
+    } else {
+      try {
+        runWithoutIntroFishbowl(slug)
       } catch (error) {
         console.error(`[STOOA] Error introduction: ${error}`);
       }

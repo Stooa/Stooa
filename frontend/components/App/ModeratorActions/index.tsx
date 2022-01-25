@@ -149,7 +149,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduct
             </ButtonAppSmall>
           ) : (
             <ButtonAppSmall className="app-sm button" onClick={startFishbowl} disabled={loading}>
-              <span className="text">{t('allowUsers')}</span>
+              <span className="text">{hasIntroduction ? t('allowUsers') : t('startFishbowl')}</span>
             </ButtonAppSmall>
           ))}
       </div>
