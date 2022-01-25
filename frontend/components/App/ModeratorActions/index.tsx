@@ -73,7 +73,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduct
       try {
         runWithoutIntroFishbowl(slug)
           .then(() => {
-            console.log('[STOOA] allowing users in');
+            console.log('[STOOA] run fishbowl without introduction');
             setIntroduction(false);
             setRunning(true);
             setLoading(false);
@@ -83,7 +83,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus, hasIntroduct
             setLoading(false);
           });
       } catch (error) {
-        console.error(`[STOOA] Error introduction: ${error}`);
+        console.error(`[STOOA] Error run fishbowl without introduction: ${error}`);
       }
     }
 

@@ -48,7 +48,7 @@ const Page = () => {
     router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
     return <Loader />;
   }
-
+  console.log('----------------->fb', fb);
   const handleJoinAsGuest = () => {
     setJoinAsGuest(true);
   };
@@ -58,7 +58,7 @@ const Page = () => {
 
   return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
     <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>
-      {shoulPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
+      {shoulPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl hasIntroduction={fb.hasIntroduction} />}
     </Layout>
   ) : (
     <LayoutWeb data={fb}>

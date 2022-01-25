@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
@@ -24,8 +24,14 @@ import ButtonVideo from '@/components/App/ButtonVideo';
 import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
+import useEventListener from "@/hooks/useEventListener";
+import {CONFERENCE_START} from "@/jitsi/Events";
 
-const ToolBar = () => {
+interface Props {
+  hasIntroduction: boolean;
+}
+
+const ToolBar: React.FC<Props> = ({hasIntroduction}) => {
   const [joined, setJoined] = useState(false);
   const { isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
@@ -47,6 +53,19 @@ const ToolBar = () => {
       leave();
     }
   };
+
+  useEventListener(CONFERENCE_START, () => {
+    if (
+      !hasIntroduction &&
+      isModerator &&
+      conferenceReady &&
+      conferenceStatus !== IConferenceStatus.FINISHED
+    ) {
+      setJoined(true);
+      const userSettings = userRepository.getUser();
+      joinSeat(userSettings);
+    }
+  });
 
   const handleMic = () => {
     configButtonRef.current.handleShowDevices(false);
@@ -84,6 +103,7 @@ const ToolBar = () => {
 
   useEffect(() => {
     if (
+      hasIntroduction &&
       isModerator &&
       conferenceReady &&
       conferenceStatus !== IConferenceStatus.RUNNING &&
