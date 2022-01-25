@@ -27,11 +27,11 @@ import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from "@/hooks/useEventListener";
 import {CONFERENCE_START} from "@/jitsi/Events";
 
-interface Props {
+interface ToolBarProps {
   hasIntroduction: boolean;
 }
 
-const ToolBar: React.FC<Props> = ({hasIntroduction}) => {
+const ToolBar: React.FC<ToolBarProps> = ({hasIntroduction}) => {
   const [joined, setJoined] = useState(false);
   const { isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
