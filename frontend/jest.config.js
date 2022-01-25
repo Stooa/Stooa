@@ -20,6 +20,7 @@ module.exports = {
     "!**/.coverage/**",
     "!**/__setups__/**",
     "!**/public/vendor/**",
+    "!**/tests/**",
     "!**/{jest,next,prettier}.config.js"
   ],
   moduleNameMapper: {
