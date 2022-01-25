@@ -99,7 +99,8 @@ jobs:
               uses: cypress-io/github-action@v2
               with:
                 install: false
-                start: yarn run dev-e2e
+                build: yarn run build-e2e
+                start: yarn run start-e2e
                 wait-on: 'http://localhost:3000'
                 parallel: ${{ github.ref == 'refs/heads/main' }}
                 record: ${{ github.ref == 'refs/heads/main' }}
