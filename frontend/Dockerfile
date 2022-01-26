@@ -29,7 +29,7 @@ RUN npm install --global pm2
 
 COPY . /usr/app
 
-CMD ["pm2-runtime", "npm", "--", "build-start"]
+CMD ["pm2-runtime", "npm", "--", "run", "build-start"]
 
 
 # NEXT DEV
