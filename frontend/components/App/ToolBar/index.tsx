@@ -24,6 +24,7 @@ import ButtonVideo from '@/components/App/ButtonVideo';
 import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
+import useEventListener from '@/hooks/useEventListener';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -77,11 +78,13 @@ const ToolBar: React.FC = () => {
     tracksRepository.toggleVideoTrack();
   };
 
-  const handleParentClick = event => {
+  const handleOutsideClick = event => {
     if (event.target.id !== 'config-button') {
       configButtonRef.current.handleShowDevices(false);
     }
   };
+
+  useEventListener('click', handleOutsideClick);
 
   useEffect(() => {
     if (null !== audioOutputDevice) {
@@ -124,7 +127,7 @@ const ToolBar: React.FC = () => {
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 
   return (
-    <Container onClick={handleParentClick} className={isModerator ? 'moderator' : ''}>
+    <Container className={isModerator ? 'moderator' : ''}>
       <ButtonJoin joined={joined} join={joinSeat} leave={leaveSeat} disabled={isActionDisabled}>
         {joinLabel}
       </ButtonJoin>
