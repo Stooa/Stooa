@@ -3,7 +3,7 @@
     "timeup": "Terminado!",
     "timeleft": "para terminar",
     "notification": {
-        "emptySeats": "El fishbowl está lleno ⚠️  Si ya has participado, por favor libera tu asiento.",
+        "emptySeats": "El fishbowl está lleno. Si ya has participado, por favor libera tu asiento.",
         "tenMinutesLeft": "Quedan 10 minutos para terminar el fishbowl 👀",
         "oneMinuteLeft": "Queda 1 minuto para terminar el fishbowl 🚨",
         "joinAfterIntroduction": "⚠️  Puedes unirte a la conversación después de la introducción"

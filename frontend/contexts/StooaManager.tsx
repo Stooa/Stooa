@@ -15,18 +15,14 @@ import useTranslation from 'next-translate/useTranslation';
 import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
-import {
-  CONFERENCE_START,
-  NOTIFICATION,
-  NOTIFICATION_CLOSE,
-  USER_MUST_LEAVE
-} from '@/jitsi/Events';
+import { CONFERENCE_START, NOTIFICATION, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
-import useToasts from '@/hooks/useToasts';
+
+import { toast } from 'react-toastify';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -37,7 +33,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
   const [conferenceReady, setConferenceReady] = useState(false);
-  const { addToast, clearDelayed } = useToasts();
+  const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
+  const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const { t, lang } = useTranslation('app');
 
   const apiInterval = useRef<number>();
@@ -70,13 +67,15 @@ const StooaProvider = ({ data, isModerator, children }) => {
   useEventListener(NOTIFICATION, ({ detail: { type, seats, message } }) => {
     if (seats.includes(myUserId)) {
       const delay = type === USER_MUST_LEAVE ? 8000 : 0;
-      const autoclose = type === USER_MUST_LEAVE ? 15000 : 0;
-      addToast({ type, message }, delay, autoclose);
+      const autoClose = type === USER_MUST_LEAVE ? 15000 : 0;
+      toast(t(message), {
+        icon: '⚠️',
+        type: 'warning',
+        position: 'bottom-center',
+        delay,
+        autoClose
+      });
     }
-  });
-
-  useEventListener(NOTIFICATION_CLOSE, ({ detail: { type } }) => {
-    clearDelayed(type);
   });
 
   const checkApIConferenceStatus = () => {
@@ -100,15 +99,31 @@ const StooaProvider = ({ data, isModerator, children }) => {
       clearInterval(timeUpInterval.current);
       setTimeStatus(ITimeStatus.TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING) {
+      if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
         const message = t('notification.oneMinuteLeft');
-        addToast({ type: ITimeStatus.LAST_MINUTE, message }, 5000);
+        toast(message, {
+          icon: '⏳',
+          type: 'error',
+          position: 'bottom-center',
+          delay: 5000,
+          autoClose: 10000
+        });
+        setLastMinuteToastSent(true);
+        clearInterval(timeUpInterval.current);
       }
       setTimeStatus(ITimeStatus.LAST_MINUTE);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING) {
+      if (conferenceStatus === IConferenceStatus.RUNNING && !tenMinuteToastSent) {
         const message = t('notification.tenMinutesLeft');
-        addToast({ type: ITimeStatus.ENDING, message }, 3000);
+        toast(message, {
+          icon: '⏳',
+          type: 'warning',
+          position: 'bottom-center',
+          delay: 3000,
+          autoClose: 10000
+        });
+        seTenMinuteToastSent(true);
+        clearInterval(timeUpInterval.current);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
@@ -169,6 +184,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.clearInterval(apiInterval.current);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    clearInterval(timeUpInterval.current);
+    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1500);
+  }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 

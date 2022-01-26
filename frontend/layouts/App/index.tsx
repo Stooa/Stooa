@@ -21,6 +21,9 @@ import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
 import Seo from '@/components/Web/Seo';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const scripts = [
   'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
   '/vendor/lib-jitsi-meet.min.js'
@@ -31,6 +34,7 @@ interface Props {
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;
+  prejoin: boolean;
 }
 
 const Layout: React.FC<Props> = ({
@@ -62,6 +66,7 @@ const Layout: React.FC<Props> = ({
         <Seo title={title} />
         <Container>{children}</Container>
       </DevicesProvider>
+      <ToastContainer className="toastify-custom" />
     </StooaProvider>
   );
 };
