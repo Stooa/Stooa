@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
