@@ -41,6 +41,8 @@ jobs:
 
             - name: Install all NPM dependencies
               uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: frontend
 
             - name: Build Next.js application
               run: yarn build

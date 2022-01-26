@@ -41,6 +41,8 @@ jobs:
 
             - name: Install all NPM dependencies
               uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: frontend
 
             - name: Run ESLint to ensure Javascript coding standards
               run: yarn run eslint components contexts types hooks layouts lib pages ui tests

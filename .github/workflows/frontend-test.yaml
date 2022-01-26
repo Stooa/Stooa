@@ -41,6 +41,8 @@ jobs:
 
             - name: Install all NPM dependencies
               uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: frontend
 
             - name: Execute Jest Unit tests
               run: yarn run test --coverage
@@ -72,6 +74,8 @@ jobs:
 
             - name: Install all NPM dependencies
               uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: frontend
 
             - name: Execute Cypress E2E tests
               uses: cypress-io/github-action@v2
