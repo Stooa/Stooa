@@ -30,6 +30,7 @@ const Switch = (props: Props) => {
         </SwitchLabel>
         {props.label && <span className="label-text">Quiero intro wacho!</span>}
       </SwitchStyled>
+      {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
     </Field>
   );
 };
