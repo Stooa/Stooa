@@ -5,8 +5,6 @@
     "clover"
   ],
   "exclude": [
-    "**/__setups__/**",
-    "**/__tests__/**",
     "**/public/vendor/**",
     "**/{jest,next,prettier}.config.js",
     "**/**.d.ts"
