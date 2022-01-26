@@ -7,18 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useState } from 'react';
-import { useMutation } from '@apollo/client';
+import React, {useEffect, useState} from 'react';
+import {useMutation} from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
-import {RUN_FISHBOWL, FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL} from '@/graphql/Fishbowl';
-import { IConferenceStatus } from '@/jitsi/Status';
-import { useStateValue } from '@/contexts/AppContext';
+import {FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL} from '@/graphql/Fishbowl';
+import {IConferenceStatus} from '@/jitsi/Status';
+import {useStateValue} from '@/contexts/AppContext';
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 
-import { ButtonAppSmall } from '@/ui/Button';
-import { useStooa } from "@/contexts/StooaManager";
+import {ButtonAppSmall} from '@/ui/Button';
+import {useStooa} from "@/contexts/StooaManager";
 
 interface Props {
   fid: string;
@@ -75,9 +75,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         runWithoutIntroFishbowl(slug)
           .then(() => {
             console.log('[STOOA] run fishbowl without introduction');
-            setIntroduction(false);
-            setRunning(true);
-            setLoading(false);
+            setLoading(true);
           })
           .catch(error => {
             console.error(error);
@@ -87,7 +85,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         console.error(`[STOOA] Error run fishbowl without introduction: ${error}`);
       }
     }
-
   };
 
   const finishFishbowl = () => {
@@ -114,6 +111,10 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   useEffect(() => {
     setRunning(conferenceStatus === IConferenceStatus.RUNNING);
 
+    if (conferenceStatus === IConferenceStatus.RUNNING) {
+      setLoading(false);
+    }
+    
     if (conferenceStatus === IConferenceStatus.INTRODUCTION) {
       setIntroduction(true);
       setShowIntroductionModal(false);
