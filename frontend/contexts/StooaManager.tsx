@@ -137,13 +137,17 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   };
 
+  const isConferenceIntroducing = (): boolean => {
+    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+  }
+
   useEffect(() => {
     if (
       !prejoin &&
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
         (!conferenceReady &&
-          (conferenceStatus === IConferenceStatus.INTRODUCTION ||
+          (isConferenceIntroducing() ||
             conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       initializeConnection(fid, isModerator);

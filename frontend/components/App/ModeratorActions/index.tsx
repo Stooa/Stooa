@@ -79,7 +79,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           })
           .catch(error => {
             console.error(error);
-            setLoading(false);
           });
       } catch (error) {
         console.error(`[STOOA] Error run fishbowl without introduction: ${error}`);
@@ -114,7 +113,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     if (conferenceStatus === IConferenceStatus.RUNNING) {
       setLoading(false);
     }
-    
+
     if (conferenceStatus === IConferenceStatus.INTRODUCTION) {
       setIntroduction(true);
       setShowIntroductionModal(false);
