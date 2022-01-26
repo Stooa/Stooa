@@ -81,8 +81,8 @@ jobs:
               uses: cypress-io/github-action@v2
               with:
                 install: false
-                build: npx build-e2e
-                start: npx start-e2e
+                build: npm run build-e2e
+                start: npm run start-e2e
                 wait-on: 'http://localhost:3000'
                 parallel: true
                 record: true

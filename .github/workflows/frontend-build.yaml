@@ -45,4 +45,4 @@ jobs:
                   working-directory: frontend
 
             - name: Build Next.js application
-              run: npx build
+              run: npm run build
