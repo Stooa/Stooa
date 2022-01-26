@@ -326,5 +326,66 @@ const TextDivider = styled.div`
   }
 `;
 
-export { CheckboxStyled, DatePickerStyled, FormError, InputStyled, TextDivider };
+const SwitchStyled = styled.input`
+  width: 100%;
+
+  input {
+    display: inline;
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+`;
+
+const SwitchLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 50px;
+  height: 30px;
+  background: grey;
+  border-radius: 50px;
+  position: relative;
+  transition: background-color 0.2s;
+
+  & .switch-button {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    border-radius: 25px;
+    transition: 0.2s;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+  }
+
+  .switch-checkbox:checked + & .switch-button {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+  }
+
+  &:hover .switch-button {
+    width: 28px;
+  }
+
+  & .label-text {
+    position: absolute;
+    width: 100%;
+    left: 50px;
+    margin-left: ${space(2)};
+  }
+`;
+
+export {
+  CheckboxStyled,
+  DatePickerStyled,
+  FormError,
+  InputStyled,
+  TextDivider,
+  SwitchStyled,
+  SwitchLabel
+};
 export default FormikForm;

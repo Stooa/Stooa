@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps } from 'formik';
+import { withFormik, FormikProps, Field } from 'formik';
 import * as Yup from 'yup';
 import countriesAndTimezones from 'countries-and-timezones';
 
@@ -27,6 +27,7 @@ import Select from '@/components/Common/Fields/Select';
 import DatePicker from '@/components/Common/Fields/DatePicker';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import Switch from '@/components/Common/Fields/Switch';
 
 type createFishbowlAttrs = {
   variables: {
@@ -78,7 +79,7 @@ const initialValues = {
   description: '',
   language: '',
   timezone: '',
-  hasIntroduction: false,
+  hasIntroduction: false
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -190,6 +191,9 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             </option>
           ))}
         </Select>
+        <div>
+          <Field as={Switch} name="hasIntroduction" label={t('fishbowl.hasIntroduction')} />
+        </div>
       </fieldset>
       <fieldset>
         <SubmitBtn
@@ -236,7 +240,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
             timezone: values.timezone,
             duration: values.hours,
             locale: values.language,
-            hasIntroduction: false,
+            hasIntroduction: false
           }
         }
       })
@@ -297,7 +301,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
       timezone: timezone,
-      hasIntroduction: false,
+      hasIntroduction: false
     };
   }
 
