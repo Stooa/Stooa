@@ -42,7 +42,7 @@ jobs:
                   tools: cs2pr, composer
 
             - name: Install all Composer dependencies
-              uses: ramsey/composer-install@v1
+              uses: ramsey/composer-install@v2
               with:
                   composer-options: --working-dir=backend --prefer-dist --no-scripts
 
