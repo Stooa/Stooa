@@ -45,7 +45,7 @@ jobs:
                   working-directory: frontend
 
             - name: Execute Jest Unit tests
-              run: npx test --coverage
+              run: npm run test --coverage
 
             - name: Send coverage to Codecov
               uses: codecov/codecov-action@v2
