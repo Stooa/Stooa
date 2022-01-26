@@ -326,7 +326,7 @@ const TextDivider = styled.div`
   }
 `;
 
-const SwitchStyled = styled.input`
+const SwitchStyled = styled.div`
   width: 100%;
 
   input {
@@ -334,6 +334,11 @@ const SwitchStyled = styled.input`
     height: 0;
     width: 0;
     visibility: hidden;
+  }
+
+  & .switch-checkbox[value='true'] + label .switch-button {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
   }
 `;
 
@@ -360,11 +365,6 @@ const SwitchLabel = styled.label`
     transition: 0.2s;
     background: #fff;
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
-  }
-
-  .switch-checkbox:checked + & .switch-button {
-    left: calc(100% - 3px);
-    transform: translateX(-100%);
   }
 
   &:hover .switch-button {

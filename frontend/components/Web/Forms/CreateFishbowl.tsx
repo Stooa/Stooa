@@ -192,7 +192,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           ))}
         </Select>
         <div>
-          <Switch label="whatever" name="hasIntroduction" />
+          <Switch label="idk" name="hasIntroduction" />
         </div>
       </fieldset>
       <fieldset>

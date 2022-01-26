@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { FormEvent } from 'react';
-
+import React from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
 import { SwitchLabel, SwitchStyled } from '@/ui/Form';
@@ -18,20 +17,24 @@ type Props = {
   label?: string;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Switch = (props: Props) => {
+const Switch: React.FC<Props> = props => {
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
 
   return (
-    <Field {...field} {...props} id={props.id || props.name}>
-      <SwitchStyled>
-        <input id={`switch-new`} type="checkbox" />
-        <SwitchLabel className="switch-label" htmlFor={`switch-new`}>
-          <span className={`switch-button`} />
-        </SwitchLabel>
-        {props.label && <span className="label-text">Quiero intro wacho!</span>}
-      </SwitchStyled>
+    <SwitchStyled>
+      <Field
+        className="switch-checkbox"
+        {...field}
+        {...props}
+        type="checkbox"
+        id={props.id || props.name}
+      />
+      <SwitchLabel htmlFor={props.id || props.name}>
+        <span className={`switch-button`} />
+      </SwitchLabel>
+      {props.label && <span className="label-text">Quiero intro wacho!</span>}
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
-    </Field>
+    </SwitchStyled>
   );
 };
 

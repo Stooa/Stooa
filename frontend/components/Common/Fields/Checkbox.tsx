@@ -22,7 +22,13 @@ const Checkbox: React.FC<Props> = ({ label, children, ...props }) => {
 
   return (
     <CheckboxStyled>
-      <Field {...field} {...props} type="checkbox" id={props.id || props.name} />
+      <Field
+        className="switch-checkbox"
+        {...field}
+        {...props}
+        type="checkbox"
+        id={props.id || props.name}
+      />
       {label && !children && (
         <label
           htmlFor={props.id || props.name}
