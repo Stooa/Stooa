@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 
 import { useStateValue } from '@/contexts/AppContext';
 import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
-import userRepository from '@/lib/jitsi-modules/User';
+import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';

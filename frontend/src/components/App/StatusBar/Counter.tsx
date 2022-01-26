@@ -9,7 +9,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
+import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { Fishbowl } from '@/types/api-platform';
 import useTranslation from 'next-translate/useTranslation';
 

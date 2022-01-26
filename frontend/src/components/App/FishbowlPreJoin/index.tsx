@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import userRepository from '@/lib/jitsi-modules/User';
+import userRepository from '@/jitsi/User';
 
 import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layouts/Default/styles';
 import Decoration from '@/components/Web/Decoration';

@@ -11,7 +11,7 @@ import cookie from 'js-cookie';
 
 import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';
-import userRepository from '@/lib/jitsi-modules/User';
+import userRepository from '@/jitsi/User';
 import LocaleCookie from '@/lib/LocaleCookie';
 
 const COOKIE_TOKEN = 'token';

@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/lib/jitsi-modules/User';
+import userRepository from '@/jitsi/User';
 import VideoIcon from '@/ui/svg/video.svg';
 import VideoMutedIcon from '@/ui/svg/video-muted.svg';
 import Button from '@/components/App/ButtonVideo/styles';

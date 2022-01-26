@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/lib/jitsi-modules/User';
+import userRepository from '@/jitsi/User';
 import MicMutedIcon from '@/ui/svg/mic-muted.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import Button from '@/components/App/ButtonMic/styles';
