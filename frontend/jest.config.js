@@ -18,6 +18,10 @@ module.exports = {
     "**/*.{js,jsx,ts,tsx}",
     "!**/node_modules/**",
     "!**/.coverage/**",
+    "!**/__setups__/**",
+    "!**/public/vendor/**",
+    "!**/tests/**",
+    "!**/{jest,next,prettier}.config.js"
   ],
   moduleNameMapper: {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
