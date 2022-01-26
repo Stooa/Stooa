@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM node:14.15-buster as base
+FROM node:17.4 as base
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -17,25 +17,25 @@ RUN apt-get update \
 WORKDIR /usr/app
 
 COPY package.json /usr/app/package.json
-COPY yarn.lock /usr/app/yarn.lock
+COPY package-lock.json /usr/app/package-lock.json
 
-RUN yarn install --frozen-lockfile
+RUN npm clean-install
 
 
 # NEXT PROD
 FROM base as next
 
-RUN yarn global add pm2
+RUN npm install --global pm2
 
 COPY . /usr/app
 
-CMD ["pm2-runtime", "start", "yarn", "--interpreter", "bash", "--", "build-start"]
+CMD ["pm2-runtime", "npm", "--", "run", "build-start"]
 
 
 # NEXT DEV
 FROM base as next-dev
 
-CMD ["yarn", "dev"]
+CMD ["npm", "run", "dev"]
 
 
 # NGINX

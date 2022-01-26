@@ -42,9 +42,9 @@ jobs:
                   tools: cs2pr, composer
 
             - name: Install all Composer dependencies
-              uses: ramsey/composer-install@v1
+              uses: ramsey/composer-install@v2
               with:
-                  composer-options: --working-dir=backend --prefer-dist --no-scripts
+                  working-directory: backend
 
             - name: Execute PHP CS Fixer to ensure coding standards
               run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
