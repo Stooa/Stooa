@@ -49,7 +49,8 @@ const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) 
       className={`text-sm ${muted ? 'muted' : ''}`}
       onClick={handleOnClick}
       disabled={disabled}
-      active={active}>
+      active={active}
+    >
       <div className="button">{muted || disabled ? <MicMutedIcon /> : <MicIcon />}</div>
       {!unlabeled && (
         <span className="text medium">{!joined || muted ? t('unmute') : t('mute')}</span>

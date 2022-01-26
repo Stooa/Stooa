@@ -14,11 +14,14 @@ const tracksRepository = () => {
   let tracks = [];
 
   const _playTrackHtml = trackHtml => {
-    trackHtml.play().then(() => {
-      console.log('[STOOA] Playing track', trackHtml.id);
-    }).catch(error => {
-      console.log('[STOOA] Problem with auto play', error);
-    });
+    trackHtml
+      .play()
+      .then(() => {
+        console.log('[STOOA] Playing track', trackHtml.id);
+      })
+      .catch(error => {
+        console.log('[STOOA] Problem with auto play', error);
+      });
   };
 
   const _getTrackHtml = track => {
@@ -71,7 +74,7 @@ const tracksRepository = () => {
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);
 
-    if(!track.isLocalAudioTrack()){
+    if (!track.isLocalAudioTrack()) {
       trackHtml.autoplay = true;
     }
 
@@ -89,7 +92,7 @@ const tracksRepository = () => {
     seatHtml.appendChild(trackHtml);
     track.attach(trackHtml);
 
-    if(!track.isLocalAudioTrack()){
+    if (!track.isLocalAudioTrack()) {
       _playTrackHtml(trackHtml);
     }
   };
@@ -170,7 +173,7 @@ const tracksRepository = () => {
     }
 
     console.log('[STOOA] Tracks disposed', id);
-  }
+  };
 
   const handleTrackAdded = track => {
     const id = track.getParticipantId();
@@ -206,7 +209,7 @@ const tracksRepository = () => {
   };
 
   const handleTrackMuteChanged = async track => {
-    await syncSessionStorageTrack(track)
+    await syncSessionStorageTrack(track);
 
     if (track.isLocal()) return;
 
@@ -285,7 +288,7 @@ const tracksRepository = () => {
     disposeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
-    syncSessionStorageTrack,
+    syncSessionStorageTrack
   };
 };
 

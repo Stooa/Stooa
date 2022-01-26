@@ -49,7 +49,8 @@ const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled
       className={`text-sm ${muted ? 'muted' : ''}`}
       onClick={handleOnClick}
       disabled={disabled}
-      active={active}>
+      active={active}
+    >
       <div className="button">{muted || disabled ? <VideoMutedIcon /> : <VideoIcon />}</div>
       {!unlabeled && (
         <span className="text medium">{!joined || muted ? t('videoUnmute') : t('videoMute')}</span>

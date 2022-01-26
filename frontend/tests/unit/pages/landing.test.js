@@ -19,9 +19,9 @@ jest.mock('next/router', () => ({
       route: '/',
       pathname: '',
       query: '',
-      asPath: '',
+      asPath: ''
     };
-  },
+  }
 }));
 
 beforeAll(async () => {
@@ -38,7 +38,7 @@ describe('Test of marketing landing page, with 4 listed benefits.', () => {
       benefits,
       loginButton,
       registerButton,
-      createFishbowlButton,
+      createFishbowlButton
     } = await waitFor(() => {
       const testElements = {
         headingTitle: getByTestId('landing-title'),
@@ -46,7 +46,7 @@ describe('Test of marketing landing page, with 4 listed benefits.', () => {
         benefits: queryAllByTestId(/benefit/i),
         loginButton: getByTestId('login'),
         registerButton: getByTestId('register'),
-        createFishbowlButton: document.querySelectorAll('.cta-create-fishbowl'),
+        createFishbowlButton: document.querySelectorAll('.cta-create-fishbowl')
       };
 
       return testElements;

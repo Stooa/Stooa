@@ -32,7 +32,8 @@ const InputField: React.FC<Input> = ({
 
   return (
     <InputStyled
-      className={`${className} ${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}>
+      className={`${className} ${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}
+    >
       {icon && <Icon variant={icon} className="icon" />}
       <Field
         {...field}

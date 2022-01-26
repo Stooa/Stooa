@@ -62,7 +62,8 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
               href={twitter}
               target="_blank"
               rel="noreferrer"
-              className="icon">
+              className="icon"
+            >
               <Twitter />
             </a>
           </Link>
@@ -83,7 +84,8 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
               }}
               target="_blank"
               rel="noreferrer"
-              className="icon">
+              className="icon"
+            >
               <Linkedin />
             </a>
           </Link>

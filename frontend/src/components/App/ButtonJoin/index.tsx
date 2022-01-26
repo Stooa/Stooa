@@ -46,7 +46,8 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, children }
       className={`text-sm medium ${joined ? 'joined' : ''}`}
       onClick={handleJoinClick}
       disabled={disabled}
-      active={active}>
+      active={active}
+    >
       <div className="button">{joined ? <ArrowDownIcon /> : <ArrowUpIcon />}</div>
       <div className="text">{children}</div>
     </Button>

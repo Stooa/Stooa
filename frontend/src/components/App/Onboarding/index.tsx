@@ -172,7 +172,8 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
             onClick={() => {
               setActiveTooltip(false);
               setAlreadySeen(true);
-            }}>
+            }}
+          >
             <Cross />
           </button>
         </Tooltip>
@@ -184,7 +185,8 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
               <Slide
                 key={`slide-${i}`}
                 className={`${isModerator ? 'moderator' : 'participant'} slide slide-${i}`}
-                data-slide={i}>
+                data-slide={i}
+              >
                 <div className="left">
                   <div className="animate">
                     {item.pretitle && <p>{t(item.preTitle)}</p>}

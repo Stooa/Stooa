@@ -33,9 +33,9 @@ const localTracksRepository = () => {
           TRACK_AUDIO_LEVEL_CHANGED,
           TRACK_MUTE_CHANGED,
           LOCAL_TRACK_STOPPED,
-          TRACK_AUDIO_OUTPUT_CHANGED,
-        },
-      },
+          TRACK_AUDIO_OUTPUT_CHANGED
+        }
+      }
     } = JitsiMeetJS;
 
     tracks.forEach(track => {
@@ -54,7 +54,7 @@ const localTracksRepository = () => {
     let options = {
       devices: [kind],
       firePermissionPromptIsShownEvent: true,
-      fireSlowPromiseEvent: true,
+      fireSlowPromiseEvent: true
     };
 
     if (deviceId !== undefined) {
@@ -83,8 +83,9 @@ const localTracksRepository = () => {
       micDeviceId,
       cameraDeviceId,
       firePermissionPromptIsShownEvent: true,
-      fireSlowPromiseEvent: true,
-    }).then(_addTracks)
+      fireSlowPromiseEvent: true
+    })
+      .then(_addTracks)
       .catch(() => {
         console.log('[STOOA] Video and audio failed, trying only audio');
 

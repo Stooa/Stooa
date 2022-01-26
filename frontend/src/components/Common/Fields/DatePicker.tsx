@@ -24,7 +24,8 @@ const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, selecte
 
   return (
     <DatePickerStyled
-      className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}>
+      className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}
+    >
       {icon && <Icon variant={icon} className="icon" />}
       <DatePickerField
         {...props}

@@ -48,7 +48,8 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                         action: 'Header',
                         label: window.location.href
                       });
-                    }}>
+                    }}
+                  >
                     <span>{t('createEvent')}</span>
                     <ArrowRight />
                   </ButtonSmall>

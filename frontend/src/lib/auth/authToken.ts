@@ -14,7 +14,7 @@ export type User = {
   name: string;
   twitter: string;
   linkedin: string;
-}
+};
 
 export type DecodedToken = {
   readonly context: {

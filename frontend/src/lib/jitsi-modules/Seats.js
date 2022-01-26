@@ -48,7 +48,7 @@ const seatsRepository = () => {
     dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat() });
   };
 
-  const join = (id) => {
+  const join = id => {
     const seat = getSeat(null);
 
     if (seat <= 0) return;
@@ -74,7 +74,7 @@ const seatsRepository = () => {
       dispatchEvent(NOTIFICATION, {
         type: USER_MUST_LEAVE,
         seats: notificationUsers,
-        message: 'notification.emptySeats',
+        message: 'notification.emptySeats'
       });
     }
 
@@ -166,7 +166,7 @@ const seatsRepository = () => {
     join,
     leave,
     updateStatus,
-    updateDominantSpeaker,
+    updateDominantSpeaker
   };
 };
 

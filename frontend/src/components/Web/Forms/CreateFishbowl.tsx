@@ -128,7 +128,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="hours"
           variant="sm"
           icon="hourglass"
-          autoComplete="off">
+          autoComplete="off"
+        >
           {[...Array(9)].map((e, i) => {
             if (i === 0) {
               return (
@@ -148,7 +149,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
               <option
                 defaultValue={(time === props.values.hours).toString()}
                 key={`hour_${time}`}
-                value={time}>{`${time} ${t('fishbowl.hours')}`}</option>
+                value={time}
+              >{`${time} ${t('fishbowl.hours')}`}</option>
             );
           })}
         </Select>
@@ -163,7 +165,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.timezone')}
           name="timezone"
           icon="world"
-          autoComplete="off">
+          autoComplete="off"
+        >
           <option value="">{t('fishbowl.selectTimeZone')}</option>
           {Object.keys(timezones).map((zone, index) => {
             const text = `(GTM${timezones[zone].utcOffsetStr}) ${timezones[zone].name}`;
@@ -179,7 +182,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.language')}
           name="language"
           icon="language"
-          autoComplete="off">
+          autoComplete="off"
+        >
           <option value="">{t('fishbowl.selectLanguageLabel')}</option>
           {locales.map(locale => (
             <option value={locale} key={`locale-${locale}`}>

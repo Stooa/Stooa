@@ -101,7 +101,8 @@ const Footer: React.FC = () => {
                       action: 'Footer',
                       label: 'Footer'
                     });
-                  }}>
+                  }}
+                >
                   <span>{t('cta')}</span>
                 </a>
               </Link>
@@ -185,7 +186,8 @@ const Footer: React.FC = () => {
                     action: 'RRSS',
                     label: name
                   });
-                }}>
+                }}
+              >
                 {component}
               </a>
             </Link>

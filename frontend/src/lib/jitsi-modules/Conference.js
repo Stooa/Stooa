@@ -147,9 +147,9 @@ const conferenceRepository = () => {
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
-          DOMINANT_SPEAKER_CHANGED,
-        },
-      },
+          DOMINANT_SPEAKER_CHANGED
+        }
+      }
     } = JitsiMeetJS;
 
     conference = connection.initJitsiConference(roomName, roomOptions);
@@ -177,8 +177,8 @@ const conferenceRepository = () => {
   const _handleConnectionDisconnected = () => {
     const {
       events: {
-        connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED },
-      },
+        connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
+      }
     } = JitsiMeetJS;
 
     connection.removeEventListener(CONNECTION_ESTABLISHED, _handleConnectionEstablished);
@@ -203,23 +203,30 @@ const conferenceRepository = () => {
   const initializeJitsi = () => {
     const {
       events: {
-        mediaDevices: { PERMISSION_PROMPT_IS_SHOWN, USER_MEDIA_SLOW_PROMISE_TIMEOUT, PERMISSIONS_CHANGED },
-      },
+        mediaDevices: {
+          PERMISSION_PROMPT_IS_SHOWN,
+          USER_MEDIA_SLOW_PROMISE_TIMEOUT,
+          PERMISSIONS_CHANGED
+        }
+      }
     } = JitsiMeetJS;
 
     JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);
-    JitsiMeetJS.mediaDevices.addEventListener(USER_MEDIA_SLOW_PROMISE_TIMEOUT, _handleUserMediaSlowPromiseTimeout);
+    JitsiMeetJS.mediaDevices.addEventListener(
+      USER_MEDIA_SLOW_PROMISE_TIMEOUT,
+      _handleUserMediaSlowPromiseTimeout
+    );
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSIONS_CHANGED, _handlePermissionChanged);
   };
 
   const initializeConnection = async (rawRoomName, isUserModerator) => {
     const {
       events: {
-        connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED },
-      },
+        connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
+      }
     } = JitsiMeetJS;
     const auth = await getAuthToken(true, rawRoomName);
     isModerator = isUserModerator;
@@ -247,7 +254,7 @@ const conferenceRepository = () => {
     }
 
     return conference.getLocalAudioTrack();
-  }
+  };
 
   const getLocalVideoTrack = () => {
     if (!isJoined) {
@@ -255,7 +262,7 @@ const conferenceRepository = () => {
     }
 
     return conference.getLocalVideoTrack();
-  }
+  };
 
   const addTrack = (track, oldTrack) => {
     if (!isJoined) {
@@ -354,7 +361,7 @@ const conferenceRepository = () => {
       isCurrentUser: true,
       joined: conference.getLocalParticipantProperty('joined') === 'yes',
       isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
-      isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video'),
+      isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
     };
   };
 
@@ -372,7 +379,7 @@ const conferenceRepository = () => {
     initializeConnection,
     leave,
     sendJoinEvent,
-    sendLeaveEvent,
+    sendLeaveEvent
   };
 };
 

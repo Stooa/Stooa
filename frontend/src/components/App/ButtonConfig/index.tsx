@@ -71,7 +71,8 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
         id="config-button"
         className="text-sm"
         onClick={() => handleShowDevices()}
-        active={true}>
+        active={true}
+      >
         <div className="button">
           <SettingsIcon />
         </div>
@@ -93,7 +94,8 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                       className="text-sm"
                       selected={audioInputDevice.deviceId === deviceId}
                       onClick={handleAudioInput}
-                      value={deviceId}>
+                      value={deviceId}
+                    >
                       <CheckIcon />{' '}
                       <span>
                         {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
@@ -114,7 +116,8 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                       className="text-sm"
                       selected={audioOutputDevice.deviceId === deviceId}
                       onClick={handleAudioOutput}
-                      value={deviceId}>
+                      value={deviceId}
+                    >
                       <CheckIcon />{' '}
                       <span>
                         {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
@@ -135,7 +138,8 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                       className="text-sm"
                       selected={videoDevice.deviceId === deviceId}
                       onClick={handleVideoInput}
-                      value={deviceId}>
+                      value={deviceId}
+                    >
                       <CheckIcon />{' '}
                       <span>
                         {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}

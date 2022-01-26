@@ -65,7 +65,8 @@ const ThankYou = () => {
       <Time
         as="time"
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-        className="error">
+        className="error"
+      >
         <p className="title-sm medium">{t('finishedEvent')}</p>
         <div className="text-sm">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
@@ -82,7 +83,8 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`whatsapp://send?text=${shareTitle} ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref>
+                passHref
+              >
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -92,7 +94,8 @@ const ThankYou = () => {
                       action: 'Whastapp',
                       label: `fishbowl/thankyou/${fid}`
                     });
-                  }}>
+                  }}
+                >
                   <Whatsapp />
                 </a>
               </Link>
@@ -100,7 +103,8 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
-                passHref>
+                passHref
+              >
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -110,7 +114,8 @@ const ThankYou = () => {
                       action: 'Linkedin',
                       label: `fishbowl/thankyou/${fid}`
                     });
-                  }}>
+                  }}
+                >
                   <Linkedin />
                 </a>
               </Link>
@@ -118,7 +123,8 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref>
+                passHref
+              >
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -128,7 +134,8 @@ const ThankYou = () => {
                       action: 'Twitter',
                       label: `fishbowl/thankyou/${fid}`
                     });
-                  }}>
+                  }}
+                >
                   <Twitter />
                 </a>
               </Link>
@@ -136,7 +143,8 @@ const ThankYou = () => {
             <li>
               <Link
                 href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref>
+                passHref
+              >
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -146,7 +154,8 @@ const ThankYou = () => {
                       action: 'Mail',
                       label: `fishbowl/thankyou/${fid}`
                     });
-                  }}>
+                  }}
+                >
                   <Mail />
                 </a>
               </Link>
@@ -162,7 +171,8 @@ const ThankYou = () => {
                 action: 'ThankYou-Page',
                 label: `fishbowl/thankyou/${fid}`
               });
-            }}>
+            }}
+          >
             <span>{t('common:createEvent')}</span>
             <ArrowRight />
           </ButtonStyledLinkSmall>
