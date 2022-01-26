@@ -29,13 +29,13 @@ RUN npm install --global pm2
 
 COPY . /usr/app
 
-CMD ["pm2-runtime", "start", "npx", "--interpreter", "bash", "--", "build-start"]
+CMD ["pm2-runtime", "npm", "--", "build-start"]
 
 
 # NEXT DEV
 FROM base as next-dev
 
-CMD ["npx", "dev"]
+CMD ["npm", "run", "dev"]
 
 
 # NGINX
