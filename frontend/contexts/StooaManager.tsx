@@ -30,15 +30,12 @@ import useToasts from '@/hooks/useToasts';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-
 const StooaContext = createContext(undefined);
-
-let initJitsi = false;
-let initConnection = false;
 
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
+  const [initConnection, setInitConnection] = useState(false);
   const [conferenceReady, setConferenceReady] = useState(false);
   const { addToast, clearDelayed } = useToasts();
   const { t, lang } = useTranslation('app');
@@ -128,45 +125,48 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   useEffect(() => {
-    if (!initJitsi) {
-      initializeJitsi();
-
-      initJitsi = true;
-    }
-
-    if (prejoin) {
-      return;
-    }
-
-    if (conferenceStatus === IConferenceStatus.FINISHED) {
-      unload();
-
-      const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
-      router.push(route, route, { locale: lang });
-    }
-
     if (
+      !prejoin &&
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
-        (!conferenceReady && conferenceStatus !== IConferenceStatus.NOT_STARTED))
+        (!conferenceReady &&
+          (conferenceStatus === IConferenceStatus.INTRODUCTION ||
+            conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       initializeConnection(fid, isModerator);
 
-      window.addEventListener('beforeunload', unload);
-      window.addEventListener('unload', unload);
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
 
-      initConnection = true;
+      setInitConnection(true);
     }
 
     return () => {
-      window.removeEventListener('beforeunload', unload);
-      window.removeEventListener('unload', unload);
       window.removeEventListener('mousedown', initialInteraction);
       window.removeEventListener('keydown', initialInteraction);
     };
   }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    initializeJitsi();
+
+    window.addEventListener('beforeunload', unload);
+    window.addEventListener('unload', unload);
+
+    return () => {
+      window.removeEventListener('beforeunload', unload);
+      window.removeEventListener('unload', unload);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (conferenceStatus === IConferenceStatus.FINISHED) {
+      unload().then(function () {
+        const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
+        router.push(route, route, { locale: lang });
+      });
+    }
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     checkIsTimeUp();
@@ -175,10 +175,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
     apiInterval.current = window.setInterval(checkApIConferenceStatus, 6000);
 
     return () => {
-      clearInterval(timeUpInterval.current);
-      clearInterval(apiInterval.current);
-      initJitsi = false;
-      initConnection = false;
+      window.clearInterval(timeUpInterval.current);
+      window.clearInterval(apiInterval.current);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

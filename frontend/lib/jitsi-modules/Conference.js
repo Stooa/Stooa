@@ -287,14 +287,13 @@ const conferenceRepository = () => {
     return false;
   };
 
-  const leave = async () => {
+  const leave = () => {
     console.log('[STOOA] Leave');
 
     if (isJoined) {
       isJoined = false;
 
-      await conference.leave();
-
+      conference.leave();
       connection.disconnect();
     }
   };
