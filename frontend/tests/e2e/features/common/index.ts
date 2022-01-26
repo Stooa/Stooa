@@ -19,6 +19,8 @@ When('clicks on {string}', (text = '') => {
 
 Then('sees {string}', (text = '') => {
   cy.findByText(text).should('be.visible');
+
+  cy.screenshot();
 });
 
 Then('gets redirect to {string}', (url = '') => {
