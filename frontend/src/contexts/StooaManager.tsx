@@ -16,7 +16,7 @@ import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_MUST_LEAVE } from '@/jitsi/Events';
-import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
+import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
 import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';

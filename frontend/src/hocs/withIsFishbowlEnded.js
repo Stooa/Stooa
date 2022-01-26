@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
 import api from '@/lib/api';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/lib/jitsi-modules/Status';
 import Loader from '@/components/Web/Loader';
 import Error from '@/components/Common/Error';
 import { useStateValue } from '@/contexts/AppContext';

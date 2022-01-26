@@ -10,8 +10,8 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 
 import { Devices, DevicesCtx } from '@/types/devices';
-import userRepository from '@/jitsi/User';
-import devicesRepository from '@/jitsi/Devices';
+import userRepository from '@/lib/jitsi-modules/User';
+import devicesRepository from '@/lib/jitsi-modules/Devices';
 import { parseDevices } from '@/lib/helpers';
 
 const DevicesContext = createContext<DevicesCtx>(undefined);

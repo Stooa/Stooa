@@ -26,7 +26,7 @@
       " "
     ], 2]
   },
-  "ignorePatterns": ["node_modules/", ".next/", "locales/", "ui/animations"],
+  "ignorePatterns": ["node_modules/", ".next/", "locales/", "src/ui/animations"],
   "settings": {
     "import/resolver": {
       "alias": [

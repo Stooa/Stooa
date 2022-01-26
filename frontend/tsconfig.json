@@ -5,9 +5,10 @@
     "allowJs": true,
     "baseUrl": ".",
     "paths": {
-      "@/jitsi/*": ["lib/jitsi-modules/*"],
-      "@/graphql/*": ["lib/gql/*"],
-      "@/*": ["./*"]
+      "@/jitsi/*": ["src/lib/jitsi-modules/*"],
+      "@/graphql/*": ["src/lib/gql/*"],
+      "@/i18n": ["i18n"],
+      "@/*": ["src/*"]
     },
     "skipLibCheck": true,
     "strict": false,
@@ -21,8 +22,8 @@
     "sourceMap": true,
     "jsx": "preserve",
     "types": ["cypress", "@testing-library/cypress"],
-    "typeRoots": ["./node_modules/@types/*", "./*.d.ts", "./types/*"]
+    "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"]
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Jitsi/index.jsx"]
+  "include": ["global.d.ts", "next-env.d.ts", "typings.d.ts", "src/**/*.ts", "src/**/*.tsx"]
 }

@@ -11,21 +11,21 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/jitsi/User';
-import MicMutedIcon from '@/ui/svg/mic-muted.svg';
-import MicIcon from '@/ui/svg/mic.svg';
-import Button from '@/components/App/ButtonMic/styles';
+import userRepository from '@/lib/jitsi-modules/User';
+import VideoIcon from '@/ui/svg/video.svg';
+import VideoMutedIcon from '@/ui/svg/video-muted.svg';
+import Button from '@/components/App/ButtonVideo/styles';
 
 interface Props {
   joined: boolean;
   disabled: boolean;
   unlabeled?: boolean;
-  handleMic?: (value?: boolean) => void;
+  handleVideo?: (value?: boolean) => void;
 }
 
-const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) => {
+const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled }) => {
   const [active, setActive] = useState(true);
-  const [muted, setMuted] = useState(userRepository.getUserAudioMuted());
+  const [muted, setMuted] = useState(userRepository.getUserVideoMuted());
   const { t } = useTranslation('fishbowl');
 
   const handleOnClick = async () => {
@@ -33,14 +33,14 @@ const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) 
     setActive(false);
 
     pushEventDataLayer({
-      action: muted ? 'Unmute' : 'Mute',
+      action: muted ? 'Video Unmute' : 'Video Mute',
       category: 'Buttons',
       label: window.location.href
     });
 
-    userRepository.setUserAudioMuted(!currentMutedState);
+    userRepository.setUserVideoMuted(!currentMutedState);
     setMuted(!currentMutedState);
-    typeof handleMic === 'function' && handleMic(!currentMutedState);
+    typeof handleVideo === 'function' && handleVideo(!currentMutedState);
     setActive(true);
   };
 
@@ -50,12 +50,12 @@ const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) 
       onClick={handleOnClick}
       disabled={disabled}
       active={active}>
-      <div className="button">{muted || disabled ? <MicMutedIcon /> : <MicIcon />}</div>
+      <div className="button">{muted || disabled ? <VideoMutedIcon /> : <VideoIcon />}</div>
       {!unlabeled && (
-        <span className="text medium">{!joined || muted ? t('unmute') : t('mute')}</span>
+        <span className="text medium">{!joined || muted ? t('videoUnmute') : t('videoMute')}</span>
       )}
     </Button>
   );
 };
 
-export default ButtonMic;
+export default ButtonVideo;

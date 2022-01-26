@@ -8,7 +8,7 @@
  */
 
 import React, { createContext, useContext, useReducer } from 'react';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/lib/jitsi-modules/Status';
 
 const reducer = (state, action) => {
   const allowedActions = [

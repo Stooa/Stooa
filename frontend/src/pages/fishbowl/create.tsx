@@ -14,7 +14,7 @@ import Layout from '@/layouts/Default';
 import CreateFishbowlForm from '@/components/Web/Forms/CreateFishbowl';
 import { useStateValue } from '@/contexts/AppContext';
 
-import { IConferenceStatus } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/lib/jitsi-modules/Status';
 
 const Create = () => {
   const { t } = useTranslation('fishbowl');

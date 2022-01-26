@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 
 import { User } from '@/types/user';
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/jitsi/User';
+import userRepository from '@/lib/jitsi-modules/User';
 
 import ArrowDownIcon from '@/ui/svg/arrow-down.svg';
 import ArrowUpIcon from '@/ui/svg/arrow-up.svg';

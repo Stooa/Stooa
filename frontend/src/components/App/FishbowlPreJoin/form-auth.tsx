@@ -9,7 +9,7 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import userRepository from '@/jitsi/User';
+import userRepository from '@/lib/jitsi-modules/User';
 import { useStateValue } from '@/contexts/AppContext';
 
 import { InputStyled } from '@/ui/Form';

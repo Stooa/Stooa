@@ -12,7 +12,7 @@ import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
 import { RUN_FISHBOWL, FINISH_FISHBOWL } from '@/graphql/Fishbowl';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/lib/jitsi-modules/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
