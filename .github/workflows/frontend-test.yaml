@@ -102,8 +102,8 @@ jobs:
                 build: yarn run build-e2e
                 start: yarn run start-e2e
                 wait-on: 'http://localhost:3000'
-                parallel: ${{ github.ref == 'refs/heads/main' }}
-                record: ${{ github.ref == 'refs/heads/main' }}
+                parallel: true
+                record: true
                 working-directory: frontend
               env:
                 CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
