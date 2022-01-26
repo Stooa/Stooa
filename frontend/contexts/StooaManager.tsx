@@ -47,7 +47,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const { fid } = router.query;
 
   const startFishbowl = () => {
-    const slug = {variables: {input: {slug: fid}}};
+    const slug = { variables: { input: { slug: fid } } };
     if (data.hasIntroduction) {
       try {
         introduceFishbowl(slug);
@@ -56,7 +56,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }
     } else {
       try {
-        runWithoutIntroFishbowl(slug)
+        runWithoutIntroFishbowl(slug);
       } catch (error) {
         console.error(`[STOOA] Error introduction: ${error}`);
       }
@@ -139,7 +139,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   const isConferenceIntroducing = (): boolean => {
     return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
-  }
+  };
 
   useEffect(() => {
     if (
@@ -147,8 +147,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
         (!conferenceReady &&
-          (isConferenceIntroducing() ||
-            conferenceStatus === IConferenceStatus.RUNNING)))
+          (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       initializeConnection(fid, isModerator);
 
