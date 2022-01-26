@@ -16,7 +16,6 @@ module.exports = {
   coverageDirectory: '.coverage',
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
-    '!**/__setups__/**',
     '!**/.coverage/**',
     '!**/.next/**',
     '!**/coverage/**',
@@ -43,9 +42,9 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/__setups__/fileTransformer.js'
+      '<rootDir>/tests/unit/setup/fileTransformer.js'
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['./__setups__/jest.setup.js', './__setups__/canvas.js']
+  setupFilesAfterEnv: ['./tests/unit/setup/jest.setup.js', './tests/unit/setup/canvas.js']
 };
