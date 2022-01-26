@@ -63,7 +63,7 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      conferenceStatus !== IConferenceStatus.FINISHED
+      data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
     );
   }
 

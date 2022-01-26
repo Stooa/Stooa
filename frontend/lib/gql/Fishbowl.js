@@ -65,6 +65,7 @@ const GET_FISHBOWL = gql`
       durationFormatted
       slug
       hasIntroduction
+      currentStatus
     }
   }
 `;
