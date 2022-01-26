@@ -3,7 +3,7 @@
     "timeup": "Completed!",
     "timeleft": "to finish",
     "notification": {
-        "emptySeats": "The fishbowl is full ⚠️  If you have already participated, please free your seat.",
+        "emptySeats": "The fishbowl is full. If you have already participated, please free your seat.",
         "tenMinutesLeft": "10 minutes left to finish the fishbowl 👀",
         "oneMinuteLeft": "1 minute left to finish the fishbowl 🚨",
         "joinAfterIntroduction": "⚠️  You can join the conversation after the introduction"
