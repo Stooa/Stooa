@@ -44,7 +44,7 @@ jobs:
             - name: Install all Composer dependencies
               uses: ramsey/composer-install@v2
               with:
-                  composer-options: --working-dir=backend --prefer-dist --no-scripts
+                  working-directory: backend
 
             - name: Run PHPUnit to generate a compiled container for PHPStan
               run: vendor/bin/phpunit
