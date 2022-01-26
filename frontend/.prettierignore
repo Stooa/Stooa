@@ -10,4 +10,7 @@
 *.json
 *.min.css
 *.module.css
-node_modules/*
+node_modules
+coverage
+.next
+.coverage

@@ -12,6 +12,8 @@
 
 # testing
 .coverage
+.nyc_output
+coverage
 
 # next.js
 /.next/
@@ -35,3 +37,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# cypress
+tests/e2e/screenshots
+tests/e2e/videos
