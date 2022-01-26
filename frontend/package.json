@@ -4,14 +4,22 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
+    "build-e2e": "NODE_ENV=e2e next build",
     "start": "next start",
+    "start-e2e": "NODE_ENV=e2e next start",
     "build-start": "next build && next start",
     "design-tokens": "design-tokens",
     "test": "jest --env=jsdom",
     "test-watch": "jest --watch --env=jsdom",
     "prettify": "prettier --write **/*.{js,ts,tsx}",
-    "lint:js": "eslint components contexts types hooks layouts lib pages ui",
-    "lint:fix": "eslint components contexts types hooks hocs layouts lib pages types ui --fix"
+    "lint:js": "eslint components contexts types hooks layouts lib pages ui tests",
+    "lint:fix": "eslint components contexts types hooks hocs layouts lib pages types ui tests --fix",
+    "test:e2e:dev": "cypress open",
+    "test:e2e:run": "cypress run"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "tests/e2e/features"
   },
   "dependencies": {
     "@apollo/client": "3.3.18",
@@ -46,14 +54,20 @@
     "yup": "0.32.9"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "3.9.12",
     "@runroom/design-tokens": "1.0.0",
     "@runroom/npm-scripts": "1.0.8",
     "@svgr/webpack": "^6.0.0",
+    "@testing-library/cypress": "8.0.2",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.1.2",
+    "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.0.2",
     "@typescript-eslint/eslint-plugin": "4.28.5",
+    "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
+    "cypress": "9.3.1",
+    "cypress-cucumber-preprocessor": "4.3.1",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "8.3.0",
@@ -64,6 +78,7 @@
     "jest-canvas-mock": "2.3.1",
     "jest-css-modules": "2.1.0",
     "jest-next-dynamic": "1.0.1",
+    "nyc": "15.1.0",
     "prettier": "2.3.2"
   }
 }
