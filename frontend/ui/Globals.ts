@@ -14,7 +14,18 @@ import Texts from '@/ui/Texts';
 import Titles from '@/ui/Titles';
 import Overrides from '@/ui/Overrides';
 import { media, space } from '@/ui/helpers';
-import { COLOR_NEUTRO_700, FONT_BASE_SIZE, FONT_PRIMARY } from '@/ui/settings';
+import {
+  COLOR_GREEN_100,
+  COLOR_GREEN_500,
+  COLOR_GREEN_800,
+  COLOR_NEUTRO_700,
+  COLOR_RED_100,
+  COLOR_RED_600,
+  COLOR_YELLOW_100,
+  COLOR_YELLOW_500,
+  FONT_BASE_SIZE,
+  FONT_PRIMARY
+} from '@/ui/settings';
 import { getIconCSS } from '@/ui/Icons';
 
 const GlobalStyle = createGlobalStyle`
@@ -179,6 +190,57 @@ const GlobalStyle = createGlobalStyle`
     height: ${space(2)};
     width: ${space(2)};
   }
+
+  /*  CUSTOM TOASTS STYLES */
+  :root {
+    --toastify-toast-width: fit-content !important;
+
+    --toastify-text-color-light: ${COLOR_NEUTRO_700} !important;
+    --toastify-color-success: ${COLOR_GREEN_500} !important;
+    --toastify-text-color-success: ${COLOR_GREEN_800} !important;
+    --toastify-color-warning: ${COLOR_YELLOW_500} !important;
+    --toastify-color-error: ${COLOR_RED_600} !important;
+  }
+
+  .toastify-custom {
+
+      & .Toastify__toast {
+        padding: ${space(0)} ${space(2)};
+      }
+
+      & .Toastify__toast-theme--light.Toastify__toast--warning {
+        --toastify-color-light: ${COLOR_YELLOW_100};
+      }
+
+      & .Toastify__toast-theme--light.Toastify__toast--error {
+        --toastify-color-light: ${COLOR_RED_100};
+      }
+
+      & .Toastify__toast-theme--light.Toastify__toast--success {
+        --toastify-color-light: ${COLOR_GREEN_100};
+        --toastify-text-color-light: ${COLOR_GREEN_800};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_GREEN_800};
+          opacity: 1;
+          }
+      }
+
+      &.Toastify__toast-container--bottom-center {
+        bottom: ${space(10)}
+      }
+
+      & .Toastify__toast-body {
+        padding-right: ${space(3)};
+      }
+
+      & .Toastify__close-button {
+        align-self: center;
+      }
+    }
+
+
+
 `;
 
 export default GlobalStyle;

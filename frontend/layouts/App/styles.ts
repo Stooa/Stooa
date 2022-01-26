@@ -16,7 +16,7 @@ const Container = styled.div<{ drawer?: boolean }>`
   background: ${COLOR_NEUTRO_200};
   display: grid;
   grid-template-columns: 1fr ${({ drawer }) => (drawer ? '300px' : 0)};
-  grid-template-rows: ${space(14)} 1fr minmax(${space(10)}, auto)};
+  grid-template-rows: ${space(14)} 1fr minmax(${space(10)}, auto);
   gap: 0;
   grid-template-areas: 'Header Aside' 'Main Aside' 'Footer Aside';
   min-height: 100vh;
