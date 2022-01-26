@@ -7,29 +7,30 @@
  * file that was distributed with this source code.
  */
 
-import { FormEvent } from 'react';
-import { SwitchLabel, SwitchStyled } from '@/ui/Form';
+import React, { FormEvent } from 'react';
 
-interface Props {
-  isOn: boolean;
-  handleToggle: (event: FormEvent<HTMLInputElement>) => void;
-}
+import { Field, FieldAttributes, useField } from 'formik';
+
+import { SwitchLabel, SwitchStyled } from '@/ui/Form';
+import { ValidationError } from '@/ui/Validation';
+
+type Props = {
+  label?: string;
+} & FieldAttributes<Record<string, unknown>>;
 
 const Switch = (props: Props) => {
+  const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
+
   return (
-    <SwitchStyled>
-      <input
-        checked={props.isOn}
-        onChange={props.handleToggle}
-        id={`switch-new`}
-        type="checkbox"
-        {...props}
-      />
-      <SwitchLabel className="switch-label" htmlFor={`switch-new`}>
-        <span className={`switch-button`} />
-      </SwitchLabel>
-      <span className="label-text">Quiero intro wacho!</span>
-    </SwitchStyled>
+    <Field {...field} {...props} id={props.id || props.name}>
+      <SwitchStyled>
+        <input id={`switch-new`} type="checkbox" />
+        <SwitchLabel className="switch-label" htmlFor={`switch-new`}>
+          <span className={`switch-button`} />
+        </SwitchLabel>
+        {props.label && <span className="label-text">Quiero intro wacho!</span>}
+      </SwitchStyled>
+    </Field>
   );
 };
 

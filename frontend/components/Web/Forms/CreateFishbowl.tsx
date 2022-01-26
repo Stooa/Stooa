@@ -192,7 +192,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           ))}
         </Select>
         <div>
-          <Field as={Switch} name="hasIntroduction" label={t('fishbowl.hasIntroduction')} />
+          <Switch label="whatever" name="hasIntroduction" />
         </div>
       </fieldset>
       <fieldset>
