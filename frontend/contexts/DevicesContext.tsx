@@ -143,7 +143,8 @@ const DevicesProvider = ({ children }) => {
         audioInputDevice,
         videoDevice,
         devices
-      }}>
+      }}
+    >
       {children}
     </DevicesContext.Provider>
   );

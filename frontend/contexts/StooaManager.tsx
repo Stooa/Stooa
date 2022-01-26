@@ -201,7 +201,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
         isModerator,
         onIntroduction,
         timeStatus
-      }}>
+      }}
+    >
       {children}
     </StooaContext.Provider>
   );
