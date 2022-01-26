@@ -49,7 +49,6 @@ services:
             - 3000:3000
         volumes:
             - ./frontend:/usr/app/:cached
-            - /usr/app/.next/
             - /usr/app/node_modules/
         networks:
             meet.jitsi:
