@@ -7,8 +7,8 @@
         "php": "^7.4",
         "api-platform/core": "2.6.6",
         "doctrine/annotations": "1.13.2",
-        "doctrine/doctrine-bundle": "2.4.3",
-        "doctrine/doctrine-migrations-bundle": "3.2.0",
+        "doctrine/doctrine-bundle": "2.4.4",
+        "doctrine/doctrine-migrations-bundle": "3.2.1",
         "doctrine/orm": "2.9.6",
         "gedmo/doctrine-extensions": "3.2.0",
         "gesdinet/jwt-refresh-token-bundle": "0.12.0",
@@ -61,7 +61,7 @@
         "symfony/polyfill-php74": "*"
     },
     "require-dev": {
-        "doctrine/data-fixtures": "1.5.1",
+        "doctrine/data-fixtures": "1.5.2",
         "doctrine/doctrine-fixtures-bundle": "3.4.1",
         "ergebnis/composer-normalize": "2.15.0",
         "friendsofphp/php-cs-fixer": "3.2.1",
