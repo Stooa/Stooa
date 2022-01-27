@@ -1,0 +1,77 @@
+{
+    "preTitle": "Kerja bagus!",
+    "preSubtitle": "Periksa detail fishbowl baru kamu:",
+    "title": "Buat sebuah fishbowl yang gratis",
+    "dateandtime": "Tanggal dan Waktu",
+    "copyText": "Salin dan bagikan tautan fishbowl dengan peserta",
+    "joinGuest": "Gabung sebagai pengguna tamu",
+    "joinMemberNote": "* Memperbolehkanmu untuk menghubungi peserta lainnya",
+    "copySuccess": "Tautan disalin ke papan klip!",
+    "detail": {
+        "title": "Judul",
+        "duration": "Durasi",
+        "startDate": "Tanggal mulai",
+        "startTime": "Waktu mulai",
+        "description": "Deskripsi",
+        "language": "Bahasa"
+    },
+    "months": {
+        "01": "Januari",
+        "03": "Maret",
+        "04": "April",
+        "05": "Mei",
+        "06": "Juni",
+        "07": "Juli",
+        "08": "Agustus",
+        "09": "September",
+        "11": "November",
+        "12": "Desember",
+        "02": "Februari",
+        "10": "Oktober"
+    },
+    "full": "Penuh",
+    "join": "Gabung pembicaraan",
+    "leave": "Tinggalkan pembicaraan",
+    "unmute": "Tidak bisukan",
+    "sameAsSystem": "Sama dengan sistem",
+    "mute": "Bisukan",
+    "videoUnmute": "Mulai video",
+    "mic": "Mikrofon",
+    "speaker": "Pengeras suara",
+    "cam": "Kamera",
+    "nickname": {
+        "title": "Bagaimana seharusnya partisipan lainnya memanggilmu?"
+    },
+    "waiting": "Menunggu hos untuk memulai fishbowl-nya",
+    "timesUp": "Waktu habis",
+    "timeToStart": "{{time}} untuk memulai",
+    "timeLeft_one": "{{time}} tersisa",
+    "lastMinute": "Menit terakhir",
+    "startFishbowl": "Mulai fishbowl-nya",
+    "allowUsers": "Perbolehkan peserta untuk gabung pembicaraan",
+    "endFishbowl": "Akhiri fishbowl-nya",
+    "finishedEvent": "Fishbowl-nya sudah selesai",
+    "introduceModal": {
+        "button": "Mulai",
+        "description": "Anda bisa mengatakan beberapa kata pengenalan, kamera dan mikrofon hanya akan nyala untuk kamu saja. Jika kamu sudah selesai, jangan lupa untuk memperbolehkan peserta untuk gabung pembicaraan.",
+        "title": "Berikan pengenalan"
+    },
+    "endModal": {
+        "title": "Akhiri fishbowl",
+        "description": "Apakah Anda yakin ingin menghentikan fishbowl ini?",
+        "button": "Konfirmasi"
+    },
+    "participants": {
+        "title": "Peserta fishbowl",
+        "attendees": "Pendengar",
+        "speaking": "Berbicara sekarang"
+    },
+    "joinFishbowl": "Pergi ke fishbowl",
+    "accessMsg": "Akses ke fishbowl akan diperbolehkan <strong>satu jam</strong> sebelum waktu mulai yang dijadwalkan.",
+    "joinMember": "Gabung sebagai pengguna terdaftar *",
+    "videoMute": "Berhentikan video",
+    "settings": "Pengaturan",
+    "waitingHost": "Peserta menunggumu untuk memulai fishbowl-nya",
+    "timeLeft_other": "{{time}} tersisa",
+    "share": "Beri tahu orang lain tentang Stooa!"
+}

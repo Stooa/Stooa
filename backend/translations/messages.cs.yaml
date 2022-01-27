@@ -1,0 +1,33 @@
+emails:
+    from: Stooa
+    welcome_email:
+        subject: Vítejte ve Stooa!
+        title: Vítejte ve Stooa
+        subtitle: Stooa je nekonferenční online nástroj. Každý má svůj hlas. Připojte se, poslouchejte a sdílejte své znalosti s ostatními.
+        cta: Vytvořte si akvárium
+        delete: Pokud chcete smazat svůj účet Stooa, napište nám <a href="mailto:stooa@stooa.com?subject=Delete Stooa účet">zde</a>
+    reset_password_email:
+        subject: Ahoj %name%! Obdrželi jsme žádost o obnovení vašeho hesla Stooa
+        title: Ahoj %name%!
+        description: 'Chcete-li obnovit své heslo, navštivte následující odkaz:'
+        expire_text: Nezapomeňte, že platnost tohoto odkazu vyprší za 1 hodinu.
+        button_text: Obnovení hesla
+        information_text: Pokud tuto zprávu ignorujete, vaše heslo nebude změněno.<br>Pokud jste o změnu hesla nepožádali, <a href="mailto:%email%">dejte nám vědět</a>.
+        information_help_text: Pokud to není váš účet, můžete z něj odstranit svůj e-mail. <br>Neodpovídejte na tento e-mail a uvádějte své heslo. Nikdy vás nebudeme žádat o heslo a důrazně vás nedoporučujeme je s nikým sdílet.
+    fishbowl_created_email:
+        subject: Ahoj %name%! Vytvořili jste nové akvárium
+        title: Výborně!
+        description: 'Podívejte se na detaily svého nového akvária:'
+        info_title: Nadpis
+        info_duration: Doba trvání
+        info_description: Popis
+        info_start_date: Datum zahájení
+        info_start_time: Čas zahájení
+        info_url: Kliknutím sem získáte přístup k akváriu
+        languages:
+            es: Španělština
+            ca: Katalánština
+            en: Angličtina
+        info_language: Jazyk
+        info_invite: Odkaz na pozvání účastníků
+        delete: 'Pokud chcete tento fishbowl smazat, napište nám <a href="mailto:stooa@stooa.com?subject=Smazat událost akvária&amp;body=Prosím, smažte událost akvária s id: %id%">zde</a>'
