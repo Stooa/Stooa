@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79c5f699553a9e762858c7c0e59fa7d9",
+    "content-hash": "c65efd2c7032db5d1932dbd1939767fd",
     "packages": [
         {
             "name": "api-platform/core",
@@ -12522,16 +12522,16 @@
         },
         {
             "name": "phpstan/phpstan-webmozart-assert",
-            "version": "1.0.0",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-webmozart-assert.git",
-                "reference": "83546e171484750922686be13c041c480f5a7a48"
+                "reference": "67f970c81ae8633ad85b6cb332a64b4ec7860b74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-webmozart-assert/zipball/83546e171484750922686be13c041c480f5a7a48",
-                "reference": "83546e171484750922686be13c041c480f5a7a48",
+                "url": "https://api.github.com/repos/phpstan/phpstan-webmozart-assert/zipball/67f970c81ae8633ad85b6cb332a64b4ec7860b74",
+                "reference": "67f970c81ae8633ad85b6cb332a64b4ec7860b74",
                 "shasum": ""
             },
             "require": {
@@ -12544,7 +12544,7 @@
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "phpunit/phpunit": "^9.5",
-                "webmozart/assert": "^1.9.1"
+                "webmozart/assert": "^1.10.0"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -12569,9 +12569,9 @@
             "description": "PHPStan webmozart/assert extension",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-webmozart-assert/issues",
-                "source": "https://github.com/phpstan/phpstan-webmozart-assert/tree/1.0.0"
+                "source": "https://github.com/phpstan/phpstan-webmozart-assert/tree/1.0.8"
             },
-            "time": "2021-10-14T08:10:02+00:00"
+            "time": "2022-01-17T11:49:56+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
