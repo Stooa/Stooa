@@ -15,7 +15,8 @@
         "description": "Description (facultatif)",
         "timezone": "Fuseau horaire",
         "selectTimeZone": "Sélectionnez le fuseau horaire",
-        "advancedOptions": "Options avancées"
+        "advancedOptions": "Options avancées",
+        "introductionLabel": "Je veux commencer le bocal en donnant une introduction."
     },
     "button": {
         "createAccount": "Créez-en un !",

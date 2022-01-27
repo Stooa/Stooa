@@ -170,8 +170,7 @@ const AuthProvider = ({ children }) => {
         updateUser,
         updateLogingStatus,
         updateCreateFishbowl
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   );

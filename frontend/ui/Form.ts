@@ -15,6 +15,7 @@ import { space, media, rems } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
+  COLOR_GREEN_500,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
@@ -327,6 +328,7 @@ const TextDivider = styled.div`
 `;
 
 const SwitchStyled = styled.div`
+  display: flex;
   width: 100%;
 
   input {
@@ -340,6 +342,10 @@ const SwitchStyled = styled.div`
     left: calc(100% - 3px);
     transform: translateX(-100%);
   }
+
+  & .switch-checkbox[value='true'] + label {
+    background-color: ${COLOR_GREEN_500};
+  }
 `;
 
 const SwitchLabel = styled.label`
@@ -348,8 +354,9 @@ const SwitchLabel = styled.label`
   justify-content: space-between;
   cursor: pointer;
   width: 50px;
-  height: 30px;
-  background: grey;
+  margin-right: ${space(2)};
+  height: 26px;
+  background: ${COLOR_NEUTRO_700};
   border-radius: 50px;
   position: relative;
   transition: background-color 0.2s;
@@ -359,8 +366,8 @@ const SwitchLabel = styled.label`
     position: absolute;
     top: 3px;
     left: 3px;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 25px;
     transition: 0.2s;
     background: #fff;
