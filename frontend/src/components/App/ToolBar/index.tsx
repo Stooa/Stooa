@@ -66,7 +66,7 @@ const ToolBar: React.FC = () => {
       conferenceReady &&
       data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
     );
-  }
+  };
 
   const handleMic = () => {
     configButtonRef.current.handleShowDevices(false);

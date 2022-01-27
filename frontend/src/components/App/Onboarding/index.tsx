@@ -30,7 +30,7 @@ import OnboardingWrapper, {
 } from '@/components/App/Onboarding/styles';
 import onBoardingDataWithIntroduction from '@/components/App/Onboarding/dataWithIntroduction.json';
 import onBoardingDataWithoutIntroduction from '@/components/App/Onboarding/dataWithoutIntroduction.json';
-import { useStooa} from "@/contexts/StooaManager";
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   initialized: boolean;
@@ -70,7 +70,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
   const [active, setActive] = useState(false);
   const [alreadySeen, setAlreadySeen] = useState(false);
   const [activeTooltip, setActiveTooltip] = useState(false);
-  const { data : fishbowlData } = useStooa();
+  const { data: fishbowlData } = useStooa();
   const [data, setData] = useState([]);
   const { t } = useTranslation('on-boarding');
 
