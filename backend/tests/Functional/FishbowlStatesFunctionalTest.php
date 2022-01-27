@@ -28,7 +28,6 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
 
     private const ADMIN_PASSWORD = '$argon2id$v=19$m=65536,t=4,p=1$37ytdOiVjLdUPFfPRDALmA$xZsJ/uHJ1nTklxYMq1WrjhEPPN2E1HOtVXAyf4rTTV0';
     private User $adminUser;
-    private User $user;
     private string $adminToken;
     private string $token;
 
@@ -44,13 +43,13 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
 
         $this->adminToken = $this->logIn($this->adminUser);
 
-        $this->user = UserFactory::createOne([
+        $user = UserFactory::createOne([
             'email' => 'user@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
         ])->object();
 
-        $this->token = $this->logIn($this->user);
+        $this->token = $this->logIn($user);
     }
 
     /** @test */
@@ -253,7 +252,7 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
         return $logInResponse['token'];
     }
 
-    /*** @return array<string> */
+    /*** @return array<string, array<string, null|array<string, string>>> */
     private function callGraphqlWithToken(string $gql, string $token): array
     {
         $response = static::createClient()->request('POST', '/graphql', [
