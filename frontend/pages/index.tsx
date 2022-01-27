@@ -139,8 +139,7 @@ const Home = () => {
                 action: 'Billboard',
                 label: 'Home'
               });
-            }}
-          >
+            }}>
             <span>{t('cta')}</span>
             <ArrowRight />
           </ButtonStyledLink>
