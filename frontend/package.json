@@ -11,9 +11,9 @@
     "design-tokens": "design-tokens",
     "test": "jest --env=jsdom",
     "test-watch": "jest --watch --env=jsdom",
-    "prettify": "prettier --write **/*.{js,ts,tsx}",
-    "lint:js": "eslint components contexts types hooks layouts lib pages ui tests",
-    "lint:fix": "eslint components contexts types hooks hocs layouts lib pages types ui tests --fix",
+    "prettify": "prettier --write src tests",
+    "lint:js": "eslint src tests",
+    "lint:fix": "eslint src tests --fix",
     "test:e2e:dev": "cypress open",
     "test:e2e:run": "cypress run"
   },
