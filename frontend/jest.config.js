@@ -16,7 +16,6 @@ module.exports = {
   coverageDirectory: '.coverage',
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
-    '!**/__setups__/**',
     '!**/.coverage/**',
     '!**/.next/**',
     '!**/coverage/**',
@@ -27,25 +26,17 @@ module.exports = {
   ],
   moduleNameMapper: {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
-    '^@/jitsi/(.*)$': '<rootDir>/lib/jitsi-modules/$1',
-    '^@/graphql/(.*)$': '<rootDir>/lib/gql/$1',
-    '^@/components/(.*)': '<rootDir>/components/$1',
-    '^@/contexts/(.*)': '<rootDir>/contexts/$1',
-    '^@/layouts/(.*)': '<rootDir>/layouts/$1',
-    '^@/lib/(.*)': '<rootDir>/lib/$1',
-    '^@/hooks/(.*)': '<rootDir>/hooks/$1',
-    '^@/hocs/(.*)': '<rootDir>/hocs/$1',
-    '^@/pages/(.*)': '<rootDir>/pages/$1',
-    '^@/ui/(.*)': '<rootDir>/ui/$1',
-    '^@/app.config': '<rootDir>/app.config.ts',
-    '^@/i18n': '<rootDir>/i18n.js'
+    '^@/jitsi/(.*)$': '<rootDir>/src/lib/jitsi-modules/$1',
+    '^@/graphql/(.*)$': '<rootDir>/src/lib/gql/$1',
+    '^@/i18n': '<rootDir>/i18n.js',
+    '^@/(.*)': '<rootDir>/src/$1'
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/__setups__/fileTransformer.js'
+      '<rootDir>/tests/unit/setup/fileTransformer.js'
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['./__setups__/jest.setup.js', './__setups__/canvas.js']
+  setupFilesAfterEnv: ['./tests/unit/setup/jest.setup.js', './tests/unit/setup/canvas.js']
 };
