@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useEffect, useState, useRef } from 'react';
+import { useContext, createContext, useEffect, useState, useRef, FunctionComponent } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -24,11 +24,20 @@ import useEventListener from '@/hooks/useEventListener';
 
 import { toast } from 'react-toastify';
 
+interface StooaContextInterface {
+  conferenceReady: boolean;
+  conferenceStatus: IConferenceStatus;
+  data: any;
+  isModerator: boolean;
+  onIntroduction: boolean;
+  timeStatus: ITimeStatus;
+}
+
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-const StooaContext = createContext(undefined);
+const StooaContext = createContext<StooaContextInterface>(undefined!);
 
-const StooaProvider = ({ data, isModerator, children }) => {
+const StooaProvider: FunctionComponent<StooaContextInterface> = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);

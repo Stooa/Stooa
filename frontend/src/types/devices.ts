@@ -20,9 +20,9 @@ export interface DevicesCtx {
   selectAudioInputDevice: (deviceId: string) => void;
   selectVideoDevice: (deviceId: string) => void;
   setDevices: Dispatch<SetStateAction<Devices>>;
-  audioOutputDevice: MediaDeviceInfo;
-  audioInputDevice: MediaDeviceInfo;
-  videoDevice: MediaDeviceInfo;
+  audioOutputDevice: MediaDeviceInfo | null;
+  audioInputDevice: MediaDeviceInfo | null;
+  videoDevice: MediaDeviceInfo | null;
   devices: Devices;
 }
 

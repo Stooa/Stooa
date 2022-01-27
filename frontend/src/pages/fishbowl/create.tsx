@@ -22,7 +22,7 @@ const Create = () => {
 
   useEffect(() => {
     dispatch({
-      type: 'FISHBOWL_STATUS',
+      type: 'RESET',
       fishbowlReady: false,
       fishbowlStarted: false,
       isGuest: false,

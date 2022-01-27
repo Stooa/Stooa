@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, Dispatch, FunctionComponent, Reducer, useContext, useReducer } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-const reducer = (state, action) => {
+const reducer = (state: StateInterface, action: StateActions) => {
   const allowedActions = [
     'FISHBOWL_STARTED',
     'FISHBOWL_READY',
@@ -31,6 +31,56 @@ const reducer = (state, action) => {
   return state;
 };
 
+interface StateProviderInterface {
+  updateState?: StateInterface;
+}
+
+interface StateInterface {
+  fishbowlReady: boolean;
+  fishbowlStarted: boolean;
+  isGuest: boolean;
+  prejoin: boolean;
+  conferenceStatus: IConferenceStatus;
+}
+
+interface FishbowlStatusAction {
+  conferenceStatus: IConferenceStatus;
+  type: 'FISHBOWL_STATUS';
+}
+
+interface FishbowlReadyAction {
+  fishbowlReady: boolean;
+  type: 'FISHBOWL_READY';
+}
+
+interface FishbowlStartedAction {
+  fishbowlStarted: boolean;
+  type: 'FISHBOWL_STARTED';
+}
+
+interface JoinGuestAction {
+  isGuest: boolean;
+  prejoin: boolean;
+  type: 'JOIN_GUEST';
+}
+
+interface JoinUserAction {
+  prejoin: boolean;
+  type: 'JOIN_USER';
+}
+
+interface ResetAction {
+  fishbowlReady: boolean;
+  fishbowlStarted: boolean;
+  isGuest: boolean;
+  prejoin: boolean;
+  conferenceStatus: IConferenceStatus;
+  type: 'RESET';
+}
+
+type StateActions = FishbowlStatusAction | FishbowlReadyAction | FishbowlStartedAction | JoinGuestAction | JoinUserAction | ResetAction;
+type StateContextInterface = [StateInterface, Dispatch<StateActions>];
+
 const initialState = {
   fishbowlReady: false,
   fishbowlStarted: false,
@@ -39,10 +89,10 @@ const initialState = {
   conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
-const StateContext = createContext(undefined);
+const StateContext = createContext<StateContextInterface>(undefined!);
 
-const StateProvider = ({ updateState = {}, children }) => (
-  <StateContext.Provider value={useReducer(reducer, { ...initialState, ...updateState })}>
+const StateProvider: FunctionComponent<StateProviderInterface> = ({ updateState = {}, children }) => (
+  <StateContext.Provider value={useReducer<Reducer<StateInterface, StateActions>>(reducer, { ...initialState, ...updateState })}>
     {children}
   </StateContext.Provider>
 );

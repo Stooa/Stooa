@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import Router from 'next/router';
 
 import 'react-datepicker/dist/react-datepicker.min.css';
@@ -21,7 +21,7 @@ import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp: FunctionComponent = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
 
   useEffect(() => {

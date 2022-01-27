@@ -7,16 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState, useEffect, FunctionComponent } from 'react';
 
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
 import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
 
-const DevicesContext = createContext<DevicesCtx>(undefined);
+const DevicesContext = createContext<DevicesCtx>(undefined!);
 
-const DevicesProvider = ({ children }) => {
+const DevicesProvider: FunctionComponent<DevicesCtx> = ({ children }) => {
   const [devices, setDevices] = useState<Devices>({
     audioOutputDevices: [],
     audioInputDevices: [],
@@ -68,7 +68,7 @@ const DevicesProvider = ({ children }) => {
   const selectAudioOutputDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.audioOutputDevices);
 
-    if (null === device) {
+    if (undefined === device) {
       return;
     }
 
@@ -79,7 +79,7 @@ const DevicesProvider = ({ children }) => {
   const selectAudioInputDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.audioInputDevices);
 
-    if (null === device) {
+    if (undefined === device) {
       return;
     }
 
@@ -90,7 +90,7 @@ const DevicesProvider = ({ children }) => {
   const selectVideoDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.videoDevices);
 
-    if (null === device) {
+    if (undefined === device) {
       return;
     }
 
@@ -150,6 +150,6 @@ const DevicesProvider = ({ children }) => {
   );
 };
 
-const useDevices = (): DevicesCtx => useContext<DevicesCtx>(DevicesContext);
+const useDevices = () => useContext(DevicesContext);
 
 export { DevicesProvider, useDevices };

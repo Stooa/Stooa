@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, FunctionComponent } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
@@ -39,6 +39,7 @@ import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
+import { User } from '@/types/user';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -57,7 +58,7 @@ const unauthenticatedRoutes = [
 
 const voidFunction = () => console.log('[STOOA] Context not initialized yet');
 
-const AuthContext = createContext<Auth | null>({
+const AuthContext = createContext<Auth>({
   isAuthenticated: false,
   user: {},
   login: () => Promise.resolve(),
@@ -70,10 +71,10 @@ const AuthContext = createContext<Auth | null>({
   updateCreateFishbowl: voidFunction
 });
 
-const AuthProvider = ({ children }) => {
+const AuthProvider: FunctionComponent = ({ children }) => {
   const router = useRouter();
   const { lang } = useTranslation();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
@@ -145,9 +146,9 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const updateUser = user => setUser(user);
+  const updateUser = (user: User) => setUser(user);
   const updateLogingStatus = () => setLoginStatus(null);
-  const updateCreateFishbowl = val => setCreateFishbowl(val || false);
+  const updateCreateFishbowl = (createFishbowl: boolean) => setCreateFishbowl(createFishbowl || false);
 
   if (
     createFishbowl &&
@@ -179,7 +180,7 @@ const AuthProvider = ({ children }) => {
 
 const useAuth = () => useContext(AuthContext);
 
-const ProtectRoute = ({ children }) => {
+const ProtectRoute: FunctionComponent = ({ children }) => {
   const router = useRouter();
   const { lang } = useTranslation();
   const { isAuthenticated, loading } = useAuth();
