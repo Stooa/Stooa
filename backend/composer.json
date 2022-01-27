@@ -70,7 +70,7 @@
         "phpstan/phpstan-phpunit": "1.0.0",
         "phpstan/phpstan-symfony": "1.0.0",
         "phpstan/phpstan-webmozart-assert": "1.0.0",
-        "phpunit/phpunit": "9.5.10",
+        "phpunit/phpunit": "9.5.13",
         "psalm/plugin-phpunit": "0.16.1",
         "psalm/plugin-symfony": "3.0.4",
         "runroom-packages/testing": "0.14.1",
