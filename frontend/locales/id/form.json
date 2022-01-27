@@ -1,0 +1,43 @@
+{
+    "firstname": "Nama Depan",
+    "email": "Surel",
+    "password": "Kata Sandi",
+    "name": "Nama kamu",
+    "haveAccount": "Sudah punya akun?",
+    "fishbowl": {
+        "day": "Tanggal",
+        "selectDay": "Pilih hari",
+        "time": "Mulai pada",
+        "selectTime": "Pilih waktu",
+        "hours": "jam",
+        "minutes": "men",
+        "duration": "Durasi",
+        "description": "Deskripsi (opsional)",
+        "timezone": "Zona Waktu",
+        "selectTimeZone": "Zona Waktu",
+        "selectDuration": "Durasi"
+    },
+    "validation": {
+        "email": "Alamat surel tidak valid",
+        "passwordLength": "Kata sandi harus mempunyai 6 karakter atau lebih",
+        "terms": "Kamu harus menyetujui ketentuan layanan",
+        "url": "Ini bukanlah URL yang valid",
+        "twitter": "Nama pengguna Twitter harus mulai dengan @",
+        "required": "Bagian ini diperlukan",
+        "date": "Format tanggal tidak valid: hh/bb/tttt",
+        "equalPassword": "Dua kata sandi tersebut harus sama"
+    },
+    "button": {
+        "login": "Masuk",
+        "createFishbowl": "Buat fishbowl",
+        "modifyFishbowl": "Sunting fishbowl",
+        "recoverPassword": "Kirim tautan atur ulang",
+        "register": "Selanjutnya",
+        "createAccount": "Buat satu!",
+        "enterFishbowl": "Masuk",
+        "save": "Simpan",
+        "changePassword": "Ubah kata sandi"
+    },
+    "lastname": "Nama Belakang",
+    "noAccount": "Tidak ada akun?"
+}

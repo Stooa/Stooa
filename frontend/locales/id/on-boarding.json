@@ -1,0 +1,26 @@
+{
+    "skip": "Lewati ke fishbowl",
+    "done": "Saya sudah siap!",
+    "new": {
+        "title": "Baru di sini? Jangan khawatir!",
+        "text": "<p>Di fishbowl, akan ada 5 kursi yang tersedia di mana pembicaraan terjadi. Jika ada kursi kosong, Anda bisa mengikuti pembicaraan kapan saja. Hanya satu peraturan: <strong>harus selalu ada kursi yang tersedia.</strong></p><p>Jika semua 5 kursi terisi dan kamu sudah berpartisipasi, tinggalkan kursimu sehingga yang lain bisa berkontribusi juga.</p>"
+    },
+    "hostIntroduction": {
+        "title": "Apa sekarang?",
+        "preTitle": "Pengenalan hos",
+        "participantText": "<p>Ketika fishbowl dimulai, <strong>hos bisa mengenalkan dirinya sendiri.</strong> Setelah itu, seluruh partisipan akan mendapatkan izin untuk bergabung ke pembicaraan.</p>",
+        "hostText": "<p>Ketika kamu memulai fishbowl, <strong>kamu bisa memulai dengan pengenalan.</strong> Kamera dan mikrofon akan nyala untuk kamu saja. Ketika kamu sudah selesai, <strong>jangan lupa memperbolehkan peserta untuk bergabung ke pembicaraan.</strong></p>"
+    },
+    "appControls": {
+        "title": "Bagaimana saya berinteraksi?",
+        "preTitle": "Kontrol Dalam Aplikasi",
+        "text": "<div><ul><li><strong>Gabung pembicaraan</strong> dan <strong>keluar dari pembicaraan</strong> menggunakan tombol hijau dan merah.</li><li>Kontrol mikrofon menggunakan tombol <strong>Tidak bisukan/Bisukan</strong>.</li><li>Terhubung <strong>dengan peserta</strong> dengan mengakses profil Linkedin dan Twitter mereke (jika mereka menyediakannya).</li></ul></div>"
+    },
+    "end": {
+        "title": "Semua hal yang bagus ada akhirnya...",
+        "preTitle": "Akhir dari sebuah Fishbowl",
+        "participantText": "<p>Kamu akan melihat di kanan atas ketika fishbowl <strong>tinggal 1 menit lagi.</strong> Ketika ini terjadi, <strong>akses bergabung ke pembicaraan akan ditutup untuk seluruh peserta</strong> kecuali hos.</p>",
+        "hostText": "<p>Kamu akan melihat sebuah notifikasi di kanan atas ketika <strong> tinggal 1 menit </strong> tersisa untuk fishbowl. Ketika itu terjadi, <strong>akses bergabung ke pembicaraan akan ditutup</strong> untuk semua peserta kecuali kamu. Merupakan waktunya untuk menutup fishbowl dan ucapkan selamat tinggal kepada partisipan.</p>"
+    },
+    "tooltip": "👆🏼 Kamu bisa memeriksa panduan pengantar di sini kapan saja."
+}
