@@ -25,7 +25,7 @@
     "node": ">=17"
   },
   "dependencies": {
-    "@apollo/client": "3.3.18",
+    "@apollo/client": "3.3.21",
     "@types/node": "15.3.0",
     "@types/react": "17.0.38",
     "@types/styled-components": "5.1.9",
