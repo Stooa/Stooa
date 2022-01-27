@@ -22,13 +22,16 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 
-const loading = { loading: () => <div /> };
-const Layout = dynamic(import('@/layouts/App'), loading);
-const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), loading);
-const Fishbowl = dynamic(import('@/components/App/Fishbowl'), loading);
-const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), loading);
-const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), loading);
-const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), loading);
+const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
+const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
+const Fishbowl = dynamic(import('@/components/App/Fishbowl'), { loading: () => <div /> });
+const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
+  loading: () => <div />
+});
+const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
+const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
+  loading: () => <div />
+});
 
 const Page = () => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
