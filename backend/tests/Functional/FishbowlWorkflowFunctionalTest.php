@@ -105,7 +105,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         parent::setUp();
 
-        $this->createFishbowlWithStatus(Fishbowl::STATUS_INTRODUCTION, $this->adminUser);
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_INTRODUCTION, $this->adminUser, true);
 
         $gql = <<<GQL
           mutation RunFishbowl(\$slug: String!) {
@@ -116,6 +116,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
             }
           }
         GQL;
+
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
         $this->assertNull($graphqlResponse['runFishbowl']['fishbowl']);
     }
@@ -127,7 +128,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         parent::setUp();
 
-        $this->createFishbowlWithStatus(Fishbowl::STATUS_INTRODUCTION, $this->adminUser);
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_INTRODUCTION, $this->adminUser, true);
 
         $gql = <<<GQL
           mutation RunFishbowl(\$slug: String!) {
@@ -235,6 +236,54 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         $this->assertSame(Fishbowl::STATUS_RUNNING, $graphqlResponse['noIntroRunFishbowl']['fishbowl']['currentStatus']);
     }
 
+    /** @test */
+    public function itCantRunFishbowlWithoutIntroduction(): void
+    {
+        self::bootKernel();
+
+        parent::setUp();
+
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_NOT_STARTED, $this->adminUser);
+
+        $gql = <<<GQL
+          mutation RunFishbowl(\$slug: String!) {
+            runFishbowl(input: {slug: \$slug}) {
+              fishbowl {
+                currentStatus
+              }
+            }
+          }
+        GQL;
+
+        $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
+
+        $this->assertNull($graphqlResponse['runFishbowl']['fishbowl']);
+    }
+
+    /** @test */
+    public function itCantRunWithoutIntroWhenFishbowlHasIntroduction(): void
+    {
+        self::bootKernel();
+
+        parent::setUp();
+
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_NOT_STARTED, $this->adminUser, true);
+
+        $gql = <<<GQL
+          mutation NoIntroRunFishbowl(\$slug: String!) {
+            noIntroRunFishbowl(input: {slug: \$slug}) {
+              fishbowl {
+                currentStatus
+              }
+            }
+          }
+        GQL;
+
+        $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
+
+        $this->assertNull($graphqlResponse['noIntroRunFishbowl']['fishbowl']);
+    }
+
     private function logIn(User $user): string
     {
         $response = static::createClient()->request('POST', '/login', ['json' => [
@@ -272,7 +321,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         return $graphqlResponse['data'];
     }
 
-    private function createFishbowlWithStatus(string $status, User $user): void
+    private function createFishbowlWithStatus(string $status, User $user, bool $hasIntroduction = false): void
     {
         FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
@@ -281,6 +330,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
             'currentStatus' => $status,
             'slug' => 'fishbowl-slug',
             'host' => $user,
+            'hasIntroduction' => $hasIntroduction,
         ]);
     }
 }

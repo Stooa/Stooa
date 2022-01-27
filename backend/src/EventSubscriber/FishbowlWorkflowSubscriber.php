@@ -41,7 +41,7 @@ class FishbowlWorkflowSubscriber implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'workflow.fishbowl.guard' => ['guardFishbowl'],

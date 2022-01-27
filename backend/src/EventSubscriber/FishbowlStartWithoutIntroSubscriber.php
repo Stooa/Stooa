@@ -29,7 +29,7 @@ class FishbowlStartWithoutIntroSubscriber implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
