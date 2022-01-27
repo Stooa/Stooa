@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import {FC, useState} from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -21,7 +21,7 @@ const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
 const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 
-const Fishbowl = () => {
+const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
   const { isModerator } = useStooa();
