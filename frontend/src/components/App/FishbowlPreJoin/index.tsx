@@ -101,6 +101,8 @@ const FishbowlPreJoin: React.FC = () => {
               .catch(error => {
                 console.log('[STOOA] Problem with auto play', error);
               });
+          } else {
+            disposeLocalTracks();
           }
         }
       }
