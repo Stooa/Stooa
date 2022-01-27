@@ -32,7 +32,7 @@
     "@types/yup": "0.29.13",
     "axios": "0.24.0",
     "babel-plugin-styled-components": "1.12.1",
-    "countries-and-timezones": "2.4.0",
+    "countries-and-timezones": "2.5.0",
     "file-loader": "6.2.0",
     "formik": "2.2.9",
     "graphql": "15.5.3",
