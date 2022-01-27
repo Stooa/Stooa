@@ -1,0 +1,48 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+# This workflow ensures that all the Javascript code is linted and styled correctly.
+
+name: Frontend quality assurance
+
+on:
+    pull_request:
+
+    push:
+        branches:
+            - main
+
+jobs:
+    frontend-qa:
+        name: Node ${{ matrix.node }}
+
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                working-directory: frontend
+
+        strategy:
+            matrix:
+                node: ['17.4']
+
+        steps:
+            - name: Checkout the repository to Github workspace
+              uses: actions/checkout@v2
+
+            - name: Setup the Node environment
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node }}
+
+            - name: Install all NPM dependencies
+              uses: bahmutov/npm-install@v1
+              with:
+                  working-directory: frontend
+
+            - name: Run Typescript compiler
+              run: npx tsc --pretty false
