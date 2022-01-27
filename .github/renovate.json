@@ -4,6 +4,7 @@
     ":automergePatch",
     ":automergePr"
   ],
+  "labels": ["dependencies"],
   "branchPrefix": "deps-",
   "packageRules": [
     {
