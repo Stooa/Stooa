@@ -15,9 +15,11 @@ namespace App\EventSubscriber;
 
 use App\Entity\Fishbowl;
 use App\Entity\User;
+use App\Model\ChangePasswordInput;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Workflow\Event\GuardEvent;
+use Webmozart\Assert\Assert;
 
 class FishbowlWorkflowSubscriber implements EventSubscriberInterface
 {
@@ -30,13 +32,13 @@ class FishbowlWorkflowSubscriber implements EventSubscriberInterface
 
     public function guardFishbowl(GuardEvent $event): void
     {
-        /** @var Fishbowl $fishbowl */
         $fishbowl = $event->getSubject();
 
-        /** @var User $user */
+        Assert::isInstanceOf($fishbowl, Fishbowl::class);
+
         $user = $this->security->getUser();
 
-        if ($fishbowl->getHost() !== $user) {
+        if ($user !== null && $fishbowl->getHost() !== $user) {
             $event->setBlocked(true);
         }
     }
