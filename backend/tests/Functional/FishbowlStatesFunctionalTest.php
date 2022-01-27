@@ -61,14 +61,7 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
 
         parent::setUp();
 
-        FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
-            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'slug' => 'fishbowl-slug',
-            'host' => $this->adminUser,
-        ]);
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_NOT_STARTED);
 
         $gql = <<<GQL
           mutation IntroduceFishbowl(\$slug: String!) {
@@ -104,14 +97,7 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
 
         parent::setUp();
 
-        FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
-            'currentStatus' => Fishbowl::STATUS_INTRODUCTION,
-            'slug' => 'fishbowl-slug',
-            'host' => $this->adminUser,
-        ]);
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_INTRODUCTION);
 
         $gql = <<<GQL
           mutation RunFishbowl(\$slug: String!) {
@@ -147,14 +133,7 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
 
         parent::setUp();
 
-        FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
-            'currentStatus' => Fishbowl::STATUS_RUNNING,
-            'slug' => 'fishbowl-slug',
-            'host' => $this->adminUser,
-        ]);
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_RUNNING);
 
         $gql = <<<GQL
           mutation FinishFishbowl(\$slug: String!) {
@@ -184,20 +163,13 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
     }
 
     /** @test */
-    public function itRunsWihthoutIntroduction(): void
+    public function itRunsWithoutIntroduction(): void
     {
         self::bootKernel();
 
         parent::setUp();
 
-        FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
-            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'slug' => 'fishbowl-slug',
-            'host' => $this->adminUser,
-        ]);
+        $this->createFishbowlWithStatus(Fishbowl::STATUS_NOT_STARTED);
 
         $gql = <<<GQL
           mutation NoIntroRunFishbowl(\$slug: String!) {
@@ -224,5 +196,17 @@ class FishbowlStatesFunctionalTest extends ApiTestCase
         $this->assertNotEmpty($graphqlResponse['data']);
 
         $this->assertSame(Fishbowl::STATUS_RUNNING, $graphqlResponse['data']['noIntroRunFishbowl']['fishbowl']['currentStatus']);
+    }
+
+    private function createFishbowlWithStatus(string $status): void
+    {
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
+            'currentStatus' => $status,
+            'slug' => 'fishbowl-slug',
+            'host' => $this->adminUser,
+        ]);
     }
 }
