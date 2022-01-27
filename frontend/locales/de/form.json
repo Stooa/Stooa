@@ -17,7 +17,7 @@
         "introductionLabel": "Ich möchte das Fishbowl mit einer Einführung beginnen.",
         "minutes": "Min.",
         "duration": "Dauer",
-        "selectDuration": "Wählen Sie die Dauer",
+        "selectDuration": "Dauer",
         "description": "Beschreibung (optional)",
         "timezone": "Zeitzone",
         "selectTimeZone": "Zeitzone",
@@ -29,7 +29,6 @@
         "advancedOptions": "Erweiterte optionen"
     },
     "button": {
-        "title": "Ungültiger titel. Bitte fügen Sie ein Gesprächsthema ein",
         "login": "Anmelden",
         "register": "Nächste",
         "createAccount": "Erstellen Sie eines!",

@@ -1,0 +1,10 @@
+{
+    "pageTitle": "Halaman galat",
+    "title": "Halaman galat",
+    "description": "Mohon <a>kirim surel kepada saya</a> jika kamu pikir sesuatu rusak.",
+    "404": {
+        "pageTitle": "404",
+        "title": "Kami sepertinya tidak bisa mencari apa pun (atau siapa pun 👀) di sini.",
+        "text": "Berikut merupakan beberapa tautan yang berguna sebagai gantinya:"
+    }
+}

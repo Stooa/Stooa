@@ -1,0 +1,28 @@
+{
+    "title": "Alat fishbowl daring",
+    "cta": "Buat sebuah fishbowl yang gratis",
+    "definition": {
+        "title": "Apa itu fishbowl?",
+        "description": "<p>Fishbowl adalah <strong>dinamika kelompok</strong> yang memfasilitasi pembicaraan, debat, dan jenis aktivitas apa pun yang <strong>partisipasi sangat penting untuk pengembangannya</strong>.</p><p>Ini adalah metode dialog yang ideal untuk komunitas, lingkungan pendidikan, atau perusahaan yang ingin meningkatkan pengalaman karyawan mereka.</p>"
+    },
+    "keybenefits": {
+        "second": {
+            "title": "Fasilitas otomatis dan kelancaran",
+            "description": "Pembicaraan terjadi antara peserta secara spontan tanpa harus ada moderator. Alatnya beradaptasi dengan metode dan memandu pengguna, menunjukkan waktu dan langkah yang harus diikuti."
+        },
+        "third": {
+            "title": "Berbagi pengetahuan",
+            "description": "Opini partisipan muncul seiring pembicaraan berjalan dan topik yang paling menarik digali lebih dalam dari sudut pandang yang berbeda."
+        },
+        "fourth": {
+            "title": "Koneksi informal",
+            "description": "Peserta bisa membagikan pengalaman, bertemu dengan partisipan lainnya, dan buat jaringan kontak baik informal ataupun profesional."
+        },
+        "first": {
+            "title": "Partisipasi lebih banyak",
+            "description": "Semua partisipan merasa terlibat, menjaga perhatian, dan bisa masuk dan keluar dari fishbowl sesuai keinginan mereka untuk masuk ke pembicaraan. Hierarki dihapuskan dan tingkat keterlibatan partisipan meningkat."
+        }
+    },
+    "banner": "Buat aktivitas fishbowl gratismu dan undang partisipan. Mulailah pembicaraan!",
+    "description": "Stooa memungkinkan pembicaraan yang lancar dan partisipatif dengan fasilitas otomatis yang berdasarkan metode fishbowl."
+}

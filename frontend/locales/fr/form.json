@@ -11,10 +11,10 @@
         "hours": "h",
         "minutes": "min",
         "duration": "Durée",
-        "selectDuration": "Sélectionnez la durée",
+        "selectDuration": "Durée",
         "description": "Description (facultatif)",
         "timezone": "Fuseau horaire",
-        "selectTimeZone": "Sélectionnez le fuseau horaire",
+        "selectTimeZone": "Fuseau horaire",
         "advancedOptions": "Options avancées",
         "introductionLabel": "Je veux commencer le bocal en donnant une introduction."
     },

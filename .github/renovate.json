@@ -1,0 +1,39 @@
+{
+  "extends": [
+    "config:base",
+    ":automergePatch",
+    ":automergePr"
+  ],
+  "labels": ["dependencies"],
+  "branchPrefix": "deps-",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["sonata-project/"],
+      "groupName": "sonata-project"
+    },
+    {
+      "matchPackagePatterns": ["psalm"],
+      "groupName": "psalm"
+    },
+    {
+      "matchPackagePatterns": ["phpstan"],
+      "groupName": "phpstan"
+    },
+    {
+      "matchPackagePatterns": ["eslint"],
+      "groupName": "eslint"
+    },
+    {
+      "matchPackagePatterns": ["stylelint"],
+      "groupName": "stylelint"
+    },
+    {
+      "matchPackagePatterns": ["doctrine/"],
+      "groupName": "doctrine"
+    },
+    {
+      "matchPackagePatterns": ["runroom"],
+      "groupName": "runroom"
+    }
+  ]
+}
