@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps, Field } from 'formik';
+import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import countriesAndTimezones from 'countries-and-timezones';
 
@@ -191,9 +191,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             </option>
           ))}
         </Select>
-        <div>
-          <Switch label="idk" name="hasIntroduction" />
-        </div>
+        <Switch label={t('fishbowl.introductionLabel')} name="hasIntroduction" />
       </fieldset>
       <fieldset>
         <SubmitBtn

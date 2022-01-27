@@ -16,6 +16,7 @@
         "language": "Language",
         "selectLanguageLabel": "Select language",
         "hours": "h",
+        "introductionLabel": "I want to start the fishbowl giving an introduction.",
         "minutes": "m",
         "duration": "Duration",
         "selectDuration": "Duration",

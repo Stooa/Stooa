@@ -22,7 +22,8 @@
         "description": "Descripción (opcional)",
         "timezone": "Zona horaria",
         "selectTimeZone": "Selecciona zona horaria",
-        "advancedOptions": "Opciones avanzadas"
+        "advancedOptions": "Opciones avanzadas",
+        "introductionLabel": "Quiero comenzar el fishbowl con una introducción."
     },
     "button": {
         "login": "Entra",

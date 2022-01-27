@@ -32,7 +32,7 @@ const Switch: React.FC<Props> = props => {
       <SwitchLabel htmlFor={props.id || props.name}>
         <span className={`switch-button`} />
       </SwitchLabel>
-      {props.label && <span className="label-text">Quiero intro wacho!</span>}
+      {props.label && <span className="label-text">{props.label}</span>}
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
     </SwitchStyled>
   );
