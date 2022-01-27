@@ -64,7 +64,7 @@
         "doctrine/data-fixtures": "1.5.2",
         "doctrine/doctrine-fixtures-bundle": "3.4.1",
         "ergebnis/composer-normalize": "2.15.0",
-        "friendsofphp/php-cs-fixer": "3.2.1",
+        "friendsofphp/php-cs-fixer": "3.5.0",
         "phpstan/phpstan": "1.4.2",
         "phpstan/phpstan-doctrine": "1.2.7",
         "phpstan/phpstan-phpunit": "1.0.0",
