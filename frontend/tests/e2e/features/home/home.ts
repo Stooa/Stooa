@@ -14,3 +14,9 @@ Then('sees the register form', () => {
 
   cy.screenshot();
 });
+
+Then('sees the create fishbowl form', () => {
+  cy.findByRole('heading', { name: 'Create a free fishbowl' });
+
+  cy.screenshot();
+});
