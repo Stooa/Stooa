@@ -21,7 +21,7 @@ use App\Factory\UserFactory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class FishbowlStatesFunctionalTest extends ApiTestCase
+class FishbowlWorkflowFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;
