@@ -1,0 +1,9 @@
+fishbowl:
+    overlap: Fishbowl tumpang-tindih dengan yang lain.
+    future: Tanggal mulai fishbowl berada di lampau.
+user:
+    valid_token: Token tidak valid atau sudah kadaluwarsa.
+    email: Sudah ada pengguna dengan surel yang dimasukkan.
+    participant: Partisipan harus antara Peserta atau Tamu
+    same_user: Kata sandi tidak sesuai dengan kata sandi kamu saat ini.
+    password: Kata sandi saat ini tidak sesuai

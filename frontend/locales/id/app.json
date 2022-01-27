@@ -1,0 +1,12 @@
+{
+    "notification": {
+        "emptySeats": "Fishbowl-nya penuh ⚠️  Jika kamu sudah berpartisipasi, silakan bebaskan kursimu.",
+        "tenMinutesLeft": "10 menit tersisa untuk menyelesaikan fishbowl-nya 👀",
+        "oneMinuteLeft": "1 menit tersisa untuk menyelesaikan fishbowl-nya 🚨",
+        "joinAfterIntroduction": "⚠️  Kamu bisa gabung pembicaraan setelah pengenalan"
+    },
+    "timeup": "Selesai!",
+    "timeleft": "untuk selesai",
+    "seatAvailable": "Kursi tersedia",
+    "loading": "Gabung fishbowl"
+}

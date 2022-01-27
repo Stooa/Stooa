@@ -1,0 +1,33 @@
+emails:
+    welcome_email:
+        delete: Jika Anda ingin menghapus akun Stooa kamu, mohon kirim surel ke <a href="mailto:stooa@stooa.com?subject=Delete Stooa account">sini</a>
+        title: Selamat datang di Stooa
+        subject: Selamat datang di Stooa!
+        cta: Buat sebuah fishbowl sekarang
+        subtitle: Stooa adalah alat unconference daring. Semuanya punya suara. Gabung, dengar, dan bagikan pengetahuanmu dengan yang lainnya.
+    from: Stooa
+    reset_password_email:
+        button_text: Atur ulang kata sandimu
+        information_help_text: JIka ini bukan akunmu, kamu bisa menghapus surelmu dari sini. <br>Mohon untuk tidak membalas surel ini dengan kata sandimu. Kami tidak akan pernah meminta kata sandimu dan kami sangat menyarankanmu untuk tidak membagikannya dengan siapa pun.
+        title: Halo %name%!
+        description: 'Untuk mengatur ulang kata sandimu, mohon kunjungi tautan berikut:'
+        expire_text: Ingatlah bahwa tautan ini akan kadaluwarsa dalam 1 jam.
+        subject: Halo %name%! Kita mendapatkan permintaan untuk mengatur ulang kata sandi Stooa milikmu
+        information_text: Jika kamu mengabaikan pesan ini, kata sandimu tidak akan diubah.<br>Jika kamu tidak meminta sebuah atur ulang kata sandi, <a href="mailto:%email%">beritahu kami</a>.
+    fishbowl_created_email:
+        title: Bagus sekali!
+        info_title: Judul
+        info_duration: Durasi
+        info_description: Deskripsi
+        info_language: Bahasa
+        info_start_time: Waktu mulai
+        info_invite: Tautan untuk mengundang peserta
+        info_url: Klik di sini untuk mengakses fishbowl-mu
+        info_start_date: Tanggal mulai
+        languages:
+            en: Inggris
+            es: Spanyol
+            ca: Katala
+        subject: Halo %name%! Kamu telah membuat sebuah fishbowl yang baru
+        delete: 'Jika kamu ingin menghapus fishbowl ini, mohon kirim surel ke <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id: %id%">sini</a>'
+        description: 'Periksa detail dari fishbowl-mu yang baru:'
