@@ -7,7 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+
+Given('a logged user', () => {
+  cy.login();
+});
+
+Given('a non logged user', () => {
+  cy.logout();
+});
 
 When('navigates to {string}', (url = '') => {
   cy.visit(url, { timeout: 10000 });
