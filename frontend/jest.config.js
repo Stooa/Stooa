@@ -26,18 +26,10 @@ module.exports = {
   ],
   moduleNameMapper: {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
-    '^@/jitsi/(.*)$': '<rootDir>/lib/jitsi-modules/$1',
-    '^@/graphql/(.*)$': '<rootDir>/lib/gql/$1',
-    '^@/components/(.*)': '<rootDir>/components/$1',
-    '^@/contexts/(.*)': '<rootDir>/contexts/$1',
-    '^@/layouts/(.*)': '<rootDir>/layouts/$1',
-    '^@/lib/(.*)': '<rootDir>/lib/$1',
-    '^@/hooks/(.*)': '<rootDir>/hooks/$1',
-    '^@/hocs/(.*)': '<rootDir>/hocs/$1',
-    '^@/pages/(.*)': '<rootDir>/pages/$1',
-    '^@/ui/(.*)': '<rootDir>/ui/$1',
-    '^@/app.config': '<rootDir>/app.config.ts',
-    '^@/i18n': '<rootDir>/i18n.js'
+    '^@/jitsi/(.*)$': '<rootDir>/src/lib/jitsi-modules/$1',
+    '^@/graphql/(.*)$': '<rootDir>/src/lib/gql/$1',
+    '^@/i18n': '<rootDir>/i18n.js',
+    '^@/(.*)': '<rootDir>/src/$1'
   },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest'],

@@ -12,5 +12,3 @@
 *.min.css
 *.module.css
 next-env.d.ts
-next.config.js
-typings.d.ts
