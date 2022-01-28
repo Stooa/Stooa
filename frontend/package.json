@@ -35,7 +35,7 @@
     "countries-and-timezones": "2.5.0",
     "file-loader": "6.2.0",
     "formik": "2.2.9",
-    "graphql": "15.8.0",
+    "graphql": "16.3.0",
     "gsap": "3.9.1",
     "hoist-non-react-statics": "3.3.2",
     "js-cookie": "2.2.1",
