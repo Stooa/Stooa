@@ -16,13 +16,15 @@ namespace App\EventSubscriber;
 use App\Entity\Fishbowl;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
+use Webmozart\Assert\Assert;
 
 class FishbowlStartWithoutIntroSubscriber implements EventSubscriberInterface
 {
     public function guardFishbowl(GuardEvent $event): void
     {
-        /** @var Fishbowl $fishbowl */
         $fishbowl = $event->getSubject();
+
+        Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
         if ($fishbowl->getHasIntroduction()) {
             $event->setBlocked(true);
