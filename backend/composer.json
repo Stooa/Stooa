@@ -111,6 +111,7 @@
         }
     },
     "scripts": {
+        "lint-container": "bin/console lint:container",
         "lint-twig": "bin/console lint:twig templates",
         "lint-yaml": "bin/console lint:yaml config src translations --parse-tags",
         "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
