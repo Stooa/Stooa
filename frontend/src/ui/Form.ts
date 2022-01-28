@@ -328,7 +328,8 @@ const TextDivider = styled.div`
 `;
 
 const SwitchStyled = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
   width: 100%;
 
   input {
