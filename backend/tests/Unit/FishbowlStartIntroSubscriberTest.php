@@ -50,7 +50,7 @@ class FishbowlStartIntroSubscriberTest extends TestCase
     public function itGetSubscribedEvents(): void
     {
         $this->assertSame([
-                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl']
+                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
             ],
             $this->subscriber::getSubscribedEvents()
         );
