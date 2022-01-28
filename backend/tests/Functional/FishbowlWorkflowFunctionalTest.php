@@ -72,7 +72,11 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         GQL;
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
-        $this->assertNull($graphqlResponse['introduceFishbowl']['fishbowl']);
+
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertNull($graphqlResponse['data']['introduceFishbowl']['fishbowl']);
     }
 
     /** @test */
@@ -95,7 +99,11 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         GQL;
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
-        $this->assertSame(Fishbowl::STATUS_INTRODUCTION, $graphqlResponse['introduceFishbowl']['fishbowl']['currentStatus']);
+
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertSame(Fishbowl::STATUS_INTRODUCTION, $graphqlResponse['data']['introduceFishbowl']['fishbowl']['currentStatus']);
     }
 
     /** @test */
@@ -118,7 +126,11 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         GQL;
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
-        $this->assertNull($graphqlResponse['runFishbowl']['fishbowl']);
+
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertNull($graphqlResponse['data']['runFishbowl']['fishbowl']);
     }
 
     /** @test */
@@ -141,7 +153,10 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         GQL;
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
-        $this->assertSame(Fishbowl::STATUS_RUNNING, $graphqlResponse['runFishbowl']['fishbowl']['currentStatus']);
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertSame(Fishbowl::STATUS_RUNNING, $graphqlResponse['data']['runFishbowl']['fishbowl']['currentStatus']);
     }
 
     /** @test */
@@ -164,7 +179,10 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         GQL;
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
-        $this->assertNull($graphqlResponse['finishFishbowl']['fishbowl']);
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertNull($graphqlResponse['data']['finishFishbowl']['fishbowl']);
     }
 
     /** @test */
@@ -187,7 +205,10 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         GQL;
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
-        $this->assertSame(Fishbowl::STATUS_FINISHED, $graphqlResponse['finishFishbowl']['fishbowl']['currentStatus']);
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertSame(Fishbowl::STATUS_FINISHED, $graphqlResponse['data']['finishFishbowl']['fishbowl']['currentStatus']);
     }
 
     /** @test */
@@ -211,7 +232,10 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
 
-        $this->assertNull($graphqlResponse['runFishbowl']['fishbowl']);
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertNull($graphqlResponse['data']['runFishbowl']['fishbowl']);
     }
 
     private function logIn(User $user): string
@@ -231,7 +255,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         return $logInResponse['token'];
     }
 
-    /*** @return array<string, array<string, null|array<string, string>>> */
+    /*** @return array<string, mixed> */
     private function callGraphqlWithToken(string $gql, string $token): array
     {
         $response = static::createClient()->request('POST', '/graphql', [
@@ -243,12 +267,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
             ],
             'auth_bearer' => $token,
         ]);
-        $graphqlResponse = $response->toArray();
-
-        $this->assertArrayHasKey('data', $graphqlResponse);
-        $this->assertNotEmpty($graphqlResponse['data']);
-
-        return $graphqlResponse['data'];
+        return $response->toArray();
     }
 
     private function createFishbowlWithStatus(string $status, User $user): void
