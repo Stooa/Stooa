@@ -71,7 +71,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         $this->assertNull($graphqlResponse['data'][$functionName]['fishbowl']);
     }
 
-    /** @return iterable<array{string}> */
+    /** @return iterable<array{string, string, string}> */
     public function mutationProvider(): iterable
     {
         yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED];
@@ -106,7 +106,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         $this->assertSame($finalStatus, $graphqlResponse['data'][$functionName]['fishbowl']['currentStatus']);
     }
 
-    /** @return iterable<array{string}> */
+    /** @return iterable<array{string, string, string, string}> */
     public function mutationProviderWithFinalStatus(): iterable
     {
         yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED, Fishbowl::STATUS_INTRODUCTION];
