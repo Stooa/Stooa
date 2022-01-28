@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c65efd2c7032db5d1932dbd1939767fd",
+    "content-hash": "e9b78578d9f7100e76902ea7aceb6a0c",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10339,28 +10339,28 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v14.11.0",
+            "version": "v14.11.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "d191b0c34365c025c6cd953b5a63aa62946c7060"
+                "reference": "ffa431c0821821839370a68dab3c2597c06bf7f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/d191b0c34365c025c6cd953b5a63aa62946c7060",
-                "reference": "d191b0c34365c025c6cd953b5a63aa62946c7060",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/ffa431c0821821839370a68dab3c2597c06bf7f0",
+                "reference": "ffa431c0821821839370a68dab3c2597c06bf7f0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "php": "^7.1 || ^8.0"
+                "php": "^7.1 || ^8"
             },
             "require-dev": {
                 "amphp/amp": "^2.3",
                 "doctrine/coding-standard": "^6.0",
                 "nyholm/psr7": "^1.2",
-                "phpbench/phpbench": "^0.16.10",
+                "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "0.12.82",
                 "phpstan/phpstan-phpunit": "0.12.18",
@@ -10393,7 +10393,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webonyx/graphql-php/issues",
-                "source": "https://github.com/webonyx/graphql-php/tree/v14.11.0"
+                "source": "https://github.com/webonyx/graphql-php/tree/v14.11.5"
             },
             "funding": [
                 {
@@ -10401,7 +10401,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-10-29T13:08:08+00:00"
+            "time": "2022-01-24T11:13:31+00:00"
         },
         {
             "name": "willdurand/negotiation",
