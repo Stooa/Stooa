@@ -83,7 +83,7 @@
         "symfony/web-profiler-bundle": "4.4.31",
         "vimeo/psalm": "4.19.0",
         "weirdan/doctrine-psalm-plugin": "2.1.0",
-        "zenstruck/foundry": "1.13.4"
+        "zenstruck/foundry": "1.16.0"
     },
     "config": {
         "allow-plugins": {
