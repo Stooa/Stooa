@@ -44,7 +44,7 @@
     "next": "12.0.9",
     "next-translate": "1.3.3",
     "react": "17.0.2",
-    "react-datepicker": "3.8.0",
+    "react-datepicker": "4.6.0",
     "react-dom": "17.0.2",
     "react-script-loader-hoc": "1.2.2",
     "react-slick": "0.28.1",
