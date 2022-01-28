@@ -14,7 +14,7 @@
         "gesdinet/jwt-refresh-token-bundle": "0.12.0",
         "hashids/hashids": "4.1.0",
         "lexik/jwt-authentication-bundle": "2.14.4",
-        "nelmio/cors-bundle": "2.1.1",
+        "nelmio/cors-bundle": "2.2.0",
         "ramsey/uuid": "4.2.3",
         "ramsey/uuid-doctrine": "1.7.0",
         "sonata-project/admin-bundle": "3.106.1",
