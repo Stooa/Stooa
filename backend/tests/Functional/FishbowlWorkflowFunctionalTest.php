@@ -142,7 +142,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         $graphqlResponse = $this->callGQLWithToken($gql, $hostToken);
 
         $graphqlResponse = $graphqlResponse->toArray();
-        
+
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
