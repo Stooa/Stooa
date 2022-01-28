@@ -21,8 +21,12 @@ When('navigates to {string}', (url = '') => {
   cy.visit(url, { timeout: 10000 });
 });
 
-When('clicks on {string}', (text = '') => {
+When('clicks on {string} link', (text = '') => {
   cy.findAllByRole('link', { name: text }).first().click({ force: true });
+});
+
+When('clicks on {string} button', (text = '') => {
+  cy.findAllByRole('button', { name: text }).first().click({ force: true });
 });
 
 Then('sees {string}', (text = '') => {
