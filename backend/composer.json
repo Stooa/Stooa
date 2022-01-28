@@ -81,7 +81,7 @@
         "symfony/stopwatch": "5.3.4",
         "symfony/var-dumper": "5.3.13",
         "symfony/web-profiler-bundle": "4.4.31",
-        "vimeo/psalm": "4.18.1",
+        "vimeo/psalm": "4.19.0",
         "weirdan/doctrine-psalm-plugin": "2.1.0",
         "zenstruck/foundry": "1.13.4"
     },
