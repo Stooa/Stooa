@@ -74,7 +74,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
@@ -102,7 +102,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
@@ -130,7 +130,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
@@ -158,7 +158,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
@@ -186,7 +186,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->token);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
@@ -214,7 +214,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
@@ -242,7 +242,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
         $graphqlResponse = $this->callGraphqlWithToken($gql, $this->adminToken);
 
-        $graphqlResponse =  $graphqlResponse->toArray();
+        $graphqlResponse = $graphqlResponse->toArray();
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
