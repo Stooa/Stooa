@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\Fishbowl;
-use App\Entity\User;
-use App\Model\ChangePasswordInput;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Workflow\Event\GuardEvent;
@@ -38,7 +36,7 @@ class FishbowlWorkflowSubscriber implements EventSubscriberInterface
 
         $user = $this->security->getUser();
 
-        if ($user !== null && $fishbowl->getHost() !== $user) {
+        if (null !== $user && $fishbowl->getHost() !== $user) {
             $event->setBlocked(true);
         }
     }
