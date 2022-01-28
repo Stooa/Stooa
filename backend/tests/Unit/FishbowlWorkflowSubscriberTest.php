@@ -65,4 +65,10 @@ class FishbowlWorkflowSubscriberTest extends TestCase
         $this->subscriber->guardFishbowl($guardEvent);
         $this->assertTrue($guardEvent->isBlocked());
     }
+
+    /** @test */
+    public function itGetSubscribedEvents(): void
+    {
+        $this->assertSame(['workflow.fishbowl.guard' => ['guardFishbowl']], $this->subscriber::getSubscribedEvents());
+    }
 }
