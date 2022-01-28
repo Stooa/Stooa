@@ -65,7 +65,7 @@ CMD ["php-fpm", "--allow-to-run-as-root"]
 
 
 # NGINX
-FROM nginx:1.20 as nginx
+FROM nginx:1.21 as nginx
 
 COPY --from=fpm /usr/app/public /usr/app/public
 
