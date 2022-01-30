@@ -60,7 +60,7 @@
     "@cypress/code-coverage": "3.9.12",
     "@runroom/design-tokens": "1.0.0",
     "@runroom/npm-scripts": "1.2.8",
-    "@svgr/webpack": "6.2.0",
+    "@svgr/webpack": "6.2.1",
     "@testing-library/cypress": "8.0.2",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
