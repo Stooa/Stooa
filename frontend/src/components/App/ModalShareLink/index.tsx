@@ -19,13 +19,13 @@ import { getOnBoardingCookie } from '@/lib/auth';
 const ModalShareLink: React.FC = () => {
   const { t } = useTranslation('fishbowl');
   const { data, isModerator } = useStooa();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState<boolean>(true);
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setShow(false);
   };
 
-  const showModal = () => {
+  const showModal = (): boolean => {
     return show && data.isFishbowlNow && getOnBoardingCookie(isModerator);
   };
 
