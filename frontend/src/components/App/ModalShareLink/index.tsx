@@ -10,6 +10,7 @@
 import { React, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
+import Trans from 'next-translate/Trans';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import CopyUrl from '@/components/Common/CopyUrl';
@@ -38,7 +39,9 @@ const ModalShareLink: React.FC = () => {
               <Cross />
             </button>
             <h2 className="app-lg">{t('shareModal.title')}</h2>
-            <p className="description">{t('shareModal.description')}</p>
+            <p className="description">
+              <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
+            </p>
             <div className="modal-footer">
               <CopyUrl className="centered" data={data} />
             </div>
