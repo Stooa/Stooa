@@ -63,6 +63,7 @@ const GET_FISHBOWL = gql`
       endDateTimeTz
       durationFormatted
       slug
+      isFishbowlNow
     }
   }
 `;
