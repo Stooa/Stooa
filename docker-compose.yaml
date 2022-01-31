@@ -45,8 +45,6 @@ services:
         build:
             context: frontend
             target: next-dev
-        ports:
-            - 3000:3000
         volumes:
             - ./frontend:/usr/app/:cached
             - /usr/app/node_modules/
