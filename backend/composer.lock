@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ff13e4998b6e5b30ae68120badce2e1",
+    "content-hash": "34138ef632300e385bc9ce9e702146f6",
     "packages": [
         {
             "name": "api-platform/core",
@@ -15002,16 +15002,16 @@
         },
         {
             "name": "weirdan/doctrine-psalm-plugin",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-doctrine.git",
-                "reference": "b9dc2484b8bc1d43dc6e5c4305efa251624cb174"
+                "reference": "52b058d54ceb7238ea6bfb3f5fdfff3c97988d79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-doctrine/zipball/b9dc2484b8bc1d43dc6e5c4305efa251624cb174",
-                "reference": "b9dc2484b8bc1d43dc6e5c4305efa251624cb174",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-doctrine/zipball/52b058d54ceb7238ea6bfb3f5fdfff3c97988d79",
+                "reference": "52b058d54ceb7238ea6bfb3f5fdfff3c97988d79",
                 "shasum": ""
             },
             "require": {
@@ -15074,9 +15074,9 @@
             ],
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-doctrine/issues",
-                "source": "https://github.com/psalm/psalm-plugin-doctrine/tree/v2.1.0"
+                "source": "https://github.com/psalm/psalm-plugin-doctrine/tree/v2.2.0"
             },
-            "time": "2022-01-16T09:23:35+00:00"
+            "time": "2022-01-29T12:47:59+00:00"
         },
         {
             "name": "zenstruck/assert",
