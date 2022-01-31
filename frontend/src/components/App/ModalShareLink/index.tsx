@@ -27,7 +27,7 @@ const ModalShareLink: React.FC = () => {
   };
 
   const showModal = (): boolean => {
-    return show && data.isFishbowlNow && getOnBoardingCookie(isModerator);
+    return show && data.isFishbowlNow && isModerator && getOnBoardingCookie(isModerator);
   };
 
   return (
