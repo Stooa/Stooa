@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import countriesAndTimezones from 'countries-and-timezones';
@@ -28,7 +29,6 @@ import DatePicker from '@/components/Common/Fields/DatePicker';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
-import Trans from 'next-translate/Trans';
 
 type createFishbowlAttrs = {
   variables: {

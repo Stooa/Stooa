@@ -19,7 +19,7 @@ type Props = {
   tooltipText: string | ReactElement;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Switch: React.FC<Props> = props => {
+const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
 
@@ -35,13 +35,13 @@ const Switch: React.FC<Props> = props => {
       <SwitchLabel htmlFor={props.id || props.name}>
         <span className={`switch-button`} />
       </SwitchLabel>
-      {props.label && <span className="label-text">{props.label}</span>}
+      {label && <span className="label-text">{label}</span>}
       <div
         className="icon-wrapper"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
-        {showTooltip && <StyledIntroductionTooltip>{props.tooltipText}</StyledIntroductionTooltip>}
+        {showTooltip && <StyledIntroductionTooltip>{tooltipText}</StyledIntroductionTooltip>}
         <Info />
       </div>
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
