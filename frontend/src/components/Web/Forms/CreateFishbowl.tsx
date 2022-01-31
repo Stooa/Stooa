@@ -28,6 +28,7 @@ import DatePicker from '@/components/Common/Fields/DatePicker';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
+import Trans from 'next-translate/Trans';
 
 type createFishbowlAttrs = {
   variables: {
@@ -195,7 +196,16 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             </option>
           ))}
         </Select>
-        <Switch label={t('fishbowl.introductionLabel')} name="hasIntroduction" />
+        <Switch
+          tooltipText={
+            <Trans
+              i18nKey="form:fishbowl.introductionTooltip"
+              components={{ strong: <strong /> }}
+            />
+          }
+          label={t('fishbowl.introductionLabel')}
+          name="hasIntroduction"
+        />
       </fieldset>
       <fieldset>
         <SubmitBtn

@@ -7,17 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
-import { SwitchLabel, SwitchStyled } from '@/ui/Form';
+import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
+import Info from '@/ui/svg/info-brown.svg';
 
 type Props = {
-  label?: string;
+  label: string;
+  tooltipText: string | ReactElement;
 } & FieldAttributes<Record<string, unknown>>;
 
 const Switch: React.FC<Props> = props => {
+  const [showTooltip, setShowTooltip] = useState(false);
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
 
   return (
@@ -33,6 +36,14 @@ const Switch: React.FC<Props> = props => {
         <span className={`switch-button`} />
       </SwitchLabel>
       {props.label && <span className="label-text">{props.label}</span>}
+      <div
+        className="icon-wrapper"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      >
+        {showTooltip && <StyledIntroductionTooltip>{props.tooltipText}</StyledIntroductionTooltip>}
+        <Info />
+      </div>
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
     </SwitchStyled>
   );
