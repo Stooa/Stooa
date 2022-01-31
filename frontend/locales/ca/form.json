@@ -16,14 +16,15 @@
         "selectLanguageLabel": "Selecciona el teu idioma",
         "language": "Idioma",
         "hours": "h",
-        "introductionLabel": "Vull començar el Fishbowl amb una introducció.",
         "minutes": "m",
         "duration": "Durada",
         "selectDuration": "Selecciona una durada",
         "description": "Descripció (opcional)",
         "timezone": "Zona horària",
         "selectTimeZone": "Zona horària",
-        "advancedOptions": "Opcions avançades"
+        "advancedOptions": "Opcions avançades",
+        "introductionLabel": "Vull començar el Fishbowl amb una introducció.",
+        "introductionTooltip": "Quan inicies el fishbowl, podràs fer-lo amb una introducció. La càmera i el micròfon estaran actius no mes per a tu fins que decidis deixar entrar als demés."
     },
     "button": {
         "login": "Entra",

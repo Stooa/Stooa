@@ -23,7 +23,8 @@
         "timezone": "Zona horaria",
         "selectTimeZone": "Selecciona zona horaria",
         "advancedOptions": "Opciones avanzadas",
-        "introductionLabel": "Quiero comenzar el fishbowl con una introducción."
+        "introductionLabel": "Quiero comenzar el fishbowl con una introducción.",
+        "introductionTooltip": "Cuando inicies el fishbowl, puedes comenzar haciendo una introducción. La cámara y el micrófono estarán activos solo para ti hasta que decidas permitir entrar a los demás asitentes."
     },
     "button": {
         "login": "Entra",

@@ -16,14 +16,15 @@
         "language": "Language",
         "selectLanguageLabel": "Select language",
         "hours": "h",
-        "introductionLabel": "I want to start the fishbowl giving an introduction.",
         "minutes": "m",
         "duration": "Duration",
         "selectDuration": "Duration",
         "description": "Description (optional)",
         "timezone": "Time Zone",
         "selectTimeZone": "Time Zone",
-        "advancedOptions": "Advanced Options"
+        "advancedOptions": "Advanced Options",
+        "introductionLabel": "I want to start the fishbowl giving an introduction.",
+        "introductionTooltip": "When you start the fishbowl, you can begin by making an introduction. The camera and microphone will be active only for you until you decide to allow other attendees to enter."
     },
     "button": {
         "login": "Log in",

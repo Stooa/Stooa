@@ -195,7 +195,11 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             </option>
           ))}
         </Select>
-        <Switch label={t('fishbowl.introductionLabel')} name="hasIntroduction" />
+        <Switch
+          tooltipText={t('fishbowl.introductionTooltip')}
+          label={t('fishbowl.introductionLabel')}
+          name="hasIntroduction"
+        />
       </fieldset>
       <fieldset>
         <SubmitBtn

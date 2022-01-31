@@ -14,7 +14,6 @@
         "selectLanguageLabel": "Sprache wählen",
         "language": "Sprache",
         "hours": "St.",
-        "introductionLabel": "Ich möchte das Fishbowl mit einer Einführung beginnen.",
         "minutes": "Min.",
         "duration": "Dauer",
         "selectDuration": "Dauer",
@@ -26,7 +25,9 @@
         "selectDay": "Wählen Sie ein Tag aus",
         "title": "Titel",
         "time": "Beginnt um",
-        "advancedOptions": "Erweiterte optionen"
+        "advancedOptions": "Erweiterte optionen",
+        "introductionLabel": "Ich möchte das Fishbowl mit einer Einführung beginnen.",
+        "introductionTooltip": "Wenn Sie das Fishbowl starten, können Sie mit einer Einleitung beginnen. Die Kamera und das Mikrofon sind nur für Sie aktiv, bis Sie entscheiden, anderen Teilnehmern den Zutritt zu gestatten."
     },
     "button": {
         "login": "Anmelden",
