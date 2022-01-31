@@ -236,7 +236,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
             startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
             timezone: values.timezone,
             duration: values.hours,
-            locale: values.language
+            locale: values.language,
+            isFishbowlNow: false
           }
         }
       })
