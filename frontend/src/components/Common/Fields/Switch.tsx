@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
 import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
@@ -16,11 +16,11 @@ import Info from '@/ui/svg/info-brown.svg';
 
 type Props = {
   label: string;
-  tooltipText: string;
+  tooltipText: string | ReactElement;
 } & FieldAttributes<Record<string, unknown>>;
 
 const Switch: React.FC<Props> = props => {
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [showTooltip, setShowTooltip] = useState(false);
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
 
   return (

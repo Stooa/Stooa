@@ -351,15 +351,19 @@ const SwitchStyled = styled.div`
   }
 
   & .icon-wrapper {
-    position: relative;
+    ${media.min('tablet')`
+      position: relative;
+    `}
   }
 
   & .label-text {
     font-size: ${rems(14)};
+    margin-right: ${space(2)};
   }
 `;
 
 const SwitchLabel = styled.label`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -369,7 +373,6 @@ const SwitchLabel = styled.label`
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;
-  position: relative;
   transition: background-color 0.2s;
 
   & .switch-button {
@@ -399,21 +402,29 @@ const StyledIntroductionTooltip = styled.div`
 
   color: ${COLOR_NEUTRO_100};
   background-color: ${COLOR_NEUTRO_700};
-  width: 288px;
   height: auto;
   padding: ${space(1)} ${space(2)};
   border-radius: ${rems(4)};
   box-shadow: var(--shadow-elevation-medium);
 
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 150%;
   z-index: 10;
   text-align: center;
 
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 150px;
+
+  ${media.min('tablet')`
+    bottom: 150%;
+    width: 60ch;
+  `}
+
   &:after {
+    ${media.min('tablet')`
     content: '';
+    `}
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
