@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Trans from 'next-translate/Trans';
@@ -15,20 +15,35 @@ import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import CopyUrl from '@/components/Common/CopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
-import { getOnBoardingCookie } from '@/lib/auth';
+import { getOnBoardingCookie, isFishbowlShareLinkCookie, setShareLinkCookie } from '@/lib/auth';
+import { useRouter } from 'next/router';
 
 const ModalShareLink: React.FC = () => {
   const { t } = useTranslation('fishbowl');
   const { data, isModerator } = useStooa();
   const [show, setShow] = useState<boolean>(true);
+  const router = useRouter();
+  const { fid } = router.query;
 
   const closeModal = (): void => {
     setShow(false);
   };
 
   const showModal = (): boolean => {
-    return show && data.isFishbowlNow && isModerator && getOnBoardingCookie(isModerator);
+    return (
+      show &&
+      data.isFishbowlNow &&
+      isModerator &&
+      getOnBoardingCookie(isModerator) &&
+      !isFishbowlShareLinkCookie(fid)
+    );
   };
+
+  useEffect(() => {
+    if (!show) {
+      setShareLinkCookie(fid);
+    }
+  }, [show]);
 
   return (
     <>
