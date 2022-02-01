@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit;
 
 use App\Entity\Fishbowl;
-use App\EventSubscriber\FishbowlWorkflowGuardSubscriber;
+use App\EventSubscriber\FishbowlIntroduceAndNoIntroRunSubscriber;
 use App\Factory\FishbowlFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Workflow\Event\GuardEvent;
@@ -22,15 +22,15 @@ use Symfony\Component\Workflow\Marking;
 use Symfony\Component\Workflow\Transition;
 use Zenstruck\Foundry\Test\Factories;
 
-class FishbowlWorkflowGuardSubscriberTest extends TestCase
+class FishbowlIntroduceAndNoIntroRunSubscriberTest extends TestCase
 {
     use Factories;
 
-    private FishbowlWorkflowGuardSubscriber $subscriber;
+    private FishbowlIntroduceAndNoIntroRunSubscriber $subscriber;
 
     protected function setUp(): void
     {
-        $this->subscriber = new FishbowlWorkflowGuardSubscriber();
+        $this->subscriber = new FishbowlIntroduceAndNoIntroRunSubscriber();
     }
 
     /** @test */
@@ -65,7 +65,8 @@ class FishbowlWorkflowGuardSubscriberTest extends TestCase
     public function itGetSubscribedEvents(): void
     {
         $this->assertSame([
-                'workflow.fishbowl.guard' => ['guardFishbowl'],
+                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
+                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
             ],
             $this->subscriber::getSubscribedEvents()
         );
