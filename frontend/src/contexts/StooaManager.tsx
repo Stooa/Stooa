@@ -41,7 +41,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const timeUpInterval = useRef<number>();
 
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
-  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
@@ -51,12 +50,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     if (data.hasIntroduction) {
       try {
         introduceFishbowl(slug);
-      } catch (error) {
-        console.error(`[STOOA] Error introduction: ${error}`);
-      }
-    } else {
-      try {
-        runWithoutIntroFishbowl(slug);
       } catch (error) {
         console.error(`[STOOA] Error introduction: ${error}`);
       }
