@@ -20,6 +20,7 @@ const CREATE_FISHBOWL = gql`
         locale
         startDateTimeTz
         endDateTimeTz
+        isFishbowlNow
       }
     }
   }

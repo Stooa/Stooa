@@ -23,7 +23,8 @@ import {
   ROUTE_RECOVER_PASSWORD,
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
-  ROUTE_RESET_PASSWORD
+  ROUTE_RESET_PASSWORD,
+  ROUTE_FISHBOWL_HOST_NOW
 } from '@/app.config';
 
 import {
@@ -45,6 +46,7 @@ import { formatDateTime } from '@/lib/helpers';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_DETAIL,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_EDIT_PROFILE,
@@ -81,8 +83,6 @@ const AuthProvider = ({ children }) => {
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
 
-  const [createFishbowlApi] = useMutation(CREATE_FISHBOWL);
-
   useEffect(() => {
     const loadUserFromCookies = async () => {
       const auth = await getAuthToken();
@@ -103,7 +103,7 @@ const AuthProvider = ({ children }) => {
 
     return await api
       .post('login', { email, password }, { headers: { 'Accept-Language': lang } })
-      .then(async ({ data }) => {
+      .then(({ data }) => {
         const pathname = router.query.redirect || ROUTE_HOME;
         const auth = new AuthToken(data.token);
         const user = auth ? auth.user : null;
@@ -118,29 +118,9 @@ const AuthProvider = ({ children }) => {
         setRefreshToken(data.refresh_token);
         const route = pathname.toString();
 
-        if (router.query.method === 'now') {
-          const dateNow = new Date();
-          const formatedDay = formatDateTime(dateNow.getDate());
-
-          await createFishbowlApi({
-            variables: {
-              input: {
-                name: '',
-                description: '',
-                startDateTime: dateNow,
-                timezone: values.timezone,
-                duration: values.hours,
-                locale: values.language
-              }
-            }
-          })
-            .then(res => {})
-            .catch(error => {});
-        } else {
-          router.push(route, route, { locale: lang }).then(() => {
-            setLoading(false);
-          });
-        }
+        router.push(route, route, { locale: lang }).then(() => {
+          setLoading(false);
+        });
 
         setLoginStatus(status);
         return status;

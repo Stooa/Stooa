@@ -37,6 +37,7 @@ type createFishbowlAttrs = {
       timezone: string;
       duration: string;
       locale: string;
+      isFishbowlNow: boolean;
     };
   };
 };
