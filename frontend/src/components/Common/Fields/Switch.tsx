@@ -38,6 +38,7 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
       {label && <span className="label-text">{label}</span>}
       <div
         className="icon-wrapper"
+        onClick={() => setShowTooltip(true)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
