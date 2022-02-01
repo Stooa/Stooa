@@ -24,5 +24,6 @@
     "description": "Stooa permet une conversation fluide et participative avec une facilitation automatique basée sur la méthode du fishbowl.",
     "banner": "Créez votre activité gratuite en forme de fishbowl et invitez les participants. Que la conversation commence !",
     "title": "L'outil de fishbowl en ligne",
-    "cta": "Créer un fishbowl gratuit"
+    "scheduleFishbowl": "Planifier un <i>Fishbowl</i>",
+    "hostNow": "Commencez un <i>Fishbowl</i> maintenant"
 }

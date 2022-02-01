@@ -131,21 +131,6 @@ const Home = () => {
           {t('description')}
         </Description>
         <div className="cta-wrapper">
-          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-            <ButtonStyledLink
-              className="animate-item cta-create-fishbowl"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Create Fishbowl',
-                  action: 'Billboard',
-                  label: 'Home'
-                });
-              }}
-            >
-              <span>{t('cta')}</span>
-              <ArrowRight />
-            </ButtonStyledLink>
-          </Link>
           <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
             <ButtonStyledLink
               className="animate-item cta-create-fishbowl"
@@ -157,7 +142,26 @@ const Home = () => {
                 });
               }}
             >
-              <span>Host fishbowl now</span>
+              <span>
+                <Trans i18nKey="home:hostNow" components={{ i: <i /> }} />
+              </span>
+              <ArrowRight />
+            </ButtonStyledLink>
+          </Link>
+          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
+            <ButtonStyledLink
+              className="animate-item cta-create-fishbowl secondary"
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Create Fishbowl',
+                  action: 'Billboard',
+                  label: 'Home'
+                });
+              }}
+            >
+              <span>
+                <Trans i18nKey="home:scheduleFishbowl" components={{ i: <i /> }} />
+              </span>
               <ArrowRight />
             </ButtonStyledLink>
           </Link>
