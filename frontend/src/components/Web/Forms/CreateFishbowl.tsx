@@ -28,14 +28,14 @@ import DatePicker from '@/components/Common/Fields/DatePicker';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 
-import { CreateFishbowl } from '@/types/graphql/fishbowl';
+import { CreateFishbowlOptions } from '@/types/graphql/fishbowl';
 
 interface FormProps {
   required: string;
   date: string;
   title: string;
   createFishbowl: (
-    options?: CreateFishbowl
+    options?: CreateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   onSubmit: (any) => void;
   currentLanguage: string;
