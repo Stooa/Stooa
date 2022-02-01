@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Trans from 'next-translate/Trans';
@@ -35,15 +35,15 @@ const ModalShareLink: React.FC = () => {
       data.isFishbowlNow &&
       isModerator &&
       getOnBoardingCookie(isModerator) &&
-      !isFishbowlShareLinkCookie(fid)
+      !isFishbowlShareLinkCookie(fid as string)
     );
   };
 
   useEffect(() => {
     if (!show) {
-      setShareLinkCookie(fid);
+      setShareLinkCookie(fid as string);
     }
-  }, [show]);
+  }, [show]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
