@@ -7,33 +7,53 @@
  * file that was distributed with this source code.
  */
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
 import { useMutation } from '@apollo/client';
-import { useEffect } from 'react';
+import useTranslation from 'next-translate/useTranslation';
+
+import { ROUTE_FISHBOWL } from '@/app.config';
+import { getTimePlusOneMinute } from '@/lib/helpers';
 
 const HostNow = () => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
+  const { lang } = useTranslation();
+  const router = useRouter();
 
   const createFishbowlRequest = async () => {
-    const dateNow = new Date();
-    const formatedDay = formatDateTime(dateNow.getDate());
-
     await createFishbowl({
       variables: {
         input: {
           name: '',
           description: '',
-          startDateTime: dateNow,
-          timezone: values.timezone,
-          duration: values.hours,
-          locale: values.language,
+          startDateTime: getTimePlusOneMinute(),
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          duration: '1:00',
+          locale: lang,
           isFishbowlNow: true
         }
       }
     })
-      .then(res => {})
-      .catch(error => {});
+      .then(res => {
+        const {
+          data: {
+            createFishbowl: { fishbowl }
+          }
+        } = res;
+        console.log('[STOOA] Host now fishbowl created', fishbowl);
+        const route = `${ROUTE_FISHBOWL}/${fishbowl.slug}`;
+        router.push(route, route, { locale: lang });
+      })
+      .catch(error => {
+        console.error('[STOOA] Host now fishbowl error', error);
+      });
   };
+
+  useEffect(() => {
+    createFishbowlRequest();
+  }, []);
 
   return <></>;
 };
