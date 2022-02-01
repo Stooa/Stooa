@@ -44,7 +44,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
-  console.log('---->', data);
+
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);

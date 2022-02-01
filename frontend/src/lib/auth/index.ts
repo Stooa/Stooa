@@ -17,7 +17,6 @@ import LocaleCookie from '@/lib/LocaleCookie';
 const COOKIE_TOKEN = 'token';
 const COOKIE_REFRESH = 'refresh_token';
 const COOKIE_SHARE_LINK_COOKIE = 'share_link';
-const COOKIE_SHARE_DAYS = 1;
 const COOKIE_ON_BOARDING_MODERATOR = 'on_boarding_moderator';
 const COOKIE_ON_BOARDING = 'on_boarding';
 const COOKIE_ON_BOARDING_VALUE = true;
@@ -37,9 +36,11 @@ const setRefreshToken = (value: string) => {
 };
 
 const setShareLinkCookie = (fishbowlId: string): void => {
+  const fourHours = 1 / 6;
+
   cookie.set(COOKIE_SHARE_LINK_COOKIE, fishbowlId, {
     ...COOKIE_OPTIONS,
-    expires: COOKIE_SHARE_DAYS
+    expires: fourHours
   });
 };
 

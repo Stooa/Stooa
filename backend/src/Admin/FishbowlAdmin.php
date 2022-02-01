@@ -80,7 +80,7 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('currentStatus', null, [], ChoiceType::class, [
                 'choices' => Fishbowl::$statusChoices,
             ])
-            ->add('isFishbowlNow');;
+            ->add('isFishbowlNow');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -128,7 +128,7 @@ class FishbowlAdmin extends AbstractAdmin
                     'callback' => self::hostCallbackFunction(),
                 ])
                 ->add('isFishbowlNow', BooleanType::class, [
-                    'transform' => true
+                    'transform' => true,
                 ])
             ->end()
             ->with('Disabled')
