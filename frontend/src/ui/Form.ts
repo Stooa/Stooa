@@ -354,6 +354,7 @@ const SwitchStyled = styled.div`
     ${media.min('tablet')`
       position: relative;
     `}
+    padding: ${space(1)};
   }
 
   & .label-text {
