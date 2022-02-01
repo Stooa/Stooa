@@ -16,7 +16,7 @@ import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
 import { TweenMax } from 'gsap';
 
-import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
+import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
 import Layout from '@/layouts/Home';
 
 import { Lottie } from '@/types/animations';
@@ -146,7 +146,7 @@ const Home = () => {
               <ArrowRight />
             </ButtonStyledLink>
           </Link>
-          <Link href={`${ROUTE_FISHBOWL_CREATE}?method=now`} passHref>
+          <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
             <ButtonStyledLink
               className="animate-item cta-create-fishbowl"
               onClick={() => {
