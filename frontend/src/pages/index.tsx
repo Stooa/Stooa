@@ -151,7 +151,7 @@ const Home = () => {
               className="animate-item cta-create-fishbowl"
               onClick={() => {
                 pushEventDataLayer({
-                  category: 'Create Fishbowl',
+                  category: 'Host Fishbowl Now',
                   action: 'Billboard',
                   label: 'Home'
                 });

@@ -11,6 +11,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
+import { useMutation } from '@apollo/client';
 
 import {
   ROUTE_HOME,
@@ -39,6 +40,8 @@ import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
+import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
+import { formatDateTime } from '@/lib/helpers';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -78,6 +81,8 @@ const AuthProvider = ({ children }) => {
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
 
+  const [createFishbowlApi] = useMutation(CREATE_FISHBOWL);
+
   useEffect(() => {
     const loadUserFromCookies = async () => {
       const auth = await getAuthToken();
@@ -98,7 +103,7 @@ const AuthProvider = ({ children }) => {
 
     return await api
       .post('login', { email, password }, { headers: { 'Accept-Language': lang } })
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         const pathname = router.query.redirect || ROUTE_HOME;
         const auth = new AuthToken(data.token);
         const user = auth ? auth.user : null;
@@ -112,9 +117,30 @@ const AuthProvider = ({ children }) => {
         setToken(data.token);
         setRefreshToken(data.refresh_token);
         const route = pathname.toString();
-        router.push(route, route, { locale: lang }).then(() => {
-          setLoading(false);
-        });
+
+        if (router.query.method === 'now') {
+          const dateNow = new Date();
+          const formatedDay = formatDateTime(dateNow.getDate());
+
+          await createFishbowlApi({
+            variables: {
+              input: {
+                name: '',
+                description: '',
+                startDateTime: dateNow,
+                timezone: values.timezone,
+                duration: values.hours,
+                locale: values.language
+              }
+            }
+          })
+            .then(res => {})
+            .catch(error => {});
+        } else {
+          router.push(route, route, { locale: lang }).then(() => {
+            setLoading(false);
+          });
+        }
 
         setLoginStatus(status);
         return status;
@@ -192,10 +218,11 @@ const ProtectRoute = ({ children }) => {
       let pathname;
 
       if (isAuthenticated) {
-        const { ...paramValues } = router.query;
-        pathname = paramValues || ROUTE_HOME;
+        pathname = router.query.redirect || ROUTE_HOME;
       } else {
-        pathname = `${ROUTE_REGISTER}?redirect=${router.pathname}`;
+        pathname = `${ROUTE_REGISTER}?redirect=${router.pathname}${
+          router.query.method === 'now' ? '?method=now' : ''
+        }`;
       }
       const route = pathname.toString();
       router.push(route, route, { locale: lang });
