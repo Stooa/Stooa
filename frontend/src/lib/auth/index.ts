@@ -36,7 +36,7 @@ const setRefreshToken = (value: string) => {
 };
 
 const setShareLinkCookie = (fishbowlId: string): void => {
-  const fourHours = 1/6;
+  const fourHours = 1 / 6;
 
   cookie.set(COOKIE_SHARE_LINK_COOKIE, fishbowlId, {
     ...COOKIE_OPTIONS,
