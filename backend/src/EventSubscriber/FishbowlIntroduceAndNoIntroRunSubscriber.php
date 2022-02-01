@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Webmozart\Assert\Assert;
 
-class FishbowlStartIntroSubscriber implements EventSubscriberInterface
+class FishbowlIntroduceAndNoIntroRunSubscriber implements EventSubscriberInterface
 {
     public function guardFishbowl(GuardEvent $event): void
     {
@@ -26,7 +26,11 @@ class FishbowlStartIntroSubscriber implements EventSubscriberInterface
 
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
-        if (!$fishbowl->getHasIntroduction()) {
+        $transition = $event->getTransition();
+
+        if ((Fishbowl::TRANSITION_INTRODUCE === $transition->getName() && !$fishbowl->getHasIntroduction()) ||
+            (Fishbowl::TRANSITION_NO_INTRO_RUN === $transition->getName() && $fishbowl->getHasIntroduction())
+        ) {
             $event->setBlocked(true);
         }
     }
@@ -35,6 +39,7 @@ class FishbowlStartIntroSubscriber implements EventSubscriberInterface
     {
         return [
             'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
+            'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
         ];
     }
 }

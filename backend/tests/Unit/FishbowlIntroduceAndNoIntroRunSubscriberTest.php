@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit;
 
 use App\Entity\Fishbowl;
-use App\EventSubscriber\FishbowlStartIntroSubscriber;
+use App\EventSubscriber\FishbowlIntroduceAndNoIntroRunSubscriber;
 use App\Factory\FishbowlFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Workflow\Event\GuardEvent;
@@ -22,28 +22,43 @@ use Symfony\Component\Workflow\Marking;
 use Symfony\Component\Workflow\Transition;
 use Zenstruck\Foundry\Test\Factories;
 
-class FishbowlStartIntroSubscriberTest extends TestCase
+class FishbowlIntroduceAndNoIntroRunSubscriberTest extends TestCase
 {
     use Factories;
 
-    private FishbowlStartIntroSubscriber $subscriber;
+    private FishbowlIntroduceAndNoIntroRunSubscriber $subscriber;
 
     protected function setUp(): void
     {
-        $this->subscriber = new FishbowlStartIntroSubscriber();
+        $this->subscriber = new FishbowlIntroduceAndNoIntroRunSubscriber();
     }
 
     /** @test */
-    public function itBlockWhenHasIntroduction(): void
+    public function itBlockWhenIntroduceTransitionDoesntHaveIntroduction(): void
+    {
+        $fishbowl = FishbowlFactory::createOne([
+            'hasIntroduction' => false,
+        ])->object();
+
+        $guardEvent = new GuardEvent($fishbowl, new Marking(), new Transition(Fishbowl::TRANSITION_INTRODUCE, '', ''));
+
+        $this->subscriber->guardFishbowl($guardEvent);
+
+        $this->assertTrue($guardEvent->isBlocked());
+    }
+
+    /** @test */
+    public function itBlockWhenNoIntroTransitionDoesHaveIntroduction(): void
     {
         $fishbowl = FishbowlFactory::createOne([
             'hasIntroduction' => true,
         ])->object();
 
-        $guardEvent = new GuardEvent($fishbowl, new Marking(), new Transition('fishbowl', '', ''));
+        $guardEvent = new GuardEvent($fishbowl, new Marking(), new Transition(Fishbowl::TRANSITION_NO_INTRO_RUN, '', ''));
 
         $this->subscriber->guardFishbowl($guardEvent);
-        $this->assertFalse($guardEvent->isBlocked());
+
+        $this->assertTrue($guardEvent->isBlocked());
     }
 
     /** @test */
@@ -51,6 +66,7 @@ class FishbowlStartIntroSubscriberTest extends TestCase
     {
         $this->assertSame([
                 'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
+                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
             ],
             $this->subscriber::getSubscribedEvents()
         );

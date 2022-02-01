@@ -23,6 +23,7 @@ use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\Form\Type\BooleanType;
 use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
@@ -125,6 +126,9 @@ class FishbowlAdmin extends AbstractAdmin
                 ->add('host', ModelAutocompleteType::class, [
                     'property' => 'email',
                     'callback' => self::hostCallbackFunction(),
+                ])
+                ->add('hasIntroduction', BooleanType::class, [
+                    'transform' => true,
                 ])
             ->end()
             ->with('Disabled')
