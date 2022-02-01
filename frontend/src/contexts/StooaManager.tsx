@@ -41,7 +41,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const timeUpInterval = useRef<number>();
 
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
-  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
