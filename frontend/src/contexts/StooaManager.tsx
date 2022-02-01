@@ -54,12 +54,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
       } catch (error) {
         console.error(`[STOOA] Error introduction: ${error}`);
       }
-    } else {
-      try {
-        runWithoutIntroFishbowl(slug);
-      } catch (error) {
-        console.error(`[STOOA] Error introduction: ${error}`);
-      }
     }
   };
 
