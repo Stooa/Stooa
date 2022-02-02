@@ -208,7 +208,6 @@ class RefreshTokenFunctionalTest extends ApiTestCase
             'query' => [
                 'email' => 'host@stooa.com',
                 'refresh_token' => $logInResponse['refresh_token'],
-                'room' => $room,
             ],
             'extra' => [
                 'parameters' => [
