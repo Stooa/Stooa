@@ -2,7 +2,7 @@
     "title": "El fishbowl online",
     "description": "Stooa permite una conversación fluida y participativa con facilitación automática basada en el método fishbowl.",
     "scheduleFishbowl": "Agendar un fishbowl",
-    "hostNow": "Inicia un fishbowl ahora",
+    "hostNow": "Empezar un <p>fishbowl</p> ahora",
     "definition": {
         "title": "¿Qué es un fishbowl?",
         "description": "<p>Un fishbowl es una <strong>dinámica de grupo</strong> que facilita las conversaciones, debates y cualquier tipo de actividad en el que <strong>la participación es esencial para su desarrollo </strong>.</p><p>Es un método de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.</p>"
