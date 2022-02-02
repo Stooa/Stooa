@@ -35,10 +35,14 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
       <SwitchLabel htmlFor={props.id || props.name}>
         <span className={`switch-button`} />
       </SwitchLabel>
-      {label && <span className="label-text">{label}</span>}
+      {label && (
+        <label htmlFor={props.id || props.name}>
+          <span className="label-text">{label}</span>
+        </label>
+      )}
       <div
         className="icon-wrapper"
-        onClick={() => setShowTooltip(true)}
+        onClick={() => setShowTooltip(showTooltip => !showTooltip)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
       >
