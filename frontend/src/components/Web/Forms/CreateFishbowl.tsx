@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import countriesAndTimezones from 'countries-and-timezones';
@@ -27,6 +28,7 @@ import Select from '@/components/Common/Fields/Select';
 import DatePicker from '@/components/Common/Fields/DatePicker';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import Switch from '@/components/Common/Fields/Switch';
 
 type createFishbowlAttrs = {
   variables: {
@@ -37,6 +39,7 @@ type createFishbowlAttrs = {
       timezone: string;
       duration: string;
       locale: string;
+      hasIntroduction: boolean;
     };
   };
 };
@@ -66,6 +69,7 @@ interface FormValues {
   description: string;
   language: string;
   timezone: string;
+  hasIntroduction: boolean;
 }
 
 const initialValues = {
@@ -75,7 +79,8 @@ const initialValues = {
   hours: '',
   description: '',
   language: '',
-  timezone: ''
+  timezone: '',
+  hasIntroduction: false
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -191,6 +196,16 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             </option>
           ))}
         </Select>
+        <Switch
+          tooltipText={
+            <Trans
+              i18nKey="form:fishbowl.introductionTooltip"
+              components={{ strong: <strong /> }}
+            />
+          }
+          label={t('fishbowl.introductionLabel')}
+          name="hasIntroduction"
+        />
       </fieldset>
       <fieldset>
         <SubmitBtn
@@ -227,6 +242,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
+    console.log(values);
     await props
       .createFishbowl({
         variables: {
@@ -236,7 +252,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
             startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
             timezone: values.timezone,
             duration: values.hours,
-            locale: values.language
+            locale: values.language,
+            hasIntroduction: values.hasIntroduction
           }
         }
       })
@@ -296,7 +313,8 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
       hours: selectedFishbowl.durationFormatted,
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
-      timezone: timezone
+      timezone: timezone,
+      hasIntroduction: false
     };
   }
 

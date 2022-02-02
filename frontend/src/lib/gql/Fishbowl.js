@@ -20,6 +20,7 @@ const CREATE_FISHBOWL = gql`
         locale
         startDateTimeTz
         endDateTimeTz
+        hasIntroduction
       }
     }
   }
@@ -63,6 +64,8 @@ const GET_FISHBOWL = gql`
       endDateTimeTz
       durationFormatted
       slug
+      hasIntroduction
+      currentStatus
     }
   }
 `;
@@ -71,6 +74,16 @@ const IS_FISHBOWL_CREATOR = gql`
   query IsCreatorOfFishbowl($slug: String!) {
     isCreatorOfFishbowl(slug: $slug) {
       currentStatus
+    }
+  }
+`;
+
+const NO_INTRO_RUN_FISHBOWL = gql`
+  mutation NoIntroRunFishbowl($input: noIntroRunFishbowlInput!) {
+    noIntroRunFishbowl(input: $input) {
+      fishbowl {
+        currentStatus
+      }
     }
   }
 `;
@@ -124,5 +137,6 @@ export {
   INTRODUCE_FISHBOWL,
   IS_FISHBOWL_CREATOR,
   RUN_FISHBOWL,
-  UPDATE_FISHBOWL
+  UPDATE_FISHBOWL,
+  NO_INTRO_RUN_FISHBOWL
 };
