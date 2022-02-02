@@ -15,7 +15,6 @@ namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Fishbowl;
-use App\Entity\User;
 use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
 use FOS\UserBundle\Model\UserInterface;
@@ -206,12 +205,11 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $logInResponse = $response->toArray();
 
         $response = static::createClient()->request('POST', '/refresh-token', [
-            'body' => [
+            'query' => [
                 'email' => 'host@stooa.com',
                 'refresh_token' => $logInResponse['refresh_token'],
                 'room' => $room,
             ],
-            'auth_bearer' => $logInResponse['token'],
         ]);
 
         $this->assertResponseIsSuccessful();
