@@ -1,7 +1,7 @@
 {
     "title": "El fishbowl online",
     "description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
-    "scheduleFishbowl": "Agenda un fishbowl",
+    "scheduleFishbowl": "Agendar un fishbowl",
     "hostNow": "Començar un <i>fishbowl</i> ara",
     "definition": {
         "title": "Què és un fishbowl?",
