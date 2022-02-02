@@ -87,7 +87,7 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         $currentRequest = $this->requestStack->getCurrentRequest();
 
         if (null !== $currentRequest) {
-            $slug = $currentRequest->get('room');
+            $slug = $currentRequest->request->get('room');
 
             if (null !== $slug && \is_string($slug) && $this->fishbowlService->canFishbowlStart($slug, $user)) {
                 return $slug;
