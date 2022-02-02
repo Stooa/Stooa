@@ -73,5 +73,9 @@
         "attendees": "Oients",
         "speaking": "Parlant ara"
     },
-    "share": "Que corri la veu!"
+    "share": "Que corri la veu!",
+    "shareModal": {
+        "title": "Convida a mes persones!",
+        "description": "Fes que la conversa. Còpia i comparteix l'enllaç del <i>fishbowl</i> amb les persones que vuilgis que s'uneixin a la sessió."
+    }
 }

@@ -9,14 +9,15 @@
 
 import React, { useState, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import Trans from 'next-translate/Trans';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import CopyUrl from '@/components/Common/CopyUrl';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getOnBoardingCookie, isFishbowlShareLinkCookie, setShareLinkCookie } from '@/lib/auth';
-import { useRouter } from 'next/router';
 
 const ModalShareLink: React.FC = () => {
   const { t } = useTranslation('fishbowl');
@@ -58,7 +59,9 @@ const ModalShareLink: React.FC = () => {
               <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
             </p>
             <div className="modal-footer">
-              <CopyUrl className="centered" data={data} />
+              <ButtonCopyUrl fid={fid as string} locale={data.locale}>
+                {t('shareModal.linkButton')}
+              </ButtonCopyUrl>
             </div>
           </div>
         </Modal>

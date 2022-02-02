@@ -76,7 +76,6 @@
     "share": "¡Que corra la voz!",
     "shareModal": {
         "title": "¡Invita a más personas!",
-        "description": "Haz que la conversación fluya. Copia y comparte el enlace de este <i>fishbowl</i> con las personas que quieras que se unan a la sesión.",
-        "link": "Copia enlace"
+        "description": "Haz que la conversación fluya. Copia y comparte el enlace de este <i>fishbowl</i> con las personas que quieras que se unan a la sesión."
     }
 }

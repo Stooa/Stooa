@@ -11,9 +11,9 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
-import CopyUrl from '@/components/Common/CopyUrl';
 import Dots from '@/ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 
 interface Props {
   data: Fishbowl;
@@ -57,9 +57,12 @@ const Info: React.FC<Props> = ({ data }) => {
       </Icon>
       {active && (
         <Description>
-          <p className="app-md medium">{data.name}</p>
+          <p className="app-md medium description__title">{data.name}</p>
           <p className="info-text app-sm">{data.description}</p>
-          <CopyUrl variant="left" data={data} />
+          <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
+          <p className="app-sm description__share-text">
+            Copy and share the link to invite people to this fishbowl
+          </p>
         </Description>
       )}
     </InfoStyled>

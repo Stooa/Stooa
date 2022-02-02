@@ -15,7 +15,8 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
-  BORDER_RADIUS
+  BORDER_RADIUS,
+  COLOR_PURPLE_600
 } from '@/ui/settings';
 
 const InfoStyled = styled.div`
@@ -63,14 +64,24 @@ const Description = styled.div`
   border-radius: ${BORDER_RADIUS};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   color: ${COLOR_NEUTRO_700};
-  max-width: ${rems(340)};
+  width: ${rems(340)};
   padding: ${space(2)};
   position: absolute;
   top: 100%;
+  left: 70%;
   z-index: 10;
+
+  .description__title {
+    margin-bottom: ${space(1)};
+  }
 
   .info-text {
     margin-bottom: ${space(2)};
+  }
+
+  .description__share-text {
+    color: ${COLOR_PURPLE_600};
+    margin-top: ${space(1)};
   }
 `;
 

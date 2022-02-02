@@ -24,6 +24,8 @@ import Curve from '@/ui/svg/participants-curve.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
+import { useStooa } from '@/contexts/StooaManager';
 
 const initialParticipant = {
   id: '',
@@ -56,6 +58,8 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
     initialParticipant
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
+
+  const { data } = useStooa();
 
   const pingParticipant = () => {
     ping(lang, fid);
@@ -166,6 +170,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       <ParticipantsDrawer className={active ? 'active' : ''}>
         <div className="header">
           <h2 className="app-md medium">{t('fishbowl:participants.title')}</h2>
+          <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
           <Icon onClick={toggleDrawer}>
             <Cross />
           </Icon>

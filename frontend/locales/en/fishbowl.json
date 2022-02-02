@@ -69,14 +69,13 @@
         "button": "Confirm"
     },
     "participants": {
-        "title": "Fishbowl attendees",
+        "title": "People in the room",
         "attendees": "Listeners",
         "speaking": "Speaking now"
     },
     "share": "Let others know about Stooa!",
     "shareModal": {
         "title": "Invite more people!",
-        "description": "Let the conversation flow! Copy and share the link of this <i>fishbowl</i> with the people you want to join the session.",
-        "link": "Copy link"
+        "description": "Let the conversation flow! Copy and share the link of this <i>fishbowl</i> with the people you want to join the session."
     }
 }
