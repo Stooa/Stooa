@@ -71,18 +71,10 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           setLoading(false);
         });
     } else {
-      try {
-        runWithoutIntroFishbowl(slug)
-          .then(() => {
-            console.log('[STOOA] run fishbowl without introduction');
-            setLoading(true);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      } catch (error) {
-        console.error(`[STOOA] Error run fishbowl without introduction: ${error}`);
-      }
+      dispatch({
+        type: 'FISHBOWL_STARTED',
+        fishbowlStarted: true
+      });
     }
   };
 
