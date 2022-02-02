@@ -216,6 +216,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
+    console.log('------ DURATION ------', values.hours);
     await props
       .createFishbowl({
         variables: {

@@ -67,7 +67,7 @@ const Description = styled.div`
   width: ${rems(340)};
   padding: ${space(2)};
   position: absolute;
-  top: 100%;
+  top: 125%;
   left: 70%;
   z-index: 10;
 

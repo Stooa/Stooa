@@ -20,7 +20,7 @@ import Layout from '@/layouts/Default';
 
 const HostNow = () => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('fishbowl');
   const router = useRouter();
 
   const createFishbowlRequest = async () => {
@@ -31,7 +31,7 @@ const HostNow = () => {
           description: '',
           startDateTime: getTimePlusOneMinute(),
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          duration: '1:00',
+          duration: '01:00',
           locale: lang,
           isFishbowlNow: true
         }
@@ -58,7 +58,7 @@ const HostNow = () => {
 
   return (
     <Layout>
-      <h1>Preparando sillas...</h1>
+      <h1>{t('hostNow.preparing')}</h1>
     </Layout>
   );
 };

@@ -11,7 +11,6 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
-import { useMutation } from '@apollo/client';
 
 import {
   ROUTE_HOME,

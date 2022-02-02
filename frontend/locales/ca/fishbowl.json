@@ -77,5 +77,8 @@
     "shareModal": {
         "title": "Convida a més persones!",
         "description": "Fes que la conversa flueixi! Còpia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vulguis que s'uneixin a la sessió."
+    },
+    "hostNow": {
+        "preparing": "Preparant cadires..."
     }
 }
