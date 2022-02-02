@@ -210,6 +210,11 @@ class RefreshTokenFunctionalTest extends ApiTestCase
                 'refresh_token' => $logInResponse['refresh_token'],
                 'room' => $room,
             ],
+            'extra' => [
+                'parameters' => [
+                    'room' => $room,
+                ],
+            ],
         ]);
 
         $this->assertResponseIsSuccessful();
