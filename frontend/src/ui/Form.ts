@@ -15,6 +15,8 @@ import { space, media, rems } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
+  COLOR_GREEN_500,
+  COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
@@ -326,5 +328,130 @@ const TextDivider = styled.div`
   }
 `;
 
-export { CheckboxStyled, DatePickerStyled, FormError, InputStyled, TextDivider };
+const SwitchStyled = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  align-items: center;
+  width: 100%;
+
+  input {
+    display: none;
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  .switch-checkbox[value='true'] + label .switch-button {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+  }
+
+  .switch-checkbox[value='true'] + label {
+    background-color: ${COLOR_GREEN_500};
+  }
+
+  .icon-wrapper {
+    ${media.min('tablet')`
+      position: relative;
+    `}
+    padding: ${space(1)};
+  }
+
+  .label-text {
+    font-size: ${rems(14)};
+    margin-right: ${space(2)};
+  }
+
+  label {
+    cursor: pointer;
+  }
+`;
+
+const SwitchLabel = styled.label`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 42px;
+  margin-right: ${space(2)};
+  height: 22px;
+  background: ${COLOR_NEUTRO_700};
+  border-radius: 50px;
+  transition: background-color 0.2s;
+
+  .switch-button {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 25px;
+    transition: 0.2s;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+  }
+
+  &:hover .switch-button {
+    width: 20px;
+  }
+`;
+
+const StyledIntroductionTooltip = styled.div`
+  --shadow-color: 0deg 0% 79%;
+  --shadow-elevation-medium: -0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0.36),
+    -0.3px 0.6px 0.8px -0.8px hsl(var(--shadow-color) / 0.36),
+    -0.8px 1.4px 1.8px -1.7px hsl(var(--shadow-color) / 0.36),
+    -2px 3.5px 4.5px -2.5px hsl(var(--shadow-color) / 0.36);
+
+  color: ${COLOR_NEUTRO_100};
+  background-color: ${COLOR_NEUTRO_700};
+  height: auto;
+  padding: ${space(1)} ${space(2)};
+  border-radius: ${rems(4)};
+  box-shadow: var(--shadow-elevation-medium);
+
+  position: absolute;
+  z-index: 10;
+  text-align: center;
+
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 150px;
+
+  ${media.min('tablet')`
+    bottom: 150%;
+    width: 60ch;
+  `}
+
+  &:after {
+    ${media.min('tablet')`
+    content: '';
+    `}
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -10px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #e8e8e8;
+    clear: both;
+    border-color: ${COLOR_NEUTRO_700} transparent transparent;
+  }
+`;
+
+export {
+  CheckboxStyled,
+  DatePickerStyled,
+  FormError,
+  InputStyled,
+  TextDivider,
+  SwitchStyled,
+  SwitchLabel,
+  StyledIntroductionTooltip
+};
 export default FormikForm;
