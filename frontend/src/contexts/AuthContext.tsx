@@ -40,8 +40,6 @@ import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
-import { formatDateTime } from '@/lib/helpers';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
