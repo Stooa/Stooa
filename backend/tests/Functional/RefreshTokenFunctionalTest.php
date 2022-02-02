@@ -204,11 +204,17 @@ class RefreshTokenFunctionalTest extends ApiTestCase
 
         $logInResponse = $response->toArray();
 
-        $response = static::createClient()->request('POST', '/refresh-token', ['query' => [
-            'email' => 'host@stooa.com',
-            'refresh_token' => $logInResponse['refresh_token'],
-            'room' => $room,
-        ]]);
+        $response = static::createClient()->request('POST', '/refresh-token', [
+            'query' => [
+                'email' => 'host@stooa.com',
+                'refresh_token' => $logInResponse['refresh_token'],
+            ],
+            'extra' => [
+                'parameters' => [
+                    'room' => $room,
+                ],
+            ],
+        ]);
 
         $this->assertResponseIsSuccessful();
 
