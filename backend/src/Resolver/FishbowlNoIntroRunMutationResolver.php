@@ -18,7 +18,7 @@ use App\Entity\Fishbowl;
 use App\Repository\FishbowlRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-class FishbowlFinishMutationResolver implements MutationResolverInterface
+class FishbowlNoIntroRunMutationResolver implements MutationResolverInterface
 {
     private FishbowlRepository $repository;
     private WorkflowInterface $fishbowlStateMachine;
@@ -42,11 +42,11 @@ class FishbowlFinishMutationResolver implements MutationResolverInterface
             return null;
         }
 
-        if (!$this->fishbowlStateMachine->can($fishbowl, FISHBOWL::TRANSITION_FINISH)) {
+        if (!$this->fishbowlStateMachine->can($fishbowl, FISHBOWL::TRANSITION_NO_INTRO_RUN)) {
             return null;
         }
 
-        $this->fishbowlStateMachine->apply($fishbowl, FISHBOWL::TRANSITION_FINISH);
+        $this->fishbowlStateMachine->apply($fishbowl, FISHBOWL::TRANSITION_NO_INTRO_RUN);
 
         return $fishbowl;
     }
