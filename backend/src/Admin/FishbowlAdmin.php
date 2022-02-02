@@ -81,6 +81,7 @@ class FishbowlAdmin extends AbstractAdmin
                 'choices' => Fishbowl::$statusChoices,
             ])
             ->add('isFishbowlNow');
+            ->add('hasIntroduction');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -94,6 +95,7 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('currentStatus', null, [
                 'template' => 'sonata/fishbowl_status.html.twig',
             ])
+            ->add('hasIntroduction')
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('endDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('duration', FieldDescriptionInterface::TYPE_TIME)
@@ -128,6 +130,9 @@ class FishbowlAdmin extends AbstractAdmin
                     'callback' => self::hostCallbackFunction(),
                 ])
                 ->add('isFishbowlNow', BooleanType::class, [
+                    'transform' => true,
+                ])
+                ->add('hasIntroduction', BooleanType::class, [
                     'transform' => true,
                 ])
             ->end()

@@ -20,6 +20,7 @@ use App\Repository\FishbowlRepository;
 use App\Resolver\FishbowlCreatorResolver;
 use App\Resolver\FishbowlFinishMutationResolver;
 use App\Resolver\FishbowlIntroduceMutationResolver;
+use App\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Resolver\FishbowlResolver;
 use App\Resolver\FishbowlRunMutationResolver;
 use App\Validator\Constraints\FutureFishbowl;
@@ -74,6 +75,13 @@ use Webmozart\Assert\Assert as MAssert;
  *             },
  *             "validation_groups"={"Default"}
  *          },
+ *         "noIntroRun"={
+ *             "mutation"=FishbowlNoIntroRunMutationResolver::class,
+ *             "args"={
+ *                 "slug"={"type"="String!"}
+ *             },
+ *             "validation_groups"={"Default"}
+ *          },
  *         "finish"={
  *             "mutation"=FishbowlFinishMutationResolver::class,
  *             "args"={
@@ -103,6 +111,7 @@ class Fishbowl
 
     public const TRANSITION_INTRODUCE = 'introduce';
     public const TRANSITION_RUN = 'run';
+    public const TRANSITION_NO_INTRO_RUN = 'no_intro_run';
     public const TRANSITION_FINISH = 'finish';
 
     public const STATUS_NOT_STARTED = 'not_started';
@@ -257,6 +266,7 @@ class Fishbowl
      * @ORM\Column(type="boolean")
      */
     private bool $isFishbowlNow = false;
+    private bool $hasIntroduction = false;
 
     public function __construct()
     {
@@ -540,6 +550,16 @@ class Fishbowl
     public function setIsFishbowlNow(bool $isFishbowlNow): self
     {
         $this->isFishbowlNow = $isFishbowlNow;
+    }
+
+    public function getHasIntroduction(): bool
+    {
+        return $this->hasIntroduction;
+    }
+
+    public function setHasIntroduction(bool $hasIntroduction): self
+    {
+        $this->hasIntroduction = $hasIntroduction;
 
         return $this;
     }
