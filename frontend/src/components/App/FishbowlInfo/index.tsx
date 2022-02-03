@@ -62,7 +62,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
           <p className="info-text app-sm">{data.description}</p>
           <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
           <p className="app-sm description__share-text">
-            <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
+            <Trans i18nKey="fishbowl:shareModal.shareText" components={{ i: <i /> }} />
           </p>
         </Description>
       )}
