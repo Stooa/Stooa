@@ -341,25 +341,29 @@ const SwitchStyled = styled.div`
     visibility: hidden;
   }
 
-  & .switch-checkbox[value='true'] + label .switch-button {
+  .switch-checkbox[value='true'] + label .switch-button {
     left: calc(100% - 3px);
     transform: translateX(-100%);
   }
 
-  & .switch-checkbox[value='true'] + label {
+  .switch-checkbox[value='true'] + label {
     background-color: ${COLOR_GREEN_500};
   }
 
-  & .icon-wrapper {
+  .icon-wrapper {
     ${media.min('tablet')`
       position: relative;
     `}
     padding: ${space(1)};
   }
 
-  & .label-text {
+  .label-text {
     font-size: ${rems(14)};
     margin-right: ${space(2)};
+  }
+
+  label {
+    cursor: pointer;
   }
 `;
 
@@ -376,7 +380,7 @@ const SwitchLabel = styled.label`
   border-radius: 50px;
   transition: background-color 0.2s;
 
-  & .switch-button {
+  .switch-button {
     content: '';
     position: absolute;
     top: 3px;
