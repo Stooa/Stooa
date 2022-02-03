@@ -229,6 +229,7 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
     const auth = await getAuthToken(true, rawRoomName);
+
     isModerator = isUserModerator;
 
     setUsername(auth ? auth.user : null);

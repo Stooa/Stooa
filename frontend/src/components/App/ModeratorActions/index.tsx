@@ -71,6 +71,10 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           setLoading(false);
         });
     } else {
+      dispatch({
+        type: 'FISHBOWL_STARTED',
+        fishbowlStarted: true
+      });
       try {
         runWithoutIntroFishbowl(slug)
           .then(() => {
