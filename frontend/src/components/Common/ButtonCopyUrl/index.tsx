@@ -55,7 +55,7 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => 
   return (
     <ButtonToUse onClick={handleCopyUrl} className={`${secondary && 'secondary '}`}>
       {t('linkButton')}
-      <UrlSvg />
+      {variant !== 'link' && <UrlSvg />}
     </ButtonToUse>
   );
 };
