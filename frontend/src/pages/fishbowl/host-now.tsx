@@ -33,7 +33,8 @@ const HostNow = () => {
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           duration: '01:00',
           locale: lang,
-          isFishbowlNow: true
+          isFishbowlNow: true,
+          hasIntroduction: false
         }
       }
     })

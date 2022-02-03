@@ -31,6 +31,7 @@ final class FishbowlFactory extends ModelFactory
             'duration' => self::faker()->dateTime(),
             'currentStatus' => self::faker()->randomElement(Fishbowl::$statusChoices),
             'slug' => self::faker()->slug(),
+            'hasIntroduction' => false,
         ];
     }
 
