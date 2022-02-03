@@ -164,6 +164,7 @@ const ThankYou = () => {
         </div>
         <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
           <ButtonStyledLinkSmall
+            className="host-now"
             onClick={() => {
               pushEventDataLayer({
                 category: 'Host Fishbowl Now',

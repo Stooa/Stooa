@@ -54,6 +54,10 @@ const ThankYouStyled = styled.div`
       fill: ${COLOR_NEUTRO_100};
     }
   }
+
+  .host-now {
+    margin-right: ${space(2)};
+  }
 `;
 
 const Description = styled.p`
