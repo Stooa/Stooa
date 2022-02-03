@@ -26,5 +26,6 @@
     "githubIssues": "Github Issues",
     "help": "Ayuda",
     "legal": "Legal",
-    "linkButton": "Copiar enlace"
+    "linkButton": "Copiar enlace",
+    "successCopiedLink": "Enlace copiado"
 }

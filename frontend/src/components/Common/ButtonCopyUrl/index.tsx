@@ -34,7 +34,7 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => 
 
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(fbUrl);
-    toast('Link copied', {
+    toast(t('successCopiedLink'), {
       icon: <Check />,
       type: 'success',
       position: 'bottom-center',
