@@ -38,6 +38,7 @@ const Icon = styled.button`
 
   .icon-wrapper {
     align-items: center;
+    background-color: ${COLOR_NEUTRO_400};
     border: 1px solid transparent;
     border-radius: 50%;
     display: flex;
@@ -52,8 +53,11 @@ const Icon = styled.button`
     fill: ${COLOR_NEUTRO_600};
   }
 
+  .icon-wrapper:hover {
+    border-color: currentColor;
+  }
+
   &.active .icon-wrapper {
-    background-color: ${COLOR_NEUTRO_400};
     border-color: currentColor;
   }
 `;
