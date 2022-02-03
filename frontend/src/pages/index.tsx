@@ -157,9 +157,7 @@ const Home = () => {
                 });
               }}
             >
-              <span>
-                <Trans i18nKey="home:scheduleFishbowl" components={{ i: <i /> }} />
-              </span>
+              <span>{t('scheduleFishbowl')}</span>
               <ArrowRight />
             </ButtonStyledLink>
           </Link>
