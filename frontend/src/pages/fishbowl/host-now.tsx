@@ -17,6 +17,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { getTimePlusOneMinute } from '@/lib/helpers';
 import Layout from '@/layouts/Default';
+import Loading from '@/components/App/Loader';
 
 const HostNow = () => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
@@ -58,7 +59,7 @@ const HostNow = () => {
 
   return (
     <Layout>
-      <h1>{t('hostNow.preparing')}</h1>
+      <Loading />
     </Layout>
   );
 };
