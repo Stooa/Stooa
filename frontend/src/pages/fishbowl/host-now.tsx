@@ -74,7 +74,7 @@ const HostNow = () => {
   useEffect(() => {
     handleResetAppState();
     createFishbowlRequest();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Layout>
