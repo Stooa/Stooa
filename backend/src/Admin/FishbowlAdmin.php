@@ -80,7 +80,7 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('currentStatus', null, [], ChoiceType::class, [
                 'choices' => Fishbowl::$statusChoices,
             ])
-            ->add('isFishbowlNow');
+            ->add('isFishbowlNow')
             ->add('hasIntroduction');
     }
 

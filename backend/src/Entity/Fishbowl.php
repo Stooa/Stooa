@@ -266,6 +266,12 @@ class Fishbowl
      * @ORM\Column(type="boolean")
      */
     private bool $isFishbowlNow = false;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     *
+     * @ORM\Column(type="boolean")
+     */
     private bool $hasIntroduction = false;
 
     public function __construct()
@@ -550,6 +556,8 @@ class Fishbowl
     public function setIsFishbowlNow(bool $isFishbowlNow): self
     {
         $this->isFishbowlNow = $isFishbowlNow;
+
+        return $this;
     }
 
     public function getHasIntroduction(): bool
