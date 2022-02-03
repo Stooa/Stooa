@@ -143,7 +143,7 @@ const Home = () => {
               }}
             >
               <span>
-                <Trans i18nKey="home:hostNow" components={{ i: <i /> }} />
+                <Trans i18nKey="home:hostFishbowlNow" components={{ i: <i /> }} />
               </span>
               <ArrowRight />
             </ButtonStyledLink>
@@ -153,7 +153,7 @@ const Home = () => {
               className="animate-item cta-create-fishbowl secondary"
               onClick={() => {
                 pushEventDataLayer({
-                  category: 'Create Fishbowl',
+                  category: 'Schedule Fishbowl',
                   action: 'Billboard',
                   label: 'Home'
                 });
