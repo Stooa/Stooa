@@ -103,7 +103,7 @@ const Footer: React.FC = () => {
                     });
                   }}
                 >
-                  <span>{t('cta')}</span>
+                  <span>{t('scheduleFishbowl')}</span>
                 </a>
               </Link>
             </li>

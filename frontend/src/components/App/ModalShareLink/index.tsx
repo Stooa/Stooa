@@ -14,7 +14,6 @@ import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
-import CopyUrl from '@/components/Common/CopyUrl';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getOnBoardingCookie, isFishbowlShareLinkCookie, setShareLinkCookie } from '@/lib/auth';
@@ -60,7 +59,7 @@ const ModalShareLink: React.FC = () => {
             </p>
             <div className="modal-footer">
               <ButtonCopyUrl fid={fid as string} locale={data.locale}>
-                {t('shareModal.linkButton')}
+                {t('common:linkButton')}
               </ButtonCopyUrl>
             </div>
           </div>

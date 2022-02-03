@@ -16,6 +16,7 @@ export interface CreateFishbowlOptions {
       timezone: string;
       duration: string;
       locale: string;
+      hasIntroduction: boolean;
       isFishbowlNow: boolean;
     };
   };

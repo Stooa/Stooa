@@ -17,12 +17,15 @@ import useTranslation from 'next-translate/useTranslation';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { getTimePlusOneMinute } from '@/lib/helpers';
 import Layout from '@/layouts/Default';
-import Loading from '@/components/App/Loader';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const HostNow = () => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
-  const { lang, t } = useTranslation('fishbowl');
+  const { lang } = useTranslation();
   const router = useRouter();
+
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const timeToStart = getTimePlusOneMinute().toLocaleString('en-US');
 
   const createFishbowlRequest = async () => {
     await createFishbowl({
@@ -30,8 +33,8 @@ const HostNow = () => {
         input: {
           name: '',
           description: '',
-          startDateTime: getTimePlusOneMinute(),
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          startDateTime: timeToStart,
+          timezone: timeZone,
           duration: '01:00',
           locale: lang,
           isFishbowlNow: true,
@@ -60,7 +63,7 @@ const HostNow = () => {
 
   return (
     <Layout>
-      <Loading />
+      <LoadingIcon />
     </Layout>
   );
 };
