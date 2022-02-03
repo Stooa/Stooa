@@ -14,12 +14,13 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import Dots from '@/ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
+import Trans from 'next-translate/Trans';
 
 interface Props {
   data: Fishbowl;
 }
 
-const Info: React.FC<Props> = ({ data }) => {
+const FishbowlInfo: React.FC<Props> = ({ data }) => {
   const wrapperRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -61,7 +62,7 @@ const Info: React.FC<Props> = ({ data }) => {
           <p className="info-text app-sm">{data.description}</p>
           <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
           <p className="app-sm description__share-text">
-            Copy and share the link to invite people to this fishbowl
+            <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
           </p>
         </Description>
       )}
@@ -69,4 +70,4 @@ const Info: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default Info;
+export default FishbowlInfo;
