@@ -170,7 +170,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       <ParticipantsDrawer className={active ? 'active' : ''}>
         <div className="header">
           <h2 className="app-md medium">{t('fishbowl:participants.title')}</h2>
-          <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
+          <ButtonCopyUrl variant="link" secondary fid={data.slug} locale={data.locale} />
           <Icon onClick={toggleDrawer}>
             <Cross />
           </Icon>

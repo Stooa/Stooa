@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-import Button, { ButtonSmall } from '@/ui/Button';
+import Button, { ButtonLinkColored, ButtonSmall } from '@/ui/Button';
 import UrlSvg from '@/ui/svg/url.svg';
 import Check from '@/ui/svg/checkmark.svg';
 
@@ -22,7 +22,7 @@ interface Props {
   fid: string;
   locale: string;
   secondary?: boolean;
-  variant?: 'small';
+  variant?: 'small' | 'link';
 }
 
 const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => {
@@ -42,7 +42,15 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => 
     });
   };
 
-  const ButtonToUse = variant === 'small' ? ButtonSmall : Button;
+  let ButtonToUse;
+
+  if (variant === 'small') {
+    ButtonToUse = ButtonSmall;
+  } else if (variant === 'link') {
+    ButtonToUse = ButtonLinkColored;
+  } else {
+    ButtonToUse = Button;
+  }
 
   return (
     <ButtonToUse onClick={handleCopyUrl} className={`${secondary && 'secondary '}`}>
