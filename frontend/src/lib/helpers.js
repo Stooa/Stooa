@@ -102,7 +102,7 @@ const nearestQuarterHour = () => {
 };
 
 const getTimePlusOneMinute = () => {
-  return new Date(Date.now() + 60 * 1000);
+  return new Date(Date.now() + 60 * 1000).toLocaleString('en-US');
 };
 
 export {
