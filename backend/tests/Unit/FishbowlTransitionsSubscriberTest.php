@@ -98,4 +98,17 @@ class FishbowlTransitionsSubscriberTest extends TestCase
 
         $this->assertNotNull($this->fishbowl->getFinishedAt());
     }
+
+    /** @test */
+    public function itGetSubscribedEvents(): void
+    {
+        $this->assertSame([
+            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_INTRODUCE => 'onIntroduction',
+            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_NO_INTRO_RUN => 'onNoIntroductionRun',
+            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_RUN => 'onRun',
+            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_FINISH => 'onFinish',
+        ],
+            $this->subscriber::getSubscribedEvents()
+        );
+    }
 }
