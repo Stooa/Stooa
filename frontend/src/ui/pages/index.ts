@@ -50,7 +50,13 @@ const Billboard = styled.div`
 
   .cta-wrapper {
     display: flex;
-    column-gap: ${space(3)};
+    flex-direction: column;
+    row-gap: ${space(2)};
+
+    ${media.min('tablet')`
+      flex-direction: row;
+      column-gap: ${space(3)};
+    `}
   }
 
   #animated-billboard-morph,
