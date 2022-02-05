@@ -28,7 +28,7 @@
     "@apollo/client": "3.5.8",
     "@types/node": "16.11.22",
     "@types/react": "17.0.39",
-    "@types/styled-components": "5.1.21",
+    "@types/styled-components": "5.1.22",
     "@types/yup": "0.29.13",
     "axios": "0.25.0",
     "babel-plugin-styled-components": "2.0.2",
