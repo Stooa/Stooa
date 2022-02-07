@@ -3,8 +3,9 @@
     "signout": "Salir",
     "register": "Registro gratuito",
     "cancel": "Cancela",
-    "createEvent": "Crear un fishbowl gratis",
     "cta": "Crear un fishbowl",
+    "scheduleFishbowl": "Agendar un fishbowl",
+    "hostFishbowlNow": "Empezar un fishbowl ahora",
     "editProfile": "Edita tu perfil",
     "changePassword": "Cambia la contraseña",
     "goHome": "Ves a la página de inicio",
@@ -24,5 +25,7 @@
     "conductCode": "Código de conducta",
     "githubIssues": "Github Issues",
     "help": "Ayuda",
-    "legal": "Legal"
+    "legal": "Legal",
+    "linkButton": "Copiar enlace",
+    "successCopiedLink": "Enlace copiado"
 }

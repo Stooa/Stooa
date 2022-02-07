@@ -20,6 +20,7 @@ const CREATE_FISHBOWL = gql`
         locale
         startDateTimeTz
         endDateTimeTz
+        isFishbowlNow
         hasIntroduction
       }
     }
@@ -64,6 +65,7 @@ const GET_FISHBOWL = gql`
       endDateTimeTz
       durationFormatted
       slug
+      isFishbowlNow
       hasIntroduction
       currentStatus
     }
