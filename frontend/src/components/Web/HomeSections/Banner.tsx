@@ -39,7 +39,7 @@ const Banner: React.FC = () => {
         <p className="text-lg animate-item">{t('banner')}</p>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
           <Button as="a" className="animate-item cta-create-fishbowl">
-            <span>{t('cta')}</span>
+            <span>{t('scheduleFishbowl')}</span>
             <ArrowRight />
           </Button>
         </Link>

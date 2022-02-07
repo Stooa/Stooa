@@ -30,26 +30,14 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
-type createFishbowlAttrs = {
-  variables: {
-    input: {
-      name: string;
-      description: string;
-      startDateTime: string;
-      timezone: string;
-      duration: string;
-      locale: string;
-      hasIntroduction: boolean;
-    };
-  };
-};
+import { CreateFishbowlOptions } from '@/types/graphql/fishbowl';
 
 interface FormProps {
   required: string;
   date: string;
   title: string;
   createFishbowl: (
-    options?: createFishbowlAttrs
+    options?: CreateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   onSubmit: (any) => void;
   currentLanguage: string;
@@ -242,7 +230,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
-    console.log(values);
     await props
       .createFishbowl({
         variables: {
@@ -253,6 +240,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
             timezone: values.timezone,
             duration: values.hours,
             locale: values.language,
+            isFishbowlNow: false,
             hasIntroduction: values.hasIntroduction
           }
         }
