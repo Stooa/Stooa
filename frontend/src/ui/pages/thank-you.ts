@@ -10,7 +10,7 @@
 import styled from 'styled-components';
 
 import Alert from '@/ui/Alert';
-import { space, rems } from '@/ui/helpers';
+import { space, rems, media } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_PURPLE_400,
@@ -53,6 +53,17 @@ const ThankYouStyled = styled.div`
     svg path {
       fill: ${COLOR_NEUTRO_100};
     }
+  }
+
+  .action-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: ${space(2)};
+
+    ${media.min('tablet')`
+      flex-direction: row;
+      column-gap: ${space(3)};
+    `}
   }
 `;
 

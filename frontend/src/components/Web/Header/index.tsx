@@ -44,13 +44,13 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                     className="secondary"
                     onClick={() => {
                       pushEventDataLayer({
-                        category: 'Create Fishbowl',
+                        category: 'Schedule Fishbowl',
                         action: 'Header',
                         label: window.location.href
                       });
                     }}
                   >
-                    <span>{t('createEvent')}</span>
+                    <span>{t('scheduleFishbowl')}</span>
                     <ArrowRight />
                   </ButtonSmall>
                 </RedirectLink>

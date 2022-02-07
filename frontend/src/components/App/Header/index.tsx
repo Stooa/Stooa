@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Header as HeaderStyled } from '@/layouts/App/styles';
+import ModalShareLink from '@/components/App/ModalShareLink';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
@@ -46,6 +47,9 @@ const Header: React.FC<Props> = ({ toggleParticipants }) => {
       <div className="header-info">
         <FishbowlInfo data={data} />
         <Onboarding initialized={conferenceReady} isModerator={isModerator} />
+      </div>
+      <div className="header-share">
+        <ModalShareLink />
       </div>
       <div className="header-actions">
         {isModerator && (

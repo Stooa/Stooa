@@ -48,6 +48,17 @@ const Billboard = styled.div`
     min-height: 55vh;
   `}
 
+  .cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: ${space(2)};
+
+    ${media.min('tablet')`
+      flex-direction: row;
+      column-gap: ${space(3)};
+    `}
+  }
+
   #animated-billboard-morph,
   #animated-billboard-morph2 {
     height: ${rems(160)};

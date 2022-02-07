@@ -80,6 +80,7 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('currentStatus', null, [], ChoiceType::class, [
                 'choices' => Fishbowl::$statusChoices,
             ])
+            ->add('isFishbowlNow')
             ->add('hasIntroduction');
     }
 
@@ -90,6 +91,7 @@ class FishbowlAdmin extends AbstractAdmin
             ->addIdentifier('name')
             ->add('description')
             ->add('host')
+            ->add('isFishbowlNow')
             ->add('currentStatus', null, [
                 'template' => 'sonata/fishbowl_status.html.twig',
             ])
@@ -126,6 +128,9 @@ class FishbowlAdmin extends AbstractAdmin
                 ->add('host', ModelAutocompleteType::class, [
                     'property' => 'email',
                     'callback' => self::hostCallbackFunction(),
+                ])
+                ->add('isFishbowlNow', BooleanType::class, [
+                    'transform' => true,
                 ])
                 ->add('hasIntroduction', BooleanType::class, [
                     'transform' => true,

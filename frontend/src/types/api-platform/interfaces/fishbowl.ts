@@ -15,6 +15,7 @@ export interface Fishbowl {
   'timezone': string;
   'locale': string;
   'duration': Date;
+  'isFishbowlNow'?: boolean;
   'hasIntroduction'?: boolean;
   readonly 'slug'?: string;
   readonly 'host'?: string;
