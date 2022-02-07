@@ -59,7 +59,7 @@ const Header = styled.div`
 
 const CardStyled = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 2fr 1fr;
   position: relative;
   background-color: ${COLOR_NEUTRO_100};
   padding: ${space(1)} ${space(2)};
@@ -75,8 +75,11 @@ const CardStyled = styled.div`
   }
 
   .card__actions {
+    display: flex;
+    column-gap: ${space(1)};
     align-self: flex-end;
-    justify-self: flex-end;
+    justify-content: space-evenly;
+    align-items: baseline;
   }
 
   &::after {
@@ -88,11 +91,15 @@ const CardStyled = styled.div`
     left: 0;
     top: 0;
   }
-  .card__title {
-    ${TEXT_MD};
-    font-weight: 500;
-    color: ${COLOR_NEUTRO_800};
-  }
 `;
 
-export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper };
+const CardTitle = styled.div`
+  ${TEXT_MD};
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+  color: ${COLOR_NEUTRO_800};
+  grid-column: 1 / span 2;
+`;
+
+export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper, CardTitle };

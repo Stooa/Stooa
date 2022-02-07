@@ -7,11 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
-import { formatDateTime } from '@/lib/helpers';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import router from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { CardStyled } from './styles';
+
+import { ROUTE_FISHBOWL } from '@/app.config';
+import { formatDateTime } from '@/lib/helpers';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
+import RedirectLink from '@/components/Web/RedirectLink';
+import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+
+import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
+import { ButtonSmall } from '@/ui/Button';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -27,10 +34,17 @@ const FishbowlCard = ({ fishbowl }: Props) => {
 
   const offset = startDateTime.getTimezoneOffset() / 60;
 
+  const handleGoToFishbowl = () => {
+    const route = `${ROUTE_FISHBOWL}/${slug}`;
+    router.push(route, route, { locale: locale });
+  };
+
   return (
     <CardStyled>
+      <CardTitle>
+        <h4>{name}</h4>
+      </CardTitle>
       <div className="card__info">
-        <h4 className="card__title">{name}</h4>
         <div>
           {month} {day}, {year}
         </div>
@@ -40,6 +54,17 @@ const FishbowlCard = ({ fishbowl }: Props) => {
         </div>
       </div>
       <div className="card__actions">
+        <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
+          <ButtonSmall
+            onClick={() => {
+              handleGoToFishbowl;
+            }}
+          >
+            <span>{t('enterFishbowl')}</span>
+            <ArrowRight />
+          </ButtonSmall>
+        </RedirectLink>
+
         <ButtonCopyUrl variant="link" fid={slug} locale={locale}>
           {t('linkButton')}
         </ButtonCopyUrl>
