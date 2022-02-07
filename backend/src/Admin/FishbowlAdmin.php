@@ -91,10 +91,10 @@ class FishbowlAdmin extends AbstractAdmin
             ->addIdentifier('name')
             ->add('description')
             ->add('host')
-            ->add('isFishbowlNow')
             ->add('currentStatus', null, [
                 'template' => 'sonata/fishbowl_status.html.twig',
             ])
+            ->add('isFishbowlNow')
             ->add('hasIntroduction')
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('endDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
