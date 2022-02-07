@@ -265,6 +265,13 @@ class Fishbowl
      *
      * @ORM\Column(type="boolean")
      */
+    private bool $isFishbowlNow = false;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     *
+     * @ORM\Column(type="boolean")
+     */
     private bool $hasIntroduction = false;
 
     public function __construct()
@@ -537,6 +544,18 @@ class Fishbowl
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
         }
+
+        return $this;
+    }
+
+    public function getIsFishbowlNow(): bool
+    {
+        return $this->isFishbowlNow;
+    }
+
+    public function setIsFishbowlNow(bool $isFishbowlNow): self
+    {
+        $this->isFishbowlNow = $isFishbowlNow;
 
         return $this;
     }

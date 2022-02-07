@@ -28,7 +28,8 @@ import {
   GITBOOK_CONDUCT,
   SUPPORT_EMAIL,
   GITHUB_BASE,
-  APP_NAME
+  APP_NAME,
+  ROUTE_FISHBOWL_HOST_NOW
 } from '@/app.config';
 
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -97,13 +98,28 @@ const Footer: React.FC = () => {
                 <a
                   onClick={() => {
                     pushEventDataLayer({
-                      category: 'Create Fishbowl',
+                      category: 'Schedule Fishbowl',
                       action: 'Footer',
                       label: 'Footer'
                     });
                   }}
                 >
-                  <span>{t('cta')}</span>
+                  <span>{t('scheduleFishbowl')}</span>
+                </a>
+              </Link>
+            </li>
+            <li className="text-sm">
+              <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+                <a
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Host Fishbowl Now',
+                      action: 'Footer',
+                      label: 'Footer'
+                    });
+                  }}
+                >
+                  <span>{t('hostFishbowlNow')}</span>
                 </a>
               </Link>
             </li>

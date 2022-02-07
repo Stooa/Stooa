@@ -133,6 +133,12 @@ const linkStyles = css`
   text-decoration: underline;
 `;
 
+const coloredLinkStyles = css`
+  cursor: pointer;
+  color: ${COLOR_PURPLE_500};
+  font-weight: bold;
+`;
+
 const ButtonLink = styled.button`
   ${linkStyles}
 `;
@@ -154,6 +160,11 @@ const ButtonLinkApp = styled.button`
   ${linkStyles}
 `;
 
+const ButtonLinkColored = styled.button`
+  ${coloredLinkStyles}
+  ${APP_MD}
+`;
+
 export {
   ButtonApp,
   ButtonAppSmall,
@@ -163,6 +174,7 @@ export {
   ButtonLink,
   ButtonLinkApp,
   ButtonStyledLink,
-  ButtonStyledLinkSmall
+  ButtonStyledLinkSmall,
+  ButtonLinkColored
 };
 export default Button;

@@ -18,6 +18,7 @@ import {
   COLOR_GREEN_100,
   COLOR_GREEN_500,
   COLOR_GREEN_800,
+  COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_RED_100,
   COLOR_RED_600,
@@ -219,10 +220,20 @@ const GlobalStyle = createGlobalStyle`
 
       & .Toastify__toast-theme--light.Toastify__toast--warning {
         --toastify-color-light: ${COLOR_YELLOW_100};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_NEUTRO_600};
+          opacity: 1;
+          }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--error {
         --toastify-color-light: ${COLOR_RED_100};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_NEUTRO_600};
+          opacity: 1;
+          }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--success {
