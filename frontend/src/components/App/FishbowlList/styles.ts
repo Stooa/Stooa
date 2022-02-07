@@ -15,7 +15,8 @@ import { APP_MD, TEXT_LG, TEXT_MD } from '@/ui/Texts';
 const FishbowlListWrapper = styled.div`
   height: 100%;
   padding: ${space(5)} 0;
-  width: ${BREAKPOINTS.desktop}px;
+  width: 100%;
+  max-width: ${BREAKPOINTS.tablet}px;
 `;
 
 const ScrollWrapper = styled.div`
@@ -38,7 +39,6 @@ const Header = styled.div`
 
   .fishbowlist__title {
     ${TEXT_LG}
-    margin-bottom: ${space(1)};
     font-weight: 300;
   }
 
@@ -48,20 +48,36 @@ const Header = styled.div`
     width: 100%;
     display: block;
   }
+
+  div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: ${space(1)};
+  }
 `;
 
 const CardStyled = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
   position: relative;
-  flex-direction: column;
-  align-items: flex-start;
   background-color: ${COLOR_NEUTRO_100};
-  border-radius: ${rems(8)};
   padding: ${space(1)} ${space(2)};
-
+  border-radius: ${rems(8)};
   box-shadow: var(--shadow-elevation-medium);
 
   overflow: hidden;
+
+  .card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card__actions {
+    align-self: flex-end;
+    justify-self: flex-end;
+  }
 
   &::after {
     content: '';

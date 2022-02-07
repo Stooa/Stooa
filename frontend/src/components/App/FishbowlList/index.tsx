@@ -7,11 +7,21 @@
  * file that was distributed with this source code.
  */
 
+import useTranslation from 'next-translate/useTranslation';
+import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
+
+import RedirectLink from '@/components/Web/RedirectLink';
+import { pushEventDataLayer } from '@/lib/analytics';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { ButtonSmall } from '@/ui/Button';
 import FishbowlCard from './FishbowlCard';
 import { FishbowlListWrapper, Header, ScrollWrapper } from './styles';
 
+import PlusSign from '@/ui/svg/plus-sign.svg';
+
 const FishbowlList = () => {
+  const { t, lang } = useTranslation('common');
+
   //todays date
   const today = new Date(Date.now());
   const tomorrow = new Date(Date.now() + 86400000);
@@ -22,6 +32,7 @@ const FishbowlList = () => {
       description: 'fishbowl 1 description',
       startDateTime: tomorrow,
       durationFormatted: '01:00',
+      duration: tomorrow,
       timezone: 'Europe/Paris',
       slug: 'fjaksjklda',
       locale: 'en',
@@ -33,6 +44,7 @@ const FishbowlList = () => {
       startDateTime: tomorrow,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -43,6 +55,7 @@ const FishbowlList = () => {
       startDateTime: tomorrow,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -53,6 +66,7 @@ const FishbowlList = () => {
       startDateTime: tomorrow,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -63,6 +77,7 @@ const FishbowlList = () => {
       startDateTime: tomorrow,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -73,6 +88,7 @@ const FishbowlList = () => {
       startDateTime: today,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -83,6 +99,7 @@ const FishbowlList = () => {
       startDateTime: today,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -93,6 +110,7 @@ const FishbowlList = () => {
       startDateTime: today,
       timezone: 'Europe/Paris',
       durationFormatted: '01:00',
+      duration: tomorrow,
       slug: 'fjaksjklda',
       locale: 'en',
       currentStatus: 'open'
@@ -104,6 +122,21 @@ const FishbowlList = () => {
       <Header>
         <div>
           <h1 className="fishbowlist__title">Scheduled fishbowls (10)</h1>
+          <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
+            <ButtonSmall
+              className="secondary"
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Schedule Fishbowl',
+                  action: 'Header',
+                  label: window.location.href
+                });
+              }}
+            >
+              <span>{t('scheduleFishbowl')}</span>
+              <PlusSign />
+            </ButtonSmall>
+          </RedirectLink>
         </div>
         <span className="divider" />
       </Header>
