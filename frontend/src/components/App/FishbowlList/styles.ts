@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 import { BREAKPOINTS, COLOR_NEUTRO_100, COLOR_NEUTRO_500, COLOR_NEUTRO_800 } from '@/ui/settings';
-import { rems, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 import { APP_MD, TEXT_LG, TEXT_MD } from '@/ui/Texts';
 
 const FishbowlListWrapper = styled.div`
@@ -59,16 +59,19 @@ const Header = styled.div`
 
 const CardStyled = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
+  min-height: 150px;
   position: relative;
   background-color: ${COLOR_NEUTRO_100};
   padding: ${space(2)} ${space(2)};
   border-radius: ${rems(8)};
   box-shadow: var(--shadow-elevation-medium);
-
   transition: transform 0.2s ease-in-out;
-
   overflow: hidden;
+
+  ${media.min('tablet')`
+    grid-template-columns: 2fr 1fr;
+  `}
 
   .card__info {
     display: flex;
@@ -106,7 +109,7 @@ const CardTitle = styled.div`
   text-align: left;
   font-weight: 500;
   color: ${COLOR_NEUTRO_800};
-  grid-column: 1 / span 2;
+  grid-column: 1 / 2;
 `;
 
 export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper, CardTitle };

@@ -58,6 +58,10 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
       </div>
       <div className="card__actions">
         <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
+          <ButtonCopyUrl variant="link" fid={slug} locale={locale}>
+            {t('common:linkButton')}
+          </ButtonCopyUrl>
+
           <ButtonSmall
             onClick={() => {
               handleGoToFishbowl;
@@ -67,10 +71,6 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
             <ArrowRight />
           </ButtonSmall>
         </RedirectLink>
-
-        <ButtonCopyUrl variant="link" fid={slug} locale={locale}>
-          {t('common:linkButton')}
-        </ButtonCopyUrl>
       </div>
     </CardStyled>
   );
