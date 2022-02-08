@@ -50,6 +50,6 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
         $queryBuilder->andWhere(sprintf('%s.currentStatus != :finished', $rootAlias));
         $queryBuilder->setParameter('finished', Fishbowl::STATUS_FINISHED);
 
-        $queryBuilder->addOrderBy(sprintf('%s.startDateTime', $rootAlias), 'DESC');
+        $queryBuilder->addOrderBy(sprintf('%s.startDateTime', $rootAlias), 'ASC');
     }
 }
