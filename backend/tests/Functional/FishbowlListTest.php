@@ -27,17 +27,21 @@ class FishbowlListTest extends ApiTestCase
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
         ])->object();
-
-        FishbowlFactory::createOne([
-           'host' => $this->host
-        ]);
-
-        FishbowlFactory::createOne();
     }
 
     /** @test */
-    public function itGetsHostFishbowlsCorrectly(): void
+    public function itGetsHostsCreatedFishbowlsCorrectly(): void
     {
+        FishbowlFactory::createOne([
+            'host' => $this->host
+        ]);
+
+        FishbowlFactory::createOne([
+            'currentStatus' => Fishbowl::STATUS_FINISHED
+        ]);
+
+        FishbowlFactory::createOne();
+
         $hostToken = $this->logIn($this->host);
 
         static::createClient()->request('GET', '/fishbowls', [
