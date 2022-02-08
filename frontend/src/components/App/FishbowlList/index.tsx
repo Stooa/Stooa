@@ -128,7 +128,7 @@ const FishbowlList = () => {
     console.log(fid);
   };
 
-  const params = new URLSearchParams([['estimatedDateToFinish[before]', tomorrow.toISOString()]]);
+  const params = new URLSearchParams([['estimatedDateToFinish[after]', new Date().toISOString()]]);
 
   const getFishbowls = async () => {
     const auth = await getAuthToken();
