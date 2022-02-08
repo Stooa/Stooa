@@ -425,9 +425,9 @@ class Fishbowl
 
     public function calculateEstimatedDateToFinish(): void
     {
-        $startDateTime = $this->getStartDateTime();
+        $this->estimatedDateToFinish = clone $this->getStartDateTime();
 
-        $this->estimatedDateToFinish = $startDateTime->add(
+        $this->estimatedDateToFinish->add(
             new \DateInterval($this->duration->format('\P\TG\Hi\M'))
         );
     }
