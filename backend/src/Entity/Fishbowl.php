@@ -38,7 +38,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Annotation\ApiFilter;
 
 /**
- * @ApiFilter(DateFilter::class, properties={"startDateTime"}),
+ * @ApiFilter(DateFilter::class, properties={"estimatedDateToFinish"}),
  * @ApiResource(
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
@@ -250,6 +250,13 @@ class Fishbowl
     private ?\DateTimeInterface $finishedAt = null;
 
     /**
+     * @Assert\DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $estimatedDateToFinish = null;
+
+    /**
      * @Groups({"fishbowl:read"})
      *
      * @var Collection<int, Participant>
@@ -400,6 +407,25 @@ class Fishbowl
         MAssert::notNull($this->duration);
 
         return $this->getStartDateTimeTz()->add(
+            new \DateInterval($this->duration->format('\P\TG\Hi\M'))
+        );
+    }
+
+    public function getEstimatedDateToFinish(): ?\DateTimeInterface
+    {
+        return $this->estimatedDateToFinish;
+    }
+
+    public function setEstimatedDateToFinish(\DateTimeInterface $estimatedDateToFinish): self
+    {
+        $this->estimatedDateToFinish = $estimatedDateToFinish;
+
+        return $this;
+    }
+
+    public function calculateEstimatedDateToFinish(): void
+    {
+        $this->estimatedDateToFinish = $this->getStartDateTime()->add(
             new \DateInterval($this->duration->format('\P\TG\Hi\M'))
         );
     }

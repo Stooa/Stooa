@@ -11,7 +11,7 @@ use Faker\Provider\DateTime;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class FishbowlListTest extends ApiTestCase
+class FishbowlListFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -81,7 +81,7 @@ class FishbowlListTest extends ApiTestCase
 
         static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'startDateTime[before]' => $now->format(\DateTimeInterface::ISO8601)
+                'estimatedDateToFinish[before]' => $now->format(\DateTimeInterface::ISO8601)
             ],
             'auth_bearer' => $hostToken,
         ]);
