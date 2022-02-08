@@ -26,12 +26,14 @@ interface Props {
 }
 
 const FishbowlCard = ({ fishbowl, onClick }: Props) => {
-  const { t } = useTranslation('common');
-  const { name, startDateTime, slug, timezone, locale } = fishbowl;
+  const { t } = useTranslation('fishbowl-list');
+  const { name, startDateTimeTz, slug, locale } = fishbowl;
+
+  const startDateTime = new Date(startDateTimeTz);
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
   const day = startDateTime.toLocaleString('default', { day: 'numeric' });
-  const { time, year } = formatDateTime(startDateTime);
+  const { time, year, timezone } = formatDateTime(startDateTimeTz);
 
   const offset = startDateTime.getTimezoneOffset() / 60;
 
@@ -49,10 +51,10 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
         <div>
           {month} {day}, {year}
         </div>
-        <div>{time}</div>
         <div>
-          {timezone} {offset}
+          {time} {offset}
         </div>
+        <div>{timezone}</div>
       </div>
       <div className="card__actions">
         <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
@@ -67,7 +69,7 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
         </RedirectLink>
 
         <ButtonCopyUrl variant="link" fid={slug} locale={locale}>
-          {t('linkButton')}
+          {t('common:linkButton')}
         </ButtonCopyUrl>
       </div>
     </CardStyled>
