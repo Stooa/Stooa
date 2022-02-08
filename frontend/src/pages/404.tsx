@@ -32,7 +32,7 @@ const Page404 = () => {
         <div className="ctas">
           <Link href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button as="a">
-              <span>{t('home:cta')}</span>
+              <span>{t('home:scheduleFishbowl')}</span>
               <ArrowRight />
             </Button>
           </Link>
