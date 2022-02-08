@@ -17,7 +17,6 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Repository\FishbowlRepository;
 use App\Resolver\FishbowlCreatorResolver;
 use App\Resolver\FishbowlFinishMutationResolver;
@@ -40,7 +39,6 @@ use Webmozart\Assert\Assert as MAssert;
 
 /**
  * @ApiFilter(DateFilter::class, properties={"estimatedDateToFinish"}),
- * @ApiFilter(OrderFilter::class, properties={"startDateTime": "DESC"}),
  * @ApiResource(
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
