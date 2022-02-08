@@ -128,12 +128,17 @@ const FishbowlList = () => {
     console.log(fid);
   };
 
+  const params = new URLSearchParams([['estimatedDateToFinish[before]', tomorrow.toISOString()]]);
+
   const getFishbowls = async () => {
     const auth = await getAuthToken();
 
     api
       .get(`/fishbowls`, {
-        headers: { authorization: `${auth ? auth.authorizationString : null}` }
+        headers: {
+          authorization: `${auth ? auth.authorizationString : null}`
+        },
+        params
       })
       .then(response => {
         console.log(response.data);
