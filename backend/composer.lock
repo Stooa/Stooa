@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "29786d80d2f921ccb494359f2b7fe6d2",
+    "content-hash": "ea8fa4028ce4d58994e239fa6fef3565",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13158,16 +13158,16 @@
         },
         {
             "name": "psalm/plugin-symfony",
-            "version": "v3.1.2",
+            "version": "v3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-symfony.git",
-                "reference": "cd25832215c35770bb3a6a42a00f34cd7672697c"
+                "reference": "f5348e9a7c8b2db247a8fda639b6e2b98471e22e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/cd25832215c35770bb3a6a42a00f34cd7672697c",
-                "reference": "cd25832215c35770bb3a6a42a00f34cd7672697c",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/f5348e9a7c8b2db247a8fda639b6e2b98471e22e",
+                "reference": "f5348e9a7c8b2db247a8fda639b6e2b98471e22e",
                 "shasum": ""
             },
             "require": {
@@ -13177,6 +13177,7 @@
                 "vimeo/psalm": "^4.12"
             },
             "require-dev": {
+                "doctrine/annotations": "^1.8",
                 "doctrine/orm": "^2.7",
                 "phpunit/phpunit": "~7.5 || ~9.5",
                 "symfony/cache-contracts": "^1.0 || ^2.0",
@@ -13216,9 +13217,9 @@
             "description": "Psalm Plugin for Symfony",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-symfony/issues",
-                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.1.2"
+                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.1.3"
             },
-            "time": "2022-01-02T20:22:02+00:00"
+            "time": "2022-02-08T07:02:16+00:00"
         },
         {
             "name": "runroom-packages/testing",
