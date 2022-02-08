@@ -1,5 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
@@ -7,7 +18,6 @@ use App\Entity\Fishbowl;
 use App\Entity\User;
 use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
-use Faker\Provider\DateTime;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -34,11 +44,11 @@ class FishbowlListFunctionalTest extends ApiTestCase
     public function itGetsHostsOnlyCreatedFishbowlsCorrectly(): void
     {
         FishbowlFactory::createOne([
-            'host' => $this->host
+            'host' => $this->host,
         ]);
 
         FishbowlFactory::createOne([
-            'currentStatus' => Fishbowl::STATUS_FINISHED
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
         ]);
 
         FishbowlFactory::createOne();
@@ -72,14 +82,14 @@ class FishbowlListFunctionalTest extends ApiTestCase
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'host' => $this->host
+            'host' => $this->host,
         ])->object();
 
         $hostToken = $this->logIn($this->host);
 
         static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'estimatedDateToFinish[after]' => $now->format(\DateTimeInterface::ISO8601)
+                'estimatedDateToFinish[after]' => $now->format(\DateTimeInterface::ISO8601),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -105,14 +115,14 @@ class FishbowlListFunctionalTest extends ApiTestCase
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'host' => $this->host
+            'host' => $this->host,
         ])->object();
 
         $hostToken = $this->logIn($this->host);
 
         static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'estimatedDateToFinish[before]' => $now->format(\DateTimeInterface::ISO8601)
+                'estimatedDateToFinish[before]' => $now->format(\DateTimeInterface::ISO8601),
             ],
             'auth_bearer' => $hostToken,
         ]);

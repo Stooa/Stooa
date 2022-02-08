@@ -36,7 +36,6 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
         string $resourceClass,
         string $operationName = null
     ): void {
-
         if (Fishbowl::class !== $resourceClass || null === $user = $this->security->getUser()) {
             return;
         }
