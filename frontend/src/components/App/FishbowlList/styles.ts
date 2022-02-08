@@ -62,7 +62,7 @@ const CardStyled = styled.div`
   grid-template-columns: 2fr 1fr;
   position: relative;
   background-color: ${COLOR_NEUTRO_100};
-  padding: ${space(1)} ${space(2)};
+  padding: ${space(2)} ${space(2)};
   border-radius: ${rems(8)};
   box-shadow: var(--shadow-elevation-medium);
 
