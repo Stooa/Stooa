@@ -66,6 +66,8 @@ const CardStyled = styled.div`
   border-radius: ${rems(8)};
   box-shadow: var(--shadow-elevation-medium);
 
+  transition: transform 0.2s ease-in-out;
+
   overflow: hidden;
 
   .card__info {
@@ -90,6 +92,11 @@ const CardStyled = styled.div`
     background-color: ${COLOR_NEUTRO_500};
     left: 0;
     top: 0;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    cursor: pointer;
   }
 `;
 

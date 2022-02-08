@@ -22,9 +22,10 @@ import ArrowRight from '@/ui/svg/arrow-right.svg';
 
 interface Props {
   fishbowl: Fishbowl;
+  onClick: (fid: string) => void;
 }
 
-const FishbowlCard = ({ fishbowl }: Props) => {
+const FishbowlCard = ({ fishbowl, onClick }: Props) => {
   const { t } = useTranslation('common');
   const { name, startDateTime, slug, timezone, locale } = fishbowl;
 
@@ -40,7 +41,7 @@ const FishbowlCard = ({ fishbowl }: Props) => {
   };
 
   return (
-    <CardStyled>
+    <CardStyled onClick={() => onClick(fishbowl.slug)}>
       <CardTitle>
         <h4>{name}</h4>
       </CardTitle>
