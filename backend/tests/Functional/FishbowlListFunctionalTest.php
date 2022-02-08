@@ -63,16 +63,47 @@ class FishbowlListFunctionalTest extends ApiTestCase
     }
 
     /** @test */
-    public function itGetsFishbowlsFilteredByDate(): void
+    public function itGetsFishbowlsFilteredByAfterDate(): void
     {
-        $timeZone = 'Europe/Madrid';
-
         $now = new \DateTime();
 
         FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime('+ 30 minutes', new \DateTimeZone($timeZone)),
-            'timezone' => $timeZone,
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'startDateTime' => new \DateTime('+ 30 minutes'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $this->host
+        ])->object();
+
+        $hostToken = $this->logIn($this->host);
+
+        static::createClient()->request('GET', '/fishbowls', [
+            'query' => [
+                'estimatedDateToFinish[after]' => $now->format(\DateTimeInterface::ISO8601)
+            ],
+            'auth_bearer' => $hostToken,
+        ]);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+
+        $this->assertJsonContains([
+            '@context' => '/contexts/Fishbowl',
+            '@id' => '/fishbowls',
+            '@type' => 'hydra:Collection',
+            'hydra:totalItems' => 1,
+        ]);
+    }
+
+    /** @test */
+    public function itGetsFishbowlsFilteredByBeforeDate(): void
+    {
+        $now = new \DateTime();
+
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime('+ 30 minutes'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'host' => $this->host
         ])->object();
