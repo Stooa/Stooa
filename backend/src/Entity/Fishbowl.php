@@ -425,11 +425,16 @@ class Fishbowl
 
     public function calculateEstimatedDateToFinish(): void
     {
-        $this->estimatedDateToFinish = clone $this->getStartDateTime();
+        MAssert::notNull($this->startDateTime);
+        MAssert::notNull($this->duration);
 
-        $this->estimatedDateToFinish->add(
+        $dateTime = new \DateTimeImmutable($this->startDateTime->format('Y-m-d H:i:s'));
+
+        $dateTime = $dateTime->add(
             new \DateInterval($this->duration->format('\P\TG\Hi\M'))
         );
+
+        $this->setEstimatedDateToFinish($dateTime);
     }
 
     public function getDuration(): ?\DateTimeInterface

@@ -21,12 +21,10 @@ use Webmozart\Assert\Assert;
 
 class FishbowlDoctrineSubscriber implements EventSubscriberInterface
 {
-    /** @return array<string, string> */
+    /** @return array<int, string> */
     public function getSubscribedEvents(): array
     {
-        return [
-            Events::prePersist,
-        ];
+        return [Events::prePersist];
     }
 
     public function prePersist(LifecycleEventArgs $args): void
