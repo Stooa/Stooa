@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 /**
- * @ApiFilter(DateFilter::class, properties={"estimatedDateToFinish"}),
+ * @ApiFilter(DateFilter::class, properties={"estimatedDateToFinish"= DateFilter::EXCLUDE_NULL}),
  * @ApiResource(
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
