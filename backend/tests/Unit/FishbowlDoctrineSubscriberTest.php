@@ -37,7 +37,7 @@ class FishbowlDoctrineSubscriberTest extends TestCase
     }
 
     /** @test */
-    public function itCalculatesEstimatedDateToFinish(): void
+    public function itCalculatesFinishDateTime(): void
     {
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
@@ -53,7 +53,7 @@ class FishbowlDoctrineSubscriberTest extends TestCase
 
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
-        $this->assertNotNull($fishbowl->getEstimatedDateToFinish());
+        $this->assertNotNull($fishbowl->finishDateTime());
     }
 
     /** @test */

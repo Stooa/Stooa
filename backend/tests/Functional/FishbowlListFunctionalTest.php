@@ -121,7 +121,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'estimatedDateToFinish[after]' => $now->format(\DateTimeInterface::ISO8601),
+                'finishDateTime[after]' => $now->format(\DateTimeInterface::ISO8601),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -158,7 +158,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'estimatedDateToFinish[before]' => $now->format(\DateTimeInterface::ISO8601),
+                'finishDateTime[before]' => $now->format(\DateTimeInterface::ISO8601),
             ],
             'auth_bearer' => $hostToken,
         ]);

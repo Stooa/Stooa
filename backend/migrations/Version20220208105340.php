@@ -29,12 +29,12 @@ final class Version20220208105340 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE fishbowl ADD estimated_date_to_finish DATETIME DEFAULT NULL');
+        $this->addSql('ALTER TABLE fishbowl ADD finish_date_time DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE fishbowl DROP estimated_date_to_finish');
+        $this->addSql('ALTER TABLE fishbowl DROP finish_date_time');
     }
 }

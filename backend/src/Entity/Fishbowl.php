@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 /**
- * @ApiFilter(DateFilter::class, properties={"estimatedDateToFinish"= DateFilter::EXCLUDE_NULL}),
+ * @ApiFilter(DateFilter::class, properties={"finishDateTime"= DateFilter::EXCLUDE_NULL}),
  * @ApiResource(
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
@@ -174,7 +174,7 @@ class Fishbowl
     private ?\DateTimeInterface $startDateTime = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\Length(max=255)
@@ -254,7 +254,7 @@ class Fishbowl
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $estimatedDateToFinish = null;
+    private ?\DateTimeInterface $finishDateTime = null;
 
     /**
      * @Groups({"fishbowl:read"})
@@ -411,19 +411,19 @@ class Fishbowl
         );
     }
 
-    public function getEstimatedDateToFinish(): ?\DateTimeInterface
+    public function getFinishDateTime(): ?\DateTimeInterface
     {
-        return $this->estimatedDateToFinish;
+        return $this->finishDateTime;
     }
 
-    public function setEstimatedDateToFinish(\DateTimeInterface $estimatedDateToFinish): self
+    public function setFinishDateTime(\DateTimeInterface $finishDateTime): self
     {
-        $this->estimatedDateToFinish = $estimatedDateToFinish;
+        $this->finishDateTime = $finishDateTime;
 
         return $this;
     }
 
-    public function calculateEstimatedDateToFinish(): void
+    public function calculateFinishTime(): void
     {
         MAssert::notNull($this->startDateTime);
         MAssert::notNull($this->duration);
@@ -434,7 +434,7 @@ class Fishbowl
             new \DateInterval($this->duration->format('\P\TG\Hi\M'))
         );
 
-        $this->setEstimatedDateToFinish($dateTime);
+        $this->setFinishDateTime($dateTime);
     }
 
     public function getDuration(): ?\DateTimeInterface

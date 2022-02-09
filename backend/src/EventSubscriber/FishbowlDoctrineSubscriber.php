@@ -34,6 +34,6 @@ class FishbowlDoctrineSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $fishbowl->calculateEstimatedDateToFinish();
+        $fishbowl->calculateFinishTime();
     }
 }
