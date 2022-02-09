@@ -52,8 +52,8 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
           {month} {day}, {year}
         </div>
         <div className="card__time">
-          {`${time} ${timezone} ${timezoneCode}
-          ${offset}`}
+          {time}
+          <span>{` ${timezone} ${timezoneCode} ${offset}`}</span>
         </div>
       </div>
       <div className="card__actions">
