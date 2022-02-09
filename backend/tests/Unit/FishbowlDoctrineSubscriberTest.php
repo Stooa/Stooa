@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit;
 
 use App\Entity\Fishbowl;
-use App\Entity\User;
 use App\EventSubscriber\FishbowlDoctrineSubscriber;
 use App\Factory\FishbowlFactory;
 use Doctrine\ORM\Events;
