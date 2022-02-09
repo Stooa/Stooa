@@ -17,7 +17,6 @@ use App\Entity\Fishbowl;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Webmozart\Assert\Assert;
 
 class FishbowlDoctrineSubscriber implements EventSubscriberInterface
 {
