@@ -71,7 +71,8 @@ class FishbowlListFunctionalTest extends ApiTestCase
     /** @test */
     public function itGetsUserCreatedFishbowls(): void
     {
-        FishbowlFactory::createOne([
+        $fishbowl = FishbowlFactory::createOne([
+            'name' => 'fishbowl name',
             'host' => $this->host,
         ]);
 
@@ -98,6 +99,8 @@ class FishbowlListFunctionalTest extends ApiTestCase
         ]);
 
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
+
+        $this->assertSame($fishbowl->getName(), $response->toArray()['hydra:member'][0]['name']);
     }
 
     /** @test */
