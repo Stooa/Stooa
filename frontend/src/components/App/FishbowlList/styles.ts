@@ -8,7 +8,13 @@
  */
 
 import styled from 'styled-components';
-import { BREAKPOINTS, COLOR_NEUTRO_100, COLOR_NEUTRO_500, COLOR_NEUTRO_800 } from '@/ui/settings';
+import {
+  BREAKPOINTS,
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_800
+} from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
 import { APP_MD, TEXT_LG, TEXT_MD } from '@/ui/Texts';
 
@@ -56,8 +62,23 @@ const Header = styled.div`
     margin-bottom: ${space(2)};
   }
 
-  .schedule-fishbowl span {
-    display: none;
+  .schedule-fishbowl {
+    padding: ${space(1)};
+
+    span {
+      display: none;
+      ${media.min('tablet')`
+      display: block;
+    `}
+    }
+
+    svg {
+      margin-left: 0;
+      width: auto;
+      ${media.min('tablet')`
+      display: block;
+    `}
+    }
   }
 `;
 
@@ -81,6 +102,10 @@ const CardStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    .card__time span {
+      color: ${COLOR_NEUTRO_600};
+    }
   }
 
   .card__actions {
