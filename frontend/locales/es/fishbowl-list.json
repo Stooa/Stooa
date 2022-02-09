@@ -1,4 +1,4 @@
 {
-    "scheduledFishbowls": "<i>Fishbowls</i> agendados {{count}}",
+    "scheduledFishbowls": "<i>Fishbowls</i> agendados ({{count}})",
     "enterFishbowl": "Entrar al fishbowl"
 }
