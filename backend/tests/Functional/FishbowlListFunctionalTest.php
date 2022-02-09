@@ -216,7 +216,6 @@ class FishbowlListFunctionalTest extends ApiTestCase
         $this->assertSame($first->getName(), $response->toArray()['hydra:member'][0]['name']);
         $this->assertSame($second->getName(), $response->toArray()['hydra:member'][1]['name']);
         $this->assertSame($third->getName(), $response->toArray()['hydra:member'][2]['name']);
-
     }
 
     private function logIn(User $user): string
