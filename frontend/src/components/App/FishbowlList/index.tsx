@@ -171,7 +171,7 @@ const FishbowlList = () => {
             </h1>
             <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
               <ButtonSmall
-                className="secondary"
+                className="schedule-fishbowl secondary"
                 onClick={() => {
                   pushEventDataLayer({
                     category: 'Schedule Fishbowl',

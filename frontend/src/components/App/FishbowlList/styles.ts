@@ -14,7 +14,7 @@ import { APP_MD, TEXT_LG, TEXT_MD } from '@/ui/Texts';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
-  padding: ${space(5)} 0;
+  padding: ${space(3)} 0;
   width: 100%;
   max-width: ${BREAKPOINTS.tablet}px;
 `;
@@ -53,7 +53,11 @@ const Header = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: ${space(1)};
+    margin-bottom: ${space(2)};
+  }
+
+  .schedule-fishbowl span {
+    display: none;
   }
 `;
 
@@ -70,7 +74,7 @@ const CardStyled = styled.div`
   overflow: hidden;
 
   ${media.min('tablet')`
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
   `}
 
   .card__info {
@@ -81,9 +85,9 @@ const CardStyled = styled.div`
 
   .card__actions {
     display: flex;
-    column-gap: ${space(1)};
+    column-gap: ${space(3)};
     align-self: flex-end;
-    justify-content: space-evenly;
+    justify-content: end;
     align-items: baseline;
   }
 
@@ -109,7 +113,11 @@ const CardTitle = styled.div`
   text-align: left;
   font-weight: 500;
   color: ${COLOR_NEUTRO_800};
-  grid-column: 1 / 2;
+  overflow: ellipsis;
+
+  ${media.min('tablet')`
+    grid-column: 1 / 3;
+  `}
 `;
 
 export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper, CardTitle };
