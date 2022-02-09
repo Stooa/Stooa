@@ -35,8 +35,6 @@ class FishbowlDoctrineSubscriber implements EventSubscriberInterface
             return;
         }
 
-        Assert::isInstanceOf($fishbowl, Fishbowl::class);
-
         $fishbowl->calculateEstimatedDateToFinish();
     }
 }
