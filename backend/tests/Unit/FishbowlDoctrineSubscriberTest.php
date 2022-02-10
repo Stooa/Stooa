@@ -53,7 +53,7 @@ class FishbowlDoctrineSubscriberTest extends TestCase
 
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
-        $this->assertNotNull($fishbowl->finishDateTime());
+        $this->assertNotNull($fishbowl->getFinishDateTime());
     }
 
     /** @test */
