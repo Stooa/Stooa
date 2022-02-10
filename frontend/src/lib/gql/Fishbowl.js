@@ -31,13 +31,14 @@ const UPDATE_FISHBOWL = gql`
   mutation UpdateFishbowl($input: updateFishbowlInput!) {
     updateFishbowl(input: $input) {
       fishbowl {
-        id
         name
-        slug
         description
         locale
         startDateTimeTz
         endDateTimeTz
+        timezone
+        locale
+        hasIntroduction
       }
     }
   }
