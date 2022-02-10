@@ -29,6 +29,10 @@ const Billboard = styled.div`
   z-index: 3;
   width: 100%;
 
+  .title-xl {
+    margin-bottom: ${space(2)};
+  }
+
   ${media.max('desktop')`
     .title-xl {
       font-size: ${rems(61)};
@@ -52,7 +56,11 @@ const Billboard = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: ${space(2)};
-    margin-bottom: ${space(5)};
+    margin-bottom: ${space(4)};
+
+    ${media.min('phone')`
+      align-items: center;
+    `}
 
     ${media.min('tablet')`
       flex-direction: row;
@@ -108,7 +116,7 @@ const Billboard = styled.div`
 `;
 
 const Description = styled.div<{ center?: boolean }>`
-  margin: ${space(2)} 0;
+  margin-bottom: ${space(4)};
   text-align: left;
 
   a {
