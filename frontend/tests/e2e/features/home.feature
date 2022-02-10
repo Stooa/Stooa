@@ -11,7 +11,7 @@ Feature: Home
     Given a non logged user
     When navigates to "/"
     And clicks on "Schedule a fishbowl" link
-    Then gets redirect to "/register"
+    Then gets redirect to "/fishbowl/create"
     And sees the register form
 
   Scenario: Non logged users will see login and register buttons on header
