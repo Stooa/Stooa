@@ -162,6 +162,21 @@ const Home = () => {
             </ButtonStyledLink>
           </Link>
         </div>
+        <div className="ph-badge">
+          <a
+            href="https://www.producthunt.com/posts/stooa?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-stooa"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=320231&theme=light&period=daily"
+              alt="Stooa - The open source online fishbowl tool | Product Hunt"
+              style="width: 250px; height: 54px;"
+              width="250"
+              height="54"
+            />
+          </a>
+        </div>
         <div id="animated-billboard-morph2"></div>
       </Billboard>
       <Content>
