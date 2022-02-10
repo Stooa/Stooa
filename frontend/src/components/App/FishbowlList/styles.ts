@@ -36,6 +36,68 @@ const ScrollWrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  .fishbowl-list__empty-illustration {
+    margin: ${space(2)} 0;
+    position: relative;
+    width: 100%;
+    height: ${rems(200)};
+
+    ${media.min('tablet')`
+    margin: ${space(6)} 0;`}
+  }
+`;
+
+const EmptyFishbowlList = styled.div`
+  .fishbowl-list__empty-illustration {
+    display: flex;
+    justify-content: center;
+    margin: ${space(3)} 0;
+    position: relative;
+    width: 100%;
+    height: ${rems(200)};
+
+    img {
+      object-fit: contain;
+      height: 100%;
+      width: auto;
+    }
+
+    .multi {
+      display: none;
+      ${media.min('tablet')`
+      display: block;
+    `}
+    }
+
+    .single {
+      ${media.min('tablet')`
+      display: none;
+    `}
+    }
+
+    ${media.min('tablet')`
+
+      margin: ${space(6)} 0;
+
+    `}
+  }
+
+  p {
+    margin-bottom: ${space(3)};
+  }
+
+  .empty-actions {
+    display: grid;
+    align-items: center;
+    gap: ${space(2)};
+    flex-direction: column;
+
+    ${media.min('tablet')`
+      justify-content: center;
+      grid-template-columns: auto auto;
+    `}
+  }
 `;
 
 const Header = styled.div`
@@ -43,7 +105,7 @@ const Header = styled.div`
   text-align: left;
   margin-bottom: ${space(2)};
 
-  .fishbowlist__title {
+  .fishbowl-list__title {
     ${TEXT_LG}
     font-weight: 300;
   }
@@ -63,22 +125,24 @@ const Header = styled.div`
   }
 
   .schedule-fishbowl {
-    padding: ${space(1)};
+    display: block;
+    ${media.max('tablet')`
+    padding: ${space(1.5)};
+    `}
 
     span {
+      ${media.max('tablet')`
       display: none;
-      ${media.min('tablet')`
-      display: block;
-    `}
+   `}
     }
+  }
 
-    svg {
+  svg {
+    display: block;
+    ${media.max('tablet')`
       margin-left: 0;
       width: auto;
-      ${media.min('tablet')`
-      display: block;
-    `}
-    }
+      `}
   }
 `;
 
@@ -145,4 +209,4 @@ const CardTitle = styled.div`
   `}
 `;
 
-export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper, CardTitle };
+export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper, CardTitle, EmptyFishbowlList };
