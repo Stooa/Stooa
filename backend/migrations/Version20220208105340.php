@@ -30,6 +30,9 @@ final class Version20220208105340 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE fishbowl ADD finish_date_time DATETIME DEFAULT NULL');
+
+        // Fill all the previous fishbowls value
+        $this->addSql('UPDATE fishbowl SET finish_date_time = ADDTIME(start_date_time, duration);');
     }
 
     public function down(Schema $schema): void

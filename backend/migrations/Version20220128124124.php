@@ -31,7 +31,7 @@ final class Version20220128124124 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE fishbowl ADD is_fishbowl_now TINYINT(1) NOT NULL');
 
-        // All the previous fishbowls has the values to false
+        // Fill all the previous fishbowls value to false
         $this->addSql('UPDATE fishbowl SET is_fishbowl_now = 0');
     }
 
