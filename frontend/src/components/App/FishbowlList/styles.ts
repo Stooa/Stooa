@@ -16,7 +16,7 @@ import {
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
-import { APP_MD, TEXT_LG, TEXT_MD } from '@/ui/Texts';
+import { TEXT_LG, TEXT_MD } from '@/ui/Texts';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
@@ -77,9 +77,7 @@ const EmptyFishbowlList = styled.div`
     }
 
     ${media.min('tablet')`
-
       margin: ${space(6)} 0;
-
     `}
   }
 
@@ -125,7 +123,6 @@ const Header = styled.div`
   }
 
   .schedule-fishbowl {
-    display: block;
     ${media.max('tablet')`
     padding: ${space(1.5)};
     `}
@@ -138,7 +135,7 @@ const Header = styled.div`
   }
 
   svg {
-    display: block;
+    display: inline-block;
     ${media.max('tablet')`
       margin-left: 0;
       width: auto;
