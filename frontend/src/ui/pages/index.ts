@@ -52,6 +52,7 @@ const Billboard = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: ${space(2)};
+    margin-bottom: ${space(5)};
 
     ${media.min('tablet')`
       flex-direction: row;
@@ -161,11 +162,14 @@ const Content = styled.div`
     .wave {
       bottom: -5px;
       display: block;
-      left: -2%;
       position: absolute;
-      right: 0;
-      width: 105%;
+      right: -2px;
+      width: 100%;
       z-index: -1;
+
+      &.hide-mobile {
+        width: 105%;
+      }
     }
 
     .hide-mobile {
