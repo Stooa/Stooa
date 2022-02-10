@@ -8,7 +8,8 @@
             "@/jitsi/*": ["src/lib/jitsi-modules/*"],
             "@/graphql/*": ["src/lib/gql/*"],
             "@/i18n": ["i18n"],
-            "@/*": ["src/*"]
+            "@/*": ["src/*"],
+            "@/tests/*": ["tests/*"]
         },
         "skipLibCheck": true,
         "strict": false,
@@ -22,7 +23,7 @@
         "sourceMap": true,
         "jsx": "preserve",
         "types": ["cypress", "@testing-library/cypress"],
-        "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"],
+        "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*", "tests/e2e/types"],
         "incremental": true
     },
     "exclude": ["node_modules"],
