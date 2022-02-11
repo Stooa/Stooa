@@ -27,7 +27,7 @@ import api from '@/lib/api';
 import Trans from 'next-translate/Trans';
 import Image from 'next/image';
 import Link from 'next/link';
-import {getIsoDateTimeWithActualTimeZone} from "@/lib/helpers";
+import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
 
 const FishbowlList = () => {
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
@@ -38,7 +38,9 @@ const FishbowlList = () => {
     console.log(fid);
   };
 
-  const params = new URLSearchParams([['finishDateTime[before]', getIsoDateTimeWithActualTimeZone()]]);
+  const params = new URLSearchParams([
+    ['finishDateTime[before]', getIsoDateTimeWithActualTimeZone()]
+  ]);
 
   const getFishbowls = async () => {
     const auth = await getAuthToken();
@@ -63,7 +65,7 @@ const FishbowlList = () => {
     getFishbowls();
   }, []);
 
-  if (!fishbowls) {
+  if (!fishbowls && !error) {
     return <LoadingIcon />;
   } else {
     return (
