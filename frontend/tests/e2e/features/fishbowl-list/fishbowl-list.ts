@@ -8,13 +8,14 @@
  */
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {getIsoDateTimeWithActualTimeZone} from "@/lib/helpers";
 
 Given('a list of fishbowls', () => {
   cy.intercept(
     {
       pathname: '/fishbowls',
       query: {
-        'finishDateTime[after]': new Date().toISOString()
+        'finishDateTime[after]': getIsoDateTimeWithActualTimeZone()
       }
     },
     { fixture: 'fishbowl-list.json' }
