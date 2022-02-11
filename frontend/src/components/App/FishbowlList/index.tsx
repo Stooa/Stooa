@@ -163,7 +163,7 @@ const FishbowlList = () => {
       <FishbowlListWrapper>
         <Header>
           <div>
-            <h1 className="fishbowl-list__title">
+            <h1 className="fishbowl-list__title" data-cy="scheduled-header">
               <Trans
                 i18nKey="fishbowl-list:scheduledFishbowls"
                 components={{ i: <i /> }}
