@@ -257,8 +257,6 @@ class Fishbowl
     private ?\DateTimeInterface $finishDateTime = null;
 
     /**
-     * @Groups({"fishbowl:read"})
-     *
      * @var Collection<int, Participant>
      *
      * @ORM\OneToMany(targetEntity="Participant", mappedBy="fishbowl", cascade={"all"})
