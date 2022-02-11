@@ -11,7 +11,7 @@ import router from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL } from '@/app.config';
-import { formatDateTime } from '@/lib/helpers';
+import { formatDateTime, isTimeLessThanNMinutes } from '@/lib/helpers';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
@@ -60,16 +60,18 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
         <ButtonCopyUrl variant="link" fid={slug} locale={locale}>
           {t('common:linkButton')}
         </ButtonCopyUrl>
-        <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
-          <ButtonSmall
-            onClick={() => {
-              handleGoToFishbowl;
-            }}
-          >
-            <span>{t('enterFishbowl')}</span>
-            <ArrowRight />
-          </ButtonSmall>
-        </RedirectLink>
+        {isTimeLessThanNMinutes(startDateTime, 30) && (
+          <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
+            <ButtonSmall
+              onClick={() => {
+                handleGoToFishbowl;
+              }}
+            >
+              <span>{t('enterFishbowl')}</span>
+              <ArrowRight />
+            </ButtonSmall>
+          </RedirectLink>
+        )}
       </div>
     </CardStyled>
   );

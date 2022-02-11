@@ -50,7 +50,6 @@ const FishbowlList = () => {
         params
       })
       .then(response => {
-        console.log(response.data);
         setFishbowls(response.data);
       })
       .catch(error => {
@@ -73,7 +72,7 @@ const FishbowlList = () => {
             <h1 className="fishbowl-list__title" data-cy="scheduled-header">
               <Trans
                 i18nKey="fishbowl-list:scheduledFishbowls"
-                components={{ i: <i /> }}
+                components={{ i: <i />, span: <span data-cy="count" /> }}
                 values={{
                   count: fishbowls.length
                 }}
@@ -99,7 +98,7 @@ const FishbowlList = () => {
         </Header>
         <ScrollWrapper>
           {fishbowls.length === 0 ? (
-            <EmptyFishbowlList>
+            <EmptyFishbowlList data-cy="empty-list">
               <div className="fishbowl-list__empty-illustration">
                 {/* // eslint-disable-next-line @next/next/no-img-element */}
                 <img

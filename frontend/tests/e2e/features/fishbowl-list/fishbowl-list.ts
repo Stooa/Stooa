@@ -9,7 +9,7 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
-Given('a list of fishbowl', () => {
+Given('a list of fishbowls', () => {
   cy.intercept(
     {
       pathname: '/fishbowls',
@@ -19,6 +19,18 @@ Given('a list of fishbowl', () => {
     },
     { fixture: 'fishbowl-list.json' }
   ).as('getFishbowlsListQuery');
+});
+
+Given('a list of empty fishbowls', () => {
+  cy.intercept(
+    {
+      pathname: '/fishbowls',
+      query: {
+        'finishDateTime[after]': new Date().toISOString()
+      }
+    },
+    []
+  ).as('getEmptyFishbowlsListQuery');
 });
 
 When('clicks on its profile', () => {
@@ -31,6 +43,17 @@ Then('sees the fishbowl list page', () => {
   cy.wait('@getFishbowlsListQuery');
 
   cy.get('[data-cy=scheduled-header]').should('exist');
+  cy.get('[data-cy=count]').should('contain', '1');
+
+  cy.screenshot();
+});
+
+Then('sees the empty fishbowl list page', () => {
+  cy.wait('@getEmptyFishbowlsListQuery');
+
+  cy.get('[data-cy=scheduled-header]').should('exist');
+  cy.get('[data-cy=empty-list]').should('exist');
+  cy.get('[data-cy=count]').should('contain', '0');
 
   cy.screenshot();
 });

@@ -12,4 +12,13 @@ Feature: Fishbowl List
     When navigates to "/"
     And clicks on its profile
     And clicks on "Fishbowl list" link
+    Given a list of fishbowls
     Then sees the fishbowl list page
+
+  Scenario: Logged user has no fishbowls in the list
+    Given a logged user
+    When navigates to "/"
+    And clicks on its profile
+    And clicks on "Fishbowl list" link
+    Given a list of empty fishbowls
+    Then sees the empty fishbowl list page
