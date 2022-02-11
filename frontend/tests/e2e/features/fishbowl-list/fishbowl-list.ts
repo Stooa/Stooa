@@ -27,7 +27,7 @@ Given('a list of empty fishbowls', () => {
     {
       pathname: '/fishbowls',
       query: {
-        'finishDateTime[after]': new Date().toISOString()
+        'finishDateTime[after]': getIsoDateTimeWithActualTimeZone()
       }
     },
     []
