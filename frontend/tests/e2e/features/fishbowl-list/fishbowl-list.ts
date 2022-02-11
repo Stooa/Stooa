@@ -9,10 +9,16 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
-Given('a profile information', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', {
-    fixture: 'self-user.json'
-  }).as('gqlSelfUserQuery');
+Given('a list of fishbowl', () => {
+  cy.intercept(
+    {
+      pathname: '/fishbowls',
+      query: {
+        'finishDateTime[after]': new Date().toISOString()
+      }
+    },
+    { fixture: 'fishbowl-list.json' }
+  ).as('getFishbowlsListQuery');
 });
 
 When('clicks on its profile', () => {
@@ -22,6 +28,8 @@ When('clicks on its profile', () => {
 });
 
 Then('sees the fishbowl list page', () => {
+  cy.wait('@getFishbowlsListQuery');
+
   cy.get('[data-cy=scheduled-header]').should('exist');
 
   cy.screenshot();

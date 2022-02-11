@@ -30,102 +30,8 @@ import Link from 'next/link';
 
 const FishbowlList = () => {
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
+  const [error, setError] = useState<boolean>(false);
   const { t, lang } = useTranslation('common');
-
-  //todays date
-  const today = new Date(Date.now());
-  const tomorrow = new Date(Date.now() + 86400000);
-
-  const fishbowlsmockup: Fishbowl[] = [
-    {
-      name: 'fishbowl 1',
-      description: 'fishbowl 1 description',
-      startDateTime: tomorrow,
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      timezone: 'Europe/Paris',
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 2',
-      description: 'fishbowl 1 description',
-      startDateTime: tomorrow,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 3',
-      description: 'fishbowl 1 description',
-      startDateTime: tomorrow,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 4',
-      description: 'fishbowl 1 description',
-      startDateTime: tomorrow,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 5',
-      description: 'fishbowl 1 description',
-      startDateTime: tomorrow,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 5',
-      description: 'fishbowl 1 description',
-      startDateTime: today,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 5',
-      description: 'fishbowl 1 description',
-      startDateTime: today,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    },
-    {
-      name: 'fishbowl 5',
-      description: 'fishbowl 1 description',
-      startDateTime: today,
-      timezone: 'Europe/Paris',
-      durationFormatted: '01:00',
-      duration: tomorrow,
-      slug: 'fjaksjklda',
-      locale: 'en',
-      currentStatus: 'open'
-    }
-  ];
 
   const handleClick = fid => {
     console.log(fid);
@@ -149,6 +55,7 @@ const FishbowlList = () => {
       })
       .catch(error => {
         console.log(error);
+        setError(true);
       });
   };
 
