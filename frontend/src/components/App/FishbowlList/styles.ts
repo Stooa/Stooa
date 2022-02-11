@@ -146,7 +146,6 @@ const Header = styled.div`
 const CardStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  min-height: 150px;
   position: relative;
   background-color: ${COLOR_NEUTRO_100};
   padding: ${space(2)} ${space(2)};

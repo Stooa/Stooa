@@ -35,8 +35,6 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
   const day = startDateTime.toLocaleString('default', { day: 'numeric' });
   const { time, year, timezone: timezoneCode } = formatDateTime(startDateTimeTz);
 
-  const offset = startDateTime.getTimezoneOffset() / 60;
-
   const handleGoToFishbowl = () => {
     const route = `${ROUTE_FISHBOWL}/${slug}`;
     router.push(route, route, { locale: locale });
@@ -47,22 +45,23 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
       <CardTitle>
         <h4>{name}</h4>
       </CardTitle>
-      <div className="card__info">
+      <div data-testid="card-info" className="card__info">
         <div>
           {month} {day}, {year}
         </div>
         <div className="card__time">
           {time}
-          <span>{` ${timezone} ${timezoneCode} ${offset}`}</span>
+          <span>{` (${timezoneCode}) ${timezone} `}</span>
         </div>
       </div>
-      <div className="card__actions">
-        <ButtonCopyUrl variant="link" fid={slug} locale={locale}>
+      <div data-testid="card-actions" className="card__actions">
+        <ButtonCopyUrl data-testid="copy-link" variant="link" fid={slug} locale={locale}>
           {t('common:linkButton')}
         </ButtonCopyUrl>
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
             <ButtonSmall
+              data-testid="enter-fishbowl"
               onClick={() => {
                 handleGoToFishbowl;
               }}

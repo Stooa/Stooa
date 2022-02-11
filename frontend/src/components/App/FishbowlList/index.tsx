@@ -8,8 +8,11 @@
  */
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
+import Trans from 'next-translate/Trans';
+import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW, ROUTE_HOME } from '@/app.config';
 
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -17,22 +20,24 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { ButtonSmall, ButtonStyledLink } from '@/ui/Button';
-import FishbowlCard from './FishbowlCard';
-import { EmptyFishbowlList, FishbowlListWrapper, Header, ScrollWrapper } from './styles';
+import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
+import {
+  EmptyFishbowlList,
+  FishbowlListWrapper,
+  Header,
+  ScrollWrapper
+} from '@/components/App/FishbowlList/styles';
 
 import PlusSign from '@/ui/svg/plus-sign.svg';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
-import Trans from 'next-translate/Trans';
-import Image from 'next/image';
-import Link from 'next/link';
 import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
 
 const FishbowlList = () => {
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
-  const [error, setError] = useState<boolean>(false);
   const { t, lang } = useTranslation('common');
+  const router = useRouter();
 
   const handleClick = fid => {
     console.log(fid);
@@ -56,8 +61,8 @@ const FishbowlList = () => {
         setFishbowls(response.data);
       })
       .catch(error => {
-        console.log(error);
-        setError(true);
+        console.error('[STOOA] Fishbowl list error', error);
+        router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
       });
   };
 
@@ -65,7 +70,7 @@ const FishbowlList = () => {
     getFishbowls();
   }, []);
 
-  if (!fishbowls && !error) {
+  if (!fishbowls) {
     return <LoadingIcon />;
   } else {
     return (
