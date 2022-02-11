@@ -38,7 +38,7 @@ const FishbowlList = () => {
     console.log(fid);
   };
 
-  const params = new URLSearchParams([['finishDateTime[before]', getIsoDateTimeWithActualTimeZone()]]);
+  const params = new URLSearchParams([['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]]);
 
   const getFishbowls = async () => {
     const auth = await getAuthToken();
