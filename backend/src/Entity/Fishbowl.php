@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use App\Repository\FishbowlRepository;
 use App\Resolver\FishbowlCreatorResolver;
 use App\Resolver\FishbowlFinishMutationResolver;
@@ -37,15 +38,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 /**
+ * @ApiFilter(DateFilter::class, properties={"finishDateTime"= DateFilter::EXCLUDE_NULL}),
  * @ApiResource(
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
  *     collectionOperations={
- *         "get"={
- *             "controller"=NotFoundAction::class,
- *             "read"=false,
- *             "output"=false,
- *         },
+ *         "get",
  *         "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     itemOperations={
@@ -176,7 +174,7 @@ class Fishbowl
     private ?\DateTimeInterface $startDateTime = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\Length(max=255)
@@ -252,8 +250,13 @@ class Fishbowl
     private ?\DateTimeInterface $finishedAt = null;
 
     /**
-     * @Groups({"fishbowl:read"})
+     * @Assert\DateTime
      *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $finishDateTime = null;
+
+    /**
      * @var Collection<int, Participant>
      *
      * @ORM\OneToMany(targetEntity="Participant", mappedBy="fishbowl", cascade={"all"})
@@ -404,6 +407,32 @@ class Fishbowl
         return $this->getStartDateTimeTz()->add(
             new \DateInterval($this->duration->format('\P\TG\Hi\M'))
         );
+    }
+
+    public function getFinishDateTime(): ?\DateTimeInterface
+    {
+        return $this->finishDateTime;
+    }
+
+    public function setFinishDateTime(\DateTimeInterface $finishDateTime): self
+    {
+        $this->finishDateTime = $finishDateTime;
+
+        return $this;
+    }
+
+    public function calculateFinishTime(): void
+    {
+        MAssert::notNull($this->startDateTime);
+        MAssert::notNull($this->duration);
+
+        $dateTime = new \DateTimeImmutable($this->startDateTime->format('Y-m-d H:i:s'));
+
+        $dateTime = $dateTime->add(
+            new \DateInterval($this->duration->format('\P\TG\Hi\M'))
+        );
+
+        $this->setFinishDateTime($dateTime);
     }
 
     public function getDuration(): ?\DateTimeInterface
