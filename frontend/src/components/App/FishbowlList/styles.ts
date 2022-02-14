@@ -28,6 +28,7 @@ const FishbowlListWrapper = styled.div`
 const ScrollWrapper = styled.div`
   display: grid;
   row-gap: ${space(2)};
+  padding-bottom: ${space(1)};
 
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -199,6 +200,7 @@ const CardTitle = styled.div`
   font-weight: 500;
   color: ${COLOR_NEUTRO_800};
   overflow: ellipsis;
+  margin-bottom: ${space()};
 
   ${media.min('tablet')`
     grid-column: 1 / 3;
