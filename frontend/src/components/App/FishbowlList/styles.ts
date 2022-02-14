@@ -163,6 +163,7 @@ const CardStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: ${space(2)};
 
     .card__time span {
       color: ${COLOR_NEUTRO_600};

@@ -44,7 +44,7 @@ const FishbowlList = () => {
   };
 
   const params = new URLSearchParams([
-    ['finishDateTime[before]', getIsoDateTimeWithActualTimeZone()]
+    ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
   ]);
 
   const getFishbowls = async () => {
@@ -68,7 +68,7 @@ const FishbowlList = () => {
 
   useEffect(() => {
     getFishbowls();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!fishbowls) {
     return <LoadingIcon />;
