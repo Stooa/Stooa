@@ -22,7 +22,7 @@ import ArrowRight from '@/ui/svg/arrow-right.svg';
 
 interface Props {
   fishbowl: Fishbowl;
-  onClick: (fid: string) => void;
+  onClick: (fishbowl: Fishbowl) => void;
 }
 
 const FishbowlCard = ({ fishbowl, onClick }: Props) => {
@@ -41,7 +41,7 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
   };
 
   return (
-    <CardStyled onClick={() => onClick(fishbowl.slug)}>
+    <CardStyled onClick={() => onClick(fishbowl)}>
       <CardTitle>
         <h4>{name}</h4>
       </CardTitle>

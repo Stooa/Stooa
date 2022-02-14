@@ -22,13 +22,25 @@ const FishbowlListWrapper = styled.div`
   height: 100%;
   padding: ${space(3)} 0;
   width: 100%;
-  max-width: ${BREAKPOINTS.tablet}px;
+  max-width: ${BREAKPOINTS.desktopLarge}px;
 `;
 
-const ScrollWrapper = styled.div`
+const FishbowlListContent = styled.div`
+  display: grid;
+  width: 100%;
+
+  column-gap: ${space(2)};
+
+  &.half {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const FishbowlScrollList = styled.div`
   display: grid;
   row-gap: ${space(2)};
   padding-bottom: ${space(1)};
+  align-items: flex-start;
 
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -155,8 +167,8 @@ const CardStyled = styled.div`
   transition: transform 0.2s ease-in-out;
   overflow: hidden;
 
-  ${media.min('tablet')`
-    grid-template-columns: 3fr 2fr;
+  ${media.min('desktopLarge')`
+    grid-template-columns: 4fr 3fr;
   `}
 
   .card__info {
@@ -203,9 +215,17 @@ const CardTitle = styled.div`
   overflow: ellipsis;
   margin-bottom: ${space()};
 
-  ${media.min('tablet')`
+  ${media.min('desktopLarge')`
     grid-column: 1 / 3;
   `}
 `;
 
-export { FishbowlListWrapper, Header, CardStyled, ScrollWrapper, CardTitle, EmptyFishbowlList };
+export {
+  FishbowlListWrapper,
+  Header,
+  CardStyled,
+  FishbowlScrollList,
+  CardTitle,
+  EmptyFishbowlList,
+  FishbowlListContent
+};
