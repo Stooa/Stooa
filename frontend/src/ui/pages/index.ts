@@ -55,8 +55,11 @@ const Billboard = styled.div`
   .cta-wrapper {
     display: flex;
     flex-direction: column;
-    row-gap: ${space(2)};
     margin-bottom: ${space(4)};
+
+    & a:first-child {
+      margin-bottom: ${space(2)};
+    }
 
     ${media.min('phone')`
       align-items: center;
@@ -64,7 +67,10 @@ const Billboard = styled.div`
 
     ${media.min('tablet')`
       flex-direction: row;
-      column-gap: ${space(3)};
+      & a:first-child {
+      margin-right: ${space(3)};
+      margin-bottom: 0;
+    }
     `}
   }
 
