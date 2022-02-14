@@ -15,40 +15,40 @@ const HOUR_IN_MS = 1000 * 60 * 60;
 const TWO_HOURS_IN_MS = 2 * HOUR_IN_MS;
 
 const mockFishbowl = {
-  id: "/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
-  type: "Fishbowl",
-  name: "repellendus voluptatibus rerum",
-  description: "Ratione et maiores itaque ut debitis.",
-  slug: "test-me-fishbowl",
-  timezone: "Europe/Madrid",
-  locale: "en",
-  host: "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
-  currentStatus: "not_started",
+  id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
+  type: 'Fishbowl',
+  name: 'repellendus voluptatibus rerum',
+  description: 'Ratione et maiores itaque ut debitis.',
+  slug: 'test-me-fishbowl',
+  timezone: 'Europe/Madrid',
+  locale: 'en',
+  host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+  currentStatus: 'not_started',
   participants: [],
   isFishbowlNow: false,
   hasIntroduction: false,
   startDateTimeTz: new Date(Date.now() + TWENTY_MINUTES_IN_MS),
   endDateTimeTz: new Date(Date.now() + TWO_HOURS_IN_MS),
-  durationFormatted: "02:00"
-}
+  durationFormatted: '02:00'
+};
 
 const mockFishbowlMoreThanThirty = {
-  id: "/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
-  type: "Fishbowl",
-  name: "repellendus voluptatibus rerum",
-  description: "Ratione et maiores itaque ut debitis.",
-  slug: "test-me-fishbowl",
-  timezone: "Europe/Madrid",
-  locale: "en",
-  host: "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
-  currentStatus: "not_started",
+  id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
+  type: 'Fishbowl',
+  name: 'repellendus voluptatibus rerum',
+  description: 'Ratione et maiores itaque ut debitis.',
+  slug: 'test-me-fishbowl',
+  timezone: 'Europe/Madrid',
+  locale: 'en',
+  host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+  currentStatus: 'not_started',
   participants: [],
   isFishbowlNow: false,
   hasIntroduction: false,
   startDateTimeTz: new Date(Date.now() + HOUR_IN_MS),
   endDateTimeTz: new Date(Date.now() + TWO_HOURS_IN_MS),
-  durationFormatted: "02:00"
-}
+  durationFormatted: '02:00'
+};
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -81,7 +81,9 @@ describe('Unit test of fishbowl card at fishbowl list', () => {
 
   it('Fishbowl with only copy link visible', () => {
     // The getByRole will error if there are less or more than 1 element found
-    render(<FishbowlCard fishbowl={mockFishbowlMoreThanThirty} onClick={() => console.log('void')} />);
+    render(
+      <FishbowlCard fishbowl={mockFishbowlMoreThanThirty} onClick={() => console.log('void')} />
+    );
     const title = screen.getByRole('heading');
     const info = screen.getByTestId('card-info');
     const actions = screen.getByTestId('card-actions');

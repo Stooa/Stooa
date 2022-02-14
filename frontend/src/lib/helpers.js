@@ -107,8 +107,8 @@ const getTimePlusOneMinute = () => {
 
 const getIsoDateTimeWithActualTimeZone = () => {
   const date = new Date();
-  return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
-}
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+};
 
 export {
   dateDifferenceFromNow,
