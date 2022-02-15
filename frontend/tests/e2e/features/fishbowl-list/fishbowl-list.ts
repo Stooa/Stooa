@@ -68,7 +68,10 @@ Then('sees the fishbowl list page with multiple fishbowls', () => {
 
   cy.get('[data-cy=scheduled-header]').should('exist');
   cy.get('[data-cy=count]').should('contain', '3');
+
   cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First fishbowl');
+  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(1).should('contain', 'Second fishbowl');
+  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(2).should('contain', 'Third fishbowl');
 
   cy.screenshot();
 });
