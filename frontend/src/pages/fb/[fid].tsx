@@ -52,7 +52,7 @@ const Page = () => {
   useEffect(() => {
     router.beforePopState(({ as }) => {
       if (as === '/fishbowl/host-now') {
-        router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+        router.replace(ROUTE_HOME, ROUTE_HOME, { locale: lang });
         return false;
       }
       return true;
