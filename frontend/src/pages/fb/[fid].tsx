@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
@@ -42,15 +42,7 @@ const Page = () => {
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
-  if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
-
   const { bySlugQueryFishbowl: fb } = data;
-
-  if (!fb) {
-    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-    return <Loader />;
-  }
 
   const handleJoinAsGuest = () => {
     setJoinAsGuest(true);
@@ -58,6 +50,27 @@ const Page = () => {
 
   const shoulPrintPreJoinPage: boolean = (joinAsGuest || isAuthenticated) && prejoin;
   const shoulPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
+
+  useEffect(() => {
+    router.beforePopState(({ as }) => {
+      if (as !== router.asPath) {
+        console.log('Saura back lol');
+        console.log(as);
+      }
+      return true;
+    });
+
+    return () => {
+      router.beforePopState(() => true);
+    };
+  }, [router]);
+
+  if (loading) return <Loader />;
+  if (error) return <Error message={error.message} />;
+  if (!fb) {
+    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+    return <Loader />;
+  }
 
   return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
     <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>
