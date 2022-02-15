@@ -27,13 +27,15 @@ interface Props {
 
 const FishbowlCard = ({ fishbowl, onClick }: Props) => {
   const { t } = useTranslation('fishbowl-list');
-  const { name, startDateTimeTz, slug, locale, timezone } = fishbowl;
+  const { name, startDateTimeTz, slug, locale } = fishbowl;
 
   const startDateTime = new Date(startDateTimeTz);
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
   const day = startDateTime.toLocaleString('default', { day: 'numeric' });
   const { time, year, timezone: timezoneCode } = formatDateTime(startDateTimeTz);
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const handleGoToFishbowl = () => {
     const route = `${ROUTE_FISHBOWL}/${slug}`;
