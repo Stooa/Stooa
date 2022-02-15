@@ -104,7 +104,7 @@ const FishbowlList = () => {
           </div>
           <span className="divider" />
         </Header>
-        <ScrollWrapper>
+        <ScrollWrapper data-cy="fishbowl-list-wrapper">
           {fishbowls.length === 0 ? (
             <EmptyFishbowlList data-cy="empty-list">
               <div className="fishbowl-list__empty-illustration">
