@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import { ROUTE_NOT_FOUND } from '@/app.config';
+import { ROUTE_HOME, ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
@@ -42,8 +42,6 @@ const Page = () => {
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
-  const { bySlugQueryFishbowl: fb } = data;
-
   const handleJoinAsGuest = () => {
     setJoinAsGuest(true);
   };
@@ -53,9 +51,9 @@ const Page = () => {
 
   useEffect(() => {
     router.beforePopState(({ as }) => {
-      if (as !== router.asPath) {
-        console.log('Saura back lol');
-        console.log(as);
+      if (as === '/fishbowl/host-now') {
+        router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+        return false;
       }
       return true;
     });
@@ -63,10 +61,12 @@ const Page = () => {
     return () => {
       router.beforePopState(() => true);
     };
-  }, [router]);
+  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;
+
+  const { bySlugQueryFishbowl: fb } = data;
   if (!fb) {
     router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
     return <Loader />;
