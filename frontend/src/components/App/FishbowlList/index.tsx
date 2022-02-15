@@ -39,7 +39,7 @@ import CreateFishbowl from '@/components/Web/Forms/CreateFishbowl';
 const FishbowlList = () => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('fishbowl');
   const router = useRouter();
 
   const handleClick = fishbowl => {
@@ -174,7 +174,12 @@ const FishbowlList = () => {
                   />
                 ))}
               </FishbowlScrollList>
-              {selectedFishbowl && <CreateFishbowl full selectedFishbowl={selectedFishbowl} />}
+              {selectedFishbowl && (
+                <div>
+                  <h2 className="title-md">{t('title')}</h2>
+                  <CreateFishbowl full selectedFishbowl={selectedFishbowl} />
+                </div>
+              )}
             </>
           )}
         </FishbowlListContent>

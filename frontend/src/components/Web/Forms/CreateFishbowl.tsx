@@ -259,7 +259,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
+const CreateFishbowl = ({ selectedFishbowl = null, full = false, edit = false }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);

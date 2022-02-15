@@ -29,7 +29,7 @@ const FishbowlListContent = styled.div`
   display: grid;
   width: 100%;
 
-  column-gap: ${space(2)};
+  column-gap: ${space(4)};
 
   &.half {
     grid-template-columns: 1fr 1fr;
