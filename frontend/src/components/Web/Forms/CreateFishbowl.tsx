@@ -19,7 +19,7 @@ import countriesAndTimezones from 'countries-and-timezones';
 import { ROUTE_FISHBOWL_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
-import { CREATE_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import FormikForm, { TextDivider } from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
@@ -30,7 +30,7 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
-import { CreateFishbowlOptions } from '@/types/graphql/fishbowl';
+import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
 
 interface FormProps {
   required: string;
@@ -39,12 +39,16 @@ interface FormProps {
   createFishbowl: (
     options?: CreateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  updateFishbowl: (
+    options?: UpdateFishbowlOptions
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   onSubmit: (any) => void;
   currentLanguage: string;
   currentTimezone: string;
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues | null;
   full: boolean;
+  edit?: boolean;
   defaultHourValue: string;
   defaultTime: Date;
 }
@@ -230,32 +234,61 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
-    await props
-      .createFishbowl({
-        variables: {
-          input: {
-            name: values.title,
-            description: values.description,
-            startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
-            timezone: values.timezone,
-            duration: values.hours,
-            locale: values.language,
-            isFishbowlNow: false,
-            hasIntroduction: values.hasIntroduction
+    if (props.edit) {
+      await props
+        .updateFishbowl({
+          variables: {
+            input: {
+              name: values.title,
+              description: values.description,
+              startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
+              timezone: values.timezone,
+              duration: values.hours,
+              locale: values.language,
+              isFishbowlNow: false,
+              hasIntroduction: values.hasIntroduction
+            }
           }
-        }
-      })
-      .then(res => {
-        setSubmitting(false);
-        props.onSubmit(res);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
+        })
+        .then(res => {
+          setSubmitting(false);
+          props.onSubmit(res);
+        })
+        .catch(error => {
+          setSubmitting(false);
+          props.onSubmit({
+            type: 'Error',
+            data: error
+          });
         });
-      });
+    } else {
+      await props
+        .createFishbowl({
+          variables: {
+            input: {
+              name: values.title,
+              description: values.description,
+              startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
+              timezone: values.timezone,
+              duration: values.hours,
+              locale: values.language,
+              isFishbowlNow: false,
+              hasIntroduction: values.hasIntroduction
+            }
+          }
+        })
+        .then(res => {
+          setSubmitting(false);
+          props.onSubmit(res);
+        })
+        .catch(error => {
+          setSubmitting(false);
+          props.onSubmit({
+            type: 'Error',
+            data: error
+          });
+        });
+    }
   }
 })(Form);
 
@@ -263,6 +296,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false, edit = false })
   const [error, setError] = useState(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
+  const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
   const { t, lang } = useTranslation('form');
   const { updateCreateFishbowl } = useAuth();
 
@@ -316,6 +350,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false, edit = false })
         required={requiredError}
         date={dateError}
         createFishbowl={createFishbowl}
+        updateFishbowl={updateFishbowl}
         onSubmit={handleOnSubmit}
         defaultTime={nearestQuarterHour()}
         defaultHourValue="01:00"
