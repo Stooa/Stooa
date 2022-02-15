@@ -30,3 +30,10 @@ Feature: Fishbowl List
         And clicks on "Fishbowl list" link
         Given a list of empty fishbowls
         Then sees the empty fishbowl list page
+
+    Scenario: Logged user enters to a fishbowl from the list
+        Given a logged user
+        When navigates to "/fishbowl/list"
+        Given a list of multiple fishbowls
+        Then clicks "Enter fishbowl" link
+        Then gets redirect to "/fishbowl/test-me-fishbowl"

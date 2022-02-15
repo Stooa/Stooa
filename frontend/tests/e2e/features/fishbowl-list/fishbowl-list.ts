@@ -70,7 +70,6 @@ Then('sees the fishbowl list page with multiple fishbowls', () => {
   cy.get('[data-cy=count]').should('contain', '3');
   cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First fishbowl');
 
-
   cy.screenshot();
 });
 
