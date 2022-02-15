@@ -17,7 +17,7 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
-import { ButtonSmall } from '@/ui/Button';
+import { ButtonStyledLinkSmall } from '@/ui/Button';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
 
 interface Props {
@@ -27,13 +27,15 @@ interface Props {
 
 const FishbowlCard = ({ fishbowl, onClick }: Props) => {
   const { t } = useTranslation('fishbowl-list');
-  const { name, startDateTimeTz, slug, locale, timezone } = fishbowl;
+  const { name, startDateTimeTz, slug, locale } = fishbowl;
 
   const startDateTime = new Date(startDateTimeTz);
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
   const day = startDateTime.toLocaleString('default', { day: 'numeric' });
   const { time, year, timezone: timezoneCode } = formatDateTime(startDateTimeTz);
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const handleGoToFishbowl = () => {
     const route = `${ROUTE_FISHBOWL}/${slug}`;
@@ -60,7 +62,7 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
         </ButtonCopyUrl>
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
-            <ButtonSmall
+            <ButtonStyledLinkSmall
               data-testid="enter-fishbowl"
               onClick={() => {
                 handleGoToFishbowl;
@@ -68,7 +70,7 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
             >
               <span>{t('enterFishbowl')}</span>
               <ArrowRight />
-            </ButtonSmall>
+            </ButtonStyledLinkSmall>
           </RedirectLink>
         )}
       </div>

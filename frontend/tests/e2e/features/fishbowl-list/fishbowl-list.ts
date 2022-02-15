@@ -10,18 +10,30 @@
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 const date = new Date();
-const standarizedDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+const isoDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
 
-Given('a list of fishbowls', () => {
+Given('a list of one fishbowl', () => {
   cy.intercept(
     {
       pathname: '/fishbowls',
       query: {
-        'finishDateTime[after]': standarizedDate
+        'finishDateTime[after]': isoDate
       }
     },
-    { fixture: 'fishbowl-list.json' }
-  ).as('getFishbowlsListQuery');
+    { fixture: 'one-fishbowl-list.json' }
+  ).as('getOneFishbowlsListQuery');
+});
+
+Given('a list of multiple fishbowls', () => {
+  cy.intercept(
+    {
+      pathname: '/fishbowls',
+      query: {
+        'finishDateTime[after]': isoDate
+      }
+    },
+    { fixture: 'multiple-fishbowl-list.json' }
+  ).as('getMultipleFishbowlsListQuery');
 });
 
 Given('a list of empty fishbowls', () => {
@@ -29,7 +41,7 @@ Given('a list of empty fishbowls', () => {
     {
       pathname: '/fishbowls',
       query: {
-        'finishDateTime[after]': standarizedDate
+        'finishDateTime[after]': isoDate
       }
     },
     []
@@ -42,11 +54,24 @@ When('clicks on its profile', () => {
   });
 });
 
-Then('sees the fishbowl list page', () => {
-  cy.wait('@getFishbowlsListQuery');
+Then('sees the fishbowl list page with one fishbowl', () => {
+  cy.wait('@getOneFishbowlsListQuery');
 
   cy.get('[data-cy=scheduled-header]').should('exist');
   cy.get('[data-cy=count]').should('contain', '1');
+
+  cy.screenshot();
+});
+
+Then('sees the fishbowl list page with multiple fishbowls', () => {
+  cy.wait('@getMultipleFishbowlsListQuery');
+
+  cy.get('[data-cy=scheduled-header]').should('exist');
+  cy.get('[data-cy=count]').should('contain', '3');
+
+  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First fishbowl');
+  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(1).should('contain', 'Second fishbowl');
+  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(2).should('contain', 'Third fishbowl');
 
   cy.screenshot();
 });

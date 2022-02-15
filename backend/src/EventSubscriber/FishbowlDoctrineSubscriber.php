@@ -23,7 +23,21 @@ class FishbowlDoctrineSubscriber implements EventSubscriberInterface
     /** @return array<int, string> */
     public function getSubscribedEvents(): array
     {
-        return [Events::prePersist];
+        return [
+            Events::prePersist,
+            Events::preUpdate,
+        ];
+    }
+
+    public function preUpdate(LifecycleEventArgs $args): void
+    {
+        $fishbowl = $args->getObject();
+
+        if (!$fishbowl instanceof Fishbowl) {
+            return;
+        }
+
+        $fishbowl->calculateFinishTime();
     }
 
     public function prePersist(LifecycleEventArgs $args): void
