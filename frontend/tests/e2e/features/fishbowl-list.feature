@@ -35,5 +35,5 @@ Feature: Fishbowl List
         Given a logged user
         When navigates to "/fishbowl/list"
         Given a list of multiple fishbowls
-        Then clicks "Enter fishbowl" link
-        Then gets redirect to "/fishbowl/test-me-fishbowl"
+        Then clicks on "Enter fishbowl" link
+        Then gets redirect to "/fb/test-me-fishbowl"
