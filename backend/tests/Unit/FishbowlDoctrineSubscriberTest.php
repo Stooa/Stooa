@@ -59,6 +59,6 @@ class FishbowlDoctrineSubscriberTest extends TestCase
     /** @test */
     public function itGetSubscribedEvents(): void
     {
-        $this->assertSame([Events::prePersist], $this->subscriber->getSubscribedEvents());
+        $this->assertSame([Events::prePersist, Events::preUpdate], $this->subscriber->getSubscribedEvents());
     }
 }
