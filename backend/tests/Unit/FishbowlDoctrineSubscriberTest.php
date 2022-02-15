@@ -37,7 +37,7 @@ class FishbowlDoctrineSubscriberTest extends TestCase
     }
 
     /** @test */
-    public function itCalculatesFinishDateTime(): void
+    public function itCalculatesFinishDateTimeWhenPersisting(): void
     {
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
@@ -48,6 +48,26 @@ class FishbowlDoctrineSubscriberTest extends TestCase
         $eventArgs = new LifecycleEventArgs($fishbowl, $objectManager);
 
         $this->subscriber->prePersist($eventArgs);
+
+        $fishbowl = $eventArgs->getObject();
+
+        Assert::isInstanceOf($fishbowl, Fishbowl::class);
+
+        $this->assertNotNull($fishbowl->getFinishDateTime());
+    }
+
+    /** @test */
+    public function itCalculatesFinishDateTimeWhenUpdating(): void
+    {
+        $fishbowl = FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime(),
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
+        ])->object();
+
+        $objectManager = $this->createStub(ObjectManager::class);
+        $eventArgs = new LifecycleEventArgs($fishbowl, $objectManager);
+
+        $this->subscriber->preUpdate($eventArgs);
 
         $fishbowl = $eventArgs->getObject();
 
