@@ -25,7 +25,7 @@ class FishbowlDoctrineSubscriber implements EventSubscriberInterface
     {
         return [
             Events::prePersist,
-            Events::preUpdate
+            Events::preUpdate,
         ];
     }
 
