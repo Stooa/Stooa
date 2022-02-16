@@ -50,7 +50,7 @@ const Page = () => {
   const shoulPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
 
   useEffect(() => {
-    router.beforePopState(({ as }) => {
+    router.beforePopState(({ as }): boolean => {
       if (as === '/fishbowl/host-now' || as.includes('/fishbowl/detail')) {
         router.replace(ROUTE_HOME, ROUTE_HOME, { locale: lang });
         return false;
