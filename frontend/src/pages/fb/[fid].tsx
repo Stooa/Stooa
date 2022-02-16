@@ -7,13 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-import { ROUTE_NOT_FOUND } from '@/app.config';
+import { ROUTE_HOME, ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
@@ -42,22 +42,35 @@ const Page = () => {
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
-  if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
-
-  const { bySlugQueryFishbowl: fb } = data;
-
-  if (!fb) {
-    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-    return <Loader />;
-  }
-
-  const handleJoinAsGuest = () => {
+  const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
   };
 
   const shoulPrintPreJoinPage: boolean = (joinAsGuest || isAuthenticated) && prejoin;
   const shoulPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
+
+  useEffect(() => {
+    router.beforePopState(({ as }): boolean => {
+      if (as === '/fishbowl/host-now' || as.includes('/fishbowl/detail')) {
+        router.replace(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+        return false;
+      }
+      return true;
+    });
+
+    return () => {
+      router.beforePopState(() => true);
+    };
+  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (loading) return <Loader />;
+  if (error) return <Error message={error.message} />;
+
+  const { bySlugQueryFishbowl: fb } = data;
+  if (!fb) {
+    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+    return <Loader />;
+  }
 
   return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
     <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>
