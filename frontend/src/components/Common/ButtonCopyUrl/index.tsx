@@ -25,7 +25,7 @@ interface Props {
   variant?: 'small' | 'link';
 }
 
-const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => {
+const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant, ...props }) => {
   const { t } = useTranslation('common');
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
   const fbUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${
@@ -36,6 +36,7 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => 
     navigator.clipboard.writeText(fbUrl);
     toast(t('successCopiedLink'), {
       icon: <Check />,
+      toastId: 'link-copied',
       type: 'success',
       position: 'bottom-center',
       autoClose: 5000
@@ -53,7 +54,7 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant }) => 
   }
 
   return (
-    <ButtonToUse onClick={handleCopyUrl} className={`${secondary && 'secondary '}`}>
+    <ButtonToUse onClick={handleCopyUrl} className={`${secondary && 'secondary '}`} {...props}>
       {t('linkButton')}
       {variant !== 'link' && <UrlSvg />}
     </ButtonToUse>

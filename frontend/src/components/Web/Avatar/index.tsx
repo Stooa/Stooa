@@ -11,14 +11,16 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD } from '@/app.config';
+import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD, ROUTE_FISHBOWL_LIST } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Logout from '@/ui/svg/logout.svg';
 import Lock from '@/ui/svg/lock.svg';
 import Pencil from '@/ui/svg/pencil.svg';
+import List from '@/ui/svg/list.svg';
 import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
+import Trans from 'next-translate/Trans';
 
 const Header: React.FC = () => {
   const wrapperRef = useRef(null);
@@ -54,6 +56,14 @@ const Header: React.FC = () => {
       </button>
       {active && (
         <Dropdown>
+          <Link href={ROUTE_FISHBOWL_LIST} passHref>
+            <a className="item">
+              <List />
+              <span>
+                <Trans i18nKey="common:fishbowlList" components={{ i: <i /> }} />
+              </span>
+            </a>
+          </Link>
           <Link href={ROUTE_EDIT_PROFILE} passHref>
             <a className="item">
               <Pencil />
