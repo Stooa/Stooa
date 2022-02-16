@@ -46,8 +46,9 @@ const Page = () => {
     setJoinAsGuest(true);
   };
 
-  const shoulPrintPreJoinPage: boolean = (joinAsGuest || isAuthenticated) && prejoin;
-  const shoulPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
+  const shouldPrintPreJoinPage: boolean =
+    (joinAsGuest || isAuthenticated) && prejoin && fishbowlReady;
+  const shouldPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
 
   useEffect(() => {
     router.beforePopState(({ as }): boolean => {
@@ -72,9 +73,9 @@ const Page = () => {
     return <Loader />;
   }
 
-  return shoulPrintPreJoinPage || shoulPrintFishbowlPage ? (
-    <Layout data={fb} prejoin={shoulPrintPreJoinPage} title={fb.name}>
-      {shoulPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
+  return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
+    <Layout data={fb} prejoin={shouldPrintPreJoinPage} title={fb.name}>
+      {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
     </Layout>
   ) : (
     <LayoutWeb data={fb}>

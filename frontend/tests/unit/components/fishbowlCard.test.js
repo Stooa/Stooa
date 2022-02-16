@@ -62,9 +62,7 @@ jest.mock('next/router', () => ({
 }));
 
 describe('Unit test of fishbowl card at fishbowl list', () => {
-  // Each test for the component will get an `it` block
   it('Fishbowl with all buttons visible', () => {
-    // The getByRole will error if there are less or more than 1 element found
     render(<FishbowlCard fishbowl={mockFishbowl} onClick={() => console.log('void')} />);
     const title = screen.getByRole('heading');
     const info = screen.getByTestId('card-info');
@@ -80,7 +78,6 @@ describe('Unit test of fishbowl card at fishbowl list', () => {
   });
 
   it('Fishbowl with only copy link visible', () => {
-    // The getByRole will error if there are less or more than 1 element found
     render(
       <FishbowlCard fishbowl={mockFishbowlMoreThanThirty} onClick={() => console.log('void')} />
     );
