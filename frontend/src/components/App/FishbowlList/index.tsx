@@ -24,8 +24,9 @@ import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
   FishbowlListWrapper,
+  FishbowlScrollList,
   Header,
-  ScrollWrapper
+  FishbowlListContent
 } from '@/components/App/FishbowlList/styles';
 
 import PlusSign from '@/ui/svg/plus-sign.svg';
@@ -33,14 +34,17 @@ import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
 import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
+import CreateFishbowl from '@/components/Web/Forms/CreateFishbowl';
 
 const FishbowlList = () => {
+  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
 
-  const handleClick = fid => {
-    console.log(fid);
+  const handleClick = fishbowl => {
+    console.log(fishbowl);
+    setSelectedFishbowl(fishbowl);
   };
 
   const params = new URLSearchParams([
@@ -104,7 +108,7 @@ const FishbowlList = () => {
           </div>
           <span className="divider" />
         </Header>
-        <ScrollWrapper data-cy="fishbowl-list-wrapper">
+        <FishbowlListContent className={`${selectedFishbowl && 'half'}`}>
           {fishbowls.length === 0 ? (
             <EmptyFishbowlList data-cy="empty-list">
               <div className="fishbowl-list__empty-illustration">
@@ -160,11 +164,25 @@ const FishbowlList = () => {
               </div>
             </EmptyFishbowlList>
           ) : (
-            fishbowls.map((fishbowl, index) => (
-              <FishbowlCard onClick={fid => handleClick(fid)} key={index} fishbowl={fishbowl} />
-            ))
+            <>
+              <FishbowlScrollList>
+                {fishbowls.map((fishbowl, index) => (
+                  <FishbowlCard
+                    onClick={fishbowl => handleClick(fishbowl)}
+                    key={index}
+                    fishbowl={fishbowl}
+                  />
+                ))}
+              </FishbowlScrollList>
+              {selectedFishbowl && (
+                <div>
+                  <h2 className="title-md">{t('titleEdit')}</h2>
+                  <CreateFishbowl full selectedFishbowl={selectedFishbowl} />
+                </div>
+              )}
+            </>
           )}
-        </ScrollWrapper>
+        </FishbowlListContent>
       </FishbowlListWrapper>
     );
   }
