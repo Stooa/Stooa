@@ -42,7 +42,7 @@ const Page = () => {
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
-  const handleJoinAsGuest = () => {
+  const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
   };
 
