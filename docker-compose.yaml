@@ -11,6 +11,8 @@ services:
         build:
             context: backend
             target: fpm-dev
+        environment:
+            PHP_IDE_CONFIG: serverName=localhost
         depends_on:
             - mysql
         volumes:
