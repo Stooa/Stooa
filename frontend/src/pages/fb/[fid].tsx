@@ -51,7 +51,7 @@ const Page = () => {
 
   useEffect(() => {
     router.beforePopState(({ as }) => {
-      if (as === '/fishbowl/host-now') {
+      if (as === '/fishbowl/host-now' || as.includes('/fishbowl/detail')) {
         router.replace(ROUTE_HOME, ROUTE_HOME, { locale: lang });
         return false;
       }
