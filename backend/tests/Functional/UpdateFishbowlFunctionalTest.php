@@ -105,7 +105,7 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
 
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
-        
+
         $this->assertSame($newFishbowl->getName(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['name']);
         $this->assertSame($newFishbowl->getStartDateTimeTz()->format(\DateTime::ATOM), $graphqlResponse['data']['updateFishbowl']['fishbowl']['startDateTimeTz']);
         $this->assertSame($newFishbowl->getDescription(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['description']);
