@@ -22,7 +22,7 @@ import List from '@/ui/svg/list.svg';
 import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
 import Trans from 'next-translate/Trans';
 
-const Header: React.FC = () => {
+const Avatar: React.FC = () => {
   const wrapperRef = useRef(null);
   const [active, setActive] = useState(false);
   const { user, logout } = useAuth();
@@ -86,4 +86,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Avatar;
