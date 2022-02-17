@@ -8,7 +8,7 @@
  */
 
 export interface Fishbowl {
-  '@id'?: string;
+  'id'?: string;
   'name'?: string;
   'description'?: string;
   'startDateTime': Date;
