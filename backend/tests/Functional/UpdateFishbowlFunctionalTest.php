@@ -60,6 +60,60 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
         $this->assertSame($graphqlResponse['errors'][0]['debugMessage'], 'Access Denied.');
     }
 
+    /** @test */
+    public function itCantUpdateUsingPastStartDateTime(): void
+    {
+        $hostedFishbowl = FishbowlFactory::createOne([
+            'host' => $this->host,
+        ])->object();
+
+        $hostToken = $this->logIn($this->host);
+
+        $newFishbowl = FishbowlFactory::createOne([
+            'name' => 'New fishbowl name',
+            'startDateTime' => new \DateTime('yesterday'),
+        ])->object();
+
+        $response = $this->callGQLWithToken($hostedFishbowl->getId(), $hostToken, $newFishbowl);
+        $graphqlResponse = $response->toArray();
+
+        $this->assertArrayHasKey('errors', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['errors']);
+        $this->assertSame($graphqlResponse['errors'][0]['debugMessage'], 'startDateTime: The fishbowl start date is already past.');
+    }
+
+    /** @test */
+    public function itCanUpdateFishbowlCorrectly(): void
+    {
+        $hostedFishbowl = FishbowlFactory::createOne([
+            'host' => $this->host,
+        ])->object();
+
+        $hostToken = $this->logIn($this->host);
+
+        $newFishbowl = FishbowlFactory::createOne([
+            'name' => 'New fishbowl name',
+            'startDateTime' => new \DateTime('now'),
+            'description' => 'new description',
+            'locale' => 'es',
+            'timezone' => 'Europe/Madrid',
+            'hasIntroduction' => true,
+        ])->object();
+
+        $response = $this->callGQLWithToken($hostedFishbowl->getId(), $hostToken, $newFishbowl);
+        $graphqlResponse = $response->toArray();
+
+        $this->assertArrayHasKey('data', $graphqlResponse);
+        $this->assertNotEmpty($graphqlResponse['data']);
+        
+        $this->assertSame($newFishbowl->getName(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['name']);
+        $this->assertSame($newFishbowl->getStartDateTimeTz()->format(\DateTime::ATOM), $graphqlResponse['data']['updateFishbowl']['fishbowl']['startDateTimeTz']);
+        $this->assertSame($newFishbowl->getDescription(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['description']);
+        $this->assertSame($newFishbowl->getLocale(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['locale']);
+        $this->assertSame($newFishbowl->getTimezone(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['timezone']);
+        $this->assertSame($newFishbowl->getHasIntroduction(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['hasIntroduction']);
+    }
+
     private function callGQLWithToken(?UuidInterface $id, string $token, Fishbowl $newFishbowl): ResponseInterface
     {
         $updateMutation = <<<GQL
@@ -77,6 +131,12 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
             }
         GQL;
 
+        $startDateTime = $newFishbowl->getStartDateTime();
+
+        if (null !== $startDateTime) {
+            $startDateTime = $startDateTime->format('Y-m-d H:i:s');
+        }
+
         return static::createClient()->request('POST', '/graphql', [
             'json' => [
                 'query' => $updateMutation,
@@ -86,9 +146,7 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
                         'name' => $newFishbowl->getName(),
                         'description' => $newFishbowl->getDescription(),
                         'locale' => $newFishbowl->getLocale(),
-                        'startDateTime' => $newFishbowl->getStartDateTime()
-                            ? $newFishbowl->getStartDateTime()->format('Y-m-d H:i:s')
-                            : null,
+                        'startDateTime' => $startDateTime,
                         'timezone' => $newFishbowl->getTimezone(),
                         'hasIntroduction' => $newFishbowl->getHasIntroduction(),
                     ],
