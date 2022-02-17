@@ -130,6 +130,8 @@ class Fishbowl
     ];
 
     /**
+     * @Groups({"fishbowl:read"})
+     *
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")

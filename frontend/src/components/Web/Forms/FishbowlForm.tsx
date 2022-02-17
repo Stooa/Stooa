@@ -54,6 +54,7 @@ interface FormProps {
 }
 
 interface FormValues {
+  id?: string;
   title: string;
   day: Date;
   time: Date;
@@ -240,6 +241,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
         .updateFishbowl({
           variables: {
             input: {
+              id: `/fishbowls/${values.id}`,
               name: values.title,
               description: values.description,
               startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
@@ -257,6 +259,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
         })
         .catch(error => {
           setSubmitting(false);
+          console.log('da error');
           props.onSubmit({
             type: 'Error',
             data: error
@@ -330,6 +333,7 @@ const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = fals
     const { timezone } = formatDateTime(selectedFishbowl.startDateTimeTz);
 
     selectedFishbowlValues = {
+      id: selectedFishbowl.id,
       title: selectedFishbowl.name,
       day: new Date(selectedFishbowl.startDateTimeTz),
       time: selectedFishbowl.startDateTimeTz,
