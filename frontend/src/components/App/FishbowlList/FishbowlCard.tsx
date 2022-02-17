@@ -12,6 +12,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { formatDateTime, isTimeLessThanNMinutes } from '@/lib/helpers';
+import { pushEventDataLayer } from '@/lib/analytics';
+
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
@@ -22,6 +24,7 @@ import ArrowRight from '@/ui/svg/arrow-right.svg';
 
 interface Props {
   fishbowl: Fishbowl;
+
   onClick: (fishbowl: Fishbowl) => void;
 }
 
@@ -39,6 +42,11 @@ const FishbowlCard = ({ fishbowl, onClick }: Props) => {
 
   const handleGoToFishbowl = () => {
     const route = `${ROUTE_FISHBOWL}/${slug}`;
+    pushEventDataLayer({
+      category: 'Enter Fishbowl',
+      action: 'Enter Fishbowl From List',
+      label: route
+    });
     router.push(route, route, { locale: locale });
   };
 

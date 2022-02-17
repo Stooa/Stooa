@@ -34,7 +34,7 @@ import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
 import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
-import FishbowlForm from "@/components/Web/Forms/FishbowlForm";
+import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 
 const FishbowlList = () => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);

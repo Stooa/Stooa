@@ -241,7 +241,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
         .updateFishbowl({
           variables: {
             input: {
-              id: `/fishbowls/${values.id}/`,
+              id: `/fishbowls/${values.id}`,
               name: values.title,
               description: values.description,
               startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
@@ -259,6 +259,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
         })
         .catch(error => {
           setSubmitting(false);
+          console.log('da error');
           props.onSubmit({
             type: 'Error',
             data: error
