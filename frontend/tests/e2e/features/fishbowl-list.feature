@@ -33,7 +33,7 @@ Feature: Fishbowl List
 
     Scenario: Logged user enters to a fishbowl from the list
         Given a logged user
-        Given a list of multiple fishbowls
+        And a list of multiple fishbowls
         When navigates to "/fishbowl/list"
         Then clicks on "Enter fishbowl" link
         And gets redirect to "/fb/test-me-fishbowl"
