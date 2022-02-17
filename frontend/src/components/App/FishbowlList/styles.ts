@@ -210,10 +210,12 @@ const CardTitle = styled.div`
   ${TEXT_MD};
   width: 100%;
   text-align: left;
-  font-weight: 500;
   color: ${COLOR_NEUTRO_800};
   overflow: ellipsis;
-  margin-bottom: ${space()};
+
+  h4 {
+    font-weight: 500;
+  }
 
   ${media.min('desktopLarge')`
     grid-column: 1 / 3;

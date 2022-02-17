@@ -69,41 +69,6 @@ class FishbowlListFunctionalTest extends ApiTestCase
     }
 
     /** @test */
-    public function itGetsUserCreatedFishbowls(): void
-    {
-        $fishbowl = FishbowlFactory::createOne([
-            'name' => 'fishbowl name',
-            'host' => $this->host,
-        ]);
-
-        FishbowlFactory::createOne([
-            'currentStatus' => Fishbowl::STATUS_FINISHED,
-        ]);
-
-        FishbowlFactory::createOne();
-
-        $hostToken = $this->logIn($this->host);
-
-        $response = static::createClient()->request('GET', '/fishbowls', [
-            'auth_bearer' => $hostToken,
-        ]);
-
-        $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
-
-        $this->assertJsonContains([
-            '@context' => '/contexts/Fishbowl',
-            '@id' => '/fishbowls',
-            '@type' => 'hydra:Collection',
-            'hydra:totalItems' => 1,
-        ]);
-
-        $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
-
-        $this->assertSame($fishbowl->getName(), $response->toArray()['hydra:member'][0]['name']);
-    }
-
-    /** @test */
     public function itGetsFishbowlsFilteredByAfterDate(): void
     {
         $now = new \DateTime();
