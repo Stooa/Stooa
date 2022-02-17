@@ -48,7 +48,7 @@ interface FormProps {
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues | null;
   full: boolean;
-  edit?: boolean;
+  isEditForm?: boolean;
   defaultHourValue: string;
   defaultTime: Date;
 }
@@ -234,7 +234,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
-    if (props.edit) {
+
+    if (props.isEditForm) {
       await props
         .updateFishbowl({
           variables: {
@@ -292,7 +293,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const CreateFishbowl = ({ selectedFishbowl = null, full = false, edit = false }) => {
+const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = false }) => {
+
   const [error, setError] = useState(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
@@ -336,7 +338,7 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false, edit = false })
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
       timezone: timezone,
-      hasIntroduction: false
+      hasIntroduction: false,
     };
   }
 
@@ -357,9 +359,10 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false, edit = false })
         currentLanguage={lang}
         currentTimezone={currentUserTimezoneName}
         selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
+        isEditForm={isEditForm}
       />
     </>
   );
 };
 
-export default CreateFishbowl;
+export default FishbowlForm;

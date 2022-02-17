@@ -34,7 +34,7 @@ import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
 import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
-import CreateFishbowl from '@/components/Web/Forms/CreateFishbowl';
+import FishbowlForm from "@/components/Web/Forms/FishbowlForm";
 
 const FishbowlList = () => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
@@ -177,7 +177,7 @@ const FishbowlList = () => {
               {selectedFishbowl && (
                 <div>
                   <h2 className="title-md">{t('titleEdit')}</h2>
-                  <CreateFishbowl full selectedFishbowl={selectedFishbowl} />
+                  <FishbowlForm full selectedFishbowl={selectedFishbowl} isEditForm={true} />
                 </div>
               )}
             </>

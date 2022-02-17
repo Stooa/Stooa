@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Layout from '@/layouts/Default';
-import CreateFishbowlForm from '@/components/Web/Forms/CreateFishbowl';
+import FishbowlForm from "@/components/Web/Forms/FishbowlForm";
 import { useStateValue } from '@/contexts/AppContext';
 
 import { IConferenceStatus } from '@/jitsi/Status';
@@ -34,7 +34,7 @@ const Create = () => {
   return (
     <Layout title={t('title')}>
       <h1 className="title-md">{t('title')}</h1>
-      <CreateFishbowlForm />
+      <FishbowlForm />
     </Layout>
   );
 };
