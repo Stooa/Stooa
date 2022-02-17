@@ -101,7 +101,7 @@ const FishbowlList = () => {
                   });
                 }}
               >
-                <span>{t('scheduleFishbowl')}</span>
+                <span>{t('common:scheduleFishbowl')}</span>
                 <PlusSign />
               </ButtonSmall>
             </RedirectLink>
