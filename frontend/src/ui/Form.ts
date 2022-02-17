@@ -399,12 +399,6 @@ const SwitchLabel = styled.label`
 `;
 
 const StyledIntroductionTooltip = styled.div`
-  --shadow-color: 0deg 0% 79%;
-  --shadow-elevation-medium: -0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0.36),
-    -0.3px 0.6px 0.8px -0.8px hsl(var(--shadow-color) / 0.36),
-    -0.8px 1.4px 1.8px -1.7px hsl(var(--shadow-color) / 0.36),
-    -2px 3.5px 4.5px -2.5px hsl(var(--shadow-color) / 0.36);
-
   color: ${COLOR_NEUTRO_100};
   background-color: ${COLOR_NEUTRO_700};
   height: auto;
