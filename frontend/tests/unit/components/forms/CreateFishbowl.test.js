@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { CreateFishbowlForm } from '@/components/forms/CreateFishbowl';
 
 // `describe` is not required, but it helps the tests read nicely
@@ -16,6 +16,5 @@ describe('Unit test of button join', () => {
   it('should render the `button`', () => {
     // The getByRole will error if there are less or more than 1 element found
     render(<CreateFishbowlForm />);
-
   });
 });

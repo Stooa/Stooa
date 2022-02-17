@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Layout from '@/layouts/Default';
-import FishbowlForm from "@/components/Web/Forms/FishbowlForm";
+import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 import { useStateValue } from '@/contexts/AppContext';
 
 import { IConferenceStatus } from '@/jitsi/Status';

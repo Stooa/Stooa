@@ -294,7 +294,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = false }) => {
-
   const [error, setError] = useState(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
@@ -338,7 +337,7 @@ const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = fals
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
       timezone: timezone,
-      hasIntroduction: false,
+      hasIntroduction: false
     };
   }
 
