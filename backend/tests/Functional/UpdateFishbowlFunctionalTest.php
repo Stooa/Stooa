@@ -30,7 +30,6 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
 
     private const ADMIN_PASSWORD = '$argon2id$v=19$m=65536,t=4,p=1$37ytdOiVjLdUPFfPRDALmA$xZsJ/uHJ1nTklxYMq1WrjhEPPN2E1HOtVXAyf4rTTV0';
     private User $host;
-    private Fishbowl $fishbowl;
 
     protected function setUp(): void
     {
@@ -50,11 +49,10 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
         $hostToken = $this->logIn($this->host);
 
         $newFishbowl = FishbowlFactory::createOne([
-           'name' => 'New fishbowl name'
+           'name' => 'New fishbowl name',
         ])->object();
 
         $response = $this->callGQLWithToken($fishbowlWithoutHost->getId(), $hostToken, $newFishbowl);
-
         $graphqlResponse = $response->toArray();
 
         $this->assertArrayHasKey('errors', $graphqlResponse);
@@ -62,7 +60,7 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
         $this->assertSame($graphqlResponse['errors'][0]['debugMessage'], 'Access Denied.');
     }
 
-    private function callGQLWithToken(UuidInterface $id, string $token, Fishbowl $newFishbowl): ResponseInterface
+    private function callGQLWithToken(?UuidInterface $id, string $token, Fishbowl $newFishbowl): ResponseInterface
     {
         $updateMutation = <<<GQL
             mutation UpdateFishbowl(\$input: updateFishbowlInput!) {
@@ -72,15 +70,12 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
                         description
                         locale
                         startDateTimeTz
-                        endDateTimeTz
                         timezone
-                        locale
                         hasIntroduction
                     }
                 }
             }
         GQL;
-
 
         return static::createClient()->request('POST', '/graphql', [
             'json' => [
@@ -88,7 +83,14 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
                 'variables' => [
                     'input' => [
                         'id' => '/fishbowls/' . $id,
-                        'name' => $newFishbowl->getName()
+                        'name' => $newFishbowl->getName(),
+                        'description' => $newFishbowl->getDescription(),
+                        'locale' => $newFishbowl->getLocale(),
+                        'startDateTime' => $newFishbowl->getStartDateTime()
+                            ? $newFishbowl->getStartDateTime()->format('Y-m-d H:i:s')
+                            : null,
+                        'timezone' => $newFishbowl->getTimezone(),
+                        'hasIntroduction' => $newFishbowl->getHasIntroduction(),
                     ],
                 ],
             ],

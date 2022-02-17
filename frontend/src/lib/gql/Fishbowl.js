@@ -34,10 +34,8 @@ const UPDATE_FISHBOWL = gql`
         name
         description
         locale
-        startDateTimeTz
-        endDateTimeTz
+        startDateTime
         timezone
-        locale
         hasIntroduction
       }
     }
