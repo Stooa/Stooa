@@ -47,7 +47,7 @@ interface FormProps {
   currentTimezone: string;
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues | null;
-  full: boolean;
+  isFull?: boolean;
   isEditForm?: boolean;
   defaultHourValue: string;
   defaultTime: Date;
@@ -83,7 +83,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
   const { user } = useAuth();
 
   return (
-    <FormikForm full={props.full ? props.full : undefined}>
+    <FormikForm $isFull={props.isFull}>
       <fieldset className="fieldset-inline">
         <Input
           placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' })}
@@ -296,7 +296,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = false }) => {
+const FishbowlForm = ({ selectedFishbowl = null, $isFull = false, isEditForm = false }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
@@ -315,15 +315,19 @@ const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = fals
       console.error('[STOOA]', res);
       setError(res.data);
     } else {
-      const {
-        data: {
-          createFishbowl: { fishbowl }
-        }
-      } = res;
+      if (isEditForm) {
+        console.log('SHEEEEEESH');
+      } else {
+        const {
+          data: {
+            createFishbowl: { fishbowl }
+          }
+        } = res;
 
-      const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
-      updateCreateFishbowl(true);
-      router.push(route, route, { locale: lang });
+        const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
+        updateCreateFishbowl(true);
+        router.push(route, route, { locale: lang });
+      }
     }
   };
 
@@ -349,7 +353,7 @@ const FishbowlForm = ({ selectedFishbowl = null, full = false, isEditForm = fals
     <>
       {error && <FormError errors={error} />}
       <FormValidation
-        full={full}
+        isFull={$isFull}
         title={titleError}
         enableReinitialize
         required={requiredError}

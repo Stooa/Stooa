@@ -28,12 +28,12 @@ import {
 import { TEXT_SM, TEXT_XXS } from '@/ui/Texts';
 
 interface Props {
-  full?: boolean;
+  $isFull?: boolean;
 }
 
 const FormikForm = styled(Form)`
   margin-top: ${space(4)};
-  max-width: ${({ full }: Props) => (full ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -329,10 +329,13 @@ const TextDivider = styled.div`
 `;
 
 const SwitchStyled = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+  display: flex;
   align-items: center;
   width: 100%;
+
+  > *:not(:nth-child(2)) {
+    margin-left: ${space()};
+  }
 
   input {
     display: none;
@@ -359,7 +362,6 @@ const SwitchStyled = styled.div`
 
   .label-text {
     font-size: ${rems(14)};
-    margin-right: ${space(2)};
   }
 
   label {
@@ -374,7 +376,7 @@ const SwitchLabel = styled.label`
   justify-content: space-between;
   cursor: pointer;
   width: 42px;
-  margin-right: ${space(2)};
+  margin-right: ${space()};
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;

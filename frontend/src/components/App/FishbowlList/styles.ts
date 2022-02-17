@@ -10,6 +10,7 @@
 import styled from 'styled-components';
 import {
   BREAKPOINTS,
+  COLOR_GREEN_500,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
@@ -22,7 +23,7 @@ const FishbowlListWrapper = styled.div`
   height: 100%;
   padding: ${space(3)} 0;
   width: 100%;
-  max-width: ${BREAKPOINTS.desktopLarge}px;
+  max-width: ${BREAKPOINTS.desktop}px;
 `;
 
 const FishbowlListContent = styled.div`
@@ -32,15 +33,17 @@ const FishbowlListContent = styled.div`
   column-gap: ${space(4)};
 
   &.half {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto;
   }
 `;
 
 const FishbowlScrollList = styled.div`
   display: grid;
+  grid-auto-rows: minmax(min-content, max-content);
   row-gap: ${space(2)};
   padding-bottom: ${space(1)};
-  align-items: flex-start;
+  align-items: start;
+  padding-top: 4px;
 
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -164,7 +167,7 @@ const CardStyled = styled.div`
   padding: ${space(2)} ${space(2)};
   border-radius: ${rems(8)};
   box-shadow: var(--shadow-elevation-medium);
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   overflow: hidden;
 
   ${media.min('desktopLarge')`
@@ -203,6 +206,14 @@ const CardStyled = styled.div`
   &:hover {
     transform: translateY(-2px);
     cursor: pointer;
+  }
+
+  &.selected-card {
+    border: 1px solid ${COLOR_GREEN_500};
+
+    &::after {
+      background-color: ${COLOR_GREEN_500};
+    }
   }
 `;
 

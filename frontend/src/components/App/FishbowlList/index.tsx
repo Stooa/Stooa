@@ -33,7 +33,7 @@ import PlusSign from '@/ui/svg/plus-sign.svg';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
-import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
+import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/helpers';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 
 const FishbowlList = () => {
@@ -42,8 +42,7 @@ const FishbowlList = () => {
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
 
-  const handleClick = fishbowl => {
-    console.log(fishbowl);
+  const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
   };
 
@@ -171,13 +170,17 @@ const FishbowlList = () => {
                     onClick={fishbowl => handleClick(fishbowl)}
                     key={index}
                     fishbowl={fishbowl}
+                    selected={fishbowl.id === selectedFishbowl?.id}
                   />
                 ))}
               </FishbowlScrollList>
               {selectedFishbowl && (
                 <div>
                   <h2 className="title-md">{t('titleEdit')}</h2>
-                  <FishbowlForm full selectedFishbowl={selectedFishbowl} isEditForm={true} />
+                  <FishbowlForm
+                    selectedFishbowl={selectedFishbowl}
+                    isEditForm={!isTimeLessThanNMinutes(selectedFishbowl.startDateTimeTz, 30)}
+                  />
                 </div>
               )}
             </>
