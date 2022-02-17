@@ -9,6 +9,12 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
+Given('a profile information', () => {
+  cy.intercept('POST', 'https://localhost:8443/graphql', {
+    fixture: 'self-user.json'
+  }).as('gqlSelfUserQuery');
+});
+
 Given('a logged user', () => {
   cy.login();
 });

@@ -10,7 +10,8 @@
 import React from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
-import Header from '@/components/Web/FishbowlDetailHeader';
+// import Header from '@/components/Web/FishbowlDetailHeader';
+import Header from '@/components/Web/Header';
 import Footer from '@/components/Web/Footer';
 import Decoration from '@/components/Web/Decoration';
 import {
@@ -22,14 +23,15 @@ import {
 
 interface Props {
   data: Fishbowl;
+  navigation?: boolean;
 }
 
-const Page: React.FC<Props> = ({ children, data }) => {
+const Page: React.FC<Props> = ({ children, data, navigation = true }) => {
   return (
     <>
       <Container>
         <HeaderStyled>
-          <Header data={data} />
+          <Header navigation={navigation} />
         </HeaderStyled>
         <Main center>{children}</Main>
         <DecorationStyled>

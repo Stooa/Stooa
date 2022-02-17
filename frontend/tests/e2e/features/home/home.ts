@@ -7,13 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
-
-Given('a profile information', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', {
-    fixture: 'self-user.json'
-  }).as('gqlSelfUserQuery');
-});
+import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 When('clicks on its profile', () => {
   cy.get('header').within(() => {
