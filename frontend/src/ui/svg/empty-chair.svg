@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="185" height="211" fill="none" viewBox="0 0 185 211">
+  <ellipse cx="98.154" cy="205.891" fill="#EBE5DD" rx="86.062" ry="4.97"/>
+  <path fill="#8D5219" fill-rule="evenodd" d="M118.976 100.106h13.514l-32.007 106.45h-4.978l23.471-106.45z" clip-rule="evenodd"/>
+  <path fill="#7C4612" fill-rule="evenodd" d="M99.061 206.556h2.845l32.007-106.45h-2.845l-32.007 106.45z" clip-rule="evenodd"/>
+  <path fill="#8D5219" fill-rule="evenodd" d="M155.055 100.861h-13.514l32.006 106.45h4.979l-23.471-106.45z" clip-rule="evenodd"/>
+  <path fill="#7C4612" fill-rule="evenodd" d="M175.681 207.311h2.845l-23.471-106.45h-2.846l23.472 106.45z" clip-rule="evenodd"/>
+  <path fill="#AB6C2C" fill-rule="evenodd" d="M96.731 98.155l81.596-6.067.496 7.545-81.596 6.068-.496-7.546z" clip-rule="evenodd"/>
+  <path fill="#824D18" fill-rule="evenodd" d="M171.232 92.615l7.095-.527.496 7.545-7.095.528-.496-7.546z" clip-rule="evenodd"/>
+  <g>
+    <path fill="#FFDD6E" fill-rule="evenodd" d="M.197 10.013C-.155 4.686 4.065.17 9.404.157L82.205.004a9.246 9.246 0 018.916 6.727l32.162 113.557c1.671 5.902-2.763 11.766-8.897 11.766H16.913a9.246 9.246 0 01-9.226-8.637L.197 10.013z" clip-rule="evenodd"/>
+    <rect width="153.632" height="24.139" x="7.824" y="121.405" fill="#E3BD3F" rx="3.556"/>
+  </g>
+  <g>
+    <path fill="#8D5219" fill-rule="evenodd" d="M35.759 102.236h13.514l-32.007 106.45h-4.979l23.472-106.45z" clip-rule="evenodd"/>
+    <path fill="#7C4612" fill-rule="evenodd" d="M15.844 208.686h2.845l32.007-106.45H47.85l-32.006 106.45z" clip-rule="evenodd"/>
+    <path fill="#8D5219" fill-rule="evenodd" d="M71.837 102.991H58.323l32.007 106.45h4.979l-23.472-106.45z" clip-rule="evenodd"/>
+    <path fill="#7C4612" fill-rule="evenodd" d="M92.464 209.441h2.845l-23.472-106.45h-2.845l23.472 106.45z" clip-rule="evenodd"/>
+    <path fill="#AB6C2C" fill-rule="evenodd" d="M13.514 100.286l81.596-6.068.496 7.545-81.596 6.068-.496-7.545z" clip-rule="evenodd"/>
+    <path fill="#824D18" fill-rule="evenodd" d="M88.014 94.745l7.096-.527.496 7.545-7.095.528-.496-7.546z" clip-rule="evenodd"/>
+  </g>
+</svg>

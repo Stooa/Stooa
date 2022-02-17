@@ -105,6 +105,11 @@ const getTimePlusOneMinute = () => {
   return new Date(Date.now() + 60 * 1000).toLocaleString('en-US');
 };
 
+const getIsoDateTimeWithActualTimeZone = () => {
+  const date = new Date();
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+};
+
 export {
   dateDifferenceFromNow,
   dispatchEvent,
@@ -115,5 +120,6 @@ export {
   parseDevices,
   removeItem,
   nearestQuarterHour,
-  getTimePlusOneMinute
+  getTimePlusOneMinute,
+  getIsoDateTimeWithActualTimeZone
 };
