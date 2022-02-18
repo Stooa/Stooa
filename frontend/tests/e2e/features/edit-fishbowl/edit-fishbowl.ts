@@ -39,10 +39,10 @@ Given('an updated fishbowl', () => {
   }).as('gqlUpdateFishbowlMutation');
 });
 
-Then('sees the fishbowl edit form updated', () => {
+Then('sees the fishbowl list updated', () => {
   cy.wait('@gqlUpdateFishbowlMutation');
 
-  cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl updated');
+  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First updated');
 
   cy.screenshot();
 });

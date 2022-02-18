@@ -12,3 +12,4 @@ Feature: Edit fishbowl
         And clicks on fishbowl title
         Then sees the fishbowl edit form full of information
         When clicks on modify fishbowl button
+#        Then sees the fishbowl list updated
