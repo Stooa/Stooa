@@ -12,18 +12,6 @@ import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 const date = new Date();
 const isoDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
 
-Given('a list of one fishbowl', () => {
-  cy.intercept(
-    {
-      pathname: '/fishbowls',
-      query: {
-        'finishDateTime[after]': isoDate
-      }
-    },
-    { fixture: 'one-fishbowl-list.json' }
-  ).as('getOneFishbowlsListQuery');
-});
-
 Given('a list of multiple fishbowls', () => {
   cy.intercept(
     {

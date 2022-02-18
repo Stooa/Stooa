@@ -86,6 +86,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
     <FormikForm $isFull={props.isFull}>
       <fieldset className="fieldset-inline">
         <Input
+          data-testid="edit-form-title"
           placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' })}
           label={t('fishbowl.title')}
           name="title"

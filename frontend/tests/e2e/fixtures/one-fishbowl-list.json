@@ -2,7 +2,7 @@
     {
         "@id": "/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
         "@type": "Fishbowl",
-        "name": "repellendus voluptatibus rerum",
+        "name": "Fishbowl test",
         "description": "Ratione et maiores itaque ut debitis.",
         "slug": "test-me-fishbowl",
         "timezone": "Europe/Madrid",
