@@ -10,7 +10,8 @@
                 "durationFormatted": "02:00",
                 "hasIntroduction": false,
                 "locale": "en",
-                "slug": "test-me-fishbowl"
+                "slug": "test-me-fishbowl",
+                "isFishbowlNow": false
             }
         }
     }

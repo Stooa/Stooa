@@ -179,7 +179,7 @@ const FishbowlList = () => {
                   <h2 className="title-md">{t('titleEdit')}</h2>
                   <FishbowlForm
                     selectedFishbowl={selectedFishbowl}
-                    isEditForm={!isTimeLessThanNMinutes(selectedFishbowl.startDateTimeTz, 30)}
+                    isEditForm={true}
                   />
                 </div>
               )}

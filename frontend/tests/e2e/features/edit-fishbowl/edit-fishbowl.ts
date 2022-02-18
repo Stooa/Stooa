@@ -22,7 +22,7 @@ Then('sees the fishbowl edit form full of information', () => {
 
   cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
   cy.get('[data-testid=edit-form-description]').should('have.value', 'Fishbowl description');
-  cy.get('input[name="day"]').should('have.value', '11/02/2022');
+  cy.get('input[name="day"]').should('have.value', '11/02/2030');
 
   cy.screenshot();
 });
