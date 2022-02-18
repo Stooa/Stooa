@@ -94,12 +94,14 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           autoComplete="off"
         />
         <Textarea
+          data-testid="edit-form-description"
           label={t('fishbowl.description')}
           name="description"
           validation={false}
           autoComplete="off"
         />
         <DatePicker
+          data-testid="edit-form-date"
           label={t('fishbowl.day')}
           placeholderText={t('fishbowl.selectDay')}
           name="day"
@@ -110,6 +112,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           variant="sm"
         />
         <DatePicker
+          data-testid="edit-form-time"
           label={t('fishbowl.time')}
           placeholderText={t('fishbowl.selectTime')}
           name="time"
@@ -203,6 +206,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
       </fieldset>
       <fieldset>
         <SubmitBtn
+          data-testid='fishbowl-submit'
           text={props.selectedFishbowl ? t('button.modifyFishbowl') : t('button.createFishbowl')}
           disabled={isSubmitting}
         />
