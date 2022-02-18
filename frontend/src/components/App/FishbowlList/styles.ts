@@ -172,14 +172,13 @@ const CardStyled = styled.div`
   overflow: hidden;
 
   ${media.min('desktopLarge')`
-    grid-template-columns: 4fr 3fr;
+    grid-template-columns: 3fr 4fr;
   `}
 
   .card__info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: ${space(2)};
 
     .card__time span {
       color: ${COLOR_NEUTRO_600};
@@ -202,6 +201,7 @@ const CardStyled = styled.div`
     background-color: ${COLOR_NEUTRO_500};
     left: 0;
     top: 0;
+    transition: all 0.2s ease-in-out;
   }
 
   &:hover {
@@ -214,6 +214,7 @@ const CardStyled = styled.div`
 
     &::after {
       background-color: ${COLOR_GREEN_500};
+      width: 6px;
     }
   }
 `;
@@ -234,6 +235,12 @@ const CardTitle = styled.div`
   `}
 `;
 
+const EditFormWrapper = styled.div`
+  background-color: ${COLOR_NEUTRO_100};
+  padding: ${space()} ${space(6)};
+  border-radius: ${rems(4)};
+`;
+
 export {
   FishbowlListWrapper,
   Header,
@@ -241,5 +248,6 @@ export {
   FishbowlScrollList,
   CardTitle,
   EmptyFishbowlList,
-  FishbowlListContent
+  FishbowlListContent,
+  EditFormWrapper
 };

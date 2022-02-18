@@ -44,13 +44,10 @@ interface FormProps {
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   onSubmit: (any) => void;
   currentLanguage: string;
-  currentTimezone: string;
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues | null;
   isFull?: boolean;
   isEditForm?: boolean;
-  defaultHourValue: string;
-  defaultTime: Date;
 }
 
 interface FormValues {
@@ -68,11 +65,11 @@ interface FormValues {
 const initialValues = {
   title: '',
   day: new Date(),
-  time: '',
-  hours: '',
+  time: nearestQuarterHour(),
+  hours: '01:00',
   description: '',
   language: '',
-  timezone: '',
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false
 };
 
@@ -114,7 +111,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="time"
           showTimeSelect
           showTimeSelectOnly
-          selected={nearestQuarterHour()}
+          selected={initialValues.time ? initialValues.time : nearestQuarterHour()}
           timeIntervals={15}
           dateFormat="H:mm"
           icon="clock"
@@ -213,10 +210,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
-    language: props.currentLanguage,
-    timezone: props.currentTimezone,
-    hours: props.defaultHourValue,
-    time: props.defaultTime
+    language: props.currentLanguage
   }),
   validationSchema: props => {
     return Yup.object({
@@ -308,8 +302,6 @@ const FishbowlForm = ({ selectedFishbowl = null, $isFull = false, isEditForm = f
   const dateError = t('validation.date');
   const titleError = t('validation.title');
 
-  const currentUserTimezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   const handleOnSubmit = res => {
     if (res.type === 'Error') {
       console.error('[STOOA]', res);
@@ -340,7 +332,7 @@ const FishbowlForm = ({ selectedFishbowl = null, $isFull = false, isEditForm = f
       id: selectedFishbowl.id,
       title: selectedFishbowl.name,
       day: new Date(selectedFishbowl.startDateTimeTz),
-      time: selectedFishbowl.startDateTimeTz,
+      time: new Date(selectedFishbowl.startDateTimeTz),
       hours: selectedFishbowl.durationFormatted,
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
@@ -361,10 +353,7 @@ const FishbowlForm = ({ selectedFishbowl = null, $isFull = false, isEditForm = f
         createFishbowl={createFishbowl}
         updateFishbowl={updateFishbowl}
         onSubmit={handleOnSubmit}
-        defaultTime={nearestQuarterHour()}
-        defaultHourValue="01:00"
         currentLanguage={lang}
-        currentTimezone={currentUserTimezoneName}
         selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
         isEditForm={isEditForm}
       />

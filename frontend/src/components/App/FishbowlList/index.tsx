@@ -26,7 +26,8 @@ import {
   FishbowlListWrapper,
   FishbowlScrollList,
   Header,
-  FishbowlListContent
+  FishbowlListContent,
+  EditFormWrapper
 } from '@/components/App/FishbowlList/styles';
 
 import PlusSign from '@/ui/svg/plus-sign.svg';
@@ -175,13 +176,13 @@ const FishbowlList = () => {
                 ))}
               </FishbowlScrollList>
               {selectedFishbowl && (
-                <div>
+                <EditFormWrapper>
                   <h2 className="title-md">{t('titleEdit')}</h2>
                   <FishbowlForm
                     selectedFishbowl={selectedFishbowl}
                     isEditForm={!isTimeLessThanNMinutes(selectedFishbowl.startDateTimeTz, 30)}
                   />
-                </div>
+                </EditFormWrapper>
               )}
             </>
           )}
