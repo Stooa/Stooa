@@ -218,7 +218,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
       </fieldset>
       <fieldset>
         <SubmitBtn
-          data-testid='fishbowl-submit'
+          data-testid="fishbowl-submit"
           text={props.selectedFishbowl ? t('button.modifyFishbowl') : t('button.createFishbowl')}
           disabled={isSubmitting}
         />
@@ -312,11 +312,13 @@ const FormValidation = withFormik<FormProps, FormValues>({
 const FishbowlForm = ({
   selectedFishbowl = null,
   $isFull = false,
-  isEditForm = false
+  isEditForm = false,
+  onSaveCallback
 }: {
   selectedFishbowl: Fishbowl;
   $isFull?: boolean;
   isEditForm: boolean;
+  onSaveCallback?: (data: any) => void;
 }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -331,11 +333,15 @@ const FishbowlForm = ({
 
   const handleOnSubmit = res => {
     if (res.type === 'Error') {
-      console.error('[STOOA]', res);
+      console.error('[STOOA] Error', res);
       setError(res.data);
     } else {
       if (isEditForm) {
-        console.log('SHEEEEEESH');
+        const formatedFishbowl = {
+          ...res.data.updateFishbowl.fishbowl,
+          id: res.data.updateFishbowl.fishbowl.id.substring(11)
+        };
+        onSaveCallback(formatedFishbowl);
       } else {
         const {
           data: {

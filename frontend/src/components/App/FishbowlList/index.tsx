@@ -62,13 +62,24 @@ const FishbowlList = () => {
         params
       })
       .then(response => {
-        console.log(response.data);
         setFishbowls(response.data);
       })
       .catch(error => {
         console.error('[STOOA] Fishbowl list error', error);
         router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
       });
+  };
+
+  const handleUpdateFishbowl = updatedFishbowl => {
+    setFishbowls(fishbowls => {
+      return fishbowls.map(fishbowl => {
+        if (fishbowl.id !== updatedFishbowl.id) {
+          return fishbowl;
+        } else {
+          return { ...fishbowl, ...updatedFishbowl };
+        }
+      });
+    });
   };
 
   useEffect(() => {
@@ -182,6 +193,7 @@ const FishbowlList = () => {
                   <FishbowlForm
                     selectedFishbowl={selectedFishbowl}
                     isEditForm={true}
+                    onSaveCallback={handleUpdateFishbowl}
                   />
                 </EditFormWrapper>
               )}
