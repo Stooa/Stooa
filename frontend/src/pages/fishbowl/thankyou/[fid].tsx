@@ -169,7 +169,7 @@ const ThankYou = () => {
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Host Fishbowl Now',
-                  action: 'ThankYou-Page',
+                  action: 'Thank You Page',
                   label: `fishbowl/thankyou/${fid}`
                 });
               }}
@@ -184,7 +184,7 @@ const ThankYou = () => {
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Schedule Fishbowl',
-                  action: 'ThankYou-Page',
+                  action: 'Thank You Page',
                   label: `fishbowl/thankyou/${fid}`
                 });
               }}
