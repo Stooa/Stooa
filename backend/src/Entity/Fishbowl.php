@@ -166,7 +166,7 @@ class Fishbowl
     private ?string $slug = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\DateTime
