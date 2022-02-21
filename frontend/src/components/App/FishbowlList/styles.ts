@@ -12,8 +12,10 @@ import {
   BREAKPOINTS,
   COLOR_GREEN_500,
   COLOR_NEUTRO_100,
+  COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
@@ -30,7 +32,7 @@ const FishbowlListContent = styled.div`
   display: grid;
   width: 100%;
 
-  column-gap: ${space(4)};
+  column-gap: ${space(2)};
 
   &.half {
     grid-template-columns: 1fr auto;
@@ -39,18 +41,29 @@ const FishbowlListContent = styled.div`
 
 const FishbowlScrollList = styled.div`
   display: grid;
+  position: relative;
   grid-auto-rows: minmax(min-content, max-content);
   row-gap: ${space(2)};
   padding-bottom: ${space(1)};
   align-items: start;
   padding-top: 4px;
+  max-height: 800px;
 
   overflow-y: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-color: ${COLOR_NEUTRO_400} transparent;
 
   &::-webkit-scrollbar {
-    display: none;
+    /* display: none; */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* Foreground */
+    background: ${COLOR_NEUTRO_400};
+  }
+
+  &::-webkit-scrollbar-track {
+    /* Background */
+    background: transparent;
   }
 
   .fishbowl-list__empty-illustration {
@@ -236,9 +249,18 @@ const CardTitle = styled.div`
 `;
 
 const EditFormWrapper = styled.div`
+  display: none;
   background-color: ${COLOR_NEUTRO_100};
-  padding: ${space()} ${space(6)};
+  padding: ${space(2)} ${space(6)};
   border-radius: ${rems(4)};
+
+  h2 {
+    color: ${COLOR_NEUTRO_700};
+  }
+
+  ${media.min('desktopLarge')`
+    display: block;
+  `}
 `;
 
 export {

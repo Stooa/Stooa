@@ -11,7 +11,7 @@ import router from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL } from '@/app.config';
-import { formatDateTime, isTimeLessThanNMinutes } from '@/lib/helpers';
+import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
@@ -36,9 +36,8 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
   const day = startDateTime.toLocaleString('default', { day: 'numeric' });
-  const { time, year, timezone: timezoneCode } = formatDateTime(startDateTimeTz);
-
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const time = startDateTime.toLocaleString('default', { hour: 'numeric', minute: 'numeric' });
+  const year = startDateTime.toLocaleString('default', { year: 'numeric' });
 
   const handleGoToFishbowl = () => {
     const route = `${ROUTE_FISHBOWL}/${slug}`;
@@ -59,10 +58,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div>
           {month} {day}, {year}
         </div>
-        <div className="card__time">
-          {time}
-          <span>{` (${timezoneCode}) ${timezone} `}</span>
-        </div>
+        <div className="card__time">{time}</div>
       </div>
       <div data-testid="card-actions" className="card__actions">
         <ButtonCopyUrl data-testid="copy-link" variant="link" fid={slug} locale={locale}>

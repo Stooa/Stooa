@@ -31,6 +31,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
 import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
+import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 
 interface FormProps {
   required: string;
@@ -79,6 +80,21 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
   const timezones = countriesAndTimezones.getAllTimezones();
   const { user } = useAuth();
 
+  const selectedTime = () => {
+    if (props.selectedFishbowl) {
+      console.log(
+        props.selectedFishbowl.time.toLocaleString('es', {
+          timeZone: props.selectedFishbowl.timezone
+        })
+      );
+      return props.selectedFishbowl.time.toLocaleString('es', {
+        timeZone: props.selectedFishbowl.timezone
+      });
+    } else {
+      return nearestQuarterHour();
+    }
+  };
+
   return (
     <FormikForm $isFull={props.isFull}>
       <fieldset className="fieldset-inline">
@@ -111,7 +127,6 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="time"
           showTimeSelect
           showTimeSelectOnly
-          selected={initialValues.time ? initialValues.time : nearestQuarterHour()}
           timeIntervals={15}
           dateFormat="H:mm"
           icon="clock"
@@ -253,7 +268,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
         })
         .catch(error => {
           setSubmitting(false);
-          console.log('da error');
           props.onSubmit({
             type: 'Error',
             data: error
@@ -290,7 +304,15 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const FishbowlForm = ({ selectedFishbowl = null, $isFull = false, isEditForm = false }) => {
+const FishbowlForm = ({
+  selectedFishbowl = null,
+  $isFull = false,
+  isEditForm = false
+}: {
+  selectedFishbowl: Fishbowl;
+  $isFull?: boolean;
+  isEditForm: boolean;
+}) => {
   const [error, setError] = useState(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
@@ -326,17 +348,27 @@ const FishbowlForm = ({ selectedFishbowl = null, $isFull = false, isEditForm = f
   let selectedFishbowlValues: FormValues;
 
   if (selectedFishbowl) {
-    const { timezone } = formatDateTime(selectedFishbowl.startDateTimeTz);
+    const stringDate = selectedFishbowl.startDateTimeTz.toString();
+    const timezone = stringDate.substring(stringDate.length - 5, stringDate.length - 3);
+    const sign = stringDate.substring(stringDate.length - 6, stringDate.length - 1);
+    const hoursInMs = parseInt(timezone) * 60 * 60 * 1000;
+
+    const timestamp = new Date(selectedFishbowl.startDateTimeTz).getTime();
+    const UTCDate = new Date(new Date(timestamp + (sign === '-' ? -hoursInMs : hoursInMs)));
+    const userTimezone = UTCDate.getTimezoneOffset() * 60000;
+    const newDate = new Date(UTCDate.getTime() + userTimezone);
+
+    console.log(newDate);
 
     selectedFishbowlValues = {
       id: selectedFishbowl.id,
       title: selectedFishbowl.name,
-      day: new Date(selectedFishbowl.startDateTimeTz),
-      time: new Date(selectedFishbowl.startDateTimeTz),
+      day: newDate,
+      time: newDate,
       hours: selectedFishbowl.durationFormatted,
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
-      timezone: timezone,
+      timezone: selectedFishbowl.timezone,
       hasIntroduction: false
     };
   }

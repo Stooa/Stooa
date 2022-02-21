@@ -62,6 +62,7 @@ const FishbowlList = () => {
         params
       })
       .then(response => {
+        console.log(response.data);
         setFishbowls(response.data);
       })
       .catch(error => {
@@ -142,7 +143,7 @@ const FishbowlList = () => {
                       });
                     }}
                   >
-                    <span>{t('hostFishbowlNow')}</span>
+                    <span>{t('common:hostFishbowlNow')}</span>
                     <ArrowRight />
                   </ButtonStyledLink>
                 </Link>
@@ -157,7 +158,7 @@ const FishbowlList = () => {
                       });
                     }}
                   >
-                    <span>{t('scheduleFishbowl')}</span>
+                    <span>{t('common:scheduleFishbowl')}</span>
                     <ArrowRight />
                   </ButtonStyledLink>
                 </Link>
