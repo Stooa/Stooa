@@ -1,0 +1,20 @@
+{
+    "data": {
+        "updateFishbowl": {
+            "fishbowl": {
+                "id": "/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
+                "name": "Fishbowl updated",
+                "description": "Fishbowl description",
+                "startDateTimeTz": "2022-02-19T13:45:00+01:00",
+                "timezone": "Europe/Madrid",
+                "durationFormatted": "02:00",
+                "hasIntroduction": false,
+                "locale": "en",
+                "slug": "test-me-fishbowl",
+                "isFishbowlNow": false
+            }
+        }
+    }
+}
+
+

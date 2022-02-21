@@ -21,6 +21,7 @@ import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
 import { ButtonStyledLinkSmall } from '@/ui/Button';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
+import {convertIntoClassName} from "@/lib/helpers";
 
 interface Props {
   fishbowl: Fishbowl;
@@ -50,7 +51,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
   };
 
   return (
-    <CardStyled className={`${selected ? 'selected-card' : ''}`} onClick={() => onClick(fishbowl)}>
+    <CardStyled className={`${selected ? 'selected-card' : ''}`} onClick={() => onClick(fishbowl)} data-cy={convertIntoClassName(name)}>
       <CardTitle>
         <h4>{name}</h4>
       </CardTitle>

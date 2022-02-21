@@ -9,6 +9,9 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
+const date = new Date();
+const isoDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+
 Given('a profile information', () => {
   cy.intercept('POST', 'https://localhost:8443/graphql', {
     fixture: 'self-user.json'
@@ -43,4 +46,16 @@ Then('sees {string}', (text = '') => {
 
 Then('gets redirect to {string}', (url = '') => {
   cy.location('pathname', { timeout: 10000 }).should('eq', url);
+});
+
+Given('a list of one fishbowl', () => {
+  cy.intercept(
+    {
+      pathname: '/fishbowls',
+      query: {
+        'finishDateTime[after]': isoDate
+      }
+    },
+    { fixture: 'one-fishbowl-list.json' }
+  ).as('getOneFishbowlsListQuery');
 });
