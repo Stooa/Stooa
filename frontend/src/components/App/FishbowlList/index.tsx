@@ -12,8 +12,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
-import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW, ROUTE_HOME } from '@/app.config';
+import { motion, AnimatePresence } from 'framer-motion';
 
+import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW, ROUTE_HOME } from '@/app.config';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 import { pushEventDataLayer } from '@/lib/analytics';
 
@@ -29,17 +30,22 @@ import {
   FishbowlListContent,
   EditFormWrapper
 } from '@/components/App/FishbowlList/styles';
+import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 
-import PlusSign from '@/ui/svg/plus-sign.svg';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
-import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/helpers';
-import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
+import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
+import { useWindowSize } from '@/hooks/useWIndowSize';
+import { basicReveal, bottomMobileReveal } from '@/ui/animations/motion/reveals';
+import PlusSign from '@/ui/svg/plus-sign.svg';
+import ArrowRight from '@/ui/svg/arrow-right.svg';
+import BackArrow from '@/ui/svg/arrow-prev.svg';
+import { BREAKPOINTS } from '@/ui/settings';
 
 const FishbowlList = () => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
+  const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
 
@@ -71,8 +77,8 @@ const FishbowlList = () => {
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
-    setFishbowls(fishbowls => {
-      return fishbowls.map(fishbowl => {
+    setFishbowls(currentFishbowls => {
+      return currentFishbowls.map(fishbowl => {
         if (fishbowl.id !== updatedFishbowl.id) {
           return fishbowl;
         } else {
@@ -187,16 +193,33 @@ const FishbowlList = () => {
                   />
                 ))}
               </FishbowlScrollList>
-              {selectedFishbowl && (
-                <EditFormWrapper>
-                  <h2 className="title-md">{t('titleEdit')}</h2>
-                  <FishbowlForm
-                    selectedFishbowl={selectedFishbowl}
-                    isEditForm={true}
-                    onSaveCallback={handleUpdateFishbowl}
-                  />
-                </EditFormWrapper>
-              )}
+              <AnimatePresence>
+                {selectedFishbowl && (
+                  <EditFormWrapper
+                    key="desktop"
+                    as={motion.div}
+                    variants={windowWidth <= BREAKPOINTS.desktop ? bottomMobileReveal : basicReveal}
+                    initial="initial"
+                    exit="exit"
+                    animate="visible"
+                  >
+                    <div className="form-wrapper">
+                      <div className="form-header">
+                        <button className="mobile-back" onClick={() => setSelectedFishbowl(null)}>
+                          <BackArrow />
+                        </button>
+                        <h2 className="title-md">{t('titleEdit')}</h2>
+                      </div>
+                      <FishbowlForm
+                        $isFull={windowWidth <= BREAKPOINTS.desktop}
+                        selectedFishbowl={selectedFishbowl}
+                        isEditForm={true}
+                        onSaveCallback={handleUpdateFishbowl}
+                      />
+                    </div>
+                  </EditFormWrapper>
+                )}
+              </AnimatePresence>
             </>
           )}
         </FishbowlListContent>

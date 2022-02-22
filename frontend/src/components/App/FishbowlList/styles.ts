@@ -32,11 +32,13 @@ const FishbowlListContent = styled.div`
   display: grid;
   width: 100%;
 
-  column-gap: ${space(2)};
-
   &.half {
     grid-template-columns: 1fr auto;
   }
+
+  ${media.min('desktop')`
+    column-gap: ${space(2)};
+  `}
 `;
 
 const FishbowlScrollList = styled.div`
@@ -52,9 +54,16 @@ const FishbowlScrollList = styled.div`
   overflow-y: scroll;
   scrollbar-color: ${COLOR_NEUTRO_400} transparent;
 
-  &::-webkit-scrollbar {
-    /* display: none; */
+  ${media.max('desktop')`
+  & {
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
   }
+
+  &::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+  }`}
 
   &::-webkit-scrollbar-thumb {
     /* Foreground */
@@ -243,23 +252,59 @@ const CardTitle = styled.div`
     font-weight: 500;
   }
 
-  ${media.min('desktopLarge')`
+  ${media.min('desktop')`
     grid-column: 1 / 3;
   `}
 `;
 
 const EditFormWrapper = styled.div`
-  display: none;
-  background-color: ${COLOR_NEUTRO_100};
-  padding: ${space(2)} ${space(6)};
-  border-radius: ${rems(4)};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .form-header {
+    position: relative;
+  }
 
   h2 {
     color: ${COLOR_NEUTRO_700};
   }
 
-  ${media.min('desktopLarge')`
-    display: block;
+  .mobile-back {
+    position: absolute;
+    left: ${space()};
+    bottom: ${rems(6)};
+    ${media.min('desktop')`
+      display: none;
+    `}
+  }
+
+  .form-wrapper {
+    border-radius: ${rems(4)};
+    background-color: ${COLOR_NEUTRO_100};
+    padding: ${space(6)} ${space(3)} ${space(3)};
+    ${media.min('desktop')`
+      padding: ${space(2)} ${space(6)} ${space(6)};
+    `}
+  }
+
+  ${media.min('desktop')`
+    height: auto;
+    position: relative;
+    background-color: ${COLOR_NEUTRO_100};
+    & {
+      -ms-overflow-style: none; /* for Internet Explorer, Edge */
+      scrollbar-width: none; /* for Firefox */
+      overflow-y: scroll;
+    }
+
+    &::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+    }
   `}
 `;
 

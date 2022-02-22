@@ -35,8 +35,10 @@ import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 
 interface FormProps {
   required: string;
+  success?: boolean;
   date: string;
   title: string;
+  defaultTitle: string;
   createFishbowl: (
     options?: CreateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
@@ -75,32 +77,16 @@ const initialValues = {
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
-  const { isSubmitting } = props;
+  const { isSubmitting, success, defaultTitle } = props;
   const { t } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
-  const { user } = useAuth();
-
-  const selectedTime = () => {
-    if (props.selectedFishbowl) {
-      console.log(
-        props.selectedFishbowl.time.toLocaleString('es', {
-          timeZone: props.selectedFishbowl.timezone
-        })
-      );
-      return props.selectedFishbowl.time.toLocaleString('es', {
-        timeZone: props.selectedFishbowl.timezone
-      });
-    } else {
-      return nearestQuarterHour();
-    }
-  };
 
   return (
     <FormikForm $isFull={props.isFull}>
       <fieldset className="fieldset-inline">
         <Input
           data-testid="edit-form-title"
-          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' })}
+          placeholder={defaultTitle}
           label={t('fishbowl.title')}
           name="title"
           type="text"
@@ -222,6 +208,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           text={props.selectedFishbowl ? t('button.modifyFishbowl') : t('button.createFishbowl')}
           disabled={isSubmitting}
         />
+        {success && <span>{t('validation.successMessage')}</span>}
       </fieldset>
     </FormikForm>
   );
@@ -256,7 +243,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
           variables: {
             input: {
               id: `/fishbowls/${values.id}`,
-              name: values.title,
+              name: values.title === '' ? props.defaultTitle : values.title,
               description: values.description,
               startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
               timezone: values.timezone,
@@ -321,11 +308,16 @@ const FishbowlForm = ({
   onSaveCallback?: (data: any) => void;
 }) => {
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState<boolean>(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
   const { t, lang } = useTranslation('form');
   const { updateCreateFishbowl } = useAuth();
+
+  const { user } = useAuth();
+
+  const defaultTitle = t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' });
 
   const requiredError = t('validation.required');
   const dateError = t('validation.date');
@@ -341,6 +333,10 @@ const FishbowlForm = ({
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 5000);
         onSaveCallback(formatedFishbowl);
       } else {
         const {
@@ -369,8 +365,6 @@ const FishbowlForm = ({
     const userTimezone = UTCDate.getTimezoneOffset() * 60000;
     const newDate = new Date(UTCDate.getTime() + userTimezone);
 
-    console.log(newDate);
-
     selectedFishbowlValues = {
       id: selectedFishbowl.id,
       title: selectedFishbowl.name,
@@ -390,8 +384,10 @@ const FishbowlForm = ({
       <FormValidation
         isFull={$isFull}
         title={titleError}
+        defaultTitle={defaultTitle}
         enableReinitialize
         required={requiredError}
+        success={success}
         date={dateError}
         createFishbowl={createFishbowl}
         updateFishbowl={updateFishbowl}

@@ -16,6 +16,7 @@ import {
   BORDER_RADIUS,
   BREAKPOINTS,
   COLOR_GREEN_500,
+  COLOR_GREEN_600,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
@@ -32,6 +33,7 @@ interface Props {
 }
 
 const FormikForm = styled(Form)`
+  position: relative;
   margin-top: ${space(4)};
   max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
@@ -47,8 +49,19 @@ const FormikForm = styled(Form)`
     &:first-child {
       margin-top: 0;
     }
+
     &:last-child {
+      padding-bottom: ${space(2)};
       margin-bottom: 0;
+
+      span {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        color: ${COLOR_GREEN_600};
+        margin: 0;
+      }
     }
 
     > *:not(:last-child) {
