@@ -99,10 +99,10 @@ const FishbowlList = () => {
       <FishbowlListWrapper>
         <Header>
           <div>
-            <h1 className="fishbowl-list__title" data-cy="scheduled-header">
+            <h1 className="fishbowl-list__title" data-testid="scheduled-header">
               <Trans
                 i18nKey="fishbowl-list:scheduledFishbowls"
-                components={{ i: <i />, span: <span data-cy="count" /> }}
+                components={{ i: <i />, span: <span data-testid="count" /> }}
                 values={{
                   count: fishbowls.length
                 }}
@@ -128,7 +128,7 @@ const FishbowlList = () => {
         </Header>
         <FishbowlListContent className={`${selectedFishbowl && 'half'}`}>
           {fishbowls.length === 0 ? (
-            <EmptyFishbowlList data-cy="empty-list">
+            <EmptyFishbowlList data-testid="empty-list">
               <div className="fishbowl-list__empty-illustration">
                 {/* // eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -183,7 +183,7 @@ const FishbowlList = () => {
             </EmptyFishbowlList>
           ) : (
             <>
-              <FishbowlScrollList>
+              <FishbowlScrollList data-testid="fishbowl-list-wrapper">
                 {fishbowls.map((fishbowl, index) => (
                   <FishbowlCard
                     onClick={fishbowl => handleClick(fishbowl)}

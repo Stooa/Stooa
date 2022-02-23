@@ -54,7 +54,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
     <CardStyled
       className={`${selected ? 'selected-card' : ''}`}
       onClick={() => onClick(fishbowl)}
-      data-cy={convertIntoClassName(name)}
+      data-testid={convertIntoClassName(name)}
     >
       <CardTitle>
         <h4>{name}</h4>

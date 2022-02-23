@@ -45,8 +45,8 @@ When('clicks on its profile', () => {
 Then('sees the fishbowl list page with one fishbowl', () => {
   cy.wait('@getOneFishbowlsListQuery');
 
-  cy.get('[data-cy=scheduled-header]').should('exist');
-  cy.get('[data-cy=count]').should('contain', '1');
+  cy.get('[data-testid=scheduled-header]').should('exist');
+  cy.get('[data-testid=count]').should('contain', '1');
 
   cy.screenshot();
 });
@@ -54,12 +54,12 @@ Then('sees the fishbowl list page with one fishbowl', () => {
 Then('sees the fishbowl list page with multiple fishbowls', () => {
   cy.wait('@getMultipleFishbowlsListQuery');
 
-  cy.get('[data-cy=scheduled-header]').should('exist');
-  cy.get('[data-cy=count]').should('contain', '3');
+  cy.get('[data-testid=scheduled-header]').should('exist');
+  cy.get('[data-testid=count]').should('contain', '3');
 
-  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First fishbowl');
-  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(1).should('contain', 'Second fishbowl');
-  cy.get('[data-cy=fishbowl-list-wrapper] h4').eq(2).should('contain', 'Third fishbowl');
+  cy.get('[data-testid=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First fishbowl');
+  cy.get('[data-testid=fishbowl-list-wrapper] h4').eq(1).should('contain', 'Second fishbowl');
+  cy.get('[data-testid=fishbowl-list-wrapper] h4').eq(2).should('contain', 'Third fishbowl');
 
   cy.screenshot();
 });
@@ -67,9 +67,9 @@ Then('sees the fishbowl list page with multiple fishbowls', () => {
 Then('sees the empty fishbowl list page', () => {
   cy.wait('@getEmptyFishbowlsListQuery');
 
-  cy.get('[data-cy=scheduled-header]').should('exist');
-  cy.get('[data-cy=empty-list]').should('exist');
-  cy.get('[data-cy=count]').should('contain', '0');
+  cy.get('[data-testid=scheduled-header]').should('exist');
+  cy.get('[data-testid=empty-list]').should('exist');
+  cy.get('[data-testid=count]').should('contain', '0');
 
   cy.screenshot();
 });
