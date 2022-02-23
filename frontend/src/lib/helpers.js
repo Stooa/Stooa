@@ -110,9 +110,9 @@ const getIsoDateTimeWithActualTimeZone = () => {
   return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
 };
 
-const convertIntoClassName= (text) => {
-  return text.replace(/\s/g , '-');
-}
+const convertIntoClassName = text => {
+  return text.replace(/\s/g, '-');
+};
 
 export {
   dateDifferenceFromNow,
@@ -126,5 +126,5 @@ export {
   nearestQuarterHour,
   getTimePlusOneMinute,
   getIsoDateTimeWithActualTimeZone,
-  convertIntoClassName,
+  convertIntoClassName
 };
