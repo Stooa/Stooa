@@ -9,7 +9,7 @@
 
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import I18nProvider from 'next-translate/I18nProvider'
+import I18nProvider from 'next-translate/I18nProvider';
 
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
@@ -44,15 +44,15 @@ const mocks = [
         }
       }
     }
-  },
+  }
 ];
 
 describe('Unit test of create fishbowl', () => {
   it('renderrs the Create Fishbowl form with all correct fields and a submit button', () => {
     render(
-        <MockedProvider mocks={mocks}>
-          <FishbowlForm />
-        </MockedProvider>
+      <MockedProvider mocks={mocks}>
+        <FishbowlForm />
+      </MockedProvider>
     );
 
     screen.getByLabelText(/title/i);
