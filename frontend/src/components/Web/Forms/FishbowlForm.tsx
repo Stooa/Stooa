@@ -302,9 +302,9 @@ const FishbowlForm = ({
   isEditForm = false,
   onSaveCallback
 }: {
-  selectedFishbowl: Fishbowl;
+  selectedFishbowl?: Fishbowl;
   $isFull?: boolean;
-  isEditForm: boolean;
+  isEditForm?: boolean;
   onSaveCallback?: (data: any) => void;
 }) => {
   const [error, setError] = useState(null);
