@@ -52,3 +52,9 @@ Then('sees the fishbowl list updated', () => {
 
   cy.screenshot();
 });
+
+Then('sees the placeholder area', () => {
+  cy.get('[data-testid=selected-placeholder]').should('exist');
+
+  cy.screenshot();
+});

@@ -80,6 +80,7 @@ const FishbowlList = () => {
         params
       })
       .then(response => {
+        console.log(response.data);
         setFishbowls(response.data);
       })
       .catch(error => {
@@ -277,8 +278,8 @@ const FishbowlList = () => {
                           <ArrowRight />
                         </ButtonStyledLink>
                       </RedirectLink>
-                      <ButtonLinkColored onClick={() => setSelectedFishbowl(null)}>
-                        <button className="back">{t('back')}</button>
+                      <ButtonLinkColored className="back" onClick={() => setSelectedFishbowl(null)}>
+                        <span>{t('back')}</span>
                       </ButtonLinkColored>
                     </DetailPlaceholder>
                   ))}

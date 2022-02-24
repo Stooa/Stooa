@@ -9,8 +9,16 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
+const twoHoursInMs = 1000 * 60 * 60 * 2;
+const twentyMinutesInMs = 1000 * 60 * 20;
+
 const date = new Date();
-const isoDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+const isoDate = new Date(
+  date.getTime() + twoHoursInMs - date.getTimezoneOffset() * 60000
+).toISOString();
+const isoCloseDate = new Date(
+  date.getTime() + twentyMinutesInMs - date.getTimezoneOffset() * 60000
+).toISOString();
 
 Given('a profile information', () => {
   cy.intercept('POST', 'https://localhost:8443/graphql', {
@@ -58,4 +66,24 @@ Given('a list of one fishbowl', () => {
     },
     { fixture: 'one-fishbowl-list.json' }
   ).as('getOneFishbowlsListQuery');
+});
+
+Given('a list of one fishbowl that is about to start', () => {
+  cy.intercept(
+    {
+      pathname: '/fishbowls',
+      query: {
+        'finishDateTime[after]': isoCloseDate
+      }
+    },
+    { fixture: 'one-close-fishbowl-list.json' }
+  ).as('getOneCloseFishbowlsListQuery');
+});
+
+Given('a desktop computer', () => {
+  cy.viewport('macbook-15');
+});
+
+Given('a mobile device', () => {
+  cy.viewport('iphone-6');
 });

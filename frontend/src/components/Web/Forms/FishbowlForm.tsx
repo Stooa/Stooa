@@ -240,6 +240,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
 
+    console.log(`${dayFormatted.date} ${timeFormatted.time}`);
+
     if (props.isEditForm) {
       await props
         .updateFishbowl({
@@ -360,11 +362,11 @@ const FishbowlForm = ({
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
     const timezone = stringDate.substring(stringDate.length - 5, stringDate.length - 3);
-    const sign = stringDate.substring(stringDate.length - 6, stringDate.length - 1);
+    const sign = stringDate.substring(stringDate.length - 6, stringDate.length - 5);
     const hoursInMs = parseInt(timezone) * 60 * 60 * 1000;
 
     const timestamp = new Date(selectedFishbowl.startDateTimeTz).getTime();
-    const UTCDate = new Date(new Date(timestamp + (sign === '-' ? -hoursInMs : hoursInMs)));
+    const UTCDate = new Date(new Date(timestamp + (sign === '-' ? -1 * hoursInMs : hoursInMs)));
     const userTimezone = UTCDate.getTimezoneOffset() * 60000;
     const newDate = new Date(UTCDate.getTime() + userTimezone);
 

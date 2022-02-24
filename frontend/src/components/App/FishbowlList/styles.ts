@@ -330,11 +330,11 @@ const DetailPlaceholder = styled.div`
     height: 100vh;`};
 
   p {
-    margin-bottom: ${space(2)};
+    margin-bottom: ${space(3)};
   }
 
   a.enter-fishbowl {
-    margin-bottom: ${space(2)};
+    margin-bottom: ${space(4)};
   }
 
   button.back {
