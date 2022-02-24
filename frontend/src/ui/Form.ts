@@ -56,8 +56,8 @@ const FormikForm = styled(Form)`
 
       span {
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
         color: ${COLOR_GREEN_600};
         margin: 0;
 
