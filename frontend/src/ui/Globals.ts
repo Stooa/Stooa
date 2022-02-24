@@ -167,6 +167,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .hidden {
+    display: none;
+  }
+
   .hide-mobile {
     ${media.max('tablet')`
       display: none !important;

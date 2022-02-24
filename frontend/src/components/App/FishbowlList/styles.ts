@@ -31,13 +31,11 @@ const FishbowlListWrapper = styled.div`
 const FishbowlListContent = styled.div`
   display: grid;
   width: 100%;
-
-  &.half {
-    grid-template-columns: 1fr auto;
-  }
+  height: 815px;
+  grid-template-columns: 1fr auto;
 
   ${media.min('desktop')`
-    column-gap: ${space(2)};
+    column-gap: ${space()};
   `}
 `;
 
@@ -49,31 +47,36 @@ const FishbowlScrollList = styled.div`
   padding-bottom: ${space(1)};
   align-items: start;
   padding-top: 4px;
-  max-height: 800px;
+  max-height: 100%;
 
   overflow-y: scroll;
   scrollbar-color: ${COLOR_NEUTRO_400} transparent;
 
-  ${media.max('desktop')`
-  & {
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll;
-  }
-
   &::-webkit-scrollbar {
-      display: none; /* for Chrome, Safari, and Opera */
-  }`}
+    width: 16px;
+  }
 
   &::-webkit-scrollbar-thumb {
     /* Foreground */
-    background: ${COLOR_NEUTRO_400};
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: ${COLOR_NEUTRO_400};
   }
 
   &::-webkit-scrollbar-track {
     /* Background */
     background: transparent;
   }
+
+  ${media.max('desktop')`
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+  }`}
 
   .fishbowl-list__empty-illustration {
     margin: ${space(2)} 0;
@@ -263,8 +266,12 @@ const EditFormWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
+  border-radius: ${rems(4)};
+
   overflow-y: scroll;
-  background-color: rgba(0, 0, 0, 0.5);
+  ${media.min('desktop')`
+    overflow-y: hidden;
+  `}
 
   .form-header {
     position: relative;
@@ -274,37 +281,74 @@ const EditFormWrapper = styled.div`
     color: ${COLOR_NEUTRO_700};
   }
 
-  .mobile-back {
-    position: absolute;
-    left: ${space()};
-    bottom: ${rems(6)};
-    ${media.min('desktop')`
-      display: none;
-    `}
-  }
-
   .form-wrapper {
-    border-radius: ${rems(4)};
     background-color: ${COLOR_NEUTRO_100};
     padding: ${space(6)} ${space(3)} ${space(3)};
+
     ${media.min('desktop')`
       padding: ${space(2)} ${space(6)} ${space(6)};
     `}
   }
 
+  ${media.max('desktop')`
+    background-color: rgba(0, 0, 0, 0.5);
+  `}
+
   ${media.min('desktop')`
-    height: auto;
+    height: 100%;
     position: relative;
-    background-color: ${COLOR_NEUTRO_100};
-    & {
-      -ms-overflow-style: none; /* for Internet Explorer, Edge */
-      scrollbar-width: none; /* for Firefox */
-      overflow-y: scroll;
-    }
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
 
     &::-webkit-scrollbar {
         display: none; /* for Chrome, Safari, and Opera */
     }
+  `}
+`;
+
+const DetailPlaceholder = styled.div`
+  &.not-selected {
+    display: none;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${rems(4)};
+  width: 470px;
+  min-height: 500px;
+  background-color: ${COLOR_NEUTRO_100};
+  padding: ${space(3)};
+
+  ${media.max('desktop')`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;`};
+
+  p {
+    margin-bottom: ${space(2)};
+  }
+
+  a.enter-fishbowl {
+    margin-bottom: ${space(2)};
+  }
+`;
+
+const MobileBackButton = styled.button`
+  position: absolute;
+  left: ${space()};
+
+  &.top {
+    top: ${rems(20)};
+  }
+  &.bottom {
+    bottom: ${rems(6)};
+  }
+
+  ${media.min('desktop')`
+      display: none;
   `}
 `;
 
@@ -316,5 +360,7 @@ export {
   CardTitle,
   EmptyFishbowlList,
   FishbowlListContent,
-  EditFormWrapper
+  EditFormWrapper,
+  DetailPlaceholder,
+  MobileBackButton
 };

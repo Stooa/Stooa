@@ -14,13 +14,23 @@ import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW, ROUTE_HOME } from '@/app.config';
+import {
+  ROUTE_FISHBOWL,
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_HOST_NOW,
+  ROUTE_HOME
+} from '@/app.config';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import { ButtonSmall, ButtonStyledLink } from '@/ui/Button';
+import {
+  ButtonLinkColored,
+  ButtonSmall,
+  ButtonStyledLink,
+  ButtonStyledLinkSmall
+} from '@/ui/Button';
 import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
@@ -28,15 +38,17 @@ import {
   FishbowlScrollList,
   Header,
   FishbowlListContent,
-  EditFormWrapper
+  EditFormWrapper,
+  DetailPlaceholder,
+  MobileBackButton
 } from '@/components/App/FishbowlList/styles';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
-import { getIsoDateTimeWithActualTimeZone } from '@/lib/helpers';
+import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/helpers';
 import { useWindowSize } from '@/hooks/useWIndowSize';
-import { basicReveal, bottomMobileReveal } from '@/ui/animations/motion/reveals';
+import { basicRevealWithDelay, bottomMobileReveal } from '@/ui/animations/motion/reveals';
 import PlusSign from '@/ui/svg/plus-sign.svg';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
 import BackArrow from '@/ui/svg/arrow-prev.svg';
@@ -126,7 +138,7 @@ const FishbowlList = () => {
           </div>
           <span className="divider" />
         </Header>
-        <FishbowlListContent className={`${selectedFishbowl && 'half'}`}>
+        <FishbowlListContent>
           {fishbowls.length === 0 ? (
             <EmptyFishbowlList data-testid="empty-list">
               <div className="fishbowl-list__empty-illustration">
@@ -194,32 +206,99 @@ const FishbowlList = () => {
                 ))}
               </FishbowlScrollList>
               <AnimatePresence>
-                {selectedFishbowl && (
-                  <EditFormWrapper
-                    key="desktop"
-                    as={motion.div}
-                    variants={windowWidth <= BREAKPOINTS.desktop ? bottomMobileReveal : basicReveal}
-                    initial="initial"
-                    exit="exit"
-                    animate="visible"
-                  >
-                    <div className="form-wrapper">
-                      <div className="form-header">
-                        <button className="mobile-back" onClick={() => setSelectedFishbowl(null)}>
-                          <BackArrow />
-                        </button>
-                        <h2 className="title-md">{t('titleEdit')}</h2>
-                      </div>
-                      <FishbowlForm
-                        $isFull={windowWidth <= BREAKPOINTS.desktop}
-                        selectedFishbowl={selectedFishbowl}
-                        isEditForm={true}
-                        onSaveCallback={handleUpdateFishbowl}
-                      />
-                    </div>
-                  </EditFormWrapper>
-                )}
+                {selectedFishbowl &&
+                  (!isTimeLessThanNMinutes(selectedFishbowl.startDateTimeTz, 30) ? (
+                    <EditFormWrapper
+                      as={motion.div}
+                      variants={basicRevealWithDelay}
+                      initial="initial"
+                      exit="exit"
+                      animate="visible"
+                    >
+                      <motion.div
+                        className="form-wrapper"
+                        variants={
+                          windowWidth <= BREAKPOINTS.desktop
+                            ? bottomMobileReveal
+                            : basicRevealWithDelay
+                        }
+                        initial="initial"
+                        exit="exit"
+                        animate="visible"
+                      >
+                        <div className="form-header">
+                          <MobileBackButton
+                            className="bottom"
+                            onClick={() => setSelectedFishbowl(null)}
+                          >
+                            <BackArrow />
+                          </MobileBackButton>
+                          <h2 className="title-md">{t('titleEdit')}</h2>
+                        </div>
+                        <FishbowlForm
+                          $isFull={windowWidth <= BREAKPOINTS.desktop}
+                          selectedFishbowl={selectedFishbowl}
+                          isEditForm={true}
+                          onSaveCallback={handleUpdateFishbowl}
+                        />
+                      </motion.div>
+                    </EditFormWrapper>
+                  ) : (
+                    <DetailPlaceholder
+                      as={motion.div}
+                      variants={
+                        windowWidth <= BREAKPOINTS.desktop
+                          ? bottomMobileReveal
+                          : basicRevealWithDelay
+                      }
+                      initial="initial"
+                      exit="exit"
+                      animate="visible"
+                    >
+                      <h2>
+                        <Trans i18nKey="fishbowl-list:fishbowlStarted" components={{ i: <i /> }} />
+                      </h2>
+                      <p>
+                        <Trans
+                          i18nKey="fishbowl-list:fishbowlStartedDescription"
+                          components={{ i: <i /> }}
+                        />
+                      </p>
+                      <RedirectLink
+                        href={`${ROUTE_FISHBOWL}/${selectedFishbowl.slug}`}
+                        locale={selectedFishbowl.locale}
+                        passHref
+                      >
+                        <ButtonStyledLink
+                          className="enter-fishbowl"
+                          data-testid="started-enter-fishbowl"
+                        >
+                          <span>{t('enterFishbowl')}</span>
+                          <ArrowRight />
+                        </ButtonStyledLink>
+                      </RedirectLink>
+                      <ButtonLinkColored onClick={() => setSelectedFishbowl(null)}>
+                        <span>{t('back')}</span>
+                      </ButtonLinkColored>
+                    </DetailPlaceholder>
+                  ))}
               </AnimatePresence>
+              {!selectedFishbowl && (
+                <DetailPlaceholder data-testid="selected-placeholder" className="not-selected">
+                  <h2>
+                    <Trans
+                      i18nKey="fishbowl-list:noSelectedFishbowlTitle"
+                      components={{ i: <i /> }}
+                    />
+                  </h2>
+                  <p>
+                    <Trans
+                      i18nKey="fishbowl-list:noSelectedFishbowlDescription"
+                      components={{ i: <i /> }}
+                    />
+                  </p>
+                </DetailPlaceholder>
+              )}
             </>
           )}
         </FishbowlListContent>

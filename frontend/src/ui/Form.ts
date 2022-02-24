@@ -56,11 +56,18 @@ const FormikForm = styled(Form)`
 
       span {
         position: absolute;
-        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
         color: ${COLOR_GREEN_600};
         margin: 0;
+
+        &.success-message-bottom {
+          bottom: -1.5ch;
+        }
+
+        &.success-message-top {
+          top: -3.2ch;
+        }
       }
     }
 

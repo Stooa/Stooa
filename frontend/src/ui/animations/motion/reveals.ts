@@ -7,23 +7,30 @@
  * file that was distributed with this source code.
  */
 
-const basicReveal = {
+import { Variants } from 'framer-motion';
+
+const basicRevealWithDelay: Variants = {
   initial: {
-    opacity: 0
+    opacity: 0.8,
+    y: '-6px'
   },
   visible: {
     opacity: 1,
+    y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.4,
       ease: 'easeInOut'
     }
   },
   exit: {
-    opacity: 0
+    opacity: 0,
+    transition: {
+      delay: 0.3
+    }
   }
 };
 
-const bottomMobileReveal = {
+const bottomMobileReveal: Variants = {
   initial: {
     y: '100%',
     opacity: 0
@@ -45,4 +52,4 @@ const bottomMobileReveal = {
   }
 };
 
-export { basicReveal, bottomMobileReveal };
+export { basicRevealWithDelay, bottomMobileReveal };

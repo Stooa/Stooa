@@ -203,12 +203,15 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         />
       </fieldset>
       <fieldset>
+        {success && <span className="success-message-top">{t('validation.successMessage')}</span>}
+        {success && (
+          <span className="success-message-bottom">{t('validation.successMessage')}</span>
+        )}
         <SubmitBtn
           data-testid="fishbowl-submit"
           text={props.selectedFishbowl ? t('button.modifyFishbowl') : t('button.createFishbowl')}
           disabled={isSubmitting}
         />
-        {success && <span>{t('validation.successMessage')}</span>}
       </fieldset>
     </FormikForm>
   );
