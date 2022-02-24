@@ -308,7 +308,7 @@ const FishbowlForm = ({
   selectedFishbowl?: Fishbowl;
   $isFull?: boolean;
   isEditForm?: boolean;
-  onSaveCallback?: (data: any) => void;
+  onSaveCallback?: (data: Fishbowl) => void;
 }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState<boolean>(null);

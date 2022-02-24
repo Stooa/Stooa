@@ -308,7 +308,9 @@ const EditFormWrapper = styled.div`
 
 const DetailPlaceholder = styled.div`
   &.not-selected {
+    ${media.max('desktop')`
     display: none;
+    `}
   }
   display: flex;
   flex-direction: column;
@@ -333,6 +335,13 @@ const DetailPlaceholder = styled.div`
 
   a.enter-fishbowl {
     margin-bottom: ${space(2)};
+  }
+
+  button.back {
+    display: none;
+    ${media.max('desktop')`
+      display: block;
+    `}
   }
 `;
 

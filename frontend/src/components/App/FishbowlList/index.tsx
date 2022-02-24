@@ -278,7 +278,7 @@ const FishbowlList = () => {
                         </ButtonStyledLink>
                       </RedirectLink>
                       <ButtonLinkColored onClick={() => setSelectedFishbowl(null)}>
-                        <span>{t('back')}</span>
+                        <button className="back">{t('back')}</button>
                       </ButtonLinkColored>
                     </DetailPlaceholder>
                   ))}

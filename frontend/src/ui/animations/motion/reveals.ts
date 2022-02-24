@@ -33,7 +33,7 @@ const basicRevealWithDelay: Variants = {
 const bottomMobileReveal: Variants = {
   initial: {
     y: '100%',
-    opacity: 0
+    opacity: 1
   },
   visible: {
     y: 0,
