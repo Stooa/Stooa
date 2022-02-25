@@ -330,6 +330,9 @@ const FishbowlForm = ({
     if (res.type === 'Error') {
       console.error('[STOOA] Error', res);
       setError(res.data);
+      setTimeout(() => {
+        setError(null);
+      }, 5000);
     } else {
       if (isEditForm) {
         const formattedFishbowl = {
