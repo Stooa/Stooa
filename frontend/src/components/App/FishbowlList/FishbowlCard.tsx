@@ -60,7 +60,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <h4>{name}</h4>
       </CardTitle>
       <div data-testid="card-info" className="card__info">
-        <div>
+        <div className="card__date">
           {month} {day}, {year}
         </div>
         <div className="card__time">{time}</div>

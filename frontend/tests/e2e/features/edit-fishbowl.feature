@@ -30,12 +30,12 @@ Feature: Edit fishbowl
         Then saves the changes
         Then sees the fishbowl list updated
 
-    # Scenario: Logged user sees placeholder when no fishbowl selected
-    #     Given a logged user
-    #     And a desktop computer
-    #     And a list of one fishbowl
-    #     When navigates to "/fishbowl/list"
-    #     Then sees the placeholder area
+    Scenario: Logged user sees placeholder when no fishbowl selected
+        Given a logged user
+        And a desktop computer
+        And a list of one fishbowl
+        When navigates to "/fishbowl/list"
+        Then sees the placeholder area
 
     # Scenario: Logged user tries to edit a fishbowl that is about to start
     #     Given a logged user

@@ -65,7 +65,6 @@ Then('sees success message', () => {
 });
 
 Given('an updated fishbowl', () => {
-  console.log('Saura modified values', modifiedValues);
   const mergedValues = {
     data: {
       updateFishbowl: {
@@ -73,8 +72,8 @@ Given('an updated fishbowl', () => {
           id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
           description: modifiedValues.description,
           startDateTimeTz: modifiedValues.startDateTimeTz,
-          timezone: 'Europe/Madrid',
-          duration: '02:00',
+          timezone: modifiedValues.timezone,
+          duration: modifiedValues.hours,
           hasIntroduction: modifiedValues.hasIntroduction,
           locale: modifiedValues.language,
           slug: 'test-me-fishbowl',
@@ -94,19 +93,18 @@ Given('an updated fishbowl', () => {
 Then('sees the fishbowl list updated', () => {
   cy.wait('@gqlUpdateFishbowlMutation');
 
+  const startDateTime = new Date(modifiedValues.startDateTimeTz);
+
+  const month = startDateTime.toLocaleString('default', { month: 'long' });
+  const day = startDateTime.toLocaleString('default', { day: 'numeric' });
+  const time = startDateTime.toLocaleString('default', { hour: 'numeric', minute: 'numeric' });
+  const year = startDateTime.toLocaleString('default', { year: 'numeric' });
+
   cy.get('[data-testid=fishbowl-list-wrapper] h4').eq(0).should('contain', modifiedValues.title);
-  // cy.get('[data-testid=fishbowl-list-wrapper] h4')
-  //   .eq(0)
-  //   .should('contain', modifiedValues.startDateTimeTz);
-  cy.get('[data-testid=fishbowl-list-wrapper] .card__time')
+  cy.get('[data-testid=fishbowl-list-wrapper] .card__date')
     .eq(0)
-    .should(
-      'contain',
-      new Date(modifiedValues.startDateTimeTz).toLocaleString('default', {
-        hour: 'numeric',
-        minute: 'numeric'
-      })
-    );
+    .should('contain', `${month} ${day}, ${year}`);
+  cy.get('[data-testid=fishbowl-list-wrapper] .card__time').eq(0).should('contain', time);
 
   cy.screenshot();
 });
