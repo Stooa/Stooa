@@ -378,7 +378,7 @@ const FishbowlForm = ({
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: false
+      hasIntroduction: selectedFishbowl.hasIntroduction
     };
   }
 

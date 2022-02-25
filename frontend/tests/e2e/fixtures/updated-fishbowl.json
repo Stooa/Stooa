@@ -7,6 +7,7 @@
                 "description": "Fishbowl description",
                 "startDateTimeTz": "2022-02-19T13:45:00+01:00",
                 "timezone": "Europe/Madrid",
+                "duration": "02:00",
                 "durationFormatted": "02:00",
                 "hasIntroduction": false,
                 "locale": "en",
