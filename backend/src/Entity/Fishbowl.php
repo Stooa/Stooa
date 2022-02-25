@@ -198,7 +198,7 @@ class Fishbowl
     private ?string $locale = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\Time
