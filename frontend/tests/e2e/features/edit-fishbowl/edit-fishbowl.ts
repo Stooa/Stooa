@@ -129,3 +129,12 @@ Then('clicks on placeholders Enter Fishbowl link', () => {
   cy.wait(2000);
   cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
 });
+
+Then('sees success messages', () => {
+  cy.get('span.success-message-top').should('exist');
+  cy.get('span.success-message-bottom').should('exist');
+
+  cy.wait(5500);
+  cy.get('span.success-message-top').should('not.exist');
+  cy.get('span.success-message-bottom').should('not.exist');
+});
