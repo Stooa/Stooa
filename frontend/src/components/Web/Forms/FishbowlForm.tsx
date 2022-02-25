@@ -220,7 +220,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
-    language: props.currentLanguage
+    ...(!props.isEditForm && { language: props.currentLanguage })
   }),
   validationSchema: props => {
     return Yup.object({
@@ -239,8 +239,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
-
-    console.log(`${dayFormatted.date} ${timeFormatted.time}`);
 
     if (props.isEditForm) {
       await props
@@ -334,15 +332,16 @@ const FishbowlForm = ({
       setError(res.data);
     } else {
       if (isEditForm) {
-        const formatedFishbowl = {
+        const formattedFishbowl = {
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
+        console.log(formattedFishbowl);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
         }, 5000);
-        onSaveCallback(formatedFishbowl);
+        onSaveCallback(formattedFishbowl);
       } else {
         const {
           data: {

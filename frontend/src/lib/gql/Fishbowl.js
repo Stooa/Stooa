@@ -38,6 +38,7 @@ const UPDATE_FISHBOWL = gql`
         timezone
         locale
         duration
+        durationFormatted
         isFishbowlNow
         hasIntroduction
       }

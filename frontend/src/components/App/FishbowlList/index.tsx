@@ -95,6 +95,7 @@ const FishbowlList = () => {
         if (fishbowl.id !== updatedFishbowl.id) {
           return fishbowl;
         } else {
+          console.log({ ...fishbowl, ...updatedFishbowl });
           return { ...fishbowl, ...updatedFishbowl };
         }
       });
