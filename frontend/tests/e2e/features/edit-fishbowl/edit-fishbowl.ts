@@ -30,6 +30,12 @@ When('clicks on fishbowl card', () => {
   cy.screenshot();
 });
 
+When('clicks on fishbowl card that is about to start', () => {
+  cy.wait('@getOneCloseFishbowlsListQuery');
+
+  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
+});
+
 Then('sees the fishbowl edit form full of information', () => {
   cy.wait(1000);
   cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
@@ -113,4 +119,13 @@ Then('sees the placeholder area', () => {
   cy.get('[data-testid=selected-placeholder]').should('exist');
 
   cy.screenshot();
+});
+
+Then('sees a placeholder with Enter Fishbowl button', () => {
+  cy.get('[data-testid=started-fishbowl-placeholder] button').should('exist');
+});
+
+Then('clicks on placeholders Enter Fishbowl link', () => {
+  cy.wait(2000);
+  cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
 });

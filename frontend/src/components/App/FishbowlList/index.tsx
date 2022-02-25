@@ -245,6 +245,7 @@ const FishbowlList = () => {
                     </EditFormWrapper>
                   ) : (
                     <DetailPlaceholder
+                      data-testid="started-fishbowl-placeholder"
                       as={motion.div}
                       variants={
                         windowWidth <= BREAKPOINTS.desktop
