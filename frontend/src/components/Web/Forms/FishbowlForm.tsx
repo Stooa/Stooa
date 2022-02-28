@@ -21,6 +21,8 @@ import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
+import { pushEventDataLayer } from '@/lib/analytics';
+
 import FormikForm, { TextDivider } from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Textarea from '@/components/Common/Fields/Textarea';
@@ -241,6 +243,12 @@ const FormValidation = withFormik<FormProps, FormValues>({
     const timeFormatted = formatDateTime(values.time);
 
     if (props.isEditForm) {
+      pushEventDataLayer({
+        category: 'Modify Fishbowl',
+        action: 'Fishbowl List',
+        label: values.id
+      });
+
       await props
         .updateFishbowl({
           variables: {
