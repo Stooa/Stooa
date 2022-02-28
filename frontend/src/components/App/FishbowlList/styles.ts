@@ -196,10 +196,6 @@ const CardStyled = styled.div`
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
-  ${media.min('desktopLarge')`
-    grid-template-columns: 3fr 4fr;
-  `}
-
   .card__info {
     display: flex;
     flex-direction: column;
@@ -212,10 +208,15 @@ const CardStyled = styled.div`
 
   .card__actions {
     display: flex;
+    min-height: ${rems(38)};
     column-gap: ${space(3)};
     align-self: flex-end;
     justify-content: end;
-    align-items: baseline;
+    align-items: center;
+
+    & > a {
+      align-items: baseline;
+    }
   }
 
   &::after {
@@ -246,6 +247,9 @@ const CardStyled = styled.div`
 
 const CardTitle = styled.div`
   ${TEXT_MD};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   width: 100%;
   text-align: left;
   color: ${COLOR_NEUTRO_800};
