@@ -374,9 +374,6 @@ const SwitchStyled = styled.div`
   }
 
   .icon-wrapper {
-    ${media.min('tablet')`
-      position: relative;
-    `}
     padding: ${space(1)};
   }
 
@@ -437,18 +434,17 @@ const StyledIntroductionTooltip = styled.div`
   transform: translateX(-50%);
   bottom: 150px;
 
-  ${media.min('tablet')`
+  /* ${media.min('tablet')`
     bottom: 150%;
     width: 60ch;
-  `}
+  `} */
 
   &:after {
     ${media.min('tablet')`
     content: '';
     `}
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
     bottom: -10px;
     width: 0;
     height: 0;
