@@ -258,10 +258,6 @@ const CardTitle = styled.div`
   h4 {
     font-weight: 500;
   }
-
-  ${media.min('desktop')`
-    grid-column: 1 / 3;
-  `}
 `;
 
 const EditFormWrapper = styled.div`
