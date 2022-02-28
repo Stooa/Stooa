@@ -332,7 +332,7 @@ const FishbowlForm = ({
       setError(res.data);
       setTimeout(() => {
         setError(null);
-      }, 5000);
+      }, 7000);
     } else {
       if (isEditForm) {
         const formattedFishbowl = {
