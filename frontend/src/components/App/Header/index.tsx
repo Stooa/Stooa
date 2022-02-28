@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ toggleParticipants }) => {
   return (
     <HeaderStyled>
       <div className="hide-desktop header-top">
-        <Logo />
+        <Logo className="header-logo" />
         <StatusBar
           isModerator={isModerator}
           data={data}

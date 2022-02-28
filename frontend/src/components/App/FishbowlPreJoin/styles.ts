@@ -10,15 +10,22 @@
 import styled from 'styled-components';
 
 import { COLOR_NEUTRO_100, BORDER_RADIUS, COLOR_NEUTRO_700 } from '@/ui/settings';
-import { rems, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 
 const Container = styled.div`
   background-color: ${COLOR_NEUTRO_100};
   border-radius: ${BORDER_RADIUS};
   display: flex;
+  flex-direction: column;
   flex: 1;
-  max-height: ${rems(480)};
+  overflow: hidden;
+
   max-width: ${rems(840)};
+
+  ${media.min('tablet')`
+    flex-direction: row;
+    max-height: ${rems(480)};
+  `}
 `;
 
 const Devices = styled.div`
@@ -38,22 +45,33 @@ const DevicesToolbar = styled.div`
 `;
 
 const Form = styled.div`
-  padding: ${space(6)};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: ${space(3)} ${space(2)};
   text-align: center;
   width: 100%;
 
-  & input {
+  input {
     margin-bottom: ${space(3)};
   }
 
-  & h2 {
+  h2 {
     color: ${COLOR_NEUTRO_700};
   }
+
+  button.cancel {
+    color: ${COLOR_NEUTRO_700};
+  }
+
+  ${media.min('tablet')`
+    padding: ${space(6)};
+  `}
 `;
 
 const VideoContainer = styled.div`
   border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
-  height: 100%;
+  height: 35vh;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -68,6 +86,10 @@ const VideoContainer = styled.div`
     z-index: 1;
     object-fit: cover;
   }
+
+  ${media.min('tablet')`
+    height: 100%;
+  `}
 `;
 
 export { Container, Devices, DevicesToolbar, Form, VideoContainer };

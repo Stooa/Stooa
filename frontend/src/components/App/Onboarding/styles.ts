@@ -19,7 +19,9 @@ import {
 } from '@/ui/settings';
 
 const OnboardingWrapper = styled.div`
-  position: relative;
+  ${media.min('tablet')`
+    position: relative;
+  `}
 `;
 
 const Icon = styled.button`
@@ -30,13 +32,23 @@ const Icon = styled.button`
 `;
 
 const Tooltip = styled(Alert)`
-  left: ${space(-1.75)};
-  margin: 0;
-  min-width: 250px;
-  padding-right: ${space()};
   position: absolute;
-  top: calc(100% + ${space()});
+  left: 50%;
+  bottom: -60px;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 100%;
+  max-width: 350px;
+  padding-right: ${space()};
+
   z-index: 10;
+
+  ${media.min('tablet')`
+    width: 60ch;
+    bottom: -60px;
+    left: -20%;
+    transform: translateX(0);
+  `}
 
   button {
     height: ${rems(20)};
@@ -52,10 +64,6 @@ const Tooltip = styled(Alert)`
       }
     }
   }
-
-  ${media.min('tablet')`
-    min-width: 390px;
-  `}
 `;
 
 const Slider = styled.div`

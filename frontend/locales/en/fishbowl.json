@@ -45,7 +45,7 @@
     "speaker": "Speaker",
     "cam": "Camera",
     "nickname": {
-        "title": "How should the other participants call you?"
+        "title": "Set up your micro and camera!"
     },
     "waiting": "Waiting for host to start the fishbowl",
     "waitingHost": "Attendees are waiting for you to start the fishbowl",

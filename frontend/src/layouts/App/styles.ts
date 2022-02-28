@@ -32,6 +32,7 @@ const Container = styled.div<{ drawer?: boolean }>`
 `;
 
 const Header = styled.header`
+  position: relative;
   align-items: center;
   color: ${COLOR_NEUTRO_700};
   display: flex;
@@ -56,7 +57,14 @@ const Header = styled.header`
 
   .header-info {
     justify-content: flex-start;
-    max-width: 45%;
+    margin-bottom: 0.5rem;
+    p {
+      max-width: 20ch;
+      overflow: hidden;
+      ${media.min('tablet')`
+        max-width: 45%;
+      `}
+    }
   }
 
   .header-top {
@@ -64,6 +72,10 @@ const Header = styled.header`
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+    .header-logo {
+      margin-right: ${space(2)};
+    }
 
     > * {
       margin: 0;

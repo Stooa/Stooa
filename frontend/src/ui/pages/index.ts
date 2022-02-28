@@ -326,6 +326,10 @@ const Banner = styled.div`
   position: relative;
   text-align: center;
 
+  .text-lg {
+    margin-bottom: ${space(5)};
+  }
+
   #animated-banner-morph {
     height: ${rems(160)};
     position: absolute;

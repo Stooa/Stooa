@@ -214,6 +214,12 @@ const GlobalStyle = createGlobalStyle`
 
   .toastify-custom {
 
+      &.Toastify__toast-container {
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
       & .Toastify__toast {
         padding: ${space(0)} ${space(2)};
       }
