@@ -16,6 +16,7 @@ import {
   BORDER_RADIUS,
   BREAKPOINTS,
   COLOR_GREEN_500,
+  COLOR_GREEN_600,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
@@ -28,12 +29,13 @@ import {
 import { TEXT_SM, TEXT_XXS } from '@/ui/Texts';
 
 interface Props {
-  full?: boolean;
+  $isFull?: boolean;
 }
 
 const FormikForm = styled(Form)`
+  position: relative;
   margin-top: ${space(4)};
-  max-width: ${({ full }: Props) => (full ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -47,8 +49,26 @@ const FormikForm = styled(Form)`
     &:first-child {
       margin-top: 0;
     }
+
     &:last-child {
+      padding-bottom: ${space(2)};
       margin-bottom: 0;
+
+      span {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: ${COLOR_GREEN_600};
+        margin: 0;
+
+        &.success-message-bottom {
+          bottom: -1.5ch;
+        }
+
+        &.success-message-top {
+          top: -3.2ch;
+        }
+      }
     }
 
     > *:not(:last-child) {
@@ -329,10 +349,13 @@ const TextDivider = styled.div`
 `;
 
 const SwitchStyled = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, auto);
+  display: flex;
   align-items: center;
   width: 100%;
+
+  > *:not(:nth-child(2)) {
+    margin-left: ${space()};
+  }
 
   input {
     display: none;
@@ -351,15 +374,11 @@ const SwitchStyled = styled.div`
   }
 
   .icon-wrapper {
-    ${media.min('tablet')`
-      position: relative;
-    `}
     padding: ${space(1)};
   }
 
   .label-text {
     font-size: ${rems(14)};
-    margin-right: ${space(2)};
   }
 
   label {
@@ -374,7 +393,7 @@ const SwitchLabel = styled.label`
   justify-content: space-between;
   cursor: pointer;
   width: 42px;
-  margin-right: ${space(2)};
+  margin-right: ${space()};
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;
@@ -415,18 +434,17 @@ const StyledIntroductionTooltip = styled.div`
   transform: translateX(-50%);
   bottom: 150px;
 
-  ${media.min('tablet')`
+  /* ${media.min('tablet')`
     bottom: 150%;
     width: 60ch;
-  `}
+  `} */
 
   &:after {
     ${media.min('tablet')`
     content: '';
     `}
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
     bottom: -10px;
     width: 0;
     height: 0;

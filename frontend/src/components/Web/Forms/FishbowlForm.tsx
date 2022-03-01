@@ -19,8 +19,10 @@ import countriesAndTimezones from 'countries-and-timezones';
 import { ROUTE_FISHBOWL_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
-import { CREATE_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
+import { pushEventDataLayer } from '@/lib/analytics';
+
 import FormikForm, { TextDivider } from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Textarea from '@/components/Common/Fields/Textarea';
@@ -30,26 +32,31 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
-import { CreateFishbowlOptions } from '@/types/graphql/fishbowl';
+import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
+import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 
 interface FormProps {
   required: string;
+  success?: boolean;
   date: string;
   title: string;
+  defaultTitle: string;
   createFishbowl: (
     options?: CreateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  updateFishbowl: (
+    options?: UpdateFishbowlOptions
+  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
   onSubmit: (any) => void;
   currentLanguage: string;
-  currentTimezone: string;
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues | null;
-  full: boolean;
-  defaultHourValue: string;
-  defaultTime: Date;
+  isFull?: boolean;
+  isEditForm?: boolean;
 }
 
 interface FormValues {
+  id?: string;
   title: string;
   day: Date;
   time: Date;
@@ -63,37 +70,39 @@ interface FormValues {
 const initialValues = {
   title: '',
   day: new Date(),
-  time: '',
-  hours: '',
+  time: nearestQuarterHour(),
+  hours: '01:00',
   description: '',
   language: '',
-  timezone: '',
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
-  const { isSubmitting } = props;
+  const { isSubmitting, success, defaultTitle } = props;
   const { t } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
-  const { user } = useAuth();
 
   return (
-    <FormikForm full={props.full ? props.full : undefined}>
+    <FormikForm $isFull={props.isFull}>
       <fieldset className="fieldset-inline">
         <Input
-          placeholder={t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' })}
+          data-testid="edit-form-title"
+          placeholder={defaultTitle}
           label={t('fishbowl.title')}
           name="title"
           type="text"
           autoComplete="off"
         />
         <Textarea
+          data-testid="edit-form-description"
           label={t('fishbowl.description')}
           name="description"
           validation={false}
           autoComplete="off"
         />
         <DatePicker
+          data-testid="edit-form-date"
           label={t('fishbowl.day')}
           placeholderText={t('fishbowl.selectDay')}
           name="day"
@@ -104,12 +113,12 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           variant="sm"
         />
         <DatePicker
+          data-testid="edit-form-time"
           label={t('fishbowl.time')}
           placeholderText={t('fishbowl.selectTime')}
           name="time"
           showTimeSelect
           showTimeSelectOnly
-          selected={nearestQuarterHour()}
           timeIntervals={15}
           dateFormat="H:mm"
           icon="clock"
@@ -196,7 +205,12 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         />
       </fieldset>
       <fieldset>
+        {success && <span className="success-message-top">{t('validation.successMessage')}</span>}
+        {success && (
+          <span className="success-message-bottom">{t('validation.successMessage')}</span>
+        )}
         <SubmitBtn
+          data-testid="fishbowl-submit"
           text={props.selectedFishbowl ? t('button.modifyFishbowl') : t('button.createFishbowl')}
           disabled={isSubmitting}
         />
@@ -208,10 +222,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
-    language: props.currentLanguage,
-    timezone: props.currentTimezone,
-    hours: props.defaultHourValue,
-    time: props.defaultTime
+    ...(!props.isEditForm && { language: props.currentLanguage })
   }),
   validationSchema: props => {
     return Yup.object({
@@ -230,79 +241,155 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
-    await props
-      .createFishbowl({
-        variables: {
-          input: {
-            name: values.title,
-            description: values.description,
-            startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
-            timezone: values.timezone,
-            duration: values.hours,
-            locale: values.language,
-            isFishbowlNow: false,
-            hasIntroduction: values.hasIntroduction
-          }
-        }
-      })
-      .then(res => {
-        setSubmitting(false);
-        props.onSubmit(res);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
-        });
+
+    if (props.isEditForm) {
+      pushEventDataLayer({
+        category: 'Modify Fishbowl',
+        action: 'Fishbowl List',
+        label: values.id
       });
+
+      await props
+        .updateFishbowl({
+          variables: {
+            input: {
+              id: `/fishbowls/${values.id}`,
+              name: values.title === '' ? props.defaultTitle : values.title,
+              description: values.description,
+              startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
+              timezone: values.timezone,
+              duration: values.hours,
+              locale: values.language,
+              isFishbowlNow: false,
+              hasIntroduction: values.hasIntroduction
+            }
+          }
+        })
+        .then(res => {
+          setSubmitting(false);
+          props.onSubmit(res);
+        })
+        .catch(error => {
+          setSubmitting(false);
+          props.onSubmit({
+            type: 'Error',
+            data: error
+          });
+        });
+    } else {
+      await props
+        .createFishbowl({
+          variables: {
+            input: {
+              name: values.title,
+              description: values.description,
+              startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
+              timezone: values.timezone,
+              duration: values.hours,
+              locale: values.language,
+              isFishbowlNow: false,
+              hasIntroduction: values.hasIntroduction
+            }
+          }
+        })
+        .then(res => {
+          setSubmitting(false);
+          props.onSubmit(res);
+        })
+        .catch(error => {
+          setSubmitting(false);
+          props.onSubmit({
+            type: 'Error',
+            data: error
+          });
+        });
+    }
   }
 })(Form);
 
-const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
+const FishbowlForm = ({
+  selectedFishbowl = null,
+  $isFull = false,
+  isEditForm = false,
+  onSaveCallback
+}: {
+  selectedFishbowl?: Fishbowl;
+  $isFull?: boolean;
+  isEditForm?: boolean;
+  onSaveCallback?: (data: Fishbowl) => void;
+}) => {
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState<boolean>(null);
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
+  const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
   const { t, lang } = useTranslation('form');
   const { updateCreateFishbowl } = useAuth();
+
+  const { user } = useAuth();
+
+  const defaultTitle = t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' });
 
   const requiredError = t('validation.required');
   const dateError = t('validation.date');
   const titleError = t('validation.title');
 
-  const currentUserTimezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   const handleOnSubmit = res => {
     if (res.type === 'Error') {
-      console.error('[STOOA]', res);
+      console.error('[STOOA] Error', res);
       setError(res.data);
+      setTimeout(() => {
+        setError(null);
+      }, 7000);
     } else {
-      const {
-        data: {
-          createFishbowl: { fishbowl }
-        }
-      } = res;
+      if (isEditForm) {
+        const formattedFishbowl = {
+          ...res.data.updateFishbowl.fishbowl,
+          id: res.data.updateFishbowl.fishbowl.id.substring(11)
+        };
+        console.log(formattedFishbowl);
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 5000);
+        onSaveCallback(formattedFishbowl);
+      } else {
+        const {
+          data: {
+            createFishbowl: { fishbowl }
+          }
+        } = res;
 
-      const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
-      updateCreateFishbowl(true);
-      router.push(route, route, { locale: lang });
+        const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
+        updateCreateFishbowl(true);
+        router.push(route, route, { locale: lang });
+      }
     }
   };
 
   let selectedFishbowlValues: FormValues;
 
   if (selectedFishbowl) {
-    const { timezone } = formatDateTime(selectedFishbowl.startDateTimeTz);
+    const stringDate = selectedFishbowl.startDateTimeTz.toString();
+    const timezone = stringDate.substring(stringDate.length - 5, stringDate.length - 3);
+    const sign = stringDate.substring(stringDate.length - 6, stringDate.length - 5);
+    const hoursInMs = parseInt(timezone) * 60 * 60 * 1000;
+
+    const timestamp = new Date(selectedFishbowl.startDateTimeTz).getTime();
+    const UTCDate = new Date(new Date(timestamp + (sign === '-' ? -1 * hoursInMs : hoursInMs)));
+    const userTimezone = UTCDate.getTimezoneOffset() * 60000;
+    const newDate = new Date(UTCDate.getTime() + userTimezone);
 
     selectedFishbowlValues = {
+      id: selectedFishbowl.id,
       title: selectedFishbowl.name,
-      day: new Date(selectedFishbowl.startDateTimeTz),
-      time: selectedFishbowl.startDateTimeTz,
+      day: newDate,
+      time: newDate,
       hours: selectedFishbowl.durationFormatted,
       description: selectedFishbowl.description,
       language: selectedFishbowl.locale,
-      timezone: timezone,
-      hasIntroduction: false
+      timezone: selectedFishbowl.timezone,
+      hasIntroduction: selectedFishbowl.hasIntroduction
     };
   }
 
@@ -310,21 +397,22 @@ const CreateFishbowl = ({ selectedFishbowl = null, full = false }) => {
     <>
       {error && <FormError errors={error} />}
       <FormValidation
-        full={full}
+        isFull={$isFull}
         title={titleError}
+        defaultTitle={defaultTitle}
         enableReinitialize
         required={requiredError}
+        success={success}
         date={dateError}
         createFishbowl={createFishbowl}
+        updateFishbowl={updateFishbowl}
         onSubmit={handleOnSubmit}
-        defaultTime={nearestQuarterHour()}
-        defaultHourValue="01:00"
         currentLanguage={lang}
-        currentTimezone={currentUserTimezoneName}
         selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
+        isEditForm={isEditForm}
       />
     </>
   );
 };
 
-export default CreateFishbowl;
+export default FishbowlForm;

@@ -96,6 +96,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  i {
+    padding-right: 0.2rem;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -165,6 +169,10 @@ const GlobalStyle = createGlobalStyle`
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+
+  .hidden {
+    display: none;
   }
 
   .hide-mobile {
