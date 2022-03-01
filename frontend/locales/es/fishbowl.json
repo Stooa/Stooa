@@ -45,7 +45,7 @@
     "speaker": "Altavoz",
     "cam": "Cámara",
     "nickname": {
-        "title": "¿Cómo deben llamarte el resto de participantes?"
+        "title": "Configura tu micro y tu cámara."
     },
     "waiting": "Esperando a que el anfitrión inicie el fishbowl",
     "waitingHost": "Los asistentes están esperando a que inicies el fishbowl",
