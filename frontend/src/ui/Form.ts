@@ -57,6 +57,11 @@ const FormikForm = styled(Form)`
     > .textarea {
       margin-bottom: ${space(4)};
     }
+
+    &.submit-wrapper {
+      display: flex;
+      justify-content: center;
+    }
   }
 
   .form__footer {

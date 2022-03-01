@@ -18,7 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   max-width: ${rems(840)};
 
@@ -48,6 +48,7 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: ${space(3)} ${space(2)};
   text-align: center;
   width: 100%;
@@ -70,7 +71,7 @@ const Form = styled.div`
 `;
 
 const VideoContainer = styled.div`
-  border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
+  border-radius: ${BORDER_RADIUS} ${BORDER_RADIUS} 0 0;
   height: 35vh;
   overflow: hidden;
   position: relative;

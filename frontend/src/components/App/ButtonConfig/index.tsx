@@ -91,7 +91,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                 {devices.audioInputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm"
+                      className="text-sm device"
                       selected={audioInputDevice.deviceId === deviceId}
                       onClick={handleAudioInput}
                       value={deviceId}
@@ -113,7 +113,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                 {devices.audioOutputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm"
+                      className="text-sm device"
                       selected={audioOutputDevice.deviceId === deviceId}
                       onClick={handleAudioOutput}
                       value={deviceId}
@@ -135,7 +135,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                 {devices.videoDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm"
+                      className="text-sm device"
                       selected={videoDevice.deviceId === deviceId}
                       onClick={handleVideoInput}
                       value={deviceId}

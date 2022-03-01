@@ -79,7 +79,7 @@ const ToolBar: React.FC = () => {
   };
 
   const handleOutsideClick = event => {
-    if (event.target.id !== 'config-button') {
+    if (event.target.id !== 'config-button' && !event.target.className.includes('device')) {
       configButtonRef.current.handleShowDevices(false);
     }
   };

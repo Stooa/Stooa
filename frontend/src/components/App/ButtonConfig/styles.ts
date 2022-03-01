@@ -18,7 +18,7 @@ import {
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
 } from '@/ui/settings';
-import { rems, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 
 const Button = styled(ActionButton)`
   .button {
@@ -43,9 +43,12 @@ const Button = styled(ActionButton)`
 `;
 
 const Container = styled.div`
-  position: relative;
   display: flex;
   justify-content: center;
+
+  ${media.min('tablet')`
+    position: relative;
+  `}
 `;
 
 const Selector = styled.div`
@@ -53,13 +56,18 @@ const Selector = styled.div`
   border: 1px solid ${COLOR_NEUTRO_600};
   border-radius: ${BORDER_RADIUS};
   bottom: calc(100% + ${space()});
-  left: 50%;
-  margin-left: ${rems(-140)};
-  max-height: ${rems(350)};
+  max-height: 35vh;
   overflow-y: auto;
   position: absolute;
   width: ${rems(280)};
   z-index: 21;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  ${media.min('tablet')`
+    max-height: ${rems(350)};
+  `}
 `;
 
 const List = styled.ul`
