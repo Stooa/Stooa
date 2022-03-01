@@ -24,7 +24,7 @@ import { media, space } from '@/ui/helpers';
 const SeatsStyled = styled.div`
   align-items: center;
   display: flex;
-  height: 100%;
+  height: 70vh;
   justify-content: center;
   overflow: hidden;
 
@@ -54,13 +54,14 @@ const SeatsStyled = styled.div`
 `;
 
 const Free = styled.div`
-  color: ${COLOR_NEUTRO_600};
-  left: 50%;
-  pointer-events: none;
   position: absolute;
+  color: ${COLOR_NEUTRO_600};
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;
+  pointer-events: none;
+  text-align: center;
 
   svg {
     display: block;
@@ -80,12 +81,12 @@ const Free = styled.div`
 const Seat = styled.div`
   background: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
-  height: calc(33.33333% - ${space()});
+  height: calc(30% - ${space()});
   margin: 0 ${space(0.5)} ${space()};
-  min-height: 180px;
+  min-height: 160px;
   overflow: hidden;
   position: relative;
-  width: calc(${100 / 2}% - ${space()});
+  width: calc(50% - ${space()});
 
   ${media.min('tablet')`
     height: calc(50% - ${space()});
