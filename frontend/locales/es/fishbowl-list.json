@@ -2,7 +2,7 @@
     "scheduledFishbowls": "<i>Fishbowls</i> agendados (<span>{{count}}</span>)",
     "enterFishbowl": "Entrar al fishbowl",
     "emptyListTitle": "Aún no has programado ningún <i>fishbowl</i>. ¡Crea uno!",
-    "emptyListDescription": "Aquí verás todos tus fishbowls programados.",
+    "emptyListDescription": "Aquí verás todos tus <i>fishbowls</i> programados.",
     "noSelectedFishbowlTitle": "Ningún <i>fishbowl</i> seleccionado.",
     "noSelectedFishbowlDescription": "Selecciona uno de los <i>fishbowls</i> agendados para editarlo.",
     "fishbowlStarted": "El <i>fishbowl</i> ha comenzado o está a punto de empezar.",
