@@ -96,6 +96,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  i {
+    padding-right: 0.2rem;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
