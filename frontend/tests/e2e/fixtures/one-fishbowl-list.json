@@ -1,9 +1,9 @@
 [
     {
-        "@id": "/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
+        "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
         "@type": "Fishbowl",
-        "name": "repellendus voluptatibus rerum",
-        "description": "Ratione et maiores itaque ut debitis.",
+        "name": "Fishbowl title",
+        "description": "Fishbowl description",
         "slug": "test-me-fishbowl",
         "timezone": "Europe/Madrid",
         "locale": "en",
@@ -12,8 +12,8 @@
         "participants": [],
         "isFishbowlNow": false,
         "hasIntroduction": false,
-        "startDateTimeTz": "2022-02-11T10:48:22+01:00",
-        "endDateTimeTz": "2022-02-11T12:48:22+01:00",
+        "startDateTimeTz": "2030-02-11T10:48:22+01:00",
+        "endDateTimeTz": "2030-02-11T12:48:22+01:00",
         "durationFormatted": "02:00"
     }
 ]

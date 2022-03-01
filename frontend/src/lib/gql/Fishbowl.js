@@ -33,11 +33,14 @@ const UPDATE_FISHBOWL = gql`
       fishbowl {
         id
         name
-        slug
         description
-        locale
         startDateTimeTz
-        endDateTimeTz
+        timezone
+        locale
+        duration
+        durationFormatted
+        isFishbowlNow
+        hasIntroduction
       }
     }
   }

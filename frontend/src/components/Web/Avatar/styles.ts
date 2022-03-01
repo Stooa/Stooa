@@ -49,15 +49,6 @@ const Avatar = styled.div`
 
   ${media.max('tablet')`
     max-width: 85%;
-
-    .avatar {
-      padding-left: 0;
-      padding-right: 0;
-
-      &.active {
-        padding: ${space(1.1)} ${space(3)} ${space(0.9)};
-      }
-    }
   `}
 
   ${media.min('tablet')`
