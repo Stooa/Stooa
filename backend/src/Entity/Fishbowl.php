@@ -130,6 +130,8 @@ class Fishbowl
     ];
 
     /**
+     * @Groups({"fishbowl:read"})
+     *
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -164,7 +166,7 @@ class Fishbowl
     private ?string $slug = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\DateTime
@@ -196,7 +198,7 @@ class Fishbowl
     private ?string $locale = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\Time
