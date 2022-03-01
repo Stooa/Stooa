@@ -215,9 +215,11 @@ const GlobalStyle = createGlobalStyle`
   .toastify-custom {
 
       &.Toastify__toast-container {
+        ${media.max('tablet')`
         width: 90%;
         left: 50%;
         transform: translateX(-50%);
+        `}
       }
 
       & .Toastify__toast {
