@@ -78,7 +78,6 @@ const Seat = styled.div`
   background: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
   height: 100%;
-  min-height: 160px;
   overflow: hidden;
   position: relative;
   grid-column-end: span 2;
