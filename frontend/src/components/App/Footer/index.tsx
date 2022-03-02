@@ -38,15 +38,15 @@ const Footer: React.FC<Props> = ({ participantsActive }) => {
       <div className="col-left hide-mobile">
         <Logo />
       </div>
-      <div className="col-mid">
-        <ToolBar />
-      </div>
-      <div className="col-right">
+      <div className="moderator-actions">
         {isModerator && (
-          <div className="hide-desktop moderator-actions">
+          <div className="hide-desktop">
             <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} />
           </div>
         )}
+      </div>
+      <div className="user-actions">
+        <ToolBar />
       </div>
     </FooterStyled>
   );

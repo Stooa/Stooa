@@ -120,7 +120,7 @@ const Footer = styled.footer`
 
   ${media.min('reader')`
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: 1fr auto 1fr;
     grid-gap: ${space(0.5)};
   `}
 
@@ -128,34 +128,29 @@ const Footer = styled.footer`
     ${media.min('tablet')`
       align-items: center;
       display: flex;
-      grid-column: 1 / 3;
     `}
   }
 
-  .col-mid {
+  .moderator-actions {
+    display: grid;
+    place-content: center;
+    margin: ${space(2)} 0;
     ${media.min('reader')`
-      grid-column: 1 / 7;
-    `}
-
-    ${media.min('tablet')`
-      grid-column: 3 / 11;
+      grid-row: 1;
+      grid-column: 3 / 4;
     `}
   }
 
-  .col-right {
-    margin: ${space()} 0;
+  .user-actions {
+    margin-bottom: ${space()};
     text-align: center;
 
     ${media.min('reader')`
       align-items: center;
-      grid-column: 7 / span 6;
+      grid-column: 2/3;
       display: flex;
       margin: 0;
       text-align: inherit;
-    `}
-
-    ${media.min('tablet')`
-      grid-column: 11 / span 2;
     `}
   }
 

@@ -26,7 +26,6 @@ const SeatsStyled = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-  padding-bottom: ${space(2)};
 
   .content {
     display: grid;
@@ -35,8 +34,10 @@ const SeatsStyled = styled.div`
     align-items: center;
     height: 100%;
     width: 100%;
+
     ${media.min('tablet')`
-    grid-template-columns: repeat(6, 1fr);
+    padding-bottom: ${space()};
+      grid-template-columns: repeat(6, 1fr);
     `}
   }
 

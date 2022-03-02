@@ -98,7 +98,7 @@ const Slider = styled.div`
     `}
 
     ${media.min('maxWidth')`
-      bottom: calc(${space(6)} - ${rems(7)});
+      bottom: calc(${space(4)} - ${rems(7)});
       left: ${space(8)};
     `}
 
