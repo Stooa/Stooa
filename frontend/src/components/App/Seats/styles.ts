@@ -22,27 +22,23 @@ import { APP_SM } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
 
 const SeatsStyled = styled.div`
-  align-items: center;
   display: flex;
-  height: 70vh;
-  justify-content: center;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
+  padding-bottom: ${space(2)};
 
   .content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: ${space(1)};
     align-items: center;
-    display: flex;
-    flex-wrap: wrap;
     height: 100%;
-    justify-content: center;
-    margin-left: ${space(-0.5)};
-    width: calc(100% + ${space()});
+    width: 100%;
+    ${media.min('tablet')`
+    grid-template-columns: repeat(6, 1fr);
+    `}
   }
-
-  ${media.max('tablet')`
-    .content {
-      overflow-y: auto;
-    }
-  `}
 
   ${media.between('tablet', 'tabletLarge')`
     .drawer-open & .content {
@@ -81,16 +77,25 @@ const Free = styled.div`
 const Seat = styled.div`
   background: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
-  height: calc(30% - ${space()});
-  margin: 0 ${space(0.5)} ${space()};
+  height: 100%;
   min-height: 160px;
   overflow: hidden;
   position: relative;
-  width: calc(50% - ${space()});
+  grid-column-end: span 2;
+
+  &:last-child {
+    grid-column-start: 2;
+  }
 
   ${media.min('tablet')`
-    height: calc(50% - ${space()});
-    width: calc(${100 / 3}% - ${space()});
+    &:last-child {
+      grid-column-start: initial;
+    }
+
+  &:nth-child(4) {
+    grid-column-start: 2;
+  }
+
   `}
 
   ${media.between('tablet', 'tabletLarge')`

@@ -87,7 +87,7 @@ const Slider = styled.div`
   }
 
   .slick-dots {
-    bottom: ${space(3)};
+    bottom: ${space(2)};
     left: ${space(3)};
     position: absolute;
     width: auto;

@@ -13,7 +13,7 @@ import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
 
 const Container = styled.div<{ drawer?: boolean }>`
-  background: ${COLOR_NEUTRO_200};
+  position: relative;
   display: grid;
   grid-template-columns: 1fr ${({ drawer }) => (drawer ? '300px' : 0)};
   grid-template-rows: ${space(14)} 1fr minmax(${space(10)}, auto);
@@ -22,7 +22,7 @@ const Container = styled.div<{ drawer?: boolean }>`
   min-height: 100vh;
   overflow: hidden;
   padding: 0 ${space(2)};
-  position: relative;
+  background: ${COLOR_NEUTRO_200};
   transition: grid-template-columns 0.25s ease-in-out;
 
   ${media.min('tablet')`
@@ -33,13 +33,13 @@ const Container = styled.div<{ drawer?: boolean }>`
 
 const Header = styled.header`
   position: relative;
-  align-items: center;
-  color: ${COLOR_NEUTRO_700};
   display: flex;
-  height: ${space(14)};
+  align-items: baseline;
   justify-content: space-between;
+  height: ${space(14)};
   grid-area: Header;
   padding: ${space(2)} 0;
+  color: ${COLOR_NEUTRO_700};
 
   .header-info,
   .header-actions {
@@ -57,20 +57,25 @@ const Header = styled.header`
 
   .header-info {
     justify-content: flex-start;
-    margin-bottom: 0.5rem;
-    p {
+
+    ${media.max('tablet')`
+      margin-bottom: 0.5rem;
+    `}
+
+    p.title {
       max-width: 20ch;
       overflow: hidden;
       ${media.min('tablet')`
-        max-width: 45%;
+        max-width: ${rems(250)};
       `}
     }
   }
 
   .header-top {
     align-items: center;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-items: space-between;
     width: 100%;
 
     .header-logo {

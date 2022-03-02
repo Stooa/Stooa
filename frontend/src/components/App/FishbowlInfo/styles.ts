@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space, rems } from '@/ui/helpers';
+import { space, rems, media } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
@@ -63,17 +63,27 @@ const Icon = styled.button`
 `;
 
 const Description = styled.div`
+  position: fixed;
+  top: ${space(14)};
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  padding: ${space(2)};
   background-color: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_700};
   border-radius: ${BORDER_RADIUS};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   color: ${COLOR_NEUTRO_700};
-  width: ${rems(340)};
-  padding: ${space(2)};
-  position: absolute;
-  top: 125%;
-  left: 70%;
   z-index: 10;
+
+  ${media.min('tablet')`
+    position: absolute;
+    top: 125%;
+    left: 0;
+    transform: translateX(0);
+    min-width: ${rems(340)};
+    width: 100%;
+  `}
 
   .description__title {
     margin-bottom: ${space(1)};
