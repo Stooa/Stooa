@@ -224,9 +224,10 @@ const GlobalStyle = createGlobalStyle`
 
       &.Toastify__toast-container {
         ${media.max('tablet')`
-        width: 90%;
-        left: 50%;
-        transform: translateX(-50%);
+          width: 92%;
+          left: 50%;
+          transform: translateX(-50%);
+          .Toastify__toast {border-radius: 4px;}
         `}
       }
 
