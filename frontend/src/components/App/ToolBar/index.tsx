@@ -135,7 +135,7 @@ const ToolBar: React.FC = () => {
       </ButtonJoin>
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo handleVideo={handleVideo} joined={joined} disabled={isMuteDisabled} />
-      <ButtonConfig ref={configButtonRef} />
+      <ButtonConfig selectorPosition="top" ref={configButtonRef} />
     </Container>
   );
 };

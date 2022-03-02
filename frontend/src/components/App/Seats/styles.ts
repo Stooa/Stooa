@@ -36,7 +36,7 @@ const SeatsStyled = styled.div`
     width: 100%;
 
     ${media.min('tablet')`
-    padding-bottom: ${space()};
+      padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
     `}
   }

@@ -139,7 +139,7 @@ const FishbowlPreJoin: React.FC = () => {
                 unlabeled={true}
               />
               <ButtonMic joined={true} disabled={false} unlabeled={true} />
-              <ButtonConfig ref={configButtonRef} unlabeled={true} />
+              <ButtonConfig selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
             </DevicesToolbar>
           </Devices>
           <Form>

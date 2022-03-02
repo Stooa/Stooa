@@ -71,19 +71,18 @@ const Form = styled.div`
 `;
 
 const VideoContainer = styled.div`
+  display: grid;
+  align-items: center;
+  position: relative;
   border-radius: ${BORDER_RADIUS} ${BORDER_RADIUS} 0 0;
   height: 35vh;
   overflow: hidden;
-  position: relative;
   width: 100%;
 
   .video {
     width: 100%;
-    left: 50%;
     min-height: 100%;
-    position: absolute;
-    top: 0;
-    transform: translateX(-50%) scaleX(-1);
+    transform: scaleX(-1);
     z-index: 1;
     object-fit: cover;
   }

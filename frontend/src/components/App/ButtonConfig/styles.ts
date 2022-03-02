@@ -51,21 +51,35 @@ const Container = styled.div`
   `}
 `;
 
+interface SelectorProps {
+  $bottom?: boolean;
+  $top?: boolean;
+}
+
 const Selector = styled.div`
+  position: absolute;
+  ${({ $bottom }: SelectorProps) =>
+    $bottom &&
+    `top: calc(100% + ${space()});
+      left: 50%;
+      transform: translateX(-50%);
+    `}
+  ${({ $top }: SelectorProps) =>
+    $top &&
+    `bottom: calc(55% + ${space()});
+      right: 0;
+  `};
+  max-height: 45vh;
+  width: ${rems(280)};
   background: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_600};
   border-radius: ${BORDER_RADIUS};
-  bottom: calc(100% + ${space()});
-  max-height: 35vh;
   overflow-y: auto;
-  position: absolute;
-  width: ${rems(280)};
   z-index: 21;
 
-  left: 50%;
-  transform: translateX(-50%);
-
   ${media.min('tablet')`
+    top: initial;
+    bottom: calc(100% + ${space()});
     max-height: ${rems(350)};
   `}
 `;
