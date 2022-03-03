@@ -50,10 +50,16 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
     router.push(route, route, { locale: locale });
   };
 
+  const handleClick = event => {
+    if (!event.target.parentElement.classList.contains('card__actions')) {
+      onClick(fishbowl);
+    }
+  };
+
   return (
     <CardStyled
       className={`${selected ? 'selected-card' : ''}`}
-      onClick={() => onClick(fishbowl)}
+      onClick={handleClick}
       data-testid={convertIntoClassName(name)}
     >
       <CardTitle>
