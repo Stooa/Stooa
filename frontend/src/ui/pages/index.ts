@@ -252,6 +252,11 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
 
   .title-lg {
     color: ${({ dark }) => (dark ? `${COLOR_NEUTRO_700}` : `${COLOR_NEUTRO_600}`)};
+    margin-bottom: ${space(2)};
+  }
+
+  .title-lg.definition {
+    text-align: center;
   }
 
   ${media.min('tablet')`
