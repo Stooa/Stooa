@@ -9,7 +9,7 @@
 
 import styled, { css } from 'styled-components';
 
-import Alert from '@/ui/Alert';
+import { CustomToast } from '@/ui/CustomToast';
 import { space, media, rems } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
@@ -31,21 +31,23 @@ const Icon = styled.button`
   padding: ${space()};
 `;
 
-const Tooltip = styled(Alert)`
+const Tooltip = styled(CustomToast)`
+  display: flex;
+  align-items: center;
   position: absolute;
   left: 50%;
-  bottom: -60px;
+  bottom: -65px;
   transform: translateX(-50%);
   margin: 0;
   width: 100%;
   max-width: 350px;
-  padding-right: ${space()};
 
   z-index: 10;
+  box-shadow: var(--shadow-elevation-medium);
 
   ${media.min('tablet')`
     width: 60ch;
-    bottom: -60px;
+    bottom: -75px;
     left: -20%;
     transform: translateX(0);
   `}
@@ -56,8 +58,8 @@ const Tooltip = styled(Alert)`
     width: ${rems(20)};
 
     svg {
-      height: ${rems(10)};
-      width: ${rems(10)};
+      height: ${rems(16)};
+      width: ${rems(16)};
 
       path {
         fill: ${COLOR_NEUTRO_600};
