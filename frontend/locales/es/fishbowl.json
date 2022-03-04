@@ -55,13 +55,14 @@
     "timeLeft_other": "Quedan {{time}}",
     "lastMinute": "Último minuto",
     "startFishbowl": "Iniciar el fishbowl",
+    "startIntroduction": "Iniciar introducción",
     "allowUsers": "Permitir a los asistentes unirse a la conversación",
     "endFishbowl": "Finalizar el fishbowl",
     "finishedEvent": "El fishbowl ha finalizado",
     "introduceModal": {
         "title": "Haz una introducción",
         "description": "Puedes decir algunas palabras de introducción, la cámara y el micrófono estarán activos solo para ti. Cuando termines, no olvides permitir a los asistentes unirse a la conversación.",
-        "button": "Comenzar"
+        "button": "Comenzar introducción"
     },
     "endModal": {
         "title": "Finalizar el fishbowl",
