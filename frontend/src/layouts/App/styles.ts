@@ -65,7 +65,7 @@ const Header = styled.header`
       margin-bottom: 0.5rem;
     `}
 
-    p.title {
+    .title {
       max-width: 20ch;
       overflow: hidden;
       ${media.min('tablet')`
