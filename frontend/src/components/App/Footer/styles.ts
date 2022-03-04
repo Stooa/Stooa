@@ -15,8 +15,8 @@ import { media, rems, space } from '@/ui/helpers';
 const Alert = styled(AlertStyled)`
   position: absolute;
   left: 50%;
-  bottom: 100%;
   transform: translateX(-50%);
+  bottom: 100%;
   padding: ${space()} ${space(2)};
   z-index: 9;
 
