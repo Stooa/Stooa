@@ -40,6 +40,10 @@ const Header = styled.header`
   padding-top: ${space(2)};
   color: ${COLOR_NEUTRO_700};
 
+  ${media.max('tablet')`
+    min-height: ${space(16)};
+  `}
+
   .header-info,
   .header-actions {
     align-items: center;
