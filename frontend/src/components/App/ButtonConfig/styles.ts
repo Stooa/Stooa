@@ -52,20 +52,20 @@ const Container = styled.div`
 `;
 
 interface SelectorProps {
-  $bottom?: boolean;
+  bottom?: boolean;
   $top?: boolean;
 }
 
 const Selector = styled.div`
   position: absolute;
-  ${({ $bottom }: SelectorProps) =>
-    $bottom &&
+  ${({ bottom }: SelectorProps) =>
+    bottom &&
     `top: calc(100% + ${space()});
       left: 50%;
       transform: translateX(-50%);
     `}
-  ${({ $top }: SelectorProps) =>
-    $top &&
+  ${({ top }: SelectorProps) =>
+    top &&
     `bottom: calc(55% + ${space()});
       right: 0;
   `};
