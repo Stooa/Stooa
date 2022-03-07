@@ -71,6 +71,7 @@ const Free = styled.div`
 
   .text {
     display: block;
+    font-weight: 500;
     margin: ${space()} 0 0;
   }
 `;
@@ -82,6 +83,10 @@ const Seat = styled.div`
   overflow: hidden;
   position: relative;
   grid-column-end: span 2;
+
+  &.not-started {
+    opacity: 0.3;
+  }
 
   &:last-child {
     grid-column-start: 2;
