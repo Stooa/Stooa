@@ -41,7 +41,7 @@ const Seats = () => {
               {isIntro ? (
                 <>
                   <NotAvailableImage />
-                  <span className="text app-md">{t('seatAvailable')}</span>
+                  <span className="text app-md">{t('seatAvailableAfterIntro')}</span>
                 </>
               ) : (
                 <>

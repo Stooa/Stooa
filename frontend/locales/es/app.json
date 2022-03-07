@@ -1,5 +1,6 @@
 {
     "seatAvailable": "Asiento libre",
+    "seatAvailableAfterIntro": "Asiento libre después de la introducción",
     "timeup": "Terminado!",
     "timeleft": "para terminar",
     "notification": {
