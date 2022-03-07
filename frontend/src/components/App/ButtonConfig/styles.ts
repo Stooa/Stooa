@@ -20,6 +20,11 @@ import {
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
 
+interface SelectorProps {
+  bottom?: boolean;
+  top?: boolean;
+}
+
 const Button = styled(ActionButton)`
   .button {
     background-color: ${COLOR_NEUTRO_300};
@@ -50,11 +55,6 @@ const Container = styled.div`
     position: relative;
   `}
 `;
-
-interface SelectorProps {
-  bottom?: boolean;
-  $top?: boolean;
-}
 
 const Selector = styled.div`
   position: absolute;
