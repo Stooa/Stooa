@@ -7,12 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { space, media } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
-  COLOR_GREEN_900,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,

@@ -63,17 +63,17 @@ const Icon = styled.button`
 `;
 
 const Description = styled.div`
-  position: fixed;
-  top: ${space(15)};
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - ${space(4)});
-  padding: ${space(2)};
   background-color: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_700};
   border-radius: ${BORDER_RADIUS};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
   color: ${COLOR_NEUTRO_700};
+  left: 50%;
+  padding: ${space(2)};
+  position: fixed;
+  top: ${space(15)};
+  transform: translateX(-50%);
+  width: calc(100% - ${space(4)});
   z-index: 10;
 
   ${media.min('reader')`

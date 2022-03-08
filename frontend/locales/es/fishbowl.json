@@ -44,7 +44,7 @@
     "mic": "Micrófono",
     "speaker": "Altavoz",
     "cam": "Cámara",
-    "nickname": {
+    "prejoin": {
         "title": "Configura tu micro y cámara."
     },
     "waiting": "Esperando a que el anfitrión inicie el fishbowl",

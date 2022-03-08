@@ -83,7 +83,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
         (devices.audioInputDevices.length > 0 ||
           devices.audioOutputDevices.length > 0 ||
           devices.videoDevices.length > 0) && (
-          <Selector $top={selectorPosition === 'top'} $bottom={selectorPosition === 'bottom'}>
+          <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             {devices.audioInputDevices.length > 0 && (
               <List>
                 <li className="title">

@@ -20,6 +20,11 @@ import {
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
 
+interface SelectorProps {
+  bottom?: boolean;
+  top?: boolean;
+}
+
 const Button = styled(ActionButton)`
   .button {
     background-color: ${COLOR_NEUTRO_300};
@@ -58,14 +63,14 @@ interface SelectorProps {
 
 const Selector = styled.div`
   position: absolute;
-  ${({ $bottom }: SelectorProps) =>
-    $bottom &&
+  ${({ bottom }: SelectorProps) =>
+    bottom &&
     `top: calc(100% + ${space()});
       left: 50%;
       transform: translateX(-50%);
     `}
-  ${({ $top }: SelectorProps) =>
-    $top &&
+  ${({ top }: SelectorProps) =>
+    top &&
     `bottom: calc(55% + ${space()});
       right: 0;
   `};

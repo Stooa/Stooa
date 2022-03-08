@@ -44,7 +44,7 @@
     "mic": "Micròfon",
     "speaker": "Altaveu",
     "cam": "Càmera",
-    "nickname": {
+    "prejoin": {
         "title": "Configura la càmera i el micròfon"
     },
     "waiting": "Esperant que l'amfitrió iniciï el fishbowl",
