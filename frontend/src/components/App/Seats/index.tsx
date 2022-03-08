@@ -38,10 +38,14 @@ const Seats = () => {
             <MicMuted className="icon-medium icon-audio" />
             <VideoMuted className="icon-medium icon-video" />
             <Free>
-              {isIntro ? (
+              {isIntro || notStarted ? (
                 <>
                   <NotAvailableImage />
-                  <span className="text app-md">{t('seatAvailableAfterIntro')}</span>
+                  {isIntro ? (
+                    <span className="text app-md">{t('seatAvailableAfterIntro')}</span>
+                  ) : (
+                    <span className="text app-md">{t('seatUnavailable')}</span>
+                  )}
                 </>
               ) : (
                 <>
