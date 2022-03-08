@@ -13,7 +13,7 @@ import { Button } from '@/ui/Resets';
 import Texts from '@/ui/Texts';
 import Titles from '@/ui/Titles';
 import Overrides from '@/ui/Overrides';
-import { media, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 import {
   COLOR_GREEN_100,
   COLOR_GREEN_500,
@@ -222,8 +222,22 @@ const GlobalStyle = createGlobalStyle`
 
   .toastify-custom {
 
+
+      &.Toastify__toast-container {
+        ${media.max('tablet')`
+          width: 92%;
+          left: 50%;
+          transform: translateX(-50%);
+          .Toastify__toast {border-radius: 4px;}
+        `}
+      }
+
       & .Toastify__toast {
         padding: ${space(0)} ${space(2)};
+
+        .Toastify__toast-icon {
+          display: inline !important;
+        }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--warning {

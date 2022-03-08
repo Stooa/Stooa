@@ -211,7 +211,7 @@ const CardStyled = styled.div`
     min-height: ${rems(38)};
     column-gap: ${space(3)};
     align-self: flex-end;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 
     & > a {

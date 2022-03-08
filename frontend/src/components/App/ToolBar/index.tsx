@@ -79,8 +79,10 @@ const ToolBar: React.FC = () => {
   };
 
   const handleOutsideClick = event => {
-    if (event.target.id !== 'config-button') {
-      configButtonRef.current.handleShowDevices(false);
+    if (typeof event.target.className === 'string') {
+      if (event.target.id !== 'config-button' && !event.target.className?.includes('device')) {
+        configButtonRef.current.handleShowDevices(false);
+      }
     }
   };
 
@@ -133,7 +135,7 @@ const ToolBar: React.FC = () => {
       </ButtonJoin>
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo handleVideo={handleVideo} joined={joined} disabled={isMuteDisabled} />
-      <ButtonConfig ref={configButtonRef} />
+      <ButtonConfig selectorPosition="top" ref={configButtonRef} />
     </Container>
   );
 };

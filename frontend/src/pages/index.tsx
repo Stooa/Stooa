@@ -186,7 +186,7 @@ const Home = () => {
           <WaveDesktop className="wave hide-mobile" />
         </div>
         <Row dark className="animate">
-          <h2 className="title-lg animate-item">{t('definition.title')}</h2>
+          <h2 className="title-lg animate-item definition">{t('definition.title')}</h2>
           <Description center className="animate-item text-lg">
             <Trans
               i18nKey="home:definition.description"
