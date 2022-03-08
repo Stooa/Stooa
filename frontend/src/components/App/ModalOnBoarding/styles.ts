@@ -18,8 +18,8 @@ const OnboardingModal = styled(Modal)`
   }
 
   .content {
-    height: 100%;
-    max-height: ${rems(480)};
+    height: fit-content;
+    max-height: ${rems(680)};
     max-width: ${rems(840)};
     padding: 0;
     width: 100%;

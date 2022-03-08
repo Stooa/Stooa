@@ -14,7 +14,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Footer as FooterStyled } from '@/layouts/App/styles';
-import { Alert } from '@/components/App/Footer/styles';
+import { CustomToast } from '@/ui/CustomToast';
 
 const ToolBar = dynamic(import('@/components/App/ToolBar'), { loading: () => <div /> });
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
@@ -34,19 +34,19 @@ const Footer: React.FC<Props> = ({ participantsActive }) => {
 
   return (
     <FooterStyled className={participantsActive ? 'drawer-open' : ''}>
-      {onIntroduction && <Alert className="info">{t('notification.joinAfterIntroduction')}</Alert>}
+      {onIntroduction && <CustomToast>{t('notification.joinAfterIntroduction')}</CustomToast>}
       <div className="col-left hide-mobile">
         <Logo />
       </div>
-      <div className="col-mid">
-        <ToolBar />
-      </div>
-      <div className="col-right">
+      <div className="moderator-actions">
         {isModerator && (
-          <div className="hide-desktop moderator-actions">
+          <div className="hide-desktop">
             <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} />
           </div>
         )}
+      </div>
+      <div className="user-actions">
+        <ToolBar />
       </div>
     </FooterStyled>
   );
