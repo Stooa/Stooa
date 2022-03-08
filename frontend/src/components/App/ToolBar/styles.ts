@@ -13,7 +13,7 @@ import { media } from '@/ui/helpers';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, minmax(90px, 100px));
+  grid-template-columns: repeat(4, minmax(80px, 100px));
   justify-content: center;
   justify-items: stretch;
   align-items: start;

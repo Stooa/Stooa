@@ -13,11 +13,11 @@ import AlertStyled from '@/ui/Alert';
 import { media, rems, space } from '@/ui/helpers';
 
 const Alert = styled(AlertStyled)`
-  bottom: 100%;
-  left: 50%;
-  padding: ${space()} ${space(2)};
   position: absolute;
+  left: 50%;
   transform: translateX(-50%);
+  bottom: 100%;
+  padding: ${space()} ${space(2)};
   z-index: 9;
 
   ${media.min('tablet')`
