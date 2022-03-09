@@ -26,7 +26,12 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import { ButtonLinkColored, ButtonSmall, ButtonStyledLink } from '@/ui/Button';
+import {
+  ButtonLinkColored,
+  ButtonSmall,
+  ButtonStyledLink,
+  ButtonStyledLinkSmall
+} from '@/ui/Button';
 import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
