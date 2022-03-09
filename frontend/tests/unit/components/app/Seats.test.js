@@ -17,7 +17,7 @@ import I18nProvider from 'next-translate/I18nProvider'
 
 import appEN from 'locales/en/app.json'
 
-const initialState = {
+const notStartedState = {
   fishbowlReady: false,
   fishbowlStarted: false,
   isGuest: false,
@@ -25,22 +25,24 @@ const initialState = {
   conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
-describe('Unit test of fishbowl card at fishbowl list', () => {
-  it('Fishbowl with all buttons visible', () => {
-    render(
-      <I18nProvider
+const renderWithContext = (state) => {
+  render(
+    <I18nProvider
     lang={'en'}
-    namespaces={{
-      app: appEN
-      }}
-    >
-    <StateProvider value={[initialState]}>
-      <Seats />
-    </StateProvider>
+    namespaces={{ app: appEN }}>
+      <StateProvider value={[state]}>
+        <Seats />
+      </StateProvider>
+   </I18nProvider>
+  );
+}
 
-  </I18nProvider>
-    );
+describe('Unit test of fishbowl seats', () => {
+  it('Unstarted fishbowl with all unavailable seats', () => {
+    renderWithContext(notStartedState);
 
+    const seats = screen.getAllByText('Seat unavailable');
+    expect(seats.length).toBe(5);
   });
 
 });
