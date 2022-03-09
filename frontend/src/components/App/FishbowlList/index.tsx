@@ -18,19 +18,15 @@ import {
   ROUTE_FISHBOWL,
   ROUTE_FISHBOWL_CREATE,
   ROUTE_FISHBOWL_HOST_NOW,
-  ROUTE_HOME
+  ROUTE_HOME,
+  ROUTE_SIGN_IN
 } from '@/app.config';
 import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import {
-  ButtonLinkColored,
-  ButtonSmall,
-  ButtonStyledLink,
-  ButtonStyledLinkSmall
-} from '@/ui/Button';
+import { ButtonLinkColored, ButtonSmall, ButtonStyledLink } from '@/ui/Button';
 import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
@@ -72,20 +68,25 @@ const FishbowlList = () => {
   const getFishbowls = async () => {
     const auth = await getAuthToken();
 
-    api
-      .get(`/fishbowls`, {
-        headers: {
-          authorization: `${auth ? auth.authorizationString : null}`
-        },
-        params
-      })
-      .then(response => {
-        setFishbowls(response.data);
-      })
-      .catch(error => {
-        console.error('[STOOA] Fishbowl list error', error);
-        router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
-      });
+    if (auth) {
+      api
+        .get(`/fishbowls`, {
+          headers: {
+            authorization: auth.authorizationString
+          },
+          params
+        })
+        .then(response => {
+          setFishbowls(response.data);
+        })
+        .catch(error => {
+          console.error('[STOOA] Fishbowl list error', error);
+          router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+        });
+    } else {
+      console.error('[STOOA] Fishbowl list error login');
+      router.push(ROUTE_SIGN_IN, ROUTE_SIGN_IN, { locale: lang });
+    }
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
