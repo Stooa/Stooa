@@ -30,7 +30,7 @@
     "@types/react": "17.0.39",
     "@types/styled-components": "5.1.22",
     "@types/yup": "0.29.13",
-    "axios": "0.25.0",
+    "axios": "0.26.1",
     "babel-plugin-styled-components": "2.0.2",
     "countries-and-timezones": "3.3.0",
     "file-loader": "6.2.0",
