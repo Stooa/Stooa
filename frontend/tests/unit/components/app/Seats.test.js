@@ -45,5 +45,22 @@ describe('Unit test of fishbowl seats', () => {
     expect(seats.length).toBe(5);
   });
 
+  // TODO: Improve testing with all cases
+  // it('Running fishbowl while intro with unavailable seats', () => {
+  //   renderWithContext({...notStartedState, fishbowlReady: true, fishbowlStarted: true, conferenceStatus: IConferenceStatus.INTRODUCTION });
+
+  //   const seats = screen.getAllByText('Seat available after introduction');
+  //   expect(seats.length).toBe(5);
+
+  // });
+
+  // it('Running fishbowl with available seats', () => {
+  //   renderWithContext({...notStartedState, fishbowlReady: true, fishbowlStarted: true,conferenceStatus: IConferenceStatus.RUNNING });
+
+  //   screen.debug();
+  //   const seats = screen.getAllByText('Seat available');
+  //   expect(seats.length).toBe(5);
+  // });
+
 });
 
