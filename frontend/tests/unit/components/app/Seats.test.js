@@ -17,12 +17,12 @@ import I18nProvider from 'next-translate/I18nProvider'
 
 import appEN from 'locales/en/app.json'
 
-const notStartedState = {
-  fishbowlReady: false,
+const introState = {
+  fishbowlReady: true,
   fishbowlStarted: false,
   isGuest: false,
-  prejoin: true,
-  conferenceStatus: IConferenceStatus?.NOT_STARTED
+  prejoin: false,
+  conferenceStatus: IConferenceStatus.NOT_STARTED
 };
 
 const renderWithContext = (state) => {
@@ -39,19 +39,19 @@ const renderWithContext = (state) => {
 
 describe('Unit test of fishbowl seats', () => {
   it('Unstarted fishbowl with all unavailable seats', () => {
-    renderWithContext(notStartedState);
+    renderWithContext(introState);
 
     const seats = screen.getAllByText('Seat unavailable');
     expect(seats.length).toBe(5);
   });
 
-  // TODO: Improve testing with all cases
-  // it('Running fishbowl while intro with unavailable seats', () => {
-  //   renderWithContext({...notStartedState, fishbowlReady: true, fishbowlStarted: true, conferenceStatus: IConferenceStatus.INTRODUCTION });
+  /* //TODO: Improve testing with all cases, do we even set the state conferenceStatus? look at the dispatch to start intro.
+  I want to update the state and the check the texts */
 
+  // it('Running fishbowl while intro with unavailable seats', () => {
+  //   renderWithContext(introState);
   //   const seats = screen.getAllByText('Seat available after introduction');
   //   expect(seats.length).toBe(5);
-
   // });
 
   // it('Running fishbowl with available seats', () => {

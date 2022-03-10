@@ -71,7 +71,7 @@ const Free = styled.div`
 
   .text {
     display: block;
-    font-weight: 500;
+    font-weight: 400;
     margin: ${space()} 0 0;
   }
 `;
