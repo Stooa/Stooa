@@ -84,11 +84,11 @@ const Seat = styled.div`
   overflow: hidden;
   position: relative;
   grid-column-end: span 2;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.35s ease-in-out;
   will-change: background;
 
   .seat-wrapper {
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.35s ease-in-out;
   }
 
   &.not-started {
