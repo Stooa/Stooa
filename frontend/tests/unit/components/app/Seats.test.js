@@ -13,9 +13,9 @@ import { StateProvider } from '@/contexts/AppContext';
 import Seats from '@/components/App/Seats';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-import I18nProvider from 'next-translate/I18nProvider'
+import I18nProvider from 'next-translate/I18nProvider';
 
-import appEN from 'locales/en/app.json'
+import appEN from 'locales/en/app.json';
 
 const introState = {
   fishbowlReady: true,
@@ -25,17 +25,15 @@ const introState = {
   conferenceStatus: IConferenceStatus.NOT_STARTED
 };
 
-const renderWithContext = (state) => {
+const renderWithContext = state => {
   render(
-    <I18nProvider
-    lang={'en'}
-    namespaces={{ app: appEN }}>
+    <I18nProvider lang={'en'} namespaces={{ app: appEN }}>
       <StateProvider value={[state]}>
         <Seats />
       </StateProvider>
-   </I18nProvider>
+    </I18nProvider>
   );
-}
+};
 
 describe('Unit test of fishbowl seats', () => {
   it('Unstarted fishbowl with all unavailable seats', () => {
@@ -61,6 +59,4 @@ describe('Unit test of fishbowl seats', () => {
   //   const seats = screen.getAllByText('Seat available');
   //   expect(seats.length).toBe(5);
   // });
-
 });
-
