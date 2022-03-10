@@ -37,7 +37,7 @@ const Seats = () => {
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />
             <VideoMuted className="icon-medium icon-video" />
-            <Free>
+            <Free className="seat-wrapper">
               {isIntro || notStarted ? (
                 <>
                   <NotAvailableImage />

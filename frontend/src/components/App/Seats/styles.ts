@@ -16,7 +16,8 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_YELLOW_500
+  COLOR_YELLOW_500,
+  COLOR_NEUTRO_300
 } from '@/ui/settings';
 import { APP_SM } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
@@ -83,9 +84,18 @@ const Seat = styled.div`
   overflow: hidden;
   position: relative;
   grid-column-end: span 2;
+  transition: background 0.2s ease-in-out;
+  will-change: background;
+
+  .seat-wrapper {
+    transition: opacity 0.2s ease-in-out;
+  }
 
   &.not-started {
-    opacity: 0.3;
+    background: ${COLOR_NEUTRO_300};
+    .seat-wrapper {
+      opacity: 0.3;
+    }
   }
 
   &:last-child {
