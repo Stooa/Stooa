@@ -25,10 +25,10 @@ Feature: Fishbowl List
 
     Scenario: Logged user has no fishbowls in the list
         Given a logged user
+        And a list of empty fishbowls
         When navigates to "/"
         And clicks on its profile
         And clicks on "Fishbowl list" link
-        Given a list of empty fishbowls
         Then sees the empty fishbowl list page
 
     Scenario: Logged user enters to a fishbowl from the list
