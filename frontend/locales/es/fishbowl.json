@@ -61,7 +61,7 @@
     "finishedEvent": "El fishbowl ha finalizado",
     "introduceModal": {
         "title": "Haz una introducción",
-        "description": "Puedes decir algunas palabras de introducción, la cámara y el micrófono estarán activos solo para ti. Cuando termines, no olvides permitir a los asistentes unirse a la conversación.",
+        "description": "Tu cámara se activará para que puedas decir unas palabras a los asistentes antes de abrir el <i>fishbowl</i>. Después podrás permitir a los usuarios unirse a la conversación.",
         "button": "Comenzar introducción"
     },
     "endModal": {
