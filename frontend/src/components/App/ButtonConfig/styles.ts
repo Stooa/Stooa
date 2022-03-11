@@ -56,11 +56,6 @@ const Container = styled.div`
   `}
 `;
 
-interface SelectorProps {
-  $bottom?: boolean;
-  $top?: boolean;
-}
-
 const Selector = styled.div`
   position: absolute;
   ${({ bottom }: SelectorProps) =>
