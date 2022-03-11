@@ -233,7 +233,9 @@ const FishbowlList = () => {
                           >
                             <BackArrow />
                           </MobileBackButton>
-                          <h2 className="title-md">{t('titleEdit')}</h2>
+                          <h2 className="title-md">
+                            <Trans i18nKey="fishbowl-list:titleEdit" components={{ i: <i /> }} />
+                          </h2>
                         </div>
                         <FishbowlForm
                           $isFull={windowWidth <= BREAKPOINTS.desktop}
