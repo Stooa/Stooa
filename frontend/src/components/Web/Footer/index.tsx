@@ -123,11 +123,13 @@ const Footer: React.FC = () => {
                 </a>
               </Link>
             </li>
-            <li className="text-sm">
-              <Link href={`${ROUTE_REGISTER}`} passHref>
-                <a>{t('register')}</a>
-              </Link>
-            </li>
+            {!isAuthenticated && (
+              <li className="text-sm">
+                <Link href={`${ROUTE_REGISTER}`} passHref>
+                  <a>{t('register')}</a>
+                </Link>
+              </li>
+            )}
             {!isAuthenticated && (
               <li className="text-sm">
                 <RedirectLink href={ROUTE_SIGN_IN} passHref>
