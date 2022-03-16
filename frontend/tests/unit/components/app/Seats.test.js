@@ -42,21 +42,4 @@ describe('Unit test of fishbowl seats', () => {
     const seats = screen.getAllByText('Seat unavailable');
     expect(seats.length).toBe(5);
   });
-
-  /* //TODO: Improve testing with all cases, do we even set the state conferenceStatus? look at the dispatch to start intro.
-  I want to update the state and the check the texts */
-
-  // it('Running fishbowl while intro with unavailable seats', () => {
-  //   renderWithContext(introState);
-  //   const seats = screen.getAllByText('Seat available after introduction');
-  //   expect(seats.length).toBe(5);
-  // });
-
-  // it('Running fishbowl with available seats', () => {
-  //   renderWithContext({...notStartedState, fishbowlReady: true, fishbowlStarted: true,conferenceStatus: IConferenceStatus.RUNNING });
-
-  //   screen.debug();
-  //   const seats = screen.getAllByText('Seat available');
-  //   expect(seats.length).toBe(5);
-  // });
 });
