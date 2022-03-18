@@ -12,7 +12,9 @@
     "languages": {
         "en": "Inggris",
         "es": "Spanyol",
-        "ca": "Katala"
+        "ca": "Katala",
+        "fr": "Perancis",
+        "id": "Bahasa Indonesia"
     },
     "roadmap": "Peta rencana",
     "documentation": "Dokumentasi",
