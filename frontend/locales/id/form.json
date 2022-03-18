@@ -16,7 +16,9 @@
         "description": "Deskripsi (opsional)",
         "timezone": "Zona Waktu",
         "selectTimeZone": "Zona Waktu",
-        "selectDuration": "Durasi"
+        "selectDuration": "Durasi",
+        "introductionLabel": "Saya ingin memulai fishbowl memberikan pengantar.",
+        "introductionTooltip": "Saat Anda memulai fishbowl, <strong>Anda dapat memulai dengan membuat pendahuluan.</strong> Kamera dan mikrofon akan aktif hanya untuk Anda. Setelah selesai, <strong>jangan lupa izinkan peserta untuk bergabung dalam percakapan.</strong>"
     },
     "validation": {
         "email": "Alamat surel tidak valid",
