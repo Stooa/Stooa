@@ -22,15 +22,15 @@ const Seats = () => {
   const { t } = useTranslation('app');
   const [{ conferenceStatus }] = useStateValue();
 
-  const isIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
-  const notStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
+  const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
+  const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
 
   return (
     <SeatsStyled>
       <div className="content">
         {[...Array(5)].map((e, seat) => (
           <Seat
-            className={notStarted ? 'not-started' : ''}
+            className={isConferenceNotStarted ? 'not-started' : ''}
             key={`seat-${seat + 1}`}
             id={`seat-${seat + 1}`}
           >
@@ -38,10 +38,10 @@ const Seats = () => {
             <MicMuted className="icon-medium icon-audio" />
             <VideoMuted className="icon-medium icon-video" />
             <Free className="seat-wrapper">
-              {isIntro || notStarted ? (
+              {isConferenceInIntro || isConferenceNotStarted ? (
                 <>
                   <NotAvailableImage />
-                  {isIntro ? (
+                  {isConferenceInIntro ? (
                     <span className="text app-md">{t('seatAvailableAfterIntro')}</span>
                   ) : (
                     <span className="text app-md">{t('seatUnavailable')}</span>
