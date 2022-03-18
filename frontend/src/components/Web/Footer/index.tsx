@@ -124,18 +124,18 @@ const Footer: React.FC = () => {
               </Link>
             </li>
             {!isAuthenticated && (
-              <li className="text-sm">
-                <Link href={`${ROUTE_REGISTER}`} passHref>
-                  <a>{t('register')}</a>
-                </Link>
-              </li>
-            )}
-            {!isAuthenticated && (
-              <li className="text-sm">
-                <RedirectLink href={ROUTE_SIGN_IN} passHref>
-                  <a data-testid="footer-login">{t('signin')}</a>
-                </RedirectLink>
-              </li>
+              <>
+                <li className="text-sm">
+                  <Link href={`${ROUTE_REGISTER}`} passHref>
+                    <a>{t('register')}</a>
+                  </Link>
+                </li>
+                <li className="text-sm">
+                  <RedirectLink href={ROUTE_SIGN_IN} passHref>
+                    <a data-testid="footer-login">{t('signin')}</a>
+                  </RedirectLink>
+                </li>
+              </>
             )}
           </NavList>
         </Nav>
