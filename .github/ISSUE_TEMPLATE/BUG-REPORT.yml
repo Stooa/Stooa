@@ -17,7 +17,7 @@ body:
       validations:
           required: true
     - type: textarea
-      id: what-happened
+      id: solution
       attributes:
           label: Definition of the solution
           description: What did you expect to see instead?
