@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Modal from '@/ui/Modal';
 import { ButtonApp, ButtonLinkApp } from '@/ui/Button';
 import Cross from '@/ui/svg/cross.svg';
+import Trans from 'next-translate/Trans';
 
 interface Props {
   closeModal: () => void;
@@ -30,7 +31,9 @@ const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, dis
           <Cross />
         </button>
         <h2 className="app-lg">{t('introduceModal.title')}</h2>
-        <p className="description">{t('introduceModal.description')}</p>
+        <p className="description">
+          <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} />
+        </p>
         <div className="modal-footer">
           <ButtonApp onClick={startIntroduction} disabled={disabled}>
             {t('introduceModal.button')}
