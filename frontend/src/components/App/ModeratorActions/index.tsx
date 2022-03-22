@@ -150,7 +150,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         {!running &&
           (!introduction && data.hasIntroduction ? (
             <ButtonAppSmall className="app-sm button" onClick={toggleIntroductionModal}>
-              <span className="text">{t('startFishbowl')}</span>
+              <span className="text">{t('startIntroduction')}</span>
             </ButtonAppSmall>
           ) : (
             <ButtonAppSmall className="app-sm button" onClick={startFishbowl} disabled={loading}>

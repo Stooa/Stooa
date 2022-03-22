@@ -136,7 +136,7 @@ const linkStyles = css`
 const coloredLinkStyles = css`
   cursor: pointer;
   color: ${COLOR_PURPLE_500};
-  font-weight: bold;
+  font-weight: 500;
 `;
 
 const ButtonLink = styled.button`
