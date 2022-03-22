@@ -142,7 +142,7 @@ const Slider = styled.div`
     width: ${space(5.75)};
 
     &.slick-disabled {
-       display: none !important;
+      display: none !important;
     }
 
     &::before {

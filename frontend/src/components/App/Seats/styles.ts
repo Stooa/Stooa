@@ -16,7 +16,8 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_YELLOW_500
+  COLOR_YELLOW_500,
+  COLOR_NEUTRO_300
 } from '@/ui/settings';
 import { APP_SM } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
@@ -55,14 +56,21 @@ const Free = styled.div`
   color: ${COLOR_NEUTRO_600};
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
+  padding: 0 ${space(2)};
   pointer-events: none;
+  transform: translate(-50%, -50%);
+  width: 100%;
   text-align: center;
+  z-index: 0;
 
   svg {
     display: block;
     margin: 0 auto;
+    transform: scale(0.75) translateY(0.5rem);
+
+    ${media.min('tablet')`
+      transform: scale(1) translateY(0);
+    `}
 
     path {
       fill: currentColor;
@@ -71,6 +79,7 @@ const Free = styled.div`
 
   .text {
     display: block;
+    font-weight: 400;
     margin: ${space()} 0 0;
   }
 `;
@@ -82,6 +91,19 @@ const Seat = styled.div`
   overflow: hidden;
   position: relative;
   grid-column-end: span 2;
+  transition: background 0.35s ease-in-out;
+  will-change: background;
+
+  .seat-wrapper {
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  &.not-started {
+    background: ${COLOR_NEUTRO_300};
+    .seat-wrapper {
+      opacity: 0.3;
+    }
+  }
 
   &:last-child {
     grid-column-start: 2;
