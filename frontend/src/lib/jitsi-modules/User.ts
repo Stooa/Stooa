@@ -15,7 +15,7 @@ const userRepository = (): UserRepository => {
   let users: User[] = [];
 
   const clearUser = (): void => {
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
   };
 
   const setUser = (value: User): void => {
@@ -25,12 +25,12 @@ const userRepository = (): UserRepository => {
       ...value
     };
 
-    sessionStorage.setItem('user', JSON.stringify(updatedUser));
+    localStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
   const getUser = (): User => {
-    if (typeof sessionStorage === 'undefined') return {};
-    const user = sessionStorage.getItem('user');
+    if (typeof localStorage === 'undefined') return {};
+    const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : {};
   };
 
