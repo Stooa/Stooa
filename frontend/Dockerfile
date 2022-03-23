@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM node:17.4 as base
+FROM node:17.8 as base
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
