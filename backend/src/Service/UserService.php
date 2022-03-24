@@ -14,50 +14,22 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\User;
-use App\Model\Payload\JWTPayload;
-use App\Model\Payload\UserPayload;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
-final class JWTService
+class UserService
 {
     private RequestStack $requestStack;
     private FishbowlService $fishbowlService;
-    private bool $isJAAS;
 
-    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService, bool $isJAAS)
+    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
     {
         $this->requestStack = $requestStack;
         $this->fishbowlService = $fishbowlService;
-        $this->isJAAS = $isJAAS;
     }
 
-    public function addPayloadToEvent(JWTCreatedEvent $event): void
-    {
-        /** @var User */
-        $user = $event->getUser();
-
-        $payload = $event->getData();
-
-        $jwtPayload = new JWTPayload();
-        $jwtPayload->setIss('api_client');
-        $jwtPayload->setAud('api_client');
-        $jwtPayload->setSub('meet.jitsi');
-        $jwtPayload->setRoom($this->buildRoomPermission($user));
-
-        $userPayload = new UserPayload();
-        $userPayload->setName($user->getFullName());
-        $userPayload->setEmail($user->getEmail());
-        $userPayload->setTwitter($user->getPublicTwitterProfile());
-        $userPayload->setLinkedin($user->getPublicLinkedinProfile());
-        $jwtPayload->setUser($userPayload);
-
-        $event->setData(array_merge($jwtPayload->toArray(), $payload));
-    }
-
-    private function buildRoomPermission(UserInterface $user): string
+    public function buildRoomPermissionByUser(UserInterface $user): string
     {
         $slug = $this->getRoomFromRequest($user);
 

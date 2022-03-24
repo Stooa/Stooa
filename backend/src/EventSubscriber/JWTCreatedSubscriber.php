@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Service\JWTService;
+use App\TokenGenerator\TokenGeneratorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class JWTCreatedSubscriber implements EventSubscriberInterface
 {
-    private JWTService $JWTService;
+    private TokenGeneratorInterface $tokenGenerator;
 
-    public function __construct(JWTService $JWTService)
+    public function __construct(TokenGeneratorInterface $tokenGenerator)
     {
-        $this->JWTService = $JWTService;
+        $this->tokenGenerator = $tokenGenerator;
     }
 
     /** @return array<string, string> */
@@ -37,6 +37,6 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
 
     public function onJWTCreated(JWTCreatedEvent $event): void
     {
-        $this->JWTService->addPayloadToEvent($event);
+        $this->tokenGenerator->generate($event);
     }
 }
