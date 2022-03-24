@@ -50,6 +50,10 @@ services:
     App\DataPersister\FishbowlDataPersister:
         decorates: api_platform.doctrine.orm.data_persister
 
+    App\Service\JWTService:
+        bind:
+            $isJAAS: '%env(JAAS_ACTIVATED)%'
+
     App\Service\MailerService:
         bind:
             $from: '%env(MAILER_FROM)%'

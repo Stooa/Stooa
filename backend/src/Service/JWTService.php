@@ -25,11 +25,13 @@ final class JWTService
 {
     private RequestStack $requestStack;
     private FishbowlService $fishbowlService;
+    private bool $isJAAS;
 
-    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
+    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService, bool $isJAAS)
     {
         $this->requestStack = $requestStack;
         $this->fishbowlService = $fishbowlService;
+        $this->isJAAS = $isJAAS;
     }
 
     public function addPayloadToEvent(JWTCreatedEvent $event): void
@@ -44,8 +46,6 @@ final class JWTService
         $jwtPayload->setAud('api_client');
         $jwtPayload->setSub('meet.jitsi');
         $jwtPayload->setRoom($this->buildRoomPermission($user));
-
-        Assert::isInstanceOf($user, User::class);
 
         $userPayload = new UserPayload();
         $userPayload->setName($user->getFullName());
