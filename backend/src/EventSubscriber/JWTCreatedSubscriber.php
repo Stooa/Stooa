@@ -15,6 +15,7 @@ namespace App\EventSubscriber;
 
 use App\Entity\User;
 use App\Service\FishbowlService;
+use App\Service\JWTService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -22,13 +23,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class JWTCreatedSubscriber implements EventSubscriberInterface
 {
-    private RequestStack $requestStack;
-    private FishbowlService $fishbowlService;
+    private JWTService $JWTService;
 
-    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
+    public function __construct(JWTService $JWTService)
     {
-        $this->requestStack = $requestStack;
-        $this->fishbowlService = $fishbowlService;
+        $this->JWTService = $JWTService;
     }
 
     /** @return array<string, string> */
@@ -45,55 +44,9 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
         $user = $event->getUser();
 
         $payload = $event->getData();
-        $payload['iss'] = 'api_client';
-        $payload['aud'] = 'api_client';
-        $payload['sub'] = 'meet.jitsi';
-        $payload['room'] = $this->buildRoomPermission($user);
-        $payload['context'] = [
-            'user' => [
-                'name' => $user->getFullName(),
-                'email' => $user->getEmail(),
-                'twitter' => $user->getPublicTwitterProfile(),
-                'linkedin' => $user->getPublicLinkedinProfile(),
-            ],
-        ];
+
+        $this->JWTService->foo($payload, $user);
 
         $event->setData($payload);
-    }
-
-    private function buildRoomPermission(User $user): string
-    {
-        $slug = $this->getRoomFromRequest($user);
-
-        if (null !== $slug) {
-            return $slug;
-        }
-
-        $currentFishbowl = $user->getCurrentFishbowl();
-
-        if (null !== $currentFishbowl) {
-            return (string) $currentFishbowl->getSlug();
-        }
-
-        return '';
-    }
-
-    /**
-     * When a host has multiple fishbowls created we want to specify the room name via endpoint everytime we want to
-     * refresh the token.
-     */
-    private function getRoomFromRequest(User $user): ?string
-    {
-        $currentRequest = $this->requestStack->getCurrentRequest();
-
-        if (null !== $currentRequest) {
-            $slug = $currentRequest->request->get('room');
-
-            if (null !== $slug && \is_string($slug) && $this->fishbowlService->canFishbowlStart($slug, $user)) {
-                return $slug;
-            }
-        }
-
-        return null;
     }
 }
