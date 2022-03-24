@@ -19,7 +19,7 @@ use App\Model\Payload\UserPayload;
 use App\Service\UserService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
-final class SelfHostedTokenGenerator
+final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
     private UserService $userService;
 

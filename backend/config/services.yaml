@@ -16,6 +16,8 @@ services:
         autowire: true
         autoconfigure: true
 
+    App\TokenGenerator\TokenGeneratorInterface: '@App\TokenGenerator\SelfHostedTokenGenerator'
+
     # Vendors
     Gedmo\Timestampable\TimestampableListener:
         tags: [doctrine.event_subscriber]
