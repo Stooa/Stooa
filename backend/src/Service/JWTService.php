@@ -1,10 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Service;
 
 use App\Entity\User;
+use App\Model\Payload\JWTPayload;
+use App\Model\Payload\UserPayload;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 final class JWTService
 {
@@ -17,31 +32,40 @@ final class JWTService
         $this->fishbowlService = $fishbowlService;
     }
 
-    public function foo(array $payload, UserInterface $user): array
+    public function addPayloadToEvent(JWTCreatedEvent $event): void
     {
-        $payload['iss'] = 'api_client';
-        $payload['aud'] = 'api_client';
-        $payload['sub'] = 'meet.jitsi';
-        $payload['room'] = $this->buildRoomPermission($user);
-        $payload['context'] = [
-            'user' => [
-                'name' => $user->getFullName(),
-                'email' => $user->getEmail(),
-                'twitter' => $user->getPublicTwitterProfile(),
-                'linkedin' => $user->getPublicLinkedinProfile(),
-            ],
-        ];
+        /** @var User */
+        $user = $event->getUser();
 
-        return $payload;
+        $payload = $event->getData();
+
+        $jwtPayload = new JWTPayload();
+        $jwtPayload->setIss('api_client');
+        $jwtPayload->setAud('api_client');
+        $jwtPayload->setSub('meet.jitsi');
+        $jwtPayload->setRoom($this->buildRoomPermission($user));
+
+        Assert::isInstanceOf($user, User::class);
+
+        $userPayload = new UserPayload();
+        $userPayload->setName($user->getFullName());
+        $userPayload->setEmail($user->getEmail());
+        $userPayload->setTwitter($user->getPublicTwitterProfile());
+        $userPayload->setLinkedin($user->getPublicLinkedinProfile());
+        $jwtPayload->setUser($userPayload);
+
+        $event->setData(array_merge($jwtPayload->toArray(), $payload));
     }
 
-    private function buildRoomPermission(User $user): string
+    private function buildRoomPermission(UserInterface $user): string
     {
         $slug = $this->getRoomFromRequest($user);
 
         if (null !== $slug) {
             return $slug;
         }
+
+        Assert::isInstanceOf($user, User::class);
 
         $currentFishbowl = $user->getCurrentFishbowl();
 
