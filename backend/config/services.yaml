@@ -60,6 +60,7 @@ services:
     App\TokenGenerator\JaasTokenGenerator:
         bind:
             $appId: '%env(JAAS_APP_ID)%'
+            $apiKey: '%env(JAAS_API_KEY)%'
 
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
