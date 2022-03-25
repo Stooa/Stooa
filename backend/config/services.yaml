@@ -16,7 +16,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    App\TokenGenerator\TokenGeneratorInterface: '@App\TokenGenerator\SelfHostedTokenGenerator'
+#    App\TokenGenerator\TokenGeneratorInterface: '@App\TokenGenerator\SelfHostedTokenGenerator'
 
     # Vendors
     Gedmo\Timestampable\TimestampableListener:
