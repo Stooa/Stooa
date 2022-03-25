@@ -19,6 +19,23 @@ final class UserPayload implements PayloadInterface
     private ?string $email;
     private ?string $twitter;
     private ?string $linkedin;
+    private ?string $id;
+    private bool $moderator;
+
+    public function __construct()
+    {
+        $this->moderator = false;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    public function setId(?string $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getName(): ?string
     {
@@ -60,7 +77,17 @@ final class UserPayload implements PayloadInterface
         $this->linkedin = $linkedin;
     }
 
-    /** @return array<string, string|null> */
+    public function isModerator(): bool
+    {
+        return $this->moderator;
+    }
+
+    public function setModerator(bool $moderator): void
+    {
+        $this->moderator = $moderator;
+    }
+
+    /** @return array<string, string|bool|null> */
     public function toArray(): array
     {
         return [
@@ -68,6 +95,8 @@ final class UserPayload implements PayloadInterface
             'email' => $this->getEmail(),
             'twitter' => $this->getTwitter(),
             'linkedin' => $this->getLinkedin(),
+            'moderator' => $this->isModerator(),
+            'avatar' => '',
         ];
     }
 }

@@ -14,18 +14,21 @@ declare(strict_types=1);
 namespace App\TokenGenerator;
 
 use App\Entity\User;
+use App\Model\Payload\FeaturesPayload;
+use App\Model\Payload\HeaderPayload;
 use App\Model\Payload\JWTPayload;
 use App\Model\Payload\UserPayload;
-use App\Service\UserService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
-    private UserService $userService;
+    private string $appId;
+    private string $apiKey;
 
-    public function __construct(UserService $userService)
+    public function __construct(string $appId, string $apiKey)
     {
-        $this->userService = $userService;
+        $this->appId = $appId;
+        $this->apiKey = $apiKey;
     }
 
     public function generate(JWTCreatedEvent $event): void
@@ -36,18 +39,35 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         $payload = $event->getData();
 
         $jwtPayload = new JWTPayload();
-        $jwtPayload->setIss('api_client');
-        $jwtPayload->setAud('api_client');
-        $jwtPayload->setSub('meet.jitsi');
-        $jwtPayload->setRoom($this->userService->buildRoomPermissionByUser($user));
+        $jwtPayload->setIss('chat');
+        $jwtPayload->setAud('jitsi');
+        $jwtPayload->setSub($this->appId);
+        $jwtPayload->setRoom('*');
 
         $userPayload = new UserPayload();
         $userPayload->setName($user->getFullName());
         $userPayload->setEmail($user->getEmail());
         $userPayload->setTwitter($user->getPublicTwitterProfile());
         $userPayload->setLinkedin($user->getPublicLinkedinProfile());
+
+        $featurePayload = new FeaturesPayload();
+        $featurePayload->setLivestreaming(false);
+        $featurePayload->setOutboundCall(false);
+        $featurePayload->setRecording(false);
+        $featurePayload->setTranscription(false);
+
         $jwtPayload->setUser($userPayload);
+        $jwtPayload->setFeatures($featurePayload);
 
         $event->setData(array_merge($jwtPayload->toArray(), $payload));
+
+        $header = $event->getHeader();
+
+        $headerPayload = new HeaderPayload();
+        $headerPayload->setAlg('RS256');
+        $headerPayload->setKid($this->apiKey);
+        $headerPayload->setTyp('JWT');
+
+        $event->setHeader($header);
     }
 }

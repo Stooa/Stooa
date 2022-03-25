@@ -19,7 +19,8 @@ final class JWTPayload implements PayloadInterface
     private ?string $aud;
     private ?string $sub;
     private ?string $room;
-    private UserPayload $user;
+    private ?UserPayload $user;
+    private ?FeaturesPayload $features;
 
     public function getIss(): ?string
     {
@@ -61,7 +62,7 @@ final class JWTPayload implements PayloadInterface
         $this->room = $room;
     }
 
-    public function getUser(): UserPayload
+    public function getUser(): ?UserPayload
     {
         return $this->user;
     }
@@ -71,7 +72,17 @@ final class JWTPayload implements PayloadInterface
         $this->user = $user;
     }
 
-    /** @return array<string, array<string, array<string, mixed>>|string|null> */
+    public function getFeatures(): ?FeaturesPayload
+    {
+        return $this->features;
+    }
+
+    public function setFeatures(?FeaturesPayload $features): void
+    {
+        $this->features = $features;
+    }
+
+    /** @return array<string, array<string, string|array<string, mixed>>|string|null> */
     public function toArray(): array
     {
         return [
@@ -80,7 +91,8 @@ final class JWTPayload implements PayloadInterface
             'sub' => $this->getSub(),
             'room' => $this->getRoom(),
             'context' => [
-                'user' => $this->getUser()->toArray(),
+                'user' => $this->getUser() ? $this->getUser()->toArray() : '',
+                'features' => $this->getFeatures() ? $this->getFeatures()->toArray() : '',
             ],
         ];
     }

@@ -45,6 +45,15 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         return \dirname(__DIR__);
     }
 
+    public function process(ContainerBuilder $container): void
+    {
+        $isJaasActive = $container->resolveEnvPlaceholders('%env(JAAS_ACTIVE)%', true);
+
+        $tokenGeneratorClass = 'true' === $isJaasActive ? JaasTokenGenerator::class : SelfHostedTokenGenerator::class;
+
+        $container->setAlias(TokenGeneratorInterface::class, $tokenGeneratorClass);
+    }
+
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $configDir = $this->getProjectDir() . '/config';
@@ -63,14 +72,5 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         $routes->import($configDir . '/routes.yaml', '/');
         $routes->import($configDir . '/{routes}/*.yaml', '/', 'glob');
         $routes->import($configDir . '/{routes}/' . $this->getEnvironment() . '/**/*.yaml', '/', 'glob');
-    }
-
-    public function process(ContainerBuilder $container): void
-    {
-        $isJaasActive = $container->resolveEnvPlaceholders('%env(JAAS_ACTIVE)%', true);
-
-        $tokenGeneratorClass = 'true' === $isJaasActive ? JaasTokenGenerator::class : SelfHostedTokenGenerator::class;
-
-        $container->setAlias(TokenGeneratorInterface::class,$tokenGeneratorClass);
     }
 }
