@@ -47,6 +47,7 @@ const userRepository = (): UserRepository => {
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
   const setUserAudioMuted = (audioMuted: boolean): void => setUser({ audioMuted });
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
+  const setUserNickname = (nickname: string): void => setUser({ nickname });
 
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
@@ -78,7 +79,8 @@ const userRepository = (): UserRepository => {
     setUserAudioMuted,
     setUserAudioOutput,
     setUserVideoInput,
-    setUserVideoMuted
+    setUserVideoMuted,
+    setUserNickname
   };
 };
 
