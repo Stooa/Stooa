@@ -91,7 +91,7 @@ const FishbowlList = () => {
   const handleUpdateFishbowl = updatedFishbowl => {
     setFishbowls(currentFishbowls => {
       return currentFishbowls.map(fishbowl => {
-        if (fishbowl.slug !== updatedFishbowl.slug) {
+        if (fishbowl.id !== updatedFishbowl.id) {
           return fishbowl;
         } else {
           return { ...fishbowl, ...updatedFishbowl };
@@ -201,7 +201,7 @@ const FishbowlList = () => {
                     onClick={fishbowl => handleClick(fishbowl)}
                     key={index}
                     fishbowl={fishbowl}
-                    selected={fishbowl.slug === selectedFishbowl?.slug}
+                    selected={fishbowl.id === selectedFishbowl?.id}
                   />
                 ))}
               </FishbowlScrollList>
