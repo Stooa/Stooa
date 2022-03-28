@@ -22,9 +22,14 @@ final class UserPayload implements PayloadInterface
     private ?string $id;
     private bool $moderator;
 
-    public function __construct()
+    public function __construct(?string $name, ?string $email, ?string $twitter, ?string $linkedin, bool $moderator)
     {
-        $this->moderator = false;
+        $this->name = $name;
+        $this->email = $email;
+        $this->twitter = $twitter;
+        $this->linkedin = $linkedin;
+        $this->moderator = $moderator;
+        $this->id = '';
     }
 
     public function getId(): ?string
@@ -32,19 +37,9 @@ final class UserPayload implements PayloadInterface
         return $this->id;
     }
 
-    public function setId(?string $id): void
-    {
-        $this->id = $id;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function setName(?string $name): void
-    {
-        $this->name = $name;
     }
 
     public function getEmail(): ?string
@@ -52,19 +47,9 @@ final class UserPayload implements PayloadInterface
         return $this->email;
     }
 
-    public function setEmail(?string $email): void
-    {
-        $this->email = $email;
-    }
-
     public function getTwitter(): ?string
     {
         return $this->twitter;
-    }
-
-    public function setTwitter(?string $twitter): void
-    {
-        $this->twitter = $twitter;
     }
 
     public function getLinkedin(): ?string
@@ -72,19 +57,9 @@ final class UserPayload implements PayloadInterface
         return $this->linkedin;
     }
 
-    public function setLinkedin(?string $linkedin): void
-    {
-        $this->linkedin = $linkedin;
-    }
-
     public function isModerator(): bool
     {
         return $this->moderator;
-    }
-
-    public function setModerator(bool $moderator): void
-    {
-        $this->moderator = $moderator;
     }
 
     /** @return array<string, string|bool|null> */
@@ -97,6 +72,7 @@ final class UserPayload implements PayloadInterface
             'linkedin' => $this->getLinkedin(),
             'moderator' => $this->isModerator(),
             'avatar' => '',
+            'id' => $this->getId(),
         ];
     }
 }

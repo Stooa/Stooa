@@ -19,14 +19,16 @@ final class HeaderPayload implements PayloadInterface
     private ?string $typ;
     private ?string $kid;
 
+    public function __construct(?string $apiKey)
+    {
+        $this->kid = $apiKey;
+        $this->alg = 'xxxxxx';
+        $this->typ = 'JWT';
+    }
+
     public function getAlg(): ?string
     {
         return $this->alg;
-    }
-
-    public function setAlg(?string $alg): void
-    {
-        $this->alg = $alg;
     }
 
     public function getTyp(): ?string
@@ -34,19 +36,9 @@ final class HeaderPayload implements PayloadInterface
         return $this->typ;
     }
 
-    public function setTyp(?string $typ): void
-    {
-        $this->typ = $typ;
-    }
-
     public function getKid(): ?string
     {
         return $this->kid;
-    }
-
-    public function setKid(?string $kid): void
-    {
-        $this->kid = $kid;
     }
 
     /** @return array<string, string|null> */

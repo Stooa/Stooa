@@ -13,23 +13,26 @@ declare(strict_types=1);
 
 namespace App\Model\Payload;
 
-final class JWTPayload implements PayloadInterface
+class JWTPayload implements PayloadInterface
 {
-    private ?string $iss;
-    private ?string $aud;
-    private ?string $sub;
-    private ?string $room;
-    private ?UserPayload $user;
-    private ?FeaturesPayload $features;
+    protected ?string $iss;
+    protected ?string $aud;
+    protected ?string $sub;
+    protected ?string $room;
+    protected ?UserPayload $user;
+
+    public function __construct(?UserPayload $user, ?string $room)
+    {
+        $this->iss = 'api_client';
+        $this->aud = 'api_client';
+        $this->sub = 'meet.jitsi';
+        $this->room = $room;
+        $this->user = $user;
+    }
 
     public function getIss(): ?string
     {
         return $this->iss;
-    }
-
-    public function setIss(?string $iss): void
-    {
-        $this->iss = $iss;
     }
 
     public function getAud(): ?string
@@ -37,19 +40,9 @@ final class JWTPayload implements PayloadInterface
         return $this->aud;
     }
 
-    public function setAud(?string $aud): void
-    {
-        $this->aud = $aud;
-    }
-
     public function getSub(): ?string
     {
         return $this->sub;
-    }
-
-    public function setSub(?string $sub): void
-    {
-        $this->sub = $sub;
     }
 
     public function getRoom(): ?string
@@ -57,29 +50,9 @@ final class JWTPayload implements PayloadInterface
         return $this->room;
     }
 
-    public function setRoom(?string $room): void
-    {
-        $this->room = $room;
-    }
-
     public function getUser(): ?UserPayload
     {
         return $this->user;
-    }
-
-    public function setUser(UserPayload $user): void
-    {
-        $this->user = $user;
-    }
-
-    public function getFeatures(): ?FeaturesPayload
-    {
-        return $this->features;
-    }
-
-    public function setFeatures(?FeaturesPayload $features): void
-    {
-        $this->features = $features;
     }
 
     /** @return array<string, array<string, string|array<string, mixed>>|string|null> */
@@ -92,7 +65,6 @@ final class JWTPayload implements PayloadInterface
             'room' => $this->getRoom(),
             'context' => [
                 'user' => $this->getUser() ? $this->getUser()->toArray() : '',
-                'features' => $this->getFeatures() ? $this->getFeatures()->toArray() : '',
             ],
         ];
     }

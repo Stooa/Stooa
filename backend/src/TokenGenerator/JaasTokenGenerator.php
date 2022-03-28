@@ -16,7 +16,7 @@ namespace App\TokenGenerator;
 use App\Entity\User;
 use App\Model\Payload\FeaturesPayload;
 use App\Model\Payload\HeaderPayload;
-use App\Model\Payload\JWTPayload;
+use App\Model\Payload\JaasJWTPayload;
 use App\Model\Payload\UserPayload;
 use App\Service\UserService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
@@ -43,33 +43,21 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
 
         $isUserHost = $this->userService->isUserHost($user);
 
-        $jwtPayload = new JWTPayload();
-        $jwtPayload->setIss('chat');
-        $jwtPayload->setAud('jitsi');
-        $jwtPayload->setSub($this->appId);
-        $jwtPayload->setRoom('*');
+        $userPayload = new UserPayload(
+            $user->getFullName(),
+            $user->getEmail(),
+            $user->getPublicTwitterProfile(),
+            $user->getPublicLinkedinProfile(),
+            $isUserHost
+        );
 
-        $userPayload = new UserPayload();
-        $userPayload->setName($user->getFullName());
-        $userPayload->setEmail($user->getEmail());
-        $userPayload->setTwitter($user->getPublicTwitterProfile());
-        $userPayload->setLinkedin($user->getPublicLinkedinProfile());
-        $userPayload->setModerator($isUserHost);
-
-        $featurePayload = new FeaturesPayload($isUserHost);
-
-        $jwtPayload->setUser($userPayload);
-        $jwtPayload->setFeatures($featurePayload);
+        $jwtPayload = new JaasJWTPayload($this->appId, $userPayload, new FeaturesPayload($isUserHost));
 
         $event->setData(array_merge($jwtPayload->toArray(), $payload));
 
         $header = $event->getHeader();
+        $headerPayload = new HeaderPayload($this->apiKey);
 
-        $headerPayload = new HeaderPayload();
-        $headerPayload->setAlg('RS256');
-        $headerPayload->setKid($this->apiKey);
-        $headerPayload->setTyp('JWT');
-
-        $event->setHeader($header);
+        $event->setHeader(array_merge($header, $headerPayload->toArray()));
     }
 }

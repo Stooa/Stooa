@@ -32,21 +32,16 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
     {
         /** @var User */
         $user = $event->getUser();
-
         $payload = $event->getData();
+        $userPayload = new UserPayload(
+            $user->getFullName(),
+            $user->getEmail(),
+            $user->getPublicTwitterProfile(),
+            $user->getPublicLinkedinProfile(),
+            false
+        );
 
-        $jwtPayload = new JWTPayload();
-        $jwtPayload->setIss('api_client');
-        $jwtPayload->setAud('api_client');
-        $jwtPayload->setSub('meet.jitsi');
-        $jwtPayload->setRoom($this->userService->buildRoomPermissionByUser($user));
-
-        $userPayload = new UserPayload();
-        $userPayload->setName($user->getFullName());
-        $userPayload->setEmail($user->getEmail());
-        $userPayload->setTwitter($user->getPublicTwitterProfile());
-        $userPayload->setLinkedin($user->getPublicLinkedinProfile());
-        $jwtPayload->setUser($userPayload);
+        $jwtPayload = new JWTPayload($userPayload, $this->userService->buildRoomPermissionByUser($user));
 
         $event->setData(array_merge($jwtPayload->toArray(), $payload));
     }
