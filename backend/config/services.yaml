@@ -10,13 +10,12 @@ parameters:
     locales: [ en, es, ca, fr, id ]
     container.dumper.inline_factories: true
     container.dumper.inline_class_loader: true
+    jaas_activated: '%env(JAAS_ACTIVE)%'
 
 services:
     _defaults:
         autowire: true
         autoconfigure: true
-
-#    App\TokenGenerator\TokenGeneratorInterface: '@App\TokenGenerator\SelfHostedTokenGenerator'
 
     # Vendors
     Gedmo\Timestampable\TimestampableListener:

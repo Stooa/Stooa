@@ -32,6 +32,7 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
     public function registerBundles(): iterable
     {
         $contents = require $this->getProjectDir() . '/config/bundles.php';
+
         /** @phpstan-var class-string<BundleInterface> $class */
         foreach ($contents as $class => $envs) {
             if ($envs[$this->environment] ?? $envs['all'] ?? false) {
@@ -47,9 +48,13 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        $isJaasActive = $container->resolveEnvPlaceholders('%env(JAAS_ACTIVE)%', true);
+        $isJaasActive = $container->resolveEnvPlaceholders($container->getParameter('jaas_activated'),
+            true
+        );
 
-        $tokenGeneratorClass = 'true' === $isJaasActive ? JaasTokenGenerator::class : SelfHostedTokenGenerator::class;
+        $tokenGeneratorClass = 'true' === $isJaasActive
+            ? JaasTokenGenerator::class
+            : SelfHostedTokenGenerator::class;
 
         $container->setAlias(TokenGeneratorInterface::class, $tokenGeneratorClass);
     }
