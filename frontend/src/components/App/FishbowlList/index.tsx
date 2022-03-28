@@ -89,9 +89,10 @@ const FishbowlList = () => {
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
+    console.log(updatedFishbowl);
     setFishbowls(currentFishbowls => {
       return currentFishbowls.map(fishbowl => {
-        if (fishbowl.slug !== updatedFishbowl.slug) {
+        if (fishbowl.id !== updatedFishbowl.id) {
           return fishbowl;
         } else {
           return { ...fishbowl, ...updatedFishbowl };
@@ -201,7 +202,7 @@ const FishbowlList = () => {
                     onClick={fishbowl => handleClick(fishbowl)}
                     key={index}
                     fishbowl={fishbowl}
-                    selected={fishbowl.slug === selectedFishbowl?.slug}
+                    selected={fishbowl.id === selectedFishbowl?.id}
                   />
                 ))}
               </FishbowlScrollList>
@@ -268,7 +269,7 @@ const FishbowlList = () => {
                         />
                       </p>
                       <RedirectLink
-                        href={`${ROUTE_FISHBOWL}/${selectedFishbowl.slug}`}
+                        href={`${ROUTE_FISHBOWL}/${selectedFishbowl.id}`}
                         locale={selectedFishbowl.locale}
                         passHref
                       >
