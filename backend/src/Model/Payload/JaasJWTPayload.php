@@ -35,12 +35,15 @@ final class JaasJWTPayload extends JWTPayload
     /** @return array<string, array<string, string|array<string, mixed>>|string|null> */
     public function toArray(): array
     {
-        $array = [
+        return [
+            'iss' => $this->getIss(),
+            'aud' => $this->getAud(),
+            'sub' => $this->getSub(),
+            'room' => $this->getRoom(),
             'context' => [
                 'features' => $this->getFeatures() ? $this->getFeatures()->toArray() : '',
+                'user' => $this->getUser() ? $this->getUser()->toArray() : '',
             ],
         ];
-
-        return array_merge(parent::toArray(), $array);
     }
 }
