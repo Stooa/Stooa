@@ -269,7 +269,7 @@ const FishbowlList = () => {
                         />
                       </p>
                       <RedirectLink
-                        href={`${ROUTE_FISHBOWL}/${selectedFishbowl.id}`}
+                        href={`${ROUTE_FISHBOWL}/${selectedFishbowl.slug}`}
                         locale={selectedFishbowl.locale}
                         passHref
                       >
