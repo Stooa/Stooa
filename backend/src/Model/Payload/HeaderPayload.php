@@ -22,7 +22,7 @@ final class HeaderPayload implements PayloadInterface
     public function __construct(?string $apiKey)
     {
         $this->kid = $apiKey;
-        $this->alg = 'xxxxxx';
+        $this->alg = 'RS256';
         $this->typ = 'JWT';
     }
 
