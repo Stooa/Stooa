@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\User;
+use App\Repository\FishbowlRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
@@ -22,11 +23,32 @@ class UserService
 {
     private RequestStack $requestStack;
     private FishbowlService $fishbowlService;
+    private FishbowlRepository $fishbowlRepository;
 
-    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
+    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService, FishbowlRepository $fishbowlRepository)
     {
         $this->requestStack = $requestStack;
         $this->fishbowlService = $fishbowlService;
+        $this->fishbowlRepository = $fishbowlRepository;
+    }
+
+    public function isUserHost(UserInterface $user): bool
+    {
+        $slug = $this->getRoomFromRequest($user);
+
+        if (null === $slug) {
+            return false;
+        }
+
+        Assert::isInstanceOf($user, User::class);
+
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
+
+        if (null === $fishbowl) {
+            return false;
+        }
+
+        return $fishbowl->getHost() === $user;
     }
 
     public function buildRoomPermissionByUser(UserInterface $user): string

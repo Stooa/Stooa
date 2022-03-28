@@ -15,59 +15,55 @@ namespace App\Model\Payload;
 
 final class FeaturesPayload implements PayloadInterface
 {
-    private ?bool $recording;
-    private ?bool $livestreaming;
-    private ?bool $transcription;
-    private ?bool $outboundCall;
+    private bool $recording;
+    private bool $livestreaming;
+    private bool $transcription;
+    private bool $outboundCall;
+    private bool $moderator;
 
-    public function getRecording(): ?bool
+    public function __construct(bool $moderator)
+    {
+        $this->moderator = $moderator;
+
+        $this->recording = false;
+        $this->livestreaming = false;
+        $this->transcription = false;
+        $this->outboundCall = false;
+    }
+
+    public function isRecording(): bool
     {
         return $this->recording;
     }
 
-    public function setRecording(?bool $recording): void
-    {
-        $this->recording = $recording;
-    }
-
-    public function getLivestreaming(): ?bool
+    public function isLivestreaming(): bool
     {
         return $this->livestreaming;
     }
 
-    public function setLivestreaming(?bool $livestreaming): void
-    {
-        $this->livestreaming = $livestreaming;
-    }
-
-    public function getTranscription(): ?bool
+    public function isTranscription(): bool
     {
         return $this->transcription;
     }
 
-    public function setTranscription(?bool $transcription): void
-    {
-        $this->transcription = $transcription;
-    }
-
-    public function getOutboundCall(): ?bool
+    public function isOutboundCall(): bool
     {
         return $this->outboundCall;
     }
 
-    public function setOutboundCall(?bool $outboundCall): void
+    public function isModerator(): bool
     {
-        $this->outboundCall = $outboundCall;
+        return $this->moderator;
     }
 
     /** @return array<string, bool|null> */
     public function toArray(): array
     {
         return [
-            'recording' => $this->getRecording(),
-            'livestreaming' => $this->getLivestreaming(),
-            'transcription' => $this->getTranscription(),
-            'outbound-call' => $this->getOutboundCall(),
+            'recording' => $this->isRecording(),
+            'livestreaming' => $this->isLivestreaming(),
+            'transcription' => $this->isTranscription(),
+            'outbound-call' => $this->isOutboundCall(),
         ];
     }
 }

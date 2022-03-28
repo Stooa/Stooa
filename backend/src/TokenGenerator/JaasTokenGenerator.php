@@ -18,17 +18,20 @@ use App\Model\Payload\FeaturesPayload;
 use App\Model\Payload\HeaderPayload;
 use App\Model\Payload\JWTPayload;
 use App\Model\Payload\UserPayload;
+use App\Service\UserService;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
     private string $appId;
     private string $apiKey;
+    private UserService $userService;
 
-    public function __construct(string $appId, string $apiKey)
+    public function __construct(string $appId, string $apiKey, UserService $userService)
     {
         $this->appId = $appId;
         $this->apiKey = $apiKey;
+        $this->userService = $userService;
     }
 
     public function generate(JWTCreatedEvent $event): void
@@ -37,6 +40,8 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         $user = $event->getUser();
 
         $payload = $event->getData();
+
+        $isUserHost = $this->userService->isUserHost($user);
 
         $jwtPayload = new JWTPayload();
         $jwtPayload->setIss('chat');
@@ -49,12 +54,9 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         $userPayload->setEmail($user->getEmail());
         $userPayload->setTwitter($user->getPublicTwitterProfile());
         $userPayload->setLinkedin($user->getPublicLinkedinProfile());
+        $userPayload->setModerator($isUserHost);
 
-        $featurePayload = new FeaturesPayload();
-        $featurePayload->setLivestreaming(false);
-        $featurePayload->setOutboundCall(false);
-        $featurePayload->setRecording(false);
-        $featurePayload->setTranscription(false);
+        $featurePayload = new FeaturesPayload($isUserHost);
 
         $jwtPayload->setUser($userPayload);
         $jwtPayload->setFeatures($featurePayload);
