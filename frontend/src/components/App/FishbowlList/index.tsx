@@ -89,7 +89,6 @@ const FishbowlList = () => {
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
-    console.log(updatedFishbowl);
     setFishbowls(currentFishbowls => {
       return currentFishbowls.map(fishbowl => {
         if (fishbowl.id !== updatedFishbowl.id) {
