@@ -268,10 +268,6 @@ const InputStyled = styled.div`
     margin-top: ${space(0.5)};
     padding: 0 ${space(2)};
   }
-
-  &:not(:last-child) .help {
-    /* margin-bottom: ${space(2)}; */
-  }
 `;
 
 const DatePickerStyled = styled(InputStyled)`
