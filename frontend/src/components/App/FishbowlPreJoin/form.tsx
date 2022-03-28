@@ -37,8 +37,8 @@ const Form = (props: FormikProps<FormValues>) => {
 
   return (
     <FormikForm className="prejoin">
-      <Input label={t('name')} name="name" type="text" />
       <fieldset className="submit-wrapper">
+        <Input label={t('name')} name="name" type="text" />
         <Button type="submit" disabled={props.isSubmitting}>
           {t('button.enterFishbowl')}
         </Button>

@@ -80,7 +80,12 @@ const FormikForm = styled(Form)`
 
     &.submit-wrapper {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      input {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -262,10 +267,6 @@ const InputStyled = styled.div`
     font-size: ${rems(12)};
     margin-top: ${space(0.5)};
     padding: 0 ${space(2)};
-  }
-
-  &:not(:last-child) .help {
-    margin-bottom: ${space(2)};
   }
 `;
 
