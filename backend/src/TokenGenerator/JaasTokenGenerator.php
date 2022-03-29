@@ -16,9 +16,9 @@ namespace App\TokenGenerator;
 use App\Entity\User;
 use App\Model\Payload\FeaturesPayload;
 use App\Model\Payload\HeaderPayload;
-use App\Model\Payload\JaasJWTPayload;
-use App\Model\Payload\JWTPayload;
 use App\Model\Payload\UserPayload;
+use App\Model\Token\JaasJWTToken;
+use App\Model\Token\JWTToken;
 use App\Service\UserService;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
@@ -34,7 +34,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         $this->userService = $userService;
     }
 
-    public function generate(User $user): JWTPayload
+    public function generate(User $user): JWTToken
     {
         $isUserHost = $this->userService->isUserHost($user);
 
@@ -46,7 +46,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
             $isUserHost
         );
 
-        return new JaasJWTPayload(
+        return new JaasJWTToken(
             $this->appId, $userPayload,
             new FeaturesPayload($isUserHost),
             new HeaderPayload($this->apiKey)

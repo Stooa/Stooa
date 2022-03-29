@@ -11,9 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Model\Payload;
+namespace App\Model\Token;
 
-class JWTPayload implements PayloadInterface
+use App\Model\Payload\HeaderPayload;
+use App\Model\Payload\UserPayload;
+
+class JWTToken implements TokenInterface
 {
     protected ?string $iss;
     protected ?string $aud;

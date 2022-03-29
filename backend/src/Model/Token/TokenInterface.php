@@ -11,12 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\TokenGenerator;
+namespace App\Model\Token;
 
-use App\Entity\User;
-use App\Model\Token\JWTToken;
-
-interface TokenGeneratorInterface
+interface TokenInterface
 {
-    public function generate(User $user): JWTToken;
+    /** @return array<string, string|null> */
+    public function toArray(): array;
 }
