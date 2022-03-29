@@ -22,7 +22,7 @@ final class UserPayload implements PayloadInterface
     private ?string $id;
     private bool $moderator;
 
-    public function __construct(?string $name, ?string $email, ?string $twitter, ?string $linkedin, bool $moderator)
+    public function __construct(string $name, string $email, string $twitter, string $linkedin, bool $moderator)
     {
         $this->name = $name;
         $this->email = $email;

@@ -22,7 +22,7 @@ class JWTPayload implements PayloadInterface
     protected ?UserPayload $user;
     protected ?HeaderPayload  $headerPayload;
 
-    public function __construct(?UserPayload $user, ?string $room)
+    public function __construct(UserPayload $user, string $room)
     {
         $this->iss = 'api_client';
         $this->aud = 'api_client';
