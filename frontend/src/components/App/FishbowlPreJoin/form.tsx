@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { useEffect } from 'react';
+
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
@@ -34,6 +36,12 @@ const initialValues = {
 
 const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
+
+  useEffect(() => {
+    userRepository.setUser({
+      guestId: ''
+    });
+  }, []);
 
   return (
     <FormikForm className="prejoin">
@@ -70,6 +78,7 @@ const Nickname = () => {
 
   const handleOnSubmit = async values => {
     const { name = '' } = values;
+
     createGuest({
       variables: {
         input: {
