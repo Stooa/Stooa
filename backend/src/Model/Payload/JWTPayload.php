@@ -20,6 +20,7 @@ class JWTPayload implements PayloadInterface
     protected ?string $sub;
     protected ?string $room;
     protected ?UserPayload $user;
+    protected ?HeaderPayload  $headerPayload;
 
     public function __construct(?UserPayload $user, ?string $room)
     {
@@ -53,6 +54,11 @@ class JWTPayload implements PayloadInterface
     public function getUser(): ?UserPayload
     {
         return $this->user;
+    }
+
+    public function getHeaderPayload(): ?HeaderPayload
+    {
+        return $this->headerPayload;
     }
 
     /** @return array<string, array<string, string|array<string, mixed>>|string|null> */

@@ -17,7 +17,7 @@ final class JaasJWTPayload extends JWTPayload
 {
     private ?FeaturesPayload $features;
 
-    public function __construct(string $appId, ?UserPayload $userPayload, ?FeaturesPayload $featuresPayload)
+    public function __construct(string $appId, ?UserPayload $userPayload, ?FeaturesPayload $featuresPayload, ?HeaderPayload $headerPayload)
     {
         $this->iss = 'chat';
         $this->aud = 'jitsi';
@@ -25,6 +25,7 @@ final class JaasJWTPayload extends JWTPayload
         $this->room = '*';
         $this->user = $userPayload;
         $this->features = $featuresPayload;
+        $this->headerPayload = $headerPayload;
     }
 
     public function getFeatures(): ?FeaturesPayload

@@ -17,7 +17,6 @@ use App\Entity\User;
 use App\Model\Payload\JWTPayload;
 use App\Model\Payload\UserPayload;
 use App\Service\UserService;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
@@ -28,11 +27,8 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
         $this->userService = $userService;
     }
 
-    public function generate(JWTCreatedEvent $event): void
+    public function generate(User $user): JWTPayload
     {
-        /** @var User */
-        $user = $event->getUser();
-        $payload = $event->getData();
         $userPayload = new UserPayload(
             $user->getFullName(),
             $user->getEmail(),
@@ -41,8 +37,6 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
             false
         );
 
-        $jwtPayload = new JWTPayload($userPayload, $this->userService->buildRoomPermissionByUser($user));
-
-        $event->setData(array_merge($jwtPayload->toArray(), $payload));
+        return new JWTPayload($userPayload, $this->userService->buildRoomPermissionByUser($user));
     }
 }

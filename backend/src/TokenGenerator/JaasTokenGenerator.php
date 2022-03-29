@@ -17,9 +17,9 @@ use App\Entity\User;
 use App\Model\Payload\FeaturesPayload;
 use App\Model\Payload\HeaderPayload;
 use App\Model\Payload\JaasJWTPayload;
+use App\Model\Payload\JWTPayload;
 use App\Model\Payload\UserPayload;
 use App\Service\UserService;
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
@@ -34,13 +34,8 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         $this->userService = $userService;
     }
 
-    public function generate(JWTCreatedEvent $event): void
+    public function generate(User $user): JWTPayload
     {
-        /** @var User */
-        $user = $event->getUser();
-
-        $payload = $event->getData();
-
         $isUserHost = $this->userService->isUserHost($user);
 
         $userPayload = new UserPayload(
@@ -51,13 +46,10 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
             $isUserHost
         );
 
-        $jwtPayload = new JaasJWTPayload($this->appId, $userPayload, new FeaturesPayload($isUserHost));
-
-        $event->setData(array_merge($jwtPayload->toArray(), $payload));
-
-        $header = $event->getHeader();
-        $headerPayload = new HeaderPayload($this->apiKey);
-
-        $event->setHeader(array_merge($header, $headerPayload->toArray()));
+        return new JaasJWTPayload(
+            $this->appId, $userPayload,
+            new FeaturesPayload($isUserHost),
+            new HeaderPayload($this->apiKey)
+        );
     }
 }

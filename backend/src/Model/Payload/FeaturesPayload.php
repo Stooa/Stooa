@@ -24,7 +24,6 @@ final class FeaturesPayload implements PayloadInterface
     public function __construct(bool $moderator)
     {
         $this->moderator = $moderator;
-
         $this->recording = false;
         $this->livestreaming = false;
         $this->transcription = false;

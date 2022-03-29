@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\TokenGenerator;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
+use App\Entity\User;
+use App\Model\Payload\JWTPayload;
 
 interface TokenGeneratorInterface
 {
-    public function generate(JWTCreatedEvent $event): void;
+    public function generate(User $user): JWTPayload;
 }

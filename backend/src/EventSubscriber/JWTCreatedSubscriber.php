@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
+use App\Entity\User;
 use App\TokenGenerator\TokenGeneratorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
@@ -37,6 +38,19 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
 
     public function onJWTCreated(JWTCreatedEvent $event): void
     {
-        $this->tokenGenerator->generate($event);
+        /** @var User */
+        $user = $event->getUser();
+
+        $payload = $event->getData();
+
+        $jwtPayload = $this->tokenGenerator->generate($user);
+
+        $event->setData(array_merge($jwtPayload->toArray(), $payload));
+
+        if (null !== $jwtPayload->getHeaderPayload()) {
+            $header = $event->getHeader();
+
+            $event->setHeader(array_merge($header, $jwtPayload->getHeaderPayload()->toArray()));
+        }
     }
 }
