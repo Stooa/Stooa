@@ -32,6 +32,7 @@ class JWTToken implements TokenInterface
         $this->sub = 'meet.jitsi';
         $this->room = $room;
         $this->user = $user;
+        $this->headerPayload = null;
     }
 
     public function getIss(): ?string
