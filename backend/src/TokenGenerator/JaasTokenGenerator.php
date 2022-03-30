@@ -42,7 +42,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         $jwtToken = new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload, );
         $jwtToken->setNbf(new \DateTimeImmutable('-10 seconds'));
         $jwtToken->setFeatures(new FeaturesPayload(false, false, false, false, false));
-        $jwtToken->setHeaderPayload(new HeaderPayload($this->apiKey));
+        $jwtToken->setHeaderPayload(new HeaderPayload($this->apiKey, 'RS256', 'JWT'));
 
         return $jwtToken;
     }
