@@ -37,7 +37,7 @@ final class UserPayload implements PayloadInterface
         $this->avatar = null;
     }
 
-    public function getId(): ?string
+    public function getId(): ?UuidInterface
     {
         return $this->id;
     }
@@ -57,7 +57,7 @@ final class UserPayload implements PayloadInterface
         $this->avatar = $avatar;
     }
 
-    /** @return array<string, string|bool|null> */
+    /** @return array<string, string|bool|UuidInterface|null> */
     public function toArray(): array
     {
         $arrayResponse = [
