@@ -19,58 +19,26 @@ final class FeaturesPayload implements PayloadInterface
     private bool $livestreaming;
     private bool $transcription;
     private bool $outboundCall;
-    private bool $moderator;
     private bool $sipOutboundCall;
 
-    public function __construct(bool $moderator)
+    public function __construct(bool $recording, bool $livestreaming, bool $transcription, bool $outboundCall, bool $sipOutboundCall)
     {
-        $this->moderator = $moderator;
-        $this->recording = false;
-        $this->livestreaming = false;
-        $this->transcription = false;
-        $this->outboundCall = false;
-        $this->sipOutboundCall = false;
-    }
-
-    public function isRecording(): bool
-    {
-        return $this->recording;
-    }
-
-    public function isLivestreaming(): bool
-    {
-        return $this->livestreaming;
-    }
-
-    public function isTranscription(): bool
-    {
-        return $this->transcription;
-    }
-
-    public function isOutboundCall(): bool
-    {
-        return $this->outboundCall;
-    }
-
-    public function isModerator(): bool
-    {
-        return $this->moderator;
-    }
-
-    public function isSipOutboundCall(): bool
-    {
-        return $this->sipOutboundCall;
+        $this->recording = $recording;
+        $this->livestreaming = $livestreaming;
+        $this->transcription = $transcription;
+        $this->outboundCall = $outboundCall;
+        $this->sipOutboundCall = $sipOutboundCall;
     }
 
     /** @return array<string, bool|null> */
     public function toArray(): array
     {
         return [
-            'livestreaming' => $this->isLivestreaming(),
-            'outbound-call' => $this->isOutboundCall(),
-            'transcription' => $this->isTranscription(),
-            'sip-outbound-call' => $this->isSipOutboundCall(),
-            'recording' => $this->isRecording(),
+            'livestreaming' => $this->livestreaming,
+            'outbound-call' => $this->outboundCall,
+            'transcription' => $this->transcription,
+            'sip-outbound-call' => $this->sipOutboundCall,
+            'recording' => $this->recording,
         ];
     }
 }

@@ -41,26 +41,6 @@ final class JWTToken
         $this->nbf = null;
     }
 
-    public function getIss(): ?string
-    {
-        return $this->iss;
-    }
-
-    public function getAud(): ?string
-    {
-        return $this->aud;
-    }
-
-    public function getSub(): ?string
-    {
-        return $this->sub;
-    }
-
-    public function getRoom(): ?string
-    {
-        return $this->room;
-    }
-
     public function getUser(): ?UserPayload
     {
         return $this->user;
@@ -100,10 +80,10 @@ final class JWTToken
     public function toArray(): array
     {
         $arrayResponse = [
-            RegisteredClaims::ISSUER => $this->getIss(),
-            RegisteredClaims::AUDIENCE => $this->getAud(),
-            RegisteredClaims::SUBJECT => $this->getSub(),
-            'room' => $this->getRoom(),
+            RegisteredClaims::ISSUER => $this->iss,
+            RegisteredClaims::AUDIENCE => $this->aud,
+            RegisteredClaims::SUBJECT => $this->sub,
+            'room' => $this->room,
             'context' => [
                 'user' => $this->getUser() ? $this->getUser()->toArray() : '',
             ],

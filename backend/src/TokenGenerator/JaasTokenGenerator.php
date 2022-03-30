@@ -35,15 +35,13 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
 
     public function generate(User $user): JWTToken
     {
-        $isUserHost = $this->userService->isUserHost($user);
-
-        $userPayload = new UserPayload($user, $isUserHost);
+        $userPayload = new UserPayload($user, $this->userService->isUserHost($user));
         $userPayload->setAvatar('');
         $userPayload->setId($user->getId());
 
         $jwtToken = new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload, );
         $jwtToken->setNbf(new \DateTimeImmutable('-10 seconds'));
-        $jwtToken->setFeatures(new FeaturesPayload($isUserHost));
+        $jwtToken->setFeatures(new FeaturesPayload(false, false, false, false, false));
         $jwtToken->setHeaderPayload(new HeaderPayload($this->apiKey));
 
         return $jwtToken;

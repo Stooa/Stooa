@@ -47,31 +47,6 @@ final class UserPayload implements PayloadInterface
         $this->id = $id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function getTwitter(): ?string
-    {
-        return $this->twitter;
-    }
-
-    public function getLinkedin(): ?string
-    {
-        return $this->linkedin;
-    }
-
-    public function isModerator(): bool
-    {
-        return $this->moderator;
-    }
-
     public function getAvatar(): ?string
     {
         return $this->avatar;
@@ -86,11 +61,11 @@ final class UserPayload implements PayloadInterface
     public function toArray(): array
     {
         $arrayResponse = [
-            'name' => $this->getName(),
-            'email' => $this->getEmail(),
-            'twitter' => $this->getTwitter(),
-            'linkedin' => $this->getLinkedin(),
-            'moderator' => $this->isModerator(),
+            'name' => $this->name,
+            'email' => $this->email,
+            'twitter' => $this->twitter,
+            'linkedin' => $this->linkedin,
+            'moderator' => $this->moderator,
         ];
 
         if ($this->getId()) {

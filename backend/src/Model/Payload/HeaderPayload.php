@@ -15,9 +15,9 @@ namespace App\Model\Payload;
 
 final class HeaderPayload implements PayloadInterface
 {
-    private ?string $alg;
-    private ?string $typ;
-    private ?string $kid;
+    private string $alg;
+    private string $typ;
+    private string $kid;
 
     public function __construct(string $apiKey)
     {
@@ -26,28 +26,13 @@ final class HeaderPayload implements PayloadInterface
         $this->typ = 'JWT';
     }
 
-    public function getAlg(): ?string
-    {
-        return $this->alg;
-    }
-
-    public function getTyp(): ?string
-    {
-        return $this->typ;
-    }
-
-    public function getKid(): ?string
-    {
-        return $this->kid;
-    }
-
     /** @return array<string, string|null> */
     public function toArray(): array
     {
         return [
-            'alg' => $this->getAlg(),
-            'kid' => $this->getKid(),
-            'typ' => $this->getTyp(),
+            'alg' => $this->alg,
+            'kid' => $this->kid,
+            'typ' => $this->typ,
         ];
     }
 }
