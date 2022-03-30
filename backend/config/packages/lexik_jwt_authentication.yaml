@@ -6,6 +6,7 @@
 # file that was distributed with this source code.
 
 lexik_jwt_authentication:
-    secret_key: '%env(JWT_SECRET_KEY)%'
+    secret_key: '%env(resolve:JWT_SECRET_KEY)%'
+    public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
     encoder:
-        signature_algorithm: HS256
+        signature_algorithm: '%env(JWT_ALGORITHM)%'

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\TokenGenerator;
 
 use App\Entity\User;
-use App\Model\Token\JWTToken;
+use App\Model\JWTToken;
 
 interface TokenGeneratorInterface
 {

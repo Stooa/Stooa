@@ -14,11 +14,10 @@ declare(strict_types=1);
 namespace App\TokenGenerator;
 
 use App\Entity\User;
+use App\Model\JWTToken;
 use App\Model\Payload\FeaturesPayload;
 use App\Model\Payload\HeaderPayload;
 use App\Model\Payload\UserPayload;
-use App\Model\Token\JaasJWTToken;
-use App\Model\Token\JWTToken;
 use App\Service\UserService;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
@@ -38,18 +37,15 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
     {
         $isUserHost = $this->userService->isUserHost($user);
 
-        $userPayload = new UserPayload(
-            $user->getFullName(),
-            $user->getEmail(),
-            $user->getPublicTwitterProfile(),
-            $user->getPublicLinkedinProfile(),
-            $isUserHost
-        );
+        $userPayload = new UserPayload($user, $isUserHost);
+        $userPayload->setAvatar('');
+        $userPayload->setId($user->getId());
 
-        return new JaasJWTToken(
-            $this->appId, $userPayload,
-            new FeaturesPayload($isUserHost),
-            new HeaderPayload($this->apiKey)
-        );
+        $jwtToken = new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload, );
+        $jwtToken->setNbf(new \DateTimeImmutable('-10 seconds'));
+        $jwtToken->setFeatures(new FeaturesPayload($isUserHost));
+        $jwtToken->setHeaderPayload(new HeaderPayload($this->apiKey));
+
+        return $jwtToken;
     }
 }

@@ -13,28 +13,38 @@ declare(strict_types=1);
 
 namespace App\Model\Payload;
 
+use App\Entity\User;
+use Ramsey\Uuid\UuidInterface;
+
 final class UserPayload implements PayloadInterface
 {
     private ?string $name;
     private ?string $email;
     private ?string $twitter;
     private ?string $linkedin;
-    private ?string $id;
+    private ?string $avatar;
+    private ?UuidInterface $id;
     private bool $moderator;
 
-    public function __construct(?string $name, ?string $email, ?string $twitter, ?string $linkedin, bool $moderator)
+    public function __construct(User $user, bool $moderator)
     {
-        $this->name = $name;
-        $this->email = $email;
-        $this->twitter = $twitter;
-        $this->linkedin = $linkedin;
+        $this->name = $user->getFullName();
+        $this->email = $user->getEmail();
+        $this->twitter = $user->getPublicTwitterProfile();
+        $this->linkedin = $user->getPublicLinkedinProfile();
         $this->moderator = $moderator;
-        $this->id = '';
+        $this->id = null;
+        $this->avatar = null;
     }
 
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId(?UuidInterface $id): void
+    {
+        $this->id = $id;
     }
 
     public function getName(): ?string
@@ -62,17 +72,35 @@ final class UserPayload implements PayloadInterface
         return $this->moderator;
     }
 
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar;
+    }
+
     /** @return array<string, string|bool|null> */
     public function toArray(): array
     {
-        return [
+        $arrayResponse = [
             'name' => $this->getName(),
             'email' => $this->getEmail(),
             'twitter' => $this->getTwitter(),
             'linkedin' => $this->getLinkedin(),
             'moderator' => $this->isModerator(),
-            'avatar' => '',
-            'id' => $this->getId(),
         ];
+
+        if ($this->getId()) {
+            $arrayResponse['id'] = $this->getId();
+        }
+
+        if ($this->getAvatar()) {
+            $arrayResponse['avatar'] = $this->getAvatar();
+        }
+
+        return $arrayResponse;
     }
 }

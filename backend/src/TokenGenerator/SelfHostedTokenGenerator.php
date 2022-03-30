@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\TokenGenerator;
 
 use App\Entity\User;
+use App\Model\JWTToken;
 use App\Model\Payload\UserPayload;
-use App\Model\Token\JWTToken;
 use App\Service\UserService;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
@@ -29,14 +29,11 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 
     public function generate(User $user): JWTToken
     {
-        $userPayload = new UserPayload(
-            $user->getFullName(),
-            $user->getEmail(),
-            $user->getPublicTwitterProfile(),
-            $user->getPublicLinkedinProfile(),
-            false
-        );
+        $userPayload = new UserPayload($user, false);
 
-        return new JWTToken($userPayload, $this->userService->buildRoomPermissionByUser($user));
+        return new JWTToken('api_client', 'api_client', 'meet.jitsi',
+            $this->userService->buildRoomPermissionByUser($user),
+            $userPayload
+        );
     }
 }

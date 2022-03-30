@@ -20,6 +20,7 @@ final class FeaturesPayload implements PayloadInterface
     private bool $transcription;
     private bool $outboundCall;
     private bool $moderator;
+    private bool $sipOutboundCall;
 
     public function __construct(bool $moderator)
     {
@@ -28,6 +29,7 @@ final class FeaturesPayload implements PayloadInterface
         $this->livestreaming = false;
         $this->transcription = false;
         $this->outboundCall = false;
+        $this->sipOutboundCall = false;
     }
 
     public function isRecording(): bool
@@ -55,14 +57,20 @@ final class FeaturesPayload implements PayloadInterface
         return $this->moderator;
     }
 
+    public function isSipOutboundCall(): bool
+    {
+        return $this->sipOutboundCall;
+    }
+
     /** @return array<string, bool|null> */
     public function toArray(): array
     {
         return [
-            'recording' => $this->isRecording(),
             'livestreaming' => $this->isLivestreaming(),
-            'transcription' => $this->isTranscription(),
             'outbound-call' => $this->isOutboundCall(),
+            'transcription' => $this->isTranscription(),
+            'sip-outbound-call' => $this->isSipOutboundCall(),
+            'recording' => $this->isRecording(),
         ];
     }
 }
