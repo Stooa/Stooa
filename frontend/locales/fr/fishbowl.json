@@ -5,7 +5,7 @@
     "speaker": "Haut-parleur",
     "cam": "Caméra",
     "timeLeft_one": "Il reste {{time}}",
-    "nickname": {
+    "prejoin": {
         "title": "Comment les autres participants doivent-ils vous appeler ?"
     },
     "waiting": "Attendre que l'hôte démarre le fishbowl",

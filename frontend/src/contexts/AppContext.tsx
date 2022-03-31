@@ -10,6 +10,14 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 
+interface State {
+  fishbowlReady: boolean;
+  fishbowlStarted: boolean;
+  isGuest: boolean;
+  prejoin: boolean;
+  conferenceStatus: IConferenceStatus;
+}
+
 const reducer = (state, action) => {
   const allowedActions = [
     'FISHBOWL_STARTED',
@@ -31,7 +39,7 @@ const reducer = (state, action) => {
   return state;
 };
 
-const initialState = {
+const initialState: State = {
   fishbowlReady: false,
   fishbowlStarted: false,
   isGuest: false,

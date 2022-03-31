@@ -1,10 +1,12 @@
 {
     "signin": "Log in",
+    "fishbowlList": "Llistat de <i>fishbowls</i>",
     "signout": "Surt",
     "register": "Registre gratuït",
     "cancel": "Cancel·la",
-    "createEvent": "Crear un fishbowl gratuït",
     "cta": "Crear un fishbowl",
+    "scheduleFishbowl": "Agendar un fishbowl",
+    "hostFishbowlNow": "Començar un fishbowl ara",
     "editProfile": "Edita el teu perfil",
     "changePassword": "Canvia la contrasenya",
     "goHome": "Ves a la pàgina d'inici",
@@ -17,12 +19,15 @@
         "en": "Anglès",
         "es": "Castellà",
         "ca": "Català",
-        "fr": "Francès"
+        "fr": "Francès",
+        "id": "Indonesi"
     },
     "roadmap": "Roadmap",
     "documentation": "Documentació",
     "conductCode": "Codi de conducta",
     "githubIssues": "Github Issues",
     "help": "Ajuda",
-    "legal": "Legal"
+    "legal": "Legal",
+    "linkButton": "Copiar enllaç",
+    "successCopiedLink": "Enllaç copiat"
 }

@@ -13,11 +13,12 @@ import { Button } from '@/ui/Resets';
 import Texts from '@/ui/Texts';
 import Titles from '@/ui/Titles';
 import Overrides from '@/ui/Overrides';
-import { media, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 import {
   COLOR_GREEN_100,
   COLOR_GREEN_500,
   COLOR_GREEN_800,
+  COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_RED_100,
   COLOR_RED_600,
@@ -95,6 +96,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  i {
+    padding-right: 0.2rem;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -166,6 +171,10 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .hidden {
+    display: none;
+  }
+
   .hide-mobile {
     ${media.max('tablet')`
       display: none !important;
@@ -191,6 +200,15 @@ const GlobalStyle = createGlobalStyle`
     width: ${space(2)};
   }
 
+  /* CUSTOM SHADOWS */
+  :root {
+    --shadow-color: 0deg 0% 79%;
+    --shadow-elevation-medium: -0.1px 0.2px 0.3px hsl(var(--shadow-color) / 0.36),
+      -0.3px 0.6px 0.8px -0.8px hsl(var(--shadow-color) / 0.36),
+      -0.8px 1.4px 1.8px -1.7px hsl(var(--shadow-color) / 0.36),
+      -2px 3.5px 4.5px -2.5px hsl(var(--shadow-color) / 0.36);
+  }
+
   /*  CUSTOM TOASTS STYLES */
   :root {
     --toastify-toast-width: fit-content !important;
@@ -204,16 +222,40 @@ const GlobalStyle = createGlobalStyle`
 
   .toastify-custom {
 
+
+      &.Toastify__toast-container {
+        ${media.max('tablet')`
+          width: 92%;
+          left: 50%;
+          transform: translateX(-50%);
+          .Toastify__toast {border-radius: 4px;}
+        `}
+      }
+
       & .Toastify__toast {
         padding: ${space(0)} ${space(2)};
+
+        .Toastify__toast-icon {
+          display: inline !important;
+        }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--warning {
         --toastify-color-light: ${COLOR_YELLOW_100};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_NEUTRO_600};
+          opacity: 1;
+          }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--error {
         --toastify-color-light: ${COLOR_RED_100};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_NEUTRO_600};
+          opacity: 1;
+          }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--success {

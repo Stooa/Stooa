@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
@@ -22,7 +22,9 @@ import {
   ROUTE_RECOVER_PASSWORD,
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
-  ROUTE_RESET_PASSWORD
+  ROUTE_RESET_PASSWORD,
+  ROUTE_FISHBOWL_HOST_NOW,
+  ROUTE_FISHBOWL_LIST
 } from '@/app.config';
 
 import {
@@ -35,6 +37,7 @@ import {
 } from '@/lib/auth';
 
 import { Auth, StatusPayload } from '@/types/auth-context';
+import userRepository from '@/jitsi/User';
 import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';
 import Layout from '@/layouts/Clean';
@@ -42,7 +45,9 @@ import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_DETAIL,
+  ROUTE_FISHBOWL_LIST,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD
@@ -78,21 +83,6 @@ const AuthProvider = ({ children }) => {
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
 
-  useEffect(() => {
-    const loadUserFromCookies = async () => {
-      const auth = await getAuthToken();
-
-      if (auth) {
-        const user = auth.user;
-        if (user) setUser(user);
-      }
-
-      setLoading(false);
-    };
-
-    loadUserFromCookies();
-  }, []);
-
   const login = async (email: string, password: string) => {
     setLoading(true);
 
@@ -112,6 +102,7 @@ const AuthProvider = ({ children }) => {
         setToken(data.token);
         setRefreshToken(data.refresh_token);
         const route = pathname.toString();
+
         router.push(route, route, { locale: lang }).then(() => {
           setLoading(false);
         });
@@ -142,6 +133,7 @@ const AuthProvider = ({ children }) => {
     router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang }).then(() => {
       console.log('Redirected');
     });
+    userRepository.setUserNickname('');
     setUser(null);
   };
 
@@ -156,6 +148,21 @@ const AuthProvider = ({ children }) => {
   ) {
     setCreateFishbowl(false);
   }
+
+  useEffect(() => {
+    const loadUserFromCookies = async () => {
+      const auth = await getAuthToken();
+
+      if (auth) {
+        const user = auth.user;
+        if (user) setUser(user);
+      }
+
+      setLoading(false);
+    };
+
+    loadUserFromCookies();
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -189,9 +196,15 @@ const ProtectRoute = ({ children }) => {
 
   const handleRedirection = () => {
     if (!loading && protectedRoutes) {
-      const pathname = isAuthenticated
-        ? router.query.redirect || ROUTE_HOME
-        : `${ROUTE_REGISTER}?redirect=${router.pathname}`;
+      let pathname;
+
+      if (isAuthenticated) {
+        pathname = router.query.redirect || ROUTE_HOME;
+      } else {
+        pathname = `${ROUTE_REGISTER}?redirect=${router.pathname}${
+          router.query.method === 'now' ? '?method=now' : ''
+        }`;
+      }
       const route = pathname.toString();
       router.push(route, route, { locale: lang });
     }

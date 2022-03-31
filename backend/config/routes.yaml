@@ -9,4 +9,4 @@ fishbowl:
     resource: fishbowl.yaml
     prefix: /{_locale}
     requirements:
-        _locale: en|es|ca|fr
+        _locale: en|es|ca|fr|id

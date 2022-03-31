@@ -17,7 +17,7 @@ import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import { INTRODUCE_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
@@ -40,10 +40,28 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const apiInterval = useRef<number>();
   const timeUpInterval = useRef<number>();
 
+  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
+
+  const startFishbowl = () => {
+    const slug = { variables: { input: { slug: fid } } };
+    if (data.hasIntroduction) {
+      try {
+        introduceFishbowl(slug);
+      } catch (error) {
+        console.error(`[STOOA] Error introduction: ${error}`);
+      }
+    } else {
+      try {
+        runWithoutIntroFishbowl(slug);
+      } catch (error) {
+        console.error(`[STOOA] Error introduction: ${error}`);
+      }
+    }
+  };
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
@@ -51,17 +69,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
     if (!isModerator) return;
 
-    try {
-      introduceFishbowl({
-        variables: {
-          input: {
-            slug: fid
-          }
-        }
-      });
-    } catch (error) {
-      console.error(`[STOOA] Error introduction: ${error}`);
-    }
+    startFishbowl();
   });
 
   useEventListener(NOTIFICATION, ({ detail: { type, seats, message } }) => {
@@ -129,14 +137,17 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   };
 
+  const isConferenceIntroducing = (): boolean => {
+    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+  };
+
   useEffect(() => {
     if (
       !prejoin &&
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
         (!conferenceReady &&
-          (conferenceStatus === IConferenceStatus.INTRODUCTION ||
-            conferenceStatus === IConferenceStatus.RUNNING)))
+          (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       initializeConnection(fid, isModerator);
 

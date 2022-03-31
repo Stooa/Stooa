@@ -29,6 +29,10 @@ const Billboard = styled.div`
   z-index: 3;
   width: 100%;
 
+  .title-xl {
+    margin-bottom: ${space(2)};
+  }
+
   ${media.max('desktop')`
     .title-xl {
       font-size: ${rems(61)};
@@ -47,6 +51,28 @@ const Billboard = styled.div`
   ${media.min('desktopLarge')`
     min-height: 55vh;
   `}
+
+  .cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: ${space(4)};
+
+    & a:first-child {
+      margin-bottom: ${space(2)};
+    }
+
+    ${media.min('phone')`
+      align-items: center;
+    `}
+
+    ${media.min('tablet')`
+      flex-direction: row;
+      & a:first-child {
+      margin-right: ${space(3)};
+      margin-bottom: 0;
+    }
+    `}
+  }
 
   #animated-billboard-morph,
   #animated-billboard-morph2 {
@@ -96,7 +122,7 @@ const Billboard = styled.div`
 `;
 
 const Description = styled.div<{ center?: boolean }>`
-  margin: ${space(2)} 0;
+  margin-bottom: ${space(4)};
   text-align: left;
 
   a {
@@ -150,11 +176,14 @@ const Content = styled.div`
     .wave {
       bottom: -5px;
       display: block;
-      left: -2%;
       position: absolute;
-      right: 0;
-      width: 105%;
+      right: -2px;
+      width: 100%;
       z-index: -1;
+
+      &.hide-mobile {
+        width: 105%;
+      }
     }
 
     .hide-mobile {
@@ -223,6 +252,11 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
 
   .title-lg {
     color: ${({ dark }) => (dark ? `${COLOR_NEUTRO_700}` : `${COLOR_NEUTRO_600}`)};
+    margin-bottom: ${space(2)};
+  }
+
+  .title-lg.definition {
+    text-align: center;
   }
 
   ${media.min('tablet')`
@@ -296,6 +330,10 @@ const Banner = styled.div`
   padding: ${space(10)} ${space(2)};
   position: relative;
   text-align: center;
+
+  .text-lg {
+    margin-bottom: ${space(5)};
+  }
 
   #animated-banner-morph {
     height: ${rems(160)};

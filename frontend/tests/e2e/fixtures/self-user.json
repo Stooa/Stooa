@@ -1,0 +1,14 @@
+{
+    "data": {
+        "selfUser": {
+            "id": "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
+            "name": "Linwood",
+            "surnames": "Hahn",
+            "email": "host@stooa.com",
+            "allowShareData": true,
+            "linkedinProfile": "https://linkedin.com",
+            "twitterProfile": "https://twitter.com",
+            "__typename": "User"
+        }
+    }
+}

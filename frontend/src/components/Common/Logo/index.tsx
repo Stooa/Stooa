@@ -17,15 +17,15 @@ interface Props {
   className?: string;
 }
 
-const Logo = ({ href = '', ...props }: Props) => {
+const Logo = ({ href = '', className, ...props }: Props) => {
   return href ? (
     <Link href={href} passHref>
-      <LogoStyled as="a" {...props}>
+      <LogoStyled as="a" className={className} {...props}>
         {APP_NAME}
       </LogoStyled>
     </Link>
   ) : (
-    <LogoAppStyled className="logo">{APP_NAME}</LogoAppStyled>
+    <LogoAppStyled className={`logo ${className}`}>{APP_NAME}</LogoAppStyled>
   );
 };
 

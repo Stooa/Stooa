@@ -25,7 +25,9 @@
         "selectDay": "Wählen Sie ein Tag aus",
         "title": "Titel",
         "time": "Beginnt um",
-        "advancedOptions": "Erweiterte optionen"
+        "advancedOptions": "Erweiterte optionen",
+        "introductionLabel": "Ich möchte das Fishbowl mit einer Einführung beginnen.",
+        "introductionTooltip": "Wenn Sie das Fishbowl starten, <strong>können Sie zunächst eine Einführung geben</strong>. Die Kamera und das Mikrofon werden nur für Sie aktiv sein. Wenn Sie fertig sind, vergessen Sie nicht, den Teilnehmern zu erlauben, sich an der Unterhaltung zu beteiligen."
     },
     "button": {
         "login": "Anmelden",

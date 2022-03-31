@@ -14,7 +14,7 @@ server {
 server {
     listen 443 ssl http2 default_server;
 
-    client_max_body_size 0;
+    add_header Access-Control-Allow-Origin ${NGINX_CUSTOM_JITSI_CORS_URL};
 
     # Default
     location / {
@@ -66,8 +66,6 @@ server {
     server_tokens off;
     http2_push_preload on;
 
-    add_header Access-Control-Allow-Origin ${NGINX_CUSTOM_JITSI_CORS_URL};
-    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
     add_header X-Content-Type-Options nosniff always;
     add_header X-Frame-Options SAMEORIGIN always;
     add_header X-XSS-Protection "1; mode=block" always;

@@ -65,7 +65,7 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   const handleParentClick = event => {
-    if (event.target.id !== 'config-button') {
+    if (event.target.id !== 'config-button' && !event.target.className.includes('device')) {
       configButtonRef.current.handleShowDevices(false);
     }
   };
@@ -139,13 +139,13 @@ const FishbowlPreJoin: React.FC = () => {
                 unlabeled={true}
               />
               <ButtonMic joined={true} disabled={false} unlabeled={true} />
-              <ButtonConfig ref={configButtonRef} unlabeled={true} />
+              <ButtonConfig selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
             </DevicesToolbar>
           </Devices>
           <Form>
-            <h2 className="title-md">{t('fishbowl:nickname.title')}</h2>
+            <h2 className="title-md">{t('fishbowl:prejoin.title')}</h2>
             {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
-            <ButtonLink className="text-sm" onClick={handleCancel}>
+            <ButtonLink className="cancel text-sm" onClick={handleCancel}>
               {t('cancel')}
             </ButtonLink>
           </Form>

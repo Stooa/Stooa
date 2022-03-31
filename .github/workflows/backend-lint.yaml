@@ -57,3 +57,6 @@ jobs:
 
             - name: Ensure that all the .twig files are linted correctly
               run: composer lint-twig
+
+            - name: Ensure that all the Symfony container gets linted correctly
+              run: composer lint-container

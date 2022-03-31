@@ -1,29 +1,30 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/jitsi/*": ["src/lib/jitsi-modules/*"],
-      "@/graphql/*": ["src/lib/gql/*"],
-      "@/i18n": ["i18n"],
-      "@/*": ["src/*"]
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/jitsi/*": ["src/lib/jitsi-modules/*"],
+            "@/graphql/*": ["src/lib/gql/*"],
+            "@/i18n": ["i18n"],
+            "@/*": ["src/*"]
+        },
+        "skipLibCheck": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "sourceMap": true,
+        "jsx": "preserve",
+        "types": ["cypress", "@testing-library/cypress"],
+        "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"],
+        "incremental": true
     },
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "sourceMap": true,
-    "jsx": "preserve",
-    "types": ["cypress", "@testing-library/cypress"],
-    "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"]
-  },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+    "exclude": ["node_modules"],
+    "include": ["next-env.d.ts", "tests/**/*.ts", "tests/**/*.tsx","src/**/*.ts", "src/**/*.tsx"]
 }

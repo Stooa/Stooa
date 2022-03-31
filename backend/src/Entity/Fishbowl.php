@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use App\Repository\FishbowlRepository;
 use App\Resolver\FishbowlCreatorResolver;
 use App\Resolver\FishbowlFinishMutationResolver;
 use App\Resolver\FishbowlIntroduceMutationResolver;
+use App\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Resolver\FishbowlResolver;
 use App\Resolver\FishbowlRunMutationResolver;
 use App\Validator\Constraints\FutureFishbowl;
@@ -36,15 +38,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 /**
+ * @ApiFilter(DateFilter::class, properties={"finishDateTime"= DateFilter::EXCLUDE_NULL}),
  * @ApiResource(
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
  *     collectionOperations={
- *         "get"={
- *             "controller"=NotFoundAction::class,
- *             "read"=false,
- *             "output"=false,
- *         },
+ *         "get"={"security"="is_granted('ROLE_USER')"},
  *         "post"={"security"="is_granted('ROLE_USER')"}
  *     },
  *     itemOperations={
@@ -69,6 +68,13 @@ use Webmozart\Assert\Assert as MAssert;
  *          },
  *         "run"={
  *             "mutation"=FishbowlRunMutationResolver::class,
+ *             "args"={
+ *                 "slug"={"type"="String!"}
+ *             },
+ *             "validation_groups"={"Default"}
+ *          },
+ *         "noIntroRun"={
+ *             "mutation"=FishbowlNoIntroRunMutationResolver::class,
  *             "args"={
  *                 "slug"={"type"="String!"}
  *             },
@@ -103,6 +109,7 @@ class Fishbowl
 
     public const TRANSITION_INTRODUCE = 'introduce';
     public const TRANSITION_RUN = 'run';
+    public const TRANSITION_NO_INTRO_RUN = 'no_intro_run';
     public const TRANSITION_FINISH = 'finish';
 
     public const STATUS_NOT_STARTED = 'not_started';
@@ -123,6 +130,8 @@ class Fishbowl
     ];
 
     /**
+     * @Groups({"fishbowl:read"})
+     *
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -157,7 +166,7 @@ class Fishbowl
     private ?string $slug = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\DateTime
@@ -167,7 +176,7 @@ class Fishbowl
     private ?\DateTimeInterface $startDateTime = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\Length(max=255)
@@ -189,7 +198,7 @@ class Fishbowl
     private ?string $locale = null;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
      * @Assert\Time
@@ -243,13 +252,32 @@ class Fishbowl
     private ?\DateTimeInterface $finishedAt = null;
 
     /**
-     * @Groups({"fishbowl:read"})
+     * @Assert\DateTime
      *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $finishDateTime = null;
+
+    /**
      * @var Collection<int, Participant>
      *
      * @ORM\OneToMany(targetEntity="Participant", mappedBy="fishbowl", cascade={"all"})
      */
     private Collection $participants;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isFishbowlNow = false;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private bool $hasIntroduction = false;
 
     public function __construct()
     {
@@ -381,6 +409,32 @@ class Fishbowl
         return $this->getStartDateTimeTz()->add(
             new \DateInterval($this->duration->format('\P\TG\Hi\M'))
         );
+    }
+
+    public function getFinishDateTime(): ?\DateTimeInterface
+    {
+        return $this->finishDateTime;
+    }
+
+    public function setFinishDateTime(\DateTimeInterface $finishDateTime): self
+    {
+        $this->finishDateTime = $finishDateTime;
+
+        return $this;
+    }
+
+    public function calculateFinishTime(): void
+    {
+        MAssert::notNull($this->startDateTime);
+        MAssert::notNull($this->duration);
+
+        $dateTime = new \DateTimeImmutable($this->startDateTime->format('Y-m-d H:i:s'));
+
+        $dateTime = $dateTime->add(
+            new \DateInterval($this->duration->format('\P\TG\Hi\M'))
+        );
+
+        $this->setFinishDateTime($dateTime);
     }
 
     public function getDuration(): ?\DateTimeInterface
@@ -521,6 +575,30 @@ class Fishbowl
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
         }
+
+        return $this;
+    }
+
+    public function getIsFishbowlNow(): bool
+    {
+        return $this->isFishbowlNow;
+    }
+
+    public function setIsFishbowlNow(bool $isFishbowlNow): self
+    {
+        $this->isFishbowlNow = $isFishbowlNow;
+
+        return $this;
+    }
+
+    public function getHasIntroduction(): bool
+    {
+        return $this->hasIntroduction;
+    }
+
+    public function setHasIntroduction(bool $hasIntroduction): self
+    {
+        $this->hasIntroduction = $hasIntroduction;
 
         return $this;
     }
