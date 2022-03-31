@@ -25,7 +25,7 @@ final class JWTToken
     private ?string $sub;
     private ?string $room;
     private ?FeaturesPayload $features;
-    private ?\DateTimeImmutable $nbf;
+    private ?int $nbf;
     private ?UserPayload $user;
     private ?HeaderPayload  $headerPayload;
 
@@ -66,12 +66,12 @@ final class JWTToken
         $this->features = $features;
     }
 
-    public function setNbf(?\DateTimeImmutable $nbf): void
+    public function setNbf(?int $nbf): void
     {
         $this->nbf = $nbf;
     }
 
-    public function getNbf(): ?\DateTimeImmutable
+    public function getNbf(): ?int
     {
         return $this->nbf;
     }

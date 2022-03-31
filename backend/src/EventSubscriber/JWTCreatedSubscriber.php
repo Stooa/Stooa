@@ -53,4 +53,44 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
             $event->setHeader(array_merge($header, $jwtPayload->getHeaderPayload()->toArray()));
         }
     }
+
+    private function fake(JWTCreatedEvent $event): void
+    {
+        $payload = $event->getData();
+
+        $jayParsedAry = [
+            "aud" => "jitsi",
+//            "exp" => 1648725228,
+            "nbf" => new \DateTimeImmutable('- 1 day'),
+            "iss" => "chat",
+            "room" => "*",
+            "sub" => "vpaas-magic-cookie-a9a8c47f6b204bdeb1cf7a8114598b6e",
+            "context" => [
+                "features" => [
+                    "livestreaming" => true,
+                    "outbound-call" => true,
+                    "sip-outbound-call" => false,
+                    "transcription" => true,
+                    "recording" => true
+                ],
+                "user" => [
+                    "moderator" => true,
+                    "name" => "aitor",
+                    "id" => "google-oauth2|113294531651258150396",
+                    "avatar" => "",
+                    "email" => "aitor@runroom.com"
+                ]
+            ]
+        ];
+        $event->setData(array_merge($jayParsedAry, $payload));
+
+        $header = $event->getHeader();
+
+        $customHeader = [
+            'kid' => 'vpaas-magic-cookie-a9a8c47f6b204bdeb1cf7a8114598b6e/961b36-SAMPLE_APP',
+            'typ' => 'JWT',
+            'alg' => 'RS256',
+        ];
+        $event->setHeader(array_merge($header, $customHeader));
+    }
 }

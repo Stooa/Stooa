@@ -10,3 +10,4 @@ lexik_jwt_authentication:
     public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
     encoder:
         signature_algorithm: '%env(JWT_ALGORITHM)%'
+        service: App\JWT\Encoder\JoseEncoder

@@ -72,7 +72,7 @@ final class UserPayload implements PayloadInterface
             $arrayResponse['id'] = $this->getId();
         }
 
-        if ($this->getAvatar()) {
+        if (null !== $this->getAvatar()) {
             $arrayResponse['avatar'] = $this->getAvatar();
         }
 
