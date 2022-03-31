@@ -63,7 +63,7 @@
     "@runroom/npm-scripts": "1.2.8",
     "@svgr/webpack": "6.2.1",
     "@testing-library/cypress": "8.0.2",
-    "@testing-library/jest-dom": "5.16.2",
+    "@testing-library/jest-dom": "5.16.3",
     "@testing-library/react": "12.1.2",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.4.0",
