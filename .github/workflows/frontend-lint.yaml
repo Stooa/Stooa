@@ -45,7 +45,7 @@ jobs:
                   working-directory: frontend
 
             - name: Run ESLint to ensure Javascript coding standards
-              run: npx eslint src tests
+              run: npx eslint src tests --resolve-plugins-relative-to
 
             - name: Run Prettier to ensure Javascript styling
               run: npx prettier --check src tests
