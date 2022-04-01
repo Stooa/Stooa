@@ -35,9 +35,9 @@ final class JWTToken
         string $sub,
         string $room,
         UserPayload $user,
-        ?\DateTimeImmutable $nbf,
-        ?HeaderPayload $headerPayload,
-        ?FeaturesPayload $featuresPayload
+        ?\DateTimeImmutable $nbf = null,
+        ?HeaderPayload $headerPayload = null,
+        ?FeaturesPayload $featuresPayload = null
     ) {
         $this->iss = $iss;
         $this->aud = $aud;

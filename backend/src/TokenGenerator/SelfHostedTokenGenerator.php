@@ -33,10 +33,7 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 
         return new JWTToken('api_client', 'api_client', 'meet.jitsi',
             $this->userService->buildRoomPermissionByUser($user),
-            $userPayload,
-            null,
-            null,
-            null
+            $userPayload
         );
     }
 }
