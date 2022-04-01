@@ -19,7 +19,7 @@ final class JoseJWSProvider implements JWSProviderInterface
 
     public function __construct(KeyLoaderInterface $keyLoader, string $cryptoEngine, string $signatureAlgorithm, int $ttl, int $clockSkew)
     {
-        $cryptoEngine = 'OpenSSL' === $cryptoEngine ? 'OpenSSL' : 'SecLib';
+        $cryptoEngine = 'openssl' === $cryptoEngine ? 'OpenSSL' : 'SecLib';
 
         if (!$this->isAlgorithmSupportedForEngine($cryptoEngine, $signatureAlgorithm)) {
             throw new \InvalidArgumentException(sprintf('The algorithm "%s" is not supported for %s', $signatureAlgorithm, $cryptoEngine));
@@ -45,7 +45,7 @@ final class JoseJWSProvider implements JWSProviderInterface
         }
 
         $jws->setPayload($payload + $claims);
-
+        
         $jws->sign(
             $this->keyLoader->loadKey('private'),
             $this->keyLoader->getPassphrase()
