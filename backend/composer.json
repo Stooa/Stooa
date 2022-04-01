@@ -3,6 +3,12 @@
     "description": "Stooa Project",
     "license": "MPL-2.0",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/aerrasti/LexikJWTAuthenticationBundle"
+        }
+    ],
     "require": {
         "php": "^7.4",
         "api-platform/core": "2.6.8",
@@ -13,7 +19,7 @@
         "gedmo/doctrine-extensions": "3.5.0",
         "gesdinet/jwt-refresh-token-bundle": "1.0.1",
         "hashids/hashids": "4.1.0",
-        "lexik/jwt-authentication-bundle": "2.14.4",
+        "lexik/jwt-authentication-bundle": "dev-hotfix/unify-audience as 2.14.4",
         "nelmio/cors-bundle": "2.2.0",
         "ramsey/uuid": "4.2.3",
         "ramsey/uuid-doctrine": "1.8.1",

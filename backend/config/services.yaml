@@ -64,19 +64,6 @@ services:
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\JWT\JWSProvider\JoseJWSProvider:
-        arguments:
-            $keyLoader: '@lexik_jwt_authentication.key_loader'
-        bind:
-            $cryptoEngine: '%lexik_jwt_authentication.encoder.crypto_engine%'
-            $signatureAlgorithm: '%lexik_jwt_authentication.encoder.signature_algorithm%'
-            $ttl: '%lexik_jwt_authentication.token_ttl%'
-            $clockSkew: '%lexik_jwt_authentication.clock_skew%'
-
-    App\JWT\Encoder\JoseEncoder:
-        arguments:
-            $jwsProvider: '@App\JWT\JWSProvider\JoseJWSProvider'
-
     # Admin
     App\Admin\UserAdmin:
         arguments: [null, App\Entity\User, null]

@@ -26,56 +26,28 @@ final class UserPayload implements PayloadInterface
     private ?UuidInterface $id;
     private bool $moderator;
 
-    public function __construct(User $user, bool $moderator)
+    public function __construct(User $user, bool $moderator, ?UuidInterface $id, ?string $avatar)
     {
         $this->name = $user->getFullName();
         $this->email = $user->getEmail();
         $this->twitter = $user->getPublicTwitterProfile();
         $this->linkedin = $user->getPublicLinkedinProfile();
         $this->moderator = $moderator;
-        $this->id = null;
-        $this->avatar = null;
-    }
-
-    public function getId(): ?UuidInterface
-    {
-        return $this->id;
-    }
-
-    public function setId(?UuidInterface $id): void
-    {
         $this->id = $id;
-    }
-
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): void
-    {
         $this->avatar = $avatar;
     }
 
     /** @return array<string, string|bool|UuidInterface|null> */
     public function toArray(): array
     {
-        $arrayResponse = [
+        return [
             'name' => $this->name,
             'email' => $this->email,
             'twitter' => $this->twitter,
             'linkedin' => $this->linkedin,
             'moderator' => $this->moderator,
+            'id' => $this->id,
+            'avatar' => $this->avatar,
         ];
-
-        if ($this->getId()) {
-            $arrayResponse['id'] = $this->getId();
-        }
-
-        if (null !== $this->getAvatar()) {
-            $arrayResponse['avatar'] = $this->getAvatar();
-        }
-
-        return $arrayResponse;
     }
 }

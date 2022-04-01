@@ -25,55 +25,33 @@ final class JWTToken
     private ?string $sub;
     private ?string $room;
     private ?FeaturesPayload $features;
-    private ?int $nbf;
+    private ?\DateTimeImmutable $nbf;
     private ?UserPayload $user;
     private ?HeaderPayload  $headerPayload;
 
-    public function __construct(string $iss, string $aud, string $sub, string $room, UserPayload $user)
-    {
+    public function __construct(
+        string $iss,
+        string $aud,
+        string $sub,
+        string $room,
+        UserPayload $user,
+        ?\DateTimeImmutable $nbf,
+        ?HeaderPayload $headerPayload,
+        ?FeaturesPayload $featuresPayload
+    ) {
         $this->iss = $iss;
         $this->aud = $aud;
         $this->sub = $sub;
         $this->room = $room;
         $this->user = $user;
-        $this->features = null;
-        $this->headerPayload = null;
-        $this->nbf = null;
-    }
-
-    public function getUser(): ?UserPayload
-    {
-        return $this->user;
-    }
-
-    public function setHeaderPayload(?HeaderPayload $headerPayload): void
-    {
+        $this->nbf = $nbf;
         $this->headerPayload = $headerPayload;
+        $this->features = $featuresPayload;
     }
 
     public function getHeaderPayload(): ?HeaderPayload
     {
         return $this->headerPayload;
-    }
-
-    public function getFeatures(): ?FeaturesPayload
-    {
-        return $this->features;
-    }
-
-    public function setFeatures(?FeaturesPayload $features): void
-    {
-        $this->features = $features;
-    }
-
-    public function setNbf(?int $nbf): void
-    {
-        $this->nbf = $nbf;
-    }
-
-    public function getNbf(): ?int
-    {
-        return $this->nbf;
     }
 
     /** @return array<string, array<string, string|array<string, mixed>>|string|null> */
@@ -85,16 +63,16 @@ final class JWTToken
             RegisteredClaims::SUBJECT => $this->sub,
             'room' => $this->room,
             'context' => [
-                'user' => $this->getUser() ? $this->getUser()->toArray() : '',
+                'user' => null !== $this->user ? $this->user->toArray() : '',
             ],
         ];
 
-        if ($this->getNbf()) {
-            $arrayResponse[RegisteredClaims::NOT_BEFORE] = $this->getNbf();
+        if (null !== $this->nbf) {
+            $arrayResponse[RegisteredClaims::NOT_BEFORE] = $this->nbf;
         }
 
-        if ($this->getFeatures()) {
-            $arrayResponse['context']['features'] = $this->getFeatures()->toArray();
+        if (null !== $this->features) {
+            $arrayResponse['context']['features'] = $this->features->toArray();
         }
 
         return $arrayResponse;
