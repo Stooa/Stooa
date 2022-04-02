@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "951aeacab319e95c4e981949dad88b4f",
+    "content-hash": "a849ec9450f47ff05ddc64b32ad6b148",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13224,16 +13224,16 @@
         },
         {
             "name": "runroom-packages/testing",
-            "version": "v0.15.3",
+            "version": "v0.15.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Runroom/testing.git",
-                "reference": "dc4283e0143762020e48aa7bf17eb010d7a93955"
+                "reference": "de4c689d0e4727bfebe9378af25f22a90b9c91a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Runroom/testing/zipball/dc4283e0143762020e48aa7bf17eb010d7a93955",
-                "reference": "dc4283e0143762020e48aa7bf17eb010d7a93955",
+                "url": "https://api.github.com/repos/Runroom/testing/zipball/de4c689d0e4727bfebe9378af25f22a90b9c91a9",
+                "reference": "de4c689d0e4727bfebe9378af25f22a90b9c91a9",
                 "shasum": ""
             },
             "require": {
@@ -13250,7 +13250,7 @@
                 "doctrine/doctrine-bundle": "^2.4",
                 "doctrine/orm": "^2.9",
                 "knplabs/knp-menu-bundle": "^3.1",
-                "sonata-project/admin-bundle": "^3.103 || ^4.0",
+                "sonata-project/admin-bundle": "^3.103 || ^4.9",
                 "sonata-project/doctrine-orm-admin-bundle": "^3.34 || ^4.0",
                 "symfony/phpunit-bridge": "^6.0",
                 "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
@@ -13289,9 +13289,9 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/Runroom/testing/tree/v0.15.3"
+                "source": "https://github.com/Runroom/testing/tree/v0.15.6"
             },
-            "time": "2021-12-07T10:55:04+00:00"
+            "time": "2022-03-03T13:03:09+00:00"
         },
         {
             "name": "sebastian/cli-parser",
