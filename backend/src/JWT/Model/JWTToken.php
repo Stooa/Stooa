@@ -54,6 +54,11 @@ class JWTToken
         return $this->headerPayload;
     }
 
+    public function getNbf(): ?\DateTimeImmutable
+    {
+        return $this->nbf;
+    }
+
     /** @return array<string, \DateTimeImmutable|string|array<string, string|array<string, mixed>>|null> */
     public function toArray(): array
     {

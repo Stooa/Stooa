@@ -20,11 +20,11 @@ use App\JWT\Model\Payload\UserPayload;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
-    private CurrentUserFishbowl $buildRoomRequest;
+    private CurrentUserFishbowl $currentUserFishbowl;
 
-    public function __construct(CurrentUserFishbowl $buildRoomRequest)
+    public function __construct(CurrentUserFishbowl $currentUserFishbowl)
     {
-        $this->buildRoomRequest = $buildRoomRequest;
+        $this->currentUserFishbowl = $currentUserFishbowl;
     }
 
     public function generate(User $user): JWTToken
@@ -32,7 +32,7 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
         $userPayload = new UserPayload($user, false);
 
         return new JWTToken('api_client', 'api_client', 'meet.jitsi',
-            $this->buildRoomRequest->currentSlug($user),
+            $this->currentUserFishbowl->currentSlug($user),
             $userPayload
         );
     }

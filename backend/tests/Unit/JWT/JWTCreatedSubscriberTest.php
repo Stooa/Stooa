@@ -23,8 +23,7 @@ use App\JWT\TokenGenerator\TokenGeneratorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
+
 use Zenstruck\Foundry\Test\Factories;
 
 class JWTCreatedSubscriberTest extends TestCase
@@ -32,12 +31,9 @@ class JWTCreatedSubscriberTest extends TestCase
     use Factories;
 
     private JWTCreatedSubscriber $subscriber;
-    private RequestStack $requestStack;
     /** @var MockObject&TokenGeneratorInterface */
     private MockObject $tokenGenerator;
     private User $user;
-    /** @var array<string, mixed> */
-    private array $data;
 
     protected function setUp(): void
     {
@@ -53,12 +49,12 @@ class JWTCreatedSubscriberTest extends TestCase
         $event = new JWTCreatedEvent([], $this->user, []);
 
         $userPayload = new UserPayload($this->user, false);
-        $jwtPayload = new JWTToken('iss', 'aud', 'sub', 'room', $userPayload);
+        $token = new JWTToken('iss', 'aud', 'sub', 'room', $userPayload);
 
-        $this->tokenGenerator->method('generate')->willReturn($jwtPayload);
+        $this->tokenGenerator->method('generate')->willReturn($token);
 
         $this->subscriber->onJWTCreated($event);
-        $this->assertSame($jwtPayload->toArray(), $event->getData());
+        $this->assertSame($token->toArray(), $event->getData());
 
         $this->assertSame([], $event->getHeader());
     }
@@ -70,12 +66,12 @@ class JWTCreatedSubscriberTest extends TestCase
 
         $userPayload = new UserPayload($this->user, false);
         $headerPayload = new HeaderPayload('apiKey', 'alg', 'typ');
-        $jwtPayload = new JWTToken('iss', 'aud', 'sub', 'room', $userPayload, new \DateTimeImmutable(), $headerPayload);
+        $token = new JWTToken('iss', 'aud', 'sub', 'room', $userPayload, new \DateTimeImmutable(), $headerPayload);
 
-        $this->tokenGenerator->method('generate')->willReturn($jwtPayload);
+        $this->tokenGenerator->method('generate')->willReturn($token);
 
         $this->subscriber->onJWTCreated($event);
-        $this->assertSame($jwtPayload->toArray(), $event->getData());
+        $this->assertSame($token->toArray(), $event->getData());
 
         $this->assertSame($headerPayload->toArray(), $event->getHeader());
     }

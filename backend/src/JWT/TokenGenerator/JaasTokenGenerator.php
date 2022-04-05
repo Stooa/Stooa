@@ -24,18 +24,18 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
 {
     private string $appId;
     private string $apiKey;
-    private HostValidator $requestUserIsHost;
+    private HostValidator $hostValidator;
 
-    public function __construct(string $appId, string $apiKey, HostValidator $requestUserIsHost)
+    public function __construct(string $appId, string $apiKey, HostValidator $hostValidator)
     {
         $this->appId = $appId;
         $this->apiKey = $apiKey;
-        $this->requestUserIsHost = $requestUserIsHost;
+        $this->hostValidator = $hostValidator;
     }
 
     public function generate(User $user): JWTToken
     {
-        $userPayload = new UserPayload($user, $this->requestUserIsHost->validateFromRequest($user), $user->getId(), '');
+        $userPayload = new UserPayload($user, $this->hostValidator->validateFromRequest($user), $user->getId(), '');
 
         return new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),
