@@ -19,16 +19,16 @@ use Webmozart\Assert\Assert;
 
 class CurrentUserFishbowl
 {
-    private CurrentUserRoom $roomRequest;
+    private CurrentUserRoom $currentUserRoom;
 
-    public function __construct(CurrentUserRoom $roomRequest)
+    public function __construct(CurrentUserRoom $currentUserRoom)
     {
-        $this->roomRequest = $roomRequest;
+        $this->currentUserRoom = $currentUserRoom;
     }
 
     public function currentSlug(UserInterface $user): string
     {
-        $slug = $this->roomRequest->getRoom($user);
+        $slug = $this->currentUserRoom->getRoom($user);
 
         if (null !== $slug) {
             return $slug;
