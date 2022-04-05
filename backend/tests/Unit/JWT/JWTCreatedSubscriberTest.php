@@ -41,10 +41,6 @@ class JWTCreatedSubscriberTest extends TestCase
 
     protected function setUp(): void
     {
-        $request = new Request();
-        $this->requestStack = new RequestStack();
-        $this->requestStack->push($request);
-
         $this->user = UserFactory::createOne()->object();
 
         $this->tokenGenerator = $this->createMock(TokenGeneratorInterface::class);
