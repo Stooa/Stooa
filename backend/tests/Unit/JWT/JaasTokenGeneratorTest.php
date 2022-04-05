@@ -55,9 +55,11 @@ class JaasTokenGeneratorTest extends TestCase
     {
         $isModerator = true;
         $this->hostValidator->method('validateFromRequest')->willReturn($isModerator);
+
         $token = $this->jaasTokenGenerator->generate($this->user);
 
         $userPayload = new UserPayload($this->user, $isModerator, $this->user->getId(), '');
+
         $expectedToken = new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),
             new HeaderPayload($this->apiKey, 'RS256', 'JWT'),
