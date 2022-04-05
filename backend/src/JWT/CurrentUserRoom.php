@@ -17,7 +17,7 @@ use App\Service\FishbowlService;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class CurrentUserRoom
+class CurrentUserRoom
 {
     private RequestStack $requestStack;
     private FishbowlService $fishbowlService;

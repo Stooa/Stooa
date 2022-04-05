@@ -18,7 +18,7 @@ use App\JWT\Model\Payload\HeaderPayload;
 use App\JWT\Model\Payload\UserPayload;
 use Lcobucci\JWT\Token\RegisteredClaims;
 
-final class JWTToken
+class JWTToken
 {
     private ?string $iss;
     private ?string $aud;

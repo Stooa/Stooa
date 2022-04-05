@@ -17,7 +17,7 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
-final class CurrentUserFishbowl
+class CurrentUserFishbowl
 {
     private CurrentUserRoom $roomRequest;
 
