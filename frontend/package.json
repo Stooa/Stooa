@@ -67,7 +67,7 @@
     "@testing-library/react": "12.1.4",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.4.1",
-    "@typescript-eslint/eslint-plugin": "5.17.0",
+    "@typescript-eslint/eslint-plugin": "5.18.0",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.4.1",
