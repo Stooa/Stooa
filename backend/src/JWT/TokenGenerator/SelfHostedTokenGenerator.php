@@ -29,7 +29,7 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 
     public function generate(User $user): JWTToken
     {
-        $userPayload = new UserPayload($user, false, null, null);
+        $userPayload = new UserPayload($user, false);
 
         return new JWTToken('api_client', 'api_client', 'meet.jitsi',
             $this->buildRoomRequest->currentSlug($user),

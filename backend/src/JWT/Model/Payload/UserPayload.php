@@ -26,7 +26,7 @@ final class UserPayload implements PayloadInterface
     private ?UuidInterface $id;
     private bool $moderator;
 
-    public function __construct(User $user, bool $moderator, ?UuidInterface $id, ?string $avatar)
+    public function __construct(User $user, bool $moderator, ?UuidInterface $id = null, ?string $avatar = null)
     {
         $this->name = $user->getFullName();
         $this->email = $user->getEmail();
