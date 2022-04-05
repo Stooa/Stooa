@@ -1,5 +1,7 @@
 {
     "seatAvailable": "Seat available",
+    "seatAvailableAfterIntro": "Seat available after introduction",
+    "seatUnavailable": "Seat unavailable",
     "timeup": "Completed!",
     "timeleft": "to finish",
     "notification": {

@@ -22,7 +22,9 @@
         "description": "Descripció (opcional)",
         "timezone": "Zona horària",
         "selectTimeZone": "Zona horària",
-        "advancedOptions": "Opcions avançades"
+        "advancedOptions": "Opcions avançades",
+        "introductionLabel": "Vull començar el Fishbowl amb una introducció.",
+        "introductionTooltip": "Quan iniciïs el Fishbowl, <strong>podràs començar fent una introducció.</strong> La càmera i el micròfon estaran actius només per a tu. Quan acabis, <strong>no oblidis permetre als assistents unir-se a la conversa.</strong>"
     },
     "button": {
         "login": "Entra",
@@ -31,7 +33,7 @@
         "createFishbowl": "Crear fishbowl",
         "modifyFishbowl": "Modificar fishbowl",
         "recoverPassword": "Envia un enllaç de recuperació",
-        "enterFishbowl": "Entrar",
+        "enterFishbowl": "Entrar al fishbowl",
         "save": "Guardar",
         "changePassword": "Canviar la contrasenya"
     },
@@ -44,6 +46,7 @@
         "terms": "Has d'acceptar els termes i condicions",
         "url": "Aquesta url no és vàlida",
         "twitter": "L'usiari de Twitter ha de començar per @",
-        "equalPassword": "Les dues contrasenyes han de ser iguals"
+        "equalPassword": "Les dues contrasenyes han de ser iguals",
+        "successMessage": "Els teus canvis estan guardats"
     }
 }

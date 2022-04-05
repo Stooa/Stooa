@@ -44,8 +44,8 @@
     "mic": "Micròfon",
     "speaker": "Altaveu",
     "cam": "Càmera",
-    "nickname": {
-        "title": "Com poden dir-te la resta de participants?"
+    "prejoin": {
+        "title": "Configura la càmera i el micròfon"
     },
     "waiting": "Esperant que l'amfitrió iniciï el fishbowl",
     "waitingHost": "Els assistents estan esperant a que iniciïs el fishbowl",
@@ -55,13 +55,14 @@
     "timeLeft_other": "Queden {{time}}",
     "lastMinute": "Últim minut",
     "startFishbowl": "Iniciar el fishbowl",
+    "startIntroduction": "Iniciar introducció",
     "allowUsers": "Permetre als assistents unir-se a la conversa",
     "endFishbowl": "Finalitzar el fishbowl",
     "finishedEvent": "El fishbowl ha finalitzat",
     "introduceModal": {
         "title": "Fes una introducció",
-        "description": "Pots dir algunes paraules d'introducció, la càmera i el micròfon estaran actius només per a tu. Quan acabis, no oblidis permetre als assistents unir-se a la conversa.",
-        "button": "Començar"
+        "description": "La teva càmera s'activarà perquè que pugis dir unes paraules abans del <i>fishbowl</i>. Després podràs permetre als usuaris unir-se a la conversa.",
+        "button": "Començar introducció"
     },
     "endModal": {
         "title": "Finalitzar el fishbowl",
@@ -73,5 +74,12 @@
         "attendees": "Oients",
         "speaking": "Parlant ara"
     },
-    "share": "Que corri la veu!"
+    "share": "Que corri la veu!",
+    "shareModal": {
+        "title": "Convida a més persones!",
+        "description": "Fes que la conversa flueixi! Còpia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vulguis que s'uneixin a la sessió."
+    },
+    "fishbowlDescription": {
+        "shareText": "Copia i comparteix l'enllaç per a convidar a mes persones  a aquest <i>fishbowl</i>."
+    }
 }

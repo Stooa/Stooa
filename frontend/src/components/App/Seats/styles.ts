@@ -16,33 +16,31 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_YELLOW_500
+  COLOR_YELLOW_500,
+  COLOR_NEUTRO_300
 } from '@/ui/settings';
 import { APP_SM } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
 
 const SeatsStyled = styled.div`
-  align-items: center;
   display: flex;
   height: 100%;
-  justify-content: center;
+  width: 100%;
   overflow: hidden;
 
   .content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: ${space(1)};
     align-items: center;
-    display: flex;
-    flex-wrap: wrap;
     height: 100%;
-    justify-content: center;
-    margin-left: ${space(-0.5)};
-    width: calc(100% + ${space()});
-  }
+    width: 100%;
 
-  ${media.max('tablet')`
-    .content {
-      overflow-y: auto;
-    }
-  `}
+    ${media.min('tablet')`
+      padding-bottom: ${space()};
+      grid-template-columns: repeat(6, 1fr);
+    `}
+  }
 
   ${media.between('tablet', 'tabletLarge')`
     .drawer-open & .content {
@@ -54,17 +52,25 @@ const SeatsStyled = styled.div`
 `;
 
 const Free = styled.div`
-  color: ${COLOR_NEUTRO_600};
-  left: 50%;
-  pointer-events: none;
   position: absolute;
+  color: ${COLOR_NEUTRO_600};
   top: 50%;
+  left: 50%;
+  padding: 0 ${space(2)};
+  pointer-events: none;
   transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
   z-index: 0;
 
   svg {
     display: block;
     margin: 0 auto;
+    transform: scale(0.75) translateY(0.5rem);
+
+    ${media.min('tablet')`
+      transform: scale(1) translateY(0);
+    `}
 
     path {
       fill: currentColor;
@@ -73,6 +79,7 @@ const Free = styled.div`
 
   .text {
     display: block;
+    font-weight: 400;
     margin: ${space()} 0 0;
   }
 `;
@@ -80,16 +87,37 @@ const Free = styled.div`
 const Seat = styled.div`
   background: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
-  height: calc(33.33333% - ${space()});
-  margin: 0 ${space(0.5)} ${space()};
-  min-height: 180px;
+  height: 100%;
   overflow: hidden;
   position: relative;
-  width: calc(${100 / 2}% - ${space()});
+  grid-column-end: span 2;
+  transition: background 0.35s ease-in-out;
+  will-change: background;
+
+  .seat-wrapper {
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  &.not-started {
+    background: ${COLOR_NEUTRO_300};
+    .seat-wrapper {
+      opacity: 0.3;
+    }
+  }
+
+  &:last-child {
+    grid-column-start: 2;
+  }
 
   ${media.min('tablet')`
-    height: calc(50% - ${space()});
-    width: calc(${100 / 3}% - ${space()});
+    &:last-child {
+      grid-column-start: initial;
+    }
+
+  &:nth-child(4) {
+    grid-column-start: 2;
+  }
+
   `}
 
   ${media.between('tablet', 'tabletLarge')`

@@ -42,6 +42,9 @@
     "bPurple500": {
       "value": "#7d13a3"
     },
+    "bPurple600": {
+      "value": "#69008D"
+    },
     "empty-name": {
       "value": "empty-value"
     },

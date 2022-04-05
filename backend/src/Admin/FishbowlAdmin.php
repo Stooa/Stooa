@@ -23,6 +23,7 @@ use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\Form\Type\BooleanType;
 use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
@@ -78,7 +79,9 @@ class FishbowlAdmin extends AbstractAdmin
             ])
             ->add('currentStatus', null, [], ChoiceType::class, [
                 'choices' => Fishbowl::$statusChoices,
-            ]);
+            ])
+            ->add('isFishbowlNow')
+            ->add('hasIntroduction');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -91,6 +94,8 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('currentStatus', null, [
                 'template' => 'sonata/fishbowl_status.html.twig',
             ])
+            ->add('isFishbowlNow')
+            ->add('hasIntroduction')
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('endDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('duration', FieldDescriptionInterface::TYPE_TIME)
@@ -123,6 +128,12 @@ class FishbowlAdmin extends AbstractAdmin
                 ->add('host', ModelAutocompleteType::class, [
                     'property' => 'email',
                     'callback' => self::hostCallbackFunction(),
+                ])
+                ->add('isFishbowlNow', BooleanType::class, [
+                    'transform' => true,
+                ])
+                ->add('hasIntroduction', BooleanType::class, [
+                    'transform' => true,
                 ])
             ->end()
             ->with('Disabled')

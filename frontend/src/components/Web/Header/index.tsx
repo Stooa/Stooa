@@ -13,7 +13,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import { ROUTE_HOME, ROUTE_SIGN_IN, ROUTE_REGISTER, ROUTE_FISHBOWL_CREATE } from '@/app.config';
+import {
+  ROUTE_HOME,
+  ROUTE_SIGN_IN,
+  ROUTE_REGISTER,
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_LIST
+} from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import { ButtonSmall, ButtonTransp } from '@/ui/Button';
 import ArrowRight from '@/ui/svg/arrow-right.svg';
@@ -38,23 +44,25 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
         <Navigation>
           {isAuthenticated ? (
             <>
-              {!createFishbowl && pathname !== ROUTE_FISHBOWL_CREATE && (
-                <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
-                  <ButtonSmall
-                    className="secondary"
-                    onClick={() => {
-                      pushEventDataLayer({
-                        category: 'Create Fishbowl',
-                        action: 'Header',
-                        label: window.location.href
-                      });
-                    }}
-                  >
-                    <span>{t('createEvent')}</span>
-                    <ArrowRight />
-                  </ButtonSmall>
-                </RedirectLink>
-              )}
+              {!createFishbowl &&
+                pathname !== ROUTE_FISHBOWL_CREATE &&
+                pathname !== ROUTE_FISHBOWL_LIST && (
+                  <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
+                    <ButtonSmall
+                      className="secondary"
+                      onClick={() => {
+                        pushEventDataLayer({
+                          category: 'Schedule Fishbowl',
+                          action: 'Header',
+                          label: window.location.href
+                        });
+                      }}
+                    >
+                      <span>{t('scheduleFishbowl')}</span>
+                      <ArrowRight />
+                    </ButtonSmall>
+                  </RedirectLink>
+                )}
               <Avatar />
             </>
           ) : (

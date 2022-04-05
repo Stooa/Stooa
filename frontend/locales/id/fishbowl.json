@@ -39,7 +39,7 @@
     "mic": "Mikrofon",
     "speaker": "Pengeras suara",
     "cam": "Kamera",
-    "nickname": {
+    "prejoin": {
         "title": "Bagaimana seharusnya partisipan lainnya memanggilmu?"
     },
     "waiting": "Menunggu hos untuk memulai fishbowl-nya",

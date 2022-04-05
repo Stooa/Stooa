@@ -8,6 +8,6 @@
  */
 
 export interface Guest {
-  "@id"?: string;
-  name: string;
+  '@id'?: string;
+  'name': string;
 }

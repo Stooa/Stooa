@@ -39,6 +39,7 @@ class JWTCreatedSubscriberTest extends TestCase
         $request = new Request();
         $this->requestStack = new RequestStack();
         $this->requestStack->push($request);
+
         $this->fishbowlService = $this->createMock(FishbowlService::class);
         $this->subscriber = new JWTCreatedSubscriber($this->requestStack, $this->fishbowlService);
 
@@ -97,7 +98,7 @@ class JWTCreatedSubscriberTest extends TestCase
     /** @test */
     public function itCreatesPayloadDataWithUserFishbowlSlugFromRequest(): void
     {
-        $request = new Request(['room' => 'fishbowl-slug']);
+        $request = new Request([], ['room' => 'fishbowl-slug']);
         $this->requestStack->push($request);
         $this->subscriber = new JWTCreatedSubscriber($this->requestStack, $this->fishbowlService);
 

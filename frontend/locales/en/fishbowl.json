@@ -44,8 +44,8 @@
     "mic": "Microphone",
     "speaker": "Speaker",
     "cam": "Camera",
-    "nickname": {
-        "title": "How should the other participants call you?"
+    "prejoin": {
+        "title": "Set up your micro and camera!"
     },
     "waiting": "Waiting for host to start the fishbowl",
     "waitingHost": "Attendees are waiting for you to start the fishbowl",
@@ -55,13 +55,14 @@
     "timeLeft_other": "{{time}} left",
     "lastMinute": "Last minute",
     "startFishbowl": "Start the fishbowl",
+    "startIntroduction": "Start introduction",
     "allowUsers": "Allow attendees to join the conversation",
     "endFishbowl": "End fishbowl",
     "finishedEvent": "The fishbowl is over",
     "introduceModal": {
         "title": "Give an introduction",
-        "description": "You can say a few words of introduction, the camera and microphone will be active just for you. When you're done, don't forget to allow attendees to join the conversation.",
-        "button": "Start"
+        "description": "Your camera will activate so you can say a few words to the attendees before opening the fishbowl. Afterwards you can allow users in the conversation.",
+        "button": "Start your introduction"
     },
     "endModal": {
         "title": "End fishbowl",
@@ -69,9 +70,16 @@
         "button": "Confirm"
     },
     "participants": {
-        "title": "Fishbowl attendees",
+        "title": "People in the room",
         "attendees": "Listeners",
         "speaking": "Speaking now"
     },
-    "share": "Let others know about Stooa!"
+    "share": "Let others know about Stooa!",
+    "shareModal": {
+        "title": "Invite more people!",
+        "description": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the session."
+    },
+    "fishbowlDescription": {
+        "shareText": "Copy and share the link to invite people to this fishbowl."
+    }
 }

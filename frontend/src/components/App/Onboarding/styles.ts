@@ -9,7 +9,7 @@
 
 import styled, { css } from 'styled-components';
 
-import Alert from '@/ui/Alert';
+import { CustomToast } from '@/ui/CustomToast';
 import { space, media, rems } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
@@ -19,7 +19,9 @@ import {
 } from '@/ui/settings';
 
 const OnboardingWrapper = styled.div`
-  position: relative;
+  ${media.min('tablet')`
+    position: relative;
+  `}
 `;
 
 const Icon = styled.button`
@@ -29,14 +31,26 @@ const Icon = styled.button`
   padding: ${space()};
 `;
 
-const Tooltip = styled(Alert)`
-  left: ${space(-1.75)};
-  margin: 0;
-  min-width: 250px;
-  padding-right: ${space()};
+const Tooltip = styled(CustomToast)`
+  display: flex;
+  align-items: center;
   position: absolute;
-  top: calc(100% + ${space()});
+  left: 50%;
+  bottom: -65px;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 100%;
+  max-width: 350px;
+
   z-index: 10;
+  box-shadow: var(--shadow-elevation-medium);
+
+  ${media.min('tablet')`
+    width: 60ch;
+    bottom: -75px;
+    left: -20%;
+    transform: translateX(0);
+  `}
 
   button {
     height: ${rems(20)};
@@ -44,18 +58,14 @@ const Tooltip = styled(Alert)`
     width: ${rems(20)};
 
     svg {
-      height: ${rems(10)};
-      width: ${rems(10)};
+      height: ${rems(16)};
+      width: ${rems(16)};
 
       path {
         fill: ${COLOR_NEUTRO_600};
       }
     }
   }
-
-  ${media.min('tablet')`
-    min-width: 390px;
-  `}
 `;
 
 const Slider = styled.div`
@@ -79,7 +89,7 @@ const Slider = styled.div`
   }
 
   .slick-dots {
-    bottom: ${space(3)};
+    bottom: ${space(2)};
     left: ${space(3)};
     position: absolute;
     width: auto;
@@ -90,7 +100,7 @@ const Slider = styled.div`
     `}
 
     ${media.min('maxWidth')`
-      bottom: calc(${space(6)} - ${rems(7)});
+      bottom: calc(${space(4)} - ${rems(7)});
       left: ${space(8)};
     `}
 
@@ -132,7 +142,7 @@ const Slider = styled.div`
     width: ${space(5.75)};
 
     &.slick-disabled {
-       display: none !important;
+      display: none !important;
     }
 
     &::before {

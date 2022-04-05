@@ -15,6 +15,9 @@ import { space, media, rems } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
+  COLOR_GREEN_500,
+  COLOR_GREEN_600,
+  COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
@@ -26,12 +29,13 @@ import {
 import { TEXT_SM, TEXT_XXS } from '@/ui/Texts';
 
 interface Props {
-  full?: boolean;
+  $isFull?: boolean;
 }
 
 const FormikForm = styled(Form)`
+  position: relative;
   margin-top: ${space(4)};
-  max-width: ${({ full }: Props) => (full ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -45,8 +49,26 @@ const FormikForm = styled(Form)`
     &:first-child {
       margin-top: 0;
     }
+
     &:last-child {
+      padding-bottom: ${space(2)};
       margin-bottom: 0;
+
+      span {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: ${COLOR_GREEN_600};
+        margin: 0;
+
+        &.success-message-bottom {
+          bottom: -1.5ch;
+        }
+
+        &.success-message-top {
+          top: -3.2ch;
+        }
+      }
     }
 
     > *:not(:last-child) {
@@ -54,6 +76,16 @@ const FormikForm = styled(Form)`
     }
     > .textarea {
       margin-bottom: ${space(4)};
+    }
+
+    &.submit-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      input {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -236,10 +268,6 @@ const InputStyled = styled.div`
     margin-top: ${space(0.5)};
     padding: 0 ${space(2)};
   }
-
-  &:not(:last-child) .help {
-    margin-bottom: ${space(2)};
-  }
 `;
 
 const DatePickerStyled = styled(InputStyled)`
@@ -326,5 +354,122 @@ const TextDivider = styled.div`
   }
 `;
 
-export { CheckboxStyled, DatePickerStyled, FormError, InputStyled, TextDivider };
+const SwitchStyled = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  > *:not(:nth-child(2)) {
+    margin-left: ${space()};
+  }
+
+  input {
+    display: none;
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  .switch-checkbox[value='true'] + label .switch-button {
+    left: calc(100% - 3px);
+    transform: translateX(-100%);
+  }
+
+  .switch-checkbox[value='true'] + label {
+    background-color: ${COLOR_GREEN_500};
+  }
+
+  .icon-wrapper {
+    padding: ${space(1)};
+  }
+
+  .label-text {
+    font-size: ${rems(14)};
+  }
+
+  label {
+    cursor: pointer;
+  }
+`;
+
+const SwitchLabel = styled.label`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 42px;
+  margin-right: ${space()};
+  height: 22px;
+  background: ${COLOR_NEUTRO_700};
+  border-radius: 50px;
+  transition: background-color 0.2s;
+
+  .switch-button {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 25px;
+    transition: 0.2s;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+  }
+
+  &:hover .switch-button {
+    width: 20px;
+  }
+`;
+
+const StyledIntroductionTooltip = styled.div`
+  color: ${COLOR_NEUTRO_100};
+  background-color: ${COLOR_NEUTRO_700};
+  height: auto;
+  padding: ${space(1)} ${space(2)};
+  border-radius: ${rems(4)};
+  box-shadow: var(--shadow-elevation-medium);
+
+  position: absolute;
+  z-index: 10;
+  text-align: center;
+
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 150px;
+
+  /* ${media.min('tablet')`
+    bottom: 150%;
+    width: 60ch;
+  `} */
+
+  &:after {
+    ${media.min('tablet')`
+    content: '';
+    `}
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #e8e8e8;
+    clear: both;
+    border-color: ${COLOR_NEUTRO_700} transparent transparent;
+  }
+`;
+
+export {
+  CheckboxStyled,
+  DatePickerStyled,
+  FormError,
+  InputStyled,
+  TextDivider,
+  SwitchStyled,
+  SwitchLabel,
+  StyledIntroductionTooltip
+};
 export default FormikForm;

@@ -101,6 +101,20 @@ const nearestQuarterHour = () => {
   return new Date(Math.ceil(new Date().getTime() / quarter) * quarter);
 };
 
+const getTimePlusOneMinute = () => {
+  return new Date(Date.now() + 60 * 1000).toLocaleString('en-US');
+};
+
+const getIsoDateTimeWithActualTimeZone = () => {
+  // FIXME: This is not working as expected.
+  const date = new Date();
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+};
+
+const convertIntoClassName = text => {
+  return text.replace(/\s/g, '-');
+};
+
 export {
   dateDifferenceFromNow,
   dispatchEvent,
@@ -110,5 +124,8 @@ export {
   isTimeUp,
   parseDevices,
   removeItem,
-  nearestQuarterHour
+  nearestQuarterHour,
+  getTimePlusOneMinute,
+  getIsoDateTimeWithActualTimeZone,
+  convertIntoClassName
 };

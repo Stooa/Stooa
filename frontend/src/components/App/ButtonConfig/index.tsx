@@ -20,9 +20,10 @@ import { useDevices } from '@/contexts/DevicesContext';
 
 interface Props {
   unlabeled?: boolean;
+  selectorPosition?: 'top' | 'bottom';
 }
 
-const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
+const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) => {
   const [showDevices, setShowDevices] = useState(false);
 
   const {
@@ -82,7 +83,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
         (devices.audioInputDevices.length > 0 ||
           devices.audioOutputDevices.length > 0 ||
           devices.videoDevices.length > 0) && (
-          <Selector>
+          <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             {devices.audioInputDevices.length > 0 && (
               <List>
                 <li className="title">
@@ -91,7 +92,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                 {devices.audioInputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm"
+                      className="text-sm device"
                       selected={audioInputDevice.deviceId === deviceId}
                       onClick={handleAudioInput}
                       value={deviceId}
@@ -113,7 +114,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                 {devices.audioOutputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm"
+                      className="text-sm device"
                       selected={audioOutputDevice.deviceId === deviceId}
                       onClick={handleAudioOutput}
                       value={deviceId}
@@ -135,7 +136,7 @@ const ButtonConfig = forwardRef(({ unlabeled }: Props, ref) => {
                 {devices.videoDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm"
+                      className="text-sm device"
                       selected={videoDevice.deviceId === deviceId}
                       onClick={handleVideoInput}
                       value={deviceId}

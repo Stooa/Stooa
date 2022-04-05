@@ -1,10 +1,12 @@
 {
     "signin": "Log in",
+    "fishbowlList": "Fishbowl list",
     "signout": "Log out",
     "register": "Register for free",
     "cancel": "Cancel",
-    "createEvent": "Create a free fishbowl",
     "cta": "Create a fishbowl",
+    "scheduleFishbowl": "Schedule a fishbowl",
+    "hostFishbowlNow": "Host a fishbowl now",
     "editProfile": "Edit profile",
     "changePassword": "Change password",
     "goHome": "Go to Home page",
@@ -17,12 +19,15 @@
         "en": "English",
         "es": "Spanish",
         "ca": "Catalan",
-        "fr": "French"
+        "fr": "French",
+        "id": "Indonesian"
     },
     "roadmap": "Roadmap",
     "documentation": "Documentation",
     "conductCode": "Code of Conduct",
     "githubIssues": "Github Issues",
     "help": "Help",
-    "legal": "Legal"
+    "legal": "Legal",
+    "linkButton": "Copy link",
+    "successCopiedLink": "Link copied"
 }

@@ -37,4 +37,5 @@ export interface UserRepository {
   setUserAudioOutput: (audioOutput: MediaDeviceInfo) => void;
   setUserVideoInput: (videoInput: MediaDeviceInfo) => void;
   setUserVideoMuted: (videoMuted: boolean) => void;
+  setUserNickname: (nickname: string) => void;
 }

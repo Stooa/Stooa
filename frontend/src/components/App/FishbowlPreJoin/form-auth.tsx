@@ -39,8 +39,8 @@ const AuthUser = ({ name }: TProps) => {
         <input className="filled" type="text" disabled value={name} />
         <label>{t('name')}</label>
       </InputStyled>
-      <fieldset>
-        <Button type="button" full onClick={handleOnSubmit}>
+      <fieldset className="submit-wrapper">
+        <Button type="button" onClick={handleOnSubmit}>
           {t('button.enterFishbowl')}
         </Button>
       </fieldset>

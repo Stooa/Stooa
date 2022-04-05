@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
@@ -26,9 +26,9 @@ import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 
-const ToolBar = () => {
+const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
-  const { isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
+  const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
@@ -49,6 +49,25 @@ const ToolBar = () => {
     }
   };
 
+  const hasModeratorToSeatDuringIntroduction = (): boolean => {
+    return (
+      data.hasIntroduction &&
+      isModerator &&
+      conferenceReady &&
+      conferenceStatus !== IConferenceStatus.RUNNING &&
+      conferenceStatus !== IConferenceStatus.FINISHED
+    );
+  };
+
+  const hasModeratorToSeatDuringRunning = (): boolean => {
+    return (
+      !data.hasIntroduction &&
+      isModerator &&
+      conferenceReady &&
+      data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
+    );
+  };
+
   const handleMic = () => {
     configButtonRef.current.handleShowDevices(false);
     tracksRepository.toggleAudioTrack();
@@ -60,8 +79,10 @@ const ToolBar = () => {
   };
 
   const handleOutsideClick = event => {
-    if (event.target.id !== 'config-button') {
-      configButtonRef.current.handleShowDevices(false);
+    if (typeof event.target.className === 'string') {
+      if (event.target.id !== 'config-button' && !event.target.className?.includes('device')) {
+        configButtonRef.current.handleShowDevices(false);
+      }
     }
   };
 
@@ -86,15 +107,9 @@ const ToolBar = () => {
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (
-      isModerator &&
-      conferenceReady &&
-      conferenceStatus !== IConferenceStatus.RUNNING &&
-      conferenceStatus !== IConferenceStatus.FINISHED
-    ) {
-      console.log('[STOOA] starting introduction');
-      const userSettings = userRepository.getUser();
-      joinSeat(userSettings);
+    if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
+      console.log('[STOOA] Moderator join seat');
+      joinSeat(userRepository.getUser());
     }
   }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -120,7 +135,7 @@ const ToolBar = () => {
       </ButtonJoin>
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo handleVideo={handleVideo} joined={joined} disabled={isMuteDisabled} />
-      <ButtonConfig ref={configButtonRef} />
+      <ButtonConfig selectorPosition="top" ref={configButtonRef} />
     </Container>
   );
 };
