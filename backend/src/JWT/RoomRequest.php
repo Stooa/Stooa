@@ -32,7 +32,7 @@ final class RoomRequest
      * When a host has multiple fishbowls created we want to specify the room name via endpoint everytime we want to
      * refresh the token.
      */
-    public function getRoomFromRequest(UserInterface $user): ?string
+    public function getRoom(UserInterface $user): ?string
     {
         $currentRequest = $this->requestStack->getCurrentRequest();
 

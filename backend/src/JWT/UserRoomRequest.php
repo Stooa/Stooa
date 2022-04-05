@@ -28,7 +28,7 @@ final class UserRoomRequest
 
     public function buildRoomPermissionByUser(UserInterface $user): string
     {
-        $slug = $this->roomRequest->getRoomFromRequest($user);
+        $slug = $this->roomRequest->getRoom($user);
 
         if (null !== $slug) {
             return $slug;

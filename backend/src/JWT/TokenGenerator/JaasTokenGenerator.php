@@ -18,15 +18,15 @@ use App\JWT\Model\JWTToken;
 use App\JWT\Model\Payload\FeaturesPayload;
 use App\JWT\Model\Payload\HeaderPayload;
 use App\JWT\Model\Payload\UserPayload;
-use App\JWT\UserIsHostRequest;
+use App\JWT\HostValidator;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
     private string $appId;
     private string $apiKey;
-    private UserIsHostRequest $requestUserIsHost;
+    private HostValidator $requestUserIsHost;
 
-    public function __construct(string $appId, string $apiKey, UserIsHostRequest $requestUserIsHost)
+    public function __construct(string $appId, string $apiKey, HostValidator $requestUserIsHost)
     {
         $this->appId = $appId;
         $this->apiKey = $apiKey;
@@ -35,7 +35,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
 
     public function generate(User $user): JWTToken
     {
-        $userPayload = new UserPayload($user, $this->requestUserIsHost->isUserHost($user), $user->getId(), '');
+        $userPayload = new UserPayload($user, $this->requestUserIsHost->validate($user), $user->getId(), '');
 
         return new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),

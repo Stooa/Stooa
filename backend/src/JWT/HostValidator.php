@@ -18,7 +18,7 @@ use App\Repository\FishbowlRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
-final class UserIsHostRequest
+final class HostValidator
 {
     private FishbowlRepository $fishbowlRepository;
     private RoomRequest $roomRequest;
@@ -29,9 +29,9 @@ final class UserIsHostRequest
         $this->roomRequest = $roomRequest;
     }
 
-    public function isUserHost(UserInterface $user): bool
+    public function validate(UserInterface $user): bool
     {
-        $slug = $this->roomRequest->getRoomFromRequest($user);
+        $slug = $this->roomRequest->getRoom($user);
 
         if (null === $slug) {
             return false;
