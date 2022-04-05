@@ -18,7 +18,7 @@ use App\Repository\FishbowlRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
-class UserIsHostRequest
+final class UserIsHostRequest
 {
     private FishbowlRepository $fishbowlRepository;
     private RoomRequest $roomRequest;
