@@ -17,16 +17,16 @@ use App\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
-final class UserRoomRequest
+final class CurrentUserFishbowl
 {
-    private RoomRequest $roomRequest;
+    private CurrentUserRoom $roomRequest;
 
-    public function __construct(RoomRequest $roomRequest)
+    public function __construct(CurrentUserRoom $roomRequest)
     {
         $this->roomRequest = $roomRequest;
     }
 
-    public function buildRoomPermissionByUser(UserInterface $user): string
+    public function currentSlug(UserInterface $user): string
     {
         $slug = $this->roomRequest->getRoom($user);
 

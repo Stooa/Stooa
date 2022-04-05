@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace App\JWT\TokenGenerator;
 
 use App\Entity\User;
+use App\JWT\CurrentUserFishbowl;
 use App\JWT\Model\JWTToken;
 use App\JWT\Model\Payload\UserPayload;
-use App\JWT\UserRoomRequest;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
-    private UserRoomRequest $buildRoomRequest;
+    private CurrentUserFishbowl $buildRoomRequest;
 
-    public function __construct(UserRoomRequest $buildRoomRequest)
+    public function __construct(CurrentUserFishbowl $buildRoomRequest)
     {
         $this->buildRoomRequest = $buildRoomRequest;
     }
@@ -32,7 +32,7 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
         $userPayload = new UserPayload($user, false, null, null);
 
         return new JWTToken('api_client', 'api_client', 'meet.jitsi',
-            $this->buildRoomRequest->buildRoomPermissionByUser($user),
+            $this->buildRoomRequest->currentSlug($user),
             $userPayload
         );
     }

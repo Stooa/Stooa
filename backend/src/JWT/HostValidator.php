@@ -21,15 +21,15 @@ use Webmozart\Assert\Assert;
 final class HostValidator
 {
     private FishbowlRepository $fishbowlRepository;
-    private RoomRequest $roomRequest;
+    private CurrentUserRoom $roomRequest;
 
-    public function __construct(FishbowlRepository $fishbowlRepository, RoomRequest $roomRequest)
+    public function __construct(FishbowlRepository $fishbowlRepository, CurrentUserRoom $roomRequest)
     {
         $this->fishbowlRepository = $fishbowlRepository;
         $this->roomRequest = $roomRequest;
     }
 
-    public function validate(UserInterface $user): bool
+    public function validateFromRequest(UserInterface $user): bool
     {
         $slug = $this->roomRequest->getRoom($user);
 

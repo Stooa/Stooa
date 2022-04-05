@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\JWT\TokenGenerator;
 
 use App\Entity\User;
+use App\JWT\HostValidator;
 use App\JWT\Model\JWTToken;
 use App\JWT\Model\Payload\FeaturesPayload;
 use App\JWT\Model\Payload\HeaderPayload;
 use App\JWT\Model\Payload\UserPayload;
-use App\JWT\HostValidator;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
@@ -35,7 +35,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
 
     public function generate(User $user): JWTToken
     {
-        $userPayload = new UserPayload($user, $this->requestUserIsHost->validate($user), $user->getId(), '');
+        $userPayload = new UserPayload($user, $this->requestUserIsHost->validateFromRequest($user), $user->getId(), '');
 
         return new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),
