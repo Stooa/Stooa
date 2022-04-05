@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Model\Payload;
+namespace App\JWT\Model\Payload;
 
 final class FeaturesPayload implements PayloadInterface
 {

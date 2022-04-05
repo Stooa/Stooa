@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\TokenGenerator;
+namespace App\JWT\TokenGenerator;
 
 use App\Entity\User;
-use App\Model\JWTToken;
+use App\JWT\Model\JWTToken;
 
 interface TokenGeneratorInterface
 {

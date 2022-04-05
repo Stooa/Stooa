@@ -56,7 +56,7 @@ services:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
 
-    App\TokenGenerator\JaasTokenGenerator:
+    App\JWT\TokenGenerator\JaasTokenGenerator:
         bind:
             $appId: '%env(JAAS_APP_ID)%'
             $apiKey: '%env(JAAS_API_KEY)%'

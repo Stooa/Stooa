@@ -11,20 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\TokenGenerator;
+namespace App\JWT\TokenGenerator;
 
 use App\Entity\User;
-use App\Model\JWTToken;
-use App\Model\Payload\UserPayload;
-use App\Service\UserService;
+use App\JWT\Model\JWTToken;
+use App\JWT\Model\Payload\UserPayload;
+use App\JWT\UserRoomRequest;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
-    private UserService $userService;
+    private UserRoomRequest $buildRoomRequest;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserRoomRequest $buildRoomRequest)
     {
-        $this->userService = $userService;
+        $this->buildRoomRequest = $buildRoomRequest;
     }
 
     public function generate(User $user): JWTToken
@@ -32,7 +32,7 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
         $userPayload = new UserPayload($user, false, null, null);
 
         return new JWTToken('api_client', 'api_client', 'meet.jitsi',
-            $this->userService->buildRoomPermissionByUser($user),
+            $this->buildRoomRequest->buildRoomPermissionByUser($user),
             $userPayload
         );
     }

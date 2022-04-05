@@ -11,31 +11,31 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\TokenGenerator;
+namespace App\JWT\TokenGenerator;
 
 use App\Entity\User;
-use App\Model\JWTToken;
-use App\Model\Payload\FeaturesPayload;
-use App\Model\Payload\HeaderPayload;
-use App\Model\Payload\UserPayload;
-use App\Service\UserService;
+use App\JWT\Model\JWTToken;
+use App\JWT\Model\Payload\FeaturesPayload;
+use App\JWT\Model\Payload\HeaderPayload;
+use App\JWT\Model\Payload\UserPayload;
+use App\JWT\UserIsHostRequest;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
     private string $appId;
     private string $apiKey;
-    private UserService $userService;
+    private UserIsHostRequest $requestUserIsHost;
 
-    public function __construct(string $appId, string $apiKey, UserService $userService)
+    public function __construct(string $appId, string $apiKey, UserIsHostRequest $requestUserIsHost)
     {
         $this->appId = $appId;
         $this->apiKey = $apiKey;
-        $this->userService = $userService;
+        $this->requestUserIsHost = $requestUserIsHost;
     }
 
     public function generate(User $user): JWTToken
     {
-        $userPayload = new UserPayload($user, $this->userService->isUserHost($user), $user->getId(), '');
+        $userPayload = new UserPayload($user, $this->requestUserIsHost->isUserHost($user), $user->getId(), '');
 
         return new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),

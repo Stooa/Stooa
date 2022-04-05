@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Model;
+namespace App\JWT\Model;
 
-use App\Model\Payload\FeaturesPayload;
-use App\Model\Payload\HeaderPayload;
-use App\Model\Payload\UserPayload;
+use App\JWT\Model\Payload\FeaturesPayload;
+use App\JWT\Model\Payload\HeaderPayload;
+use App\JWT\Model\Payload\UserPayload;
 use Lcobucci\JWT\Token\RegisteredClaims;
 
 final class JWTToken
@@ -54,7 +54,7 @@ final class JWTToken
         return $this->headerPayload;
     }
 
-    /** @return array<string, array<string, string|array<string, mixed>>|string|null> */
+    /** @return array<string, \DateTimeImmutable|string|array<string, string|array<string, mixed>>|null> */
     public function toArray(): array
     {
         $arrayResponse = [
