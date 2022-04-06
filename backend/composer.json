@@ -3,12 +3,6 @@
     "description": "Stooa Project",
     "license": "MPL-2.0",
     "type": "project",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/aerrasti/LexikJWTAuthenticationBundle"
-        }
-    ],
     "require": {
         "php": "^7.4",
         "api-platform/core": "2.6.8",
@@ -91,6 +85,12 @@
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php74": "*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/aerrasti/LexikJWTAuthenticationBundle"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "src/"
