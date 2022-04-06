@@ -17,6 +17,6 @@ use Ramsey\Uuid\UuidInterface;
 
 interface PayloadInterface
 {
-    /** @return array<string, bool|string|UuidInterface|null|array<string, mixed>> */
+    /** @return array<string, bool|string|UuidInterface|array<string, mixed>|null> */
     public function toArray(): array;
 }
