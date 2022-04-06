@@ -67,7 +67,7 @@ class CurrentUserFishbowlTest extends TestCase
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
             'host' => $this->user,
             'slug' => 'fishbowl-slug',
             'currentStatus' => Fishbowl::STATUS_RUNNING,
