@@ -30,7 +30,7 @@ final class FeaturesPayload implements PayloadInterface
         $this->sipOutboundCall = $sipOutboundCall;
     }
 
-    /** @return array<string, bool|null> */
+    /** @return array<string, bool> */
     public function toArray(): array
     {
         return [

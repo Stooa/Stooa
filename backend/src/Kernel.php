@@ -52,9 +52,7 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
             true
         );
 
-        $tokenGeneratorClass = 'true' === $isJaasActive
-            ? JaasTokenGenerator::class
-            : SelfHostedTokenGenerator::class;
+        $tokenGeneratorClass = 'true' === $isJaasActive ? JaasTokenGenerator::class : SelfHostedTokenGenerator::class;
 
         $container->setAlias(TokenGeneratorInterface::class, $tokenGeneratorClass);
     }

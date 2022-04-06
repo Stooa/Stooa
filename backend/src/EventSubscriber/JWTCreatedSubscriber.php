@@ -47,10 +47,12 @@ class JWTCreatedSubscriber implements EventSubscriberInterface
 
         $event->setData(array_merge($jwtPayload->toArray(), $payload));
 
-        if (null !== $jwtPayload->getHeaderPayload()) {
+        $headerPayload = $jwtPayload->getHeaderPayload();
+
+        if (null !== $headerPayload) {
             $header = $event->getHeader();
 
-            $event->setHeader(array_merge($header, $jwtPayload->getHeaderPayload()->toArray()));
+            $event->setHeader(array_merge($header, $headerPayload->toArray()));
         }
     }
 }

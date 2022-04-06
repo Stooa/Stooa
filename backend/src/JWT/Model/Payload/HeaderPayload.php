@@ -26,7 +26,7 @@ final class HeaderPayload implements PayloadInterface
         $this->typ = $typ;
     }
 
-    /** @return array<string, string|null> */
+    /** @return array<string, string> */
     public function toArray(): array
     {
         return [

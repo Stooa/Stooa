@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace App\JWT\Model\Payload;
 
+use Ramsey\Uuid\UuidInterface;
+
 interface PayloadInterface
 {
-    /** @return array<string, string|null> */
+    /** @return array<string, bool|string|array|UuidInterface|null> */
     public function toArray(): array;
 }

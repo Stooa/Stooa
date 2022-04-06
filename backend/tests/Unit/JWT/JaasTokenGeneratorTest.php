@@ -66,10 +66,13 @@ class JaasTokenGeneratorTest extends TestCase
             new FeaturesPayload(false, false, false, false, false)
         );
 
-        $this->assertNotNull($token->getNbf());
-        $this->assertNotNull($expectedToken->getNbf());
+        $expectedNbf = $expectedToken->getNbf();
+        $nbf = $token->getNbf();
 
-        $this->assertSame($token->getNbf()->getTimestamp(), $expectedToken->getNbf()->getTimestamp());
+        $this->assertNotNull($expectedNbf);
+        $this->assertNotNull($nbf);
+
+        $this->assertSame($nbf->getTimestamp(), $expectedNbf->getTimestamp());
 
         $tokenArray = $token->toArray();
         $expectedTokenArray = $expectedToken->toArray();
