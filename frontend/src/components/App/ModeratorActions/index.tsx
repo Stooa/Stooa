@@ -59,8 +59,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     setLoading(true);
     const slug = { variables: { input: { slug: fid } } };
 
-    console.log('Start fishbowl in moderactor actions')
-
     if (data.hasIntroduction) {
       runFishbowl(slug)
         .then(() => {
