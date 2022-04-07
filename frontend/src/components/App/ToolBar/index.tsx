@@ -107,9 +107,7 @@ const ToolBar: React.FC = () => {
 
   // TODO: BUG IS HERE, THIS MAKES THE USER JOIN TWICE WHEN MUTED (?)
   useEffect(() => {
-    console.log('SAURA THIS IS TRIGGERED TWICE!');
     if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
-      console.log('Inside');
       console.log('[STOOA] Moderator join seat');
       joinSeat(userRepository.getUser());
     }
