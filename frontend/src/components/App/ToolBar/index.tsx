@@ -105,7 +105,6 @@ const ToolBar: React.FC = () => {
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO: BUG IS HERE, THIS MAKES THE USER JOIN TWICE WHEN MUTED (?)
   useEffect(() => {
     if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
       console.log('[STOOA] Moderator join seat');
