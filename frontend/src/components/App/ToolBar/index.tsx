@@ -54,8 +54,7 @@ const ToolBar: React.FC = () => {
       data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      conferenceStatus !== IConferenceStatus.RUNNING &&
-      conferenceStatus !== IConferenceStatus.FINISHED
+      conferenceStatus === IConferenceStatus.INTRODUCTION
     );
   };
 
@@ -64,7 +63,7 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
+      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
     );
   };
 
@@ -106,12 +105,15 @@ const ToolBar: React.FC = () => {
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // TODO: BUG IS HERE, THIS MAKES THE USER JOIN TWICE WHEN MUTED (?)
   useEffect(() => {
+    console.log('SAURA THIS IS TRIGGERED TWICE!');
     if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
+      console.log('Inside');
       console.log('[STOOA] Moderator join seat');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||
