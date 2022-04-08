@@ -8,10 +8,21 @@
 # BASE
 FROM php:7.4-fpm-buster as base
 
-WORKDIR /usr/app
+ARG UID=1000
+ARG GID=1000
+
+RUN usermod -u $UID www-data
+RUN groupmod -g $GID www-data
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN mkdir /var/www/.composer
+RUN chown www-data:www-data /var/www/.composer
+
+USER www-data
+
+WORKDIR /usr/app
 
 RUN install-php-extensions apcu bz2 gd intl opcache pdo_mysql zip gmp
 RUN apt-get update \
@@ -39,13 +50,13 @@ FROM base as fpm
 
 COPY .env /usr/app/.env
 
-COPY composer.json /usr/app/composer.json
-COPY composer.lock /usr/app/composer.lock
-COPY symfony.lock /usr/app/symfony.lock
+COPY --chown=$UID:$GID  composer.json /usr/app/composer.json
+COPY --chown=$UID:$GID  composer.lock /usr/app/composer.lock
+COPY --chown=$UID:$GID  symfony.lock /usr/app/symfony.lock
 
 RUN composer install --prefer-dist --no-progress --no-interaction --no-dev --no-autoloader
 
-COPY . /usr/app
+COPY --chown=$UID:$GID . /usr/app
 
 RUN composer dump-autoload --classmap-authoritative
 RUN composer symfony:dump-env prod
@@ -59,7 +70,11 @@ ENTRYPOINT ["bash", "/usr/app/.docker/app-prod/php-fpm.sh"]
 # FPM-DEV
 FROM base as fpm-dev
 
+USER root
+
 RUN install-php-extensions pcov xdebug
+
+USER www-data
 
 CMD ["php-fpm", "--allow-to-run-as-root"]
 
@@ -67,6 +82,12 @@ CMD ["php-fpm", "--allow-to-run-as-root"]
 # NGINX
 FROM nginx:1.21 as nginx
 
-COPY --from=fpm /usr/app/public /usr/app/public
+ARG UID=1000
+ARG GID=1000
+
+RUN usermod -u $UID nginx
+RUN groupmod -g $GID nginx
+
+COPY --chown=$UID:$GID --from=fpm /usr/app/public /usr/app/public
 
 COPY .docker/nginx-prod/default.conf.template /etc/nginx/templates/default.conf.template

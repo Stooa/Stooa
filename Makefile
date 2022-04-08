@@ -8,6 +8,8 @@
 AUTOLOAD = backend/vendor/autoload.php
 JITSI_CONFIG = jitsi-meet-cfg/jvb/logging.properties
 CERTS_DIR = .certs
+UID = $(shell id -u)
+GID = $(shell id -g)
 
 docker-exec-backend = docker compose exec backend /bin/bash -c "$1"
 docker-exec-frontend = docker compose exec frontend /bin/bash -c "$1"
@@ -23,7 +25,7 @@ compose: $(CERTS_DIR)
 	docker compose up -d
 
 build: halt
-	docker compose build
+	docker compose build --build-arg UID=$(UID) --build-arg GID=$(GID)
 
 halt:
 	docker compose stop
