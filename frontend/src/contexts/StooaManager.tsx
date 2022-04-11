@@ -78,6 +78,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       const autoClose = type === USER_MUST_LEAVE ? 15000 : 0;
       toast(t(message), {
         icon: '⚠️',
+        toastId: 'must-leave',
         type: 'warning',
         position: 'bottom-center',
         delay,
@@ -112,12 +113,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
         toast(message, {
           icon: '⏳',
           type: 'error',
+          toastId: 'one-minute',
           position: 'bottom-center',
           delay: 5000,
           autoClose: 10000
         });
         setLastMinuteToastSent(true);
-        clearInterval(timeUpInterval.current);
       }
       setTimeStatus(ITimeStatus.LAST_MINUTE);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
@@ -126,12 +127,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
         toast(message, {
           icon: '⏳',
           type: 'warning',
+          toastId: 'ten-minute',
           position: 'bottom-center',
           delay: 3000,
           autoClose: 10000
         });
         seTenMinuteToastSent(true);
-        clearInterval(timeUpInterval.current);
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
@@ -187,18 +188,18 @@ const StooaProvider = ({ data, isModerator, children }) => {
   useEffect(() => {
     checkIsTimeUp();
 
-    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1500);
+    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
     apiInterval.current = window.setInterval(checkApIConferenceStatus, 6000);
 
     return () => {
-      window.clearInterval(timeUpInterval.current);
-      window.clearInterval(apiInterval.current);
+      clearInterval(timeUpInterval.current);
+      clearInterval(apiInterval.current);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     clearInterval(timeUpInterval.current);
-    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1500);
+    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
   }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
