@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "291d498225ea23e88d9c93c407447816",
+    "content-hash": "7435fadab4cc1a2df9afd7cf6f8f5d49",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2807,16 +2807,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "dev-hotfix/unify-audience",
+            "version": "v2.15.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/aerrasti/LexikJWTAuthenticationBundle.git",
-                "reference": "666b1ceb8bab77e198e0f3497376b38c5a2344a5"
+                "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
+                "reference": "b7a640b135fc572d69375d97e4a87524a5e886d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aerrasti/LexikJWTAuthenticationBundle/zipball/666b1ceb8bab77e198e0f3497376b38c5a2344a5",
-                "reference": "666b1ceb8bab77e198e0f3497376b38c5a2344a5",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/b7a640b135fc572d69375d97e4a87524a5e886d0",
+                "reference": "b7a640b135fc572d69375d97e4a87524a5e886d0",
                 "shasum": ""
             },
             "require": {
@@ -2863,15 +2863,7 @@
                     "/Tests/"
                 ]
             },
-            "scripts": {
-                "test": [
-                    "vendor/bin/simple-phpunit",
-                    "ENCODER=lcobucci vendor/bin/simple-phpunit",
-                    "ENCODER=lcobucci ALGORITHM=HS256 vendor/bin/simple-phpunit",
-                    "ENCODER=user_id_claim vendor/bin/simple-phpunit",
-                    "PROVIDER=lexik_jwt vendor/bin/simple-phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2909,28 +2901,29 @@
             "description": "This bundle provides JWT authentication for your Symfony REST API",
             "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle",
             "keywords": [
-                "Symfony",
+                "Authentication",
+                "JWS",
                 "api",
-                "authentication",
                 "bundle",
-                "jws",
                 "jwt",
-                "rest"
+                "rest",
+                "symfony"
             ],
             "support": {
-                "source": "https://github.com/aerrasti/LexikJWTAuthenticationBundle/tree/hotfix/unify-audience"
+                "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.15.1"
             },
             "funding": [
                 {
-                    "type": "github",
-                    "url": "https://github.com/chalasr"
+                    "url": "https://github.com/chalasr",
+                    "type": "github"
                 },
                 {
-                    "type": "tidelift",
-                    "url": "https://tidelift.com/funding/github/packagist/lexik/jwt-authentication-bundle"
+                    "url": "https://tidelift.com/funding/github/packagist/lexik/jwt-authentication-bundle",
+                    "type": "tidelift"
                 }
             ],
-            "time": "2022-04-01T09:59:20+00:00"
+            "time": "2022-04-08T12:31:19+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -15283,18 +15276,9 @@
             "time": "2022-01-06T11:00:29+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "lexik/jwt-authentication-bundle",
-            "version": "dev-hotfix/unify-audience",
-            "alias": "2.14.4",
-            "alias_normalized": "2.14.4.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "lexik/jwt-authentication-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
