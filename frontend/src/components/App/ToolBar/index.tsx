@@ -54,8 +54,7 @@ const ToolBar: React.FC = () => {
       data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      conferenceStatus !== IConferenceStatus.RUNNING &&
-      conferenceStatus !== IConferenceStatus.FINISHED
+      conferenceStatus === IConferenceStatus.INTRODUCTION
     );
   };
 
@@ -64,7 +63,7 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
+      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
     );
   };
 
@@ -111,7 +110,7 @@ const ToolBar: React.FC = () => {
       console.log('[STOOA] Moderator join seat');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||
