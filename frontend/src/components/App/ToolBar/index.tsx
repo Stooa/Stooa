@@ -110,7 +110,7 @@ const ToolBar: React.FC = () => {
       console.log('[STOOA] Moderator join seat');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||
