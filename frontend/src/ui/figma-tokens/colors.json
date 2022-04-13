@@ -1,0 +1,364 @@
+{
+  "colors": {
+    "neutral100": {
+      "name": "neutral-100",
+      "rgbColor": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 1
+      },
+      "hexColor": "#fff"
+    },
+    "neutral200": {
+      "name": "neutral-200",
+      "rgbColor": {
+        "r": 250,
+        "g": 248,
+        "b": 245,
+        "a": 1
+      },
+      "hexColor": "#faf8f5"
+    },
+    "neutral300": {
+      "name": "neutral-300",
+      "rgbColor": {
+        "r": 244,
+        "g": 239,
+        "b": 231,
+        "a": 1
+      },
+      "hexColor": "#f4efe7"
+    },
+    "neutral400": {
+      "name": "neutral-400",
+      "rgbColor": {
+        "r": 235,
+        "g": 229,
+        "b": 221,
+        "a": 1
+      },
+      "hexColor": "#ebe5dd"
+    },
+    "neutral500": {
+      "name": "neutral-500",
+      "rgbColor": {
+        "r": 220,
+        "g": 205,
+        "b": 188,
+        "a": 1
+      },
+      "hexColor": "#dccdbc"
+    },
+    "neutral600": {
+      "name": "neutral-600",
+      "rgbColor": {
+        "r": 189,
+        "g": 162,
+        "b": 143,
+        "a": 1
+      },
+      "hexColor": "#bda28f"
+    },
+    "neutral700": {
+      "name": "neutral-700",
+      "rgbColor": {
+        "r": 144,
+        "g": 118,
+        "b": 111,
+        "a": 1
+      },
+      "hexColor": "#90766f"
+    },
+    "neutral800": {
+      "name": "neutral-800",
+      "rgbColor": {
+        "r": 68,
+        "g": 44,
+        "b": 22,
+        "a": 1
+      },
+      "hexColor": "#442c16"
+    },
+    "neutral900": {
+      "name": "neutral-900",
+      "rgbColor": {
+        "r": 34,
+        "g": 26,
+        "b": 13,
+        "a": 1
+      },
+      "hexColor": "#221a0d"
+    },
+    "bPurple100": {
+      "name": "b-purple-100",
+      "rgbColor": {
+        "r": 246,
+        "g": 237,
+        "b": 249,
+        "a": 1
+      },
+      "hexColor": "#f6edf9"
+    },
+    "bPurple200": {
+      "name": "b-purple-200",
+      "rgbColor": {
+        "r": 239,
+        "g": 223,
+        "b": 245,
+        "a": 1
+      },
+      "hexColor": "#efdff5"
+    },
+    "bPurple300": {
+      "name": "b-purple-300",
+      "rgbColor": {
+        "r": 213,
+        "g": 172,
+        "b": 227,
+        "a": 1
+      },
+      "hexColor": "#d5ace3"
+    },
+    "bPurple400": {
+      "name": "b-purple-400",
+      "rgbColor": {
+        "r": 185,
+        "g": 88,
+        "b": 219,
+        "a": 1
+      },
+      "hexColor": "#b958db"
+    },
+    "bPurple500": {
+      "name": "b-purple-500",
+      "rgbColor": {
+        "r": 125,
+        "g": 19,
+        "b": 163,
+        "a": 1
+      },
+      "hexColor": "#7d13a3"
+    },
+    "bPurple600": {
+      "name": "b-purple-600",
+      "rgbColor": {
+        "r": 105,
+        "g": 0,
+        "b": 141,
+        "a": 1
+      },
+      "hexColor": "#69008d"
+    },
+    "bPurple800": {
+      "name": "b-purple-800",
+      "rgbColor": {
+        "r": 56,
+        "g": 17,
+        "b": 70,
+        "a": 1
+      },
+      "hexColor": "#381146"
+    },
+    "bPurple900": {
+      "name": "b-purple-900",
+      "rgbColor": {
+        "r": 35,
+        "g": 0,
+        "b": 48,
+        "a": 1
+      },
+      "hexColor": "#230030"
+    },
+    "bGreen100": {
+      "name": "b-green-100",
+      "rgbColor": {
+        "r": 234,
+        "g": 246,
+        "b": 244,
+        "a": 1
+      },
+      "hexColor": "#eaf6f4"
+    },
+    "bGreen200": {
+      "name": "b-green-200",
+      "rgbColor": {
+        "r": 179,
+        "g": 223,
+        "b": 215,
+        "a": 1
+      },
+      "hexColor": "#b3dfd7"
+    },
+    "bGreen400": {
+      "name": "b-green-400",
+      "rgbColor": {
+        "r": 93,
+        "g": 219,
+        "b": 208,
+        "a": 1
+      },
+      "hexColor": "#5ddbd0"
+    },
+    "bGreen500": {
+      "name": "b-green-500",
+      "rgbColor": {
+        "r": 46,
+        "g": 196,
+        "b": 182,
+        "a": 1
+      },
+      "hexColor": "#2ec4b6"
+    },
+    "bGreen600": {
+      "name": "b-green-600",
+      "rgbColor": {
+        "r": 13,
+        "g": 168,
+        "b": 161,
+        "a": 1
+      },
+      "hexColor": "#0da8a1"
+    },
+    "bGreen900": {
+      "name": "b-green-900",
+      "rgbColor": {
+        "r": 2,
+        "g": 53,
+        "b": 48,
+        "a": 1
+      },
+      "hexColor": "#023530"
+    },
+    "bRed100": {
+      "name": "b-red-100",
+      "rgbColor": {
+        "r": 255,
+        "g": 235,
+        "b": 229,
+        "a": 1
+      },
+      "hexColor": "#ffebe5"
+    },
+    "bRed200": {
+      "name": "b-red-200",
+      "rgbColor": {
+        "r": 255,
+        "g": 218,
+        "b": 216,
+        "a": 1
+      },
+      "hexColor": "#ffdad8"
+    },
+    "bRed400": {
+      "name": "b-red-400",
+      "rgbColor": {
+        "r": 255,
+        "g": 152,
+        "b": 138,
+        "a": 1
+      },
+      "hexColor": "#ff988a"
+    },
+    "bRed500": {
+      "name": "b-red-500",
+      "rgbColor": {
+        "r": 250,
+        "g": 105,
+        "b": 105,
+        "a": 1
+      },
+      "hexColor": "#fa6969"
+    },
+    "bRed600": {
+      "name": "b-red-600",
+      "rgbColor": {
+        "r": 199,
+        "g": 40,
+        "b": 53,
+        "a": 1
+      },
+      "hexColor": "#c72835"
+    },
+    "bRed800": {
+      "name": "b-red-800",
+      "rgbColor": {
+        "r": 140,
+        "g": 31,
+        "b": 31,
+        "a": 1
+      },
+      "hexColor": "#8c1f1f"
+    },
+    "bRed900": {
+      "name": "b-red-900",
+      "rgbColor": {
+        "r": 104,
+        "g": 21,
+        "b": 16,
+        "a": 1
+      },
+      "hexColor": "#681510"
+    },
+    "bYellow100": {
+      "name": "b-yellow-100",
+      "rgbColor": {
+        "r": 251,
+        "g": 245,
+        "b": 218,
+        "a": 1
+      },
+      "hexColor": "#fbf5da"
+    },
+    "bYellow200": {
+      "name": "b-yellow-200",
+      "rgbColor": {
+        "r": 255,
+        "g": 240,
+        "b": 175,
+        "a": 1
+      },
+      "hexColor": "#fff0af"
+    },
+    "bYellow300": {
+      "name": "b-yellow-300",
+      "rgbColor": {
+        "r": 238,
+        "g": 222,
+        "b": 150,
+        "a": 1
+      },
+      "hexColor": "#eede96"
+    },
+    "bYellow500": {
+      "name": "b-yellow-500",
+      "rgbColor": {
+        "r": 255,
+        "g": 221,
+        "b": 110,
+        "a": 1
+      },
+      "hexColor": "#ffdd6e"
+    },
+    "bYellow900": {
+      "name": "b-yellow-900",
+      "rgbColor": {
+        "r": 71,
+        "g": 36,
+        "b": 0,
+        "a": 1
+      },
+      "hexColor": "#472400"
+    },
+    "bGreen800": {
+      "name": "b-green-800",
+      "rgbColor": {
+        "r": 11,
+        "g": 122,
+        "b": 117,
+        "a": 1
+      },
+      "hexColor": "#0b7a75"
+    }
+  }
+}
