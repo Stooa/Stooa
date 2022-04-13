@@ -19,7 +19,7 @@ import {
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
-import { TEXT_LG, TEXT_MD } from '@/ui/Texts';
+import { BODY_LG, BODY_MD } from '@/ui/Texts';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
@@ -145,7 +145,7 @@ const Header = styled.div`
   margin-bottom: ${space(2)};
 
   .fishbowl-list__title {
-    ${TEXT_LG}
+    ${BODY_LG}
     font-weight: 300;
   }
 
@@ -246,7 +246,7 @@ const CardStyled = styled.div`
 `;
 
 const CardTitle = styled.div`
-  ${TEXT_MD};
+  ${BODY_MD};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

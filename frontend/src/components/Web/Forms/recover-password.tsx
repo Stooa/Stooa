@@ -57,7 +57,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <SubmitBtn text={t('recover:button')} disabled={props.isSubmitting} />
       </fieldset>
       <fieldset className="form__footer">
-        <p className="text-sm">
+        <p className="body-sm">
           <Link href={ROUTE_SIGN_IN}>
             <a>{t('recover:back')}</a>
           </Link>

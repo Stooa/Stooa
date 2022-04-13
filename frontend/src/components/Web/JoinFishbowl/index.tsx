@@ -78,7 +78,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
                 <ButtonHollow as="a">{t('joinMember')}</ButtonHollow>
               </Link>
             </div>
-            <p className="text-xxs">{t('joinMemberNote')}</p>
+            <p className="body-xs">{t('joinMemberNote')}</p>
           </>
         )}
       </JoinFishbowlStyled>

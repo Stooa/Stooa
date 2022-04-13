@@ -124,10 +124,10 @@ const Home = () => {
     <Layout title={t('title')}>
       <Billboard className="billboard-animate">
         <div id="animated-billboard-morph"></div>
-        <h1 data-testid="landing-title" className="title-xl animate-item">
+        <h1 data-testid="landing-title" className="title-display animate-item">
           {t('title')}
         </h1>
-        <Description className="text-lg animate-item" center>
+        <Description className="body-lg animate-item" center>
           {t('description')}
         </Description>
         <div className="cta-wrapper">
@@ -187,7 +187,7 @@ const Home = () => {
         </div>
         <Row dark className="animate">
           <h2 className="title-lg animate-item definition">{t('definition.title')}</h2>
-          <Description center className="animate-item text-lg">
+          <Description center className="animate-item body-lg">
             <Trans
               i18nKey="home:definition.description"
               components={{ strong: <strong />, p: <p /> }}

@@ -46,7 +46,7 @@ const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled
 
   return (
     <Button
-      className={`text-sm ${muted ? 'muted' : ''}`}
+      className={`body-sm ${muted ? 'muted' : ''}`}
       onClick={handleOnClick}
       disabled={disabled}
       active={active}

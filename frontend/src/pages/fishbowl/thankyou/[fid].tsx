@@ -68,16 +68,16 @@ const ThankYou = () => {
         className="error"
       >
         <p className="title-sm medium">{t('finishedEvent')}</p>
-        <div className="text-sm">
+        <div className="body-sm">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
             startDate.time
           } - ${endDate.time} ${endDate.timezone}`}
         </div>
       </Time>
-      <h1 className="text-lg medium">{fb.name}</h1>
-      {fb.description && <Description className="text-sm">{fb.description}</Description>}
+      <h1 className="body-lg medium">{fb.name}</h1>
+      {fb.description && <Description className="body-sm">{fb.description}</Description>}
       <ThankYouStyled>
-        <div className="share text-md medium">
+        <div className="share body-md medium">
           <p>{t('share')}</p>
           <ul>
             <li>

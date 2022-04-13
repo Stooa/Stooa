@@ -41,7 +41,7 @@ const Benefits = ({ item }: Props): JSX.Element => {
       <Row flex reverse={item.reverse} className="animate">
         <Column className="col animate-item">
           <h2 className="title-lg">{t(`keybenefits.${item.name}.title`)}</h2>
-          <Description className="text-lg">{t(`keybenefits.${item.name}.description`)}</Description>
+          <Description className="body-lg">{t(`keybenefits.${item.name}.description`)}</Description>
         </Column>
         <Column className="col animate-item">
           <div id={item.id}></div>

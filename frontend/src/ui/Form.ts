@@ -26,7 +26,7 @@ import {
   COLOR_RED_500,
   FONT_BASE_SIZE
 } from '@/ui/settings';
-import { TEXT_SM, TEXT_XXS } from '@/ui/Texts';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
 interface Props {
   $isFull?: boolean;
@@ -203,7 +203,7 @@ const InputStyled = styled.div`
     width: 100%;
 
     ${media.min('tablet')`
-      ${TEXT_SM}
+      ${BODY_SM}
     `}
 
     &:focus {
@@ -251,7 +251,7 @@ const InputStyled = styled.div`
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
-      ${TEXT_XXS};
+      ${BODY_XS};
     }
   }
 
@@ -260,7 +260,7 @@ const InputStyled = styled.div`
     color: ${COLOR_NEUTRO_700};
     top: ${space(1.3)};
 
-    ${TEXT_XXS};
+    ${BODY_XS};
   }
 
   .help {

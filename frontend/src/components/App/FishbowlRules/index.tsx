@@ -16,13 +16,13 @@ const FishbowlRules = ({ action }) => {
     <>
       <Title className="title-sm">📐The 3 fishbowl rules</Title>
       <List>
-        <li className="text-sm">
+        <li className="body-sm">
           Everyone is welcomed to participate both as a speaker and as an observer.
         </li>
-        <li className="text-sm">
+        <li className="body-sm">
           Feel free to occupy a “seat” whenever you want to engage in the discussion.
         </li>
-        <li className="text-sm">
+        <li className="body-sm">
           It should always be an empty “seat”. Should someone occupies a seat, another speaker
           should leave.
         </li>

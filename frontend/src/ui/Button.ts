@@ -19,11 +19,11 @@ import {
   COLOR_RED_400,
   COLOR_RED_500
 } from '@/ui/settings';
-import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from '@/ui/Texts';
+import { APP_SM, APP_MD, BODY_SM, BODY_MD } from '@/ui/Texts';
 import { rems, space } from '@/ui/helpers';
 
 const buttonStyles = css`
-  ${TEXT_MD}
+  ${BODY_MD}
 
   align-items: center;
   background: ${COLOR_PURPLE_500};
@@ -77,7 +77,7 @@ const Button = styled.button<{ full?: boolean }>`
 `;
 
 const ButtonSmall = styled(Button)`
-  ${TEXT_SM}
+  ${BODY_SM}
 
   border-width: 1px;
   padding: ${space(1.1)} ${space(3)} ${space(0.8)};
@@ -149,7 +149,7 @@ const ButtonStyledLink = styled.a<{ full?: boolean }>`
 `;
 
 const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
-  ${TEXT_SM}
+  ${BODY_SM}
 
   border-width: 1px;
   padding: ${space(1.1)} ${space(3)} ${space(0.8)};

@@ -25,7 +25,7 @@ import {
   COLOR_RED_600,
   COLOR_YELLOW_100
 } from '@/ui/settings';
-import { TEXT_SM, TEXT_LG } from '@/ui/Texts';
+import { BODY_SM, BODY_LG } from '@/ui/Texts';
 
 const ERROR_STYLES = css`
   background: ${COLOR_RED_100};
@@ -56,7 +56,7 @@ const INFO_STYLES = css`
 `;
 
 const Alert = styled.div<{ block?: boolean }>`
-  ${TEXT_SM}
+  ${BODY_SM}
 
   align-items: center;
   border-radius: ${BORDER_RADIUS};
@@ -94,7 +94,7 @@ const Alert = styled.div<{ block?: boolean }>`
   }
 
   &.lg {
-    ${TEXT_LG}
+    ${BODY_LG}
 
     padding: ${space(2)} ${space(4)};
   }

@@ -47,7 +47,7 @@ const Avatar: React.FC = () => {
   return (
     <AvatarStyled ref={wrapperRef}>
       <button
-        className={`avatar medium text-sm ${active ? 'active' : ''}`}
+        className={`avatar medium body-sm ${active ? 'active' : ''}`}
         onClick={toggleDropdown}
       >
         <AvatarIcon />
@@ -76,7 +76,7 @@ const Avatar: React.FC = () => {
               <span>{t('changePassword')}</span>
             </a>
           </Link>
-          <button className="item text-sm" onClick={logout}>
+          <button className="item body-sm" onClick={logout}>
             <Logout />
             <span>{t('signout')}</span>
           </button>

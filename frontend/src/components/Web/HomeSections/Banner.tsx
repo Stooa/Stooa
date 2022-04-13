@@ -36,7 +36,7 @@ const Banner: React.FC = () => {
     <BannerStyled className="animate">
       <div id="animated-banner-morph"></div>
       <div>
-        <p className="text-lg animate-item">{t('banner')}</p>
+        <p className="body-lg animate-item">{t('banner')}</p>
         <Link href={ROUTE_FISHBOWL_CREATE} passHref>
           <Button as="a" className="animate-item cta-create-fishbowl">
             <span>{t('scheduleFishbowl')}</span>

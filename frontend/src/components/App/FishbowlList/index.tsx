@@ -161,24 +161,9 @@ const FishbowlList = () => {
                 <Trans i18nKey="fishbowl-list:emptyListDescription" components={{ i: <i /> }} />
               </p>
               <div className="empty-actions">
-                <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-                  <ButtonStyledLink
-                    className="animate-item cta-create-fishbowl"
-                    onClick={() => {
-                      pushEventDataLayer({
-                        category: 'Host Fishbowl Now',
-                        action: 'Empty Fishbowl List',
-                        label: 'Fishbowl List'
-                      });
-                    }}
-                  >
-                    <span>{t('common:hostFishbowlNow')}</span>
-                    <ArrowRight />
-                  </ButtonStyledLink>
-                </Link>
                 <Link href={ROUTE_FISHBOWL_CREATE} passHref>
                   <ButtonStyledLink
-                    className="animate-item cta-create-fishbowl secondary"
+                    className="animate-item cta-create-fishbowl"
                     onClick={() => {
                       pushEventDataLayer({
                         category: 'Schedule Fishbowl',
@@ -188,6 +173,21 @@ const FishbowlList = () => {
                     }}
                   >
                     <span>{t('common:scheduleFishbowl')}</span>
+                    <ArrowRight />
+                  </ButtonStyledLink>
+                </Link>
+                <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+                  <ButtonStyledLink
+                    className="animate-item cta-create-fishbowl secondary"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Host Fishbowl Now',
+                        action: 'Empty Fishbowl List',
+                        label: 'Fishbowl List'
+                      });
+                    }}
+                  >
+                    <span>{t('common:hostFishbowlNow')}</span>
                     <ArrowRight />
                   </ButtonStyledLink>
                 </Link>

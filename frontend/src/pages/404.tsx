@@ -26,7 +26,7 @@ const Page404 = () => {
         <NotFoundImg className="not-found-img" />
         <h1>
           <p className="title-md">{t('404.pageTitle')}</p>
-          <p className="text-lg medium">{t('404.title')}</p>
+          <p className="body-lg medium">{t('404.title')}</p>
         </h1>
         <p>{t('404.text')}</p>
         <div className="ctas">
