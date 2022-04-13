@@ -27,10 +27,9 @@ const Seats = () => {
 
   return (
     <SeatsStyled>
-      <div className="content">
+      <div className={`content ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
           <Seat
-            className={isConferenceNotStarted ? 'not-started' : ''}
             key={`seat-${seat + 1}`}
             id={`seat-${seat + 1}`}
           >
