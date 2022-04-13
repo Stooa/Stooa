@@ -163,24 +163,8 @@ const ThankYou = () => {
           </ul>
         </div>
         <div className="action-wrapper">
-          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <ButtonStyledLinkSmall
-              className="host-now"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Host Fishbowl Now',
-                  action: 'Thank You Page',
-                  label: `fishbowl/thankyou/${fid}`
-                });
-              }}
-            >
-              <span>{t('common:hostFishbowlNow')}</span>
-              <ArrowRight />
-            </ButtonStyledLinkSmall>
-          </RedirectLink>
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <ButtonStyledLinkSmall
-              className="secondary"
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Schedule Fishbowl',
@@ -190,7 +174,20 @@ const ThankYou = () => {
               }}
             >
               <span>{t('common:scheduleFishbowl')}</span>
-              <ArrowRight />
+            </ButtonStyledLinkSmall>
+          </RedirectLink>
+          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+            <ButtonStyledLinkSmall
+              className="host-now secondary"
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Host Fishbowl Now',
+                  action: 'Thank You Page',
+                  label: `fishbowl/thankyou/${fid}`
+                });
+              }}
+            >
+              <span>{t('common:hostFishbowlNow')}</span>
             </ButtonStyledLinkSmall>
           </RedirectLink>
         </div>

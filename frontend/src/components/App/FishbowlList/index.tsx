@@ -138,7 +138,7 @@ const FishbowlList = () => {
           </div>
           <span className="divider" />
         </Header>
-        <FishbowlListContent>
+        <FishbowlListContent className={fishbowls.length === 0 ? '' : 'not-empty'}>
           {fishbowls.length === 0 ? (
             <EmptyFishbowlList data-testid="empty-list">
               <div className="fishbowl-list__empty-illustration">
@@ -173,7 +173,6 @@ const FishbowlList = () => {
                     }}
                   >
                     <span>{t('common:scheduleFishbowl')}</span>
-                    <ArrowRight />
                   </ButtonStyledLink>
                 </Link>
                 <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
@@ -188,7 +187,6 @@ const FishbowlList = () => {
                     }}
                   >
                     <span>{t('common:hostFishbowlNow')}</span>
-                    <ArrowRight />
                   </ButtonStyledLink>
                 </Link>
               </div>

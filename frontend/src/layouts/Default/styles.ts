@@ -23,10 +23,10 @@ const Container = styled.div`
   background-color: ${COLOR_NEUTRO_200};
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${space(6)} 1fr;
+  grid-template-rows: ${space(6)} auto;
   gap: 0;
   grid-template-areas: 'Header' 'Main';
-  min-height: calc(100vh - ${space(6)});
+  min-height: calc(100vh - ${space(6)} - ${space(30)});
   padding: ${space(3)};
   position: relative;
   transition: grid-template-columns 0.25s ease-in-out;

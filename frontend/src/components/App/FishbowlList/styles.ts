@@ -30,9 +30,12 @@ const FishbowlListWrapper = styled.div`
 
 const FishbowlListContent = styled.div`
   display: grid;
-  width: 100%;
-  height: 815px;
   grid-template-columns: 1fr auto;
+  width: 100%;
+
+  &.not-empty {
+    height: 815px;
+  }
 
   ${media.min('desktop')`
     column-gap: ${space()};
@@ -123,7 +126,7 @@ const EmptyFishbowlList = styled.div`
   }
 
   p {
-    margin-bottom: ${space(3)};
+    margin-bottom: ${space(4)};
   }
 
   .empty-actions {
