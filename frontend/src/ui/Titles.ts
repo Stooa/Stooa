@@ -9,32 +9,70 @@
 
 import { css } from 'styled-components';
 
-import { rems } from '@/ui/helpers';
+import { media, rems } from '@/ui/helpers';
+import typographyData from '@/ui/figma-tokens/typography.json';
+
+const typography = typographyData.typography;
+
+const TITLE_DISPLAY = css`
+  font-size: ${rems(typography.mobileDisplay.rawFontSize)};
+  line-height: ${typography.mobileDisplay.lineHeight};
+  font-weight: 700;
+
+  ${media.min('tablet')`
+  font-size: ${rems(typography.desktopDisplay.rawFontSize)};
+  line-height: ${typography.desktopDisplay.lineHeight};
+  `}
+`;
+
+const TITLE_LG = css`
+  font-size: ${rems(typography.mobileTitlelg.rawFontSize)};
+  line-height: ${typography.mobileTitlelg.lineHeight};
+  font-weight: 700;
+
+  ${media.min('tablet')`
+    font-size: ${rems(typography.desktopTitlelg.rawFontSize)};
+    line-height: ${typography.desktopTitlelg.lineHeight};
+  `}
+`;
+
+const TITLE_MD = css`
+  font-size: ${rems(typography.mobileTitlemd.rawFontSize)};
+  line-height: ${typography.mobileTitlemd.lineHeight};
+  font-weight: 700;
+
+  ${media.min('tablet')`
+    font-size: ${rems(typography.desktopTitlemd.rawFontSize)};
+    line-height: ${typography.desktopTitlemd.lineHeight};
+  `}
+`;
+
+const TITLE_SM = css`
+  font-size: ${rems(typography.desktopTitlesm.rawFontSize)};
+  line-height: ${typography.desktopTitlesm.lineHeight};
+  font-weight: 500;
+
+  ${media.min('tablet')`
+    font-size: ${rems(typography.desktopTitlesm.rawFontSize)};
+    line-height: ${typography.desktopTitlesm.lineHeight};
+  `}
+`;
 
 const Titles = css`
-  .title-xl {
-    font-size: ${rems(83)};
-    font-weight: 600;
-    line-height: 1.15;
+  .title-display {
+    ${TITLE_DISPLAY}
   }
 
   .title-lg {
-    font-size: ${rems(60)};
-    font-weight: 600;
-    line-height: 1.15;
+    ${TITLE_LG}
   }
 
   .title-md {
-    font-size: ${rems(35)};
-    font-weight: 600;
-    line-height: 1.142;
+    ${TITLE_MD}
   }
 
   .title-sm {
-    font-size: ${rems(14)};
-    font-weight: 500;
-    letter-spacing: 0.15px;
-    line-height: 1.5;
+    ${TITLE_SM}
   }
 `;
 

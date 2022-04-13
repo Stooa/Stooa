@@ -11,27 +11,31 @@ import { css } from 'styled-components';
 
 import { rems } from '@/ui/helpers';
 import { FONT_BASE_SIZE } from '@/ui/settings';
+import typographyData from '@/ui/figma-tokens/typography.json';
 
-const TEXT_LG = css`
-  font-size: ${rems(20)};
-  line-height: 1.4;
+const typography = typographyData.typography;
+
+const BODY_LG = css`
+  font-size: ${rems(typography.bodylg.rawFontSize)};
+  line-height: ${typography.bodylg.lineHeight};
 `;
 
-const TEXT_MD = css`
-  font-size: ${rems(FONT_BASE_SIZE)};
-  line-height: 1.5;
+const BODY_MD = css`
+  font-size: ${rems(typography.bodymd.rawFontSize)};
+  line-height: ${typography.bodymd.lineHeight};
 `;
 
-const TEXT_SM = css`
-  font-size: ${rems(14)};
-  line-height: 1.4;
+const BODY_SM = css`
+  font-size: ${rems(typography.bodysm.rawFontSize)};
+  line-height: ${typography.bodysm.lineHeight};
 `;
 
-const TEXT_XXS = css`
-  font-size: ${rems(12)};
-  line-height: 1;
+const BODY_XS = css`
+  font-size: ${rems(typography.bodyxs.rawFontSize)};
+  line-height: ${typography.bodyxs.lineHeight};
 `;
 
+// TODO
 const APP_MD = css`
   font-size: 14px;
   line-height: 1.2857;
@@ -43,20 +47,20 @@ const APP_SM = css`
 `;
 
 const Texts = css`
-  .text-lg {
-    ${TEXT_LG}
+  .body-lg {
+    ${BODY_LG}
   }
 
-  .text-md {
-    ${TEXT_MD}
+  .body-md {
+    ${BODY_MD}
   }
 
-  .text-sm {
-    ${TEXT_SM}
+  .body-sm {
+    ${BODY_SM}
   }
 
-  .text-xxs {
-    ${TEXT_XXS}
+  .body-xs {
+    ${BODY_XS}
   }
 
   .app-lg {
@@ -97,5 +101,5 @@ const Texts = css`
   }
 `;
 
-export { APP_SM, APP_MD, TEXT_LG, TEXT_MD, TEXT_SM, TEXT_XXS };
+export { APP_SM, APP_MD, BODY_LG, BODY_MD, BODY_SM, BODY_XS };
 export default Texts;
