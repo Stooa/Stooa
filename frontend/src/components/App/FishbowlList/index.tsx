@@ -25,12 +25,7 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import {
-  ButtonLinkColored,
-  ButtonSmall,
-  ButtonStyledLink,
-  ButtonStyledLinkSmall
-} from '@/ui/Button';
+import { ButtonLinkColored, ButtonSmall, ButtonStyledLink } from '@/ui/Button';
 import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
@@ -50,7 +45,6 @@ import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { basicRevealWithDelay, bottomMobileReveal } from '@/ui/animations/motion/reveals';
 import PlusSign from '@/ui/svg/plus-sign.svg';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import BackArrow from '@/ui/svg/arrow-prev.svg';
 import { BREAKPOINTS } from '@/ui/settings';
 
@@ -275,7 +269,6 @@ const FishbowlList = () => {
                           data-testid="started-enter-fishbowl"
                         >
                           <span>{t('enterFishbowl')}</span>
-                          <ArrowRight />
                         </ButtonStyledLink>
                       </RedirectLink>
                       <ButtonLinkColored className="back" onClick={() => setSelectedFishbowl(null)}>

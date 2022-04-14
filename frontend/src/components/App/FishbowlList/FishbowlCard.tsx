@@ -20,7 +20,6 @@ import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
 
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
 import { ButtonStyledLinkSmall } from '@/ui/Button';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { convertIntoClassName } from '@/lib/helpers';
 
 interface Props {
@@ -84,7 +83,6 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
               }}
             >
               <span>{t('enterFishbowl')}</span>
-              <ArrowRight />
             </ButtonStyledLinkSmall>
           </RedirectLink>
         )}
