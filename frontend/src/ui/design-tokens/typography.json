@@ -1,395 +1,132 @@
 {
   "typography": {
-    "mobileTitleXl": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "61px"
-      },
-      "lineHeight": {
-        "value": "69px"
-      },
-      "lineHeightRelative": {
-        "value": 1.13
-      },
-      "fontWeight": {
-        "value": 700
-      }
+    "desktopDisplay": {
+      "fontFamily": "Geomanist",
+      "fontSize": "4.75rem",
+      "rawFontSize": 76,
+      "fontWeight": 700,
+      "letterSpacing": 0,
+      "lineHeight": 1.15
     },
-    "mobileTitleLg": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "39px"
-      },
-      "lineHeight": {
-        "value": "50px"
-      },
-      "lineHeightRelative": {
-        "value": 1.28
-      },
-      "fontWeight": {
-        "value": 500
-      }
+    "desktopTitlelg": {
+      "fontFamily": "Geomanist",
+      "fontSize": "3.8125rem",
+      "rawFontSize": 61,
+      "fontWeight": 700,
+      "letterSpacing": 0,
+      "lineHeight": 1.04
     },
-    "mobileTitleMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "25px"
-      },
-      "lineHeight": {
-        "value": "31px"
-      },
-      "lineHeightRelative": {
-        "value": 1.24
-      },
-      "fontWeight": {
-        "value": 500
-      }
+    "desktopTitlemd": {
+      "fontFamily": "Geomanist",
+      "fontSize": "2rem",
+      "rawFontSize": 32,
+      "fontWeight": 700,
+      "letterSpacing": 0,
+      "lineHeight": 1.25
     },
-    "mobileTitleSm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "13px"
-      },
-      "lineHeight": {
-        "value": "19px"
-      },
-      "lineHeightRelative": {
-        "value": 1.46
-      },
-      "fontWeight": {
-        "value": 700
-      }
+    "desktopTitlesm": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1.5625rem",
+      "rawFontSize": 25,
+      "fontWeight": 500,
+      "letterSpacing": 0,
+      "lineHeight": 1.28
     },
-    "mobileBodyLg": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "20px"
-      },
-      "lineHeight": {
-        "value": "31px"
-      },
-      "lineHeightRelative": {
-        "value": 1.55
-      },
-      "fontWeight": {
-        "value": 400
-      }
+    "mobileDisplay": {
+      "fontFamily": "Geomanist",
+      "fontSize": "3.8125rem",
+      "rawFontSize": 61,
+      "fontWeight": 700,
+      "letterSpacing": 0,
+      "lineHeight": 1.04
     },
-    "mobileBodyMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "15px"
-      },
-      "lineHeight": {
-        "value": "23px"
-      },
-      "lineHeightRelative": {
-        "value": 1.53
-      },
-      "fontWeight": {
-        "value": 400
-      }
+    "mobileTitlelg": {
+      "fontFamily": "Geomanist",
+      "fontSize": "2.4375rem",
+      "rawFontSize": 39,
+      "fontWeight": 700,
+      "letterSpacing": 0,
+      "lineHeight": 1.23
     },
-    "mobileBodySm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "13px"
-      },
-      "lineHeight": {
-        "value": "19px"
-      },
-      "lineHeightRelative": {
-        "value": 1.46
-      },
-      "fontWeight": {
-        "value": 400
-      }
+    "mobileTitlemd": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1.5625rem",
+      "rawFontSize": 25,
+      "fontWeight": 700,
+      "letterSpacing": 0,
+      "lineHeight": 1.28
     },
-    "mobileButtonMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "13px"
-      },
-      "lineHeight": {
-        "value": "19px"
-      },
-      "lineHeightRelative": {
-        "value": 1.46
-      },
-      "fontWeight": {
-        "value": 500
-      }
+    "mobileTitlesm": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1rem",
+      "rawFontSize": 16,
+      "fontWeight": 500,
+      "letterSpacing": 0,
+      "lineHeight": 1.18
     },
-    "mobileButtonSm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "11px"
-      },
-      "lineHeight": {
-        "value": "19px"
-      },
-      "lineHeightRelative": {
-        "value": 1.72
-      },
-      "fontWeight": {
-        "value": 500
-      }
+    "bodylg": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1.25rem",
+      "rawFontSize": 20,
+      "fontWeight": 400,
+      "letterSpacing": 0,
+      "lineHeight": 1.2
     },
-    "desktopTitleXl": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "86px"
-      },
-      "lineHeight": {
-        "value": "99px"
-      },
-      "lineHeightRelative": {
-        "value": 1.15
-      },
-      "fontWeight": {
-        "value": 700
-      }
+    "bodylgBold": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1.25rem",
+      "rawFontSize": 20,
+      "fontWeight": 500,
+      "letterSpacing": 0,
+      "lineHeight": 1.2
     },
-    "desktopTitleLg": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "60px"
-      },
-      "lineHeight": {
-        "value": "63px"
-      },
-      "lineHeightRelative": {
-        "value": 1.05
-      },
-      "fontWeight": {
-        "value": 700
-      }
+    "bodymd": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1rem",
+      "rawFontSize": 16,
+      "fontWeight": 400,
+      "letterSpacing": 0,
+      "lineHeight": 1.5
     },
-    "desktopTitleMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "35px"
-      },
-      "lineHeight": {
-        "value": "40px"
-      },
-      "lineHeightRelative": {
-        "value": 1.14
-      },
-      "fontWeight": {
-        "value": 700
-      }
+    "bodymdBold": {
+      "fontFamily": "Geomanist",
+      "fontSize": "1rem",
+      "rawFontSize": 16,
+      "fontWeight": 500,
+      "letterSpacing": 0,
+      "lineHeight": 1.25
     },
-    "desktopTitleSm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "14px"
-      },
-      "lineHeight": {
-        "value": "21px"
-      },
-      "lineHeightRelative": {
-        "value": 1.5
-      },
-      "fontWeight": {
-        "value": 700
-      }
+    "link": {
+      "fontFamily": "Geomanist",
+      "fontSize": "0.875rem",
+      "rawFontSize": 14,
+      "fontWeight": 400,
+      "letterSpacing": 0,
+      "lineHeight": 1.14
     },
-    "desktopBodyLg": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "20px"
-      },
-      "lineHeight": {
-        "value": "28px"
-      },
-      "lineHeightRelative": {
-        "value": 1.4
-      },
-      "fontWeight": {
-        "value": 400
-      }
+    "bodysm": {
+      "fontFamily": "Geomanist",
+      "fontSize": "0.875rem",
+      "rawFontSize": 14,
+      "fontWeight": 400,
+      "letterSpacing": 0,
+      "lineHeight": 1.42
     },
-    "desktopBodyMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "16px"
-      },
-      "lineHeight": {
-        "value": "24px"
-      },
-      "lineHeightRelative": {
-        "value": 1.5
-      },
-      "fontWeight": {
-        "value": 400
-      }
+    "bodysmBold": {
+      "fontFamily": "Geomanist",
+      "fontSize": "0.875rem",
+      "rawFontSize": 14,
+      "fontWeight": 500,
+      "letterSpacing": 0,
+      "lineHeight": 1.42
     },
-    "desktopBodySm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "14px"
-      },
-      "lineHeight": {
-        "value": "21px"
-      },
-      "lineHeightRelative": {
-        "value": 1.5
-      },
-      "fontWeight": {
-        "value": 400
-      }
-    },
-    "desktopButtonMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "13px"
-      },
-      "lineHeight": {
-        "value": "14px"
-      },
-      "lineHeightRelative": {
-        "value": 1.07
-      },
-      "fontWeight": {
-        "value": 700
-      }
-    },
-    "desktopnButtonSm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "11px"
-      },
-      "lineHeight": {
-        "value": "12px"
-      },
-      "lineHeightRelative": {
-        "value": 1.09
-      },
-      "fontWeight": {
-        "value": 500
-      }
-    },
-    "appLg": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "25px"
-      },
-      "lineHeight": {
-        "value": "22px"
-      },
-      "lineHeightRelative": {
-        "value": 0.88
-      },
-      "fontWeight": {
-        "value": 500
-      }
-    },
-    "appMdBold": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "14px"
-      },
-      "lineHeight": {
-        "value": "18px"
-      },
-      "lineHeightRelative": {
-        "value": 1.28
-      },
-      "fontWeight": {
-        "value": 500
-      }
-    },
-    "appMd": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "14px"
-      },
-      "lineHeight": {
-        "value": "18px"
-      },
-      "lineHeightRelative": {
-        "value": 1.28
-      },
-      "fontWeight": {
-        "value": 400
-      }
-    },
-    "appSmCaps": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "11px"
-      },
-      "lineHeight": {
-        "value": "14px"
-      },
-      "lineHeightRelative": {
-        "value": 1.27
-      },
-      "fontWeight": {
-        "value": 500
-      }
-    },
-    "appSm": {
-      "fontFamily": {
-        "value": "'Geomanist'"
-      },
-      "fontSize": {
-        "value": "12px"
-      },
-      "lineHeight": {
-        "value": "18px"
-      },
-      "lineHeightRelative": {
-        "value": 1.5
-      },
-      "fontWeight": {
-        "value": 500
-      }
+    "bodyxs": {
+      "fontFamily": "Geomanist",
+      "fontSize": "0.75rem",
+      "rawFontSize": 12,
+      "fontWeight": 400,
+      "letterSpacing": 0,
+      "lineHeight": 1.33
     }
   }
 }

@@ -10,7 +10,7 @@
 import { css } from 'styled-components';
 
 import { media, rems } from '@/ui/helpers';
-import typographyData from '@/ui/figma-tokens/typography.json';
+import typographyData from '@/ui/design-tokens/typography.json';
 
 const typography = typographyData.typography;
 

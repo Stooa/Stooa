@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import colors from '@/ui/figma-tokens/colors.json';
+import colors from '@/ui/design-tokens/colors.json';
 
 const BREAKPOINTS = {
   desktop: 1024,

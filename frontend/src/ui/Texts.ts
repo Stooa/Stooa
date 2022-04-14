@@ -11,7 +11,7 @@ import { css } from 'styled-components';
 
 import { rems } from '@/ui/helpers';
 import { FONT_BASE_SIZE } from '@/ui/settings';
-import typographyData from '@/ui/figma-tokens/typography.json';
+import typographyData from '@/ui/design-tokens/typography.json';
 
 const typography = typographyData.typography;
 
