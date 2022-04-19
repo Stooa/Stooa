@@ -24,7 +24,7 @@ const roomOptions = {
     preferredCodec: 'VP8'
   },
   p2p: {
-    enabled: true,
+    enabled: false,
     preferredCodec: 'VP8'
   },
 };
