@@ -40,5 +40,10 @@ file that was distributed with this source code.
         <!-- Psalm equivalent of PHPStan config `treatPhpDocTypesAsCertain: false` -->
         <DocblockTypeContradiction errorLevel="suppress"/>
         <RedundantConditionGivenDocblockType errorLevel="suppress"/>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <referencedClass name="UnitEnum" />
+            </errorLevel>
+        </UndefinedDocblockClass>
     </issueHandlers>
 </psalm>

@@ -25,7 +25,6 @@ const join = async user => {
         tracksRepository.syncLocalStorageTrack(track, user);
         conferenceRepository.addTrack(track);
       });
-
       localTracksCreated = true;
     });
   }

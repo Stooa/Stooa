@@ -68,7 +68,7 @@ class FishbowlService
         $this->translator = $translator;
     }
 
-    public function canFishbowlStart(string $slug, User $host): bool
+    public function canFishbowlStart(string $slug, UserInterface $host): bool
     {
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
