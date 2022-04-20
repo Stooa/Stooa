@@ -107,6 +107,9 @@ class RefreshTokenFunctionalTest extends ApiTestCase
                 'email' => 'user@stooa.com',
                 'twitter' => 'https//www.twitter.com/test',
                 'linkedin' => 'https://www.linkedin.com/test',
+                'moderator' => false,
+                'id' => null,
+                'avatar' => null,
             ],
         ]);
     }

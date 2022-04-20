@@ -36,6 +36,13 @@ const SeatsStyled = styled.div`
     height: 100%;
     width: 100%;
 
+    &.not-started div[id^='seat'] {
+      background: ${COLOR_NEUTRO_300};
+      .seat-wrapper {
+        opacity: 0.3;
+      }
+    }
+
     ${media.min('tablet')`
       padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
@@ -96,13 +103,6 @@ const Seat = styled.div`
 
   .seat-wrapper {
     transition: opacity 0.35s ease-in-out;
-  }
-
-  &.not-started {
-    background: ${COLOR_NEUTRO_300};
-    .seat-wrapper {
-      opacity: 0.3;
-    }
   }
 
   &:last-child {
