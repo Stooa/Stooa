@@ -29,10 +29,7 @@ const Seats = () => {
     <SeatsStyled>
       <div className={`content ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
-          <Seat
-            key={`seat-${seat + 1}`}
-            id={`seat-${seat + 1}`}
-          >
+          <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />
             <VideoMuted className="icon-medium icon-video" />

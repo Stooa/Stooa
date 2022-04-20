@@ -15,7 +15,7 @@ const connectionOptions = roomName => ({
     muc: process.env.NEXT_PUBLIC_XMPP_MUC_DOMAIN
   },
   serviceUrl: `wss://${process.env.NEXT_PUBLIC_JITSI_HOST}/xmpp-websocket?room=${process.env.NEXT_PUBLIC_JITSI_ROOM_PREFIX}${roomName}`,
-  deploymentInfo: {},
+  deploymentInfo: {}
 });
 
 const initOptions = { disableAudioLevels: true };
@@ -26,7 +26,7 @@ const roomOptions = {
   p2p: {
     enabled: false,
     preferredCodec: 'VP8'
-  },
+  }
 };
 
 export { connectionOptions, initOptions, roomOptions };

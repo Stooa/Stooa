@@ -36,7 +36,7 @@ const SeatsStyled = styled.div`
     height: 100%;
     width: 100%;
 
-    &.not-started div[id^="seat"] {
+    &.not-started div[id^='seat'] {
       background: ${COLOR_NEUTRO_300};
       .seat-wrapper {
         opacity: 0.3;
