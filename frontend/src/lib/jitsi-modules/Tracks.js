@@ -46,9 +46,9 @@ const tracksRepository = () => {
     return null;
   };
 
-  const syncSessionStorageTrack = async (track, user) => {
+  const syncLocalStorageTrack = async (track, user) => {
     if (!user) {
-      user = JSON.parse(sessionStorage.getItem('user'));
+      user = JSON.parse(localStorage.getItem('user'));
     }
 
     const seat = seatsRepository.getSeat();
@@ -64,7 +64,7 @@ const tracksRepository = () => {
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
-          console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          console.log('[STOOA] Track muted', track.getParticipantId() + trackType);
         });
       }
     }
@@ -86,7 +86,7 @@ const tracksRepository = () => {
       trackHtml.setAttribute('playsinline', '');
     }
 
-    await syncSessionStorageTrack(track, user);
+    await syncLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
     seatHtml.appendChild(trackHtml);
@@ -209,7 +209,7 @@ const tracksRepository = () => {
   };
 
   const handleTrackMuteChanged = async track => {
-    await syncSessionStorageTrack(track);
+    await syncLocalStorageTrack(track);
 
     if (track.isLocal()) return;
 
@@ -288,7 +288,7 @@ const tracksRepository = () => {
     disposeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
-    syncSessionStorageTrack
+    syncLocalStorageTrack
   };
 };
 

@@ -40,6 +40,7 @@ jobs:
                   php-version: ${{ matrix.php }}
                   coverage: none
                   tools: cs2pr, composer
+                  ini-values: date.timezone=Europe/Madrid
 
             - name: Install all Composer dependencies
               uses: ramsey/composer-install@v2

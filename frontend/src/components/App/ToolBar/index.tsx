@@ -54,8 +54,7 @@ const ToolBar: React.FC = () => {
       data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      conferenceStatus !== IConferenceStatus.RUNNING &&
-      conferenceStatus !== IConferenceStatus.FINISHED
+      conferenceStatus === IConferenceStatus.INTRODUCTION
     );
   };
 
@@ -64,7 +63,7 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
+      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
     );
   };
 
@@ -107,11 +106,18 @@ const ToolBar: React.FC = () => {
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
-      console.log('[STOOA] Moderator join seat');
+    if (hasModeratorToSeatDuringIntroduction()) {
+      console.log('[STOOA] Moderator join seat during introduction');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (hasModeratorToSeatDuringRunning()) {
+      console.log('[STOOA] Moderator join seat during running');
+      joinSeat(userRepository.getUser());
+    }
+  }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||

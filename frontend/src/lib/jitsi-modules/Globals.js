@@ -14,8 +14,8 @@ const connectionOptions = roomName => ({
     authdomain: process.env.NEXT_PUBLIC_XMPP_AUTH_DOMAIN,
     muc: process.env.NEXT_PUBLIC_XMPP_MUC_DOMAIN
   },
-  serviceUrl: `wss://${process.env.NEXT_PUBLIC_JITSI_HOST}/xmpp-websocket?room=${roomName}`,
-  disableDeepLinking: true
+  serviceUrl: `wss://${process.env.NEXT_PUBLIC_JITSI_HOST}/xmpp-websocket?room=${process.env.NEXT_PUBLIC_JITSI_ROOM_PREFIX}${roomName}`,
+  deploymentInfo: {}
 });
 
 const initOptions = { disableAudioLevels: true };
@@ -24,10 +24,9 @@ const roomOptions = {
     preferredCodec: 'VP8'
   },
   p2p: {
-    enabled: true,
+    enabled: false,
     preferredCodec: 'VP8'
-  },
-  openBridgeChannel: 'websocket'
+  }
 };
 
 export { connectionOptions, initOptions, roomOptions };

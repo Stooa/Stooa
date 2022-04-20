@@ -22,10 +22,9 @@ const join = async user => {
   if (!localTracksCreated) {
     await localTracksRepository.createLocalTracks().then(tracks => {
       tracks.forEach(async track => {
-        tracksRepository.syncSessionStorageTrack(track, user);
+        tracksRepository.syncLocalStorageTrack(track, user);
         conferenceRepository.addTrack(track);
       });
-
       localTracksCreated = true;
     });
   }
