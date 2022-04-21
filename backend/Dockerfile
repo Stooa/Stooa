@@ -40,6 +40,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN chown $UID:$GID /var/www
 
+RUN mkdir -p /usr/app/var
+
+RUN chown $UID:$GID /usr/app/var
+
 USER www-data
 
 WORKDIR /usr/app
