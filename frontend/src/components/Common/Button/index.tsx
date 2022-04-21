@@ -9,7 +9,7 @@
 
 import { PrimaryButton, SecondaryButton, SIZES, TextButton } from '@/ui/Button';
 
-interface Props extends React.ComponentPropsWithoutRef<'button'> {
+interface Props extends React.ComponentProps<'button'> {
   variant?: 'primary' | 'secondary' | 'text';
   size?: 'small' | 'medium' | 'large';
   as?: 'button' | 'a';
@@ -39,6 +39,10 @@ const Button: React.FC<Props> = ({
     Component = SecondaryButton;
   } else if (variant === 'text') {
     Component = TextButton;
+  }
+
+  if (as === 'a') {
+    console.log('RAMOOOOOOON');
   }
 
   return (

@@ -23,7 +23,8 @@ const BREAKPOINTS = {
 
 const BORDER_RADIUS = '5px';
 
-const _getDesignToken = colorName => (colors.colors[colorName] ? colors.colors[colorName].hexColor : '');
+const _getDesignToken = colorName =>
+  colors.colors[colorName] ? colors.colors[colorName].hexColor : '';
 
 // Colors
 const COLOR_NEUTRO_100 = _getDesignToken('neutral100');
