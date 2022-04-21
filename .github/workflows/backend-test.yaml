@@ -40,6 +40,7 @@ jobs:
                   php-version: ${{ matrix.php }}
                   coverage: pcov
                   tools: composer
+                  ini-values: date.timezone=Europe/Madrid
 
             - name: Add PHPUnit matcher
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"

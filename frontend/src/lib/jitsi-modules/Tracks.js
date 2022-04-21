@@ -64,7 +64,7 @@ const tracksRepository = () => {
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
-          console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          console.log('[STOOA] Track muted', track.getParticipantId() + trackType);
         });
       }
     }

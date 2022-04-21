@@ -10,6 +10,7 @@ parameters:
     locales: [ en, es, ca, fr, id ]
     container.dumper.inline_factories: true
     container.dumper.inline_class_loader: true
+    jaas_activated: '%env(JAAS_ACTIVE)%'
 
 services:
     _defaults:
@@ -54,6 +55,11 @@ services:
         bind:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
+
+    App\JWT\TokenGenerator\JaasTokenGenerator:
+        bind:
+            $appId: '%env(JAAS_APP_ID)%'
+            $apiKey: '%env(JAAS_API_KEY)%'
 
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
