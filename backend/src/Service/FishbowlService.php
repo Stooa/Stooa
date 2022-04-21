@@ -227,19 +227,17 @@ class FishbowlService
      */
     private function buildParticipants(array $participants, Fishbowl $fishbowl, ?UserInterface $currentUser): array
     {
-        return array_map(function (Participant $participant) use ($fishbowl, $currentUser) {
-            return [
-                'id' => $participant->getId(),
-                'lastPing' => $participant->getLastPing(),
-                'name' => $participant->getUserName(),
-                'twitter' => $participant->getPublicTwitterProfile(),
-                'linkedin' => $participant->getPublicLinkedinAccount(),
-                'isModerator' => $participant->isModerator($fishbowl),
-                'isCurrentUser' => $participant->isCurrentUser($currentUser),
-                'guestId' => $participant->getGuestId(),
-                'joined' => false,
-                'isMuted' => false,
-            ];
-        }, $participants);
+        return array_map(fn(Participant $participant) => [
+            'id' => $participant->getId(),
+            'lastPing' => $participant->getLastPing(),
+            'name' => $participant->getUserName(),
+            'twitter' => $participant->getPublicTwitterProfile(),
+            'linkedin' => $participant->getPublicLinkedinAccount(),
+            'isModerator' => $participant->isModerator($fishbowl),
+            'isCurrentUser' => $participant->isCurrentUser($currentUser),
+            'guestId' => $participant->getGuestId(),
+            'joined' => false,
+            'isMuted' => false,
+        ], $participants);
     }
 }

@@ -22,8 +22,7 @@ use Webmozart\Assert\Assert;
 
 class TranslateJWTAuthenticationFailureResponse implements EventSubscriberInterface
 {
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

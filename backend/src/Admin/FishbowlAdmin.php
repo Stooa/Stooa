@@ -32,7 +32,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 /** @extends AbstractAdmin<Fishbowl> */
 class FishbowlAdmin extends AbstractAdmin
 {
-    protected ?FishbowlService $fishbowlService;
+    protected ?FishbowlService $fishbowlService = null;
 
     public function setFishbowlService(FishbowlService $fishbowlService): void
     {

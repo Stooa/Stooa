@@ -12,7 +12,7 @@ CERTS_DIR = .certs
 docker-exec-backend = docker compose exec backend /bin/bash -c "$1"
 docker-exec-frontend = docker compose exec frontend /bin/bash -c "$1"
 
-.PHONY: up composer build halt destroy ssh ssh-front certs provision provision-backend \
+.PHONY: up composer build halt destroy ssh ssh-front certs provision provision-backend rector \
 		composer-install composer-normalize phpstan php-cs-fixer phpunit phpunit-coverage \
 		assets cache-clear database provision-jitsi
 
@@ -61,6 +61,9 @@ composer-normalize:
 
 phpstan:
 	$(call docker-exec-backend,composer phpstan)
+
+rector:
+	$(call docker-exec,composer rector)
 
 php-cs-fixer:
 	$(call docker-exec-backend,composer php-cs-fixer)
