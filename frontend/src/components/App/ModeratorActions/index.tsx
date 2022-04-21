@@ -17,8 +17,8 @@ import { useStateValue } from '@/contexts/AppContext';
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 
-import { ButtonAppSmall } from '@/ui/Button';
 import { useStooa } from '@/contexts/StooaManager';
+import Button from '@/components/Common/Button';
 
 interface Props {
   fid: string;
@@ -143,21 +143,26 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           />
         )}
         {running && (
-          <ButtonAppSmall className="app-sm button error" onClick={toggleFinishModal}>
+          <Button size="small" className="body-xs button error" onClick={toggleFinishModal}>
             <span className="text">{t('endFishbowl')}</span>
-          </ButtonAppSmall>
+          </Button>
         )}
         {!running &&
           (!introduction && data.hasIntroduction ? (
-            <ButtonAppSmall className="app-sm button" onClick={toggleIntroductionModal}>
+            <Button size="small" className="body-xs button" onClick={toggleIntroductionModal}>
               <span className="text">{t('startIntroduction')}</span>
-            </ButtonAppSmall>
+            </Button>
           ) : (
-            <ButtonAppSmall className="app-sm button" onClick={startFishbowl} disabled={loading}>
+            <Button
+              size="small"
+              className="body-xs button"
+              onClick={startFishbowl}
+              disabled={loading}
+            >
               <span className="text">
                 {data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}
               </span>
-            </ButtonAppSmall>
+            </Button>
           ))}
       </div>
     )

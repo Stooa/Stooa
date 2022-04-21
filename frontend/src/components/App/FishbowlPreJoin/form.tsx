@@ -19,7 +19,7 @@ import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
 import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
-import Button from '@/ui/Button';
+import Button from '@/components/Common/Button';
 
 interface FormValues {
   name: string;

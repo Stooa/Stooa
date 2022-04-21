@@ -165,19 +165,21 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
         {active && <ChevronRight className="toggle-icon" />}
         {!active && <ChevronLeft className="toggle-icon" />}
         <People />
-        <span className="app-sm medium">{participants.length === 0 ? 1 : participants.length}</span>
+        <span className="body-xs medium">
+          {participants.length === 0 ? 1 : participants.length}
+        </span>
       </ParticipantsToggle>
       <ParticipantsDrawer className={active ? 'active' : ''}>
         <div className="header">
-          <h2 className="app-md medium">{t('fishbowl:participants.title')}</h2>
-          <ButtonCopyUrl variant="link" secondary fid={data.slug} locale={data.locale} />
+          <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
+          <ButtonCopyUrl variant="text" fid={data.slug} locale={data.locale} />
           <Icon onClick={toggleDrawer}>
             <Cross />
           </Icon>
         </div>
         {speakingParticipants.length > 0 && (
           <div className="participant-list participant-list--speaking">
-            <h3 className="app-sm medium caps">{t('fishbowl:participants.speaking')}</h3>
+            <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
             <ul>
               {speakingParticipants.map((participant, i) => (
                 <ParticipantCard
@@ -191,7 +193,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
         )}
         {roomParticipants.length > 0 && (
           <div className="participant-list">
-            <h3 className="app-sm medium caps">
+            <h3 className="body-xs medium caps">
               <span>{t('fishbowl:participants.attendees')}</span>
               <MicMuted className="icon-small" />
               <VideoMuted className="icon-small" />

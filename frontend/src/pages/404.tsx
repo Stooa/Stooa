@@ -12,8 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_HOME } from '@/app.config';
 import Layout from '@/layouts/Default';
-import Button from '@/ui/Button';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
+import Button from '@/components/Common/Button';
 import NotFoundImg from '@/ui/svg/not-found.svg';
 import NotFoundStyled from '@/ui/pages/not-found';
 
@@ -33,13 +32,11 @@ const Page404 = () => {
           <Link href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button as="a">
               <span>{t('home:scheduleFishbowl')}</span>
-              <ArrowRight />
             </Button>
           </Link>
           <Link href={ROUTE_HOME} passHref>
-            <Button className="secondary" as="a">
+            <Button variant="secondary" as="a">
               <span>{t('common:goHome')}</span>
-              <ArrowRight />
             </Button>
           </Link>
         </div>

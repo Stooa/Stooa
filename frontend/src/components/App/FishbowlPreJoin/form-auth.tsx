@@ -12,8 +12,8 @@ import useTranslation from 'next-translate/useTranslation';
 import userRepository from '@/jitsi/User';
 import { useStateValue } from '@/contexts/AppContext';
 
+import Button from '@/components/Common/Button';
 import { InputStyled } from '@/ui/Form';
-import Button from '@/ui/Button';
 import FormikForm from '@/ui/Form';
 
 type TProps = {
@@ -40,7 +40,7 @@ const AuthUser = ({ name }: TProps) => {
         <label>{t('name')}</label>
       </InputStyled>
       <fieldset className="submit-wrapper">
-        <Button type="button" onClick={handleOnSubmit}>
+        <Button as="a" onClick={handleOnSubmit}>
           {t('button.enterFishbowl')}
         </Button>
       </fieldset>

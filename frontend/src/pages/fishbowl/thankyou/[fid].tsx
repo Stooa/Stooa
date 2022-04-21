@@ -18,13 +18,12 @@ import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
 import ThankYouStyled, { Description, Time } from '@/ui/pages/thank-you';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
-import { ButtonStyledLinkSmall } from '@/ui/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import Button from '@/components/Common/Button';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -164,7 +163,9 @@ const ThankYou = () => {
         </div>
         <div className="action-wrapper">
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-            <ButtonStyledLinkSmall
+            <Button
+              size="small"
+              as="a"
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Schedule Fishbowl',
@@ -174,10 +175,12 @@ const ThankYou = () => {
               }}
             >
               <span>{t('common:scheduleFishbowl')}</span>
-            </ButtonStyledLinkSmall>
+            </Button>
           </RedirectLink>
           <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <ButtonStyledLinkSmall
+            <Button
+              size="small"
+              as="a"
               className="host-now secondary"
               onClick={() => {
                 pushEventDataLayer({
@@ -188,7 +191,7 @@ const ThankYou = () => {
               }}
             >
               <span>{t('common:hostFishbowlNow')}</span>
-            </ButtonStyledLinkSmall>
+            </Button>
           </RedirectLink>
         </div>
       </ThankYouStyled>

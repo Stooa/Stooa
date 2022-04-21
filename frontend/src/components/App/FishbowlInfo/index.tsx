@@ -50,7 +50,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
 
   return (
     <InfoStyled ref={wrapperRef}>
-      <p className="title app-md medium">{data.name}</p>
+      <p className="title body-sm medium">{data.name}</p>
       <Icon onClick={toggleInfo} className={`${active ? 'active' : ''}`}>
         <span className="icon-wrapper">
           <Dots />
@@ -58,10 +58,10 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
       </Icon>
       {active && (
         <Description>
-          <p className="app-md medium description__title">{data.name}</p>
-          <p className="info-text app-sm">{data.description}</p>
-          <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
-          <p className="app-sm description__share-text">
+          <p className="body-sm medium description__title">{data.name}</p>
+          <p className="info-text body-xs">{data.description}</p>
+          <ButtonCopyUrl variant="secondary" size="small" fid={data.slug} locale={data.locale} />
+          <p className="body-xs description__share-text">
             <Trans i18nKey="fishbowl:fishbowlDescription.shareText" components={{ i: <i /> }} />
           </p>
         </Description>

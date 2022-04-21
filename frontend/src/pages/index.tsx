@@ -24,7 +24,6 @@ import { Lottie } from '@/types/animations';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import { Billboard, Content, Description, Row, Sections, Wrapper } from '@/ui/pages';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import WaveMobile from '@/ui/svg/wave-mobile.svg';
 import WaveDesktop from '@/ui/svg/wave-desktop.svg';
 import BillboardDeskAnimPath from '@/ui/animations/home/billboard-desktop.json';
@@ -32,7 +31,7 @@ import BillboardMobAnimPath from '@/ui/animations/home/billboard-mobile.json';
 import MorphBillAnimPath from '@/ui/animations/home/billboard-morph.json';
 import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
-import { ButtonStyledLink } from '@/ui/Button';
+import Button from '@/components/Common/Button';
 
 const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
   loading: () => <div />
@@ -132,7 +131,8 @@ const Home = () => {
         </Description>
         <div className="cta-wrapper">
           <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <ButtonStyledLink
+            <Button
+              as="a"
               className="animate-item cta-create-fishbowl"
               onClick={() => {
                 pushEventDataLayer({
@@ -143,12 +143,13 @@ const Home = () => {
               }}
             >
               <span>{t('hostFishbowlNow')}</span>
-              <ArrowRight />
-            </ButtonStyledLink>
+            </Button>
           </Link>
           <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-            <ButtonStyledLink
-              className="animate-item cta-create-fishbowl secondary"
+            <Button
+              as="a"
+              variant="secondary"
+              className="animate-item cta-create-fishbowl "
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Schedule Fishbowl',
@@ -158,8 +159,7 @@ const Home = () => {
               }}
             >
               <span>{t('scheduleFishbowl')}</span>
-              <ArrowRight />
-            </ButtonStyledLink>
+            </Button>
           </Link>
         </div>
         <div className="ph-badge animate-item">

@@ -14,11 +14,10 @@ import useTranslation from 'next-translate/useTranslation';
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_HOME, ROUTE_FISHBOWL, ROUTE_SIGN_IN, ROUTE_REGISTER } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import { ButtonSmall, ButtonTransp } from '@/ui/Button';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import AvatarIcon from '@/ui/svg/avatar.svg';
 import Logo from '@/components/Common/Logo';
 import Navigation, { Avatar } from '@/components/Web/FishbowlDetailHeader/styles';
+import Button from '@/components/Common/Button';
 
 interface Props {
   data: Fishbowl;
@@ -39,22 +38,21 @@ const Header: React.FC<Props> = ({ data }) => {
               <AvatarIcon />
               <span>{user.name}</span>
             </Avatar>
-            <ButtonTransp onClick={logout}>
+            <Button size="small" onClick={logout}>
               <span>{t('signout')}</span>
-            </ButtonTransp>
+            </Button>
           </>
         ) : (
           <>
             <Link href={`${ROUTE_SIGN_IN}?redirect=${redirectPath}`} passHref>
-              <ButtonTransp as="a">
+              <Button size="small" as="a">
                 <span>{t('signin')}</span>
-              </ButtonTransp>
+              </Button>
             </Link>
             <Link href={`${ROUTE_REGISTER}?redirect=${redirectPath}`} passHref>
-              <ButtonSmall className="secondary" as="a">
+              <Button size="small" variant="secondary" as="a">
                 <span>{t('register')}</span>
-                <ArrowRight />
-              </ButtonSmall>
+              </Button>
             </Link>
           </>
         )}

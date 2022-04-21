@@ -17,8 +17,8 @@ import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
-import Button, { ButtonHollow } from '@/ui/Button';
 import { JoinFishbowlStyled } from '@/components/Web/JoinFishbowl/styles';
+import Button from '@/components/Common/Button';
 
 interface Props {
   data: Fishbowl;
@@ -66,16 +66,22 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
         {isAuthenticated && fishbowlReady && (
           <div className="join-buttons">
             <Link href={fbRoute} locale={data.locale} passHref>
-              <ButtonHollow as="a">{t('joinFishbowl')}</ButtonHollow>
+              <Button variant="primary" as="a">
+                {t('joinFishbowl')}
+              </Button>
             </Link>
           </div>
         )}
         {!isAuthenticated && fishbowlReady && (
           <>
             <div className="join-buttons">
-              <Button onClick={joinAsGuest}>{t('joinGuest')}</Button>
+              <Button variant="primary" onClick={joinAsGuest}>
+                {t('joinGuest')}
+              </Button>
               <Link href={`${ROUTE_SIGN_IN}?redirect=${fbRoute}`} locale={data.locale} passHref>
-                <ButtonHollow as="a">{t('joinMember')}</ButtonHollow>
+                <Button variant="secondary" as="a">
+                  {t('joinMember')}
+                </Button>
               </Link>
             </div>
             <p className="body-xs">{t('joinMemberNote')}</p>

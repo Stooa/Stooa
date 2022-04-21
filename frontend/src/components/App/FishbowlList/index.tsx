@@ -25,7 +25,6 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import { ButtonLinkColored, ButtonSmall, ButtonStyledLink } from '@/ui/Button';
 import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
@@ -38,6 +37,7 @@ import {
   MobileBackButton
 } from '@/components/App/FishbowlList/styles';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
+import Button from '@/components/Common/Button';
 
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
@@ -115,8 +115,11 @@ const FishbowlList = () => {
               />
             </h1>
             <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
-              <ButtonSmall
-                className="schedule-fishbowl secondary"
+              <Button
+                as="a"
+                variant="secondary"
+                size="small"
+                className="schedule-fishbowl"
                 onClick={() => {
                   pushEventDataLayer({
                     category: 'Schedule Fishbowl',
@@ -127,7 +130,7 @@ const FishbowlList = () => {
               >
                 <span>{t('common:scheduleFishbowl')}</span>
                 <PlusSign />
-              </ButtonSmall>
+              </Button>
             </RedirectLink>
           </div>
           <span className="divider" />
@@ -156,7 +159,9 @@ const FishbowlList = () => {
               </p>
               <div className="empty-actions">
                 <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-                  <ButtonStyledLink
+                  <Button
+                    as="a"
+                    variant="secondary"
                     className="animate-item cta-create-fishbowl"
                     onClick={() => {
                       pushEventDataLayer({
@@ -167,11 +172,12 @@ const FishbowlList = () => {
                     }}
                   >
                     <span>{t('common:scheduleFishbowl')}</span>
-                  </ButtonStyledLink>
+                  </Button>
                 </Link>
                 <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-                  <ButtonStyledLink
-                    className="animate-item cta-create-fishbowl secondary"
+                  <Button
+                    as="a"
+                    className="animate-item cta-create-fishbowl"
                     onClick={() => {
                       pushEventDataLayer({
                         category: 'Host Fishbowl Now',
@@ -181,7 +187,7 @@ const FishbowlList = () => {
                     }}
                   >
                     <span>{t('common:hostFishbowlNow')}</span>
-                  </ButtonStyledLink>
+                  </Button>
                 </Link>
               </div>
             </EmptyFishbowlList>
@@ -264,16 +270,21 @@ const FishbowlList = () => {
                         locale={selectedFishbowl.locale}
                         passHref
                       >
-                        <ButtonStyledLink
+                        <Button
+                          as="a"
                           className="enter-fishbowl"
                           data-testid="started-enter-fishbowl"
                         >
                           <span>{t('enterFishbowl')}</span>
-                        </ButtonStyledLink>
+                        </Button>
                       </RedirectLink>
-                      <ButtonLinkColored className="back" onClick={() => setSelectedFishbowl(null)}>
+                      <Button
+                        variant="text"
+                        className="back"
+                        onClick={() => setSelectedFishbowl(null)}
+                      >
                         <span>{t('back')}</span>
-                      </ButtonLinkColored>
+                      </Button>
                     </DetailPlaceholder>
                   ))}
               </AnimatePresence>

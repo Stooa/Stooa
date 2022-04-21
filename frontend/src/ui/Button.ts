@@ -16,36 +16,51 @@ import {
   COLOR_PURPLE_200,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
+  COLOR_PURPLE_600,
   COLOR_RED_400,
-  COLOR_RED_500
+  COLOR_RED_500,
+  COLOR_RED_600
 } from '@/ui/settings';
-import { APP_SM, APP_MD, BODY_SM, BODY_MD } from '@/ui/Texts';
+import { BODY_XS, BODY_MD, BODY_SM, mediumWeight } from '@/ui/Texts';
 import { rems, space } from '@/ui/helpers';
 
-const buttonStyles = css`
-  ${BODY_MD}
+const SIZES = {
+  small: {
+    '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
+    '--fontSize': `${BODY_XS}`
+  },
+  medium: {
+    '--padding': `${space(1.5)} ${space(4)} ${space(1.25)} ${space(4)}`,
+    '--fontSize': `${BODY_MD}`
+  },
+  large: {
+    '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
+    '--fontSize': `${BODY_MD}`
+  }
+};
+
+const ButtonBase = styled.button<{ full?: boolean }>`
+  width: ${({ full }) => (full ? '100%' : 'auto')};
+  ${mediumWeight};
 
   align-items: center;
-  background: ${COLOR_PURPLE_500};
-  border: 2px solid ${COLOR_PURPLE_500};
+  border: none;
   border-radius: ${space(3)};
-  color: ${COLOR_NEUTRO_100};
   cursor: pointer;
   display: inline-flex;
-  font-weight: 500;
+  font-size: var(--fontSize);
   justify-content: center;
-  line-height: ${rems(20)};
-  letter-spacing: 0.15px;
-  min-width: ${rems(20)};
-  padding: ${space(1.85)} ${space(4)} ${space(1.65)};
+  /* line-height: ${rems(20)}; */
+  /* min-width: ${rems(20)}; */
+  padding: var(--padding);
   text-decoration: none;
   transition: 0.1s ease-out;
   will-change: background, color;
 
   &:disabled {
-    background: ${COLOR_NEUTRO_300} !important;
-    border-color: ${COLOR_NEUTRO_300} !important;
-    color: ${COLOR_NEUTRO_500} !important;
+    cursor: not-allowed;
+    background-color: ${COLOR_NEUTRO_300};
+    color: ${COLOR_NEUTRO_500};
     pointer-events: none;
   }
 
@@ -58,73 +73,58 @@ const buttonStyles = css`
     }
   }
 
-  &.secondary {
-    background: ${COLOR_PURPLE_200};
-    border-color: ${COLOR_PURPLE_200};
-    color: ${COLOR_PURPLE_500};
-  }
-
-  &:hover {
-    background: ${COLOR_PURPLE_400};
-    border-color: ${COLOR_PURPLE_400};
-    color: ${COLOR_NEUTRO_100};
-  }
-`;
-
-const Button = styled.button<{ full?: boolean }>`
-  width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${buttonStyles};
-`;
-
-const ButtonSmall = styled(Button)`
-  ${BODY_SM}
-
-  border-width: 1px;
-  padding: ${space(1.1)} ${space(3)} ${space(0.8)};
-`;
-
-const ButtonApp = styled(Button)`
-  ${APP_MD}
-
-  font-weight: 500;
-  padding: ${space(1.1)} ${space(3)} ${space(0.9)};
-
   &.error {
-    background: ${COLOR_RED_500};
+    background-color: ${COLOR_RED_500};
     border-color: ${COLOR_RED_500};
 
     &:hover {
-      background: ${COLOR_RED_400};
+      background-color: ${COLOR_RED_400};
       border-color: ${COLOR_RED_400};
+    }
+
+    &:focus {
+      background-color: ${COLOR_RED_600};
     }
   }
 `;
 
-const ButtonAppSmall = styled(ButtonApp)`
-  ${APP_SM}
+const PrimaryButton = styled(ButtonBase)`
+  background-color: ${COLOR_PURPLE_500};
+  color: ${COLOR_NEUTRO_100};
 
-  border-width: 1px;
+  &:hover {
+    background-color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    background-color: ${COLOR_PURPLE_600};
+  }
 `;
 
-const ButtonHollow = styled(Button)`
-  background: transparent;
+const SecondaryButton = styled(ButtonBase)`
+  background-color: ${COLOR_PURPLE_200};
   color: ${COLOR_PURPLE_500};
+
+  &:hover {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_600};
+  }
 `;
 
-const ButtonTransp = styled.button`
-  align-items: center;
+const TextButton = styled.button`
   color: ${COLOR_PURPLE_500};
-  cursor: pointer;
-  display: inline-flex;
-  font-weight: 500;
-  justify-content: center;
-  padding: ${space(1.85)} ${space(3)} ${space(1.65)};
-  text-decoration: none;
-  transition: color 0.1s ease-out;
-  will-change: color;
 
   &:hover {
     color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    color: ${COLOR_PURPLE_600};
   }
 `;
 
@@ -145,36 +145,32 @@ const ButtonLink = styled.button`
 
 const ButtonStyledLink = styled.a<{ full?: boolean }>`
   width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${buttonStyles};
+  ${ButtonBase};
 `;
 
 const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
   ${BODY_SM}
-
-  border-width: 1px;
-  padding: ${space(1.1)} ${space(3)} ${space(0.8)};
 `;
 
 const ButtonLinkApp = styled.button`
-  ${APP_MD}
+  ${BODY_SM}
   ${linkStyles}
 `;
 
 const ButtonLinkColored = styled.button`
   ${coloredLinkStyles}
-  ${APP_MD}
+  ${BODY_SM}
 `;
 
 export {
-  ButtonApp,
-  ButtonAppSmall,
-  ButtonHollow,
-  ButtonSmall,
-  ButtonTransp,
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
   ButtonLink,
   ButtonLinkApp,
   ButtonStyledLink,
   ButtonStyledLinkSmall,
-  ButtonLinkColored
+  ButtonLinkColored,
+  SIZES
 };
-export default Button;
+export default ButtonBase;
