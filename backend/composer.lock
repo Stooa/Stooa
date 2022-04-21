@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "efdac452ad4300be9e9a0af93e4c0489",
+    "content-hash": "27e99d3bc2c0bd20383b65f0e293f3b8",
     "packages": [
         {
             "name": "api-platform/core",
@@ -11217,35 +11217,35 @@
         },
         {
             "name": "ergebnis/composer-normalize",
-            "version": "2.23.1",
+            "version": "2.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/composer-normalize.git",
-                "reference": "a54e28d1338903d9b6043d2187ed0f059d89938f"
+                "reference": "854ca6746fbc23e285da01aa963b9c61266d56eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/a54e28d1338903d9b6043d2187ed0f059d89938f",
-                "reference": "a54e28d1338903d9b6043d2187ed0f059d89938f",
+                "url": "https://api.github.com/repos/ergebnis/composer-normalize/zipball/854ca6746fbc23e285da01aa963b9c61266d56eb",
+                "reference": "854ca6746fbc23e285da01aa963b9c61266d56eb",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^2.0.0",
                 "ergebnis/json-normalizer": "~2.1.0",
                 "ergebnis/json-printer": "^3.2.0",
-                "justinrainbow/json-schema": "^5.2.11",
+                "justinrainbow/json-schema": "^5.2.12",
                 "localheinz/diff": "^1.1.1",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "composer/composer": "^2.2.5",
+                "composer/composer": "^2.3.5",
                 "ergebnis/license": "^1.2.0",
-                "ergebnis/php-cs-fixer-config": "^3.4.0",
-                "fakerphp/faker": "^1.18.0",
-                "phpunit/phpunit": "^9.5.13",
+                "ergebnis/php-cs-fixer-config": "^4.4.0",
+                "fakerphp/faker": "^1.19.0",
+                "phpunit/phpunit": "^9.5.20",
                 "psalm/plugin-phpunit": "~0.16.1",
-                "symfony/filesystem": "^5.4.3",
-                "vimeo/psalm": "^4.18.1"
+                "symfony/filesystem": "^5.4.7",
+                "vimeo/psalm": "^4.22.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -11288,7 +11288,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-31T06:49:30+00:00"
+            "time": "2022-04-20T07:53:13+00:00"
         },
         {
             "name": "ergebnis/json-normalizer",
@@ -11747,16 +11747,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.2.11",
+            "version": "5.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "2ab6744b7296ded80f8cc4f9509abbff393399aa"
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/2ab6744b7296ded80f8cc4f9509abbff393399aa",
-                "reference": "2ab6744b7296ded80f8cc4f9509abbff393399aa",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
                 "shasum": ""
             },
             "require": {
@@ -11811,9 +11811,9 @@
             ],
             "support": {
                 "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.11"
+                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
             },
-            "time": "2021-07-22T09:24:00+00:00"
+            "time": "2022-04-13T08:02:27+00:00"
         },
         {
             "name": "localheinz/diff",
@@ -13210,16 +13210,16 @@
         },
         {
             "name": "psalm/plugin-symfony",
-            "version": "v3.1.3",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-symfony.git",
-                "reference": "f5348e9a7c8b2db247a8fda639b6e2b98471e22e"
+                "reference": "f11c57890db78be5e137ee53d045e14d95531444"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/f5348e9a7c8b2db247a8fda639b6e2b98471e22e",
-                "reference": "f5348e9a7c8b2db247a8fda639b6e2b98471e22e",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/f11c57890db78be5e137ee53d045e14d95531444",
+                "reference": "f11c57890db78be5e137ee53d045e14d95531444",
                 "shasum": ""
             },
             "require": {
@@ -13269,9 +13269,9 @@
             "description": "Psalm Plugin for Symfony",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-symfony/issues",
-                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.1.3"
+                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.1.4"
             },
-            "time": "2022-02-08T07:02:16+00:00"
+            "time": "2022-04-10T20:35:50+00:00"
         },
         {
             "name": "runroom-packages/testing",
