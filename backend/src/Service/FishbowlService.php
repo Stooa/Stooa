@@ -227,7 +227,7 @@ class FishbowlService
      */
     private function buildParticipants(array $participants, Fishbowl $fishbowl, ?UserInterface $currentUser): array
     {
-        return array_map(fn(Participant $participant) => [
+        return array_map(fn (Participant $participant) => [
             'id' => $participant->getId(),
             'lastPing' => $participant->getLastPing(),
             'name' => $participant->getUserName(),
