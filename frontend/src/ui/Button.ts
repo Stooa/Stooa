@@ -13,6 +13,9 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_800,
   COLOR_PURPLE_200,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
@@ -21,7 +24,7 @@ import {
   COLOR_RED_500,
   COLOR_RED_600
 } from '@/ui/settings';
-import { BODY_MD, BODY_SM, mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
+import { mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
 import { rems, space } from '@/ui/helpers';
 
 const SIZES = {
@@ -127,6 +130,8 @@ const SecondaryButton = styled(ButtonBase)`
 const TextButton = styled.button`
   ${mediumWeight};
   color: ${COLOR_PURPLE_500};
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
 
   &:hover {
     color: ${COLOR_PURPLE_400};
@@ -137,5 +142,43 @@ const TextButton = styled.button`
   }
 `;
 
-export { PrimaryButton, SecondaryButton, TextButton, SIZES };
+const LinkStyledButton = styled.button`
+  ${mediumWeight};
+  color: ${COLOR_PURPLE_500};
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
+  text-decoration: underline;
+
+  &:hover {
+    color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    color: ${COLOR_PURPLE_600};
+  }
+`;
+
+const SubtleLinkStyledButton = styled.button`
+  ${mediumWeight};
+  color: ${COLOR_NEUTRO_700};
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: ${COLOR_NEUTRO_600};
+  }
+
+  &:focus {
+    color: ${COLOR_NEUTRO_800};
+  }
+`;
+
+export {
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
+  LinkStyledButton,
+  SubtleLinkStyledButton,
+  SIZES
+};
 export default ButtonBase;

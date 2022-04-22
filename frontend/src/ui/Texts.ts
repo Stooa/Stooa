@@ -80,11 +80,6 @@ const BODY_XS = css`
   line-height: ${TYPOGRAPHY_SIZES.body_xs.lineHeight};
 `;
 
-const LINK_STYLE = css`
-  font-size: ${TYPOGRAPHY_SIZES.link.fontSize};
-  line-height: ${TYPOGRAPHY_SIZES.link.lineHeight};
-`;
-
 /**
  * font-weight: 500;
  */
@@ -129,28 +124,5 @@ const Texts = css`
   }
 `;
 
-const StyledLink = styled.a<{ subtle?: boolean }>`
-  ${LINK_STYLE}
-  color: ${({ subtle }) => (subtle ? COLOR_NEUTRO_700 : COLOR_PURPLE_500)};
-  text-decoration: underline;
-
-  &:hover {
-    color: ${({ subtle }) => (subtle ? COLOR_NEUTRO_600 : COLOR_PURPLE_400)};
-  }
-
-  &:focus {
-    color: ${({ subtle }) => (subtle ? COLOR_NEUTRO_800 : COLOR_PURPLE_600)};
-  }
-`;
-
-export {
-  BODY_LG,
-  BODY_MD,
-  BODY_SM,
-  BODY_XS,
-  boldWeight,
-  mediumWeight,
-  TYPOGRAPHY_SIZES,
-  StyledLink
-};
+export { BODY_LG, BODY_MD, BODY_SM, BODY_XS, boldWeight, mediumWeight, TYPOGRAPHY_SIZES };
 export default Texts;

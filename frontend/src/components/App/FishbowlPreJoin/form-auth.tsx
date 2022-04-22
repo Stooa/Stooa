@@ -40,7 +40,7 @@ const AuthUser = ({ name }: TProps) => {
         <label>{t('name')}</label>
       </InputStyled>
       <fieldset className="submit-wrapper">
-        <Button as="a" onClick={handleOnSubmit}>
+        <Button size="large" as="a" onClick={handleOnSubmit}>
           {t('button.enterFishbowl')}
         </Button>
       </fieldset>

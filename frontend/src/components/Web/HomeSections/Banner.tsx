@@ -37,7 +37,7 @@ const Banner: React.FC = () => {
       <div>
         <p className="body-lg animate-item">{t('banner')}</p>
         <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-          <Button as="a" className="animate-item cta-create-fishbowl">
+          <Button size="large" as="a" className="animate-item cta-create-fishbowl">
             <span>{t('scheduleFishbowl')}</span>
           </Button>
         </RedirectLink>

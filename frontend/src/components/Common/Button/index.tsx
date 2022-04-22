@@ -9,10 +9,17 @@
 
 import React from 'react';
 
-import { PrimaryButton, SecondaryButton, SIZES, TextButton } from '@/ui/Button';
+import {
+  LinkStyledButton,
+  PrimaryButton,
+  SecondaryButton,
+  SIZES,
+  SubtleLinkStyledButton,
+  TextButton
+} from '@/ui/Button';
 
 interface Props extends React.ComponentProps<'button'> {
-  variant?: 'primary' | 'secondary' | 'text';
+  variant?: 'primary' | 'secondary' | 'text' | 'link' | 'subtleLink';
   size?: 'small' | 'medium' | 'large';
   as?: 'button' | 'a';
   full?: boolean;
@@ -35,6 +42,10 @@ const Button: React.FC<Props> = React.forwardRef(
       Component = SecondaryButton;
     } else if (variant === 'text') {
       Component = TextButton;
+    } else if (variant === 'link') {
+      Component = LinkStyledButton;
+    } else if (variant === 'subtleLink') {
+      Component = SubtleLinkStyledButton;
     }
 
     return (

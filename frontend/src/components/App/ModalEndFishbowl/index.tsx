@@ -35,7 +35,7 @@ const EndFishbowl: React.FC<Props> = ({ closeModal, endFishbowl, disabled }) => 
           <Button onClick={endFishbowl} className="error" disabled={disabled}>
             {t('endModal.button')}
           </Button>
-          <Button variant="text" onClick={closeModal}>
+          <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
           </Button>
         </div>

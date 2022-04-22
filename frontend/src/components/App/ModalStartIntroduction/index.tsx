@@ -38,7 +38,7 @@ const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, dis
           <Button size="medium" onClick={startIntroduction} disabled={disabled}>
             {t('introduceModal.button')}
           </Button>
-          <Button variant="text" onClick={closeModal}>
+          <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
           </Button>
         </div>

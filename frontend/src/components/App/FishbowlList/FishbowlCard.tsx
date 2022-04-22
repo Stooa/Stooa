@@ -71,13 +71,12 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div className="card__time">{time}</div>
       </div>
       <div data-testid="card-actions" className="card__actions">
-        <ButtonCopyUrl data-testid="copy-link" variant="text" withSvg fid={slug} locale={locale}>
+        <ButtonCopyUrl data-testid="copy-link" variant="text" fid={slug} locale={locale}>
           {t('common:linkButton')}
         </ButtonCopyUrl>
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
             <Button
-              variant="primary"
               as="a"
               data-testid="enter-fishbowl"
               onClick={() => {
