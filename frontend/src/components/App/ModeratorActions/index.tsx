@@ -143,18 +143,18 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           />
         )}
         {running && (
-          <Button size="small" className="body-xs button error" onClick={toggleFinishModal}>
+          <Button size="medium" className="body-xs button error" onClick={toggleFinishModal}>
             <span className="text">{t('endFishbowl')}</span>
           </Button>
         )}
         {!running &&
           (!introduction && data.hasIntroduction ? (
-            <Button size="small" className="body-xs button" onClick={toggleIntroductionModal}>
+            <Button size="medium" className="body-xs button" onClick={toggleIntroductionModal}>
               <span className="text">{t('startIntroduction')}</span>
             </Button>
           ) : (
             <Button
-              size="small"
+              size="medium"
               className="body-xs button"
               onClick={startFishbowl}
               disabled={loading}

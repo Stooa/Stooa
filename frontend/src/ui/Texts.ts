@@ -7,27 +7,59 @@
  * file that was distributed with this source code.
  */
 
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { rems } from '@/ui/helpers';
 import typographyData from '@/ui/design-tokens/typography.json';
+import {
+  COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_800,
+  COLOR_PURPLE_400,
+  COLOR_PURPLE_500,
+  COLOR_PURPLE_600
+} from './settings';
 
 const typography = typographyData.typography;
+
+const TYPOGRAPHY_SIZES = {
+  body_lg: {
+    fontSize: rems(typography.bodylg.rawFontSize),
+    lineHeight: typography.bodylg.lineHeight
+  },
+  body_md: {
+    fontSize: rems(typography.bodymd.rawFontSize),
+    lineHeight: typography.bodymd.lineHeight
+  },
+  body_sm: {
+    fontSize: rems(typography.bodysm.rawFontSize),
+    lineHeight: typography.bodysm.lineHeight
+  },
+  body_xs: {
+    fontSize: rems(typography.bodyxs.rawFontSize),
+    lineHeight: typography.bodyxs.lineHeight
+  },
+  link: {
+    fontSize: rems(typography.link.rawFontSize),
+    lineHeight: typography.link.lineHeight
+  }
+};
 
 /**
  * font-size: 1.25rem;
  */
 const BODY_LG = css`
-  font-size: ${rems(typography.bodylg.rawFontSize)};
-  line-height: ${typography.bodylg.lineHeight};
+  font-size: ${TYPOGRAPHY_SIZES.body_lg.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_lg.lineHeight};
 `;
 
 /**
  * font-size: 1rem;
  */
 const BODY_MD = css`
-  font-size: ${rems(typography.bodymd.rawFontSize)};
-  line-height: ${typography.bodymd.lineHeight};
+  font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_md.lineHeight};
 `;
 
 /**
@@ -35,8 +67,8 @@ const BODY_MD = css`
  * Form labels, image captions, tooltips, etc...
  */
 const BODY_SM = css`
-  font-size: ${rems(typography.bodysm.rawFontSize)};
-  line-height: ${typography.bodysm.lineHeight};
+  font-size: ${TYPOGRAPHY_SIZES.body_sm.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_sm.lineHeight};
 `;
 
 /**
@@ -44,8 +76,13 @@ const BODY_SM = css`
  * Form labels, image captions, tooltips, etc...
  */
 const BODY_XS = css`
-  font-size: ${rems(typography.bodyxs.rawFontSize)};
-  line-height: ${typography.bodyxs.lineHeight};
+  font-size: ${TYPOGRAPHY_SIZES.body_xs.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_xs.lineHeight};
+`;
+
+const LINK_STYLE = css`
+  font-size: ${TYPOGRAPHY_SIZES.link.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.link.lineHeight};
 `;
 
 /**
@@ -80,11 +117,11 @@ const Texts = css`
   }
 
   .bold {
-    font-weight: ${boldWeight};
+    ${boldWeight};
   }
 
   .medium {
-    font-weight: ${mediumWeight};
+    ${mediumWeight};
   }
 
   .caps {
@@ -92,5 +129,28 @@ const Texts = css`
   }
 `;
 
-export { BODY_LG, BODY_MD, BODY_SM, BODY_XS, boldWeight, mediumWeight };
+const StyledLink = styled.a<{ subtle?: boolean }>`
+  ${LINK_STYLE}
+  color: ${({ subtle }) => (subtle ? COLOR_NEUTRO_700 : COLOR_PURPLE_500)};
+  text-decoration: underline;
+
+  &:hover {
+    color: ${({ subtle }) => (subtle ? COLOR_NEUTRO_600 : COLOR_PURPLE_400)};
+  }
+
+  &:focus {
+    color: ${({ subtle }) => (subtle ? COLOR_NEUTRO_800 : COLOR_PURPLE_600)};
+  }
+`;
+
+export {
+  BODY_LG,
+  BODY_MD,
+  BODY_SM,
+  BODY_XS,
+  boldWeight,
+  mediumWeight,
+  TYPOGRAPHY_SIZES,
+  StyledLink
+};
 export default Texts;

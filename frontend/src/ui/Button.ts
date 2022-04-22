@@ -21,24 +21,28 @@ import {
   COLOR_RED_500,
   COLOR_RED_600
 } from '@/ui/settings';
-import { BODY_XS, BODY_MD, BODY_SM, mediumWeight } from '@/ui/Texts';
+import { BODY_MD, BODY_SM, mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
 import { rems, space } from '@/ui/helpers';
 
 const SIZES = {
   small: {
     '--padding': `${space(1)} ${space(3)} ${space(0.75)} ${space(3)}`,
-    '--fontSize': `${BODY_XS[1]}`,
-    '--lineHeight': `${BODY_XS[3]}`
+    '--fontSize': `${TYPOGRAPHY_SIZES.body_sm.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.body_sm.lineHeight}`
   },
   medium: {
     '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
-    '--fontSize': `${BODY_SM[1]}`,
-    '--lineHeight': `${BODY_SM[3]}`
+    '--fontSize': `${TYPOGRAPHY_SIZES.body_sm.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.body_sm.lineHeight}`
   },
   large: {
-    '--padding': `${space(1.5)} ${space(4)} ${space(1.25)} ${space(4)}`,
-    '--fontSize': `${BODY_MD[1]}`,
-    '--lineHeight': `${BODY_MD[3]}`
+    '--padding': `${space(1.75)} ${space(4)} ${space(1.5)} ${space(4)}`,
+    '--fontSize': `${TYPOGRAPHY_SIZES.body_md.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.body_md.lineHeight}`
+  },
+  link: {
+    '--fontSize': `${TYPOGRAPHY_SIZES.link.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.link.lineHeight}`
   }
 };
 
@@ -67,7 +71,7 @@ const ButtonBase = styled.button<{ full?: boolean }>`
     pointer-events: none;
   }
 
-  &:last-child svg {
+  * + &:last-child svg {
     margin-left: ${space(0.75)};
     margin-right: ${space(-0.75)};
     width: ${space(2)};
@@ -121,8 +125,8 @@ const SecondaryButton = styled(ButtonBase)`
 `;
 
 const TextButton = styled.button`
+  ${mediumWeight};
   color: ${COLOR_PURPLE_500};
-  text-decoration: underline;
 
   &:hover {
     color: ${COLOR_PURPLE_400};

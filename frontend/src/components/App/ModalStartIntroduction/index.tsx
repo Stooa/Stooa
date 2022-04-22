@@ -35,7 +35,7 @@ const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, dis
           <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} />
         </p>
         <div className="modal-footer">
-          <Button size="small" onClick={startIntroduction} disabled={disabled}>
+          <Button size="medium" onClick={startIntroduction} disabled={disabled}>
             {t('introduceModal.button')}
           </Button>
           <Button variant="text" onClick={closeModal}>

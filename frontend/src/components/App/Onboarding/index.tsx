@@ -212,7 +212,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                       />
                     )}
                     {i === data.length - 1 ? (
-                      <Button size="small" onClick={skipOnBoarding}>
+                      <Button size="medium" onClick={skipOnBoarding}>
                         {t('done')}
                       </Button>
                     ) : (

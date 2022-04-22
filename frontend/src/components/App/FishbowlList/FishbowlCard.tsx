@@ -78,7 +78,6 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
             <Button
               variant="primary"
-              size="small"
               as="a"
               data-testid="enter-fishbowl"
               onClick={() => {

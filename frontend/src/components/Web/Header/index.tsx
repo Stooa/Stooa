@@ -48,7 +48,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                 pathname !== ROUTE_FISHBOWL_LIST && (
                   <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                     <Button
-                      size="small"
+                      size="medium"
                       variant="secondary"
                       onClick={() => {
                         pushEventDataLayer({
@@ -68,14 +68,14 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
             <>
               {pathname !== ROUTE_SIGN_IN && (
                 <RedirectLink href={ROUTE_SIGN_IN} passHref>
-                  <Button size="small" as="a" data-testid="login">
+                  <Button size="medium" as="a" data-testid="login">
                     <span>{t('signin')}</span>
                   </Button>
                 </RedirectLink>
               )}
               {pathname !== ROUTE_REGISTER && (
                 <RedirectLink href={ROUTE_REGISTER} passHref>
-                  <Button size="small" variant="secondary" as="a" data-testid="register">
+                  <Button size="medium" variant="secondary" as="a" data-testid="register">
                     <span>{t('register')}</span>
                   </Button>
                 </RedirectLink>

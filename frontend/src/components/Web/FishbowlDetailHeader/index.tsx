@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
@@ -39,19 +38,19 @@ const Header: React.FC<Props> = ({ data }) => {
               <AvatarIcon />
               <span>{user.name}</span>
             </Avatar>
-            <Button size="small" onClick={logout}>
+            <Button size="medium" onClick={logout}>
               <span>{t('signout')}</span>
             </Button>
           </>
         ) : (
           <>
             <RedirectLink href={`${ROUTE_SIGN_IN}?redirect=${redirectPath}`} passHref>
-              <Button size="small" as="a">
+              <Button size="medium" as="a">
                 <span>{t('signin')}</span>
               </Button>
             </RedirectLink>
             <RedirectLink href={`${ROUTE_REGISTER}?redirect=${redirectPath}`} passHref>
-              <Button size="small" variant="secondary" as="a">
+              <Button size="medium" variant="secondary" as="a">
                 <span>{t('register')}</span>
               </Button>
             </RedirectLink>

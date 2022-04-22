@@ -32,7 +32,7 @@ const EndFishbowl: React.FC<Props> = ({ closeModal, endFishbowl, disabled }) => 
         <h2 className="title-sm">{t('endModal.title')}</h2>
         <p className="description">{t('endModal.description')}</p>
         <div className="modal-footer">
-          <Button size="small" onClick={endFishbowl} className="error" disabled={disabled}>
+          <Button onClick={endFishbowl} className="error" disabled={disabled}>
             {t('endModal.button')}
           </Button>
           <Button variant="text" onClick={closeModal}>

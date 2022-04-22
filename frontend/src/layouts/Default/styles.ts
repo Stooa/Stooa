@@ -23,7 +23,7 @@ const Container = styled.div`
   background-color: ${COLOR_NEUTRO_200};
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${space(6)} auto;
+  grid-template-rows: ${space(6)} 1fr;
   gap: 0;
   grid-template-areas: 'Header' 'Main';
   min-height: calc(100vh - ${space(6)} - ${space(30)});

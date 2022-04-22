@@ -164,7 +164,7 @@ const ThankYou = () => {
         <div className="action-wrapper">
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button
-              size="small"
+              size="medium"
               as="a"
               onClick={() => {
                 pushEventDataLayer({
@@ -179,7 +179,7 @@ const ThankYou = () => {
           </RedirectLink>
           <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
             <Button
-              size="small"
+              size="medium"
               as="a"
               className="host-now secondary"
               onClick={() => {

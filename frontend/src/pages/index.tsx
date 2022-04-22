@@ -132,6 +132,7 @@ const Home = () => {
         <div className="cta-wrapper">
           <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
             <Button
+              size="large"
               as="a"
               className="animate-item cta-create-fishbowl"
               onClick={() => {
@@ -147,6 +148,7 @@ const Home = () => {
           </RedirectLink>
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button
+              size="large"
               as="a"
               variant="secondary"
               className="animate-item cta-create-fishbowl "
