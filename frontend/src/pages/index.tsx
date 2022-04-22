@@ -10,7 +10,6 @@
 import { GetStaticProps } from 'next';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
@@ -32,6 +31,7 @@ import MorphBillAnimPath from '@/ui/animations/home/billboard-morph.json';
 import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
 import Button from '@/components/Common/Button';
+import RedirectLink from '@/components/Web/RedirectLink';
 
 const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
   loading: () => <div />
@@ -130,7 +130,7 @@ const Home = () => {
           {t('description')}
         </Description>
         <div className="cta-wrapper">
-          <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
             <Button
               as="a"
               className="animate-item cta-create-fishbowl"
@@ -144,8 +144,8 @@ const Home = () => {
             >
               <span>{t('hostFishbowlNow')}</span>
             </Button>
-          </Link>
-          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
+          </RedirectLink>
+          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button
               as="a"
               variant="secondary"
@@ -160,7 +160,7 @@ const Home = () => {
             >
               <span>{t('scheduleFishbowl')}</span>
             </Button>
-          </Link>
+          </RedirectLink>
         </div>
         <div className="ph-badge animate-item">
           <a

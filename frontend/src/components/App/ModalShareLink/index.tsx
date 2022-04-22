@@ -58,12 +58,7 @@ const ModalShareLink: React.FC = () => {
               <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
             </p>
             <div className="modal-footer">
-              <ButtonCopyUrl
-                variant="primary"
-                size="small"
-                fid={fid as string}
-                locale={data.locale}
-              >
+              <ButtonCopyUrl withSvg variant="primary" fid={fid as string} locale={data.locale}>
                 {t('common:linkButton')}
               </ButtonCopyUrl>
             </div>

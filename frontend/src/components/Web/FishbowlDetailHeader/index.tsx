@@ -18,6 +18,7 @@ import AvatarIcon from '@/ui/svg/avatar.svg';
 import Logo from '@/components/Common/Logo';
 import Navigation, { Avatar } from '@/components/Web/FishbowlDetailHeader/styles';
 import Button from '@/components/Common/Button';
+import RedirectLink from '../RedirectLink';
 
 interface Props {
   data: Fishbowl;
@@ -44,16 +45,16 @@ const Header: React.FC<Props> = ({ data }) => {
           </>
         ) : (
           <>
-            <Link href={`${ROUTE_SIGN_IN}?redirect=${redirectPath}`} passHref>
+            <RedirectLink href={`${ROUTE_SIGN_IN}?redirect=${redirectPath}`} passHref>
               <Button size="small" as="a">
                 <span>{t('signin')}</span>
               </Button>
-            </Link>
-            <Link href={`${ROUTE_REGISTER}?redirect=${redirectPath}`} passHref>
+            </RedirectLink>
+            <RedirectLink href={`${ROUTE_REGISTER}?redirect=${redirectPath}`} passHref>
               <Button size="small" variant="secondary" as="a">
                 <span>{t('register')}</span>
               </Button>
-            </Link>
+            </RedirectLink>
           </>
         )}
       </Navigation>

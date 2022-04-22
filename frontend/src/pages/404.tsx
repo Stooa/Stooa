@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_HOME } from '@/app.config';
 import Layout from '@/layouts/Default';
+import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import NotFoundImg from '@/ui/svg/not-found.svg';
 import NotFoundStyled from '@/ui/pages/not-found';
@@ -29,16 +29,16 @@ const Page404 = () => {
         </h1>
         <p>{t('404.text')}</p>
         <div className="ctas">
-          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
+          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button as="a">
               <span>{t('home:scheduleFishbowl')}</span>
             </Button>
-          </Link>
-          <Link href={ROUTE_HOME} passHref>
+          </RedirectLink>
+          <RedirectLink href={ROUTE_HOME} passHref>
             <Button variant="secondary" as="a">
               <span>{t('common:goHome')}</span>
             </Button>
-          </Link>
+          </RedirectLink>
         </div>
       </NotFoundStyled>
     </Layout>

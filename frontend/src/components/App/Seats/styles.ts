@@ -158,8 +158,8 @@ const Seat = styled.div`
   }
 
   .icon-medium {
-    /* background: ${COLOR_RED_100};
-    border-radius: 50%; */
+    background: ${COLOR_RED_100};
+    border-radius: 50%;
     bottom: ${space(0.75)};
     display: none;
     height: ${space(2.5)};

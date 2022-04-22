@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import React from 'react';
+
 import { PrimaryButton, SecondaryButton, SIZES, TextButton } from '@/ui/Button';
 
 interface Props extends React.ComponentProps<'button'> {
@@ -22,34 +24,25 @@ interface Props extends React.ComponentProps<'button'> {
  * @param as button or a
  * @returns
  */
-const Button: React.FC<Props> = ({
-  variant = 'primary',
-  size = 'medium',
-  children,
-  as = 'button',
-  full,
-  ...props
-}) => {
-  const styles = SIZES[size];
+const Button: React.FC<Props> = React.forwardRef(
+  ({ variant = 'primary', size = 'medium', children, as = 'button', full, ref, ...props }) => {
+    const styles = SIZES[size];
 
-  let Component;
-  if (variant === 'primary') {
-    Component = PrimaryButton;
-  } else if (variant === 'secondary') {
-    Component = SecondaryButton;
-  } else if (variant === 'text') {
-    Component = TextButton;
+    let Component;
+    if (variant === 'primary') {
+      Component = PrimaryButton;
+    } else if (variant === 'secondary') {
+      Component = SecondaryButton;
+    } else if (variant === 'text') {
+      Component = TextButton;
+    }
+
+    return (
+      <Component ref={ref} as={as} style={styles} full={full} {...props}>
+        {children}
+      </Component>
+    );
   }
-
-  if (as === 'a') {
-    console.log('RAMOOOOOOON');
-  }
-
-  return (
-    <Component as={as} style={styles} full={full} {...props}>
-      {children}
-    </Component>
-  );
-};
+);
 
 export default Button;

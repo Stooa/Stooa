@@ -32,7 +32,7 @@ const Modal = styled.div`
     color: ${COLOR_NEUTRO_700};
     border-radius: ${BORDER_RADIUS};
     max-width: ${rems(422)};
-    padding: ${space(6)} ${space(3)};
+    padding: ${space(6)} ${space(4)};
     position: relative;
     text-align: center;
   }

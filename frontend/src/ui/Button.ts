@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   COLOR_NEUTRO_100,
@@ -26,16 +26,19 @@ import { rems, space } from '@/ui/helpers';
 
 const SIZES = {
   small: {
-    '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
-    '--fontSize': `${BODY_XS}`
+    '--padding': `${space(1)} ${space(3)} ${space(0.75)} ${space(3)}`,
+    '--fontSize': `${BODY_XS[1]}`,
+    '--lineHeight': `${BODY_XS[3]}`
   },
   medium: {
-    '--padding': `${space(1.5)} ${space(4)} ${space(1.25)} ${space(4)}`,
-    '--fontSize': `${BODY_MD}`
+    '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
+    '--fontSize': `${BODY_SM[1]}`,
+    '--lineHeight': `${BODY_SM[3]}`
   },
   large: {
-    '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
-    '--fontSize': `${BODY_MD}`
+    '--padding': `${space(1.5)} ${space(4)} ${space(1.25)} ${space(4)}`,
+    '--fontSize': `${BODY_MD[1]}`,
+    '--lineHeight': `${BODY_MD[3]}`
   }
 };
 
@@ -50,7 +53,7 @@ const ButtonBase = styled.button<{ full?: boolean }>`
   display: inline-flex;
   font-size: var(--fontSize);
   justify-content: center;
-  /* line-height: ${rems(20)}; */
+  line-height: var(--lineHeight);
   /* min-width: ${rems(20)}; */
   padding: var(--padding);
   text-decoration: none;
@@ -64,8 +67,9 @@ const ButtonBase = styled.button<{ full?: boolean }>`
     pointer-events: none;
   }
 
-  svg {
+  &:last-child svg {
     margin-left: ${space(0.75)};
+    margin-right: ${space(-0.75)};
     width: ${space(2)};
 
     path {
@@ -118,6 +122,7 @@ const SecondaryButton = styled(ButtonBase)`
 
 const TextButton = styled.button`
   color: ${COLOR_PURPLE_500};
+  text-decoration: underline;
 
   &:hover {
     color: ${COLOR_PURPLE_400};
@@ -128,49 +133,5 @@ const TextButton = styled.button`
   }
 `;
 
-const linkStyles = css`
-  cursor: pointer;
-  text-decoration: underline;
-`;
-
-const coloredLinkStyles = css`
-  cursor: pointer;
-  color: ${COLOR_PURPLE_500};
-  font-weight: 500;
-`;
-
-const ButtonLink = styled.button`
-  ${linkStyles}
-`;
-
-const ButtonStyledLink = styled.a<{ full?: boolean }>`
-  width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${ButtonBase};
-`;
-
-const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
-  ${BODY_SM}
-`;
-
-const ButtonLinkApp = styled.button`
-  ${BODY_SM}
-  ${linkStyles}
-`;
-
-const ButtonLinkColored = styled.button`
-  ${coloredLinkStyles}
-  ${BODY_SM}
-`;
-
-export {
-  PrimaryButton,
-  SecondaryButton,
-  TextButton,
-  ButtonLink,
-  ButtonLinkApp,
-  ButtonStyledLink,
-  ButtonStyledLinkSmall,
-  ButtonLinkColored,
-  SIZES
-};
+export { PrimaryButton, SecondaryButton, TextButton, SIZES };
 export default ButtonBase;

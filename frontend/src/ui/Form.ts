@@ -99,7 +99,7 @@ const FormikForm = styled(Form)`
   }
 
   a {
-    text-decoration: underline;
+    /* text-decoration: underline; */
   }
 
   ${media.min('tablet')`

@@ -158,7 +158,7 @@ const FishbowlList = () => {
                 <Trans i18nKey="fishbowl-list:emptyListDescription" components={{ i: <i /> }} />
               </p>
               <div className="empty-actions">
-                <Link href={ROUTE_FISHBOWL_CREATE} passHref>
+                <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
                   <Button
                     as="a"
                     variant="secondary"
@@ -173,8 +173,8 @@ const FishbowlList = () => {
                   >
                     <span>{t('common:scheduleFishbowl')}</span>
                   </Button>
-                </Link>
-                <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+                </RedirectLink>
+                <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
                   <Button
                     as="a"
                     className="animate-item cta-create-fishbowl"
@@ -188,7 +188,7 @@ const FishbowlList = () => {
                   >
                     <span>{t('common:hostFishbowlNow')}</span>
                   </Button>
-                </Link>
+                </RedirectLink>
               </div>
             </EmptyFishbowlList>
           ) : (
