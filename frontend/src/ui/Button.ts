@@ -25,7 +25,7 @@ import {
   COLOR_RED_600
 } from '@/ui/settings';
 import { mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
-import { rems, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 
 const SIZES = {
   small: {
@@ -75,9 +75,11 @@ const ButtonBase = styled.button<{ full?: boolean }>`
   }
 
   * + &:last-child svg {
-    margin-left: ${space(0.75)};
-    margin-right: ${space(-0.75)};
-    width: ${space(2)};
+    ${media.min('tablet')`
+      margin-left: ${space(0.75)};
+      margin-right: ${space(-0.75)};
+      width: ${space(2)};
+    `}
 
     path {
       fill: currentColor;

@@ -13,11 +13,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
+
 import { useStateValue } from '@/contexts/AppContext';
+import { useStooa } from '@/contexts/StooaManager';
+
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
-
-import { useStooa } from '@/contexts/StooaManager';
 import Button from '@/components/Common/Button';
 
 interface Props {

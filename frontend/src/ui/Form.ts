@@ -51,7 +51,6 @@ const FormikForm = styled(Form)`
     }
 
     &:last-child {
-      padding-bottom: ${space(2)};
       margin-bottom: 0;
 
       span {
