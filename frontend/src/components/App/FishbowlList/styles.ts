@@ -140,6 +140,10 @@ const EmptyFishbowlList = styled.div`
       grid-template-columns: auto auto;
     `}
   }
+
+  h2 {
+    margin-bottom: ${space(1)};
+  }
 `;
 
 const Header = styled.div`

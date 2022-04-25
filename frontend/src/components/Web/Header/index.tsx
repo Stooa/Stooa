@@ -48,6 +48,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                 pathname !== ROUTE_FISHBOWL_LIST && (
                   <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                     <Button
+                      className="hide-mobile"
                       size="medium"
                       variant="secondary"
                       onClick={() => {

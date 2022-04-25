@@ -19,6 +19,7 @@ import {
   COLOR_GREEN_600,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
+  COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
@@ -61,7 +62,7 @@ const FormikForm = styled(Form)`
         margin: 0;
 
         &.success-message-bottom {
-          bottom: -1.5ch;
+          bottom: -2.5ch;
         }
 
         &.success-message-top {
@@ -129,7 +130,7 @@ const InputStyled = styled.div`
 
   svg {
     pointer-events: none;
-    color: ${COLOR_NEUTRO_600};
+    color: ${COLOR_NEUTRO_700};
   }
 
   .dropdown-icon {
@@ -195,7 +196,7 @@ const InputStyled = styled.div`
   textarea,
   select {
     background-color: ${COLOR_NEUTRO_300};
-    border: 1px solid ${COLOR_NEUTRO_500};
+    border: 1px solid ${COLOR_NEUTRO_400};
     color: ${COLOR_NEUTRO_700};
     border-radius: ${BORDER_RADIUS};
     padding: ${space(2.75)} ${space(6)} ${space(0.4)} ${space(2)};
@@ -239,7 +240,7 @@ const InputStyled = styled.div`
   }
 
   input::placeholder {
-    color: ${COLOR_NEUTRO_700};
+    color: ${COLOR_NEUTRO_600};
   }
 
   input:focus,

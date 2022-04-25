@@ -118,7 +118,6 @@ const FishbowlList = () => {
               <Button
                 as="a"
                 variant="secondary"
-                size="medium"
                 className="schedule-fishbowl"
                 onClick={() => {
                   pushEventDataLayer({
@@ -151,7 +150,7 @@ const FishbowlList = () => {
                   alt="Empty chair"
                 />
               </div>
-              <h2>
+              <h2 className="body-lg medium">
                 <Trans i18nKey="fishbowl-list:emptyListTitle" components={{ i: <i /> }} />
               </h2>
               <p>
@@ -162,6 +161,7 @@ const FishbowlList = () => {
                   <Button
                     as="a"
                     variant="secondary"
+                    size="large"
                     className="animate-item cta-create-fishbowl"
                     onClick={() => {
                       pushEventDataLayer({
@@ -177,6 +177,7 @@ const FishbowlList = () => {
                 <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
                   <Button
                     as="a"
+                    size="large"
                     className="animate-item cta-create-fishbowl"
                     onClick={() => {
                       pushEventDataLayer({
