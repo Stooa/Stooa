@@ -197,7 +197,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.introductionTooltip"
-              components={{ strong: <strong /> }}
+              components={{ span: <span className="medium" /> }}
             />
           }
           label={t('fishbowl.introductionLabel')}

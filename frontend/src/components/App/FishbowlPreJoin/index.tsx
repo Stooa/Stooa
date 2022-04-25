@@ -145,7 +145,7 @@ const FishbowlPreJoin: React.FC = () => {
           <Form>
             <h2 className="title-md">{t('fishbowl:prejoin.title')}</h2>
             {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
-            <Button variant="subtleLink" className="cancel body-sm" onClick={handleCancel}>
+            <Button variant="subtleLink" className="cancel" onClick={handleCancel}>
               {t('cancel')}
             </Button>
           </Form>

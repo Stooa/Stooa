@@ -216,7 +216,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                         {t('done')}
                       </Button>
                     ) : (
-                      <Button variant="text" onClick={skipOnBoarding}>
+                      <Button variant="subtleLink" onClick={skipOnBoarding}>
                         {t('skip')}
                       </Button>
                     )}

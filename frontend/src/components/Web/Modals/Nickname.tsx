@@ -28,7 +28,7 @@ const Nickname: React.FC<Props> = ({ toggleModal }) => {
           <Cross />
         </button>
         <h2 className="title-md">{t('fishbowl:prejoin.title')}</h2>
-        <Button variant="text" className="body-sm" onClick={toggleModal}>
+        <Button variant="text" onClick={toggleModal}>
           {t('cancel')}
         </Button>
       </div>

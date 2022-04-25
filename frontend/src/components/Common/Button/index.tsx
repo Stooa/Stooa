@@ -26,9 +26,9 @@ interface Props extends React.ComponentProps<'button'> {
 }
 /**
  * Main button component
- * @param variant primary, secondary or text
- * @param size small, medium or large
  * @param as button or a
+ * @param variant primary, secondary, text, link, subtleLink
+ * @param size small, medium or large
  * @returns
  */
 const Button: React.FC<Props> = React.forwardRef(

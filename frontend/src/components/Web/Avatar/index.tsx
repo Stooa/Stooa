@@ -76,7 +76,7 @@ const Avatar: React.FC = () => {
               <span>{t('changePassword')}</span>
             </a>
           </Link>
-          <button className="item body-sm" onClick={logout}>
+          <button className="item" onClick={logout}>
             <Logout />
             <span>{t('signout')}</span>
           </button>

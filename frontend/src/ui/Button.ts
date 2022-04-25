@@ -159,7 +159,6 @@ const LinkStyledButton = styled.button`
 `;
 
 const SubtleLinkStyledButton = styled.button`
-  ${mediumWeight};
   color: ${COLOR_NEUTRO_700};
   cursor: pointer;
   text-decoration: underline;

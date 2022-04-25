@@ -24,7 +24,7 @@
         "selectTimeZone": "Selecciona zona horaria",
         "advancedOptions": "Opciones avanzadas",
         "introductionLabel": "Quiero comenzar el fishbowl con una introducción.",
-        "introductionTooltip": "Cuando inicies el Fishbowl, <strong>podrás comenzar haciendo una introducción.</strong> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <strong>no olvides permitir a los asistentes unirse a la conversación.</strong>"
+        "introductionTooltip": "Cuando inicies el Fishbowl, <span>podrás comenzar haciendo una introducción.</span> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <span>no olvides permitir a los asistentes unirse a la conversación.</span>"
     },
     "button": {
         "login": "Entra",

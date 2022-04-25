@@ -24,7 +24,7 @@
         "selectTimeZone": "Time Zone",
         "advancedOptions": "Advanced Options",
         "introductionLabel": "I want to start the fishbowl giving an introduction.",
-        "introductionTooltip": "When you start the fishbowl, <strong>you can start by making an introduction.</strong> The camera and microphone will be active just for you. When you're done, <strong>don't forget to allow attendees to join the conversation.</strong>"
+        "introductionTooltip": "When you start the fishbowl, <span>you can start by making an introduction.</span> The camera and microphone will be active just for you. When you're done, <span>don't forget to allow attendees to join the conversation.</span>"
     },
     "button": {
         "login": "Log in",

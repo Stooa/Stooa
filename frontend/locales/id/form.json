@@ -19,7 +19,7 @@
         "selectTimeZone": "Zona Waktu",
         "selectDuration": "Durasi",
         "introductionLabel": "Saya ingin memulai fishbowl memberikan pengantar.",
-        "introductionTooltip": "Saat Anda memulai fishbowl, <strong>Anda dapat memulai dengan membuat pendahuluan.</strong> Kamera dan mikrofon akan aktif hanya untuk Anda. Setelah selesai, <strong>jangan lupa izinkan peserta untuk bergabung dalam percakapan.</strong>"
+        "introductionTooltip": "Saat Anda memulai fishbowl, <span>Anda dapat memulai dengan membuat pendahuluan.</span> Kamera dan mikrofon akan aktif hanya untuk Anda. Setelah selesai, <span>jangan lupa izinkan peserta untuk bergabung dalam percakapan.</span>"
     },
     "validation": {
         "email": "Alamat surel tidak valid",
