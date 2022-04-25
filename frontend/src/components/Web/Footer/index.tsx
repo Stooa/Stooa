@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
         <Nav>
           <NavTitle className="body-md bold">{APP_NAME}</NavTitle>
           <NavList>
-            <li className="body-sm">
+            <li>
               <Link href={ROUTE_FISHBOWL_CREATE} passHref>
                 <a
                   onClick={() => {
@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
                 </a>
               </Link>
             </li>
-            <li className="body-sm">
+            <li>
               <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
                 <a
                   onClick={() => {
@@ -125,12 +125,12 @@ const Footer: React.FC = () => {
             </li>
             {!isAuthenticated && (
               <>
-                <li className="body-sm">
+                <li>
                   <Link href={`${ROUTE_REGISTER}`} passHref>
                     <a>{t('register')}</a>
                   </Link>
                 </li>
-                <li className="body-sm">
+                <li>
                   <RedirectLink href={ROUTE_SIGN_IN} passHref>
                     <a data-testid="footer-login">{t('signin')}</a>
                   </RedirectLink>
@@ -142,33 +142,33 @@ const Footer: React.FC = () => {
         <Nav>
           <NavTitle className="body-md bold">{t('help')}</NavTitle>
           <NavList>
-            <li className="body-sm">
+            <li>
               <Link href={GITHUB_ISSUES} passHref>
                 <a target="_blank" rel="noreferrer noopener">
                   {t('githubIssues')}
                 </a>
               </Link>
             </li>
-            <li className="body-sm">
+            <li>
               <Link href={`mailto:${SUPPORT_EMAIL}`} passHref>
                 <a>{SUPPORT_EMAIL}</a>
               </Link>
             </li>
-            <li className="body-sm">
+            <li>
               <Link href={GITHUB_ROADMAP} passHref>
                 <a target="_blank" rel="noreferrer noopener">
                   {t('roadmap')}
                 </a>
               </Link>
             </li>
-            <li className="body-sm">
+            <li>
               <Link href={GITBOOK_DOCUMENTATION} passHref>
                 <a target="_blank" rel="noreferrer noopener">
                   {t('documentation')}
                 </a>
               </Link>
             </li>
-            <li className="body-sm">
+            <li>
               <Link href={GITBOOK_CONDUCT} passHref>
                 <a target="_blank" rel="noreferrer noopener">
                   {t('conductCode')}
@@ -180,12 +180,12 @@ const Footer: React.FC = () => {
         <Nav>
           <NavTitle className="body-md bold">{t('legal')}</NavTitle>
           <NavList>
-            <li className="body-sm">
+            <li>
               <Link href={ROUTE_PRIVACY_POLICY} passHref>
                 <a>{t('privacyPolicy')}</a>
               </Link>
             </li>
-            <li className="body-sm">
+            <li>
               <Link href={ROUTE_COOKIES_POLICY} passHref>
                 <a>{t('cookiesPolicy')}</a>
               </Link>

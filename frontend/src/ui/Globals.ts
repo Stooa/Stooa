@@ -7,19 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 import { Button } from '@/ui/Resets';
-import Texts from '@/ui/Texts';
+import Texts, { TYPOGRAPHY_SIZES } from '@/ui/Texts';
 import Titles from '@/ui/Titles';
 import Overrides from '@/ui/Overrides';
-import { media, rems, space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import {
   COLOR_GREEN_100,
   COLOR_GREEN_500,
   COLOR_GREEN_800,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
+  COLOR_NEUTRO_800,
   COLOR_RED_100,
   COLOR_RED_600,
   COLOR_YELLOW_100,
@@ -28,6 +29,21 @@ import {
   FONT_PRIMARY
 } from '@/ui/settings';
 import { getIconCSS } from '@/ui/Icons';
+
+const StyledLinkCss = css`
+  color: ${COLOR_NEUTRO_700};
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
+  cursor: pointer;
+
+  &:hover {
+    color: ${COLOR_NEUTRO_600};
+  }
+
+  &:focus {
+    color: ${COLOR_NEUTRO_800};
+  }
+`;
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -101,7 +117,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: inherit;
+    ${StyledLinkCss}
+    --fontSize: ${TYPOGRAPHY_SIZES.body_sm.fontSize};
+    --lineHeight: ${TYPOGRAPHY_SIZES.body_sm.lineHeight};
     text-decoration: none;
     text-decoration-skip-ink: auto;
 
@@ -285,4 +303,5 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
+export { StyledLinkCss };
 export default GlobalStyle;

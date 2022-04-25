@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import {
   COLOR_NEUTRO_100,
@@ -26,6 +26,7 @@ import {
 } from '@/ui/settings';
 import { mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
 import { media, rems, space } from '@/ui/helpers';
+import { StyledLinkCss } from './Globals';
 
 const SIZES = {
   small: {
@@ -42,10 +43,6 @@ const SIZES = {
     '--padding': `${space(1.75)} ${space(4)} ${space(1.5)} ${space(4)}`,
     '--fontSize': `${TYPOGRAPHY_SIZES.body_md.fontSize}`,
     '--lineHeight': `${TYPOGRAPHY_SIZES.body_md.lineHeight}`
-  },
-  link: {
-    '--fontSize': `${TYPOGRAPHY_SIZES.link.fontSize}`,
-    '--lineHeight': `${TYPOGRAPHY_SIZES.link.lineHeight}`
   }
 };
 
@@ -88,11 +85,9 @@ const ButtonBase = styled.button<{ full?: boolean }>`
 
   &.error {
     background-color: ${COLOR_RED_500};
-    border-color: ${COLOR_RED_500};
 
     &:hover {
       background-color: ${COLOR_RED_400};
-      border-color: ${COLOR_RED_400};
     }
 
     &:focus {
@@ -106,10 +101,12 @@ const PrimaryButton = styled(ButtonBase)`
   color: ${COLOR_NEUTRO_100};
 
   &:hover {
+    color: ${COLOR_NEUTRO_100};
     background-color: ${COLOR_PURPLE_400};
   }
 
   &:focus {
+    color: ${COLOR_NEUTRO_100};
     background-color: ${COLOR_PURPLE_600};
   }
 `;
@@ -145,7 +142,6 @@ const TextButton = styled.button`
 `;
 
 const LinkStyledButton = styled.button`
-  ${mediumWeight};
   color: ${COLOR_PURPLE_500};
   font-size: var(--fontSize);
   line-height: var(--lineHeight);
@@ -161,19 +157,8 @@ const LinkStyledButton = styled.button`
 `;
 
 const SubtleLinkStyledButton = styled.button`
-  color: ${COLOR_NEUTRO_700};
-  font-size: var(--fontSize);
-  line-height: var(--lineHeight);
-  cursor: pointer;
+  ${StyledLinkCss}
   text-decoration: underline;
-
-  &:hover {
-    color: ${COLOR_NEUTRO_600};
-  }
-
-  &:focus {
-    color: ${COLOR_NEUTRO_800};
-  }
 `;
 
 export {

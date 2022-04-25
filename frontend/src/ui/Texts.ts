@@ -7,19 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
 import { rems } from '@/ui/helpers';
 import typographyData from '@/ui/design-tokens/typography.json';
-import {
-  COLOR_NEUTRO_500,
-  COLOR_NEUTRO_600,
-  COLOR_NEUTRO_700,
-  COLOR_NEUTRO_800,
-  COLOR_PURPLE_400,
-  COLOR_PURPLE_500,
-  COLOR_PURPLE_600
-} from './settings';
 
 const typography = typographyData.typography;
 
@@ -39,10 +30,6 @@ const TYPOGRAPHY_SIZES = {
   body_xs: {
     fontSize: rems(typography.bodyxs.rawFontSize),
     lineHeight: typography.bodyxs.lineHeight
-  },
-  link: {
-    fontSize: rems(typography.link.rawFontSize),
-    lineHeight: typography.link.lineHeight
   }
 };
 
