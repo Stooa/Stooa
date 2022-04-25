@@ -42,10 +42,10 @@ const Icon = styled.button`
     border: 1px solid transparent;
     border-radius: 50%;
     display: flex;
-    height: ${space(2)};
+    height: ${space(3.25)};
     justify-content: center;
     transition: background-color 0.1s ease-out;
-    width: ${space(2)};
+    width: ${space(3.25)};
     will-change: background-color;
   }
 
