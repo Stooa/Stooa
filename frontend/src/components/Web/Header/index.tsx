@@ -68,7 +68,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
             <>
               {pathname !== ROUTE_SIGN_IN && (
                 <RedirectLink href={ROUTE_SIGN_IN} passHref>
-                  <Button size="medium" as="a" data-testid="login">
+                  <Button variant="text" size="medium" as="a" data-testid="login">
                     <span>{t('signin')}</span>
                   </Button>
                 </RedirectLink>

@@ -30,12 +30,12 @@ const Page404 = () => {
         <p>{t('404.text')}</p>
         <div className="ctas">
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-            <Button as="a">
+            <Button size="large" as="a">
               <span>{t('home:scheduleFishbowl')}</span>
             </Button>
           </RedirectLink>
           <RedirectLink href={ROUTE_HOME} passHref>
-            <Button variant="secondary" as="a">
+            <Button size="large" variant="secondary" as="a">
               <span>{t('common:goHome')}</span>
             </Button>
           </RedirectLink>

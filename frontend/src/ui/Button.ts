@@ -162,6 +162,8 @@ const LinkStyledButton = styled.button`
 
 const SubtleLinkStyledButton = styled.button`
   color: ${COLOR_NEUTRO_700};
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
   cursor: pointer;
   text-decoration: underline;
 

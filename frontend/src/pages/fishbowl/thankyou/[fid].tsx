@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
+import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
@@ -164,7 +164,7 @@ const ThankYou = () => {
         <div className="action-wrapper">
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button
-              size="medium"
+              size="large"
               as="a"
               onClick={() => {
                 pushEventDataLayer({
@@ -177,20 +177,9 @@ const ThankYou = () => {
               <span>{t('common:scheduleFishbowl')}</span>
             </Button>
           </RedirectLink>
-          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <Button
-              size="medium"
-              as="a"
-              className="host-now secondary"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Host Fishbowl Now',
-                  action: 'Thank You Page',
-                  label: `fishbowl/thankyou/${fid}`
-                });
-              }}
-            >
-              <span>{t('common:hostFishbowlNow')}</span>
+          <RedirectLink href={ROUTE_HOME} passHref>
+            <Button size="large" variant="secondary" as="a">
+              <span>{t('common:goHome')}</span>
             </Button>
           </RedirectLink>
         </div>
