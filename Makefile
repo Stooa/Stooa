@@ -63,10 +63,11 @@ provision-backend: composer-install cache-clear assets database
 
 composer-install:
 	$(call docker-exec-backend,composer install --optimize-autoloader)
+.PHONY: composer-install
 
 composer-normalize:
 	$(call docker-exec-backend,composer normalize)
-.PHONY: composer-install
+.PHONY: composer-normalize
 
 phpstan:
 	$(call docker-exec-backend,composer phpstan)
