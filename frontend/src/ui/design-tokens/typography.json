@@ -70,7 +70,7 @@
       "rawFontSize": 20,
       "fontWeight": 400,
       "letterSpacing": 0,
-      "lineHeight": 1.2
+      "lineHeight": 1.4
     },
     "bodylgBold": {
       "fontFamily": "Geomanist",
@@ -78,7 +78,7 @@
       "rawFontSize": 20,
       "fontWeight": 500,
       "letterSpacing": 0,
-      "lineHeight": 1.2
+      "lineHeight": 1.4
     },
     "bodymd": {
       "fontFamily": "Geomanist",
