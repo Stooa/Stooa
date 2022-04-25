@@ -16,31 +16,33 @@ import {
   COLOR_GREEN_200,
   COLOR_GREEN_900,
   COLOR_NEUTRO_100,
-  COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_700,
   COLOR_RED_100,
   COLOR_RED_200,
-  COLOR_RED_600,
-  COLOR_YELLOW_100
+  COLOR_RED_900,
+  COLOR_YELLOW_100,
+  COLOR_YELLOW_300
 } from '@/ui/settings';
 import { BODY_SM, BODY_LG } from '@/ui/Texts';
 
 const ERROR_STYLES = css`
   background: ${COLOR_RED_100};
   border: 1px solid ${COLOR_RED_200};
-  color: ${COLOR_RED_600};
+  color: ${COLOR_RED_900};
 `;
 
 const HIGHLIGHT_STYLES = css`
-  background: ${COLOR_NEUTRO_300};
+  background: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_400};
+  color: ${COLOR_NEUTRO_700};
 `;
 
 const WARNING_STYLES = css`
   background: ${COLOR_YELLOW_100};
-  border: 1px solid ${COLOR_NEUTRO_500};
+  border: 1px solid ${COLOR_YELLOW_300};
+  color: ${COLOR_NEUTRO_700};
 `;
 
 const SUCCESS_STYLES = css`
