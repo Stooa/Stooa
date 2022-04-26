@@ -17,7 +17,7 @@ import AvatarIcon from '@/ui/svg/avatar.svg';
 import Logo from '@/components/Common/Logo';
 import Navigation, { Avatar } from '@/components/Web/FishbowlDetailHeader/styles';
 import Button from '@/components/Common/Button';
-import RedirectLink from '../RedirectLink';
+import RedirectLink from '@/components/Web/RedirectLink';
 
 interface Props {
   data: Fishbowl;
