@@ -21,12 +21,11 @@ import {
   ROUTE_FISHBOWL_LIST
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import { ButtonSmall, ButtonTransp } from '@/ui/Button';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import Logo from '@/components/Common/Logo';
 import Avatar from '@/components/Web/Avatar';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Navigation from '@/components/Web/Header/styles';
+import Button from '@/components/Common/Button';
 
 interface Props {
   navigation?: boolean;
@@ -48,8 +47,10 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                 pathname !== ROUTE_FISHBOWL_CREATE &&
                 pathname !== ROUTE_FISHBOWL_LIST && (
                   <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
-                    <ButtonSmall
-                      className="secondary"
+                    <Button
+                      className="hide-mobile"
+                      size="medium"
+                      variant="secondary"
                       onClick={() => {
                         pushEventDataLayer({
                           category: 'Schedule Fishbowl',
@@ -59,8 +60,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                       }}
                     >
                       <span>{t('scheduleFishbowl')}</span>
-                      <ArrowRight />
-                    </ButtonSmall>
+                    </Button>
                   </RedirectLink>
                 )}
               <Avatar />
@@ -69,17 +69,16 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
             <>
               {pathname !== ROUTE_SIGN_IN && (
                 <RedirectLink href={ROUTE_SIGN_IN} passHref>
-                  <ButtonTransp as="a" data-testid="login">
+                  <Button variant="text" size="medium" as="a" data-testid="login">
                     <span>{t('signin')}</span>
-                  </ButtonTransp>
+                  </Button>
                 </RedirectLink>
               )}
               {pathname !== ROUTE_REGISTER && (
                 <RedirectLink href={ROUTE_REGISTER} passHref>
-                  <ButtonSmall className="secondary" as="a" data-testid="register">
+                  <Button size="medium" variant="secondary" as="a" data-testid="register">
                     <span>{t('register')}</span>
-                    <ArrowRight />
-                  </ButtonSmall>
+                  </Button>
                 </RedirectLink>
               )}
             </>

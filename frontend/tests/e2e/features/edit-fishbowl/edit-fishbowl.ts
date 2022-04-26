@@ -131,7 +131,6 @@ Then('clicks on placeholders Enter Fishbowl link', () => {
 });
 
 Then('sees success messages', () => {
-  cy.get('span.success-message-top').should('exist');
   cy.get('span.success-message-bottom').should('exist');
 
   cy.wait(5500);

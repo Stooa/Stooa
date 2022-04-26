@@ -36,8 +36,8 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
         className="highlight"
       >
-        <p className="text-md medium">{t('dateandtime')}</p>
-        <div className="text-lg">
+        <p className="body-md medium">{t('dateandtime')}</p>
+        <div className="body-lg">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
             startDate.time
           } - ${endDate.time} ${endDate.timezone}`}
@@ -45,7 +45,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
       </Time>
       {!fishbowlReady && (
         <>
-          <TimeLeft className="warning text-md prewrap" block>
+          <TimeLeft className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
           </TimeLeft>
           <CopyUrl className="centered" data={data} />

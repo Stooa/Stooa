@@ -17,8 +17,9 @@ import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
-import Button, { ButtonHollow } from '@/ui/Button';
 import { JoinFishbowlStyled } from '@/components/Web/JoinFishbowl/styles';
+import Button from '@/components/Common/Button';
+import RedirectLink from '@/components/Web/RedirectLink';
 
 interface Props {
   data: Fishbowl;
@@ -65,20 +66,30 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
       <JoinFishbowlStyled>
         {isAuthenticated && fishbowlReady && (
           <div className="join-buttons">
-            <Link href={fbRoute} locale={data.locale} passHref>
-              <ButtonHollow as="a">{t('joinFishbowl')}</ButtonHollow>
-            </Link>
+            <RedirectLink href={fbRoute} locale={data.locale} passHref>
+              <Button size="large" variant="primary" as="a">
+                {t('joinFishbowl')}
+              </Button>
+            </RedirectLink>
           </div>
         )}
         {!isAuthenticated && fishbowlReady && (
           <>
             <div className="join-buttons">
-              <Button onClick={joinAsGuest}>{t('joinGuest')}</Button>
-              <Link href={`${ROUTE_SIGN_IN}?redirect=${fbRoute}`} locale={data.locale} passHref>
-                <ButtonHollow as="a">{t('joinMember')}</ButtonHollow>
-              </Link>
+              <Button size="large" variant="primary" onClick={joinAsGuest}>
+                {t('joinGuest')}
+              </Button>
+              <RedirectLink
+                href={`${ROUTE_SIGN_IN}?redirect=${fbRoute}`}
+                locale={data.locale}
+                passHref
+              >
+                <Button size="large" variant="secondary" as="a">
+                  {t('joinMember')}
+                </Button>
+              </RedirectLink>
             </div>
-            <p className="text-xxs">{t('joinMemberNote')}</p>
+            <p className="body-xs">{t('joinMemberNote')}</p>
           </>
         )}
       </JoinFishbowlStyled>

@@ -19,7 +19,7 @@ import {
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
-import { TEXT_LG, TEXT_MD } from '@/ui/Texts';
+import { BODY_LG, BODY_MD } from '@/ui/Texts';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
@@ -30,9 +30,12 @@ const FishbowlListWrapper = styled.div`
 
 const FishbowlListContent = styled.div`
   display: grid;
-  width: 100%;
-  height: 815px;
   grid-template-columns: 1fr auto;
+  width: 100%;
+
+  &.not-empty {
+    height: 815px;
+  }
 
   ${media.min('desktop')`
     column-gap: ${space()};
@@ -123,7 +126,7 @@ const EmptyFishbowlList = styled.div`
   }
 
   p {
-    margin-bottom: ${space(3)};
+    margin-bottom: ${space(4)};
   }
 
   .empty-actions {
@@ -137,6 +140,10 @@ const EmptyFishbowlList = styled.div`
       grid-template-columns: auto auto;
     `}
   }
+
+  h2 {
+    margin-bottom: ${space(1)};
+  }
 `;
 
 const Header = styled.div`
@@ -145,7 +152,7 @@ const Header = styled.div`
   margin-bottom: ${space(2)};
 
   .fishbowl-list__title {
-    ${TEXT_LG}
+    ${BODY_LG}
     font-weight: 300;
   }
 
@@ -246,7 +253,7 @@ const CardStyled = styled.div`
 `;
 
 const CardTitle = styled.div`
-  ${TEXT_MD};
+  ${BODY_MD};
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

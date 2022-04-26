@@ -17,7 +17,7 @@
         "selectTimeZone": "Fuseau horaire",
         "advancedOptions": "Options avancées",
         "introductionLabel": "Je veux commencer le bocal en donnant une introduction.",
-        "introductionTooltip": "Lorsque vous démarrez le bocal, <strong>vous pouvez commencer par faire une introduction</strong>. La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <strong>n'oubliez pas d'autoriser les participants à se joindre à la conversation.</strong>"
+        "introductionTooltip": "Lorsque vous démarrez le bocal, <span>vous pouvez commencer par faire une introduction</span>. La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <span>n'oubliez pas d'autoriser les participants à se joindre à la conversation.</span>"
     },
     "button": {
         "createAccount": "Créez-en un !",

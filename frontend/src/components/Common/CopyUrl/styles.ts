@@ -22,10 +22,10 @@ import {
   COLOR_PURPLE_500,
   COLOR_PURPLE_900
 } from '@/ui/settings';
-import { TEXT_XXS } from '@/ui/Texts';
+import { BODY_XS } from '@/ui/Texts';
 
 const Share = styled.div`
-  ${TEXT_XXS}
+  ${BODY_XS}
 
   &.align-left {
     text-align: left;
