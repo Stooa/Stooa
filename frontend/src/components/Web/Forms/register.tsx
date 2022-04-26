@@ -100,7 +100,14 @@ const Form = (props: FormikProps<FormValues>) => {
           <Trans
             i18nKey="register:terms"
             components={{
-              a: <a href={privacyLink} target="_blank" rel="noreferrer noopener nofollow" />
+              a: (
+                <a
+                  className="decorated"
+                  href={privacyLink}
+                  target="_blank"
+                  rel="noreferrer noopener nofollow"
+                />
+              )
             }}
           />
         </Checkbox>
@@ -112,7 +119,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <p className="body-sm">
           {t('register:haveAccount')}{' '}
           <RedirectLink href={ROUTE_SIGN_IN} passHref>
-            <a>{t('register:button.login')}</a>
+            <a className="decorated">{t('register:button.login')}</a>
           </RedirectLink>
         </p>
       </fieldset>

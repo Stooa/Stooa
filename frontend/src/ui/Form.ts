@@ -283,6 +283,11 @@ const CheckboxStyled = styled.div`
     position: absolute;
     width: auto;
 
+    &:focus-visible + label::before {
+      outline: ${COLOR_NEUTRO_700} solid 1px;
+      outline-offset: -1px;
+    }
+
     & + label {
       cursor: pointer;
       display: inline-block;
