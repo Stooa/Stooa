@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42632b489e98fbfadc64b2cf8b65e2ed",
+    "content-hash": "f013cc1af3a1c8dce3cace2f016ba1c3",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3156,35 +3156,30 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.2.0",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "dbc093d7af60eff5cd575d2ed761b15ed40bd08e"
+                "reference": "129a63b3bc7caeb593c224c41f420675e63cfefc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/dbc093d7af60eff5cd575d2ed761b15ed40bd08e",
-                "reference": "dbc093d7af60eff5cd575d2ed761b15ed40bd08e",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/129a63b3bc7caeb593c224c41f420675e63cfefc",
+                "reference": "129a63b3bc7caeb593c224c41f420675e63cfefc",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.0",
+                "phpstan/phpstan": "^1.5",
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PHPStan\\PhpDocParser\\": [
@@ -3199,9 +3194,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.2.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.4.5"
             },
-            "time": "2021-09-16T20:46:02+00:00"
+            "time": "2022-04-22T11:11:01+00:00"
         },
         {
             "name": "psr/cache",
@@ -4335,16 +4330,16 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "2.10.1",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "bea28f5fc5a6b732edef5a64e0876920122b9590"
+                "reference": "9c0a4afe26f00f2b7a30030d7585b864a9734208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/bea28f5fc5a6b732edef5a64e0876920122b9590",
-                "reference": "bea28f5fc5a6b732edef5a64e0876920122b9590",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/9c0a4afe26f00f2b7a30030d7585b864a9734208",
+                "reference": "9c0a4afe26f00f2b7a30030d7585b864a9734208",
                 "shasum": ""
             },
             "require": {
@@ -4423,7 +4418,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/exporter/issues",
-                "source": "https://github.com/sonata-project/exporter/tree/2.10.1"
+                "source": "https://github.com/sonata-project/exporter/tree/2.11.0"
             },
             "funding": [
                 {
@@ -4443,20 +4438,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-03T20:36:43+00:00"
+            "time": "2022-02-13T18:46:26+00:00"
         },
         {
             "name": "sonata-project/form-extensions",
-            "version": "1.12.4",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/form-extensions.git",
-                "reference": "2134849d114bd140933ff080f0c73f41147b56e0"
+                "reference": "336439d98215d2bd88658aad5fe571f0710336c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/form-extensions/zipball/2134849d114bd140933ff080f0c73f41147b56e0",
-                "reference": "2134849d114bd140933ff080f0c73f41147b56e0",
+                "url": "https://api.github.com/repos/sonata-project/form-extensions/zipball/336439d98215d2bd88658aad5fe571f0710336c7",
+                "reference": "336439d98215d2bd88658aad5fe571f0710336c7",
                 "shasum": ""
             },
             "require": {
@@ -4537,7 +4532,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/form-extensions/issues",
-                "source": "https://github.com/sonata-project/form-extensions/tree/1.12.4"
+                "source": "https://github.com/sonata-project/form-extensions/tree/1.13.1"
             },
             "funding": [
                 {
@@ -4557,7 +4552,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-04T14:19:07+00:00"
+            "time": "2022-02-24T08:50:24+00:00"
         },
         {
             "name": "sonata-project/twig-extensions",
