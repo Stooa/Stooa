@@ -119,7 +119,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <p className="body-sm">
           {t('register:haveAccount')}{' '}
           <RedirectLink href={ROUTE_SIGN_IN} passHref>
-            <a className="decorated">{t('register:button.login')}</a>
+            <a className="decorated colored">{t('register:button.login')}</a>
           </RedirectLink>
         </p>
       </fieldset>

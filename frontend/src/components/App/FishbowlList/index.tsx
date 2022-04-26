@@ -232,7 +232,7 @@ const FishbowlList = () => {
                           >
                             <BackArrow />
                           </MobileBackButton>
-                          <h2 className="title-md">
+                          <h2 className="title-md form-title">
                             <Trans i18nKey="fishbowl-list:titleEdit" components={{ i: <i /> }} />
                           </h2>
                         </div>
