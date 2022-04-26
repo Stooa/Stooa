@@ -31,6 +31,10 @@ const ERROR_STYLES = css`
   background: ${COLOR_RED_100};
   border: 1px solid ${COLOR_RED_200};
   color: ${COLOR_RED_900};
+
+  svg > path {
+    fill: ${COLOR_RED_900};
+  }
 `;
 
 const HIGHLIGHT_STYLES = css`
@@ -49,6 +53,10 @@ const SUCCESS_STYLES = css`
   background: ${COLOR_GREEN_100};
   border: 1px solid ${COLOR_GREEN_200};
   color: ${COLOR_GREEN_900};
+
+  svg > path {
+    fill: ${COLOR_GREEN_900};
+  }
 `;
 
 const INFO_STYLES = css`
