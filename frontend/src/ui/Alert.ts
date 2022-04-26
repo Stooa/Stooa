@@ -76,7 +76,7 @@ const Alert = styled.div<{ block?: boolean }>`
   margin: ${space()};
   max-width: 80vw;
   overflow-x: auto;
-  padding: ${space()} ${space(2)};
+  padding: ${space(1.125)} ${space(1.5)} ${space(0.875)};
   text-align: center;
 
   span {
