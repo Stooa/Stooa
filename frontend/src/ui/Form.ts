@@ -62,11 +62,10 @@ const FormikForm = styled(Form)`
         margin: 0;
 
         &.success-message-bottom {
-          bottom: -2.5ch;
-        }
-
-        &.success-message-top {
-          top: -3.2ch;
+          ${media.min('tablet')`
+            bottom: -2.85ch;
+          `}
+          bottom: 3.25rem;
         }
       }
     }

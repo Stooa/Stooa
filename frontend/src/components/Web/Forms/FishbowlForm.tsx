@@ -205,7 +205,6 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         />
       </fieldset>
       <fieldset>
-        {success && <span className="success-message-top">{t('validation.successMessage')}</span>}
         {success && (
           <span className="success-message-bottom">{t('validation.successMessage')}</span>
         )}
