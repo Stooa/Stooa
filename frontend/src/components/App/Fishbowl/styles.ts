@@ -11,11 +11,11 @@ import styled from 'styled-components';
 
 import Alert from '@/ui/Alert';
 import { COLOR_NEUTRO_600 } from '@/ui/settings';
-import { APP_SM } from '@/ui/Texts';
 import { space } from '@/ui/helpers';
+import { BODY_XS } from '@/ui/Texts';
 
 const StatusBox = styled(Alert)`
-  ${APP_SM}
+  ${BODY_XS}
 
   font-weight: 500;
   padding-left: ${space(1.5)};

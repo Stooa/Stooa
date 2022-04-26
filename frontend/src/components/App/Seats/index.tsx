@@ -38,15 +38,15 @@ const Seats = () => {
                 <>
                   <NotAvailableImage />
                   {isConferenceInIntro ? (
-                    <span className="text app-md">{t('seatAvailableAfterIntro')}</span>
+                    <span className="text body-sm">{t('seatAvailableAfterIntro')}</span>
                   ) : (
-                    <span className="text app-md">{t('seatUnavailable')}</span>
+                    <span className="text body-sm">{t('seatUnavailable')}</span>
                   )}
                 </>
               ) : (
                 <>
                   <SeatImage />
-                  <span className="text app-md">{t('seatAvailable')}</span>
+                  <span className="text body-sm">{t('seatAvailable')}</span>
                 </>
               )}
             </Free>

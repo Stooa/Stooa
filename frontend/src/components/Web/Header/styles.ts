@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { TEXT_SM } from '@/ui/Texts';
+import { BODY_SM } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
 
 const Navigation = styled.nav`
@@ -17,7 +17,7 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: flex-end;
 
-  ${TEXT_SM}
+  ${BODY_SM}
 
   .secondary {
     display: none;

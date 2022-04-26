@@ -10,86 +10,100 @@
 import { css } from 'styled-components';
 
 import { rems } from '@/ui/helpers';
-import { FONT_BASE_SIZE } from '@/ui/settings';
+import typographyData from '@/ui/design-tokens/typography.json';
 
-const TEXT_LG = css`
-  font-size: ${rems(20)};
-  line-height: 1.4;
+const typography = typographyData.typography;
+
+const TYPOGRAPHY_SIZES = {
+  body_lg: {
+    fontSize: rems(typography.bodylg.rawFontSize),
+    lineHeight: typography.bodylg.lineHeight
+  },
+  body_md: {
+    fontSize: rems(typography.bodymd.rawFontSize),
+    lineHeight: typography.bodymd.lineHeight
+  },
+  body_sm: {
+    fontSize: rems(typography.bodysm.rawFontSize),
+    lineHeight: typography.bodysm.lineHeight
+  },
+  body_xs: {
+    fontSize: rems(typography.bodyxs.rawFontSize),
+    lineHeight: typography.bodyxs.lineHeight
+  }
+};
+
+/**
+ * font-size: 1.25rem;
+ */
+const BODY_LG = css`
+  font-size: ${TYPOGRAPHY_SIZES.body_lg.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_lg.lineHeight};
 `;
 
-const TEXT_MD = css`
-  font-size: ${rems(FONT_BASE_SIZE)};
-  line-height: 1.5;
+/**
+ * font-size: 1rem;
+ */
+const BODY_MD = css`
+  font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_md.lineHeight};
 `;
 
-const TEXT_SM = css`
-  font-size: ${rems(14)};
-  line-height: 1.4;
+/**
+ * font-size: 0.875rem;
+ * Form labels, image captions, tooltips, etc...
+ */
+const BODY_SM = css`
+  font-size: ${TYPOGRAPHY_SIZES.body_sm.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_sm.lineHeight};
 `;
 
-const TEXT_XXS = css`
-  font-size: ${rems(12)};
-  line-height: 1;
+/**
+ * font-size: 0.75rem;
+ * Form labels, image captions, tooltips, etc...
+ */
+const BODY_XS = css`
+  font-size: ${TYPOGRAPHY_SIZES.body_xs.fontSize};
+  line-height: ${TYPOGRAPHY_SIZES.body_xs.lineHeight};
 `;
 
-const APP_MD = css`
-  font-size: 14px;
-  line-height: 1.2857;
+/**
+ * font-weight: 500;
+ */
+const mediumWeight = css`
+  font-weight: 500;
 `;
 
-const APP_SM = css`
-  font-size: 12px;
-  line-height: 1.5;
+/**
+ * font-weight: 600;
+ */
+const boldWeight = css`
+  font-weight: 600;
 `;
 
 const Texts = css`
-  .text-lg {
-    ${TEXT_LG}
+  .body-lg {
+    ${BODY_LG}
   }
 
-  .text-md {
-    ${TEXT_MD}
+  .body-md {
+    ${BODY_MD}
   }
 
-  .text-sm {
-    ${TEXT_SM}
+  .body-sm {
+    ${BODY_SM}
   }
 
-  .text-xxs {
-    ${TEXT_XXS}
-  }
-
-  .app-lg {
-    font-size: 25px;
-    font-weight: 500;
-    line-height: 1.2;
-  }
-
-  .app-md {
-    ${APP_MD}
-  }
-
-  .app-sm {
-    ${APP_SM}
-  }
-
-  .app-sm-caps {
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.2727;
-    text-transform: uppercase;
+  .body-xs {
+    ${BODY_XS}
   }
 
   .bold {
-    font-weight: 600;
-  }
-  .medium {
-    font-weight: 500;
+    ${boldWeight};
   }
 
-  .bold,
   .medium {
-    letter-spacing: 0.15px;
+    ${mediumWeight};
   }
 
   .caps {
@@ -97,5 +111,5 @@ const Texts = css`
   }
 `;
 
-export { APP_SM, APP_MD, TEXT_LG, TEXT_MD, TEXT_SM, TEXT_XXS };
+export { BODY_LG, BODY_MD, BODY_SM, BODY_XS, boldWeight, mediumWeight, TYPOGRAPHY_SIZES };
 export default Texts;

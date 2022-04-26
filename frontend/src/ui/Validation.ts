@@ -11,10 +11,10 @@ import styled from 'styled-components';
 
 import { rems, space } from '@/ui/helpers';
 import { COLOR_RED_500 } from '@/ui/settings';
-import { TEXT_SM } from '@/ui/Texts';
+import { BODY_SM } from '@/ui/Texts';
 
 const ValidationError = styled.div`
-  ${TEXT_SM};
+  ${BODY_SM};
 
   color: ${COLOR_RED_500};
   font-size: ${rems(12)};

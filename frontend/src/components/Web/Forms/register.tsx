@@ -79,7 +79,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <Input label={t('password')} name="password" type="password" icon="lock" />
       </fieldset>
       <fieldset>
-        <p className="text-xxs">
+        <p className="body-xs">
           <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
         </p>
         <Input
@@ -100,7 +100,14 @@ const Form = (props: FormikProps<FormValues>) => {
           <Trans
             i18nKey="register:terms"
             components={{
-              a: <a href={privacyLink} target="_blank" rel="noreferrer noopener nofollow" />
+              a: (
+                <a
+                  className="decorated"
+                  href={privacyLink}
+                  target="_blank"
+                  rel="noreferrer noopener nofollow"
+                />
+              )
             }}
           />
         </Checkbox>
@@ -109,10 +116,10 @@ const Form = (props: FormikProps<FormValues>) => {
         <SubmitBtn text={t('register:button.register')} disabled={props.isSubmitting} />
       </fieldset>
       <fieldset className="form__footer">
-        <p className="text-sm">
+        <p className="body-sm">
           {t('register:haveAccount')}{' '}
           <RedirectLink href={ROUTE_SIGN_IN} passHref>
-            <a>{t('register:button.login')}</a>
+            <a className="decorated colored">{t('register:button.login')}</a>
           </RedirectLink>
         </p>
       </fieldset>

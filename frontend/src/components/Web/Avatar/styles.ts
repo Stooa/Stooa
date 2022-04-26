@@ -91,8 +91,17 @@ const Dropdown = styled.div`
     &:hover {
       background-color: ${COLOR_NEUTRO_400};
     }
+
     span {
       margin: 0 ${space()};
+    }
+
+    &:hover {
+      color: inherit;
+    }
+
+    &:focus {
+      color: inherit;
     }
   }
 `;

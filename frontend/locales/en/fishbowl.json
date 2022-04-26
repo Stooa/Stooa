@@ -33,8 +33,8 @@
         "12": "December"
     },
     "full": "Full",
-    "join": "Join the conversation",
-    "leave": "Leave the conversation",
+    "join": "Join",
+    "leave": "Leave",
     "unmute": "Unmute",
     "mute": "Mute",
     "sameAsSystem": "Same as system",

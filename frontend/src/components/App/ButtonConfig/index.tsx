@@ -70,7 +70,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
     <Container>
       <Button
         id="config-button"
-        className="text-sm"
+        className="body-sm"
         onClick={() => handleShowDevices()}
         active={true}
       >
@@ -92,7 +92,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                 {devices.audioInputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm device"
+                      className="body-sm device"
                       selected={audioInputDevice.deviceId === deviceId}
                       onClick={handleAudioInput}
                       value={deviceId}
@@ -114,7 +114,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                 {devices.audioOutputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm device"
+                      className="body-sm device"
                       selected={audioOutputDevice.deviceId === deviceId}
                       onClick={handleAudioOutput}
                       value={deviceId}
@@ -136,7 +136,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                 {devices.videoDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
-                      className="text-sm device"
+                      className="body-sm device"
                       selected={videoDevice.deviceId === deviceId}
                       onClick={handleVideoInput}
                       value={deviceId}

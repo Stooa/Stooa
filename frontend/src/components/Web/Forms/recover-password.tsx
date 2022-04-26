@@ -57,9 +57,9 @@ const Form = (props: FormikProps<FormValues>) => {
         <SubmitBtn text={t('recover:button')} disabled={props.isSubmitting} />
       </fieldset>
       <fieldset className="form__footer">
-        <p className="text-sm">
+        <p className="body-sm">
           <Link href={ROUTE_SIGN_IN}>
-            <a>{t('recover:back')}</a>
+            <a className="decorated colored">{t('recover:back')}</a>
           </Link>
         </p>
       </fieldset>
@@ -119,7 +119,7 @@ const RecoverPassword = () => {
   const emailError = t('validation.email');
 
   return submitted ? (
-    <Alert className="success lg">{t('recover:sent')}</Alert>
+    <Alert className="success medium">{t('recover:sent')}</Alert>
   ) : (
     <>
       {error && <FormError errors={error} />}

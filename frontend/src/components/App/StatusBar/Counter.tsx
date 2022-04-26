@@ -112,5 +112,5 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     return timeLeftText;
   };
 
-  return <div>{timeToDisplay}</div>;
+  return <div className="body-xs medium">{timeToDisplay}</div>;
 };
