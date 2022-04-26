@@ -13,12 +13,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
+
 import { useStateValue } from '@/contexts/AppContext';
+import { useStooa } from '@/contexts/StooaManager';
+
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
-
-import { ButtonAppSmall } from '@/ui/Button';
-import { useStooa } from '@/contexts/StooaManager';
+import Button from '@/components/Common/Button';
 
 interface Props {
   fid: string;
@@ -143,21 +144,21 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           />
         )}
         {running && (
-          <ButtonAppSmall className="app-sm button error" onClick={toggleFinishModal}>
+          <Button size="medium" className="button error" onClick={toggleFinishModal}>
             <span className="text">{t('endFishbowl')}</span>
-          </ButtonAppSmall>
+          </Button>
         )}
         {!running &&
           (!introduction && data.hasIntroduction ? (
-            <ButtonAppSmall className="app-sm button" onClick={toggleIntroductionModal}>
+            <Button size="medium" className="button" onClick={toggleIntroductionModal}>
               <span className="text">{t('startIntroduction')}</span>
-            </ButtonAppSmall>
+            </Button>
           ) : (
-            <ButtonAppSmall className="app-sm button" onClick={startFishbowl} disabled={loading}>
+            <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
               <span className="text">
                 {data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}
               </span>
-            </ButtonAppSmall>
+            </Button>
           ))}
       </div>
     )

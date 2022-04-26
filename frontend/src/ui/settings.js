@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import color from '@/ui/design-tokens/color.json';
+import colors from '@/ui/design-tokens/colors.json';
 
 const BREAKPOINTS = {
   desktop: 1024,
@@ -23,7 +23,8 @@ const BREAKPOINTS = {
 
 const BORDER_RADIUS = '5px';
 
-const _getDesignToken = colorName => (color.colors[colorName] ? color.colors[colorName].value : '');
+const _getDesignToken = colorName =>
+  colors.colors[colorName] ? colors.colors[colorName].hexColor : '';
 
 // Colors
 const COLOR_NEUTRO_100 = _getDesignToken('neutral100');

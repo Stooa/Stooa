@@ -49,7 +49,7 @@ const Info: React.FC<Props> = ({ data }) => {
 
   return (
     <InfoStyled ref={wrapperRef}>
-      <p className="title app-md medium">{data.name}</p>
+      <p className="title body-sm medium">{data.name}</p>
       <Icon onClick={toggleInfo} className={`${active ? 'active' : ''}`}>
         <span className="icon-wrapper">
           <Dots />
@@ -57,8 +57,8 @@ const Info: React.FC<Props> = ({ data }) => {
       </Icon>
       {active && (
         <Description>
-          <p className="app-md medium">{data.name}</p>
-          <p className="info-text app-sm">{data.description}</p>
+          <p className="body-sm medium">{data.name}</p>
+          <p className="info-text body-xs">{data.description}</p>
           <CopyUrl variant="left" data={data} />
         </Description>
       )}

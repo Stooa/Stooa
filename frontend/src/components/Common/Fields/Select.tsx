@@ -39,7 +39,7 @@ const InputField: React.FC<Input> = ({
       <label htmlFor={props.id || props.name}>{label}</label>
       <Icon variant="chevron-down" className="dropdown-icon" />
       {isInvalid && <ValidationError>{meta.error}</ValidationError>}
-      {help && <p className="help text-sm">{help}</p>}
+      {help && <p className="help body-sm">{help}</p>}
     </InputStyled>
   );
 };

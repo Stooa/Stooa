@@ -16,37 +16,47 @@ import {
   COLOR_GREEN_200,
   COLOR_GREEN_900,
   COLOR_NEUTRO_100,
-  COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_700,
   COLOR_RED_100,
   COLOR_RED_200,
-  COLOR_RED_600,
-  COLOR_YELLOW_100
+  COLOR_RED_900,
+  COLOR_YELLOW_100,
+  COLOR_YELLOW_300
 } from '@/ui/settings';
-import { TEXT_SM, TEXT_LG } from '@/ui/Texts';
+import { BODY_SM, BODY_LG } from '@/ui/Texts';
 
 const ERROR_STYLES = css`
   background: ${COLOR_RED_100};
   border: 1px solid ${COLOR_RED_200};
-  color: ${COLOR_RED_600};
+  color: ${COLOR_RED_900};
+
+  svg > path {
+    fill: ${COLOR_RED_900};
+  }
 `;
 
 const HIGHLIGHT_STYLES = css`
-  background: ${COLOR_NEUTRO_300};
+  background: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_400};
+  color: ${COLOR_NEUTRO_700};
 `;
 
 const WARNING_STYLES = css`
   background: ${COLOR_YELLOW_100};
-  border: 1px solid ${COLOR_NEUTRO_500};
+  border: 1px solid ${COLOR_YELLOW_300};
+  color: ${COLOR_NEUTRO_700};
 `;
 
 const SUCCESS_STYLES = css`
   background: ${COLOR_GREEN_100};
   border: 1px solid ${COLOR_GREEN_200};
   color: ${COLOR_GREEN_900};
+
+  svg > path {
+    fill: ${COLOR_GREEN_900};
+  }
 `;
 
 const INFO_STYLES = css`
@@ -56,7 +66,7 @@ const INFO_STYLES = css`
 `;
 
 const Alert = styled.div<{ block?: boolean }>`
-  ${TEXT_SM}
+  ${BODY_SM}
 
   align-items: center;
   border-radius: ${BORDER_RADIUS};
@@ -66,12 +76,8 @@ const Alert = styled.div<{ block?: boolean }>`
   margin: ${space()};
   max-width: 80vw;
   overflow-x: auto;
-  padding: ${space()} ${space(2)};
+  padding: ${space(1.125)} ${space(1.5)} ${space(0.875)};
   text-align: center;
-
-  span {
-    margin-top: 4px;
-  }
 
   &.info {
     ${INFO_STYLES}
@@ -94,7 +100,7 @@ const Alert = styled.div<{ block?: boolean }>`
   }
 
   &.lg {
-    ${TEXT_LG}
+    ${BODY_LG}
 
     padding: ${space(2)} ${space(4)};
   }

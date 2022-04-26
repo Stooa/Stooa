@@ -29,7 +29,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
   return (
-    <li className={`participant app-md`} data-id={id} title={name}>
+    <li className={`participant body-sm`} data-id={id} title={name}>
       <div className="info">
         {speaker && (
           <>

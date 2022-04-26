@@ -32,12 +32,12 @@ const Checkbox: React.FC<Props> = ({ label, children, ...props }) => {
       {label && !children && (
         <label
           htmlFor={props.id || props.name}
-          className="text-sm"
+          className="body-sm"
           dangerouslySetInnerHTML={{ __html: label }}
         />
       )}
       {children && !label && (
-        <label htmlFor={props.id || props.name} className="text-sm">
+        <label htmlFor={props.id || props.name} className="body-sm">
           {children}
         </label>
       )}

@@ -71,7 +71,11 @@ const columns = (number: number, spaces = 1, direction = 'default') => `
     `
   }
 `;
-
+/**
+ * Convert px to Rems
+ * @param {number} px
+ * @returns rems
+ */
 const rems = (n: number | string) =>
   typeof n === 'string' ? `${parseInt(n, 10) / FONT_BASE_SIZE}rem` : `${n / FONT_BASE_SIZE}rem`;
 

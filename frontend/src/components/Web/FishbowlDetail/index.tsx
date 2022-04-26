@@ -47,7 +47,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
         <dd>{data.durationFormatted}</dd>
       </dl>
       {!fishbowlReady && (
-        <TimeLeft className="warning text-md prewrap" block>
+        <TimeLeft className="warning body-md prewrap" block>
           <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
         </TimeLeft>
       )}
