@@ -55,9 +55,11 @@ class FishbowlDoctrineSubscriberTest extends TestCase
 
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
-        $this->assertNotNull($fishbowl->getFinishDateTime());
+        $finishDateTime = $fishbowl->getFinishDateTime();
 
-        $this->assertSame($fishbowl->getFinishDateTime()->getTimestamp(), $currentTime->add(new \DateInterval('PT1H'))->getTimestamp());
+        $this->assertNotNull($finishDateTime);
+
+        $this->assertSame($finishDateTime->getTimestamp(), $currentTime->add(new \DateInterval('PT1H'))->getTimestamp());
     }
 
     /** @test */
@@ -78,8 +80,11 @@ class FishbowlDoctrineSubscriberTest extends TestCase
 
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
-        $this->assertNotNull($fishbowl->getFinishDateTime());
-        $this->assertSame($fishbowl->getFinishDateTime()->getTimestamp(), $currentTime->add(new \DateInterval('PT1H'))->getTimestamp());
+        $finishDateTime = $fishbowl->getFinishDateTime();
+
+        $this->assertNotNull($finishDateTime);
+
+        $this->assertSame($finishDateTime->getTimestamp(), $currentTime->add(new \DateInterval('PT1H'))->getTimestamp());
     }
 
     /** @test */
