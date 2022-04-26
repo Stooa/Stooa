@@ -40,7 +40,7 @@ class FishbowlDoctrineSubscriberTest extends TestCase
     public function itCalculatesFinishDateTimeWhenPersisting(): void
     {
         $currentTime = new \DateTime();
-        
+
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => $currentTime,
             'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
