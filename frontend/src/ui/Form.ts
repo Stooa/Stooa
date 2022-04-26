@@ -62,7 +62,7 @@ const FormikForm = styled(Form)`
 
         &.success-message-bottom {
           ${media.min('tablet')`
-            bottom: -2.85ch;
+            bottom: -3.5ch;
           `}
           bottom: 3.25rem;
         }
@@ -323,8 +323,8 @@ const CheckboxStyled = styled.div`
 
 const FormError = styled(Alert)`
   flex-direction: column;
-  margin-bottom: ${space(-2)};
-  margin-top: ${space(2)};
+  margin-top: ${space(-2)};
+  margin-bottom: ${space(2)};
 `;
 
 const TextDivider = styled.div`

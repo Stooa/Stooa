@@ -79,10 +79,6 @@ const Alert = styled.div<{ block?: boolean }>`
   padding: ${space(1.125)} ${space(1.5)} ${space(0.875)};
   text-align: center;
 
-  span {
-    margin-top: 4px;
-  }
-
   &.info {
     ${INFO_STYLES}
   }

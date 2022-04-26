@@ -257,7 +257,7 @@ const FishbowlList = () => {
                       exit="exit"
                       animate="visible"
                     >
-                      <h2>
+                      <h2 className="body-lg medium">
                         <Trans i18nKey="fishbowl-list:fishbowlStarted" components={{ i: <i /> }} />
                       </h2>
                       <p>
@@ -291,7 +291,7 @@ const FishbowlList = () => {
               </AnimatePresence>
               {!selectedFishbowl && (
                 <DetailPlaceholder data-testid="selected-placeholder" className="not-selected">
-                  <h2>
+                  <h2 className="body-lg medium">
                     <Trans
                       i18nKey="fishbowl-list:noSelectedFishbowlTitle"
                       components={{ i: <i /> }}
