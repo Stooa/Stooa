@@ -131,8 +131,13 @@ const Description = styled.div<{ center?: boolean }>`
 
   ${media.min('tablet')`
   margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
-    max-width: ${rems(700)};
+  max-width: ${rems(700)};
+  text-align:'left';
+
+  ${media.min('tablet')`
     text-align: ${({ center }) => (center ? 'center' : 'left')};
+    margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
+  `}
   `}
 
   p + p {
@@ -255,7 +260,9 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
   }
 
   .title-lg.definition {
-    text-align: center;
+    ${media.min('tablet')`
+      text-align: center;
+    `}
   }
 
   ${media.min('tablet')`

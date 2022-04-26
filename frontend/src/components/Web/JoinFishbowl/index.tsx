@@ -67,7 +67,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
         {isAuthenticated && fishbowlReady && (
           <div className="join-buttons">
             <RedirectLink href={fbRoute} locale={data.locale} passHref>
-              <Button variant="primary" as="a">
+              <Button size="large" variant="primary" as="a">
                 {t('joinFishbowl')}
               </Button>
             </RedirectLink>
@@ -76,7 +76,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
         {!isAuthenticated && fishbowlReady && (
           <>
             <div className="join-buttons">
-              <Button variant="primary" onClick={joinAsGuest}>
+              <Button size="large" variant="primary" onClick={joinAsGuest}>
                 {t('joinGuest')}
               </Button>
               <RedirectLink
@@ -84,7 +84,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
                 locale={data.locale}
                 passHref
               >
-                <Button variant="secondary" as="a">
+                <Button size="large" variant="secondary" as="a">
                   {t('joinMember')}
                 </Button>
               </RedirectLink>

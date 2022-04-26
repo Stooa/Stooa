@@ -35,7 +35,7 @@ interface Props {
 
 const FormikForm = styled(Form)`
   position: relative;
-  margin-top: ${space(4)};
+  /* margin-top: ${space(4)}; */
   max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
@@ -92,10 +92,6 @@ const FormikForm = styled(Form)`
   .form__footer {
     margin-top: ${space(3.5)};
     text-align: center;
-
-    a {
-      color: ${COLOR_PURPLE_500};
-    }
   }
 
   a {

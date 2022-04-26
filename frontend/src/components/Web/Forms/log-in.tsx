@@ -48,7 +48,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <Input label={t('email')} name="email" type="email" icon="mail" />
         <Input label={t('password')} name="password" type="password" icon="lock" />
         <Link passHref href={ROUTE_RECOVER_PASSWORD}>
-          <a className="body-sm">{t('login:forgotPassword')}</a>
+          <a className="decorated">{t('login:forgotPassword')}</a>
         </Link>
       </fieldset>
       <fieldset>
@@ -58,7 +58,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <p className="body-sm">
           {t('login:noAccount')}{' '}
           <RedirectLink href={ROUTE_REGISTER} passHref>
-            <a>{t('login:createAccount')}</a>
+            <a className="decorated colored">{t('login:createAccount')}</a>
           </RedirectLink>
         </p>
       </fieldset>

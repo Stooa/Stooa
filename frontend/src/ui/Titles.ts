@@ -9,7 +9,7 @@
 
 import { css } from 'styled-components';
 
-import { media, rems } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 import typographyData from '@/ui/design-tokens/typography.json';
 
 const typography = typographyData.typography;
@@ -69,6 +69,7 @@ const Titles = css`
 
   .title-md {
     ${TITLE_MD}
+    margin-bottom: ${space(2)};
   }
 
   .title-sm {

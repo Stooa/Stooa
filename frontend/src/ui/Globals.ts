@@ -21,6 +21,9 @@ import {
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800,
+  COLOR_PURPLE_400,
+  COLOR_PURPLE_500,
+  COLOR_PURPLE_600,
   COLOR_RED_100,
   COLOR_RED_600,
   COLOR_YELLOW_100,
@@ -35,6 +38,18 @@ const StyledLinkCss = css`
   font-size: var(--fontSize);
   line-height: var(--lineHeight);
   cursor: pointer;
+
+  &.colored {
+    color: ${COLOR_PURPLE_500};
+
+    &:hover {
+      color: ${COLOR_PURPLE_400};
+    }
+
+    &:focus {
+      color: ${COLOR_PURPLE_600};
+    }
+  }
 
   &:hover {
     color: ${COLOR_NEUTRO_600};
