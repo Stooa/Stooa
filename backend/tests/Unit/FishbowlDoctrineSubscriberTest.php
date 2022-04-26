@@ -16,9 +16,9 @@ namespace App\Tests\Unit;
 use App\Entity\Fishbowl;
 use App\EventSubscriber\FishbowlDoctrineSubscriber;
 use App\Factory\FishbowlFactory;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Test\Factories;
@@ -39,12 +39,14 @@ class FishbowlDoctrineSubscriberTest extends TestCase
     /** @test */
     public function itCalculatesFinishDateTimeWhenPersisting(): void
     {
+        $currentTime = new \DateTime();
+        
         $fishbowl = FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
+            'startDateTime' => $currentTime,
             'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
         ])->object();
 
-        $objectManager = $this->createStub(ObjectManager::class);
+        $objectManager = $this->createStub(EntityManagerInterface::class);
         $eventArgs = new LifecycleEventArgs($fishbowl, $objectManager);
 
         $this->subscriber->prePersist($eventArgs);
@@ -54,17 +56,20 @@ class FishbowlDoctrineSubscriberTest extends TestCase
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
         $this->assertNotNull($fishbowl->getFinishDateTime());
+
+        $this->assertEquals($fishbowl->getFinishDateTime()->getTimestamp(), $currentTime->add(new \DateInterval('PT1H'))->getTimestamp());
     }
 
     /** @test */
     public function itCalculatesFinishDateTimeWhenUpdating(): void
     {
+        $currentTime = new \DateTime();
         $fishbowl = FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
+            'startDateTime' => $currentTime,
             'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
         ])->object();
 
-        $objectManager = $this->createStub(ObjectManager::class);
+        $objectManager = $this->createStub(EntityManagerInterface::class);
         $eventArgs = new LifecycleEventArgs($fishbowl, $objectManager);
 
         $this->subscriber->preUpdate($eventArgs);
@@ -74,6 +79,7 @@ class FishbowlDoctrineSubscriberTest extends TestCase
         Assert::isInstanceOf($fishbowl, Fishbowl::class);
 
         $this->assertNotNull($fishbowl->getFinishDateTime());
+        $this->assertEquals($fishbowl->getFinishDateTime()->getTimestamp(), $currentTime->add(new \DateInterval('PT1H'))->getTimestamp());
     }
 
     /** @test */

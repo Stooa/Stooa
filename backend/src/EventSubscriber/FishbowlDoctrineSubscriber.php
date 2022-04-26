@@ -15,8 +15,8 @@ namespace App\EventSubscriber;
 
 use App\Entity\Fishbowl;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class FishbowlDoctrineSubscriber implements EventSubscriberInterface
 {
