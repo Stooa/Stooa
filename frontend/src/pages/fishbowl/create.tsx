@@ -33,7 +33,7 @@ const Create = () => {
 
   return (
     <Layout title={t('title')}>
-      <h1 className="title-md">{t('title')}</h1>
+      <h1 className="title-md form-title">{t('title')}</h1>
       <FishbowlForm />
     </Layout>
   );

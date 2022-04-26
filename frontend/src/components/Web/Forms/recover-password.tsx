@@ -119,7 +119,7 @@ const RecoverPassword = () => {
   const emailError = t('validation.email');
 
   return submitted ? (
-    <Alert className="success lg">{t('recover:sent')}</Alert>
+    <Alert className="success medium">{t('recover:sent')}</Alert>
   ) : (
     <>
       {error && <FormError errors={error} />}
