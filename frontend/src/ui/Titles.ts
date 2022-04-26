@@ -69,7 +69,11 @@ const Titles = css`
 
   .title-md {
     ${TITLE_MD}
-    margin-bottom: ${space(2)};
+    margin-bottom: ${space(3)};
+
+    & + p {
+      margin-bottom: ${space(1)};
+    }
   }
 
   .title-sm {

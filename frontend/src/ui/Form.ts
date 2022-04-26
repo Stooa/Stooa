@@ -35,7 +35,6 @@ interface Props {
 
 const FormikForm = styled(Form)`
   position: relative;
-  /* margin-top: ${space(4)}; */
   max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
@@ -91,10 +90,6 @@ const FormikForm = styled(Form)`
   .form__footer {
     margin-top: ${space(3.5)};
     text-align: center;
-  }
-
-  a {
-    /* text-decoration: underline; */
   }
 
   ${media.min('tablet')`
@@ -439,11 +434,6 @@ const StyledIntroductionTooltip = styled.div`
   left: 50%;
   transform: translateX(-50%);
   bottom: 150px;
-
-  /* ${media.min('tablet')`
-    bottom: 150%;
-    width: 60ch;
-  `} */
 
   &:after {
     ${media.min('tablet')`
