@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52d05279f3ac8c712bcb06327e87db72",
+    "content-hash": "3901145eb73160e8e0d07cbe83ecc92d",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10098,16 +10098,16 @@
         },
         {
             "name": "symfonycasts/reset-password-bundle",
-            "version": "v1.11.0",
+            "version": "v1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/reset-password-bundle.git",
-                "reference": "09fcd0d893bbd58d4477787c6cb5a4ffc4fc9455"
+                "reference": "6e926da7fb2031ef38a385a994ea3a52b436dc8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/09fcd0d893bbd58d4477787c6cb5a4ffc4fc9455",
-                "reference": "09fcd0d893bbd58d4477787c6cb5a4ffc4fc9455",
+                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/6e926da7fb2031ef38a385a994ea3a52b436dc8c",
+                "reference": "6e926da7fb2031ef38a385a994ea3a52b436dc8c",
                 "shasum": ""
             },
             "require": {
@@ -10142,9 +10142,9 @@
             "description": "Symfony bundle that adds password reset functionality.",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/reset-password-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.11.0"
+                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.13.0"
             },
-            "time": "2021-11-30T17:32:21+00:00"
+            "time": "2022-02-23T14:48:27+00:00"
         },
         {
             "name": "twig/string-extra",
