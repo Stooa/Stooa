@@ -20,11 +20,16 @@ const JoinFishbowlStyled = styled.div`
     }
 
     ${media.min('tablet')`
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    * + * {
+      margin-left: ${space(2)};
+    }
     `}
+
+    flex-direction: column;
   }
 `;
 

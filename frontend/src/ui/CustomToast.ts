@@ -17,10 +17,10 @@ import {
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800
 } from '@/ui/settings';
-import { TEXT_SM } from '@/ui/Texts';
+import { BODY_SM } from '@/ui/Texts';
 
 const CustomToast = styled.div`
-  ${TEXT_SM}
+  ${BODY_SM}
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

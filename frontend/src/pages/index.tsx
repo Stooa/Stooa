@@ -10,7 +10,6 @@
 import { GetStaticProps } from 'next';
 import { useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
@@ -24,7 +23,6 @@ import { Lottie } from '@/types/animations';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import { Billboard, Content, Description, Row, Sections, Wrapper } from '@/ui/pages';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import WaveMobile from '@/ui/svg/wave-mobile.svg';
 import WaveDesktop from '@/ui/svg/wave-desktop.svg';
 import BillboardDeskAnimPath from '@/ui/animations/home/billboard-desktop.json';
@@ -32,7 +30,8 @@ import BillboardMobAnimPath from '@/ui/animations/home/billboard-mobile.json';
 import MorphBillAnimPath from '@/ui/animations/home/billboard-morph.json';
 import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
-import { ButtonStyledLink } from '@/ui/Button';
+import Button from '@/components/Common/Button';
+import RedirectLink from '@/components/Web/RedirectLink';
 
 const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
   loading: () => <div />
@@ -124,15 +123,17 @@ const Home = () => {
     <Layout title={t('title')}>
       <Billboard className="billboard-animate">
         <div id="animated-billboard-morph"></div>
-        <h1 data-testid="landing-title" className="title-xl animate-item">
+        <h1 data-testid="landing-title" className="title-display animate-item">
           {t('title')}
         </h1>
-        <Description className="text-lg animate-item" center>
+        <Description className="body-lg animate-item" center>
           {t('description')}
         </Description>
         <div className="cta-wrapper">
-          <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <ButtonStyledLink
+          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+            <Button
+              size="large"
+              as="a"
               className="animate-item cta-create-fishbowl"
               onClick={() => {
                 pushEventDataLayer({
@@ -143,12 +144,14 @@ const Home = () => {
               }}
             >
               <span>{t('hostFishbowlNow')}</span>
-              <ArrowRight />
-            </ButtonStyledLink>
-          </Link>
-          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-            <ButtonStyledLink
-              className="animate-item cta-create-fishbowl secondary"
+            </Button>
+          </RedirectLink>
+          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+            <Button
+              size="large"
+              as="a"
+              variant="secondary"
+              className="animate-item cta-create-fishbowl "
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Schedule Fishbowl',
@@ -158,9 +161,8 @@ const Home = () => {
               }}
             >
               <span>{t('scheduleFishbowl')}</span>
-              <ArrowRight />
-            </ButtonStyledLink>
-          </Link>
+            </Button>
+          </RedirectLink>
         </div>
         <div className="ph-badge animate-item">
           <a
@@ -187,7 +189,7 @@ const Home = () => {
         </div>
         <Row dark className="animate">
           <h2 className="title-lg animate-item definition">{t('definition.title')}</h2>
-          <Description center className="animate-item text-lg">
+          <Description center className="animate-item body-lg">
             <Trans
               i18nKey="home:definition.description"
               components={{ strong: <strong />, p: <p /> }}

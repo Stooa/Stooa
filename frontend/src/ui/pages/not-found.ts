@@ -16,7 +16,7 @@ const NotFoundStyled = styled.div`
     margin-bottom: ${space(4)};
   }
   .title-md,
-  .text-lg {
+  .body-lg {
     margin-bottom: ${space()};
   }
 

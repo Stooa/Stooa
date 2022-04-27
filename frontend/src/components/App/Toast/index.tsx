@@ -26,7 +26,7 @@ const Toast: React.FC<Props> = ({ message, onDismiss }) => {
 
   return (
     <Container show={show}>
-      <span className="app-md">{message}</span>
+      <span className="body-sm">{message}</span>
       <Cross onClick={onDismiss}>
         <CrossIcon />
       </Cross>

@@ -10,9 +10,9 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ButtonLink } from '@/ui/Button';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
+import Button from '@/components/Common/Button';
 
 interface Props {
   toggleModal: () => void;
@@ -28,9 +28,9 @@ const Nickname: React.FC<Props> = ({ toggleModal }) => {
           <Cross />
         </button>
         <h2 className="title-md">{t('fishbowl:prejoin.title')}</h2>
-        <ButtonLink className="text-sm" onClick={toggleModal}>
+        <Button variant="text" onClick={toggleModal}>
           {t('cancel')}
-        </ButtonLink>
+        </Button>
       </div>
     </Modal>
   );
