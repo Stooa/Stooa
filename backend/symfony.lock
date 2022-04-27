@@ -5,9 +5,6 @@
     "amphp/byte-stream": {
         "version": "v1.7.3"
     },
-    "api-platform/api-pack": {
-        "version": "v1.2.2"
-    },
     "api-platform/core": {
         "version": "2.5",
         "recipe": {
@@ -33,6 +30,12 @@
     },
     "brick/math": {
         "version": "0.9.1"
+    },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
+    },
+    "composer/pcre": {
+        "version": "1.0.1"
     },
     "composer/semver": {
         "version": "1.5.1"
@@ -149,6 +152,9 @@
     "ergebnis/json-printer": {
         "version": "3.1.0"
     },
+    "ergebnis/json-schema-validator": {
+        "version": "2.0.0"
+    },
     "fakerphp/faker": {
         "version": "v1.16.0"
     },
@@ -254,9 +260,6 @@
     "nikic/php-parser": {
         "version": "v4.6.0"
     },
-    "ocramius/package-versions": {
-        "version": "1.10.0"
-    },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
     },
@@ -314,9 +317,6 @@
     "phpunit/php-timer": {
         "version": "5.0.1"
     },
-    "phpunit/php-token-stream": {
-        "version": "4.0.3"
-    },
     "phpunit/phpunit": {
         "version": "4.7",
         "recipe": {
@@ -341,6 +341,9 @@
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/event-dispatcher": {
         "version": "1.0.0"
     },
     "psr/link": {
@@ -447,9 +450,6 @@
     "sonata-project/doctrine-orm-admin-bundle": {
         "version": "3.21.0"
     },
-    "sonata-project/easy-extends-bundle": {
-        "version": "2.5.0"
-    },
     "sonata-project/exporter": {
         "version": "2.3.0"
     },
@@ -524,9 +524,6 @@
         "files": [
             "config/packages/dev/debug.yaml"
         ]
-    },
-    "symfony/debug-pack": {
-        "version": "v1.0.8"
     },
     "symfony/dependency-injection": {
         "version": "v5.1.2"
@@ -705,9 +702,6 @@
     },
     "symfony/process": {
         "version": "v5.1.2"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.4"
     },
     "symfony/property-access": {
         "version": "v5.1.2"
