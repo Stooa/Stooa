@@ -11,12 +11,10 @@
     "joinMemberNote": "* Permite contactar con el resto de asistentes",
     "copySuccess": "¡Enlace copiado!",
     "detail": {
-        "title": "Título",
-        "duration": "Duración",
-        "description": "Descripción",
-        "startDate": "Fecha de inicio",
-        "startTime": "Hora de inicio",
-        "language": "Idioma"
+        "shareTitle": "¿Ahora qué? <br/>¡Comparte el <i>fishbowl</i> con tus amigos!",
+        "shareSubtitle": "¡Deja que la conversación fluya! Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.",
+        "shareInSocials": "O comparte en:",
+        "fishbowlCreatedSuccessfully": "¡<i>Fishbowl</i> creado con éxito!"
     },
     "months": {
         "01": "Enero",

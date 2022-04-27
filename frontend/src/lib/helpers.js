@@ -71,6 +71,18 @@ const formatDateTime = date => {
   };
 };
 
+/**
+ * Return list of months
+ * 🌍 localeName   : name of local, f.e. es-ES, default en-US
+ *  ✅ monthFormat : short, numeric, long (Default)
+ */
+ function getMonthsForLocale(localeName = 'en-US', monthFormat = 'long') {
+  const format = new Intl
+     .DateTimeFormat(localeName, {month: monthFormat}).format;
+  return [...Array(12).keys()]
+    .map((m) => format(new Date(Date.UTC(2022, m))));
+}
+
 const dateDifferenceFromNow = date => {
   const d = new Date(date);
   const now = new Date();
@@ -124,6 +136,7 @@ export {
   isTimeUp,
   parseDevices,
   removeItem,
+  getMonthsForLocale,
   nearestQuarterHour,
   getTimePlusOneMinute,
   getIsoDateTimeWithActualTimeZone,

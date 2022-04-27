@@ -11,12 +11,10 @@
     "joinMemberNote": "* Allows you to contact the rest of the attendees",
     "copySuccess": "Link copied to clipboard!",
     "detail": {
-        "title": "Title",
-        "duration": "Duration",
-        "description": "Description",
-        "language": "Language",
-        "startDate": "Start date",
-        "startTime": "Start time"
+        "shareTitle": "Now what? <br/>Share the fishbowl!",
+        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the session.",
+        "shareInSocials": "Or share in:",
+        "fishbowlCreatedSuccessfully": "Fishbowl created successfully!"
     },
     "months": {
         "01": "January",

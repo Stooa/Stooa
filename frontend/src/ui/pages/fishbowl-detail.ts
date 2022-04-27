@@ -15,12 +15,9 @@ import { space, rems } from '@/ui/helpers';
 
 const Container = styled.div<{ centered?: boolean }>`
   margin: ${space(4)} 0 ${space(2)};
-  max-width: ${rems(BREAKPOINTS.reader)};
   text-align: ${({ centered }) => (centered ? 'center' : 'left')};
-
-  dl {
-    margin: 0 0 ${space(8)};
-  }
+  max-width: ${BREAKPOINTS.desktop}px;
+  width: 100%;
 `;
 
 const Description = styled.p`
