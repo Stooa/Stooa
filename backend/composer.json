@@ -44,7 +44,7 @@
         "symfony/validator": "4.4.40",
         "symfony/workflow": "5.4.3",
         "symfony/yaml": "5.3.14",
-        "symfonycasts/reset-password-bundle": "1.11.0",
+        "symfonycasts/reset-password-bundle": "1.13.0",
         "twig/twig": "3.3.10",
         "webmozart/assert": "1.10.0",
         "webonyx/graphql-php": "14.11.6"
