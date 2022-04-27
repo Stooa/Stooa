@@ -19,6 +19,7 @@ import {
   COLOR_GREEN_600,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
+  COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
@@ -26,7 +27,7 @@ import {
   COLOR_RED_500,
   FONT_BASE_SIZE
 } from '@/ui/settings';
-import { TEXT_SM, TEXT_XXS } from '@/ui/Texts';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
 interface Props {
   $isFull?: boolean;
@@ -34,7 +35,6 @@ interface Props {
 
 const FormikForm = styled(Form)`
   position: relative;
-  margin-top: ${space(4)};
   max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
@@ -51,7 +51,6 @@ const FormikForm = styled(Form)`
     }
 
     &:last-child {
-      padding-bottom: ${space(2)};
       margin-bottom: 0;
 
       span {
@@ -62,11 +61,10 @@ const FormikForm = styled(Form)`
         margin: 0;
 
         &.success-message-bottom {
-          bottom: -1.5ch;
-        }
-
-        &.success-message-top {
-          top: -3.2ch;
+          ${media.min('tablet')`
+            bottom: -3.5ch;
+          `}
+          bottom: 3.25rem;
         }
       }
     }
@@ -92,14 +90,6 @@ const FormikForm = styled(Form)`
   .form__footer {
     margin-top: ${space(3.5)};
     text-align: center;
-
-    a {
-      color: ${COLOR_PURPLE_500};
-    }
-  }
-
-  a {
-    text-decoration: underline;
   }
 
   ${media.min('tablet')`
@@ -130,7 +120,7 @@ const InputStyled = styled.div`
 
   svg {
     pointer-events: none;
-    color: ${COLOR_NEUTRO_600};
+    color: ${COLOR_NEUTRO_700};
   }
 
   .dropdown-icon {
@@ -196,14 +186,14 @@ const InputStyled = styled.div`
   textarea,
   select {
     background-color: ${COLOR_NEUTRO_300};
-    border: 1px solid ${COLOR_NEUTRO_500};
+    border: 1px solid ${COLOR_NEUTRO_400};
     color: ${COLOR_NEUTRO_700};
     border-radius: ${BORDER_RADIUS};
     padding: ${space(2.75)} ${space(6)} ${space(0.4)} ${space(2)};
     width: 100%;
 
     ${media.min('tablet')`
-      ${TEXT_SM}
+      ${BODY_SM}
     `}
 
     &:focus {
@@ -240,7 +230,7 @@ const InputStyled = styled.div`
   }
 
   input::placeholder {
-    color: ${COLOR_NEUTRO_700};
+    color: ${COLOR_NEUTRO_600};
   }
 
   input:focus,
@@ -251,7 +241,7 @@ const InputStyled = styled.div`
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
-      ${TEXT_XXS};
+      ${BODY_XS};
     }
   }
 
@@ -260,7 +250,7 @@ const InputStyled = styled.div`
     color: ${COLOR_NEUTRO_700};
     top: ${space(1.3)};
 
-    ${TEXT_XXS};
+    ${BODY_XS};
   }
 
   .help {
@@ -287,6 +277,11 @@ const CheckboxStyled = styled.div`
     opacity: 0;
     position: absolute;
     width: auto;
+
+    &:focus-visible + label::before {
+      outline: ${COLOR_NEUTRO_700} solid 1px;
+      outline-offset: -1px;
+    }
 
     & + label {
       cursor: pointer;
@@ -328,8 +323,8 @@ const CheckboxStyled = styled.div`
 
 const FormError = styled(Alert)`
   flex-direction: column;
-  margin-bottom: ${space(-2)};
-  margin-top: ${space(2)};
+  margin-top: ${space(-2)};
+  margin-bottom: ${space(2)};
 `;
 
 const TextDivider = styled.div`
@@ -439,11 +434,6 @@ const StyledIntroductionTooltip = styled.div`
   left: 50%;
   transform: translateX(-50%);
   bottom: 150px;
-
-  /* ${media.min('tablet')`
-    bottom: 150%;
-    width: 60ch;
-  `} */
 
   &:after {
     ${media.min('tablet')`

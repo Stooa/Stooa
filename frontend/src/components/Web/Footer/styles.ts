@@ -16,6 +16,7 @@ const Container = styled.footer`
   background-color: ${COLOR_NEUTRO_400};
   color: ${COLOR_NEUTRO_700};
   line-height: 1.2;
+  min-height: ${space(37.5)};
   padding: ${space(5)} ${space(3)};
 
   ${media.min('tablet')`

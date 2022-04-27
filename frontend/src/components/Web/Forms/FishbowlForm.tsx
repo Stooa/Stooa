@@ -197,7 +197,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.introductionTooltip"
-              components={{ strong: <strong /> }}
+              components={{ span: <span className="medium" /> }}
             />
           }
           label={t('fishbowl.introductionLabel')}
@@ -205,7 +205,6 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         />
       </fieldset>
       <fieldset>
-        {success && <span className="success-message-top">{t('validation.successMessage')}</span>}
         {success && (
           <span className="success-message-bottom">{t('validation.successMessage')}</span>
         )}

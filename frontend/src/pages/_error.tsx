@@ -33,7 +33,7 @@ const ErrorPage = ({ statusCode }: Props) => {
         <Trans
           i18nKey="_error:description"
           components={{
-            a: <a href={`mailto:${CONTACT_EMAIL}`} />
+            a: <a className="decorated colored" href={`mailto:${CONTACT_EMAIL}`} />
           }}
         />
       </p>

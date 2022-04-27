@@ -8,6 +8,12 @@
 # BASE
 FROM node:17.4 as base
 
+ARG UID=1000
+ARG GID=1000
+
+RUN usermod -u $UID node
+RUN groupmod -g $GID node
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     git \
@@ -16,8 +22,8 @@ RUN apt-get update \
 
 WORKDIR /usr/app
 
-COPY package.json /usr/app/package.json
-COPY package-lock.json /usr/app/package-lock.json
+COPY --chown=$UID:$GID package.json /usr/app/package.json
+COPY --chown=$UID:$GID package-lock.json /usr/app/package-lock.json
 
 RUN npm clean-install
 
@@ -27,7 +33,7 @@ FROM base as next
 
 RUN npm install --global pm2
 
-COPY . /usr/app
+COPY --chown=$UID:$GID . /usr/app
 
 CMD ["pm2-runtime", "npm", "--", "run", "build-start"]
 
@@ -40,5 +46,11 @@ CMD ["npm", "run", "dev"]
 
 # NGINX
 FROM nginx:1.21 as nginx
+
+ARG UID=1000
+ARG GID=1000
+
+RUN usermod -u $UID nginx
+RUN groupmod -g $GID nginx
 
 COPY .docker/nginx-prod/default.conf.template /etc/nginx/templates/default.conf.template

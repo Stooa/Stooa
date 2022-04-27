@@ -19,8 +19,8 @@ import {
   COLOR_YELLOW_500,
   COLOR_NEUTRO_300
 } from '@/ui/settings';
-import { APP_SM } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
+import { BODY_XS } from '@/ui/Texts';
 
 const SeatsStyled = styled.div`
   display: flex;
@@ -154,12 +154,12 @@ const Seat = styled.div`
     padding: ${space()};
     position: absolute;
     z-index: 7;
-    ${APP_SM};
+    ${BODY_XS};
   }
 
   .icon-medium {
-    /* background: ${COLOR_RED_100};
-    border-radius: 50%; */
+    background: ${COLOR_RED_100};
+    border-radius: 50%;
     bottom: ${space(0.75)};
     display: none;
     height: ${space(2.5)};

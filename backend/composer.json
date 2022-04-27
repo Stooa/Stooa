@@ -50,7 +50,7 @@
         "webonyx/graphql-php": "14.11.6"
     },
     "require-dev": {
-        "doctrine/data-fixtures": "1.5.2",
+        "doctrine/data-fixtures": "1.5.3",
         "doctrine/doctrine-fixtures-bundle": "3.4.1",
         "ergebnis/composer-normalize": "2.25.2",
         "friendsofphp/php-cs-fixer": "3.2.1",

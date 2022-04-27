@@ -10,7 +10,7 @@
 import styled from 'styled-components';
 
 import { COLOR_NEUTRO_900, COLOR_NEUTRO_100 } from '@/ui/settings';
-import { TEXT_SM } from '@/ui/Texts';
+import { BODY_SM } from '@/ui/Texts';
 import { space } from '@/ui/helpers';
 
 const Title = styled.div`
@@ -29,7 +29,7 @@ const List = styled.ol`
     position: relative;
 
     &::before {
-      ${TEXT_SM};
+      ${BODY_SM};
 
       align-items: center;
       background: ${COLOR_NEUTRO_900};

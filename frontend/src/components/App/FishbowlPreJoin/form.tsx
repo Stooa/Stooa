@@ -19,7 +19,7 @@ import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
 import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
-import Button from '@/ui/Button';
+import Button from '@/components/Common/Button';
 
 interface FormValues {
   name: string;
@@ -47,7 +47,7 @@ const Form = (props: FormikProps<FormValues>) => {
     <FormikForm className="prejoin">
       <fieldset className="submit-wrapper">
         <Input label={t('name')} name="name" type="text" />
-        <Button type="submit" disabled={props.isSubmitting}>
+        <Button size="large" type="submit" disabled={props.isSubmitting}>
           {t('button.enterFishbowl')}
         </Button>
       </fieldset>
