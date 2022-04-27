@@ -32,7 +32,7 @@ interface Props extends React.ComponentProps<'button'> {
  * @returns
  */
 const Button: React.FC<Props> = React.forwardRef(
-  ({ variant = 'primary', size = 'medium', children, as = 'button', full, ref, ...props }) => {
+  ({ variant = 'primary', size = 'medium', children, as = 'button', full, ...props }, ref) => {
     const styles = SIZES[size];
 
     let Component;
