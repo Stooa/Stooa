@@ -29,7 +29,6 @@ interface Props {
 }
 
 const FishbowlDetail: React.FC<Props> = ({ data }) => {
-  const { t } = useTranslation('fishbowl');
   const { width } = useWindowSize();
 
   const isLargerThanTablet = width > BREAKPOINTS.tablet;
