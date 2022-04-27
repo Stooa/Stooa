@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import Button from '@/ui/Button';
+import Button from '@/components/Common/Button';
 
 const SubmitBtn = ({ text, disabled, ...props }) => {
   return (
-    <Button type="submit" full {...props} disabled={disabled}>
+    <Button size="large" type="submit" full {...props} disabled={disabled}>
       {text}
     </Button>
   );

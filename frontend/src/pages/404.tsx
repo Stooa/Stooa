@@ -7,13 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_HOME } from '@/app.config';
 import Layout from '@/layouts/Default';
-import Button from '@/ui/Button';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
+import RedirectLink from '@/components/Web/RedirectLink';
+import Button from '@/components/Common/Button';
 import NotFoundImg from '@/ui/svg/not-found.svg';
 import NotFoundStyled from '@/ui/pages/not-found';
 
@@ -26,22 +25,20 @@ const Page404 = () => {
         <NotFoundImg className="not-found-img" />
         <h1>
           <p className="title-md">{t('404.pageTitle')}</p>
-          <p className="text-lg medium">{t('404.title')}</p>
+          <p className="body-lg medium">{t('404.title')}</p>
         </h1>
         <p>{t('404.text')}</p>
         <div className="ctas">
-          <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-            <Button as="a">
+          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+            <Button size="large" as="a">
               <span>{t('home:scheduleFishbowl')}</span>
-              <ArrowRight />
             </Button>
-          </Link>
-          <Link href={ROUTE_HOME} passHref>
-            <Button className="secondary" as="a">
+          </RedirectLink>
+          <RedirectLink href={ROUTE_HOME} passHref>
+            <Button size="large" variant="secondary" as="a">
               <span>{t('common:goHome')}</span>
-              <ArrowRight />
             </Button>
-          </Link>
+          </RedirectLink>
         </div>
       </NotFoundStyled>
     </Layout>

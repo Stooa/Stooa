@@ -59,10 +59,6 @@ const Form = styled.div`
     color: ${COLOR_NEUTRO_700};
   }
 
-  button.cancel {
-    color: ${COLOR_NEUTRO_700};
-  }
-
   ${media.min('tablet')`
     padding: ${space(6)};
   `}

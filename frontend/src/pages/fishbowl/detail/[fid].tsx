@@ -65,7 +65,7 @@ const Detail = props => {
     <Layout title={fb.name} decorated>
       {showTitle && (
         <Alert className="success" block>
-          <p className="title-sm">{t('preTitle')}</p>
+          <p className="body-md bold">{t('preTitle')}</p>
           <p>{t('preSubtitle')}</p>
         </Alert>
       )}

@@ -9,7 +9,6 @@
 
 import React from 'react';
 
-import Button, { ButtonLinkColored, ButtonSmall } from '@/ui/Button';
 import UrlSvg from '@/ui/svg/url.svg';
 import Check from '@/ui/svg/checkmark.svg';
 
@@ -17,15 +16,17 @@ import { toast } from 'react-toastify';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { defaultLocale } from '@/i18n';
 import useTranslation from 'next-translate/useTranslation';
+import Button from '@/components/Common/Button';
 
 interface Props {
   fid: string;
   locale: string;
-  secondary?: boolean;
-  variant?: 'small' | 'link';
+  variant?: 'primary' | 'secondary' | 'text';
+  size?: 'small' | 'medium' | 'large';
+  withSvg?: boolean;
 }
 
-const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant, ...props }) => {
+const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, size, variant, withSvg, ...props }) => {
   const { t } = useTranslation('common');
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
   const fbUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${
@@ -43,21 +44,11 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, secondary, variant, ...pr
     });
   };
 
-  let ButtonToUse;
-
-  if (variant === 'small') {
-    ButtonToUse = ButtonSmall;
-  } else if (variant === 'link') {
-    ButtonToUse = ButtonLinkColored;
-  } else {
-    ButtonToUse = Button;
-  }
-
   return (
-    <ButtonToUse onClick={handleCopyUrl} className={`${secondary && 'secondary '}`} {...props}>
+    <Button size={size} variant={variant} onClick={handleCopyUrl} {...props}>
       {t('linkButton')}
-      {variant !== 'link' && <UrlSvg />}
-    </ButtonToUse>
+      {withSvg && <UrlSvg />}
+    </Button>
   );
 };
 

@@ -10,14 +10,14 @@
 import styled from 'styled-components';
 
 import { space } from '@/ui/helpers';
-import { TEXT_SM } from '@/ui/Texts';
+import { BODY_SM } from '@/ui/Texts';
 
 const Navigation = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
 
-  ${TEXT_SM}
+  ${BODY_SM}
 
   > *:not(:last-child) {
     margin-right: ${space(3)};

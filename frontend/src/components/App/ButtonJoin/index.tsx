@@ -43,7 +43,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, children }
 
   return (
     <Button
-      className={`text-sm medium ${joined ? 'joined' : ''}`}
+      className={`body-sm medium ${joined ? 'joined' : ''}`}
       onClick={handleJoinClick}
       disabled={disabled}
       active={active}

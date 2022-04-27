@@ -74,7 +74,7 @@ const Form = (props: FormikProps<FormValues>) => {
         />
       </fieldset>
       <fieldset>
-        <p className="text-xxs">
+        <p className="body-xs">
           <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
         </p>
         <Input

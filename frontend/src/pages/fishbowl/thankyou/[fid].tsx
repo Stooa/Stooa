@@ -13,18 +13,17 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
+import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
 import ThankYouStyled, { Description, Time } from '@/ui/pages/thank-you';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
-import { ButtonStyledLinkSmall } from '@/ui/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import Button from '@/components/Common/Button';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -67,17 +66,17 @@ const ThankYou = () => {
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
         className="error"
       >
-        <p className="title-sm medium">{t('finishedEvent')}</p>
-        <div className="text-sm">
+        <p className="body-md medium">{t('finishedEvent')}</p>
+        <div className="body-sm">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
             startDate.time
           } - ${endDate.time} ${endDate.timezone}`}
         </div>
       </Time>
-      <h1 className="text-lg medium">{fb.name}</h1>
-      {fb.description && <Description className="text-sm">{fb.description}</Description>}
+      <h1 className="body-lg medium">{fb.name}</h1>
+      {fb.description && <Description className="body-sm">{fb.description}</Description>}
       <ThankYouStyled>
-        <div className="share text-md medium">
+        <div className="share body-md medium">
           <p>{t('share')}</p>
           <ul>
             <li>
@@ -163,24 +162,10 @@ const ThankYou = () => {
           </ul>
         </div>
         <div className="action-wrapper">
-          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <ButtonStyledLinkSmall
-              className="host-now"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Host Fishbowl Now',
-                  action: 'Thank You Page',
-                  label: `fishbowl/thankyou/${fid}`
-                });
-              }}
-            >
-              <span>{t('common:hostFishbowlNow')}</span>
-              <ArrowRight />
-            </ButtonStyledLinkSmall>
-          </RedirectLink>
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-            <ButtonStyledLinkSmall
-              className="secondary"
+            <Button
+              size="large"
+              as="a"
               onClick={() => {
                 pushEventDataLayer({
                   category: 'Schedule Fishbowl',
@@ -190,8 +175,12 @@ const ThankYou = () => {
               }}
             >
               <span>{t('common:scheduleFishbowl')}</span>
-              <ArrowRight />
-            </ButtonStyledLinkSmall>
+            </Button>
+          </RedirectLink>
+          <RedirectLink href={ROUTE_HOME} passHref>
+            <Button size="large" variant="secondary" as="a">
+              <span>{t('common:goHome')}</span>
+            </Button>
           </RedirectLink>
         </div>
       </ThankYouStyled>

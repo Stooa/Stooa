@@ -55,7 +55,7 @@ const InputField: React.FC<Input> = ({
           <ValidationError>{meta.error}</ValidationError>
         </>
       )}
-      {help && <p className="help text-sm">{help}</p>}
+      {help && <p className="help body-sm">{help}</p>}
     </InputStyled>
   );
 };
