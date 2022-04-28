@@ -18,7 +18,7 @@ if [ "${RESET_DATABASE:-}" = true ]; then
 
     console doctrine:database:drop --no-interaction --force
     console doctrine:database:create --no-interaction
-    console doctrine:schema:update --no-interaction --force
+    console doctrine:migrations:migrate --no-interaction --allow-no-migration
     APP_ENV=dev console doctrine:fixtures:load --no-interaction --append
 
     # Our current infrastructure does not allow to run sidecar containers to perform
