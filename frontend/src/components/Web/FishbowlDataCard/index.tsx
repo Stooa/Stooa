@@ -28,10 +28,14 @@ const FishbowlDataCard = ({ data }: Props) => {
     <StyledFishbowlDataCard>
       <p className="body-xs card-subtitle">Fishbowl Details</p>
       <h2 className="body-md medium ">{data.name}</h2>
-      {data.description && <p className="description body-sm">{data.description}</p>}
+      {data.description && (
+        <p className="description body-sm" data-testid="fishbowl-description">
+          {data.description}
+        </p>
+      )}
 
       <div className="date">
-        <p className="body-xs">{`${
+        <p className="body-xs" data-testid="date-with-month">{`${
           monthName.charAt(0).toUpperCase() + monthName.slice(1)
         } ${day}, ${year}`}</p>
         <p className="body-xs">{`${startTime} - ${endTime}`}</p>
