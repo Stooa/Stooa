@@ -34,6 +34,7 @@
         "symfony/flex": "1.18.6",
         "symfony/framework-bundle": "4.4.40",
         "symfony/http-client": "5.4.7",
+        "symfony/intl": "5.4.8",
         "symfony/mailer": "5.4.7",
         "symfony/messenger": "5.4.3",
         "symfony/monolog-bundle": "3.7.1",
