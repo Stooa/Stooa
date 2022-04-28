@@ -12,8 +12,8 @@
     "copySuccess": "Enllaç copiat!",
     "detail": {
         "shareTitle": "Ara què? <br/>Comparteix el teu <i>fishbowl</i>!",
-        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the session.",
-        "shareInSocials": "Or share in:",
+        "shareSubtitle": "Deixa que la conversa flueixi! Copieu i compartiu l'enllaç d'aquest <i>Fishbowl</i> amb les persones que voleu unir a la sessió.",
+        "shareInSocials": "O comparteix en:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!"
     },
     "months": {
