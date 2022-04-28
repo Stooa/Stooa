@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
 
@@ -19,20 +18,19 @@ import FishbowlDataCard from '@/components/Web/FishbowlDataCard';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useWindowSize } from '@/hooks/useWIndowSize';
-import { BREAKPOINTS } from '@/ui/settings';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import RedirectLink from '../RedirectLink';
+import Button from '@/components/Common/Button';
+import { ROUTE_FISHBOWL } from '@/app.config';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   data: Fishbowl;
 }
 
 const FishbowlDetail: React.FC<Props> = ({ data }) => {
-  const { width } = useWindowSize();
-
-  const isLargerThanTablet = width > BREAKPOINTS.tablet;
-
+  const { t } = useTranslation('form');
   const shareTitle = `Come to my online 🐠 fishbowl in Stooa. ${data.name}.`;
 
   useEffect(() => {
@@ -59,9 +57,16 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
           <p className="body-md description">
             <Trans i18nKey="fishbowl:detail.shareSubtitle" components={{ i: <i /> }} />
           </p>
+          <div className="hide-desktop enter-fishbowl">
+            <RedirectLink href={`${ROUTE_FISHBOWL}/${data.slug}`} locale={data.locale} passHref>
+              <Button size="large" as="a" data-testid="enter-fishbowl">
+                <span>{t('button.enterFishbowl')}</span>
+              </Button>
+            </RedirectLink>
+          </div>
           <ButtonCopyUrl
-            size={isLargerThanTablet ? 'medium' : 'large'}
-            full={!isLargerThanTablet}
+            variant="secondary"
+            size="large"
             withSvg
             fid={data.slug}
             locale={data.locale}

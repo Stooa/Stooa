@@ -16,6 +16,7 @@ const StyledFishbowlDataCard = styled.div`
   display: flex;
   border-radius: 4px;
   flex-direction: column;
+  align-items: flex-start;
   margin-bottom: ${space(2)};
   padding: ${space(2)} ${space(2)} ${space(2)} ${space(3)};
   position: relative;

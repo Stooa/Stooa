@@ -47,8 +47,13 @@ const SIZES = {
 };
 
 const ButtonBase = styled.button<{ full?: boolean }>`
-  width: ${({ full }) => (full ? '100%' : 'auto')};
+  width: 100%;
+
   ${mediumWeight};
+
+  ${media.min('tablet')`
+    width: ${({ full }) => (full ? '100%' : 'auto')} !important;
+  `}
 
   align-items: center;
   border: none;
@@ -64,6 +69,10 @@ const ButtonBase = styled.button<{ full?: boolean }>`
   transition: 0.1s ease-out;
   will-change: background, color;
 
+  &.never-full {
+    width: auto;
+  }
+
   &:disabled {
     cursor: not-allowed;
     background-color: ${COLOR_NEUTRO_300};
@@ -71,7 +80,11 @@ const ButtonBase = styled.button<{ full?: boolean }>`
     pointer-events: none;
   }
 
-  * + &:last-child svg {
+  svg {
+    &:first-child {
+      margin-left: ${space(0.75)};
+    }
+
     ${media.min('tablet')`
       margin-left: ${space(0.75)};
       margin-right: ${space(-0.75)};

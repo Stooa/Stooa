@@ -15,12 +15,6 @@ When('clicks on its profile', () => {
   });
 });
 
-Then('sees the register form', () => {
-  cy.findByRole('heading', { name: 'Register to get started' });
-
-  cy.screenshot();
-});
-
 Then('sees login and register buttons', () => {
   cy.get('header').within(() => {
     cy.screenshot();

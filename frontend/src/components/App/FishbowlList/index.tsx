@@ -118,7 +118,7 @@ const FishbowlList = () => {
               <Button
                 as="a"
                 variant="secondary"
-                className="schedule-fishbowl"
+                className="schedule-fishbowl never-full"
                 onClick={() => {
                   pushEventDataLayer({
                     category: 'Schedule Fishbowl',

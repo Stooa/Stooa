@@ -39,6 +39,10 @@ const MainGrid = styled.div`
       margin-bottom: ${space(3)};
     }
 
+    div.enter-fishbowl {
+      margin-bottom: ${space(3)};
+    }
+
     ul.social-links {
       padding-left: 0;
       list-style: none;

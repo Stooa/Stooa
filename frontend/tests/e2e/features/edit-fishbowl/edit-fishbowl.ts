@@ -9,18 +9,7 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
-const modifiedValues = {
-  title: '',
-  hours: '',
-  description: '',
-  startDateTimeTz: new Date(),
-  duration: '',
-  durationFormatted: '',
-  timezone: '',
-  locale: '',
-  language: '',
-  hasIntroduction: false
-};
+import { modifiedValues } from '../common';
 
 When('clicks on fishbowl card', () => {
   cy.wait('@getOneFishbowlsListQuery');
@@ -45,15 +34,14 @@ Then('sees the fishbowl edit form full of information', () => {
   cy.screenshot();
 });
 
-When('modifies the fishbowl {string} writing {string}', (fieldName = '', newValue = '') => {
-  cy.get(`:is(input, textarea, div)[name=${fieldName}]`).clear().type(newValue);
-  modifiedValues[fieldName] = newValue;
-});
-
+/**
+ * This function changes the value to a select type input
+ * @param {string} fieldName
+ * @param {string} newValue
+ */
 When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
   cy.get(`select[name=${fieldName}]`).select(newValue);
   modifiedValues[fieldName] = newValue;
-  console.log(modifiedValues);
 });
 
 When('modifies the fishbowl {string} to true', (fieldName = '') => {
@@ -128,12 +116,4 @@ Then('sees a placeholder with Enter Fishbowl button', () => {
 Then('clicks on placeholders Enter Fishbowl link', () => {
   cy.wait(2000);
   cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
-});
-
-Then('sees success messages', () => {
-  cy.get('span.success-message-bottom').should('exist');
-
-  cy.wait(5500);
-  cy.get('span.success-message-top').should('not.exist');
-  cy.get('span.success-message-bottom').should('not.exist');
 });
