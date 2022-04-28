@@ -63,7 +63,7 @@ class UserAdmin extends AbstractAdmin
     {
         $subject = $this->getSubject();
 
-        if (null === $subject || null === $subject->getId()) {
+        if (null === $subject->getId()) {
             $formOptions = ['validation_groups' => ['Default', 'user:create']];
         }
     }
@@ -119,7 +119,7 @@ class UserAdmin extends AbstractAdmin
             ->add('locale', LocaleType::class)
             ->add('active')
             ->add('plainPassword', TextType::class, [
-                'required' => null === $user || null === $user->getId(),
+                'required' => null === $user->getId(),
             ]);
     }
 }
