@@ -73,13 +73,15 @@ class FishbowlAdmin extends AbstractAdmin
     {
         $filter
             ->add('name')
-            ->add('host', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'email',
-                'callback' => self::hostCallbackFunction(),
-            ])
-            ->add('currentStatus', null, [], ChoiceType::class, [
-                'choices' => Fishbowl::$statusChoices,
-            ])
+            // This needs to be fixed, it does not work with new version of Sonata
+            //
+            // ->add('host', ModelAutocompleteFilter::class, [], null, [
+            //     'property' => 'email',
+            //     'callback' => self::hostCallbackFunction(),
+            // ])
+            // ->add('currentStatus', null, [], ChoiceType::class, [
+            //     'choices' => Fishbowl::$statusChoices,
+            // ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction');
     }

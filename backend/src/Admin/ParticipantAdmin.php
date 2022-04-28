@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\DateRangeFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\Form\Type\DateRangePickerType;
@@ -33,7 +33,7 @@ class ParticipantAdmin extends AbstractAdmin
         $sortValues['_sort_order'] = 'DESC';
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
     }
@@ -41,16 +41,18 @@ class ParticipantAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('user', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'email',
-                'callback' => FishbowlAdmin::hostCallbackFunction(),
-            ])
-            ->add('guest', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'name',
-            ])
-            ->add('fishbowl', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'name',
-            ])
+            // This needs to be fixed, it does not work with new version of Sonata
+            //
+            // ->add('user', ModelAutocompleteFilter::class, [], null, [
+            //     'property' => 'email',
+            //     'callback' => FishbowlAdmin::hostCallbackFunction(),
+            // ])
+            // ->add('guest', ModelAutocompleteFilter::class, [], null, [
+            //     'property' => 'name',
+            // ])
+            // ->add('fishbowl', ModelAutocompleteFilter::class, [], null, [
+            //     'property' => 'name',
+            // ])
             ->add('lastPing', DateRangeFilter::class, [
                 'field_type' => DateRangePickerType::class,
             ]);

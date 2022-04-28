@@ -7,7 +7,7 @@
 
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: auto
+        Sonata\UserBundle\Model\UserInterface: auto
         App\Entity\User: auto
 
     access_control:
@@ -34,7 +34,7 @@ security:
         strategy: unanimous
     providers:
         admin:
-            id: fos_user.user_provider.username
+            id: sonata.user.security.user_provider
         api:
             entity:
                 class: App\Entity\User
