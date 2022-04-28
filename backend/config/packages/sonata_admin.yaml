@@ -10,6 +10,13 @@ sonata_admin:
     show_mosaic_button: false
     security:
         handler: sonata.admin.security.handler.role
+    options:
+        default_admin_route: edit
+        html5_validate: false
+    global_search:
+        admin_route: edit
+    breadcrumbs:
+        child_admin_route: edit
     dashboard:
         groups:
             users:
