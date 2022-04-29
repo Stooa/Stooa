@@ -17,6 +17,7 @@ import { formatDateTime } from '@/lib/helpers';
 import { Container, Description } from '@/ui/pages/fishbowl-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { HelpText, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
+import { ToastContainer } from 'react-toastify';
 
 interface Props {
   data: Fishbowl;
@@ -30,6 +31,7 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
 
   return (
     <Container centered>
+      <ToastContainer className="toastify-custom" />
       <StyledFishbowlData>
         <h1 className="title-md">{data.name}</h1>
         {data.description && <Description>{data.description}</Description>}
