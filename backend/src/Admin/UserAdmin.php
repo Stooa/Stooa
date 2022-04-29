@@ -106,6 +106,10 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
+        if (!$this->hasSubject()) {
+            return;
+        }
+
         $user = $this->getSubject();
 
         $form
