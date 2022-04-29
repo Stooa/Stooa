@@ -64,6 +64,25 @@ When('writes {string} in input {string}', (newValue = '', fieldName = '') => {
   modifiedValues[fieldName] = newValue;
 });
 
+/**
+ * This function changes the value to a select type input
+ * @param {string} fieldName
+ * @param {string} newValue
+ */
+When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
+  cy.get(`select[name=${fieldName}]`).select(newValue);
+  modifiedValues[fieldName] = newValue;
+});
+
+/**
+ * This function changes the value to a checkbox type input
+ * @param {string} fieldName
+ */
+When('modifies the fishbowl {string} to true', (fieldName = '') => {
+  cy.get(`input[name=${fieldName}]`).click({ force: true });
+  modifiedValues[fieldName] = true;
+});
+
 When('clicks submit button', () => {
   cy.get('form').submit();
 });
@@ -91,6 +110,12 @@ Then('sees success messages', () => {
   cy.get('span.success-message-bottom').should('not.exist');
 });
 
+Then('sees the create fishbowl form', () => {
+  cy.findByRole('heading', { name: 'Create a free fishbowl' });
+
+  cy.screenshot();
+});
+
 Given('a list of one fishbowl', () => {
   cy.intercept(
     {
@@ -104,36 +129,6 @@ Given('a list of one fishbowl', () => {
 });
 
 Given('a list of one fishbowl that is about to start', () => {
-  cy.intercept(
-    {
-      pathname: '/fishbowls',
-      query: {
-        'finishDateTime[after]': isoCloseDate.toISOString()
-      }
-    },
-    [
-      {
-        id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-        type: 'Fishbowl',
-        name: 'Fishbowl title',
-        description: 'Fishbowl description',
-        slug: 'test-me-fishbowl',
-        timezone: 'Europe/Madrid',
-        locale: 'en',
-        host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
-        currentStatus: 'not_started',
-        participants: [],
-        isFishbowlNow: false,
-        hasIntroduction: false,
-        startDateTimeTz: isoCloseDate,
-        endDateTimeTz: isoDate,
-        durationFormatted: '02:00'
-      }
-    ]
-  ).as('getOneCloseFishbowlsListQuery');
-});
-
-Given('a freshly created fishbowl', () => {
   cy.intercept(
     {
       pathname: '/fishbowls',

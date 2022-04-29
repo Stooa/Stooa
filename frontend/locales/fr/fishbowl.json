@@ -39,7 +39,9 @@
         "shareTitle": "Et maintenant ?<br/>Partagez le <i>fishbowl</i> !",
         "shareSubtitle": "Laissez la conversation se dérouler ! Copiez et partagez le lien de cette <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.",
         "shareInSocials": "Ou partagez en:",
-        "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !"
+        "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !",
+        "cardMiniTitle": "<i>Fishbowl</i> détails",
+        "editFishbowlDetails": "Modifier les détails du <i>Fishbowl</i>"
     },
     "months": {
         "10": "octobre",

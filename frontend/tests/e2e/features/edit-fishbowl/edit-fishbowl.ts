@@ -34,21 +34,6 @@ Then('sees the fishbowl edit form full of information', () => {
   cy.screenshot();
 });
 
-/**
- * This function changes the value to a select type input
- * @param {string} fieldName
- * @param {string} newValue
- */
-When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
-  cy.get(`select[name=${fieldName}]`).select(newValue);
-  modifiedValues[fieldName] = newValue;
-});
-
-When('modifies the fishbowl {string} to true', (fieldName = '') => {
-  cy.get(`input[name=${fieldName}]`).click({ force: true });
-  modifiedValues[fieldName] = true;
-});
-
 When('saves the changes', () => {
   cy.get('form').submit();
 });

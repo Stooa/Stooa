@@ -14,7 +14,9 @@
         "shareTitle": "Ara què? <br/>Comparteix el teu <i>fishbowl</i>!",
         "shareSubtitle": "Deixa que la conversa flueixi! Copieu i compartiu l'enllaç d'aquest <i>Fishbowl</i> amb les persones que voleu unir a la sessió.",
         "shareInSocials": "O comparteix en:",
-        "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!"
+        "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!",
+        "cardMiniTitle": "Detalls del <i>fishbowl</i>",
+        "editFishbowlDetails": "Editar detalls del <i>fishbowl</i>"
     },
     "months": {
         "01": "Gener",

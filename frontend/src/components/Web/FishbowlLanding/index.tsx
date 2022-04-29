@@ -14,8 +14,8 @@ import Trans from 'next-translate/Trans';
 import { Fishbowl } from '@/types/api-platform';
 import { useStateValue } from '@/contexts/AppContext';
 import { formatDateTime } from '@/lib/helpers';
-import CopyUrl from '@/components/Common/CopyUrl';
 import { Container, Description, Time, TimeLeft } from '@/ui/pages/fishbowl-detail';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 
 interface Props {
   data: Fishbowl;
@@ -48,7 +48,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
           <TimeLeft className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
           </TimeLeft>
-          <CopyUrl className="centered" data={data} />
+          <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
         </>
       )}
     </Container>

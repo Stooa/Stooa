@@ -23,12 +23,6 @@ Then('sees login and register buttons', () => {
   });
 });
 
-Then('sees the create fishbowl form', () => {
-  cy.findByRole('heading', { name: 'Create a free fishbowl' });
-
-  cy.screenshot();
-});
-
 Then('sees create fishbowl and profile buttons', () => {
   cy.get('header').within(() => {
     cy.screenshot();

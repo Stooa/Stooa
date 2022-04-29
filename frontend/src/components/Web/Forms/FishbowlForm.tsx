@@ -296,6 +296,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
           props.onSubmit(res);
         })
         .catch(error => {
+          console.log('SAURA ERROR AAAAA', error);
           setSubmitting(false);
           props.onSubmit({
             type: 'Error',
