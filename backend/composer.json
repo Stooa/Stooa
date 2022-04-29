@@ -52,7 +52,7 @@
     },
     "require-dev": {
         "doctrine/data-fixtures": "1.5.3",
-        "doctrine/doctrine-fixtures-bundle": "3.4.1",
+        "doctrine/doctrine-fixtures-bundle": "3.4.2",
         "ergebnis/composer-normalize": "2.25.2",
         "friendsofphp/php-cs-fixer": "3.4.0",
         "phpstan/phpstan": "1.6.2",
