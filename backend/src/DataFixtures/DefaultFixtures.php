@@ -19,7 +19,7 @@ use App\Factory\SonataUserUserFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use FOS\UserBundle\Model\User;
+use Sonata\UserBundle\Model\UserInterface;
 
 class DefaultFixtures extends Fixture
 {
@@ -36,7 +36,7 @@ class DefaultFixtures extends Fixture
             'email' => 'admin@localhost',
             'password' => self::ADMIN_PASSWORD,
             'enabled' => true,
-            'roles' => [User::ROLE_SUPER_ADMIN],
+            'roles' => [UserInterface::ROLE_SUPER_ADMIN],
         ]);
 
         UserFactory::createOne([

@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 /** @extends AbstractAdmin<Guest> */
 class GuestAdmin extends AbstractAdmin
@@ -30,7 +30,7 @@ class GuestAdmin extends AbstractAdmin
         $sortValues['_sort_order'] = 'DESC';
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
     }
