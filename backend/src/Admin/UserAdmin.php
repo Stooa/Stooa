@@ -106,20 +106,16 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
-        if (!$this->hasSubject()) {
-            return;
-        }
-
-        $user = $this->getSubject();
+        $required = !$this->hasSubject() || null === $this->getSubject()->getId();
 
         $form
             ->add('email', EmailType::class, [
-                'disabled' => null !== $user && null !== $user->getId(),
+                'disabled' => !$required,
             ])
             ->add('name')
             ->add('surnames')
             ->add('privacyPolicy', CheckboxType::class, [
-                'disabled' => null !== $user && null !== $user->getId(),
+                'disabled' => !$required,
             ])
             ->add('allowShareData')
             ->add('linkedinProfile')
@@ -127,7 +123,7 @@ class UserAdmin extends AbstractAdmin
             ->add('locale', LocaleType::class)
             ->add('active')
             ->add('plainPassword', TextType::class, [
-                'required' => null === $user->getId(),
+                'required' => $required,
             ]);
     }
 }
