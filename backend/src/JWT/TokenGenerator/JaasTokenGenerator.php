@@ -22,15 +22,8 @@ use App\JWT\Model\Payload\UserPayload;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
-    private string $appId;
-    private string $apiKey;
-    private HostValidator $hostValidator;
-
-    public function __construct(string $appId, string $apiKey, HostValidator $hostValidator)
+    public function __construct(private readonly string $appId, private readonly string $apiKey, private readonly HostValidator $hostValidator)
     {
-        $this->appId = $appId;
-        $this->apiKey = $apiKey;
-        $this->hostValidator = $hostValidator;
     }
 
     public function generate(User $user): JWTToken

@@ -23,18 +23,11 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class ResetPasswordResolver implements MutationResolverInterface
 {
-    private UserRepository $userRepository;
-    private MailerService $mailerService;
-    private ResetPasswordHelperInterface $helper;
-
     public function __construct(
-        UserRepository $userRepository,
-        MailerService $mailerService,
-        ResetPasswordHelperInterface $helper
+        private readonly UserRepository $userRepository,
+        private readonly MailerService $mailerService,
+        private readonly ResetPasswordHelperInterface $helper
     ) {
-        $this->mailerService = $mailerService;
-        $this->userRepository = $userRepository;
-        $this->helper = $helper;
     }
 
     /** @param mixed[] $context */
@@ -53,7 +46,7 @@ class ResetPasswordResolver implements MutationResolverInterface
         if (null !== $user) {
             try {
                 $token = $this->helper->generateResetToken($user);
-            } catch (ResetPasswordExceptionInterface $e) {
+            } catch (ResetPasswordExceptionInterface) {
                 return $resetPassword;
             }
 

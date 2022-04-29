@@ -16,7 +16,6 @@ import { TweenMax } from 'gsap';
 import ModalOnBoarding from '@/components/App/ModalOnBoarding';
 import { getOnBoardingCookie, setOnBoardingCookie } from '@/lib/auth';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { ButtonApp, ButtonLinkApp } from '@/ui/Button';
 
 import ArrowPrev from '@/ui/svg/arrow-prev.svg';
 import ArrowNext from '@/ui/svg/arrow-next.svg';
@@ -31,6 +30,7 @@ import OnboardingWrapper, {
 import onBoardingDataWithIntroduction from '@/components/App/Onboarding/dataWithIntroduction.json';
 import onBoardingDataWithoutIntroduction from '@/components/App/Onboarding/dataWithoutIntroduction.json';
 import { useStooa } from '@/contexts/StooaManager';
+import Button from '@/components/Common/Button';
 
 interface Props {
   initialized: boolean;
@@ -212,9 +212,13 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
                       />
                     )}
                     {i === data.length - 1 ? (
-                      <ButtonApp onClick={skipOnBoarding}>{t('done')}</ButtonApp>
+                      <Button size="medium" onClick={skipOnBoarding}>
+                        {t('done')}
+                      </Button>
                     ) : (
-                      <ButtonLinkApp onClick={skipOnBoarding}>{t('skip')}</ButtonLinkApp>
+                      <Button variant="subtleLink" onClick={skipOnBoarding}>
+                        {t('skip')}
+                      </Button>
                     )}
                   </div>
                 </div>

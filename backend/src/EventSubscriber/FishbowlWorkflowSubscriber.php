@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 class FishbowlWorkflowSubscriber implements EventSubscriberInterface
 {
-    private Security $security;
-
-    public function __construct(Security $security)
+    public function __construct(private readonly Security $security)
     {
-        $this->security = $security;
     }
 
     public function guardFishbowl(GuardEvent $event): void

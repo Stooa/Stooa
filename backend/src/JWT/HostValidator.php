@@ -20,13 +20,10 @@ use Webmozart\Assert\Assert;
 
 class HostValidator
 {
-    private FishbowlRepository $fishbowlRepository;
-    private CurrentUserRoom $currentUserRoom;
-
-    public function __construct(FishbowlRepository $fishbowlRepository, CurrentUserRoom $currentUserRoom)
-    {
-        $this->fishbowlRepository = $fishbowlRepository;
-        $this->currentUserRoom = $currentUserRoom;
+    public function __construct(
+        private readonly FishbowlRepository $fishbowlRepository,
+        private readonly CurrentUserRoom $currentUserRoom
+    ) {
     }
 
     public function validateFromRequest(UserInterface $user): bool

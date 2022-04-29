@@ -99,10 +99,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface
+class User implements UserInterface, \Stringable
 {
     use TimestampableEntity;
-
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
@@ -110,7 +109,6 @@ class User implements UserInterface
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private ?UuidInterface $id = null;
-
     /**
      * @Groups({"user:read", "user:write"})
      *
@@ -120,7 +118,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private ?string $name = null;
-
     /**
      * @Groups({"user:read", "user:write"})
      *
@@ -130,7 +127,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private ?string $surnames = null;
-
     /**
      * @Groups({"user:self", "user:create", "user:read"})
      *
@@ -141,17 +137,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", unique=true)
      */
     private ?string $email = null;
-
     /**
      * @var string[]
      *
      * @ORM\Column(type="json")
      */
     private array $roles = [];
-
     /** @ORM\Column(type="string") */
     private ?string $password = null;
-
     /**
      * @Groups({"user:create"})
      *
@@ -160,17 +153,14 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $privacyPolicy = false;
-
     /**
      * @Groups({"user:self", "user:write"})
      *
      * @ORM\Column(type="boolean")
      */
     private bool $allowShareData = false;
-
     /** @ORM\Column(type="boolean") */
     private bool $active = false;
-
     /**
      * @Groups({"user:self", "user:write"})
      *
@@ -180,7 +170,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $linkedinProfile = null;
-
     /**
      * @Groups({"user:self", "user:write"})
      *
@@ -190,7 +179,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $twitterProfile = null;
-
     /**
      * @Groups({"user:self", "user:create", "user:read"})
      *
@@ -201,14 +189,12 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private ?string $locale = null;
-
     /**
      * @var Collection<int, Fishbowl>
      *
      * @ORM\OneToMany(targetEntity="Fishbowl", mappedBy="host")
      */
     private Collection $fishbowls;
-
     /**
      * @Groups({"user:write"})
      *

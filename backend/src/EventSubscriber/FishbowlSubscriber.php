@@ -25,13 +25,10 @@ use Webmozart\Assert\Assert;
 
 class FishbowlSubscriber implements EventSubscriberInterface
 {
-    private FishbowlService $service;
-    private Security $security;
-
-    public function __construct(FishbowlService $service, Security $security)
-    {
-        $this->service = $service;
-        $this->security = $security;
+    public function __construct(
+        private readonly FishbowlService $service,
+        private readonly Security $security
+    ) {
     }
 
     public static function getSubscribedEvents(): array

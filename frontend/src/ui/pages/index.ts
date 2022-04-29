@@ -29,12 +29,12 @@ const Billboard = styled.div`
   z-index: 3;
   width: 100%;
 
-  .title-xl {
+  .title-display {
     margin-bottom: ${space(2)};
   }
 
   ${media.max('desktop')`
-    .title-xl {
+    .title-display {
       font-size: ${rems(61)};
     }
   `}
@@ -122,7 +122,7 @@ const Billboard = styled.div`
 `;
 
 const Description = styled.div<{ center?: boolean }>`
-  margin-bottom: ${space(4)};
+  margin-bottom: ${space(5)};
   text-align: left;
 
   a {
@@ -130,10 +130,14 @@ const Description = styled.div<{ center?: boolean }>`
   }
 
   ${media.min('tablet')`
-    margin: ${({ center }) =>
-      center ? `${space(2)} auto ${space(3)}}` : `${space(2)} 0 ${space(3)}}`};
-    max-width: ${rems(700)};
+  margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
+  max-width: ${rems(700)};
+  text-align:'left';
+
+  ${media.min('tablet')`
     text-align: ${({ center }) => (center ? 'center' : 'left')};
+    margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
+  `}
   `}
 
   p + p {
@@ -256,7 +260,9 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
   }
 
   .title-lg.definition {
-    text-align: center;
+    ${media.min('tablet')`
+      text-align: center;
+    `}
   }
 
   ${media.min('tablet')`
@@ -331,7 +337,7 @@ const Banner = styled.div`
   position: relative;
   text-align: center;
 
-  .text-lg {
+  .body-lg {
     margin-bottom: ${space(5)};
   }
 
@@ -353,7 +359,7 @@ const Banner = styled.div`
   ${media.min('tablet')`
     padding: ${space(15)} ${space(2)};
 
-    .text-lg {
+    .body-lg {
       margin: 0 auto ${space(5)};
       max-width: ${rems(550)};
     }

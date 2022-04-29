@@ -37,7 +37,7 @@ use Webmozart\Assert\Assert as MAssert;
  *
  * @ORM\Entity
  */
-class Participant
+class Participant implements \Stringable
 {
     /**
      * @ORM\Id

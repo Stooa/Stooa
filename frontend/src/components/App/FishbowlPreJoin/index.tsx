@@ -26,7 +26,6 @@ import NicknameForm from '@/components/App/FishbowlPreJoin/form';
 import AuthUser from '@/components/App/FishbowlPreJoin/form-auth';
 
 import Modal from '@/ui/Modal';
-import { ButtonLink } from '@/ui/Button';
 import {
   Container,
   Devices,
@@ -36,6 +35,7 @@ import {
 } from '@/components/App/FishbowlPreJoin/styles';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from '@/contexts/DevicesContext';
+import Button from '@/components/Common/Button';
 
 const FishbowlPreJoin: React.FC = () => {
   const localTracks = useRef([]);
@@ -143,11 +143,11 @@ const FishbowlPreJoin: React.FC = () => {
             </DevicesToolbar>
           </Devices>
           <Form>
-            <h2 className="title-md">{t('fishbowl:prejoin.title')}</h2>
+            <h2 className="title-md form-title">{t('fishbowl:prejoin.title')}</h2>
             {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
-            <ButtonLink className="cancel text-sm" onClick={handleCancel}>
+            <Button size="small" variant="subtleLink" className="cancel" onClick={handleCancel}>
               {t('cancel')}
-            </ButtonLink>
+            </Button>
           </Form>
         </Container>
       </Modal>

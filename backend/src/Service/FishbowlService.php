@@ -45,27 +45,14 @@ use Webmozart\Assert\Assert;
  */
 class FishbowlService
 {
-    protected FishbowlRepository $fishbowlRepository;
-    protected RequestStack $requestStack;
-    protected Security $security;
-    protected GuestRepository $guestRepository;
-    protected ParticipantRepository $participantRepository;
-    protected TranslatorInterface $translator;
-
     public function __construct(
-        FishbowlRepository $fishbowlRepository,
-        RequestStack $requestStack,
-        Security $security,
-        GuestRepository $guestRepository,
-        ParticipantRepository $participantRepository,
-        TranslatorInterface $translator
+        protected FishbowlRepository $fishbowlRepository,
+        protected RequestStack $requestStack,
+        protected Security $security,
+        protected GuestRepository $guestRepository,
+        protected ParticipantRepository $participantRepository,
+        protected TranslatorInterface $translator
     ) {
-        $this->fishbowlRepository = $fishbowlRepository;
-        $this->requestStack = $requestStack;
-        $this->security = $security;
-        $this->guestRepository = $guestRepository;
-        $this->participantRepository = $participantRepository;
-        $this->translator = $translator;
     }
 
     public function canFishbowlStart(string $slug, UserInterface $host): bool

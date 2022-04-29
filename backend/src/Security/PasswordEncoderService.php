@@ -18,11 +18,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class PasswordEncoderService
 {
-    protected EncoderFactoryInterface $encoderFactory;
-
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(protected EncoderFactoryInterface $encoderFactory)
     {
-        $this->encoderFactory = $encoderFactory;
     }
 
     public function encodePassword(User $user): void

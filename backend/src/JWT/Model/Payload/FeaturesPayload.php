@@ -15,19 +15,13 @@ namespace App\JWT\Model\Payload;
 
 final class FeaturesPayload implements PayloadInterface
 {
-    private bool $recording;
-    private bool $livestreaming;
-    private bool $transcription;
-    private bool $outboundCall;
-    private bool $sipOutboundCall;
-
-    public function __construct(bool $recording, bool $livestreaming, bool $transcription, bool $outboundCall, bool $sipOutboundCall)
-    {
-        $this->recording = $recording;
-        $this->livestreaming = $livestreaming;
-        $this->transcription = $transcription;
-        $this->outboundCall = $outboundCall;
-        $this->sipOutboundCall = $sipOutboundCall;
+    public function __construct(
+        private readonly bool $recording,
+        private readonly bool $livestreaming,
+        private readonly bool $transcription,
+        private readonly bool $outboundCall,
+        private readonly bool $sipOutboundCall
+    ) {
     }
 
     /** @return array<string, bool> */

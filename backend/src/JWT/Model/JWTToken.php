@@ -20,33 +20,16 @@ use Lcobucci\JWT\Token\RegisteredClaims;
 
 class JWTToken
 {
-    private ?string $iss;
-    private ?string $aud;
-    private ?string $sub;
-    private ?string $room;
-    private ?FeaturesPayload $features;
-    private ?\DateTimeImmutable $nbf;
-    private ?UserPayload $user;
-    private ?HeaderPayload  $headerPayload;
-
     public function __construct(
-        string $iss,
-        string $aud,
-        string $sub,
-        string $room,
-        UserPayload $user,
-        ?\DateTimeImmutable $nbf = null,
-        ?HeaderPayload $headerPayload = null,
-        ?FeaturesPayload $featuresPayload = null
+        private readonly ?string $iss,
+        private readonly ?string $aud,
+        private readonly ?string $sub,
+        private readonly ?string $room,
+        private readonly ?UserPayload $user,
+        private readonly ?\DateTimeImmutable $nbf = null,
+        private readonly ?HeaderPayload $headerPayload = null,
+        private readonly ?FeaturesPayload $features = null
     ) {
-        $this->iss = $iss;
-        $this->aud = $aud;
-        $this->sub = $sub;
-        $this->room = $room;
-        $this->user = $user;
-        $this->nbf = $nbf;
-        $this->headerPayload = $headerPayload;
-        $this->features = $featuresPayload;
     }
 
     public function getHeaderPayload(): ?HeaderPayload
