@@ -76,11 +76,9 @@ const formatDateTime = date => {
  * 🌍 localeName   : name of local, f.e. es-ES, default en-US
  *  ✅ monthFormat : short, numeric, long (Default)
  */
- function getMonthsForLocale(localeName = 'en-US', monthFormat = 'long') {
-  const format = new Intl
-     .DateTimeFormat(localeName, {month: monthFormat}).format;
-  return [...Array(12).keys()]
-    .map((m) => format(new Date(Date.UTC(2022, m))));
+function getMonthsForLocale(localeName = 'en-US', monthFormat = 'long') {
+  const format = new Intl.DateTimeFormat(localeName, { month: monthFormat }).format;
+  return [...Array(12).keys()].map(m => format(new Date(Date.UTC(2022, m))));
 }
 
 const dateDifferenceFromNow = date => {

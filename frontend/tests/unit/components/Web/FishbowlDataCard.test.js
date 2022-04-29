@@ -19,13 +19,13 @@ const TWO_HOURS_IN_MS = 2 * HOUR_IN_MS;
 
 const fishbowlData = {
   id: '1001',
-  name: "Fishbowl name",
+  name: 'Fishbowl name',
   slug: 'mock-slug',
   locale: 'es',
   currentStatus: 'ready',
   startDateTimeTz: new Date(Date.now() + HOUR_IN_MS),
   endDateTimeTz: new Date(Date.now() + TWO_HOURS_IN_MS),
-  durationFormatted: '01:00',
+  durationFormatted: '01:00'
 };
 
 jest.mock('next/router', () => ({
@@ -41,7 +41,6 @@ jest.mock('next/router', () => ({
 }));
 
 describe("Unit test of fishbowl data card at fishbol's detail", () => {
-
   it('Fishbowl data card without description', () => {
     render(
       <I18nProvider lang={fishbowlData.locale} namespaces={{ fishbowl: fishbowlES }}>
@@ -50,10 +49,14 @@ describe("Unit test of fishbowl data card at fishbol's detail", () => {
     );
     const { time: startTime } = formatDateTime(fishbowlData.startDateTimeTz);
     const { day, year, time: endTime } = formatDateTime(fishbowlData.endDateTimeTz);
-    const monthName = getMonthsForLocale(fishbowlData.locale)[new Date(fishbowlData.startDateTimeTz).getMonth()];
+    const monthName = getMonthsForLocale(fishbowlData.locale)[
+      new Date(fishbowlData.startDateTimeTz).getMonth()
+    ];
 
-    const dateWithStringMonth = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${day}, ${year}`
-    const durationHoursString = `${startTime} - ${endTime}`
+    const dateWithStringMonth = `${
+      monthName.charAt(0).toUpperCase() + monthName.slice(1)
+    } ${day}, ${year}`;
+    const durationHoursString = `${startTime} - ${endTime}`;
 
     const title = screen.getByRole('heading');
     const description = screen.queryByTestId('fishbowl-description');
@@ -69,15 +72,24 @@ describe("Unit test of fishbowl data card at fishbol's detail", () => {
   it('Fishbowl data card with description', () => {
     render(
       <I18nProvider lang={fishbowlData.locale} namespaces={{ fishbowl: fishbowlES }}>
-        <FishbowlDataCard data={{...fishbowlData, description: "An amazing description of this super dupper cool event."}} />
+        <FishbowlDataCard
+          data={{
+            ...fishbowlData,
+            description: 'An amazing description of this super dupper cool event.'
+          }}
+        />
       </I18nProvider>
     );
     const { time: startTime } = formatDateTime(fishbowlData.startDateTimeTz);
     const { day, year, time: endTime } = formatDateTime(fishbowlData.endDateTimeTz);
-    const monthName = getMonthsForLocale(fishbowlData.locale)[new Date(fishbowlData.startDateTimeTz).getMonth()];
+    const monthName = getMonthsForLocale(fishbowlData.locale)[
+      new Date(fishbowlData.startDateTimeTz).getMonth()
+    ];
 
-    const dateWithStringMonth = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${day}, ${year}`
-    const durationHoursString = `${startTime} - ${endTime}`
+    const dateWithStringMonth = `${
+      monthName.charAt(0).toUpperCase() + monthName.slice(1)
+    } ${day}, ${year}`;
+    const durationHoursString = `${startTime} - ${endTime}`;
 
     const title = screen.getByRole('heading');
     const description = screen.getByTestId('fishbowl-description');
@@ -89,5 +101,4 @@ describe("Unit test of fishbowl data card at fishbol's detail", () => {
     expect(dateWithMonth).toBeInTheDocument();
     expect(durationHours).toBeInTheDocument();
   });
-
 });
