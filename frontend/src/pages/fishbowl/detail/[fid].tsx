@@ -12,16 +12,13 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_NOT_FOUND } from '@/app.config';
+import { ROUTE_FISHBOWL, ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { dataLayerPush } from '@/lib/analytics';
 
 import { ToastContainer } from 'react-toastify';
 
 const FishbowlDetail = dynamic(import('@/components/Web/FishbowlDetail'), {
-  loading: () => <div />
-});
-const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), {
   loading: () => <div />
 });
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
@@ -46,12 +43,11 @@ const Detail = props => {
     return <Loader />;
   }
 
-  // TODO: REACTIVATE THIS
-  // if (!referer.includes('/create')) {
-  //   const route = `${ROUTE_FISHBOWL}/${fid}`;
-  //   router.push(route, route, { locale: lang });
-  //   return <Loader />;
-  // }
+  if (!referer.includes('/create')) {
+    const route = `${ROUTE_FISHBOWL}/${fid}`;
+    router.push(route, route, { locale: lang });
+    return <Loader />;
+  }
 
   dataLayerPush({
     event: 'GAPageView',
