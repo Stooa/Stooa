@@ -63,7 +63,7 @@
         "phpunit/phpunit": "9.5.20",
         "psalm/plugin-phpunit": "0.16.1",
         "psalm/plugin-symfony": "3.1.4",
-        "runroom-packages/testing": "0.15.6",
+        "runroom-packages/testing": "0.15.7",
         "symfony/browser-kit": "5.4.3",
         "symfony/debug-bundle": "4.4.37",
         "symfony/maker-bundle": "1.39.0",

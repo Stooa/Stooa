@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3273d00d262f46a8e7b222aac72de426",
+    "content-hash": "588ec7d3ac15dc0f2f9ff1409e777f55",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13145,16 +13145,16 @@
         },
         {
             "name": "runroom-packages/testing",
-            "version": "v0.15.6",
+            "version": "0.15.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Runroom/testing.git",
-                "reference": "de4c689d0e4727bfebe9378af25f22a90b9c91a9"
+                "reference": "7538ecdaed22c682e8564af880ba495c7f65da95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Runroom/testing/zipball/de4c689d0e4727bfebe9378af25f22a90b9c91a9",
-                "reference": "de4c689d0e4727bfebe9378af25f22a90b9c91a9",
+                "url": "https://api.github.com/repos/Runroom/testing/zipball/7538ecdaed22c682e8564af880ba495c7f65da95",
+                "reference": "7538ecdaed22c682e8564af880ba495c7f65da95",
                 "shasum": ""
             },
             "require": {
@@ -13210,9 +13210,9 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/Runroom/testing/tree/v0.15.6"
+                "source": "https://github.com/Runroom/testing/tree/0.15.7"
             },
-            "time": "2022-03-03T13:03:09+00:00"
+            "time": "2022-04-28T09:12:19+00:00"
         },
         {
             "name": "sebastian/cli-parser",
