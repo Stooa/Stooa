@@ -36,11 +36,7 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
         <h1 className="title-md">{data.name}</h1>
         {data.description && <Description>{data.description}</Description>}
       </StyledFishbowlData>
-      <Time
-        as="time"
-        dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-        className="highlight"
-      >
+      <Time as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
         <p className="body-md medium">{t('dateandtime')}</p>
         <div className="body-lg">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${

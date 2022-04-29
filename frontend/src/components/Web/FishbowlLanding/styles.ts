@@ -10,9 +10,11 @@
 import styled from 'styled-components';
 import Alert from '@/ui/Alert';
 import { space } from '@/ui/helpers';
-import { COLOR_PURPLE_400 } from '@/ui/settings';
+import { COLOR_PURPLE_400, COLOR_NEUTRO_300, COLOR_NEUTRO_400 } from '@/ui/settings';
 
 const Time = styled(Alert)`
+  background-color: ${COLOR_NEUTRO_300};
+  border: ${COLOR_NEUTRO_400} 1px solid;
   display: inline-block;
   margin-bottom: ${space(4)};
   padding: ${space(2)} ${space(4)};
