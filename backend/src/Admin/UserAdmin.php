@@ -61,6 +61,10 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormOptions(array &$formOptions): void
     {
+        if (!$this->hasSubject()) {
+            return;
+        }
+
         $subject = $this->getSubject();
 
         if (null === $subject->getId()) {
