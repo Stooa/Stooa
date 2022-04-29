@@ -18,9 +18,10 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\DateRangeFilter;
-use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\Form\Type\DateRangePickerType;
 
 /** @extends AbstractAdmin<Participant> */
@@ -33,7 +34,7 @@ class ParticipantAdmin extends AbstractAdmin
         $sortValues['_sort_order'] = 'DESC';
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
     }
@@ -41,15 +42,24 @@ class ParticipantAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
-            ->add('user', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'email',
-                'callback' => FishbowlAdmin::hostCallbackFunction(),
+            ->add('user', ModelFilter::class, [
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => [
+                    'property' => 'email',
+                    'callback' => FishbowlAdmin::hostCallbackFunction(),
+                ],
             ])
-            ->add('guest', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'name',
+            ->add('guest', ModelFilter::class, [
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => [
+                    'property' => 'name',
+                ],
             ])
-            ->add('fishbowl', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'name',
+            ->add('fishbowl', ModelFilter::class, [
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => [
+                    'property' => 'name',
+                ],
             ])
             ->add('lastPing', DateRangeFilter::class, [
                 'field_type' => DateRangePickerType::class,
