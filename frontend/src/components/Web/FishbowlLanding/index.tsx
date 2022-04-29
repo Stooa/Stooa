@@ -14,14 +14,15 @@ import Trans from 'next-translate/Trans';
 import { Fishbowl } from '@/types/api-platform';
 import { useStateValue } from '@/contexts/AppContext';
 import { formatDateTime } from '@/lib/helpers';
-import { Container, Description, Time, TimeLeft } from '@/ui/pages/fishbowl-detail';
+import { Container, Description } from '@/ui/pages/fishbowl-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
+import { HelpText, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
 
 interface Props {
   data: Fishbowl;
 }
 
-const FishbowlDetail: React.FC<Props> = ({ data }) => {
+const FishbowlLanding: React.FC<Props> = ({ data }) => {
   const [{ fishbowlReady }] = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);
@@ -29,8 +30,10 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
 
   return (
     <Container centered>
-      <h1 className="title-md">{data.name}</h1>
-      {data.description && <Description>{data.description}</Description>}
+      <StyledFishbowlData>
+        <h1 className="title-md">{data.name}</h1>
+        {data.description && <Description>{data.description}</Description>}
+      </StyledFishbowlData>
       <Time
         as="time"
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
@@ -45,14 +48,15 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
       </Time>
       {!fishbowlReady && (
         <>
-          <TimeLeft className="warning body-md prewrap" block>
+          <StyledDetailAlert className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
-          </TimeLeft>
+          </StyledDetailAlert>
           <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+          <HelpText className="body-sm">{t('copyText')}</HelpText>
         </>
       )}
     </Container>
   );
 };
 
-export default FishbowlDetail;
+export default FishbowlLanding;
