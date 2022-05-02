@@ -43,11 +43,11 @@ const Detail = props => {
     return <Loader />;
   }
 
-  // if (!referer.includes('/create')) {
-  //   const route = `${ROUTE_FISHBOWL}/${fid}`;
-  //   router.push(route, route, { locale: lang });
-  //   return <Loader />;
-  // }
+  if (!referer.includes('/create')) {
+    const route = `${ROUTE_FISHBOWL}/${fid}`;
+    router.push(route, route, { locale: lang });
+    return <Loader />;
+  }
 
   dataLayerPush({
     event: 'GAPageView',

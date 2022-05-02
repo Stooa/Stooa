@@ -74,7 +74,6 @@ const Alert = styled.div<{ block?: boolean }>`
   display: ${({ block }) => (block ? 'block' : 'flex')};
   justify-content: center;
   margin: ${space()} auto;
-  max-width: fit-content;
   overflow-x: auto;
   padding: ${space(1.125)} ${space(1.5)} ${space(0.875)};
   text-align: center;

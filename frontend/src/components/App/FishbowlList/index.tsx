@@ -71,7 +71,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
         }
       });
     }
-  }, [fishbowls]);
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const params = new URLSearchParams([
     ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
