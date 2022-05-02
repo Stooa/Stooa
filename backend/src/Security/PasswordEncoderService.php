@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class PasswordEncoderService
 {
-    public function __construct(protected EncoderFactoryInterface $encoderFactory)
+    public function __construct(private readonly EncoderFactoryInterface $encoderFactory)
     {
     }
 

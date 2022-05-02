@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class FishbowlController extends AbstractController
 {
-    public function __construct(protected FishbowlService $fishbowlService)
+    public function __construct(private readonly FishbowlService $fishbowlService)
     {
     }
 

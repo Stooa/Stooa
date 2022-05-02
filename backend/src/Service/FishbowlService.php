@@ -46,12 +46,12 @@ use Webmozart\Assert\Assert;
 class FishbowlService
 {
     public function __construct(
-        protected FishbowlRepository $fishbowlRepository,
-        protected RequestStack $requestStack,
-        protected Security $security,
-        protected GuestRepository $guestRepository,
-        protected ParticipantRepository $participantRepository,
-        protected TranslatorInterface $translator
+        readonly private FishbowlRepository $fishbowlRepository,
+        readonly private RequestStack $requestStack,
+        readonly private Security $security,
+        readonly private GuestRepository $guestRepository,
+        readonly private ParticipantRepository $participantRepository,
+        readonly private TranslatorInterface $translator
     ) {
     }
 
