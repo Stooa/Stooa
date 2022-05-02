@@ -140,16 +140,17 @@ class User implements UserInterface, \Stringable
      * @ORM\Column(type="string", unique=true)
      */
     private ?string $email = null;
+
     /**
      * @var string[]
      *
      * @ORM\Column(type="json")
      */
-
     private array $roles = [];
-    /** @ORM\Column(type="string") */
 
+    /** @ORM\Column(type="string") */
     private ?string $password = null;
+
     /**
      * @Groups({"user:create"})
      *
