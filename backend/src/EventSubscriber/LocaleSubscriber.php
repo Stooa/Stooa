@@ -19,14 +19,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {
-    /** @var string[] */
-    private array $locales;
-
     /** @param string[] $locales */
-    public function __construct(
-        array $locales
-    ) {
-        $this->locales = $locales;
+    public function __construct(private readonly array $locales)
+    {
     }
 
     /** @return array<string, array<int, array<int, int|string>>> */

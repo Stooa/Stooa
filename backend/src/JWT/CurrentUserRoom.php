@@ -19,13 +19,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class CurrentUserRoom
 {
-    private RequestStack $requestStack;
-    private FishbowlService $fishbowlService;
-
-    public function __construct(RequestStack $requestStack, FishbowlService $fishbowlService)
-    {
-        $this->requestStack = $requestStack;
-        $this->fishbowlService = $fishbowlService;
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly FishbowlService $fishbowlService
+    ) {
     }
 
     /**

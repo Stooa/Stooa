@@ -367,6 +367,9 @@
             "config/packages/ramsey_uuid_doctrine.yaml"
         ]
     },
+    "rector/rector": {
+        "version": "0.12.21"
+    },
     "runroom-packages/testing": {
         "version": "0.9.2"
     },

@@ -23,18 +23,11 @@ use Webmozart\Assert\Assert;
 
 class ChangePasswordDataTransformer implements DataTransformerInterface
 {
-    private PasswordEncoderService $passwordEncoder;
-    private ResetPasswordHelperInterface $helper;
-    private ValidatorInterface $validator;
-
     public function __construct(
-        PasswordEncoderService $passwordEncoder,
-        ResetPasswordHelperInterface $helper,
-        ValidatorInterface $validator
+        private readonly PasswordEncoderService $passwordEncoder,
+        private readonly ResetPasswordHelperInterface $helper,
+        private readonly ValidatorInterface $validator
     ) {
-        $this->helper = $helper;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->validator = $validator;
     }
 
     /** @param mixed[] $context */

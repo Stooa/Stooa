@@ -17,6 +17,7 @@
         "nelmio/cors-bundle": "2.2.0",
         "ramsey/uuid": "4.3.1",
         "ramsey/uuid-doctrine": "1.8.1",
+        "rector/rector": "0.12.22",
         "sonata-project/admin-bundle": "4.11.1",
         "sonata-project/doctrine-extensions": "1.16.0",
         "sonata-project/doctrine-orm-admin-bundle": "4.2.8",
@@ -112,11 +113,12 @@
         }
     },
     "scripts": {
-        "lint-container": "bin/console lint:container",
-        "lint-twig": "bin/console lint:twig templates",
-        "lint-yaml": "bin/console lint:yaml config src translations --parse-tags",
-        "php-cs-fixer": "php-cs-fixer fix --ansi --verbose",
-        "phpstan": "phpstan analyse --no-progress",
-        "psalm": "psalm --stats"
+        "lint-container": "@php bin/console lint:container",
+        "lint-twig": "@php bin/console lint:twig templates",
+        "lint-yaml": "@php bin/console lint:yaml config src translations --parse-tags",
+        "php-cs-fixer": "@php php-cs-fixer fix --ansi --verbose",
+        "phpstan": "@php phpstan analyse --no-progress",
+        "psalm": "@php psalm --stats",
+        "rector": "@php rector --no-progress-bar"
     }
 }

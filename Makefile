@@ -73,6 +73,10 @@ phpstan:
 	$(call docker-exec-backend,composer phpstan)
 .PHONY: phpstan
 
+rector:
+	$(call docker-exec,composer rector)
+.PHONY: rector
+
 php-cs-fixer:
 	$(call docker-exec-backend,composer php-cs-fixer)
 .PHONY: php-cs-fixer

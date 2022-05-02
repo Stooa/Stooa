@@ -18,23 +18,21 @@ use Ramsey\Uuid\UuidInterface;
 
 final class UserPayload implements PayloadInterface
 {
-    private ?string $name;
-    private ?string $email;
-    private ?string $twitter;
-    private ?string $linkedin;
-    private ?string $avatar;
-    private ?UuidInterface $id;
-    private bool $moderator;
+    private readonly ?string $name;
+    private readonly ?string $email;
+    private readonly ?string $twitter;
+    private readonly ?string $linkedin;
 
-    public function __construct(User $user, bool $moderator, ?UuidInterface $id = null, ?string $avatar = null)
-    {
+    public function __construct(
+        User $user,
+        private readonly bool $moderator,
+        private readonly ?UuidInterface $id = null,
+        private readonly ?string $avatar = null
+    ) {
         $this->name = $user->getFullName();
         $this->email = $user->getEmail();
         $this->twitter = $user->getPublicTwitterProfile();
         $this->linkedin = $user->getPublicLinkedinProfile();
-        $this->moderator = $moderator;
-        $this->id = $id;
-        $this->avatar = $avatar;
     }
 
     /** @return array<string, string|bool|UuidInterface|null> */

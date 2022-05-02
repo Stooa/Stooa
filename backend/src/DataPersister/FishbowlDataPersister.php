@@ -19,15 +19,10 @@ use App\Service\MailerService;
 
 class FishbowlDataPersister implements ContextAwareDataPersisterInterface
 {
-    private ContextAwareDataPersisterInterface $decorated;
-    private MailerService $mailerService;
-
     public function __construct(
-        ContextAwareDataPersisterInterface $decorated,
-        MailerService $mailerService
+        private readonly ContextAwareDataPersisterInterface $decorated,
+        private readonly MailerService $mailerService
     ) {
-        $this->decorated = $decorated;
-        $this->mailerService = $mailerService;
     }
 
     /**
