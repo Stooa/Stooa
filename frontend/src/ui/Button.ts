@@ -7,15 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
-  COLOR_NEUTRO_600,
-  COLOR_NEUTRO_700,
-  COLOR_NEUTRO_800,
   COLOR_PURPLE_200,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
