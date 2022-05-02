@@ -21,11 +21,11 @@ use Lcobucci\JWT\Token\RegisteredClaims;
 class JWTToken
 {
     public function __construct(
-        private readonly ?string $iss,
-        private readonly ?string $aud,
-        private readonly ?string $sub,
-        private readonly ?string $room,
-        private readonly ?UserPayload $user,
+        private readonly string $iss,
+        private readonly string $aud,
+        private readonly string $sub,
+        private readonly string $room,
+        private readonly UserPayload $user,
         private readonly ?\DateTimeImmutable $nbf = null,
         private readonly ?HeaderPayload $headerPayload = null,
         private readonly ?FeaturesPayload $features = null
