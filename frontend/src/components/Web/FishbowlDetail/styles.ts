@@ -43,15 +43,39 @@ const MainGrid = styled.div`
       margin-bottom: ${space(3)};
     }
 
+    .share-text {
+      ${media.max('tablet')`
+          text-align: center;
+      `}
+    }
+
     ul.social-links {
       padding-left: 0;
       list-style: none;
       display: flex;
+      justify-content: center;
+
+      ${media.min('tablet')`
+        justify-content: flex-start;
+      `}
+
+      li {
+        margin-top: ${space()};
+      }
+
       li + li {
+        ${media.max('tablet')`
+          margin-left: ${space(4)};
+        `}
+
         margin-left: ${space(1)};
       }
 
       .icon-wrapper {
+        ${media.max('tablet')`
+        transform: scale(1.5);
+        `}
+
         background-color: ${COLOR_PURPLE_500};
         border-radius: 50%;
         display: inline-block;

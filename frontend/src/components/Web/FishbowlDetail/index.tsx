@@ -31,7 +31,7 @@ interface Props {
 
 const FishbowlDetail: React.FC<Props> = ({ data }) => {
   const { t } = useTranslation('form');
-  const shareTitle = `Come to my online 🐠 fishbowl in Stooa. ${data.name}.`;
+  const shareTitle = `${data.name}.`;
 
   useEffect(() => {
     toast(
@@ -71,7 +71,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
             fid={data.slug}
             locale={data.locale}
           />
-          <p className="body-xs">
+          <p className="body-xs share-text">
             <Trans i18nKey="fishbowl:detail.shareInSocials" />
           </p>
           <ul className="social-links">

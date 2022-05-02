@@ -77,6 +77,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
             <Button
+              className="never-full"
               as="a"
               data-testid="enter-fishbowl"
               onClick={() => {
