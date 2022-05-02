@@ -102,6 +102,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface, \Stringable
 {
     use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
