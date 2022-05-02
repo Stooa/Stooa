@@ -15,15 +15,11 @@ namespace App\JWT\Model\Payload;
 
 final class HeaderPayload implements PayloadInterface
 {
-    private string $alg;
-    private string $typ;
-    private string $kid;
-
-    public function __construct(string $apiKey, string $alg, string $typ)
-    {
-        $this->kid = $apiKey;
-        $this->alg = $alg;
-        $this->typ = $typ;
+    public function __construct(
+        private readonly string $kid,
+        private readonly string $alg,
+        private readonly string $typ
+    ) {
     }
 
     /** @return array<string, string> */

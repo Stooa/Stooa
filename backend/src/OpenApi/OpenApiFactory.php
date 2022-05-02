@@ -25,11 +25,8 @@ use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 final class OpenApiFactory implements OpenApiFactoryInterface
 {
-    private OpenApiFactoryInterface $decorated;
-
-    public function __construct(OpenApiFactoryInterface $decorated)
+    public function __construct(private readonly OpenApiFactoryInterface $decorated)
     {
-        $this->decorated = $decorated;
     }
 
     /** @param mixed[] $context */

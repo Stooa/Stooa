@@ -50,6 +50,9 @@ jobs:
             - name: Execute PHP CS Fixer to ensure coding standards
               run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
 
+            - name: Executes Rector
+              run: composer rector -- --dry-run
+
             - name: Executes Composer normalize to ensure that composer file is correctly generated
               run: composer normalize --dry-run
 
