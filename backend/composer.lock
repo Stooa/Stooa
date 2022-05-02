@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0488387556b5cf3e0681d885048e5e53",
+    "content-hash": "7c237b9e323fa23d9310b6b987da3843",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3597,16 +3597,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.11.0",
+            "version": "4.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "b481e9c2c171facec59a9208b4ee45a87ee3c3b1"
+                "reference": "b35398eb451b132eaa24440e09024bb7c9f552dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b481e9c2c171facec59a9208b4ee45a87ee3c3b1",
-                "reference": "b481e9c2c171facec59a9208b4ee45a87ee3c3b1",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/b35398eb451b132eaa24440e09024bb7c9f552dd",
+                "reference": "b35398eb451b132eaa24440e09024bb7c9f552dd",
                 "shasum": ""
             },
             "require": {
@@ -3716,7 +3716,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.11.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.11.1"
             },
             "funding": [
                 {
@@ -3736,7 +3736,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-27T09:09:04+00:00"
+            "time": "2022-04-29T18:59:02+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -7301,23 +7301,21 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.4.3",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "cc1147cb11af1b43f503ac18f31aa3bec213aba8"
+                "reference": "51f7006670febe4cbcbae177cbffe93ff833250d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/cc1147cb11af1b43f503ac18f31aa3bec213aba8",
-                "reference": "cc1147cb11af1b43f503ac18f31aa3bec213aba8",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/51f7006670febe4cbcbae177cbffe93ff833250d",
+                "reference": "51f7006670febe4cbcbae177cbffe93ff833250d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.5",
-                "symfony/deprecation-contracts": "^2.1|^3",
-                "symfony/polyfill-php73": "~1.0",
-                "symfony/polyfill-php80": "^1.16"
+                "php": ">=8.0.2",
+                "symfony/deprecation-contracts": "^2.1|^3"
             },
             "type": "library",
             "autoload": {
@@ -7350,7 +7348,7 @@
                 "options"
             ],
             "support": {
-                "source": "https://github.com/symfony/options-resolver/tree/v5.4.3"
+                "source": "https://github.com/symfony/options-resolver/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -7366,7 +7364,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-02T09:53:40+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
