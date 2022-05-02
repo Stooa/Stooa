@@ -9,6 +9,7 @@
 
 import Trans from 'next-translate/Trans';
 import Link from 'next/link';
+import React, { useEffect } from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
 import { Container } from '@/ui/pages/fishbowl-detail';
@@ -18,7 +19,6 @@ import FishbowlDataCard from '@/components/Web/FishbowlDataCard';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import RedirectLink from '../RedirectLink';
 import Button from '@/components/Common/Button';
@@ -32,6 +32,17 @@ interface Props {
 const FishbowlDetail: React.FC<Props> = ({ data }) => {
   const { t } = useTranslation('form');
   const shareTitle = `Come to my online 🐠 fishbowl in Stooa. ${data.name}.`;
+
+  const showSuccessToast = () => {
+    toast(t('fishbowl:detail.fishbowlCreatedSuccessfully'), {
+      toastId: 'successful-created-fishbowl',
+      icon: '🎉',
+      type: 'success',
+      position: 'bottom-center',
+      autoClose: 5000,
+      delay: 2000
+    });
+  };
 
   useEffect(() => {
     toast(
@@ -52,7 +63,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
       <MainGrid>
         <div className="left-column">
           <h2 className="title-md">
-            <Trans i18nKey="fishbowl:detail.shareTitle" components={{ br: <br /> }} />
+            <Trans i18nKey="fishbowl:detail.shareTitle" components={{ br: <br />, i: <i /> }} />
           </h2>
           <p className="body-md description">
             <Trans i18nKey="fishbowl:detail.shareSubtitle" components={{ i: <i /> }} />
@@ -124,7 +135,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
         <div className="right-column">
           <FishbowlDataCard data={data} />
           <p className="body-xs">
-            <Trans i18nKey="fishbowl:detail.mailInfo" components={{ i: <i></i> }} />
+            <Trans i18nKey="fishbowl:detail.mailInfo" components={{ i: <i /> }} />
           </p>
         </div>
       </MainGrid>

@@ -31,7 +31,7 @@ const MainGrid = styled.div`
     width: 100%;
 
     ${media.min('tablet')`
-    max-width: 300px;
+    max-width: 400px;
     `}
 
     p.description,

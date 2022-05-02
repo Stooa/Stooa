@@ -42,7 +42,7 @@
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !",
         "cardMiniTitle": "<i>Fishbowl</i> détails",
         "editFishbowlDetails": "Modifier les détails du <i>Fishbowl</i>",
-        "mailInfo": "Vous recevrez un courrier électronique contenant tous les détails del <i>Fishbowl</i> prévu."
+        "mailInfo": "📩 Vous recevrez un courrier électronique contenant tous les détails del <i>Fishbowl</i> prévu."
     },
     "months": {
         "10": "octobre",

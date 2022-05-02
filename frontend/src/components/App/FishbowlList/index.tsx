@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -48,7 +48,11 @@ import PlusSign from '@/ui/svg/plus-sign.svg';
 import BackArrow from '@/ui/svg/arrow-prev.svg';
 import { BREAKPOINTS } from '@/ui/settings';
 
-const FishbowlList = () => {
+interface Props {
+  selectedFishbowlParam?: string;
+}
+
+const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
   const { width: windowWidth } = useWindowSize();
@@ -58,6 +62,16 @@ const FishbowlList = () => {
   const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
   };
+
+  useEffect(() => {
+    if (fishbowls) {
+      fishbowls.forEach(fishbowl => {
+        if (fishbowl.slug === selectedFishbowlParam) {
+          setSelectedFishbowl(fishbowl);
+        }
+      });
+    }
+  }, [fishbowls]);
 
   const params = new URLSearchParams([
     ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
