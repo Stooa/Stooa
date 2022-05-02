@@ -20,11 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class FishbowlController extends AbstractController
 {
-    protected FishbowlService $fishbowlService;
-
-    public function __construct(FishbowlService $fishbowlService)
+    public function __construct(private readonly FishbowlService $fishbowlService)
     {
-        $this->fishbowlService = $fishbowlService;
     }
 
     public function ping(string $slug): Response

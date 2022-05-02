@@ -28,11 +28,11 @@ jobs:
 
         strategy:
             matrix:
-                php: ['7.4']
+                php: ['8.1']
 
         steps:
             - name: Checkout the repository to Github workspace
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Setup the PHP environment
               uses: shivammathur/setup-php@v2
@@ -49,6 +49,9 @@ jobs:
 
             - name: Execute PHP CS Fixer to ensure coding standards
               run: composer php-cs-fixer -- --dry-run --format=checkstyle | cs2pr
+
+            - name: Executes Rector
+              run: composer rector -- --dry-run
 
             - name: Executes Composer normalize to ensure that composer file is correctly generated
               run: composer normalize --dry-run

@@ -19,11 +19,8 @@ use Webmozart\Assert\Assert;
 
 class CurrentUserFishbowl
 {
-    private CurrentUserRoom $currentUserRoom;
-
-    public function __construct(CurrentUserRoom $currentUserRoom)
+    public function __construct(private readonly CurrentUserRoom $currentUserRoom)
     {
-        $this->currentUserRoom = $currentUserRoom;
     }
 
     public function currentSlug(UserInterface $user): string

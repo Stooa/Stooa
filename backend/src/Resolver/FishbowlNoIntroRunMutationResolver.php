@@ -20,13 +20,10 @@ use Symfony\Component\Workflow\WorkflowInterface;
 
 class FishbowlNoIntroRunMutationResolver implements MutationResolverInterface
 {
-    private FishbowlRepository $repository;
-    private WorkflowInterface $fishbowlStateMachine;
-
-    public function __construct(FishbowlRepository $repository, WorkflowInterface $fishbowlStateMachine)
-    {
-        $this->repository = $repository;
-        $this->fishbowlStateMachine = $fishbowlStateMachine;
+    public function __construct(
+        private readonly FishbowlRepository $repository,
+        private readonly WorkflowInterface $fishbowlStateMachine
+    ) {
     }
 
     /** @param mixed[] $context */

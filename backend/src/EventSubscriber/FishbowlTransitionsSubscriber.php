@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 class FishbowlTransitionsSubscriber implements EventSubscriberInterface
 {
-    private FishbowlRepository $repository;
-
-    public function __construct(FishbowlRepository $repository)
+    public function __construct(private readonly FishbowlRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function onIntroduction(Event $event): void

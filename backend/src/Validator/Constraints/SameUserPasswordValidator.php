@@ -26,18 +26,11 @@ use Webmozart\Assert\Assert;
 
 class SameUserPasswordValidator extends ConstraintValidator
 {
-    private Security $security;
-    private UserPasswordEncoderInterface $passwordEncoder;
-    private UserRepository $userRepository;
-
     public function __construct(
-        Security $security,
-        UserRepository $userRepository,
-        UserPasswordEncoderInterface $passwordEncoder
+        private readonly Security $security,
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordEncoderInterface $passwordEncoder
     ) {
-        $this->security = $security;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->userRepository = $userRepository;
     }
 
     public function validate($value, Constraint $constraint): void

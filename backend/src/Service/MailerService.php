@@ -24,21 +24,12 @@ use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 
 class MailerService
 {
-    private MailerInterface $mailer;
-    private TranslatorInterface $translator;
-    private string $from;
-    private string $appUrl;
-
     public function __construct(
-        MailerInterface $mailer,
-        TranslatorInterface $translator,
-        string $from,
-        string $appUrl
+        private readonly MailerInterface $mailer,
+        private readonly TranslatorInterface $translator,
+        private readonly string $from,
+        private readonly string $appUrl
     ) {
-        $this->mailer = $mailer;
-        $this->translator = $translator;
-        $this->from = $from;
-        $this->appUrl = $appUrl;
     }
 
     public function sendWelcomeEmail(User $user): void
