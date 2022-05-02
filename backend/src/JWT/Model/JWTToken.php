@@ -51,7 +51,7 @@ class JWTToken
             RegisteredClaims::SUBJECT => $this->sub,
             'room' => $this->room,
             'context' => [
-                'user' => $this->user->toArray()
+                'user' => $this->user->toArray(),
             ],
         ];
 
