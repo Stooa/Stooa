@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c237b9e323fa23d9310b6b987da3843",
+    "content-hash": "a53faabdb7fcd6f74ff657fc1368cb44",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4523,16 +4523,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.0.0",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "f47fa253106466b521f698e729741a6827a06b48"
+                "reference": "740a72243ecc979b82b8b4ac8b0acfc424bcddc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/f47fa253106466b521f698e729741a6827a06b48",
-                "reference": "f47fa253106466b521f698e729741a6827a06b48",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/740a72243ecc979b82b8b4ac8b0acfc424bcddc5",
+                "reference": "740a72243ecc979b82b8b4ac8b0acfc424bcddc5",
                 "shasum": ""
             },
             "require": {
@@ -4575,6 +4575,7 @@
                 "doctrine/mongodb-odm": "^2.2",
                 "doctrine/orm": "^2.9",
                 "egulias/email-validator": "^2.1.9 || ^3.1",
+                "friendsofphp/php-cs-fixer": "^3.4",
                 "matthiasnoback/symfony-config-test": "^4.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
                 "phpstan/extension-installer": "^1.0",
@@ -4627,15 +4628,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.0.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.1.0"
             },
             "funding": [
                 {
                     "url": "https://github.com/OskarStark",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/VincentLanglet",
                     "type": "github"
                 },
                 {
@@ -4645,9 +4642,13 @@
                 {
                     "url": "https://github.com/greg0ire",
                     "type": "github"
+                },
+                {
+                    "url": "https://github.com/jordisala1991",
+                    "type": "github"
                 }
             ],
-            "time": "2022-03-13T18:41:56+00:00"
+            "time": "2022-04-29T19:00:50+00:00"
         },
         {
             "name": "stella-maris/clock",
