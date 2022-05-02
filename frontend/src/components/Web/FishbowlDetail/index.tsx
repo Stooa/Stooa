@@ -124,7 +124,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
         <div className="right-column">
           <FishbowlDataCard data={data} />
           <p className="body-xs">
-            📩 You&apos;ll receive an email with all the details of your scheduled fishbowl.
+            <Trans i18nKey="fishbowl:detail.mailInfo" components={{ i: <i></i> }} />
           </p>
         </div>
       </MainGrid>

@@ -16,7 +16,8 @@
         "shareInSocials": "O comparteix en:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!",
         "cardMiniTitle": "Detalls del <i>fishbowl</i>",
-        "editFishbowlDetails": "Editar detalls del <i>fishbowl</i>"
+        "editFishbowlDetails": "Editar detalls del <i>fishbowl</i>",
+        "mailInfo": "📩 Recibirás un correo con todos los detalles de tu <i>fishbowl</i> agendado."
     },
     "months": {
         "01": "Gener",

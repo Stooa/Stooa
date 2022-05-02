@@ -16,7 +16,8 @@
         "shareInSocials": "O comparte en:",
         "fishbowlCreatedSuccessfully": "¡<i>Fishbowl</i> creado con éxito!",
         "cardMiniTitle": "Detalles del <i>fishbowl</i>",
-        "editFishbowlDetails": "Editar detalles del <i>fishbowl</i>"
+        "editFishbowlDetails": "Editar detalles del <i>fishbowl</i>",
+        "mailInfo": "📩 Recibirás un correo con todos los detalles de tu <i>fishbowl</i> agendado."
     },
     "months": {
         "01": "Enero",
