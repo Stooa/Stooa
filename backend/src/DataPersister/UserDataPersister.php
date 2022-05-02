@@ -20,18 +20,11 @@ use App\Service\MailerService;
 
 class UserDataPersister implements ContextAwareDataPersisterInterface
 {
-    private ContextAwareDataPersisterInterface $decorated;
-    private PasswordEncoderService $passwordEncoder;
-    private MailerService $mailerService;
-
     public function __construct(
-        ContextAwareDataPersisterInterface $decorated,
-        PasswordEncoderService $passwordEncoder,
-        MailerService $mailerService
+        private readonly ContextAwareDataPersisterInterface $decorated,
+        private readonly PasswordEncoderService $passwordEncoder,
+        private readonly MailerService $mailerService
     ) {
-        $this->decorated = $decorated;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->mailerService = $mailerService;
     }
 
     /**

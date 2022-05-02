@@ -29,8 +29,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 /** @extends AbstractAdmin<User> */
 class UserAdmin extends AbstractAdmin
 {
-    protected ?PasswordEncoderService $passwordEncoder;
-    protected ?MailerService $mailerService;
+    protected ?PasswordEncoderService $passwordEncoder = null;
+    protected ?MailerService $mailerService = null;
 
     public function setPasswordEncoder(PasswordEncoderService $passwordEncoder): void
     {

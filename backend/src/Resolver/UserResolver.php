@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 class UserResolver implements QueryItemResolverInterface
 {
-    private Security $security;
-
-    public function __construct(Security $security)
+    public function __construct(private readonly Security $security)
     {
-        $this->security = $security;
     }
 
     /**

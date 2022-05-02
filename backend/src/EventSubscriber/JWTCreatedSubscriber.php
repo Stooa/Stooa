@@ -21,11 +21,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class JWTCreatedSubscriber implements EventSubscriberInterface
 {
-    private TokenGeneratorInterface $tokenGenerator;
-
-    public function __construct(TokenGeneratorInterface $tokenGenerator)
+    public function __construct(private readonly TokenGeneratorInterface $tokenGenerator)
     {
-        $this->tokenGenerator = $tokenGenerator;
     }
 
     /** @return array<string, string> */
