@@ -33,17 +33,6 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
   const { t } = useTranslation('form');
   const shareTitle = `Come to my online 🐠 fishbowl in Stooa. ${data.name}.`;
 
-  const showSuccessToast = () => {
-    toast(t('fishbowl:detail.fishbowlCreatedSuccessfully'), {
-      toastId: 'successful-created-fishbowl',
-      icon: '🎉',
-      type: 'success',
-      position: 'bottom-center',
-      autoClose: 5000,
-      delay: 2000
-    });
-  };
-
   useEffect(() => {
     toast(
       <Trans i18nKey="fishbowl:detail.fishbowlCreatedSuccessfully" components={{ i: <i /> }} />,

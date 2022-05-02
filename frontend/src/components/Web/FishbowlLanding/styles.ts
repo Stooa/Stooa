@@ -10,7 +10,8 @@
 import styled from 'styled-components';
 import Alert from '@/ui/Alert';
 import { space } from '@/ui/helpers';
-import { COLOR_PURPLE_400, COLOR_NEUTRO_300, COLOR_NEUTRO_400 } from '@/ui/settings';
+import { COLOR_PURPLE_400, COLOR_NEUTRO_300, COLOR_NEUTRO_400, BREAKPOINTS } from '@/ui/settings';
+import { Container } from '@/ui/pages/fishbowl-detail';
 
 const Time = styled(Alert)`
   background-color: ${COLOR_NEUTRO_300};
@@ -33,4 +34,8 @@ const HelpText = styled.p`
   margin-top: ${space(2)};
 `;
 
-export { Time, StyledFishbowlData, StyledDetailAlert, HelpText };
+const LandingContainer = styled(Container)`
+  max-width: ${BREAKPOINTS.form}px;
+`;
+
+export { Time, StyledFishbowlData, StyledDetailAlert, HelpText, LandingContainer };

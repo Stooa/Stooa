@@ -14,9 +14,9 @@ import Trans from 'next-translate/Trans';
 import { Fishbowl } from '@/types/api-platform';
 import { useStateValue } from '@/contexts/AppContext';
 import { formatDateTime } from '@/lib/helpers';
-import { Container, Description } from '@/ui/pages/fishbowl-detail';
+import { Description } from '@/ui/pages/fishbowl-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
-import { HelpText, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
+import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
 import { ToastContainer } from 'react-toastify';
 
 interface Props {
@@ -30,7 +30,7 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
   const endDate = formatDateTime(data.endDateTimeTz);
 
   return (
-    <Container centered>
+    <LandingContainer centered>
       <ToastContainer className="toastify-custom" />
       <StyledFishbowlData>
         <h1 className="title-md">{data.name}</h1>
@@ -53,7 +53,7 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
           <HelpText className="body-sm">{t('copyText')}</HelpText>
         </>
       )}
-    </Container>
+    </LandingContainer>
   );
 };
 
