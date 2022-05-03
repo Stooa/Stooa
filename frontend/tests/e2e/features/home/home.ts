@@ -15,24 +15,12 @@ When('clicks on its profile', () => {
   });
 });
 
-Then('sees the register form', () => {
-  cy.findByRole('heading', { name: 'Register to get started' });
-
-  cy.screenshot();
-});
-
 Then('sees login and register buttons', () => {
   cy.get('header').within(() => {
     cy.screenshot();
     cy.findByRole('link', { name: 'Register for free' });
     cy.findByRole('link', { name: 'Log in' });
   });
-});
-
-Then('sees the create fishbowl form', () => {
-  cy.findByRole('heading', { name: 'Create a free fishbowl' });
-
-  cy.screenshot();
 });
 
 Then('sees create fishbowl and profile buttons', () => {

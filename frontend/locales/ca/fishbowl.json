@@ -11,12 +11,13 @@
     "joinMemberNote": "* Permet contactar amb la resta d'assistents",
     "copySuccess": "Enllaç copiat!",
     "detail": {
-        "title": "Títol",
-        "duration": "Durada",
-        "description": "Descripció",
-        "startDate": "Data d'inici",
-        "startTime": "Hora d'inici",
-        "language": "Idioma"
+        "shareTitle": "Ara què? <br/>Comparteix el teu <i>fishbowl</i>!",
+        "shareSubtitle": "Deixa que la conversa flueixi! Copia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vols afegir a la sessió.",
+        "shareInSocials": "O comparteix en:",
+        "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!",
+        "cardMiniTitle": "Detalls del <i>fishbowl</i>",
+        "editFishbowlDetails": "Editar detalls del <i>fishbowl</i>",
+        "mailInfo": "📩 Rebràs un correu amb tots els detalls del <i>fishbowl</i> que has programat."
     },
     "months": {
         "01": "Gener",

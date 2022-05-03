@@ -9,15 +9,18 @@
 
 import FishbowlList from '@/components/App/FishbowlList';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 
 const List = () => {
+  const router = useRouter();
+  const { selected } = router.query;
+
   return (
     <Layout>
-      <FishbowlList />
+      <FishbowlList selectedFishbowlParam={selected as string} />
       <ToastContainer className="toastify-custom" />
     </Layout>
   );

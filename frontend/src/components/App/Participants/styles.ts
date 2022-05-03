@@ -154,6 +154,7 @@ const ParticipantsToggle = styled(StatusBox)`
   border-top-left-radius: ${rems(8)};
   overflow: initial;
   padding-right: 0;
+  margin-left: ${space(1)};
 
   &:not(.active) {
     padding-left: 0;

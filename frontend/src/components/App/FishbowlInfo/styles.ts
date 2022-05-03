@@ -91,6 +91,8 @@ const Description = styled.div`
 
   .info-text {
     margin-bottom: ${space(2)};
+    max-height: 350px;
+    overflow-y: scroll;
   }
 
   .description__share-text {
