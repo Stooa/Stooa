@@ -12,12 +12,12 @@
     "copySuccess": "Enllaç copiat!",
     "detail": {
         "shareTitle": "Ara què? <br/>Comparteix el teu <i>fishbowl</i>!",
-        "shareSubtitle": "Deixa que la conversa flueixi! Copieu i compartiu l'enllaç d'aquest <i>Fishbowl</i> amb les persones que voleu unir a la sessió.",
+        "shareSubtitle": "Deixa que la conversa flueixi! Copia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vols afegir a la sessió.",
         "shareInSocials": "O comparteix en:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!",
         "cardMiniTitle": "Detalls del <i>fishbowl</i>",
         "editFishbowlDetails": "Editar detalls del <i>fishbowl</i>",
-        "mailInfo": "📩 Rebràs un correu amb tots els detalls del teu fishbowl programat."
+        "mailInfo": "📩 Rebràs un correu amb tots els detalls del <i>fishbowl</i> que has programat."
     },
     "months": {
         "01": "Gener",

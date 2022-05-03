@@ -12,12 +12,12 @@
     "copySuccess": "Link copied to clipboard!",
     "detail": {
         "shareTitle": "Now what? <br/>Share the fishbowl!",
-        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the session.",
+        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the conversation.",
         "shareInSocials": "Or share in:",
         "fishbowlCreatedSuccessfully": "Fishbowl created successfully!",
         "cardMiniTitle": "Fishbowl details",
         "editFishbowlDetails": "Edit fishbowl details",
-        "mailInfo": "📩 You'll receive an email with all the details of your scheduled fishbowl."
+        "mailInfo": "📩 You will receive an email with all the details of the fishbowl you have scheduled."
     },
     "months": {
         "01": "January",

@@ -37,12 +37,12 @@
     "preSubtitle": "Vérifiez les détails de votre nouveau fishbowl :",
     "detail": {
         "shareTitle": "Et maintenant ?<br/>Partagez le <i>fishbowl</i> !",
-        "shareSubtitle": "Laissez la conversation se dérouler ! Copiez et partagez le lien de cette <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.",
-        "shareInSocials": "Ou partagez en:",
+        "shareSubtitle": "Laissez couler la conversation ! Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.",
+        "shareInSocials": "Ou partagez sur:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !",
-        "cardMiniTitle": "<i>Fishbowl</i> détails",
-        "editFishbowlDetails": "Modifier les détails du <i>Fishbowl</i>",
-        "mailInfo": "📩 Vous recevrez un courrier électronique contenant tous les détails del <i>Fishbowl</i> prévu."
+        "cardMiniTitle": "Détails du <i>fishbowl</i>",
+        "editFishbowlDetails": "Modifier les détails du <i>fishbowl</i>",
+        "mailInfo": "📩 Vous recevrez un e-mail avec tous les détails du <i>fishbowl</i> que vous avez programmé."
     },
     "months": {
         "10": "octobre",
