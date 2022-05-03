@@ -23,7 +23,6 @@ import {
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
-  COLOR_PURPLE_500,
   COLOR_RED_500,
   FONT_BASE_SIZE
 } from '@/ui/settings';

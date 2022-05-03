@@ -10,7 +10,6 @@
 import React from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
-// import Header from '@/components/Web/FishbowlDetailHeader';
 import Header from '@/components/Web/Header';
 import Footer from '@/components/Web/Footer';
 import Decoration from '@/components/Web/Decoration';

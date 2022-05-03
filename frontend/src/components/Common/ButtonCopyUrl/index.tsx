@@ -24,6 +24,7 @@ interface Props {
   variant?: 'primary' | 'secondary' | 'text';
   size?: 'small' | 'medium' | 'large';
   withSvg?: boolean;
+  full?: boolean;
 }
 
 const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, size, variant, withSvg, ...props }) => {

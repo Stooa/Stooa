@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
@@ -48,7 +47,11 @@ import PlusSign from '@/ui/svg/plus-sign.svg';
 import BackArrow from '@/ui/svg/arrow-prev.svg';
 import { BREAKPOINTS } from '@/ui/settings';
 
-const FishbowlList = () => {
+interface Props {
+  selectedFishbowlParam?: string;
+}
+
+const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
   const { width: windowWidth } = useWindowSize();
@@ -58,6 +61,16 @@ const FishbowlList = () => {
   const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
   };
+
+  useEffect(() => {
+    if (fishbowls) {
+      fishbowls.forEach(fishbowl => {
+        if (fishbowl.slug === selectedFishbowlParam) {
+          setSelectedFishbowl(fishbowl);
+        }
+      });
+    }
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const params = new URLSearchParams([
     ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
@@ -118,7 +131,7 @@ const FishbowlList = () => {
               <Button
                 as="a"
                 variant="secondary"
-                className="schedule-fishbowl"
+                className="schedule-fishbowl never-full"
                 onClick={() => {
                   pushEventDataLayer({
                     category: 'Schedule Fishbowl',

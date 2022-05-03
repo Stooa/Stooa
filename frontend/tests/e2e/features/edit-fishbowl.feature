@@ -18,10 +18,10 @@ Feature: Edit fishbowl
         When navigates to "/fishbowl/list"
         And clicks on fishbowl card
         Then sees the fishbowl edit form full of information
-        When modifies the fishbowl "title" writing "Updated fishbowl"
-        And modifies the fishbowl "description" writing "Updated description"
-        And modifies the fishbowl "day" writing "15/02/2030"
-        And modifies the fishbowl "time" writing "10:00"
+        When writes "Updated fishbowl" in input "title"
+        And writes "Updated description" in input "description"
+        And writes "15/02/2030" in input "day"
+        And writes "10:00" in input "time"
         And modifies the fishbowl "hours" selecting "04:00"
         And modifies the fishbowl "timezone" selecting "Antarctica/Vostok"
         And modifies the fishbowl "language" selecting "ca"

@@ -9,18 +9,14 @@
 
 import styled from 'styled-components';
 
-import Alert from '@/ui/Alert';
 import { BREAKPOINTS } from '@/ui/settings';
 import { space, rems } from '@/ui/helpers';
 
 const Container = styled.div<{ centered?: boolean }>`
   margin: ${space(4)} 0 ${space(2)};
-  max-width: ${rems(BREAKPOINTS.reader)};
   text-align: ${({ centered }) => (centered ? 'center' : 'left')};
-
-  dl {
-    margin: 0 0 ${space(8)};
-  }
+  max-width: ${BREAKPOINTS.desktop}px;
+  width: 100%;
 `;
 
 const Description = styled.p`
@@ -29,14 +25,4 @@ const Description = styled.p`
   text-align: center;
 `;
 
-const Time = styled(Alert)`
-  display: inline-block;
-  margin: ${space(4)} 0;
-  padding: ${space(2)} ${space(4)};
-`;
-
-const TimeLeft = styled(Alert)`
-  margin: ${space(5)} 0 ${space(2)};
-`;
-
-export { Container, Description, Time, TimeLeft };
+export { Container, Description };
