@@ -19,6 +19,9 @@ import {
 } from '@/ui/Button';
 
 interface Props extends React.ComponentProps<'button'> {
+  /**
+   * Select one of the variants, it will change color and major style
+   */
   variant?: 'primary' | 'secondary' | 'text' | 'link' | 'subtleLink';
   size?: 'small' | 'medium' | 'large';
   as?: 'button' | 'a';
