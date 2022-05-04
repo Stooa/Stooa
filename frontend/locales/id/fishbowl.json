@@ -31,8 +31,8 @@
         "10": "Oktober"
     },
     "full": "Penuh",
-    "join": "Gabung",
-    "leave": "Tinggalkan",
+    "join": "Gabung pembicaraan",
+    "leave": "Tinggalkan pembicaraan",
     "unmute": "Tidak bisukan",
     "sameAsSystem": "Sama dengan sistem",
     "mute": "Bisukan",
