@@ -92,6 +92,7 @@ const conferenceRepository = () => {
 
     dispatchEvent(CONFERENCE_START, { status: true, myUserId: conference.myUserId() });
 
+    console.log('----> CONFERENCE is moderation supported', conference.isAVModerationSupported());
     console.log('[STOOA] Handle conference join');
   };
 
@@ -131,6 +132,22 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  const _handleModerationParticipantApproved = (participant, mediaType) => {
+    console.log('[STOOA] Moderation Participant Approved', participant, mediaType);
+  }
+
+  const _handleModerationApproved = (mediaType) => {
+    console.log('[STOOA] Moderation Approved', mediaType);
+  }
+
+  const _handleModerationChanged = (enabled, mediaType, actor) => {
+    console.log('[STOOA] Moderation Changed', enabled, mediaType, actor);
+  }
+
+  const _handleModerationRejected = mediaType => {
+    console.log('[STOOA] Moderation Rejected', mediaType);
+  }
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -147,7 +164,11 @@ const conferenceRepository = () => {
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
-          DOMINANT_SPEAKER_CHANGED
+          DOMINANT_SPEAKER_CHANGED,
+          AV_MODERATION_REJECTED,
+          AV_MODERATION_CHANGED,
+          AV_MODERATION_APPROVED,
+          AV_MODERATION_PARTICIPANT_APPROVED
         }
       }
     } = JitsiMeetJS;
@@ -168,6 +189,10 @@ const conferenceRepository = () => {
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
+    conference.on(AV_MODERATION_REJECTED, _handleModerationRejected);
+    conference.on(AV_MODERATION_CHANGED, _handleModerationChanged);
+    conference.on(AV_MODERATION_APPROVED, _handleModerationApproved);
+    conference.on(AV_MODERATION_PARTICIPANT_APPROVED, _handleModerationParticipantApproved);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -211,7 +236,7 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
+    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.DEBUG);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);
@@ -366,8 +391,14 @@ const conferenceRepository = () => {
     };
   };
 
+  const avModerationReject = (type, id) => {
+    console.log('entra aqui');
+    conference.avModerationReject(type, id);
+  };
+
   return {
     addTrack,
+    avModerationReject,
     getLocalVideoTrack,
     getLocalAudioTrack,
     getLocalParticipant,

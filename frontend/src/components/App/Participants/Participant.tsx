@@ -20,6 +20,8 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
+import Button from "@/components/Common/Button";
+import Conference from "@/jitsi/Conference";
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
@@ -27,6 +29,11 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
 }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
+
+  const reject = () => {
+    console.log('helooooooo');
+    Conference.avModerationReject('video', id);
+  };
 
   return (
     <li className={`participant body-sm`} data-id={id} title={name}>
@@ -48,6 +55,9 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
+      <Button className="never-full" as="a" data-testid="enter-fishbowl" onClick={reject}>
+        <span>test</span>
+      </Button>
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
