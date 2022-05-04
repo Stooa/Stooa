@@ -34,8 +34,8 @@
         "12": "Desembre"
     },
     "full": "Complet",
-    "join": "Unir-se",
-    "leave": "Sortir",
+    "join": "Unir-se a la conversa",
+    "leave": "Sortir de la conversa",
     "unmute": "Activar",
     "mute": "Silenciar",
     "sameAsSystem": "Mateix que el sistema",

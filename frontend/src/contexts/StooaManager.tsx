@@ -21,6 +21,7 @@ import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
+import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
 
@@ -74,16 +75,19 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
   useEventListener(NOTIFICATION, ({ detail: { type, seats, message } }) => {
     if (seats.includes(myUserId)) {
-      const delay = type === USER_MUST_LEAVE ? 8000 : 0;
+      const delay = type === USER_MUST_LEAVE ? 5000 : 0;
       const autoClose = type === USER_MUST_LEAVE ? 15000 : 0;
-      toast(t(message), {
-        icon: '⚠️',
-        toastId: 'must-leave',
-        type: 'warning',
-        position: 'bottom-center',
-        delay,
-        autoClose
-      });
+      setTimeout(() => {
+        if (seatsRepository.getIds().length === 5) {
+          toast(t(message), {
+            icon: '⚠️',
+            toastId: 'must-leave',
+            type: 'warning',
+            position: 'bottom-center',
+            autoClose
+          });
+        }
+      }, delay);
     }
   });
 
