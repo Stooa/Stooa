@@ -56,13 +56,7 @@ file that was distributed with this source code.
                 {{ macros.spaceRow(10, 2) }}
                 {{ macros.dl(
                     'emails.fishbowl_created_email.info_start_time'|trans({}, null, locale),
-                    fishbowlStartTime,
-                    emailConfig
-                ) }}
-                {{ macros.spaceRow(10, 2) }}
-                {{ macros.dl(
-                    'emails.fishbowl_created_email.info_duration'|trans({}, null, locale),
-                    fishbowlDuration ~ ' h',
+                    fishbowlStartTime ~ ' - ' ~ fishbowlFinishTime,
                     emailConfig
                 ) }}
                 {{ macros.spaceRow(10, 2) }}

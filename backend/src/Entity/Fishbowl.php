@@ -488,6 +488,13 @@ class Fishbowl implements \Stringable
         return $this->startDateTime->format('H:i');
     }
 
+    public function getFinishDateTimeHourFormatted(): string
+    {
+        MAssert::notNull($this->finishDateTime);
+
+        return $this->finishDateTime->format('H:i');
+    }
+
     public function isHappeningNow(): bool
     {
         $now = new \DateTimeImmutable();
