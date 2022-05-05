@@ -28,6 +28,7 @@ import useEventListener from '@/hooks/useEventListener';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
+  const [joinIsInActive, setJoinIsInactive] = useState(false);
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
   const seatsAvailable = useSeatsAvailable();
@@ -35,17 +36,27 @@ const ToolBar: React.FC = () => {
 
   const configButtonRef = useRef(null);
 
-  const joinSeat = (user: User) => {
+  const joinSeat = async(user: User) => {
+    setJoinIsInactive(true);
     if (!joined) {
-      setJoined(true);
-      join(user);
+      await join(user);
+
+      setTimeout(() => {
+        setJoined(true);
+        setJoinIsInactive(false);
+      }, 800)
     }
   };
 
-  const leaveSeat = () => {
+  const leaveSeat = async() => {
+    setJoinIsInactive(true);
     if (joined) {
-      setJoined(false);
-      leave();
+      await leave();
+
+      setTimeout(() => {
+        setJoined(false);
+        setJoinIsInactive(false);
+      }, 800)
     }
   };
 
@@ -124,7 +135,7 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     conferenceStatus === IConferenceStatus.INTRODUCTION ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
-    (!joined && !seatsAvailable);
+    (!joined && !seatsAvailable) || joinIsInActive;
 
   const isMuteDisabled =
     !conferenceReady ||
