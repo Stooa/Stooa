@@ -1,0 +1,31 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<tr>
+    <td align="center" width="100%">
+        {% include '/emails/components/email-linked-logo.html.twig' with {
+            src: emailConfig.socialImages.twitter.src,
+            href: emailConfig.socialImages.twitter.href,
+            alt: emailConfig.socialImages.twitter.alt,
+            width: emailConfig.socialImages.twitter.width,
+            height: emailConfig.socialImages.twitter.height,
+            style: 'margin-right: 8px;'
+            } %}
+        {% include '/emails/components/email-linked-logo.html.twig' with {
+            src: emailConfig.socialImages.linkedin.src,
+            href: emailConfig.socialImages.linkedin.href,
+            alt: emailConfig.socialImages.linkedin.alt,
+            width: emailConfig.socialImages.linkedin.width,
+            height: emailConfig.socialImages.linkedin.height
+            } %}
+    </td>
+</tr>
+

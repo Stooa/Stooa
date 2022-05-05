@@ -14,7 +14,7 @@ file that was distributed with this source code.
 
 {% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
 {% set fishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
-{% set editFishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbwol/list' ~ fishbowlSlug %}
+{% set editFishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/list?selected=' ~ fishbowlSlug %}
 
 {% block title %}
     {{ 'emails.fishbowl_created_email.title'|trans({}, null, locale) }}
@@ -30,6 +30,8 @@ file that was distributed with this source code.
     ) }}
     {{ macros.spaceRow(20) }}
     {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.spaceRow(20) }}
+    {% include '/emails/components/email-socials.html.twig' %}
     {{ macros.spaceRow(20) }}
     <tr>
         <td align="center">
