@@ -7,19 +7,28 @@
 {% set colorNeutro100 = '#fff' %}
 {% set colorNeutro200 = '#FAF8F5' %}
 {% set colorNeutro700 = '#90766F' %}
+{% set colorNeutro800 = '#442C16' %}
 {% set colorPurple500 = '#7D13A3' %}
 
 {% set emailConfig = {
     background: {
-        base: colorNeutro100,
-        content: colorNeutro100
+        base: colorNeutro200,
+        content: colorNeutro200
     },
     font: {
         color: colorNeutro700,
         family: fontFamilyDefault,
         regular: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 16px; font-weight: 400; color:' ~ colorNeutro700 ~ '; line-height: 1.5; text-align: left;',
-        title: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 61px; font-weight: 600; color:' ~ colorNeutro700 ~ '; line-height: 1.13; letter-spacing: -2px; text-align: left;',
-        note: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 12px; color:' ~ colorNeutro700 ~ '; line-height: 1.2; text-align: left;'
+        fishbowlLink: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 20px; font-weight: 400; color:' ~ colorPurple500 ~ '; line-height: 1.5; text-align: center;',
+        title: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 61px; font-weight: 700; color:' ~ colorNeutro700 ~ '; line-height: 1.13; letter-spacing: -2px; text-align: left;',
+        note: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 12px; color:' ~ colorNeutro700 ~ '; line-height: 1.2; text-align: left;',
+        fishbowlCardTitle: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 20px; font-weight: 700; color:' ~ colorNeutro800 ~ '; line-height: 1.5; text-align: center;',
+        fishbowlCardHours: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 20px; font-weight: 400; color:' ~ colorNeutro800 ~ '; line-height: 1.5; text-align: center;',
+
+    },
+    fishbowlLink: {
+        color: colorPurple500,
+        styles: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 20px; color:' ~ colorPurple500 ~ '; line-height: inherit; text-decoration: underline; text-align: center;'
     },
     link: {
         color: colorPurple500,
@@ -36,16 +45,16 @@
     header: {
         link: path,
         image: {
-            src: imagesPath ~ 'logo.png',
-            height: 24,
-            width: 56,
+            src: imagesPath ~ 'header.png',
+            height: 71.22,
+            width: 600,
             alt: ''
         }
     },
     footer: {
         image: {
-            src: imagesPath ~ 'footer.jpg',
-            height: 129,
+            src: imagesPath ~ 'footer.png',
+            height: 75,
             width: 600,
             alt: ''
         }
@@ -54,8 +63,8 @@
         background: colorPurple500,
         color: '#ffffff',
         padding: '15px 0px',
-        radius: '25px',
-        styles: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 16px; line-height: 1; font-weight: 500; padding: 15px 35px; text-align: center;'
+        radius: '30px',
+        styles: 'font-family: ' ~ fontFamilyDefault ~ '; font-size: 16px; line-height: 1; font-weight: 600; padding: 15px 35px; text-align: center;'
     }
 } %}
 {% set contentWidth = emailConfig.container.padding ? emailConfig.container.width - (emailConfig.container.padding * 2) : emailConfig.container.width %}
