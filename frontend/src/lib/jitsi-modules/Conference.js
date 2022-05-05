@@ -197,7 +197,12 @@ const conferenceRepository = () => {
     conference.addCommandListener('leave', _handleCommandLeave);
 
     await conference.join();
-  };
+    console.log('-----------> despues de join');
+    setTimeout(()=>{
+      // conference.enableAVModeration('audio');
+      // conference.enableAVModeration('video');
+    }, 5000)
+    };
 
   const _handleConnectionDisconnected = () => {
     const {
@@ -392,12 +397,16 @@ const conferenceRepository = () => {
   };
 
   const avModerationReject = (type, id) => {
-    console.log('entra aqui');
     conference.avModerationReject(type, id);
+  };
+
+  const avModerationApprove = (type, id) => {
+    conference.avModerationApprove(type, id);
   };
 
   return {
     addTrack,
+    avModerationApprove,
     avModerationReject,
     getLocalVideoTrack,
     getLocalAudioTrack,

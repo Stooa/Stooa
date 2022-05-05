@@ -31,8 +31,11 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
   const reject = () => {
-    console.log('helooooooo');
     Conference.avModerationReject('video', id);
+  };
+
+  const approve = () => {
+    Conference.avModerationApprove('video', id);
   };
 
   return (
@@ -56,7 +59,10 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
         )}
       </div>
       <Button className="never-full" as="a" data-testid="enter-fishbowl" onClick={reject}>
-        <span>test</span>
+        <span>Reject</span>
+      </Button>
+      <Button className="never-full" as="a" data-testid="enter-fishbowl" onClick={approve}>
+        <span>Approve</span>
       </Button>
       <div className="social">
         {twitter ? (
