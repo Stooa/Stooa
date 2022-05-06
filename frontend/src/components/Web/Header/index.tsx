@@ -76,7 +76,13 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
               )}
               {pathname !== ROUTE_REGISTER && (
                 <RedirectLink href={ROUTE_REGISTER} passHref>
-                  <Button size="medium" variant="secondary" as="a" data-testid="register">
+                  <Button
+                    className="never-full"
+                    size="medium"
+                    variant="secondary"
+                    as="a"
+                    data-testid="register"
+                  >
                     <span>{t('register')}</span>
                   </Button>
                 </RedirectLink>
