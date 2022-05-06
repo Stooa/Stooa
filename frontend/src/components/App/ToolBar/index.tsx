@@ -36,7 +36,7 @@ const ToolBar: React.FC = () => {
 
   const configButtonRef = useRef(null);
 
-  const joinSeat = async(user: User) => {
+  const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
     if (!joined) {
       await join(user);
@@ -44,11 +44,11 @@ const ToolBar: React.FC = () => {
       setTimeout(() => {
         setJoined(true);
         setJoinIsInactive(false);
-      }, 800)
+      }, 800);
     }
   };
 
-  const leaveSeat = async() => {
+  const leaveSeat = async () => {
     setJoinIsInactive(true);
     if (joined) {
       await leave();
@@ -56,7 +56,7 @@ const ToolBar: React.FC = () => {
       setTimeout(() => {
         setJoined(false);
         setJoinIsInactive(false);
-      }, 800)
+      }, 800);
     }
   };
 
@@ -135,7 +135,8 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     conferenceStatus === IConferenceStatus.INTRODUCTION ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
-    (!joined && !seatsAvailable) || joinIsInActive;
+    (!joined && !seatsAvailable) ||
+    joinIsInActive;
 
   const isMuteDisabled =
     !conferenceReady ||
