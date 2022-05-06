@@ -44,7 +44,7 @@ const ToolBar: React.FC = () => {
       setTimeout(() => {
         setJoined(true);
         setJoinIsInactive(false);
-      }, 800);
+      }, 1000);
     }
   };
 
@@ -56,7 +56,7 @@ const ToolBar: React.FC = () => {
       setTimeout(() => {
         setJoined(false);
         setJoinIsInactive(false);
-      }, 800);
+      }, 1000);
     }
   };
 
