@@ -28,7 +28,7 @@ import useEventListener from '@/hooks/useEventListener';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
-  const [joinIsInActive, setJoinIsInactive] = useState(false);
+  const [joinIsInactive, setJoinIsInactive] = useState(false);
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
   const seatsAvailable = useSeatsAvailable();
@@ -44,7 +44,7 @@ const ToolBar: React.FC = () => {
       setTimeout(() => {
         setJoined(true);
         setJoinIsInactive(false);
-      }, 800);
+      }, 500);
     }
   };
 
@@ -56,7 +56,7 @@ const ToolBar: React.FC = () => {
       setTimeout(() => {
         setJoined(false);
         setJoinIsInactive(false);
-      }, 800);
+      }, 500);
     }
   };
 
@@ -136,7 +136,7 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.INTRODUCTION ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
     (!joined && !seatsAvailable) ||
-    joinIsInActive;
+    joinIsInactive;
 
   const isMuteDisabled =
     !conferenceReady ||
