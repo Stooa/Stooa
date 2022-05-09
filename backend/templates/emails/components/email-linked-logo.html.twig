@@ -1,0 +1,27 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% set src = src|default('') %}
+{% set alt = alt|default('') %}
+{% set href = href|default('') %}
+{% set width = width|default('') %}
+{% set height = height|default('') %}
+{% set style = style|default('') %}
+
+
+{% block content %}
+    <tr >
+        <a href="{{ href }}" style='text-decoration: none;'>
+            <img src="{{ src }}" width="{{ width }}"  height="{{ height }}" border="0" alt="{{ alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; display: inline-block; {{ emailConfig.font.regular }} {{ style }}">
+        </a>
+    </tr>
+{% endblock %}
+
