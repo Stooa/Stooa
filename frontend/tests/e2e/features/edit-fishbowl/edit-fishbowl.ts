@@ -34,16 +34,6 @@ Then('sees the fishbowl edit form full of information', () => {
 });
 
 When('saves the changes', () => {
-  cy.get('form').submit();
-
-  cy.wait('@gqlUpdateFishbowlMutation');
-});
-
-Then('sees success message', () => {
-  cy.get('span.success-message-bottom').should('exist');
-});
-
-Given('an updated fishbowl', () => {
   const mergedValues = {
     data: {
       updateFishbowl: {
@@ -67,6 +57,15 @@ Given('an updated fishbowl', () => {
   cy.intercept('POST', 'https://localhost:8443/graphql', mergedValues).as(
     'gqlUpdateFishbowlMutation'
   );
+
+  cy.get('form').submit();
+
+});
+
+Then('sees the success message', () => {
+  cy.wait('@gqlUpdateFishbowlMutation');
+
+  cy.get('span.success-message-bottom').should('exist');
 });
 
 Then('sees the fishbowl list updated', () => {
