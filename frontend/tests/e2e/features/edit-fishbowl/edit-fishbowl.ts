@@ -26,7 +26,6 @@ When('clicks on fishbowl card that is about to start', () => {
 });
 
 Then('sees the fishbowl edit form full of information', () => {
-  cy.wait(1000);
   cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
   cy.get('[data-testid=edit-form-description]').should('have.value', 'Fishbowl description');
   cy.get('input[name="day"]').should('have.value', '11/02/2030');
@@ -35,15 +34,6 @@ Then('sees the fishbowl edit form full of information', () => {
 });
 
 When('saves the changes', () => {
-  cy.get('form').submit();
-});
-
-Then('sees success message', () => {
-  cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
-  cy.screenshot();
-});
-
-Given('an updated fishbowl', () => {
   const mergedValues = {
     data: {
       updateFishbowl: {
@@ -67,11 +57,17 @@ Given('an updated fishbowl', () => {
   cy.intercept('POST', 'https://localhost:8443/graphql', mergedValues).as(
     'gqlUpdateFishbowlMutation'
   );
+
+  cy.get('form').submit();
+});
+
+Then('sees the success message', () => {
+  cy.wait('@gqlUpdateFishbowlMutation');
+
+  cy.get('span.success-message-bottom').should('exist');
 });
 
 Then('sees the fishbowl list updated', () => {
-  cy.wait('@gqlUpdateFishbowlMutation');
-
   const startDateTime = new Date(modifiedValues.startDateTimeTz);
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
@@ -99,6 +95,5 @@ Then('sees a placeholder with Enter Fishbowl button', () => {
 });
 
 Then('clicks on placeholders Enter Fishbowl link', () => {
-  cy.wait(2000);
   cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
 });
