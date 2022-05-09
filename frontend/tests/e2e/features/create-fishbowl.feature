@@ -6,11 +6,8 @@ Feature: Create fishbowl
         Given a logged user
         And a created Fishbowl
         And a Fishbowl by slug
-        When navigates to "/"
-        And clicks on "Schedule a fishbowl" link
-        Then gets redirect to "/fishbowl/create"
-        And sees the create fishbowl form
-        When writes "Updated fishbowl" in input "title"
+        When navigates to "/fishbowl/create"
+        And writes "Updated fishbowl" in input "title"
         And writes "Updated description" in input "description"
         And writes "15/02/2030" in input "day"
         And writes "10:00" in input "time"
@@ -18,6 +15,6 @@ Feature: Create fishbowl
         And modifies the fishbowl "timezone" selecting "Antarctica/Vostok"
         And modifies the fishbowl "language" selecting "ca"
         And modifies the fishbowl "hasIntroduction" to true
-        Then clicks submit button
-        And sees the fishbowl created
+        And clicks submit button
+        Then sees the fishbowl created
         And sees the fishbowl by query
