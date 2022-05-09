@@ -59,7 +59,6 @@ When('saves the changes', () => {
   );
 
   cy.get('form').submit();
-
 });
 
 Then('sees the success message', () => {
