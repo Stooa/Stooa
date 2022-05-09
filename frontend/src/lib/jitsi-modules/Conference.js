@@ -404,10 +404,15 @@ const conferenceRepository = () => {
     conference.avModerationApprove(type, id);
   };
 
+  const muteParticipant = (type, id) => {
+    conference.muteParticipant(id, type);
+  };
+
   return {
     addTrack,
     avModerationApprove,
     avModerationReject,
+    muteParticipant,
     getLocalVideoTrack,
     getLocalAudioTrack,
     getLocalParticipant,
