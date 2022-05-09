@@ -15,20 +15,16 @@ Feature: Fishbowl List
         And clicks on "Fishbowl list" link
         Then sees the fishbowl list page with one fishbowl
 
-    Scenario: Logged users can access to fishbowl list
+    Scenario: Logged users can have multiple fishbowls on its list
         Given a logged user
         And a list of multiple fishbowls
-        When navigates to "/"
-        And clicks on its profile
-        And clicks on "Fishbowl list" link
+        When navigates to "/fishbowl/list"
         Then sees the fishbowl list page with multiple fishbowls
 
     Scenario: Logged user has no fishbowls in the list
         Given a logged user
         And a list of empty fishbowls
-        When navigates to "/"
-        And clicks on its profile
-        And clicks on "Fishbowl list" link
+        When navigates to "/fishbowl/list"
         Then sees the empty fishbowl list page
 
     Scenario: Logged user enters to a fishbowl from the list
