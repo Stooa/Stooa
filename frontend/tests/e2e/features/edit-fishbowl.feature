@@ -28,7 +28,7 @@ Feature: Edit fishbowl
         And modifies the fishbowl "hasIntroduction" to true
         Given an updated fishbowl
         Then saves the changes
-        And sees success messages
+        And sees success message
         And sees the fishbowl list updated
 
     Scenario: Logged user sees placeholder when no fishbowl selected

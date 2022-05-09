@@ -103,13 +103,6 @@ Then('sees the register form', () => {
   cy.screenshot();
 });
 
-Then('sees success messages', () => {
-  cy.get('span.success-message-bottom').should('exist');
-
-  cy.wait(5500);
-  cy.get('span.success-message-bottom').should('not.exist');
-});
-
 Then('sees the create fishbowl form', () => {
   cy.findByRole('heading', { name: 'Create a free fishbowl' });
 
