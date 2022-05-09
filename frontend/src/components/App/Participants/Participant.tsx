@@ -42,6 +42,11 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
     Conference.muteParticipant('audio', id);
   };
 
+  const kick = () => {
+    Conference.kickParticipant(id);
+  };
+
+
   return (
     <li className={`participant body-sm`} data-id={id} title={name}>
       <div className="info">
@@ -70,6 +75,9 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
       </Button>
       <Button className="never-full" as="a" data-testid="enter-fishbowl" onClick={mute}>
         <span>Mute</span>
+      </Button>
+      <Button className="never-full" as="a" data-testid="enter-fishbowl" onClick={kick}>
+        <span>Kick</span>
       </Button>
       <div className="social">
         {twitter ? (

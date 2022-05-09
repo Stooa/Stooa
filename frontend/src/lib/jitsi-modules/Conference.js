@@ -408,6 +408,10 @@ const conferenceRepository = () => {
     conference.muteParticipant(id, type);
   };
 
+  const kickParticipant = (id) => {
+    conference.kickParticipant(id, 'reason for being kicked');
+  };
+
   return {
     addTrack,
     avModerationApprove,
@@ -421,6 +425,7 @@ const conferenceRepository = () => {
     getParticipantCount,
     getParticipantNameById,
     getParticipants,
+    kickParticipant,
     initializeJitsi,
     initializeConnection,
     leave,
