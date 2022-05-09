@@ -16,9 +16,9 @@ file that was distributed with this source code.
 {% block title %}{{ 'emails.welcome_email.subject'|trans({}, null, locale) }}{% endblock %}
 
 {% block body %}
-    {{ macros.title('emails.welcome_email.title'|trans({}, null, locale), emailConfig) }}
+    {{ macros.title('emails.welcome_email.title'|trans({}, null, locale), emailConfig, 'text-align: center;') }}
     {{ macros.spaceRow(20) }}
-    {{ macros.text('emails.welcome_email.subtitle'|trans({}, null, locale), emailConfig) }}
+    {{ macros.text('emails.welcome_email.subtitle'|trans({}, null, locale), emailConfig, 'text-align: center;') }}
     {{ macros.spaceRow(45) }}
     <tr>
         <td align="center">
@@ -38,6 +38,6 @@ file that was distributed with this source code.
         </td>
     </tr>
     {{ macros.spaceRow(55) }}
-    {{ macros.note('emails.welcome_email.delete'|trans({'%styles%': emailConfig.link.styles}, null, locale), emailConfig) }}
+    {{ macros.note('emails.welcome_email.delete'|trans({'%styles%': emailConfig.link.styles}, null, locale), emailConfig, 'text-align: center;') }}
     {{ macros.spaceRow(25) }}
 {% endblock %}

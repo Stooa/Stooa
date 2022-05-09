@@ -23,8 +23,11 @@ emails:
         information_help_text: Si esta no es tu cuenta, puedes borrar tu email de ella. <br>Por favor, no contestes a este email con tu contraseña. Nosotros nunca te pediremos tu contraseña y te recomendamos que no la compartas con nadie.
     fishbowl_created_email:
         subject: ¡Hola %name%! Has creado un nuevo fishbowl
-        title: ¡Bien hecho!
-        description: 'Revisa los detalles de tu nuevo fishbowl:'
+        title: ¿Ahora qué?<br>¡Comparte el fishbowl!
+        description: "Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.👇"
+        social_share: "o comparte en:"
+        edit_details: "Recuerda que puedes <a style='text-decoration: underline;' href='%edit_link%'>editar los detalles del fishbowl</a> hasta una hora antes de que empiece."
+        cta: Acceder al fishbowl
         info_title: Título
         info_duration: Duración
         info_description: Descripción
