@@ -12,7 +12,12 @@ import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
 import { FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL } from '@/graphql/Fishbowl';
-import { IConferenceStatus } from '@/jitsi/Status';
+import {
+  CONFERENCE_FINISHED,
+  CONFERENCE_INTRODUCTION,
+  CONFERENCE_RUNNING,
+  IConferenceStatus
+} from '@/jitsi/Status';
 
 import { useStateValue } from '@/contexts/AppContext';
 import { useDevices } from '@/contexts/DevicesContext';
@@ -127,13 +132,13 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   useEffect(() => {
-    setRunning(conferenceStatus === IConferenceStatus.RUNNING);
+    setRunning(conferenceStatus === CONFERENCE_RUNNING);
 
-    if (conferenceStatus === IConferenceStatus.RUNNING) {
+    if (conferenceStatus === CONFERENCE_RUNNING) {
       setLoading(false);
     }
 
-    if (conferenceStatus === IConferenceStatus.INTRODUCTION) {
+    if (conferenceStatus === CONFERENCE_INTRODUCTION) {
       setIntroduction(true);
       setShowIntroductionModal(false);
       setLoading(false);
@@ -141,7 +146,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   }, [conferenceStatus]);
 
   return (
-    conferenceStatus !== IConferenceStatus.FINISHED && (
+    conferenceStatus !== CONFERENCE_FINISHED && (
       <div className="actions">
         {showIntroductionModal && (
           <ModalStartIntroduction

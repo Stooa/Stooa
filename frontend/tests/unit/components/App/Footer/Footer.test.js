@@ -11,7 +11,7 @@ import Footer from '@/components/App/Footer';
 import { render } from '@testing-library/react';
 import { useStooa } from '@/contexts/StooaManager';
 import { useRouter } from 'next/router';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { CONFERENCE_NOT_STARTED, CONFERENCE_RUNNING } from '@/jitsi/Status';
 import preloadAll from 'jest-next-dynamic';
 
 jest.mock('next/dynamic', () => () => {
@@ -26,7 +26,9 @@ jest.mock('@/components/App/IntroNotification', () => () => (
 ));
 
 jest.mock('@/contexts/StooaManager');
-jest.mock('next/router');
+jest.mock('next/router', () => ({
+  useRouter: jest.fn()
+}));
 
 beforeAll(async () => {
   await preloadAll();
@@ -37,7 +39,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -51,7 +53,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: true,
       isModerator: true,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -65,7 +67,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
-      conferenceStatus: IConferenceStatus.RUNNING
+      conferenceStatus: CONFERENCE_RUNNING
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -79,7 +81,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: true,
       isModerator: false,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 

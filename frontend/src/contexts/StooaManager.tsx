@@ -26,7 +26,16 @@ import {
   unloadKickedUser
 } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
-import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
+import {
+  CONFERENCE_FINISHED,
+  CONFERENCE_INTRODUCTION,
+  CONFERENCE_RUNNING,
+  ITimeStatus,
+  TIME_DEFAULT,
+  TIME_ENDING,
+  TIME_LAST_MINUTE,
+  TIME_UP
+} from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
@@ -42,7 +51,7 @@ const ONE_MINUTE = 1;
 const StooaContext = createContext<StooaContextValues>(undefined);
 
 const StooaProvider = ({ data, isModerator, children }) => {
-  const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
+  const [timeStatus, setTimeStatus] = useState<ITimeStatus>(TIME_DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
   const [conferenceReady, setConferenceReady] = useState(false);
@@ -144,9 +153,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const checkIsTimeUp = () => {
     if (isTimeUp(data.endDateTimeTz)) {
       clearInterval(timeUpInterval.current);
-      setTimeStatus(ITimeStatus.TIME_UP);
+      setTimeStatus(TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
+      if (conferenceStatus === CONFERENCE_RUNNING && !lastMinuteToastSent) {
         const message = t('notification.oneMinuteLeft');
         toast(message, {
           icon: '⏳',
@@ -158,9 +167,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
         });
         setLastMinuteToastSent(true);
       }
-      setTimeStatus(ITimeStatus.LAST_MINUTE);
+      setTimeStatus(TIME_LAST_MINUTE);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING && !tenMinuteToastSent) {
+      if (conferenceStatus === CONFERENCE_RUNNING && !tenMinuteToastSent) {
         const message = t('notification.tenMinutesLeft');
         toast(message, {
           icon: '⏳',
@@ -172,12 +181,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
         });
         seTenMinuteToastSent(true);
       }
-      setTimeStatus(ITimeStatus.ENDING);
+      setTimeStatus(TIME_ENDING);
     }
   };
 
   const isConferenceIntroducing = (): boolean => {
-    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+    return data.hasIntroduction && conferenceStatus === CONFERENCE_INTRODUCTION;
   };
 
   useEffect(() => {
@@ -186,7 +195,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
         (!conferenceReady &&
-          (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
+          (isConferenceIntroducing() || conferenceStatus === CONFERENCE_RUNNING)))
     ) {
       setTimeout(() => {
         initializeConnection(fid, isModerator);
@@ -217,7 +226,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   }, []);
 
   useEffect(() => {
-    if (conferenceStatus === IConferenceStatus.FINISHED) {
+    if (conferenceStatus === CONFERENCE_FINISHED) {
       unload().then(function () {
         const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
         router.push(route, route, { locale: lang });
@@ -242,7 +251,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
   }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
+  const onIntroduction = conferenceStatus === CONFERENCE_INTRODUCTION && !isModerator;
 
   return (
     <StooaContext.Provider

@@ -35,8 +35,8 @@ module.exports = {
     '/fishbowl/thankyou/[fid]': ['fishbowl', 'form', 'home']
   },
   loadLocaleFrom: async (lang, ns) => {
-    const locales = await import(`./locales/${lang}/${ns}.json`).then((m) => m.default);
-    const defaultLocales = await import(`./locales/${DEFAULT_LOCALE}/${ns}.json`).then((m) => m.default);
+    const locales = await require(`./locales/${lang}/${ns}.json`);
+    const defaultLocales = await require(`./locales/${DEFAULT_LOCALE}/${ns}.json`);
     return { ...defaultLocales, ...locales };
   }
 };

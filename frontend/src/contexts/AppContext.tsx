@@ -8,7 +8,7 @@
  */
 
 import React, { createContext, useContext, useReducer } from 'react';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { CONFERENCE_NOT_STARTED, IConferenceStatus } from '@/jitsi/Status';
 
 interface State {
   fishbowlReady: boolean;
@@ -44,7 +44,7 @@ const initialState: State = {
   fishbowlStarted: false,
   isGuest: false,
   prejoin: true,
-  conferenceStatus: IConferenceStatus?.NOT_STARTED
+  conferenceStatus: CONFERENCE_NOT_STARTED
 };
 
 const StateContext = createContext(undefined);

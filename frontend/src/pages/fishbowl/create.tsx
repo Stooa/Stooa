@@ -14,7 +14,7 @@ import Layout from '@/layouts/Default';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 import { useStateValue } from '@/contexts/AppContext';
 
-import { IConferenceStatus } from '@/jitsi/Status';
+import { CONFERENCE_NOT_STARTED } from '@/jitsi/Status';
 
 const Create = () => {
   const { t } = useTranslation('fishbowl');
@@ -27,7 +27,7 @@ const Create = () => {
       fishbowlStarted: false,
       isGuest: false,
       prejoin: true,
-      conferenceStatus: IConferenceStatus?.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
