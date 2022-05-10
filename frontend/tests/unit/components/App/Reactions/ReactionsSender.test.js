@@ -17,6 +17,8 @@ const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
 useRouter.mockImplementation(() => ({
   query: ''
+// jest.mock('next/router', () => ({
+//   useRouter: jest.fn()
 }));
 
 describe('Reactions sender component', () => {

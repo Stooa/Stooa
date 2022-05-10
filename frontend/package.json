@@ -9,8 +9,8 @@
     "start-e2e": "NODE_ENV=e2e next start",
     "build-start": "next build && next start",
     "design-tokens": "design-tokens",
-    "test": "jest --env=jsdom",
-    "test-watch": "jest --watch --env=jsdom",
+    "test": "jest",
+    "test-watch": "jest --watch",
     "prettify": "prettier --write src tests",
     "lint:js": "eslint src tests",
     "lint:fix": "eslint src tests --fix",
@@ -72,8 +72,6 @@
     "@types/js-cookie": "3.0.2",
     "@types/react-slick": "0.23.10",
     "@typescript-eslint/eslint-plugin": "5.48.0",
-    "babel-plugin-istanbul": "6.1.1",
-    "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.7.0",
     "cypress-cucumber-preprocessor": "4.3.1",
     "eslint": "8.31.0",
@@ -88,6 +86,7 @@
     "jest-next-dynamic": "1.0.1",
     "jest-transformer-svg": "2.0.0",
     "nyc": "15.1.0",
-    "prettier": "2.8.2"
+    "prettier": "2.8.2",
+    "swc-plugin-coverage-instrument": "0.0.7"
   }
 }

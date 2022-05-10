@@ -9,7 +9,7 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import { IConferenceStatus } from '@/jitsi/Status';
+import { CONFERENCE_INTRODUCTION, CONFERENCE_NOT_STARTED } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
 import SeatsStyled, { Free, Seat, VideoWrapper } from '@/components/App/Seats/styles';
@@ -23,8 +23,8 @@ const Seats = () => {
   const { t } = useTranslation('app');
   const [{ conferenceStatus }] = useStateValue();
 
-  const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
-  const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
+  const isConferenceInIntro = conferenceStatus === CONFERENCE_INTRODUCTION;
+  const isConferenceNotStarted = conferenceStatus === CONFERENCE_NOT_STARTED;
 
   return (
     <SeatsStyled>

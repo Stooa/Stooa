@@ -9,7 +9,7 @@
 
 import useTranslation from 'next-translate/useTranslation';
 import React, { useEffect } from 'react';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { CONFERENCE_NOT_STARTED } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import Layout from '@/layouts/Default';
 import { Content } from '@/layouts/KickedUser/styles';
@@ -26,7 +26,7 @@ const UserConductViolationPage = () => {
       fishbowlStarted: true,
       isGuest: false,
       prejoin: true,
-      conferenceStatus: IConferenceStatus?.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
   }, []);
 

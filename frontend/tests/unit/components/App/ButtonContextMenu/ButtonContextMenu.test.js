@@ -13,7 +13,7 @@ import { useStateValue } from '@/contexts/AppContext';
 import { useStooa } from '@/contexts/StooaManager';
 import conferenceRepository from '@/jitsi/Conference';
 import { mapObjectArray } from '../../../test-utils';
-import { IConferenceStatus } from '@/jitsi/Status';
+import { CONFERENCE_RUNNING } from '@/jitsi/Status';
 import { PARTICIPANT_TEST_CASES, SEAT_TEST_CASES } from './cases';
 
 jest.mock('@/contexts/StooaManager');
@@ -79,8 +79,6 @@ describe('Tests with seat number', () => {
 
       jest.spyOn(conferenceRepository, 'getParticipantById').mockImplementation(() => '123456');
 
-      jest.spyOn(React, 'useState').mockImplementation(() => participant.id);
-
       const seatsValues = ['123456', null, null, null, null];
       const changeSeatEvent = new CustomEvent('seats:change', { detail: { seatsValues } });
 
@@ -106,7 +104,7 @@ describe('User clicks on button and show available context menu options', () => 
     useStooa.mockReturnValue({ isModerator: true, conferenceReady: true });
 
     useStateValue.mockReturnValue([
-      { fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING },
+      { fishbowlReady: true, conferenceStatus: CONFERENCE_RUNNING },
       () => jest.fn()
     ]);
 
@@ -134,7 +132,7 @@ describe('User clicks on button and show available context menu options', () => 
     useStooa.mockReturnValue({ isModerator: true, conferenceReady: true });
 
     useStateValue.mockReturnValue([
-      { fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING },
+      { fishbowlReady: true, conferenceStatus: CONFERENCE_RUNNING },
       () => jest.fn()
     ]);
 
@@ -173,7 +171,7 @@ describe('User clicks on button and show available context menu options', () => 
     });
 
     useStateValue.mockReturnValue([
-      { fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING },
+      { fishbowlReady: true, conferenceStatus: CONFERENCE_RUNNING },
       () => jest.fn()
     ]);
 

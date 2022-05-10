@@ -9,7 +9,13 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
+import {
+  CONFERENCE_NOT_STARTED,
+  CONFERENCE_RUNNING,
+  IConferenceStatus,
+  ITimeStatus,
+  TIME_LAST_MINUTE
+} from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
 import { Fishbowl } from '@/types/api-platform';
 import LoadingDots from '@/components/Common/LoadingDots';
@@ -66,7 +72,7 @@ export const Counter = ({
   };
 
   useEffect(() => {
-    if (conferenceStatus === IConferenceStatus.RUNNING) {
+    if (conferenceStatus === CONFERENCE_RUNNING) {
       setCompletedTime(false);
     }
 

@@ -30,6 +30,8 @@ const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
 useRouter.mockImplementation(() => ({
   query: { fid: '12345' }
+// jest.mock('next/router', () => ({
+//   useRouter: jest.fn()
 }));
 
 beforeAll(async () => {
@@ -41,7 +43,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -55,7 +57,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: true,
       isModerator: true,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -69,7 +71,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
-      conferenceStatus: IConferenceStatus.RUNNING
+      conferenceStatus: CONFERENCE_RUNNING
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -83,7 +85,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: true,
       isModerator: false,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
+      conferenceStatus: CONFERENCE_NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
