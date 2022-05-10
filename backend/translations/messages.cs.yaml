@@ -18,6 +18,9 @@ emails:
         subject: Ahoj %name%! Vytvořili jste nové akvárium
         title: Výborně!
         description: 'Podívejte se na detaily svého nového akvária:'
+        social_share: "or share in:"
+        edit_details: "Remember that you can <a style='text-decoration: underline;' href='%edit_link%'>edit the event details</a> up until one hour before it starts."
+        cta: "Go to the event"
         info_title: Nadpis
         info_duration: Doba trvání
         info_description: Popis

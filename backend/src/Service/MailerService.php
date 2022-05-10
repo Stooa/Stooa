@@ -103,6 +103,7 @@ class MailerService
                     'fishbowlDescription' => $fishbowl->getDescription(),
                     'fishbowlStartDate' => $fishbowl->getStartDateTimeFormatted(),
                     'fishbowlStartTime' => $fishbowl->getStartDateTimeHourFormatted(),
+                    'fishbowlFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
                     'fishbowlDuration' => $fishbowl->getDurationFormatted(),
                     'fishbowlSlug' => $fishbowl->getSlug(),
                     'locale' => $locale,
