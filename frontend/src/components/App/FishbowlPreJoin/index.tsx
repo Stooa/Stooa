@@ -38,15 +38,16 @@ import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 
 const FishbowlPreJoin: React.FC = () => {
-  const localTracks = useRef([]);
-  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(
-    userRepository.getUserVideoMuted()
-  );
-  const router = useRouter();
-  const { t, lang } = useTranslation('common');
+  const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
 
-  const { videoDevice } = useDevices();
+  const localTracks = useRef([]);
+  const [showMutedPlaceholder, setShowMutedPlaceholder] = useState<boolean>(
+    userRepository.getUserVideoMuted()
+  );
+  const [showPermissionsPlaceholder, setShowPermissionsPlaceholder] = useState(!permissions.video);
+  const router = useRouter();
+  const { t, lang } = useTranslation('common');
 
   const configButtonRef = useRef(null);
 
@@ -71,7 +72,7 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   const handleVideo = () => {
-    setShowPlaceholder(!showPlaceholder);
+    setShowMutedPlaceholder(!showMutedPlaceholder);
   };
 
   const handleCancel = () => {
@@ -128,7 +129,8 @@ const FishbowlPreJoin: React.FC = () => {
         <Container>
           <Devices>
             <VideoContainer>
-              {showPlaceholder && <VideoPlaceholder />}
+              {showMutedPlaceholder && <VideoPlaceholder />}
+              {showPermissionsPlaceholder && <VideoPlaceholder />}
               <video id="prejoin" autoPlay muted className="video" playsInline />
             </VideoContainer>
             <DevicesToolbar>

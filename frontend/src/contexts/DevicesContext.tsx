@@ -31,6 +31,17 @@ const DevicesProvider = ({ children }) => {
   const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo | null>(
     userRepository.getUserVideoInput()
   );
+  const [permissions, setPermissions] = useState({
+    audio: false,
+    video: false
+  });
+
+  const _getPermissions = async () => {
+    return {
+      audio: await devicesRepository.isDevicePermissionGranted('audio'),
+      video: await devicesRepository.isDevicePermissionGranted('video')
+    };
+  };
 
   const _findDevice = (
     deviceId: string,
@@ -132,6 +143,16 @@ const DevicesProvider = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    _getPermissions()
+      .then(browserPermissions => {
+        setPermissions(browserPermissions);
+      })
+      .catch(err => {
+        console.error('[STOOA] Error getting permissions:', err);
+      });
+  }, []);
+
   return (
     <DevicesContext.Provider
       value={{
@@ -142,7 +163,8 @@ const DevicesProvider = ({ children }) => {
         audioOutputDevice,
         audioInputDevice,
         videoDevice,
-        devices
+        devices,
+        permissions
       }}
     >
       {children}
