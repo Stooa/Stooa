@@ -36,6 +36,8 @@ import {
 import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
+import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
+import Image from 'next/image';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
@@ -130,7 +132,22 @@ const FishbowlPreJoin: React.FC = () => {
           <Devices>
             <VideoContainer>
               {showMutedPlaceholder && <VideoPlaceholder />}
-              {showPermissionsPlaceholder && <VideoPlaceholder />}
+              {showPermissionsPlaceholder && (
+                <VideoPermissionsPlaceholder>
+                  <Image
+                    src="/img/permissions/prejoin.png"
+                    alt="Permissions illustration, a funny one"
+                    width={178.26 / 1.2}
+                    height={172.64 / 1.2}
+                    layout="intrinsic"
+                  />
+                  <p>
+                    If you want to participate actively, Stooa needs{' '}
+                    <span className="medium">permissions to access your camera and microphone</span>{' '}
+                    so others can hear and see you.
+                  </p>{' '}
+                </VideoPermissionsPlaceholder>
+              )}
               <video id="prejoin" autoPlay muted className="video" playsInline />
             </VideoContainer>
             <DevicesToolbar>

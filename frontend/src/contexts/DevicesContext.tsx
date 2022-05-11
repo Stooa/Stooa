@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState, useEffect, useMemo } from 'react';
 
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
@@ -133,6 +133,15 @@ const DevicesProvider = ({ children }) => {
       userRepository.setUserVideoInput(devices.videoDevices[0]);
       setVideoDevice(devices.videoDevices[0]);
     }
+
+    console.log('DEVICES CHANGED! Saura');
+    _getPermissions()
+      .then(browserPermissions => {
+        setPermissions(browserPermissions);
+      })
+      .catch(err => {
+        console.error('[STOOA] Error getting permissions:', err);
+      });
   }, [devices]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -143,15 +152,15 @@ const DevicesProvider = ({ children }) => {
     };
   }, []);
 
-  useEffect(() => {
-    _getPermissions()
-      .then(browserPermissions => {
-        setPermissions(browserPermissions);
-      })
-      .catch(err => {
-        console.error('[STOOA] Error getting permissions:', err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   _getPermissions()
+  //     .then(browserPermissions => {
+  //       setPermissions(browserPermissions);
+  //     })
+  //     .catch(err => {
+  //       console.error('[STOOA] Error getting permissions:', err);
+  //     });
+  // }, []);
 
   return (
     <DevicesContext.Provider
