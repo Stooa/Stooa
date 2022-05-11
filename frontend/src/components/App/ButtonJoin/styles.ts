@@ -21,23 +21,31 @@ import {
   COLOR_RED_400,
   COLOR_RED_500
 } from '@/ui/settings';
-import { rems } from '@/ui/helpers';
+import { rems, space } from '@/ui/helpers';
 
 const Button = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
 
   .button {
+    position: relative;
     background-color: ${COLOR_GREEN_500};
     color: ${COLOR_NEUTRO_100};
+
+    & > svg {
+      height: ${rems(24)};
+      width: ${rems(12)};
+    }
+  }
+
+  .alert {
+    position: absolute;
+    color: ${COLOR_NEUTRO_100};
+    top: 0;
+    right: -50%;
   }
 
   .text {
     color: ${COLOR_GREEN_500};
-  }
-
-  svg {
-    height: ${rems(24)};
-    width: ${rems(12)};
   }
 
   * {

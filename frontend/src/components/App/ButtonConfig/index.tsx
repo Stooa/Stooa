@@ -75,8 +75,6 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
     handleShowDevices
   }));
 
-  console.log('Saura my man', devices);
-
   return (
     <Container>
       <Button

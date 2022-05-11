@@ -134,7 +134,6 @@ const DevicesProvider = ({ children }) => {
       setVideoDevice(devices.videoDevices[0]);
     }
 
-    console.log('DEVICES CHANGED! Saura');
     _getPermissions()
       .then(browserPermissions => {
         setPermissions(browserPermissions);
@@ -151,16 +150,6 @@ const DevicesProvider = ({ children }) => {
       devicesRepository.clean(_devicesChangedEvent);
     };
   }, []);
-
-  // useEffect(() => {
-  //   _getPermissions()
-  //     .then(browserPermissions => {
-  //       setPermissions(browserPermissions);
-  //     })
-  //     .catch(err => {
-  //       console.error('[STOOA] Error getting permissions:', err);
-  //     });
-  // }, []);
 
   return (
     <DevicesContext.Provider

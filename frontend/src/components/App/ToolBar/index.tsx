@@ -30,7 +30,7 @@ const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
   const [joinIsInactive, setJoinIsInactive] = useState(false);
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
-  const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
+  const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
 
