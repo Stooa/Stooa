@@ -25,6 +25,8 @@ export interface DevicesCtx {
   videoDevice: MediaDeviceInfo;
   devices: Devices;
   permissions: { audio: boolean; video: boolean };
+  showModalPermissions: boolean;
+  setShowModalPermissions: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface DevicesRepository {

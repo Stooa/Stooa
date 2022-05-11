@@ -17,18 +17,26 @@ import ArrowDownIcon from '@/ui/svg/arrow-down.svg';
 import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 import Button from '@/components/App/ButtonJoin/styles';
+import { useDevices } from '@/contexts/DevicesContext';
 
 interface Props {
   join: (user: User) => void;
   leave: () => void;
   joined: boolean;
   disabled: boolean;
+  permissions: boolean;
 }
 
-const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, children }) => {
+const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permissions, children }) => {
   const [active, setActive] = useState(true);
+  const { setShowModalPermissions } = useDevices();
 
   const handleJoinClick = async () => {
+    if (!permissions) {
+      setShowModalPermissions(true);
+      return;
+    }
+
     pushEventDataLayer({
       action: joined ? 'Leave' : 'Join',
       category: 'Buttons',
@@ -50,9 +58,11 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, children }
       active={active}
     >
       <div className="button">
-        <div className="alert">
-          <PermissionsAlert />
-        </div>
+        {!permissions && (
+          <div className="alert">
+            <PermissionsAlert />
+          </div>
+        )}
         {joined ? <ArrowDownIcon /> : <ArrowUpIcon />}
       </div>
       <div className="text">{children}</div>

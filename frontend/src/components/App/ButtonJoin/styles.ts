@@ -21,7 +21,7 @@ import {
   COLOR_RED_400,
   COLOR_RED_500
 } from '@/ui/settings';
-import { rems, space } from '@/ui/helpers';
+import { rems } from '@/ui/helpers';
 
 const Button = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
@@ -42,6 +42,11 @@ const Button = styled(ActionButton)`
     color: ${COLOR_NEUTRO_100};
     top: 0;
     right: -50%;
+    transition: transform 0.2s ease-in;
+
+    svg circle {
+      transition: fill 0.1s ease-out;
+    }
   }
 
   .text {
@@ -91,6 +96,15 @@ const Button = styled(ActionButton)`
     .button {
       background-color: ${COLOR_GREEN_400};
       color: ${COLOR_NEUTRO_100};
+
+      .alert {
+        transition: transform 0.2s ease-out;
+        transform: translateY(-2px);
+
+        circle {
+          fill: ${COLOR_RED_500};
+        }
+      }
     }
 
     .text {

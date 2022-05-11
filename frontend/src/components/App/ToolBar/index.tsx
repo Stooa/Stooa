@@ -148,7 +148,13 @@ const ToolBar: React.FC = () => {
 
   return (
     <Container className={isModerator ? 'moderator' : ''}>
-      <ButtonJoin joined={joined} join={joinSeat} leave={leaveSeat} disabled={isActionDisabled}>
+      <ButtonJoin
+        permissions={permissions.audio}
+        joined={joined}
+        join={joinSeat}
+        leave={leaveSeat}
+        disabled={isActionDisabled}
+      >
         {joinLabel}
       </ButtonJoin>
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />

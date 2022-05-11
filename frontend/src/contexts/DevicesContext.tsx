@@ -35,6 +35,7 @@ const DevicesProvider = ({ children }) => {
     audio: false,
     video: false
   });
+  const [showModalPermissions, setShowModalPermissions] = useState<boolean>(false);
 
   const _getPermissions = async () => {
     return {
@@ -162,7 +163,9 @@ const DevicesProvider = ({ children }) => {
         audioInputDevice,
         videoDevice,
         devices,
-        permissions
+        permissions,
+        showModalPermissions,
+        setShowModalPermissions
       }}
     >
       {children}
