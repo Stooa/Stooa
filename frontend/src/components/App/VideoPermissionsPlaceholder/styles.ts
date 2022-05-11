@@ -27,7 +27,6 @@ const Placeholder = styled.div`
   padding: ${space(4)};
   top: 0;
   width: 100%;
-  z-index: 2;
 
   p {
     text-align: center;

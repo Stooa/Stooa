@@ -12,10 +12,6 @@ import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
 
 const devicesRepository = (): DevicesRepository => {
-  const _handlePermissionIsShown = environmentType => {
-    console.log('[STOOA] Permission prompt is shown for:', environmentType);
-  };
-
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
     const kind = device.kind === 'audioinput' ? 'audio' : 'video';
     const oldTrack =

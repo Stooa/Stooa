@@ -19,6 +19,7 @@ const Container = styled.div`
   flex-direction: column;
   flex: 1;
   max-width: ${rems(840)};
+  overflow: hidden;
 
   ${media.min('tablet')`
     flex-direction: row;

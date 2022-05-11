@@ -47,7 +47,6 @@ const FishbowlPreJoin: React.FC = () => {
   const [showMutedPlaceholder, setShowMutedPlaceholder] = useState<boolean>(
     userRepository.getUserVideoMuted()
   );
-  const [showPermissionsPlaceholder, setShowPermissionsPlaceholder] = useState(!permissions.video);
   const router = useRouter();
   const { t, lang } = useTranslation('common');
 
@@ -131,33 +130,31 @@ const FishbowlPreJoin: React.FC = () => {
         <Container>
           <Devices>
             <VideoContainer>
-              {showMutedPlaceholder && <VideoPlaceholder />}
-              {showPermissionsPlaceholder && (
-                <VideoPermissionsPlaceholder>
-                  <Image
-                    src="/img/permissions/prejoin.png"
-                    alt="Permissions illustration, a funny one"
-                    width={178.26 / 1.2}
-                    height={172.64 / 1.2}
-                    layout="intrinsic"
-                  />
-                  <p>
-                    If you want to participate actively, Stooa needs{' '}
-                    <span className="medium">permissions to access your camera and microphone</span>{' '}
-                    so others can hear and see you.
-                  </p>{' '}
-                </VideoPermissionsPlaceholder>
-              )}
+              {showMutedPlaceholder && permissions.video && <VideoPlaceholder />}
+              <VideoPermissionsPlaceholder>
+                <Image
+                  src="/img/permissions/prejoin.png"
+                  alt="Permissions illustration, a funny one"
+                  width={178.26 / 1.2}
+                  height={172.64 / 1.2}
+                  layout="intrinsic"
+                />
+                <p>
+                  If you want to participate actively, Stooa needs{' '}
+                  <span className="medium">permissions to access your camera and microphone</span>{' '}
+                  so others can hear and see you.
+                </p>{' '}
+              </VideoPermissionsPlaceholder>
               <video id="prejoin" autoPlay muted className="video" playsInline />
             </VideoContainer>
             <DevicesToolbar>
               <ButtonVideo
                 handleVideo={handleVideo}
                 joined={true}
-                disabled={false}
+                disabled={!permissions.video}
                 unlabeled={true}
               />
-              <ButtonMic joined={true} disabled={false} unlabeled={true} />
+              <ButtonMic joined={true} disabled={!permissions.audio} unlabeled={true} />
               <ButtonConfig selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
             </DevicesToolbar>
           </Devices>
