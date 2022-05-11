@@ -62,6 +62,14 @@ const userRepository = (): UserRepository => {
     console.log('[STOOA] Handle userRepository left', user);
   };
 
+  const handleParticipantKicked= (actorParticipant: User, kickedParticipant: User, reason: string): void => {
+    console.log('[STOOA] Handle participant kicked', actorParticipant, kickedParticipant, reason);
+  };
+
+  const handleUserKicked= (actorParticipant: User, reason: string): void => {
+    console.log('[STOOA] Handle user kicked', actorParticipant, reason);
+  };
+
   return {
     clearUser,
     getUser,
@@ -74,6 +82,8 @@ const userRepository = (): UserRepository => {
     getUserVideoMuted,
     handleUserJoin,
     handleUserLeft,
+    handleParticipantKicked,
+    handleUserKicked,
     setUser,
     setUserAudioInput,
     setUserAudioMuted,

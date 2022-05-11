@@ -31,6 +31,8 @@ export interface UserRepository {
   getUserVideoMuted: () => boolean;
   handleUserJoin: (id: string, user: User) => void;
   handleUserLeft: (id: string, user: User) => void;
+  handleParticipantKicked: (actorParticipant: User, kickedParticipant: User, reason: string) => void;
+  handleUserKicked: (actorParticipant: User, reason: string) => void;
   setUser: (value: User) => void;
   setUserAudioInput: (audioInput: MediaDeviceInfo) => void;
   setUserAudioMuted: (audioMuted: boolean) => void;
