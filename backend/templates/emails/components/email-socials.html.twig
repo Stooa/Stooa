@@ -9,23 +9,23 @@ file that was distributed with this source code.
 
 #}
 
-<tr>
-    <td align="center">
-        <table>
-            <tr width="100%">
-                <td align="center" width="50%">
+<tr >
+    <td>
+        <table cellpadding="8" width="100%">
+            <tr class="a" >
+                <td align="right" width="50%">
                     {% include '/emails/components/email-linked-logo.html.twig' with {
                         src: emailConfig.socialImages.twitter.src,
-                        href: emailConfig.socialImages.twitter.href,
+                        href: twitterHref,
                         alt: emailConfig.socialImages.twitter.alt,
                         width: emailConfig.socialImages.twitter.width,
                         height: emailConfig.socialImages.twitter.height,
                         } %}
                 </td>
-                <td align="center" width="50%">
+                <td align="left" width="50%">
                         {% include '/emails/components/email-linked-logo.html.twig' with {
                             src: emailConfig.socialImages.linkedin.src,
-                            href: emailConfig.socialImages.linkedin.href,
+                            href: linkedinHref,
                             alt: emailConfig.socialImages.linkedin.alt,
                             width: emailConfig.socialImages.linkedin.width,
                             height: emailConfig.socialImages.linkedin.height
@@ -35,3 +35,4 @@ file that was distributed with this source code.
         </table>
     </td>
 </tr>
+
