@@ -97,6 +97,10 @@ const getParticipantList = () => {
   return participants;
 };
 
+const kickParticipant = (id, reason) => {
+  return conferenceRepository.kickParticipant(id, reason);
+};
+
 export {
   getParticipantCount,
   getParticipantList,
@@ -105,5 +109,6 @@ export {
   initializeConnection,
   join,
   leave,
-  unload
+  unload,
+  kickParticipant
 };

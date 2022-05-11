@@ -366,6 +366,10 @@ const conferenceRepository = () => {
     };
   };
 
+  const kickParticipant = (id, reason) => {
+    conference.kickParticipant(id, reason);
+  };
+
   return {
     addTrack,
     getLocalVideoTrack,
@@ -378,6 +382,7 @@ const conferenceRepository = () => {
     getParticipants,
     initializeJitsi,
     initializeConnection,
+    kickParticipant,
     leave,
     sendJoinEvent,
     sendLeaveEvent

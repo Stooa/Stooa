@@ -20,11 +20,14 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
+import HostActions from '@/components/App/HostActions';
+import { useStooa } from '@/contexts/StooaManager';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
   speaker = false
 }) => {
+  const { isModerator: isCurrentUserModerator } = useStooa();
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
@@ -48,6 +51,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
+      {isCurrentUserModerator && !isMyself && <HostActions participant={participant}></HostActions>}
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
