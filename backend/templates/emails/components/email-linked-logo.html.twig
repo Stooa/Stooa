@@ -18,10 +18,8 @@ file that was distributed with this source code.
 
 
 {% block content %}
-    <tr >
-        <a href="{{ href }}" style='text-decoration: none;'>
-            <img src="{{ src }}" width="{{ width }}"  height="{{ height }}" border="0" alt="{{ alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; display: inline-block; {{ emailConfig.font.regular }} {{ style }}">
-        </a>
-    </tr>
+    <a href="{{ href }}" style='text-decoration: none;'>
+        <img src="{{ src }}" width="{{ width }}"  height="{{ height }}" border="0" alt="{{ alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; display: inline-block; {{ emailConfig.font.regular }} {{ style }}">
+    </a>
 {% endblock %}
 
