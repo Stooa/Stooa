@@ -9,12 +9,15 @@
 
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
+import devicesRepository from '@/jitsi/Devices';
 
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
 import Image from 'next/image';
+import LocalTracks from '@/jitsi/LocalTracks';
+import { toast } from 'react-toastify';
 
 interface Props {
   closeModal: () => void;
@@ -22,6 +25,26 @@ interface Props {
 
 const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
   const { t } = useTranslation('fishbowl');
+
+  const handleRequestPermissions = () => {
+    // devicesRepository.loadDevices(newDevices => console.log('Sauriki', newDevices));
+    LocalTracks.createLocalTracks()
+      .then(data => {
+        closeModal();
+      })
+      .catch(() => {
+        toast(
+          'Error requesting permissions.</br>You may have blocked camera and microphone permissions.',
+          {
+            type: 'error',
+            toastId: 'permissions-error',
+            icon: '❗',
+            position: 'bottom-center',
+            autoClose: 5000
+          }
+        );
+      });
+  };
 
   return (
     <Modal>
@@ -42,7 +65,9 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
           {/* <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} /> */}
         </p>
         <div className="modal-footer">
-          <Button size="large">Request access</Button>
+          <Button size="large" onClick={handleRequestPermissions}>
+            Request access
+          </Button>
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
           </Button>
