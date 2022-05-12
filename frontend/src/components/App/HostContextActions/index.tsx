@@ -16,7 +16,7 @@ interface Props {
   participant: User;
 }
 
-const HostActions: React.FC<Props> = ({ participant, children }) => {
+const HostContextActions: React.FC<Props> = ({ participant, children }) => {
   const kick = () => {
     kickParticipant(participant.id, 'reason');
   };
@@ -28,4 +28,4 @@ const HostActions: React.FC<Props> = ({ participant, children }) => {
   );
 };
 
-export default HostActions;
+export default HostContextActions;

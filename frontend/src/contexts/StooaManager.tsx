@@ -63,9 +63,16 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }
     }
   };
-  useEventListener(USER_KICKED, ({ detail: { participant: participant, reason: reason } }) => {
-    console.log('router --->', participant, reason);
-    router.push(ROUTE_PARTICIPANT_KICKED, ROUTE_PARTICIPANT_KICKED, { locale: lang });
+
+  useEventListener(USER_KICKED, ({ detail: { reason: reason } }) => {
+    router.push(
+      {
+        pathname: ROUTE_PARTICIPANT_KICKED,
+        query: reason
+      },
+      ROUTE_PARTICIPANT_KICKED,
+      { locale: lang }
+    );
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {

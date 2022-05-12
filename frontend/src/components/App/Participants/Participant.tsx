@@ -20,8 +20,10 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
-import HostActions from '@/components/App/ParticipantContextMenu';
+import HostContextActions from '@/components/App/HostContextActions';
 import { useStooa } from '@/contexts/StooaManager';
+import { useStateValue } from '@/contexts/AppContext';
+import { IConferenceStatus } from '@/jitsi/Status';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
@@ -30,6 +32,16 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
   const { isModerator: isCurrentUserModerator } = useStooa();
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
+  const [{ fishbowlReady, conferenceStatus }] = useStateValue();
+
+  const showHostContextActions = () => {
+    return (
+      isCurrentUserModerator &&
+      fishbowlReady &&
+      !isMyself &&
+      conferenceStatus === IConferenceStatus.RUNNING
+    );
+  };
 
   return (
     <li className={`participant body-sm`} data-id={id} title={name}>
@@ -51,7 +63,9 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      {isCurrentUserModerator && !isMyself && <HostActions participant={participant}></HostActions>}
+      {showHostContextActions() && (
+        <HostContextActions participant={participant}></HostContextActions>
+      )}
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
