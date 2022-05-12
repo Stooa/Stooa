@@ -9,7 +9,8 @@
 
 import { User, UserRepository } from '@/types/user';
 import seatsRepository from '@/jitsi/Seats';
-import { removeItem } from '@/lib/helpers';
+import { dispatchEvent, removeItem } from '@/lib/helpers';
+import { USER_KICKED } from '@/jitsi/Events';
 
 const userRepository = (): UserRepository => {
   let users: User[] = [];
@@ -62,12 +63,10 @@ const userRepository = (): UserRepository => {
     console.log('[STOOA] Handle userRepository left', user);
   };
 
-  const handleParticipantKicked= (actorParticipant: User, kickedParticipant: User, reason: string): void => {
-    console.log('[STOOA] Handle participant kicked', actorParticipant, kickedParticipant, reason);
-  };
+  const handleUserKicked = (participant: User, reason: string): void => {
+    dispatchEvent(USER_KICKED, { participant: participant, reason: reason });
 
-  const handleUserKicked= (actorParticipant: User, reason: string): void => {
-    console.log('[STOOA] Handle user kicked', actorParticipant, reason);
+    console.log('[STOOA] Handle user kicked', participant, reason);
   };
 
   return {
@@ -82,7 +81,6 @@ const userRepository = (): UserRepository => {
     getUserVideoMuted,
     handleUserJoin,
     handleUserLeft,
-    handleParticipantKicked,
     handleUserKicked,
     setUser,
     setUserAudioInput,

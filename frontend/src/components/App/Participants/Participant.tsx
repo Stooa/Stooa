@@ -20,7 +20,7 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
-import HostActions from '@/components/App/HostActions';
+import HostActions from '@/components/App/ParticipantContextMenu';
 import { useStooa } from '@/contexts/StooaManager';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({

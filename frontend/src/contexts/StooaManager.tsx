@@ -12,10 +12,10 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
+import { ROUTE_FISHBOWL_THANKYOU, ROUTE_PARTICIPANT_KICKED } from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
-import { CONFERENCE_START, NOTIFICATION, USER_MUST_LEAVE } from '@/jitsi/Events';
+import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
@@ -63,6 +63,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }
     }
   };
+  useEventListener(USER_KICKED, ({ detail: { participant: participant, reason: reason } }) => {
+    console.log('router --->', participant, reason);
+    router.push(ROUTE_PARTICIPANT_KICKED, ROUTE_PARTICIPANT_KICKED, { locale: lang });
+  });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);

@@ -163,7 +163,6 @@ const conferenceRepository = () => {
     conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
     conference.on(USER_JOINED, userRepository.handleUserJoin);
     conference.on(USER_LEFT, userRepository.handleUserLeft);
-    conference.on(PARTICIPANT_KICKED, userRepository.handleUserKicked);
     conference.on(KICKED, userRepository.handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
@@ -362,7 +361,10 @@ const conferenceRepository = () => {
       linkedin,
       isModerator,
       isCurrentUser: true,
-      joined: conference.isJoined() === null ? false : conference.getLocalParticipantProperty('joined') === 'yes',
+      joined:
+        conference.isJoined() === null
+          ? false
+          : conference.getLocalParticipantProperty('joined') === 'yes',
       isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
       isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
     };
