@@ -33,16 +33,13 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
         closeModal();
       })
       .catch(() => {
-        toast(
-          'Error requesting permissions.</br>You may have blocked camera and microphone permissions.',
-          {
-            type: 'error',
-            toastId: 'permissions-error',
-            icon: '❗',
-            position: 'bottom-center',
-            autoClose: 5000
-          }
-        );
+        toast(<Trans i18nKey="fishbowl:permissionsModalErrorToast" components={{ br: <br /> }} />, {
+          type: 'error',
+          toastId: 'permissions-error',
+          icon: '❗',
+          position: 'bottom-center',
+          autoClose: 5000
+        });
       });
   };
 
@@ -60,13 +57,14 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
         />
         <h2 className="title-sm">Permissions needed</h2>
         <p className="description">
-          If you want to take a seat in order say something, Stooa needs permissions to access your
-          microphone so others can hear you.
-          {/* <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} /> */}
+          <Trans i18nKey="fishbowl:permissionsModalDescription" components={{ i: <i /> }} />
         </p>
         <div className="modal-footer">
           <Button size="large" onClick={handleRequestPermissions}>
-            Request access
+            <Trans
+              i18nKey="fishbowl:permissionsModalButton"
+              components={{ span: <span className="medium" /> }}
+            />
           </Button>
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
