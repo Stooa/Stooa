@@ -19,7 +19,6 @@ const Container = styled.div`
   flex-direction: column;
   flex: 1;
   max-width: ${rems(840)};
-  overflow: hidden;
 
   ${media.min('tablet')`
     flex-direction: row;
@@ -69,7 +68,7 @@ const VideoContainer = styled.div`
   display: grid;
   align-items: center;
   position: relative;
-  border-radius: ${BORDER_RADIUS} ${BORDER_RADIUS} 0 0;
+  border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
   height: 35vh;
   overflow: hidden;
   width: 100%;

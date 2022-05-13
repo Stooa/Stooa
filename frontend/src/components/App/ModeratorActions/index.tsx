@@ -15,11 +15,14 @@ import { FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL } from '@/graphql/
 import { IConferenceStatus } from '@/jitsi/Status';
 
 import { useStateValue } from '@/contexts/AppContext';
+import { useDevices } from '@/contexts/DevicesContext';
 import { useStooa } from '@/contexts/StooaManager';
 
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 import Button from '@/components/Common/Button';
+
+import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 
 interface Props {
   fid: string;
@@ -38,6 +41,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
   const { data } = useStooa();
+  const { permissions, setShowModalPermissions } = useDevices();
 
   const toggleIntroductionModal = () => {
     setShowIntroductionModal(!showIntroductionModal);
@@ -57,6 +61,11 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const startFishbowl = () => {
+    if (!permissions.audio) {
+      setShowModalPermissions(true);
+      return;
+    }
+
     setLoading(true);
     const slug = { variables: { input: { slug: fid } } };
 
@@ -151,10 +160,20 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         {!running &&
           (!introduction && data.hasIntroduction ? (
             <Button size="medium" className="button" onClick={toggleIntroductionModal}>
+              {!permissions.audio && (
+                <div className="alert">
+                  <PermissionsAlert />
+                </div>
+              )}
               <span className="text">{t('startIntroduction')}</span>
             </Button>
           ) : (
             <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
+              {!permissions.audio && (
+                <div className="alert">
+                  <PermissionsAlert />
+                </div>
+              )}
               <span className="text">
                 {data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}
               </span>
