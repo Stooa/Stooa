@@ -24,6 +24,7 @@ module.exports = {
     '/edit-profile': ['form', 'edit-profile', 'register', 'password'],
     '/log-in': ['form', 'login'],
     '/recover-password': ['form', 'recover'],
+    '/kicked-participant': ['kicked-participant'],
     '/register': ['form', 'register'],
     '/fb/[fid]': ['fishbowl', 'app', 'form', 'on-boarding'],
     '/fishbowl/create': ['fishbowl', 'form'],

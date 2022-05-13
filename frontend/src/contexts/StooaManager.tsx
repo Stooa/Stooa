@@ -12,7 +12,7 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_THANKYOU, ROUTE_PARTICIPANT_KICKED } from '@/app.config';
+import { ROUTE_FISHBOWL_THANKYOU, ROUTE_KICKED_PARTICIPANT } from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
@@ -67,10 +67,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
   useEventListener(USER_KICKED, ({ detail: { reason: reason } }) => {
     router.push(
       {
-        pathname: ROUTE_PARTICIPANT_KICKED,
+        pathname: ROUTE_KICKED_PARTICIPANT,
         query: reason
       },
-      ROUTE_PARTICIPANT_KICKED,
+      ROUTE_KICKED_PARTICIPANT,
       { locale: lang }
     );
   });
