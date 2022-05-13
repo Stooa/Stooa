@@ -173,7 +173,7 @@ const Seat = styled.div`
     }
   }
 
-  .video-placeholder {
+  &:not(.user-joined) .video-placeholder {
     opacity: 0;
   }
 

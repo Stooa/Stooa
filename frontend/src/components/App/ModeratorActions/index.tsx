@@ -44,6 +44,11 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const { permissions, setShowModalPermissions } = useDevices();
 
   const toggleIntroductionModal = () => {
+    if (!permissions.audio) {
+      setShowModalPermissions(true);
+      return;
+    }
+
     setShowIntroductionModal(!showIntroductionModal);
   };
 
