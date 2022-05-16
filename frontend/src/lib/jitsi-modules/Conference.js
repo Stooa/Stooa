@@ -143,7 +143,6 @@ const conferenceRepository = () => {
           USER_JOINED,
           USER_LEFT,
           USER_ROLE_CHANGED,
-          PARTICIPANT_KICKED,
           KICKED,
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,

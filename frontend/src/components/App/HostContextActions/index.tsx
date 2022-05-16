@@ -15,7 +15,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
-import {REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING} from "@/lib/Reasons";
+import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 
 interface Props {
   participant: User;

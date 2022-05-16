@@ -9,19 +9,10 @@
 
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
-import RedirectLink from '@/components/Web/RedirectLink';
-import Button from '@/components/Common/Button';
 import React from 'react';
-import { ROUTE_FISHBOWL } from '@/app.config';
 
-interface ParticipantKickedPageProps {
-  reason?: string;
-  slug?: string;
-}
-
-const UserConductViolationPage = ({ reason, slug }: ParticipantKickedPageProps) => {
-  const { t, lang } = useTranslation('user-conduct-violation');
-  const fbRoute = `${ROUTE_FISHBOWL}/${slug}`;
+const UserConductViolationPage = () => {
+  const { t } = useTranslation('user-conduct-violation');
 
   return (
     <>
@@ -30,13 +21,6 @@ const UserConductViolationPage = ({ reason, slug }: ParticipantKickedPageProps) 
       </Head>
       <h1>{t('title')}</h1>
       <p>{t('description')}</p>
-      {slug && (
-        <RedirectLink href={fbRoute} locale={lang} passHref>
-          <Button size="large" variant="primary" as="a">
-            {t('backButton')}
-          </Button>
-        </RedirectLink>
-      )}
     </>
   );
 };

@@ -28,7 +28,7 @@ import useEventListener from '@/hooks/useEventListener';
 import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
-import { REASON_CONDUCT_VIOLATION } from '@/lib/Reasons';
+import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -70,11 +70,14 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   useEventListener(USER_KICKED, ({ detail: { reason: reason } }) => {
-    let pathName = ROUTE_USER_NO_PARTICIPATING;
-
-    if (reason === REASON_CONDUCT_VIOLATION) {
-      pathName = ROUTE_USER_CONDUCT_VIOLATION;
+    if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
+      return;
     }
+
+    const pathName =
+      reason === REASON_CONDUCT_VIOLATION
+        ? ROUTE_USER_CONDUCT_VIOLATION
+        : ROUTE_USER_NO_PARTICIPATING;
 
     router.push(
       {

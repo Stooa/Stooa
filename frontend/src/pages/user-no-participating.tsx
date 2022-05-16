@@ -14,13 +14,9 @@ import Button from '@/components/Common/Button';
 import React from 'react';
 import { ROUTE_FISHBOWL } from '@/app.config';
 
-interface ParticipantKickedPageProps {
-  reason?: string;
-  slug?: string;
-}
-
-const UserNoParticipatingPage = ({ reason, slug }: ParticipantKickedPageProps) => {
+const UserNoParticipatingPage = () => {
   const { t, lang } = useTranslation('user-no-participating');
+  const slug = 'xxxx';
   const fbRoute = `${ROUTE_FISHBOWL}/${slug}`;
 
   return (
@@ -30,6 +26,10 @@ const UserNoParticipatingPage = ({ reason, slug }: ParticipantKickedPageProps) =
       </Head>
       <h1>{t('title')}</h1>
       <p>{t('description')}</p>
+      <ul>
+        <li>{t('firstReason')}</li>
+        <li>{t('secondReason')}</li>
+      </ul>
       {slug && (
         <RedirectLink href={fbRoute} locale={lang} passHref>
           <Button size="large" variant="primary" as="a">
