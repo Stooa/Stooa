@@ -74,5 +74,18 @@
     "settings": "Pengaturan",
     "waitingHost": "Peserta menunggumu untuk memulai fishbowl-nya",
     "timeLeft_other": "{{time}} tersisa",
-    "share": "Beri tahu orang lain tentang Stooa!"
+    "share": "Beri tahu orang lain tentang Stooa!",
+    "kick": {
+        "button": "Kick",
+        "modal": {
+            "title": "Why do you want to kick user?",
+            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "options": {
+                "noParticipating": "The user occupies a seat without participating.",
+                "conductViolation": "The user has violated the code of conduct of the community."
+            },
+            "button": "Kick user",
+            "cancelButton": "Cancel"
+        }
+    }
 }

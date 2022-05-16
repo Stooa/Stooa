@@ -19,8 +19,8 @@ interface ParticipantKickedPageProps {
   slug?: string;
 }
 
-const KickedParticipantPage = ({ reason, slug }: ParticipantKickedPageProps) => {
-  const { t, lang } = useTranslation('participant-kicked');
+const UserNoParticipatingPage = ({ reason, slug }: ParticipantKickedPageProps) => {
+  const { t, lang } = useTranslation('user-no-participating');
   const fbRoute = `${ROUTE_FISHBOWL}/${slug}`;
 
   return (
@@ -41,4 +41,4 @@ const KickedParticipantPage = ({ reason, slug }: ParticipantKickedPageProps) => 
   );
 };
 
-export default KickedParticipantPage;
+export default UserNoParticipatingPage;

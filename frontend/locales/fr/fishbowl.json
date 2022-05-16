@@ -74,5 +74,18 @@
     "timesUp": "Le temps est écoulé",
     "unmute": "Activer le son",
     "mute": "Mettre en sourdine",
-    "videoMute": "Arrêter la vidéo"
+    "videoMute": "Arrêter la vidéo",
+    "kick": {
+        "button": "Kick",
+        "modal": {
+            "title": "Why do you want to kick user?",
+            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "options": {
+                "noParticipating": "The user occupies a seat without participating.",
+                "conductViolation": "The user has violated the code of conduct of the community."
+            },
+            "button": "Kick user",
+            "cancelButton": "Cancel"
+        }
+    }
 }
