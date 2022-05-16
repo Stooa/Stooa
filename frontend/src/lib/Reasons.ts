@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export const REASON_BANNED = 'reason_banned';
-export const REASON_MODERATED = 'reason_moderated';
+export const REASON_NO_PARTICIPATING = 'no_participating';
+export const REASON_CONDUCT_VIOLATION = 'conduct_violation';

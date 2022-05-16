@@ -12,9 +12,10 @@ import Button from '@/components/Common/Button';
 import { User } from '@/types/user';
 import { kickParticipant } from '@/lib/jitsi';
 import useTranslation from 'next-translate/useTranslation';
-import Modal from "@/ui/Modal";
-import Cross from "@/ui/svg/cross.svg";
-import Trans from "next-translate/Trans";
+import Modal from '@/ui/Modal';
+import Cross from '@/ui/svg/cross.svg';
+import Trans from 'next-translate/Trans';
+import {REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING} from "@/lib/Reasons";
 
 interface Props {
   participant: User;
@@ -33,7 +34,7 @@ const HostContextActions: React.FC<Props> = ({ participant, children }) => {
   };
 
   const kick = () => {
-    kickParticipant(participant.id, 'reason');
+    kickParticipant(participant.id, REASON_NO_PARTICIPATING);
   };
 
   return (

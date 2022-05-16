@@ -12,7 +12,11 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_THANKYOU, ROUTE_KICKED_PARTICIPANT } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_THANKYOU,
+  ROUTE_USER_CONDUCT_VIOLATION,
+  ROUTE_USER_NO_PARTICIPATING
+} from '@/app.config';
 import api from '@/lib/api';
 import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
@@ -24,6 +28,7 @@ import useEventListener from '@/hooks/useEventListener';
 import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
+import { REASON_CONDUCT_VIOLATION } from '@/lib/Reasons';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -65,12 +70,17 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   useEventListener(USER_KICKED, ({ detail: { reason: reason } }) => {
+    let pathName = ROUTE_USER_NO_PARTICIPATING;
+
+    if (reason === REASON_CONDUCT_VIOLATION) {
+      pathName = ROUTE_USER_CONDUCT_VIOLATION;
+    }
+
     router.push(
       {
-        pathname: ROUTE_KICKED_PARTICIPANT,
-        query: reason
+        pathname: pathName
       },
-      ROUTE_KICKED_PARTICIPANT,
+      pathName,
       { locale: lang }
     );
   });
