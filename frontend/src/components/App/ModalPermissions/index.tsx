@@ -55,7 +55,9 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
           height={165}
           width={138.85}
         />
-        <h2 className="title-sm">Permissions needed</h2>
+        <h2 className="title-sm">
+          <Trans i18nKey="fishbowl:permissionsModalTitle" />
+        </h2>
         <p className="description">
           <Trans i18nKey="fishbowl:permissionsModalDescription" components={{ i: <i /> }} />
         </p>
