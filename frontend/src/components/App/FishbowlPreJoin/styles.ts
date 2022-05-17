@@ -18,7 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  max-width: ${rems(840)};
+  max-width: ${rems(1024)};
 
   ${media.min('tablet')`
     flex-direction: row;
@@ -57,10 +57,16 @@ const Form = styled.div`
 
   h2 {
     color: ${COLOR_NEUTRO_700};
+    margin-bottom: ${space(2)};
+  }
+
+  p.subtitle {
+    color: ${COLOR_NEUTRO_700};
+    margin-bottom: ${space(4)};
   }
 
   ${media.min('tablet')`
-    padding: ${space(6)};
+    padding:  ${space(15)} ${space(4)} ${space(6)} ${space(4)};
   `}
 `;
 

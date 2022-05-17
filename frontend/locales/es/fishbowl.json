@@ -47,7 +47,7 @@
     "cam": "Cámara",
     "prejoin": {
         "title": "Únete a la sala",
-        "subtitle": "Entrarás en la sala como oyente.</br>Una vez dentro, si quieres participar activamente en la conversación tendrás que ocupar una silla del fishbowl.",
+        "subtitle": "Entrarás en la sala como oyente.<br/>Una vez dentro, si quieres participar activamente en la conversación tendrás que ocupar una silla del fishbowl.",
         "permissions": "Si además de asistir al evento como público <span>quieres hablar en el fishbowl</span>, Stooa necesita permisos para acceder a tu cámara y micrófono para que todo el mundo pueda escucharte y verte."
     },
     "waiting": "Esperando a que el anfitrión inicie el fishbowl",

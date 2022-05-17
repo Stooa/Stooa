@@ -47,7 +47,7 @@
     "cam": "Camera",
     "prejoin": {
         "title": "Join the room",
-        "subtitle": "You will enter the room as a listener.</br>Once inside, if you want to join in the conversation you must occupy a seat.",
+        "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
         "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
     "waiting": "Waiting for host to start the fishbowl",

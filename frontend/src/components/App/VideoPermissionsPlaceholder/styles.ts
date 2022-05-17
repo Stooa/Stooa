@@ -17,7 +17,7 @@ const Placeholder = styled.div`
   display: grid;
   justify-items: center;
   align-items: center;
-  align-content: flex-start;
+  align-content: center;
   row-gap: ${space(3)};
   height: 100%;
   justify-content: center;

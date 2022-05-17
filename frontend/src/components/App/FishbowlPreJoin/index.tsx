@@ -38,6 +38,7 @@ import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Image from 'next/image';
+import Trans from 'next-translate/Trans';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
@@ -139,11 +140,12 @@ const FishbowlPreJoin: React.FC = () => {
                   height={172.64 / 1.2}
                   layout="intrinsic"
                 />
-                <p>
-                  If you want to participate actively, Stooa needs{' '}
-                  <span className="medium">permissions to access your camera and microphone</span>{' '}
-                  so others can hear and see you.
-                </p>{' '}
+                <p className="body-sm">
+                  <Trans
+                    i18nKey="fishbowl:prejoin.permissions"
+                    components={{ span: <span className="medium" /> }}
+                  />
+                </p>
               </VideoPermissionsPlaceholder>
               <video id="prejoin" autoPlay muted className="video" playsInline />
             </VideoContainer>
@@ -159,7 +161,10 @@ const FishbowlPreJoin: React.FC = () => {
             </DevicesToolbar>
           </Devices>
           <Form>
-            <h2 className="title-md form-title">{t('fishbowl:prejoin.title')}</h2>
+            <h2 className="title-md ">{t('fishbowl:prejoin.title')}</h2>
+            <p className="body-md subtitle">
+              <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+            </p>
             {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
             <Button size="small" variant="subtleLink" className="cancel" onClick={handleCancel}>
               {t('cancel')}
