@@ -16,11 +16,11 @@ import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import ReasonForm from '@/components/App/HostContextActions/ReasonForm';
 
-interface Props {
+interface HostContextActionsProps {
   participant: User;
 }
 
-const HostContextActions: React.FC<Props> = ({ participant, children }) => {
+const HostContextActions: React.FC<HostContextActionsProps> = ({ participant }) => {
   const { t } = useTranslation('fishbowl');
   const [show, setShow] = useState<boolean>(false);
 
@@ -43,11 +43,11 @@ const HostContextActions: React.FC<Props> = ({ participant, children }) => {
             <button className="close" onClick={closeModal}>
               <Cross />
             </button>
-            <h2 className="title-sm">{t('kick.modal.title', {userName: participant.name})}</h2>
+            <h2 className="title-sm">{t('kick.modal.title', { userName: participant.name })}</h2>
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
-            <ReasonForm participant={participant} />
+            <ReasonForm participant={participant} showModal={show} />
           </div>
         </Modal>
       )}

@@ -19,8 +19,9 @@ import { User } from '@/types/user';
 import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
 
-interface Props {
+interface ReasonFormProps {
   participant: User;
+  showModal: boolean;
 }
 
 interface FormValues {
@@ -29,6 +30,7 @@ interface FormValues {
 
 interface FormProps {
   participant: User;
+  showModal: boolean;
 }
 
 const initialValues = {
@@ -68,14 +70,15 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: (values, { props }) => {
     if (props.participant && values.reason) {
       kickParticipant(props.participant.id, values.reason);
+      props.showModal = false;
     }
   }
 })(Form);
 
-const ReasonForm: React.FC<Props> = ({ participant }) => {
+const ReasonForm: React.FC<ReasonFormProps> = ({ participant, showModal }) => {
   return (
     <>
-      <FormValidation participant={participant} />
+      <FormValidation participant={participant} showModal={showModal} />
     </>
   );
 };
