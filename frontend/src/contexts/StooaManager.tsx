@@ -79,13 +79,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
         ? ROUTE_USER_CONDUCT_VIOLATION
         : ROUTE_USER_NO_PARTICIPATING;
 
-    router.push(
-      {
-        pathname: pathName
-      },
-      pathName,
-      { locale: lang }
-    );
+    const url = {
+      pathname: pathName,
+      query: { fid: fid }
+    };
+
+    router.push(url, url, { locale: lang });
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {

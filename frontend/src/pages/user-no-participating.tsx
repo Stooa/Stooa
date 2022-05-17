@@ -13,11 +13,13 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import React from 'react';
 import { ROUTE_FISHBOWL } from '@/app.config';
+import { useRouter } from 'next/router';
 
 const UserNoParticipatingPage = () => {
   const { t, lang } = useTranslation('user-no-participating');
-  const slug = 'xxxx';
-  const fbRoute = `${ROUTE_FISHBOWL}/${slug}`;
+  const router = useRouter();
+  const { fid } = router.query;
+  const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
 
   return (
     <>
@@ -30,7 +32,7 @@ const UserNoParticipatingPage = () => {
         <li>{t('firstReason')}</li>
         <li>{t('secondReason')}</li>
       </ul>
-      {slug && (
+      {fid && (
         <RedirectLink href={fbRoute} locale={lang} passHref>
           <Button size="large" variant="primary" as="a">
             {t('backButton')}

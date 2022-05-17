@@ -14,9 +14,10 @@ import Button from '@/components/Common/Button';
 
 import FormikForm from '@/ui/Form';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
-import { kickParticipant } from '@/lib/jitsi';
+import Input from '@/components/Common/Fields/Input';
 import { User } from '@/types/user';
 import React from 'react';
+import { kickParticipant } from '@/lib/jitsi';
 
 interface Props {
   participant: User;
@@ -24,17 +25,14 @@ interface Props {
 
 interface FormValues {
   reason: string;
-  participant: User;
 }
 
 interface FormProps {
-  reason: string;
   participant: User;
 }
 
 const initialValues = {
-  reason: '',
-  participant: null
+  reason: REASON_NO_PARTICIPATING
 };
 
 const Form = (props: FormikProps<FormValues>) => {
@@ -42,14 +40,18 @@ const Form = (props: FormikProps<FormValues>) => {
 
   return (
     <FormikForm>
-      <label>
-        <input type="radio" name="reason" value={REASON_NO_PARTICIPATING} />
-        {t('kick.modal.options.noParticipating')}
-      </label>
-      <label>
-        <input type="radio" name="reason" value={REASON_CONDUCT_VIOLATION} />
-        {t('kick.modal.options.conductViolation')}
-      </label>
+      <Input
+        type="radio"
+        name="reason"
+        value={REASON_NO_PARTICIPATING}
+        label={t('kick.modal.options.noParticipating')}
+      />
+      <Input
+        type="radio"
+        name="reason"
+        value={REASON_CONDUCT_VIOLATION}
+        label={t('kick.modal.options.conductViolation')}
+      />
       <div className="modal-footer">
         <Button type="submit">{t('kick.modal.button')}</Button>
       </div>
@@ -63,18 +65,17 @@ const FormValidation = withFormik<FormProps, FormValues>({
     Yup.object({
       reason: Yup.string().required(props.required)
     }),
-  handleSubmit: (values, { props, setSubmitting }) => {
+  handleSubmit: (values, { props }) => {
     if (props.participant && values.reason) {
-      console.log('REASON---->', values.reason);
-      // kickParticipant(props.participant.id, values.reason);
+      kickParticipant(props.participant.id, values.reason);
     }
   }
 })(Form);
 
-const ReasonForm: React.FC<Props> = ({ participant, children }) => {
+const ReasonForm: React.FC<Props> = ({ participant }) => {
   return (
     <>
-      <FormValidation reason={REASON_NO_PARTICIPATING} participant={participant} />
+      <FormValidation participant={participant} />
     </>
   );
 };
