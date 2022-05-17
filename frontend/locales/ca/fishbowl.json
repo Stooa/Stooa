@@ -46,8 +46,9 @@
     "speaker": "Altaveu",
     "cam": "Càmera",
     "prejoin": {
-        "title": "Configura la càmera i el micròfon",
-        "permissions": "Si quieres participar <span>activamente</span>, Stooa necesita <span>permisos para acceder a tu cámara y micrófono</span> para que los demás puedan verte y escucharte."
+        "title": "Uneix-te a la sala",
+        "subtitle": "Entraràs a la sala com a públic.</br>Una vegada dins, si vols participar activament en la conversa hauràs d'ocupar una cadira del fishbowl.",
+        "permissions": "Si a més d'assistir a l'esdeveniment com a públic <span>vols parlar en el fishbowl</span>, Stooa necessita permisos per a accedir a la teva càmera i micròfon perquè tothom pugui escoltar-te i veure't."
     },
     "waiting": "Esperant que l'amfitrió iniciï el fishbowl",
     "waitingHost": "Els assistents estan esperant a que iniciïs el fishbowl",
@@ -84,7 +85,8 @@
     "fishbowlDescription": {
         "shareText": "Copia i comparteix l'enllaç per a convidar a mes persones  a aquest <i>fishbowl</i>."
     },
-    "permissionsModalDescription": "If you want to take a seat in order say something, Stooa needs permissions to access your microphone so others can hear you.",
-    "permissionsModalButton": "Grant permissions",
+    "permissionsModalTitle": "Permisos necessaris",
+    "permissionsModalDescription": "Si vols ocupar una cadira per a dir alguna cosa, Stooa necessita permisos per a accedir al teu micròfon, perquè la resta de participants t'escolti.",
+    "permissionsModalButton": "Sol·licitar accés",
     "permissionsModalErrorToast" : "Hi ha un problema amb els permissos.<br/>Pot ser els tinguis bloquejats en el navigador web."
 }

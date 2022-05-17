@@ -46,8 +46,9 @@
     "speaker": "Speaker",
     "cam": "Camera",
     "prejoin": {
-        "title": "Set up your micro and camera!",
-        "permissions": "If you want to participate actively, Stooa <span>needs permissions to acces your camera and microphone</span> so other can hear and see you."
+        "title": "Join the room",
+        "subtitle": "You will enter the room as a listener.</br>Once inside, if you want to join in the conversation you must occupy a seat.",
+        "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
     "waiting": "Waiting for host to start the fishbowl",
     "waitingHost": "Attendees are waiting for you to start the fishbowl",
@@ -84,7 +85,8 @@
     "fishbowlDescription": {
         "shareText": "Copy and share the link to invite people to this fishbowl."
     },
-    "permissionsModalDescription": "If you want to take a seat in order say something, Stooa needs permissions to access your microphone so others can hear you.",
+    "permissionsModalTitle": "Permissions needed",
+    "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Grant permissions",
     "permissionsModalErrorToast" : "There was an error with permissions.<br/>You may have blocked it from browser settings."
 }
