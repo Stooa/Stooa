@@ -12,6 +12,7 @@ export interface User {
   guestId?: string;
   nickname?: string;
   name?: string;
+  isCurrentUser: boolean;
   audioInput?: MediaDeviceInfo;
   audioOutput?: MediaDeviceInfo;
   videoInput?: MediaDeviceInfo;

@@ -18,10 +18,11 @@ import Input from '@/components/Common/Fields/Input';
 import { User } from '@/types/user';
 import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
+import seatsRepository from '@/jitsi/Seats';
 
 interface ReasonFormProps {
   participant: User;
-  showModal: boolean;
+  seat: number;
 }
 
 interface FormValues {
@@ -30,7 +31,7 @@ interface FormValues {
 
 interface FormProps {
   participant: User;
-  showModal: boolean;
+  seat: number;
 }
 
 const initialValues = {
@@ -70,15 +71,18 @@ const FormValidation = withFormik<FormProps, FormValues>({
   handleSubmit: (values, { props }) => {
     if (props.participant && values.reason) {
       kickParticipant(props.participant.id, values.reason);
-      props.showModal = false;
+    }
+
+    if (props.seat && values.reason) {
+      kickParticipant(seatsRepository.getParticipantIdBySeat(props.seat), values.reason);
     }
   }
 })(Form);
 
-const ReasonForm: React.FC<ReasonFormProps> = ({ participant, showModal }) => {
+const ReasonForm: React.FC<ReasonFormProps> = ({ participant, seat }) => {
   return (
     <>
-      <FormValidation participant={participant} showModal={showModal} />
+      <FormValidation participant={participant} seat={seat} />
     </>
   );
 };

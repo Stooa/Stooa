@@ -157,11 +157,22 @@ const seatsRepository = () => {
     }
   };
 
+  const getParticipantIdBySeat = seat => {
+    const seatHtml = document.getElementById(`seat-${seat}`);
+
+    if (!seatHtml.hasAttribute('data-id')) {
+      return null;
+    }
+
+    return seatHtml.getAttribute('data-id');
+  };
+
   return {
     create,
     getIds,
     getSeat,
     getSeats,
+    getParticipantIdBySeat,
     hasFreeSeat,
     join,
     leave,

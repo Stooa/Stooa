@@ -17,6 +17,7 @@ import SeatImage from '@/ui/svg/seat.svg';
 import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
+import HostContextActions from '@/components/App/HostContextActions';
 
 const Seats = () => {
   const { t } = useTranslation('app');
@@ -30,6 +31,7 @@ const Seats = () => {
       <div className={`content ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
           <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
+            <HostContextActions participant={null} seat={seat + 1} />
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />
             <VideoMuted className="icon-medium icon-video" />

@@ -29,19 +29,8 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
   participant,
   speaker = false
 }) => {
-  const { isModerator: isCurrentUserModerator } = useStooa();
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
-  const [{ fishbowlReady, conferenceStatus }] = useStateValue();
-
-  const showHostContextActions = () => {
-    return (
-      isCurrentUserModerator &&
-      fishbowlReady &&
-      !isMyself &&
-      conferenceStatus === IConferenceStatus.RUNNING
-    );
-  };
 
   return (
     <li className={`participant body-sm`} data-id={id} title={name}>
@@ -63,9 +52,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      {showHostContextActions() && (
-        <HostContextActions participant={participant}></HostContextActions>
-      )}
+      <HostContextActions participant={participant} seat={null} />
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
