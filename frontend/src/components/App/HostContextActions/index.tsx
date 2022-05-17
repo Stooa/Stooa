@@ -9,7 +9,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Button from '@/components/Common/Button';
-import { User } from '@/types/user';
 import useTranslation from 'next-translate/useTranslation';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
@@ -21,9 +20,10 @@ import { useStateValue } from '@/contexts/AppContext';
 import conferenceRepository from '@/jitsi/Conference';
 import useEventListener from '@/hooks/useEventListener';
 import { SEATS_CHANGE } from '@/jitsi/Events';
+import { Participant } from '@/types/participant';
 
 interface HostContextActionsProps {
-  participant: User;
+  initialParticipant: Participant;
   seat: number;
 }
 
@@ -34,10 +34,10 @@ type SeatsChangeProps = {
   };
 };
 
-const HostContextActions: React.FC<HostContextActionsProps> = ({ participant, seat }) => {
+const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticipant, seat }) => {
   const { t } = useTranslation('fishbowl');
   const [show, setShow] = useState<boolean>(false);
-  const [seatList, setSeatList] = useState<Array<string>>([]);
+  const [participant, setParticipant] = useState<Participant>(initialParticipant);
   const { isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const isMyself = participant ? participant.isCurrentUser : false;
@@ -61,19 +61,33 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ participant, se
   };
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeProps) => {
-    setSeatList(seatsValues);
+    if (seatsValues[seat]) {
+      setParticipant(conferenceRepository.getParticipantById(seatsValues[seat]));
+    } else {
+      setParticipant(null);
+    }
   });
 
   useEffect(() => {
-    if (seat && seatList[seat]) {
-      participant = conferenceRepository.getParticipantById(seatList[seat]);
+    if (
+      fishbowlReady &&
+      conferenceStatus === IConferenceStatus.RUNNING &&
+      initialParticipant &&
+      initialParticipant.id
+    ) {
+      setParticipant(conferenceRepository.getParticipantById(initialParticipant.id));
     }
-  }, [seatList]);
+  }, [initialParticipant]);
 
   return (
     <>
       {showHostContextActions() && (
-        <Button variant="secondary" className="never-full" onClick={showModal}>
+        <Button
+          style={{ zIndex: 10, position: 'absolute', top: '12px', right: '12px', padding: '10px' }}
+          variant="secondary"
+          className="never-full"
+          onClick={showModal}
+        >
           <span>{t('kick.button')}</span>
         </Button>
       )}
@@ -83,7 +97,12 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ participant, se
             <button className="close" onClick={closeModal}>
               <Cross />
             </button>
-            <h2 className="title-sm">{t('kick.modal.title', { userName: participant.name })}</h2>
+
+            <h2 className="title-sm">
+              {t('kick.modal.title', {
+                userName: participant.name ? participant.name : participant.getDisplayName()
+              })}
+            </h2>
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>

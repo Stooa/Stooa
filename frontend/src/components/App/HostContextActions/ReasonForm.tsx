@@ -15,12 +15,12 @@ import Button from '@/components/Common/Button';
 import FormikForm from '@/ui/Form';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import Input from '@/components/Common/Fields/Input';
-import { User } from '@/types/user';
 import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
+import { Participant } from '@/types/participant';
 
 interface ReasonFormProps {
-  participant: User;
+  participant: Participant;
 }
 
 interface FormValues {
@@ -28,7 +28,7 @@ interface FormValues {
 }
 
 interface FormProps {
-  participant: User;
+  participant: Participant;
 }
 
 const initialValues = {
@@ -67,7 +67,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
     }),
   handleSubmit: (values, { props }) => {
     if (props.participant && values.reason) {
-      kickParticipant(props.participant.id, values.reason);
+      kickParticipant(props.participant.getId(), values.reason);
     }
   }
 })(Form);

@@ -21,9 +21,6 @@ import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
 import HostContextActions from '@/components/App/HostContextActions';
-import { useStooa } from '@/contexts/StooaManager';
-import { useStateValue } from '@/contexts/AppContext';
-import { IConferenceStatus } from '@/jitsi/Status';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
@@ -52,7 +49,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      <HostContextActions participant={participant} seat={null} />
+      <HostContextActions initialParticipant={participant} seat={null} />
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
