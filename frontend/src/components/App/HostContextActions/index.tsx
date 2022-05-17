@@ -43,7 +43,7 @@ const HostContextActions: React.FC<Props> = ({ participant, children }) => {
             <button className="close" onClick={closeModal}>
               <Cross />
             </button>
-            <h2 className="title-sm">{t('kick.modal.title')}</h2>
+            <h2 className="title-sm">{t('kick.modal.title', {userName: participant.name})}</h2>
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
