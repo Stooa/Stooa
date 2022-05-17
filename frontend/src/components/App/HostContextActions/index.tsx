@@ -18,22 +18,37 @@ import ReasonForm from '@/components/App/HostContextActions/ReasonForm';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
+import conferenceRepository from '@/jitsi/Conference';
+import useEventListener from '@/hooks/useEventListener';
+import { SEATS_CHANGE } from '@/jitsi/Events';
 
 interface HostContextActionsProps {
   participant: User;
   seat: number;
 }
 
+type SeatsChangeProps = {
+  detail: {
+    seats: [];
+    seatsValues: [];
+  };
+};
+
 const HostContextActions: React.FC<HostContextActionsProps> = ({ participant, seat }) => {
   const { t } = useTranslation('fishbowl');
   const [show, setShow] = useState<boolean>(false);
+  const [seatList, setSeatList] = useState<Array<string>>([]);
   const { isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const isMyself = participant ? participant.isCurrentUser : false;
 
   const showHostContextActions = () => {
     return (
-      isModerator && fishbowlReady && !isMyself && conferenceStatus === IConferenceStatus.RUNNING
+      participant &&
+      isModerator &&
+      fishbowlReady &&
+      !isMyself &&
+      conferenceStatus === IConferenceStatus.RUNNING
     );
   };
 
@@ -44,6 +59,16 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ participant, se
   const showModal = (): void => {
     setShow(true);
   };
+
+  useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeProps) => {
+    setSeatList(seatsValues);
+  });
+
+  useEffect(() => {
+    if (seat && seatList[seat]) {
+      participant = conferenceRepository.getParticipantById(seatList[seat]);
+    }
+  }, [seatList]);
 
   return (
     <>
@@ -62,7 +87,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ participant, se
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
-            <ReasonForm participant={participant} seat={seat} />
+            <ReasonForm participant={participant} />
           </div>
         </Modal>
       )}
