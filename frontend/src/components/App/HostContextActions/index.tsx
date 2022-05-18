@@ -103,7 +103,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
-            <ReasonForm participant={participant} showModal={show} />
+            <ReasonForm participant={participant} onSubmit={() => closeModal()} />
           </div>
         </Modal>
       )}
