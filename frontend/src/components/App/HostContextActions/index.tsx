@@ -24,7 +24,7 @@ import { Participant } from '@/types/participant';
 
 interface HostContextActionsProps {
   initialParticipant: Participant;
-  seat: number;
+  seatNumber: number;
 }
 
 type SeatsChangeProps = {
@@ -34,7 +34,10 @@ type SeatsChangeProps = {
   };
 };
 
-const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticipant, seat }) => {
+const HostContextActions: React.FC<HostContextActionsProps> = ({
+  initialParticipant,
+  seatNumber
+}) => {
   const { t } = useTranslation('fishbowl');
   const [show, setShow] = useState<boolean>(false);
   const [participant, setParticipant] = useState<Participant>(
@@ -67,8 +70,10 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
   };
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeProps) => {
-    if (seatsValues[seat]) {
-      setParticipant(conferenceRepository.getParticipantById(seatsValues[seat]));
+    const participantId = seatsValues[seatNumber];
+
+    if (participantId) {
+      setParticipant(conferenceRepository.getParticipantById(participantId));
     } else {
       setParticipant(null);
     }

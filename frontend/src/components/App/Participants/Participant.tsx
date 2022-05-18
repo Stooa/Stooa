@@ -49,7 +49,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      <HostContextActions initialParticipant={participant} seat={null} />
+      <HostContextActions initialParticipant={participant} seatNumber={null} />
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>

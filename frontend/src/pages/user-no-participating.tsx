@@ -11,15 +11,29 @@ import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { useRouter } from 'next/router';
+import { IConferenceStatus } from '@/jitsi/Status';
+import { useStateValue } from '@/contexts/AppContext';
 
 const UserNoParticipatingPage = () => {
   const { t, lang } = useTranslation('user-no-participating');
   const router = useRouter();
   const { fid } = router.query;
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
+  const [{}, dispatch] = useStateValue();
+
+  useEffect(() => {
+    dispatch({
+      type: 'FISHBOWL_STATUS',
+      fishbowlReady: false,
+      fishbowlStarted: false,
+      isGuest: false,
+      prejoin: true,
+      conferenceStatus: IConferenceStatus?.NOT_STARTED
+    });
+  }, []); // es
 
   return (
     <>

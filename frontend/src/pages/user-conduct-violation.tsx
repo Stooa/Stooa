@@ -9,10 +9,24 @@
 
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { IConferenceStatus } from '@/jitsi/Status';
+import { useStateValue } from '@/contexts/AppContext';
 
 const UserConductViolationPage = () => {
   const { t } = useTranslation('user-conduct-violation');
+  const [{}, dispatch] = useStateValue();
+
+  useEffect(() => {
+    dispatch({
+      type: 'FISHBOWL_STATUS',
+      fishbowlReady: false,
+      fishbowlStarted: false,
+      isGuest: false,
+      prejoin: true,
+      conferenceStatus: IConferenceStatus?.NOT_STARTED
+    });
+  }, []); // es
 
   return (
     <>
