@@ -47,9 +47,9 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const isMyself = participant ? participant.isCurrentUser : false;
 
-  const showHostContextActions = () => {
+  const showKickButton = () => {
     return (
-      (participant || initialParticipant) &&
+      participant &&
       isModerator &&
       fishbowlReady &&
       !isMyself &&
@@ -87,7 +87,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
 
   return (
     <>
-      {showHostContextActions() && (
+      {showKickButton() && (
         <Button
           style={{ zIndex: 9, position: 'absolute', top: '12px', right: '12px', padding: '10px' }}
           variant="secondary"
