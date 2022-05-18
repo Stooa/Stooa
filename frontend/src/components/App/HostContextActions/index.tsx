@@ -69,21 +69,16 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
   });
 
   useEffect(() => {
-    if (
-      fishbowlReady &&
-      conferenceStatus === IConferenceStatus.RUNNING &&
-      initialParticipant &&
-      initialParticipant.id
-    ) {
+    if (show && initialParticipant) {
       setParticipant(conferenceRepository.getParticipantById(initialParticipant.id));
     }
-  }, [initialParticipant]);
+  }, [show]);
 
   return (
     <>
       {showHostContextActions() && (
         <Button
-          style={{ zIndex: 10, position: 'absolute', top: '12px', right: '12px', padding: '10px' }}
+          style={{ zIndex: 9, position: 'absolute', top: '12px', right: '12px', padding: '10px' }}
           variant="secondary"
           className="never-full"
           onClick={showModal}
@@ -91,7 +86,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
           <span>{t('kick.button')}</span>
         </Button>
       )}
-      {show && (
+      {show && participant && (
         <Modal>
           <div className="content">
             <button className="close" onClick={closeModal}>
@@ -100,13 +95,15 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
 
             <h2 className="title-sm">
               {t('kick.modal.title', {
-                userName: participant.name ? participant.name : participant.getDisplayName()
+                userName: initialParticipant
+                  ? initialParticipant.name
+                  : participant.getDisplayName()
               })}
             </h2>
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
-            <ReasonForm participant={participant} />
+            <ReasonForm participant={participant} showModal={show} />
           </div>
         </Modal>
       )}
