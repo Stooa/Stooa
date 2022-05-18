@@ -87,9 +87,9 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
 
   return (
     <>
-      {showKickButton() && seatNumber &&(
+      {showKickButton() && seatNumber && (
         <Button
-          style={{zIndex: 9, position: 'absolute', top: '12px', right: '12px', padding: '10px'}}
+          style={{ zIndex: 9, position: 'absolute', top: '12px', right: '12px', padding: '10px' }}
           variant="secondary"
           className="never-full"
           onClick={showModal}
@@ -97,12 +97,8 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
           <span>{t('kick.button')}</span>
         </Button>
       )}
-      {showKickButton() && !seatNumber &&(
-        <Button
-          variant="secondary"
-          className="never-full"
-          onClick={showModal}
-        >
+      {showKickButton() && !seatNumber && (
+        <Button variant="secondary" className="never-full" onClick={showModal}>
           <span>{t('kick.button')}</span>
         </Button>
       )}
