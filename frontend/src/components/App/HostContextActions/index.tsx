@@ -95,9 +95,9 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
 
             <h2 className="title-sm">
               {t('kick.modal.title', {
-                userName: initialParticipant
-                  ? initialParticipant.name
-                  : participant.getDisplayName()
+                userName: participant
+                  ? participant.getDisplayName()
+                  : ''
               })}
             </h2>
             <p className="description">
