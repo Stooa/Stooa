@@ -16,6 +16,7 @@ import { ROUTE_FISHBOWL } from '@/app.config';
 import { useRouter } from 'next/router';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
+import Layout from '@/layouts/Default';
 
 const UserNoParticipatingPage = () => {
   const { t, lang } = useTranslation('user-no-participating');
@@ -37,22 +38,21 @@ const UserNoParticipatingPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{t('pageTitle')}</title> XXX
-      </Head>
-      <h1>{t('title')}</h1>
-      <p>{t('description')}</p>
-      <ul>
-        <li>{t('firstReason')}</li>
-        <li>{t('secondReason')}</li>
-      </ul>
-      {fid && (
-        <RedirectLink href={fbRoute} locale={lang} passHref>
-          <Button size="large" variant="primary" as="a">
-            {t('backButton')}
-          </Button>
-        </RedirectLink>
-      )}
+      <Layout title={t('pageTitle')}>
+        <h1>{t('title')}</h1>
+        <p>{t('description')}</p>
+        <ul>
+          <li>{t('firstReason')}</li>
+          <li>{t('secondReason')}</li>
+        </ul>
+        {fid && (
+          <RedirectLink href={fbRoute} locale={lang} passHref>
+            <Button size="large" variant="primary" as="a">
+              {t('backButton')}
+            </Button>
+          </RedirectLink>
+        )}
+      </Layout>
     </>
   );
 };

@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useEffect } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
+import Layout from '@/layouts/Default';
 
 const UserConductViolationPage = () => {
   const { t } = useTranslation('user-conduct-violation');
@@ -30,11 +30,10 @@ const UserConductViolationPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{t('pageTitle')}</title> XXX
-      </Head>
-      <h1>{t('title')}</h1>
-      <p>{t('description')}</p>
+      <Layout title={t('pageTitle')}>
+        <h1>{t('title')}</h1>
+        <p>{t('description')}</p>
+      </Layout>
     </>
   );
 };
