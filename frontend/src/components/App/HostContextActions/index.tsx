@@ -37,14 +37,16 @@ type SeatsChangeProps = {
 const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticipant, seat }) => {
   const { t } = useTranslation('fishbowl');
   const [show, setShow] = useState<boolean>(false);
-  const [participant, setParticipant] = useState<Participant>(initialParticipant);
+  const [participant, setParticipant] = useState<Participant>(
+    initialParticipant ? initialParticipant : null
+  );
   const { isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const isMyself = participant ? participant.isCurrentUser : false;
 
   const showHostContextActions = () => {
     return (
-      participant &&
+      (participant || initialParticipant) &&
       isModerator &&
       fishbowlReady &&
       !isMyself &&
@@ -58,6 +60,10 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
 
   const showModal = (): void => {
     setShow(true);
+  };
+
+  const getUserName = (): string => {
+    return initialParticipant ? initialParticipant.name : participant.getDisplayName();
   };
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeProps) => {
@@ -86,7 +92,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
           <span>{t('kick.button')}</span>
         </Button>
       )}
-      {show && participant && (
+      {show && (
         <Modal>
           <div className="content">
             <button className="close" onClick={closeModal}>
@@ -95,9 +101,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({ initialParticip
 
             <h2 className="title-sm">
               {t('kick.modal.title', {
-                userName: participant
-                  ? participant.getDisplayName()
-                  : ''
+                userName: getUserName()
               })}
             </h2>
             <p className="description">
