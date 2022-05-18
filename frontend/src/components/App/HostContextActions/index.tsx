@@ -65,7 +65,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
     setShow(true);
   };
 
-  const getUserName = (): string => {
+  const getParticipantName = (): string => {
     return initialParticipant ? initialParticipant.name : participant.getDisplayName();
   };
 
@@ -106,7 +106,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
 
             <h2 className="title-sm">
               {t('kick.modal.title', {
-                userName: getUserName()
+                userName: getParticipantName()
               })}
             </h2>
             <p className="description">
