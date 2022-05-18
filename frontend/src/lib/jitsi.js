@@ -44,6 +44,12 @@ const unload = async () => {
   localTracksCreated = false;
 };
 
+const kicked = () => {
+  console.log('[STOOA] user kicked from jitsi');
+
+  localTracksCreated = false;
+};
+
 const initializeJitsi = () => {
   console.log('[STOOA] Initialize jitsi');
 
@@ -110,5 +116,6 @@ export {
   join,
   leave,
   unload,
-  kickParticipant
+  kickParticipant,
+  kicked
 };

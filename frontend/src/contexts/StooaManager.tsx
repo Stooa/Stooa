@@ -18,7 +18,13 @@ import {
   ROUTE_USER_NO_PARTICIPATING
 } from '@/app.config';
 import api from '@/lib/api';
-import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
+import {
+  initialInteraction,
+  initializeJitsi,
+  initializeConnection,
+  unload,
+  kicked
+} from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
@@ -73,6 +79,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
     if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
       return;
     }
+
+    kicked();
 
     const pathName =
       reason === REASON_CONDUCT_VIOLATION

@@ -20,8 +20,8 @@ const UserConductViolationPage = () => {
   useEffect(() => {
     dispatch({
       type: 'FISHBOWL_STATUS',
-      fishbowlReady: false,
-      fishbowlStarted: false,
+      fishbowlReady: true,
+      fishbowlStarted: true,
       isGuest: false,
       prejoin: true,
       conferenceStatus: IConferenceStatus?.NOT_STARTED
