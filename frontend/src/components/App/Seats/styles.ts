@@ -217,10 +217,12 @@ const Seat = styled.div`
 
     .video-placeholder {
       opacity: 1;
+      z-index: 7;
     }
   }
 
-  &.user-muted-video {
+  &.user-muted-video,
+  &.no-video-permission {
     &::before {
       background: ${COLOR_NEUTRO_600};
     }

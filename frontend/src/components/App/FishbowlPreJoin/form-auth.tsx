@@ -35,10 +35,10 @@ const AuthUser = ({ name }: TProps) => {
 
   return (
     <FormikForm as="div">
-      <InputStyled className="disabled">
+      {/* <InputStyled className="disabled">
         <input className="filled" type="text" disabled value={name} />
         <label>{t('name')}</label>
-      </InputStyled>
+      </InputStyled> */}
       <fieldset className="submit-wrapper">
         <Button size="large" as="a" onClick={handleOnSubmit}>
           {t('button.enterFishbowl')}

@@ -19,7 +19,8 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_RED_400,
-  COLOR_RED_500
+  COLOR_RED_500,
+  COLOR_RED_600
 } from '@/ui/settings';
 import { rems } from '@/ui/helpers';
 
@@ -39,12 +40,12 @@ const Button = styled(ActionButton)`
 
   .alert {
     position: absolute;
-    color: ${COLOR_NEUTRO_100};
     top: 0;
     right: -50%;
     transition: transform 0.2s ease-in;
 
-    svg circle {
+    svg path:first-child {
+      fill: ${COLOR_RED_600};
       transition: fill 0.1s ease-out;
     }
   }
@@ -101,7 +102,7 @@ const Button = styled(ActionButton)`
         transition: transform 0.2s ease-out;
         transform: translateY(-2px);
 
-        circle {
+        svg:first-child {
           fill: ${COLOR_RED_500};
         }
       }

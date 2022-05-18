@@ -87,6 +87,6 @@
     },
     "permissionsModalTitle": "Permissions needed",
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
-    "permissionsModalButton": "Grant permissions",
-    "permissionsModalErrorToast" : "There was an error with permissions.<br/>You may have blocked it from browser settings."
+    "permissionsModalButton": "Request access",
+    "permissionsModalErrorToast" : "A problem with the permissions occurred.<br/>You may have them blocked from the browser."
 }

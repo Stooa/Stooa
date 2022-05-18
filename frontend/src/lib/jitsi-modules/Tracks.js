@@ -64,7 +64,7 @@ const tracksRepository = () => {
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
-          console.log('[STOOA] Track muted', track.getParticipantId() + trackType);
+          console.log('[STOOA] Track muted ', track.getParticipantId() + trackType);
         });
       }
     }
@@ -103,7 +103,7 @@ const tracksRepository = () => {
     if (trackHtml !== null) {
       if (track.isLocal() && !track.isMuted()) {
         track.mute().then(() => {
-          console.log('[STOOA] Track muted', track.getParticipantId() + track.getType());
+          console.log('[STOOA] Track muted (from remove) ', track.getParticipantId() + track.getType());
         });
       }
 

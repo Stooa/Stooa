@@ -9,7 +9,7 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START } from '@/jitsi/Events';
+import { CONFERENCE_START, PERMISSION_CHANGED } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -196,7 +196,8 @@ const conferenceRepository = () => {
     console.log('[STOOA] User media slow promise timeout');
   };
 
-  const _handlePermissionChanged = () => {
+  const _handlePermissionChanged = (permissions) => {
+    if(permissions) dispatchEvent(PERMISSION_CHANGED, permissions);
     console.log('[STOOA] Permission changed');
   };
 
@@ -380,7 +381,7 @@ const conferenceRepository = () => {
     initializeConnection,
     leave,
     sendJoinEvent,
-    sendLeaveEvent
+    sendLeaveEvent,
   };
 };
 

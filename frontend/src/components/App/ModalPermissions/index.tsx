@@ -26,20 +26,34 @@ interface Props {
 const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
   const { t } = useTranslation('fishbowl');
 
+  const fireErrorToast = () => {
+    toast(<Trans i18nKey="fishbowl:permissionsModalErrorToast" components={{ br: <br /> }} />, {
+      type: 'error',
+      toastId: 'permissions-error',
+      icon: '❗',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+  };
+
   const handleRequestPermissions = () => {
-    // devicesRepository.loadDevices(newDevices => console.log('Sauriki', newDevices));
     LocalTracks.createLocalTracks()
       .then(data => {
-        closeModal();
+        let audioGranted = false;
+        data.forEach(track => {
+          if (track.type === 'audio') {
+            audioGranted = true;
+          }
+        });
+
+        if (audioGranted) {
+          closeModal();
+        } else {
+          fireErrorToast();
+        }
       })
       .catch(() => {
-        toast(<Trans i18nKey="fishbowl:permissionsModalErrorToast" components={{ br: <br /> }} />, {
-          type: 'error',
-          toastId: 'permissions-error',
-          icon: '❗',
-          position: 'bottom-center',
-          autoClose: 5000
-        });
+        fireErrorToast();
       });
   };
 

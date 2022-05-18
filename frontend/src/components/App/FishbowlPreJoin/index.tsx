@@ -45,9 +45,7 @@ const FishbowlPreJoin: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
 
   const localTracks = useRef([]);
-  const [showMutedPlaceholder, setShowMutedPlaceholder] = useState<boolean>(
-    userRepository.getUserVideoMuted()
-  );
+  const [muteVideo, setMuteVideo] = useState<boolean>(userRepository.getUserVideoMuted());
   const router = useRouter();
   const { t, lang } = useTranslation('common');
 
@@ -74,7 +72,7 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   const handleVideo = () => {
-    setShowMutedPlaceholder(!showMutedPlaceholder);
+    setMuteVideo(!muteVideo);
   };
 
   const handleCancel = () => {
@@ -131,23 +129,32 @@ const FishbowlPreJoin: React.FC = () => {
         <Container>
           <Devices>
             <VideoContainer>
-              {showMutedPlaceholder && permissions.video && <VideoPlaceholder />}
-              <VideoPermissionsPlaceholder>
-                <Image
-                  src="/img/permissions/prejoin.png"
-                  alt="Permissions illustration, a funny one"
-                  width={178.26 / 1.2}
-                  height={172.64 / 1.2}
-                  layout="intrinsic"
-                />
-                <p className="body-sm">
-                  <Trans
-                    i18nKey="fishbowl:prejoin.permissions"
-                    components={{ span: <span className="medium" /> }}
+              <video
+                id="prejoin"
+                style={{ opacity: muteVideo && 0 }}
+                autoPlay
+                muted
+                className="video"
+                playsInline
+              />
+              <VideoPlaceholder />
+              {!permissions.video && (
+                <VideoPermissionsPlaceholder>
+                  <Image
+                    src="/img/permissions/prejoin.png"
+                    alt="Permissions illustration, a funny one"
+                    width={178.26 / 1.2}
+                    height={172.64 / 1.2}
+                    layout="intrinsic"
                   />
-                </p>
-              </VideoPermissionsPlaceholder>
-              <video id="prejoin" autoPlay muted className="video" playsInline />
+                  <p className="body-sm">
+                    <Trans
+                      i18nKey="fishbowl:prejoin.permissions"
+                      components={{ span: <span className="medium" /> }}
+                    />
+                  </p>
+                </VideoPermissionsPlaceholder>
+              )}
             </VideoContainer>
             <DevicesToolbar>
               <ButtonVideo

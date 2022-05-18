@@ -13,6 +13,8 @@ import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
 import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
+import useEventListener from '@/hooks/useEventListener';
+import { PERMISSION_CHANGED } from '@/jitsi/Events';
 
 const DevicesContext = createContext<DevicesCtx>(undefined);
 
@@ -32,8 +34,8 @@ const DevicesProvider = ({ children }) => {
     userRepository.getUserVideoInput()
   );
   const [permissions, setPermissions] = useState({
-    audio: false,
-    video: false
+    audio: true,
+    video: true
   });
   const [showModalPermissions, setShowModalPermissions] = useState<boolean>(false);
 
@@ -109,6 +111,12 @@ const DevicesProvider = ({ children }) => {
     userRepository.setUserVideoInput(device);
     setVideoDevice(device);
   };
+
+  useEventListener(PERMISSION_CHANGED, permissions => {
+    if (permissions.detail) {
+      setPermissions(permissions.detail);
+    }
+  });
 
   useEffect(() => {
     if (

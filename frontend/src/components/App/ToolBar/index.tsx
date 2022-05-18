@@ -99,19 +99,19 @@ const ToolBar: React.FC = () => {
   useEventListener('click', handleOutsideClick);
 
   useEffect(() => {
-    if (null !== audioOutputDevice) {
+    if (audioOutputDevice !== null) {
       devicesRepository.changeDevice(audioOutputDevice);
     }
   }, [audioOutputDevice]);
 
   useEffect(() => {
-    if (joined && null !== audioInputDevice) {
+    if (joined && audioInputDevice !== null) {
       devicesRepository.changeDevice(audioInputDevice);
     }
-  }, [audioInputDevice]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [audioInputDevice, permissions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (joined && null !== videoDevice) {
+    if (joined && videoDevice !== null) {
       devicesRepository.changeDevice(videoDevice);
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -149,7 +149,7 @@ const ToolBar: React.FC = () => {
   return (
     <Container className={isModerator ? 'moderator' : ''}>
       <ButtonJoin
-        permissions={permissions.audio}
+        permissions={joined ? true : permissions.audio}
         joined={joined}
         join={joinSeat}
         leave={leaveSeat}
@@ -158,7 +158,11 @@ const ToolBar: React.FC = () => {
         {joinLabel}
       </ButtonJoin>
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
-      <ButtonVideo handleVideo={handleVideo} joined={joined} disabled={isMuteDisabled} />
+      <ButtonVideo
+        handleVideo={handleVideo}
+        joined={joined}
+        disabled={isMuteDisabled || !permissions.video}
+      />
       <ButtonConfig selectorPosition="top" ref={configButtonRef} />
     </Container>
   );
