@@ -74,10 +74,11 @@ const VideoContainer = styled.div`
   display: grid;
   align-items: center;
   position: relative;
-  border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
+  border-radius: ${BORDER_RADIUS} ${BORDER_RADIUS} 0 0;
   height: 35vh;
   overflow: hidden;
   width: 100%;
+  min-height: 420px;
 
   .video {
     width: 100%;
@@ -88,6 +89,7 @@ const VideoContainer = styled.div`
   }
 
   ${media.min('tablet')`
+    border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
     height: 100%;
   `}
 `;

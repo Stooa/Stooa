@@ -7,8 +7,10 @@
  * file that was distributed with this source code.
  */
 
+import { StyledSvg } from './styles';
+
 const PrejoinPermissionFriend = props => (
-  <svg
+  <StyledSvg
     preserveAspectRatio="xMaxYMid meet"
     viewBox="0 0 220 220"
     width={200}
@@ -367,6 +369,6 @@ const PrejoinPermissionFriend = props => (
         </g>
       </g>
     </g>
-  </svg>
+  </StyledSvg>
 );
 export default PrejoinPermissionFriend;

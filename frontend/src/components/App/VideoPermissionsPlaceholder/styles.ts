@@ -15,12 +15,10 @@ const Placeholder = styled.div`
   background: ${COLOR_NEUTRO_400};
   color: ${COLOR_NEUTRO_700};
   display: grid;
-  justify-items: center;
-  align-items: center;
   align-content: center;
+  justify-items: center;
   row-gap: ${space(3)};
   height: 100%;
-  justify-content: center;
   left: 0;
   pointer-events: none;
   position: absolute;
