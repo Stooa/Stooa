@@ -16,6 +16,8 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import I18nProvider from 'next-translate/I18nProvider';
 
 import appEN from 'locales/en/app.json';
+import {StooaProvider} from "@/contexts/StooaManager";
+import { MockedProvider } from '@apollo/client/testing';
 
 const introState = {
   fishbowlReady: true,
@@ -25,11 +27,26 @@ const introState = {
   conferenceStatus: IConferenceStatus.NOT_STARTED
 };
 
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: '',
+      asPath: ''
+    };
+  }
+}));
+
 const renderWithContext = state => {
   render(
     <I18nProvider lang={'en'} namespaces={{ app: appEN }}>
       <StateProvider value={[state]}>
-        <Seats />
+      <MockedProvider>
+        <StooaProvider>
+            <Seats />
+        </StooaProvider>
+      </MockedProvider>
       </StateProvider>
     </I18nProvider>
   );
