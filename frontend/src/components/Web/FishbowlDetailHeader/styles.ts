@@ -19,7 +19,7 @@ const Navigation = styled.div`
 
   ${BODY_SM}
 
-  > a:first-child {
+  > *:not(:last-child) {
     margin-right: ${space(3)};
   }
   ${media.min('tablet')`

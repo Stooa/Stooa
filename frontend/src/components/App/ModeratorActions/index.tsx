@@ -44,7 +44,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const { permissions, setShowModalPermissions } = useDevices();
 
   const toggleIntroductionModal = () => {
-    if (!permissions.audio) {
+    if (!permissions.audio && !introduction) {
       setShowModalPermissions(true);
       return;
     }
@@ -66,7 +66,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const startFishbowl = () => {
-    if (!permissions.audio) {
+    if (!permissions.audio && !introduction) {
       setShowModalPermissions(true);
       return;
     }
@@ -174,7 +174,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
             </Button>
           ) : (
             <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
-              {!permissions.audio && (
+              {!permissions.audio && !introduction && (
                 <div className="alert">
                   <PermissionsAlert />
                 </div>

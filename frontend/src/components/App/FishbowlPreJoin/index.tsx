@@ -37,7 +37,6 @@ import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
-import Image from 'next/image';
 import Trans from 'next-translate/Trans';
 import PrejoinPermissionFriend from '@/components/Common/SVG/PrejoinPermissionFriend';
 
