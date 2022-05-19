@@ -103,7 +103,10 @@ const tracksRepository = () => {
     if (trackHtml !== null) {
       if (track.isLocal() && !track.isMuted()) {
         track.mute().then(() => {
-          console.log('[STOOA] Track muted (from remove) ', track.getParticipantId() + track.getType());
+          console.log(
+            '[STOOA] Track muted (from remove) ',
+            track.getParticipantId() + track.getType()
+          );
         });
       }
 
