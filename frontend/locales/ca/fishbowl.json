@@ -84,16 +84,16 @@
         "shareText": "Copia i comparteix l'enllaç per a convidar a mes persones  a aquest <i>fishbowl</i>."
     },
     "kick": {
-        "button": "Kick",
+        "button": "Expulsar",
         "modal": {
-            "title": "Why do you want to kick {{userName}}?",
-            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "title": "Per què vols expulsar a {{userName}}?",
+            "description": "La persona indicada serà expulsada i rebrà notificació, però podrà tornar a la sala si vol.",
             "options": {
-                "noParticipating": "The user occupies a seat without participating.",
-                "conductViolation": "The user has violated the code of conduct of the community."
+                "noParticipating": "Està ocupant un seient sense participar.",
+                "conductViolation": "Ha violat el codi de conducta de la comunitat."
             },
-            "button": "Kick user",
-            "cancelButton": "Cancel"
+            "button": "Expulsar usuari",
+            "cancelButton": "Cancelar"
         }
     }
 }

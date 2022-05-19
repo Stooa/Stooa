@@ -86,14 +86,14 @@
     "kick": {
         "button": "Kick",
         "modal": {
-            "title": "Why do you want to kick {{userName}}?",
-            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "title": "¿Por qué quieres expulsar a {{userName}}?",
+            "description": "La persona indicada será expulsada y recibirá notificación, pero podrá volver a la sala si quiere.",
             "options": {
-                "noParticipating": "The user occupies a seat without participating.",
-                "conductViolation": "The user has violated the code of conduct of the community."
+                "noParticipating": "Está ocupando un asiento sin participar.",
+                "conductViolation": "Ha violado el código de conducta de la comunidad."
             },
-            "button": "Kick user",
-            "cancelButton": "Cancel"
+            "button": "Expulsar usuario/a",
+            "cancelButton": "Cancelar"
         }
     }
 }
