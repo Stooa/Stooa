@@ -122,6 +122,13 @@ const Button = styled(ActionButton)`
       color: ${COLOR_NEUTRO_100};
     }
 
+    .alert {
+      svg path:first-child {
+        fill: ${COLOR_NEUTRO_400};
+        transition: fill 0.1s ease-out;
+      }
+    }
+
     .text {
       color: ${COLOR_NEUTRO_500};
     }

@@ -18,6 +18,7 @@ import Button from '@/components/Common/Button';
 import Image from 'next/image';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { toast } from 'react-toastify';
+import MicPermissionFriend from '@/components/Common/SVG/MicPermissionFriend';
 
 interface Props {
   closeModal: () => void;
@@ -63,12 +64,7 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <Image
-          src="/img/permissions/modal.png"
-          alt="Modal Illustration, a cute one"
-          height={165}
-          width={138.85}
-        />
+        <MicPermissionFriend />
         <h2 className="title-sm">
           <Trans i18nKey="fishbowl:permissionsModalTitle" />
         </h2>
