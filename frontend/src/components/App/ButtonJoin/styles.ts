@@ -124,7 +124,7 @@ const Button = styled(ActionButton)`
 
     .alert {
       svg path:first-child {
-        fill: ${COLOR_RED_400};
+        fill: ${COLOR_NEUTRO_400};
         transition: fill 0.1s ease-out;
       }
     }
