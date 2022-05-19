@@ -196,8 +196,8 @@ const conferenceRepository = () => {
     console.log('[STOOA] User media slow promise timeout');
   };
 
-  const _handlePermissionChanged = (permissions) => {
-    if(permissions) dispatchEvent(PERMISSION_CHANGED, permissions);
+  const _handlePermissionChanged = permissions => {
+    if (permissions) dispatchEvent(PERMISSION_CHANGED, permissions);
     console.log('[STOOA] Permission changed');
   };
 
@@ -381,7 +381,7 @@ const conferenceRepository = () => {
     initializeConnection,
     leave,
     sendJoinEvent,
-    sendLeaveEvent,
+    sendLeaveEvent
   };
 };
 

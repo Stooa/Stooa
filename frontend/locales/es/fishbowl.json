@@ -88,5 +88,5 @@
     "permissionsModalTitle": "Permisos necesarios",
     "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
     "permissionsModalButton": "Solicitar acceso",
-    "permissionsModalErrorToast" : "Hay un problema con los permisos.<br/>Puede que los tengas bloqueados desde el navegador."
+    "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar."
 }

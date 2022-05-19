@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { BODY_SM } from '@/ui/Texts';
 
 const Navigation = styled.div`
@@ -19,9 +19,11 @@ const Navigation = styled.div`
 
   ${BODY_SM}
 
-  > *:not(:last-child) {
+  > a:first-child {
     margin-right: ${space(3)};
   }
+  ${media.min('tablet')`
+  `}
 `;
 
 const Avatar = styled.div`
