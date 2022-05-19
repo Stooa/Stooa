@@ -1,8 +1,8 @@
 {
-    "pageTitle": "¿Sigues ahí?",
-    "title": "¿Sigues ahí?",
-    "description": "La persona anfitriona considera que estás ocupando una silla del fishbowl sin participar.",
-    "firstReason": "Si solo quieres escuchar, no es necesario ocupar una silla del fishbowl.",
-    "secondReason": "Si has llegado aquí por problemas técnicos, recuerda que tienes que dar acceso a los permisos del micrófono para que el resto de participantes te escuche.",
-    "backButton": "Volver"
+    "pageTitle": "Segueixes aquí?",
+    "title": "Segueixes aquí?",
+    "description": "La persona amfitriona considera que estàs ocupant una cadira del fishbowl sense participar.",
+    "firstReason": "Si només vols escoltar, no és necessari ocupar una cadira del fishbowl.",
+    "secondReason": "Si has arribat aquí per problemes tècnics, recorda que has de donar accés als permisos del micròfon perquè la resta de participants t'escolti.",
+    "backButton": "Entès, vull tornar a la sala."
 }
