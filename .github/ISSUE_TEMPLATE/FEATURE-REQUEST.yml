@@ -1,7 +1,7 @@
 name: Feature Request
 description: Request a feature for Stooa.
 title: '[Feature]: '
-labels: ['feature-request']
+labels: ['feature']
 body:
     - type: markdown
       attributes:
