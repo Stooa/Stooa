@@ -9,10 +9,12 @@
 
 import ButtonJoin from '@/components/App/ButtonJoin';
 import { render, screen } from '@testing-library/react';
+import { DevicesProvider } from '@/contexts/DevicesContext';
 
 describe('Unit test of button join', () => {
   it('should render the `button`', () => {
-    render(<ButtonJoin />);
+    const permissions = {audio: true, video: true};
+    render(<DevicesProvider value={permissions}><ButtonJoin /></DevicesProvider>);
     const button = screen.getByRole('button');
 
     expect(button).toBeInTheDocument();
