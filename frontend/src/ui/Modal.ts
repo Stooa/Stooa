@@ -9,7 +9,7 @@
 
 import styled from 'styled-components';
 
-import { space, rems, hexToRgb } from '@/ui/helpers';
+import { space, rems, hexToRgb, media } from '@/ui/helpers';
 import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_700, COLOR_NEUTRO_900 } from '@/ui/settings';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
@@ -27,6 +27,10 @@ const Modal = styled.div`
   top: 0;
   z-index: 11;
   overflow: scroll;
+
+  ${media.min('tablet')`
+    overflow: unset;
+  `}
 
   .content {
     background-color: ${COLOR_NEUTRO_100};
