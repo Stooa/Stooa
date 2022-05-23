@@ -46,7 +46,9 @@
     "speaker": "Speaker",
     "cam": "Camera",
     "prejoin": {
-        "title": "Set up your micro and camera!"
+        "title": "Join the room",
+        "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
+        "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
     "waiting": "Waiting for host to start the fishbowl",
     "waitingHost": "Attendees are waiting for you to start the fishbowl",
@@ -95,5 +97,9 @@
             "button": "Kick user",
             "cancelButton": "Cancel"
         }
-    }
+    },
+    "permissionsModalTitle": "Permissions needed",
+    "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
+    "permissionsModalButton": "Request access",
+    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue."
 }

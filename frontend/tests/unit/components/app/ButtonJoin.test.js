@@ -9,12 +9,27 @@
 
 import ButtonJoin from '@/components/App/ButtonJoin';
 import { render, screen } from '@testing-library/react';
+import { createContext } from 'react';
+const DevicesContext = createContext(undefined);
+
+jest.mock('@/contexts/DevicesContext', () => ({
+  useDevices() {
+    return {
+      audio: true,
+      video: true
+    };
+  }
+}));
+
+const renderButtonJoin = () => {
+  render(<ButtonJoin />);
+};
 
 describe('Unit test of button join', () => {
   it('should render the `button`', () => {
-    render(<ButtonJoin />);
-    const button = screen.getByRole('button');
+    renderButtonJoin();
 
+    const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
   });
 });
