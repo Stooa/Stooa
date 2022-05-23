@@ -10,7 +10,7 @@
 import styled from 'styled-components';
 
 import { BODY_SM } from '@/ui/Texts';
-import { media, space } from '@/ui/helpers';
+import { space } from '@/ui/helpers';
 
 const Navigation = styled.nav`
   align-items: center;
@@ -19,17 +19,9 @@ const Navigation = styled.nav`
 
   ${BODY_SM}
 
-  .secondary {
-    display: none;
+  > *:not(:last-child) {
+    margin-right: ${space(2)};
   }
-
-  ${media.min('tablet')`
-    > *:not(:last-child) {
-      margin-right: ${space(3)};
-    }
-
-    .secondary { display: block; }
-  `}
 `;
 
 export default Navigation;

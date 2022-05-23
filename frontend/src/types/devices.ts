@@ -24,10 +24,14 @@ export interface DevicesCtx {
   audioInputDevice: MediaDeviceInfo;
   videoDevice: MediaDeviceInfo;
   devices: Devices;
+  permissions: { audio: boolean; video: boolean };
+  showModalPermissions: boolean;
+  setShowModalPermissions: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface DevicesRepository {
   changeDevice: (device: MediaDeviceInfo) => Promise<void>;
   loadDevices: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
   clean: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
+  isDevicePermissionGranted: (type?: 'video' | 'audio') => Promise<boolean>;
 }

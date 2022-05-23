@@ -19,7 +19,8 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_RED_400,
-  COLOR_RED_500
+  COLOR_RED_500,
+  COLOR_RED_600
 } from '@/ui/settings';
 import { rems } from '@/ui/helpers';
 
@@ -27,17 +28,30 @@ const Button = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
 
   .button {
+    position: relative;
     background-color: ${COLOR_GREEN_500};
     color: ${COLOR_NEUTRO_100};
+
+    & > svg {
+      height: ${rems(24)};
+      width: ${rems(12)};
+    }
+  }
+
+  .alert {
+    position: absolute;
+    top: 0;
+    right: -50%;
+    transition: transform 0.2s ease-in;
+
+    svg path:first-child {
+      fill: ${COLOR_RED_600};
+      transition: fill 0.1s ease-out;
+    }
   }
 
   .text {
     color: ${COLOR_GREEN_500};
-  }
-
-  svg {
-    height: ${rems(24)};
-    width: ${rems(12)};
   }
 
   * {
@@ -83,6 +97,15 @@ const Button = styled(ActionButton)`
     .button {
       background-color: ${COLOR_GREEN_400};
       color: ${COLOR_NEUTRO_100};
+
+      .alert {
+        transition: transform 0.2s ease-out;
+        transform: translateY(-2px);
+
+        svg:first-child {
+          fill: ${COLOR_RED_500};
+        }
+      }
     }
 
     .text {
@@ -97,6 +120,13 @@ const Button = styled(ActionButton)`
       background-color: ${COLOR_NEUTRO_400};
       border-color: ${COLOR_NEUTRO_400};
       color: ${COLOR_NEUTRO_100};
+    }
+
+    .alert {
+      svg path:first-child {
+        fill: ${COLOR_NEUTRO_400};
+        transition: fill 0.1s ease-out;
+      }
     }
 
     .text {
