@@ -67,9 +67,14 @@ const devicesRepository = (): DevicesRepository => {
     );
   };
 
+  const isDevicePermissionGranted = (type?: 'audio' | 'video'): Promise<boolean> => {
+    return JitsiMeetJS.mediaDevices.isDevicePermissionGranted(type);
+  };
+
   return {
     changeDevice,
     loadDevices,
+    isDevicePermissionGranted,
     clean
   };
 };

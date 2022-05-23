@@ -8,19 +8,31 @@
  */
 
 import styled from 'styled-components';
-import { COLOR_NEUTRO_600 } from '@/ui/settings';
+import { COLOR_NEUTRO_400, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { media, space } from '@/ui/helpers';
 
 const Placeholder = styled.div`
-  align-items: center;
-  background: ${COLOR_NEUTRO_600};
+  background: ${COLOR_NEUTRO_400};
+  color: ${COLOR_NEUTRO_700};
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
-  justify-content: center;
   left: 0;
   pointer-events: none;
   position: absolute;
+  padding: ${space(4)};
   top: 0;
   width: 100%;
+
+  p {
+    text-align: center;
+  }
+
+  ${media.min('tablet')`
+    row-gap: ${space(3)};
+    justify-content: center;
+  `}
 `;
 
 export default Placeholder;
