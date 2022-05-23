@@ -12,14 +12,14 @@ import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import Button from '@/components/Common/Button';
 
-import FormikForm from '@/ui/Form';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import Input from '@/components/Common/Fields/Input';
 import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
 import { Participant } from '@/types/participant';
+import { KickReasonFormStyled } from './styles';
 
-interface ReasonFormProps {
+interface KickReasonFormProps {
   participant: Participant;
   onSubmit: () => void;
 }
@@ -37,18 +37,22 @@ const initialValues = {
   reason: REASON_NO_PARTICIPATING
 };
 
-const Form = (props: FormikProps<FormValues>) => {
+const Form = () => {
   const { t } = useTranslation('fishbowl');
 
   return (
-    <FormikForm>
+    <KickReasonFormStyled>
       <Input
+        validation={false}
         type="radio"
         name="reason"
         value={REASON_NO_PARTICIPATING}
         label={t('kick.modal.options.noParticipating')}
-      />
+      >
+        <div>Cositas</div>
+      </Input>
       <Input
+        validation={false}
         type="radio"
         name="reason"
         value={REASON_CONDUCT_VIOLATION}
@@ -57,7 +61,7 @@ const Form = (props: FormikProps<FormValues>) => {
       <div className="modal-footer">
         <Button type="submit">{t('kick.modal.button')}</Button>
       </div>
-    </FormikForm>
+    </KickReasonFormStyled>
   );
 };
 
@@ -75,7 +79,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const ReasonForm: React.FC<ReasonFormProps> = ({ participant, onSubmit }) => {
+const KickReasonForm: React.FC<KickReasonFormProps> = ({ participant, onSubmit }) => {
   return (
     <>
       <FormValidation participant={participant} onSubmit={onSubmit} />
@@ -83,4 +87,4 @@ const ReasonForm: React.FC<ReasonFormProps> = ({ participant, onSubmit }) => {
   );
 };
 
-export default ReasonForm;
+export default KickReasonForm;

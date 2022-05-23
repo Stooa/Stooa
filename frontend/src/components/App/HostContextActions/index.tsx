@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
-import ReasonForm from '@/components/App/HostContextActions/ReasonForm';
+import KickReasonForm from '@/components/App/KickReasonForm';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
@@ -39,7 +39,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
   seatNumber
 }) => {
   const { t } = useTranslation('fishbowl');
-  const [show, setShow] = useState<boolean>(false);
+  const [showKickReasonsModal, setShowKickReasonsModal] = useState<boolean>(false);
   const [participant, setParticipant] = useState<Participant>(
     initialParticipant ? initialParticipant : null
   );
@@ -58,11 +58,11 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
   };
 
   const closeModal = (): void => {
-    setShow(false);
+    setShowKickReasonsModal(false);
   };
 
   const showModal = (): void => {
-    setShow(true);
+    setShowKickReasonsModal(true);
   };
 
   const getParticipantName = (): string => {
@@ -80,10 +80,10 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
   });
 
   useEffect(() => {
-    if (show && initialParticipant) {
+    if (showKickReasonsModal && initialParticipant) {
       setParticipant(conferenceRepository.getParticipantById(initialParticipant.id));
     }
-  }, [show]);
+  }, [showKickReasonsModal]);
 
   return (
     <>
@@ -102,7 +102,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
           <span>{t('kick.button')}</span>
         </Button>
       )}
-      {show && (
+      {showKickReasonsModal && (
         <Modal>
           <div className="content">
             <button className="close" onClick={closeModal}>
@@ -117,7 +117,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
             <p className="description">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
-            <ReasonForm participant={participant} onSubmit={() => closeModal()} />
+            <KickReasonForm participant={participant} onSubmit={() => closeModal()} />
           </div>
         </Modal>
       )}

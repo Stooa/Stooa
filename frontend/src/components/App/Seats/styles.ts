@@ -28,7 +28,7 @@ const SeatsStyled = styled.div`
   width: 100%;
   overflow: hidden;
 
-  .content {
+  & > .content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: ${space(1)};
