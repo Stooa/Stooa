@@ -8,16 +8,14 @@
  */
 
 import { render, screen } from '@testing-library/react';
-
-import { StateProvider } from '@/contexts/AppContext';
 import Seats from '@/components/App/Seats';
 import { IConferenceStatus } from '@/jitsi/Status';
-
 import I18nProvider from 'next-translate/I18nProvider';
 
 import appEN from 'locales/en/app.json';
-import {StooaProvider} from "@/contexts/StooaManager";
+import { StooaProvider } from '@/contexts/StooaManager';
 import { MockedProvider } from '@apollo/client/testing';
+import { StateProvider } from '@/contexts/AppContext';
 
 const introState = {
   fishbowlReady: true,
@@ -38,15 +36,15 @@ jest.mock('next/router', () => ({
   }
 }));
 
+jest.mock('@/components/App/HostContextActions', () => ({ children }) => <>{children}</>);
+
 const renderWithContext = state => {
   render(
     <I18nProvider lang={'en'} namespaces={{ app: appEN }}>
       <StateProvider value={[state]}>
-      <MockedProvider>
-        <StooaProvider>
-            <Seats />
-        </StooaProvider>
-      </MockedProvider>
+        <MockedProvider>
+          <Seats />
+        </MockedProvider>
       </StateProvider>
     </I18nProvider>
   );
