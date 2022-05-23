@@ -46,7 +46,9 @@
     "speaker": "Altavoz",
     "cam": "Cámara",
     "prejoin": {
-        "title": "Configura tu micro y cámara."
+        "title": "Únete a la sala",
+        "subtitle": "Entrarás en la sala como oyente.<br/>Una vez dentro, si quieres participar activamente en la conversación tendrás que ocupar una silla del fishbowl.",
+        "permissions": "Si además de asistir al evento como público <span>quieres hablar en el fishbowl</span>, Stooa necesita permisos para acceder a tu cámara y micrófono para que todo el mundo pueda escucharte y verte."
     },
     "waiting": "Esperando a que el anfitrión inicie el fishbowl",
     "waitingHost": "Los asistentes están esperando a que inicies el fishbowl",
@@ -82,5 +84,9 @@
     },
     "fishbowlDescription":{
         "shareText": "Copia y comparte el link para invitar a más personas a este <i>fishbowl</i>."
-    }
+    },
+    "permissionsModalTitle": "Permisos necesarios",
+    "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
+    "permissionsModalButton": "Solicitar acceso",
+    "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar."
 }

@@ -13,3 +13,5 @@ export const USER_MUST_LEAVE = 'user:leave';
 export const USER_JOINED = 'user:joined';
 export const NOTIFICATION = 'notification';
 export const NOTIFICATION_CLOSE = 'notification:close';
+export const LOCALTRACK_STOPPED = 'localtrack:stopped';
+export const PERMISSION_CHANGED = 'permission:changed';

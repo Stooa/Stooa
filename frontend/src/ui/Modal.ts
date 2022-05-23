@@ -26,6 +26,7 @@ const Modal = styled.div`
   right: 0;
   top: 0;
   z-index: 11;
+  overflow: scroll;
 
   .content {
     background-color: ${COLOR_NEUTRO_100};

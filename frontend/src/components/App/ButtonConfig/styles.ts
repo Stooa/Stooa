@@ -108,6 +108,20 @@ const List = styled.ul`
   }
 `;
 
+const PermissionsNotGranted = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: ${space(1.5)};
+  padding: ${space()} ${space(2)} ${space()} ${space(2.5)};
+  color: ${COLOR_NEUTRO_600};
+
+  svg {
+    height: ${space(2)};
+    width: ${space(2)};
+  }
+`;
+
 const Item = styled.button<{ selected: boolean }>`
   align-items: center;
   color: ${COLOR_NEUTRO_600};
@@ -167,4 +181,4 @@ const HelpTextWrapper = styled.div`
   }
 `;
 
-export { Button, Container, Item, List, Selector, HelpTextWrapper };
+export { Button, Container, Item, List, Selector, HelpTextWrapper, PermissionsNotGranted };

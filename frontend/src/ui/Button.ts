@@ -62,6 +62,7 @@ const ButtonBase = styled.button<{ full?: boolean }>`
   line-height: var(--lineHeight);
   /* min-width: ${rems(20)}; */
   padding: var(--padding);
+  position: relative;
   text-decoration: none;
   transition: 0.1s ease-out;
   will-change: background, color;
@@ -77,7 +78,7 @@ const ButtonBase = styled.button<{ full?: boolean }>`
     pointer-events: none;
   }
 
-  svg {
+  & > svg {
     &:first-child {
       margin-left: ${space(0.75)};
     }
@@ -103,6 +104,12 @@ const ButtonBase = styled.button<{ full?: boolean }>`
     &:focus {
       background-color: ${COLOR_RED_600};
     }
+  }
+
+  & div.alert {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 `;
 

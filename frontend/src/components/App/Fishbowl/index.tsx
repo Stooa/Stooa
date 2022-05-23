@@ -16,6 +16,8 @@ import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
 
 import { Main } from '@/layouts/App/styles';
+import ModalPermissions from '../ModalPermissions';
+import { useDevices } from '@/contexts/DevicesContext';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -25,6 +27,7 @@ const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
   const { isModerator } = useStooa();
+  const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -34,10 +37,15 @@ const Fishbowl: FC = () => {
     setParticipantsActive(!participantsActive);
   };
 
+  const handleCloseModalPermissions = () => {
+    setShowModalPermissions(false);
+  };
+
   return (
     <>
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
+        {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
         <Seats />
       </Main>
       <Footer participantsActive={participantsActive} />
