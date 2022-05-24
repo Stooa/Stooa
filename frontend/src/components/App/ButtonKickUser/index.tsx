@@ -21,27 +21,22 @@ import { SEATS_CHANGE } from '@/jitsi/Events';
 import { Participant } from '@/types/participant';
 import ModalKickUser from '../ModalKickUser';
 
-interface HostContextActionsProps {
-  initialParticipant: Participant;
-  seatNumber: number;
+interface Props {
+  initialParticipant?: Participant;
+  seatNumber?: number;
 }
 
-type SeatsChangeProps = {
+type SeatsChangeEventProps = {
   detail: {
     seats: [];
     seatsValues: [];
   };
 };
 
-const HostContextActions: React.FC<HostContextActionsProps> = ({
-  initialParticipant,
-  seatNumber
-}) => {
+const HostContextActions = ({ initialParticipant, seatNumber = null }: Props) => {
   const { t } = useTranslation('fishbowl');
   const [showKickReasonsModal, setShowKickReasonsModal] = useState<boolean>(false);
-  const [participant, setParticipant] = useState<Participant>(
-    initialParticipant ? initialParticipant : null
-  );
+  const [participant, setParticipant] = useState<Participant>(initialParticipant);
   const { isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const isMyself = participant ? participant.isCurrentUser : false;
@@ -68,7 +63,7 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
     return initialParticipant ? initialParticipant.name : participant.getDisplayName();
   };
 
-  useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeProps) => {
+  useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeEventProps) => {
     const participantId = seatsValues[seatNumber];
 
     if (participantId) {
@@ -93,11 +88,6 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
           className="never-full"
           onClick={showModal}
         >
-          <span>{t('kick.button')}</span>
-        </Button>
-      )}
-      {showKickButton() && !seatNumber && (
-        <Button variant="secondary" className="never-full" onClick={showModal}>
           <span>{t('kick.button')}</span>
         </Button>
       )}

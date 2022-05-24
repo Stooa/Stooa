@@ -12,6 +12,8 @@ import React, { useEffect } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import Layout from '@/layouts/Default';
+import ReadingFriend from '@/components/Common/SVG/ReadingFriend';
+import { Content } from '@/layouts/KickedUser/styles';
 
 const UserConductViolationPage = () => {
   const { t } = useTranslation('user-conduct-violation');
@@ -26,15 +28,16 @@ const UserConductViolationPage = () => {
       prejoin: true,
       conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
-  }, []); // es
+  }, []);
 
   return (
-    <>
-      <Layout title={t('pageTitle')}>
-        <h1>{t('title')}</h1>
+    <Layout title={t('pageTitle')}>
+      <Content>
+        <ReadingFriend />
+        <h1 className="title-sm">{t('title')}</h1>
         <p>{t('description')}</p>
-      </Layout>
-    </>
+      </Content>
+    </Layout>
   );
 };
 

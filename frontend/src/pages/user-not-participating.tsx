@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
@@ -17,9 +16,12 @@ import { useRouter } from 'next/router';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import Layout from '@/layouts/Default';
+import { Content } from '@/layouts/KickedUser/styles';
+import MeditatingFriend from '@/components/Common/SVG/MeditatingFriend';
+import Info from '@/ui/svg/info-brown.svg';
 
 const UserNoParticipatingPage = () => {
-  const { t, lang } = useTranslation('user-no-participating');
+  const { t, lang } = useTranslation('user-not-participating');
   const router = useRouter();
   const { fid } = router.query;
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
@@ -39,19 +41,25 @@ const UserNoParticipatingPage = () => {
   return (
     <>
       <Layout title={t('pageTitle')}>
-        <h1>{t('title')}</h1>
-        <p>{t('description')}</p>
-        <ul>
-          <li>{t('firstReason')}</li>
-          <li>{t('secondReason')}</li>
-        </ul>
-        {fid && (
-          <RedirectLink href={fbRoute} locale={lang} passHref>
-            <Button size="large" variant="primary" as="a">
-              {t('backButton')}
-            </Button>
-          </RedirectLink>
-        )}
+        <Content>
+          <MeditatingFriend />
+          <h1 className="title-sm">{t('title')}</h1>
+          <p className="description">{t('description')}</p>
+          <div className="reasons">
+            <Info />
+            <ul>
+              <li>{t('firstReason')}</li>
+              <li>{t('secondReason')}</li>
+            </ul>
+          </div>
+          {fid && (
+            <RedirectLink href={fbRoute} locale={lang} passHref>
+              <Button size="large" variant="primary" as="a">
+                {t('backButton')}
+              </Button>
+            </RedirectLink>
+          )}
+        </Content>
       </Layout>
     </>
   );

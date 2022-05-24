@@ -89,7 +89,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
     const url = {
       pathname: pathName,
-      query: { fid: fid }
+      ...(reason === REASON_NO_PARTICIPATING && { query: { fid: fid } })
     };
 
     router.push(url, url, { locale: lang });

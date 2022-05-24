@@ -20,7 +20,7 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
-import HostContextActions from '@/components/App/HostContextActions';
+import ButtonKickUser from '@/components/App/ButtonKickUser';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
@@ -49,7 +49,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      <HostContextActions initialParticipant={participant} seatNumber={null} />
+      <ButtonKickUser initialParticipant={participant} seatNumber={null} />
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
