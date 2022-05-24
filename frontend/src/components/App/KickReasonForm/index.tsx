@@ -8,81 +8,80 @@
  */
 
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
-import Button from '@/components/Common/Button';
 
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import Input from '@/components/Common/Fields/Input';
 import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
 import { Participant } from '@/types/participant';
-import { KickReasonFormStyled } from './styles';
+import { StyledReasonGroup } from './styles';
+import MeditatingFriend from '@/components/Common/SVG/MeditatingFriend';
 
-interface KickReasonFormProps {
-  participant: Participant;
-  onSubmit: () => void;
-}
+import { Formik, Form, Field } from 'formik';
+import ReadingFriend from '@/components/Common/SVG/ReadingFriend';
+import Button from '@/components/Common/Button';
 
 interface FormProps {
   participant: Participant;
   onSubmit: () => void;
 }
 
-interface FormValues {
-  reason: string;
-}
-
 const initialValues = {
   reason: REASON_NO_PARTICIPATING
 };
 
-const Form = () => {
+const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
   const { t } = useTranslation('fishbowl');
 
   return (
-    <KickReasonFormStyled>
-      <Input
-        validation={false}
-        type="radio"
-        name="reason"
-        value={REASON_NO_PARTICIPATING}
-        label={t('kick.modal.options.noParticipating')}
-      >
-        <div>Cositas</div>
-      </Input>
-      <Input
-        validation={false}
-        type="radio"
-        name="reason"
-        value={REASON_CONDUCT_VIOLATION}
-        label={t('kick.modal.options.conductViolation')}
-      />
-      <div className="modal-footer">
-        <Button type="submit">{t('kick.modal.button')}</Button>
-      </div>
-    </KickReasonFormStyled>
-  );
-};
-
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props =>
-    Yup.object({
-      reason: Yup.string().required(props.required)
-    }),
-  handleSubmit: (values, { props }) => {
-    if (props.participant && values.reason) {
-      kickParticipant(props.participant.getId(), values.reason);
-      props.onSubmit();
-    }
-  }
-})(Form);
-
-const KickReasonForm: React.FC<KickReasonFormProps> = ({ participant, onSubmit }) => {
-  return (
     <>
-      <FormValidation participant={participant} onSubmit={onSubmit} />
+      <Formik
+        validationSchema={Yup.object({
+          reason: Yup.string().required('Required message')
+        })}
+        initialValues={initialValues}
+        onSubmit={async values => {
+          if (participant && values.reason) {
+            kickParticipant(participant.getId(), values.reason);
+            onSubmit();
+          }
+        }}
+      >
+        {({ values }) => (
+          <Form>
+            <StyledReasonGroup role="group" aria-labelledby="reasons-radio-group">
+              <label>
+                <Field type="radio" name="reason" value={REASON_NO_PARTICIPATING} />
+                <div
+                  className={`reason-card ${
+                    values.reason === REASON_NO_PARTICIPATING ? 'selected' : ''
+                  }`}
+                >
+                  <MeditatingFriend />
+                  {t('kick.modal.options.noParticipating')}
+                </div>
+              </label>
+              <label>
+                <Field type="radio" name="reason" value={REASON_CONDUCT_VIOLATION} />
+                <div
+                  className={`reason-card ${
+                    values.reason === REASON_CONDUCT_VIOLATION ? 'selected' : ''
+                  }`}
+                >
+                  <ReadingFriend />
+                  {t('kick.modal.options.conductViolation')}
+                </div>
+              </label>
+            </StyledReasonGroup>
+            <fieldset>
+              <Button size="large" type="submit">
+                {t('kick.modal.button')}
+              </Button>
+            </fieldset>
+          </Form>
+        )}
+      </Formik>
     </>
   );
 };

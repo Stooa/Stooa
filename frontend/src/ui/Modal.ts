@@ -32,7 +32,7 @@ const Modal = styled.div`
     overflow: unset;
   `}
 
-  .content {
+  & .content {
     background-color: ${COLOR_NEUTRO_100};
     color: ${COLOR_NEUTRO_700};
     border-radius: ${BORDER_RADIUS};

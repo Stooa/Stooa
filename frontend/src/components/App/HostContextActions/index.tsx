@@ -10,8 +10,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@/components/Common/Button';
 import useTranslation from 'next-translate/useTranslation';
-import Modal from '@/ui/Modal';
-import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import KickReasonForm from '@/components/App/KickReasonForm';
 import { IConferenceStatus } from '@/jitsi/Status';
@@ -21,6 +19,7 @@ import conferenceRepository from '@/jitsi/Conference';
 import useEventListener from '@/hooks/useEventListener';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import { Participant } from '@/types/participant';
+import ModalKickUser from '../ModalKickUser';
 
 interface HostContextActionsProps {
   initialParticipant: Participant;
@@ -103,23 +102,19 @@ const HostContextActions: React.FC<HostContextActionsProps> = ({
         </Button>
       )}
       {showKickReasonsModal && (
-        <Modal>
-          <div className="content">
-            <button className="close" onClick={closeModal}>
-              <Cross />
-            </button>
-
+        <ModalKickUser closeModal={() => closeModal()}>
+          <>
             <h2 className="title-sm">
               {t('kick.modal.title', {
                 userName: getParticipantName()
               })}
             </h2>
-            <p className="description">
+            <p className="body-xs subtitle">
               <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
             </p>
             <KickReasonForm participant={participant} onSubmit={() => closeModal()} />
-          </div>
-        </Modal>
+          </>
+        </ModalKickUser>
       )}
     </>
   );
