@@ -81,15 +81,18 @@ const tracksRepository = () => {
     trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
-    if (trackType === 'video') {
-      trackHtml.setAttribute('muted', '');
-      trackHtml.setAttribute('playsinline', '');
-    }
 
     await syncLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
-    seatHtml.appendChild(trackHtml);
+
+    if (trackType === 'video') {
+      trackHtml.setAttribute('muted', '');
+      trackHtml.setAttribute('playsinline', '');
+      seatHtml.querySelector('#video-wrapper').appendChild(trackHtml);
+    } else {
+      seatHtml.appendChild(trackHtml);
+    }
     track.attach(trackHtml);
 
     if (!track.isLocalAudioTrack()) {
