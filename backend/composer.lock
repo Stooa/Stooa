@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c5deb56958eae780a42c3c8fe321c97",
+    "content-hash": "6125997b2bfc53a707c692b100b83874",
     "packages": [
         {
             "name": "api-platform/core",
@@ -15183,16 +15183,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.18.2",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "2b2d2e7a1f5c5b10b1c132446d713edced353259"
+                "reference": "46de01a809a230fc2428bfb4644adc196e4f7e6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/2b2d2e7a1f5c5b10b1c132446d713edced353259",
-                "reference": "2b2d2e7a1f5c5b10b1c132446d713edced353259",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/46de01a809a230fc2428bfb4644adc196e4f7e6d",
+                "reference": "46de01a809a230fc2428bfb4644adc196e4f7e6d",
                 "shasum": ""
             },
             "require": {
@@ -15214,7 +15214,7 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^4.1",
                 "symfony/framework-bundle": "^4.4|^5.0|^6.0",
                 "symfony/maker-bundle": "^1.30",
-                "symfony/phpunit-bridge": "^5.3"
+                "symfony/phpunit-bridge": "^6.0"
             },
             "type": "library",
             "extra": {
@@ -15255,7 +15255,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.18.2"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.19.0"
             },
             "funding": [
                 {
@@ -15263,7 +15263,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-29T20:28:00+00:00"
+            "time": "2022-05-24T12:55:34+00:00"
         }
     ],
     "aliases": [],
