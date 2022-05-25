@@ -7,17 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import { StyledContextButton } from './styles';
+import { StyledContextButton, StyledContextMenu } from './styles';
 import DotsSvg from '@/ui/svg/dots.svg';
 
 interface Props {
   onClick: () => void;
+  children: React.ReactNode;
+  className?: string;
 }
 
-const ButtonContextMenu = ({ onClick }: Props) => {
+const ButtonContextMenu = ({ onClick, children, className }: Props) => {
   return (
-    <StyledContextButton onClick={onClick}>
+    <StyledContextButton className={className} onClick={onClick}>
       <DotsSvg />
+      <StyledContextMenu>{children}</StyledContextMenu>
     </StyledContextButton>
   );
 };

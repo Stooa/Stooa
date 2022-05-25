@@ -7,19 +7,39 @@
  * file that was distributed with this source code.
  */
 
-import { COLOR_NEUTRO_100 } from '@/ui/settings';
+import { space } from '@/ui/helpers';
+import { COLOR_NEUTRO_100, COLOR_NEUTRO_300 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledContextButton = styled.button`
-  position: relative;
-  background-color: hsla(0, 0, 0, 0.75);
+  position: absolute;
+  top: ${space()};
+  right: 24px;
+  background-color: rgba(0, 0, 0, 0.65);
+  border-radius: 5px;
+  z-index: 4;
+  padding: ${space()} ${space(2)};
 
   & svg {
-    transform: rotate(45deg);
+    transform: rotate(90deg);
     & path {
       fill: ${COLOR_NEUTRO_100};
     }
   }
 `;
 
-export { StyledContextButton };
+const StyledContextMenu = styled.ul`
+  position: absolute;
+  left: 100%;
+  top: 0;
+  z-index: 10;
+  list-style: none;
+  padding: 0;
+
+  & > li {
+    background-color: ${COLOR_NEUTRO_300};
+    padding: ${space(1)} ${space(2)};
+  }
+`;
+
+export { StyledContextButton, StyledContextMenu };

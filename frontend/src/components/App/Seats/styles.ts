@@ -253,6 +253,16 @@ const Seat = styled.div`
       transform: translate(-50%, -50%) scaleX(-1);
     }
   }
+
+  & .context-button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+  }
+
+  &:hover .context-button {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+  }
 `;
 
 export { Free, Seat };
