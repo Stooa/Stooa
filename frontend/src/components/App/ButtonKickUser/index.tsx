@@ -33,7 +33,7 @@ type SeatsChangeEventProps = {
   };
 };
 
-const HostContextActions = ({ initialParticipant, seatNumber = null }: Props) => {
+const ButtonKickUser = ({ initialParticipant, seatNumber = null }: Props) => {
   const { t } = useTranslation('fishbowl');
   const [showKickReasonsModal, setShowKickReasonsModal] = useState<boolean>(false);
   const [participant, setParticipant] = useState<Participant>(initialParticipant);
@@ -82,12 +82,7 @@ const HostContextActions = ({ initialParticipant, seatNumber = null }: Props) =>
   return (
     <>
       {showKickButton() && seatNumber && (
-        <Button
-          style={{ zIndex: 9, position: 'absolute', top: '12px', right: '12px', padding: '10px' }}
-          variant="secondary"
-          className="never-full"
-          onClick={showModal}
-        >
+        <Button variant="secondary" className="never-full" onClick={showModal}>
           <span>{t('kick.button')}</span>
         </Button>
       )}
@@ -110,4 +105,4 @@ const HostContextActions = ({ initialParticipant, seatNumber = null }: Props) =>
   );
 };
 
-export default HostContextActions;
+export default ButtonKickUser;

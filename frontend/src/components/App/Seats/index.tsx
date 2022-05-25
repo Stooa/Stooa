@@ -33,7 +33,9 @@ const Seats = () => {
         {[...Array(5)].map((e, seat) => (
           <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <ContextMenu>
-              <ButtonKickUser seatNumber={seat} />
+              <li>
+                <ButtonKickUser seatNumber={seat} />
+              </li>
             </ContextMenu>
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />

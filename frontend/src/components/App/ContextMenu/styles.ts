@@ -8,12 +8,19 @@
  */
 
 import { space } from '@/ui/helpers';
+import { COLOR_NEUTRO_300 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledContextMenu = styled.ul`
   position: absolute;
-  right: calc(100% + ${space(2)});
+  right: 20px;
   top: 0;
+  z-index: 10;
+
+  & > li {
+    background-color: ${COLOR_NEUTRO_300};
+    padding: ${space(1)} ${space(2)};
+  }
 `;
 
 export { StyledContextMenu };

@@ -49,7 +49,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      <ButtonKickUser initialParticipant={participant} seatNumber={null} />
+      <ButtonKickUser initialParticipant={participant} />
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
