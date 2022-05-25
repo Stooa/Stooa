@@ -64,7 +64,7 @@ const ButtonKickUser = ({ initialParticipant, seatNumber = null }: Props) => {
   };
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeEventProps) => {
-    const participantId = seatsValues[seatNumber];
+    const participantId = seatsValues[seatNumber - 1];
 
     if (participantId) {
       setParticipant(conferenceRepository.getParticipantById(participantId));

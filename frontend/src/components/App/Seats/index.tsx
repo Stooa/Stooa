@@ -34,7 +34,7 @@ const Seats = () => {
           <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <ContextMenu>
               <li>
-                <ButtonKickUser seatNumber={seat} />
+                <ButtonKickUser seatNumber={seat + 1} />
               </li>
             </ContextMenu>
             <div className="frame" />
