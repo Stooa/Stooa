@@ -18,11 +18,13 @@ import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import ButtonKickUser from '@/components/App/ButtonKickUser';
-import ContextMenu from '@/components/App/ContextMenu';
+import ButtonContextMenu from '../ButtonContextMenu';
+import { useState } from 'react';
 
 const Seats = () => {
   const { t } = useTranslation('app');
   const [{ conferenceStatus }] = useStateValue();
+  const [showContextMenu, setShowContextMenu] = useState(false);
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
@@ -32,11 +34,12 @@ const Seats = () => {
       <div className={`content ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
           <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
-            <ContextMenu>
+            <ButtonContextMenu className="context-button" onClick={() => setShowContextMenu(true)}>
               <li>
                 <ButtonKickUser seatNumber={seat} />
               </li>
-            </ContextMenu>
+            </ButtonContextMenu>
+
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />
             <VideoMuted className="icon-medium icon-video" />
