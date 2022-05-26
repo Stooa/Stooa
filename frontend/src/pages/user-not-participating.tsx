@@ -44,7 +44,7 @@ const UserNoParticipatingPage = () => {
         <Content>
           <MeditatingFriend />
           <h1 className="title-sm">{t('title')}</h1>
-          <p className="description">{t('description')}</p>
+          <p className="description body-lg">{t('description')}</p>
           <div className="reasons">
             <Info />
             <ul>

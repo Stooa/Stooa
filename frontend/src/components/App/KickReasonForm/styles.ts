@@ -15,6 +15,7 @@ const StyledReasonGroup = styled.div`
   display: grid;
   row-gap: ${space(2)};
   margin-bottom: ${space(4)};
+  justify-items: center;
 
   & input {
     display: none;
@@ -23,14 +24,18 @@ const StyledReasonGroup = styled.div`
   & .reason-card {
     display: flex;
     align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
     justify-content: center;
     padding: ${space(2)} ${space()};
     background-color: ${COLOR_NEUTRO_100};
-    transition: border 0.2s ease-in-out;
+    transition: border, transform 0.2s ease-in-out;
     border: 2px solid ${COLOR_NEUTRO_100};
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 
-    border-radius: 5px;
+    &:hover {
+      transform: translateY(-2px);
+    }
 
     & svg {
       height: 80px;
@@ -38,6 +43,7 @@ const StyledReasonGroup = styled.div`
     }
 
     &.selected {
+      transform: scale(1.02);
       border: 2px solid ${COLOR_GREEN_400};
     }
   }

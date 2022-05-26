@@ -35,7 +35,7 @@ const UserConductViolationPage = () => {
       <Content>
         <ReadingFriend />
         <h1 className="title-sm">{t('title')}</h1>
-        <p>{t('description')}</p>
+        <p className="body-lg">{t('description')}</p>
       </Content>
     </Layout>
   );

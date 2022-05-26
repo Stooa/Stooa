@@ -18,7 +18,7 @@ const StyledKickModal = styled(Modal)`
   }
 
   & .subtitle {
-    margin-bottom: ${space(2)};
+    margin-bottom: ${space(5)};
   }
 
   & .modal-footer {
