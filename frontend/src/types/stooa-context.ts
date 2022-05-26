@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import { IConferenceStatus } from '@/jitsi/Status';
+import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { Dispatch, SetStateAction } from 'react';
-import { Fishbowl } from './api-platform';
 import { Participant } from '@/types/participant';
+import { Fishbowl } from './api-platform';
 
 export interface StooaContextValues {
   conferenceReady: boolean;
@@ -18,7 +18,7 @@ export interface StooaContextValues {
   data: Fishbowl;
   isModerator: boolean;
   onIntroduction: boolean;
-  timeStatus: string;
+  timeStatus: ITimeStatus;
   participantToKick: Participant;
   setParticipantToKick: Dispatch<SetStateAction<Participant>>;
 }

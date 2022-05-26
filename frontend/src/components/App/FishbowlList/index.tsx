@@ -19,7 +19,7 @@ import {
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_HOME
 } from '@/app.config';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';

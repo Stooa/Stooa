@@ -33,7 +33,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
 import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 
 interface FormProps {
   required: string;
