@@ -53,15 +53,17 @@ const StyledReasonGroup = styled.div`
     column-gap: ${space(2)};
 
     & .reason-card {
+      justify-content: flex-start;
       align-items: center;
       flex-direction: column;
       padding: ${space(4)} ${space(2)};
-      max-width: ${rems(232)};
+      max-width: ${rems(260)};
+      height: 100%;
 
       & svg {
         height: 146px;
         margin-right: 0;
-        margin-bottom: ${space(2)};
+        margin-bottom: ${space(4)};
       }
     }
   `}

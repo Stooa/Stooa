@@ -76,7 +76,7 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                   }`}
                 >
                   <MeditatingFriend />
-                  {t('kick.modal.options.noParticipating')}
+                  <p>{t('kick.modal.options.noParticipating')}</p>
                 </div>
               </label>
               <label>
@@ -87,7 +87,7 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                   }`}
                 >
                   <ReadingFriend />
-                  {t('kick.modal.options.conductViolation')}
+                  <p>{t('kick.modal.options.conductViolation')}</p>
                 </div>
               </label>
             </StyledReasonGroup>
