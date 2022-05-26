@@ -18,10 +18,6 @@ import useEventListener from '@/hooks/useEventListener';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import conferenceRepository from '@/jitsi/Conference';
-import ModalKickUser from '../ModalKickUser';
-import KickReasonForm from '../KickReasonForm';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   className?: string;
@@ -38,14 +34,13 @@ type SeatsChangeEventProps = {
 
 const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [showKickReasonsModal, setShowKickReasonsModal] = useState(false);
   const [participant, setParticipant] = useState<Participant>(initialParticipant);
+  const { setParticipantToKick, conferenceReady } = useStooa();
 
   const wrapperRef = useRef(null);
 
   const { isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
-  const { t } = useTranslation('fishbowl');
 
   const isMyself = participant ? participant.isCurrentUser : false;
 
@@ -59,23 +54,24 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
     );
   };
 
-  const getParticipantName = (): string => {
-    return participant ? participant.getDisplayName() : '';
-  };
-
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeEventProps) => {
-    const participantId = seatsValues[seatNumber - 1];
+    if (seatNumber) {
+      const participantId = seatsValues[seatNumber - 1];
 
-    if (participantId) {
-      setParticipant(conferenceRepository.getParticipantById(participantId));
+      if (participantId) {
+        setParticipant(conferenceRepository.getParticipantById(participantId));
+      } else {
+        setParticipant(null);
+      }
     }
   });
 
-  // useEffect(() => {
-  //   if (initialParticipant) {
-  //     setParticipant(conferenceRepository.getParticipantById(initialParticipant.id));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (participant && conferenceReady) {
+      console.log('Conference repository call useEffect');
+      setParticipant(conferenceRepository.getParticipantById(participant.id));
+    }
+  }, [conferenceReady]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -100,26 +96,9 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
         {showContextMenu && (
           <StyledContextMenu id="context-menu" onMouseLeave={() => setShowContextMenu(false)}>
             <li>
-              <ButtonKickUser onClick={() => setShowKickReasonsModal(true)} />
+              <ButtonKickUser onClick={() => setParticipantToKick(participant)} />
             </li>
           </StyledContextMenu>
-        )}
-
-        {showKickReasonsModal && (
-          <ModalKickUser closeModal={() => setShowKickReasonsModal(false)}>
-            <h2 className="title-sm">
-              {t('kick.modal.title', {
-                userName: getParticipantName()
-              })}
-            </h2>
-            <p className="body-xs subtitle">
-              <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
-            </p>
-            <KickReasonForm
-              participant={participant}
-              onSubmit={() => setShowKickReasonsModal(false)}
-            />
-          </ModalKickUser>
         )}
       </StyledButtonContext>
     );

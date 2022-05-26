@@ -44,8 +44,10 @@ const unload = async () => {
   localTracksCreated = false;
 };
 
-const userKicked = () => {
+const userKicked = async (participant) => {
   console.log('[STOOA] user kicked from jitsi');
+
+  // tracksRepository.fooTracks(participant.id);
 
   localTracksCreated = false;
 };

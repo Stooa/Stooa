@@ -105,6 +105,10 @@ const Seat = styled.div`
     position: absolute;
     top: ${space()};
     right: 24px;
+
+    & > #context-menu {
+      left: calc(100% + ${space()});
+    }
   }
 
   .seat-wrapper {
@@ -142,7 +146,6 @@ const Seat = styled.div`
     position: absolute;
     top: -1px;
     width: calc(100% + 2px);
-    z-index: 5;
   }
 
   .frame {
@@ -153,10 +156,13 @@ const Seat = styled.div`
 
   &::after {
     background: rgba(0, 0, 0, 0.5);
-    bottom: -1px;
+    bottom: 0;
+    border-radius: 0 0 0 ${BORDER_RADIUS};
     color: ${COLOR_NEUTRO_100};
-    left: -1px;
-    opacity: 0.9;
+    left: 0;
+    opacity: 0.8;
+    backdrop-filter: blur(64px);
+    text-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.25);
     padding: ${space()};
     position: absolute;
     z-index: 4;
@@ -218,12 +224,16 @@ const Seat = styled.div`
     }
   }
 
+  .video-placeholder {
+    z-index: 1;
+    border-radius: ${BORDER_RADIUS};
+  }
+
   &.user-status-interrupted {
     background: ${COLOR_NEUTRO_600};
 
     .video-placeholder {
       opacity: 1;
-      z-index: 5;
     }
   }
 
@@ -235,13 +245,16 @@ const Seat = styled.div`
 
     .video-placeholder {
       opacity: 1;
-      z-index: 5;
     }
   }
 
   &.user-dominant .frame {
     border-color: ${COLOR_YELLOW_500};
     display: block;
+  }
+
+  &.user-muted-video > #video-wrapper {
+    z-index: 0;
   }
 
   & > #video-wrapper video {
@@ -253,6 +266,7 @@ const Seat = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    z-index: 2;
 
     &.is-local {
       transform: translate(-50%, -50%) scaleX(-1);
@@ -276,7 +290,6 @@ const VideoWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 3;
 `;
 
 export { Free, Seat, VideoWrapper };

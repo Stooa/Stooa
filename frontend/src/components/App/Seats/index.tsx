@@ -17,14 +17,11 @@ import SeatImage from '@/ui/svg/seat.svg';
 import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
-import ButtonKickUser from '@/components/App/ButtonKickUser';
 import ButtonContextMenu from '../ButtonContextMenu';
-import { useStooa } from '@/contexts/StooaManager';
 
 const Seats = () => {
   const { t } = useTranslation('app');
-  const { isModerator } = useStooa();
-  const [{ fishbowlReady, conferenceStatus }] = useStateValue();
+  const [{ conferenceStatus }] = useStateValue();
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
@@ -56,8 +53,8 @@ const Seats = () => {
                 </>
               )}
             </Free>
-            <VideoWrapper id="video-wrapper" />
             <VideoPlaceholder className="video-placeholder" />
+            <VideoWrapper id="video-wrapper" />
           </Seat>
         ))}
       </div>

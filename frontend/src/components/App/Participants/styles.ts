@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import { COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
-import { StyledContextWrapper } from '@/components/App/ButtonContextMenu/styles';
+import { StyledButtonContext } from '@/components/App/ButtonContextMenu/styles';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
@@ -27,7 +27,11 @@ const ParticipantsDrawer = styled.div`
   will-change: transform;
   z-index: 10;
 
-  ${StyledContextWrapper} {
+  ${StyledButtonContext} {
+    position: relative;
+    & > #context-menu {
+      right: calc(100% + ${space()});
+    }
   }
 
   &.active {

@@ -16,8 +16,9 @@ import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
 
 import { Main } from '@/layouts/App/styles';
-import ModalPermissions from '../ModalPermissions';
+import ModalPermissions from '@/components/App/ModalPermissions';
 import { useDevices } from '@/contexts/DevicesContext';
+import ModalKickUser from '@/components/App/ModalKickUser';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -26,7 +27,7 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { isModerator } = useStooa();
+  const { isModerator, participantToKick, setParticipantToKick } = useStooa();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   useEventListener(CONFERENCE_START, () => {
@@ -46,6 +47,13 @@ const Fishbowl: FC = () => {
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
+        {participantToKick && (
+          <ModalKickUser
+            participant={participantToKick}
+            onSubmit={() => setParticipantToKick(null)}
+            closeModal={() => setParticipantToKick(null)}
+          />
+        )}
         <Seats />
       </Main>
       <Footer participantsActive={participantsActive} />
