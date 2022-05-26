@@ -197,7 +197,7 @@ const Register = () => {
         dataLayerPush({
           dataLayerPush: 'GAPageView',
           pageViewUrl: '/user-registered',
-          pageViewTitle: `User registered ${username}`
+          pageViewTitle: `User registered ${res.email}`
         });
       });
     }
