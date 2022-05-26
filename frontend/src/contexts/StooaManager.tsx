@@ -78,12 +78,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   };
 
-  useEventListener(USER_KICKED, ({ detail: { reason, participant } }) => {
+  useEventListener(USER_KICKED, async ({detail: {reason, participant}}) => {
     if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
       return;
     }
 
-    unloadKickedUser(participant);
+    await unloadKickedUser(participant);
 
     const pathName =
       reason === REASON_CONDUCT_VIOLATION
@@ -92,10 +92,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
     const url = {
       pathname: pathName,
-      ...(reason === REASON_NO_PARTICIPATING && { query: { fid: fid } })
+      ...(reason === REASON_NO_PARTICIPATING && {query: {fid: fid}})
     };
 
-    router.push(url, url, { locale: lang });
+    router.push(url, url, {locale: lang});
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
