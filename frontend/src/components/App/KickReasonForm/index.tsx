@@ -11,7 +11,7 @@ import useTranslation from 'next-translate/useTranslation';
 import * as Yup from 'yup';
 
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
-import Input from '@/components/Common/Fields/Input';
+import Check from '@/ui/svg/checkmark.svg';
 import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
 import { Participant } from '@/types/participant';
@@ -21,6 +21,8 @@ import MeditatingFriend from '@/components/Common/SVG/MeditatingFriend';
 import { Formik, Form, Field } from 'formik';
 import ReadingFriend from '@/components/Common/SVG/ReadingFriend';
 import Button from '@/components/Common/Button';
+import { toast } from 'react-toastify';
+import Trans from 'next-translate/Trans';
 
 interface FormProps {
   participant: Participant;
@@ -44,8 +46,15 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
         onSubmit={async values => {
           if (participant && values.reason) {
             kickParticipant(participant.getId(), values.reason);
-            onSubmit();
+            toast(t('kick.successMessage'), {
+              icon: <Check />,
+              toastId: 'kick-success',
+              type: 'success',
+              position: 'bottom-center',
+              autoClose: 5000
+            });
           }
+          onSubmit();
         }}
       >
         {({ values }) => (

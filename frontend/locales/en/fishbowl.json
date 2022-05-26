@@ -87,6 +87,7 @@
     },
     "kick": {
         "button": "Kick user",
+        "successMessage": "User kicked successfully.",
         "modal": {
             "title": "Why do you want to kick {{userName}}?",
             "description": "The user will be kicked and notified, but will be able to come back to the room",

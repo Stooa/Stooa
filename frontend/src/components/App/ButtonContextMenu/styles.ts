@@ -22,6 +22,7 @@ const StyledButton = styled.button`
   background-color: rgba(0, 0, 0, 0.65);
   border-radius: 5px;
   padding: ${space(0.75)} ${space(1.75)};
+  transition: background-color 0.2s ease-in-out;
 
   & svg {
     transform: rotate(90deg);
@@ -57,7 +58,12 @@ const StyledContextMenu = styled.ul`
 `;
 
 const StyledButtonContext = styled.div`
-  z-index: 6;
+  position: relative;
+
+  & > #context-menu {
+    top: calc(100% + ${space(0.5)});
+    right: 0;
+  }
 `;
 
 export { StyledButtonContext, StyledContextMenu, StyledButton };

@@ -10,14 +10,21 @@
 import styled from 'styled-components';
 
 import { StatusBox } from '@/components/App/Fishbowl/styles';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import {
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_300,
+  COLOR_NEUTRO_400,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700
+} from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
 import { StyledButtonContext } from '@/components/App/ButtonContextMenu/styles';
+import { BODY_MD, BODY_SM } from '@/ui/Texts';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
   bottom: 0;
-  // height: calc(100% - ${space(14)});
+  /* height: calc(100% - ${space(14)}); */
   overflow-y: auto;
   padding: ${space(3)};
   position: fixed;
@@ -29,8 +36,17 @@ const ParticipantsDrawer = styled.div`
 
   ${StyledButtonContext} {
     position: relative;
-    & > #context-menu {
-      right: calc(100% + ${space()});
+
+    & > button {
+      opacity: 1;
+      background-color: ${COLOR_NEUTRO_300};
+      & > svg path {
+        fill: ${COLOR_NEUTRO_700};
+      }
+
+      &:hover {
+        background-color: ${COLOR_NEUTRO_400};
+      }
     }
   }
 
@@ -77,85 +93,71 @@ const ParticipantsDrawer = styled.div`
         margin-left: ${space()};
       }
     }
+  }
+`;
 
-    .participant .name {
-      display: inline-block;
+const StyledListItem = styled.li`
+  display: grid;
+  min-height: 30px;
+  grid-template-columns: 4fr minmax(100px, 1fr);
+  column-gap: ${space(2)};
+  padding: ${space()} 0;
+  ${BODY_MD}
+
+  &:not(:last-child) {
+    margin-bottom: ${space()};
+  }
+
+  .roles {
+    color: ${COLOR_NEUTRO_600};
+    margin-left: ${space()};
+  }
+
+  .name {
+    display: inline-block;
+    max-width: 61%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+
+    * :not(:last-child) {
+      margin-right: ${space()};
     }
   }
 
-  .participant {
-    display: grid;
-    grid-template-columns: 4fr minmax(70px, 1fr);
-    column-gap: ${space(2)};
-    margin: ${space(2)} 0;
+  .icon {
+    box-sizing: content-box;
+    align-items: center;
+    display: inline-flex;
+    height: 16px;
+    justify-content: center;
+    width: 16px;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+  span.icon {
+    opacity: 0.25;
+  }
 
-    .roles {
-      color: ${COLOR_NEUTRO_600};
-    }
+  .social {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 
-    .roles,
-    .social {
-      justify-self: end;
-    }
-
-    .name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .muted,
-    .video-muted {
-      display: none;
-    }
-
-    &.user-muted-audio {
-      .muted {
-        display: block;
-      }
-      .unmuted {
-        display: none;
-      }
-    }
-
-    &.user-muted-video {
-      .video-muted {
-        display: block;
-      }
-      .video-unmuted {
-        display: none;
-      }
-    }
-
-    .info {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      overflow: hidden;
-
-      *:not(:last-child) {
-        margin-right: ${space()};
-      }
-    }
-
-    .icon {
-      align-items: center;
-      display: inline-flex;
-      height: ${rems(24)};
-      justify-content: center;
-      margin-left: ${space()};
-      padding: ${rems(6)};
-      width: ${rems(24)};
-    }
-
-    span.icon {
-      opacity: 0.25;
+    & > *:not(:last-child) {
+      margin-right: ${space(2)};
     }
   }
+
+  ${media.min('tablet')`
+    ${BODY_SM}
+  `}
 `;
 
 const ParticipantsToggle = styled(StatusBox)`
@@ -235,4 +237,4 @@ const Icon = styled.button`
   `}
 `;
 
-export { ParticipantsDrawer, ParticipantsToggle, Icon };
+export { ParticipantsDrawer, ParticipantsToggle, Icon, StyledListItem };

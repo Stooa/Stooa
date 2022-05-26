@@ -104,11 +104,28 @@ const Seat = styled.div`
   ${StyledButtonContext} {
     position: absolute;
     top: ${space()};
-    right: 24px;
+    right: ${space()};
+    z-index: 4;
 
-    & > #context-menu {
-      left: calc(100% + ${space()});
+    & .context-button {
+      opacity: 1;
+      transition: opacity 0.2s ease-in;
+      z-index: 10;
     }
+
+    ${media.min('tablet')`
+
+      & .context-button {
+        opacity: 0;
+        transition: opacity 0.2s ease-in;
+      }
+
+
+      `}
+  }
+  &:hover .context-button {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
   }
 
   .seat-wrapper {
@@ -136,20 +153,19 @@ const Seat = styled.div`
     }
   `}
 
-  .frame,
-  &::before {
-    border-radius: ${BORDER_RADIUS};
+  /* &::before {
     content: '';
-    height: calc(100% + 2px);
     left: -1px;
     pointer-events: none;
-    position: absolute;
     top: -1px;
-    width: calc(100% + 2px);
-  }
+  } */
 
   .frame {
-    border: 5px solid transparent;
+    position: absolute;
+    border-radius: ${BORDER_RADIUS};
+    border: 4px solid transparent;
+    height: calc(100% + 2px);
+    width: calc(100% + 2px);
     display: none;
     z-index: 5;
   }
@@ -271,16 +287,6 @@ const Seat = styled.div`
     &.is-local {
       transform: translate(-50%, -50%) scaleX(-1);
     }
-  }
-
-  & .context-button {
-    opacity: 0;
-    transition: opacity 0.2s ease-in;
-  }
-
-  &:hover .context-button {
-    opacity: 1;
-    transition: opacity 0.2s ease-out;
   }
 `;
 
