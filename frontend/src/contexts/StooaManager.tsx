@@ -78,7 +78,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   };
 
-  useEventListener(USER_KICKED, async ({detail: {reason, participant}}) => {
+  useEventListener(USER_KICKED, async ({ detail: { reason, participant } }) => {
     if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
       return;
     }
@@ -92,10 +92,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
 
     const url = {
       pathname: pathName,
-      ...(reason === REASON_NO_PARTICIPATING && {query: {fid: fid}})
+      ...(reason === REASON_NO_PARTICIPATING && { query: { fid: fid } })
     };
 
-    router.push(url, url, {locale: lang});
+    router.push(url, url, { locale: lang });
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
@@ -188,7 +188,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
         (!conferenceReady &&
           (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
-      setTimeout(()=> {
+      setTimeout(() => {
         initializeConnection(fid, isModerator);
       }, 300);
 
