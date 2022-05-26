@@ -17,12 +17,12 @@ import { kickParticipant } from '@/lib/jitsi';
 import { Participant } from '@/types/participant';
 import { StyledReasonGroup } from './styles';
 import MeditatingFriend from '@/components/Common/SVG/MeditatingFriend';
-
+import { pushEventDataLayer } from '@/lib/analytics';
 import { Formik, Form, Field } from 'formik';
 import ReadingFriend from '@/components/Common/SVG/ReadingFriend';
 import Button from '@/components/Common/Button';
 import { toast } from 'react-toastify';
-import Trans from 'next-translate/Trans';
+import { useRouter } from 'next/router';
 
 interface FormProps {
   participant: Participant;
@@ -35,6 +35,8 @@ const initialValues = {
 
 const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
   const { t } = useTranslation('fishbowl');
+  const router = useRouter();
+  const { fid } = router.query;
 
   return (
     <>
@@ -45,6 +47,12 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
         initialValues={initialValues}
         onSubmit={async values => {
           if (participant && values.reason) {
+            pushEventDataLayer({
+              action: fid as string,
+              category: 'Kick',
+              label: values.reason === REASON_CONDUCT_VIOLATION ? 'hard' : 'soft'
+            });
+
             kickParticipant(participant.getId(), values.reason);
             toast(t('kick.successMessage'), {
               icon: <Check />,
