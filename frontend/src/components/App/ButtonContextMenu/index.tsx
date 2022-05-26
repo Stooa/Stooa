@@ -67,8 +67,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
   });
 
   useEffect(() => {
-    if (participant && conferenceReady) {
-      console.log('Conference repository call useEffect');
+    if (initialParticipant && conferenceReady) {
       setParticipant(conferenceRepository.getParticipantById(participant.id));
     }
   }, [conferenceReady]);
