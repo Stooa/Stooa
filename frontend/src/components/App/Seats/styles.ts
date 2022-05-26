@@ -153,12 +153,6 @@ const Seat = styled.div`
     }
   `}
 
-  /* &::before {
-    content: '';
-    left: -1px;
-    pointer-events: none;
-    top: -1px;
-  } */
 
   .frame {
     position: absolute;
@@ -179,7 +173,7 @@ const Seat = styled.div`
     opacity: 0.8;
     backdrop-filter: blur(64px);
     text-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.25);
-    padding: ${space()};
+    padding: ${space(1.25)};
     position: absolute;
     z-index: 4;
     ${BODY_XS};
@@ -188,10 +182,10 @@ const Seat = styled.div`
   .icon-medium {
     background: ${COLOR_RED_100};
     border-radius: 50%;
-    bottom: ${space(0.75)};
+    bottom: ${space(1)};
     display: none;
     height: ${space(2.5)};
-    left: ${space(0.5)};
+    left: ${space(1)};
     position: absolute;
     width: ${space(2.5)};
     z-index: 5;
@@ -214,11 +208,11 @@ const Seat = styled.div`
 
   &.user-muted-audio.user-muted-video {
     &::after {
-      padding-left: ${space(7)};
+      padding-left: ${space(7.5)};
     }
 
     .icon-medium + .icon-medium {
-      left: ${space(3.5)};
+      left: ${space(4)};
     }
   }
 
