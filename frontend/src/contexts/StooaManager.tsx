@@ -188,7 +188,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
         (!conferenceReady &&
           (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
-      initializeConnection(fid, isModerator);
+      setTimeout(()=> {
+        initializeConnection(fid, isModerator);
+      }, 300);
 
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
