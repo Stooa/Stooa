@@ -36,7 +36,7 @@ jest.mock('next/router', () => ({
   }
 }));
 
-jest.mock('@/components/App/HostContextActions', () => ({ children }) => <>{children}</>);
+jest.mock('@/components/App/ButtonContextMenu', () => ({ children }) => <>{children}</>);
 
 const renderWithContext = state => {
   render(
