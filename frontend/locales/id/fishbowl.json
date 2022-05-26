@@ -78,7 +78,7 @@
     "timeLeft_other": "{{time}} tersisa",
     "share": "Beri tahu orang lain tentang Stooa!",
     "kick": {
-        "button": "Kick",
+        "button": "Kick user",
         "modal": {
             "title": "Why do you want to kick {{userName}}?",
             "description": "The user will be kicked and notified, but will be able to come back to the room",

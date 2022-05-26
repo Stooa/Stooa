@@ -81,15 +81,18 @@ const tracksRepository = () => {
     trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
-    if (trackType === 'video') {
-      trackHtml.setAttribute('muted', '');
-      trackHtml.setAttribute('playsinline', '');
-    }
 
     await syncLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
-    seatHtml.appendChild(trackHtml);
+
+    if (trackType === 'video') {
+      trackHtml.setAttribute('muted', '');
+      trackHtml.setAttribute('playsinline', '');
+      seatHtml.querySelector('#video-wrapper').appendChild(trackHtml);
+    } else {
+      seatHtml.appendChild(trackHtml);
+    }
     track.attach(trackHtml);
 
     if (!track.isLocalAudioTrack()) {
@@ -166,13 +169,29 @@ const tracksRepository = () => {
     console.log('[STOOA] Html tracks removed', id);
   };
 
-  const disposeTracks = async () => {
-    const id = conferenceRepository.getMyUserId();
+  const disposeTracks = async (id) => {
+    if (id === undefined) {
+      id = conferenceRepository.getMyUserId();
+    }
 
     if (tracks[id] === undefined) return;
 
     for (let index = 0; index < tracks[id].length; index++) {
       await tracks[id][index].dispose();
+    }
+
+    console.log('[STOOA] Tracks disposed', id);
+  };
+
+  const fooTracks = async (id) => {
+    if (id === undefined) {
+      id = conferenceRepository.getMyUserId();
+    }
+
+    if (tracks[id] === undefined) return;
+
+    for (let index = 0; index < tracks[id].length; index++) {
+      await tracks[id][index].stop();
     }
 
     console.log('[STOOA] Tracks disposed', id);
@@ -289,6 +308,7 @@ const tracksRepository = () => {
     playTracks,
     removeTracks,
     disposeTracks,
+    fooTracks,
     toggleAudioTrack,
     toggleVideoTrack,
     syncLocalStorageTrack

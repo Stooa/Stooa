@@ -21,6 +21,7 @@ import {
 } from '@/ui/settings';
 import { media, space } from '@/ui/helpers';
 import { BODY_XS } from '@/ui/Texts';
+import { StyledButtonContext } from '../ButtonContextMenu/styles';
 
 const SeatsStyled = styled.div`
   display: flex;
@@ -95,11 +96,20 @@ const Seat = styled.div`
   background: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
   height: 100%;
-  overflow: hidden;
   position: relative;
   grid-column-end: span 2;
   transition: background 0.35s ease-in-out;
   will-change: background;
+
+  ${StyledButtonContext} {
+    position: absolute;
+    top: ${space()};
+    right: 24px;
+
+    & > #context-menu {
+      left: calc(100% + ${space()});
+    }
+  }
 
   .seat-wrapper {
     transition: opacity 0.35s ease-in-out;
@@ -136,24 +146,26 @@ const Seat = styled.div`
     position: absolute;
     top: -1px;
     width: calc(100% + 2px);
-    z-index: 5;
   }
 
   .frame {
     border: 5px solid transparent;
     display: none;
-    z-index: 9;
+    z-index: 5;
   }
 
   &::after {
     background: rgba(0, 0, 0, 0.5);
-    bottom: -1px;
+    bottom: 0;
+    border-radius: 0 0 0 ${BORDER_RADIUS};
     color: ${COLOR_NEUTRO_100};
-    left: -1px;
-    opacity: 0.9;
+    left: 0;
+    opacity: 0.8;
+    backdrop-filter: blur(64px);
+    text-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.25);
     padding: ${space()};
     position: absolute;
-    z-index: 7;
+    z-index: 4;
     ${BODY_XS};
   }
 
@@ -166,7 +178,7 @@ const Seat = styled.div`
     left: ${space(0.5)};
     position: absolute;
     width: ${space(2.5)};
-    z-index: 8;
+    z-index: 5;
 
     path {
       fill: ${COLOR_RED_500};
@@ -212,12 +224,16 @@ const Seat = styled.div`
     }
   }
 
+  .video-placeholder {
+    z-index: 1;
+    border-radius: ${BORDER_RADIUS};
+  }
+
   &.user-status-interrupted {
     background: ${COLOR_NEUTRO_600};
 
     .video-placeholder {
       opacity: 1;
-      z-index: 7;
     }
   }
 
@@ -229,7 +245,6 @@ const Seat = styled.div`
 
     .video-placeholder {
       opacity: 1;
-      z-index: 7;
     }
   }
 
@@ -238,7 +253,11 @@ const Seat = styled.div`
     display: block;
   }
 
-  > video {
+  &.user-muted-video > #video-wrapper {
+    z-index: 0;
+  }
+
+  & > #video-wrapper video {
     height: 100%;
     left: 50%;
     object-fit: cover;
@@ -247,7 +266,7 @@ const Seat = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    z-index: 3;
+    z-index: 2;
 
     &.is-local {
       transform: translate(-50%, -50%) scaleX(-1);
@@ -265,5 +284,13 @@ const Seat = styled.div`
   }
 `;
 
-export { Free, Seat };
+const VideoWrapper = styled.div`
+  border-radius: ${BORDER_RADIUS};
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+export { Free, Seat, VideoWrapper };
 export default SeatsStyled;

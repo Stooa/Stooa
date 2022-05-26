@@ -8,17 +8,20 @@
  */
 
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_300 } from '@/ui/settings';
+import {
+  BORDER_RADIUS,
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_300,
+  COLOR_NEUTRO_400,
+  COLOR_NEUTRO_700
+} from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledContextButton = styled.button`
-  position: absolute;
-  top: ${space()};
-  right: 24px;
+const StyledButton = styled.button`
+  display: flex;
   background-color: rgba(0, 0, 0, 0.65);
   border-radius: 5px;
-  z-index: 4;
-  padding: ${space()} ${space(2)};
+  padding: ${space(0.75)} ${space(1.75)};
 
   & svg {
     transform: rotate(90deg);
@@ -30,16 +33,31 @@ const StyledContextButton = styled.button`
 
 const StyledContextMenu = styled.ul`
   position: absolute;
-  left: 100%;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
   top: 0;
-  z-index: 10;
+  z-index: 6;
   list-style: none;
   padding: 0;
+  border: ${COLOR_NEUTRO_700} solid 1px;
+  color: ${COLOR_NEUTRO_700};
+  border-radius: ${BORDER_RADIUS};
+  overflow: hidden;
+  width: max-content;
 
   & > li {
     background-color: ${COLOR_NEUTRO_300};
     padding: ${space(1)} ${space(2)};
+    transition: background-color 0.15s ease-in;
+
+    &:hover {
+      background-color: ${COLOR_NEUTRO_400};
+      transition: background-color 0.2s ease-out;
+    }
   }
 `;
 
-export { StyledContextButton, StyledContextMenu };
+const StyledButtonContext = styled.div`
+  z-index: 6;
+`;
+
+export { StyledButtonContext, StyledContextMenu, StyledButton };

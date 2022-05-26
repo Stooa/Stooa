@@ -12,19 +12,16 @@ import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
-import SeatsStyled, { Free, Seat } from '@/components/App/Seats/styles';
+import SeatsStyled, { Free, Seat, VideoWrapper } from '@/components/App/Seats/styles';
 import SeatImage from '@/ui/svg/seat.svg';
 import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
-import ButtonKickUser from '@/components/App/ButtonKickUser';
 import ButtonContextMenu from '../ButtonContextMenu';
-import { useState } from 'react';
 
 const Seats = () => {
   const { t } = useTranslation('app');
   const [{ conferenceStatus }] = useStateValue();
-  const [showContextMenu, setShowContextMenu] = useState(false);
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
@@ -34,11 +31,7 @@ const Seats = () => {
       <div className={`content ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
           <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
-            <ButtonContextMenu className="context-button" onClick={() => setShowContextMenu(true)}>
-              <li>
-                <ButtonKickUser seatNumber={seat + 1} />
-              </li>
-            </ButtonContextMenu>
+            <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
 
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />
@@ -61,6 +54,7 @@ const Seats = () => {
               )}
             </Free>
             <VideoPlaceholder className="video-placeholder" />
+            <VideoWrapper id="video-wrapper" />
           </Seat>
         ))}
       </div>

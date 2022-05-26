@@ -8,15 +8,20 @@
  */
 
 import Button from '@/components/Common/Button';
+import { Participant } from '@/types/participant';
 import Cross from '@/ui/svg/cross.svg';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
+import KickReasonForm from '@/components/App/KickReasonForm';
 import StyledKickModal from './styles';
 
 interface Props {
   closeModal: () => void;
+  onSubmit: () => void;
+  participant: Participant;
 }
 
-const ModalKickUser: React.FC<Props> = ({ closeModal, children }) => {
+const ModalKickUser: React.FC<Props> = ({ closeModal, onSubmit, participant }) => {
   const { t } = useTranslation('fishbowl');
 
   return (
@@ -25,7 +30,15 @@ const ModalKickUser: React.FC<Props> = ({ closeModal, children }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        {children}
+        <h2 className="title-sm">
+          {t('kick.modal.title', {
+            userName: participant.getDisplayName()
+          })}
+        </h2>
+        <p className="body-xs subtitle">
+          <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
+        </p>
+        <KickReasonForm participant={participant} onSubmit={onSubmit} />
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}

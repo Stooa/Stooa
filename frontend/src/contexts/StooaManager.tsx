@@ -35,10 +35,11 @@ import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
+import { StooaContextValues } from '@/types/stooa-context';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-const StooaContext = createContext(undefined);
+const StooaContext = createContext<StooaContextValues>(undefined);
 
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
@@ -47,6 +48,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [conferenceReady, setConferenceReady] = useState(false);
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
+  const [participantToKick, setParticipantToKick] = useState(null);
+
   const { t, lang } = useTranslation('app');
 
   const apiInterval = useRef<number>();
@@ -75,12 +78,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   };
 
-  useEventListener(USER_KICKED, ({ detail: { reason: reason } }) => {
+  useEventListener(USER_KICKED, ({ detail: { reason, participant } }) => {
     if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
       return;
     }
 
-    userKicked();
+    userKicked(participant);
 
     const pathName =
       reason === REASON_CONDUCT_VIOLATION
@@ -247,7 +250,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
         data,
         isModerator,
         onIntroduction,
-        timeStatus
+        timeStatus,
+        participantToKick,
+        setParticipantToKick
       }}
     >
       {children}

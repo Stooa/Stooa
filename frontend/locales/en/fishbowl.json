@@ -86,7 +86,7 @@
         "shareText": "Copy and share the link to invite people to this fishbowl."
     },
     "kick": {
-        "button": "Kick",
+        "button": "Kick user",
         "modal": {
             "title": "Why do you want to kick {{userName}}?",
             "description": "The user will be kicked and notified, but will be able to come back to the room",
