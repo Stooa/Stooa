@@ -10,7 +10,7 @@
         "doctrine/doctrine-bundle": "2.6.3",
         "doctrine/doctrine-migrations-bundle": "3.2.2",
         "doctrine/orm": "2.12.2",
-        "gedmo/doctrine-extensions": "3.6.0",
+        "gedmo/doctrine-extensions": "3.7.0",
         "gesdinet/jwt-refresh-token-bundle": "1.0.1",
         "hashids/hashids": "4.1.0",
         "lexik/jwt-authentication-bundle": "2.15.1",
@@ -74,7 +74,7 @@
         "symfony/web-profiler-bundle": "4.4.41",
         "vimeo/psalm": "4.23.0",
         "weirdan/doctrine-psalm-plugin": "2.3.0",
-        "zenstruck/foundry": "1.18.2"
+        "zenstruck/foundry": "1.19.0"
     },
     "replace": {
         "paragonie/random_compat": "2.*",
