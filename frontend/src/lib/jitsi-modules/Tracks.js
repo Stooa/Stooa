@@ -169,7 +169,7 @@ const tracksRepository = () => {
     console.log('[STOOA] Html tracks removed', id);
   };
 
-  const disposeTracks = async (id) => {
+  const disposeTracks = async id => {
     if (id === undefined) {
       id = conferenceRepository.getMyUserId();
     }
@@ -178,20 +178,6 @@ const tracksRepository = () => {
 
     for (let index = 0; index < tracks[id].length; index++) {
       await tracks[id][index].dispose();
-    }
-
-    console.log('[STOOA] Tracks disposed', id);
-  };
-
-  const fooTracks = async (id) => {
-    if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
-    }
-
-    if (tracks[id] === undefined) return;
-
-    for (let index = 0; index < tracks[id].length; index++) {
-      await tracks[id][index].stop();
     }
 
     console.log('[STOOA] Tracks disposed', id);
@@ -308,7 +294,6 @@ const tracksRepository = () => {
     playTracks,
     removeTracks,
     disposeTracks,
-    fooTracks,
     toggleAudioTrack,
     toggleVideoTrack,
     syncLocalStorageTrack

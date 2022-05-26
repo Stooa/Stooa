@@ -64,9 +64,9 @@ const userRepository = (): UserRepository => {
   };
 
   const handleUserKicked = (participant: User, reason: string): void => {
-    dispatchEvent(USER_KICKED, { participant: participant, reason: reason });
-
     console.log('[STOOA] Handle user kicked', participant, reason);
+
+    dispatchEvent(USER_KICKED, { participant: participant, reason: reason });
   };
 
   return {

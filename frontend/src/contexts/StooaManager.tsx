@@ -23,7 +23,7 @@ import {
   initializeJitsi,
   initializeConnection,
   unload,
-  userKicked
+  unloadKickedUser
 } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
@@ -83,7 +83,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       return;
     }
 
-    userKicked(participant);
+    unloadKickedUser(participant);
 
     const pathName =
       reason === REASON_CONDUCT_VIOLATION
