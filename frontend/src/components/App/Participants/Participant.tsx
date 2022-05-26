@@ -20,7 +20,7 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import Video from '@/ui/svg/video.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import { Participant } from '@/types/participant';
-import ButtonKickUser from '@/components/App/ButtonKickUser';
+import ButtonContextMenu from '../ButtonContextMenu';
 
 const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
   participant,
@@ -49,7 +49,6 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
           </span>
         )}
       </div>
-      <ButtonKickUser initialParticipant={participant} />
       <div className="social">
         {twitter ? (
           <Link href={twitter} passHref>
@@ -96,6 +95,7 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
             <Linkedin />
           </span>
         )}
+        <ButtonContextMenu initialParticipant={participant} />
       </div>
     </li>
   );

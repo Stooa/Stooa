@@ -11,7 +11,7 @@ import { space } from '@/ui/helpers';
 import { COLOR_NEUTRO_100, COLOR_NEUTRO_300 } from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledContextButton = styled.button`
+const StyledButton = styled.button`
   display: flex;
   background-color: rgba(0, 0, 0, 0.65);
   border-radius: 5px;
@@ -41,11 +41,8 @@ const StyledContextMenu = styled.ul`
   }
 `;
 
-const StyledContextWrapper = styled.div`
-  position: absolute;
-  top: ${space()};
-  right: 24px;
+const StyledButtonContext = styled.div`
   z-index: 6;
 `;
 
-export { StyledContextButton, StyledContextMenu, StyledContextWrapper };
+export { StyledButtonContext, StyledContextMenu, StyledButton };

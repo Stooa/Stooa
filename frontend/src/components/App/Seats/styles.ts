@@ -21,6 +21,7 @@ import {
 } from '@/ui/settings';
 import { media, space } from '@/ui/helpers';
 import { BODY_XS } from '@/ui/Texts';
+import { StyledButtonContext } from '../ButtonContextMenu/styles';
 
 const SeatsStyled = styled.div`
   display: flex;
@@ -99,6 +100,12 @@ const Seat = styled.div`
   grid-column-end: span 2;
   transition: background 0.35s ease-in-out;
   will-change: background;
+
+  ${StyledButtonContext} {
+    position: absolute;
+    top: ${space()};
+    right: 24px;
+  }
 
   .seat-wrapper {
     transition: opacity 0.35s ease-in-out;

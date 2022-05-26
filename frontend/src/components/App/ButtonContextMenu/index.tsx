@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { StyledContextButton, StyledContextMenu, StyledContextWrapper } from './styles';
+import { StyledContextMenu, StyledButtonContext, StyledButton } from './styles';
 import DotsSvg from '@/ui/svg/dots.svg';
 import { useEffect, useRef, useState } from 'react';
 import { useStooa } from '@/contexts/StooaManager';
@@ -93,10 +93,10 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
     return null;
   } else {
     return (
-      <StyledContextWrapper ref={wrapperRef}>
-        <StyledContextButton className={className} onClick={() => setShowContextMenu(true)}>
+      <StyledButtonContext ref={wrapperRef}>
+        <StyledButton className={className} onClick={() => setShowContextMenu(true)}>
           <DotsSvg />
-        </StyledContextButton>
+        </StyledButton>
         {showContextMenu && (
           <StyledContextMenu id="context-menu" onMouseLeave={() => setShowContextMenu(false)}>
             <li>
@@ -121,7 +121,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
             />
           </ModalKickUser>
         )}
-      </StyledContextWrapper>
+      </StyledButtonContext>
     );
   }
 };
