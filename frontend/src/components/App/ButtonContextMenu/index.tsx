@@ -42,7 +42,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
   const { isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
 
-  const isMyself = participant ? participant.isCurrentUser : false;
+  const isMyself = initialParticipant ? initialParticipant.isCurrentUser : false;
 
   const showKickButton = () => {
     return (
