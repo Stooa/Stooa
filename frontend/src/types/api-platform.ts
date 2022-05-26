@@ -8,25 +8,12 @@
  */
 
 import { User } from '@/types/user';
+import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
 
-export type Fishbowl = {
-  id: string;
-  name: string;
-  description?: string;
-  slug: string;
-  locale: string;
-  host?: User;
-  currentStatus: string;
-  participants?: (
-    first?: number,
-    last?: number,
-    before?: string,
-    after?: string
-  ) => ParticipantConnection;
+export interface Fishbowl extends Omit<apiPlatformFishbowl, 'startDateTimeTz' | 'endDateTimeTz'> {
   startDateTimeTz: string;
   endDateTimeTz: string;
-  durationFormatted: string;
-};
+}
 
 type ParticipantConnection = {
   edges?: ParticipantEdge[];
