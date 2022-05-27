@@ -9,10 +9,11 @@
 
 import Logout from '@/ui/svg/logout.svg';
 import useTranslation from 'next-translate/useTranslation';
+import { MouseEventHandler } from 'react';
 import { StyledButton } from './styles';
 
 interface Props {
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 const ButtonKickUser = ({ onClick }: Props) => {
