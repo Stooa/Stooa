@@ -46,7 +46,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
 
   const showKickButton = useCallback(() => {
     return (
-      participant  &&
+      (participant || initialParticipant)  &&
       isModerator &&
       fishbowlReady &&
       !isMyself &&
