@@ -46,13 +46,13 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
 
   const showKickButton = useCallback(() => {
     return (
-      initialParticipant &&
+      participant  &&
       isModerator &&
       fishbowlReady &&
       !isMyself &&
       conferenceStatus === IConferenceStatus.RUNNING
     );
-  }, [initialParticipant, isModerator, fishbowlReady, conferenceStatus, isMyself]);
+  }, [participant, isModerator, fishbowlReady, conferenceStatus, isMyself]);
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeEventProps) => {
     if (seatNumber) {

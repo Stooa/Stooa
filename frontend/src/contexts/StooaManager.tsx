@@ -190,7 +190,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     ) {
       setTimeout(() => {
         initializeConnection(fid, isModerator);
-      }, 300);
+      }, 500);
 
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
