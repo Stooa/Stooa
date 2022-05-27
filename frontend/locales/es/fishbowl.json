@@ -87,7 +87,7 @@
     },
     "kick": {
         "button": "Expulsar usuario",
-        "successMessage": "Usuario explusado correctamente.",
+        "successMessage": "Usuario expulsado correctamente.",
         "modal": {
             "title": "¿Por qué quieres expulsar a {{userName}}?",
             "description": "La persona indicada será expulsada y recibirá notificación, pero podrá volver a la sala si quiere.",

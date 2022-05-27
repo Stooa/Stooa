@@ -35,7 +35,7 @@ const ModalKickUser: React.FC<Props> = ({ closeModal, onSubmit, participant }) =
             userName: participant.getDisplayName()
           })}
         </h2>
-        <p className="body-xs subtitle">
+        <p className="body-sm subtitle">
           <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
         </p>
         <KickReasonForm participant={participant} onSubmit={onSubmit} />
