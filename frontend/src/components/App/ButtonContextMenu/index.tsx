@@ -9,7 +9,7 @@
 
 import { StyledContextMenu, StyledButtonContext, StyledButton } from './styles';
 import DotsSvg from '@/ui/svg/dots.svg';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
 import { Participant } from '@/types/participant';
@@ -44,7 +44,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
 
   const isMyself = initialParticipant ? initialParticipant.isCurrentUser : false;
 
-  const showKickButton = useCallback(() => {
+  const showKickButton = useMemo(() => {
     return (
       initialParticipant &&
       isModerator &&
@@ -53,17 +53,6 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
       conferenceStatus === IConferenceStatus.RUNNING
     );
   }, [initialParticipant, isModerator, fishbowlReady, conferenceStatus, isMyself]);
-
-  // if (!isMyself && !seatNumber) {
-  //   console.table({
-  //     participant: participant.id,
-  //     isModerator,
-  //     fishbowlReady,
-  //     isMyself,
-  //     conferenceStatus,
-  //     seatNumber
-  //   });
-  // }
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeEventProps) => {
     if (seatNumber) {
