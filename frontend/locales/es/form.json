@@ -47,6 +47,7 @@
         "url": "La url no es válida",
         "twitter": "El usuario de Twitter debe comenzar por @",
         "equalPassword": "Las dos contraseñas deben ser iguales",
-        "successMessage": "Tus cambios están guardados"
+        "successMessage": "Tus cambios están guardados",
+        "notEmpty": "No puede ser vacío"
     }
 }

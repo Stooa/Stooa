@@ -47,6 +47,7 @@
         "url": "This is not a valid url",
         "twitter": "The twitter username should start with @",
         "equalPassword": "The two passwords must be equal",
-        "successMessage": "Changes saved"
+        "successMessage": "Changes saved",
+        "notEmpty": "Cannot be empty"
     }
 }

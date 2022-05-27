@@ -46,6 +46,7 @@
         "terms": "Vous devez accepter les termes et conditions",
         "url": "Ce n'est pas une URL valide",
         "twitter": "Le nom d'utilisateur Twitter doit commencer par @",
-        "equalPassword": "Les deux mots de passe doivent correspondre"
+        "equalPassword": "Les deux mots de passe doivent correspondre",
+        "notEmpty": "Cannot be empty"
     }
 }

@@ -29,7 +29,8 @@
         "twitter": "Nama pengguna Twitter harus mulai dengan @",
         "required": "Bagian ini diperlukan",
         "date": "Format tanggal tidak valid: hh/bb/tttt",
-        "equalPassword": "Dua kata sandi tersebut harus sama"
+        "equalPassword": "Dua kata sandi tersebut harus sama",
+        "notEmpty": "Cannot be empty"
     },
     "button": {
         "login": "Masuk",
