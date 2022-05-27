@@ -17,8 +17,9 @@ const Content = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: ${BREAKPOINTS.reader}px;
+  max-width: ${BREAKPOINTS.tablet}px;
   width: 100%;
+  padding: ${space(8)} 0;
 
   & svg,
   & .description,

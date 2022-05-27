@@ -105,12 +105,11 @@ const Seat = styled.div`
     position: absolute;
     top: ${space()};
     right: ${space()};
-    z-index: 4;
+    z-index: 6;
 
     & .context-button {
       opacity: 1;
       transition: opacity 0.2s ease-in;
-      z-index: 10;
     }
 
     ${media.min('tablet')`
