@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import {
   COLOR_NEUTRO_100,
+  COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
@@ -154,6 +155,16 @@ const StyledListItem = styled.li`
       margin-right: ${space(2)};
     }
   }
+
+  ${media.max('tablet')`
+    width: calc(100% + ${space(6)});
+    transform: translateX(${space(-3)});
+    padding: ${space()} ${space(2)};
+
+    &:hover {
+      background-color: ${COLOR_NEUTRO_200};
+    }
+  `}
 
   ${media.min('tablet')`
     ${BODY_SM}
