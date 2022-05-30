@@ -20,7 +20,7 @@ interface Props {
 const Onboarding: React.FC<Props> = ({ show, closeModal, children }) => {
   return (
     <OnboardingModal className={!show ? 'hide' : 'show'}>
-      <div className="content">
+      <div className="content white">
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
