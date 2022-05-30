@@ -27,13 +27,18 @@ const ParticipantsDrawer = styled.div`
   bottom: 0;
   /* height: calc(100% - ${space(14)}); */
   overflow-y: auto;
-  padding: ${space(3)};
+  padding: ${space(3)} 0;
   position: fixed;
   right: 0;
   transform: translateX(100%);
   width: 100%;
   will-change: transform;
   z-index: 10;
+
+  & > .participant-list > h3,
+  & > .header {
+    padding: 0 ${space(3)};
+  }
 
   ${StyledButtonContext} {
     position: relative;
@@ -99,15 +104,12 @@ const ParticipantsDrawer = styled.div`
 
 const StyledListItem = styled.li`
   display: grid;
+  box-sizing: content-box;
   min-height: 30px;
   grid-template-columns: 4fr minmax(100px, 1fr);
   column-gap: ${space(2)};
-  padding: ${space()} 0;
+  padding: ${space(1)} ${space(3)};
   ${BODY_MD}
-
-  &:not(:last-child) {
-    margin-bottom: ${space()};
-  }
 
   .roles {
     color: ${COLOR_NEUTRO_600};
@@ -157,9 +159,6 @@ const StyledListItem = styled.li`
   }
 
   ${media.max('tablet')`
-    width: calc(100% + ${space(6)});
-    transform: translateX(${space(-3)});
-    padding: ${space()} ${space(2)};
 
     &:hover {
       background-color: ${COLOR_NEUTRO_200};
