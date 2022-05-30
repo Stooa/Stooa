@@ -60,6 +60,8 @@ const seatsRepository = () => {
     const participantName = conferenceRepository.getParticipantNameById(id);
     const seatHtml = document.getElementById(`seat-${seat}`);
 
+    if (!seatHtml) return;
+
     seatHtml.setAttribute('data-username', participantName);
     seatHtml.setAttribute('data-id', id);
     seatHtml.classList.add('user-joined');
