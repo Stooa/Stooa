@@ -88,7 +88,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
     return null;
   } else {
     return (
-      <StyledButtonContext ref={wrapperRef}>
+      <StyledButtonContext data-testid="button-context-menu" ref={wrapperRef}>
         <StyledButton className={className} onClick={() => setShowContextMenu(true)}>
           <DotsSvg />
         </StyledButton>
