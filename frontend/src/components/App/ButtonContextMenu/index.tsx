@@ -52,7 +52,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
       !isMyself &&
       conferenceStatus === IConferenceStatus.RUNNING
     );
-  }, [participant, isModerator, fishbowlReady, conferenceStatus, isMyself]);
+  }, [participant, initialParticipant, isModerator, fishbowlReady, conferenceStatus, isMyself]);
 
   useEventListener(SEATS_CHANGE, ({ detail: { seatsValues } }: SeatsChangeEventProps) => {
     if (seatNumber) {
@@ -70,7 +70,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
     if (initialParticipant && conferenceReady) {
       setParticipant(conferenceRepository.getParticipantById(initialParticipant.id));
     }
-  }, [conferenceReady]);
+  }, [conferenceReady, initialParticipant]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
