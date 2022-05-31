@@ -99,6 +99,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: false,
     fishbowlReady: false,
     conferenceStatus: IConferenceStatus.NOT_STARTED,
+    seatNumber: 1,
     shouldRender: false
   },
   {
@@ -106,6 +107,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: false,
     fishbowlReady: false,
     conferenceStatus: IConferenceStatus.NOT_STARTED,
+    seatNumber: 1,
     shouldRender: false
   },
   {
@@ -113,6 +115,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: false,
     fishbowlReady: false,
     conferenceStatus: IConferenceStatus.INTRODUCTION,
+    seatNumber: 1,
     shouldRender: false
   },
   {
@@ -120,14 +123,16 @@ export const SEAT_TEST_CASES = [
     conferenceReady: true,
     fishbowlReady: true,
     conferenceStatus: IConferenceStatus.RUNNING,
+    seatNumber: 2,
+    shouldRender: false
+  },
+  {
+    isModerator: true,
+    conferenceReady: true,
+    fishbowlReady: true,
+    conferenceStatus: IConferenceStatus.RUNNING,
+    seatNumber: 1,
     shouldRender: true
-  },
-  {
-    isModerator: true,
-    conferenceReady: true,
-    fishbowlReady: true,
-    conferenceStatus: IConferenceStatus.RUNNING,
-    shouldRender: false
   },
   // NOT MODERATOR CASES
   {
@@ -135,6 +140,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: false,
     fishbowlReady: false,
     conferenceStatus: IConferenceStatus.NOT_STARTED,
+    seatNumber: 1,
     shouldRender: false
   },
   {
@@ -142,6 +148,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: false,
     fishbowlReady: false,
     conferenceStatus: IConferenceStatus.NOT_STARTED,
+    seatNumber: 1,
     shouldRender: false
   },
   {
@@ -149,6 +156,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: false,
     fishbowlReady: false,
     conferenceStatus: IConferenceStatus.INTRODUCTION,
+    seatNumber: 1,
     shouldRender: false
   },
   {
@@ -156,13 +164,7 @@ export const SEAT_TEST_CASES = [
     conferenceReady: true,
     fishbowlReady: true,
     conferenceStatus: IConferenceStatus.RUNNING,
-    shouldRender: false
-  },
-  {
-    isModerator: false,
-    conferenceReady: true,
-    fishbowlReady: true,
-    conferenceStatus: IConferenceStatus.RUNNING,
+    seatNumber: 1,
     shouldRender: false
   }
 ];

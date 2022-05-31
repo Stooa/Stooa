@@ -7,19 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import {screen, render, act, waitFor} from '@testing-library/react';
+import {screen, render, act} from '@testing-library/react';
 import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { useStateValue } from '@/contexts/AppContext';
 import { useStooa } from '@/contexts/StooaManager';
 import conferenceRepository from '@/jitsi/Conference';
 import { mapObjectArray } from '../../../test-utils';
-// import useEventListener from '@/hooks/useEventListener';
 import { PARTICIPANT_TEST_CASES, SEAT_TEST_CASES } from './cases';
 
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/AppContext');
 jest.mock('@/ui/svg/dots.svg', () => () => <></>);
-// jest.mock('@/hooks/useEventListener');
 
 describe("Tests with initial participant" , () => {
 const testCases = mapObjectArray(PARTICIPANT_TEST_CASES);
@@ -61,8 +59,8 @@ describe("Tests with seat number" , () => {
   const testCases = mapObjectArray(SEAT_TEST_CASES);
 
    test.each(testCases)(
-    "When moderator %p, conference ready is %p, fishbowl ready %p, conferenceStatus %p, should button render %p",
-    async (isModerator, conferenceReady, fishbowlReady, conferenceStatus, shouldRender) => {
+    "When moderator %p, conference ready is %p, fishbowl ready %p, conferenceStatus %p, in seat number %p, should button render %p",
+    async (isModerator, conferenceReady, fishbowlReady, conferenceStatus, seatNumber, shouldRender) => {
       useStooa.mockReturnValue({ isModerator, conferenceReady });
 
       useStateValue.mockReturnValue([
@@ -71,25 +69,26 @@ describe("Tests with seat number" , () => {
       ]);
 
       jest.spyOn(conferenceRepository, 'getParticipantById').mockImplementation(() => '123456');
+
       jest.spyOn(React, 'useState').mockImplementation(() => participant.id);
-      const changeSeatEvent = new CustomEvent('seats:change', { detail: { seatsValues: ['123456'] } });
+
+      const seatsValues =  ['123456', null, null, null, null];
+      const changeSeatEvent = new CustomEvent('seats:change', { detail: { seatsValues } });
+
+      render(<ButtonContextMenu seatNumber={seatNumber}/>)
 
       act(() => {
-        render(<ButtonContextMenu seatNumber={1}/>)
         dispatchEvent(changeSeatEvent);
       })
 
       const button = screen.queryByTestId('button-context-menu');
 
-      await waitFor(() => {
       if (shouldRender) {
           return expect(button).toBeInTheDocument()
         } else {
           return expect(button).not.toBeInTheDocument()
         }
-      });
-
-    }
+      }
    )
  })
 
