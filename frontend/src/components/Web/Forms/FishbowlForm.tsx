@@ -93,6 +93,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="title"
           type="text"
           autoComplete="off"
+          id="title"
         />
         <Textarea
           data-testid="edit-form-description"
@@ -100,6 +101,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="description"
           validation={false}
           autoComplete="off"
+          id="description"
         />
         <DatePicker
           data-testid="edit-form-date"
@@ -346,7 +348,6 @@ const FishbowlForm = ({
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
-        console.log(formattedFishbowl);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
