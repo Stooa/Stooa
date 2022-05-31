@@ -35,12 +35,9 @@ type SeatsChangeEventProps = {
 const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [participant, setParticipant] = useState<Participant>(initialParticipant);
-  const { setParticipantToKick, conferenceReady } = useStooa();
-
-  const wrapperRef = useRef(null);
-
-  const { isModerator } = useStooa();
+  const { setParticipantToKick, conferenceReady, isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
+  const wrapperRef = useRef(null);
 
   const isMyself = initialParticipant ? initialParticipant.isCurrentUser : false;
 
