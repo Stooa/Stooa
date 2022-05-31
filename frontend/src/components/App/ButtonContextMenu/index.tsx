@@ -85,14 +85,25 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
     return null;
   } else {
     return (
-      <StyledButtonContext data-testid="button-context-menu" ref={wrapperRef}>
-        <StyledButton className={className} onClick={() => setShowContextMenu(true)}>
+      <StyledButtonContext data-testid="wrapper-context-menu" ref={wrapperRef}>
+        <StyledButton
+          data-testid="button-context-menu"
+          className={className}
+          onClick={() => setShowContextMenu(true)}
+        >
           <DotsSvg />
         </StyledButton>
         {showContextMenu && (
-          <StyledContextMenu id="context-menu" onMouseLeave={() => setShowContextMenu(false)}>
+          <StyledContextMenu
+            data-testid="context-menu"
+            id="context-menu"
+            onMouseLeave={() => setShowContextMenu(false)}
+          >
             <li>
-              <ButtonKickUser onClick={() => setParticipantToKick(participant)} />
+              <ButtonKickUser
+                data-testid="kick-button"
+                onClick={() => setParticipantToKick(participant)}
+              />
             </li>
           </StyledContextMenu>
         )}

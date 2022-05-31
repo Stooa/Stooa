@@ -13,14 +13,15 @@ import { MouseEventHandler } from 'react';
 import { StyledButton } from './styles';
 
 interface Props {
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  'onClick': MouseEventHandler<HTMLButtonElement>;
+  'data-testid'?: string;
 }
 
-const ButtonKickUser = ({ onClick }: Props) => {
+const ButtonKickUser = ({ onClick, 'data-testid': dataTestid }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton onClick={onClick} data-testid={dataTestid}>
       <Logout />
       <p className="body-sm">{t('kick.button')}</p>
     </StyledButton>
