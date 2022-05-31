@@ -13,7 +13,6 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import I18nProvider from 'next-translate/I18nProvider';
 
 import appEN from 'locales/en/app.json';
-import { StooaProvider } from '@/contexts/StooaManager';
 import { MockedProvider } from '@apollo/client/testing';
 import { StateProvider } from '@/contexts/AppContext';
 
