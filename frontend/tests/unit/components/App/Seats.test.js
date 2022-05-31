@@ -14,7 +14,7 @@ import I18nProvider from 'next-translate/I18nProvider';
 
 import appEN from 'locales/en/app.json';
 import { MockedProvider } from '@apollo/client/testing';
-import { StateProvider } from '@/contexts/AppContext';
+import { useStateValue } from '@/contexts/AppContext';
 
 const introState = {
   fishbowlReady: true,
@@ -24,6 +24,7 @@ const introState = {
   conferenceStatus: IConferenceStatus.NOT_STARTED
 };
 
+jest.mock('@/contexts/AppContext');
 jest.mock('next/router', () => ({
   useRouter() {
     return {
@@ -37,23 +38,40 @@ jest.mock('next/router', () => ({
 
 jest.mock('@/components/App/ButtonContextMenu', () => ({ children }) => <>{children}</>);
 
-const renderWithContext = state => {
+const renderWithContext = () => {
   render(
     <I18nProvider lang={'en'} namespaces={{ app: appEN }}>
-      <StateProvider value={[state]}>
-        <MockedProvider>
-          <Seats />
-        </MockedProvider>
-      </StateProvider>
+      <MockedProvider>
+        <Seats />
+      </MockedProvider>
     </I18nProvider>
   );
 };
 
 describe('Unit test of fishbowl seats', () => {
-  it('Unstarted fishbowl with all unavailable seats', () => {
+  it('Unstarted fishbowl renders 5 unavailable seats', () => {
+    useStateValue.mockReturnValue([
+      { conferenceStatus: IConferenceStatus.NOT_STARTED },
+      () => jest.fn()
+    ]);
+
     renderWithContext(introState);
 
     const seats = screen.getAllByText('Seat unavailable');
+
+    expect(seats.length).toBe(5);
+  });
+
+  it('Started fishbowl renders 5 available seats', () => {
+    useStateValue.mockReturnValue([
+      { conferenceStatus: IConferenceStatus.RUNNING },
+      () => jest.fn()
+    ]);
+
+    renderWithContext(introState);
+
+    const seats = screen.getAllByText('Seat available');
+
     expect(seats.length).toBe(5);
   });
 });

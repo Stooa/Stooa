@@ -18,8 +18,6 @@ import { PARTICIPANT_TEST_CASES, SEAT_TEST_CASES } from './cases';
 
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/AppContext');
-jest.mock('@/ui/svg/dots.svg', () => () => <></>);
-jest.mock('@/ui/svg/logout.svg', () => () => <></>);
 
 describe('Tests with initial participant', () => {
   const testCases = mapObjectArray(PARTICIPANT_TEST_CASES);
