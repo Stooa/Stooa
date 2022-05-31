@@ -47,4 +47,4 @@ const getSize = s => {
   `;
 };
 
-export {  getIconCSS };
+export { getIconCSS };

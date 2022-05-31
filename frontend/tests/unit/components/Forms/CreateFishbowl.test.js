@@ -13,7 +13,7 @@ import formEnglishTranslation from 'locales/en/form.json';
 import commonEnglishTranslation from 'locales/en/common.json';
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
-import I18nProvider from "next-translate/I18nProvider";
+import I18nProvider from 'next-translate/I18nProvider';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -51,7 +51,10 @@ const mocks = [
 describe('Unit test of create fishbowl', () => {
   it('It renders the Create Fishbowl form with all correct fields and a submit button', () => {
     render(
-      <I18nProvider lang={'en'} namespaces={{ form: formEnglishTranslation, common: commonEnglishTranslation }}>
+      <I18nProvider
+        lang={'en'}
+        namespaces={{ form: formEnglishTranslation, common: commonEnglishTranslation }}
+      >
         <MockedProvider mocks={mocks}>
           <FishbowlForm />
         </MockedProvider>

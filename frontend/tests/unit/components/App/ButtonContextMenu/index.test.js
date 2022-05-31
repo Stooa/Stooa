@@ -104,11 +104,13 @@ describe('Tests with seat number', () => {
 });
 
 describe('User clicks on button and show available context menu options', () => {
-
   it('should show button', () => {
     useStooa.mockReturnValue({ isModerator: true, conferenceReady: true });
 
-    useStateValue.mockReturnValue([{ fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING }, () => jest.fn()]);
+    useStateValue.mockReturnValue([
+      { fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING },
+      () => jest.fn()
+    ]);
 
     const participant = {
       id: '12345',
@@ -117,9 +119,7 @@ describe('User clicks on button and show available context menu options', () => 
       isCurrentUser: false
     };
 
-    jest
-      .spyOn(conferenceRepository, 'getParticipantById')
-      .mockImplementation(() => participant.id);
+    jest.spyOn(conferenceRepository, 'getParticipantById').mockImplementation(() => participant.id);
 
     render(<ButtonContextMenu initialParticipant={participant} />);
 
@@ -129,12 +129,15 @@ describe('User clicks on button and show available context menu options', () => 
     const contextMenu = screen.getByTestId('context-menu');
 
     expect(contextMenu).toBeInTheDocument();
-  })
+  });
 
   it('should show button in seat', () => {
     useStooa.mockReturnValue({ isModerator: true, conferenceReady: true });
 
-    useStateValue.mockReturnValue([{ fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING }, () => jest.fn()]);
+    useStateValue.mockReturnValue([
+      { fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING },
+      () => jest.fn()
+    ]);
 
     const participant = {
       id: '12345',
@@ -143,11 +146,11 @@ describe('User clicks on button and show available context menu options', () => 
       isCurrentUser: false
     };
 
-    jest
-      .spyOn(conferenceRepository, 'getParticipantById')
-      .mockImplementation(() => participant.id);
+    jest.spyOn(conferenceRepository, 'getParticipantById').mockImplementation(() => participant.id);
 
-    const changeSeatEvent = new CustomEvent('seats:change', { detail: { seatsValues: ['12345', null, null, null, null] } });
+    const changeSeatEvent = new CustomEvent('seats:change', {
+      detail: { seatsValues: ['12345', null, null, null, null] }
+    });
 
     render(<ButtonContextMenu seatNumber={1} />);
 
@@ -161,12 +164,19 @@ describe('User clicks on button and show available context menu options', () => 
     const contextMenu = screen.getByTestId('context-menu');
 
     expect(contextMenu).toBeInTheDocument();
-  })
+  });
 
   it('should show button in seat and click kick', () => {
-    useStooa.mockReturnValue({ isModerator: true, conferenceReady: true, setParticipantToKick: jest.fn() });
+    useStooa.mockReturnValue({
+      isModerator: true,
+      conferenceReady: true,
+      setParticipantToKick: jest.fn()
+    });
 
-    useStateValue.mockReturnValue([{ fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING }, () => jest.fn()]);
+    useStateValue.mockReturnValue([
+      { fishbowlReady: true, conferenceStatus: IConferenceStatus.RUNNING },
+      () => jest.fn()
+    ]);
 
     const participant = {
       id: '12345',
@@ -175,11 +185,11 @@ describe('User clicks on button and show available context menu options', () => 
       isCurrentUser: false
     };
 
-    jest
-      .spyOn(conferenceRepository, 'getParticipantById')
-      .mockImplementation(() => participant.id);
+    jest.spyOn(conferenceRepository, 'getParticipantById').mockImplementation(() => participant.id);
 
-    const changeSeatEvent = new CustomEvent('seats:change', { detail: { seatsValues: ['12345', null, null, null, null] } });
+    const changeSeatEvent = new CustomEvent('seats:change', {
+      detail: { seatsValues: ['12345', null, null, null, null] }
+    });
 
     render(<ButtonContextMenu seatNumber={1} />);
 
@@ -195,7 +205,5 @@ describe('User clicks on button and show available context menu options', () => 
 
     const kickButton = screen.getByTestId('kick-button');
     expect(kickButton).toBeInTheDocument();
-
-  })
-
-})
+  });
+});
