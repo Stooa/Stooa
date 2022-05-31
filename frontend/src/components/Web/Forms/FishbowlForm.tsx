@@ -108,6 +108,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.day')}
           placeholderText={t('fishbowl.selectDay')}
           name="day"
+          id="day"
           minDate={new Date()}
           dateFormat="dd/MM/yyyy"
           icon="calendar"
@@ -119,6 +120,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.time')}
           placeholderText={t('fishbowl.selectTime')}
           name="time"
+          id="time"
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
@@ -130,6 +132,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         <Select
           label={t('fishbowl.duration')}
           name="hours"
+          id="hours"
           variant="sm"
           icon="hourglass"
           autoComplete="off"
@@ -168,6 +171,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           className="select"
           label={t('fishbowl.timezone')}
           name="timezone"
+          id="timezone"
           icon="world"
           autoComplete="off"
         >
@@ -185,6 +189,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           className="select"
           label={t('fishbowl.language')}
           name="language"
+          id="language"
           icon="language"
           autoComplete="off"
         >

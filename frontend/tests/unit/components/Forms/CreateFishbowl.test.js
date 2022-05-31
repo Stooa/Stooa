@@ -63,5 +63,10 @@ describe('Unit test of create fishbowl', () => {
 
     expect(screen.getByLabelText('Title')).toBeInTheDocument();
     expect(screen.getByLabelText('Description (optional)')).toBeInTheDocument();
+    expect(screen.getByLabelText('Date')).toBeInTheDocument();
+    expect(screen.getByLabelText('Starts at')).toBeInTheDocument();
+    expect(screen.getByLabelText('Duration')).toBeInTheDocument();
+    expect(screen.getByLabelText('Time Zone')).toBeInTheDocument();
+    expect(screen.getByLabelText('Language')).toBeInTheDocument();
   });
 });
