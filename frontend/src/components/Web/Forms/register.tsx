@@ -22,7 +22,7 @@ import * as Yup from 'yup';
 import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from '@/app.config';
 import i18nConfig from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
-import {pushPageViewDataLayer} from '@/lib/analytics';
+import { pushPageViewDataLayer } from '@/lib/analytics';
 import { CREATE_USER } from '@/lib/gql/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
@@ -202,7 +202,7 @@ const Register = () => {
       console.log('[STOOA] submit error', res);
     } else {
       await login(values.email, values.password).then(res => {
-        pushPageViewDataLayer({url: '/user-registered', title: 'User registered'});
+        pushPageViewDataLayer({ url: '/user-registered', title: 'User registered' });
       });
     }
   };
