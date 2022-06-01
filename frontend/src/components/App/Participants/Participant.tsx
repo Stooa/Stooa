@@ -13,32 +13,21 @@ import Link from 'next/link';
 import { isCurrentGuest } from '@/lib/auth';
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import Linkedin from '@/ui/svg/linkedin.svg';
-import Twitter from '@/ui/svg/twitter.svg';
-import Mic from '@/ui/svg/mic.svg';
-import MicMuted from '@/ui/svg/mic-muted.svg';
-import Video from '@/ui/svg/video.svg';
-import VideoMuted from '@/ui/svg/video-muted.svg';
+import Linkedin from '@/ui/svg/share-linkedin.svg';
+import Twitter from '@/ui/svg/share-twitter.svg';
 import { Participant } from '@/types/participant';
+import ButtonContextMenu from '../ButtonContextMenu';
+import { StyledListItem } from './styles';
 
-const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boolean }> = ({
-  participant,
-  speaker = false
+const ParticipantCard: React.FC<{ participant: Participant; speaker?: boolean }> = ({
+  participant
 }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
   return (
-    <li className={`participant body-sm`} data-id={id} title={name}>
+    <StyledListItem className={`participant`} data-id={id} title={name}>
       <div className="info">
-        {speaker && (
-          <>
-            <Mic className="unmuted icon-small" />
-            <MicMuted className="muted icon-small" />
-            <Video className="video-unmuted icon-small" />
-            <VideoMuted className="video-muted icon-small" />
-          </>
-        )}
         <span className="name">{name}</span>
         {(isModerator || isCurrentUser || isMyself) && (
           <span className="roles">
@@ -94,9 +83,10 @@ const ParticipantComponent: React.FC<{ participant: Participant; speaker?: boole
             <Linkedin />
           </span>
         )}
+        <ButtonContextMenu initialParticipant={participant} />
       </div>
-    </li>
+    </StyledListItem>
   );
 };
 
-export default ParticipantComponent;
+export default ParticipantCard;

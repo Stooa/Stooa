@@ -44,6 +44,7 @@ interface FormValues {
 
 interface FormProps {
   required: string;
+  notEmpty: string;
   email: string;
   terms: string;
   minlength: string;
@@ -131,8 +132,18 @@ const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
-      firstname: Yup.string().required(props.required),
-      lastname: Yup.string().required(props.required),
+      firstname: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required),
+      lastname: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required),
       email: Yup.string().email(props.email).required(props.required),
       password: Yup.string().min(6, props.minlength).required(props.required),
       terms: Yup.boolean().required(props.required).oneOf([true], props.terms),
@@ -183,6 +194,7 @@ const Register = () => {
   const termsError = t('validation.terms');
   const minlengthError = t('validation.passwordLength');
   const urlError = t('validation.url');
+  const notEmptyError = t('validation.notEmpty');
 
   const handleOnSubmit = async (res, values) => {
     if (res.type === 'Error') {
@@ -207,6 +219,7 @@ const Register = () => {
     <>
       {error && <FormError errors={error} />}
       <FormValidation
+        notEmpty={notEmptyError}
         required={requiredError}
         email={emailError}
         terms={termsError}

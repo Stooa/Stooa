@@ -85,6 +85,20 @@
     "fishbowlDescription":{
         "shareText": "Copia y comparte el link para invitar a más personas a este <i>fishbowl</i>."
     },
+    "kick": {
+        "button": "Expulsar usuario",
+        "successMessage": "Usuario expulsado correctamente.",
+        "modal": {
+            "title": "¿Por qué quieres expulsar a {{userName}}?",
+            "description": "La persona indicada será expulsada y recibirá notificación, pero podrá volver a la sala si quiere.",
+            "options": {
+                "noParticipating": "Está ocupando un asiento sin participar.",
+                "conductViolation": "Ha violado el código de conducta de la comunidad."
+            },
+            "button": "Expulsar usuario/a",
+            "cancelButton": "Cancelar"
+        }
+    },
     "permissionsModalTitle": "Permisos necesarios",
     "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
     "permissionsModalButton": "Solicitar acceso",

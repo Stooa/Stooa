@@ -44,6 +44,14 @@ const unload = async () => {
   localTracksCreated = false;
 };
 
+const unloadKickedUser = async participant => {
+  console.log('[STOOA] Unload kicked user');
+
+  await tracksRepository.disposeTracks(participant.getId());
+
+  localTracksCreated = false;
+};
+
 const initializeJitsi = () => {
   console.log('[STOOA] Initialize jitsi');
 
@@ -97,6 +105,10 @@ const getParticipantList = () => {
   return participants;
 };
 
+const kickParticipant = (id, reason) => {
+  return conferenceRepository.kickParticipant(id, reason);
+};
+
 export {
   getParticipantCount,
   getParticipantList,
@@ -105,5 +117,7 @@ export {
   initializeConnection,
   join,
   leave,
-  unload
+  unload,
+  kickParticipant,
+  unloadKickedUser
 };
