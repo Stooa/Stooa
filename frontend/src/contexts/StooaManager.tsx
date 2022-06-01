@@ -12,10 +12,20 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_THANKYOU,
+  ROUTE_USER_CONDUCT_VIOLATION,
+  ROUTE_USER_NO_PARTICIPATING
+} from '@/app.config';
 import api from '@/lib/api';
-import { initialInteraction, initializeJitsi, initializeConnection, unload } from '@/lib/jitsi';
-import { CONFERENCE_START, NOTIFICATION, USER_MUST_LEAVE } from '@/jitsi/Events';
+import {
+  initialInteraction,
+  initializeJitsi,
+  initializeConnection,
+  unload,
+  unloadKickedUser
+} from '@/lib/jitsi';
+import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
@@ -24,10 +34,12 @@ import useEventListener from '@/hooks/useEventListener';
 import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
+import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
+import { StooaContextValues } from '@/types/stooa-context';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-const StooaContext = createContext(undefined);
+const StooaContext = createContext<StooaContextValues>(undefined);
 
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
@@ -36,6 +48,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [conferenceReady, setConferenceReady] = useState(false);
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
+  const [participantToKick, setParticipantToKick] = useState(null);
+
   const { t, lang } = useTranslation('app');
 
   const apiInterval = useRef<number>();
@@ -63,6 +77,26 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }
     }
   };
+
+  useEventListener(USER_KICKED, async ({ detail: { reason, participant } }) => {
+    if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
+      return;
+    }
+
+    await unloadKickedUser(participant);
+
+    const pathName =
+      reason === REASON_CONDUCT_VIOLATION
+        ? ROUTE_USER_CONDUCT_VIOLATION
+        : ROUTE_USER_NO_PARTICIPATING;
+
+    const url = {
+      pathname: pathName,
+      ...(reason === REASON_NO_PARTICIPATING && { query: { fid: fid } })
+    };
+
+    router.push(url, url, { locale: lang });
+  });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
@@ -154,7 +188,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
         (!conferenceReady &&
           (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
-      initializeConnection(fid, isModerator);
+      setTimeout(() => {
+        initializeConnection(fid, isModerator);
+      }, 700);
 
       window.addEventListener('mousedown', initialInteraction);
       window.addEventListener('keydown', initialInteraction);
@@ -216,7 +252,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
         data,
         isModerator,
         onIntroduction,
-        timeStatus
+        timeStatus,
+        participantToKick,
+        setParticipantToKick
       }}
     >
       {children}

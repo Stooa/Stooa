@@ -21,6 +21,7 @@ import {
 } from '@/ui/settings';
 import { media, space } from '@/ui/helpers';
 import { BODY_XS } from '@/ui/Texts';
+import { StyledButtonContext } from '../ButtonContextMenu/styles';
 
 const SeatsStyled = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const SeatsStyled = styled.div`
   width: 100%;
   overflow: hidden;
 
-  .content {
+  & > .content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: ${space(1)};
@@ -95,11 +96,36 @@ const Seat = styled.div`
   background: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
   height: 100%;
-  overflow: hidden;
   position: relative;
   grid-column-end: span 2;
   transition: background 0.35s ease-in-out;
   will-change: background;
+
+  ${StyledButtonContext} {
+    position: absolute;
+    top: ${space()};
+    right: ${space()};
+    z-index: 6;
+
+    & .context-button {
+      opacity: 1;
+      transition: opacity 0.2s ease-in;
+    }
+
+    ${media.min('tablet')`
+
+      & .context-button {
+        opacity: 0;
+        transition: opacity 0.2s ease-in;
+      }
+
+
+      `}
+  }
+  &:hover .context-button {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+  }
 
   .seat-wrapper {
     transition: opacity 0.35s ease-in-out;
@@ -126,47 +152,42 @@ const Seat = styled.div`
     }
   `}
 
-  .frame,
-  &::before {
-    border-radius: ${BORDER_RADIUS};
-    content: '';
-    height: calc(100% + 2px);
-    left: -1px;
-    pointer-events: none;
-    position: absolute;
-    top: -1px;
-    width: calc(100% + 2px);
-    z-index: 5;
-  }
 
   .frame {
-    border: 5px solid transparent;
+    position: absolute;
+    border-radius: ${BORDER_RADIUS};
+    border: 4px solid transparent;
+    height: calc(100% + 2px);
+    width: calc(100% + 2px);
     display: none;
-    z-index: 9;
+    z-index: 5;
   }
 
   &::after {
     background: rgba(0, 0, 0, 0.5);
-    bottom: -1px;
+    bottom: 0;
+    border-radius: 0 0 0 ${BORDER_RADIUS};
     color: ${COLOR_NEUTRO_100};
-    left: -1px;
-    opacity: 0.9;
-    padding: ${space()};
+    left: 0;
+    opacity: 0.8;
+    backdrop-filter: blur(64px);
+    text-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.25);
+    padding: ${space(1.25)};
     position: absolute;
-    z-index: 7;
+    z-index: 4;
     ${BODY_XS};
   }
 
   .icon-medium {
     background: ${COLOR_RED_100};
     border-radius: 50%;
-    bottom: ${space(0.75)};
+    bottom: ${space(1)};
     display: none;
     height: ${space(2.5)};
-    left: ${space(0.5)};
+    left: ${space(1)};
     position: absolute;
     width: ${space(2.5)};
-    z-index: 8;
+    z-index: 5;
 
     path {
       fill: ${COLOR_RED_500};
@@ -186,11 +207,11 @@ const Seat = styled.div`
 
   &.user-muted-audio.user-muted-video {
     &::after {
-      padding-left: ${space(7)};
+      padding-left: ${space(7.5)};
     }
 
     .icon-medium + .icon-medium {
-      left: ${space(3.5)};
+      left: ${space(4)};
     }
   }
 
@@ -212,12 +233,16 @@ const Seat = styled.div`
     }
   }
 
+  .video-placeholder {
+    z-index: 1;
+    border-radius: ${BORDER_RADIUS};
+  }
+
   &.user-status-interrupted {
     background: ${COLOR_NEUTRO_600};
 
     .video-placeholder {
       opacity: 1;
-      z-index: 7;
     }
   }
 
@@ -229,7 +254,6 @@ const Seat = styled.div`
 
     .video-placeholder {
       opacity: 1;
-      z-index: 7;
     }
   }
 
@@ -238,7 +262,11 @@ const Seat = styled.div`
     display: block;
   }
 
-  > video {
+  &.user-muted-video > #video-wrapper {
+    z-index: 0;
+  }
+
+  & > #video-wrapper video {
     height: 100%;
     left: 50%;
     object-fit: cover;
@@ -247,7 +275,7 @@ const Seat = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    z-index: 3;
+    z-index: 2;
 
     &.is-local {
       transform: translate(-50%, -50%) scaleX(-1);
@@ -255,5 +283,13 @@ const Seat = styled.div`
   }
 `;
 
-export { Free, Seat };
+const VideoWrapper = styled.div`
+  border-radius: ${BORDER_RADIUS};
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+export { Free, Seat, VideoWrapper };
 export default SeatsStyled;
