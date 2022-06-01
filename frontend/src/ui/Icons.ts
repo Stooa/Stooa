@@ -47,9 +47,4 @@ const getSize = s => {
   `;
 };
 
-const DeleteIcon = styled(Delete)`
-  ${props => getIconCSS(props)};
-  ${({ size }) => getSize(size)};
-`;
-
-export { DeleteIcon, getIconCSS };
+export { getIconCSS };

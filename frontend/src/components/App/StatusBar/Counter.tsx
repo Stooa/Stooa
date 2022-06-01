@@ -10,8 +10,8 @@
 import { useEffect, useState } from 'react';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import { Fishbowl } from '@/types/api-platform';
 import useTranslation from 'next-translate/useTranslation';
+import { Fishbowl } from '@/types/api-platform';
 
 interface Props {
   fishbowlData: Fishbowl;
