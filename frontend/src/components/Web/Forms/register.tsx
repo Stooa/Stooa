@@ -202,14 +202,10 @@ const Register = () => {
       console.log('[STOOA] submit error', res);
     } else {
       await login(values.email, values.password).then(res => {
-        const {
-          data: { username }
-        } = res;
-
         dataLayerPush({
           dataLayerPush: 'GAPageView',
           pageViewUrl: '/user-registered',
-          pageViewTitle: `User registered ${username}`
+          pageViewTitle: 'User registered'
         });
       });
     }
