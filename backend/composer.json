@@ -57,7 +57,7 @@
         "ergebnis/composer-normalize": "2.26.0",
         "friendsofphp/php-cs-fixer": "3.4.0",
         "phpstan/phpstan": "1.7.7",
-        "phpstan/phpstan-doctrine": "1.3.4",
+        "phpstan/phpstan-doctrine": "1.3.6",
         "phpstan/phpstan-phpunit": "1.1.1",
         "phpstan/phpstan-symfony": "1.2.2",
         "phpstan/phpstan-webmozart-assert": "1.1.3",
