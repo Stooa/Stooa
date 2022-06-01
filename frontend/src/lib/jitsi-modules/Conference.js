@@ -162,7 +162,7 @@ const conferenceRepository = () => {
     conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
     conference.on(USER_JOINED, userRepository.handleUserJoin);
     conference.on(USER_LEFT, userRepository.handleUserLeft);
-    conference.on(KICKED, userRepository.handleUserLeft);
+    conference.on(KICKED, userRepository.handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
@@ -361,10 +361,17 @@ const conferenceRepository = () => {
       linkedin,
       isModerator,
       isCurrentUser: true,
-      joined: conference.getLocalParticipantProperty('joined') === 'yes',
+      joined:
+        conference.isJoined() === null
+          ? false
+          : conference.getLocalParticipantProperty('joined') === 'yes',
       isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
       isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
     };
+  };
+
+  const kickParticipant = (id, reason) => {
+    conference.kickParticipant(id, reason);
   };
 
   return {
@@ -379,6 +386,7 @@ const conferenceRepository = () => {
     getParticipants,
     initializeJitsi,
     initializeConnection,
+    kickParticipant,
     leave,
     sendJoinEvent,
     sendLeaveEvent

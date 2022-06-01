@@ -45,7 +45,7 @@ const seatsRepository = () => {
   const hasFreeSeat = () => getSeat(null) > 0;
 
   const _handleDispatchEvent = () => {
-    dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat() });
+    dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat(), seatsValues: getSeats() });
   };
 
   const join = id => {
@@ -59,6 +59,8 @@ const seatsRepository = () => {
 
     const participantName = conferenceRepository.getParticipantNameById(id);
     const seatHtml = document.getElementById(`seat-${seat}`);
+
+    if (!seatHtml) return;
 
     seatHtml.setAttribute('data-username', participantName);
     seatHtml.setAttribute('data-id', id);
@@ -157,11 +159,22 @@ const seatsRepository = () => {
     }
   };
 
+  const getParticipantIdBySeat = seat => {
+    const seatHtml = document.getElementById(`seat-${seat}`);
+
+    if (!seatHtml.hasAttribute('data-id')) {
+      return null;
+    }
+
+    return seatHtml.getAttribute('data-id');
+  };
+
   return {
     create,
     getIds,
     getSeat,
     getSeats,
+    getParticipantIdBySeat,
     hasFreeSeat,
     join,
     leave,
