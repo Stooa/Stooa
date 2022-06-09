@@ -25,6 +25,7 @@ import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
+import { ButtonReactions } from '../ButtonReactions';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -144,6 +145,8 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
+  const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
+
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 
   return (
@@ -157,6 +160,7 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
+      <ButtonReactions disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
         handleVideo={handleVideo}
