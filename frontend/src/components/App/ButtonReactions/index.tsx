@@ -46,7 +46,9 @@ export const ButtonReactions = ({ disabled }: Props) => {
 
   return (
     <div ref={wrapperRef}>
-      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(300)} />}
+      {/* {showReactions &&  */}
+      <ReactionsSender className={animation} onMouseLeave={() => hide(300)} />
+      {/* } */}
       <StyledButtonReaction disabled={disabled} onClick={() => show()}>
         <div className="cross">
           <Cross />

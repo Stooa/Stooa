@@ -14,6 +14,10 @@ const StyledEmojiReaction = styled.div`
   user-select: none;
   transition: transform 0.1s ease-out;
 
+  & > * {
+    pointer-events: none;
+  }
+
   &:hover {
     transform: translateY(-6px) scale(var(--emojiScale));
   }
