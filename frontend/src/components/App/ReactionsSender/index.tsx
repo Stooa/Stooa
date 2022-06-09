@@ -20,7 +20,7 @@ interface Props {
 
 export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const [emojisToSend, setEmojisToSend] = useState<string[]>([]);
-  const [clientEmojisShown, setClientEmojisShown] = useState<[string, number][]>([]);
+  const [clientEmojisShown, setClientEmojisShown] = useState<[string, number, boolean][]>([]);
   const [timesClicked, setTimesClicked] = useState(0);
   const [lastLocationClicked, setLastLocationClicked] = useState<number>();
 
@@ -30,7 +30,9 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const spawnEmoji = (emojiToSpawn: string, xCoordenate: number): void => {
     console.log('wtf');
     const randomNumber = Math.floor(Math.random() * 10);
-    setClientEmojisShown(emojis => [...emojis, [emojiToSpawn, xCoordenate + randomNumber]]);
+    const fast = Math.random() < 0.5;
+
+    setClientEmojisShown(emojis => [...emojis, [emojiToSpawn, xCoordenate + randomNumber, fast]]);
   };
 
   const spawnEmojisBatch = (emojis): void => {
@@ -82,14 +84,14 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     }
   }, [debouncedEmojis]);
 
+  console.log('re render');
+
   return (
     <ReactionsWrapper className={className} onMouseLeave={onMouseLeave}>
       <EmojiSpawner ref={emojiSpawnerRef} id="emoji-spawner">
         {clientEmojisShown.length > 0 &&
           clientEmojisShown.map((emojiAndCoordinate, index) => {
-            const [emoji, xCoordenate] = emojiAndCoordinate;
-            // random number or 0 or 1
-            const fast = Math.random() < 0.5;
+            const [emoji, xCoordenate, fast] = emojiAndCoordinate;
             return (
               <div
                 className={fast ? 'emoji-fast' : 'emoji'}
