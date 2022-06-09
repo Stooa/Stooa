@@ -9,7 +9,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { StyledButtonReaction } from './styles';
-import { ReactionsSender } from '../ReactionsSender';
+import ReactionsSender from '../ReactionsSender';
 import Laugh from '@/ui/svg/emojis/laugh.svg';
 import Cross from '@/ui/svg/cross.svg';
 
@@ -46,9 +46,7 @@ export const ButtonReactions = ({ disabled }: Props) => {
 
   return (
     <div ref={wrapperRef}>
-      {/* {showReactions &&  */}
-      <ReactionsSender className={animation} onMouseLeave={() => hide(300)} />
-      {/* } */}
+      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(300)} />}
       <StyledButtonReaction disabled={disabled} onClick={() => show()}>
         <div className="cross">
           <Cross />

@@ -14,6 +14,11 @@ const StyledEmojiReaction = styled.div`
   user-select: none;
   transition: transform 0.1s ease-out;
 
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
   & > * {
     pointer-events: none;
   }

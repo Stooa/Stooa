@@ -18,8 +18,9 @@ interface Props {
   className?: string;
 }
 
-export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
+const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const [emojisToSend, setEmojisToSend] = useState<string[]>([]);
+  const [disableToSendEmojis, setDisableToSendEmojis] = useState(false);
   const [clientEmojisShown, setClientEmojisShown] = useState<
     { emoji: string; xCoordenate: number; yCoordenate: number; animation: string }[]
   >([]);
@@ -55,9 +56,11 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     });
 
     setClientEmojisShown(emojisWithCoordenates);
+    setDisableToSendEmojis(true);
 
     setTimeout(() => {
       setClientEmojisShown([]);
+      setDisableToSendEmojis(false);
     }, 2000);
   };
 
@@ -80,10 +83,14 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     }
   };
 
+  const handleOnMouseLeave = (mouseEvent: React.MouseEvent) => {
+    setClientEmojisShown([]);
+    onMouseLeave(mouseEvent);
+  };
+
   useEffect(() => {
     if (debouncedEmojis.length > 0) {
       // Send here emojis to sendmessage jitsi
-      console.log('only debounced');
 
       console.log('sending', debouncedEmojis.slice(0, 10));
       if (timesClicked === 10) {
@@ -92,20 +99,14 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
         setTimesClicked(0);
       } else {
         // initialize client side emojis
-        setTimeout(() => {
-          setClientEmojisShown([]);
-        }, 2000);
-
         setEmojisToSend([]);
         setTimesClicked(0);
       }
     }
   }, [debouncedEmojis]);
 
-  console.log('re render');
-
   return (
-    <ReactionsWrapper className={className} onMouseLeave={onMouseLeave}>
+    <ReactionsWrapper className={className} onMouseLeave={handleOnMouseLeave}>
       <EmojiSpawner ref={emojiSpawnerRef} id="emoji-spawner">
         {clientEmojisShown.length > 0 &&
           clientEmojisShown.map((emojiAndCoordinate, index) => {
@@ -122,13 +123,15 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
           })}
       </EmojiSpawner>
 
-      <EmojiReaction emoji="like" onClick={handleClick} />
-      <EmojiReaction emoji="love" onClick={handleClick} />
-      <EmojiReaction emoji="applause" onClick={handleClick} />
-      <EmojiReaction emoji="laugh" onClick={handleClick} />
-      <EmojiReaction emoji="wave" onClick={handleClick} />
-      <EmojiReaction emoji="insightful" onClick={handleClick} />
-      <EmojiReaction emoji="curious" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="like" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="love" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="applause" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="laugh" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="wave" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="insightful" onClick={handleClick} />
+      <EmojiReaction disabled={disableToSendEmojis} emoji="curious" onClick={handleClick} />
     </ReactionsWrapper>
   );
 };
+
+export default ReactionsSender;

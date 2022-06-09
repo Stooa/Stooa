@@ -21,6 +21,7 @@ import Curious from '@/ui/svg/emojis/curious.svg';
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   emoji: 'like' | 'love' | 'applause' | 'laugh' | 'wave' | 'insightful' | 'curious';
   onClick: (mouseEvent: React.MouseEvent) => void;
+  disabled?: boolean;
 }
 
 export const EMOJIS = {
@@ -33,14 +34,16 @@ export const EMOJIS = {
   curious: { component: <Curious />, id: 7 }
 };
 
-const EmojiReaction = ({ onClick, emoji, ...props }: Props) => {
+const EmojiReaction = ({ onClick, emoji, disabled, ...props }: Props) => {
   const [size, setSize] = useState(1);
   const [clicked, setClicked] = useState(0);
 
   const handleOnClick = mouseEvent => {
-    setClicked(clicked => clicked + 1);
-    setSize(size => (size < 1.5 ? size + 0.05 : size));
-    onClick(mouseEvent);
+    if (!disabled) {
+      setClicked(clicked => clicked + 1);
+      setSize(size => (size < 1.5 ? size + 0.05 : size));
+      onClick(mouseEvent);
+    }
   };
 
   useEffect(() => {
@@ -56,6 +59,7 @@ const EmojiReaction = ({ onClick, emoji, ...props }: Props) => {
 
   return (
     <StyledEmojiReaction
+      className={disabled ? 'disabled' : ''}
       id={emoji}
       onClick={handleOnClick}
       style={{ '--emojiScale': size } as React.CSSProperties}
