@@ -102,6 +102,8 @@ export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     }
   }, [debouncedEmojis]);
 
+  console.log('re render');
+
   return (
     <ReactionsWrapper className={className} onMouseLeave={onMouseLeave}>
       <EmojiSpawner ref={emojiSpawnerRef} id="emoji-spawner">
