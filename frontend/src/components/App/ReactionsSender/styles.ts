@@ -32,15 +32,11 @@ const ReactionsWrapper = styled.div`
   }
 
   &.open {
-    animation-duration: 0.3s;
-    animation-name: open;
+    animation: open 0.3s;
   }
 
   &.close {
-    animation-duration: 0.2s;
-    animation-name: close;
-    animation-timing-function: ease-out;
-    animation-direction: alternate;
+    animation: close 0.2s ease-out forwards;
   }
 
   @keyframes open {
@@ -68,7 +64,7 @@ const EmojiSpawner = styled.div`
   position: absolute;
   width: 100vw;
   height: 100%;
-  bottom: 80%;
+  bottom: 50%;
   left: 50%;
   transform: translateX(-50%);
 
@@ -78,14 +74,35 @@ const EmojiSpawner = styled.div`
     animation: float 2s ease-out forwards;
   }
 
+  & > .emoji-fast {
+    animation: float-fast 2s ease-out forwards;
+  }
+
   @keyframes float {
     from {
-      transform: translateY(-0.5px);
+      transform: translateY(0);
       opacity: 1;
     }
 
     to {
-      transform: translateY(-100.5px);
+      transform: translateY(-150px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes float-fast {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    50% {
+      transform: translateY(-150px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(-150px);
       opacity: 0;
     }
   }

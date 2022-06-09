@@ -9,17 +9,8 @@
 
 import useDebounce from '@/hooks/useDebouce';
 import React, { useEffect, useState } from 'react';
-import EmojiReaction from '../EmojiReaction';
+import EmojiReaction, { EMOJIS } from '../EmojiReaction';
 import { EmojiSpawner, ReactionsWrapper } from './styles';
-
-import applause from '@/ui/svg/emojis/applause.svg';
-import like from '@/ui/svg/emojis/like.svg';
-import love from '@/ui/svg/emojis/love.svg';
-import laugh from '@/ui/svg/emojis/laugh.svg';
-import insightful from '@/ui/svg/emojis/insightful.svg';
-import wave from '@/ui/svg/emojis/wave.svg';
-import curious from '@/ui/svg/emojis/curious.svg';
-import { Node } from 'typescript';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -27,64 +18,88 @@ interface Props {
   className?: string;
 }
 
-const EMOJIS = {
-  like: <svg></svg>,
-  love: <svg></svg>,
-  applause: <svg></svg>,
-  laugh: <svg></svg>,
-  wave: <svg></svg>,
-  insightful: <svg></svg>,
-  curious: <svg></svg>
-};
-
 export const ReactionsSender = ({ onMouseLeave, className }: Props) => {
-  const [emojisToSend, setEmojisToSend] = useState('');
-  const debouncedEmojis = useDebounce<string>(emojisToSend, 600);
+  const [emojisToSend, setEmojisToSend] = useState<string[]>([]);
+  const [clientEmojisShown, setClientEmojisShown] = useState<[string, number][]>([]);
+  const [timesClicked, setTimesClicked] = useState(0);
+  const [lastLocationClicked, setLastLocationClicked] = useState<number>();
+
+  const debouncedEmojis = useDebounce<string[]>(emojisToSend, 600);
   const emojiSpawnerRef = React.useRef<HTMLDivElement>(null);
-  const [clientEmojisShown, setClientEmojisShown] = useState([]);
 
   const spawnEmoji = (emojiToSpawn: string, xCoordenate: number): void => {
-    const EmojiToAppend = EMOJIS[emojiToSpawn];
-    const emojiWrapper = document.createElement('div');
-    emojiWrapper.className = 'emoji';
-    emojiWrapper.style.left = `${xCoordenate}px`;
-    emojiWrapper.style.position = 'absolute';
-    emojiWrapper.appendChild(EmojiToAppend);
+    console.log('wtf');
+    const randomNumber = Math.floor(Math.random() * 10);
+    setClientEmojisShown(emojis => [...emojis, [emojiToSpawn, xCoordenate + randomNumber]]);
+  };
 
-    setClientEmojisShown(emojis => [...emojis, emojiWrapper]);
+  const spawnEmojisBatch = (emojis): void => {
+    const emojisWithCoordenates = emojis.map((emoji, index) => [
+      emoji,
+      lastLocationClicked - 100 + index * 20
+    ]);
 
-    setTimeout(() => {
-      setClientEmojisShown(emojis => (emojis.length > 1 ? emojis.slice(1) : []));
-    }, 1000);
+    setClientEmojisShown(emojisWithCoordenates);
   };
 
   const handleClick = (mouseEvent: React.MouseEvent) => {
+    console.log('Handle click', timesClicked);
     const target = mouseEvent.currentTarget as HTMLDivElement;
-    console.log([mouseEvent.clientX, mouseEvent.clientY]);
+    const { x: xCoordinate } = target.getBoundingClientRect();
+    const emojiCoordinate = xCoordinate + 20;
 
     if (target.id) {
       //client side
-      target;
-      spawnEmoji(target.id, mouseEvent.clientX);
+      if (timesClicked < 10) {
+        console.log('no more than 10 clicks');
+        setTimesClicked(timesClicked => timesClicked + 1);
+        spawnEmoji(target.id, emojiCoordinate);
+      }
+
+      setLastLocationClicked(emojiCoordinate);
 
       //server side
-      setEmojisToSend(emojisToSend => emojisToSend + target.innerText);
+      setEmojisToSend(emojisToSend => [...emojisToSend, target.id]);
     }
   };
 
   useEffect(() => {
-    if (debouncedEmojis) {
+    if (debouncedEmojis.length > 0) {
       // Send here emojis to sendmessage
-      console.log('sending', debouncedEmojis.slice(0, 10));
+      console.log('only debounced');
 
-      setEmojisToSend('');
+      console.log('sending', debouncedEmojis.slice(0, 10));
+      if (timesClicked === 10) {
+        spawnEmojisBatch(debouncedEmojis.slice(0, 10));
+        setEmojisToSend([]);
+        setTimesClicked(0);
+      } else {
+        // initialize client side emojis
+        setClientEmojisShown([]);
+        setEmojisToSend([]);
+        setTimesClicked(0);
+      }
     }
   }, [debouncedEmojis]);
 
   return (
     <ReactionsWrapper className={className} onMouseLeave={onMouseLeave}>
       <EmojiSpawner ref={emojiSpawnerRef} id="emoji-spawner">
-        {clientEmojisShown}
+        {clientEmojisShown.length > 0 &&
+          clientEmojisShown.map((emojiAndCoordinate, index) => {
+            const [emoji, xCoordenate] = emojiAndCoordinate;
+            // random number or 0 or 1
+            const fast = Math.random() < 0.5;
+            return (
+              <div
+                className={fast ? 'emoji-fast' : 'emoji'}
+                key={emoji + xCoordenate + index}
+                style={{ left: xCoordenate - 20, position: 'absolute' }}
+              >
+                {EMOJIS[emoji].component}
+              </div>
+            );
+          })}
       </EmojiSpawner>
 
       <EmojiReaction emoji="like" onClick={handleClick} />

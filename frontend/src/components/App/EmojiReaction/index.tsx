@@ -24,10 +24,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const EMOJIS = {
-  like: { component: <Like />, id: 1 },
-  love: { component: <Love />, id: 2 },
-  applause: { component: <Applause />, id: 3 },
-  laugh: { component: <Laugh />, id: 4 },
+  like: { component: <Like style={{}} />, id: 1 },
+  love: { component: <Love style={{}} />, id: 2 },
+  applause: { component: <Applause style={{}} />, id: 3 },
+  laugh: { component: <Laugh style={{}} />, id: 4 },
   wave: { component: <Wave />, id: 5 },
   insightful: { component: <Insightful />, id: 6 },
   curious: { component: <Curious />, id: 7 }

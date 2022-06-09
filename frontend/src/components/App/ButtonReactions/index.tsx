@@ -7,10 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
-import Laugh from '@/ui/svg/emojis/laugh.svg';
-import { StyledWrapper, StyledButtonReaction } from './styles';
+import { useEffect, useRef, useState } from 'react';
+import { StyledButtonReaction } from './styles';
 import { ReactionsSender } from '../ReactionsSender';
+import Laugh from '@/ui/svg/emojis/laugh.svg';
+import Cross from '@/ui/svg/cross.svg';
 
 interface Props {
   disabled?: boolean;
@@ -19,13 +20,11 @@ interface Props {
 export const ButtonReactions = ({ disabled }: Props) => {
   const [showReactions, setShowReactions] = useState(false);
   const [animation, setAnimation] = useState<'open' | 'close'>('open');
+  const wrapperRef = useRef(null);
 
   const hide = async ms => {
     setAnimation('close');
-
-    await new Promise(r => setTimeout(r, ms));
-
-    setShowReactions(false);
+    setTimeout(() => setShowReactions(false), ms);
   };
 
   const show = () => {
@@ -33,15 +32,28 @@ export const ButtonReactions = ({ disabled }: Props) => {
     setShowReactions(true);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (showReactions && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setShowReactions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showReactions]);
+
   return (
-    <StyledWrapper>
-      {/* {showReactions &&  */}
-      <ReactionsSender className={animation} onMouseLeave={() => hide(200)} />
-      {/* } */}
+    <div ref={wrapperRef}>
+      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(300)} />}
       <StyledButtonReaction disabled={disabled} onClick={() => show()}>
+        <div className="cross">
+          <Cross />
+        </div>
         <Laugh />
         <span className="medium body-sm">Reactions</span>
       </StyledButtonReaction>
-    </StyledWrapper>
+    </div>
   );
 };

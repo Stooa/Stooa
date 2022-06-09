@@ -10,11 +10,8 @@
 import { COLOR_NEUTRO_500, COLOR_NEUTRO_600 } from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledWrapper = styled.div`
-  /* position: relative; */
-`;
-
 const StyledButtonReaction = styled.button`
+  position: relative;
   line-height: 0;
   margin: 0;
   color: ${COLOR_NEUTRO_600};
@@ -34,6 +31,23 @@ const StyledButtonReaction = styled.button`
       opacity: 0.5;
     }
   }
+
+  & > .cross {
+    position: absolute;
+    bottom: 15px;
+    right: 22px;
+    transform: rotate(45deg);
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+
+    & > svg path {
+      fill: currentColor;
+      stroke: white;
+      stroke-width: 2px;
+      stroke-linejoin: round;
+    }
+  }
 `;
 
-export { StyledButtonReaction, StyledWrapper };
+export { StyledButtonReaction };
