@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { space } from '@/ui/helpers';
+import { FloatFast, FloatStandard } from '@/ui/animations/motion/reactions';
+import { media, space } from '@/ui/helpers';
 import styled from 'styled-components';
 
 const StyledReactionsReciever = styled.div`
@@ -16,6 +17,17 @@ const StyledReactionsReciever = styled.div`
   left: -${space(3)};
   width: 100vw;
   height: ${space(10)};
+
+  ${media.min('tablet')`
+    width: 50vw;
+    margin: 0 auto;
+
+    left: 50%;
+    transform: translateX(-50%);
+  `}
+
+  ${FloatFast}
+  ${FloatStandard}
 `;
 
 export { StyledReactionsReciever };

@@ -14,6 +14,7 @@ import { EmojiSpawner, ReactionsWrapper } from './styles';
 import conferenceRepository from '@/jitsi/Conference';
 import { Reaction } from '@/types/reactions';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
+import Reactions from '@/lib/Reactions/Reactions';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -33,31 +34,17 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
 
   const debouncedEmojis = useDebounce<string[]>(emojisToSendRef.current, 600);
 
-  // TODO: Probar a mover dentro del componente boton
   const spawnEmoji = (emojiToSpawn: string, xCoordinate: number): void => {
-    const randomNumber = Math.floor(Math.random() * 15);
-    setClientEmojisShown(emojis => [
-      ...emojis,
-      {
-        emoji: emojiToSpawn,
-        xCoordinate: xCoordinate + randomNumber,
-        yCoordinate: 0,
-        animation: 'emoji-standard'
-      }
+    setClientEmojisShown(reactions => [
+      ...reactions,
+      Reactions.createReaction(emojiToSpawn, xCoordinate)
     ]);
   };
 
   const spawnEmojisBatch = (emojis): void => {
-    const emojisWithCoordinates = emojis.map((emoji, index) => {
-      const randomYPosition = Math.floor(Math.random() * 20);
-      const fast = Math.random() >= 0.5;
-      return {
-        emoji,
-        xCoordinate: lastLocationClicked - 100 + index * 20,
-        yCoordinate: randomYPosition,
-        animation: fast ? 'emoji-fast' : 'emoji-standard'
-      };
-    });
+    const emojisWithCoordinates = emojis.map((emoji, index) =>
+      Reactions.createReaction(emoji, lastLocationClicked - 100 + index * 20)
+    );
 
     setClientEmojisShown(emojisWithCoordinates);
     setDisableToSendEmojis(true);
@@ -109,21 +96,23 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     }
   }, [debouncedEmojis]);
 
-  console.log('re-render');
-
   return (
     <ReactionsWrapper className={className} onMouseLeave={handleOnMouseLeave}>
       <EmojiSpawner ref={emojiSpawnerRef} id="emoji-spawner">
         {clientEmojisShown.length > 0 &&
-          clientEmojisShown.map((emojiAndCoordinate, index) => {
-            const { emoji, xCoordinate, yCoordinate, animation } = emojiAndCoordinate;
+          clientEmojisShown.map(reactionMapped => {
+            const { id, reaction, xCoordinate, yCoordinate, animation } = reactionMapped;
             return (
               <div
                 className={animation}
-                key={emoji + xCoordinate + index}
-                style={{ position: 'absolute', left: xCoordinate - 20, bottom: yCoordinate }}
+                key={id}
+                style={{
+                  position: 'absolute',
+                  left: (xCoordinate as number) - 20,
+                  bottom: yCoordinate
+                }}
               >
-                {REACTION_EMOJIS[emoji]}
+                {REACTION_EMOJIS[reaction]}
               </div>
             );
           })}

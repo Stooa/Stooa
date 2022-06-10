@@ -7,8 +7,9 @@
  * file that was distributed with this source code.
  */
 
+import { FloatFast, FloatStandard } from '@/ui/animations/motion/reactions';
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_300 } from '@/ui/settings';
+import { COLOR_NEUTRO_100 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const ReactionsWrapper = styled.div`
@@ -70,42 +71,8 @@ const EmojiSpawner = styled.div`
 
   overflow: visible;
 
-  & > .emoji-standard {
-    animation: float 2s ease-out forwards;
-  }
-
-  & > .emoji-fast {
-    animation: float-fast 2s ease-out forwards;
-  }
-
-  @keyframes float {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    to {
-      transform: translateY(-150px);
-      opacity: 0;
-    }
-  }
-
-  @keyframes float-fast {
-    0% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    50% {
-      transform: translateY(-150px);
-      opacity: 0;
-    }
-
-    100% {
-      transform: translateY(-150px);
-      opacity: 0;
-    }
-  }
+  ${FloatFast}
+  ${FloatStandard}
 `;
 
 export { ReactionsWrapper, EmojiSpawner };

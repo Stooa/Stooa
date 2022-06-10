@@ -8,8 +8,9 @@
  */
 
 export interface Reaction {
-  emoji: string;
-  xCoordinate: number;
+  id: string;
+  reaction: string;
+  xCoordinate: number | string;
   yCoordinate: number;
   animation: string;
 }

@@ -7,42 +7,65 @@
  * file that was distributed with this source code.
  */
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useEventListener from '@/hooks/useEventListener';
 import { REACTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { StyledReactionsReciever } from './styles';
 import { Reaction } from '@/types/reactions';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
+import Reactions from '@/lib/Reactions/Reactions';
 
 const ReactionsReceiver = () => {
-  const [reactionsToShow, setReactionsToShow] = useState<Reaction[]>([]);
+  const [reactionsToShow, setReactionsToShow] = useState<Reaction[][]>([]);
 
   const reactionReceiverRef = useRef(null);
 
+  const formatReaction = (reaction: string, index: number): Reaction => {
+    return Reactions.createReaction(reaction, `calc(${50}% - 20px)`);
+  };
+
   useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { id, text, ts } }) => {
-    console.log('I Listened the message (o)(o)', text);
+    console.log('REACTION_MESSAGE_RECEIVED', id, text, ts);
 
-    const receivedReactions = text.split(',');
-    const formattedReactions = receivedReactions.map((reaction, index) => {
-      const randomNumber = Math.floor(Math.random() * 25);
-      const randomBoolean = Math.random() >= 0.5;
-      return {
-        emoji: reaction,
-        xCoordinate: 20 + index * 20,
-        yCoordinate: randomNumber,
-        animation: randomBoolean ? 'emoji-fast' : 'emoji-standard'
-      };
-    });
+    const formattedReactions: Reaction[] = text.split(',').map(formatReaction);
 
-    setReactionsToShow(formattedReactions);
+    setReactionsToShow(reactions => [...reactions, formattedReactions]);
   });
+
+  useEffect(() => {
+    let timeout;
+    if (reactionsToShow.length > 0) {
+      timeout = setTimeout(() => {
+        setReactionsToShow(reactions => reactions.slice(1));
+      }, 2000);
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [reactionsToShow]);
 
   return (
     <StyledReactionsReciever ref={reactionReceiverRef}>
       {reactionsToShow.length > 0 &&
-        reactionsToShow.map((reaction, index) => {
-          const { emoji, xCoordinate, yCoordinate, animation } = reaction;
-          return <span key={emoji + index}>{REACTION_EMOJIS[emoji]}</span>;
+        reactionsToShow.map(reaction => {
+          return reaction.map(mappedReaction => {
+            const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
+            return (
+              <span
+                style={{
+                  position: 'absolute',
+                  left: xCoordinate,
+                  bottom: yCoordinate,
+                  transformOrigin: 'center'
+                }}
+                className={animation}
+                key={id}
+              >
+                {REACTION_EMOJIS[reaction]}
+              </span>
+            );
+          });
         })}
     </StyledReactionsReciever>
   );

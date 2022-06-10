@@ -25,6 +25,7 @@ const StyledButtonReaction = styled.button`
   }
 
   &:disabled {
+    cursor: default;
     color: ${COLOR_NEUTRO_500};
 
     & > svg {
