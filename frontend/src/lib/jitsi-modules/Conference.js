@@ -139,8 +139,8 @@ const conferenceRepository = () => {
    */
   const _handleMessageRecieved = (id, text, ts) => {
     console.log('Message recieved!', id, text, ts);
-    dispatchEvent(TEXT_MESSAGE_RECEIVED, { id, text, ts});
-  }
+    dispatchEvent(TEXT_MESSAGE_RECEIVED, { id, text, ts });
+  };
 
   const _handleConnectionEstablished = async () => {
     const {
@@ -393,7 +393,7 @@ const conferenceRepository = () => {
    */
   const sendTextMessage = message => {
     conference.sendTextMessage(message);
-  }
+  };
 
   return {
     addTrack,
