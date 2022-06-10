@@ -25,7 +25,7 @@ import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
-import { ButtonReactions } from '../ButtonReactions';
+import { ButtonReactions } from '../Reactions/ButtonReactions';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);

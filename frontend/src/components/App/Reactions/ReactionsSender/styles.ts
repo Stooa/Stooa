@@ -70,7 +70,7 @@ const EmojiSpawner = styled.div`
 
   overflow: visible;
 
-  & > .emoji {
+  & > .emoji-standard {
     animation: float 2s ease-out forwards;
   }
 

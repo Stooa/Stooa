@@ -19,7 +19,7 @@ import { Main } from '@/layouts/App/styles';
 import ModalPermissions from '@/components/App/ModalPermissions';
 import { useDevices } from '@/contexts/DevicesContext';
 import ModalKickUser from '@/components/App/ModalKickUser';
-import ReactionsReceiver from '../ReactionsReceiver';
+import ReactionsReceiver from '../Reactions/ReactionsReceiver';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });

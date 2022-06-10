@@ -9,9 +9,11 @@
 
 import useDebounce from '@/hooks/useDebouce';
 import React, { useEffect, useState } from 'react';
-import EmojiReaction, { EMOJIS } from '../EmojiReaction';
+import EmojiReaction from '../EmojiReaction';
 import { EmojiSpawner, ReactionsWrapper } from './styles';
 import conferenceRepository from '@/jitsi/Conference';
+import { Reaction } from '@/types/reactions';
+import { REACTION_EMOJIS } from '../ReactionsEmojis';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -21,9 +23,7 @@ interface Props {
 
 const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const [disableToSendEmojis, setDisableToSendEmojis] = useState(false);
-  const [clientEmojisShown, setClientEmojisShown] = useState<
-    { emoji: string; xCoordenate: number; yCoordenate: number; animation: string }[]
-  >([]);
+  const [clientEmojisShown, setClientEmojisShown] = useState<Reaction[]>([]);
   const [timesClicked, setTimesClicked] = useState(0);
   const [lastLocationClicked, setLastLocationClicked] = useState<number>();
 
@@ -41,7 +41,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
         emoji: emojiToSpawn,
         xCoordenate: xCoordenate + randomNumber,
         yCoordenate: 0,
-        animation: 'emoji'
+        animation: 'emoji-standard'
       }
     ]);
   };
@@ -54,7 +54,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
         emoji,
         xCoordenate: lastLocationClicked - 100 + index * 20,
         yCoordenate: randomYPosition,
-        animation: fast ? 'emoji-fast' : 'emoji'
+        animation: fast ? 'emoji-fast' : 'emoji-standard'
       };
     });
 
@@ -125,7 +125,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
                 key={emoji + xCoordenate + index}
                 style={{ position: 'absolute', left: xCoordenate - 20, bottom: yCoordenate }}
               >
-                {EMOJIS[emoji].component}
+                {REACTION_EMOJIS[emoji]}
               </div>
             );
           })}

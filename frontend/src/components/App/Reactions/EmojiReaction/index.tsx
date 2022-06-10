@@ -8,31 +8,14 @@
  */
 
 import { useEffect, useState } from 'react';
+import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import { StyledEmojiReaction } from './styles';
-
-import Applause from '@/ui/svg/emojis/applause.svg';
-import Like from '@/ui/svg/emojis/like.svg';
-import Love from '@/ui/svg/emojis/love.svg';
-import Laugh from '@/ui/svg/emojis/laugh.svg';
-import Insightful from '@/ui/svg/emojis/insightful.svg';
-import Wave from '@/ui/svg/emojis/wave.svg';
-import Curious from '@/ui/svg/emojis/curious.svg';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   emoji: 'like' | 'love' | 'applause' | 'laugh' | 'wave' | 'insightful' | 'curious';
   onClick: (mouseEvent: React.MouseEvent) => void;
   disabled?: boolean;
 }
-
-export const EMOJIS = {
-  like: { component: <Like style={{}} />, id: 1 },
-  love: { component: <Love style={{}} />, id: 2 },
-  applause: { component: <Applause style={{}} />, id: 3 },
-  laugh: { component: <Laugh style={{}} />, id: 4 },
-  wave: { component: <Wave />, id: 5 },
-  insightful: { component: <Insightful />, id: 6 },
-  curious: { component: <Curious />, id: 7 }
-};
 
 const EmojiReaction = ({ onClick, emoji, disabled, ...props }: Props) => {
   const [size, setSize] = useState(1);
@@ -65,7 +48,7 @@ const EmojiReaction = ({ onClick, emoji, disabled, ...props }: Props) => {
       style={{ '--emojiScale': size } as React.CSSProperties}
       {...props}
     >
-      {EMOJIS[emoji].component}
+      {REACTION_EMOJIS[emoji]}
     </StyledEmojiReaction>
   );
 };
