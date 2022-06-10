@@ -9,7 +9,7 @@
 
 export interface Reaction {
   emoji: string;
-  xCoordenate: number;
-  yCoordenate: number;
+  xCoordinate: number;
+  yCoordinate: number;
   animation: string;
 }

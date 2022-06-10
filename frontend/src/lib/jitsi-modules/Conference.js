@@ -9,7 +9,7 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START, PERMISSION_CHANGED, TEXT_MESSAGE_RECEIVED } from '@/jitsi/Events';
+import { CONFERENCE_START, PERMISSION_CHANGED, REACTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -137,9 +137,9 @@ const conferenceRepository = () => {
    * @param {string} text Message content
    * @param {number} ts Timestamp
    */
-  const _handleMessageRecieved = (id, text, ts) => {
+  const _handleMessageReceived = (id, text, ts) => {
     console.log('Message recieved!', id, text, ts);
-    dispatchEvent(TEXT_MESSAGE_RECEIVED, { id, text, ts });
+    dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, ts });
   };
 
   const _handleConnectionEstablished = async () => {
@@ -180,7 +180,7 @@ const conferenceRepository = () => {
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
-    conference.on(MESSAGE_RECEIVED, _handleMessageRecieved);
+    conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 

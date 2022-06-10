@@ -9,7 +9,7 @@
 
 import { useRef, useState } from 'react';
 import useEventListener from '@/hooks/useEventListener';
-import { TEXT_MESSAGE_RECEIVED } from '@/jitsi/Events';
+import { REACTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { StyledReactionsReciever } from './styles';
 import { Reaction } from '@/types/reactions';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
@@ -19,7 +19,7 @@ const ReactionsReceiver = () => {
 
   const reactionReceiverRef = useRef(null);
 
-  useEventListener(TEXT_MESSAGE_RECEIVED, ({ detail: { id, text, ts } }) => {
+  useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { id, text, ts } }) => {
     console.log('I Listened the message (o)(o)', text);
 
     const receivedReactions = text.split(',');
@@ -28,8 +28,8 @@ const ReactionsReceiver = () => {
       const randomBoolean = Math.random() >= 0.5;
       return {
         emoji: reaction,
-        xCoordenate: 20 + index * 20,
-        yCoordenate: randomNumber,
+        xCoordinate: 20 + index * 20,
+        yCoordinate: randomNumber,
         animation: randomBoolean ? 'emoji-fast' : 'emoji-standard'
       };
     });
@@ -41,7 +41,7 @@ const ReactionsReceiver = () => {
     <StyledReactionsReciever ref={reactionReceiverRef}>
       {reactionsToShow.length > 0 &&
         reactionsToShow.map((reaction, index) => {
-          const { emoji, xCoordenate, yCoordenate, animation } = reaction;
+          const { emoji, xCoordinate, yCoordinate, animation } = reaction;
           return <span key={emoji + index}>{REACTION_EMOJIS[emoji]}</span>;
         })}
     </StyledReactionsReciever>
