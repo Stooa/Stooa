@@ -9,7 +9,7 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START, PERMISSION_CHANGED } from '@/jitsi/Events';
+import { CONFERENCE_START, PERMISSION_CHANGED, TEXT_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -131,6 +131,17 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  /**
+   *
+   * @param {string} id ID of the message
+   * @param {string} text Message content
+   * @param {number} ts Timestamp
+   */
+  const _handleMessageRecieved = (id, text, ts) => {
+    console.log('Message recieved!', id, text, ts);
+    dispatchEvent(TEXT_MESSAGE_RECEIVED, { id, text, ts});
+  }
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -147,7 +158,8 @@ const conferenceRepository = () => {
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
-          DOMINANT_SPEAKER_CHANGED
+          DOMINANT_SPEAKER_CHANGED,
+          MESSAGE_RECEIVED
         }
       }
     } = JitsiMeetJS;
@@ -168,6 +180,7 @@ const conferenceRepository = () => {
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
+    conference.on(MESSAGE_RECEIVED, _handleMessageRecieved);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -374,6 +387,14 @@ const conferenceRepository = () => {
     conference.kickParticipant(id, reason);
   };
 
+  /**
+   * Send message to all the participants in the conference.
+   * @param {string} message
+   */
+  const sendTextMessage = message => {
+    conference.sendTextMessage(message);
+  }
+
   return {
     addTrack,
     getLocalVideoTrack,
@@ -389,7 +410,8 @@ const conferenceRepository = () => {
     kickParticipant,
     leave,
     sendJoinEvent,
-    sendLeaveEvent
+    sendLeaveEvent,
+    sendTextMessage
   };
 };
 

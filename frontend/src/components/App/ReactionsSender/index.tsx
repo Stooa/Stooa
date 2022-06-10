@@ -11,6 +11,7 @@ import useDebounce from '@/hooks/useDebouce';
 import React, { useEffect, useState } from 'react';
 import EmojiReaction, { EMOJIS } from '../EmojiReaction';
 import { EmojiSpawner, ReactionsWrapper } from './styles';
+import conferenceRepository from '@/jitsi/Conference';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -19,7 +20,6 @@ interface Props {
 }
 
 const ReactionsSender = ({ onMouseLeave, className }: Props) => {
-  const [emojisToSend, setEmojisToSend] = useState<string[]>([]);
   const [disableToSendEmojis, setDisableToSendEmojis] = useState(false);
   const [clientEmojisShown, setClientEmojisShown] = useState<
     { emoji: string; xCoordenate: number; yCoordenate: number; animation: string }[]
@@ -27,11 +27,14 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const [timesClicked, setTimesClicked] = useState(0);
   const [lastLocationClicked, setLastLocationClicked] = useState<number>();
 
-  const debouncedEmojis = useDebounce<string[]>(emojisToSend, 600);
+  // const [emojisToSend, setEmojisToSend] = useState<string[]>([]);
+  const emojisToSendRef = React.useRef<string[]>([]);
   const emojiSpawnerRef = React.useRef<HTMLDivElement>(null);
 
+  const debouncedEmojis = useDebounce<string[]>(emojisToSendRef.current, 600);
+
   const spawnEmoji = (emojiToSpawn: string, xCoordenate: number): void => {
-    const randomNumber = Math.floor(Math.random() * 10);
+    const randomNumber = Math.floor(Math.random() * 15);
     setClientEmojisShown(emojis => [
       ...emojis,
       {
@@ -45,12 +48,12 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
 
   const spawnEmojisBatch = (emojis): void => {
     const emojisWithCoordenates = emojis.map((emoji, index) => {
-      const randomNumber = Math.floor(Math.random() * 10);
+      const randomYPosition = Math.floor(Math.random() * 20);
       const fast = Math.random() >= 0.5;
       return {
         emoji,
         xCoordenate: lastLocationClicked - 100 + index * 20,
-        yCoordenate: randomNumber,
+        yCoordenate: randomYPosition,
         animation: fast ? 'emoji-fast' : 'emoji'
       };
     });
@@ -77,7 +80,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
       }
 
       //server side
-      setEmojisToSend(emojisToSend => [...emojisToSend, target.id]);
+      emojisToSendRef.current = [...emojisToSendRef.current, target.id];
 
       setLastLocationClicked(emojiCoordinate);
     }
@@ -91,19 +94,24 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   useEffect(() => {
     if (debouncedEmojis.length > 0) {
       // Send here emojis to sendmessage jitsi
+      const firstTenEmojis = debouncedEmojis.slice(0, 10);
 
-      console.log('sending', debouncedEmojis.slice(0, 10));
+      console.log('sending', firstTenEmojis);
+      conferenceRepository.sendTextMessage(firstTenEmojis.join(','));
+
       if (timesClicked === 10) {
-        spawnEmojisBatch(debouncedEmojis.slice(0, 10));
-        setEmojisToSend([]);
+        spawnEmojisBatch(firstTenEmojis);
+        emojisToSendRef.current = [];
         setTimesClicked(0);
       } else {
         // initialize client side emojis
-        setEmojisToSend([]);
+        emojisToSendRef.current = [];
         setTimesClicked(0);
       }
     }
   }, [debouncedEmojis]);
+
+  console.log('re-render');
 
   return (
     <ReactionsWrapper className={className} onMouseLeave={handleOnMouseLeave}>
