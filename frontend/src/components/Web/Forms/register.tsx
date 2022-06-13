@@ -201,9 +201,8 @@ const Register = () => {
       setError(res.data);
       console.log('[STOOA] submit error', res);
     } else {
-      await login(values.email, values.password).then(res => {
-        pushPageViewDataLayer({ url: '/user-registered', title: 'User registered' });
-      });
+      pushPageViewDataLayer({ url: '/user-registered', title: 'User registered' });
+      await login(values.email, values.password);
     }
   };
 
