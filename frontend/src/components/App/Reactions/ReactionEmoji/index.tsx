@@ -17,7 +17,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-const EmojiReaction = ({ onClick, emoji, disabled, ...props }: Props) => {
+const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
   const [size, setSize] = useState(1);
   const [clicked, setClicked] = useState(0);
 
@@ -53,4 +53,4 @@ const EmojiReaction = ({ onClick, emoji, disabled, ...props }: Props) => {
   );
 };
 
-export default EmojiReaction;
+export default ReactionEmoji;

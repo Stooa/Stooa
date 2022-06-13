@@ -9,12 +9,12 @@
 
 import useDebounce from '@/hooks/useDebouce';
 import React, { useEffect, useState } from 'react';
-import EmojiReaction from '../EmojiReaction';
 import { EmojiSpawner, ReactionsWrapper } from './styles';
 import conferenceRepository from '@/jitsi/Conference';
-import { Reaction } from '@/types/reactions';
-import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import Reactions from '@/lib/Reactions/Reactions';
+import { REACTION_EMOJIS } from '../ReactionsEmojis';
+import ReactionEmoji from '../ReactionEmoji';
+import { Reaction } from '@/types/reactions';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -42,9 +42,10 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   };
 
   const spawnEmojisBatch = (emojis): void => {
-    const emojisWithCoordinates = emojis.map((emoji, index) =>
-      Reactions.createReaction(emoji, lastLocationClicked - 100 + index * 20)
-    );
+    const emojisWithCoordinates = emojis.map((emoji, index) => {
+      const emojiPosition = lastLocationClicked - 100 + index * 20;
+      return Reactions.createReaction(emoji, emojiPosition);
+    });
 
     setClientEmojisShown(emojisWithCoordinates);
     setDisableToSendEmojis(true);
@@ -118,13 +119,13 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
           })}
       </EmojiSpawner>
 
-      <EmojiReaction disabled={disableToSendEmojis} emoji="like" onClick={handleClick} />
-      <EmojiReaction disabled={disableToSendEmojis} emoji="love" onClick={handleClick} />
-      <EmojiReaction disabled={disableToSendEmojis} emoji="applause" onClick={handleClick} />
-      <EmojiReaction disabled={disableToSendEmojis} emoji="laugh" onClick={handleClick} />
-      <EmojiReaction disabled={disableToSendEmojis} emoji="wave" onClick={handleClick} />
-      <EmojiReaction disabled={disableToSendEmojis} emoji="insightful" onClick={handleClick} />
-      <EmojiReaction disabled={disableToSendEmojis} emoji="curious" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="like" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="love" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="applause" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="laugh" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="wave" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="insightful" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="curious" onClick={handleClick} />
     </ReactionsWrapper>
   );
 };

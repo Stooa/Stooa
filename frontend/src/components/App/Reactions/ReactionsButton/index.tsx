@@ -17,7 +17,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export const ButtonReactions = ({ disabled }: Props) => {
+const ReactionsButton = ({ disabled }: Props) => {
   const [showReactions, setShowReactions] = useState(false);
   const [animation, setAnimation] = useState<'open' | 'close'>('open');
   const wrapperRef = useRef(null);
@@ -46,7 +46,7 @@ export const ButtonReactions = ({ disabled }: Props) => {
 
   return (
     <div ref={wrapperRef}>
-      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(300)} />}
+      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(600)} />}
       <StyledButtonReaction disabled={disabled} onClick={() => show()}>
         <div className="cross">
           <Cross />
@@ -57,3 +57,5 @@ export const ButtonReactions = ({ disabled }: Props) => {
     </div>
   );
 };
+
+export default ReactionsButton;

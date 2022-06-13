@@ -25,7 +25,7 @@ import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
-import { ButtonReactions } from '../Reactions/ButtonReactions';
+import { ReactionsButton } from '../Reactions/ReactionsButton';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -160,7 +160,7 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
-      <ButtonReactions disabled={!isReactionsEnabled} />
+      <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
         handleVideo={handleVideo}

@@ -16,56 +16,58 @@ import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import Reactions from '@/lib/Reactions/Reactions';
 
 const ReactionsReceiver = () => {
-  const [reactionsToShow, setReactionsToShow] = useState<Reaction[][]>([]);
+  const [reactionsToShow, setReactionsToShow] = useState<Reaction[]>([]);
 
   const reactionReceiverRef = useRef(null);
 
-  const formatReaction = (reaction: string, index: number): Reaction => {
-    return Reactions.createReaction(reaction, `calc(${50}% - 20px)`);
+  const formatReactions = (reactions: string[]): Reaction[] => {
+    const countReaction = reactions.length;
+    const formattedReactions = reactions.map((reaction, index) =>
+      Reactions.createReaction(reaction, `calc(${50 - countReaction}% - 20px + ${index * 20}px)`)
+    );
+
+    return formattedReactions;
   };
 
   useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { id, text, ts } }) => {
-    console.log('REACTION_MESSAGE_RECEIVED', id, text, ts);
+    const splittedReactions: string[] = text.split(',');
+    const formattedReactions: Reaction[] = formatReactions(splittedReactions);
 
-    const formattedReactions: Reaction[] = text.split(',').map(formatReaction);
-
-    setReactionsToShow(reactions => [...reactions, formattedReactions]);
+    setReactionsToShow(reactions => [...reactions, ...formattedReactions]);
   });
 
   useEffect(() => {
     let timeout;
     if (reactionsToShow.length > 0) {
       timeout = setTimeout(() => {
-        setReactionsToShow(reactions => reactions.slice(1));
-      }, 2000);
+        setReactionsToShow([]);
+      }, 10000);
     }
 
     return () => {
-      if (timeout) clearTimeout(timeout);
+      clearTimeout(timeout);
     };
   }, [reactionsToShow]);
 
   return (
     <StyledReactionsReciever ref={reactionReceiverRef}>
       {reactionsToShow.length > 0 &&
-        reactionsToShow.map(reaction => {
-          return reaction.map(mappedReaction => {
-            const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
-            return (
-              <span
-                style={{
-                  position: 'absolute',
-                  left: xCoordinate,
-                  bottom: yCoordinate,
-                  transformOrigin: 'center'
-                }}
-                className={animation}
-                key={id}
-              >
-                {REACTION_EMOJIS[reaction]}
-              </span>
-            );
-          });
+        reactionsToShow.map(mappedReaction => {
+          const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
+          return (
+            <span
+              style={{
+                position: 'absolute',
+                left: xCoordinate,
+                bottom: yCoordinate,
+                transformOrigin: 'center'
+              }}
+              className={animation}
+              key={id}
+            >
+              {REACTION_EMOJIS[reaction]}
+            </span>
+          );
         })}
     </StyledReactionsReciever>
   );

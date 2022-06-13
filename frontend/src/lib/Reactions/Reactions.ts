@@ -14,7 +14,7 @@ const Reactions = () => {
     const randomYPosition = Math.floor(Math.random() * 20);
     const fast = Math.random() >= 0.5;
     return {
-      id: Math.floor(Math.random() * 100).toString(),
+      id: Math.floor(Math.random() * 100000).toString(),
       reaction: reactionName,
       xCoordinate: xPosition,
       yCoordinate: randomYPosition,
