@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   COLOR_NEUTRO_100,
@@ -16,165 +16,174 @@ import {
   COLOR_PURPLE_200,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
+  COLOR_PURPLE_600,
   COLOR_RED_400,
-  COLOR_RED_500
+  COLOR_RED_500,
+  COLOR_RED_600
 } from '@/ui/settings';
-import { APP_SM, APP_MD, TEXT_SM, TEXT_MD } from '@/ui/Texts';
-import { rems, space } from '@/ui/helpers';
+import { mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
+import { media, rems, space } from '@/ui/helpers';
+import { StyledLinkCss } from './Globals';
 
-const buttonStyles = css`
-  ${TEXT_MD}
+const SIZES = {
+  small: {
+    '--padding': `${space(1)} ${space(3)} ${space(0.75)} ${space(3)}`,
+    '--fontSize': `${TYPOGRAPHY_SIZES.body_sm.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.body_sm.lineHeight}`
+  },
+  medium: {
+    '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
+    '--fontSize': `${TYPOGRAPHY_SIZES.body_sm.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.body_sm.lineHeight}`
+  },
+  large: {
+    '--padding': `${space(1.75)} ${space(4)} ${space(1.5)} ${space(4)}`,
+    '--fontSize': `${TYPOGRAPHY_SIZES.body_md.fontSize}`,
+    '--lineHeight': `${TYPOGRAPHY_SIZES.body_md.lineHeight}`
+  }
+};
+
+const ButtonBase = styled.button<{ full?: boolean }>`
+  width: 100%;
+
+  ${mediumWeight};
+
+  ${media.min('tablet')`
+    width: ${({ full }) => (full ? '100%' : 'auto')} !important;
+  `}
 
   align-items: center;
-  background: ${COLOR_PURPLE_500};
-  border: 2px solid ${COLOR_PURPLE_500};
+  border: none;
   border-radius: ${space(3)};
-  color: ${COLOR_NEUTRO_100};
   cursor: pointer;
   display: inline-flex;
-  font-weight: 500;
+  font-size: var(--fontSize);
   justify-content: center;
-  line-height: ${rems(20)};
-  letter-spacing: 0.15px;
-  min-width: ${rems(20)};
-  padding: ${space(1.85)} ${space(4)} ${space(1.65)};
+  line-height: var(--lineHeight);
+  /* min-width: ${rems(20)}; */
+  padding: var(--padding);
+  position: relative;
   text-decoration: none;
   transition: 0.1s ease-out;
   will-change: background, color;
 
+  &.never-full {
+    width: auto;
+  }
+
   &:disabled {
-    background: ${COLOR_NEUTRO_300} !important;
-    border-color: ${COLOR_NEUTRO_300} !important;
-    color: ${COLOR_NEUTRO_500} !important;
+    cursor: not-allowed;
+    background-color: ${COLOR_NEUTRO_300};
+    color: ${COLOR_NEUTRO_500};
     pointer-events: none;
   }
 
-  svg {
-    margin-left: ${space(0.75)};
-    width: ${space(2)};
+  & > svg {
+    &:first-child {
+      margin-left: ${space(0.75)};
+    }
+
+    ${media.min('tablet')`
+      margin-left: ${space(0.75)};
+      margin-right: ${space(-0.75)};
+      width: ${space(2)};
+    `}
 
     path {
       fill: currentColor;
     }
   }
 
-  &.secondary {
-    background: ${COLOR_PURPLE_200};
-    border-color: ${COLOR_PURPLE_200};
-    color: ${COLOR_PURPLE_500};
-  }
-
-  &:hover {
-    background: ${COLOR_PURPLE_400};
-    border-color: ${COLOR_PURPLE_400};
-    color: ${COLOR_NEUTRO_100};
-  }
-`;
-
-const Button = styled.button<{ full?: boolean }>`
-  width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${buttonStyles};
-`;
-
-const ButtonSmall = styled(Button)`
-  ${TEXT_SM}
-
-  border-width: 1px;
-  padding: ${space(1.1)} ${space(3)} ${space(0.8)};
-`;
-
-const ButtonApp = styled(Button)`
-  ${APP_MD}
-
-  font-weight: 500;
-  padding: ${space(1.1)} ${space(3)} ${space(0.9)};
-
   &.error {
-    background: ${COLOR_RED_500};
-    border-color: ${COLOR_RED_500};
+    background-color: ${COLOR_RED_500};
 
     &:hover {
-      background: ${COLOR_RED_400};
-      border-color: ${COLOR_RED_400};
+      background-color: ${COLOR_RED_400};
     }
+
+    &:focus {
+      background-color: ${COLOR_RED_600};
+    }
+  }
+
+  & div.alert {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 `;
 
-const ButtonAppSmall = styled(ButtonApp)`
-  ${APP_SM}
+const PrimaryButton = styled(ButtonBase)`
+  background-color: ${COLOR_PURPLE_500};
+  color: ${COLOR_NEUTRO_100};
 
-  border-width: 1px;
+  &:hover {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_600};
+  }
 `;
 
-const ButtonHollow = styled(Button)`
-  background: transparent;
+const SecondaryButton = styled(ButtonBase)`
+  background-color: ${COLOR_PURPLE_200};
   color: ${COLOR_PURPLE_500};
+
+  &:hover {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_600};
+  }
 `;
 
-const ButtonTransp = styled.button`
-  align-items: center;
+const TextButton = styled.button`
+  ${mediumWeight};
   color: ${COLOR_PURPLE_500};
-  cursor: pointer;
-  display: inline-flex;
-  font-weight: 500;
-  justify-content: center;
-  padding: ${space(1.85)} ${space(3)} ${space(1.65)};
-  text-decoration: none;
-  transition: color 0.1s ease-out;
-  will-change: color;
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
 
   &:hover {
     color: ${COLOR_PURPLE_400};
   }
+
+  &:focus {
+    color: ${COLOR_PURPLE_600};
+  }
 `;
 
-const linkStyles = css`
-  cursor: pointer;
+const LinkStyledButton = styled.button`
+  color: ${COLOR_PURPLE_500};
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
+  text-decoration: underline;
+
+  &:hover {
+    color: ${COLOR_PURPLE_400};
+  }
+
+  &:focus {
+    color: ${COLOR_PURPLE_600};
+  }
+`;
+
+const SubtleLinkStyledButton = styled.button`
+  ${StyledLinkCss}
   text-decoration: underline;
 `;
 
-const coloredLinkStyles = css`
-  cursor: pointer;
-  color: ${COLOR_PURPLE_500};
-  font-weight: bold;
-`;
-
-const ButtonLink = styled.button`
-  ${linkStyles}
-`;
-
-const ButtonStyledLink = styled.a<{ full?: boolean }>`
-  width: ${({ full }) => (full ? '100%' : 'auto')};
-  ${buttonStyles};
-`;
-
-const ButtonStyledLinkSmall = styled(ButtonStyledLink)`
-  ${TEXT_SM}
-
-  border-width: 1px;
-  padding: ${space(1.1)} ${space(3)} ${space(0.8)};
-`;
-
-const ButtonLinkApp = styled.button`
-  ${APP_MD}
-  ${linkStyles}
-`;
-
-const ButtonLinkColored = styled.button`
-  ${coloredLinkStyles}
-  ${APP_MD}
-`;
-
 export {
-  ButtonApp,
-  ButtonAppSmall,
-  ButtonHollow,
-  ButtonSmall,
-  ButtonTransp,
-  ButtonLink,
-  ButtonLinkApp,
-  ButtonStyledLink,
-  ButtonStyledLinkSmall,
-  ButtonLinkColored
+  PrimaryButton,
+  SecondaryButton,
+  TextButton,
+  LinkStyledButton,
+  SubtleLinkStyledButton,
+  SIZES
 };
-export default Button;
+export default ButtonBase;

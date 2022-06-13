@@ -29,8 +29,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 /** @extends AbstractAdmin<User> */
 class UserAdmin extends AbstractAdmin
 {
-    protected ?PasswordEncoderService $passwordEncoder;
-    protected ?MailerService $mailerService;
+    protected ?PasswordEncoderService $passwordEncoder = null;
+    protected ?MailerService $mailerService = null;
 
     public function setPasswordEncoder(PasswordEncoderService $passwordEncoder): void
     {
@@ -61,9 +61,13 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormOptions(array &$formOptions): void
     {
+        if (!$this->hasSubject()) {
+            return;
+        }
+
         $subject = $this->getSubject();
 
-        if (null === $subject || null === $subject->getId()) {
+        if (null === $subject->getId()) {
             $formOptions = ['validation_groups' => ['Default', 'user:create']];
         }
     }
@@ -102,16 +106,16 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $form): void
     {
-        $user = $this->getSubject();
+        $required = !$this->hasSubject() || null === $this->getSubject()->getId();
 
         $form
             ->add('email', EmailType::class, [
-                'disabled' => null !== $user && null !== $user->getId(),
+                'disabled' => !$required,
             ])
             ->add('name')
             ->add('surnames')
             ->add('privacyPolicy', CheckboxType::class, [
-                'disabled' => null !== $user && null !== $user->getId(),
+                'disabled' => !$required,
             ])
             ->add('allowShareData')
             ->add('linkedinProfile')
@@ -119,7 +123,7 @@ class UserAdmin extends AbstractAdmin
             ->add('locale', LocaleType::class)
             ->add('active')
             ->add('plainPassword', TextType::class, [
-                'required' => null === $user || null === $user->getId(),
+                'required' => $required,
             ]);
     }
 }

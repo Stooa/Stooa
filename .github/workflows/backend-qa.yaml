@@ -28,11 +28,11 @@ jobs:
 
         strategy:
             matrix:
-                php: ['7.4']
+                php: ['8.1']
 
         steps:
             - name: Checkout the repository to Github workspace
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Setup the PHP environment
               uses: shivammathur/setup-php@v2
@@ -40,6 +40,7 @@ jobs:
                   php-version: ${{ matrix.php }}
                   coverage: none
                   tools: cs2pr, composer
+                  ini-values: date.timezone=Europe/Madrid
 
             - name: Install all Composer dependencies
               uses: ramsey/composer-install@v2

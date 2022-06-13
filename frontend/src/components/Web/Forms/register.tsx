@@ -44,6 +44,7 @@ interface FormValues {
 
 interface FormProps {
   required: string;
+  notEmpty: string;
   email: string;
   terms: string;
   minlength: string;
@@ -79,7 +80,7 @@ const Form = (props: FormikProps<FormValues>) => {
         <Input label={t('password')} name="password" type="password" icon="lock" />
       </fieldset>
       <fieldset>
-        <p className="text-xxs">
+        <p className="body-xs">
           <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
         </p>
         <Input
@@ -100,7 +101,14 @@ const Form = (props: FormikProps<FormValues>) => {
           <Trans
             i18nKey="register:terms"
             components={{
-              a: <a href={privacyLink} target="_blank" rel="noreferrer noopener nofollow" />
+              a: (
+                <a
+                  className="decorated"
+                  href={privacyLink}
+                  target="_blank"
+                  rel="noreferrer noopener nofollow"
+                />
+              )
             }}
           />
         </Checkbox>
@@ -109,10 +117,10 @@ const Form = (props: FormikProps<FormValues>) => {
         <SubmitBtn text={t('register:button.register')} disabled={props.isSubmitting} />
       </fieldset>
       <fieldset className="form__footer">
-        <p className="text-sm">
+        <p className="body-sm">
           {t('register:haveAccount')}{' '}
           <RedirectLink href={ROUTE_SIGN_IN} passHref>
-            <a>{t('register:button.login')}</a>
+            <a className="decorated colored">{t('register:button.login')}</a>
           </RedirectLink>
         </p>
       </fieldset>
@@ -124,8 +132,18 @@ const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
-      firstname: Yup.string().required(props.required),
-      lastname: Yup.string().required(props.required),
+      firstname: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required),
+      lastname: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required),
       email: Yup.string().email(props.email).required(props.required),
       password: Yup.string().min(6, props.minlength).required(props.required),
       terms: Yup.boolean().required(props.required).oneOf([true], props.terms),
@@ -176,6 +194,7 @@ const Register = () => {
   const termsError = t('validation.terms');
   const minlengthError = t('validation.passwordLength');
   const urlError = t('validation.url');
+  const notEmptyError = t('validation.notEmpty');
 
   const handleOnSubmit = async (res, values) => {
     if (res.type === 'Error') {
@@ -183,14 +202,10 @@ const Register = () => {
       console.log('[STOOA] submit error', res);
     } else {
       await login(values.email, values.password).then(res => {
-        const {
-          data: { username }
-        } = res;
-
         dataLayerPush({
           dataLayerPush: 'GAPageView',
           pageViewUrl: '/user-registered',
-          pageViewTitle: `User registered ${username}`
+          pageViewTitle: 'User registered'
         });
       });
     }
@@ -200,6 +215,7 @@ const Register = () => {
     <>
       {error && <FormError errors={error} />}
       <FormValidation
+        notEmpty={notEmptyError}
         required={requiredError}
         email={emailError}
         terms={termsError}

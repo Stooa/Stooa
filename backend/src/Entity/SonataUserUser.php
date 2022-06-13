@@ -23,7 +23,7 @@ use Sonata\UserBundle\Entity\BaseUser;
 class SonataUserUser extends BaseUser
 {
     /**
-     * @var mixed
+     * @var int|string|null
      *
      * @ORM\Id
      * @ORM\GeneratedValue

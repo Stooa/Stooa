@@ -21,13 +21,10 @@ use Webmozart\Assert\Assert;
 
 class FishbowlCreatorResolver implements QueryItemResolverInterface
 {
-    private FishbowlRepository $repository;
-    private Security $security;
-
-    public function __construct(FishbowlRepository $repository, Security $security)
-    {
-        $this->repository = $repository;
-        $this->security = $security;
+    public function __construct(
+        private readonly FishbowlRepository $repository,
+        private readonly Security $security
+    ) {
     }
 
     /**

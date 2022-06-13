@@ -42,10 +42,10 @@ const Icon = styled.button`
     border: 1px solid transparent;
     border-radius: 50%;
     display: flex;
-    height: ${space(4)};
+    height: ${space(3.25)};
     justify-content: center;
     transition: background-color 0.1s ease-out;
-    width: ${space(4)};
+    width: ${space(3.25)};
     will-change: background-color;
   }
 
@@ -91,6 +91,8 @@ const Description = styled.div`
 
   .info-text {
     margin-bottom: ${space(2)};
+    max-height: 350px;
+    overflow-y: scroll;
   }
 
   .description__share-text {

@@ -37,6 +37,7 @@ import {
 } from '@/lib/auth';
 
 import { Auth, StatusPayload } from '@/types/auth-context';
+import userRepository from '@/jitsi/User';
 import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';
 import Layout from '@/layouts/Clean';
@@ -132,6 +133,7 @@ const AuthProvider = ({ children }) => {
     router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang }).then(() => {
       console.log('Redirected');
     });
+    userRepository.setUserNickname('');
     setUser(null);
   };
 

@@ -9,12 +9,12 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import Dots from '@/ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import Trans from 'next-translate/Trans';
+import { Fishbowl } from '@/types/api-platform';
 
 interface Props {
   data: Fishbowl;
@@ -50,7 +50,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
 
   return (
     <InfoStyled ref={wrapperRef}>
-      <p className="title app-md medium">{data.name}</p>
+      <p className="title body-sm medium">{data.name}</p>
       <Icon onClick={toggleInfo} className={`${active ? 'active' : ''}`}>
         <span className="icon-wrapper">
           <Dots />
@@ -58,10 +58,10 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
       </Icon>
       {active && (
         <Description>
-          <p className="app-md medium description__title">{data.name}</p>
-          <p className="info-text app-sm">{data.description}</p>
-          <ButtonCopyUrl variant="small" secondary fid={data.slug} locale={data.locale} />
-          <p className="app-sm description__share-text">
+          <p className="body-sm medium description__title">{data.name}</p>
+          <p className="info-text body-xs">{data.description}</p>
+          <ButtonCopyUrl variant="secondary" size="medium" fid={data.slug} locale={data.locale} />
+          <p className="body-xs description__share-text">
             <Trans i18nKey="fishbowl:fishbowlDescription.shareText" components={{ i: <i /> }} />
           </p>
         </Description>

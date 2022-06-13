@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
@@ -20,17 +19,11 @@ import {
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_HOME
 } from '@/app.config';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import RedirectLink from '@/components/Web/RedirectLink';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import {
-  ButtonLinkColored,
-  ButtonSmall,
-  ButtonStyledLink,
-  ButtonStyledLinkSmall
-} from '@/ui/Button';
 import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
 import {
   EmptyFishbowlList,
@@ -43,6 +36,7 @@ import {
   MobileBackButton
 } from '@/components/App/FishbowlList/styles';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
+import Button from '@/components/Common/Button';
 
 import { getAuthToken } from '@/lib/auth';
 import api from '@/lib/api';
@@ -50,11 +44,14 @@ import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { basicRevealWithDelay, bottomMobileReveal } from '@/ui/animations/motion/reveals';
 import PlusSign from '@/ui/svg/plus-sign.svg';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import BackArrow from '@/ui/svg/arrow-prev.svg';
 import { BREAKPOINTS } from '@/ui/settings';
 
-const FishbowlList = () => {
+interface Props {
+  selectedFishbowlParam?: string;
+}
+
+const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
   const { width: windowWidth } = useWindowSize();
@@ -64,6 +61,16 @@ const FishbowlList = () => {
   const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
   };
+
+  useEffect(() => {
+    if (fishbowls) {
+      fishbowls.forEach(fishbowl => {
+        if (fishbowl.slug === selectedFishbowlParam) {
+          setSelectedFishbowl(fishbowl);
+        }
+      });
+    }
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const params = new URLSearchParams([
     ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
@@ -91,7 +98,7 @@ const FishbowlList = () => {
   const handleUpdateFishbowl = updatedFishbowl => {
     setFishbowls(currentFishbowls => {
       return currentFishbowls.map(fishbowl => {
-        if (fishbowl.slug !== updatedFishbowl.slug) {
+        if (fishbowl.id !== updatedFishbowl.id) {
           return fishbowl;
         } else {
           return { ...fishbowl, ...updatedFishbowl };
@@ -121,8 +128,10 @@ const FishbowlList = () => {
               />
             </h1>
             <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
-              <ButtonSmall
-                className="schedule-fishbowl secondary"
+              <Button
+                as="a"
+                variant="secondary"
+                className="schedule-fishbowl never-full"
                 onClick={() => {
                   pushEventDataLayer({
                     category: 'Schedule Fishbowl',
@@ -133,12 +142,12 @@ const FishbowlList = () => {
               >
                 <span>{t('common:scheduleFishbowl')}</span>
                 <PlusSign />
-              </ButtonSmall>
+              </Button>
             </RedirectLink>
           </div>
           <span className="divider" />
         </Header>
-        <FishbowlListContent>
+        <FishbowlListContent className={fishbowls.length === 0 ? '' : 'not-empty'}>
           {fishbowls.length === 0 ? (
             <EmptyFishbowlList data-testid="empty-list">
               <div className="fishbowl-list__empty-illustration">
@@ -154,15 +163,34 @@ const FishbowlList = () => {
                   alt="Empty chair"
                 />
               </div>
-              <h2>
+              <h2 className="body-lg medium">
                 <Trans i18nKey="fishbowl-list:emptyListTitle" components={{ i: <i /> }} />
               </h2>
               <p>
                 <Trans i18nKey="fishbowl-list:emptyListDescription" components={{ i: <i /> }} />
               </p>
               <div className="empty-actions">
-                <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-                  <ButtonStyledLink
+                <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+                  <Button
+                    as="a"
+                    variant="secondary"
+                    size="large"
+                    className="animate-item cta-create-fishbowl"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Schedule Fishbowl',
+                        action: 'Empty Fishbowl List',
+                        label: 'Fishbowl List'
+                      });
+                    }}
+                  >
+                    <span>{t('common:scheduleFishbowl')}</span>
+                  </Button>
+                </RedirectLink>
+                <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+                  <Button
+                    as="a"
+                    size="large"
                     className="animate-item cta-create-fishbowl"
                     onClick={() => {
                       pushEventDataLayer({
@@ -173,24 +201,8 @@ const FishbowlList = () => {
                     }}
                   >
                     <span>{t('common:hostFishbowlNow')}</span>
-                    <ArrowRight />
-                  </ButtonStyledLink>
-                </Link>
-                <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-                  <ButtonStyledLink
-                    className="animate-item cta-create-fishbowl secondary"
-                    onClick={() => {
-                      pushEventDataLayer({
-                        category: 'Schedule Fishbowl',
-                        action: 'Empty Fishbowl List',
-                        label: 'Fishbowl List'
-                      });
-                    }}
-                  >
-                    <span>{t('common:scheduleFishbowl')}</span>
-                    <ArrowRight />
-                  </ButtonStyledLink>
-                </Link>
+                  </Button>
+                </RedirectLink>
               </div>
             </EmptyFishbowlList>
           ) : (
@@ -201,7 +213,7 @@ const FishbowlList = () => {
                     onClick={fishbowl => handleClick(fishbowl)}
                     key={index}
                     fishbowl={fishbowl}
-                    selected={fishbowl.slug === selectedFishbowl?.slug}
+                    selected={fishbowl.id === selectedFishbowl?.id}
                   />
                 ))}
               </FishbowlScrollList>
@@ -233,7 +245,7 @@ const FishbowlList = () => {
                           >
                             <BackArrow />
                           </MobileBackButton>
-                          <h2 className="title-md">
+                          <h2 className="title-md form-title">
                             <Trans i18nKey="fishbowl-list:titleEdit" components={{ i: <i /> }} />
                           </h2>
                         </div>
@@ -258,7 +270,7 @@ const FishbowlList = () => {
                       exit="exit"
                       animate="visible"
                     >
-                      <h2>
+                      <h2 className="body-lg medium">
                         <Trans i18nKey="fishbowl-list:fishbowlStarted" components={{ i: <i /> }} />
                       </h2>
                       <p>
@@ -272,23 +284,27 @@ const FishbowlList = () => {
                         locale={selectedFishbowl.locale}
                         passHref
                       >
-                        <ButtonStyledLink
+                        <Button
+                          as="a"
                           className="enter-fishbowl"
                           data-testid="started-enter-fishbowl"
                         >
                           <span>{t('enterFishbowl')}</span>
-                          <ArrowRight />
-                        </ButtonStyledLink>
+                        </Button>
                       </RedirectLink>
-                      <ButtonLinkColored className="back" onClick={() => setSelectedFishbowl(null)}>
+                      <Button
+                        variant="text"
+                        className="back"
+                        onClick={() => setSelectedFishbowl(null)}
+                      >
                         <span>{t('back')}</span>
-                      </ButtonLinkColored>
+                      </Button>
                     </DetailPlaceholder>
                   ))}
               </AnimatePresence>
               {!selectedFishbowl && (
                 <DetailPlaceholder data-testid="selected-placeholder" className="not-selected">
-                  <h2>
+                  <h2 className="body-lg medium">
                     <Trans
                       i18nKey="fishbowl-list:noSelectedFishbowlTitle"
                       components={{ i: <i /> }}

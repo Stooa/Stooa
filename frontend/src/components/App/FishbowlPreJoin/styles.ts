@@ -18,8 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  max-width: ${rems(840)};
+  max-width: ${rems(1024)};
 
   ${media.min('tablet')`
     flex-direction: row;
@@ -58,14 +57,16 @@ const Form = styled.div`
 
   h2 {
     color: ${COLOR_NEUTRO_700};
+    margin-bottom: ${space(2)};
   }
 
-  button.cancel {
+  p.subtitle {
     color: ${COLOR_NEUTRO_700};
+    margin-bottom: ${space(4)};
   }
 
   ${media.min('tablet')`
-    padding: ${space(6)};
+    padding:  ${space(15)} ${space(4)} ${space(6)} ${space(4)};
   `}
 `;
 
@@ -77,6 +78,7 @@ const VideoContainer = styled.div`
   height: 35vh;
   overflow: hidden;
   width: 100%;
+  min-height: 420px;
 
   .video {
     width: 100%;
@@ -87,6 +89,7 @@ const VideoContainer = styled.div`
   }
 
   ${media.min('tablet')`
+    border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
     height: 100%;
   `}
 `;

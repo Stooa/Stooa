@@ -13,12 +13,16 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
+
 import { useStateValue } from '@/contexts/AppContext';
+import { useDevices } from '@/contexts/DevicesContext';
+import { useStooa } from '@/contexts/StooaManager';
+
 import ModalStartIntroduction from '@/components/App/ModalStartIntroduction';
 import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
+import Button from '@/components/Common/Button';
 
-import { ButtonAppSmall } from '@/ui/Button';
-import { useStooa } from '@/contexts/StooaManager';
+import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 
 interface Props {
   fid: string;
@@ -37,8 +41,14 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
   const { data } = useStooa();
+  const { permissions, setShowModalPermissions } = useDevices();
 
   const toggleIntroductionModal = () => {
+    if (!permissions.audio && !introduction) {
+      setShowModalPermissions(true);
+      return;
+    }
+
     setShowIntroductionModal(!showIntroductionModal);
   };
 
@@ -56,6 +66,11 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const startFishbowl = () => {
+    if (!permissions.audio && !introduction) {
+      setShowModalPermissions(true);
+      return;
+    }
+
     setLoading(true);
     const slug = { variables: { input: { slug: fid } } };
 
@@ -143,21 +158,31 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           />
         )}
         {running && (
-          <ButtonAppSmall className="app-sm button error" onClick={toggleFinishModal}>
+          <Button size="medium" className="button error" onClick={toggleFinishModal}>
             <span className="text">{t('endFishbowl')}</span>
-          </ButtonAppSmall>
+          </Button>
         )}
         {!running &&
           (!introduction && data.hasIntroduction ? (
-            <ButtonAppSmall className="app-sm button" onClick={toggleIntroductionModal}>
-              <span className="text">{t('startFishbowl')}</span>
-            </ButtonAppSmall>
+            <Button size="medium" className="button" onClick={toggleIntroductionModal}>
+              {!permissions.audio && (
+                <div className="alert">
+                  <PermissionsAlert />
+                </div>
+              )}
+              <span className="text">{t('startIntroduction')}</span>
+            </Button>
           ) : (
-            <ButtonAppSmall className="app-sm button" onClick={startFishbowl} disabled={loading}>
+            <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
+              {!permissions.audio && !introduction && (
+                <div className="alert">
+                  <PermissionsAlert />
+                </div>
+              )}
               <span className="text">
                 {data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}
               </span>
-            </ButtonAppSmall>
+            </Button>
           ))}
       </div>
     )

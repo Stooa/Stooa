@@ -16,6 +16,19 @@ const date = new Date();
 const isoDate = new Date(date.getTime() + twoHoursInMs);
 const isoCloseDate = new Date(date.getTime() + twentyMinutesInMs);
 
+export const modifiedValues = {
+  title: '',
+  hours: '',
+  description: '',
+  startDateTimeTz: new Date(),
+  duration: '',
+  durationFormatted: '',
+  timezone: '',
+  locale: '',
+  language: '',
+  hasIntroduction: false
+};
+
 Given('a profile information', () => {
   cy.intercept('POST', 'https://localhost:8443/graphql', {
     fixture: 'self-user.json'
@@ -42,6 +55,38 @@ When('clicks on {string} button', (text = '') => {
   cy.findAllByRole('button', { name: text }).first().click({ force: true });
 });
 
+/**
+ * @param {string} newValue Is the user's input
+ * @param {string} fieldName The field to select by name
+ */
+When('writes {string} in input {string}', (newValue = '', fieldName = '') => {
+  cy.get(`:is(input, textarea, div)[name=${fieldName}]`).clear().type(newValue);
+  modifiedValues[fieldName] = newValue;
+});
+
+/**
+ * This function changes the value to a select type input
+ * @param {string} fieldName
+ * @param {string} newValue
+ */
+When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
+  cy.get(`select[name=${fieldName}]`).select(newValue);
+  modifiedValues[fieldName] = newValue;
+});
+
+/**
+ * This function changes the value to a checkbox type input
+ * @param {string} fieldName
+ */
+When('modifies the fishbowl {string} to true', (fieldName = '') => {
+  cy.get(`input[name=${fieldName}]`).click({ force: true });
+  modifiedValues[fieldName] = true;
+});
+
+When('clicks submit button', () => {
+  cy.get('form').submit();
+});
+
 Then('sees {string}', (text = '') => {
   cy.findByText(text).should('be.visible');
 
@@ -50,6 +95,18 @@ Then('sees {string}', (text = '') => {
 
 Then('gets redirect to {string}', (url = '') => {
   cy.location('pathname', { timeout: 10000 }).should('eq', url);
+});
+
+Then('sees the register form', () => {
+  cy.findByRole('heading', { name: 'Register to get started' });
+
+  cy.screenshot();
+});
+
+Then('sees the create fishbowl form', () => {
+  cy.findByRole('heading', { name: 'Create a free fishbowl' });
+
+  cy.screenshot();
 });
 
 Given('a list of one fishbowl', () => {
@@ -65,7 +122,6 @@ Given('a list of one fishbowl', () => {
 });
 
 Given('a list of one fishbowl that is about to start', () => {
-  console.log(new Date(date.getTime() + twentyMinutesInMs));
   cy.intercept(
     {
       pathname: '/fishbowls',

@@ -33,7 +33,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
 import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 
 interface FormProps {
   required: string;
@@ -93,6 +93,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="title"
           type="text"
           autoComplete="off"
+          id="title"
         />
         <Textarea
           data-testid="edit-form-description"
@@ -100,12 +101,14 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="description"
           validation={false}
           autoComplete="off"
+          id="description"
         />
         <DatePicker
           data-testid="edit-form-date"
           label={t('fishbowl.day')}
           placeholderText={t('fishbowl.selectDay')}
           name="day"
+          id="day"
           minDate={new Date()}
           dateFormat="dd/MM/yyyy"
           icon="calendar"
@@ -117,6 +120,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.time')}
           placeholderText={t('fishbowl.selectTime')}
           name="time"
+          id="time"
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
@@ -128,6 +132,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         <Select
           label={t('fishbowl.duration')}
           name="hours"
+          id="hours"
           variant="sm"
           icon="hourglass"
           autoComplete="off"
@@ -166,6 +171,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           className="select"
           label={t('fishbowl.timezone')}
           name="timezone"
+          id="timezone"
           icon="world"
           autoComplete="off"
         >
@@ -183,6 +189,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           className="select"
           label={t('fishbowl.language')}
           name="language"
+          id="language"
           icon="language"
           autoComplete="off"
         >
@@ -197,7 +204,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.introductionTooltip"
-              components={{ strong: <strong /> }}
+              components={{ span: <span className="medium" /> }}
             />
           }
           label={t('fishbowl.introductionLabel')}
@@ -205,7 +212,6 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         />
       </fieldset>
       <fieldset>
-        {success && <span className="success-message-top">{t('validation.successMessage')}</span>}
         {success && (
           <span className="success-message-bottom">{t('validation.successMessage')}</span>
         )}
@@ -347,7 +353,6 @@ const FishbowlForm = ({
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
-        console.log(formattedFishbowl);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);

@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { useEffect } from 'react';
+
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
@@ -17,13 +19,14 @@ import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
 import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
-import Button from '@/ui/Button';
+import Button from '@/components/Common/Button';
 
 interface FormValues {
   name: string;
 }
 
 interface FormProps {
+  notEmpty: string;
   required: string;
   onSubmit: (values: FormValues) => void;
 }
@@ -35,11 +38,17 @@ const initialValues = {
 const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
+  useEffect(() => {
+    userRepository.setUser({
+      guestId: ''
+    });
+  }, []);
+
   return (
     <FormikForm className="prejoin">
-      <Input label={t('name')} name="name" type="text" />
       <fieldset className="submit-wrapper">
-        <Button type="submit" disabled={props.isSubmitting}>
+        <Input label={t('name')} name="name" type="text" />
+        <Button size="large" type="submit" disabled={props.isSubmitting}>
           {t('button.enterFishbowl')}
         </Button>
       </fieldset>
@@ -51,7 +60,12 @@ const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
-      name: Yup.string().required(props.required)
+      name: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
@@ -67,9 +81,11 @@ const Nickname = () => {
   const { t } = useTranslation('form');
 
   const requiredError = t('validation.required');
+  const notEmptyError = t('validation.notEmpty');
 
   const handleOnSubmit = async values => {
     const { name = '' } = values;
+
     createGuest({
       variables: {
         input: {
@@ -107,7 +123,9 @@ const Nickname = () => {
     });
   };
 
-  return <FormValidation required={requiredError} onSubmit={handleOnSubmit} />;
+  return (
+    <FormValidation notEmpty={notEmptyError} required={requiredError} onSubmit={handleOnSubmit} />
+  );
 };
 
 export default Nickname;

@@ -1,5 +1,7 @@
 {
     "seatAvailable": "Seient disponible",
+    "seatAvailableAfterIntro": "Seient disponible després de la introducció",
+    "seatUnavailable": "Seient no disponible",
     "timeup": "Esgotat!",
     "timeleft": "per acabar",
     "notification": {

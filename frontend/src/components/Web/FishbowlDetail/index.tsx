@@ -7,51 +7,127 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
-import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
+import Link from 'next/link';
+import React, { useEffect } from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
-import { useStateValue } from '@/contexts/AppContext';
-import { formatDateTime } from '@/lib/helpers';
-import CopyUrl from '@/components/Common/CopyUrl';
-import { Container, TimeLeft } from '@/ui/pages/fishbowl-detail';
+import { Container } from '@/ui/pages/fishbowl-detail';
+import { MainGrid } from './styles';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
+import FishbowlDataCard from '@/components/Web/FishbowlDataCard';
+import Twitter from '@/ui/svg/share-twitter.svg';
+import Linkedin from '@/ui/svg/share-linkedin.svg';
+import { pushEventDataLayer } from '@/lib/analytics';
+import { toast } from 'react-toastify';
+import RedirectLink from '../RedirectLink';
+import Button from '@/components/Common/Button';
+import { ROUTE_FISHBOWL } from '@/app.config';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   data: Fishbowl;
 }
 
 const FishbowlDetail: React.FC<Props> = ({ data }) => {
-  const [{ fishbowlReady }] = useStateValue();
-  const { t } = useTranslation('fishbowl');
-  const startDate = formatDateTime(data.startDateTimeTz);
+  const { t } = useTranslation('form');
+  const shareTitle = `${data.name}.`;
+
+  useEffect(() => {
+    toast(
+      <Trans i18nKey="fishbowl:detail.fishbowlCreatedSuccessfully" components={{ i: <i /> }} />,
+      {
+        toastId: 'successful-created-fishbowl',
+        icon: '🎉',
+        type: 'success',
+        position: 'bottom-center',
+        autoClose: 5000,
+        delay: 2000
+      }
+    );
+  }, []);
 
   return (
     <Container>
-      <dl>
-        <dt>{t('detail.title')}</dt>
-        <dd>{data.name}</dd>
-        {data.description && (
-          <>
-            <dt>{t('detail.description')}</dt>
-            <dd>{data.description}</dd>
-          </>
-        )}
-        <dt>{t('detail.startDate')}</dt>
-        <dd>
-          {t(`months.${startDate.month}`)} {startDate.day}, {startDate.year}
-        </dd>
-        <dt>{t('detail.startTime')}</dt>
-        <dd>{startDate.time}</dd>
-        <dt>{t('detail.duration')}</dt>
-        <dd>{data.durationFormatted}</dd>
-      </dl>
-      {!fishbowlReady && (
-        <TimeLeft className="warning text-md prewrap" block>
-          <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
-        </TimeLeft>
-      )}
-      <CopyUrl className="centered" data={data} />
+      <MainGrid>
+        <div className="left-column">
+          <h2 className="title-md">
+            <Trans i18nKey="fishbowl:detail.shareTitle" components={{ br: <br />, i: <i /> }} />
+          </h2>
+          <p className="body-md description">
+            <Trans i18nKey="fishbowl:detail.shareSubtitle" components={{ i: <i /> }} />
+          </p>
+          <div className="hide-desktop enter-fishbowl">
+            <RedirectLink href={`${ROUTE_FISHBOWL}/${data.slug}`} locale={data.locale} passHref>
+              <Button size="large" as="a" data-testid="enter-fishbowl">
+                <span>{t('button.enterFishbowl')}</span>
+              </Button>
+            </RedirectLink>
+          </div>
+          <ButtonCopyUrl
+            variant="secondary"
+            size="large"
+            withSvg
+            fid={data.slug}
+            locale={data.locale}
+          />
+          <p className="body-xs share-text">
+            <Trans i18nKey="fishbowl:detail.shareInSocials" />
+          </p>
+          <ul className="social-links">
+            <li>
+              <Link
+                href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}&title=${shareTitle}&mini=true`}
+                passHref
+              >
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Share',
+                      action: 'Linkedin',
+                      label: `fishbowl/detail/${data.slug}`
+                    });
+                  }}
+                >
+                  <span className="icon-wrapper">
+                    <Linkedin />
+                  </span>
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}`}
+                passHref
+              >
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => {
+                    pushEventDataLayer({
+                      category: 'Share',
+                      action: 'Twitter',
+                      label: `fishbowl/detail/${data.slug}`
+                    });
+                  }}
+                >
+                  <span className="icon-wrapper">
+                    <Twitter />
+                  </span>
+                </a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="right-column">
+          <FishbowlDataCard data={data} />
+          <p className="body-xs">
+            <Trans i18nKey="fishbowl:detail.mailInfo" components={{ i: <i /> }} />
+          </p>
+        </div>
+      </MainGrid>
     </Container>
   );
 };

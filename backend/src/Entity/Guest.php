@@ -43,7 +43,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity
  */
-class Guest
+class Guest implements \Stringable
 {
     /**
      * @ORM\Id

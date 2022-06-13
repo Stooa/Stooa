@@ -10,7 +10,7 @@
 const DEFAULT_LOCALE = 'en';
 
 module.exports = {
-  locales: ['en', 'ca', 'es', 'fr'],
+  locales: ['en', 'ca', 'es', 'fr', 'id'],
   defaultLocale: DEFAULT_LOCALE,
   pages: {
     '*': ['common'],
@@ -24,6 +24,8 @@ module.exports = {
     '/edit-profile': ['form', 'edit-profile', 'register', 'password'],
     '/log-in': ['form', 'login'],
     '/recover-password': ['form', 'recover'],
+    '/user-not-participating': ['user-not-participating'],
+    '/user-conduct-violation': ['user-conduct-violation'],
     '/register': ['form', 'register'],
     '/fb/[fid]': ['fishbowl', 'app', 'form', 'on-boarding'],
     '/fishbowl/create': ['fishbowl', 'form'],

@@ -17,11 +17,11 @@ file that was distributed with this source code.
     {{ macros.spaceRow(50) }}
     <tr>
         <td align="center" width="100%">
+            <img src="{{ emailConfig.header.image.src }}" width="{{ emailConfig.header.image.width }}" height="{{ emailConfig.header.image.height }}" border="0" alt="{{ emailConfig.header.image.alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; {{ emailConfig.font.regular }}">
             <a href="{{ emailConfig.header.link }}" target="_blank" rel="noreferrer noopener">
-                <img src="{{ emailConfig.header.image.src }}" width="{{ emailConfig.header.image.width }}" height="{{ emailConfig.header.image.height }}" border="0" alt="{{ emailConfig.header.image.alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; {{ emailConfig.font.regular }}">
+                <img src="{{ emailConfig.header.logo.src }}" width="{{ emailConfig.header.logo.width }}" height="{{ emailConfig.header.logo.height }}" border="0" alt="{{ emailConfig.header.logo.alt }}" style="border:0; -ms-interpolation-mode: bicubic; display: block; {{ emailConfig.font.regular }}">
             </a>
         </td>
     </tr>
     {{ macros.spaceRow(40) }}
 {% endblock %}
-

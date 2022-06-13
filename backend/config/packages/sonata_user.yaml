@@ -8,6 +8,9 @@
 sonata_user:
     class:
         user: App\Entity\SonataUserUser
-        group: App\Entity\SonataUserGroup
     impersonating:
         route: sonata_admin_dashboard
+    resetting:
+        email:
+            address: '%env(MAILER_FROM)%'
+            sender_name: Backoffice

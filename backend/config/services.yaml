@@ -7,9 +7,10 @@
 
 parameters:
     locale: en
-    locales: [ en, es, ca, fr ]
+    locales: [ en, es, ca, fr, id ]
     container.dumper.inline_factories: true
     container.dumper.inline_class_loader: true
+    jaas_activated: '%env(JAAS_ACTIVE)%'
 
 services:
     _defaults:
@@ -55,36 +56,36 @@ services:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
 
+    App\JWT\TokenGenerator\JaasTokenGenerator:
+        bind:
+            $appId: '%env(JAAS_APP_ID)%'
+            $apiKey: '%env(JAAS_API_KEY)%'
+
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
     # Admin
     App\Admin\UserAdmin:
-        arguments: [null, App\Entity\User, null]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Users }
+            - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, label: Users }
         calls:
             - [setPasswordEncoder, ['@App\Security\PasswordEncoderService']]
             - [setMailerService, ['@App\Service\MailerService']]
 
     App\Admin\FishbowlAdmin:
-        arguments: [null, App\Entity\Fishbowl, null]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Fishbowls }
+            - { name: sonata.admin, model_class: App\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
         calls:
             - [setFishbowlService, ['@App\Service\FishbowlService']]
 
     App\Admin\ResetPasswordRequestAdmin:
-        arguments: [null, App\Entity\ResetPasswordRequest, null]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Reset Password Requests }
+            - { name: sonata.admin, model_class: App\Entity\ResetPasswordRequest, manager_type: orm, label: Reset Password Requests }
 
     App\Admin\ParticipantAdmin:
-        arguments: [null, App\Entity\Participant, null]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Participants }
+            - { name: sonata.admin, model_class: App\Entity\Participant, manager_type: orm, label: Participants }
 
     App\Admin\GuestAdmin:
-        arguments: [null, App\Entity\Guest, null]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Guests }
+            - { name: sonata.admin, model_class: App\Entity\Guest, manager_type: orm, label: Guests }

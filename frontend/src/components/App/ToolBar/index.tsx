@@ -28,24 +28,35 @@ import useEventListener from '@/hooks/useEventListener';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
+  const [joinIsInactive, setJoinIsInactive] = useState(false);
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
-  const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
+  const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
 
   const configButtonRef = useRef(null);
 
-  const joinSeat = (user: User) => {
+  const joinSeat = async (user: User) => {
+    setJoinIsInactive(true);
     if (!joined) {
-      setJoined(true);
-      join(user);
+      await join(user);
+
+      setTimeout(() => {
+        setJoined(true);
+        setJoinIsInactive(false);
+      }, 1200);
     }
   };
 
-  const leaveSeat = () => {
+  const leaveSeat = async () => {
+    setJoinIsInactive(true);
     if (joined) {
-      setJoined(false);
-      leave();
+      await leave();
+
+      setTimeout(() => {
+        setJoined(false);
+        setJoinIsInactive(false);
+      }, 1200);
     }
   };
 
@@ -54,8 +65,7 @@ const ToolBar: React.FC = () => {
       data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      conferenceStatus !== IConferenceStatus.RUNNING &&
-      conferenceStatus !== IConferenceStatus.FINISHED
+      conferenceStatus === IConferenceStatus.INTRODUCTION
     );
   };
 
@@ -64,7 +74,7 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      data.currentStatus.toUpperCase() == IConferenceStatus.NOT_STARTED
+      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
     );
   };
 
@@ -89,36 +99,44 @@ const ToolBar: React.FC = () => {
   useEventListener('click', handleOutsideClick);
 
   useEffect(() => {
-    if (null !== audioOutputDevice) {
+    if (audioOutputDevice !== null) {
       devicesRepository.changeDevice(audioOutputDevice);
     }
   }, [audioOutputDevice]);
 
   useEffect(() => {
-    if (joined && null !== audioInputDevice) {
+    if (joined && audioInputDevice !== null) {
       devicesRepository.changeDevice(audioInputDevice);
     }
-  }, [audioInputDevice]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [audioInputDevice, permissions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (joined && null !== videoDevice) {
+    if (joined && videoDevice !== null) {
       devicesRepository.changeDevice(videoDevice);
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (hasModeratorToSeatDuringIntroduction() || hasModeratorToSeatDuringRunning()) {
-      console.log('[STOOA] Moderator join seat');
+    if (hasModeratorToSeatDuringIntroduction()) {
+      console.log('[STOOA] Moderator join seat during introduction');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceReady, conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (hasModeratorToSeatDuringRunning()) {
+      console.log('[STOOA] Moderator join seat during running');
+      joinSeat(userRepository.getUser());
+    }
+  }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     conferenceStatus === IConferenceStatus.INTRODUCTION ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
-    (!joined && !seatsAvailable);
+    (!joined && !seatsAvailable) ||
+    joinIsInactive;
 
   const isMuteDisabled =
     !conferenceReady ||
@@ -130,11 +148,21 @@ const ToolBar: React.FC = () => {
 
   return (
     <Container className={isModerator ? 'moderator' : ''}>
-      <ButtonJoin joined={joined} join={joinSeat} leave={leaveSeat} disabled={isActionDisabled}>
+      <ButtonJoin
+        permissions={joined ? true : permissions.audio}
+        joined={joined}
+        join={joinSeat}
+        leave={leaveSeat}
+        disabled={isActionDisabled}
+      >
         {joinLabel}
       </ButtonJoin>
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
-      <ButtonVideo handleVideo={handleVideo} joined={joined} disabled={isMuteDisabled} />
+      <ButtonVideo
+        handleVideo={handleVideo}
+        joined={joined}
+        disabled={isMuteDisabled || !permissions.video}
+      />
       <ButtonConfig selectorPosition="top" ref={configButtonRef} />
     </Container>
   );

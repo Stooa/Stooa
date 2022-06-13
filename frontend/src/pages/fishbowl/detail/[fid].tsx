@@ -13,15 +13,12 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL, ROUTE_NOT_FOUND } from '@/app.config';
-import { useAuth } from '@/contexts/AuthContext';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { dataLayerPush } from '@/lib/analytics';
-import Alert from '@/ui/Alert';
+
+import { ToastContainer } from 'react-toastify';
 
 const FishbowlDetail = dynamic(import('@/components/Web/FishbowlDetail'), {
-  loading: () => <div />
-});
-const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), {
   loading: () => <div />
 });
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
@@ -29,10 +26,8 @@ const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div 
 const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div /> });
 
 const Detail = props => {
-  const { t } = useTranslation('fishbowl');
   const router = useRouter();
   const { lang } = useTranslation();
-  const { createFishbowl } = useAuth();
   const referer = props.referer ? props.referer : '';
 
   const { fid } = router.query;
@@ -42,7 +37,6 @@ const Detail = props => {
   if (error) return <Error message={error.message} />;
 
   const { bySlugQueryFishbowl: fb } = data;
-  const showTitle = createFishbowl;
 
   if (!fb) {
     router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
@@ -63,14 +57,8 @@ const Detail = props => {
 
   return (
     <Layout title={fb.name} decorated>
-      {showTitle && (
-        <Alert className="success" block>
-          <p className="title-sm">{t('preTitle')}</p>
-          <p>{t('preSubtitle')}</p>
-        </Alert>
-      )}
       <FishbowlDetail data={fb} />
-      <JoinFishbowl data={fb} isCreator />
+      <ToastContainer className="toastify-custom" />
     </Layout>
   );
 };

@@ -15,3 +15,5 @@ coverage
 .next
 .coverage
 src/types/api-platform
+
+src/ui/design-tokens/*

@@ -28,7 +28,7 @@ const EditProfile = () => {
 
   return (
     <Layout title={t('title')}>
-      <h1 className="title-md">{t('title')}</h1>
+      <h1 className="title-md form-title">{t('title')}</h1>
       <ProfileForm userData={data.selfUser} refetch={refetch} />
     </Layout>
   );

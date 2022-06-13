@@ -18,7 +18,8 @@ const OnboardingModal = styled(Modal)`
   }
 
   .content {
-    height: fit-content;
+    height: 85vh;
+    min-height: ${rems(420)};
     max-height: ${rems(680)};
     max-width: ${rems(840)};
     padding: 0;
@@ -26,6 +27,10 @@ const OnboardingModal = styled(Modal)`
 
     ${media.min('maxWidth')`
       max-width: ${rems(920)};
+    `}
+
+    ${media.min('tablet')`
+    height: ${rems(520)};
     `}
   }
 `;

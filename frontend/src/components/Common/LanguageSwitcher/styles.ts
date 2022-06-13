@@ -21,7 +21,7 @@ const Languages = styled.div`
     border-radius: 0;
     color: inherit;
     cursor: pointer;
-    line-height 1.2;
+    line-height: 1.2;
     padding-right: ${space(2.5)};
 
     &:focus {
@@ -37,7 +37,9 @@ const Languages = styled.div`
     top: ${rems('10px')};
     width: ${space(1.5)};
 
-    path { fill: currentColor; }
+    path {
+      fill: currentColor;
+    }
   }
 
   ${media.max('phone')`

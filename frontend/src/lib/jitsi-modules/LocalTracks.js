@@ -8,6 +8,8 @@
  */
 
 import userRepository from '@/jitsi/User';
+import conferenceRepository from '@/jitsi/Conference';
+import seatsRepository from '@/jitsi/Seats';
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = audioLevel => {
@@ -70,6 +72,10 @@ const localTracksRepository = () => {
       .catch(error => {
         console.log('[STOOA] Error creating local track', kind, error.message);
 
+        if (kind === 'video') {
+          deleteLocalVideo();
+        }
+
         return Promise.reject(error);
       });
   };
@@ -101,6 +107,16 @@ const localTracksRepository = () => {
 
         return Promise.reject(error);
       });
+  };
+
+  const deleteLocalVideo = () => {
+    const userId = conferenceRepository.getMyUserId();
+    const seatNumber = seatsRepository.getSeat(userId);
+
+    if (seatNumber > 0) {
+      const seatHtml = document.getElementById(`seat-${seatNumber}`);
+      seatHtml.querySelector('video').remove();
+    }
   };
 
   return { createLocalTrack, createLocalTracks };

@@ -9,6 +9,8 @@
         "selectDay": "Pilih hari",
         "time": "Mulai pada",
         "selectTime": "Pilih waktu",
+        "language": "Bahasa",
+        "selectLanguageLabel": "Pilih bahasa",
         "hours": "jam",
         "minutes": "men",
         "duration": "Durasi",
@@ -33,7 +35,8 @@
         "date": "Format tanggal tidak valid: hh/bb/tttt",
         "equalPassword": "Dua kata sandi tersebut harus sama",
         "successMessage": "Perubahan disimpan",
-        "title": "Judul tidak valid. Masukkan topik pembicaraan"
+        "title": "Judul tidak valid. Masukkan topik pembicaraan",
+        "notEmpty": "This field cannot be empty"
     },
     "button": {
         "login": "Masuk",

@@ -17,6 +17,7 @@ import Icon from '@/components/Common/Fields/Icon';
 
 const InputField: React.FC<Input> = ({
   className = '',
+  children,
   label,
   variant = 'default',
   help,
@@ -42,6 +43,8 @@ const InputField: React.FC<Input> = ({
         className={`${isFilled || props.placeholder ? 'filled' : ''} ${isInvalid ? 'invalid' : ''}`}
       />
       <label htmlFor={props.id || props.name}>{label}</label>
+
+      {children && props.type === 'radio' && <div className="input-radio-wrapper">{children}</div>}
       {isValid && (
         <ValidationIcon>
           <Icon variant="checkmark" />
@@ -55,7 +58,7 @@ const InputField: React.FC<Input> = ({
           <ValidationError>{meta.error}</ValidationError>
         </>
       )}
-      {help && <p className="help text-sm">{help}</p>}
+      {help && <p className="help body-sm">{help}</p>}
     </InputStyled>
   );
 };

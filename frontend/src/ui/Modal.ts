@@ -9,8 +9,14 @@
 
 import styled from 'styled-components';
 
-import { space, rems, hexToRgb } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_700, COLOR_NEUTRO_900 } from '@/ui/settings';
+import { space, rems, hexToRgb, media } from '@/ui/helpers';
+import {
+  BORDER_RADIUS,
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_200,
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_900
+} from '@/ui/settings';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
 
@@ -26,15 +32,24 @@ const Modal = styled.div`
   right: 0;
   top: 0;
   z-index: 11;
+  overflow: scroll;
 
-  .content {
-    background-color: ${COLOR_NEUTRO_100};
+  ${media.min('tablet')`
+    overflow: unset;
+  `}
+
+  & .content {
+    background-color: ${COLOR_NEUTRO_200};
     color: ${COLOR_NEUTRO_700};
     border-radius: ${BORDER_RADIUS};
     max-width: ${rems(422)};
-    padding: ${space(6)} ${space(3)};
+    padding: ${space(6)} ${space(4)};
     position: relative;
     text-align: center;
+
+    &.white {
+      background-color: ${COLOR_NEUTRO_100};
+    }
   }
 
   .close {

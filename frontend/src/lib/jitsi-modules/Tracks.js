@@ -46,9 +46,9 @@ const tracksRepository = () => {
     return null;
   };
 
-  const syncSessionStorageTrack = async (track, user) => {
+  const syncLocalStorageTrack = async (track, user) => {
     if (!user) {
-      user = JSON.parse(sessionStorage.getItem('user'));
+      user = JSON.parse(localStorage.getItem('user'));
     }
 
     const seat = seatsRepository.getSeat();
@@ -64,7 +64,7 @@ const tracksRepository = () => {
         });
       } else if (!track.isMuted() && userIsMuted) {
         await track.mute().then(() => {
-          console.log('[STOOA] Track unmuted', track.getParticipantId() + trackType);
+          console.log('[STOOA] Track muted ', track.getParticipantId() + trackType);
         });
       }
     }
@@ -81,15 +81,18 @@ const tracksRepository = () => {
     trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
+
+    await syncLocalStorageTrack(track, user);
+
+    const seatHtml = handleElementsMutedClass(seat, track);
+
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
       trackHtml.setAttribute('playsinline', '');
+      seatHtml.querySelector('#video-wrapper').appendChild(trackHtml);
+    } else {
+      seatHtml.appendChild(trackHtml);
     }
-
-    await syncSessionStorageTrack(track, user);
-
-    const seatHtml = handleElementsMutedClass(seat, track);
-    seatHtml.appendChild(trackHtml);
     track.attach(trackHtml);
 
     if (!track.isLocalAudioTrack()) {
@@ -103,7 +106,10 @@ const tracksRepository = () => {
     if (trackHtml !== null) {
       if (track.isLocal() && !track.isMuted()) {
         track.mute().then(() => {
-          console.log('[STOOA] Track muted', track.getParticipantId() + track.getType());
+          console.log(
+            '[STOOA] Track muted (from remove) ',
+            track.getParticipantId() + track.getType()
+          );
         });
       }
 
@@ -163,8 +169,10 @@ const tracksRepository = () => {
     console.log('[STOOA] Html tracks removed', id);
   };
 
-  const disposeTracks = async () => {
-    const id = conferenceRepository.getMyUserId();
+  const disposeTracks = async id => {
+    if (id === undefined) {
+      id = conferenceRepository.getMyUserId();
+    }
 
     if (tracks[id] === undefined) return;
 
@@ -209,7 +217,7 @@ const tracksRepository = () => {
   };
 
   const handleTrackMuteChanged = async track => {
-    await syncSessionStorageTrack(track);
+    await syncLocalStorageTrack(track);
 
     if (track.isLocal()) return;
 
@@ -288,7 +296,7 @@ const tracksRepository = () => {
     disposeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
-    syncSessionStorageTrack
+    syncLocalStorageTrack
   };
 };
 

@@ -45,30 +45,17 @@ use Webmozart\Assert\Assert;
  */
 class FishbowlService
 {
-    protected FishbowlRepository $fishbowlRepository;
-    protected RequestStack $requestStack;
-    protected Security $security;
-    protected GuestRepository $guestRepository;
-    protected ParticipantRepository $participantRepository;
-    protected TranslatorInterface $translator;
-
     public function __construct(
-        FishbowlRepository $fishbowlRepository,
-        RequestStack $requestStack,
-        Security $security,
-        GuestRepository $guestRepository,
-        ParticipantRepository $participantRepository,
-        TranslatorInterface $translator
+        private readonly FishbowlRepository $fishbowlRepository,
+        private readonly RequestStack $requestStack,
+        private readonly Security $security,
+        private readonly GuestRepository $guestRepository,
+        private readonly ParticipantRepository $participantRepository,
+        private readonly TranslatorInterface $translator
     ) {
-        $this->fishbowlRepository = $fishbowlRepository;
-        $this->requestStack = $requestStack;
-        $this->security = $security;
-        $this->guestRepository = $guestRepository;
-        $this->participantRepository = $participantRepository;
-        $this->translator = $translator;
     }
 
-    public function canFishbowlStart(string $slug, User $host): bool
+    public function canFishbowlStart(string $slug, UserInterface $host): bool
     {
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
@@ -227,19 +214,17 @@ class FishbowlService
      */
     private function buildParticipants(array $participants, Fishbowl $fishbowl, ?UserInterface $currentUser): array
     {
-        return array_map(function (Participant $participant) use ($fishbowl, $currentUser) {
-            return [
-                'id' => $participant->getId(),
-                'lastPing' => $participant->getLastPing(),
-                'name' => $participant->getUserName(),
-                'twitter' => $participant->getPublicTwitterProfile(),
-                'linkedin' => $participant->getPublicLinkedinAccount(),
-                'isModerator' => $participant->isModerator($fishbowl),
-                'isCurrentUser' => $participant->isCurrentUser($currentUser),
-                'guestId' => $participant->getGuestId(),
-                'joined' => false,
-                'isMuted' => false,
-            ];
-        }, $participants);
+        return array_map(fn (Participant $participant) => [
+            'id' => $participant->getId(),
+            'lastPing' => $participant->getLastPing(),
+            'name' => $participant->getUserName(),
+            'twitter' => $participant->getPublicTwitterProfile(),
+            'linkedin' => $participant->getPublicLinkedinAccount(),
+            'isModerator' => $participant->isModerator($fishbowl),
+            'isCurrentUser' => $participant->isCurrentUser($currentUser),
+            'guestId' => $participant->getGuestId(),
+            'joined' => false,
+            'isMuted' => false,
+        ], $participants);
     }
 }

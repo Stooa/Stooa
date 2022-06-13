@@ -36,7 +36,7 @@ file that was distributed with this source code.
 
 {% macro dl(label, text, config, styles = '', type = 'regular') %}{% apply spaceless %}
     <tr>
-        <td valign="top" class="col200 fullwidth" style="{{ config.font[type] }}{{ styles }}"><b>{{ label|raw }}</b></td>
+        <td valign="top" class="col200" style="{{ config.font[type] }}{{ styles }}"><b>{{ label|raw }}</b></td>
         <td valign="top" class="fullwidth" style="{{ config.font[type] }}{{ styles }}">{{ text|raw }}</td>
     </tr>
 {% endapply %}{% endmacro %}

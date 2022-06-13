@@ -22,7 +22,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
-use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\Form\Type\BooleanType;
 use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,7 +32,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 /** @extends AbstractAdmin<Fishbowl> */
 class FishbowlAdmin extends AbstractAdmin
 {
-    protected ?FishbowlService $fishbowlService;
+    protected ?FishbowlService $fishbowlService = null;
 
     public function setFishbowlService(FishbowlService $fishbowlService): void
     {
@@ -73,12 +73,18 @@ class FishbowlAdmin extends AbstractAdmin
     {
         $filter
             ->add('name')
-            ->add('host', ModelAutocompleteFilter::class, [], null, [
-                'property' => 'email',
-                'callback' => self::hostCallbackFunction(),
+            ->add('host', ModelFilter::class, [
+                'field_type' => ModelAutocompleteType::class,
+                'field_options' => [
+                    'property' => 'email',
+                    'callback' => self::hostCallbackFunction(),
+                ],
             ])
-            ->add('currentStatus', null, [], ChoiceType::class, [
-                'choices' => Fishbowl::$statusChoices,
+            ->add('currentStatus', null, [
+                'field_type' => ChoiceType::class,
+                'field_options' => [
+                    'choices' => Fishbowl::$statusChoices,
+                ],
             ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction');

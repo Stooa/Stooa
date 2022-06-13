@@ -103,19 +103,19 @@ use Webmozart\Assert\Assert as MAssert;
  *
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
-class Fishbowl
+class Fishbowl implements \Stringable
 {
     use TimestampableEntity;
 
-    public const TRANSITION_INTRODUCE = 'introduce';
-    public const TRANSITION_RUN = 'run';
-    public const TRANSITION_NO_INTRO_RUN = 'no_intro_run';
-    public const TRANSITION_FINISH = 'finish';
+    final public const TRANSITION_INTRODUCE = 'introduce';
+    final public const TRANSITION_RUN = 'run';
+    final public const TRANSITION_NO_INTRO_RUN = 'no_intro_run';
+    final public const TRANSITION_FINISH = 'finish';
 
-    public const STATUS_NOT_STARTED = 'not_started';
-    public const STATUS_INTRODUCTION = 'introduction';
-    public const STATUS_RUNNING = 'running';
-    public const STATUS_FINISHED = 'finished';
+    final public const STATUS_NOT_STARTED = 'not_started';
+    final public const STATUS_INTRODUCTION = 'introduction';
+    final public const STATUS_RUNNING = 'running';
+    final public const STATUS_FINISHED = 'finished';
 
     /**
      * @var array<string, string>
@@ -486,6 +486,13 @@ class Fishbowl
         MAssert::notNull($this->startDateTime);
 
         return $this->startDateTime->format('H:i');
+    }
+
+    public function getFinishDateTimeHourFormatted(): string
+    {
+        MAssert::notNull($this->finishDateTime);
+
+        return $this->finishDateTime->format('H:i');
     }
 
     public function isHappeningNow(): bool

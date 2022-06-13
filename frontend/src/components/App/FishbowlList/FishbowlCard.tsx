@@ -16,12 +16,11 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import RedirectLink from '@/components/Web/RedirectLink';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
-import { ButtonStyledLinkSmall } from '@/ui/Button';
-import ArrowRight from '@/ui/svg/arrow-right.svg';
 import { convertIntoClassName } from '@/lib/helpers';
+import Button from '@/components/Common/Button';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -72,20 +71,21 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div className="card__time">{time}</div>
       </div>
       <div data-testid="card-actions" className="card__actions">
-        <ButtonCopyUrl data-testid="copy-link" variant="link" fid={slug} locale={locale}>
+        <ButtonCopyUrl data-testid="copy-link" variant="text" fid={slug} locale={locale}>
           {t('common:linkButton')}
         </ButtonCopyUrl>
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
-            <ButtonStyledLinkSmall
+            <Button
+              className="never-full"
+              as="a"
               data-testid="enter-fishbowl"
               onClick={() => {
                 handleGoToFishbowl;
               }}
             >
               <span>{t('enterFishbowl')}</span>
-              <ArrowRight />
-            </ButtonStyledLinkSmall>
+            </Button>
           </RedirectLink>
         )}
       </div>

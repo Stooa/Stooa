@@ -17,8 +17,8 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Fishbowl;
 use App\Factory\FishbowlFactory;
 use App\Factory\UserFactory;
-use FOS\UserBundle\Model\UserInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
+use Sonata\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
@@ -107,6 +107,9 @@ class RefreshTokenFunctionalTest extends ApiTestCase
                 'email' => 'user@stooa.com',
                 'twitter' => 'https//www.twitter.com/test',
                 'linkedin' => 'https://www.linkedin.com/test',
+                'moderator' => false,
+                'id' => null,
+                'avatar' => null,
             ],
         ]);
     }

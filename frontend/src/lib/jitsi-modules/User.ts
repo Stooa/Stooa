@@ -9,13 +9,14 @@
 
 import { User, UserRepository } from '@/types/user';
 import seatsRepository from '@/jitsi/Seats';
-import { removeItem } from '@/lib/helpers';
+import { dispatchEvent, removeItem } from '@/lib/helpers';
+import { USER_KICKED } from '@/jitsi/Events';
 
 const userRepository = (): UserRepository => {
   let users: User[] = [];
 
   const clearUser = (): void => {
-    sessionStorage.removeItem('user');
+    localStorage.removeItem('user');
   };
 
   const setUser = (value: User): void => {
@@ -25,12 +26,12 @@ const userRepository = (): UserRepository => {
       ...value
     };
 
-    sessionStorage.setItem('user', JSON.stringify(updatedUser));
+    localStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
   const getUser = (): User => {
-    if (typeof sessionStorage === 'undefined') return {};
-    const user = sessionStorage.getItem('user');
+    if (typeof localStorage === 'undefined') return {};
+    const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : {};
   };
 
@@ -47,6 +48,7 @@ const userRepository = (): UserRepository => {
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
   const setUserAudioMuted = (audioMuted: boolean): void => setUser({ audioMuted });
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
+  const setUserNickname = (nickname: string): void => setUser({ nickname });
 
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
@@ -61,6 +63,12 @@ const userRepository = (): UserRepository => {
     console.log('[STOOA] Handle userRepository left', user);
   };
 
+  const handleUserKicked = (participant: User, reason: string): void => {
+    console.log('[STOOA] Handle user kicked', participant, reason);
+
+    dispatchEvent(USER_KICKED, { participant: participant, reason: reason });
+  };
+
   return {
     clearUser,
     getUser,
@@ -73,12 +81,14 @@ const userRepository = (): UserRepository => {
     getUserVideoMuted,
     handleUserJoin,
     handleUserLeft,
+    handleUserKicked,
     setUser,
     setUserAudioInput,
     setUserAudioMuted,
     setUserAudioOutput,
     setUserVideoInput,
-    setUserVideoMuted
+    setUserVideoMuted,
+    setUserNickname
   };
 };
 

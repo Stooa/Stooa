@@ -24,14 +24,14 @@
         "selectTimeZone": "Selecciona zona horaria",
         "advancedOptions": "Opciones avanzadas",
         "introductionLabel": "Quiero comenzar el fishbowl con una introducción.",
-        "introductionTooltip": "Cuando inicies el Fishbowl, <strong>podrás comenzar haciendo una introducción.</strong> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <strong>no olvides permitir a los asistentes unirse a la conversación.</strong>"
+        "introductionTooltip": "Cuando inicies el Fishbowl, <span>podrás comenzar haciendo una introducción.</span> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <span>no olvides permitir a los asistentes unirse a la conversación.</span>"
     },
     "button": {
         "login": "Entra",
         "register": "Siguiente",
         "createAccount": "¡Crea una cuenta!",
         "createFishbowl": "Crear fishbowl",
-        "modifyFishbowl": "Modificar fishbowl",
+        "modifyFishbowl": "Guardar cambios",
         "recoverPassword": "Envía un enlace de recuperación",
         "enterFishbowl": "Entrar al fishbowl",
         "save": "Guardar",
@@ -47,6 +47,7 @@
         "url": "La url no es válida",
         "twitter": "El usuario de Twitter debe comenzar por @",
         "equalPassword": "Las dos contraseñas deben ser iguales",
-        "successMessage": "Tus cambios están guardados"
+        "successMessage": "Tus cambios están guardados",
+        "notEmpty": "Este campo no puede estar vacío"
     }
 }

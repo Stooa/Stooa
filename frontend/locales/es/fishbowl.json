@@ -11,12 +11,13 @@
     "joinMemberNote": "* Permite contactar con el resto de asistentes",
     "copySuccess": "¡Enlace copiado!",
     "detail": {
-        "title": "Título",
-        "duration": "Duración",
-        "description": "Descripción",
-        "startDate": "Fecha de inicio",
-        "startTime": "Hora de inicio",
-        "language": "Idioma"
+        "shareTitle": "¿Ahora qué? <br/>¡Comparte el <i>fishbowl</i> con tus amigos!",
+        "shareSubtitle": "¡Deja que la conversación fluya! Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.",
+        "shareInSocials": "O comparte en:",
+        "fishbowlCreatedSuccessfully": "¡<i>Fishbowl</i> creado con éxito!",
+        "cardMiniTitle": "Detalles del <i>fishbowl</i>",
+        "editFishbowlDetails": "Editar detalles del <i>fishbowl</i>",
+        "mailInfo": "📩 Recibirás un correo con todos los detalles del <i>fishbowl</i> que has agendado."
     },
     "months": {
         "01": "Enero",
@@ -45,7 +46,9 @@
     "speaker": "Altavoz",
     "cam": "Cámara",
     "prejoin": {
-        "title": "Configura tu micro y cámara."
+        "title": "Únete a la sala",
+        "subtitle": "Entrarás en la sala como oyente.<br/>Una vez dentro, si quieres participar activamente en la conversación tendrás que ocupar una silla del fishbowl.",
+        "permissions": "Si además de asistir al evento como público <span>quieres hablar en el fishbowl</span>, Stooa necesita permisos para acceder a tu cámara y micrófono para que todo el mundo pueda escucharte y verte."
     },
     "waiting": "Esperando a que el anfitrión inicie el fishbowl",
     "waitingHost": "Los asistentes están esperando a que inicies el fishbowl",
@@ -55,13 +58,14 @@
     "timeLeft_other": "Quedan {{time}}",
     "lastMinute": "Último minuto",
     "startFishbowl": "Iniciar el fishbowl",
+    "startIntroduction": "Iniciar introducción",
     "allowUsers": "Permitir a los asistentes unirse a la conversación",
     "endFishbowl": "Finalizar el fishbowl",
     "finishedEvent": "El fishbowl ha finalizado",
     "introduceModal": {
         "title": "Haz una introducción",
-        "description": "Puedes decir algunas palabras de introducción, la cámara y el micrófono estarán activos solo para ti. Cuando termines, no olvides permitir a los asistentes unirse a la conversación.",
-        "button": "Comenzar"
+        "description": "Tu cámara se activará para que puedas decir unas palabras a los asistentes antes de abrir el <i>fishbowl</i>. Después podrás permitir a los usuarios unirse a la conversación.",
+        "button": "Comenzar introducción"
     },
     "endModal": {
         "title": "Finalizar el fishbowl",
@@ -80,5 +84,23 @@
     },
     "fishbowlDescription":{
         "shareText": "Copia y comparte el link para invitar a más personas a este <i>fishbowl</i>."
-    }
+    },
+    "kick": {
+        "button": "Expulsar usuario",
+        "successMessage": "Usuario expulsado correctamente.",
+        "modal": {
+            "title": "¿Por qué quieres expulsar a {{userName}}?",
+            "description": "La persona indicada será expulsada y recibirá notificación, pero podrá volver a la sala si quiere.",
+            "options": {
+                "noParticipating": "Está ocupando un asiento sin participar.",
+                "conductViolation": "Ha violado el código de conducta de la comunidad."
+            },
+            "button": "Expulsar usuario/a",
+            "cancelButton": "Cancelar"
+        }
+    },
+    "permissionsModalTitle": "Permisos necesarios",
+    "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
+    "permissionsModalButton": "Solicitar acceso",
+    "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar."
 }

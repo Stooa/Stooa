@@ -26,7 +26,6 @@ import NicknameForm from '@/components/App/FishbowlPreJoin/form';
 import AuthUser from '@/components/App/FishbowlPreJoin/form-auth';
 
 import Modal from '@/ui/Modal';
-import { ButtonLink } from '@/ui/Button';
 import {
   Container,
   Devices,
@@ -36,17 +35,19 @@ import {
 } from '@/components/App/FishbowlPreJoin/styles';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from '@/contexts/DevicesContext';
+import Button from '@/components/Common/Button';
+import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
+import Trans from 'next-translate/Trans';
+import PrejoinPermissionFriend from '@/components/Common/SVG/PrejoinPermissionFriend';
 
 const FishbowlPreJoin: React.FC = () => {
-  const localTracks = useRef([]);
-  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(
-    userRepository.getUserVideoMuted()
-  );
-  const router = useRouter();
-  const { t, lang } = useTranslation('common');
+  const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
 
-  const { videoDevice } = useDevices();
+  const localTracks = useRef([]);
+  const [muteVideo, setMuteVideo] = useState<boolean>(userRepository.getUserVideoMuted());
+  const router = useRouter();
+  const { t, lang } = useTranslation('common');
 
   const configButtonRef = useRef(null);
 
@@ -71,7 +72,7 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   const handleVideo = () => {
-    setShowPlaceholder(!showPlaceholder);
+    setMuteVideo(!muteVideo);
   };
 
   const handleCancel = () => {
@@ -128,26 +129,47 @@ const FishbowlPreJoin: React.FC = () => {
         <Container>
           <Devices>
             <VideoContainer>
-              {showPlaceholder && <VideoPlaceholder />}
-              <video id="prejoin" autoPlay muted className="video" playsInline />
+              <video
+                id="prejoin"
+                style={{ opacity: muteVideo && 0 }}
+                autoPlay
+                muted
+                className="video"
+                playsInline
+              />
+              <VideoPlaceholder />
+              {!permissions.video && (
+                <VideoPermissionsPlaceholder>
+                  <PrejoinPermissionFriend />
+                  <p className="body-sm">
+                    <Trans
+                      i18nKey="fishbowl:prejoin.permissions"
+                      components={{ span: <span className="medium" /> }}
+                    />
+                  </p>
+                </VideoPermissionsPlaceholder>
+              )}
             </VideoContainer>
             <DevicesToolbar>
               <ButtonVideo
                 handleVideo={handleVideo}
                 joined={true}
-                disabled={false}
+                disabled={!permissions.video}
                 unlabeled={true}
               />
-              <ButtonMic joined={true} disabled={false} unlabeled={true} />
+              <ButtonMic joined={true} disabled={!permissions.audio} unlabeled={true} />
               <ButtonConfig selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
             </DevicesToolbar>
           </Devices>
           <Form>
-            <h2 className="title-md">{t('fishbowl:prejoin.title')}</h2>
+            <h2 className="title-md ">{t('fishbowl:prejoin.title')}</h2>
+            <p className="body-md subtitle">
+              <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+            </p>
             {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
-            <ButtonLink className="cancel text-sm" onClick={handleCancel}>
+            <Button size="small" variant="subtleLink" className="cancel" onClick={handleCancel}>
               {t('cancel')}
-            </ButtonLink>
+            </Button>
           </Form>
         </Container>
       </Modal>
