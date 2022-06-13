@@ -18,8 +18,12 @@
         "timezone": "Zona Waktu",
         "selectTimeZone": "Zona Waktu",
         "selectDuration": "Durasi",
-        "introductionLabel": "Saya ingin memulai fishbowl memberikan pengantar.",
-        "introductionTooltip": "Saat Anda memulai fishbowl, <span>Anda dapat memulai dengan membuat pendahuluan.</span> Kamera dan mikrofon akan aktif hanya untuk Anda. Setelah selesai, <span>jangan lupa izinkan peserta untuk bergabung dalam percakapan.</span>"
+        "introductionTooltip": "Ketika kamu memulai fishbowl, <strong>kamu bisa memulai dengan mengenalkan dirimu.</strong> Kamera dan mikrofon akan nyala hanya untuk kamu saja. Ketika kamu selesai, <strong>jangan lupa untuk mempersilakan peserta untuk bergabung dengan pembicaraan.</strong>",
+        "introductionLabel": "Saya ingin untuk memulai fishbowl memberikan pengenalan.",
+        "title": "Judul",
+        "language": "Bahasa",
+        "selectLanguageLabel": "Pilih bahasa",
+        "advancedOptions": "Pengaturan Lanjutan"
     },
     "validation": {
         "email": "Alamat surel tidak valid",
@@ -30,6 +34,8 @@
         "required": "Bagian ini diperlukan",
         "date": "Format tanggal tidak valid: hh/bb/tttt",
         "equalPassword": "Dua kata sandi tersebut harus sama",
+        "successMessage": "Perubahan disimpan",
+        "title": "Judul tidak valid. Masukkan topik pembicaraan",
         "notEmpty": "This field cannot be empty"
     },
     "button": {
@@ -39,10 +45,11 @@
         "recoverPassword": "Kirim tautan atur ulang",
         "register": "Selanjutnya",
         "createAccount": "Buat satu!",
-        "enterFishbowl": "Masuk",
+        "enterFishbowl": "Masuk fishbowl",
         "save": "Simpan",
         "changePassword": "Ubah kata sandi"
     },
     "lastname": "Nama Belakang",
-    "noAccount": "Tidak ada akun?"
+    "noAccount": "Tidak ada akun?",
+    "defaultTitle": "Pertemuan Fishbowl - {{name}}"
 }
