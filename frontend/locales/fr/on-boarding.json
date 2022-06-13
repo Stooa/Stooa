@@ -22,5 +22,5 @@
         "hostText": "<p>Vous verrez une notification en haut à droite quand <strong>il restera 1 minute</strong> pour que le fishbowl se termine. Lorsque ceci se produit, <strong>l’accès pour rejoindre la conversation sera fermé</strong> pour tous les participants, sauf pour vous. Il est temps de fermer le fishbowl et de dire au revoir aux participants.</p>",
         "participantText": "<p>Vous remarquerez en haut à droite quand il restera <strong>1 minute</strong> au fishbowl. Une fois que c’est le cas, l’<strong>accès pour rejoindre la conversation sera fermé à tous les participants</strong> sauf pour l’hôte.</p>"
     },
-    "tooltip": "👆🏼 Vous pouvez consulter le guide d’introduction ici à tout moment."
+    "tooltip": "👆🏼 Vous pouvez trouver le guide d'introduction sur le point d'interrogation à tout moment !"
 }

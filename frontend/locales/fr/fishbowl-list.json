@@ -1,1 +1,12 @@
-{}
+{
+    "scheduledFishbowls": "Fishbowls planifiés (<span>{{count}}</span>)",
+    "enterFishbowl": "Entrer dans le fishbowl",
+    "emptyListTitle": "Vous n’avez pas encore programmé de fishbowls. Créez-en un !",
+    "emptyListDescription": "C'est ici que vous verrez tous vos fishbowls programmés.",
+    "fishbowlStartedDescription": "Les fishbowls qui sont en cours ou qui commenceront dans moins de 30 minutes ne peuvent pas être modifiés.",
+    "noSelectedFishbowlTitle": "Aucun fishbowl sélectionné.",
+    "noSelectedFishbowlDescription": "Sélectionnez un fishbowl programmé pour commencer à le modifier.",
+    "fishbowlStarted": "Ce fishbowl a déjà commencé ou est sur le point de commencer.",
+    "back": "Retourner à la liste",
+    "titleEdit": "Modifier le fishbowl"
+}
