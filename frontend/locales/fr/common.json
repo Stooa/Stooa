@@ -24,5 +24,6 @@
     "signin": "Se connecter",
     "help": "Aide",
     "legal": "Mentions légales",
-    "signout": "Se déconnecter"
+    "signout": "Se déconnecter",
+    "fishbowlList": "Liste des fishbowls"
 }
