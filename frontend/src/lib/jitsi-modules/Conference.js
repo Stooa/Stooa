@@ -137,9 +137,8 @@ const conferenceRepository = () => {
    * @param {string} text Message content
    * @param {number} ts Timestamp
    */
-  const _handleMessageReceived = (id, text, ts) => {
-    console.log('Message recieved!', id, text, ts);
-    dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, ts });
+  const _handleMessageReceived = (id, text, timestamp) => {
+    dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
 
   const _handleConnectionEstablished = async () => {

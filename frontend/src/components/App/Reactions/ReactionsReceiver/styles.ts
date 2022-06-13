@@ -19,11 +19,13 @@ const StyledReactionsReciever = styled.div`
   height: ${space(10)};
 
   ${media.min('tablet')`
-    width: 50vw;
-    margin: 0 auto;
-
+    bottom: ${space(7)};
     left: 50%;
     transform: translateX(-50%);
+    width: 50vw;
+
+    margin: 0 auto;
+
   `}
 
   ${FloatFast}

@@ -46,7 +46,7 @@ const ReactionsButton = ({ disabled }: Props) => {
 
   return (
     <div ref={wrapperRef}>
-      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(600)} />}
+      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(1200)} />}
       <StyledButtonReaction disabled={disabled} onClick={() => show()}>
         <div className="cross">
           <Cross />

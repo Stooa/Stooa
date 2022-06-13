@@ -9,19 +9,29 @@
 
 import styled from 'styled-components';
 
-import { media } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
+import { COLOR_NEUTRO_400 } from '@/ui/settings';
 
-const Container = styled.div`
+const StyledToolbar = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, minmax(80px, 100px));
+  grid-template-columns: repeat(5, minmax(20%, 100px));
   justify-content: center;
   justify-items: stretch;
   align-items: start;
   margin: auto;
   width: 100%;
+  padding-top: ${space(1.2)};
+  padding-bottom: ${space()};
+  padding-left: ${space(2)};
+  padding-right: ${space(2)};
+
+  ${media.min('tablet')`
+  padding-left: ${space(3)};
+  padding-right: ${space(3)};
+  `}
 
   ${media.max('tablet')`
-    &.moderator { padding-left: 0; }
+    background-color: ${COLOR_NEUTRO_400};
   `}
 
   button {
@@ -30,4 +40,4 @@ const Container = styled.div`
   }
 `;
 
-export { Container };
+export { StyledToolbar };

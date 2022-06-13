@@ -8,7 +8,7 @@
  */
 
 import { FloatFast, FloatStandard } from '@/ui/animations/motion/reactions';
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { COLOR_NEUTRO_100 } from '@/ui/settings';
 import styled from 'styled-components';
 
@@ -17,7 +17,7 @@ const ReactionsWrapper = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: calc(100% + ${space()});
+  bottom: 65%;
   left: 50%;
   transform: translateX(-50%);
   line-height: 0;
@@ -31,6 +31,10 @@ const ReactionsWrapper = styled.div`
   & > *:not(:last-child) {
     margin-right: ${space(1.5)};
   }
+
+  ${media.min('tablet')`
+    bottom: calc(100% + ${space()});
+  `}
 
   &.open {
     animation: open 0.3s;

@@ -11,6 +11,7 @@ import styled from 'styled-components';
 
 import ActionButton from '@/ui/ActionButton';
 import {
+  COLOR_NEUTRO_300,
   COLOR_GREEN_400,
   COLOR_GREEN_500,
   COLOR_GREEN_600,
@@ -24,7 +25,7 @@ import {
 } from '@/ui/settings';
 import { rems } from '@/ui/helpers';
 
-const Button = styled(ActionButton)`
+const StyledButton = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
 
   .button {
@@ -117,9 +118,9 @@ const Button = styled(ActionButton)`
     pointer-events: none;
 
     .button {
-      background-color: ${COLOR_NEUTRO_400};
+      background-color: ${COLOR_NEUTRO_300};
       border-color: ${COLOR_NEUTRO_400};
-      color: ${COLOR_NEUTRO_100};
+      color: ${COLOR_NEUTRO_400};
     }
 
     .alert {
@@ -135,4 +136,4 @@ const Button = styled(ActionButton)`
   }
 `;
 
-export default Button;
+export default StyledButton;

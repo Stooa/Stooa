@@ -21,13 +21,23 @@ const Container = styled.div<{ drawer?: boolean }>`
   grid-template-areas: 'Header Aside' 'Main Aside' 'Footer Aside';
   min-height: 100vh;
   overflow: hidden;
-  padding: 0 ${space(2)};
   background: ${COLOR_NEUTRO_200};
   transition: grid-template-columns 0.25s ease-in-out;
 
+  & > header,
+  & > main {
+    padding-left: ${space(2)};
+    padding-right: ${space(2)};
+  }
+
   ${media.min('tablet')`
-    grid-template-rows: ${space(10)} 1fr ${space(10)};
-    padding: 0 ${space(3)};
+  grid-template-rows: ${space(10)} 1fr ${space(10)};
+
+  & > header,
+  & > main {
+      padding-left: ${space(3)};
+      padding-right: ${space(3)};
+    }
   `}
 `;
 
@@ -105,13 +115,13 @@ const Main = styled.main`
 
   ${media.between('tablet', 'tabletLarge')`
     &.drawer-open {
-      padding-right: ${rems(310)};
+      padding-right: ${rems(344)};
     }
   `}
 
   ${media.min('tabletLarge')`
     &.drawer-open {
-      padding-right: ${rems(340)};
+      padding-right: ${rems(375)};
     }
   `}
 `;
@@ -121,7 +131,7 @@ const Footer = styled.footer`
   position: relative;
   z-index: 9;
 
-  ${media.min('reader')`
+  ${media.min('tablet')`
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     grid-gap: ${space(0.5)};
@@ -131,6 +141,7 @@ const Footer = styled.footer`
     ${media.min('tablet')`
       align-items: center;
       display: flex;
+      padding-left: ${space(2)};
     `}
   }
 
@@ -144,11 +155,10 @@ const Footer = styled.footer`
     `}
   }
 
-  .user-actions {
-    margin-bottom: ${space()};
+  & > .user-actions {
     text-align: center;
 
-    ${media.min('reader')`
+    ${media.min('tablet')`
       align-items: center;
       grid-column: 2/3;
       display: flex;
@@ -159,13 +169,13 @@ const Footer = styled.footer`
 
   ${media.between('tablet', 'tabletLarge')`
     &.drawer-open {
-      padding-right: ${rems(310)};
+      padding-right: ${rems(344)};
     }
   `}
 
   ${media.min('tabletLarge')`
     &.drawer-open {
-      padding-right: ${rems(340)};
+      padding-right: ${rems(375)};
     }
   `}
 `;
