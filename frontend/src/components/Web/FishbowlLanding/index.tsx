@@ -33,11 +33,11 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
     <LandingContainer centered>
       <ToastContainer className="toastify-custom" />
       <StyledFishbowlData>
-        <h1 data-test-id="fishbowl-name" className="title-md">
+        <h1 data-testid="fishbowl-name" className="title-md">
           {data.name}
         </h1>
         {data.description && (
-          <Description data-test-id="fishbowl-description">{data.description}</Description>
+          <Description data-testid="fishbowl-description">{data.description}</Description>
         )}
       </StyledFishbowlData>
       <Time as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
