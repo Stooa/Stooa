@@ -67,11 +67,11 @@ const ReactionsWrapper = styled.div`
 
 const EmojiSpawner = styled.div`
   position: absolute;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   bottom: 50%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  pointer-events: none;
 
   overflow: visible;
 

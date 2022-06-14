@@ -8,7 +8,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { StyledButtonReaction } from './styles';
+import { StyledButtonReaction, StyledWrapper } from './styles';
 import ReactionsSender from '../ReactionsSender';
 import Laugh from '@/ui/svg/emojis/laugh.svg';
 import Cross from '@/ui/svg/cross.svg';
@@ -21,15 +21,26 @@ const ReactionsButton = ({ disabled }: Props) => {
   const [showReactions, setShowReactions] = useState(false);
   const [animation, setAnimation] = useState<'open' | 'close'>('open');
   const wrapperRef = useRef(null);
+  const timeOutRef = useRef(null);
 
   const hide = async ms => {
-    setAnimation('close');
-    setTimeout(() => setShowReactions(false), ms);
+    if (animation === 'open') {
+      setAnimation('close');
+      timeOutRef.current = setTimeout(() => setShowReactions(false), ms);
+    }
   };
 
   const show = () => {
     setAnimation('open');
     setShowReactions(true);
+  };
+
+  const handleClick = () => {
+    if (showReactions && animation === 'open') {
+      hide(600);
+    } else {
+      show();
+    }
   };
 
   useEffect(() => {
@@ -44,17 +55,23 @@ const ReactionsButton = ({ disabled }: Props) => {
     };
   }, [showReactions]);
 
+  useEffect(() => {
+    if (timeOutRef.current) {
+      clearTimeout(timeOutRef.current);
+    }
+  }, [animation]);
+
   return (
-    <div ref={wrapperRef}>
+    <StyledWrapper ref={wrapperRef}>
       {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(1200)} />}
-      <StyledButtonReaction disabled={disabled} onClick={() => show()}>
+      <StyledButtonReaction disabled={disabled} onClick={handleClick}>
         <div className="cross">
           <Cross />
         </div>
         <Laugh />
         <div className="label medium">Reactions</div>
       </StyledButtonReaction>
-    </div>
+    </StyledWrapper>
   );
 };
 

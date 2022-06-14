@@ -12,6 +12,10 @@ import { COLOR_NEUTRO_500, COLOR_NEUTRO_600 } from '@/ui/settings';
 import { BODY_SM, BODY_XS } from '@/ui/Texts';
 import styled from 'styled-components';
 
+const StyledWrapper = styled.div`
+  position: relative;
+`;
+
 const StyledButtonReaction = styled.button`
   position: relative;
   line-height: 0;
@@ -59,4 +63,4 @@ const StyledButtonReaction = styled.button`
   }
 `;
 
-export { StyledButtonReaction };
+export { StyledButtonReaction, StyledWrapper };

@@ -11,8 +11,12 @@ import styled from 'styled-components';
 
 const StyledEmojiReaction = styled.div`
   cursor: pointer;
-  user-select: none;
   transition: transform 0.1s ease-out;
+
+  &,
+  & > * {
+    user-select: none;
+  }
 
   &.disabled {
     opacity: 0.5;

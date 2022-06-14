@@ -57,8 +57,9 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   };
 
   const handleClick = (mouseEvent: React.MouseEvent) => {
-    const target = mouseEvent.currentTarget;
-    const { x: xCoordinate } = target.getBoundingClientRect();
+    const target = mouseEvent.currentTarget as HTMLDivElement;
+    const xCoordinate = target.offsetLeft;
+
     const emojiCoordinate = xCoordinate + 20;
 
     if (target.id) {
