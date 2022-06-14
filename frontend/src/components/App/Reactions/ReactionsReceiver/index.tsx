@@ -15,7 +15,11 @@ import { Reaction } from '@/types/reactions';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import Reactions from '@/lib/Reactions/Reactions';
 
-const ReactionsReceiver = () => {
+interface Props {
+  className?: string;
+}
+
+const ReactionsReceiver = ({ className }: Props) => {
   const [reactionsToShow, setReactionsToShow] = useState<Reaction[]>([]);
   const [reactionsEnabled, SetreactionsEnabled] = useState(false);
   const REACTIONS_LIMIT = 1000;
@@ -27,7 +31,7 @@ const ReactionsReceiver = () => {
     const formattedReactions = reactions.map((reaction, index) =>
       Reactions.createReaction(
         reaction,
-        `calc(${50 - countReaction * 1.2}% - 20px + ${index * 20}px)`
+        `calc(${51.5 - countReaction * 0.85}% - 20px + ${index * 22}px)`
       )
     );
 
@@ -66,7 +70,7 @@ const ReactionsReceiver = () => {
   }, [reactionsEnabled]);
 
   return (
-    <StyledReactionsReciever ref={reactionReceiverRef}>
+    <StyledReactionsReciever ref={reactionReceiverRef} className={className}>
       {reactionsToShow.length > 0 &&
         reactionsToShow.map(mappedReaction => {
           const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;

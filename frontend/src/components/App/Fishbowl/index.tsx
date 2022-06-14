@@ -56,7 +56,7 @@ const Fishbowl: FC = () => {
           />
         )}
         <Seats />
-        <ReactionsReceiver />
+        <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
       <Footer participantsActive={participantsActive} />
     </>

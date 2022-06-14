@@ -8,25 +8,37 @@
  */
 
 import { FloatFast, FloatStandard } from '@/ui/animations/motion/reactions';
-import { media, space } from '@/ui/helpers';
+import { media, rems, space } from '@/ui/helpers';
 import styled from 'styled-components';
 
 const StyledReactionsReciever = styled.div`
   position: absolute;
   bottom: 0;
-  left: -${space(3)};
-  width: 100vw;
+  left: 0;
+  width: 100%;
   height: ${space(10)};
 
   ${media.min('tablet')`
     bottom: ${space(7)};
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50vw;
+    width:100%;
 
     margin: 0 auto;
 
   `}
+
+  &.drawer-open {
+    ${media.between('tablet', 'tabletLarge')`
+    &.drawer-open {
+      width: calc(100vw - ${rems(335)});
+    }
+  `}
+
+    ${media.min('tabletLarge')`
+    &.drawer-open {
+      width: calc(100vw - ${rems(355)});
+    }
+  `}
+  }
 
   ${FloatFast}
   ${FloatStandard}
