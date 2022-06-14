@@ -52,7 +52,7 @@ const ReactionsButton = ({ disabled }: Props) => {
           <Cross />
         </div>
         <Laugh />
-        <span className="medium body-sm">Reactions</span>
+        <div className="label medium">Reactions</div>
       </StyledButtonReaction>
     </div>
   );

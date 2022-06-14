@@ -9,20 +9,27 @@
 
 import { media } from '@/ui/helpers';
 import { COLOR_NEUTRO_500, COLOR_NEUTRO_600 } from '@/ui/settings';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
 import styled from 'styled-components';
 
 const StyledButtonReaction = styled.button`
   position: relative;
   line-height: 0;
-  margin: 0;
+  margin: 0 auto;
   color: ${COLOR_NEUTRO_600};
 
   & > svg {
     transform: translateY(-3px);
   }
 
-  & > span {
-    line-height: 0.8;
+  & > .label {
+    ${BODY_XS}
+    line-height: 0.875;
+
+    ${media.min('tablet')`
+      ${BODY_SM}
+      line-height: 0.8;
+    `}
   }
 
   &:disabled {
@@ -36,8 +43,8 @@ const StyledButtonReaction = styled.button`
 
   & > .cross {
     position: absolute;
-    bottom: 15px;
-    right: 0.65em;
+    top: 0;
+    right: 0;
     transform: rotate(45deg);
     width: 20px;
     height: 20px;
@@ -49,11 +56,6 @@ const StyledButtonReaction = styled.button`
       stroke-width: 2px;
       stroke-linejoin: round;
     }
-
-    ${media.min('tablet')`
-    bottom: 15px;
-    right: 22px;
-    `}
   }
 `;
 

@@ -27,8 +27,7 @@ const Container = styled.div`
   gap: 0;
   grid-template-areas: 'Header' 'Main';
   min-height: calc(100vh - ${space(6)});
-  padding-left: ${space(3)};
-  padding-right: ${space(3)};
+  padding: ${space(3)};
   position: relative;
   transition: grid-template-columns 0.25s ease-in-out;
 

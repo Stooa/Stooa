@@ -20,21 +20,17 @@ const StyledToolbar = styled.div`
   align-items: start;
   margin: auto;
   width: 100%;
-  padding-top: ${space(1.2)};
-  padding-bottom: ${space()};
-  padding-left: ${space(2)};
-  padding-right: ${space(2)};
+  padding: ${space(1.2)} ${space(2)} ${space()} ${space(2)};
 
   ${media.min('tablet')`
-  padding-left: ${space(3)};
-  padding-right: ${space(3)};
+    padding: 0 ${space(3)};
   `}
 
   ${media.max('tablet')`
     background-color: ${COLOR_NEUTRO_400};
   `}
 
-  button {
+  & > button {
     margin: 0;
     max-width: 100%;
   }

@@ -23,7 +23,8 @@ import {
   COLOR_RED_500,
   COLOR_RED_600
 } from '@/ui/settings';
-import { rems } from '@/ui/helpers';
+import { media, rems } from '@/ui/helpers';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const StyledButton = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
@@ -53,6 +54,16 @@ const StyledButton = styled(ActionButton)`
 
   .text {
     color: ${COLOR_GREEN_500};
+    padding-top: 3.125px;
+
+    ${BODY_XS}
+    line-height: 1.1;
+
+    ${media.min('tablet')`
+      padding-top: 2px;
+      ${BODY_SM}
+      line-height: 1.1;
+    `}
   }
 
   * {

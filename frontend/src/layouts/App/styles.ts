@@ -24,7 +24,10 @@ const Container = styled.div<{ drawer?: boolean }>`
   background: ${COLOR_NEUTRO_200};
   transition: grid-template-columns 0.25s ease-in-out;
 
-  & > header,
+  & > header {
+    padding: ${space(2)} ${space(2)} 0 ${space(2)};
+  }
+
   & > main {
     padding-left: ${space(2)};
     padding-right: ${space(2)};
@@ -33,7 +36,10 @@ const Container = styled.div<{ drawer?: boolean }>`
   ${media.min('tablet')`
   grid-template-rows: ${space(10)} 1fr ${space(10)};
 
-  & > header,
+  & > header {
+    padding: ${space(3)} ${space(3)} 0 ${space(3)};
+  }
+
   & > main {
       padding-left: ${space(3)};
       padding-right: ${space(3)};
@@ -163,7 +169,6 @@ const Footer = styled.footer`
       grid-column: 2/3;
       display: flex;
       margin: 0;
-      text-align: inherit;
     `}
   }
 
