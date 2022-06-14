@@ -46,7 +46,7 @@ const ReactionsButton = ({ disabled }: Props) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (showReactions && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        setShowReactions(false);
+        hide(1200);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
