@@ -9,6 +9,7 @@
 
 import { User } from '@/types/user';
 import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
+import { faker } from '@faker-js/faker';
 
 export interface Fishbowl extends Omit<apiPlatformFishbowl, 'startDateTimeTz' | 'endDateTimeTz'> {
   startDateTimeTz: string;
