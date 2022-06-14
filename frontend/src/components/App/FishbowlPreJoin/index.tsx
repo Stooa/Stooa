@@ -162,12 +162,20 @@ const FishbowlPreJoin: React.FC = () => {
             </DevicesToolbar>
           </Devices>
           <Form>
-            <h2 className="title-md ">{t('fishbowl:prejoin.title')}</h2>
+            <h2 data-test-id="pre-join-title" className="title-md ">
+              {t('fishbowl:prejoin.title')}
+            </h2>
             <p className="body-md subtitle">
               <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
             </p>
             {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
-            <Button size="small" variant="subtleLink" className="cancel" onClick={handleCancel}>
+            <Button
+              data-test-id="pre-join-cancel"
+              size="small"
+              variant="subtleLink"
+              className="cancel"
+              onClick={handleCancel}
+            >
               {t('cancel')}
             </Button>
           </Form>

@@ -43,7 +43,9 @@ const Seats = () => {
                   {isConferenceInIntro ? (
                     <span className="text body-sm">{t('seatAvailableAfterIntro')}</span>
                   ) : (
-                    <span className="text body-sm">{t('seatUnavailable')}</span>
+                    <span data-testid="unavailable-seat" className="text body-sm">
+                      {t('seatUnavailable')}
+                    </span>
                   )}
                 </>
               ) : (
