@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Then } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 import { makeGQLCurrentFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
 
@@ -32,7 +32,7 @@ Then('sees tomorrow fishbowl information page', () => {
   cy.screenshot();
 });
 
-Then('can access to pre fishbowl', () => {
+When('can access to pre fishbowl', () => {
   const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
 
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
@@ -66,7 +66,7 @@ Then('can access to pre fishbowl', () => {
   cy.screenshot();
 });
 
-Then('sees the fishbowl page', () => {
+When('sees the fishbowl page', () => {
   const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
 
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
@@ -86,7 +86,7 @@ Then('sees the fishbowl page', () => {
   cy.screenshot();
 });
 
-Then('starts fishbowl', () => {
+When('starts fishbowl', () => {
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
@@ -132,7 +132,7 @@ Then('finishes a fishbowl', () => {
 
   cy.contains('End fishbowl').click();
 
-  cy.wait(2500);
+  cy.wait(3500);
 
   cy.get('[data-testid=finished-fishbowl]').should('exist');
 });
