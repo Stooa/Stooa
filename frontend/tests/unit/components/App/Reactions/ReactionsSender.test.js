@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ReactionsSender from '@/components/App/Reactions/ReactionsSender';
 import { useStooa } from '@/contexts/StooaManager';
 
@@ -17,11 +17,19 @@ describe('Reactions sender component', () => {
   it('It renders the component as moderator', () => {
     useStooa.mockReturnValue({ isModerator: true });
 
-    const { container } = render(<ReactionsSender />);
+    const { container, getByTestId } = render(<ReactionsSender />);
 
     const isModeratorClassName = container.getElementsByClassName('moderator');
 
     expect(isModeratorClassName.length).toBe(1);
+
+    expect(getByTestId('agree-emoji')).toBeInTheDocument();
+    expect(getByTestId('disagree-emoji')).toBeInTheDocument();
+    expect(getByTestId('love-emoji')).toBeInTheDocument();
+    expect(getByTestId('applause-emoji')).toBeInTheDocument();
+    expect(getByTestId('joy-emoji')).toBeInTheDocument();
+    expect(getByTestId('wave-emoji')).toBeInTheDocument();
+    expect(getByTestId('insightful-emoji')).toBeInTheDocument();
   });
 
   it('It renders the component as user', () => {
