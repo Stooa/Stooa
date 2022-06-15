@@ -58,7 +58,6 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
         getComputedStyle(reactionRef.current).getPropertyValue('--emojiScale')
       );
 
-      console.log('WTF BROTHER', cssVariableSize);
       setInitialScale(cssVariableSize);
       setSize(cssVariableSize);
     }
