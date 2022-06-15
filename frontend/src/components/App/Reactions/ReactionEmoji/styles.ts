@@ -7,14 +7,23 @@
  * file that was distributed with this source code.
  */
 
+import { media } from '@/ui/helpers';
 import styled from 'styled-components';
 
 const StyledEmojiReaction = styled.div`
-  cursor: pointer;
-  transition: transform 0.1s ease-out;
+  --translateY: 0;
+  --emojiScale: 1;
 
-  &,
-  & > * {
+  cursor: pointer;
+  transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+
+  transform: translateY(var(--translateY)) scale(var(--emojiScale));
+
+  ${media.min('tablet')`
+    --emojiScale: 1;
+  `}
+
+  &, & > * {
     user-select: none;
   }
 
@@ -28,7 +37,7 @@ const StyledEmojiReaction = styled.div`
   }
 
   &:hover {
-    transform: translateY(-6px) scale(var(--emojiScale));
+    --translateY: -6px;
   }
 `;
 

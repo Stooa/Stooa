@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { useWindowSize } from '@/hooks/useWIndowSize';
 import { useEffect, useState } from 'react';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import { StyledEmojiReaction } from './styles';
@@ -18,13 +19,17 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
-  const [size, setSize] = useState(1);
+  const { width } = useWindowSize();
+  const emojiSize = width && width > 380 ? 1 : 0.75;
+
+  const [size, setSize] = useState(emojiSize);
   const [clicked, setClicked] = useState(0);
 
   const handleOnClick = mouseEvent => {
     if (!disabled) {
       setClicked(clicked => clicked + 1);
-      setSize(size => (size < 1.5 ? size + 0.05 : size));
+      const scaleInterval = clicked === 0 ? 0.12 : 0.035;
+      setSize(size => (size < 1.435 ? size + scaleInterval : size));
       onClick(mouseEvent);
     }
   };
@@ -32,7 +37,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setClicked(0);
-      setSize(1);
+      setSize(emojiSize);
     }, 500);
 
     return () => {
@@ -40,17 +45,25 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
     };
   }, [clicked]);
 
-  return (
-    <StyledEmojiReaction
-      className={disabled ? 'disabled' : ''}
-      id={emoji}
-      onClick={handleOnClick}
-      style={{ '--emojiScale': size } as React.CSSProperties}
-      {...props}
-    >
-      {REACTION_EMOJIS[emoji]}
-    </StyledEmojiReaction>
-  );
+  useEffect(() => {
+    setSize(emojiSize);
+  }, [width]);
+
+  if (width) {
+    return (
+      <StyledEmojiReaction
+        className={disabled ? 'disabled' : ''}
+        id={emoji}
+        onClick={handleOnClick}
+        style={{ '--emojiScale': size } as React.CSSProperties}
+        {...props}
+      >
+        {REACTION_EMOJIS[emoji]}
+      </StyledEmojiReaction>
+    );
+  } else {
+    return <div>ono</div>;
+  }
 };
 
 export default ReactionEmoji;

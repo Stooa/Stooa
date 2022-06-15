@@ -13,7 +13,7 @@ import { BODY_SM, BODY_XS } from '@/ui/Texts';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  position: relative;
+  ${media.min('tablet')`position:relative`}
 `;
 
 const StyledButtonReaction = styled.button`

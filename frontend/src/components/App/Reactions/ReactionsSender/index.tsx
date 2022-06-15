@@ -82,8 +82,6 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     if (debouncedEmojis.length > 0) {
       // Send here emojis to sendmessage jitsi
       const firstTenEmojis = debouncedEmojis.slice(0, 10);
-
-      console.log('sending', firstTenEmojis);
       conferenceRepository.sendTextMessage(firstTenEmojis.join(','));
 
       if (timesClicked === 10) {

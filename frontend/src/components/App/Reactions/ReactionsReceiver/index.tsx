@@ -31,7 +31,7 @@ const ReactionsReceiver = ({ className }: Props) => {
     const formattedReactions = reactions.map((reaction, index) =>
       Reactions.createReaction(
         reaction,
-        `calc(${51.5 - countReaction * 0.85}% - 20px + ${index * 22}px)`
+        `calc(50% - ${countReaction > 1 ? countReaction * 14 : 20}px + ${index * 22}px)`
       )
     );
 

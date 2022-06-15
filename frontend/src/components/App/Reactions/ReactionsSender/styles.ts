@@ -17,7 +17,7 @@ const ReactionsWrapper = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 65%;
+  bottom: 60%;
   left: 50%;
   transform: translateX(-50%);
   line-height: 0;
@@ -34,6 +34,13 @@ const ReactionsWrapper = styled.div`
 
   ${media.min('tablet')`
     bottom: calc(100% + ${space()});
+
+    `}
+
+  ${media.max('smallestIphone')`
+    & > *:not(:last-child) {
+      margin-right: ${space(0.5)};
+    }
   `}
 
   &.open {
