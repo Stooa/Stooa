@@ -17,13 +17,12 @@ const StyledReactionsReciever = styled.div`
   left: 0;
   width: 100%;
   height: ${space(10)};
+  z-index: 10;
 
   ${media.min('tablet')`
     bottom: ${space(7)};
     width:100%;
-
     margin: 0 auto;
-
   `}
 
   &.drawer-open {
