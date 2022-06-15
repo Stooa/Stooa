@@ -15,6 +15,7 @@ import Reactions from '@/lib/Reactions/Reactions';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import ReactionEmoji from '../ReactionEmoji';
 import { Reaction } from '@/types/reactions';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -23,12 +24,12 @@ interface Props {
 }
 
 const ReactionsSender = ({ onMouseLeave, className }: Props) => {
+  const { isModerator } = useStooa();
   const [disableToSendEmojis, setDisableToSendEmojis] = useState(false);
   const [clientEmojisShown, setClientEmojisShown] = useState<Reaction[]>([]);
   const [timesClicked, setTimesClicked] = useState(0);
   const [lastLocationClicked, setLastLocationClicked] = useState<number>();
 
-  // const [emojisToSend, setEmojisToSend] = useState<string[]>([]);
   const emojisToSendRef = React.useRef<string[]>([]);
   const emojiSpawnerRef = React.useRef<HTMLDivElement>(null);
 
@@ -97,7 +98,10 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   }, [debouncedEmojis]);
 
   return (
-    <ReactionsWrapper className={className} onMouseLeave={handleOnMouseLeave}>
+    <ReactionsWrapper
+      className={`${className} ${isModerator && 'moderator'}`}
+      onMouseLeave={handleOnMouseLeave}
+    >
       <EmojiSpawner ref={emojiSpawnerRef} id="emoji-spawner">
         {clientEmojisShown.length > 0 &&
           clientEmojisShown.map(reactionMapped => {

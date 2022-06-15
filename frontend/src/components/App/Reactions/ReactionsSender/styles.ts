@@ -17,24 +17,28 @@ const ReactionsWrapper = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 60%;
   left: 50%;
   transform: translateX(-50%);
   line-height: 0;
-
+  bottom: 78%;
   background-color: ${COLOR_NEUTRO_100};
   border-radius: 30px;
   box-shadow: 0px 0.9375px 2.8125px 0px rgba(0, 0, 0, 0.15);
 
   padding: ${space()} ${space(2)};
 
+  &.moderator {
+    bottom: 60%;
+  }
+
   & > *:not(:last-child) {
     margin-right: ${space(1.5)};
   }
 
   ${media.min('tablet')`
-    bottom: calc(100% + ${space()});
-
+    &, &.moderator{
+      bottom: calc(100% + ${space()});
+    }
     `}
 
   ${media.max('smallestIphone')`
