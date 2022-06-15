@@ -12,6 +12,7 @@ import { StyledButtonReaction, StyledWrapper } from './styles';
 import ReactionsSender from '../ReactionsSender';
 import Laugh from '@/ui/svg/emojis/laugh.svg';
 import Plus from '@/ui/svg/emojis/plus.svg';
+import { useWindowSize } from '@/hooks/useWIndowSize';
 
 interface Props {
   disabled?: boolean;
@@ -22,6 +23,9 @@ const ReactionsButton = ({ disabled }: Props) => {
   const [animation, setAnimation] = useState<'open' | 'close'>('open');
   const wrapperRef = useRef(null);
   const timeOutRef = useRef(null);
+  const reactionButtonRef = useRef(null);
+
+  const { width } = useWindowSize();
 
   const hide = async ms => {
     if (animation === 'open') {
@@ -43,12 +47,19 @@ const ReactionsButton = ({ disabled }: Props) => {
     }
   };
 
+  const handleOnMouseLeave = e => {
+    if (showReactions && animation === 'open' && !reactionButtonRef.current.contains(e.target)) {
+      hide(600);
+    }
+  };
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (showReactions && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
         hide(1200);
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -63,8 +74,13 @@ const ReactionsButton = ({ disabled }: Props) => {
 
   return (
     <StyledWrapper ref={wrapperRef}>
-      {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(1200)} />}
-      <StyledButtonReaction disabled={disabled} onClick={handleClick}>
+      {showReactions && (
+        <ReactionsSender
+          className={animation}
+          onMouseLeave={width < 680 ? () => null : handleOnMouseLeave}
+        />
+      )}
+      <StyledButtonReaction disabled={disabled} ref={reactionButtonRef} onClick={handleClick}>
         <div className="plus">
           <Plus />
         </div>
