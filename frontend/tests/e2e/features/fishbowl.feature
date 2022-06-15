@@ -4,12 +4,12 @@ Feature: Fishbowl
 
     Scenario: Logged users can see information about future fishbowl
         Given a logged user
-        When navigates to "/fb/test-me-fishbowl"
+        When navigates to future fishbowl
         Then sees tomorrow fishbowl information page
 
     Scenario: Host user can start and finish a fishbowl
         Given a logged user
-        When navigates to "/fb/test-fishbowl"
+        When navigates to fishbowl
         And can access to pre fishbowl
         And clicks on "Enter fishbowl"
         And sees the fishbowl page

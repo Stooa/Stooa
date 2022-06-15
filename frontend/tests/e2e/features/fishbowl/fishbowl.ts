@@ -11,8 +11,45 @@ import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 import { makeGQLCurrentFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
 
+When('navigates to future fishbowl', () => {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
+    statusCode: 200,
+    body: {
+      status: 'NOT_STARTED'
+    }
+  });
+
+  cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
+});
+
+When('navigates to fishbowl', () => {
+  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
+    statusCode: 200,
+    body: {
+      status: 'NOT_STARTED'
+    }
+  });
+
+  cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
+});
+
 Then('sees tomorrow fishbowl information page', () => {
   const bySlugQueryFishbowl = makeGQLTomorrowFishbowl();
+
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
@@ -33,21 +70,6 @@ Then('sees tomorrow fishbowl information page', () => {
 });
 
 When('can access to pre fishbowl', () => {
-  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
-
-  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
-  cy.setCookie('on_boarding_moderator', 'true');
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
       req.reply({
