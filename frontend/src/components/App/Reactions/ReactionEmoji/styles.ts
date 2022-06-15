@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 const StyledEmojiReaction = styled.div`
   --translateY: 0;
-  --emojiScale: 1;
+  --emojiScale: 0.9;
 
   cursor: pointer;
   transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
@@ -23,7 +23,8 @@ const StyledEmojiReaction = styled.div`
     --emojiScale: 1;
   `}
 
-  &, & > * {
+  &,
+  & > * {
     user-select: none;
   }
 

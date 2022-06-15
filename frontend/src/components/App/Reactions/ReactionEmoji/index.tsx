@@ -7,29 +7,36 @@
  * file that was distributed with this source code.
  */
 
-import { useWindowSize } from '@/hooks/useWIndowSize';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import { StyledEmojiReaction } from './styles';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
-  emoji: 'like' | 'love' | 'applause' | 'laugh' | 'wave' | 'insightful' | 'curious';
+  emoji: 'agree' | 'disagree' | 'love' | 'applause' | 'joy' | 'wave' | 'insightful';
   onClick: (mouseEvent: React.MouseEvent) => void;
   disabled?: boolean;
 }
 
 const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
-  const { width } = useWindowSize();
-  const emojiSize = width && width > 380 ? 1 : 0.75;
+  const reactionRef = useRef<HTMLDivElement>(null);
 
-  const [size, setSize] = useState(emojiSize);
-  const [clicked, setClicked] = useState(0);
+  const [initialScale, setInitialScale] = useState<number>(1);
+  const [size, setSize] = useState<number>(1);
+  const [clicked, setClicked] = useState<number>(0);
+
+  const changeCssScaleVariable = scale => {
+    if (scale) reactionRef.current.style.setProperty('--emojiScale', scale);
+    setSize(scale);
+  };
 
   const handleOnClick = mouseEvent => {
-    if (!disabled) {
+    if (!disabled && reactionRef.current) {
       setClicked(clicked => clicked + 1);
+
       const scaleInterval = clicked === 0 ? 0.12 : 0.035;
-      setSize(size => (size < 1.435 ? size + scaleInterval : size));
+      const scaleToSet = size < 1.435 ? size + scaleInterval : size;
+
+      changeCssScaleVariable(scaleToSet);
       onClick(mouseEvent);
     }
   };
@@ -37,33 +44,37 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setClicked(0);
-      setSize(emojiSize);
+      changeCssScaleVariable(initialScale);
     }, 500);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [clicked]);
+  }, [clicked, initialScale]);
 
   useEffect(() => {
-    setSize(emojiSize);
-  }, [width]);
+    if (reactionRef.current) {
+      const cssVariableSize = parseFloat(
+        getComputedStyle(reactionRef.current).getPropertyValue('--emojiScale')
+      );
 
-  if (width) {
-    return (
-      <StyledEmojiReaction
-        className={disabled ? 'disabled' : ''}
-        id={emoji}
-        onClick={handleOnClick}
-        style={{ '--emojiScale': size } as React.CSSProperties}
-        {...props}
-      >
-        {REACTION_EMOJIS[emoji]}
-      </StyledEmojiReaction>
-    );
-  } else {
-    return <div>ono</div>;
-  }
+      console.log('WTF BROTHER', cssVariableSize);
+      setInitialScale(cssVariableSize);
+      setSize(cssVariableSize);
+    }
+  }, [reactionRef.current]);
+
+  return (
+    <StyledEmojiReaction
+      ref={reactionRef}
+      className={disabled ? 'disabled' : ''}
+      id={emoji}
+      onClick={handleOnClick}
+      {...props}
+    >
+      {REACTION_EMOJIS[emoji]}
+    </StyledEmojiReaction>
+  );
 };
 
 export default ReactionEmoji;

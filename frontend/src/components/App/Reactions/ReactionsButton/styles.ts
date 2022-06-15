@@ -45,21 +45,19 @@ const StyledButtonReaction = styled.button`
     }
   }
 
-  & > .cross {
+  & > .plus {
     position: absolute;
     top: 0;
-    right: 0;
-    transform: rotate(45deg);
-    width: 20px;
-    height: 20px;
+    right: 4px;
     z-index: 1;
 
     & > svg path {
       fill: currentColor;
-      stroke: white;
-      stroke-width: 2px;
-      stroke-linejoin: round;
     }
+
+    ${media.min('tablet')`
+      right: 8px;
+    `}
   }
 `;
 

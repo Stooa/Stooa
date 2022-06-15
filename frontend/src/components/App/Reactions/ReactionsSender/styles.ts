@@ -39,7 +39,7 @@ const ReactionsWrapper = styled.div`
 
   ${media.max('smallestIphone')`
     & > *:not(:last-child) {
-      margin-right: ${space(0.5)};
+      margin-right: 0;
     }
   `}
 

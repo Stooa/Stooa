@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { StyledButtonReaction, StyledWrapper } from './styles';
 import ReactionsSender from '../ReactionsSender';
 import Laugh from '@/ui/svg/emojis/laugh.svg';
-import Cross from '@/ui/svg/cross.svg';
+import Plus from '@/ui/svg/emojis/plus.svg';
 
 interface Props {
   disabled?: boolean;
@@ -65,8 +65,8 @@ const ReactionsButton = ({ disabled }: Props) => {
     <StyledWrapper ref={wrapperRef}>
       {showReactions && <ReactionsSender className={animation} onMouseLeave={() => hide(1200)} />}
       <StyledButtonReaction disabled={disabled} onClick={handleClick}>
-        <div className="cross">
-          <Cross />
+        <div className="plus">
+          <Plus />
         </div>
         <Laugh />
         <div className="label medium">Reactions</div>

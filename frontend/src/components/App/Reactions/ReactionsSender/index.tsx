@@ -118,13 +118,13 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
           })}
       </EmojiSpawner>
 
-      <ReactionEmoji disabled={disableToSendEmojis} emoji="like" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="agree" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="disagree" onClick={handleClick} />
       <ReactionEmoji disabled={disableToSendEmojis} emoji="love" onClick={handleClick} />
       <ReactionEmoji disabled={disableToSendEmojis} emoji="applause" onClick={handleClick} />
-      <ReactionEmoji disabled={disableToSendEmojis} emoji="laugh" onClick={handleClick} />
+      <ReactionEmoji disabled={disableToSendEmojis} emoji="joy" onClick={handleClick} />
       <ReactionEmoji disabled={disableToSendEmojis} emoji="wave" onClick={handleClick} />
       <ReactionEmoji disabled={disableToSendEmojis} emoji="insightful" onClick={handleClick} />
-      <ReactionEmoji disabled={disableToSendEmojis} emoji="curious" onClick={handleClick} />
     </ReactionsWrapper>
   );
 };
