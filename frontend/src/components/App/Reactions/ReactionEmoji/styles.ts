@@ -25,6 +25,7 @@ const StyledEmojiReaction = styled.div`
 
   &,
   & > * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     user-select: none;
   }
 

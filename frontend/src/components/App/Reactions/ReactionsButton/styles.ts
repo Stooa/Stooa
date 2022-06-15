@@ -21,6 +21,7 @@ const StyledButtonReaction = styled.button`
   line-height: 0;
   margin: 0 auto;
   color: ${COLOR_NEUTRO_600};
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   & > svg {
     transform: translateY(-3px);
