@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import ReactionsReceiver from '@/components/App/Reactions/ReactionsReceiver';
 
 const sendReceivedEvent = reactionText => {
@@ -19,12 +19,31 @@ const sendReceivedEvent = reactionText => {
     dispatchEvent(reactionReceivedEvent);
   });
 };
+
 describe('Reactions receiver component', () => {
   it('It renders the component', () => {
     const { getByTestId } = render(<ReactionsReceiver />);
     const reactionsReceiver = getByTestId('reactions-receiver');
 
     expect(reactionsReceiver).toBeInTheDocument();
+  });
+
+  it('It shows one agree reaction', () => {
+    const { getByTestId } = render(<ReactionsReceiver enabled="true" />);
+
+    sendReceivedEvent('agree');
+
+    const reactionToShow = getByTestId('reaction-to-show');
+    expect(reactionToShow).toBeInTheDocument();
+  });
+
+  it('It shows one agree reaction', () => {
+    const { getByTestId } = render(<ReactionsReceiver enabled="true" />);
+
+    sendReceivedEvent('agree');
+
+    const reactionToShow = getByTestId('reaction-to-show');
+    expect(reactionToShow).toBeInTheDocument();
   });
 
   it('It shows one agree reaction', () => {
@@ -45,5 +64,30 @@ describe('Reactions receiver component', () => {
 
     const reactionsToShow = getAllByTestId('reaction-to-show');
     expect(reactionsToShow.length).toBe(10);
+  });
+
+  it('It shows 7 unique reactions', () => {
+    const { getAllByTestId } = render(<ReactionsReceiver enabled="true" />);
+
+    sendReceivedEvent('agree');
+    sendReceivedEvent('disagree');
+    sendReceivedEvent('love');
+    sendReceivedEvent('applause');
+    sendReceivedEvent('joy');
+    sendReceivedEvent('wave');
+    sendReceivedEvent('insightful');
+
+    const reactionsToShow = getAllByTestId('reaction-to-show');
+    expect(reactionsToShow.length).toBe(7);
+  });
+
+  it('It does not render when reaction is incorrect', () => {
+    const { queryByTestId } = render(<ReactionsReceiver enabled="true" />);
+
+    sendReceivedEvent('incorrect-reaction');
+
+    const reactionsToShow = queryByTestId('reaction-to-show');
+
+    expect(reactionsToShow).not.toBeInTheDocument();
   });
 });

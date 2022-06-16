@@ -29,12 +29,14 @@ const ReactionsReceiver = ({ className, enabled = false }: Props) => {
 
   const formatReactions = (reactions: string[]): Reaction[] => {
     const countReaction = reactions.length;
-    const formattedReactions = reactions.map((reaction, index) =>
-      Reactions.createReaction(
-        reaction,
-        `calc(50% - ${countReaction > 1 ? countReaction * 14 : 20}px + ${index * 22}px)`
-      )
-    );
+    const formattedReactions = reactions.map((reaction, index) => {
+      if (REACTION_EMOJIS.hasOwnProperty(reaction)) {
+        return Reactions.createReaction(
+          reaction,
+          `calc(50% - ${countReaction > 1 ? countReaction * 14 : 20}px + ${index * 22}px)`
+        );
+      }
+    });
 
     return formattedReactions;
   };
@@ -79,22 +81,24 @@ const ReactionsReceiver = ({ className, enabled = false }: Props) => {
     >
       {reactionsToShow.length > 0 &&
         reactionsToShow.map(mappedReaction => {
-          const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
-          return (
-            <span
-              data-testid="reaction-to-show"
-              style={{
-                position: 'absolute',
-                left: xCoordinate,
-                bottom: yCoordinate,
-                transformOrigin: 'center'
-              }}
-              className={animation}
-              key={id}
-            >
-              {REACTION_EMOJIS[reaction]}
-            </span>
-          );
+          if (mappedReaction) {
+            const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
+            return (
+              <span
+                data-testid="reaction-to-show"
+                style={{
+                  position: 'absolute',
+                  left: xCoordinate,
+                  bottom: yCoordinate,
+                  transformOrigin: 'center'
+                }}
+                className={animation}
+                key={id}
+              >
+                {REACTION_EMOJIS[reaction]}
+              </span>
+            );
+          }
         })}
     </StyledReactionsReciever>
   );
