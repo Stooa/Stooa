@@ -59,7 +59,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     setTimeout(() => {
       setClientEmojisShown([]);
       setDisableToSendEmojis(false);
-    }, 2000);
+    }, 4000);
   };
 
   const handleClick = (mouseEvent: React.MouseEvent) => {

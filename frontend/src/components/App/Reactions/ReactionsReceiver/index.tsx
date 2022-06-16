@@ -51,7 +51,7 @@ const ReactionsReceiver = ({ className }: Props) => {
     if (reactionsToShow.length > 0) {
       timeout = setTimeout(() => {
         setReactionsToShow([]);
-      }, 2000);
+      }, 4000);
     }
 
     return () => {
@@ -60,6 +60,7 @@ const ReactionsReceiver = ({ className }: Props) => {
   }, [reactionsToShow]);
 
   useEffect(() => {
+    // CLEAN SVGS FROM DOM
     const enabledTimeout = setTimeout(() => {
       SetreactionsEnabled(true);
     }, 5000);
