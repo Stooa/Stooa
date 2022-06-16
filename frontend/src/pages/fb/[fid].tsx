@@ -65,14 +65,6 @@ const Page = () => {
     };
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    pushEventDataLayer({
-      action: fid as string,
-      category: 'FishbowlReactions',
-      label: 'Connect'
-    });
-  }, []);
-
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;
 

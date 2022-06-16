@@ -93,7 +93,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
       pushEventDataLayer({
         action: fid as string,
         category: 'FishbowlReactions',
-        label: 'Reaction',
+        label: 'React',
         value: Object.keys(REACTION_EMOJIS).indexOf(firstTenEmojis[0])
       });
 
