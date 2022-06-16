@@ -7,8 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import ReactionsButton from '@/components/App/Reactions/ReactionsButton';
+
+jest.mock('@/components/App/Reactions/ReactionsSender', () => () => {
+  return <mock-reaction-sender data-testid="reaction-sender"></mock-reaction-sender>;
+});
 
 describe('Reactions button component', () => {
   it('It renders the component', () => {
@@ -26,5 +30,14 @@ describe('Reactions button component', () => {
 
     expect(reactionsButton).toBeInTheDocument();
     expect(reactionsButton).toBeDisabled();
+  });
+
+  it('It shows reaction sender component on click', () => {
+    const { getByTestId } = render(<ReactionsButton />);
+    const reactionsButton = getByTestId('reactions-button');
+
+    fireEvent.click(reactionsButton);
+
+    expect(getByTestId('reaction-sender')).toBeInTheDocument();
   });
 });
