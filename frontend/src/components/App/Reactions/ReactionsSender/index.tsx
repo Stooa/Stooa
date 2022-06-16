@@ -99,6 +99,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
 
   return (
     <ReactionsWrapper
+      data-testid="reactions-wrapper"
       className={`${className} ${isModerator && 'moderator'}`}
       onMouseLeave={handleOnMouseLeave}
     >
@@ -108,6 +109,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
             const { id, reaction, xCoordinate, yCoordinate, animation } = reactionMapped;
             return (
               <div
+                data-testid="emoji-shown"
                 className={animation}
                 key={id}
                 style={{
