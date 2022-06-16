@@ -18,6 +18,7 @@ const StyledReactionsReciever = styled.div`
   width: 100%;
   height: ${space(10)};
   z-index: 10;
+  pointer-events: none;
 
   ${media.min('tablet')`
     bottom: ${space(7)};
