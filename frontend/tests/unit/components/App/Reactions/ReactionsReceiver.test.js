@@ -34,6 +34,7 @@ describe('Reactions receiver component', () => {
     sendReceivedEvent('agree');
 
     const reactionToShow = getByTestId('reaction-to-show');
+
     expect(reactionToShow).toBeInTheDocument();
   });
 
@@ -43,6 +44,7 @@ describe('Reactions receiver component', () => {
     sendReceivedEvent('agree');
 
     const reactionToShow = getByTestId('reaction-to-show');
+
     expect(reactionToShow).toBeInTheDocument();
   });
 
@@ -52,6 +54,7 @@ describe('Reactions receiver component', () => {
     sendReceivedEvent('agree');
 
     const reactionToShow = getByTestId('reaction-to-show');
+
     expect(reactionToShow).toBeInTheDocument();
   });
 
@@ -63,6 +66,7 @@ describe('Reactions receiver component', () => {
     }
 
     const reactionsToShow = getAllByTestId('reaction-to-show');
+
     expect(reactionsToShow.length).toBe(10);
   });
 
@@ -78,6 +82,7 @@ describe('Reactions receiver component', () => {
     sendReceivedEvent('insightful');
 
     const reactionsToShow = getAllByTestId('reaction-to-show');
+
     expect(reactionsToShow.length).toBe(7);
   });
 
