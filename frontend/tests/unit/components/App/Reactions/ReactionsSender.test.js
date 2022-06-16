@@ -7,16 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import {getByTestId, render, fireEvent, screen} from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import ReactionsSender from '@/components/App/Reactions/ReactionsSender';
 import { useStooa } from '@/contexts/StooaManager';
+import { useRouter } from 'next/router';
 
 jest.mock('@/contexts/StooaManager');
+jest.mock('next/router');
 
 describe('Reactions sender component', () => {
   it('It renders the component as moderator', () => {
     useStooa.mockReturnValue({ isModerator: true });
-
+    useRouter.mockReturnValue({ query: '' });
     const { container, getByTestId } = render(<ReactionsSender />);
 
     const isModeratorClassName = container.getElementsByClassName('moderator');
@@ -34,6 +36,7 @@ describe('Reactions sender component', () => {
 
   it('It renders the component as user', () => {
     useStooa.mockReturnValue({ isModerator: false });
+    useRouter.mockReturnValue({ query: '' });
 
     const { container } = render(<ReactionsSender />);
 
@@ -44,17 +47,18 @@ describe('Reactions sender component', () => {
 
   it('It shows emoji when clicks one', () => {
     useStooa.mockReturnValue({ isModerator: false });
+    useRouter.mockReturnValue({ query: '' });
 
-    render(<ReactionsSender />);
+    const { getByTestId } = render(<ReactionsSender />);
 
-    const reactionWrapper = screen.getByTestId('reactions-wrapper');
-    const agreeEmoji = screen.getByTestId('agree-emoji');
+    const reactionWrapper = getByTestId('reactions-wrapper');
+    const agreeEmoji = getByTestId('agree-emoji');
 
     fireEvent.click(reactionWrapper);
     fireEvent.click(agreeEmoji);
 
-    const shownEmoji = screen.getByTestId('emoji-shown');
+    const shownEmoji = getByTestId('emoji-shown');
 
-    expect(shownEmoji).toBeInTheDocument();
+    expect(shownEmoji).toBeInTheDocument(1);
   });
 });
