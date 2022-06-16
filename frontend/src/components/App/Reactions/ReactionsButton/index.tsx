@@ -31,10 +31,8 @@ const ReactionsButton = ({ disabled }: Props) => {
   const { width } = useWindowSize();
 
   const hide = async ms => {
-    if (animation === 'open') {
-      setAnimation('close');
-      timeOutRef.current = setTimeout(() => setShowReactions(false), ms);
-    }
+    setAnimation('close');
+    timeOutRef.current = setTimeout(() => setShowReactions(false), ms);
   };
 
   const show = () => {
@@ -59,7 +57,7 @@ const ReactionsButton = ({ disabled }: Props) => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (showReactions && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-        hide(1200);
+        hide(600);
       }
     };
 
