@@ -71,7 +71,11 @@ const ReactionsReceiver = ({ className }: Props) => {
   }, [reactionsEnabled]);
 
   return (
-    <StyledReactionsReciever ref={reactionReceiverRef} className={className}>
+    <StyledReactionsReciever
+      ref={reactionReceiverRef}
+      className={className}
+      data-testid="reactions-receiver"
+    >
       {reactionsToShow.length > 0 &&
         reactionsToShow.map(mappedReaction => {
           const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
