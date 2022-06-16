@@ -1,1 +1,12 @@
-{}
+{
+    "scheduledFishbowls": "Fishbowl terjadwal (<span>{{count}}</span>)",
+    "enterFishbowl": "Masuk fishbowl",
+    "emptyListTitle": "Kamu belum menjadwalkan fishbowl. Buatlah satu!",
+    "emptyListDescription": "Di sini adalah di mana kamu akan melihat semua dari fishbowl terjadwal kamu.",
+    "noSelectedFishbowlTitle": "Tidak ada fishbowl yang dipilih.",
+    "fishbowlStartedDescription": "Fishbowl yang sedang berjalan atau akan mulai kurang dari 30 menit tidak bisa disunting.",
+    "noSelectedFishbowlDescription": "Pilih sebuah fishbowl yang dijadwalkan untuk mulai menyuntingnya.",
+    "fishbowlStarted": "Fishbowl ini sudah mulai atau mau mulai.",
+    "back": "Kembali ke daftar",
+    "titleEdit": "Sunting fishbowl"
+}
