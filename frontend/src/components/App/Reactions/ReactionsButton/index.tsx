@@ -13,6 +13,7 @@ import ReactionsSender from '../ReactionsSender';
 import Laugh from '@/ui/svg/emojis/laugh.svg';
 import Plus from '@/ui/svg/emojis/plus.svg';
 import { useWindowSize } from '@/hooks/useWIndowSize';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   disabled?: boolean;
@@ -24,6 +25,8 @@ const ReactionsButton = ({ disabled }: Props) => {
   const wrapperRef = useRef(null);
   const timeOutRef = useRef(null);
   const reactionButtonRef = useRef(null);
+
+  const { t } = useTranslation('fishbowl');
 
   const { width } = useWindowSize();
 
@@ -85,7 +88,7 @@ const ReactionsButton = ({ disabled }: Props) => {
           <Plus />
         </div>
         <Laugh />
-        <div className="label medium">Reactions</div>
+        <div className="label medium">{t('reactions')}</div>
       </StyledButtonReaction>
     </StyledWrapper>
   );
