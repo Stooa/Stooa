@@ -40,8 +40,8 @@ const ReactionsReceiver = ({ className }: Props) => {
 
   useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { id, text, ts } }) => {
     if (reactionsToShow.length < REACTIONS_LIMIT && reactionsEnabled) {
-      const splittedReactions: string[] = text.split(',');
-      const formattedReactions: Reaction[] = formatReactions(splittedReactions);
+      const splitReactions: string[] = text.split(',');
+      const formattedReactions: Reaction[] = formatReactions(splitReactions);
       setReactionsToShow(reactions => [...reactions, ...formattedReactions]);
     }
   });
@@ -60,7 +60,7 @@ const ReactionsReceiver = ({ className }: Props) => {
   }, [reactionsToShow]);
 
   useEffect(() => {
-    // CLEAN SVGS FROM DOM
+    // CLEAN SVGs FROM DOM
     const enabledTimeout = setTimeout(() => {
       SetreactionsEnabled(true);
     }, 5000);
