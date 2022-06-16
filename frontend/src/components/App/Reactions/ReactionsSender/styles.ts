@@ -52,6 +52,7 @@ const ReactionsWrapper = styled.div`
   }
 
   &.close {
+    pointer-events: none;
     animation: close 0.2s ease-out forwards;
   }
 
