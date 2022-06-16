@@ -15,13 +15,13 @@ const FastAnimation = keyframes`
       opacity: 1;
     }
 
-    50% {
-      transform: translateY(-150px);
+    60% {
+      transform: translateY(-50vh);
       opacity: 0;
     }
 
     100% {
-      transform: translateY(-150px);
+      transform: translateY(-50vh);
       opacity: 0;
     }
 
@@ -34,7 +34,7 @@ const StandardAnimation = keyframes`
     }
 
     100% {
-      transform: translateY(-150px);
+      transform: translateY(-50vh);
       opacity: 0;
     }
 
@@ -45,7 +45,7 @@ const StandardAnimation = keyframes`
  */
 const FloatFast = css`
   & > .emoji-fast {
-    animation: ${FastAnimation} 2s ease-out forwards;
+    animation: ${FastAnimation} 4s ease-out forwards;
   }
 `;
 
@@ -54,7 +54,7 @@ const FloatFast = css`
  */
 const FloatStandard = css`
   & > .emoji-standard {
-    animation: ${StandardAnimation} 2s ease-out forwards;
+    animation: ${StandardAnimation} 4s ease-out forwards;
   }
 `;
 

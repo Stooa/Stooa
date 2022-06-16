@@ -21,6 +21,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -63,6 +64,14 @@ const Page = () => {
       router.beforePopState(() => true);
     };
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    pushEventDataLayer({
+      action: fid as string,
+      category: 'FishbowlReactions',
+      label: 'Connect'
+    });
+  }, []);
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;
