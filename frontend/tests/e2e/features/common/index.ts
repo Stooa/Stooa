@@ -55,6 +55,14 @@ When('clicks on {string} button', (text = '') => {
   cy.findAllByRole('button', { name: text }).first().click({ force: true });
 });
 
+When('clicks on {string}', (text = '') => {
+  cy.contains(text).click();
+});
+
+When('clicks to close modal', (text = '') => {
+  cy.get('button[class="close"]').click({ force: true });
+});
+
 /**
  * @param {string} newValue Is the user's input
  * @param {string} fieldName The field to select by name

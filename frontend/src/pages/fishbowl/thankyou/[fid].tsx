@@ -66,7 +66,9 @@ const ThankYou = () => {
         dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
         className="error"
       >
-        <p className="body-md medium">{t('finishedEvent')}</p>
+        <p data-testid="finished-fishbowl" className="body-md medium">
+          {t('finishedEvent')}
+        </p>
         <div className="body-sm">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
             startDate.time
