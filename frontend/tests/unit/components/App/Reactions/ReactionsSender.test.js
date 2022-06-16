@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import {getByTestId, render, fireEvent, screen} from '@testing-library/react';
+import { getByTestId, render, fireEvent, screen } from '@testing-library/react';
 import ReactionsSender from '@/components/App/Reactions/ReactionsSender';
 import { useStooa } from '@/contexts/StooaManager';
 
