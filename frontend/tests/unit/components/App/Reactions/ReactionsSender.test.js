@@ -63,7 +63,7 @@ describe('Reactions sender component', () => {
     expect(shownEmoji).toBeInTheDocument(1);
   });
 
-  it('It shows two emoji when clicks two', () => {
+  it('It shows two emoji when clicks two times', () => {
     useStooa.mockReturnValue({ isModerator: false });
     useRouter.mockReturnValue({ query: '' });
 
