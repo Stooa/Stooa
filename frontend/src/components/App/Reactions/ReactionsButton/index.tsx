@@ -74,14 +74,19 @@ const ReactionsButton = ({ disabled }: Props) => {
   }, [animation]);
 
   return (
-    <StyledWrapper ref={wrapperRef}>
+    <StyledWrapper ref={wrapperRef} data-testid="wrapper-reactions-button">
       {showReactions && (
         <ReactionsSender
           className={animation}
           onMouseLeave={width < 680 ? () => null : handleOnMouseLeave}
         />
       )}
-      <StyledButtonReaction disabled={disabled} ref={reactionButtonRef} onClick={handleClick}>
+      <StyledButtonReaction
+        data-testid="reactions-button"
+        disabled={disabled}
+        ref={reactionButtonRef}
+        onClick={handleClick}
+      >
         <div className="plus">
           <Plus />
         </div>
