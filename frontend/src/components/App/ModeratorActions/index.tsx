@@ -158,7 +158,12 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           />
         )}
         {running && (
-          <Button size="medium" className="button error" onClick={toggleFinishModal}>
+          <Button
+            data-testid="finish-fishbowl"
+            size="medium"
+            className="button error"
+            onClick={toggleFinishModal}
+          >
             <span className="text">{t('endFishbowl')}</span>
           </Button>
         )}
