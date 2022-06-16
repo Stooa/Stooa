@@ -17,11 +17,12 @@ import Reactions from '@/lib/Reactions/Reactions';
 
 interface Props {
   className?: string;
+  enabled?: boolean;
 }
 
-const ReactionsReceiver = ({ className }: Props) => {
+const ReactionsReceiver = ({ className, enabled = false }: Props) => {
   const [reactionsToShow, setReactionsToShow] = useState<Reaction[]>([]);
-  const [reactionsEnabled, SetreactionsEnabled] = useState(false);
+  const [reactionsEnabled, setReactionsEnabled] = useState(enabled);
   const REACTIONS_LIMIT = 1000;
 
   const reactionReceiverRef = useRef(null);
@@ -38,7 +39,7 @@ const ReactionsReceiver = ({ className }: Props) => {
     return formattedReactions;
   };
 
-  useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { id, text, ts } }) => {
+  useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { text } }) => {
     if (reactionsToShow.length < REACTIONS_LIMIT && reactionsEnabled) {
       const splitReactions: string[] = text.split(',');
       const formattedReactions: Reaction[] = formatReactions(splitReactions);
@@ -62,7 +63,7 @@ const ReactionsReceiver = ({ className }: Props) => {
   useEffect(() => {
     // CLEAN SVGs FROM DOM
     const enabledTimeout = setTimeout(() => {
-      SetreactionsEnabled(true);
+      setReactionsEnabled(true);
     }, 5000);
 
     return () => {
@@ -81,6 +82,7 @@ const ReactionsReceiver = ({ className }: Props) => {
           const { id, reaction, xCoordinate, yCoordinate, animation } = mappedReaction;
           return (
             <span
+              data-testid="reaction-to-show"
               style={{
                 position: 'absolute',
                 left: xCoordinate,
