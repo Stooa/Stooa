@@ -61,4 +61,62 @@ describe('Reactions sender component', () => {
 
     expect(shownEmoji).toBeInTheDocument(1);
   });
+
+  it('It shows two emoji when clicks two', () => {
+    useStooa.mockReturnValue({ isModerator: false });
+    useRouter.mockReturnValue({ query: '' });
+
+    const { getByTestId, getAllByTestId } = render(<ReactionsSender />);
+
+    const reactionWrapper = getByTestId('reactions-wrapper');
+    const agreeEmoji = getByTestId('agree-emoji');
+
+    fireEvent.click(reactionWrapper);
+    fireEvent.click(agreeEmoji);
+    fireEvent.click(agreeEmoji);
+
+    const shownEmojis = getAllByTestId('emoji-shown');
+
+    expect(shownEmojis.length).toBe(2);
+  });
+
+  it('It shows ten emoji when clicks ten times', () => {
+    useStooa.mockReturnValue({ isModerator: false });
+    useRouter.mockReturnValue({ query: '' });
+
+    const { getByTestId, getAllByTestId } = render(<ReactionsSender />);
+
+    const reactionWrapper = getByTestId('reactions-wrapper');
+    const agreeEmoji = getByTestId('agree-emoji');
+
+    fireEvent.click(reactionWrapper);
+
+    for (let count = 0; count < 10; count++) {
+      fireEvent.click(agreeEmoji);
+    }
+
+    const shownEmojis = getAllByTestId('emoji-shown');
+
+    expect(shownEmojis.length).toBe(10);
+  });
+
+  it('It shows ten emoji when clicks 20 times', () => {
+    useStooa.mockReturnValue({ isModerator: false });
+    useRouter.mockReturnValue({ query: '' });
+
+    const { getByTestId, getAllByTestId } = render(<ReactionsSender />);
+
+    const reactionWrapper = getByTestId('reactions-wrapper');
+    const agreeEmoji = getByTestId('agree-emoji');
+
+    fireEvent.click(reactionWrapper);
+
+    for (let count = 0; count < 20; count++) {
+      fireEvent.click(agreeEmoji);
+    }
+
+    const shownEmojis = getAllByTestId('emoji-shown');
+
+    expect(shownEmojis.length).toBe(10);
+  });
 });
