@@ -19,6 +19,7 @@ describe('Reactions sender component', () => {
   it('It renders the component as moderator', () => {
     useStooa.mockReturnValue({ isModerator: true });
     useRouter.mockReturnValue({ query: '' });
+
     const { container, getByTestId } = render(<ReactionsSender />);
 
     const isModeratorClassName = container.getElementsByClassName('moderator');
@@ -59,7 +60,7 @@ describe('Reactions sender component', () => {
 
     const shownEmoji = getByTestId('emoji-shown');
 
-    expect(shownEmoji).toBeInTheDocument(1);
+    expect(shownEmoji).toBeInTheDocument();
   });
 
   it('It shows two emoji when clicks two times', () => {

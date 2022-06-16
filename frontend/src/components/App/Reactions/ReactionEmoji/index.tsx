@@ -13,7 +13,7 @@ import { StyledEmojiReaction } from './styles';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   emoji: 'agree' | 'disagree' | 'love' | 'applause' | 'joy' | 'wave' | 'insightful';
-  onClick: (mouseEvent: React.MouseEvent) => void;
+  onClick?: (mouseEvent: React.MouseEvent) => void;
   disabled?: boolean;
 }
 
@@ -65,6 +65,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
 
   return (
     <StyledEmojiReaction
+      data-testid={`emoji-reaction-${emoji}`}
       ref={reactionRef}
       className={disabled ? 'disabled' : ''}
       id={emoji}
