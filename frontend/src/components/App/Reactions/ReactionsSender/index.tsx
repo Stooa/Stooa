@@ -86,7 +86,6 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
 
   useEffect(() => {
     if (debouncedEmojis.length > 0) {
-      // Send here emojis to sendmessage jitsi
       const firstTenEmojis = debouncedEmojis.slice(0, 10);
       conferenceRepository.sendTextMessage(firstTenEmojis.join(','));
 

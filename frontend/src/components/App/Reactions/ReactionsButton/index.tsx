@@ -77,6 +77,7 @@ const ReactionsButton = ({ disabled }: Props) => {
     <StyledWrapper ref={wrapperRef} data-testid="wrapper-reactions-button">
       {showReactions && (
         <ReactionsSender
+          data-testid="reactions-sender"
           className={animation}
           onMouseLeave={width < 680 ? () => null : handleOnMouseLeave}
         />

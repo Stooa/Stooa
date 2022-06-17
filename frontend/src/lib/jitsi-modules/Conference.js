@@ -131,12 +131,6 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
-  /**
-   *
-   * @param {string} id ID of the message
-   * @param {string} text Message content
-   * @param {number} ts Timestamp
-   */
   const _handleMessageReceived = (id, text, timestamp) => {
     dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
@@ -386,12 +380,10 @@ const conferenceRepository = () => {
     conference.kickParticipant(id, reason);
   };
 
-  /**
-   * Send message to all the participants in the conference.
-   * @param {string} message
-   */
   const sendTextMessage = message => {
-    conference.sendTextMessage(message);
+    if (isJoined) {
+      conference.sendTextMessage(message);
+    }
   };
 
   return {
