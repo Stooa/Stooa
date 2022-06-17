@@ -198,6 +198,8 @@ When('starts fishbowl', () => {
     }
   });
 
+  cy.wait(1000);
+
   cy.get('[data-testid=finish-fishbowl]').should('exist');
 
   cy.screenshot();
