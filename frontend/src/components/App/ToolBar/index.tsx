@@ -25,6 +25,7 @@ import ButtonConfig from '@/components/App/ButtonConfig';
 import { Container } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
+import Button from "@/components/Common/Button";
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -35,6 +36,10 @@ const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
 
   const configButtonRef = useRef(null);
+
+  const startRecording = () => {
+    console.log('hola');
+  }
 
   const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
@@ -157,6 +162,10 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
+      {
+        isModerator && conferenceReady &&
+        <Button onClick={startRecording}>Recording</Button>
+      }
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
         handleVideo={handleVideo}

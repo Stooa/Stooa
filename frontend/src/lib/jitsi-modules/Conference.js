@@ -374,6 +374,21 @@ const conferenceRepository = () => {
     conference.kickParticipant(id, reason);
   };
 
+  const startRecording = () => {
+    const options= { appData: '', broadcastId: '', mode: '', streamId: '' };
+
+    const recordingConfig = {
+      mode: 'file',
+      appData: JSON.stringify({
+        'file_recording_metadata': {
+          'share': shouldShare
+        }
+      })
+    };
+
+    conference.startRecording(options);
+  };
+
   return {
     addTrack,
     getLocalVideoTrack,
@@ -389,7 +404,8 @@ const conferenceRepository = () => {
     kickParticipant,
     leave,
     sendJoinEvent,
-    sendLeaveEvent
+    sendLeaveEvent,
+    startRecording
   };
 };
 

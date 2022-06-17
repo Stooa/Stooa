@@ -109,6 +109,10 @@ const kickParticipant = (id, reason) => {
   return conferenceRepository.kickParticipant(id, reason);
 };
 
+const startRecording = () => {
+  conferenceRepository.startRecording();
+};
+
 export {
   getParticipantCount,
   getParticipantList,
@@ -119,5 +123,6 @@ export {
   leave,
   unload,
   kickParticipant,
-  unloadKickedUser
+  unloadKickedUser,
+  startRecording
 };
