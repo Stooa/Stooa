@@ -8,3 +8,4 @@
 .certs
 .idea
 jitsi-meet-cfg
+/node_modules

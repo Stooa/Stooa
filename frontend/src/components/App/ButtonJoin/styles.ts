@@ -11,6 +11,7 @@ import styled from 'styled-components';
 
 import ActionButton from '@/ui/ActionButton';
 import {
+  COLOR_NEUTRO_300,
   COLOR_GREEN_400,
   COLOR_GREEN_500,
   COLOR_GREEN_600,
@@ -22,15 +23,17 @@ import {
   COLOR_RED_500,
   COLOR_RED_600
 } from '@/ui/settings';
-import { rems } from '@/ui/helpers';
+import { media, rems } from '@/ui/helpers';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
-const Button = styled(ActionButton)`
+const StyledButton = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
 
   .button {
     position: relative;
     background-color: ${COLOR_GREEN_500};
     color: ${COLOR_NEUTRO_100};
+    border: none;
 
     & > svg {
       height: ${rems(24)};
@@ -52,6 +55,16 @@ const Button = styled(ActionButton)`
 
   .text {
     color: ${COLOR_GREEN_500};
+    padding-top: 3.125px;
+
+    ${BODY_XS}
+    line-height: 1.1;
+
+    ${media.min('tablet')`
+      padding-top: 2px;
+      ${BODY_SM}
+      line-height: 1.1;
+    `}
   }
 
   * {
@@ -117,9 +130,9 @@ const Button = styled(ActionButton)`
     pointer-events: none;
 
     .button {
-      background-color: ${COLOR_NEUTRO_400};
+      background-color: ${COLOR_NEUTRO_300};
       border-color: ${COLOR_NEUTRO_400};
-      color: ${COLOR_NEUTRO_100};
+      color: ${COLOR_NEUTRO_200};
     }
 
     .alert {
@@ -135,4 +148,4 @@ const Button = styled(ActionButton)`
   }
 `;
 
-export default Button;
+export default StyledButton;

@@ -11,7 +11,7 @@ export interface UAEvent {
   action?: string;
   category?: string;
   label?: string;
-  value?: string;
+  value?: number;
 }
 
 export interface UAPageView {

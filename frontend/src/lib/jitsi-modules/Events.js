@@ -16,3 +16,4 @@ export const NOTIFICATION = 'notification';
 export const NOTIFICATION_CLOSE = 'notification:close';
 export const LOCALTRACK_STOPPED = 'localtrack:stopped';
 export const PERMISSION_CHANGED = 'permission:changed';
+export const REACTION_MESSAGE_RECEIVED = 'reaction:received';

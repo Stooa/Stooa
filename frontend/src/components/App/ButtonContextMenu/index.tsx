@@ -9,7 +9,7 @@
 
 import { StyledContextMenu, StyledButtonContext, StyledButton } from './styles';
 import DotsSvg from '@/ui/svg/dots.svg';
-import { useEffect, useRef, useState, useCallback, MouseEventHandler } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
 import { Participant } from '@/types/participant';

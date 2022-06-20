@@ -16,7 +16,7 @@ import userRepository from '@/jitsi/User';
 import ArrowDownIcon from '@/ui/svg/arrow-down.svg';
 import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
-import Button from '@/components/App/ButtonJoin/styles';
+import StyledButton from '@/components/App/ButtonJoin/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 
 interface Props {
@@ -51,8 +51,8 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
   };
 
   return (
-    <Button
-      className={`body-sm medium ${joined ? 'joined' : ''}`}
+    <StyledButton
+      className={`medium ${joined ? 'joined' : ''}`}
       onClick={handleJoinClick}
       disabled={disabled}
       active={active}
@@ -66,7 +66,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
         {joined ? <ArrowDownIcon /> : <ArrowUpIcon />}
       </div>
       <div className="text">{children}</div>
-    </Button>
+    </StyledButton>
   );
 };
 

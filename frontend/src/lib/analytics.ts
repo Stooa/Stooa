@@ -13,7 +13,7 @@ const dataLayerPush = (data: Record<string, unknown>) => {
   window?.dataLayer && window.dataLayer.push(data);
 };
 
-const pushEventDataLayer = ({ action = '', category = '', label = '', value = '' }: UAEvent) => {
+const pushEventDataLayer = ({ action = '', category = '', label = '', value = 0 }: UAEvent) => {
   const event = {
     event: 'GAEvent',
     eventCategory: category,

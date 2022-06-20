@@ -9,7 +9,7 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START, PERMISSION_CHANGED } from '@/jitsi/Events';
+import { CONFERENCE_START, PERMISSION_CHANGED, REACTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -131,6 +131,10 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  const _handleMessageReceived = (id, text, timestamp) => {
+    dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
+  };
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -147,7 +151,8 @@ const conferenceRepository = () => {
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
-          DOMINANT_SPEAKER_CHANGED
+          DOMINANT_SPEAKER_CHANGED,
+          MESSAGE_RECEIVED
         }
       }
     } = JitsiMeetJS;
@@ -168,6 +173,7 @@ const conferenceRepository = () => {
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
+    conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -375,18 +381,24 @@ const conferenceRepository = () => {
   };
 
   const startRecording = () => {
-    const options= { appData: '', broadcastId: '', mode: '', streamId: '' };
+    const options = { appData: '', broadcastId: '', mode: '', streamId: '' };
 
     const recordingConfig = {
       mode: 'file',
       appData: JSON.stringify({
-        'file_recording_metadata': {
-          'share': shouldShare
+        file_recording_metadata: {
+          share: shouldShare
         }
       })
     };
 
     conference.startRecording(options);
+  };
+
+  const sendTextMessage = message => {
+    if (isJoined) {
+      conference.sendTextMessage(message);
+    }
   };
 
   return {
@@ -405,7 +417,8 @@ const conferenceRepository = () => {
     leave,
     sendJoinEvent,
     sendLeaveEvent,
-    startRecording
+    startRecording,
+    sendTextMessage
   };
 };
 

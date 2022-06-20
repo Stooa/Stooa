@@ -39,4 +39,4 @@ jobs:
                   create-file-commit-message: 'Creating file for storing DCO Signatures'
                   signed-commit-message: '$contributorName has signed the DCO in #$pullRequestNo'
                   custom-allsigned-prcomment: '**DCO Assistant** All Contributors have signed the DCO. 📝 ✅ '
-                  allowlist: stooa-dev,weblate,renovate-bot
+                  allowlist: stooa-dev,weblate,renovate-bot,renovate[bot]

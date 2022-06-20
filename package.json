@@ -1,0 +1,10 @@
+{
+    "devDependencies": {
+        "auto-changelog": "2.4.0"
+    },
+    "auto-changelog": {
+        "template": "keepachangelog",
+        "unreleased": false,
+        "commitLimit": 0
+    }
+}
