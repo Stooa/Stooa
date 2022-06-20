@@ -132,7 +132,7 @@ const StyledButton = styled(ActionButton)`
     .button {
       background-color: ${COLOR_NEUTRO_300};
       border-color: ${COLOR_NEUTRO_400};
-      color: ${COLOR_NEUTRO_400};
+      color: ${COLOR_NEUTRO_200};
     }
 
     .alert {
