@@ -27,6 +27,7 @@ import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import Button from '@/components/Common/Button';
 import ReactionsButton from '../Reactions/ReactionsButton';
+import conference from "@/jitsi/Conference";
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -39,7 +40,7 @@ const ToolBar: React.FC = () => {
   const configButtonRef = useRef(null);
 
   const startRecording = () => {
-    console.log('hola');
+    conference.startRecording();
   };
 
   const joinSeat = async (user: User) => {

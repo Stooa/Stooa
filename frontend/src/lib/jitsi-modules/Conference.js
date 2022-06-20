@@ -218,7 +218,7 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
+    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.DEBUG);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);
@@ -387,12 +387,24 @@ const conferenceRepository = () => {
       mode: 'file',
       appData: JSON.stringify({
         file_recording_metadata: {
-          share: shouldShare
+          share: true
         }
       })
     };
 
-    conference.startRecording(options);
+    const recordingDropboxConfig = {
+      mode: 'file',
+      appData: JSON.stringify({
+        'file_recording_metadata': {
+          'upload_credentials': {
+            'service_name': 'dropbox',
+            'token': 'token'
+          }
+        }
+      })
+    };
+
+    conference.startRecording(recordingConfig);
   };
 
   const sendTextMessage = message => {
