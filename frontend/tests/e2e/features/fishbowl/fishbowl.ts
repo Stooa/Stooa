@@ -108,42 +108,6 @@ When('sees the fishbowl page', () => {
   cy.screenshot();
 });
 
-When('starts fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
-    }
-  });
-
-  cy.intercept('GET', 'https://localhost:8443/en/ping/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      response: true
-    }
-  });
-
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-participants/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      response: []
-    }
-  });
-
-  cy.contains('Start the fishbowl').click();
-
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'RUNNING'
-    }
-  });
-
-  cy.get('[data-testid=finish-fishbowl]').should('exist');
-
-  cy.screenshot();
-});
-
 Then('finishes a fishbowl', () => {
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,

@@ -22,9 +22,10 @@ import ButtonJoin from '@/components/App/ButtonJoin';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
 import ButtonConfig from '@/components/App/ButtonConfig';
-import { Container } from '@/components/App/ToolBar/styles';
+import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
+import ReactionsButton from '../Reactions/ReactionsButton';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -144,10 +145,12 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
+  const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
+
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 
   return (
-    <Container className={isModerator ? 'moderator' : ''}>
+    <StyledToolbar className={isModerator ? 'moderator' : ''}>
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}
@@ -157,6 +160,7 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
+      <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
         handleVideo={handleVideo}
@@ -164,7 +168,7 @@ const ToolBar: React.FC = () => {
         disabled={isMuteDisabled || !permissions.video}
       />
       <ButtonConfig selectorPosition="top" ref={configButtonRef} />
-    </Container>
+    </StyledToolbar>
   );
 };
 
