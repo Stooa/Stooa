@@ -10,8 +10,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { StyledButtonReaction, StyledWrapper } from './styles';
 import ReactionsSender from '../ReactionsSender';
-import Laugh from '@/ui/svg/emojis/laugh.svg';
-import Plus from '@/ui/svg/emojis/plus.svg';
+import ReactionsButtonSvg from '@/ui/svg/emojis/reactions-button.svg';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -88,10 +87,7 @@ const ReactionsButton = ({ disabled }: Props) => {
         ref={reactionButtonRef}
         onClick={handleClick}
       >
-        <div className="plus">
-          <Plus />
-        </div>
-        <Laugh />
+        <ReactionsButtonSvg />
         <div className="label medium">{t('reactions')}</div>
       </StyledButtonReaction>
     </StyledWrapper>

@@ -45,21 +45,6 @@ const StyledButtonReaction = styled.button`
       opacity: 0.5;
     }
   }
-
-  & > .plus {
-    position: absolute;
-    top: 0;
-    right: 4px;
-    z-index: 1;
-
-    & > svg path {
-      fill: currentColor;
-    }
-
-    ${media.min('tablet')`
-      right: 8px;
-    `}
-  }
 `;
 
 export { StyledButtonReaction, StyledWrapper };
