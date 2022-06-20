@@ -69,7 +69,6 @@
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.4.1",
     "@typescript-eslint/eslint-plugin": "5.28.0",
-    "auto-changelog": "2.4.0",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.5.4",
@@ -87,10 +86,5 @@
     "jest-transformer-svg": "2.0.0",
     "nyc": "15.1.0",
     "prettier": "2.6.2"
-  },
-  "auto-changelog": {
-    "template": "keepachangelog",
-    "unreleased": false,
-    "commitLimit": 0
   }
 }
