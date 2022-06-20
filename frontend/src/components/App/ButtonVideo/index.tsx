@@ -53,7 +53,7 @@ const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled
     >
       <div className="button">{muted || disabled ? <VideoMutedIcon /> : <VideoIcon />}</div>
       {!unlabeled && (
-        <span className="text medium">{!joined || muted ? t('videoUnmute') : t('videoMute')}</span>
+        <div className="text medium">{!joined || muted ? t('videoUnmute') : t('videoMute')}</div>
       )}
     </Button>
   );

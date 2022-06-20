@@ -22,6 +22,8 @@ import {
   COLOR_RED_500,
   COLOR_RED_600
 } from '@/ui/settings';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
+import { media } from '@/ui/helpers';
 
 const Button = styled(ActionButton)`
   ${({ active }) => (!active ? 'pointer-events: none;' : '')}
@@ -33,6 +35,13 @@ const Button = styled(ActionButton)`
 
   .text {
     color: ${COLOR_NEUTRO_600};
+
+    ${BODY_XS}
+    line-height: 1.5;
+
+    ${media.min('tablet')`
+      ${BODY_SM}
+    `}
   }
 
   &:hover {
