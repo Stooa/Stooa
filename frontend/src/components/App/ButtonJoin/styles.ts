@@ -33,6 +33,7 @@ const StyledButton = styled(ActionButton)`
     position: relative;
     background-color: ${COLOR_GREEN_500};
     color: ${COLOR_NEUTRO_100};
+    border: none;
 
     & > svg {
       height: ${rems(24)};
