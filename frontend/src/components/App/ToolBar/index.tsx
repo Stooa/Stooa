@@ -39,6 +39,10 @@ const ToolBar: React.FC = () => {
 
   const configButtonRef = useRef(null);
 
+  const stopRecording = () => {
+    conference.stopRecording();
+  };
+
   const startRecording = () => {
     conference.startRecording();
   };
@@ -167,6 +171,7 @@ const ToolBar: React.FC = () => {
         {joinLabel}
       </ButtonJoin>
       {isModerator && conferenceReady && <Button onClick={startRecording}>Recording</Button>}
+      {isModerator && conferenceReady && <Button onClick={stopRecording}>Stop Recording</Button>}
       <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo

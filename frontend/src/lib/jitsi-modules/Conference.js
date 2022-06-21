@@ -14,6 +14,8 @@ import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
 import userRepository from '@/jitsi/User';
+import LocaleCookie from "@/lib/LocaleCookie";
+import RecordingCookie from "@/RecordingCookie";
 
 const conferenceRepository = () => {
   let connection;
@@ -24,6 +26,7 @@ const conferenceRepository = () => {
   let isJoined = false;
   let twitter = false;
   let linkedin = false;
+  let sessionID;
 
   const joinUser = (id, user) => {
     if (id === undefined || id === null) {
@@ -135,6 +138,13 @@ const conferenceRepository = () => {
     dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
 
+  const _handleRecorderStateChanged = (recorderSession) => {
+    sessionID = recorderSession._sessionID;
+    RecordingCookie.setLocaleCookie(sessionID);
+    console.log('[Stooa] Recorded State Changed', recorderSession);
+    console.log('')
+  }
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -152,7 +162,8 @@ const conferenceRepository = () => {
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
           DOMINANT_SPEAKER_CHANGED,
-          MESSAGE_RECEIVED
+          MESSAGE_RECEIVED,
+          RECORDER_STATE_CHANGED
         }
       }
     } = JitsiMeetJS;
@@ -174,6 +185,7 @@ const conferenceRepository = () => {
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
     conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
+    conference.on(RECORDER_STATE_CHANGED, _handleRecorderStateChanged);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -218,7 +230,7 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.DEBUG);
+    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);
@@ -404,7 +416,16 @@ const conferenceRepository = () => {
       })
     };
 
-    conference.startRecording(recordingConfig);
+    const hola = conference.startRecording(recordingConfig);
+    console.log(hola);
+  };
+
+  const stopRecording = () => {
+    const recordingCookie = RecordingCookie.getCurrentLocaleCookie();
+    console.log('Session ID', recordingCookie);
+    if (recordingCookie) {
+      conference.stopRecording(recordingCookie);
+    }
   };
 
   const sendTextMessage = message => {
@@ -430,6 +451,7 @@ const conferenceRepository = () => {
     sendJoinEvent,
     sendLeaveEvent,
     startRecording,
+    stopRecording,
     sendTextMessage
   };
 };

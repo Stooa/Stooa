@@ -18,6 +18,7 @@ security:
         - { path: ^/admin/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
+        - { path: ^/webhooks, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/refresh-token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/docs$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
