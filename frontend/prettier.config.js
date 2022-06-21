@@ -7,7 +7,24 @@
  * file that was distributed with this source code.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const prettierConfig = require('@runroom/npm-scripts').prettier;
-
-module.exports = prettierConfig;
+module.exports = {
+  arrowParens: 'avoid',
+  bracketSpacing: true,
+  printWidth: 100,
+  proseWrap: 'always',
+  quoteProps: 'consistent',
+  semi: true,
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'none',
+  useTabs: false,
+  overrides: [
+    {
+      files: ['*.scss', '*.css', '*.yaml', '*.yml', 'composer.json'],
+      options: {
+        singleQuote: false,
+        tabWidth: 4
+      }
+    }
+  ]
+};
