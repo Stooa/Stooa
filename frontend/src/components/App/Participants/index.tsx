@@ -97,28 +97,6 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
     return 0;
   };
 
-  const handleShowMutedIcons = () => {
-    participants.forEach(participant => {
-      const participantElement = document.querySelector(
-        `.participant[data-id="${participant.id}"]`
-      );
-
-      if (participantElement) {
-        if (participant.isMuted) {
-          participantElement.classList.add('user-muted-audio');
-        } else {
-          participantElement.classList.remove('user-muted-audio');
-        }
-
-        if (participant.isVideoMuted) {
-          participantElement.classList.add('user-muted-video');
-        } else {
-          participantElement.classList.remove('user-muted-video');
-        }
-      }
-    });
-  };
-
   useEffect(() => {
     if (!initialized) {
       pingParticipant();
@@ -153,10 +131,6 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
     setSpeakingParticipants(tempSpeakingParticipants);
     setRoomParticipants(tempRoomParticipants);
   }, [participants]);
-
-  useEffect(() => {
-    handleShowMutedIcons();
-  }, [speakingParticipants, roomParticipants]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

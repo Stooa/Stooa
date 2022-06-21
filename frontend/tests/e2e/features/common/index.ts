@@ -55,6 +55,14 @@ When('clicks on {string} button', (text = '') => {
   cy.findAllByRole('button', { name: text }).first().click({ force: true });
 });
 
+When('clicks on {string}', (text = '') => {
+  cy.contains(text).click();
+});
+
+When('clicks to close modal', (text = '') => {
+  cy.get('button[class="close"]').click({ force: true });
+});
+
 /**
  * @param {string} newValue Is the user's input
  * @param {string} fieldName The field to select by name
@@ -157,4 +165,42 @@ Given('a desktop computer', () => {
 
 Given('a mobile device', () => {
   cy.viewport('iphone-6');
+});
+
+When('starts fishbowl', () => {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
+    statusCode: 200,
+    body: {
+      status: 'NOT_STARTED'
+    }
+  });
+
+  cy.intercept('GET', 'https://localhost:8443/en/ping/test-fishbowl', {
+    statusCode: 200,
+    body: {
+      response: true
+    }
+  });
+
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-participants/test-fishbowl', {
+    statusCode: 200,
+    body: {
+      response: []
+    }
+  });
+
+  cy.contains('Start the fishbowl').click();
+
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
+    statusCode: 200,
+    body: {
+      status: 'RUNNING'
+    }
+  });
+
+  cy.wait(1000);
+
+  cy.get('[data-testid=finish-fishbowl]').should('exist');
+
+  cy.screenshot();
 });

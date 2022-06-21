@@ -50,7 +50,7 @@ const Header: React.FC<Props> = ({ data }) => {
               </Button>
             </RedirectLink>
             <RedirectLink href={`${ROUTE_REGISTER}?redirect=${redirectPath}`} passHref>
-              <Button size="medium" variant="secondary" as="a">
+              <Button className="never-full" size="medium" variant="secondary" as="a">
                 <span>{t('register')}</span>
               </Button>
             </RedirectLink>

@@ -7,12 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState, useEffect, useMemo } from 'react';
 
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
 import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
+import useEventListener from '@/hooks/useEventListener';
+import { PERMISSION_CHANGED } from '@/jitsi/Events';
 
 const DevicesContext = createContext<DevicesCtx>(undefined);
 
@@ -31,6 +33,18 @@ const DevicesProvider = ({ children }) => {
   const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo | null>(
     userRepository.getUserVideoInput()
   );
+  const [permissions, setPermissions] = useState({
+    audio: true,
+    video: true
+  });
+  const [showModalPermissions, setShowModalPermissions] = useState<boolean>(false);
+
+  const _getPermissions = async () => {
+    return {
+      audio: await devicesRepository.isDevicePermissionGranted('audio'),
+      video: await devicesRepository.isDevicePermissionGranted('video')
+    };
+  };
 
   const _findDevice = (
     deviceId: string,
@@ -98,6 +112,12 @@ const DevicesProvider = ({ children }) => {
     setVideoDevice(device);
   };
 
+  useEventListener(PERMISSION_CHANGED, permissions => {
+    if (permissions.detail) {
+      setPermissions(permissions.detail);
+    }
+  });
+
   useEffect(() => {
     if (
       devices.audioOutputDevices.length > 0 &&
@@ -122,6 +142,14 @@ const DevicesProvider = ({ children }) => {
       userRepository.setUserVideoInput(devices.videoDevices[0]);
       setVideoDevice(devices.videoDevices[0]);
     }
+
+    _getPermissions()
+      .then(browserPermissions => {
+        setPermissions(browserPermissions);
+      })
+      .catch(err => {
+        console.error('[STOOA] Error getting permissions:', err);
+      });
   }, [devices]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -142,7 +170,10 @@ const DevicesProvider = ({ children }) => {
         audioOutputDevice,
         audioInputDevice,
         videoDevice,
-        devices
+        devices,
+        permissions,
+        showModalPermissions,
+        setShowModalPermissions
       }}
     >
       {children}

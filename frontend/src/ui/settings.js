@@ -18,7 +18,8 @@ const BREAKPOINTS = {
   phone: 480,
   reader: 550,
   tablet: 768,
-  tabletLarge: 992
+  tabletLarge: 992,
+  smallestIphone: 376
 };
 
 const BORDER_RADIUS = '5px';

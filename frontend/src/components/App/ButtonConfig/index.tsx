@@ -15,7 +15,15 @@ import MicIcon from '@/ui/svg/mic.svg';
 import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
 import CheckIcon from '@/ui/svg/checkmark.svg';
-import { Button, Container, Item, List, Selector } from '@/components/App/ButtonConfig/styles';
+import Cross from '@/ui/svg/cross.svg';
+import {
+  Button,
+  Container,
+  Item,
+  List,
+  PermissionsNotGranted,
+  Selector
+} from '@/components/App/ButtonConfig/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 
 interface Props {
@@ -33,7 +41,8 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
     videoDevice,
     selectAudioOutputDevice,
     selectAudioInputDevice,
-    selectVideoDevice
+    selectVideoDevice,
+    permissions
   } = useDevices();
   const { t } = useTranslation('fishbowl');
 
@@ -77,19 +86,22 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
         <div className="button">
           <SettingsIcon />
         </div>
-        {!unlabeled && <span className="text medium">{t('settings')}</span>}
+        {!unlabeled && <div className="text medium">{t('settings')}</div>}
       </Button>
-      {showDevices &&
-        (devices.audioInputDevices.length > 0 ||
-          devices.audioOutputDevices.length > 0 ||
-          devices.videoDevices.length > 0) && (
-          <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
-            {devices.audioInputDevices.length > 0 && (
-              <List>
-                <li className="title">
-                  <MicIcon /> {t('mic')}
-                </li>
-                {devices.audioInputDevices.map(({ deviceId, label }) => (
+      {showDevices && (
+        <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
+          {devices.audioInputDevices.length > 0 && (
+            <List>
+              <li className="title">
+                <MicIcon /> {t('mic')}
+              </li>
+              {!permissions.audio ? (
+                <PermissionsNotGranted>
+                  <Cross />
+                  <span>Permission not granted</span>
+                </PermissionsNotGranted>
+              ) : (
+                devices.audioInputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
@@ -103,15 +115,22 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                       </span>
                     </Item>
                   </li>
-                ))}
-              </List>
-            )}
-            {devices.audioOutputDevices.length > 0 && (
-              <List>
-                <li className="title">
-                  <SpeakerIcon /> {t('speaker')}
-                </li>
-                {devices.audioOutputDevices.map(({ deviceId, label }) => (
+                ))
+              )}
+            </List>
+          )}
+          {devices.audioOutputDevices.length > 0 && (
+            <List>
+              <li className="title">
+                <SpeakerIcon /> {t('speaker')}
+              </li>
+              {!permissions.audio ? (
+                <PermissionsNotGranted>
+                  <Cross />
+                  <span>Permission not granted</span>
+                </PermissionsNotGranted>
+              ) : (
+                devices.audioOutputDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
@@ -125,15 +144,22 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                       </span>
                     </Item>
                   </li>
-                ))}
-              </List>
-            )}
-            {devices.videoDevices.length > 0 && (
-              <List>
-                <li className="title">
-                  <VideoIcon /> {t('cam')}
-                </li>
-                {devices.videoDevices.map(({ deviceId, label }) => (
+                ))
+              )}
+            </List>
+          )}
+          {devices.videoDevices.length > 0 && (
+            <List>
+              <li className="title">
+                <VideoIcon /> {t('cam')}
+              </li>
+              {!permissions.video ? (
+                <PermissionsNotGranted>
+                  <Cross />
+                  <span>Permission not granted</span>
+                </PermissionsNotGranted>
+              ) : (
+                devices.videoDevices.map(({ deviceId, label }) => (
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
@@ -147,11 +173,12 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                       </span>
                     </Item>
                   </li>
-                ))}
-              </List>
-            )}
-          </Selector>
-        )}
+                ))
+              )}
+            </List>
+          )}
+        </Selector>
+      )}
     </Container>
   );
 });
