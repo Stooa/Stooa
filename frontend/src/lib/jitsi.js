@@ -22,7 +22,7 @@ const join = async user => {
   if (!localTracksCreated) {
     await localTracksRepository.createLocalTracks().then(tracks => {
       tracks.forEach(async track => {
-        tracksRepository.syncLocalStorageTrack(track, user);
+        await tracksRepository.syncLocalStorageTrack(track, user);
         conferenceRepository.addTrack(track);
       });
       localTracksCreated = true;
@@ -40,6 +40,14 @@ const unload = async () => {
   await tracksRepository.disposeTracks();
 
   conferenceRepository.leave();
+
+  localTracksCreated = false;
+};
+
+const unloadKickedUser = async participant => {
+  console.log('[STOOA] Unload kicked user');
+
+  await tracksRepository.disposeTracks(participant.getId());
 
   localTracksCreated = false;
 };
@@ -97,6 +105,10 @@ const getParticipantList = () => {
   return participants;
 };
 
+const kickParticipant = (id, reason) => {
+  return conferenceRepository.kickParticipant(id, reason);
+};
+
 export {
   getParticipantCount,
   getParticipantList,
@@ -105,5 +117,7 @@ export {
   initializeConnection,
   join,
   leave,
-  unload
+  unload,
+  kickParticipant,
+  unloadKickedUser
 };

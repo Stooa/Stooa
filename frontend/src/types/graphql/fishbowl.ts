@@ -37,3 +37,20 @@ export interface UpdateFishbowlOptions {
     };
   };
 }
+
+export interface Fishbowl {
+  id: string;
+  type: string;
+  name: string;
+  description: string;
+  slug: string;
+  timezone: string;
+  locale: string;
+  host: string;
+  currentStatus: string;
+  isFishbowlNow: boolean;
+  hasIntroduction: boolean;
+  startDateTimeTz: string;
+  endDateTimeTz: string;
+  durationFormatted: string;
+}

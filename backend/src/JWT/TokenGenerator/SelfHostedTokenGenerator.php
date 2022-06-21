@@ -20,11 +20,8 @@ use App\JWT\Model\Payload\UserPayload;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
-    private CurrentUserFishbowl $currentUserFishbowl;
-
-    public function __construct(CurrentUserFishbowl $currentUserFishbowl)
+    public function __construct(private readonly CurrentUserFishbowl $currentUserFishbowl)
     {
-        $this->currentUserFishbowl = $currentUserFishbowl;
     }
 
     public function generate(User $user): JWTToken

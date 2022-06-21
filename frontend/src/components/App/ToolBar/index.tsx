@@ -22,30 +22,42 @@ import ButtonJoin from '@/components/App/ButtonJoin';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
 import ButtonConfig from '@/components/App/ButtonConfig';
-import { Container } from '@/components/App/ToolBar/styles';
+import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
+import ReactionsButton from '../Reactions/ReactionsButton';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
+  const [joinIsInactive, setJoinIsInactive] = useState(false);
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
-  const { videoDevice, audioInputDevice, audioOutputDevice } = useDevices();
+  const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
 
   const configButtonRef = useRef(null);
 
-  const joinSeat = (user: User) => {
+  const joinSeat = async (user: User) => {
+    setJoinIsInactive(true);
     if (!joined) {
-      setJoined(true);
-      join(user);
+      await join(user);
+
+      setTimeout(() => {
+        setJoined(true);
+        setJoinIsInactive(false);
+      }, 1200);
     }
   };
 
-  const leaveSeat = () => {
+  const leaveSeat = async () => {
+    setJoinIsInactive(true);
     if (joined) {
-      setJoined(false);
-      leave();
+      await leave();
+
+      setTimeout(() => {
+        setJoined(false);
+        setJoinIsInactive(false);
+      }, 1200);
     }
   };
 
@@ -88,19 +100,19 @@ const ToolBar: React.FC = () => {
   useEventListener('click', handleOutsideClick);
 
   useEffect(() => {
-    if (null !== audioOutputDevice) {
+    if (audioOutputDevice !== null) {
       devicesRepository.changeDevice(audioOutputDevice);
     }
   }, [audioOutputDevice]);
 
   useEffect(() => {
-    if (joined && null !== audioInputDevice) {
+    if (joined && audioInputDevice !== null) {
       devicesRepository.changeDevice(audioInputDevice);
     }
-  }, [audioInputDevice]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [audioInputDevice, permissions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (joined && null !== videoDevice) {
+    if (joined && videoDevice !== null) {
       devicesRepository.changeDevice(videoDevice);
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -124,7 +136,8 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     conferenceStatus === IConferenceStatus.INTRODUCTION ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
-    (!joined && !seatsAvailable);
+    (!joined && !seatsAvailable) ||
+    joinIsInactive;
 
   const isMuteDisabled =
     !conferenceReady ||
@@ -132,17 +145,30 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
+  const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
+
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 
   return (
-    <Container className={isModerator ? 'moderator' : ''}>
-      <ButtonJoin joined={joined} join={joinSeat} leave={leaveSeat} disabled={isActionDisabled}>
+    <StyledToolbar className={isModerator ? 'moderator' : ''}>
+      <ButtonJoin
+        permissions={joined ? true : permissions.audio}
+        joined={joined}
+        join={joinSeat}
+        leave={leaveSeat}
+        disabled={isActionDisabled}
+      >
         {joinLabel}
       </ButtonJoin>
+      <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
-      <ButtonVideo handleVideo={handleVideo} joined={joined} disabled={isMuteDisabled} />
+      <ButtonVideo
+        handleVideo={handleVideo}
+        joined={joined}
+        disabled={isMuteDisabled || !permissions.video}
+      />
       <ButtonConfig selectorPosition="top" ref={configButtonRef} />
-    </Container>
+    </StyledToolbar>
   );
 };
 

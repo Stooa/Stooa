@@ -6,7 +6,9 @@
     "cam": "Caméra",
     "timeLeft_one": "Il reste {{time}}",
     "prejoin": {
-        "title": "Comment les autres participants doivent-ils vous appeler ?"
+        "title": "Join the room",
+        "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
+        "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
     "waiting": "Attendre que l'hôte démarre le fishbowl",
     "finishedEvent": "Le fishbowl est terminé",
@@ -36,12 +38,13 @@
     "videoUnmute": "Démarrer la vidéo",
     "preSubtitle": "Vérifiez les détails de votre nouveau fishbowl :",
     "detail": {
-        "title": "Titre",
-        "startDate": "Date de début",
-        "duration": "Durée",
-        "description": "Description",
-        "language": "Langue",
-        "startTime": "Heure de début"
+        "shareTitle": "Et maintenant ?<br/>Partagez le <i>fishbowl</i> !",
+        "shareSubtitle": "Laissez couler la conversation ! Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.",
+        "shareInSocials": "Ou partagez sur:",
+        "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !",
+        "cardMiniTitle": "Détails du <i>fishbowl</i>",
+        "editFishbowlDetails": "Modifier les détails du <i>fishbowl</i>",
+        "mailInfo": "📩 Vous recevrez un e-mail avec tous les détails du <i>fishbowl</i> que vous avez programmé."
     },
     "months": {
         "10": "octobre",
@@ -66,12 +69,31 @@
     "lastMinute": "Dernière minute",
     "endFishbowl": "Terminer le fishbowl",
     "full": "Plein",
-    "join": "Rejoindre",
-    "leave": "Quitter",
+    "join": "Rejoindre la conversation",
+    "leave": "Quitter la conversation",
+    "reactions": "Réactions",
     "sameAsSystem": "Suivre le système",
     "settings": "Paramètres",
     "timesUp": "Le temps est écoulé",
     "unmute": "Activer le son",
     "mute": "Mettre en sourdine",
-    "videoMute": "Arrêter la vidéo"
+    "videoMute": "Arrêter la vidéo",
+    "kick": {
+        "button": "Kick user",
+        "successMessage": "User kicked successfully.",
+        "modal": {
+            "title": "Why do you want to kick {{userName}}?",
+            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "options": {
+                "noParticipating": "The user occupies a seat without participating.",
+                "conductViolation": "The user has violated the code of conduct of the community."
+            },
+            "button": "Kick user",
+            "cancelButton": "Cancel"
+        }
+    },
+    "permissionsModalTitle": "Permissions needed",
+    "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
+    "permissionsModalButton": "Grant permissions",
+    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue."
 }

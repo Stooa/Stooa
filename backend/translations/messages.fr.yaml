@@ -22,7 +22,11 @@ emails:
         information_text: Si vous ignorez ce message, votre mot de passe ne sera pas modifié.<br>Si vous n’avez pas demandé la réinitialisation de votre mot de passe, <a href="mailto:%email%">faites-le-nous savoir</a>.
         information_help_text: Si ce n’est pas votre compte, vous pouvez supprimer votre adresse électronique de celui-ci. <br>Veuillez ne pas répondre à ce courriel avec votre mot de passe. Nous ne vous demanderons jamais votre mot de passe, et nous vous déconseillons fortement de le partager avec qui que ce soit.
     fishbowl_created_email:
-        description: 'Vérifiez les détails de votre nouveau fishbowl :'
+        title: Et maintenant?<br>Partagez le <i>fishbowl</i> !
+        description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.👇"
+        social_share: "ou partagez sur:"
+        edit_details: "N'oubliez pas que vous pouvez <a style='text-decoration: underline;' href='%edit_link%'>modifier les détails de l'événement</a> jusqu'à une heure avant son début."
+        cta: "Accéder au fishbowl"
         info_url: 'Cliquez ici pour accéder au fishbowl'
         languages:
             es: espagnol
@@ -30,7 +34,6 @@ emails:
             en: anglais
             fr: française
         subject: Bonjour %name% ! Vous avez créé un nouveau fishbowl
-        title: Bien joué !
         info_duration: Durée
         info_description: Description
         info_language: Langue

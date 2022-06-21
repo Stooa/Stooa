@@ -29,18 +29,7 @@ const Container = styled(ContainerDefault)`
 `;
 
 const Header = styled(HeaderDefault)`
-  padding: 0 ${space(3)};
-
-  ${media.max('tablet')`
-    a:last-child {
-      padding-left: ${space(2)};
-      padding-right: ${space(2)};
-    }
-
-    a:first-child {
-      padding-right: ${space(2)};
-    }
-  `}
+  padding: ${space(3)} ${space(3)} 0 ${space(3)};
 
   ${media.min('tablet')`
     padding: ${space(3)} ${space(6)};

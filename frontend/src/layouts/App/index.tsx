@@ -22,7 +22,6 @@ import { DevicesProvider } from '@/contexts/DevicesContext';
 import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const scripts = [
   'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',

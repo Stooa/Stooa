@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -16,6 +16,12 @@ import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
 
 import { Main } from '@/layouts/App/styles';
+import ModalPermissions from '@/components/App/ModalPermissions';
+import { useDevices } from '@/contexts/DevicesContext';
+import ModalKickUser from '@/components/App/ModalKickUser';
+import ReactionsReceiver from '../Reactions/ReactionsReceiver';
+import { pushEventDataLayer } from '@/lib/analytics';
+import { useRouter } from 'next/router';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -24,7 +30,10 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { isModerator } = useStooa();
+  const { isModerator, participantToKick, setParticipantToKick } = useStooa();
+  const { showModalPermissions, setShowModalPermissions } = useDevices();
+
+  const { fid } = useRouter().query;
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -34,11 +43,32 @@ const Fishbowl: FC = () => {
     setParticipantsActive(!participantsActive);
   };
 
+  const handleCloseModalPermissions = () => {
+    setShowModalPermissions(false);
+  };
+
+  useEffect(() => {
+    pushEventDataLayer({
+      action: fid as string,
+      category: 'FishbowlReactions',
+      label: 'Connect'
+    });
+  }, []);
+
   return (
     <>
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
+        {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
+        {participantToKick && (
+          <ModalKickUser
+            participant={participantToKick}
+            onSubmit={() => setParticipantToKick(null)}
+            closeModal={() => setParticipantToKick(null)}
+          />
+        )}
         <Seats />
+        <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
       <Footer participantsActive={participantsActive} />
     </>

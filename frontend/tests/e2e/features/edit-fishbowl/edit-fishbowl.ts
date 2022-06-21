@@ -9,18 +9,7 @@
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
-const modifiedValues = {
-  title: '',
-  hours: '',
-  description: '',
-  startDateTimeTz: new Date(),
-  duration: '',
-  durationFormatted: '',
-  timezone: '',
-  locale: '',
-  language: '',
-  hasIntroduction: false
-};
+import { modifiedValues } from '../common';
 
 When('clicks on fishbowl card', () => {
   cy.wait('@getOneFishbowlsListQuery');
@@ -37,7 +26,6 @@ When('clicks on fishbowl card that is about to start', () => {
 });
 
 Then('sees the fishbowl edit form full of information', () => {
-  cy.wait(1000);
   cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
   cy.get('[data-testid=edit-form-description]').should('have.value', 'Fishbowl description');
   cy.get('input[name="day"]').should('have.value', '11/02/2030');
@@ -45,32 +33,7 @@ Then('sees the fishbowl edit form full of information', () => {
   cy.screenshot();
 });
 
-When('modifies the fishbowl {string} writing {string}', (fieldName = '', newValue = '') => {
-  cy.get(`:is(input, textarea, div)[name=${fieldName}]`).clear().type(newValue);
-  modifiedValues[fieldName] = newValue;
-});
-
-When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
-  cy.get(`select[name=${fieldName}]`).select(newValue);
-  modifiedValues[fieldName] = newValue;
-  console.log(modifiedValues);
-});
-
-When('modifies the fishbowl {string} to true', (fieldName = '') => {
-  cy.get(`input[name=${fieldName}]`).click({ force: true });
-  modifiedValues[fieldName] = true;
-});
-
 When('saves the changes', () => {
-  cy.get('form').submit();
-});
-
-Then('sees success message', () => {
-  cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
-  cy.screenshot();
-});
-
-Given('an updated fishbowl', () => {
   const mergedValues = {
     data: {
       updateFishbowl: {
@@ -94,11 +57,17 @@ Given('an updated fishbowl', () => {
   cy.intercept('POST', 'https://localhost:8443/graphql', mergedValues).as(
     'gqlUpdateFishbowlMutation'
   );
+
+  cy.get('form').submit();
+});
+
+Then('sees the success message', () => {
+  cy.wait('@gqlUpdateFishbowlMutation');
+
+  cy.get('span.success-message-bottom').should('exist');
 });
 
 Then('sees the fishbowl list updated', () => {
-  cy.wait('@gqlUpdateFishbowlMutation');
-
   const startDateTime = new Date(modifiedValues.startDateTimeTz);
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
@@ -126,14 +95,5 @@ Then('sees a placeholder with Enter Fishbowl button', () => {
 });
 
 Then('clicks on placeholders Enter Fishbowl link', () => {
-  cy.wait(2000);
   cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
-});
-
-Then('sees success messages', () => {
-  cy.get('span.success-message-bottom').should('exist');
-
-  cy.wait(5500);
-  cy.get('span.success-message-top').should('not.exist');
-  cy.get('span.success-message-bottom').should('not.exist');
 });

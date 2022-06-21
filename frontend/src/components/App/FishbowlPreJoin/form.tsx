@@ -26,6 +26,7 @@ interface FormValues {
 }
 
 interface FormProps {
+  notEmpty: string;
   required: string;
   onSubmit: (values: FormValues) => void;
 }
@@ -59,7 +60,12 @@ const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
   validationSchema: props => {
     return Yup.object({
-      name: Yup.string().required(props.required)
+      name: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
@@ -75,6 +81,7 @@ const Nickname = () => {
   const { t } = useTranslation('form');
 
   const requiredError = t('validation.required');
+  const notEmptyError = t('validation.notEmpty');
 
   const handleOnSubmit = async values => {
     const { name = '' } = values;
@@ -116,7 +123,9 @@ const Nickname = () => {
     });
   };
 
-  return <FormValidation required={requiredError} onSubmit={handleOnSubmit} />;
+  return (
+    <FormValidation notEmpty={notEmptyError} required={requiredError} onSubmit={handleOnSubmit} />
+  );
 };
 
 export default Nickname;

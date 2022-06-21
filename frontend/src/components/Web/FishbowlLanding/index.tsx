@@ -14,28 +14,33 @@ import Trans from 'next-translate/Trans';
 import { Fishbowl } from '@/types/api-platform';
 import { useStateValue } from '@/contexts/AppContext';
 import { formatDateTime } from '@/lib/helpers';
-import CopyUrl from '@/components/Common/CopyUrl';
-import { Container, Description, Time, TimeLeft } from '@/ui/pages/fishbowl-detail';
+import { Description } from '@/ui/pages/fishbowl-detail';
+import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
+import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
+import { ToastContainer } from 'react-toastify';
 
 interface Props {
   data: Fishbowl;
 }
 
-const FishbowlDetail: React.FC<Props> = ({ data }) => {
+const FishbowlLanding: React.FC<Props> = ({ data }) => {
   const [{ fishbowlReady }] = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);
   const endDate = formatDateTime(data.endDateTimeTz);
 
   return (
-    <Container centered>
-      <h1 className="title-md">{data.name}</h1>
-      {data.description && <Description>{data.description}</Description>}
-      <Time
-        as="time"
-        dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-        className="highlight"
-      >
+    <LandingContainer centered>
+      <ToastContainer className="toastify-custom" />
+      <StyledFishbowlData>
+        <h1 data-testid="fishbowl-name" className="title-md">
+          {data.name}
+        </h1>
+        {data.description && (
+          <Description data-testid="fishbowl-description">{data.description}</Description>
+        )}
+      </StyledFishbowlData>
+      <Time as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
         <p className="body-md medium">{t('dateandtime')}</p>
         <div className="body-lg">
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
@@ -45,14 +50,15 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
       </Time>
       {!fishbowlReady && (
         <>
-          <TimeLeft className="warning body-md prewrap" block>
+          <StyledDetailAlert className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
-          </TimeLeft>
-          <CopyUrl className="centered" data={data} />
+          </StyledDetailAlert>
+          <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+          <HelpText className="body-sm">{t('copyText')}</HelpText>
         </>
       )}
-    </Container>
+    </LandingContainer>
   );
 };
 
-export default FishbowlDetail;
+export default FishbowlLanding;

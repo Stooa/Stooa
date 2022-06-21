@@ -21,11 +21,8 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class ValidResetPasswordTokenValidator extends ConstraintValidator
 {
-    private ResetPasswordHelperInterface $helper;
-
-    public function __construct(ResetPasswordHelperInterface $helper)
+    public function __construct(private readonly ResetPasswordHelperInterface $helper)
     {
-        $this->helper = $helper;
     }
 
     public function validate($value, Constraint $constraint): void
@@ -40,7 +37,7 @@ class ValidResetPasswordTokenValidator extends ConstraintValidator
 
         try {
             $this->helper->validateTokenAndFetchUser($value);
-        } catch (ResetPasswordExceptionInterface $exception) {
+        } catch (ResetPasswordExceptionInterface) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

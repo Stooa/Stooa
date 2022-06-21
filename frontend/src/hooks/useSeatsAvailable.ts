@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import useEventListener from '@/hooks/useEventListener';
 
-type IProps = {
+type Props = {
   detail: {
     seats: [];
   };
@@ -21,7 +21,7 @@ type IProps = {
 const useSeatsAvailable = () => {
   const [seatsAvailable, setSeatsAvailable] = useState<[] | boolean>(true);
 
-  useEventListener(SEATS_CHANGE, ({ detail: { seats } }: IProps) => {
+  useEventListener(SEATS_CHANGE, ({ detail: { seats } }: Props) => {
     setSeatsAvailable(seats);
     return seatsAvailable;
   });

@@ -306,7 +306,7 @@ const GlobalStyle = createGlobalStyle`
       }
 
       & .Toastify__toast-body {
-        padding-right: ${space(3)};
+        padding: ${space(2)} ${space(2)} ${space(2)} 0;
       }
 
       & .Toastify__close-button {

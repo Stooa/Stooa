@@ -23,11 +23,8 @@ use Webmozart\Assert\Assert;
 
 class FishbowlListExtension implements QueryCollectionExtensionInterface
 {
-    private Security $security;
-
-    public function __construct(Security $security)
+    public function __construct(private readonly Security $security)
     {
-        $this->security = $security;
     }
 
     public function applyToCollection(

@@ -11,12 +11,13 @@
     "joinMemberNote": "* Allows you to contact the rest of the attendees",
     "copySuccess": "Link copied to clipboard!",
     "detail": {
-        "title": "Title",
-        "duration": "Duration",
-        "description": "Description",
-        "language": "Language",
-        "startDate": "Start date",
-        "startTime": "Start time"
+        "shareTitle": "Now what? <br/>Share the fishbowl!",
+        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the conversation.",
+        "shareInSocials": "Or share in:",
+        "fishbowlCreatedSuccessfully": "Fishbowl created successfully!",
+        "cardMiniTitle": "Fishbowl details",
+        "editFishbowlDetails": "Edit fishbowl details",
+        "mailInfo": "📩 You will receive an email with all the details of the fishbowl you have scheduled."
     },
     "months": {
         "01": "January",
@@ -33,8 +34,9 @@
         "12": "December"
     },
     "full": "Full",
-    "join": "Join",
-    "leave": "Leave",
+    "join": "Join the conversation",
+    "leave": "Leave the conversation",
+    "reactions": "Reactions",
     "unmute": "Unmute",
     "mute": "Mute",
     "sameAsSystem": "Same as system",
@@ -45,7 +47,9 @@
     "speaker": "Speaker",
     "cam": "Camera",
     "prejoin": {
-        "title": "Set up your micro and camera!"
+        "title": "Join the room",
+        "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
+        "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
     "waiting": "Waiting for host to start the fishbowl",
     "waitingHost": "Attendees are waiting for you to start the fishbowl",
@@ -81,5 +85,23 @@
     },
     "fishbowlDescription": {
         "shareText": "Copy and share the link to invite people to this fishbowl."
-    }
+    },
+    "kick": {
+        "button": "Kick user",
+        "successMessage": "User kicked successfully.",
+        "modal": {
+            "title": "Why do you want to kick {{userName}}?",
+            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "options": {
+                "noParticipating": "The user occupies a seat without participating.",
+                "conductViolation": "The user has violated the code of conduct of the community."
+            },
+            "button": "Kick user",
+            "cancelButton": "Cancel"
+        }
+    },
+    "permissionsModalTitle": "Permissions needed",
+    "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
+    "permissionsModalButton": "Request access",
+    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue."
 }

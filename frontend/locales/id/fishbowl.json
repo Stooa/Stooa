@@ -8,12 +8,13 @@
     "joinMemberNote": "* Memperbolehkanmu untuk menghubungi peserta lainnya",
     "copySuccess": "Tautan disalin ke papan klip!",
     "detail": {
-        "title": "Judul",
-        "duration": "Durasi",
-        "startDate": "Tanggal mulai",
-        "startTime": "Waktu mulai",
-        "description": "Deskripsi",
-        "language": "Bahasa"
+        "shareTitle": "Now what? <br/>Share the fishbowl!",
+        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the session.",
+        "shareInSocials": "Or share in:",
+        "fishbowlCreatedSuccessfully": "Fishbowl created successfully!",
+        "cardMiniTitle": "Fishbowl details",
+        "editFishbowlDetails": "Edit fishbowl details",
+        "mailInfo": "📩 You'll receive an email with all the details of your scheduled fishbowl."
     },
     "months": {
         "01": "Januari",
@@ -30,8 +31,9 @@
         "10": "Oktober"
     },
     "full": "Penuh",
-    "join": "Gabung",
-    "leave": "Tinggalkan",
+    "join": "Gabung pembicaraan",
+    "leave": "Tinggalkan pembicaraan",
+    "reactions": "Reaksi",
     "unmute": "Tidak bisukan",
     "sameAsSystem": "Sama dengan sistem",
     "mute": "Bisukan",
@@ -40,7 +42,9 @@
     "speaker": "Pengeras suara",
     "cam": "Kamera",
     "prejoin": {
-        "title": "Bagaimana seharusnya partisipan lainnya memanggilmu?"
+        "title": "Join the room",
+        "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
+        "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
     "waiting": "Menunggu hos untuk memulai fishbowl-nya",
     "timesUp": "Waktu habis",
@@ -62,7 +66,7 @@
         "button": "Konfirmasi"
     },
     "participants": {
-        "title": "Peserta fishbowl",
+        "title": "Orang-orang di ruang",
         "attendees": "Pendengar",
         "speaking": "Berbicara sekarang"
     },
@@ -73,5 +77,23 @@
     "settings": "Pengaturan",
     "waitingHost": "Peserta menunggumu untuk memulai fishbowl-nya",
     "timeLeft_other": "{{time}} tersisa",
-    "share": "Beri tahu orang lain tentang Stooa!"
+    "share": "Beri tahu orang lain tentang Stooa!",
+    "kick": {
+        "button": "Kick user",
+        "successMessage": "User kicked successfully.",
+        "modal": {
+            "title": "Why do you want to kick {{userName}}?",
+            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "options": {
+                "noParticipating": "The user occupies a seat without participating.",
+                "conductViolation": "The user has violated the code of conduct of the community."
+            },
+            "button": "Kick user",
+            "cancelButton": "Cancel"
+        }
+    },
+    "permissionsModalTitle": "Permissions needed",
+    "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
+    "permissionsModalButton": "Grant permissions",
+    "permissionsModalErrorToast" : "There was an error with permissions.<br/>You may have blocked it from browser settings."
 }

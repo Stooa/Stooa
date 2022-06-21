@@ -8,7 +8,6 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';

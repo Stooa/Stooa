@@ -90,7 +90,7 @@ class LoginFunctionalTest extends ApiTestCase
         $this->assertResponseStatusCodeSame(401);
 
         $loginResponse = $response->getContent(false);
-        $responseArray = json_decode($loginResponse, true);
+        $responseArray = json_decode($loginResponse, true, 512, \JSON_THROW_ON_ERROR);
         $this->assertIsArray($responseArray);
         $this->assertArrayHasKey('message', $responseArray);
         $this->assertSame($message, $responseArray['message']);

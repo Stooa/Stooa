@@ -22,15 +22,10 @@ use Webmozart\Assert\Assert;
 
 class ChangePasswordLoggedDataTransformer implements DataTransformerInterface
 {
-    private ValidatorInterface $validator;
-    private Security $security;
-
     public function __construct(
-        ValidatorInterface $validator,
-        Security $security
+        private readonly ValidatorInterface $validator,
+        private readonly Security $security
     ) {
-        $this->validator = $validator;
-        $this->security = $security;
     }
 
     /** @param mixed[] $context */

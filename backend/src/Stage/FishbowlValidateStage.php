@@ -22,18 +22,11 @@ use Webmozart\Assert\Assert;
 
 class FishbowlValidateStage implements ValidateStageInterface
 {
-    private ValidateStageInterface $decorated;
-    private Security $security;
-    private FishbowlService $service;
-
     public function __construct(
-        ValidateStageInterface $decorated,
-        Security $security,
-        FishbowlService $service
+        private readonly ValidateStageInterface $decorated,
+        private readonly Security $security,
+        private readonly FishbowlService $service
     ) {
-        $this->decorated = $decorated;
-        $this->security = $security;
-        $this->service = $service;
     }
 
     /** @param mixed[] $context */
