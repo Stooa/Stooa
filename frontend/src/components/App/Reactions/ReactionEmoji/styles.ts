@@ -24,10 +24,11 @@ const StyledTooltip = styled.div`
   background-color: hsla(0, 59%, 0%, 0.65);
   backdrop-filter: blur(12px);
 
-  transition: opacity 0.3s 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   opacity: 0;
 
   &.show {
+    transition: opacity 0.3s 0.3s ease-in-out;
     opacity: 1;
   }
 
