@@ -138,11 +138,13 @@ const conferenceRepository = () => {
     dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
 
-  const _handleRecorderStateChanged = (recorderSession) => {
-    sessionID = recorderSession._sessionID;
+  const _handleRecorderStateChanged = (jibriSession) => {
+    sessionID = jibriSession._sessionID;
     RecordingCookie.setLocaleCookie(sessionID);
-    console.log('[Stooa] Recorded State Changed', recorderSession);
-    console.log('')
+    console.log('[Stooa] Recorded State Changed', jibriSession);
+    const session = conference.recordingManager.getSession(sessionID);
+    console.log('[Stooa] JibriSession', session);
+    console.log('[Stooa] livestreamviewurl', session.getLiveStreamViewURL());
   }
 
   const _handleConnectionEstablished = async () => {
