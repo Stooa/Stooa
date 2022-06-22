@@ -9,7 +9,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
-import { StyledEmojiReaction } from './styles';
+import { StyledEmojiReaction, StyledTooltip } from './styles';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   emoji: 'agree' | 'disagree' | 'love' | 'applause' | 'joy' | 'wave' | 'insightful';
@@ -23,6 +23,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
   const [initialScale, setInitialScale] = useState<number>(1);
   const [size, setSize] = useState<number>(1);
   const [clicked, setClicked] = useState<number>(0);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const changeCssScaleVariable = scale => {
     if (scale) reactionRef.current.style.setProperty('--emojiScale', scale);
@@ -64,16 +65,27 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
   }, [reactionRef.current]);
 
   return (
-    <StyledEmojiReaction
-      data-testid={`emoji-reaction-${emoji}`}
-      ref={reactionRef}
-      className={disabled ? 'disabled' : ''}
-      id={emoji}
-      onClick={handleOnClick}
-      {...props}
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      onClick={() => (showTooltip ? setShowTooltip(false) : null)}
     >
-      {REACTION_EMOJIS[emoji]}
-    </StyledEmojiReaction>
+      <StyledTooltip className={showTooltip ? 'show' : ''}>
+        {emoji[0].toUpperCase() + emoji.substring(1)}
+      </StyledTooltip>
+
+      <StyledEmojiReaction
+        data-testid={`emoji-reaction-${emoji}`}
+        ref={reactionRef}
+        className={disabled ? 'disabled' : ''}
+        id={emoji}
+        onClick={handleOnClick}
+        {...props}
+      >
+        {REACTION_EMOJIS[emoji]}
+      </StyledEmojiReaction>
+    </div>
   );
 };
 
