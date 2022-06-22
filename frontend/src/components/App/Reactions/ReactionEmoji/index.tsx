@@ -71,7 +71,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
       onMouseLeave={() => setShowTooltip(false)}
       onClick={() => (showTooltip ? setShowTooltip(false) : null)}
     >
-      <StyledTooltip className={showTooltip ? 'show' : ''}>
+      <StyledTooltip className={`body-xs ${showTooltip ? 'show' : ''}`}>
         {emoji[0].toUpperCase() + emoji.substring(1)}
       </StyledTooltip>
 

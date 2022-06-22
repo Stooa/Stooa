@@ -7,6 +7,10 @@
  * file that was distributed with this source code.
  */
 
+import { media, space } from '@/ui/helpers';
+import { COLOR_NEUTRO_100 } from '@/ui/settings';
+import styled from 'styled-components';
+
 const StyledTooltip = styled.div`
   position: absolute;
   display: flex;
@@ -17,8 +21,8 @@ const StyledTooltip = styled.div`
   padding: ${space()} ${space(2)};
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(100% + ${space(1.5)});
-  border-radius: ${BORDER_RADIUS};
+  bottom: calc(100% + ${space(1.25)});
+  border-radius: 46px;
 
   color: ${COLOR_NEUTRO_100};
   background-color: hsla(0, 59%, 0%, 0.65);
@@ -31,22 +35,7 @@ const StyledTooltip = styled.div`
     transition: opacity 0.3s 0.3s ease-in-out;
     opacity: 1;
   }
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid hsla(0, 59%, 0%, 0.65);
-  }
 `;
-
-import { media, space } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_100 } from '@/ui/settings';
-import styled from 'styled-components';
 
 const StyledEmojiReaction = styled.div`
   --translateY: 0;
