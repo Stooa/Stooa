@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77a5b21fa7a647ea6753beee54131c9d",
+    "content-hash": "ca5da8f2c1a49c92e37bb3ac3f644d11",
     "packages": [
         {
             "name": "api-platform/core",
@@ -13152,16 +13152,16 @@
         },
         {
             "name": "psalm/plugin-symfony",
-            "version": "v3.1.5",
+            "version": "v3.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-symfony.git",
-                "reference": "62b37be93df3d1f35dbd8c8509616e567e2466f0"
+                "reference": "c10e7795f4d7935a26983a8735cb2b7e6ff814e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/62b37be93df3d1f35dbd8c8509616e567e2466f0",
-                "reference": "62b37be93df3d1f35dbd8c8509616e567e2466f0",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/c10e7795f4d7935a26983a8735cb2b7e6ff814e1",
+                "reference": "c10e7795f4d7935a26983a8735cb2b7e6ff814e1",
                 "shasum": ""
             },
             "require": {
@@ -13211,9 +13211,9 @@
             "description": "Psalm Plugin for Symfony",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-symfony/issues",
-                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.1.5"
+                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.1.7"
             },
-            "time": "2022-05-14T11:21:10+00:00"
+            "time": "2022-06-14T11:07:03+00:00"
         },
         {
             "name": "runroom-packages/testing",
