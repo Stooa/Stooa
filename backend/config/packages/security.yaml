@@ -13,17 +13,17 @@ security:
         App\Entity\User: auto
 
     access_control:
-        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login$, role: PUBLIC_ACCESS }
+        - { path: ^/admin/logout$, role: PUBLIC_ACCESS }
+        - { path: ^/admin/login_check$, role: PUBLIC_ACCESS }
+        - { path: ^/admin/resetting, role: PUBLIC_ACCESS }
+        - { path: ^/admin/reset, role: PUBLIC_ACCESS }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/refresh-token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/docs$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/graphql/graphql_playground$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/refresh-token, roles: PUBLIC_ACCESS }
+        - { path: ^/docs$, roles: PUBLIC_ACCESS }
+        - { path: ^/graphql/graphql_playground$, roles: PUBLIC_ACCESS }
     role_hierarchy:
         ROLE_ADMIN:
             - ROLE_USER
@@ -61,20 +61,19 @@ security:
                 secret: '%env(APP_SECRET)%'
                 lifetime: 2629746
                 path: /admin
-        refresh:
-            pattern: ^/refresh-token
-            stateless: true
         api:
             lazy: true
             pattern: /(.*)
             provider: api
             stateless: true
+            entry_point: jwt
             json_login:
                 check_path: /login
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+            jwt: ~
+            refresh_jwt:
+                check_path: /refresh-token
+

@@ -16,7 +16,7 @@ namespace App\Validator\Constraints;
 use App\Entity\User;
 use App\Model\ChangePasswordLoggedInput;
 use App\Repository\UserRepository;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -29,7 +29,7 @@ class SameUserPasswordValidator extends ConstraintValidator
     public function __construct(
         private readonly Security $security,
         private readonly UserRepository $userRepository,
-        private readonly UserPasswordEncoderInterface $passwordEncoder
+        private readonly UserPasswordHasherInterface $passwordEncoder
     ) {
     }
 

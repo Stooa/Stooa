@@ -6,5 +6,4 @@
 # file that was distributed with this source code.
 
 api_refresh_token:
-    path: /api/token/refresh
-
+    path: /refresh-token

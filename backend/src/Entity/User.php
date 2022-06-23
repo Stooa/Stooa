@@ -27,6 +27,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -99,7 +100,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, \Stringable
+class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
 
