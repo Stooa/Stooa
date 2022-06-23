@@ -19,8 +19,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @extends ServiceEntityRepository<User> */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserLoaderInterface
@@ -30,23 +30,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
-        $user->setPassword($newEncodedPassword);
+        $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
     }
 
-    public function loadUserByUsername($username): ?User
+    public function loadUserByIdentifier(string $identifier): ?User
     {
         $query = $this->createQueryBuilder('user')
             ->where('user.email = :email')
             ->andWhere('user.active = true')
-            ->setParameter('email', $username, Types::STRING)
+            ->setParameter('email', $identifier, Types::STRING)
             ->getQuery();
 
         return $query->getOneOrNullResult();

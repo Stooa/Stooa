@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\User;
-use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PasswordEncoderService
 {
-    public function __construct(private readonly PasswordHasherFactoryInterface $encoderFactory)
+    public function __construct(private readonly UserPasswordHasherInterface $hasher)
     {
     }
 
@@ -28,8 +28,7 @@ class PasswordEncoderService
             return;
         }
 
-        $encoder = $this->encoderFactory->getEncoder($user);
-        $hashedPassword = $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
+        $hashedPassword = $this->hasher->hashPassword($user, $user->getPlainPassword());
 
         $user->setPassword($hashedPassword);
         $user->eraseCredentials();

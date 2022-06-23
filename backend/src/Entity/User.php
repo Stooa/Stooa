@@ -224,7 +224,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     public function __toString(): string
     {
-        return $this->getFullName() . ' (' . $this->getUsername() . ')';
+        return $this->getFullName() . ' (' . $this->getUserIdentifier() . ')';
     }
 
     public function getId(): ?UuidInterface
@@ -280,7 +280,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         return $this;
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
