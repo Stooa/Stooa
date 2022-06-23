@@ -19,6 +19,7 @@ import {
   COLOR_NEUTRO_700
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
+import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
 interface SelectorProps {
   bottom?: boolean;
@@ -33,6 +34,13 @@ const Button = styled(ActionButton)`
 
   .text {
     color: ${COLOR_NEUTRO_600};
+
+    ${BODY_XS}
+    line-height: 1.5;
+
+    ${media.min('tablet')`
+      ${BODY_SM}
+    `}
   }
 
   &:hover {

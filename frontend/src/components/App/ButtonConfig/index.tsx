@@ -86,7 +86,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
         <div className="button">
           <SettingsIcon />
         </div>
-        {!unlabeled && <span className="text medium">{t('settings')}</span>}
+        {!unlabeled && <div className="text medium">{t('settings')}</div>}
       </Button>
       {showDevices && (
         <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
