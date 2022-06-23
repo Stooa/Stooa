@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\User;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 class PasswordEncoderService
 {
-    public function __construct(private readonly EncoderFactoryInterface $encoderFactory)
+    public function __construct(private readonly PasswordHasherFactoryInterface $encoderFactory)
     {
     }
 

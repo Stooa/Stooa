@@ -8,7 +8,7 @@
 security:
     enable_authenticator_manager: true
 
-    encoders:
+    password_hashers:
         Sonata\UserBundle\Model\UserInterface: auto
         App\Entity\User: auto
 
