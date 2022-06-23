@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce84b796dd909ad81a69ce7303d6471c",
+    "content-hash": "6283319118326a9e952d7afef3033ae1",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2090,16 +2090,16 @@
         },
         {
             "name": "gesdinet/jwt-refresh-token-bundle",
-            "version": "v1.0.1",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
-                "reference": "1167006f2973064a81f1671e89c3c495969c6a50"
+                "reference": "8970ae1a602fb74e434964d03c969d883cfed376"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/1167006f2973064a81f1671e89c3c495969c6a50",
-                "reference": "1167006f2973064a81f1671e89c3c495969c6a50",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/8970ae1a602fb74e434964d03c969d883cfed376",
+                "reference": "8970ae1a602fb74e434964d03c969d883cfed376",
                 "shasum": ""
             },
             "require": {
@@ -2137,7 +2137,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -2164,9 +2164,9 @@
             ],
             "support": {
                 "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
-                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.0.1"
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.1.1"
             },
-            "time": "2022-01-25T11:32:28+00:00"
+            "time": "2022-04-11T14:46:00+00:00"
         },
         {
             "name": "hashids/hashids",
