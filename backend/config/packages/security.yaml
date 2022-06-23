@@ -6,6 +6,8 @@
 # file that was distributed with this source code.
 
 security:
+    enable_authenticator_manager: true
+
     encoders:
         Sonata\UserBundle\Model\UserInterface: auto
         App\Entity\User: auto
@@ -43,7 +45,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            anonymous: lazy
+            lazy: true
             pattern: /admin(.*)
             provider: admin
             context: user
@@ -62,9 +64,9 @@ security:
         refresh:
             pattern: ^/refresh-token
             stateless: true
-            anonymous: true
+#            anonymous: true
         api:
-            anonymous: lazy
+            lazy: true
             pattern: /(.*)
             provider: api
             stateless: true
