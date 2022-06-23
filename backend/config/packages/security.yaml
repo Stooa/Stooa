@@ -64,7 +64,6 @@ security:
         refresh:
             pattern: ^/refresh-token
             stateless: true
-#            anonymous: true
         api:
             lazy: true
             pattern: /(.*)
