@@ -30,7 +30,7 @@ describe('Reactions sender component', () => {
     expect(getByTestId('disagree-emoji')).toBeInTheDocument();
     expect(getByTestId('love-emoji')).toBeInTheDocument();
     expect(getByTestId('applause-emoji')).toBeInTheDocument();
-    expect(getByTestId('joy-emoji')).toBeInTheDocument();
+    expect(getByTestId('laugh-emoji')).toBeInTheDocument();
     expect(getByTestId('wave-emoji')).toBeInTheDocument();
     expect(getByTestId('insightful-emoji')).toBeInTheDocument();
   });

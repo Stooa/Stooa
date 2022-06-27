@@ -11,7 +11,7 @@ import Applause from '@/ui/svg/emojis/applause.svg';
 import Agree from '@/ui/svg/emojis/agree.svg';
 import Disagree from '@/ui/svg/emojis/disagree.svg';
 import Love from '@/ui/svg/emojis/love.svg';
-import Laugh from '@/ui/svg/emojis/joy.svg';
+import Laugh from '@/ui/svg/emojis/laugh.svg';
 import Insightful from '@/ui/svg/emojis/insightful.svg';
 import Wave from '@/ui/svg/emojis/wave.svg';
 
