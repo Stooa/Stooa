@@ -61,7 +61,6 @@
     "@cypress/code-coverage": "3.9.12",
     "@faker-js/faker": "7.2.0",
     "@runroom/design-tokens": "2.0.2",
-    "@runroom/npm-scripts": "1.2.8",
     "@svgr/webpack": "6.2.1",
     "@testing-library/cypress": "8.0.2",
     "@testing-library/jest-dom": "5.16.4",
