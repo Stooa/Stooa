@@ -167,7 +167,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
       />
       <ReactionEmoji
         disabled={disableToSendEmojis}
-        emoji="joy"
+        emoji="laugh"
         data-testid="joy-emoji"
         onClick={handleClick}
       />

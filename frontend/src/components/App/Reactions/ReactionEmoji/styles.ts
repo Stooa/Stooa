@@ -18,6 +18,7 @@ const StyledTooltip = styled.div`
   justify-content: center;
 
   height: 24px;
+  width: max-content;
   padding: ${space()} ${space(2)};
   left: 50%;
   transform: translateX(-50%);

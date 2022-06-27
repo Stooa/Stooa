@@ -11,7 +11,7 @@ import Applause from '@/ui/svg/emojis/applause.svg';
 import Agree from '@/ui/svg/emojis/agree.svg';
 import Disagree from '@/ui/svg/emojis/disagree.svg';
 import Love from '@/ui/svg/emojis/love.svg';
-import Joy from '@/ui/svg/emojis/joy.svg';
+import Laugh from '@/ui/svg/emojis/joy.svg';
 import Insightful from '@/ui/svg/emojis/insightful.svg';
 import Wave from '@/ui/svg/emojis/wave.svg';
 
@@ -20,7 +20,7 @@ export const REACTION_EMOJIS = {
   disagree: <Disagree />,
   love: <Love />,
   applause: <Applause />,
-  joy: <Joy />,
+  laugh: <Laugh />,
   wave: <Wave />,
   insightful: <Insightful />
 };
