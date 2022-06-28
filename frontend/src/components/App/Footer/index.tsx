@@ -10,11 +10,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import useTranslation from 'next-translate/useTranslation';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Footer as FooterStyled } from '@/layouts/App/styles';
-import { CustomToast } from '@/ui/CustomToast';
+import IntroNotification from '@/components/App/IntroNotification';
 
 const ToolBar = dynamic(import('@/components/App/ToolBar'), { loading: () => <div /> });
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
@@ -28,13 +27,12 @@ interface Props {
 
 const Footer: React.FC<Props> = ({ participantsActive }) => {
   const { onIntroduction, isModerator, conferenceStatus } = useStooa();
-  const { t } = useTranslation('app');
   const router = useRouter();
   const { fid } = router.query;
 
   return (
     <FooterStyled className={participantsActive ? 'drawer-open' : ''}>
-      {onIntroduction && <CustomToast>{t('notification.joinAfterIntroduction')}</CustomToast>}
+      {onIntroduction && <IntroNotification />}
       <div className="col-left hide-mobile">
         <Logo />
       </div>
