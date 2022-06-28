@@ -18,7 +18,7 @@ const IntroNotification = () => {
 
   if (showIntroNotification) {
     return (
-      <StyledIntroNotification>
+      <StyledIntroNotification data-testid="intro-notification">
         {t('notification.joinAfterIntroduction')}
         <button className="cross" onClick={() => setShowIntroNotification(false)}>
           <Cross />
