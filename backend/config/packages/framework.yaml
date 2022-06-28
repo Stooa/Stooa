@@ -14,3 +14,8 @@ framework:
         storage_factory_id: session.storage.factory.native
     php_errors:
         log: true
+
+when@prod:
+    framework:
+        trusted_proxies:  '%env(TRUSTED_PROXIES)%'
+        trusted_headers: [ 'x-forwarded-for', 'x-forwarded-host', 'x-forwarded-proto', 'x-forwarded-port', 'x-forwarded-prefix' ]
