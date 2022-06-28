@@ -25,6 +25,7 @@ services:
 
     Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\JWTAuthenticator:
         tags: ['container.no_preload']
+        abstract:  true
 
     # App
     App\:
