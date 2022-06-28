@@ -10,7 +10,7 @@
 import IntroNotification from '@/components/App/IntroNotification';
 import { fireEvent, render } from '@testing-library/react';
 
-describe('Intro Notification component',() => {
+describe('Intro Notification component', () => {
   it('It should render and close when clicking cross button', async () => {
     const { getByTestId, getByRole } = render(<IntroNotification />);
 
@@ -22,6 +22,5 @@ describe('Intro Notification component',() => {
     fireEvent.click(closeButton);
 
     expect(introNotificationElement).not.toBeInTheDocument();
-  }
-  );
-})
+  });
+});
