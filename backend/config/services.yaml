@@ -23,6 +23,9 @@ services:
         calls:
             - [setAnnotationReader, ['@annotation_reader']]
 
+    Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\JWTAuthenticator:
+        tags: ['container.no_preload']
+
     # App
     App\:
         resource: ../src/
