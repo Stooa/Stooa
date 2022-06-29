@@ -144,7 +144,6 @@ const conferenceRepository = () => {
     console.log('[Stooa] Recorded State Changed', jibriSession);
     const session = conference.recordingManager.getSession(sessionID);
     console.log('[Stooa] JibriSession', session);
-    console.log('[Stooa] livestreamviewurl', session.getLiveStreamViewURL());
   }
 
   const _handleConnectionEstablished = async () => {
@@ -395,8 +394,6 @@ const conferenceRepository = () => {
   };
 
   const startRecording = () => {
-    const options = { appData: '', broadcastId: '', mode: '', streamId: '' };
-
     const recordingConfig = {
       mode: 'file',
       appData: JSON.stringify({
