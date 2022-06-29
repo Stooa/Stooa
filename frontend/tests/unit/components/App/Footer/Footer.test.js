@@ -88,46 +88,4 @@ describe('App footer component', () => {
     const introNotificationElement = queryByTestId('intro-notification');
     expect(introNotificationElement).toBeInTheDocument();
   });
-
-  // it('Moderator actions renders properly when user is moderator', () => {
-  //   useStooa.mockReturnValue({
-  //     onIntroduction: true,
-  //     isModerator: true,
-  //     conferenceStatus: IConferenceStatus.NOT_STARTED
-  //   });
-  //   useRouter.mockReturnValue({ query: 'test-fid' });
-
-  //   const { queryByTestId } = render(<Footer participantsActive={false} />);
-
-  //   const introNotificationElement = queryByTestId('moderator-actions');
-  //   expect(introNotificationElement).toBeInTheDocument();
-  // });
-
-  // it("Moderator actions doesn't render when user is not moderator", () => {
-  //   useStooa.mockReturnValue({
-  //     onIntroduction: true,
-  //     isModerator: false,
-  //     conferenceStatus: IConferenceStatus.NOT_STARTED
-  //   });
-  //   useRouter.mockReturnValue({ query: 'test-fid' });
-
-  //   const { queryByTestId } = render(<Footer participantsActive={false} />);
-
-  //   const introNotificationElement = queryByTestId('moderator-actions');
-  //   expect(introNotificationElement).not.toBeInTheDocument();
-  // });
-
-  // it('Toolbar renders properly', () => {
-  //   useStooa.mockReturnValue({
-  //     onIntroduction: true,
-  //     isModerator: false,
-  //     conferenceStatus: IConferenceStatus.NOT_STARTED
-  //   });
-  //   useRouter.mockReturnValue({ query: 'test-fid' });
-
-  //   const { queryByTestId } = render(<Footer participantsActive={false} />);
-
-  //   const introNotificationElement = queryByTestId('toolbar');
-  //   expect(introNotificationElement).toBeInTheDocument();
-  // });
 });
