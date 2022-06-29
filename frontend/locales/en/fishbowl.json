@@ -103,5 +103,14 @@
     "permissionsModalTitle": "Permissions needed",
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Request access",
-    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue."
+    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
+    "reaction": {
+        "agree": "Agree",
+        "disagree": "Disagree",
+        "love": "Love",
+        "applause": "Applause",
+        "laugh": "LOL",
+        "wave": "Hi",
+        "insightful": "Insightful"
+    }
 }
