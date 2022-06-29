@@ -114,4 +114,5 @@ provision-jitsi:
 	rm -rf jitsi-meet-cfg/prosody/prosody-plugins-custom/*
 	rm -rf jitsi-meet-cfg/jicofo/*
 	rm -rf jitsi-meet-cfg/jvb/*
+	rm -rf jitsi-meet-cfg/jibri/*
 .PHONY: provision-jitsi

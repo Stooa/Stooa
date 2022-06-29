@@ -199,6 +199,9 @@ services:
         shm_size: '2gb'
         cap_add:
             - SYS_ADMIN
+            - NET_BIND_SERVICE
+        devices:
+            - /dev/snd:/dev/snd
         environment:
             - CHROMIUM_FLAGS
             - DISPLAY=:0
