@@ -39,7 +39,8 @@ jest.mock('@/components/Common/Logo', () => {
   DynamicComponent.preload = jest.fn();
   return DynamicComponent;
 });
-jest.mock('@/components/App/Toolbar', () => {
+
+jest.mock('@/components/App/ToolBar', () => {
   const DynamicComponent = () => <div data-testid="toolbar" />;
   DynamicComponent.displayName = 'LoadableComponent';
   DynamicComponent.preload = jest.fn();
