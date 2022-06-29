@@ -77,7 +77,7 @@ describe('Reactions receiver component', () => {
     sendReceivedEvent('disagree');
     sendReceivedEvent('love');
     sendReceivedEvent('applause');
-    sendReceivedEvent('joy');
+    sendReceivedEvent('laugh');
     sendReceivedEvent('wave');
     sendReceivedEvent('insightful');
 
