@@ -18,7 +18,6 @@ jest.mock('next/dynamic', () => ({
   __esModule: true,
   default: (...props) => {
     const matchedPath = /(.)*(\'(.*)\')(.)*/.exec(props[0].toString());
-    console.log(matchedPath[3]);
     if (matchedPath) return require(matchedPath[3]);
     else return () => <></>;
   }
