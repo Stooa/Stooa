@@ -32,7 +32,7 @@ const Footer: React.FC<Props> = ({ participantsActive }) => {
 
   return (
     <FooterStyled className={participantsActive ? 'drawer-open' : ''}>
-      {onIntroduction && <IntroNotification />}
+      {onIntroduction && !isModerator && <IntroNotification />}
       <div className="col-left hide-mobile">
         <Logo />
       </div>

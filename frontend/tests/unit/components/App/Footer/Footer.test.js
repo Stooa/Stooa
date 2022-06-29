@@ -8,40 +8,83 @@
  */
 
 import Footer from '@/components/App/Footer';
-import { render, waitForElement } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { useStooa } from '@/contexts/StooaManager';
 import { useRouter } from 'next/router';
 import { IConferenceStatus } from '@/jitsi/Status';
-import preloadAll from 'jest-next-dynamic';
-import '@testing-library/jest-dom/extend-expect';
+
+jest.mock('next/dynamic', () => () => {
+  const DynamicComponent = () => null;
+  DynamicComponent.displayName = 'LoadableComponent';
+  DynamicComponent.preload = jest.fn();
+  return DynamicComponent;
+});
 
 jest.mock('@/components/App/IntroNotification', () => () => (
   <div data-testid="intro-notification" />
 ));
 jest.mock('@/components/App/ModeratorActions', () => () => <div data-testid="moderator-actions" />);
 jest.mock('@/components/Common/Logo', () => () => <div data-testid="logo" />);
-jest.mock('@/components/App/Toolbar', () => () => <div data-testid="toolbar" />);
+jest.mock('@/components/App/Toolbar', () => () => (
+  <mock-toolbar data-testid="toolbar"></mock-toolbar>
+));
 jest.mock('@/contexts/StooaManager');
 jest.mock('next/router');
 
-beforeAll(async () => {
-  await preloadAll();
-});
-
 describe('App footer component', () => {
-  it("doesn't render because is not started", async () => {
+  it("doesn't render because is not started", () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
       conferenceStatus: IConferenceStatus.NOT_STARTED
     });
-    useRouter.mockReturnValue({ query: 'test' });
+    useRouter.mockReturnValue({ query: 'test-fid' });
 
     const { queryByTestId } = render(<Footer participantsActive={false} />);
 
-    const lazyContent = await waitForElement(() => queryByTestId('intro-notification'));
+    const introNotificationElement = queryByTestId('intro-notification');
+    expect(introNotificationElement).not.toBeInTheDocument();
+  });
 
-    // const introNotificationElement = queryByTestId('intro-notification');
-    // expect(introNotificationElement).not.toBeInTheDocument();
+  it("doesn't render because is admin but the fishbowl is in intro", () => {
+    useStooa.mockReturnValue({
+      onIntroduction: true,
+      isModerator: true,
+      conferenceStatus: IConferenceStatus.NOT_STARTED
+    });
+    useRouter.mockReturnValue({ query: 'test-fid' });
+
+    const { queryByTestId } = render(<Footer participantsActive={false} />);
+
+    const introNotificationElement = queryByTestId('intro-notification');
+    expect(introNotificationElement).not.toBeInTheDocument();
+  });
+
+  it("doesn't render because the fishbowl is running", () => {
+    useStooa.mockReturnValue({
+      onIntroduction: false,
+      isModerator: false,
+      conferenceStatus: IConferenceStatus.RUNNING
+    });
+    useRouter.mockReturnValue({ query: 'test-fid' });
+
+    const { queryByTestId } = render(<Footer participantsActive={false} />);
+
+    const introNotificationElement = queryByTestId('intro-notification');
+    expect(introNotificationElement).not.toBeInTheDocument();
+  });
+
+  it('renders because is not admin and the fishbowl is in intro', () => {
+    useStooa.mockReturnValue({
+      onIntroduction: true,
+      isModerator: false,
+      conferenceStatus: IConferenceStatus.NOT_STARTED
+    });
+    useRouter.mockReturnValue({ query: 'test-fid' });
+
+    const { queryByTestId } = render(<Footer participantsActive={false} />);
+
+    const introNotificationElement = queryByTestId('intro-notification');
+    expect(introNotificationElement).toBeInTheDocument();
   });
 });
