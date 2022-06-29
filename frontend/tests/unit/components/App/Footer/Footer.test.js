@@ -25,9 +25,7 @@ jest.mock('@/components/App/IntroNotification', () => () => (
 ));
 jest.mock('@/components/App/ModeratorActions', () => () => <div data-testid="moderator-actions" />);
 jest.mock('@/components/Common/Logo', () => () => <div data-testid="logo" />);
-jest.mock('@/components/App/Toolbar', () => () => (
-  <mock-toolbar data-testid="toolbar"></mock-toolbar>
-));
+jest.mock('@/components/App/Toolbar', () => () => <div data-testid="toolbar"></div>);
 jest.mock('@/contexts/StooaManager');
 jest.mock('next/router');
 
