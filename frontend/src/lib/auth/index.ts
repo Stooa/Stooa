@@ -27,11 +27,13 @@ const COOKIE_OPTIONS = { path: '/', domain: process.env.NEXT_PUBLIC_COOKIE_DOMAI
 const setToken = (token: string) => {
   const auth = new AuthToken(token);
   if (auth) {
+    cookie.remove(COOKIE_TOKEN, COOKIE_OPTIONS);
     cookie.set(COOKIE_TOKEN, token, { ...COOKIE_OPTIONS, expires: auth.decodedToken.exp });
   }
 };
 
 const setRefreshToken = (value: string) => {
+  cookie.remove(COOKIE_REFRESH, COOKIE_OPTIONS);
   cookie.set(COOKIE_REFRESH, value, { ...COOKIE_OPTIONS, expires: COOKIE_REFRESH_DAYS });
 };
 

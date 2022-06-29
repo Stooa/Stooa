@@ -96,6 +96,12 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
         value: Object.keys(REACTION_EMOJIS).indexOf(firstTenEmojis[0])
       });
 
+      pushEventDataLayer({
+        action: fid as string,
+        category: 'FishbowlReactions',
+        label: `Reaction-${firstTenEmojis[0]}`
+      });
+
       if (timesClicked === 10) {
         spawnEmojisBatch(firstTenEmojis);
         emojisToSendRef.current = [];
