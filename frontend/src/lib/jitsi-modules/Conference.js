@@ -403,20 +403,8 @@ const conferenceRepository = () => {
       })
     };
 
-    const recordingDropboxConfig = {
-      mode: 'file',
-      appData: JSON.stringify({
-        'file_recording_metadata': {
-          'upload_credentials': {
-            'service_name': 'dropbox',
-            'token': 'token'
-          }
-        }
-      })
-    };
-
-    const hola = conference.startRecording(recordingConfig);
-    console.log(hola);
+    const jibri = conference.startRecording(recordingConfig);
+    console.log(jibri);
   };
 
   const stopRecording = () => {
