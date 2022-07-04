@@ -89,7 +89,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $token = new JWTUserToken();
         $token->setRawToken($refreshTokenResponse['token']);
 
-        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
+        $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
         $decodedToken = $jwtManager->decode($token);
 
         $this->assertIsArray($decodedToken);
@@ -133,7 +133,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
             'createdAt' => new \DateTime(),
         ]);
 
-        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
+        $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
 
         $response = static::createClient()->request('POST', '/login', ['json' => [
             'email' => 'host@stooa.com',
@@ -182,7 +182,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $token = new JWTUserToken();
         $token->setRawToken($refreshTokenResponse['token']);
 
-        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
+        $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
         $decodedToken = $jwtManager->decode($token);
 
         $this->assertIsArray($decodedToken);
@@ -226,7 +226,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $token = new JWTUserToken();
         $token->setRawToken($refreshTokenResponse['token']);
 
-        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
+        $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
         $decodedToken = $jwtManager->decode($token);
 
         $this->assertIsArray($decodedToken);

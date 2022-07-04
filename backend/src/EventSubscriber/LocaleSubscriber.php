@@ -24,7 +24,7 @@ class LocaleSubscriber implements EventSubscriberInterface
     {
     }
 
-    /** @return array<string, array<int, array<int, int|string>>> */
+    /** @return array<string, array<int, array{0: string, 1?: int}|int|string>|string> */
     public static function getSubscribedEvents(): array
     {
         return [

@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 final class Kernel extends BaseKernel implements CompilerPassInterface
 {
@@ -68,12 +68,12 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         $loader->load($configDir . '/{packages}/' . $this->getEnvironment() . '/**/*.yaml', 'glob');
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    protected function configureRoutes(RoutingConfigurator $routes): void
     {
         $configDir = $this->getProjectDir() . '/config';
 
-        $routes->import($configDir . '/routes.yaml', '/');
-        $routes->import($configDir . '/{routes}/*.yaml', '/', 'glob');
-        $routes->import($configDir . '/{routes}/' . $this->getEnvironment() . '/**/*.yaml', '/', 'glob');
+        $routes->import($configDir . '/routes.yaml');
+        $routes->import($configDir . '/{routes}/*.yaml');
+        $routes->import($configDir . '/{routes}/' . $this->getEnvironment() . '/**/*.yaml');
     }
 }
