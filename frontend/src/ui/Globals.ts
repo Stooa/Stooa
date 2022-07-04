@@ -85,6 +85,22 @@ const GlobalStyle = createGlobalStyle`
     src: local('Geomanist Bold'), url("/fonts/geomanist-bold.woff2") format("woff2"),url("fonts/geomanist-bold.woff") format("woff");
   }
 
+    @font-face {
+      font-display: swap;
+      font-family: 'Geomanist';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Geomanist Italic Medium'), url("/fonts/geomanist-regular-italic.woff2") format("woff2"),url("fonts/geomanist-regular-italic.woff") format("woff");
+    }
+
+  @font-face {
+    font-display: swap;
+    font-family: 'Geomanist';
+    font-style: italic;
+    font-weight: 500;
+    src: local('Geomanist Italic Regular'), url("/fonts/geomanist-medium-italic.woff2") format("woff2"),url("fonts/geomanist-medium-italic.woff") format("woff");
+  }
+
   *,
   *::before,
   *::after {
@@ -125,10 +141,6 @@ const GlobalStyle = createGlobalStyle`
   ol:not([class]) {
     list-style: none;
     padding: 0;
-  }
-
-  i {
-    padding-right: 0.2rem;
   }
 
   a {
