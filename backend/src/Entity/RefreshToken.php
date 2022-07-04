@@ -11,10 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use App\Kernel;
+namespace App\Entity;
 
-require_once dirname(__DIR__) . '/vendor/autoload_runtime.php';
+use Doctrine\ORM\Mapping as ORM;
+use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken as BaseRefreshToken;
 
-return function (array $context) {
-    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
-};
+/**
+ * @ORM\Entity
+ * @ORM\Table("refresh_tokens")
+ */
+class RefreshToken extends BaseRefreshToken
+{
+}

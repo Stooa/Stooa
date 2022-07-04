@@ -36,7 +36,7 @@ class ResetPasswordResolver implements MutationResolverInterface
         $email = $context['args']['input']['email'];
         $locale = $context['args']['input']['locale'];
 
-        $user = $this->userRepository->loadUserByUsername($email);
+        $user = $this->userRepository->loadUserByIdentifier($email);
 
         $resetPassword = new ResetPassword();
         $resetPassword->setId(Uuid::uuid4());
