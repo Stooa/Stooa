@@ -169,7 +169,7 @@ class Fishbowl implements \Stringable
      * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ORM\Column(type="datetime")
      */
@@ -201,7 +201,7 @@ class Fishbowl implements \Stringable
      * @Groups({"fishbowl:write", "fishbowl:read"})
      *
      * @Assert\NotNull
-     * @Assert\Time
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ApiProperty(attributes={
      *     "openapi_context"={"format"="string"}
@@ -231,28 +231,28 @@ class Fishbowl implements \Stringable
     private string $currentStatus = self::STATUS_NOT_STARTED;
 
     /**
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $introducedAt = null;
 
     /**
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $runnedAt = null;
 
     /**
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $finishedAt = null;
 
     /**
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
