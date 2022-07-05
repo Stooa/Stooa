@@ -89,3 +89,4 @@ const Titles = css`
 `;
 
 export default Titles;
+export { TITLE_DISPLAY, TITLE_LG, TITLE_MD, TITLE_SM };

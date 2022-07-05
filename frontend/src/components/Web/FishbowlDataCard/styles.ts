@@ -9,7 +9,12 @@
 
 import styled from 'styled-components';
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_500, COLOR_NEUTRO_800 } from '@/ui/settings';
+import {
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_800
+} from '@/ui/settings';
 
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
@@ -51,4 +56,15 @@ const StyledFishbowlDataCard = styled.div`
   }
 `;
 
-export { StyledFishbowlDataCard };
+const StyledFishbowlDataCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+
+  color: ${COLOR_NEUTRO_600};
+
+  margin-bottom: ${space(2)};
+`;
+
+export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader };
