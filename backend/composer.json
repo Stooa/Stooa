@@ -17,7 +17,7 @@
         "nelmio/cors-bundle": "2.2.0",
         "ramsey/uuid": "4.3.1",
         "ramsey/uuid-doctrine": "1.8.1",
-        "rector/rector": "0.13.6",
+        "rector/rector": "0.13.7",
         "sonata-project/admin-bundle": "4.12.0",
         "sonata-project/doctrine-extensions": "1.17.0",
         "sonata-project/doctrine-orm-admin-bundle": "4.3.0",
