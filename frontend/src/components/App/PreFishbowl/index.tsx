@@ -21,6 +21,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { Counter } from '@/components/App/StatusBar/Counter';
 import { StyledContainer, StyledFishbowlInformation } from './styles';
+import PreFishbowlParticipants from "@/components/App/PreFishbowl/PreFishbowlParticipants";
 
 interface Props {
   fishbowl: Fishbowl;
@@ -69,7 +70,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
 
         <Button variant="link">what ever you do idkidkdik</Button>
       </StyledFishbowlInformation>
-      <div>Participant List</div>
+      <PreFishbowlParticipants/>
     </StyledContainer>
   );
 };
