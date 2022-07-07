@@ -208,7 +208,7 @@ services:
 
     # JITSI
     xmpp:
-        image: jitsi/prosody:stable-6726-2
+        image: jitsi/prosody:stable-7439-2
         volumes:
             - ${CONFIG}/prosody/config:/config:Z
             - ${CONFIG}/prosody/prosody-plugins-custom:/prosody-plugins-custom:Z
@@ -220,8 +220,9 @@ services:
             - ENABLE_BREAKOUT_ROOMS
             - ENABLE_GUESTS
             - ENABLE_LOBBY
-            - ENABLE_XMPP_WEBSOCKET
             - ENABLE_RECORDING
+            - ENABLE_XMPP_WEBSOCKET
+            - ENABLE_JAAS_COMPONENTS
             - GLOBAL_CONFIG
             - GLOBAL_MODULES
             - JIBRI_RECORDER_USER
@@ -243,6 +244,10 @@ services:
             - JWT_ALLOW_EMPTY
             - JWT_AUTH_TYPE
             - JWT_TOKEN_AUTH_MODULE
+            - MATRIX_UVS_URL
+            - MATRIX_UVS_ISSUER
+            - MATRIX_UVS_AUTH_TOKEN
+            - MATRIX_UVS_SYNC_POWER_LEVELS
             - LOG_LEVEL
             - LDAP_AUTH_METHOD
             - LDAP_BASE
@@ -257,6 +262,8 @@ services:
             - LDAP_START_TLS
             - LDAP_URL
             - LDAP_USE_TLS
+            - PROSODY_RESERVATION_ENABLED
+            - PROSODY_RESERVATION_REST_BASE_URL
             - PUBLIC_URL
             - TURN_CREDENTIALS
             - TURN_HOST
@@ -271,16 +278,17 @@ services:
             - XMPP_INTERNAL_MUC_DOMAIN
             - XMPP_MODULES
             - XMPP_MUC_MODULES
+            - XMPP_MUC_CONFIGURATION
             - XMPP_INTERNAL_MUC_MODULES
             - XMPP_RECORDER_DOMAIN
-            - XMPP_CROSS_DOMAIN
+            - XMPP_PORT
         networks:
             meet.jitsi:
                 aliases:
                     - ${XMPP_SERVER}
 
     focus:
-        image: jitsi/jicofo:stable-6726-2
+        image: jitsi/jicofo:stable-7439-2
         depends_on:
             - xmpp
         volumes:
@@ -305,8 +313,6 @@ services:
             - JICOFO_CONF_SINGLE_PARTICIPANT_TIMEOUT
             - JICOFO_ENABLE_HEALTH_CHECKS
             - JICOFO_SHORT_ID
-            - JICOFO_RESERVATION_ENABLED
-            - JICOFO_RESERVATION_REST_BASE_URL
             - JIBRI_BREWERY_MUC
             - JIBRI_REQUEST_RETRIES
             - JIBRI_PENDING_TIMEOUT
@@ -325,6 +331,7 @@ services:
             - XMPP_MUC_DOMAIN
             - XMPP_RECORDER_DOMAIN
             - XMPP_SERVER
+            - XMPP_PORT
         networks:
             meet.jitsi:
                 aliases:
@@ -353,7 +360,7 @@ services:
             - JIBRI_RECORDING_DIR
             - JIBRI_FINALIZE_RECORDING_SCRIPT_PATH
             - JIBRI_STRIP_DOMAIN_JID
-            - PUBLIC_URL=https://localhost:8343
+            - PUBLIC_URL
             - TZ
             - XMPP_AUTH_DOMAIN
             - XMPP_DOMAIN
@@ -364,11 +371,11 @@ services:
             - XMPP_PORT
             - XMPP_TRUST_ALL_CERTS
         depends_on:
-            - jicofo
+            - focus
         networks:
             meet.jitsi:
     jvb:
-        image: jitsi/jvb:stable-6726-2
+        image: jitsi/jvb:stable-7439-2
         depends_on:
             - xmpp
         ports:
@@ -380,14 +387,13 @@ services:
             - DOCKER_HOST_ADDRESS
             - ENABLE_COLIBRI_WEBSOCKET
             - ENABLE_OCTO
+            - ENABLE_MULTI_STREAM
             - JVB_AUTH_USER
             - JVB_AUTH_PASSWORD
             - JVB_BREWERY_MUC
+            - JVB_DISABLE_STUN
             - JVB_PORT
             - JVB_MUC_NICKNAME
-            - JVB_TCP_HARVESTER_DISABLED
-            - JVB_TCP_PORT
-            - JVB_TCP_MAPPED_PORT
             - JVB_STUN_SERVERS
             - JVB_OCTO_BIND_ADDRESS
             - JVB_OCTO_PUBLIC_ADDRESS
@@ -405,6 +411,7 @@ services:
             - XMPP_AUTH_DOMAIN
             - XMPP_INTERNAL_MUC_DOMAIN
             - XMPP_SERVER
+            - XMPP_PORT
         networks:
             meet.jitsi:
                 aliases:
