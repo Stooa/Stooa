@@ -76,7 +76,7 @@ const PreFishbowlParticipants: React.FC = ({}) => {
 
   return (
     <div>
-      {participants.length > 0 && (
+      {participants.length > 0 ? (
         <div className="participant-list">
           <div>
             <div className="col-left">
@@ -102,6 +102,8 @@ const PreFishbowlParticipants: React.FC = ({}) => {
             </ul>
           </div>
         </div>
+      ) : (
+        <div>Loading</div>
       )}
     </div>
   );
