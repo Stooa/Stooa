@@ -15,10 +15,6 @@ import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
 import { TweenMax } from 'gsap';
 
-const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
-  ssr: false
-});
-
 import "intro.js/introjs.css";
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
@@ -125,53 +121,8 @@ const Home = () => {
     });
   }, []);
 
-  const steps = [
-    {
-      element: '.kill-you',
-      intro: 'KIll me truck',
-      position: 'right',
-      tooltipClass: 'myTooltipClass',
-      highlightClass: 'myHighlightClass',
-    },
-    {
-      element: '.cta-create-fishbowl',
-      intro: 'Crea un fishbowl ya veras',
-    },
-    {
-      element: '.ph-badge ',
-      intro: 'Arnold is número uno in product hunt',
-    },
-  ];
-
-  const startCallback = () => {
-    console.log('start callback');
-  }
-
-  const exitCallback = () => {
-    console.log('exit callback');
-  }
-
-  const introJSOptions = {
-    nextLabel: 'siguiente',
-    prevLabel: 'patras',
-    // skipLabel: 'skippi',
-    showStepNumbers: true,
-    hintAnimation: true,
-    showBullets: true,
-    showButtons: true
-  };
-
   return (
     <Layout title={t('title')}>
-      <button className='kill-you'>temato</button>
-      <Steps
-        onStart={startCallback}
-        enabled={true}
-        steps={steps}
-        initialStep={0}
-        onExit={exitCallback}
-        options={introJSOptions}
-      />
       <Billboard className="billboard-animate">
         <div id="animated-billboard-morph"></div>
         <h1 data-testid="landing-title" className="title-display animate-item">
