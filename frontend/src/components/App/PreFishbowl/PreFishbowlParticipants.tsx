@@ -15,25 +15,12 @@ import People from '@/ui/svg/people.svg';
 import { getParticipants } from '@/lib/auth';
 import router from 'next/router';
 
-const initialParticipant = {
-  id: '',
-  name: '',
-  linkedin: '',
-  twitter: '',
-  isModerator: false,
-  isCurrentUser: false,
-  guestId: '',
-  joined: false,
-  isMuted: false,
-  isVideoMuted: false
-};
-
 const PING_TIMEOUT = 3500;
 const MAX_FAKE_PARTICIPANTS = 10;
 
 const PreFishbowlParticipants: React.FC = ({}) => {
-  const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);
-  const { t, lang } = useTranslation('fishbowl');
+  const [participants, setParticipants] = useState<Participant[]>([]);
+  const { lang } = useTranslation('fishbowl');
   const { fid } = router.query;
   const getParticipantsInterval = useRef<number>();
   const [numFakeParticipants, setNumFakeParticipants] = useState<number>(0);
@@ -41,7 +28,7 @@ const PreFishbowlParticipants: React.FC = ({}) => {
   const getApiParticipants = () => {
     getParticipants(lang, fid as string)
       .then(({ data: { response } }) => {
-        setParticipants(response || [initialParticipant]);
+        setParticipants(response || []);
       })
       .catch(error => {
         console.log('[STOOA] Error getting participants', error);
