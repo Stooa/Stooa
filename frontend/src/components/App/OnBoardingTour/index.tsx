@@ -13,7 +13,7 @@ import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { getTourSteps } from '@/components/App/OnBoardingTour/Steps';
-import { getOnBoardingCookie, setOnBoardingCookie } from '@/lib/auth';
+import OnBoardingTourCookie from '@/lib/OnBoardingTourCookie';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -30,41 +30,37 @@ const introJSOptions = {
 
 const OnBoardingTour: React.FC = () => {
   const { isModerator, conferenceStatus } = useStooa();
-  const [enabled, setEnabled] = useState(false);
+  const [alreadySeen, setAlreadySeen] = useState(false);
 
   const startTour = () => {
-    setOnBoardingCookie(true);
+    OnBoardingTourCookie.setOnBoardingCookie();
   };
 
   const exitTour = () => {
-    setEnabled(false);
+    setAlreadySeen(true);
   };
 
   const showTour = (): boolean => {
-    const cookie = getOnBoardingCookie(isModerator);
+    const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
     if (
-      !cookie &&
-      isModerator &&
+      !isModerator &&
+      !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
     ) {
-      setEnabled(true);
-
       return true;
     }
 
     return false;
   };
 
-  useEffect(() => {}, [enabled]);
-
   return (
     <>
       {showTour() && (
         <Steps
           onStart={startTour}
-          enabled={enabled}
+          enabled={true}
           steps={getTourSteps()}
           initialStep={0}
           onExit={exitTour}
