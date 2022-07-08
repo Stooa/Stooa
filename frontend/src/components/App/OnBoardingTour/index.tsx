@@ -14,7 +14,6 @@ import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { getTourSteps } from '@/components/App/OnBoardingTour/Steps';
 import { getOnBoardingCookie, setOnBoardingCookie } from '@/lib/auth';
-import useTranslation from 'next-translate/useTranslation';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -44,7 +43,12 @@ const OnBoardingTour: React.FC = () => {
   const showTour = (): boolean => {
     const cookie = getOnBoardingCookie(isModerator);
 
-    if (!cookie && isModerator && conferenceStatus === IConferenceStatus.RUNNING) {
+    if (
+      !cookie &&
+      isModerator &&
+      (conferenceStatus === IConferenceStatus.RUNNING ||
+        conferenceStatus === IConferenceStatus.INTRODUCTION)
+    ) {
       setEnabled(true);
 
       return true;
