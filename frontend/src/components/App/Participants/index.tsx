@@ -134,7 +134,11 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
 
   return (
     <>
-      <ParticipantsToggle as="button" className={active ? 'active' : ''} onClick={toggleDrawer}>
+      <ParticipantsToggle
+        as="button"
+        className={`participant-toggle ${active ? 'active' : ''} `}
+        onClick={toggleDrawer}
+      >
         <Curve className="curve" />
         {active && <ChevronRight className="toggle-icon" />}
         {!active && <ChevronLeft className="toggle-icon" />}

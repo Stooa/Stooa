@@ -22,6 +22,7 @@ import ModalKickUser from '@/components/App/ModalKickUser';
 import ReactionsReceiver from '../Reactions/ReactionsReceiver';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useRouter } from 'next/router';
+import OnBoardingTour from '@/components/App/OnBoardingTour';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -57,6 +58,7 @@ const Fishbowl: FC = () => {
 
   return (
     <>
+      <OnBoardingTour />
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}

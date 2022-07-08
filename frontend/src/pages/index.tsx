@@ -15,7 +15,7 @@ import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
 import { TweenMax } from 'gsap';
 
-import "intro.js/introjs.css";
+import 'intro.js/introjs.css';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
 import Layout from '@/layouts/Home';
@@ -34,6 +34,7 @@ import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import OnBoardingTour from '@/components/App/OnBoardingTour';
 
 const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
   loading: () => <div />

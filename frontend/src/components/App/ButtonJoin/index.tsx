@@ -52,7 +52,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
 
   return (
     <StyledButton
-      className={`medium ${joined ? 'joined' : ''}`}
+      className={`medium button-join ${joined ? 'joined' : ''}`}
       onClick={handleJoinClick}
       disabled={disabled}
       active={active}

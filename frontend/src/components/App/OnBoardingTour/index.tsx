@@ -7,31 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
+import { useStooa } from '@/contexts/StooaManager';
+import { IConferenceStatus } from '@/jitsi/Status';
+import { getTourSteps } from '@/components/App/OnBoardingTour/Steps';
+import { getOnBoardingCookie, setOnBoardingCookie } from '@/lib/auth';
+import useTranslation from 'next-translate/useTranslation';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
 });
-
-const steps = [
-  {
-    element: '.test',
-    intro: 'First step',
-    position: 'right',
-    tooltipClass: 'myTooltipClass',
-    highlightClass: 'myHighlightClass',
-  },
-  {
-    element: '.cta-create-fishbowl',
-    intro: 'Crea un fishbowl ya veras',
-  },
-  {
-    element: '.ph-badge ',
-    intro: 'Arnold is número uno in product hunt',
-  },
-];
 
 const introJSOptions = {
   nextLabel: 'next',
@@ -42,23 +29,46 @@ const introJSOptions = {
   showButtons: true
 };
 
-const startCallback = () => {
-  console.log('start callback');
-}
-
-const exitCallback = () => {
-  console.log('exit callback');
-}
-
 const OnBoardingTour: React.FC = () => {
-  return       <Steps
-    onStart={startCallback}
-    enabled={true}
-    steps={steps}
-    initialStep={0}
-    onExit={exitCallback}
-    options={introJSOptions}
-  />;
+  const { isModerator, conferenceStatus } = useStooa();
+  const [enabled, setEnabled] = useState(false);
+
+  const startTour = () => {
+    setOnBoardingCookie(true);
+  };
+
+  const exitTour = () => {
+    setEnabled(false);
+  };
+
+  const showTour = (): boolean => {
+    const cookie = getOnBoardingCookie(isModerator);
+
+    if (!cookie && isModerator && conferenceStatus === IConferenceStatus.RUNNING) {
+      setEnabled(true);
+
+      return true;
+    }
+
+    return false;
+  };
+
+  useEffect(() => {}, [enabled]);
+
+  return (
+    <>
+      {showTour() && (
+        <Steps
+          onStart={startTour}
+          enabled={enabled}
+          steps={getTourSteps()}
+          initialStep={0}
+          onExit={exitTour}
+          options={introJSOptions}
+        />
+      )}
+    </>
+  );
 };
 
 export default OnBoardingTour;
