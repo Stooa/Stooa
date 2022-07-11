@@ -143,7 +143,7 @@ const StyledParticipantList = styled.ul`
   }
 
   ${media.min('desktop')`
-    max-height: 60vh;
+  max-height: 620px;
   `}
 `;
 
