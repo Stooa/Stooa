@@ -60,8 +60,8 @@ const TITLE_MD = css`
 
 const TITLE_SM = css`
   ${titleSpacing}
-  font-size: ${rems(typography.desktopTitlesm.rawFontSize)};
-  line-height: ${typography.desktopTitlesm.lineHeight};
+  font-size: ${rems(typography.mobileTitlesm.rawFontSize)};
+  line-height: ${typography.mobileTitlesm.lineHeight};
   font-weight: 500;
 
   ${media.min('tablet')`

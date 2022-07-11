@@ -11,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
-import { TweenMax } from 'gsap';
+import { gsap } from 'gsap';
 
 import ModalOnBoarding from '@/components/App/ModalOnBoarding';
 import { getOnBoardingCookie, setOnBoardingCookie } from '@/lib/auth';
@@ -131,7 +131,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
     const items = document.querySelectorAll(`.slide[data-slide="${slide}"] .animate`);
 
     items.forEach(item => {
-      TweenMax.to(item, 0, {
+      gsap.to(item, 0, {
         opacity: 0,
         y: 30,
         ease: 'none',
@@ -144,7 +144,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
     const items = document.querySelectorAll(`.slide[data-slide="${slide}"] .animate`);
 
     items.forEach((item, i) => {
-      TweenMax.to(item, 1, {
+      gsap.to(item, 1, {
         opacity: 1,
         y: 0,
         ease: 'Power3.easeOut',

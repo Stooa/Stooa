@@ -8,19 +8,32 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+
 import { Participant } from '@/types/participant';
 import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
 import { getParticipants } from '@/lib/auth';
 import router from 'next/router';
+import {
+  StyledParticipantListWrapper,
+  StyledParticipantList,
+  StyledPrefishbowlParticipant,
+  StyledRegisterNotification
+} from './styles';
+import RedirectLink from '@/components/Web/RedirectLink';
+import Button from '@/components/Common/Button';
+import { ROUTE_REGISTER } from '@/app.config';
+
+import Linkedin from '@/ui/svg/share-linkedin.svg';
+import Twitter from '@/ui/svg/share-twitter.svg';
 
 const PING_TIMEOUT = 3500;
 const MAX_FAKE_PARTICIPANTS = 10;
 
 const PreFishbowlParticipants: React.FC = ({}) => {
   const [participants, setParticipants] = useState<Participant[]>([]);
-  const { lang } = useTranslation('fishbowl');
+  const { t, lang } = useTranslation('fishbowl');
   const { fid } = router.query;
   const getParticipantsInterval = useRef<number>();
   const [numFakeParticipants, setNumFakeParticipants] = useState<number>(0);
@@ -36,10 +49,25 @@ const PreFishbowlParticipants: React.FC = ({}) => {
   };
 
   const createFakeParticipants = () => {
-    let fakeParticipants = [];
+    const fakeParticipants = [];
 
     for (let i = 0; i < numFakeParticipants; i++) {
-      fakeParticipants.push(<div key={i}>fake participant</div>);
+      fakeParticipants.push(
+        <StyledPrefishbowlParticipant>
+          <div className="placeholder" key={i}>
+            <div />
+          </div>
+          <div className="social">
+            <span className="icon">
+              <Twitter />
+            </span>
+
+            <span className="icon">
+              <Linkedin />
+            </span>
+          </div>
+        </StyledPrefishbowlParticipant>
+      );
     }
 
     return fakeParticipants;
@@ -59,39 +87,46 @@ const PreFishbowlParticipants: React.FC = ({}) => {
     const fakeParticipantsToPrint = MAX_FAKE_PARTICIPANTS - participants.length;
 
     setNumFakeParticipants(fakeParticipantsToPrint > 0 ? fakeParticipantsToPrint : 0);
+    console.log(participants[0]);
   }, [participants]);
 
   return (
     <div>
-      {participants.length > 0 ? (
-        <div className="participant-list">
-          <div>
-            <div className="col-left">
-              <h3 className="caps col-left">Participants in the room</h3>
-            </div>
-            <div className="col-right">
-              <People />
-              <span className="body-xs medium">
-                {participants.length === 0 ? 1 : participants.length}
-              </span>
-            </div>
-          </div>
-          <div>
-            <ul>
-              {participants.map((participant, i) => (
-                <ParticipantCard
-                  participant={participant}
-                  key={`participant-speaking-${i}`}
-                  speaker={true}
-                />
-              ))}
-              {createFakeParticipants()}
-            </ul>
+      <StyledParticipantListWrapper>
+        <div className="participant-list__header">
+          <h3 className="caps body-sm medium">Participants in the room</h3>
+
+          <div className="participant-list__counter">
+            <People />
+            <span className="body-xs medium">
+              {participants.length === 0 ? 1 : participants.length}
+            </span>
           </div>
         </div>
-      ) : (
-        <div>Loading</div>
-      )}
+
+        <StyledRegisterNotification>
+          <p className="body-sm">
+            To connect with the people in the room through your social networks, sign up for Stooa.
+          </p>
+
+          <RedirectLink href={ROUTE_REGISTER} passHref>
+            <Button className="never-full" size="medium" as="a" data-testid="register">
+              <span>{t('common:register')}</span>
+            </Button>
+          </RedirectLink>
+        </StyledRegisterNotification>
+        <StyledParticipantList className={`${participants.length >= 10 ? 'scroll' : ''}`}>
+          {participants.length > 0 &&
+            participants.map((participant, i) => (
+              <ParticipantCard
+                variant="prefishbowl"
+                participant={participant}
+                key={`participant-${i}`}
+              />
+            ))}
+          {createFakeParticipants()}
+        </StyledParticipantList>
+      </StyledParticipantListWrapper>
     </div>
   );
 };

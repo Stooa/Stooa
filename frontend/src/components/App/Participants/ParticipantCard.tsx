@@ -16,17 +16,19 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import { Participant } from '@/types/participant';
-import ButtonContextMenu from '../ButtonContextMenu';
+import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';
 
-const ParticipantCard: React.FC<{ participant: Participant; speaker?: boolean }> = ({
-  participant
-}) => {
+const ParticipantCard: React.FC<{
+  participant: Participant;
+  speaker?: boolean;
+  variant?: 'prefishbowl' | 'participant-list';
+}> = ({ participant, variant = 'participant-list' }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
   return (
-    <StyledListItem className={`participant`} data-id={id} title={name}>
+    <StyledListItem className={`participant ${variant}`} data-id={id} title={name}>
       <div className="info">
         <span className="name">{name}</span>
         {(isModerator || isCurrentUser || isMyself) && (

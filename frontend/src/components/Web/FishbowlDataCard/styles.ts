@@ -8,13 +8,15 @@
  */
 
 import styled from 'styled-components';
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_800
 } from '@/ui/settings';
+import { TITLE_SM } from '@/ui/Titles';
+import { BODY_LG } from '@/ui/Texts';
 
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
@@ -48,6 +50,13 @@ const StyledFishbowlDataCard = styled.div`
 
   h2 {
     color: ${COLOR_NEUTRO_800};
+
+    &.prefishbowl-title {
+      ${TITLE_SM}
+      ${media.min('tablet')`
+        ${BODY_LG}
+      `}
+    }
   }
 
   div.date {

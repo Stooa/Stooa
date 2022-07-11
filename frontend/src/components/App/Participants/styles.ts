@@ -111,6 +111,10 @@ const StyledListItem = styled.li`
   padding: ${space(1)} ${space(3)};
   ${BODY_MD}
 
+  &.prefishbowl {
+    padding: ${space(2)} ${space(3)};
+  }
+
   .roles {
     color: ${COLOR_NEUTRO_600};
     margin-left: ${space()};

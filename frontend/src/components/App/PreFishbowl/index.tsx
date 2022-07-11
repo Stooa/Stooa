@@ -20,7 +20,7 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { Counter } from '@/components/App/StatusBar/Counter';
-import { StyledContainer, StyledFishbowlInformation } from './styles';
+import { StyledContainer, StyledFishbowlInformation, StyledParticipantsColumn } from './styles';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 
 interface Props {
@@ -60,7 +60,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
             </ButtonCopyUrl>
           </StyledFishbowlDataCardHeader>
 
-          <h2 className="body-lg medium">{fishbowl.name}</h2>
+          <h2 className="prefishbowl-title medium">{fishbowl.name}</h2>
           {fishbowl.description && (
             <p className="description body-md" data-testid="fishbowl-description">
               {fishbowl.description}
@@ -70,7 +70,9 @@ const PreFishbowl = ({ fishbowl }: Props) => {
 
         <Button variant="link">what ever you do idkidkdik</Button>
       </StyledFishbowlInformation>
-      <PreFishbowlParticipants />
+      <StyledParticipantsColumn>
+        <PreFishbowlParticipants />
+      </StyledParticipantsColumn>
     </StyledContainer>
   );
 };
