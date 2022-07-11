@@ -6,4 +6,4 @@ const OnBoardingTourWrapper = styled.div`
   }
 `;
 
-export {OnBoardingTourWrapper};
+export { OnBoardingTourWrapper };

@@ -31,7 +31,7 @@ const introJSOptions = {
 };
 
 const OnBoardingTour = () => {
-  const { isModerator, conferenceStatus } = useStooa();
+  const { isModerator, conferenceReady, conferenceStatus } = useStooa();
   const [alreadySeen, setAlreadySeen] = useState(false);
 
   const startTour = () => {
@@ -46,7 +46,8 @@ const OnBoardingTour = () => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
     if (
-      // !isModerator &&
+      conferenceReady &&
+      !isModerator &&
       !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)

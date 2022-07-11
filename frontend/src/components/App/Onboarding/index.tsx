@@ -113,7 +113,7 @@ const Onboarding: React.FC<Props> = ({ isModerator }) => {
   const shouldShow = () => {
     const cookie = getOnBoardingCookie(isModerator);
 
-    if (!cookie) {
+    if (!cookie && isModerator) {
       setActive(true);
       setAlreadySeen(false);
     }

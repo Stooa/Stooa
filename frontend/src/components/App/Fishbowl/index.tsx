@@ -58,7 +58,6 @@ const Fishbowl: FC = () => {
 
   return (
     <>
-      <OnBoardingTour />
       <Header toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
@@ -73,6 +72,7 @@ const Fishbowl: FC = () => {
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
       <Footer participantsActive={participantsActive} />
+      <OnBoardingTour />
     </>
   );
 };
