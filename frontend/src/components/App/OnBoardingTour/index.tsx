@@ -7,13 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { getTourSteps } from '@/components/App/OnBoardingTour/Steps';
 import OnBoardingTourCookie from '@/lib/OnBoardingTourCookie';
+import 'intro.js/introjs.css';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -22,13 +23,14 @@ const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
 const introJSOptions = {
   nextLabel: 'next',
   prevLabel: 'prev',
-  showStepNumbers: true,
+  showStepNumbers: false,
   hintAnimation: true,
   showBullets: true,
-  showButtons: true
+  showButtons: true,
+  tooltipClass: 'on-boarding-tour'
 };
 
-const OnBoardingTour: React.FC = () => {
+const OnBoardingTour = () => {
   const { isModerator, conferenceStatus } = useStooa();
   const [alreadySeen, setAlreadySeen] = useState(false);
 
@@ -44,7 +46,7 @@ const OnBoardingTour: React.FC = () => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
     if (
-      !isModerator &&
+      // !isModerator &&
       !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
@@ -55,20 +57,20 @@ const OnBoardingTour: React.FC = () => {
     return false;
   };
 
-  return (
-    <>
-      {showTour() && (
-        <Steps
-          onStart={startTour}
-          enabled={true}
-          steps={getTourSteps()}
-          initialStep={0}
-          onExit={exitTour}
-          options={introJSOptions}
-        />
-      )}
-    </>
-  );
+  if (showTour()) {
+    return (
+      <Steps
+        onStart={startTour}
+        enabled={true}
+        steps={getTourSteps()}
+        initialStep={0}
+        onExit={exitTour}
+        options={introJSOptions}
+      />
+    );
+  } else {
+    return null;
+  }
 };
 
 export default OnBoardingTour;
