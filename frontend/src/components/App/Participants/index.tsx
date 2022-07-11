@@ -14,7 +14,7 @@ import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getParticipants, ping } from '@/lib/auth';
 import { getParticipantList } from '@/lib/jitsi';
-import ParticipantCard from '@/components/App/Participants/Participant';
+import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
 import ChevronLeft from '@/ui/svg/chevron-left.svg';
 import ChevronRight from '@/ui/svg/chevron-right.svg';

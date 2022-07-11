@@ -19,14 +19,15 @@ import { Fishbowl } from '@/types/api-platform';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { Counter } from '../StatusBar/Counter';
+import { Counter } from '@/components/App/StatusBar/Counter';
 import { StyledContainer, StyledFishbowlInformation } from './styles';
+import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 
 interface Props {
   fishbowl: Fishbowl;
 }
 
-const Prefishbowl = ({ fishbowl }: Props) => {
+const PreFishbowl = ({ fishbowl }: Props) => {
   const router = useRouter();
   const { slug } = router.query;
   const { isModerator, conferenceStatus, timeStatus } = useStooa();
@@ -69,9 +70,9 @@ const Prefishbowl = ({ fishbowl }: Props) => {
 
         <Button variant="link">what ever you do idkidkdik</Button>
       </StyledFishbowlInformation>
-      <div>Participant List</div>
+      <PreFishbowlParticipants />
     </StyledContainer>
   );
 };
 
-export default Prefishbowl;
+export default PreFishbowl;

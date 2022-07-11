@@ -24,7 +24,7 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import { useRouter } from 'next/router';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
-import Prefishbowl from '@/components/App/Prefishbowl';
+import PreFishbowl from '@/components/App/PreFishbowl';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -39,7 +39,7 @@ const Fishbowl: FC = () => {
 
   const { fid } = useRouter().query;
 
-  const isPrefishbowl = fishbowlReady && !(conferenceStatus === IConferenceStatus.NOT_STARTED);
+  const isPreFishbowl = fishbowlReady && !(conferenceStatus === IConferenceStatus.NOT_STARTED);
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -73,10 +73,10 @@ const Fishbowl: FC = () => {
             closeModal={() => setParticipantToKick(null)}
           />
         )}
-        {isPrefishbowl ? <Seats /> : <Prefishbowl fishbowl={data} />}
+        {isPreFishbowl ? <Seats /> : <PreFishbowl fishbowl={data} />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
-      {isPrefishbowl && <Footer participantsActive={participantsActive} />}
+      {isPreFishbowl && <Footer participantsActive={participantsActive} />}
     </>
   );
 };
