@@ -39,7 +39,7 @@ const Fishbowl: FC = () => {
 
   const { fid } = useRouter().query;
 
-  const isPreFishbowl = fishbowlReady && !(conferenceStatus === IConferenceStatus.NOT_STARTED);
+  const isPreFishbowl = fishbowlReady && conferenceStatus === IConferenceStatus.NOT_STARTED;
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -63,7 +63,7 @@ const Fishbowl: FC = () => {
 
   return (
     <>
-      <Header toggleParticipants={toggleParticipants} />
+      <Header isPrefishbowl={isPreFishbowl} toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
         {participantToKick && (
@@ -73,10 +73,10 @@ const Fishbowl: FC = () => {
             closeModal={() => setParticipantToKick(null)}
           />
         )}
-        {isPreFishbowl ? <Seats /> : <PreFishbowl fishbowl={data} />}
+        {isPreFishbowl ? <PreFishbowl fishbowl={data} /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
-      {isPreFishbowl && <Footer participantsActive={participantsActive} />}
+      {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
     </>
   );
 };

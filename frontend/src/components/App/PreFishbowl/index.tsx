@@ -23,6 +23,9 @@ import { Counter } from '@/components/App/StatusBar/Counter';
 import { StyledContainer, StyledFishbowlInformation, StyledParticipantsColumn } from './styles';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 
+import Red from '@/ui/svg/blobs/red.svg';
+import Yellow from '@/ui/svg/blobs/yellow.svg';
+
 interface Props {
   fishbowl: Fishbowl;
 }
@@ -36,6 +39,12 @@ const PreFishbowl = ({ fishbowl }: Props) => {
 
   return (
     <StyledContainer>
+      {/* BLOBS */}
+      <div className="blobs-wrapper">
+        <Red />
+        <Yellow />
+      </div>
+
       <StyledFishbowlInformation>
         <BoxedFriend />
         <Counter

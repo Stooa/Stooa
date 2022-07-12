@@ -26,38 +26,19 @@ const Onboarding = dynamic(import('@/components/App/Onboarding'), { loading: () 
 
 interface Props {
   toggleParticipants: () => void;
+  isPrefishbowl?: boolean;
 }
 
-const Header: React.FC<Props> = ({ toggleParticipants }) => {
+const Header: React.FC<Props> = ({ toggleParticipants, isPrefishbowl = 'false' }) => {
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
 
   return (
-    <HeaderStyled>
-      <div className="hide-desktop header-top">
-        <Logo className="header-logo" />
-        <StatusBar
-          isModerator={isModerator}
-          data={data}
-          conferenceStatus={conferenceStatus}
-          timeStatus={timeStatus}
-        />
-      </div>
-      <div className="header-info">
-        <FishbowlInfo data={data} />
-        <Onboarding initialized={conferenceReady} isModerator={isModerator} />
-      </div>
-      <div className="header-share">
-        <ModalShareLink />
-      </div>
-      <div className="header-actions">
-        {isModerator && (
-          <div className="hide-mobile">
-            <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} />
-          </div>
-        )}
-        <div className="hide-mobile">
+    <HeaderStyled className={`${isPrefishbowl ? 'prefishbowl' : ''}`}>
+      {!isPrefishbowl && (
+        <div className="hide-desktop header-top">
+          <Logo className="header-logo" />
           <StatusBar
             isModerator={isModerator}
             data={data}
@@ -65,11 +46,43 @@ const Header: React.FC<Props> = ({ toggleParticipants }) => {
             timeStatus={timeStatus}
           />
         </div>
-        <Participants
-          initialized={conferenceReady}
-          fid={fid as string}
-          toggleParticipants={toggleParticipants}
-        />
+      )}
+      <div className="header-info">
+        {isPrefishbowl ? (
+          <Logo className="header-logo" />
+        ) : (
+          <>
+            <FishbowlInfo data={data} />
+            <Onboarding initialized={conferenceReady} isModerator={isModerator} />
+          </>
+        )}
+      </div>
+      <div className="header-share">
+        <ModalShareLink />
+      </div>
+      <div className="header-actions">
+        {isModerator && (
+          <div className={!isPrefishbowl ? 'hide-mobile' : ''}>
+            <ModeratorActions fid={fid as string} conferenceStatus={conferenceStatus} />
+          </div>
+        )}
+        {!isPrefishbowl && (
+          <>
+            <div className="hide-mobile">
+              <StatusBar
+                isModerator={isModerator}
+                data={data}
+                conferenceStatus={conferenceStatus}
+                timeStatus={timeStatus}
+              />
+            </div>
+            <Participants
+              initialized={conferenceReady}
+              fid={fid as string}
+              toggleParticipants={toggleParticipants}
+            />
+          </>
+        )}
       </div>
     </HeaderStyled>
   );

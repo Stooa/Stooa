@@ -23,20 +23,41 @@ const StyledContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  padding-top: ${space(6)};
 
   row-gap: ${space(8)};
 
   ${media.min('desktop')`
-    grid-template-columns: 1fr 1fr;
-    column-gap: ${space(8)};
+  grid-template-columns: 1fr 1fr;
+  column-gap: ${space(8)};
+  padding-top: ${space(6)};
   `}
+
+  & .blobs-wrapper {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+
+    & svg:first-child {
+      position: absolute;
+      left: -120px;
+      bottom: -260px;
+    }
+
+    & svg:last-child {
+      position: absolute;
+      right: -280px;
+      bottom: -117px;
+    }
+  }
 `;
 
 const StyledFishbowlInformation = styled.div`
   display: flex;
   flex-direction: column;
-  padding: ${space(2)} ${space(8)} 0;
+  padding: 0;
+  z-index: 1;
 
   & > .counter {
     ${TITLE_MD}
@@ -54,25 +75,16 @@ const StyledFishbowlInformation = styled.div`
     align-self: flex-start;
   }
 
-  /* ELLIPSIS ANIMATION */
-
-  @keyframes ellipsis {
-    to {
-      width: 1em;
-    }
-  }
-
-  @-webkit-keyframes ellipsis {
-    to {
-      width: 1em;
-    }
-  }
+  ${media.min('tablet')`
+    padding: ${space(2)} ${space(8)} 0;
+  `}
 `;
 
 const StyledParticipantsColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1;
 `;
 
 const StyledParticipantListWrapper = styled.div`
@@ -97,7 +109,26 @@ const StyledParticipantListWrapper = styled.div`
       color: ${COLOR_NEUTRO_700};
 
       & :last-child {
+        width: 16px;
         margin-left: ${space(0.5)};
+      }
+
+      & svg.loader {
+        color: ${COLOR_NEUTRO_700};
+        animation: spin 1s linear infinite;
+
+        & circle {
+          opacity: 0.25;
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
       }
     }
   }
