@@ -8,6 +8,7 @@
  */
 
 import React  from 'react';
+import useTranslation from "next-translate/useTranslation";
 
 interface StepProps {
   title?: string;
@@ -16,16 +17,18 @@ interface StepProps {
 }
 
 const StepTooltip = ({ title, text, img } : StepProps) => {
+  const { t } = useTranslation('on-boarding-tour');
+
   return (
     <div>
       {img &&
         <img src={img}/>
       }
       {title &&
-        <h1>{title}</h1>
+        <h1>{t('title')}</h1>
       }
       {text &&
-        <p>{text}</p>
+        <p>{t('text')}</p>
       }
     </div>
   );

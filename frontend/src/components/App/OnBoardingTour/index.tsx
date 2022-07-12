@@ -49,19 +49,19 @@ const OnBoardingTour = () => {
   const getTourSteps = (): step[] => {
     return [
       {
-        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="" />
+        intro: <StepTooltip title="step1.title" text="step2.text" img="" />
       },
       {
         element: '.button-join',
-        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="/img/tour/step2.gif" />
+        intro: <StepTooltip title="step2.title" text="step2.text" img="/img/tour/step2.gif" />
       },
       {
         element: '#seat-2',
-        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="/img/tour/step3.gif" />
+        intro: <StepTooltip title="step3.title" text="step3.text" img="/img/tour/step3.gif" />
       },
       {
         element: '.participant-toggle',
-        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="/img/tour/step4.gif" />
+        intro: <StepTooltip title="step4.title" text="step4.text" img="/img/tour/step4.gif" />
       }
     ];
   };
