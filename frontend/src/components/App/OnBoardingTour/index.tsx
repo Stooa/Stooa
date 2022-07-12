@@ -12,9 +12,10 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus } from '@/jitsi/Status';
-import { getTourSteps } from '@/components/App/OnBoardingTour/Steps';
 import OnBoardingTourCookie from '@/lib/OnBoardingTourCookie';
 import 'intro.js/introjs.css';
+
+import StepTooltip from "@/components/App/OnBoardingTour/StepTooltip";
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -23,12 +24,15 @@ const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
 const introJSOptions = {
   nextLabel: 'next',
   prevLabel: 'prev',
-  showStepNumbers: false,
-  hintAnimation: true,
-  showBullets: true,
-  showButtons: true,
-  tooltipClass: 'on-boarding-tour'
+  tooltipClass: 'on-boarding-tour',
+  hidePrev: true
 };
+
+type step = {
+  element?: string;
+  intro: JSX.Element|string;
+};
+
 
 const OnBoardingTour = () => {
   const { isModerator, conferenceReady, conferenceStatus } = useStooa();
@@ -42,12 +46,32 @@ const OnBoardingTour = () => {
     setAlreadySeen(true);
   };
 
+  const getTourSteps = (): step[] => {
+    return [
+      {
+        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="" />
+      },
+      {
+        element: '.button-join',
+        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="/img/tour/step2.gif" />
+      },
+      {
+        element: '#seat-2',
+        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="/img/tour/step3.gif" />
+      },
+      {
+        element: '.participant-toggle',
+        intro: <StepTooltip title="on-boarding-tour:title" text="on-boarding-tour:text" img="/img/tour/step4.gif" />
+      }
+    ];
+  };
+
   const showTour = (): boolean => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
     if (
       conferenceReady &&
-      !isModerator &&
+      // !isModerator &&
       !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
