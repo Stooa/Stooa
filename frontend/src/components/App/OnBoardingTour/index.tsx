@@ -39,22 +39,22 @@ const OnBoardingTour = () => {
       },
       {
         element: '.button-join',
-        intro: <StepTooltip title={t('step2.title')} text={t('step2.title')} img="/img/tour/step2.gif" />
+        intro: <StepTooltip title={t('step2.title')} text={t('step2.title')} img="/img/tour/tour-step2.gif" />
       },
       {
         element: '#seat-2',
-        intro: <StepTooltip title={t('step3.title')} text={t('step3.text')} img="/img/tour/step3.gif" />
+        intro: <StepTooltip title={t('step3.title')} text={t('step3.text')} img="/img/tour/tour-step3.gif" />
       },
       {
         element: '.participant-toggle',
-        intro: <StepTooltip title={t('step4.title')} text={t('step4.title')} img="/img/tour/step4.gif" />
+        intro: <StepTooltip title={t('step4.title')} text={t('step4.text')} img="/img/tour/tour-step4.gif" />
       }
     ];
   };
 
   const introJSOptions = {
     nextLabel: t('next'),
-    prevLabel: t('prev'),
+    prevLabel: t('previous'),
     doneLabel: t('done'),
     tooltipClass: 'on-boarding-tour',
     hidePrev: true
