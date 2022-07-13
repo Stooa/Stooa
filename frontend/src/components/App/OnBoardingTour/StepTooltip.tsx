@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import React  from 'react';
-import useTranslation from "next-translate/useTranslation";
+import React from 'react';
+import useTranslation from 'next-translate/useTranslation';
 
 interface StepTooltipProps {
   title?: string;
@@ -16,20 +16,14 @@ interface StepTooltipProps {
   img?: string;
 }
 
-const StepTooltip = ({ title, text, img } : StepTooltipProps) => {
+const StepTooltip = ({ title, text, img }: StepTooltipProps) => {
   const { t } = useTranslation('on-boarding-tour');
 
   return (
     <div>
-      {img &&
-        <img src={img}/>
-      }
-      {title &&
-        <h3>{t(title)}</h3>
-      }
-      {text &&
-        <p>{t(text)}</p>
-      }
+      {img && <img src={img} />}
+      {title && <h3>{t(title)}</h3>}
+      {text && <p>{t(text)}</p>}
     </div>
   );
 };
