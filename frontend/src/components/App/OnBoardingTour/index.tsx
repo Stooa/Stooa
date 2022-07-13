@@ -30,7 +30,7 @@ type step = {
 };
 
 const OnBoardingTour = () => {
-  const { isModerator, conferenceReady, conferenceStatus } = useStooa();
+  const { isModerator, data, conferenceReady, conferenceStatus } = useStooa();
   const [alreadySeen, setAlreadySeen] = useState(false);
   const { t } = useTranslation('on-boarding-tour');
 
@@ -80,12 +80,16 @@ const OnBoardingTour = () => {
     hidePrev: true
   };
 
-  const startTour = () => {
+  const onStartTour = () => {
     OnBoardingTourCookie.setOnBoardingCookie();
   };
 
-  const exitTour = () => {
+  const onExitTour = () => {
     setAlreadySeen(true);
+  };
+
+  const onCompleteTour = () => {
+    // track with event
   };
 
   const showTour = (): boolean => {
@@ -107,11 +111,12 @@ const OnBoardingTour = () => {
   if (showTour()) {
     return (
       <Steps
-        onStart={startTour}
         enabled={true}
         steps={attendeeSteps}
         initialStep={0}
-        onExit={exitTour}
+        onStart={onStartTour}
+        onExit={onExitTour}
+        onComplete={onCompleteTour}
         options={introJSOptions}
       />
     );
