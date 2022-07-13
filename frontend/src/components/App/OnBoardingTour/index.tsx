@@ -21,13 +21,6 @@ const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
 });
 
-const introJSOptions = {
-  nextLabel: 'next',
-  prevLabel: 'prev',
-  tooltipClass: 'on-boarding-tour',
-  hidePrev: true
-};
-
 type step = {
   element?: string;
   intro: JSX.Element|string;
@@ -37,14 +30,6 @@ type step = {
 const OnBoardingTour = () => {
   const { isModerator, conferenceReady, conferenceStatus } = useStooa();
   const [alreadySeen, setAlreadySeen] = useState(false);
-
-  const startTour = () => {
-    OnBoardingTourCookie.setOnBoardingCookie();
-  };
-
-  const exitTour = () => {
-    setAlreadySeen(true);
-  };
 
   const getTourSteps = (): step[] => {
     return [
@@ -66,6 +51,21 @@ const OnBoardingTour = () => {
     ];
   };
 
+  const introJSOptions = {
+    nextLabel: 'next',
+    prevLabel: 'prev',
+    tooltipClass: 'on-boarding-tour',
+    hidePrev: true
+  };
+
+  const startTour = () => {
+    OnBoardingTourCookie.setOnBoardingCookie();
+  };
+
+  const exitTour = () => {
+    setAlreadySeen(true);
+  };
+  
   const showTour = (): boolean => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 

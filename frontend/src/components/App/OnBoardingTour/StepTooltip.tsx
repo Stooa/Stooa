@@ -10,13 +10,13 @@
 import React  from 'react';
 import useTranslation from "next-translate/useTranslation";
 
-interface StepProps {
+interface StepTooltipProps {
   title?: string;
   text?: string;
   img?: string;
 }
 
-const StepTooltip = ({ title, text, img } : StepProps) => {
+const StepTooltip = ({ title, text, img } : StepTooltipProps) => {
   const { t } = useTranslation('on-boarding-tour');
 
   return (
@@ -25,10 +25,10 @@ const StepTooltip = ({ title, text, img } : StepProps) => {
         <img src={img}/>
       }
       {title &&
-        <h1>{t('title')}</h1>
+        <h1>{t(title)}</h1>
       }
       {text &&
-        <p>{t('text')}</p>
+        <p>{t(text)}</p>
       }
     </div>
   );
