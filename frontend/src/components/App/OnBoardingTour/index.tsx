@@ -25,6 +25,8 @@ const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
 type step = {
   element?: string;
   intro: JSX.Element | string;
+  position?: string;
+  tooltipClass?: string;
 };
 
 const OnBoardingTour = () => {
@@ -34,7 +36,8 @@ const OnBoardingTour = () => {
 
   const attendeeSteps: step[] = [
     {
-      intro: <StepTooltip title={t('step1.title')} text={t('step1.text')} img="" />
+      intro: <StepTooltip title={t('step1.title')} text={t('step1.text')} img="" />,
+      tooltipClass: 'first-step'
     },
     {
       element: '.button-join',
@@ -54,7 +57,8 @@ const OnBoardingTour = () => {
           text={t('step3.text')}
           img="/img/tour/tour-step3.gif"
         />
-      )
+      ),
+      position: 'right'
     },
     {
       element: '.participant-toggle',
