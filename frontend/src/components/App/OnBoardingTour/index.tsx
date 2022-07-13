@@ -55,6 +55,7 @@ const OnBoardingTour = () => {
   const introJSOptions = {
     nextLabel: t('next'),
     prevLabel: t('prev'),
+    doneLabel: t('done'),
     tooltipClass: 'on-boarding-tour',
     hidePrev: true
   };
