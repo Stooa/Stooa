@@ -54,7 +54,7 @@ const OnBoardingTour = () => {
       intro: (
         <StepTooltip
           title={t('step3.title')}
-          text={t('step3.text')}
+          text={data.hasIntroduction ? t('step3.textIntroduction') : t('step3.text')}
           img="/img/tour/tour-step3.gif"
         />
       ),

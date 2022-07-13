@@ -9,7 +9,8 @@
     },
     "step3": {
         "title": "How can I join a seat?",
-        "text": "Join and Leave a seat using the green and red buttons. And no worries, by leaving a seat you are still staying in the room hearing the others."
+        "text": "Join and Leave a seat using the green and red buttons. And no worries, by leaving a seat you are still staying in the room hearing the others.",
+        "textIntroduction": "As soon as the introduction is over, you can join and leave a seat using the green and red buttons. Don’t worry, by leaving a seat you'll still be in the room listening to the other speakers!"
     },
     "step4": {
         "title": "Network with participants",
