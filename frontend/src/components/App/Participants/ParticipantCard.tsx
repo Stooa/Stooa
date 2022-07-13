@@ -54,6 +54,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
+              data-username={`@${twitter.split('/').pop()}`}
             >
               <Twitter />
             </a>
@@ -76,6 +77,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
+              data-username={linkedin}
             >
               <Linkedin />
             </a>

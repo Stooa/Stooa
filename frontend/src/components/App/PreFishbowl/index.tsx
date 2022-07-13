@@ -20,7 +20,12 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { Counter } from '@/components/App/StatusBar/Counter';
-import { StyledContainer, StyledFishbowlInformation, StyledParticipantsColumn } from './styles';
+import {
+  StyledContainer,
+  StyledFishbowlDataWrapper,
+  StyledFishbowlInformation,
+  StyledParticipantsColumn
+} from './styles';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 
 import Red from '@/ui/svg/blobs/red.svg';
@@ -35,7 +40,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
   const { slug } = router.query;
   const { isModerator, conferenceStatus, timeStatus } = useStooa();
 
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('fishbowl');
 
   return (
     <StyledContainer>
@@ -54,30 +59,31 @@ const PreFishbowl = ({ fishbowl }: Props) => {
           conferenceStatus={conferenceStatus}
         />
 
-        <StyledFishbowlDataCard>
-          <StyledFishbowlDataCardHeader>
-            <p className="body-xs">
-              <Trans i18nKey="fishbowl:detail.cardMiniTitle" components={{ i: <i /> }} />
-            </p>
-            <ButtonCopyUrl
-              data-testid="copy-link"
-              variant="text"
-              fid={slug as string}
-              locale={lang}
-            >
-              {t('common:linkButton')}
-            </ButtonCopyUrl>
-          </StyledFishbowlDataCardHeader>
+        <StyledFishbowlDataWrapper>
+          <StyledFishbowlDataCard className="prefishbowl">
+            <StyledFishbowlDataCardHeader>
+              <p className="body-xs">
+                <Trans i18nKey="fishbowl:detail.cardMiniTitle" components={{ i: <i /> }} />
+              </p>
+              <ButtonCopyUrl
+                data-testid="copy-link"
+                variant="text"
+                fid={slug as string}
+                locale={lang}
+              >
+                {t('common:linkButton')}
+              </ButtonCopyUrl>
+            </StyledFishbowlDataCardHeader>
 
-          <h2 className="prefishbowl-title medium">{fishbowl.name}</h2>
-          {fishbowl.description && (
-            <p className="description body-md" data-testid="fishbowl-description">
-              {fishbowl.description}
-            </p>
-          )}
-        </StyledFishbowlDataCard>
-
-        <Button variant="link">what ever you do idkidkdik</Button>
+            <h2 className=" medium">{fishbowl.name}</h2>
+            {fishbowl.description && (
+              <p className="description body-md" data-testid="fishbowl-description">
+                {fishbowl.description}
+              </p>
+            )}
+          </StyledFishbowlDataCard>
+          <Button variant="link">{t('prefishbowl.onBoardingHelp')}</Button>
+        </StyledFishbowlDataWrapper>
       </StyledFishbowlInformation>
       <StyledParticipantsColumn>
         <PreFishbowlParticipants />

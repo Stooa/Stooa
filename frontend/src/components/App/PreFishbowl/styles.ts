@@ -8,6 +8,7 @@
  */
 
 import { media, space } from '@/ui/helpers';
+import { scrolllbarStyle } from '@/ui/Scrollbar';
 import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_200,
@@ -26,7 +27,7 @@ const StyledContainer = styled.div`
 
   row-gap: ${space(8)};
 
-  ${media.min('desktop')`
+  ${media.min('desktopLarge')`
   grid-template-columns: 1fr 1fr;
   column-gap: ${space(8)};
   padding-top: ${space(6)};
@@ -56,6 +57,7 @@ const StyledContainer = styled.div`
 const StyledFishbowlInformation = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 0;
   z-index: 1;
 
@@ -88,7 +90,8 @@ const StyledParticipantsColumn = styled.div`
 `;
 
 const StyledParticipantListWrapper = styled.div`
-  max-width: 512px;
+  width: 100%;
+  max-width: 620px;
 
   border: 1px solid ${COLOR_NEUTRO_300};
   border-radius: 4px;
@@ -166,15 +169,23 @@ const StyledPrefishbowlParticipant = styled(StyledListItem)`
 const StyledParticipantList = styled.ul`
   max-height: 620px;
   padding: 0;
+  color: ${COLOR_NEUTRO_700};
 
   background-color: ${COLOR_NEUTRO_100};
-
+  ${scrolllbarStyle}
   &.scroll {
     overflow-y: scroll;
   }
 
   ${media.min('desktop')`
-  max-height: 620px;
+    max-height: 800px;
+  `}
+`;
+
+const StyledFishbowlDataWrapper = styled.div`
+  width: 100%;
+  ${media.between('tablet', 'desktopLarge')`
+    max-width: 620px;
   `}
 `;
 
@@ -185,5 +196,6 @@ export {
   StyledParticipantsColumn,
   StyledParticipantListWrapper,
   StyledRegisterNotification,
-  StyledPrefishbowlParticipant
+  StyledPrefishbowlParticipant,
+  StyledFishbowlDataWrapper
 };

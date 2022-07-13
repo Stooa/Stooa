@@ -47,9 +47,9 @@ const PreFishbowlParticipants: React.FC = ({}) => {
   };
 
   const getApiParticipants = () => {
-    console.log(lang, fid);
     getParticipants(lang, fid as string)
       .then(({ data: { response } }) => {
+        console.log('getParticipants', response);
         setParticipants(response || []);
       })
       .catch(error => {
@@ -62,8 +62,8 @@ const PreFishbowlParticipants: React.FC = ({}) => {
 
     for (let i = 0; i < numFakeParticipants; i++) {
       fakeParticipants.push(
-        <StyledPrefishbowlParticipant>
-          <div className="placeholder" key={i}>
+        <StyledPrefishbowlParticipant key={i} className="prefishbowl">
+          <div className="placeholder">
             <div />
           </div>
           <div className="social">
@@ -101,7 +101,7 @@ const PreFishbowlParticipants: React.FC = ({}) => {
   }, [participants]);
 
   return (
-    <div>
+    <>
       <StyledParticipantListWrapper>
         <div className="participant-list__header">
           <h3 className="caps body-sm medium">Participants in the room</h3>
@@ -141,7 +141,7 @@ const PreFishbowlParticipants: React.FC = ({}) => {
           {createFakeParticipants()}
         </StyledParticipantList>
       </StyledParticipantListWrapper>
-    </div>
+    </>
   );
 };
 

@@ -13,10 +13,12 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { TITLE_SM } from '@/ui/Titles';
 import { BODY_LG } from '@/ui/Texts';
+import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
@@ -50,18 +52,33 @@ const StyledFishbowlDataCard = styled.div`
 
   h2 {
     color: ${COLOR_NEUTRO_800};
+  }
 
-    &.prefishbowl-title {
+  & div.date {
+    color: ${COLOR_NEUTRO_800};
+    margin-bottom: ${space(3)};
+  }
+
+  & .description {
+    color: ${COLOR_NEUTRO_700};
+    overflow-y: scroll;
+    max-height: 5.4em;
+    word-break: break-word;
+
+    ${scrolllbarStyle}
+
+    ${media.min('tablet')`
+        max-height: 9em;
+      `}
+  }
+
+  &.prefishbowl {
+    & h2 {
       ${TITLE_SM}
       ${media.min('tablet')`
         ${BODY_LG}
       `}
     }
-  }
-
-  div.date {
-    color: ${COLOR_NEUTRO_800};
-    margin-bottom: ${space(3)};
   }
 `;
 

@@ -20,6 +20,7 @@ import {
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
 import { BODY_LG, BODY_MD } from '@/ui/Texts';
+import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
@@ -53,24 +54,8 @@ const FishbowlScrollList = styled.div`
   max-height: 100%;
 
   overflow-y: scroll;
-  scrollbar-color: ${COLOR_NEUTRO_400} transparent;
 
-  &::-webkit-scrollbar {
-    width: 16px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    /* Foreground */
-    border: 4px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    border-radius: 9999px;
-    background-color: ${COLOR_NEUTRO_400};
-  }
-
-  &::-webkit-scrollbar-track {
-    /* Background */
-    background: transparent;
-  }
+  ${scrolllbarStyle}
 
   ${media.max('desktop')`
     -ms-overflow-style: none; /* for Internet Explorer, Edge */

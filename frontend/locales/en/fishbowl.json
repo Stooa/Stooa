@@ -112,5 +112,8 @@
         "laugh": "LOL",
         "wave": "Hi",
         "insightful": "Insightful"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "Don't know how a fishbowl works? Click here"
     }
 }

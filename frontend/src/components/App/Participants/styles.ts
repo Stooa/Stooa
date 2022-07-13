@@ -16,7 +16,8 @@ import {
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_NEUTRO_700
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_900
 } from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
 import { StyledButtonContext } from '@/components/App/ButtonContextMenu/styles';
@@ -111,10 +112,6 @@ const StyledListItem = styled.li`
   padding: ${space(1)} ${space(3)};
   ${BODY_MD}
 
-  &.prefishbowl {
-    padding: ${space(2)} ${space(3)};
-  }
-
   .roles {
     color: ${COLOR_NEUTRO_600};
     margin-left: ${space()};
@@ -143,9 +140,9 @@ const StyledListItem = styled.li`
     box-sizing: content-box;
     align-items: center;
     display: inline-flex;
-    height: 16px;
+    height: auto;
     justify-content: center;
-    width: 16px;
+    width: auto;
   }
 
   span.icon {
@@ -153,12 +150,33 @@ const StyledListItem = styled.li`
   }
 
   .social {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
     & > *:not(:last-child) {
       margin-right: ${space(2)};
+    }
+
+    & a:hover::after {
+      ${BODY_SM}
+      content: attr(data-username);
+      position: absolute;
+      bottom: calc(100% + ${space(0.5)});
+      background-color: ${COLOR_NEUTRO_900};
+      padding: ${space(0.5)} ${space(1)};
+      color: ${COLOR_NEUTRO_100};
+
+      border-radius: 30px;
+    }
+  }
+
+  &.prefishbowl {
+    padding: ${space(2)} ${space(3)};
+
+    & .icon {
+      transform: scale(1.2);
     }
   }
 
