@@ -16,6 +16,7 @@ import OnBoardingTourCookie from '@/lib/OnBoardingTourCookie';
 import 'intro.js/introjs.css';
 
 import StepTooltip from "@/components/App/OnBoardingTour/StepTooltip";
+import useTranslation from "next-translate/useTranslation";
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -26,34 +27,34 @@ type step = {
   intro: JSX.Element|string;
 };
 
-
 const OnBoardingTour = () => {
   const { isModerator, conferenceReady, conferenceStatus } = useStooa();
   const [alreadySeen, setAlreadySeen] = useState(false);
+  const { t } = useTranslation('on-boarding-tour');
 
   const getTourSteps = (): step[] => {
     return [
       {
-        intro: <StepTooltip title="step1.title" text="step2.text" img="" />
+        intro: <StepTooltip title={t('step1.title')} text={t('step1.text')} img="" />
       },
       {
         element: '.button-join',
-        intro: <StepTooltip title="step2.title" text="step2.text" img="/img/tour/step2.gif" />
+        intro: <StepTooltip title={t('step2.title')} text={t('step2.title')} img="/img/tour/step2.gif" />
       },
       {
         element: '#seat-2',
-        intro: <StepTooltip title="step3.title" text="step3.text" img="/img/tour/step3.gif" />
+        intro: <StepTooltip title={t('step3.title')} text={t('step3.text')} img="/img/tour/step3.gif" />
       },
       {
         element: '.participant-toggle',
-        intro: <StepTooltip title="step4.title" text="step4.text" img="/img/tour/step4.gif" />
+        intro: <StepTooltip title={t('step4.title')} text={t('step4.title')} img="/img/tour/step4.gif" />
       }
     ];
   };
 
   const introJSOptions = {
-    nextLabel: 'next',
-    prevLabel: 'prev',
+    nextLabel: t('next'),
+    prevLabel: t('prev'),
     tooltipClass: 'on-boarding-tour',
     hidePrev: true
   };
@@ -65,7 +66,7 @@ const OnBoardingTour = () => {
   const exitTour = () => {
     setAlreadySeen(true);
   };
-  
+
   const showTour = (): boolean => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
