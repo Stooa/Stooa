@@ -1,0 +1,22 @@
+{
+    "step1": {
+        "title": "Hola!",
+        "text": "Aquí van uns consells perquè la teva experiència en el fishbowl sigui fluida."
+    },
+    "step2": {
+        "title": "Les cinc cadires",
+        "text": "Les 5 cadires estan disponibles perquè t'uneixis conversa sempre que tinguis alguna cosa a dir. Quan hagis acabat, deixa la teva cadira lliure perquè altres persones puguin participar!"
+    },
+    "step3": {
+        "title": "Com faig servir les cadires?",
+        "text": "Quan acabi la introducció, podràs ocupar una cadira o deixar-la lliure usant els botons verd i vermell. No et preocupis: quan deixis el teu seient seguiràs a la sala escoltant als altres!",
+        "textIntroduction": "Quan acabi la introducció, podràs ocupar una cadira o deixar-la lliure usant els botons verd i vermell. No et preocupis: quan deixis el teu seient seguiràs a la sala escoltant als altres!"
+    },
+    "step4": {
+        "title": "Networking",
+        "text": "Coneix i connecta amb les persones a la sala a través del seu perfil en Linkedin i Twitter (si estindicat)"
+    },
+    "next": "Següent",
+    "previous": "Anterior",
+    "done": "Entès"
+}
