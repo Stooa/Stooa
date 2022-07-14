@@ -97,7 +97,8 @@ const OnBoardingTour = () => {
 
     if (
       conferenceReady &&
-      // !isModerator &&
+      !isModerator &&
+      !cookie &&
       !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
