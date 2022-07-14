@@ -17,6 +17,7 @@ import 'intro.js/introjs.css';
 
 import StepTooltip from '@/components/App/OnBoardingTour/StepTooltip';
 import useTranslation from 'next-translate/useTranslation';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -81,6 +82,10 @@ const OnBoardingTour = () => {
   };
 
   const onStartTour = () => {
+    pushEventDataLayer({
+      category: 'OnBoarding Tour',
+      action: 'Start'
+    });
     OnBoardingTourCookie.setOnBoardingCookie();
   };
 
@@ -89,7 +94,10 @@ const OnBoardingTour = () => {
   };
 
   const onCompleteTour = () => {
-    // track with event
+    pushEventDataLayer({
+      category: 'OnBoarding Tour',
+      action: 'End'
+    });
   };
 
   const showTour = (): boolean => {
