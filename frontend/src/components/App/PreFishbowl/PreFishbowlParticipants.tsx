@@ -23,7 +23,7 @@ import {
 } from './styles';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
-import { ROUTE_REGISTER } from '@/app.config';
+import { ROUTE_FISHBOWL, ROUTE_REGISTER } from '@/app.config';
 
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
@@ -49,7 +49,6 @@ const PreFishbowlParticipants = () => {
   const getApiParticipants = () => {
     getParticipants(lang, fid as string)
       .then(({ data: { response } }) => {
-        console.log('getParticipants', response);
         setParticipants(response || []);
       })
       .catch(error => {
@@ -118,7 +117,7 @@ const PreFishbowlParticipants = () => {
           <StyledRegisterNotification>
             <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
-            <RedirectLink href={ROUTE_REGISTER} passHref>
+            <RedirectLink href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}`} passHref>
               <Button className="never-full" size="medium" as="a" data-testid="register">
                 <span>{t('common:register')}</span>
               </Button>
