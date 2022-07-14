@@ -61,7 +61,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
         />
 
         <StyledFishbowlDataWrapper>
-          <StyledFishbowlDataCard data-testid="prefishbowldata-card" className="prefishbowl">
+          <StyledFishbowlDataCard data-testid="prefishbowl-datacard" className="prefishbowl">
             <StyledFishbowlDataCardHeader>
               <p className="body-xs">
                 <Trans i18nKey="fishbowl:detail.cardMiniTitle" components={{ i: <i /> }} />

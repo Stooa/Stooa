@@ -104,6 +104,8 @@ When('sees the prefishbowl page', () => {
   cy.wait('@gqlFishbowlBySlugQuery');
 
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
+  cy.get('[data-testid=prefishbowl-datacard]').should('exist');
+  cy.get('[data-testid=prefishbowl-participants]').should('exist');
 
   cy.screenshot();
 });
@@ -114,11 +116,11 @@ Then('finishes a fishbowl', () => {
     body: {
       status: 'FINISHED'
     }
-  });
+  }).as('endFishbowl');
 
   cy.contains('End fishbowl').click();
 
-  cy.wait(3500);
+  cy.wait('@endFishbowl');
 
   cy.get('[data-testid=finished-fishbowl]').should('exist');
 });
