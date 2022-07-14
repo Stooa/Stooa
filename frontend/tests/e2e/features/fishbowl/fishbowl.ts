@@ -19,7 +19,7 @@ When('navigates to future fishbowl', () => {
     }
   });
 
-  cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
+  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
 });
 
 When('navigates to fishbowl', () => {
@@ -44,7 +44,7 @@ When('navigates to fishbowl', () => {
     }
   });
 
-  cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
+  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
 });
 
 Then('sees tomorrow fishbowl information page', () => {
@@ -88,7 +88,7 @@ When('can access to pre fishbowl', () => {
   cy.screenshot();
 });
 
-When('sees the fishbowl page', () => {
+When('sees the prefishbowl page', () => {
   const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
 
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
@@ -103,7 +103,7 @@ When('sees the fishbowl page', () => {
 
   cy.wait('@gqlFishbowlBySlugQuery');
 
-  cy.get('[data-testid=seat]').should('have.length', 5);
+  cy.get('[data-testid=prefishbowl-counter]').should('exist');
 
   cy.screenshot();
 });

@@ -20,7 +20,13 @@ interface Props {
   isModerator: boolean;
 }
 
-export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerator }: Props) => {
+export const Counter = ({
+  fishbowlData,
+  timeStatus,
+  conferenceStatus,
+  isModerator,
+  ...props
+}: Props) => {
   const getDateByStatus = () =>
     conferenceStatus === IConferenceStatus?.NOT_STARTED
       ? Date.parse(fishbowlData.startDateTimeTz)
@@ -112,5 +118,9 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     return timeLeftText;
   };
 
-  return <div className="body-xs medium counter">{timeToDisplay}</div>;
+  return (
+    <div {...props} className="body-xs medium counter">
+      {timeToDisplay}
+    </div>
+  );
 };

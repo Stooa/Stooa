@@ -33,7 +33,7 @@ import { useStateValue } from '@/contexts/AppContext';
 const PING_TIMEOUT = 3500;
 const MAX_FAKE_PARTICIPANTS = 10;
 
-const PreFishbowlParticipants: React.FC = ({}) => {
+const PreFishbowlParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { t, lang } = useTranslation('fishbowl');
   const { fid } = router.query;
@@ -102,7 +102,7 @@ const PreFishbowlParticipants: React.FC = ({}) => {
 
   return (
     <>
-      <StyledParticipantListWrapper>
+      <StyledParticipantListWrapper data-testid="prefishbowl-participants">
         <div className="participant-list__header">
           <h3 className="caps body-sm medium">Participants in the room</h3>
 

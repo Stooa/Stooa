@@ -53,6 +53,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
       <StyledFishbowlInformation>
         <BoxedFriend />
         <Counter
+          data-testid="prefishbowl-counter"
           fishbowlData={fishbowl}
           timeStatus={timeStatus}
           isModerator={isModerator}
@@ -60,7 +61,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
         />
 
         <StyledFishbowlDataWrapper>
-          <StyledFishbowlDataCard className="prefishbowl">
+          <StyledFishbowlDataCard data-testid="prefishbowldata-card" className="prefishbowl">
             <StyledFishbowlDataCardHeader>
               <p className="body-xs">
                 <Trans i18nKey="fishbowl:detail.cardMiniTitle" components={{ i: <i /> }} />
