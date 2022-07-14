@@ -25,6 +25,7 @@ import { useRouter } from 'next/router';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import PreFishbowl from '@/components/App/PreFishbowl';
+import ModalOnboarding from '../ModalOnBoarding';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -33,7 +34,8 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { data, isModerator, participantToKick, setParticipantToKick } = useStooa();
+  const { data, isModerator, participantToKick, setParticipantToKick, showOnBoardingModal } =
+    useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
@@ -65,6 +67,7 @@ const Fishbowl: FC = () => {
     <>
       <Header isPrefishbowl={isPreFishbowl} toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
+        {/* MODALS */}
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
         {participantToKick && (
           <ModalKickUser
@@ -73,6 +76,8 @@ const Fishbowl: FC = () => {
             closeModal={() => setParticipantToKick(null)}
           />
         )}
+        {showOnBoardingModal && <ModalOnboarding />}
+
         {isPreFishbowl ? <PreFishbowl fishbowl={data} /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>

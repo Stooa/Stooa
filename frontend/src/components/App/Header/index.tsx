@@ -22,7 +22,9 @@ const ModeratorActions = dynamic(import('@/components/App/ModeratorActions'), {
 });
 const Participants = dynamic(import('@/components/App/Participants'), { loading: () => <div /> });
 const FishbowlInfo = dynamic(import('@/components/App/FishbowlInfo'), { loading: () => <div /> });
-const Onboarding = dynamic(import('@/components/App/Onboarding'), { loading: () => <div /> });
+const OnBoardingButton = dynamic(import('@/components/App/OnBoarding'), {
+  loading: () => <div />
+});
 
 interface Props {
   toggleParticipants: () => void;
@@ -53,7 +55,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, isPrefishbowl = 'false' }
         ) : (
           <>
             <FishbowlInfo data={data} />
-            <Onboarding initialized={conferenceReady} isModerator={isModerator} />
+            <OnBoardingButton />
           </>
         )}
       </div>

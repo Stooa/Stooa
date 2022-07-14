@@ -77,7 +77,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={linkedin}
+              data-username={linkedin.match(/.*\/([^/]+)\/+/)[1]}
             >
               <Linkedin />
             </a>

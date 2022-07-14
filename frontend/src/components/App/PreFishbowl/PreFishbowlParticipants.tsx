@@ -116,10 +116,7 @@ const PreFishbowlParticipants: React.FC = ({}) => {
 
         {isGuest && (
           <StyledRegisterNotification>
-            <p className="body-sm">
-              To connect with the people in the room through your social networks, sign up for
-              Stooa.
-            </p>
+            <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
             <RedirectLink href={ROUTE_REGISTER} passHref>
               <Button className="never-full" size="medium" as="a" data-testid="register">

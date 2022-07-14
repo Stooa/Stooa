@@ -38,7 +38,7 @@ interface Props {
 const PreFishbowl = ({ fishbowl }: Props) => {
   const router = useRouter();
   const { slug } = router.query;
-  const { isModerator, conferenceStatus, timeStatus } = useStooa();
+  const { isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
 
   const { t, lang } = useTranslation('fishbowl');
 
@@ -82,7 +82,9 @@ const PreFishbowl = ({ fishbowl }: Props) => {
               </p>
             )}
           </StyledFishbowlDataCard>
-          <Button variant="link">{t('prefishbowl.onBoardingHelp')}</Button>
+          <Button variant="link" onClick={() => toggleOnBoarding('prefishbowl')}>
+            {t('prefishbowl.onBoardingHelp')}
+          </Button>
         </StyledFishbowlDataWrapper>
       </StyledFishbowlInformation>
       <StyledParticipantsColumn>

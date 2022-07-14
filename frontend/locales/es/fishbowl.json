@@ -114,6 +114,7 @@
         "insightful": "Interesante"
     },
     "prefishbowl": {
-        "onBoardingHelp": "¿No sabes cómo funciona un fishbowl? Clica aquí."
+        "onBoardingHelp": "¿No tienes claro cómo funciona un fishbowl? Haz clic aquí",
+        "connectWithUsers": "Para conectar con las personas en la sala a través de tus RRSS, regístrate en Stooa."
     }
 }

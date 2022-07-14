@@ -21,7 +21,7 @@ import {
 } from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
 import { StyledButtonContext } from '@/components/App/ButtonContextMenu/styles';
-import { BODY_MD, BODY_SM } from '@/ui/Texts';
+import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
@@ -160,7 +160,7 @@ const StyledListItem = styled.li`
     }
 
     & a:hover::after {
-      ${BODY_SM}
+      ${BODY_XS}
       content: attr(data-username);
       position: absolute;
       bottom: calc(100% + ${space(0.5)});
