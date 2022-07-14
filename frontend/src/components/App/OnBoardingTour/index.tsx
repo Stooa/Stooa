@@ -41,25 +41,25 @@ const OnBoardingTour = () => {
       tooltipClass: 'first-step'
     },
     {
-      element: '.button-join',
-      intro: (
-        <StepTooltip
-          title={t('step2.title')}
-          text={t('step2.title')}
-          img="/img/tour/tour-step2.gif"
-        />
-      )
-    },
-    {
       element: '#seat-2',
       intro: (
         <StepTooltip
           title={t('step3.title')}
-          text={data.hasIntroduction ? t('step3.textIntroduction') : t('step3.text')}
+          text={t('step2.text')}
           img="/img/tour/tour-step3.gif"
         />
       ),
       position: 'right'
+    },
+    {
+      element: '#button-join',
+      intro: (
+        <StepTooltip
+          title={t('step2.title')}
+          text={data.hasIntroduction ? t('step3.textIntroduction') : t('step3.text')}
+          img="/img/tour/tour-step2.gif"
+        />
+      )
     },
     {
       element: '.participant-toggle',
@@ -86,10 +86,10 @@ const OnBoardingTour = () => {
       category: 'OnBoarding Tour',
       action: 'Start'
     });
-    OnBoardingTourCookie.setOnBoardingCookie();
   };
 
   const onExitTour = () => {
+    OnBoardingTourCookie.setOnBoardingCookie();
     setAlreadySeen(true);
   };
 
@@ -106,7 +106,7 @@ const OnBoardingTour = () => {
     if (
       conferenceReady &&
       !isModerator &&
-      !cookie &&
+      // !cookie &&
       !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
