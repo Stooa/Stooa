@@ -15,7 +15,7 @@ import QuestionMark from '@/ui/svg/questionmark.svg';
 import OnboardingWrapper, { Icon, Tooltip } from '@/components/App/OnBoarding/styles';
 import { useStooa } from '@/contexts/StooaManager';
 
-const OnBoardingButton = () => {
+const OnBoarding = () => {
   const {
     activeOnBoardingTooltip,
     setActiveOnBoardingTooltip,
@@ -46,4 +46,4 @@ const OnBoardingButton = () => {
   );
 };
 
-export default OnBoardingButton;
+export default OnBoarding;
