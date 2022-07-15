@@ -28,7 +28,7 @@ const AuthUser = ({ name }: TProps) => {
     dispatch({
       type: 'JOIN_USER',
       prejoin: false,
-      isGuest: false,
+      isGuest: false
     });
   };
 
