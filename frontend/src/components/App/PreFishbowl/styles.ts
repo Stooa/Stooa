@@ -104,7 +104,6 @@ const StyledParticipantListWrapper = styled.div`
 
   border: 1px solid ${COLOR_NEUTRO_300};
   border-radius: 4px;
-  overflow: hidden;
 
   & > .participant-list__header {
     display: flex;
