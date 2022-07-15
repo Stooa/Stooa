@@ -110,7 +110,9 @@ const PreFishbowlParticipants = () => {
           </StyledRegisterNotification>
         )}
 
-        <StyledParticipantList className={`${participants.length >= 10 ? 'scroll' : ''}`}>
+        <StyledParticipantList
+          className={`${participants.length >= MAX_PLACEHOLDER_PARTICIPANTS ? 'scroll' : ''}`}
+        >
           {participants.length > 0 &&
             participants.map((participant, i) => (
               <ParticipantCard

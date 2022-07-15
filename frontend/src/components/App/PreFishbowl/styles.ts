@@ -78,8 +78,13 @@ const StyledFishbowlInformation = styled.div`
   }
 
   & > .friend {
+    width: 150px;
     margin-bottom: ${space(2)};
     align-self: center;
+
+    ${media.min('desktop')`
+      width: auto;
+    `}
   }
 
   & > button {
@@ -189,8 +194,7 @@ const StyledParticipantList = styled.ul`
 
   ${media.min('desktop')`
     height: 70vh;
-    max-height: 720px;
-    min-height: 600px;
+    min-height: 620px;
   `}
 `;
 

@@ -38,6 +38,9 @@ const StyledDots = styled.div`
     0% {
       opacity: 0;
     }
+    21% {
+      opacity: 0;
+    }
     22% {
       opacity: 1;
     }
