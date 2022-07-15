@@ -19,7 +19,7 @@ interface Props {
   timeStatus: ITimeStatus;
   conferenceStatus: IConferenceStatus;
   isModerator: boolean;
-  prefishbowl: boolean;
+  prefishbowl?: boolean;
 }
 
 export const Counter = ({
@@ -27,7 +27,7 @@ export const Counter = ({
   timeStatus,
   conferenceStatus,
   isModerator,
-  prefishbowl,
+  prefishbowl = false,
   ...props
 }: Props) => {
   const getDateByStatus = () =>
