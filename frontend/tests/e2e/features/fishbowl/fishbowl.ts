@@ -116,10 +116,11 @@ Then('finishes a fishbowl', () => {
     body: {
       status: 'FINISHED'
     }
-  });
-  cy.contains('End fishbowl').click();
+  }).as('endFishbowl');
 
-  cy.wait(3500);
+  cy.wait('@endFishbowl');
+
+  cy.contains('End fishbowl').click();
 
   cy.get('[data-testid=finished-fishbowl]').should('exist');
 });
