@@ -111,16 +111,16 @@ When('sees the prefishbowl page', () => {
 });
 
 Then('finishes a fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/fishbowl-status/test-fishbowl', {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
       status: 'FINISHED'
     }
-  }).as('endFishbowl');
-
-  cy.wait('@endFishbowl');
+  });
 
   cy.contains('End fishbowl').click();
+
+  cy.wait(3500);
 
   cy.get('[data-testid=finished-fishbowl]').should('exist');
 });
