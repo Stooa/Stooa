@@ -10,6 +10,7 @@
         "selectTime": "Sélectionner l'heure",
         "hours": "h",
         "minutes": "min",
+        "minutesShort": "m",
         "duration": "Durée",
         "selectDuration": "Durée",
         "description": "Description (facultatif)",

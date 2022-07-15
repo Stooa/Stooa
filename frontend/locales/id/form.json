@@ -13,6 +13,7 @@
         "selectLanguageLabel": "Pilih bahasa",
         "hours": "jam",
         "minutes": "men",
+        "minutesShort": "m",
         "duration": "Durasi",
         "description": "Deskripsi (opsional)",
         "timezone": "Zona Waktu",

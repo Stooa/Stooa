@@ -105,7 +105,8 @@ export const Counter = ({
       timeLeftText = t('timeToStart', { time });
     } else {
       const hoursText = t('form:fishbowl.hours');
-      const minutesText = t('form:fishbowl.minutes');
+      const minutesText = hours > 0 ? t('form:fishbowl.minutesShort') : t('form:fishbowl.minutes');
+
       const time =
         hours > 0 && seconds >= 3600
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`

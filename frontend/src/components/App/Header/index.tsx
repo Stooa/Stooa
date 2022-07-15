@@ -14,6 +14,7 @@ import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
 import { Header as HeaderStyled } from '@/layouts/App/styles';
 import ModalShareLink from '@/components/App/ModalShareLink';
+import { ROUTE_HOME } from '@/app.config';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
@@ -51,7 +52,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, isPrefishbowl = 'false' }
       )}
       <div className="header-info">
         {isPrefishbowl ? (
-          <Logo className="header-logo" />
+          <Logo href={ROUTE_HOME} className="header-logo" />
         ) : (
           <>
             <FishbowlInfo data={data} />
