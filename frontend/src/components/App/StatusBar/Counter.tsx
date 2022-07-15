@@ -12,12 +12,14 @@ import { useEffect, useState } from 'react';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
 import { Fishbowl } from '@/types/api-platform';
+import LoadingDots from '@/components/Common/LoadingDots';
 
 interface Props {
   fishbowlData: Fishbowl;
   timeStatus: ITimeStatus;
   conferenceStatus: IConferenceStatus;
   isModerator: boolean;
+  prefishbowl: boolean;
 }
 
 export const Counter = ({
@@ -25,6 +27,7 @@ export const Counter = ({
   timeStatus,
   conferenceStatus,
   isModerator,
+  prefishbowl,
   ...props
 }: Props) => {
   const getDateByStatus = () =>
@@ -33,7 +36,7 @@ export const Counter = ({
       : Date.parse(fishbowlData.endDateTimeTz);
 
   const [completedTime, setCompletedTime] = useState<boolean>(false);
-  const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading...');
+  const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
   const [intervalTimer, setIntervalTimer] = useState<number>();
   const [fishbowlDate, setFishbowlDate] = useState(getDateByStatus());
 
@@ -122,6 +125,7 @@ export const Counter = ({
   return (
     <span {...props} className="body-xs medium counter">
       {timeToDisplay}
+      {prefishbowl && <LoadingDots />}
     </span>
   );
 };

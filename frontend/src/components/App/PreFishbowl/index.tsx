@@ -61,16 +61,14 @@ const PreFishbowl = ({ fishbowl }: Props) => {
             quality={100}
           />
         </div>
-        <div className="counter-wrapper">
-          <Counter
-            data-testid="prefishbowl-counter"
-            fishbowlData={fishbowl}
-            timeStatus={timeStatus}
-            isModerator={isModerator}
-            conferenceStatus={conferenceStatus}
-          />
-          <LoadingDots />
-        </div>
+        <Counter
+          prefishbowl
+          data-testid="prefishbowl-counter"
+          fishbowlData={fishbowl}
+          timeStatus={timeStatus}
+          isModerator={isModerator}
+          conferenceStatus={conferenceStatus}
+        />
 
         <StyledFishbowlDataWrapper>
           <StyledFishbowlDataCard data-testid="prefishbowl-datacard" className="prefishbowl">

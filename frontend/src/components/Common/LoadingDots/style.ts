@@ -10,6 +10,7 @@
 import styled from 'styled-components';
 
 const StyledDots = styled.div`
+  display: inline;
   .dot1 {
     animation: visibility 2s linear infinite;
   }
@@ -22,7 +23,7 @@ const StyledDots = styled.div`
       opacity: 1;
     }
     66% {
-      opacity: 0.5;
+      opacity: 0;
     }
     100% {
       opacity: 0;
@@ -37,9 +38,6 @@ const StyledDots = styled.div`
     0% {
       opacity: 0;
     }
-    21% {
-      opacity: 0.5;
-    }
     22% {
       opacity: 1;
     }
@@ -47,7 +45,7 @@ const StyledDots = styled.div`
       opacity: 1;
     }
     66% {
-      opacity: 0.5;
+      opacity: 0;
     }
     100% {
       opacity: 0;
@@ -63,7 +61,7 @@ const StyledDots = styled.div`
       opacity: 0;
     }
     43% {
-      opacity: 0.5;
+      opacity: 0;
     }
     44% {
       opacity: 1;
@@ -72,7 +70,7 @@ const StyledDots = styled.div`
       opacity: 1;
     }
     66% {
-      opacity: 0.5;
+      opacity: 0;
     }
     100% {
       opacity: 0;
