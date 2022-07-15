@@ -116,7 +116,7 @@ Then('finishes a fishbowl', () => {
     body: {
       status: 'FINISHED'
     }
-  })
+  });
   cy.contains('End fishbowl').click();
 
   cy.wait(3500);
