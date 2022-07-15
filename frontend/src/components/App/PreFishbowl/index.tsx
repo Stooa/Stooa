@@ -30,6 +30,7 @@ import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlPar
 import Red from '@/ui/svg/blobs/red.svg';
 import Yellow from '@/ui/svg/blobs/yellow.svg';
 import Image from 'next/image';
+import LoadingDots from '@/components/Common/LoadingDots';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -51,19 +52,25 @@ const PreFishbowl = ({ fishbowl }: Props) => {
       </div>
 
       <StyledFishbowlInformation>
-        <Image
-          alt="Stooa friend seated in a box"
-          src="img/friends/seated.png"
-          width={224}
-          height={223}
-        />
-        <Counter
-          data-testid="prefishbowl-counter"
-          fishbowlData={fishbowl}
-          timeStatus={timeStatus}
-          isModerator={isModerator}
-          conferenceStatus={conferenceStatus}
-        />
+        <div className="friend">
+          <Image
+            alt="Stooa friend seated in a box"
+            src="/img/friends/seated.png"
+            width={224}
+            height={223}
+            quality={100}
+          />
+        </div>
+        <div className="counter-wrapper">
+          <Counter
+            data-testid="prefishbowl-counter"
+            fishbowlData={fishbowl}
+            timeStatus={timeStatus}
+            isModerator={isModerator}
+            conferenceStatus={conferenceStatus}
+          />
+          <LoadingDots />
+        </div>
 
         <StyledFishbowlDataWrapper>
           <StyledFishbowlDataCard data-testid="prefishbowl-datacard" className="prefishbowl">

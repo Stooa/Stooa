@@ -120,8 +120,8 @@ export const Counter = ({
   };
 
   return (
-    <div {...props} className="body-xs medium counter">
+    <span {...props} className="body-xs medium counter">
       {timeToDisplay}
-    </div>
+    </span>
   );
 };

@@ -77,7 +77,7 @@ const StyledFishbowlInformation = styled.div`
     text-align: center;
   }
 
-  & > svg {
+  & > .friend {
     margin-bottom: ${space(2)};
     align-self: center;
   }
