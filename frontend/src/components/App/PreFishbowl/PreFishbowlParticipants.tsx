@@ -25,13 +25,12 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import { ROUTE_FISHBOWL, ROUTE_REGISTER } from '@/app.config';
 
-import Linkedin from '@/ui/svg/share-linkedin.svg';
-import Twitter from '@/ui/svg/share-twitter.svg';
 import Loader from '@/ui/svg/spin-loader.svg';
 import { useStateValue } from '@/contexts/AppContext';
+import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 
 const PING_TIMEOUT = 3500;
-const MAX_FAKE_PARTICIPANTS = 10;
+const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 
 const PreFishbowlParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -39,7 +38,7 @@ const PreFishbowlParticipants = () => {
   const { fid } = router.query;
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
-  const [numFakeParticipants, setNumFakeParticipants] = useState<number>(0);
+  const [numPlaceholderParticipants, setNumPlaceholderParticipants] = useState<number>(0);
   const [{ isGuest }] = useStateValue();
 
   const pingParticipant = () => {
@@ -56,29 +55,14 @@ const PreFishbowlParticipants = () => {
       });
   };
 
-  const createFakeParticipants = () => {
-    const fakeParticipants = [];
+  const createPlaceholderParticipants = () => {
+    const placeholderParticipants = [];
 
-    for (let i = 0; i < numFakeParticipants; i++) {
-      fakeParticipants.push(
-        <StyledPrefishbowlParticipant key={i} className="prefishbowl">
-          <div className="placeholder">
-            <div />
-          </div>
-          <div className="social">
-            <span className="icon">
-              <Twitter />
-            </span>
-
-            <span className="icon">
-              <Linkedin />
-            </span>
-          </div>
-        </StyledPrefishbowlParticipant>
-      );
+    for (let i = 0; i < numPlaceholderParticipants; i++) {
+      placeholderParticipants.push(<ParticipantPlaceholder key={i} />);
     }
 
-    return fakeParticipants;
+    return placeholderParticipants;
   };
 
   useEffect(() => {
@@ -95,8 +79,10 @@ const PreFishbowlParticipants = () => {
   }, []);
 
   useEffect(() => {
-    const fakeParticipantsToPrint = MAX_FAKE_PARTICIPANTS - participants.length;
-    setNumFakeParticipants(fakeParticipantsToPrint > 0 ? fakeParticipantsToPrint : 0);
+    const placeholderParticipantsToPrint = MAX_PLACEHOLDER_PARTICIPANTS - participants.length;
+    setNumPlaceholderParticipants(
+      placeholderParticipantsToPrint > 0 ? placeholderParticipantsToPrint : 0
+    );
   }, [participants]);
 
   return (
@@ -134,7 +120,7 @@ const PreFishbowlParticipants = () => {
                 key={`participant-${i}`}
               />
             ))}
-          {createFakeParticipants()}
+          {createPlaceholderParticipants()}
         </StyledParticipantList>
       </StyledParticipantListWrapper>
     </>
