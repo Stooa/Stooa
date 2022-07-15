@@ -9,7 +9,6 @@
 
 import Button from '@/components/Common/Button';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
-import BoxedFriend from '@/components/Common/SVG/BoxedFriend/BoxedFriend';
 import {
   StyledFishbowlDataCard,
   StyledFishbowlDataCardHeader
@@ -30,6 +29,7 @@ import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlPar
 
 import Red from '@/ui/svg/blobs/red.svg';
 import Yellow from '@/ui/svg/blobs/yellow.svg';
+import Image from 'next/image';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -51,7 +51,12 @@ const PreFishbowl = ({ fishbowl }: Props) => {
       </div>
 
       <StyledFishbowlInformation>
-        <BoxedFriend />
+        <Image
+          alt="Stooa friend seated in a box"
+          src="img/friends/seated.png"
+          width={224}
+          height={223}
+        />
         <Counter
           data-testid="prefishbowl-counter"
           fishbowlData={fishbowl}

@@ -28,9 +28,9 @@ const StyledContainer = styled.div`
   row-gap: ${space(8)};
 
   ${media.min('desktopLarge')`
-  grid-template-columns: 1fr 1fr;
-  column-gap: ${space(8)};
-  padding-top: ${space(6)};
+    grid-template-columns: 1fr 1fr;
+    column-gap: ${space(8)};
+    padding-top: ${space(6)};
   `}
 
   & .blobs-wrapper {
@@ -42,14 +42,23 @@ const StyledContainer = styled.div`
 
     & svg:first-child {
       position: absolute;
-      left: -120px;
-      bottom: -260px;
+      left: -160px;
+      bottom: -296px;
+
+      ${media.min('desktop')`
+        left: -120px;
+        bottom: -260px;
+      `}
     }
 
     & svg:last-child {
       position: absolute;
-      right: -280px;
-      bottom: -117px;
+      right: -320px;
+      bottom: -207px;
+      ${media.min('desktop')`
+        right: -280px;
+        bottom: -117px;
+      `}
     }
   }
 `;
@@ -95,6 +104,7 @@ const StyledParticipantListWrapper = styled.div`
 
   border: 1px solid ${COLOR_NEUTRO_300};
   border-radius: 4px;
+  overflow: hidden;
 
   & > .participant-list__header {
     display: flex;
@@ -167,18 +177,21 @@ const StyledPrefishbowlParticipant = styled(StyledListItem)`
 `;
 
 const StyledParticipantList = styled.ul`
-  max-height: 620px;
+  max-height: 420px;
   padding: 0;
   color: ${COLOR_NEUTRO_700};
 
   background-color: ${COLOR_NEUTRO_100};
   ${scrolllbarStyle}
+
   &.scroll {
     overflow-y: scroll;
   }
 
   ${media.min('desktop')`
-    max-height: 800px;
+    height: 70vh;
+    max-height: 720px;
+    min-height: 600px;
   `}
 `;
 

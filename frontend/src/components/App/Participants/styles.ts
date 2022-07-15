@@ -167,6 +167,9 @@ const StyledListItem = styled.li`
       background-color: ${COLOR_NEUTRO_900};
       padding: ${space(0.5)} ${space(1)};
       color: ${COLOR_NEUTRO_100};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 16ch;
 
       border-radius: 30px;
     }
