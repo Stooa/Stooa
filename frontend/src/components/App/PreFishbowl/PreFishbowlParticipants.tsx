@@ -18,7 +18,6 @@ import router from 'next/router';
 import {
   StyledParticipantListWrapper,
   StyledParticipantList,
-  StyledPrefishbowlParticipant,
   StyledRegisterNotification
 } from './styles';
 import RedirectLink from '@/components/Web/RedirectLink';
