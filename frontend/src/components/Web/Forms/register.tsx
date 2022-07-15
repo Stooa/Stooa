@@ -186,7 +186,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const Register = () => {
-  const [{}, dispatch] = useStateValue();
   const [error, setError] = useState(null);
   const [createUser] = useMutation(CREATE_USER);
   const { login } = useAuth();
@@ -205,10 +204,6 @@ const Register = () => {
       console.log('[STOOA] submit error', res);
     } else {
       userRepository.clearUser();
-      dispatch({
-        type: 'JOIN_USER',
-        prejoin: true
-      });
 
       pushPageViewDataLayer({ url: '/user-registered', title: 'User registered' });
       await login(values.email, values.password);
