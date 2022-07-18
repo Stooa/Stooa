@@ -27,6 +27,7 @@ import { ROUTE_FISHBOWL, ROUTE_REGISTER } from '@/app.config';
 import Loader from '@/ui/svg/spin-loader.svg';
 import { useStateValue } from '@/contexts/AppContext';
 import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const PING_TIMEOUT = 3500;
 const MAX_PLACEHOLDER_PARTICIPANTS = 10;
@@ -103,7 +104,19 @@ const PreFishbowlParticipants = () => {
             <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
             <RedirectLink href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}`} passHref>
-              <Button className="never-full" size="medium" as="a" data-testid="register">
+              <Button
+                onClick={() => {
+                  pushEventDataLayer({
+                    action: 'Register',
+                    category: 'Prefishbowl',
+                    label: fid as string
+                  });
+                }}
+                className="never-full"
+                size="medium"
+                as="a"
+                data-testid="register"
+              >
                 <span>{t('common:register')}</span>
               </Button>
             </RedirectLink>
@@ -116,7 +129,7 @@ const PreFishbowlParticipants = () => {
           {participants.length > 0 &&
             participants.map((participant, i) => (
               <ParticipantCard
-                variant="prefishbowl"
+                prefishbowl={true}
                 participant={participant}
                 key={`participant-${i}`}
               />
