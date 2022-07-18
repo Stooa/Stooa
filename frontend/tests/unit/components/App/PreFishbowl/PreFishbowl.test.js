@@ -18,11 +18,11 @@ jest.mock('next/router');
 jest.mock('@/contexts/StooaManager');
 
 jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => (
-  <mock-pre-fishbowl-participants />
+  <mock-pre-fishbowl-participants data-testid="mock-participants" />
 ));
 
 jest.mock('@/components/App/StatusBar/Counter', () => ({
-  Counter: () => <mock-counter data-testid="prefishbowl-counter" />
+  Counter: () => <mock-counter data-testid="mock-counter" />
 }));
 
 describe('Pre Fishbowl component', () => {
@@ -39,10 +39,26 @@ describe('Pre Fishbowl component', () => {
       conferenceStatus: IConferenceStatus.NOT_STARTED
     });
 
-    const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
+    const { getByTestId, shallow } = render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     const preFishbowlComponent = getByTestId('pre-fishbowl');
 
     expect(preFishbowlComponent).toBeInTheDocument();
+
+    const participantsComponent = getByTestId('mock-participants');
+
+    expect(participantsComponent).toBeInTheDocument();
+
+    const counterComponent = getByTestId('mock-counter');
+
+    expect(counterComponent).toBeInTheDocument();
+
+    const description = getByTestId('fishbowl-description');
+
+    expect(description).toHaveTextContent(currentFishbowl.description);
+
+    const name = getByTestId('fishbowl-name');
+
+    expect(name).toHaveTextContent(currentFishbowl.name);
   });
 });
