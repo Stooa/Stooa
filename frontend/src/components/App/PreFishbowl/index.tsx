@@ -14,7 +14,6 @@ import {
   StyledFishbowlDataCardHeader
 } from '@/components/Web/FishbowlDataCard/styles';
 import { useStooa } from '@/contexts/StooaManager';
-import { Fishbowl } from '@/types/api-platform';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -33,14 +32,10 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { pushEventDataLayer } from '@/lib/analytics';
 
-interface Props {
-  fishbowl: Fishbowl;
-}
-
-const PreFishbowl = ({ fishbowl }: Props) => {
+const PreFishbowl = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const { isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
+  const { data, isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
 
   const { t, lang } = useTranslation('fishbowl');
 
@@ -60,8 +55,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
   }, []);
 
   return (
-    <StyledContainer>
-      {/* BLOBS */}
+    <StyledContainer data-testid="pre-fishbowl">
       <div className="blobs-wrapper">
         <Red />
         <Yellow />
@@ -78,9 +72,9 @@ const PreFishbowl = ({ fishbowl }: Props) => {
           />
         </div>
         <Counter
-          prefishbowl
+          prefishbowl={true}
           data-testid="prefishbowl-counter"
-          fishbowlData={fishbowl}
+          fishbowlData={data}
           timeStatus={timeStatus}
           isModerator={isModerator}
           conferenceStatus={conferenceStatus}
@@ -102,10 +96,10 @@ const PreFishbowl = ({ fishbowl }: Props) => {
               </ButtonCopyUrl>
             </StyledFishbowlDataCardHeader>
 
-            <h2 className=" medium">{fishbowl.name}</h2>
-            {fishbowl.description && (
+            <h2 className=" medium">{data.name}</h2>
+            {data.description && (
               <p className="description body-md" data-testid="fishbowl-description">
-                {fishbowl.description}
+                {data.description}
               </p>
             )}
           </StyledFishbowlDataCard>

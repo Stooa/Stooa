@@ -78,7 +78,7 @@ const Fishbowl: FC = () => {
         )}
         {showOnBoardingModal && <ModalOnboarding />}
 
-        {isPreFishbowl ? <PreFishbowl fishbowl={data} /> : <Seats />}
+        {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
