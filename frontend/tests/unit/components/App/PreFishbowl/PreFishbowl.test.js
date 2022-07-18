@@ -7,32 +7,37 @@
  * file that was distributed with this source code.
  */
 
-import {  render } from '@testing-library/react';
-import PreFishbowl from "@/components/App/PreFishbowl";
+import { render } from '@testing-library/react';
+import PreFishbowl from '@/components/App/PreFishbowl';
 import { useStooa } from '@/contexts/StooaManager';
-import {IConferenceStatus, ITimeStatus} from "@/lib/jitsi-modules/Status";
-import {makeCurrentFishbowl} from "../../../factories/fishbowl";
-import { useRouter } from "next/router";
+import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
+import { makeCurrentFishbowl } from '../../../factories/fishbowl';
+import { useRouter } from 'next/router';
 
 jest.mock('next/router');
 jest.mock('@/contexts/StooaManager');
-jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => {
-  return <mock-pre-fishbowl-participants />;
-});
+
+jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => (
+  <mock-pre-fishbowl-participants />
+));
+
+jest.mock('@/components/App/StatusBar/Counter', () => ({
+  Counter: () => <mock-counter data-testid="prefishbowl-counter" />
+}));
 
 describe('Pre Fishbowl component', () => {
   it('It should render', async () => {
+    const currentFishbowl = makeCurrentFishbowl();
 
-    useRouter.mockReturnValue({ query: 'test-fid' });
+    useRouter.mockReturnValue({ query: { slug: currentFishbowl.slug } });
 
     useStooa.mockReturnValue({
       isModerator: false,
+      data: currentFishbowl,
       toggleOnBoarding: jest.fn(),
       timeStatus: ITimeStatus.DEFAULT,
       conferenceStatus: IConferenceStatus.NOT_STARTED
     });
-
-    const currentFishbowl = makeCurrentFishbowl();
 
     const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
 
