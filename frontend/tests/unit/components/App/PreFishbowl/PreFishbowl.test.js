@@ -42,7 +42,7 @@ beforeEach(() => {
 });
 
 describe('Pre Fishbowl component', () => {
-  it('Should render component', async () => {
+  it('Should render component', () => {
     const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     const preFishbowlComponent = getByTestId('pre-fishbowl');
@@ -66,7 +66,7 @@ describe('Pre Fishbowl component', () => {
     expect(name).toHaveTextContent(currentFishbowl.name);
   });
 
-  it('Should render component without description', async () => {
+  it('Should render component without description', () => {
     currentFishbowl.description = null;
 
     const { queryByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
@@ -76,13 +76,13 @@ describe('Pre Fishbowl component', () => {
     expect(description).not.toBeInTheDocument();
   });
 
-  it('Should push event data layer been called on component render', async () => {
+  it('Should push event data layer been called on component render', () => {
     render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     expect(pushEventDataLayer).toHaveBeenCalled();
   });
 
-  it('Should push event data layer been called on click', async () => {
+  it('Should push event data layer been called on click', () => {
     const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     const button = getByTestId('on-boarding-button');
