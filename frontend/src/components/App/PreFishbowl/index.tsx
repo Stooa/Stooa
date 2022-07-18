@@ -105,7 +105,7 @@ const PreFishbowl = () => {
               </p>
             )}
           </StyledFishbowlDataCard>
-          <Button variant="link" onClick={handleOnBoardingClick}>
+          <Button data-testid="on-boarding-button" variant="link" onClick={handleOnBoardingClick}>
             {t('prefishbowl.onBoardingHelp')}
           </Button>
         </StyledFishbowlDataWrapper>

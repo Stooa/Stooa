@@ -7,13 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import PreFishbowl from '@/components/App/PreFishbowl';
 import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
 import { makeCurrentFishbowl } from '../../../factories/fishbowl';
 import { useRouter } from 'next/router';
+import { pushEventDataLayer } from '@/lib/analytics';
 
+jest.mock('@/lib/analytics');
 jest.mock('next/router');
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => (
@@ -72,5 +74,21 @@ describe('Pre Fishbowl component', () => {
     const description = queryByTestId('fishbowl-description');
 
     expect(description).not.toBeInTheDocument();
+  });
+
+  it('Should push event data layer been called on component render', async () => {
+    render(<PreFishbowl fishbowl={currentFishbowl} />);
+
+    expect(pushEventDataLayer).toHaveBeenCalled();
+  });
+
+  it('Should push event data layer been called on click', async () => {
+    const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
+
+    const button = getByTestId('on-boarding-button');
+
+    fireEvent.click(button);
+
+    expect(pushEventDataLayer).toHaveBeenCalledTimes(2);
   });
 });
