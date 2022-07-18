@@ -22,13 +22,17 @@ import { StyledListItem } from './styles';
 const ParticipantCard: React.FC<{
   participant: Participant;
   speaker?: boolean;
-  variant?: 'prefishbowl' | 'participant-list';
-}> = ({ participant, variant = 'participant-list' }) => {
+  prefishbowl?: boolean;
+}> = ({ participant, prefishbowl = false }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
   return (
-    <StyledListItem className={`participant ${variant}`} data-id={id} title={name}>
+    <StyledListItem
+      className={`participant ${prefishbowl ? 'prefishbowl' : ''}`}
+      data-id={id}
+      title={name}
+    >
       <div className="info">
         <span className="name">{name}</span>
         {(isModerator || isCurrentUser || isMyself) && (
@@ -46,7 +50,7 @@ const ParticipantCard: React.FC<{
               onClick={() => {
                 pushEventDataLayer({
                   action: 'Twitter',
-                  category: 'Participants',
+                  category: prefishbowl ? 'Prefishbowl' : 'Participants',
                   label: window.location.href
                 });
               }}
@@ -70,7 +74,7 @@ const ParticipantCard: React.FC<{
               onClick={() => {
                 pushEventDataLayer({
                   action: 'Linkedin',
-                  category: 'Participants',
+                  category: prefishbowl ? 'Prefishbowl' : 'Participants',
                   label: window.location.href
                 });
               }}

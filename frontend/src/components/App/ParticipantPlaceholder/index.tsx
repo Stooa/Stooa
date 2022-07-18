@@ -12,13 +12,9 @@ import { StyledPrefishbowlParticipant } from '@/components/App/PreFishbowl/style
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 
-interface ParticipantPlaceholderProps {
-  key: number;
-}
-
-const ParticipantPlaceholder = ({ key }: ParticipantPlaceholderProps) => {
+const ParticipantPlaceholder = props => {
   return (
-    <StyledPrefishbowlParticipant key={key} className="prefishbowl">
+    <StyledPrefishbowlParticipant {...props} className="prefishbowl">
       <div className="placeholder">
         <div />
       </div>

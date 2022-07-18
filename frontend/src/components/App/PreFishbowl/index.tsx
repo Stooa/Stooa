@@ -30,6 +30,8 @@ import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlPar
 import Red from '@/ui/svg/blobs/red.svg';
 import Yellow from '@/ui/svg/blobs/yellow.svg';
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 interface PreFishbowlProps {
   fishbowl: Fishbowl;
@@ -41,6 +43,21 @@ const PreFishbowl = ({ fishbowl }: PreFishbowlProps) => {
   const { isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
 
   const { t, lang } = useTranslation('fishbowl');
+
+  const handleOnBoardingClick = () => {
+    pushEventDataLayer({
+      action: 'Action',
+      category: 'onboarding'
+    });
+    toggleOnBoarding('prefishbowl');
+  };
+
+  useEffect(() => {
+    pushEventDataLayer({
+      action: 'Connect',
+      category: 'prefishbowl'
+    });
+  }, []);
 
   return (
     <StyledContainer data-testid="pre-fishbowl">
@@ -91,7 +108,7 @@ const PreFishbowl = ({ fishbowl }: PreFishbowlProps) => {
               </p>
             )}
           </StyledFishbowlDataCard>
-          <Button variant="link" onClick={() => toggleOnBoarding('prefishbowl')}>
+          <Button variant="link" onClick={handleOnBoardingClick}>
             {t('prefishbowl.onBoardingHelp')}
           </Button>
         </StyledFishbowlDataWrapper>
