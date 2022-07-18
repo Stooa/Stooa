@@ -9,7 +9,13 @@
 
 import { useEffect, useState } from 'react';
 
-import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
+import {
+  CONFERENCE_NOT_STARTED,
+  CONFERENCE_RUNNING,
+  IConferenceStatus,
+  ITimeStatus,
+  TIME_LAST_MINUTE
+} from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
 import { Fishbowl } from '@/types/api-platform';
 
@@ -22,7 +28,7 @@ interface Props {
 
 export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerator }: Props) => {
   const getDateByStatus = () =>
-    conferenceStatus === IConferenceStatus?.NOT_STARTED
+    conferenceStatus === CONFERENCE_NOT_STARTED
       ? Date.parse(fishbowlData.startDateTimeTz)
       : Date.parse(fishbowlData.endDateTimeTz);
 
@@ -46,7 +52,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   };
 
   useEffect(() => {
-    if (conferenceStatus === IConferenceStatus.RUNNING) {
+    if (conferenceStatus === CONFERENCE_RUNNING) {
       setCompletedTime(false);
     }
 
@@ -76,7 +82,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
   }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const rendererCountdown = (): string => {
-    const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
+    const conferenceNotStarted = conferenceStatus === CONFERENCE_NOT_STARTED;
     let timeLeftText;
 
     const seconds = checkSecondsToDate(fishbowlDate);
@@ -92,7 +98,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
     } else if (seconds < 2) {
       timeLeftText = t('timesUp');
-    } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
+    } else if ((minutes <= 1 && hours === 0) || timeStatus === TIME_LAST_MINUTE) {
       timeLeftText = t('lastMinute');
     } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
       const time = `1${t('form:fishbowl.minutes')}`;

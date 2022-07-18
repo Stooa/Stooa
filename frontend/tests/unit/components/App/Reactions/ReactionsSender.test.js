@@ -13,7 +13,9 @@ import { useStooa } from '@/contexts/StooaManager';
 import { useRouter } from 'next/router';
 
 jest.mock('@/contexts/StooaManager');
-jest.mock('next/router');
+jest.mock('next/router', () => ({
+  useRouter: jest.fn()
+}));
 
 describe('Reactions sender component', () => {
   it('It renders the component as moderator', () => {
