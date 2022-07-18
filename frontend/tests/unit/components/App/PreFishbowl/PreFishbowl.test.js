@@ -25,21 +25,25 @@ jest.mock('@/components/App/StatusBar/Counter', () => ({
   Counter: () => <mock-counter data-testid="mock-counter" />
 }));
 
+let currentFishbowl;
+
+beforeEach(() => {
+  currentFishbowl = makeCurrentFishbowl();
+
+  useRouter.mockReturnValue({ query: { slug: currentFishbowl.slug } });
+
+  useStooa.mockReturnValue({
+    isModerator: false,
+    data: currentFishbowl,
+    toggleOnBoarding: jest.fn(),
+    timeStatus: ITimeStatus.DEFAULT,
+    conferenceStatus: IConferenceStatus.NOT_STARTED
+  });
+});
+
 describe('Pre Fishbowl component', () => {
-  it('It should render', async () => {
-    const currentFishbowl = makeCurrentFishbowl();
-
-    useRouter.mockReturnValue({ query: { slug: currentFishbowl.slug } });
-
-    useStooa.mockReturnValue({
-      isModerator: false,
-      data: currentFishbowl,
-      toggleOnBoarding: jest.fn(),
-      timeStatus: ITimeStatus.DEFAULT,
-      conferenceStatus: IConferenceStatus.NOT_STARTED
-    });
-
-    const { getByTestId, shallow } = render(<PreFishbowl fishbowl={currentFishbowl} />);
+  it('Should render component', async () => {
+    const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     const preFishbowlComponent = getByTestId('pre-fishbowl');
 
@@ -60,5 +64,15 @@ describe('Pre Fishbowl component', () => {
     const name = getByTestId('fishbowl-name');
 
     expect(name).toHaveTextContent(currentFishbowl.name);
+  });
+
+  it('Should render component without description', async () => {
+    currentFishbowl.description = null;
+
+    const { queryByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
+
+    const description = queryByTestId('fishbowl-description');
+
+    expect(description).not.toBeInTheDocument();
   });
 });
