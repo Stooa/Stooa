@@ -170,6 +170,7 @@ const StyledListItem = styled.li`
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 16ch;
+      white-space: nowrap;
 
       border-radius: 30px;
     }

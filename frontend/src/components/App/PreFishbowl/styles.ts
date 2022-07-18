@@ -160,6 +160,10 @@ const StyledRegisterNotification = styled.div`
   color: ${COLOR_NEUTRO_800};
   background-color: ${COLOR_NEUTRO_200};
 
+  & p:first-child {
+    margin-right: ${space(2)};
+  }
+
   & > a {
     white-space: nowrap;
   }
@@ -193,8 +197,8 @@ const StyledParticipantList = styled.ul`
   }
 
   ${media.min('desktop')`
-    height: 70vh;
-    min-height: 620px;
+    max-height: none;
+    height: 620px;
   `}
 `;
 

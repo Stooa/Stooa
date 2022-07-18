@@ -103,7 +103,10 @@ const PreFishbowlParticipants = () => {
           <StyledRegisterNotification>
             <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
-            <RedirectLink href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}`} passHref>
+            <RedirectLink
+              href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}&prefishbowl=true`}
+              passHref
+            >
               <Button
                 onClick={() => {
                   pushEventDataLayer({
