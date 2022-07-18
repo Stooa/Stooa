@@ -16,11 +16,9 @@ import { useRouter } from 'next/router';
 
 jest.mock('next/router');
 jest.mock('@/contexts/StooaManager');
-
 jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => (
   <mock-pre-fishbowl-participants data-testid="mock-participants" />
 ));
-
 jest.mock('@/components/App/StatusBar/Counter', () => ({
   Counter: () => <mock-counter data-testid="mock-counter" />
 }));
