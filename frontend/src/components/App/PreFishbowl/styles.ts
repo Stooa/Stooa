@@ -197,8 +197,8 @@ const StyledParticipantList = styled.ul`
   }
 
   ${media.min('desktop')`
-    height: 70vh;
-    min-height: 620px;
+    max-height: none;
+    height: 620px;
   `}
 `;
 
