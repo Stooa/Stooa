@@ -30,13 +30,12 @@ import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlPar
 import Red from '@/ui/svg/blobs/red.svg';
 import Yellow from '@/ui/svg/blobs/yellow.svg';
 import Image from 'next/image';
-import LoadingDots from '@/components/Common/LoadingDots';
 
-interface Props {
+interface PreFishbowlProps {
   fishbowl: Fishbowl;
 }
 
-const PreFishbowl = ({ fishbowl }: Props) => {
+const PreFishbowl = ({ fishbowl }: PreFishbowlProps) => {
   const router = useRouter();
   const { slug } = router.query;
   const { isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
@@ -44,8 +43,7 @@ const PreFishbowl = ({ fishbowl }: Props) => {
   const { t, lang } = useTranslation('fishbowl');
 
   return (
-    <StyledContainer>
-      {/* BLOBS */}
+    <StyledContainer data-testid="pre-fishbowl">
       <div className="blobs-wrapper">
         <Red />
         <Yellow />
