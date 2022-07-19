@@ -58,7 +58,11 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={`@${twitter.split('/').pop()}`}
+              data-username={`@${
+                /^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$/gm.exec(
+                  twitter
+                )[1]
+              }`}
             >
               <Twitter />
             </a>
@@ -81,7 +85,11 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={linkedin.match(/.*\/([^/]+)\/+/)[1]}
+              data-username={
+                /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile)?(?:\/*)([\w\-\.]*)/gm.exec(
+                  linkedin
+                )[2]
+              }
             >
               <Linkedin />
             </a>

@@ -149,8 +149,19 @@ const FormValidation = withFormik<FormProps, FormValues>({
       email: Yup.string().email(props.email).required(props.required),
       password: Yup.string().min(6, props.minlength).required(props.required),
       terms: Yup.boolean().required(props.required).oneOf([true], props.terms),
-      linkedin: Yup.string().url(props.url),
-      twitter: Yup.string().url(props.url)
+      linkedin: Yup.string()
+        .matches(
+          /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile)?(?:\/*)([\w\-\.]*)/gm,
+          {
+            message: props.url
+          }
+        )
+        .url(props.url),
+      twitter: Yup.string()
+        .matches(/^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$/gm, {
+          message: props.url
+        })
+        .url(props.url)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
