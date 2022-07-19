@@ -11,8 +11,10 @@ import { render } from '@testing-library/react';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 import { useRouter } from 'next/router';
 import { useStateValue } from '@/contexts/AppContext';
-import { getApiParticipantList} from "@/repository/ApiParticipantRepository";
+import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import { ping } from '@/lib/auth';
 
+jest.mock('@/lib/auth');
 jest.mock('@/lib/analytics');
 jest.mock('@/contexts/AppContext');
 jest.mock('next/router');
@@ -20,22 +22,49 @@ jest.mock('@/repository/ApiParticipantRepository');
 
 beforeEach(() => {
   useRouter.mockReturnValue({ query: { fid: 12345 } });
-  useStateValue.mockReturnValue([{ isGuest: false }]);
-
 });
 
-const setParticipants = (participants) => {
-  getApiParticipantList.mockReturnValue(new Promise(resolve => {
-    setTimeout(() => resolve(participants), 500);
-  }));
-}
+const setParticipants = participants => {
+  getApiParticipantList.mockReturnValue(
+    new Promise(resolve => {
+      setTimeout(() => resolve(participants), 500);
+      useStateValue.mockReturnValue([{ isGuest: false }]);
+    })
+  );
+};
 
 describe('Pre Fishbowl Participants component', () => {
-  it('Should render component', () => {
+  it('Should render component as guest user', () => {
     setParticipants([]);
+
+    useStateValue.mockReturnValue([{ isGuest: true }]);
+
     const { getByTestId } = render(<PreFishbowlParticipants />);
 
-    const preFishbowlParticipantsComponent = getByTestId('prefishbowl-participants');
-    expect(preFishbowlParticipantsComponent).toBeInTheDocument();
+    const preFishbowlParticipants = getByTestId('prefishbowl-participants');
+    expect(preFishbowlParticipants).toBeInTheDocument();
+
+    const preFishbowlRegister = getByTestId('prefishbowl-register');
+    expect(preFishbowlRegister).toBeInTheDocument();
+
+    expect(getApiParticipantList).toHaveBeenCalled();
+
+    expect(ping).toHaveBeenCalled();
+  });
+
+  it('Should render component as host', () => {
+    setParticipants([]);
+
+    const { getByTestId, queryByTestId } = render(<PreFishbowlParticipants />);
+
+    const preFishbowlParticipants = getByTestId('prefishbowl-participants');
+    expect(preFishbowlParticipants).toBeInTheDocument();
+
+    const preFishbowlRegister = queryByTestId('prefishbowl-register');
+    expect(preFishbowlRegister).not.toBeInTheDocument();
+
+    expect(getApiParticipantList).toHaveBeenCalled();
+
+    expect(ping).toHaveBeenCalled();
   });
 });

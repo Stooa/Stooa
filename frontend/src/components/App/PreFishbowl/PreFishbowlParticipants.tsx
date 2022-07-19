@@ -102,7 +102,7 @@ const PreFishbowlParticipants = () => {
         </div>
 
         {isGuest && (
-          <StyledRegisterNotification>
+          <StyledRegisterNotification data-testid="prefishbowl-register">
             <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
             <RedirectLink
