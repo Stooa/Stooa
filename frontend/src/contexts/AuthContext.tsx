@@ -222,7 +222,7 @@ const ProtectRoute = ({ children }: { children: React.ReactChild }) => {
     );
   }
 
-  return <>{children}</>;
+  return children;
 };
 
 export { AuthProvider, ProtectRoute, useAuth };
