@@ -14,7 +14,7 @@ import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
 import { getParticipants, ping } from '@/lib/auth';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import {
   StyledParticipantListWrapper,
   StyledParticipantList,
@@ -35,6 +35,7 @@ const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 const PreFishbowlParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { t, lang } = useTranslation('fishbowl');
+  const router = useRouter();
   const { fid } = router.query;
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
