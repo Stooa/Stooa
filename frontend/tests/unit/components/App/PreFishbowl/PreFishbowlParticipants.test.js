@@ -21,13 +21,21 @@ jest.mock('@/repository/ApiParticipantRepository');
 beforeEach(() => {
   useRouter.mockReturnValue({ query: { fid: 12345 } });
   useStateValue.mockReturnValue([{ isGuest: false }]);
-  getApiParticipantList.mockReturnValue(new Promise(resolve => {
-    setTimeout(() => resolve([]), 500);
-  }));
+
 });
+
+const setParticipants = (participants) => {
+  getApiParticipantList.mockReturnValue(new Promise(resolve => {
+    setTimeout(() => resolve(participants), 500);
+  }));
+}
 
 describe('Pre Fishbowl Participants component', () => {
   it('Should render component', () => {
+    setParticipants([]);
     const { getByTestId } = render(<PreFishbowlParticipants />);
+
+    const preFishbowlParticipantsComponent = getByTestId('prefishbowl-participants');
+    expect(preFishbowlParticipantsComponent).toBeInTheDocument();
   });
 });
