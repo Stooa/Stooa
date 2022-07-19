@@ -14,7 +14,11 @@ import Linkedin from '@/ui/svg/share-linkedin.svg';
 
 const ParticipantPlaceholder = props => {
   return (
-    <StyledPrefishbowlParticipant {...props} className="prefishbowl">
+    <StyledPrefishbowlParticipant
+      {...props}
+      className="prefishbowl"
+      data-testid="participant-placeholder"
+    >
       <div className="placeholder">
         <div />
       </div>

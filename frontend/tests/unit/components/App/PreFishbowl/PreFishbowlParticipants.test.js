@@ -26,10 +26,14 @@ jest.mock('@/components/App/Participants/ParticipantCard', () => () => (
   <mock-participant-card data-testid="mock-participant-card" />
 ));
 
-beforeEach(() => {
+beforeEach(async () => {
   useRouter.mockReturnValue({ query: { fid: 12345 } });
   useStateValue.mockReturnValue([{ isGuest: false }]);
-  getApiParticipantList.mockResolvedValue([]);
+  getApiParticipantList.mockReturnValue(
+    new Promise(resolve => {
+      setTimeout(() => resolve([]), 100);
+    })
+  );
 });
 
 describe('Pre Fishbowl Participants component', () => {
@@ -63,7 +67,7 @@ describe('Pre Fishbowl Participants component', () => {
     expect(ping).toHaveBeenCalled();
   });
 
-  it('Should render participant', async () => {
+  it('Should render one participant', async () => {
     const newParticipant = makeParticipant();
 
     getApiParticipantList.mockResolvedValue([newParticipant]);

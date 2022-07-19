@@ -50,7 +50,6 @@ const PreFishbowlParticipants = () => {
   const getApiParticipants = () => {
     getApiParticipantList(lang, fid as string)
       .then(participantList => {
-        console.log('--->', participantList);
         setParticipants(participantList);
       })
       .catch(error => {
@@ -96,7 +95,7 @@ const PreFishbowlParticipants = () => {
 
           <div className="participant-list__counter">
             <People />
-            <span className="body-xs medium">
+            <span className="body-xs medium" data-test-id="prefishbowl-participants-number">
               {participants.length === 0 ? <Loader className="loader" /> : participants.length}
             </span>
           </div>
