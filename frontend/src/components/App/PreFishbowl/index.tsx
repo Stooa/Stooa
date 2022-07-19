@@ -96,14 +96,16 @@ const PreFishbowl = () => {
               </ButtonCopyUrl>
             </StyledFishbowlDataCardHeader>
 
-            <h2 className=" medium">{data.name}</h2>
+            <h2 data-testid="fishbowl-name" className=" medium">
+              {data.name}
+            </h2>
             {data.description && (
               <p className="description body-md" data-testid="fishbowl-description">
                 {data.description}
               </p>
             )}
           </StyledFishbowlDataCard>
-          <Button variant="link" onClick={handleOnBoardingClick}>
+          <Button data-testid="on-boarding-button" variant="link" onClick={handleOnBoardingClick}>
             {t('prefishbowl.onBoardingHelp')}
           </Button>
         </StyledFishbowlDataWrapper>
