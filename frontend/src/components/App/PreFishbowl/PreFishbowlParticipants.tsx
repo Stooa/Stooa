@@ -13,8 +13,8 @@ import { Participant } from '@/types/participant';
 import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
-import { getParticipants, ping } from '@/lib/auth';
-import router from 'next/router';
+import { ping } from '@/lib/auth';
+import { useRouter } from 'next/router';
 import {
   StyledParticipantListWrapper,
   StyledParticipantList,
@@ -28,6 +28,7 @@ import Loader from '@/ui/svg/spin-loader.svg';
 import { useStateValue } from '@/contexts/AppContext';
 import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 
 const PING_TIMEOUT = 3500;
 const MAX_PLACEHOLDER_PARTICIPANTS = 10;
@@ -35,6 +36,7 @@ const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 const PreFishbowlParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { t, lang } = useTranslation('fishbowl');
+  const router = useRouter();
   const { fid } = router.query;
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
@@ -46,9 +48,9 @@ const PreFishbowlParticipants = () => {
   };
 
   const getApiParticipants = () => {
-    getParticipants(lang, fid as string)
-      .then(({ data: { response } }) => {
-        setParticipants(response || []);
+    getApiParticipantList(lang, fid as string)
+      .then(participantList => {
+        setParticipants(participantList);
       })
       .catch(error => {
         console.log('[STOOA] Error getting participants', error);

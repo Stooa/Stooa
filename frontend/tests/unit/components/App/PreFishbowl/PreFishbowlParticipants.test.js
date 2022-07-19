@@ -10,11 +10,17 @@
 import { render } from '@testing-library/react';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 import { useRouter } from 'next/router';
+import { useStateValue } from '@/contexts/AppContext';
+import { getParticipants } from '@/lib/auth';
 
+jest.mock('@/lib/analytics');
+jest.mock('@/contexts/AppContext');
 jest.mock('next/router');
 
 beforeEach(() => {
-  useRouter.mockReturnValue({ query: '12434' });
+  useRouter.mockReturnValue({ query: { fid: 12345 } });
+  useStateValue.mockReturnValue([{ isGuest: false }]);
+  getParticipants.mockReturnValue([]);
 });
 
 describe('Pre Fishbowl Participants component', () => {
