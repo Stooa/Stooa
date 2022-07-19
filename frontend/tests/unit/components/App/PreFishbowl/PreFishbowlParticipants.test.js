@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { render } from "@testing-library/react";
-import PreFishbowlParticipants from "@/components/App/PreFishbowl/PreFishbowlParticipants";
+import { render } from '@testing-library/react';
+import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 import { useRouter } from 'next/router';
 
 jest.mock('next/router');
@@ -20,6 +20,5 @@ beforeEach(() => {
 describe('Pre Fishbowl Participants component', () => {
   it('Should render component', () => {
     const { getByTestId } = render(<PreFishbowlParticipants />);
-
   });
 });
