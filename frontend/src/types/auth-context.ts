@@ -12,7 +12,7 @@ import { User } from '@/types/user';
 export interface Auth {
   user: User;
   isAuthenticated: boolean;
-  loginStatus: StatusPayload | Record<string, unknown>;
+  loginStatus: StatusPayload | null;
   loading: boolean;
   createFishbowl: boolean;
   login: (

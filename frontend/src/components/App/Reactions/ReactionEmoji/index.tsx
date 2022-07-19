@@ -28,12 +28,15 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
 
   const { t } = useTranslation('fishbowl');
 
-  const changeCssScaleVariable = scale => {
-    if (scale) reactionRef.current.style.setProperty('--emojiScale', scale);
+  const changeCssScaleVariable = (scale: number) => {
+    if (reactionRef.current) {
+      reactionRef.current.style.setProperty('--emojiScale', scale.toString());
+    }
+
     setSize(scale);
   };
 
-  const handleOnClick = mouseEvent => {
+  const handleOnClick = (mouseEvent: React.MouseEvent) => {
     if (!disabled && reactionRef.current) {
       setClicked(clicked => clicked + 1);
 

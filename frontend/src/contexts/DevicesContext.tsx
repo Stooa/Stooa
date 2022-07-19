@@ -82,7 +82,7 @@ const DevicesProvider = ({ children }) => {
   const selectAudioOutputDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.audioOutputDevices);
 
-    if (null === device) {
+    if (!device) {
       return;
     }
 
@@ -93,7 +93,7 @@ const DevicesProvider = ({ children }) => {
   const selectAudioInputDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.audioInputDevices);
 
-    if (null === device) {
+    if (!device) {
       return;
     }
 
@@ -104,7 +104,7 @@ const DevicesProvider = ({ children }) => {
   const selectVideoDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.videoDevices);
 
-    if (null === device) {
+    if (!device) {
       return;
     }
 

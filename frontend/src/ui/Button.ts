@@ -10,6 +10,7 @@
 import styled from 'styled-components';
 
 import {
+  BREAKPOINTS,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_500,
@@ -48,9 +49,9 @@ const ButtonBase = styled.button<{ full?: boolean }>`
 
   ${mediumWeight};
 
-  ${media.min('tablet')`
+  @media (min-width: ${BREAKPOINTS['tablet']}) {
     width: ${({ full }) => (full ? '100%' : 'auto')} !important;
-  `}
+  }
 
   align-items: center;
   border: none;
