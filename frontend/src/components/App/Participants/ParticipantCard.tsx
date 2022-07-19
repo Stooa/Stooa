@@ -28,6 +28,9 @@ const ParticipantCard: React.FC<{
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
+  linkedinValidator.lastIndex = 0;
+  twitterValidator.lastIndex = 0;
+
   return (
     <StyledListItem
       className={`participant ${prefishbowl ? 'prefishbowl' : ''}`}
