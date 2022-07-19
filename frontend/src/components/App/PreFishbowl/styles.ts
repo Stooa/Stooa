@@ -185,7 +185,8 @@ const StyledPrefishbowlParticipant = styled(StyledListItem)`
 `;
 
 const StyledParticipantList = styled.ul`
-  max-height: 420px;
+  max-height: none;
+  height: 620px;
   padding: 0;
   color: ${COLOR_NEUTRO_700};
 
@@ -195,11 +196,6 @@ const StyledParticipantList = styled.ul`
   &.scroll {
     overflow-y: scroll;
   }
-
-  ${media.min('desktop')`
-    max-height: none;
-    height: 620px;
-  `}
 `;
 
 const StyledFishbowlDataWrapper = styled.div`
