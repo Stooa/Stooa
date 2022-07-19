@@ -107,7 +107,7 @@ const StyledListItem = styled.li`
   display: grid;
   box-sizing: content-box;
   min-height: 30px;
-  grid-template-columns: 4fr minmax(100px, 1fr);
+  grid-template-columns: 4fr minmax(50px, 1fr);
   column-gap: ${space(2)};
   padding: ${space(1)} ${space(3)};
   ${BODY_MD}
@@ -185,7 +185,6 @@ const StyledListItem = styled.li`
   }
 
   ${media.max('tablet')`
-
     &:hover {
       background-color: ${COLOR_NEUTRO_200};
     }

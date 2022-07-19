@@ -18,6 +18,7 @@ import Twitter from '@/ui/svg/share-twitter.svg';
 import { Participant } from '@/types/participant';
 import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';
+import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 
 const ParticipantCard: React.FC<{
   participant: Participant;
@@ -58,11 +59,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={`@${
-                /^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$/gm.exec(
-                  twitter
-                )[1]
-              }`}
+              data-username={`@${twitterValidator.exec(twitter)[1]}`}
             >
               <Twitter />
             </a>
@@ -85,11 +82,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={
-                /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile)?(?:\/*)([\w\-\.]*)/gm.exec(
-                  linkedin
-                )[2]
-              }
+              data-username={linkedinValidator.exec(linkedin)[2]}
             >
               <Linkedin />
             </a>

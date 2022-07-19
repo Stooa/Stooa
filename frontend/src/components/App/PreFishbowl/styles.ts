@@ -25,10 +25,11 @@ const StyledContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
 
-  row-gap: ${space(8)};
+  row-gap: ${space(4)};
 
   ${media.min('desktopLarge')`
     grid-template-columns: 1fr 1fr;
+    row-gap: ${space(8)};
     column-gap: ${space(8)};
     padding-top: ${space(6)};
   `}
@@ -73,12 +74,16 @@ const StyledFishbowlInformation = styled.div`
   & > .counter {
     ${TITLE_MD}
     color: ${COLOR_NEUTRO_700};
-    margin-bottom: ${space(4)};
+    margin-bottom: ${space(2)};
     text-align: center;
+
+    ${media.min('desktopLarge')`
+      margin-bottom: ${space(4)};
+    `}
   }
 
   & > .friend {
-    width: 150px;
+    width: 125px;
     margin-bottom: ${space(2)};
     align-self: center;
 
@@ -153,6 +158,8 @@ const StyledParticipantListWrapper = styled.div`
 
 const StyledRegisterNotification = styled.div`
   display: flex;
+  flex-direction: column;
+
   justify-content: space-between;
   align-items: center;
   padding: ${space(2)} ${space(2)};
@@ -161,12 +168,21 @@ const StyledRegisterNotification = styled.div`
   background-color: ${COLOR_NEUTRO_200};
 
   & p:first-child {
-    margin-right: ${space(2)};
+    margin-bottom: ${space(2)};
   }
 
   & > a {
     white-space: nowrap;
   }
+
+  ${media.min('tablet')`
+  flex-direction: row;
+
+  & p:first-child {
+      margin-bottom: none;
+      margin-right: ${space(2)};
+    }
+  `}
 `;
 
 const StyledPrefishbowlParticipant = styled(StyledListItem)`
@@ -182,6 +198,12 @@ const StyledPrefishbowlParticipant = styled(StyledListItem)`
     background-color: ${COLOR_NEUTRO_300};
     width: 8rem;
   }
+
+  ${media.max('tablet')`
+    &:hover {
+      background-color: unset;
+    }
+`}
 `;
 
 const StyledParticipantList = styled.ul`

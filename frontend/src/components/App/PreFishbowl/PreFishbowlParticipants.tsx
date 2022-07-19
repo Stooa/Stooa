@@ -104,13 +104,13 @@ const PreFishbowlParticipants = () => {
             <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
             <RedirectLink
-              href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}&prefishbowl=true`}
+              href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}&prefishbowl=${fid}`}
               passHref
             >
               <Button
                 onClick={() => {
                   pushEventDataLayer({
-                    action: 'Register',
+                    action: 'Register Intention',
                     category: 'Prefishbowl',
                     label: fid as string
                   });
