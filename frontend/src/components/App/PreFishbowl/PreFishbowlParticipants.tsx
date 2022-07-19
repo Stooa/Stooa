@@ -50,6 +50,7 @@ const PreFishbowlParticipants = () => {
   const getApiParticipants = () => {
     getApiParticipantList(lang, fid as string)
       .then(participantList => {
+        console.log('--->', participantList);
         setParticipants(participantList);
       })
       .catch(error => {
