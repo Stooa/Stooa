@@ -29,7 +29,7 @@ final class UserFactory extends ModelFactory
             'password' => self::faker()->password(),
             'plainPassword' => self::faker()->word(),
             'privacyPolicy' => self::faker()->boolean(),
-            'allowShareData' => self::faker()->boolean(),
+            'allowShareData' => true,
             'active' => self::faker()->boolean(),
             'linkedinProfile' => 'https://www.linkedin.com/in/wearestooa',
             'twitterProfile' => 'https://www.twitter.com/wearestooa',
