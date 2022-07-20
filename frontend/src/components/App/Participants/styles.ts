@@ -159,7 +159,7 @@ const StyledListItem = styled.li`
       margin-right: ${space(2)};
     }
 
-    & a:hover::after {
+    & a:not(.invalid):hover::after {
       ${BODY_XS}
       content: attr(data-username);
       position: absolute;

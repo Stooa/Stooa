@@ -31,8 +31,10 @@ const ParticipantCard: React.FC<{
   linkedinValidator.lastIndex = 0;
   twitterValidator.lastIndex = 0;
 
-  const twitterUsername = twitterValidator.exec(twitter)[1] ?? twitter;
-  const linkedinUsername = linkedinValidator.exec(linkedin)[2] ?? linkedin;
+  const twitterUsername = twitterValidator.exec(twitter) ? twitterValidator.exec(twitter)[1] : null;
+  const linkedinUsername = linkedinValidator.exec(linkedin)
+    ? linkedinValidator.exec(linkedin)[2]
+    : null;
 
   return (
     <StyledListItem
@@ -64,7 +66,7 @@ const ParticipantCard: React.FC<{
               href={twitter}
               target="_blank"
               rel="noreferrer"
-              className="icon"
+              className={`icon ${twitterUsername ? 'twitter' : 'invalid'}`}
               data-username={`@${twitterUsername}`}
             >
               <Twitter />
@@ -87,7 +89,7 @@ const ParticipantCard: React.FC<{
               }}
               target="_blank"
               rel="noreferrer"
-              className="icon"
+              className={`icon ${linkedinUsername ? 'linkedin' : 'invalid'}`}
               data-username={linkedinUsername}
             >
               <Linkedin />
