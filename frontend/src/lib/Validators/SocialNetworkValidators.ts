@@ -13,6 +13,8 @@ const linkedinValidator =
   /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile|company)?(?:\/*)([\w\-\.]*)/gm;
 
 const getTwitterUsername = (url: string): string | null => {
+  if (!url) return null;
+
   twitterValidator.lastIndex = 0;
 
   if (url.match(twitterValidator)) {
@@ -23,6 +25,8 @@ const getTwitterUsername = (url: string): string | null => {
 };
 
 const getLinkedinUsername = (url: string): string | null => {
+  if (!url) return null;
+
   linkedinValidator.lastIndex = 0;
 
   if (url.match(linkedinValidator)) {
