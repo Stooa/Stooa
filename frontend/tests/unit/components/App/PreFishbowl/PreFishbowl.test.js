@@ -76,13 +76,13 @@ describe('Pre Fishbowl component', () => {
     expect(description).not.toBeInTheDocument();
   });
 
-  it('Should push event data layer been called on component render', () => {
+  it('Should data layer event been called on component render', () => {
     render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     expect(pushEventDataLayer).toHaveBeenCalled();
   });
 
-  it('Should push event data layer been called on click', () => {
+  it('Should data layer event been called on click', () => {
     const { getByTestId } = render(<PreFishbowl fishbowl={currentFishbowl} />);
 
     const button = getByTestId('on-boarding-button');

@@ -11,7 +11,7 @@ import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 import { render } from '@testing-library/react';
 
 describe('Participant placeholder component', () => {
-  it('It should render', async () => {
+  it('It should render', () => {
     const { getByTestId } = render(<ParticipantPlaceholder />);
 
     const participantPlaceholder = getByTestId('participant-placeholder');
