@@ -16,11 +16,12 @@ import {
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_NEUTRO_700
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_900
 } from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
 import { StyledButtonContext } from '@/components/App/ButtonContextMenu/styles';
-import { BODY_MD, BODY_SM } from '@/ui/Texts';
+import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
@@ -106,7 +107,7 @@ const StyledListItem = styled.li`
   display: grid;
   box-sizing: content-box;
   min-height: 30px;
-  grid-template-columns: 4fr minmax(100px, 1fr);
+  grid-template-columns: 4fr minmax(50px, 1fr);
   column-gap: ${space(2)};
   padding: ${space(1)} ${space(3)};
   ${BODY_MD}
@@ -139,9 +140,9 @@ const StyledListItem = styled.li`
     box-sizing: content-box;
     align-items: center;
     display: inline-flex;
-    height: 16px;
+    height: auto;
     justify-content: center;
-    width: 16px;
+    width: auto;
   }
 
   span.icon {
@@ -149,6 +150,7 @@ const StyledListItem = styled.li`
   }
 
   .social {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -156,10 +158,33 @@ const StyledListItem = styled.li`
     & > *:not(:last-child) {
       margin-right: ${space(2)};
     }
+
+    & a:not(.invalid):hover::after {
+      ${BODY_XS}
+      content: attr(data-username);
+      position: absolute;
+      bottom: calc(100% + ${space(0.5)});
+      background-color: ${COLOR_NEUTRO_900};
+      padding: ${space(0.5)} ${space(1)};
+      color: ${COLOR_NEUTRO_100};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 16ch;
+      white-space: nowrap;
+
+      border-radius: 30px;
+    }
+  }
+
+  &.prefishbowl {
+    padding: ${space(2)} ${space(3)};
+
+    & .icon {
+      transform: scale(1.2);
+    }
   }
 
   ${media.max('tablet')`
-
     &:hover {
       background-color: ${COLOR_NEUTRO_200};
     }

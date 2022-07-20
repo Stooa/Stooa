@@ -124,6 +124,7 @@ describe('User clicks on button and show available context menu options', () => 
     const button = screen.getByTestId('button-context-menu');
 
     fireEvent.click(button);
+
     const contextMenu = screen.getByTestId('context-menu');
 
     expect(contextMenu).toBeInTheDocument();
