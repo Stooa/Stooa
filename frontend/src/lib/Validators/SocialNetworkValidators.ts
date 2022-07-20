@@ -12,4 +12,23 @@ const twitterValidator = /^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]
 const linkedinValidator =
   /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile|company)?(?:\/*)([\w\-\.]*)/gm;
 
-export { twitterValidator, linkedinValidator };
+const getTwitterUsername = (url: string): string | null => {
+  twitterValidator.lastIndex = 0;
+
+  if (url.match(twitterValidator)) {
+    return twitterValidator.exec(url)[1];
+  }
+
+  return null;
+};
+
+const getLinkedinUsername = (url: string): string | null => {
+  linkedinValidator.lastIndex = 0;
+
+  if (url.match(linkedinValidator)) {
+    return linkedinValidator.exec(url)[2];
+  }
+  return null;
+};
+
+export { twitterValidator, linkedinValidator, getTwitterUsername, getLinkedinUsername };

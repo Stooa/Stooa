@@ -18,7 +18,7 @@ import Twitter from '@/ui/svg/share-twitter.svg';
 import { Participant } from '@/types/participant';
 import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';
-import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
+import { getLinkedinUsername, getTwitterUsername } from '@/lib/Validators/SocialNetworkValidators';
 
 const ParticipantCard: React.FC<{
   participant: Participant;
@@ -28,13 +28,8 @@ const ParticipantCard: React.FC<{
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
-  linkedinValidator.lastIndex = 0;
-  twitterValidator.lastIndex = 0;
-
-  const twitterUsername = twitterValidator.exec(twitter) ? twitterValidator.exec(twitter)[1] : null;
-  const linkedinUsername = linkedinValidator.exec(linkedin)
-    ? linkedinValidator.exec(linkedin)[2]
-    : null;
+  const twitterUsername = getTwitterUsername(twitter);
+  const linkedinUsername = getLinkedinUsername(linkedin);
 
   return (
     <StyledListItem
