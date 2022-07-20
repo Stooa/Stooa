@@ -10,6 +10,6 @@
 const twitterValidator = /^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$/gm;
 
 const linkedinValidator =
-  /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile)?(?:\/*)([\w\-\.]*)/gm;
+  /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile|company)?(?:\/*)([\w\-\.]*)/gm;
 
 export { twitterValidator, linkedinValidator };

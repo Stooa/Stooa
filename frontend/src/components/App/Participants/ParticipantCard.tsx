@@ -31,6 +31,9 @@ const ParticipantCard: React.FC<{
   linkedinValidator.lastIndex = 0;
   twitterValidator.lastIndex = 0;
 
+  const twitterUsername = twitterValidator.exec(twitter)[1] ?? twitter;
+  const linkedinUsername = linkedinValidator.exec(linkedin)[2] ?? linkedin;
+
   return (
     <StyledListItem
       className={`participant ${prefishbowl ? 'prefishbowl' : ''}`}
@@ -62,7 +65,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={`@${twitterValidator.exec(twitter)[1]}`}
+              data-username={`@${twitterUsername}`}
             >
               <Twitter />
             </a>
@@ -85,7 +88,7 @@ const ParticipantCard: React.FC<{
               target="_blank"
               rel="noreferrer"
               className="icon"
-              data-username={linkedinValidator.exec(linkedin)[2]}
+              data-username={linkedinUsername}
             >
               <Linkedin />
             </a>
