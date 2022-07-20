@@ -12,9 +12,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getParticipants, ping } from '@/lib/auth';
+import { ping } from '@/lib/auth';
 import { getParticipantList } from '@/lib/jitsi';
-import ParticipantCard from '@/components/App/Participants/Participant';
+import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
 import ChevronLeft from '@/ui/svg/chevron-left.svg';
 import ChevronRight from '@/ui/svg/chevron-right.svg';
@@ -26,6 +26,7 @@ import VideoMuted from '@/ui/svg/video-muted.svg';
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
+import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 
 const initialParticipant = {
   id: '',
@@ -66,9 +67,9 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   };
 
   const getApiParticipants = () => {
-    getParticipants(lang, fid)
-      .then(({ data: { response } }) => {
-        setParticipants(response || [initialParticipant]);
+    getApiParticipantList(lang, fid)
+      .then(participantList => {
+        setParticipants(participantList);
       })
       .catch(error => {
         console.log('[STOOA] Error getting participants', error);

@@ -7,9 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
-import Delete from '@/ui/svg/delete.svg';
 import { rems, space } from '@/ui/helpers';
 
 type TProps = {

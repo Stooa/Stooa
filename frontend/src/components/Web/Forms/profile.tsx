@@ -28,6 +28,7 @@ import { UPDATE_USER } from '@/lib/gql/User';
 import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 
 interface FormValues {
   firstname: string;
@@ -117,8 +118,16 @@ const FormValidation = withFormik<FormProps, FormValues>({
       firstname: Yup.string().required(props.required),
       lastname: Yup.string().required(props.required),
       email: Yup.string().email(props.email).required(props.required),
-      linkedin: Yup.string().nullable().url(props.url),
-      twitter: Yup.string().nullable().url(props.url)
+      linkedin: Yup.string()
+        .matches(linkedinValidator, {
+          message: props.url
+        })
+        .url(props.url),
+      twitter: Yup.string()
+        .matches(twitterValidator, {
+          message: props.url
+        })
+        .url(props.url)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {

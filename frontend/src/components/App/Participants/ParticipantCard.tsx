@@ -16,17 +16,27 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import { Participant } from '@/types/participant';
-import ButtonContextMenu from '../ButtonContextMenu';
+import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';
+import { getLinkedinUsername, getTwitterUsername } from '@/lib/Validators/SocialNetworkValidators';
 
-const ParticipantCard: React.FC<{ participant: Participant; speaker?: boolean }> = ({
-  participant
-}) => {
+const ParticipantCard: React.FC<{
+  participant: Participant;
+  speaker?: boolean;
+  prefishbowl?: boolean;
+}> = ({ participant, prefishbowl = false }) => {
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
+  const twitterUsername = getTwitterUsername(twitter);
+  const linkedinUsername = getLinkedinUsername(linkedin);
+
   return (
-    <StyledListItem className={`participant`} data-id={id} title={name}>
+    <StyledListItem
+      className={`participant ${prefishbowl ? 'prefishbowl' : ''}`}
+      data-id={id}
+      title={name}
+    >
       <div className="info">
         <span className="name">{name}</span>
         {(isModerator || isCurrentUser || isMyself) && (
@@ -44,14 +54,15 @@ const ParticipantCard: React.FC<{ participant: Participant; speaker?: boolean }>
               onClick={() => {
                 pushEventDataLayer({
                   action: 'Twitter',
-                  category: 'Participants',
+                  category: prefishbowl ? 'Prefishbowl' : 'Participants',
                   label: window.location.href
                 });
               }}
               href={twitter}
               target="_blank"
               rel="noreferrer"
-              className="icon"
+              className={`icon ${twitterUsername ? 'twitter' : 'invalid'}`}
+              data-username={`@${twitterUsername}`}
             >
               <Twitter />
             </a>
@@ -67,13 +78,14 @@ const ParticipantCard: React.FC<{ participant: Participant; speaker?: boolean }>
               onClick={() => {
                 pushEventDataLayer({
                   action: 'Linkedin',
-                  category: 'Participants',
+                  category: prefishbowl ? 'Prefishbowl' : 'Participants',
                   label: window.location.href
                 });
               }}
               target="_blank"
               rel="noreferrer"
-              className="icon"
+              className={`icon ${linkedinUsername ? 'linkedin' : 'invalid'}`}
+              data-username={linkedinUsername}
             >
               <Linkedin />
             </a>

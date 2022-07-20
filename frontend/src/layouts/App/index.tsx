@@ -34,9 +34,11 @@ interface Props {
   scriptsLoadedSuccessfully: boolean;
   title: string;
   prejoin: boolean;
+  className?: string;
 }
 
 const Layout: React.FC<Props> = ({
+  className,
   data,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
@@ -63,7 +65,7 @@ const Layout: React.FC<Props> = ({
     <StooaProvider data={data} isModerator={isModerator}>
       <DevicesProvider>
         <Seo title={title} />
-        <Container>{children}</Container>
+        <Container className={className}>{children}</Container>
       </DevicesProvider>
       <ToastContainer className="toastify-custom" />
     </StooaProvider>
