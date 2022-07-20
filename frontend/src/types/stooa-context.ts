@@ -21,4 +21,11 @@ export interface StooaContextValues {
   timeStatus: ITimeStatus;
   participantToKick: Participant;
   setParticipantToKick: Dispatch<SetStateAction<Participant>>;
+  showOnBoardingModal: boolean;
+  setShowOnBoardingModal: Dispatch<SetStateAction<boolean>>;
+  toggleOnBoarding: (location: string) => void;
+  activeOnBoardingTooltip: boolean;
+  setActiveOnBoardingTooltip: Dispatch<SetStateAction<boolean>>;
+  onBoardingTooltipSeen: boolean;
+  setOnBoardingTooltipSeen: Dispatch<SetStateAction<boolean>>;
 }

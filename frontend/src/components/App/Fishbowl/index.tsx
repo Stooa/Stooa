@@ -19,9 +19,13 @@ import { Main } from '@/layouts/App/styles';
 import ModalPermissions from '@/components/App/ModalPermissions';
 import { useDevices } from '@/contexts/DevicesContext';
 import ModalKickUser from '@/components/App/ModalKickUser';
-import ReactionsReceiver from '../Reactions/ReactionsReceiver';
+import ReactionsReceiver from '@/components/App/Reactions/ReactionsReceiver';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useRouter } from 'next/router';
+import { useStateValue } from '@/contexts/AppContext';
+import { IConferenceStatus } from '@/jitsi/Status';
+import PreFishbowl from '@/components/App/PreFishbowl';
+import ModalOnboarding from '../ModalOnBoarding';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -30,10 +34,14 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { isModerator, participantToKick, setParticipantToKick } = useStooa();
+  const { data, isModerator, participantToKick, setParticipantToKick, showOnBoardingModal } =
+    useStooa();
+  const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
+
+  const isPreFishbowl = fishbowlReady && conferenceStatus === IConferenceStatus.NOT_STARTED;
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -57,8 +65,9 @@ const Fishbowl: FC = () => {
 
   return (
     <>
-      <Header toggleParticipants={toggleParticipants} />
+      <Header isPrefishbowl={isPreFishbowl} toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
+        {/* MODALS */}
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
         {participantToKick && (
           <ModalKickUser
@@ -67,10 +76,12 @@ const Fishbowl: FC = () => {
             closeModal={() => setParticipantToKick(null)}
           />
         )}
-        <Seats />
+        {showOnBoardingModal && <ModalOnboarding />}
+
+        {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
-      <Footer participantsActive={participantsActive} />
+      {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
     </>
   );
 };

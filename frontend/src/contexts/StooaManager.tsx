@@ -36,6 +36,8 @@ import seatsRepository from '@/jitsi/Seats';
 import { toast } from 'react-toastify';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import { StooaContextValues } from '@/types/stooa-context';
+import { pushEventDataLayer } from '@/lib/analytics';
+import { getOnBoardingCookie } from '@/lib/auth';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -49,6 +51,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState(null);
+  const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
+  const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
+  const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -180,6 +185,27 @@ const StooaProvider = ({ data, isModerator, children }) => {
     return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
   };
 
+  const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
+
+  const toggleOnBoarding = (location: string) => {
+    pushEventDataLayer({
+      action: showOnBoardingModal ? 'OnBoarding close' : 'OnBoarding open',
+      category: location,
+      label: window.location.href
+    });
+
+    setShowOnBoardingModal(!showOnBoardingModal);
+  };
+
+  const shouldShowOnboardingModal = () => {
+    const cookie = getOnBoardingCookie(isModerator);
+
+    if (!cookie) {
+      setShowOnBoardingModal(true);
+      setOnBoardingTooltipSeen(false);
+    }
+  };
+
   useEffect(() => {
     if (
       !prejoin &&
@@ -242,7 +268,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
   }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
+  useEffect(() => {
+    shouldShowOnboardingModal();
+  }, []);
 
   return (
     <StooaContext.Provider
@@ -254,7 +282,14 @@ const StooaProvider = ({ data, isModerator, children }) => {
         onIntroduction,
         timeStatus,
         participantToKick,
-        setParticipantToKick
+        setParticipantToKick,
+        showOnBoardingModal,
+        setShowOnBoardingModal,
+        toggleOnBoarding,
+        activeOnBoardingTooltip,
+        setActiveOnBoardingTooltip,
+        onBoardingTooltipSeen,
+        setOnBoardingTooltipSeen
       }}
     >
       {children}

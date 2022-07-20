@@ -8,8 +8,17 @@
  */
 
 import styled from 'styled-components';
-import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_500, COLOR_NEUTRO_800 } from '@/ui/settings';
+import { media, space } from '@/ui/helpers';
+import {
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_800
+} from '@/ui/settings';
+import { TITLE_SM } from '@/ui/Titles';
+import { BODY_LG } from '@/ui/Texts';
+import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
@@ -45,10 +54,43 @@ const StyledFishbowlDataCard = styled.div`
     color: ${COLOR_NEUTRO_800};
   }
 
-  div.date {
+  & div.date {
     color: ${COLOR_NEUTRO_800};
     margin-bottom: ${space(3)};
   }
+
+  & .description {
+    color: ${COLOR_NEUTRO_700};
+    overflow-y: scroll;
+    max-height: 5.4em;
+    word-break: break-word;
+
+    ${scrolllbarStyle}
+
+    ${media.min('tablet')`
+        max-height: 9em;
+      `}
+  }
+
+  &.prefishbowl {
+    & h2 {
+      ${TITLE_SM}
+      ${media.min('tablet')`
+        ${BODY_LG}
+      `}
+    }
+  }
 `;
 
-export { StyledFishbowlDataCard };
+const StyledFishbowlDataCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+
+  color: ${COLOR_NEUTRO_600};
+
+  margin-bottom: ${space(2)};
+`;
+
+export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader };
