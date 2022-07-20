@@ -12,6 +12,6 @@ Feature: Fishbowl
         When navigates to fishbowl
         And can access to pre fishbowl
         And clicks on "Enter fishbowl"
-        And sees the fishbowl page
+        And sees the prefishbowl page
         And starts fishbowl
         Then finishes a fishbowl
