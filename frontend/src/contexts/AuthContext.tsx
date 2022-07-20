@@ -7,7 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect
+} from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
@@ -76,7 +81,11 @@ const AuthContext = createContext<Auth>({
   updateCreateFishbowl: voidFunction
 });
 
-const AuthProvider = ({ children }: { children: React.ReactChild }) => {
+type AuthProviderProps = {
+  children?: React.ReactNode;
+};
+
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
   const { lang } = useTranslation();
   const [user, setUser] = useState<User>({});
@@ -187,7 +196,11 @@ const AuthProvider = ({ children }: { children: React.ReactChild }) => {
 
 const useAuth = () => useContext(AuthContext);
 
-const ProtectRoute = ({ children }: { children: React.ReactChild }) => {
+type ProtectedRouteProps = {
+  children?: React.ReactNode
+};
+
+const ProtectRoute = ({ children }: ProtectedRouteProps) => {
   const router = useRouter();
   const { lang } = useTranslation();
   const { isAuthenticated, loading } = useAuth();
@@ -222,7 +235,7 @@ const ProtectRoute = ({ children }: { children: React.ReactChild }) => {
     );
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export { AuthProvider, ProtectRoute, useAuth };

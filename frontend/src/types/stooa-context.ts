@@ -19,6 +19,6 @@ export interface StooaContextValues {
   isModerator: boolean;
   onIntroduction: boolean;
   timeStatus: ITimeStatus;
-  participantToKick: Participant;
+  participantToKick: Participant | null;
   setParticipantToKick: Dispatch<SetStateAction<Participant>>;
 }

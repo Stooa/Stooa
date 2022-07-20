@@ -50,7 +50,7 @@ interface FormProps {
   onSubmit: (any) => void;
   currentLanguage: string;
   enableReinitialize?: boolean;
-  selectedFishbowl?: FormValues | null;
+  selectedFishbowl?: FormValues;
   isFull?: boolean;
   isEditForm?: boolean;
 }
@@ -314,7 +314,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const FishbowlForm = ({
-  selectedFishbowl = null,
+  selectedFishbowl,
   $isFull = false,
   isEditForm = false,
   onSaveCallback
@@ -325,7 +325,7 @@ const FishbowlForm = ({
   onSaveCallback?: (data: Fishbowl) => void;
 }) => {
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState<boolean>(null);
+  const [success, setSuccess] = useState<boolean>();
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
@@ -357,7 +357,10 @@ const FishbowlForm = ({
         setTimeout(() => {
           setSuccess(false);
         }, 5000);
-        onSaveCallback(formattedFishbowl);
+
+        if (onSaveCallback) {
+          onSaveCallback(formattedFishbowl);
+        }
       } else {
         const {
           data: {

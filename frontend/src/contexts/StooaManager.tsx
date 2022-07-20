@@ -36,6 +36,7 @@ import seatsRepository from '@/jitsi/Seats';
 import { toast } from 'react-toastify';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import { StooaContextValues } from '@/types/stooa-context';
+import { Participant } from '@/types/participant';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -48,7 +49,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [conferenceReady, setConferenceReady] = useState(false);
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
-  const [participantToKick, setParticipantToKick] = useState(null);
+  const [participantToKick, setParticipantToKick] = useState<Participant | null>(null);
 
   const { t, lang } = useTranslation('app');
 
