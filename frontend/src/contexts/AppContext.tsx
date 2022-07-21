@@ -57,7 +57,8 @@ type joinGuestAction = {
 
 type joinUserAction = {
   type: typeof JOIN_USER;
-  prejoin: boolean;
+  prejoin?: boolean;
+  isGuest?: boolean;
 };
 
 type Actions =

@@ -18,7 +18,11 @@ const getTwitterUsername = (url: string): string | null => {
   twitterValidator.lastIndex = 0;
 
   if (url.match(twitterValidator)) {
-    return twitterValidator.exec(url)[1];
+    const execResult = twitterValidator.exec(url);
+
+    if (execResult) {
+      return execResult[1];
+    }
   }
 
   return null;
@@ -30,8 +34,13 @@ const getLinkedinUsername = (url: string): string | null => {
   linkedinValidator.lastIndex = 0;
 
   if (url.match(linkedinValidator)) {
-    return linkedinValidator.exec(url)[2];
+    const execResult = linkedinValidator.exec(url);
+
+    if (execResult) {
+      return execResult[2];
+    }
   }
+
   return null;
 };
 

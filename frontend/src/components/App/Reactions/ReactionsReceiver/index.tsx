@@ -29,11 +29,15 @@ const ReactionsReceiver = ({ className, enabled = false }: Props) => {
 
   const formatReactions = (reactions: string[]): Reaction[] => {
     const countReaction = reactions.length;
-    const formattedReactions = reactions.map((reaction, index) => {
+    const formattedReactions: Reaction[] = [];
+
+    reactions.forEach((reaction, index) => {
       if (REACTION_EMOJIS.hasOwnProperty(reaction)) {
-        return Reactions.createReaction(
-          reaction,
-          `calc(50% - ${countReaction > 1 ? countReaction * 14 : 20}px + ${index * 22}px)`
+        formattedReactions.push(
+          Reactions.createReaction(
+            reaction,
+            `calc(50% - ${countReaction > 1 ? countReaction * 14 : 20}px + ${index * 22}px)`
+          )
         );
       }
     });
@@ -44,7 +48,7 @@ const ReactionsReceiver = ({ className, enabled = false }: Props) => {
   useEventListener(REACTION_MESSAGE_RECEIVED, ({ detail: { text } }) => {
     if (reactionsToShow.length < REACTIONS_LIMIT && reactionsEnabled) {
       const splitReactions: string[] = text.split(',');
-      const formattedReactions: Reaction[] = formatReactions(splitReactions);
+      const formattedReactions = formatReactions(splitReactions);
       setReactionsToShow(reactions => [...reactions, ...formattedReactions]);
     }
   });

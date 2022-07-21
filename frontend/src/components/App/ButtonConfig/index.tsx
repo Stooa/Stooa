@@ -31,7 +31,14 @@ interface Props {
   selectorPosition?: 'top' | 'bottom';
 }
 
-const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) => {
+type ButtonConfigHandle = {
+  handleShowDevices: (shouldShowDevices?: boolean) => void;
+};
+
+const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = (
+  { unlabeled, selectorPosition },
+  ref
+) => {
   const [showDevices, setShowDevices] = useState(false);
 
   const {
@@ -181,6 +188,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
       )}
     </Container>
   );
-});
+};
 
-export default ButtonConfig;
+export default forwardRef(ButtonConfig);
+export { ButtonConfigHandle };
