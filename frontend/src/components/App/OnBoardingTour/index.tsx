@@ -38,7 +38,7 @@ const OnBoardingTour = () => {
   const attendeeSteps: step[] = [
     {
       intro: <StepTooltip title={t('step1.title')} text={t('step1.text')} img="" />,
-      tooltipClass: 'first-step'
+      tooltipClass: 'custom-tooltip first-step'
     },
     {
       element: '#seat-2',
@@ -49,7 +49,8 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step3.gif"
         />
       ),
-      position: 'right'
+      position: 'right',
+      tooltipClass: 'custom-tooltip'
     },
     {
       element: '#button-join',
@@ -59,7 +60,8 @@ const OnBoardingTour = () => {
           text={data.hasIntroduction ? t('step3.textIntroduction') : t('step3.text')}
           img="/img/tour/tour-step2.gif"
         />
-      )
+      ),
+      tooltipClass: 'custom-tooltip'
     },
     {
       element: '.participant-toggle',
