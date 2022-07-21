@@ -245,7 +245,7 @@ const conferenceRepository = () => {
 
     connection = new JitsiMeetJS.JitsiConnection(
       null,
-      isUserModerator && auth ? auth.token : null,
+      auth ? auth.token : null,
       connectionOptions(roomName)
     );
 
