@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
@@ -31,8 +31,14 @@ type step = {
 };
 
 const OnBoardingTour = () => {
-  const { isModerator, data, conferenceReady, conferenceStatus } = useStooa();
-  const [alreadySeen, setAlreadySeen] = useState(false);
+  const {
+    isModerator,
+    data,
+    conferenceReady,
+    conferenceStatus,
+    showOnBoardingTour,
+    setShowOnBoardingTour
+  } = useStooa();
   const { t } = useTranslation('on-boarding-tour');
 
   const attendeeSteps: step[] = [
@@ -99,7 +105,6 @@ const OnBoardingTour = () => {
 
   const onExitTour = () => {
     OnBoardingTourCookie.setOnBoardingCookie();
-    setAlreadySeen(true);
   };
 
   const onCompleteTour = () => {
@@ -109,24 +114,25 @@ const OnBoardingTour = () => {
     });
   };
 
-  const showTour = (): boolean => {
+  const showTour = (): void => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
     if (
       conferenceReady &&
       !isModerator &&
       !cookie &&
-      !alreadySeen &&
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
     ) {
-      return true;
+      setShowOnBoardingTour(true);
     }
 
-    return false;
+    setShowOnBoardingTour(false);
   };
 
-  if (showTour()) {
+  console.log(showTour());
+
+  if (showOnBoardingTour) {
     return (
       <Steps
         enabled={true}

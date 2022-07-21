@@ -28,7 +28,7 @@ import { BODY_LG, mediumWeight, TYPOGRAPHY_SIZES } from './Texts';
 
 const OnBoardingTourOverrides = css`
   div.introjs-helperLayer {
-    box-shadow: rgb(33 33 33 / 50%) 0px 0px 0px 5000px;
+    box-shadow: rgb(33 33 33 / 50%) 0px 0px 0px 5000px !important;
   }
 
   .custom-onboarding-tooltip {
@@ -136,7 +136,6 @@ const OnBoardingTourOverrides = css`
       }
 
       & a.introjs-prevbutton:not(.introjs-hidden) {
-        ${mediumWeight};
         color: ${COLOR_PURPLE_500};
         font-size: var(--fontSize);
         line-height: var(--lineHeight);
@@ -150,6 +149,7 @@ const OnBoardingTourOverrides = css`
 
         &:focus {
           color: ${COLOR_PURPLE_600};
+          box-shadow: none;
         }
       }
     }
