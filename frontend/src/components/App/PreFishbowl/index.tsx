@@ -34,7 +34,7 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 const PreFishbowl = () => {
   const router = useRouter();
-  const { slug } = router.query;
+  const { fid } = router.query;
   const { data, isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
 
   const { t, lang } = useTranslation('fishbowl');
@@ -89,7 +89,7 @@ const PreFishbowl = () => {
               <ButtonCopyUrl
                 data-testid="copy-link"
                 variant="text"
-                fid={slug as string}
+                fid={fid as string}
                 locale={lang}
               >
                 {t('common:linkButton')}
