@@ -13,6 +13,8 @@ import { Button } from '@/ui/Resets';
 import Texts, { TYPOGRAPHY_SIZES } from '@/ui/Texts';
 import Titles from '@/ui/Titles';
 import Overrides from '@/ui/Overrides';
+import { OnBoardingTourOverrides } from '@/ui/OnBoardingTourOverrides';
+
 import { media, space } from '@/ui/helpers';
 import {
   COLOR_GREEN_100,
@@ -326,6 +328,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
+    ${OnBoardingTourOverrides}
 
 
 `;

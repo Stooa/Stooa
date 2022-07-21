@@ -37,8 +37,14 @@ const OnBoardingTour = () => {
 
   const attendeeSteps: step[] = [
     {
-      intro: <StepTooltip title={t('step1.title')} text={t('step1.text')} img="" />,
-      tooltipClass: 'custom-tooltip first-step'
+      intro: (
+        <StepTooltip
+          title={t('step1.title')}
+          text={t('step1.text')}
+          img="/img/friends/dancing.png"
+        />
+      ),
+      tooltipClass: 'custom-onboarding-tooltip first-step'
     },
     {
       element: '#seat-2',
@@ -50,7 +56,7 @@ const OnBoardingTour = () => {
         />
       ),
       position: 'right',
-      tooltipClass: 'custom-tooltip'
+      tooltipClass: 'custom-onboarding-tooltip'
     },
     {
       element: '#button-join',
@@ -61,7 +67,7 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step2.gif"
         />
       ),
-      tooltipClass: 'custom-tooltip'
+      tooltipClass: 'custom-onboarding-tooltip'
     },
     {
       element: '.participant-toggle',
@@ -71,7 +77,8 @@ const OnBoardingTour = () => {
           text={t('step4.text')}
           img="/img/tour/tour-step4.gif"
         />
-      )
+      ),
+      tooltipClass: 'custom-onboarding-tooltip'
     }
   ];
 

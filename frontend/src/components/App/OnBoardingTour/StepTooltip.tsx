@@ -20,11 +20,11 @@ const StepTooltip = ({ title, text, img }: StepTooltipProps) => {
   const { t } = useTranslation('on-boarding-tour');
 
   return (
-    <div>
-      {img && <img alt={`${title} image`} src={img} />}
+    <>
+      {img && <img className="image" alt={`${title} image`} src={img} />}
       {title && <h3>{t(title)}</h3>}
       {text && <p>{t(text)}</p>}
-    </div>
+    </>
   );
 };
 
