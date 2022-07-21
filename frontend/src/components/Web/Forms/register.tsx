@@ -22,7 +22,7 @@ import * as Yup from 'yup';
 import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from '@/app.config';
 import i18nConfig from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
-import { pushPageViewDataLayer } from '@/lib/analytics';
+import { pushEventDataLayer, pushPageViewDataLayer } from '@/lib/analytics';
 import { CREATE_USER } from '@/lib/gql/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
@@ -30,6 +30,10 @@ import Checkbox from '@/components/Common/Fields/Checkbox';
 import RedirectLink from '@/components/Web/RedirectLink';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import { useStateValue } from '@/contexts/AppContext';
+import userRepository from '@/jitsi/User';
+import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
+import { useRouter } from 'next/router';
 
 interface FormValues {
   firstname: string;
@@ -147,8 +151,16 @@ const FormValidation = withFormik<FormProps, FormValues>({
       email: Yup.string().email(props.email).required(props.required),
       password: Yup.string().min(6, props.minlength).required(props.required),
       terms: Yup.boolean().required(props.required).oneOf([true], props.terms),
-      linkedin: Yup.string().url(props.url),
-      twitter: Yup.string().url(props.url)
+      linkedin: Yup.string()
+        .matches(linkedinValidator, {
+          message: props.url
+        })
+        .url(props.url),
+      twitter: Yup.string()
+        .matches(twitterValidator, {
+          message: props.url
+        })
+        .url(props.url)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
@@ -188,6 +200,8 @@ const Register = () => {
   const [createUser] = useMutation(CREATE_USER);
   const { login } = useAuth();
   const { t, lang } = useTranslation('form');
+  const router = useRouter();
+  const { prefishbowl } = router.query;
 
   const requiredError = t('validation.required');
   const emailError = t('validation.email');
@@ -201,6 +215,17 @@ const Register = () => {
       setError(res.data);
       console.log('[STOOA] submit error', res);
     } else {
+      if (prefishbowl) {
+        console.log(prefishbowl);
+        pushEventDataLayer({
+          action: 'Register Confirmation',
+          category: 'Prefishbowl',
+          label: prefishbowl as string
+        });
+      }
+
+      userRepository.clearUser();
+
       pushPageViewDataLayer({ url: '/user-registered', title: 'User registered' });
       await login(values.email, values.password);
     }

@@ -48,6 +48,7 @@ import { AuthToken } from '@/lib/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { User } from '@/types/user';
+import { useStateValue } from '@/contexts/AppContext';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -86,6 +87,7 @@ type AuthProviderProps = {
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [{}, dispatch] = useStateValue();
   const router = useRouter();
   const { lang } = useTranslation();
   const [user, setUser] = useState<User>({});
@@ -107,7 +109,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           data
         };
 
-        if (user) setUser(user);
+        if (user) {
+          setUser(user);
+          userRepository.setUserNickname(user.name);
+          dispatch({
+            type: 'JOIN_USER',
+            isGuest: false
+          });
+        }
 
         setToken(data.token);
         setRefreshToken(data.refresh_token);

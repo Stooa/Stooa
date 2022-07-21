@@ -45,6 +45,14 @@ const Container = styled.div<{ drawer?: boolean }>`
       padding-right: ${space(3)};
     }
   `}
+
+  &.prefishbowl {
+    display: grid;
+    grid-template-columns: 1fr ${({ drawer }) => (drawer ? '300px' : 0)};
+    grid-template-rows: auto 1fr minmax(${space(10)}, auto);
+    gap: 0;
+    grid-template-areas: 'Header Aside' 'Main Aside' 'Footer Aside';
+  }
 `;
 
 const Header = styled.header`
@@ -57,7 +65,12 @@ const Header = styled.header`
   color: ${COLOR_NEUTRO_700};
 
   ${media.max('tablet')`
-    min-height: ${space(16)};
+
+      min-height: ${space(16)};
+
+    &.prefishbowl{
+      min-height: ${space(12)};
+    }
   `}
 
   .header-info,

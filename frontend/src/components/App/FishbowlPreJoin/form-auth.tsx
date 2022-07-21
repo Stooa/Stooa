@@ -27,7 +27,8 @@ const AuthUser = ({ name }: TProps) => {
   const handleOnSubmit = () => {
     dispatch({
       type: 'JOIN_USER',
-      prejoin: false
+      prejoin: false,
+      isGuest: false
     });
   };
 

@@ -133,17 +133,6 @@ const ping = async (lang: string, slug: string) => {
     });
 };
 
-const getParticipants = async (lang: string, slug: string) => {
-  const auth = await getAuthToken();
-
-  return api.get(`${lang}/fishbowl-participants/${slug}`, {
-    headers: {
-      'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
-      'Authorization': `${auth ? auth.authorizationString : null}`
-    }
-  });
-};
-
 const isCurrentGuest = (guestId: string | null) => {
   return guestId !== null && userRepository.getUserGuestId() === guestId;
 };
@@ -154,7 +143,6 @@ export {
   COOKIE_TOKEN,
   getAuthToken,
   getOnBoardingCookie,
-  getParticipants,
   isCurrentGuest,
   ping,
   setOnBoardingCookie,

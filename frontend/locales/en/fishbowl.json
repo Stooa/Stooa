@@ -112,5 +112,9 @@
         "laugh": "LOL",
         "wave": "Hi",
         "insightful": "Insightful"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "Don't know how a fishbowl works? Click here",
+        "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
     }
 }
