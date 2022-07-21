@@ -23,7 +23,7 @@ import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles
 import Trans from 'next-translate/Trans';
 
 const Avatar: React.FC = () => {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
   const { user, logout } = useAuth();
   const { t } = useTranslation('common');

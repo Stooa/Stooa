@@ -375,7 +375,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues;
+  let selectedFishbowlValues: FormValues | undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
@@ -416,7 +416,7 @@ const FishbowlForm = ({
         updateFishbowl={updateFishbowl}
         onSubmit={handleOnSubmit}
         currentLanguage={lang}
-        selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
+        selectedFishbowl={selectedFishbowlValues}
         isEditForm={isEditForm}
       />
     </>
