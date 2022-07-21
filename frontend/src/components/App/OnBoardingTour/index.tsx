@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
@@ -112,6 +112,7 @@ const OnBoardingTour = () => {
       category: 'OnBoarding Tour',
       action: 'End'
     });
+    setShowOnBoardingTour(false);
   };
 
   const showTour = (): void => {
@@ -124,13 +125,16 @@ const OnBoardingTour = () => {
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION)
     ) {
+      console.log('shouldShow lol');
       setShowOnBoardingTour(true);
+    } else {
+      setShowOnBoardingTour(false);
     }
-
-    setShowOnBoardingTour(false);
   };
 
-  console.log(showTour());
+  useEffect(() => {
+    showTour();
+  }, []);
 
   if (showOnBoardingTour) {
     return (
