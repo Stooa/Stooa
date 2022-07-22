@@ -21,8 +21,7 @@ import {
   COLOR_PURPLE_200,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
-  COLOR_PURPLE_600,
-  COLOR_RED_500
+  COLOR_PURPLE_600
 } from './settings';
 import { BODY_LG, mediumWeight, TYPOGRAPHY_SIZES } from './Texts';
 
@@ -38,6 +37,9 @@ const OnBoardingTourOverrides = css`
 
     & > .introjs-tooltip-header {
       padding: unset;
+      & > .introjs-skipbutton {
+        color: ${COLOR_NEUTRO_600};
+      }
     }
 
     & > .introjs-tooltiptext {

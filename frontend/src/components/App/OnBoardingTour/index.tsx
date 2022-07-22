@@ -118,14 +118,7 @@ const OnBoardingTour = () => {
   const showTour = (): void => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
-    if (
-      conferenceReady &&
-      !isModerator &&
-      !cookie &&
-      (conferenceStatus === IConferenceStatus.RUNNING ||
-        conferenceStatus === IConferenceStatus.INTRODUCTION)
-    ) {
-      console.log('shouldShow lol');
+    if (!isModerator && !cookie) {
       setShowOnBoardingTour(true);
     } else {
       setShowOnBoardingTour(false);
@@ -133,8 +126,15 @@ const OnBoardingTour = () => {
   };
 
   useEffect(() => {
-    showTour();
-  }, []);
+    console.log('MY MAN CONFERENCE STATUS CHANGED WTF');
+    if (
+      (conferenceStatus === IConferenceStatus.RUNNING ||
+        conferenceStatus === IConferenceStatus.INTRODUCTION) &&
+      conferenceReady
+    ) {
+      showTour();
+    }
+  }, [conferenceStatus, conferenceReady]);
 
   if (showOnBoardingTour) {
     return (
