@@ -15,8 +15,6 @@ namespace App\Security;
 
 use App\Entity\Guest;
 use App\Repository\GuestRepository;
-use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -71,7 +69,7 @@ class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAut
         $guestValues = $this->getValues($request);
 
         $userBadge = null === $guestValues['id']
-            ? new UserBadge('', fn() => $this->createGuest($guestValues['name']))
+            ? new UserBadge('', fn () => $this->createGuest($guestValues['name']))
             : new UserBadge($guestValues['id'], $this->guestRepository->loadUserByIdentifier(...));
 
         return new SelfValidatingPassport($userBadge);
@@ -105,7 +103,7 @@ class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAut
         $guestValues['id'] = property_exists($data, 'id') ? $data->id : null;
         $guestValues['name'] = property_exists($data, 'name') ? $data->name : null;
 
-        if (null === $guestValues['id'] && null === $guestValues['name'] ) {
+        if (null === $guestValues['id'] && null === $guestValues['name']) {
             throw new BadRequestHttpException('The key "id" or "name" are mandatory.');
         }
 
