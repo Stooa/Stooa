@@ -44,7 +44,10 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
       const scaleToSet = size < 1.435 ? size + scaleInterval : size;
 
       changeCssScaleVariable(scaleToSet);
-      onClick(mouseEvent);
+
+      if (onClick) {
+        onClick(mouseEvent);
+      }
     }
   };
 

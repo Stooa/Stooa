@@ -21,7 +21,7 @@ interface Props {
 }
 
 const FishbowlInfo: React.FC<Props> = ({ data }) => {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
   const toggleInfo = () => {

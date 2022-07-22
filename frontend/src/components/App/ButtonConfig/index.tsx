@@ -112,7 +112,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
-                      selected={audioInputDevice.deviceId === deviceId}
+                      selected={audioInputDevice?.deviceId === deviceId}
                       onClick={handleAudioInput}
                       value={deviceId}
                     >
@@ -141,7 +141,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
-                      selected={audioOutputDevice.deviceId === deviceId}
+                      selected={audioOutputDevice?.deviceId === deviceId}
                       onClick={handleAudioOutput}
                       value={deviceId}
                     >
@@ -170,7 +170,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
-                      selected={videoDevice.deviceId === deviceId}
+                      selected={videoDevice?.deviceId === deviceId}
                       onClick={handleVideoInput}
                       value={deviceId}
                     >
@@ -191,4 +191,4 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
 };
 
 export default forwardRef(ButtonConfig);
-export { ButtonConfigHandle };
+export type { ButtonConfigHandle };

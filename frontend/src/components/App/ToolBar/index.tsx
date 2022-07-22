@@ -63,7 +63,7 @@ const ToolBar: React.FC = () => {
 
   const hasModeratorToSeatDuringIntroduction = (): boolean => {
     return (
-      data.hasIntroduction &&
+      (data.hasIntroduction ?? false) &&
       isModerator &&
       conferenceReady &&
       conferenceStatus === IConferenceStatus.INTRODUCTION
