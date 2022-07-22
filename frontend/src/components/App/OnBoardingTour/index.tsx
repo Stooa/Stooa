@@ -18,6 +18,8 @@ import 'intro.js/introjs.css';
 import StepTooltip from '@/components/App/OnBoardingTour/StepTooltip';
 import useTranslation from 'next-translate/useTranslation';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { useWindowSize } from '@/hooks/useWIndowSize';
+import { BREAKPOINTS } from '@/ui/settings';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -40,6 +42,7 @@ const OnBoardingTour = () => {
     setShowOnBoardingTour
   } = useStooa();
   const { t } = useTranslation('on-boarding-tour');
+  const { width } = useWindowSize();
 
   const attendeeSteps: step[] = [
     {
@@ -53,7 +56,6 @@ const OnBoardingTour = () => {
       tooltipClass: 'custom-onboarding-tooltip first-step'
     },
     {
-      element: '#seat-2',
       intro: (
         <StepTooltip
           title={t('step3.title')}
@@ -61,11 +63,11 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step3.gif"
         />
       ),
-      position: 'right',
+      ...(width > BREAKPOINTS.tablet && { position: 'right', element: '#seat-2' }),
       tooltipClass: 'custom-onboarding-tooltip'
     },
     {
-      element: '#button-join',
+      ...(width > BREAKPOINTS.tablet && { element: '#button-join' }),
       intro: (
         <StepTooltip
           title={t('step2.title')}
@@ -76,7 +78,6 @@ const OnBoardingTour = () => {
       tooltipClass: 'custom-onboarding-tooltip'
     },
     {
-      element: '.participant-toggle',
       intro: (
         <StepTooltip
           title={t('step4.title')}
@@ -84,6 +85,7 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step4.gif"
         />
       ),
+      ...(width > BREAKPOINTS.tablet && { element: '.participant-toggle' }),
       tooltipClass: 'custom-onboarding-tooltip'
     }
   ];
@@ -93,6 +95,7 @@ const OnBoardingTour = () => {
     prevLabel: t('previous'),
     doneLabel: t('done'),
     tooltipClass: 'on-boarding-tour',
+    tooltipPosition: 'left',
     hidePrev: true
   };
 
@@ -105,6 +108,7 @@ const OnBoardingTour = () => {
 
   const onExitTour = () => {
     OnBoardingTourCookie.setOnBoardingCookie();
+    setShowOnBoardingTour(false);
   };
 
   const onCompleteTour = () => {

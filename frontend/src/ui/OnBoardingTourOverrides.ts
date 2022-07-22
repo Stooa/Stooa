@@ -32,8 +32,13 @@ const OnBoardingTourOverrides = css`
 
   .custom-onboarding-tooltip {
     background-color: ${COLOR_NEUTRO_200};
-    min-width: 360px;
     padding: ${space(2)} ${space(2)} ${space(3)};
+    width: 95vh;
+
+    ${media.min('desktop')`
+    width: auto;
+      min-width: 360px;
+    `}
 
     & > .introjs-tooltip-header {
       padding: unset;
@@ -55,6 +60,11 @@ const OnBoardingTourOverrides = css`
 
       & > .image {
         margin-bottom: ${space(2)};
+        width: 50%;
+
+        ${media.min('tablet')`
+          width: auto;
+        `}
       }
 
       &.first-step > .image {
