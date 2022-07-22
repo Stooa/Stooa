@@ -100,7 +100,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
+class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface, Foo1Interface, Foo2Interface
 {
     use TimestampableEntity;
 

@@ -11,12 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\JWT\TokenGenerator;
+namespace App\Entity;
 
-use App\JWT\Model\JWTToken;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Ramsey\Uuid\UuidInterface;
 
-interface TokenGeneratorInterface
+interface Foo1Interface
 {
-    public function generate(UserInterface $user): JWTToken;
+    public function getId(): ?UuidInterface;
+
+    public function getFullName(): string;
 }
