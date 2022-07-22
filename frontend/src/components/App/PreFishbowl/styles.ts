@@ -179,7 +179,7 @@ const StyledRegisterNotification = styled.div`
   flex-direction: row;
 
   & p:first-child {
-      margin-bottom: none;
+      margin-bottom: 0;
       margin-right: ${space(2)};
     }
   `}
