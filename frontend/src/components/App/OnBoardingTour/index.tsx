@@ -39,7 +39,9 @@ const OnBoardingTour = () => {
     conferenceReady,
     conferenceStatus,
     showOnBoardingTour,
-    setShowOnBoardingTour
+    setShowOnBoardingTour,
+    setActiveOnBoardingTooltip,
+    onBoardingTooltipSeen
   } = useStooa();
   const { t } = useTranslation('on-boarding-tour');
   const { width } = useWindowSize();
@@ -112,6 +114,9 @@ const OnBoardingTour = () => {
   const onExitTour = () => {
     OnBoardingTourCookie.setOnBoardingCookie();
     setShowOnBoardingTour(false);
+    if (!onBoardingTooltipSeen) {
+      setActiveOnBoardingTooltip(true);
+    }
   };
 
   const onCompleteTour = () => {
@@ -120,6 +125,9 @@ const OnBoardingTour = () => {
       action: 'End'
     });
     setShowOnBoardingTour(false);
+    if (!onBoardingTooltipSeen) {
+      setActiveOnBoardingTooltip(true);
+    }
   };
 
   const showTour = (): void => {
