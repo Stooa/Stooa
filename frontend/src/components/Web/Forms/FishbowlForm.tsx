@@ -390,14 +390,14 @@ const FishbowlForm = ({
 
     selectedFishbowlValues = {
       id: selectedFishbowl.id,
-      title: selectedFishbowl.name,
+      title: selectedFishbowl.name ?? '',
       day: newDate,
       time: newDate,
-      hours: selectedFishbowl.durationFormatted,
-      description: selectedFishbowl.description,
+      hours: selectedFishbowl.durationFormatted ?? '',
+      description: selectedFishbowl.description ?? '',
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: selectedFishbowl.hasIntroduction
+      hasIntroduction: selectedFishbowl.hasIntroduction ?? false
     };
   }
 

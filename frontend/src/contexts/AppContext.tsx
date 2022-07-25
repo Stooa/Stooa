@@ -9,6 +9,7 @@
 
 import React, { createContext, useContext, useReducer, Dispatch, Reducer } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { createGenericContext } from './createGenericContext';
 
 const FISHBOWL_STARTED = 'FISHBOWL_STARTED';
 const FISHBOWL_READY = 'FISHBOWL_READY';
@@ -89,14 +90,12 @@ const initialState: State = {
   conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
-const StateContext = createContext<[State, Dispatch<Actions>]>(undefined);
+const [useStateValue, StateContextProvider] = createGenericContext<[State, Dispatch<Actions>]>();
 
 const StateProvider = ({ updateState = {}, children }) => (
-  <StateContext.Provider value={useReducer(reducer, { ...initialState, ...updateState })}>
+  <StateContextProvider value={useReducer(reducer, { ...initialState, ...updateState })}>
     {children}
-  </StateContext.Provider>
+  </StateContextProvider>
 );
 
-const useStateValue = () => useContext(StateContext);
-
-export { initialState, StateContext, StateProvider, useStateValue };
+export { initialState, StateProvider, useStateValue };

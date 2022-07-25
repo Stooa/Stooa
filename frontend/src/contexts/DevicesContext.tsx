@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
@@ -15,8 +15,9 @@ import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
 import useEventListener from '@/hooks/useEventListener';
 import { PERMISSION_CHANGED } from '@/jitsi/Events';
+import { createGenericContext } from './createGenericContext';
 
-const DevicesContext = createContext<DevicesCtx>(undefined);
+const [useDevices, DevicesContextProvider] = createGenericContext<DevicesCtx>();
 
 const DevicesProvider = ({ children }) => {
   const [devices, setDevices] = useState<Devices>({
@@ -161,7 +162,7 @@ const DevicesProvider = ({ children }) => {
   }, []);
 
   return (
-    <DevicesContext.Provider
+    <DevicesContextProvider
       value={{
         selectAudioOutputDevice,
         selectAudioInputDevice,
@@ -177,10 +178,8 @@ const DevicesProvider = ({ children }) => {
       }}
     >
       {children}
-    </DevicesContext.Provider>
+    </DevicesContextProvider>
   );
 };
-
-const useDevices = (): DevicesCtx => useContext<DevicesCtx>(DevicesContext);
 
 export { DevicesProvider, useDevices };

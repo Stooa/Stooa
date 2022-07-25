@@ -39,10 +39,11 @@ import { StooaContextValues } from '@/types/stooa-context';
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
+import { createGenericContext } from './createGenericContext';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-const StooaContext = createContext<StooaContextValues>(undefined);
+const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
@@ -274,7 +275,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   }, []);
 
   return (
-    <StooaContext.Provider
+    <StooaContextProvider
       value={{
         conferenceReady,
         conferenceStatus,
@@ -294,10 +295,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }}
     >
       {children}
-    </StooaContext.Provider>
+    </StooaContextProvider>
   );
 };
-
-const useStooa = () => useContext(StooaContext);
 
 export { StooaProvider, useStooa };
