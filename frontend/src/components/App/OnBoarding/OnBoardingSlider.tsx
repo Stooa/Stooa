@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useRef } from 'react';
+import { LegacyRef, useEffect, useRef } from 'react';
 import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
 
@@ -52,7 +52,7 @@ const NextArrow = ({ currentSlide, slideCount, children, ...props }: Arrow) => (
 );
 
 const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) => {
-  const sliderRef = useRef(null);
+  const sliderRef = useRef<SlickSlider>(null);
   // const [onBoardingData, setOnBoardingData] = useState([]);
   const { t } = useTranslation('on-boarding');
   const { data: fishbowlData, showOnBoardingModal, isModerator } = useStooa();
@@ -127,7 +127,7 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
   };
 
   useEffect(() => {
-    if (!showOnBoardingModal) sliderRef.current.slickGoTo(0);
+    if (!showOnBoardingModal && sliderRef.current) sliderRef.current.slickGoTo(0);
     else showSlide(0);
   }, [showOnBoardingModal]);
 
