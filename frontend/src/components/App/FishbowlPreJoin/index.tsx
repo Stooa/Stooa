@@ -168,7 +168,7 @@ const FishbowlPreJoin: React.FC = () => {
             <p className="body-md subtitle">
               <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
             </p>
-            {isAuthenticated ? <AuthUser name={user.name ?? ''} /> : <NicknameForm />}
+            {isAuthenticated ? <AuthUser name={user?.name ?? ''} /> : <NicknameForm />}
             <Button
               data-testid="pre-join-cancel"
               size="small"

@@ -53,7 +53,7 @@ const Avatar: React.FC = () => {
         onClick={toggleDropdown}
       >
         <AvatarIcon />
-        <span>{user.name}</span>
+        <span>{user?.name}</span>
         <ChevronDown />
       </button>
       {active && (

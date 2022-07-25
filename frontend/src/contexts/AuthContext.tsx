@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
@@ -44,6 +44,7 @@ import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { User } from '@/types/user';
 import { useStateValue } from '@/contexts/AppContext';
+import { createGenericContext } from './createGenericContext';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
@@ -62,20 +63,7 @@ const unauthenticatedRoutes = [
   ROUTE_RESET_PASSWORD
 ];
 
-const voidFunction = () => console.log('[STOOA] Context not initialized yet');
-
-const AuthContext = createContext<Auth>({
-  isAuthenticated: false,
-  user: {},
-  login: () => Promise.resolve(),
-  loginStatus: null,
-  loading: true,
-  createFishbowl: false,
-  logout: voidFunction,
-  updateUser: voidFunction,
-  updateLogingStatus: voidFunction,
-  updateCreateFishbowl: voidFunction
-});
+const [useAuth, AuthContextProvider] = createGenericContext<Auth>();
 
 type AuthProviderProps = {
   children?: React.ReactNode;
@@ -85,7 +73,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [{}, dispatch] = useStateValue();
   const router = useRouter();
   const { lang } = useTranslation();
-  const [user, setUser] = useState<User>({});
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
@@ -148,7 +136,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       console.log('Redirected');
     });
     userRepository.setUserNickname('');
-    setUser({});
+    setUser(null);
   };
 
   const updateUser = (user: User) => setUser(user);
@@ -179,7 +167,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   return (
-    <AuthContext.Provider
+    <AuthContextProvider
       value={{
         isAuthenticated: !!user,
         user,
@@ -194,11 +182,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </AuthContextProvider>
   );
 };
-
-const useAuth = () => useContext(AuthContext);
 
 type ProtectedRouteProps = {
   children?: React.ReactNode;

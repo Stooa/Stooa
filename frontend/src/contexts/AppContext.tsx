@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useContext, useReducer, Dispatch, Reducer } from 'react';
+import React, { useReducer, Dispatch, Reducer } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { createGenericContext } from './createGenericContext';
 

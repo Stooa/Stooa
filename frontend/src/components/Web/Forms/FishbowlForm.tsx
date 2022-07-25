@@ -334,7 +334,9 @@ const FishbowlForm = ({
 
   const { user } = useAuth();
 
-  const defaultTitle = t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' });
+  const defaultTitle = t('defaultTitle', {
+    name: user && user.name ? user.name.split(' ')[0] : ''
+  });
 
   const requiredError = t('validation.required');
   const dateError = t('validation.date');
