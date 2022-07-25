@@ -51,6 +51,12 @@ services:
     App\DataPersister\FishbowlDataPersister:
         decorates: api_platform.doctrine.orm.data_persister
 
+    App\Security\GuestAuthenticator:
+        bind:
+            $authenticationSuccessHandler: '@lexik_jwt_authentication.handler.authentication_success'
+            $authenticationFailureHandler: '@lexik_jwt_authentication.handler.authentication_failure'
+            $guestRepository: '@App\Repository\GuestRepository'
+
     App\Service\MailerService:
         bind:
             $from: '%env(MAILER_FROM)%'

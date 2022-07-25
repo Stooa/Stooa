@@ -21,6 +21,7 @@ security:
         - { path: ^/admin/, role: ROLE_ADMIN }
 
         - { path: ^/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/guest-login, roles: PUBLIC_ACCESS }
         - { path: ^/refresh-token, roles: PUBLIC_ACCESS }
         - { path: ^/docs$, roles: PUBLIC_ACCESS }
         - { path: ^/graphql/graphql_playground$, roles: PUBLIC_ACCESS }
@@ -74,6 +75,8 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
+            guest_login:
+                check_path: /guest-login
             refresh_jwt:
                 check_path: /refresh-token
 

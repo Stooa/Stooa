@@ -9,6 +9,10 @@ api_login:
     path: /login
     methods: ['POST']
 
+api_guest_login:
+    path: /guest-login
+    methods: ['POST']
+
 api_platform:
     resource: .
     type: api_platform

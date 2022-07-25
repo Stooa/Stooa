@@ -16,7 +16,9 @@ namespace App;
 use App\JWT\TokenGenerator\JaasTokenGenerator;
 use App\JWT\TokenGenerator\SelfHostedTokenGenerator;
 use App\JWT\TokenGenerator\TokenGeneratorInterface;
+use App\Security\Factory\GuestLoginFactory;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -75,5 +77,13 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         $routes->import($configDir . '/routes.yaml');
         $routes->import($configDir . '/{routes}/*.yaml');
         $routes->import($configDir . '/{routes}/' . $this->getEnvironment() . '/**/*.yaml');
+    }
+
+    protected function build(ContainerBuilder $container): void
+    {
+        /** @var SecurityExtension $extension */
+        $extension = $container->getExtension('security');
+
+        $extension->addAuthenticatorFactory(new GuestLoginFactory());
     }
 }

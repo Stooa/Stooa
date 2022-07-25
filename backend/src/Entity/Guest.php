@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity
  */
-class Guest implements \Stringable
+class Guest implements \Stringable, UserInterface, Foo1Interface
 {
     /**
      * @ORM\Id
@@ -93,5 +94,24 @@ class Guest implements \Stringable
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        return ['ROLE_GUEST'];
+    }
+
+    public function eraseCredentials(): void
+    {
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->id;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->getName() ?? '';
     }
 }

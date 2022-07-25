@@ -15,7 +15,6 @@ namespace App\JWT;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Webmozart\Assert\Assert;
 
 class CurrentUserFishbowl
 {
@@ -31,7 +30,9 @@ class CurrentUserFishbowl
             return $slug;
         }
 
-        Assert::isInstanceOf($user, User::class);
+        if (!$user instanceof User) {
+            return '';
+        }
 
         $currentFishbowl = $user->getCurrentFishbowl();
 
