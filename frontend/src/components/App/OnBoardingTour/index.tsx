@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useStooa } from '@/contexts/StooaManager';
@@ -18,6 +18,8 @@ import 'intro.js/introjs.css';
 import StepTooltip from '@/components/App/OnBoardingTour/StepTooltip';
 import useTranslation from 'next-translate/useTranslation';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { useWindowSize } from '@/hooks/useWIndowSize';
+import { BREAKPOINTS } from '@/ui/settings';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -31,17 +33,31 @@ type step = {
 };
 
 const OnBoardingTour = () => {
-  const { isModerator, data, conferenceReady, conferenceStatus } = useStooa();
-  const [alreadySeen, setAlreadySeen] = useState(false);
+  const {
+    isModerator,
+    data,
+    conferenceReady,
+    conferenceStatus,
+    showOnBoardingTour,
+    setShowOnBoardingTour,
+    setActiveOnBoardingTooltip,
+    onBoardingTooltipSeen
+  } = useStooa();
   const { t } = useTranslation('on-boarding-tour');
+  const { width } = useWindowSize();
 
   const attendeeSteps: step[] = [
     {
-      intro: <StepTooltip title={t('step1.title')} text={t('step1.text')} img="" />,
-      tooltipClass: 'first-step'
+      intro: (
+        <StepTooltip
+          title={t('step1.title')}
+          text={t('step1.text')}
+          img="/img/friends/dancing.png"
+        />
+      ),
+      tooltipClass: 'custom-onboarding-tooltip first-step'
     },
     {
-      element: '#seat-2',
       intro: (
         <StepTooltip
           title={t('step3.title')}
@@ -49,7 +65,9 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step3.gif"
         />
       ),
-      position: 'right'
+      position: 'right',
+      element: '#seat-2',
+      tooltipClass: 'custom-onboarding-tooltip second-step'
     },
     {
       element: '#button-join',
@@ -59,17 +77,21 @@ const OnBoardingTour = () => {
           text={data.hasIntroduction ? t('step3.textIntroduction') : t('step3.text')}
           img="/img/tour/tour-step2.gif"
         />
-      )
+      ),
+      position: 'auto',
+      tooltipClass: 'custom-onboarding-tooltip'
     },
     {
-      element: '.participant-toggle',
       intro: (
         <StepTooltip
           title={t('step4.title')}
           text={t('step4.text')}
           img="/img/tour/tour-step4.gif"
         />
-      )
+      ),
+      element: '.participant-toggle',
+      position: 'auto',
+      tooltipClass: 'custom-onboarding-tooltip third-step'
     }
   ];
 
@@ -78,6 +100,7 @@ const OnBoardingTour = () => {
     prevLabel: t('previous'),
     doneLabel: t('done'),
     tooltipClass: 'on-boarding-tour',
+    tooltipPosition: 'left',
     hidePrev: true
   };
 
@@ -90,7 +113,10 @@ const OnBoardingTour = () => {
 
   const onExitTour = () => {
     OnBoardingTourCookie.setOnBoardingCookie();
-    setAlreadySeen(true);
+    setShowOnBoardingTour(false);
+    if (!onBoardingTooltipSeen) {
+      setActiveOnBoardingTooltip(true);
+    }
   };
 
   const onCompleteTour = () => {
@@ -98,28 +124,37 @@ const OnBoardingTour = () => {
       category: 'OnBoarding Tour',
       action: 'End'
     });
+    setShowOnBoardingTour(false);
+    if (!onBoardingTooltipSeen) {
+      setActiveOnBoardingTooltip(true);
+    }
   };
 
-  const showTour = (): boolean => {
+  const showTour = (): void => {
     const cookie = OnBoardingTourCookie.getOnBoardingTourCookie();
 
-    if (
-      conferenceReady &&
-      !isModerator &&
-      !cookie &&
-      !alreadySeen &&
-      (conferenceStatus === IConferenceStatus.RUNNING ||
-        conferenceStatus === IConferenceStatus.INTRODUCTION)
-    ) {
-      return true;
+    if (!isModerator && !cookie) {
+      setShowOnBoardingTour(true);
+    } else {
+      setShowOnBoardingTour(false);
     }
-
-    return false;
   };
 
-  if (showTour()) {
+  useEffect(() => {
+    if (
+      (conferenceStatus === IConferenceStatus.RUNNING ||
+        conferenceStatus === IConferenceStatus.INTRODUCTION) &&
+      conferenceReady
+    ) {
+      showTour();
+    }
+  }, [conferenceStatus, conferenceReady]);
+
+  if (showOnBoardingTour) {
     return (
       <Steps
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         enabled={true}
         steps={attendeeSteps}
         initialStep={0}

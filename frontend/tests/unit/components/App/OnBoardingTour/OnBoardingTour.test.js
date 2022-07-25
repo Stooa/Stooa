@@ -9,8 +9,8 @@
 
 import OnBoardingTour from '@/components/App/OnBoardingTour';
 import { render } from '@testing-library/react';
-import {makeCurrentFishbowl} from "../../../factories/fishbowl";
-import {useRouter} from "next/router";
+import { makeCurrentFishbowl } from '../../../factories/fishbowl';
+import { useRouter } from 'next/router';
 import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
 

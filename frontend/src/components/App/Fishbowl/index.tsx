@@ -26,7 +26,7 @@ import OnBoardingTour from '@/components/App/OnBoardingTour';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import PreFishbowl from '@/components/App/PreFishbowl';
-import ModalOnboarding from '../ModalOnBoarding';
+import ModalOnboarding from '@/components/App/ModalOnBoarding';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
