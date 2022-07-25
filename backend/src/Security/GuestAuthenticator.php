@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\Guest;
+use App\Model\GuestLogin;
 use App\Repository\GuestRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,24 +32,8 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAuthenticatorInterface
 {
-    private AuthenticationSuccessHandlerInterface $authenticationSuccessHandler;
-    private AuthenticationFailureHandlerInterface $authenticationFailureHandler;
-    private HttpUtils $httpUtils;
-    private GuestRepository $guestRepository;
-    private array $options;
-
-    public function __construct(
-        AuthenticationSuccessHandlerInterface $authenticationSuccessHandler,
-        AuthenticationFailureHandlerInterface $authenticationFailureHandler,
-        HttpUtils $httpUtils,
-        GuestRepository $guestRepository,
-        array $options
-    ) {
-        $this->authenticationSuccessHandler = $authenticationSuccessHandler;
-        $this->httpUtils = $httpUtils;
-        $this->guestRepository = $guestRepository;
-        $this->options = $options;
-        $this->authenticationFailureHandler = $authenticationFailureHandler;
+    public function __construct(private readonly AuthenticationSuccessHandlerInterface $authenticationSuccessHandler, private readonly AuthenticationFailureHandlerInterface $authenticationFailureHandler, private readonly HttpUtils $httpUtils, private readonly GuestRepository $guestRepository, private readonly array $options)
+    {
     }
 
     public function supports(Request $request): ?bool
@@ -90,28 +75,21 @@ class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAut
         return true;
     }
 
-    private function getValues(Request $request): ?array
+    private function getValues(Request $request): GuestLogin
     {
-        $guestValues = [];
-
         try {
             $data = json_decode($request->getContent(), false, 512, \JSON_THROW_ON_ERROR);
         } catch (\JsonException) {
             throw new BadRequestHttpException('Invalid JSON.');
         }
 
-        $guestValues['id'] = property_exists($data, 'id') ? $data->id : null;
-        $guestValues['name'] = property_exists($data, 'name') ? $data->name : null;
+        $guestLogin = GuestLogin::createFromData($data);
 
-        if (null === $guestValues['id'] && null === $guestValues['name']) {
+        if (null === $guestLogin->getId() || null === $guestLogin->getName()) {
             throw new BadRequestHttpException('The key "id" or "name" are mandatory.');
         }
 
-        if (null !== $guestValues['id'] && !\is_string($guestValues['id'])) {
-            throw new BadRequestHttpException('The key "id" must be a string.');
-        }
-
-        return $guestValues;
+        return $guestLogin;
     }
 
     private function createGuest(string $name): Guest
