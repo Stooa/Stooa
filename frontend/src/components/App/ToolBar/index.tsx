@@ -75,7 +75,7 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
+      data.currentStatus?.toUpperCase() === IConferenceStatus.NOT_STARTED
     );
   };
 

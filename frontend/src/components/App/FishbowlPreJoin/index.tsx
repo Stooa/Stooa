@@ -89,7 +89,7 @@ const FishbowlPreJoin: React.FC = () => {
         const localTrack = localTracks.current[index];
 
         if (!localTrack.isAudioTrack()) {
-          const video: HTMLVideoElement = document.querySelector('#prejoin');
+          const video: HTMLVideoElement | null = document.querySelector('#prejoin');
 
           if (video) {
             localTrack.attach(video);
@@ -131,7 +131,7 @@ const FishbowlPreJoin: React.FC = () => {
             <VideoContainer>
               <video
                 id="prejoin"
-                style={{ opacity: muteVideo && 0 }}
+                style={{ opacity: muteVideo ? 1 : 0 }}
                 autoPlay
                 muted
                 className="video"
@@ -168,7 +168,7 @@ const FishbowlPreJoin: React.FC = () => {
             <p className="body-md subtitle">
               <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
             </p>
-            {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
+            {isAuthenticated ? <AuthUser name={user.name ?? ''} /> : <NicknameForm />}
             <Button
               data-testid="pre-join-cancel"
               size="small"

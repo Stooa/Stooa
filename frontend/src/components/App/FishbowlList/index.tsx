@@ -52,8 +52,8 @@ interface Props {
 }
 
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
-  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
-  const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
+  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl | null>(null);
+  const [fishbowls, setFishbowls] = useState<Fishbowl[]>([]);
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
@@ -63,13 +63,11 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   useEffect(() => {
-    if (fishbowls) {
-      fishbowls.forEach(fishbowl => {
-        if (fishbowl.slug === selectedFishbowlParam) {
-          setSelectedFishbowl(fishbowl);
-        }
-      });
-    }
+    fishbowls.forEach(fishbowl => {
+      if (fishbowl.slug === selectedFishbowlParam) {
+        setSelectedFishbowl(fishbowl);
+      }
+    });
   }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const params = new URLSearchParams([
@@ -230,7 +228,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       <motion.div
                         className="form-wrapper"
                         variants={
-                          windowWidth <= BREAKPOINTS.desktop
+                          windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop
                             ? bottomMobileReveal
                             : basicRevealWithDelay
                         }
@@ -250,7 +248,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                           </h2>
                         </div>
                         <FishbowlForm
-                          $isFull={windowWidth <= BREAKPOINTS.desktop}
+                          $isFull={windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop}
                           selectedFishbowl={selectedFishbowl}
                           isEditForm={true}
                           onSaveCallback={handleUpdateFishbowl}
@@ -262,7 +260,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       data-testid="started-fishbowl-placeholder"
                       as={motion.div}
                       variants={
-                        windowWidth <= BREAKPOINTS.desktop
+                        windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop
                           ? bottomMobileReveal
                           : basicRevealWithDelay
                       }

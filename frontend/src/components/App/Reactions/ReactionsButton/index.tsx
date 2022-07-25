@@ -21,9 +21,9 @@ interface Props {
 const ReactionsButton = ({ disabled }: Props) => {
   const [showReactions, setShowReactions] = useState(false);
   const [animation, setAnimation] = useState<'open' | 'close'>('open');
-  const wrapperRef = useRef(null);
-  const timeOutRef = useRef(null);
-  const reactionButtonRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const timeOutRef = useRef<NodeJS.Timeout | null>(null);
+  const reactionButtonRef = useRef<HTMLButtonElement>(null);
 
   const { t } = useTranslation('fishbowl');
 
@@ -47,15 +47,23 @@ const ReactionsButton = ({ disabled }: Props) => {
     }
   };
 
-  const handleOnMouseLeave = e => {
-    if (showReactions && animation === 'open' && !reactionButtonRef.current.contains(e.target)) {
+  const handleOnMouseLeave = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (
+      showReactions &&
+      animation === 'open' &&
+      reactionButtonRef.current &&
+      !reactionButtonRef.current.contains(target)
+    ) {
       hide(600);
     }
   };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (showReactions && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+      const target = e.target as HTMLElement;
+      if (showReactions && wrapperRef.current && !wrapperRef.current.contains(target)) {
         hide(600);
       }
     };
@@ -78,7 +86,7 @@ const ReactionsButton = ({ disabled }: Props) => {
         <ReactionsSender
           data-testid="reactions-sender"
           className={animation}
-          onMouseLeave={width < 680 ? () => null : handleOnMouseLeave}
+          onMouseLeave={width !== undefined && width < 680 ? () => null : handleOnMouseLeave}
         />
       )}
       <StyledButtonReaction

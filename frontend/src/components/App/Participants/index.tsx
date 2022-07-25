@@ -28,7 +28,7 @@ import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 
-const initialParticipant = {
+const initialParticipant: Participant = {
   id: '',
   name: '',
   linkedin: '',
@@ -38,7 +38,9 @@ const initialParticipant = {
   guestId: '',
   joined: false,
   isMuted: false,
-  isVideoMuted: false
+  isVideoMuted: false,
+  getId: () => '',
+  getDisplayName: () => ''
 };
 
 interface Props {
@@ -147,7 +149,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       <ParticipantsDrawer className={active ? 'active' : ''}>
         <div className="header">
           <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
-          <ButtonCopyUrl variant="text" fid={data.slug} locale={data.locale} />
+          {data.slug && <ButtonCopyUrl variant="text" fid={data.slug} locale={data.locale} />}
           <Icon onClick={toggleDrawer}>
             <Cross />
           </Icon>

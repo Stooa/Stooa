@@ -36,7 +36,9 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      const target = event.target as HTMLElement;
+
+      if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
         toggleInfo();
       }
     };
@@ -60,7 +62,9 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
         <Description>
           <p className="body-sm medium description__title">{data.name}</p>
           <p className="info-text body-xs">{data.description}</p>
-          <ButtonCopyUrl variant="secondary" size="medium" fid={data.slug} locale={data.locale} />
+          {data.slug && (
+            <ButtonCopyUrl variant="secondary" size="medium" fid={data.slug} locale={data.locale} />
+          )}
           <p className="body-xs description__share-text">
             <Trans i18nKey="fishbowl:fishbowlDescription.shareText" components={{ i: <i /> }} />
           </p>

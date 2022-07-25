@@ -58,7 +58,7 @@ const PreFishbowlParticipants = () => {
   };
 
   const createPlaceholderParticipants = () => {
-    const placeholderParticipants = [];
+    const placeholderParticipants: JSX.Element[] = [];
 
     for (let i = 0; i < numPlaceholderParticipants; i++) {
       placeholderParticipants.push(<ParticipantPlaceholder key={i} />);

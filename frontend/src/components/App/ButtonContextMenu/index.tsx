@@ -21,7 +21,7 @@ import conferenceRepository from '@/jitsi/Conference';
 
 interface Props {
   className?: string;
-  initialParticipant?: Participant;
+  initialParticipant?: Participant | null;
   seatNumber?: number;
 }
 
@@ -32,9 +32,9 @@ type SeatsChangeEventProps = {
   };
 };
 
-const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props) => {
+const ButtonContextMenu = ({ className, initialParticipant = null, seatNumber }: Props) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [participant, setParticipant] = useState<Participant | undefined>(initialParticipant);
+  const [participant, setParticipant] = useState<Participant | null>(initialParticipant);
   const { setParticipantToKick, conferenceReady, isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
       if (participantId) {
         setParticipant(conferenceRepository.getParticipantById(participantId));
       } else {
-        setParticipant(undefined);
+        setParticipant(null);
       }
     }
   });
@@ -71,7 +71,9 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (showContextMenu && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+      const target = e.target as HTMLElement;
+
+      if (showContextMenu && wrapperRef.current && !wrapperRef.current.contains(target)) {
         setShowContextMenu(false);
       }
     };

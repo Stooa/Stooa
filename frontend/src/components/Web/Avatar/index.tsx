@@ -31,7 +31,9 @@ const Avatar: React.FC = () => {
   const toggleDropdown = () => setActive(!active);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    const target = event.target as HTMLElement;
+
+    if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
       toggleDropdown();
     }
   };
