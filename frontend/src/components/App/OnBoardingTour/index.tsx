@@ -145,6 +145,7 @@ const OnBoardingTour = () => {
   if (showOnBoardingTour) {
     return (
       <Steps
+        // @ts-ignore
         enabled={true}
         steps={attendeeSteps}
         initialStep={0}
