@@ -63,7 +63,7 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step3.gif"
         />
       ),
-      position: 'auto',
+      position: 'right',
       element: '#seat-2',
       tooltipClass: 'custom-onboarding-tooltip second-step'
     },
@@ -133,7 +133,6 @@ const OnBoardingTour = () => {
   };
 
   useEffect(() => {
-    console.log('MY MAN CONFERENCE STATUS CHANGED WTF');
     if (
       (conferenceStatus === IConferenceStatus.RUNNING ||
         conferenceStatus === IConferenceStatus.INTRODUCTION) &&

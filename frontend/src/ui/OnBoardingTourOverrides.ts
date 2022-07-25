@@ -196,7 +196,9 @@ const OnBoardingTourOverrides = css`
     ${media.max('desktop')`
 
       &.second-step {
-        left: -135.5px !important;
+        left: auto !important;
+        right: 0;
+
         & > .introjs-arrow {
           left: auto;
           right: 90px;
@@ -204,14 +206,22 @@ const OnBoardingTourOverrides = css`
       }
 
       &.third-step {
-        left: -275px;
+        left: auto !important;
+        right: 0;
 
         & > .introjs-arrow {
-          left: auto;
-          right: 36px;
+          left: auto !important;
+          right: 26px;
         }
       }
     `}
+
+    @media (max-height: 720px) {
+      &.second-step {
+        right: 0;
+        top: 91px !important;
+      }
+    }
   }
 `;
 export { OnBoardingTourOverrides };
