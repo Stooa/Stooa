@@ -32,8 +32,16 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAuthenticatorInterface
 {
-    public function __construct(private readonly AuthenticationSuccessHandlerInterface $authenticationSuccessHandler, private readonly AuthenticationFailureHandlerInterface $authenticationFailureHandler, private readonly HttpUtils $httpUtils, private readonly GuestRepository $guestRepository, private readonly array $options)
-    {
+    /**
+     * @param array<string, string|null> $options
+     */
+    public function __construct(
+        private readonly AuthenticationSuccessHandlerInterface $authenticationSuccessHandler,
+        private readonly AuthenticationFailureHandlerInterface $authenticationFailureHandler,
+        private readonly HttpUtils $httpUtils,
+        private readonly GuestRepository $guestRepository,
+        private readonly array $options
+    ) {
     }
 
     public function supports(Request $request): ?bool
@@ -51,11 +59,11 @@ class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAut
 
     public function authenticate(Request $request): Passport
     {
-        $guestValues = $this->getValues($request);
+        $guestLogin = $this->getValues($request);
 
-        $userBadge = null === $guestValues['id']
-            ? new UserBadge('', fn () => $this->createGuest($guestValues['name']))
-            : new UserBadge($guestValues['id'], $this->guestRepository->loadUserByIdentifier(...));
+        $userBadge = null !== $guestLogin->getId()
+            ? new UserBadge($guestLogin->getId(), $this->guestRepository->loadUserByIdentifier(...))
+            : new UserBadge('', fn () => $this->createGuest($guestLogin->getName()));
 
         return new SelfValidatingPassport($userBadge);
     }
@@ -85,7 +93,7 @@ class GuestAuthenticator extends AbstractAuthenticator implements InteractiveAut
 
         $guestLogin = GuestLogin::createFromData($data);
 
-        if (null === $guestLogin->getId() || null === $guestLogin->getName()) {
+        if (null === $guestLogin->getId() || '' === $guestLogin->getName()) {
             throw new BadRequestHttpException('The key "id" or "name" are mandatory.');
         }
 

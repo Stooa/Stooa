@@ -16,14 +16,14 @@ namespace App\Model;
 class GuestLogin
 {
     private ?string $id;
-    private ?string $name;
+    private string $name;
 
     public static function createFromData(\stdClass $data): self
     {
         $guestLogin = new self();
 
         $guestLogin->id = property_exists($data, 'id') ? $data->id : null;
-        $guestLogin->name = property_exists($data, 'name') ? $data->name : null;
+        $guestLogin->name = property_exists($data, 'name') ? $data->name : '';
 
         return $guestLogin;
     }
@@ -33,7 +33,7 @@ class GuestLogin
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

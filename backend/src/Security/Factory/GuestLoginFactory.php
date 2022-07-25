@@ -30,6 +30,9 @@ class GuestLoginFactory extends AbstractFactory
         return 'guest-login';
     }
 
+    /**
+     * @param array<array-key, mixed> $config
+     */
     public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId): string|array
     {
         $authenticatorId = 'app.authenticator.guest_login.' . $firewallName;
