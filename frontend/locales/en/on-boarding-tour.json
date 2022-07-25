@@ -1,20 +1,20 @@
 {
     "step1": {
         "title": "Hello there!",
-        "text": "We’ll show you a few tips to get you ready to go on your fishbowl experience."
+        "text": "Here are some tips to get you ready for your fishbowl experience."
     },
     "step2": {
         "title": "The five seats",
-        "text": "We have 5 seats available where you can join anytime you wish to talk. Whenever you feel that you finished your participation, free your seat so others can contribute too!"
+        "text": "The 5 seats are available for you to join the conversation any time you have something to say. When you have finished, leave your seat so that other people can participate!"
     },
     "step3": {
         "title": "How can I join a seat?",
-        "text": "Join and Leave a seat using the green and red buttons. And no worries, by leaving a seat you are still staying in the room hearing the others.",
-        "textIntroduction": "As soon as the introduction is over, you can join and leave a seat using the green and red buttons. Don’t worry, by leaving a seat you'll still be in the room listening to the other speakers!"
+        "text": "Join and leave a seat using the green and red buttons. Don’t worry, by leaving a seat you'll still be in the room listening to the other speakers!",
+        "textIntroduction": "As soon as the introduction is over you can join and leave a seat using the green and red buttons. Don't worry, by leaving a seat you'll still be in the room listening to the other speakers!"
     },
     "step4": {
         "title": "Networking",
-        "text": "Find out more about the participants through their Linkedin and Twitter (if provided)."
+        "text": "Find out more and connect with participants through their Linkedin and Twitter profile (if provided)"
     },
     "next": "Next",
     "previous": "Back",

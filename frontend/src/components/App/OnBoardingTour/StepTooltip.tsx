@@ -22,7 +22,7 @@ const StepTooltip = ({ title, text, img }: StepTooltipProps) => {
   return (
     <>
       {img && <img className="image" alt={`${title} image`} src={img} />}
-      {title && <h3>{t(title)}</h3>}
+      {title && <h3 className="medium">{t(title)}</h3>}
       {text && <p>{t(text)}</p>}
     </>
   );

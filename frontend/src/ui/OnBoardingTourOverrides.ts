@@ -21,13 +21,17 @@ import {
   COLOR_PURPLE_200,
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
-  COLOR_PURPLE_600
+  FONT_PRIMARY
 } from './settings';
 import { BODY_LG, mediumWeight, TYPOGRAPHY_SIZES } from './Texts';
 
 const OnBoardingTourOverrides = css`
   div.introjs-helperLayer {
     box-shadow: rgb(33 33 33 / 50%) 0px 0px 0px 5000px !important;
+  }
+
+  .introjs-tooltipReferenceLayer * {
+    font-family: ${FONT_PRIMARY} !important;
   }
 
   .custom-onboarding-tooltip {
@@ -141,8 +145,6 @@ const OnBoardingTourOverrides = css`
         }
 
         &:focus {
-          color: ${COLOR_NEUTRO_100};
-          background-color: ${COLOR_PURPLE_600};
           box-shadow: none;
         }
       }
@@ -160,7 +162,6 @@ const OnBoardingTourOverrides = css`
         }
 
         &:focus {
-          color: ${COLOR_PURPLE_600};
           box-shadow: none;
         }
       }
@@ -176,8 +177,6 @@ const OnBoardingTourOverrides = css`
       }
 
       &:focus {
-        color: ${COLOR_NEUTRO_100};
-        background-color: ${COLOR_PURPLE_600};
         box-shadow: none;
       }
 
