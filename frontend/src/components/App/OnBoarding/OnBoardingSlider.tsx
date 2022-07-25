@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { LegacyRef, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Trans from 'next-translate/Trans';
 import SlickSlider from 'react-slick';
 
