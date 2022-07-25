@@ -36,7 +36,7 @@ const OnBoardingTourOverrides = css`
     width: 95vh;
 
     ${media.min('desktop')`
-    width: auto;
+      width: auto;
       min-width: 360px;
     `}
 
@@ -191,6 +191,26 @@ const OnBoardingTourOverrides = css`
 
     ${media.min('tablet')`
       min-width: 360px;
+    `}
+
+    ${media.max('desktop')`
+
+      &.second-step {
+        left: -135.5px !important;
+        & > .introjs-arrow {
+          left: auto;
+          right: 90px;
+        }
+      }
+
+      &.third-step {
+        left: -275px;
+
+        & > .introjs-arrow {
+          left: auto;
+          right: 36px;
+        }
+      }
     `}
   }
 `;

@@ -63,11 +63,12 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step3.gif"
         />
       ),
-      ...(width > BREAKPOINTS.tablet && { position: 'right', element: '#seat-2' }),
-      tooltipClass: 'custom-onboarding-tooltip'
+      position: 'auto',
+      element: '#seat-2',
+      tooltipClass: 'custom-onboarding-tooltip second-step'
     },
     {
-      ...(width > BREAKPOINTS.tablet && { element: '#button-join' }),
+      element: '#button-join',
       intro: (
         <StepTooltip
           title={t('step2.title')}
@@ -75,6 +76,7 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step2.gif"
         />
       ),
+      position: 'auto',
       tooltipClass: 'custom-onboarding-tooltip'
     },
     {
@@ -85,8 +87,9 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step4.gif"
         />
       ),
-      ...(width > BREAKPOINTS.tablet && { element: '.participant-toggle' }),
-      tooltipClass: 'custom-onboarding-tooltip'
+      element: '.participant-toggle',
+      position: 'auto',
+      tooltipClass: 'custom-onboarding-tooltip third-step'
     }
   ];
 
