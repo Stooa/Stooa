@@ -145,6 +145,7 @@ const OnBoardingTour = () => {
   if (showOnBoardingTour) {
     return (
       <Steps
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         enabled={true}
         steps={attendeeSteps}
