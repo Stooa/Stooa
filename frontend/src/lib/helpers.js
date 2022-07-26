@@ -95,10 +95,9 @@ const isTimeLessThanNMinutes = (date, minutes = 1) => {
 };
 
 const isTimeLessThanNSeconds = (date, seconds = 1) => {
-  const TIME = seconds * 1000;
+  const TIME = seconds * -1000;
   const t = dateDifferenceFromNow(date);
-
-  return t <= TIME;
+  return TIME < t;
 };
 
 const isTimeUp = date => {
