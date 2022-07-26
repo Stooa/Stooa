@@ -69,7 +69,7 @@ const OnBoardingTourOverrides = css`
 
       & > .image {
         margin-bottom: ${space(2)};
-        width: 50%;
+        width: 75%;
 
         ${media.min('tablet')`
           width: 85%;
