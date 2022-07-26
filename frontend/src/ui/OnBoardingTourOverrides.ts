@@ -199,7 +199,9 @@ const OnBoardingTourOverrides = css`
 
         & > .introjs-arrow {
           top: -10px;
+          bottom: auto !important;
           border-bottom: 5px solid ${COLOR_NEUTRO_200};
+          border-top-color: transparent !important;
           left: auto;
           right: 90px;
           display: inherit !important;
