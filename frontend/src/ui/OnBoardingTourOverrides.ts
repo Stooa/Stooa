@@ -52,6 +52,10 @@ const OnBoardingTourOverrides = css`
       }
     }
 
+    &.first-step > .introjs-tooltiptext > .image {
+      width: 175px;
+    }
+
     & > .introjs-tooltiptext {
       display: flex;
       flex-direction: column;
@@ -68,12 +72,8 @@ const OnBoardingTourOverrides = css`
         width: 50%;
 
         ${media.min('tablet')`
-          width: auto;
+          width: 85%;
         `}
-      }
-
-      &.first-step > .image {
-        width: 50%;
       }
 
       & > h3 {
@@ -189,6 +189,23 @@ const OnBoardingTourOverrides = css`
       }
     }
 
+    /* ARROW COLOR */
+    & .introjs-arrow.left {
+      border-right-color: ${COLOR_NEUTRO_200} !important;
+    }
+
+    & .introjs-arrow.top {
+      border-bottom-color: ${COLOR_NEUTRO_200} !important;
+    }
+
+    & .introjs-arrow.bottom {
+      border-top-color: ${COLOR_NEUTRO_200} !important;
+    }
+
+    & .introjs-arrow.top-right {
+      border-bottom-color: ${COLOR_NEUTRO_200} !important;
+    }
+
     ${media.max('desktop')`
       &.second-step {
         left: auto !important;
@@ -196,6 +213,7 @@ const OnBoardingTourOverrides = css`
         margin-left: 0 !important;
         margin-top: 0 !important;
         width: 275px !important;
+
 
         & > .introjs-arrow {
           top: -10px;
