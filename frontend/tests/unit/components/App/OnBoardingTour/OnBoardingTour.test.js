@@ -8,26 +8,35 @@
  */
 
 import OnBoardingTour from '@/components/App/OnBoardingTour';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { makeCurrentFishbowl } from '../../../factories/fishbowl';
-import { useRouter } from 'next/router';
 import { useStooa } from '@/contexts/StooaManager';
-import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
+import { IConferenceStatus } from '@/lib/jitsi-modules/Status';
+import OnBoardingTourCookie from '@/lib/OnBoardingTourCookie';
 
 jest.mock('@/contexts/StooaManager');
+jest.mock('@/lib/OnBoardingTourCookie');
 
 beforeEach(() => {
   useStooa.mockReturnValue({
     isModerator: false,
     data: makeCurrentFishbowl(),
     conferenceReady: true,
-    conferenceStatus: IConferenceStatus.NOT_STARTED
+    conferenceStatus: IConferenceStatus.RUNNING,
+    showOnBoardingTour: true,
+    setShowOnBoardingTour: () => true,
+    setActiveOnBoardingTooltip: () => false
   });
+  OnBoardingTourCookie.setOnBoardingCookie.mockReturnValue(true);
 });
 
 describe('On boarding tour component', () => {
-  it('Should render component', () => {
-    const { container } = render(<OnBoardingTour />);
-    const onBoardingTourComponent = container.getElementsByClassName('on-boarding-tour');
+  it('Should render component', async () => {
+    const { getByTestId } = render(<OnBoardingTour />);
+
+    await waitFor(() => {
+      const onBoardingTourComponent = getByTestId('on-boarding-tour');
+      expect(onBoardingTourComponent).toBeInTheDocument();
+    });
   });
 });

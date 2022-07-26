@@ -41,6 +41,7 @@ const OnBoardingTour = () => {
     setActiveOnBoardingTooltip,
     onBoardingTooltipSeen
   } = useStooa();
+
   const { t } = useTranslation('on-boarding-tour');
 
   const attendeeSteps: step[] = [
@@ -148,17 +149,19 @@ const OnBoardingTour = () => {
 
   if (showOnBoardingTour) {
     return (
-      <Steps
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        enabled={true}
-        steps={attendeeSteps}
-        initialStep={0}
-        onStart={onStartTour}
-        onExit={onExitTour}
-        onComplete={onCompleteTour}
-        options={introJSOptions}
-      />
+      <div data-testid="on-boarding-tour">
+        <Steps
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          enabled={true}
+          steps={attendeeSteps}
+          initialStep={0}
+          onStart={onStartTour}
+          onExit={onExitTour}
+          onComplete={onCompleteTour}
+          options={introJSOptions}
+        />
+      </div>
     );
   } else {
     return null;
