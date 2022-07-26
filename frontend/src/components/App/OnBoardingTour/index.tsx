@@ -132,6 +132,7 @@ const OnBoardingTour = () => {
       setShowOnBoardingTour(true);
     } else {
       setShowOnBoardingTour(false);
+      setActiveOnBoardingTooltip(true);
     }
   };
 

@@ -35,9 +35,10 @@ const OnBoardingTourOverrides = css`
   }
 
   .custom-onboarding-tooltip {
+    box-sizing: border-box !important;
     background-color: ${COLOR_NEUTRO_200} !important;
     padding: ${space(2)} ${space(2)} ${space(3)};
-    width: 95vh !important;
+    width: 80vw !important;
 
     ${media.min('desktop')`
       width: auto !important;
@@ -188,19 +189,17 @@ const OnBoardingTourOverrides = css`
       }
     }
 
-    ${media.min('tablet')`
-      min-width: 360px !important;
-    `}
-
     ${media.max('desktop')`
-
       &.second-step {
         left: auto !important;
         right: 0;
         margin-left: 0 !important;
         margin-top: 0 !important;
+        width: 275px !important;
 
         & > .introjs-arrow {
+          top: -10px;
+          border-bottom: 5px solid ${COLOR_NEUTRO_200};
           left: auto;
           right: 90px;
           display: inherit !important;
