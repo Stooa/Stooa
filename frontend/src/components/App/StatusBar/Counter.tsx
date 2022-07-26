@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
@@ -30,10 +30,13 @@ export const Counter = ({
   prefishbowl = false,
   ...props
 }: Props) => {
-  const getDateByStatus = () =>
-    conferenceStatus === IConferenceStatus?.NOT_STARTED
-      ? Date.parse(fishbowlData.startDateTimeTz)
-      : Date.parse(fishbowlData.endDateTimeTz);
+  const getDateByStatus = useCallback(
+    () =>
+      conferenceStatus === IConferenceStatus?.NOT_STARTED
+        ? Date.parse(fishbowlData.startDateTimeTz)
+        : Date.parse(fishbowlData.endDateTimeTz),
+    [conferenceStatus, fishbowlData]
+  );
 
   const [completedTime, setCompletedTime] = useState<boolean>(false);
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
@@ -62,9 +65,48 @@ export const Counter = ({
     setFishbowlDate(getDateByStatus());
 
     return () => clearInterval(intervalTimer);
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus, getDateByStatus, intervalTimer]);
 
   useEffect(() => {
+    const rendererCountdown = (): string => {
+      const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
+      let timeLeftText;
+
+      const seconds = checkSecondsToDate(fishbowlDate);
+
+      if (checkIfFinished(fishbowlDate) || seconds === 0) {
+        clearInterval(intervalTimer);
+      }
+
+      const minutes: number = Math.floor((seconds / 60) % 60);
+      const hours: number = Math.floor(seconds / 3600);
+
+      if (seconds === 0 && conferenceNotStarted) {
+        timeLeftText = isModerator ? t('waitingHost') : t('waiting');
+      } else if (seconds === 0) {
+        timeLeftText = t('timesUp');
+      } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
+        timeLeftText = t('lastMinute');
+      } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
+        const time = `1${t('form:fishbowl.minutes')}`;
+        timeLeftText = t('timeToStart', { time });
+      } else {
+        const hoursText = t('form:fishbowl.hours');
+        const minutesText =
+          hours > 0 ? t('form:fishbowl.minutesShort') : t('form:fishbowl.minutes');
+
+        const time =
+          hours > 0 && seconds >= 3600
+            ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
+            : Math.floor(seconds / 60);
+        timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
+          time: `${time}${minutesText}`
+        });
+      }
+
+      return timeLeftText;
+    };
+
     const isFinished = checkIfFinished(fishbowlDate);
 
     if (!isFinished) {
@@ -82,45 +124,7 @@ export const Counter = ({
     }
 
     return () => clearInterval(intervalTimer);
-  }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const rendererCountdown = (): string => {
-    const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
-    let timeLeftText;
-
-    const seconds = checkSecondsToDate(fishbowlDate);
-
-    if (checkIfFinished(fishbowlDate) || seconds === 0) {
-      clearInterval(intervalTimer);
-    }
-
-    const minutes: number = Math.floor((seconds / 60) % 60);
-    const hours: number = Math.floor(seconds / 3600);
-
-    if (seconds === 0 && conferenceNotStarted) {
-      timeLeftText = isModerator ? t('waitingHost') : t('waiting');
-    } else if (seconds === 0) {
-      timeLeftText = t('timesUp');
-    } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
-      timeLeftText = t('lastMinute');
-    } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
-      const time = `1${t('form:fishbowl.minutes')}`;
-      timeLeftText = t('timeToStart', { time });
-    } else {
-      const hoursText = t('form:fishbowl.hours');
-      const minutesText = hours > 0 ? t('form:fishbowl.minutesShort') : t('form:fishbowl.minutes');
-
-      const time =
-        hours > 0 && seconds >= 3600
-          ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
-          : Math.floor(seconds / 60);
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-        time: `${time}${minutesText}`
-      });
-    }
-
-    return timeLeftText;
-  };
+  }, [fishbowlDate, completedTime, timeStatus, intervalTimer, conferenceStatus, isModerator, t]);
 
   return (
     <span {...props} className="body-xs medium counter">

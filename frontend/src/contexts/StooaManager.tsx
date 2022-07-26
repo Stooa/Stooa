@@ -130,23 +130,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   });
 
-  const checkApIConferenceStatus = () => {
-    api
-      .get(`${lang}/fishbowl-status/${fid}`, {
-        headers: { 'Accept-Language': lang }
-      })
-      .then(({ data: { status } }) => {
-        dispatch({
-          type: 'FISHBOWL_STATUS',
-          conferenceStatus: status
-        });
-      })
-      .catch(error => {
-        console.log('[STOOA] ', error);
-      });
-  };
-
-  const checkIsTimeUp = () => {
+  const checkIsTimeUp = useCallback(() => {
     if (isTimeUp(data.endDateTimeTz)) {
       clearInterval(timeUpInterval.current);
       setTimeStatus(ITimeStatus.TIME_UP);
@@ -179,11 +163,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }
       setTimeStatus(ITimeStatus.ENDING);
     }
-  };
-
-  const isConferenceIntroducing = (): boolean => {
-    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
-  };
+  }, [conferenceStatus, data.endDateTimeTz, lastMinuteToastSent, t, tenMinuteToastSent]);
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
@@ -198,6 +178,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   useEffect(() => {
+    const isConferenceIntroducing = (): boolean => {
+      return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+    };
+
     if (
       !prejoin &&
       !initConnection &&
@@ -219,7 +203,16 @@ const StooaProvider = ({ data, isModerator, children }) => {
       window.removeEventListener('mousedown', initialInteraction);
       window.removeEventListener('keydown', initialInteraction);
     };
-  }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [
+    fishbowlStarted,
+    conferenceReady,
+    conferenceStatus,
+    prejoin,
+    initConnection,
+    isModerator,
+    fid,
+    data.hasIntroduction
+  ]);
 
   useEffect(() => {
     initializeJitsi();
@@ -240,9 +233,25 @@ const StooaProvider = ({ data, isModerator, children }) => {
         router.push(route, route, { locale: lang });
       });
     }
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus, fid, lang, router]);
 
   useEffect(() => {
+    const checkApIConferenceStatus = () => {
+      api
+        .get(`${lang}/fishbowl-status/${fid}`, {
+          headers: { 'Accept-Language': lang }
+        })
+        .then(({ data: { status } }) => {
+          dispatch({
+            type: 'FISHBOWL_STATUS',
+            conferenceStatus: status
+          });
+        })
+        .catch(error => {
+          console.log('[STOOA] ', error);
+        });
+    };
+
     checkIsTimeUp();
 
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
@@ -252,12 +261,12 @@ const StooaProvider = ({ data, isModerator, children }) => {
       clearInterval(timeUpInterval.current);
       clearInterval(apiInterval.current);
     };
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [checkIsTimeUp, conferenceStatus, dispatch, fid, lang]);
 
   useEffect(() => {
     clearInterval(timeUpInterval.current);
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
-  }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [tenMinuteToastSent, lastMinuteToastSent, checkIsTimeUp]);
 
   useEffect(() => {
     const cookie = getOnBoardingCookie(isModerator);

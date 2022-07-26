@@ -109,27 +109,27 @@ const ToolBar: React.FC = () => {
     if (joined && audioInputDevice !== null) {
       devicesRepository.changeDevice(audioInputDevice);
     }
-  }, [audioInputDevice, permissions]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [audioInputDevice, joined, permissions]);
 
   useEffect(() => {
     if (joined && videoDevice !== null) {
       devicesRepository.changeDevice(videoDevice);
     }
-  }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [joined, videoDevice]);
 
   useEffect(() => {
     if (hasModeratorToSeatDuringIntroduction()) {
       console.log('[STOOA] Moderator join seat during introduction');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceStatus, hasModeratorToSeatDuringIntroduction, joinSeat]);
 
   useEffect(() => {
     if (hasModeratorToSeatDuringRunning()) {
       console.log('[STOOA] Moderator join seat during running');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [conferenceReady, hasModeratorToSeatDuringRunning, joinSeat]);
 
   const isActionDisabled =
     !conferenceReady ||

@@ -29,7 +29,7 @@ const HostNow = () => {
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-  const handleResetAppState = () => {
+  useEffect(() => {
     dispatch({
       type: 'FISHBOWL_STATUS',
       fishbowlReady: false,
@@ -38,10 +38,8 @@ const HostNow = () => {
       prejoin: true,
       conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
-  };
 
-  const createFishbowlRequest = async () => {
-    await createFishbowl({
+    createFishbowl({
       variables: {
         input: {
           name: '',
@@ -69,12 +67,7 @@ const HostNow = () => {
         console.error('[STOOA] Host now fishbowl error', error);
         router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
       });
-  };
-
-  useEffect(() => {
-    handleResetAppState();
-    createFishbowlRequest();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [createFishbowl, dispatch, lang, router, timeZone]);
 
   return (
     <Layout>

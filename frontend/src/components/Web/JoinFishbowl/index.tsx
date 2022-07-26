@@ -37,28 +37,28 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
 
-  const evaluateFishbowlReady = () => {
-    const isReady = isTimeLessThanNMinutes(data.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
-
-    if (isReady) {
-      window.clearInterval(intervalRef.current);
-
-      dispatch({
-        type: 'FISHBOWL_READY',
-        fishbowlReady: true
-      });
-    } else {
-      console.log('[STOOA] More than 1 hour to start fishbowl');
-    }
-  };
-
   useEffect(() => {
+    const evaluateFishbowlReady = () => {
+      const isReady = isTimeLessThanNMinutes(data.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
+
+      if (isReady) {
+        window.clearInterval(intervalRef.current);
+
+        dispatch({
+          type: 'FISHBOWL_READY',
+          fishbowlReady: true
+        });
+      } else {
+        console.log('[STOOA] More than 1 hour to start fishbowl');
+      }
+    };
+
     evaluateFishbowlReady();
 
     intervalRef.current = window.setInterval(evaluateFishbowlReady, MINUTE);
 
     return () => window.clearInterval(intervalRef.current);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data, dispatch]);
 
   return (
     <>

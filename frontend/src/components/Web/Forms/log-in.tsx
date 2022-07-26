@@ -92,7 +92,7 @@ const LogIn = () => {
       setError(loginStatus.data);
       updateLogingStatus();
     }
-  }, [loginStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [loginStatus, updateLogingStatus]);
 
   return (
     <>

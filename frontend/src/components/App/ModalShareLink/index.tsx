@@ -43,7 +43,7 @@ const ModalShareLink: React.FC = () => {
     if (!show) {
       setShareLinkCookie(fid as string);
     }
-  }, [show]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fid, show]);
 
   return (
     <>

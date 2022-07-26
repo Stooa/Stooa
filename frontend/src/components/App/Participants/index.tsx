@@ -62,20 +62,6 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
 
   const { data } = useStooa();
 
-  const pingParticipant = () => {
-    ping(lang, fid);
-  };
-
-  const getApiParticipants = () => {
-    getApiParticipantList(lang, fid)
-      .then(participantList => {
-        setParticipants(participantList);
-      })
-      .catch(error => {
-        console.log('[STOOA] Error getting participants', error);
-      });
-  };
-
   const getConferenceParticipants = () => {
     const typedParticipants = getParticipantList() as unknown as Participant[];
     setParticipants(typedParticipants);
@@ -99,6 +85,20 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   };
 
   useEffect(() => {
+    const pingParticipant = () => {
+      ping(lang, fid);
+    };
+
+    const getApiParticipants = () => {
+      getApiParticipantList(lang, fid)
+        .then(participantList => {
+          setParticipants(participantList);
+        })
+        .catch(error => {
+          console.log('[STOOA] Error getting participants', error);
+        });
+    };
+
     if (!initialized) {
       pingParticipant();
       getApiParticipants();
@@ -119,7 +119,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       window.clearInterval(pingInterval.current);
       window.clearInterval(getParticipantsInterval.current);
     };
-  }, [initialized]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fid, initialized, lang]);
 
   useEffect(() => {
     const tempSpeakingParticipants = participants

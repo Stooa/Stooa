@@ -139,7 +139,7 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
   //       onBoardingDataWithoutIntroduction[isModerator ? 'moderator' : 'participant']
   //     );
   //   }
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // }, [fishbowlData.hasIntroduction, isModerator]);
 
   return (
     <Slider>

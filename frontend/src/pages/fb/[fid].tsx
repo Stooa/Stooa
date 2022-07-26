@@ -63,7 +63,7 @@ const Page = () => {
     return () => {
       router.beforePopState(() => true);
     };
-  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lang, router]);
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;

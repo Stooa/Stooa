@@ -29,7 +29,7 @@ const Create = () => {
       prejoin: true,
       conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <Layout title={t('title')}>
