@@ -60,11 +60,14 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
 
   useEffect(() => {
     if (conferenceStatus === IConferenceStatus.RUNNING && isGuest) {
-      console.log('FAIL JOIN -- CONNECT');
+      pushEventDataLayer({
+        action: 'Connect',
+        category: 'Fail join'
+      });
 
       setTimeout(() => {
         trackFailJoin.current = true;
-      }, 10000);
+      }, 15000);
     }
   }, [conferenceStatus]);
 
@@ -78,7 +81,11 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
       !joined &&
       isTimeLessThanNSeconds(new Date(joinedTimestamp.current), 15)
     ) {
-      console.log('FAIL JOIN --> Early fail join');
+      pushEventDataLayer({
+        action: 'Failed',
+        category: 'Fail join',
+        label: 'Early fail join'
+      });
     }
   }, [joined]);
 
