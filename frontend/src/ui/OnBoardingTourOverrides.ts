@@ -40,9 +40,9 @@ const OnBoardingTourOverrides = css`
     padding: ${space(2)} ${space(2)} ${space(3)};
     width: 80vw !important;
 
-    ${media.min('desktop')`
+    ${media.min('tablet')`
       width: auto !important;
-      min-width: 360px !important;
+      min-width: 380px !important;
     `}
 
     & > .introjs-tooltip-header {
