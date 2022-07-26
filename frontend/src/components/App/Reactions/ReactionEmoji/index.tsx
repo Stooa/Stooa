@@ -65,7 +65,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
       setInitialScale(cssVariableSize);
       setSize(cssVariableSize);
     }
-  }, [reactionRef.current]);
+  }, []);
 
   return (
     <div

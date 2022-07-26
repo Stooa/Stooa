@@ -7,11 +7,12 @@
     "prettier"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/explicit-module-boundary-types": "off", //This one is to allow implicit type casting in functional components, otherwise we should use JSX.Element.
-    "react/display-name": "off", //This rule is to avoid the warning of nexts dynamic components with displayName
-    "@next/next/no-img-element": "warn", // Changed to warn since next Image component is bugged without sharp. From Next 11.2 on it will be fixed.
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off", // This one is to allow implicit type casting in functional components, otherwise we should use JSX.Element.
+    "react/display-name": "off", // This rule is to avoid the warning of nexts dynamic components with displayName
+    "@next/next/no-img-element": "off", // Changed to warn since next Image component is bugged without sharp. From Next 11.2 on it will be fixed.
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
     "header/header": [2, "block", [
       "!",

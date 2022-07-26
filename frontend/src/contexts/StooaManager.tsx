@@ -197,15 +197,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     setShowOnBoardingModal(!showOnBoardingModal);
   };
 
-  const shouldShowOnboardingModal = () => {
-    const cookie = getOnBoardingCookie(isModerator);
-
-    if (!cookie) {
-      setShowOnBoardingModal(true);
-      setOnBoardingTooltipSeen(false);
-    }
-  };
-
   useEffect(() => {
     if (
       !prejoin &&
@@ -269,8 +260,13 @@ const StooaProvider = ({ data, isModerator, children }) => {
   }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    shouldShowOnboardingModal();
-  }, []);
+    const cookie = getOnBoardingCookie(isModerator);
+
+    if (!cookie) {
+      setShowOnBoardingModal(true);
+      setOnBoardingTooltipSeen(false);
+    }
+  }, [isModerator]);
 
   return (
     <StooaContext.Provider

@@ -34,8 +34,7 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { data, isModerator, participantToKick, setParticipantToKick, showOnBoardingModal } =
-    useStooa();
+  const { isModerator, participantToKick, setParticipantToKick, showOnBoardingModal } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
@@ -61,7 +60,7 @@ const Fishbowl: FC = () => {
       category: 'FishbowlReactions',
       label: 'Connect'
     });
-  }, []);
+  }, [fid]);
 
   return (
     <>

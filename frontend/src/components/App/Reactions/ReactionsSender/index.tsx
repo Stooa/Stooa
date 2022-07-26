@@ -47,21 +47,6 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     ]);
   };
 
-  const spawnEmojisBatch = (emojis): void => {
-    const emojisWithCoordinates = emojis.map((emoji, index) => {
-      const emojiPosition = lastLocationClicked - 100 + index * 20;
-      return Reactions.createReaction(emoji, emojiPosition);
-    });
-
-    setClientEmojisShown(emojisWithCoordinates);
-    setDisableToSendEmojis(true);
-
-    setTimeout(() => {
-      setClientEmojisShown([]);
-      setDisableToSendEmojis(false);
-    }, 4000);
-  };
-
   const handleClick = (mouseEvent: React.MouseEvent) => {
     const target = mouseEvent.currentTarget as HTMLDivElement;
     const xCoordinate = target.parentElement.offsetLeft;
@@ -85,6 +70,21 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   };
 
   useEffect(() => {
+    const spawnEmojisBatch = (emojis): void => {
+      const emojisWithCoordinates = emojis.map((emoji, index) => {
+        const emojiPosition = lastLocationClicked - 100 + index * 20;
+        return Reactions.createReaction(emoji, emojiPosition);
+      });
+
+      setClientEmojisShown(emojisWithCoordinates);
+      setDisableToSendEmojis(true);
+
+      setTimeout(() => {
+        setClientEmojisShown([]);
+        setDisableToSendEmojis(false);
+      }, 4000);
+    };
+
     if (debouncedEmojis.length > 0) {
       const firstTenEmojis = debouncedEmojis.slice(0, 10);
       conferenceRepository.sendTextMessage(firstTenEmojis.join(','));
@@ -112,7 +112,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
         setTimesClicked(0);
       }
     }
-  }, [debouncedEmojis]);
+  }, [debouncedEmojis, fid, lastLocationClicked, timesClicked]);
 
   return (
     <ReactionsWrapper
