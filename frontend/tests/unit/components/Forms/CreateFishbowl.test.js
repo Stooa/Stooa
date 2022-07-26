@@ -26,6 +26,12 @@ jest.mock('next/router', () => ({
   }
 }));
 
+jest.mock('@/contexts/AuthContext', () => ({
+  useAuth() {
+    return {};
+  }
+}));
+
 const mocks = [
   {
     request: {
