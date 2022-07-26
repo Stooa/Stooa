@@ -39,4 +39,21 @@ describe('On boarding tour component', () => {
       expect(onBoardingTourComponent).toBeInTheDocument();
     });
   });
+
+  it('Should should not render the component', () => {
+    useStooa.mockReturnValue({
+      isModerator: true,
+      data: makeCurrentFishbowl(),
+      conferenceReady: true,
+      conferenceStatus: IConferenceStatus.RUNNING,
+      showOnBoardingTour: false,
+      setShowOnBoardingTour: () => false,
+      setActiveOnBoardingTooltip: () => false
+    });
+
+    const { queryByTestId } = render(<OnBoardingTour />);
+
+    const onBoardingTourComponent = queryByTestId('on-boarding-tour');
+    expect(onBoardingTourComponent).not.toBeInTheDocument();
+  });
 });
