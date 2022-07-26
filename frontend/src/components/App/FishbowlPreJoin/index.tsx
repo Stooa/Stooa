@@ -131,7 +131,7 @@ const FishbowlPreJoin: React.FC = () => {
             <VideoContainer>
               <video
                 id="prejoin"
-                style={{ opacity: muteVideo ? 1 : 0 }}
+                style={{ opacity: muteVideo ? 0 : 1 }}
                 autoPlay
                 muted
                 className="video"

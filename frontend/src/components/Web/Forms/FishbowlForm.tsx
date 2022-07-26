@@ -330,9 +330,7 @@ const FishbowlForm = ({
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
   const { t, lang } = useTranslation('form');
-  const { updateCreateFishbowl } = useAuth();
-
-  const { user } = useAuth();
+  const { user, updateCreateFishbowl } = useAuth();
 
   const defaultTitle = t('defaultTitle', {
     name: user && user.name ? user.name.split(' ')[0] : ''
