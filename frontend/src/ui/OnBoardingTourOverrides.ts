@@ -197,10 +197,13 @@ const OnBoardingTourOverrides = css`
       &.second-step {
         left: auto !important;
         right: 0;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
 
         & > .introjs-arrow {
           left: auto;
           right: 90px;
+          display: inherit !important;
         }
       }
 

@@ -18,8 +18,6 @@ import 'intro.js/introjs.css';
 import StepTooltip from '@/components/App/OnBoardingTour/StepTooltip';
 import useTranslation from 'next-translate/useTranslation';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useWindowSize } from '@/hooks/useWIndowSize';
-import { BREAKPOINTS } from '@/ui/settings';
 
 const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -44,7 +42,6 @@ const OnBoardingTour = () => {
     onBoardingTooltipSeen
   } = useStooa();
   const { t } = useTranslation('on-boarding-tour');
-  const { width } = useWindowSize();
 
   const attendeeSteps: step[] = [
     {
@@ -99,8 +96,6 @@ const OnBoardingTour = () => {
     nextLabel: t('next'),
     prevLabel: t('previous'),
     doneLabel: t('done'),
-    tooltipClass: 'on-boarding-tour',
-    tooltipPosition: 'left',
     hidePrev: true
   };
 
