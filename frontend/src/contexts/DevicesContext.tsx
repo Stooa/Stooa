@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect, useMemo } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
 
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';

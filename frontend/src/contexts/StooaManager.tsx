@@ -263,6 +263,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
     };
   }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
+
+
   useEffect(() => {
     clearInterval(timeUpInterval.current);
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
