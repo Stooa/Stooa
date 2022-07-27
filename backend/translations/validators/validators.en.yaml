@@ -8,6 +8,7 @@
 fishbowl:
     overlap: The fishbowl gets overlapped with another one.
     future: The fishbowl start date is already past.
+    private: The password field can not be empty in private fishbowls.
 
 user:
     same_user: The password does not match your current password.

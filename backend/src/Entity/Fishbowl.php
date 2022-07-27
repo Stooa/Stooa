@@ -25,6 +25,7 @@ use App\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Resolver\FishbowlResolver;
 use App\Resolver\FishbowlRunMutationResolver;
 use App\Validator\Constraints\FutureFishbowl;
+use App\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -100,6 +101,7 @@ use Webmozart\Assert\Assert as MAssert;
  *
  * @UniqueEntity(fields={"slug"})
  * @FutureFishbowl(groups={"fishbowl:create", "fishbowl:update"})
+ * @PrivateFishbowl(groups={"fishbowl:create", "fishbowl:update"})
  *
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
@@ -278,6 +280,20 @@ class Fishbowl implements \Stringable
      * @ORM\Column(type="boolean")
      */
     private bool $hasIntroduction = false;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isPrivate = false;
+
+    /**
+     * @Groups({"fishbowl:write"})
+     *
+     * @ORM\Column(type="string")
+     */
+    private ?string $password = null;
 
     public function __construct()
     {
@@ -625,10 +641,30 @@ class Fishbowl implements \Stringable
 
         MAssert::isInstanceOf($host, User::class);
 
-        if (null === $host->getName()) {
-            return '';
-        }
+        return $host->getName() ?? '';
+    }
 
-        return $host->getName();
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getIsPrivate(): bool
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate(bool $isPrivate): self
+    {
+        $this->isPrivate = $isPrivate;
+
+        return $this;
     }
 }
