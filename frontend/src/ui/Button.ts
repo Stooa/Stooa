@@ -23,7 +23,7 @@ import {
   COLOR_RED_600
 } from '@/ui/settings';
 import { mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
-import { media, rems, space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { StyledLinkCss } from './Globals';
 
 const SIZES = {
@@ -45,12 +45,11 @@ const SIZES = {
 };
 
 const ButtonBase = styled.button<{ full?: boolean }>`
+  ${mediumWeight};
   width: 100%;
 
-  ${mediumWeight};
-
-  @media (min-width: ${BREAKPOINTS['tablet']}) {
-    width: ${({ full }) => (full ? '100%' : 'auto')} !important;
+  @media (min-width: ${BREAKPOINTS.tablet}px) {
+    width: ${({ full }) => (full ? '100%' : 'auto')};
   }
 
   align-items: center;
@@ -61,7 +60,6 @@ const ButtonBase = styled.button<{ full?: boolean }>`
   font-size: var(--fontSize);
   justify-content: center;
   line-height: var(--lineHeight);
-  /* min-width: ${rems(20)}; */
   padding: var(--padding);
   position: relative;
   text-decoration: none;
