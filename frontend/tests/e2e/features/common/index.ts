@@ -59,7 +59,7 @@ When('clicks on {string}', (text = '') => {
   cy.contains(text).click();
 });
 
-When('clicks to close modal', (text = '') => {
+When('clicks to close modal', () => {
   cy.get('button[class="close"]').click({ force: true });
 });
 

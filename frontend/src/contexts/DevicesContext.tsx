@@ -8,7 +8,6 @@
  */
 
 import { useState, useEffect } from 'react';
-
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
 import devicesRepository from '@/jitsi/Devices';
