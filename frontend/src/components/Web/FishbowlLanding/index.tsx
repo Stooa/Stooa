@@ -53,7 +53,7 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
           <StyledDetailAlert className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
           </StyledDetailAlert>
-          {data.slug && <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />}
+          <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
           <HelpText className="body-sm">{t('copyText')}</HelpText>
         </>
       )}

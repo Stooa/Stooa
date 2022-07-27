@@ -64,15 +64,13 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
               </Button>
             </RedirectLink>
           </div>
-          {data.slug && (
-            <ButtonCopyUrl
-              variant="secondary"
-              size="large"
-              withSvg
-              fid={data.slug}
-              locale={data.locale}
-            />
-          )}
+          <ButtonCopyUrl
+            variant="secondary"
+            size="large"
+            withSvg
+            fid={data.slug}
+            locale={data.locale}
+          />
           <p className="body-xs share-text">
             <Trans i18nKey="fishbowl:detail.shareInSocials" />
           </p>
