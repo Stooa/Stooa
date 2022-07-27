@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
@@ -37,17 +37,20 @@ const ToolBar: React.FC = () => {
 
   const configButtonRef = useRef(null);
 
-  const joinSeat = async (user: User) => {
-    setJoinIsInactive(true);
-    if (!joined) {
-      await join(user);
+  const joinSeat = useCallback(
+    async (user: User) => {
+      setJoinIsInactive(true);
+      if (!joined) {
+        await join(user);
 
-      setTimeout(() => {
-        setJoined(true);
-        setJoinIsInactive(false);
-      }, 1200);
-    }
-  };
+        setTimeout(() => {
+          setJoined(true);
+          setJoinIsInactive(false);
+        }, 1200);
+      }
+    },
+    [joined]
+  );
 
   const leaveSeat = async () => {
     setJoinIsInactive(true);
@@ -59,24 +62,6 @@ const ToolBar: React.FC = () => {
         setJoinIsInactive(false);
       }, 1200);
     }
-  };
-
-  const hasModeratorToSeatDuringIntroduction = (): boolean => {
-    return (
-      data.hasIntroduction &&
-      isModerator &&
-      conferenceReady &&
-      conferenceStatus === IConferenceStatus.INTRODUCTION
-    );
-  };
-
-  const hasModeratorToSeatDuringRunning = (): boolean => {
-    return (
-      !data.hasIntroduction &&
-      isModerator &&
-      conferenceReady &&
-      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
-    );
   };
 
   const handleMic = () => {
@@ -118,18 +103,36 @@ const ToolBar: React.FC = () => {
   }, [joined, videoDevice]);
 
   useEffect(() => {
+    const hasModeratorToSeatDuringIntroduction = (): boolean => {
+      return (
+        data.hasIntroduction &&
+        isModerator &&
+        conferenceReady &&
+        conferenceStatus === IConferenceStatus.INTRODUCTION
+      );
+    };
+
     if (hasModeratorToSeatDuringIntroduction()) {
       console.log('[STOOA] Moderator join seat during introduction');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceStatus, hasModeratorToSeatDuringIntroduction, joinSeat]);
+  }, [conferenceReady, conferenceStatus, data, isModerator, joinSeat]);
 
   useEffect(() => {
+    const hasModeratorToSeatDuringRunning = (): boolean => {
+      return (
+        !data.hasIntroduction &&
+        isModerator &&
+        conferenceReady &&
+        data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
+      );
+    };
+
     if (hasModeratorToSeatDuringRunning()) {
       console.log('[STOOA] Moderator join seat during running');
       joinSeat(userRepository.getUser());
     }
-  }, [conferenceReady, hasModeratorToSeatDuringRunning, joinSeat]);
+  }, [conferenceReady, data, isModerator, joinSeat]);
 
   const isActionDisabled =
     !conferenceReady ||
