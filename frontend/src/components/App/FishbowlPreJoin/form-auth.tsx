@@ -13,7 +13,6 @@ import userRepository from '@/jitsi/User';
 import { useStateValue } from '@/contexts/AppContext';
 
 import Button from '@/components/Common/Button';
-import { InputStyled } from '@/ui/Form';
 import FormikForm from '@/ui/Form';
 
 type TProps = {

@@ -11,7 +11,6 @@ import styled from 'styled-components';
 
 import AlertStyled from '@/ui/Alert';
 import { media, rems, space } from '@/ui/helpers';
-import { CustomToast } from '@/ui/CustomToast';
 
 const Alert = styled(AlertStyled)`
   position: absolute;
