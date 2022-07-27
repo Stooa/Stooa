@@ -8,7 +8,7 @@
  */
 
 export interface Fishbowl {
-  id?: string;
+  "@id"?: string;
   name?: string;
   description?: string;
   startDateTime: Date;
@@ -20,7 +20,6 @@ export interface Fishbowl {
   readonly slug?: string;
   readonly host?: string;
   readonly currentStatus?: string;
-  readonly participants?: string[];
   readonly startDateTimeTz?: Date;
   readonly endDateTimeTz?: Date;
   readonly durationFormatted?: string;
