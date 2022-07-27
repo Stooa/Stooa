@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useEffect, useState, useRef } from 'react';
+import { useContext, createContext, useEffect, useState, useRef, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';

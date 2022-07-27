@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
