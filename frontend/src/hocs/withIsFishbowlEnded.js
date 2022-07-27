@@ -49,7 +49,7 @@ const withIsFishbowlEnded = WrappedComponent => props => {
         console.log('[STOOA] ', error);
         setError(true);
       });
-  }, [dispatch, fid, lang, router]);
+  }, []);
 
   if (!loaded) return <Loader />;
   if (error) return <Error message={error.message} />;

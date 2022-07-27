@@ -36,7 +36,7 @@ const UserNoParticipatingPage = () => {
       prejoin: true,
       conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
-  }, [dispatch]);
+  }, []); // es
 
   return (
     <>
