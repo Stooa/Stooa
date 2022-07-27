@@ -9,7 +9,6 @@
 
 import React from 'react';
 
-import { Fishbowl } from '@/types/api-platform';
 import Header from '@/components/Web/Header';
 import Footer from '@/components/Web/Footer';
 import Decoration from '@/components/Web/Decoration';
@@ -21,11 +20,10 @@ import {
 } from '@/layouts/Default/styles';
 
 interface Props {
-  data: Fishbowl;
   navigation?: boolean;
 }
 
-const Page: React.FC<Props> = ({ children, data, navigation = true }) => {
+const Page: React.FC<Props> = ({ children, navigation = true }) => {
   return (
     <>
       <Container>

@@ -9,13 +9,11 @@
 
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import devicesRepository from '@/jitsi/Devices';
 
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
-import Image from 'next/image';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { toast } from 'react-toastify';
 import MicPermissionFriend from '@/components/Common/SVG/MicPermissionFriend';
