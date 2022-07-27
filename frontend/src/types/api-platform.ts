@@ -10,7 +10,8 @@
 import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
 
 export interface Fishbowl
-  extends Omit<apiPlatformFishbowl, 'startDateTimeTz' | 'endDateTimeTz' | 'slug'> {
+  extends Omit<apiPlatformFishbowl, '@id' | 'slug' | 'startDateTimeTz' | 'endDateTimeTz'> {
+  id?: string;
   readonly slug: string;
   startDateTimeTz: string;
   endDateTimeTz: string;
