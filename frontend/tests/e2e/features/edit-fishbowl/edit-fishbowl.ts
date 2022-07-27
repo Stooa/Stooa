@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 import { modifiedValues } from '../common';
 
