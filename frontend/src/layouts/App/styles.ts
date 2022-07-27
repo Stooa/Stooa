@@ -58,14 +58,13 @@ const Container = styled.div<{ drawer?: boolean }>`
 const Header = styled.header`
   position: relative;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   grid-area: Header;
   padding-top: ${space(2)};
   color: ${COLOR_NEUTRO_700};
 
   ${media.max('tablet')`
-
       min-height: ${space(16)};
 
     &.prefishbowl{
