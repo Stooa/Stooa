@@ -44,6 +44,7 @@ const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localTracks = useRef<any[]>([]);
   const [muteVideo, setMuteVideo] = useState<boolean>(userRepository.getUserVideoMuted());
   const router = useRouter();
