@@ -30,7 +30,6 @@ import Checkbox from '@/components/Common/Fields/Checkbox';
 import RedirectLink from '@/components/Web/RedirectLink';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
-import { useStateValue } from '@/contexts/AppContext';
 import userRepository from '@/jitsi/User';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 import { useRouter } from 'next/router';
