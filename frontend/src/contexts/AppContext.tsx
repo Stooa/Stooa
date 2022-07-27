@@ -70,9 +70,9 @@ type Actions =
   | joinGuestAction
   | joinUserAction;
 
-type FooReducer = Reducer<State, Actions>;
+type AppContextReducer = Reducer<State, Actions>;
 
-const reducer: FooReducer = (state, action) => {
+const reducer: AppContextReducer = (state, action) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { type, ...actionData } = action;
 
