@@ -8,35 +8,35 @@
  */
 
 import ButtonJoin from '@/components/App/ButtonJoin';
-import { render } from '@testing-library/react';
+import { useStateValue } from '@/contexts/AppContext';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import { pushEventDataLayer } from '@/lib/analytics';
+
+jest.mock('@/lib/analytics');
+jest.mock('@/contexts/AppContext');
 
 jest.mock('@/contexts/DevicesContext', () => ({
   useDevices() {
     return {
-      audio: true,
-      video: true
+      setShowModalPermissions: jest.fn()
     };
-  }
-}));
-
-jest.mock('@/contexts/AppContext', () => ({
-  useStateValue() {
-    return [
-      {
-        conferenceStatus: 'NOT_STARTED',
-        isGuest: true
-      }
-    ];
   }
 }));
 
 describe('Unit test of button join', () => {
   it('should render the `button` with alert', () => {
+    useStateValue.mockReturnValue([
+      {
+        conferenceStatus: 'NOT_STARTED',
+        isGuest: true
+      }
+    ]);
+
     const { getByRole, getByTestId } = render(
       <ButtonJoin
         permissions={false}
-        join={user => console.log('user joined', user)}
-        leave={() => console.log()}
+        join={jest.fn()}
+        leave={jest.fn()}
         joined={false}
         disabled={false}
       />
@@ -49,12 +49,12 @@ describe('Unit test of button join', () => {
     expect(alert).toBeInTheDocument();
   });
 
-  it('should render the `button` without alert', () => {
+  it('should render the `button` without alert when does not have permissions', () => {
     const { getByRole, queryByTestId } = render(
       <ButtonJoin
         permissions={true}
-        join={user => console.log('user joined', user)}
-        leave={() => console.log()}
+        join={jest.fn()}
+        leave={jest.fn()}
         joined={false}
         disabled={false}
       />
@@ -71,8 +71,8 @@ describe('Unit test of button join', () => {
     const { getByRole, getByTestId } = render(
       <ButtonJoin
         permissions={false}
-        join={user => console.log('user joined', user)}
-        leave={() => console.log()}
+        join={jest.fn()}
+        leave={jest.fn()}
         joined={false}
         disabled={false}
       />
@@ -89,8 +89,8 @@ describe('Unit test of button join', () => {
     const { getByRole, getByTestId } = render(
       <ButtonJoin
         permissions={false}
-        join={user => console.log('user joined', user)}
-        leave={() => console.log()}
+        join={jest.fn()}
+        leave={jest.fn()}
         joined={true}
         disabled={false}
       />
@@ -101,5 +101,49 @@ describe('Unit test of button join', () => {
 
     expect(button).toBeInTheDocument();
     expect(arrowDown).toBeInTheDocument();
+  });
+
+  it('should call the join event', async () => {
+    const joinEvent = jest.fn();
+
+    const { getByRole } = render(
+      <ButtonJoin
+        permissions={true}
+        join={joinEvent}
+        leave={jest.fn()}
+        joined={false}
+        disabled={false}
+      />
+    );
+
+    const button = getByRole('button');
+
+    fireEvent.click(button);
+
+    expect(button).toBeInTheDocument();
+    expect(joinEvent).toHaveBeenCalled();
+    expect(pushEventDataLayer).toHaveBeenCalled();
+  });
+
+  it('should call the leave event', async () => {
+    const leaveEvent = jest.fn();
+
+    const { getByRole } = render(
+      <ButtonJoin
+        permissions={true}
+        join={jest.fn()}
+        leave={leaveEvent}
+        joined={true}
+        disabled={false}
+      />
+    );
+
+    const button = getByRole('button');
+
+    fireEvent.click(button);
+
+    expect(button).toBeInTheDocument();
+    expect(leaveEvent).toHaveBeenCalled();
+    expect(pushEventDataLayer).toHaveBeenCalled();
   });
 });
