@@ -9,7 +9,7 @@
 
 import ButtonJoin from '@/components/App/ButtonJoin';
 import { useStateValue } from '@/contexts/AppContext';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 jest.mock('@/lib/analytics');
