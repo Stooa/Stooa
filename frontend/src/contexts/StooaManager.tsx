@@ -8,7 +8,6 @@
  */
 
 import { useContext, createContext, useEffect, useState, useRef } from 'react';
-import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -27,7 +26,6 @@ import {
 } from '@/lib/jitsi';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
@@ -38,6 +36,10 @@ import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons
 import { StooaContextValues } from '@/types/stooa-context';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
+import {
+  useIntroduceFishbowlMutation,
+  useNoIntroRunFishbowlMutation
+} from '@/graphql/Fishbowl.generated';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -60,14 +62,14 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const apiInterval = useRef<number>();
   const timeUpInterval = useRef<number>();
 
-  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
-  const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
+  const [runWithoutIntroFishbowl] = useNoIntroRunFishbowlMutation();
+  const [introduceFishbowl] = useIntroduceFishbowlMutation();
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
 
   const startFishbowl = () => {
-    const slug = { variables: { input: { slug: fid } } };
+    const slug = { variables: { input: { slug: fid as string } } };
     if (data.hasIntroduction) {
       try {
         introduceFishbowl(slug);

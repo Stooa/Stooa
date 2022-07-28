@@ -7,11 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { GET_SELF_USER } from '@/lib/gql/User';
+import { useSelfUserQuery } from '@/graphql/User.generated';
 
 const ProfileForm = dynamic(import('@/components/Web/Forms/profile'), { loading: () => <div /> });
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
@@ -21,7 +20,7 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 const EditProfile = () => {
   const { t } = useTranslation('edit-profile');
 
-  const { loading, error, data, refetch } = useQuery(GET_SELF_USER);
+  const { loading, error, data, refetch } = useSelfUserQuery();
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;

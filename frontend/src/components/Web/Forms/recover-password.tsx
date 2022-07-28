@@ -9,23 +9,18 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { FetchResult, MutationFunctionOptions, OperationVariables } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { ROUTE_SIGN_IN } from '@/app.config';
-import { RECOVER_PASSWORD } from '@/lib/gql/Password';
 import FormikForm from '@/ui/Form';
 import Alert from '@/ui/Alert';
 import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import { useCreateResetPasswordMutation } from '@/graphql/Password.generated';
 
 interface FormValues {
   email: string;
@@ -100,7 +95,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const RecoverPassword = () => {
-  const [recoverPassword] = useMutation(RECOVER_PASSWORD);
+  const [recoverPassword] = useCreateResetPasswordMutation();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const { t, lang } = useTranslation('form');

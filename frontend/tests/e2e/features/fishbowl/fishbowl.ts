@@ -11,6 +11,9 @@ import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 import { makeGQLCurrentFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
 
+const bySlugQueryTomorrowFishbowl = makeGQLTomorrowFishbowl();
+const bySlugQueryCurrentFishbowl = makeGQLCurrentFishbowl();
+
 When('navigates to future fishbowl', () => {
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
@@ -19,24 +22,23 @@ When('navigates to future fishbowl', () => {
     }
   });
 
-  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
-});
-
-When('navigates to fishbowl', () => {
-  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
-
-  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
-  cy.setCookie('on_boarding_moderator', 'true');
-
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
-          bySlugQueryFishbowl
+          bySlugQueryTomorrowFishbowl
         }
       });
     }
   }).as('gqlFishbowlBySlugQuery');
+
+  cy.visit('/fb/test-fishbowl');
+});
+
+When('navigates to fishbowl', () => {
+  cy.setCookie('share_link', bySlugQueryCurrentFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
@@ -44,27 +46,30 @@ When('navigates to fishbowl', () => {
     }
   });
 
-  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
-});
-
-Then('sees tomorrow fishbowl information page', () => {
-  const bySlugQueryFishbowl = makeGQLTomorrowFishbowl();
-
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
-          bySlugQueryFishbowl
+          bySlugQueryCurrentFishbowl
         }
       });
     }
   }).as('gqlFishbowlBySlugQuery');
 
+  cy.visit('/fb/test-fishbowl');
+});
+
+Then('sees tomorrow fishbowl information page', () => {
+  cy.wait('@gqlFishbowlBySlugQuery');
+
   cy.get('[data-testid=fishbowl-name]').should('exist');
-  cy.get('[data-testid=fishbowl-name]').should('have.text', bySlugQueryFishbowl.name);
+  cy.get('[data-testid=fishbowl-name]').should('have.text', bySlugQueryTomorrowFishbowl.name);
 
   cy.get('[data-testid=fishbowl-description]').should('exist');
-  cy.get('[data-testid=fishbowl-description]').should('have.text', bySlugQueryFishbowl.description);
+  cy.get('[data-testid=fishbowl-description]').should(
+    'have.text',
+    bySlugQueryTomorrowFishbowl.description
+  );
 
   cy.screenshot();
 });
@@ -89,13 +94,11 @@ When('can access to pre fishbowl', () => {
 });
 
 When('sees the prefishbowl page', () => {
-  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
-
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
-          bySlugQueryFishbowl
+          bySlugQueryCurrentFishbowl
         }
       });
     }

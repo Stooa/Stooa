@@ -10,7 +10,7 @@
 import React, { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { defaultLocale } from '@/i18n';
 import Copy from '@/ui/svg/copy.svg';

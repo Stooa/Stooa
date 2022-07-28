@@ -9,7 +9,7 @@
 
 import { gql } from '@apollo/client';
 
-const RECOVER_PASSWORD = gql`
+gql`
   mutation CreateResetPassword($input: createResetPasswordInput!) {
     createResetPassword(input: $input) {
       resetPassword {
@@ -19,7 +19,7 @@ const RECOVER_PASSWORD = gql`
   }
 `;
 
-const RESET_PASSWORD = gql`
+gql`
   mutation ChangePassword($input: changePasswordUserInput!) {
     changePasswordUser(input: $input) {
       user {
@@ -29,7 +29,7 @@ const RESET_PASSWORD = gql`
   }
 `;
 
-const RESET_LOGGED_PASSWORD = gql`
+gql`
   mutation ChangePasswordLogged($input: changePasswordLoggedUserInput!) {
     changePasswordLoggedUser(input: $input) {
       user {
@@ -38,5 +38,3 @@ const RESET_LOGGED_PASSWORD = gql`
     }
   }
 `;
-
-export { RECOVER_PASSWORD, RESET_PASSWORD, RESET_LOGGED_PASSWORD };

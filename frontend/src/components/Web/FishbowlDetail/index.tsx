@@ -11,7 +11,7 @@ import Trans from 'next-translate/Trans';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import { Container } from '@/ui/pages/fishbowl-detail';
 import { MainGrid } from './styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';

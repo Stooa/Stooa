@@ -10,7 +10,6 @@
 import React, { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from '@/app.config';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -19,6 +18,7 @@ import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import { JoinFishbowlStyled } from '@/components/Web/JoinFishbowl/styles';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 
 interface Props {
   data: Fishbowl;

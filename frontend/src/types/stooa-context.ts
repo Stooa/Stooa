@@ -10,7 +10,7 @@
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { Dispatch, SetStateAction } from 'react';
 import { Participant } from '@/types/participant';
-import { Fishbowl } from './api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 
 export interface StooaContextValues {
   conferenceReady: boolean;

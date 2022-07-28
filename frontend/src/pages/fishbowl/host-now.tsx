@@ -10,8 +10,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
-import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL, ROUTE_HOME } from '@/app.config';
@@ -20,9 +18,10 @@ import Layout from '@/layouts/Default';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { useCreateFishbowlMutation } from '@/graphql/Fishbowl.generated';
 
 const HostNow = () => {
-  const [createFishbowl] = useMutation(CREATE_FISHBOWL);
+  const [createFishbowl] = useCreateFishbowlMutation();
   const [{}, dispatch] = useStateValue();
   const { lang } = useTranslation();
   const router = useRouter();

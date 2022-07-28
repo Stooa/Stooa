@@ -14,7 +14,7 @@ import Dots from '@/ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import Trans from 'next-translate/Trans';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 
 interface Props {
   data: Fishbowl;

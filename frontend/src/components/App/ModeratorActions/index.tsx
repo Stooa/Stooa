@@ -8,10 +8,8 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 
-import { FINISH_FISHBOWL, NO_INTRO_RUN_FISHBOWL, RUN_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
 
 import { useStateValue } from '@/contexts/AppContext';
@@ -23,6 +21,11 @@ import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 import Button from '@/components/Common/Button';
 
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
+import {
+  useFinishFishbowlMutation,
+  useNoIntroRunFishbowlMutation,
+  useRunFishbowlMutation
+} from '@/graphql/Fishbowl.generated';
 
 interface Props {
   fid: string;
@@ -36,9 +39,9 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [running, setRunning] = useState(false);
   const [showIntroductionModal, setShowIntroductionModal] = useState(false);
   const [showFinishModal, setShowFinishModal] = useState(false);
-  const [runFishbowl] = useMutation(RUN_FISHBOWL);
-  const [endFishbowl] = useMutation(FINISH_FISHBOWL);
-  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
+  const [runFishbowl] = useRunFishbowlMutation();
+  const [endFishbowl] = useFinishFishbowlMutation();
+  const [runWithoutIntroFishbowl] = useNoIntroRunFishbowlMutation();
   const { t } = useTranslation('fishbowl');
   const { data } = useStooa();
   const { permissions, setShowModalPermissions } = useDevices();

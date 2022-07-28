@@ -9,12 +9,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { FetchResult, MutationFunctionOptions, OperationVariables } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
@@ -24,11 +19,11 @@ import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import FormikForm from '@/ui/Form';
 import { getAuthToken } from '@/lib/auth';
-import { UPDATE_USER } from '@/lib/gql/User';
 import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
+import { useUpdateUserMutation } from '@/graphql/User.generated';
 
 interface FormValues {
   firstname: string;
@@ -167,7 +162,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 const Profile = ({ userData, refetch }) => {
   const router = useRouter();
   const [error, setError] = useState(null);
-  const [updateUser] = useMutation(UPDATE_USER);
+  const [updateUser] = useUpdateUserMutation();
   const { user, updateUser: contextUpdateUser } = useAuth();
   const { t, lang } = useTranslation('form');
 

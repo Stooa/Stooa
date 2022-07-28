@@ -9,12 +9,10 @@
 
 import { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
 import { ROUTE_HOME, ROUTE_NOT_FOUND } from '@/app.config';
-import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
@@ -22,6 +20,7 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { useBySlugQueryFishbowlQuery } from '@/graphql/Fishbowl.generated';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -41,7 +40,9 @@ const Page = () => {
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { fid } = router.query;
-  const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
+  const { loading, error, data } = useBySlugQueryFishbowlQuery({
+    variables: { slug: fid as string }
+  });
 
   const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);

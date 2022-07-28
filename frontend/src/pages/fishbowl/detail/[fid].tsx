@@ -8,15 +8,14 @@
  */
 
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL, ROUTE_NOT_FOUND } from '@/app.config';
-import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { dataLayerPush } from '@/lib/analytics';
 
 import { ToastContainer } from 'react-toastify';
+import { useBySlugQueryFishbowlQuery } from '@/graphql/Fishbowl.generated';
 
 const FishbowlDetail = dynamic(import('@/components/Web/FishbowlDetail'), {
   loading: () => <div />
@@ -31,7 +30,9 @@ const Detail = props => {
   const referer = props.referer ? props.referer : '';
 
   const { fid } = router.query;
-  const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
+  const { loading, error, data } = useBySlugQueryFishbowlQuery({
+    variables: { slug: fid as string }
+  });
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;

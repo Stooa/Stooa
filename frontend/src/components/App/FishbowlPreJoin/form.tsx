@@ -9,17 +9,16 @@
 
 import { useEffect } from 'react';
 
-import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { useStateValue } from '@/contexts/AppContext';
-import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
 import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Button from '@/components/Common/Button';
+import { useCreateGuestMutation } from '@/graphql/Fishbowl.generated';
 
 interface FormValues {
   name: string;
@@ -77,7 +76,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 
 const Nickname = () => {
   const [{}, dispatch] = useStateValue();
-  const [createGuest] = useMutation(CREATE_GUEST);
+  const [createGuest] = useCreateGuestMutation();
   const { t } = useTranslation('form');
 
   const requiredError = t('validation.required');

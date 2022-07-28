@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import LoadingDots from '@/components/Common/LoadingDots';
 
 interface Props {
