@@ -8,12 +8,7 @@
  */
 
 import { useState } from 'react';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { FetchResult, MutationFunctionOptions, OperationVariables } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
@@ -23,7 +18,6 @@ import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from '@/app.config';
 import i18nConfig from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { pushEventDataLayer, pushPageViewDataLayer } from '@/lib/analytics';
-import { CREATE_USER } from '@/lib/gql/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Checkbox from '@/components/Common/Fields/Checkbox';
@@ -33,6 +27,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import userRepository from '@/jitsi/User';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 import { useRouter } from 'next/router';
+import { useCreateUserMutation } from '@/graphql/User.generated';
 
 interface FormValues {
   firstname: string;
@@ -196,7 +191,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 
 const Register = () => {
   const [error, setError] = useState(null);
-  const [createUser] = useMutation(CREATE_USER);
+  const [createUser] = useCreateUserMutation();
   const { login } = useAuth();
   const { t, lang } = useTranslation('form');
   const router = useRouter();

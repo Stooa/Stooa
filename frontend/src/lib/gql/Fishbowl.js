@@ -9,7 +9,7 @@
 
 import { gql } from '@apollo/client';
 
-const CREATE_FISHBOWL = gql`
+gql`
   mutation CreateFishbowl($input: createFishbowlInput!) {
     createFishbowl(input: $input) {
       fishbowl {
@@ -27,7 +27,7 @@ const CREATE_FISHBOWL = gql`
   }
 `;
 
-const UPDATE_FISHBOWL = gql`
+gql`
   mutation UpdateFishbowl($input: updateFishbowlInput!) {
     updateFishbowl(input: $input) {
       fishbowl {
@@ -46,17 +46,7 @@ const UPDATE_FISHBOWL = gql`
   }
 `;
 
-const DELETE_FISHBOWL = gql`
-  mutation DeleteFishbowl($input: deleteFishbowlInput!) {
-    deleteFishbowl(input: $input) {
-      fishbowl {
-        id
-      }
-    }
-  }
-`;
-
-const GET_FISHBOWL = gql`
+gql`
   query BySlugQueryFishbowl($slug: String!) {
     bySlugQueryFishbowl(slug: $slug) {
       id
@@ -75,7 +65,7 @@ const GET_FISHBOWL = gql`
   }
 `;
 
-const IS_FISHBOWL_CREATOR = gql`
+gql`
   query IsCreatorOfFishbowl($slug: String!) {
     isCreatorOfFishbowl(slug: $slug) {
       currentStatus
@@ -83,7 +73,7 @@ const IS_FISHBOWL_CREATOR = gql`
   }
 `;
 
-const NO_INTRO_RUN_FISHBOWL = gql`
+gql`
   mutation NoIntroRunFishbowl($input: noIntroRunFishbowlInput!) {
     noIntroRunFishbowl(input: $input) {
       fishbowl {
@@ -93,7 +83,7 @@ const NO_INTRO_RUN_FISHBOWL = gql`
   }
 `;
 
-const INTRODUCE_FISHBOWL = gql`
+gql`
   mutation IntroduceFishbowl($input: introduceFishbowlInput!) {
     introduceFishbowl(input: $input) {
       fishbowl {
@@ -103,7 +93,7 @@ const INTRODUCE_FISHBOWL = gql`
   }
 `;
 
-const RUN_FISHBOWL = gql`
+gql`
   mutation RunFishbowl($input: runFishbowlInput!) {
     runFishbowl(input: $input) {
       fishbowl {
@@ -113,7 +103,7 @@ const RUN_FISHBOWL = gql`
   }
 `;
 
-const FINISH_FISHBOWL = gql`
+gql`
   mutation FinishFishbowl($input: finishFishbowlInput!) {
     finishFishbowl(input: $input) {
       fishbowl {
@@ -123,7 +113,7 @@ const FINISH_FISHBOWL = gql`
   }
 `;
 
-const CREATE_GUEST = gql`
+gql`
   mutation CreateGuest($input: createGuestInput!) {
     createGuest(input: $input) {
       guest {
@@ -132,16 +122,3 @@ const CREATE_GUEST = gql`
     }
   }
 `;
-
-export {
-  CREATE_FISHBOWL,
-  CREATE_GUEST,
-  DELETE_FISHBOWL,
-  GET_FISHBOWL,
-  FINISH_FISHBOWL,
-  INTRODUCE_FISHBOWL,
-  IS_FISHBOWL_CREATOR,
-  RUN_FISHBOWL,
-  UPDATE_FISHBOWL,
-  NO_INTRO_RUN_FISHBOWL
-};

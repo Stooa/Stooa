@@ -15,7 +15,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ROUTE_FISHBOWL, ROUTE_FISHBOWL_LIST } from '@/app.config';
 import Button from '@/components/Common/Button';
 import { formatDateTime, getMonthsForLocale, isTimeLessThanNMinutes } from '@/lib/helpers';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import RedirectLink from '../RedirectLink';
 import { StyledFishbowlDataCard } from './styles';
 

@@ -9,7 +9,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { withFormik, FormikProps } from 'formik';
@@ -19,7 +18,6 @@ import countriesAndTimezones from 'countries-and-timezones';
 import { ROUTE_FISHBOWL_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
-import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { pushEventDataLayer } from '@/lib/analytics';
 
@@ -32,8 +30,13 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
-import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
+import {
+  CreateFishbowlMutationFn,
+  UpdateFishbowlMutationFn,
+  useCreateFishbowlMutation,
+  useUpdateFishbowlMutation
+} from '@/graphql/Fishbowl.generated';
 
 interface FormProps {
   required: string;
@@ -41,12 +44,8 @@ interface FormProps {
   date: string;
   title: string;
   defaultTitle: string;
-  createFishbowl: (
-    options?: CreateFishbowlOptions
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  updateFishbowl: (
-    options?: UpdateFishbowlOptions
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
+  createFishbowl: CreateFishbowlMutationFn;
+  updateFishbowl: UpdateFishbowlMutationFn;
   onSubmit: (any) => void;
   currentLanguage: string;
   enableReinitialize?: boolean;
@@ -327,8 +326,8 @@ const FishbowlForm = ({
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState<boolean>(null);
   const router = useRouter();
-  const [createFishbowl] = useMutation(CREATE_FISHBOWL);
-  const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
+  const [createFishbowl] = useCreateFishbowlMutation();
+  const [updateFishbowl] = useUpdateFishbowlMutation();
   const { t, lang } = useTranslation('form');
   const { updateCreateFishbowl } = useAuth();
 

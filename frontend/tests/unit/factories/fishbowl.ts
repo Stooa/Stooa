@@ -8,7 +8,7 @@
  */
 
 import { faker } from '@faker-js/faker';
-import { Fishbowl } from '@/types/graphql/fishbowl';
+import { Fishbowl, User } from '@/types/graphql-codegen/types';
 
 const today = new Date();
 const tomorrow = new Date(today);
@@ -23,7 +23,14 @@ export const makeCurrentFishbowl = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      id: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+      allowShareData: false,
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.lorem.words(1),
+      surnames: faker.lorem.words(2)
+    } as User,
     currentStatus: 'not_started',
     isFishbowlNow: true,
     hasIntroduction: false,

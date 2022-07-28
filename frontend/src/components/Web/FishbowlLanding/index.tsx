@@ -11,7 +11,7 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import { useStateValue } from '@/contexts/AppContext';
 import { formatDateTime } from '@/lib/helpers';
 import { Description } from '@/ui/pages/fishbowl-detail';

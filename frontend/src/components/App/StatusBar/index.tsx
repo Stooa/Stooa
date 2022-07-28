@@ -13,7 +13,7 @@ import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import HourGlass from '@/ui/svg/hourglass-countdown.svg';
 import { Counter } from '@/components/App/StatusBar/Counter';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 
 interface Props {
   isModerator: boolean;

@@ -11,9 +11,9 @@ import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import formEnglishTranslation from 'locales/en/form.json';
 import commonEnglishTranslation from 'locales/en/common.json';
-import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 import I18nProvider from 'next-translate/I18nProvider';
+import { CreateFishbowlDocument } from '@/graphql/Fishbowl.generated';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -29,7 +29,7 @@ jest.mock('next/router', () => ({
 const mocks = [
   {
     request: {
-      query: CREATE_FISHBOWL
+      query: CreateFishbowlDocument
     },
     result: {
       data: {

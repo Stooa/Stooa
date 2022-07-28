@@ -9,13 +9,11 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
-import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
 import ThankYouStyled, { Description, Time } from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
@@ -24,6 +22,7 @@ import Twitter from '@/ui/svg/share-twitter.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
+import { useBySlugQueryFishbowlQuery } from '@/graphql/Fishbowl.generated';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -36,7 +35,9 @@ const ThankYou = () => {
   const {
     query: { fid }
   } = router;
-  const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
+  const { loading, error, data } = useBySlugQueryFishbowlQuery({
+    variables: { slug: fid as string }
+  });
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;

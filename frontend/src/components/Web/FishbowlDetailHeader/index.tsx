@@ -10,7 +10,7 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import { ROUTE_HOME, ROUTE_FISHBOWL, ROUTE_SIGN_IN, ROUTE_REGISTER } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';

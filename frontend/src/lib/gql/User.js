@@ -9,7 +9,7 @@
 
 import { gql } from '@apollo/client';
 
-const CREATE_USER = gql`
+gql`
   mutation CreateUser($input: createUserInput!) {
     createUser(input: $input) {
       user {
@@ -20,7 +20,7 @@ const CREATE_USER = gql`
   }
 `;
 
-const UPDATE_USER = gql`
+gql`
   mutation UpdateUser($input: updateUserInput!) {
     updateUser(input: $input) {
       user {
@@ -32,26 +32,7 @@ const UPDATE_USER = gql`
   }
 `;
 
-const DELETE_USER = gql`
-  mutation DeleteUser($input: deleteUserInput!) {
-    deleteUser(input: $input) {
-      user {
-        id
-      }
-    }
-  }
-`;
-
-const GET_USER = gql`
-  query GetUser($id: ID!) {
-    user(id: $id) {
-      id
-      name
-    }
-  }
-`;
-
-const GET_SELF_USER = gql`
+gql`
   query SelfUser {
     selfUser {
       id
@@ -64,5 +45,3 @@ const GET_SELF_USER = gql`
     }
   }
 `;
-
-export { CREATE_USER, DELETE_USER, GET_USER, GET_SELF_USER, UPDATE_USER };

@@ -16,7 +16,7 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import RedirectLink from '@/components/Web/RedirectLink';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';

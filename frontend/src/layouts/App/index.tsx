@@ -9,10 +9,8 @@
 
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 
-import { Fishbowl } from '@/types/api-platform';
-import { IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 import { StooaProvider } from '@/contexts/StooaManager';
 import ScriptLoader from '@/hocs/withScriptLoader';
 import Error from '@/components/Common/Error';
@@ -20,6 +18,7 @@ import Loader from '@/components/Web/Loader';
 import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
 import Seo from '@/components/Web/Seo';
+import { useIsCreatorOfFishbowlQuery } from '@/graphql/Fishbowl.generated';
 
 import { ToastContainer } from 'react-toastify';
 
@@ -51,7 +50,7 @@ const Layout: React.FC<Props> = ({
     loading,
     error,
     data: fbCreatorData
-  } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
+  } = useIsCreatorOfFishbowlQuery({ variables: { slug: fid as string } });
 
   if (!scriptsLoaded) return <Loader />;
   if (!scriptsLoadedSuccessfully) return <Error message={'Could not create fishbowl event'} />;
