@@ -60,7 +60,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data } = useStooa();
+  const { data, showOnBoardingTour } = useStooa();
 
   const pingParticipant = () => {
     ping(lang, fid);
@@ -133,9 +133,17 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
     setRoomParticipants(tempRoomParticipants);
   }, [participants]);
 
+  useEffect(() => {
+    if (showOnBoardingTour) {
+      setActive(false);
+      if (active) toggleParticipants();
+    }
+  }, [showOnBoardingTour]);
+
   return (
     <>
       <ParticipantsToggle
+        id="participant-toggle"
         as="button"
         className={`participant-toggle ${active ? 'active' : ''} `}
         onClick={toggleDrawer}

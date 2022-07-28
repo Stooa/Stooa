@@ -87,8 +87,7 @@ const OnBoardingTour = () => {
           img="/img/tour/tour-step4.gif"
         />
       ),
-      element: '.participant-toggle',
-      position: 'auto',
+      element: '#participant-toggle',
       tooltipClass: 'custom-onboarding-tooltip third-step'
     }
   ];
