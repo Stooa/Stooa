@@ -18,8 +18,6 @@ import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 import StyledButton from '@/components/App/ButtonJoin/styles';
 import { useDevices } from '@/contexts/DevicesContext';
-import conferenceRepository from '@/jitsi/Conference';
-import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { isTimeLessThanNSeconds } from '@/lib/helpers';

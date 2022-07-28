@@ -32,7 +32,6 @@ import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
-import OnBoardingTour from '@/components/App/OnBoardingTour';
 
 const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
   loading: () => <div />
