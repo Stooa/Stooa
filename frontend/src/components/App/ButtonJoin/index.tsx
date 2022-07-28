@@ -97,7 +97,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
     >
       <div className="button">
         {!permissions && (
-          <div className="alert">
+          <div className="alert" data-testid="permission-alert">
             <PermissionsAlert />
           </div>
         )}

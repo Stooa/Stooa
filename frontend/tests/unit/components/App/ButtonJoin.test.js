@@ -19,15 +19,51 @@ jest.mock('@/contexts/DevicesContext', () => ({
   }
 }));
 
-const renderButtonJoin = () => {
-  render(<ButtonJoin />);
-};
+jest.mock('@/contexts/AppContext', () => ({
+  useStateValue() {
+    return [
+      {
+        conferenceStatus: 'NOT_STARTED',
+        isGuest: true
+      }
+    ];
+  }
+}));
 
 describe('Unit test of button join', () => {
-  it('should render the `button`', () => {
-    renderButtonJoin();
+  it('should render the `button` with alert', () => {
+    const { getByRole, getByTestId } = render(
+      <ButtonJoin
+        permissions={false}
+        join={user => console.log('user joined', user)}
+        leave={() => console.log()}
+        joined={false}
+        disabled={false}
+      />
+    );
 
-    const button = screen.getByRole('button');
+    const button = getByRole('button');
+    const alert = getByTestId('permission-alert');
+
     expect(button).toBeInTheDocument();
+    expect(alert).toBeInTheDocument();
+  });
+
+  it('should render the `button` without alert', () => {
+    const { getByRole, queryByTestId } = render(
+      <ButtonJoin
+        permissions={true}
+        join={user => console.log('user joined', user)}
+        leave={() => console.log()}
+        joined={false}
+        disabled={false}
+      />
+    );
+
+    const button = getByRole('button');
+    const alert = queryByTestId('permission-alert');
+
+    expect(button).toBeInTheDocument();
+    expect(alert).not.toBeInTheDocument();
   });
 });
