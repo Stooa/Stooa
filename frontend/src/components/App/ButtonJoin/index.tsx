@@ -101,7 +101,11 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
             <PermissionsAlert />
           </div>
         )}
-        {joined ? <ArrowDownIcon /> : <ArrowUpIcon />}
+        {joined ? (
+          <ArrowDownIcon data-testid="arrow-down" />
+        ) : (
+          <ArrowUpIcon data-testid="arrow-up" />
+        )}
       </div>
       <div className="text">{children}</div>
     </StyledButton>

@@ -8,7 +8,7 @@
  */
 
 import ButtonJoin from '@/components/App/ButtonJoin';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 jest.mock('@/contexts/DevicesContext', () => ({
   useDevices() {
@@ -65,5 +65,41 @@ describe('Unit test of button join', () => {
 
     expect(button).toBeInTheDocument();
     expect(alert).not.toBeInTheDocument();
+  });
+
+  it('should render the `button` with arrow up to join', () => {
+    const { getByRole, getByTestId } = render(
+      <ButtonJoin
+        permissions={false}
+        join={user => console.log('user joined', user)}
+        leave={() => console.log()}
+        joined={false}
+        disabled={false}
+      />
+    );
+
+    const button = getByRole('button');
+    const arrowUp = getByTestId('arrow-up');
+
+    expect(button).toBeInTheDocument();
+    expect(arrowUp).toBeInTheDocument();
+  });
+
+  it('should render the `button` with arrow down to leave', () => {
+    const { getByRole, getByTestId } = render(
+      <ButtonJoin
+        permissions={false}
+        join={user => console.log('user joined', user)}
+        leave={() => console.log()}
+        joined={true}
+        disabled={false}
+      />
+    );
+
+    const button = getByRole('button');
+    const arrowDown = getByTestId('arrow-down');
+
+    expect(button).toBeInTheDocument();
+    expect(arrowDown).toBeInTheDocument();
   });
 });
