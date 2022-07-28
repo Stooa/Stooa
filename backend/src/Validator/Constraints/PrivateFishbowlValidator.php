@@ -35,13 +35,12 @@ class PrivateFishbowlValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, Fishbowl::class);
         }
 
-        if ($this->privateFishbowlHasPassword($value)) {
+        if ($value->privateFishbowlHasPassword()) {
             $this->context->buildViolation($constraint->message)->atPath('password')->addViolation();
         }
-    }
 
-    public function privateFishbowlHasPassword(Fishbowl $value): bool
-    {
-        return true === $value->getIsPrivate() && (null === $value->getPassword() || '' === $value->getPassword());
+        if ($value->publicFishbowlHasPassword()) {
+            $this->context->buildViolation($constraint->publicMessage)->atPath('isPrivate')->addViolation();
+        }
     }
 }

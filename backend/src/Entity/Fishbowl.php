@@ -291,7 +291,7 @@ class Fishbowl implements \Stringable
     /**
      * @Groups({"fishbowl:write"})
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private ?string $password = null;
 
@@ -644,12 +644,12 @@ class Fishbowl implements \Stringable
         return $host->getName() ?? '';
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -666,5 +666,15 @@ class Fishbowl implements \Stringable
         $this->isPrivate = $isPrivate;
 
         return $this;
+    }
+
+    public function privateFishbowlHasPassword(): bool
+    {
+        return true === $this->getIsPrivate() && (null === $this->getPassword() || '' === $this->getPassword());
+    }
+
+    public function publicFishbowlHasPassword(): bool
+    {
+        return false === $this->getIsPrivate() && null !== $this->getPassword();
     }
 }

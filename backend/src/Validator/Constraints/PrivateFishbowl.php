@@ -20,7 +20,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class PrivateFishbowl extends Constraint
 {
-    public string $message = 'fishbowl.private';
+    public string $message = 'fishbowl.private.private';
+    public string $publicMessage = 'fishbowl.private.public';
 
     public function getTargets()
     {

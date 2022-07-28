@@ -14,4 +14,7 @@ user:
 fishbowl:
     overlap: Le fishbowl en chevauche un autre.
     future: La date de début de l'opération est déjà passée.
-    private: The password field can not be empty in private fishbowls.
+    private:
+        private: The password field can not be empty in private fishbowls.
+        public: The password field must be empty in public fishbowls.
+

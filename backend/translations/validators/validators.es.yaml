@@ -8,7 +8,9 @@
 fishbowl:
     overlap: Ya existe un Fishbowl creado en ese mismo momento.
     future: La fecha inicio del fishbowl ya ha pasado.
-    private: El campo password no puede ser vacío en fishbowl privados.
+    private:
+        private: El campo password no puede ser vacío en fishbowl privados.
+        public: El campo password tiene que ser vacío en fishbowl públicos.
 
 user:
     same_user: La contraseña no coincide con su contraseña actual.

@@ -1,7 +1,9 @@
 fishbowl:
     overlap: Fishbowl tumpang-tindih dengan yang lain.
     future: Tanggal mulai fishbowl berada di lampau.
-    private: The password field can not be empty in private fishbowls.
+    private:
+        private: The password field can not be empty in private fishbowls.
+        public: The password field must be empty in public fishbowls.
 
 user:
     valid_token: Token tidak valid atau sudah kadaluwarsa.
