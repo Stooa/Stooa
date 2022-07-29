@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { User } from '@/types/user';
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -18,6 +18,9 @@ import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 import StyledButton from '@/components/App/ButtonJoin/styles';
 import { useDevices } from '@/contexts/DevicesContext';
+import { useStateValue } from '@/contexts/AppContext';
+import { IConferenceStatus } from '@/jitsi/Status';
+import { isTimeLessThanNSeconds } from '@/lib/helpers';
 
 interface Props {
   join: (user: User) => void;
@@ -30,6 +33,9 @@ interface Props {
 const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permissions, children }) => {
   const [active, setActive] = useState(true);
   const { setShowModalPermissions } = useDevices();
+  const [{ conferenceStatus, isGuest }] = useStateValue();
+  const trackFailJoin = useRef<boolean>();
+  const joinedTimestamp = useRef<number>();
 
   const handleJoinClick = async () => {
     if (!permissions) {
@@ -50,8 +56,40 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
     setActive(true);
   };
 
+  useEffect(() => {
+    if (conferenceStatus === IConferenceStatus.RUNNING && isGuest) {
+      pushEventDataLayer({
+        action: 'Connect',
+        category: 'Fail join'
+      });
+
+      setTimeout(() => {
+        trackFailJoin.current = true;
+      }, 15000);
+    }
+  }, [conferenceStatus]);
+
+  useEffect(() => {
+    if (trackFailJoin.current && joined) {
+      joinedTimestamp.current = Date.now();
+    }
+
+    if (
+      trackFailJoin.current &&
+      !joined &&
+      isTimeLessThanNSeconds(new Date(joinedTimestamp.current), 15)
+    ) {
+      pushEventDataLayer({
+        action: 'Failed',
+        category: 'Fail join',
+        label: 'Early fail join'
+      });
+    }
+  }, [joined]);
+
   return (
     <StyledButton
+      id="button-join"
       className={`medium ${joined ? 'joined' : ''}`}
       onClick={handleJoinClick}
       disabled={disabled}
@@ -59,11 +97,15 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
     >
       <div className="button">
         {!permissions && (
-          <div className="alert">
+          <div className="alert" data-testid="permission-alert">
             <PermissionsAlert />
           </div>
         )}
-        {joined ? <ArrowDownIcon /> : <ArrowUpIcon />}
+        {joined ? (
+          <ArrowDownIcon data-testid="arrow-down" />
+        ) : (
+          <ArrowUpIcon data-testid="arrow-up" />
+        )}
       </div>
       <div className="text">{children}</div>
     </StyledButton>

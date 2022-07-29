@@ -22,10 +22,11 @@ import ModalKickUser from '@/components/App/ModalKickUser';
 import ReactionsReceiver from '@/components/App/Reactions/ReactionsReceiver';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useRouter } from 'next/router';
+import OnBoardingTour from '@/components/App/OnBoardingTour';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import PreFishbowl from '@/components/App/PreFishbowl';
-import ModalOnboarding from '../ModalOnBoarding';
+import ModalOnboarding from '@/components/App/ModalOnBoarding';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -81,6 +82,7 @@ const Fishbowl: FC = () => {
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
+      <OnBoardingTour />
     </>
   );
 };
