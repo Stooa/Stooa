@@ -39,6 +39,8 @@
     "graphql": "16.3.0",
     "gsap": "3.9.1",
     "hoist-non-react-statics": "3.3.2",
+    "intro.js": "5.1.0",
+    "intro.js-react": "0.6.0",
     "js-cookie": "3.0.1",
     "jwt-decode": "3.1.2",
     "lottie-web": "5.9.6",
