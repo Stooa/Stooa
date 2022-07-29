@@ -21,13 +21,9 @@ const Placeholder = styled.div`
   left: 0;
   pointer-events: none;
   position: absolute;
-  padding: ${space(4)};
+  padding: ${space()} ${space(4)} ${space(8)} ${space(4)};
   top: 0;
   width: 100%;
-
-  p {
-    text-align: center;
-  }
 
   ${media.min('tablet')`
     row-gap: ${space(3)};
