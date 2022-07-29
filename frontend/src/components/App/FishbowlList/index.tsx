@@ -52,7 +52,7 @@ interface Props {
 }
 
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
-  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl | null>(null);
+  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>([]);
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
@@ -239,7 +239,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                         <div className="form-header">
                           <MobileBackButton
                             className="bottom"
-                            onClick={() => setSelectedFishbowl(null)}
+                            onClick={() => setSelectedFishbowl(undefined)}
                           >
                             <BackArrow />
                           </MobileBackButton>
@@ -293,7 +293,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       <Button
                         variant="text"
                         className="back"
-                        onClick={() => setSelectedFishbowl(null)}
+                        onClick={() => setSelectedFishbowl(undefined)}
                       >
                         <span>{t('back')}</span>
                       </Button>
