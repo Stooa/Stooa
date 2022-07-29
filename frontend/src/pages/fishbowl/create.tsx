@@ -18,7 +18,7 @@ import { IConferenceStatus } from '@/jitsi/Status';
 
 const Create = () => {
   const { t } = useTranslation('fishbowl');
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(() => {
     dispatch({

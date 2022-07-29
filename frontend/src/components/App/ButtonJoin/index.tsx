@@ -76,6 +76,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
 
     if (
       trackFailJoin.current &&
+      joinedTimestamp.current &&
       !joined &&
       isTimeLessThanNSeconds(new Date(joinedTimestamp.current), 15)
     ) {

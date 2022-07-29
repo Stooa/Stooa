@@ -8,7 +8,7 @@
  */
 
 import useTranslation from 'next-translate/useTranslation';
-import { useEffect, useRef, useState } from 'react';
+import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import { StyledEmojiReaction, StyledTooltip } from './styles';
 
@@ -28,12 +28,15 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
 
   const { t } = useTranslation('fishbowl');
 
-  const changeCssScaleVariable = scale => {
-    if (scale) reactionRef.current.style.setProperty('--emojiScale', scale);
+  const changeCssScaleVariable = (scale: number) => {
+    if (reactionRef.current) {
+      reactionRef.current.style.setProperty('--emojiScale', scale.toString());
+    }
+
     setSize(scale);
   };
 
-  const handleOnClick = mouseEvent => {
+  const handleOnClick: MouseEventHandler = event => {
     if (!disabled && reactionRef.current) {
       setClicked(clicked => clicked + 1);
 
@@ -41,7 +44,10 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
       const scaleToSet = size < 1.435 ? size + scaleInterval : size;
 
       changeCssScaleVariable(scaleToSet);
-      onClick(mouseEvent);
+
+      if (onClick) {
+        onClick(event);
+      }
     }
   };
 
