@@ -140,9 +140,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     }
   }, [conferenceStatus]);
 
-  return conferenceStatus === IConferenceStatus.FINISHED ? (
-    <></>
-  ) : (
+  return conferenceStatus === IConferenceStatus.FINISHED ? null : (
     <div className="actions">
       {showIntroductionModal && (
         <ModalStartIntroduction
