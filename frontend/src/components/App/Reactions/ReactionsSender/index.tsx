@@ -30,7 +30,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const [disableToSendEmojis, setDisableToSendEmojis] = useState(false);
   const [clientEmojisShown, setClientEmojisShown] = useState<Reaction[]>([]);
   const [timesClicked, setTimesClicked] = useState(0);
-  const [lastLocationClicked, setLastLocationClicked] = useState<number>();
+  const [lastLocationClicked, setLastLocationClicked] = useState(0);
 
   const router = useRouter();
   const { fid } = router.query;
@@ -64,7 +64,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
 
   const handleClick = (mouseEvent: React.MouseEvent) => {
     const target = mouseEvent.currentTarget as HTMLDivElement;
-    const xCoordinate = target.parentElement.offsetLeft;
+    const xCoordinate = target.parentElement?.offsetLeft ?? 0;
 
     const emojiCoordinate = xCoordinate + 20;
 
@@ -81,7 +81,10 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
 
   const handleOnMouseLeave = (mouseEvent: React.MouseEvent) => {
     setClientEmojisShown([]);
-    onMouseLeave(mouseEvent);
+
+    if (onMouseLeave) {
+      onMouseLeave(mouseEvent);
+    }
   };
 
   useEffect(() => {

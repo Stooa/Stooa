@@ -76,7 +76,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const Nickname = () => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
 

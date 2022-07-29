@@ -33,7 +33,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('fishbowl');
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<number>();
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
 

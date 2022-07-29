@@ -19,7 +19,6 @@ const COOKIE_REFRESH = 'refresh_token';
 const COOKIE_SHARE_LINK_COOKIE = 'share_link';
 const COOKIE_ON_BOARDING_MODERATOR = 'on_boarding_moderator';
 const COOKIE_ON_BOARDING = 'on_boarding';
-const COOKIE_ON_BOARDING_VALUE = true;
 const COOKIE_REFRESH_DAYS = 30;
 const COOKIE_ON_BOARDING_DAYS = 30;
 const COOKIE_OPTIONS = { path: '/', domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN };
@@ -53,7 +52,7 @@ const isFishbowlShareLinkCookie = (fishbowlId: string): boolean => {
 const setOnBoardingCookie = (isModerator: boolean) => {
   const cookieName = isModerator ? COOKIE_ON_BOARDING_MODERATOR : COOKIE_ON_BOARDING;
 
-  cookie.set(cookieName, COOKIE_ON_BOARDING_VALUE, {
+  cookie.set(cookieName, 'true', {
     ...COOKIE_OPTIONS,
     expires: COOKIE_ON_BOARDING_DAYS
   });

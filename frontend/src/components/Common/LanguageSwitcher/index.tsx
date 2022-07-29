@@ -26,13 +26,15 @@ const LanguageSwitcher = () => {
   usePersistLocaleCookie();
 
   const changeLanguage = async () => {
-    pushEventDataLayer({
-      action: 'Language Change',
-      category: 'Footer',
-      label: selectRef.current.value
-    });
+    if (selectRef.current) {
+      pushEventDataLayer({
+        action: 'Language Change',
+        category: 'Footer',
+        label: selectRef.current.value
+      });
 
-    await setLanguage(selectRef.current.value);
+      await setLanguage(selectRef.current.value);
+    }
   };
 
   return (
