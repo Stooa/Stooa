@@ -21,7 +21,7 @@ import conferenceRepository from '@/jitsi/Conference';
 
 interface Props {
   className?: string;
-  initialParticipant?: Participant | null;
+  initialParticipant?: Participant;
   seatNumber?: number;
 }
 
@@ -32,9 +32,9 @@ type SeatsChangeEventProps = {
   };
 };
 
-const ButtonContextMenu = ({ className, initialParticipant = null, seatNumber }: Props) => {
+const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [participant, setParticipant] = useState<Participant | null>(initialParticipant);
+  const [participant, setParticipant] = useState<Participant | undefined>(initialParticipant);
   const { setParticipantToKick, conferenceReady, isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ const ButtonContextMenu = ({ className, initialParticipant = null, seatNumber }:
       if (participantId) {
         setParticipant(conferenceRepository.getParticipantById(participantId));
       } else {
-        setParticipant(null);
+        setParticipant(undefined);
       }
     }
   });

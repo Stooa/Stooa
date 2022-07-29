@@ -19,8 +19,8 @@ export interface StooaContextValues {
   isModerator: boolean;
   onIntroduction: boolean;
   timeStatus: ITimeStatus;
-  participantToKick: Participant | null;
-  setParticipantToKick: Dispatch<SetStateAction<Participant | null>>;
+  participantToKick: Participant | undefined;
+  setParticipantToKick: Dispatch<SetStateAction<Participant | undefined>>;
   showOnBoardingModal: boolean;
   setShowOnBoardingModal: Dispatch<SetStateAction<boolean>>;
   toggleOnBoarding: (location: string) => void;

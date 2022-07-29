@@ -52,7 +52,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [conferenceReady, setConferenceReady] = useState(false);
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
-  const [participantToKick, setParticipantToKick] = useState<Participant | null>(null);
+  const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
