@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -36,12 +36,14 @@ import seatsRepository from '@/jitsi/Seats';
 import { toast } from 'react-toastify';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import { StooaContextValues } from '@/types/stooa-context';
+import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
+import createGenericContext from '@/contexts/createGenericContext';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
-const StooaContext = createContext<StooaContextValues>(undefined);
+const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
 const StooaProvider = ({ data, isModerator, children }) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
@@ -50,7 +52,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [conferenceReady, setConferenceReady] = useState(false);
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
-  const [participantToKick, setParticipantToKick] = useState(null);
+  const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
@@ -274,7 +276,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   }, []);
 
   return (
-    <StooaContext.Provider
+    <StooaContextProvider
       value={{
         conferenceReady,
         conferenceStatus,
@@ -296,10 +298,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
       }}
     >
       {children}
-    </StooaContext.Provider>
+    </StooaContextProvider>
   );
 };
-
-const useStooa = () => useContext(StooaContext);
 
 export { StooaProvider, useStooa };

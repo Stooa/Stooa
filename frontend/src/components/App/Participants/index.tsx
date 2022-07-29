@@ -28,7 +28,7 @@ import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 
-const initialParticipant = {
+const initialParticipant: Participant = {
   id: '',
   name: '',
   linkedin: '',
@@ -38,7 +38,9 @@ const initialParticipant = {
   guestId: '',
   joined: false,
   isMuted: false,
-  isVideoMuted: false
+  isVideoMuted: false,
+  getId: () => '',
+  getDisplayName: () => ''
 };
 
 interface Props {

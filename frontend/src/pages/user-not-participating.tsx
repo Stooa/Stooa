@@ -25,7 +25,7 @@ const UserNoParticipatingPage = () => {
   const router = useRouter();
   const { fid } = router.query;
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(() => {
     dispatch({

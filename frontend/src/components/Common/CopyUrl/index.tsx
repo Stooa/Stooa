@@ -23,7 +23,7 @@ interface Props {
 }
 
 const CopyUrl: React.FC<Props> = ({ data, className = '', variant = 'default' }) => {
-  const linkRef = useRef(null);
+  const linkRef = useRef<HTMLSpanElement>(null);
   const [copySuccess, setCopySuccess] = useState(false);
   const { t } = useTranslation('fishbowl');
 
@@ -33,13 +33,15 @@ const CopyUrl: React.FC<Props> = ({ data, className = '', variant = 'default' })
   }${fbRoute}`;
 
   const copyToClipboard = () => {
-    const text = linkRef.current.innerHTML;
-    navigator.clipboard.writeText(text);
-    setCopySuccess(true);
+    if (linkRef.current) {
+      const text = linkRef.current.innerHTML;
+      navigator.clipboard.writeText(text);
+      setCopySuccess(true);
 
-    setTimeout(() => {
-      setCopySuccess(false);
-    }, 1500);
+      setTimeout(() => {
+        setCopySuccess(false);
+      }, 1500);
+    }
   };
 
   return (
