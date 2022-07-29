@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { StyledButtonReaction, StyledWrapper } from './styles';
 import ReactionsSender from '../ReactionsSender';
 import ReactionsButtonSvg from '@/ui/svg/emojis/reactions-button.svg';
@@ -47,7 +47,7 @@ const ReactionsButton = ({ disabled }: Props) => {
     }
   };
 
-  const handleOnMouseLeave = (e: React.MouseEvent) => {
+  const handleOnMouseLeave: MouseEventHandler = e => {
     const target = e.target as HTMLElement;
 
     if (
