@@ -56,6 +56,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
+  const [showOnBoardingTour, setShowOnBoardingTour] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -202,7 +203,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const shouldShowOnboardingModal = () => {
     const cookie = getOnBoardingCookie(isModerator);
 
-    if (!cookie) {
+    if (!cookie && conferenceStatus === IConferenceStatus.NOT_STARTED && isModerator) {
       setShowOnBoardingModal(true);
       setOnBoardingTooltipSeen(false);
     }
@@ -291,7 +292,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
         activeOnBoardingTooltip,
         setActiveOnBoardingTooltip,
         onBoardingTooltipSeen,
-        setOnBoardingTooltipSeen
+        setOnBoardingTooltipSeen,
+        showOnBoardingTour,
+        setShowOnBoardingTour
       }}
     >
       {children}

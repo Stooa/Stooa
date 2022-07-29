@@ -1,0 +1,22 @@
+{
+    "step1": {
+        "title": "Salut!",
+        "text": "Voici quelques conseils pour rendre votre expérience fishbowl fluide."
+    },
+    "step2": {
+        "title": "Les cinq chaises",
+        "text": "Les 5 chaises sont à votre disposition pour avoir une conversation chaque fois que vous avez quelque chose à dire. Lorsque vous avez terminé, dégagez votre chaise pour que d'autres personnes puissent se joindre !"
+    },
+    "step3": {
+        "title": "Comment utiliser les chaises ?",
+        "text": "Pour occuper une chaise ou la laisser libre, vous pouvez utiliser les boutons verts et rouges. Ne vous inquiétez pas : lorsque vous quitterez votre siège, vous serez toujours dans la salle en train d'écouter les autres !",
+        "textIntroduction": "Dès que l'introduction est terminée vous pouvez occuper une chaise ou la libérer à l'aide des boutons verts et rouges. Ne vous inquiétez pas : lorsque vous quitterez votre siège, vous serez toujours dans la salle en train d'écouter les autres !"
+    },
+    "step4": {
+        "title": "Networking",
+        "text": "Rencontrez et connectez-vous avec les personnes présentes dans la salle via votre profil sur Linkedin et Twitter (si indiqué)"
+    },
+    "next": "Précédent",
+    "previous": "Précédent",
+    "done": "Compris"
+}

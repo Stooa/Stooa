@@ -94,6 +94,12 @@ const isTimeLessThanNMinutes = (date, minutes = 1) => {
   return t <= TIME;
 };
 
+const isTimeLessThanNSeconds = (date, seconds = 1) => {
+  const TIME = seconds * -1000;
+  const t = dateDifferenceFromNow(date);
+  return TIME < t;
+};
+
 const isTimeUp = date => {
   return dateDifferenceFromNow(date) < 0;
 };
@@ -131,6 +137,7 @@ export {
   formatDateTime,
   getBackendSafeRoomName,
   isTimeLessThanNMinutes,
+  isTimeLessThanNSeconds,
   isTimeUp,
   parseDevices,
   removeItem,
