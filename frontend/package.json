@@ -65,7 +65,6 @@
     "@graphql-codegen/typescript": "2.7.2",
     "@graphql-codegen/typescript-operations": "2.5.2",
     "@graphql-codegen/typescript-react-apollo": "3.3.2",
-    "@graphql-codegen/typescript-resolvers": "^2.7.2",
     "@runroom/design-tokens": "2.0.2",
     "@svgr/webpack": "6.2.1",
     "@testing-library/cypress": "8.0.2",
