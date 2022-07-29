@@ -8,7 +8,7 @@
  */
 
 import useTranslation from 'next-translate/useTranslation';
-import { useEffect, useRef, useState } from 'react';
+import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import { StyledEmojiReaction, StyledTooltip } from './styles';
 
@@ -36,7 +36,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
     setSize(scale);
   };
 
-  const handleOnClick = (mouseEvent: React.MouseEvent) => {
+  const handleOnClick: MouseEventHandler = event => {
     if (!disabled && reactionRef.current) {
       setClicked(clicked => clicked + 1);
 
@@ -46,7 +46,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
       changeCssScaleVariable(scaleToSet);
 
       if (onClick) {
-        onClick(mouseEvent);
+        onClick(event);
       }
     }
   };
