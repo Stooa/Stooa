@@ -32,7 +32,7 @@ interface FormProps {
 }
 
 const initialValues = {
-  name: userRepository.getUserNickname() ?? ''
+  name: userRepository.getUserNickname()
 };
 
 const Form = (props: FormikProps<FormValues>) => {

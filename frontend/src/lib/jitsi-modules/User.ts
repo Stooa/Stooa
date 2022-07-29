@@ -36,7 +36,7 @@ const userRepository = (): UserRepository => {
   };
 
   const getUserGuestId = () => getUser()?.guestId || null;
-  const getUserNickname = () => getUser()?.nickname || null;
+  const getUserNickname = () => getUser()?.nickname ?? '';
   const getUserAudioInput = () => getUser()?.audioInput || null;
   const getUserAudioOutput = () => getUser()?.audioOutput || null;
   const getUserVideoInput = () => getUser()?.videoInput || null;
