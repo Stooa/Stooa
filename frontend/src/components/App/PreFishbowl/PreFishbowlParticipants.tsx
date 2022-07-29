@@ -43,20 +43,6 @@ const PreFishbowlParticipants = () => {
   const [numPlaceholderParticipants, setNumPlaceholderParticipants] = useState<number>(0);
   const [{ isGuest }] = useStateValue();
 
-  const pingParticipant = () => {
-    ping(lang, fid as string);
-  };
-
-  const getApiParticipants = () => {
-    getApiParticipantList(lang, fid as string)
-      .then(participantList => {
-        setParticipants(participantList);
-      })
-      .catch(error => {
-        console.log('[STOOA] Error getting participants', error);
-      });
-  };
-
   const createPlaceholderParticipants = () => {
     const placeholderParticipants = [];
 
@@ -68,6 +54,20 @@ const PreFishbowlParticipants = () => {
   };
 
   useEffect(() => {
+    const pingParticipant = () => {
+      ping(lang, fid as string);
+    };
+
+    const getApiParticipants = () => {
+      getApiParticipantList(lang, fid as string)
+        .then(participantList => {
+          setParticipants(participantList);
+        })
+        .catch(error => {
+          console.log('[STOOA] Error getting participants', error);
+        });
+    };
+
     pingInterval.current = window.setInterval(pingParticipant, PING_TIMEOUT);
     getParticipantsInterval.current = window.setInterval(getApiParticipants, PING_TIMEOUT);
 
@@ -78,7 +78,7 @@ const PreFishbowlParticipants = () => {
       window.clearInterval(pingInterval.current);
       window.clearInterval(getParticipantsInterval.current);
     };
-  }, []);
+  }, [fid, lang]);
 
   useEffect(() => {
     const placeholderParticipantsToPrint = MAX_PLACEHOLDER_PARTICIPANTS - participants.length;

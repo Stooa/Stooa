@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -28,21 +28,21 @@ const Avatar: React.FC = () => {
   const { user, logout } = useAuth();
   const { t } = useTranslation('common');
 
-  const toggleDropdown = () => setActive(!active);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      toggleDropdown();
-    }
-  };
+  const toggleDropdown = useCallback(() => setActive(!active), [active]);
 
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        toggleDropdown();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [wrapperRef, active, toggleDropdown]);
 
   return (
     <AvatarStyled ref={wrapperRef}>

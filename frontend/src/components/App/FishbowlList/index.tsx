@@ -70,30 +70,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
         }
       });
     }
-  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const params = new URLSearchParams([
-    ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
-  ]);
-
-  const getFishbowls = async () => {
-    const auth = await getAuthToken();
-
-    api
-      .get(`/fishbowls`, {
-        headers: {
-          authorization: `${auth ? auth.authorizationString : null}`
-        },
-        params
-      })
-      .then(response => {
-        setFishbowls(response.data);
-      })
-      .catch(error => {
-        console.error('[STOOA] Fishbowl list error', error);
-        router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
-      });
-  };
+  }, [fishbowls, selectedFishbowlParam]);
 
   const handleUpdateFishbowl = updatedFishbowl => {
     setFishbowls(currentFishbowls => {
@@ -108,8 +85,29 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   useEffect(() => {
+    const getFishbowls = async () => {
+      const auth = await getAuthToken();
+
+      api
+        .get(`/fishbowls`, {
+          headers: {
+            authorization: `${auth ? auth.authorizationString : null}`
+          },
+          params: new URLSearchParams([
+            ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
+          ])
+        })
+        .then(response => {
+          setFishbowls(response.data);
+        })
+        .catch(error => {
+          console.error('[STOOA] Fishbowl list error', error);
+          router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+        });
+    };
+
     getFishbowls();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lang, router]);
 
   if (!fishbowls) {
     return <LoadingIcon />;

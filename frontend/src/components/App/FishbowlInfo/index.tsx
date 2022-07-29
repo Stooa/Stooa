@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 import Dots from '@/ui/svg/dots.svg';
@@ -24,7 +24,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
   const wrapperRef = useRef(null);
   const [active, setActive] = useState(false);
 
-  const toggleInfo = () => {
+  const toggleInfo = useCallback(() => {
     pushEventDataLayer({
       action: active ? 'Info close' : 'Info open',
       category: 'Header',
@@ -32,7 +32,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
     });
 
     setActive(!active);
-  };
+  }, [active]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -46,7 +46,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [wrapperRef, active, toggleInfo]);
 
   return (
     <InfoStyled ref={wrapperRef}>

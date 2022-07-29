@@ -150,7 +150,7 @@ const DevicesProvider = ({ children }) => {
       .catch(err => {
         console.error('[STOOA] Error getting permissions:', err);
       });
-  }, [devices]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [audioInputDevice, audioOutputDevice, devices, videoDevice]);
 
   useEffect(() => {
     devicesRepository.loadDevices(_devicesChangedEvent);

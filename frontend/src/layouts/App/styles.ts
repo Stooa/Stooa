@@ -65,7 +65,6 @@ const Header = styled.header`
   color: ${COLOR_NEUTRO_700};
 
   ${media.max('tablet')`
-
       min-height: ${space(16)};
 
     &.prefishbowl{

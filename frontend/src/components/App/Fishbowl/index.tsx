@@ -61,7 +61,7 @@ const Fishbowl: FC = () => {
       category: 'FishbowlReactions',
       label: 'Connect'
     });
-  }, []);
+  }, [fid]);
 
   return (
     <>

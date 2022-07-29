@@ -131,16 +131,6 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
     else showSlide(0);
   }, [showOnBoardingModal]);
 
-  // useEffect(() => {
-  //   if (fishbowlData.hasIntroduction) {
-  //     setOnBoardingData(onBoardingDataWithIntroduction[isModerator ? 'moderator' : 'participant']);
-  //   } else {
-  //     setOnBoardingData(
-  //       onBoardingDataWithoutIntroduction[isModerator ? 'moderator' : 'participant']
-  //     );
-  //   }
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <Slider>
       <SlickSlider {...SLIDE_SETTINGS} ref={sliderRef}>

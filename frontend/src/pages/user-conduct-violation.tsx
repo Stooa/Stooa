@@ -28,7 +28,7 @@ const UserConductViolationPage = () => {
       prejoin: true,
       conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Layout title={t('pageTitle')}>

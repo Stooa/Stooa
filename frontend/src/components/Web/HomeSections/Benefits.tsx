@@ -34,7 +34,7 @@ const Benefits = ({ item }: Props): JSX.Element => {
       autoplay: true,
       assetsPath: `img/animations/${item.path}/`
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [item]);
 
   return (
     <Wrapper>
