@@ -70,7 +70,7 @@ type AuthProviderProps = {
 };
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const router = useRouter();
   const { lang } = useTranslation();
   const [user, setUser] = useState<User | null>(null);

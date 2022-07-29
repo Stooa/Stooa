@@ -20,7 +20,7 @@ type TProps = {
 };
 
 const AuthUser = ({ name }: TProps) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const { t } = useTranslation('form');
 
   const handleOnSubmit = () => {

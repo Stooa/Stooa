@@ -21,7 +21,7 @@ import { useStateValue } from '@/contexts/AppContext';
 const withIsFishbowlEnded = WrappedComponent => props => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const router = useRouter();
   const { lang } = useTranslation();
   const { fid } = router.query;

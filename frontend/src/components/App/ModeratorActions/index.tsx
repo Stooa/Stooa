@@ -30,7 +30,7 @@ interface Props {
 }
 
 const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
   const [running, setRunning] = useState(false);
