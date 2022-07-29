@@ -65,7 +65,7 @@ export const Counter = ({
     setFishbowlDate(getDateByStatus());
 
     return () => clearInterval(intervalTimer);
-  }, [conferenceStatus, getDateByStatus, intervalTimer]);
+  }, [conferenceStatus, getDateByStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const rendererCountdown = (): string => {
