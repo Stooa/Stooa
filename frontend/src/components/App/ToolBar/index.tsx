@@ -80,20 +80,29 @@ const ToolBar: React.FC = () => {
   };
 
   const handleMic = () => {
-    configButtonRef.current?.handleShowDevices(false);
+    if (configButtonRef.current) {
+      configButtonRef.current.handleShowDevices(false);
+    }
+
     tracksRepository.toggleAudioTrack();
   };
 
   const handleVideo = () => {
-    configButtonRef.current?.handleShowDevices(false);
+    if (configButtonRef.current) {
+      configButtonRef.current.handleShowDevices(false);
+    }
+
     tracksRepository.toggleVideoTrack();
   };
 
   const handleOutsideClick = event => {
-    if (typeof event.target.className === 'string') {
-      if (event.target.id !== 'config-button' && !event.target.className?.includes('device')) {
-        configButtonRef.current?.handleShowDevices(false);
-      }
+    if (
+      configButtonRef.current &&
+      typeof event.target.className === 'string' &&
+      event.target.id !== 'config-button' &&
+      !event.target.className?.includes('device')
+    ) {
+      configButtonRef.current.handleShowDevices(false);
     }
   };
 
