@@ -39,7 +39,7 @@ import { StooaContextValues } from '@/types/stooa-context';
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
-import { createGenericContext } from './createGenericContext';
+import createGenericContext from '@/contexts/createGenericContext';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;

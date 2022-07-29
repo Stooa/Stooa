@@ -9,7 +9,7 @@
 
 import React, { useReducer, Dispatch, Reducer } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
-import { createGenericContext } from './createGenericContext';
+import createGenericContext from '@/contexts/createGenericContext';
 
 const FISHBOWL_STARTED = 'FISHBOWL_STARTED';
 const FISHBOWL_READY = 'FISHBOWL_READY';

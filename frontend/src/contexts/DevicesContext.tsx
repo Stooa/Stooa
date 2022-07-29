@@ -14,7 +14,7 @@ import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
 import useEventListener from '@/hooks/useEventListener';
 import { PERMISSION_CHANGED } from '@/jitsi/Events';
-import { createGenericContext } from './createGenericContext';
+import createGenericContext from '@/contexts/createGenericContext';
 
 const [useDevices, DevicesContextProvider] = createGenericContext<DevicesCtx>();
 

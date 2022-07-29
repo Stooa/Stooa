@@ -44,7 +44,7 @@ import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { User } from '@/types/user';
 import { useStateValue } from '@/contexts/AppContext';
-import { createGenericContext } from './createGenericContext';
+import createGenericContext from '@/contexts/createGenericContext';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
