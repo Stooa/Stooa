@@ -124,7 +124,7 @@ export const Counter = ({
     }
 
     return () => clearInterval(intervalTimer);
-  }, [fishbowlDate, completedTime, timeStatus, intervalTimer, conferenceStatus, isModerator, t]);
+  }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <span {...props} className="body-xs medium counter">
