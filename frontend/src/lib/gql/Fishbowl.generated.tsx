@@ -1,3 +1,12 @@
+/*!
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import * as Types from '../../types/graphql-codegen/types';
 
 import { gql } from '@apollo/client';
@@ -7,84 +16,145 @@ export type CreateFishbowlMutationVariables = Types.Exact<{
   input: Types.CreateFishbowlInput;
 }>;
 
-
-export type CreateFishbowlMutation = { createFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'id' | 'name' | 'slug' | 'description' | 'locale' | 'startDateTimeTz' | 'endDateTimeTz' | 'isFishbowlNow' | 'hasIntroduction'>> }> };
+export type CreateFishbowlMutation = {
+  createFishbowl?: Types.Maybe<{
+    fishbowl?: Types.Maybe<
+      Pick<
+        Types.Fishbowl,
+        | 'id'
+        | 'name'
+        | 'slug'
+        | 'description'
+        | 'locale'
+        | 'startDateTimeTz'
+        | 'endDateTimeTz'
+        | 'isFishbowlNow'
+        | 'hasIntroduction'
+      >
+    >;
+  }>;
+};
 
 export type UpdateFishbowlMutationVariables = Types.Exact<{
   input: Types.UpdateFishbowlInput;
 }>;
 
-
-export type UpdateFishbowlMutation = { updateFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'id' | 'name' | 'description' | 'startDateTimeTz' | 'timezone' | 'locale' | 'duration' | 'durationFormatted' | 'isFishbowlNow' | 'hasIntroduction'>> }> };
+export type UpdateFishbowlMutation = {
+  updateFishbowl?: Types.Maybe<{
+    fishbowl?: Types.Maybe<
+      Pick<
+        Types.Fishbowl,
+        | 'id'
+        | 'name'
+        | 'description'
+        | 'startDateTimeTz'
+        | 'timezone'
+        | 'locale'
+        | 'duration'
+        | 'durationFormatted'
+        | 'isFishbowlNow'
+        | 'hasIntroduction'
+      >
+    >;
+  }>;
+};
 
 export type BySlugQueryFishbowlQueryVariables = Types.Exact<{
   slug: Types.Scalars['String'];
 }>;
 
-
-export type BySlugQueryFishbowlQuery = { bySlugQueryFishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'id' | 'name' | 'slug' | 'description' | 'locale' | 'startDateTimeTz' | 'endDateTimeTz' | 'durationFormatted' | 'isFishbowlNow' | 'hasIntroduction' | 'currentStatus'>> };
+export type BySlugQueryFishbowlQuery = {
+  bySlugQueryFishbowl?: Types.Maybe<
+    Pick<
+      Types.Fishbowl,
+      | 'id'
+      | 'name'
+      | 'slug'
+      | 'description'
+      | 'locale'
+      | 'startDateTimeTz'
+      | 'endDateTimeTz'
+      | 'durationFormatted'
+      | 'isFishbowlNow'
+      | 'hasIntroduction'
+      | 'currentStatus'
+    >
+  >;
+};
 
 export type IsCreatorOfFishbowlQueryVariables = Types.Exact<{
   slug: Types.Scalars['String'];
 }>;
 
-
-export type IsCreatorOfFishbowlQuery = { isCreatorOfFishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> };
+export type IsCreatorOfFishbowlQuery = {
+  isCreatorOfFishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>>;
+};
 
 export type NoIntroRunFishbowlMutationVariables = Types.Exact<{
   input: Types.NoIntroRunFishbowlInput;
 }>;
 
-
-export type NoIntroRunFishbowlMutation = { noIntroRunFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> }> };
+export type NoIntroRunFishbowlMutation = {
+  noIntroRunFishbowl?: Types.Maybe<{
+    fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>>;
+  }>;
+};
 
 export type IntroduceFishbowlMutationVariables = Types.Exact<{
   input: Types.IntroduceFishbowlInput;
 }>;
 
-
-export type IntroduceFishbowlMutation = { introduceFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> }> };
+export type IntroduceFishbowlMutation = {
+  introduceFishbowl?: Types.Maybe<{
+    fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>>;
+  }>;
+};
 
 export type RunFishbowlMutationVariables = Types.Exact<{
   input: Types.RunFishbowlInput;
 }>;
 
-
-export type RunFishbowlMutation = { runFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> }> };
+export type RunFishbowlMutation = {
+  runFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> }>;
+};
 
 export type FinishFishbowlMutationVariables = Types.Exact<{
   input: Types.FinishFishbowlInput;
 }>;
 
-
-export type FinishFishbowlMutation = { finishFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> }> };
+export type FinishFishbowlMutation = {
+  finishFishbowl?: Types.Maybe<{ fishbowl?: Types.Maybe<Pick<Types.Fishbowl, 'currentStatus'>> }>;
+};
 
 export type CreateGuestMutationVariables = Types.Exact<{
   input: Types.CreateGuestInput;
 }>;
 
-
-export type CreateGuestMutation = { createGuest?: Types.Maybe<{ guest?: Types.Maybe<Pick<Types.Guest, 'id'>> }> };
-
+export type CreateGuestMutation = {
+  createGuest?: Types.Maybe<{ guest?: Types.Maybe<Pick<Types.Guest, 'id'>> }>;
+};
 
 export const CreateFishbowlDocument = gql`
-    mutation CreateFishbowl($input: createFishbowlInput!) {
-  createFishbowl(input: $input) {
-    fishbowl {
-      id
-      name
-      slug
-      description
-      locale
-      startDateTimeTz
-      endDateTimeTz
-      isFishbowlNow
-      hasIntroduction
+  mutation CreateFishbowl($input: createFishbowlInput!) {
+    createFishbowl(input: $input) {
+      fishbowl {
+        id
+        name
+        slug
+        description
+        locale
+        startDateTimeTz
+        endDateTimeTz
+        isFishbowlNow
+        hasIntroduction
+      }
     }
   }
-}
-    `;
-export type CreateFishbowlMutationFn = Apollo.MutationFunction<CreateFishbowlMutation, CreateFishbowlMutationVariables>;
+`;
+export type CreateFishbowlMutationFn = Apollo.MutationFunction<
+  CreateFishbowlMutation,
+  CreateFishbowlMutationVariables
+>;
 
 /**
  * __useCreateFishbowlMutation__
@@ -103,32 +173,43 @@ export type CreateFishbowlMutationFn = Apollo.MutationFunction<CreateFishbowlMut
  *   },
  * });
  */
-export function useCreateFishbowlMutation(baseOptions?: Apollo.MutationHookOptions<CreateFishbowlMutation, CreateFishbowlMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateFishbowlMutation, CreateFishbowlMutationVariables>(CreateFishbowlDocument, options);
-      }
+export function useCreateFishbowlMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateFishbowlMutation, CreateFishbowlMutationVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateFishbowlMutation, CreateFishbowlMutationVariables>(
+    CreateFishbowlDocument,
+    options
+  );
+}
 export type CreateFishbowlMutationHookResult = ReturnType<typeof useCreateFishbowlMutation>;
 export type CreateFishbowlMutationResult = Apollo.MutationResult<CreateFishbowlMutation>;
-export type CreateFishbowlMutationOptions = Apollo.BaseMutationOptions<CreateFishbowlMutation, CreateFishbowlMutationVariables>;
+export type CreateFishbowlMutationOptions = Apollo.BaseMutationOptions<
+  CreateFishbowlMutation,
+  CreateFishbowlMutationVariables
+>;
 export const UpdateFishbowlDocument = gql`
-    mutation UpdateFishbowl($input: updateFishbowlInput!) {
-  updateFishbowl(input: $input) {
-    fishbowl {
-      id
-      name
-      description
-      startDateTimeTz
-      timezone
-      locale
-      duration
-      durationFormatted
-      isFishbowlNow
-      hasIntroduction
+  mutation UpdateFishbowl($input: updateFishbowlInput!) {
+    updateFishbowl(input: $input) {
+      fishbowl {
+        id
+        name
+        description
+        startDateTimeTz
+        timezone
+        locale
+        duration
+        durationFormatted
+        isFishbowlNow
+        hasIntroduction
+      }
     }
   }
-}
-    `;
-export type UpdateFishbowlMutationFn = Apollo.MutationFunction<UpdateFishbowlMutation, UpdateFishbowlMutationVariables>;
+`;
+export type UpdateFishbowlMutationFn = Apollo.MutationFunction<
+  UpdateFishbowlMutation,
+  UpdateFishbowlMutationVariables
+>;
 
 /**
  * __useUpdateFishbowlMutation__
@@ -147,31 +228,39 @@ export type UpdateFishbowlMutationFn = Apollo.MutationFunction<UpdateFishbowlMut
  *   },
  * });
  */
-export function useUpdateFishbowlMutation(baseOptions?: Apollo.MutationHookOptions<UpdateFishbowlMutation, UpdateFishbowlMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateFishbowlMutation, UpdateFishbowlMutationVariables>(UpdateFishbowlDocument, options);
-      }
+export function useUpdateFishbowlMutation(
+  baseOptions?: Apollo.MutationHookOptions<UpdateFishbowlMutation, UpdateFishbowlMutationVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateFishbowlMutation, UpdateFishbowlMutationVariables>(
+    UpdateFishbowlDocument,
+    options
+  );
+}
 export type UpdateFishbowlMutationHookResult = ReturnType<typeof useUpdateFishbowlMutation>;
 export type UpdateFishbowlMutationResult = Apollo.MutationResult<UpdateFishbowlMutation>;
-export type UpdateFishbowlMutationOptions = Apollo.BaseMutationOptions<UpdateFishbowlMutation, UpdateFishbowlMutationVariables>;
+export type UpdateFishbowlMutationOptions = Apollo.BaseMutationOptions<
+  UpdateFishbowlMutation,
+  UpdateFishbowlMutationVariables
+>;
 export const BySlugQueryFishbowlDocument = gql`
-    query BySlugQueryFishbowl($slug: String!) {
-  bySlugQueryFishbowl(slug: $slug) {
-    id
-    name
-    slug
-    description
-    locale
-    startDateTimeTz
-    endDateTimeTz
-    durationFormatted
-    slug
-    isFishbowlNow
-    hasIntroduction
-    currentStatus
+  query BySlugQueryFishbowl($slug: String!) {
+    bySlugQueryFishbowl(slug: $slug) {
+      id
+      name
+      slug
+      description
+      locale
+      startDateTimeTz
+      endDateTimeTz
+      durationFormatted
+      slug
+      isFishbowlNow
+      hasIntroduction
+      currentStatus
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useBySlugQueryFishbowlQuery__
@@ -189,24 +278,42 @@ export const BySlugQueryFishbowlDocument = gql`
  *   },
  * });
  */
-export function useBySlugQueryFishbowlQuery(baseOptions: Apollo.QueryHookOptions<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>(BySlugQueryFishbowlDocument, options);
-      }
-export function useBySlugQueryFishbowlLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>(BySlugQueryFishbowlDocument, options);
-        }
-export type BySlugQueryFishbowlQueryHookResult = ReturnType<typeof useBySlugQueryFishbowlQuery>;
-export type BySlugQueryFishbowlLazyQueryHookResult = ReturnType<typeof useBySlugQueryFishbowlLazyQuery>;
-export type BySlugQueryFishbowlQueryResult = Apollo.QueryResult<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>;
-export const IsCreatorOfFishbowlDocument = gql`
-    query IsCreatorOfFishbowl($slug: String!) {
-  isCreatorOfFishbowl(slug: $slug) {
-    currentStatus
-  }
+export function useBySlugQueryFishbowlQuery(
+  baseOptions: Apollo.QueryHookOptions<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>(
+    BySlugQueryFishbowlDocument,
+    options
+  );
 }
-    `;
+export function useBySlugQueryFishbowlLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    BySlugQueryFishbowlQuery,
+    BySlugQueryFishbowlQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<BySlugQueryFishbowlQuery, BySlugQueryFishbowlQueryVariables>(
+    BySlugQueryFishbowlDocument,
+    options
+  );
+}
+export type BySlugQueryFishbowlQueryHookResult = ReturnType<typeof useBySlugQueryFishbowlQuery>;
+export type BySlugQueryFishbowlLazyQueryHookResult = ReturnType<
+  typeof useBySlugQueryFishbowlLazyQuery
+>;
+export type BySlugQueryFishbowlQueryResult = Apollo.QueryResult<
+  BySlugQueryFishbowlQuery,
+  BySlugQueryFishbowlQueryVariables
+>;
+export const IsCreatorOfFishbowlDocument = gql`
+  query IsCreatorOfFishbowl($slug: String!) {
+    isCreatorOfFishbowl(slug: $slug) {
+      currentStatus
+    }
+  }
+`;
 
 /**
  * __useIsCreatorOfFishbowlQuery__
@@ -224,27 +331,48 @@ export const IsCreatorOfFishbowlDocument = gql`
  *   },
  * });
  */
-export function useIsCreatorOfFishbowlQuery(baseOptions: Apollo.QueryHookOptions<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>(IsCreatorOfFishbowlDocument, options);
-      }
-export function useIsCreatorOfFishbowlLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>(IsCreatorOfFishbowlDocument, options);
-        }
+export function useIsCreatorOfFishbowlQuery(
+  baseOptions: Apollo.QueryHookOptions<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>(
+    IsCreatorOfFishbowlDocument,
+    options
+  );
+}
+export function useIsCreatorOfFishbowlLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    IsCreatorOfFishbowlQuery,
+    IsCreatorOfFishbowlQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>(
+    IsCreatorOfFishbowlDocument,
+    options
+  );
+}
 export type IsCreatorOfFishbowlQueryHookResult = ReturnType<typeof useIsCreatorOfFishbowlQuery>;
-export type IsCreatorOfFishbowlLazyQueryHookResult = ReturnType<typeof useIsCreatorOfFishbowlLazyQuery>;
-export type IsCreatorOfFishbowlQueryResult = Apollo.QueryResult<IsCreatorOfFishbowlQuery, IsCreatorOfFishbowlQueryVariables>;
+export type IsCreatorOfFishbowlLazyQueryHookResult = ReturnType<
+  typeof useIsCreatorOfFishbowlLazyQuery
+>;
+export type IsCreatorOfFishbowlQueryResult = Apollo.QueryResult<
+  IsCreatorOfFishbowlQuery,
+  IsCreatorOfFishbowlQueryVariables
+>;
 export const NoIntroRunFishbowlDocument = gql`
-    mutation NoIntroRunFishbowl($input: noIntroRunFishbowlInput!) {
-  noIntroRunFishbowl(input: $input) {
-    fishbowl {
-      currentStatus
+  mutation NoIntroRunFishbowl($input: noIntroRunFishbowlInput!) {
+    noIntroRunFishbowl(input: $input) {
+      fishbowl {
+        currentStatus
+      }
     }
   }
-}
-    `;
-export type NoIntroRunFishbowlMutationFn = Apollo.MutationFunction<NoIntroRunFishbowlMutation, NoIntroRunFishbowlMutationVariables>;
+`;
+export type NoIntroRunFishbowlMutationFn = Apollo.MutationFunction<
+  NoIntroRunFishbowlMutation,
+  NoIntroRunFishbowlMutationVariables
+>;
 
 /**
  * __useNoIntroRunFishbowlMutation__
@@ -263,23 +391,37 @@ export type NoIntroRunFishbowlMutationFn = Apollo.MutationFunction<NoIntroRunFis
  *   },
  * });
  */
-export function useNoIntroRunFishbowlMutation(baseOptions?: Apollo.MutationHookOptions<NoIntroRunFishbowlMutation, NoIntroRunFishbowlMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<NoIntroRunFishbowlMutation, NoIntroRunFishbowlMutationVariables>(NoIntroRunFishbowlDocument, options);
-      }
+export function useNoIntroRunFishbowlMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    NoIntroRunFishbowlMutation,
+    NoIntroRunFishbowlMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<NoIntroRunFishbowlMutation, NoIntroRunFishbowlMutationVariables>(
+    NoIntroRunFishbowlDocument,
+    options
+  );
+}
 export type NoIntroRunFishbowlMutationHookResult = ReturnType<typeof useNoIntroRunFishbowlMutation>;
 export type NoIntroRunFishbowlMutationResult = Apollo.MutationResult<NoIntroRunFishbowlMutation>;
-export type NoIntroRunFishbowlMutationOptions = Apollo.BaseMutationOptions<NoIntroRunFishbowlMutation, NoIntroRunFishbowlMutationVariables>;
+export type NoIntroRunFishbowlMutationOptions = Apollo.BaseMutationOptions<
+  NoIntroRunFishbowlMutation,
+  NoIntroRunFishbowlMutationVariables
+>;
 export const IntroduceFishbowlDocument = gql`
-    mutation IntroduceFishbowl($input: introduceFishbowlInput!) {
-  introduceFishbowl(input: $input) {
-    fishbowl {
-      currentStatus
+  mutation IntroduceFishbowl($input: introduceFishbowlInput!) {
+    introduceFishbowl(input: $input) {
+      fishbowl {
+        currentStatus
+      }
     }
   }
-}
-    `;
-export type IntroduceFishbowlMutationFn = Apollo.MutationFunction<IntroduceFishbowlMutation, IntroduceFishbowlMutationVariables>;
+`;
+export type IntroduceFishbowlMutationFn = Apollo.MutationFunction<
+  IntroduceFishbowlMutation,
+  IntroduceFishbowlMutationVariables
+>;
 
 /**
  * __useIntroduceFishbowlMutation__
@@ -298,23 +440,37 @@ export type IntroduceFishbowlMutationFn = Apollo.MutationFunction<IntroduceFishb
  *   },
  * });
  */
-export function useIntroduceFishbowlMutation(baseOptions?: Apollo.MutationHookOptions<IntroduceFishbowlMutation, IntroduceFishbowlMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<IntroduceFishbowlMutation, IntroduceFishbowlMutationVariables>(IntroduceFishbowlDocument, options);
-      }
+export function useIntroduceFishbowlMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    IntroduceFishbowlMutation,
+    IntroduceFishbowlMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<IntroduceFishbowlMutation, IntroduceFishbowlMutationVariables>(
+    IntroduceFishbowlDocument,
+    options
+  );
+}
 export type IntroduceFishbowlMutationHookResult = ReturnType<typeof useIntroduceFishbowlMutation>;
 export type IntroduceFishbowlMutationResult = Apollo.MutationResult<IntroduceFishbowlMutation>;
-export type IntroduceFishbowlMutationOptions = Apollo.BaseMutationOptions<IntroduceFishbowlMutation, IntroduceFishbowlMutationVariables>;
+export type IntroduceFishbowlMutationOptions = Apollo.BaseMutationOptions<
+  IntroduceFishbowlMutation,
+  IntroduceFishbowlMutationVariables
+>;
 export const RunFishbowlDocument = gql`
-    mutation RunFishbowl($input: runFishbowlInput!) {
-  runFishbowl(input: $input) {
-    fishbowl {
-      currentStatus
+  mutation RunFishbowl($input: runFishbowlInput!) {
+    runFishbowl(input: $input) {
+      fishbowl {
+        currentStatus
+      }
     }
   }
-}
-    `;
-export type RunFishbowlMutationFn = Apollo.MutationFunction<RunFishbowlMutation, RunFishbowlMutationVariables>;
+`;
+export type RunFishbowlMutationFn = Apollo.MutationFunction<
+  RunFishbowlMutation,
+  RunFishbowlMutationVariables
+>;
 
 /**
  * __useRunFishbowlMutation__
@@ -333,23 +489,34 @@ export type RunFishbowlMutationFn = Apollo.MutationFunction<RunFishbowlMutation,
  *   },
  * });
  */
-export function useRunFishbowlMutation(baseOptions?: Apollo.MutationHookOptions<RunFishbowlMutation, RunFishbowlMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RunFishbowlMutation, RunFishbowlMutationVariables>(RunFishbowlDocument, options);
-      }
+export function useRunFishbowlMutation(
+  baseOptions?: Apollo.MutationHookOptions<RunFishbowlMutation, RunFishbowlMutationVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<RunFishbowlMutation, RunFishbowlMutationVariables>(
+    RunFishbowlDocument,
+    options
+  );
+}
 export type RunFishbowlMutationHookResult = ReturnType<typeof useRunFishbowlMutation>;
 export type RunFishbowlMutationResult = Apollo.MutationResult<RunFishbowlMutation>;
-export type RunFishbowlMutationOptions = Apollo.BaseMutationOptions<RunFishbowlMutation, RunFishbowlMutationVariables>;
+export type RunFishbowlMutationOptions = Apollo.BaseMutationOptions<
+  RunFishbowlMutation,
+  RunFishbowlMutationVariables
+>;
 export const FinishFishbowlDocument = gql`
-    mutation FinishFishbowl($input: finishFishbowlInput!) {
-  finishFishbowl(input: $input) {
-    fishbowl {
-      currentStatus
+  mutation FinishFishbowl($input: finishFishbowlInput!) {
+    finishFishbowl(input: $input) {
+      fishbowl {
+        currentStatus
+      }
     }
   }
-}
-    `;
-export type FinishFishbowlMutationFn = Apollo.MutationFunction<FinishFishbowlMutation, FinishFishbowlMutationVariables>;
+`;
+export type FinishFishbowlMutationFn = Apollo.MutationFunction<
+  FinishFishbowlMutation,
+  FinishFishbowlMutationVariables
+>;
 
 /**
  * __useFinishFishbowlMutation__
@@ -368,23 +535,34 @@ export type FinishFishbowlMutationFn = Apollo.MutationFunction<FinishFishbowlMut
  *   },
  * });
  */
-export function useFinishFishbowlMutation(baseOptions?: Apollo.MutationHookOptions<FinishFishbowlMutation, FinishFishbowlMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<FinishFishbowlMutation, FinishFishbowlMutationVariables>(FinishFishbowlDocument, options);
-      }
+export function useFinishFishbowlMutation(
+  baseOptions?: Apollo.MutationHookOptions<FinishFishbowlMutation, FinishFishbowlMutationVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<FinishFishbowlMutation, FinishFishbowlMutationVariables>(
+    FinishFishbowlDocument,
+    options
+  );
+}
 export type FinishFishbowlMutationHookResult = ReturnType<typeof useFinishFishbowlMutation>;
 export type FinishFishbowlMutationResult = Apollo.MutationResult<FinishFishbowlMutation>;
-export type FinishFishbowlMutationOptions = Apollo.BaseMutationOptions<FinishFishbowlMutation, FinishFishbowlMutationVariables>;
+export type FinishFishbowlMutationOptions = Apollo.BaseMutationOptions<
+  FinishFishbowlMutation,
+  FinishFishbowlMutationVariables
+>;
 export const CreateGuestDocument = gql`
-    mutation CreateGuest($input: createGuestInput!) {
-  createGuest(input: $input) {
-    guest {
-      id
+  mutation CreateGuest($input: createGuestInput!) {
+    createGuest(input: $input) {
+      guest {
+        id
+      }
     }
   }
-}
-    `;
-export type CreateGuestMutationFn = Apollo.MutationFunction<CreateGuestMutation, CreateGuestMutationVariables>;
+`;
+export type CreateGuestMutationFn = Apollo.MutationFunction<
+  CreateGuestMutation,
+  CreateGuestMutationVariables
+>;
 
 /**
  * __useCreateGuestMutation__
@@ -403,10 +581,18 @@ export type CreateGuestMutationFn = Apollo.MutationFunction<CreateGuestMutation,
  *   },
  * });
  */
-export function useCreateGuestMutation(baseOptions?: Apollo.MutationHookOptions<CreateGuestMutation, CreateGuestMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateGuestMutation, CreateGuestMutationVariables>(CreateGuestDocument, options);
-      }
+export function useCreateGuestMutation(
+  baseOptions?: Apollo.MutationHookOptions<CreateGuestMutation, CreateGuestMutationVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateGuestMutation, CreateGuestMutationVariables>(
+    CreateGuestDocument,
+    options
+  );
+}
 export type CreateGuestMutationHookResult = ReturnType<typeof useCreateGuestMutation>;
 export type CreateGuestMutationResult = Apollo.MutationResult<CreateGuestMutation>;
-export type CreateGuestMutationOptions = Apollo.BaseMutationOptions<CreateGuestMutation, CreateGuestMutationVariables>;
+export type CreateGuestMutationOptions = Apollo.BaseMutationOptions<
+  CreateGuestMutation,
+  CreateGuestMutationVariables
+>;

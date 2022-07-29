@@ -1,8 +1,6 @@
 schema: https://localhost:8443/graphql
 documents: "src/lib/gql/!(*.generated).js"
 generates:
-    src/fragment-matcher.ts:
-        - fragment-matcher
     src/types/graphql-codegen/types.ts:
         - typescript
     src/:
