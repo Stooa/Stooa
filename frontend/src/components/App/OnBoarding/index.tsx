@@ -17,16 +17,26 @@ import { useStooa } from '@/contexts/StooaManager';
 
 const OnBoarding = () => {
   const {
+    isModerator,
     activeOnBoardingTooltip,
     setActiveOnBoardingTooltip,
     toggleOnBoarding,
-    setOnBoardingTooltipSeen
+    setOnBoardingTooltipSeen,
+    setShowOnBoardingTour
   } = useStooa();
   const { t } = useTranslation('on-boarding');
 
+  const handleClick = (): void => {
+    if (isModerator) {
+      toggleOnBoarding('header');
+    } else {
+      setShowOnBoardingTour(true);
+    }
+  };
+
   return (
     <OnboardingWrapper>
-      <Icon onClick={() => toggleOnBoarding('header')}>
+      <Icon onClick={handleClick}>
         <QuestionMark />
       </Icon>
       {activeOnBoardingTooltip && (
