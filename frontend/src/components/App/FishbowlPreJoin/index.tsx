@@ -67,8 +67,12 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   const handleParentClick = event => {
-    if (event.target.id !== 'config-button' && !event.target.className.includes('device')) {
-      configButtonRef.current?.handleShowDevices(false);
+    if (
+      configButtonRef.current &&
+      event.target.id !== 'config-button' &&
+      !event.target.className.includes('device')
+    ) {
+      configButtonRef.current.handleShowDevices(false);
     }
   };
 
