@@ -21,7 +21,7 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import { Fishbowl } from '@/types/graphql-codegen/types';
 
 interface Props {
-  data: Fishbowl;
+  data: Pick<Fishbowl, 'slug' | 'locale' | 'startDateTimeTz'>;
   joinAsGuest?: () => void;
   isCreator?: boolean;
 }

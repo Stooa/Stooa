@@ -16,8 +16,8 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 export const makeGQLTomorrowFishbowl = (): Fishbowl => {
   return {
+    _id: 'fishbowl/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
     id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-    type: 'Fishbowl',
     name: faker.lorem.words(3),
     description: faker.lorem.words(10),
     slug: 'test-fishbowl',
@@ -34,16 +34,18 @@ export const makeGQLTomorrowFishbowl = (): Fishbowl => {
     currentStatus: 'not_started',
     isFishbowlNow: true,
     hasIntroduction: false,
+    startDateTime: tomorrow.toString(),
     startDateTimeTz: tomorrow.toString(),
     endDateTimeTz: tomorrow.toString(),
+    duration: '03:00',
     durationFormatted: '03:00'
   };
 };
 
 export const makeGQLCurrentFishbowl = (): Fishbowl => {
   return {
+    _id: 'fishbowl/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
     id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-    type: 'Fishbowl',
     name: faker.lorem.words(3),
     description: faker.lorem.words(10),
     slug: 'test-fishbowl',
@@ -60,8 +62,10 @@ export const makeGQLCurrentFishbowl = (): Fishbowl => {
     currentStatus: 'not_started',
     isFishbowlNow: true,
     hasIntroduction: false,
+    startDateTime: tomorrow.toString(),
     startDateTimeTz: today.toString(),
     endDateTimeTz: tomorrow.toString(),
+    duration: '02:00',
     durationFormatted: '02:00'
   };
 };

@@ -26,7 +26,10 @@ import { ROUTE_FISHBOWL } from '@/app.config';
 import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
-  data: Fishbowl;
+  data: Pick<
+    Fishbowl,
+    'name' | 'slug' | 'locale' | 'description' | 'startDateTimeTz' | 'endDateTimeTz'
+  >;
 }
 
 const FishbowlDetail: React.FC<Props> = ({ data }) => {

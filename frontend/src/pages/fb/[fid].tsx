@@ -21,6 +21,7 @@ import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useBySlugQueryFishbowlQuery } from '@/graphql/Fishbowl.generated';
+import { Fishbowl } from '@/types/graphql-codegen/types';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });

@@ -1,12 +1,3 @@
-/*!
- * This file is part of the Stooa codebase.
- *
- * (c) 2020 - present Runroom SL
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 import * as Types from '../../types/graphql-codegen/types';
 
 import { gql } from '@apollo/client';
@@ -16,51 +7,34 @@ export type CreateResetPasswordMutationVariables = Types.Exact<{
   input: Types.CreateResetPasswordInput;
 }>;
 
-export type CreateResetPasswordMutation = {
-  __typename?: 'Mutation';
-  createResetPassword?: {
-    __typename?: 'createResetPasswordPayload';
-    resetPassword?: { __typename?: 'ResetPassword'; email: string } | null;
-  } | null;
-};
+
+export type CreateResetPasswordMutation = { createResetPassword?: Types.Maybe<{ resetPassword?: Types.Maybe<Pick<Types.ResetPassword, 'email'>> }> };
 
 export type ChangePasswordMutationVariables = Types.Exact<{
   input: Types.ChangePasswordUserInput;
 }>;
 
-export type ChangePasswordMutation = {
-  __typename?: 'Mutation';
-  changePasswordUser?: {
-    __typename?: 'changePasswordUserPayload';
-    user?: { __typename?: 'UserItem'; email: string } | null;
-  } | null;
-};
+
+export type ChangePasswordMutation = { changePasswordUser?: Types.Maybe<{ user?: Types.Maybe<Pick<Types.UserItem, 'email'>> }> };
 
 export type ChangePasswordLoggedMutationVariables = Types.Exact<{
   input: Types.ChangePasswordLoggedUserInput;
 }>;
 
-export type ChangePasswordLoggedMutation = {
-  __typename?: 'Mutation';
-  changePasswordLoggedUser?: {
-    __typename?: 'changePasswordLoggedUserPayload';
-    user?: { __typename?: 'UserItem'; email: string } | null;
-  } | null;
-};
+
+export type ChangePasswordLoggedMutation = { changePasswordLoggedUser?: Types.Maybe<{ user?: Types.Maybe<Pick<Types.UserItem, 'email'>> }> };
+
 
 export const CreateResetPasswordDocument = gql`
-  mutation CreateResetPassword($input: createResetPasswordInput!) {
-    createResetPassword(input: $input) {
-      resetPassword {
-        email
-      }
+    mutation CreateResetPassword($input: createResetPasswordInput!) {
+  createResetPassword(input: $input) {
+    resetPassword {
+      email
     }
   }
-`;
-export type CreateResetPasswordMutationFn = Apollo.MutationFunction<
-  CreateResetPasswordMutation,
-  CreateResetPasswordMutationVariables
->;
+}
+    `;
+export type CreateResetPasswordMutationFn = Apollo.MutationFunction<CreateResetPasswordMutation, CreateResetPasswordMutationVariables>;
 
 /**
  * __useCreateResetPasswordMutation__
@@ -79,39 +53,23 @@ export type CreateResetPasswordMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateResetPasswordMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateResetPasswordMutation,
-    CreateResetPasswordMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateResetPasswordMutation, CreateResetPasswordMutationVariables>(
-    CreateResetPasswordDocument,
-    options
-  );
-}
-export type CreateResetPasswordMutationHookResult = ReturnType<
-  typeof useCreateResetPasswordMutation
->;
-export type CreateResetPasswordMutationResult = Apollo.MutationResult<CreateResetPasswordMutation>;
-export type CreateResetPasswordMutationOptions = Apollo.BaseMutationOptions<
-  CreateResetPasswordMutation,
-  CreateResetPasswordMutationVariables
->;
-export const ChangePasswordDocument = gql`
-  mutation ChangePassword($input: changePasswordUserInput!) {
-    changePasswordUser(input: $input) {
-      user {
-        email
+export function useCreateResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<CreateResetPasswordMutation, CreateResetPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateResetPasswordMutation, CreateResetPasswordMutationVariables>(CreateResetPasswordDocument, options);
       }
+export type CreateResetPasswordMutationHookResult = ReturnType<typeof useCreateResetPasswordMutation>;
+export type CreateResetPasswordMutationResult = Apollo.MutationResult<CreateResetPasswordMutation>;
+export type CreateResetPasswordMutationOptions = Apollo.BaseMutationOptions<CreateResetPasswordMutation, CreateResetPasswordMutationVariables>;
+export const ChangePasswordDocument = gql`
+    mutation ChangePassword($input: changePasswordUserInput!) {
+  changePasswordUser(input: $input) {
+    user {
+      email
     }
   }
-`;
-export type ChangePasswordMutationFn = Apollo.MutationFunction<
-  ChangePasswordMutation,
-  ChangePasswordMutationVariables
->;
+}
+    `;
+export type ChangePasswordMutationFn = Apollo.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
 
 /**
  * __useChangePasswordMutation__
@@ -130,34 +88,23 @@ export type ChangePasswordMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useChangePasswordMutation(
-  baseOptions?: Apollo.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(
-    ChangePasswordDocument,
-    options
-  );
-}
+export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptions<ChangePasswordMutation, ChangePasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument, options);
+      }
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
-export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<
-  ChangePasswordMutation,
-  ChangePasswordMutationVariables
->;
+export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const ChangePasswordLoggedDocument = gql`
-  mutation ChangePasswordLogged($input: changePasswordLoggedUserInput!) {
-    changePasswordLoggedUser(input: $input) {
-      user {
-        email
-      }
+    mutation ChangePasswordLogged($input: changePasswordLoggedUserInput!) {
+  changePasswordLoggedUser(input: $input) {
+    user {
+      email
     }
   }
-`;
-export type ChangePasswordLoggedMutationFn = Apollo.MutationFunction<
-  ChangePasswordLoggedMutation,
-  ChangePasswordLoggedMutationVariables
->;
+}
+    `;
+export type ChangePasswordLoggedMutationFn = Apollo.MutationFunction<ChangePasswordLoggedMutation, ChangePasswordLoggedMutationVariables>;
 
 /**
  * __useChangePasswordLoggedMutation__
@@ -176,24 +123,10 @@ export type ChangePasswordLoggedMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useChangePasswordLoggedMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    ChangePasswordLoggedMutation,
-    ChangePasswordLoggedMutationVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<ChangePasswordLoggedMutation, ChangePasswordLoggedMutationVariables>(
-    ChangePasswordLoggedDocument,
-    options
-  );
-}
-export type ChangePasswordLoggedMutationHookResult = ReturnType<
-  typeof useChangePasswordLoggedMutation
->;
-export type ChangePasswordLoggedMutationResult =
-  Apollo.MutationResult<ChangePasswordLoggedMutation>;
-export type ChangePasswordLoggedMutationOptions = Apollo.BaseMutationOptions<
-  ChangePasswordLoggedMutation,
-  ChangePasswordLoggedMutationVariables
->;
+export function useChangePasswordLoggedMutation(baseOptions?: Apollo.MutationHookOptions<ChangePasswordLoggedMutation, ChangePasswordLoggedMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ChangePasswordLoggedMutation, ChangePasswordLoggedMutationVariables>(ChangePasswordLoggedDocument, options);
+      }
+export type ChangePasswordLoggedMutationHookResult = ReturnType<typeof useChangePasswordLoggedMutation>;
+export type ChangePasswordLoggedMutationResult = Apollo.MutationResult<ChangePasswordLoggedMutation>;
+export type ChangePasswordLoggedMutationOptions = Apollo.BaseMutationOptions<ChangePasswordLoggedMutation, ChangePasswordLoggedMutationVariables>;

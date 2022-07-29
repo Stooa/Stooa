@@ -20,7 +20,10 @@ import RedirectLink from '../RedirectLink';
 import { StyledFishbowlDataCard } from './styles';
 
 interface Props {
-  data: Fishbowl;
+  data: Pick<
+    Fishbowl,
+    'name' | 'slug' | 'locale' | 'description' | 'startDateTimeTz' | 'endDateTimeTz'
+  >;
 }
 
 const FishbowlDataCard = ({ data }: Props) => {

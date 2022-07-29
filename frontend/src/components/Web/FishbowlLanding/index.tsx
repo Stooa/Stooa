@@ -20,7 +20,10 @@ import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time
 import { ToastContainer } from 'react-toastify';
 
 interface Props {
-  data: Fishbowl;
+  data: Pick<
+    Fishbowl,
+    'startDateTimeTz' | 'endDateTimeTz' | 'name' | 'description' | 'slug' | 'locale'
+  >;
 }
 
 const FishbowlLanding: React.FC<Props> = ({ data }) => {

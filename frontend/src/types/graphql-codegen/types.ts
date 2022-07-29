@@ -1,12 +1,3 @@
-/*!
- * This file is part of the Stooa codebase.
- *
- * (c) 2020 - present Runroom SL
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -80,61 +71,76 @@ export type Mutation = {
   updateUser?: Maybe<UpdateUserPayload>;
 };
 
+
 export type MutationChangePasswordLoggedUserArgs = {
   input: ChangePasswordLoggedUserInput;
 };
+
 
 export type MutationChangePasswordUserArgs = {
   input: ChangePasswordUserInput;
 };
 
+
 export type MutationCreateFishbowlArgs = {
   input: CreateFishbowlInput;
 };
+
 
 export type MutationCreateGuestArgs = {
   input: CreateGuestInput;
 };
 
+
 export type MutationCreateParticipantArgs = {
   input: CreateParticipantInput;
 };
+
 
 export type MutationCreateResetPasswordArgs = {
   input: CreateResetPasswordInput;
 };
 
+
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
 };
+
 
 export type MutationDeleteParticipantArgs = {
   input: DeleteParticipantInput;
 };
 
+
 export type MutationFinishFishbowlArgs = {
   input: FinishFishbowlInput;
 };
+
 
 export type MutationIntroduceFishbowlArgs = {
   input: IntroduceFishbowlInput;
 };
 
+
 export type MutationNoIntroRunFishbowlArgs = {
   input: NoIntroRunFishbowlInput;
 };
+
 
 export type MutationRunFishbowlArgs = {
   input: RunFishbowlInput;
 };
 
+
 export type MutationUpdateFishbowlArgs = {
   input: UpdateFishbowlInput;
 };
 
+
 export type MutationUpdateParticipantArgs = {
   input: UpdateParticipantInput;
 };
+
 
 export type MutationUpdateUserArgs = {
   input: UpdateUserInput;
@@ -190,21 +196,26 @@ export type Query = {
   user?: Maybe<UserItem>;
 };
 
+
 export type QueryBySlugQueryFishbowlArgs = {
   slug: Scalars['String'];
 };
+
 
 export type QueryIsCreatorOfFishbowlArgs = {
   slug: Scalars['String'];
 };
 
+
 export type QueryNodeArgs = {
   id: Scalars['ID'];
 };
 
+
 export type QueryParticipantArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryParticipantsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -212,6 +223,7 @@ export type QueryParticipantsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
 };
+
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
