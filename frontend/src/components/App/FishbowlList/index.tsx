@@ -228,7 +228,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       <motion.div
                         className="form-wrapper"
                         variants={
-                          windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop
+                          windowWidth && windowWidth <= BREAKPOINTS.desktop
                             ? bottomMobileReveal
                             : basicRevealWithDelay
                         }
@@ -260,7 +260,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       data-testid="started-fishbowl-placeholder"
                       as={motion.div}
                       variants={
-                        windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop
+                        windowWidth && windowWidth <= BREAKPOINTS.desktop
                           ? bottomMobileReveal
                           : basicRevealWithDelay
                       }
