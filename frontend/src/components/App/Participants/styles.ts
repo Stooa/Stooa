@@ -232,7 +232,6 @@ const ParticipantsToggle = styled(StatusBox)`
   }
 
   &.active {
-    background: ${COLOR_NEUTRO_100};
     position: relative;
 
     &::before {
