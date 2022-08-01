@@ -79,7 +79,7 @@ const initialValues = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false,
   hasPassword: false,
-  password: ''
+  password: Math.random().toString(36).substring(2, 8)
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
