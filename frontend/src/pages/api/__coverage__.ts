@@ -7,4 +7,5 @@
  * file that was distributed with this source code.
  */
 
+// @ts-expect-error There are no types for this middleware.
 export { default } from '@cypress/code-coverage/middleware/nextjs';

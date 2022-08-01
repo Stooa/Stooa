@@ -9,6 +9,7 @@
 
 import { useEffect } from 'react';
 import Router from 'next/router';
+import { AppProps } from 'next/app';
 
 import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
@@ -23,7 +24,7 @@ import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
 
-const MyApp = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }: AppProps) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
 
   useEffect(() => {
@@ -58,4 +59,4 @@ const MyApp = ({ Component, pageProps }) => {
   );
 };
 
-export default MyApp;
+export default App;

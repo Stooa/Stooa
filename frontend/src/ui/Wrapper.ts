@@ -9,20 +9,21 @@
 
 import styled from 'styled-components';
 
-import { media, space } from '@/ui/helpers';
+import { space } from '@/ui/helpers';
+import { BREAKPOINTS } from './settings';
 
 const Wrapper = styled.div<{ small?: boolean; reader?: boolean }>`
   margin: 0 auto;
   max-width: ${({ reader }) => (reader ? '70ch' : '95vw')};
   width: 100%;
 
-  ${media.max('reader')`
+  @media (max-width: ${BREAKPOINTS.reader}px) {
     ${({ reader }) => reader && `padding: 0 ${space(2)}`};
-  `}
+  }
 
-  ${media.min('large')`
+  @media (min-width: ${BREAKPOINTS.desktopLarge}px) {
     ${({ small }) => small && `max-width: 60vw;`}
-  `}
+  }
 `;
 
 export default Wrapper;

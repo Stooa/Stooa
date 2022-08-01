@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { space, rems, media } from '@/ui/helpers';
 
 import {
+  BREAKPOINTS,
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_600,
@@ -129,16 +130,16 @@ const Description = styled.div<{ center?: boolean }>`
     text-decoration: underline;
   }
 
-  ${media.min('tablet')`
-  margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
-  max-width: ${rems(700)};
-  text-align:'left';
-
-  ${media.min('tablet')`
-    text-align: ${({ center }) => (center ? 'center' : 'left')};
+  @media (min-width: ${BREAKPOINTS.tablet}px) {
     margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
-  `}
-  `}
+    max-width: ${rems(700)};
+    text-align: 'left';
+
+    @media (min-width: ${BREAKPOINTS.tablet}px) {
+      text-align: ${({ center }) => (center ? 'center' : 'left')};
+      margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
+    }
+  }
 
   p + p {
     margin-top: ${space(2)};
@@ -265,16 +266,16 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
     `}
   }
 
-  ${media.min('tablet')`
+  @media (min-width: ${BREAKPOINTS.tablet}px) {
     padding: ${({ dark }) => (dark ? `${space(10)} 0 ${space(15)}` : `0 0 ${space(15)} 0`)};
     text-align: ${({ flex }) => (flex ? 'left' : 'center')};
 
     .title-lg {
       font-weight: 600;
     }
-  `}
+  }
 
-  ${media.min('desktop')`
+  @media (min-width: ${BREAKPOINTS.desktop}px) {
     align-items: center;
     display: ${({ flex }) => (flex ? 'flex' : 'auto')};
     flex-direction: ${({ reverse }) => (reverse ? 'row-reverse' : 'row')};
@@ -287,7 +288,7 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
     .col:nth-child(2n) {
       margin-right: ${({ reverse }) => (reverse ? `${space(15)}` : 0)};
     }
-  `}
+  }
 `;
 
 const Column = styled.div`
