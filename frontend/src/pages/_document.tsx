@@ -7,16 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import i18nConfig from '@/i18n';
 
-function documentLang({ __NEXT_DATA__ }) {
+function documentLang({ __NEXT_DATA__ }: DocumentProps) {
   const { locale } = __NEXT_DATA__;
   const lang = i18nConfig.locales.find(l => l === locale);
 
   return lang || i18nConfig.defaultLocale;
 }
+
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();

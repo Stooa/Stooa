@@ -18,7 +18,11 @@ import createGenericContext from '@/contexts/createGenericContext';
 
 const [useDevices, DevicesContextProvider] = createGenericContext<DevicesCtx>();
 
-const DevicesProvider = ({ children }) => {
+type DevicesProviderProps = {
+  children?: React.ReactNode;
+};
+
+const DevicesProvider = ({ children }: DevicesProviderProps) => {
   const [devices, setDevices] = useState<Devices>({
     audioOutputDevices: [],
     audioInputDevices: [],

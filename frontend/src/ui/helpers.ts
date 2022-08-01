@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { css } from 'styled-components';
+import { css, Interpolation, ThemedStyledProps } from 'styled-components';
 import { BREAKPOINTS, FONT_BASE_SIZE, SPACE } from '@/ui/settings';
 
 const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
@@ -97,7 +97,7 @@ const getSizeFromBreakpoint = (value: string, max = false) => {
 const generateMedia = () => {
   const max =
     (breakpoint: string) =>
-    (first: TemplateStringsArray, ...args) =>
+    (first: TemplateStringsArray, ...args: Interpolation<ThemedStyledProps<object, unknown>>[]) =>
       css`
         @media (max-width: ${getSizeFromBreakpoint(breakpoint, true)}) {
           ${css.call(null, first, ...args)};
@@ -106,7 +106,7 @@ const generateMedia = () => {
 
   const min =
     (breakpoint: string) =>
-    (first: TemplateStringsArray, ...args) =>
+    (first: TemplateStringsArray, ...args: Interpolation<ThemedStyledProps<object, unknown>>[]) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(breakpoint)}) {
           ${css.call(null, first, ...args)};
@@ -115,7 +115,7 @@ const generateMedia = () => {
 
   const between =
     (firstBreakpoint: string, secondBreakpoint: string) =>
-    (first: TemplateStringsArray, ...args) =>
+    (first: TemplateStringsArray, ...args: Interpolation<ThemedStyledProps<object, unknown>>[]) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(
             firstBreakpoint

@@ -40,12 +40,19 @@ import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
 import createGenericContext from '@/contexts/createGenericContext';
+import { Fishbowl } from '@/types/api-platform';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
 const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
-const StooaProvider = ({ data, isModerator, children }) => {
+type StooaProviderProps = {
+  data: Fishbowl;
+  isModerator: boolean;
+  children?: React.ReactNode;
+};
+
+const StooaProvider = ({ data, isModerator, children }: StooaProviderProps) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
