@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
 import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
@@ -21,7 +21,17 @@ type Props = {
 
 const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [arrowPosition, setArrowPosition] = useState<string>();
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
+  const tipToHover = useRef<HTMLDivElement>(null);
+
+  const handleOnMouseEnter: React.MouseEventHandler = () => {
+    if (tipToHover.current) {
+      const left = tipToHover.current.offsetLeft;
+      setArrowPosition(left - 8 + 'px');
+      setShowTooltip(true);
+    }
+  };
 
   return (
     <SwitchStyled>
@@ -43,10 +53,19 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
       <div
         className="icon-wrapper"
         onClick={() => setShowTooltip(showTooltip => !showTooltip)}
-        onMouseEnter={() => setShowTooltip(true)}
+        onMouseEnter={handleOnMouseEnter}
         onMouseLeave={() => setShowTooltip(false)}
+        ref={tipToHover}
       >
-        {showTooltip && <StyledIntroductionTooltip>{tooltipText}</StyledIntroductionTooltip>}
+        {showTooltip && (
+          <StyledIntroductionTooltip>
+            <div
+              className="arrow"
+              style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
+            ></div>
+            {tooltipText}
+          </StyledIntroductionTooltip>
+        )}
         <Info />
       </div>
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
