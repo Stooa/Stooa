@@ -21,6 +21,8 @@ export const makeParticipant = (): Participant => {
     guestId: '',
     joined: false,
     isMuted: false,
-    isVideoMuted: false
+    isVideoMuted: false,
+    getId: () => faker.datatype.uuid(),
+    getDisplayName: () => faker.name.firstName()
   };
 };

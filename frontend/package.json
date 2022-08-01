@@ -55,7 +55,7 @@
     "slick-carousel": "1.8.1",
     "styled-components": "5.3.5",
     "swr": "1.2.2",
-    "typescript": "4.5.5",
+    "typescript": "4.7.4",
     "use-sound": "4.0.1",
     "yup": "0.32.11"
   },
@@ -69,6 +69,8 @@
     "@testing-library/react": "12.1.5",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.4.1",
+    "@types/js-cookie": "3.0.2",
+    "@types/react-slick": "0.23.10",
     "@typescript-eslint/eslint-plugin": "5.30.7",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",

@@ -17,7 +17,7 @@ import { Content } from '@/layouts/KickedUser/styles';
 
 const UserConductViolationPage = () => {
   const { t } = useTranslation('user-conduct-violation');
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(() => {
     dispatch({

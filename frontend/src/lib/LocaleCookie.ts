@@ -9,6 +9,8 @@
 
 import cookie from 'js-cookie';
 
+const DEFAULT_LOCALE = 'en';
+
 const LocaleCookie = () => {
   const COOKIE_LOCALE = 'NEXT_LOCALE';
   const COOKIE_OPTIONS = { path: '/', domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN };
@@ -19,7 +21,7 @@ const LocaleCookie = () => {
   };
 
   const getCurrentLocaleCookie = (): string => {
-    return cookie.get(COOKIE_LOCALE);
+    return cookie.get(COOKIE_LOCALE) ?? DEFAULT_LOCALE;
   };
 
   return {

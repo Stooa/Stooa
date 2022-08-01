@@ -18,8 +18,9 @@ import 'intro.js/introjs.css';
 import StepTooltip from '@/components/App/OnBoardingTour/StepTooltip';
 import useTranslation from 'next-translate/useTranslation';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { StepsProps } from 'intro.js-react';
 
-const Steps = dynamic(() => import('intro.js-react').then(mod => mod.Steps), {
+const Steps = dynamic<StepsProps>(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
 });
 
@@ -150,8 +151,6 @@ const OnBoardingTour = () => {
     return (
       <div data-testid="on-boarding-tour">
         <Steps
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           enabled={true}
           steps={attendeeSteps}
           initialStep={0}

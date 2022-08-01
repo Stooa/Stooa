@@ -7,16 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import { useContext, createContext, useState, useEffect } from 'react';
-
+import { useState, useEffect } from 'react';
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
 import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
 import useEventListener from '@/hooks/useEventListener';
 import { PERMISSION_CHANGED } from '@/jitsi/Events';
+import createGenericContext from '@/contexts/createGenericContext';
 
-const DevicesContext = createContext<DevicesCtx>(undefined);
+const [useDevices, DevicesContextProvider] = createGenericContext<DevicesCtx>();
 
 const DevicesProvider = ({ children }) => {
   const [devices, setDevices] = useState<Devices>({
@@ -82,7 +82,7 @@ const DevicesProvider = ({ children }) => {
   const selectAudioOutputDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.audioOutputDevices);
 
-    if (null === device) {
+    if (!device) {
       return;
     }
 
@@ -93,7 +93,7 @@ const DevicesProvider = ({ children }) => {
   const selectAudioInputDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.audioInputDevices);
 
-    if (null === device) {
+    if (!device) {
       return;
     }
 
@@ -104,7 +104,7 @@ const DevicesProvider = ({ children }) => {
   const selectVideoDevice = (deviceId: string): void => {
     const device = _findDevice(deviceId, devices.videoDevices);
 
-    if (null === device) {
+    if (!device) {
       return;
     }
 
@@ -161,7 +161,7 @@ const DevicesProvider = ({ children }) => {
   }, []);
 
   return (
-    <DevicesContext.Provider
+    <DevicesContextProvider
       value={{
         selectAudioOutputDevice,
         selectAudioInputDevice,
@@ -177,10 +177,8 @@ const DevicesProvider = ({ children }) => {
       }}
     >
       {children}
-    </DevicesContext.Provider>
+    </DevicesContextProvider>
   );
 };
-
-const useDevices = (): DevicesCtx => useContext<DevicesCtx>(DevicesContext);
 
 export { DevicesProvider, useDevices };

@@ -72,8 +72,8 @@ const Fishbowl: FC = () => {
         {participantToKick && (
           <ModalKickUser
             participant={participantToKick}
-            onSubmit={() => setParticipantToKick(null)}
-            closeModal={() => setParticipantToKick(null)}
+            onSubmit={() => setParticipantToKick(undefined)}
+            closeModal={() => setParticipantToKick(undefined)}
           />
         )}
         {showOnBoardingModal && <ModalOnboarding />}

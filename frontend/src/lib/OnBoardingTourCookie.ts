@@ -15,10 +15,10 @@ const OnBoardingTourCookie = () => {
   const COOKIE_REFRESH_DAYS = 100;
 
   const setOnBoardingCookie = () => {
-    cookie.set(COOKIE_LOCALE, true, { ...COOKIE_OPTIONS, expires: COOKIE_REFRESH_DAYS });
+    cookie.set(COOKIE_LOCALE, 'true', { ...COOKIE_OPTIONS, expires: COOKIE_REFRESH_DAYS });
   };
 
-  const getOnBoardingTourCookie = (): string => {
+  const getOnBoardingTourCookie = () => {
     return cookie.get(COOKIE_LOCALE);
   };
 
