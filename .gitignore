@@ -7,5 +7,6 @@
 
 .certs
 .idea
+/.php-cs-fixer.cache
 jitsi-meet-cfg
 /node_modules

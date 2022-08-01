@@ -65,6 +65,8 @@ interface FormValues {
   language: string;
   timezone: string;
   hasIntroduction: boolean;
+  hasPassword: boolean;
+  password: string;
 }
 
 const initialValues = {
@@ -75,7 +77,9 @@ const initialValues = {
   description: '',
   language: '',
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  hasIntroduction: false
+  hasIntroduction: false,
+  hasPassword: false,
+  password: ''
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -210,6 +214,27 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.introductionLabel')}
           name="hasIntroduction"
         />
+        <Switch
+          tooltipText={
+            <Trans
+              i18nKey="form:fishbowl.passwordTooltip"
+              components={{ span: <span className="medium" /> }}
+            />
+          }
+          label={t('fishbowl.hasPassword')}
+          name="hasPassword"
+        />
+        {props.values.hasPassword && (
+          <Input
+            data-testid="fishbowl-form-passwordinput"
+            placeholder={t('fishbowl.passwordPlaceholder')}
+            label={t('fishbowl.passwordInputLabel')}
+            name="password"
+            type="text"
+            autoComplete="off"
+            id="password"
+          />
+        )}
       </fieldset>
       <fieldset>
         {success && (
@@ -241,7 +266,11 @@ const FormValidation = withFormik<FormProps, FormValues>({
       day: Yup.string().required(props.required),
       time: Yup.string().required(props.required),
       hours: Yup.string().required(props.required),
-      timezone: Yup.string().required(props.required)
+      timezone: Yup.string().required(props.required),
+      password: Yup.string().when('hasPassword', {
+        is: true,
+        then: Yup.string().required(props.required)
+      })
     });
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
@@ -397,7 +426,9 @@ const FishbowlForm = ({
       description: selectedFishbowl.description ?? '',
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: selectedFishbowl.hasIntroduction ?? false
+      hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
+      hasPassword: false,
+      password: ''
     };
   }
 

@@ -32,6 +32,7 @@ final class FishbowlFactory extends ModelFactory
             'currentStatus' => self::faker()->randomElement(Fishbowl::$statusChoices),
             'slug' => self::faker()->slug(),
             'hasIntroduction' => false,
+            'isPrivate' => false,
         ];
     }
 
