@@ -233,6 +233,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             type="text"
             autoComplete="off"
             id="password"
+            icon="lock"
           />
         )}
       </fieldset>

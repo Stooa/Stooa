@@ -375,6 +375,7 @@ const SwitchStyled = styled.div`
   }
 
   .icon-wrapper {
+    display: flex;
     padding: ${space(1)};
   }
 
@@ -443,13 +444,13 @@ const StyledIntroductionTooltip = styled.div`
       display: block;
     `}
     position: absolute;
-    bottom: -10px;
+    bottom: -6px;
     left: var(--leftPosition);
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #e8e8e8;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #e8e8e8;
     clear: both;
     border-color: ${COLOR_NEUTRO_700} transparent transparent;
   }

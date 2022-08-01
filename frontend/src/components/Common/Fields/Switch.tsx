@@ -28,7 +28,7 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
   const handleOnMouseEnter: React.MouseEventHandler = () => {
     if (tipToHover.current) {
       const left = tipToHover.current.offsetLeft;
-      setArrowPosition(left - 8 + 'px');
+      setArrowPosition(left + 9 + 'px');
       setShowTooltip(true);
     }
   };
