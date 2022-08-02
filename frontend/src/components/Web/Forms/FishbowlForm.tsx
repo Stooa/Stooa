@@ -65,7 +65,7 @@ interface FormValues {
   language: string;
   timezone: string;
   hasIntroduction: boolean;
-  hasPassword: boolean;
+  isPrivate: boolean;
   password: string;
 }
 
@@ -78,8 +78,8 @@ const initialValues = {
   language: '',
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false,
-  hasPassword: false,
-  password: Math.random().toString(36).substring(2, 8)
+  isPrivate: false,
+  password: Math.random().toString(36).substring(2, 10)
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -221,11 +221,12 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
               components={{ span: <span className="medium" /> }}
             />
           }
-          label={t('fishbowl.hasPassword')}
-          name="hasPassword"
+          label={t('fishbowl.isPrivate')}
+          name="isPrivate"
         />
-        {props.values.hasPassword && (
+        {props.values.isPrivate && (
           <Input
+            value={props.values.isPrivate ? props.values.password : ''}
             data-testid="fishbowl-form-passwordinput"
             placeholder={t('fishbowl.passwordPlaceholder')}
             label={t('fishbowl.passwordInputLabel')}
@@ -268,7 +269,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
       time: Yup.string().required(props.required),
       hours: Yup.string().required(props.required),
       timezone: Yup.string().required(props.required),
-      password: Yup.string().when('hasPassword', {
+      password: Yup.string().when('isPrivate', {
         is: true,
         then: Yup.string().required(props.required)
       })
@@ -297,7 +298,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              password: values.password
             }
           }
         })
@@ -324,7 +327,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              password: values.password
             }
           }
         })
@@ -428,7 +433,7 @@ const FishbowlForm = ({
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
       hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
-      hasPassword: false,
+      isPrivate: false,
       password: ''
     };
   }

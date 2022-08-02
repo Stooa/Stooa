@@ -28,6 +28,6 @@
     "githubIssues": "Github Issues",
     "help": "Help",
     "legal": "Legal",
-    "linkButton": "Copy link",
-    "successCopiedLink": "Link copied"
+    "copyInvitation": "Copy invitation",
+    "successCopiedInvitation": "Invitation copied"
 }

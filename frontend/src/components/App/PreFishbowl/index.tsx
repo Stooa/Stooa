@@ -92,7 +92,7 @@ const PreFishbowl = () => {
                 fid={fid as string}
                 locale={lang}
               >
-                {t('common:linkButton')}
+                {t('common:copyInvitation')}
               </ButtonCopyUrl>
             </StyledFishbowlDataCardHeader>
 
