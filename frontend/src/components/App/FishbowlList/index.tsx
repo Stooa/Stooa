@@ -53,7 +53,7 @@ interface Props {
 
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
-  const [fishbowls, setFishbowls] = useState<Fishbowl[]>([]);
+  const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
@@ -63,11 +63,13 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   useEffect(() => {
-    fishbowls.forEach(fishbowl => {
-      if (fishbowl.slug === selectedFishbowlParam) {
-        setSelectedFishbowl(fishbowl);
-      }
-    });
+    if (fishbowls) {
+      fishbowls.forEach(fishbowl => {
+        if (fishbowl.slug === selectedFishbowlParam) {
+          setSelectedFishbowl(fishbowl);
+        }
+      });
+    }
   }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const params = new URLSearchParams([
@@ -95,13 +97,15 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
 
   const handleUpdateFishbowl = updatedFishbowl => {
     setFishbowls(currentFishbowls => {
-      return currentFishbowls.map(fishbowl => {
-        if (fishbowl.id !== updatedFishbowl.id) {
-          return fishbowl;
-        } else {
-          return { ...fishbowl, ...updatedFishbowl };
-        }
-      });
+      if (currentFishbowls) {
+        return currentFishbowls.map(fishbowl => {
+          if (fishbowl.id !== updatedFishbowl.id) {
+            return fishbowl;
+          } else {
+            return { ...fishbowl, ...updatedFishbowl };
+          }
+        });
+      }
     });
   };
 
