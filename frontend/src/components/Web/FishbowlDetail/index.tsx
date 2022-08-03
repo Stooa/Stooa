@@ -24,6 +24,7 @@ import RedirectLink from '../RedirectLink';
 import Button from '@/components/Common/Button';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import useTranslation from 'next-translate/useTranslation';
+import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
 interface Props {
   data: Fishbowl;
@@ -65,7 +66,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
             </RedirectLink>
           </div>
           <ButtonCopyUrl
-            variant="secondary"
+            variant={isTimeLessThanNMinutes(data.startDateTimeTz, 30) ? 'secondary' : 'primary'}
             size="large"
             withSvg
             fid={data.slug}

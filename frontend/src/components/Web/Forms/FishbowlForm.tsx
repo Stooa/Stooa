@@ -300,7 +300,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
               isFishbowlNow: false,
               hasIntroduction: values.hasIntroduction,
               isPrivate: values.isPrivate,
-              password: values.password
+              password: values.isPrivate ? values.password : ''
             }
           }
         })
@@ -316,6 +316,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
           });
         });
     } else {
+      console.log('Form values', values);
       await props
         .createFishbowl({
           variables: {
@@ -329,7 +330,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
               isFishbowlNow: false,
               hasIntroduction: values.hasIntroduction,
               isPrivate: values.isPrivate,
-              password: values.password
+              password: values.isPrivate ? values.password : ''
             }
           }
         })
