@@ -39,10 +39,12 @@ import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Trans from 'next-translate/Trans';
 import PrejoinPermissionFriend from '@/components/Common/SVG/PrejoinPermissionFriend';
+import { useStooa } from '@/contexts/StooaManager';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
+  const { data } = useStooa();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localTracks = useRef<any[]>([]);
@@ -173,7 +175,11 @@ const FishbowlPreJoin: React.FC = () => {
             <p className="body-md subtitle">
               <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
             </p>
-            {isAuthenticated ? <AuthUser name={user?.name ?? ''} /> : <NicknameForm />}
+            {isAuthenticated ? (
+              <AuthUser isPrivate={data.isPrivate} name={user?.name ?? ''} />
+            ) : (
+              <NicknameForm isPrivate={data.isPrivate} />
+            )}
             <Button
               data-testid="pre-join-cancel"
               size="small"

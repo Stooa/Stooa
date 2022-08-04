@@ -23,16 +23,19 @@ import Button from '@/components/Common/Button';
 
 interface FormValues {
   name: string;
+  isPrivate: boolean;
 }
 
 interface FormProps {
   notEmpty: string;
   required: string;
   onSubmit: (values: FormValues) => void;
+  isPrivate: boolean;
 }
 
 const initialValues = {
-  name: userRepository.getUserNickname()
+  name: userRepository.getUserNickname(),
+  isPrivate: false
 };
 
 const Form = (props: FormikProps<FormValues>) => {
@@ -48,6 +51,8 @@ const Form = (props: FormikProps<FormValues>) => {
     <FormikForm className="prejoin">
       <fieldset className="submit-wrapper">
         <Input label={t('name')} name="name" type="text" />
+        {props.values.isPrivate && <Input label={t('password')} name="password" type="password" />}
+
         <Button size="large" type="submit" disabled={props.isSubmitting}>
           {t('button.enterFishbowl')}
         </Button>
@@ -75,7 +80,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const Nickname = () => {
+const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   const [, dispatch] = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
@@ -124,7 +129,12 @@ const Nickname = () => {
   };
 
   return (
-    <FormValidation notEmpty={notEmptyError} required={requiredError} onSubmit={handleOnSubmit} />
+    <FormValidation
+      isPrivate={isPrivate}
+      notEmpty={notEmptyError}
+      required={requiredError}
+      onSubmit={handleOnSubmit}
+    />
   );
 };
 

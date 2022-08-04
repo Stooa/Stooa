@@ -66,7 +66,7 @@ interface FormValues {
   timezone: string;
   hasIntroduction: boolean;
   isPrivate: boolean;
-  password: string;
+  password?: string;
 }
 
 const initialValues = {
@@ -330,7 +330,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
               isFishbowlNow: false,
               hasIntroduction: values.hasIntroduction,
               isPrivate: values.isPrivate,
-              password: values.isPrivate ? values.password : ''
+              password: values.isPrivate && values.password ? values.password : ''
             }
           }
         })
@@ -411,7 +411,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues | undefined;
+  let selectedFishbowlValues: FormValues | undefined = undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
@@ -434,8 +434,8 @@ const FishbowlForm = ({
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
       hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
-      isPrivate: false,
-      password: ''
+      isPrivate: selectedFishbowl.isPrivate,
+      password: selectedFishbowl.password
     };
   }
 
