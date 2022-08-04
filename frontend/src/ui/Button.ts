@@ -25,23 +25,24 @@ import {
 import { mediumWeight, TYPOGRAPHY_SIZES } from '@/ui/Texts';
 import { media, space } from '@/ui/helpers';
 import { StyledLinkCss } from './Globals';
+import { CSSProperties } from 'react';
 
 const SIZES = {
   small: {
     '--padding': `${space(1)} ${space(3)} ${space(0.75)} ${space(3)}`,
     '--fontSize': `${TYPOGRAPHY_SIZES.body_sm.fontSize}`,
     '--lineHeight': `${TYPOGRAPHY_SIZES.body_sm.lineHeight}`
-  },
+  } as CSSProperties,
   medium: {
     '--padding': `${space(1)} ${space(3)} ${space(0.875)} ${space(3)}`,
     '--fontSize': `${TYPOGRAPHY_SIZES.body_sm.fontSize}`,
     '--lineHeight': `${TYPOGRAPHY_SIZES.body_sm.lineHeight}`
-  },
+  } as CSSProperties,
   large: {
     '--padding': `${space(1.75)} ${space(4)} ${space(1.5)} ${space(4)}`,
     '--fontSize': `${TYPOGRAPHY_SIZES.body_md.fontSize}`,
     '--lineHeight': `${TYPOGRAPHY_SIZES.body_md.lineHeight}`
-  }
+  } as CSSProperties
 };
 
 const ButtonBase = styled.button<{ full?: boolean }>`

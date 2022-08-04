@@ -8,10 +8,16 @@
  */
 
 import Button from '@/components/Common/Button';
+import { ComponentProps, Ref } from 'react';
 
-const SubmitBtn = ({ text, disabled, ...props }) => {
+type SubmitBtnProps = ComponentProps<'button'> & {
+  text: string;
+  ref?: Ref<HTMLButtonElement>;
+};
+
+const SubmitBtn = ({ text, ...props }: SubmitBtnProps) => {
   return (
-    <Button size="large" type="submit" full {...props} disabled={disabled}>
+    <Button size="large" type="submit" full {...props}>
       {text}
     </Button>
   );

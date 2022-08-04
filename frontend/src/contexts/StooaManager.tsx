@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, PropsWithChildren } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -49,10 +49,9 @@ const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues
 type StooaProviderProps = {
   data: Fishbowl;
   isModerator: boolean;
-  children?: React.ReactNode;
 };
 
-const StooaProvider = ({ data, isModerator, children }: StooaProviderProps) => {
+const StooaProvider = ({ data, isModerator, children }: PropsWithChildren<StooaProviderProps>) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
@@ -192,7 +191,9 @@ const StooaProvider = ({ data, isModerator, children }: StooaProviderProps) => {
   };
 
   const isConferenceIntroducing = (): boolean => {
-    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+    return (
+      data.hasIntroduction !== undefined && conferenceStatus === IConferenceStatus.INTRODUCTION
+    );
   };
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
