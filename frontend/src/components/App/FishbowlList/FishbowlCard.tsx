@@ -21,6 +21,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';
 import Button from '@/components/Common/Button';
+import { MouseEventHandler } from 'react';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -49,8 +50,9 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
     router.push(route, route, { locale: locale });
   };
 
-  const handleClick = event => {
-    if (!event.target.parentElement.classList.contains('card__actions')) {
+  const handleClick: MouseEventHandler<HTMLDivElement> = event => {
+    const element = event.target as HTMLElement;
+    if (element.parentElement && !element.parentElement.classList.contains('card__actions')) {
       onClick(fishbowl);
     }
   };
