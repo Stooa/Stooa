@@ -28,5 +28,6 @@
     "legal": "Mentions légales",
     "signout": "Se déconnecter",
     "fishbowlList": "Liste des fishbowls",
-    "linkButton": "Copier le lien"
+    "linkButton": "Copier le lien",
+    "successCopiedLink": "Lien copié"
 }
