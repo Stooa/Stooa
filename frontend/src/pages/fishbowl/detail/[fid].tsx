@@ -17,6 +17,7 @@ import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { dataLayerPush } from '@/lib/analytics';
 
 import { ToastContainer } from 'react-toastify';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 const FishbowlDetail = dynamic(import('@/components/Web/FishbowlDetail'), {
   loading: () => <div />
@@ -25,7 +26,7 @@ const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
 const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div /> });
 
-const Detail = props => {
+const Detail = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const { lang } = useTranslation();
   const referer = props.referer ? props.referer : '';
@@ -65,9 +66,9 @@ const Detail = props => {
 
 export default Detail;
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps<{ referer: string | null }> = async context => {
   const referer = context.req.headers.referer || null;
   return {
     props: { referer }
   };
-}
+};
