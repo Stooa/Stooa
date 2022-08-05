@@ -69,7 +69,7 @@ const Form = (props: FormikProps<FormValues>) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       email: Yup.string().email(props.email).required(props.required)
     });

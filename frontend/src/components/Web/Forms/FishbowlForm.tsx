@@ -230,7 +230,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     ...(!props.isEditForm && { language: props.currentLanguage })
   }),
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       title: Yup.string().matches(/[^-\s]/, {
         excludeEmptyString: true,

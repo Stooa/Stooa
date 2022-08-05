@@ -79,7 +79,7 @@ const Form = (props: FormikProps<FormValues>) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       password: Yup.string().required(props.required),
       newPassword: Yup.string().min(6, props.minlength).required(props.required),

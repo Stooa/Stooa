@@ -44,7 +44,7 @@ interface FormProps {
   email: string;
   minlength: string;
   url: string;
-  onSubmit: (any) => Promise<void>;
+  onSubmit: ({}) => Promise<void>;
   initialValues: {
     id: string;
     linkedinProfile: string;
@@ -113,7 +113,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
       isSubmitting: false
     };
   },
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       firstname: Yup.string().required(props.required),
       lastname: Yup.string().required(props.required),
