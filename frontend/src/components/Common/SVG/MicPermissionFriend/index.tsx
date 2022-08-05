@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-const MicPermissionFriend = props => {
+const MicPermissionFriend = () => {
   return (
     <svg
       viewBox="-40 0 250 250"

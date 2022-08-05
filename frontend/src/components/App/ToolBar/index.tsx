@@ -95,12 +95,13 @@ const ToolBar: React.FC = () => {
     tracksRepository.toggleVideoTrack();
   };
 
-  const handleOutsideClick = event => {
+  const handleOutsideClick = (event: CustomEvent) => {
+    const element = event.target as HTMLElement;
     if (
       configButtonRef.current &&
-      typeof event.target.className === 'string' &&
-      event.target.id !== 'config-button' &&
-      !event.target.className?.includes('device')
+      typeof element.className === 'string' &&
+      element.id !== 'config-button' &&
+      !element.className?.includes('device')
     ) {
       configButtonRef.current.handleShowDevices(false);
     }
