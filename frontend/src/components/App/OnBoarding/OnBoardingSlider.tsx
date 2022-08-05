@@ -29,7 +29,7 @@ interface Arrow {
   children?: React.ReactElement;
 }
 
-const SlickButtonFix = ({ children, ...props }) => (
+const SlickButtonFix = ({ children, ...props }: { children: React.ReactElement }) => (
   <button className="arrow prev" {...props}>
     {children}
   </button>
@@ -152,7 +152,7 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
           >
             <div className="left">
               <div className="animate">
-                {item.pretitle && <p>{t(item.preTitle)}</p>}
+                {item.preTitle && <p>{t(item.preTitle)}</p>}
                 {item.title && <h2 className="title-md">{t(item.title)}</h2>}
                 {item.text && (
                   <Trans
