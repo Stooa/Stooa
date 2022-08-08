@@ -17,8 +17,8 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import Layout from '@/layouts/Default';
 import { Content } from '@/layouts/KickedUser/styles';
-import MeditatingFriend from '@/components/Common/SVG/MeditatingFriend';
 import Info from '@/ui/svg/info-brown.svg';
+import Image from 'next/image';
 
 const UserNoParticipatingPage = () => {
   const { t, lang } = useTranslation('user-not-participating');
@@ -42,7 +42,16 @@ const UserNoParticipatingPage = () => {
     <>
       <Layout title={t('pageTitle')}>
         <Content>
-          <MeditatingFriend />
+          <div className="friend-image">
+            <Image
+              src="/img/friends/meditating.png"
+              alt="Illustration of a friend meditating"
+              height={146.38 * 1.5}
+              width={151 * 1.5}
+              quality={100}
+              layout="intrinsic"
+            />
+          </div>
           <h1 className="title-sm">{t('title')}</h1>
           <p className="description body-lg">{t('description')}</p>
           <div className="reasons">
