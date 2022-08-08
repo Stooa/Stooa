@@ -16,6 +16,7 @@ const date = new Date();
 const isoDate = new Date(date.getTime() + twoHoursInMs);
 const isoCloseDate = new Date(date.getTime() + twentyMinutesInMs);
 
+// it would be nice to have the union types of Fishbowl. Something like Fishbowl properties.
 export const modifiedValues: Record<string, unknown> = {
   title: '',
   hours: '',
