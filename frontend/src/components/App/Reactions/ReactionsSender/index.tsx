@@ -47,8 +47,8 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
     ]);
   };
 
-  const spawnEmojisBatch = (emojis): void => {
-    const emojisWithCoordinates = emojis.map((emoji, index) => {
+  const spawnEmojisBatch = (emojis: string[]): void => {
+    const emojisWithCoordinates = emojis.map((emoji: string, index: number) => {
       const emojiPosition = lastLocationClicked - 100 + index * 20;
       return Reactions.createReaction(emoji, emojiPosition);
     });
