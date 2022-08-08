@@ -101,6 +101,7 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                       height={146}
                       width={140.06}
                       quality={100}
+                      layout="intrinsic"
                     />
                   </div>
                   <p>{t('kick.modal.options.conductViolation')}</p>
