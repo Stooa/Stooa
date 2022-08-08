@@ -16,7 +16,7 @@ const date = new Date();
 const isoDate = new Date(date.getTime() + twoHoursInMs);
 const isoCloseDate = new Date(date.getTime() + twentyMinutesInMs);
 
-export const modifiedValues = {
+export const modifiedValues: Record<string, unknown> = {
   title: '',
   hours: '',
   description: '',
