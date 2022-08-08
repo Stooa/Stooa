@@ -3,6 +3,8 @@
     "cookiesPolicy": "Politique en matière de cookies",
     "cancel": "Annuler",
     "register": "S'inscrire gratuitement",
+    "scheduleFishbowl": "Planifier un Fishbowl",
+    "hostFishbowlNow": "Commencez un Fishbowl maintenant",
     "cta": "Créer un fishbowl",
     "editProfile": "Modifier le profil",
     "privacyPolicy": "Politique de confidentialité",
@@ -25,5 +27,7 @@
     "help": "Aide",
     "legal": "Mentions légales",
     "signout": "Se déconnecter",
-    "fishbowlList": "Liste des fishbowls"
+    "fishbowlList": "Liste des fishbowls",
+    "linkButton": "Copier le lien",
+    "successCopiedLink": "Lien copié"
 }
