@@ -36,7 +36,7 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, size, variant, withSvg, .
 
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(fbUrl);
-    toast(t('successCopiedLink'), {
+    toast(t('successCopiedInvitation'), {
       icon: <Check />,
       toastId: 'link-copied',
       type: 'success',
@@ -47,7 +47,7 @@ const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, size, variant, withSvg, .
 
   return (
     <Button size={size} variant={variant} onClick={handleCopyUrl} {...props}>
-      {t('linkButton')}
+      {t('copyInvitation')}
       {withSvg && <UrlSvg />}
     </Button>
   );

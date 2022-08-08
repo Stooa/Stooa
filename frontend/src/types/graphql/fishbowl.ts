@@ -18,6 +18,8 @@ export interface CreateFishbowlOptions {
       locale: string;
       hasIntroduction: boolean;
       isFishbowlNow: boolean;
+      isPrivate: boolean;
+      password: string;
     };
   };
 }
@@ -34,6 +36,8 @@ export interface UpdateFishbowlOptions {
       locale?: string;
       hasIntroduction?: boolean;
       isFishbowlNow?: boolean;
+      isPrivate?: boolean;
+      password?: string;
     };
   };
 }

@@ -28,6 +28,6 @@
     "githubIssues": "Github Issues",
     "help": "Ajuda",
     "legal": "Legal",
-    "linkButton": "Copiar enllaç",
-    "successCopiedLink": "Enllaç copiat"
+    "copyInvitation": "Copiar invitació",
+    "successCopiedInvitation": "Invitació copiada"
 }

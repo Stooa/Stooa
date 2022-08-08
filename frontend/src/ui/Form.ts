@@ -349,6 +349,7 @@ const TextDivider = styled.div`
 `;
 
 const SwitchStyled = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -374,6 +375,7 @@ const SwitchStyled = styled.div`
   }
 
   .icon-wrapper {
+    display: flex;
     padding: ${space(1)};
   }
 
@@ -418,6 +420,8 @@ const SwitchLabel = styled.label`
 `;
 
 const StyledIntroductionTooltip = styled.div`
+  --leftPosition: 0px;
+
   color: ${COLOR_NEUTRO_100};
   background-color: ${COLOR_NEUTRO_700};
   height: auto;
@@ -432,20 +436,21 @@ const StyledIntroductionTooltip = styled.div`
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 150px;
+  bottom: calc(100% + ${space()});
 
-  &:after {
+  & .arrow {
+    display: none;
     ${media.min('tablet')`
-    content: '';
+      display: block;
     `}
     position: absolute;
-    right: 0;
-    bottom: -10px;
+    bottom: -6px;
+    left: var(--leftPosition);
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #e8e8e8;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #e8e8e8;
     clear: both;
     border-color: ${COLOR_NEUTRO_700} transparent transparent;
   }

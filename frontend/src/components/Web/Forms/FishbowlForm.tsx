@@ -65,6 +65,8 @@ interface FormValues {
   language: string;
   timezone: string;
   hasIntroduction: boolean;
+  isPrivate: boolean;
+  password?: string;
 }
 
 const initialValues = {
@@ -75,7 +77,9 @@ const initialValues = {
   description: '',
   language: '',
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  hasIntroduction: false
+  hasIntroduction: false,
+  isPrivate: false,
+  password: Math.random().toString(36).substring(2, 10)
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -210,6 +214,29 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.introductionLabel')}
           name="hasIntroduction"
         />
+        <Switch
+          tooltipText={
+            <Trans
+              i18nKey="form:fishbowl.passwordTooltip"
+              components={{ span: <span className="medium" /> }}
+            />
+          }
+          label={t('fishbowl.isPrivate')}
+          name="isPrivate"
+        />
+        {props.values.isPrivate && (
+          <Input
+            value={props.values.isPrivate ? props.values.password : ''}
+            data-testid="fishbowl-form-passwordinput"
+            placeholder={t('fishbowl.passwordPlaceholder')}
+            label={t('fishbowl.passwordInputLabel')}
+            name="password"
+            type="text"
+            autoComplete="off"
+            id="password"
+            icon="lock"
+          />
+        )}
       </fieldset>
       <fieldset>
         {success && (
@@ -241,7 +268,11 @@ const FormValidation = withFormik<FormProps, FormValues>({
       day: Yup.string().required(props.required),
       time: Yup.string().required(props.required),
       hours: Yup.string().required(props.required),
-      timezone: Yup.string().required(props.required)
+      timezone: Yup.string().required(props.required),
+      password: Yup.string().when('isPrivate', {
+        is: true,
+        then: Yup.string().required(props.required)
+      })
     });
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
@@ -267,7 +298,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              password: values.isPrivate ? values.password : ''
             }
           }
         })
@@ -283,6 +316,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
           });
         });
     } else {
+      console.log('Form values', values);
       await props
         .createFishbowl({
           variables: {
@@ -294,7 +328,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              password: values.isPrivate && values.password ? values.password : ''
             }
           }
         })
@@ -375,7 +411,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues | undefined;
+  let selectedFishbowlValues: FormValues | undefined = undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
@@ -397,7 +433,9 @@ const FishbowlForm = ({
       description: selectedFishbowl.description ?? '',
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: selectedFishbowl.hasIntroduction ?? false
+      hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
+      isPrivate: selectedFishbowl.isPrivate,
+      password: selectedFishbowl.password
     };
   }
 

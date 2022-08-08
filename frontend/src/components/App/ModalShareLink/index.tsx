@@ -59,7 +59,7 @@ const ModalShareLink: React.FC = () => {
             </p>
             <div className="modal-footer">
               <ButtonCopyUrl withSvg variant="primary" fid={fid as string} locale={data.locale}>
-                {t('common:linkButton')}
+                {t('common:copyInvitation')}
               </ButtonCopyUrl>
             </div>
           </div>
