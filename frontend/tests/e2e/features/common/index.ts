@@ -171,10 +171,9 @@ let notStartedFishbowl = true;
 
 Given('a fishbowl', () => {
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
-    console.log('SAURAAAAAAAAA', notStartedFishbowl);
     if (notStartedFishbowl) {
       req.reply({
-        status: 'RUNNING'
+        status: 'NOT_STARTED'
       });
     } else {
       req.reply({
