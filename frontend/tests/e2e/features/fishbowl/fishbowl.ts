@@ -12,7 +12,7 @@ import { hasOperationName } from '../../utils/graphql-test-utils';
 import { makeGQLCurrentFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
 
 When('navigates to future fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/fishbowl-status/test-fishbowl', {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
       status: 'NOT_STARTED'
@@ -37,7 +37,7 @@ When('navigates to fishbowl', () => {
       });
     }
   }).as('gqlFishbowlBySlugQuery');
-  cy.intercept('GET', 'https://localhost:8443/fishbowl-status/test-fishbowl', {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
       status: 'NOT_STARTED'
@@ -111,7 +111,7 @@ When('sees the prefishbowl page', () => {
 });
 
 Then('finishes a fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/fishbowl-status/test-fishbowl', {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
       status: 'FINISHED'
