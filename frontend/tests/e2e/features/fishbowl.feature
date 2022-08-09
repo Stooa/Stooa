@@ -9,6 +9,7 @@ Feature: Fishbowl
 
     Scenario: Host user can start and finish a fishbowl
         Given a logged user
+        And a fishbowl
         When navigates to fishbowl
         And can access to pre fishbowl
         And clicks on "Enter fishbowl"
