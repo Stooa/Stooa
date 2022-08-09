@@ -27,7 +27,7 @@ When('access to a current fishbowl', () => {
     }
   }).as('gqlFishbowlBySlugQuery');
 
-  cy.intercept('GET', 'https://localhost:8443/fishbowl-status/test-fishbowl', {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
       status: 'NOT_STARTED'
