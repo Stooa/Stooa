@@ -191,6 +191,8 @@ Given('a fishbowl', () => {
 });
 
 When('starts fishbowl', () => {
+  cy.contains('Start the fishbowl').click();
+
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
     statusCode: 200,
     body: {
@@ -198,9 +200,7 @@ When('starts fishbowl', () => {
     }
   }).as('runningFishbowl');
 
-  cy.contains('Start the fishbowl').click();
-
-  cy.wait('@runningFishbowl');
+  cy.wait(1000);
 
   cy.get('[data-testid=finish-fishbowl]').should('exist');
 
