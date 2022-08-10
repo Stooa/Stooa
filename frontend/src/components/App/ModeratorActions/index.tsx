@@ -30,7 +30,7 @@ interface Props {
 }
 
 const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
   const [running, setRunning] = useState(false);
@@ -140,57 +140,55 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     }
   }, [conferenceStatus]);
 
-  return (
-    conferenceStatus !== IConferenceStatus.FINISHED && (
-      <div className="actions">
-        {showIntroductionModal && (
-          <ModalStartIntroduction
-            closeModal={toggleIntroductionModal}
-            startIntroduction={startIntroduction}
-            disabled={loading}
-          />
-        )}
-        {showFinishModal && (
-          <ModalEndFishbowl
-            closeModal={toggleFinishModal}
-            endFishbowl={finishFishbowl}
-            disabled={loading}
-          />
-        )}
-        {running && (
-          <Button
-            data-testid="finish-fishbowl"
-            size="medium"
-            className="button error"
-            onClick={toggleFinishModal}
-          >
-            <span className="text">{t('endFishbowl')}</span>
+  return conferenceStatus === IConferenceStatus.FINISHED ? null : (
+    <div className="actions">
+      {showIntroductionModal && (
+        <ModalStartIntroduction
+          closeModal={toggleIntroductionModal}
+          startIntroduction={startIntroduction}
+          disabled={loading}
+        />
+      )}
+      {showFinishModal && (
+        <ModalEndFishbowl
+          closeModal={toggleFinishModal}
+          endFishbowl={finishFishbowl}
+          disabled={loading}
+        />
+      )}
+      {running && (
+        <Button
+          data-testid="finish-fishbowl"
+          size="medium"
+          className="button error"
+          onClick={toggleFinishModal}
+        >
+          <span className="text">{t('endFishbowl')}</span>
+        </Button>
+      )}
+      {!running &&
+        (!introduction && data.hasIntroduction ? (
+          <Button size="medium" className="button" onClick={toggleIntroductionModal}>
+            {!permissions.audio && (
+              <div className="alert">
+                <PermissionsAlert />
+              </div>
+            )}
+            <span className="text">{t('startIntroduction')}</span>
           </Button>
-        )}
-        {!running &&
-          (!introduction && data.hasIntroduction ? (
-            <Button size="medium" className="button" onClick={toggleIntroductionModal}>
-              {!permissions.audio && (
-                <div className="alert">
-                  <PermissionsAlert />
-                </div>
-              )}
-              <span className="text">{t('startIntroduction')}</span>
-            </Button>
-          ) : (
-            <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
-              {!permissions.audio && !introduction && (
-                <div className="alert">
-                  <PermissionsAlert />
-                </div>
-              )}
-              <span className="text">
-                {data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}
-              </span>
-            </Button>
-          ))}
-      </div>
-    )
+        ) : (
+          <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
+            {!permissions.audio && !introduction && (
+              <div className="alert">
+                <PermissionsAlert />
+              </div>
+            )}
+            <span className="text">
+              {data.hasIntroduction ? t('allowUsers') : t('startFishbowl')}
+            </span>
+          </Button>
+        ))}
+    </div>
   );
 };
 

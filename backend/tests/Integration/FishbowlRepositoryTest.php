@@ -38,7 +38,7 @@ class FishbowlRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->fishbowlRepository = self::$container->get(FishbowlRepository::class);
+        $this->fishbowlRepository = static::getContainer()->get(FishbowlRepository::class);
     }
 
     /** @test */

@@ -1,0 +1,22 @@
+{
+    "step1": {
+        "title": "Hello there!",
+        "text": "Here are some tips to get you ready for your fishbowl experience."
+    },
+    "step2": {
+        "title": "The five seats",
+        "text": "The 5 seats are available for you to join the conversation any time you have something to say. When you have finished, leave your seat so that other people can participate!"
+    },
+    "step3": {
+        "title": "How can I join a seat?",
+        "text": "Join and leave a seat using the green and red buttons. Don’t worry, by leaving a seat you'll still be in the room listening to the other speakers!",
+        "textIntroduction": "As soon as the introduction is over you can join and leave a seat using the green and red buttons. Don't worry, by leaving a seat you'll still be in the room listening to the other speakers!"
+    },
+    "step4": {
+        "title": "Networking",
+        "text": "Find out more and connect with participants through their Linkedin and Twitter profile (if provided)"
+    },
+    "next": "Next",
+    "previous": "Back",
+    "done": "Done"
+}

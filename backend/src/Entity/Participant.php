@@ -67,7 +67,7 @@ class Participant implements \Stringable
      * @Groups({"participant:read"})
      *
      * @Assert\NotNull
-     * @Assert\DateTime
+     * @Assert\Type("\DateTimeInterface")
      *
      * @ORM\Column(type="datetime")
      */

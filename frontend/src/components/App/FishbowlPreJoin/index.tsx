@@ -19,7 +19,7 @@ import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layout
 import Decoration from '@/components/Web/Decoration';
 import Header from '@/components/Web/Header';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
-import ButtonConfig from '@/components/App/ButtonConfig';
+import ButtonConfig, { ButtonConfigHandle } from '@/components/App/ButtonConfig';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
 import NicknameForm from '@/components/App/FishbowlPreJoin/form';
@@ -44,12 +44,13 @@ const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
 
-  const localTracks = useRef([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const localTracks = useRef<any[]>([]);
   const [muteVideo, setMuteVideo] = useState<boolean>(userRepository.getUserVideoMuted());
   const router = useRouter();
   const { t, lang } = useTranslation('common');
 
-  const configButtonRef = useRef(null);
+  const configButtonRef = useRef<ButtonConfigHandle>(null);
 
   const disposeLocalTracks = () => {
     for (let index = 0; index < localTracks.current.length; index++) {
@@ -66,7 +67,11 @@ const FishbowlPreJoin: React.FC = () => {
   };
 
   const handleParentClick = event => {
-    if (event.target.id !== 'config-button' && !event.target.className.includes('device')) {
+    if (
+      configButtonRef.current &&
+      event.target.id !== 'config-button' &&
+      !event.target.className.includes('device')
+    ) {
       configButtonRef.current.handleShowDevices(false);
     }
   };
@@ -89,7 +94,7 @@ const FishbowlPreJoin: React.FC = () => {
         const localTrack = localTracks.current[index];
 
         if (!localTrack.isAudioTrack()) {
-          const video: HTMLVideoElement = document.querySelector('#prejoin');
+          const video: HTMLVideoElement | null = document.querySelector('#prejoin');
 
           if (video) {
             localTrack.attach(video);
@@ -131,7 +136,7 @@ const FishbowlPreJoin: React.FC = () => {
             <VideoContainer>
               <video
                 id="prejoin"
-                style={{ opacity: muteVideo && 0 }}
+                style={{ opacity: muteVideo ? 0 : 1 }}
                 autoPlay
                 muted
                 className="video"
@@ -168,7 +173,7 @@ const FishbowlPreJoin: React.FC = () => {
             <p className="body-md subtitle">
               <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
             </p>
-            {isAuthenticated ? <AuthUser name={user.name} /> : <NicknameForm />}
+            {isAuthenticated ? <AuthUser name={user?.name ?? ''} /> : <NicknameForm />}
             <Button
               data-testid="pre-join-cancel"
               size="small"

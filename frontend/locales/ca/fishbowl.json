@@ -11,9 +11,9 @@
     "joinMemberNote": "* Permet contactar amb la resta d'assistents",
     "copySuccess": "Enllaç copiat!",
     "detail": {
-        "shareTitle": "Ara què? <br/>Comparteix el teu <i>fishbowl</i>!",
-        "shareSubtitle": "Deixa que la conversa flueixi! Copia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vols afegir a la sessió.",
-        "shareInSocials": "O comparteix en:",
+        "shareTitle": "Ben fet! I ara què? <br/>Comparteix el <i>fishbowl</i> amb la teva gent!",
+        "shareSubtitle": "Deixa que la conversa flueixi! Còpia i comparteix el link d'aquest <i>fishbowl</i> amb les persones que vols que s'uneixin a la conversa.",
+        "shareInSocials": "O comparteix-ho en:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> creat amb èxit!",
         "cardMiniTitle": "Detalls del <i>fishbowl</i>",
         "editFishbowlDetails": "Editar detalls del <i>fishbowl</i>",
@@ -112,5 +112,9 @@
         "laugh": "LOL",
         "wave": "Hola",
         "insightful": "Interessant"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "No tens clar com funciona un fishbowl? Fes clic aquí",
+        "connectWithUsers": "Per a connectar amb les persones a la sala a través de les teves RRSS, registra't en Stooa."
     }
 }

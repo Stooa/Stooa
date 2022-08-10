@@ -21,7 +21,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
-import { pushEventDataLayer } from '@/lib/analytics';
+import { IConferenceStatus } from '@/jitsi/Status';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -38,7 +38,7 @@ const Page = () => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
   const { lang } = useTranslation();
-  const [{ fishbowlReady, isGuest, prejoin }] = useStateValue();
+  const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
@@ -75,11 +75,16 @@ const Page = () => {
   }
 
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
-    <Layout data={fb} prejoin={shouldPrintPreJoinPage} title={fb.name}>
+    <Layout
+      className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}
+      data={fb}
+      prejoin={shouldPrintPreJoinPage}
+      title={fb.name}
+    >
       {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
     </Layout>
   ) : (
-    <LayoutWeb data={fb}>
+    <LayoutWeb>
       <FishbowlLanding data={fb} />
       <JoinFishbowl data={fb} joinAsGuest={handleJoinAsGuest} />
     </LayoutWeb>
