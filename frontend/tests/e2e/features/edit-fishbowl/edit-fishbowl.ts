@@ -40,7 +40,6 @@ When('saves the changes', () => {
         fishbowl: {
           id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
           description: modifiedValues.description,
-          startDateTimeTz: modifiedValues.startDateTimeTz,
           timezone: modifiedValues.timezone,
           duration: modifiedValues.hours,
           hasIntroduction: modifiedValues.hasIntroduction,
@@ -68,7 +67,7 @@ Then('sees the success message', () => {
 });
 
 Then('sees the fishbowl list updated', () => {
-  const startDateTime = new Date(modifiedValues.startDateTimeTz);
+  const startDateTime = new Date();
 
   const month = startDateTime.toLocaleString('default', { month: 'long' });
   const day = startDateTime.toLocaleString('default', { day: 'numeric' });

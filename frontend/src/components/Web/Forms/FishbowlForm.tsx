@@ -47,15 +47,15 @@ interface FormProps {
   updateFishbowl: (
     options?: UpdateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  onSubmit: (any) => void;
+  onSubmit: (res: FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>) => void;
   currentLanguage: string;
   enableReinitialize?: boolean;
-  selectedFishbowl?: FormValues;
+  selectedFishbowl?: FishbowlFormValues;
   isFull?: boolean;
   isEditForm?: boolean;
 }
 
-interface FormValues {
+export interface FishbowlFormValues {
   id?: string;
   title: string;
   day: Date;
@@ -78,7 +78,7 @@ const initialValues = {
   hasIntroduction: false
 };
 
-const Form = (props: FormProps & FormikProps<FormValues>) => {
+const Form = (props: FormProps & FormikProps<FishbowlFormValues>) => {
   const { isSubmitting, success, defaultTitle } = props;
   const { t } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
@@ -225,7 +225,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
   );
 };
 
-const FormValidation = withFormik<FormProps, FormValues>({
+const FormValidation = withFormik<FormProps, FishbowlFormValues>({
   mapPropsToValues: props => ({
     ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
     ...(!props.isEditForm && { language: props.currentLanguage })
@@ -340,7 +340,9 @@ const FishbowlForm = ({
   const dateError = t('validation.date');
   const titleError = t('validation.title');
 
-  const handleOnSubmit = res => {
+  const handleOnSubmit = (
+    res: FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>
+  ) => {
     if (res.type === 'Error') {
       console.error('[STOOA] Error', res);
       setError(res.data);
@@ -375,7 +377,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues | undefined;
+  let selectedFishbowlValues: FishbowlFormValues | undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();

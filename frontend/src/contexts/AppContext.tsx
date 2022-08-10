@@ -92,16 +92,8 @@ const initialState: State = {
 
 const [useStateValue, StateContextProvider] = createGenericContext<[State, Dispatch<Actions>]>();
 
-const StateProvider = ({
-  updateState = {},
-  children
-}: {
-  updateState: Record<string, unknown>;
-  children: JSX.Element;
-}) => (
-  <StateContextProvider value={useReducer(reducer, { ...initialState, ...updateState })}>
-    {children}
-  </StateContextProvider>
+const StateProvider = ({ children }: { children: JSX.Element }) => (
+  <StateContextProvider value={useReducer(reducer, initialState)}>{children}</StateContextProvider>
 );
 
 export { initialState, StateProvider, useStateValue };

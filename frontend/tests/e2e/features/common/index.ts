@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { FishbowlFormValues } from '@/components/Web/Forms/FishbowlForm';
+import { nearestQuarterHour } from '@/lib/helpers';
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 const twoHoursInMs = 1000 * 60 * 60 * 2;
@@ -17,16 +19,14 @@ const isoDate = new Date(date.getTime() + twoHoursInMs);
 const isoCloseDate = new Date(date.getTime() + twentyMinutesInMs);
 
 // it would be nice to have the union types of Fishbowl. Something like Fishbowl properties.
-export const modifiedValues: Record<string, unknown> = {
+export const modifiedValues: FishbowlFormValues = {
   title: '',
-  hours: '',
+  day: new Date(),
+  time: nearestQuarterHour(),
+  hours: '01:00',
   description: '',
-  startDateTimeTz: new Date(),
-  duration: '',
-  durationFormatted: '',
-  timezone: '',
-  locale: '',
   language: '',
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false
 };
 
@@ -64,30 +64,32 @@ When('clicks to close modal', () => {
   cy.get('button[class="close"]').click({ force: true });
 });
 
-/**
- * @param {string} newValue Is the user's input
- * @param {string} fieldName The field to select by name
- */
-When('writes {string} in input {string}', (newValue = '', fieldName = '') => {
-  cy.get(`:is(input, textarea, div)[name=${fieldName}]`).clear().type(newValue);
-  modifiedValues[fieldName] = newValue;
-});
+When(
+  'writes {string} in input {string}',
+  (newValue: Date & string, fieldName: 'title' | 'description' | 'day' | 'time') => {
+    cy.get(`:is(input, textarea, div)[name=${fieldName}]`).clear().type(newValue);
+    modifiedValues[fieldName] = newValue;
+  }
+);
 
 /**
  * This function changes the value to a select type input
  * @param {string} fieldName
  * @param {string} newValue
  */
-When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
-  cy.get(`select[name=${fieldName}]`).select(newValue);
-  modifiedValues[fieldName] = newValue;
-});
+When(
+  'modifies the fishbowl {string} selecting {string}',
+  (fieldName: 'hours' | 'timezone' | 'language', newValue: string) => {
+    cy.get(`select[name=${fieldName}]`).select(newValue);
+    modifiedValues[fieldName] = newValue;
+  }
+);
 
 /**
  * This function changes the value to a checkbox type input
  * @param {string} fieldName
  */
-When('modifies the fishbowl {string} to true', (fieldName = '') => {
+When('modifies the fishbowl {string} to true', (fieldName: 'hasIntroduction') => {
   cy.get(`input[name=${fieldName}]`).click({ force: true });
   modifiedValues[fieldName] = true;
 });
