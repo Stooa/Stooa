@@ -19,7 +19,7 @@ parameters:
         - config
         - tests
     symfony:
-        container_xml_path: '%rootDir%/../../../var/cache/test/srcApp_KernelTestDebugContainer.xml'
+        container_xml_path: '%rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml'
     treatPhpDocTypesAsCertain: false
     checkGenericClassInNonGenericObjectType: true
     checkMissingIterableValueType: true

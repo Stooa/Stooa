@@ -41,7 +41,7 @@ class ParticipantRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->participantRepository = self::$container->get(ParticipantRepository::class);
+        $this->participantRepository = static::getContainer()->get(ParticipantRepository::class);
     }
 
     /** @test */

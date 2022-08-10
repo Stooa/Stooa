@@ -7,63 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { User } from '@/types/user';
+import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
 
-export type Fishbowl = {
-  id: string;
-  name: string;
-  description?: string;
-  slug: string;
-  locale: string;
-  host?: User;
-  currentStatus: string;
-  participants?: (
-    first?: number,
-    last?: number,
-    before?: string,
-    after?: string
-  ) => ParticipantConnection;
+export interface Fishbowl
+  extends Omit<apiPlatformFishbowl, '@id' | 'slug' | 'startDateTimeTz' | 'endDateTimeTz'> {
+  id?: string;
+  readonly slug: string;
   startDateTimeTz: string;
   endDateTimeTz: string;
-  durationFormatted: string;
-};
-
-type ParticipantConnection = {
-  edges?: ParticipantEdge[];
-  pageInfo: ParticipantPageInfo;
-  totalCount: number;
-};
-
-type ParticipantEdge = {
-  node?: Participant;
-  cursor: string;
-};
-
-type ParticipantPageInfo = {
-  endCursor?: string;
-  startCursor?: string;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-};
-
-type Participant = {
-  id: string;
-  user?: UserItem;
-  guest?: Guest;
-  lastPing: string;
-  fishbowl?: Fishbowl;
-};
-
-type Guest = {
-  id: string;
-};
-
-type UserItem = {
-  id: string;
-  name: string;
-  surnames: string;
-  email: string;
-  locale: string;
-  publicLinkedinProfile?: string;
-  publicTwitterProfile?: string;
-};
+}

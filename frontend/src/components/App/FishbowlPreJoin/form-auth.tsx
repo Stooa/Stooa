@@ -13,7 +13,6 @@ import userRepository from '@/jitsi/User';
 import { useStateValue } from '@/contexts/AppContext';
 
 import Button from '@/components/Common/Button';
-import { InputStyled } from '@/ui/Form';
 import FormikForm from '@/ui/Form';
 
 type TProps = {
@@ -21,13 +20,14 @@ type TProps = {
 };
 
 const AuthUser = ({ name }: TProps) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const { t } = useTranslation('form');
 
   const handleOnSubmit = () => {
     dispatch({
       type: 'JOIN_USER',
-      prejoin: false
+      prejoin: false,
+      isGuest: false
     });
   };
 

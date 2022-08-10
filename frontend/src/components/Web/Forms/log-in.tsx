@@ -80,7 +80,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const LogIn = () => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Record<string, unknown>>();
   const { t } = useTranslation('form');
   const { login, loginStatus, updateLogingStatus } = useAuth();
 

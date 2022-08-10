@@ -16,7 +16,8 @@
         "language": "Idioma",
         "selectLanguageLabel": "Selecciona el idioma",
         "hours": "h",
-        "minutes": "m",
+        "minutes": "min",
+        "minutesShort": "m",
         "duration": "Duración",
         "selectDuration": "Selecciona la duración",
         "description": "Descripción (opcional)",
@@ -47,6 +48,7 @@
         "url": "La url no es válida",
         "twitter": "El usuario de Twitter debe comenzar por @",
         "equalPassword": "Las dos contraseñas deben ser iguales",
-        "successMessage": "Tus cambios están guardados"
+        "successMessage": "Tus cambios están guardados",
+        "notEmpty": "Este campo no puede estar vacío"
     }
 }

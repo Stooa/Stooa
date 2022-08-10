@@ -33,6 +33,7 @@
     "full": "Penuh",
     "join": "Gabung pembicaraan",
     "leave": "Tinggalkan pembicaraan",
+    "reactions": "Reaksi",
     "unmute": "Tidak bisukan",
     "sameAsSystem": "Sama dengan sistem",
     "mute": "Bisukan",
@@ -65,7 +66,7 @@
         "button": "Konfirmasi"
     },
     "participants": {
-        "title": "Peserta fishbowl",
+        "title": "Orang-orang di ruang",
         "attendees": "Pendengar",
         "speaking": "Berbicara sekarang"
     },
@@ -77,6 +78,20 @@
     "waitingHost": "Peserta menunggumu untuk memulai fishbowl-nya",
     "timeLeft_other": "{{time}} tersisa",
     "share": "Beri tahu orang lain tentang Stooa!",
+    "kick": {
+        "button": "Kick user",
+        "successMessage": "User kicked successfully.",
+        "modal": {
+            "title": "Why do you want to kick {{userName}}?",
+            "description": "The user will be kicked and notified, but will be able to come back to the room",
+            "options": {
+                "noParticipating": "The user occupies a seat without participating.",
+                "conductViolation": "The user has violated the code of conduct of the community."
+            },
+            "button": "Kick user",
+            "cancelButton": "Cancel"
+        }
+    },
     "permissionsModalTitle": "Permissions needed",
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Grant permissions",

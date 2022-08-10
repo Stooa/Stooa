@@ -9,19 +9,19 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
-import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import Dots from '@/ui/svg/dots.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import Trans from 'next-translate/Trans';
+import { Fishbowl } from '@/types/api-platform';
 
 interface Props {
   data: Fishbowl;
 }
 
 const FishbowlInfo: React.FC<Props> = ({ data }) => {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
   const toggleInfo = () => {
@@ -36,7 +36,9 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      const target = event.target as HTMLElement;
+
+      if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
         toggleInfo();
       }
     };

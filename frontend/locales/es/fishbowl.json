@@ -11,9 +11,9 @@
     "joinMemberNote": "* Permite contactar con el resto de asistentes",
     "copySuccess": "¡Enlace copiado!",
     "detail": {
-        "shareTitle": "¿Ahora qué? <br/>¡Comparte el <i>fishbowl</i> con tus amigos!",
-        "shareSubtitle": "¡Deja que la conversación fluya! Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.",
-        "shareInSocials": "O comparte en:",
+        "shareTitle": "¡Bien hecho! ¿Y ahora qué?<br/>¡Comparte el <i>fishbowl</i> con tu gente!",
+        "shareSubtitle": "¡Deja que la conversación fluya! Copia y comparte el link de este <i>fishbowl</i> con las personas que quieres que se unan a la conversación.",
+        "shareInSocials": "O compártelo en:",
         "fishbowlCreatedSuccessfully": "¡<i>Fishbowl</i> creado con éxito!",
         "cardMiniTitle": "Detalles del <i>fishbowl</i>",
         "editFishbowlDetails": "Editar detalles del <i>fishbowl</i>",
@@ -36,6 +36,7 @@
     "full": "Lleno",
     "join": "Unirse a la conversación",
     "leave": "Salir de la conversación",
+    "reactions": "Reacciones",
     "unmute": "Activar",
     "mute": "Silenciar",
     "sameAsSystem": "Mismo que el sistema",
@@ -85,8 +86,35 @@
     "fishbowlDescription":{
         "shareText": "Copia y comparte el link para invitar a más personas a este <i>fishbowl</i>."
     },
+    "kick": {
+        "button": "Expulsar usuario",
+        "successMessage": "Usuario expulsado correctamente.",
+        "modal": {
+            "title": "¿Por qué quieres expulsar a {{userName}}?",
+            "description": "La persona indicada será expulsada y recibirá notificación, pero podrá volver a la sala si quiere.",
+            "options": {
+                "noParticipating": "Está ocupando un asiento sin participar.",
+                "conductViolation": "Ha violado el código de conducta de la comunidad."
+            },
+            "button": "Expulsar usuario/a",
+            "cancelButton": "Cancelar"
+        }
+    },
     "permissionsModalTitle": "Permisos necesarios",
     "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
     "permissionsModalButton": "Solicitar acceso",
-    "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar."
+    "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar.",
+    "reaction": {
+        "agree": "De acuerdo",
+        "disagree": "Desacuerdo",
+        "love": "Me encanta",
+        "applause": "¡Bravo!",
+        "laugh": "LOL",
+        "wave": "Hola",
+        "insightful": "Interesante"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "¿No tienes claro cómo funciona un fishbowl? Haz clic aquí",
+        "connectWithUsers": "Para conectar con las personas en la sala a través de tus RRSS, regístrate en Stooa."
+    }
 }

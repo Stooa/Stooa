@@ -12,6 +12,7 @@ export interface User {
   guestId?: string;
   nickname?: string;
   name?: string;
+  isCurrentUser?: boolean;
   audioInput?: MediaDeviceInfo;
   audioOutput?: MediaDeviceInfo;
   videoInput?: MediaDeviceInfo;
@@ -26,11 +27,12 @@ export interface UserRepository {
   getUserAudioMuted: () => boolean;
   getUserAudioOutput: () => MediaDeviceInfo | null;
   getUserGuestId: () => string | null;
-  getUserNickname: () => string | null;
+  getUserNickname: () => string;
   getUserVideoInput: () => MediaDeviceInfo | null;
   getUserVideoMuted: () => boolean;
   handleUserJoin: (id: string, user: User) => void;
   handleUserLeft: (id: string, user: User) => void;
+  handleUserKicked: (actorParticipant: User, reason: string) => void;
   setUser: (value: User) => void;
   setUserAudioInput: (audioInput: MediaDeviceInfo) => void;
   setUserAudioMuted: (audioMuted: boolean) => void;

@@ -31,7 +31,14 @@ interface Props {
   selectorPosition?: 'top' | 'bottom';
 }
 
-const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) => {
+type ButtonConfigHandle = {
+  handleShowDevices: (shouldShowDevices?: boolean) => void;
+};
+
+const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = (
+  { unlabeled, selectorPosition },
+  ref
+) => {
   const [showDevices, setShowDevices] = useState(false);
 
   const {
@@ -86,7 +93,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
         <div className="button">
           <SettingsIcon />
         </div>
-        {!unlabeled && <span className="text medium">{t('settings')}</span>}
+        {!unlabeled && <div className="text medium">{t('settings')}</div>}
       </Button>
       {showDevices && (
         <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
@@ -105,7 +112,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
-                      selected={audioInputDevice.deviceId === deviceId}
+                      selected={audioInputDevice?.deviceId === deviceId}
                       onClick={handleAudioInput}
                       value={deviceId}
                     >
@@ -134,7 +141,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
-                      selected={audioOutputDevice.deviceId === deviceId}
+                      selected={audioOutputDevice?.deviceId === deviceId}
                       onClick={handleAudioOutput}
                       value={deviceId}
                     >
@@ -163,7 +170,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
                   <li key={deviceId}>
                     <Item
                       className="body-sm device"
-                      selected={videoDevice.deviceId === deviceId}
+                      selected={videoDevice?.deviceId === deviceId}
                       onClick={handleVideoInput}
                       value={deviceId}
                     >
@@ -181,6 +188,7 @@ const ButtonConfig = forwardRef(({ unlabeled, selectorPosition }: Props, ref) =>
       )}
     </Container>
   );
-});
+};
 
-export default ButtonConfig;
+export default forwardRef(ButtonConfig);
+export type { ButtonConfigHandle };

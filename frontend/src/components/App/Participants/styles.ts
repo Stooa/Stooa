@@ -10,21 +10,52 @@
 import styled from 'styled-components';
 
 import { StatusBox } from '@/components/App/Fishbowl/styles';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import {
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_200,
+  COLOR_NEUTRO_300,
+  COLOR_NEUTRO_400,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
+  COLOR_NEUTRO_900
+} from '@/ui/settings';
 import { space, rems, media } from '@/ui/helpers';
+import { StyledButtonContext } from '@/components/App/ButtonContextMenu/styles';
+import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
   bottom: 0;
-  // height: calc(100% - ${space(14)});
+  /* height: calc(100% - ${space(14)}); */
   overflow-y: auto;
-  padding: ${space(3)};
+  padding: ${space(3)} 0;
   position: fixed;
   right: 0;
   transform: translateX(100%);
   width: 100%;
   will-change: transform;
   z-index: 10;
+
+  & > .participant-list > h3,
+  & > .header {
+    padding: 0 ${space(3)};
+  }
+
+  ${StyledButtonContext} {
+    position: relative;
+
+    & > button {
+      opacity: 1;
+      background-color: ${COLOR_NEUTRO_300};
+      & > svg path {
+        fill: ${COLOR_NEUTRO_700};
+      }
+
+      &:hover {
+        background-color: ${COLOR_NEUTRO_400};
+      }
+    }
+  }
 
   &.active {
     transform: translateX(0);
@@ -69,85 +100,99 @@ const ParticipantsDrawer = styled.div`
         margin-left: ${space()};
       }
     }
+  }
+`;
 
-    .participant .name {
-      display: inline-block;
+const StyledListItem = styled.li`
+  display: grid;
+  box-sizing: content-box;
+  min-height: 30px;
+  grid-template-columns: 4fr minmax(50px, 1fr);
+  column-gap: ${space(2)};
+  padding: ${space(1)} ${space(3)};
+  ${BODY_MD}
+
+  .roles {
+    color: ${COLOR_NEUTRO_600};
+    margin-left: ${space()};
+  }
+
+  .name {
+    display: inline-block;
+    max-width: 61%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+
+    * :not(:last-child) {
+      margin-right: ${space()};
     }
   }
 
-  .participant {
-    display: grid;
-    grid-template-columns: 4fr minmax(70px, 1fr);
-    column-gap: ${space(2)};
-    margin: ${space(2)} 0;
+  .icon {
+    box-sizing: content-box;
+    align-items: center;
+    display: inline-flex;
+    height: auto;
+    justify-content: center;
+    width: auto;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
+  span.icon {
+    opacity: 0.25;
+  }
+
+  .social {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    & > *:not(:last-child) {
+      margin-right: ${space(2)};
     }
 
-    .roles {
-      color: ${COLOR_NEUTRO_600};
-    }
-
-    .roles,
-    .social {
-      justify-self: end;
-    }
-
-    .name {
+    & a:not(.invalid):hover::after {
+      ${BODY_XS}
+      content: attr(data-username);
+      position: absolute;
+      bottom: calc(100% + ${space(0.5)});
+      background-color: ${COLOR_NEUTRO_900};
+      padding: ${space(0.5)} ${space(1)};
+      color: ${COLOR_NEUTRO_100};
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 16ch;
       white-space: nowrap;
-    }
 
-    .muted,
-    .video-muted {
-      display: none;
-    }
-
-    &.user-muted-audio {
-      .muted {
-        display: block;
-      }
-      .unmuted {
-        display: none;
-      }
-    }
-
-    &.user-muted-video {
-      .video-muted {
-        display: block;
-      }
-      .video-unmuted {
-        display: none;
-      }
-    }
-
-    .info {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      overflow: hidden;
-
-      *:not(:last-child) {
-        margin-right: ${space()};
-      }
-    }
-
-    .icon {
-      align-items: center;
-      display: inline-flex;
-      height: ${rems(24)};
-      justify-content: center;
-      margin-left: ${space()};
-      padding: ${rems(6)};
-      width: ${rems(24)};
-    }
-
-    span.icon {
-      opacity: 0.25;
+      border-radius: 30px;
     }
   }
+
+  &.prefishbowl {
+    padding: ${space(2)} ${space(3)};
+
+    & .icon {
+      transform: scale(1.2);
+    }
+  }
+
+  ${media.max('tablet')`
+    &:hover {
+      background-color: ${COLOR_NEUTRO_200};
+    }
+  `}
+
+  ${media.min('tablet')`
+    ${BODY_SM}
+  `}
 `;
 
 const ParticipantsToggle = styled(StatusBox)`
@@ -187,7 +232,6 @@ const ParticipantsToggle = styled(StatusBox)`
   }
 
   &.active {
-    background: ${COLOR_NEUTRO_100};
     position: relative;
 
     &::before {
@@ -227,4 +271,4 @@ const Icon = styled.button`
   `}
 `;
 
-export { ParticipantsDrawer, ParticipantsToggle, Icon };
+export { ParticipantsDrawer, ParticipantsToggle, Icon, StyledListItem };

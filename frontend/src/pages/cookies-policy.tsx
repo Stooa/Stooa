@@ -22,7 +22,12 @@ const CookiesPolicy = () => {
       const cookiebotDec = document.createElement('script');
       cookiebotDec.src = `https://consent.cookiebot.com/${cookiebotId}/cd.js`;
       cookiebotDec.id = 'CookieDeclaration';
-      document.getElementById('cookies-container').appendChild(cookiebotDec);
+
+      const cookiesContainer = document.getElementById('cookies-container');
+
+      if (cookiesContainer) {
+        cookiesContainer.appendChild(cookiebotDec);
+      }
     }
   }, []);
 

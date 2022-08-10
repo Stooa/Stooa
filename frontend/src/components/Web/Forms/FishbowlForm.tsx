@@ -33,7 +33,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import Switch from '@/components/Common/Fields/Switch';
 
 import { CreateFishbowlOptions, UpdateFishbowlOptions } from '@/types/graphql/fishbowl';
-import { Fishbowl } from '@/types/api-platform/interfaces/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 
 interface FormProps {
   required: string;
@@ -50,7 +50,7 @@ interface FormProps {
   onSubmit: (any) => void;
   currentLanguage: string;
   enableReinitialize?: boolean;
-  selectedFishbowl?: FormValues | null;
+  selectedFishbowl?: FormValues;
   isFull?: boolean;
   isEditForm?: boolean;
 }
@@ -93,6 +93,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="title"
           type="text"
           autoComplete="off"
+          id="title"
         />
         <Textarea
           data-testid="edit-form-description"
@@ -100,12 +101,14 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="description"
           validation={false}
           autoComplete="off"
+          id="description"
         />
         <DatePicker
           data-testid="edit-form-date"
           label={t('fishbowl.day')}
           placeholderText={t('fishbowl.selectDay')}
           name="day"
+          id="day"
           minDate={new Date()}
           dateFormat="dd/MM/yyyy"
           icon="calendar"
@@ -117,6 +120,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.time')}
           placeholderText={t('fishbowl.selectTime')}
           name="time"
+          id="time"
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={15}
@@ -128,6 +132,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         <Select
           label={t('fishbowl.duration')}
           name="hours"
+          id="hours"
           variant="sm"
           icon="hourglass"
           autoComplete="off"
@@ -166,6 +171,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           className="select"
           label={t('fishbowl.timezone')}
           name="timezone"
+          id="timezone"
           icon="world"
           autoComplete="off"
         >
@@ -183,6 +189,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           className="select"
           label={t('fishbowl.language')}
           name="language"
+          id="language"
           icon="language"
           autoComplete="off"
         >
@@ -307,7 +314,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const FishbowlForm = ({
-  selectedFishbowl = null,
+  selectedFishbowl,
   $isFull = false,
   isEditForm = false,
   onSaveCallback
@@ -318,16 +325,16 @@ const FishbowlForm = ({
   onSaveCallback?: (data: Fishbowl) => void;
 }) => {
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState<boolean>(null);
+  const [success, setSuccess] = useState<boolean>();
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
   const { t, lang } = useTranslation('form');
-  const { updateCreateFishbowl } = useAuth();
+  const { user, updateCreateFishbowl } = useAuth();
 
-  const { user } = useAuth();
-
-  const defaultTitle = t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' });
+  const defaultTitle = t('defaultTitle', {
+    name: user && user.name ? user.name.split(' ')[0] : ''
+  });
 
   const requiredError = t('validation.required');
   const dateError = t('validation.date');
@@ -346,12 +353,14 @@ const FishbowlForm = ({
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
-        console.log(formattedFishbowl);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
         }, 5000);
-        onSaveCallback(formattedFishbowl);
+
+        if (onSaveCallback) {
+          onSaveCallback(formattedFishbowl);
+        }
       } else {
         const {
           data: {
@@ -366,7 +375,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues;
+  let selectedFishbowlValues: FormValues | undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
@@ -381,14 +390,14 @@ const FishbowlForm = ({
 
     selectedFishbowlValues = {
       id: selectedFishbowl.id,
-      title: selectedFishbowl.name,
+      title: selectedFishbowl.name ?? '',
       day: newDate,
       time: newDate,
-      hours: selectedFishbowl.durationFormatted,
-      description: selectedFishbowl.description,
+      hours: selectedFishbowl.durationFormatted ?? '',
+      description: selectedFishbowl.description ?? '',
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: selectedFishbowl.hasIntroduction
+      hasIntroduction: selectedFishbowl.hasIntroduction ?? false
     };
   }
 
@@ -407,7 +416,7 @@ const FishbowlForm = ({
         updateFishbowl={updateFishbowl}
         onSubmit={handleOnSubmit}
         currentLanguage={lang}
-        selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
+        selectedFishbowl={selectedFishbowlValues}
         isEditForm={isEditForm}
       />
     </>

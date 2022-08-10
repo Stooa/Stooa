@@ -1,0 +1,22 @@
+{
+    "step1": {
+        "title": "¡Hola!",
+        "text": "Aquí van unos consejos para que tu experiencia en el fishbowl sea fluida."
+    },
+    "step2": {
+        "title": "Las cinco sillas",
+        "text": "Las 5 sillas están disponibles para que te unas a la conversación siempre que tengas algo que decir. ¡Cuando hayas terminado, deja tu silla libre para que otras personas puedan participar!"
+    },
+    "step3": {
+        "title": "¿Cómo uso las sillas?",
+        "text": "Para ocupar una silla o dejarla libre puedes usar los botones verde y rojo. ¡No te preocupes: cuando dejes tu silla seguirás en la sala escuchando a los demás!",
+        "textIntroduction": "En cuanto acabe la introducción, podrás ocupar una silla o dejarla libre usando los botones verde y rojo. ¡No te preocupes: cuando dejes tu asiento seguirás en la sala escuchando a los demás!"
+    },
+    "step4": {
+        "title": "Networking",
+        "text": "Conoce y conecta con las personas en la sala a través de su perfil en Linkedin y Twitter (si está indicado)"
+    },
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "done": "Entendido"
+}

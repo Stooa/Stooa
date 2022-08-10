@@ -29,7 +29,7 @@ const Container = styled(ContainerDefault)`
 `;
 
 const Header = styled(HeaderDefault)`
-  padding: 0 ${space(3)};
+  padding: ${space(3)} ${space(3)} 0 ${space(3)};
 
   ${media.min('tablet')`
     padding: ${space(3)} ${space(6)};

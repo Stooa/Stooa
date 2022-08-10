@@ -23,7 +23,7 @@ import { IConferenceStatus } from '@/jitsi/Status';
 
 const HostNow = () => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
   const { lang } = useTranslation();
   const router = useRouter();
 

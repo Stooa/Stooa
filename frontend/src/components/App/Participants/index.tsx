@@ -12,9 +12,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getParticipants, ping } from '@/lib/auth';
+import { ping } from '@/lib/auth';
 import { getParticipantList } from '@/lib/jitsi';
-import ParticipantCard from '@/components/App/Participants/Participant';
+import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
 import ChevronLeft from '@/ui/svg/chevron-left.svg';
 import ChevronRight from '@/ui/svg/chevron-right.svg';
@@ -26,8 +26,9 @@ import VideoMuted from '@/ui/svg/video-muted.svg';
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
+import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 
-const initialParticipant = {
+const initialParticipant: Participant = {
   id: '',
   name: '',
   linkedin: '',
@@ -37,7 +38,9 @@ const initialParticipant = {
   guestId: '',
   joined: false,
   isMuted: false,
-  isVideoMuted: false
+  isVideoMuted: false,
+  getId: () => '',
+  getDisplayName: () => ''
 };
 
 interface Props {
@@ -59,16 +62,16 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data } = useStooa();
+  const { data, showOnBoardingTour } = useStooa();
 
   const pingParticipant = () => {
     ping(lang, fid);
   };
 
   const getApiParticipants = () => {
-    getParticipants(lang, fid)
-      .then(({ data: { response } }) => {
-        setParticipants(response || [initialParticipant]);
+    getApiParticipantList(lang, fid)
+      .then(participantList => {
+        setParticipants(participantList);
       })
       .catch(error => {
         console.log('[STOOA] Error getting participants', error);
@@ -95,28 +98,6 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
     if (a.isModerator) return -1;
     if (b.isModerator) return 1;
     return 0;
-  };
-
-  const handleShowMutedIcons = () => {
-    participants.forEach(participant => {
-      const participantElement = document.querySelector(
-        `.participant[data-id="${participant.id}"]`
-      );
-
-      if (participantElement) {
-        if (participant.isMuted) {
-          participantElement.classList.add('user-muted-audio');
-        } else {
-          participantElement.classList.remove('user-muted-audio');
-        }
-
-        if (participant.isVideoMuted) {
-          participantElement.classList.add('user-muted-video');
-        } else {
-          participantElement.classList.remove('user-muted-video');
-        }
-      }
-    });
   };
 
   useEffect(() => {
@@ -155,12 +136,20 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   }, [participants]);
 
   useEffect(() => {
-    handleShowMutedIcons();
-  }, [speakingParticipants, roomParticipants]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (showOnBoardingTour) {
+      setActive(false);
+      if (active) toggleParticipants();
+    }
+  }, [showOnBoardingTour]);
 
   return (
     <>
-      <ParticipantsToggle as="button" className={active ? 'active' : ''} onClick={toggleDrawer}>
+      <ParticipantsToggle
+        id="participant-toggle"
+        as="button"
+        className={`participant-toggle ${active ? 'active' : ''} `}
+        onClick={toggleDrawer}
+      >
         <Curve className="curve" />
         {active && <ChevronRight className="toggle-icon" />}
         {!active && <ChevronLeft className="toggle-icon" />}

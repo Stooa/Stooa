@@ -9,7 +9,7 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START, PERMISSION_CHANGED } from '@/jitsi/Events';
+import { CONFERENCE_START, PERMISSION_CHANGED, REACTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -131,6 +131,10 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  const _handleMessageReceived = (id, text, timestamp) => {
+    dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
+  };
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -147,7 +151,8 @@ const conferenceRepository = () => {
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
-          DOMINANT_SPEAKER_CHANGED
+          DOMINANT_SPEAKER_CHANGED,
+          MESSAGE_RECEIVED
         }
       }
     } = JitsiMeetJS;
@@ -162,12 +167,13 @@ const conferenceRepository = () => {
     conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
     conference.on(USER_JOINED, userRepository.handleUserJoin);
     conference.on(USER_LEFT, userRepository.handleUserLeft);
-    conference.on(KICKED, userRepository.handleUserLeft);
+    conference.on(KICKED, userRepository.handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
+    conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -239,7 +245,7 @@ const conferenceRepository = () => {
 
     connection = new JitsiMeetJS.JitsiConnection(
       null,
-      isUserModerator && auth ? auth.token : null,
+      auth ? auth.token : process.env.NEXT_PUBLIC_GUEST_TOKEN ?? null,
       connectionOptions(roomName)
     );
 
@@ -361,10 +367,23 @@ const conferenceRepository = () => {
       linkedin,
       isModerator,
       isCurrentUser: true,
-      joined: conference.getLocalParticipantProperty('joined') === 'yes',
+      joined:
+        conference.isJoined() === null
+          ? false
+          : conference.getLocalParticipantProperty('joined') === 'yes',
       isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
       isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
     };
+  };
+
+  const kickParticipant = (id, reason) => {
+    conference.kickParticipant(id, reason);
+  };
+
+  const sendTextMessage = message => {
+    if (isJoined) {
+      conference.sendTextMessage(message);
+    }
   };
 
   return {
@@ -379,9 +398,11 @@ const conferenceRepository = () => {
     getParticipants,
     initializeJitsi,
     initializeConnection,
+    kickParticipant,
     leave,
     sendJoinEvent,
-    sendLeaveEvent
+    sendLeaveEvent,
+    sendTextMessage
   };
 };
 

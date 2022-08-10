@@ -23,7 +23,7 @@ import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles
 import Trans from 'next-translate/Trans';
 
 const Avatar: React.FC = () => {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const { user, logout } = useAuth();
   const { t } = useTranslation('common');
@@ -31,7 +31,9 @@ const Avatar: React.FC = () => {
   const toggleDropdown = () => setActive(!active);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    const target = event.target as HTMLElement;
+
+    if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
       toggleDropdown();
     }
   };
@@ -51,7 +53,7 @@ const Avatar: React.FC = () => {
         onClick={toggleDropdown}
       >
         <AvatarIcon />
-        <span>{user.name}</span>
+        <span>{user?.name}</span>
         <ChevronDown />
       </button>
       {active && (
