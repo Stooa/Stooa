@@ -11,9 +11,9 @@
     "joinMemberNote": "* Allows you to contact the rest of the attendees",
     "copySuccess": "Link copied to clipboard!",
     "detail": {
-        "shareTitle": "Now what? <br/>Share the fishbowl!",
-        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the conversation.",
-        "shareInSocials": "Or share in:",
+        "shareTitle": "Well done! Now what? <br/>Share the fishbowl with your friends!",
+        "shareSubtitle": "Let the conversation flow! Copy and share the link to this fishbowl with the people you want to join the conversation.",
+        "shareInSocials": "Or share it on:",
         "fishbowlCreatedSuccessfully": "Fishbowl created successfully!",
         "cardMiniTitle": "Fishbowl details",
         "editFishbowlDetails": "Edit fishbowl details",
@@ -112,5 +112,9 @@
         "laugh": "LOL",
         "wave": "Hi",
         "insightful": "Insightful"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "Don't know how a fishbowl works? Click here",
+        "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
     }
 }

@@ -101,14 +101,18 @@ const Home = () => {
     ];
 
     bodyMovinanimations.map(item => {
-      lottie.loadAnimation({
-        container: document.getElementById(item.id),
-        animationData: item.path,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        assetsPath: item.assetsPath
-      });
+      const element = document.getElementById(item.id);
+
+      if (element) {
+        lottie.loadAnimation({
+          container: element,
+          animationData: item.path,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          assetsPath: item.assetsPath
+        });
+      }
     }, []);
 
     handleAnimation('billboard-animate', 0.2);

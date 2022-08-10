@@ -35,8 +35,8 @@ const userRepository = (): UserRepository => {
     return user ? JSON.parse(user) : {};
   };
 
-  const getUserGuestId = () => getUser()?.guestId;
-  const getUserNickname = () => getUser()?.nickname;
+  const getUserGuestId = () => getUser()?.guestId || null;
+  const getUserNickname = () => getUser()?.nickname ?? '';
   const getUserAudioInput = () => getUser()?.audioInput || null;
   const getUserAudioOutput = () => getUser()?.audioOutput || null;
   const getUserVideoInput = () => getUser()?.videoInput || null;

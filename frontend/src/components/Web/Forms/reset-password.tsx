@@ -125,8 +125,8 @@ const ResetPassword = ({ token }: { token: string }) => {
 
       await login(email, values.password).then(res => {
         if (res.type === 'Error') {
-          setError(error);
-          console.error('[STOOA LOGIN]', error.message);
+          setError(res.data);
+          console.error('[STOOA LOGIN]', res);
         }
       });
     }
