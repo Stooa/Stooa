@@ -10,7 +10,6 @@
 import Footer from '@/components/App/Footer';
 import { render } from '@testing-library/react';
 import { useStooa } from '@/contexts/StooaManager';
-import { useRouter } from 'next/router';
 import { IConferenceStatus } from '@/jitsi/Status';
 import preloadAll from 'jest-next-dynamic';
 
@@ -26,7 +25,12 @@ jest.mock('@/components/App/IntroNotification', () => () => (
 ));
 
 jest.mock('@/contexts/StooaManager');
-jest.mock('next/router');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+useRouter.mockImplementation(() => ({
+  query: { fid: '12345' }
+}));
 
 beforeAll(async () => {
   await preloadAll();

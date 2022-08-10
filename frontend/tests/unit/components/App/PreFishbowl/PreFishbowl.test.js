@@ -12,11 +12,9 @@ import PreFishbowl from '@/components/App/PreFishbowl';
 import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
 import { makeCurrentFishbowl } from '../../../factories/fishbowl';
-import { useRouter } from 'next/router';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 jest.mock('@/lib/analytics');
-jest.mock('next/router');
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => (
   <mock-pre-fishbowl-participants data-testid="mock-participants" />
@@ -25,12 +23,18 @@ jest.mock('@/components/App/StatusBar/Counter', () => ({
   Counter: () => <mock-counter data-testid="mock-counter" />
 }));
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+useRouter.mockImplementation(() => ({
+  pathname: '/',
+  query: { fid: 'test-fid' }
+}));
+
 let currentFishbowl;
 
 beforeEach(() => {
   currentFishbowl = makeCurrentFishbowl();
-
-  useRouter.mockReturnValue({ query: { slug: currentFishbowl.slug } });
 
   useStooa.mockReturnValue({
     isModerator: false,
