@@ -65,7 +65,7 @@
     "@runroom/design-tokens": "2.0.2",
     "@svgr/webpack": "6.2.1",
     "@testing-library/cypress": "8.0.2",
-    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
     "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.4.1",
