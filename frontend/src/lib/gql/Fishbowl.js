@@ -22,6 +22,8 @@ const CREATE_FISHBOWL = gql`
         endDateTimeTz
         isFishbowlNow
         hasIntroduction
+        isPrivate
+        password
       }
     }
   }
@@ -71,6 +73,7 @@ const GET_FISHBOWL = gql`
       isFishbowlNow
       hasIntroduction
       currentStatus
+      isPrivate
     }
   }
 `;
