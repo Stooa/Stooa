@@ -9,7 +9,6 @@
 
 import { render, waitFor } from '@testing-library/react';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
-import { useRouter } from 'next/router';
 import { useStateValue } from '@/contexts/AppContext';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { ping } from '@/lib/auth';
@@ -17,7 +16,6 @@ import { makeParticipant } from '../../../factories/participant';
 
 jest.mock('@/lib/auth');
 jest.mock('@/contexts/AppContext');
-jest.mock('next/router');
 jest.mock('@/repository/ApiParticipantRepository');
 jest.mock('@/components/App/ParticipantPlaceholder', () => () => (
   <mock-participant-placeholder data-testid="mock-placeholder" />
@@ -26,8 +24,14 @@ jest.mock('@/components/App/Participants/ParticipantCard', () => () => (
   <mock-participant-card data-testid="mock-participant-card" />
 ));
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+useRouter.mockImplementation(() => ({
+  query: { fid: '12345' }
+}));
+
 beforeEach(async () => {
-  useRouter.mockReturnValue({ query: { fid: 12345 } });
   useStateValue.mockReturnValue([{ isGuest: false }]);
   getApiParticipantList.mockReturnValue(
     new Promise(resolve => {
