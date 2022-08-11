@@ -23,6 +23,7 @@ RUN apt-get update \
     libfcgi-bin \
     mariadb-client \
     git \
+    libsodium-dev\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 

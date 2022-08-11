@@ -15,6 +15,7 @@
         "hashids/hashids": "4.1.0",
         "lexik/jwt-authentication-bundle": "2.16.0",
         "nelmio/cors-bundle": "2.2.0",
+        "paragonie/halite": "5.1.0",
         "ramsey/uuid": "4.3.1",
         "ramsey/uuid-doctrine": "1.8.1",
         "rector/rector": "0.13.10",
