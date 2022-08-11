@@ -7,8 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import { css } from 'styled-components';
+import { css, Interpolation, ThemedStyledProps } from 'styled-components';
 import { BREAKPOINTS, FONT_BASE_SIZE, SPACE } from '@/ui/settings';
+
+type Breakpoints =
+  | 'desktop'
+  | 'desktopLarge'
+  | 'desktopXL'
+  | 'form'
+  | 'maxWidth'
+  | 'phone'
+  | 'reader'
+  | 'tablet'
+  | 'tabletLarge'
+  | 'smallestIphone';
 
 const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
   if (hex[0] === '#') {
@@ -83,10 +95,10 @@ const pixelate = (n: number | string) => (n !== 0 ? `${n}px` : n);
 
 const space = (n = 1) => rems(SPACE * n);
 
-const getSizeFromBreakpoint = (value: string, max = false) => {
+const getSizeFromBreakpoint = (breakpoint: Breakpoints, max = false) => {
   let mq;
-  if (BREAKPOINTS[value]) {
-    mq = max ? BREAKPOINTS[value] - 1 : BREAKPOINTS[value];
+  if (BREAKPOINTS[breakpoint]) {
+    mq = max ? BREAKPOINTS[breakpoint] - 1 : BREAKPOINTS[breakpoint];
   } else {
     // tslint:disable-next-line:no-console
     console.error('No valid breakpoint or size specified for media.');
@@ -96,8 +108,8 @@ const getSizeFromBreakpoint = (value: string, max = false) => {
 
 const generateMedia = () => {
   const max =
-    (breakpoint: string) =>
-    (first: TemplateStringsArray, ...args) =>
+    (breakpoint: Breakpoints) =>
+    (first: TemplateStringsArray, ...args: Interpolation<ThemedStyledProps<object, unknown>>[]) =>
       css`
         @media (max-width: ${getSizeFromBreakpoint(breakpoint, true)}) {
           ${css.call(null, first, ...args)};
@@ -105,8 +117,8 @@ const generateMedia = () => {
       `;
 
   const min =
-    (breakpoint: string) =>
-    (first: TemplateStringsArray, ...args) =>
+    (breakpoint: Breakpoints) =>
+    (first: TemplateStringsArray, ...args: Interpolation<ThemedStyledProps<object, unknown>>[]) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(breakpoint)}) {
           ${css.call(null, first, ...args)};
@@ -114,8 +126,8 @@ const generateMedia = () => {
       `;
 
   const between =
-    (firstBreakpoint: string, secondBreakpoint: string) =>
-    (first: TemplateStringsArray, ...args) =>
+    (firstBreakpoint: Breakpoints, secondBreakpoint: Breakpoints) =>
+    (first: TemplateStringsArray, ...args: Interpolation<ThemedStyledProps<object, unknown>>[]) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(
             firstBreakpoint

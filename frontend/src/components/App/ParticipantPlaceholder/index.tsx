@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { Key } from 'react';
 import { StyledPrefishbowlParticipant } from '@/components/App/PreFishbowl/styles';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 
-const ParticipantPlaceholder = props => {
+const ParticipantPlaceholder = ({ key }: { key: Key }) => {
   return (
     <StyledPrefishbowlParticipant
-      {...props}
+      key={key}
       className="prefishbowl"
       data-testid="participant-placeholder"
     >

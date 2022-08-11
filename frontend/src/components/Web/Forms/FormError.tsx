@@ -10,9 +10,28 @@
 import { FormError as FormErrorStyled } from '@/ui/Form';
 import FormErrorParser from '@/components/Web/Forms/FormErrorParser';
 
-const FormError = ({ errors }) => (
+type GraphQLErrors = {
+  graphQLErrors: {
+    debugMessage?: string;
+    message: string;
+  }[];
+};
+
+type RestErrors = {
+  message: string;
+};
+
+type FormErrorProps = {
+  errors: GraphQLErrors | RestErrors;
+};
+
+const isGraphQLErrors = (errors: GraphQLErrors | RestErrors): errors is GraphQLErrors => {
+  return (errors as GraphQLErrors).graphQLErrors !== undefined;
+};
+
+const FormError = ({ errors }: FormErrorProps) => (
   <FormErrorStyled className="error">
-    {errors.graphQLErrors &&
+    {isGraphQLErrors(errors) &&
       errors.graphQLErrors.map((message, key) => (
         <span key={`message-${key}`}>
           {message.debugMessage
@@ -20,7 +39,7 @@ const FormError = ({ errors }) => (
             : FormErrorParser.parse(message.message)}
         </span>
       ))}
-    {!errors.graphQLErrors &&
+    {!isGraphQLErrors(errors) &&
       errors.message
         .split('\n')
         .map((message, key) => (

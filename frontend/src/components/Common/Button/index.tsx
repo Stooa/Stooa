@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import React, { forwardRef } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
+import { StyledComponent } from 'styled-components';
 
 import {
   LinkStyledButton,
@@ -18,15 +19,20 @@ import {
   TextButton
 } from '@/ui/Button';
 
-interface Props extends React.ComponentProps<'button'> {
-  /**
-   * Select one of the variants, it will change color and major style
-   */
+type ButtonProps = ComponentProps<'button'> & {
   variant?: 'primary' | 'secondary' | 'text' | 'link' | 'subtleLink';
   size?: 'small' | 'medium' | 'large';
   as?: 'button' | 'a';
   full?: boolean;
-}
+};
+
+const Buttons = {
+  primary: PrimaryButton,
+  secondary: SecondaryButton,
+  text: TextButton,
+  link: LinkStyledButton,
+  subtleLink: SubtleLinkStyledButton
+};
 
 /**
  * Main button component
@@ -35,24 +41,12 @@ interface Props extends React.ComponentProps<'button'> {
  * @param size small, medium or large
  * @returns
  */
-const Button: React.ForwardRefRenderFunction<Record<string, never>, Props> = (
+const Button: React.ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
   { variant = 'primary', size = 'medium', children, as = 'button', full, ...props },
   ref
 ) => {
   const styles = SIZES[size];
-
-  let Component;
-  if (variant === 'primary') {
-    Component = PrimaryButton;
-  } else if (variant === 'secondary') {
-    Component = SecondaryButton;
-  } else if (variant === 'text') {
-    Component = TextButton;
-  } else if (variant === 'link') {
-    Component = LinkStyledButton;
-  } else if (variant === 'subtleLink') {
-    Component = SubtleLinkStyledButton;
-  }
+  const Component: StyledComponent<'button', never, Record<string, unknown>> = Buttons[variant];
 
   return (
     <Component ref={ref} as={as} style={styles} full={full} {...props}>

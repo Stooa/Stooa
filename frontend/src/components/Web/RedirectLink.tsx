@@ -8,9 +8,10 @@
  */
 
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
+import { PropsWithChildren } from 'react';
 
-const RedirectLink = ({ href, children, ...props }) => {
+const RedirectLink = ({ href, children, ...props }: PropsWithChildren<LinkProps>) => {
   const router = useRouter();
   const {
     query: { redirect }

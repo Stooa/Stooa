@@ -23,7 +23,6 @@ const useSeatsAvailable = () => {
 
   useEventListener(SEATS_CHANGE, ({ detail: { seats } }: Props) => {
     setSeatsAvailable(seats);
-    return seatsAvailable;
   });
 
   return seatsAvailable;

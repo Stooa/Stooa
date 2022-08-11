@@ -39,7 +39,7 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
     LocalTracks.createLocalTracks()
       .then(data => {
         let audioGranted = false;
-        data.forEach(track => {
+        data.forEach((track: Record<string, unknown>) => {
           if (track.type === 'audio') {
             audioGranted = true;
           }

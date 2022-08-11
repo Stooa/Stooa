@@ -29,7 +29,7 @@ const ReactionsButton = ({ disabled }: Props) => {
 
   const { width } = useWindowSize();
 
-  const hide = async ms => {
+  const hide = async (ms: number) => {
     setAnimation('close');
     timeOutRef.current = setTimeout(() => setShowReactions(false), ms);
   };

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, PropsWithChildren } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -40,12 +40,18 @@ import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
 import createGenericContext from '@/contexts/createGenericContext';
+import { Fishbowl } from '@/types/api-platform';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
 const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
-const StooaProvider = ({ data, isModerator, children }) => {
+type StooaProviderProps = {
+  data: Fishbowl;
+  isModerator: boolean;
+};
+
+const StooaProvider = ({ data, isModerator, children }: PropsWithChildren<StooaProviderProps>) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
@@ -185,7 +191,9 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   const isConferenceIntroducing = (): boolean => {
-    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+    return (
+      data.hasIntroduction !== undefined && conferenceStatus === IConferenceStatus.INTRODUCTION
+    );
   };
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;

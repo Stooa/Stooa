@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -66,11 +66,12 @@ const FishbowlPreJoin: React.FC = () => {
     localTracks.current = [];
   };
 
-  const handleParentClick = event => {
+  const handleParentClick: MouseEventHandler<HTMLDivElement> = event => {
+    const element = event.target as HTMLDivElement;
     if (
       configButtonRef.current &&
-      event.target.id !== 'config-button' &&
-      !event.target.className.includes('device')
+      element.id !== 'config-button' &&
+      !element.className.includes('device')
     ) {
       configButtonRef.current.handleShowDevices(false);
     }

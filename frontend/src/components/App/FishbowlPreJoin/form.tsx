@@ -58,7 +58,7 @@ const Form = (props: FormikProps<FormValues>) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       name: Yup.string()
         .matches(/[^-\s]/, {

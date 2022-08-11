@@ -15,7 +15,7 @@ import Laugh from '@/ui/svg/emojis/laugh.svg';
 import Insightful from '@/ui/svg/emojis/insightful.svg';
 import Wave from '@/ui/svg/emojis/wave.svg';
 
-export const REACTION_EMOJIS = {
+export const REACTION_EMOJIS: Record<string, JSX.Element> = {
   agree: <Agree />,
   disagree: <Disagree />,
   love: <Love />,

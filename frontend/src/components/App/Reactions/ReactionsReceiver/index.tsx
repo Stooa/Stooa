@@ -54,7 +54,7 @@ const ReactionsReceiver = ({ className, enabled = false }: Props) => {
   });
 
   useEffect(() => {
-    let timeout;
+    let timeout: NodeJS.Timeout;
     if (reactionsToShow.length > 0) {
       timeout = setTimeout(() => {
         setReactionsToShow([]);

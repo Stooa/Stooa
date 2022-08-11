@@ -9,7 +9,7 @@
 
 import Layout from '@/layouts/Default';
 
-const Error = ({ message }) => {
+const Error = ({ message }: { message: string }) => {
   return (
     <Layout>
       <p>Error: {message}</p>

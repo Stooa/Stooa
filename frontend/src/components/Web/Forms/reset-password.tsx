@@ -34,7 +34,7 @@ interface FormProps {
   required: string;
   equalPassword: string;
   minlength: string;
-  onSubmit: (res: unknown, any?) => Promise<void>;
+  onSubmit: (res: unknown, any?: FormValues) => Promise<void>;
   resetPassword: (
     options?: MutationFunctionOptions<unknown, OperationVariables>
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
@@ -69,7 +69,7 @@ const Form = (props: FormikProps<FormValues>) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: () => initialValues,
-  validationSchema: props => {
+  validationSchema: (props: FormProps) => {
     return Yup.object({
       password: Yup.string().min(6, props.minlength).required(props.required),
       passwordConfirmation: Yup.string()
@@ -109,7 +109,8 @@ const ResetPassword = ({ token }: { token: string }) => {
   const { login } = useAuth();
   const { t } = useTranslation('form');
 
-  const handleOnSubmit = async (res, values) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOnSubmit = async (res: any, values?: FormValues) => {
     if (res.type === 'Error') {
       setError(res.data);
       console.log('[STOOA] submit error', res);
