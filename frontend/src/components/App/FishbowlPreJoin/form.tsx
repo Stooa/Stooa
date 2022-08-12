@@ -38,7 +38,7 @@ const initialValues = {
   isPrivate: false
 };
 
-const Form = (props: FormikProps<FormValues>) => {
+const Form = (props: FormProps & FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   useEffect(() => {
