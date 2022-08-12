@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
+use App\Encryption\HalitePasswordEncryption;
 use App\Entity\Fishbowl;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -20,6 +21,13 @@ use Doctrine\ORM\Events;
 
 class FishbowlPasswordDoctrineSubscriber implements EventSubscriberInterface
 {
+    private HalitePasswordEncryption $halitePasswordEncryption;
+
+    public function __construct(HalitePasswordEncryption $halitePasswordEncryption)
+    {
+        $this->halitePasswordEncryption = $halitePasswordEncryption;
+    }
+
     /** @return array<int, string> */
     public function getSubscribedEvents(): array
     {
@@ -37,7 +45,7 @@ class FishbowlPasswordDoctrineSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $fishbowl->calculateFinishTime();
+        $this->encryptPassword($fishbowl);
     }
 
     public function prePersist(LifecycleEventArgs $args): void
@@ -48,6 +56,13 @@ class FishbowlPasswordDoctrineSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $fishbowl->calculateFinishTime();
+        $this->encryptPassword($fishbowl);
+    }
+
+    private function encryptPassword(Fishbowl $fishbowl): void
+    {
+        if ($fishbowl->getIsPrivate() && null !== $fishbowl->getPassword()) {
+            $fishbowl->setPassword($this->halitePasswordEncryption->encrypt($fishbowl->getPassword()));
+        }
     }
 }
