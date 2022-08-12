@@ -43,6 +43,8 @@ const UPDATE_FISHBOWL = gql`
         durationFormatted
         isFishbowlNow
         hasIntroduction
+        isPrivate
+        password
       }
     }
   }
@@ -74,6 +76,7 @@ const GET_FISHBOWL = gql`
       hasIntroduction
       currentStatus
       isPrivate
+      password
     }
   }
 `;

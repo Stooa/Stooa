@@ -25,6 +25,7 @@ import {
   unload,
   unloadKickedUser
 } from '@/lib/jitsi';
+import Conference from '@/jitsi/Conference';
 import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
@@ -219,6 +220,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
     ) {
       setTimeout(() => {
         initializeConnection(fid, isModerator);
+        // TODO: SET PASSWORD HERE
+        if (data.isPrivate) {
+          console.log('It is private dude');
+          Conference.lockConference('jose123', isModerator);
+        }
       }, 700);
 
       window.addEventListener('mousedown', initialInteraction);

@@ -274,10 +274,11 @@ const conferenceRepository = () => {
   /**
    *
    * @param {string} password
+   * @param {boolean} _isModerator
    * @returns Promise
    */
-  const lockConference = password => {
-    if (window.conference && isModerator) {
+  const lockConference = (password, _isModerator) => {
+    if (window.conference && _isModerator) {
       return window.conference.lock(password);
     }
   };
@@ -424,12 +425,12 @@ const conferenceRepository = () => {
     getParticipants,
     initializeJitsi,
     initializeConnection,
+    lockConference,
     kickParticipant,
     leave,
     sendJoinEvent,
     sendLeaveEvent,
-    sendTextMessage,
-    lockConference
+    sendTextMessage
   };
 };
 
