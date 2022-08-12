@@ -135,6 +135,16 @@ const conferenceRepository = () => {
     dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
 
+  const _handlePasswordRequired = () => {
+    console.log('[STOOA] Password required');
+    // dispatchEvent(WRONG_PASSWORD_EVENT, { id, text, timestamp });
+  };
+
+  const _handlePasswordNotSupported = () => {
+    console.log('[STOOA] Password not supported');
+    // dispatchEvent(PASSWORD_NOT_SUPPORTED, { id, text, timestamp });
+  };
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -154,6 +164,9 @@ const conferenceRepository = () => {
           DOMINANT_SPEAKER_CHANGED,
           MESSAGE_RECEIVED
         }
+      },
+      errors: {
+        conference: { PASSWORD_REQUIRED, PASSWORD_NOT_SUPPORTED }
       }
     } = JitsiMeetJS;
 
@@ -174,6 +187,8 @@ const conferenceRepository = () => {
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
     conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
+    conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
+    conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -254,6 +269,17 @@ const conferenceRepository = () => {
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
     connection.connect();
+  };
+
+  /**
+   *
+   * @param {string} password
+   * @returns Promise
+   */
+  const lockConference = password => {
+    if (window.conference && isModerator) {
+      return window.conference.lock(password);
+    }
   };
 
   const getLocalAudioTrack = () => {
@@ -402,7 +428,8 @@ const conferenceRepository = () => {
     leave,
     sendJoinEvent,
     sendLeaveEvent,
-    sendTextMessage
+    sendTextMessage,
+    lockConference
   };
 };
 
