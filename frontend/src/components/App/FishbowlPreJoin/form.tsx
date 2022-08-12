@@ -51,7 +51,7 @@ const Form = (props: FormikProps<FormValues>) => {
     <FormikForm className="prejoin">
       <fieldset className="submit-wrapper">
         <Input label={t('name')} name="name" type="text" />
-        {props.values.isPrivate && <Input label={t('password')} name="password" type="password" />}
+        {props.isPrivate && <Input label={t('password')} name="password" type="password" />}
 
         <Button size="large" type="submit" disabled={props.isSubmitting}>
           {t('button.enterFishbowl')}
@@ -70,7 +70,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
           excludeEmptyString: true,
           message: props.notEmpty
         })
-        .required(props.required)
+        .required(props.required),
+      password: Yup.string().required(props.required)
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {

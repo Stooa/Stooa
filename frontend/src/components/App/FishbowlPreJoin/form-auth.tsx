@@ -15,17 +15,24 @@ import { useStateValue } from '@/contexts/AppContext';
 import Button from '@/components/Common/Button';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 type TProps = {
   name: string;
   isPrivate: boolean;
 };
 
+interface FormValues {
+  password: string;
+}
+
 const AuthUser = ({ name, isPrivate }: TProps) => {
   const [, dispatch] = useStateValue();
   const { t } = useTranslation('form');
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (values: FormValues) => {
+    console.log(values);
     dispatch({
       type: 'JOIN_USER',
       prejoin: false,
@@ -36,15 +43,35 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
   userRepository.setUser({ nickname: name });
 
   return (
-    <FormikForm as="div">
-      <fieldset className="submit-wrapper">
-        {isPrivate && <Input label={t('password')} name="password" type="password" />}
+    <Formik
+      onSubmit={(values: FormValues) => handleOnSubmit(values)}
+      initialValues={{
+        password: ''
+      }}
+      validationSchema={Yup.object({
+        password: Yup.string().required('required')
+      })}
+    >
+      <FormikForm>
+        <fieldset className="submit-wrapper">
+          {isPrivate && (
+            <Input
+              placeholder={t('fishbowl.passwordPlaceholder')}
+              label={t('fishbowl.passwordInputLabel')}
+              name="password"
+              type="password"
+              autoComplete="off"
+              id="password"
+              icon="lock"
+            />
+          )}
 
-        <Button size="large" as="a" onClick={handleOnSubmit}>
-          {t('button.enterFishbowl')}
-        </Button>
-      </fieldset>
-    </FormikForm>
+          <Button type="submit" size="large" as="a">
+            {t('button.enterFishbowl')}
+          </Button>
+        </fieldset>
+      </FormikForm>
+    </Formik>
   );
 };
 

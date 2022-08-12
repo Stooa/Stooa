@@ -23,7 +23,6 @@ const CREATE_FISHBOWL = gql`
         isFishbowlNow
         hasIntroduction
         isPrivate
-        password
       }
     }
   }
@@ -44,7 +43,6 @@ const UPDATE_FISHBOWL = gql`
         isFishbowlNow
         hasIntroduction
         isPrivate
-        password
       }
     }
   }
@@ -76,7 +74,6 @@ const GET_FISHBOWL = gql`
       hasIntroduction
       currentStatus
       isPrivate
-      password
     }
   }
 `;
