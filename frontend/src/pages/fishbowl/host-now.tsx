@@ -51,7 +51,8 @@ const HostNow = () => {
           duration: '01:00',
           locale: lang,
           isFishbowlNow: true,
-          hasIntroduction: false
+          hasIntroduction: false,
+          isPrivate: false
         }
       }
     })

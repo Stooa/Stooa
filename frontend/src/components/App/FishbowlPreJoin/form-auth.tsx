@@ -66,7 +66,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
             />
           )}
 
-          <Button type="submit" size="large" as="a">
+          <Button type="submit" size="large">
             {t('button.enterFishbowl')}
           </Button>
         </fieldset>

@@ -221,6 +221,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
       setTimeout(() => {
         initializeConnection(fid, isModerator);
         // TODO: SET PASSWORD HERE
+        console.log('SAURA: INNITCONNECTION');
         if (data.isPrivate) {
           console.log('It is private dude');
           Conference.lockConference('jose123', isModerator);
