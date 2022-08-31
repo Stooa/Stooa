@@ -21,7 +21,7 @@ const Content = styled.main`
   width: 100%;
   padding: ${space(8)} 0;
 
-  & svg,
+  & .friend-image,
   & .description,
   & .reasons {
     margin-bottom: ${space(4)};

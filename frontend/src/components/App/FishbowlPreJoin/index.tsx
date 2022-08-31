@@ -38,7 +38,7 @@ import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Trans from 'next-translate/Trans';
-import PrejoinPermissionFriend from '@/components/Common/SVG/PrejoinPermissionFriend';
+import Image from 'next/image';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
@@ -145,7 +145,15 @@ const FishbowlPreJoin: React.FC = () => {
               <VideoPlaceholder />
               {!permissions.video && (
                 <VideoPermissionsPlaceholder>
-                  <PrejoinPermissionFriend />
+                  <div className="friend-image">
+                    <Image
+                      src="/img/friends/computer.png"
+                      alt="Illustration of friend using computer"
+                      width={178.26}
+                      height={172.64}
+                      quality={100}
+                    />
+                  </div>
                   <p className="body-sm">
                     <Trans
                       i18nKey="fishbowl:prejoin.permissions"
