@@ -22,7 +22,8 @@ const StyledReasonGroup = styled.div`
   }
 
   & .reason-card {
-    display: flex;
+    display: grid;
+    grid-template-columns: 80px 1fr;
     align-items: center;
     border-radius: 5px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
@@ -37,8 +38,8 @@ const StyledReasonGroup = styled.div`
       transform: translateY(-2px);
     }
 
-    & svg {
-      height: 80px;
+    & .friend-image {
+      height: 100%;
       margin-right: ${space(1)};
     }
 
@@ -53,6 +54,7 @@ const StyledReasonGroup = styled.div`
     column-gap: ${space(2)};
 
     & .reason-card {
+      grid-template-columns: 1fr;
       justify-content: flex-start;
       align-items: center;
       flex-direction: column;
@@ -60,10 +62,9 @@ const StyledReasonGroup = styled.div`
       max-width: ${rems(260)};
       height: 100%;
 
-      & svg {
-        height: 146px;
+      & .friend-image {
         margin-right: 0;
-        margin-bottom: ${space(4)};
+        margin-bottom: ${space(2)};
       }
     }
   `}

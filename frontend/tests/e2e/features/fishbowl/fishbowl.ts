@@ -12,13 +12,6 @@ import { hasOperationName } from '../../utils/graphql-test-utils';
 import { makeGQLCurrentFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
 
 When('navigates to future fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
-    }
-  });
-
   cy.visit('/fb/test-fishbowl', { timeout: 10000 });
 });
 
@@ -37,12 +30,6 @@ When('navigates to fishbowl', () => {
       });
     }
   }).as('gqlFishbowlBySlugQuery');
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
-    }
-  });
 
   cy.visit('/fb/test-fishbowl', { timeout: 10000 });
 });
@@ -108,19 +95,4 @@ When('sees the prefishbowl page', () => {
   cy.get('[data-testid=prefishbowl-participants]').should('exist');
 
   cy.screenshot();
-});
-
-Then('finishes a fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'FINISHED'
-    }
-  });
-
-  cy.contains('End fishbowl').click();
-
-  cy.wait(3500);
-
-  cy.get('[data-testid=finished-fishbowl]').should('exist');
 });
