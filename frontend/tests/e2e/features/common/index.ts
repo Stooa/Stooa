@@ -212,7 +212,7 @@ When('starts fishbowl', () => {
 
   cy.wait('@getFishbowlStatus');
 
-  cy.get('[data-testid=finish-fishbowl]').should('exist');
+  cy.get('[data-testid=finish-fishbowl]', { timeout: 10000 }).should('exist');
 
   cy.screenshot();
 });
