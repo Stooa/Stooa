@@ -27,14 +27,7 @@ When('access to a current fishbowl', () => {
     }
   }).as('gqlFishbowlBySlugQuery');
 
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
-    }
-  });
-
-  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
+  cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
 
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'IsCreatorOfFishbowl')) {

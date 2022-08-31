@@ -4,6 +4,7 @@ Feature: Fishbowl
 
     Scenario: Logged users can see information about future fishbowl
         Given a logged user
+        And a fishbowl
         When navigates to future fishbowl
         Then sees tomorrow fishbowl information page
 
