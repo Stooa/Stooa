@@ -47,6 +47,10 @@ const Modal = styled.div`
     position: relative;
     text-align: center;
 
+    & .friend-image {
+      margin-bottom: ${space(2)};
+    }
+
     &.white {
       background-color: ${COLOR_NEUTRO_100};
     }
