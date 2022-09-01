@@ -97,30 +97,30 @@ const getSizeFromBreakpoint = (value: string, max = false) => {
 const generateMedia = () => {
   const max =
     (breakpoint: string) =>
-    (...args) =>
+    (first: TemplateStringsArray, ...args) =>
       css`
         @media (max-width: ${getSizeFromBreakpoint(breakpoint, true)}) {
-          ${css.call(null, ...args)};
+          ${css.call(null, first, ...args)};
         }
       `;
 
   const min =
     (breakpoint: string) =>
-    (...args) =>
+    (first: TemplateStringsArray, ...args) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(breakpoint)}) {
-          ${css.call(null, ...args)};
+          ${css.call(null, first, ...args)};
         }
       `;
 
   const between =
     (firstBreakpoint: string, secondBreakpoint: string) =>
-    (...args) =>
+    (first: TemplateStringsArray, ...args) =>
       css`
         @media (min-width: ${getSizeFromBreakpoint(
             firstBreakpoint
           )}) and (max-width: ${getSizeFromBreakpoint(secondBreakpoint, true)}) {
-          ${css.call(null, ...args)};
+          ${css.call(null, first, ...args)};
         }
       `;
 

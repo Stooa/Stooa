@@ -7,10 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
-import Delete from '@/ui/svg/delete.svg';
-import { rems, space } from '@/ui/helpers';
+import { space } from '@/ui/helpers';
 
 type TProps = {
   left?: boolean;
@@ -26,25 +25,5 @@ const getIconCSS = (props?: TProps) => css`
     fill: currentColor;
   }
 `;
-
-const getSize = s => {
-  let size;
-  switch (s) {
-    case 'small':
-      size = 14;
-      break;
-    case 'large':
-      size = 24;
-      break;
-    default:
-      size = 18;
-      break;
-  }
-
-  return css`
-    height: ${rems(size)};
-    width: ${rems(size)};
-  `;
-};
 
 export { getIconCSS };

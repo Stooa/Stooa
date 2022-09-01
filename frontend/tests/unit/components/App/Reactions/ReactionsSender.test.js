@@ -10,15 +10,18 @@
 import { render, fireEvent } from '@testing-library/react';
 import ReactionsSender from '@/components/App/Reactions/ReactionsSender';
 import { useStooa } from '@/contexts/StooaManager';
-import { useRouter } from 'next/router';
 
 jest.mock('@/contexts/StooaManager');
-jest.mock('next/router');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+useRouter.mockImplementation(() => ({
+  query: ''
+}));
 
 describe('Reactions sender component', () => {
   it('It renders the component as moderator', () => {
     useStooa.mockReturnValue({ isModerator: true });
-    useRouter.mockReturnValue({ query: '' });
 
     const { container, getByTestId } = render(<ReactionsSender />);
 
@@ -30,7 +33,7 @@ describe('Reactions sender component', () => {
     expect(getByTestId('disagree-emoji')).toBeInTheDocument();
     expect(getByTestId('love-emoji')).toBeInTheDocument();
     expect(getByTestId('applause-emoji')).toBeInTheDocument();
-    expect(getByTestId('joy-emoji')).toBeInTheDocument();
+    expect(getByTestId('laugh-emoji')).toBeInTheDocument();
     expect(getByTestId('wave-emoji')).toBeInTheDocument();
     expect(getByTestId('insightful-emoji')).toBeInTheDocument();
   });

@@ -21,7 +21,7 @@ import useSeatsAvailable from '@/hooks/useSeatsAvailable';
 import ButtonJoin from '@/components/App/ButtonJoin';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
-import ButtonConfig from '@/components/App/ButtonConfig';
+import ButtonConfig, { ButtonConfigHandle } from '@/components/App/ButtonConfig';
 import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
@@ -35,7 +35,7 @@ const ToolBar: React.FC = () => {
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
 
-  const configButtonRef = useRef(null);
+  const configButtonRef = useRef<ButtonConfigHandle>(null);
 
   const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
@@ -63,7 +63,7 @@ const ToolBar: React.FC = () => {
 
   const hasModeratorToSeatDuringIntroduction = (): boolean => {
     return (
-      data.hasIntroduction &&
+      (data.hasIntroduction ?? false) &&
       isModerator &&
       conferenceReady &&
       conferenceStatus === IConferenceStatus.INTRODUCTION
@@ -75,25 +75,34 @@ const ToolBar: React.FC = () => {
       !data.hasIntroduction &&
       isModerator &&
       conferenceReady &&
-      data.currentStatus.toUpperCase() === IConferenceStatus.NOT_STARTED
+      data.currentStatus?.toUpperCase() === IConferenceStatus.NOT_STARTED
     );
   };
 
   const handleMic = () => {
-    configButtonRef.current.handleShowDevices(false);
+    if (configButtonRef.current) {
+      configButtonRef.current.handleShowDevices(false);
+    }
+
     tracksRepository.toggleAudioTrack();
   };
 
   const handleVideo = () => {
-    configButtonRef.current.handleShowDevices(false);
+    if (configButtonRef.current) {
+      configButtonRef.current.handleShowDevices(false);
+    }
+
     tracksRepository.toggleVideoTrack();
   };
 
   const handleOutsideClick = event => {
-    if (typeof event.target.className === 'string') {
-      if (event.target.id !== 'config-button' && !event.target.className?.includes('device')) {
-        configButtonRef.current.handleShowDevices(false);
-      }
+    if (
+      configButtonRef.current &&
+      typeof event.target.className === 'string' &&
+      event.target.id !== 'config-button' &&
+      !event.target.className?.includes('device')
+    ) {
+      configButtonRef.current.handleShowDevices(false);
     }
   };
 
@@ -134,7 +143,7 @@ const ToolBar: React.FC = () => {
   const isActionDisabled =
     !conferenceReady ||
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
-    conferenceStatus === IConferenceStatus.INTRODUCTION ||
+    (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator) ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
     (!joined && !seatsAvailable) ||
     joinIsInactive;

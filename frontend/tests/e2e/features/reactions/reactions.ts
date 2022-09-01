@@ -27,13 +27,6 @@ When('access to a current fishbowl', () => {
     }
   }).as('gqlFishbowlBySlugQuery');
 
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
-    }
-  });
-
   cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
 
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
@@ -51,12 +44,10 @@ When('access to a current fishbowl', () => {
   cy.contains('Enter fishbowl').click();
 });
 
-Then('can clicks on reactions', () => {
+Then('can click on reactions', () => {
   cy.get('[data-testid=reactions-button]').should('exist');
 
   cy.get('[data-testid=reactions-button]').click();
 
   cy.get('[data-testid=reactions-wrapper]').should('exist');
-
-  cy.get('[data-testid=applause-emoji]').click();
 });

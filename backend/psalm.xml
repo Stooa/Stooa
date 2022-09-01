@@ -31,7 +31,7 @@ file that was distributed with this source code.
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
-            <containerXml>var/cache/test/srcApp_KernelTestDebugContainer.xml</containerXml>
+            <containerXml>var/cache/test/App_KernelTestDebugContainer.xml</containerXml>
         </pluginClass>
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
     </plugins>

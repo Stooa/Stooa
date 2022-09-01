@@ -188,7 +188,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
     private function logIn(User $user): string
     {
-        $jwtManager = static::$container->get('lexik_jwt_authentication.jwt_manager');
+        $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
 
         return $jwtManager->create($user);
     }

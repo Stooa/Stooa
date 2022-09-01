@@ -5,6 +5,5 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-gesdinet_jwt_refresh_token:
+api_refresh_token:
     path: /refresh-token
-    controller: gesdinet.jwtrefreshtoken::refresh

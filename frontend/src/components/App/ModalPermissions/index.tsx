@@ -9,16 +9,14 @@
 
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import devicesRepository from '@/jitsi/Devices';
 
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
-import Image from 'next/image';
 import LocalTracks from '@/jitsi/LocalTracks';
 import { toast } from 'react-toastify';
-import MicPermissionFriend from '@/components/Common/SVG/MicPermissionFriend';
+import Image from 'next/image';
 
 interface Props {
   closeModal: () => void;
@@ -64,7 +62,15 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <MicPermissionFriend />
+        <div className="friend-image">
+          <Image
+            src="/img/friends/hold.png"
+            alt="Illustration of friend holding a microphone icon"
+            width={138.85}
+            height={165}
+            quality={100}
+          />
+        </div>
         <h2 className="title-sm">
           <Trans i18nKey="fishbowl:permissionsModalTitle" />
         </h2>

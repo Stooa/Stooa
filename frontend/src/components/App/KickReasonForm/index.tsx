@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 import * as Yup from 'yup';
 
@@ -16,10 +17,8 @@ import React from 'react';
 import { kickParticipant } from '@/lib/jitsi';
 import { Participant } from '@/types/participant';
 import { StyledReasonGroup } from './styles';
-import MeditatingFriend from '@/components/Common/SVG/MeditatingFriend';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { Formik, Form, Field } from 'formik';
-import ReadingFriend from '@/components/Common/SVG/ReadingFriend';
 import Button from '@/components/Common/Button';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -75,7 +74,16 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                     values.reason === REASON_NO_PARTICIPATING ? 'selected' : ''
                   }`}
                 >
-                  <MeditatingFriend />
+                  <div className="friend-image">
+                    <Image
+                      src="/img/friends/meditating.png"
+                      alt="Illustration of a friend meditating"
+                      height={146.38}
+                      width={151}
+                      quality={100}
+                      layout="intrinsic"
+                    />
+                  </div>
                   <p>{t('kick.modal.options.noParticipating')}</p>
                 </div>
               </label>
@@ -86,7 +94,16 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                     values.reason === REASON_CONDUCT_VIOLATION ? 'selected' : ''
                   }`}
                 >
-                  <ReadingFriend />
+                  <div className="friend-image">
+                    <Image
+                      src="/img/friends/reading.png"
+                      alt="Illustration of a friend reading"
+                      height={146}
+                      width={140.06}
+                      quality={100}
+                      layout="intrinsic"
+                    />
+                  </div>
                   <p>{t('kick.modal.options.conductViolation')}</p>
                 </div>
               </label>

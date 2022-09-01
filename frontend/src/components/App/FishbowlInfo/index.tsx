@@ -21,7 +21,7 @@ interface Props {
 }
 
 const FishbowlInfo: React.FC<Props> = ({ data }) => {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
 
   const toggleInfo = () => {
@@ -36,7 +36,9 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (active && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+      const target = event.target as HTMLElement;
+
+      if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
         toggleInfo();
       }
     };

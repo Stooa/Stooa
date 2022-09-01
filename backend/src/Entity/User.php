@@ -27,6 +27,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -99,7 +100,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, \Stringable
+class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
 
@@ -223,7 +224,7 @@ class User implements UserInterface, \Stringable
 
     public function __toString(): string
     {
-        return $this->getFullName() . ' (' . $this->getUsername() . ')';
+        return $this->getFullName() . ' (' . $this->getUserIdentifier() . ')';
     }
 
     public function getId(): ?UuidInterface
@@ -279,7 +280,7 @@ class User implements UserInterface, \Stringable
         return $this;
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }

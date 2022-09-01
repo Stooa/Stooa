@@ -7,13 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { media } from '@/ui/helpers';
 import styled from 'styled-components';
 
-export const StyledSvg = styled.svg`
-  transform: scale(0.75);
-
-  ${media.min('tablet')`
-      transform: scale(1);
-    `}
+const OnBoardingTourWrapper = styled.div`
+  .on-boarding-tour {
+    background: red;
+  }
 `;
+
+export { OnBoardingTourWrapper };

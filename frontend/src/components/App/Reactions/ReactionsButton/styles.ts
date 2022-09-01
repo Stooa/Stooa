@@ -29,11 +29,11 @@ const StyledButtonReaction = styled.button`
 
   & > .label {
     ${BODY_XS}
-    line-height: 0.875;
+    line-height: 1;
 
     ${media.min('tablet')`
       ${BODY_SM}
-      line-height: 0.8;
+      line-height: 1;
     `}
   }
 

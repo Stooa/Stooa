@@ -12,12 +12,12 @@ import React, { useEffect } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import Layout from '@/layouts/Default';
-import ReadingFriend from '@/components/Common/SVG/ReadingFriend';
 import { Content } from '@/layouts/KickedUser/styles';
+import Image from 'next/image';
 
 const UserConductViolationPage = () => {
   const { t } = useTranslation('user-conduct-violation');
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(() => {
     dispatch({
@@ -33,7 +33,17 @@ const UserConductViolationPage = () => {
   return (
     <Layout title={t('pageTitle')}>
       <Content>
-        <ReadingFriend />
+        <div className="friend-image">
+          <Image
+            src="/img/friends/reading.png"
+            alt="Illustration of a friend reading"
+            height={146 * 1.5}
+            width={140.06 * 1.5}
+            quality={100}
+            layout="intrinsic"
+          />
+        </div>
+
         <h1 className="title-sm">{t('title')}</h1>
         <p className="body-lg">{t('description')}</p>
       </Content>
