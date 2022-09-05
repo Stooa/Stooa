@@ -147,7 +147,15 @@ const FishbowlPreJoin: React.FC = () => {
               <VideoPlaceholder />
               {!permissions.video && (
                 <VideoPermissionsPlaceholder>
-                  <PrejoinPermissionFriend />
+                  <div className="friend-image">
+                    <Image
+                      src="/img/friends/computer.png"
+                      alt="Illustration of friend using computer"
+                      width={178.26}
+                      height={172.64}
+                      quality={100}
+                    />
+                  </div>
                   <p className="body-sm">
                     <Trans
                       i18nKey="fishbowl:prejoin.permissions"

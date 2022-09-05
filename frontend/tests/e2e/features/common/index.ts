@@ -167,13 +167,29 @@ Given('a mobile device', () => {
   cy.viewport('iphone-6');
 });
 
-When('starts fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
+let startedFishbowl = false;
+let finishedFishbowl = false;
+
+Given('a fishbowl', () => {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
+    if (!startedFishbowl && !finishedFishbowl) {
+      console.log('NOT STARTED');
+
+      req.reply({
+        status: 'NOT_STARTED'
+      });
+    } else if (startedFishbowl && !finishedFishbowl) {
+      console.log('RUNNING');
+      req.reply({
+        status: 'RUNNING'
+      });
+    } else if (finishedFishbowl) {
+      console.log('FINISHED');
+      req.reply({
+        status: 'FINISHED'
+      });
     }
-  });
+  }).as('getFishbowlStatus');
 
   cy.intercept('GET', 'https://localhost:8443/en/ping/test-fishbowl', {
     statusCode: 200,
@@ -188,19 +204,24 @@ When('starts fishbowl', () => {
       response: []
     }
   });
+});
 
+When('starts fishbowl', () => {
   cy.contains('Start the fishbowl').click();
+  startedFishbowl = true;
 
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'RUNNING'
-    }
-  });
+  cy.wait('@getFishbowlStatus');
 
-  cy.wait(1000);
-
-  cy.get('[data-testid=finish-fishbowl]').should('exist');
+  cy.get('[data-testid=finish-fishbowl]', { timeout: 10000 }).should('exist');
 
   cy.screenshot();
+});
+
+Then('finishes a fishbowl', () => {
+  cy.contains('End fishbowl').click();
+  finishedFishbowl = true;
+
+  cy.wait('@getFishbowlStatus');
+
+  cy.get('[data-testid=finished-fishbowl]', { timeout: 10000 }).should('exist');
 });

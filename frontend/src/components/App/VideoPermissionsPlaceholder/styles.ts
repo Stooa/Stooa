@@ -17,6 +17,7 @@ const Placeholder = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   height: 100%;
   left: 0;
   pointer-events: none;
@@ -24,6 +25,11 @@ const Placeholder = styled.div`
   padding: ${space()} ${space(4)} ${space(8)} ${space(4)};
   top: 0;
   width: 100%;
+
+  & > .friend-image {
+    width: 120px;
+    margin-bottom: ${space(2)};
+  }
 
   ${media.min('tablet')`
     row-gap: ${space(3)};
