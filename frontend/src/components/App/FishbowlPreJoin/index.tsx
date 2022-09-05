@@ -38,8 +38,8 @@ import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Trans from 'next-translate/Trans';
-import PrejoinPermissionFriend from '@/components/Common/SVG/PrejoinPermissionFriend';
 import { useStooa } from '@/contexts/StooaManager';
+import Image from 'next/image';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
