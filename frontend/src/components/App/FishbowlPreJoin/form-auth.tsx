@@ -49,7 +49,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
         password: ''
       }}
       validationSchema={Yup.object({
-        password: Yup.string().required('required')
+        password: isPrivate ? Yup.string().required(t('required')) : Yup.string()
       })}
     >
       <FormikForm>

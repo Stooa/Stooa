@@ -316,7 +316,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
           });
         });
     } else {
-      console.log('Form values', values);
       await props
         .createFishbowl({
           variables: {
