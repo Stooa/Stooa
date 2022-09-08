@@ -11,8 +11,8 @@ FROM php:8.1-fpm-buster as base
 ARG UID=1000
 ARG GID=1000
 
-RUN usermod -u $UID www-data
-RUN groupmod -g $GID www-data
+RUN usermod --uid $UID www-data
+RUN groupmod --non-unique --gid $GID www-data
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
@@ -84,8 +84,8 @@ FROM nginx:1.21 as nginx
 ARG UID=1000
 ARG GID=1000
 
-RUN usermod -u $UID nginx
-RUN groupmod -g $GID nginx
+RUN usermod --uid $UID nginx
+RUN groupmod --non-unique --gid $GID nginx
 
 COPY --chown=$UID:$GID --from=fpm /usr/app/public /usr/app/public
 
