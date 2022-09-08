@@ -11,8 +11,8 @@ FROM node:17.4 as base
 ARG UID=1000
 ARG GID=1000
 
-RUN usermod -u $UID node
-RUN groupmod -g $GID node
+RUN usermod --uid $UID node
+RUN groupmod --non-unique --gid $GID node
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -50,7 +50,7 @@ FROM nginx:1.21 as nginx
 ARG UID=1000
 ARG GID=1000
 
-RUN usermod -u $UID nginx
-RUN groupmod -g $GID nginx
+RUN usermod --uid $UID nginx
+RUN groupmod --non-unique --gid $GID nginx
 
 COPY .docker/nginx-prod/default.conf.template /etc/nginx/templates/default.conf.template
