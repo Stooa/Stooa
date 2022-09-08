@@ -226,7 +226,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         />
         {props.values.isPrivate && (
           <Input
-            value={props.values.isPrivate ? props.values.password : ''}
+            value={props.values.isPrivate ? props.values.password : undefined}
             data-testid="fishbowl-form-passwordinput"
             placeholder={t('fishbowl.passwordPlaceholder')}
             label={t('fishbowl.passwordInputLabel')}
@@ -300,7 +300,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
               isFishbowlNow: false,
               hasIntroduction: values.hasIntroduction,
               isPrivate: values.isPrivate,
-              password: values.isPrivate ? values.password : ''
+              password: values.isPrivate ? values.password : undefined
             }
           }
         })
@@ -329,7 +329,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
               isFishbowlNow: false,
               hasIntroduction: values.hasIntroduction,
               isPrivate: values.isPrivate,
-              password: values.isPrivate && values.password ? values.password : ''
+              password: values.isPrivate && values.password ? values.password : undefined
             }
           }
         })

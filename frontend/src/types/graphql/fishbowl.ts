@@ -19,7 +19,7 @@ export interface CreateFishbowlOptions {
       hasIntroduction: boolean;
       isFishbowlNow: boolean;
       isPrivate: boolean;
-      password: string;
+      password?: string;
     };
   };
 }

@@ -146,6 +146,7 @@ const conferenceRepository = () => {
   };
 
   const _handleConnectionEstablished = async () => {
+    console.log('Saura Established');
     const {
       events: {
         conference: {
@@ -192,7 +193,7 @@ const conferenceRepository = () => {
     conference.addCommandListener('join', _handleCommnandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
-    await conference.join();
+    await conference.join('jose123');
   };
 
   const _handleConnectionDisconnected = () => {
@@ -268,18 +269,18 @@ const conferenceRepository = () => {
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
+    console.log('Saura CONNECT INIT?');
     connection.connect();
   };
 
   /**
    *
    * @param {string} password
-   * @param {boolean} _isModerator
    * @returns Promise
    */
-  const lockConference = (password, _isModerator) => {
-    if (window.conference && _isModerator) {
-      return window.conference.lock(password);
+  const lockConference = password => {
+    if (conference) {
+      return conference.lock(password);
     }
   };
 
