@@ -26,7 +26,14 @@ import {
   unloadKickedUser
 } from '@/lib/jitsi';
 // import Conference from '@/jitsi/Conference';
-import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
+import {
+  CONFERENCE_IS_LOCKABLE,
+  CONFERENCE_START,
+  CONNECTION_ESTABLISHED_FINISHED,
+  NOTIFICATION,
+  USER_KICKED,
+  USER_MUST_LEAVE
+} from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
@@ -41,6 +48,7 @@ import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
 import createGenericContext from '@/contexts/createGenericContext';
+import Conference from '@/jitsi/Conference';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -105,6 +113,17 @@ const StooaProvider = ({ data, isModerator, children }) => {
     };
 
     router.push(url, url, { locale: lang });
+  });
+
+  useEventListener(CONFERENCE_IS_LOCKABLE, () => {
+    console.log(data.isPrivate, data.password);
+    if (data.isPrivate) {
+      Conference.lockConference('jose123');
+    }
+  });
+
+  useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
+    Conference.joinConference('jose123');
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
@@ -220,11 +239,6 @@ const StooaProvider = ({ data, isModerator, children }) => {
     ) {
       setTimeout(() => {
         initializeConnection(fid, isModerator);
-        console.log('SAURA: INNITCONNECTION');
-        if (data.isPrivate && isModerator) {
-          console.log('It is private dude');
-          // Conference.lockConference('jose123');
-        }
       }, 700);
 
       window.addEventListener('mousedown', initialInteraction);

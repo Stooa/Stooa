@@ -9,7 +9,13 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START, PERMISSION_CHANGED, REACTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
+import {
+  CONFERENCE_IS_LOCKABLE,
+  CONFERENCE_START,
+  CONNECTION_ESTABLISHED_FINISHED,
+  PERMISSION_CHANGED,
+  REACTION_MESSAGE_RECEIVED
+} from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -34,6 +40,16 @@ const conferenceRepository = () => {
     conference.selectParticipants(seatsRepository.getIds());
 
     console.log('[STOOA] Join', id);
+  };
+
+  /**
+   * Join the jitsi conference
+   * @param {string} password
+   */
+  const joinConference = async (password = '') => {
+    if (conference) {
+      await conference.join(password);
+    }
   };
 
   const leaveUser = id => {
@@ -108,10 +124,15 @@ const conferenceRepository = () => {
   };
 
   const _handleUserRoleChanged = () => {
+    const role = conference.getRole();
     console.log('[STOOA] User role changed', conference.getRole());
+
+    if (role === 'moderator') {
+      dispatchEvent(CONFERENCE_IS_LOCKABLE);
+    }
   };
 
-  const _handleCommnandJoin = values => {
+  const _handleCommandJoin = values => {
     const { value } = values;
     const seat = seatsRepository.join(value);
 
@@ -146,7 +167,6 @@ const conferenceRepository = () => {
   };
 
   const _handleConnectionEstablished = async () => {
-    console.log('Saura Established');
     const {
       events: {
         conference: {
@@ -190,10 +210,10 @@ const conferenceRepository = () => {
     conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
     conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
-    conference.addCommandListener('join', _handleCommnandJoin);
+    conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
-    await conference.join('jose123');
+    dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
   };
 
   const _handleConnectionDisconnected = () => {
@@ -269,7 +289,6 @@ const conferenceRepository = () => {
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
-    console.log('Saura CONNECT INIT?');
     connection.connect();
   };
 
@@ -278,9 +297,9 @@ const conferenceRepository = () => {
    * @param {string} password
    * @returns Promise
    */
-  const lockConference = password => {
+  const lockConference = async password => {
     if (conference) {
-      return conference.lock(password);
+      return await conference.lock(password);
     }
   };
 
@@ -427,6 +446,7 @@ const conferenceRepository = () => {
     initializeJitsi,
     initializeConnection,
     lockConference,
+    joinConference,
     kickParticipant,
     leave,
     sendJoinEvent,

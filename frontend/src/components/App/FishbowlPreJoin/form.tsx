@@ -71,7 +71,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
           message: props.notEmpty
         })
         .required(props.required),
-      password: Yup.string().required(props.required)
+      password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
     });
   },
   handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
