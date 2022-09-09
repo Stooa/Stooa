@@ -30,6 +30,8 @@ class PrivateFishbowlService
     {
         if ($fishbowl->getIsPrivate() && $this->security->getUser() === $fishbowl->getHost()) {
             $fishbowl->setPassword($this->halitePasswordEncryption->decrypt($fishbowl->getPassword()));
+        } else {
+            $fishbowl->setPassword(null);
         }
 
         return $fishbowl;
