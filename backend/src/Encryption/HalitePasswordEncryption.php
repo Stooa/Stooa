@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Encryption;
 
-use ParagonIE\HiddenString\HiddenString;
 use ParagonIE\Halite\KeyFactory;
 use ParagonIE\Halite\Symmetric\Crypto;
 use ParagonIE\Halite\Symmetric\EncryptionKey;
+use ParagonIE\HiddenString\HiddenString;
 
 class HalitePasswordEncryption implements PasswordEncryptionInterface
 {

@@ -289,7 +289,7 @@ class Fishbowl implements \Stringable
     private bool $isPrivate = false;
 
     /**
-     * @Groups({"fishbowl:write"})
+     * @Groups({"fishbowl:read", "fishbowl:write"})
      *
      * @ORM\Column(type="text", nullable=true)
      */

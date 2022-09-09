@@ -16,11 +16,12 @@ namespace App\Resolver;
 use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Entity\Fishbowl;
 use App\Repository\FishbowlRepository;
+use App\Service\PrivateFishbowlService;
 use Webmozart\Assert\Assert;
 
 class FishbowlResolver implements QueryItemResolverInterface
 {
-    public function __construct(private readonly FishbowlRepository $repository)
+    public function __construct(private readonly FishbowlRepository $repository, private readonly PrivateFishbowlService $fishbowlPasswordService)
     {
     }
 
@@ -35,7 +36,13 @@ class FishbowlResolver implements QueryItemResolverInterface
     public function __invoke($item, array $context): ?Fishbowl
     {
         if (null === $item) {
-            return $this->repository->findBySlug($context['args']['slug']);
+            $fishbowl = $this->repository->findBySlug($context['args']['slug']);
+
+            if (null !== $fishbowl) {
+                $fishbowl = $this->fishbowlPasswordService->decryptPassword($fishbowl);
+            }
+
+            return $fishbowl;
         }
 
         Assert::isInstanceOf($item, Fishbowl::class);
