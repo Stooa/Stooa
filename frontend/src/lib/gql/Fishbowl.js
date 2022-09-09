@@ -74,6 +74,7 @@ const GET_FISHBOWL = gql`
       hasIntroduction
       currentStatus
       isPrivate
+      password
     }
   }
 `;

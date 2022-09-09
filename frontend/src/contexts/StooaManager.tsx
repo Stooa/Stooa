@@ -123,6 +123,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
+    console.log(data);
     Conference.joinConference('jose123');
   });
 
