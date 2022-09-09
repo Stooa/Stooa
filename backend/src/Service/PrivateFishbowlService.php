@@ -22,7 +22,6 @@ class PrivateFishbowlService
     public function __construct(
         private readonly HalitePasswordEncryption $halitePasswordEncryption,
         private readonly Security $security
-
     ) {
     }
 
