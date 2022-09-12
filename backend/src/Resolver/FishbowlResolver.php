@@ -39,7 +39,7 @@ class FishbowlResolver implements QueryItemResolverInterface
             $fishbowl = $this->repository->findBySlug($context['args']['slug']);
 
             if (null !== $fishbowl) {
-                $fishbowl = $this->fishbowlPasswordService->decryptPassword($fishbowl);
+                $fishbowl = $this->fishbowlPasswordService->decryptPrivatePassword($fishbowl);
             }
 
             return $fishbowl;

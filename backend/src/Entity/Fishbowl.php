@@ -677,4 +677,9 @@ class Fishbowl implements \Stringable
     {
         return false === $this->getIsPrivate() && null !== $this->getPassword();
     }
+
+    public function isPasswordEqual(string $password): bool
+    {
+        return $this->getIsPrivate() && $this->getPassword() === $password;
+    }
 }
