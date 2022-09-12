@@ -57,6 +57,6 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
 
         Assert::isInstanceOf($item, Fishbowl::class);
 
-        return $item;
+        return $this->privateFishbowlService->decryptPrivatePassword($item);
     }
 }
