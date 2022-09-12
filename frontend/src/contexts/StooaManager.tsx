@@ -49,12 +49,21 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
 import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
+import { Fishbowl } from '@/types/api-platform';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
 const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
-const StooaProvider = ({ data, isModerator, children }) => {
+const StooaProvider = ({
+  data,
+  isModerator,
+  children
+}: {
+  data: Fishbowl;
+  isModerator: boolean;
+  children: JSX.Element[];
+}) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
@@ -117,7 +126,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   });
 
   useEventListener(CONFERENCE_IS_LOCKABLE, () => {
-    if (data.isPrivate && isModerator) {
+    if (data.isPrivate && data.password && isModerator) {
       Conference.lockConference(data.password);
     }
   });
@@ -211,7 +220,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   const isConferenceIntroducing = (): boolean => {
-    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+    if (data.hasIntroduction) {
+      return conferenceStatus === IConferenceStatus.INTRODUCTION;
+    }
+    return false;
   };
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
