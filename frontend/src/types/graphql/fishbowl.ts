@@ -19,7 +19,7 @@ export interface CreateFishbowlOptions {
       hasIntroduction: boolean;
       isFishbowlNow: boolean;
       isPrivate: boolean;
-      password?: string;
+      plainPassword?: string;
     };
   };
 }
@@ -37,7 +37,7 @@ export interface UpdateFishbowlOptions {
       hasIntroduction?: boolean;
       isFishbowlNow?: boolean;
       isPrivate?: boolean;
-      password?: string;
+      plainPassword?: string;
     };
   };
 }

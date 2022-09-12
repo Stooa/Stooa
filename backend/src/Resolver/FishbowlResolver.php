@@ -21,8 +21,10 @@ use Webmozart\Assert\Assert;
 
 class FishbowlResolver implements QueryItemResolverInterface
 {
-    public function __construct(private readonly FishbowlRepository $repository, private readonly PrivateFishbowlService $fishbowlPasswordService)
-    {
+    public function __construct(
+        private readonly FishbowlRepository $repository,
+        private readonly PrivateFishbowlService $fishbowlPasswordService
+    ) {
     }
 
     /**
@@ -39,10 +41,8 @@ class FishbowlResolver implements QueryItemResolverInterface
             $fishbowl = $this->repository->findBySlug($context['args']['slug']);
 
             if (null !== $fishbowl) {
-                $fishbowl = $this->fishbowlPasswordService->decryptPrivatePassword($fishbowl);
+                return $this->fishbowlPasswordService->decryptPrivatePassword($fishbowl);
             }
-
-            return $fishbowl;
         }
 
         Assert::isInstanceOf($item, Fishbowl::class);

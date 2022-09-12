@@ -126,15 +126,15 @@ const StooaProvider = ({
   });
 
   useEventListener(CONFERENCE_IS_LOCKABLE, () => {
-    if (data.isPrivate && data.password && isModerator) {
-      Conference.lockConference(data.password);
+    if (data.isPrivate && data.plainPassword && isModerator) {
+      Conference.lockConference(data.plainPassword);
     }
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
     if (isModerator) {
       console.log('JOINING CONFERENCE MOD SAURA', data);
-      Conference.joinConference(data.password);
+      Conference.joinConference(data.plainPassword);
     } else {
       console.log('JOINING CONFERENCE SAURA', fishbowlPassword);
       Conference.joinConference(fishbowlPassword);

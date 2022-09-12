@@ -18,7 +18,7 @@ export interface Fishbowl {
   isFishbowlNow?: boolean;
   hasIntroduction?: boolean;
   isPrivate?: boolean;
-  password?: string;
+  plainPassword?: string;
   readonly slug?: string;
   readonly host?: string;
   readonly currentStatus?: string;

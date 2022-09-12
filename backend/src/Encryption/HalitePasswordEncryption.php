@@ -15,27 +15,20 @@ namespace App\Encryption;
 
 use ParagonIE\Halite\KeyFactory;
 use ParagonIE\Halite\Symmetric\Crypto;
-use ParagonIE\Halite\Symmetric\EncryptionKey;
 use ParagonIE\HiddenString\HiddenString;
 
 class HalitePasswordEncryption implements PasswordEncryptionInterface
 {
-    private EncryptionKey $encryptedKey;
-
     public function __construct(
         private readonly string $key
-
     ) {
-        $this->encryptedKey = KeyFactory::importEncryptionKey(new HiddenString($this->key));
     }
 
     public function encrypt(string $password): string
     {
         return Crypto::encrypt(
-            new HiddenString(
-                $password
-            ),
-            $this->encryptedKey
+            new HiddenString($password),
+            KeyFactory::importEncryptionKey(new HiddenString($this->key))
         );
     }
 
@@ -43,7 +36,7 @@ class HalitePasswordEncryption implements PasswordEncryptionInterface
     {
         return Crypto::decrypt(
             $cipherPassword,
-            $this->encryptedKey
+            KeyFactory::importEncryptionKey(new HiddenString($this->key))
         )->getString();
     }
 }

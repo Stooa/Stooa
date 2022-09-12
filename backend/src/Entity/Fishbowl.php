@@ -288,12 +288,15 @@ class Fishbowl implements \Stringable
      */
     private bool $isPrivate = false;
 
+    /** @ORM\Column(type="text", nullable=true) */
+    private ?string $password = null;
+
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
      *
-     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(groups={"user:create"})
      */
-    private ?string $password = null;
+    private ?string $plainPassword = null;
 
     public function __construct()
     {
@@ -656,6 +659,18 @@ class Fishbowl implements \Stringable
         return $this;
     }
 
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
     public function getIsPrivate(): bool
     {
         return $this->isPrivate;
@@ -670,16 +685,11 @@ class Fishbowl implements \Stringable
 
     public function privateFishbowlHasPassword(): bool
     {
-        return true === $this->getIsPrivate() && (null === $this->getPassword() || '' === $this->getPassword());
+        return true === $this->getIsPrivate() && (null === $this->getPlainPassword() || '' === $this->getPlainPassword());
     }
 
     public function publicFishbowlHasPassword(): bool
     {
-        return false === $this->getIsPrivate() && null !== $this->getPassword();
-    }
-
-    public function isPasswordEqual(string $password): bool
-    {
-        return $this->getIsPrivate() && $this->getPassword() === $password;
+        return false === $this->getIsPrivate() && null !== $this->getPlainPassword();
     }
 }
