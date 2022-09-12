@@ -20,6 +20,7 @@ import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Button from '@/components/Common/Button';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface FormValues {
   name: string;
@@ -82,6 +83,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
+  const { setFishbowlPassword, isModerator } = useStooa();
   const [, dispatch] = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
@@ -121,6 +123,10 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
     userRepository.setUser({
       nickname: name
     });
+
+    if (isPrivate && values.password && !isModerator) {
+      setFishbowlPassword(values.password);
+    }
 
     dispatch({
       type: 'JOIN_GUEST',
