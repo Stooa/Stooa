@@ -17,6 +17,7 @@ import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useStooa } from '@/contexts/StooaManager';
 
 type TProps = {
   name: string;
@@ -28,11 +29,16 @@ interface FormValues {
 }
 
 const AuthUser = ({ name, isPrivate }: TProps) => {
+  const { isModerator, setFishbowlPassword } = useStooa();
   const [, dispatch] = useStateValue();
   const { t } = useTranslation('form');
 
   const handleOnSubmit = (values: FormValues) => {
-    console.log(values);
+    if (isPrivate && values.password && !isModerator) {
+      console.log('Saura password', values.password);
+      setFishbowlPassword(values.password);
+    }
+
     dispatch({
       type: 'JOIN_USER',
       prejoin: false,
@@ -49,12 +55,13 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
         password: ''
       }}
       validationSchema={Yup.object({
-        password: isPrivate ? Yup.string().required(t('validation.required')) : Yup.string()
+        password:
+          isPrivate && !isModerator ? Yup.string().required(t('validation.required')) : Yup.string()
       })}
     >
       <FormikForm>
         <fieldset className="submit-wrapper">
-          {isPrivate && (
+          {isPrivate && !isModerator && (
             <Input
               placeholder={t('fishbowl.passwordPlaceholder')}
               label={t('fishbowl.passwordInputLabel')}

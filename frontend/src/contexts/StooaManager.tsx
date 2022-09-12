@@ -66,6 +66,7 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
   const [showOnBoardingTour, setShowOnBoardingTour] = useState(false);
+  const [fishbowlPassword, setFishbowlPassword] = useState<string>();
 
   const { t, lang } = useTranslation('app');
 
@@ -116,15 +117,19 @@ const StooaProvider = ({ data, isModerator, children }) => {
   });
 
   useEventListener(CONFERENCE_IS_LOCKABLE, () => {
-    console.log(data.isPrivate, data.password);
-    if (data.isPrivate) {
-      Conference.lockConference('jose123');
+    if (data.isPrivate && isModerator) {
+      Conference.lockConference(data.password);
     }
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
-    console.log(data);
-    Conference.joinConference('jose123');
+    if (isModerator) {
+      console.log('JOINING CONFERENCE MOD SAURA', data);
+      Conference.joinConference(data.password);
+    } else {
+      console.log('JOINING CONFERENCE SAURA', fishbowlPassword);
+      Conference.joinConference(fishbowlPassword);
+    }
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
@@ -315,7 +320,8 @@ const StooaProvider = ({ data, isModerator, children }) => {
         onBoardingTooltipSeen,
         setOnBoardingTooltipSeen,
         showOnBoardingTour,
-        setShowOnBoardingTour
+        setShowOnBoardingTour,
+        setFishbowlPassword
       }}
     >
       {children}
