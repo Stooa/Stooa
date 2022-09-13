@@ -21,11 +21,8 @@ use Doctrine\ORM\Events;
 
 class FishbowlPasswordDoctrineSubscriber implements EventSubscriberInterface
 {
-    private HalitePasswordEncryption $halitePasswordEncryption;
-
-    public function __construct(HalitePasswordEncryption $halitePasswordEncryption)
+    public function __construct(private readonly HalitePasswordEncryption $halitePasswordEncryption)
     {
-        $this->halitePasswordEncryption = $halitePasswordEncryption;
     }
 
     /** @return array<int, string> */
