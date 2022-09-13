@@ -53,6 +53,7 @@
         "twitter": "El usuario de Twitter debe comenzar por @",
         "equalPassword": "Las dos contraseñas deben ser iguales",
         "successMessage": "Tus cambios están guardados",
-        "notEmpty": "Este campo no puede estar vacío"
+        "notEmpty": "Este campo no puede estar vacío",
+        "wrongPassword": "La contraseña es incorrecta"
     }
 }

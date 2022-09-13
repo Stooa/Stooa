@@ -53,6 +53,7 @@
         "twitter": "L'usiari de Twitter ha de començar per @",
         "equalPassword": "Les dues contrasenyes han de ser iguals",
         "successMessage": "Els teus canvis estan guardats",
-        "notEmpty": "Aquest camp no pot estar buit"
+        "notEmpty": "Aquest camp no pot estar buit",
+        "wrongPassword": "Contrasenya incorrecta"
     }
 }

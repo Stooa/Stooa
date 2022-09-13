@@ -53,6 +53,7 @@
         "twitter": "The twitter username should start with @",
         "equalPassword": "The two passwords must be equal",
         "successMessage": "Changes saved",
-        "notEmpty": "This field cannot be empty"
+        "notEmpty": "This field cannot be empty",
+        "wrongPassword": "The password is wrong"
     }
 }
