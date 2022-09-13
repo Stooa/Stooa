@@ -54,6 +54,8 @@
         "equalPassword": "The two passwords must be equal",
         "successMessage": "Changes saved",
         "notEmpty": "This field cannot be empty",
-        "wrongPassword": "The password is wrong"
+        "wrongPassword": "Incorrect password",
+        "unknownErrorServer": "Unknown problem. Please refresh the page and try again.",
+        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again."
     }
 }
