@@ -54,6 +54,8 @@
         "equalPassword": "Les dues contrasenyes han de ser iguals",
         "successMessage": "Els teus canvis estan guardats",
         "notEmpty": "Aquest camp no pot estar buit",
-        "wrongPassword": "Contrasenya incorrecta"
+        "wrongPassword": "Contrassenya incorrecta",
+        "unknownErrorServer": "Problema desconegut. Actualitza la pàgina i prova de nou",
+        "unknownErrorInside": "Ho sentim! Va ocórrer un error durant l'accés. Intenta-ho de nou"
     }
 }

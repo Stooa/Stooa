@@ -10,7 +10,9 @@
         "url": "Dies ist keine gültige URL",
         "equalPassword": "Die beiden Passwörter müssen gleich sein",
         "notEmpty": "Dieses Feld kann nicht leer sein",
-        "wrongPassword": "Falsches Passwort"
+        "wrongPassword": "Falsches Passwort",
+        "unknownErrorServer": "Ein unbekannter Fehler ist aufgetreten",
+        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again."
     },
     "fishbowl": {
         "selectLanguageLabel": "Sprache wählen",

@@ -50,6 +50,8 @@
         "equalPassword": "Les deux mots de passe doivent correspondre",
         "successMessage": "Changements enregistrés",
         "notEmpty": "This field cannot be empty",
-        "wrongPassword": "Mot de passe incorrect"
+        "wrongPassword": "Mot de passe erroné",
+        "unknownErrorServer": "Problème inconnu. Veuillez actualiser la page et réessayer",
+        "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer"
     }
 }

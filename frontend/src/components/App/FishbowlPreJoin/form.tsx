@@ -97,6 +97,14 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   const requiredError = t('validation.required');
   const notEmptyError = t('validation.notEmpty');
 
+  const handleDispatchJoinGuest = (): void => {
+    dispatch({
+      type: 'JOIN_GUEST',
+      isGuest: true,
+      prejoin: false
+    });
+  };
+
   const handleOnSubmit = async values => {
     const { name = '' } = values;
 
@@ -132,15 +140,12 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
 
     if (isPrivate && values.password && !isModerator) {
       setFishbowlPassword(values.password);
+
       connectWithPassword(values.password, fid as string)
         .then(res => {
           console.log('[STOOA] ConnectWithPassword response', res);
           if (res.data.response) {
-            dispatch({
-              type: 'JOIN_GUEST',
-              isGuest: true,
-              prejoin: false
-            });
+            handleDispatchJoinGuest();
           } else {
             toast(t('validation.wrongPassword'), {
               icon: '🔒',
@@ -152,13 +157,15 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
         })
         .catch(error => {
           console.log(error);
-          toast('error desconocido', {
-            icon: '🔒',
+          toast(t('validation.unknownErrorServer'), {
+            icon: '⚠️',
             type: 'error',
             position: 'bottom-center',
             autoClose: 5000
           });
         });
+    } else {
+      handleDispatchJoinGuest();
     }
   };
 

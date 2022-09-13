@@ -18,6 +18,9 @@ import Input from '@/components/Common/Fields/Input';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useStooa } from '@/contexts/StooaManager';
+import { connectWithPassword } from './connection';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 type TProps = {
   name: string;
@@ -32,18 +35,46 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
   const { isModerator, setFishbowlPassword } = useStooa();
   const [, dispatch] = useStateValue();
   const { t } = useTranslation('form');
+  const { fid } = useRouter().query;
 
-  const handleOnSubmit = (values: FormValues) => {
-    if (isPrivate && values.password && !isModerator) {
-      console.log('Saura password', values.password);
-      setFishbowlPassword(values.password);
-    }
-
+  const handleDispatchJoin = (): void => {
     dispatch({
       type: 'JOIN_USER',
       prejoin: false,
       isGuest: false
     });
+  };
+
+  const handleOnSubmit = (values: FormValues) => {
+    if (isPrivate && values.password && !isModerator) {
+      setFishbowlPassword(values.password);
+
+      connectWithPassword(values.password, fid as string)
+        .then(res => {
+          console.log('[STOOA] ConnectWithPassword response', res);
+          if (res.data.response) {
+            handleDispatchJoin();
+          } else {
+            toast(t('validation.wrongPassword'), {
+              icon: '🔒',
+              type: 'error',
+              position: 'bottom-center',
+              autoClose: 5000
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          toast(t('validation.unknownErrorServer'), {
+            icon: '⚠️',
+            type: 'error',
+            position: 'bottom-center',
+            autoClose: 5000
+          });
+        });
+    } else {
+      handleDispatchJoin();
+    }
   };
 
   userRepository.setUser({ nickname: name });
