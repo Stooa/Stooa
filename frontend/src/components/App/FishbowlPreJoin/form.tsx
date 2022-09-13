@@ -158,7 +158,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
         .catch(error => {
           console.log(error);
           toast(t('validation.unknownErrorServer'), {
-            icon: '🔒',
+            icon: '⚠️',
             type: 'error',
             position: 'bottom-center',
             autoClose: 5000
