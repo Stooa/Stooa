@@ -329,7 +329,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
               isFishbowlNow: false,
               hasIntroduction: values.hasIntroduction,
               isPrivate: values.isPrivate,
-              plainPassword: values.isPrivate && values.plainPassword ? values.plainPassword : undefined
+              plainPassword:
+                values.isPrivate && values.plainPassword ? values.plainPassword : undefined
             }
           }
         })
