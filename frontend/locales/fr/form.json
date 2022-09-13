@@ -49,6 +49,7 @@
         "twitter": "Le nom d'utilisateur Twitter doit commencer par @",
         "equalPassword": "Les deux mots de passe doivent correspondre",
         "successMessage": "Changements enregistrés",
-        "notEmpty": "This field cannot be empty"
+        "notEmpty": "This field cannot be empty",
+        "wrongPassword": "Mot de passe incorrect"
     }
 }

@@ -37,7 +37,8 @@
         "equalPassword": "Dua kata sandi tersebut harus sama",
         "successMessage": "Perubahan disimpan",
         "title": "Judul tidak valid. Masukkan topik pembicaraan",
-        "notEmpty": "This field cannot be empty"
+        "notEmpty": "This field cannot be empty",
+        "wrongPassword": "Password is wrong"
     },
     "button": {
         "login": "Masuk",

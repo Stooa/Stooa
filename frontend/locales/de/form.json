@@ -9,7 +9,8 @@
         "passwordLength": "Das Passwort muss mindestens 6 Zeichen lang sein",
         "url": "Dies ist keine gültige URL",
         "equalPassword": "Die beiden Passwörter müssen gleich sein",
-        "notEmpty": "Dieses Feld kann nicht leer sein"
+        "notEmpty": "Dieses Feld kann nicht leer sein",
+        "wrongPassword": "Falsches Passwort"
     },
     "fishbowl": {
         "selectLanguageLabel": "Sprache wählen",

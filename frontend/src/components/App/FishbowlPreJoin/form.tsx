@@ -21,6 +21,9 @@ import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Button from '@/components/Common/Button';
 import { useStooa } from '@/contexts/StooaManager';
+import { connectWithPassword } from './connection';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 interface FormValues {
   name: string;
@@ -36,7 +39,8 @@ interface FormProps {
 
 const initialValues = {
   name: userRepository.getUserNickname(),
-  isPrivate: false
+  isPrivate: false,
+  password: ''
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -88,6 +92,8 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
 
+  const { fid } = useRouter().query;
+
   const requiredError = t('validation.required');
   const notEmptyError = t('validation.notEmpty');
 
@@ -126,13 +132,34 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
 
     if (isPrivate && values.password && !isModerator) {
       setFishbowlPassword(values.password);
+      connectWithPassword(values.password, fid as string)
+        .then(res => {
+          console.log('[STOOA] ConnectWithPassword response', res);
+          if (res.data.response) {
+            dispatch({
+              type: 'JOIN_GUEST',
+              isGuest: true,
+              prejoin: false
+            });
+          } else {
+            toast(t('validation.wrongPassword'), {
+              icon: '🔒',
+              type: 'error',
+              position: 'bottom-center',
+              autoClose: 5000
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          toast('error desconocido', {
+            icon: '🔒',
+            type: 'error',
+            position: 'bottom-center',
+            autoClose: 5000
+          });
+        });
     }
-
-    dispatch({
-      type: 'JOIN_GUEST',
-      isGuest: true,
-      prejoin: false
-    });
   };
 
   return (
