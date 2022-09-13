@@ -23,7 +23,7 @@ class FishbowlResolver implements QueryItemResolverInterface
 {
     public function __construct(
         private readonly FishbowlRepository $repository,
-        private readonly PrivateFishbowlService $fishbowlPasswordService
+        private readonly PrivateFishbowlService $privateFishbowlService
     ) {
     }
 
@@ -41,7 +41,7 @@ class FishbowlResolver implements QueryItemResolverInterface
             $fishbowl = $this->repository->findBySlug($context['args']['slug']);
 
             if (null !== $fishbowl) {
-                return $this->fishbowlPasswordService->decryptPrivatePassword($fishbowl);
+                return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
             }
         }
 

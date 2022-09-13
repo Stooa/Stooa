@@ -62,4 +62,17 @@ class FishbowlResolverTest extends TestCase
         $response = ($this->resolver)($fishbowl, $context);
         $this->assertSame($fishbowl, $response);
     }
+
+    /** @test */
+    public function itCallsDecryptPrivatePassword(): void
+    {
+        $fishbowl = FishbowlFactory::createOne()->object();
+        $context = ['args' => ['slug' => 'fishbowl-slug']];
+
+        $this->fishbowlRepository->method('findBySlug')->willReturn($fishbowl);
+
+        $this->privateFishbowlService->expects($this->once())->method('decryptPrivatePassword')->with($fishbowl);
+
+        ($this->resolver)(null, $context);
+    }
 }
