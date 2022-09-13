@@ -133,10 +133,8 @@ const StooaProvider = ({
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
     if (isModerator) {
-      console.log('JOINING CONFERENCE MOD SAURA', data);
       Conference.joinConference(data.plainPassword);
     } else {
-      console.log('JOINING CONFERENCE SAURA', fishbowlPassword);
       Conference.joinConference(fishbowlPassword);
     }
   });
