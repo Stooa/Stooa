@@ -15,7 +15,7 @@ namespace App\Encryption;
 
 interface PasswordEncryptionInterface
 {
-    public function encrypt(string $password): string;
+    public function encrypt(?string $password): ?string;
 
-    public function decrypt(string $cipherPassword): string;
+    public function decrypt(?string $cipherPassword): ?string;
 }

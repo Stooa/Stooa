@@ -24,16 +24,24 @@ class HalitePasswordEncryption implements PasswordEncryptionInterface
     ) {
     }
 
-    public function encrypt(string $password): string
+    public function encrypt(?string $password): ?string
     {
+        if (null === $password) {
+            return null;
+        }
+
         return Crypto::encrypt(
             new HiddenString($password),
             KeyFactory::importEncryptionKey(new HiddenString($this->key))
         );
     }
 
-    public function decrypt(string $cipherPassword): string
+    public function decrypt(?string $cipherPassword): ?string
     {
+        if (null === $cipherPassword) {
+            return null;
+        }
+
         return Crypto::decrypt(
             $cipherPassword,
             KeyFactory::importEncryptionKey(new HiddenString($this->key))
