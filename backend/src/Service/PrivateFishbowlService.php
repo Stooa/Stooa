@@ -31,13 +31,13 @@ class PrivateFishbowlService
 
     public function isPasswordEqual(string $slug): bool
     {
-        $request = $this->requestStack->getCurrentRequest();
+        $currentRequest = $this->requestStack->getCurrentRequest();
 
-        if (null === $request) {
+        if (null === $currentRequest) {
             return false;
         }
 
-        $password = $request->request->get('password');
+        $password = $currentRequest->request->get('password');
 
         if (null === $password) {
             return false;
