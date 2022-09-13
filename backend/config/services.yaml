@@ -68,6 +68,10 @@ services:
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
+    App\DataProvider\FishbowlDataProvider:
+        bind:
+            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
+
     # Admin
     App\Admin\UserAdmin:
         tags:

@@ -45,7 +45,6 @@ class ResetPassword
 
     /**
      * @Groups({"reset_password:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Email
      */
@@ -53,7 +52,6 @@ class ResetPassword
 
     /**
      * @Groups({"reset_password:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Locale
      */

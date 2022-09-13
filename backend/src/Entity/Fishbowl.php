@@ -98,11 +98,9 @@ use Webmozart\Assert\Assert as MAssert;
  *         },
  *     }
  * )
- *
  * @UniqueEntity(fields={"slug"})
  * @FutureFishbowl(groups={"fishbowl:create", "fishbowl:update"})
  * @PrivateFishbowl(groups={"fishbowl:create", "fishbowl:update"})
- *
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
 class Fishbowl implements \Stringable
@@ -133,7 +131,6 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -143,119 +140,97 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $name = null;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="text", nullable=true)
      */
     private ?string $description = null;
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string", unique=true)
      */
     private ?string $slug = null;
 
     /**
      * @Groups({"fishbowl:write", "fishbowl:read"})
-     *
      * @Assert\NotNull
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime")
      */
     private ?\DateTimeInterface $startDateTime = null;
 
     /**
      * @Groups({"fishbowl:write", "fishbowl:read"})
-     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @Assert\Timezone
-     *
      * @ORM\Column(type="string")
      */
     private ?string $timezone = null;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @Assert\Locale(canonicalize=true)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $locale = null;
 
     /**
      * @Groups({"fishbowl:write", "fishbowl:read"})
-     *
      * @Assert\NotNull
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ApiProperty(attributes={
      *     "openapi_context"={"format"="string"}
      * })
-     *
      * @ORM\Column(type="time")
      */
     private ?\DateTimeInterface $duration = null;
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @Assert\NotNull
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="fishbowls")
      */
     private ?User $host = null;
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @Assert\Length(max=255)
      * @Assert\Choice({self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED})
-     *
      * @ORM\Column(type="string", options={"default": self::STATUS_NOT_STARTED})
      */
     private string $currentStatus = self::STATUS_NOT_STARTED;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $introducedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $runnedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $finishedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $finishDateTime = null;
@@ -269,21 +244,18 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $isFishbowlNow = false;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $hasIntroduction = false;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $isPrivate = false;
@@ -293,7 +265,6 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @Assert\NotBlank(groups={"user:create"})
      */
     private ?string $plainPassword = null;

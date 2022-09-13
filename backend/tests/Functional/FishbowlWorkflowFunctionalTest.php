@@ -50,6 +50,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationProvider
      */
     public function itCantRunWorkflowMutationWithWrongUser(
@@ -86,6 +87,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationProviderWithFinalStatus
      */
     public function itRunsWorkflowMutationWhenFishbowlHostsExecutesThem(
@@ -123,6 +125,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationHasIntroduceProvider
      */
     public function itBlocksWorkflowDependingHasIntroductionValue(
