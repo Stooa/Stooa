@@ -11,6 +11,7 @@ import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
 import {
   CONFERENCE_IS_LOCKABLE,
+  CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   PERMISSION_CHANGED,
@@ -43,13 +44,19 @@ const conferenceRepository = () => {
   };
 
   /**
-   * Join the jitsi conference
-   * @param {string} password
+   * Join the jitsi private conference
+   * @param {string | undefined} password
    */
-  const joinConference = async (password = '') => {
-    if (conference) {
-      await conference.join(password);
-    }
+  const joinPrivateConference = async password => {
+    if (conference) await conference.join(password);
+  };
+
+  /**
+   * Join the jitsi conference
+   * @param {string | undefined} password
+   */
+  const joinConference = async () => {
+    if (conference) await conference.join();
   };
 
   const leaveUser = id => {
@@ -113,6 +120,9 @@ const conferenceRepository = () => {
 
   const _handleConferenceFailed = error => {
     console.log('[STOOA] Conference failed', error);
+    if (error === 'conference.authenticationRequired') {
+      dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
+    }
   };
 
   const _handleConferenceError = error => {
@@ -447,6 +457,7 @@ const conferenceRepository = () => {
     initializeConnection,
     lockConference,
     joinConference,
+    joinPrivateConference,
     kickParticipant,
     leave,
     sendJoinEvent,

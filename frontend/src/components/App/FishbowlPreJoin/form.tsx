@@ -149,6 +149,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
           } else {
             toast(t('validation.wrongPassword'), {
               icon: '🔒',
+              toastId: 'wrongPassword',
               type: 'error',
               position: 'bottom-center',
               autoClose: 5000
@@ -159,6 +160,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
           console.log(error);
           toast(t('validation.unknownErrorServer'), {
             icon: '⚠️',
+            toastId: 'unknownErrorServer',
             type: 'error',
             position: 'bottom-center',
             autoClose: 5000

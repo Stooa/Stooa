@@ -11,6 +11,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import userRepository from '@/jitsi/User';
 
 import {
   ROUTE_FISHBOWL_THANKYOU,
@@ -28,6 +29,7 @@ import {
 // import Conference from '@/jitsi/Conference';
 import {
   CONFERENCE_IS_LOCKABLE,
+  CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   NOTIFICATION,
@@ -132,11 +134,28 @@ const StooaProvider = ({
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
-    if (isModerator) {
-      Conference.joinConference(data.plainPassword);
+    if (data.isPrivate) {
+      Conference.joinPrivateConference(isModerator ? data.plainPassword : fishbowlPassword);
     } else {
-      Conference.joinConference(fishbowlPassword);
+      Conference.joinConference();
     }
+  });
+
+  useEventListener(CONFERENCE_PASSWORD_REQUIRED, () => {
+    toast(t('form:validation.unknownErrorInside'), {
+      icon: '⚠️',
+      toastId: 'error-inside',
+      type: 'warning',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+    userRepository.clearUser();
+    setInitConnection(false);
+    setFishbowlPassword(undefined);
+    dispatch({
+      type: 'PREJOIN_RESET',
+      prejoin: true
+    });
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
