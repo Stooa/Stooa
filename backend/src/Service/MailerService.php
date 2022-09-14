@@ -27,6 +27,7 @@ class MailerService
     public function __construct(
         private readonly MailerInterface $mailer,
         private readonly TranslatorInterface $translator,
+        private readonly PrivateFishbowlService $privateFishbowlService,
         private readonly string $from,
         private readonly string $appUrl
     ) {
@@ -106,7 +107,8 @@ class MailerService
                     'fishbowlFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
                     'fishbowlDuration' => $fishbowl->getDurationFormatted(),
                     'fishbowlSlug' => $fishbowl->getSlug(),
-                    'fishbowlPassword' => $fishbowl->getPassword(),
+                    'fishbowlPassword' => $this->privateFishbowlService->decryptPrivatePassword($fishbowl)->getPlainPassword(),
+                    'fishbowlIsPrivate' => $fishbowl->getIsPrivate(),
                     'locale' => $locale,
                     'appUrl' => $this->appUrl,
                 ]);

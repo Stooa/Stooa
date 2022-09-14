@@ -33,5 +33,5 @@ emails:
             en: Angličtina
         info_language: Jazyk
         info_invite: Odkaz na pozvání účastníků
-        password: 'Password'
+        password: 'Password: %password%'
         delete: 'Pokud chcete tento fishbowl smazat, napište nám <a href="mailto:stooa@stooa.com?subject=Smazat událost akvária&amp;body=Prosím, smažte událost akvária s id: %id%">zde</a>'
