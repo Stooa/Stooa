@@ -61,6 +61,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
               position: 'bottom-center',
               autoClose: 5000
             });
+            values.password = '';
           }
         })
         .catch(error => {
