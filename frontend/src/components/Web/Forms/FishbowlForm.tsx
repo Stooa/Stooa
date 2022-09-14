@@ -286,8 +286,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
         label: values.id
       });
 
-      console.log('VALUES', values);
-
       await props
         .updateFishbowl({
           variables: {
