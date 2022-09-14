@@ -18,7 +18,6 @@ import { Description } from '@/ui/pages/fishbowl-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
 import { ToastContainer } from 'react-toastify';
-import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   data: Fishbowl;
