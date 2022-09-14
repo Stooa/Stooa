@@ -71,6 +71,8 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
             withSvg
             fid={data.slug}
             locale={data.locale}
+            isPrivate={data.isPrivate}
+            plainPassword={data.plainPassword as string}
           />
           <p className="body-xs share-text">
             <Trans i18nKey="fishbowl:detail.shareInSocials" />

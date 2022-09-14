@@ -30,5 +30,6 @@ export interface StooaContextValues {
   setOnBoardingTooltipSeen: Dispatch<SetStateAction<boolean>>;
   showOnBoardingTour: boolean;
   setShowOnBoardingTour: Dispatch<SetStateAction<boolean>>;
+  getPassword: () => string;
   setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
 }

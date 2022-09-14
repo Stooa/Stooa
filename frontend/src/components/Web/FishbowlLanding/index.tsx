@@ -18,6 +18,7 @@ import { Description } from '@/ui/pages/fishbowl-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
 import { ToastContainer } from 'react-toastify';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   data: Fishbowl;
@@ -55,6 +56,16 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
           </StyledDetailAlert>
           {!data.isPrivate && (
             <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+          )}
+          {data.plainPassword && (
+            <ButtonCopyUrl
+              size="large"
+              withSvg
+              fid={data.slug}
+              locale={data.locale}
+              isPrivate
+              plainPassword={data.plainPassword}
+            />
           )}
           <HelpText className="body-sm">{t('copyText')}</HelpText>
         </>

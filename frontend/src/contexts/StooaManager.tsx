@@ -107,6 +107,14 @@ const StooaProvider = ({
     }
   };
 
+  const getPassword = (): string => {
+    if (isModerator) {
+      return data.plainPassword as string;
+    } else {
+      return fishbowlPassword ?? '';
+    }
+  };
+
   useEventListener(USER_KICKED, async ({ detail: { reason, participant } }) => {
     if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
       return;
@@ -350,6 +358,7 @@ const StooaProvider = ({
         setOnBoardingTooltipSeen,
         showOnBoardingTour,
         setShowOnBoardingTour,
+        getPassword,
         setFishbowlPassword
       }}
     >

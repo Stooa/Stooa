@@ -30,7 +30,7 @@ interface Props {
 
 const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
   const { t } = useTranslation('fishbowl-list');
-  const { name, startDateTimeTz, slug, locale } = fishbowl;
+  const { name, startDateTimeTz, slug, locale, isPrivate, plainPassword } = fishbowl;
 
   const startDateTime = new Date(startDateTimeTz);
 
@@ -71,7 +71,14 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div className="card__time">{time}</div>
       </div>
       <div data-testid="card-actions" className="card__actions">
-        <ButtonCopyUrl data-testid="copy-link" variant="text" fid={slug} locale={locale}>
+        <ButtonCopyUrl
+          data-testid="copy-link"
+          variant="text"
+          fid={slug}
+          locale={locale}
+          isPrivate={isPrivate}
+          plainPassword={plainPassword ?? 'error ask for the password'}
+        >
           {t('common:copyInvitation')}
         </ButtonCopyUrl>
         {isTimeLessThanNMinutes(startDateTime, 30) && (

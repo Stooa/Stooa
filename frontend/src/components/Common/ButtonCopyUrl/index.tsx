@@ -27,15 +27,30 @@ interface Props {
   full?: boolean;
 }
 
-const ButtonCopyUrl: React.FC<Props> = ({ fid, locale, size, variant, withSvg, ...props }) => {
+type PrivateProps =
+  | { isPrivate?: false; plainPassword?: never }
+  | { isPrivate: boolean; plainPassword: string };
+
+const ButtonCopyUrl: React.FC<Props & PrivateProps> = ({
+  fid,
+  locale,
+  size,
+  variant,
+  withSvg,
+  isPrivate,
+  plainPassword,
+  ...props
+}) => {
   const { t } = useTranslation('common');
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
   const fbUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${
     locale === defaultLocale ? '' : `/${locale}`
   }${fbRoute}`;
 
+  const invitation = `${fbUrl}\n${t(`form:password`)}:${plainPassword}`;
+
   const handleCopyUrl = () => {
-    navigator.clipboard.writeText(fbUrl);
+    navigator.clipboard.writeText(isPrivate ? invitation : fbUrl);
     toast(t('successCopiedInvitation'), {
       icon: <Check />,
       toastId: 'link-copied',
