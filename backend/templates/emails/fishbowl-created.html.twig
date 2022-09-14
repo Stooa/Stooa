@@ -28,6 +28,12 @@ file that was distributed with this source code.
     {{ macros.text(urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.fishbowlLink.styles }),
         emailConfig, '', 'fishbowlLink'
     ) }}
+
+    {% if fishbowlIsPrivate %}
+        {{ macros.spaceRow(20) }}
+        {{ macros.text('emails.fishbowl_created_email.password'|trans({'%password%': fishbowlPassword}, null, locale), emailConfig, 'text-align:center;') }}
+    {% endif %}
+
     {{ macros.spaceRow(20) }}
     {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
 
