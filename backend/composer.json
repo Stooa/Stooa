@@ -76,7 +76,7 @@
         "symfony/web-profiler-bundle": "6.1.2",
         "vimeo/psalm": "4.24.0",
         "weirdan/doctrine-psalm-plugin": "2.3.0",
-        "zenstruck/foundry": "1.21.0"
+        "zenstruck/foundry": "1.21.1"
     },
     "replace": {
         "paragonie/random_compat": "2.*",
