@@ -37,6 +37,7 @@ emails:
         info_invite: Enlace para invitar los asistentes
         info_url: Clica aquí para acceder al fishbowl
         delete: 'Si quieres borrar este fishbowl, por favor, envíanos un email <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl event with id: %id%">aquí</a>'
+        password: 'Password'
         languages:
             es: Español
             ca: Catalán

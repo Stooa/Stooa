@@ -106,6 +106,7 @@ class MailerService
                     'fishbowlFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
                     'fishbowlDuration' => $fishbowl->getDurationFormatted(),
                     'fishbowlSlug' => $fishbowl->getSlug(),
+                    'fishbowlPassword' => $fishbowl->getPassword(),
                     'locale' => $locale,
                     'appUrl' => $this->appUrl,
                 ]);
