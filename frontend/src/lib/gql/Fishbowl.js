@@ -43,6 +43,7 @@ const UPDATE_FISHBOWL = gql`
         isFishbowlNow
         hasIntroduction
         isPrivate
+        plainPassword
       }
     }
   }
