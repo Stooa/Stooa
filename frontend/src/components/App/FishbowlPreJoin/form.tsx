@@ -79,9 +79,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
       password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
     });
   },
-  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
+  handleSubmit: async (values, { props, setSubmitting }) => {
     setSubmitting(false);
-    resetForm({ values: initialValues });
     props.onSubmit(values);
   }
 })(Form);
@@ -154,6 +153,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
               position: 'bottom-center',
               autoClose: 5000
             });
+            values.password = '';
           }
         })
         .catch(error => {
