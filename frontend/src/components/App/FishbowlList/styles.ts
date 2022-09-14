@@ -34,7 +34,7 @@ const FishbowlListContent = styled.div`
   width: 100%;
 
   &.not-empty {
-    height: 815px;
+    height: 900px;
   }
 
   ${media.min('desktop')`
