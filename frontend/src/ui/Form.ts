@@ -352,6 +352,8 @@ const SwitchStyled = styled.div`
   position: relative;
   width: 100%;
   display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   align-items: center;
 
   > *:not(:nth-child(2)) {

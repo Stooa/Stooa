@@ -74,6 +74,7 @@ const StooaProvider = ({
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
+  const [showConfirmCloseTabModal, setShowConfirmCloseTabModal] = useState(false);
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
   const [showOnBoardingTour, setShowOnBoardingTour] = useState(false);
@@ -358,6 +359,8 @@ const StooaProvider = ({
         setOnBoardingTooltipSeen,
         showOnBoardingTour,
         setShowOnBoardingTour,
+        showConfirmCloseTabModal,
+        setShowConfirmCloseTabModal,
         getPassword,
         setFishbowlPassword
       }}

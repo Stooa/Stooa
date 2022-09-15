@@ -27,6 +27,9 @@ import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import PreFishbowl from '@/components/App/PreFishbowl';
 import ModalOnboarding from '@/components/App/ModalOnBoarding';
+import { HackLeaveHover } from './styles';
+import { isTimeLessThanNMinutes } from '@/lib/helpers';
+import ModalConfirmLeaving from '../ModalConfirmLeaving';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -35,7 +38,15 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { isModerator, participantToKick, setParticipantToKick, showOnBoardingModal } = useStooa();
+  const {
+    data,
+    isModerator,
+    participantToKick,
+    setParticipantToKick,
+    showOnBoardingModal,
+    showConfirmCloseTabModal,
+    setShowConfirmCloseTabModal
+  } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
@@ -55,19 +66,51 @@ const Fishbowl: FC = () => {
     setShowModalPermissions(false);
   };
 
+  const handleModeratorIsGonnaLeave = () => {
+    console.log('Saura less than 5', isTimeLessThanNMinutes(data.endDateTimeTz, 5));
+    if (
+      isModerator &&
+      conferenceStatus === IConferenceStatus.RUNNING &&
+      isTimeLessThanNMinutes(data.endDateTimeTz, 5)
+    ) {
+      setShowConfirmCloseTabModal(true);
+    }
+  };
+
   useEffect(() => {
     pushEventDataLayer({
       action: fid as string,
       category: 'FishbowlReactions',
       label: 'Connect'
     });
+
+    const closeTabFunction = (e: BeforeUnloadEvent) => {
+      if (isModerator && conferenceStatus === IConferenceStatus.RUNNING) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+
+    addEventListener('beforeunload', closeTabFunction);
+
+    return () => {
+      removeEventListener('beforeunload', closeTabFunction);
+    };
   }, []);
 
   return (
     <>
       <Header isPrefishbowl={isPreFishbowl} toggleParticipants={toggleParticipants} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
+        <HackLeaveHover onMouseEnter={handleModeratorIsGonnaLeave} />
+
         {/* MODALS */}
+        {showConfirmCloseTabModal && (
+          <ModalConfirmLeaving
+            handleFinished={() => setShowConfirmCloseTabModal(false)}
+            closeModal={() => setShowConfirmCloseTabModal(false)}
+          />
+        )}
         {showModalPermissions && <ModalPermissions closeModal={handleCloseModalPermissions} />}
         {participantToKick && (
           <ModalKickUser
