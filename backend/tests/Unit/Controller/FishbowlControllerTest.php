@@ -56,4 +56,40 @@ class FishbowlControllerTest extends TestCase
 
         $this->assertSame($jsonResponse->getContent(), $response->getContent());
     }
+
+    /** @test */
+    public function itCallsParticipants(): void
+    {
+        $jsonResponse = new JsonResponse(['response' => []]);
+
+        $this->fishbowlService->method('getParticipants')->willReturn([]);
+
+        $response = $this->controller->participants('fishbowl-slug');
+
+        $this->assertSame($jsonResponse->getContent(), $response->getContent());
+    }
+
+    /** @test */
+    public function itCallsStatus(): void
+    {
+        $jsonResponse = new JsonResponse(['status' => 'running']);
+
+        $this->fishbowlService->method('getFishbowlStatus')->willReturn('running');
+
+        $response = $this->controller->status('fishbowl-slug');
+
+        $this->assertSame($jsonResponse->getContent(), $response->getContent());
+    }
+
+    /** @test */
+    public function itCallsPing(): void
+    {
+        $jsonResponse = new JsonResponse(['response' => true]);
+
+        $this->fishbowlService->method('ping')->willReturn(true);
+
+        $response = $this->controller->ping('fishbowl-slug');
+
+        $this->assertSame($jsonResponse->getContent(), $response->getContent());
+    }
 }
