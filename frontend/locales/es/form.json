@@ -52,7 +52,7 @@
         "url": "La url no es válida",
         "twitter": "El usuario de Twitter debe comenzar por @",
         "equalPassword": "Las dos contraseñas deben ser iguales",
-        "successMessage": "Tus cambios están guardados",
+        "successMessage": "Tus cambios se han guardado",
         "notEmpty": "Este campo no puede estar vacío",
         "wrongPassword": "Contraseña incorrecta",
         "unknownErrorServer": "Ha ocurrido un error desconocido. Prueba de nuevo.",
