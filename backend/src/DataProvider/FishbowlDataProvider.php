@@ -37,7 +37,7 @@ final class FishbowlDataProvider implements ContextAwareCollectionDataProviderIn
      *
      * @throws ResourceClassNotSupportedException
      *
-     * @return iterable<int, Fishbowl>
+     * @return iterable<array-key, Fishbowl>
      */
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
