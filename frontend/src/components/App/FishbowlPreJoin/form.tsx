@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps } from 'formik';
+import { withFormik, FormikProps, FormikBag } from 'formik';
 import * as Yup from 'yup';
 
 import { useStateValue } from '@/contexts/AppContext';
@@ -28,12 +28,13 @@ import { toast } from 'react-toastify';
 interface FormValues {
   name: string;
   isPrivate: boolean;
+  password?: string;
 }
 
 interface FormProps {
   notEmpty: string;
   required: string;
-  onSubmit: (values: FormValues) => void;
+  onSubmit: (values: FormValues, formikBag: FormikBag<FormProps, FormValues>) => void;
   isPrivate: boolean;
 }
 
@@ -79,9 +80,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
       password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
     });
   },
-  handleSubmit: async (values, { props, setSubmitting }) => {
-    setSubmitting(false);
-    props.onSubmit(values);
+  handleSubmit: async (values, actions) => {
+    actions.setSubmitting(false);
+    actions.props.onSubmit(values, actions);
   }
 })(Form);
 
@@ -104,7 +105,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
     });
   };
 
-  const handleOnSubmit = async values => {
+  const handleOnSubmit: FormProps['onSubmit'] = async (values, { setErrors }) => {
     const { name = '' } = values;
 
     createGuest({
@@ -146,14 +147,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
           if (res.data.response) {
             handleDispatchJoinGuest();
           } else {
-            toast(t('validation.wrongPassword'), {
-              icon: '🔒',
-              toastId: 'wrongPassword',
-              type: 'error',
-              position: 'bottom-center',
-              autoClose: 5000
-            });
-            values.password = '';
+            setErrors({ password: t('validation.wrongPassword') });
           }
         })
         .catch(error => {
