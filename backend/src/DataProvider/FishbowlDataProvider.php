@@ -16,29 +16,33 @@ namespace App\DataProvider;
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
+use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use App\Entity\Fishbowl;
 use App\Service\PrivateFishbowlService;
 
 final class FishbowlDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    private CollectionDataProviderInterface $collectionDataProvider;
-    private PrivateFishbowlService $privateFishbowlService;
-
-    public function __construct(PrivateFishbowlService $privateFishbowlService, CollectionDataProviderInterface $collectionDataProvider)
+    public function __construct(private readonly PrivateFishbowlService $privateFishbowlService, private readonly CollectionDataProviderInterface $collectionDataProvider)
     {
-        $this->collectionDataProvider = $collectionDataProvider;
-        $this->privateFishbowlService = $privateFishbowlService;
     }
 
+    /** @param array<mixed> $context */
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
         return Fishbowl::class === $resourceClass;
     }
 
+    /**
+     * @param array<mixed> $context
+     *
+     * @throws ResourceClassNotSupportedException
+     *
+     * @return iterable<array-key, Fishbowl>
+     */
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
         /** @var Fishbowl[] $fishbowls */
-        $fishbowls = $this->collectionDataProvider->getCollection($resourceClass, $operationName, $context);
+        $fishbowls = $this->collectionDataProvider->getCollection($resourceClass, $operationName);
 
         foreach ($fishbowls as $fishbowl) {
             $this->privateFishbowlService->decryptPrivatePassword($fishbowl);

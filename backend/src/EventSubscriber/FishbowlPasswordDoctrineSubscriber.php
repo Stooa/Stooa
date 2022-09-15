@@ -60,8 +60,6 @@ class FishbowlPasswordDoctrineSubscriber implements EventSubscriberInterface
     {
         if ($fishbowl->getIsPrivate() && null !== $fishbowl->getPlainPassword()) {
             $fishbowl->setPassword($this->halitePasswordEncryption->encrypt($fishbowl->getPlainPassword()));
-
-            $fishbowl->setPlainPassword(null);
         }
     }
 }
