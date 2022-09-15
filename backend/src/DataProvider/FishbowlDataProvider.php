@@ -21,13 +21,8 @@ use App\Service\PrivateFishbowlService;
 
 final class FishbowlDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    private CollectionDataProviderInterface $collectionDataProvider;
-    private PrivateFishbowlService $privateFishbowlService;
-
-    public function __construct(PrivateFishbowlService $privateFishbowlService, CollectionDataProviderInterface $collectionDataProvider)
+    public function __construct(private readonly PrivateFishbowlService $privateFishbowlService, private readonly CollectionDataProviderInterface $collectionDataProvider)
     {
-        $this->collectionDataProvider = $collectionDataProvider;
-        $this->privateFishbowlService = $privateFishbowlService;
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
