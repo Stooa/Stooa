@@ -54,19 +54,24 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
           </StyledDetailAlert>
           {!data.isPrivate && (
-            <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+            <>
+              <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+              <HelpText className="body-sm">{t('copyText')}</HelpText>
+            </>
           )}
           {data.plainPassword && (
-            <ButtonCopyUrl
-              size="large"
-              withSvg
-              fid={data.slug}
-              locale={data.locale}
-              isPrivate
-              plainPassword={data.plainPassword}
-            />
+            <>
+              <ButtonCopyUrl
+                size="large"
+                withSvg
+                fid={data.slug}
+                locale={data.locale}
+                isPrivate
+                plainPassword={data.plainPassword}
+              />
+              <HelpText className="body-sm">{t('copyText')}</HelpText>
+            </>
           )}
-          <HelpText className="body-sm">{t('copyText')}</HelpText>
         </>
       )}
     </LandingContainer>

@@ -381,6 +381,7 @@ const SwitchStyled = styled.div`
 
   .label-text {
     font-size: ${rems(14)};
+    width: fit-content;
   }
 
   label {

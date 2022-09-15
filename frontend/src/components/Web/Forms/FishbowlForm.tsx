@@ -37,6 +37,7 @@ import { Fishbowl } from '@/types/api-platform';
 
 interface FormProps {
   required: string;
+  minimumLength: string;
   success?: boolean;
   date: string;
   title: string;
@@ -271,7 +272,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
       timezone: Yup.string().required(props.required),
       plainPassword: Yup.string().when('isPrivate', {
         is: true,
-        then: Yup.string().required(props.required)
+        then: Yup.string().min(8, props.minimumLength).required(props.required)
       })
     });
   },
@@ -373,6 +374,7 @@ const FishbowlForm = ({
   });
 
   const requiredError = t('validation.required');
+  const minimumLength = t('validation.fishbowlPasswordLength');
   const dateError = t('validation.date');
   const titleError = t('validation.title');
 
@@ -448,6 +450,7 @@ const FishbowlForm = ({
         defaultTitle={defaultTitle}
         enableReinitialize
         required={requiredError}
+        minimumLength={minimumLength}
         success={success}
         date={dateError}
         createFishbowl={createFishbowl}

@@ -27,7 +27,7 @@
         "introductionLabel": "I want to start the fishbowl giving an introduction",
         "introductionTooltip": "When you start the fishbowl, <span>you can start by making an introduction.</span> The camera and microphone will be active just for you. When you're done, <span>don't forget to allow attendees to join the conversation.</span>",
         "isPrivate": "I want this event to be private",
-        "passwordTooltip": "Attendees will be required to enter the password in order to access the event",
+        "passwordTooltip": "Participants will be required to enter the password in order to access the event",
         "passwordPlaceholder": "Insert your password",
         "passwordInputLabel": "Password"
     },
@@ -48,6 +48,7 @@
         "email": "Invalid email addresss",
         "date": "Format of the date is invalid: dd/mm/yyyy",
         "passwordLength": "The password must have 6 characters or more",
+        "fishbowlPasswordLength": "The password must have 8 characters or more",
         "terms": "You must accept the terms and conditions",
         "url": "This is not a valid url",
         "twitter": "The twitter username should start with @",

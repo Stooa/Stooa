@@ -3,7 +3,7 @@
     "firstname": "Nom",
     "lastname": "Cognom",
     "email": "Email",
-    "password": "Contrasenya",
+    "password": "contrasenya",
     "name": "El teu nom",
     "haveAccount": "Ja tens un compte?",
     "noAccount": "No tens compte?",
@@ -26,10 +26,10 @@
         "advancedOptions": "Opcions avançades",
         "introductionLabel": "Vull començar el Fishbowl amb una introducció.",
         "introductionTooltip": "Quan iniciïs el Fishbowl, <span>podràs començar fent una introducció.</span> La càmera i el micròfon estaran actius només per a tu. Quan acabis, <span>no oblidis permetre als assistents unir-se a la conversa.</span>",
-        "isPrivate": "I want this event to be private",
-        "passwordTooltip": "Attendees will be required to enter the password in order to access the event",
-        "passwordPlaceholder": "Insert your password",
-        "passwordInputLabel": "Password"
+        "isPrivate": "Vull que aquest esdeveniment sigui privat",
+        "passwordTooltip": "Per a poder accedir a l'esdeveniment serà necessari ingressar la contrasenya",
+        "passwordPlaceholder": "Introdueix la teva contrasenya",
+        "passwordInputLabel": "contrasenya"
     },
     "button": {
         "login": "Entra",
@@ -54,7 +54,7 @@
         "equalPassword": "Les dues contrasenyes han de ser iguals",
         "successMessage": "Els teus canvis estan guardats",
         "notEmpty": "Aquest camp no pot estar buit",
-        "wrongPassword": "Contrassenya incorrecta",
+        "wrongPassword": "contrasenya incorrecta",
         "unknownErrorServer": "Problema desconegut. Actualitza la pàgina i prova de nou",
         "unknownErrorInside": "Ho sentim! Va ocórrer un error durant l'accés. Intenta-ho de nou"
     }

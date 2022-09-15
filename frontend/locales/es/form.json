@@ -26,10 +26,10 @@
         "advancedOptions": "Opciones avanzadas",
         "introductionLabel": "Quiero comenzar el fishbowl con una introducción.",
         "introductionTooltip": "Cuando inicies el Fishbowl, <span>podrás comenzar haciendo una introducción.</span> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <span>no olvides permitir a los asistentes unirse a la conversación.</span>",
-        "isPrivate": "Quiero que este fishbowl tenga contraseña.",
-        "passwordTooltip": "Los asistentes tendrán que introducirla para unirse a la conversación.",
-        "passwordPlaceholder": "Insert your password",
-        "passwordInputLabel": "Password"
+        "isPrivate": "Quiero que el evento sea privado",
+        "passwordTooltip": "Para poder acceder al evento será necesario ingresar la contraseña",
+        "passwordPlaceholder": "Inserta tu contraseña",
+        "passwordInputLabel": "Contraseña"
     },
     "button": {
         "login": "Entra",
@@ -48,6 +48,7 @@
         "email": "Dirección de email no válida",
         "date": "Formato de fecha no válido: dd/mm/aaaa",
         "passwordLength": "La contraseña debe tener 6 caracteres o más",
+        "fishbowlPasswordLength": "La contraseña debe tener 8 caracteres o más",
         "terms": "Debes aceptar los términos y condiciones",
         "url": "La url no es válida",
         "twitter": "El usuario de Twitter debe comenzar por @",

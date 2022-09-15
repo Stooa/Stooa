@@ -21,6 +21,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';
 import Button from '@/components/Common/Button';
+import Icon from '@/components/Common/Fields/Icon';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -62,6 +63,11 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
       data-testid={convertIntoClassName(name)}
     >
       <CardTitle>
+        {isPrivate && (
+          <span className="icon-wrapper">
+            <Icon variant="lock" />
+          </span>
+        )}
         <h4>{name}</h4>
       </CardTitle>
       <div data-testid="card-info" className="card__info">
