@@ -265,6 +265,7 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
+     * @Assert\Length(min=8, max=255)
      * @Assert\NotBlank(groups={"user:create"})
      */
     private ?string $plainPassword = null;
