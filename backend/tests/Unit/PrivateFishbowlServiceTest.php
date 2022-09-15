@@ -61,4 +61,18 @@ class PrivateFishbowlServiceTest extends TestCase
 
         $this->assertNull($decryptedFishbowl->getPlainPassword());
     }
+
+    /** @test */
+    public function itDecryptPassword(): void
+    {
+        $fishbowl = FishbowlFactory::createOne([
+            'isPrivate' => true,
+            'password' => 'password',
+        ])->object();
+
+        $this->halitePasswordEncryption->method('decrypt')->willReturn('decryptedPassword');
+        $decryptedFishbowl = $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
+
+        $this->assertSame('decryptedPassword', $decryptedFishbowl->getPlainPassword());
+    }
 }

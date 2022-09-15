@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Resolver;
 
 use App\Factory\FishbowlFactory;
 use App\Repository\FishbowlRepository;
