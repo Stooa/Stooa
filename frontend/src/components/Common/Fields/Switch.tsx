@@ -28,7 +28,7 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
   const handleOnMouseEnter: React.MouseEventHandler = () => {
     if (tipToHover.current) {
       const left = tipToHover.current.offsetLeft;
-      setArrowPosition(left + 9 + 'px');
+      setArrowPosition(left + 'px');
       setShowTooltip(true);
     }
   };
@@ -45,28 +45,30 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
       <SwitchLabel htmlFor={props.id || props.name}>
         <span className={`switch-button`} />
       </SwitchLabel>
-      {label && (
-        <label htmlFor={props.id || props.name}>
-          <span className="label-text">{label}</span>
-        </label>
-      )}
-      <div
-        className="icon-wrapper"
-        onClick={() => setShowTooltip(showTooltip => !showTooltip)}
-        onMouseEnter={handleOnMouseEnter}
-        onMouseLeave={() => setShowTooltip(false)}
-        ref={tipToHover}
-      >
-        {showTooltip && (
-          <StyledIntroductionTooltip>
-            <div
-              className="arrow"
-              style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
-            ></div>
-            {tooltipText}
-          </StyledIntroductionTooltip>
+      <div className="label-wrapper">
+        {label && (
+          <label htmlFor={props.id || props.name}>
+            <span className="label-text">{label}</span>
+          </label>
         )}
-        <Info />
+        <div
+          className="icon-wrapper"
+          onClick={() => setShowTooltip(showTooltip => !showTooltip)}
+          onMouseEnter={handleOnMouseEnter}
+          onMouseLeave={() => setShowTooltip(false)}
+          ref={tipToHover}
+        >
+          {showTooltip && (
+            <StyledIntroductionTooltip>
+              <div
+                className="arrow"
+                style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
+              ></div>
+              {tooltipText}
+            </StyledIntroductionTooltip>
+          )}
+          <Info />
+        </div>
       </div>
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
     </SwitchStyled>

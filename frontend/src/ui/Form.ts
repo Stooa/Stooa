@@ -350,12 +350,12 @@ const TextDivider = styled.div`
 
 const SwitchStyled = styled.div`
   position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
-  width: 100%;
 
   > *:not(:nth-child(2)) {
-    margin-left: ${space()};
+    margin-left: ${space(1.5)};
   }
 
   input {
@@ -374,9 +374,19 @@ const SwitchStyled = styled.div`
     background-color: ${COLOR_GREEN_500};
   }
 
-  .icon-wrapper {
-    display: flex;
-    padding: ${space(1)};
+  .label-wrapper {
+    padding-right: ${space()};
+    label {
+      display: inline;
+    }
+
+    .icon-wrapper {
+      display: inline;
+      margin-left: ${space()};
+      svg {
+        transform: translateY(2px);
+      }
+    }
   }
 
   .label-text {
