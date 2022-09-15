@@ -19,6 +19,7 @@ use App\Repository\FishbowlRepository;
 use App\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
 use Zenstruck\Foundry\Test\Factories;
@@ -31,17 +32,16 @@ class PrivateFishbowlServiceTest extends TestCase
     private MockObject $halitePasswordEncryption;
     /** @var MockObject&Security */
     private MockObject $security;
-    /** @var MockObject&RequestStack */
-    private MockObject $requestStack;
     /** @var MockObject&FishbowlRepository */
     private MockObject $fishbowlRepository;
+    private RequestStack $requestStack;
     private PrivateFishbowlService $privateFishbowlService;
 
     protected function setUp(): void
     {
         $this->halitePasswordEncryption = $this->createMock(HalitePasswordEncryption::class);
         $this->security = $this->createMock(Security::class);
-        $this->requestStack = $this->createMock(RequestStack::class);
+        $this->requestStack = new RequestStack();
         $this->fishbowlRepository = $this->createMock(FishbowlRepository::class);
 
         $this->privateFishbowlService = new PrivateFishbowlService(
@@ -74,5 +74,104 @@ class PrivateFishbowlServiceTest extends TestCase
         $decryptedFishbowl = $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
 
         $this->assertSame('decryptedPassword', $decryptedFishbowl->getPlainPassword());
+    }
+
+    /** @test */
+    public function itGetsFalseWhenRequestIsFalse(): void
+    {
+        $response = $this->privateFishbowlService->isPasswordEqual('slug');
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itGetsFalseWhenPasswordIsNull(): void
+    {
+        $request = new Request();
+
+        $request->request->set('password', null);
+
+        $this->requestStack->push($request);
+
+        $response = $this->privateFishbowlService->isPasswordEqual('slug');
+
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itGetsFalseWhenFishbowlIsNull(): void
+    {
+        $request = new Request();
+
+        $request->request->set('password', 'password');
+
+        $this->requestStack->push($request);
+
+        $this->fishbowlRepository->method('findBySlug')->willReturn(null);
+
+        $response = $this->privateFishbowlService->isPasswordEqual('slug');
+
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itGetsFalseWhenFishbowlIsNotPrivate(): void
+    {
+        $request = new Request();
+
+        $request->request->set('password', 'password');
+
+        $this->requestStack->push($request);
+
+        $fishbowl = FishbowlFactory::createOne()->object();
+
+        $this->fishbowlRepository->method('findBySlug')->willReturn($fishbowl);
+
+        $response = $this->privateFishbowlService->isPasswordEqual('slug');
+
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itGetsFalseWhenIsPrivateButPasswordAreNotTheSame(): void
+    {
+        $request = new Request();
+
+        $request->request->set('password', 'password');
+
+        $this->requestStack->push($request);
+
+        $fishbowl = FishbowlFactory::createOne([
+            'isPrivate' => true,
+        ])->object();
+
+        $this->halitePasswordEncryption->method('decrypt')->willReturn('anotherPassword');
+
+        $this->fishbowlRepository->method('findBySlug')->willReturn($fishbowl);
+
+        $response = $this->privateFishbowlService->isPasswordEqual('slug');
+
+        $this->assertFalse($response);
+    }
+
+    /** @test */
+    public function itGetsFalseWhenIsPrivateButPasswordAreTheSame(): void
+    {
+        $request = new Request();
+
+        $request->request->set('password', 'password');
+
+        $this->requestStack->push($request);
+
+        $fishbowl = FishbowlFactory::createOne([
+            'isPrivate' => true,
+        ])->object();
+
+        $this->halitePasswordEncryption->method('decrypt')->willReturn('password');
+
+        $this->fishbowlRepository->method('findBySlug')->willReturn($fishbowl);
+
+        $response = $this->privateFishbowlService->isPasswordEqual('slug');
+
+        $this->assertTrue($response);
     }
 }
