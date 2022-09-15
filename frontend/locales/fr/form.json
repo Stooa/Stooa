@@ -28,7 +28,7 @@
         "login": "Se connecter",
         "register": "Suivant",
         "changePassword": "Changer le mot de passe",
-        "modifyFishbowl": "Modifier le fishbowl",
+        "modifyFishbowl": "Enregistrer les changements",
         "enterFishbowl": "Entrer dans le fishbowl"
     },
     "firstname": "Prénom",
