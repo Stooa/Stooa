@@ -19,6 +19,9 @@ use App\Validator\Constraints\PrivateFishbowlValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Zenstruck\Foundry\Test\Factories;
 
+/**
+ * @extends ConstraintValidatorTestCase<PrivateFishbowlValidator>
+ */
 class PrivateFishbowlValidatorTest extends ConstraintValidatorTestCase
 {
     use Factories;
