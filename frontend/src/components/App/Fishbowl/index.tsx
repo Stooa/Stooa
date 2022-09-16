@@ -66,6 +66,7 @@ const Fishbowl: FC = () => {
     setShowModalPermissions(false);
   };
 
+  // TODO: Delete this or keep it.
   // const handleModeratorIsGonnaLeave = () => {
   //   console.log('Saura less than 5', isTimeLessThanNMinutes(data.endDateTimeTz, 5));
   //   if (

@@ -69,6 +69,8 @@ const Page = () => {
   if (error) return <Error message={error.message} />;
 
   const { bySlugQueryFishbowl: fb } = data;
+  const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
+
   if (!fb) {
     router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
     return <Loader />;
@@ -79,7 +81,7 @@ const Page = () => {
       className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}
       data={fb}
       prejoin={shouldPrintPreJoinPage}
-      title={fb.name}
+      title={fishbowlTitle}
     >
       {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
     </Layout>
