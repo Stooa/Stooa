@@ -59,7 +59,7 @@ const ModalConfirmLeaving: React.FC<Props> = ({ closeModal, handleFinished }) =>
         <p className="description">Please don&apos;t forget to finish your fishbowl!</p>
         <div className="modal-footer">
           <Button onClick={() => finishFishbowl()} className="error" disabled={loading}>
-            Finish fishbowl
+            {t('endFishbowl')}
           </Button>
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}

@@ -377,17 +377,14 @@ const SwitchStyled = styled.div`
   }
 
   .label-wrapper {
-    padding-right: ${space()};
-    label {
-      display: inline;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-right: ${space(1.5)};
 
-    .icon-wrapper {
-      display: inline;
-      margin-left: ${space()};
-      svg {
-        transform: translateY(2px);
-      }
+    svg {
+      transform: translateY(2px);
     }
   }
 
