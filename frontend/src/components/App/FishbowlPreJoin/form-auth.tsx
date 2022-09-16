@@ -15,7 +15,7 @@ import { useStateValue } from '@/contexts/AppContext';
 import Button from '@/components/Common/Button';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useStooa } from '@/contexts/StooaManager';
 import { connectWithPassword } from './connection';
@@ -45,7 +45,10 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
     });
   };
 
-  const handleOnSubmit = (values: FormValues) => {
+  const handleOnSubmit: (
+    values: FormValues,
+    formikHelpers: FormikHelpers<FormValues>
+  ) => void | Promise<void> = (values, { setErrors }) => {
     if (isPrivate && values.password && !isModerator) {
       setFishbowlPassword(values.password);
 
@@ -55,13 +58,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
           if (res.data.response) {
             handleDispatchJoin();
           } else {
-            toast(t('validation.wrongPassword'), {
-              icon: '🔒',
-              type: 'error',
-              position: 'bottom-center',
-              autoClose: 5000
-            });
-            values.password = '';
+            setErrors({ password: t('validation.wrongPassword') });
           }
         })
         .catch(error => {
@@ -82,7 +79,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
 
   return (
     <Formik
-      onSubmit={(values: FormValues) => handleOnSubmit(values)}
+      onSubmit={handleOnSubmit}
       initialValues={{
         password: ''
       }}
