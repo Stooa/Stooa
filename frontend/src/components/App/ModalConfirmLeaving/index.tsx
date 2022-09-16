@@ -12,7 +12,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
-import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
 import { useMutation } from '@apollo/client';
 import { FINISH_FISHBOWL } from '@/graphql/Fishbowl';
@@ -57,7 +56,7 @@ const ModalConfirmLeaving: React.FC<Props> = ({ closeModal, handleFinished }) =>
           <Cross />
         </button>
         <h2 className="title-sm">Are you leaving?</h2>
-        <p className="description">Please don't forget to finish your fishbowl!</p>
+        <p className="description">Please don&apos;t forget to finish your fishbowl!</p>
         <div className="modal-footer">
           <Button onClick={() => finishFishbowl()} className="error" disabled={loading}>
             Finish fishbowl
