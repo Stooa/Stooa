@@ -26,7 +26,9 @@ export const modifiedValues = {
   timezone: '',
   locale: '',
   language: '',
-  hasIntroduction: false
+  hasIntroduction: false,
+  isPrivate: false,
+  password: ''
 };
 
 Given('a profile information', () => {
