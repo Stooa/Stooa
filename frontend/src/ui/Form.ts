@@ -356,10 +356,6 @@ const SwitchStyled = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  > *:not(:nth-child(2)) {
-    margin-left: ${space(1.5)};
-  }
-
   input {
     display: none;
     height: 0;
@@ -383,6 +379,10 @@ const SwitchStyled = styled.div`
     width: 100%;
     margin-right: ${space(1.5)};
 
+    label {
+      margin-right: ${space(1.5)};
+    }
+
     svg {
       transform: translateY(2px);
     }
@@ -405,7 +405,6 @@ const SwitchLabel = styled.label`
   justify-content: space-between;
   cursor: pointer;
   width: 42px;
-  margin-right: ${space()};
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;

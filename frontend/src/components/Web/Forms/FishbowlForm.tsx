@@ -80,7 +80,11 @@ const initialValues = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false,
   isPrivate: false,
-  plainPassword: Math.random().toString(36).substring(2, 10)
+  plainPassword: undefined
+};
+
+const getRandomPassword = () => {
+  return Math.random().toString(36).substring(2, 10);
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -255,7 +259,9 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => ({
-    ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
+    ...(props.selectedFishbowl
+      ? props.selectedFishbowl
+      : { ...initialValues, plainPassword: getRandomPassword() }),
     ...(!props.isEditForm && { language: props.currentLanguage })
   }),
   validationSchema: props => {
