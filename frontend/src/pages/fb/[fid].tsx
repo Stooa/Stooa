@@ -76,6 +76,8 @@ const Page = () => {
     return <Loader />;
   }
 
+  console.log('SAURA ->', data);
+
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
       className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}

@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { Fishbowl } from '@/types/api-platform';
 import { faker } from '@faker-js/faker';
-import { Fishbowl } from '@/types/graphql/fishbowl';
 
 const today = new Date();
 const tomorrow = new Date(today);
@@ -17,7 +17,6 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 export const makeGQLTomorrowFishbowl = (): Fishbowl => {
   return {
     id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-    type: 'Fishbowl',
     name: faker.lorem.words(3),
     description: faker.lorem.words(10),
     slug: 'test-fishbowl',
@@ -29,14 +28,15 @@ export const makeGQLTomorrowFishbowl = (): Fishbowl => {
     hasIntroduction: false,
     startDateTimeTz: tomorrow.toString(),
     endDateTimeTz: tomorrow.toString(),
-    durationFormatted: '03:00'
+    durationFormatted: '03:00',
+    isPrivate: false,
+    startDateTime: tomorrow
   };
 };
 
 export const makeGQLCurrentFishbowl = (): Fishbowl => {
   return {
     id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-    type: 'Fishbowl',
     name: faker.lorem.words(3),
     description: faker.lorem.words(10),
     slug: 'test-fishbowl',
@@ -48,6 +48,8 @@ export const makeGQLCurrentFishbowl = (): Fishbowl => {
     hasIntroduction: false,
     startDateTimeTz: today.toString(),
     endDateTimeTz: tomorrow.toString(),
-    durationFormatted: '02:00'
+    durationFormatted: '02:00',
+    isPrivate: false,
+    startDateTime: today
   };
 };
