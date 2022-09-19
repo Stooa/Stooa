@@ -8,6 +8,8 @@
  */
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { makeGQLCurrentFishbowl, makeGQLCurrentNotOwnedFishbowl } from '../../factories/fishbowl';
+import { hasOperationName } from '../../utils/graphql-test-utils';
 
 const twoHoursInMs = 1000 * 60 * 60 * 2;
 const twentyMinutesInMs = 1000 * 60 * 20;
@@ -39,6 +41,32 @@ Given('a profile information', () => {
 
 Given('a logged user', () => {
   cy.login();
+});
+
+Given('has host role', () => {
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
+      req.reply({
+        data: {
+          isCreatorOfFishbowl: {
+            currentStatus: 'test-me-fishbowl'
+          }
+        }
+      });
+    }
+  }).as('gqlIsCreatorOfFishbowl');
+});
+
+Given("doesn't have host role", () => {
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
+      req.reply({
+        data: {
+          isCreatorOfFishbowl: null
+        }
+      });
+    }
+  }).as('gqlIsCreatorOfFishbowl');
 });
 
 Given('a non logged user', () => {
@@ -173,20 +201,61 @@ let startedFishbowl = false;
 let finishedFishbowl = false;
 
 Given('a fishbowl', () => {
+  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+Given('a not owned fishbowl', () => {
+  const bySlugQueryFishbowl = makeGQLCurrentNotOwnedFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+When('starts fishbowl', () => {
+  cy.contains('Start the fishbowl').click();
+  startedFishbowl = true;
+
+  cy.wait('@getFishbowlStatus');
+
+  cy.get('[data-testid=finish-fishbowl]', { timeout: 10000 }).should('exist');
+
+  cy.screenshot();
+});
+
+When('navigates to fishbowl', () => {
   cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
     if (!startedFishbowl && !finishedFishbowl) {
-      console.log('NOT STARTED');
-
       req.reply({
         status: 'NOT_STARTED'
       });
     } else if (startedFishbowl && !finishedFishbowl) {
-      console.log('RUNNING');
       req.reply({
         status: 'RUNNING'
       });
     } else if (finishedFishbowl) {
-      console.log('FINISHED');
       req.reply({
         status: 'FINISHED'
       });
@@ -206,15 +275,35 @@ Given('a fishbowl', () => {
       response: []
     }
   });
+
+  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
 });
 
-When('starts fishbowl', () => {
-  cy.contains('Start the fishbowl').click();
-  startedFishbowl = true;
+When('can access to pre join', () => {
+  cy.get('[data-testid=pre-join-title]').should('exist');
+  cy.get('[data-testid=pre-join-cancel]').should('exist');
 
-  cy.wait('@getFishbowlStatus');
+  cy.screenshot();
+});
 
-  cy.get('[data-testid=finish-fishbowl]', { timeout: 10000 }).should('exist');
+When('sees the prefishbowl page', () => {
+  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+
+  cy.wait('@gqlFishbowlBySlugQuery');
+
+  cy.get('[data-testid=prefishbowl-counter]').should('exist');
+  cy.get('[data-testid=prefishbowl-datacard]').should('exist');
+  cy.get('[data-testid=prefishbowl-participants]').should('exist');
 
   cy.screenshot();
 });

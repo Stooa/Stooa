@@ -151,20 +151,22 @@ const StooaProvider = ({
   });
 
   useEventListener(CONFERENCE_PASSWORD_REQUIRED, () => {
-    toast(t('form:validation.unknownErrorInside'), {
-      icon: '⚠️',
-      toastId: 'error-inside',
-      type: 'warning',
-      position: 'bottom-center',
-      autoClose: 5000
-    });
-    userRepository.clearUser();
-    setInitConnection(false);
-    setFishbowlPassword(undefined);
-    dispatch({
-      type: 'PREJOIN_RESET',
-      prejoin: true
-    });
+    if (data.isPrivate && !fishbowlPassword && !data.plainPassword) {
+      toast(t('form:validation.unknownErrorInside'), {
+        icon: '⚠️',
+        toastId: 'error-inside',
+        type: 'warning',
+        position: 'bottom-center',
+        autoClose: 5000
+      });
+      userRepository.clearUser();
+      setInitConnection(false);
+      setFishbowlPassword(undefined);
+      dispatch({
+        type: 'PREJOIN_RESET',
+        prejoin: true
+      });
+    }
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {

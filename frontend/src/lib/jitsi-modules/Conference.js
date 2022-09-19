@@ -48,7 +48,8 @@ const conferenceRepository = () => {
    * @param {string | undefined} password
    */
   const joinPrivateConference = async password => {
-    if (conference) await conference.join(password);
+    console.log(password);
+    if (conference) await conference.join('lmao');
   };
 
   /**
@@ -119,7 +120,6 @@ const conferenceRepository = () => {
   };
 
   const _handleConferenceFailed = error => {
-    console.log('[STOOA] Conference failed', error);
     if (error === 'conference.authenticationRequired') {
       dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
     }
@@ -168,12 +168,10 @@ const conferenceRepository = () => {
 
   const _handlePasswordRequired = () => {
     console.log('[STOOA] Password required');
-    // dispatchEvent(WRONG_PASSWORD_EVENT, { id, text, timestamp });
   };
 
   const _handlePasswordNotSupported = () => {
     console.log('[STOOA] Password not supported');
-    // dispatchEvent(PASSWORD_NOT_SUPPORTED, { id, text, timestamp });
   };
 
   const _handleConnectionEstablished = async () => {

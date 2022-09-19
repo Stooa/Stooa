@@ -92,6 +92,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
         <fieldset className="submit-wrapper">
           {isPrivate && !isModerator && (
             <Input
+              data-testid="prejoin-password"
               placeholder={t('fishbowl.passwordPlaceholder')}
               label={t('fishbowl.passwordInputLabel')}
               name="password"
@@ -102,7 +103,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
             />
           )}
 
-          <Button type="submit" size="large">
+          <Button type="submit" size="large" data-testid="prejoin-enterFishbowl">
             {t('button.enterFishbowl')}
           </Button>
         </fieldset>
