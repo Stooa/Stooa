@@ -8,38 +8,9 @@
  */
 
 import { Then, When } from 'cypress-cucumber-preprocessor/steps';
-import { hasOperationName } from '../../utils/graphql-test-utils';
-import { makeGQLCurrentFishbowl } from '../../factories/fishbowl';
 
 When('access to a current fishbowl', () => {
-  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
-
-  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
-  cy.setCookie('on_boarding_moderator', 'true');
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-
   cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
-      req.reply({
-        data: {
-          isCreatorOfFishbowl: {
-            currentStatus: 'test-me-fishbowl'
-          }
-        }
-      });
-    }
-  }).as('gqlIsCreatorOfFishbowl');
 
   cy.contains('Enter fishbowl').click();
 });

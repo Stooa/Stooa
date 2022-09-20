@@ -16,6 +16,7 @@ namespace App\Resolver;
 use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Entity\Fishbowl;
 use App\Repository\FishbowlRepository;
+use App\Service\PrivateFishbowlService;
 use Symfony\Component\Security\Core\Security;
 use Webmozart\Assert\Assert;
 
@@ -23,7 +24,8 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
 {
     public function __construct(
         private readonly FishbowlRepository $repository,
-        private readonly Security $security
+        private readonly Security $security,
+        private readonly PrivateFishbowlService $privateFishbowlService
     ) {
     }
 
@@ -47,7 +49,7 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
             $fishbowl = $this->repository->findBySlug($context['args']['slug']);
 
             if (null !== $fishbowl && $user === $fishbowl->getHost()) {
-                return $fishbowl;
+                return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
             }
 
             return null;

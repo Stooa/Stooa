@@ -8,6 +8,9 @@
 fishbowl:
   overlap: Ja existeix un Fishbowl creat en aquest mateix moment.
   future: La data d'inici del fishbowl ja va passar.
+  private:
+      private: El campo password no puede ser vacío en fishbowl privados.
+      public: The password field must be empty in public fishbowls.
 
 user:
   same_user: La contrasenya no coincideix amb la vostra contrasenya actual.

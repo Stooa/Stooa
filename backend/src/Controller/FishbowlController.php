@@ -14,14 +14,17 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\FishbowlService;
+use App\Service\PrivateFishbowlService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class FishbowlController extends AbstractController
 {
-    public function __construct(private readonly FishbowlService $fishbowlService)
-    {
+    public function __construct(
+        private readonly FishbowlService $fishbowlService,
+        private readonly PrivateFishbowlService $privateFishbowlService
+    ) {
     }
 
     public function ping(string $slug): Response
@@ -37,5 +40,10 @@ final class FishbowlController extends AbstractController
     public function participants(string $slug): Response
     {
         return new JsonResponse(['response' => $this->fishbowlService->getParticipants($slug)]);
+    }
+
+    public function private(string $slug): Response
+    {
+        return new JsonResponse(['response' => $this->privateFishbowlService->isPasswordEqual($slug)]);
     }
 }

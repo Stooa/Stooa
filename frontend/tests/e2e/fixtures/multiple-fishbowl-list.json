@@ -14,7 +14,9 @@
         "hasIntroduction": false,
         "startDateTimeTz": "2022-02-11T10:48:22+01:00",
         "endDateTimeTz": "2022-02-11T12:48:22+01:00",
-        "durationFormatted": "02:00"
+        "durationFormatted": "02:00",
+        "isPrivate": false,
+        "plainPassword": null
     },
     {
         "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a8",
@@ -31,7 +33,9 @@
         "hasIntroduction": false,
         "startDateTimeTz": "2022-02-12T10:48:22+01:00",
         "endDateTimeTz": "2022-02-12T12:48:22+01:00",
-        "durationFormatted": "02:00"
+        "durationFormatted": "02:00",
+        "isPrivate": false,
+        "plainPassword": null
     },
     {
         "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a9",
@@ -48,6 +52,8 @@
         "hasIntroduction": false,
         "startDateTimeTz": "2022-02-13T10:48:22+01:00",
         "endDateTimeTz": "2022-02-13T12:48:22+01:00",
-        "durationFormatted": "02:00"
+        "durationFormatted": "02:00",
+        "isPrivate": false,
+        "plainPassword": null
     }
 ]

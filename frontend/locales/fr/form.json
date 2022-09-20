@@ -18,7 +18,11 @@
         "selectTimeZone": "Fuseau horaire",
         "advancedOptions": "Options avancées",
         "introductionLabel": "Je veux commencer le bocal en donnant une introduction.",
-        "introductionTooltip": "Lorsque vous démarrez le bocal, <span>vous pouvez commencer par faire une introduction</span>. La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <span>n'oubliez pas d'autoriser les participants à se joindre à la conversation.</span>"
+        "introductionTooltip": "Lorsque vous démarrez le bocal, <span>vous pouvez commencer par faire une introduction</span>. La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <span>n'oubliez pas d'autoriser les participants à se joindre à la conversation.</span>",
+        "isPrivate": "Je veux que cet événement soit privé",
+        "passwordTooltip": "Pour accéder à l'événement, il sera nécessaire d'entrer le mot de passe",
+        "passwordPlaceholder": "Insérez votre mot de passe",
+        "passwordInputLabel": "Mot de passe"
     },
     "button": {
         "createAccount": "Créez-en un !",
@@ -41,6 +45,7 @@
     "validation": {
         "title": "Titre invalide. Veuillez insérer un sujet de conversation",
         "passwordLength": "Le mot de passe doit comporter 6 caractères ou plus",
+        "fishbowlPasswordLength": "Le mot de passe doit comporter 8 caractères ou plus",
         "email": "Adresse électronique invalide",
         "required": "Ce champ est obligatoire",
         "date": "Le format de la date est invalide : jj/mm/aaaa",
@@ -49,6 +54,9 @@
         "twitter": "Le nom d'utilisateur Twitter doit commencer par @",
         "equalPassword": "Les deux mots de passe doivent correspondre",
         "successMessage": "Changements enregistrés",
-        "notEmpty": "This field cannot be empty"
+        "notEmpty": "This field cannot be empty",
+        "wrongPassword": "Mot de passe erroné",
+        "unknownErrorServer": "Problème inconnu. Veuillez actualiser la page et réessayer",
+        "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer"
     }
 }
