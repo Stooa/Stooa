@@ -3,7 +3,7 @@
     "firstname": "Nom",
     "lastname": "Cognom",
     "email": "Email",
-    "password": "contrasenya",
+    "password": "Contrasenya",
     "name": "El teu nom",
     "haveAccount": "Ja tens un compte?",
     "noAccount": "No tens compte?",
@@ -29,7 +29,7 @@
         "isPrivate": "Vull que aquest esdeveniment sigui privat",
         "passwordTooltip": "Per a poder accedir a l'esdeveniment serà necessari ingressar la contrasenya",
         "passwordPlaceholder": "Introdueix la teva contrasenya",
-        "passwordInputLabel": "contrasenya"
+        "passwordInputLabel": "Contrasenya"
     },
     "button": {
         "login": "Entra",
