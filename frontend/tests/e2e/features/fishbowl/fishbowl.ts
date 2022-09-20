@@ -28,10 +28,10 @@ Then('sees tomorrow fishbowl information page', () => {
     }
   }).as('gqlFishbowlBySlugQuery');
 
-  cy.get('[data-testid=fishbowl-name]').should('exist');
+  cy.get('[data-testid=fishbowl-name]', { timeout: 10000 }).should('exist');
   cy.get('[data-testid=fishbowl-name]').should('have.text', bySlugQueryFishbowl.name);
 
-  cy.get('[data-testid=fishbowl-description]').should('exist');
+  cy.get('[data-testid=fishbowl-description]', { timeout: 10000 }).should('exist');
   cy.get('[data-testid=fishbowl-description]').should('have.text', bySlugQueryFishbowl.description);
 
   cy.screenshot();
