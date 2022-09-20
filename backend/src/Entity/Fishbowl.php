@@ -41,6 +41,7 @@ use Webmozart\Assert\Assert as MAssert;
 /**
  * @ApiFilter(DateFilter::class, properties={"finishDateTime"= DateFilter::EXCLUDE_NULL}),
  * @ApiResource(
+ *     attributes={"pagination_enabled"=false},
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
  *     collectionOperations={
