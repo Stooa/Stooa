@@ -5,8 +5,8 @@ Feature: Fishbowl
     Scenario: Logged users can see information about future fishbowl
         Given a logged user
         And has host role
-        And a fishbowl
-        When navigates to future fishbowl
+        And a future fishbowl
+        When navigates to fishbowl
         Then sees tomorrow fishbowl information page
 
     Scenario: Host user can start and finish a fishbowl

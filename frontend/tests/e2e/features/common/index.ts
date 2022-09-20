@@ -11,7 +11,8 @@ import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import {
   makeGQLCurrentFishbowl,
   makeGQLCurrentNotOwnedFishbowl,
-  makeGQLCurrentPrivateFishbowl
+  makeGQLCurrentPrivateFishbowl,
+  makeGQLTomorrowFishbowl
 } from '../../factories/fishbowl';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 
@@ -209,6 +210,26 @@ Given('a fishbowl', () => {
   finishedFishbowl = false;
 
   const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+Given('a future fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
+  const bySlugQueryFishbowl = makeGQLTomorrowFishbowl();
 
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');

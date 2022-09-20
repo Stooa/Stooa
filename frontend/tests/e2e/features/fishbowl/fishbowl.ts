@@ -7,32 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
-import { hasOperationName } from '../../utils/graphql-test-utils';
-import { makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
-
-When('navigates to future fishbowl', () => {
-  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
-});
+import { Then } from 'cypress-cucumber-preprocessor/steps';
 
 Then('sees tomorrow fishbowl information page', () => {
-  const bySlugQueryFishbowl = makeGQLTomorrowFishbowl();
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-
   cy.get('[data-testid=fishbowl-name]', { timeout: 10000 }).should('exist');
-  cy.get('[data-testid=fishbowl-name]').should('have.text', bySlugQueryFishbowl.name);
 
   cy.get('[data-testid=fishbowl-description]', { timeout: 10000 }).should('exist');
-  cy.get('[data-testid=fishbowl-description]').should('have.text', bySlugQueryFishbowl.description);
 
   cy.screenshot();
 });
