@@ -96,6 +96,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
+    console.log('Saura -> updatedFishbowl', updatedFishbowl);
     setFishbowls(currentFishbowls => {
       if (currentFishbowls) {
         return currentFishbowls.map(fishbowl => {
