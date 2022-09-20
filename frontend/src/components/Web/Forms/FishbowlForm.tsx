@@ -258,12 +258,25 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 };
 
 const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: props => ({
-    ...(props.selectedFishbowl
-      ? props.selectedFishbowl
-      : { ...initialValues, plainPassword: getRandomPassword() }),
-    ...(!props.isEditForm && { language: props.currentLanguage })
-  }),
+  mapPropsToValues: props => {
+    if (props.selectedFishbowl) {
+      const password = props.selectedFishbowl.plainPassword
+        ? props.selectedFishbowl.plainPassword
+        : getRandomPassword();
+
+      return {
+        ...props.selectedFishbowl,
+        plainPassword: password,
+        ...(!props.isEditForm && { language: props.currentLanguage })
+      };
+    } else {
+      return {
+        ...initialValues,
+        plainPassword: getRandomPassword(),
+        ...(!props.isEditForm && { language: props.currentLanguage })
+      };
+    }
+  },
   validationSchema: props => {
     return Yup.object({
       title: Yup.string().matches(/[^-\s]/, {
