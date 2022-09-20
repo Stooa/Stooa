@@ -20,7 +20,7 @@ import { getOnBoardingCookie, isFishbowlShareLinkCookie, setShareLinkCookie } fr
 
 const ModalShareLink: React.FC = () => {
   const { t } = useTranslation('fishbowl');
-  const { data, isModerator } = useStooa();
+  const { data, isModerator, getPassword } = useStooa();
   const [show, setShow] = useState<boolean>(true);
   const router = useRouter();
   const { fid } = router.query;
@@ -58,8 +58,15 @@ const ModalShareLink: React.FC = () => {
               <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
             </p>
             <div className="modal-footer">
-              <ButtonCopyUrl withSvg variant="primary" fid={fid as string} locale={data.locale}>
-                {t('common:linkButton')}
+              <ButtonCopyUrl
+                withSvg
+                variant="primary"
+                fid={fid as string}
+                locale={data.locale}
+                isPrivate={data.isPrivate}
+                plainPassword={getPassword()}
+              >
+                {t('common:copyInvitation')}
               </ButtonCopyUrl>
             </div>
           </div>

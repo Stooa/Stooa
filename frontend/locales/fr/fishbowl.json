@@ -17,6 +17,10 @@
         "button": "Confirmer",
         "description": "Voulez-vous vraiment terminer ce fishbowl ?"
     },
+    "confirmLeaving": {
+        "title": "Tu t'en vas déjà?",
+        "description": "Si vous avez terminé, n'oubliez pas de terminer le bocal à poissons pour tout le monde."
+    },
     "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
     "introduceModal": {
         "title": "Faites une introduction",
@@ -38,7 +42,7 @@
     "videoUnmute": "Démarrer la vidéo",
     "preSubtitle": "Vérifiez les détails de votre nouveau fishbowl :",
     "detail": {
-        "shareTitle": "Bien fait! Et maintenant quoi? <br/>Partagez le <i>fishbowl</i> avec vos amis !",
+        "shareTitle": "Bien fait! Et maintenant quoi? Partagez le fishbowl avec vos amis !",
         "shareSubtitle": "Laissez couler la conversation ! Copiez et partagez le lien vers cet <i>fishbowl</i> avec les personnes que vous souhaitez joindre à la conversation.",
         "shareInSocials": "Ou partagez-le sur:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !",

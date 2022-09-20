@@ -48,7 +48,9 @@ When('saves the changes', () => {
           slug: 'test-me-fishbowl',
           isFishbowlNow: false,
           durationFormatted: modifiedValues.hours,
-          name: modifiedValues.title
+          name: modifiedValues.title,
+          isPrivate: modifiedValues.isPrivate,
+          password: modifiedValues.password
         }
       }
     }

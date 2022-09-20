@@ -7,92 +7,41 @@
  * file that was distributed with this source code.
  */
 
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
-import { hasOperationName } from '../../utils/graphql-test-utils';
-import { makeGQLCurrentFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
-
-When('navigates to future fishbowl', () => {
-  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
-});
-
-When('navigates to fishbowl', () => {
-  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
-
-  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
-  cy.setCookie('on_boarding_moderator', 'true');
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-
-  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
-});
+import { Then } from 'cypress-cucumber-preprocessor/steps';
 
 Then('sees tomorrow fishbowl information page', () => {
-  const bySlugQueryFishbowl = makeGQLTomorrowFishbowl();
+  cy.get('[data-testid=fishbowl-name]', { timeout: 10000 }).should('exist');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-
-  cy.get('[data-testid=fishbowl-name]').should('exist');
-  cy.get('[data-testid=fishbowl-name]').should('have.text', bySlugQueryFishbowl.name);
-
-  cy.get('[data-testid=fishbowl-description]').should('exist');
-  cy.get('[data-testid=fishbowl-description]').should('have.text', bySlugQueryFishbowl.description);
+  cy.get('[data-testid=fishbowl-description]', { timeout: 10000 }).should('exist');
 
   cy.screenshot();
 });
 
-When('can access to pre fishbowl', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
-      req.reply({
-        data: {
-          isCreatorOfFishbowl: {
-            currentStatus: 'test-me-fishbowl'
-          }
-        }
-      });
-    }
-  }).as('gqlIsCreatorOfFishbowl');
-
-  cy.get('[data-testid=pre-join-title]').should('exist');
-  cy.get('[data-testid=pre-join-cancel]').should('exist');
-
-  cy.screenshot();
-});
-
-When('sees the prefishbowl page', () => {
-  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-
-  cy.wait('@gqlFishbowlBySlugQuery');
-
+Then('sees the prefishbowl page', () => {
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
   cy.get('[data-testid=prefishbowl-participants]').should('exist');
+
+  cy.screenshot();
+});
+
+Then('sees the password input', () => {
+  cy.get('[data-testid=prejoin-password]').should('exist');
+
+  cy.screenshot();
+});
+
+Then('writes the correct password', () => {
+  cy.intercept('POST', 'https://localhost:8443/es/private-password/test-fishbowl', req => {
+    req.reply({
+      response: true
+    });
+  }).as('gqlPrivateFishbowlPassword');
+
+  cy.get('[data-testid=prejoin-password]').type('stooa123');
+  cy.get('[data-testid=prejoin-enterFishbowl]').click();
+
+  cy.wait('@gqlPrivateFishbowlPassword');
 
   cy.screenshot();
 });
