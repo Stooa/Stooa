@@ -192,6 +192,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider roomProvider
      */
     public function itGetsCorrectRoomsByParameter(string $room): void

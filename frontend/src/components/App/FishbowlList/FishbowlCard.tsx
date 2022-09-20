@@ -21,6 +21,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';
 import Button from '@/components/Common/Button';
+import Icon from '@/components/Common/Fields/Icon';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -30,7 +31,7 @@ interface Props {
 
 const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
   const { t } = useTranslation('fishbowl-list');
-  const { name, startDateTimeTz, slug, locale } = fishbowl;
+  const { name, startDateTimeTz, slug, locale, isPrivate, plainPassword } = fishbowl;
 
   const startDateTime = new Date(startDateTimeTz);
 
@@ -62,6 +63,11 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
       data-testid={convertIntoClassName(name)}
     >
       <CardTitle>
+        {isPrivate && (
+          <span className="icon-wrapper">
+            <Icon variant="lock" />
+          </span>
+        )}
         <h4>{name}</h4>
       </CardTitle>
       <div data-testid="card-info" className="card__info">
@@ -71,8 +77,15 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div className="card__time">{time}</div>
       </div>
       <div data-testid="card-actions" className="card__actions">
-        <ButtonCopyUrl data-testid="copy-link" variant="text" fid={slug} locale={locale}>
-          {t('common:linkButton')}
+        <ButtonCopyUrl
+          data-testid="copy-link"
+          variant="text"
+          fid={slug}
+          locale={locale}
+          isPrivate={isPrivate}
+          plainPassword={plainPassword ?? 'error ask for the password'}
+        >
+          {t('common:copyInvitation')}
         </ButtonCopyUrl>
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>

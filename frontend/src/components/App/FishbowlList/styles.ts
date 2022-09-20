@@ -34,7 +34,7 @@ const FishbowlListContent = styled.div`
   width: 100%;
 
   &.not-empty {
-    height: 815px;
+    height: 900px;
   }
 
   ${media.min('desktop')`
@@ -245,9 +245,16 @@ const CardTitle = styled.div`
   text-align: left;
   color: ${COLOR_NEUTRO_800};
   overflow: ellipsis;
+  display: flex;
 
   h4 {
     font-weight: 500;
+  }
+
+  svg {
+    margin-right: ${space(0.5)};
+    width: ${rems(19)};
+    height: ${rems(19)};
   }
 `;
 

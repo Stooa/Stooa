@@ -37,6 +37,7 @@ import { Fishbowl } from '@/types/api-platform';
 
 interface FormProps {
   required: string;
+  minimumLength: string;
   success?: boolean;
   date: string;
   title: string;
@@ -65,6 +66,8 @@ interface FormValues {
   language: string;
   timezone: string;
   hasIntroduction: boolean;
+  isPrivate: boolean;
+  plainPassword?: string;
 }
 
 const initialValues = {
@@ -75,7 +78,13 @@ const initialValues = {
   description: '',
   language: '',
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  hasIntroduction: false
+  hasIntroduction: false,
+  isPrivate: false,
+  plainPassword: undefined
+};
+
+const getRandomPassword = () => {
+  return Math.random().toString(36).substring(2, 10);
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -210,6 +219,29 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.introductionLabel')}
           name="hasIntroduction"
         />
+        <Switch
+          tooltipText={
+            <Trans
+              i18nKey="form:fishbowl.passwordTooltip"
+              components={{ span: <span className="medium" /> }}
+            />
+          }
+          label={t('fishbowl.isPrivate')}
+          name="isPrivate"
+        />
+        {props.values.isPrivate && (
+          <Input
+            value={props.values.isPrivate ? props.values.plainPassword : undefined}
+            data-testid="fishbowl-form-passwordinput"
+            placeholder={t('fishbowl.passwordPlaceholder')}
+            label={t('fishbowl.passwordInputLabel')}
+            name="plainPassword"
+            type="text"
+            autoComplete="off"
+            id="plainPassword"
+            icon="lock"
+          />
+        )}
       </fieldset>
       <fieldset>
         {success && (
@@ -226,10 +258,25 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 };
 
 const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: props => ({
-    ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
-    ...(!props.isEditForm && { language: props.currentLanguage })
-  }),
+  mapPropsToValues: props => {
+    if (props.selectedFishbowl) {
+      const password = props.selectedFishbowl.plainPassword
+        ? props.selectedFishbowl.plainPassword
+        : getRandomPassword();
+
+      return {
+        ...props.selectedFishbowl,
+        plainPassword: password,
+        ...(!props.isEditForm && { language: props.currentLanguage })
+      };
+    } else {
+      return {
+        ...initialValues,
+        plainPassword: getRandomPassword(),
+        ...(!props.isEditForm && { language: props.currentLanguage })
+      };
+    }
+  },
   validationSchema: props => {
     return Yup.object({
       title: Yup.string().matches(/[^-\s]/, {
@@ -241,7 +288,11 @@ const FormValidation = withFormik<FormProps, FormValues>({
       day: Yup.string().required(props.required),
       time: Yup.string().required(props.required),
       hours: Yup.string().required(props.required),
-      timezone: Yup.string().required(props.required)
+      timezone: Yup.string().required(props.required),
+      plainPassword: Yup.string().when('isPrivate', {
+        is: true,
+        then: Yup.string().min(8, props.minimumLength).required(props.required)
+      })
     });
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
@@ -267,7 +318,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              plainPassword: values.isPrivate ? values.plainPassword : undefined
             }
           }
         })
@@ -294,7 +347,10 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              plainPassword:
+                values.isPrivate && values.plainPassword ? values.plainPassword : undefined
             }
           }
         })
@@ -337,6 +393,7 @@ const FishbowlForm = ({
   });
 
   const requiredError = t('validation.required');
+  const minimumLength = t('validation.fishbowlPasswordLength');
   const dateError = t('validation.date');
   const titleError = t('validation.title');
 
@@ -375,7 +432,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues | undefined;
+  let selectedFishbowlValues: FormValues | undefined = undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
@@ -397,7 +454,9 @@ const FishbowlForm = ({
       description: selectedFishbowl.description ?? '',
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: selectedFishbowl.hasIntroduction ?? false
+      hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
+      isPrivate: selectedFishbowl.isPrivate,
+      plainPassword: selectedFishbowl.plainPassword
     };
   }
 
@@ -410,6 +469,7 @@ const FishbowlForm = ({
         defaultTitle={defaultTitle}
         enableReinitialize
         required={requiredError}
+        minimumLength={minimumLength}
         success={success}
         date={dateError}
         createFishbowl={createFishbowl}
