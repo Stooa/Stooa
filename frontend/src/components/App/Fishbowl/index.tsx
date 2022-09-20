@@ -67,7 +67,6 @@ const Fishbowl: FC = () => {
   };
 
   const handleModeratorIsGonnaLeave = () => {
-    console.log('Saura less than 5', isTimeLessThanNMinutes(data.endDateTimeTz, 5));
     if (
       isModerator &&
       conferenceStatus === IConferenceStatus.RUNNING &&

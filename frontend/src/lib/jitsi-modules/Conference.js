@@ -48,8 +48,7 @@ const conferenceRepository = () => {
    * @param {string | undefined} password
    */
   const joinPrivateConference = async password => {
-    console.log(password);
-    if (conference) await conference.join('lmao');
+    if (conference) await conference.join(password);
   };
 
   /**
