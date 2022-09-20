@@ -8,7 +8,11 @@
  */
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
-import { makeGQLCurrentFishbowl, makeGQLCurrentNotOwnedFishbowl } from '../../factories/fishbowl';
+import {
+  makeGQLCurrentFishbowl,
+  makeGQLCurrentNotOwnedFishbowl,
+  makeGQLCurrentPrivateFishbowl
+} from '../../factories/fishbowl';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 
 const twoHoursInMs = 1000 * 60 * 60 * 2;
@@ -201,6 +205,9 @@ let startedFishbowl = false;
 let finishedFishbowl = false;
 
 Given('a fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
   const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
 
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
@@ -218,6 +225,9 @@ Given('a fishbowl', () => {
 });
 
 Given('a not owned fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
   const bySlugQueryFishbowl = makeGQLCurrentNotOwnedFishbowl();
 
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
@@ -228,6 +238,26 @@ Given('a not owned fishbowl', () => {
       req.reply({
         data: {
           bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+Given('a private fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
+  const bySlugQueryPrivateFishbowl = makeGQLCurrentPrivateFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryPrivateFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl: bySlugQueryPrivateFishbowl
         }
       });
     }

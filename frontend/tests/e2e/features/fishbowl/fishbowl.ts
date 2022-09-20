@@ -7,26 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { hasOperationName } from '../../utils/graphql-test-utils';
-import { makeGQLCurrentPrivateFishbowl, makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
-
-Given('a private fishbowl', () => {
-  const bySlugQueryPrivateFishbowl = makeGQLCurrentPrivateFishbowl();
-
-  cy.setCookie('share_link', bySlugQueryPrivateFishbowl.slug);
-  cy.setCookie('on_boarding_moderator', 'true');
-
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
-    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-      req.reply({
-        data: {
-          bySlugQueryFishbowl: bySlugQueryPrivateFishbowl
-        }
-      });
-    }
-  }).as('gqlFishbowlBySlugQuery');
-});
+import { makeGQLTomorrowFishbowl } from '../../factories/fishbowl';
 
 When('navigates to future fishbowl', () => {
   cy.visit('/fb/test-fishbowl', { timeout: 10000 });
