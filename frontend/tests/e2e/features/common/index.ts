@@ -35,7 +35,7 @@ export const modifiedValues = {
   language: '',
   hasIntroduction: false,
   isPrivate: false,
-  password: ''
+  plainPassword: ''
 };
 
 Given('a profile information', () => {
