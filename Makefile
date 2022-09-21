@@ -18,6 +18,10 @@ docker-exec-frontend = docker compose exec frontend /bin/bash -c "$1"
 up: $(JITSI_CONFIG) compose $(AUTOLOAD)
 .PHONY: up
 
+up-debug:
+	XDEBUG_MODE=debug docker compose up -d
+.PHONY: up-debug
+
 compose: $(CERTS_DIR)
 	docker compose up -d
 .PHONY: compose

@@ -70,6 +70,8 @@ ENTRYPOINT ["bash", "/usr/app/.docker/app-prod/php-fpm.sh"]
 # FPM-DEV
 FROM base as fpm-dev
 
+ENV XDEBUG_MODE=off
+
 USER root
 
 RUN install-php-extensions pcov xdebug
