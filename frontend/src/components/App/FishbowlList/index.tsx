@@ -106,13 +106,15 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
 
   useEffect(() => {
     if (fishbowls) {
+      console.log('Saura', fishbowls);
+      console.log(selectedFishbowlParam);
       fishbowls.forEach(fishbowl => {
         if (fishbowl.slug === selectedFishbowlParam) {
           setSelectedFishbowl(fishbowl);
         }
       });
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!fishbowls) {
     return <LoadingIcon />;
