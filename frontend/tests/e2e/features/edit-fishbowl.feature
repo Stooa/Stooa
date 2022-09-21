@@ -2,12 +2,12 @@ Feature: Edit fishbowl
     As a Stooa user
     I can access the fishbowl list page and edit a fishbowl
 
-    # Scenario: Logged users can access to fishbowl list
-    #     Given a logged user
-    #     And a list of one fishbowl
-    #     When navigates to "/fishbowl/list"
-    #     And clicks on fishbowl card
-    #     Then sees the fishbowl edit form full of information
+    Scenario: Logged users can access to fishbowl list
+        Given a logged user
+        And a list of one fishbowl
+        When navigates to "/fishbowl/list"
+        And clicks on fishbowl card
+        Then sees the fishbowl edit form full of information
 
     Scenario: Logged users can edit a fishbowl
         Given a logged user
@@ -28,19 +28,19 @@ Feature: Edit fishbowl
         Then sees the success message
         And sees the fishbowl list updated
 
-    # Scenario: Logged user sees placeholder when no fishbowl selected
-    #     Given a logged user
-    #     And a desktop computer
-    #     And a list of one fishbowl
-    #     When navigates to "/fishbowl/list"
-    #     Then sees the placeholder area
+    Scenario: Logged user sees placeholder when no fishbowl selected
+        Given a logged user
+        And a desktop computer
+        And a list of one fishbowl
+        When navigates to "/fishbowl/list"
+        Then sees the placeholder area
 
-    # Scenario: Logged user clicks on fishbowl that is about to start
-    #     Given a logged user
-    #     And a list of one fishbowl that is about to start
-    #     When navigates to "/fishbowl/list"
-    #     Then clicks on fishbowl card that is about to start
-    #     And sees a placeholder with Enter Fishbowl button
-    #     And clicks on placeholders Enter Fishbowl link
-    #     And gets redirect to "/fb/test-me-fishbowl"
+    Scenario: Logged user clicks on fishbowl that is about to start
+        Given a logged user
+        And a list of one fishbowl that is about to start
+        When navigates to "/fishbowl/list"
+        Then clicks on fishbowl card that is about to start
+        And sees a placeholder with Enter Fishbowl button
+        And clicks on placeholders Enter Fishbowl link
+        And gets redirect to "/fb/test-me-fishbowl"
 
