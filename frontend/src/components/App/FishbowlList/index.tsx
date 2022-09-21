@@ -112,7 +112,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
         }
       });
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!fishbowls) {
     return <LoadingIcon />;
