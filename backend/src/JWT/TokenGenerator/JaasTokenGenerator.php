@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace App\JWT\TokenGenerator;
 
-use App\Entity\User;
+use App\Entity\Foo1Interface;
 use App\JWT\HostValidator;
 use App\JWT\Model\JWTToken;
 use App\JWT\Model\Payload\FeaturesPayload;
 use App\JWT\Model\Payload\HeaderPayload;
 use App\JWT\Model\Payload\UserPayload;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class JaasTokenGenerator implements TokenGeneratorInterface
 {
@@ -29,8 +30,10 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
     ) {
     }
 
-    public function generate(User $user): JWTToken
+    public function generate(UserInterface $user): JWTToken
     {
+        \assert($user instanceof Foo1Interface);
+
         $userPayload = new UserPayload($user, $this->hostValidator->validateFromRequest($user), $user->getId(), '');
 
         return new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,

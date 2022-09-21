@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\JWT\TokenGenerator;
 
-use App\Entity\User;
 use App\JWT\CurrentUserFishbowl;
 use App\JWT\Model\JWTToken;
 use App\JWT\Model\Payload\UserPayload;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
@@ -24,7 +24,7 @@ final class SelfHostedTokenGenerator implements TokenGeneratorInterface
     {
     }
 
-    public function generate(User $user): JWTToken
+    public function generate(UserInterface $user): JWTToken
     {
         $userPayload = new UserPayload($user, false);
 
