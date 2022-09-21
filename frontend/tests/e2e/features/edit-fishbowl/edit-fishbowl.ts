@@ -8,6 +8,7 @@
  */
 
 import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { hasOperationName } from '../../utils/graphql-test-utils';
 
 import { modifiedValues } from '../common';
 
@@ -35,30 +36,33 @@ Then('sees the fishbowl edit form full of information', () => {
 
 When('saves the changes', () => {
   const mergedValues = {
-    data: {
-      updateFishbowl: {
-        fishbowl: {
-          id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-          description: modifiedValues.description,
-          startDateTimeTz: modifiedValues.startDateTimeTz,
-          timezone: modifiedValues.timezone,
-          duration: modifiedValues.hours,
-          hasIntroduction: modifiedValues.hasIntroduction,
-          locale: modifiedValues.language,
-          slug: 'test-me-fishbowl',
-          isFishbowlNow: false,
-          durationFormatted: modifiedValues.hours,
-          name: modifiedValues.title,
-          isPrivate: modifiedValues.isPrivate,
-          password: modifiedValues.password
-        }
+    updateFishbowl: {
+      fishbowl: {
+        id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
+        description: modifiedValues.description,
+        startDateTimeTz: modifiedValues.startDateTimeTz,
+        timezone: modifiedValues.timezone,
+        duration: modifiedValues.hours,
+        hasIntroduction: modifiedValues.hasIntroduction,
+        locale: modifiedValues.language,
+        slug: 'test-fishbowl',
+        isFishbowlNow: false,
+        durationFormatted: modifiedValues.hours,
+        name: modifiedValues.title,
+        isPrivate: modifiedValues.isPrivate,
+        plainPassword: modifiedValues.plainPassword
       }
     }
   };
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', mergedValues).as(
-    'gqlUpdateFishbowlMutation'
-  );
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'UpdateFishbowl')) {
+      console.log('SAURA NO HACE DAÑO mergedValues', mergedValues);
+      req.reply({
+        data: mergedValues
+      });
+    }
+  }).as('gqlUpdateFishbowlMutation');
 
   cy.get('form').submit();
 });

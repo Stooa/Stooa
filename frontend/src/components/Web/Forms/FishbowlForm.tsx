@@ -48,7 +48,7 @@ interface FormProps {
   updateFishbowl: (
     options?: UpdateFishbowlOptions
   ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  onSubmit: (any, setSubmitting?: (isSubmitting: boolean) => void) => void;
+  onSubmit: (any) => void;
   currentLanguage: string;
   enableReinitialize?: boolean;
   selectedFishbowl?: FormValues;
@@ -281,7 +281,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
       })
     });
   },
-  enableReinitialize: true,
   handleSubmit: async (values, { props, setSubmitting }) => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
@@ -312,7 +311,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
           }
         })
         .then(res => {
-          props.onSubmit(res, setSubmitting);
+          setSubmitting(false);
+          props.onSubmit(res);
         })
         .catch(error => {
           setSubmitting(false);
@@ -342,7 +342,8 @@ const FormValidation = withFormik<FormProps, FormValues>({
         })
         .then(res => {
           setSubmitting(false);
-          props.onSubmit(res, setSubmitting);
+          setSubmitting(false);
+          props.onSubmit(res);
         })
         .catch(error => {
           setSubmitting(false);
@@ -387,7 +388,7 @@ const FishbowlForm = ({
     return Math.random().toString(36).substring(2, 10);
   }, []);
 
-  const handleOnSubmit = (res, setSubmitting) => {
+  const handleOnSubmit = res => {
     if (res.type === 'Error') {
       console.error('[STOOA] Error', res);
       setError(res.data);
@@ -402,7 +403,6 @@ const FishbowlForm = ({
         };
 
         setSuccess(true);
-        setSubmitting(false);
         setTimeout(() => {
           setSuccess(false);
         }, 5000);
@@ -419,7 +419,6 @@ const FishbowlForm = ({
 
         const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
         updateCreateFishbowl(true);
-        setSubmitting(false);
         router.push(route, route, { locale: lang });
       }
     }
