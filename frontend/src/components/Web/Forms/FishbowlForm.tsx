@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
@@ -54,6 +54,7 @@ interface FormProps {
   selectedFishbowl?: FormValues;
   isFull?: boolean;
   isEditForm?: boolean;
+  randomPassword?: string;
 }
 
 interface FormValues {
@@ -81,10 +82,6 @@ const initialValues = {
   hasIntroduction: false,
   isPrivate: false,
   plainPassword: undefined
-};
-
-const getRandomPassword = () => {
-  return Math.random().toString(36).substring(2, 10);
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -259,23 +256,12 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 
 const FormValidation = withFormik<FormProps, FormValues>({
   mapPropsToValues: props => {
-    if (props.selectedFishbowl) {
-      const password = props.selectedFishbowl.plainPassword
-        ? props.selectedFishbowl.plainPassword
-        : getRandomPassword();
-
-      return {
-        ...props.selectedFishbowl,
-        plainPassword: password,
-        ...(!props.isEditForm && { language: props.currentLanguage })
-      };
-    } else {
-      return {
-        ...initialValues,
-        plainPassword: getRandomPassword(),
-        ...(!props.isEditForm && { language: props.currentLanguage })
-      };
-    }
+    return {
+      ...(props.selectedFishbowl
+        ? props.selectedFishbowl
+        : { ...initialValues, plainPassword: props.randomPassword }),
+      ...(!props.isEditForm && { language: props.currentLanguage })
+    };
   },
   validationSchema: props => {
     return Yup.object({
@@ -397,6 +383,10 @@ const FishbowlForm = ({
   const dateError = t('validation.date');
   const titleError = t('validation.title');
 
+  const getRandomPassword = useCallback(() => {
+    return Math.random().toString(36).substring(2, 10);
+  }, []);
+
   const handleOnSubmit = res => {
     if (res.type === 'Error') {
       console.error('[STOOA] Error', res);
@@ -410,6 +400,7 @@ const FishbowlForm = ({
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
+
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -456,7 +447,7 @@ const FishbowlForm = ({
       timezone: selectedFishbowl.timezone,
       hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
       isPrivate: selectedFishbowl.isPrivate,
-      plainPassword: selectedFishbowl.plainPassword
+      plainPassword: selectedFishbowl.isPrivate ? selectedFishbowl.plainPassword : ''
     };
   }
 
@@ -478,6 +469,7 @@ const FishbowlForm = ({
         currentLanguage={lang}
         selectedFishbowl={selectedFishbowlValues}
         isEditForm={isEditForm}
+        randomPassword={getRandomPassword()}
       />
     </>
   );
