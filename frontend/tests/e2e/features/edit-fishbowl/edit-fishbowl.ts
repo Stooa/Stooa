@@ -40,7 +40,7 @@ When('saves the changes', () => {
       fishbowl: {
         id: '/fishbowls/a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
         description: modifiedValues.description,
-        startDateTimeTz: modifiedValues.startDateTimeTz,
+        startDateTimeTz: '2030-09-22T09:48:46.489Z',
         timezone: modifiedValues.timezone,
         duration: modifiedValues.hours,
         hasIntroduction: modifiedValues.hasIntroduction,
@@ -57,7 +57,7 @@ When('saves the changes', () => {
 
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'UpdateFishbowl')) {
-      console.log('SAURA NO HACE DAÑO mergedValues', mergedValues);
+      console.log('Saura', mergedValues);
       req.reply({
         data: mergedValues
       });

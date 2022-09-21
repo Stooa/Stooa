@@ -342,7 +342,6 @@ const FormValidation = withFormik<FormProps, FormValues>({
         })
         .then(res => {
           setSubmitting(false);
-          setSubmitting(false);
           props.onSubmit(res);
         })
         .catch(error => {
