@@ -15,7 +15,7 @@ emails:
         subject: Halo %name%! Kita mendapatkan permintaan untuk mengatur ulang kata sandi Stooa milikmu
         information_text: Jika kamu mengabaikan pesan ini, kata sandimu tidak akan diubah.<br>Jika kamu tidak meminta sebuah atur ulang kata sandi, <a href="mailto:%email%">beritahu kami</a>.
     fishbowl_created_email:
-        title: Bagus sekali!
+        title: Sekarang apa?<br>Bagikan fishbowl-nya!
         info_title: Judul
         info_duration: Durasi
         info_description: Deskripsi
@@ -30,5 +30,5 @@ emails:
             ca: Katala
         subject: Halo %name%! Kamu telah membuat sebuah fishbowl yang baru
         delete: 'Jika kamu ingin menghapus fishbowl ini, mohon kirim surel ke <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id: %id%">sini</a>'
-        description: 'Periksa detail dari fishbowl-mu yang baru:'
+        description: 'Salin dan bagikan tautan fishbowl ini ke orang-orang yang kamu ingin mereka bergabung ke pembicaraan.👇'
         password: 'Password: %password%'
