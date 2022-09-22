@@ -82,19 +82,6 @@ const Fishbowl: FC = () => {
       category: 'FishbowlReactions',
       label: 'Connect'
     });
-
-    const closeTabFunction = (e: BeforeUnloadEvent) => {
-      if (isModerator && conferenceStatus === IConferenceStatus.RUNNING) {
-        e.preventDefault();
-        e.returnValue = '';
-      }
-    };
-
-    addEventListener('beforeunload', closeTabFunction);
-
-    return () => {
-      removeEventListener('beforeunload', closeTabFunction);
-    };
   }, []);
 
   return (
