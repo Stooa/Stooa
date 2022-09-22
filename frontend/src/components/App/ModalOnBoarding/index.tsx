@@ -11,23 +11,30 @@ import React from 'react';
 
 import Cross from '@/ui/svg/cross.svg';
 import OnboardingModal from '@/components/App/ModalOnBoarding/styles';
+import OnBoardingSlider from '@/components/App/OnBoarding/OnBoardingSlider';
+import { useStooa } from '@/contexts/StooaManager';
+import { setOnBoardingCookie } from '@/lib/auth';
 
-interface Props {
-  show: boolean;
-  closeModal: () => void;
-}
+const ModalOnboarding = () => {
+  const { toggleOnBoarding, isModerator, onBoardingTooltipSeen, setActiveOnBoardingTooltip } =
+    useStooa();
 
-const Onboarding: React.FC<Props> = ({ show, closeModal, children }) => {
+  const skipOnBoarding = () => {
+    toggleOnBoarding('skip');
+    setOnBoardingCookie(isModerator);
+    if (!onBoardingTooltipSeen) setActiveOnBoardingTooltip(true);
+  };
+
   return (
-    <OnboardingModal className={!show ? 'hide' : 'show'}>
+    <OnboardingModal>
       <div className="content white">
-        <button className="close" onClick={closeModal}>
+        <button className="close" onClick={skipOnBoarding}>
           <Cross />
         </button>
-        {children}
+        <OnBoardingSlider skipOnBoarding={skipOnBoarding} />
       </div>
     </OnboardingModal>
   );
 };
 
-export default Onboarding;
+export default ModalOnboarding;

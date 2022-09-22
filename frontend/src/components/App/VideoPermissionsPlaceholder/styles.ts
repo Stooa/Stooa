@@ -17,16 +17,18 @@ const Placeholder = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
   height: 100%;
   left: 0;
   pointer-events: none;
   position: absolute;
-  padding: ${space(4)};
+  padding: ${space()} ${space(4)} ${space(8)} ${space(4)};
   top: 0;
   width: 100%;
 
-  p {
-    text-align: center;
+  & > .friend-image {
+    width: 120px;
+    margin-bottom: ${space(2)};
   }
 
   ${media.min('tablet')`

@@ -19,6 +19,19 @@ export interface StooaContextValues {
   isModerator: boolean;
   onIntroduction: boolean;
   timeStatus: ITimeStatus;
-  participantToKick: Participant;
-  setParticipantToKick: Dispatch<SetStateAction<Participant>>;
+  participantToKick: Participant | undefined;
+  setParticipantToKick: Dispatch<SetStateAction<Participant | undefined>>;
+  showOnBoardingModal: boolean;
+  setShowOnBoardingModal: Dispatch<SetStateAction<boolean>>;
+  toggleOnBoarding: (location: string) => void;
+  activeOnBoardingTooltip: boolean;
+  setActiveOnBoardingTooltip: Dispatch<SetStateAction<boolean>>;
+  onBoardingTooltipSeen: boolean;
+  setOnBoardingTooltipSeen: Dispatch<SetStateAction<boolean>>;
+  showConfirmCloseTabModal: boolean;
+  setShowConfirmCloseTabModal: Dispatch<SetStateAction<boolean>>;
+  showOnBoardingTour: boolean;
+  setShowOnBoardingTour: Dispatch<SetStateAction<boolean>>;
+  getPassword: () => string;
+  setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
 }

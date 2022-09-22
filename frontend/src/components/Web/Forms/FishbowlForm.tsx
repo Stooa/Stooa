@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { FetchResult, useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
@@ -37,6 +37,7 @@ import { Fishbowl } from '@/types/api-platform';
 
 interface FormProps {
   required: string;
+  minimumLength: string;
   success?: boolean;
   date: string;
   title: string;
@@ -50,9 +51,10 @@ interface FormProps {
   onSubmit: (any) => void;
   currentLanguage: string;
   enableReinitialize?: boolean;
-  selectedFishbowl?: FormValues | null;
+  selectedFishbowl?: FormValues;
   isFull?: boolean;
   isEditForm?: boolean;
+  randomPassword?: string;
 }
 
 interface FormValues {
@@ -65,6 +67,8 @@ interface FormValues {
   language: string;
   timezone: string;
   hasIntroduction: boolean;
+  isPrivate: boolean;
+  plainPassword?: string;
 }
 
 const initialValues = {
@@ -75,7 +79,9 @@ const initialValues = {
   description: '',
   language: '',
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  hasIntroduction: false
+  hasIntroduction: false,
+  isPrivate: false,
+  plainPassword: undefined
 };
 
 const Form = (props: FormProps & FormikProps<FormValues>) => {
@@ -210,6 +216,29 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           label={t('fishbowl.introductionLabel')}
           name="hasIntroduction"
         />
+        <Switch
+          tooltipText={
+            <Trans
+              i18nKey="form:fishbowl.passwordTooltip"
+              components={{ span: <span className="medium" /> }}
+            />
+          }
+          label={t('fishbowl.isPrivate')}
+          name="isPrivate"
+        />
+        {props.values.isPrivate && (
+          <Input
+            value={props.values.isPrivate ? props.values.plainPassword : undefined}
+            data-testid="fishbowl-form-passwordinput"
+            placeholder={t('fishbowl.passwordPlaceholder')}
+            label={t('fishbowl.passwordInputLabel')}
+            name="plainPassword"
+            type="text"
+            autoComplete="off"
+            id="plainPassword"
+            icon="lock"
+          />
+        )}
       </fieldset>
       <fieldset>
         {success && (
@@ -226,10 +255,14 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
 };
 
 const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: props => ({
-    ...(props.selectedFishbowl ? props.selectedFishbowl : initialValues),
-    ...(!props.isEditForm && { language: props.currentLanguage })
-  }),
+  mapPropsToValues: props => {
+    return {
+      ...(props.selectedFishbowl
+        ? props.selectedFishbowl
+        : { ...initialValues, plainPassword: props.randomPassword }),
+      ...(!props.isEditForm && { language: props.currentLanguage })
+    };
+  },
   validationSchema: props => {
     return Yup.object({
       title: Yup.string().matches(/[^-\s]/, {
@@ -241,7 +274,11 @@ const FormValidation = withFormik<FormProps, FormValues>({
       day: Yup.string().required(props.required),
       time: Yup.string().required(props.required),
       hours: Yup.string().required(props.required),
-      timezone: Yup.string().required(props.required)
+      timezone: Yup.string().required(props.required),
+      plainPassword: Yup.string().when('isPrivate', {
+        is: true,
+        then: Yup.string().min(8, props.minimumLength).required(props.required)
+      })
     });
   },
   handleSubmit: async (values, { props, setSubmitting }) => {
@@ -267,7 +304,9 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              plainPassword: values.isPrivate ? values.plainPassword : undefined
             }
           }
         })
@@ -294,7 +333,10 @@ const FormValidation = withFormik<FormProps, FormValues>({
               duration: values.hours,
               locale: values.language,
               isFishbowlNow: false,
-              hasIntroduction: values.hasIntroduction
+              hasIntroduction: values.hasIntroduction,
+              isPrivate: values.isPrivate,
+              plainPassword:
+                values.isPrivate && values.plainPassword ? values.plainPassword : undefined
             }
           }
         })
@@ -314,7 +356,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
 })(Form);
 
 const FishbowlForm = ({
-  selectedFishbowl = null,
+  selectedFishbowl,
   $isFull = false,
   isEditForm = false,
   onSaveCallback
@@ -325,20 +367,25 @@ const FishbowlForm = ({
   onSaveCallback?: (data: Fishbowl) => void;
 }) => {
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState<boolean>(null);
+  const [success, setSuccess] = useState<boolean>();
   const router = useRouter();
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [updateFishbowl] = useMutation(UPDATE_FISHBOWL);
   const { t, lang } = useTranslation('form');
-  const { updateCreateFishbowl } = useAuth();
+  const { user, updateCreateFishbowl } = useAuth();
 
-  const { user } = useAuth();
-
-  const defaultTitle = t('defaultTitle', { name: user.name ? user.name.split(' ')[0] : '' });
+  const defaultTitle = t('defaultTitle', {
+    name: user && user.name ? user.name.split(' ')[0] : ''
+  });
 
   const requiredError = t('validation.required');
+  const minimumLength = t('validation.fishbowlPasswordLength');
   const dateError = t('validation.date');
   const titleError = t('validation.title');
+
+  const getRandomPassword = useCallback(() => {
+    return Math.random().toString(36).substring(2, 10);
+  }, []);
 
   const handleOnSubmit = res => {
     if (res.type === 'Error') {
@@ -353,11 +400,15 @@ const FishbowlForm = ({
           ...res.data.updateFishbowl.fishbowl,
           id: res.data.updateFishbowl.fishbowl.id.substring(11)
         };
+
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
         }, 5000);
-        onSaveCallback(formattedFishbowl);
+
+        if (onSaveCallback) {
+          onSaveCallback(formattedFishbowl);
+        }
       } else {
         const {
           data: {
@@ -372,7 +423,7 @@ const FishbowlForm = ({
     }
   };
 
-  let selectedFishbowlValues: FormValues;
+  let selectedFishbowlValues: FormValues | undefined = undefined;
 
   if (selectedFishbowl) {
     const stringDate = selectedFishbowl.startDateTimeTz.toString();
@@ -387,14 +438,16 @@ const FishbowlForm = ({
 
     selectedFishbowlValues = {
       id: selectedFishbowl.id,
-      title: selectedFishbowl.name,
+      title: selectedFishbowl.name ?? '',
       day: newDate,
       time: newDate,
-      hours: selectedFishbowl.durationFormatted,
-      description: selectedFishbowl.description,
+      hours: selectedFishbowl.durationFormatted ?? '',
+      description: selectedFishbowl.description ?? '',
       language: selectedFishbowl.locale,
       timezone: selectedFishbowl.timezone,
-      hasIntroduction: selectedFishbowl.hasIntroduction
+      hasIntroduction: selectedFishbowl.hasIntroduction ?? false,
+      isPrivate: selectedFishbowl.isPrivate,
+      plainPassword: selectedFishbowl.isPrivate ? selectedFishbowl.plainPassword : ''
     };
   }
 
@@ -407,14 +460,16 @@ const FishbowlForm = ({
         defaultTitle={defaultTitle}
         enableReinitialize
         required={requiredError}
+        minimumLength={minimumLength}
         success={success}
         date={dateError}
         createFishbowl={createFishbowl}
         updateFishbowl={updateFishbowl}
         onSubmit={handleOnSubmit}
         currentLanguage={lang}
-        selectedFishbowl={selectedFishbowlValues ? selectedFishbowlValues : null}
+        selectedFishbowl={selectedFishbowlValues}
         isEditForm={isEditForm}
+        randomPassword={getRandomPassword()}
       />
     </>
   );

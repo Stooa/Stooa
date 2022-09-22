@@ -12,22 +12,31 @@ import { useEffect, useState } from 'react';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
 import { Fishbowl } from '@/types/api-platform';
+import LoadingDots from '@/components/Common/LoadingDots';
 
 interface Props {
   fishbowlData: Fishbowl;
   timeStatus: ITimeStatus;
   conferenceStatus: IConferenceStatus;
   isModerator: boolean;
+  prefishbowl?: boolean;
 }
 
-export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerator }: Props) => {
+export const Counter = ({
+  fishbowlData,
+  timeStatus,
+  conferenceStatus,
+  isModerator,
+  prefishbowl = false,
+  ...props
+}: Props) => {
   const getDateByStatus = () =>
     conferenceStatus === IConferenceStatus?.NOT_STARTED
       ? Date.parse(fishbowlData.startDateTimeTz)
       : Date.parse(fishbowlData.endDateTimeTz);
 
   const [completedTime, setCompletedTime] = useState<boolean>(false);
-  const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading...');
+  const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
   const [intervalTimer, setIntervalTimer] = useState<number>();
   const [fishbowlDate, setFishbowlDate] = useState(getDateByStatus());
 
@@ -90,7 +99,7 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
 
     if (seconds === 0 && conferenceNotStarted) {
       timeLeftText = isModerator ? t('waitingHost') : t('waiting');
-    } else if (seconds < 2) {
+    } else if (seconds === 0) {
       timeLeftText = t('timesUp');
     } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
       timeLeftText = t('lastMinute');
@@ -99,7 +108,8 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
       timeLeftText = t('timeToStart', { time });
     } else {
       const hoursText = t('form:fishbowl.hours');
-      const minutesText = t('form:fishbowl.minutes');
+      const minutesText = hours > 0 ? t('form:fishbowl.minutesShort') : t('form:fishbowl.minutes');
+
       const time =
         hours > 0 && seconds >= 3600
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
@@ -112,5 +122,10 @@ export const Counter = ({ fishbowlData, timeStatus, conferenceStatus, isModerato
     return timeLeftText;
   };
 
-  return <div className="body-xs medium">{timeToDisplay}</div>;
+  return (
+    <span {...props} className="body-xs medium counter">
+      {timeToDisplay}
+      {prefishbowl && <LoadingDots />}
+    </span>
+  );
 };

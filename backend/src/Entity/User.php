@@ -27,6 +27,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -91,15 +92,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         }
  *     }
  * )
- *
  * @UniqueEntity(
  *     fields={"email"},
  *     message="user.email"
  * )
- *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface, \Stringable
+class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
 
@@ -113,31 +112,25 @@ class User implements UserInterface, \Stringable
 
     /**
      * @Groups({"user:read", "user:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $name = null;
 
     /**
      * @Groups({"user:read", "user:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $surnames = null;
 
     /**
      * @Groups({"user:self", "user:create", "user:read"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
      * @Assert\Email
-     *
      * @ORM\Column(type="string", unique=true)
      */
     private ?string $email = null;
@@ -154,16 +147,13 @@ class User implements UserInterface, \Stringable
 
     /**
      * @Groups({"user:create"})
-     *
      * @Assert\IsTrue
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $privacyPolicy = false;
 
     /**
      * @Groups({"user:self", "user:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $allowShareData = false;
@@ -173,31 +163,25 @@ class User implements UserInterface, \Stringable
 
     /**
      * @Groups({"user:self", "user:write"})
-     *
      * @Assert\Url
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $linkedinProfile = null;
 
     /**
      * @Groups({"user:self", "user:write"})
-     *
      * @Assert\Url
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $twitterProfile = null;
 
     /**
      * @Groups({"user:self", "user:create", "user:read"})
-     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @Assert\Locale(canonicalize=true)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $locale = null;
@@ -211,7 +195,6 @@ class User implements UserInterface, \Stringable
 
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank(groups={"user:create"})
      */
     private ?string $plainPassword = null;
@@ -223,7 +206,7 @@ class User implements UserInterface, \Stringable
 
     public function __toString(): string
     {
-        return $this->getFullName() . ' (' . $this->getUsername() . ')';
+        return $this->getFullName() . ' (' . $this->getUserIdentifier() . ')';
     }
 
     public function getId(): ?UuidInterface
@@ -279,7 +262,7 @@ class User implements UserInterface, \Stringable
         return $this;
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }

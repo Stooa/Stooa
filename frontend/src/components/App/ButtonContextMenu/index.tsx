@@ -9,7 +9,7 @@
 
 import { StyledContextMenu, StyledButtonContext, StyledButton } from './styles';
 import DotsSvg from '@/ui/svg/dots.svg';
-import { useEffect, useRef, useState, useCallback, MouseEventHandler } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
 import { Participant } from '@/types/participant';
@@ -34,10 +34,10 @@ type SeatsChangeEventProps = {
 
 const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [participant, setParticipant] = useState<Participant>(initialParticipant);
+  const [participant, setParticipant] = useState<Participant | undefined>(initialParticipant);
   const { setParticipantToKick, conferenceReady, isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const isMyself = initialParticipant ? initialParticipant.isCurrentUser : false;
 
@@ -58,7 +58,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
       if (participantId) {
         setParticipant(conferenceRepository.getParticipantById(participantId));
       } else {
-        setParticipant(null);
+        setParticipant(undefined);
       }
     }
   });
@@ -71,7 +71,9 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (showContextMenu && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+      const target = e.target as HTMLElement;
+
+      if (showContextMenu && wrapperRef.current && !wrapperRef.current.contains(target)) {
         setShowContextMenu(false);
       }
     };

@@ -29,12 +29,10 @@ use Webmozart\Assert\Assert as MAssert;
  *     collectionOperations={"get"},
  *     itemOperations={},
  * )
- *
  * @Assert\Expression(
  *     "this.getUser() or this.getGuest()",
  *     message="user.participant"
  * )
- *
  * @ORM\Entity
  */
 class Participant implements \Stringable
@@ -49,7 +47,6 @@ class Participant implements \Stringable
 
     /**
      * @Groups({"participant:read"})
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(referencedColumnName="id")
      */
@@ -57,7 +54,6 @@ class Participant implements \Stringable
 
     /**
      * @Groups({"participant:read"})
-     *
      * @ORM\ManyToOne(targetEntity="Guest", cascade={"all"})
      * @ORM\JoinColumn(referencedColumnName="id")
      */
@@ -65,19 +61,15 @@ class Participant implements \Stringable
 
     /**
      * @Groups({"participant:read"})
-     *
      * @Assert\NotNull
-     * @Assert\DateTime
-     *
+     * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime")
      */
     private ?\DateTimeInterface $lastPing = null;
 
     /**
      * @Groups({"participant:read"})
-     *
      * @Assert\NotNull
-     *
      * @ORM\ManyToOne(targetEntity="Fishbowl", inversedBy="participants")
      */
     private ?Fishbowl $fishbowl = null;

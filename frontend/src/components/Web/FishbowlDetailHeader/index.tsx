@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ data }) => {
           <>
             <Avatar>
               <AvatarIcon />
-              <span>{user.name}</span>
+              <span>{user?.name}</span>
             </Avatar>
             <Button size="medium" onClick={logout}>
               <span>{t('signout')}</span>

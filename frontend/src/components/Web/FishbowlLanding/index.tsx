@@ -33,8 +33,12 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
     <LandingContainer centered>
       <ToastContainer className="toastify-custom" />
       <StyledFishbowlData>
-        <h1 className="title-md">{data.name}</h1>
-        {data.description && <Description>{data.description}</Description>}
+        <h1 data-testid="fishbowl-name" className="title-md">
+          {data.name}
+        </h1>
+        {data.description && (
+          <Description data-testid="fishbowl-description">{data.description}</Description>
+        )}
       </StyledFishbowlData>
       <Time as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
         <p className="body-md medium">{t('dateandtime')}</p>
@@ -49,8 +53,25 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
           <StyledDetailAlert className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
           </StyledDetailAlert>
-          <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
-          <HelpText className="body-sm">{t('copyText')}</HelpText>
+          {!data.isPrivate && (
+            <>
+              <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+              <HelpText className="body-sm">{t('copyText')}</HelpText>
+            </>
+          )}
+          {data.plainPassword && (
+            <>
+              <ButtonCopyUrl
+                size="large"
+                withSvg
+                fid={data.slug}
+                locale={data.locale}
+                isPrivate
+                plainPassword={data.plainPassword}
+              />
+              <HelpText className="body-sm">{t('copyText')}</HelpText>
+            </>
+          )}
         </>
       )}
     </LandingContainer>

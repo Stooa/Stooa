@@ -11,9 +11,9 @@
     "joinMemberNote": "* Allows you to contact the rest of the attendees",
     "copySuccess": "Link copied to clipboard!",
     "detail": {
-        "shareTitle": "Now what? <br/>Share the fishbowl!",
-        "shareSubtitle": "Let the conversation flow! Copy and share the link of this fishbowl with the people you want to join the conversation.",
-        "shareInSocials": "Or share in:",
+        "shareTitle": "Well done! Now what? <br/>Share the fishbowl with your friends!",
+        "shareSubtitle": "Let the conversation flow! Copy and share the link to this fishbowl with the people you want to join the conversation.",
+        "shareInSocials": "Or share it on:",
         "fishbowlCreatedSuccessfully": "Fishbowl created successfully!",
         "cardMiniTitle": "Fishbowl details",
         "editFishbowlDetails": "Edit fishbowl details",
@@ -36,6 +36,7 @@
     "full": "Full",
     "join": "Join the conversation",
     "leave": "Leave the conversation",
+    "reactions": "Reactions",
     "unmute": "Unmute",
     "mute": "Mute",
     "sameAsSystem": "Same as system",
@@ -72,6 +73,10 @@
         "description": "Are you sure you want to terminate this fishbowl?",
         "button": "Confirm"
     },
+    "confirmLeaving": {
+        "title": "Are you leaving?",
+        "description": "If you're done, remember to finish the fishbowl for everyone."
+    },
     "participants": {
         "title": "People in the room",
         "attendees": "Listeners",
@@ -102,5 +107,18 @@
     "permissionsModalTitle": "Permissions needed",
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Request access",
-    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue."
+    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
+    "reaction": {
+        "agree": "Agree",
+        "disagree": "Disagree",
+        "love": "Love",
+        "applause": "Applause",
+        "laugh": "LOL",
+        "wave": "Hi",
+        "insightful": "Insightful"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "Don't know how a fishbowl works? Click here",
+        "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
+    }
 }

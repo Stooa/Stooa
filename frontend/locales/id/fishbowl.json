@@ -33,6 +33,7 @@
     "full": "Penuh",
     "join": "Gabung pembicaraan",
     "leave": "Tinggalkan pembicaraan",
+    "reactions": "Reaksi",
     "unmute": "Tidak bisukan",
     "sameAsSystem": "Sama dengan sistem",
     "mute": "Bisukan",
@@ -63,6 +64,10 @@
         "title": "Akhiri fishbowl",
         "description": "Apakah Anda yakin ingin menghentikan fishbowl ini?",
         "button": "Konfirmasi"
+    },
+    "confirmLeaving": {
+        "title": "Are you leaving?",
+        "description": "If you're done, remember to finish the fishbowl for everyone."
     },
     "participants": {
         "title": "Orang-orang di ruang",

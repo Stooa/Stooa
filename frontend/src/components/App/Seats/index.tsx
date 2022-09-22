@@ -28,9 +28,9 @@ const Seats = () => {
 
   return (
     <SeatsStyled>
-      <div className={`content ${isConferenceNotStarted ? 'not-started' : ''} `}>
+      <div className={`content seats-wrapper ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
-          <Seat key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
+          <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
 
             <div className="frame" />
@@ -43,7 +43,9 @@ const Seats = () => {
                   {isConferenceInIntro ? (
                     <span className="text body-sm">{t('seatAvailableAfterIntro')}</span>
                   ) : (
-                    <span className="text body-sm">{t('seatUnavailable')}</span>
+                    <span data-testid="unavailable-seat" className="text body-sm">
+                      {t('seatUnavailable')}
+                    </span>
                   )}
                 </>
               ) : (

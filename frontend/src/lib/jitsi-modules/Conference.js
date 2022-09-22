@@ -9,7 +9,14 @@
 
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
-import { CONFERENCE_START, PERMISSION_CHANGED } from '@/jitsi/Events';
+import {
+  CONFERENCE_IS_LOCKABLE,
+  CONFERENCE_PASSWORD_REQUIRED,
+  CONFERENCE_START,
+  CONNECTION_ESTABLISHED_FINISHED,
+  PERMISSION_CHANGED,
+  REACTION_MESSAGE_RECEIVED
+} from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
@@ -34,6 +41,22 @@ const conferenceRepository = () => {
     conference.selectParticipants(seatsRepository.getIds());
 
     console.log('[STOOA] Join', id);
+  };
+
+  /**
+   * Join the jitsi private conference
+   * @param {string | undefined} password
+   */
+  const joinPrivateConference = async password => {
+    if (conference) await conference.join(password);
+  };
+
+  /**
+   * Join the jitsi conference
+   * @param {string | undefined} password
+   */
+  const joinConference = async () => {
+    if (conference) await conference.join();
   };
 
   const leaveUser = id => {
@@ -96,7 +119,9 @@ const conferenceRepository = () => {
   };
 
   const _handleConferenceFailed = error => {
-    console.log('[STOOA] Conference failed', error);
+    if (error === 'conference.authenticationRequired') {
+      dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
+    }
   };
 
   const _handleConferenceError = error => {
@@ -108,10 +133,15 @@ const conferenceRepository = () => {
   };
 
   const _handleUserRoleChanged = () => {
+    const role = conference.getRole();
     console.log('[STOOA] User role changed', conference.getRole());
+
+    if (role === 'moderator') {
+      dispatchEvent(CONFERENCE_IS_LOCKABLE);
+    }
   };
 
-  const _handleCommnandJoin = values => {
+  const _handleCommandJoin = values => {
     const { value } = values;
     const seat = seatsRepository.join(value);
 
@@ -131,6 +161,18 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  const _handleMessageReceived = (id, text, timestamp) => {
+    dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
+  };
+
+  const _handlePasswordRequired = () => {
+    console.log('[STOOA] Password required');
+  };
+
+  const _handlePasswordNotSupported = () => {
+    console.log('[STOOA] Password not supported');
+  };
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -147,8 +189,12 @@ const conferenceRepository = () => {
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
-          DOMINANT_SPEAKER_CHANGED
+          DOMINANT_SPEAKER_CHANGED,
+          MESSAGE_RECEIVED
         }
+      },
+      errors: {
+        conference: { PASSWORD_REQUIRED, PASSWORD_NOT_SUPPORTED }
       }
     } = JitsiMeetJS;
 
@@ -168,10 +214,13 @@ const conferenceRepository = () => {
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
     conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
     conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
-    conference.addCommandListener('join', _handleCommnandJoin);
+    conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
+    conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
+    conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
+    conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
-    await conference.join();
+    dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
   };
 
   const _handleConnectionDisconnected = () => {
@@ -239,7 +288,7 @@ const conferenceRepository = () => {
 
     connection = new JitsiMeetJS.JitsiConnection(
       null,
-      isUserModerator && auth ? auth.token : null,
+      auth ? auth.token : process.env.NEXT_PUBLIC_GUEST_TOKEN ?? null,
       connectionOptions(roomName)
     );
 
@@ -248,6 +297,17 @@ const conferenceRepository = () => {
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
     connection.connect();
+  };
+
+  /**
+   *
+   * @param {string} password
+   * @returns Promise
+   */
+  const lockConference = async password => {
+    if (conference) {
+      return await conference.lock(password);
+    }
   };
 
   const getLocalAudioTrack = () => {
@@ -374,6 +434,12 @@ const conferenceRepository = () => {
     conference.kickParticipant(id, reason);
   };
 
+  const sendTextMessage = message => {
+    if (isJoined) {
+      conference.sendTextMessage(message);
+    }
+  };
+
   return {
     addTrack,
     getLocalVideoTrack,
@@ -386,10 +452,14 @@ const conferenceRepository = () => {
     getParticipants,
     initializeJitsi,
     initializeConnection,
+    lockConference,
+    joinConference,
+    joinPrivateConference,
     kickParticipant,
     leave,
     sendJoinEvent,
-    sendLeaveEvent
+    sendLeaveEvent,
+    sendTextMessage
   };
 };
 
