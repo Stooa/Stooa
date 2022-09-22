@@ -13,6 +13,7 @@ services:
             target: fpm-dev
         environment:
             PHP_IDE_CONFIG: serverName=localhost
+            XDEBUG_MODE: "${XDEBUG_MODE:-off}"
         depends_on:
             - mysql
         volumes:

@@ -19,3 +19,8 @@ app.fishbowl.ping:
     path: /ping/{slug}
     controller: App\Controller\FishbowlController::ping
     methods: [POST]
+
+app.fishbowl.private:
+    path: /private-password/{slug}
+    controller: App\Controller\FishbowlController::private
+    methods: [POST]

@@ -17,6 +17,7 @@ emails:
         info_invite: Link zur Einladung der Teilnehmer
         info_duration: Dauer
         info_description: Beschreibung
+        password: 'Password: %password%'
 
 fishbowl:
     default_title: 'Termin Fishbowl - %name%'

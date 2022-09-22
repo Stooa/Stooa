@@ -48,6 +48,7 @@ class WorkflowMutationResolverTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationResolverProvider
      */
     public function itGetsNullWhenContextIsEmpty(string $className): void
@@ -68,6 +69,7 @@ class WorkflowMutationResolverTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationResolverProvider
      */
     public function itGetsNullFishbowlWhenFishbowlSlugDontExists(string $className): void
@@ -88,6 +90,7 @@ class WorkflowMutationResolverTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationResolverProviderWithTransition
      */
     public function itGetsNullWhenFishbowlCantChangeWorkflowStatus(string $className, string $transition): void
@@ -111,6 +114,7 @@ class WorkflowMutationResolverTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider mutationResolverProviderWithTransition
      */
     public function itGetsCorrectFishbowl(string $className, string $transition): void
