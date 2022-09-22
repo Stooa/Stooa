@@ -28,7 +28,7 @@ jobs:
 
         strategy:
             matrix:
-                node: ['17.4']
+                node: ['17.9']
 
         steps:
             - name: Checkout the repository to Github workspace
