@@ -10,7 +10,7 @@
         "doctrine/doctrine-bundle": "2.7.0",
         "doctrine/doctrine-migrations-bundle": "3.2.2",
         "doctrine/orm": "2.13.1",
-        "gedmo/doctrine-extensions": "3.8.0",
+        "gedmo/doctrine-extensions": "3.9.0",
         "gesdinet/jwt-refresh-token-bundle": "1.1.1",
         "hashids/hashids": "4.1.0",
         "lexik/jwt-authentication-bundle": "2.16.0",
