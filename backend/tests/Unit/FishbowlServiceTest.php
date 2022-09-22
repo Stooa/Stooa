@@ -343,6 +343,7 @@ class FishbowlServiceTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider fishbowlTitleProvider
      */
     public function itGeneratesDefaultTitle(string $fishbowlTitle): void

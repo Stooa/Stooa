@@ -12,7 +12,9 @@
                 "hasIntroduction": false,
                 "locale": "en",
                 "slug": "test-me-fishbowl",
-                "isFishbowlNow": false
+                "isFishbowlNow": false,
+                "isPrivate": true,
+                "plainPassword": null
             }
         }
     }

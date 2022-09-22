@@ -28,6 +28,10 @@ export interface StooaContextValues {
   setActiveOnBoardingTooltip: Dispatch<SetStateAction<boolean>>;
   onBoardingTooltipSeen: boolean;
   setOnBoardingTooltipSeen: Dispatch<SetStateAction<boolean>>;
+  showConfirmCloseTabModal: boolean;
+  setShowConfirmCloseTabModal: Dispatch<SetStateAction<boolean>>;
   showOnBoardingTour: boolean;
   setShowOnBoardingTour: Dispatch<SetStateAction<boolean>>;
+  getPassword: () => string;
+  setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
 }

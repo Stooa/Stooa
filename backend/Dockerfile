@@ -23,6 +23,7 @@ RUN apt-get update \
     libfcgi-bin \
     mariadb-client \
     git \
+    libsodium-dev\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
@@ -68,6 +69,8 @@ ENTRYPOINT ["bash", "/usr/app/.docker/app-prod/php-fpm.sh"]
 
 # FPM-DEV
 FROM base as fpm-dev
+
+ENV XDEBUG_MODE=off
 
 USER root
 

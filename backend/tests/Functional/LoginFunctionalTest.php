@@ -72,6 +72,7 @@ class LoginFunctionalTest extends ApiTestCase
 
     /**
      * @test
+     *
      * @dataProvider errorMessageProvider
      */
     public function itTranslatesCorrectlyLoginErrorMessage(string $langCode, string $message): void

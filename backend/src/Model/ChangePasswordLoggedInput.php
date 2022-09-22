@@ -21,7 +21,6 @@ class ChangePasswordLoggedInput
 {
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank
      * @SecurityAssert\UserPassword(message="user.password")
      */
@@ -29,7 +28,6 @@ class ChangePasswordLoggedInput
 
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank
      * @Assert\EqualTo(propertyPath="newPasswordConfirmation")
      */
@@ -37,7 +35,6 @@ class ChangePasswordLoggedInput
 
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank
      */
     private ?string $newPasswordConfirmation = null;

@@ -22,7 +22,7 @@ const Container = styled.div`
 
   ${media.min('tablet')`
     flex-direction: row;
-    max-height: ${rems(480)};
+    max-height: ${rems(500)};
   `}
 `;
 

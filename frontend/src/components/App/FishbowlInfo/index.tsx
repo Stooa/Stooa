@@ -15,6 +15,7 @@ import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/sty
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import Trans from 'next-translate/Trans';
 import { Fishbowl } from '@/types/api-platform';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   data: Fishbowl;
@@ -23,6 +24,7 @@ interface Props {
 const FishbowlInfo: React.FC<Props> = ({ data }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const { getPassword } = useStooa();
 
   const toggleInfo = () => {
     pushEventDataLayer({
@@ -62,7 +64,14 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
         <Description>
           <p className="body-sm medium description__title">{data.name}</p>
           <p className="info-text body-xs">{data.description}</p>
-          <ButtonCopyUrl variant="secondary" size="medium" fid={data.slug} locale={data.locale} />
+          <ButtonCopyUrl
+            variant="secondary"
+            size="medium"
+            fid={data.slug}
+            locale={data.locale}
+            isPrivate={data.isPrivate}
+            plainPassword={getPassword()}
+          />
           <p className="body-xs description__share-text">
             <Trans i18nKey="fishbowl:fishbowlDescription.shareText" components={{ i: <i /> }} />
           </p>

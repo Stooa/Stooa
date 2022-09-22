@@ -9,6 +9,11 @@
 
 export const SEATS_CHANGE = 'seats:change';
 export const CONFERENCE_START = 'conference:start';
+export const CONFERENCE_PASSWORD_REQUIRED = 'conference:passwordrequired';
+export const WRONG_PASSWORD_EVENT = 'conference:wrongpassword';
+export const PASSWORD_NOT_SUPPORTED = 'conference:notsupportedpassword';
+export const CONNECTION_ESTABLISHED_FINISHED = 'conference:connectionestablishedfinished';
+export const CONFERENCE_IS_LOCKABLE = 'conference:islockable';
 export const USER_MUST_LEAVE = 'user:leave';
 export const USER_JOINED = 'user:joined';
 export const USER_KICKED = 'user:kicked';

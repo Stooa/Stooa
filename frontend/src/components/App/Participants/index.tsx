@@ -62,7 +62,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data, showOnBoardingTour } = useStooa();
+  const { data, showOnBoardingTour, getPassword } = useStooa();
 
   const pingParticipant = () => {
     ping(lang, fid);
@@ -161,7 +161,13 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
       <ParticipantsDrawer className={active ? 'active' : ''}>
         <div className="header">
           <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
-          <ButtonCopyUrl variant="text" fid={data.slug} locale={data.locale} />
+          <ButtonCopyUrl
+            variant="text"
+            fid={data.slug}
+            locale={data.locale}
+            isPrivate={data.isPrivate}
+            plainPassword={getPassword()}
+          />
           <Icon onClick={toggleDrawer}>
             <Cross />
           </Icon>

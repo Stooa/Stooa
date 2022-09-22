@@ -65,6 +65,10 @@
         "description": "Apakah Anda yakin ingin menghentikan fishbowl ini?",
         "button": "Konfirmasi"
     },
+    "confirmLeaving": {
+        "title": "Are you leaving?",
+        "description": "If you're done, remember to finish the fishbowl for everyone."
+    },
     "participants": {
         "title": "Orang-orang di ruang",
         "attendees": "Pendengar",

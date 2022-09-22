@@ -31,3 +31,4 @@ emails:
         subject: Halo %name%! Kamu telah membuat sebuah fishbowl yang baru
         delete: 'Jika kamu ingin menghapus fishbowl ini, mohon kirim surel ke <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id: %id%">sini</a>'
         description: 'Salin dan bagikan tautan fishbowl ini ke orang-orang yang kamu ingin mereka bergabung ke pembicaraan.👇'
+        password: 'Password: %password%'

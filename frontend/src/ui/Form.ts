@@ -349,13 +349,12 @@ const TextDivider = styled.div`
 `;
 
 const SwitchStyled = styled.div`
-  display: flex;
-  align-items: center;
+  position: relative;
   width: 100%;
-
-  > *:not(:nth-child(2)) {
-    margin-left: ${space()};
-  }
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
 
   input {
     display: none;
@@ -373,12 +372,25 @@ const SwitchStyled = styled.div`
     background-color: ${COLOR_GREEN_500};
   }
 
-  .icon-wrapper {
-    padding: ${space(1)};
+  .label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-right: ${space(1.5)};
+
+    label {
+      margin-right: ${space(1.5)};
+    }
+
+    svg {
+      transform: translateY(2px);
+    }
   }
 
   .label-text {
     font-size: ${rems(14)};
+    width: fit-content;
   }
 
   label {
@@ -393,7 +405,6 @@ const SwitchLabel = styled.label`
   justify-content: space-between;
   cursor: pointer;
   width: 42px;
-  margin-right: ${space()};
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;
@@ -418,6 +429,8 @@ const SwitchLabel = styled.label`
 `;
 
 const StyledIntroductionTooltip = styled.div`
+  --leftPosition: 0px;
+
   color: ${COLOR_NEUTRO_100};
   background-color: ${COLOR_NEUTRO_700};
   height: auto;
@@ -432,20 +445,21 @@ const StyledIntroductionTooltip = styled.div`
   width: 100%;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 150px;
+  bottom: calc(100% + ${space()});
 
-  &:after {
+  & .arrow {
+    display: none;
     ${media.min('tablet')`
-    content: '';
+      display: block;
     `}
     position: absolute;
-    right: 0;
-    bottom: -10px;
+    bottom: -6px;
+    left: var(--leftPosition);
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #e8e8e8;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #e8e8e8;
     clear: both;
     border-color: ${COLOR_NEUTRO_700} transparent transparent;
   }
