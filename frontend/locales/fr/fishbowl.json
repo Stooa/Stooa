@@ -6,7 +6,7 @@
     "cam": "Caméra",
     "timeLeft_one": "Il reste {{time}}",
     "prejoin": {
-        "title": "Join the room",
+        "title": "Rejoindre la salle",
         "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
         "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
@@ -24,8 +24,8 @@
     "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
     "introduceModal": {
         "title": "Faites une introduction",
-        "description": "Vous pouvez dire quelques mots d'introduction, la caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, n'oubliez pas d'autoriser les participants à se joindre à la conversation.",
-        "button": "Démarrer"
+        "description": "Votre caméra sera activée et vous pourrez dire quelques mots aux participants avant d'ouvrir le bocal. Ensuite, vous pouvez autoriser les utilisateurs à participer à la conversation.",
+        "button": "Commencer votre présentation"
     },
     "participants": {
         "attendees": "Auditeurs",
@@ -99,7 +99,7 @@
     "permissionsModalTitle": "Permissions needed",
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Grant permissions",
-    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
+    "permissionsModalErrorToast": "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
     "reaction": {
         "agree": "D'accord",
         "disagree": "Pas d'accord",
