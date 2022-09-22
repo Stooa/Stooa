@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Translation\Translator;
+use Webmozart\Assert\Assert;
 
 class FishbowlServiceTest extends TestCase
 {
@@ -90,7 +91,13 @@ class FishbowlServiceTest extends TestCase
         $fishbowl->setName('fishbowl name');
         $fishbowl->setTimezone('Europe/Madrid');
         $fishbowl->setDuration((new \DateTimeImmutable())->setTime(1, 0));
-        $fishbowl->setStartDateTime((new \DateTimeImmutable())->sub(new \DateInterval('PT48H')));
+
+        $date = (new \DateTimeImmutable())->sub(new \DateInterval('PT48H'));
+
+        Assert::notFalse($date);
+
+        $fishbowl->setStartDateTime($date);
+
         $fishbowl->setCurrentStatus(Fishbowl::STATUS_RUNNING);
 
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
