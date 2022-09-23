@@ -73,6 +73,10 @@
         "description": "¿Seguro que quieres finalizar el fishbowl?",
         "button": "Confirmar"
     },
+    "confirmLeaving": {
+        "title": "¿Ya te vas?",
+        "description": "Si habéis acabado, recuerda finalizar el fishbowl para todos."
+    },
     "participants": {
         "title": "Asistentes al fishbowl",
         "attendees": "Oyentes",

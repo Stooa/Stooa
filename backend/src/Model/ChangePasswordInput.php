@@ -21,15 +21,14 @@ class ChangePasswordInput
 {
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank
+     *
      * @ValidResetPasswordToken
      */
     private ?string $token = null;
 
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank
      * @Assert\EqualTo(propertyPath="passwordConfirmation")
      */
@@ -37,7 +36,6 @@ class ChangePasswordInput
 
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank
      */
     private ?string $passwordConfirmation = null;

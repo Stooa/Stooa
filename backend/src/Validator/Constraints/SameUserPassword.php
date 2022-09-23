@@ -22,7 +22,7 @@ class SameUserPassword extends Constraint
 {
     public string $message = 'user.same';
 
-    public function getTargets()
+    public function getTargets(): array|string
     {
         return self::CLASS_CONSTRAINT;
     }

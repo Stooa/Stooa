@@ -22,7 +22,7 @@
     "stepDefinitions": "tests/e2e/features"
   },
   "engines": {
-    "node": ">=17"
+    "node": ">=18"
   },
   "dependencies": {
     "@apollo/client": "3.6.9",
@@ -37,7 +37,7 @@
     "formik": "2.2.9",
     "framer-motion": "6.5.1",
     "graphql": "16.3.0",
-    "gsap": "3.9.1",
+    "gsap": "3.11.1",
     "hoist-non-react-statics": "3.3.2",
     "intro.js": "5.1.0",
     "intro.js-react": "0.6.0",
@@ -64,7 +64,7 @@
     "@faker-js/faker": "7.3.0",
     "@runroom/design-tokens": "2.0.2",
     "@svgr/webpack": "6.2.1",
-    "@testing-library/cypress": "8.0.2",
+    "@testing-library/cypress": "8.0.3",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
     "@types/cypress-cucumber-preprocessor": "4.0.1",

@@ -15,7 +15,9 @@
                 "hasIntroduction": false,
                 "startDateTimeTz": "1514123412414",
                 "endDateTimeTz": "15142131234124",
-                "durationFormatted": "02:00"
+                "durationFormatted": "02:00",
+                "isPrivate": true,
+                "plainPassword": null
             }
         }
     }

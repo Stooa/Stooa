@@ -73,6 +73,10 @@
         "description": "Are you sure you want to terminate this fishbowl?",
         "button": "Confirm"
     },
+    "confirmLeaving": {
+        "title": "Are you leaving?",
+        "description": "If you're done, remember to finish the fishbowl for everyone."
+    },
     "participants": {
         "title": "People in the room",
         "attendees": "Listeners",
