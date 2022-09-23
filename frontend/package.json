@@ -22,7 +22,7 @@
     "stepDefinitions": "tests/e2e/features"
   },
   "engines": {
-    "node": ">=17"
+    "node": ">=18"
   },
   "dependencies": {
     "@apollo/client": "3.6.9",

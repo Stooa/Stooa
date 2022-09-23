@@ -22,6 +22,8 @@ Feature: Edit fishbowl
         And modifies the fishbowl "timezone" selecting "Antarctica/Vostok"
         And modifies the fishbowl "language" selecting "ca"
         And modifies the fishbowl "hasIntroduction" to true
+        And modifies the fishbowl "isPrivate" to true
+        And writes "password" in input "plainPassword"
         And saves the changes
         Then sees the success message
         And sees the fishbowl list updated

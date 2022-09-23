@@ -41,7 +41,8 @@ beforeEach(() => {
     data: currentFishbowl,
     toggleOnBoarding: jest.fn(),
     timeStatus: ITimeStatus.DEFAULT,
-    conferenceStatus: IConferenceStatus.NOT_STARTED
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
+    getPassword: jest.fn()
   });
 });
 

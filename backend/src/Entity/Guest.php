@@ -55,10 +55,8 @@ class Guest implements \Stringable
 
     /**
      * @Groups({"guest:create", "guest:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $name = null;

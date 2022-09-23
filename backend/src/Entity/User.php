@@ -92,12 +92,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         }
  *     }
  * )
- *
  * @UniqueEntity(
  *     fields={"email"},
  *     message="user.email"
  * )
- *
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
@@ -114,31 +112,25 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     /**
      * @Groups({"user:read", "user:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $name = null;
 
     /**
      * @Groups({"user:read", "user:write"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $surnames = null;
 
     /**
      * @Groups({"user:self", "user:create", "user:read"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
      * @Assert\Email
-     *
      * @ORM\Column(type="string", unique=true)
      */
     private ?string $email = null;
@@ -155,16 +147,13 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     /**
      * @Groups({"user:create"})
-     *
      * @Assert\IsTrue
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $privacyPolicy = false;
 
     /**
      * @Groups({"user:self", "user:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $allowShareData = false;
@@ -174,31 +163,25 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     /**
      * @Groups({"user:self", "user:write"})
-     *
      * @Assert\Url
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $linkedinProfile = null;
 
     /**
      * @Groups({"user:self", "user:write"})
-     *
      * @Assert\Url
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $twitterProfile = null;
 
     /**
      * @Groups({"user:self", "user:create", "user:read"})
-     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @Assert\Locale(canonicalize=true)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $locale = null;
@@ -212,7 +195,6 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     /**
      * @Groups({"user:write"})
-     *
      * @Assert\NotBlank(groups={"user:create"})
      */
     private ?string $plainPassword = null;

@@ -78,6 +78,10 @@
         "attendees": "Oients",
         "speaking": "Parlant ara"
     },
+    "confirmLeaving": {
+        "title": "Ja te'n vas?",
+        "description": "Si heu acabat, recorda finalitzar el fishbowl per a tots."
+    },
     "share": "Que corri la veu!",
     "shareModal": {
         "title": "Convida a més persones!",

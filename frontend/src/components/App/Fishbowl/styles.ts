@@ -47,4 +47,14 @@ const Notifications = styled.div`
   z-index: 10;
 `;
 
-export { Notifications, StatusBox, IntroductionBanner };
+const HackLeaveHover = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+  z-index: 100;
+`;
+
+export { Notifications, StatusBox, IntroductionBanner, HackLeaveHover };

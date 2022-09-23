@@ -8,7 +8,7 @@
  */
 
 import { faker } from '@faker-js/faker';
-import { Fishbowl } from '@/types/graphql/fishbowl';
+import { Fishbowl } from '@/types/api-platform';
 
 const today = new Date();
 const tomorrow = new Date(today);
@@ -17,7 +17,6 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 export const makeCurrentFishbowl = (): Fishbowl => {
   return {
     id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-    type: 'Fishbowl',
     name: faker.lorem.words(3),
     description: faker.lorem.words(10),
     slug: 'test-fishbowl',
@@ -29,6 +28,9 @@ export const makeCurrentFishbowl = (): Fishbowl => {
     hasIntroduction: false,
     startDateTimeTz: today.toString(),
     endDateTimeTz: tomorrow.toString(),
-    durationFormatted: '02:00'
+    durationFormatted: '02:00',
+    isPrivate: true,
+    plainPassword: undefined,
+    startDateTime: today
   };
 };

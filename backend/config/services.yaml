@@ -61,8 +61,16 @@ services:
             $appId: '%env(JAAS_APP_ID)%'
             $apiKey: '%env(JAAS_API_KEY)%'
 
+    App\Encryption\HalitePasswordEncryption:
+        bind:
+            $key: '%env(HALITE_KEY)%'
+
     App\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
+
+    App\DataProvider\FishbowlDataProvider:
+        bind:
+            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
 
     # Admin
     App\Admin\UserAdmin:

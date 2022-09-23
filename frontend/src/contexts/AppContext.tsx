@@ -17,6 +17,7 @@ const FISHBOWL_STATUS = 'FISHBOWL_STATUS';
 const FISHBOWL_ENDED = 'FISHBOWL_ENDED';
 const JOIN_GUEST = 'JOIN_GUEST';
 const JOIN_USER = 'JOIN_USER';
+const PREJOIN_RESET = 'PREJOIN_RESET';
 
 interface State {
   fishbowlReady: boolean;
@@ -45,6 +46,11 @@ type fishbowlStatusAction = {
   conferenceStatus: IConferenceStatus;
 };
 
+type prejoinResetAction = {
+  type: typeof PREJOIN_RESET;
+  prejoin: boolean;
+};
+
 type fishbowlEndedAction = {
   type: typeof FISHBOWL_ENDED;
   conferenceStatus: IConferenceStatus;
@@ -68,7 +74,8 @@ type Actions =
   | fishbowlStatusAction
   | fishbowlEndedAction
   | joinGuestAction
-  | joinUserAction;
+  | joinUserAction
+  | prejoinResetAction;
 
 type AppContextReducer = Reducer<State, Actions>;
 

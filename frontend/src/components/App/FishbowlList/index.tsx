@@ -62,16 +62,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
     setSelectedFishbowl(fishbowl);
   };
 
-  useEffect(() => {
-    if (fishbowls) {
-      fishbowls.forEach(fishbowl => {
-        if (fishbowl.slug === selectedFishbowlParam) {
-          setSelectedFishbowl(fishbowl);
-        }
-      });
-    }
-  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const params = new URLSearchParams([
     ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
   ]);
@@ -96,6 +86,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
+    setSelectedFishbowl(updatedFishbowl);
     setFishbowls(currentFishbowls => {
       if (currentFishbowls) {
         return currentFishbowls.map(fishbowl => {
@@ -112,6 +103,16 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   useEffect(() => {
     getFishbowls();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (fishbowls) {
+      fishbowls.forEach(fishbowl => {
+        if (fishbowl.slug === selectedFishbowlParam) {
+          setSelectedFishbowl(fishbowl);
+        }
+      });
+    }
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!fishbowls) {
     return <LoadingIcon />;
@@ -210,10 +211,10 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
           ) : (
             <>
               <FishbowlScrollList data-testid="fishbowl-list-wrapper">
-                {fishbowls.map((fishbowl, index) => (
+                {fishbowls.map(fishbowl => (
                   <FishbowlCard
                     onClick={fishbowl => handleClick(fishbowl)}
-                    key={index}
+                    key={fishbowl.id}
                     fishbowl={fishbowl}
                     selected={fishbowl.id === selectedFishbowl?.id}
                   />
