@@ -23,7 +23,7 @@ class PrivateFishbowl extends Constraint
     public string $message = 'fishbowl.private.private';
     public string $publicMessage = 'fishbowl.private.public';
 
-    public function getTargets()
+    public function getTargets(): array|string
     {
         return self::CLASS_CONSTRAINT;
     }
