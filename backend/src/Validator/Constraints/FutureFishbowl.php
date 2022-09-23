@@ -22,7 +22,7 @@ class FutureFishbowl extends Constraint
 {
     public string $message = 'fishbowl.future';
 
-    public function getTargets()
+    public function getTargets(): array|string
     {
         return self::CLASS_CONSTRAINT;
     }
