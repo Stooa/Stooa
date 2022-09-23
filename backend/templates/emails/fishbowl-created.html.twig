@@ -28,13 +28,20 @@ file that was distributed with this source code.
     {{ macros.text(urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.fishbowlLink.styles }),
         emailConfig, '', 'fishbowlLink'
     ) }}
-    {{ macros.spaceRow(20) }}
-    {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
 
-    {% include '/emails/components/email-socials.html.twig' with {
-        twitterHref: 'https://twitter.com/intent/tweet?text=' ~ fishbowlName ~ '&url=' ~ fishbowlLink,
-        linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ fishbowlLink ~ '&title=' ~ fishbowlName ~ '&mini=true'
-    } %}
+    {% if fishbowlIsPrivate %}
+        {{ macros.text('emails.fishbowl_created_email.password'|trans({'%password%': fishbowlPassword}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+    {% endif %}
+
+    {{ macros.spaceRow(20) }}
+    {% if not fishbowlIsPrivate %}
+        {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+
+        {% include '/emails/components/email-socials.html.twig' with {
+            twitterHref: 'https://twitter.com/intent/tweet?text=' ~ fishbowlName ~ '&url=' ~ fishbowlLink,
+            linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ fishbowlLink ~ '&title=' ~ fishbowlName ~ '&mini=true'
+        } %}
+    {% endif %}
 
     {{ macros.spaceRow(20) }}
     <tr>

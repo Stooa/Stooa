@@ -7,8 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { useReducer, Dispatch, Reducer } from 'react';
 import { IConferenceStatus } from '@/jitsi/Status';
+import createGenericContext from '@/contexts/createGenericContext';
+
+const FISHBOWL_STARTED = 'FISHBOWL_STARTED';
+const FISHBOWL_READY = 'FISHBOWL_READY';
+const FISHBOWL_STATUS = 'FISHBOWL_STATUS';
+const FISHBOWL_ENDED = 'FISHBOWL_ENDED';
+const JOIN_GUEST = 'JOIN_GUEST';
+const JOIN_USER = 'JOIN_USER';
+const PREJOIN_RESET = 'PREJOIN_RESET';
 
 interface State {
   fishbowlReady: boolean;
@@ -18,25 +27,66 @@ interface State {
   conferenceStatus: IConferenceStatus;
 }
 
-const reducer = (state, action) => {
-  const allowedActions = [
-    'FISHBOWL_STARTED',
-    'FISHBOWL_READY',
-    'FISHBOWL_STATUS',
-    'FISHBOWL_ENDED',
-    'JOIN_GUEST',
-    'JOIN_USER'
-  ];
+type fishbowlStartedAction = {
+  type: typeof FISHBOWL_STARTED;
+  fishbowlStarted: boolean;
+};
+
+type fishbowlReadyAction = {
+  type: typeof FISHBOWL_READY;
+  fishbowlReady: boolean;
+};
+
+type fishbowlStatusAction = {
+  type: typeof FISHBOWL_STATUS;
+  fishbowlReady?: boolean;
+  fishbowlStarted?: boolean;
+  isGuest?: boolean;
+  prejoin?: boolean;
+  conferenceStatus: IConferenceStatus;
+};
+
+type prejoinResetAction = {
+  type: typeof PREJOIN_RESET;
+  prejoin: boolean;
+};
+
+type fishbowlEndedAction = {
+  type: typeof FISHBOWL_ENDED;
+  conferenceStatus: IConferenceStatus;
+};
+
+type joinGuestAction = {
+  type: typeof JOIN_GUEST;
+  isGuest: boolean;
+  prejoin: boolean;
+};
+
+type joinUserAction = {
+  type: typeof JOIN_USER;
+  prejoin?: boolean;
+  isGuest?: boolean;
+};
+
+type Actions =
+  | fishbowlStartedAction
+  | fishbowlReadyAction
+  | fishbowlStatusAction
+  | fishbowlEndedAction
+  | joinGuestAction
+  | joinUserAction
+  | prejoinResetAction;
+
+type AppContextReducer = Reducer<State, Actions>;
+
+const reducer: AppContextReducer = (state, action) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { type, ...actionData } = action;
 
-  if (allowedActions.includes(type)) {
-    return {
-      ...state,
-      ...actionData
-    };
-  }
-
-  return state;
+  return {
+    ...state,
+    ...actionData
+  };
 };
 
 const initialState: State = {
@@ -47,14 +97,12 @@ const initialState: State = {
   conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
-const StateContext = createContext(undefined);
+const [useStateValue, StateContextProvider] = createGenericContext<[State, Dispatch<Actions>]>();
 
 const StateProvider = ({ updateState = {}, children }) => (
-  <StateContext.Provider value={useReducer(reducer, { ...initialState, ...updateState })}>
+  <StateContextProvider value={useReducer(reducer, { ...initialState, ...updateState })}>
     {children}
-  </StateContext.Provider>
+  </StateContextProvider>
 );
 
-const useStateValue = () => useContext(StateContext);
-
-export { initialState, StateContext, StateProvider, useStateValue };
+export { initialState, StateProvider, useStateValue };

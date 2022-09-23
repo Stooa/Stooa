@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import {
   LinkStyledButton,
@@ -27,6 +27,7 @@ interface Props extends React.ComponentProps<'button'> {
   as?: 'button' | 'a';
   full?: boolean;
 }
+
 /**
  * Main button component
  * @param as button or a
@@ -34,29 +35,30 @@ interface Props extends React.ComponentProps<'button'> {
  * @param size small, medium or large
  * @returns
  */
-const Button: React.FC<Props> = React.forwardRef(
-  ({ variant = 'primary', size = 'medium', children, as = 'button', full, ...props }, ref) => {
-    const styles = SIZES[size];
+const Button: React.ForwardRefRenderFunction<Record<string, never>, Props> = (
+  { variant = 'primary', size = 'medium', children, as = 'button', full, ...props },
+  ref
+) => {
+  const styles = SIZES[size];
 
-    let Component;
-    if (variant === 'primary') {
-      Component = PrimaryButton;
-    } else if (variant === 'secondary') {
-      Component = SecondaryButton;
-    } else if (variant === 'text') {
-      Component = TextButton;
-    } else if (variant === 'link') {
-      Component = LinkStyledButton;
-    } else if (variant === 'subtleLink') {
-      Component = SubtleLinkStyledButton;
-    }
-
-    return (
-      <Component ref={ref} as={as} style={styles} full={full} {...props}>
-        {children}
-      </Component>
-    );
+  let Component;
+  if (variant === 'primary') {
+    Component = PrimaryButton;
+  } else if (variant === 'secondary') {
+    Component = SecondaryButton;
+  } else if (variant === 'text') {
+    Component = TextButton;
+  } else if (variant === 'link') {
+    Component = LinkStyledButton;
+  } else if (variant === 'subtleLink') {
+    Component = SubtleLinkStyledButton;
   }
-);
 
-export default Button;
+  return (
+    <Component ref={ref} as={as} style={styles} full={full} {...props}>
+      {children}
+    </Component>
+  );
+};
+
+export default forwardRef(Button);

@@ -27,7 +27,7 @@ export interface UserRepository {
   getUserAudioMuted: () => boolean;
   getUserAudioOutput: () => MediaDeviceInfo | null;
   getUserGuestId: () => string | null;
-  getUserNickname: () => string | null;
+  getUserNickname: () => string;
   getUserVideoInput: () => MediaDeviceInfo | null;
   getUserVideoMuted: () => boolean;
   handleUserJoin: (id: string, user: User) => void;

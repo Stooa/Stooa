@@ -75,94 +75,101 @@ const ThankYou = () => {
           } - ${endDate.time} ${endDate.timezone}`}
         </div>
       </Time>
-      <h1 className="body-lg medium">{fb.name}</h1>
-      {fb.description && <Description className="body-sm">{fb.description}</Description>}
+      {(!fb.isPrivate || fb.plainPassword) && (
+        <>
+          <h1 className="body-lg medium">{fb.name}</h1>
+          {fb.description && <Description className="body-sm">{fb.description}</Description>}
+        </>
+      )}
       <ThankYouStyled>
-        <div className="share body-md medium">
-          <p>{t('share')}</p>
-          <ul>
-            <li>
-              <Link
-                href={`whatsapp://send?text=${shareTitle} ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref
-              >
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Whastapp',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
+        {(!fb.isPrivate || fb.plainPassword) && (
+          <div className="share body-md medium">
+            <p>{t('share')}</p>
+            <ul>
+              <li>
+                <Link
+                  href={`whatsapp://send?text=${shareTitle} ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                  passHref
                 >
-                  <Whatsapp />
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
-                passHref
-              >
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Linkedin',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Whastapp',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Whatsapp />
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
+                  passHref
                 >
-                  <Linkedin />
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref
-              >
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Twitter',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Linkedin',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Linkedin />
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                  passHref
                 >
-                  <Twitter />
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                passHref
-              >
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Mail',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Twitter',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Twitter />
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                  passHref
                 >
-                  <Mail />
-                </a>
-              </Link>
-            </li>
-          </ul>
-        </div>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Mail',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Mail />
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+
         <div className="action-wrapper">
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button

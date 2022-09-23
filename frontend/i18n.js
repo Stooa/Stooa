@@ -27,7 +27,7 @@ module.exports = {
     '/user-not-participating': ['user-not-participating'],
     '/user-conduct-violation': ['user-conduct-violation'],
     '/register': ['form', 'register'],
-    '/fb/[fid]': ['fishbowl', 'app', 'form', 'on-boarding'],
+    '/fb/[fid]': ['fishbowl', 'app', 'form', 'on-boarding', 'on-boarding-tour'],
     '/fishbowl/create': ['fishbowl', 'form'],
     '/fishbowl/list': ['fishbowl-list', 'fishbowl', 'form'],
     '/fishbowl/host-now': ['fishbowl'],

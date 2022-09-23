@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
 import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
@@ -21,7 +21,17 @@ type Props = {
 
 const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [arrowPosition, setArrowPosition] = useState<string>();
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
+  const tipToHover = useRef<HTMLDivElement>(null);
+
+  const handleOnMouseEnter: React.MouseEventHandler = () => {
+    if (tipToHover.current) {
+      const left = tipToHover.current.offsetLeft;
+      setArrowPosition(left + 'px');
+      setShowTooltip(true);
+    }
+  };
 
   return (
     <SwitchStyled>
@@ -35,19 +45,30 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
       <SwitchLabel htmlFor={props.id || props.name}>
         <span className={`switch-button`} />
       </SwitchLabel>
-      {label && (
-        <label htmlFor={props.id || props.name}>
-          <span className="label-text">{label}</span>
-        </label>
-      )}
-      <div
-        className="icon-wrapper"
-        onClick={() => setShowTooltip(showTooltip => !showTooltip)}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-      >
-        {showTooltip && <StyledIntroductionTooltip>{tooltipText}</StyledIntroductionTooltip>}
-        <Info />
+      <div className="label-wrapper">
+        {label && (
+          <label htmlFor={props.id || props.name}>
+            <span className="label-text">{label}</span>
+          </label>
+        )}
+        <div
+          className="icon-wrapper"
+          onClick={() => setShowTooltip(showTooltip => !showTooltip)}
+          onMouseEnter={handleOnMouseEnter}
+          onMouseLeave={() => setShowTooltip(false)}
+          ref={tipToHover}
+        >
+          {showTooltip && (
+            <StyledIntroductionTooltip>
+              <div
+                className="arrow"
+                style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
+              ></div>
+              {tooltipText}
+            </StyledIntroductionTooltip>
+          )}
+          <Info />
+        </div>
       </div>
       {meta.touched && meta.error ? <ValidationError>{meta.error}</ValidationError> : null}
     </SwitchStyled>

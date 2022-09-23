@@ -6,7 +6,7 @@
     "cam": "Caméra",
     "timeLeft_one": "Il reste {{time}}",
     "prejoin": {
-        "title": "Join the room",
+        "title": "Rejoindre la salle",
         "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
         "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
     },
@@ -17,11 +17,15 @@
         "button": "Confirmer",
         "description": "Voulez-vous vraiment terminer ce fishbowl ?"
     },
+    "confirmLeaving": {
+        "title": "Tu t'en vas déjà?",
+        "description": "Si vous avez terminé, n'oubliez pas de terminer le bocal à poissons pour tout le monde."
+    },
     "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
     "introduceModal": {
         "title": "Faites une introduction",
-        "description": "Vous pouvez dire quelques mots d'introduction, la caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, n'oubliez pas d'autoriser les participants à se joindre à la conversation.",
-        "button": "Démarrer"
+        "description": "Votre caméra sera activée et vous pourrez dire quelques mots aux participants avant d'ouvrir le bocal. Ensuite, vous pouvez autoriser les utilisateurs à participer à la conversation.",
+        "button": "Commencer votre présentation"
     },
     "participants": {
         "attendees": "Auditeurs",
@@ -38,9 +42,9 @@
     "videoUnmute": "Démarrer la vidéo",
     "preSubtitle": "Vérifiez les détails de votre nouveau fishbowl :",
     "detail": {
-        "shareTitle": "Et maintenant ?<br/>Partagez le <i>fishbowl</i> !",
-        "shareSubtitle": "Laissez couler la conversation ! Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.",
-        "shareInSocials": "Ou partagez sur:",
+        "shareTitle": "Bien fait! Et maintenant quoi? Partagez le fishbowl avec vos amis !",
+        "shareSubtitle": "Laissez couler la conversation ! Copiez et partagez le lien vers cet <i>fishbowl</i> avec les personnes que vous souhaitez joindre à la conversation.",
+        "shareInSocials": "Ou partagez-le sur:",
         "fishbowlCreatedSuccessfully": "<i>Fishbowl</i> créée avec succès !",
         "cardMiniTitle": "Détails du <i>fishbowl</i>",
         "editFishbowlDetails": "Modifier les détails du <i>fishbowl</i>",
@@ -95,7 +99,7 @@
     "permissionsModalTitle": "Permissions needed",
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Grant permissions",
-    "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
+    "permissionsModalErrorToast": "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
     "reaction": {
         "agree": "D'accord",
         "disagree": "Pas d'accord",
@@ -104,5 +108,9 @@
         "laugh": "LOL",
         "wave": "Salut",
         "insightful": "Intéressant"
+    },
+    "prefishbowl": {
+        "onBoardingHelp": "Don't know how a fishbowl works? Click here",
+        "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
     }
 }

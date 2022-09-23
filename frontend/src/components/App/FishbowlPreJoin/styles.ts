@@ -22,7 +22,7 @@ const Container = styled.div`
 
   ${media.min('tablet')`
     flex-direction: row;
-    max-height: ${rems(480)};
+    max-height: ${rems(500)};
   `}
 `;
 
@@ -78,7 +78,7 @@ const VideoContainer = styled.div`
   height: 35vh;
   overflow: hidden;
   width: 100%;
-  min-height: 420px;
+  min-height: 320px;
 
   .video {
     width: 100%;

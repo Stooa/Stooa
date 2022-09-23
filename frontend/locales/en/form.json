@@ -16,15 +16,20 @@
         "language": "Language",
         "selectLanguageLabel": "Select language",
         "hours": "h",
-        "minutes": "m",
+        "minutes": "min",
+        "minutesShort": "m",
         "duration": "Duration",
         "selectDuration": "Duration",
         "description": "Description (optional)",
         "timezone": "Time Zone",
         "selectTimeZone": "Time Zone",
         "advancedOptions": "Advanced Options",
-        "introductionLabel": "I want to start the fishbowl giving an introduction.",
-        "introductionTooltip": "When you start the fishbowl, <span>you can start by making an introduction.</span> The camera and microphone will be active just for you. When you're done, <span>don't forget to allow attendees to join the conversation.</span>"
+        "introductionLabel": "I want to start the fishbowl giving an introduction",
+        "introductionTooltip": "When you start the fishbowl, <span>you can start by making an introduction.</span> The camera and microphone will be active just for you. When you're done, <span>don't forget to allow attendees to join the conversation.</span>",
+        "isPrivate": "I want this event to be private",
+        "passwordTooltip": "Participants will be required to enter the password in order to access the event",
+        "passwordPlaceholder": "Insert your password",
+        "passwordInputLabel": "Password"
     },
     "button": {
         "login": "Log in",
@@ -43,11 +48,15 @@
         "email": "Invalid email addresss",
         "date": "Format of the date is invalid: dd/mm/yyyy",
         "passwordLength": "The password must have 6 characters or more",
+        "fishbowlPasswordLength": "The password must have 8 characters or more",
         "terms": "You must accept the terms and conditions",
         "url": "This is not a valid url",
         "twitter": "The twitter username should start with @",
         "equalPassword": "The two passwords must be equal",
         "successMessage": "Changes saved",
-        "notEmpty": "This field cannot be empty"
+        "notEmpty": "This field cannot be empty",
+        "wrongPassword": "Incorrect password",
+        "unknownErrorServer": "Unknown problem. Please refresh the page and try again.",
+        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again."
     }
 }

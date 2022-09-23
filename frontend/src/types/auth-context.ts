@@ -10,9 +10,9 @@
 import { User } from '@/types/user';
 
 export interface Auth {
-  user: User;
+  user: User | null;
   isAuthenticated: boolean;
-  loginStatus: StatusPayload | Record<string, unknown>;
+  loginStatus: StatusPayload | null;
   loading: boolean;
   createFishbowl: boolean;
   login: (

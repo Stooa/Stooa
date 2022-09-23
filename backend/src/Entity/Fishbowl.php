@@ -25,6 +25,7 @@ use App\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Resolver\FishbowlResolver;
 use App\Resolver\FishbowlRunMutationResolver;
 use App\Validator\Constraints\FutureFishbowl;
+use App\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,6 +41,7 @@ use Webmozart\Assert\Assert as MAssert;
 /**
  * @ApiFilter(DateFilter::class, properties={"finishDateTime"= DateFilter::EXCLUDE_NULL}),
  * @ApiResource(
+ *     attributes={"pagination_enabled"=false},
  *     normalizationContext={"groups"={"fishbowl:read"}},
  *     denormalizationContext={"groups"={"fishbowl:write"}},
  *     collectionOperations={
@@ -97,10 +99,9 @@ use Webmozart\Assert\Assert as MAssert;
  *         },
  *     }
  * )
- *
  * @UniqueEntity(fields={"slug"})
  * @FutureFishbowl(groups={"fishbowl:create", "fishbowl:update"})
- *
+ * @PrivateFishbowl(groups={"fishbowl:create", "fishbowl:update"})
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
 class Fishbowl implements \Stringable
@@ -131,7 +132,6 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -141,119 +141,97 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $name = null;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="text", nullable=true)
      */
     private ?string $description = null;
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @Assert\NotBlank
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(type="string", unique=true)
      */
     private ?string $slug = null;
 
     /**
      * @Groups({"fishbowl:write", "fishbowl:read"})
-     *
      * @Assert\NotNull
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime")
      */
     private ?\DateTimeInterface $startDateTime = null;
 
     /**
      * @Groups({"fishbowl:write", "fishbowl:read"})
-     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @Assert\Timezone
-     *
      * @ORM\Column(type="string")
      */
     private ?string $timezone = null;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @Assert\NotNull
      * @Assert\Length(max=255)
      * @Assert\Locale(canonicalize=true)
-     *
      * @ORM\Column(type="string")
      */
     private ?string $locale = null;
 
     /**
      * @Groups({"fishbowl:write", "fishbowl:read"})
-     *
      * @Assert\NotNull
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ApiProperty(attributes={
      *     "openapi_context"={"format"="string"}
      * })
-     *
      * @ORM\Column(type="time")
      */
     private ?\DateTimeInterface $duration = null;
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @Assert\NotNull
-     *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="fishbowls")
      */
     private ?User $host = null;
 
     /**
      * @Groups({"fishbowl:read"})
-     *
      * @Assert\Length(max=255)
      * @Assert\Choice({self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED})
-     *
      * @ORM\Column(type="string", options={"default": self::STATUS_NOT_STARTED})
      */
     private string $currentStatus = self::STATUS_NOT_STARTED;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $introducedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $runnedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $finishedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $finishDateTime = null;
@@ -267,17 +245,31 @@ class Fishbowl implements \Stringable
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $isFishbowlNow = false;
 
     /**
      * @Groups({"fishbowl:read", "fishbowl:write"})
-     *
      * @ORM\Column(type="boolean")
      */
     private bool $hasIntroduction = false;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isPrivate = false;
+
+    /** @ORM\Column(type="text", nullable=true) */
+    private ?string $password = null;
+
+    /**
+     * @Groups({"fishbowl:read", "fishbowl:write"})
+     * @Assert\Length(min=8, max=255)
+     * @Assert\NotBlank(groups={"user:create"})
+     */
+    private ?string $plainPassword = null;
 
     public function __construct()
     {
@@ -625,10 +617,52 @@ class Fishbowl implements \Stringable
 
         MAssert::isInstanceOf($host, User::class);
 
-        if (null === $host->getName()) {
-            return '';
-        }
+        return $host->getName() ?? '';
+    }
 
-        return $host->getName();
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getIsPrivate(): bool
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate(bool $isPrivate): self
+    {
+        $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function privateFishbowlHasPassword(): bool
+    {
+        return true === $this->getIsPrivate() && (null === $this->getPlainPassword() || '' === $this->getPlainPassword());
+    }
+
+    public function publicFishbowlHasPassword(): bool
+    {
+        return false === $this->getIsPrivate() && null !== $this->getPlainPassword();
     }
 }

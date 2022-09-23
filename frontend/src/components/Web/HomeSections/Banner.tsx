@@ -21,14 +21,18 @@ const Banner: React.FC = () => {
   const { t } = useTranslation('home');
 
   useEffect(() => {
-    lottie.loadAnimation({
-      container: document.getElementById('animated-banner-morph'),
-      animationData: AnimPath,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      assetsPath: `img/animations/banner-morph/`
-    });
+    const element = document.getElementById('animated-banner-morph');
+
+    if (element) {
+      lottie.loadAnimation({
+        container: element,
+        animationData: AnimPath,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        assetsPath: `img/animations/banner-morph/`
+      });
+    }
   }, []);
 
   return (

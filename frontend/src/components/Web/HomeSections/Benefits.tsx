@@ -25,15 +25,18 @@ const Benefits = ({ item }: Props): JSX.Element => {
 
   useEffect(() => {
     const AnimPath = importAnimatiom(item.path);
+    const element = document.getElementById(item.id);
 
-    lottie.loadAnimation({
-      container: document.getElementById(item.id),
-      animationData: AnimPath,
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      assetsPath: `img/animations/${item.path}/`
-    });
+    if (element) {
+      lottie.loadAnimation({
+        container: element,
+        animationData: AnimPath,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        assetsPath: `img/animations/${item.path}/`
+      });
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

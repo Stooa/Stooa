@@ -8,6 +8,13 @@
  */
 
 import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {
+  makeGQLCurrentFishbowl,
+  makeGQLCurrentNotOwnedFishbowl,
+  makeGQLCurrentPrivateFishbowl,
+  makeGQLTomorrowFishbowl
+} from '../../factories/fishbowl';
+import { hasOperationName } from '../../utils/graphql-test-utils';
 
 const twoHoursInMs = 1000 * 60 * 60 * 2;
 const twentyMinutesInMs = 1000 * 60 * 20;
@@ -26,7 +33,9 @@ export const modifiedValues = {
   timezone: '',
   locale: '',
   language: '',
-  hasIntroduction: false
+  hasIntroduction: false,
+  isPrivate: false,
+  plainPassword: ''
 };
 
 Given('a profile information', () => {
@@ -37,6 +46,32 @@ Given('a profile information', () => {
 
 Given('a logged user', () => {
   cy.login();
+});
+
+Given('has host role', () => {
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
+      req.reply({
+        data: {
+          isCreatorOfFishbowl: {
+            currentStatus: 'test-me-fishbowl'
+          }
+        }
+      });
+    }
+  }).as('gqlIsCreatorOfFishbowl');
+});
+
+Given("doesn't have host role", () => {
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
+      req.reply({
+        data: {
+          isCreatorOfFishbowl: null
+        }
+      });
+    }
+  }).as('gqlIsCreatorOfFishbowl');
 });
 
 Given('a non logged user', () => {
@@ -59,7 +94,7 @@ When('clicks on {string}', (text = '') => {
   cy.contains(text).click();
 });
 
-When('clicks to close modal', (text = '') => {
+When('clicks to close modal', () => {
   cy.get('button[class="close"]').click({ force: true });
 });
 
@@ -167,13 +202,116 @@ Given('a mobile device', () => {
   cy.viewport('iphone-6');
 });
 
-When('starts fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'NOT_STARTED'
+let startedFishbowl = false;
+let finishedFishbowl = false;
+
+Given('a fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
+  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
     }
-  });
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+Given('a future fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
+  const bySlugQueryFishbowl = makeGQLTomorrowFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+Given('a not owned fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
+  const bySlugQueryFishbowl = makeGQLCurrentNotOwnedFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+Given('a private fishbowl', () => {
+  startedFishbowl = false;
+  finishedFishbowl = false;
+
+  const bySlugQueryPrivateFishbowl = makeGQLCurrentPrivateFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryPrivateFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl: bySlugQueryPrivateFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
+When('starts fishbowl', () => {
+  cy.contains('Start the fishbowl').click();
+  startedFishbowl = true;
+
+  cy.wait('@getFishbowlStatus');
+
+  cy.get('[data-testid=finish-fishbowl]', { timeout: 10000 }).should('exist');
+
+  cy.screenshot();
+});
+
+When('navigates to fishbowl', () => {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
+    if (!startedFishbowl && !finishedFishbowl) {
+      req.reply({
+        status: 'NOT_STARTED'
+      });
+    } else if (startedFishbowl && !finishedFishbowl) {
+      req.reply({
+        status: 'RUNNING'
+      });
+    } else if (finishedFishbowl) {
+      req.reply({
+        status: 'FINISHED'
+      });
+    }
+  }).as('getFishbowlStatus');
 
   cy.intercept('GET', 'https://localhost:8443/en/ping/test-fishbowl', {
     statusCode: 200,
@@ -189,18 +327,43 @@ When('starts fishbowl', () => {
     }
   });
 
-  cy.contains('Start the fishbowl').click();
+  cy.visit('/fb/test-fishbowl', { timeout: 10000 });
+});
 
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', {
-    statusCode: 200,
-    body: {
-      status: 'RUNNING'
-    }
-  });
-
-  cy.wait(1000);
-
-  cy.get('[data-testid=finish-fishbowl]').should('exist');
+When('can access to pre join', () => {
+  cy.get('[data-testid=pre-join-title]').should('exist');
+  cy.get('[data-testid=pre-join-cancel]').should('exist');
 
   cy.screenshot();
+});
+
+When('sees the prefishbowl page', () => {
+  const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+
+  cy.wait('@gqlFishbowlBySlugQuery');
+
+  cy.get('[data-testid=prefishbowl-counter]').should('exist');
+  cy.get('[data-testid=prefishbowl-datacard]').should('exist');
+  cy.get('[data-testid=prefishbowl-participants]').should('exist');
+
+  cy.screenshot();
+});
+
+Then('finishes a fishbowl', () => {
+  cy.contains('End fishbowl').click();
+  finishedFishbowl = true;
+
+  cy.wait('@getFishbowlStatus');
+
+  cy.get('[data-testid=finished-fishbowl]', { timeout: 10000 }).should('exist');
 });

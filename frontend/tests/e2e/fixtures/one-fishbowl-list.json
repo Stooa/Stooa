@@ -14,6 +14,8 @@
         "hasIntroduction": false,
         "startDateTimeTz": "2030-02-11T10:48:22+01:00",
         "endDateTimeTz": "2030-02-11T12:48:22+01:00",
-        "durationFormatted": "02:00"
+        "durationFormatted": "02:00",
+        "isPrivate": false,
+        "plainPassword": null
     }
 ]

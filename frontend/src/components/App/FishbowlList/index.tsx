@@ -52,8 +52,8 @@ interface Props {
 }
 
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
-  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>(null);
-  const [fishbowls, setFishbowls] = useState<Fishbowl[]>(null);
+  const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
+  const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
@@ -61,16 +61,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
   };
-
-  useEffect(() => {
-    if (fishbowls) {
-      fishbowls.forEach(fishbowl => {
-        if (fishbowl.slug === selectedFishbowlParam) {
-          setSelectedFishbowl(fishbowl);
-        }
-      });
-    }
-  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const params = new URLSearchParams([
     ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
@@ -96,20 +86,33 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   const handleUpdateFishbowl = updatedFishbowl => {
+    setSelectedFishbowl(updatedFishbowl);
     setFishbowls(currentFishbowls => {
-      return currentFishbowls.map(fishbowl => {
-        if (fishbowl.id !== updatedFishbowl.id) {
-          return fishbowl;
-        } else {
-          return { ...fishbowl, ...updatedFishbowl };
-        }
-      });
+      if (currentFishbowls) {
+        return currentFishbowls.map(fishbowl => {
+          if (fishbowl.id !== updatedFishbowl.id) {
+            return fishbowl;
+          } else {
+            return { ...fishbowl, ...updatedFishbowl };
+          }
+        });
+      }
     });
   };
 
   useEffect(() => {
     getFishbowls();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (fishbowls) {
+      fishbowls.forEach(fishbowl => {
+        if (fishbowl.slug === selectedFishbowlParam) {
+          setSelectedFishbowl(fishbowl);
+        }
+      });
+    }
+  }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!fishbowls) {
     return <LoadingIcon />;
@@ -208,10 +211,10 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
           ) : (
             <>
               <FishbowlScrollList data-testid="fishbowl-list-wrapper">
-                {fishbowls.map((fishbowl, index) => (
+                {fishbowls.map(fishbowl => (
                   <FishbowlCard
                     onClick={fishbowl => handleClick(fishbowl)}
-                    key={index}
+                    key={fishbowl.id}
                     fishbowl={fishbowl}
                     selected={fishbowl.id === selectedFishbowl?.id}
                   />
@@ -230,7 +233,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       <motion.div
                         className="form-wrapper"
                         variants={
-                          windowWidth <= BREAKPOINTS.desktop
+                          windowWidth && windowWidth <= BREAKPOINTS.desktop
                             ? bottomMobileReveal
                             : basicRevealWithDelay
                         }
@@ -241,7 +244,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                         <div className="form-header">
                           <MobileBackButton
                             className="bottom"
-                            onClick={() => setSelectedFishbowl(null)}
+                            onClick={() => setSelectedFishbowl(undefined)}
                           >
                             <BackArrow />
                           </MobileBackButton>
@@ -250,7 +253,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                           </h2>
                         </div>
                         <FishbowlForm
-                          $isFull={windowWidth <= BREAKPOINTS.desktop}
+                          $isFull={windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop}
                           selectedFishbowl={selectedFishbowl}
                           isEditForm={true}
                           onSaveCallback={handleUpdateFishbowl}
@@ -262,7 +265,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       data-testid="started-fishbowl-placeholder"
                       as={motion.div}
                       variants={
-                        windowWidth <= BREAKPOINTS.desktop
+                        windowWidth && windowWidth <= BREAKPOINTS.desktop
                           ? bottomMobileReveal
                           : basicRevealWithDelay
                       }
@@ -295,7 +298,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
                       <Button
                         variant="text"
                         className="back"
-                        onClick={() => setSelectedFishbowl(null)}
+                        onClick={() => setSelectedFishbowl(undefined)}
                       >
                         <span>{t('back')}</span>
                       </Button>
