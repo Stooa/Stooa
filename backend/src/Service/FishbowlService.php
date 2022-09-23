@@ -114,7 +114,7 @@ class FishbowlService
             $this->participantRepository->getParticipants($fishbowl),
             $fishbowl,
             $currentUser
-       );
+        );
     }
 
     public function ping(string $slug): bool

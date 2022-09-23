@@ -9,8 +9,6 @@
         "selectDay": "Pilih hari",
         "time": "Mulai pada",
         "selectTime": "Pilih waktu",
-        "language": "Bahasa",
-        "selectLanguageLabel": "Pilih bahasa",
         "hours": "jam",
         "minutes": "men",
         "minutesShort": "m",
@@ -21,6 +19,10 @@
         "selectDuration": "Durasi",
         "introductionTooltip": "Ketika kamu memulai fishbowl, <strong>kamu bisa memulai dengan mengenalkan dirimu.</strong> Kamera dan mikrofon akan nyala hanya untuk kamu saja. Ketika kamu selesai, <strong>jangan lupa untuk mempersilakan peserta untuk bergabung dengan pembicaraan.</strong>",
         "introductionLabel": "Saya ingin untuk memulai fishbowl memberikan pengenalan.",
+        "isPrivate": "I want this event to be private",
+        "passwordTooltip": "Participants will be required to enter the password in order to access the event",
+        "passwordPlaceholder": "Insert your password",
+        "passwordInputLabel": "Password",
         "title": "Judul",
         "language": "Bahasa",
         "selectLanguageLabel": "Pilih bahasa",
@@ -37,7 +39,8 @@
         "equalPassword": "Dua kata sandi tersebut harus sama",
         "successMessage": "Perubahan disimpan",
         "title": "Judul tidak valid. Masukkan topik pembicaraan",
-        "notEmpty": "This field cannot be empty"
+        "notEmpty": "This field cannot be empty",
+        "wrongPassword": "Password is wrong"
     },
     "button": {
         "login": "Masuk",

@@ -11,6 +11,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import userRepository from '@/jitsi/User';
 
 import {
   ROUTE_FISHBOWL_THANKYOU,
@@ -25,7 +26,16 @@ import {
   unload,
   unloadKickedUser
 } from '@/lib/jitsi';
-import { CONFERENCE_START, NOTIFICATION, USER_KICKED, USER_MUST_LEAVE } from '@/jitsi/Events';
+// import Conference from '@/jitsi/Conference';
+import {
+  CONFERENCE_IS_LOCKABLE,
+  CONFERENCE_PASSWORD_REQUIRED,
+  CONFERENCE_START,
+  CONNECTION_ESTABLISHED_FINISHED,
+  NOTIFICATION,
+  USER_KICKED,
+  USER_MUST_LEAVE
+} from '@/jitsi/Events';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
@@ -40,12 +50,22 @@ import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getOnBoardingCookie } from '@/lib/auth';
 import createGenericContext from '@/contexts/createGenericContext';
+import Conference from '@/jitsi/Conference';
+import { Fishbowl } from '@/types/api-platform';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
 const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
-const StooaProvider = ({ data, isModerator, children }) => {
+const StooaProvider = ({
+  data,
+  isModerator,
+  children
+}: {
+  data: Fishbowl;
+  isModerator: boolean;
+  children: JSX.Element[];
+}) => {
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
@@ -54,9 +74,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
+  const [showConfirmCloseTabModal, setShowConfirmCloseTabModal] = useState(false);
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
   const [showOnBoardingTour, setShowOnBoardingTour] = useState(false);
+  const [fishbowlPassword, setFishbowlPassword] = useState<string>();
 
   const { t, lang } = useTranslation('app');
 
@@ -86,6 +108,14 @@ const StooaProvider = ({ data, isModerator, children }) => {
     }
   };
 
+  const getPassword = (): string => {
+    if (isModerator) {
+      return data.plainPassword as string;
+    } else {
+      return fishbowlPassword ?? '';
+    }
+  };
+
   useEventListener(USER_KICKED, async ({ detail: { reason, participant } }) => {
     if (reason !== REASON_NO_PARTICIPATING && reason !== REASON_CONDUCT_VIOLATION) {
       return;
@@ -104,6 +134,39 @@ const StooaProvider = ({ data, isModerator, children }) => {
     };
 
     router.push(url, url, { locale: lang });
+  });
+
+  useEventListener(CONFERENCE_IS_LOCKABLE, () => {
+    if (data.isPrivate && data.plainPassword && isModerator) {
+      Conference.lockConference(data.plainPassword);
+    }
+  });
+
+  useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
+    if (data.isPrivate) {
+      Conference.joinPrivateConference(isModerator ? data.plainPassword : fishbowlPassword);
+    } else {
+      Conference.joinConference();
+    }
+  });
+
+  useEventListener(CONFERENCE_PASSWORD_REQUIRED, () => {
+    if (data.isPrivate && !fishbowlPassword && !data.plainPassword) {
+      toast(t('form:validation.unknownErrorInside'), {
+        icon: '⚠️',
+        toastId: 'error-inside',
+        type: 'warning',
+        position: 'bottom-center',
+        autoClose: 5000
+      });
+      userRepository.clearUser();
+      setInitConnection(false);
+      setFishbowlPassword(undefined);
+      dispatch({
+        type: 'PREJOIN_RESET',
+        prejoin: true
+      });
+    }
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
@@ -185,7 +248,10 @@ const StooaProvider = ({ data, isModerator, children }) => {
   };
 
   const isConferenceIntroducing = (): boolean => {
-    return data.hasIntroduction && conferenceStatus === IConferenceStatus.INTRODUCTION;
+    if (data.hasIntroduction) {
+      return conferenceStatus === IConferenceStatus.INTRODUCTION;
+    }
+    return false;
   };
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
@@ -294,7 +360,11 @@ const StooaProvider = ({ data, isModerator, children }) => {
         onBoardingTooltipSeen,
         setOnBoardingTooltipSeen,
         showOnBoardingTour,
-        setShowOnBoardingTour
+        setShowOnBoardingTour,
+        showConfirmCloseTabModal,
+        setShowConfirmCloseTabModal,
+        getPassword,
+        setFishbowlPassword
       }}
     >
       {children}

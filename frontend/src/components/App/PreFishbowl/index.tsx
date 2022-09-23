@@ -35,7 +35,8 @@ import { pushEventDataLayer } from '@/lib/analytics';
 const PreFishbowl = () => {
   const router = useRouter();
   const { fid } = router.query;
-  const { data, isModerator, conferenceStatus, timeStatus, toggleOnBoarding } = useStooa();
+  const { data, isModerator, conferenceStatus, timeStatus, toggleOnBoarding, getPassword } =
+    useStooa();
 
   const { t, lang } = useTranslation('fishbowl');
 
@@ -91,9 +92,9 @@ const PreFishbowl = () => {
                 variant="text"
                 fid={fid as string}
                 locale={lang}
-              >
-                {t('common:linkButton')}
-              </ButtonCopyUrl>
+                isPrivate={data.isPrivate}
+                plainPassword={getPassword()}
+              />
             </StyledFishbowlDataCardHeader>
 
             <h2 data-testid="fishbowl-name" className=" medium">

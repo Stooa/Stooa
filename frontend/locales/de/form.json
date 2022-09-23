@@ -7,9 +7,13 @@
         "required": "Dieses Feld wird benötigt",
         "date": "Das Format des Datums ist ungültig: tt.mm.jjjj",
         "passwordLength": "Das Passwort muss mindestens 6 Zeichen lang sein",
+        "fishbowlPasswordLength": "Das Passwort muss mindestens 8 Zeichen lang sein",
         "url": "Dies ist keine gültige URL",
         "equalPassword": "Die beiden Passwörter müssen gleich sein",
-        "notEmpty": "Dieses Feld kann nicht leer sein"
+        "notEmpty": "Dieses Feld kann nicht leer sein",
+        "wrongPassword": "Falsches Passwort",
+        "unknownErrorServer": "Ein unbekannter Fehler ist aufgetreten",
+        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again."
     },
     "fishbowl": {
         "selectLanguageLabel": "Sprache wählen",
