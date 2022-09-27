@@ -74,7 +74,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
       handleDispatchJoin();
     }
   };
-  
+
   userRepository.setUser({ guestId: '', nickname: name });
 
   return (
