@@ -74,8 +74,8 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
       handleDispatchJoin();
     }
   };
-
-  userRepository.setUser({ nickname: name });
+  
+  userRepository.setUser({ guestId: '', nickname: name });
 
   return (
     <Formik
