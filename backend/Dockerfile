@@ -82,7 +82,7 @@ CMD ["php-fpm", "--allow-to-run-as-root"]
 
 
 # NGINX
-FROM nginx:1.21 as nginx
+FROM nginx:1.23 as nginx
 
 ARG UID=1000
 ARG GID=1000
