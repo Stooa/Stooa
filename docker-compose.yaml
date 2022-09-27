@@ -27,7 +27,7 @@ services:
                 aliases:
                     - ${BACKEND}
     backend-nginx:
-        image: nginx:1.21
+        image: nginx:1.23
         depends_on:
             - backend
         ports:
@@ -55,7 +55,7 @@ services:
                 aliases:
                     - ${FRONTEND}
     frontend-nginx:
-        image: nginx:1.21
+        image: nginx:1.23
         depends_on:
             - frontend
         ports:
@@ -234,7 +234,7 @@ services:
                 aliases:
                     - ${JVB_SERVER}
     jitsi-nginx:
-        image: nginx:1.21
+        image: nginx:1.23
         depends_on:
             - jvb
             - xmpp

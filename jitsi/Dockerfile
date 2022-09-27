@@ -6,6 +6,6 @@
 # file that was distributed with this source code.
 
 # NGINX
-FROM nginx:1.21 as nginx
+FROM nginx:1.23 as nginx
 
 COPY .docker/nginx-prod/default.conf.template /etc/nginx/templates/default.conf.template

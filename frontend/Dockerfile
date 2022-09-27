@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM node:17.4 as base
+FROM node:18.9 as base
 
 ARG UID=1000
 ARG GID=1000
@@ -45,7 +45,7 @@ CMD ["npm", "run", "dev"]
 
 
 # NGINX
-FROM nginx:1.21 as nginx
+FROM nginx:1.23 as nginx
 
 ARG UID=1000
 ARG GID=1000
