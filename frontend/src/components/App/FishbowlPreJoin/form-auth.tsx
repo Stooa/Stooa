@@ -75,7 +75,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
     }
   };
 
-  userRepository.setUser({ nickname: name });
+  userRepository.setUser({ guestId: '', nickname: name });
 
   return (
     <Formik
