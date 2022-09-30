@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3f3537e67283472d261783b2fc46b44",
+    "content-hash": "6cb5c89145243a568351806e97a64890",
     "packages": [
         {
             "name": "api-platform/core",
@@ -571,16 +571,16 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "1.7.3",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "09dde3eb237756190f2de738d3c97cff10a8407b"
+                "reference": "2b44dd4cbca8b5744327de78bafef5945c7e7b5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/09dde3eb237756190f2de738d3c97cff10a8407b",
-                "reference": "09dde3eb237756190f2de738d3c97cff10a8407b",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/2b44dd4cbca8b5744327de78bafef5945c7e7b5e",
+                "reference": "2b44dd4cbca8b5744327de78bafef5945c7e7b5e",
                 "shasum": ""
             },
             "require": {
@@ -635,9 +635,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/collections/issues",
-                "source": "https://github.com/doctrine/collections/tree/1.7.3"
+                "source": "https://github.com/doctrine/collections/tree/1.8.0"
             },
-            "time": "2022-09-01T19:34:23+00:00"
+            "time": "2022-09-01T20:12:10+00:00"
         },
         {
             "name": "doctrine/common",
@@ -15308,16 +15308,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "4fb5fb84a40c7a4e98b32b5feda4f229c9b41508"
+                "reference": "8d41ca8f6e2e1e7f790028c258071f300773ac71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/4fb5fb84a40c7a4e98b32b5feda4f229c9b41508",
-                "reference": "4fb5fb84a40c7a4e98b32b5feda4f229c9b41508",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/8d41ca8f6e2e1e7f790028c258071f300773ac71",
+                "reference": "8d41ca8f6e2e1e7f790028c258071f300773ac71",
                 "shasum": ""
             },
             "require": {
@@ -15380,7 +15380,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.22.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -15388,7 +15388,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-21T14:50:17+00:00"
+            "time": "2022-09-28T16:59:36+00:00"
         }
     ],
     "aliases": [],
