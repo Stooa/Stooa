@@ -280,6 +280,8 @@ const conferenceRepository = () => {
     } = JitsiMeetJS;
     const auth = await getAuthToken(true, rawRoomName);
 
+    console.log('token', auth.token);
+
     isModerator = isUserModerator;
 
     setUsername(auth ? auth.user : null);
@@ -440,6 +442,10 @@ const conferenceRepository = () => {
     }
   };
 
+  const startTranscriber = () => {
+    conference.startTranscriber();
+  }
+
   return {
     addTrack,
     getLocalVideoTrack,
@@ -459,7 +465,8 @@ const conferenceRepository = () => {
     leave,
     sendJoinEvent,
     sendLeaveEvent,
-    sendTextMessage
+    sendTextMessage,
+    startTranscriber
   };
 };
 

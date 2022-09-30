@@ -20,6 +20,7 @@ security:
         - { path: ^/admin/reset, role: PUBLIC_ACCESS }
         - { path: ^/admin/, role: ROLE_ADMIN }
 
+        - { path: ^/webhooks, roles: PUBLIC_ACCESS }
         - { path: ^/login$, roles: PUBLIC_ACCESS }
         - { path: ^/refresh-token, roles: PUBLIC_ACCESS }
         - { path: ^/docs$, roles: PUBLIC_ACCESS }

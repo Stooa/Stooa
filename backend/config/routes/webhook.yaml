@@ -5,11 +5,7 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-fishbowl:
-    resource: fishbowl.yaml
-    prefix: /{_locale}
-    requirements:
-        _locale: en|es|ca|fr|id
-
-webhook:
-    resource: routes/webhook.yaml
+app.webhook:
+    path: /webhooks/transcription
+    controller: App\Controller\WebhookController::transcription
+    methods: [POST]

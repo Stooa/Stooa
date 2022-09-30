@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, {startTransition, useEffect, useRef, useState} from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
@@ -26,6 +26,8 @@ import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import ReactionsButton from '../Reactions/ReactionsButton';
+import Button from "@/components/Common/Button";
+import conferenceRepository from '@/jitsi/Conference';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -36,6 +38,10 @@ const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
 
   const configButtonRef = useRef<ButtonConfigHandle>(null);
+
+  const startTranscriber = () => {
+    conferenceRepository.startTranscriber();
+  }
 
   const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
@@ -169,6 +175,7 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
+      <Button onClick={startTranscriber}>Start Transcriber</Button>
       <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
