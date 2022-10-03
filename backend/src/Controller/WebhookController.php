@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,16 @@ final class WebhookController extends AbstractController
 
     public function transcription(Request $request): Response
     {
+        $requestArray = $request->toArray();
+
+        if (isset($requestArray['data']['preAuthenticatedLink'])) {
+            $url = $requestArray['data']['preAuthenticatedLink'];
+            $sessionId = $requestArray['sessionId'];
+            $path = $this->getParameter('kernel.project_dir') . '/transcriptions';
+            $fileContent = file_get_contents($url);
+            file_put_contents($path . '/' . $sessionId . '.json', $fileContent);
+        }
+
         return new JsonResponse(['response' => $request->getContent()]);
     }
 }

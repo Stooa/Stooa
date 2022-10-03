@@ -26,9 +26,7 @@ const roomOptions = {
   p2p: {
     enabled: false,
     preferredCodec: 'VP8'
-  },
-  transcribingEnabled: true,
-  transcriptionLanguage: 'es'
+  }
 };
 
 export { connectionOptions, initOptions, roomOptions };
