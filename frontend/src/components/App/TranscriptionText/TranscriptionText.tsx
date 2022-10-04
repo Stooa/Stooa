@@ -30,7 +30,7 @@ const TranscriptionText = () => {
   }, [sentText]);
 
   return (
-    <StyledTextContainer>{textToShow.length > 0 && <span>{textToShow}</span>}</StyledTextContainer>
+    <StyledTextContainer>{textToShow.length > 0 && <div>{textToShow}</div>}</StyledTextContainer>
   );
 };
 

@@ -17,8 +17,9 @@ const StyledTextContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   bottom: ${space(12)};
+  z-index: 50;
 
-  & > span {
+  & > div {
     color: white;
     background-color: hsla(0, 0%, 0%, 0.5);
     padding: ${space()} ${space(2)};
