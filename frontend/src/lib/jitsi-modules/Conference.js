@@ -182,7 +182,6 @@ const conferenceRepository = () => {
     if (json && json.type === 'transcription-result') {
       const { text } = json.transcript[0];
       dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { text });
-      console.log('transcription text', text);
     }
   };
 

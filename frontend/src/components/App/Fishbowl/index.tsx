@@ -30,6 +30,7 @@ import ModalOnboarding from '@/components/App/ModalOnBoarding';
 import { HackLeaveHover } from './styles';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import ModalConfirmLeaving from '../ModalConfirmLeaving';
+import TranscriptionText from '../TranscriptionText';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -109,6 +110,8 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
+
+        <TranscriptionText />
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />
