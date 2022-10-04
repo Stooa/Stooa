@@ -15,7 +15,8 @@ import {
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   PERMISSION_CHANGED,
-  REACTION_MESSAGE_RECEIVED
+  REACTION_MESSAGE_RECEIVED,
+  TRANSCRIPTION_MESSAGE_RECEIVED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -180,6 +181,7 @@ const conferenceRepository = () => {
 
     if (json && json.type === 'transcription-result') {
       const { text } = json.transcript[0];
+      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { text });
       console.log('transcription text', text);
     }
   };
