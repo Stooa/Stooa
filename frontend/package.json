@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.6.10",
+    "@happykit/flags": "^3.0.0",
     "@types/node": "16.11.64",
     "@types/react": "17.0.50",
     "@types/styled-components": "5.1.26",

@@ -11,6 +11,9 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
+import { useFlags } from 'flags/client';
+import { getFlags } from 'flags/server';
+
 import { GET_SELF_USER } from '@/lib/gql/User';
 
 const ProfileForm = dynamic(import('@/components/Web/Forms/profile'), { loading: () => <div /> });
@@ -18,8 +21,9 @@ const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
 const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div /> });
 
-const EditProfile = () => {
+const EditProfile = props => {
   const { t } = useTranslation('edit-profile');
+  const { flags } = useFlags({ initialState: props.initialFlagState });
 
   const { loading, error, data, refetch } = useQuery(GET_SELF_USER);
 
@@ -29,9 +33,15 @@ const EditProfile = () => {
   return (
     <Layout title={t('title')}>
       <h1 className="title-md form-title">{t('title')}</h1>
+      {flags?.cdti && <h2>CDTI!</h2>}
       <ProfileForm userData={data.selfUser} refetch={refetch} />
     </Layout>
   );
+};
+
+export const getServerSideProps = async context => {
+  const { initialFlagState } = await getFlags({ context });
+  return { props: { initialFlagState } };
 };
 
 export default EditProfile;
