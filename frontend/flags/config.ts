@@ -18,5 +18,7 @@ export const config: Configuration<AppFlags> = {
   envKey: process.env.NEXT_PUBLIC_FLAGS_ENV_KEY!,
 
   // You can provide defaults flag values here
-  defaultFlags: {}
+  defaultFlags: {
+    cdti: false
+  }
 };
