@@ -46,4 +46,9 @@ final class FishbowlController extends AbstractController
     {
         return new JsonResponse(['response' => $this->privateFishbowlService->isPasswordEqual($slug)]);
     }
+
+    public function world(): Response
+    {
+        return new JsonResponse(['response' => 'ok']);
+    }
 }

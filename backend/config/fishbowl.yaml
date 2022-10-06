@@ -24,3 +24,9 @@ app.fishbowl.private:
     path: /private-password/{slug}
     controller: App\Controller\FishbowlController::private
     methods: [POST]
+
+app.fishbowl.world_cafe:
+    path: /world-cafe
+    controller: App\Controller\FishbowlController::world
+    methods: [GET]
+    defaults:   { _feature: 'world_cafe' }
