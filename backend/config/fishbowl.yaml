@@ -24,3 +24,9 @@ app.fishbowl.private:
     path: /private-password/{slug}
     controller: App\Controller\FishbowlController::private
     methods: [POST]
+
+app.fishbowl.flag:
+    path: /flag-is-enabled/{flagName}
+    controller: App\Controller\FishbowlController::flag
+    methods: [GET]
+

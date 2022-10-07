@@ -35,6 +35,10 @@ services:
         resource: ../src/Controller/
         tags: [controller.service_arguments]
 
+    App\Controller\FishbowlController:
+        bind:
+            $flagApiKey: '%env(FLAG_SMITH_KEY)%'
+
     App\EventSubscriber\LocaleSubscriber:
         bind:
             $locales: '%locales%'

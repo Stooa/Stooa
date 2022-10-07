@@ -15,6 +15,7 @@ namespace App\Controller;
 
 use App\Service\FishbowlService;
 use App\Service\PrivateFishbowlService;
+use Flagsmith\Flagsmith;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,8 @@ final class FishbowlController extends AbstractController
 {
     public function __construct(
         private readonly FishbowlService $fishbowlService,
-        private readonly PrivateFishbowlService $privateFishbowlService
+        private readonly PrivateFishbowlService $privateFishbowlService,
+        private readonly string $flagApiKey
     ) {
     }
 
@@ -45,5 +47,13 @@ final class FishbowlController extends AbstractController
     public function private(string $slug): Response
     {
         return new JsonResponse(['response' => $this->privateFishbowlService->isPasswordEqual($slug)]);
+    }
+
+    public function flag(string $flagName): Response
+    {
+        $flagsmith = new Flagsmith($this->flagApiKey);
+        $flags = $flagsmith->getEnvironmentFlags();
+
+        return new JsonResponse(['response' => $flags->isFeatureEnabled($flagName)]);
     }
 }
