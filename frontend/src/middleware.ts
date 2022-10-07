@@ -15,9 +15,7 @@ export async function middleware() {
     environmentID: 'ser.dPTKAVcscTGXRXjGzXFaNX'
   });
 
-  const worldcafe = flagsmith.hasFeature('worldcafe');
-
-  if (worldcafe) {
+  if (flagsmith.hasFeature('worldcafe')) {
     return NextResponse.redirect('/');
   }
 }
