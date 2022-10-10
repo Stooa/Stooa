@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\WorldCafe;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
-final class WorldCafeBundle extends Bundle
+final class WorldCafeBundle extends AbstractBundle
 {
 }

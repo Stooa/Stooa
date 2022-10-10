@@ -81,9 +81,9 @@
         "zenstruck/foundry": "1.22.1"
     },
     "replace": {
-        "Core/stooa": "self.version",
-        "WorldCafe/stooa": "self.version",
         "paragonie/random_compat": "2.*",
+        "stooa/stooa": "self.version",
+        "stooa/worldcafe": "self.version",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php56": "*",
@@ -96,7 +96,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "App\\WorldCafe": "packages/WorldCafe/src/"
+            "App\\WorldCafe": "packages/WorldCafe/src/",
+            "App\\WorldCafe\\": "packages/WorldCafe/src/"
         }
     },
     "autoload-dev": {
