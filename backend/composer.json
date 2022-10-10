@@ -25,7 +25,7 @@
         "sonata-project/exporter": "3.0.0",
         "sonata-project/form-extensions": "1.18.0",
         "sonata-project/twig-extensions": "2.0.0",
-        "sonata-project/user-bundle": "5.3.3",
+        "sonata-project/user-bundle": "5.4.0",
         "symfony/amazon-mailer": "6.1.0",
         "symfony/asset": "6.1.5",
         "symfony/config": "6.1.3",
