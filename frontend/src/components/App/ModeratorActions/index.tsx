@@ -157,7 +157,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           disabled={loading}
         />
       )}
-      {running && (
+      {(running || data.isFishbowlNow) && (
         <Button
           data-testid="finish-fishbowl"
           size="medium"
@@ -167,8 +167,8 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           <span className="text">{t('endFishbowl')}</span>
         </Button>
       )}
-      {!running &&
-        (!introduction && data.hasIntroduction ? (
+      {!(running || data.isFishbowlNow) &&
+        (!introduction && data.hasIntroduction && !data.isFishbowlNow ? (
           <Button size="medium" className="button" onClick={toggleIntroductionModal}>
             {!permissions.audio && (
               <div className="alert">
