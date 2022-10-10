@@ -90,6 +90,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         type: 'FISHBOWL_STARTED',
         fishbowlStarted: true
       });
+
       try {
         runWithoutIntroFishbowl(slug)
           .then(() => {
