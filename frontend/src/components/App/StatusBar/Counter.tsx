@@ -31,7 +31,7 @@ export const Counter = ({
   ...props
 }: Props) => {
   const getDateByStatus = () =>
-    conferenceStatus === IConferenceStatus?.NOT_STARTED
+    conferenceStatus === IConferenceStatus?.NOT_STARTED && !fishbowlData.isFishbowlNow
       ? Date.parse(fishbowlData.startDateTimeTz)
       : Date.parse(fishbowlData.endDateTimeTz);
 
