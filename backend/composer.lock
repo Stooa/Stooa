@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33368f93816a9a7c5c88f0cd02b7c031",
+    "content-hash": "47f65646ed65325ded518eefe865f934",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4878,16 +4878,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.3.3",
+            "version": "5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "6ee04269dd7099d8b286279eca6c91fc34d09133"
+                "reference": "da37806c8b76cb11087455a023921036d54846fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/6ee04269dd7099d8b286279eca6c91fc34d09133",
-                "reference": "6ee04269dd7099d8b286279eca6c91fc34d09133",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/da37806c8b76cb11087455a023921036d54846fe",
+                "reference": "da37806c8b76cb11087455a023921036d54846fe",
                 "shasum": ""
             },
             "require": {
@@ -4941,12 +4941,13 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.17",
                 "psalm/plugin-symfony": "^3.0",
-                "rector/rector": "^0.13",
+                "rector/rector": "^0.14",
                 "sonata-project/admin-bundle": "^4.9",
                 "sonata-project/block-bundle": "^4.11",
                 "sonata-project/doctrine-orm-admin-bundle": "^4.0",
                 "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
                 "symfony/console": "^4.4 || ^5.4 || ^6.0",
+                "symfony/filesystem": "^4.4 || ^5.4 || ^6.0",
                 "symfony/intl": "^4.4 || ^5.4 || ^6.0",
                 "symfony/phpunit-bridge": "^6.1",
                 "vimeo/psalm": "^4.9.2"
@@ -4984,7 +4985,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.3.3"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.4.0"
             },
             "funding": [
                 {
@@ -5004,7 +5005,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-13T14:48:58+00:00"
+            "time": "2022-10-09T20:29:43+00:00"
         },
         {
             "name": "stella-maris/clock",
