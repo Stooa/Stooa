@@ -44,7 +44,7 @@ import Image from 'next/image';
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
-  const { data } = useStooa();
+  const { data, isModerator } = useStooa();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localTracks = useRef<any[]>([]);
@@ -178,10 +178,14 @@ const FishbowlPreJoin: React.FC = () => {
           </Devices>
           <Form>
             <h2 data-testid="pre-join-title" className="title-md ">
-              {t('fishbowl:prejoin.title')}
+              {isModerator ? t('fishbowl:prejoin.startFishbowl') : t('fishbowl:prejoin.title')}
             </h2>
             <p className="body-md subtitle">
-              <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+              {isModerator ? (
+                t('fishbowl:prejoin.moderatorSubtitle')
+              ) : (
+                <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+              )}
             </p>
             {isAuthenticated ? (
               <AuthUser isPrivate={data.isPrivate} name={user?.name ?? ''} />
