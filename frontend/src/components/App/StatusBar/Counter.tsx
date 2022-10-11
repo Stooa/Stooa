@@ -102,7 +102,6 @@ export const Counter = ({
 
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
-    let timeLeftText;
 
     const seconds = checkSecondsToDate(fishbowlDate);
 
@@ -114,14 +113,14 @@ export const Counter = ({
     const hours: number = Math.floor(seconds / 3600);
 
     if (seconds === 0 && conferenceNotStarted) {
-      timeLeftText = isModerator ? t('waitingHost') : t('waiting');
+      return isModerator ? t('waitingHost') : t('waiting');
     } else if (seconds === 0) {
-      timeLeftText = t('timesUp');
+      return t('timesUp');
     } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
-      timeLeftText = t('lastMinute');
+      return t('lastMinute');
     } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
       const time = `1${t('form:fishbowl.minutes')}`;
-      timeLeftText = t('timeToStart', { time });
+      return t('timeToStart', { time });
     } else {
       const hoursText = t('form:fishbowl.hours');
       const minutesText = hours > 0 ? t('form:fishbowl.minutesShort') : t('form:fishbowl.minutes');
@@ -132,15 +131,13 @@ export const Counter = ({
           : Math.floor(seconds / 60);
 
       if (isFishbowlNowAndModerator && conferenceNotStarted) {
-        timeLeftText = t('timeLeft_other', { time: `${time}${minutesText}` });
+        return t('timeLeft_other', { time: `${time}${minutesText}` });
       } else {
-        timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
+        return t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
           time: `${time}${minutesText}`
         });
       }
     }
-
-    return timeLeftText;
   };
 
   return (
