@@ -54,7 +54,7 @@ const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(
     () => (isModerator && data.isFishbowlNow) || false
   );
-  const [{  conferenceStatus }] = useStateValue();
+  const [{ conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
