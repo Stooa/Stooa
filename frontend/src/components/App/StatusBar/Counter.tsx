@@ -114,7 +114,7 @@ export const Counter = ({
         hours > 0 && seconds >= 3600
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
           : Math.floor(seconds / 60);
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
+      timeLeftText = t('timeLeft_other', {
         time: `${time}${minutesText}`
       });
     }
