@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
@@ -30,10 +30,21 @@ export const Counter = ({
   prefishbowl = false,
   ...props
 }: Props) => {
-  const getDateByStatus = () =>
-    conferenceStatus === IConferenceStatus?.NOT_STARTED && !fishbowlData.isFishbowlNow
-      ? Date.parse(fishbowlData.startDateTimeTz)
-      : Date.parse(fishbowlData.endDateTimeTz);
+  const getDateByStatus = () => {
+    if (
+      fishbowlData.isFishbowlNow &&
+      conferenceStatus === IConferenceStatus?.NOT_STARTED &&
+      isModerator
+    ) {
+      return Date.parse(fishbowlData.endDateTimeTz);
+    }
+
+    if (conferenceStatus === IConferenceStatus?.NOT_STARTED) {
+      return Date.parse(fishbowlData.startDateTimeTz);
+    }
+
+    return Date.parse(fishbowlData.endDateTimeTz);
+  };
 
   const [completedTime, setCompletedTime] = useState<boolean>(false);
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
@@ -84,6 +95,11 @@ export const Counter = ({
     return () => clearInterval(intervalTimer);
   }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const isFishbowlNowAndModerator = useMemo(
+    () => fishbowlData.isFishbowlNow && isModerator,
+    [fishbowlData.isFishbowlNow, isModerator]
+  );
+
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
     let timeLeftText;
@@ -114,9 +130,14 @@ export const Counter = ({
         hours > 0 && seconds >= 3600
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
           : Math.floor(seconds / 60);
-      timeLeftText = t('timeLeft_other', {
-        time: `${time}${minutesText}`
-      });
+
+      if (isFishbowlNowAndModerator && conferenceNotStarted) {
+        timeLeftText = t('timeLeft_other', { time: `${time}${minutesText}` });
+      } else {
+        timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
+          time: `${time}${minutesText}`
+        });
+      }
     }
 
     return timeLeftText;
