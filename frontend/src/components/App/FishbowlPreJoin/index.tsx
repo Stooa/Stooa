@@ -179,7 +179,9 @@ const FishbowlPreJoin: React.FC = () => {
           </Devices>
           <Form>
             <h2 data-testid="pre-join-title" className="title-md ">
-              {isModerator && conferenceStatus === IConferenceStatus.NOT_STARTED
+              {isModerator &&
+              data.isFishbowlNow &&
+              conferenceStatus === IConferenceStatus.NOT_STARTED
                 ? t('fishbowl:prejoin.startFishbowl')
                 : t('fishbowl:prejoin.title')}
             </h2>
