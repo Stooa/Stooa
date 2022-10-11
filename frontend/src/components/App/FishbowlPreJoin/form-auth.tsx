@@ -109,9 +109,9 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
 
   const getButtonText = () => {
     if (data.isFishbowlNow && conferenceStatus === IConferenceStatus.NOT_STARTED) {
-      return t('fishbowl:startFishbowl');
+      return t('fishbowl:prejoin.startFishbowl');
     } else {
-      return t('button.enterFishbowl');
+      return t('fishbowl:prejoin.enterDiscussion');
     }
   };
 

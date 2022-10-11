@@ -43,6 +43,7 @@
     "cam": "Kamera",
     "prejoin": {
         "startFishbowl": "Start fishbowl",
+        "joinDiscussion": "Join the discussion",
         "title": "Join the room",
         "moderatorSubtitle": "If you want you can configure the audio and video before starting the fishbowl.",
         "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
