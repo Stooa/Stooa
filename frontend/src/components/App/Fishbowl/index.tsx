@@ -54,13 +54,13 @@ const Fishbowl: FC = () => {
   const [participantsActive, setParticipantsActive] = useState(
     () => (isModerator && data.isFishbowlNow) || false
   );
-  const [{ fishbowlReady, conferenceStatus }] = useStateValue();
+  const [{  conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
 
   const isPreFishbowl =
-    fishbowlReady && conferenceStatus === IConferenceStatus.NOT_STARTED && !data.isFishbowlNow;
+    conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
