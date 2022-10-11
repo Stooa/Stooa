@@ -143,7 +143,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
             />
           )}
 
-          <Button type="submit" size="large" data-testid="prejoin-enterFishbowl">
+          <Button type="submit" size="large" data-testid="prejoin-cta">
             {getButtonText()}
           </Button>
         </fieldset>
