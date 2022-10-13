@@ -12,7 +12,7 @@ import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 When('access to a current fishbowl', () => {
   cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
 
-  cy.contains('Enter fishbowl').click();
+  cy.contains('Join discussion').click();
 });
 
 Then('can click on reactions', () => {
