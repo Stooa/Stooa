@@ -33,11 +33,7 @@ interface Props {
   isPrefishbowl?: boolean;
 }
 
-const Header: React.FC<Props> = ({
-  toggleParticipants,
-  participantsActive,
-  isPrefishbowl = 'false'
-}) => {
+const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPrefishbowl }) => {
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
