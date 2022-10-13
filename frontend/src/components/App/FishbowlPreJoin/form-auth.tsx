@@ -21,6 +21,9 @@ import { useStooa } from '@/contexts/StooaManager';
 import { connectWithPassword } from './connection';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useMutation } from '@apollo/client';
+import { NO_INTRO_RUN_FISHBOWL } from '@/graphql/Fishbowl';
+import { IConferenceStatus } from '@/jitsi/Status';
 
 type TProps = {
   name: string;
@@ -32,10 +35,36 @@ interface FormValues {
 }
 
 const AuthUser = ({ name, isPrivate }: TProps) => {
-  const { isModerator, setFishbowlPassword } = useStooa();
+  const { data, isModerator, setFishbowlPassword, conferenceStatus } = useStooa();
   const [, dispatch] = useStateValue();
+  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
+
   const { t } = useTranslation('form');
   const { fid } = useRouter().query;
+
+  const startFishbowlNow = () => {
+    try {
+      const slug = { variables: { input: { slug: fid } } };
+
+      runWithoutIntroFishbowl(slug)
+        .then(() => {
+          console.log('[STOOA] run fishbowl without introduction');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(`[STOOA] Error run fishbowl without introduction: ${error}`);
+    }
+  };
+
+  const handleDispatchStartFishbowlNow = () => {
+    dispatch({
+      type: 'START_FISHBOWL_NOW',
+      prejoin: false,
+      fishbowlStarted: true
+    });
+  };
 
   const handleDispatchJoin = (): void => {
     dispatch({
@@ -70,8 +99,19 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
             autoClose: 5000
           });
         });
+    } else if (data.isFishbowlNow && conferenceStatus === IConferenceStatus.NOT_STARTED) {
+      handleDispatchStartFishbowlNow();
+      startFishbowlNow();
     } else {
       handleDispatchJoin();
+    }
+  };
+
+  const getButtonText = () => {
+    if (isModerator && data.isFishbowlNow && conferenceStatus === IConferenceStatus.NOT_STARTED) {
+      return t('fishbowl:prejoin.startFishbowl');
+    } else {
+      return t('fishbowl:prejoin.joinDiscussion');
     }
   };
 
@@ -103,8 +143,8 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
             />
           )}
 
-          <Button type="submit" size="large" data-testid="prejoin-enterFishbowl">
-            {t('button.enterFishbowl')}
+          <Button type="submit" size="large" data-testid="prejoin-cta">
+            {getButtonText()}
           </Button>
         </fieldset>
       </FormikForm>
