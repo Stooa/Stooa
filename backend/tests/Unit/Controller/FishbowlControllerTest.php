@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Controller;
 
-use App\Controller\FishbowlController;
-use App\Service\FishbowlService;
-use App\Service\PrivateFishbowlService;
+use App\Fishbowl\Controller\FishbowlController;
+use App\Fishbowl\Service\FishbowlService;
+use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;

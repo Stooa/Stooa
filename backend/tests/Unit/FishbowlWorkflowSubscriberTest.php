@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\EventSubscriber\FishbowlWorkflowSubscriber;
-use App\Factory\FishbowlFactory;
-use App\Factory\UserFactory;
+use App\Core\Factory\UserFactory;
+use App\Fishbowl\EventSubscriber\FishbowlWorkflowSubscriber;
+use App\Fishbowl\Factory\FishbowlFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Security;

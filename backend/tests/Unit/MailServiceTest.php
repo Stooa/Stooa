@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\Factory\FishbowlFactory;
-use App\Factory\UserFactory;
-use App\Model\ResetPassword;
-use App\Service\MailerService;
-use App\Service\PrivateFishbowlService;
+use App\Core\Factory\UserFactory;
+use App\Core\Model\ResetPassword;
+use App\Core\Service\MailerService;
+use App\Fishbowl\Factory\FishbowlFactory;
+use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;

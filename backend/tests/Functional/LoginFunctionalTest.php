@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use App\Factory\UserFactory;
+use App\Core\Factory\UserFactory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 

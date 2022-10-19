@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration;
 
-use App\Entity\Participant;
-use App\Factory\FishbowlFactory;
-use App\Factory\GuestFactory;
-use App\Factory\ParticipantFactory;
-use App\Factory\UserFactory;
-use App\Repository\ParticipantRepository;
+use App\Core\Entity\Participant;
+use App\Core\Factory\GuestFactory;
+use App\Core\Factory\ParticipantFactory;
+use App\Core\Factory\UserFactory;
+use App\Core\Repository\ParticipantRepository;
+use App\Fishbowl\Factory\FishbowlFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;

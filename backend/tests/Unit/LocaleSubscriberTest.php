@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\EventSubscriber\LocaleSubscriber;
+use App\Core\EventSubscriber\LocaleSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
