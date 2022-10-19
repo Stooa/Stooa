@@ -5,8 +5,5 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-
-world_cafe.show:
-    path: /world-cafe
-    controller: App\WorldCafe\Controller\WorldCafeController::show
-    methods: [ GET ]
+world_cafe:
+    resource: '@WorldCafeBundle/config/routing.yaml'
