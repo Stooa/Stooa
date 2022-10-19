@@ -24,15 +24,26 @@ services:
             - [setAnnotationReader, ['@annotation_reader']]
 
     # App
-    App\:
-        resource: ../src/
+    App\Core\:
+        resource: ../src/Core/
         exclude:
-            - ../src/DependencyInjection/
-            - ../src/Entity/
+            - ../src/Core/DependencyInjection/
+            - ../src/Core/Entity/
             - ../src/Kernel.php
 
-    App\Controller\:
-        resource: ../src/Controller/
+    App\Fishbowl\:
+        resource: ../src/Fishbowl/
+        exclude:
+            - ../src/Core/DependencyInjection/
+            - ../src/Core/Entity/
+            - ../src/Kernel.php
+
+    App\Core\Controller\:
+        resource: ../src/Core/Controller/
+        tags: [controller.service_arguments]
+
+    App\Fishbowl\Controller\:
+        resource: ../src/Fishbowl/Controller/
         tags: [controller.service_arguments]
 
     App\EventSubscriber\LocaleSubscriber:
