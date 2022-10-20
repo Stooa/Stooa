@@ -71,7 +71,7 @@ class Participant implements \Stringable
     /**
      * @Groups({"participant:read"})
      * @Assert\NotNull
-     * @ORM\ManyToOne(targetEntity="Fishbowl", inversedBy="participants")
+     * @ORM\ManyToOne(targetEntity="App\Fishbowl\Entity\Fishbowl", inversedBy="participants")
      */
     private ?Fishbowl $fishbowl = null;
 

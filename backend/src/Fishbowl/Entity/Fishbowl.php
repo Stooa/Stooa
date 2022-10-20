@@ -202,7 +202,7 @@ class Fishbowl implements \Stringable
     /**
      * @Groups({"fishbowl:read"})
      * @Assert\NotNull
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="fishbowls")
+     * @ORM\ManyToOne(targetEntity="App\Core\Entity\User", inversedBy="fishbowls")
      */
     private ?User $host = null;
 
@@ -241,7 +241,7 @@ class Fishbowl implements \Stringable
     /**
      * @var Collection<int, Participant>
      *
-     * @ORM\OneToMany(targetEntity="Participant", mappedBy="fishbowl", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="App\Core\Entity\Participant", mappedBy="fishbowl", cascade={"all"})
      */
     private Collection $participants;
 
