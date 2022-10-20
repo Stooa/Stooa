@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace App\Tests\Unit;
 
 use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
-use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
 use App\Fishbowl\Resolver\FishbowlIntroduceMutationResolver;
 use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
+use Fishbowl;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;

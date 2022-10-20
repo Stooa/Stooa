@@ -22,20 +22,13 @@ services:
         tags: [doctrine.event_subscriber]
         calls:
             - [setAnnotationReader, ['@annotation_reader']]
-
     # App
-    App\:
-        resource: ../src/
+    App\Core\:
+        resource: ../src/Core/
         exclude:
             - ../src/Core/DependencyInjection/
             - ../src/Core/Entity/
-            - ../src/Fishbowl/DependencyInjection/
-            - ../src/Fishbowl/Entity/
             - ../src/Kernel.php
-
-    App\Fishbowl\Controller\:
-        resource: ../src/Fishbowl/Controller/
-        tags: [controller.service_arguments]
 
     App\Core\EventSubscriber\LocaleSubscriber:
         bind:
@@ -48,9 +41,6 @@ services:
         autoconfigure: false
 
     App\Core\DataPersister\UserDataPersister:
-        decorates: api_platform.doctrine.orm.data_persister
-
-    App\Fishbowl\DataPersister\FishbowlDataPersister:
         decorates: api_platform.doctrine.orm.data_persister
 
     App\Core\Service\MailerService:
@@ -81,12 +71,6 @@ services:
         calls:
             - [setPasswordEncoder, ['@App\Core\Security\PasswordEncoderService']]
             - [setMailerService, ['@App\Core\Service\MailerService']]
-
-    App\Fishbowl\Admin\FishbowlAdmin:
-        tags:
-            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
-        calls:
-            - [setFishbowlService, ['@App\Fishbowl\Service\FishbowlService']]
 
     App\Core\Admin\ResetPasswordRequestAdmin:
         tags:

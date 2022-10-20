@@ -15,8 +15,8 @@ namespace App\Core\Service;
 
 use App\Core\Entity\User;
 use App\Core\Model\ResetPassword;
-use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\PrivateFishbowlService;
+use Fishbowl;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;

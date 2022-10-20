@@ -16,8 +16,8 @@ namespace App\Core\Extension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Core\Entity\User;
-use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\ORM\QueryBuilder;
+use Fishbowl;
 use Symfony\Component\Security\Core\Security;
 use Webmozart\Assert\Assert;
 

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Core\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\ORM\Mapping as ORM;
+use Fishbowl;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
