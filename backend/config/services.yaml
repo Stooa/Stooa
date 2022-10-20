@@ -33,10 +33,6 @@ services:
             - ../src/Fishbowl/Entity/
             - ../src/Kernel.php
 
-    App\Core\Controller\:
-        resource: ../src/Core/Controller/
-        tags: [controller.service_arguments]
-
     App\Fishbowl\Controller\:
         resource: ../src/Fishbowl/Controller/
         tags: [controller.service_arguments]
