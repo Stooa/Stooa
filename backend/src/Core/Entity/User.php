@@ -190,7 +190,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     /**
      * @var Collection<int, Fishbowl>
      *
-     * @ORM\OneToMany(targetEntity="Fishbowl", mappedBy="host")
+     * @ORM\OneToMany(targetEntity="App\Fishbowl\Entity\Fishbowl", mappedBy="host")
      */
     private Collection $fishbowls;
 
