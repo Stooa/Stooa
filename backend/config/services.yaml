@@ -27,73 +27,75 @@ services:
     App\:
         resource: ../src/
         exclude:
-            - ../src/DependencyInjection/
-            - ../src/Entity/
+            - ../src/Core/DependencyInjection/
+            - ../src/Core/Entity/
+            - ../src/Fishbowl/DependencyInjection/
+            - ../src/Fishbowl/Entity/
             - ../src/Kernel.php
 
-    App\Controller\:
-        resource: ../src/Controller/
+    App\Fishbowl\Controller\:
+        resource: ../src/Fishbowl/Controller/
         tags: [controller.service_arguments]
 
-    App\EventSubscriber\LocaleSubscriber:
+    App\Core\EventSubscriber\LocaleSubscriber:
         bind:
             $locales: '%locales%'
 
-    App\OpenApi\OpenApiFactory:
+    App\Core\OpenApi\OpenApiFactory:
         decorates: api_platform.openapi.factory
         arguments:
-            - '@App\OpenApi\OpenApiFactory.inner'
+            - '@App\Core\OpenApi\OpenApiFactory.inner'
         autoconfigure: false
 
-    App\DataPersister\UserDataPersister:
+    App\Core\DataPersister\UserDataPersister:
         decorates: api_platform.doctrine.orm.data_persister
 
-    App\DataPersister\FishbowlDataPersister:
+    App\Fishbowl\DataPersister\FishbowlDataPersister:
         decorates: api_platform.doctrine.orm.data_persister
 
-    App\Service\MailerService:
+    App\Core\Service\MailerService:
         bind:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
 
-    App\JWT\TokenGenerator\JaasTokenGenerator:
+    App\Core\JWT\TokenGenerator\JaasTokenGenerator:
         bind:
             $appId: '%env(JAAS_APP_ID)%'
             $apiKey: '%env(JAAS_API_KEY)%'
 
-    App\Encryption\HalitePasswordEncryption:
+    App\Core\Encryption\HalitePasswordEncryption:
         bind:
             $key: '%env(HALITE_KEY)%'
 
-    App\Stage\FishbowlValidateStage:
+    App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\DataProvider\FishbowlDataProvider:
+    App\Fishbowl\DataProvider\FishbowlDataProvider:
         bind:
             $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
 
     # Admin
-    App\Admin\UserAdmin:
+    App\Core\Admin\UserAdmin:
         tags:
-            - { name: sonata.admin, model_class: App\Entity\User, manager_type: orm, label: Users }
+            - { name: sonata.admin, model_class: App\Core\Entity\User, manager_type: orm, label: Users }
         calls:
-            - [setPasswordEncoder, ['@App\Security\PasswordEncoderService']]
-            - [setMailerService, ['@App\Service\MailerService']]
+            - [setPasswordEncoder, ['@App\Core\Security\PasswordEncoderService']]
+            - [setMailerService, ['@App\Core\Service\MailerService']]
 
-    App\Admin\FishbowlAdmin:
+    App\Fishbowl\Admin\FishbowlAdmin:
         tags:
-            - { name: sonata.admin, model_class: App\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
+            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
         calls:
-            - [setFishbowlService, ['@App\Service\FishbowlService']]
+            - [setFishbowlService, ['@App\Fishbowl\Service\FishbowlService']]
 
-    App\Admin\ResetPasswordRequestAdmin:
+    App\Core\Admin\ResetPasswordRequestAdmin:
         tags:
-            - { name: sonata.admin, model_class: App\Entity\ResetPasswordRequest, manager_type: orm, label: Reset Password Requests }
+            - { name: sonata.admin, model_class: App\Core\Entity\ResetPasswordRequest, manager_type: orm, label: Reset Password Requests }
 
-    App\Admin\ParticipantAdmin:
+    App\Core\Admin\ParticipantAdmin:
         tags:
-            - { name: sonata.admin, model_class: App\Entity\Participant, manager_type: orm, label: Participants }
+            - { name: sonata.admin, model_class: App\Core\Entity\Participant, manager_type: orm, label: Participants }
 
-    App\Admin\GuestAdmin:
+    App\Core\Admin\GuestAdmin:
         tags:
-            - { name: sonata.admin, model_class: App\Entity\Guest, manager_type: orm, label: Guests }
+            - { name: sonata.admin, model_class: App\Core\Entity\Guest, manager_type: orm, label: Guests }

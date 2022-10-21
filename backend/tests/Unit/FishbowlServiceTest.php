@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\Entity\Fishbowl;
-use App\Entity\Guest;
-use App\Entity\Participant;
-use App\Entity\User;
-use App\Repository\FishbowlRepository;
-use App\Repository\GuestRepository;
-use App\Repository\ParticipantRepository;
-use App\Service\FishbowlService;
+use App\Core\Entity\Guest;
+use App\Core\Entity\Participant;
+use App\Core\Entity\User;
+use App\Core\Repository\GuestRepository;
+use App\Core\Repository\ParticipantRepository;
+use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Repository\FishbowlRepository;
+use App\Fishbowl\Service\FishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;

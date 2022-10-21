@@ -13,17 +13,16 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\JWT;
 
-use App\Entity\User;
-use App\EventSubscriber\JWTCreatedSubscriber;
-use App\Factory\UserFactory;
-use App\JWT\Model\JWTToken;
-use App\JWT\Model\Payload\HeaderPayload;
-use App\JWT\Model\Payload\UserPayload;
-use App\JWT\TokenGenerator\TokenGeneratorInterface;
+use App\Core\Entity\User;
+use App\Core\EventSubscriber\JWTCreatedSubscriber;
+use App\Core\Factory\UserFactory;
+use App\Core\JWT\Model\JWTToken;
+use App\Core\JWT\Model\Payload\HeaderPayload;
+use App\Core\JWT\Model\Payload\UserPayload;
+use App\Core\JWT\TokenGenerator\TokenGeneratorInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
 use Zenstruck\Foundry\Test\Factories;
 
 class JWTCreatedSubscriberTest extends TestCase

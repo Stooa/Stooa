@@ -19,4 +19,4 @@ fos_user_resetting_reset:
 
 symfonycast_reset_pass:
     path: /admin/reset-password
-    controller: App\Controller\ResetPasswordController::request
+    controller: App\Core\Controller\ResetPasswordController::request

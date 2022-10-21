@@ -10,7 +10,7 @@ security:
 
     password_hashers:
         Sonata\UserBundle\Model\UserInterface: auto
-        App\Entity\User: auto
+        App\Core\Entity\User: auto
 
     access_control:
         - { path: ^/admin/login$, role: PUBLIC_ACCESS }
@@ -39,7 +39,7 @@ security:
             id: sonata.user.security.user_provider
         api:
             entity:
-                class: App\Entity\User
+                class: App\Core\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\Encryption\HalitePasswordEncryption;
-use App\Factory\FishbowlFactory;
-use App\Repository\FishbowlRepository;
-use App\Service\PrivateFishbowlService;
+use App\Core\Encryption\HalitePasswordEncryption;
+use App\Fishbowl\Factory\FishbowlFactory;
+use App\Fishbowl\Repository\FishbowlRepository;
+use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;

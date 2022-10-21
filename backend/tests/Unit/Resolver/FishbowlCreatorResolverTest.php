@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Resolver;
 
-use App\Factory\FishbowlFactory;
-use App\Factory\UserFactory;
-use App\Repository\FishbowlRepository;
-use App\Resolver\FishbowlCreatorResolver;
-use App\Service\PrivateFishbowlService;
+use App\Core\Factory\UserFactory;
+use App\Fishbowl\Factory\FishbowlFactory;
+use App\Fishbowl\Repository\FishbowlRepository;
+use App\Fishbowl\Resolver\FishbowlCreatorResolver;
+use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Security;

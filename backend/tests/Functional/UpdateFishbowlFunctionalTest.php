@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use App\Entity\Fishbowl;
-use App\Entity\User;
-use App\Factory\FishbowlFactory;
-use App\Factory\UserFactory;
+use App\Core\Entity\User;
+use App\Core\Factory\UserFactory;
+use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Factory\FishbowlFactory;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
