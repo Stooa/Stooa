@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace App\Tests\Unit;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
-use App\Entity\Fishbowl;
-use App\Entity\User;
-use App\Extension\FishbowlListExtension;
+use App\Core\Entity\User;
+use App\Core\Extension\FishbowlListExtension;
+use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\Stub;

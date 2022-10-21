@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\JWT;
 
-use App\Entity\User;
-use App\Factory\UserFactory;
-use App\JWT\CurrentUserRoom;
-use App\Service\FishbowlService;
+use App\Core\Entity\User;
+use App\Core\Factory\UserFactory;
+use App\Core\JWT\CurrentUserRoom;
+use App\Fishbowl\Service\FishbowlService;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;

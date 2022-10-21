@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Resolver;
 
-use App\Factory\FishbowlFactory;
-use App\Repository\FishbowlRepository;
-use App\Resolver\FishbowlResolver;
-use App\Service\PrivateFishbowlService;
+use App\Fishbowl\Factory\FishbowlFactory;
+use App\Fishbowl\Repository\FishbowlRepository;
+use App\Fishbowl\Resolver\FishbowlResolver;
+use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Zenstruck\Foundry\Test\Factories;

@@ -7,20 +7,20 @@
 
 app.fishbowl.ready:
     path: /fishbowl-status/{slug}
-    controller: App\Controller\FishbowlController::status
+    controller: App\Fishbowl\Controller\FishbowlController::status
     methods: [GET]
 
 app.fishbowl.participants:
     path: /fishbowl-participants/{slug}
-    controller: App\Controller\FishbowlController::participants
+    controller: App\Fishbowl\Controller\FishbowlController::participants
     methods: [GET]
 
 app.fishbowl.ping:
     path: /ping/{slug}
-    controller: App\Controller\FishbowlController::ping
+    controller: App\Fishbowl\Controller\FishbowlController::ping
     methods: [POST]
 
 app.fishbowl.private:
     path: /private-password/{slug}
-    controller: App\Controller\FishbowlController::private
+    controller: App\Fishbowl\Controller\FishbowlController::private
     methods: [POST]
