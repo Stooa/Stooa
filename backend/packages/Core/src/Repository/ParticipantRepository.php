@@ -16,10 +16,10 @@ namespace App\Core\Repository;
 use App\Core\Entity\Guest;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
+use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Fishbowl\Entity\Fishbowl;
 
 /** @extends ServiceEntityRepository<Participant> */
 class ParticipantRepository extends ServiceEntityRepository

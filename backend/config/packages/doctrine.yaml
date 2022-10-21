@@ -18,7 +18,7 @@ doctrine:
             App\Core:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Core/Entity'
+                dir: '%kernel.project_dir%/packages/Core/src/Entity'
                 prefix: 'App\Core\Entity'
                 alias: App\Core
             App\Fishbowl:
