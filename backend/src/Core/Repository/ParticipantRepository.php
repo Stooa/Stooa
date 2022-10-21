@@ -19,7 +19,7 @@ use App\Core\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
-use Fishbowl;
+use App\Fishbowl\Entity\Fishbowl;
 
 /** @extends ServiceEntityRepository<Participant> */
 class ParticipantRepository extends ServiceEntityRepository

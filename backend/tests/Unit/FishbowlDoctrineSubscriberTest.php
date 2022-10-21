@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
+use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\EventSubscriber\FishbowlDoctrineSubscriber;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Fishbowl;
 use PHPUnit\Framework\TestCase;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Test\Factories;

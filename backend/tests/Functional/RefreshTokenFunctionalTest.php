@@ -15,8 +15,8 @@ namespace App\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Factory\UserFactory;
+use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
-use Fishbowl;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Sonata\UserBundle\Model\UserInterface;
 use Zenstruck\Foundry\Test\Factories;

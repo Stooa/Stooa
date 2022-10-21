@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration;
 
+use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;
-use Fishbowl;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;

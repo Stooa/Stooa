@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
+use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\EventSubscriber\FishbowlIntroduceAndNoIntroRunSubscriber;
 use App\Fishbowl\Factory\FishbowlFactory;
-use Fishbowl;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Marking;

@@ -18,7 +18,7 @@ use App\Core\Factory\UserFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Fishbowl;
+use App\Fishbowl\Entity\Fishbowl;
 use Sonata\UserBundle\Model\UserInterface;
 
 class DefaultFixtures extends Fixture
