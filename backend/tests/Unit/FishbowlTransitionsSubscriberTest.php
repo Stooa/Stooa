@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use App\Entity\Fishbowl;
-use App\EventSubscriber\FishbowlTransitionsSubscriber;
-use App\Factory\FishbowlFactory;
-use App\Repository\FishbowlRepository;
+use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\EventSubscriber\FishbowlTransitionsSubscriber;
+use App\Fishbowl\Factory\FishbowlFactory;
+use App\Fishbowl\Repository\FishbowlRepository;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Workflow\Event\Event;

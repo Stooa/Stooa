@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\JWT;
 
-use App\Entity\Fishbowl;
-use App\Entity\User;
-use App\Factory\FishbowlFactory;
-use App\Factory\UserFactory;
-use App\JWT\CurrentUserFishbowl;
-use App\JWT\CurrentUserRoom;
+use App\Core\Entity\User;
+use App\Core\Factory\UserFactory;
+use App\Core\JWT\CurrentUserFishbowl;
+use App\Core\JWT\CurrentUserRoom;
+use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Factory\FishbowlFactory;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Zenstruck\Foundry\Test\Factories;

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Validator;
 
-use App\Factory\FishbowlFactory;
-use App\Validator\Constraints\PrivateFishbowl;
-use App\Validator\Constraints\PrivateFishbowlValidator;
+use App\Fishbowl\Factory\FishbowlFactory;
+use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
+use App\Fishbowl\Validator\Constraints\PrivateFishbowlValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Zenstruck\Foundry\Test\Factories;
 
