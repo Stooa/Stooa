@@ -99,7 +99,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/",
+            "App\\Core\\Tests\\": "packages/Core/tests/",
+            "App\\Fishbowl\\Tests\\": "packages/Fishbowl/tests/"
         }
     },
     "config": {
