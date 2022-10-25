@@ -32,7 +32,7 @@ file that was distributed with this source code.
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests</directory>
+            <directory>packages/*/tests</directory>
         </testsuite>
     </testsuites>
 

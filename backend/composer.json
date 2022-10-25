@@ -92,12 +92,16 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "App\\Core\\": "packages/Core/src/",
+            "App\\Fishbowl\\": "packages/Fishbowl/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/",
+            "App\\Core\\Tests\\": "packages/Core/tests/",
+            "App\\Fishbowl\\Tests\\": "packages/Fishbowl/tests/"
         }
     },
     "config": {
