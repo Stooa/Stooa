@@ -12,13 +12,14 @@ import useTranslation from 'next-translate/useTranslation';
 import lottie from 'lottie-web';
 
 import { Lottie } from '@/types/animations';
-import { Column, Description, Row, Wrapper } from '@/ui/pages';
+import { Column, Row, Wrapper } from '@/landing/ui/styles';
+import Description from '@/components/Common/Description';
 
 interface Props {
   item: Lottie;
 }
 
-const importAnimatiom = (path: string) => require(`@/ui/animations/home/${path}`);
+const importAnimatiom = (path: string) => require(`@/landing/ui/animations/home/${path}`);
 
 const Benefits = ({ item }: Props): JSX.Element => {
   const { t } = useTranslation('home');

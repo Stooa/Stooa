@@ -12,8 +12,8 @@ import useTranslation from 'next-translate/useTranslation';
 import lottie from 'lottie-web';
 
 import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
-import { Banner as BannerStyled } from '@/ui/pages';
-import AnimPath from '@/ui/animations/home/banner-morph.json';
+import { Banner as BannerStyled } from '@/landing/ui/styles';
+import AnimPath from '@/landing/ui/animations/home/banner-morph.json';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 
