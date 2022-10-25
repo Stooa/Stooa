@@ -22,7 +22,7 @@ import { Lottie } from '@/types/animations';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import { Billboard, Content, Description, Row, Sections, Wrapper } from '@/landing/ui/styles';
+import { Billboard, Content, Row, Sections, Wrapper } from '@/landing/ui/styles';
 import WaveMobile from '@/landing/ui/svg/wave-mobile.svg';
 import WaveDesktop from '@/landing/ui/svg/wave-desktop.svg';
 import BillboardDeskAnimPath from '@/landing/ui/animations/home/billboard-desktop.json';
@@ -32,6 +32,7 @@ import Morph2BillAnimPath from '@/landing/ui/animations/home/billboard-morph-2.j
 import KeyBenefit2MorphPath from '@/landing/ui/animations/home/keybenefit2-morph.json';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import Description from '@/components/Common/Description';
 
 const Benefits = dynamic(import('@/landing/HomeSections/Benefits'), {
   loading: () => <div />

@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
+import { media, rems, space } from '@/ui/helpers';
 import styled from 'styled-components';
-import { media, rems, space } from '../helpers';
 
-const Description = styled.div<{ center?: boolean }>`
+export const StyledDescription = styled.div<{ center?: boolean }>`
   margin-bottom: ${space(5)};
   text-align: left;
 
@@ -33,5 +33,3 @@ const Description = styled.div<{ center?: boolean }>`
     margin-top: ${space(2)};
   }
 `;
-
-export { Description };
