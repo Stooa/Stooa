@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cf3e62ac9943c9bb61788999d54a4e6",
+    "content-hash": "7357338145501cc7fdd93b1de87161b8",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3966,16 +3966,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.19.0",
+            "version": "4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "4e957ebb6afbc784d84c65c8ee33215b8913b9b5"
+                "reference": "1b919ccc08e3e924dbd4857756bf238f2909b593"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/4e957ebb6afbc784d84c65c8ee33215b8913b9b5",
-                "reference": "4e957ebb6afbc784d84c65c8ee33215b8913b9b5",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1b919ccc08e3e924dbd4857756bf238f2909b593",
+                "reference": "1b919ccc08e3e924dbd4857756bf238f2909b593",
                 "shasum": ""
             },
             "require": {
@@ -4012,6 +4012,7 @@
                 "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
                 "symfony/security-core": "^4.4.24 || ^5.4 || ^6.0",
                 "symfony/security-csrf": "^4.4 || ^5.4 || ^6.0",
+                "symfony/serializer": "^4.4 || ^5.4 || ^6.0",
                 "symfony/string": "^5.4 || ^6.0",
                 "symfony/translation": "^4.4 || ^5.4 || ^6.0",
                 "symfony/translation-contracts": "^1.1.10 || ^2.3 || ^3.0",
@@ -4041,12 +4042,10 @@
                 "symfony/filesystem": "^4.4 || ^5.4 || ^6.0",
                 "symfony/maker-bundle": "^1.25",
                 "symfony/phpunit-bridge": "^6.1",
-                "symfony/serializer": "^4.4 || ^5.4 || ^6.0",
                 "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
                 "vimeo/psalm": "^4.9.2"
             },
             "suggest": {
-                "symfony/serializer": "To render errors coming from form validation on ajax calls",
                 "twig/extra-bundle": "Auto configures the Twig Intl extension"
             },
             "type": "symfony-bundle",
@@ -4082,7 +4081,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.19.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.20.0"
             },
             "funding": [
                 {
@@ -4102,7 +4101,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-27T21:22:38+00:00"
+            "time": "2022-10-20T08:28:33+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
