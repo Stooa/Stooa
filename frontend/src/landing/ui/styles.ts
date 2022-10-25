@@ -121,30 +121,6 @@ const Billboard = styled.div`
   }
 `;
 
-const Description = styled.div<{ center?: boolean }>`
-  margin-bottom: ${space(5)};
-  text-align: left;
-
-  a {
-    text-decoration: underline;
-  }
-
-  ${media.min('tablet')`
-  margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
-  max-width: ${rems(700)};
-  text-align:'left';
-
-  ${media.min('tablet')`
-    text-align: ${({ center }) => (center ? 'center' : 'left')};
-    margin: ${({ center }) => (center ? `0 auto ${space(5)}}` : `0 0 ${space(5)}}`)};
-  `}
-  `}
-
-  p + p {
-    margin-top: ${space(2)};
-  }
-`;
-
 const Content = styled.div`
   min-height: ${rems(250)};
   position: relative;
@@ -366,4 +342,4 @@ const Banner = styled.div`
   `}
 `;
 
-export { Content, Description, Row, Column, Billboard, Wrapper, Banner, Sections };
+export { Content, Row, Column, Billboard, Wrapper, Banner, Sections };
