@@ -22,21 +22,22 @@ import { Lottie } from '@/types/animations';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import { Billboard, Content, Description, Row, Sections, Wrapper } from '@/ui/pages';
-import WaveMobile from '@/ui/svg/wave-mobile.svg';
-import WaveDesktop from '@/ui/svg/wave-desktop.svg';
-import BillboardDeskAnimPath from '@/ui/animations/home/billboard-desktop.json';
-import BillboardMobAnimPath from '@/ui/animations/home/billboard-mobile.json';
-import MorphBillAnimPath from '@/ui/animations/home/billboard-morph.json';
-import Morph2BillAnimPath from '@/ui/animations/home/billboard-morph-2.json';
-import KeyBenefit2MorphPath from '@/ui/animations/home/keybenefit2-morph.json';
+import { Billboard, Content, Row, Sections, Wrapper } from '@/landing/ui/styles';
+import WaveMobile from '@/landing/ui/svg/wave-mobile.svg';
+import WaveDesktop from '@/landing/ui/svg/wave-desktop.svg';
+import BillboardDeskAnimPath from '@/landing/ui/animations/home/billboard-desktop.json';
+import BillboardMobAnimPath from '@/landing/ui/animations/home/billboard-mobile.json';
+import MorphBillAnimPath from '@/landing/ui/animations/home/billboard-morph.json';
+import Morph2BillAnimPath from '@/landing/ui/animations/home/billboard-morph-2.json';
+import KeyBenefit2MorphPath from '@/landing/ui/animations/home/keybenefit2-morph.json';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import Description from '@/components/Common/Description';
 
-const Benefits = dynamic(import('@/components/Web/HomeSections/Benefits'), {
+const Benefits = dynamic(import('@/landing/HomeSections/Benefits'), {
   loading: () => <div />
 });
-const Banner = dynamic(import('@/components/Web/HomeSections/Banner'), { loading: () => <div /> });
+const Banner = dynamic(import('@/landing/HomeSections/Banner'), { loading: () => <div /> });
 
 const Home = () => {
   const { t } = useTranslation('home');
