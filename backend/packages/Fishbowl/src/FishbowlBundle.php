@@ -19,9 +19,7 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 final class FishbowlBundle extends AbstractBundle
 {
-    /**
-     * @param array<array-key, mixed> $config
-     */
+    /** @param array<array-key, mixed> $config */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         $container->import('../config/services.yaml');
