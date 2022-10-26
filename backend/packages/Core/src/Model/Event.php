@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Core\Model;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
-use App\Core\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
