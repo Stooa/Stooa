@@ -334,17 +334,4 @@ abstract class Event implements EventInterface
 
         return $this;
     }
-
-    public function getHostName(): ?string
-    {
-        if (null === $this->getHost()) {
-            return '';
-        }
-
-        $host = $this->getHost();
-
-        MAssert::isInstanceOf($host, User::class);
-
-        return $host->getName() ?? '';
-    }
 }

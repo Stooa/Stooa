@@ -38,6 +38,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Webmozart\Assert\Assert as MAssert;
 
 /**
  * @ApiFilter(DateFilter::class, properties={"finishDateTime"= DateFilter::EXCLUDE_NULL}),
@@ -219,6 +220,19 @@ final class Fishbowl extends Event implements EventInterface
         $this->host = $host;
 
         return $this;
+    }
+
+    public function getHostName(): ?string
+    {
+        if (null === $this->getHost()) {
+            return '';
+        }
+
+        $host = $this->getHost();
+
+        MAssert::isInstanceOf($host, User::class);
+
+        return $host->getName() ?? '';
     }
 
     /** @return Collection<int, Participant> */

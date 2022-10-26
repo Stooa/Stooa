@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\WorldCafe\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Core\Entity\User;
 use App\Core\Model\Event;
 use App\WorldCafe\Repository\WorldCafeRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +23,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Webmozart\Assert\Assert as MAssert;
 
 /**
  * @ApiResource(
