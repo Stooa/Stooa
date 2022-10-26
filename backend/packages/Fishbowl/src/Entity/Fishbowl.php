@@ -19,6 +19,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
+use App\Core\Model\EventInterface;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
@@ -106,7 +107,7 @@ use Webmozart\Assert\Assert as MAssert;
  * @PrivateFishbowl(groups={"fishbowl:create", "fishbowl:update"})
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
-class Fishbowl implements \Stringable
+final class Fishbowl implements \Stringable, EventInterface
 {
     use TimestampableEntity;
 
