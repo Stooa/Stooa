@@ -21,42 +21,53 @@ use Ramsey\Uuid\UuidInterface;
 interface EventInterface
 {
     public function getId(): ?UuidInterface;
+
     public function setId(string $id): self;
 
     public function getName(): ?string;
+
     public function setName(string $name): self;
 
     public function getSlug(): ?string;
+
     public function setSlug(string $slug): self;
 
     public function getDescription(): ?string;
+
     public function setDescription(?string $description = null): self;
 
     public function getStartDateTime(): ?\DateTimeInterface;
+
     public function setStartDateTime(\DateTimeInterface $startDateTime): self;
 
+    public function getStartDateTimeTz(): \DateTimeImmutable;
+
     public function getTimezone(): ?string;
+
     public function setTimezone(string $timezone): self;
 
     public function getLocale(): ?string;
+
     public function setLocale(string $locale): self;
 
     public function getDuration(): ?\DateTimeInterface;
+
     public function setDuration(\DateTimeInterface $duration): self;
 
-    public function getCurrentStatus(): string;
-    public function setCurrentStatus(string $status): self;
-
     public function getHost(): ?User;
+
     public function setHost(?User $host): self;
 
     public function getParticipants(): Collection;
+
     public function addParticipant(Participant $participant): self;
+
     public function removeParticipant(Participant $participant): self;
 
-    public function getStartDateTimeTz(): \DateTimeImmutable;
     public function getEndDateTimeTz(): \DateTimeImmutable;
+
     public function getFinishDateTime(): ?\DateTimeInterface;
+
     public function setFinishDateTime(\DateTimeInterface $finishDateTime): self;
 
     public function calculateFinishTime(): void;
