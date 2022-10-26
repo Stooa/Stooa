@@ -16,8 +16,10 @@ namespace App\Fishbowl\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use App\Core\Entity\Participant;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
+use App\Core\Model\EventInterface;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
@@ -27,6 +29,8 @@ use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
 use App\Fishbowl\Validator\Constraints\FutureFishbowl;
 use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
@@ -97,7 +101,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @PrivateFishbowl(groups={"fishbowl:create", "fishbowl:update"})
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
-final class Fishbowl extends Event
+final class Fishbowl extends Event implements EventInterface
 {
     final public const TRANSITION_INTRODUCE = 'introduce';
     final public const TRANSITION_RUN = 'run';
@@ -129,6 +133,20 @@ final class Fishbowl extends Event
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private ?UuidInterface $id = null;
+
+    /**
+     * @Groups({"event:read"})
+     * @Assert\NotNull
+     * @ORM\ManyToOne(targetEntity="App\Core\Entity\User", inversedBy="fishbowls")
+     */
+    private ?User $host = null;
+
+    /**
+     * @var Collection<int, Participant>
+     *
+     * @ORM\OneToMany(targetEntity="App\Core\Entity\Participant", mappedBy="fishbowl", cascade={"all"})
+     */
+    private Collection $participants;
 
     /**
      * @Groups({"event:read"})
@@ -166,6 +184,11 @@ final class Fishbowl extends Event
      */
     private ?string $plainPassword = null;
 
+    public function __construct()
+    {
+        $this->participants = new ArrayCollection();
+    }
+
     public function __toString(): string
     {
         $uid = $this->getId();
@@ -182,6 +205,43 @@ final class Fishbowl extends Event
     public function setId(string $id): self
     {
         $this->id = Uuid::fromString($id);
+
+        return $this;
+    }
+
+    public function getHost(): ?User
+    {
+        return $this->host;
+    }
+
+    public function setHost(?User $host): self
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+
+    /** @return Collection<int, Participant> */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Participant $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->$participant[] = $participant;
+            $participant->setFishbowl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Participant $participant): self
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+        }
 
         return $this;
     }

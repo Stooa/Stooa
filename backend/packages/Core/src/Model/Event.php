@@ -14,17 +14,14 @@ declare(strict_types=1);
 namespace App\Core\Model;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
-use App\Core\Entity\Participant;
 use App\Core\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-abstract class Event implements \Stringable, EventInterface
+abstract class Event implements EventInterface
 {
     use TimestampableEntity;
 
@@ -87,13 +84,6 @@ abstract class Event implements \Stringable, EventInterface
     private ?\DateTimeInterface $duration = null;
 
     /**
-     * @Groups({"event:read"})
-     * @Assert\NotNull
-     * @ORM\ManyToOne(targetEntity="App\Core\Entity\User", inversedBy="fishbowls")
-     */
-    private ?User $host = null;
-
-    /**
      * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -116,18 +106,6 @@ abstract class Event implements \Stringable, EventInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $finishDateTime = null;
-
-    /**
-     * @var Collection<int, Participant>
-     *
-     * @ORM\OneToMany(targetEntity="App\Core\Entity\Participant", mappedBy="fishbowl", cascade={"all"})
-     */
-    private Collection $participants;
-
-    public function __construct()
-    {
-        $this->participants = new ArrayCollection();
-    }
 
     public function getName(): ?string
     {
@@ -321,18 +299,6 @@ abstract class Event implements \Stringable, EventInterface
         return $now > $this->getEndDateTimeTz()->add($hoursInterval);
     }
 
-    public function getHost(): ?User
-    {
-        return $this->host;
-    }
-
-    public function setHost(?User $host): self
-    {
-        $this->host = $host;
-
-        return $this;
-    }
-
     public function getIntroducedAt(): ?\DateTimeInterface
     {
         return $this->introducedAt;
@@ -365,31 +331,6 @@ abstract class Event implements \Stringable, EventInterface
     public function setFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $this->finishedAt = $finishedAt;
-
-        return $this;
-    }
-
-    /** @return Collection<int, Participant> */
-    public function getParticipants(): Collection
-    {
-        return $this->participants;
-    }
-
-    public function addParticipant(Participant $participant): self
-    {
-        if (!$this->participants->contains($participant)) {
-            $this->$participant[] = $participant;
-            $participant->setFishbowl($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipant(Participant $participant): self
-    {
-        if ($this->participants->contains($participant)) {
-            $this->participants->removeElement($participant);
-        }
 
         return $this;
     }

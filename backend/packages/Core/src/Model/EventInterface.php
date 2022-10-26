@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Core\Model;
 
-use App\Core\Entity\Participant;
-use App\Core\Entity\User;
-use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\UuidInterface;
 
 interface EventInterface
@@ -53,16 +50,6 @@ interface EventInterface
     public function getDuration(): ?\DateTimeInterface;
 
     public function setDuration(\DateTimeInterface $duration): self;
-
-    public function getHost(): ?User;
-
-    public function setHost(?User $host): self;
-
-    public function getParticipants(): Collection;
-
-    public function addParticipant(Participant $participant): self;
-
-    public function removeParticipant(Participant $participant): self;
 
     public function getEndDateTimeTz(): \DateTimeImmutable;
 
