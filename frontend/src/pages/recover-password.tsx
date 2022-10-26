@@ -10,7 +10,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
 import { useAuth } from '@/contexts/AuthContext';
-import RecoverPasswordForm from '@/components/Web/Forms/recover-password';
+import RecoverPasswordForm from '@/user/forms/recover-password';
 import Layout from '@/layouts/Default';
 import Description from '@/components/Common/Description';
 
