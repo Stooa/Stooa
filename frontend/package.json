@@ -27,7 +27,7 @@
   "dependencies": {
     "@apollo/client": "3.6.10",
     "@types/node": "18.11.5",
-    "@types/react": "17.0.50",
+    "@types/react": "17.0.51",
     "@types/styled-components": "5.1.26",
     "@types/yup": "0.29.14",
     "axios": "0.27.2",
