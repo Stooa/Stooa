@@ -47,13 +47,14 @@ interface Props {
   initialized: boolean;
   fid: string;
   toggleParticipants: () => void;
+  opened: boolean;
 }
 
 const PING_TIMEOUT = 3500;
 
-const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants }) => {
+const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, opened }) => {
   const { t, lang } = useTranslation('fishbowl');
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(opened);
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
   const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);

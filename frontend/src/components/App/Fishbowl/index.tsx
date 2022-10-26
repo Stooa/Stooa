@@ -30,13 +30,14 @@ import ModalOnboarding from '@/components/App/ModalOnBoarding';
 import { HackLeaveHover } from './styles';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import ModalConfirmLeaving from '../ModalConfirmLeaving';
+import { useWindowSize } from '@/hooks/useWIndowSize';
+import { BREAKPOINTS } from '@/ui/settings';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
 const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 
 const Fishbowl: FC = () => {
-  const [participantsActive, setParticipantsActive] = useState(false);
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
   const {
     data,
@@ -47,12 +48,19 @@ const Fishbowl: FC = () => {
     showConfirmCloseTabModal,
     setShowConfirmCloseTabModal
   } = useStooa();
-  const [{ fishbowlReady, conferenceStatus }] = useStateValue();
+
+  const { width } = useWindowSize();
+
+  const [participantsActive, setParticipantsActive] = useState(
+    () => (isModerator && data.isFishbowlNow) || false
+  );
+  const [{ conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
 
-  const isPreFishbowl = fishbowlReady && conferenceStatus === IConferenceStatus.NOT_STARTED;
+  const isPreFishbowl =
+    conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -82,11 +90,25 @@ const Fishbowl: FC = () => {
       category: 'FishbowlReactions',
       label: 'Connect'
     });
+
+    if (width && width < BREAKPOINTS.tablet) {
+      setParticipantsActive(false);
+    }
   }, []);
+
+  useEffect(() => {
+    if (width && width < BREAKPOINTS.tablet) {
+      setParticipantsActive(false);
+    }
+  }, [width]);
 
   return (
     <>
-      <Header isPrefishbowl={isPreFishbowl} toggleParticipants={toggleParticipants} />
+      <Header
+        isPrefishbowl={isPreFishbowl}
+        participantsActive={participantsActive}
+        toggleParticipants={toggleParticipants}
+      />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <HackLeaveHover onMouseEnter={handleModeratorIsGonnaLeave} />
 

@@ -29,10 +29,11 @@ const OnBoardingButton = dynamic(import('@/components/App/OnBoarding'), {
 
 interface Props {
   toggleParticipants: () => void;
+  participantsActive: boolean;
   isPrefishbowl?: boolean;
 }
 
-const Header: React.FC<Props> = ({ toggleParticipants, isPrefishbowl = 'false' }) => {
+const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPrefishbowl }) => {
   const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
@@ -81,6 +82,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, isPrefishbowl = 'false' }
             </div>
             <Participants
               initialized={conferenceReady}
+              opened={participantsActive}
               fid={fid as string}
               toggleParticipants={toggleParticipants}
             />
