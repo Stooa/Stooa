@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Repository;
 
-use App\Fishbowl\Entity\WorldCafe;
+use App\WorldCafe\Entity\WorldCafe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;

@@ -31,7 +31,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @UniqueEntity(fields={"slug"})
  * @ORM\Entity(repositoryClass=WorldCafeRepository::class)
  */
-final class WorldCafe extends Event
+class WorldCafe extends Event
 {
     /**
      * @Groups({"event:read"})

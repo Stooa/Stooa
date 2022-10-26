@@ -19,7 +19,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
-use App\Core\Model\EventInterface;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
@@ -102,7 +101,7 @@ use Webmozart\Assert\Assert as MAssert;
  * @PrivateFishbowl(groups={"fishbowl:create", "fishbowl:update"})
  * @ORM\Entity(repositoryClass=FishbowlRepository::class)
  */
-final class Fishbowl extends Event implements EventInterface
+class Fishbowl extends Event
 {
     final public const TRANSITION_INTRODUCE = 'introduce';
     final public const TRANSITION_RUN = 'run';
