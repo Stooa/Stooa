@@ -34,7 +34,7 @@ final class Version20221027145539 extends AbstractMigration implements Container
     {
         $this->skipIf(
             $this->skipMigration,
-            'Skipping because World Cafe is disabled'
+            'Skipping migration because World Cafe is disabled'
         );
 
         // this up() migration is auto-generated, please modify it to your needs
