@@ -29,13 +29,13 @@ abstract class Event implements EventInterface
      * @Assert\Length(max=255)
      * @ORM\Column(type="string")
      */
-    private ?string $name = null;
+    protected ?string $name = null;
 
     /**
      * @Groups({"event:read", "event:write"})
      * @ORM\Column(type="text", nullable=true)
      */
-    private ?string $description = null;
+    protected ?string $description = null;
 
     /**
      * @Groups({"event:read"})
@@ -43,7 +43,7 @@ abstract class Event implements EventInterface
      * @Assert\Length(max=255)
      * @ORM\Column(type="string", unique=true)
      */
-    private ?string $slug = null;
+    protected ?string $slug = null;
 
     /**
      * @Groups({"event:write", "event:read"})
@@ -51,7 +51,7 @@ abstract class Event implements EventInterface
      * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime")
      */
-    private ?\DateTimeInterface $startDateTime = null;
+    protected ?\DateTimeInterface $startDateTime = null;
 
     /**
      * @Groups({"event:write", "event:read"})
@@ -60,7 +60,7 @@ abstract class Event implements EventInterface
      * @Assert\Timezone
      * @ORM\Column(type="string")
      */
-    private ?string $timezone = null;
+    protected ?string $timezone = null;
 
     /**
      * @Groups({"event:read", "event:write"})
@@ -69,7 +69,7 @@ abstract class Event implements EventInterface
      * @Assert\Locale(canonicalize=true)
      * @ORM\Column(type="string")
      */
-    private ?string $locale = null;
+    protected ?string $locale = null;
 
     /**
      * @Groups({"event:write", "event:read"})
@@ -80,31 +80,31 @@ abstract class Event implements EventInterface
      * })
      * @ORM\Column(type="time")
      */
-    private ?\DateTimeInterface $duration = null;
+    protected ?\DateTimeInterface $duration = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $introducedAt = null;
+    protected ?\DateTimeInterface $introducedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $runnedAt = null;
+    protected ?\DateTimeInterface $runnedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $finishedAt = null;
+    protected ?\DateTimeInterface $finishedAt = null;
 
     /**
      * @Assert\Type("\DateTimeInterface")
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $finishDateTime = null;
+    protected ?\DateTimeInterface $finishDateTime = null;
 
     public function getName(): ?string
     {
