@@ -11,6 +11,7 @@ parameters:
     container.dumper.inline_factories: true
     container.dumper.inline_class_loader: true
     jaas_activated: '%env(JAAS_ACTIVE)%'
+    world_cafe: '%env(WORLD_CAFE)%'
 
 services:
     _defaults:
