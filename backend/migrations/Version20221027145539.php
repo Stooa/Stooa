@@ -47,7 +47,7 @@ final class Version20221027145539 extends AbstractMigration implements Container
         $this->addSql('DROP TABLE world_cafe');
     }
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null): void
     {
         $this->skipMigration = 'false' === $container->getParameter('world_cafe');
     }
