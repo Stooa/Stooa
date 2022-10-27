@@ -16,7 +16,11 @@ import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
-import { getOnBoardingCookie, isFishbowlShareLinkCookie, setShareLinkCookie } from '@/lib/auth';
+import {
+  getOnBoardingCookie,
+  isFishbowlShareLinkCookie,
+  setShareLinkCookie
+} from '@/user/lib/auth';
 
 const ModalShareLink: React.FC = () => {
   const { t } = useTranslation('fishbowl');

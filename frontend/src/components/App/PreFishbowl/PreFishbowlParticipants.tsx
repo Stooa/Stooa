@@ -13,7 +13,7 @@ import { Participant } from '@/types/participant';
 import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
-import { ping } from '@/lib/auth';
+import { ping } from '@/user/lib/auth';
 import { useRouter } from 'next/router';
 import {
   StyledParticipantListWrapper,

@@ -38,7 +38,7 @@ import {
 import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 import Button from '@/components/Common/Button';
 
-import { getAuthToken } from '@/lib/auth';
+import { getAuthToken } from '@/user/lib/auth';
 import api from '@/lib/api';
 import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/helpers';
 import { useWindowSize } from '@/hooks/useWIndowSize';
