@@ -48,7 +48,7 @@ import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons
 import { StooaContextValues } from '@/types/stooa-context';
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getOnBoardingCookie } from '@/user/lib/auth';
+import { getOnBoardingCookie } from '@/user/auth';
 import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';

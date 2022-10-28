@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { ping } from '@/user/lib/auth';
+import { ping } from '@/user/auth';
 import { getParticipantList } from '@/lib/jitsi';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 

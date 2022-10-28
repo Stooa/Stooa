@@ -23,7 +23,7 @@ import * as Yup from 'yup';
 import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import FormikForm from '@/ui/Form';
-import { getAuthToken } from '@/user/lib/auth';
+import { getAuthToken } from '@/user/auth';
 import { UPDATE_USER } from '@/lib/gql/User';
 import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';

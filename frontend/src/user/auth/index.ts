@@ -10,7 +10,7 @@
 import cookie from 'js-cookie';
 
 import api from '@/lib/api';
-import { AuthToken } from '@/user/lib/auth/authToken';
+import { AuthToken } from '@/user/auth/authToken';
 import userRepository from '@/jitsi/User';
 import LocaleCookie from '@/lib/LocaleCookie';
 
