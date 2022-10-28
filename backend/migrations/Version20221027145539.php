@@ -16,14 +16,14 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20221027145539 extends AbstractMigration implements ContainerAwareInterface
 {
-    private bool $skipMigration = true;
+    use ContainerAwareTrait;
 
     public function getDescription(): string
     {
@@ -33,7 +33,7 @@ final class Version20221027145539 extends AbstractMigration implements Container
     public function up(Schema $schema): void
     {
         $this->skipIf(
-            $this->skipMigration,
+            'false' === $this->container->getParameter('world_cafe'),
             'Skipping migration because World Cafe is disabled'
         );
 
@@ -45,10 +45,5 @@ final class Version20221027145539 extends AbstractMigration implements Container
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE world_cafe');
-    }
-
-    public function setContainer(ContainerInterface $container = null): void
-    {
-        $this->skipMigration = 'false' === $container->getParameter('world_cafe');
     }
 }
