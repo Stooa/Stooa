@@ -14,7 +14,7 @@ import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { ping } from '@/lib/auth';
 import { makeParticipant } from '../../../factories/participant';
 
-jest.mock('@/lib/auth');
+jest.mock('@/user/auth');
 jest.mock('@/contexts/AppContext');
 jest.mock('@/repository/ApiParticipantRepository');
 jest.mock('@/components/App/ParticipantPlaceholder', () => () => (
