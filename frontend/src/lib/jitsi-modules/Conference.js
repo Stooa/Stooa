@@ -22,6 +22,8 @@ import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
 import userRepository from '@/jitsi/User';
 
+import JitsiMeetJS from 'lib-jitsi-meet';
+
 const conferenceRepository = () => {
   let connection;
   let roomName;

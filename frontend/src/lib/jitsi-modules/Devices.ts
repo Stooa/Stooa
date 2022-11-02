@@ -10,6 +10,7 @@
 import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
+import JitsiMeetJS from 'lib-jitsi-meet'; // TODO: Hack from jitsi
 
 const devicesRepository = (): DevicesRepository => {
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {

@@ -23,10 +23,7 @@ import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 
-const scripts = [
-  'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
-  '/vendor/lib-jitsi-meet.min.js'
-];
+const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
 interface Props {
   data: Fishbowl;
