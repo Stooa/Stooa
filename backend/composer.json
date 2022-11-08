@@ -63,7 +63,7 @@
         "phpstan/phpstan-doctrine": "1.3.22",
         "phpstan/phpstan-phpunit": "1.2.2",
         "phpstan/phpstan-symfony": "1.2.16",
-        "phpstan/phpstan-webmozart-assert": "1.2.1",
+        "phpstan/phpstan-webmozart-assert": "1.2.2",
         "phpunit/phpunit": "9.5.26",
         "psalm/plugin-phpunit": "0.18.3",
         "psalm/plugin-symfony": "4.0.0",
