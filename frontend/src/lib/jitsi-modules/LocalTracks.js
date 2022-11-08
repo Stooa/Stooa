@@ -10,7 +10,9 @@
 import userRepository from '@/jitsi/User';
 import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
-import JitsiMeetJS from 'lib-jitsi-meet';
+import dynamic from 'next/dynamic';
+
+const JitsiMeetJS = dynamic(() => import('lib-jitsi-meet'), { ssr: false });
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = audioLevel => {
