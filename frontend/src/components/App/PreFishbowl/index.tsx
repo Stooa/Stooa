@@ -31,12 +31,13 @@ import Yellow from '@/ui/svg/blobs/yellow.svg';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { useModals } from '@/contexts/ModalsContext';
 
 const PreFishbowl = () => {
   const router = useRouter();
   const { fid } = router.query;
-  const { data, isModerator, conferenceStatus, timeStatus, toggleOnBoarding, getPassword } =
-    useStooa();
+  const { data, isModerator, conferenceStatus, timeStatus, getPassword } = useStooa();
+  const { toggleOnBoarding } = useModals();
 
   const { t, lang } = useTranslation('fishbowl');
 
