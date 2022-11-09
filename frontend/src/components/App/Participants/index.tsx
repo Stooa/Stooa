@@ -27,6 +27,7 @@ import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/P
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import { useModals } from '@/contexts/ModalsContext';
 
 const initialParticipant: Participant = {
   id: '',
@@ -63,7 +64,9 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data, showOnBoardingTour, getPassword } = useStooa();
+  const { data, getPassword } = useStooa();
+
+  const { showOnBoardingTour } = useModals();
 
   const pingParticipant = () => {
     ping(lang, fid);

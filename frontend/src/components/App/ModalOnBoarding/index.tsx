@@ -16,8 +16,9 @@ import { useStooa } from '@/contexts/StooaManager';
 import { setOnBoardingCookie } from '@/user/auth';
 
 const ModalOnboarding = () => {
-  const { toggleOnBoarding, isModerator, onBoardingTooltipSeen, setActiveOnBoardingTooltip } =
-    useStooa();
+  const { isModerator } = useStooa();
+
+  const { toggleOnBoarding, setActiveOnBoardingTooltip, onBoardingTooltipSeen } = useModals();
 
   const skipOnBoarding = () => {
     toggleOnBoarding('skip');
