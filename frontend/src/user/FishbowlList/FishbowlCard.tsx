@@ -18,7 +18,7 @@ import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { Fishbowl } from '@/types/api-platform';
 
-import { CardStyled, CardTitle } from '@/components/App/FishbowlList/styles';
+import { CardStyled, CardTitle } from '@/user/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';
 import Button from '@/components/Common/Button';
 import Icon from '@/components/Common/Fields/Icon';
