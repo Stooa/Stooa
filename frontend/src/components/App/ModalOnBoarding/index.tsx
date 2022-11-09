@@ -14,6 +14,7 @@ import OnboardingModal from '@/components/App/ModalOnBoarding/styles';
 import OnBoardingSlider from '@/components/App/OnBoarding/OnBoardingSlider';
 import { useStooa } from '@/contexts/StooaManager';
 import { setOnBoardingCookie } from '@/user/auth';
+import { useModals } from '@/contexts/ModalsContext';
 
 const ModalOnboarding = () => {
   const { isModerator } = useStooa();

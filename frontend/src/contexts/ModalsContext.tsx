@@ -10,7 +10,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getOnBoardingCookie } from '@/lib/auth';
+import { getOnBoardingCookie } from '@/user/auth';
 import { ModalsContextValues } from '@/types/contexts/modals-context';
 import { useStateValue } from './AppContext';
 import createGenericContext from './createGenericContext';
