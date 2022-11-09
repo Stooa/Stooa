@@ -32,6 +32,7 @@ import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import ModalConfirmLeaving from '../ModalConfirmLeaving';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { BREAKPOINTS } from '@/ui/settings';
+import { useModals } from '@/contexts/ModalsContext';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -39,15 +40,10 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 
 const Fishbowl: FC = () => {
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const {
-    data,
-    isModerator,
-    participantToKick,
-    setParticipantToKick,
-    showOnBoardingModal,
-    showConfirmCloseTabModal,
-    setShowConfirmCloseTabModal
-  } = useStooa();
+  const { data, isModerator, participantToKick, setParticipantToKick } = useStooa();
+
+  const { showOnBoardingModal, showConfirmCloseTabModal, setShowConfirmCloseTabModal } =
+    useModals();
 
   const { width } = useWindowSize();
 

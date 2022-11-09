@@ -36,7 +36,7 @@ import {
   setToken
 } from '@/lib/auth';
 
-import { Auth, StatusPayload } from '@/types/auth-context';
+import { Auth, StatusPayload } from '@/types/contexts/auth-context';
 import userRepository from '@/jitsi/User';
 import api from '@/lib/api';
 import { AuthToken } from '@/lib/auth/authToken';

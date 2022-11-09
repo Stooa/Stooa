@@ -10,7 +10,7 @@
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { Dispatch, SetStateAction } from 'react';
 import { Participant } from '@/types/participant';
-import { Fishbowl } from './api-platform';
+import { Fishbowl } from '../api-platform';
 
 export interface StooaContextValues {
   conferenceReady: boolean;
@@ -21,17 +21,6 @@ export interface StooaContextValues {
   timeStatus: ITimeStatus;
   participantToKick: Participant | undefined;
   setParticipantToKick: Dispatch<SetStateAction<Participant | undefined>>;
-  showOnBoardingModal: boolean;
-  setShowOnBoardingModal: Dispatch<SetStateAction<boolean>>;
-  toggleOnBoarding: (location: string) => void;
-  activeOnBoardingTooltip: boolean;
-  setActiveOnBoardingTooltip: Dispatch<SetStateAction<boolean>>;
-  onBoardingTooltipSeen: boolean;
-  setOnBoardingTooltipSeen: Dispatch<SetStateAction<boolean>>;
-  showConfirmCloseTabModal: boolean;
-  setShowConfirmCloseTabModal: Dispatch<SetStateAction<boolean>>;
-  showOnBoardingTour: boolean;
-  setShowOnBoardingTour: Dispatch<SetStateAction<boolean>>;
   getPassword: () => string;
   setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
 }
