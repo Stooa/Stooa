@@ -10,7 +10,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { isCurrentGuest } from '@/lib/auth';
+import { isCurrentGuest } from '@/user/auth';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import Linkedin from '@/ui/svg/share-linkedin.svg';
