@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Core\Extension;
+namespace App\Fishbowl\Extension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
@@ -46,6 +46,9 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
 
         $queryBuilder->andWhere(sprintf('%s.currentStatus != :finished', $rootAlias));
         $queryBuilder->setParameter('finished', Fishbowl::STATUS_FINISHED);
+
+        $queryBuilder->andWhere(sprintf('%s.startDateTime > :fiveHoursAgo', $rootAlias));
+        $queryBuilder->setParameter('fiveHoursAgo', (new \DateTimeImmutable())->modify('-5 hour'));
 
         $queryBuilder->addOrderBy(sprintf('%s.startDateTime', $rootAlias), 'ASC');
     }
