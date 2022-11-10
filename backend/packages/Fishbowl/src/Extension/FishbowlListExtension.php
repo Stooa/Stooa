@@ -48,7 +48,7 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
         $queryBuilder->setParameter('finished', Fishbowl::STATUS_FINISHED);
 
         $queryBuilder->andWhere(sprintf('%s.startDateTime > :fiveHoursAgo', $rootAlias));
-        $queryBuilder->setParameter('fiveHoursAgo', (new \DateTimeImmutable())->modify("-5 hour"));
+        $queryBuilder->setParameter('fiveHoursAgo', (new \DateTimeImmutable())->modify('-5 hour'));
 
         $queryBuilder->addOrderBy(sprintf('%s.startDateTime', $rootAlias), 'ASC');
     }
