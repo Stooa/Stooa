@@ -15,7 +15,7 @@ namespace App\Fishbowl\Tests\Unit;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
 use App\Core\Entity\User;
-use App\Core\Extension\FishbowlListExtension;
+use App\Fishbowl\Extension\FishbowlListExtension;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
