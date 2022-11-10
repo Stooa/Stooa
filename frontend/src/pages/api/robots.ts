@@ -8,7 +8,6 @@
  */
 
 export default function handler(req, res) {
-  console.log('SAURAAA', process.env.ROBOTS_INDEXING);
   if (process.env.ROBOTS_INDEXING === 'true') {
     res.send('User-agent: *\nAllow: /');
   } else {
