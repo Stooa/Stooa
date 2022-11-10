@@ -76,7 +76,7 @@
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.7.0",
     "cypress-cucumber-preprocessor": "4.3.1",
-    "eslint": "8.26.0",
+    "eslint": "8.27.0",
     "eslint-config-next": "12.3.2",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-alias": "1.1.2",
