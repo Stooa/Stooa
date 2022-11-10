@@ -50,6 +50,15 @@ const Layout: React.FC<Props> = ({
     data: fbCreatorData
   } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
 
+  const importJitsi = async () => {
+    // @ts-expect-error: lib-jitsi-meet not found
+    const importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
+
+    window.JitsiMeetJS = importedJitsiMeetJs;
+  };
+
+  importJitsi();
+
   if (!scriptsLoaded) return <Loader />;
   if (!scriptsLoadedSuccessfully) return <Error message={'Could not create fishbowl event'} />;
 

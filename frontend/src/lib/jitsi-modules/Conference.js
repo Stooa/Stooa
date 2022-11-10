@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import dynamic from 'next/dynamic';
 import { getAuthToken } from '@/lib/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
 import {
@@ -22,8 +21,6 @@ import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
 import userRepository from '@/jitsi/User';
-
-const JitsiMeetJS = dynamic(() => import('lib-jitsi-meet'), { ssr: false });
 
 const conferenceRepository = () => {
   let connection;
