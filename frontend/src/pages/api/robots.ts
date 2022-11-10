@@ -8,7 +8,7 @@
  */
 
 export default function handler(req, res) {
-  if (process.env.ROBOTS_INDEXING === 'true') {
+  if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'prod') {
     res.send('User-agent: *\nAllow: /');
   } else {
     res.send('User-agent: *\nDisallow: /');
