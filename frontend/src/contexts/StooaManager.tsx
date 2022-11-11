@@ -45,10 +45,8 @@ import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
-import { StooaContextValues } from '@/types/stooa-context';
+import { StooaContextValues } from '@/types/contexts/stooa-context';
 import { Participant } from '@/types/participant';
-import { pushEventDataLayer } from '@/lib/analytics';
-import { getOnBoardingCookie } from '@/lib/auth';
 import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
@@ -73,11 +71,6 @@ const StooaProvider = ({
   const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
-  const [showOnBoardingModal, setShowOnBoardingModal] = useState(false);
-  const [showConfirmCloseTabModal, setShowConfirmCloseTabModal] = useState(false);
-  const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
-  const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
-  const [showOnBoardingTour, setShowOnBoardingTour] = useState(false);
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
 
   const { t, lang } = useTranslation('app');
@@ -256,25 +249,6 @@ const StooaProvider = ({
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
-  const toggleOnBoarding = (location: string) => {
-    pushEventDataLayer({
-      action: showOnBoardingModal ? 'OnBoarding close' : 'OnBoarding open',
-      category: location,
-      label: window.location.href
-    });
-
-    setShowOnBoardingModal(!showOnBoardingModal);
-  };
-
-  const shouldShowOnboardingModal = () => {
-    const cookie = getOnBoardingCookie(isModerator);
-
-    if (!cookie && conferenceStatus === IConferenceStatus.NOT_STARTED && isModerator) {
-      setShowOnBoardingModal(true);
-      setOnBoardingTooltipSeen(false);
-    }
-  };
-
   useEffect(() => {
     if (
       !prejoin &&
@@ -337,10 +311,6 @@ const StooaProvider = ({
     timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
   }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    shouldShowOnboardingModal();
-  }, []);
-
   return (
     <StooaContextProvider
       value={{
@@ -352,17 +322,6 @@ const StooaProvider = ({
         timeStatus,
         participantToKick,
         setParticipantToKick,
-        showOnBoardingModal,
-        setShowOnBoardingModal,
-        toggleOnBoarding,
-        activeOnBoardingTooltip,
-        setActiveOnBoardingTooltip,
-        onBoardingTooltipSeen,
-        setOnBoardingTooltipSeen,
-        showOnBoardingTour,
-        setShowOnBoardingTour,
-        showConfirmCloseTabModal,
-        setShowConfirmCloseTabModal,
         getPassword,
         setFishbowlPassword
       }}

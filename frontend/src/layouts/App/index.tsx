@@ -22,6 +22,7 @@ import { DevicesProvider } from '@/contexts/DevicesContext';
 import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
+import { ModalsProvider } from '@/contexts/ModalsContext';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -69,10 +70,12 @@ const Layout: React.FC<Props> = ({
 
   return (
     <StooaProvider data={data} isModerator={isModerator}>
-      <DevicesProvider>
-        <Seo title={title} />
-        <Container className={className}>{children}</Container>
-      </DevicesProvider>
+      <ModalsProvider isModerator={isModerator}>
+        <DevicesProvider>
+          <Seo title={title} />
+          <Container className={className}>{children}</Container>
+        </DevicesProvider>
+      </ModalsProvider>
       <ToastContainer className="toastify-custom" />
     </StooaProvider>
   );
