@@ -20,7 +20,6 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 
 const EditProfile = () => {
   const { t } = useTranslation('edit-profile');
-
   const { loading, error, data, refetch } = useQuery(GET_SELF_USER);
 
   if (loading) return <Loader />;
