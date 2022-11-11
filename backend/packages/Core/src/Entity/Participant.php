@@ -30,49 +30,36 @@ use Webmozart\Assert\Assert as MAssert;
  *     collectionOperations={"get"},
  *     itemOperations={},
  * )
- * @Assert\Expression(
- *     "this.getUser() or this.getGuest()",
- *     message="user.participant"
- * )
- * @ORM\Entity
  */
+#[Assert\Expression('this.getUser() or this.getGuest()', message: 'user.participant')]
+#[ORM\Entity]
 class Participant implements \Stringable
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    /**
-     * @Groups({"participant:read"})
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(referencedColumnName="id")
-     */
+    #[Groups(['participant:read'])]
+    #[ORM\ManyToOne(targetEntity: 'User')]
+    #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?User $user = null;
 
-    /**
-     * @Groups({"participant:read"})
-     * @ORM\ManyToOne(targetEntity="Guest", cascade={"all"})
-     * @ORM\JoinColumn(referencedColumnName="id")
-     */
+    #[Groups(['participant:read'])]
+    #[ORM\ManyToOne(targetEntity: 'Guest', cascade: ['all'])]
+    #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?Guest $guest = null;
 
-    /**
-     * @Groups({"participant:read"})
-     * @Assert\NotNull
-     * @Assert\Type("\DateTimeInterface")
-     * @ORM\Column(type="datetime")
-     */
+    #[Groups(['participant:read'])]
+    #[Assert\NotNull]
+    #[Assert\Type('\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $lastPing = null;
 
-    /**
-     * @Groups({"participant:read"})
-     * @Assert\NotNull
-     * @ORM\ManyToOne(targetEntity="App\Fishbowl\Entity\Fishbowl", inversedBy="participants")
-     */
+    #[Groups(['participant:read'])]
+    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'participants')]
     private ?Fishbowl $fishbowl = null;
 
     public function __toString(): string

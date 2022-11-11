@@ -16,6 +16,7 @@ namespace App\Core\JWT\Model;
 use App\Core\JWT\Model\Payload\FeaturesPayload;
 use App\Core\JWT\Model\Payload\HeaderPayload;
 use App\Core\JWT\Model\Payload\UserPayload;
+use DateTimeImmutable;
 use Lcobucci\JWT\Token\RegisteredClaims;
 
 class JWTToken
@@ -42,7 +43,7 @@ class JWTToken
         return $this->nbf;
     }
 
-    /** @return array<string, \DateTimeImmutable|string|array<string, string|array<string, mixed>>|null> */
+    /** @return array<string, (DateTimeImmutable | string | array<string, (string | array<string, mixed>)> | null)> */
     public function toArray(): array
     {
         $arrayResponse = [

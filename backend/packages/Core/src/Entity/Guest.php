@@ -41,24 +41,20 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         },
  *     }
  * )
- * @ORM\Entity
  */
+#[ORM\Entity]
 class Guest implements \Stringable
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    /**
-     * @Groups({"guest:create", "guest:write"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['guest:create', 'guest:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
     public function __toString(): string

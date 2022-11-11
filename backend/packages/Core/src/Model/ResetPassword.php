@@ -43,18 +43,14 @@ class ResetPassword
     /** @ApiProperty(identifier=true) */
     private ?UuidInterface $id = null;
 
-    /**
-     * @Groups({"reset_password:write"})
-     * @Assert\NotBlank
-     * @Assert\Email
-     */
+    #[Groups(['reset_password:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private ?string $email = null;
 
-    /**
-     * @Groups({"reset_password:write"})
-     * @Assert\NotBlank
-     * @Assert\Locale
-     */
+    #[Groups(['reset_password:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Locale]
     private ?string $locale = null;
 
     public function getId(): ?UuidInterface

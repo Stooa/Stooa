@@ -20,6 +20,7 @@ use App\Core\Repository\GuestRepository;
 use App\Core\Repository\ParticipantRepository;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
+use DateTimeInterface;
 use Hashids\Hashids;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,18 +31,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @psalm-type RawParticipant = array{
- *     id: UuidInterface|null,
- *     lastPing: \DateTimeInterface|null,
- *     name: string|null,
- *     twitter: string|null,
- *     linkedin: string|null,
- *     isModerator: bool,
- *     isCurrentUser: bool,
- *     guestId: string|null,
- *     joined: bool,
- *     isMuted: bool
- * }
+ * @psalm-type RawParticipant array{id: (UuidInterface | null), lastPing: (DateTimeInterface | null), name: (string | null), twitter: (string | null), linkedin: (string | null), isModerator: bool, isCurrentUser: bool, guestId: (string | null), joined: bool, isMuted: bool}
  */
 class FishbowlService
 {

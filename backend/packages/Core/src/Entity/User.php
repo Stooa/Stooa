@@ -93,111 +93,82 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         }
  *     }
  * )
- * @UniqueEntity(
- *     fields={"email"},
- *     message="user.email"
- * )
- * @ORM\Entity(repositoryClass=UserRepository::class)
  */
+#[UniqueEntity(fields: ['email'], message: 'user.email')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
 
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    /**
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    /**
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string')]
     private ?string $surnames = null;
 
-    /**
-     * @Groups({"user:self", "user:create", "user:read"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @Assert\Email
-     * @ORM\Column(type="string", unique=true)
-     */
+    #[Groups(['user:self', 'user:create', 'user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[Assert\Email]
+    #[ORM\Column(type: 'string', unique: true)]
     private ?string $email = null;
 
-    /**
-     * @var string[]
-     *
-     * @ORM\Column(type="json")
-     */
+    /** @var string[] */
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    /** @ORM\Column(type="string") */
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
-    /**
-     * @Groups({"user:create"})
-     * @Assert\IsTrue
-     * @ORM\Column(type="boolean")
-     */
+    #[Groups(['user:create'])]
+    #[Assert\IsTrue]
+    #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
 
-    /**
-     * @Groups({"user:self", "user:write"})
-     * @ORM\Column(type="boolean")
-     */
+    #[Groups(['user:self', 'user:write'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
 
-    /** @ORM\Column(type="boolean") */
+    #[ORM\Column(type: 'boolean')]
     private bool $active = false;
 
-    /**
-     * @Groups({"user:self", "user:write"})
-     * @Assert\Url
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[Groups(['user:self', 'user:write'])]
+    #[Assert\Url]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $linkedinProfile = null;
 
-    /**
-     * @Groups({"user:self", "user:write"})
-     * @Assert\Url
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[Groups(['user:self', 'user:write'])]
+    #[Assert\Url]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $twitterProfile = null;
 
-    /**
-     * @Groups({"user:self", "user:create", "user:read"})
-     * @Assert\NotNull
-     * @Assert\Length(max=255)
-     * @Assert\Locale(canonicalize=true)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['user:self', 'user:create', 'user:read'])]
+    #[Assert\NotNull]
+    #[Assert\Length(max: 255)]
+    #[Assert\Locale(canonicalize: true)]
+    #[ORM\Column(type: 'string')]
     private ?string $locale = null;
 
-    /**
-     * @var Collection<int, Fishbowl>
-     *
-     * @ORM\OneToMany(targetEntity="App\Fishbowl\Entity\Fishbowl", mappedBy="host")
-     */
+    /** @var Collection<int, Fishbowl> */
+    #[ORM\OneToMany(targetEntity: Fishbowl::class, mappedBy: 'host')]
     private Collection $fishbowls;
 
-    /**
-     * @Groups({"user:write"})
-     * @Assert\NotBlank(groups={"user:create"})
-     */
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
     public function __construct()
@@ -344,7 +315,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         return $this;
     }
 
-    /** @Groups({"user:foreign"}) */
+    #[Groups(['user:foreign'])]
     public function getPublicLinkedinProfile(): ?string
     {
         if ($this->getAllowShareData()) {
@@ -366,7 +337,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         return $this;
     }
 
-    /** @Groups({"user:foreign"}) */
+    #[Groups(['user:foreign'])]
     public function getPublicTwitterProfile(): ?string
     {
         if ($this->getAllowShareData()) {
