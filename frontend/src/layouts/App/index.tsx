@@ -57,12 +57,14 @@ const Layout: React.FC<Props> = ({
     try {
       // @ts-expect-error: lib-jitsi-meet not found
       importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
-      setLoadedJitsi(true);
     } catch (error) {
       setLoadedJitsi(false);
     }
 
-    window.JitsiMeetJS = importedJitsiMeetJs;
+    if (!window.JitsiMeetJS) {
+      window.JitsiMeetJS = importedJitsiMeetJs;
+      setLoadedJitsi(true);
+    }
   };
 
   importJitsi();
