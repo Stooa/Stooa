@@ -60,8 +60,9 @@ const Layout: React.FC<Props> = ({
 
   importJitsi();
 
-  if (!scriptsLoaded) return <Loader />;
-  if (!scriptsLoadedSuccessfully) return <Error message={'Could not create fishbowl event'} />;
+  if (!scriptsLoaded || !window.JitsiMeetJS) return <Loader />;
+  if (!scriptsLoadedSuccessfully || !window.JitsiMeetJS)
+    return <Error message={'Could not create fishbowl event'} />;
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;
