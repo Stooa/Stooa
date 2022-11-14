@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
+
 import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
@@ -34,7 +36,7 @@ const devicesRepository = (): DevicesRepository => {
     conferenceRepository.addTrack(newTracks[0], oldTrack);
   };
 
-  const _changeOutputDevice = (device: MediaDeviceInfo): Promise<void> => {
+  const _changeOutputDevice = (device: MediaDeviceInfo): Promise<unknown> => {
     if (!JitsiMeetJS.mediaDevices.isDeviceChangeAvailable('output')) {
       console.log('[STOOA] Adjusting audio output is not supported.');
 
@@ -46,18 +48,16 @@ const devicesRepository = (): DevicesRepository => {
     return JitsiMeetJS.mediaDevices.setAudioOutputDevice(device.deviceId);
   };
 
-  const changeDevice = (device: MediaDeviceInfo): Promise<void> =>
+  const changeDevice = (device: MediaDeviceInfo): Promise<unknown> =>
     device.kind === 'audiooutput' ? _changeOutputDevice(device) : _changeInputDevice(device);
 
-  const loadDevices = (
-    callback: (newDevices: MediaDeviceInfo[]) => void
-  ): Promise<MediaDeviceInfo[]> => {
+  const loadDevices = (callback: (devices: MediaDeviceInfo[]) => void): void => {
     JitsiMeetJS.mediaDevices.addEventListener(
       JitsiMeetJS.events.mediaDevices.DEVICE_LIST_CHANGED,
       callback
     );
 
-    return JitsiMeetJS.mediaDevices.enumerateDevices(callback);
+    JitsiMeetJS.mediaDevices.enumerateDevices(callback);
   };
 
   const clean = (callback: (newDevices: MediaDeviceInfo[]) => void): void => {
@@ -67,7 +67,7 @@ const devicesRepository = (): DevicesRepository => {
     );
   };
 
-  const isDevicePermissionGranted = (type?: 'audio' | 'video'): Promise<boolean> => {
+  const isDevicePermissionGranted = (type: MediaType): Promise<boolean> => {
     return JitsiMeetJS.mediaDevices.isDevicePermissionGranted(type);
   };
 
