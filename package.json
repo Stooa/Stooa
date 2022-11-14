@@ -7,6 +7,6 @@
     "auto-changelog": {
         "template": "keepachangelog",
         "unreleased": false,
-        "commitLimit": false
+        "commitLimit": 0
     }
 }
