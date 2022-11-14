@@ -7,12 +7,14 @@
  * file that was distributed with this source code.
  */
 
+import _default from 'lib-jitsi-meet/types/hand-crafted/JitsiMeetJS';
+
 declare global {
-  let JitsiMeetJS: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  let JitsiMeetJS: typeof _default;
 
   interface Window {
     dataLayer: Record<string, any>[]; // eslint-disable-line @typescript-eslint/no-explicit-any
-    JitsiMeetJS?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+    JitsiMeetJS?: typeof _default;
   }
 }
 
