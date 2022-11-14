@@ -8,7 +8,6 @@
  */
 
 import { useState, useEffect } from 'react';
-import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
 
 import { Devices, DevicesCtx } from '@/types/devices';
 import userRepository from '@/jitsi/User';
@@ -43,8 +42,8 @@ const DevicesProvider = ({ children }) => {
 
   const _getPermissions = async () => {
     return {
-      audio: await devicesRepository.isDevicePermissionGranted(MediaType.AUDIO),
-      video: await devicesRepository.isDevicePermissionGranted(MediaType.VIDEO)
+      audio: await devicesRepository.isDevicePermissionGranted('audio'),
+      video: await devicesRepository.isDevicePermissionGranted('video')
     };
   };
 

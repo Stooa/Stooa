@@ -7,8 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
-
 import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
@@ -67,7 +65,7 @@ const devicesRepository = (): DevicesRepository => {
     );
   };
 
-  const isDevicePermissionGranted = (type: MediaType): Promise<boolean> => {
+  const isDevicePermissionGranted = (type: 'audio' | 'video'): Promise<boolean> => {
     return JitsiMeetJS.mediaDevices.isDevicePermissionGranted(type);
   };
 

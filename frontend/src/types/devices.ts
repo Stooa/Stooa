@@ -8,7 +8,6 @@
  */
 
 import { Dispatch, SetStateAction } from 'react';
-import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
 
 export interface Devices {
   audioOutputDevices: MediaDeviceInfo[];
@@ -34,5 +33,5 @@ export interface DevicesRepository {
   changeDevice: (device: MediaDeviceInfo) => Promise<unknown>;
   loadDevices: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
   clean: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
-  isDevicePermissionGranted: (type: MediaType) => Promise<boolean>;
+  isDevicePermissionGranted: (type: 'audio' | 'video') => Promise<boolean>;
 }

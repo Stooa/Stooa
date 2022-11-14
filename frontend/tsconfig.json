@@ -28,7 +28,7 @@
         "sourceMap": true,
         "jsx": "preserve",
         "types": ["cypress", "@testing-library/cypress"],
-        "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*", "node_modules/lib-jitsi-meet/types/*"],
+        "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"],
         "incremental": true
     },
     "exclude": ["node_modules"],
