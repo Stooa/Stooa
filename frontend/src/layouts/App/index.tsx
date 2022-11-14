@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
@@ -50,18 +50,20 @@ const Layout: React.FC<Props> = ({
     error,
     data: fbCreatorData
   } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
+  const [loadedJitsi, setLoadedJitsi] = useState(false);
 
   const importJitsi = async () => {
     // @ts-expect-error: lib-jitsi-meet not found
     const importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
+    setLoadedJitsi(true);
 
     window.JitsiMeetJS = importedJitsiMeetJs;
   };
 
   importJitsi();
 
-  if (!scriptsLoaded || !window.JitsiMeetJS) return <Loader />;
-  if (!scriptsLoadedSuccessfully || !window.JitsiMeetJS)
+  if (!scriptsLoaded || !loadedJitsi) return <Loader />;
+  if (!scriptsLoadedSuccessfully || !loadedJitsi)
     return <Error message={'Could not create fishbowl event'} />;
 
   if (loading) return <Loader />;
