@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { JitsiMeetJSType } from 'lib-jitsi-meet/types/hand-crafted/JitsiMeetJS';
+import type { JitsiMeetJSType } from 'lib-jitsi-meet/types/hand-crafted/JitsiMeetJS';
 
 declare global {
   let JitsiMeetJS: JitsiMeetJSType;
