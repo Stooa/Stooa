@@ -18,7 +18,7 @@
         "paragonie/halite": "5.1.0",
         "ramsey/uuid": "4.6.0",
         "ramsey/uuid-doctrine": "1.8.2",
-        "rector/rector": "0.14.7",
+        "rector/rector": "0.14.8",
         "sonata-project/admin-bundle": "4.21.0",
         "sonata-project/doctrine-extensions": "2.0.1",
         "sonata-project/doctrine-orm-admin-bundle": "4.8.0",
