@@ -81,9 +81,11 @@ class FishbowlService
             return $fishbowl;
         }
 
-        return $fishbowl->setName(
+        $fishbowl->setName(
             $this->translator->trans('fishbowl.default_title', ['%name%' => $fishbowl->getHostName()], null, $fishbowl->getLocale())
         );
+
+        return $fishbowl;
     }
 
     public function getFishbowlStatus(string $slug): ?string
