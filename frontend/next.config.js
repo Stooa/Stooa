@@ -7,10 +7,11 @@
  * file that was distributed with this source code.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const nextTranslate = require('next-translate');
 
 module.exports = nextTranslate({
-  webpack: (config, { isServer, webpack }) => {
+  webpack: config => {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack']
@@ -24,5 +25,13 @@ module.exports = nextTranslate({
       ]
     });
     return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/robots.txt',
+        destination: '/api/robots'
+      }
+    ];
   }
 });

@@ -135,10 +135,8 @@ class FishbowlListFunctionalTest extends ApiTestCase
             '@context' => '/contexts/Fishbowl',
             '@id' => '/fishbowls',
             '@type' => 'hydra:Collection',
-            'hydra:totalItems' => 1,
+            'hydra:totalItems' => 0,
         ]);
-
-        $this->assertSame($fishbowl->getName(), $response->toArray()['hydra:member'][0]['name']);
     }
 
     /** @test */
@@ -178,12 +176,11 @@ class FishbowlListFunctionalTest extends ApiTestCase
             '@context' => '/contexts/Fishbowl',
             '@id' => '/fishbowls',
             '@type' => 'hydra:Collection',
-            'hydra:totalItems' => 3,
+            'hydra:totalItems' => 2,
         ]);
 
-        $this->assertSame($first->getName(), $response->toArray()['hydra:member'][0]['name']);
-        $this->assertSame($second->getName(), $response->toArray()['hydra:member'][1]['name']);
-        $this->assertSame($third->getName(), $response->toArray()['hydra:member'][2]['name']);
+        $this->assertSame($second->getName(), $response->toArray()['hydra:member'][0]['name']);
+        $this->assertSame($third->getName(), $response->toArray()['hydra:member'][1]['name']);
     }
 
     private function logIn(User $user): string
