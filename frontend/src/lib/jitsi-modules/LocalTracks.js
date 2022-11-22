@@ -80,6 +80,17 @@ const localTracksRepository = () => {
       });
   };
 
+  const createScreenShareTracks = async () => {
+    return JitsiMeetJS.createLocalTracks({
+      devices: ['desktop']
+    })
+      .then(_addTracks)
+      .catch(error => {
+        console.log('[STOOA] All attempts creating local tracks failed', error.message);
+        return Promise.reject(error);
+      });
+  }
+
   const createLocalTracks = async () => {
     const micDeviceId = userRepository.getUserAudioInput()?.deviceId;
     const cameraDeviceId = userRepository.getUserVideoInput()?.deviceId;
@@ -119,7 +130,7 @@ const localTracksRepository = () => {
     }
   };
 
-  return { createLocalTrack, createLocalTracks };
+  return { createLocalTrack, createLocalTracks, createScreenShareTracks };
 };
 
 export default localTracksRepository();

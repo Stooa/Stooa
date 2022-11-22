@@ -21,6 +21,7 @@ import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
 import userRepository from '@/jitsi/User';
+import localTracks from "@/jitsi/LocalTracks";
 
 const conferenceRepository = () => {
   let connection;

@@ -26,6 +26,7 @@ import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import ReactionsButton from '../Reactions/ReactionsButton';
+import Button from "@/components/Common/Button";
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -36,6 +37,10 @@ const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
 
   const configButtonRef = useRef<ButtonConfigHandle>(null);
+
+  const share = () => {
+    devicesRepository.screenShare();
+  }
 
   const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
@@ -169,6 +174,7 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
+      <Button onClick={share}>Screen share</Button>
       <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
