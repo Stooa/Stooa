@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { ping } from '@/lib/auth';
+import { ping } from '@/user/auth';
 import { getParticipantList } from '@/lib/jitsi';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
@@ -27,6 +27,7 @@ import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/P
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import { useModals } from '@/contexts/ModalsContext';
 
 const initialParticipant: Participant = {
   id: '',
@@ -47,13 +48,14 @@ interface Props {
   initialized: boolean;
   fid: string;
   toggleParticipants: () => void;
+  opened: boolean;
 }
 
 const PING_TIMEOUT = 3500;
 
-const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants }) => {
+const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, opened }) => {
   const { t, lang } = useTranslation('fishbowl');
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(opened);
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
   const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);
@@ -62,7 +64,9 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants })
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data, showOnBoardingTour, getPassword } = useStooa();
+  const { data, getPassword } = useStooa();
+
+  const { showOnBoardingTour } = useModals();
 
   const pingParticipant = () => {
     ping(lang, fid);

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { getAuthToken } from '@/lib/auth';
+import { getAuthToken } from '@/user/auth';
 import { getBackendSafeRoomName, dispatchEvent } from '@/lib/helpers';
 import {
   CONFERENCE_IS_LOCKABLE,

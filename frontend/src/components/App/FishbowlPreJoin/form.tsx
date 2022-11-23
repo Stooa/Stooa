@@ -60,7 +60,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
         {props.isPrivate && <Input label={t('password')} name="password" type="password" />}
 
         <Button size="large" type="submit" disabled={props.isSubmitting}>
-          {t('button.enterFishbowl')}
+          {t('fishbowl:prejoin.joinDiscussion')}
         </Button>
       </fieldset>
     </FormikForm>
