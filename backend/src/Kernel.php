@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\JWT\TokenGenerator\JaasTokenGenerator;
-use App\JWT\TokenGenerator\SelfHostedTokenGenerator;
-use App\JWT\TokenGenerator\TokenGeneratorInterface;
+use App\Core\JWT\TokenGenerator\JaasTokenGenerator;
+use App\Core\JWT\TokenGenerator\SelfHostedTokenGenerator;
+use App\Core\JWT\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;

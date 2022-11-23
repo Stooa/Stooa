@@ -6,4 +6,4 @@
 # file that was distributed with this source code.
 
 gesdinet_jwt_refresh_token:
-    refresh_token_class: App\Entity\RefreshToken
+    refresh_token_class: App\Core\Entity\RefreshToken

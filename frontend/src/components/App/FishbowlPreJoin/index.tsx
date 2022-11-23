@@ -40,11 +40,12 @@ import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Trans from 'next-translate/Trans';
 import { useStooa } from '@/contexts/StooaManager';
 import Image from 'next/image';
+import { IConferenceStatus } from '@/jitsi/Status';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
-  const { data } = useStooa();
+  const { data, isModerator, conferenceStatus } = useStooa();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localTracks = useRef<any[]>([]);
@@ -178,10 +179,18 @@ const FishbowlPreJoin: React.FC = () => {
           </Devices>
           <Form>
             <h2 data-testid="pre-join-title" className="title-md ">
-              {t('fishbowl:prejoin.title')}
+              {isModerator &&
+              data.isFishbowlNow &&
+              conferenceStatus === IConferenceStatus.NOT_STARTED
+                ? t('fishbowl:prejoin.startFishbowl')
+                : t('fishbowl:prejoin.title')}
             </h2>
             <p className="body-md subtitle">
-              <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+              {isModerator ? (
+                t('fishbowl:prejoin.moderatorSubtitle')
+              ) : (
+                <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+              )}
             </p>
             {isAuthenticated ? (
               <AuthUser isPrivate={data.isPrivate} name={user?.name ?? ''} />

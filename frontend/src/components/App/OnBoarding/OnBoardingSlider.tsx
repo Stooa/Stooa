@@ -22,6 +22,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import onBoardingDataWithIntroduction from '@/components/App/OnBoarding/dataWithIntroduction.json';
 import onBoardingDataWithoutIntroduction from '@/components/App/OnBoarding/dataWithoutIntroduction.json';
+import { useModals } from '@/contexts/ModalsContext';
 
 interface Arrow {
   currentSlide?: number;
@@ -55,7 +56,8 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
   const sliderRef = useRef<SlickSlider>(null);
   // const [onBoardingData, setOnBoardingData] = useState([]);
   const { t } = useTranslation('on-boarding');
-  const { data: fishbowlData, showOnBoardingModal, isModerator } = useStooa();
+  const { data: fishbowlData, isModerator } = useStooa();
+  const { showOnBoardingModal } = useModals();
 
   let onBoardingData;
   if (fishbowlData.hasIntroduction) {
