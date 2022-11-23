@@ -11,10 +11,12 @@ import OnBoardingTour from '@/components/App/OnBoardingTour';
 import { render, waitFor } from '@testing-library/react';
 import { makeCurrentFishbowl } from '../../../factories/fishbowl';
 import { useStooa } from '@/contexts/StooaManager';
+import { useModals } from '@/contexts/ModalsContext';
 import { IConferenceStatus } from '@/lib/jitsi-modules/Status';
 import OnBoardingTourCookie from '@/lib/OnBoardingTourCookie';
 
 jest.mock('@/contexts/StooaManager');
+jest.mock('@/contexts/ModalsContext');
 jest.mock('@/lib/OnBoardingTourCookie');
 
 beforeEach(() => {
@@ -22,11 +24,15 @@ beforeEach(() => {
     isModerator: false,
     data: makeCurrentFishbowl(),
     conferenceReady: true,
-    conferenceStatus: IConferenceStatus.RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING
+  });
+
+  useModals.mockReturnValue({
     showOnBoardingTour: true,
     setShowOnBoardingTour: () => true,
     setActiveOnBoardingTooltip: () => false
   });
+
   OnBoardingTourCookie.setOnBoardingCookie.mockReturnValue(true);
 });
 
@@ -45,7 +51,10 @@ describe('On boarding tour component', () => {
       isModerator: true,
       data: makeCurrentFishbowl(),
       conferenceReady: true,
-      conferenceStatus: IConferenceStatus.RUNNING,
+      conferenceStatus: IConferenceStatus.RUNNING
+    });
+
+    useModals.mockReturnValue({
       showOnBoardingTour: false,
       setShowOnBoardingTour: () => false,
       setActiveOnBoardingTooltip: () => false

@@ -8,7 +8,7 @@ Feature: Fishbowl
         And a fishbowl
         When navigates to fishbowl
         And can access to pre join
-        And clicks on "Enter fishbowl"
+        And clicks on "Join the discussion" button
         And sees the prefishbowl page
         And starts fishbowl
         Then can click on reactions

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
@@ -22,11 +22,9 @@ import { DevicesProvider } from '@/contexts/DevicesContext';
 import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
+import { ModalsProvider } from '@/contexts/ModalsContext';
 
-const scripts = [
-  'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
-  '/vendor/lib-jitsi-meet.min.js'
-];
+const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
 interface Props {
   data: Fishbowl;
@@ -52,9 +50,28 @@ const Layout: React.FC<Props> = ({
     error,
     data: fbCreatorData
   } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
+  const [loadedJitsi, setLoadedJitsi] = useState(false);
 
-  if (!scriptsLoaded) return <Loader />;
-  if (!scriptsLoadedSuccessfully) return <Error message={'Could not create fishbowl event'} />;
+  const importJitsi = async () => {
+    let importedJitsiMeetJs;
+    try {
+      // @ts-expect-error: lib-jitsi-meet not found
+      importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
+    } catch (error) {
+      setLoadedJitsi(false);
+    }
+
+    if (!window.JitsiMeetJS) {
+      window.JitsiMeetJS = importedJitsiMeetJs;
+      setLoadedJitsi(true);
+    }
+  };
+
+  importJitsi();
+
+  if (!scriptsLoaded || !loadedJitsi) return <Loader />;
+  if (!scriptsLoadedSuccessfully || !loadedJitsi)
+    return <Error message={'Could not create fishbowl event'} />;
 
   if (loading) return <Loader />;
   if (error) return <Error message={error.message} />;
@@ -63,10 +80,12 @@ const Layout: React.FC<Props> = ({
 
   return (
     <StooaProvider data={data} isModerator={isModerator}>
-      <DevicesProvider>
-        <Seo title={title} />
-        <Container className={className}>{children}</Container>
-      </DevicesProvider>
+      <ModalsProvider isModerator={isModerator}>
+        <DevicesProvider>
+          <Seo title={title} />
+          <Container className={className}>{children}</Container>
+        </DevicesProvider>
+      </ModalsProvider>
       <ToastContainer className="toastify-custom" />
     </StooaProvider>
   );

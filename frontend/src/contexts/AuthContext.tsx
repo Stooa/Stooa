@@ -34,12 +34,12 @@ import {
   getAuthToken,
   setRefreshToken,
   setToken
-} from '@/lib/auth';
+} from '@/user/auth';
 
-import { Auth, StatusPayload } from '@/types/auth-context';
+import { Auth, StatusPayload } from '@/types/contexts/auth-context';
 import userRepository from '@/jitsi/User';
 import api from '@/lib/api';
-import { AuthToken } from '@/lib/auth/authToken';
+import { AuthToken } from '@/user/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { User } from '@/types/user';

@@ -10,8 +10,9 @@ api_platform:
     enable_docs: false
     mapping:
         paths:
-            - '%kernel.project_dir%/src/Entity'
-            - '%kernel.project_dir%/src/Model'
+            - '%kernel.project_dir%/packages/Core/src/Entity'
+            - '%kernel.project_dir%/packages/Core/src/Model'
+            - '%kernel.project_dir%/packages/Fishbowl/src/Entity'
     patch_formats:
         json: ['application/merge-patch+json']
     graphql:

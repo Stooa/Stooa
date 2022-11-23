@@ -26,10 +26,7 @@ const StatusBar: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
   const [statusClass, setStatusClass] = useState('warning');
 
   useEffect(() => {
-    if (
-      conferenceStatus === IConferenceStatus.NOT_STARTED ||
-      (conferenceStatus === IConferenceStatus.RUNNING && timeStatus === ITimeStatus.ENDING)
-    ) {
+    if (conferenceStatus === IConferenceStatus.RUNNING && timeStatus === ITimeStatus.ENDING) {
       setStatusClass('warning');
     } else if (
       (conferenceStatus === IConferenceStatus.RUNNING &&
