@@ -17,13 +17,13 @@ Then('sees tomorrow fishbowl information page', () => {
   cy.screenshot();
 });
 
-Then('sees the prefishbowl page', () => {
-  cy.get('[data-testid=prefishbowl-counter]').should('exist');
-  cy.get('[data-testid=prefishbowl-datacard]').should('exist');
-  cy.get('[data-testid=prefishbowl-participants]').should('exist');
+// Then('sees the prefishbowl page', () => {
+//   cy.get('[data-testid=prefishbowl-counter]').should('exist');
+//   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
+//   cy.get('[data-testid=prefishbowl-participants]').should('exist');
 
-  cy.screenshot();
-});
+//   cy.screenshot();
+// });
 
 Then('sees the password input', () => {
   cy.get('[data-testid=prejoin-password]').should('exist');
@@ -39,7 +39,7 @@ Then('writes the correct password', () => {
   }).as('gqlPrivateFishbowlPassword');
 
   cy.get('[data-testid=prejoin-password]').type('stooa123');
-  cy.get('[data-testid=prejoin-enterFishbowl]').click();
+  cy.get('[data-testid=prejoin-cta]').click();
 
   cy.wait('@gqlPrivateFishbowlPassword');
 

@@ -7,7 +7,7 @@
 
 sonata_user:
     class:
-        user: App\Entity\SonataUserUser
+        user: App\Core\Entity\SonataUserUser
     impersonating:
         route: sonata_admin_dashboard
     resetting:
