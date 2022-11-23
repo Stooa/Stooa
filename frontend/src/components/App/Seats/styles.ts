@@ -44,9 +44,46 @@ const SeatsStyled = styled.div`
       }
     }
 
+    #screen {
+      display: none;
+    }
+
     ${media.min('tablet')`
       padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
+
+      &.sharing {
+      padding-bottom: ${space()};
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-areas:
+        'seat-1 seat-1 . screen screen screen screen . seat-2 seat-2'
+        '. seat-3 seat-3 . seat-4 seat-4 . seat-5 seat-5 .';
+
+      #screen {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        background-color: red;
+        grid-area: screen;
+      }
+
+      .seat:nth-child(1) {
+        grid-area: seat-1;
+      }
+      .seat:nth-child(2) {
+        grid-area: seat-2;
+      }
+      .seat:nth-child(3) {
+        grid-area: seat-3;
+      }
+      .seat:nth-child(4) {
+        grid-area: seat-4;
+      }
+      .seat:nth-child(5) {
+        grid-area: seat-5;
+      }
+    }
     `}
   }
 

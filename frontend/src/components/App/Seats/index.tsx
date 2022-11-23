@@ -28,9 +28,14 @@ const Seats = () => {
 
   return (
     <SeatsStyled>
-      <div className={`content seats-wrapper ${isConferenceNotStarted ? 'not-started' : ''} `}>
+      <div className={`content seats-wrapper  ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
-          <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
+          <Seat
+            className="seat"
+            data-testid="seat"
+            key={`seat-${seat + 1}`}
+            id={`seat-${seat + 1}`}
+          >
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
 
             <div className="frame" />
@@ -59,6 +64,8 @@ const Seats = () => {
             <VideoWrapper id="video-wrapper" />
           </Seat>
         ))}
+
+        <div id="screen"></div>
       </div>
     </SeatsStyled>
   );
