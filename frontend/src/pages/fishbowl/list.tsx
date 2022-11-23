@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import FishbowlList from '@/components/App/FishbowlList';
+import FishbowlList from '@/user/FishbowlList';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';

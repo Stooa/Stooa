@@ -13,8 +13,8 @@ import Cross from '@/ui/svg/cross.svg';
 import OnboardingModal from '@/components/App/ModalOnBoarding/styles';
 import OnBoardingSlider from '@/components/App/OnBoarding/OnBoardingSlider';
 import { useStooa } from '@/contexts/StooaManager';
+import { setOnBoardingCookie } from '@/user/auth';
 import { useModals } from '@/contexts/ModalsContext';
-import { setOnBoardingCookie } from '@/lib/auth';
 
 const ModalOnboarding = () => {
   const { isModerator } = useStooa();
