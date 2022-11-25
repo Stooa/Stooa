@@ -10,25 +10,26 @@
 import userRepository from '@/jitsi/User';
 import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
+import { Track } from "@/types/jitsi/track";
 
 const localTracksRepository = () => {
-  const _handleAudioLevelChanged = audioLevel => {
+  const _handleAudioLevelChanged = (audioLevel: number): void => {
     console.log('[STOOA] Local audio level changed', audioLevel);
   };
 
-  const _handleTrackMuteChanged = track => {
+  const _handleTrackMuteChanged = (track: Track): void => {
     console.log('[STOOA] Local mute change', track.isMuted(), track);
   };
 
-  const _handleLocalTrackStopped = () => {
+  const _handleLocalTrackStopped = (): void => {
     console.log('[STOOA] Local track stopped');
   };
 
-  const _handleAudioOutputChanged = deviceId => {
+  const _handleAudioOutputChanged = (deviceId: string): void => {
     console.log('[STOOA] Local audio output changed', deviceId);
   };
 
-  const _addTracks = tracks => {
+  const _addListenersToHtmlTracks = (htmlTracks: HTMLTrackElement[]): HTMLTrackElement[] => {
     const {
       events: {
         track: {
@@ -40,19 +41,19 @@ const localTracksRepository = () => {
       }
     } = JitsiMeetJS;
 
-    tracks.forEach(track => {
-      track.addEventListener(TRACK_AUDIO_LEVEL_CHANGED, _handleAudioLevelChanged);
-      track.addEventListener(TRACK_MUTE_CHANGED, _handleTrackMuteChanged);
-      track.addEventListener(LOCAL_TRACK_STOPPED, _handleLocalTrackStopped);
-      track.addEventListener(TRACK_AUDIO_OUTPUT_CHANGED, _handleAudioOutputChanged);
+    htmlTracks.forEach(htmlTrack => {
+      htmlTrack.addEventListener(TRACK_AUDIO_LEVEL_CHANGED, _handleAudioLevelChanged);
+      htmlTrack.addEventListener(TRACK_MUTE_CHANGED, _handleTrackMuteChanged);
+      htmlTrack.addEventListener(LOCAL_TRACK_STOPPED, _handleLocalTrackStopped);
+      htmlTrack.addEventListener(TRACK_AUDIO_OUTPUT_CHANGED, _handleAudioOutputChanged);
     });
 
-    console.log('[STOOA] Add local tracks', tracks);
+    console.log('[STOOA] Add local tracks', htmlTracks);
 
-    return tracks;
+    return htmlTracks;
   };
 
-  const createLocalTrack = async (kind, deviceId) => {
+  const createLocalTrack = async (kind: string, deviceId?: string): Promise<Track[]> => {
     let options = {
       devices: [kind],
       firePermissionPromptIsShownEvent: true,
@@ -68,7 +69,7 @@ const localTracksRepository = () => {
     console.log('[STOOA] Created local track', kind, deviceId);
 
     return JitsiMeetJS.createLocalTracks(options)
-      .then(_addTracks)
+      .then(_addListenersToHtmlTracks)
       .catch(error => {
         console.log('[STOOA] Error creating local track', kind, error.message);
 
@@ -80,20 +81,20 @@ const localTracksRepository = () => {
       });
   };
 
-  const createScreenShareTracks = async () => {
+  const createScreenShareTracks = async (): Promise<Track[]> => {
     return JitsiMeetJS.createLocalTracks({
       devices: ['desktop']
     })
-      .then(_addTracks)
+      .then(_addListenersToHtmlTracks)
       .catch(error => {
         console.log('[STOOA] All attempts creating local tracks failed', error.message);
         return Promise.reject(error);
       });
   }
 
-  const createLocalTracks = async () => {
-    const micDeviceId = userRepository.getUserAudioInput()?.deviceId;
-    const cameraDeviceId = userRepository.getUserVideoInput()?.deviceId;
+  const createLocalTracks = async (): Promise<Track[]> => {
+    const micDeviceId = userRepository?.getUserAudioInput()?.deviceId;
+    const cameraDeviceId = userRepository?.getUserVideoInput()?.deviceId;
 
     return JitsiMeetJS.createLocalTracks({
       devices: ['audio', 'video'],
@@ -102,7 +103,7 @@ const localTracksRepository = () => {
       firePermissionPromptIsShownEvent: true,
       fireSlowPromiseEvent: true
     })
-      .then(_addTracks)
+      .then(_addListenersToHtmlTracks)
       .catch(() => {
         console.log('[STOOA] Video and audio failed, trying only audio');
 
@@ -120,7 +121,7 @@ const localTracksRepository = () => {
       });
   };
 
-  const deleteLocalVideo = () => {
+  const deleteLocalVideo = (): void => {
     const userId = conferenceRepository.getMyUserId();
     const seatNumber = seatsRepository.getSeat(userId);
 
