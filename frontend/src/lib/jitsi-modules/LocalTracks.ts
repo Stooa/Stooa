@@ -10,14 +10,14 @@
 import userRepository from '@/jitsi/User';
 import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
-import { Track } from "@/types/jitsi/track";
+import JitsiLocalTrack from "lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack";
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {
     console.log('[STOOA] Local audio level changed', audioLevel);
   };
 
-  const _handleTrackMuteChanged = (track: Track): void => {
+  const _handleTrackMuteChanged = (track: JitsiLocalTrack): void => {
     console.log('[STOOA] Local mute change', track.isMuted(), track);
   };
 
@@ -53,7 +53,7 @@ const localTracksRepository = () => {
     return htmlTracks;
   };
 
-  const createLocalTrack = async (kind: string, deviceId?: string): Promise<Track[]> => {
+  const createLocalTrack = async (kind: string, deviceId?: string): Promise<JitsiLocalTrack[]> => {
     let options = {
       devices: [kind],
       firePermissionPromptIsShownEvent: true,
@@ -81,7 +81,7 @@ const localTracksRepository = () => {
       });
   };
 
-  const createScreenShareTracks = async (): Promise<Track[]> => {
+  const createScreenShareTracks = async (): Promise<JitsiLocalTrack[]> => {
     return JitsiMeetJS.createLocalTracks({
       devices: ['desktop']
     })
@@ -92,7 +92,7 @@ const localTracksRepository = () => {
       });
   }
 
-  const createLocalTracks = async (): Promise<Track[]> => {
+  const createLocalTracks = async (): Promise<JitsiLocalTrack[]> => {
     const micDeviceId = userRepository?.getUserAudioInput()?.deviceId;
     const cameraDeviceId = userRepository?.getUserVideoInput()?.deviceId;
 
