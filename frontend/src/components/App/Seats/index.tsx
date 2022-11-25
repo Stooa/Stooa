@@ -29,6 +29,7 @@ const Seats = () => {
   return (
     <SeatsStyled>
       <div className={`content seats-wrapper ${isConferenceNotStarted ? 'not-started' : ''} `}>
+        <div id="share"></div>
         {[...Array(5)].map((e, seat) => (
           <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
