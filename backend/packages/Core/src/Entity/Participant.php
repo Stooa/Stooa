@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace App\Core\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -23,14 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-/**
- * @ApiResource(
- *     normalizationContext={"groups"={"participant:read"}},
- *     denormalizationContext={"groups"={"participant:write"}},
- *     collectionOperations={"get"},
- *     itemOperations={},
- * )
- */
+#[ApiResource(operations: [new GetCollection()], normalizationContext: ['groups' => ['participant:read']], denormalizationContext: ['groups' => ['participant:write']])]
 #[Assert\Expression('this.getUser() or this.getGuest()', message: 'user.participant')]
 #[ORM\Entity]
 class Participant implements \Stringable
@@ -40,23 +34,19 @@ class Participant implements \Stringable
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
-
     #[Groups(['participant:read'])]
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?User $user = null;
-
     #[Groups(['participant:read'])]
     #[ORM\ManyToOne(targetEntity: Guest::class, cascade: ['all'])]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?Guest $guest = null;
-
     #[Groups(['participant:read'])]
     #[Assert\NotNull]
-    #[Assert\Type('\DateTimeInterface')]
+    #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $lastPing = null;
-
     #[Groups(['participant:read'])]
     #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'participants')]
@@ -122,13 +112,10 @@ class Participant implements \Stringable
     public function getUserName(): string
     {
         $user = $this->getUser();
-
         if (null !== $user) {
             return $user->getFullName();
         }
-
         $guest = $this->getGuest();
-
         if (null !== $guest) {
             $guestName = $guest->getName();
             MAssert::notNull($guestName);
@@ -142,7 +129,6 @@ class Participant implements \Stringable
     public function getPublicTwitterProfile(): ?string
     {
         $user = $this->getUser();
-
         if (null !== $user) {
             return $user->getPublicTwitterProfile();
         }
@@ -153,7 +139,6 @@ class Participant implements \Stringable
     public function getPublicLinkedinAccount(): ?string
     {
         $user = $this->getUser();
-
         if (null !== $user) {
             return $user->getPublicLinkedinProfile();
         }
@@ -164,7 +149,6 @@ class Participant implements \Stringable
     public function isModerator(Fishbowl $fishbowl): bool
     {
         $user = $this->getUser();
-
         if (null !== $this->getUser()) {
             return $fishbowl->getHost() === $user;
         }
@@ -184,10 +168,8 @@ class Participant implements \Stringable
     public function getGuestId(): ?string
     {
         $guest = $this->getGuest();
-
         if (null !== $guest) {
             $uid = $guest->getId();
-
             if (null !== $uid) {
                 return $uid->toString();
             }
