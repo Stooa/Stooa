@@ -42,12 +42,12 @@ class Participant implements \Stringable
     private ?UuidInterface $id = null;
 
     #[Groups(['participant:read'])]
-    #[ORM\ManyToOne(targetEntity: 'User')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?User $user = null;
 
     #[Groups(['participant:read'])]
-    #[ORM\ManyToOne(targetEntity: 'Guest', cascade: ['all'])]
+    #[ORM\ManyToOne(targetEntity: Guest::class, cascade: ['all'])]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?Guest $guest = null;
 

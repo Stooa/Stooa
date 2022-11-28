@@ -32,7 +32,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     private ?UuidInterface $id = null;
 
     public function __construct(
-        #[ORM\ManyToOne(targetEntity: 'User')]
+        #[ORM\ManyToOne(targetEntity: User::class)]
         #[ORM\JoinColumn(nullable: false)]
         private readonly User $user,
         \DateTimeInterface $expiresAt,
