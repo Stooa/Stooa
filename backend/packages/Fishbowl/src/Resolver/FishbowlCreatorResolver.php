@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Resolver;
 
-use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
+use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\PrivateFishbowlService;
