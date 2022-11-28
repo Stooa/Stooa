@@ -10,7 +10,7 @@
 import userRepository from '@/jitsi/User';
 import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
-import JitsiLocalTrack from "lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack";
+import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {
@@ -54,7 +54,7 @@ const localTracksRepository = () => {
   };
 
   const createLocalTrack = async (kind: string, deviceId?: string): Promise<JitsiLocalTrack[]> => {
-    let options = {
+    const options = {
       devices: [kind],
       firePermissionPromptIsShownEvent: true,
       fireSlowPromiseEvent: true
@@ -90,7 +90,7 @@ const localTracksRepository = () => {
         console.log('[STOOA] All attempts creating local tracks failed', error.message);
         return Promise.reject(error);
       });
-  }
+  };
 
   const createLocalTracks = async (): Promise<JitsiLocalTrack[]> => {
     const micDeviceId = userRepository?.getUserAudioInput()?.deviceId;
@@ -127,7 +127,7 @@ const localTracksRepository = () => {
 
     if (seatNumber > 0) {
       const seatHtml = document.getElementById(`seat-${seatNumber}`);
-      seatHtml.querySelector('video').remove();
+      seatHtml?.querySelector('video')?.remove();
     }
   };
 
