@@ -10,10 +10,11 @@
 import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
+import { MediaType } from '@/types/jitsi/media';
 
 const devicesRepository = (): DevicesRepository => {
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
-    const kind = device.kind === 'audioinput' ? 'audio' : 'video';
+    const kind = device.kind === 'audioinput' ? MediaType.AUDIO : MediaType.VIDEO;
     const oldTrack =
       kind === 'audio'
         ? conferenceRepository.getLocalAudioTrack()
@@ -77,21 +78,21 @@ const devicesRepository = (): DevicesRepository => {
       oldTrack.dispose();
     }
 
-    const newTracks = await localTracksRepository.createScreenShareTracks();
+    const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
 
     if (newTracks.length !== 1) {
       Promise.reject('More than one track to replace');
     }
 
     conferenceRepository.addTrack(newTracks[0], undefined);
-  }
+  };
 
   return {
     changeDevice,
     loadDevices,
     isDevicePermissionGranted,
     clean,
-    screenShare,
+    screenShare
   };
 };
 

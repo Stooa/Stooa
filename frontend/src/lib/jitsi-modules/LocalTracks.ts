@@ -11,6 +11,7 @@ import userRepository from '@/jitsi/User';
 import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
+import { MediaType } from '@/types/jitsi/media';
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {
@@ -53,7 +54,10 @@ const localTracksRepository = () => {
     return htmlTracks;
   };
 
-  const createLocalTrack = async (kind: string, deviceId?: string): Promise<JitsiLocalTrack[]> => {
+  const createLocalTrack = async (
+    kind: MediaType,
+    deviceId?: string
+  ): Promise<JitsiLocalTrack[]> => {
     const options = {
       devices: [kind],
       firePermissionPromptIsShownEvent: true,
@@ -81,17 +85,6 @@ const localTracksRepository = () => {
       });
   };
 
-  const createScreenShareTracks = async (): Promise<JitsiLocalTrack[]> => {
-    return JitsiMeetJS.createLocalTracks({
-      devices: ['desktop']
-    })
-      .then(_addListenersToHtmlTracks)
-      .catch(error => {
-        console.log('[STOOA] All attempts creating local tracks failed', error.message);
-        return Promise.reject(error);
-      });
-  };
-
   const createLocalTracks = async (): Promise<JitsiLocalTrack[]> => {
     const micDeviceId = userRepository?.getUserAudioInput()?.deviceId;
     const cameraDeviceId = userRepository?.getUserVideoInput()?.deviceId;
@@ -107,12 +100,12 @@ const localTracksRepository = () => {
       .catch(() => {
         console.log('[STOOA] Video and audio failed, trying only audio');
 
-        return createLocalTrack('audio', micDeviceId);
+        return createLocalTrack(MediaType.AUDIO, micDeviceId);
       })
       .catch(() => {
         console.log('[STOOA] Audio failed, trying only video');
 
-        return createLocalTrack('video', cameraDeviceId);
+        return createLocalTrack(MediaType.VIDEO, cameraDeviceId);
       })
       .catch(error => {
         console.log('[STOOA] All attempts creating local tracks failed', error.message);
@@ -131,7 +124,7 @@ const localTracksRepository = () => {
     }
   };
 
-  return { createLocalTrack, createLocalTracks, createScreenShareTracks };
+  return { createLocalTrack, createLocalTracks };
 };
 
 export default localTracksRepository();

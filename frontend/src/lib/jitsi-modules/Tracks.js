@@ -9,6 +9,7 @@
 
 import seatsRepository from '@/jitsi/Seats';
 import conferenceRepository from '@/jitsi/Conference';
+import { MediaType } from '@/types/jitsi/media';
 
 const tracksRepository = () => {
   let tracks = [];
@@ -192,7 +193,10 @@ const tracksRepository = () => {
 
     tracks[id].push(track);
 
-    const seat = seatsRepository.getSeat(id);
+    const seat =
+      track.getVideoType() === MediaType.DESKTOP
+        ? seatsRepository.getScreenShareHtml()
+        : seatsRepository.getSeat(id);
 
     if (seat > 0) {
       _create(seat, track);
