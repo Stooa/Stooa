@@ -25,7 +25,7 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/packages/Fishbowl/tests',
     ]);
     $rectorConfig->importNames();
-    $rectorConfig->importShortClasses();
+    $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         CountOnNullRector::class,
     ]);
