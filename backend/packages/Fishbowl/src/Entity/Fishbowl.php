@@ -214,7 +214,7 @@ class Fishbowl implements \Stringable
 
     /** @var Collection<int, Participant> */
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Participant::class, cascade: ['all'])]
-    private readonly Collection $participants;
+    private Collection $participants;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
