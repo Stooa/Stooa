@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6903f0128314899355741f0dee71a873",
+    "content-hash": "95be3800d8a8f3c2ecfcb894d9391a3f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -15257,24 +15257,25 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.23.0",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "a3f3cdb397c70237ca743192aaeb4a4407f7e1d3"
+                "reference": "1711ddf0957870a688472dd2569b3825a5a16ea2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/a3f3cdb397c70237ca743192aaeb4a4407f7e1d3",
-                "reference": "a3f3cdb397c70237ca743192aaeb4a4407f7e1d3",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/1711ddf0957870a688472dd2569b3825a5a16ea2",
+                "reference": "1711ddf0957870a688472dd2569b3825a5a16ea2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/persistence": "^1.3.3|^2.0|^3.0",
                 "fakerphp/faker": "^1.5",
-                "php": ">=7.2.12",
+                "php": ">=8.0",
                 "symfony/deprecation-contracts": "^2.2|^3.0",
                 "symfony/property-access": "^3.4|^4.4|^5.0|^6.0",
+                "symfony/string": "^6.0",
                 "zenstruck/assert": "^1.0",
                 "zenstruck/callback": "^1.1"
             },
@@ -15288,7 +15289,8 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^4.1",
                 "symfony/framework-bundle": "^4.4|^5.0|^6.0",
                 "symfony/maker-bundle": "^1.30",
-                "symfony/phpunit-bridge": "^6.0"
+                "symfony/phpunit-bridge": "^6.0",
+                "symfony/translation-contracts": "^3.0"
             },
             "type": "library",
             "extra": {
@@ -15328,7 +15330,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.23.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.24.0"
             },
             "funding": [
                 {
@@ -15336,7 +15338,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-11-10T18:43:03+00:00"
+            "time": "2022-11-25T16:03:04+00:00"
         }
     ],
     "aliases": [],
