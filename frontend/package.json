@@ -40,7 +40,7 @@
     "gsap": "3.11.3",
     "hoist-non-react-statics": "3.3.2",
     "intro.js": "5.1.0",
-    "intro.js-react": "0.7.0",
+    "intro.js-react": "0.7.1",
     "js-cookie": "3.0.1",
     "jwt-decode": "3.1.2",
     "lib-jitsi-meet": "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1529.0.0%2B669dbcbb/lib-jitsi-meet.tgz",
@@ -55,7 +55,6 @@
     "react-toastify": "8.2.0",
     "slick-carousel": "1.8.1",
     "styled-components": "5.3.6",
-    "swr": "1.2.2",
     "typescript": "4.7.4",
     "use-sound": "4.0.1",
     "yup": "0.32.11"
@@ -72,7 +71,7 @@
     "@types/jest": "27.4.1",
     "@types/js-cookie": "3.0.2",
     "@types/react-slick": "0.23.10",
-    "@typescript-eslint/eslint-plugin": "5.43.0",
+    "@typescript-eslint/eslint-plugin": "5.44.0",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.7.0",
@@ -89,6 +88,6 @@
     "jest-next-dynamic": "1.0.1",
     "jest-transformer-svg": "2.0.0",
     "nyc": "15.1.0",
-    "prettier": "2.7.1"
+    "prettier": "2.8.0"
   }
 }
