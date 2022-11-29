@@ -10,6 +10,7 @@
 import userRepository from '@/jitsi/User';
 import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
+import sharedTrackRepository from '@/jitsi/SharedTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 import { MediaType } from '@/types/jitsi/media';
 
@@ -22,8 +23,11 @@ const localTracksRepository = () => {
     console.log('[STOOA] Local mute change', track.isMuted(), track);
   };
 
-  const _handleLocalTrackStopped = (): void => {
-    console.log('[STOOA] Local track stopped');
+  const _handleLocalTrackStopped = (track: JitsiLocalTrack): void => {
+    if (track.getVideoType() === 'desktop') {
+      sharedTrackRepository.removeShareTrack(track);
+    }
+    console.log('[STOOA] Local track stopped', track);
   };
 
   const _handleAudioOutputChanged = (deviceId: string): void => {

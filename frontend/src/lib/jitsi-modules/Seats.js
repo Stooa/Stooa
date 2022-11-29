@@ -169,17 +169,12 @@ const seatsRepository = () => {
     return seatHtml.getAttribute('data-id');
   };
 
-  const getScreenShareHtml = () => {
-    return document.getElementById('share');
-  };
-
   return {
     create,
     getIds,
     getSeat,
     getSeats,
     getParticipantIdBySeat,
-    getScreenShareHtml,
     hasFreeSeat,
     join,
     leave,

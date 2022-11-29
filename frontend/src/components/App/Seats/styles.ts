@@ -37,6 +37,18 @@ const SeatsStyled = styled.div`
     height: 100%;
     width: 100%;
 
+    & #share {
+      width: 100%;
+      height: 100%;
+      background-color: red;
+
+      & > video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
     &.not-started div[id^='seat'] {
       background: ${COLOR_NEUTRO_300};
       .seat-wrapper {

@@ -9,6 +9,7 @@
 
 import seatsRepository from '@/jitsi/Seats';
 import conferenceRepository from '@/jitsi/Conference';
+import sharedTrackRepository from '@/jitsi/SharedTrack';
 import { MediaType } from '@/types/jitsi/media';
 
 const tracksRepository = () => {
@@ -101,26 +102,6 @@ const tracksRepository = () => {
     }
   };
 
-  const _createShareTrack = async track => {
-    const videoType = track.getVideoType();
-    if (videoType !== 'desktop') {
-      return;
-    }
-
-    const trackHtml = document.createElement('video');
-    trackHtml.autoplay = true;
-
-    trackHtml.id = track.getParticipantId() + videoType;
-
-    trackHtml.setAttribute('muted', '');
-    trackHtml.setAttribute('playsinline', '');
-    seatHtml.querySelector('#share').appendChild(trackHtml);
-
-    track.attach(trackHtml);
-
-    // _playTrackHtml(trackHtml);
-  };
-
   const _remove = track => {
     const trackHtml = _getTrackHtml(track);
 
@@ -205,8 +186,15 @@ const tracksRepository = () => {
   };
 
   const handleTrackAdded = track => {
+    if (track.getVideoType() === MediaType.DESKTOP) {
+      sharedTrackRepository.shareTrackAdded(track);
+    } else {
+      trackAdded(track);
+    }
+  };
+
+  const trackAdded = track => {
     const id = track.getParticipantId();
-    console.log('SAURA TRACK', track);
 
     if (tracks[id] === undefined) {
       tracks[id] = [];
@@ -216,12 +204,8 @@ const tracksRepository = () => {
 
     let seat;
 
-    if (track.getVideoType() === MediaType.DESKTOP) {
-      _createShareTrack(track);
-    } else {
-      seat = seatsRepository.getSeat(id);
-      _create(seat, track);
-    }
+    seat = seatsRepository.getSeat(id);
+    _create(seat, track);
 
     console.log('[STOOA] Handle track added', track, seat);
   };
