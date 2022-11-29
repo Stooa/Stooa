@@ -90,7 +90,7 @@ const tracksRepository = () => {
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
       trackHtml.setAttribute('playsinline', '');
-      seatHtml.querySelector('#video-wrapper').appendChild(trackHtml);
+      seatHtml.querySelector('.video-wrapper').appendChild(trackHtml);
     } else {
       seatHtml.appendChild(trackHtml);
     }
@@ -99,6 +99,26 @@ const tracksRepository = () => {
     if (!track.isLocalAudioTrack()) {
       _playTrackHtml(trackHtml);
     }
+  };
+
+  const _createShareTrack = async track => {
+    const videoType = track.getVideoType();
+    if (videoType !== 'desktop') {
+      return;
+    }
+
+    const trackHtml = document.createElement('video');
+    trackHtml.autoplay = true;
+
+    trackHtml.id = track.getParticipantId() + videoType;
+
+    trackHtml.setAttribute('muted', '');
+    trackHtml.setAttribute('playsinline', '');
+    seatHtml.querySelector('#share').appendChild(trackHtml);
+
+    track.attach(trackHtml);
+
+    // _playTrackHtml(trackHtml);
   };
 
   const _remove = track => {
@@ -186,6 +206,7 @@ const tracksRepository = () => {
 
   const handleTrackAdded = track => {
     const id = track.getParticipantId();
+    console.log('SAURA TRACK', track);
 
     if (tracks[id] === undefined) {
       tracks[id] = [];
@@ -193,12 +214,12 @@ const tracksRepository = () => {
 
     tracks[id].push(track);
 
-    const seat =
-      track.getVideoType() === MediaType.DESKTOP
-        ? seatsRepository.getScreenShareHtml()
-        : seatsRepository.getSeat(id);
+    let seat;
 
-    if (seat > 0) {
+    if (track.getVideoType() === MediaType.DESKTOP) {
+      _createShareTrack(track);
+    } else {
+      seat = seatsRepository.getSeat(id);
       _create(seat, track);
     }
 

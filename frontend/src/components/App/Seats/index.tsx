@@ -57,7 +57,7 @@ const Seats = () => {
               )}
             </Free>
             <VideoPlaceholder className="video-placeholder" />
-            <VideoWrapper id="video-wrapper" />
+            <VideoWrapper className="video-wrapper" />
           </Seat>
         ))}
       </div>

@@ -262,11 +262,11 @@ const Seat = styled.div`
     display: block;
   }
 
-  &.user-muted-video > #video-wrapper {
+  &.user-muted-video > .video-wrapper {
     z-index: 0;
   }
 
-  & > #video-wrapper video {
+  & > .video-wrapper video {
     height: 100%;
     left: 50%;
     object-fit: cover;
