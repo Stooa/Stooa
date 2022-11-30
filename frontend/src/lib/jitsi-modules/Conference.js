@@ -333,7 +333,6 @@ const conferenceRepository = () => {
 
     if (oldTrack === undefined) {
       conference.addTrack(track);
-
       return;
     }
 

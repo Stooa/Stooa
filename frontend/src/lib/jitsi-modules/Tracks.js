@@ -190,6 +190,7 @@ const tracksRepository = () => {
       sharedTrackRepository.shareTrackAdded(track);
       console.log('[STOOA] handle desktop track added');
     } else {
+      console.log('-------------->xxxxx');
       trackAdded(track);
     }
   };

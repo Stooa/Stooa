@@ -10,7 +10,7 @@
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 
 const sharedTrackRepository = () => {
-  let shareTrack: JitsiLocalTrack;
+  let shareTrack: JitsiLocalTrack | null;
 
   const getShareHtmlTrack = (): HTMLElement | null => {
     return document.getElementById('share');
@@ -50,6 +50,9 @@ const sharedTrackRepository = () => {
     if (!track) return;
 
     const trackHtml = getShareHtmlTrack();
+    shareTrack = null;
+
+    track.dispose();
 
     if (trackHtml && trackHtml.firstChild) {
       track.detach(trackHtml);

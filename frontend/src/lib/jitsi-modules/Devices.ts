@@ -71,13 +71,6 @@ const devicesRepository = (): DevicesRepository => {
   };
 
   const screenShare = async (): Promise<void> => {
-    const oldTrack = conferenceRepository.getLocalVideoTrack();
-
-    if (oldTrack !== undefined) {
-      oldTrack.getTrack().stop();
-      oldTrack.dispose();
-    }
-
     const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
 
     if (newTracks.length !== 1) {
