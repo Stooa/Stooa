@@ -43,7 +43,7 @@
     "intro.js-react": "0.7.1",
     "js-cookie": "3.0.1",
     "jwt-decode": "3.1.2",
-    "lib-jitsi-meet": "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1486.0.0+73bc6ba2/lib-jitsi-meet.tgz",
+    "lib-jitsi-meet": "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1538.0.0+871968af/lib-jitsi-meet.tgz",
     "lottie-web": "5.9.6",
     "next": "12.3.4",
     "next-translate": "1.6.0",
