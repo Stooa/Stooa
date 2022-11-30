@@ -22,3 +22,4 @@ export const NOTIFICATION_CLOSE = 'notification:close';
 export const LOCALTRACK_STOPPED = 'localtrack:stopped';
 export const PERMISSION_CHANGED = 'permission:changed';
 export const REACTION_MESSAGE_RECEIVED = 'reaction:received';
+export const SCREEN_SHARE_CANCELED = 'screen-share:canceled';

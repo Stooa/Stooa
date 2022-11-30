@@ -188,6 +188,7 @@ const tracksRepository = () => {
   const handleTrackAdded = track => {
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.shareTrackAdded(track);
+      console.log('---> HA ENTRADO UN TIPO DESKTOP TRACK TRON');
     } else {
       trackAdded(track);
     }

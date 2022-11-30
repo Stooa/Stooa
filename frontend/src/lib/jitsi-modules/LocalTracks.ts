@@ -12,7 +12,9 @@ import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
-import { MediaType } from '@/types/jitsi/media';
+import {MediaType} from '@/types/jitsi/media';
+import {dispatchEvent} from "@/lib/helpers";
+import {SCREEN_SHARE_CANCELED} from "@/jitsi/Events";
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {
@@ -24,7 +26,7 @@ const localTracksRepository = () => {
   };
 
   const _handleLocalTrackStopped = (track: JitsiLocalTrack): void => {
-    if (track.getVideoType() === 'desktop') {
+    if (track && track.getVideoType() === 'desktop') {
       sharedTrackRepository.removeShareTrack(track);
     }
     console.log('[STOOA] Local track stopped', track);
@@ -34,6 +36,10 @@ const localTracksRepository = () => {
     console.log('[STOOA] Local audio output changed', deviceId);
   };
 
+  const _handleVideoTypeChanged = (foo): void => {
+    console.log('[STOOA] Local video type changed', foo);
+  };
+
   const _addListenersToHtmlTracks = (htmlTracks: HTMLTrackElement[]): HTMLTrackElement[] => {
     const {
       events: {
@@ -41,7 +47,8 @@ const localTracksRepository = () => {
           TRACK_AUDIO_LEVEL_CHANGED,
           TRACK_MUTE_CHANGED,
           LOCAL_TRACK_STOPPED,
-          TRACK_AUDIO_OUTPUT_CHANGED
+          TRACK_AUDIO_OUTPUT_CHANGED,
+          TRACK_VIDEOTYPE_CHANGED
         }
       }
     } = JitsiMeetJS;
@@ -51,6 +58,7 @@ const localTracksRepository = () => {
       htmlTrack.addEventListener(TRACK_MUTE_CHANGED, _handleTrackMuteChanged);
       htmlTrack.addEventListener(LOCAL_TRACK_STOPPED, _handleLocalTrackStopped);
       htmlTrack.addEventListener(TRACK_AUDIO_OUTPUT_CHANGED, _handleAudioOutputChanged);
+      htmlTrack.addEventListener(TRACK_VIDEOTYPE_CHANGED, _handleVideoTypeChanged);
     });
 
     console.log('[STOOA] Add local tracks', htmlTracks);
@@ -81,7 +89,11 @@ const localTracksRepository = () => {
       .catch(error => {
         console.log('[STOOA] Error creating local track', kind, error.message);
 
-        if (kind === 'video') {
+        if (kind === MediaType.DESKTOP) {
+          dispatchEvent(SCREEN_SHARE_CANCELED);
+        }
+
+        if (kind === MediaType.VIDEO) {
           deleteLocalVideo();
         }
 
