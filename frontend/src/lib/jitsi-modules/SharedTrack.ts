@@ -25,8 +25,6 @@ const sharedTrackRepository = () => {
     const seatHtml = document.getElementById('share');
     const trackHtml = document.createElement('video');
 
-    console.log('Saura', seatHtml);
-
     if (!seatHtml && trackHtml) {
       return;
     }
