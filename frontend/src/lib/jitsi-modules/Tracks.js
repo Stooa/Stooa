@@ -207,6 +207,8 @@ const tracksRepository = () => {
 
     seat = seatsRepository.getSeat(id);
     _create(seat, track);
+
+    console.log('[STOOA] Handle video or audio track added in seat', track, seat);
   };
 
   const handleTrackRemoved = track => {
