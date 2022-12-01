@@ -120,6 +120,7 @@ const tracksRepository = () => {
     }
   };
 
+  // TO-DO: play shared tracks
   const playTracks = () => {
     const ids = seatsRepository.getIds();
 
@@ -214,6 +215,11 @@ const tracksRepository = () => {
   const handleTrackRemoved = track => {
     const id = track.getParticipantId();
     const seat = seatsRepository.getSeat(id);
+
+    if (track.getVideoType() === MediaType.DESKTOP) {
+      sharedTrackRepository.removeShareTrack(track);
+      return;
+    }
 
     if (seat > 0) {
       _remove(track);

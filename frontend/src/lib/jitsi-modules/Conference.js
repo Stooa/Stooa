@@ -69,7 +69,7 @@ const conferenceRepository = () => {
 
     conference.selectParticipants(seatsRepository.getIds());
 
-    console.log('[STOOA] Leave', id);
+    console.log('[STOOA] User leave', id);
   };
 
   const _handleParticipantConnectionStatusChanged = (id, status) => {

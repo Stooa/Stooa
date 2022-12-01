@@ -46,15 +46,15 @@ const sharedTrackRepository = () => {
     _createShareTrack(shareTrack);
   };
 
-  const removeShareTrack = track => {
+  const removeShareTrack = async track => {
     if (!track) return;
 
     const trackHtml = getShareHtmlTrack();
     shareTrack = null;
 
-    track.dispose();
-
     if (trackHtml && trackHtml.firstChild) {
+      // dispose when leaving only
+      // await track.dispose();
       track.detach(trackHtml);
       trackHtml.removeChild(trackHtml.firstChild);
     }
