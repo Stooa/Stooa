@@ -261,7 +261,7 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.DEBUG);
+    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);

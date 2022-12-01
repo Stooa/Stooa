@@ -186,7 +186,7 @@ const tracksRepository = () => {
   };
 
   const handleTrackAdded = track => {
-    console.log('[STOOA] handle desktop track added', track, track.getType(), track.getVideoType);
+    console.log('[STOOA] handle track added', track, track.getType(), track.getVideoType());
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.shareTrackAdded(track);
     } else {
