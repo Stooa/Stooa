@@ -186,15 +186,15 @@ const tracksRepository = () => {
   };
 
   const handleTrackAdded = track => {
-    console.log('[STOOA] handle track added', track, track.getType(), track.getVideoType());
+    console.log('[STOOA] Handle track added', track, track.getType(), track.getVideoType());
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.shareTrackAdded(track);
     } else {
-      trackAdded(track);
+      videoAudioTrackAdded(track);
     }
   };
 
-  const trackAdded = track => {
+  const videoAudioTrackAdded = track => {
     const id = track.getParticipantId();
 
     if (tracks[id] === undefined) {
@@ -207,8 +207,6 @@ const tracksRepository = () => {
 
     seat = seatsRepository.getSeat(id);
     _create(seat, track);
-
-    console.log('[STOOA] Handle track added', track, seat);
   };
 
   const handleTrackRemoved = track => {
