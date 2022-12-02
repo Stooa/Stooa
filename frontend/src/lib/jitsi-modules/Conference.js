@@ -15,7 +15,9 @@ import {
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   PERMISSION_CHANGED,
-  REACTION_MESSAGE_RECEIVED
+  REACTION_MESSAGE_RECEIVED,
+  SCREEN_SHARE_START,
+  SCREEN_SHARE_STOP
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -85,6 +87,13 @@ const conferenceRepository = () => {
       oldValue,
       newValue
     );
+
+    if (property === 'screenShare' && newValue) {
+      console.log('entro aqui');
+      dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
+
+      return;
+    }
 
     if (property === 'joined') {
       const id = user.getId();
@@ -366,6 +375,14 @@ const conferenceRepository = () => {
     }
   };
 
+  const startScreenShareEvent = () => {
+    conference.setLocalParticipantProperty('screenShare', 'true');
+  };
+
+  const stopScreenShareEvent = () => {
+    conference.setLocalParticipantProperty('screenShare', 'false');
+  };
+
   const sendJoinEvent = user => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
@@ -458,7 +475,9 @@ const conferenceRepository = () => {
     leave,
     sendJoinEvent,
     sendLeaveEvent,
-    sendTextMessage
+    sendTextMessage,
+    startScreenShareEvent,
+    stopScreenShareEvent
   };
 };
 

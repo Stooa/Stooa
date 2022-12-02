@@ -78,6 +78,8 @@ const devicesRepository = (): DevicesRepository => {
     }
 
     conferenceRepository.addTrack(newTracks[0], undefined);
+
+    conferenceRepository.startScreenShareEvent();
   };
 
   return {

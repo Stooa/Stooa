@@ -8,6 +8,7 @@
  */
 
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
+import conferenceRepository from '@/jitsi/Conference';
 
 const sharedTrackRepository = () => {
   let shareTrack: JitsiLocalTrack | null;
@@ -53,10 +54,13 @@ const sharedTrackRepository = () => {
     shareTrack = null;
 
     if (trackHtml && trackHtml.firstChild) {
-      // dispose when leaving only
-      // await track.dispose();
       track.detach(trackHtml);
+
       trackHtml.removeChild(trackHtml.firstChild);
+
+      await track.dispose();
+
+      conferenceRepository.stopScreenShareEvent();
     }
 
     console.log('[STOOA] Html tracks removed');
