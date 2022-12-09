@@ -88,7 +88,7 @@ const conferenceRepository = () => {
       newValue
     );
 
-    if (property === 'screenShare' && newValue) {
+    if (property === 'screenShare' && newValue !== undefined) {
       dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
 
       return;

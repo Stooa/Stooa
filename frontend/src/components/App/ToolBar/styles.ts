@@ -22,7 +22,7 @@ const StyledToolbar = styled.div`
   width: 100%;
   padding: ${space(1.2)} ${space(2)} ${space()} ${space(2)};
 
-  &.moderator {
+  &.moderator.introduction {
     grid-template-columns: repeat(6, minmax(20%, 100px));
   }
 

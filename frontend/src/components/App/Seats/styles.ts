@@ -290,12 +290,13 @@ const SeatsStyled = styled.div`
           height: 100%;
           display: flex;
           align-items: center;
+          background-color: ${COLOR_NEUTRO_600};
+          border-radius: ${BORDER_RADIUS};
 
           grid-column: 1;
           grid-row: span 3;
 
           & > video {
-            max-width: fit-content;
             width: 100%;
             height: fit-content;
             object-fit: contain;

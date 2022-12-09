@@ -9,6 +9,8 @@
 
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 import conferenceRepository from '@/jitsi/Conference';
+import { SCREEN_SHARE_STOP } from './Events';
+import { dispatchEvent } from '../helpers';
 
 const sharedTrackRepository = () => {
   let shareTrack: JitsiLocalTrack | null;
@@ -53,11 +55,14 @@ const sharedTrackRepository = () => {
     const trackHtml = getShareHtmlTrack();
     shareTrack = null;
 
-    if (trackHtml && trackHtml.firstChild) {
+    console.log('SAURA TRACK HTML', trackHtml);
+
+    if (trackHtml) {
       track.detach(trackHtml);
-      trackHtml.removeChild(trackHtml.firstChild);
+      if (trackHtml.firstChild) trackHtml.removeChild(trackHtml.firstChild);
       track.dispose();
 
+      dispatchEvent(SCREEN_SHARE_STOP);
       conferenceRepository.stopScreenShareEvent();
     }
 

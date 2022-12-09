@@ -39,7 +39,7 @@ const ActionButton = styled.button<{ disabled?: boolean; active: boolean }>`
     transition: color 0.1s ease-out;
   }
 
-  svg {
+  & svg {
     height: ${space(3.25)};
     width: ${space(3.25)};
 

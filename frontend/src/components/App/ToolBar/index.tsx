@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
@@ -179,12 +179,21 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
+  const showShareScreenButton = useMemo(
+    () => isModerator && conferenceStatus === IConferenceStatus.INTRODUCTION,
+    [conferenceStatus, isModerator]
+  );
+
   const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
 
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 
   return (
-    <StyledToolbar className={isModerator ? 'moderator' : ''}>
+    <StyledToolbar
+      className={`${conferenceStatus === IConferenceStatus.INTRODUCTION ? 'introduction' : ''} ${
+        isModerator ? 'moderator' : ''
+      }`}
+    >
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}
@@ -194,7 +203,13 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
-      {isModerator && <ScreenShareButton isSharing={isSharing} onClick={handleShareClick} />}
+      {showShareScreenButton && (
+        <ScreenShareButton
+          data-testid="share-screen-button"
+          isSharing={isSharing}
+          onClick={handleShareClick}
+        />
+      )}
       <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo

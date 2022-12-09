@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import VideoIcon from '@/ui/svg/video.svg';
-import VideoMutedIcon from '@/ui/svg/video-muted.svg';
+import ShareIcon from '@/ui/svg/share.svg';
+import ShareStopIcon from '@/ui/svg/share-stop.svg';
 import { StyledButton } from './style';
 
 interface Props {
@@ -16,10 +16,10 @@ interface Props {
   onClick: () => void;
 }
 
-const ScreenShareButton = ({ isSharing, onClick }: Props) => {
+const ScreenShareButton = ({ isSharing, onClick, ...props }: Props) => {
   return (
-    <StyledButton active className={isSharing ? 'sharing' : ''} onClick={onClick}>
-      <span className="button">{isSharing ? <VideoMutedIcon /> : <VideoIcon />}</span>
+    <StyledButton active className={isSharing ? 'sharing' : ''} onClick={onClick} {...props}>
+      <span className="button">{isSharing ? <ShareStopIcon /> : <ShareIcon />}</span>
       <div className="text medium">{!isSharing ? 'Compartir pantalla' : 'Dejar de compartir'}</div>
     </StyledButton>
   );

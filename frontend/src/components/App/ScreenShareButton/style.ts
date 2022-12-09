@@ -33,6 +33,11 @@ export const StyledButton = styled(ActionButton)`
     color: ${COLOR_NEUTRO_600};
   }
 
+  & svg {
+    width: initial;
+    height: initial;
+  }
+
   .text {
     color: ${COLOR_NEUTRO_600};
 
