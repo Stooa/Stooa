@@ -23,54 +23,6 @@ import { media, space } from '@/ui/helpers';
 import { BODY_XS } from '@/ui/Texts';
 import { StyledButtonContext } from '../ButtonContextMenu/styles';
 
-const SeatsStyled = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-
-  & > .content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: ${space(1)};
-    align-items: center;
-    height: 100%;
-    width: 100%;
-
-    & #share {
-      width: 100%;
-      height: 100%;
-      background-color: red;
-
-      & > video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    &.not-started div[id^='seat'] {
-      background: ${COLOR_NEUTRO_300};
-      .seat-wrapper {
-        opacity: 0.3;
-      }
-    }
-
-    ${media.min('tablet')`
-      padding-bottom: ${space()};
-      grid-template-columns: repeat(6, 1fr);
-    `}
-  }
-
-  ${media.between('tablet', 'tabletLarge')`
-    .drawer-open & .content {
-      flex-direction: column;
-      flex-wrap: nowrap;
-      width: 100%;
-    }
-  `}
-`;
-
 const Free = styled.div`
   position: absolute;
   color: ${COLOR_NEUTRO_600};
@@ -125,15 +77,13 @@ const Seat = styled.div`
     }
 
     ${media.min('tablet')`
-
-      & .context-button {
-        opacity: 0;
-        transition: opacity 0.2s ease-in;
-      }
-
-
-      `}
+        & .context-button {
+          opacity: 0;
+          transition: opacity 0.2s ease-in;
+        }
+    `}
   }
+
   &:hover .context-button {
     opacity: 1;
     transition: opacity 0.2s ease-out;
@@ -143,27 +93,11 @@ const Seat = styled.div`
     transition: opacity 0.35s ease-in-out;
   }
 
-  &:last-child {
-    grid-column-start: 2;
-  }
-
-  ${media.min('tablet')`
-    &:last-child {
-      grid-column-start: initial;
-    }
-
-  &:nth-child(4) {
-    grid-column-start: 2;
-  }
-
-  `}
-
   ${media.between('tablet', 'tabletLarge')`
     .drawer-open & {
       width: 100%;
     }
   `}
-
 
   .frame {
     position: absolute;
@@ -293,6 +227,92 @@ const Seat = styled.div`
       transform: translate(-50%, -50%) scaleX(-1);
     }
   }
+`;
+
+const SeatsStyled = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  & > .content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: ${space(1)};
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    &.sharing {
+      & #share {
+        width: 100%;
+        height: 100%;
+
+        & > video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    &.not-started div[id^='seat'] {
+      background: ${COLOR_NEUTRO_300};
+      .seat-wrapper {
+        opacity: 0.3;
+      }
+    }
+
+    ${media.min('tablet')`
+      padding-bottom: ${space()};
+      grid-template-columns: repeat(6, 1fr);
+
+      #seat-4 {
+        grid-column: 2 / 4;
+      }
+
+      &.sharing {
+        grid-template-columns: 4fr 1fr 1fr;
+
+        ${Seat} {
+          grid-column: span 1;
+        }
+
+        #seat-1 {
+          grid-column: span 2;
+        }
+
+        #seat-4 {
+          grid-column:initial;
+        }
+
+        & #share {
+          height: 100%;
+          display: flex;
+          align-items: center;
+
+          grid-column: 1;
+          grid-row: span 3;
+
+          & > video {
+            max-width: fit-content;
+            width: 100%;
+            height: fit-content;
+            object-fit: contain;
+            border-radius: ${BORDER_RADIUS};
+          }
+        }
+      }
+    `}
+  }
+
+  ${media.between('tablet', 'tabletLarge')`
+    .drawer-open & .content {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+  `}
 `;
 
 const VideoWrapper = styled.div`

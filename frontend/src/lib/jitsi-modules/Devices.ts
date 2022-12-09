@@ -73,7 +73,7 @@ const devicesRepository = (): DevicesRepository => {
   const screenShare = async (): Promise<void> => {
     const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
 
-    if (newTracks.length !== 1) {
+    if (newTracks && newTracks.length !== 1) {
       Promise.reject('More than one track to replace');
     }
 

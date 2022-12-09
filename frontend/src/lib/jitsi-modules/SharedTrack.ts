@@ -55,10 +55,8 @@ const sharedTrackRepository = () => {
 
     if (trackHtml && trackHtml.firstChild) {
       track.detach(trackHtml);
-
       trackHtml.removeChild(trackHtml.firstChild);
-
-      await track.dispose();
+      track.dispose();
 
       conferenceRepository.stopScreenShareEvent();
     }

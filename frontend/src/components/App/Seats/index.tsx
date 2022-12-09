@@ -11,6 +11,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
+import { useStooa } from '@/contexts/StooaManager';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
 import SeatsStyled, { Free, Seat, VideoWrapper } from '@/components/App/Seats/styles';
 import SeatImage from '@/ui/svg/seat.svg';
@@ -21,6 +22,7 @@ import ButtonContextMenu from '../ButtonContextMenu';
 
 const Seats = () => {
   const { t } = useTranslation('app');
+  const { isSharing } = useStooa();
   const [{ conferenceStatus }] = useStateValue();
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
@@ -28,8 +30,12 @@ const Seats = () => {
 
   return (
     <SeatsStyled>
-      <div className={`content seats-wrapper ${isConferenceNotStarted ? 'not-started' : ''} `}>
-        <div id="share"></div>
+      <div
+        className={`content seats-wrapper ${isSharing ? 'sharing' : ''} ${
+          isConferenceNotStarted ? 'not-started' : ''
+        } `}
+      >
+        {isSharing && <div id="share"></div>}
         {[...Array(5)].map((e, seat) => (
           <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />

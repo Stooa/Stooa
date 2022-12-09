@@ -89,7 +89,6 @@ const conferenceRepository = () => {
     );
 
     if (property === 'screenShare' && newValue) {
-      console.log('entro aqui');
       dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
 
       return;
@@ -446,6 +445,14 @@ const conferenceRepository = () => {
     };
   };
 
+  const getLocalTracks = () => {
+    if (!isJoined) {
+      return [];
+    }
+
+    return conference.getLocalTracks();
+  };
+
   const kickParticipant = (id, reason) => {
     conference.kickParticipant(id, reason);
   };
@@ -477,7 +484,8 @@ const conferenceRepository = () => {
     sendLeaveEvent,
     sendTextMessage,
     startScreenShareEvent,
-    stopScreenShareEvent
+    stopScreenShareEvent,
+    getLocalTracks
   };
 };
 

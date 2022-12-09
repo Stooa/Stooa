@@ -7,7 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import Button from '@/components/Common/Button';
+import VideoIcon from '@/ui/svg/video.svg';
+import VideoMutedIcon from '@/ui/svg/video-muted.svg';
+import { StyledButton } from './style';
 
 interface Props {
   isSharing: boolean;
@@ -16,11 +18,10 @@ interface Props {
 
 const ScreenShareButton = ({ isSharing, onClick }: Props) => {
   return (
-    <Button variant={isSharing ? 'primary' : 'secondary'} onClick={onClick}>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quis nostrum vitae tempora quo ad
-      consequuntur repellat enim mollitia dolore, deleniti minima blanditiis tenetur voluptates sit.
-      Enim numquam iste facilis.
-    </Button>
+    <StyledButton active className={isSharing ? 'sharing' : ''} onClick={onClick}>
+      <span className="button">{isSharing ? <VideoMutedIcon /> : <VideoIcon />}</span>
+      <div className="text medium">{!isSharing ? 'Compartir pantalla' : 'Dejar de compartir'}</div>
+    </StyledButton>
   );
 };
 

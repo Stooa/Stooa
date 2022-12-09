@@ -91,6 +91,7 @@ const localTracksRepository = () => {
 
         if (kind === MediaType.DESKTOP) {
           dispatchEvent(SCREEN_SHARE_CANCELED);
+          return;
         }
 
         if (kind === MediaType.VIDEO) {

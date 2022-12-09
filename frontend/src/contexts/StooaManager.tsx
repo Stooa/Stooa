@@ -33,6 +33,9 @@ import {
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   NOTIFICATION,
+  SCREEN_SHARE_CANCELED,
+  SCREEN_SHARE_START,
+  SCREEN_SHARE_STOP,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -72,6 +75,7 @@ const StooaProvider = ({
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
+  const [isSharing, setIsSharing] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -187,6 +191,18 @@ const StooaProvider = ({
         }
       }, delay);
     }
+  });
+
+  useEventListener(SCREEN_SHARE_START, () => {
+    setIsSharing(true);
+  });
+
+  useEventListener(SCREEN_SHARE_STOP, () => {
+    setIsSharing(false);
+  });
+
+  useEventListener(SCREEN_SHARE_CANCELED, () => {
+    setIsSharing(false);
   });
 
   const checkApIConferenceStatus = () => {
@@ -323,7 +339,9 @@ const StooaProvider = ({
         participantToKick,
         setParticipantToKick,
         getPassword,
-        setFishbowlPassword
+        setFishbowlPassword,
+        isSharing,
+        setIsSharing
       }}
     >
       {children}

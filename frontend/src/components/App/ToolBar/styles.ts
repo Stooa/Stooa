@@ -22,6 +22,10 @@ const StyledToolbar = styled.div`
   width: 100%;
   padding: ${space(1.2)} ${space(2)} ${space()} ${space(2)};
 
+  &.moderator {
+    grid-template-columns: repeat(6, minmax(20%, 100px));
+  }
+
   ${media.min('tablet')`
     padding: 0 ${space(3)};
   `}

@@ -26,20 +26,40 @@ import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import ReactionsButton from '../Reactions/ReactionsButton';
-import Button from '@/components/Common/Button';
+import ScreenShareButton from '../ScreenShareButton';
+import Conference from '@/jitsi/Conference';
+import SharedTrack from '@/jitsi/SharedTrack';
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
   const [joinIsInactive, setJoinIsInactive] = useState(false);
-  const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
+  const {
+    data,
+    isModerator,
+    conferenceStatus,
+    timeStatus,
+    conferenceReady,
+    isSharing,
+    setIsSharing
+  } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { t } = useTranslation('fishbowl');
 
   const configButtonRef = useRef<ButtonConfigHandle>(null);
 
-  const share = () => {
-    devicesRepository.screenShare();
+  const handleShareClick = () => {
+    if (isSharing) {
+      const shareLocalTrack = Conference.getLocalTracks().filter(
+        track => track.videoType === 'desktop'
+      );
+
+      setIsSharing(false);
+      SharedTrack.removeShareTrack(shareLocalTrack[0]);
+    } else {
+      devicesRepository.screenShare();
+      setIsSharing(true);
+    }
   };
 
   const joinSeat = async (user: User) => {
@@ -174,7 +194,7 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
-      <Button onClick={share}>Screen share</Button>
+      {isModerator && <ScreenShareButton isSharing={isSharing} onClick={handleShareClick} />}
       <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
