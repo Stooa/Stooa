@@ -48,17 +48,20 @@ const ToolBar: React.FC = () => {
 
   const configButtonRef = useRef<ButtonConfigHandle>(null);
 
-  const handleShareClick = () => {
+  const handleShareClick = async () => {
     if (isSharing) {
       const shareLocalTrack = Conference.getLocalTracks().filter(
         track => track.videoType === 'desktop'
       );
 
       setIsSharing(false);
-      SharedTrack.removeShareTrack(shareLocalTrack[0]);
+      await SharedTrack.removeShareTrack(shareLocalTrack[0]);
     } else {
-      devicesRepository.screenShare();
-      setIsSharing(true);
+      const selectedScreen = await devicesRepository.screenShare();
+
+      if (selectedScreen) {
+        setIsSharing(true);
+      }
     }
   };
 

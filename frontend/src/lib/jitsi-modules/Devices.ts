@@ -70,7 +70,7 @@ const devicesRepository = (): DevicesRepository => {
     return JitsiMeetJS.mediaDevices.isDevicePermissionGranted(type);
   };
 
-  const screenShare = async (): Promise<void> => {
+  const screenShare = async (): Promise<boolean> => {
     const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
 
     if (!newTracks) {
@@ -83,6 +83,8 @@ const devicesRepository = (): DevicesRepository => {
 
     conferenceRepository.addTrack(newTracks[0], undefined);
     conferenceRepository.startScreenShareEvent();
+
+    return Promise.resolve(true);
   };
 
   return {
