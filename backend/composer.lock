@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f1cc758e8ad68c7810abd25e42cf776",
+    "content-hash": "d1f5753fc6856e5236bcc2b1a5b74694",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4008,16 +4008,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.21.0",
+            "version": "4.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "08b3907ca1776cb111b00be8be28d3ad75ec0aa4"
+                "reference": "37aec296627a34557c9edb581ae32b7134c873b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/08b3907ca1776cb111b00be8be28d3ad75ec0aa4",
-                "reference": "08b3907ca1776cb111b00be8be28d3ad75ec0aa4",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/37aec296627a34557c9edb581ae32b7134c873b8",
+                "reference": "37aec296627a34557c9edb581ae32b7134c873b8",
                 "shasum": ""
             },
             "require": {
@@ -4123,7 +4123,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.21.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.21.1"
             },
             "funding": [
                 {
@@ -4143,7 +4143,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-11-11T08:53:17+00:00"
+            "time": "2022-12-08T14:14:12+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
