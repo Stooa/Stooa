@@ -172,6 +172,7 @@ const ToolBar: React.FC = () => {
     !conferenceReady ||
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator) ||
+    (conferenceStatus === IConferenceStatus.INTRODUCTION && joined && isModerator) ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
     (!joined && !seatsAvailable) ||
     joinIsInactive;
