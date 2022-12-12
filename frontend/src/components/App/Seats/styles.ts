@@ -243,8 +243,13 @@ const SeatsStyled = styled.div`
     height: 100%;
     width: 100%;
 
+    & #share {
+      display: none;
+    }
+
     &.sharing {
       & #share {
+        display: block;
         width: 100%;
         height: 100%;
 

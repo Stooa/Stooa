@@ -55,8 +55,6 @@ const sharedTrackRepository = () => {
     const trackHtml = getShareHtmlTrack();
     shareTrack = null;
 
-    console.log('SAURA TRACK HTML', trackHtml);
-
     if (trackHtml) {
       track.detach(trackHtml);
       if (trackHtml.firstChild) trackHtml.removeChild(trackHtml.firstChild);
