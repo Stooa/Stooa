@@ -77,11 +77,9 @@ const devicesRepository = (): DevicesRepository => {
       await Promise.reject('User canceled desktop track creation');
     }
 
-    if (newTracks && newTracks.length !== 1) {
-      await Promise.reject('More than one track to replace');
-    }
-
-    conferenceRepository.addTrack(newTracks[0], undefined);
+    const desktopTrack = newTracks.filter((track) => track.getVideoType() === 'desktop');
+    
+    conferenceRepository.addTrack(desktopTrack[0], undefined);
     conferenceRepository.startScreenShareEvent();
 
     return Promise.resolve(true);
