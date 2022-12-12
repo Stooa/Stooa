@@ -298,7 +298,7 @@ const SeatsStyled = styled.div`
 
           & > video {
             width: 100%;
-            height: fit-content;
+            height: auto;
             object-fit: contain;
             border-radius: ${BORDER_RADIUS};
           }
