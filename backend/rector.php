@@ -17,11 +17,13 @@ use Rector\Set\ValueObject\LevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
+        __DIR__ . '/packages/Core/src',
+        __DIR__ . '/packages/Core/tests',
+        __DIR__ . '/packages/Fishbowl/src',
+        __DIR__ . '/packages/Fishbowl/tests',
     ]);
     $rectorConfig->importNames();
-    $rectorConfig->disableImportShortClasses();
+    $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         CountOnNullRector::class,
     ]);
