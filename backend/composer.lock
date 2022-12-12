@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4940557785d903b05e318c5de2d812a",
+    "content-hash": "d631fdf6b547e009ab8cf7166d958365",
     "packages": [
         {
             "name": "api-platform/core",
@@ -15119,22 +15119,22 @@
         },
         {
             "name": "weirdan/doctrine-psalm-plugin",
-            "version": "v2.5.0",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-doctrine.git",
-                "reference": "a55e7274d22795366761d35a6186a8f592f8754e"
+                "reference": "6e388e170f583e235288d22b9497344a96666908"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-doctrine/zipball/a55e7274d22795366761d35a6186a8f592f8754e",
-                "reference": "a55e7274d22795366761d35a6186a8f592f8754e",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-doctrine/zipball/6e388e170f583e235288d22b9497344a96666908",
+                "reference": "6e388e170f583e235288d22b9497344a96666908",
                 "shasum": ""
             },
             "require": {
                 "composer/semver": "^1.4 || ^2.0 || ^3.0",
                 "php": "^7.2 || ^8",
-                "vimeo/psalm": "^4.28"
+                "vimeo/psalm": "^4.28|^5.0"
             },
             "conflict": {
                 "doctrine/collections": "<1.8",
@@ -15191,9 +15191,9 @@
             ],
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-doctrine/issues",
-                "source": "https://github.com/psalm/psalm-plugin-doctrine/tree/v2.5.0"
+                "source": "https://github.com/psalm/psalm-plugin-doctrine/tree/v2.7.0"
             },
-            "time": "2022-10-12T17:35:35+00:00"
+            "time": "2022-12-10T11:13:05+00:00"
         },
         {
             "name": "zenstruck/assert",
