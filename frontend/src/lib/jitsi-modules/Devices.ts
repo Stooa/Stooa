@@ -70,16 +70,21 @@ const devicesRepository = (): DevicesRepository => {
     return JitsiMeetJS.mediaDevices.isDevicePermissionGranted(type);
   };
 
-  const screenShare = async (): Promise<void> => {
+  const screenShare = async (): Promise<boolean> => {
     const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
 
+    if (!newTracks) {
+      await Promise.reject('User canceled desktop track creation');
+    }
+
     if (newTracks && newTracks.length !== 1) {
-      Promise.reject('More than one track to replace');
+      await Promise.reject('More than one track to replace');
     }
 
     conferenceRepository.addTrack(newTracks[0], undefined);
-
     conferenceRepository.startScreenShareEvent();
+
+    return Promise.resolve(true);
   };
 
   return {
