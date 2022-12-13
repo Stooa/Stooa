@@ -71,6 +71,11 @@
         "description": "La teva càmera s'activarà perquè que pugis dir unes paraules abans del <i>fishbowl</i>. Després podràs permetre als usuaris unir-se a la conversa.",
         "button": "Començar introducció"
     },
+    "endIntroModal": {
+        "title": "Fi de la introducció",
+        "description": "Quan acabis la intro i deixis entrar als assistents, deixaràs automàticament de compartir pantalla i ja no podràs tornar a fer-ho.",
+        "button": "Finalitzar introducció"
+    },
     "endModal": {
         "title": "Finalitzar el fishbowl",
         "description": "Segur que vols finalitzar el fishbowl?",

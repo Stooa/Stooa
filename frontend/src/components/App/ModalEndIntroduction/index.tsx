@@ -30,7 +30,7 @@ const ModalEndIntroduction: React.FC<Props> = ({ closeModal, startFishbowl, disa
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t('introduceModal.title')}</h2>
+        <h2 className="title-sm">{t('endIntroModal.title')}</h2>
         <p className="description">
           {/* <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} /> */}
           Cuando acabes la intro y dejes entrar a lxs asistentes, dejarás automáticamente de
@@ -38,7 +38,7 @@ const ModalEndIntroduction: React.FC<Props> = ({ closeModal, startFishbowl, disa
         </p>
         <div className="modal-footer">
           <Button size="medium" onClick={startFishbowl} disabled={disabled}>
-            {t('introduceModal.button')}
+            Acabar introducción
           </Button>
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}

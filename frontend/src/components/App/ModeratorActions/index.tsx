@@ -130,8 +130,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       });
   };
 
-  const handleEndIntroduction = () => {};
-
   const handleStartFishbowl = () => {
     if (isSharing) {
       setShowEndIntroductionModal(true);
@@ -165,8 +163,8 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       )}
       {showEndIntroductionModal && (
         <ModalEndIntroduction
-          closeModal={toggleIntroductionModal}
-          endIntroduction={handleEndIntroduction}
+          closeModal={() => setShowEndIntroductionModal(false)}
+          startFishbowl={startFishbowl}
           disabled={loading}
         />
       )}

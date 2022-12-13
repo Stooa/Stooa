@@ -63,6 +63,11 @@
         "description": "Anda bisa mengatakan beberapa kata pengenalan, kamera dan mikrofon hanya akan nyala untuk kamu saja. Jika kamu sudah selesai, jangan lupa untuk memperbolehkan peserta untuk gabung pembicaraan.",
         "title": "Berikan pengenalan"
     },
+    "endIntroModal": {
+        "title": "End of introduction",
+        "description": "When you finish the intro and let the attendees in, you will automatically stop screen sharing and will not be able to do it again.",
+        "button": "Finish introduction"
+    },
     "endModal": {
         "title": "Akhiri fishbowl",
         "description": "Apakah Anda yakin ingin menghentikan fishbowl ini?",
