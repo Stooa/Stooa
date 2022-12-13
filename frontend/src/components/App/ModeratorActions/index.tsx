@@ -23,6 +23,8 @@ import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 import Button from '@/components/Common/Button';
 
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
+import { useModals } from '@/contexts/ModalsContext';
+import ModalEndIntroduction from '../ModalEndIntroduction';
 
 interface Props {
   fid: string;
@@ -40,8 +42,9 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
-  const { data } = useStooa();
+  const { data, isSharing } = useStooa();
   const { permissions, setShowModalPermissions } = useDevices();
+  const { showEndIntroductionModal, setShowEndIntroductionModal } = useModals();
 
   const toggleIntroductionModal = () => {
     if (!permissions.audio && !introduction) {
@@ -127,6 +130,16 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       });
   };
 
+  const handleEndIntroduction = () => {};
+
+  const handleStartFishbowl = () => {
+    if (isSharing) {
+      setShowEndIntroductionModal(true);
+    } else {
+      startFishbowl();
+    }
+  };
+
   useEffect(() => {
     setRunning(conferenceStatus === IConferenceStatus.RUNNING);
 
@@ -147,6 +160,13 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         <ModalStartIntroduction
           closeModal={toggleIntroductionModal}
           startIntroduction={startIntroduction}
+          disabled={loading}
+        />
+      )}
+      {showEndIntroductionModal && (
+        <ModalEndIntroduction
+          closeModal={toggleIntroductionModal}
+          endIntroduction={handleEndIntroduction}
           disabled={loading}
         />
       )}
@@ -178,7 +198,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
             <span className="text">{t('startIntroduction')}</span>
           </Button>
         ) : (
-          <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
+          <Button size="medium" className="button" onClick={handleStartFishbowl} disabled={loading}>
             {!permissions.audio && !introduction && (
               <div className="alert">
                 <PermissionsAlert />

@@ -22,8 +22,9 @@ interface Props {
   disabled: boolean;
 }
 
-const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, disabled }) => {
+const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, disabled }) => {
   const { t } = useTranslation('fishbowl');
+  // TODO: usesinwodwisdth to chose one content or another
 
   return (
     <StyledIntroModal>
@@ -88,4 +89,4 @@ const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, dis
   );
 };
 
-export default StartIntroduction;
+export default ModalStartIntroduction;
