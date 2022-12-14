@@ -47,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Post(
             denormalizationContext: ['groups' => ['user:write', 'user:create']],
             validationContext: ['groups' => ['Default', 'user:create']]
-        )
+        ),
     ],
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:write']],
@@ -75,7 +75,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 args: [
                     'token' => ['type' => 'String!'],
                     'password' => ['type' => 'String!'],
-                    'passwordConfirmation' => ['type' => 'String!']
+                    'passwordConfirmation' => ['type' => 'String!'],
                 ],
                 input: ChangePasswordInput::class,
                 name: 'changePassword'
@@ -84,7 +84,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 args: [
                     'password' => ['type' => 'String!'],
                     'newPassword' => ['type' => 'String!'],
-                    'newPasswordConfirmation' => ['type' => 'String!']
+                    'newPasswordConfirmation' => ['type' => 'String!'],
                 ],
                 input: ChangePasswordLoggedInput::class,
                 name: 'changePasswordLogged'
@@ -162,7 +162,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     /** @var Collection<int, Fishbowl> */
     #[ORM\OneToMany(targetEntity: Fishbowl::class, mappedBy: 'host')]
     private Collection $fishbowls;
-    
+
     #[Groups(['user:write'])]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;

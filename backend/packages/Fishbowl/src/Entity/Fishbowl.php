@@ -56,7 +56,7 @@ use Webmozart\Assert\Assert as MAssert;
         new Get(),
         new Put(security: 'object.getHost() == user'),
         new GetCollection(security: 'is_granted(\'ROLE_USER\')'),
-        new Post(security: 'is_granted(\'ROLE_USER\')')
+        new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
     normalizationContext: ['groups' => ['fishbowl:read']],
     denormalizationContext: ['groups' => ['fishbowl:write']],
@@ -105,7 +105,7 @@ use Webmozart\Assert\Assert as MAssert;
             security: 'is_granted(\'ROLE_USER\')',
             validationContext: ['groups' => ['Default', 'fishbowl:create']],
             name: 'create'
-        )
+        ),
     ]
 )]
 #[UniqueEntity(fields: ['slug'])]

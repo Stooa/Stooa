@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     operations: [
         new Get(),
         new GetCollection(controller: NotFoundAction::class, output: false, read: false),
-        new Post()
+        new Post(),
     ],
     normalizationContext: ['groups' => ['guest:read']],
     denormalizationContext: ['groups' => ['guest:write']],

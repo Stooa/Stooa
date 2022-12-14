@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             resolver: ResetPasswordResolver::class,
             args: ['email' => ['type' => 'String!'], 'locale' => ['type' => 'String!']],
             read: false, write: false, name: 'create'
-        )
+        ),
     ]
 )]
 class ResetPassword
