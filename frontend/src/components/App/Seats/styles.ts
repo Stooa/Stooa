@@ -248,17 +248,57 @@ const SeatsStyled = styled.div`
       display: none;
     }
 
+    &:not(.sharing) #seat-5 {
+      grid-column: 2 / 4;
+    }
+
     &.sharing {
+      position: relative;
+
+      & #seat-1 {
+        grid-row: 1;
+        grid-column: span 4;
+      }
+
+      & #seat-2,
+      & #seat-3,
+      & #seat-4,
+      & #seat-5 {
+        display: none;
+      }
+
       & #share {
         display: block;
         width: 100%;
         height: 100%;
 
-        & .share-video-wrapper.moderator {
-          background-color: #000;
+        grid-column: span 4;
 
-          & video {
-            opacity: 0.5;
+        & .warning {
+          ${BODY_XS}
+          color: white;
+          position: absolute;
+
+          left: ${space(4)};
+          bottom: ${space(4)};
+
+          width: 80%;
+          max-width: 66ch;
+        }
+
+        & .share-video-wrapper {
+          height: fit-content;
+          border-radius: ${BORDER_RADIUS};
+          overflow: hidden;
+          line-height: 0;
+          width: 100%;
+
+          &.moderator {
+            background-color: #000;
+
+            & video {
+              opacity: 0.45;
+            }
           }
         }
 
@@ -282,13 +322,19 @@ const SeatsStyled = styled.div`
       padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
 
+
       #seat-4 {
         grid-column: 2 / 4;
+      }
+
+      &:not(.sharing) #seat-5 {
+        grid-column: span 2;
       }
 
       &.sharing {
         grid-template-columns: 4fr 1fr 1fr;
         grid-template-rows: 2fr 1fr 1fr;
+
 
         ${Seat} {
           grid-column: span 1;
@@ -296,6 +342,14 @@ const SeatsStyled = styled.div`
 
         #seat-1 {
           grid-column: span 2;
+          grid-row: initial;
+        }
+
+        #seat-2,
+        #seat-3,
+        #seat-4,
+        #seat-5 {
+          display: block;
         }
 
         #seat-4 {
@@ -311,12 +365,6 @@ const SeatsStyled = styled.div`
 
           grid-column: 1;
           grid-row: span 3;
-
-          & .share-video-wrapper {
-            border-radius: ${BORDER_RADIUS};
-            overflow: hidden;
-            line-height: 0;
-          }
 
           & video {
             width: 100%;
