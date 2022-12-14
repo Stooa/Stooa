@@ -26,13 +26,16 @@
     },
     "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
     "introduceModal": {
-        "title": "Faites une introduction",
+        "title": "Faites une présentation",
         "description": "Votre caméra sera activée et vous pourrez dire quelques mots aux participants avant d'ouvrir le bocal. Ensuite, vous pouvez autoriser les utilisateurs à participer à la conversation.",
-        "button": "Commencer votre présentation"
+        "button": "Commencer votre présentation",
+        "shareScreenFirst": "C'est le moment d'adresser quelques mots aux participants avant d'ouvrir le fishbowl.",
+        "shareScreenSecond": "Vous pouvez également <span>partager votre écran</span> pour fournir un contenu visuel à votre introduction.",
+        "shareScreenThird": "<span>Lorsque vous avez terminé</span>, vous pouvez autoriser les participants à rejoindre la conversation."
     },
     "endIntroModal": {
-        "title": "Faites une présentation",
-        "description": "C'est le moment d'adresser quelques mots aux participants avant d'ouvrir le fishbowl. Vous pouvez également partager votre écran pour fournir un contenu visuel à votre introduction. Lorsque vous avez terminé, vous pouvez autoriser les participants à rejoindre la conversation.",
+        "title": "Fin de présentation",
+        "description": "Lorsque vous aurez terminé l'intro et laissé entrer les participants, vous arrêterez automatiquement le partage d'écran et ne pourrez plus le faire.",
         "button": "Fin de l'introduction"
     },
     "participants": {

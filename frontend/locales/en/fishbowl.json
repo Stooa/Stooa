@@ -69,6 +69,9 @@
     "introduceModal": {
         "title": "Give an introduction",
         "description": "Your camera will activate so you can say a few words to the attendees before opening the fishbowl. Afterwards you can allow users in the conversation.",
+        "shareScreenFirst": "It is your moment <span>to address a few words</span> to the attendees before opening the fishbowl.",
+        "shareScreenSecond": "You can also <span>share your screen</span> to provide visual content to your introduction.",
+        "shareScreenThird": "<span>When you're done</span>, you can allow attendees to join the conversation.",
         "button": "Start your introduction"
     },
     "endIntroModal": {
