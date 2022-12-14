@@ -40,7 +40,7 @@ const Free = styled.div`
     margin: 0 auto;
     transform: scale(0.75) translateY(0.5rem);
 
-    ${media.min('tablet')`
+    ${media.min('desktop')`
       transform: scale(1) translateY(0);
     `}
 
@@ -76,7 +76,7 @@ const Seat = styled.div`
       transition: opacity 0.2s ease-in;
     }
 
-    ${media.min('tablet')`
+    ${media.min('desktop')`
         & .context-button {
           opacity: 0;
           transition: opacity 0.2s ease-in;
@@ -93,7 +93,7 @@ const Seat = styled.div`
     transition: opacity 0.35s ease-in-out;
   }
 
-  ${media.between('tablet', 'tabletLarge')`
+  ${media.between('desktop', 'tabletLarge')`
     .drawer-open & {
       width: 100%;
     }
@@ -318,7 +318,7 @@ const SeatsStyled = styled.div`
       }
     }
 
-    ${media.min('tablet')`
+    ${media.min('desktop')`
       padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
 
@@ -377,7 +377,7 @@ const SeatsStyled = styled.div`
     `}
   }
 
-  ${media.between('tablet', 'tabletLarge')`
+  ${media.between('desktop', 'tabletLarge')`
     .drawer-open & .content {
       flex-direction: column;
       flex-wrap: nowrap;

@@ -9,6 +9,10 @@
         "participantText": "<p>Lorsque le fishbowl commence, <strong>l’hôte peut faire une introduction.</strong>Après quoi, tous les participants auront la permission de rejoindre la conversation.</p>",
         "hostText": "<p>Lorsque vous démarrez le fishbowl, <strong>vous pouvez commencer par faire une introduction.</strong>La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <strong>n’oubliez pas d’autoriser les participants à rejoindre la conversation.</strong></p>"
     },
+    "shareScreen": {
+        "title": "Partagez votre écran !",
+        "description": "<ul><li>Lors de l'introduction, vous pouvez <strong>partager l'écran</strong>, si vous en avez besoin.</li><li>Cette fonctionnalité <strong>n'est disponible que pour vous</strong> en tant qu'hôte et ne sera plus active lorsque vous fermerez l'introduction.</li><li>Vous ne pouvez partager l'écran qu'avec votre ordinateur, jamais avec votre téléphone.</li></ul>"
+    },
     "skip": "Aller directement au fishbowl",
     "done": "C’est tout bon !",
     "appControls": {

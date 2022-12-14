@@ -11,6 +11,10 @@
         "hostText": "<p>When you start the fishbowl, <strong>you can start by making an introduction.</strong> The camera and microphone will be active just for you. When you're done, <strong>don't forget to allow attendees to join the conversation.</strong></p>",
         "participantText": "<p>When the fishbowl starts, <strong>the host can make an introduction.</strong> After this, all participants will have permission to join the conversation.</p>"
     },
+    "shareScreen": {
+        "title": "Share your screen!",
+        "description": "<ul><li>During the introduction, you can <strong>share screen</strong>, if you need it.</li><li>This feature is <strong>only available for you</strong> as a Host and will no longer be active when you close the introduction.</li><li>You can only share screen with your computer, never with your phone.</li></ul>"
+    },
     "appControls": {
         "title": "How can I interact?",
         "preTitle": "In-App Controls",

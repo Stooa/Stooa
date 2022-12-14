@@ -215,7 +215,7 @@ const images = css`
     }
   }
 
-  &.slide-2 {
+  &.slide-3 {
     .img-1 {
       bottom: 0;
       height: 81.2%;
@@ -248,7 +248,23 @@ const images = css`
       }
     }
 
-    &.slide-3 {
+    &.slide-2 {
+      .img-1 {
+        bottom: 0;
+        height: 81.2%;
+        right: ${space(4.5)};
+        width: auto;
+      }
+
+      .img-2 {
+        bottom: ${space(2.5)};
+        height: 31.2%;
+        left: ${space(-4.5)};
+        width: auto;
+      }
+    }
+
+    &.slide-4 {
       .img-1 {
         bottom: 0;
         height: 81.2%;

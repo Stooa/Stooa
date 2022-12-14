@@ -29,8 +29,11 @@ import ReactionsButton from '../Reactions/ReactionsButton';
 import ScreenShareButton from '../ScreenShareButton';
 import Conference from '@/jitsi/Conference';
 import SharedTrack from '@/jitsi/SharedTrack';
+import { useWindowSize } from '@/hooks/useWIndowSize';
 
 const ToolBar: React.FC = () => {
+  const { t } = useTranslation('fishbowl');
+
   const [joined, setJoined] = useState(false);
   const [joinIsInactive, setJoinIsInactive] = useState(false);
   const {
@@ -44,7 +47,7 @@ const ToolBar: React.FC = () => {
   } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
-  const { t } = useTranslation('fishbowl');
+  const { width } = useWindowSize();
 
   const configButtonRef = useRef<ButtonConfigHandle>(null);
 
@@ -184,8 +187,9 @@ const ToolBar: React.FC = () => {
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
   const showShareScreenButton = useMemo(
-    () => isModerator && conferenceStatus === IConferenceStatus.INTRODUCTION,
-    [conferenceStatus, isModerator]
+    () =>
+      isModerator && conferenceStatus === IConferenceStatus.INTRODUCTION && width && width > 768,
+    [conferenceStatus, isModerator, width]
   );
 
   const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
