@@ -32,6 +32,7 @@ use App\Fishbowl\Resolver\FishbowlIntroduceMutationResolver;
 use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
+use App\Fishbowl\State\FishbowlProcessor;
 use App\Fishbowl\Validator\Constraints\FutureFishbowl;
 use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -106,7 +107,8 @@ use Webmozart\Assert\Assert as MAssert;
             validationContext: ['groups' => ['Default', 'fishbowl:create']],
             name: 'create'
         ),
-    ]
+    ],
+    processor: FishbowlProcessor::class
 )]
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]

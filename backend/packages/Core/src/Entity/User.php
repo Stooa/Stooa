@@ -25,6 +25,7 @@ use App\Core\Model\ChangePasswordInput;
 use App\Core\Model\ChangePasswordLoggedInput;
 use App\Core\Repository\UserRepository;
 use App\Core\Resolver\UserResolver;
+use App\Core\State\UserProcessor;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -89,7 +90,8 @@ use Symfony\Component\Validator\Constraints as Assert;
             input: ChangePasswordLoggedInput::class,
             name: 'changePasswordLogged'
         ),
-    ]
+    ],
+    processor: UserProcessor::class
 )]
 #[UniqueEntity(fields: ['email'], message: 'user.email')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -160,7 +162,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     private ?string $locale = null;
 
     /** @var Collection<int, Fishbowl> */
-    #[ORM\OneToMany(targetEntity: Fishbowl::class, mappedBy: 'host')]
+    #[ORM\OneToMany(mappedBy: 'host', targetEntity: Fishbowl::class)]
     private Collection $fishbowls;
 
     #[Groups(['user:write'])]
