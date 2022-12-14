@@ -28,6 +28,10 @@ final class UserProcessor implements ProcessorInterface
     ) {
     }
 
+    /**
+     * @param array<mixed> $context
+     * @param array<mixed> $uriVariables
+     */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         if ($data instanceof User) {

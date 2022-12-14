@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\State;
 
-use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Service\MailerService;
@@ -27,6 +26,10 @@ final class FishbowlProcessor implements ProcessorInterface
     ) {
     }
 
+    /**
+     * @param array<mixed> $context
+     * @param array<mixed> $uriVariables
+     */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $result = $this->decorated->process($data, $operation, $uriVariables, $context);
