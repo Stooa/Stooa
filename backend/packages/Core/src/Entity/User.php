@@ -52,36 +52,39 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:write']],
     graphQlOperations: [
-            new Query(normalizationContext: ['groups' => ['user:read', 'user:foreign']], name: 'item_query'),
-            new Query(resolver: UserResolver::class, args: [], normalizationContext: ['groups' => ['user:read', 'user:self']], security: 'object == user', name: 'self'),
-            new Mutation(normalizationContext: ['groups' => ['user:read', 'user:self']], security: 'object == user', name: 'update'),
-            new Mutation(denormalizationContext: ['groups' => ['user:write', 'user:create']], validationContext: ['groups' => ['Default', 'user:create']], name: 'create'),
+            new Query(
+                normalizationContext: ['groups' => ['user:read', 'user:foreign']],
+                name: 'item_query'
+            ),
+            new Query(
+                resolver: UserResolver::class,
+                args: [],
+                normalizationContext: ['groups' => ['user:read', 'user:self']],
+                security: 'object == user', name: 'self'
+            ),
+            new Mutation(
+                normalizationContext: ['groups' => ['user:read', 'user:self']],
+                security: 'object == user', name: 'update'
+            ),
+            new Mutation(
+                denormalizationContext: ['groups' => ['user:write', 'user:create']],
+                validationContext: ['groups' => ['Default', 'user:create']],
+                name: 'create'
+            ),
             new Mutation(
                 args: [
-                    'token' => [
-                        'type' => 'String!'
-                    ],
-                    'password' => [
-                        'type' => 'String!'
-                    ],
-                    'passwordConfirmation' => [
-                        'type' => 'String!'
-                    ]
+                    'token' => ['type' => 'String!'],
+                    'password' => ['type' => 'String!'],
+                    'passwordConfirmation' => ['type' => 'String!']
                 ],
                 input: ChangePasswordInput::class,
                 name: 'changePassword'
             ),
             new Mutation(
                 args: [
-                    'password' => [
-                        'type' => 'String!'
-                    ],
-                    'newPassword' => [
-                        'type' => 'String!'
-                    ],
-                    'newPasswordConfirmation' => [
-                        'type' => 'String!'
-                    ]
+                    'password' => ['type' => 'String!'],
+                    'newPassword' => ['type' => 'String!'],
+                    'newPasswordConfirmation' => ['type' => 'String!']
                 ],
                 input: ChangePasswordLoggedInput::class,
                 name: 'changePasswordLogged'
@@ -98,55 +101,68 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
+
     #[Groups(['user:read', 'user:write'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
+
     #[Groups(['user:read', 'user:write'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
     private ?string $surnames = null;
+
     #[Groups(['user:self', 'user:create', 'user:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[Assert\Email]
     #[ORM\Column(type: 'string', unique: true)]
     private ?string $email = null;
+
     /** @var string[] */
     #[ORM\Column(type: 'json')]
     private array $roles = [];
+
     #[ORM\Column(type: 'string')]
     private ?string $password = null;
+
     #[Groups(['user:create'])]
     #[Assert\IsTrue]
     #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
+
     #[Groups(['user:self', 'user:write'])]
     #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
+
     #[ORM\Column(type: 'boolean')]
     private bool $active = false;
+
     #[Groups(['user:self', 'user:write'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $linkedinProfile = null;
+
     #[Groups(['user:self', 'user:write'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $twitterProfile = null;
+
     #[Groups(['user:self', 'user:create', 'user:read'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Locale(canonicalize: true)]
     #[ORM\Column(type: 'string')]
     private ?string $locale = null;
+
     /** @var Collection<int, Fishbowl> */
     #[ORM\OneToMany(targetEntity: Fishbowl::class, mappedBy: 'host')]
     private Collection $fishbowls;
+    
     #[Groups(['user:write'])]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;

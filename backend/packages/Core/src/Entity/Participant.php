@@ -24,7 +24,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-#[ApiResource(operations: [new GetCollection()], normalizationContext: ['groups' => ['participant:read']], denormalizationContext: ['groups' => ['participant:write']])]
+#[ApiResource(
+    operations: [new GetCollection()],
+    normalizationContext: ['groups' => ['participant:read']],
+    denormalizationContext: ['groups' => ['participant:write']]
+)]
 #[Assert\Expression('this.getUser() or this.getGuest()', message: 'user.participant')]
 #[ORM\Entity]
 class Participant implements \Stringable
@@ -34,19 +38,23 @@ class Participant implements \Stringable
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
+
     #[Groups(['participant:read'])]
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?User $user = null;
+
     #[Groups(['participant:read'])]
     #[ORM\ManyToOne(targetEntity: Guest::class, cascade: ['all'])]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?Guest $guest = null;
+
     #[Groups(['participant:read'])]
     #[Assert\NotNull]
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $lastPing = null;
+
     #[Groups(['participant:read'])]
     #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'participants')]
