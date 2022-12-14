@@ -120,10 +120,13 @@ class Participant implements \Stringable
     public function getUserName(): string
     {
         $user = $this->getUser();
+
         if (null !== $user) {
             return $user->getFullName();
         }
+
         $guest = $this->getGuest();
+
         if (null !== $guest) {
             $guestName = $guest->getName();
             MAssert::notNull($guestName);

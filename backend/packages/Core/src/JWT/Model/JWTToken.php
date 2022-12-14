@@ -16,7 +16,6 @@ namespace App\Core\JWT\Model;
 use App\Core\JWT\Model\Payload\FeaturesPayload;
 use App\Core\JWT\Model\Payload\HeaderPayload;
 use App\Core\JWT\Model\Payload\UserPayload;
-use DateTimeImmutable;
 use Lcobucci\JWT\Token\RegisteredClaims;
 
 class JWTToken

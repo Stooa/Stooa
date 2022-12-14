@@ -30,7 +30,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @psalm-type RawParticipant array{
+ * @psalm-type RawParticipant = array{
  *     id: UuidInterface|null,
  *     lastPing: \DateTimeInterface|null,
  *     name: string|null,

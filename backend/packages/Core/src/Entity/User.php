@@ -52,43 +52,43 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:write']],
     graphQlOperations: [
-            new Query(
-                normalizationContext: ['groups' => ['user:read', 'user:foreign']],
-                name: 'item_query'
-            ),
-            new Query(
-                resolver: UserResolver::class,
-                args: [],
-                normalizationContext: ['groups' => ['user:read', 'user:self']],
-                security: 'object == user', name: 'self'
-            ),
-            new Mutation(
-                normalizationContext: ['groups' => ['user:read', 'user:self']],
-                security: 'object == user', name: 'update'
-            ),
-            new Mutation(
-                denormalizationContext: ['groups' => ['user:write', 'user:create']],
-                validationContext: ['groups' => ['Default', 'user:create']],
-                name: 'create'
-            ),
-            new Mutation(
-                args: [
-                    'token' => ['type' => 'String!'],
-                    'password' => ['type' => 'String!'],
-                    'passwordConfirmation' => ['type' => 'String!'],
-                ],
-                input: ChangePasswordInput::class,
-                name: 'changePassword'
-            ),
-            new Mutation(
-                args: [
-                    'password' => ['type' => 'String!'],
-                    'newPassword' => ['type' => 'String!'],
-                    'newPasswordConfirmation' => ['type' => 'String!'],
-                ],
-                input: ChangePasswordLoggedInput::class,
-                name: 'changePasswordLogged'
-            ),
+        new Query(
+            normalizationContext: ['groups' => ['user:read', 'user:foreign']],
+            name: 'item_query'
+        ),
+        new Query(
+            resolver: UserResolver::class,
+            args: [],
+            normalizationContext: ['groups' => ['user:read', 'user:self']],
+            security: 'object == user', name: 'self'
+        ),
+        new Mutation(
+            normalizationContext: ['groups' => ['user:read', 'user:self']],
+            security: 'object == user', name: 'update'
+        ),
+        new Mutation(
+            denormalizationContext: ['groups' => ['user:write', 'user:create']],
+            validationContext: ['groups' => ['Default', 'user:create']],
+            name: 'create'
+        ),
+        new Mutation(
+            args: [
+                'token' => ['type' => 'String!'],
+                'password' => ['type' => 'String!'],
+                'passwordConfirmation' => ['type' => 'String!'],
+            ],
+            input: ChangePasswordInput::class,
+            name: 'changePassword'
+        ),
+        new Mutation(
+            args: [
+                'password' => ['type' => 'String!'],
+                'newPassword' => ['type' => 'String!'],
+                'newPasswordConfirmation' => ['type' => 'String!'],
+            ],
+            input: ChangePasswordLoggedInput::class,
+            name: 'changePasswordLogged'
+        ),
     ]
 )]
 #[UniqueEntity(fields: ['email'], message: 'user.email')]
