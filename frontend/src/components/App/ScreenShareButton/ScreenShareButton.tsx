@@ -10,6 +10,7 @@
 import ShareIcon from '@/ui/svg/share.svg';
 import ShareStopIcon from '@/ui/svg/share-stop.svg';
 import { StyledButton } from './style';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   isSharing: boolean;
@@ -17,10 +18,13 @@ interface Props {
 }
 
 const ScreenShareButton = ({ isSharing, onClick, ...props }: Props) => {
+  const { t } = useTranslation('fishbowl');
   return (
     <StyledButton active className={isSharing ? 'sharing' : ''} onClick={onClick} {...props}>
       <span className="button">{isSharing ? <ShareStopIcon /> : <ShareIcon />}</span>
-      <div className="text medium">{!isSharing ? 'Compartir pantalla' : 'Dejar de compartir'}</div>
+      <div className="text medium">
+        {!isSharing ? t('shareScreenButton') : t('stopShareScreenButton')}
+      </div>
     </StyledButton>
   );
 };

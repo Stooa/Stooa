@@ -240,6 +240,7 @@ const SeatsStyled = styled.div`
     grid-template-columns: repeat(4, 1fr);
     gap: ${space(1)};
     align-items: center;
+    justify-content: center;
     height: 100%;
     width: 100%;
 
@@ -253,10 +254,19 @@ const SeatsStyled = styled.div`
         width: 100%;
         height: 100%;
 
-        & > video {
+        & .share-video-wrapper.moderator {
+          background-color: #000;
+
+          & video {
+            opacity: 0.5;
+          }
+        }
+
+        & video {
           width: 100%;
-          height: 100%;
+          height: auto;
           object-fit: cover;
+          max-height: 550px;
         }
       }
     }
@@ -278,6 +288,7 @@ const SeatsStyled = styled.div`
 
       &.sharing {
         grid-template-columns: 4fr 1fr 1fr;
+        grid-template-rows: 2fr 1fr 1fr;
 
         ${Seat} {
           grid-column: span 1;
@@ -301,11 +312,17 @@ const SeatsStyled = styled.div`
           grid-column: 1;
           grid-row: span 3;
 
-          & > video {
+          & .share-video-wrapper {
+            border-radius: ${BORDER_RADIUS};
+            overflow: hidden;
+            line-height: 0;
+          }
+
+          & video {
             width: 100%;
             height: auto;
             object-fit: contain;
-            border-radius: ${BORDER_RADIUS};
+            max-height: 850px;
           }
         }
       }

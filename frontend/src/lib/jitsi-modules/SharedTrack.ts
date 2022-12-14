@@ -16,7 +16,7 @@ const sharedTrackRepository = () => {
   let shareTrack: JitsiLocalTrack | null;
 
   const getShareHtmlTrack = (): HTMLElement | null => {
-    return document.getElementById('share');
+    return document.querySelector('#share > .share-video-wrapper');
   };
 
   const _createShareTrack = async track => {
@@ -25,7 +25,7 @@ const sharedTrackRepository = () => {
       return;
     }
 
-    const seatHtml = document.getElementById('share');
+    const seatHtml = document.querySelector('#share > .share-video-wrapper');
     const trackHtml = document.createElement('video');
 
     if (!seatHtml && trackHtml) {

@@ -22,7 +22,7 @@ import ButtonContextMenu from '../ButtonContextMenu';
 
 const Seats = () => {
   const { t } = useTranslation('app');
-  const { isSharing } = useStooa();
+  const { isSharing, isModerator } = useStooa();
   const [{ conferenceStatus }] = useStateValue();
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
@@ -35,7 +35,9 @@ const Seats = () => {
           isConferenceNotStarted ? 'not-started' : ''
         } `}
       >
-        <div id="share"></div>
+        <div id="share">
+          <div className={`share-video-wrapper ${isModerator ? 'moderator' : ''}`}></div>
+        </div>
         {[...Array(5)].map((e, seat) => (
           <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />

@@ -36,6 +36,8 @@
     "full": "Lleno",
     "join": "Unirse a la conversación",
     "leave": "Salir de la conversación",
+    "shareScreenButton": "Compartir pantalla",
+    "stopShareScreenButton": "Dejar de compartir",
     "reactions": "Reacciones",
     "unmute": "Activar",
     "mute": "Silenciar",
@@ -129,6 +131,7 @@
         "insightful": "Interesante"
     },
     "prefishbowl": {
+        "participantsTitle": "Participantes en la sala",
         "onBoardingHelp": "¿No tienes claro cómo funciona un fishbowl? Haz clic aquí",
         "connectWithUsers": "Para conectar con las personas en la sala a través de tus RRSS, regístrate en Stooa."
     }

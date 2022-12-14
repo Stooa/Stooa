@@ -40,6 +40,8 @@ export const StyledButton = styled(ActionButton)`
 
   .text {
     color: ${COLOR_NEUTRO_600};
+    max-width: 13ch;
+    margin: 0 auto;
 
     ${BODY_XS}
     line-height: 1.5;

@@ -36,6 +36,8 @@
     "full": "Full",
     "join": "Join the conversation",
     "leave": "Leave the conversation",
+    "shareScreenButton": "Share screen",
+    "stopShareScreenButton": "Stop sharing",
     "reactions": "Reactions",
     "unmute": "Unmute",
     "mute": "Mute",
@@ -129,6 +131,7 @@
         "insightful": "Insightful"
     },
     "prefishbowl": {
+        "participantsTitle": "Participants in the room",
         "onBoardingHelp": "Don't know how a fishbowl works? Click here",
         "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
     }
