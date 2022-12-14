@@ -28,6 +28,7 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
     {
     }
 
+    /** @param array<array-key, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
