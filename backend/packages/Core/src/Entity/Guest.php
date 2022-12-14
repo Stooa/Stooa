@@ -26,7 +26,16 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ApiResource(operations: [new Get(), new GetCollection(controller: NotFoundAction::class, read: false, output: false), new Post()], graphQlOperations: [new Mutation(name: 'create', validationContext: ['groups' => ['Default', 'guest:create']])], normalizationContext: ['groups' => ['guest:read']], denormalizationContext: ['groups' => ['guest:write']])]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(controller: NotFoundAction::class, output: false, read: false),
+        new Post()
+    ],
+    normalizationContext: ['groups' => ['guest:read']],
+    denormalizationContext: ['groups' => ['guest:write']],
+    graphQlOperations: [new Mutation(validationContext: ['groups' => ['Default', 'guest:create']], name: 'create')]
+)]
 #[ORM\Entity]
 class Guest implements \Stringable
 {

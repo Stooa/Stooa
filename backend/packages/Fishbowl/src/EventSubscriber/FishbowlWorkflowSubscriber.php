@@ -15,7 +15,7 @@ namespace App\Fishbowl\EventSubscriber;
 
 use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Webmozart\Assert\Assert;
 

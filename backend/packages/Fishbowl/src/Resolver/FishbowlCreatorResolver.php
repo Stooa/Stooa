@@ -17,7 +17,7 @@ use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\PrivateFishbowlService;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class FishbowlCreatorResolver implements QueryItemResolverInterface

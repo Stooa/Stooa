@@ -17,7 +17,7 @@ use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
 use ApiPlatform\Validator\ValidatorInterface;
 use App\Core\Entity\User;
 use App\Core\Model\ChangePasswordLoggedInput;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class ChangePasswordLoggedDataTransformer implements DataTransformerInterface

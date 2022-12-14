@@ -18,7 +18,7 @@ use ApiPlatform\Metadata\GraphQl\Operation;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\FishbowlService;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class FishbowlValidateStage implements ValidateStageInterface

@@ -18,7 +18,7 @@ use App\Fishbowl\EventSubscriber\FishbowlWorkflowSubscriber;
 use App\Fishbowl\Factory\FishbowlFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Marking;
 use Symfony\Component\Workflow\Transition;

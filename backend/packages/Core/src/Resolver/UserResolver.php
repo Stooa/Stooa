@@ -15,7 +15,7 @@ namespace App\Core\Resolver;
 
 use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Core\Entity\User;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class UserResolver implements QueryItemResolverInterface
