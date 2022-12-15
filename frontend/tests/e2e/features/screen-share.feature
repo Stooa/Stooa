@@ -11,4 +11,4 @@ Feature: Fishbowl
         And clicks on "Join the discussion" button
         And sees the prefishbowl page with introduction
         And starts fishbowl with introduction
-#        Then can click on screen share button
+        Then can click on screen share button
