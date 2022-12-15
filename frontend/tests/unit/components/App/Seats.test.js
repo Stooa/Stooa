@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { getAllByTestId, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Seats from '@/components/App/Seats';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStooa } from '@/contexts/StooaManager';
