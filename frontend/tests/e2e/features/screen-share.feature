@@ -10,5 +10,5 @@ Feature: Fishbowl
         And can access to pre join
         And clicks on "Join the discussion" button
         And sees the prefishbowl page with introduction
-#        And starts fishbowl with introduction
+        And starts fishbowl with introduction
 #        Then can click on screen share button
