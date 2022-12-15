@@ -49,7 +49,7 @@ const sharedTrackRepository = () => {
     _createShareTrack(shareTrack);
   };
 
-  const removeShareTrack = async track => {
+  const removeShareTrack = async (track, location?: string) => {
     if (!track) return;
 
     const trackHtml = getShareHtmlTrack();
@@ -60,7 +60,7 @@ const sharedTrackRepository = () => {
       if (trackHtml.firstChild) trackHtml.removeChild(trackHtml.firstChild);
       track.dispose();
 
-      dispatchEvent(SCREEN_SHARE_STOP);
+      dispatchEvent(SCREEN_SHARE_STOP, { location: location });
       conferenceRepository.stopScreenShareEvent();
     }
 

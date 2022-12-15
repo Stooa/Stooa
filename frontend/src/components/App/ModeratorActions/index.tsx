@@ -27,6 +27,7 @@ import { useModals } from '@/contexts/ModalsContext';
 import ModalEndIntroduction from '../ModalEndIntroduction';
 import SharedTrack from '@/jitsi/SharedTrack';
 import Conference from '@/jitsi/Conference';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 interface Props {
   fid: string;
@@ -149,6 +150,12 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     await SharedTrack.removeShareTrack(shareLocalTrack[0]);
     setShowEndIntroductionModal(false);
     startFishbowl();
+
+    pushEventDataLayer({
+      action: 'modal_stop_share',
+      category: 'Sharescreen',
+      label: window.location.href
+    });
   };
 
   useEffect(() => {

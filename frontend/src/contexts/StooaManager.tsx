@@ -53,6 +53,7 @@ import { Participant } from '@/types/participant';
 import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -197,7 +198,14 @@ const StooaProvider = ({
     setIsSharing(true);
   });
 
-  useEventListener(SCREEN_SHARE_STOP, () => {
+  useEventListener(SCREEN_SHARE_STOP, ({ detail: { location } }) => {
+    if (isModerator) {
+      pushEventDataLayer({
+        action: location === 'app' ? 'stooa_stop_share' : 'navigator_stop_share',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+    }
     setIsSharing(false);
   });
 

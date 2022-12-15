@@ -213,13 +213,15 @@ const tracksRepository = () => {
   };
 
   const handleTrackRemoved = track => {
-    const id = track.getParticipantId();
-    const seat = seatsRepository.getSeat(id);
+    if (track.isLocal) return;
 
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.removeShareTrack(track);
       return;
     }
+
+    const id = track.getParticipantId();
+    const seat = seatsRepository.getSeat(id);
 
     if (seat > 0) {
       _remove(track);

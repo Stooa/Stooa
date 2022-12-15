@@ -30,6 +30,7 @@ import ScreenShareButton from '../ScreenShareButton';
 import Conference from '@/jitsi/Conference';
 import SharedTrack from '@/jitsi/SharedTrack';
 import { useWindowSize } from '@/hooks/useWIndowSize';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
@@ -58,11 +59,22 @@ const ToolBar: React.FC = () => {
       );
 
       setIsSharing(false);
-      await SharedTrack.removeShareTrack(shareLocalTrack[0]);
+      await SharedTrack.removeShareTrack(shareLocalTrack[0], 'app');
     } else {
+      pushEventDataLayer({
+        action: 'click_share',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+
       const selectedScreen = await devicesRepository.screenShare();
 
       if (selectedScreen) {
+        pushEventDataLayer({
+          action: 'share',
+          category: 'Sharescreen',
+          label: window.location.href
+        });
         setIsSharing(true);
       }
     }
