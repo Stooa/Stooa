@@ -395,9 +395,7 @@ When('sees the prefishbowl page with introduction', () => {
     req.reply({
       status: 'INTRODUCTION'
     });
-  }).as('getFishbowlStatus');
-
-  cy.wait('@getFishbowlStatus');
+  }).as('getIntroductionStatus');
 
   const bySlugQueryFishbowl = makeGQLCurrentFishbowlWithIntroduction();
 
@@ -410,8 +408,6 @@ When('sees the prefishbowl page with introduction', () => {
       });
     }
   }).as('gqlFishbowlBySlugQuery');
-
-  cy.wait('@gqlFishbowlBySlugQuery');
 
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
