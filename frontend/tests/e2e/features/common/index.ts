@@ -324,8 +324,6 @@ When('starts fishbowl with introduction', () => {
 
   startedFishbowl = true;
 
-  cy.wait('@getFishbowlStatus');
-
   cy.screenshot();
 });
 
@@ -393,8 +391,16 @@ When('sees the prefishbowl page', () => {
 });
 
 When('sees the prefishbowl page with introduction', () => {
+  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
+    req.reply({
+      status: 'INTRODUCTION'
+    });
+  }).as('getFishbowlStatus');
+
+  cy.wait('@getFishbowlStatus');
+
   const bySlugQueryFishbowl = makeGQLCurrentFishbowlWithIntroduction();
-  
+
   cy.intercept('POST', 'https://localhost:8443/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
@@ -406,12 +412,6 @@ When('sees the prefishbowl page with introduction', () => {
   }).as('gqlFishbowlBySlugQuery');
 
   cy.wait('@gqlFishbowlBySlugQuery');
-
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
-    req.reply({
-      status: 'INTRODUCTION'
-    });
-  }).as('getFishbowlStatus');
 
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
