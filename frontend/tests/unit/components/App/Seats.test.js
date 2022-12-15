@@ -53,4 +53,22 @@ describe('Unit test of fishbowl seats', () => {
 
     expect(seats.length).toBe(5);
   });
+
+  it('Changes layout while is sharing', () => {
+    useStooa.mockReturnValue({
+      isSharing: true,
+      isModerator: true
+    });
+
+    useStateValue.mockReturnValue([
+      { conferenceStatus: IConferenceStatus.INTRODUCTION },
+      () => jest.fn()
+    ]);
+
+    const { getByTestId } = render(<Seats />);
+
+    const seatsWrapper = getByTestId('seats-wrapper');
+
+    expect(seatsWrapper.classList.contains('sharing')).toBe(true);
+  });
 });

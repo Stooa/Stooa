@@ -31,6 +31,7 @@ const Seats = () => {
   return (
     <SeatsStyled>
       <div
+        data-testid="seats-wrapper"
         className={`content seats-wrapper ${isSharing ? 'sharing' : ''} ${
           isConferenceNotStarted ? 'not-started' : ''
         } `}
