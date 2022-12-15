@@ -20,7 +20,13 @@ interface Props {
 const ScreenShareButton = ({ isSharing, onClick, ...props }: Props) => {
   const { t } = useTranslation('fishbowl');
   return (
-    <StyledButton active className={isSharing ? 'sharing' : ''} onClick={onClick} {...props}>
+    <StyledButton
+      data-testid="screen-share-button"
+      active
+      className={isSharing ? 'sharing' : ''}
+      onClick={onClick}
+      {...props}
+    >
       <span className="button">{isSharing ? <ShareStopIcon /> : <ShareIcon />}</span>
       <div className="text medium">
         {!isSharing ? t('shareScreenButton') : t('stopShareScreenButton')}
