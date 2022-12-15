@@ -77,8 +77,8 @@ const devicesRepository = (): DevicesRepository => {
       await Promise.reject('User canceled desktop track creation');
     }
 
-    const desktopTrack = newTracks.filter((track) => track.getVideoType() === 'desktop');
-    
+    const desktopTrack = newTracks.filter(track => track.getVideoType() === 'desktop');
+
     conferenceRepository.addTrack(desktopTrack[0], undefined);
     conferenceRepository.startScreenShareEvent();
 
