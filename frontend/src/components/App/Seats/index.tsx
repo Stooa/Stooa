@@ -67,7 +67,9 @@ const Seats = () => {
               ) : (
                 <>
                   <SeatImage />
-                  <span className="text body-sm">{t('seatAvailable')}</span>
+                  <span data-testid="available-seat" className="text body-sm">
+                    {t('seatAvailable')}
+                  </span>
                 </>
               )}
             </Free>
