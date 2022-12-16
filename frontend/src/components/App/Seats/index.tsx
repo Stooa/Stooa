@@ -37,13 +37,14 @@ const Seats = () => {
         } `}
       >
         <div id="share">
-          <div className={`share-video-wrapper ${isModerator ? 'moderator' : ''}`}></div>
-          {isModerator && (
-            <p className="warning medium">
-              Para evitar el efecto espejo infinito, no compartas la pantalla completa ni la ventana
-              del navegador entera. Comparte una sola pestaña o una ventana diferente.
-            </p>
-          )}
+          <div className={`share-video-wrapper ${isModerator ? 'moderator' : ''}`}>
+            {isModerator && (
+              <p className="warning medium">
+                Para evitar el efecto espejo infinito, no compartas la pantalla completa ni la
+                ventana del navegador entera. Comparte una sola pestaña o una ventana diferente.
+              </p>
+            )}
+          </div>
         </div>
 
         {[...Array(5)].map((e, seat) => (
