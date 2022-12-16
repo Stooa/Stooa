@@ -41,10 +41,7 @@ const Seats = () => {
           <LoadingIcon white />
           <div className={`share-video-wrapper ${isModerator ? 'moderator' : ''}`}>
             {isModerator && (
-              <p className="warning medium">
-                Para evitar el efecto espejo infinito, no compartas la pantalla completa ni la
-                ventana del navegador entera. Comparte una sola pestaña o una ventana diferente.
-              </p>
+              <p className="warning medium">{t('shareWarning')}</p>
             )}
           </div>
         </div>
