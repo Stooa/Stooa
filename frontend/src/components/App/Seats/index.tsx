@@ -19,6 +19,7 @@ import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import ButtonContextMenu from '../ButtonContextMenu';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const Seats = () => {
   const { t } = useTranslation('app');
@@ -37,6 +38,7 @@ const Seats = () => {
         } `}
       >
         <div id="share">
+          <LoadingIcon white />
           <div className={`share-video-wrapper ${isModerator ? 'moderator' : ''}`}>
             {isModerator && (
               <p className="warning medium">
