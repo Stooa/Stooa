@@ -249,6 +249,7 @@ const SeatsStyled = styled.div`
     & #share {
       display: none;
       position: relative;
+      background-color: ${COLOR_NEUTRO_600};
 
       & #loading-svg {
         position: absolute;
@@ -283,6 +284,7 @@ const SeatsStyled = styled.div`
         display: block;
         width: 100%;
         height: 100%;
+        min-height: 180px;
         max-height: 220px;
 
         grid-column: span 4;
@@ -400,7 +402,6 @@ const SeatsStyled = styled.div`
           max-height: initial;
           display: flex;
           align-items: center;
-          background-color: ${COLOR_NEUTRO_600};
           border-radius: ${BORDER_RADIUS};
 
           grid-column: 1;
