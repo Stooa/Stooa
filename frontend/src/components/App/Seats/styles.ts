@@ -264,10 +264,12 @@ const SeatsStyled = styled.div`
 
     &.sharing {
       position: relative;
+      align-content: center;
 
       & #seat-1 {
         grid-row: 1;
         grid-column: span 4;
+        min-height: 180px;
       }
 
       & #seat-2,
@@ -281,6 +283,7 @@ const SeatsStyled = styled.div`
         display: block;
         width: 100%;
         height: 100%;
+        max-height: 220px;
 
         grid-column: span 4;
 
@@ -361,7 +364,7 @@ const SeatsStyled = styled.div`
         grid-column: span 2;
       }
 
-      & .fullscreen {
+      &.sharing #share .share-video-wrapper .fullscreen {
         display: none;
       }
 
@@ -369,6 +372,7 @@ const SeatsStyled = styled.div`
         grid-template-columns: repeat(7, 1fr);
         grid-template-columns: 5fr 1fr 1fr;
         grid-template-rows: 2fr 1fr 1fr;
+        align-content: initial;
 
 
         ${Seat} {
@@ -393,6 +397,7 @@ const SeatsStyled = styled.div`
 
         & #share {
           height: 100%;
+          max-height: initial;
           display: flex;
           align-items: center;
           background-color: ${COLOR_NEUTRO_600};
