@@ -322,8 +322,8 @@ const SeatsStyled = styled.div`
             right: ${space(2)};
             top: ${space(2)};
             padding: 0.5em;
-            background-color: ${COLOR_NEUTRO_800}55;
-            border: 1px solid ${COLOR_NEUTRO_200}80;
+            background-color: ${COLOR_NEUTRO_800}88;
+            border: 1px solid ${COLOR_NEUTRO_200}AA;
             border-radius: 3rem;
             z-index: 1;
             transition: background-color 0.3s ease-in-out;

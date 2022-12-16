@@ -44,10 +44,11 @@ export const StyledButton = styled(ActionButton)`
     margin: 0 auto;
 
     ${BODY_XS}
-    line-height: 1.5;
+    line-height: 1.1;
 
     ${media.min('tablet')`
       ${BODY_SM}
+      line-height: 1.1;
     `}
   }
 

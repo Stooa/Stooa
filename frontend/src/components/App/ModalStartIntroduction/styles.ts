@@ -17,19 +17,22 @@ const StyledIntroModal = styled(Modal)`
   }
 
   & .description {
-    display: flex;
-    margin-top: ${space(4)};
     margin-bottom: ${space(4)};
 
-    & > div {
-      max-width: 270px;
+    &.share {
+      display: flex;
+      margin-top: ${space(4)};
 
-      &:not(:last-child) {
-        margin-right: ${space(8)};
-      }
+      & > div {
+        max-width: 270px;
 
-      & > p {
-        margin-top: ${space(4)};
+        &:not(:last-child) {
+          margin-right: ${space(8)};
+        }
+
+        & > p {
+          margin-top: ${space(4)};
+        }
       }
     }
   }

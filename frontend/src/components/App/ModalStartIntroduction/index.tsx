@@ -39,14 +39,13 @@ const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction
             <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} />
           </p>
         ) : (
-          <div className="description">
+          <div className="description share">
             <div>
               <Image
                 src="/img/friends/reading-book.png"
                 objectFit="contain"
                 width={146}
                 height={200}
-                quality={100}
                 alt="Stooa's friend reading a book"
               />
               <p>
@@ -63,7 +62,6 @@ const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction
                 objectFit="contain"
                 width={186}
                 height={200}
-                quality={100}
                 alt="Stooa's friend choosing to share the screen"
               />
               <p>
@@ -79,7 +77,6 @@ const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction
                 objectFit="contain"
                 width={114}
                 height={200}
-                quality={100}
                 alt="Stooa's friend choosing to share the screen"
               />
               <p>

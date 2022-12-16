@@ -31,9 +31,10 @@ const Seats = () => {
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
 
   const handleFullscreen = () => {
-    const video = document.querySelector('#share video');
+    const video = document.querySelector('#share video') as HTMLVideoElement;
     if (video) {
       video.requestFullscreen();
+      video.controls = true;
     }
   };
 
@@ -52,9 +53,7 @@ const Seats = () => {
               <Fullscreen />
             </div>
 
-            {isModerator && (
-              <p className="warning medium">{t('shareWarning')}</p>
-            )}
+            {isModerator && <p className="warning medium">{t('shareWarning')}</p>}
           </div>
         </div>
 
