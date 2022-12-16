@@ -57,7 +57,8 @@ const sharedTrackRepository = () => {
 
     if (trackHtml) {
       track.detach(trackHtml);
-      if (trackHtml.firstChild) trackHtml.removeChild(trackHtml.firstChild);
+      const video = trackHtml.querySelector('video') as HTMLElement;
+      if (video) trackHtml.removeChild(video);
       track.dispose();
 
       dispatchEvent(SCREEN_SHARE_STOP, { location: location });
