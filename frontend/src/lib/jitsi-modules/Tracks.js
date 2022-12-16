@@ -213,7 +213,7 @@ const tracksRepository = () => {
   };
 
   const handleTrackRemoved = track => {
-    if (track.isLocal) return;
+    if (track.isLocal()) return;
 
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.removeShareTrack(track);

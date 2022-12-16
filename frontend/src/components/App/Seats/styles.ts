@@ -246,6 +246,15 @@ const SeatsStyled = styled.div`
 
     & #share {
       display: none;
+      position: relative;
+
+      & #loading-svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+      }
     }
 
     &:not(.sharing) #seat-5 {
@@ -284,6 +293,7 @@ const SeatsStyled = styled.div`
 
           width: 80%;
           max-width: 66ch;
+          z-index: 10;
         }
 
         & .share-video-wrapper {
@@ -292,6 +302,8 @@ const SeatsStyled = styled.div`
           overflow: hidden;
           line-height: 0;
           width: 100%;
+          position: relative;
+          z-index: 10;
 
           &.moderator {
             background-color: #000;
@@ -320,7 +332,7 @@ const SeatsStyled = styled.div`
 
     ${media.min('desktop')`
       padding-bottom: ${space()};
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(7, 1fr);
 
 
       #seat-4 {
@@ -332,7 +344,7 @@ const SeatsStyled = styled.div`
       }
 
       &.sharing {
-        grid-template-columns: 4fr 1fr 1fr;
+        grid-template-columns: 5fr 1fr 1fr;
         grid-template-rows: 2fr 1fr 1fr;
 
 

@@ -13,7 +13,7 @@
     },
     "shareScreen": {
         "title": "¡Comparte tu pantalla!",
-        "description": "<ul>Durante la introducción, podrás <strong>compartir pantalla</strong>, si lo necesitas.</li><li>Esta función <strong>solo está disponible para ti</strong> como Host y dejará de estar activa cuando cierres la introducción.</li><li>Solo podrás compartir pantalla con tu ordenador, no con tu teléfono.</li></ul>"
+        "description": "<ul><li>Durante la introducción, podrás <strong>compartir pantalla</strong>, si lo necesitas.</li><li>Esta función <strong>solo está disponible para ti</strong> como Host y dejará de estar activa cuando cierres la introducción.</li><li>Solo podrás compartir pantalla con tu ordenador, no con tu teléfono.</li></ul>"
     },
     "appControls": {
         "title": "¿Cómo puedo interactuar?",

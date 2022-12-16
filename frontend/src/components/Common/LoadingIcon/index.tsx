@@ -12,15 +12,30 @@ import { useEffect } from 'react';
 
 import { IconWrapper } from '@/components/Common/LoadingIcon/styles';
 import LoaderJson from '@/ui/animations/loader/loader.json';
+import WhiteLoaderJson from '@/ui/animations/loader/white-loader.json';
 
-const LoadingIcon = () => {
+interface Props {
+  white?: boolean;
+}
+
+const LoadingIcon = ({ white }: Props) => {
   useEffect(() => {
     const element = document.getElementById('loading-svg');
 
-    if (element) {
+    if (element && !white) {
       lottie.loadAnimation({
         container: element,
         animationData: LoaderJson,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true
+      });
+    }
+
+    if (element && white) {
+      lottie.loadAnimation({
+        container: element,
+        animationData: WhiteLoaderJson,
         renderer: 'svg',
         loop: true,
         autoplay: true
