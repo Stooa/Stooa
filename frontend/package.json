@@ -71,7 +71,7 @@
     "@types/jest": "27.4.1",
     "@types/js-cookie": "3.0.2",
     "@types/react-slick": "0.23.10",
-    "@typescript-eslint/eslint-plugin": "5.46.0",
+    "@typescript-eslint/eslint-plugin": "5.46.1",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.7.0",
