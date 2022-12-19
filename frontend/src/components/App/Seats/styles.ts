@@ -242,6 +242,7 @@ const SeatsStyled = styled.div`
     align-items: center;
     justify-content: center;
     height: 100%;
+    max-height: 79vh;
     width: 100%;
 
     & #share {
@@ -391,7 +392,6 @@ const SeatsStyled = styled.div`
             width: 100%;
             height: auto;
             object-fit: contain;
-            max-height: 850px;
           }
         }
       }
