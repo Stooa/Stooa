@@ -18,8 +18,6 @@ export const useNavigatorType = () => {
 
     if (userNavigator.maxTouchPoints) {
       hasTouchScreen = userNavigator.maxTouchPoints > 0;
-    } else if ('msMaxTouchPoints' in userNavigator) {
-      hasTouchScreen = (userNavigator.msMaxTouchPoints as number) > 0;
     } else {
       const mQ = window && window.matchMedia('(pointer:coarse)');
       if (mQ && mQ.media === '(pointer:coarse)') {
