@@ -11,10 +11,4 @@ import { Then } from 'cypress-cucumber-preprocessor/steps';
 
 Then('can click on screen share button', () => {
   cy.get('[data-testid=share-screen-button]').should('exist');
-
-  // cy.get('[data-testid=share-screen-button] span').click({ force: true });
-  //
-  // cy.get('[data-testid=share-screen-button]').should('have.class', 'sharing');
-  //
-  // cy.get('[data-testid=seats-wrapper]').should('have.class', 'sharing');
 });

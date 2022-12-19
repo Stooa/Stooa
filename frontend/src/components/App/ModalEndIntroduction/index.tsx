@@ -31,14 +31,10 @@ const ModalEndIntroduction: React.FC<Props> = ({ closeModal, startFishbowl, disa
           <Cross />
         </button>
         <h2 className="title-sm">{t('endIntroModal.title')}</h2>
-        <p className="description">
-          {/* <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} /> */}
-          Cuando acabes la intro y dejes entrar a lxs asistentes, dejarás automáticamente de
-          compartir pantalla y ya no podrás volver a hacerlo.
-        </p>
+        <p className="description">{t('endIntroModal.description')}</p>
         <div className="modal-footer">
           <Button size="medium" onClick={startFishbowl} disabled={disabled}>
-            Acabar introducción
+            {t('endIntroModal.button')}
           </Button>
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}

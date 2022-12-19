@@ -10,5 +10,6 @@
         "oneMinuteLeft": "Queda 1 minut per finalitzar el fishbowl 🚨",
         "joinAfterIntroduction": "⚠️  Podràs unir-te a la conversa després de la introducció"
     },
-    "loading": "Entrant al fishbowl"
+    "loading": "Entrant al fishbowl",
+    "shareWarning": "Per a evitar l'efecte mirall infinit, no comparteixis la pantalla completa ni la finestra del navegador sencera. Comparteix una sola pestanya o una finestra diferent."
 }
