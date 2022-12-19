@@ -242,7 +242,6 @@ const SeatsStyled = styled.div`
     align-items: center;
     justify-content: center;
     height: 100%;
-    max-height: 79vh;
     width: 100%;
 
     & #share {
@@ -320,8 +319,8 @@ const SeatsStyled = styled.div`
 
         & video {
           width: 100%;
-          height: auto;
-          object-fit: cover;
+          height: 100%;
+          object-fit: contain;
           max-height: 550px;
         }
       }
@@ -337,6 +336,7 @@ const SeatsStyled = styled.div`
     ${media.min('desktop')`
       padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
+      max-height: 79vh;
 
 
       #seat-4 {
