@@ -20,14 +20,25 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import ButtonContextMenu from '../ButtonContextMenu';
 import LoadingIcon from '@/components/Common/LoadingIcon';
+import { useEffect } from 'react';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 const Seats = () => {
   const { t } = useTranslation('app');
   const { isSharing, isModerator } = useStooa();
   const [{ conferenceStatus }] = useStateValue();
+  const { deviceType } = useNavigatorType();
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
+
+  useEffect(() => {
+    console.log(deviceType);
+    if (isSharing && deviceType === 'Mobile') {
+      const shareVideo = document.querySelector('.share-video-wrapper video') as HTMLVideoElement;
+      if (shareVideo) shareVideo.controls = true;
+    }
+  }, [isSharing, deviceType]);
 
   return (
     <SeatsStyled>

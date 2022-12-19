@@ -42,6 +42,7 @@ export const StyledButton = styled(ActionButton)`
     color: ${COLOR_NEUTRO_600};
     max-width: 13ch;
     margin: 0 auto;
+    padding-top: 2px;
 
     ${BODY_XS}
     line-height: 1.1;

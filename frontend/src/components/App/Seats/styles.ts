@@ -284,6 +284,7 @@ const SeatsStyled = styled.div`
         height: 100%;
         min-height: 180px;
         max-height: 220px;
+        border-radius: ${BORDER_RADIUS};
 
         grid-column: span 4;
 
