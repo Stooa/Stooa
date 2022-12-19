@@ -29,7 +29,7 @@
         "title": "Faites une présentation",
         "description": "Votre caméra sera activée et vous pourrez dire quelques mots aux participants avant d'ouvrir le bocal. Ensuite, vous pouvez autoriser les utilisateurs à participer à la conversation.",
         "button": "Commencer votre présentation",
-        "shareScreenFirst": "C'est le moment d'adresser quelques mots aux participants avant d'ouvrir le fishbowl.",
+        "shareScreenFirst": "C'est le moment <span>d'adresser quelques mots</span> aux participants avant d'ouvrir le fishbowl.",
         "shareScreenSecond": "Vous pouvez également <span>partager votre écran</span> pour fournir un contenu visuel à votre introduction.",
         "shareScreenThird": "<span>Lorsque vous avez terminé</span>, vous pouvez autoriser les participants à rejoindre la conversation."
     },
