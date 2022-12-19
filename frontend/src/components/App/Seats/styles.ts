@@ -301,7 +301,7 @@ const SeatsStyled = styled.div`
         }
 
         & .share-video-wrapper {
-          height: fit-content;
+          height: 100%;
           border-radius: ${BORDER_RADIUS};
           overflow: hidden;
           line-height: 0;
@@ -321,7 +321,6 @@ const SeatsStyled = styled.div`
           width: 100%;
           height: 100%;
           object-fit: contain;
-          max-height: 550px;
         }
       }
     }
@@ -357,7 +356,6 @@ const SeatsStyled = styled.div`
         grid-template-rows: 2fr 1fr 1fr;
         align-content: initial;
 
-
         ${Seat} {
           grid-column: span 1;
         }
@@ -390,7 +388,7 @@ const SeatsStyled = styled.div`
 
           & video {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: contain;
           }
         }
