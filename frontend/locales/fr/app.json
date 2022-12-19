@@ -8,5 +8,6 @@
         "oneMinuteLeft": "Il reste 1 minute pour finir le fishbowl 🚨",
         "joinAfterIntroduction": "⚠️ Vous pouvez rejoindre la conversation après l'introduction"
     },
-    "loading": "Rejoindre le fishbowl"
+    "loading": "Rejoindre le fishbowl",
+    "shareWarning": "Pour éviter la duplication à l'infini, ne partagez pas le plein écran ou la totalité de la fenêtre du navigateur. Partagez un seul onglet ou une fenêtre différente."
 }
