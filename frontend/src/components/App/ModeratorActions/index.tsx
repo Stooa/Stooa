@@ -36,7 +36,6 @@ interface Props {
 
 const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [, dispatch] = useStateValue();
-  const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
   const [running, setRunning] = useState(false);
   const [showIntroductionModal, setShowIntroductionModal] = useState(false);
@@ -45,7 +44,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
-  const { data, isSharing } = useStooa();
+  const { data, isSharing, changingFishbowlState, setChangingFishbowlState } = useStooa();
   const { permissions, setShowModalPermissions } = useDevices();
   const { showEndIntroductionModal, setShowEndIntroductionModal } = useModals();
 
@@ -63,7 +62,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const startIntroduction = () => {
-    setLoading(true);
+    setChangingFishbowlState(true);
 
     dispatch({
       type: 'FISHBOWL_STARTED',
@@ -77,7 +76,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       return;
     }
 
-    setLoading(true);
+    setChangingFishbowlState(true);
     const slug = { variables: { input: { slug: fid } } };
 
     if (data.hasIntroduction) {
@@ -85,11 +84,11 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         .then(() => {
           console.log('[STOOA] allowing users in');
           setRunning(true);
-          setLoading(false);
+          setChangingFishbowlState(false);
         })
         .catch(error => {
           console.error(error);
-          setLoading(false);
+          setChangingFishbowlState(false);
         });
     } else {
       dispatch({
@@ -101,7 +100,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         runWithoutIntroFishbowl(slug)
           .then(() => {
             console.log('[STOOA] run fishbowl without introduction');
-            setLoading(true);
+            setChangingFishbowlState(true);
           })
           .catch(error => {
             console.error(error);
@@ -113,7 +112,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const finishFishbowl = () => {
-    setLoading(true);
+    setChangingFishbowlState(true);
 
     endFishbowl({
       variables: {
@@ -124,12 +123,12 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     })
       .then(() => {
         console.log('[STOOA] Finished fishbowl. redirecting to thankyou page');
-        setLoading(false);
+        setChangingFishbowlState(false);
         setShowFinishModal(false);
       })
       .catch(error => {
         console.error('[STOOA] error finishing fishbowl: ', error);
-        setLoading(false);
+        setChangingFishbowlState(false);
       });
   };
 
@@ -142,7 +141,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const handleStartFishbowlWhileSharing = async () => {
-    setLoading(true);
+    setChangingFishbowlState(true);
     const shareLocalTrack = Conference.getLocalTracks().filter(
       track => track.videoType === 'desktop'
     );
@@ -162,13 +161,13 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     setRunning(conferenceStatus === IConferenceStatus.RUNNING);
 
     if (conferenceStatus === IConferenceStatus.RUNNING) {
-      setLoading(false);
+      setChangingFishbowlState(false);
     }
 
     if (conferenceStatus === IConferenceStatus.INTRODUCTION) {
       setIntroduction(true);
       setShowIntroductionModal(false);
-      setLoading(false);
+      setChangingFishbowlState(false);
     }
   }, [conferenceStatus]);
 
@@ -178,21 +177,21 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         <ModalStartIntroduction
           closeModal={toggleIntroductionModal}
           startIntroduction={startIntroduction}
-          disabled={loading}
+          disabled={changingFishbowlState}
         />
       )}
       {showEndIntroductionModal && (
         <ModalEndIntroduction
           closeModal={() => setShowEndIntroductionModal(false)}
           startFishbowl={handleStartFishbowlWhileSharing}
-          disabled={loading}
+          disabled={changingFishbowlState}
         />
       )}
       {showFinishModal && (
         <ModalEndFishbowl
           closeModal={toggleFinishModal}
           endFishbowl={finishFishbowl}
-          disabled={loading}
+          disabled={changingFishbowlState}
         />
       )}
       {(running || data.isFishbowlNow) && (
@@ -216,7 +215,12 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
             <span className="text">{t('startIntroduction')}</span>
           </Button>
         ) : (
-          <Button size="medium" className="button" onClick={handleStartFishbowl} disabled={loading}>
+          <Button
+            size="medium"
+            className="button"
+            onClick={handleStartFishbowl}
+            disabled={changingFishbowlState}
+          >
             {!permissions.audio && !introduction && (
               <div className="alert">
                 <PermissionsAlert />

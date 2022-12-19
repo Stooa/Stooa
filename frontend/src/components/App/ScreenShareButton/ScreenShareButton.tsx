@@ -14,10 +14,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   isSharing: boolean;
+  disabled: boolean;
   onClick: () => void;
 }
 
-const ScreenShareButton = ({ isSharing, onClick, ...props }: Props) => {
+const ScreenShareButton = ({ isSharing, onClick, disabled, ...props }: Props) => {
   const { t } = useTranslation('fishbowl');
   return (
     <StyledButton
@@ -25,6 +26,7 @@ const ScreenShareButton = ({ isSharing, onClick, ...props }: Props) => {
       active
       className={isSharing ? 'sharing' : ''}
       onClick={onClick}
+      disabled={disabled}
       {...props}
     >
       <span className="button">{isSharing ? <ShareStopIcon /> : <ShareIcon />}</span>

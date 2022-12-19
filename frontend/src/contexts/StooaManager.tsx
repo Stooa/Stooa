@@ -77,6 +77,7 @@ const StooaProvider = ({
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
   const [isSharing, setIsSharing] = useState(false);
+  const [changingFishbowlState, setChangingFishbowlState] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -349,7 +350,9 @@ const StooaProvider = ({
         getPassword,
         setFishbowlPassword,
         isSharing,
-        setIsSharing
+        setIsSharing,
+        changingFishbowlState,
+        setChangingFishbowlState
       }}
     >
       {children}
