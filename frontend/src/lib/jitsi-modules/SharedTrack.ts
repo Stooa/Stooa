@@ -33,6 +33,7 @@ const sharedTrackRepository = () => {
     }
 
     trackHtml.autoplay = true;
+    trackHtml.controls = true;
     trackHtml.id = track.getParticipantId() + videoType;
 
     trackHtml.setAttribute('muted', '');
@@ -40,7 +41,6 @@ const sharedTrackRepository = () => {
     seatHtml?.appendChild(trackHtml);
 
     track.attach(trackHtml);
-    // _playTrackHtml(trackHtml);
   };
 
   const shareTrackAdded = track => {
