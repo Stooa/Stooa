@@ -31,9 +31,7 @@ const ModalEndIntroduction: React.FC<Props> = ({ closeModal, startFishbowl, disa
           <Cross />
         </button>
         <h2 className="title-sm">{t('endIntroModal.title')}</h2>
-        <p className="description">
-          {t('endIntroModal.description')}
-        </p>
+        <p className="description">{t('endIntroModal.description')}</p>
         <div className="modal-footer">
           <Button size="medium" onClick={startFishbowl} disabled={disabled}>
             {t('endIntroModal.button')}
