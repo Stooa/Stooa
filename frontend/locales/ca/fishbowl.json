@@ -73,7 +73,7 @@
         "description": "La teva càmera s'activarà perquè que pugis dir unes paraules abans del <i>fishbowl</i>. Després podràs permetre als usuaris unir-se a la conversa.",
         "shareScreenFirst": "És el teu moment per a <span>dirigir unes paraules</span> als assistents abans d'obrir el fishbowl.",
         "shareScreenSecond": "També podràs <span>compartir la teva pantalla</span> per a dotar de contingut visual a la teva introducció.",
-        "shareScreenThird": "<span>Quan acabis</span>, podràs permetre a lxs assistents unir-se a la conversa.",
+        "shareScreenThird": "<span>Quan acabis</span>, podràs permetre a la resta d’assistents unir-se a la conversa.",
         "button": "Començar introducció"
     },
     "endIntroModal": {
