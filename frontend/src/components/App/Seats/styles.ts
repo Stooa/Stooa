@@ -14,10 +14,8 @@ import {
   COLOR_RED_100,
   COLOR_RED_500,
   COLOR_NEUTRO_100,
-  COLOR_NEUTRO_200,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_NEUTRO_800,
   COLOR_YELLOW_500,
   COLOR_NEUTRO_300
 } from '@/ui/settings';
@@ -315,24 +313,6 @@ const SeatsStyled = styled.div`
 
             & video {
               opacity: 0.45;
-            }
-          }
-
-          & .fullscreen {
-            display: block;
-            position: absolute;
-            right: ${space(2)};
-            top: ${space(2)};
-            padding: 0.5em;
-            background-color: ${COLOR_NEUTRO_800}88;
-            border: 1px solid ${COLOR_NEUTRO_200}AA;
-            border-radius: 3rem;
-            z-index: 1;
-            transition: background-color 0.3s ease-in-out;
-
-            &:hover {
-              cursor: pointer;
-              background-color: ${COLOR_NEUTRO_600}80;
             }
           }
         }
