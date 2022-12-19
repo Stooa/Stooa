@@ -36,15 +36,15 @@ interface Props {
 
 const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [, dispatch] = useStateValue();
+  const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
-  const [running, setRunning] = useState(false);
   const [showIntroductionModal, setShowIntroductionModal] = useState(false);
   const [showFinishModal, setShowFinishModal] = useState(false);
   const [runFishbowl] = useMutation(RUN_FISHBOWL);
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
-  const { data, isSharing, changingFishbowlState, setChangingFishbowlState } = useStooa();
+  const { data, isSharing, clientRunning, setClientRunning } = useStooa();
   const { permissions, setShowModalPermissions } = useDevices();
   const { showEndIntroductionModal, setShowEndIntroductionModal } = useModals();
 
@@ -62,7 +62,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const startIntroduction = () => {
-    setChangingFishbowlState(true);
+    setLoading(true);
 
     dispatch({
       type: 'FISHBOWL_STARTED',
@@ -76,19 +76,19 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       return;
     }
 
-    setChangingFishbowlState(true);
+    setLoading(true);
     const slug = { variables: { input: { slug: fid } } };
 
     if (data.hasIntroduction) {
       runFishbowl(slug)
         .then(() => {
           console.log('[STOOA] allowing users in');
-          setRunning(true);
-          setChangingFishbowlState(false);
+          setClientRunning(true);
+          setLoading(false);
         })
         .catch(error => {
           console.error(error);
-          setChangingFishbowlState(false);
+          setLoading(false);
         });
     } else {
       dispatch({
@@ -100,7 +100,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         runWithoutIntroFishbowl(slug)
           .then(() => {
             console.log('[STOOA] run fishbowl without introduction');
-            setChangingFishbowlState(true);
+            setLoading(true);
           })
           .catch(error => {
             console.error(error);
@@ -112,7 +112,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const finishFishbowl = () => {
-    setChangingFishbowlState(true);
+    setLoading(true);
 
     endFishbowl({
       variables: {
@@ -123,12 +123,12 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     })
       .then(() => {
         console.log('[STOOA] Finished fishbowl. redirecting to thankyou page');
-        setChangingFishbowlState(false);
+        setLoading(false);
         setShowFinishModal(false);
       })
       .catch(error => {
         console.error('[STOOA] error finishing fishbowl: ', error);
-        setChangingFishbowlState(false);
+        setLoading(false);
       });
   };
 
@@ -141,7 +141,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   const handleStartFishbowlWhileSharing = async () => {
-    setChangingFishbowlState(true);
+    setLoading(true);
     const shareLocalTrack = Conference.getLocalTracks().filter(
       track => track.videoType === 'desktop'
     );
@@ -158,16 +158,16 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   };
 
   useEffect(() => {
-    setRunning(conferenceStatus === IConferenceStatus.RUNNING);
+    setClientRunning(conferenceStatus === IConferenceStatus.RUNNING);
 
     if (conferenceStatus === IConferenceStatus.RUNNING) {
-      setChangingFishbowlState(false);
+      setLoading(false);
     }
 
     if (conferenceStatus === IConferenceStatus.INTRODUCTION) {
       setIntroduction(true);
       setShowIntroductionModal(false);
-      setChangingFishbowlState(false);
+      setLoading(false);
     }
   }, [conferenceStatus]);
 
@@ -177,24 +177,24 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         <ModalStartIntroduction
           closeModal={toggleIntroductionModal}
           startIntroduction={startIntroduction}
-          disabled={changingFishbowlState}
+          disabled={loading}
         />
       )}
       {showEndIntroductionModal && (
         <ModalEndIntroduction
           closeModal={() => setShowEndIntroductionModal(false)}
           startFishbowl={handleStartFishbowlWhileSharing}
-          disabled={changingFishbowlState}
+          disabled={loading}
         />
       )}
       {showFinishModal && (
         <ModalEndFishbowl
           closeModal={toggleFinishModal}
           endFishbowl={finishFishbowl}
-          disabled={changingFishbowlState}
+          disabled={loading}
         />
       )}
-      {(running || data.isFishbowlNow) && (
+      {(clientRunning || data.isFishbowlNow) && (
         <Button
           data-testid="finish-fishbowl"
           size="medium"
@@ -204,7 +204,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           <span className="text">{t('endFishbowl')}</span>
         </Button>
       )}
-      {!(running || data.isFishbowlNow) &&
+      {!(clientRunning || data.isFishbowlNow) &&
         (!introduction && data.hasIntroduction && !data.isFishbowlNow ? (
           <Button size="medium" className="button" onClick={toggleIntroductionModal}>
             {!permissions.audio && (
@@ -215,12 +215,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
             <span className="text">{t('startIntroduction')}</span>
           </Button>
         ) : (
-          <Button
-            size="medium"
-            className="button"
-            onClick={handleStartFishbowl}
-            disabled={changingFishbowlState}
-          >
+          <Button size="medium" className="button" onClick={handleStartFishbowl} disabled={loading}>
             {!permissions.audio && !introduction && (
               <div className="alert">
                 <PermissionsAlert />

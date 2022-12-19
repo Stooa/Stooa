@@ -45,7 +45,7 @@ const ToolBar: React.FC = () => {
     conferenceReady,
     isSharing,
     setIsSharing,
-    changingFishbowlState
+    clientRunning
   } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
@@ -229,7 +229,7 @@ const ToolBar: React.FC = () => {
           data-testid="share-screen-button"
           isSharing={isSharing}
           onClick={handleShareClick}
-          disabled={changingFishbowlState}
+          disabled={clientRunning}
         />
       )}
       <ReactionsButton disabled={!isReactionsEnabled} />
