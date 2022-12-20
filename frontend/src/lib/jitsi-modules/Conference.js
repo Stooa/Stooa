@@ -38,7 +38,7 @@ const conferenceRepository = () => {
     }
 
     seat = seatsRepository.join(id, seat);
-
+    
     tracksRepository.createTracks(id, seat, user);
     conference.selectParticipants(seatsRepository.getIds());
 
@@ -91,13 +91,15 @@ const conferenceRepository = () => {
     if (property === 'joined') {
       const id = user.getId();
 
-      if (newValue === 'yes') {
-        joinUser(id);
+      if (newValue === 'no') {
+        leaveUser(id);
 
         return;
       }
 
-      leaveUser(id);
+      if (newValue) {
+        joinUser(id, null, newValue);
+      }
     }
   };
 
@@ -431,7 +433,7 @@ const conferenceRepository = () => {
       joined:
         conference.isJoined() === null
           ? false
-          : conference.getLocalParticipantProperty('joined') === 'yes',
+          : conference.getLocalParticipantProperty('joined') !== 'no',
       isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
       isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
     };

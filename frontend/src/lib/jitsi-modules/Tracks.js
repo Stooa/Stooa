@@ -71,6 +71,7 @@ const tracksRepository = () => {
   };
 
   const _create = async (seat, track, user) => {
+    console.log('ENTRA TRACK',track);
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);
 

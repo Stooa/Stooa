@@ -96,7 +96,7 @@ const getParticipantList = () => {
       twitter: participant.getProperty('twitter'),
       isModerator: participant.getProperty('isModerator'),
       isCurrentUser: false,
-      joined: participant.getProperty('joined') === 'yes',
+      joined: participant.getProperty('joined') !== 'no',
       isMuted: tracksRepository.isParticipantMuted(participant, 'audio'),
       isVideoMuted: tracksRepository.isParticipantMuted(participant, 'video')
     });
