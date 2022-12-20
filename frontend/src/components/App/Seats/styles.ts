@@ -478,6 +478,28 @@ const SeatsStyled = styled.div`
       ${Seat} {
         grid-column: span 1;
       }
+      &.sharing {
+        max-height: 100%;
+        grid-template-columns: 3fr 2fr;
+
+        & #seat-1 {
+          height: 100%;
+          grid-row: initial;
+          grid-column: span 1;
+        }
+
+        & #share {
+          height: 55vh;
+          grid-column: span 1;
+        }
+
+        #seat-2,
+        #seat-3,
+        #seat-4,
+        #seat-5 {
+          display: none;
+        }
+      }
 
       #seat-4 {
         grid-column: span 1;
