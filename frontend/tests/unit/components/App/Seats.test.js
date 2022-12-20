@@ -12,16 +12,22 @@ import Seats from '@/components/App/Seats';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 jest.mock('@/components/App/ButtonContextMenu', () => ({ children }) => <>{children}</>);
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/AppContext');
+jest.mock('@/hooks/useNavigatorType');
 
 describe('Unit test of fishbowl seats', () => {
   it('Unstarted fishbowl renders 5 unavailable seats', () => {
     useStooa.mockReturnValue({
       isSharing: false,
       isModerator: true
+    });
+
+    useNavigatorType.mockReturnValue({
+      deviceType: 'Desktop'
     });
 
     useStateValue.mockReturnValue([
@@ -42,6 +48,10 @@ describe('Unit test of fishbowl seats', () => {
       isModerator: true
     });
 
+    useNavigatorType.mockReturnValue({
+      deviceType: 'Desktop'
+    });
+
     useStateValue.mockReturnValue([
       { conferenceStatus: IConferenceStatus.RUNNING },
       () => jest.fn()
@@ -58,6 +68,10 @@ describe('Unit test of fishbowl seats', () => {
     useStooa.mockReturnValue({
       isSharing: true,
       isModerator: true
+    });
+
+    useNavigatorType.mockReturnValue({
+      deviceType: 'Desktop'
     });
 
     useStateValue.mockReturnValue([
