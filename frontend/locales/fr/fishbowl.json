@@ -126,5 +126,6 @@
         "participantsTitle":"participants dans la salle",
         "onBoardingHelp": "Vous ne savez pas comment fonctionne un Fishbowl ? Cliquez ici",
         "connectWithUsers": "Pour vous connecter avec les personnes présentes dans la salle par le biais de vos réseaux sociaux, inscrivez-vous sur Stooa."
-    }
+    },
+    "startIntroduction": "Commencer la présentation"
 }
