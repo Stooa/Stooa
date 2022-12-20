@@ -14,8 +14,10 @@ import {
   COLOR_RED_100,
   COLOR_RED_500,
   COLOR_NEUTRO_100,
+  COLOR_NEUTRO_200,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
+  COLOR_NEUTRO_800,
   COLOR_YELLOW_500,
   COLOR_NEUTRO_300
 } from '@/ui/settings';
@@ -315,6 +317,24 @@ const SeatsStyled = styled.div`
               opacity: 0.45;
             }
           }
+
+          & .fullscreen {
+            display: block;
+            height: 36px;
+            width: 36px;
+            position: absolute;
+            right: ${space(2)};
+            top: ${space(2)};
+            background-color: ${COLOR_NEUTRO_800}88;
+            border: 1px solid ${COLOR_NEUTRO_200}AA;
+            border-radius: 3rem;
+            z-index: 1;
+            transition: background-color 0.3s ease-in-out;
+            &:hover {
+              cursor: pointer;
+              background-color: ${COLOR_NEUTRO_600}80;
+            }
+          }
         }
 
         & video {
@@ -322,24 +342,49 @@ const SeatsStyled = styled.div`
           height: 100%;
           object-fit: contain;
 
+          video::-webkit-media-controls-panel {
+            display: none !important;
+            -webkit-appearance: none;
+          }
+
+          & .controls-bar.bottom {
+            display: none !important;
+            -webkit-appearance: none;
+          }
+
           &::-webkit-media-controls-play-button {
-            display: none;
+            display: none !important;
+            -webkit-appearance: none;
           }
 
           &::-webkit-media-controls-volume-slider {
-            display: none;
+            display: none !important;
+            -webkit-appearance: none;
           }
 
           &::-webkit-media-controls-mute-button {
-            display: none;
+            display: none !important;
+            -webkit-appearance: none;
           }
 
           &::-webkit-media-controls-timeline {
-            display: none;
+            display: none !important;
+            -webkit-appearance: none;
           }
 
           &::-webkit-media-controls-current-time-display {
-            display: none;
+            display: none !important;
+            -webkit-appearance: none;
+          }
+
+          *::-webkit-media-controls-play-button {
+            display: none !important;
+            -webkit-appearance: none;
+          }
+
+          *::-webkit-media-controls-start-playback-button {
+            display: none !important;
+            -webkit-appearance: none;
           }
         }
       }
@@ -375,6 +420,10 @@ const SeatsStyled = styled.div`
 
       &:not(.sharing) #seat-5 {
         grid-column: span 2;
+      }
+
+      &.sharing #share .share-video-wrapper .fullscreen {
+        display: none;
       }
 
       &.sharing {
