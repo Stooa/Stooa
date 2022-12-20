@@ -54,6 +54,7 @@ import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
+import SharedTrack from '@/jitsi/SharedTrack';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -207,6 +208,9 @@ const StooaProvider = ({
         label: window.location.href
       });
     }
+
+    SharedTrack.exitFullScreen();
+
     setIsSharing(false);
   });
 

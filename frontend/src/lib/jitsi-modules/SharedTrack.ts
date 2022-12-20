@@ -48,6 +48,12 @@ const sharedTrackRepository = () => {
     _createShareTrack(shareTrack);
   };
 
+  const exitFullScreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  };
+
   const removeShareTrack = async (track, location?: string) => {
     if (!track) return;
 
@@ -69,7 +75,8 @@ const sharedTrackRepository = () => {
 
   return {
     shareTrackAdded,
-    removeShareTrack
+    removeShareTrack,
+    exitFullScreen
   };
 };
 

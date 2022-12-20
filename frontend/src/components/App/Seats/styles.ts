@@ -411,8 +411,6 @@ const SeatsStyled = styled.div`
     ${media.min('desktop')`
       padding-bottom: ${space()};
       grid-template-columns: repeat(6, 1fr);
-      max-height: 79vh;
-
 
       #seat-4 {
         grid-column: 2 / 4;
@@ -474,6 +472,7 @@ const SeatsStyled = styled.div`
 
     @media (max-height: 601px) {
       grid-template-columns: repeat(5, 1fr);
+      max-height: 79vh;
 
       ${Seat} {
         grid-column: span 1;
