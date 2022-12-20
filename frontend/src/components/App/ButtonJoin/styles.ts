@@ -55,13 +55,12 @@ const StyledButton = styled(ActionButton)`
 
   .text {
     color: ${COLOR_GREEN_500};
-    padding-top: 3.125px;
+    padding-top: 2px;
 
     ${BODY_XS}
     line-height: 1.1;
 
     ${media.min('tablet')`
-      padding-top: 2px;
       ${BODY_SM}
       line-height: 1.1;
     `}

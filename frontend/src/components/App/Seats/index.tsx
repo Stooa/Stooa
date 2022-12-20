@@ -33,10 +33,9 @@ const Seats = () => {
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
 
   useEffect(() => {
-    console.log(deviceType);
-    if (isSharing && deviceType === 'Mobile') {
+    if (isSharing && deviceType === 'Desktop') {
       const shareVideo = document.querySelector('.share-video-wrapper video') as HTMLVideoElement;
-      if (shareVideo) shareVideo.controls = true;
+      if (shareVideo) shareVideo.controls = false;
     }
   }, [isSharing, deviceType]);
 
