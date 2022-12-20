@@ -418,6 +418,7 @@ const SeatsStyled = styled.div`
         grid-column: 2 / 4;
       }
 
+
       &:not(.sharing) #seat-5 {
         grid-column: span 2;
       }
@@ -470,6 +471,22 @@ const SeatsStyled = styled.div`
         }
       }
     `}
+
+    @media (max-height: 601px) {
+      grid-template-columns: repeat(5, 1fr);
+
+      ${Seat} {
+        grid-column: span 1;
+      }
+
+      #seat-4 {
+        grid-column: span 1;
+      }
+
+      &:not(.sharing) #seat-5 {
+        grid-column: span 1;
+      }
+    }
   }
 
   ${media.between('desktop', 'tabletLarge')`
