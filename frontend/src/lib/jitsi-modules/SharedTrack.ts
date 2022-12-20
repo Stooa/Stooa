@@ -33,7 +33,6 @@ const sharedTrackRepository = () => {
     }
 
     trackHtml.autoplay = true;
-    trackHtml.controls = true;
     trackHtml.id = track.getParticipantId() + videoType;
 
     trackHtml.setAttribute('muted', '');

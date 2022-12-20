@@ -15,29 +15,28 @@ import { useStooa } from '@/contexts/StooaManager';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
 import SeatsStyled, { Free, Seat, VideoWrapper } from '@/components/App/Seats/styles';
 import SeatImage from '@/ui/svg/seat.svg';
+import Fullscreen from '@/ui/svg/fullscreen.svg';
 import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import ButtonContextMenu from '../ButtonContextMenu';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import { useEffect } from 'react';
-import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 const Seats = () => {
   const { t } = useTranslation('app');
   const { isSharing, isModerator } = useStooa();
   const [{ conferenceStatus }] = useStateValue();
-  const { deviceType } = useNavigatorType();
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
 
-  useEffect(() => {
-    if (isSharing && deviceType === 'Desktop') {
-      const shareVideo = document.querySelector('.share-video-wrapper video') as HTMLVideoElement;
-      if (shareVideo) shareVideo.controls = false;
+  const handleFullscreen = () => {
+    const video = document.querySelector('#share video') as HTMLVideoElement;
+    if (video) {
+      video.controls = true;
+      video.requestFullscreen();
     }
-  }, [isSharing, deviceType]);
+  };
 
   return (
     <SeatsStyled>
@@ -50,6 +49,9 @@ const Seats = () => {
         <div id="share">
           <LoadingIcon white />
           <div className={`share-video-wrapper ${isModerator ? 'moderator' : ''}`}>
+            <div className="fullscreen" onClick={handleFullscreen}>
+              <Fullscreen />
+            </div>
             {isModerator && <p className="warning medium">{t('shareWarning')}</p>}
           </div>
         </div>
