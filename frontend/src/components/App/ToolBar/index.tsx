@@ -201,7 +201,7 @@ const ToolBar: React.FC = () => {
 
   const showShareScreenButton = useMemo(
     () =>
-      isModerator && conferenceStatus === IConferenceStatus.INTRODUCTION && width && width > 768,
+      isModerator && conferenceStatus === IConferenceStatus.INTRODUCTION && width && width >= 1024,
     [conferenceStatus, isModerator, width]
   );
 

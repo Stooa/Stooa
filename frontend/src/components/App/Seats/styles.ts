@@ -12,12 +12,10 @@ import styled from 'styled-components';
 import {
   BORDER_RADIUS,
   COLOR_RED_100,
-  COLOR_NEUTRO_200,
   COLOR_RED_500,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
-  COLOR_NEUTRO_800,
   COLOR_YELLOW_500,
   COLOR_NEUTRO_300
 } from '@/ui/settings';
@@ -270,6 +268,7 @@ const SeatsStyled = styled.div`
       & #seat-1 {
         grid-row: 1;
         grid-column: span 4;
+        height: 20vh;
         min-height: 180px;
       }
 
@@ -283,9 +282,7 @@ const SeatsStyled = styled.div`
       & #share {
         display: block;
         width: 100%;
-        height: 100%;
-        min-height: 180px;
-        max-height: 220px;
+        height: 30vh;
         border-radius: ${BORDER_RADIUS};
 
         grid-column: span 4;
@@ -318,31 +315,45 @@ const SeatsStyled = styled.div`
               opacity: 0.45;
             }
           }
-
-          & .fullscreen {
-            display: block;
-            position: absolute;
-            right: ${space(2)};
-            top: ${space(2)};
-            padding: 0.5em;
-            background-color: ${COLOR_NEUTRO_800}88;
-            border: 1px solid ${COLOR_NEUTRO_200}AA;
-            border-radius: 3rem;
-            z-index: 1;
-            transition: background-color 0.3s ease-in-out;
-            &:hover {
-              cursor: pointer;
-              background-color: ${COLOR_NEUTRO_600}80;
-            }
-          }
         }
 
         & video {
           width: 100%;
           height: 100%;
           object-fit: contain;
+
+          &::-webkit-media-controls-play-button {
+            display: none;
+          }
+
+          &::-webkit-media-controls-volume-slider {
+            display: none;
+          }
+
+          &::-webkit-media-controls-mute-button {
+            display: none;
+          }
+
+          &::-webkit-media-controls-timeline {
+            display: none;
+          }
+
+          &::-webkit-media-controls-current-time-display {
+            display: none;
+          }
         }
       }
+
+      ${media.min('tablet')`
+        & #share {
+          height: 40vh;
+        }
+
+        & #seat-1 {
+          height: 40vh;
+        }
+
+      `}
     }
 
     &.not-started div[id^='seat'] {
@@ -364,10 +375,6 @@ const SeatsStyled = styled.div`
 
       &:not(.sharing) #seat-5 {
         grid-column: span 2;
-      }
-
-      &.sharing #share .share-video-wrapper .fullscreen {
-        display: none;
       }
 
       &.sharing {
