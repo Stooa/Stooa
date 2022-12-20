@@ -48,8 +48,10 @@ const seatsRepository = () => {
     dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat(), seatsValues: getSeats() });
   };
 
-  const join = id => {
-    const seat = getSeat(null);
+  const join = (id, seat) => {
+    if (!seat) {
+      seat = getSeat(null);
+    }
 
     if (seat <= 0) return;
 

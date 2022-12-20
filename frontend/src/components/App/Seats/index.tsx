@@ -31,10 +31,11 @@ const Seats = () => {
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
+  const isConferenceRunning = conferenceStatus === IConferenceStatus.RUNNING;
 
-  const joinOnClick = (seat: number): void => {
+  const joinOnClick = async(seat: number): Promise<void> => {
     console.log('----->', seat);
-    // await join(userRepository.getUser());
+    await join(userRepository.getUser(), seat);
   }
 
   return (
@@ -42,14 +43,15 @@ const Seats = () => {
       <div className={`content seats-wrapper ${isConferenceNotStarted ? 'not-started' : ''} `}>
         {[...Array(5)].map((e, seat) => (
           <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
-            <Button
-              id="config-button"
-              className="body-sm"
-              onClick={() => joinOnClick(seat + 1)}
-              active={true}
-            >
-              Join
-            </Button>
+            {isConferenceRunning &&
+              <Button
+                className="body-sm"
+                onClick={() => joinOnClick(seat + 1)}
+                active={true}
+              >
+                Join
+              </Button>
+            }
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
             <div className="frame" />
             <MicMuted className="icon-medium icon-audio" />

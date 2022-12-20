@@ -32,11 +32,13 @@ const conferenceRepository = () => {
   let twitter = false;
   let linkedin = false;
 
-  const joinUser = (id, user) => {
+  const joinUser = (id, user, seat) => {
     if (id === undefined || id === null) {
       id = conference.myUserId();
     }
-    const seat = seatsRepository.join(id);
+
+    seat = seatsRepository.join(id, seat);
+
     tracksRepository.createTracks(id, seat, user);
     conference.selectParticipants(seatsRepository.getIds());
 
@@ -367,10 +369,15 @@ const conferenceRepository = () => {
     }
   };
 
-  const sendJoinEvent = user => {
+  const sendJoinEvent = (user, seat) => {
     if (isJoined) {
-      conference.setLocalParticipantProperty('joined', 'yes');
-      joinUser(null, user);
+      if (seat) {
+        conference.setLocalParticipantProperty('joined', seat);
+        joinUser(null, user, seat);
+      } else {
+        conference.setLocalParticipantProperty('joined', 'yes');
+        joinUser(null, user);
+      }
     }
   };
 

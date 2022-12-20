@@ -14,10 +14,10 @@ import localTracksRepository from '@/jitsi/LocalTracks';
 
 let localTracksCreated = false;
 
-const join = async user => {
+const join = async (user, seat) => {
   if (!seatsRepository.hasFreeSeat()) return;
 
-  conferenceRepository.sendJoinEvent(user);
+  conferenceRepository.sendJoinEvent(user, seat);
 
   if (!localTracksCreated) {
     await localTracksRepository.createLocalTracks().then(tracks => {
