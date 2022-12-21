@@ -31,6 +31,7 @@ import Conference from '@/jitsi/Conference';
 import SharedTrack from '@/jitsi/SharedTrack';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
@@ -50,6 +51,7 @@ const ToolBar: React.FC = () => {
   const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
   const { width } = useWindowSize();
+  const { deviceType } = useNavigatorType();
 
   const configButtonRef = useRef<ButtonConfigHandle>(null);
 
@@ -201,8 +203,10 @@ const ToolBar: React.FC = () => {
 
   const showShareScreenButton = useMemo(
     () =>
-      isModerator && conferenceStatus === IConferenceStatus.INTRODUCTION && width && width >= 1024,
-    [conferenceStatus, isModerator, width]
+      isModerator &&
+      conferenceStatus === IConferenceStatus.INTRODUCTION &&
+      deviceType === 'Desktop',
+    [conferenceStatus, isModerator, deviceType]
   );
 
   const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;

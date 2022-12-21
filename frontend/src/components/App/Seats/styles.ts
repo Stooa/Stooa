@@ -106,7 +106,7 @@ const Seat = styled.div`
     border-radius: ${BORDER_RADIUS};
     border: 4px solid transparent;
     height: calc(100% + 2px);
-    width: calc(100% + 2px);
+    width: 100%;
     display: none;
     z-index: 5;
   }
