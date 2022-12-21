@@ -26,7 +26,6 @@ import {
   unload,
   unloadKickedUser
 } from '@/lib/jitsi';
-// import Conference from '@/jitsi/Conference';
 import {
   CONFERENCE_IS_LOCKABLE,
   CONFERENCE_PASSWORD_REQUIRED,
