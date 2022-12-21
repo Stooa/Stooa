@@ -20,11 +20,6 @@ const sharedTrackRepository = () => {
   };
 
   const _createShareTrack = async track => {
-    const videoType = track.getVideoType();
-    if (videoType !== 'desktop') {
-      return;
-    }
-
     const seatHtml = document.querySelector('#share > .share-video-wrapper');
     const trackHtml = document.createElement('video');
 
@@ -33,7 +28,7 @@ const sharedTrackRepository = () => {
     }
 
     trackHtml.autoplay = true;
-    trackHtml.id = track.getParticipantId() + videoType;
+    trackHtml.id = track.getParticipantId() + 'desktop';
 
     trackHtml.setAttribute('muted', '');
     trackHtml.setAttribute('playsinline', '');
