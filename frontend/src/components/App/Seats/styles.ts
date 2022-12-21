@@ -244,6 +244,7 @@ const SeatsStyled = styled.div`
     justify-content: center;
     height: 100%;
     width: 100%;
+    max-height: 79vh;
 
     & #share {
       display: none;
@@ -394,7 +395,7 @@ const SeatsStyled = styled.div`
         }
 
         & #seat-1 {
-          height: 40vh;
+          height: 100%;
         }
 
       `}
@@ -425,7 +426,6 @@ const SeatsStyled = styled.div`
       }
 
       &.sharing {
-        grid-template-columns: repeat(7, 1fr);
         grid-template-columns: 5fr 1fr 1fr;
         grid-template-rows: 2fr 1fr 1fr;
         align-content: initial;
