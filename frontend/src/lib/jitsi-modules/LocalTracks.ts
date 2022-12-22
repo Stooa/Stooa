@@ -14,7 +14,7 @@ import sharedTrackRepository from '@/jitsi/SharedTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 import { MediaType } from '@/types/jitsi/media';
 import { dispatchEvent } from '@/lib/helpers';
-import { SCREEN_SHARE_CANCELED } from '@/jitsi/Events';
+import { SCREEN_SHARE_CANCELED, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {
@@ -90,6 +90,10 @@ const localTracksRepository = () => {
         console.log('[STOOA] Error creating local track', kind, error.message);
 
         if (kind === MediaType.DESKTOP) {
+          if (error.name === 'gum.permission_denied') {
+            dispatchEvent(SCREEN_SHARE_PERMISSIONS_DENIED);
+            return;
+          }
           dispatchEvent(SCREEN_SHARE_CANCELED);
           return;
         }
