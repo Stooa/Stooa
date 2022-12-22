@@ -28,7 +28,7 @@ const sharedTrackRepository = () => {
     }
 
     trackHtml.autoplay = true;
-    trackHtml.id = track.getParticipantId() + 'desktop';
+    trackHtml.id = track.getId();
 
     trackHtml.setAttribute('muted', '');
     trackHtml.setAttribute('playsinline', '');
