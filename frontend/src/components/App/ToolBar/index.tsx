@@ -231,7 +231,7 @@ const ToolBar: React.FC = () => {
           data-testid="share-screen-button"
           isSharing={isSharing}
           onClick={handleShareClick}
-          disabled={clientRunning}
+          disabled={!joined || clientRunning}
         />
       )}
       <ReactionsButton disabled={!isReactionsEnabled} />
