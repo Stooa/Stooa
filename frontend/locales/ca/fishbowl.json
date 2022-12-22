@@ -134,5 +134,9 @@
         "participantsTitle": "Participants a la sala",
         "onBoardingHelp": "No tens clar com funciona un fishbowl? Fes clic aquí",
         "connectWithUsers": "Per a connectar amb les persones a la sala a través de les teves RRSS, registra't en Stooa."
+    },
+    "screenSharePermissionsModal" : {
+        "title": "La teva pantalla no es pot compartir",
+        "description": "És possible que Google Chrome no tingui permís per a gravar la pantalla en el teu ordinador. <a>Ves a Preferències de sistema.</a>"
     }
 }
