@@ -35,7 +35,7 @@ const ModalScreenSharePermissions: React.FC<Props> = ({ closeModal }) => {
             components={{
               a: (
                 <a
-                  className="colored medium"
+                  className="colored decorated"
                   href="x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
                   target="_blank"
                   rel="noopener noreferrer"
