@@ -27,7 +27,7 @@ const tracksRepository = () => {
   };
 
   const _getTrackHtml = track => {
-    return document.getElementById(track.getParticipantId() + track.getType());
+    return document.getElementById(track.getId());
   };
 
   const handleElementsMutedClass = (seat, track) => {
@@ -80,16 +80,13 @@ const tracksRepository = () => {
       trackHtml.autoplay = true;
     }
 
-    trackHtml.id = track.getParticipantId() + trackType;
+    trackHtml.id = track.getId();
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
 
     await syncLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
-
-    console.log('ESE TRACK', track);
-    console.log('ASIENTO', seatHtml);
 
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
@@ -191,27 +188,36 @@ const tracksRepository = () => {
     console.log('[STOOA] Tracks disposed', id);
   };
 
-  const handleTrackAdded = track => {
-    const id = track.getParticipantId();
-    const seat = seatsRepository.getSeat(id);
+  const _videoTypeChanged = (videoType, track) => {
+    if (track.getVideoType() === MediaType.DESKTOP) {
+      _videoAudioTrackRemoved(track);
+      sharedTrackRepository.shareTrackAdded(track);
+    }
 
-    console.log(
-      '[STOOA] Handle track added',
-      track,
-      track.getType(),
-      track.getVideoType(),
-      id,
-      seat
+    console.log('[Stooa] video type change', track, videoType);
+  };
+
+  const handleTrackAdded = track => {
+    console.log('[STOOA] Handle track added', track);
+
+    const {
+      events: {
+        track: { TRACK_VIDEOTYPE_CHANGED }
+      }
+    } = JitsiMeetJS;
+
+    track.addEventListener(TRACK_VIDEOTYPE_CHANGED, videoType =>
+      _videoTypeChanged(videoType, track)
     );
 
-    if (track.getVideoType() === MediaType.DESKTOP || seat === 0) {
+    if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.shareTrackAdded(track);
     } else {
-      videoAudioTrackAdded(track);
+      _videoAudioTrackAdded(track);
     }
   };
 
-  const videoAudioTrackAdded = track => {
+  const _videoAudioTrackAdded = track => {
     const id = track.getParticipantId();
 
     if (tracks[id] === undefined) {
@@ -230,12 +236,15 @@ const tracksRepository = () => {
   };
 
   const handleTrackRemoved = track => {
-    if (track.isLocal()) return;
-
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.removeShareTrack(track);
-      return;
+    } else {
+      _videoAudioTrackRemoved(track);
     }
+  };
+
+  const _videoAudioTrackRemoved = track => {
+    if (track.isLocal()) return;
 
     const id = track.getParticipantId();
     const seat = seatsRepository.getSeat(id);
