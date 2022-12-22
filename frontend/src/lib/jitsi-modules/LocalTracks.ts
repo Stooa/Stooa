@@ -36,8 +36,8 @@ const localTracksRepository = () => {
     console.log('[STOOA] Local audio output changed', deviceId);
   };
 
-  const _handleVideoTypeChanged = (foo): void => {
-    console.log('[STOOA] Local video type changed', foo);
+  const _handleVideoTypeChanged = (track: JitsiLocalTrack): void => {
+    console.log('[STOOA] Local video type changed', track);
   };
 
   const _addListenersToHtmlTracks = (htmlTracks: HTMLTrackElement[]): HTMLTrackElement[] => {

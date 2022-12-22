@@ -88,10 +88,15 @@ const tracksRepository = () => {
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
+    console.log('ESE TRACK', track);
+    console.log('ASIENTO', seatHtml);
+
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
       trackHtml.setAttribute('playsinline', '');
-      seatHtml.querySelector('.video-wrapper').appendChild(trackHtml);
+      if (seatHtml) {
+        seatHtml.querySelector('.video-wrapper').appendChild(trackHtml);
+      }
     } else {
       seatHtml.appendChild(trackHtml);
     }
@@ -187,8 +192,19 @@ const tracksRepository = () => {
   };
 
   const handleTrackAdded = track => {
-    console.log('[STOOA] Handle track added', track, track.getType(), track.getVideoType());
-    if (track.getVideoType() === MediaType.DESKTOP) {
+    const id = track.getParticipantId();
+    const seat = seatsRepository.getSeat(id);
+
+    console.log(
+      '[STOOA] Handle track added',
+      track,
+      track.getType(),
+      track.getVideoType(),
+      id,
+      seat
+    );
+
+    if (track.getVideoType() === MediaType.DESKTOP || seat === 0) {
       sharedTrackRepository.shareTrackAdded(track);
     } else {
       videoAudioTrackAdded(track);
@@ -207,6 +223,7 @@ const tracksRepository = () => {
     let seat;
 
     seat = seatsRepository.getSeat(id);
+
     _create(seat, track);
 
     console.log('[STOOA] Handle video or audio track added in seat', track, seat);
