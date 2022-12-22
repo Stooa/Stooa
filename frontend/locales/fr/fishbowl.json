@@ -127,5 +127,9 @@
         "onBoardingHelp": "Vous ne savez pas comment fonctionne un Fishbowl ? Cliquez ici",
         "connectWithUsers": "Pour vous connecter avec les personnes présentes dans la salle par le biais de vos réseaux sociaux, inscrivez-vous sur Stooa."
     },
-    "startIntroduction": "Commencer la présentation"
+    "startIntroduction": "Commencer la présentation",
+    "screenSharePermissionsModal" : {
+        "title": "Votre écran ne peut pas être partagé",
+        "description": "Google Chrome n'a peut-être pas l'autorisation d'enregistrer l'écran de votre ordinateur. <a>Allez dans les préférences du système.</a>"
+    }
 }

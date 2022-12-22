@@ -134,5 +134,9 @@
         "participantsTitle": "Participants in the room",
         "onBoardingHelp": "Don't know how a fishbowl works? Click here",
         "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
+    },
+    "screenSharePermissionsModal" : {
+        "title": "Your screen cannot be shared",
+        "description": "Google Chrome may not have permission to record the screen on your computer. <a>Go to System Preferences.</a>"
     }
 }
