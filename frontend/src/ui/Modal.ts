@@ -17,6 +17,7 @@ import {
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_900
 } from '@/ui/settings';
+import { TYPOGRAPHY_SIZES } from './Texts';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
 
@@ -79,6 +80,10 @@ const Modal = styled.div`
 
   .description {
     margin-top: ${space(2)};
+
+    & a {
+      --font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
+    }
   }
 
   .modal-footer {
