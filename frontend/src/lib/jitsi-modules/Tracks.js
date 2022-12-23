@@ -236,6 +236,8 @@ const tracksRepository = () => {
   };
 
   const handleTrackRemoved = track => {
+    console.log('[STOOA] Handle track removed', track);
+
     if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.removeShareTrack(track);
     } else {
@@ -257,7 +259,7 @@ const tracksRepository = () => {
 
     tracks[id] = tracks[id].filter(remoteTrack => track !== remoteTrack);
 
-    console.log('[STOOA] Handle track removed', track, seat);
+    console.log('[STOOA] Handle camera or video track removed', track, seat);
   };
 
   const handleTrackMuteChanged = async track => {

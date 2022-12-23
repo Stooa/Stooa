@@ -278,6 +278,16 @@ const StooaProvider = ({
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
   useEffect(() => {
+    if (isModerator && isConferenceIntroducing()) {
+      pushEventDataLayer({
+        action: 'activate',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+    }
+  }, [conferenceStatus]);
+
+  useEffect(() => {
     if (
       !prejoin &&
       !initConnection &&

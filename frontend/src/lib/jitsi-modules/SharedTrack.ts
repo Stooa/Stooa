@@ -50,7 +50,7 @@ const sharedTrackRepository = () => {
   };
 
   const removeShareTrack = async (track, location?: string) => {
-    if (!track) return;
+    if (!track || !shareTrack) return;
 
     const trackHtml = getShareHtmlTrack();
     shareTrack = null;
@@ -65,7 +65,7 @@ const sharedTrackRepository = () => {
       conferenceRepository.stopScreenShareEvent();
     }
 
-    console.log('[STOOA] Html tracks removed');
+    console.log('[STOOA] Html screen share track removed');
   };
 
   return {
