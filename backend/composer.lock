@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a4920bc57585a2b2c35b4eb034689fc",
+    "content-hash": "6532772979aed37e9567be3654a691c8",
     "packages": [
         {
             "name": "api-platform/core",
@@ -15328,16 +15328,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.24.1",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "ddf9b01f3c98f7d2d359a96f014bda8eeb678760"
+                "reference": "321abbef052b485ddf3efeddd0c26f9dfcbb3091"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/ddf9b01f3c98f7d2d359a96f014bda8eeb678760",
-                "reference": "ddf9b01f3c98f7d2d359a96f014bda8eeb678760",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/321abbef052b485ddf3efeddd0c26f9dfcbb3091",
+                "reference": "321abbef052b485ddf3efeddd0c26f9dfcbb3091",
                 "shasum": ""
             },
             "require": {
@@ -15345,7 +15345,7 @@
                 "fakerphp/faker": "^1.5",
                 "php": ">=8.0",
                 "symfony/deprecation-contracts": "^2.2|^3.0",
-                "symfony/property-access": "^3.4|^4.4|^5.0|^6.0",
+                "symfony/property-access": "^4.4|^5.0|^6.0",
                 "symfony/string": "^5.4|^6.0",
                 "zenstruck/assert": "^1.0",
                 "zenstruck/callback": "^1.1"
@@ -15401,7 +15401,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.24.1"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.25.0"
             },
             "funding": [
                 {
@@ -15409,7 +15409,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-11-29T18:37:09+00:00"
+            "time": "2022-12-22T15:48:22+00:00"
         }
     ],
     "aliases": [],
