@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Resolver;
 
-use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
 use App\Core\Model\ResetPassword;
 use App\Core\Repository\UserRepository;
 use App\Core\Service\MailerService;

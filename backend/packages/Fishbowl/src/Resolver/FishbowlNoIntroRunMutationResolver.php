@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Resolver;
 
-use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
