@@ -17,7 +17,7 @@
         "nelmio/cors-bundle": "2.2.0",
         "paragonie/halite": "5.1.0",
         "ramsey/uuid": "4.7.0",
-        "ramsey/uuid-doctrine": "1.8.2",
+        "ramsey/uuid-doctrine": "2.0.0",
         "rector/rector": "0.15.2",
         "sonata-project/admin-bundle": "4.21.1",
         "sonata-project/doctrine-extensions": "2.0.1",
