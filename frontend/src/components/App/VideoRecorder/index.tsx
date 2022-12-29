@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'webrtc-adapter';
 import RecordRTC, { RecordRTCPromisesHandler, invokeSaveAsDialog } from 'recordrtc';
-import html2canvas from 'html2canvas';
 
 export const VideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>(null);
@@ -14,8 +13,7 @@ export const VideoRecorder = () => {
       video: true
     });
 
-  const audioSource = () =>
-    navigator.mediaDevices.getUserMedia({ audio: true });
+  const audioSource = () => navigator.mediaDevices.getUserMedia({ audio: true });
 
   const handleRecording = async () => {
     videoSource().then(vid => {
@@ -45,13 +43,38 @@ export const VideoRecorder = () => {
 
   const handleStop = () => {
     recorderRef.current.stopRecording(() => {
-      setBlob(recorderRef.current.getBlob());
+      const blob = recorderRef.current.getBlob();
+      setBlob(blob);
+      invokeSaveAsDialog(blob);
+      stopTracks();
     });
+  };
+
+  const stopTracks = () => {
+    const tracks = stream.getVideoTracks();
+    tracks[0].stop();
   };
 
   const handleSave = () => {
     invokeSaveAsDialog(blob);
   };
+
+  const upLoadFile = blob => {
+    const fileName = getFileName('webm');
+
+    const fileObject = new File([blob], fileName, {
+      type: 'video/webm'
+    });
+
+    const formData = new FormData();
+    formData.append('video-filename', blob.name);
+    formData.append('video-blob', blob);
+    //Send to endpoint
+  };
+
+  function getFileName(fileExtension) {
+    return 'RecordRTC-' + new Date() + '.' + fileExtension;
+  }
 
   useEffect(() => {
     if (!refVideo.current) {
