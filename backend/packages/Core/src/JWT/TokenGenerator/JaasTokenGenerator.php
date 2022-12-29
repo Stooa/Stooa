@@ -20,12 +20,12 @@ use App\Core\JWT\Model\Payload\FeaturesPayload;
 use App\Core\JWT\Model\Payload\HeaderPayload;
 use App\Core\JWT\Model\Payload\UserPayload;
 
-final class JaasTokenGenerator implements TokenGeneratorInterface
+final readonly class JaasTokenGenerator implements TokenGeneratorInterface
 {
     public function __construct(
-        private readonly string $appId,
-        private readonly string $apiKey,
-        private readonly HostValidator $hostValidator
+        private string $appId,
+        private string $apiKey,
+        private HostValidator $hostValidator
     ) {
     }
 

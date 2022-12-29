@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Core\JWT\Model\Payload;
 
-final class FeaturesPayload implements PayloadInterface
+final readonly class FeaturesPayload implements PayloadInterface
 {
     public function __construct(
-        private readonly bool $recording,
-        private readonly bool $livestreaming,
-        private readonly bool $transcription,
-        private readonly bool $outboundCall,
-        private readonly bool $sipOutboundCall
+        private bool $recording,
+        private bool $livestreaming,
+        private bool $transcription,
+        private bool $outboundCall,
+        private bool $sipOutboundCall
     ) {
     }
 

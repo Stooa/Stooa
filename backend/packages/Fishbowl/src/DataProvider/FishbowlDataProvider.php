@@ -20,9 +20,9 @@ use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\PrivateFishbowlService;
 
-final class FishbowlDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
+final readonly class FishbowlDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
-    public function __construct(private readonly PrivateFishbowlService $privateFishbowlService, private readonly CollectionDataProviderInterface $collectionDataProvider)
+    public function __construct(private PrivateFishbowlService $privateFishbowlService, private CollectionDataProviderInterface $collectionDataProvider)
     {
     }
 

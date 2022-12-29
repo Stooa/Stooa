@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Core\JWT\Model\Payload;
 
-final class HeaderPayload implements PayloadInterface
+final readonly class HeaderPayload implements PayloadInterface
 {
     public function __construct(
-        private readonly string $kid,
-        private readonly string $alg,
-        private readonly string $typ
+        private string $kid,
+        private string $alg,
+        private string $typ
     ) {
     }
 

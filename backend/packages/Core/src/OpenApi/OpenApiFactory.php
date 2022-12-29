@@ -23,9 +23,9 @@ use ApiPlatform\Core\OpenApi\Model\Response;
 use ApiPlatform\Core\OpenApi\OpenApi;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
-final class OpenApiFactory implements OpenApiFactoryInterface
+final readonly class OpenApiFactory implements OpenApiFactoryInterface
 {
-    public function __construct(private readonly OpenApiFactoryInterface $decorated)
+    public function __construct(private OpenApiFactoryInterface $decorated)
     {
     }
 

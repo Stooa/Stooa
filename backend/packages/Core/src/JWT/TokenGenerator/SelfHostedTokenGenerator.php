@@ -18,9 +18,9 @@ use App\Core\JWT\CurrentUserFishbowl;
 use App\Core\JWT\Model\JWTToken;
 use App\Core\JWT\Model\Payload\UserPayload;
 
-final class SelfHostedTokenGenerator implements TokenGeneratorInterface
+final readonly class SelfHostedTokenGenerator implements TokenGeneratorInterface
 {
-    public function __construct(private readonly CurrentUserFishbowl $currentUserFishbowl)
+    public function __construct(private CurrentUserFishbowl $currentUserFishbowl)
     {
     }
 
