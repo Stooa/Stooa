@@ -29,12 +29,9 @@ import ReactionsButton from '../Reactions/ReactionsButton';
 
 import dynamic from 'next/dynamic';
 
-const VideoRecorderWithNoSSR = dynamic(
-  () => import("@/components/App/VideoRecorder"),
-  {
-    ssr: false,
-  }
-);
+const VideoRecorderWithNoSSR = dynamic(() => import('@/components/App/VideoRecorder'), {
+  ssr: false
+});
 
 const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
@@ -169,7 +166,7 @@ const ToolBar: React.FC = () => {
 
   return (
     <StyledToolbar className={isModerator ? 'moderator' : ''}>
-        <VideoRecorderWithNoSSR/>
+      <VideoRecorderWithNoSSR />
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}

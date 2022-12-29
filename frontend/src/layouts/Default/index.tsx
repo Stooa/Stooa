@@ -40,7 +40,9 @@ const Page: React.FC<Props> = ({
       <HeaderStyled>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main center={center}>{children}</Main>
+      <Main id="element-to-record" center={center}>
+        {children}
+      </Main>
       {decorated && (
         <DecorationStyled>
           <Decoration />
@@ -48,6 +50,10 @@ const Page: React.FC<Props> = ({
       )}
     </Container>
     <Footer />
+    <canvas
+      id="background-canvas"
+      style={{ position: 'absolute', top: '-99999999px', left: '-99999999px' }}
+    ></canvas>
   </>
 );
 
