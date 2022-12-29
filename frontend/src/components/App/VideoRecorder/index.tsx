@@ -9,20 +9,38 @@ export const VideoRecorder = () => {
   const refVideo = useRef(null);
   const recorderRef = useRef(null);
 
+  const videoSource = () =>
+    navigator.mediaDevices.getDisplayMedia({
+      video: true
+    });
+
+  const audioSource = () =>
+    navigator.mediaDevices.getUserMedia({ audio: true });
+
   const handleRecording = async () => {
-    const cameraStream = await navigator.mediaDevices
-      .getDisplayMedia({ video: true, audio: true })
-      .then(mediaStream => {
-        const track = mediaStream.getVideoTracks()[0];
-        track.onended = () => {
-          handleStop();
-        };
+    videoSource().then(vid => {
+      audioSource()
+        .then(audio => {
+          const combinedStream = new MediaStream();
+          const vidTrack = vid.getVideoTracks()[0];
+          const audioTrack = audio.getAudioTracks()[0];
 
-        setStream(mediaStream);
+          combinedStream.addTrack(vidTrack);
+          combinedStream.addTrack(audioTrack);
+          return combinedStream;
+        })
+        .then(mediaStream => {
+          const track = mediaStream.getVideoTracks()[0];
+          track.onended = () => {
+            handleStop();
+          };
 
-        recorderRef.current = new RecordRTC(mediaStream, { type: 'video' });
-        recorderRef.current.startRecording();
-      });
+          setStream(mediaStream);
+
+          recorderRef.current = new RecordRTC(mediaStream, { type: 'video' });
+          recorderRef.current.startRecording();
+        });
+    });
   };
 
   const handleStop = () => {
