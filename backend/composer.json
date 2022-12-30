@@ -7,7 +7,7 @@
         "php": "^8.2",
         "api-platform/core": "2.7.5",
         "doctrine/annotations": "1.14.2",
-        "doctrine/doctrine-bundle": "2.7.2",
+        "doctrine/doctrine-bundle": "2.8.0",
         "doctrine/doctrine-migrations-bundle": "3.2.2",
         "doctrine/orm": "2.14.0",
         "gedmo/doctrine-extensions": "3.10.0",
@@ -21,7 +21,7 @@
         "rector/rector": "0.15.2",
         "sonata-project/admin-bundle": "4.21.1",
         "sonata-project/doctrine-extensions": "2.0.1",
-        "sonata-project/doctrine-orm-admin-bundle": "4.9.0",
+        "sonata-project/doctrine-orm-admin-bundle": "4.9.1",
         "sonata-project/exporter": "3.0.0",
         "sonata-project/form-extensions": "1.18.0",
         "sonata-project/twig-extensions": "2.0.0",
@@ -74,10 +74,10 @@
         "symfony/phpunit-bridge": "6.2.3",
         "symfony/stopwatch": "6.2.0",
         "symfony/var-dumper": "6.2.3",
-        "symfony/web-profiler-bundle": "6.2.3",
+        "symfony/web-profiler-bundle": "6.2.4",
         "vimeo/psalm": "4.30.0",
         "weirdan/doctrine-psalm-plugin": "2.8.0",
-        "zenstruck/foundry": "1.25.0"
+        "zenstruck/foundry": "1.26.0"
     },
     "replace": {
         "paragonie/random_compat": "2.*",
