@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0739eca14d32bb1802c89516fcb195ba",
+    "content-hash": "d6f88932feeb6eef766a0a03b5d58357",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4495,16 +4495,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "4.9.0",
+            "version": "4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "4b589d769d9b01b38127370b50ccb82145be4561"
+                "reference": "81bfbcb7d22f4df2f8e67b4dee087cfd9c2f663b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/4b589d769d9b01b38127370b50ccb82145be4561",
-                "reference": "4b589d769d9b01b38127370b50ccb82145be4561",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/81bfbcb7d22f4df2f8e67b4dee087cfd9c2f663b",
+                "reference": "81bfbcb7d22f4df2f8e67b4dee087cfd9c2f663b",
                 "shasum": ""
             },
             "require": {
@@ -4548,7 +4548,7 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^4.0",
-                "rector/rector": "^0.14",
+                "rector/rector": "^0.15",
                 "sonata-project/block-bundle": "^4.2",
                 "sonata-project/entity-audit-bundle": "^1.1",
                 "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
@@ -4602,7 +4602,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.9.0"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.9.1"
             },
             "funding": [
                 {
@@ -4622,7 +4622,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-01T16:57:53+00:00"
+            "time": "2022-12-29T19:26:26+00:00"
         },
         {
             "name": "sonata-project/exporter",
@@ -6513,16 +6513,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v6.2.0",
+            "version": "v6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "31a25bd415ee56547efaaa9ebd84d1d13e6c8672"
+                "reference": "fac98f69461aa8bcabe6bf254de69da892ba9b5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/31a25bd415ee56547efaaa9ebd84d1d13e6c8672",
-                "reference": "31a25bd415ee56547efaaa9ebd84d1d13e6c8672",
+                "url": "https://api.github.com/repos/symfony/form/zipball/fac98f69461aa8bcabe6bf254de69da892ba9b5b",
+                "reference": "fac98f69461aa8bcabe6bf254de69da892ba9b5b",
                 "shasum": ""
             },
             "require": {
@@ -6597,7 +6597,7 @@
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/form/tree/v6.2.0"
+                "source": "https://github.com/symfony/form/tree/v6.2.3"
             },
             "funding": [
                 {
@@ -6613,7 +6613,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-28T12:28:19+00:00"
+            "time": "2022-12-28T14:26:22+00:00"
         },
         {
             "name": "symfony/framework-bundle",
