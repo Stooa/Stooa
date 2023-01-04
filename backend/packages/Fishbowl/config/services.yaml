@@ -20,8 +20,9 @@ services:
         resource: ../src/Controller/
         tags: [controller.service_arguments]
 
-    App\Fishbowl\DataPersister\FishbowlDataPersister:
-        decorates: api_platform.doctrine.orm.data_persister
+    App\Fishbowl\State\FishbowlProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'
 
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate

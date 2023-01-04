@@ -30,7 +30,7 @@
     "@types/react": "17.0.52",
     "@types/styled-components": "5.1.26",
     "@types/yup": "0.29.14",
-    "axios": "0.27.2",
+    "axios": "1.2.2",
     "babel-plugin-styled-components": "2.0.7",
     "countries-and-timezones": "3.3.0",
     "file-loader": "6.2.0",
@@ -43,8 +43,8 @@
     "intro.js-react": "0.7.1",
     "js-cookie": "3.0.1",
     "jwt-decode": "3.1.2",
-    "lib-jitsi-meet": "https://github.com/jitsi/lib-jitsi-meet/releases/download/1342-2d21eb5b/lib-jitsi-meet.tgz",
-    "lottie-web": "5.9.6",
+    "lib-jitsi-meet": "https://github.com/jitsi/lib-jitsi-meet/releases/download/v1530.0.0+f2af389e/lib-jitsi-meet.tgz",
+    "lottie-web": "5.10.1",
     "next": "12.3.4",
     "next-translate": "1.6.0",
     "react": "17.0.2",
@@ -71,12 +71,12 @@
     "@types/jest": "27.4.1",
     "@types/js-cookie": "3.0.2",
     "@types/react-slick": "0.23.10",
-    "@typescript-eslint/eslint-plugin": "5.45.1",
+    "@typescript-eslint/eslint-plugin": "5.47.1",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "cypress": "9.7.0",
     "cypress-cucumber-preprocessor": "4.3.1",
-    "eslint": "8.28.0",
+    "eslint": "8.30.0",
     "eslint-config-next": "12.3.4",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-alias": "1.1.2",
@@ -88,6 +88,6 @@
     "jest-next-dynamic": "1.0.1",
     "jest-transformer-svg": "2.0.0",
     "nyc": "15.1.0",
-    "prettier": "2.8.0"
+    "prettier": "2.8.1"
   }
 }

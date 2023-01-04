@@ -11,38 +11,28 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Core\DataPersister;
+namespace App\Core\State;
 
-use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
 use App\Core\Security\PasswordEncoderService;
 use App\Core\Service\MailerService;
 
-class UserDataPersister implements ContextAwareDataPersisterInterface
+final class UserProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly ContextAwareDataPersisterInterface $decorated,
+        private readonly ProcessorInterface $decorated,
         private readonly PasswordEncoderService $passwordEncoder,
         private readonly MailerService $mailerService
     ) {
     }
 
     /**
-     * @param mixed $data
-     * @param mixed[] $context
+     * @param array<mixed> $context
+     * @param array<mixed> $uriVariables
      */
-    public function supports($data, array $context = []): bool
-    {
-        return $this->decorated->supports($data, $context);
-    }
-
-    /**
-     * @param mixed $data
-     * @param mixed[] $context
-     *
-     * @return object|void
-     */
-    public function persist($data, array $context = [])
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         if ($data instanceof User) {
             if (($context['collection_operation_name'] ?? null) === 'post' ||
@@ -53,7 +43,7 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
             $this->passwordEncoder->encodePassword($data);
         }
 
-        $result = $this->decorated->persist($data, $context);
+        $result = $this->decorated->process($data, $operation, $uriVariables, $context);
 
         if ($data instanceof User && (
             ($context['collection_operation_name'] ?? null) === 'post' ||
@@ -63,14 +53,5 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         }
 
         return $result;
-    }
-
-    /**
-     * @param mixed $data
-     * @param mixed[] $context
-     */
-    public function remove($data, array $context = []): void
-    {
-        $this->decorated->remove($data, $context);
     }
 }

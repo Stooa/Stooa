@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Stage;
 
-use ApiPlatform\Core\GraphQl\Resolver\Stage\ValidateStageInterface;
+use ApiPlatform\GraphQl\Resolver\Stage\ValidateStageInterface;
+use ApiPlatform\Metadata\GraphQl\Operation;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\FishbowlService;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class FishbowlValidateStage implements ValidateStageInterface
@@ -30,7 +31,7 @@ class FishbowlValidateStage implements ValidateStageInterface
     }
 
     /** @param mixed[] $context */
-    public function __invoke($object, string $resourceClass, string $operationName, array $context): void
+    public function __invoke($object, string $resourceClass, Operation $operation, array $context): void
     {
         if ($object instanceof Fishbowl && null === $object->getId()) {
             $user = $this->security->getUser();
@@ -46,6 +47,6 @@ class FishbowlValidateStage implements ValidateStageInterface
             $object = $this->service->generateDefaultTitle($object);
         }
 
-        ($this->decorated)($object, $resourceClass, $operationName, $context);
+        ($this->decorated)($object, $resourceClass, $operation, $context);
     }
 }
