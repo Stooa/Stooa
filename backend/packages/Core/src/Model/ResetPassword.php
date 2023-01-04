@@ -13,48 +13,37 @@ declare(strict_types=1);
 
 namespace App\Core\Model;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GraphQl\Mutation;
 use App\Core\Resolver\ResetPasswordResolver;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ApiResource(
- *     denormalizationContext={"groups"={"reset_password:write"}},
- *     collectionOperations={},
- *     itemOperations={"get"},
- *     graphql={
- *         "create"={
- *             "mutation"=ResetPasswordResolver::class,
- *             "args"={
- *                 "email"={"type"="String!"},
- *                 "locale"={"type"="String!"}
- *             },
- *             "read"=false,
- *             "write"=false
- *         },
- *     }
- * )
- */
+#[ApiResource(
+    operations: [new Get()],
+    denormalizationContext: ['groups' => ['reset_password:write']],
+    graphQlOperations: [
+        new Mutation(
+            resolver: ResetPasswordResolver::class,
+            args: ['email' => ['type' => 'String!'], 'locale' => ['type' => 'String!']],
+            read: false, write: false, name: 'create'
+        ),
+    ]
+)]
 class ResetPassword
 {
-    /** @ApiProperty(identifier=true) */
+    #[ApiProperty(identifier: true)]
     private ?UuidInterface $id = null;
-
-    /**
-     * @Groups({"reset_password:write"})
-     * @Assert\NotBlank
-     * @Assert\Email
-     */
+    #[Groups(['reset_password:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private ?string $email = null;
-
-    /**
-     * @Groups({"reset_password:write"})
-     * @Assert\NotBlank
-     * @Assert\Locale
-     */
+    #[Groups(['reset_password:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Locale]
     private ?string $locale = null;
 
     public function getId(): ?UuidInterface

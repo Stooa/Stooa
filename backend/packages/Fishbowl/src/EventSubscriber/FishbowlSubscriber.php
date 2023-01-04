@@ -17,10 +17,10 @@ use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\FishbowlService;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Security;
 use Webmozart\Assert\Assert;
 
 class FishbowlSubscriber implements EventSubscriberInterface

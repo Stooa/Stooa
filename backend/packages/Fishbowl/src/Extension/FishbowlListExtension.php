@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Extension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Operation;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class FishbowlListExtension implements QueryCollectionExtensionInterface
@@ -27,11 +28,13 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
     {
     }
 
+    /** @param array<array-key, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null
+        Operation $operation = null,
+        array $context = []
     ): void {
         if (Fishbowl::class !== $resourceClass || null === $user = $this->security->getUser()) {
             return;
