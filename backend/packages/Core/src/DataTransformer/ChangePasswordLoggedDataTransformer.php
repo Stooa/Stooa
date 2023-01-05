@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace App\Core\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use ApiPlatform\Core\Validator\ValidatorInterface;
+use ApiPlatform\Validator\ValidatorInterface;
 use App\Core\Entity\User;
 use App\Core\Model\ChangePasswordLoggedInput;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class ChangePasswordLoggedDataTransformer implements DataTransformerInterface

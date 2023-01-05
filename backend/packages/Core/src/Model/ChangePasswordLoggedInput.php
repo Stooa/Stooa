@@ -19,24 +19,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ChangePasswordLoggedInput
 {
-    /**
-     * @Groups({"user:write"})
-     * @Assert\NotBlank
-     * @SecurityAssert\UserPassword(message="user.password")
-     */
+    /** @SecurityAssert\UserPassword(message="user.password") */
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank]
     private ?string $password = null;
 
-    /**
-     * @Groups({"user:write"})
-     * @Assert\NotBlank
-     * @Assert\EqualTo(propertyPath="newPasswordConfirmation")
-     */
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank]
+    #[Assert\EqualTo(propertyPath: 'newPasswordConfirmation')]
     private ?string $newPassword = null;
 
-    /**
-     * @Groups({"user:write"})
-     * @Assert\NotBlank
-     */
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank]
     private ?string $newPasswordConfirmation = null;
 
     public function getPassword(): ?string
