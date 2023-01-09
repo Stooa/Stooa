@@ -40,9 +40,10 @@ class DefaultFixtures extends Fixture
         ]);
 
         UserFactory::createOne([
-           'email' => 'user@stooa.com',
-           'password' => self::ADMIN_PASSWORD,
+            'email' => 'user@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
             'active' => true,
+            'privacyPolicy' => true
         ]);
 
         $fishbowl = FishbowlFactory::createOne([
@@ -59,6 +60,7 @@ class DefaultFixtures extends Fixture
             'active' => true,
             'fishbowls' => [$fishbowl],
             'createdAt' => new \DateTime(),
+            'privacyPolicy' => true
         ]);
     }
 }
