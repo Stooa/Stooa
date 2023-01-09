@@ -88,6 +88,6 @@
     "jest-next-dynamic": "1.0.1",
     "jest-transformer-svg": "2.0.0",
     "nyc": "15.1.0",
-    "prettier": "2.8.1"
+    "prettier": "2.8.2"
   }
 }
