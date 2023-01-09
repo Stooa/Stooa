@@ -43,7 +43,7 @@ class DefaultFixtures extends Fixture
             'email' => 'user@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
-            'privacyPolicy' => true
+            'privacyPolicy' => true,
         ]);
 
         $fishbowl = FishbowlFactory::createOne([
@@ -60,7 +60,7 @@ class DefaultFixtures extends Fixture
             'active' => true,
             'fishbowls' => [$fishbowl],
             'createdAt' => new \DateTime(),
-            'privacyPolicy' => true
+            'privacyPolicy' => true,
         ]);
     }
 }
