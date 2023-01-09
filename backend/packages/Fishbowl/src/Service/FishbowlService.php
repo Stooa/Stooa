@@ -172,10 +172,10 @@ class FishbowlService
 
     private function getGuest(Request $request): ?Guest
     {
-        $guestId = $request->request->get('guestId');
+        $requestArray = $request->toArray();
 
-        if (null !== $guestId) {
-            return $this->guestRepository->find($guestId);
+        if (!empty($requestArray['guestId'])) {
+            return $this->guestRepository->find($requestArray['guestId']);
         }
 
         return null;
