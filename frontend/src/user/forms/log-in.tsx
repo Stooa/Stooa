@@ -47,8 +47,8 @@ const Form = (props: FormikProps<FormValues>) => {
       <fieldset>
         <Input label={t('email')} name="email" type="email" icon="mail" />
         <Input label={t('password')} name="password" type="password" icon="lock" />
-        <Link passHref href={ROUTE_RECOVER_PASSWORD}>
-          <a className="decorated">{t('login:forgotPassword')}</a>
+        <Link className="decorated" href={ROUTE_RECOVER_PASSWORD}>
+          {t('login:forgotPassword')}
         </Link>
       </fieldset>
       <fieldset>
