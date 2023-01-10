@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { User } from '@/types/user';
 import { join, leave } from '@/lib/jitsi';
 import tracksRepository from '@/jitsi/Tracks';
-import { CONFERENCE_INTRODUCTION, CONFERENCE_NOT_STARTED, TIME_UP } from '@/jitsi/Status';
+import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import devicesRepository from '@/jitsi/Devices';
 import userRepository from '@/jitsi/User';
 import { useStooa } from '@/contexts/StooaManager';
@@ -66,7 +66,7 @@ const ToolBar: React.FC = () => {
       (data.hasIntroduction ?? false) &&
       isModerator &&
       conferenceReady &&
-      conferenceStatus === CONFERENCE_INTRODUCTION
+      conferenceStatus === IConferenceStatus.INTRODUCTION
     );
   };
 
@@ -142,19 +142,19 @@ const ToolBar: React.FC = () => {
 
   const isActionDisabled =
     !conferenceReady ||
-    conferenceStatus === CONFERENCE_NOT_STARTED ||
-    (conferenceStatus === CONFERENCE_INTRODUCTION && !isModerator) ||
-    (timeStatus === TIME_UP && !isModerator && !joined) ||
+    conferenceStatus === IConferenceStatus.NOT_STARTED ||
+    (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator) ||
+    (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
     (!joined && !seatsAvailable) ||
     joinIsInactive;
 
   const isMuteDisabled =
     !conferenceReady ||
     !joined ||
-    conferenceStatus === CONFERENCE_NOT_STARTED ||
-    (conferenceStatus === CONFERENCE_INTRODUCTION && !isModerator);
+    conferenceStatus === IConferenceStatus.NOT_STARTED ||
+    (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
-  const isReactionsEnabled = conferenceStatus !== CONFERENCE_NOT_STARTED;
+  const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
 
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 

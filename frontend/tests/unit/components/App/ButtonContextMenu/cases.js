@@ -7,11 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import {
-  CONFERENCE_NOT_STARTED,
-  CONFERENCE_INTRODUCTION,
-  CONFERENCE_RUNNING
-} from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 
 export const PARTICIPANT_TEST_CASES = [
   {
@@ -19,7 +15,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: true,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     shouldRender: false
   },
   {
@@ -27,7 +23,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     shouldRender: false
   },
   {
@@ -35,7 +31,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_INTRODUCTION,
+    conferenceStatus: IConferenceStatus.INTRODUCTION,
     shouldRender: false
   },
   {
@@ -43,7 +39,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: false,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     shouldRender: true
   },
   {
@@ -51,7 +47,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: true,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     shouldRender: false
   },
   // NOT MODERATOR CASES
@@ -60,7 +56,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: true,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     shouldRender: false
   },
   {
@@ -68,7 +64,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     shouldRender: false
   },
   {
@@ -76,7 +72,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_INTRODUCTION,
+    conferenceStatus: IConferenceStatus.INTRODUCTION,
     shouldRender: false
   },
   {
@@ -84,7 +80,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: false,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     shouldRender: false
   },
   {
@@ -92,7 +88,7 @@ export const PARTICIPANT_TEST_CASES = [
     isCurrentUser: true,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     shouldRender: false
   }
 ];
@@ -102,7 +98,7 @@ export const SEAT_TEST_CASES = [
     isModerator: true,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     seatNumber: 1,
     shouldRender: false
   },
@@ -110,7 +106,7 @@ export const SEAT_TEST_CASES = [
     isModerator: true,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     seatNumber: 1,
     shouldRender: false
   },
@@ -118,7 +114,7 @@ export const SEAT_TEST_CASES = [
     isModerator: true,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_INTRODUCTION,
+    conferenceStatus: IConferenceStatus.INTRODUCTION,
     seatNumber: 1,
     shouldRender: false
   },
@@ -126,7 +122,7 @@ export const SEAT_TEST_CASES = [
     isModerator: true,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     seatNumber: 2,
     shouldRender: false
   },
@@ -134,7 +130,7 @@ export const SEAT_TEST_CASES = [
     isModerator: true,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     seatNumber: 1,
     shouldRender: true
   },
@@ -143,7 +139,7 @@ export const SEAT_TEST_CASES = [
     isModerator: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     seatNumber: 1,
     shouldRender: false
   },
@@ -151,7 +147,7 @@ export const SEAT_TEST_CASES = [
     isModerator: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_NOT_STARTED,
+    conferenceStatus: IConferenceStatus.NOT_STARTED,
     seatNumber: 1,
     shouldRender: false
   },
@@ -159,7 +155,7 @@ export const SEAT_TEST_CASES = [
     isModerator: false,
     conferenceReady: false,
     fishbowlReady: false,
-    conferenceStatus: CONFERENCE_INTRODUCTION,
+    conferenceStatus: IConferenceStatus.INTRODUCTION,
     seatNumber: 1,
     shouldRender: false
   },
@@ -167,7 +163,7 @@ export const SEAT_TEST_CASES = [
     isModerator: false,
     conferenceReady: true,
     fishbowlReady: true,
-    conferenceStatus: CONFERENCE_RUNNING,
+    conferenceStatus: IConferenceStatus.RUNNING,
     seatNumber: 1,
     shouldRender: false
   }

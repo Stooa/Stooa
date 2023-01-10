@@ -13,7 +13,7 @@ import Button from '@/components/Common/Button';
 import React, { useEffect } from 'react';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { useRouter } from 'next/router';
-import { CONFERENCE_NOT_STARTED } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 import { useStateValue } from '@/contexts/AppContext';
 import Layout from '@/layouts/Default';
 import { Content } from '@/layouts/KickedUser/styles';
@@ -34,7 +34,7 @@ const UserNoParticipatingPage = () => {
       fishbowlStarted: true,
       isGuest: false,
       prejoin: true,
-      conferenceStatus: CONFERENCE_NOT_STARTED
+      conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
   }, []); // es
 

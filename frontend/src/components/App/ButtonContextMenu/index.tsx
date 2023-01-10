@@ -15,7 +15,7 @@ import { useStateValue } from '@/contexts/AppContext';
 import { Participant } from '@/types/participant';
 import ButtonKickUser from '../ButtonKickUser';
 import useEventListener from '@/hooks/useEventListener';
-import { CONFERENCE_RUNNING } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import conferenceRepository from '@/jitsi/Conference';
 
@@ -47,7 +47,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
       isModerator &&
       fishbowlReady &&
       !isMyself &&
-      conferenceStatus === CONFERENCE_RUNNING
+      conferenceStatus === IConferenceStatus.RUNNING
     );
   }, [participant, initialParticipant, isModerator, fishbowlReady, conferenceStatus, isMyself]);
 

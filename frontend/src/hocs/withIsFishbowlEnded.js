@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_THANKYOU } from '@/app.config';
 import api from '@/lib/api';
-import { CONFERENCE_FINISHED } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 import Loader from '@/components/Web/Loader';
 import Error from '@/components/Common/Error';
 import { useStateValue } from '@/contexts/AppContext';
@@ -37,7 +37,7 @@ const withIsFishbowlEnded = WrappedComponent => props => {
           conferenceStatus: data.status
         });
 
-        if (data.status === CONFERENCE_FINISHED) {
+        if (data.status === IConferenceStatus.FINISHED) {
           console.log('[STOOA] Finished fishbowl. redirecting to thankyou page');
           const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
           router.push(route, route, { locale: lang });

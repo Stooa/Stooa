@@ -19,7 +19,7 @@ import { getTimePlusOneMinute } from '@/lib/helpers';
 import Layout from '@/layouts/Default';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { useStateValue } from '@/contexts/AppContext';
-import { CONFERENCE_NOT_STARTED } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 
 const HostNow = () => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
@@ -36,7 +36,7 @@ const HostNow = () => {
       fishbowlStarted: false,
       isGuest: false,
       prejoin: true,
-      conferenceStatus: CONFERENCE_NOT_STARTED
+      conferenceStatus: IConferenceStatus?.NOT_STARTED
     });
   };
 

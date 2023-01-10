@@ -208,9 +208,9 @@ const StooaProvider = ({
   const checkIsTimeUp = () => {
     if (isTimeUp(data.endDateTimeTz)) {
       clearInterval(timeUpInterval.current);
-      setTimeStatus(TIME_UP);
+      setTimeStatus(ITimeStatus.TIME_UP);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, ONE_MINUTE + 1)) {
-      if (conferenceStatus === CONFERENCE_RUNNING && !lastMinuteToastSent) {
+      if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
         const message = t('notification.oneMinuteLeft');
         toast(message, {
           icon: '⏳',
@@ -222,9 +222,9 @@ const StooaProvider = ({
         });
         setLastMinuteToastSent(true);
       }
-      setTimeStatus(TIME_LAST_MINUTE);
+      setTimeStatus(ITimeStatus.LAST_MINUTE);
     } else if (isTimeLessThanNMinutes(data.endDateTimeTz, TEN_MINUTES + 1)) {
-      if (conferenceStatus === CONFERENCE_RUNNING && !tenMinuteToastSent) {
+      if (conferenceStatus === IConferenceStatus.RUNNING && !tenMinuteToastSent) {
         const message = t('notification.tenMinutesLeft');
         toast(message, {
           icon: '⏳',
@@ -236,7 +236,7 @@ const StooaProvider = ({
         });
         seTenMinuteToastSent(true);
       }
-      setTimeStatus(TIME_ENDING);
+      setTimeStatus(ITimeStatus.ENDING);
     }
   };
 
@@ -255,7 +255,7 @@ const StooaProvider = ({
       !initConnection &&
       ((isModerator && fishbowlStarted) ||
         (!conferenceReady &&
-          (isConferenceIntroducing() || conferenceStatus === CONFERENCE_RUNNING)))
+          (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       setTimeout(() => {
         initializeConnection(fid, isModerator);
@@ -286,7 +286,7 @@ const StooaProvider = ({
   }, []);
 
   useEffect(() => {
-    if (conferenceStatus === CONFERENCE_FINISHED) {
+    if (conferenceStatus === IConferenceStatus.FINISHED) {
       unload().then(function () {
         const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
         router.push(route, route, { locale: lang });

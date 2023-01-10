@@ -102,7 +102,7 @@ const initialState: State = {
   fishbowlStarted: false,
   isGuest: false,
   prejoin: true,
-  conferenceStatus: CONFERENCE_NOT_STARTED
+  conferenceStatus: IConferenceStatus?.NOT_STARTED
 };
 
 const [useStateValue, StateContextProvider] = createGenericContext<[State, Dispatch<Actions>]>();

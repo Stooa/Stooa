@@ -9,7 +9,7 @@
 
 import { render, screen } from '@testing-library/react';
 import Seats from '@/components/App/Seats';
-import { CONFERENCE_NOT_STARTED, CONFERENCE_RUNNING } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 import I18nProvider from 'next-translate/I18nProvider';
 
 import appEN from 'locales/en/app.json';
@@ -21,7 +21,7 @@ const introState = {
   fishbowlStarted: false,
   isGuest: false,
   prejoin: false,
-  conferenceStatus: CONFERENCE_NOT_STARTED
+  conferenceStatus: IConferenceStatus.NOT_STARTED
 };
 
 jest.mock('@/contexts/AppContext');
@@ -50,7 +50,10 @@ const renderWithContext = () => {
 
 describe('Unit test of fishbowl seats', () => {
   it('Unstarted fishbowl renders 5 unavailable seats', () => {
-    useStateValue.mockReturnValue([{ conferenceStatus: CONFERENCE_NOT_STARTED }, () => jest.fn()]);
+    useStateValue.mockReturnValue([
+      { conferenceStatus: IConferenceStatus.NOT_STARTED },
+      () => jest.fn()
+    ]);
 
     renderWithContext(introState);
 
@@ -60,7 +63,10 @@ describe('Unit test of fishbowl seats', () => {
   });
 
   it('Started fishbowl renders 5 available seats', () => {
-    useStateValue.mockReturnValue([{ conferenceStatus: CONFERENCE_RUNNING }, () => jest.fn()]);
+    useStateValue.mockReturnValue([
+      { conferenceStatus: IConferenceStatus.RUNNING },
+      () => jest.fn()
+    ]);
 
     renderWithContext(introState);
 

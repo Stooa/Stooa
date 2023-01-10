@@ -9,16 +9,7 @@
 
 import React, { useEffect, useState } from 'react';
 
-import {
-  CONFERENCE_FINISHED,
-  CONFERENCE_NOT_STARTED,
-  CONFERENCE_RUNNING,
-  IConferenceStatus,
-  ITimeStatus,
-  TIME_ENDING,
-  TIME_LAST_MINUTE,
-  TIME_UP
-} from '@/jitsi/Status';
+import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import HourGlass from '@/ui/svg/hourglass-countdown.svg';
 import { Counter } from '@/components/App/StatusBar/Counter';
@@ -38,9 +29,9 @@ const StatusBar: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
     if (conferenceStatus === IConferenceStatus.RUNNING && timeStatus === ITimeStatus.ENDING) {
       setStatusClass('warning');
     } else if (
-      (conferenceStatus === CONFERENCE_RUNNING &&
-        (timeStatus === TIME_LAST_MINUTE || timeStatus === TIME_UP)) ||
-      conferenceStatus === CONFERENCE_FINISHED
+      (conferenceStatus === IConferenceStatus.RUNNING &&
+        (timeStatus === ITimeStatus.LAST_MINUTE || timeStatus === ITimeStatus.TIME_UP)) ||
+      conferenceStatus === IConferenceStatus.FINISHED
     ) {
       setStatusClass('error');
     } else {

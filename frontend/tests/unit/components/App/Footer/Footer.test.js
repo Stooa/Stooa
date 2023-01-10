@@ -43,7 +43,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
-      conferenceStatus: CONFERENCE_NOT_STARTED
+      conferenceStatus: IConferenceStatus.NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -57,7 +57,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: true,
       isModerator: true,
-      conferenceStatus: CONFERENCE_NOT_STARTED
+      conferenceStatus: IConferenceStatus.NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -71,7 +71,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: false,
       isModerator: false,
-      conferenceStatus: CONFERENCE_RUNNING
+      conferenceStatus: IConferenceStatus.RUNNING
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
@@ -85,7 +85,7 @@ describe('App footer component', () => {
     useStooa.mockReturnValue({
       onIntroduction: true,
       isModerator: false,
-      conferenceStatus: CONFERENCE_NOT_STARTED
+      conferenceStatus: IConferenceStatus.NOT_STARTED
     });
     useRouter.mockReturnValue({ query: 'test-fid' });
 
