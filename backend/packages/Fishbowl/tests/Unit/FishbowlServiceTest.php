@@ -182,8 +182,8 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseFishbowlSlugDoesntExist(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
+        $request = new Request([], [], [], [], [], [], $content);
         $this->requestStack->push($request);
 
         $response = $this->service->ping('fishbowl-slug');
@@ -194,8 +194,8 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseWhenFishbowlExistsButThereIsNoParticipantOrGuest(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
+        $request = new Request([], [], [], [], [], [], $content);
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -210,8 +210,8 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsTrueWhenParticipantExistsInRepository(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
+        $request = new Request([], [], [], [], [], [], $content);
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -282,8 +282,8 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function createsNewGuestParticipantAndFishbowlWhenItDoesntExists(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
+        $request = new Request([], [], [], [], [], [], $content);
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
