@@ -95,10 +95,10 @@ const Header = styled.header`
     `}
 
     .title {
-      max-width: 20ch;
+      max-width: 45ch;
       overflow: hidden;
       ${media.min('tablet')`
-        max-width: ${rems(250)};
+        max-width: ${rems(310)};
       `}
     }
   }
@@ -168,6 +168,7 @@ const Footer = styled.footer`
     display: grid;
     place-content: center;
     margin: ${space(2)} 0;
+
     ${media.min('reader')`
       grid-row: 1;
       grid-column: 3 / 4;

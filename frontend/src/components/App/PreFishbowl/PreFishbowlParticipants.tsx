@@ -91,7 +91,7 @@ const PreFishbowlParticipants = () => {
     <>
       <StyledParticipantListWrapper data-testid="prefishbowl-participants">
         <div className="participant-list__header">
-          <h3 className="caps body-sm medium">Participants in the room</h3>
+          <h3 className="caps body-sm medium">{t('prefishbowl.participantsTitle')}</h3>
 
           <div className="participant-list__counter">
             <People />

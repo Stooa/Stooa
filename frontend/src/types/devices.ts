@@ -34,4 +34,5 @@ export interface DevicesRepository {
   loadDevices: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
   clean: (callback: (newDevices: MediaDeviceInfo[]) => void) => void;
   isDevicePermissionGranted: (type: 'audio' | 'video') => Promise<boolean>;
+  screenShare: () => Promise<boolean>;
 }
