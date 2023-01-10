@@ -32,6 +32,8 @@ const ModalsProvider = ({
   const [activeOnBoardingTooltip, setActiveOnBoardingTooltip] = useState(false);
   const [onBoardingTooltipSeen, setOnBoardingTooltipSeen] = useState(false);
   const [showOnBoardingTour, setShowOnBoardingTour] = useState(false);
+  const [showEndIntroductionModal, setShowEndIntroductionModal] = useState(false);
+  const [showScreenSharePermissions, setShowScreenSharePermissions] = useState(false);
 
   const toggleOnBoarding = (location: string) => {
     pushEventDataLayer({
@@ -69,7 +71,11 @@ const ModalsProvider = ({
         showOnBoardingTour,
         setShowOnBoardingTour,
         showConfirmCloseTabModal,
-        setShowConfirmCloseTabModal
+        setShowConfirmCloseTabModal,
+        showEndIntroductionModal,
+        setShowEndIntroductionModal,
+        showScreenSharePermissions,
+        setShowScreenSharePermissions
       }}
     >
       {children}

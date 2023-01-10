@@ -7,71 +7,82 @@
  * file that was distributed with this source code.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import Seats from '@/components/App/Seats';
 import { IConferenceStatus } from '@/jitsi/Status';
-import I18nProvider from 'next-translate/I18nProvider';
-
-import appEN from 'locales/en/app.json';
-import { MockedProvider } from '@apollo/client/testing';
+import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
-
-const introState = {
-  fishbowlReady: true,
-  fishbowlStarted: false,
-  isGuest: false,
-  prejoin: false,
-  conferenceStatus: IConferenceStatus.NOT_STARTED
-};
-
-jest.mock('@/contexts/AppContext');
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: ''
-    };
-  }
-}));
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 jest.mock('@/components/App/ButtonContextMenu', () => ({ children }) => <>{children}</>);
-
-const renderWithContext = () => {
-  render(
-    <I18nProvider lang={'en'} namespaces={{ app: appEN }}>
-      <MockedProvider>
-        <Seats />
-      </MockedProvider>
-    </I18nProvider>
-  );
-};
+jest.mock('@/contexts/StooaManager');
+jest.mock('@/contexts/AppContext');
+jest.mock('@/hooks/useNavigatorType');
 
 describe('Unit test of fishbowl seats', () => {
   it('Unstarted fishbowl renders 5 unavailable seats', () => {
+    useStooa.mockReturnValue({
+      isSharing: false,
+      isModerator: true
+    });
+
+    useNavigatorType.mockReturnValue({
+      deviceType: 'Desktop'
+    });
+
     useStateValue.mockReturnValue([
       { conferenceStatus: IConferenceStatus.NOT_STARTED },
       () => jest.fn()
     ]);
 
-    renderWithContext(introState);
+    const { getAllByTestId } = render(<Seats />);
 
-    const seats = screen.getAllByText('Seat unavailable');
+    const seats = getAllByTestId('unavailable-seat');
 
     expect(seats.length).toBe(5);
   });
 
   it('Started fishbowl renders 5 available seats', () => {
+    useStooa.mockReturnValue({
+      isSharing: false,
+      isModerator: true
+    });
+
+    useNavigatorType.mockReturnValue({
+      deviceType: 'Desktop'
+    });
+
     useStateValue.mockReturnValue([
       { conferenceStatus: IConferenceStatus.RUNNING },
       () => jest.fn()
     ]);
 
-    renderWithContext(introState);
+    const { getAllByTestId } = render(<Seats />);
 
-    const seats = screen.getAllByText('Seat available');
+    const seats = getAllByTestId('available-seat');
 
     expect(seats.length).toBe(5);
+  });
+
+  it('Changes layout while is sharing', () => {
+    useStooa.mockReturnValue({
+      isSharing: true,
+      isModerator: true
+    });
+
+    useNavigatorType.mockReturnValue({
+      deviceType: 'Desktop'
+    });
+
+    useStateValue.mockReturnValue([
+      { conferenceStatus: IConferenceStatus.INTRODUCTION },
+      () => jest.fn()
+    ]);
+
+    const { getByTestId } = render(<Seats />);
+
+    const seatsWrapper = getByTestId('seats-wrapper');
+
+    expect(seatsWrapper.classList.contains('sharing')).toBe(true);
   });
 });
