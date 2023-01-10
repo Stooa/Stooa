@@ -26,9 +26,17 @@
     },
     "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
     "introduceModal": {
-        "title": "Faites une introduction",
+        "title": "Faites une présentation",
         "description": "Votre caméra sera activée et vous pourrez dire quelques mots aux participants avant d'ouvrir le bocal. Ensuite, vous pouvez autoriser les utilisateurs à participer à la conversation.",
-        "button": "Commencer votre présentation"
+        "button": "Commencer votre présentation",
+        "shareScreenFirst": "C'est le moment <span>d'adresser quelques mots</span> aux participants avant d'ouvrir le fishbowl.",
+        "shareScreenSecond": "Vous pouvez également <span>partager votre écran</span> pour fournir un contenu visuel à votre introduction.",
+        "shareScreenThird": "<span>Lorsque vous avez terminé</span>, vous pouvez autoriser les participants à rejoindre la conversation."
+    },
+    "endIntroModal": {
+        "title": "Fin de présentation",
+        "description": "Lorsque vous aurez terminé l'intro et laissé entrer les participants, vous arrêterez automatiquement le partage d'écran et ne pourrez plus le faire.",
+        "button": "Fin de l'introduction"
     },
     "participants": {
         "attendees": "Auditeurs",
@@ -78,6 +86,8 @@
     "full": "Plein",
     "join": "Rejoindre la conversation",
     "leave": "Quitter la conversation",
+    "shareScreenButton": "Partager l'écran",
+    "stopShareScreenButton": "Arrêter le partage",
     "reactions": "Réactions",
     "sameAsSystem": "Suivre le système",
     "settings": "Paramètres",
@@ -113,7 +123,13 @@
         "insightful": "Intéressant"
     },
     "prefishbowl": {
-        "onBoardingHelp": "Don't know how a fishbowl works? Click here",
-        "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
+        "participantsTitle":"participants dans la salle",
+        "onBoardingHelp": "Vous ne savez pas comment fonctionne un Fishbowl ? Cliquez ici",
+        "connectWithUsers": "Pour vous connecter avec les personnes présentes dans la salle par le biais de vos réseaux sociaux, inscrivez-vous sur Stooa."
+    },
+    "startIntroduction": "Commencer la présentation",
+    "screenSharePermissionsModal" : {
+        "title": "Votre écran ne peut pas être partagé",
+        "description": "Google Chrome n'a peut-être pas l'autorisation d'enregistrer l'écran de votre ordinateur. <a>Allez dans les préférences du système.</a>"
     }
 }

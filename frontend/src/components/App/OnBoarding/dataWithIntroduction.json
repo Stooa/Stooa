@@ -42,6 +42,12 @@
             "img2": "/img/onBoarding/2-introduction-host.png"
         },
         {
+            "title": "on-boarding:shareScreen.title",
+            "text": "on-boarding:shareScreen.description",
+            "img1": "/img/onBoarding/sharescreen-1.png",
+            "img2": "/img/onBoarding/sharescreen-2.png"
+        },
+        {
             "title": "on-boarding:appControls.title",
             "preTitle": "on-boarding:appControls.preTitle",
             "text": "on-boarding:appControls.text",

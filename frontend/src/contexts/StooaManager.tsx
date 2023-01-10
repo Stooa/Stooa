@@ -26,13 +26,15 @@ import {
   unload,
   unloadKickedUser
 } from '@/lib/jitsi';
-// import Conference from '@/jitsi/Conference';
 import {
   CONFERENCE_IS_LOCKABLE,
   CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   NOTIFICATION,
+  SCREEN_SHARE_CANCELED,
+  SCREEN_SHARE_START,
+  SCREEN_SHARE_STOP,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -50,6 +52,8 @@ import { Participant } from '@/types/participant';
 import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
+import { pushEventDataLayer } from '@/lib/analytics';
+import SharedTrack from '@/jitsi/SharedTrack';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -72,6 +76,8 @@ const StooaProvider = ({
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
+  const [isSharing, setIsSharing] = useState(false);
+  const [clientRunning, setClientRunning] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -189,6 +195,28 @@ const StooaProvider = ({
     }
   });
 
+  useEventListener(SCREEN_SHARE_START, () => {
+    setIsSharing(true);
+  });
+
+  useEventListener(SCREEN_SHARE_STOP, ({ detail: { location } }) => {
+    if (isModerator) {
+      pushEventDataLayer({
+        action: location === 'app' ? 'stooa_stop_share' : 'navigator_stop_share',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+    }
+
+    SharedTrack.exitFullScreen();
+
+    setIsSharing(false);
+  });
+
+  useEventListener(SCREEN_SHARE_CANCELED, () => {
+    setIsSharing(false);
+  });
+
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
@@ -248,6 +276,16 @@ const StooaProvider = ({
   };
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
+
+  useEffect(() => {
+    if (isModerator && isConferenceIntroducing()) {
+      pushEventDataLayer({
+        action: 'activate',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+    }
+  }, [conferenceStatus]);
 
   useEffect(() => {
     if (
@@ -323,7 +361,11 @@ const StooaProvider = ({
         participantToKick,
         setParticipantToKick,
         getPassword,
-        setFishbowlPassword
+        setFishbowlPassword,
+        isSharing,
+        setIsSharing,
+        clientRunning,
+        setClientRunning
       }}
     >
       {children}
