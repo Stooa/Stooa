@@ -383,9 +383,9 @@ class FishbowlServiceTest extends TestCase
 
         $this->assertSame($fishbowl->getName(), $response->getName());
     }
-
+    
     private function createGuestContent(): string
     {
-        return false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
+        return json_encode(['guestId' => '1'], \JSON_THROW_ON_ERROR);
     }
 }
