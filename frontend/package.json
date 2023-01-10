@@ -83,7 +83,6 @@
     "jest-css-modules": "2.1.0",
     "jest-environment-jsdom": "28.1.3",
     "jest-next-dynamic": "1.0.1",
-    "jest-transformer-svg": "2.0.0",
     "prettier": "2.8.2"
   }
 }
