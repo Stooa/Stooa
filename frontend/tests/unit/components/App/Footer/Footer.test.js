@@ -30,8 +30,6 @@ const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 
 useRouter.mockImplementation(() => ({
   query: { fid: '12345' }
-  // jest.mock('next/router', () => ({
-  //   useRouter: jest.fn()
 }));
 
 beforeAll(async () => {
