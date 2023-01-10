@@ -87,6 +87,6 @@
     "jest-transformer-svg": "2.0.0",
     "nyc": "15.1.0",
     "prettier": "2.8.2",
-    "swc-plugin-coverage-instrument": "0.0.7"
+    "swc-plugin-coverage-instrument": "0.0.14"
   }
 }
