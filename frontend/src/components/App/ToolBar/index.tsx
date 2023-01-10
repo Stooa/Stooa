@@ -228,6 +228,7 @@ const ToolBar: React.FC = () => {
       </ButtonJoin>
       {showShareScreenButton && (
         <ScreenShareButton
+          className="screen-share-button"
           data-testid="share-screen-button"
           isSharing={isSharing}
           onClick={handleShareClick}

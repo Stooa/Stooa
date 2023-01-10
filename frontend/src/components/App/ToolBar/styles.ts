@@ -22,11 +22,19 @@ const StyledToolbar = styled.div`
   width: 100%;
   padding: ${space(1.2)} ${space(2)} ${space()} ${space(2)};
 
-  &.moderator.introduction {
-    ${media.min('desktop')`
-      grid-template-columns: repeat(6, minmax(16.66%, 100px));
-    `}
+  & .screen-share-button {
+    display: none;
   }
+
+  ${media.min('desktop')`
+    &.moderator.introduction {
+      grid-template-columns: repeat(6, minmax(16.66%, 100px));
+    }
+
+    & .screen-share-button {
+      display: block;
+    }
+  `}
 
   ${media.min('tablet')`
     padding: 0 ${space(3)};
