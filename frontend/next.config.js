@@ -38,11 +38,5 @@ module.exports = nextTranslate({
     reactRemoveProperties: process.env.NODE_ENV === 'production',
     styledComponents: true
   },
-  experimental: {
-    swcPlugins:
-      process.env.NODE_ENV === 'e2e'
-        ? [[require.resolve('swc-plugin-coverage-instrument'), {}]]
-        : []
-  },
   swcMinify: true
 });
