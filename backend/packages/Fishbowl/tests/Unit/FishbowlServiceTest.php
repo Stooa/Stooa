@@ -182,8 +182,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseFishbowlSlugDoesntExist(): void
     {
-        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
-        $request = new Request([], [], [], [], [], [], $content);
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $response = $this->service->ping('fishbowl-slug');
@@ -194,8 +193,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseWhenFishbowlExistsButThereIsNoParticipantOrGuest(): void
     {
-        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
-        $request = new Request([], [], [], [], [], [], $content);
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -210,8 +208,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsTrueWhenParticipantExistsInRepository(): void
     {
-        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
-        $request = new Request([], [], [], [], [], [], $content);
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -282,8 +279,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function createsNewGuestParticipantAndFishbowlWhenItDoesntExists(): void
     {
-        $content = false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
-        $request = new Request([], [], [], [], [], [], $content);
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -386,5 +382,10 @@ class FishbowlServiceTest extends TestCase
         $response = $this->service->generateDefaultTitle($fishbowl);
 
         $this->assertSame($fishbowl->getName(), $response->getName());
+    }
+
+    private function createGuestContent(): string
+    {
+        return false !== json_encode(['guestId' => '1']) ? json_encode(['guestId' => '1']) : '';
     }
 }
