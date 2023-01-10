@@ -175,7 +175,7 @@ class FishbowlService
     {
         try {
             $requestArray = $request->toArray();
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             return null;
         }
 
