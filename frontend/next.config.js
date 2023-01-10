@@ -11,6 +11,8 @@
 const nextTranslate = require('next-translate');
 
 module.exports = nextTranslate({
+  compress: false,
+  poweredByHeader: false,
   webpack: config => {
     config.module.rules.push({
       test: /\.svg$/,
