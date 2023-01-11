@@ -33,6 +33,8 @@
     "full": "Penuh",
     "join": "Gabung pembicaraan",
     "leave": "Tinggalkan pembicaraan",
+    "shareScreenButton": "Share screen",
+    "stopShareScreenButton": "Stop sharing",
     "reactions": "Reaksi",
     "unmute": "Tidak bisukan",
     "sameAsSystem": "Sama dengan sistem",
@@ -61,7 +63,15 @@
     "introduceModal": {
         "button": "Mulai",
         "description": "Anda bisa mengatakan beberapa kata pengenalan, kamera dan mikrofon hanya akan nyala untuk kamu saja. Jika kamu sudah selesai, jangan lupa untuk memperbolehkan peserta untuk gabung pembicaraan.",
-        "title": "Berikan pengenalan"
+        "title": "Berikan pengenalan",
+        "shareScreenFirst": "It is your moment <span>to address a few words</span> to the attendees before opening the fishbowl.",
+        "shareScreenSecond": "You can also <span>share your screen</span> to provide visual content to your introduction.",
+        "shareScreenThird": "<span>When you're done</span>, you can allow attendees to join the conversation."
+    },
+    "endIntroModal": {
+        "title": "End of introduction",
+        "description": "When you finish the intro and let the attendees in, you will automatically stop screen sharing and will not be able to do it again.",
+        "button": "Finish introduction"
     },
     "endModal": {
         "title": "Akhiri fishbowl",

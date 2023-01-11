@@ -417,6 +417,16 @@ const FishbowlForm = ({
         } = res;
 
         const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
+        console.log('Sauriki', fishbowl.hasIntroduction);
+
+        if (fishbowl.hasIntroduction) {
+          pushEventDataLayer({
+            action: 'activate',
+            category: 'Sharescreen',
+            label: fishbowl.slug
+          });
+        }
+
         updateCreateFishbowl(true);
         router.push(route, route, { locale: lang });
       }

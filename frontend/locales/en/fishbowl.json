@@ -36,6 +36,8 @@
     "full": "Full",
     "join": "Join the conversation",
     "leave": "Leave the conversation",
+    "shareScreenButton": "Share screen",
+    "stopShareScreenButton": "Stop sharing",
     "reactions": "Reactions",
     "unmute": "Unmute",
     "mute": "Mute",
@@ -69,7 +71,15 @@
     "introduceModal": {
         "title": "Give an introduction",
         "description": "Your camera will activate so you can say a few words to the attendees before opening the fishbowl. Afterwards you can allow users in the conversation.",
+        "shareScreenFirst": "It is your moment <span>to address a few words</span> to the attendees before opening the fishbowl.",
+        "shareScreenSecond": "You can also <span>share your screen</span> to provide visual content to your introduction.",
+        "shareScreenThird": "<span>When you're done</span>, you can allow attendees to join the conversation.",
         "button": "Start your introduction"
+    },
+    "endIntroModal": {
+        "title": "End of introduction",
+        "description": "When you finish the intro and let the attendees in, you will automatically stop screen sharing and will not be able to do it again.",
+        "button": "Finish introduction"
     },
     "endModal": {
         "title": "End fishbowl",
@@ -121,7 +131,12 @@
         "insightful": "Insightful"
     },
     "prefishbowl": {
+        "participantsTitle": "Participants in the room",
         "onBoardingHelp": "Don't know how a fishbowl works? Click here",
         "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
+    },
+    "screenSharePermissionsModal" : {
+        "title": "Your screen cannot be shared",
+        "description": "Google Chrome may not have permission to record the screen on your computer. <a>Go to System Preferences.</a>"
     }
 }

@@ -40,7 +40,7 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
       .then(data => {
         let audioGranted = false;
         data.forEach(track => {
-          if (track.type === 'audio') {
+          if (track.getType() === 'audio') {
             audioGranted = true;
           }
         });
