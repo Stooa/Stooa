@@ -244,7 +244,7 @@ const SeatsStyled = styled.div`
     justify-content: center;
     height: 100%;
     width: 100%;
-    max-height: 79vh;
+    max-height: calc(100vh - 10rem);
 
     & #share {
       display: none;
@@ -471,7 +471,6 @@ const SeatsStyled = styled.div`
 
     @media (max-height: 601px) {
       grid-template-columns: repeat(5, 1fr);
-      max-height: 79vh;
 
       ${Seat} {
         grid-column: span 1;
