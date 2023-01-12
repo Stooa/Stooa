@@ -27,6 +27,7 @@ export const VideoRecorder = () => {
 
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
+      preferCurrentTab: true,
       audio: true
     });
 
@@ -36,11 +37,11 @@ export const VideoRecorder = () => {
       }
     });
 
-    const audioIn_01 = audioContext.createMediaStreamSource(tabMediaStream);
-    const audioIn_02 = audioContext.createMediaStreamSource(audioTrack);
+    const audioInTab = audioContext.createMediaStreamSource(tabMediaStream);
+    const audioInUserInput = audioContext.createMediaStreamSource(audioTrack);
 
-    audioIn_01.connect(destination);
-    audioIn_02.connect(destination);
+    audioInTab.connect(destination);
+    audioInUserInput.connect(destination);
 
     const combinedAudios = destination.stream.getAudioTracks()[0];
 
