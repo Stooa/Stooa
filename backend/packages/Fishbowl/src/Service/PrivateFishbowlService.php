@@ -17,6 +17,7 @@ use App\Core\Encryption\HalitePasswordEncryption;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class PrivateFishbowlService
@@ -37,9 +38,13 @@ class PrivateFishbowlService
             return false;
         }
 
-        $password = $currentRequest->request->get('password');
+        try {
+            $requestArray = $currentRequest->toArray();
+        } catch (JsonException) {
+            return false;
+        }
 
-        if (null === $password) {
+        if (empty($requestArray['password'])) {
             return false;
         }
 
@@ -49,7 +54,7 @@ class PrivateFishbowlService
             return false;
         }
 
-        return $fishbowl->getIsPrivate() && $password === $this->halitePasswordEncryption->decrypt($fishbowl->getPassword());
+        return $fishbowl->getIsPrivate() && $requestArray['password'] === $this->halitePasswordEncryption->decrypt($fishbowl->getPassword());
     }
 
     public function decryptPrivatePassword(Fishbowl $fishbowl): Fishbowl
