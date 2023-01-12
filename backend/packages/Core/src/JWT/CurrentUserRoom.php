@@ -37,7 +37,7 @@ class CurrentUserRoom
         if (null !== $currentRequest) {
             try {
                 $requestArray = $currentRequest->toArray();
-            } catch (JsonException) {
+            } catch (JsonException $e) {
                 return null;
             }
 
