@@ -10,20 +10,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'webrtc-adapter';
 import RecordRTC, { RecordRTCPromisesHandler, invokeSaveAsDialog } from 'recordrtc';
+import { useDevices } from '@/contexts/DevicesContext';
 
 export const VideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [blob, setBlob] = useState(null);
   const refVideo = useRef(null);
   const recorderRef = useRef(null);
-
-  const videoSource = () =>
-    navigator.mediaDevices.getDisplayMedia({
-      video: true,
-      audio: true
-    });
-
-  const audioSource = () => navigator.mediaDevices.getUserMedia({ audio: true });
+  const { audioInputDevice } = useDevices();
 
   const handleRecording = async () => {
     const audioContext = new AudioContext();
@@ -38,7 +32,7 @@ export const VideoRecorder = () => {
 
     const audioTrack = await navigator.mediaDevices.getUserMedia({
       audio: {
-        deviceId: 'default'
+        deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
       }
     });
 
