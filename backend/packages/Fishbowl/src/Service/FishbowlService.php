@@ -23,6 +23,7 @@ use App\Fishbowl\Repository\FishbowlRepository;
 use Hashids\Hashids;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -172,10 +173,14 @@ class FishbowlService
 
     private function getGuest(Request $request): ?Guest
     {
-        $guestId = $request->request->get('guestId');
+        try {
+            $requestArray = $request->toArray();
+        } catch (JsonException) {
+            return null;
+        }
 
-        if (null !== $guestId) {
-            return $this->guestRepository->find($guestId);
+        if (!empty($requestArray['guestId'])) {
+            return $this->guestRepository->find($requestArray['guestId']);
         }
 
         return null;

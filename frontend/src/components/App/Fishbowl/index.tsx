@@ -11,7 +11,7 @@ import { FC, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
-import { CONFERENCE_START } from '@/jitsi/Events';
+import { CONFERENCE_START, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';
 import useEventListener from '@/hooks/useEventListener';
 import { useStooa } from '@/contexts/StooaManager';
 
@@ -33,6 +33,7 @@ import ModalConfirmLeaving from '../ModalConfirmLeaving';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { BREAKPOINTS } from '@/ui/settings';
 import { useModals } from '@/contexts/ModalsContext';
+import ModalScreenSharePermissions from '../ModalScreenSharePermissions';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -42,8 +43,13 @@ const Fishbowl: FC = () => {
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
   const { data, isModerator, participantToKick, setParticipantToKick } = useStooa();
 
-  const { showOnBoardingModal, showConfirmCloseTabModal, setShowConfirmCloseTabModal } =
-    useModals();
+  const {
+    showOnBoardingModal,
+    showConfirmCloseTabModal,
+    setShowConfirmCloseTabModal,
+    showScreenSharePermissions,
+    setShowScreenSharePermissions
+  } = useModals();
 
   const { width } = useWindowSize();
 
@@ -60,6 +66,10 @@ const Fishbowl: FC = () => {
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
+  });
+
+  useEventListener(SCREEN_SHARE_PERMISSIONS_DENIED, () => {
+    setShowScreenSharePermissions(true);
   });
 
   const toggleParticipants = () => {
@@ -124,6 +134,10 @@ const Fishbowl: FC = () => {
           />
         )}
         {showOnBoardingModal && <ModalOnboarding />}
+
+        {showScreenSharePermissions && (
+          <ModalScreenSharePermissions closeModal={() => setShowScreenSharePermissions(false)} />
+        )}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />

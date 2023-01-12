@@ -36,6 +36,8 @@
     "full": "Complet",
     "join": "Unir-se a la conversa",
     "leave": "Sortir de la conversa",
+    "shareScreenButton": "Compartir pantalla",
+    "stopShareScreenButton": "Deixar de compartir",
     "reactions": "Reaccions",
     "unmute": "Activar",
     "mute": "Silenciar",
@@ -69,7 +71,15 @@
     "introduceModal": {
         "title": "Fes una introducció",
         "description": "La teva càmera s'activarà perquè que pugis dir unes paraules abans del <i>fishbowl</i>. Després podràs permetre als usuaris unir-se a la conversa.",
+        "shareScreenFirst": "És el teu moment per a <span>dirigir unes paraules</span> als assistents abans d'obrir el fishbowl.",
+        "shareScreenSecond": "També podràs <span>compartir la teva pantalla</span> per a dotar de contingut visual a la teva introducció.",
+        "shareScreenThird": "<span>Quan acabis</span>, podràs permetre a la resta d’assistents unir-se a la conversa.",
         "button": "Començar introducció"
+    },
+    "endIntroModal": {
+        "title": "Fi de la introducció",
+        "description": "Quan acabis la intro i deixis entrar als assistents, deixaràs automàticament de compartir pantalla i ja no podràs tornar a fer-ho.",
+        "button": "Finalitzar introducció"
     },
     "endModal": {
         "title": "Finalitzar el fishbowl",
@@ -121,7 +131,12 @@
         "insightful": "Interessant"
     },
     "prefishbowl": {
+        "participantsTitle": "Participants a la sala",
         "onBoardingHelp": "No tens clar com funciona un fishbowl? Fes clic aquí",
         "connectWithUsers": "Per a connectar amb les persones a la sala a través de les teves RRSS, registra't en Stooa."
+    },
+    "screenSharePermissionsModal" : {
+        "title": "La teva pantalla no es pot compartir",
+        "description": "És possible que Google Chrome no tingui permís per a gravar la pantalla en el teu ordinador. <a>Ves a Preferències de sistema.</a>"
     }
 }

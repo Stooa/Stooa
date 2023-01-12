@@ -21,4 +21,8 @@ export interface ModalsContextValues {
   setShowConfirmCloseTabModal: Dispatch<SetStateAction<boolean>>;
   showOnBoardingTour: boolean;
   setShowOnBoardingTour: Dispatch<SetStateAction<boolean>>;
+  showEndIntroductionModal: boolean;
+  setShowEndIntroductionModal: Dispatch<SetStateAction<boolean>>;
+  showScreenSharePermissions: boolean;
+  setShowScreenSharePermissions: Dispatch<SetStateAction<boolean>>;
 }
