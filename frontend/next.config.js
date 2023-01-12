@@ -33,5 +33,10 @@ module.exports = nextTranslate({
         destination: '/api/robots'
       }
     ];
-  }
+  },
+  compiler: {
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
+    styledComponents: true
+  },
+  swcMinify: true
 });
