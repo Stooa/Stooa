@@ -1,44 +1,63 @@
+/*!
+ * This file is part of the Stooa codebase.
+ *
+ * (c) 2020 - present Runroom SL
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
 import 'webrtc-adapter';
 import RecordRTC, { RecordRTCPromisesHandler, invokeSaveAsDialog } from 'recordrtc';
 
 export const VideoRecorder = () => {
-  const [stream, setStream] = useState<MediaStream>(null);
+  const [stream, setStream] = useState<MediaStream>();
   const [blob, setBlob] = useState(null);
   const refVideo = useRef(null);
   const recorderRef = useRef(null);
 
   const videoSource = () =>
     navigator.mediaDevices.getDisplayMedia({
-      video: true
+      video: true,
+      audio: true
     });
 
   const audioSource = () => navigator.mediaDevices.getUserMedia({ audio: true });
 
   const handleRecording = async () => {
-    videoSource().then(vid => {
-      audioSource()
-        .then(audio => {
-          const combinedStream = new MediaStream();
-          const vidTrack = vid.getVideoTracks()[0];
-          const audioTrack = audio.getAudioTracks()[0];
+    const audioContext = new AudioContext();
+    const destination = audioContext.createMediaStreamDestination();
 
-          combinedStream.addTrack(vidTrack);
-          combinedStream.addTrack(audioTrack);
-          return combinedStream;
-        })
-        .then(mediaStream => {
-          const track = mediaStream.getVideoTracks()[0];
-          track.onended = () => {
-            handleStop();
-          };
+    const combinedStream = new MediaStream();
 
-          setStream(mediaStream);
-
-          recorderRef.current = new RecordRTC(mediaStream, { type: 'video' });
-          recorderRef.current.startRecording();
-        });
+    const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
+      video: true,
+      audio: true
     });
+
+    const audioTrack = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        deviceId: 'default'
+      }
+    });
+
+    const audioIn_01 = audioContext.createMediaStreamSource(tabMediaStream);
+    const audioIn_02 = audioContext.createMediaStreamSource(audioTrack);
+
+    audioIn_01.connect(destination);
+    audioIn_02.connect(destination);
+
+    console.log('SAURIKI KLK', destination.stream.getAudioTracks());
+
+    const combinedAudios = destination.stream.getAudioTracks()[0];
+
+    combinedStream.addTrack(tabMediaStream.getVideoTracks()[0]);
+    combinedStream.addTrack(combinedAudios);
+
+    setStream(combinedStream);
+    recorderRef.current = new RecordRTC(combinedStream, { type: 'video' });
+    recorderRef.current.startRecording();
   };
 
   const handleStop = () => {
@@ -89,7 +108,7 @@ export const VideoRecorder = () => {
       <button onClick={handleRecording}>Start</button>
       <button onClick={handleStop}>Stop</button>
       <button onClick={handleSave}>Save</button>
-      {blob && (
+      {/* {blob && (
         <video
           src={URL.createObjectURL(blob)}
           controls
@@ -97,7 +116,7 @@ export const VideoRecorder = () => {
           ref={refVideo}
           style={{ width: '700px', margin: '1em', zIndex: 99999 }}
         />
-      )}
+      )} */}
     </div>
   );
 };
