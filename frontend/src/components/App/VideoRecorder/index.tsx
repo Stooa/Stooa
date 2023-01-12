@@ -48,8 +48,6 @@ export const VideoRecorder = () => {
     audioIn_01.connect(destination);
     audioIn_02.connect(destination);
 
-    console.log('SAURIKI KLK', destination.stream.getAudioTracks());
-
     const combinedAudios = destination.stream.getAudioTracks()[0];
 
     combinedStream.addTrack(tabMediaStream.getVideoTracks()[0]);
