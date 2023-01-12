@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Core\JWT;
 
 use App\Fishbowl\Service\FishbowlService;
-use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 
