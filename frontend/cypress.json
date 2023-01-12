@@ -7,10 +7,5 @@
   "screenshotsFolder": "tests/e2e/screenshots",
   "supportFile": "tests/e2e/support",
   "video": false,
-  "videosFolder": "tests/e2e/videos",
-  "env": {
-    "codeCoverage": {
-      "url": "/api/__coverage__"
-    }
-  }
+  "videosFolder": "tests/e2e/videos"
 }
