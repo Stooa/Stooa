@@ -70,7 +70,7 @@
     "@types/jest": "27.4.1",
     "@types/js-cookie": "3.0.2",
     "@types/react-slick": "0.23.10",
-    "@typescript-eslint/eslint-plugin": "5.48.0",
+    "@typescript-eslint/eslint-plugin": "5.48.1",
     "cypress": "9.7.0",
     "cypress-cucumber-preprocessor": "4.3.1",
     "eslint": "8.31.0",
