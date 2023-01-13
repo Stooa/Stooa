@@ -19,14 +19,24 @@ use ApiPlatform\State\ProviderInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\PrivateFishbowlService;
 
+/**
+ * @implements ProviderInterface<Fishbowl>
+ */
 class FishbowlStateProvider implements ProviderInterface
 {
     public function __construct(private readonly PrivateFishbowlService $privateFishbowlService, private readonly CollectionProvider $collectionProvider)
     {
     }
 
+    /**
+     * @param array<string> $uriVariables
+     * @param array<mixed> $context
+     *
+     * @return iterable<Fishbowl>
+     */
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): iterable
     {
+        /** @var iterable<Fishbowl> $fishbowls */
         $fishbowls = $this->collectionProvider->provide($operation, $uriVariables, $context);
 
         foreach ($fishbowls as $fishbowl) {
