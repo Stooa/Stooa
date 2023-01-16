@@ -23,6 +23,11 @@ import ModalEndFishbowl from '@/components/App/ModalEndFishbowl';
 import Button from '@/components/Common/Button';
 
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
+import { useModals } from '@/contexts/ModalsContext';
+import ModalEndIntroduction from '../ModalEndIntroduction';
+import SharedTrack from '@/jitsi/SharedTrack';
+import Conference from '@/jitsi/Conference';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 interface Props {
   fid: string;
@@ -33,15 +38,15 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
   const [introduction, setIntroduction] = useState(false);
-  const [running, setRunning] = useState(false);
   const [showIntroductionModal, setShowIntroductionModal] = useState(false);
   const [showFinishModal, setShowFinishModal] = useState(false);
   const [runFishbowl] = useMutation(RUN_FISHBOWL);
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
-  const { data } = useStooa();
+  const { data, isSharing, clientRunning, setClientRunning } = useStooa();
   const { permissions, setShowModalPermissions } = useDevices();
+  const { showEndIntroductionModal, setShowEndIntroductionModal } = useModals();
 
   const toggleIntroductionModal = () => {
     if (!permissions.audio && !introduction) {
@@ -78,7 +83,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       runFishbowl(slug)
         .then(() => {
           console.log('[STOOA] allowing users in');
-          setRunning(true);
+          setClientRunning(true);
           setLoading(false);
         })
         .catch(error => {
@@ -127,8 +132,33 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       });
   };
 
+  const handleStartFishbowl = () => {
+    if (isSharing) {
+      setShowEndIntroductionModal(true);
+    } else {
+      startFishbowl();
+    }
+  };
+
+  const handleStartFishbowlWhileSharing = async () => {
+    setLoading(true);
+    const shareLocalTrack = Conference.getLocalTracks().filter(
+      track => track.videoType === 'desktop'
+    );
+
+    await SharedTrack.removeShareTrack(shareLocalTrack[0]);
+    setShowEndIntroductionModal(false);
+    startFishbowl();
+
+    pushEventDataLayer({
+      action: 'modal_stop_share',
+      category: 'Sharescreen',
+      label: window.location.href
+    });
+  };
+
   useEffect(() => {
-    setRunning(conferenceStatus === IConferenceStatus.RUNNING);
+    setClientRunning(conferenceStatus === IConferenceStatus.RUNNING);
 
     if (conferenceStatus === IConferenceStatus.RUNNING) {
       setLoading(false);
@@ -150,6 +180,13 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           disabled={loading}
         />
       )}
+      {showEndIntroductionModal && (
+        <ModalEndIntroduction
+          closeModal={() => setShowEndIntroductionModal(false)}
+          startFishbowl={handleStartFishbowlWhileSharing}
+          disabled={loading}
+        />
+      )}
       {showFinishModal && (
         <ModalEndFishbowl
           closeModal={toggleFinishModal}
@@ -157,7 +194,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           disabled={loading}
         />
       )}
-      {(running || data.isFishbowlNow) && (
+      {(clientRunning || data.isFishbowlNow) && (
         <Button
           data-testid="finish-fishbowl"
           size="medium"
@@ -167,7 +204,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           <span className="text">{t('endFishbowl')}</span>
         </Button>
       )}
-      {!(running || data.isFishbowlNow) &&
+      {!(clientRunning || data.isFishbowlNow) &&
         (!introduction && data.hasIntroduction && !data.isFishbowlNow ? (
           <Button size="medium" className="button" onClick={toggleIntroductionModal}>
             {!permissions.audio && (
@@ -178,7 +215,7 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
             <span className="text">{t('startIntroduction')}</span>
           </Button>
         ) : (
-          <Button size="medium" className="button" onClick={startFishbowl} disabled={loading}>
+          <Button size="medium" className="button" onClick={handleStartFishbowl} disabled={loading}>
             {!permissions.audio && !introduction && (
               <div className="alert">
                 <PermissionsAlert />

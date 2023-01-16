@@ -213,11 +213,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
                 'email' => 'host@stooa.com',
                 'refresh_token' => $logInResponse['refresh_token'],
             ],
-            'extra' => [
-                'parameters' => [
-                    'room' => $room,
-                ],
-            ],
+            'body' => $this->createRoomContent($room),
         ]);
 
         $this->assertResponseIsSuccessful();
@@ -271,5 +267,10 @@ class RefreshTokenFunctionalTest extends ApiTestCase
             'fishbowls' => [$firstFishbowl, $secondFishbowl],
             'createdAt' => new \DateTime('now', $timeZone),
         ]);
+    }
+
+    private function createRoomContent(string $room): string
+    {
+        return json_encode(['room' => $room], \JSON_THROW_ON_ERROR);
     }
 }
