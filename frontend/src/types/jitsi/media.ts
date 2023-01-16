@@ -7,4 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import 'jest-canvas-mock';
+export enum MediaType {
+  AUDIO = 'audio',
+  DESKTOP = 'desktop',
+  VIDEO = 'video'
+}

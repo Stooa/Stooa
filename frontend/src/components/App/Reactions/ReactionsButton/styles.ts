@@ -24,7 +24,7 @@ const StyledButtonReaction = styled.button`
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   & > svg {
-    transform: translateY(-3px);
+    transform: translateY(-1.5px);
   }
 
   & > .label {
@@ -33,7 +33,7 @@ const StyledButtonReaction = styled.button`
 
     ${media.min('tablet')`
       ${BODY_SM}
-      line-height: 1;
+      line-height: 1.1;
     `}
   }
 

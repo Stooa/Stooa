@@ -15,7 +15,9 @@ import {
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   PERMISSION_CHANGED,
-  REACTION_MESSAGE_RECEIVED
+  REACTION_MESSAGE_RECEIVED,
+  SCREEN_SHARE_START,
+  SCREEN_SHARE_STOP
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -69,7 +71,7 @@ const conferenceRepository = () => {
 
     conference.selectParticipants(seatsRepository.getIds());
 
-    console.log('[STOOA] Leave', id);
+    console.log('[STOOA] User leave', id);
   };
 
   const _handleParticipantConnectionStatusChanged = (id, status) => {
@@ -85,6 +87,12 @@ const conferenceRepository = () => {
       oldValue,
       newValue
     );
+
+    if (property === 'screenShare' && newValue !== undefined) {
+      dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
+
+      return;
+    }
 
     if (property === 'joined') {
       const id = user.getId();
@@ -333,7 +341,6 @@ const conferenceRepository = () => {
 
     if (oldTrack === undefined) {
       conference.addTrack(track);
-
       return;
     }
 
@@ -365,6 +372,14 @@ const conferenceRepository = () => {
       conference.leave();
       connection.disconnect();
     }
+  };
+
+  const startScreenShareEvent = () => {
+    conference.setLocalParticipantProperty('screenShare', 'true');
+  };
+
+  const stopScreenShareEvent = () => {
+    conference.setLocalParticipantProperty('screenShare', 'false');
   };
 
   const sendJoinEvent = user => {
@@ -430,6 +445,14 @@ const conferenceRepository = () => {
     };
   };
 
+  const getLocalTracks = () => {
+    if (!isJoined) {
+      return [];
+    }
+
+    return conference.getLocalTracks();
+  };
+
   const kickParticipant = (id, reason) => {
     conference.kickParticipant(id, reason);
   };
@@ -459,7 +482,10 @@ const conferenceRepository = () => {
     leave,
     sendJoinEvent,
     sendLeaveEvent,
-    sendTextMessage
+    sendTextMessage,
+    startScreenShareEvent,
+    stopScreenShareEvent,
+    getLocalTracks
   };
 };
 

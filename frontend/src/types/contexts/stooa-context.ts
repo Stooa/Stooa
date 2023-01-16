@@ -23,4 +23,8 @@ export interface StooaContextValues {
   setParticipantToKick: Dispatch<SetStateAction<Participant | undefined>>;
   getPassword: () => string;
   setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
+  isSharing: boolean;
+  setIsSharing: Dispatch<SetStateAction<boolean>>;
+  clientRunning: boolean;
+  setClientRunning: Dispatch<SetStateAction<boolean>>;
 }

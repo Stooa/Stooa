@@ -156,9 +156,7 @@ class PrivateFishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseWhenIsPrivateButPasswordAreTheSame(): void
     {
-        $request = new Request();
-
-        $request->request->set('password', 'password');
+        $request = new Request([], [], [], [], [], [], json_encode(['password' => 'password'], \JSON_THROW_ON_ERROR));
 
         $this->requestStack->push($request);
 

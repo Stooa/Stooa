@@ -135,20 +135,20 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
 
-    #[Groups(['user:self', 'user:write'])]
+    #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
 
     #[ORM\Column(type: 'boolean')]
     private bool $active = false;
 
-    #[Groups(['user:self', 'user:write'])]
+    #[Groups(['user:self', 'user:write', 'user:read'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $linkedinProfile = null;
 
-    #[Groups(['user:self', 'user:write'])]
+    #[Groups(['user:self', 'user:write', 'user:read'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]

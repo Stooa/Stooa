@@ -11,6 +11,10 @@
         "hostText": "<p>Cuando inicies el fishbowl, <strong>podrás comenzar haciendo una introducción.</strong> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <strong>no olvides permitir a los asistentes unirse a la conversación.</strong></p>",
         "participantText": "<p>Cuando empieza el fishbowl, <strong>el organizador puede hacer una introducción.</strong> Después de esta, todos los participantes tendrán permiso para unirse a la conversación.</p>"
     },
+    "shareScreen": {
+        "title": "¡Comparte tu pantalla!",
+        "description": "<ul><li>Durante la introducción, podrás <strong>compartir pantalla</strong>, si lo necesitas.</li><li>Esta función <strong>solo está disponible para ti</strong> como Host y dejará de estar activa cuando cierres la introducción.</li><li>Solo podrás compartir pantalla con tu ordenador, no con tu teléfono.</li></ul>"
+    },
     "appControls": {
         "title": "¿Cómo puedo interactuar?",
         "preTitle": "Controles de la aplicación",
