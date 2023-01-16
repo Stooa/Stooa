@@ -28,7 +28,7 @@ jobs:
 
         strategy:
             matrix:
-                php: ['8.1']
+                php: ['8.2']
 
         steps:
             - name: Checkout the repository to Github workspace

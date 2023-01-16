@@ -462,9 +462,6 @@
     "sonata-project/user-bundle": {
         "version": "4.6.0"
     },
-    "stella-maris/clock": {
-        "version": "0.1.4"
-    },
     "symfony/amazon-mailer": {
         "version": "4.4",
         "recipe": {

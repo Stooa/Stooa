@@ -18,11 +18,11 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Core\Service\MailerService;
 use App\Fishbowl\Entity\Fishbowl;
 
-final class FishbowlProcessor implements ProcessorInterface
+final readonly class FishbowlProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly ProcessorInterface $decorated,
-        private readonly MailerService $mailerService
+        private ProcessorInterface $decorated,
+        private MailerService $mailerService
     ) {
     }
 

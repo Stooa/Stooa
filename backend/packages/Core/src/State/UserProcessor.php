@@ -19,12 +19,12 @@ use App\Core\Entity\User;
 use App\Core\Security\PasswordEncoderService;
 use App\Core\Service\MailerService;
 
-final class UserProcessor implements ProcessorInterface
+final readonly class UserProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly ProcessorInterface $decorated,
-        private readonly PasswordEncoderService $passwordEncoder,
-        private readonly MailerService $mailerService
+        private ProcessorInterface $decorated,
+        private PasswordEncoderService $passwordEncoder,
+        private MailerService $mailerService
     ) {
     }
 
