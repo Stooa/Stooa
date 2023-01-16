@@ -40,7 +40,7 @@ const StyledReasonGroup = styled.div`
 
     & .friend-image {
       height: 100%;
-      margin-right: ${space(1)};
+      object-fit: contain;
     }
 
     &.selected {
@@ -63,7 +63,6 @@ const StyledReasonGroup = styled.div`
       height: 100%;
 
       & .friend-image {
-        margin-right: 0;
         margin-bottom: ${space(2)};
       }
     }
