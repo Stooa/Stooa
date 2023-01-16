@@ -66,7 +66,7 @@
         "phpstan/phpstan-webmozart-assert": "1.2.2",
         "phpunit/phpunit": "9.5.28",
         "psalm/plugin-phpunit": "0.18.4",
-        "psalm/plugin-symfony": "4.0.1",
+        "psalm/plugin-symfony": "4.0.2",
         "runroom-packages/testing": "0.16.0",
         "symfony/browser-kit": "6.2.0",
         "symfony/debug-bundle": "6.2.1",
