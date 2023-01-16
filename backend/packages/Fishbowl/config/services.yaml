@@ -27,9 +27,9 @@ services:
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\Fishbowl\DataProvider\FishbowlDataProvider:
+    App\Fishbowl\State\FishbowlStateProvider:
         bind:
-            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
+            $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:

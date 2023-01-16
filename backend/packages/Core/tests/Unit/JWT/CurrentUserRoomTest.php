@@ -59,7 +59,7 @@ class CurrentUserRoomTest extends TestCase
     /** @test */
     public function itGetsNullWhenFishbowlIsNotReadyToStart(): void
     {
-        $request = new Request([], ['room' => 'room-name']);
+        $request = new Request([], [], [], [], [], [], $this->createRoomContent('room-name'));
         $this->requestStack->push($request);
 
         $this->fishbowlService->method('canFishbowlStart')->willReturn(false);
@@ -72,7 +72,7 @@ class CurrentUserRoomTest extends TestCase
     /** @test */
     public function itGetsRoomNameCorrectly(): void
     {
-        $request = new Request([], ['room' => 'room-name']);
+        $request = new Request([], [], [], [], [], [], $this->createRoomContent('room-name'));
         $this->requestStack->push($request);
 
         $this->fishbowlService->method('canFishbowlStart')->willReturn(true);
@@ -80,5 +80,10 @@ class CurrentUserRoomTest extends TestCase
         $room = $this->currentUserRoom->getRoom($this->user);
 
         $this->assertSame('room-name', $room);
+    }
+
+    private function createRoomContent(string $room): string
+    {
+        return json_encode(['room' => $room], \JSON_THROW_ON_ERROR);
     }
 }
