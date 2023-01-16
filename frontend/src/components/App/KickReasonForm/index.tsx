@@ -82,7 +82,6 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                     width={151}
                     quality={100}
                   />
-
                   <p>{t('kick.modal.options.noParticipating')}</p>
                 </div>
               </label>
