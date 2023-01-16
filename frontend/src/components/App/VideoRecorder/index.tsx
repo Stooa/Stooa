@@ -29,9 +29,17 @@ export const VideoRecorder = () => {
 
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
+      audio: true,
       preferCurrentTab: true,
-      audio: true
     });
+
+    if (tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser') {
+      console.log('ToDo: Error MSG');
+      tabMediaStream.getTracks().forEach(function(track) {
+        track.stop();
+      });
+      return false;
+    }
 
     const audioStream = await navigator.mediaDevices.getUserMedia({
       audio: {
