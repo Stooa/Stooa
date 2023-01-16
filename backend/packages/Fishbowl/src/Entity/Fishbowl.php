@@ -33,6 +33,7 @@ use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
 use App\Fishbowl\State\FishbowlProcessor;
+use App\Fishbowl\State\FishbowlStateProvider;
 use App\Fishbowl\Validator\Constraints\FutureFishbowl;
 use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -56,7 +57,7 @@ use Webmozart\Assert\Assert as MAssert;
     operations: [
         new Get(),
         new Put(security: 'object.getHost() == user'),
-        new GetCollection(security: 'is_granted(\'ROLE_USER\')'),
+        new GetCollection(security: 'is_granted(\'ROLE_USER\')', provider: FishbowlStateProvider::class),
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
     normalizationContext: ['groups' => ['fishbowl:read']],
