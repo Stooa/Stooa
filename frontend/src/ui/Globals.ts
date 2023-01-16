@@ -63,7 +63,7 @@ const StyledLinkCss = css`
 `;
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
+  /* @font-face {
     font-display: swap;
     font-family: 'Geomanist';
     font-style: normal;
@@ -101,7 +101,7 @@ const GlobalStyle = createGlobalStyle`
     font-style: italic;
     font-weight: 500;
     src: local('Geomanist Italic Regular'), url("/fonts/geomanist-medium-italic.woff2") format("woff2"),url("fonts/geomanist-medium-italic.woff") format("woff");
-  }
+  } */
 
   *,
   *::before,
@@ -131,7 +131,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: ${FONT_PRIMARY};
+    /* font-family: ${FONT_PRIMARY}; */
     line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
