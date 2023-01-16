@@ -26,6 +26,11 @@ const StyledIntroModal = styled(Modal)`
       & > div {
         max-width: 270px;
 
+        & > img {
+          margin-inline: auto;
+          object-fit: contain;
+        }
+
         &:not(:last-child) {
           margin-right: ${space(8)};
         }

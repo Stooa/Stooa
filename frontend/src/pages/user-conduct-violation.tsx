@@ -40,7 +40,6 @@ const UserConductViolationPage = () => {
             height={146 * 1.5}
             width={140.06 * 1.5}
             quality={100}
-            layout="intrinsic"
           />
         </div>
 

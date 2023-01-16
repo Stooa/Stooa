@@ -49,7 +49,6 @@ const UserNoParticipatingPage = () => {
               height={146.38 * 1.5}
               width={151 * 1.5}
               quality={100}
-              layout="intrinsic"
             />
           </div>
           <h1 className="title-sm">{t('title')}</h1>
