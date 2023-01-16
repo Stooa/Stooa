@@ -50,6 +50,7 @@ const Modal = styled.div`
 
     & .friend-image {
       margin-bottom: ${space(2)};
+      margin-inline: auto;
     }
 
     &.white {
