@@ -14,6 +14,8 @@ import { useDevices } from '@/contexts/DevicesContext';
 
 export const VideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
+  const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
+  const [audioStream, setAudioStream] = useState<MediaStream>();
   const [blob, setBlob] = useState(null);
   const refVideo = useRef(null);
   const recorderRef = useRef(null);
@@ -31,14 +33,14 @@ export const VideoRecorder = () => {
       audio: true
     });
 
-    const audioTrack = await navigator.mediaDevices.getUserMedia({
+    const audioStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
       }
     });
 
     const audioInTab = audioContext.createMediaStreamSource(tabMediaStream);
-    const audioInUserInput = audioContext.createMediaStreamSource(audioTrack);
+    const audioInUserInput = audioContext.createMediaStreamSource(audioStream);
 
     audioInTab.connect(destination);
     audioInUserInput.connect(destination);
@@ -49,6 +51,9 @@ export const VideoRecorder = () => {
     combinedStream.addTrack(combinedAudios);
 
     setStream(combinedStream);
+    setTabMediaStream(tabMediaStream);
+    setAudioStream(audioStream);
+
     recorderRef.current = new RecordRTC(combinedStream, { type: 'video' });
     recorderRef.current.startRecording();
   };
@@ -57,15 +62,22 @@ export const VideoRecorder = () => {
     recorderRef.current.stopRecording(() => {
       const blob = recorderRef.current.getBlob();
       setBlob(blob);
+      stopStreamTracks();
       invokeSaveAsDialog(blob);
-      stopTracks();
     });
   };
 
-  const stopTracks = () => {
-    const tracks = stream.getVideoTracks();
-    tracks[0].stop();
-  };
+  const stopStreamTracks = () => {
+    stream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+    tabMediaStream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+    audioStream.getTracks().forEach(function(track) {
+      track.stop();
+    });
+  }
 
   const handleSave = () => {
     invokeSaveAsDialog(blob);
