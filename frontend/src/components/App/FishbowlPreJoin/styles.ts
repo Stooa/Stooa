@@ -88,6 +88,10 @@ const VideoContainer = styled.div`
     object-fit: cover;
   }
 
+  .friend-image {
+    object-fit: contain;
+  }
+
   ${media.min('tablet')`
     border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
     height: 100%;
