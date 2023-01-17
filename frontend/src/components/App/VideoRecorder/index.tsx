@@ -34,10 +34,10 @@ export const VideoRecorder = () => {
     });
 
     if (tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser') {
-      console.log('ToDo: Error MSG');
       tabMediaStream.getTracks().forEach(function(track) {
         track.stop();
       });
+      alert('Select Browser tab. Thank you');
       return false;
     }
 
