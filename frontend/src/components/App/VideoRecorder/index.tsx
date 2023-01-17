@@ -7,19 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import 'webrtc-adapter';
-import RecordRTC, { RecordRTCPromisesHandler, invokeSaveAsDialog } from 'recordrtc';
 import { useDevices } from '@/contexts/DevicesContext';
+import fixWebmDuration from 'webm-duration-fix';
 
 export const VideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const [audioStream, setAudioStream] = useState<MediaStream>();
-  const [blob, setBlob] = useState(null);
-  const refVideo = useRef(null);
-  const recorderRef = useRef(null);
+  const recorderRef = useRef<MediaRecorder>();
   const { audioInputDevice } = useDevices();
+  const [recordingData, setRecordingData] = useState<BlobPart[]>([]);
+  const mediaType =  'video/webm;codecs=vp9';
+  let totalSize = 1073741824;
 
   const handleRecording = async () => {
     const audioContext = new AudioContext();
@@ -62,17 +63,32 @@ export const VideoRecorder = () => {
     setTabMediaStream(tabMediaStream);
     setAudioStream(audioStream);
 
-    recorderRef.current = new RecordRTC(combinedStream, { type: 'video' });
-    recorderRef.current.startRecording();
+    if (combinedStream) {
+      recorderRef.current = new MediaRecorder(combinedStream, {
+        mimeType: mediaType,
+        videoBitsPerSecond: 2500000
+      });
+
+      recorderRef.current.addEventListener('dataavailable', e => {
+        if (e.data && e.data.size > 0) {
+          setRecordingData([...recordingData, e.data])
+          totalSize -= e.data.size;
+          if (totalSize <= 0) {
+            handleStop();
+          }
+        }
+      });
+
+      recorderRef.current.start(5000);
+    }
   };
 
   const handleStop = () => {
-    recorderRef.current.stopRecording(() => {
-      const blob = recorderRef.current.getBlob();
-      setBlob(blob);
+    if (recorderRef.current) {
+      recorderRef.current.stop();
       stopStreamTracks();
-      invokeSaveAsDialog(blob);
-    });
+      setTimeout(() => saveRecording(), 1000);
+    }
   };
 
   const stopStreamTracks = () => {
@@ -87,49 +103,26 @@ export const VideoRecorder = () => {
     });
   };
 
-  const handleSave = () => {
-    invokeSaveAsDialog(blob);
-  };
-
-  const upLoadFile = blob => {
-    const fileName = getFileName('webm');
-
-    const fileObject = new File([blob], fileName, {
-      type: 'video/webm'
-    });
-
-    const formData = new FormData();
-    formData.append('video-filename', blob.name);
-    formData.append('video-blob', blob);
-    //Send to endpoint
-  };
-
-  function getFileName(fileExtension) {
-    return 'RecordRTC-' + new Date() + '.' + fileExtension;
+  const getFilename = () => {
+    const now = new Date();
+    const timestamp = now.toISOString();
+    return `recording_${timestamp}`;
   }
-
-  useEffect(() => {
-    if (!refVideo.current) {
-      return;
-    }
-
-    // refVideo.current.srcObject = stream;
-  }, [stream, refVideo]);
+  const saveRecording = async() => {
+    const blob = await fixWebmDuration(new Blob([...recordingData], { type: mediaType }));
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    const extension = mediaType.slice(mediaType.indexOf('/') + 1, mediaType.indexOf(';'))
+    a.style.display = 'none';
+    a.href = url;
+    a.download = `${getFilename()}.${extension}`;
+    a.click();
+  }
 
   return (
     <div>
       <button onClick={handleRecording}>Start</button>
       <button onClick={handleStop}>Stop</button>
-      <button onClick={handleSave}>Save</button>
-      {/* {blob && (
-        <video
-          src={URL.createObjectURL(blob)}
-          controls
-          autoPlay
-          ref={refVideo}
-          style={{ width: '700px', margin: '1em', zIndex: 99999 }}
-        />
-      )} */}
     </div>
   );
 };
