@@ -30,11 +30,11 @@ export const VideoRecorder = () => {
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
       audio: true,
-      preferCurrentTab: true,
+      preferCurrentTab: true
     });
 
     if (tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser') {
-      tabMediaStream.getTracks().forEach(function(track) {
+      tabMediaStream.getTracks().forEach(function (track) {
         track.stop();
       });
       alert('Select Browser tab. Thank you');
@@ -76,16 +76,16 @@ export const VideoRecorder = () => {
   };
 
   const stopStreamTracks = () => {
-    stream.getTracks().forEach(function(track) {
+    stream.getTracks().forEach(function (track) {
       track.stop();
     });
-    tabMediaStream.getTracks().forEach(function(track) {
+    tabMediaStream.getTracks().forEach(function (track) {
       track.stop();
     });
-    audioStream.getTracks().forEach(function(track) {
+    audioStream.getTracks().forEach(function (track) {
       track.stop();
     });
-  }
+  };
 
   const handleSave = () => {
     invokeSaveAsDialog(blob);
