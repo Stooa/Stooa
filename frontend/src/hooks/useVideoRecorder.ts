@@ -52,7 +52,8 @@ const useVideoRecorder = () => {
     });
 
     // @ts-ignore
-    const isBrowser = tabMediaStream.getVideoTracks()[0].getSettings()?.displaySurface !== 'browser';
+    const isBrowser =
+      tabMediaStream.getVideoTracks()[0].getSettings()?.displaySurface !== 'browser';
 
     if (isBrowser) {
       tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
@@ -112,13 +113,13 @@ const useVideoRecorder = () => {
     }
   };
 
-  const _stopStreamTrack = (stream: MediaStream|undefined): void => {
+  const _stopStreamTrack = (stream: MediaStream | undefined): void => {
     if (stream) {
       stream.getTracks().forEach(function (track) {
         track.stop();
       });
     }
-  }
+  };
   const stopStreamTracks = () => {
     _stopStreamTrack(stream);
     _stopStreamTrack(tabMediaStream);
