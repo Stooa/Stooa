@@ -8,15 +8,17 @@
  */
 
 import React from 'react';
-import videoRecorderManager from '@/components/App/VideoRecorder/VideoRecorderManager';
 import { useDevices } from '@/contexts/DevicesContext';
+import useVideoRecorder from '@/hooks/useVideoRecorder';
+
 export const VideoRecorder = () => {
   const { audioInputDevice } = useDevices();
+  const { startRecording, stopRecording } = useVideoRecorder();
 
   return (
     <div>
-      <button onClick={() => videoRecorderManager.startRecording(audioInputDevice)}>Start</button>
-      <button onClick={() => videoRecorderManager.stopRecording()}>Stop</button>
+      <button onClick={() => startRecording(audioInputDevice)}>Start</button>
+      <button onClick={() => stopRecording()}>Stop</button>
     </div>
   );
 };

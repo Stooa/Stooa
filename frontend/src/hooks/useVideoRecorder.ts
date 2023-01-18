@@ -1,12 +1,14 @@
+import React, { useRef, useState } from 'react';
+import { useDevices } from '@/contexts/DevicesContext';
 import fixWebmDuration from 'webm-duration-fix';
-const videoRecorderManager = () => {
-  let stream: MediaStream;
-  let videoStream: MediaStream;
-  let audioStream: MediaStream;
-  let recorder: MediaRecorder;
-  let recordingData: BlobPart[];
-  let totalSize = 1073741824;
 
+const useVideoRecorder = () => {
+  const [stream, setStream] = useState<MediaStream>();
+  const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
+  const [audioStream, setAudioStream] = useState<MediaStream>();
+  const recorderRef = useRef<MediaRecorder>();
+  const recordingData = useRef<BlobPart[]>([]);
+  const [totalSize, setTotalSize] = useState<number>(1073741824);
   const getMimeType = (): string => {
     const possibleTypes = [
       'video/mp4;codecs=h264',
@@ -26,7 +28,8 @@ const videoRecorderManager = () => {
   const mediaType = getMimeType();
 
   const startRecording = async audioInputDevice => {
-    recordingData = [];
+    recordingData.current = [];
+
     const audioContext = new AudioContext();
     const destination = audioContext.createMediaStreamDestination();
 
@@ -48,14 +51,14 @@ const videoRecorderManager = () => {
       return false;
     }
 
-    const microStream = await navigator.mediaDevices.getUserMedia({
+    const audioStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
       }
     });
 
     const audioInTab = audioContext.createMediaStreamSource(tabMediaStream);
-    const audioInUserInput = audioContext.createMediaStreamSource(microStream);
+    const audioInUserInput = audioContext.createMediaStreamSource(audioStream);
 
     audioInTab.connect(destination);
     audioInUserInput.connect(destination);
@@ -65,34 +68,34 @@ const videoRecorderManager = () => {
     combinedStream.addTrack(tabMediaStream.getVideoTracks()[0]);
     combinedStream.addTrack(combinedAudios);
 
-    stream = combinedStream;
-    videoStream = tabMediaStream;
-    audioStream = microStream;
+    setStream(combinedStream);
+    setTabMediaStream(tabMediaStream);
+    setAudioStream(audioStream);
 
     if (combinedStream) {
-      recorder = new MediaRecorder(combinedStream, {
+      recorderRef.current = new MediaRecorder(combinedStream, {
         mimeType: mediaType,
         videoBitsPerSecond: 2500000
       });
 
-      recorder.addEventListener('dataavailable', e => {
+      recorderRef.current.addEventListener('dataavailable', e => {
         if (e.data && e.data.size > 0) {
-          recordingData.push(e.data);
-          totalSize -= e.data.size;
+          recordingData.current.push(e.data);
+          setTotalSize(totalSize - e.data.size);
           if (totalSize <= 0) {
             stopRecording();
           }
         }
       });
 
-      recorder.start(5000);
+      recorderRef.current.start(5000);
     }
   };
 
   const stopRecording = () => {
-    if (recorder) {
-      recorder.stop();
-      recorder = undefined;
+    if (recorderRef.current) {
+      recorderRef.current.stop();
+      recorderRef.current = undefined;
       stopStreamTracks();
       setTimeout(() => saveRecording(), 1000);
     }
@@ -102,7 +105,7 @@ const videoRecorderManager = () => {
     stream.getTracks().forEach(function (track) {
       track.stop();
     });
-    videoStream.getTracks().forEach(function (track) {
+    tabMediaStream.getTracks().forEach(function (track) {
       track.stop();
     });
     audioStream.getTracks().forEach(function (track) {
@@ -117,7 +120,7 @@ const videoRecorderManager = () => {
   };
 
   const saveRecording = async () => {
-    const blob = await fixWebmDuration(new Blob(recordingData, { type: mediaType }));
+    const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
 
@@ -135,4 +138,4 @@ const videoRecorderManager = () => {
   };
 };
 
-export default videoRecorderManager();
+export default useVideoRecorder;
