@@ -11,6 +11,21 @@ import { useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
 
 const GIGABYTE = 1073741824;
+
+const getFilename = () => {
+  const now = new Date();
+  const timestamp = now.toISOString();
+  return `recording_${timestamp}`;
+};
+
+const stopStreamTrack = (stream: MediaStream | undefined): void => {
+  if (stream) {
+    stream.getTracks().forEach(function (track) {
+      track.stop();
+    });
+  }
+};
+
 const getMimeType = (): string => {
   const possibleTypes = [
     'video/mp4;codecs=h264',
@@ -110,28 +125,13 @@ const useVideoRecorder = () => {
     if (recorderRef.current) {
       recorderRef.current.stop();
       recorderRef.current = undefined;
-      stopStreamTracks();
+
+      stopStreamTrack(stream);
+      stopStreamTrack(tabMediaStream);
+      stopStreamTrack(audioStream);
+
       setTimeout(() => _saveRecording(), 1000);
     }
-  };
-
-  const _stopStreamTrack = (stream: MediaStream | undefined): void => {
-    if (stream) {
-      stream.getTracks().forEach(function (track) {
-        track.stop();
-      });
-    }
-  };
-  const stopStreamTracks = () => {
-    _stopStreamTrack(stream);
-    _stopStreamTrack(tabMediaStream);
-    _stopStreamTrack(audioStream);
-  };
-
-  const _getFilename = () => {
-    const now = new Date();
-    const timestamp = now.toISOString();
-    return `recording_${timestamp}`;
   };
 
   const _saveRecording = async () => {
@@ -144,7 +144,7 @@ const useVideoRecorder = () => {
 
     a.style.display = 'none';
     a.href = url;
-    a.download = `${_getFilename()}.${extension}`;
+    a.download = `${getFilename()}.${extension}`;
     a.click();
   };
 
