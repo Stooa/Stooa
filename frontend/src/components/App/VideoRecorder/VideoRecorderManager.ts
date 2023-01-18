@@ -114,6 +114,7 @@ const videoRecorderManager = () => {
     const timestamp = now.toISOString();
     return `recording_${timestamp}`;
   };
+
   const saveRecording = async () => {
     const blob = await fixWebmDuration(new Blob(recordingData, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
