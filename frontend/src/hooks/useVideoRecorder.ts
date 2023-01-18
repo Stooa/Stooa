@@ -43,17 +43,19 @@ const useVideoRecorder = () => {
 
     const combinedStream = new MediaStream();
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
       audio: true,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       preferCurrentTab: true
     });
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const isBrowser =
-      tabMediaStream.getVideoTracks()[0].getSettings()?.displaySurface !== 'browser';
+    const isBrowser = tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser';
 
     if (isBrowser) {
       tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
