@@ -1,6 +1,22 @@
-import React, { useRef, useState } from 'react';
-import { useDevices } from '@/contexts/DevicesContext';
+import { useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
+
+const GIGABYTE = 1073741824;
+const getMimeType = (): string => {
+  const possibleTypes = [
+    'video/mp4;codecs=h264',
+    'video/webm;codecs=h264',
+    'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8'
+  ];
+
+  for (const type of possibleTypes) {
+    if (MediaRecorder.isTypeSupported(type)) {
+      return type;
+    }
+  }
+  throw new Error('No MIME Type supported by MediaRecorder');
+};
 
 const useVideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
@@ -8,24 +24,7 @@ const useVideoRecorder = () => {
   const [audioStream, setAudioStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
-  const [totalSize, setTotalSize] = useState<number>(1073741824);
-  const getMimeType = (): string => {
-    const possibleTypes = [
-      'video/mp4;codecs=h264',
-      'video/webm;codecs=h264',
-      'video/webm;codecs=vp9',
-      'video/webm;codecs=vp8'
-    ];
-
-    for (const type of possibleTypes) {
-      if (MediaRecorder.isTypeSupported(type)) {
-        return type;
-      }
-    }
-    throw new Error('No MIME Type supported by MediaRecorder');
-  };
-
-  const mediaType = getMimeType();
+  const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
 
   const startRecording = async audioInputDevice => {
     recordingData.current = [];
@@ -74,7 +73,7 @@ const useVideoRecorder = () => {
 
     if (combinedStream) {
       recorderRef.current = new MediaRecorder(combinedStream, {
-        mimeType: mediaType,
+        mimeType: getMimeType(),
         videoBitsPerSecond: 2500000
       });
 
@@ -120,6 +119,7 @@ const useVideoRecorder = () => {
   };
 
   const saveRecording = async () => {
+    const mediaType = getMimeType();
     const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
