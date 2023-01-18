@@ -21,7 +21,7 @@ interface Props {
 
 const importAnimatiom = (path: string) => require(`@/landing/ui/animations/home/${path}`);
 
-const Benefits = ({ item }: Props): JSX.Element => {
+const BenefitWithLottie = ({ item }: Props): JSX.Element => {
   const { t } = useTranslation('home');
 
   useEffect(() => {
@@ -44,8 +44,8 @@ const Benefits = ({ item }: Props): JSX.Element => {
     <Wrapper>
       <Row flex reverse={item.reverse} className="animate">
         <Column className="col animate-item">
-          <h2 className="title-lg">{t(`keybenefits.${item.name}.title`)}</h2>
-          <Description className="body-lg">{t(`keybenefits.${item.name}.description`)}</Description>
+          <h2 className="title-lg">{t(`${item.name}.title`)}</h2>
+          <Description className="body-lg">{t(`${item.name}.description`)}</Description>
         </Column>
         <Column className="col animate-item">
           <div id={item.id}></div>
@@ -55,4 +55,4 @@ const Benefits = ({ item }: Props): JSX.Element => {
   );
 };
 
-export default Benefits;
+export default BenefitWithLottie;

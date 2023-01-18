@@ -7,6 +7,18 @@
         "title": "¿Qué es un fishbowl?",
         "description": "<p>Un fishbowl es una <strong>dinámica de grupo</strong> que facilita las conversaciones, debates y cualquier tipo de actividad en el que <strong>la participación es esencial para su desarrollo </strong>.</p><p>Es un método de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.</p>"
     },
+    "whyStooa": {
+        "title" : "¿Por qué Stooa?",
+        "description": "Stooa es una <strong>dinámica de grupo</strong> que facilita una conversación fluida y donde se permite <strong>la participación de todos los asistentes.</strong>"
+    },
+    "howStooa": {
+        "title" : "¿Cómo funciona Stooa?",
+        "subtitle" : "¡És muy sencillo!",
+        "firstBulletTitle": "5 sillas para debatir",
+        "firstBulletSub": "Para participar en el debate tendrás que ocupar una de las sillas.",
+        "secondBulletTitle": "1 Silla libre para potenciar la participación",
+        "secondBulletSub": "Siempre tiene que haber una silla libre."
+    },
     "keybenefits": {
         "first": {
             "title": "Más participación",

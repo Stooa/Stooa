@@ -8,12 +8,17 @@
  */
 
 import { GetStaticProps } from 'next';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import lottie from 'lottie-web';
-import { TweenMax } from 'gsap';
+import { gsap } from 'gsap';
+
+import Button from '@/components/Common/Button';
+import RedirectLink from '@/components/Web/RedirectLink';
+import Description from '@/components/Common/Description';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
 import Layout from '@/layouts/Home';
@@ -23,41 +28,45 @@ import { Lottie } from '@/types/animations';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import { Billboard, Content, Row, Sections, Wrapper } from '@/landing/ui/styles';
+
 import WaveMobile from '@/landing/ui/svg/wave-mobile.svg';
 import WaveDesktop from '@/landing/ui/svg/wave-desktop.svg';
+
 import BillboardDeskAnimPath from '@/landing/ui/animations/home/billboard-desktop.json';
 import BillboardMobAnimPath from '@/landing/ui/animations/home/billboard-mobile.json';
 import MorphBillAnimPath from '@/landing/ui/animations/home/billboard-morph.json';
 import Morph2BillAnimPath from '@/landing/ui/animations/home/billboard-morph-2.json';
 import KeyBenefit2MorphPath from '@/landing/ui/animations/home/keybenefit2-morph.json';
-import Button from '@/components/Common/Button';
-import RedirectLink from '@/components/Web/RedirectLink';
-import Description from '@/components/Common/Description';
+import StooaScrollPath from '@/landing/ui/animations/home/stooa-scroll.json';
+import YoutubeEmbed from '@/landing/Components/YoutubeEmbed';
+import ResponsiveRow from '@/landing/HomeSections/ResponsiveRow';
+import FishbowlExplanation from '@/landing/Components/FishbowlExplanation';
 
-const Benefits = dynamic(import('@/landing/HomeSections/Benefits'), {
+const BenefitWithLottie = dynamic(import('@/landing/HomeSections/BenefitWithLottie'), {
   loading: () => <div />
 });
 const Banner = dynamic(import('@/landing/HomeSections/Banner'), { loading: () => <div /> });
 
 const Home = () => {
   const { t } = useTranslation('home');
+  const previewRef = useRef(null);
 
   const lazyMovinAnimations: Lottie[] = [
     {
       id: 'animated-keybenefit1',
-      name: 'first',
+      name: 'keybenefits.first',
       reverse: true,
       path: 'keybenefit1',
       assetsPath: 'img/animations/keybenefit1/'
     },
     {
       id: 'animated-keybenefit2',
-      name: 'second',
+      name: 'keybenefits.second',
       path: 'keybenefit2',
       morph: 'animated-keybenefit2-morph'
     },
-    { id: 'animated-keybenefit3', name: 'third', reverse: true, path: 'keybenefit3' },
-    { id: 'animated-keybenefit4', name: 'fourth', path: 'keybenefit4' }
+    { id: 'animated-keybenefit3', name: 'keybenefits.third', reverse: true, path: 'keybenefit3' },
+    { id: 'animated-keybenefit4', name: 'keybenefits.fourth', path: 'keybenefit4' }
   ];
 
   const handleAnimation = (targetClass = 'animate', delay = 0.6) => {
@@ -70,8 +79,9 @@ const Home = () => {
       if (!item.classList.contains(HANDLED_CLASS) && item.getBoundingClientRect().top < top) {
         const animations = [].slice.call(item.querySelectorAll(`.${ANIMATION_ITEM_CLASS}`));
 
-        animations.map((anim: HTMLElement, i: number) => {
-          TweenMax.to(anim, 1, {
+        animations.map((element: HTMLElement, i: number) => {
+          gsap.to(element, {
+            duration: 1,
             opacity: 1,
             y: 0,
             ease: 'Power3.easeOut',
@@ -97,8 +107,10 @@ const Home = () => {
         assetsPath: 'img/animations/billboard/'
       },
       { id: 'animated-billboard-morph', path: MorphBillAnimPath },
+      { id: 'animated-youtube-morph', path: MorphBillAnimPath },
       { id: 'animated-billboard-morph2', path: Morph2BillAnimPath },
-      { id: 'animated-keybenefit2-morph', path: KeyBenefit2MorphPath }
+      { id: 'animated-keybenefit2-morph', path: KeyBenefit2MorphPath },
+      { id: 'scroll-indicator', path: StooaScrollPath }
     ];
 
     bodyMovinanimations.map(item => {
@@ -128,71 +140,116 @@ const Home = () => {
     <Layout title={t('title')}>
       <Billboard className="billboard-animate">
         <div id="animated-billboard-morph"></div>
-        <h1 data-testid="landing-title" className="title-display animate-item">
-          {t('title')}
-        </h1>
-        <Description className="body-lg animate-item" center>
-          {t('description')}
-        </Description>
-        <div className="cta-wrapper">
-          <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-            <Button
-              size="large"
-              as="a"
-              className="animate-item cta-create-fishbowl"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Host Fishbowl Now',
-                  action: 'Billboard',
-                  label: 'Home'
-                });
-              }}
-            >
-              <span>{t('hostFishbowlNow')}</span>
-            </Button>
-          </RedirectLink>
-          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-            <Button
-              size="large"
-              as="a"
-              variant="secondary"
-              className="animate-item cta-create-fishbowl "
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Schedule Fishbowl',
-                  action: 'Billboard',
-                  label: 'Home'
-                });
-              }}
-            >
-              <span>{t('scheduleFishbowl')}</span>
-            </Button>
-          </RedirectLink>
+        <div id="scroll-indicator" />
+
+        <div className="billboard-text">
+          <h1 data-testid="landing-title" className="animate-item title-lg">
+            {/* {t('title')} */}
+            Debates online fluidos y participativos
+          </h1>
+          <Description className="body-lg animate-item">
+            {/* {t('description')} */}
+            Stooa es una plataforma online que permite conversaciones fluidas y participativas para
+            grandes grupos y con facilitación automática basada en el método fishbowl. Es un método
+            de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar
+            la experiencia de sus empleados.
+          </Description>
+          <div className="cta-wrapper">
+            <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
+              <Button
+                size="large"
+                as="a"
+                className="animate-item cta-create-fishbowl"
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Host Fishbowl Now',
+                    action: 'Billboard',
+                    label: 'Home'
+                  });
+                }}
+              >
+                <span>{t('hostFishbowlNow')}</span>
+              </Button>
+            </RedirectLink>
+            <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+              <Button
+                size="large"
+                as="a"
+                variant="secondary"
+                className="animate-item cta-create-fishbowl "
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Schedule Fishbowl',
+                    action: 'Billboard',
+                    label: 'Home'
+                  });
+                }}
+              >
+                <span>{t('scheduleFishbowl')}</span>
+              </Button>
+            </RedirectLink>
+          </div>
         </div>
-        <div className="ph-badge animate-item">
-          <a
-            href="https://www.producthunt.com/posts/stooa?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-stooa"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=320231&theme=light&period=daily"
-              alt="Stooa - The open source online fishbowl tool | Product Hunt"
-              width="100%"
-              height="54"
-            />
-          </a>
+        <div ref={previewRef} className="fishbowl-preview animate-item">
+          <Image
+            src="/img/web/stooa-preview.png"
+            quality={100}
+            alt="Stooa fishbowl event "
+            width={1347}
+            height={848}
+          />
         </div>
+
         <div id="animated-billboard-morph2"></div>
       </Billboard>
       <Content>
-        <div className="row-list">
-          <div id="animated-billboard-desktop" className="hide-mobile"></div>
-          <div id="animated-billboard-mobile" className="hide-desktop"></div>
-          <WaveMobile className="wave hide-desktop" />
-          <WaveDesktop className="wave hide-mobile" />
-        </div>
-        <Row dark className="animate">
+        {/* WAVES */}
+        <WaveMobile className="wave hide-desktop" />
+        <WaveDesktop className="wave hide-mobile" />
+
+        {/* WHY STOOA? */}
+        <ResponsiveRow spacing="large" className="animate" reverse colored>
+          <>
+            <h2 className="title-lg animate-item definition">{t('whyStooa.title')}</h2>
+            <Description className="body-lg">
+              <Trans
+                i18nKey="home:whyStooa.description"
+                components={{ strong: <strong />, p: <p /> }}
+              />
+            </Description>
+          </>
+
+          <div className="youtube-wrapper">
+            {/* <div id="animated-youtube-morph"></div> */}
+
+            <YoutubeEmbed src="https://www.youtube-nocookie.com/embed/SfD4w9Dua6o" />
+          </div>
+        </ResponsiveRow>
+
+        {/* HOW */}
+        <ResponsiveRow spacing="large" className="animate last-row" colored>
+          <>
+            <h2 className="title-lg animate-item definition">{t('howStooa.title')}</h2>
+            <h4 className="title-md animate-item definition how-subtitle">
+              {t('howStooa.subtitle')}
+            </h4>
+            <FishbowlExplanation />
+          </>
+
+          <div className="image-wrapper">
+            <Image
+              src="/img/web/reading-friend.png"
+              alt="A Stooa's friend reading why should they use stooa"
+              fill
+            />
+          </div>
+        </ResponsiveRow>
+
+        <Row className="animate">
+          <div className="row-list">
+            <div id="animated-billboard-desktop" className="hide-mobile"></div>
+            <div id="animated-billboard-mobile" className="hide-desktop"></div>
+          </div>
           <h2 className="title-lg animate-item definition">{t('definition.title')}</h2>
           <Description center className="animate-item body-lg">
             <Trans
@@ -201,6 +258,7 @@ const Home = () => {
             />
           </Description>
         </Row>
+
         <Sections>
           {lazyMovinAnimations.map((item: Lottie, i: number) => {
             return (
@@ -210,7 +268,7 @@ const Home = () => {
                     <div id={item.morph}></div>
                   </Wrapper>
                 )}
-                <Benefits item={item} />
+                <BenefitWithLottie item={item} />
               </div>
             );
           })}
