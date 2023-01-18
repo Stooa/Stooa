@@ -31,12 +31,7 @@ import Conference from '@/jitsi/Conference';
 import SharedTrack from '@/jitsi/SharedTrack';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
-
-import dynamic from 'next/dynamic';
-
-const VideoRecorderWithNoSSR = dynamic(() => import('@/components/App/VideoRecorder'), {
-  ssr: false
-});
+import VideoRecorder from '@/components/App/VideoRecorder';
 
 const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
@@ -223,7 +218,7 @@ const ToolBar: React.FC = () => {
         isModerator ? 'moderator' : ''
       }`}
     >
-      <VideoRecorderWithNoSSR />
+      <VideoRecorder />
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}
