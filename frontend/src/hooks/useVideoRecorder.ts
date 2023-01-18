@@ -43,13 +43,16 @@ const useVideoRecorder = () => {
 
     const combinedStream = new MediaStream();
 
+    // @ts-ignore
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
       audio: true,
+      // @ts-ignore
       preferCurrentTab: true
     });
 
-    const isBrowser = tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser';
+    // @ts-ignore
+    const isBrowser = tabMediaStream.getVideoTracks()[0].getSettings()?.displaySurface !== 'browser';
 
     if (isBrowser) {
       tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
@@ -105,29 +108,30 @@ const useVideoRecorder = () => {
       recorderRef.current.stop();
       recorderRef.current = undefined;
       stopStreamTracks();
-      setTimeout(() => saveRecording(), 1000);
+      setTimeout(() => _saveRecording(), 1000);
     }
   };
 
+  const _stopStreamTrack = (stream: MediaStream|undefined): void => {
+    if (stream) {
+      stream.getTracks().forEach(function (track) {
+        track.stop();
+      });
+    }
+  }
   const stopStreamTracks = () => {
-    stream.getTracks().forEach(function (track) {
-      track.stop();
-    });
-    tabMediaStream.getTracks().forEach(function (track) {
-      track.stop();
-    });
-    audioStream.getTracks().forEach(function (track) {
-      track.stop();
-    });
+    _stopStreamTrack(stream);
+    _stopStreamTrack(tabMediaStream);
+    _stopStreamTrack(audioStream);
   };
 
-  const getFilename = () => {
+  const _getFilename = () => {
     const now = new Date();
     const timestamp = now.toISOString();
     return `recording_${timestamp}`;
   };
 
-  const saveRecording = async () => {
+  const _saveRecording = async () => {
     const mediaType = getMimeType();
     const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
@@ -137,7 +141,7 @@ const useVideoRecorder = () => {
 
     a.style.display = 'none';
     a.href = url;
-    a.download = `${getFilename()}.${extension}`;
+    a.download = `${_getFilename()}.${extension}`;
     a.click();
   };
 
