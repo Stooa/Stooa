@@ -6,6 +6,7 @@ const videoRecorderManager = () => {
   let recorder: MediaRecorder;
   let recordingData: BlobPart[];
   let totalSize = 1073741824;
+
   const getMimeType = (): string => {
     const possibleTypes = [
       'video/mp4;codecs=h264',
