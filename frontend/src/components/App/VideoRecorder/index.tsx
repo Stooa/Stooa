@@ -12,17 +12,34 @@ import 'webrtc-adapter';
 import { useDevices } from '@/contexts/DevicesContext';
 import fixWebmDuration from 'webm-duration-fix';
 
+let totalSize = 1073741824;
+const getMimeType = (): string => {
+  const possibleTypes = [
+    'video/mp4;codecs=h264',
+    'video/webm;codecs=h264',
+    'video/webm;codecs=vp9',
+    'video/webm;codecs=vp8'
+  ];
+
+  for (const type of possibleTypes) {
+    if (MediaRecorder.isTypeSupported(type)) {
+      return type;
+    }
+  }
+  throw new Error('No MIME Type supported by MediaRecorder');
+};
+const mediaType = getMimeType();
+
 export const VideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const [audioStream, setAudioStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const { audioInputDevice } = useDevices();
-  const [recordingData, setRecordingData] = useState<BlobPart[]>([]);
-  const mediaType =  'video/webm;codecs=vp9';
-  let totalSize = 1073741824;
+  const recordingData = useRef<BlobPart[]>([]);
 
   const handleRecording = async () => {
+    recordingData.current = [];
     const audioContext = new AudioContext();
     const destination = audioContext.createMediaStreamDestination();
 
@@ -34,8 +51,10 @@ export const VideoRecorder = () => {
       preferCurrentTab: true
     });
 
-    if (tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser') {
-      tabMediaStream.getTracks().forEach(function (track) {
+    const isBrowser = tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser';
+
+    if (isBrowser) {
+      tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
         track.stop();
       });
       alert('Select Browser tab. Thank you');
@@ -71,7 +90,7 @@ export const VideoRecorder = () => {
 
       recorderRef.current.addEventListener('dataavailable', e => {
         if (e.data && e.data.size > 0) {
-          setRecordingData([...recordingData, e.data])
+          recordingData.current.push(e.data);
           totalSize -= e.data.size;
           if (totalSize <= 0) {
             handleStop();
@@ -86,6 +105,7 @@ export const VideoRecorder = () => {
   const handleStop = () => {
     if (recorderRef.current) {
       recorderRef.current.stop();
+      recorderRef.current = undefined;
       stopStreamTracks();
       setTimeout(() => saveRecording(), 1000);
     }
@@ -107,17 +127,19 @@ export const VideoRecorder = () => {
     const now = new Date();
     const timestamp = now.toISOString();
     return `recording_${timestamp}`;
-  }
-  const saveRecording = async() => {
-    const blob = await fixWebmDuration(new Blob([...recordingData], { type: mediaType }));
+  };
+  const saveRecording = async () => {
+    const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
-    const extension = mediaType.slice(mediaType.indexOf('/') + 1, mediaType.indexOf(';'))
+
+    const extension = mediaType.slice(mediaType.indexOf('/') + 1, mediaType.indexOf(';'));
+
     a.style.display = 'none';
     a.href = url;
     a.download = `${getFilename()}.${extension}`;
     a.click();
-  }
+  };
 
   return (
     <div>
