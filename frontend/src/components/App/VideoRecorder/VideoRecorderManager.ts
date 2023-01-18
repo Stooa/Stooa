@@ -24,7 +24,7 @@ const videoRecorderManager = () => {
   };
 
   const mediaType = getMimeType();
-  
+
   const startRecording = async audioInputDevice => {
     recordingData = [];
     const audioContext = new AudioContext();
