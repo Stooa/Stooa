@@ -59,7 +59,7 @@
         "doctrine/doctrine-fixtures-bundle": "3.4.2",
         "ergebnis/composer-normalize": "2.29.0",
         "friendsofphp/php-cs-fixer": "3.13.2",
-        "phpstan/phpstan": "1.9.12",
+        "phpstan/phpstan": "1.9.14",
         "phpstan/phpstan-doctrine": "1.3.32",
         "phpstan/phpstan-phpunit": "1.3.3",
         "phpstan/phpstan-symfony": "1.2.20",
