@@ -195,7 +195,7 @@ const Home = () => {
         <div ref={previewRef} className="fishbowl-preview animate-item">
           <Image
             src="/img/web/stooa-preview.png"
-            quality={100}
+            priority
             alt="Stooa fishbowl event "
             width={1347}
             height={848}
