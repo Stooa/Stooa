@@ -53,11 +53,6 @@ const useVideoRecorder = () => {
   const startRecording = async audioInputDevice => {
     recordingData.current = [];
 
-    const audioContext = new AudioContext();
-    const destination = audioContext.createMediaStreamDestination();
-
-    const combinedStream = new MediaStream();
-
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
@@ -85,6 +80,11 @@ const useVideoRecorder = () => {
         deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
       }
     });
+
+    const audioContext = new AudioContext();
+    const destination = audioContext.createMediaStreamDestination();
+
+    const combinedStream = new MediaStream();
 
     const audioInTab = audioContext.createMediaStreamSource(tabMediaStream);
     const audioInUserInput = audioContext.createMediaStreamSource(audioStream);
