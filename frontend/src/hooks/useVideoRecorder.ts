@@ -84,18 +84,16 @@ const useVideoRecorder = () => {
     const audioContext = new AudioContext();
     const destination = audioContext.createMediaStreamDestination();
 
-    const combinedStream = new MediaStream();
-
     const audioInTab = audioContext.createMediaStreamSource(tabMediaStream);
     const audioInUserInput = audioContext.createMediaStreamSource(audioStream);
 
     audioInTab.connect(destination);
     audioInUserInput.connect(destination);
 
-    const combinedAudios = destination.stream.getAudioTracks()[0];
-
-    combinedStream.addTrack(tabMediaStream.getVideoTracks()[0]);
-    combinedStream.addTrack(combinedAudios);
+    const combinedStream = new MediaStream([
+      ...destination?.stream.getAudioTracks() || [],
+      tabMediaStream.getVideoTracks()[0]
+    ]);
 
     setStream(combinedStream);
     setTabMediaStream(tabMediaStream);
