@@ -45,7 +45,7 @@ const getMimeType = (): string => {
 const useVideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
-  const [audioStream, setAudioStream] = useState<MediaStream>();
+  const [microStream, setMicroStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
@@ -75,7 +75,7 @@ const useVideoRecorder = () => {
       return false;
     }
 
-    const audioStream = await navigator.mediaDevices.getUserMedia({
+    const microStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
       }
@@ -85,7 +85,7 @@ const useVideoRecorder = () => {
     const destination = audioContext.createMediaStreamDestination();
 
     audioContext.createMediaStreamSource(tabMediaStream).connect(destination);
-    audioContext.createMediaStreamSource(audioStream).connect(destination);
+    audioContext.createMediaStreamSource(microStream).connect(destination);
 
     const combinedStream = new MediaStream([
       ...(destination?.stream.getAudioTracks() || []),
@@ -94,7 +94,7 @@ const useVideoRecorder = () => {
 
     setStream(combinedStream);
     setTabMediaStream(tabMediaStream);
-    setAudioStream(audioStream);
+    setMicroStream(microStream);
 
     if (combinedStream) {
       recorderRef.current = new MediaRecorder(combinedStream, {
@@ -123,7 +123,7 @@ const useVideoRecorder = () => {
 
       stopStreamTrack(stream);
       stopStreamTrack(tabMediaStream);
-      stopStreamTrack(audioStream);
+      stopStreamTrack(microStream);
 
       setTimeout(() => _saveRecording(), 1000);
     }
