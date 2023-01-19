@@ -261,7 +261,7 @@ const Content = styled.div`
     z-index: -1;
 
     &.hide-mobile {
-      width: 105%;
+      width: 100%;
     }
 
     &.hide-desktop {
