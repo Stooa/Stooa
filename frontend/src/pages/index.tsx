@@ -41,6 +41,7 @@ import StooaScrollPath from '@/landing/ui/animations/home/stooa-scroll.json';
 import YoutubeEmbed from '@/landing/Components/YoutubeEmbed';
 import ResponsiveRow from '@/landing/HomeSections/ResponsiveRow';
 import FishbowlExplanation from '@/landing/Components/FishbowlExplanation';
+import FixedButton from '@/landing/Components/FixedButton';
 
 const BenefitWithLottie = dynamic(import('@/landing/HomeSections/BenefitWithLottie'), {
   loading: () => <div />
@@ -138,7 +139,7 @@ const Home = () => {
 
   return (
     <Layout title={t('title')}>
-      <Billboard className="billboard-animate">
+      <Billboard id="billboard" className="billboard-animate">
         <div id="animated-billboard-morph"></div>
         <div id="scroll-indicator" />
 
@@ -200,6 +201,8 @@ const Home = () => {
             height={848}
           />
         </div>
+
+        <FixedButton buttonText="Probar ahora" />
 
         <div id="animated-billboard-morph2"></div>
       </Billboard>

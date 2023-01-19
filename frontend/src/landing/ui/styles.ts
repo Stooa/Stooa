@@ -257,7 +257,6 @@ const Content = styled.div`
     top: -80px;
     display: block;
     position: absolute;
-    right: -2px;
     width: 100%;
     z-index: -1;
 
