@@ -345,7 +345,7 @@ const StyledResponsiveRow = styled.div<{
 }>`
   display: grid;
   align-items: ${({ align }) => align};
-  gap: ${space(4)} ${space(10)};
+  gap: ${space(6)} ${space(10)};
 
   max-width: ${BREAKPOINTS.desktopLarge}px;
   margin: 0 auto;
@@ -386,10 +386,10 @@ const StyledResponsiveRow = styled.div<{
   }
 
   .larger-image-wrapper {
-    height: 27vw;
+    height: 300px;
 
     ${media.min('desktopLarge')`
-      height: 20vw;
+      height: 400px;
     `}
   }
 `;
