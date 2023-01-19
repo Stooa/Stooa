@@ -212,15 +212,15 @@ const Home = () => {
         <WaveDesktop className="wave hide-mobile" />
 
         {/* WHY STOOA? */}
-        <ResponsiveRow spacing="large" className="animate" reverse colored>
+        <ResponsiveRow spacing="medium" className="animate" reverse colored>
           <>
             <h2 className="title-lg animate-item definition">{t('whyStooa.title')}</h2>
-            <Description className="body-lg">
+            <p className="animate-item body-lg">
               <Trans
                 i18nKey="home:whyStooa.description"
                 components={{ strong: <strong />, p: <p /> }}
               />
-            </Description>
+            </p>
           </>
 
           <div className="youtube-wrapper">
@@ -231,20 +231,27 @@ const Home = () => {
               width={457}
               height={408}
             />
-
-            <YoutubeEmbed src="https://www.youtube-nocookie.com/embed/SfD4w9Dua6o" />
+            <YoutubeEmbed src="https://www.youtube.com/embed/mj2-daCUxGo" />
           </div>
         </ResponsiveRow>
 
         {/* HOW */}
-        <ResponsiveRow align="end" spacing="large" className="animate last-row" colored>
-          <>
+        <Wrapper className="animate" colored>
+          <div className="how-it-works animate-item">
             <h2 className="title-lg animate-item definition">{t('howStooa.title')}</h2>
             <h4 className="title-md animate-item definition how-subtitle">
               {t('howStooa.subtitle')}
             </h4>
-            <FishbowlExplanation />
-          </>
+          </div>
+        </Wrapper>
+        <ResponsiveRow
+          align="end"
+          spacing="medium"
+          className="animate last-row"
+          colored
+          secondItemClassName="hide-mobile"
+        >
+          <FishbowlExplanation />
 
           <div className="larger-image-wrapper">
             <Image

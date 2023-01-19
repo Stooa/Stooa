@@ -16,9 +16,16 @@ const StyledList = styled.ul`
 
   & li {
     display: flex;
-    align-items: center;
-    gap: ${space(4)};
+    flex-direction: column;
+    justify-content: center;
+    gap: ${space(2)} ${space(4)};
     margin-bottom: ${space(6)};
+
+    & > .with-icon {
+      display: flex;
+      align-items: center;
+      gap: ${space(4)};
+    }
 
     & h5 {
       margin-bottom: ${space(2)};

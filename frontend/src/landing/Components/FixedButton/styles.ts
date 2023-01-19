@@ -8,6 +8,7 @@
  */
 
 import { media, space } from '@/ui/helpers';
+import { COLOR_NEUTRO_300 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledButtonWrapper = styled.div`
@@ -17,8 +18,7 @@ const StyledButtonWrapper = styled.div`
   bottom: 0;
   left: 0;
   padding: ${space(3)} ${space(1.5)};
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%);
-  backdrop-filter: blur(2px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, ${COLOR_NEUTRO_300} 100%);
 
   ${media.min('tablet')`
     display: none;

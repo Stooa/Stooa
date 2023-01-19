@@ -22,7 +22,7 @@ const spacingSizes = {
   mobile: {
     small: 2,
     medium: 4,
-    large: 6
+    large: 4
   },
   desktop: {
     small: 4,
@@ -133,6 +133,7 @@ const Billboard = styled.div`
   }
 
   #scroll-indicator {
+    display: none;
     position: absolute;
     bottom: -5rem;
     left: calc(50% - 25px);
@@ -140,6 +141,7 @@ const Billboard = styled.div`
     width: 50px;
 
     ${media.min('tablet')`
+      display: block;
       bottom: -5rem;
     `}
   }
@@ -167,7 +169,7 @@ const Billboard = styled.div`
 
     ${media.min('tablet')`
       display: block;
-      left: -70px;
+      left: -100px;
       top: 0;
     `}
 
@@ -197,8 +199,19 @@ const Content = styled.div`
   width: 100%;
   z-index: 2;
 
+  .how-it-works {
+    text-align: left;
+    max-width: ${BREAKPOINTS.desktopLarge}px;
+    margin: 0 auto;
+    padding-top: ${space(4)};
+    & h4 {
+      margin-bottom: 0;
+    }
+  }
+
   .last-row {
-    padding-bottom: ${space(15)};
+    padding-top: ${space(4)};
+    padding-bottom: ${space(12)};
     margin-bottom: -${space(12)};
     border-image-source: url('/img/web/svg/wave-mobile-bottom.svg');
     border-bottom: solid 70px;
@@ -283,6 +296,7 @@ const Content = styled.div`
     left: -100px;
     top: 0;
     width: 50%;
+    height: auto;
     z-index: -1;
 
     ${media.min('desktopLarge')`
@@ -345,18 +359,18 @@ const StyledResponsiveRow = styled.div<{
 }>`
   display: grid;
   align-items: ${({ align }) => align};
-  gap: ${space(6)} ${space(10)};
+  gap: ${space(4)} ${space(10)};
 
   max-width: ${BREAKPOINTS.desktopLarge}px;
   margin: 0 auto;
-
-  padding-block: ${space(4)};
 
   text-align: left;
 
   ${media.min('desktop')`
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
+
+    gap: ${space(6)} ${space(10)};
   `}
 
   & > .item {
@@ -386,7 +400,9 @@ const StyledResponsiveRow = styled.div<{
   }
 
   .larger-image-wrapper {
+    position: relative;
     height: 300px;
+    width: 100%;
 
     ${media.min('desktopLarge')`
       height: 400px;
@@ -399,7 +415,6 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>
   padding: ${({ colored }) =>
     colored ? `${space(9)} ${space(3)} ${space(10)}` : `0 0 ${space(8)} 0`};
   position: relative;
-  text-align: left;
   width: 100%;
 
   .title-lg,
@@ -420,7 +435,7 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>
 
   ${media.min('tablet')`
     padding: ${({ colored }) => (colored ? `${space(10)} 0 ${space(15)}` : `0 0 ${space(15)} 0`)};
-    text-align: ${({ flex }) => (flex ? 'left' : 'center')};
+    text-align: ${({ flex }) => (flex ? `left` : `center`)};
 
     .title-lg {
       font-weight: 600;

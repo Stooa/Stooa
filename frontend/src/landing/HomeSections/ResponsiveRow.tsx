@@ -13,6 +13,7 @@ interface Props {
   children: readonly [JSX.Element, JSX.Element];
   align?: 'end' | 'center' | 'start';
   className?: string;
+  secondItemClassName?: string;
   mediaComponent?: JSX.Element;
   reverse?: boolean;
   colored?: boolean;
@@ -25,13 +26,16 @@ const ResponsiveRow = ({
   reverse,
   colored,
   className,
+  secondItemClassName,
   spacing
 }: Props): JSX.Element => {
   return (
     <Wrapper colored={colored} className={className} spacing={spacing}>
       <StyledResponsiveRow reverse={reverse} className="animate" align={align}>
         <div className="item animate-item ">{children[0]}</div>
-        <div className="item centered animate-item last-item">{children[1]}</div>
+        <div className={`item centered animate-item last-item ${secondItemClassName}`}>
+          {children[1]}
+        </div>
       </StyledResponsiveRow>
     </Wrapper>
   );

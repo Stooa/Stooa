@@ -15,25 +15,38 @@ const FishbowlExplanation = () => {
     <>
       <StyledList>
         <li className="animate-item">
-          <Image src="/img/web/explanation/chair.png" alt="Fishbowl chair" width={79} height={72} />
-          <div>
-            <h4 className="title-md">5 sillas para debatir</h4>
-            <p className="body-lg">
-              Para participar en el debate tendrás que ocupar una de las sillas.
-            </p>
+          <div className="with-icon">
+            <Image
+              src="/img/web/explanation/chair.png"
+              alt="Fishbowl chair"
+              width={79}
+              height={72}
+            />
+            <div>
+              <h4 className="title-md">5 sillas para debatir</h4>
+              <p className="body-lg hide-mobile">
+                Para participar en el debate tendrás que ocupar una de las sillas.
+              </p>
+            </div>
           </div>
+          <p className="body-lg hide-desktop">
+            Para participar en el debate tendrás que ocupar una de las sillas.
+          </p>
         </li>
         <li className="animate-item">
-          <Image
-            src="/img/web/explanation/talking-head.png"
-            alt="Talking head"
-            width={75}
-            height={70}
-          />
-          <div className="animate-item">
-            <h4 className="title-md">1 Silla libre para potenciar la participación</h4>
-            <p className="body-lg">Siempre tiene que haber una silla libre.</p>
+          <div className="with-icon">
+            <Image
+              src="/img/web/explanation/talking-head.png"
+              alt="Talking head"
+              width={75}
+              height={70}
+            />
+            <div className="animate-item">
+              <h4 className="title-md">1 Silla libre para potenciar la participación</h4>
+              <p className="body-lg hide-mobile">Siempre tiene que haber una silla libre.</p>
+            </div>
           </div>
+          <p className="body-lg hide-desktop">Siempre tiene que haber una silla libre.</p>
         </li>
       </StyledList>
       <p className="body-lg animate-item">

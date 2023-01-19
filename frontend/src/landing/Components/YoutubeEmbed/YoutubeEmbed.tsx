@@ -20,7 +20,7 @@ const YoutubeEmbed = ({ src, allowFullScreen = true }: Props) => {
       className="youtube-stooa"
       src={src}
       title="Stooa. The online fishbowl tool."
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media;  picture-in-picture; web-share"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media;  picture-in-picture; web-share;"
       allowFullScreen={allowFullScreen}
     />
   );
