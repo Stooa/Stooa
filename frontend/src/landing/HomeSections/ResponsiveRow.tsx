@@ -11,7 +11,7 @@ import { StyledResponsiveRow, Wrapper } from '@/landing/ui/styles';
 
 interface Props {
   children: readonly [JSX.Element, JSX.Element];
-  align?: 'flex-end' | 'center' | 'flex-start';
+  align?: 'end' | 'center' | 'start';
   className?: string;
   mediaComponent?: JSX.Element;
   reverse?: boolean;
@@ -30,8 +30,8 @@ const ResponsiveRow = ({
   return (
     <Wrapper colored={colored} className={className} spacing={spacing}>
       <StyledResponsiveRow reverse={reverse} className="animate" align={align}>
-        <div className="item animate-item first-item">{children[0]}</div>
-        <div className="item centered animate-item">{children[1]}</div>
+        <div className="item animate-item ">{children[0]}</div>
+        <div className="item centered animate-item last-item">{children[1]}</div>
       </StyledResponsiveRow>
     </Wrapper>
   );

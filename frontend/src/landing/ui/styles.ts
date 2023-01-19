@@ -27,7 +27,7 @@ const spacingSizes = {
   desktop: {
     small: 4,
     medium: 8,
-    large: 12
+    large: 10
   }
 };
 
@@ -48,7 +48,7 @@ const Billboard = styled.div`
 
   .billboard-text {
     width: 100%;
-    padding: 0 ${space(8)};
+    padding: 0 ${space(4)};
   }
 
   .fishbowl-preview {
@@ -82,7 +82,7 @@ const Billboard = styled.div`
   `}
 
   ${media.min('desktop')`
-  grid-template-columns: 4fr 5fr;
+  grid-template-columns: 1fr 1fr;
 
     .title-display {
       font-size: ${rems(61)};
@@ -135,9 +135,9 @@ const Billboard = styled.div`
   #scroll-indicator {
     position: absolute;
     bottom: -5rem;
-    left: calc(50% - 20px);
-    height: 40px;
-    width: 40px;
+    left: calc(50% - 25px);
+    height: 50px;
+    width: 50px;
 
     ${media.min('tablet')`
       bottom: -5rem;
@@ -198,15 +198,25 @@ const Content = styled.div`
   z-index: 2;
 
   .last-row {
-    border-image-source: url('/img/web/svg/wave-desktop-bottom.svg');
-    border-bottom: solid 100px;
+    padding-bottom: ${space(15)};
+    margin-bottom: -${space(12)};
+    border-image-source: url('/img/web/svg/wave-mobile-bottom.svg');
+    border-bottom: solid 70px;
     background-clip: padding-box;
     border-image-slice: 0 0 100;
+
+    ${media.min('desktop')`
+      border-image-source: url('/img/web/svg/wave-desktop-bottom.svg');
+      padding-bottom: ${space(20)};
+      margin-bottom: -${space(12)};
+      border-bottom: solid 140px;
+    `}
   }
 
   .row-list {
     position: relative;
     z-index: 1;
+    margin-bottom: ${space(6)};
 
     #animated-billboard-desktop,
     #animated-billboard-mobile {
@@ -269,11 +279,18 @@ const Content = styled.div`
     width: 100%;
   }
 
-  #animated-youtube-morph {
+  .red-blob {
     position: absolute;
-    width: ${rems(100)};
-    height: ${rems(70)};
-    /* z-index: -1; */
+    left: -100px;
+    top: 0;
+    width: 50%;
+    z-index: -1;
+
+    ${media.min('desktopLarge')`
+      left: -70px;
+      top: -100px;
+      width: 60%;
+    `}
   }
 
   .how-subtitle {
@@ -325,11 +342,11 @@ const Wrapper = styled.div<{ colored?: boolean; spacing?: 'small' | 'medium' | '
 
 const StyledResponsiveRow = styled.div<{
   reverse?: boolean;
-  align?: 'flex-end' | 'center' | 'flex-start';
+  align?: 'end' | 'center' | 'start';
 }>`
   display: grid;
-  align-items: center;
-  gap: ${space(4)} ${space(7)};
+  align-items: ${({ align }) => align};
+  gap: ${space(4)} ${space(10)};
 
   max-width: ${BREAKPOINTS.desktopLarge}px;
   margin: 0 auto;
@@ -338,7 +355,7 @@ const StyledResponsiveRow = styled.div<{
 
   text-align: left;
 
-  ${media.min('desktopLarge')`
+  ${media.min('desktop')`
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
   `}
@@ -363,8 +380,18 @@ const StyledResponsiveRow = styled.div<{
     }
   }
 
-  .first-item {
-    order: ${({ reverse }) => (reverse ? '-1' : '')};
+  .last-item {
+    ${media.min('desktop')`
+      order: ${({ reverse }) => (reverse ? '-1' : '')};
+    `}
+  }
+
+  .larger-image-wrapper {
+    height: 27vw;
+
+    ${media.min('desktopLarge')`
+      height: 20vw;
+    `}
   }
 `;
 

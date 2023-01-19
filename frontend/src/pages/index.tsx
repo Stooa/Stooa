@@ -149,10 +149,11 @@ const Home = () => {
           </h1>
           <Description className="body-lg animate-item">
             {/* {t('description')} */}
-            Stooa es una plataforma online que permite conversaciones fluidas y participativas para
-            grandes grupos y con facilitación automática basada en el método fishbowl. Es un método
-            de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar
-            la experiencia de sus empleados.
+            Stooa es una plataforma online que permite{' '}
+            <strong>conversaciones fluidas y participativas</strong> para grandes grupos y con
+            facilitación automática basada en el método fishbowl.
+            <br /> Es un <strong>método de diálogo ideal</strong> para comunidades, entornos
+            educativos, o compañías que buscan mejorar la experiencia de sus empleados.
           </Description>
           <div className="cta-wrapper">
             <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
@@ -220,14 +221,20 @@ const Home = () => {
           </>
 
           <div className="youtube-wrapper">
-            {/* <div id="animated-youtube-morph"></div> */}
+            <Image
+              className="red-blob"
+              src="/img/web/red-blob.png"
+              alt="Red blob floating around"
+              width={457}
+              height={408}
+            />
 
             <YoutubeEmbed src="https://www.youtube-nocookie.com/embed/SfD4w9Dua6o" />
           </div>
         </ResponsiveRow>
 
         {/* HOW */}
-        <ResponsiveRow spacing="large" className="animate last-row" colored>
+        <ResponsiveRow align="end" spacing="large" className="animate last-row" colored>
           <>
             <h2 className="title-lg animate-item definition">{t('howStooa.title')}</h2>
             <h4 className="title-md animate-item definition how-subtitle">
@@ -236,7 +243,7 @@ const Home = () => {
             <FishbowlExplanation />
           </>
 
-          <div className="image-wrapper">
+          <div className="larger-image-wrapper">
             <Image
               src="/img/web/reading-friend.png"
               alt="A Stooa's friend reading why should they use stooa"
@@ -245,19 +252,21 @@ const Home = () => {
           </div>
         </ResponsiveRow>
 
-        <Row className="animate">
-          <div className="row-list">
-            <div id="animated-billboard-desktop" className="hide-mobile"></div>
-            <div id="animated-billboard-mobile" className="hide-desktop"></div>
-          </div>
-          <h2 className="title-lg animate-item definition">{t('definition.title')}</h2>
-          <Description center className="animate-item body-lg">
-            <Trans
-              i18nKey="home:definition.description"
-              components={{ strong: <strong />, p: <p /> }}
-            />
-          </Description>
-        </Row>
+        <Wrapper>
+          <Row className="animate">
+            <div className="row-list">
+              <div id="animated-billboard-desktop" className="hide-mobile"></div>
+              <div id="animated-billboard-mobile" className="hide-desktop"></div>
+            </div>
+            <h2 className="title-lg animate-item definition">{t('definition.title')}</h2>
+            <Description center className="animate-item body-lg">
+              <Trans
+                i18nKey="home:definition.description"
+                components={{ strong: <strong />, p: <p /> }}
+              />
+            </Description>
+          </Row>
+        </Wrapper>
 
         <Sections>
           {lazyMovinAnimations.map((item: Lottie, i: number) => {
