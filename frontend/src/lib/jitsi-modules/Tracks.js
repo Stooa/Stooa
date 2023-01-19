@@ -88,6 +88,8 @@ const tracksRepository = () => {
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
+    if (!seatHtml) return;
+
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
       trackHtml.setAttribute('playsinline', '');
