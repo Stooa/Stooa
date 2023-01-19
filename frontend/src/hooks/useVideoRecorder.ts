@@ -112,6 +112,10 @@ const useVideoRecorder = () => {
         }
       });
 
+      tabMediaStream.addEventListener('inactive', () => {
+        stopRecording();
+      });
+
       recorderRef.current.start(5000);
     }
   };
