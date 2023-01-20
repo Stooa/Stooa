@@ -22,12 +22,12 @@ const spacingSizes = {
   mobile: {
     small: 2,
     medium: 4,
-    large: 4
+    large: 6
   },
   desktop: {
     small: 4,
     medium: 8,
-    large: 10
+    large: 12
   }
 };
 
@@ -338,6 +338,13 @@ const Wrapper = styled.div<{ colored?: boolean; spacing?: 'small' | 'medium' | '
       spacing ? `${space(spacingSizes.desktop[spacing])} ${space(3)}` : `0 ${space(6)}`};
   `}
 
+  &.curve-top {
+    padding-top: ${space(6)};
+    ${media.min('tablet')`
+      padding-top: ${space(4)};
+    `}
+  }
+
   #animated-keybenefit2-morph {
     height: ${rems(160)};
     position: absolute;
@@ -416,6 +423,7 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>
     colored ? `${space(9)} ${space(3)} ${space(10)}` : `0 0 ${space(8)} 0`};
   position: relative;
   width: 100%;
+  text-align: ${({ flex }) => (flex ? `left` : `center`)};
 
   .title-lg,
   strong {
@@ -435,7 +443,10 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>
 
   ${media.min('tablet')`
     padding: ${({ colored }) => (colored ? `${space(10)} 0 ${space(15)}` : `0 0 ${space(15)} 0`)};
-    text-align: ${({ flex }) => (flex ? `left` : `center`)};
+
+    &.no-padding {
+      padding: 0;
+    }
 
     .title-lg {
       font-weight: 600;

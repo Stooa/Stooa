@@ -7,10 +7,7 @@
         "title": "Què és un fishbowl?",
         "description": "<p>Un fishbowl és una <strong>dinàmica de grup</strong> que facilita converses, debats y qualsevol tipus d'activitat on la <strong>participació és essencial per al seu desenvolupament</strong>.</p><p>És un mètode de diàleg ideal per a comunitats, entorns educatius, o empreses que busquen millorar l'experiència dels treballadors.</p>"
     },
-    "whyStooa": {
-        "title" : "Why Stooa?",
-        "description": "Stooa is a <strong>group dynamic</strong> that facilitates a fluid conversation and allows <strong>the participation of all attendees.</strong>"
-    },
+    "howOnlineDebates": "Stooa is a <strong>group dynamic</strong> that facilitates a fluid conversation and allows <strong>the participation of all attendees.</strong>",
     "howStooa": {
         "title" : "¿Cómo funciona Stooa?",
         "subtitle" : "¡És muy sencillo!",

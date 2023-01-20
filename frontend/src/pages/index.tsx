@@ -211,16 +211,10 @@ const Home = () => {
         <WaveMobile className="wave hide-desktop" />
         <WaveDesktop className="wave hide-mobile" />
 
-        {/* WHY STOOA? */}
-        <ResponsiveRow spacing="medium" className="animate" reverse colored>
+        {/* HOW ONLINE DEBATES */}
+        <ResponsiveRow spacing="large" className="animate curve-top" reverse colored>
           <>
-            <h2 className="title-lg animate-item definition">{t('whyStooa.title')}</h2>
-            <p className="animate-item body-lg">
-              <Trans
-                i18nKey="home:whyStooa.description"
-                components={{ strong: <strong />, p: <p /> }}
-              />
-            </p>
+            <h2 className="title-md animate-item definition">{t('howOnlineDebates')}</h2>
           </>
 
           <div className="youtube-wrapper">
@@ -263,7 +257,7 @@ const Home = () => {
         </ResponsiveRow>
 
         <Wrapper>
-          <Row className="animate">
+          <Row className="animate no-padding">
             <div className="row-list">
               <div id="animated-billboard-desktop" className="hide-mobile"></div>
               <div id="animated-billboard-mobile" className="hide-desktop"></div>
