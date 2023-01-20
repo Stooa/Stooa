@@ -19,7 +19,7 @@ const tracksRepository = () => {
     trackHtml
       .play()
       .then(() => {
-        console.log('[STOOA] Playing track', trackHtml.id);
+        console.log('[STOOA] Playing track', trackHtml);
       })
       .catch(error => {
         console.log('[STOOA] Problem with auto play', error);
@@ -80,6 +80,8 @@ const tracksRepository = () => {
       trackHtml.autoplay = true;
     }
 
+    // TO-DO La segunda vez que pasa por aqui no tiene ID
+    console.log('Aqui falla', track.getId());
     trackHtml.id = track.getId();
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
@@ -99,7 +101,7 @@ const tracksRepository = () => {
     }
     track.attach(trackHtml);
 
-    if (!track.isLocalAudioTrack()) {
+    if (!track.isLocalAudioTrack() && trackHtml) {
       _playTrackHtml(trackHtml);
     }
   };
