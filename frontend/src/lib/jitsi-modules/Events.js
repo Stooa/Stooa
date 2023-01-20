@@ -20,6 +20,7 @@ export const USER_KICKED = 'user:kicked';
 export const NOTIFICATION = 'notification';
 export const NOTIFICATION_CLOSE = 'notification:close';
 export const LOCALTRACK_STOPPED = 'localtrack:stopped';
+export const TRACK_ADDED = 'track:added';
 export const PERMISSION_CHANGED = 'permission:changed';
 export const REACTION_MESSAGE_RECEIVED = 'reaction:received';
 export const SCREEN_SHARE_START = 'screen-share:start';

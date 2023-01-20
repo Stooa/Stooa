@@ -9,6 +9,9 @@
 
 import { useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
+import trackRepository from '@/jitsi/Tracks';
+import useEventListener from '@/hooks/useEventListener';
+import { SCREEN_SHARE_START, TRACK_ADDED } from '@/jitsi/Events';
 
 const GIGABYTE = 1073741824;
 
@@ -49,6 +52,25 @@ const useVideoRecorder = () => {
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
+  let audioDestination: MediaStreamAudioDestinationNode;
+  let audioContext: AudioContext;
+
+  useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
+    console.log('TRACK --->', track);
+
+    if (!track && track.mediaType !== 'audio') return;
+
+    const audioTrack = track.getTrack();
+
+    const stream = new MediaStream([audioTrack]);
+
+    // audioContext.createMediaStreamSource(tabMediaStream).connect(destination);
+    // audioContext.createMediaStreamSource(microStream).connect(destination);
+
+    if (stream.getAudioTracks().length > 0 && audioDestination) {
+      audioContext?.createMediaStreamSource(stream).connect(audioDestination);
+    }
+  });
 
   const startRecording = async audioInputDevice => {
     recordingData.current = [];
@@ -75,20 +97,28 @@ const useVideoRecorder = () => {
       return false;
     }
 
+    console.log('TAB MEDIA AUDIO TRACKS', tabMediaStream.getAudioTracks());
+
     const microStream = await navigator.mediaDevices.getUserMedia({
       audio: {
         deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
       }
     });
 
-    const audioContext = new AudioContext();
-    const destination = audioContext.createMediaStreamDestination();
+    audioContext = new AudioContext();
+    audioDestination = audioContext.createMediaStreamDestination();
 
-    audioContext.createMediaStreamSource(tabMediaStream).connect(destination);
-    audioContext.createMediaStreamSource(microStream).connect(destination);
+    trackRepository.getAudioTracks().forEach((track: any) => {
+      console.log('ENTRA UN TRACK', track);
+      if (track.mediaType === 'audio') {
+        addAudioTrackToLocalRecording(track);
+      }
+    });
+    audioContext.createMediaStreamSource(microStream).connect(audioDestination);
+    // audioContext.createMediaStreamSource(tabMediaStream).connect(audioDestination);
 
     const combinedStream = new MediaStream([
-      ...(destination?.stream.getAudioTracks() || []),
+      ...(audioDestination?.stream.getAudioTracks() || []),
       tabMediaStream.getVideoTracks()[0]
     ]);
 

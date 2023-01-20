@@ -11,7 +11,8 @@ import seatsRepository from '@/jitsi/Seats';
 import conferenceRepository from '@/jitsi/Conference';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import { MediaType } from '@/types/jitsi/media';
-
+import { SCREEN_SHARE_START, SCREEN_SHARE_STOP, TRACK_ADDED } from '@/jitsi/Events';
+import { dispatchEvent } from '@/lib/helpers';
 const tracksRepository = () => {
   let tracks = [];
 
@@ -208,6 +209,8 @@ const tracksRepository = () => {
       }
     } = JitsiMeetJS;
 
+    dispatchEvent(TRACK_ADDED, { track });
+
     track.addEventListener(TRACK_VIDEOTYPE_CHANGED, videoType =>
       _videoTypeChanged(videoType, track)
     );
@@ -332,6 +335,17 @@ const tracksRepository = () => {
     return false;
   };
 
+  const getAudioTracks = () => {
+    const audioTracks = [];
+    for (let index = 0; index < tracks.length; index++) {
+      if (tracks[index].type === 'audio') {
+        audioTracks.push(tracks[index]);
+      }
+    }
+
+    return audioTracks;
+  };
+
   return {
     createTracks,
     handleTrackAdded,
@@ -344,7 +358,8 @@ const tracksRepository = () => {
     disposeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
-    syncLocalStorageTrack
+    syncLocalStorageTrack,
+    getAudioTracks
   };
 };
 
