@@ -11,7 +11,7 @@ import { useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
 import trackRepository from '@/jitsi/Tracks';
 import useEventListener from '@/hooks/useEventListener';
-import { SCREEN_SHARE_START, TRACK_ADDED } from '@/jitsi/Events';
+import { TRACK_ADDED } from '@/jitsi/Events';
 
 const GIGABYTE = 1073741824;
 
@@ -55,14 +55,8 @@ const useVideoRecorder = () => {
   let audioDestination: MediaStreamAudioDestinationNode;
   let audioContext: AudioContext;
 
-  useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
-    console.log('TRACK --->', track);
-
-    if (!track && track.mediaType !== 'audio') return;
-
-    const audioTrack = track.getTrack();
-
-    const stream = new MediaStream([audioTrack]);
+  const _addAudioTrackToLocalRecording = (track: MediaStreamTrack): void => {
+    const stream = new MediaStream([track]);
 
     // audioContext.createMediaStreamSource(tabMediaStream).connect(destination);
     // audioContext.createMediaStreamSource(microStream).connect(destination);
@@ -70,6 +64,12 @@ const useVideoRecorder = () => {
     if (stream.getAudioTracks().length > 0 && audioDestination) {
       audioContext?.createMediaStreamSource(stream).connect(audioDestination);
     }
+  }
+  useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
+    console.log('TRACK --->', track);
+    if (!track && track.mediaType !== 'audio') return;
+    const audioTrack = track.getTrack();
+    _addAudioTrackToLocalRecording(audioTrack);
   });
 
   const startRecording = async audioInputDevice => {
@@ -111,7 +111,7 @@ const useVideoRecorder = () => {
     trackRepository.getAudioTracks().forEach((track: any) => {
       console.log('ENTRA UN TRACK', track);
       if (track.mediaType === 'audio') {
-        addAudioTrackToLocalRecording(track);
+        _addAudioTrackToLocalRecording(track);
       }
     });
     audioContext.createMediaStreamSource(microStream).connect(audioDestination);

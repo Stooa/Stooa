@@ -11,7 +11,7 @@ import seatsRepository from '@/jitsi/Seats';
 import conferenceRepository from '@/jitsi/Conference';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import { MediaType } from '@/types/jitsi/media';
-import { SCREEN_SHARE_START, SCREEN_SHARE_STOP, TRACK_ADDED } from '@/jitsi/Events';
+import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 const tracksRepository = () => {
   let tracks = [];
