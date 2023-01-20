@@ -63,8 +63,8 @@ const useVideoRecorder = () => {
       audioContext?.createMediaStreamSource(stream).connect(audioDestination);
     }
   };
+
   useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
-    console.log('TRACK --->', track);
     if (!track && track.mediaType !== 'audio') return;
     const audioTrack = track.getTrack();
     _addAudioTrackToLocalRecording(audioTrack);
@@ -94,8 +94,6 @@ const useVideoRecorder = () => {
       alert('Select Browser tab. Thank you');
       return false;
     }
-
-    console.log('TAB MEDIA AUDIO TRACKS', tabMediaStream.getAudioTracks());
 
     const microStream = await navigator.mediaDevices.getUserMedia({
       audio: {
