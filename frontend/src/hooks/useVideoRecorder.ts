@@ -112,7 +112,7 @@ const useVideoRecorder = () => {
     trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
       console.log('ENTRA UN TRACK', track);
       const audioTrack = track.getTrack();
-      if (audioTrack.mediaType === 'audio') {
+      if (audioTrack.kind === 'audio') {
         _addAudioTrackToLocalRecording(audioTrack);
       }
     });
