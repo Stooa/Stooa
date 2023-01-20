@@ -209,8 +209,6 @@ const tracksRepository = () => {
       }
     } = JitsiMeetJS;
 
-    dispatchEvent(TRACK_ADDED, { track });
-
     track.addEventListener(TRACK_VIDEOTYPE_CHANGED, videoType =>
       _videoTypeChanged(videoType, track)
     );
@@ -237,7 +235,10 @@ const tracksRepository = () => {
 
     _create(seat, track);
 
+    dispatchEvent(TRACK_ADDED, { track });
+
     console.log('[STOOA] Handle video or audio track added in seat', track, seat);
+    console.log('ESTE ES EL ARRAY DE TRACKS -------->', tracks);
   };
 
   const handleTrackRemoved = track => {
@@ -337,9 +338,17 @@ const tracksRepository = () => {
 
   const getAudioTracks = () => {
     const audioTracks = [];
-    for (let index = 0; index < tracks.length; index++) {
-      if (tracks[index].type === 'audio') {
-        audioTracks.push(tracks[index]);
+    const ids = seatsRepository.getIds();
+
+    for (let index = 0; index < ids.length; index++) {
+      const id = ids[index];
+
+      if (tracks[id] === undefined) continue;
+
+      for (let index = 0; index < tracks[id].length; index++) {
+        if (tracks[id][index].type === 'audio') {
+          audioTracks.push(tracks[id][index]);
+        }
       }
     }
 

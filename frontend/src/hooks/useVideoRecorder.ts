@@ -108,7 +108,7 @@ const useVideoRecorder = () => {
 
     audioContext = new AudioContext();
     audioDestination = audioContext.createMediaStreamDestination();
-
+    console.log('audiotracks', trackRepository.getAudioTracks());
     trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
       console.log('ENTRA UN TRACK', track);
       const audioTrack = track.getTrack();
