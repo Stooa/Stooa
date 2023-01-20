@@ -12,6 +12,7 @@ import fixWebmDuration from 'webm-duration-fix';
 import trackRepository from '@/jitsi/Tracks';
 import useEventListener from '@/hooks/useEventListener';
 import { TRACK_ADDED } from '@/jitsi/Events';
+import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 
 const GIGABYTE = 1073741824;
 
@@ -64,7 +65,7 @@ const useVideoRecorder = () => {
     if (stream.getAudioTracks().length > 0 && audioDestination) {
       audioContext?.createMediaStreamSource(stream).connect(audioDestination);
     }
-  }
+  };
   useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
     console.log('TRACK --->', track);
     if (!track && track.mediaType !== 'audio') return;
@@ -108,10 +109,11 @@ const useVideoRecorder = () => {
     audioContext = new AudioContext();
     audioDestination = audioContext.createMediaStreamDestination();
 
-    trackRepository.getAudioTracks().forEach((track: any) => {
+    trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
       console.log('ENTRA UN TRACK', track);
-      if (track.mediaType === 'audio') {
-        _addAudioTrackToLocalRecording(track);
+      const audioTrack = track.getTrack();
+      if (audioTrack.mediaType === 'audio') {
+        _addAudioTrackToLocalRecording(audioTrack);
       }
     });
     audioContext.createMediaStreamSource(microStream).connect(audioDestination);
