@@ -59,9 +59,6 @@ const useVideoRecorder = () => {
   const _addAudioTrackToLocalRecording = (track: MediaStreamTrack): void => {
     const stream = new MediaStream([track]);
 
-    // audioContext.createMediaStreamSource(tabMediaStream).connect(destination);
-    // audioContext.createMediaStreamSource(microStream).connect(destination);
-
     if (stream.getAudioTracks().length > 0 && audioDestination) {
       audioContext?.createMediaStreamSource(stream).connect(audioDestination);
     }
@@ -108,9 +105,8 @@ const useVideoRecorder = () => {
 
     audioContext = new AudioContext();
     audioDestination = audioContext.createMediaStreamDestination();
-    console.log('audiotracks', trackRepository.getAudioTracks());
+
     trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
-      console.log('ENTRA UN TRACK', track);
       const audioTrack = track.getTrack();
       if (audioTrack.kind === 'audio') {
         _addAudioTrackToLocalRecording(audioTrack);
