@@ -99,6 +99,10 @@ const useVideoRecorder = () => {
       });
     }
 
+    const currentTitle = document.title;
+
+    document.title = document.title + '(Select this tab)';
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
@@ -108,6 +112,8 @@ const useVideoRecorder = () => {
       // @ts-ignore
       preferCurrentTab: true
     });
+
+    document.title = currentTitle;
 
     if (_isBrowser(tabMediaStream) || _checkIsCurrentTab(tabMediaStream)) {
       tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
@@ -132,8 +138,6 @@ const useVideoRecorder = () => {
         _addAudioTrackToLocalRecording(audioTrack);
       }
     });
-    audioContext.createMediaStreamSource(microStream).connect(audioDestination);
-    // audioContext.createMediaStreamSource(tabMediaStream).connect(audioDestination);
 
     const combinedStream = new MediaStream([
       ...(audioDestination?.stream.getAudioTracks() || []),
