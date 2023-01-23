@@ -56,6 +56,21 @@ const useVideoRecorder = () => {
   let audioDestination: MediaStreamAudioDestinationNode;
   let audioContext: AudioContext;
 
+  const _supportsCaptureHandle = (): boolean => {
+    // @ts-ignore
+    return Boolean(navigator.mediaDevices.setCaptureHandleConfig);
+  };
+  const _checkIsCurrentTab = (tabMediaStream: MediaStream): boolean => {
+    // @ts-ignore
+    return tabMediaStream.getVideoTracks()[0].getCaptureHandle()?.handle !== 'Stooa';
+  };
+
+  const _isBrowser = (tabMediaStream: MediaStream): boolean => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser';
+  };
+
   const _addAudioTrackToLocalRecording = (track: MediaStreamTrack): void => {
     const stream = new MediaStream([track]);
 
@@ -73,21 +88,25 @@ const useVideoRecorder = () => {
   const startRecording = async audioInputDevice => {
     recordingData.current = [];
 
+    if (_supportsCaptureHandle) {
+      // @ts-ignore
+      navigator.mediaDevices.setCaptureHandleConfig({
+        handle: 'Stooa',
+        permittedOrigins: ['*']
+      });
+    }
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const tabMediaStream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
-      audio: true,
+      audio: false,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       preferCurrentTab: true
     });
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const isBrowser = tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser';
-
-    if (isBrowser) {
+    if (_isBrowser(tabMediaStream) || _checkIsCurrentTab(tabMediaStream)) {
       tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
         track.stop();
       });
