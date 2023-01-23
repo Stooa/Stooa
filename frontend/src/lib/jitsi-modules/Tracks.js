@@ -197,7 +197,7 @@ const tracksRepository = () => {
       sharedTrackRepository.shareTrackAdded(track);
     }
 
-    console.log('[Stooa] video type change', track, videoType);
+    console.log('[STOOA] video type change', track, videoType);
   };
 
   const handleTrackAdded = track => {
@@ -236,9 +236,6 @@ const tracksRepository = () => {
     _create(seat, track);
 
     dispatchEvent(TRACK_ADDED, { track });
-
-    console.log('[STOOA] Handle video or audio track added in seat', track, seat);
-    console.log('ESTE ES EL ARRAY DE TRACKS -------->', tracks);
   };
 
   const handleTrackRemoved = track => {

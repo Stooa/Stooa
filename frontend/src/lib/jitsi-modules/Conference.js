@@ -339,8 +339,6 @@ const conferenceRepository = () => {
       return;
     }
 
-    // addAudioTrackToLocalRecording(track);
-
     if (oldTrack === undefined) {
       conference.addTrack(track);
       return;
