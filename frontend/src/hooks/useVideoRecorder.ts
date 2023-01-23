@@ -90,7 +90,7 @@ const useVideoRecorder = () => {
   const startRecording = async audioInputDevice => {
     recordingData.current = [];
 
-    if (_supportsCaptureHandle) {
+    if (_supportsCaptureHandle()) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigator.mediaDevices.setCaptureHandleConfig({
