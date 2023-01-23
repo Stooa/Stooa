@@ -328,7 +328,6 @@ const Banner = styled.div`
       height: ${rems(300)};
       top: ${rems(-150)};
       width: ${rems(150)};
-    }
   `}
   }
 

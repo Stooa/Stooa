@@ -35,7 +35,7 @@ const conferenceRepository = () => {
   let linkedin = false;
 
   const joinUser = (id, user) => {
-    if (id === undefined || id === null) {
+    if (!id) {
       id = conference.myUserId();
     }
     const seat = seatsRepository.join(id);

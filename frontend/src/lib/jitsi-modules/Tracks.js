@@ -144,11 +144,25 @@ const tracksRepository = () => {
   };
 
   const createTracks = async (id, seat, user) => {
+    const log = {
+      id: id,
+      track: tracks[id],
+      seat: seat,
+      user: user.id
+    };
+
+    console.log('-----> 1. CREATETRACKS FUNCTION');
+    console.table(log);
     if (tracks[id] === undefined) return;
 
     for (let index = 0; index < tracks[id].length; index++) {
       const track = tracks[id][index];
       const trackType = track.getType();
+      console.log('-----> 2. CREATETRACKS FUNCTION');
+      console.table({
+        track,
+        trackType
+      });
 
       if (trackType === 'audio' && user?.audioMuted) {
         await tracks[id][index].mute();
@@ -156,6 +170,7 @@ const tracksRepository = () => {
         await tracks[id][index].mute();
       }
 
+      console.log('-----> 3. CREATETRACKS FUNCTION', track.getType(), track);
       _create(seat, track, user);
     }
 
@@ -232,6 +247,12 @@ const tracksRepository = () => {
 
     seat = seatsRepository.getSeat(id);
 
+    console.log('-------> VIDEOAUDIOTRACKADDED');
+    console.table({
+      id,
+      seat,
+      track: track.getId()
+    });
     _create(seat, track);
 
     console.log('[STOOA] Handle video or audio track added in seat', track, seat);
