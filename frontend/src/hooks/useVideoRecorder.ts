@@ -57,10 +57,12 @@ const useVideoRecorder = () => {
   let audioContext: AudioContext;
 
   const _supportsCaptureHandle = (): boolean => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return Boolean(navigator.mediaDevices.setCaptureHandleConfig);
   };
   const _checkIsCurrentTab = (tabMediaStream: MediaStream): boolean => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return tabMediaStream.getVideoTracks()[0].getCaptureHandle()?.handle !== 'Stooa';
   };
@@ -89,6 +91,7 @@ const useVideoRecorder = () => {
     recordingData.current = [];
 
     if (_supportsCaptureHandle) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigator.mediaDevices.setCaptureHandleConfig({
         handle: 'Stooa',
