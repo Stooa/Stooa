@@ -145,8 +145,7 @@ const Home = () => {
 
         <div className="billboard-text">
           <h1 data-testid="landing-title" className="animate-item title-lg">
-            {/* {t('title')} */}
-            Debates online fluidos y participativos
+            {t('title')}
           </h1>
           <Description className="body-lg animate-item">
             {/* {t('description')} */}
