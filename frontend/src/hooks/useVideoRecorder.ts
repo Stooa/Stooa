@@ -49,6 +49,7 @@ const getMimeType = (): string => {
 const useVideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
+  const [microStream, setMicroStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
@@ -130,6 +131,14 @@ const useVideoRecorder = () => {
       }
     });
 
+    const microStream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
+      }
+    });
+
+    audioContext.createMediaStreamSource(microStream).connect(audioDestination);
+
     const combinedStream = new MediaStream([
       ...(audioDestination?.stream.getAudioTracks() || []),
       tabMediaStream.getVideoTracks()[0]
@@ -137,6 +146,7 @@ const useVideoRecorder = () => {
 
     setStream(combinedStream);
     setTabMediaStream(tabMediaStream);
+    setMicroStream(microStream);
 
     if (combinedStream) {
       recorderRef.current = new MediaRecorder(combinedStream, {
@@ -169,6 +179,7 @@ const useVideoRecorder = () => {
 
       stopStreamTracks(stream);
       stopStreamTracks(tabMediaStream);
+      stopStreamTracks(microStream);
 
       setTimeout(() => _saveRecording(), 1000);
     }
