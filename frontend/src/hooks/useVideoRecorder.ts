@@ -137,7 +137,7 @@ const useVideoRecorder = () => {
       }
     });
 
-    audioContext.createMediaStreamSource(microStream).connect(audioDestination);
+    // audioContext.createMediaStreamSource(microStream).connect(audioDestination);
 
     const combinedStream = new MediaStream([
       ...(audioDestination?.stream.getAudioTracks() || []),
