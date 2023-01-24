@@ -22,7 +22,7 @@ const getFilename = () => {
   return `recording_${timestamp}`;
 };
 
-const stopStreamTrack = (stream: MediaStream | undefined): void => {
+const stopStreamTracks = (stream: MediaStream | undefined): void => {
   if (stream) {
     stream.getTracks().forEach(function (track) {
       track.stop();
@@ -49,7 +49,6 @@ const getMimeType = (): string => {
 const useVideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
-  const [microStream, setMicroStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
@@ -116,18 +115,10 @@ const useVideoRecorder = () => {
     document.title = currentTitle;
 
     if (_isBrowser(tabMediaStream) || _checkIsCurrentTab(tabMediaStream)) {
-      tabMediaStream.getTracks().forEach(function (track: MediaStreamTrack) {
-        track.stop();
-      });
+      stopStreamTracks(tabMediaStream);
       alert('Select Browser tab. Thank you');
       return false;
     }
-
-    const microStream = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
-      }
-    });
 
     audioContext = new AudioContext();
     audioDestination = audioContext.createMediaStreamDestination();
@@ -146,7 +137,6 @@ const useVideoRecorder = () => {
 
     setStream(combinedStream);
     setTabMediaStream(tabMediaStream);
-    setMicroStream(microStream);
 
     if (combinedStream) {
       recorderRef.current = new MediaRecorder(combinedStream, {
@@ -177,9 +167,8 @@ const useVideoRecorder = () => {
       recorderRef.current.stop();
       recorderRef.current = undefined;
 
-      stopStreamTrack(stream);
-      stopStreamTrack(tabMediaStream);
-      stopStreamTrack(microStream);
+      stopStreamTracks(stream);
+      stopStreamTracks(tabMediaStream);
 
       setTimeout(() => _saveRecording(), 1000);
     }
