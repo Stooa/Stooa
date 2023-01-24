@@ -27,7 +27,7 @@ const tracksRepository = () => {
   };
 
   const _getTrackHtml = track => {
-    return document.getElementById(track.getId());
+    return document.getElementById(track.getParticipantId() + track.getType());
   };
 
   const handleElementsMutedClass = (seat, track) => {
@@ -80,7 +80,7 @@ const tracksRepository = () => {
       trackHtml.autoplay = true;
     }
 
-    trackHtml.id = track.getId();
+    trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
 
