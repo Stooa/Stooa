@@ -148,12 +148,10 @@ const Home = () => {
             {t('title')}
           </h1>
           <Description className="body-lg animate-item">
-            {/* {t('description')} */}
-            Stooa es una plataforma online que permite{' '}
-            <strong>conversaciones fluidas y participativas</strong> para grandes grupos y con
-            facilitación automática basada en el método fishbowl.
-            <br /> Es un <strong>método de diálogo ideal</strong> para comunidades, entornos
-            educativos, o compañías que buscan mejorar la experiencia de sus empleados.
+            <Trans
+              i18nKey="home:description"
+              components={{ span: <span className="medium" />, br: <br /> }}
+            />
           </Description>
           <div className="cta-wrapper">
             <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
@@ -201,7 +199,7 @@ const Home = () => {
           />
         </div>
 
-        <FixedButton buttonText="Probar ahora" />
+        <FixedButton buttonText={t('hostFishbowlNow')} />
 
         <div id="animated-billboard-morph2"></div>
       </Billboard>

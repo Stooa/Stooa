@@ -1,20 +1,22 @@
 {
-    "title": "El fishbowl online",
-    "description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
+    "title": "Debats en línia fluids i participatius",
+    "description": "Stooa és una plataforma online que <span>permet converses fluides i participatives</span> per a grans grups i amb facilitació automàtica basada en el mètode fishbowl.<br />És un <span>mètode de diàleg ideal</span> per a comunitats, entorns educatius, o companyies que busquen millorar l'experiència dels seus empleats.",
     "scheduleFishbowl": "Agendar un fishbowl",
     "hostFishbowlNow": "Començar un fishbowl ara",
+    "tryNow": "Provar ara",
     "definition": {
         "title": "Què és un fishbowl?",
         "description": "<p>Un fishbowl és una <strong>dinàmica de grup</strong> que facilita converses, debats y qualsevol tipus d'activitat on la <strong>participació és essencial per al seu desenvolupament</strong>.</p><p>És un mètode de diàleg ideal per a comunitats, entorns educatius, o empreses que busquen millorar l'experiència dels treballadors.</p>"
     },
-    "howOnlineDebates": "Stooa is a <strong>group dynamic</strong> that facilitates a fluid conversation and allows <strong>the participation of all attendees.</strong>",
+    "howOnlineDebates": "Com aconseguim debats online que siguin fluids i participatius en grups grans?",
     "howStooa": {
-        "title" : "¿Cómo funciona Stooa?",
-        "subtitle" : "¡És muy sencillo!",
-        "firstBulletTitle": "5 sillas para debatir",
-        "firstBulletSub": "Para participar en el debate tendrás que ocupar una de las sillas.",
-        "secondBulletTitle": "1 Silla libre para potenciar la participación",
-        "secondBulletSub": "Siempre tiene que haber una silla libre."
+        "title" : "Com funciona Stooa?",
+        "subtitle" : "És molt sencill!",
+        "firstBulletTitle": "5 cadires per debatre",
+        "firstBulletSub": "Per participar en el debat hauràs d'ocupar una de les cadires",
+        "secondBulletTitle": "1 cadira lliure per potenciar la participació",
+        "secondBulletSub": "Sempre ha d'haver-hi una cadira lliure.",
+        "longExplanation": "Qualsevol assistent pot <span>ocupar una cadira lliure</span> en qualsevol moment <span>per a participar en el debat</span>.<br/>Si totes <span>les cadires estan ocupades</span> algú que ja hagi participat haurà de <span>deixar el seu seient lliure</span>."
     },
     "keybenefits": {
         "first": {

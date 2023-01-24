@@ -7,10 +7,13 @@
  * file that was distributed with this source code.
  */
 
+import Trans from 'next-translate/Trans';
+import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { StyledList } from './styles';
 
 const FishbowlExplanation = () => {
+  const { t } = useTranslation('home');
   return (
     <>
       <StyledList>
@@ -23,15 +26,11 @@ const FishbowlExplanation = () => {
               height={72}
             />
             <div>
-              <h4 className="title-md">5 sillas para debatir</h4>
-              <p className="body-lg hide-mobile">
-                Para participar en el debate tendrás que ocupar una de las sillas.
-              </p>
+              <h4 className="title-md">{t('howStooa.firstBulletTitle')}</h4>
+              <p className="body-lg hide-mobile">{t('howStooa.firstBulletSub')}</p>
             </div>
           </div>
-          <p className="body-lg hide-desktop">
-            Para participar en el debate tendrás que ocupar una de las sillas.
-          </p>
+          <p className="body-lg hide-desktop">{t('howStooa.firstBulletSub')}</p>
         </li>
         <li className="animate-item">
           <div className="with-icon">
@@ -42,18 +41,18 @@ const FishbowlExplanation = () => {
               height={70}
             />
             <div className="animate-item">
-              <h4 className="title-md">1 Silla libre para potenciar la participación</h4>
-              <p className="body-lg hide-mobile">Siempre tiene que haber una silla libre.</p>
+              <h4 className="title-md">{t('howStooa.secondBulletTitle')}</h4>
+              <p className="body-lg hide-mobile">{t('howStooa.secondBulletSub')}</p>
             </div>
           </div>
-          <p className="body-lg hide-desktop">Siempre tiene que haber una silla libre.</p>
+          <p className="body-lg hide-desktop">{t('howStooa.secondBulletSub')}</p>
         </li>
       </StyledList>
       <p className="body-lg animate-item">
-        Cualquier asistente puede <strong>ocupar una silla libre</strong> en cualquier momento{' '}
-        <strong>para participar en el debate</strong>. Si todas las{' '}
-        <strong>sillas están ocupadas</strong> alguien que ya haya participado deberá{' '}
-        <strong>dejar su asiento libre</strong>.
+        <Trans
+          i18nKey="home:howStooa.longExplanation"
+          components={{ span: <span className="medium" />, br: <br /> }}
+        />
       </p>
     </>
   );
