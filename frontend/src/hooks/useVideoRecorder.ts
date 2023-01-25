@@ -49,7 +49,6 @@ const getMimeType = (): string => {
 const useVideoRecorder = () => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
-  const [microStream, setMicroStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
@@ -59,7 +58,7 @@ const useVideoRecorder = () => {
   const _supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return Boolean(navigator.mediaDevices.setCaptureHandleConfig);
+    return navigator.mediaDevices.setCaptureHandleConfig;
   };
   const _checkIsCurrentTab = (tabMediaStream: MediaStream): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -83,8 +82,8 @@ const useVideoRecorder = () => {
 
   useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
     if (!track && track.mediaType !== 'audio') return;
-    const audioTrack = track.getTrack();
-    _addAudioTrackToLocalRecording(audioTrack);
+
+    _addAudioTrackToLocalRecording(track.getTrack());
   });
 
   const startRecording = async audioInputDevice => {
@@ -131,14 +130,6 @@ const useVideoRecorder = () => {
       }
     });
 
-    const microStream = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        deviceId: audioInputDevice ? audioInputDevice.deviceId : 'default'
-      }
-    });
-
-    // audioContext.createMediaStreamSource(microStream).connect(audioDestination);
-
     const combinedStream = new MediaStream([
       ...(audioDestination?.stream.getAudioTracks() || []),
       tabMediaStream.getVideoTracks()[0]
@@ -146,7 +137,6 @@ const useVideoRecorder = () => {
 
     setStream(combinedStream);
     setTabMediaStream(tabMediaStream);
-    setMicroStream(microStream);
 
     if (combinedStream) {
       recorderRef.current = new MediaRecorder(combinedStream, {
@@ -179,7 +169,6 @@ const useVideoRecorder = () => {
 
       stopStreamTracks(stream);
       stopStreamTracks(tabMediaStream);
-      stopStreamTracks(microStream);
 
       setTimeout(() => _saveRecording(), 1000);
     }
