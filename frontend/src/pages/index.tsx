@@ -231,8 +231,10 @@ const Home = () => {
         {/* HOW STOOA WORKS */}
         <Wrapper className="animate" colored>
           <div className="how-it-works-title animate-item">
-            <h2 className="title-lg animate-item definition">{t('howStooa.title')}</h2>
-            <h4 className="title-md animate-item definition how-subtitle">
+            <h2 className="title-lg animate-item definition">
+              {t('howStooa.title')} <span className="hide-desktop">{t('howStooa.subtitle')}</span>
+            </h2>
+            <h4 className="title-md animate-item definition how-subtitle hide-mobile">
               {t('howStooa.subtitle')}
             </h4>
           </div>

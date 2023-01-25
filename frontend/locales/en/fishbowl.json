@@ -49,7 +49,7 @@
     "speaker": "Speaker",
     "cam": "Camera",
     "prejoin": {
-        "startFishbowl": "Start fishbowl",
+        "startFishbowl": "Start discussion",
         "title": "Join the discussion",
         "joinDiscussion": "Join the discussion",
         "moderatorSubtitle": "If you want you can configure the audio and video before starting the fishbowl.",

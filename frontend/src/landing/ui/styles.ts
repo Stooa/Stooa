@@ -214,12 +214,18 @@ const Content = styled.div`
     padding-top: ${space(4)};
 
     & h2 {
-      margin-bottom: ${space(2)};
+      margin-bottom: 0;
     }
 
     & h4 {
       margin-bottom: 0;
     }
+
+    ${media.min('tablet')`
+      & h2 {
+        margin-bottom: ${space(2)};
+      }
+    `}
   }
 
   .how-it-works-explanation p + p {
@@ -235,11 +241,15 @@ const Content = styled.div`
     background-clip: padding-box;
     border-image-slice: 0 0 100;
 
-    ${media.min('desktop')`
+    ${media.min('tablet')`
       border-image-source: url('/img/web/svg/wave-desktop-bottom.svg');
       padding-bottom: ${space(20)};
-      margin-bottom: -${space(12)};
+      margin-bottom: -${space(18)};
       border-bottom: solid 140px;
+      `}
+
+    ${media.min('desktop')`
+      margin-bottom: -${space(12)};
     `}
   }
 
@@ -352,7 +362,7 @@ const Wrapper = styled.div<{ colored?: boolean; spacing?: 'small' | 'medium' | '
 
   ${media.min('tablet')`
     padding: ${({ spacing }) =>
-      spacing ? `${space(spacingSizes.desktop[spacing])} ${space(3)}` : `0 ${space(6)}`};
+      spacing ? `${space(spacingSizes.desktop[spacing])} ${space(6)}` : `0 ${space(6)}`};
   `}
 
   &.curve-top {
@@ -428,8 +438,9 @@ const StyledResponsiveRow = styled.div<{
     height: 300px;
     width: 100%;
 
-    ${media.min('desktopLarge')`
-      height: 400px;
+    ${media.min('desktop')`
+      min-height: 350px;
+      height: 24vw;
     `}
   }
 `;
@@ -454,6 +465,7 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>
 
   .title-lg.definition {
     text-align: left;
+
     ${media.min('tablet')`
       text-align: center;
     `}
