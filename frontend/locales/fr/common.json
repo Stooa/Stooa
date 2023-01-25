@@ -9,7 +9,7 @@
     "editProfile": "Modifier le profil",
     "privacyPolicy": "Politique de confidentialité",
     "copyright": "Stooa © %year%. Tous droits réservés",
-    "og-title": "L'outil de fishbowl en ligne",
+    "og-title": "Des discussions en ligne fluides et participatives",
     "languages": {
         "ca": "Catalan",
         "en": "Anglais",
@@ -19,7 +19,7 @@
     },
     "conductCode": "Code de conduite",
     "githubIssues": "Problèmes Github",
-    "og-description": "Stooa permet une conversation fluide et participative avec une facilitation automatique basée sur la méthode du fishbowl.",
+    "og-description": "Stooa est une plateforme en ligne qui permet des conversations fluides et participatives pour de grands groupes basée sur la méthode du fishbowl.",
     "documentation": "Documentation",
     "roadmap": "Feuille de route",
     "changePassword": "Changer le mot de passe",
