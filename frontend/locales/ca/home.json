@@ -1,8 +1,9 @@
 {
     "title": "Debats en línia fluids i participatius",
-    "description": "Stooa és una plataforma online que <span>permet converses fluides i participatives</span> per a grans grups i amb facilitació automàtica basada en el mètode fishbowl.<br />És un <span>mètode de diàleg ideal</span> per a comunitats, entorns educatius, o companyies que busquen millorar l'experiència dels seus empleats.",
-    "scheduleFishbowl": "Agendar un fishbowl",
-    "hostFishbowlNow": "Començar un fishbowl ara",
+    "description1": "Stooa és una plataforma online que <span>permet converses fluides i participatives</span> per a grans grups i amb facilitació automàtica basada en el mètode fishbowl.",
+    "description2": "És un <span>mètode de diàleg ideal</span> per a comunitats, entorns educatius, o companyies que busquen millorar l'experiència dels seus empleats.",
+    "scheduleFishbowl": "Agendar un debat",
+    "hostFishbowlNow": "Començar un debat ara",
     "tryNow": "Provar ara",
     "definition": {
         "title": "Què és un fishbowl?",
@@ -16,7 +17,8 @@
         "firstBulletSub": "Per participar en el debat hauràs d'ocupar una de les cadires",
         "secondBulletTitle": "1 cadira lliure per potenciar la participació",
         "secondBulletSub": "Sempre ha d'haver-hi una cadira lliure.",
-        "longExplanation": "Qualsevol assistent pot <span>ocupar una cadira lliure</span> en qualsevol moment <span>per a participar en el debat</span>.<br/>Si totes <span>les cadires estan ocupades</span> algú que ja hagi participat haurà de <span>deixar el seu seient lliure</span>."
+        "longExplanation1": "Qualsevol assistent pot <span>ocupar una cadira lliure</span> en qualsevol moment <span>per a participar en el debat</span>.",
+        "longExplanation2": "Si totes <span>les cadires estan ocupades</span> algú que ja hagi participat haurà de <span>deixar el seu seient lliure</span>."
     },
     "keybenefits": {
         "first": {

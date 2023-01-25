@@ -1,6 +1,7 @@
 {
     "title": "Debates online fluidos y participativos",
-    "description": "Stooa es una plataforma online que permite <span>conversaciones fluidas y participativas</span> para grandes grupos y con facilitación automática basada en el método fishbowl.<br/>Es un <span>método de diálogo ideal</span> para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.",
+    "description1": "Stooa es una plataforma online que permite <span>conversaciones fluidas y participativas</span> para grandes grupos y con facilitación automática basada en el método fishbowl.",
+    "description2": "Es un <span>método de diálogo ideal</span> para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.",
     "scheduleFishbowl": "Agendar un debate",
     "hostFishbowlNow": "Empezar un debate ahora",
     "tryNow": "Probar ahora",
@@ -16,7 +17,8 @@
         "firstBulletSub": "Para participar en el debate tendrás que ocupar una de las sillas.",
         "secondBulletTitle": "1 Silla libre para potenciar la participación",
         "secondBulletSub": "Siempre tiene que haber una silla libre.",
-        "longExplanation": "Cualquier asistente puede <span>ocupar una silla libre</span> en cualquier momento <span>para participar en el debate</span>.<br/>Si todas las <span>sillas están ocupadas</span> alguien que ya haya participado deberá <span>dejar su asiento libre</span>."
+        "longExplanation1": "Cualquier asistente puede <span>ocupar una silla libre</span> en cualquier momento <span>para participar en el debate</span>.",
+        "longExplanation2": "Si todas las <span>sillas están ocupadas</span> alguien que ya haya participado deberá <span>dejar su asiento libre</span>."
     },
     "keybenefits": {
         "first": {

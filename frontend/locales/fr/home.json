@@ -29,12 +29,14 @@
         "firstBulletSub": "Pour participer au débat, vous devrez occuper l'une des chaises.",
         "secondBulletTitle": "1 Chaise libre pour encourager la participation",
         "secondBulletSub": "Il doit toujours y avoir une chaise libre.",
-        "longExplanation": "Tout participant <span>peut occuper une chaise libre</span> à tout moment pour <span>participer à la discussion</span>.<br/>Si toutes <span>les chaises sont occupées</span>, une personne qui a déjà participé <span>doit libérer sa place</span>."
+        "longExplanation1": "Tout participant <span>peut occuper une chaise libre</span> à tout moment pour <span>participer à la discussion</span>.",
+        "longExplanation2": "Si toutes <span>les chaises sont occupées</span>, une personne qui a déjà participé <span>doit libérer sa place</span>."
     },
-    "description": "Stooa est une plateforme en ligne qui permet des <span>conversations fluides et participatives</span> pour de grands groupes et avec une animation automatique basée sur la méthode fishbowl.<br/>C'est une <span>méthode de dialogue idéale</span> pour les collectivités, les milieux éducatifs ou les entreprises qui cherchent à améliorer l'expérience de leurs employés.",
+    "description1": "Stooa est une plateforme en ligne qui permet des <span>conversations fluides et participatives</span> pour de grands groupes et avec une animation automatique basée sur la méthode fishbowl",
+    "description2": "C'est une <span>méthode de dialogue idéale</span> pour les collectivités, les milieux éducatifs ou les entreprises qui cherchent à améliorer l'expérience de leurs employés.",
     "banner": "Créez votre activité gratuite en forme de fishbowl et invitez les participants. Que la conversation commence !",
     "title": "Des discussions en ligne fluides et participatives",
-    "scheduleFishbowl": "Planifier un débat",
-    "hostFishbowlNow": "Commencez un débat maintenant",
+    "scheduleFishbowl": "Planifier un discussions",
+    "hostFishbowlNow": "Commencez un discussions maintenant",
     "tryNow": "Essayez maintenant"
 }

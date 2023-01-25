@@ -1,8 +1,9 @@
 {
     "title": "Fluid and participative online discussions",
-    "description": "Stooa is an online platform that allows <span>fluid and participatory conversations</span> for large groups and with automatic facilitation based on the fishbowl method.<br/> It is an <span>ideal dialogue method</span> for communities, educational environments, or companies that seek to improve the experience of their employees.",
-    "scheduleFishbowl": "Schedule a debate",
-    "hostFishbowlNow": "Host a debate now",
+    "description1": "Stooa is an online platform that allows <span>fluid and participatory conversations</span> for large groups and with automatic facilitation based on the fishbowl method.",
+    "description2": "It is an <span>ideal dialogue method</span> for communities, educational environments, or companies that seek to improve the experience of their employees.",
+    "scheduleFishbowl": "Schedule a discussion",
+    "hostFishbowlNow": "Host a discussion now",
     "tryNow": "Try now",
     "definition": {
         "title": "What is a fishbowl?",
@@ -10,13 +11,14 @@
     },
     "howOnlineDebates": "How do we achieve smooth and participative online discussions with large groups?",
     "howStooa": {
-        "title" : "¿Cómo funciona Stooa?",
-        "subtitle" : "¡És muy sencillo!",
-        "firstBulletTitle": "5 sillas para debatir",
-        "firstBulletSub": "Para participar en el debate tendrás que ocupar una de las sillas.",
-        "secondBulletTitle": "1 Silla libre para potenciar la participación",
-        "secondBulletSub": "Siempre tiene que haber una silla libre.",
-        "longExplanationEn": "Any attendee can <span>occupy a free chair</span> at any time <span>to participate in the debate</span>.<br/>If all <span>chairs are occupied</span> someone who has already participated must <span>leave their seat</span>."
+        "title" : "How does Stooa work?",
+        "subtitle" : "It's very simple!",
+        "firstBulletTitle": "5 seats for discussion",
+        "firstBulletSub": "To participate in the debate you will have to occupy one of the available seats.",
+        "secondBulletTitle": "1 Free seat to encourage participation",
+        "secondBulletSub": "There must always be a free seat.",
+        "longExplanation1": "Any attendee can <span>occupy a free chair</span> at any time <span>to participate in the debate</span>.",
+        "longExplanation2": "If all <span>chairs are occupied</span> someone who has already participated must <span>leave their seat</span>."
     },
     "keybenefits": {
         "first": {

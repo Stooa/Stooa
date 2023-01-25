@@ -22,7 +22,7 @@ const spacingSizes = {
   mobile: {
     small: 2,
     medium: 4,
-    large: 6
+    large: 4
   },
   desktop: {
     small: 4,
@@ -43,12 +43,20 @@ const Billboard = styled.div`
   z-index: 3;
 
   h1 {
-    margin-bottom: ${space(2)};
+    margin-bottom: ${space(4)};
   }
 
   .billboard-text {
     width: 100%;
     padding: 0 ${space(4)};
+
+    & p + p {
+      margin-top: ${space(2)};
+    }
+
+    & :nth-child(3) {
+      margin-bottom: ${space(4)};
+    }
   }
 
   .fishbowl-preview {
@@ -199,14 +207,23 @@ const Content = styled.div`
   width: 100%;
   z-index: 2;
 
-  .how-it-works {
+  .how-it-works-title {
     text-align: left;
     max-width: ${BREAKPOINTS.desktopLarge}px;
     margin: 0 auto;
     padding-top: ${space(4)};
+
+    & h2 {
+      margin-bottom: ${space(2)};
+    }
+
     & h4 {
       margin-bottom: 0;
     }
+  }
+
+  .how-it-works-explanation p + p {
+    margin-top: ${space(2)};
   }
 
   .last-row {

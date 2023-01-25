@@ -42,6 +42,7 @@ import YoutubeEmbed from '@/landing/Components/YoutubeEmbed';
 import ResponsiveRow from '@/landing/HomeSections/ResponsiveRow';
 import FishbowlExplanation from '@/landing/Components/FishbowlExplanation';
 import FixedButton from '@/landing/Components/FixedButton';
+import { useAuth } from '@/contexts/AuthContext';
 
 const BenefitWithLottie = dynamic(import('@/landing/HomeSections/BenefitWithLottie'), {
   loading: () => <div />
@@ -51,6 +52,7 @@ const Banner = dynamic(import('@/landing/HomeSections/Banner'), { loading: () =>
 const Home = () => {
   const { t } = useTranslation('home');
   const previewRef = useRef(null);
+  const { isAuthenticated } = useAuth();
 
   const lazyMovinAnimations: Lottie[] = [
     {
@@ -147,12 +149,12 @@ const Home = () => {
           <h1 data-testid="landing-title" className="animate-item title-lg">
             {t('title')}
           </h1>
-          <Description className="body-lg animate-item">
-            <Trans
-              i18nKey="home:description"
-              components={{ span: <span className="medium" />, br: <br /> }}
-            />
-          </Description>
+          <p className="body-lg animate-item">
+            <Trans i18nKey="home:description1" components={{ span: <span className="medium" /> }} />
+          </p>
+          <p className="body-lg animate-item">
+            <Trans i18nKey="home:description2" components={{ span: <span className="medium" /> }} />
+          </p>
           <div className="cta-wrapper">
             <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
               <Button
@@ -167,7 +169,7 @@ const Home = () => {
                   });
                 }}
               >
-                <span>{t('hostFishbowlNow')}</span>
+                <span>{isAuthenticated ? t('hostFishbowlNow') : t('tryNow')}</span>
               </Button>
             </RedirectLink>
             <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
@@ -199,7 +201,7 @@ const Home = () => {
           />
         </div>
 
-        <FixedButton buttonText={t('hostFishbowlNow')} />
+        <FixedButton buttonText={isAuthenticated ? t('hostFishbowlNow') : t('tryNow')} />
 
         <div id="animated-billboard-morph2"></div>
       </Billboard>
@@ -211,7 +213,7 @@ const Home = () => {
         {/* HOW ONLINE DEBATES */}
         <ResponsiveRow spacing="large" className="animate curve-top" reverse colored>
           <>
-            <h2 className="title-md animate-item definition">{t('howOnlineDebates')}</h2>
+            <h3 className="title-md animate-item definition">{t('howOnlineDebates')}</h3>
           </>
 
           <div className="youtube-wrapper">
@@ -226,9 +228,9 @@ const Home = () => {
           </div>
         </ResponsiveRow>
 
-        {/* HOW */}
+        {/* HOW STOOA WORKS */}
         <Wrapper className="animate" colored>
-          <div className="how-it-works animate-item">
+          <div className="how-it-works-title animate-item">
             <h2 className="title-lg animate-item definition">{t('howStooa.title')}</h2>
             <h4 className="title-md animate-item definition how-subtitle">
               {t('howStooa.subtitle')}
@@ -238,7 +240,7 @@ const Home = () => {
         <ResponsiveRow
           align="end"
           spacing="medium"
-          className="animate last-row"
+          className="animate last-row how-it-works-explanation"
           colored
           secondItemClassName="hide-mobile"
         >

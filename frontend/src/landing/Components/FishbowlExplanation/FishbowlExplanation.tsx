@@ -50,8 +50,14 @@ const FishbowlExplanation = () => {
       </StyledList>
       <p className="body-lg animate-item">
         <Trans
-          i18nKey="home:howStooa.longExplanation"
-          components={{ span: <span className="medium" />, br: <br /> }}
+          i18nKey="home:howStooa.longExplanation1"
+          components={{ span: <span className="medium" /> }}
+        />
+      </p>
+      <p className="body-lg animate-item">
+        <Trans
+          i18nKey="home:howStooa.longExplanation2"
+          components={{ span: <span className="medium" /> }}
         />
       </p>
     </>
