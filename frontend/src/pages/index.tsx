@@ -224,7 +224,7 @@ const Home = () => {
               width={457}
               height={408}
             />
-            <YoutubeEmbed src="https://www.youtube.com/embed/mj2-daCUxGo" />
+            <YoutubeEmbed src="https://www.youtube.com/embed/mj2-daCUxGo?rel=0" />
           </div>
         </ResponsiveRow>
 
