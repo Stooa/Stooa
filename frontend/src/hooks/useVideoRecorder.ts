@@ -52,8 +52,8 @@ const useVideoRecorder = () => {
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
-  let audioDestination: MediaStreamAudioDestinationNode;
-  let audioContext: AudioContext;
+  const [audioContext, setAudioContext] = useState<AudioContext>(new AudioContext());
+  const [audioDestination, setAudioDestination] = useState<MediaStreamAudioDestinationNode>(audioContext.createMediaStreamDestination());
 
   const _supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -120,8 +120,9 @@ const useVideoRecorder = () => {
       return false;
     }
 
-    audioContext = new AudioContext();
-    audioDestination = audioContext.createMediaStreamDestination();
+    const context = new AudioContext()
+    setAudioContext(context);
+    setAudioDestination(context.createMediaStreamDestination())
 
     trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
       const audioTrack = track.getTrack();
