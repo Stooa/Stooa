@@ -5,12 +5,12 @@ Feature: Home
   Scenario: Non logged users can see the Home page
     Given a non logged user
     When navigates to "/"
-    Then sees "The online fishbowl tool"
+    Then sees "Fluid and participative online discussions"
 
   Scenario: Non logged users will be redirect to register when trying to create a fishbowl
     Given a non logged user
     When navigates to "/"
-    And clicks on "Schedule a fishbowl" link
+    And clicks on "Schedule a discussion" link
     Then gets redirect to "/register"
     And sees the register form
 
@@ -22,7 +22,7 @@ Feature: Home
   Scenario: Logged users will be able to go to create a fishbowl
     Given a logged user
     When navigates to "/"
-    And clicks on "Schedule a fishbowl" link
+    And clicks on "Schedule a discussion" link
     Then gets redirect to "/fishbowl/create"
     And sees the create fishbowl form
 
