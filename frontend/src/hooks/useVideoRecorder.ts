@@ -129,7 +129,6 @@ const useVideoRecorder = () => {
       const audioTrack = track.getTrack();
       if (audioTrack.kind === 'audio') {
         _addAudioTrackToLocalRecording(audioTrack);
-        console.log('QUIERO VERLO ENCARA MESSI', audioTrack);
       }
     });
 
