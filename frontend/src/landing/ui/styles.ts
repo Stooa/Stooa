@@ -453,6 +453,7 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>
   }
 
   .title-lg.definition {
+    text-align: left;
     ${media.min('tablet')`
       text-align: center;
     `}
