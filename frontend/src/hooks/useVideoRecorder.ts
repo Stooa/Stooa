@@ -13,6 +13,7 @@ import trackRepository from '@/jitsi/Tracks';
 import useEventListener from '@/hooks/useEventListener';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
+import localTracks from "@/jitsi/LocalTracks";
 
 const GIGABYTE = 1073741824;
 
@@ -51,9 +52,9 @@ const useVideoRecorder = () => {
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
-  const [totalSize, setTotalSize] = useState<number>(GIGABYTE);
-  const [audioContext, setAudioContext] = useState<AudioContext>(new AudioContext());
-  const [audioDestination, setAudioDestination] = useState<MediaStreamAudioDestinationNode>(audioContext.createMediaStreamDestination());
+  const totalSize = useRef<number>(GIGABYTE);
+  const audioContext = useRef<AudioContext>(new AudioContext());
+  const audioDestination = useRef<MediaStreamAudioDestinationNode>(audioContext.current.createMediaStreamDestination());
 
   const _supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -75,8 +76,8 @@ const useVideoRecorder = () => {
   const _addAudioTrackToLocalRecording = (track: MediaStreamTrack): void => {
     const stream = new MediaStream([track]);
 
-    if (stream.getAudioTracks().length > 0 && audioDestination) {
-      audioContext?.createMediaStreamSource(stream).connect(audioDestination);
+    if (stream.getAudioTracks().length > 0 && audioDestination.current) {
+      audioContext.current.createMediaStreamSource(stream).connect(audioDestination.current);
     }
   };
 
@@ -88,6 +89,7 @@ const useVideoRecorder = () => {
 
   const startRecording = async audioInputDevice => {
     recordingData.current = [];
+    totalSize.current = GIGABYTE;
 
     if (_supportsCaptureHandle()) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -120,19 +122,19 @@ const useVideoRecorder = () => {
       return false;
     }
 
-    const context = new AudioContext()
-    setAudioContext(context);
-    setAudioDestination(context.createMediaStreamDestination())
+    audioContext.current = new AudioContext();
+    audioDestination.current = audioContext.current.createMediaStreamDestination();
 
     trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
       const audioTrack = track.getTrack();
       if (audioTrack.kind === 'audio') {
         _addAudioTrackToLocalRecording(audioTrack);
+        console.log('QUIERO VERLO ENCARA MESSI', audioTrack);
       }
     });
 
     const combinedStream = new MediaStream([
-      ...(audioDestination?.stream.getAudioTracks() || []),
+      ...(audioDestination.current.stream.getAudioTracks() || []),
       tabMediaStream.getVideoTracks()[0]
     ]);
 
@@ -148,8 +150,8 @@ const useVideoRecorder = () => {
       recorderRef.current.addEventListener('dataavailable', e => {
         if (e.data && e.data.size > 0) {
           recordingData.current.push(e.data);
-          setTotalSize(totalSize - e.data.size);
-          if (totalSize <= 0) {
+          totalSize.current -= e.data.size;
+          if (totalSize.current <= 0) {
             stopRecording();
           }
         }
@@ -180,7 +182,6 @@ const useVideoRecorder = () => {
     const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
-
     const extension = mediaType.slice(mediaType.indexOf('/') + 1, mediaType.indexOf(';'));
 
     a.style.display = 'none';
