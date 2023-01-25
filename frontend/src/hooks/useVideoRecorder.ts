@@ -14,7 +14,7 @@ import useEventListener from '@/hooks/useEventListener';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import localTracksRepository from '@/jitsi/LocalTracks';
-import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
+import { MediaType } from '@/types/jitsi/media';
 
 const GIGABYTE = 1073741824;
 
@@ -85,7 +85,7 @@ const useVideoRecorder = () => {
   };
 
   useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
-    if (!track && track.mediaType !== 'audio') return;
+    if (!track && track.mediaType !== MediaType.AUDIO) return;
 
     _addAudioTrackToLocalRecording(track);
   });
@@ -132,7 +132,7 @@ const useVideoRecorder = () => {
 
     if (audioTracks.length > 0) {
       trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
-        if (track.getType() === MediaType.AUDIO) {
+        if (track.getType() === 'audio') {
           _addAudioTrackToLocalRecording(track);
         }
       });

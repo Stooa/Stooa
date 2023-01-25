@@ -12,7 +12,8 @@ import conferenceRepository from '@/jitsi/Conference';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
-import { VideoType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/VideoType';
+import { MediaType } from '@/types/jitsi/media';
+
 const tracksRepository = () => {
   let tracks = [];
 
@@ -192,7 +193,7 @@ const tracksRepository = () => {
   };
 
   const _videoTypeChanged = (videoType, track) => {
-    if (track.getVideoType() === VideoType.DESKTOP) {
+    if (track.getVideoType() === MediaType.DESKTOP) {
       _videoAudioTrackRemoved(track);
       sharedTrackRepository.shareTrackAdded(track);
     }
@@ -213,7 +214,7 @@ const tracksRepository = () => {
       _videoTypeChanged(videoType, track)
     );
 
-    if (track.getVideoType() === VideoType.DESKTOP) {
+    if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.shareTrackAdded(track);
     } else {
       _videoAudioTrackAdded(track);
@@ -241,7 +242,7 @@ const tracksRepository = () => {
   const handleTrackRemoved = track => {
     console.log('[STOOA] Handle track removed', track);
 
-    if (track.getVideoType() === VideoType.DESKTOP) {
+    if (track.getVideoType() === MediaType.DESKTOP) {
       sharedTrackRepository.removeShareTrack(track);
     } else {
       _videoAudioTrackRemoved(track);
