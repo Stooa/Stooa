@@ -13,7 +13,8 @@ import trackRepository from '@/jitsi/Tracks';
 import useEventListener from '@/hooks/useEventListener';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
-import localTracks from "@/jitsi/LocalTracks";
+import localTracksRepository from '@/jitsi/LocalTracks';
+import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
 
 const GIGABYTE = 1073741824;
 
@@ -54,7 +55,9 @@ const useVideoRecorder = () => {
   const recordingData = useRef<BlobPart[]>([]);
   const totalSize = useRef<number>(GIGABYTE);
   const audioContext = useRef<AudioContext>(new AudioContext());
-  const audioDestination = useRef<MediaStreamAudioDestinationNode>(audioContext.current.createMediaStreamDestination());
+  const audioDestination = useRef<MediaStreamAudioDestinationNode>(
+    audioContext.current.createMediaStreamDestination()
+  );
 
   const _supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -73,8 +76,8 @@ const useVideoRecorder = () => {
     return tabMediaStream.getVideoTracks()[0].getSettings().displaySurface !== 'browser';
   };
 
-  const _addAudioTrackToLocalRecording = (track: MediaStreamTrack): void => {
-    const stream = new MediaStream([track]);
+  const _addAudioTrackToLocalRecording = (track: JitsiTrack): void => {
+    const stream = new MediaStream([track.getTrack()]);
 
     if (stream.getAudioTracks().length > 0 && audioDestination.current) {
       audioContext.current.createMediaStreamSource(stream).connect(audioDestination.current);
@@ -84,10 +87,10 @@ const useVideoRecorder = () => {
   useEventListener(TRACK_ADDED, ({ detail: { track } }) => {
     if (!track && track.mediaType !== 'audio') return;
 
-    _addAudioTrackToLocalRecording(track.getTrack());
+    _addAudioTrackToLocalRecording(track);
   });
 
-  const startRecording = async audioInputDevice => {
+  const startRecording = async () => {
     recordingData.current = [];
     totalSize.current = GIGABYTE;
 
@@ -125,12 +128,19 @@ const useVideoRecorder = () => {
     audioContext.current = new AudioContext();
     audioDestination.current = audioContext.current.createMediaStreamDestination();
 
-    trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
-      const audioTrack = track.getTrack();
-      if (audioTrack.kind === 'audio') {
-        _addAudioTrackToLocalRecording(audioTrack);
-      }
-    });
+    const audioTracks = trackRepository.getAudioTracks();
+
+    if (audioTracks.length > 0) {
+      trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
+        if (track.getType() === MediaType.AUDIO) {
+          _addAudioTrackToLocalRecording(track);
+        }
+      });
+    } else {
+      const audioLocalTrack = await localTracksRepository.createLocalTrack(MediaType.AUDIO);
+      await audioLocalTrack[0].mute();
+      _addAudioTrackToLocalRecording(audioLocalTrack[0]);
+    }
 
     const combinedStream = new MediaStream([
       ...(audioDestination.current.stream.getAudioTracks() || []),

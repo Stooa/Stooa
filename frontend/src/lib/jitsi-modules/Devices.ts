@@ -10,7 +10,8 @@
 import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
-import { MediaType } from '@/types/jitsi/media';
+import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
+import { VideoType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/VideoType';
 
 const devicesRepository = (): DevicesRepository => {
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
@@ -71,7 +72,7 @@ const devicesRepository = (): DevicesRepository => {
   };
 
   const screenShare = async (): Promise<boolean> => {
-    const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
+    const newTracks = await localTracksRepository.createLocalTrack(VideoType.DESKTOP);
 
     if (!newTracks) {
       await Promise.reject('User canceled desktop track creation');

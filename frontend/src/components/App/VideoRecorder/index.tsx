@@ -8,16 +8,14 @@
  */
 
 import React from 'react';
-import { useDevices } from '@/contexts/DevicesContext';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
 
 export const VideoRecorder = () => {
-  const { audioInputDevice } = useDevices();
   const { startRecording, stopRecording } = useVideoRecorder();
 
   return (
     <div>
-      <button onClick={() => startRecording(audioInputDevice)}>Start</button>
+      <button onClick={() => startRecording()}>Start</button>
       <button onClick={() => stopRecording()}>Stop</button>
     </div>
   );

@@ -12,9 +12,10 @@ import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
-import { MediaType } from '@/types/jitsi/media';
+import { MediaType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/MediaType';
 import { dispatchEvent } from '@/lib/helpers';
 import { SCREEN_SHARE_CANCELED, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';
+import { VideoType } from 'lib-jitsi-meet/types/hand-crafted/service/RTC/VideoType';
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {
@@ -67,7 +68,7 @@ const localTracksRepository = () => {
   };
 
   const createLocalTrack = async (
-    kind: MediaType,
+    kind: MediaType.AUDIO | MediaType.VIDEO | VideoType.DESKTOP,
     deviceId?: string
   ): Promise<JitsiLocalTrack[]> => {
     const options = {
@@ -89,7 +90,7 @@ const localTracksRepository = () => {
       .catch(error => {
         console.log('[STOOA] Error creating local track', kind, error.message);
 
-        if (kind === MediaType.DESKTOP) {
+        if (kind === VideoType.DESKTOP) {
           if (error.name === 'gum.permission_denied') {
             dispatchEvent(SCREEN_SHARE_PERMISSIONS_DENIED);
             return;
