@@ -1,12 +1,12 @@
 {
-    "title": "Fluid and participative online discussions",
-    "description1": "Stooa is an online platform that allows <span>fluid and participatory conversations</span> for large groups and with automatic facilitation based on the fishbowl method.",
+    "title": "Fluid and participative online dialogues",
+    "description1": "Stooa is an online platform that allows fluid and participatory conversations for large groups and with automatic facilitation <span>based on the fishbowl method.</span>",
     "description2": "It is an <span>ideal dialogue method</span> for communities, educational environments, or companies that seek to improve the experience of their employees.",
-    "scheduleFishbowl": "Schedule a discussion",
-    "hostFishbowlNow": "Host a discussion now",
+    "scheduleFishbowl": "Schedule a fishbowl",
+    "hostFishbowlNow": "Host a fishbowl now",
     "tryNow": "Try now",
     "definition": {
-        "title": "What is a fishbowl?",
+        "title": "What is the fishbowl method?",
         "description": "<p>A fishbowl is a <strong>group dynamic</strong> that facilitates conversations, debates and any type of activity in which <strong>participation is essential for its development</strong>.</p><p>It is an ideal dialogue method for communities, educational environements, or companies looking to improve their employee experience.</p>"
     },
     "howOnlineDebates": "How do we achieve smooth and participative online discussions with large groups?",

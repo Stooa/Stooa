@@ -149,6 +149,15 @@ const Home = () => {
           <h1 data-testid="landing-title" className="animate-item title-lg">
             {t('title')}
           </h1>
+          <div ref={previewRef} className="fishbowl-preview animate-item hide-desktop mobile">
+            <Image
+              src="/img/web/stooa-preview.png"
+              priority
+              alt="Stooa fishbowl event "
+              width={1347}
+              height={848}
+            />
+          </div>
           <p className="body-lg animate-item">
             <Trans i18nKey="home:description1" components={{ span: <span className="medium" /> }} />
           </p>
@@ -191,7 +200,7 @@ const Home = () => {
             </RedirectLink>
           </div>
         </div>
-        <div ref={previewRef} className="fishbowl-preview animate-item">
+        <div ref={previewRef} className="fishbowl-preview animate-item hide-mobile">
           <Image
             src="/img/web/stooa-preview.png"
             priority

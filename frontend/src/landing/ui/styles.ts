@@ -54,7 +54,7 @@ const Billboard = styled.div`
       margin-top: ${space(2)};
     }
 
-    & :nth-child(3) {
+    & :nth-child(4) {
       margin-bottom: ${space(4)};
     }
   }
@@ -63,10 +63,13 @@ const Billboard = styled.div`
     position: relative;
     width: 100%;
     justify-self: center;
-    padding: 0 ${space(4)};
 
     align-self: center;
     filter: drop-shadow(0px 5px 14px rgba(0, 0, 0, 0.1));
+
+    &.mobile {
+      margin-bottom: ${space(4)};
+    }
 
     & img {
       width: 100%;
@@ -189,9 +192,11 @@ const Billboard = styled.div`
 
   #animated-billboard-morph2 {
     right: 0;
-    bottom: -16%;
+    top: 40%;
+    bottom: initial;
 
     ${media.min('tablet')`
+      top: initial;
       bottom: -20%;
     `}
 
@@ -394,7 +399,7 @@ const StyledResponsiveRow = styled.div<{
 }>`
   display: grid;
   align-items: ${({ align }) => align};
-  gap: ${space(8)} ${space(10)};
+  gap: ${space(6)} ${space(10)};
 
   max-width: ${BREAKPOINTS.desktopLarge}px;
   margin: 0 auto;
@@ -436,7 +441,7 @@ const StyledResponsiveRow = styled.div<{
 
   .larger-image-wrapper {
     position: relative;
-    margin-top: ${space(4)};
+    margin-top: ${space(6)};
     height: 300px;
     width: 100%;
 

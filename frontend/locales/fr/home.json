@@ -19,7 +19,7 @@
     },
     "definition": {
         "title": "Qu'est-ce que la méthode du fishbowl ?",
-        "description": "<p></p><p>Un fishbowl est une <strong>dynamique de groupe</strong> qui facilite les conversations, les débats et tout type d'activité dans laquelle la <strong>participation est essentielle pour son développement</strong>.</p><p>C'est une méthode de dialogue idéale pour les communautés, les environnements éducatifs ou les entreprises qui cherchent à améliorer l'expérience de leurs employés.</p><p></p>"
+        "description": "<p>Un fishbowl est une <strong>dynamique de groupe</strong> qui facilite les conversations, les débats et tout type d'activité dans laquelle la <strong>participation est essentielle pour son développement</strong>.</p><p>C'est une méthode de dialogue idéale pour les communautés, les environnements éducatifs ou les entreprises qui cherchent à améliorer l'expérience de leurs employés.</p>"
     },
     "howOnlineDebates": "Comment réaliser des discussions en ligne fluides et participatives avec de grands groupes ?",
     "howStooa": {
@@ -32,11 +32,11 @@
         "longExplanation1": "Tout participant <span>peut occuper une chaise libre</span> à tout moment pour <span>participer à la discussion</span>.",
         "longExplanation2": "Si toutes <span>les chaises sont occupées</span>, une personne qui a déjà participé <span>doit libérer sa place</span>."
     },
-    "description1": "Stooa est une plateforme en ligne qui permet des <span>conversations fluides et participatives</span> pour de grands groupes et avec une animation automatique basée sur la méthode fishbowl",
+    "description1": "Stooa est une plateforme en ligne qui permet des conversations fluides et participatives pour de grands groupes et avec une animation automatique <span>basée sur la méthode fishbowl</span>",
     "description2": "C'est une <span>méthode de dialogue idéale</span> pour les collectivités, les milieux éducatifs ou les entreprises qui cherchent à améliorer l'expérience de leurs employés.",
     "banner": "Créez votre activité gratuite en forme de fishbowl et invitez les participants. Que la conversation commence !",
-    "title": "Des discussions en ligne fluides et participatives",
-    "scheduleFishbowl": "Planifier un discussions",
-    "hostFishbowlNow": "Commencez un discussions maintenant",
+    "title": "Des dialogues en ligne fluides et participatives",
+    "scheduleFishbowl": "Planifier un Fishbowl",
+    "hostFishbowlNow": "Commencez un Fishbowl maintenant",
     "tryNow": "Essayez maintenant"
 }

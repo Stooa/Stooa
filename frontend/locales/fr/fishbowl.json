@@ -6,8 +6,8 @@
     "cam": "Caméra",
     "timeLeft_one": "Il reste {{time}}",
     "prejoin": {
-        "startFishbowl": "Démarrer le débat",
-        "joinDiscussion": "Participez au débat",
+        "startFishbowl": "Démarrer le dialogue",
+        "joinDiscussion": "Participez au dialogue",
         "title": "Rejoindre la salle",
         "moderatorSubtitle": "Si vous le souhaitez, vous pouvez configurer l'audio et la vidéo avant de commencer le fishbowl.",
         "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",

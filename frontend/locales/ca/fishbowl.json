@@ -49,9 +49,9 @@
     "speaker": "Altaveu",
     "cam": "Càmera",
     "prejoin": {
-        "startFishbowl": "Iniciar debat",
-        "joinDiscussion":  "Uneix-te al debat",
-        "title": "Uneix-te al debat",
+        "startFishbowl": "Iniciar diàleg",
+        "joinDiscussion":  "Uneix-te al diàleg",
+        "title": "Uneix-te al diàleg",
         "moderatorSubtitle": "Si vols pots configurar l'àudio i el vídeo abans d'iniciar el fishbowl.",
         "subtitle": "Entraràs a la sala com a públic.<br/>Una vegada dins, si vols participar activament en la conversa hauràs d'ocupar una cadira del fishbowl.",
         "permissions": "Si a més d'assistir a l'esdeveniment com a públic <span>vols parlar en el fishbowl</span>, Stooa necessita permisos per a accedir a la teva càmera i micròfon perquè tothom pugui escoltar-te i veure't."

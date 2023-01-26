@@ -68,6 +68,10 @@ const NavList = styled.ul`
 `;
 
 const FooterNav = styled.section`
+  & .logo {
+    margin-bottom: ${space(2)};
+  }
+
   ${media.min('tablet')`
     align-items: flex-start;
     display: flex;

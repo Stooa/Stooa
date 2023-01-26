@@ -1,12 +1,12 @@
 {
-    "title": "Debats en línia fluids i participatius",
-    "description1": "Stooa és una plataforma online que <span>permet converses fluides i participatives</span> per a grans grups i amb facilitació automàtica basada en el mètode fishbowl.",
+    "title": "Diàlegs en línia fluids i participatius",
+    "description1": "Stooa és una plataforma online que permet converses fluides i participatives per a grans grups i amb facilitació automàtica <span>basada en el mètode fishbowl.</span>",
     "description2": "És un <span>mètode de diàleg ideal</span> per a comunitats, entorns educatius, o companyies que busquen millorar l'experiència dels seus empleats.",
-    "scheduleFishbowl": "Agendar un debat",
-    "hostFishbowlNow": "Començar un debat ara",
+    "scheduleFishbowl": "Agendar un fishbowl",
+    "hostFishbowlNow": "Començar un fishbowl ara",
     "tryNow": "Provar ara",
     "definition": {
-        "title": "Què és un fishbowl?",
+        "title": "Què és el mètode fishbowl?",
         "description": "<p>Un fishbowl és una <strong>dinàmica de grup</strong> que facilita converses, debats y qualsevol tipus d'activitat on la <strong>participació és essencial per al seu desenvolupament</strong>.</p><p>És un mètode de diàleg ideal per a comunitats, entorns educatius, o empreses que busquen millorar l'experiència dels treballadors.</p>"
     },
     "howOnlineDebates": "Com aconseguim debats online que siguin fluids i participatius en grups grans?",
