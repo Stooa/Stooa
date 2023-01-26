@@ -130,6 +130,8 @@ const useVideoRecorder = () => {
 
     const audioTracks = trackRepository.getAudioTracks();
 
+    console.log('ESTO SON LOS AUDIOTRACKS', audioTracks);
+
     if (audioTracks.length > 0) {
       trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
         if (track.getType() === 'audio') {

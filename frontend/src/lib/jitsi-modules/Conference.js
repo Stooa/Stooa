@@ -422,6 +422,19 @@ const conferenceRepository = () => {
     return [];
   };
 
+  const getParticipantsIds = () => {
+    const participantsIds = [];
+    const participants = conference.getParticipants();
+
+    participants.forEach(participant => {
+      participantsIds.push(participant.getId());
+    });
+
+    participantsIds.push(getMyUserId());
+
+    return participantsIds;
+  };
+
   const getLocalParticipant = () => {
     if (!isJoined) {
       return null;
@@ -485,7 +498,8 @@ const conferenceRepository = () => {
     sendTextMessage,
     startScreenShareEvent,
     stopScreenShareEvent,
-    getLocalTracks
+    getLocalTracks,
+    getParticipantsIds
   };
 };
 

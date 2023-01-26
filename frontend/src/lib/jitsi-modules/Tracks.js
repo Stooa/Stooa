@@ -336,7 +336,7 @@ const tracksRepository = () => {
 
   const getAudioTracks = () => {
     const audioTracks = [];
-    const ids = seatsRepository.getIds();
+    const ids = conferenceRepository.getParticipantsIds();
 
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
