@@ -189,10 +189,10 @@ const Billboard = styled.div`
 
   #animated-billboard-morph2 {
     right: 0;
-    bottom: -20%;
+    bottom: -16%;
 
     ${media.min('tablet')`
-      bottom: -30%;
+      bottom: -20%;
     `}
 
     ${media.min('desktop')`
@@ -243,13 +243,14 @@ const Content = styled.div`
 
     ${media.min('tablet')`
       border-image-source: url('/img/web/svg/wave-desktop-bottom.svg');
-      padding-bottom: ${space(20)};
+      padding-bottom: ${space(8)};
       margin-bottom: -${space(18)};
       border-bottom: solid 140px;
       `}
 
     ${media.min('desktop')`
       margin-bottom: -${space(12)};
+      padding-bottom: ${space(16)};
     `}
   }
 
@@ -393,7 +394,7 @@ const StyledResponsiveRow = styled.div<{
 }>`
   display: grid;
   align-items: ${({ align }) => align};
-  gap: ${space(4)} ${space(10)};
+  gap: ${space(8)} ${space(10)};
 
   max-width: ${BREAKPOINTS.desktopLarge}px;
   margin: 0 auto;
@@ -435,10 +436,12 @@ const StyledResponsiveRow = styled.div<{
 
   .larger-image-wrapper {
     position: relative;
+    margin-top: ${space(4)};
     height: 300px;
     width: 100%;
 
     ${media.min('desktop')`
+      margin-top: 0;
       min-height: 350px;
       height: 24vw;
     `}
