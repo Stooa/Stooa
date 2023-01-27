@@ -49,9 +49,9 @@
     "speaker": "Speaker",
     "cam": "Camera",
     "prejoin": {
-        "startFishbowl": "Start dialogue",
+        "startFishbowl": "Start fishbowl",
         "title": "Join the dialogue",
-        "joinDiscussion": "Join the dialogue",
+        "joinDiscussion": "Join the fishbowl",
         "moderatorSubtitle": "If you want you can configure the audio and video before starting the fishbowl.",
         "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
         "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
