@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
           </a>
         </div>
         <Nav>
-          <NavTitle className="body-md bold">{APP_NAME}</NavTitle>
+          <NavTitle className="body-md bold hide-mobile">{APP_NAME}</NavTitle>
           <NavList>
             <li>
               <Link
