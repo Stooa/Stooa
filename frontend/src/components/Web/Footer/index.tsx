@@ -99,7 +99,7 @@ const Footer: React.FC = () => {
             <img
               src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=320231&theme=light&period=daily"
               alt="Stooa - The&#0032;open&#0032;source&#0032;online&#0032;fishbowl&#0032;tool | Product Hunt"
-              // style="width: 250px; height: 54px;"
+              style={{ marginBottom: '1rem' }}
               width="250"
               height="54"
             />

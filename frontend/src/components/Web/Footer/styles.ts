@@ -46,7 +46,8 @@ const Nav = styled.nav`
 `;
 
 const NavTitle = styled.div`
-  margin: 0 0 ${space(2)};
+  margin-top: 9px;
+  margin-bottom: ${space(2)};
 `;
 
 const NavList = styled.ul`

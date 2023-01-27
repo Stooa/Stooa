@@ -67,6 +67,10 @@ const Billboard = styled.div`
     align-self: center;
     filter: drop-shadow(0px 5px 14px rgba(0, 0, 0, 0.1));
 
+    ${media.min('tablet')`
+    padding: 0 ${space(10)};
+    `}
+
     &.mobile {
       margin-bottom: ${space(4)};
     }
