@@ -112,7 +112,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
       pingInterval.current = window.setInterval(pingParticipant, PING_TIMEOUT);
       getParticipantsInterval.current = window.setInterval(getApiParticipants, PING_TIMEOUT);
     } else {
-      pingParticipant()
+      pingParticipant();
       window.clearInterval(pingInterval.current);
       window.clearInterval(getParticipantsInterval.current);
 

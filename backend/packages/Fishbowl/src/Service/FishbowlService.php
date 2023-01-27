@@ -126,6 +126,7 @@ class FishbowlService
 
         if (null === $request) {
             $this->logger->error('[PING] Request is null');
+
             return false;
         }
 
@@ -134,6 +135,7 @@ class FishbowlService
 
         if (null === $user && null === $guest) {
             $this->logger->error('[PING] Guest and user are null');
+
             return false;
         }
 
@@ -141,6 +143,7 @@ class FishbowlService
 
         if (null === $fishbowl) {
             $this->logger->error('[PING] fishbowl is null');
+
             return false;
         }
 
