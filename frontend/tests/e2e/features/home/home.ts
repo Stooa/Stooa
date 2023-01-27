@@ -26,7 +26,7 @@ Then('sees login and register buttons', () => {
 Then('sees create fishbowl and profile buttons', () => {
   cy.get('header').within(() => {
     cy.screenshot();
-    cy.findByRole('button', { name: 'Schedule a discussion' });
+    cy.findByRole('button', { name: 'Schedule a fishbowl' });
     cy.findByRole('button', { name: 'Linwood Hahn' });
   });
 });

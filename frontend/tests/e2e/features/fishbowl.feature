@@ -15,7 +15,7 @@ Feature: Fishbowl
         And a fishbowl
         When navigates to fishbowl
         And can access to pre join
-        And clicks on "Join the discussion" button
+        And clicks on "Join the fishbowl" button
         And sees the prefishbowl page
         And starts fishbowl
         Then finishes a fishbowl
@@ -26,7 +26,7 @@ Feature: Fishbowl
         And a private fishbowl
         When navigates to fishbowl
         And can access to pre join
-        And clicks on "Join the discussion" button
+        And clicks on "Join the fishbowl" button
         And sees the prefishbowl page
         And starts fishbowl
         Then finishes a fishbowl
@@ -37,7 +37,7 @@ Feature: Fishbowl
         And a not owned fishbowl
         When navigates to fishbowl
         And can access to pre join
-        And clicks on "Join the discussion" button
+        And clicks on "Join the fishbowl" button
         Then sees the prefishbowl page
 
     Scenario: Non-host user can enter and sees the password input
