@@ -18,7 +18,6 @@ use App\Core\Factory\GuestFactory;
 use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Core\Repository\ParticipantRepository;
-use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
