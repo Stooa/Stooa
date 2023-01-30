@@ -134,7 +134,7 @@ class Fishbowl implements \Stringable
         'Not Started' => self::STATUS_NOT_STARTED,
         'Introduction' => self::STATUS_INTRODUCTION,
         'Running' => self::STATUS_RUNNING,
-        'Finished' => self::STATUS_FINISHED
+        'Finished' => self::STATUS_FINISHED,
     ];
 
     #[Groups(['fishbowl:read'])]
