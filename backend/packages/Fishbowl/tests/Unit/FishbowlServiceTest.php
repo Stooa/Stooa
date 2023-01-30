@@ -23,6 +23,7 @@ use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\FishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -38,6 +39,7 @@ class FishbowlServiceTest extends TestCase
     private MockObject $participantRepository;
     private MockObject $security;
     private MockObject $translator;
+    private MockObject $logger;
 
     protected function setUp(): void
     {
@@ -47,8 +49,10 @@ class FishbowlServiceTest extends TestCase
         $this->requestStack = new RequestStack();
         $this->security = $this->createMock(Security::class);
         $this->translator = $this->createMock(Translator::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
 
         $this->service = new FishbowlService(
+            $this->logger,
             $this->fishbowlRepository,
             $this->requestStack,
             $this->security,
