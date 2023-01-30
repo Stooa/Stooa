@@ -88,15 +88,11 @@ const Header = styled.header`
   .header-info {
     justify-content: flex-start;
 
-    ${media.max('tablet')`
-      margin-bottom: 0.5rem;
-    `}
-
     .title {
-      max-width: 45ch;
+      max-width: 50vw;
       overflow: hidden;
       ${media.min('tablet')`
-        max-width: ${rems(310)};
+        max-width: 30vw;
       `}
     }
   }

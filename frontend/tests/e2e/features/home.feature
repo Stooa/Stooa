@@ -5,7 +5,7 @@ Feature: Home
   Scenario: Non logged users can see the Home page
     Given a non logged user
     When navigates to "/"
-    Then sees "The online fishbowl tool"
+    Then sees "Fluid and participative online dialogues"
 
   Scenario: Non logged users will be redirect to register when trying to create a fishbowl
     Given a non logged user
