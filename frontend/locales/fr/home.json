@@ -29,7 +29,7 @@
         "firstBulletSub": "Pour participer au dialogue, vous devrez occuper l'une des chaises.",
         "secondBulletTitle": "1 Chaise libre pour encourager la participation",
         "secondBulletSub": "Il doit toujours y avoir une chaise libre.",
-        "longExplanation1": "Tout participant <span>peut occuper une chaise libre</span> à tout moment pour <span>participer à la discussion</span>.",
+        "longExplanation1": "Tout participant <span>peut occuper une chaise libre</span> à tout moment pour <span>participer au dialogue</span>.",
         "longExplanation2": "Si toutes <span>les chaises sont occupées</span>, une personne qui a déjà participé <span>doit libérer sa place</span>."
     },
     "description1": "Stooa est une plateforme en ligne qui permet des conversations fluides et participatives pour de grands groupes et avec une animation automatique <span>basée sur la méthode fishbowl</span>",
