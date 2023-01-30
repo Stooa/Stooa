@@ -97,7 +97,7 @@ class LoginFunctionalTest extends ApiTestCase
         $this->assertSame($message, $responseArray['message']);
     }
 
-    /** @return iterable<array{string}> */
+    /** @return iterable<array{0: string, 1: string}> */
     public function errorMessageProvider(): iterable
     {
         yield ['es', 'Credenciales no válidas'];

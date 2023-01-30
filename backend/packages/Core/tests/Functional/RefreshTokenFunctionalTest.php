@@ -50,7 +50,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
     {
         self::bootKernel();
 
-        $response = static::createClient()->request('POST', '/refresh-token', ['json' => [
+        static::createClient()->request('POST', '/refresh-token', ['json' => [
             'email' => 'user@stooa.com',
             'refresh_token' => 'refresh_token',
         ]]);
@@ -245,7 +245,6 @@ class RefreshTokenFunctionalTest extends ApiTestCase
 
         $firstDate = new \DateTime('now', $timeZone);
 
-        /** @var Fishbowl $fishbowl */
         $firstFishbowl = FishbowlFactory::createOne([
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',
