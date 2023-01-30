@@ -1,11 +1,24 @@
 {
-    "title": "The online fishbowl tool",
-    "description": "Stooa enables a fluent and participatory conversation with automatic facilitation based on the fishbowl method.",
+    "title": "Fluid and participative online dialogues",
+    "description1": "Stooa is an online platform that allows fluid and participatory conversations for large groups and with automatic facilitation <span>based on the fishbowl method.</span>",
+    "description2": "It is an <span>ideal dialogue method</span> for communities, educational environments, or companies that seek to improve the experience of their employees.",
     "scheduleFishbowl": "Schedule a fishbowl",
     "hostFishbowlNow": "Host a fishbowl now",
+    "tryNow": "Try now",
     "definition": {
-        "title": "What is a fishbowl?",
+        "title": "What is the fishbowl method?",
         "description": "<p>A fishbowl is a <strong>group dynamic</strong> that facilitates conversations, debates and any type of activity in which <strong>participation is essential for its development</strong>.</p><p>It is an ideal dialogue method for communities, educational environements, or companies looking to improve their employee experience.</p>"
+    },
+    "howOnlineDebates": "How do we achieve smooth and participative online discussions with large groups?",
+    "howStooa": {
+        "title" : "How does Stooa work?",
+        "subtitle" : "It's very simple!",
+        "firstBulletTitle": "5 seats for discussion",
+        "firstBulletSub": "To participate in the debate you will have to occupy one of the available seats.",
+        "secondBulletTitle": "1 Free seat to encourage participation",
+        "secondBulletSub": "There must always be a free seat.",
+        "longExplanation1": "Any attendee can <span>occupy a free chair</span> at any time <span>to participate in the debate</span>.",
+        "longExplanation2": "If all <span>chairs are occupied</span> someone who has already participated must <span>leave their seat</span>."
     },
     "keybenefits": {
         "first": {

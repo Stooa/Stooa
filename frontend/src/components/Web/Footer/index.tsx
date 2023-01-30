@@ -89,9 +89,24 @@ const Footer: React.FC = () => {
   return (
     <Container>
       <FooterNav>
-        <Logo className="logo" href={ROUTE_HOME} />
+        <div>
+          <Logo className="logo" href={ROUTE_HOME} />
+          <a
+            href="https://www.producthunt.com/posts/stooa?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-stooa"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=320231&theme=light&period=daily"
+              alt="Stooa - The&#0032;open&#0032;source&#0032;online&#0032;fishbowl&#0032;tool | Product Hunt"
+              style={{ marginBottom: '1rem' }}
+              width="250"
+              height="54"
+            />
+          </a>
+        </div>
         <Nav>
-          <NavTitle className="body-md bold">{APP_NAME}</NavTitle>
+          <NavTitle className="body-md bold hide-mobile">{APP_NAME}</NavTitle>
           <NavList>
             <li>
               <Link

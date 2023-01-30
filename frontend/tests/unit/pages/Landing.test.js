@@ -13,6 +13,12 @@ import preloadAll from 'jest-next-dynamic';
 
 import Home from '@/pages/index';
 
+const intersectionObserverMock = () => ({
+  observe: () => null
+});
+
+window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);
+
 jest.mock('next/router', () => ({
   useRouter() {
     return {
