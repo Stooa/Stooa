@@ -76,6 +76,7 @@ const FooterNav = styled.section`
   ${media.min('tablet')`
     align-items: flex-start;
     display: flex;
+    gap: 0 ${space(4)};
     flex-wrap: wrap;
     justify-content: space-between;
     padding: ${space(2)} 0 0;
