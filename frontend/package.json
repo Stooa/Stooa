@@ -35,7 +35,7 @@
     "countries-and-timezones": "3.3.0",
     "file-loader": "6.2.0",
     "formik": "2.2.9",
-    "framer-motion": "6.5.1",
+    "framer-motion": "8.5.3",
     "graphql": "16.6.0",
     "gsap": "3.11.4",
     "hoist-non-react-statics": "3.3.2",
