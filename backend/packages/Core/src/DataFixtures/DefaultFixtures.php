@@ -46,7 +46,6 @@ class DefaultFixtures extends Fixture
             'privacyPolicy' => true,
         ]);
 
-        /** @var Fishbowl $fishbowl */
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
