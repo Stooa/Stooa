@@ -28,7 +28,7 @@
     "@apollo/client": "3.7.3",
     "@next/font": "13.1.2",
     "@types/node": "18.11.18",
-    "@types/react": "17.0.52",
+    "@types/react": "17.0.53",
     "@types/styled-components": "5.1.26",
     "@types/yup": "0.29.14",
     "axios": "1.2.2",
