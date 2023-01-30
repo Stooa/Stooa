@@ -21,6 +21,7 @@ use App\Core\Repository\ParticipantRepository;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Hashids\Hashids;
+use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Exception\JsonException;
@@ -47,6 +48,7 @@ use Webmozart\Assert\Assert;
 class FishbowlService
 {
     public function __construct(
+        private readonly LoggerInterface $logger,
         private readonly FishbowlRepository $fishbowlRepository,
         private readonly RequestStack $requestStack,
         private readonly Security $security,
@@ -123,6 +125,8 @@ class FishbowlService
         $request = $this->requestStack->getCurrentRequest();
 
         if (null === $request) {
+            $this->logger->error('[PING] Request is null');
+
             return false;
         }
 
@@ -130,12 +134,16 @@ class FishbowlService
         $user = $this->security->getUser();
 
         if (null === $user && null === $guest) {
+            $this->logger->error('[PING] Guest and user are null');
+
             return false;
         }
 
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
         if (null === $fishbowl) {
+            $this->logger->error('[PING] fishbowl is null');
+
             return false;
         }
 
