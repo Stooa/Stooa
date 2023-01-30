@@ -48,7 +48,6 @@ class ParticipantRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsParticipantInFishbowlByUser(): void
     {
-        /** @var Fishbowl $fishbowl */
         $fishbowl = FishbowlFactory::createOne()->object();
         $user = UserFactory::createOne()->object();
 
@@ -64,7 +63,6 @@ class ParticipantRepositoryTest extends KernelTestCase
     /** @test */
     public function itFindsParticipantInFishbowlByGuest(): void
     {
-        /** @var Fishbowl $fishbowl */
         $fishbowl = FishbowlFactory::createOne()->object();
         $guest = GuestFactory::createOne()->object();
 
