@@ -138,7 +138,7 @@ class WorkflowMutationResolverTest extends TestCase
         $this->assertSame($fishbowl, $returnedFishbowl);
     }
 
-    /** @return iterable<array{string}> */
+    /** @return iterable<array{0: class-string}> */
     public function mutationResolverProvider(): iterable
     {
         yield [FishbowlRunMutationResolver::class];
@@ -147,7 +147,7 @@ class WorkflowMutationResolverTest extends TestCase
         yield [FishbowlFinishMutationResolver::class];
     }
 
-    /** @return iterable<array{string}> */
+    /** @return iterable<array{0: class-string, 1: Fishbowl::TRANSITION_*}> */
     public function mutationResolverProviderWithTransition(): iterable
     {
         yield [FishbowlRunMutationResolver::class, Fishbowl::TRANSITION_RUN];
