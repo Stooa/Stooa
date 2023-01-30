@@ -117,6 +117,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
     /** @test */
     public function itRefreshUserTokenWithOneFishbowl(): void
     {
+        /** @var Fishbowl $fishbowl */
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
@@ -243,6 +244,8 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $timeZone = new \DateTimeZone('Europe/Madrid');
 
         $firstDate = new \DateTime('now', $timeZone);
+
+        /** @var Fishbowl $fishbowl */
         $firstFishbowl = FishbowlFactory::createOne([
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',
