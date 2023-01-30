@@ -83,13 +83,17 @@ const StyledFishbowlInformation = styled.div`
   }
 
   & > .friend {
-    width: 125px;
+    width: 180px;
     margin-bottom: ${space(2)};
     align-self: center;
 
     ${media.min('desktop')`
       width: auto;
     `}
+
+    & > img {
+      object-fit: contain;
+    }
   }
 
   & > button {
