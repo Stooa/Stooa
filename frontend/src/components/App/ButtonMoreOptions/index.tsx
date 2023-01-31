@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import SettingsIcon from '@/ui/svg/settings.svg';
 import Rec from '@/ui/svg/rec.svg';
-import RedRec from '@/ui/svg/red_rec.svg';
+import RedRec from '@/ui/svg/red-rec.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
@@ -162,7 +162,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       <Container>
         <Button
           id="config-button"
-          className="body-sm"
+          className={`body-sm ${showDevices ? 'active' : ''}`}
           onClick={() => handleShowDevices()}
           active={true}
         >
@@ -176,14 +176,8 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             {isModerator && (
               <button className="recording-button" onClick={() => handleShowRecordingModal()}>
-                {isRecording ? (
-                  'Stop recording'
-                ) : (
-                  <>
-                    <Rec />
-                    Start recording
-                  </>
-                )}
+                <Rec />
+                {isRecording ? 'Stop recording' : 'Start recording'}
               </button>
             )}
 
@@ -206,7 +200,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                         onClick={handleAudioInput}
                         value={deviceId}
                       >
-                        <CheckIcon />{' '}
+                        <CheckIcon />
                         <span>
                           {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
                         </span>

@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export * from './ScreenShareButton';
-export { default } from './ScreenShareButton';
+export * from './StatusRecording';
+export { default } from './StatusRecording';

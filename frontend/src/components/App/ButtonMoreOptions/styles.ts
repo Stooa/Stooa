@@ -53,6 +53,11 @@ const Button = styled(ActionButton)`
       color: ${COLOR_NEUTRO_600};
     }
   }
+
+  &.active .button {
+    background-color: ${COLOR_NEUTRO_400};
+    color: ${COLOR_NEUTRO_700};
+  }
 `;
 
 const Container = styled.div`
@@ -82,7 +87,7 @@ const Selector = styled.div`
   max-height: 45vh;
   width: ${rems(280)};
   background: ${COLOR_NEUTRO_100};
-  border: 1px solid ${COLOR_NEUTRO_600};
+  border: 1px solid ${COLOR_NEUTRO_700};
   border-radius: ${BORDER_RADIUS};
   overflow-y: auto;
   z-index: 21;
@@ -96,7 +101,7 @@ const Selector = styled.div`
     width: 100%;
     padding: ${space()} ${space(2)};
 
-    color: ${COLOR_NEUTRO_600};
+    color: ${COLOR_NEUTRO_700};
     background-color: ${COLOR_NEUTRO_100};
     transition: background-color 0.2s ease-in-out;
 
@@ -127,12 +132,12 @@ const List = styled.ul`
   text-align: left;
 
   &:not(:last-child) {
-    border-bottom: 1px solid ${COLOR_NEUTRO_600};
+    border-bottom: 1px solid ${COLOR_NEUTRO_700};
   }
 
   .title {
     align-items: center;
-    color: ${COLOR_NEUTRO_600};
+    color: ${COLOR_NEUTRO_700};
     display: inline-flex;
     padding: ${space()} ${space(2)};
 
@@ -140,6 +145,9 @@ const List = styled.ul`
       height: ${space(3)};
       margin-right: ${space()};
       width: ${space(3)};
+      & path {
+        fill: currentColor;
+      }
     }
   }
 `;

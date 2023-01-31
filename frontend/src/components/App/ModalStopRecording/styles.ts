@@ -17,14 +17,6 @@ const StyledRecordingModal = styled(Modal)`
     text-align: left;
     padding: ${space(6)} ${space(4)} ${space(3)};
 
-    & h2 {
-      margin-bottom: 0;
-    }
-
-    & .experimental {
-      margin-bottom: ${space(2)};
-    }
-
     & ul {
       padding-left: ${space(3)};
       text-align: left;

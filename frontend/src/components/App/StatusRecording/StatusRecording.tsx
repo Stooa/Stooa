@@ -8,17 +8,30 @@
  */
 
 import useTranslation from 'next-translate/useTranslation';
+import { StyledRecordingStatus } from './styles';
+import StopRec from '@/ui/svg/stop-record.svg';
+import RedRec from '@/ui/svg/red-rec-status.svg';
+import { useStooa } from '@/contexts/StooaManager';
 
-interface Props {
-  isSharing: boolean;
-  disabled: boolean;
-  className: string;
-  onClick: () => void;
-}
-
-const StatusRecording = ({ isSharing, onClick, disabled, className, ...props }: Props) => {
+const StatusRecording = () => {
   const { t } = useTranslation('fishbowl');
-  return <div>Status</div>;
+  const { isModerator } = useStooa();
+
+  return (
+    <StyledRecordingStatus className={`body-xs medium ${isModerator ? 'moderator' : ''}`}>
+      {isModerator ? (
+        <>
+          {t('recording.status')}
+          <StopRec className="stop" />
+        </>
+      ) : (
+        <>
+          <RedRec />
+          {t('recording.status')}
+        </>
+      )}
+    </StyledRecordingStatus>
+  );
 };
 
 export default StatusRecording;

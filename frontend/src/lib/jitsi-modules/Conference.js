@@ -17,7 +17,9 @@ import {
   PERMISSION_CHANGED,
   REACTION_MESSAGE_RECEIVED,
   SCREEN_SHARE_START,
-  SCREEN_SHARE_STOP
+  SCREEN_SHARE_STOP,
+  RECORDING_START,
+  RECORDING_STOP
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';

@@ -225,6 +225,7 @@ const StooaProvider = ({
   });
 
   useEventListener(RECORDING_STOP, () => {
+    console.log('--------->RECORDING_STOP');
     setIsRecording(false);
   });
 

@@ -16,6 +16,7 @@ import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack
 import localTracksRepository from '@/jitsi/LocalTracks';
 import { MediaType } from '@/types/jitsi/media';
 import { useStooa } from '@/contexts/StooaManager';
+import Conference from '@/jitsi/Conference';
 
 const GIGABYTE = 1073741824;
 
@@ -206,6 +207,7 @@ const useVideoRecorder = () => {
     a.download = `${getFilename()}.${extension}`;
     a.click();
 
+    Conference.stopRecordingEvent();
     setIsRecording(false);
   };
 
