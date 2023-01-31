@@ -27,4 +27,6 @@ export interface StooaContextValues {
   setIsSharing: Dispatch<SetStateAction<boolean>>;
   clientRunning: boolean;
   setClientRunning: Dispatch<SetStateAction<boolean>>;
+  isRecording: boolean;
+  setIsRecording: Dispatch<SetStateAction<boolean>>;
 }

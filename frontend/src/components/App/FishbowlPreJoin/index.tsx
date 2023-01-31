@@ -19,7 +19,7 @@ import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layout
 import Decoration from '@/components/Web/Decoration';
 import Header from '@/components/Web/Header';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
-import ButtonConfig, { ButtonConfigHandle } from '@/components/App/ButtonConfig';
+import ButtonMoreOptions, { ButtonHandle } from '@/components/App/ButtonMoreOptions';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
 import NicknameForm from '@/components/App/FishbowlPreJoin/form';
@@ -53,7 +53,7 @@ const FishbowlPreJoin: React.FC = () => {
   const router = useRouter();
   const { t, lang } = useTranslation('common');
 
-  const configButtonRef = useRef<ButtonConfigHandle>(null);
+  const configButtonRef = useRef<ButtonHandle>(null);
 
   const disposeLocalTracks = () => {
     for (let index = 0; index < localTracks.current.length; index++) {
@@ -173,7 +173,7 @@ const FishbowlPreJoin: React.FC = () => {
                 unlabeled={true}
               />
               <ButtonMic joined={true} disabled={!permissions.audio} unlabeled={true} />
-              <ButtonConfig selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
+              <ButtonMoreOptions selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
             </DevicesToolbar>
           </Devices>
           <Form>

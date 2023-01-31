@@ -23,19 +23,21 @@ import {
   List,
   PermissionsNotGranted,
   Selector
-} from '@/components/App/ButtonConfig/styles';
+} from '@/components/App/ButtonMoreOptions/styles';
 import { useDevices } from '@/contexts/DevicesContext';
+import useVideoRecorder from '@/hooks/useVideoRecorder';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   unlabeled?: boolean;
   selectorPosition?: 'top' | 'bottom';
 }
 
-type ButtonConfigHandle = {
+type ButtonHandle = {
   handleShowDevices: (shouldShowDevices?: boolean) => void;
 };
 
-const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = (
+const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   { unlabeled, selectorPosition },
   ref
 ) => {
@@ -51,7 +53,12 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
     selectVideoDevice,
     permissions
   } = useDevices();
+
+  const { isModerator, isRecording, setIsRecording } = useStooa();
+
   const { t } = useTranslation('fishbowl');
+
+  const { startRecording, stopRecording } = useVideoRecorder();
 
   const handleAudioInput = (event: React.MouseEvent) => {
     const { value } = event.target as HTMLButtonElement;
@@ -76,6 +83,16 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
     }
   };
 
+  const handleRecording = () => {
+    if (!isRecording) {
+      startRecording();
+      setIsRecording(true);
+    } else {
+      stopRecording();
+      setIsRecording(false);
+    }
+  };
+
   // Used imperativeHandle to make the parents able to call the handleShowDevices
   // this way we keep the state inside the button config component
   useImperativeHandle(ref, () => ({
@@ -95,8 +112,15 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
         </div>
         {!unlabeled && <div className="text medium">{t('settings')}</div>}
       </Button>
+
       {showDevices && (
         <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
+          {isModerator && (
+            <button onClick={() => handleRecording()}>
+              {isRecording ? 'Stop recording' : 'Start recording'}
+            </button>
+          )}
+
           {devices.audioInputDevices.length > 0 && (
             <List>
               <li className="title">
@@ -191,4 +215,4 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonConfigHandle, Props> = 
 };
 
 export default forwardRef(ButtonConfig);
-export type { ButtonConfigHandle };
+export type { ButtonHandle };

@@ -21,7 +21,7 @@ import useSeatsAvailable from '@/hooks/useSeatsAvailable';
 import ButtonJoin from '@/components/App/ButtonJoin';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
-import ButtonConfig, { ButtonConfigHandle } from '@/components/App/ButtonConfig';
+import ButtonMoreOptions, { ButtonHandle } from '@/components/App/ButtonMoreOptions';
 import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
@@ -31,7 +31,6 @@ import Conference from '@/jitsi/Conference';
 import SharedTrack from '@/jitsi/SharedTrack';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
-import VideoRecorder from '@/components/App/VideoRecorder';
 
 const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
@@ -52,7 +51,7 @@ const ToolBar: React.FC = () => {
   const seatsAvailable = useSeatsAvailable();
   const { deviceType } = useNavigatorType();
 
-  const configButtonRef = useRef<ButtonConfigHandle>(null);
+  const configButtonRef = useRef<ButtonHandle>(null);
 
   const handleShareClick = async () => {
     if (isSharing) {
@@ -218,7 +217,6 @@ const ToolBar: React.FC = () => {
         isModerator ? 'moderator' : ''
       }`}
     >
-      <VideoRecorder />
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}
@@ -244,7 +242,7 @@ const ToolBar: React.FC = () => {
         joined={joined}
         disabled={isMuteDisabled || !permissions.video}
       />
-      <ButtonConfig selectorPosition="top" ref={configButtonRef} />
+      <ButtonMoreOptions selectorPosition="top" ref={configButtonRef} />
     </StyledToolbar>
   );
 };
