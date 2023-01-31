@@ -11,6 +11,8 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import SettingsIcon from '@/ui/svg/settings.svg';
+import Rec from '@/ui/svg/rec.svg';
+import RedRec from '@/ui/svg/red_rec.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
@@ -27,6 +29,11 @@ import {
 import { useDevices } from '@/contexts/DevicesContext';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { useStooa } from '@/contexts/StooaManager';
+import { toast } from 'react-toastify';
+import ModalStartRecording from '../ModalStartRecording';
+import Head from 'next/head';
+import ModalStopRecording from '../ModalStopRecording';
+import Conference from '@/jitsi/Conference';
 
 interface Props {
   unlabeled?: boolean;
@@ -42,6 +49,8 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
+  const [showStartRecording, setShowStartRecording] = useState(false);
+  const [showStopRecording, setShowStopRecording] = useState(false);
 
   const {
     devices,
@@ -55,10 +64,9 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   } = useDevices();
 
   const { isModerator, isRecording, setIsRecording } = useStooa();
+  const { startRecording, stopRecording } = useVideoRecorder();
 
   const { t } = useTranslation('fishbowl');
-
-  const { startRecording, stopRecording } = useVideoRecorder();
 
   const handleAudioInput = (event: React.MouseEvent) => {
     const { value } = event.target as HTMLButtonElement;
@@ -83,14 +91,46 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     }
   };
 
-  const handleRecording = () => {
-    if (!isRecording) {
-      startRecording();
-      setIsRecording(true);
+  const handleShowRecordingModal = () => {
+    if (isRecording) {
+      setShowStopRecording(true);
     } else {
-      stopRecording();
-      setIsRecording(false);
+      setShowStartRecording(true);
     }
+  };
+
+  const handleStartRecording = async () => {
+    const recordingStarted = await startRecording();
+    if (recordingStarted.status === 'error') {
+      const translationString =
+        recordingStarted.type === 'wrong-tab' ? 'recording.wrongTab' : 'recording.recordingError';
+
+      toast(t(translationString), {
+        icon: '⚠️',
+        type: 'error',
+        position: 'bottom-center',
+        autoClose: 5000
+      });
+      return;
+    }
+
+    setIsRecording(true);
+    toast(t('recording.startedSuccessfully'), {
+      icon: <RedRec />,
+      type: 'success',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+    Conference.startRecordingEvent();
+    setShowStartRecording(false);
+  };
+
+  const handleStopRecording = async () => {
+    const recordingStopped = stopRecording();
+    if (!recordingStopped) return;
+    setIsRecording(false);
+    Conference.stopRecordingEvent();
+    setShowStopRecording(false);
   };
 
   // Used imperativeHandle to make the parents able to call the handleShowDevices
@@ -100,117 +140,144 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   }));
 
   return (
-    <Container>
-      <Button
-        id="config-button"
-        className="body-sm"
-        onClick={() => handleShowDevices()}
-        active={true}
-      >
-        <div className="button">
-          <SettingsIcon />
-        </div>
-        {!unlabeled && <div className="text medium">{t('settings')}</div>}
-      </Button>
-
-      {showDevices && (
-        <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
-          {isModerator && (
-            <button onClick={() => handleRecording()}>
-              {isRecording ? 'Stop recording' : 'Start recording'}
-            </button>
-          )}
-
-          {devices.audioInputDevices.length > 0 && (
-            <List>
-              <li className="title">
-                <MicIcon /> {t('mic')}
-              </li>
-              {!permissions.audio ? (
-                <PermissionsNotGranted>
-                  <Cross />
-                  <span>Permission not granted</span>
-                </PermissionsNotGranted>
-              ) : (
-                devices.audioInputDevices.map(({ deviceId, label }) => (
-                  <li key={deviceId}>
-                    <Item
-                      className="body-sm device"
-                      selected={audioInputDevice?.deviceId === deviceId}
-                      onClick={handleAudioInput}
-                      value={deviceId}
-                    >
-                      <CheckIcon />{' '}
-                      <span>
-                        {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
-                      </span>
-                    </Item>
-                  </li>
-                ))
-              )}
-            </List>
-          )}
-          {devices.audioOutputDevices.length > 0 && (
-            <List>
-              <li className="title">
-                <SpeakerIcon /> {t('speaker')}
-              </li>
-              {!permissions.audio ? (
-                <PermissionsNotGranted>
-                  <Cross />
-                  <span>Permission not granted</span>
-                </PermissionsNotGranted>
-              ) : (
-                devices.audioOutputDevices.map(({ deviceId, label }) => (
-                  <li key={deviceId}>
-                    <Item
-                      className="body-sm device"
-                      selected={audioOutputDevice?.deviceId === deviceId}
-                      onClick={handleAudioOutput}
-                      value={deviceId}
-                    >
-                      <CheckIcon />{' '}
-                      <span>
-                        {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
-                      </span>
-                    </Item>
-                  </li>
-                ))
-              )}
-            </List>
-          )}
-          {devices.videoDevices.length > 0 && (
-            <List>
-              <li className="title">
-                <VideoIcon /> {t('cam')}
-              </li>
-              {!permissions.video ? (
-                <PermissionsNotGranted>
-                  <Cross />
-                  <span>Permission not granted</span>
-                </PermissionsNotGranted>
-              ) : (
-                devices.videoDevices.map(({ deviceId, label }) => (
-                  <li key={deviceId}>
-                    <Item
-                      className="body-sm device"
-                      selected={videoDevice?.deviceId === deviceId}
-                      onClick={handleVideoInput}
-                      value={deviceId}
-                    >
-                      <CheckIcon />{' '}
-                      <span>
-                        {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
-                      </span>
-                    </Item>
-                  </li>
-                ))
-              )}
-            </List>
-          )}
-        </Selector>
+    <>
+      {showStartRecording && (
+        <Head>
+          <title>Stooa | 🎥 {t('recording.selectThisTab')}</title>
+        </Head>
       )}
-    </Container>
+
+      {showStartRecording && (
+        <ModalStartRecording
+          closeModal={() => setShowStartRecording(false)}
+          startRecording={handleStartRecording}
+        />
+      )}
+      {showStopRecording && (
+        <ModalStopRecording
+          closeModal={() => setShowStopRecording(false)}
+          stopRecording={handleStopRecording}
+        />
+      )}
+      <Container>
+        <Button
+          id="config-button"
+          className="body-sm"
+          onClick={() => handleShowDevices()}
+          active={true}
+        >
+          <div className="button">
+            <SettingsIcon />
+          </div>
+          {!unlabeled && <div className="text medium">{t('settings')}</div>}
+        </Button>
+
+        {showDevices && (
+          <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
+            {isModerator && (
+              <button className="recording-button" onClick={() => handleShowRecordingModal()}>
+                {isRecording ? (
+                  'Stop recording'
+                ) : (
+                  <>
+                    <Rec />
+                    Start recording
+                  </>
+                )}
+              </button>
+            )}
+
+            {devices.audioInputDevices.length > 0 && (
+              <List>
+                <li className="title">
+                  <MicIcon /> {t('mic')}
+                </li>
+                {!permissions.audio ? (
+                  <PermissionsNotGranted>
+                    <Cross />
+                    <span>Permission not granted</span>
+                  </PermissionsNotGranted>
+                ) : (
+                  devices.audioInputDevices.map(({ deviceId, label }) => (
+                    <li key={deviceId}>
+                      <Item
+                        className="body-sm device"
+                        selected={audioInputDevice?.deviceId === deviceId}
+                        onClick={handleAudioInput}
+                        value={deviceId}
+                      >
+                        <CheckIcon />{' '}
+                        <span>
+                          {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
+                        </span>
+                      </Item>
+                    </li>
+                  ))
+                )}
+              </List>
+            )}
+            {devices.audioOutputDevices.length > 0 && (
+              <List>
+                <li className="title">
+                  <SpeakerIcon /> {t('speaker')}
+                </li>
+                {!permissions.audio ? (
+                  <PermissionsNotGranted>
+                    <Cross />
+                    <span>Permission not granted</span>
+                  </PermissionsNotGranted>
+                ) : (
+                  devices.audioOutputDevices.map(({ deviceId, label }) => (
+                    <li key={deviceId}>
+                      <Item
+                        className="body-sm device"
+                        selected={audioOutputDevice?.deviceId === deviceId}
+                        onClick={handleAudioOutput}
+                        value={deviceId}
+                      >
+                        <CheckIcon />{' '}
+                        <span>
+                          {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
+                        </span>
+                      </Item>
+                    </li>
+                  ))
+                )}
+              </List>
+            )}
+            {devices.videoDevices.length > 0 && (
+              <List>
+                <li className="title">
+                  <VideoIcon /> {t('cam')}
+                </li>
+                {!permissions.video ? (
+                  <PermissionsNotGranted>
+                    <Cross />
+                    <span>Permission not granted</span>
+                  </PermissionsNotGranted>
+                ) : (
+                  devices.videoDevices.map(({ deviceId, label }) => (
+                    <li key={deviceId}>
+                      <Item
+                        className="body-sm device"
+                        selected={videoDevice?.deviceId === deviceId}
+                        onClick={handleVideoInput}
+                        value={deviceId}
+                      >
+                        <CheckIcon />{' '}
+                        <span>
+                          {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
+                        </span>
+                      </Item>
+                    </li>
+                  ))
+                )}
+              </List>
+            )}
+          </Selector>
+        )}
+      </Container>
+    </>
   );
 };
 

@@ -15,6 +15,7 @@ import { TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import localTracksRepository from '@/jitsi/LocalTracks';
 import { MediaType } from '@/types/jitsi/media';
+import { useStooa } from '@/contexts/StooaManager';
 
 const GIGABYTE = 1073741824;
 
@@ -58,6 +59,7 @@ const useVideoRecorder = () => {
   const audioDestination = useRef<MediaStreamAudioDestinationNode>(
     audioContext.current.createMediaStreamDestination()
   );
+  const { setIsRecording } = useStooa();
 
   const _supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -90,7 +92,10 @@ const useVideoRecorder = () => {
     _addAudioTrackToLocalRecording(track);
   });
 
-  const startRecording = async () => {
+  const startRecording = async (): Promise<{
+    status: 'success' | 'error';
+    type?: 'wrong-tab' | 'no-combined-stream';
+  }> => {
     recordingData.current = [];
     totalSize.current = GIGABYTE;
 
@@ -121,16 +126,13 @@ const useVideoRecorder = () => {
 
     if (_isBrowser(tabMediaStream) || _checkIsCurrentTab(tabMediaStream)) {
       stopStreamTracks(tabMediaStream);
-      alert('Select Browser tab. Thank you');
-      return false;
+      return { status: 'error', type: 'wrong-tab' };
     }
 
     audioContext.current = new AudioContext();
     audioDestination.current = audioContext.current.createMediaStreamDestination();
 
     const audioTracks = trackRepository.getAudioTracks();
-
-    console.log('ESTO SON LOS AUDIOTRACKS', audioTracks);
 
     if (audioTracks.length > 0) {
       trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
@@ -173,10 +175,12 @@ const useVideoRecorder = () => {
       });
 
       recorderRef.current.start(5000);
+      return { status: 'success' };
     }
+    return { status: 'error', type: 'no-combined-stream' };
   };
 
-  const stopRecording = () => {
+  const stopRecording = (): boolean => {
     if (recorderRef.current) {
       recorderRef.current.stop();
       recorderRef.current = undefined;
@@ -185,7 +189,9 @@ const useVideoRecorder = () => {
       stopStreamTracks(tabMediaStream);
 
       setTimeout(() => _saveRecording(), 1000);
+      return true;
     }
+    return false;
   };
 
   const _saveRecording = async () => {
@@ -199,6 +205,8 @@ const useVideoRecorder = () => {
     a.href = url;
     a.download = `${getFilename()}.${extension}`;
     a.click();
+
+    setIsRecording(false);
   };
 
   return {

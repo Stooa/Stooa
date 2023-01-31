@@ -94,6 +94,12 @@ const conferenceRepository = () => {
       return;
     }
 
+    if (property === 'recording' && newValue !== undefined) {
+      dispatchEvent(newValue === 'true' ? RECORDING_START : RECORDING_STOP);
+
+      return;
+    }
+
     if (property === 'joined') {
       const id = user.getId();
 
@@ -382,6 +388,14 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('screenShare', 'false');
   };
 
+  const startRecordingEvent = () => {
+    conference.setLocalParticipantProperty('recording', 'true');
+  };
+
+  const stopRecordingEvent = () => {
+    conference.setLocalParticipantProperty('recording', 'false');
+  };
+
   const sendJoinEvent = user => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
@@ -499,7 +513,9 @@ const conferenceRepository = () => {
     startScreenShareEvent,
     stopScreenShareEvent,
     getLocalTracks,
-    getParticipantsIds
+    getParticipantsIds,
+    startRecordingEvent,
+    stopRecordingEvent
   };
 };
 

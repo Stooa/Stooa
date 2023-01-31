@@ -66,6 +66,7 @@ const Container = styled.div`
 
 const Selector = styled.div`
   position: absolute;
+
   ${({ bottom }: SelectorProps) =>
     bottom &&
     `top: calc(100% + ${space()});
@@ -77,6 +78,7 @@ const Selector = styled.div`
     `bottom: calc(55% + ${space()});
       right: 0;
   `};
+
   max-height: 45vh;
   width: ${rems(280)};
   background: ${COLOR_NEUTRO_100};
@@ -84,6 +86,32 @@ const Selector = styled.div`
   border-radius: ${BORDER_RADIUS};
   overflow-y: auto;
   z-index: 21;
+
+  & .recording-button {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: ${space()} ${space(2)};
+
+    color: ${COLOR_NEUTRO_600};
+    background-color: ${COLOR_NEUTRO_100};
+    transition: background-color 0.2s ease-in-out;
+
+    border-bottom: 1px solid ${COLOR_NEUTRO_600};
+
+    text-align: left;
+
+    & svg {
+      margin-right: ${space()};
+    }
+
+    &:hover {
+      background-color: ${COLOR_NEUTRO_300};
+    }
+  }
 
   ${media.min('tablet')`
     top: initial;

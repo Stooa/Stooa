@@ -27,3 +27,5 @@ export const SCREEN_SHARE_START = 'screen-share:start';
 export const SCREEN_SHARE_STOP = 'screen-share:stop';
 export const SCREEN_SHARE_CANCELED = 'screen-share:canceled';
 export const SCREEN_SHARE_PERMISSIONS_DENIED = 'screen-share:permissions-denied';
+export const RECORDING_START = 'recording:start';
+export const RECORDING_STOP = 'recording:stop';
