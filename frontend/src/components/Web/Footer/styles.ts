@@ -31,13 +31,7 @@ const Container = styled.footer`
 `;
 
 const Nav = styled.nav`
-  min-width: 20%;
-
   &.social {
-    ${media.min('tablet')`
-      text-align: right;
-    `};
-
     ${media.between('tablet', 'desktop')`
       margin: ${space(2)} 0 0;
       width: 100%;
