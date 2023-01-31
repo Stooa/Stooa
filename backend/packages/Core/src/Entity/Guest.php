@@ -43,6 +43,7 @@ class Guest implements \Stringable
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+
     private ?UuidInterface $id = null;
     #[Groups(['guest:create', 'guest:write'])]
     #[Assert\NotBlank]
