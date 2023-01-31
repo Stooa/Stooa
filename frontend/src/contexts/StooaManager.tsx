@@ -32,6 +32,8 @@ import {
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
   NOTIFICATION,
+  RECORDING_START,
+  RECORDING_STOP,
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
@@ -216,6 +218,14 @@ const StooaProvider = ({
 
   useEventListener(SCREEN_SHARE_CANCELED, () => {
     setIsSharing(false);
+  });
+
+  useEventListener(RECORDING_START, () => {
+    setIsRecording(true);
+  });
+
+  useEventListener(RECORDING_STOP, () => {
+    setIsRecording(false);
   });
 
   const checkApIConferenceStatus = () => {
