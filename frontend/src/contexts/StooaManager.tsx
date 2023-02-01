@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -56,6 +56,7 @@ import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import SharedTrack from '@/jitsi/SharedTrack';
+import useVideoRecorder from '@/hooks/useVideoRecorder';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -92,6 +93,21 @@ const StooaProvider = ({
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
+
+  const _sendStopRecordingEvent = () => {
+    Conference.stopRecordingEvent();
+    setIsRecording(false);
+  };
+
+  const { startRecording: startRecordingVideoRecorder, stopRecording } =
+    useVideoRecorder(_sendStopRecordingEvent);
+
+  const startRecording = () => {
+    return startRecordingVideoRecorder().then(result => {
+      setIsRecording(true);
+      return result;
+    });
+  };
 
   const startFishbowl = () => {
     const slug = { variables: { input: { slug: fid } } };
@@ -225,7 +241,6 @@ const StooaProvider = ({
   });
 
   useEventListener(RECORDING_STOP, () => {
-    console.log('--------->RECORDING_STOP');
     setIsRecording(false);
   });
 
@@ -289,6 +304,22 @@ const StooaProvider = ({
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
+  const handleUnload = useCallback(
+    async event => {
+      if (isModerator && isRecording) {
+        stopRecording();
+        event.preventDefault();
+        event.returnValue = '';
+
+        _sendStopRecordingEvent();
+        unload();
+      } else {
+        unload();
+      }
+    },
+    [isRecording]
+  );
+
   useEffect(() => {
     if (isModerator && isConferenceIntroducing()) {
       pushEventDataLayer({
@@ -325,15 +356,17 @@ const StooaProvider = ({
 
   useEffect(() => {
     initializeJitsi();
+  }, []);
 
-    window.addEventListener('beforeunload', unload);
-    window.addEventListener('unload', unload);
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleUnload);
+    window.addEventListener('unload', handleUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', unload);
-      window.removeEventListener('unload', unload);
+      window.removeEventListener('beforeunload', handleUnload);
+      window.removeEventListener('unload', handleUnload);
     };
-  }, []);
+  }, [isRecording, handleUnload]);
 
   useEffect(() => {
     if (conferenceStatus === IConferenceStatus.FINISHED) {
@@ -378,6 +411,8 @@ const StooaProvider = ({
         setIsSharing,
         clientRunning,
         setClientRunning,
+        startRecording,
+        stopRecording,
         isRecording,
         setIsRecording
       }}

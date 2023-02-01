@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_400, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
 
@@ -15,9 +15,9 @@ const StyledRecordingStatus = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 50%;
+  top: ${space()};
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   color: ${COLOR_NEUTRO_700};
   background-color: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_400};
@@ -36,6 +36,12 @@ const StyledRecordingStatus = styled.div`
   & > svg:not(.stop) {
     margin-right: ${space(0.5)};
   }
+
+  ${media.min('tablet')`
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `}
 `;
 
 export { StyledRecordingStatus };

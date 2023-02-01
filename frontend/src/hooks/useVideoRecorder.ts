@@ -15,8 +15,7 @@ import { TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import localTracksRepository from '@/jitsi/LocalTracks';
 import { MediaType } from '@/types/jitsi/media';
-import { useStooa } from '@/contexts/StooaManager';
-import Conference from '@/jitsi/Conference';
+import { toast } from 'react-toastify';
 
 const GIGABYTE = 1073741824;
 
@@ -50,7 +49,7 @@ const getMimeType = (): string => {
   throw new Error('No MIME Type supported by MediaRecorder');
 };
 
-const useVideoRecorder = () => {
+const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const recorderRef = useRef<MediaRecorder>();
@@ -60,9 +59,8 @@ const useVideoRecorder = () => {
   const audioDestination = useRef<MediaStreamAudioDestinationNode>(
     audioContext.current.createMediaStreamDestination()
   );
-  const { setIsRecording } = useStooa();
 
-  const _supportsCaptureHandle = (): boolean => {
+  const supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     return navigator.mediaDevices.setCaptureHandleConfig;
@@ -100,7 +98,7 @@ const useVideoRecorder = () => {
     recordingData.current = [];
     totalSize.current = GIGABYTE;
 
-    if (_supportsCaptureHandle()) {
+    if (supportsCaptureHandle()) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       navigator.mediaDevices.setCaptureHandleConfig({
@@ -108,10 +106,6 @@ const useVideoRecorder = () => {
         permittedOrigins: ['*']
       });
     }
-
-    const currentTitle = document.title;
-
-    document.title = document.title + '(Select this tab)';
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -122,8 +116,6 @@ const useVideoRecorder = () => {
       // @ts-ignore
       preferCurrentTab: true
     });
-
-    document.title = currentTitle;
 
     if (_isBrowser(tabMediaStream) || _checkIsCurrentTab(tabMediaStream)) {
       stopStreamTracks(tabMediaStream);
@@ -166,13 +158,14 @@ const useVideoRecorder = () => {
           recordingData.current.push(e.data);
           totalSize.current -= e.data.size;
           if (totalSize.current <= 0) {
-            stopRecording();
+            stopRecording().catch(() => null);
           }
         }
       });
 
       tabMediaStream.addEventListener('inactive', () => {
-        stopRecording();
+        if (handleStoppedFromBrowser) handleStoppedFromBrowser();
+        stopRecording().catch(() => null);
       });
 
       recorderRef.current.start(5000);
@@ -181,18 +174,23 @@ const useVideoRecorder = () => {
     return { status: 'error', type: 'no-combined-stream' };
   };
 
-  const stopRecording = (): boolean => {
-    if (recorderRef.current) {
-      recorderRef.current.stop();
-      recorderRef.current = undefined;
+  const stopRecording = async (): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      if (recorderRef.current) {
+        recorderRef.current.stop();
+        recorderRef.current = undefined;
 
-      stopStreamTracks(stream);
-      stopStreamTracks(tabMediaStream);
+        stopStreamTracks(stream);
+        stopStreamTracks(tabMediaStream);
 
-      setTimeout(() => _saveRecording(), 1000);
-      return true;
-    }
-    return false;
+        setTimeout(async () => {
+          await _saveRecording();
+          resolve(true);
+        }, 1000);
+      } else {
+        reject(false);
+      }
+    });
   };
 
   const _saveRecording = async () => {
@@ -207,13 +205,18 @@ const useVideoRecorder = () => {
     a.download = `${getFilename()}.${extension}`;
     a.click();
 
-    Conference.stopRecordingEvent();
-    setIsRecording(false);
+    toast('Your recording is downloading', {
+      icon: '📥',
+      type: 'success',
+      position: 'bottom-center',
+      autoClose: 3000
+    });
   };
 
   return {
     startRecording,
-    stopRecording
+    stopRecording,
+    supportsCaptureHandle
   };
 };
 

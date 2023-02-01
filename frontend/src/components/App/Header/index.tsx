@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { toast } from 'react-toastify';
@@ -41,14 +41,27 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
   const router = useRouter();
   const { fid } = router.query;
 
+  const notInitialRender = useRef(false);
+
   useEffect(() => {
-    if (!isModerator && isRecording) {
-      toast('The host is recording', {
-        icon: <RedRec />,
-        type: 'info',
-        autoClose: 5000,
-        position: 'bottom-center'
-      });
+    if (notInitialRender.current) {
+      if (!isModerator && isRecording) {
+        toast('The host is recording', {
+          icon: <RedRec />,
+          type: 'info',
+          autoClose: 5000,
+          position: 'bottom-center'
+        });
+      } else if (!isModerator && !isRecording) {
+        toast('The host stopped recording', {
+          icon: 'ℹ️',
+          type: 'info',
+          autoClose: 5000,
+          position: 'bottom-center'
+        });
+      }
+    } else {
+      notInitialRender.current = true;
     }
   }, [isRecording]);
 

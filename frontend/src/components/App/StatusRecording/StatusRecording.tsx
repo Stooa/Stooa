@@ -12,6 +12,8 @@ import { StyledRecordingStatus } from './styles';
 import StopRec from '@/ui/svg/stop-record.svg';
 import RedRec from '@/ui/svg/red-rec-status.svg';
 import { useStooa } from '@/contexts/StooaManager';
+import RecordingTimer from '@/components/App/RecordingTimer';
+import LoadingDots from '@/components/Common/LoadingDots';
 
 const StatusRecording = () => {
   const { t } = useTranslation('fishbowl');
@@ -22,6 +24,8 @@ const StatusRecording = () => {
       {isModerator ? (
         <>
           {t('recording.status')}
+          <LoadingDots />
+          <RecordingTimer />
           <StopRec className="stop" />
         </>
       ) : (

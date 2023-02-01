@@ -27,13 +27,13 @@ import {
   Selector
 } from '@/components/App/ButtonMoreOptions/styles';
 import { useDevices } from '@/contexts/DevicesContext';
-import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { useStooa } from '@/contexts/StooaManager';
 import { toast } from 'react-toastify';
 import ModalStartRecording from '../ModalStartRecording';
 import Head from 'next/head';
 import ModalStopRecording from '../ModalStopRecording';
 import Conference from '@/jitsi/Conference';
+import useVideoRecorder from '@/hooks/useVideoRecorder';
 
 interface Props {
   unlabeled?: boolean;
@@ -51,6 +51,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   const [showDevices, setShowDevices] = useState(false);
   const [showStartRecording, setShowStartRecording] = useState(false);
   const [showStopRecording, setShowStopRecording] = useState(false);
+  const { supportsCaptureHandle } = useVideoRecorder();
 
   const {
     devices,
@@ -63,8 +64,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording, setIsRecording } = useStooa();
-  const { startRecording, stopRecording } = useVideoRecorder();
+  const { isModerator, isRecording, setIsRecording, startRecording, stopRecording } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -126,7 +126,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   };
 
   const handleStopRecording = async () => {
-    const recordingStopped = stopRecording();
+    const recordingStopped = await stopRecording().catch(() => false);
     if (!recordingStopped) return;
     setIsRecording(false);
     Conference.stopRecordingEvent();
@@ -156,7 +156,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       {showStopRecording && (
         <ModalStopRecording
           closeModal={() => setShowStopRecording(false)}
-          stopRecording={handleStopRecording}
+          stopRecording={() => handleStopRecording()}
         />
       )}
       <Container>
@@ -174,7 +174,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
-            {isModerator && (
+            {isModerator && supportsCaptureHandle() && (
               <button className="recording-button" onClick={() => handleShowRecordingModal()}>
                 <Rec />
                 {isRecording ? 'Stop recording' : 'Start recording'}
