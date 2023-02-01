@@ -22,7 +22,7 @@ const GIGABYTE = 1073741824;
 const getFilename = () => {
   const now = new Date();
   const timestamp = now.toISOString();
-  return `recording_${timestamp}`;
+  return `stooa_recording_${timestamp}`;
 };
 
 const stopStreamTracks = (stream: MediaStream | undefined): void => {

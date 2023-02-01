@@ -10,7 +10,7 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import SettingsIcon from '@/ui/svg/settings.svg';
+import Dots from '@/ui/svg/dots-toolbar.svg';
 import Rec from '@/ui/svg/rec.svg';
 import RedRec from '@/ui/svg/red-rec.svg';
 import MicIcon from '@/ui/svg/mic.svg';
@@ -44,7 +44,7 @@ type ButtonHandle = {
   handleShowDevices: (shouldShowDevices?: boolean) => void;
 };
 
-const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
+const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   { unlabeled, selectorPosition },
   ref
 ) => {
@@ -167,7 +167,7 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
           active={true}
         >
           <div className="button">
-            <SettingsIcon />
+            <Dots />
           </div>
           {!unlabeled && <div className="text medium">{t('settings')}</div>}
         </Button>
@@ -275,5 +275,5 @@ const ButtonConfig: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   );
 };
 
-export default forwardRef(ButtonConfig);
+export default forwardRef(ButtonMoreOptions);
 export type { ButtonHandle };
