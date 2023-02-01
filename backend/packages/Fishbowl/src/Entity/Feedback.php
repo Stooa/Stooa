@@ -69,12 +69,12 @@ class Feedback
     private ?UuidInterface $id = null;
 
     #[Groups(['feedback:read'])]
-    #[Assert\NotNull]
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $createdDateTime = null;
+    private \DateTimeInterface $createdDateTime;
 
-    #[Groups(['feedback:read'])]
+    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::SATISFACTION_SAD, self::SATISFACTION_NEUTRAL, self::SATISFACTION_HAPPY])]
     #[ORM\Column(type: 'string', options: ['default' => self::SATISFACTION_NEUTRAL])]
@@ -85,10 +85,9 @@ class Feedback
     private ?string $comment = null;
 
     #[Groups(['feedback:read', 'feedback:write'])]
-    #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[Assert\Email]
-    #[ORM\Column(type: 'string', unique: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $email = null;
 
     #[Groups(['feedback:read', 'feedback:write'])]
@@ -98,12 +97,10 @@ class Feedback
     private string $origin = self::ORIGIN_FISHBOWL;
 
     #[Groups(['feedback:read', 'feedback:write'])]
-    #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'feedbacks')]
     private ?Fishbowl $fishbowl = null;
 
     #[Groups(['feedback:read', 'feedback:write'])]
-    #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Participant::class, inversedBy: 'feedbacks')]
     private ?Participant $participant = null;
 
