@@ -69,6 +69,8 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
         $this->assertSame('new@email.com', $graphqlResponse['data']['updateFeedback']['feedback']['email']);
+        $this->assertSame(Feedback::ORIGIN_FISHBOWL, $graphqlResponse['data']['updateFeedback']['feedback']['origin']);
+        $this->assertSame(Feedback::SATISFACTION_NEUTRAL, $graphqlResponse['data']['updateFeedback']['feedback']['satisfaction']);
     }
 
     private function callGQLWithToken(string $token, ?UuidInterface $id, string $satisfaction, string $origin, string $email): ResponseInterface
@@ -78,6 +80,8 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
                 updateFeedback(input: \$input) {
                     feedback {
                         id
+                        satisfaction
+                        origin
                         email
                     }
                 }
