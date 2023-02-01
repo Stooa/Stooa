@@ -19,6 +19,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Core\Entity\Participant;
 use App\Fishbowl\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -49,6 +50,12 @@ class Feedback
     final public const SATISFACTION_SAD = 'sad';
     final public const SATISFACTION_NEUTRAL = 'neutral';
     final public const SATISFACTION_HAPPY = 'sad';
+
+    /**
+     * @var array<string, string>
+     *
+     * @phpstan-var array<string, Feedback::SATISFACTION_*> $satisfactionChoices
+     */
     public static array $satisfactionChoices = [
         'Sad' => self::SATISFACTION_SAD,
         'Neutral' => self::SATISFACTION_NEUTRAL,
@@ -65,7 +72,7 @@ class Feedback
     #[Assert\NotNull]
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $createdDateTime = null;
 
     #[Groups(['feedback:read'])]
     #[Assert\Length(max: 255)]
@@ -90,10 +97,21 @@ class Feedback
     #[ORM\Column(type: 'string', options: ['default' => self::ORIGIN_FISHBOWL])]
     private string $origin = self::ORIGIN_FISHBOWL;
 
-    #[Groups(['feedback:read'])]
+    #[Groups(['feedback:read', 'feedback:write'])]
     #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'feedbacks')]
     private ?Fishbowl $fishbowl = null;
+
+    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: Participant::class, inversedBy: 'feedbacks')]
+    private ?Participant $participant = null;
+
+    /** @param UuidInterface|null $id */
+    public function __construct()
+    {
+        $this->createdDateTime = new \DateTimeImmutable();
+    }
 
     public function __toString(): string
     {
@@ -114,14 +132,14 @@ class Feedback
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getCreatedDateTime(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->createdDateTime;
     }
 
-    public function setDate(?\DateTimeInterface $date): self
+    public function setCreatedDateTime(?\DateTimeInterface $createdDateTime): self
     {
-        $this->date = $date;
+        $this->createdDateTime = $createdDateTime;
 
         return $this;
     }
@@ -182,6 +200,18 @@ class Feedback
     public function setFishbowl(?Fishbowl $fishbowl): self
     {
         $this->fishbowl = $fishbowl;
+
+        return $this;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
 
         return $this;
     }
