@@ -170,8 +170,8 @@ class Fishbowl implements \Stringable
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
-
     private ?string $timezone = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]

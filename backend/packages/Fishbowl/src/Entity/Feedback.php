@@ -49,7 +49,7 @@ class Feedback
     final public const ORIGIN_THANK_YOU = 'thank-you';
     final public const SATISFACTION_SAD = 'sad';
     final public const SATISFACTION_NEUTRAL = 'neutral';
-    final public const SATISFACTION_HAPPY = 'sad';
+    final public const SATISFACTION_HAPPY = 'happy';
 
     /**
      * @var array<string, string>
@@ -72,6 +72,13 @@ class Feedback
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $createdDateTime;
+
+    #[Groups(['feedback:write', 'feedback:read'])]
+    #[Assert\NotNull]
+    #[Assert\Length(max: 255)]
+    #[Assert\Timezone]
+    #[ORM\Column(type: 'string')]
+    private ?string $timezone = null;
 
     #[Groups(['feedback:read', 'feedback:write'])]
     #[Assert\NotBlank]
@@ -137,6 +144,18 @@ class Feedback
     public function setCreatedDateTime(?\DateTimeInterface $createdDateTime): self
     {
         $this->createdDateTime = $createdDateTime;
+
+        return $this;
+    }
+
+    public function getTimezone(): ?string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(string $timezone): self
+    {
+        $this->timezone = $timezone;
 
         return $this;
     }
