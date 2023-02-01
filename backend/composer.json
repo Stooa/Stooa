@@ -43,7 +43,7 @@
         "symfony/messenger": "6.2.5",
         "symfony/monolog-bundle": "3.8.0",
         "symfony/runtime": "6.2.5",
-        "symfony/security-bundle": "6.2.5",
+        "symfony/security-bundle": "6.2.6",
         "symfony/string": "6.2.5",
         "symfony/translation": "6.2.5",
         "symfony/twig-bundle": "6.2.5",
