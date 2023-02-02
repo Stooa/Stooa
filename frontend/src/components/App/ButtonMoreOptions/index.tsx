@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Dots from '@/ui/svg/dots-toolbar.svg';
 import Rec from '@/ui/svg/rec.svg';
-import RedRec from '@/ui/svg/red-rec.svg';
+import RedRec from '@/ui/svg/rec-red.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
@@ -128,8 +128,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   const handleStopRecording = async () => {
     const recordingStopped = await stopRecording().catch(() => false);
     if (!recordingStopped) return;
-    setIsRecording(false);
-    Conference.stopRecordingEvent();
     setShowStopRecording(false);
   };
 
@@ -150,7 +148,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       {showStartRecording && (
         <ModalStartRecording
           closeModal={() => setShowStartRecording(false)}
-          startRecording={handleStartRecording}
+          startRecording={() => handleStartRecording()}
         />
       )}
       {showStopRecording && (

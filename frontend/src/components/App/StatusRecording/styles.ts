@@ -28,13 +28,68 @@ const StyledRecordingStatus = styled.div`
   &.moderator {
     padding: ${space(1)} ${space(1)} ${space(0.75)} ${space(1.5)};
 
+    & button {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      & svg {
+        transition: transform 0.2s ease-out;
+      }
+
+      &:hover svg {
+        transform-origin: center;
+        transform: scale(1.12);
+      }
+    }
+
     & > svg {
       margin-left: ${space(0.5)};
     }
   }
 
-  & > svg:not(.stop) {
+  &:not(.moderator) > svg {
     margin-right: ${space(0.5)};
+
+    & path {
+      transform-origin: center;
+      animation: expand 2.5s 0.35s ease-in-out infinite;
+    }
+
+    & circle {
+      transform-origin: center;
+      animation: breathe 2.5s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0% {
+        transform: scale(1.2);
+      }
+      40% {
+        transform: scale(0.8);
+      }
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes expand {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      45% {
+        transform: scale(1.2);
+        opacity: 0;
+      }
+      99% {
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
   }
 
   ${media.min('tablet')`

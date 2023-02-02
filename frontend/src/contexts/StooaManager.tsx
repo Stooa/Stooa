@@ -99,7 +99,7 @@ const StooaProvider = ({
     setIsRecording(false);
   };
 
-  const { startRecording: startRecordingVideoRecorder, stopRecording } =
+  const { startRecording: startRecordingVideoRecorder, stopRecording: stopRecordingFromApp } =
     useVideoRecorder(_sendStopRecordingEvent);
 
   const startRecording = () => {
@@ -107,6 +107,10 @@ const StooaProvider = ({
       setIsRecording(true);
       return result;
     });
+  };
+
+  const stopRecording = () => {
+    return stopRecordingFromApp(data.name);
   };
 
   const startFishbowl = () => {

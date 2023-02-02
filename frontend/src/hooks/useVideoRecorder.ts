@@ -19,10 +19,21 @@ import { toast } from 'react-toastify';
 
 const GIGABYTE = 1073741824;
 
-const getFilename = () => {
-  const now = new Date();
-  const timestamp = now.toISOString();
-  return `stooa_recording_${timestamp}`;
+const getFilename = (fileName?: string) => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const timestamp = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
+
+  if (!fileName) {
+    return `stooa_${timestamp}`;
+  } else {
+    //convert spaces to underscores except if there is a hyphen after or before and remove all non-alphanumeric characters
+    fileName = fileName.replace(/(?<!-)\s+(?!-)/g, '_').replace(/[^a-zA-Z0-9-_]/g, '');
+
+    return `${fileName}_${timestamp}`;
+  }
 };
 
 const stopStreamTracks = (stream: MediaStream | undefined): void => {
@@ -174,7 +185,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     return { status: 'error', type: 'no-combined-stream' };
   };
 
-  const stopRecording = async (): Promise<boolean> => {
+  const stopRecording = async (fileName?: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       if (recorderRef.current) {
         recorderRef.current.stop();
@@ -184,7 +195,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
         stopStreamTracks(tabMediaStream);
 
         setTimeout(async () => {
-          await _saveRecording();
+          await _saveRecording(fileName);
           resolve(true);
         }, 1000);
       } else {
@@ -193,7 +204,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     });
   };
 
-  const _saveRecording = async () => {
+  const _saveRecording = async (fileName?: string) => {
     const mediaType = getMimeType();
     const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
@@ -202,7 +213,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
 
     a.style.display = 'none';
     a.href = url;
-    a.download = `${getFilename()}.${extension}`;
+    a.download = `${getFilename(fileName)}.${extension}`;
     a.click();
 
     toast('Your recording is downloading', {

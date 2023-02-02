@@ -17,7 +17,7 @@ import { Header as HeaderStyled } from '@/layouts/App/styles';
 import ModalShareLink from '@/components/App/ModalShareLink';
 import { ROUTE_HOME } from '@/app.config';
 import StatusRecording from '../StatusRecording';
-import RedRec from '@/ui/svg/red-rec.svg';
+import RedRec from '@/ui/svg/rec-red.svg';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });

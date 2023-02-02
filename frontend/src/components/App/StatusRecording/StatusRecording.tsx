@@ -10,14 +10,17 @@
 import useTranslation from 'next-translate/useTranslation';
 import { StyledRecordingStatus } from './styles';
 import StopRec from '@/ui/svg/stop-record.svg';
-import RedRec from '@/ui/svg/red-rec-status.svg';
+import RedRec from '@/ui/svg/rec-red.svg';
 import { useStooa } from '@/contexts/StooaManager';
 import RecordingTimer from '@/components/App/RecordingTimer';
 import LoadingDots from '@/components/Common/LoadingDots';
+import { useState } from 'react';
+import Tooltip from '@/components/Common/Tooltip';
 
 const StatusRecording = () => {
   const { t } = useTranslation('fishbowl');
-  const { isModerator } = useStooa();
+  const { isModerator, stopRecording } = useStooa();
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <StyledRecordingStatus className={`body-xs medium ${isModerator ? 'moderator' : ''}`}>
@@ -26,11 +29,20 @@ const StatusRecording = () => {
           {t('recording.status')}
           <LoadingDots />
           <RecordingTimer />
-          <StopRec className="stop" />
+          <button
+            onClick={stopRecording}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            <StopRec className="stop" />
+            <Tooltip arrow showTooltip={showTooltip} position="bottom">
+              {t('recording.stop')}
+            </Tooltip>
+          </button>
         </>
       ) : (
         <>
-          <RedRec />
+          <RedRec className="red-dot" />
           {t('recording.status')}
         </>
       )}

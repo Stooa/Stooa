@@ -34,7 +34,7 @@ const ModalStopRecording: React.FC<Props> = ({ closeModal, stopRecording }) => {
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
           </Button>
-          <Button onClick={stopRecording}>{t('recording.stopModal.button')}</Button>
+          <Button onClick={stopRecording}>{t('recording.stop')}</Button>
         </div>
       </div>
     </StyledRecordingModal>

@@ -145,6 +145,7 @@
         "wrongTab": "Recording failed. Please select the current tab",
         "recordingError": "Could not record the fishbowl, refresh and try again",
         "selectThisTab": "Select this tab to record",
+        "stop": "Stop recording",
         "status": "Recording",
         "startModal": {
             "title": "You are about to start recording",
@@ -156,8 +157,7 @@
         },
         "stopModal": {
             "title": "Are you sure you want to stop recording?",
-            "description": "The recording will be saved in your download folder. ",
-            "button": "Stop recording"
+            "description": "The recording will be saved in your download folder. "
         }
     }
 }
