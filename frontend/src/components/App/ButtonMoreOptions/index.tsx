@@ -30,10 +30,12 @@ import { useDevices } from '@/contexts/DevicesContext';
 import { useStooa } from '@/contexts/StooaManager';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { useModals } from '@/contexts/ModalsContext';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 interface Props {
   unlabeled?: boolean;
   selectorPosition?: 'top' | 'bottom';
+  noRecording?: boolean;
 }
 
 type ButtonHandle = {
@@ -41,12 +43,13 @@ type ButtonHandle = {
 };
 
 const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
-  { unlabeled, selectorPosition },
+  { unlabeled, selectorPosition, noRecording },
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
   const { supportsCaptureHandle } = useVideoRecorder();
   const { setShowStopRecording, showStartRecording, setShowStartRecording } = useModals();
+  const { deviceType } = useNavigatorType();
 
   const {
     devices,
@@ -123,7 +126,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
-            {isModerator && supportsCaptureHandle() && (
+            {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !noRecording && (
               <button className="recording-button" onClick={() => handleShowRecordingModal()}>
                 <Rec />
                 {isRecording ? 'Stop recording' : 'Start recording'}

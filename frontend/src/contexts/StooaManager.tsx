@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -31,6 +31,7 @@ import {
   CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
+  MODERATOR_LEFT,
   NOTIFICATION,
   RECORDING_START,
   RECORDING_STOP,
@@ -94,13 +95,13 @@ const StooaProvider = ({
   const router = useRouter();
   const { fid } = router.query;
 
-  const _sendStopRecordingEvent = () => {
+  const sendStopRecordingEvent = () => {
     Conference.stopRecordingEvent();
     setIsRecording(false);
   };
 
   const { startRecording: startRecordingVideoRecorder, stopRecording: stopRecordingFromApp } =
-    useVideoRecorder(_sendStopRecordingEvent);
+    useVideoRecorder(sendStopRecordingEvent);
 
   const startRecording = () => {
     pushEventDataLayer({
@@ -258,6 +259,10 @@ const StooaProvider = ({
     setIsRecording(false);
   });
 
+  useEventListener(MODERATOR_LEFT, () => {
+    sendStopRecordingEvent();
+  });
+
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
@@ -318,22 +323,6 @@ const StooaProvider = ({
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
-  const handleUnload = useCallback(
-    async event => {
-      if (isModerator && isRecording) {
-        stopRecording();
-        event.preventDefault();
-        event.returnValue = '';
-
-        _sendStopRecordingEvent();
-        unload();
-      } else {
-        unload();
-      }
-    },
-    [isRecording]
-  );
-
   useEffect(() => {
     if (isModerator && isConferenceIntroducing()) {
       pushEventDataLayer({
@@ -373,14 +362,14 @@ const StooaProvider = ({
   }, []);
 
   useEffect(() => {
-    window.addEventListener('beforeunload', handleUnload);
-    window.addEventListener('unload', handleUnload);
+    window.addEventListener('beforeunload', unload);
+    window.addEventListener('unload', unload);
 
     return () => {
-      window.removeEventListener('beforeunload', handleUnload);
-      window.removeEventListener('unload', handleUnload);
+      window.removeEventListener('beforeunload', unload);
+      window.removeEventListener('unload', unload);
     };
-  }, [isRecording, handleUnload]);
+  }, []);
 
   useEffect(() => {
     if (conferenceStatus === IConferenceStatus.FINISHED) {

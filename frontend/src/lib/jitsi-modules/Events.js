@@ -17,6 +17,7 @@ export const CONFERENCE_IS_LOCKABLE = 'conference:islockable';
 export const USER_MUST_LEAVE = 'user:leave';
 export const USER_JOINED = 'user:joined';
 export const USER_KICKED = 'user:kicked';
+export const MODERATOR_LEFT = 'user:moderator_left';
 export const NOTIFICATION = 'notification';
 export const NOTIFICATION_CLOSE = 'notification:close';
 export const LOCALTRACK_STOPPED = 'localtrack:stopped';

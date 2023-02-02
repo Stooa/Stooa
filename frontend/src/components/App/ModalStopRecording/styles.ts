@@ -15,7 +15,7 @@ const StyledRecordingModal = styled(Modal)`
   & .content {
     max-width: 420px;
     text-align: left;
-    padding: ${space(6)} ${space(4)} ${space(3)};
+    padding: ${space(6)} ${space(5)} ${space(3)};
 
     & ul {
       padding-left: ${space(3)};

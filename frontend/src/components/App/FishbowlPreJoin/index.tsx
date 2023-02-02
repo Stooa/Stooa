@@ -173,7 +173,12 @@ const FishbowlPreJoin: React.FC = () => {
                 unlabeled={true}
               />
               <ButtonMic joined={true} disabled={!permissions.audio} unlabeled={true} />
-              <ButtonMoreOptions selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
+              <ButtonMoreOptions
+                noRecording
+                selectorPosition="bottom"
+                ref={configButtonRef}
+                unlabeled={true}
+              />
             </DevicesToolbar>
           </Devices>
           <Form>

@@ -126,7 +126,7 @@ const Fishbowl: FC = () => {
       toast(t(translationString), {
         icon: '⚠️',
         type: 'error',
-        position: 'bottom-center',
+        position: 'top-center',
         autoClose: 5000
       });
       return;

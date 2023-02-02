@@ -29,7 +29,7 @@ const ModalStartRecording: React.FC<Props> = ({ closeModal, startRecording }) =>
           <Cross />
         </button>
         <h2 className="title-sm">{t('recording.startModal.title')}</h2>
-        <p className="body-md experimental">{t('recording.startModal.experimental')}</p>
+        <p className="body-md experimental">({t('recording.startModal.experimental')})</p>
         <ul>
           <li>
             <Trans
