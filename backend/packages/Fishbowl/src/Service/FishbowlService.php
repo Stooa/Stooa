@@ -168,11 +168,9 @@ class FishbowlService
             }
         }
 
-        if ($participant) {
-            $participant->setLastPing(new \DateTimeImmutable());
+        $participant->setLastPing(new \DateTimeImmutable());
 
-            $this->participantRepository->persist($participant);
-        }
+        $this->participantRepository->persist($participant);
 
         if ($created) {
             $this->fishbowlRepository->persist($fishbowl);

@@ -110,7 +110,6 @@ class Feedback implements \Stringable
     #[ORM\ManyToOne(targetEntity: Participant::class, inversedBy: 'feedbacks')]
     private ?Participant $participant = null;
 
-    /** @param UuidInterface|null $id */
     public function __construct()
     {
         $this->createdDateTime = new \DateTimeImmutable();
@@ -140,7 +139,7 @@ class Feedback implements \Stringable
         return $this->createdDateTime;
     }
 
-    public function setCreatedDateTime(?\DateTimeInterface $createdDateTime): self
+    public function setCreatedDateTime(\DateTimeInterface $createdDateTime): self
     {
         $this->createdDateTime = $createdDateTime;
 

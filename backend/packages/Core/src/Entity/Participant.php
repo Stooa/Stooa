@@ -183,7 +183,7 @@ class Participant implements \Stringable
     {
         if ($this->feedbacks->contains($feedback)) {
             $this->feedbacks->removeElement($feedback);
-            if ($feedback->getFishbowl() === $this) {
+            if ($feedback->getParticipant() === $this) {
                 $feedback->setParticipant(null);
             }
         }
