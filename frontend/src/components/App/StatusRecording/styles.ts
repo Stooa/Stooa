@@ -24,9 +24,10 @@ const StyledRecordingStatus = styled.div`
   border-radius: ${BORDER_RADIUS};
   line-height: 1.33;
   padding: ${space(1)} ${space(1.5)} ${space(0.75)} ${space(1)};
-  transition: transform 1s 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
+  transition: transform 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
 
   &.show {
+    transition: transform 1s 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
     transform: translate(-50%, 0);
   }
 

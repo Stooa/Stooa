@@ -8,11 +8,11 @@
  */
 
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import Dots from '@/ui/svg/dots-toolbar.svg';
 import Rec from '@/ui/svg/rec.svg';
-import RedRec from '@/ui/svg/rec-red.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
@@ -28,11 +28,6 @@ import {
 } from '@/components/App/ButtonMoreOptions/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import { useStooa } from '@/contexts/StooaManager';
-import { toast } from 'react-toastify';
-import ModalStartRecording from '../ModalStartRecording';
-import Head from 'next/head';
-import ModalStopRecording from '../ModalStopRecording';
-import Conference from '@/jitsi/Conference';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { useModals } from '@/contexts/ModalsContext';
 
@@ -51,8 +46,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 ) => {
   const [showDevices, setShowDevices] = useState(false);
   const { supportsCaptureHandle } = useVideoRecorder();
-  const { setShowStopRecording, showStopRecording, showStartRecording, setShowStartRecording } =
-    useModals();
+  const { setShowStopRecording, showStartRecording, setShowStartRecording } = useModals();
 
   const {
     devices,
@@ -65,7 +59,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording, setIsRecording, startRecording, stopRecording } = useStooa();
+  const { isModerator, isRecording } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -100,38 +94,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     }
   };
 
-  const handleStartRecording = async () => {
-    const recordingStarted = await startRecording();
-    if (recordingStarted.status === 'error') {
-      const translationString =
-        recordingStarted.type === 'wrong-tab' ? 'recording.wrongTab' : 'recording.recordingError';
-
-      toast(t(translationString), {
-        icon: '⚠️',
-        type: 'error',
-        position: 'bottom-center',
-        autoClose: 5000
-      });
-      return;
-    }
-
-    setIsRecording(true);
-    toast(t('recording.startedSuccessfully'), {
-      icon: <RedRec />,
-      type: 'success',
-      position: 'bottom-center',
-      autoClose: 5000
-    });
-    Conference.startRecordingEvent();
-    setShowStartRecording(false);
-  };
-
-  const handleStopRecording = async () => {
-    const recordingStopped = await stopRecording().catch(() => false);
-    if (!recordingStopped) return;
-    setShowStopRecording(false);
-  };
-
   // Used imperativeHandle to make the parents able to call the handleShowDevices
   // this way we keep the state inside the button config component
   useImperativeHandle(ref, () => ({
@@ -146,18 +108,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
         </Head>
       )}
 
-      {showStartRecording && (
-        <ModalStartRecording
-          closeModal={() => setShowStartRecording(false)}
-          startRecording={() => handleStartRecording()}
-        />
-      )}
-      {showStopRecording && (
-        <ModalStopRecording
-          closeModal={() => setShowStopRecording(false)}
-          stopRecording={() => handleStopRecording()}
-        />
-      )}
       <Container>
         <Button
           id="config-button"
