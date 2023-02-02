@@ -125,11 +125,10 @@ const ping = async (lang: string, slug: string) => {
         'Authorization': `${auth ? auth.authorizationString : null}`
       }
     })
-    .then((res) => {
+    .then(res => {
       if (res.data.response) {
         console.log('--------> RESPUESTA <-----', res.data.response);
       }
-
     })
     .catch(err => {
       const { message, response } = err;
