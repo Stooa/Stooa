@@ -13,7 +13,7 @@ import api from '@/lib/api';
 import { AuthToken } from '@/user/auth/authToken';
 import userRepository from '@/jitsi/User';
 import LocaleCookie from '@/lib/LocaleCookie';
-import user from "@/jitsi/User";
+import user from '@/jitsi/User';
 
 const COOKIE_TOKEN = 'token';
 const COOKIE_REFRESH = 'refresh_token';
