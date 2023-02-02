@@ -74,7 +74,6 @@ class Feedback
     private \DateTimeInterface $createdDateTime;
 
     #[Groups(['feedback:write', 'feedback:read'])]
-    #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]

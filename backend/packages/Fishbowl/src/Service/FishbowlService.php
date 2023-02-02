@@ -120,14 +120,14 @@ class FishbowlService
         );
     }
 
-    public function ping(string $slug): bool
+    public function ping(string $slug): ?Participant
     {
         $request = $this->requestStack->getCurrentRequest();
 
         if (null === $request) {
             $this->logger->error('[PING] Request is null');
 
-            return false;
+            return null;
         }
 
         $guest = $this->getGuest($request);
@@ -136,7 +136,7 @@ class FishbowlService
         if (null === $user && null === $guest) {
             $this->logger->error('[PING] Guest and user are null');
 
-            return false;
+            return null;
         }
 
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
@@ -144,7 +144,7 @@ class FishbowlService
         if (null === $fishbowl) {
             $this->logger->error('[PING] fishbowl is null');
 
-            return false;
+            return null;
         }
 
         $participant = null;
@@ -168,30 +168,17 @@ class FishbowlService
             }
         }
 
-        $participant->setLastPing(new \DateTimeImmutable());
+        if ($participant) {
+            $participant->setLastPing(new \DateTimeImmutable());
 
-        $this->participantRepository->persist($participant);
+            $this->participantRepository->persist($participant);
+        }
 
         if ($created) {
             $this->fishbowlRepository->persist($fishbowl);
         }
 
-        return true;
-    }
-
-    private function getGuest(Request $request): ?Guest
-    {
-        try {
-            $requestArray = $request->toArray();
-        } catch (JsonException) {
-            return null;
-        }
-
-        if (!empty($requestArray['guestId'])) {
-            return $this->guestRepository->find($requestArray['guestId']);
-        }
-
-        return null;
+        return $participant;
     }
 
     private function createParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
@@ -208,6 +195,21 @@ class FishbowlService
         $participant->setGuest($guest);
 
         return $participant;
+    }
+
+    private function getGuest(Request $request): ?Guest
+    {
+        try {
+            $requestArray = $request->toArray();
+        } catch (JsonException) {
+            return null;
+        }
+
+        if (!empty($requestArray['guestId'])) {
+            return $this->guestRepository->find($requestArray['guestId']);
+        }
+
+        return null;
     }
 
     private function createParticipant(Fishbowl $fishbowl): Participant

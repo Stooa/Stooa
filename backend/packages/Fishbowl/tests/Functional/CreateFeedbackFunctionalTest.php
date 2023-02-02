@@ -79,6 +79,7 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
                     'input' => [
                         'satisfaction' => $satisfaction,
                         'origin' => $origin,
+                        'timezone' => 'Europe/Madrid',
                     ],
                 ],
             ],
