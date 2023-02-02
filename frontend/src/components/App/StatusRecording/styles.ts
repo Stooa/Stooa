@@ -17,13 +17,18 @@ const StyledRecordingStatus = styled.div`
   position: absolute;
   top: ${space()};
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -300px);
   color: ${COLOR_NEUTRO_700};
   background-color: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
   line-height: 1.33;
   padding: ${space(1)} ${space(1.5)} ${space(0.75)} ${space(1)};
+  transition: transform 1s 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
+
+  &.show {
+    transform: translate(-50%, 0);
+  }
 
   &.moderator {
     padding: ${space(1)} ${space(1)} ${space(0.75)} ${space(1.5)};
@@ -95,7 +100,11 @@ const StyledRecordingStatus = styled.div`
   ${media.min('tablet')`
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -300px);
+
+    &.show {
+      transform: translate(-50%, -50%);
+    }
   `}
 `;
 

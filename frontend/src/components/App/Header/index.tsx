@@ -69,7 +69,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
 
   return (
     <HeaderStyled className={`${isPrefishbowl ? 'prefishbowl' : ''}`}>
-      {isRecording && <StatusRecording />}
+      <StatusRecording showAnimation={isRecording} />
       {!isPrefishbowl && (
         <div className="hide-desktop header-top">
           <Logo className="header-logo" />
