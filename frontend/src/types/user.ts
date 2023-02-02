@@ -10,6 +10,8 @@
 export interface User {
   id?: string;
   guestId?: string;
+  participantId?: string;
+  participantSlug?: string;
   nickname?: string;
   name?: string;
   isCurrentUser?: boolean;
@@ -40,4 +42,8 @@ export interface UserRepository {
   setUserVideoInput: (videoInput: MediaDeviceInfo) => void;
   setUserVideoMuted: (videoMuted: boolean) => void;
   setUserNickname: (nickname: string) => void;
+  setUserParticipantId: (participantId: string) => void;
+  setUserParticipantSlug: (participantSlug: string) => void;
+  getUserParticipantId: () => string;
+  getUserParticipantSlug: () => string;
 }

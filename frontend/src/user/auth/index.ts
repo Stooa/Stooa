@@ -13,6 +13,7 @@ import api from '@/lib/api';
 import { AuthToken } from '@/user/auth/authToken';
 import userRepository from '@/jitsi/User';
 import LocaleCookie from '@/lib/LocaleCookie';
+import user from "@/jitsi/User";
 
 const COOKIE_TOKEN = 'token';
 const COOKIE_REFRESH = 'refresh_token';
@@ -127,7 +128,11 @@ const ping = async (lang: string, slug: string) => {
     })
     .then(res => {
       if (res.data.response) {
-        console.log('--------> RESPUESTA <-----', res.data.response);
+        const { participantId, slug } = res.data.response;
+        userRepository.setUserParticipantId(participantId);
+        userRepository.setUserParticipantSlug(slug);
+
+        console.log('[STOOA] Ping response', res.data.response);
       }
     })
     .catch(err => {

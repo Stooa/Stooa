@@ -42,13 +42,16 @@ const userRepository = (): UserRepository => {
   const getUserVideoInput = () => getUser()?.videoInput || null;
   const getUserAudioMuted = () => getUser()?.audioMuted || false;
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
-
+  const getUserParticipantId = () => getUser()?.participantId || null;
+  const getUserParticipantSlug = () => getUser()?.participantSlug || null;
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
   const setUserAudioMuted = (audioMuted: boolean): void => setUser({ audioMuted });
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
   const setUserNickname = (nickname: string): void => setUser({ nickname });
+  const setUserParticipantId = (participantId: string): void => setUser({ participantId });
+  const setUserParticipantSlug = (participantSlug: string): void => setUser({ participantSlug });
 
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
@@ -88,7 +91,11 @@ const userRepository = (): UserRepository => {
     setUserAudioOutput,
     setUserVideoInput,
     setUserVideoMuted,
-    setUserNickname
+    setUserNickname,
+    setUserParticipantId,
+    setUserParticipantSlug,
+    getUserParticipantId,
+    getUserParticipantSlug
   };
 };
 

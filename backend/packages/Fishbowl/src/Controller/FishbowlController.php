@@ -36,7 +36,7 @@ final class FishbowlController extends AbstractController
         }
 
         return new JsonResponse(['response' => [
-            'id' => $participant->getId(),
+            'participantId' => $participant->getId(),
             'slug' => $participant->getFishbowl()?->getSlug(),
         ]]);
     }

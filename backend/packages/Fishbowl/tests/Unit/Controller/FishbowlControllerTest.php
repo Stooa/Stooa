@@ -88,7 +88,7 @@ class FishbowlControllerTest extends TestCase
         $participant = new Participant();
 
         $jsonResponse = new JsonResponse(['response' => [
-            'id' => $participant->getId(),
+            'participantId' => $participant->getId(),
             'slug' => null,
         ]]);
 
