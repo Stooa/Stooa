@@ -143,7 +143,7 @@ const Main = styled.main`
 const Footer = styled.footer`
   grid-area: Footer;
   position: relative;
-  z-index: 9;
+  z-index: 10;
 
   ${media.min('tablet')`
     display: grid;

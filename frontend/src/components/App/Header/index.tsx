@@ -18,6 +18,7 @@ import ModalShareLink from '@/components/App/ModalShareLink';
 import { ROUTE_HOME } from '@/app.config';
 import StatusRecording from '../StatusRecording';
 import RedRec from '@/ui/svg/rec-red.svg';
+import useTranslation from 'next-translate/useTranslation';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
@@ -40,20 +41,21 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
   const { data, isModerator, conferenceStatus, conferenceReady, isRecording } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
+  const { t } = useTranslation('fishbowl');
 
   const notInitialRender = useRef(false);
 
   useEffect(() => {
     if (notInitialRender.current) {
       if (!isModerator && isRecording) {
-        toast('The host is recording', {
+        toast(t('recording.participantNotificationStart'), {
           icon: <RedRec />,
           type: 'info',
           autoClose: 5000,
           position: 'bottom-center'
         });
       } else if (!isModerator && !isRecording) {
-        toast('The host stopped recording', {
+        toast(t('recording.participantNotificationStop'), {
           icon: 'ℹ️',
           type: 'info',
           autoClose: 5000,

@@ -16,11 +16,13 @@ import RecordingTimer from '@/components/App/RecordingTimer';
 import LoadingDots from '@/components/Common/LoadingDots';
 import { useState } from 'react';
 import Tooltip from '@/components/Common/Tooltip';
+import { useModals } from '@/contexts/ModalsContext';
 
 const StatusRecording = () => {
   const { t } = useTranslation('fishbowl');
-  const { isModerator, stopRecording } = useStooa();
+  const { isModerator } = useStooa();
   const [showTooltip, setShowTooltip] = useState(false);
+  const { setShowStopRecording } = useModals();
 
   return (
     <StyledRecordingStatus className={`body-xs medium ${isModerator ? 'moderator' : ''}`}>
@@ -30,7 +32,7 @@ const StatusRecording = () => {
           <LoadingDots />
           <RecordingTimer />
           <button
-            onClick={stopRecording}
+            onClick={() => setShowStopRecording(true)}
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
           >

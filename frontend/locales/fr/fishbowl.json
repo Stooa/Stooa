@@ -90,7 +90,7 @@
     "stopShareScreenButton": "Arrêter le partage",
     "reactions": "Réactions",
     "sameAsSystem": "Suivre le système",
-    "settings": "Paramètres",
+    "settings": "Plus d'options",
     "timesUp": "Le temps est écoulé",
     "unmute": "Activer le son",
     "mute": "Mettre en sourdine",
@@ -131,5 +131,28 @@
     "screenSharePermissionsModal" : {
         "title": "Votre écran ne peut pas être partagé",
         "description": "Google Chrome n'a peut-être pas l'autorisation d'enregistrer l'écran de votre ordinateur. <a>Allez dans les préférences du système.</a>"
+    },
+    "recording": {
+        "startedSuccessfully": "L'enregistrement a commencé. Arrêtez l'enregistrement pour le sauvegarder.",
+        "downloading": "Votre enregistrement est en cours de téléchargement.",
+        "participantNotificationStart": "L'hôte enregistre.",
+        "participantNotificationStop": "L'hôte a arrêté l'enregistrement.",
+        "wrongTab": "L'enregistrement a échoué. Veuillez sélectionner l'onglet actuel.",
+        "recordingError": "Impossible de démarrer l'enregistrement, rafraîchissez la page et réessayez.",
+        "selectThisTab": "Sélectionnez cet onglet pour enregistrer",
+        "stop": "Arrêter l'enregistrement",
+        "start": "Commencer l'enregistrement ",
+        "status": "Enregistrement",
+        "startModal": {
+            "title": "Vous êtes sur le point de commencer l'enregistrement",
+            "experimental": "Expérimental",
+            "firstBullet": "L'enregistrement sera sauvegardé dans <span>votre dossier de téléchargement</span>. Il est limité à 1 Go, soit environ 100 minutes.",
+            "secondBullet": "Assurez-vous de <span>sélectionner l'onglet en cours</span>, sinon l'enregistrement ne démarrera pas.",
+            "thirdBullet": "Pour pouvoir enregistrer le Fishbowl, vous devez obtenir le <span>consentement de tous les participants</span>."
+        },
+        "stopModal": {
+            "title": "Êtes-vous sûr de vouloir arrêter l'enregistrement ?",
+            "description": "L'enregistrement sera sauvegardé dans votre dossier de téléchargement."
+        }
     }
 }

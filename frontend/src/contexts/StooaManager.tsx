@@ -110,7 +110,7 @@ const StooaProvider = ({
   };
 
   const stopRecording = () => {
-    return stopRecordingFromApp(data.name);
+    return stopRecordingFromApp(data.name, t('fishbowl:recording.downloading'));
   };
 
   const startFishbowl = () => {

@@ -185,7 +185,10 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     return { status: 'error', type: 'no-combined-stream' };
   };
 
-  const stopRecording = async (fileName?: string): Promise<boolean> => {
+  const stopRecording = async (
+    fileName?: string,
+    downloadingMessage?: string
+  ): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       if (recorderRef.current) {
         recorderRef.current.stop();
@@ -195,7 +198,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
         stopStreamTracks(tabMediaStream);
 
         setTimeout(async () => {
-          await _saveRecording(fileName);
+          await _saveRecording(fileName, downloadingMessage);
           resolve(true);
         }, 1000);
       } else {
@@ -204,7 +207,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     });
   };
 
-  const _saveRecording = async (fileName?: string) => {
+  const _saveRecording = async (fileName?: string, downloadingMessage?: string) => {
     const mediaType = getMimeType();
     const blob = await fixWebmDuration(new Blob(recordingData.current, { type: mediaType }));
     const url = window.URL.createObjectURL(blob);
@@ -216,7 +219,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     a.download = `${getFilename(fileName)}.${extension}`;
     a.click();
 
-    toast('Your recording is downloading', {
+    toast(downloadingMessage, {
       icon: '📥',
       type: 'success',
       position: 'bottom-center',

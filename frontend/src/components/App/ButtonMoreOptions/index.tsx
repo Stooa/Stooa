@@ -34,6 +34,7 @@ import Head from 'next/head';
 import ModalStopRecording from '../ModalStopRecording';
 import Conference from '@/jitsi/Conference';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
+import { useModals } from '@/contexts/ModalsContext';
 
 interface Props {
   unlabeled?: boolean;
@@ -49,9 +50,9 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
-  const [showStartRecording, setShowStartRecording] = useState(false);
-  const [showStopRecording, setShowStopRecording] = useState(false);
   const { supportsCaptureHandle } = useVideoRecorder();
+  const { setShowStopRecording, showStopRecording, showStartRecording, setShowStartRecording } =
+    useModals();
 
   const {
     devices,

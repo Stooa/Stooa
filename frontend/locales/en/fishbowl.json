@@ -44,7 +44,7 @@
     "sameAsSystem": "Same as system",
     "videoUnmute": "Start video",
     "videoMute": "Stop video",
-    "settings": "Settings",
+    "settings": "More options",
     "mic": "Microphone",
     "speaker": "Speaker",
     "cam": "Camera",
@@ -141,19 +141,21 @@
     },
     "recording": {
         "startedSuccessfully": "Recording started. Stop the recording to save it.",
-        "stoppedSuccessfully": "The fishbowl has been recorded successfully.",
+        "downloading": "Your recording is downloading.",
+        "participantNotificationStart": "The host is recording.",
+        "participantNotificationStop": "The host has stopped recording.",
         "wrongTab": "Recording failed. Please select the current tab",
         "recordingError": "Could not record the fishbowl, refresh and try again",
         "selectThisTab": "Select this tab to record",
         "stop": "Stop recording",
+        "start": "Start recording",
         "status": "Recording",
         "startModal": {
             "title": "You are about to start recording",
             "experimental": "Experimental",
-            "firstBullet": "The recording will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
+            "firstBullet": "It ill be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
             "secondBullet": "Make sure you <span>select the current tab</span>, otherwise the recording will not start.",
-            "thirdBullet": "In order to record the Fishbowl you must have <span>the consent of all attendees</span>.",
-            "button": "Start recording"
+            "thirdBullet": "In order to record the Fishbowl you must have <span>the consent of all attendees</span>."
         },
         "stopModal": {
             "title": "Are you sure you want to stop recording?",
