@@ -103,6 +103,11 @@ const StooaProvider = ({
     useVideoRecorder(_sendStopRecordingEvent);
 
   const startRecording = () => {
+    pushEventDataLayer({
+      category: 'Recording',
+      action: 'Start',
+      label: data.slug
+    });
     return startRecordingVideoRecorder().then(result => {
       if (result.status === 'success') setIsRecording(true);
       return result;
@@ -110,6 +115,11 @@ const StooaProvider = ({
   };
 
   const stopRecording = () => {
+    pushEventDataLayer({
+      category: 'Recording',
+      action: 'Stop',
+      label: data.slug
+    });
     return stopRecordingFromApp(data.name, t('fishbowl:recording.downloading'));
   };
 

@@ -144,6 +144,7 @@
         "downloading": "Your recording is downloading.",
         "participantNotificationStart": "The host is recording.",
         "participantNotificationStop": "The host has stopped recording.",
+        "closeToHundredNotification": "You only have 5 more minutes of recording until you reach the limit.",
         "wrongTab": "Recording failed. Please select the current tab",
         "recordingError": "Could not record the fishbowl, refresh and try again",
         "selectThisTab": "Select this tab to record",
