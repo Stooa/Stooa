@@ -43,7 +43,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['feedback:read']],
     denormalizationContext: ['groups' => ['feedback:write']]
 )]
-class Feedback
+class Feedback implements \Stringable
 {
     final public const ORIGIN_FISHBOWL = 'fishbowl';
     final public const ORIGIN_THANK_YOU = 'thank-you';
