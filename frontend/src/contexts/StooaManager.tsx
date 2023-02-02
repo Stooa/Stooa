@@ -104,7 +104,7 @@ const StooaProvider = ({
 
   const startRecording = () => {
     return startRecordingVideoRecorder().then(result => {
-      setIsRecording(true);
+      if (result.status === 'success') setIsRecording(true);
       return result;
     });
   };

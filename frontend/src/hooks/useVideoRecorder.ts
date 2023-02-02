@@ -29,8 +29,7 @@ const getFilename = (fileName?: string) => {
   if (!fileName) {
     return `stooa_${timestamp}`;
   } else {
-    //convert spaces to underscores except if there is a hyphen after or before and remove all non-alphanumeric characters
-    fileName = fileName.replace(/(?<!-)\s+(?!-)/g, '_').replace(/[^a-zA-Z0-9-_]/g, '');
+    fileName = fileName.replace(/(?<!-)\s+(?!-)/g, '_');
 
     return `${fileName}_${timestamp}`;
   }
