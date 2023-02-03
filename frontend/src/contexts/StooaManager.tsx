@@ -105,14 +105,14 @@ const StooaProvider = ({
     useVideoRecorder(sendStopRecordingEvent);
 
   const startRecording = () => {
-    pushEventDataLayer({
-      category: 'Recording',
-      action: 'Start',
-      label: data.slug
-    });
     recordingStart.current = new Date();
     return startRecordingVideoRecorder().then(result => {
       if (result.status === 'success') setIsRecording(true);
+      pushEventDataLayer({
+        category: 'Recording',
+        action: 'Start',
+        label: data.slug
+      });
       return result;
     });
   };
