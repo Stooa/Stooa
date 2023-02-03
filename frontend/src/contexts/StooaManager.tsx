@@ -110,6 +110,7 @@ const StooaProvider = ({
       action: 'Start',
       label: data.slug
     });
+    recordingStart.current = new Date();
     return startRecordingVideoRecorder().then(result => {
       if (result.status === 'success') setIsRecording(true);
       return result;
@@ -125,7 +126,6 @@ const StooaProvider = ({
 
     if (recordingStart.current) {
       const diff = new Date().getTime() - recordingStart.current.getTime();
-      console.log('-----> [STOOA] Recording duration: ', diff);
       pushEventDataLayer({
         category: 'Recording',
         action: 'Duration',
@@ -264,7 +264,6 @@ const StooaProvider = ({
   });
 
   useEventListener(RECORDING_START, () => {
-    recordingStart.current = new Date();
     setIsRecording(true);
   });
 
