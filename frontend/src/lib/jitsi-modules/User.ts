@@ -44,6 +44,8 @@ const userRepository = (): UserRepository => {
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
   const getUserParticipantId = () => getUser()?.participantId || null;
   const getUserParticipantSlug = () => getUser()?.participantSlug || null;
+  const getUserFeedbackId = () => getUser()?.feedbackId || '';
+  const setUserFeedbackId = (feedbackId: string): void => setUser({ feedbackId });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
@@ -95,7 +97,9 @@ const userRepository = (): UserRepository => {
     setUserParticipantId,
     setUserParticipantSlug,
     getUserParticipantId,
-    getUserParticipantSlug
+    getUserParticipantSlug,
+    setUserFeedbackId,
+    getUserFeedbackId
   };
 };
 

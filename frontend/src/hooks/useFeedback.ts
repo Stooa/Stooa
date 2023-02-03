@@ -40,6 +40,16 @@ const useFeedback = () => {
       }
     })
       .then(res => {
+        const {
+          data: {
+            createFeedback: { feedback }
+          }
+        } = res;
+
+        if (feedback.id) {
+          userRepository.setUserFeedbackId(feedback.id);
+        }
+
         console.log('[STOOA] Create Feedback', res);
       })
       .catch(error => {

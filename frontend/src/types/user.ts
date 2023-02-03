@@ -12,6 +12,7 @@ export interface User {
   guestId?: string;
   participantId?: string;
   participantSlug?: string;
+  feedbackId?: string;
   nickname?: string;
   name?: string;
   isCurrentUser?: boolean;
@@ -46,4 +47,6 @@ export interface UserRepository {
   setUserParticipantSlug: (participantSlug: string) => void;
   getUserParticipantId: () => string;
   getUserParticipantSlug: () => string;
+  getUserFeedbackId: () => string;
+  setUserFeedbackId: (feedbackId: string) => void;
 }
