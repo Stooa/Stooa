@@ -10,20 +10,32 @@
 import { useMutation } from '@apollo/client';
 import { CREATE_FEEDBACK, UPDATE_FEEDBACK } from '@/graphql/Feedback';
 import userRepository from '@/jitsi/User';
+import { useStooa } from '@/contexts/StooaManager';
 
 const useFeedback = () => {
   const [createFeedback] = useMutation(CREATE_FEEDBACK);
   const [updateFeedback] = useMutation(UPDATE_FEEDBACK);
-
-  const create = () => {
+  const { data } = useStooa();
+  const useCreateFeedback = () => {
     const satisfaction = 'sad';
-    const participant = userRepository.getUserParticipantId();
+    const participantId = userRepository.getUserParticipantId();
+    const participant = `/participants/${participantId}`;
+    const email = 'foo@foo.com';
+    const comment = 'Lorem ipsum comment';
+    const fishbowl = data.id;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const origin = 'fishbowl';
 
     createFeedback({
       variables: {
         input: {
+          participant,
+          fishbowl,
           satisfaction,
-          participant
+          comment,
+          email,
+          timezone,
+          origin
         }
       }
     })
@@ -35,7 +47,8 @@ const useFeedback = () => {
       });
   };
 
-  const update = () => {
+  const useUpdateFeedback = () => {
+    // @TODO GET FEEDBACK FIRST THEN UPDATE
     const satisfaction = 'happy';
     const participant = userRepository.getUserParticipantId();
 
@@ -56,8 +69,8 @@ const useFeedback = () => {
   };
 
   return {
-    create,
-    update
+    useCreateFeedback,
+    useUpdateFeedback
   };
 };
 

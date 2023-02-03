@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace App\Fishbowl\Tests\Functional;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use App\Core\Entity\Participant;
 use App\Core\Entity\User;
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Feedback;
 use App\Fishbowl\Factory\FishbowlFactory;
@@ -51,22 +53,33 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
     /** @test */
     public function itCreatesFeedback(): void
     {
+        $participant = ParticipantFactory::createOne()->object();
+
         $token = $this->logIn($this->host);
-        $response = $this->callGQLWithToken($token, Feedback::SATISFACTION_HAPPY, Feedback::ORIGIN_FISHBOWL);
+        $response = $this->callGQLWithToken(
+            $token,
+            $participant,
+            Feedback::SATISFACTION_HAPPY,
+            Feedback::ORIGIN_FISHBOWL
+        );
         $graphqlResponse = $response->toArray();
 
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
         $this->assertNotEmpty($graphqlResponse['data']['createFeedback']['feedback']['id']);
+        $this->assertSame(Feedback::SATISFACTION_HAPPY, $graphqlResponse['data']['createFeedback']['feedback']['satisfaction']);
+        $this->assertSame(Feedback::ORIGIN_FISHBOWL, $graphqlResponse['data']['createFeedback']['feedback']['origin']);
     }
 
-    private function callGQLWithToken(string $token, string $satisfaction, string $origin): ResponseInterface
+    private function callGQLWithToken(string $token, Participant $participant, string $satisfaction, string $origin): ResponseInterface
     {
         $createMutation = <<<GQL
             mutation CreateFeedback(\$input: createFeedbackInput!) {
                 createFeedback(input: \$input) {
                     feedback {
                         id
+                        origin
+                        satisfaction
                     }
                 }
             }
@@ -77,6 +90,7 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
                 'query' => $createMutation,
                 'variables' => [
                     'input' => [
+                        'participant' => '/participants/' . $participant->getId(),
                         'satisfaction' => $satisfaction,
                         'origin' => $origin,
                         'timezone' => 'Europe/Madrid',

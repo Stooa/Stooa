@@ -63,26 +63,26 @@ class FeedbackAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $list
+            ->add('createdDateTime')
+            ->add('satisfaction')
             ->add('participant')
             ->add('fishbowl')
-            ->add('email')
-            ->add('satisfaction')
             ->add('comment')
+            ->add('email')
             ->add('origin')
-            ->add('createdDateTime')
             ->add('timezone');
     }
 
     protected function configureFormFields(FormMapper $form): void
     {
         $form
+            ->add('createdDateTime')
+            ->add('satisfaction')
             ->add('participant')
             ->add('fishbowl')
-            ->add('email')
-            ->add('satisfaction')
             ->add('comment')
+            ->add('email')
             ->add('origin')
-            ->add('createdDateTime')
             ->add('timezone');
     }
 }

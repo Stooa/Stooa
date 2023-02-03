@@ -145,5 +145,6 @@ export {
   nearestQuarterHour,
   getTimePlusOneMinute,
   getIsoDateTimeWithActualTimeZone,
-  convertIntoClassName
+  convertIntoClassName,
+  getTimeZoneName
 };

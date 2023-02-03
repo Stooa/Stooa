@@ -9,14 +9,15 @@
 
 import React from 'react';
 import Button from '@/ui/Button';
-
+import useFeedback from '@/hooks/useFeedback';
 const Feedback = () => {
+  const { useCreateFeedback, useUpdateFeedback } = useFeedback();
   const createFeedback = () => {
-    console.log('crate');
+    useCreateFeedback();
   };
 
   const updateFeedback = () => {
-    console.log('crate');
+    useUpdateFeedback();
   };
 
   return (
