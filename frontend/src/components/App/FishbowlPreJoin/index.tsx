@@ -174,7 +174,7 @@ const FishbowlPreJoin: React.FC = () => {
               />
               <ButtonMic joined={true} disabled={!permissions.audio} unlabeled={true} />
               <ButtonMoreOptions
-                noRecording
+                prejoin
                 selectorPosition="bottom"
                 ref={configButtonRef}
                 unlabeled={true}

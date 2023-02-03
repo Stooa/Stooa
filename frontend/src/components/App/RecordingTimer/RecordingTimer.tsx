@@ -16,6 +16,7 @@ const RecordingTimer = () => {
   const [timeToDisplay, setTimeToDisplay] = useState('00:00');
   const [larger, setLarger] = useState(false);
   const [closeToHundredNotification, setCloseToHundredNotification] = useState(false);
+
   const { t } = useTranslation('fishbowl');
 
   const startTime = useRef(new Date());

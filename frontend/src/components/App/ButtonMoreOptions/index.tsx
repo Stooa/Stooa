@@ -12,7 +12,9 @@ import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import Dots from '@/ui/svg/dots-toolbar.svg';
-import Rec from '@/ui/svg/rec.svg';
+import Settings from '@/ui/svg/settings.svg';
+import Rec from '@/ui/svg/rec-red.svg';
+import StopRec from '@/ui/svg/stop-record.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
@@ -35,7 +37,7 @@ import { useNavigatorType } from '@/hooks/useNavigatorType';
 interface Props {
   unlabeled?: boolean;
   selectorPosition?: 'top' | 'bottom';
-  noRecording?: boolean;
+  prejoin?: boolean;
 }
 
 type ButtonHandle = {
@@ -43,7 +45,7 @@ type ButtonHandle = {
 };
 
 const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
-  { unlabeled, selectorPosition, noRecording },
+  { unlabeled, selectorPosition, prejoin },
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
@@ -118,18 +120,25 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
           onClick={() => handleShowDevices()}
           active={true}
         >
-          <div className="button">
-            <Dots />
-          </div>
+          <div className="button">{prejoin ? <Settings /> : <Dots />}</div>
           {!unlabeled && <div className="text medium">{t('settings')}</div>}
         </Button>
 
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
-            {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !noRecording && (
+            {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
               <button className="recording-button" onClick={() => handleShowRecordingModal()}>
-                <Rec />
-                {isRecording ? 'Stop recording' : 'Start recording'}
+                {isRecording ? (
+                  <>
+                    <StopRec />
+                    Stop recording
+                  </>
+                ) : (
+                  <>
+                    <Rec />
+                    Start recording
+                  </>
+                )}
               </button>
             )}
 
