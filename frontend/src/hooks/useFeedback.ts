@@ -18,8 +18,7 @@ const useFeedback = () => {
   const { data } = useStooa();
   const useCreateFeedback = () => {
     const satisfaction = 'sad';
-    const participantId = userRepository.getUserParticipantId();
-    const participant = `/participants/${participantId}`;
+    const participant = userRepository.getUserParticipantId();
     const email = 'foo@foo.com';
     const comment = 'Lorem ipsum comment';
     const fishbowl = data.id;

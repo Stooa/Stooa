@@ -11,7 +11,6 @@ export interface User {
   id?: string;
   guestId?: string;
   participantId?: string;
-  participantSlug?: string;
   feedbackId?: string;
   nickname?: string;
   name?: string;
@@ -44,9 +43,7 @@ export interface UserRepository {
   setUserVideoMuted: (videoMuted: boolean) => void;
   setUserNickname: (nickname: string) => void;
   setUserParticipantId: (participantId: string) => void;
-  setUserParticipantSlug: (participantSlug: string) => void;
   getUserParticipantId: () => string;
-  getUserParticipantSlug: () => string;
   getUserFeedbackId: () => string;
   setUserFeedbackId: (feedbackId: string) => void;
 }

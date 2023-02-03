@@ -43,7 +43,6 @@ const userRepository = (): UserRepository => {
   const getUserAudioMuted = () => getUser()?.audioMuted || false;
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
   const getUserParticipantId = () => getUser()?.participantId || null;
-  const getUserParticipantSlug = () => getUser()?.participantSlug || null;
   const getUserFeedbackId = () => getUser()?.feedbackId || '';
   const setUserFeedbackId = (feedbackId: string): void => setUser({ feedbackId });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
@@ -53,7 +52,6 @@ const userRepository = (): UserRepository => {
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
   const setUserNickname = (nickname: string): void => setUser({ nickname });
   const setUserParticipantId = (participantId: string): void => setUser({ participantId });
-  const setUserParticipantSlug = (participantSlug: string): void => setUser({ participantSlug });
 
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
@@ -95,9 +93,7 @@ const userRepository = (): UserRepository => {
     setUserVideoMuted,
     setUserNickname,
     setUserParticipantId,
-    setUserParticipantSlug,
     getUserParticipantId,
-    getUserParticipantSlug,
     setUserFeedbackId,
     getUserFeedbackId
   };
