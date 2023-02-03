@@ -16,6 +16,7 @@ import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack
 import localTracksRepository from '@/jitsi/LocalTracks';
 import { MediaType } from '@/types/jitsi/media';
 import { toast } from 'react-toastify';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const GIGABYTE = 1073741824;
 
@@ -70,6 +71,8 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     audioContext.current.createMediaStreamDestination()
   );
 
+  const recordingStart = useRef<Date>();
+
   const supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -107,6 +110,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
   }> => {
     recordingData.current = [];
     totalSize.current = GIGABYTE;
+    recordingStart.current = new Date();
 
     if (supportsCaptureHandle()) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -186,7 +190,8 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
 
   const stopRecording = async (
     fileName?: string,
-    downloadingMessage?: string
+    downloadingMessage?: string,
+    slug?: string
   ): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       if (recorderRef.current) {
@@ -195,6 +200,23 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
 
         stopStreamTracks(stream);
         stopStreamTracks(tabMediaStream);
+
+        if (recordingStart.current) {
+          const diff = (new Date().getTime() - recordingStart.current.getTime()) / 1000;
+          pushEventDataLayer({
+            category: 'Recording',
+            action: 'Duration',
+            label: diff.toString()
+          });
+
+          recordingStart.current = undefined;
+        }
+
+        pushEventDataLayer({
+          category: 'Recording',
+          action: 'Stop',
+          label: slug
+        });
 
         setTimeout(async () => {
           await _saveRecording(fileName, downloadingMessage);

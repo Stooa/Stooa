@@ -88,7 +88,6 @@ const StooaProvider = ({
 
   const apiInterval = useRef<number>();
   const timeUpInterval = useRef<number>();
-  const recordingStart = useRef<Date>();
 
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
@@ -105,7 +104,6 @@ const StooaProvider = ({
     useVideoRecorder(sendStopRecordingEvent);
 
   const startRecording = () => {
-    recordingStart.current = new Date();
     return startRecordingVideoRecorder().then(result => {
       if (result.status === 'success') setIsRecording(true);
       pushEventDataLayer({
@@ -118,22 +116,7 @@ const StooaProvider = ({
   };
 
   const stopRecording = () => {
-    pushEventDataLayer({
-      category: 'Recording',
-      action: 'Stop',
-      label: data.slug
-    });
-
-    if (recordingStart.current) {
-      const diff = new Date().getTime() - recordingStart.current.getTime();
-      pushEventDataLayer({
-        category: 'Recording',
-        action: 'Duration',
-        label: diff.toString()
-      });
-    }
-
-    return stopRecordingFromApp(data.name, t('fishbowl:recording.downloading'));
+    return stopRecordingFromApp(data.name, t('fishbowl:recording.downloading'), data.slug);
   };
 
   const startFishbowl = () => {
