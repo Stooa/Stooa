@@ -47,9 +47,12 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
     /** @test */
     public function itCreatesFeedback(): void
     {
-        $participant = ParticipantFactory::createOne()->object();
         $fishbowl = FishbowlFactory::createOne()->object();
-//        $fishbowl->addParticipant($participant);
+
+        $participant = ParticipantFactory::createOne([
+            'user' => $this->host,
+            'fishbowl' => $fishbowl,
+        ])->object();
 
         $token = $this->logIn($this->host);
         $response = $this->callGQLWithToken(
@@ -70,6 +73,8 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
         $this->assertSame('This is a comment', $graphqlResponse['data']['createFeedback']['feedback']['comment']);
         $this->assertSame('email@test.com', $graphqlResponse['data']['createFeedback']['feedback']['email']);
         $this->assertSame('Europe/Madrid', $graphqlResponse['data']['createFeedback']['feedback']['timezone']);
+        $this->assertSame('/fishbowls/' . $fishbowl->getId(), $graphqlResponse['data']['createFeedback']['feedback']['fishbowl']['id']);
+        $this->assertSame('/participants/' . $participant->getId(), $graphqlResponse['data']['createFeedback']['feedback']['participant']['id']);
     }
 
     private function callGQLWithToken(string $token, Participant $participant, Fishbowl $fishbowl, string $satisfaction, string $origin): ResponseInterface
@@ -84,6 +89,12 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
                         comment
                         email
                         timezone
+                        fishbowl {
+                            id
+                        }
+                        participant {
+                            id
+                        }
                     }
                 }
             }
