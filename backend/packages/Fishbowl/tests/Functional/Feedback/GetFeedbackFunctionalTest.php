@@ -58,11 +58,11 @@ class GetFeedbackFunctionalTest extends ApiTestCase
         $this->assertSame($feedback->getComment(), $responseArray['comment']);
         $this->assertSame($feedback->getEmail(), $responseArray['email']);
         $this->assertSame($feedback->getOrigin(), $responseArray['origin']);
-        $this->assertSame($feedback->getCreatedDateTime()->format(\DateTime::ATOM), $responseArray['createdDateTime']);
+        $this->assertSame($feedback->getCreatedDateTime()?->format(\DateTime::ATOM), $responseArray['createdDateTime']);
         $this->assertSame($feedback->getTimezone(), $responseArray['timezone']);
     }
 
-    private function getFeedback(UuidInterface $feedbackId, string $token): ResponseInterface
+    private function getFeedback(?UuidInterface $feedbackId, string $token): ResponseInterface
     {
         return static::createClient()->request('GET', '/feedback/' . $feedbackId, [
             'auth_bearer' => $token,
