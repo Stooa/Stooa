@@ -42,7 +42,7 @@ const userRepository = (): UserRepository => {
   const getUserVideoInput = () => getUser()?.videoInput || null;
   const getUserAudioMuted = () => getUser()?.audioMuted || false;
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
-  const getUserParticipantId = () => getUser()?.participantId || null;
+  const getUserParticipantId = () => getUser()?.participantId || '';
   const getUserFeedbackId = () => getUser()?.feedbackId || '';
   const setUserFeedbackId = (feedbackId: string): void => setUser({ feedbackId });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
