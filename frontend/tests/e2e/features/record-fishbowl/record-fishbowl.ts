@@ -10,13 +10,20 @@
 import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 When('access to a current fishbowl', () => {
-  cy.visit('/en/fb/test-fishbowl', { timeout: 15000 });
+  cy.visit('/en/fb/test-fishbowl', {
+    onBeforeLoad: win => {
+      win.navigator.canShare = () => true;
+      win.navigator.share = cy.stub().resolves(true);
+      win.navigator.canShare = cy.stub().resolves(true);
+    },
+    timeout: 15000
+  });
 
   cy.contains('Join discussion').click();
 });
 
 Then('can click on more options button', () => {
-  cy.get('[data-testid=more-options-button]').should('exist');
+  cy.get('[data-testid=more-options-button]', { timeout: 10000 }).should('exist');
   cy.get('[data-testid=more-options-button]').click();
 });
 
@@ -26,5 +33,7 @@ Then('can click on record button', () => {
 });
 
 Then('can click on start recording button from modal', () => {
-  cy.get('[data-testid=start-recording-button]').should('exist');
+  const button = cy.get('[data-testid=start-recording-button]');
+  button.should('exist');
+  button.click();
 });
