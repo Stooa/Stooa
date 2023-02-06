@@ -80,7 +80,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
   const supportsCaptureHandle = (): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return navigator.mediaDevices.setCaptureHandleConfig;
+    return Boolean(navigator.mediaDevices.setCaptureHandleConfig);
   };
   const _checkIsCurrentTab = (tabMediaStream: MediaStream): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

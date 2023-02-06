@@ -417,7 +417,6 @@ const FishbowlForm = ({
         } = res;
 
         const route = `${ROUTE_FISHBOWL_DETAIL}/${fishbowl.slug}`;
-        console.log('Sauriki', fishbowl.hasIntroduction);
 
         if (fishbowl.hasIntroduction) {
           pushEventDataLayer({

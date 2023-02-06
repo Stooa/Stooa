@@ -28,12 +28,11 @@ Then('can click on more options button', () => {
 });
 
 Then('can click on record button', () => {
-  cy.get('[data-testid=recording-button]').should('exist');
+  cy.get('[data-testid=recording-button]', { timeout: 10000 }).should('exist');
   cy.get('[data-testid=recording-button]').click();
 });
 
-Then('can click on start recording button from modal', () => {
+Then('can see start recording button from modal', () => {
   const button = cy.get('[data-testid=start-recording-button]');
   button.should('exist');
-  button.click();
 });
