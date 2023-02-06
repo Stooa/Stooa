@@ -13,3 +13,4 @@ Feature: Fishbowl
         And starts fishbowl
         Then can click on more options button
         And can click on record button
+        And can click on start recording button from modal

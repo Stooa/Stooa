@@ -15,10 +15,16 @@ When('access to a current fishbowl', () => {
   cy.contains('Join discussion').click();
 });
 
-Then('can click on more options button and then click record', () => {
+Then('can click on more options button', () => {
   cy.get('[data-testid=more-options-button]').should('exist');
   cy.get('[data-testid=more-options-button]').click();
+});
 
+Then('can click on record button', () => {
+  cy.get('[data-testid=recording-button]').should('exist');
+  cy.get('[data-testid=recording-button]').click();
+});
+
+Then('can click on start recording button from modal', () => {
   cy.get('[data-testid=start-recording-button]').should('exist');
-  cy.get('[data-testid=start-recording-button]').click();
 });
