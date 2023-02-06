@@ -19,6 +19,7 @@ use App\Core\Entity\User;
 use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Feedback;
+use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
@@ -41,27 +42,24 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
         ])->object();
-
-        FishbowlFactory::createOne([
-            'name' => 'fishbowl name',
-            'description' => 'fishbowl description',
-            'locale' => 'en',
-            'slug' => 'fishbowl-slug',
-        ]);
     }
 
     /** @test */
     public function itCreatesFeedback(): void
     {
         $participant = ParticipantFactory::createOne()->object();
+        $fishbowl = FishbowlFactory::createOne()->object();
+//        $fishbowl->addParticipant($participant);
 
         $token = $this->logIn($this->host);
         $response = $this->callGQLWithToken(
             $token,
             $participant,
+            $fishbowl,
             Feedback::SATISFACTION_HAPPY,
             Feedback::ORIGIN_FISHBOWL
         );
+
         $graphqlResponse = $response->toArray();
 
         $this->assertArrayHasKey('data', $graphqlResponse);
@@ -69,9 +67,12 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
         $this->assertNotEmpty($graphqlResponse['data']['createFeedback']['feedback']['id']);
         $this->assertSame(Feedback::SATISFACTION_HAPPY, $graphqlResponse['data']['createFeedback']['feedback']['satisfaction']);
         $this->assertSame(Feedback::ORIGIN_FISHBOWL, $graphqlResponse['data']['createFeedback']['feedback']['origin']);
+        $this->assertSame('This is a comment', $graphqlResponse['data']['createFeedback']['feedback']['comment']);
+        $this->assertSame('email@test.com', $graphqlResponse['data']['createFeedback']['feedback']['email']);
+        $this->assertSame('Europe/Madrid', $graphqlResponse['data']['createFeedback']['feedback']['timezone']);
     }
 
-    private function callGQLWithToken(string $token, Participant $participant, string $satisfaction, string $origin): ResponseInterface
+    private function callGQLWithToken(string $token, Participant $participant, Fishbowl $fishbowl, string $satisfaction, string $origin): ResponseInterface
     {
         $createMutation = <<<GQL
             mutation CreateFeedback(\$input: createFeedbackInput!) {
@@ -80,6 +81,9 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
                         id
                         origin
                         satisfaction
+                        comment
+                        email
+                        timezone
                     }
                 }
             }
@@ -91,7 +95,10 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
                 'variables' => [
                     'input' => [
                         'participant' => '/participants/' . $participant->getId(),
+                        'fishbowl' => '/fishbowls/' . $fishbowl->getId(),
                         'satisfaction' => $satisfaction,
+                        'comment' => 'This is a comment',
+                        'email' => 'email@test.com',
                         'origin' => $origin,
                         'timezone' => 'Europe/Madrid',
                     ],
