@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace App\Fishbowl\Tests\Functional\Feedback;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use App\Core\Entity\Participant;
 use App\Core\Entity\User;
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Feedback;
+use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Ramsey\Uuid\UuidInterface;
@@ -53,6 +56,13 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
     /** @test */
     public function itCreatesFeedback(): void
     {
+        $fishbowl = FishbowlFactory::createOne()->object();
+
+        $participant = ParticipantFactory::createOne([
+            'user' => $this->host,
+            'fishbowl' => $fishbowl,
+        ])->object();
+
         $token = $this->logIn($this->host);
 
         $feedback = FeedbackFactory::createOne()->object();
@@ -60,10 +70,12 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
         $response = $this->callGQLWithToken(
             $token,
             $feedback->getId(),
+            $participant,
+            $fishbowl,
             Feedback::SATISFACTION_NEUTRAL,
             Feedback::ORIGIN_FISHBOWL,
-            'new@email.com',
         );
+
         $graphqlResponse = $response->toArray();
 
         $this->assertArrayHasKey('data', $graphqlResponse);
@@ -71,9 +83,12 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
         $this->assertSame('new@email.com', $graphqlResponse['data']['updateFeedback']['feedback']['email']);
         $this->assertSame(Feedback::ORIGIN_FISHBOWL, $graphqlResponse['data']['updateFeedback']['feedback']['origin']);
         $this->assertSame(Feedback::SATISFACTION_NEUTRAL, $graphqlResponse['data']['updateFeedback']['feedback']['satisfaction']);
+        $this->assertSame('This is a comment', $graphqlResponse['data']['updateFeedback']['feedback']['comment']);
+        $this->assertSame('/fishbowls/' . $fishbowl->getId(), $graphqlResponse['data']['updateFeedback']['feedback']['fishbowl']['id']);
+        $this->assertSame('/participants/' . $participant->getId(), $graphqlResponse['data']['updateFeedback']['feedback']['participant']['id']);
     }
 
-    private function callGQLWithToken(string $token, ?UuidInterface $id, string $satisfaction, string $origin, string $email): ResponseInterface
+    private function callGQLWithToken(string $token, ?UuidInterface $id, Participant $participant, Fishbowl $fishbowl, string $satisfaction, string $origin): ResponseInterface
     {
         $createMutation = <<<GQL
             mutation UpdateFeedback(\$input: updateFeedbackInput!) {
@@ -83,6 +98,13 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
                         satisfaction
                         origin
                         email
+                        comment
+                        fishbowl {
+                            id
+                        }
+                        participant {
+                            id
+                        }
                     }
                 }
             }
@@ -94,7 +116,10 @@ class UpdateFeedbackFunctionalTest extends ApiTestCase
                 'variables' => [
                     'input' => [
                         'id' => '/feedback/' . $id,
-                        'email' => $email,
+                        'fishbowl' => '/fishbowls/' . $fishbowl->getId(),
+                        'participant' => '/participants/' . $participant->getId(),
+                        'email' => 'new@email.com',
+                        'comment' => 'This is a comment',
                         'satisfaction' => $satisfaction,
                         'origin' => $origin,
                     ],

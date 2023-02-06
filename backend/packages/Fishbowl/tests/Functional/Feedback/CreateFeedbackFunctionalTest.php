@@ -55,6 +55,7 @@ class CreateFeedbackFunctionalTest extends ApiTestCase
         ])->object();
 
         $token = $this->logIn($this->host);
+
         $response = $this->callGQLWithToken(
             $token,
             $participant,
