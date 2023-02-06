@@ -11,14 +11,7 @@ import React from 'react';
 import Button from '@/ui/Button';
 import useFeedback from '@/hooks/useFeedback';
 const Feedback = () => {
-  const { useCreateFeedback, useUpdateFeedback } = useFeedback();
-  const createFeedback = () => {
-    useCreateFeedback();
-  };
-
-  const updateFeedback = () => {
-    useUpdateFeedback();
-  };
+  const { createFeedback, updateFeedback } = useFeedback();
 
   return (
     <>

@@ -16,17 +16,17 @@ import api from '@/lib/api';
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
 
 const useFeedback = () => {
-  const [createFeedback] = useMutation(CREATE_FEEDBACK);
-  const [updateFeedback] = useMutation(UPDATE_FEEDBACK);
+  const [createFeedbackMutation] = useMutation(CREATE_FEEDBACK);
+  const [updateFeedbackMutation] = useMutation(UPDATE_FEEDBACK);
   const { data } = useStooa();
-  const useCreateFeedback = () => {
+  const createFeedback = () => {
     const satisfaction = 'sad';
     const participant = userRepository.getUserParticipantId();
     const fishbowl = data.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const origin = 'fishbowl';
 
-    createFeedback({
+    createFeedbackMutation({
       variables: {
         input: {
           participant,
@@ -78,10 +78,10 @@ const useFeedback = () => {
     return null;
   };
 
-  const useUpdateFeedback = async () => {
+  const updateFeedback = async () => {
     const feedbackId = userRepository.getUserFeedbackId();
 
-    updateFeedback({
+    updateFeedbackMutation({
       variables: {
         input: {
           id: feedbackId,
@@ -99,8 +99,8 @@ const useFeedback = () => {
   };
 
   return {
-    useCreateFeedback,
-    useUpdateFeedback,
+    createFeedback,
+    updateFeedback,
     getFeedback
   };
 };
