@@ -15,6 +15,6 @@ export interface User {
   linkedinProfile?: string;
   twitterProfile?: string;
   plainPassword?: string;
-  readonly email?: string;
-  readonly locale?: string;
+  readonly email: string;
+  readonly locale: string;
 }

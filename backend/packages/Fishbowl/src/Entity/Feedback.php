@@ -63,6 +63,7 @@ class Feedback implements \Stringable
     ];
 
     #[ORM\Id]
+    #[Groups(['feedback:read'])]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]

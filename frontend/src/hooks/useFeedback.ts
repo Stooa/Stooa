@@ -11,6 +11,9 @@ import { useMutation } from '@apollo/client';
 import { CREATE_FEEDBACK, UPDATE_FEEDBACK } from '@/graphql/Feedback';
 import userRepository from '@/jitsi/User';
 import { useStooa } from '@/contexts/StooaManager';
+import { getAuthToken } from '@/user/auth';
+import api from '@/lib/api';
+import { Feedback } from '@/types/api-platform/interfaces/feedback';
 
 const useFeedback = () => {
   const [createFeedback] = useMutation(CREATE_FEEDBACK);
@@ -19,8 +22,6 @@ const useFeedback = () => {
   const useCreateFeedback = () => {
     const satisfaction = 'sad';
     const participant = userRepository.getUserParticipantId();
-    const email = 'foo@foo.com';
-    const comment = 'Lorem ipsum comment';
     const fishbowl = data.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const origin = 'fishbowl';
@@ -31,8 +32,6 @@ const useFeedback = () => {
           participant,
           fishbowl,
           satisfaction,
-          comment,
-          email,
           timezone,
           origin
         }
@@ -56,16 +55,38 @@ const useFeedback = () => {
       });
   };
 
-  const useUpdateFeedback = () => {
-    // @TODO GET FEEDBACK FIRST THEN UPDATE
-    const satisfaction = 'happy';
-    const participant = userRepository.getUserParticipantId();
+  const getFeedback = async (): Promise<Feedback | null> => {
+    const auth = await getAuthToken();
+    const feedbackId = userRepository.getUserFeedbackId();
+
+    api
+      .get(feedbackId, {
+        headers: {
+          authorization: `${auth ? auth.authorizationString : null}`
+        }
+      })
+      .then(response => {
+        if (response.data) {
+          console.log('[STOOA] Get feedback', response.data);
+          return response.data;
+        }
+      })
+      .catch(error => {
+        console.error('[STOOA] Get Feedback error', error);
+      });
+
+    return null;
+  };
+
+  const useUpdateFeedback = async () => {
+    const feedbackId = userRepository.getUserFeedbackId();
 
     updateFeedback({
       variables: {
         input: {
-          satisfaction,
-          participant
+          id: feedbackId,
+          comment: 'This is a comment',
+          email: 'test@email.com'
         }
       }
     })
@@ -79,7 +100,8 @@ const useFeedback = () => {
 
   return {
     useCreateFeedback,
-    useUpdateFeedback
+    useUpdateFeedback,
+    getFeedback
   };
 };
 

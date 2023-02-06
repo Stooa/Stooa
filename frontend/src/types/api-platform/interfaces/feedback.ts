@@ -7,10 +7,14 @@
  * file that was distributed with this source code.
  */
 
-export interface Participant {
+export interface Feedback {
   "@id"?: string;
-  readonly user?: string;
-  readonly guest?: string;
-  readonly lastPing: Date;
-  readonly fishbowl: string;
+  timezone?: string;
+  satisfaction: string;
+  comment?: string;
+  email?: string;
+  origin?: string;
+  fishbowl?: string;
+  participant?: string;
+  readonly createdDateTime?: Date;
 }
