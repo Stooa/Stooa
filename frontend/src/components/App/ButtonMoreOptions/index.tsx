@@ -116,18 +116,27 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       <Container>
         <Button
           id="config-button"
+          data-testid="more-options-button"
           className={`body-sm ${showDevices ? 'active' : ''}`}
           onClick={() => handleShowDevices()}
           active={true}
         >
           <div className="button">{prejoin ? <Settings /> : <Dots />}</div>
-          {!unlabeled && <div className="text medium">{t('settings')}</div>}
+          {!unlabeled && (
+            <div data-testid="label" className="text medium">
+              {t('settings')}
+            </div>
+          )}
         </Button>
 
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
-              <button className="recording-button" onClick={() => handleShowRecordingModal()}>
+              <button
+                data-testid="recording-button"
+                className="recording-button"
+                onClick={() => handleShowRecordingModal()}
+              >
                 {isRecording ? (
                   <>
                     <StopRec />
@@ -148,7 +157,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   <MicIcon /> {t('mic')}
                 </li>
                 {!permissions.audio ? (
-                  <PermissionsNotGranted>
+                  <PermissionsNotGranted data-testid="no-audio-input-devices">
                     <Cross />
                     <span>Permission not granted</span>
                   </PermissionsNotGranted>
@@ -177,7 +186,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   <SpeakerIcon /> {t('speaker')}
                 </li>
                 {!permissions.audio ? (
-                  <PermissionsNotGranted>
+                  <PermissionsNotGranted data-testid="no-audio-output-devices">
                     <Cross />
                     <span>Permission not granted</span>
                   </PermissionsNotGranted>
@@ -206,7 +215,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   <VideoIcon /> {t('cam')}
                 </li>
                 {!permissions.video ? (
-                  <PermissionsNotGranted>
+                  <PermissionsNotGranted data-testid="no-video-devices">
                     <Cross />
                     <span>Permission not granted</span>
                   </PermissionsNotGranted>
