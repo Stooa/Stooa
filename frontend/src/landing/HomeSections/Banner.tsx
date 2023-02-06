@@ -16,6 +16,7 @@ import { Banner as BannerStyled } from '@/landing/ui/styles';
 import AnimPath from '@/landing/ui/animations/home/banner-morph.json';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
+import { pushEventDataLayer } from '@/lib/analytics';
 
 const Banner: React.FC = () => {
   const { t } = useTranslation('home');
@@ -40,7 +41,17 @@ const Banner: React.FC = () => {
       <div id="animated-banner-morph"></div>
       <div>
         <p className="body-lg animate-item">{t('banner')}</p>
-        <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+        <RedirectLink
+          onClick={() => {
+            pushEventDataLayer({
+              category: 'Schedule Fishbowl',
+              action: 'Prefooter',
+              label: 'Prefooter'
+            });
+          }}
+          href={ROUTE_FISHBOWL_CREATE}
+          passHref
+        >
           <Button size="large" as="a" className="animate-item cta-create-fishbowl">
             <span>{t('scheduleFishbowl')}</span>
           </Button>
