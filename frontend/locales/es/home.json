@@ -13,11 +13,11 @@
     "howStooa": {
         "title" : "¿Cómo funciona Stooa?",
         "subtitle" : "¡És muy sencillo!",
-        "firstBulletTitle": "5 sillas para debatir",
-        "firstBulletSub": "Para participar en el debate tendrás que ocupar una de las sillas.",
+        "firstBulletTitle": "5 sillas para dialogar",
+        "firstBulletSub": "Para participar en el diálogo tendrás que ocupar una de las sillas.",
         "secondBulletTitle": "1 Silla libre para potenciar la participación",
         "secondBulletSub": "Siempre tiene que haber una silla libre.",
-        "longExplanation1": "Cualquier asistente puede <span>ocupar una silla libre</span> en cualquier momento <span>para participar en el debate</span>.",
+        "longExplanation1": "Cualquier asistente puede <span>ocupar una silla libre</span> en cualquier momento <span>para participar en el diálogo</span>.",
         "longExplanation2": "Si todas las <span>sillas están ocupadas</span> alguien que ya haya participado deberá <span>dejar su asiento libre</span>."
     },
     "keybenefits": {
