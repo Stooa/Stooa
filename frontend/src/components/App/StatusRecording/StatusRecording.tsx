@@ -18,7 +18,13 @@ import { useState } from 'react';
 import Tooltip from '@/components/Common/Tooltip';
 import { useModals } from '@/contexts/ModalsContext';
 
-const StatusRecording = ({ showAnimation }: { showAnimation: boolean }) => {
+const StatusRecording = ({
+  showAnimation,
+  className = ''
+}: {
+  showAnimation: boolean;
+  className?: string;
+}) => {
   const { t } = useTranslation('fishbowl');
   const { isModerator } = useStooa();
   const [showTooltip, setShowTooltip] = useState(false);
@@ -26,7 +32,9 @@ const StatusRecording = ({ showAnimation }: { showAnimation: boolean }) => {
 
   return (
     <StyledRecordingStatus
-      className={`body-xs medium ${isModerator ? 'moderator' : ''} ${showAnimation ? 'show' : ''}`}
+      className={`body-xs medium ${isModerator ? 'moderator' : ''} ${
+        showAnimation ? 'show' : ''
+      } ${className}`}
     >
       {isModerator ? (
         <>

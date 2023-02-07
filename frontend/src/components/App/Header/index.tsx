@@ -69,11 +69,13 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
 
   return (
     <HeaderStyled className={`${isPrefishbowl ? 'prefishbowl' : ''}`}>
-      <StatusRecording showAnimation={isRecording} />
       {!isPrefishbowl && (
         <div className="hide-desktop header-top">
           <Logo className="header-logo" />
-          <StatusBar />
+          <div className="mobile-status">
+            <StatusRecording showAnimation={isRecording} />
+            <StatusBar />
+          </div>
         </div>
       )}
       <div className="header-info">
@@ -89,6 +91,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
       <div className="header-share">
         <ModalShareLink />
       </div>
+      <StatusRecording className="hide-mobile" showAnimation={isRecording} />
       <div className="header-actions">
         {isModerator && (
           <div className={!isPrefishbowl ? 'hide-mobile' : ''}>
