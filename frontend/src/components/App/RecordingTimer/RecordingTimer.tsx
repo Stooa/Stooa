@@ -8,7 +8,7 @@
  */
 
 import useTranslation from 'next-translate/useTranslation';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { StyledTimeDisplay } from './styles';
 
@@ -29,7 +29,7 @@ const RecordingTimer = () => {
     return '';
   };
 
-  const timer = () => {
+  const timer = useCallback(() => {
     const now = new Date();
     const diff = now.getTime() - startTime.current.getTime();
 
@@ -53,7 +53,7 @@ const RecordingTimer = () => {
         seconds > 9 ? seconds : `0${seconds}`
       }`
     );
-  };
+  }, [closeToHundredNotification]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,7 +63,7 @@ const RecordingTimer = () => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [timer]);
 
   return <StyledTimeDisplay className={larger ? 'larger' : ''}>{timeToDisplay}</StyledTimeDisplay>;
 };
