@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bc17f4fa63676c96d0a5498b98d18c6",
+    "content-hash": "af7b7a03c7fa0e3f07b145c4d9b7fb12",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4952,16 +4952,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.4.0",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "da37806c8b76cb11087455a023921036d54846fe"
+                "reference": "6e0ee4773ab40ad9f5fe5d645ea61ce18cfadc3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/da37806c8b76cb11087455a023921036d54846fe",
-                "reference": "da37806c8b76cb11087455a023921036d54846fe",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/6e0ee4773ab40ad9f5fe5d645ea61ce18cfadc3a",
+                "reference": "6e0ee4773ab40ad9f5fe5d645ea61ce18cfadc3a",
                 "shasum": ""
             },
             "require": {
@@ -4993,7 +4993,7 @@
                 "twig/twig": "^2.14 || ^3.0"
             },
             "conflict": {
-                "sonata-project/admin-bundle": "<4.9",
+                "sonata-project/admin-bundle": "<4.20",
                 "sonata-project/block-bundle": "<4.11",
                 "sonata-project/doctrine-orm-admin-bundle": "<4.0"
             },
@@ -5015,8 +5015,8 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.17",
                 "psalm/plugin-symfony": "^3.0",
-                "rector/rector": "^0.14",
-                "sonata-project/admin-bundle": "^4.9",
+                "rector/rector": "^0.15",
+                "sonata-project/admin-bundle": "^4.20",
                 "sonata-project/block-bundle": "^4.11",
                 "sonata-project/doctrine-orm-admin-bundle": "^4.0",
                 "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
@@ -5059,7 +5059,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.4.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.5.0"
             },
             "funding": [
                 {
@@ -5079,7 +5079,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-09T20:29:43+00:00"
+            "time": "2023-02-06T10:35:41+00:00"
         },
         {
             "name": "symfony/amazon-mailer",
