@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c5c7980a52103f37939433568dea2c9",
+    "content-hash": "39db3d6a22f9667c75b833f5383fc3ce",
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "v2.7.8",
+            "version": "v2.7.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "dc11c7322ba47bb722e963e811face7265bae5e6"
+                "reference": "1c9a025aac450035ddd6b6a89b0312493303be49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/dc11c7322ba47bb722e963e811face7265bae5e6",
-                "reference": "dc11c7322ba47bb722e963e811face7265bae5e6",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/1c9a025aac450035ddd6b6a89b0312493303be49",
+                "reference": "1c9a025aac450035ddd6b6a89b0312493303be49",
                 "shasum": ""
             },
             "require": {
@@ -165,7 +165,7 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v2.7.8"
+                "source": "https://github.com/api-platform/core/tree/v2.7.9"
             },
             "funding": [
                 {
@@ -173,7 +173,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-27T09:28:22+00:00"
+            "time": "2023-02-03T08:53:46+00:00"
         },
         {
             "name": "async-aws/core",
