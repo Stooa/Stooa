@@ -89,6 +89,7 @@ class FishbowlControllerTest extends TestCase
 
         $jsonResponse = new JsonResponse(['response' => [
             'participantId' => '/participants/' . $participant->getId(),
+            'participantSlug' => $participant->getFishbowl()?->getSlug(),
         ]]);
 
         $this->fishbowlService->method('ping')->willReturn($participant);
