@@ -37,12 +37,12 @@ const RecordingTimer = () => {
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff - hours * 1000 * 60 * 60) / (1000 * 60));
 
-    // if diff is greater than 95 minutes, launch a toast once
     if (diff > 5700000 && !closeToHundredNotification) {
       setCloseToHundredNotification(true);
       toast(t('recording.closeToHundredNotification'), {
         icon: '⚠️',
         type: 'warning',
+        toastId: 'closeToHundredNotification',
         position: 'bottom-center',
         autoClose: 5000
       });

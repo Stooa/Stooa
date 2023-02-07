@@ -21,6 +21,7 @@ const StyledRecordingStatus = styled.div`
   line-height: 1.33;
   padding: ${space(1.25)} ${space(1.5)} ${space(0.875)} ${space(1)};
   transition: transform 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
+  transform: translate(0, -300px);
 
   &.show {
     transition: transform 1s 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
