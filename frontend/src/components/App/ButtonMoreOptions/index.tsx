@@ -140,12 +140,12 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                 {isRecording ? (
                   <>
                     <StopRec />
-                    Stop recording
+                    {t('recording.stop')}
                   </>
                 ) : (
                   <>
                     <Rec />
-                    Start recording
+                    {t('recording.start')}
                   </>
                 )}
               </button>

@@ -27,9 +27,9 @@ const getFilename = (fileName?: string) => {
   const day = date.getDate();
   const hour = date.getHours();
   const minutes = date.getMinutes();
-  const timestamp = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}${
+  const timestamp = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}-${
     hour < 10 ? '0' + hour : hour
-  }${minutes < 10 ? '0' + minutes : minutes}}`;
+  }${minutes < 10 ? '0' + minutes : minutes}`;
 
   if (!fileName) {
     return `stooa_${timestamp}`;

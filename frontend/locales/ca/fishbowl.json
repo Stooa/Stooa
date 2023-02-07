@@ -142,7 +142,7 @@
     "recording": {
         "startedSuccessfully": "Gravació iniciada. Para l'enregistrament per a guardar-lo.",
         "downloading": "La teva gravació s'està descarregant.",
-        "participantNotificationStart": "La persona amfitriona está gravant.",
+        "participantNotificationStart": "La persona amfitriona està gravant.",
         "participantNotificationStop": "La persona amfitriona ha deixat de gravar.",
         "closeToHundredNotification": "No mes et queden 5 minuts de gravació per a arribar al limit.",
         "wrongTab": "Error de gravació. Si us plau, selecciona la pestanya actual.",
@@ -156,7 +156,7 @@
             "experimental": "Experimental",
             "firstBullet": "Es guardarà en la teva <span>carpeta de descàrregues</span>. Està limitada a 1 GB, uns 100 minuts.",
             "secondBullet": "Assegura't de <span>seleccionar la pestanya actual</span>, en cas contrari la gravació no s'iniciarà.",
-            "thirdBullet": "Per a gravar el Fishbowl has de comptar amb el <span>consentiment de tots els assistents</span>."
+            "thirdBullet": "Per a gravar el <i>fishbowl</i> has de comptar amb el <span>consentiment de tots els assistents</span>."
         },
         "stopModal": {
             "title": "Estàs segur que vols detenir la gravació?",

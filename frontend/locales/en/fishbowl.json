@@ -144,19 +144,19 @@
         "downloading": "Your recording is downloading.",
         "participantNotificationStart": "The host is recording.",
         "participantNotificationStop": "The host has stopped recording.",
-        "closeToHundredNotification": "You only have 5 more minutes of recording until you reach the limit.",
-        "wrongTab": "Recording failed. Please select the current tab",
-        "recordingError": "Could not record the fishbowl, refresh and try again",
-        "selectThisTab": "Select this tab to record",
+        "closeToHundredNotification": "You have 5 minutes left until the recording stops. You can start recording again.",
+        "wrongTab": "Recording failed. Please select the current tab.",
+        "recordingError": "Failed to start recording, please refresh the page and try again.",
+        "selectThisTab": "Select this tab to start recording.",
         "stop": "Stop recording",
         "start": "Start recording",
         "status": "Recording",
         "startModal": {
             "title": "You are about to start recording",
             "experimental": "Experimental",
-            "firstBullet": "It ill be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
-            "secondBullet": "Make sure you <span>select the current tab</span>, otherwise the recording will not start.",
-            "thirdBullet": "In order to record the Fishbowl you must have <span>the consent of all attendees</span>."
+            "firstBullet": "It will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
+            "secondBullet": "Make sure you <span>select the current tab</span>, otherwise the recording won't start.",
+            "thirdBullet": "In order to record the fishbowl you must have <span>the consent of all attendees</span>."
         },
         "stopModal": {
             "title": "Are you sure you want to stop recording?",

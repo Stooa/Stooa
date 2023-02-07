@@ -46,7 +46,7 @@ const ModalStartRecording: React.FC<Props> = ({ closeModal, startRecording }) =>
           <li>
             <Trans
               i18nKey="fishbowl:recording.startModal.thirdBullet"
-              components={{ span: <span className="medium" /> }}
+              components={{ span: <span className="medium" />, i: <i /> }}
             />
           </li>
         </ul>

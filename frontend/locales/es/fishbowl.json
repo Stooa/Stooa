@@ -144,19 +144,19 @@
         "downloading": "Tu grabación se está descargando.",
         "participantNotificationStart": "La persona anfitriona está grabando.",
         "participantNotificationStop": "La persona anfitriona ha dejado de grabar.",
-        "closeToHundredNotification": "Te quedan 5 minutos para que la grabación se pare.",
+        "closeToHundredNotification": "Te quedan 5 minutos para que la grabación se pare. Puedes volver a grabar.",
         "wrongTab": "Error de grabación. Por favor, selecciona la pestaña actual.",
         "recordingError": "No se pudo iniciar grabación, refresca la página y vuelve a intentarlo.",
         "selectThisTab": "Selecciona esta pestaña para grabar",
         "stop": "Parar la grabación",
-        "start": "Empezar grabación",
+        "start": "Empezar la grabación",
         "status": "Grabando",
         "startModal": {
             "title": "Estás a punto de iniciar la grabación",
             "experimental": "Experimental",
             "firstBullet": "Se guardará en tu <span>carpeta de descargas</span>. Está limitada a 1 GB, unos 100 minutos.",
             "secondBullet": "Asegúrate de <span>seleccionar la pestaña actual</span>, de lo contrario la grabación no se iniciará.",
-            "thirdBullet": "Para grabar el Fishbowl debes contar con el <span>consentimiento de todos los asistentes</span>."
+            "thirdBullet": "Para grabar el <i>fishbowl</i> debes contar con el <span>consentimiento de todos los asistentes</span>."
         },
         "stopModal": {
             "title": "¿Estás seguro de que quieres detener la grabación?",
