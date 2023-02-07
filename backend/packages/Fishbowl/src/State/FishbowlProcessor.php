@@ -30,7 +30,7 @@ final class FishbowlProcessor implements ProcessorInterface
      * @param array<mixed> $context
      * @param array<mixed> $uriVariables
      */
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
         $result = $this->decorated->process($data, $operation, $uriVariables, $context);
 
