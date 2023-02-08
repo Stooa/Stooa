@@ -119,8 +119,8 @@ const nearestQuarterHour = () => {
 
 const getTimePlusOneMinute = () => {
   const date = new Date(Date.now() + 60 * 1000);
-  
-  return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
 };
 
 const getIsoDateTimeWithActualTimeZone = () => {
