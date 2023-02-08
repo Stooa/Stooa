@@ -144,7 +144,7 @@
         "downloading": "Tu grabación se está descargando.",
         "participantNotificationStart": "La persona anfitriona está grabando.",
         "participantNotificationStop": "La persona anfitriona ha dejado de grabar.",
-        "closeToHundredNotification": "Te quedan 5 minutos para que la grabación se pare. Puedes volver a grabar.",
+        "closeToGiga": "Capacidad de grabación llegando a su límite, recuerda que puedes volver a grabar.",
         "wrongTab": "Error de grabación. Por favor, selecciona la pestaña actual.",
         "recordingError": "No se pudo iniciar grabación, refresca la página y vuelve a intentarlo.",
         "selectThisTab": "Selecciona esta pestaña para grabar",

@@ -144,7 +144,7 @@
         "downloading": "La teva gravació s'està descarregant.",
         "participantNotificationStart": "La persona amfitriona està gravant.",
         "participantNotificationStop": "La persona amfitriona ha deixat de gravar.",
-        "closeToHundredNotification": "No mes et queden 5 minuts de gravació per a arribar al limit.",
+        "closeToGiga": "Capacitat d'enregistrament arribant al seu límit, recorda que pots tornar a gravar.",
         "wrongTab": "Error de gravació. Si us plau, selecciona la pestanya actual.",
         "recordingError": "No es va poder iniciar la gravació, refresca la pàgina i torna a intentar-ho.",
         "selectThisTab": "Selecciona aquesta pestanya per a gravar",

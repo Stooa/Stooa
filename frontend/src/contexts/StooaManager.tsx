@@ -100,8 +100,18 @@ const StooaProvider = ({
     setIsRecording(false);
   };
 
+  const closeToGigabyteLimitNotification = () => {
+    toast(t('fishbowl:recording.closeToGiga'), {
+      icon: '⚠️',
+      toastId: 'close-to-giga',
+      type: 'warning',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+  };
+
   const { startRecording: startRecordingVideoRecorder, stopRecording: stopRecordingFromApp } =
-    useVideoRecorder(sendStopRecordingEvent);
+    useVideoRecorder(sendStopRecordingEvent, closeToGigabyteLimitNotification);
 
   const startRecording = () => {
     return startRecordingVideoRecorder().then(result => {

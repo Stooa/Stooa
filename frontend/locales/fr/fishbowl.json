@@ -137,7 +137,7 @@
         "downloading": "Votre enregistrement est en cours de téléchargement.",
         "participantNotificationStart": "L'hôte enregistre.",
         "participantNotificationStop": "L'hôte a arrêté l'enregistrement.",
-        "closeToHundredNotification": "Il vous reste 5 minutes avant l'arrêt de l'enregistrement. Vous pouvez recommencer l'enregistrement.",
+        "closeToGiga": "La capacité d'enregistrement atteint sa limite, rappelez-vous que vous pouvez réenregistrer.",
         "wrongTab": "L'enregistrement a échoué. Veuillez sélectionner l'onglet actuel.",
         "recordingError": "Échec du démarrage de l'enregistrement, veuillez actualiser la page et réessayer.",
         "selectThisTab": "Sélectionnez cet onglet pour commencer l'enregistrement",

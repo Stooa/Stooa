@@ -144,7 +144,7 @@
         "downloading": "Your recording is downloading.",
         "participantNotificationStart": "The host is recording.",
         "participantNotificationStop": "The host has stopped recording.",
-        "closeToHundredNotification": "You have 5 minutes left until the recording stops. You can start recording again.",
+        "closeToGiga": "Recording capacity reaching its limit, remember that you can re-record.",
         "wrongTab": "Recording failed. Please select the current tab.",
         "recordingError": "Failed to start recording, please refresh the page and try again.",
         "selectThisTab": "Select this tab to start recording.",

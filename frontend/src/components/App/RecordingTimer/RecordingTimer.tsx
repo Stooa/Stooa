@@ -7,17 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import useTranslation from 'next-translate/useTranslation';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
 import { StyledTimeDisplay } from './styles';
 
 const RecordingTimer = () => {
   const [timeToDisplay, setTimeToDisplay] = useState('00:00');
   const [larger, setLarger] = useState(false);
-  const [closeToHundredNotification, setCloseToHundredNotification] = useState(false);
-
-  const { t } = useTranslation('fishbowl');
 
   const startTime = useRef(new Date());
 
@@ -37,23 +32,12 @@ const RecordingTimer = () => {
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff - hours * 1000 * 60 * 60) / (1000 * 60));
 
-    if (diff > 5700000 && !closeToHundredNotification) {
-      setCloseToHundredNotification(true);
-      toast(t('recording.closeToHundredNotification'), {
-        icon: '⚠️',
-        type: 'warning',
-        toastId: 'closeToHundredNotification',
-        position: 'bottom-center',
-        autoClose: 5000
-      });
-    }
-
     setTimeToDisplay(
       `${hoursToDisplay(hours)}${minutes > 9 ? minutes : `0${minutes}`}:${
         seconds > 9 ? seconds : `0${seconds}`
       }`
     );
-  }, [closeToHundredNotification]);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

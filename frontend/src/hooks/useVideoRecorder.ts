@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
 import trackRepository from '@/jitsi/Tracks';
 import useEventListener from '@/hooks/useEventListener';
@@ -64,9 +64,11 @@ const getMimeType = (): string => {
   throw new Error('No MIME Type supported by MediaRecorder');
 };
 
-const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
+const useVideoRecorder = (handleStoppedFromBrowser?: () => void, closeToGigabyte?: () => void) => {
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
+  const [ranNotification, setRanNotification] = useState(false);
+
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const totalSize = useRef<number>(GIGABYTE);
@@ -171,15 +173,7 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
         videoBitsPerSecond: 2500000
       });
 
-      recorderRef.current.addEventListener('dataavailable', e => {
-        if (e.data && e.data.size > 0) {
-          recordingData.current.push(e.data);
-          totalSize.current -= e.data.size;
-          if (totalSize.current <= 0) {
-            stopRecording().catch(() => null);
-          }
-        }
-      });
+      recorderRef.current.addEventListener('dataavailable', dataAvailable);
 
       tabMediaStream.addEventListener('inactive', () => {
         if (handleStoppedFromBrowser) handleStoppedFromBrowser();
@@ -192,45 +186,44 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
     return { status: 'error', type: 'no-combined-stream' };
   };
 
-  const stopRecording = async (
-    fileName?: string,
-    downloadingMessage?: string,
-    slug?: string
-  ): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      if (recorderRef.current) {
-        recorderRef.current.stop();
-        recorderRef.current = undefined;
+  const stopRecording = useCallback(
+    async (fileName?: string, downloadingMessage?: string, slug?: string): Promise<boolean> => {
+      return new Promise((resolve, reject) => {
+        if (recorderRef.current) {
+          recorderRef.current.stop();
+          recorderRef.current = undefined;
 
-        stopStreamTracks(stream);
-        stopStreamTracks(tabMediaStream);
+          stopStreamTracks(stream);
+          stopStreamTracks(tabMediaStream);
 
-        if (recordingStart.current) {
-          const diff = (new Date().getTime() - recordingStart.current.getTime()) / 1000;
+          if (recordingStart.current) {
+            const diff = (new Date().getTime() - recordingStart.current.getTime()) / 1000;
+            pushEventDataLayer({
+              category: 'Recording',
+              action: 'Duration',
+              label: diff.toString()
+            });
+
+            recordingStart.current = undefined;
+          }
+
           pushEventDataLayer({
             category: 'Recording',
-            action: 'Duration',
-            label: diff.toString()
+            action: 'Stop',
+            label: slug
           });
 
-          recordingStart.current = undefined;
+          setTimeout(async () => {
+            await _saveRecording(fileName, downloadingMessage);
+            resolve(true);
+          }, 1000);
+        } else {
+          reject(false);
         }
-
-        pushEventDataLayer({
-          category: 'Recording',
-          action: 'Stop',
-          label: slug
-        });
-
-        setTimeout(async () => {
-          await _saveRecording(fileName, downloadingMessage);
-          resolve(true);
-        }, 1000);
-      } else {
-        reject(false);
-      }
-    });
-  };
+      });
+    },
+    [stream, tabMediaStream]
+  );
 
   const _saveRecording = async (fileName?: string, downloadingMessage?: string) => {
     const mediaType = getMimeType();
@@ -251,6 +244,38 @@ const useVideoRecorder = (handleStoppedFromBrowser?: () => void) => {
       autoClose: 3000
     });
   };
+
+  const dataAvailable = useCallback(
+    (e: BlobEvent) => {
+      if (e.data && e.data.size > 0) {
+        recordingData.current.push(e.data);
+        totalSize.current -= e.data.size;
+
+        if (totalSize.current <= 100000000 && !ranNotification) {
+          if (closeToGigabyte) {
+            closeToGigabyte();
+            setRanNotification(true);
+          }
+        }
+        if (totalSize.current <= 0) {
+          stopRecording().catch(() => null);
+        }
+      }
+    },
+    [ranNotification, closeToGigabyte, stopRecording]
+  );
+
+  useEffect(() => {
+    if (recorderRef?.current) {
+      recorderRef.current.addEventListener('dataavailable', dataAvailable);
+    }
+
+    return () => {
+      if (recorderRef?.current) {
+        recorderRef.current.removeEventListener('dataavailable', dataAvailable);
+      }
+    };
+  }, [ranNotification, dataAvailable]);
 
   return {
     startRecording,
