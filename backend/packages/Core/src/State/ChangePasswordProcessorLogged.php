@@ -16,34 +16,26 @@ namespace App\Core\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
-use App\Core\Model\ChangePasswordInput;
-use App\Core\Security\PasswordEncoderService;
-use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use App\Core\Model\ChangePasswordLoggedInput;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
-final class ChangePasswordProcessor implements ProcessorInterface
+final class ChangePasswordProcessorLogged implements ProcessorInterface
 {
     public function __construct(
-        private readonly PasswordEncoderService $passwordEncoder,
-        private readonly ResetPasswordHelperInterface $helper
+        private readonly Security $security
     ) {
     }
 
-    /** @param ChangePasswordInput $data */
+    /** @param ChangePasswordLoggedInput $data */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
-        $token = (string) $data->getToken();
-
         /** @var User $user */
-        $user = $this->helper->validateTokenAndFetchUser($token);
+        $user = $this->security->getUser();
 
         Assert::isInstanceOf($user, User::class);
 
-        $user->setPlainPassword($data->getPassword());
-
-        $this->helper->removeResetRequest($token);
-
-        $this->passwordEncoder->encodePassword($user);
+        $user->setPlainPassword($data->getNewPassword());
 
         return $user;
     }
