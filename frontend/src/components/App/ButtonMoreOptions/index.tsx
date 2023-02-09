@@ -159,7 +159,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                 {!permissions.audio ? (
                   <PermissionsNotGranted data-testid="no-audio-input-devices">
                     <Cross />
-                    <span>Permission not granted</span>
+                    <span>{t('permissionsNotGranted')}</span>
                   </PermissionsNotGranted>
                 ) : (
                   devices.audioInputDevices.map(({ deviceId, label }) => (
@@ -188,7 +188,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                 {!permissions.audio ? (
                   <PermissionsNotGranted data-testid="no-audio-output-devices">
                     <Cross />
-                    <span>Permission not granted</span>
+                    <span>{t('permissionsNotGranted')}</span>
                   </PermissionsNotGranted>
                 ) : (
                   devices.audioOutputDevices.map(({ deviceId, label }) => (
@@ -217,7 +217,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                 {!permissions.video ? (
                   <PermissionsNotGranted data-testid="no-video-devices">
                     <Cross />
-                    <span>Permission not granted</span>
+                    <span>{t('permissionsNotGranted')}</span>
                   </PermissionsNotGranted>
                 ) : (
                   devices.videoDevices.map(({ deviceId, label }) => (
