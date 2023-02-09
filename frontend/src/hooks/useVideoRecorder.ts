@@ -196,6 +196,8 @@ const useVideoRecorder = (
     const a = document.createElement('a');
     const extension = mediaType.slice(mediaType.indexOf('/') + 1, mediaType.indexOf(';'));
 
+    if (!options) return;
+
     a.style.display = 'none';
     a.href = url;
     a.download = `${getFilename(options.fileName)}.${extension}`;
@@ -210,6 +212,8 @@ const useVideoRecorder = (
   }, [options]);
 
   const stopRecording = useCallback(async (): Promise<boolean> => {
+    if (!options) return false;
+
     return new Promise((resolve, reject) => {
       if (recorderRef.current) {
         recorderRef.current.stop();
