@@ -90,6 +90,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'newPassword' => ['type' => 'String!'],
                 'newPasswordConfirmation' => ['type' => 'String!'],
             ],
+            normalizationContext: ['groups' => ['user:create']],
             input: ChangePasswordLoggedInput::class,
             name: 'changePasswordLogged',
             processor: ChangePasswordProcessorLogged::class
@@ -169,7 +170,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\OneToMany(mappedBy: 'host', targetEntity: Fishbowl::class)]
     private Collection $fishbowls;
 
-    #[Groups(['user:write'])]
+    #[Groups(['user:write', 'user:create'])]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
