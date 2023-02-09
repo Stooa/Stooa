@@ -139,7 +139,7 @@ const convertIntoClassName = text => {
 const supportsCaptureHandle = (): boolean => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return Boolean(navigator.mediaDevices.setCaptureHandleConfig);
+  return Boolean(navigator.mediaDevices?.setCaptureHandleConfig);
 };
 
 export {
