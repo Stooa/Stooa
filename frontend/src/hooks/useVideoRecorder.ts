@@ -60,7 +60,7 @@ const getMimeType = (): string => {
 };
 
 const useVideoRecorder = (
-  options: {
+  options?: {
     fileName: string;
     downloadingMessage: string;
     slug: string;
