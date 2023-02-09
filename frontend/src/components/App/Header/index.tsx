@@ -7,14 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { toast } from 'react-toastify';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Header as HeaderStyled } from '@/layouts/App/styles';
 import ModalShareLink from '@/components/App/ModalShareLink';
 import { ROUTE_HOME } from '@/app.config';
+import StatusRecording from '../StatusRecording';
+import RedRec from '@/ui/svg/rec-red.svg';
+import useTranslation from 'next-translate/useTranslation';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
@@ -34,21 +38,44 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPrefishbowl }) => {
-  const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
+  const { data, isModerator, conferenceStatus, conferenceReady, isRecording } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
+  const { t } = useTranslation('fishbowl');
+
+  const notInitialRender = useRef(false);
+
+  useEffect(() => {
+    if (notInitialRender.current) {
+      if (!isModerator && isRecording) {
+        toast(t('recording.participantNotificationStart'), {
+          icon: <RedRec />,
+          type: 'info',
+          autoClose: 5000,
+          position: 'bottom-center'
+        });
+      } else if (!isModerator && !isRecording) {
+        toast(t('recording.participantNotificationStop'), {
+          icon: 'ℹ️',
+          type: 'info',
+          autoClose: 5000,
+          position: 'bottom-center'
+        });
+      }
+    } else {
+      notInitialRender.current = true;
+    }
+  }, [isRecording]);
 
   return (
     <HeaderStyled className={`${isPrefishbowl ? 'prefishbowl' : ''}`}>
       {!isPrefishbowl && (
         <div className="hide-desktop header-top">
           <Logo className="header-logo" />
-          <StatusBar
-            isModerator={isModerator}
-            data={data}
-            conferenceStatus={conferenceStatus}
-            timeStatus={timeStatus}
-          />
+          <div className="mobile-status">
+            <StatusRecording showAnimation={isRecording} />
+            <StatusBar />
+          </div>
         </div>
       )}
       <div className="header-info">
@@ -64,6 +91,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
       <div className="header-share">
         <ModalShareLink />
       </div>
+      <StatusRecording className="hide-mobile" showAnimation={isRecording} />
       <div className="header-actions">
         {isModerator && (
           <div className={!isPrefishbowl ? 'hide-mobile' : ''}>
@@ -73,12 +101,7 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
         {!isPrefishbowl && (
           <>
             <div className="hide-mobile">
-              <StatusBar
-                isModerator={isModerator}
-                data={data}
-                conferenceStatus={conferenceStatus}
-                timeStatus={timeStatus}
-              />
+              <StatusBar />
             </div>
             <Participants
               initialized={conferenceReady}

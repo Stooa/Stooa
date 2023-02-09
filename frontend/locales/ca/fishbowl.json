@@ -44,7 +44,7 @@
     "sameAsSystem": "Mateix que el sistema",
     "videoUnmute": "Iniciar vídeo",
     "videoMute": "Aturar video",
-    "settings": "Configuració",
+    "settings": "Més opcions",
     "mic": "Micròfon",
     "speaker": "Altaveu",
     "cam": "Càmera",
@@ -121,7 +121,7 @@
     "permissionsModalDescription": "Si vols ocupar una cadira per a dir alguna cosa, Stooa necessita permisos per a accedir al teu micròfon, perquè la resta de participants t'escolti.",
     "permissionsModalButton": "Sol·licitar accés",
     "permissionsModalErrorToast" : "Sembla que tens bloquejats els permisos del micròfon des del navegador.<br/>Intenta recarregar la pàgina per a continuar.",
-    "permissionNotGranted": "Permisos no concedits.",
+    "permissionsNotGranted": "Permisos no concedits.",
     "reaction": {
         "agree": "D'acord",
         "disagree": "Desacord",
@@ -139,5 +139,29 @@
     "screenSharePermissionsModal" : {
         "title": "La teva pantalla no es pot compartir",
         "description": "És possible que Google Chrome no tingui permís per a gravar la pantalla en el teu ordinador. <a>Ves a Preferències de sistema.</a>"
+    },
+    "recording": {
+        "startedSuccessfully": "Gravació iniciada. Para l'enregistrament per a guardar-lo.",
+        "downloading": "La teva gravació s'està descarregant.",
+        "participantNotificationStart": "La persona amfitriona està gravant.",
+        "participantNotificationStop": "La persona amfitriona ha deixat de gravar.",
+        "closeToGiga": "Capacitat d'enregistrament arribant al seu límit, recorda que pots tornar a gravar.",
+        "wrongTab": "Error de gravació. Si us plau, selecciona la pestanya actual.",
+        "recordingError": "No es va poder iniciar la gravació, refresca la pàgina i torna a intentar-ho.",
+        "selectThisTab": "Selecciona aquesta pestanya per a gravar",
+        "stop": "Parar la gravació",
+        "start": "Començar la gravació",
+        "status": "Gravant",
+        "startModal": {
+            "title": "Estàs a punt d'iniciar la gravació",
+            "experimental": "Experimental",
+            "firstBullet": "Es guardarà en la teva <span>carpeta de descàrregues</span>. Està limitada a 1 GB, uns 100 minuts.",
+            "secondBullet": "Assegura't de <span>seleccionar la pestanya actual</span>, en cas contrari la gravació no s'iniciarà.",
+            "thirdBullet": "Per a gravar el <i>fishbowl</i> has de comptar amb el <span>consentiment de tots els assistents</span>."
+        },
+        "stopModal": {
+            "title": "Estàs segur que vols detenir la gravació?",
+            "description": "La gravació es guardarà en la teva carpeta de descàrregues."
+        }
     }
 }
