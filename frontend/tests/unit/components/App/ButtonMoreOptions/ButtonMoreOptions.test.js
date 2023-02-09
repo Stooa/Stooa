@@ -11,9 +11,9 @@ import { render, fireEvent } from '@testing-library/react';
 import { useStooa } from '@/contexts/StooaManager';
 import { useModals } from '@/contexts/ModalsContext';
 import { useDevices } from '@/contexts/DevicesContext';
-import useVideoRecorder from '@/hooks/useVideoRecorder';
 import ButtonMoreOptions from '@/components/App/ButtonMoreOptions';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
+import { supportsCaptureHandle } from '@/lib/helpers';
 
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/ModalsContext');
@@ -21,6 +21,7 @@ jest.mock('@/contexts/DevicesContext');
 jest.mock('@/hooks/useVideoRecorder');
 jest.mock('@/hooks/useNavigatorType');
 jest.mock('@/contexts/AppContext');
+jest.mock('@/lib/helpers');
 
 const devices = {
   audioInputDevices: [
@@ -50,7 +51,7 @@ describe('Unit test of more options button and their options', () => {
     showStartRecording: false,
     setShowStartRecording: () => jest.fn()
   });
-  useVideoRecorder.mockReturnValue({ supportsCaptureHandle: () => true });
+  supportsCaptureHandle.mockReturnValue(() => true);
   useNavigatorType.mockReturnValue({ deviceType: 'Desktop' });
   useDevices.mockReturnValue({
     devices,

@@ -110,8 +110,17 @@ const StooaProvider = ({
     });
   };
 
-  const { startRecording: startRecordingVideoRecorder, stopRecording: stopRecordingFromApp } =
-    useVideoRecorder(sendStopRecordingEvent, closeToGigabyteLimitNotification);
+  const recorderOptions = {
+    fileName: data.name || 'Fishbowl',
+    downloadingMessage: t('fishbowl:recording.downloading'),
+    slug: data.slug
+  };
+
+  const { startRecording: startRecordingVideoRecorder, stopRecording } = useVideoRecorder(
+    recorderOptions,
+    sendStopRecordingEvent,
+    closeToGigabyteLimitNotification
+  );
 
   const startRecording = () => {
     return startRecordingVideoRecorder().then(result => {
@@ -123,10 +132,6 @@ const StooaProvider = ({
       });
       return result;
     });
-  };
-
-  const stopRecording = () => {
-    return stopRecordingFromApp(data.name, t('fishbowl:recording.downloading'), data.slug);
   };
 
   const startFishbowl = () => {
