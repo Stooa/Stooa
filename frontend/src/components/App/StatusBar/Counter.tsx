@@ -11,25 +11,16 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
-import { Fishbowl } from '@/types/api-platform';
 import LoadingDots from '@/components/Common/LoadingDots';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
-  fishbowlData: Fishbowl;
-  timeStatus: ITimeStatus;
-  conferenceStatus: IConferenceStatus;
-  isModerator: boolean;
   prefishbowl?: boolean;
 }
 
-export const Counter = ({
-  fishbowlData,
-  timeStatus,
-  conferenceStatus,
-  isModerator,
-  prefishbowl = false,
-  ...props
-}: Props) => {
+export const Counter = ({ prefishbowl = false, ...props }: Props) => {
+  const { data: fishbowlData, isModerator, conferenceStatus, timeStatus } = useStooa();
+
   const getDateByStatus = () => {
     if (
       fishbowlData.isFishbowlNow &&

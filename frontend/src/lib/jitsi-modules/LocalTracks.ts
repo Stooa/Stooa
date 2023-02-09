@@ -12,9 +12,9 @@ import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
-import { MediaType } from '@/types/jitsi/media';
 import { dispatchEvent } from '@/lib/helpers';
 import { SCREEN_SHARE_CANCELED, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';
+import { MediaType } from '@/types/jitsi/media';
 
 const localTracksRepository = () => {
   const _handleAudioLevelChanged = (audioLevel: number): void => {

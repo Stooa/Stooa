@@ -12,7 +12,6 @@ import styled from 'styled-components';
 import { space, rems, media } from '@/ui/helpers';
 import {
   COLOR_NEUTRO_100,
-  COLOR_NEUTRO_400,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   BORDER_RADIUS,
@@ -20,10 +19,10 @@ import {
 } from '@/ui/settings';
 
 const InfoStyled = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   .title {
     max-width: ${rems(340)};
@@ -34,20 +33,9 @@ const InfoStyled = styled.div`
 `;
 
 const Icon = styled.button`
+  display: flex;
+  align-items: center;
   margin-left: ${space()};
-
-  .icon-wrapper {
-    align-items: center;
-    background-color: ${COLOR_NEUTRO_400};
-    border: 1px solid transparent;
-    border-radius: 50%;
-    display: flex;
-    height: ${space(3.25)};
-    justify-content: center;
-    transition: background-color 0.1s ease-out;
-    width: ${space(3.25)};
-    will-change: background-color;
-  }
 
   svg path {
     fill: ${COLOR_NEUTRO_600};

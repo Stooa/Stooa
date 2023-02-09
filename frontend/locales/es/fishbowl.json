@@ -44,7 +44,7 @@
     "sameAsSystem": "Mismo que el sistema",
     "videoUnmute": "Iniciar video",
     "videoMute": "Parar video",
-    "settings": "Configuración",
+    "settings": "Más opciones",
     "mic": "Micrófono",
     "speaker": "Altavoz",
     "cam": "Cámara",
@@ -121,7 +121,7 @@
     "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
     "permissionsModalButton": "Solicitar acceso",
     "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar.",
-    "permissionNotGranted": "Permisos no concedidos.",
+    "permissionsNotGranted": "Permisos no concedidos.",
     "reaction": {
         "agree": "De acuerdo",
         "disagree": "Desacuerdo",
@@ -139,5 +139,29 @@
     "screenSharePermissionsModal" : {
         "title": "Tu pantalla no se puede compartir",
         "description": "Es posible que Google Chrome no tenga permiso para grabar la pantalla en tu ordenador. <a>Ve a Preferencias de sistema.</a>"
+    },
+    "recording": {
+        "startedSuccessfully": "Grabación iniciada. Detén la grabación para guardarla.",
+        "downloading": "Tu grabación se está descargando.",
+        "participantNotificationStart": "La persona anfitriona está grabando.",
+        "participantNotificationStop": "La persona anfitriona ha dejado de grabar.",
+        "closeToGiga": "Capacidad de grabación llegando a su límite, recuerda que puedes volver a grabar.",
+        "wrongTab": "Error de grabación. Por favor, selecciona la pestaña actual.",
+        "recordingError": "No se pudo iniciar grabación, refresca la página y vuelve a intentarlo.",
+        "selectThisTab": "Selecciona esta pestaña para grabar",
+        "stop": "Parar la grabación",
+        "start": "Empezar la grabación",
+        "status": "Grabando",
+        "startModal": {
+            "title": "Estás a punto de iniciar la grabación",
+            "experimental": "Experimental",
+            "firstBullet": "Se guardará en tu <span>carpeta de descargas</span>. Está limitada a 1 GB, unos 100 minutos.",
+            "secondBullet": "Asegúrate de <span>seleccionar la pestaña actual</span>, de lo contrario la grabación no se iniciará.",
+            "thirdBullet": "Para grabar el <i>fishbowl</i> debes contar con el <span>consentimiento de todos los asistentes</span>."
+        },
+        "stopModal": {
+            "title": "¿Estás seguro de que quieres detener la grabación?",
+            "description": "La grabación se guardará en tu carpeta de descargas."
+        }
     }
 }
