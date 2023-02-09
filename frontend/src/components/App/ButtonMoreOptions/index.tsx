@@ -30,9 +30,9 @@ import {
 } from '@/components/App/ButtonMoreOptions/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import { useStooa } from '@/contexts/StooaManager';
-import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
+import { supportsCaptureHandle } from '@/lib/helpers';
 
 interface Props {
   unlabeled?: boolean;
@@ -49,7 +49,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
-  const { supportsCaptureHandle } = useVideoRecorder();
   const { setShowStopRecording, showStartRecording, setShowStartRecording } = useModals();
   const { deviceType } = useNavigatorType();
 

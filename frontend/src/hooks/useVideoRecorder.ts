@@ -17,6 +17,7 @@ import localTracksRepository from '@/jitsi/LocalTracks';
 import { MediaType } from '@/types/jitsi/media';
 import { toast } from 'react-toastify';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { supportsCaptureHandle } from '@/lib/helpers';
 
 const GIGABYTE = 1073741824;
 
@@ -82,11 +83,6 @@ const useVideoRecorder = (
 
   const recordingStart = useRef<Date>();
 
-  const supportsCaptureHandle = (): boolean => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    return Boolean(navigator.mediaDevices.setCaptureHandleConfig);
-  };
   const _checkIsCurrentTab = (tabMediaStream: MediaStream): boolean => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -283,8 +279,7 @@ const useVideoRecorder = (
 
   return {
     startRecording,
-    stopRecording,
-    supportsCaptureHandle
+    stopRecording
   };
 };
 
