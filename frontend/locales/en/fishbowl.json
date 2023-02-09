@@ -44,7 +44,7 @@
     "sameAsSystem": "Same as system",
     "videoUnmute": "Start video",
     "videoMute": "Stop video",
-    "settings": "Settings",
+    "settings": "More options",
     "mic": "Microphone",
     "speaker": "Speaker",
     "cam": "Camera",
@@ -121,6 +121,7 @@
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Request access",
     "permissionsModalErrorToast" : "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
+    "permissionsNotGranted": "Permissions not granted.",
     "reaction": {
         "agree": "Agree",
         "disagree": "Disagree",
@@ -138,5 +139,29 @@
     "screenSharePermissionsModal" : {
         "title": "Your screen cannot be shared",
         "description": "Google Chrome may not have permission to record the screen on your computer. <a>Go to System Preferences.</a>"
+    },
+    "recording": {
+        "startedSuccessfully": "Recording started. Stop the recording to save it.",
+        "downloading": "Your recording is downloading.",
+        "participantNotificationStart": "The host is recording.",
+        "participantNotificationStop": "The host has stopped recording.",
+        "closeToGiga": "Recording capacity reaching its limit, remember that you can re-record.",
+        "wrongTab": "Recording failed. Please select the current tab.",
+        "recordingError": "Failed to start recording, please refresh the page and try again.",
+        "selectThisTab": "Select this tab to start recording.",
+        "stop": "Stop recording",
+        "start": "Start recording",
+        "status": "Recording",
+        "startModal": {
+            "title": "You are about to start recording",
+            "experimental": "Experimental",
+            "firstBullet": "It will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
+            "secondBullet": "Make sure you <span>select the current tab</span>, otherwise the recording won't start.",
+            "thirdBullet": "In order to record the fishbowl you must have <span>the consent of all attendees</span>."
+        },
+        "stopModal": {
+            "title": "Are you sure you want to stop recording?",
+            "description": "The recording will be saved in your download folder. "
+        }
     }
 }

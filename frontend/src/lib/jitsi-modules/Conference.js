@@ -17,7 +17,9 @@ import {
   PERMISSION_CHANGED,
   REACTION_MESSAGE_RECEIVED,
   SCREEN_SHARE_START,
-  SCREEN_SHARE_STOP
+  SCREEN_SHARE_STOP,
+  RECORDING_START,
+  RECORDING_STOP
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -90,6 +92,12 @@ const conferenceRepository = () => {
 
     if (property === 'screenShare' && newValue !== undefined) {
       dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
+
+      return;
+    }
+
+    if (property === 'recording' && newValue !== undefined) {
+      dispatchEvent(newValue === 'true' ? RECORDING_START : RECORDING_STOP);
 
       return;
     }
@@ -382,6 +390,14 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('screenShare', 'false');
   };
 
+  const startRecordingEvent = () => {
+    conference.setLocalParticipantProperty('recording', 'true');
+  };
+
+  const stopRecordingEvent = () => {
+    conference.setLocalParticipantProperty('recording', 'false');
+  };
+
   const sendJoinEvent = user => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
@@ -420,6 +436,19 @@ const conferenceRepository = () => {
     }
 
     return [];
+  };
+
+  const getParticipantsIds = () => {
+    const participantsIds = [];
+    const participants = conference.getParticipants();
+
+    participants.forEach(participant => {
+      participantsIds.push(participant.getId());
+    });
+
+    participantsIds.push(getMyUserId());
+
+    return participantsIds;
   };
 
   const getLocalParticipant = () => {
@@ -485,7 +514,10 @@ const conferenceRepository = () => {
     sendTextMessage,
     startScreenShareEvent,
     stopScreenShareEvent,
-    getLocalTracks
+    getLocalTracks,
+    getParticipantsIds,
+    startRecordingEvent,
+    stopRecordingEvent
   };
 };
 
