@@ -121,6 +121,7 @@
     "permissionsModalDescription": "Si vols ocupar una cadira per a dir alguna cosa, Stooa necessita permisos per a accedir al teu micròfon, perquè la resta de participants t'escolti.",
     "permissionsModalButton": "Sol·licitar accés",
     "permissionsModalErrorToast" : "Sembla que tens bloquejats els permisos del micròfon des del navegador.<br/>Intenta recarregar la pàgina per a continuar.",
+    "permissionNotGranted": "Permisos no concedits.",
     "reaction": {
         "agree": "D'acord",
         "disagree": "Desacord",
