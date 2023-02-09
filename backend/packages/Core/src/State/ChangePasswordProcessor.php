@@ -16,7 +16,6 @@ namespace App\Core\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
-use App\Core\Model\ChangePasswordInput;
 use App\Core\Security\PasswordEncoderService;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use Webmozart\Assert\Assert;
@@ -29,7 +28,11 @@ final class ChangePasswordProcessor implements ProcessorInterface
     ) {
     }
 
-    /** @param ChangePasswordInput $data */
+    /**
+     * @param mixed $data
+     * @param array<mixed> $uriVariables
+     * @param array<mixed> $context
+     */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         $token = (string) $data->getToken();

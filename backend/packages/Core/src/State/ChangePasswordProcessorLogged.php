@@ -16,7 +16,6 @@ namespace App\Core\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
-use App\Core\Model\ChangePasswordLoggedInput;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
@@ -27,7 +26,11 @@ final class ChangePasswordProcessorLogged implements ProcessorInterface
     ) {
     }
 
-    /** @param ChangePasswordLoggedInput $data */
+    /**
+     * @param mixed $data
+     * @param array<mixed> $uriVariables
+     * @param array<mixed> $context
+     */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
         /** @var User $user */
