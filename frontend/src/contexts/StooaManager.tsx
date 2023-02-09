@@ -31,7 +31,10 @@ import {
   CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
+  MODERATOR_LEFT,
   NOTIFICATION,
+  RECORDING_START,
+  RECORDING_STOP,
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
@@ -54,6 +57,7 @@ import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import SharedTrack from '@/jitsi/SharedTrack';
+import useVideoRecorder from '@/hooks/useVideoRecorder';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -78,6 +82,7 @@ const StooaProvider = ({
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
   const [isSharing, setIsSharing] = useState(false);
   const [clientRunning, setClientRunning] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -89,6 +94,40 @@ const StooaProvider = ({
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
   const router = useRouter();
   const { fid } = router.query;
+
+  const sendStopRecordingEvent = () => {
+    Conference.stopRecordingEvent();
+    setIsRecording(false);
+  };
+
+  const closeToGigabyteLimitNotification = () => {
+    toast(t('fishbowl:recording.closeToGiga'), {
+      icon: '⚠️',
+      toastId: 'close-to-giga',
+      type: 'warning',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+  };
+
+  const { startRecording: startRecordingVideoRecorder, stopRecording: stopRecordingFromApp } =
+    useVideoRecorder(sendStopRecordingEvent, closeToGigabyteLimitNotification);
+
+  const startRecording = () => {
+    return startRecordingVideoRecorder().then(result => {
+      if (result.status === 'success') setIsRecording(true);
+      pushEventDataLayer({
+        category: 'Recording',
+        action: 'Start',
+        label: data.slug
+      });
+      return result;
+    });
+  };
+
+  const stopRecording = () => {
+    return stopRecordingFromApp(data.name, t('fishbowl:recording.downloading'), data.slug);
+  };
 
   const startFishbowl = () => {
     const slug = { variables: { input: { slug: fid } } };
@@ -217,6 +256,18 @@ const StooaProvider = ({
     setIsSharing(false);
   });
 
+  useEventListener(RECORDING_START, () => {
+    setIsRecording(true);
+  });
+
+  useEventListener(RECORDING_STOP, () => {
+    setIsRecording(false);
+  });
+
+  useEventListener(MODERATOR_LEFT, () => {
+    sendStopRecordingEvent();
+  });
+
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
@@ -313,7 +364,9 @@ const StooaProvider = ({
 
   useEffect(() => {
     initializeJitsi();
+  }, []);
 
+  useEffect(() => {
     window.addEventListener('beforeunload', unload);
     window.addEventListener('unload', unload);
 
@@ -365,7 +418,11 @@ const StooaProvider = ({
         isSharing,
         setIsSharing,
         clientRunning,
-        setClientRunning
+        setClientRunning,
+        startRecording,
+        stopRecording,
+        isRecording,
+        setIsRecording
       }}
     >
       {children}

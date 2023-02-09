@@ -44,7 +44,8 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
-  const { data, isSharing, clientRunning, setClientRunning } = useStooa();
+  const { data, isSharing, clientRunning, setClientRunning, isRecording, stopRecording } =
+    useStooa();
   const { permissions, setShowModalPermissions } = useDevices();
   const { showEndIntroductionModal, setShowEndIntroductionModal } = useModals();
 
@@ -111,8 +112,12 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     }
   };
 
-  const finishFishbowl = () => {
+  const finishFishbowl = async () => {
     setLoading(true);
+
+    if (isRecording) {
+      await stopRecording();
+    }
 
     endFishbowl({
       variables: {

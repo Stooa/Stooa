@@ -10,7 +10,7 @@
 import { User, UserRepository } from '@/types/user';
 import seatsRepository from '@/jitsi/Seats';
 import { dispatchEvent, removeItem } from '@/lib/helpers';
-import { USER_KICKED } from '@/jitsi/Events';
+import { MODERATOR_LEFT, USER_KICKED } from '@/jitsi/Events';
 
 const userRepository = (): UserRepository => {
   let users: User[] = [];
@@ -59,6 +59,10 @@ const userRepository = (): UserRepository => {
   const handleUserLeft = (id: string, user: User): void => {
     users = removeItem(users, user);
     seatsRepository.leave(id);
+
+    if (user._role === 'moderator') {
+      dispatchEvent(MODERATOR_LEFT);
+    }
 
     console.log('[STOOA] Handle userRepository left', user);
   };
