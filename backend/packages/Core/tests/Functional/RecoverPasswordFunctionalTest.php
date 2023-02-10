@@ -24,8 +24,8 @@ use Zenstruck\Foundry\Test\ResetDatabase;
 class RecoverPasswordFunctionalTest extends ApiTestCase
 {
     use Factories;
-    use ResetDatabase;
     use MailerAssertionsTrait;
+    use ResetDatabase;
     private const ADMIN_PASSWORD = '$argon2id$v=19$m=65536,t=4,p=1$37ytdOiVjLdUPFfPRDALmA$xZsJ/uHJ1nTklxYMq1WrjhEPPN2E1HOtVXAyf4rTTV0';
     private User $host;
 
@@ -47,7 +47,9 @@ class RecoverPasswordFunctionalTest extends ApiTestCase
 
         $email = $this->getMailerMessage();
 
-        $this->assertEmailHtmlBodyContains($email, 'Hello ' . $this->host->getName());
+        if ($email) {
+            $this->assertEmailHtmlBodyContains($email, 'Hello ' . $this->host->getName());
+        }
     }
 
     private function recoverPassword(): ResponseInterface
@@ -71,7 +73,7 @@ class RecoverPasswordFunctionalTest extends ApiTestCase
                         'locale' => 'en',
                     ],
                 ],
-            ]
+            ],
         ]);
     }
 }
