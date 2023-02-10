@@ -14,7 +14,7 @@
         "gedmo/doctrine-extensions": "3.11.0",
         "gesdinet/jwt-refresh-token-bundle": "1.1.1",
         "hashids/hashids": "4.1.0",
-        "lexik/jwt-authentication-bundle": "2.17.0",
+        "lexik/jwt-authentication-bundle": "2.18.0",
         "nelmio/cors-bundle": "2.2.0",
         "paragonie/halite": "5.1.0",
         "ramsey/uuid": "4.7.3",
