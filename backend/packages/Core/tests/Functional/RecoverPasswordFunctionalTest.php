@@ -16,15 +16,16 @@ namespace App\Core\Tests\Functional;
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class ChangePasswordLoggedFunctionalTest extends ApiTestCase
+class RecoverPasswordFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;
-
+    use MailerAssertionsTrait;
     private const ADMIN_PASSWORD = '$argon2id$v=19$m=65536,t=4,p=1$37ytdOiVjLdUPFfPRDALmA$xZsJ/uHJ1nTklxYMq1WrjhEPPN2E1HOtVXAyf4rTTV0';
     private User $host;
 
@@ -40,32 +41,21 @@ class ChangePasswordLoggedFunctionalTest extends ApiTestCase
     }
 
     /** @test */
-    public function itChangesPassword(): void
+    public function itReceivesRecoverPasswordEmail(): void
     {
-        $token = $this->logIn($this->host);
+        $this->recoverPassword();
 
-        $this->callGQLWithToken($token);
+        $email = $this->getMailerMessage();
 
-        $response = static::createClient()->request('POST', '/login', ['json' => [
-            'email' => 'host@stooa.com',
-            'password' => 'newPassword',
-        ]]);
-
-        $logInResponse = $response->toArray();
-
-        $this->assertArrayHasKey('token', $logInResponse);
-        $this->assertArrayHasKey('refresh_token', $logInResponse);
-        $this->assertNotEmpty($logInResponse['token']);
-        $this->assertNotEmpty($logInResponse['refresh_token']);
-        $this->assertResponseIsSuccessful();
+        $this->assertEmailHtmlBodyContains($email, 'Hello ' . $this->host->getName());
     }
 
-    private function callGQLWithToken(string $token): ResponseInterface
+    private function recoverPassword(): ResponseInterface
     {
         $mutation = <<<GQL
-            mutation ChangePasswordLogged(\$input: changePasswordLoggedUserInput!) {
-                changePasswordLoggedUser(input: \$input) {
-                    user {
+            mutation CreateResetPassword(\$input: createResetPasswordInput!) {
+                createResetPassword(input: \$input) {
+                    resetPassword {
                         email
                     }
                 }
@@ -77,20 +67,11 @@ class ChangePasswordLoggedFunctionalTest extends ApiTestCase
                 'query' => $mutation,
                 'variables' => [
                     'input' => [
-                        'password' => 'admin',
-                        'newPassword' => 'newPassword',
-                        'newPasswordConfirmation' => 'newPassword',
+                        'email' => 'host@stooa.com',
+                        'locale' => 'en',
                     ],
                 ],
-            ],
-            'auth_bearer' => $token,
+            ]
         ]);
-    }
-
-    private function logIn(User $user): string
-    {
-        $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
-
-        return $jwtManager->create($user);
     }
 }
