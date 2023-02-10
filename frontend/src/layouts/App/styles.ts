@@ -61,6 +61,7 @@ const Header = styled.header`
   justify-content: space-between;
   grid-area: Header;
   color: ${COLOR_NEUTRO_700};
+  z-index: 10;
 
   ${media.max('tablet')`
 
@@ -99,13 +100,19 @@ const Header = styled.header`
 
   .header-top {
     align-items: center;
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr auto;
-    justify-items: space-between;
+    justify-content: space-between;
     width: 100%;
 
     .header-logo {
       margin-right: ${space(2)};
+    }
+
+    .mobile-status {
+      display: flex;
+      align-items: center;
+      gap: ${space(1)};
     }
 
     > * {

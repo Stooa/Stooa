@@ -82,7 +82,6 @@ const MyApp = ({ Component, pageProps }) => {
         <AuthProvider>
           <ProtectRoute>
             <div className={geomanist.className}>
-              {' '}
               <Component {...pageProps} />
             </div>
           </ProtectRoute>

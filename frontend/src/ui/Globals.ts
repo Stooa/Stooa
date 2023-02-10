@@ -20,6 +20,7 @@ import {
   COLOR_GREEN_100,
   COLOR_GREEN_500,
   COLOR_GREEN_800,
+  COLOR_NEUTRO_100,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800,
@@ -283,12 +284,26 @@ const GlobalStyle = createGlobalStyle`
         padding: ${space(0)} ${space(2)};
 
         .Toastify__toast-icon {
-          display: inline !important;
+          display: inline-flex !important;
+          min-width: 24px !important;
+          width: auto !important;
         }
+      }
+
+      & .Toastify__toast-theme--light.Toastify__toast--info {
+        --toastify-color-light: ${COLOR_NEUTRO_100};
+        --toastify-text-color-light: ${COLOR_NEUTRO_700};
+        --toastify-color-progress-info: ${COLOR_NEUTRO_600};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_NEUTRO_700};
+          opacity: 1;
+          }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--warning {
         --toastify-color-light: ${COLOR_YELLOW_100};
+
 
         & .Toastify__close-button.Toastify__close-button--light {
           color: ${COLOR_NEUTRO_600};

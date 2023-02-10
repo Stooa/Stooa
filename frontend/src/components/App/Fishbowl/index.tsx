@@ -33,7 +33,14 @@ import ModalConfirmLeaving from '../ModalConfirmLeaving';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { BREAKPOINTS } from '@/ui/settings';
 import { useModals } from '@/contexts/ModalsContext';
-import ModalScreenSharePermissions from '../ModalScreenSharePermissions';
+import ModalScreenSharePermissions from '@/components/App/ModalScreenSharePermissions';
+import ModalStartRecording from '@/components/App/ModalStartRecording';
+import ModalStopRecording from '@/components/App/ModalStopRecording';
+import { toast } from 'react-toastify';
+import useTranslation from 'next-translate/useTranslation';
+import Conference from '@/jitsi/Conference';
+
+import RedRec from '@/ui/svg/rec-red.svg';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -41,14 +48,26 @@ const Seats = dynamic(import('../Seats'), { loading: () => <div /> });
 
 const Fishbowl: FC = () => {
   const [play] = useSound(`${process.env.NEXT_PUBLIC_APP_DOMAIN}/sounds/ding.mp3`);
-  const { data, isModerator, participantToKick, setParticipantToKick } = useStooa();
+  const {
+    data,
+    isModerator,
+    participantToKick,
+    setParticipantToKick,
+    stopRecording,
+    startRecording,
+    setIsRecording
+  } = useStooa();
 
   const {
     showOnBoardingModal,
     showConfirmCloseTabModal,
     setShowConfirmCloseTabModal,
     showScreenSharePermissions,
-    setShowScreenSharePermissions
+    setShowScreenSharePermissions,
+    showStartRecording,
+    showStopRecording,
+    setShowStartRecording,
+    setShowStopRecording
   } = useModals();
 
   const { width } = useWindowSize();
@@ -60,6 +79,8 @@ const Fishbowl: FC = () => {
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
+
+  const { t } = useTranslation('fishbowl');
 
   const isPreFishbowl =
     conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
@@ -88,6 +109,38 @@ const Fishbowl: FC = () => {
     ) {
       setShowConfirmCloseTabModal(true);
     }
+  };
+
+  const handleStopRecording = async () => {
+    const recordingStopped = await stopRecording().catch(() => false);
+    if (!recordingStopped) return;
+    setShowStopRecording(false);
+  };
+
+  const handleStartRecording = async () => {
+    const recordingStarted = await startRecording();
+    if (recordingStarted.status === 'error') {
+      const translationString =
+        recordingStarted.type === 'wrong-tab' ? 'recording.wrongTab' : 'recording.recordingError';
+
+      toast(t(translationString), {
+        icon: '⚠️',
+        type: 'error',
+        position: 'top-center',
+        autoClose: 5000
+      });
+      return;
+    }
+
+    setIsRecording(true);
+    toast(t('recording.startedSuccessfully'), {
+      icon: <RedRec />,
+      type: 'success',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+    Conference.startRecordingEvent();
+    setShowStartRecording(false);
   };
 
   useEffect(() => {
@@ -137,6 +190,19 @@ const Fishbowl: FC = () => {
 
         {showScreenSharePermissions && (
           <ModalScreenSharePermissions closeModal={() => setShowScreenSharePermissions(false)} />
+        )}
+
+        {showStartRecording && (
+          <ModalStartRecording
+            closeModal={() => setShowStartRecording(false)}
+            startRecording={() => handleStartRecording()}
+          />
+        )}
+        {showStopRecording && (
+          <ModalStopRecording
+            closeModal={() => setShowStopRecording(false)}
+            stopRecording={() => handleStopRecording()}
+          />
         )}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
