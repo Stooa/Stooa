@@ -169,6 +169,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\OneToMany(mappedBy: 'host', targetEntity: Fishbowl::class)]
     private Collection $fishbowls;
 
+    #[Groups(['user:write'])]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
