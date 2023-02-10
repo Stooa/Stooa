@@ -47,7 +47,6 @@ class ChangePasswordLoggedFunctionalTest extends ApiTestCase
         $response = $this->callGQLWithToken($token);
 
         $graphqlResponse = $response->toArray();
-        var_dump($graphqlResponse);
 
         $this->assertSame('newPassword', $graphqlResponse['data']['changePasswordLoggedUser']['user']['plainPassword']);
     }
