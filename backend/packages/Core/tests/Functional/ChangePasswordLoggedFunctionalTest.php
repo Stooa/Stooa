@@ -44,11 +44,22 @@ class ChangePasswordLoggedFunctionalTest extends ApiTestCase
     {
         $token = $this->logIn($this->host);
 
-        $response = $this->callGQLWithToken($token);
+        $this->callGQLWithToken($token);
 
-        $graphqlResponse = $response->toArray();
+        $this->host->setPassword('newPassword');
 
-        $this->assertSame('newPassword', $graphqlResponse['data']['changePasswordLoggedUser']['user']['plainPassword']);
+        $response = static::createClient()->request('POST', '/login', ['json' => [
+            'email' => 'host@stooa.com',
+            'password' => 'newPassword',
+        ]]);
+
+        $logInResponse = $response->toArray();
+
+        $this->assertArrayHasKey('token', $logInResponse);
+        $this->assertArrayHasKey('refresh_token', $logInResponse);
+        $this->assertNotEmpty($logInResponse['token']);
+        $this->assertNotEmpty($logInResponse['refresh_token']);
+        $this->assertResponseIsSuccessful();
     }
 
     private function callGQLWithToken(string $token): ResponseInterface
@@ -57,7 +68,7 @@ class ChangePasswordLoggedFunctionalTest extends ApiTestCase
             mutation ChangePasswordLogged(\$input: changePasswordLoggedUserInput!) {
                 changePasswordLoggedUser(input: \$input) {
                     user {
-                        plainPassword
+                        email
                     }
                 }
             }
