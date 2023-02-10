@@ -16,6 +16,7 @@ namespace App\Core\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
+use App\Core\Repository\UserRepository;
 use App\Core\Security\PasswordEncoderService;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use Webmozart\Assert\Assert;
@@ -24,7 +25,8 @@ final class ChangePasswordProcessor implements ProcessorInterface
 {
     public function __construct(
         private readonly PasswordEncoderService $passwordEncoder,
-        private readonly ResetPasswordHelperInterface $helper
+        private readonly ResetPasswordHelperInterface $helper,
+        private readonly UserRepository $userRepository
     ) {
     }
 
@@ -47,6 +49,8 @@ final class ChangePasswordProcessor implements ProcessorInterface
         $this->helper->removeResetRequest($token);
 
         $this->passwordEncoder->encodePassword($user);
+
+        $this->userRepository->persist($user);
 
         return $user;
     }
