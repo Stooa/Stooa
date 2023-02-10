@@ -16,13 +16,17 @@ namespace App\Core\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
+use App\Core\Repository\UserRepository;
+use App\Core\Security\PasswordEncoderService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 final class ChangePasswordProcessorLogged implements ProcessorInterface
 {
     public function __construct(
-        private readonly Security $security
+        private readonly Security $security,
+        private readonly PasswordEncoderService $passwordEncoder,
+        private readonly UserRepository $userRepository
     ) {
     }
 
@@ -39,6 +43,10 @@ final class ChangePasswordProcessorLogged implements ProcessorInterface
         Assert::isInstanceOf($user, User::class);
 
         $user->setPlainPassword($data->getNewPassword());
+
+        $this->passwordEncoder->encodePassword($user);
+
+        $this->userRepository->persist($user);
 
         return $user;
     }
