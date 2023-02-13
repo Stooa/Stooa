@@ -49,18 +49,10 @@ const conferenceRepository = () => {
     console.log('[STOOA] Join', id);
   };
 
-  /**
-   * Join the jitsi private conference
-   * @param {string | undefined} password
-   */
   const joinPrivateConference = async password => {
     if (conference) await conference.join(password);
   };
 
-  /**
-   * Join the jitsi conference
-   * @param {string | undefined} password
-   */
   const joinConference = async () => {
     if (conference) await conference.join();
   };
@@ -319,11 +311,6 @@ const conferenceRepository = () => {
     connection.connect();
   };
 
-  /**
-   *
-   * @param {string} password
-   * @returns Promise
-   */
   const lockConference = async password => {
     if (conference) {
       return await conference.lock(password);

@@ -20,23 +20,43 @@ import NotAvailableImage from '@/ui/svg/unavailable-seat.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import ButtonContextMenu from '../ButtonContextMenu';
-import { join } from '@/lib/jitsi';
+import { join, leave } from '@/lib/jitsi';
 import userRepository from '@/jitsi/User';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import Button from '@/components/Common/Button';
+import { useState } from 'react';
 
 const Seats = () => {
   const { t } = useTranslation('app');
   const { isSharing, isModerator } = useStooa();
   const [{ conferenceStatus }] = useStateValue();
+  const [joined, setJoined] = useState<boolean>(false);
+  const [participantSeat, setParticipantSeat] = useState<number | undefined>(undefined);
 
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
   const isConferenceRunning = conferenceStatus === IConferenceStatus.RUNNING;
 
-  const joinOnClick = async (seat: number): Promise<void> => {
-    console.log('----->', seat);
-    await join(userRepository.getUser(), seat);
+  const joinSeat = async (seat: number): Promise<void> => {
+    if (!joined) {
+      await join(userRepository.getUser(), seat);
+
+      setTimeout(() => {
+        setJoined(true);
+        setParticipantSeat(seat);
+      }, 500);
+    }
+  };
+
+  const leaveSeat = async (): Promise<void> => {
+    if (joined) {
+      await leave();
+
+      setTimeout(() => {
+        setJoined(false);
+        setParticipantSeat(undefined);
+      }, 500);
+    }
   };
 
   const handleFullscreen = () => {
@@ -49,6 +69,10 @@ const Seats = () => {
         video.webkitRequestFullscreen();
       }
     }
+  };
+
+  const showLeaveButton = (seat: number): boolean => {
+    return joined && participantSeat === seat;
   };
 
   return (
@@ -72,9 +96,14 @@ const Seats = () => {
 
         {[...Array(5)].map((e, seat) => (
           <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
-            {isConferenceRunning && (
-              <Button className="body-sm" onClick={() => joinOnClick(seat + 1)}>
+            {isConferenceRunning && !joined && (
+              <Button className="body-sm" onClick={() => joinSeat(seat + 1)}>
                 Join
+              </Button>
+            )}
+            {isConferenceRunning && showLeaveButton(seat + 1) && (
+              <Button style={{ zIndex: 999999 }} className="body-sm" onClick={() => leaveSeat()}>
+                Leave
               </Button>
             )}
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
