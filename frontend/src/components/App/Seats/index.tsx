@@ -23,7 +23,7 @@ import ButtonContextMenu from '../ButtonContextMenu';
 import { join } from '@/lib/jitsi';
 import userRepository from '@/jitsi/User';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import Button from "@/components/Common/Button";
+import Button from '@/components/Common/Button';
 
 const Seats = () => {
   const { t } = useTranslation('app');
