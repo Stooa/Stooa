@@ -23,4 +23,15 @@ export interface StooaContextValues {
   setParticipantToKick: Dispatch<SetStateAction<Participant | undefined>>;
   getPassword: () => string;
   setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
+  isSharing: boolean;
+  setIsSharing: Dispatch<SetStateAction<boolean>>;
+  clientRunning: boolean;
+  setClientRunning: Dispatch<SetStateAction<boolean>>;
+  startRecording: () => Promise<{
+    status: 'success' | 'error';
+    type?: 'wrong-tab' | 'no-combined-stream';
+  }>;
+  stopRecording: () => Promise<boolean>;
+  isRecording: boolean;
+  setIsRecording: Dispatch<SetStateAction<boolean>>;
 }

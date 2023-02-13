@@ -57,10 +57,8 @@ const FishbowlDataCard = ({ data }: Props) => {
           </Button>
         </RedirectLink>
       ) : (
-        <Link passHref href={`${ROUTE_FISHBOWL_LIST}?selected=${data.slug}`}>
-          <a className="decorated colored">
-            <Trans i18nKey="fishbowl:detail.editFishbowlDetails" components={{ i: <i /> }} />
-          </a>
+        <Link href={`${ROUTE_FISHBOWL_LIST}?selected=${data.slug}`} className="decorated colored">
+          <Trans i18nKey="fishbowl:detail.editFishbowlDetails" components={{ i: <i /> }} />
         </Link>
       )}
     </StyledFishbowlDataCard>

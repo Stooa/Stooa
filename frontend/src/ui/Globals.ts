@@ -20,6 +20,7 @@ import {
   COLOR_GREEN_100,
   COLOR_GREEN_500,
   COLOR_GREEN_800,
+  COLOR_NEUTRO_100,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800,
@@ -63,7 +64,7 @@ const StyledLinkCss = css`
 `;
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
+  /* @font-face {
     font-display: swap;
     font-family: 'Geomanist';
     font-style: normal;
@@ -101,7 +102,7 @@ const GlobalStyle = createGlobalStyle`
     font-style: italic;
     font-weight: 500;
     src: local('Geomanist Italic Regular'), url("/fonts/geomanist-medium-italic.woff2") format("woff2"),url("fonts/geomanist-medium-italic.woff") format("woff");
-  }
+  } */
 
   *,
   *::before,
@@ -131,7 +132,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: ${FONT_PRIMARY};
+    /* font-family: ${FONT_PRIMARY}; */
     line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
@@ -283,12 +284,26 @@ const GlobalStyle = createGlobalStyle`
         padding: ${space(0)} ${space(2)};
 
         .Toastify__toast-icon {
-          display: inline !important;
+          display: inline-flex !important;
+          min-width: 24px !important;
+          width: auto !important;
         }
+      }
+
+      & .Toastify__toast-theme--light.Toastify__toast--info {
+        --toastify-color-light: ${COLOR_NEUTRO_100};
+        --toastify-text-color-light: ${COLOR_NEUTRO_700};
+        --toastify-color-progress-info: ${COLOR_NEUTRO_600};
+
+        & .Toastify__close-button.Toastify__close-button--light {
+          color: ${COLOR_NEUTRO_700};
+          opacity: 1;
+          }
       }
 
       & .Toastify__toast-theme--light.Toastify__toast--warning {
         --toastify-color-light: ${COLOR_YELLOW_100};
+
 
         & .Toastify__close-button.Toastify__close-button--light {
           color: ${COLOR_NEUTRO_600};

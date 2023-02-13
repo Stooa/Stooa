@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Core\JWT;
 
 use App\Fishbowl\Service\FishbowlService;
+use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -34,10 +35,14 @@ class CurrentUserRoom
         $currentRequest = $this->requestStack->getCurrentRequest();
 
         if (null !== $currentRequest) {
-            $slug = $currentRequest->request->get('room');
+            try {
+                $requestArray = $currentRequest->toArray();
+            } catch (JsonException) {
+                return null;
+            }
 
-            if (null !== $slug && \is_string($slug) && $this->fishbowlService->canFishbowlStart($slug, $user)) {
-                return $slug;
+            if (!empty($requestArray['room']) && \is_string($requestArray['room']) && $this->fishbowlService->canFishbowlStart($requestArray['room'], $user)) {
+                return $requestArray['room'];
             }
         }
 

@@ -11,42 +11,114 @@ import styled from 'styled-components';
 import { space, rems, media } from '@/ui/helpers';
 
 import {
+  BREAKPOINTS,
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
 } from '@/ui/settings';
 
+const spacingSizes = {
+  mobile: {
+    small: 2,
+    medium: 4,
+    large: 4
+  },
+  desktop: {
+    small: 4,
+    medium: 8,
+    large: 12
+  }
+};
+
 const Billboard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: ${space(14)};
-  padding: 0 ${space(3)};
-  padding-top: ${space(5)};
+  display: grid;
   position: relative;
-  text-align: left;
-  z-index: 3;
   width: 100%;
 
-  .title-display {
-    margin-bottom: ${space(2)};
+  text-align: left;
+  margin-bottom: ${space(14)};
+  margin-inline: auto;
+  padding-top: ${space(5)};
+  z-index: 3;
+
+  h1 {
+    margin-bottom: ${space(4)};
   }
 
-  ${media.max('desktop')`
-    .title-display {
-      font-size: ${rems(61)};
+  .billboard-text {
+    width: 100%;
+    padding: 0 ${space(4)};
+
+    & p + p {
+      margin-top: ${space(2)};
     }
-  `}
+
+    & :nth-child(4) {
+      margin-bottom: ${space(4)};
+    }
+  }
+
+  .fishbowl-preview {
+    position: relative;
+    width: 100%;
+    justify-self: center;
+
+    align-self: center;
+    filter: drop-shadow(0px 5px 14px rgba(0, 0, 0, 0.1));
+
+    ${media.min('tablet')`
+    padding: 0 ${space(10)};
+    `}
+
+    &.mobile {
+      margin-bottom: ${space(4)};
+    }
+
+    & img {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      object-fit: contain;
+      object-position: center;
+      margin: 0 auto;
+    }
+  }
 
   ${media.min('tablet')`
     align-items: center;
     min-height: 50vh;
-    margin-bottom: 0;
-    padding-top: 0;
-    text-align: center;
+    margin-bottom: ${space(20)};
+
+    .billboard-text {
+      padding: 0 ${space(10)};
+      }
   `}
 
+  ${media.min('desktop')`
+  grid-template-columns: 1fr 1fr;
+
+    .title-display {
+      font-size: ${rems(61)};
+    }
+
+    .billboard-text {
+      min-width: 700px;
+      padding: 0 ${space(8)} 0 ${space(16)};
+    }
+
+    .fishbowl-preview {
+      height: 38vw;
+
+      & img {
+        position: absolute;
+        object-fit: cover;
+        object-position: left;
+      }
+    }
+
+  `}
 
   ${media.min('desktopLarge')`
     min-height: 55vh;
@@ -67,19 +139,34 @@ const Billboard = styled.div`
 
     ${media.min('tablet')`
       flex-direction: row;
+
       & a:first-child {
-      margin-right: ${space(3)};
-      margin-bottom: 0;
-    }
+        margin-right: ${space(3)};
+        margin-bottom: 0;
+      }
+    `}
+  }
+
+  #scroll-indicator {
+    display: none;
+    position: absolute;
+    bottom: -5rem;
+    left: calc(50% - 25px);
+    height: 50px;
+    width: 50px;
+
+    ${media.min('tablet')`
+      display: block;
+      bottom: -5rem;
     `}
   }
 
   #animated-billboard-morph,
   #animated-billboard-morph2 {
-    height: ${rems(160)};
     position: absolute;
-    z-index: -1;
     width: ${rems(80)};
+    height: ${rems(160)};
+    z-index: -1;
 
     ${media.min('tablet')`
       height: ${rems(280)};
@@ -97,7 +184,7 @@ const Billboard = styled.div`
 
     ${media.min('tablet')`
       display: block;
-      left: 0;
+      left: -100px;
       top: 0;
     `}
 
@@ -109,14 +196,16 @@ const Billboard = styled.div`
 
   #animated-billboard-morph2 {
     right: 0;
-    top: 30%;
+    top: 40%;
+    bottom: initial;
 
     ${media.min('tablet')`
-      top: 60%;
+      top: initial;
+      bottom: -20%;
     `}
 
     ${media.min('desktop')`
-      top: 30%;
+      bottom: -30%;
     `}
   }
 `;
@@ -127,9 +216,57 @@ const Content = styled.div`
   width: 100%;
   z-index: 2;
 
+  .how-it-works-title {
+    text-align: left;
+    max-width: ${BREAKPOINTS.desktopLarge}px;
+    margin: 0 auto;
+    padding-top: ${space(4)};
+
+    & h2 {
+      margin-bottom: 0;
+    }
+
+    & h4 {
+      margin-bottom: 0;
+    }
+
+    ${media.min('tablet')`
+      & h2 {
+        margin-bottom: ${space(2)};
+      }
+    `}
+  }
+
+  .how-it-works-explanation p + p {
+    margin-top: ${space(2)};
+  }
+
+  .last-row {
+    padding-top: ${space(4)};
+    padding-bottom: ${space(12)};
+    margin-bottom: -${space(12)};
+    border-image-source: url('/img/web/svg/wave-mobile-bottom.svg');
+    border-bottom: solid 70px;
+    background-clip: padding-box;
+    border-image-slice: 0 0 100;
+
+    ${media.min('tablet')`
+      border-image-source: url('/img/web/svg/wave-desktop-bottom.svg');
+      padding-bottom: ${space(8)};
+      margin-bottom: -${space(18)};
+      border-bottom: solid 140px;
+      `}
+
+    ${media.min('desktop')`
+      margin-bottom: -${space(12)};
+      padding-bottom: ${space(16)};
+    `}
+  }
+
   .row-list {
     position: relative;
     z-index: 1;
+    margin-bottom: ${space(6)};
 
     #animated-billboard-desktop,
     #animated-billboard-mobile {
@@ -153,19 +290,6 @@ const Content = styled.div`
       `}
     }
 
-    .wave {
-      bottom: -5px;
-      display: block;
-      position: absolute;
-      right: -2px;
-      width: 100%;
-      z-index: -1;
-
-      &.hide-mobile {
-        width: 105%;
-      }
-    }
-
     .hide-mobile {
       ${media.max('tablet')`
         display: none;
@@ -177,6 +301,50 @@ const Content = styled.div`
         display: none;
       `}
     }
+  }
+
+  .wave {
+    top: -80px;
+    display: block;
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+
+    &.hide-mobile {
+      width: 100%;
+    }
+
+    &.hide-desktop {
+      top: -60px;
+    }
+
+    ${media.min('desktop')`
+      top: -110px;
+    `}
+  }
+
+  .youtube-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .red-blob {
+    position: absolute;
+    left: -100px;
+    top: 0;
+    width: 50%;
+    height: auto;
+    z-index: -1;
+
+    ${media.min('desktopLarge')`
+      left: -70px;
+      top: -100px;
+      width: 60%;
+    `}
+  }
+
+  .how-subtitle {
+    margin-bottom: ${space(6)};
   }
 
   ${media.max('tablet')`
@@ -194,14 +362,25 @@ const Sections = styled.div`
   `}
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ colored?: boolean; spacing?: 'small' | 'medium' | 'large' }>`
   margin: 0 auto;
-  padding: 0 ${space(3)};
+  padding: ${({ spacing }) =>
+    spacing ? `${space(spacingSizes.mobile[spacing])} ${space(3)}` : `0 ${space(3)}`};
   position: relative;
 
+  background-color: ${({ colored }) => (colored ? COLOR_NEUTRO_300 : 'transparent')};
+
   ${media.min('tablet')`
-    padding: 0 ${space(6)};
+    padding: ${({ spacing }) =>
+      spacing ? `${space(spacingSizes.desktop[spacing])} ${space(6)}` : `0 ${space(6)}`};
   `}
+
+  &.curve-top {
+    padding-top: ${space(6)};
+    ${media.min('tablet')`
+      padding-top: ${space(4)};
+    `}
+  }
 
   #animated-keybenefit2-morph {
     height: ${rems(160)};
@@ -218,12 +397,73 @@ const Wrapper = styled.div`
   }
 `;
 
-const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
-  background-color: ${({ dark }) => (dark ? `${COLOR_NEUTRO_300}` : 'transparent')};
-  padding: ${({ dark }) => (dark ? `${space(9)} ${space(3)} ${space(10)}` : `0 0 ${space(8)} 0`)};
-  position: relative;
+const StyledResponsiveRow = styled.div<{
+  reverse?: boolean;
+  align?: 'end' | 'center' | 'start';
+}>`
+  display: grid;
+  align-items: ${({ align }) => align};
+  gap: ${space(6)} ${space(10)};
+
+  max-width: ${BREAKPOINTS.desktopLarge}px;
+  margin: 0 auto;
+
   text-align: left;
+
+  ${media.min('desktop')`
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+
+    gap: ${space(6)} ${space(10)};
+  `}
+
+  & > .item {
+    position: relative;
+
+    &.centered {
+      display: flex;
+      justify-content: center;
+      min-height: ${rems(240)};
+    }
+
+    & img {
+      object-fit: contain;
+    }
+
+    & iframe {
+      ${media.min('desktopLarge')`
+        max-width: 700px;
+      `}
+    }
+  }
+
+  .last-item {
+    ${media.min('desktop')`
+      order: ${({ reverse }) => (reverse ? '-1' : '')};
+    `}
+  }
+
+  .larger-image-wrapper {
+    position: relative;
+    margin-top: ${space(6)};
+    height: 300px;
+    width: 100%;
+
+    ${media.min('desktop')`
+      margin-top: 0;
+      min-height: 350px;
+      height: 24vw;
+    `}
+  }
+`;
+
+const Row = styled.div<{ reverse?: boolean; flex?: boolean; colored?: boolean }>`
+  background-color: ${({ colored }) => (colored ? `${COLOR_NEUTRO_300}` : 'transparent')};
+  padding: ${({ colored }) =>
+    colored ? `${space(9)} ${space(3)} ${space(10)}` : `0 0 ${space(8)} 0`};
+  position: relative;
   width: 100%;
+  text-align: ${({ flex }) => (flex ? `left` : `center`)};
 
   .title-lg,
   strong {
@@ -231,19 +471,24 @@ const Row = styled.div<{ reverse?: boolean; flex?: boolean; dark?: boolean }>`
   }
 
   .title-lg {
-    color: ${({ dark }) => (dark ? `${COLOR_NEUTRO_700}` : `${COLOR_NEUTRO_600}`)};
+    color: ${({ colored }) => (colored ? `${COLOR_NEUTRO_700}` : `${COLOR_NEUTRO_600}`)};
     margin-bottom: ${space(2)};
   }
 
   .title-lg.definition {
+    text-align: left;
+
     ${media.min('tablet')`
       text-align: center;
     `}
   }
 
   ${media.min('tablet')`
-    padding: ${({ dark }) => (dark ? `${space(10)} 0 ${space(15)}` : `0 0 ${space(15)} 0`)};
-    text-align: ${({ flex }) => (flex ? 'left' : 'center')};
+    padding: ${({ colored }) => (colored ? `${space(10)} 0 ${space(15)}` : `0 0 ${space(15)} 0`)};
+
+    &.no-padding {
+      padding: 0;
+    }
 
     .title-lg {
       font-weight: 600;
@@ -328,8 +573,7 @@ const Banner = styled.div`
       height: ${rems(300)};
       top: ${rems(-150)};
       width: ${rems(150)};
-    }
-  `}
+    `}
   }
 
   ${media.min('tablet')`
@@ -342,4 +586,4 @@ const Banner = styled.div`
   `}
 `;
 
-export { Content, Row, Column, Billboard, Wrapper, Banner, Sections };
+export { Content, Row, StyledResponsiveRow, Column, Billboard, Wrapper, Banner, Sections };

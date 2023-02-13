@@ -36,7 +36,7 @@ import { useModals } from '@/contexts/ModalsContext';
 const PreFishbowl = () => {
   const router = useRouter();
   const { fid } = router.query;
-  const { data, isModerator, conferenceStatus, timeStatus, getPassword } = useStooa();
+  const { data, getPassword } = useStooa();
   const { toggleOnBoarding } = useModals();
 
   const { t, lang } = useTranslation('fishbowl');
@@ -73,14 +73,7 @@ const PreFishbowl = () => {
             quality={100}
           />
         </div>
-        <Counter
-          prefishbowl={true}
-          data-testid="prefishbowl-counter"
-          fishbowlData={data}
-          timeStatus={timeStatus}
-          isModerator={isModerator}
-          conferenceStatus={conferenceStatus}
-        />
+        <Counter prefishbowl={true} data-testid="prefishbowl-counter" />
 
         <StyledFishbowlDataWrapper>
           <StyledFishbowlDataCard data-testid="prefishbowl-datacard" className="prefishbowl">

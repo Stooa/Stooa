@@ -9,6 +9,7 @@
 
 import { useEffect } from 'react';
 import Router from 'next/router';
+import localFont from '@next/font/local';
 
 import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
@@ -22,6 +23,36 @@ import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
 import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
+
+const geomanist = localFont({
+  src: [
+    {
+      path: './fonts/geomanist-bold.woff2',
+      weight: '700',
+      style: 'normal'
+    },
+    {
+      path: './fonts/geomanist-medium.woff2',
+      weight: '500',
+      style: 'normal'
+    },
+    {
+      path: './fonts/geomanist-medium-italic.woff2',
+      weight: '500',
+      style: 'italic'
+    },
+    {
+      path: './fonts/geomanist-regular.woff2',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: './fonts/geomanist-regular-italic.woff2',
+      weight: '400',
+      style: 'italic'
+    }
+  ]
+});
 
 const MyApp = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
@@ -50,7 +81,9 @@ const MyApp = ({ Component, pageProps }) => {
       <StateProvider>
         <AuthProvider>
           <ProtectRoute>
-            <Component {...pageProps} />
+            <div className={geomanist.className}>
+              <Component {...pageProps} />
+            </div>
           </ProtectRoute>
         </AuthProvider>
       </StateProvider>

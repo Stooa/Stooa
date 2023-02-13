@@ -57,7 +57,9 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
     <FormikForm className="prejoin">
       <fieldset className="submit-wrapper">
         <Input label={t('name')} name="name" type="text" />
-        {props.isPrivate && <Input label={t('password')} name="password" type="password" />}
+        {props.isPrivate && (
+          <Input label={t('password')} name="password" type="password" autoComplete="false" />
+        )}
 
         <Button size="large" type="submit" disabled={props.isSubmitting}>
           {t('fishbowl:prejoin.joinDiscussion')}

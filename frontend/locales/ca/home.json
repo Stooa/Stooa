@@ -1,11 +1,24 @@
 {
-    "title": "El fishbowl online",
-    "description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
+    "title": "Diàlegs en línia fluids i participatius",
+    "description1": "Stooa és una plataforma online que permet converses fluides i participatives per a grans grups i amb facilitació automàtica <span>basada en el mètode fishbowl.</span>",
+    "description2": "És un <span>mètode de diàleg ideal</span> per a comunitats, entorns educatius, o companyies que busquen millorar l'experiència dels seus empleats.",
     "scheduleFishbowl": "Agendar un fishbowl",
     "hostFishbowlNow": "Començar un fishbowl ara",
+    "tryNow": "Provar ara",
     "definition": {
-        "title": "Què és un fishbowl?",
+        "title": "Què és el mètode fishbowl?",
         "description": "<p>Un fishbowl és una <strong>dinàmica de grup</strong> que facilita converses, debats y qualsevol tipus d'activitat on la <strong>participació és essencial per al seu desenvolupament</strong>.</p><p>És un mètode de diàleg ideal per a comunitats, entorns educatius, o empreses que busquen millorar l'experiència dels treballadors.</p>"
+    },
+    "howOnlineDebates": "Com aconseguim debats online que siguin fluids i participatius en grups grans?",
+    "howStooa": {
+        "title" : "Com funciona Stooa?",
+        "subtitle" : "És molt sencill!",
+        "firstBulletTitle": "5 cadires per dialogar",
+        "firstBulletSub": "Per participar en el diàleg hauràs d'ocupar una de les cadires",
+        "secondBulletTitle": "1 cadira lliure per potenciar la participació",
+        "secondBulletSub": "Sempre ha d'haver-hi una cadira lliure.",
+        "longExplanation1": "Qualsevol assistent pot <span>ocupar una cadira lliure</span> en qualsevol moment <span>per a participar en el diàleg</span>.",
+        "longExplanation2": "Si totes <span>les cadires estan ocupades</span> algú que ja hagi participat haurà de <span>deixar el seu seient lliure</span>."
     },
     "keybenefits": {
         "first": {

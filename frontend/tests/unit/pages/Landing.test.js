@@ -13,6 +13,12 @@ import preloadAll from 'jest-next-dynamic';
 
 import Home from '@/pages/index';
 
+const intersectionObserverMock = () => ({
+  observe: () => null
+});
+
+window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);
+
 jest.mock('next/router', () => ({
   useRouter() {
     return {
@@ -63,6 +69,6 @@ describe('Test of marketing landing page, with 4 listed benefits.', () => {
     expect(benefits).toHaveLength(4);
     expect(loginButton).toBeInTheDocument();
     expect(registerButton).toBeInTheDocument();
-    expect(createFishbowlButton).toHaveLength(3);
+    expect(createFishbowlButton).toHaveLength(2);
   });
 });

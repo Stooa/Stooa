@@ -82,6 +82,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
               <Link
                 href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}&title=${shareTitle}&mini=true`}
                 passHref
+                legacyBehavior
               >
                 <a
                   target="_blank"
@@ -104,6 +105,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
               <Link
                 href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}`}
                 passHref
+                legacyBehavior
               >
                 <a
                   target="_blank"

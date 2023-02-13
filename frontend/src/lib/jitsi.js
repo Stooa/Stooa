@@ -33,7 +33,10 @@ const join = async (user, seat) => {
 const leave = async () => {
   conferenceRepository.sendLeaveEvent();
 };
-
+/**
+ * @param {Event} [event] - The event that triggered the unload
+ * @param {boolean} [prevent] - If we want to prevent the unload event
+ */
 const unload = async () => {
   console.log('[STOOA] Unload');
 

@@ -7,8 +7,8 @@
     "timeLeft_one": "Il reste {{time}}",
     "prejoin": {
         "startFishbowl": "Démarrer le fishbowl",
-        "joinDiscussion": "Participez au débat",
-        "title": "Rejoindre la salle",
+        "joinDiscussion": "Participez au fishbowl",
+        "title": "Rejoindre le dialogue",
         "moderatorSubtitle": "Si vous le souhaitez, vous pouvez configurer l'audio et la vidéo avant de commencer le fishbowl.",
         "subtitle": "You will enter the room as a listener.<br/>Once inside, if you want to join in the conversation you must occupy a seat.",
         "permissions": "If in addition to attending the event as a listener <span>you want to actively participate in the conversation</span>, Stooa needs permissions to access your camera and microphone so that others can hear and see you."
@@ -26,9 +26,17 @@
     },
     "waitingHost": "Les participants attendent que vous démarriez le fishbowl",
     "introduceModal": {
-        "title": "Faites une introduction",
+        "title": "Faites une présentation",
         "description": "Votre caméra sera activée et vous pourrez dire quelques mots aux participants avant d'ouvrir le bocal. Ensuite, vous pouvez autoriser les utilisateurs à participer à la conversation.",
-        "button": "Commencer votre présentation"
+        "button": "Commencer votre présentation",
+        "shareScreenFirst": "C'est le moment <span>d'adresser quelques mots</span> aux participants avant d'ouvrir le fishbowl.",
+        "shareScreenSecond": "Vous pouvez également <span>partager votre écran</span> pour fournir un contenu visuel à votre introduction.",
+        "shareScreenThird": "<span>Lorsque vous avez terminé</span>, vous pouvez autoriser les participants à rejoindre la conversation."
+    },
+    "endIntroModal": {
+        "title": "Fin de présentation",
+        "description": "Lorsque vous aurez terminé l'intro et laissé entrer les participants, vous arrêterez automatiquement le partage d'écran et ne pourrez plus le faire.",
+        "button": "Fin de l'introduction"
     },
     "participants": {
         "attendees": "Auditeurs",
@@ -78,9 +86,11 @@
     "full": "Plein",
     "join": "Rejoindre la conversation",
     "leave": "Quitter la conversation",
+    "shareScreenButton": "Partager l'écran",
+    "stopShareScreenButton": "Arrêter le partage",
     "reactions": "Réactions",
     "sameAsSystem": "Suivre le système",
-    "settings": "Paramètres",
+    "settings": "Plus d'options",
     "timesUp": "Le temps est écoulé",
     "unmute": "Activer le son",
     "mute": "Mettre en sourdine",
@@ -103,6 +113,7 @@
     "permissionsModalDescription": "If you want to take a seat in order to say something, Stooa needs permissions to access your microphone so others can hear you.",
     "permissionsModalButton": "Grant permissions",
     "permissionsModalErrorToast": "It looks like you have blocked the microphone permissions from the browser.<br/>Try reloading the page to continue.",
+    "permissionsNotGranted": "Permissions non accordées.",
     "reaction": {
         "agree": "D'accord",
         "disagree": "Pas d'accord",
@@ -113,7 +124,37 @@
         "insightful": "Intéressant"
     },
     "prefishbowl": {
-        "onBoardingHelp": "Don't know how a fishbowl works? Click here",
-        "connectWithUsers": "To connect with the people in the room through your social networks, sign up on Stooa."
+        "participantsTitle":"participants dans la salle",
+        "onBoardingHelp": "Vous ne savez pas comment fonctionne un Fishbowl ? Cliquez ici",
+        "connectWithUsers": "Pour vous connecter avec les personnes présentes dans la salle par le biais de vos réseaux sociaux, inscrivez-vous sur Stooa."
+    },
+    "startIntroduction": "Commencer la présentation",
+    "screenSharePermissionsModal" : {
+        "title": "Votre écran ne peut pas être partagé",
+        "description": "Google Chrome n'a peut-être pas l'autorisation d'enregistrer l'écran de votre ordinateur. <a>Allez dans les préférences du système.</a>"
+    },
+    "recording": {
+        "startedSuccessfully": "L'enregistrement a commencé. Arrêtez l'enregistrement pour le sauvegarder.",
+        "downloading": "Votre enregistrement est en cours de téléchargement.",
+        "participantNotificationStart": "L'hôte enregistre.",
+        "participantNotificationStop": "L'hôte a arrêté l'enregistrement.",
+        "closeToGiga": "La capacité d'enregistrement atteint sa limite, rappelez-vous que vous pouvez réenregistrer.",
+        "wrongTab": "L'enregistrement a échoué. Veuillez sélectionner l'onglet actuel.",
+        "recordingError": "Échec du démarrage de l'enregistrement, veuillez actualiser la page et réessayer.",
+        "selectThisTab": "Sélectionnez cet onglet pour commencer l'enregistrement",
+        "stop": "Arrêter l'enregistrement",
+        "start": "Commencer l'enregistrement",
+        "status": "Enregistrement",
+        "startModal": {
+            "title": "Vous êtes sur le point de commencer l'enregistrement",
+            "experimental": "Expérimental",
+            "firstBullet": "L'enregistrement sera sauvegardé dans <span>votre dossier de téléchargement</span>. Il est limité à 1 Go, soit environ 100 minutes.",
+            "secondBullet": "Assurez-vous de <span>sélectionner l'onglet en cours</span>, sinon l'enregistrement ne démarrera pas.",
+            "thirdBullet": "Pour pouvoir enregistrer le <i>fishbowl</i>, vous devez obtenir le <span>consentement de tous les participants</span>."
+        },
+        "stopModal": {
+            "title": "Êtes-vous sûr de vouloir arrêter l'enregistrement ?",
+            "description": "L'enregistrement sera sauvegardé dans votre dossier de téléchargement."
+        }
     }
 }

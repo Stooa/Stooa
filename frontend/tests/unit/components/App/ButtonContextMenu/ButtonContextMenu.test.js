@@ -79,8 +79,6 @@ describe('Tests with seat number', () => {
 
       jest.spyOn(conferenceRepository, 'getParticipantById').mockImplementation(() => '123456');
 
-      jest.spyOn(React, 'useState').mockImplementation(() => participant.id);
-
       const seatsValues = ['123456', null, null, null, null];
       const changeSeatEvent = new CustomEvent('seats:change', { detail: { seatsValues } });
 

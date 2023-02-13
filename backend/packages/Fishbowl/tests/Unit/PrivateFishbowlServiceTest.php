@@ -19,9 +19,9 @@ use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Security;
 use Zenstruck\Foundry\Test\Factories;
 
 class PrivateFishbowlServiceTest extends TestCase
@@ -156,9 +156,7 @@ class PrivateFishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseWhenIsPrivateButPasswordAreTheSame(): void
     {
-        $request = new Request();
-
-        $request->request->set('password', 'password');
+        $request = new Request([], [], [], [], [], [], json_encode(['password' => 'password'], \JSON_THROW_ON_ERROR));
 
         $this->requestStack->push($request);
 

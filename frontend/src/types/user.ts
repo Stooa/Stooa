@@ -18,6 +18,7 @@ export interface User {
   videoInput?: MediaDeviceInfo;
   audioMuted?: boolean;
   videoMuted?: boolean;
+  _role?: string;
 }
 
 export interface UserRepository {

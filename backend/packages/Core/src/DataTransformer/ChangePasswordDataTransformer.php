@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Core\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use ApiPlatform\Core\Validator\ValidatorInterface;
+use ApiPlatform\Validator\ValidatorInterface;
 use App\Core\Entity\User;
 use App\Core\Model\ChangePasswordInput;
 use App\Core\Security\PasswordEncoderService;
