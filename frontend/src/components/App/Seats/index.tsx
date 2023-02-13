@@ -73,7 +73,7 @@ const Seats = () => {
         {[...Array(5)].map((e, seat) => (
           <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
             {isConferenceRunning && (
-              <Button className="body-sm" onClick={() => joinOnClick(seat + 1)} active={true}>
+              <Button className="body-sm" onClick={() => joinOnClick(seat + 1)}>
                 Join
               </Button>
             )}
