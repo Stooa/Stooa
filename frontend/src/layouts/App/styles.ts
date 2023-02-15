@@ -61,7 +61,7 @@ const Header = styled.header`
   justify-content: space-between;
   grid-area: Header;
   color: ${COLOR_NEUTRO_700};
-  z-index: 10;
+  z-index: 50;
 
   ${media.max('tablet')`
 
