@@ -89,7 +89,7 @@ const Selector = styled.div`
   background: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_700};
   border-radius: ${BORDER_RADIUS};
-  overflow-y: auto;
+  overflow-y: scroll;
   z-index: 21;
 
   & .recording-button {
