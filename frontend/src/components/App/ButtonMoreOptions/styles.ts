@@ -121,7 +121,7 @@ const Selector = styled.div`
   ${media.min('tablet')`
     top: initial;
     bottom: calc(100% + ${space()});
-    max-height: ${rems(350)};
+    max-height: ${rems(450)};
   `}
 `;
 
