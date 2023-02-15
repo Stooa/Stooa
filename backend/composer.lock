@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5dfb4af2512bab277bb3641b71166a9",
+    "content-hash": "5f514256ee2daf46ec43932906e4c9a3",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3979,16 +3979,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.15.13",
+            "version": "0.15.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "05df336f8e29873ed14c0790fbea68fa5de14f50"
+                "reference": "826539a991aa22590e91f8add06ca99f76e21ccd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/05df336f8e29873ed14c0790fbea68fa5de14f50",
-                "reference": "05df336f8e29873ed14c0790fbea68fa5de14f50",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/826539a991aa22590e91f8add06ca99f76e21ccd",
+                "reference": "826539a991aa22590e91f8add06ca99f76e21ccd",
                 "shasum": ""
             },
             "require": {
@@ -3998,7 +3998,6 @@
             "conflict": {
                 "rector/rector-doctrine": "*",
                 "rector/rector-downgrade-php": "*",
-                "rector/rector-php-parser": "*",
                 "rector/rector-phpunit": "*",
                 "rector/rector-symfony": "*"
             },
@@ -4023,7 +4022,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.15.13"
+                "source": "https://github.com/rectorphp/rector/tree/0.15.16"
             },
             "funding": [
                 {
@@ -4031,7 +4030,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-07T01:46:29+00:00"
+            "time": "2023-02-14T22:22:09+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
