@@ -24,11 +24,11 @@ import { join, leave } from '@/lib/jitsi';
 import userRepository from '@/jitsi/User';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import Button from '@/components/Common/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Seats = () => {
   const { t } = useTranslation('app');
-  const { isSharing, isModerator } = useStooa();
+  const { data, isSharing, isModerator, conferenceReady } = useStooa();
   const [{ conferenceStatus }] = useStateValue();
   const [joined, setJoined] = useState<boolean>(false);
   const [participantSeat, setParticipantSeat] = useState<number | undefined>(undefined);
@@ -36,6 +36,36 @@ const Seats = () => {
   const isConferenceInIntro = conferenceStatus === IConferenceStatus.INTRODUCTION;
   const isConferenceNotStarted = conferenceStatus === IConferenceStatus.NOT_STARTED;
   const isConferenceRunning = conferenceStatus === IConferenceStatus.RUNNING;
+
+  const hasModeratorToSeatDuringIntroduction = (): boolean => {
+    return (
+      (data.hasIntroduction ?? false) &&
+      isModerator &&
+      conferenceReady &&
+      conferenceStatus === IConferenceStatus.INTRODUCTION
+    );
+  };
+
+  const hasModeratorToSeatDuringRunning = (): boolean => {
+    return (
+      !data.hasIntroduction &&
+      isModerator &&
+      conferenceReady &&
+      data.currentStatus?.toUpperCase() === IConferenceStatus.NOT_STARTED
+    );
+  };
+
+  useEffect(() => {
+    if (hasModeratorToSeatDuringIntroduction()) {
+      joinSeat(1);
+    }
+  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (hasModeratorToSeatDuringRunning()) {
+      joinSeat(1);
+    }
+  }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const joinSeat = async (seat: number): Promise<void> => {
     if (!joined) {

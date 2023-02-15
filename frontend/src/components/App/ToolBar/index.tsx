@@ -15,7 +15,6 @@ import { join, leave } from '@/lib/jitsi';
 import tracksRepository from '@/jitsi/Tracks';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import devicesRepository from '@/jitsi/Devices';
-import userRepository from '@/jitsi/User';
 import { useStooa } from '@/contexts/StooaManager';
 import useSeatsAvailable from '@/hooks/useSeatsAvailable';
 import ButtonJoin from '@/components/App/ButtonJoin';
@@ -38,7 +37,6 @@ const ToolBar: React.FC = () => {
   const [joined, setJoined] = useState(false);
   const [joinIsInactive, setJoinIsInactive] = useState(false);
   const {
-    data,
     isModerator,
     conferenceStatus,
     timeStatus,
@@ -105,24 +103,6 @@ const ToolBar: React.FC = () => {
     }
   };
 
-  const hasModeratorToSeatDuringIntroduction = (): boolean => {
-    return (
-      (data.hasIntroduction ?? false) &&
-      isModerator &&
-      conferenceReady &&
-      conferenceStatus === IConferenceStatus.INTRODUCTION
-    );
-  };
-
-  const hasModeratorToSeatDuringRunning = (): boolean => {
-    return (
-      !data.hasIntroduction &&
-      isModerator &&
-      conferenceReady &&
-      data.currentStatus?.toUpperCase() === IConferenceStatus.NOT_STARTED
-    );
-  };
-
   const handleMic = () => {
     if (configButtonRef.current) {
       configButtonRef.current.handleShowDevices(false);
@@ -169,20 +149,6 @@ const ToolBar: React.FC = () => {
       devicesRepository.changeDevice(videoDevice);
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (hasModeratorToSeatDuringIntroduction()) {
-      console.log('[STOOA] Moderator join seat during introduction');
-      joinSeat(userRepository.getUser());
-    }
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (hasModeratorToSeatDuringRunning()) {
-      console.log('[STOOA] Moderator join seat during running');
-      joinSeat(userRepository.getUser());
-    }
-  }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const isActionDisabled =
     !conferenceReady ||
