@@ -13,7 +13,7 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import { useStooa } from '@/contexts/StooaManager';
 import { useStateValue } from '@/contexts/AppContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
-import {makeCurrentFishbowl} from "../../factories/fishbowl";
+import { makeCurrentFishbowl } from '../../factories/fishbowl';
 
 jest.mock('@/components/App/ButtonContextMenu', () => ({ children }) => <>{children}</>);
 jest.mock('@/contexts/StooaManager');
@@ -22,7 +22,6 @@ jest.mock('@/hooks/useNavigatorType');
 
 describe('Unit test of fishbowl seats', () => {
   it('Unstarted fishbowl renders 5 unavailable seats', () => {
-
     useStooa.mockReturnValue({
       data: makeCurrentFishbowl(),
       conferenceReady: false,
