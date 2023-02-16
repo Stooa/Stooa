@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -32,11 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(),
-        new GetCollection(
-            controller: NotFoundAction::class,
-            output: false,
-            read: false
-        ),
+        new GetCollection(),
         new Post(),
         new Put(),
     ],
@@ -105,6 +102,7 @@ class Feedback implements \Stringable
 
     #[Groups(['feedback:read', 'feedback:write'])]
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'feedbacks')]
+    #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private ?Fishbowl $fishbowl = null;
 
     #[Groups(['feedback:read', 'feedback:write'])]

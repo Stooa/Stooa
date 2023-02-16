@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace App\Core\DataFixtures;
 
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\SonataUserUserFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -39,19 +41,28 @@ class DefaultFixtures extends Fixture
             'roles' => [UserInterface::ROLE_SUPER_ADMIN],
         ]);
 
-        UserFactory::createOne([
-            'email' => 'user@stooa.com',
-            'password' => self::ADMIN_PASSWORD,
-            'active' => true,
-            'privacyPolicy' => true,
-        ]);
-
         $fishbowl = FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'slug' => 'test-me-fishbowl',
+        ])->object();
+
+        $secondFishbowl = FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'slug' => 'another-fishbowl',
+        ])->object();
+
+        $user = UserFactory::createOne([
+            'email' => 'user@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+            'fishbowls' => [$secondFishbowl],
+            'privacyPolicy' => true,
         ])->object();
 
         UserFactory::createOne([
@@ -61,6 +72,26 @@ class DefaultFixtures extends Fixture
             'fishbowls' => [$fishbowl],
             'createdAt' => new \DateTime(),
             'privacyPolicy' => true,
+        ]);
+
+        $participant = ParticipantFactory::createOne([
+            'user' => $user,
+            'fishbowl' => $fishbowl,
+        ])->object();
+
+        $participant = ParticipantFactory::createOne([
+            'user' => $user,
+            'fishbowl' => $secondFishbowl,
+        ])->object();
+
+        FeedbackFactory::createMany(10, [
+            'fishbowl' => $fishbowl,
+            'participant' => $participant,
+        ]);
+
+        FeedbackFactory::createMany(10, [
+            'fishbowl' => $secondFishbowl,
+            'participant' => $participant,
         ]);
     }
 }
