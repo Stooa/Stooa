@@ -20,6 +20,7 @@ import {
 } from '@/ui/settings';
 import { media, rems, space } from '@/ui/helpers';
 import { BODY_SM, BODY_XS } from '@/ui/Texts';
+import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 interface SelectorProps {
   bottom?: boolean;
@@ -81,16 +82,18 @@ const Selector = styled.div`
   ${({ top }: SelectorProps) =>
     top &&
     `bottom: calc(55% + ${space()});
-      right: 0;
+      right: 8px;
   `};
 
-  max-height: 45vh;
+  max-height: 47vh;
   width: ${rems(280)};
   background: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_700};
   border-radius: ${BORDER_RADIUS};
   overflow-y: auto;
   z-index: 21;
+
+  ${scrolllbarStyle}
 
   & .recording-button {
     position: sticky;
@@ -121,7 +124,7 @@ const Selector = styled.div`
   ${media.min('tablet')`
     top: initial;
     bottom: calc(100% + ${space()});
-    max-height: ${rems(350)};
+    max-height: ${rems(430)};
   `}
 `;
 
