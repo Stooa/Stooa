@@ -74,7 +74,7 @@ class DefaultFixtures extends Fixture
             'privacyPolicy' => true,
         ]);
 
-        $participant = ParticipantFactory::createOne([
+        $secondParticipant = ParticipantFactory::createOne([
             'user' => $user,
             'fishbowl' => $fishbowl,
         ])->object();
@@ -84,12 +84,12 @@ class DefaultFixtures extends Fixture
             'fishbowl' => $secondFishbowl,
         ])->object();
 
-        FeedbackFactory::createMany(10, [
+        FeedbackFactory::createOne([
             'fishbowl' => $fishbowl,
             'participant' => $participant,
         ]);
 
-        FeedbackFactory::createMany(10, [
+        FeedbackFactory::createOne([
             'fishbowl' => $secondFishbowl,
             'participant' => $participant,
         ]);
