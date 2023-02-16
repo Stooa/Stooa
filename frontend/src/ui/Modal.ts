@@ -32,7 +32,7 @@ const Modal = styled.div`
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 11;
+  z-index: 50;
   overflow: scroll;
 
   ${media.min('tablet')`

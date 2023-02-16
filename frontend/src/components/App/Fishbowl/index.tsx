@@ -36,6 +36,7 @@ import { useModals } from '@/contexts/ModalsContext';
 import ModalScreenSharePermissions from '@/components/App/ModalScreenSharePermissions';
 import ModalStartRecording from '@/components/App/ModalStartRecording';
 import ModalStopRecording from '@/components/App/ModalStopRecording';
+import ModalShareLink from '@/components/App/ModalShareLink';
 import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
@@ -170,6 +171,8 @@ const Fishbowl: FC = () => {
       />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <HackLeaveHover onMouseEnter={handleModeratorIsGonnaLeave} />
+
+        <ModalShareLink />
 
         {/* MODALS */}
         {showConfirmCloseTabModal && (
