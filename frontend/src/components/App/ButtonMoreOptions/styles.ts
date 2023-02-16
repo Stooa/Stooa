@@ -82,7 +82,7 @@ const Selector = styled.div`
   ${({ top }: SelectorProps) =>
     top &&
     `bottom: calc(55% + ${space()});
-      right: 0;
+      right: 8px;
   `};
 
   max-height: 47vh;
