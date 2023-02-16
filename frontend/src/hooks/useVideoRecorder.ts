@@ -76,10 +76,8 @@ const useVideoRecorder = (
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
   const totalSize = useRef<number>(GIGABYTE);
-  const audioContext = useRef<AudioContext>(new AudioContext());
-  const audioDestination = useRef<MediaStreamAudioDestinationNode>(
-    audioContext.current.createMediaStreamDestination()
-  );
+  const audioContext = useRef<AudioContext>();
+  const audioDestination = useRef<MediaStreamAudioDestinationNode>();
 
   const recordingStart = useRef<Date>();
 
@@ -98,7 +96,7 @@ const useVideoRecorder = (
   const _addAudioTrackToLocalRecording = (track: JitsiTrack): void => {
     const stream = new MediaStream([track.getTrack()]);
 
-    if (stream.getAudioTracks().length > 0 && audioDestination.current) {
+    if (stream.getAudioTracks().length > 0 && audioDestination.current && audioContext.current) {
       audioContext.current.createMediaStreamSource(stream).connect(audioDestination.current);
     }
   };
