@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Header as HeaderStyled } from '@/layouts/App/styles';
-import ModalShareLink from '@/components/App/ModalShareLink';
 import { ROUTE_HOME } from '@/app.config';
 import StatusRecording from '../StatusRecording';
 import RedRec from '@/ui/svg/rec-red.svg';
@@ -87,9 +86,6 @@ const Header: React.FC<Props> = ({ toggleParticipants, participantsActive, isPre
             <OnBoardingButton />
           </>
         )}
-      </div>
-      <div className="header-share">
-        <ModalShareLink />
       </div>
       <StatusRecording className="hide-mobile" showAnimation={isRecording} />
       <div className="header-actions">

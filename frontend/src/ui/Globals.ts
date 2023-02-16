@@ -272,6 +272,7 @@ const GlobalStyle = createGlobalStyle`
 
 
       &.Toastify__toast-container {
+        --toastify-z-index: 30;
         ${media.max('tablet')`
           width: 92%;
           left: 50%;
