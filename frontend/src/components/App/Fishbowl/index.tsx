@@ -42,6 +42,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
+import ButtonFeedback from '../ButtonFeedback';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -210,6 +211,7 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
+        <ButtonFeedback drawerOpened={participantsActive} />
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

@@ -19,6 +19,7 @@ const useFeedback = () => {
   const [createFeedbackMutation] = useMutation(CREATE_FEEDBACK);
   const [updateFeedbackMutation] = useMutation(UPDATE_FEEDBACK);
   const { data } = useStooa();
+
   const createFeedback = () => {
     const satisfaction = 'sad';
     const participant = userRepository.getUserParticipantId();
