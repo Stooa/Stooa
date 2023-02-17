@@ -30,7 +30,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
-#[ORM\UniqueConstraint(name: 'feedback_unique', columns: ['fishbowl_id', 'participant_id'])]
 #[ApiResource(
     operations: [
         new Get(),

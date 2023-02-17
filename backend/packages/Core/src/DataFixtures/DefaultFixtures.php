@@ -74,12 +74,12 @@ class DefaultFixtures extends Fixture
             'privacyPolicy' => true,
         ]);
 
-        $secondParticipant = ParticipantFactory::createOne([
+        $participant = ParticipantFactory::createOne([
             'user' => $user,
             'fishbowl' => $fishbowl,
         ])->object();
 
-        $participant = ParticipantFactory::createOne([
+        $secondParticipant = ParticipantFactory::createOne([
             'user' => $user,
             'fishbowl' => $secondFishbowl,
         ])->object();
@@ -92,6 +92,16 @@ class DefaultFixtures extends Fixture
         FeedbackFactory::createOne([
             'fishbowl' => $secondFishbowl,
             'participant' => $participant,
+        ]);
+
+        FeedbackFactory::createOne([
+            'fishbowl' => $fishbowl,
+            'participant' => $secondParticipant,
+        ]);
+
+        FeedbackFactory::createOne([
+            'fishbowl' => $secondFishbowl,
+            'participant' => $secondParticipant,
         ]);
     }
 }
