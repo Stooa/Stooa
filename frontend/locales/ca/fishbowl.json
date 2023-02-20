@@ -152,6 +152,7 @@
         "stop": "Parar la gravació",
         "start": "Començar la gravació",
         "status": "Gravant",
+        "statusHost": "Parar la gravació",
         "startModal": {
             "title": "Estàs a punt d'iniciar la gravació",
             "experimental": "Experimental",

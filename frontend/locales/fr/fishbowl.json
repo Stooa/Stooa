@@ -145,6 +145,7 @@
         "stop": "Arrêter l'enregistrement",
         "start": "Commencer l'enregistrement",
         "status": "Enregistrement",
+        "statusHost": "Arrêter l'enregistrement",
         "startModal": {
             "title": "Vous êtes sur le point de commencer l'enregistrement",
             "experimental": "Expérimental",

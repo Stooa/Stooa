@@ -152,6 +152,7 @@
         "stop": "Stop recording",
         "start": "Start recording",
         "status": "Recording",
+        "statusHost": "Stop recording",
         "startModal": {
             "title": "You are about to start recording",
             "experimental": "Experimental",

@@ -38,15 +38,15 @@ const StatusRecording = ({
     >
       {isModerator ? (
         <>
-          {t('recording.status')}
-          <LoadingDots />
-          {showAnimation && <RecordingTimer />}
           <button
             onClick={() => setShowStopRecording(true)}
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
           >
             <StopRec className="stop" />
+            {t('recording.statusHost')}
+            <LoadingDots />
+            {showAnimation && <RecordingTimer />}
             <Tooltip arrow showTooltip={showTooltip} position="bottom">
               {t('recording.stop')}
             </Tooltip>
