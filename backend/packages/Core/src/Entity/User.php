@@ -25,6 +25,8 @@ use App\Core\Model\ChangePasswordInput;
 use App\Core\Model\ChangePasswordLoggedInput;
 use App\Core\Repository\UserRepository;
 use App\Core\Resolver\UserResolver;
+use App\Core\State\ChangePasswordProcessor;
+use App\Core\State\ChangePasswordProcessorLogged;
 use App\Core\State\UserProcessor;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -79,7 +81,8 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'passwordConfirmation' => ['type' => 'String!'],
             ],
             input: ChangePasswordInput::class,
-            name: 'changePassword'
+            name: 'changePassword',
+            processor: ChangePasswordProcessor::class
         ),
         new Mutation(
             args: [
@@ -88,7 +91,8 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'newPasswordConfirmation' => ['type' => 'String!'],
             ],
             input: ChangePasswordLoggedInput::class,
-            name: 'changePasswordLogged'
+            name: 'changePasswordLogged',
+            processor: ChangePasswordProcessorLogged::class
         ),
     ],
     processor: UserProcessor::class
