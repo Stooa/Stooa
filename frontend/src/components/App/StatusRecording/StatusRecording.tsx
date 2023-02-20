@@ -39,8 +39,8 @@ const StatusRecording = ({
             <StopRec className="stop" />
             {t('recording.statusHost')}
             {showAnimation && <RecordingTimer />}
-            <LoadingDots />
           </button>
+          <LoadingDots />
         </>
       ) : (
         <>
