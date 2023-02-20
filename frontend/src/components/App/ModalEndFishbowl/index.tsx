@@ -18,10 +18,22 @@ interface Props {
   closeModal: () => void;
   endFishbowl: () => void;
   disabled: boolean;
+  isRecording: boolean;
+  stopRecording: () => void;
 }
 
-const EndFishbowl: React.FC<Props> = ({ closeModal, endFishbowl, disabled }) => {
+const EndFishbowl: React.FC<Props> = ({
+  closeModal,
+  endFishbowl,
+  disabled,
+  isRecording,
+  stopRecording
+}) => {
   const { t } = useTranslation('fishbowl');
+
+  const title = isRecording ? 'recording.endModal.title' : 'endModal.title';
+  const description = isRecording ? 'recording.endModal.description' : 'endModal.description';
+  const button = isRecording ? 'recording.endModal.button' : 'endModal.button';
 
   return (
     <Modal>
@@ -29,12 +41,18 @@ const EndFishbowl: React.FC<Props> = ({ closeModal, endFishbowl, disabled }) => 
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t('endModal.title')}</h2>
-        <p className="description">{t('endModal.description')}</p>
+        <h2 className="title-sm">{t(title)}</h2>
+        <p className="description">{t(description)}</p>
         <div className="modal-footer">
-          <Button onClick={endFishbowl} className="error" disabled={disabled}>
-            {t('endModal.button')}
-          </Button>
+          {isRecording ? (
+            <Button onClick={stopRecording} disabled={disabled}>
+              {t(button)}
+            </Button>
+          ) : (
+            <Button className="error" onClick={endFishbowl} disabled={disabled}>
+              {t(button)}
+            </Button>
+          )}
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
           </Button>

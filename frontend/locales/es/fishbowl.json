@@ -163,6 +163,11 @@
         "stopModal": {
             "title": "¿Estás seguro de que quieres detener la grabación?",
             "description": "La grabación se guardará en tu carpeta de descargas."
+        },
+        "endModal": {
+            "title": "Recuerda detener la grabación antes de terminar el fishbowl.",
+            "description": "La grabación se guardará en tu carpeta de descargas.",
+            "button": "Parar la grabación"
         }
     }
 }

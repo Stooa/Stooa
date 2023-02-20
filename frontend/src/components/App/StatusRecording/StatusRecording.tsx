@@ -14,8 +14,6 @@ import RedRec from '@/ui/svg/rec-red.svg';
 import { useStooa } from '@/contexts/StooaManager';
 import RecordingTimer from '@/components/App/RecordingTimer';
 import LoadingDots from '@/components/Common/LoadingDots';
-import { useState } from 'react';
-import Tooltip from '@/components/Common/Tooltip';
 import { useModals } from '@/contexts/ModalsContext';
 
 const StatusRecording = ({
@@ -27,7 +25,6 @@ const StatusRecording = ({
 }) => {
   const { t } = useTranslation('fishbowl');
   const { isModerator } = useStooa();
-  const [showTooltip, setShowTooltip] = useState(false);
   const { setShowStopRecording } = useModals();
 
   return (
@@ -38,18 +35,11 @@ const StatusRecording = ({
     >
       {isModerator ? (
         <>
-          <button
-            onClick={() => setShowStopRecording(true)}
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-          >
+          <button onClick={() => setShowStopRecording(true)}>
             <StopRec className="stop" />
             {t('recording.statusHost')}
-            <LoadingDots />
             {showAnimation && <RecordingTimer />}
-            <Tooltip arrow showTooltip={showTooltip} position="bottom">
-              {t('recording.stop')}
-            </Tooltip>
+            <LoadingDots />
           </button>
         </>
       ) : (

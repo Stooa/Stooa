@@ -156,6 +156,11 @@
         "stopModal": {
             "title": "Êtes-vous sûr de vouloir arrêter l'enregistrement ?",
             "description": "L'enregistrement sera sauvegardé dans votre dossier de téléchargement."
+        },
+        "endModal": {
+            "title": "N'oubliez pas d'arrêter l'enregistrement avant de terminer le bocal.",
+            "description": "L'enregistrement sera sauvegardé dans votre dossier de téléchargement.",
+            "button": "Arrêter l'enregistrement"
         }
     }
 }

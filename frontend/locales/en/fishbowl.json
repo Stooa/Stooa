@@ -163,6 +163,11 @@
         "stopModal": {
             "title": "Are you sure you want to stop recording?",
             "description": "The recording will be saved in your download folder. "
+        },
+        "endModal": {
+            "title": "Remember to stop recording before finishing the fishbowl.",
+            "description": "The recording will be saved in your download folder.",
+            "button": "Stop recording"
         }
     }
 }
