@@ -148,9 +148,9 @@
         "startModal": {
             "title": "Vous êtes sur le point de commencer l'enregistrement",
             "experimental": "Expérimental",
-            "firstBullet": "L'enregistrement sera sauvegardé dans <span>votre dossier de téléchargement</span>. Il est limité à 1 Go, soit environ 100 minutes.",
-            "secondBullet": "Assurez-vous de <span>sélectionner l'onglet en cours</span>, sinon l'enregistrement ne démarrera pas.",
-            "thirdBullet": "Pour pouvoir enregistrer le <i>fishbowl</i>, vous devez obtenir le <span>consentement de tous les participants</span>."
+            "firstBullet": "<span>Arrêtez l'enregistrement</span> avant de terminer le bocal et <span>ne fermez</span> pas la fenêtre/onglet du navigateur afin de sauvegarder l'enregistrement.",
+            "secondBullet": "Pour pouvoir enregistrer le <i>fishbowl</i>, vous devez obtenir le <span>consentement de tous les participants</span>.",
+            "thirdBullet": "L'enregistrement sera sauvegardé dans <span>votre dossier de téléchargement</span>. Il est limité à 1 Go, soit environ 100 minutes."
         },
         "stopModal": {
             "title": "Êtes-vous sûr de vouloir arrêter l'enregistrement ?",

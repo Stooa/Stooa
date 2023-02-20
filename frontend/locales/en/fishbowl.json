@@ -155,9 +155,9 @@
         "startModal": {
             "title": "You are about to start recording",
             "experimental": "Experimental",
-            "firstBullet": "It will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
-            "secondBullet": "Make sure you <span>select the current tab</span>, otherwise the recording won't start.",
-            "thirdBullet": "In order to record the fishbowl you must have <span>the consent of all attendees</span>."
+            "firstBullet": "<span>Stop recording</span> before finishing the fishbowl and <span>don’t close</span> the browser window / tab in order to save the recording.",
+            "secondBullet": "In order to record the fishbowl you must have <span>the consent of all attendees</span>.",
+            "thirdBullet": "It will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes."
         },
         "stopModal": {
             "title": "Are you sure you want to stop recording?",
