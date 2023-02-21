@@ -8,14 +8,11 @@
  */
 
 import useTranslation from 'next-translate/useTranslation';
-import { StyledRecordingStatus } from './styles';
+import { StyledRecordingStatus, StyledAnimatedStatusWrapper } from './styles';
 import StopRec from '@/ui/svg/stop-record.svg';
 import RedRec from '@/ui/svg/rec-red.svg';
 import { useStooa } from '@/contexts/StooaManager';
 import RecordingTimer from '@/components/App/RecordingTimer';
-import LoadingDots from '@/components/Common/LoadingDots';
-import { useState } from 'react';
-import Tooltip from '@/components/Common/Tooltip';
 import { useModals } from '@/contexts/ModalsContext';
 
 const StatusRecording = ({
@@ -27,38 +24,29 @@ const StatusRecording = ({
 }) => {
   const { t } = useTranslation('fishbowl');
   const { isModerator } = useStooa();
-  const [showTooltip, setShowTooltip] = useState(false);
   const { setShowStopRecording } = useModals();
 
   return (
-    <StyledRecordingStatus
-      className={`body-xs medium ${isModerator ? 'moderator' : ''} ${
-        showAnimation ? 'show' : ''
-      } ${className}`}
-    >
-      {isModerator ? (
-        <>
-          {t('recording.status')}
-          <LoadingDots />
-          {showAnimation && <RecordingTimer />}
-          <button
-            onClick={() => setShowStopRecording(true)}
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-          >
-            <StopRec className="stop" />
-            <Tooltip arrow showTooltip={showTooltip} position="bottom">
-              {t('recording.stop')}
-            </Tooltip>
-          </button>
-        </>
-      ) : (
-        <>
-          <RedRec className="red-dot" />
-          {t('recording.status')}
-        </>
-      )}
-    </StyledRecordingStatus>
+    <StyledAnimatedStatusWrapper className={showAnimation ? 'show' : ''}>
+      <StyledRecordingStatus
+        className={`body-xs medium ${isModerator ? 'moderator' : ''}  ${className}`}
+      >
+        {isModerator ? (
+          <>
+            <button onClick={() => setShowStopRecording(true)}>
+              <StopRec className="stop" />
+              {t('recording.statusHost')}
+              {showAnimation && <RecordingTimer />}
+            </button>
+          </>
+        ) : (
+          <>
+            <RedRec className="red-dot" />
+            {t('recording.status')}
+          </>
+        )}
+      </StyledRecordingStatus>
+    </StyledAnimatedStatusWrapper>
   );
 };
 
