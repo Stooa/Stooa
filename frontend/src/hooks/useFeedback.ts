@@ -20,12 +20,13 @@ const useFeedback = () => {
   const [updateFeedbackMutation] = useMutation(UPDATE_FEEDBACK);
   const { data } = useStooa();
 
-  const createFeedback = () => {
-    const satisfaction = 'sad';
+  const createFeedback = (
+    satisfaction: 'sad' | 'neutral' | 'happy',
+    origin: 'fishbowl' | 'thankyou'
+  ) => {
     const participant = userRepository.getUserParticipantId();
     const fishbowl = data.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const origin = 'fishbowl';
 
     createFeedbackMutation({
       variables: {
@@ -79,15 +80,15 @@ const useFeedback = () => {
     return null;
   };
 
-  const updateFeedback = async () => {
+  const updateFeedback = async ({ type, data }: { type: 'email' | 'comment'; data: string }) => {
     const feedbackId = userRepository.getUserFeedbackId();
 
     updateFeedbackMutation({
       variables: {
         input: {
           id: feedbackId,
-          comment: 'This is a comment',
-          email: 'test@email.com'
+          ...(type === 'comment' && { comment: data }),
+          ...(type === 'email' && { email: data })
         }
       }
     })

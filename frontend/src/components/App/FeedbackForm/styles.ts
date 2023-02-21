@@ -9,13 +9,28 @@
 
 import { space } from '@/ui/helpers';
 import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
+
+const stepVariants = {
+  initial: { opacity: 0, x: 100 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -100 }
+};
+
+const AnimatedStep = styled(motion.div).attrs({
+  variants: stepVariants,
+  initial: 'initial',
+  animate: 'animate',
+  exit: 'exit'
+})``;
 
 const StyledFormWrapper = styled.div`
   position: absolute;
   bottom: calc(100% + ${space()});
   right: 0;
   width: 380px;
+  max-height: 200px;
   padding: ${space(2)} ${space(3)};
 
   border: 1px solid #e5e5e5;
@@ -25,7 +40,7 @@ const StyledFormWrapper = styled.div`
   color: ${COLOR_NEUTRO_600};
 `;
 
-const StyledSatisfactionWrapper = styled.div`
+const StyledStepWrapper = styled(AnimatedStep)`
   & h4 {
     color: ${COLOR_NEUTRO_700};
     margin-bottom: ${space()};
@@ -66,4 +81,25 @@ const StyledLabelOption = styled.label`
   }
 `;
 
-export { StyledFormWrapper, StyledLabelOption, StyledSatisfactionForm, StyledSatisfactionWrapper };
+const StyledCommentForm = styled.form`
+  display: flex;
+  flex-direction: column;
+
+  & textarea {
+    margin-bottom: ${space(2)};
+  }
+
+  & .actions {
+    display: flex;
+    gap: ${space(2)};
+    justify-content: flex-end;
+  }
+`;
+
+export {
+  StyledFormWrapper,
+  StyledLabelOption,
+  StyledSatisfactionForm,
+  StyledStepWrapper,
+  StyledCommentForm
+};

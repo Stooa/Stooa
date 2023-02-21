@@ -19,7 +19,7 @@ const StyledFeedbackWrapper = styled.div`
   position: absolute;
   bottom: ${space()};
   right: ${space(2)};
-  z-index: 100;
+  z-index: 20;
 
   &.drawer-opened {
     right: ${space(46)};

@@ -9,31 +9,37 @@
 
 import { useState } from 'react';
 import { StyledFormWrapper } from './styles';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import useFeedback from '@/hooks/useFeedback';
 import FeedbackSatisfaction from './FeedbackSatisfaction';
+import FeedbackComment from './FeebackComment';
 
 const FeedbackForm = () => {
   const [active, setActive] = useState<'satisfaction' | 'comment' | 'mail' | 'end'>('satisfaction');
 
   const { createFeedback, updateFeedback } = useFeedback();
 
-  const handleNext = () => {};
+  const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
+    createFeedback(satisfactionLevel, 'fishbowl');
+    setActive('comment');
+  };
 
-  const handleSatisfactionFeedback = (level: string) => {
-    console.log(level);
+  const handleCommentFeedback = (comment: string) => {
+    console.log('comment', comment);
+    updateFeedback({ type: 'comment', data: comment });
+    setActive('mail');
   };
 
   return (
     <StyledFormWrapper>
-      {active === 'satisfaction' && (
-        <AnimatePresence>
+      <AnimatePresence>
+        {active === 'satisfaction' && (
           <FeedbackSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
-        </AnimatePresence>
-      )}
-      {active === 'comment' && <h2>Comment</h2>}
-      {active === 'mail' && <h2>Mail</h2>}
-      {active === 'end' && <h2>End</h2>}
+        )}
+        {active === 'comment' && <FeedbackComment handleCommentFeedback={handleCommentFeedback} />}
+        {active === 'mail' && <h2>Mail</h2>}
+        {active === 'end' && <h2>End</h2>}
+      </AnimatePresence>
     </StyledFormWrapper>
   );
 };
