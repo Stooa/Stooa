@@ -152,16 +152,22 @@
         "stop": "Parar la grabación",
         "start": "Empezar la grabación",
         "status": "Grabando",
+        "statusHost": "Parar la grabación",
         "startModal": {
             "title": "Estás a punto de iniciar la grabación",
             "experimental": "Experimental",
-            "firstBullet": "Se guardará en tu <span>carpeta de descargas</span>. Está limitada a 1 GB, unos 100 minutos.",
-            "secondBullet": "Asegúrate de <span>seleccionar la pestaña actual</span>, de lo contrario la grabación no se iniciará.",
-            "thirdBullet": "Para grabar el <i>fishbowl</i> debes contar con el <span>consentimiento de todos los asistentes</span>."
+            "firstBullet": "Detén la grabación <span>antes de terminar el fishbowl</span> para guardarla. Si cierras la ventana o pestaña del navegador no se guardará.",
+            "secondBullet": "Para grabar el <i>fishbowl</i> debes contar con el <span>consentimiento de todos los asistentes</span>.",
+            "thirdBullet": "La grabación se guardará en tu <span>carpeta de descargas</span>. Está limitada a 1 GB, unos 100 minutos."
         },
         "stopModal": {
             "title": "¿Estás seguro de que quieres detener la grabación?",
             "description": "La grabación se guardará en tu carpeta de descargas."
+        },
+        "endModal": {
+            "title": "Recuerda detener la grabación antes de terminar el fishbowl.",
+            "description": "La grabación se guardará en tu carpeta de descargas.",
+            "button": "Parar la grabación"
         }
     }
 }
