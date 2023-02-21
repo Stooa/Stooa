@@ -30,6 +30,7 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
     }
 
     /**
+     * @param Fishbowl $item
      * @param mixed[] $context
      *
      * @return Fishbowl
@@ -54,7 +55,7 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
                 return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
             }
 
-            return $item;
+            return new Fishbowl();
         }
 
         Assert::isInstanceOf($item, Fishbowl::class);

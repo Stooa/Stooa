@@ -30,7 +30,10 @@ class ResetPasswordResolver implements MutationResolverInterface
     ) {
     }
 
-    /** @param mixed[] $context */
+    /**
+     * @param ResetPassword $item
+     * @param mixed[] $context
+     */
     public function __invoke($item, array $context): ResetPassword
     {
         $email = $context['args']['input']['email'];

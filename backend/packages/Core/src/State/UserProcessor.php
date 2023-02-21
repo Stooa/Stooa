@@ -29,10 +29,11 @@ final class UserProcessor implements ProcessorInterface
     }
 
     /**
+     * @param User $data
      * @param array<mixed> $context
      * @param array<mixed> $uriVariables
      */
-    public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
+    public function process($data, Operation $operation, array $uriVariables = [], array $context = []): User
     {
         if ($data instanceof User) {
             if (($context['collection_operation_name'] ?? null) === 'post' ||

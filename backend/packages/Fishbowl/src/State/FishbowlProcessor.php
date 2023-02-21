@@ -27,8 +27,11 @@ final class FishbowlProcessor implements ProcessorInterface
     }
 
     /**
+     * @param Fishbowl $data
      * @param array<mixed> $context
      * @param array<mixed> $uriVariables
+     *
+     * @return Fishbowl
      */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {

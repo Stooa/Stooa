@@ -28,6 +28,7 @@ class FishbowlResolver implements QueryItemResolverInterface
     }
 
     /**
+     * @param Fishbowl $item
      * @param mixed[] $context
      *
      * @return Fishbowl
