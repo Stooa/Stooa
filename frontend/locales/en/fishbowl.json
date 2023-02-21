@@ -152,16 +152,22 @@
         "stop": "Stop recording",
         "start": "Start recording",
         "status": "Recording",
+        "statusHost": "Stop recording",
         "startModal": {
             "title": "You are about to start recording",
             "experimental": "Experimental",
-            "firstBullet": "It will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes.",
-            "secondBullet": "Make sure you <span>select the current tab</span>, otherwise the recording won't start.",
-            "thirdBullet": "In order to record the fishbowl you must have <span>the consent of all attendees</span>."
+            "firstBullet": "Stop the recording <span>before finishing the fishbowl</span> to save it. If you close the browser window or tab, it will not be saved.",
+            "secondBullet": "In order to record the fishbowl you must have <span>the consent of all attendees</span>.",
+            "thirdBullet": "It will be saved in your <span>download folder</span>. It's limited to 1GB, around 100 minutes."
         },
         "stopModal": {
             "title": "Are you sure you want to stop recording?",
             "description": "The recording will be saved in your download folder. "
+        },
+        "endModal": {
+            "title": "Remember to stop recording before finishing the fishbowl.",
+            "description": "The recording will be saved in your download folder.",
+            "button": "Stop recording"
         }
     }
 }
