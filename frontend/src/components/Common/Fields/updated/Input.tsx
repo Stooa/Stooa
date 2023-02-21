@@ -11,49 +11,59 @@ import { forwardRef } from 'react';
 import { InputStyled } from '@/ui/Form';
 import { ValidationError, ValidationIcon } from '@/ui/Validation';
 import Icon from '../Icon';
+import { FieldError } from 'react-hook-form';
 
-type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
+type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   label?: string;
-  legend?: string | React.ReactNode;
-  hasError?: boolean;
+  icon?:
+    | 'avatar'
+    | 'calendar'
+    | 'checkmark'
+    | 'chevron-down'
+    | 'clock'
+    | 'hourglass'
+    | 'cross'
+    | 'language'
+    | 'lock'
+    | 'mail'
+    | 'world';
+  hasError?: FieldError;
   errorMessage?: string;
   isValid?: boolean;
-  isInvalid?: boolean;
   validationError?: string;
   isDirty?: boolean;
 };
 
-const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
-  (
-    { label, hasError, errorMessage, isValid, isInvalid, validationError, isDirty, ...props },
-    ref
-  ) => {
+const NewInput = forwardRef<HTMLInputElement, Props>(
+  ({ label, hasError, errorMessage, isValid, isDirty, icon, ...props }, ref) => {
+    console.log('hasError', hasError);
     return (
-      <InputStyled>
-        <textarea
+      <InputStyled className={icon ? 'withicon' : ''}>
+        {icon && <Icon variant={icon} className="icon" />}
+        <input
           ref={ref}
-          className={`textarea ${isDirty ? 'filled' : ''} ${hasError ? 'invalid' : ''}`}
+          className={` ${isDirty ? 'filled' : ''} ${hasError ? 'invalid' : ''}`}
           aria-invalid={hasError ? 'true' : 'false'}
           {...props}
-        ></textarea>
+        />
         {isValid && (
           <ValidationIcon>
             <Icon variant="checkmark" />
           </ValidationIcon>
         )}
         <label htmlFor={props.id || props.name}>{label}</label>
-        {isInvalid && (
+        {hasError?.type === 'email' && (
           <>
             <ValidationIcon>
               <Icon variant="cross" />
             </ValidationIcon>
-            <ValidationError>{validationError}</ValidationError>
+            <ValidationError>{hasError.message}</ValidationError>
           </>
         )}
-        {hasError && errorMessage && <span>{errorMessage}</span>}
+        {/* {hasError && errorMessage && <span>{errorMessage}</span>} */}
       </InputStyled>
     );
   }
 );
 
-export default NewTextarea;
+export default NewInput;

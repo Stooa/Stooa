@@ -16,15 +16,14 @@ interface Props {
   handleCommentFeedback: (comment: string) => void;
 }
 
-const FeedbackComment = ({ handleCommentFeedback }: Props) => {
+const StepComment = ({ handleCommentFeedback }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm();
+    formState: { errors, dirtyFields }
+  } = useForm({ defaultValues: { comment: '' } });
 
   const onSubmit = data => {
-    console.log('WTF', data);
     handleCommentFeedback(data.comment);
   };
 
@@ -32,7 +31,11 @@ const FeedbackComment = ({ handleCommentFeedback }: Props) => {
     <StyledStepWrapper>
       <h4 className="medium body-sm">What can we improve?</h4>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
-        <NewTextarea label="Cuentanos más " {...(register('comment'), { required: true })} />
+        <NewTextarea
+          isDirty={dirtyFields.comment}
+          label="Cuentanos más "
+          {...register('comment', { required: true })}
+        />
         {errors.comment && <span>This field is required</span>}
 
         <div className="actions">
@@ -48,4 +51,4 @@ const FeedbackComment = ({ handleCommentFeedback }: Props) => {
   );
 };
 
-export default FeedbackComment;
+export default StepComment;

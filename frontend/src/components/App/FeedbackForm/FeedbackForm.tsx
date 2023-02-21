@@ -11,8 +11,9 @@ import { useState } from 'react';
 import { StyledFormWrapper } from './styles';
 import { AnimatePresence } from 'framer-motion';
 import useFeedback from '@/hooks/useFeedback';
-import FeedbackSatisfaction from './FeedbackSatisfaction';
-import FeedbackComment from './FeebackComment';
+import StepSatisfaction from './StepSatisfaction';
+import StepComment from './StepComment';
+import StepMail from './StepMail';
 
 const FeedbackForm = () => {
   const [active, setActive] = useState<'satisfaction' | 'comment' | 'mail' | 'end'>('satisfaction');
@@ -30,14 +31,20 @@ const FeedbackForm = () => {
     setActive('mail');
   };
 
+  const handleMailFeedback = (email: string) => {
+    console.log('EMAIL', email);
+    updateFeedback({ type: 'email', data: email });
+    setActive('end');
+  };
+
   return (
     <StyledFormWrapper>
       <AnimatePresence>
         {active === 'satisfaction' && (
-          <FeedbackSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
+          <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
         )}
-        {active === 'comment' && <FeedbackComment handleCommentFeedback={handleCommentFeedback} />}
-        {active === 'mail' && <h2>Mail</h2>}
+        {active === 'comment' && <StepComment handleCommentFeedback={handleCommentFeedback} />}
+        {active === 'mail' && <StepMail handleMailFeedback={handleMailFeedback} />}
         {active === 'end' && <h2>End</h2>}
       </AnimatePresence>
     </StyledFormWrapper>

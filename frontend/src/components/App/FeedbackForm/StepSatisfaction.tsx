@@ -16,7 +16,7 @@ interface Props {
   onSelectSatisfaction: (satisfactionLevel: 'sad' | 'neutral' | 'happy') => void;
 }
 
-const FeedbackSatisfaction = ({ onSelectSatisfaction }: Props) => {
+const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
   return (
     <StyledStepWrapper>
       <h4 className="body-sm medium">Give us your feedback</h4>
@@ -67,4 +67,4 @@ const FeedbackSatisfaction = ({ onSelectSatisfaction }: Props) => {
   );
 };
 
-export default FeedbackSatisfaction;
+export default StepSatisfaction;

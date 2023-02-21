@@ -30,7 +30,7 @@ const StyledFormWrapper = styled.div`
   bottom: calc(100% + ${space()});
   right: 0;
   width: 380px;
-  max-height: 200px;
+  /* max-height: 200px; */
   padding: ${space(2)} ${space(3)};
 
   border: 1px solid #e5e5e5;
@@ -44,6 +44,10 @@ const StyledStepWrapper = styled(AnimatedStep)`
   & h4 {
     color: ${COLOR_NEUTRO_700};
     margin-bottom: ${space()};
+  }
+
+  & .description {
+    margin-bottom: ${space(2)};
   }
 `;
 
@@ -86,6 +90,11 @@ const StyledCommentForm = styled.form`
   flex-direction: column;
 
   & textarea {
+    height: 100px;
+  }
+
+  & textarea,
+  & input {
     margin-bottom: ${space(2)};
   }
 
