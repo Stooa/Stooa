@@ -197,6 +197,8 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
           closeModal={toggleFinishModal}
           endFishbowl={finishFishbowl}
           disabled={loading}
+          isRecording={isRecording}
+          stopRecording={stopRecording}
         />
       )}
       {(clientRunning || data.isFishbowlNow) && (
