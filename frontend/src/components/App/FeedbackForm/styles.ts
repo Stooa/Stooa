@@ -81,7 +81,7 @@ const StyledLabelOption = styled.label`
   }
 `;
 
-const StyledCommentForm = styled(AnimatedStep)`
+const StyledCommentForm = styled.form`
   display: flex;
   flex-direction: column;
 

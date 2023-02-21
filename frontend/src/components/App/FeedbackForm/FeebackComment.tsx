@@ -23,7 +23,10 @@ const FeedbackComment = ({ handleCommentFeedback }: Props) => {
     formState: { errors }
   } = useForm();
 
-  const onSubmit = data => handleCommentFeedback(data.comment);
+  const onSubmit = data => {
+    console.log('WTF', data);
+    handleCommentFeedback(data.comment);
+  };
 
   return (
     <StyledStepWrapper>
@@ -36,7 +39,7 @@ const FeedbackComment = ({ handleCommentFeedback }: Props) => {
           <Button type="button" variant="subtleLink">
             Skip
           </Button>
-          <Button type="submit" as="input" variant="text">
+          <Button type="submit" variant="text">
             Enviar
           </Button>
         </div>

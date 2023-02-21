@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { forwardRef } from 'react';
 import { InputStyled } from '@/ui/Form';
 import { ValidationError, ValidationIcon } from '@/ui/Validation';
 import Icon from '../Icon';
@@ -21,39 +22,34 @@ type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
   validationError?: string;
 };
 
-const NewTextarea = ({
-  label,
-  hasError,
-  errorMessage,
-  isValid,
-  isInvalid,
-  validationError,
-  ...props
-}: Props) => {
-  return (
-    <InputStyled>
-      <textarea
-        className="textarea"
-        aria-invalid={hasError ? 'true' : 'false'}
-        {...props}
-      ></textarea>
-      {isValid && (
-        <ValidationIcon>
-          <Icon variant="checkmark" />
-        </ValidationIcon>
-      )}
-      <label htmlFor={props.id || props.name}>{label}</label>
-      {isInvalid && (
-        <>
+const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
+  ({ label, hasError, errorMessage, isValid, isInvalid, validationError, ...props }, ref) => {
+    return (
+      <InputStyled>
+        <textarea
+          ref={ref}
+          className="textarea"
+          aria-invalid={hasError ? 'true' : 'false'}
+          {...props}
+        ></textarea>
+        {isValid && (
           <ValidationIcon>
-            <Icon variant="cross" />
+            <Icon variant="checkmark" />
           </ValidationIcon>
-          <ValidationError>{validationError}</ValidationError>
-        </>
-      )}
-      {hasError && errorMessage && <span>{errorMessage}</span>}
-    </InputStyled>
-  );
-};
+        )}
+        <label htmlFor={props.id || props.name}>{label}</label>
+        {isInvalid && (
+          <>
+            <ValidationIcon>
+              <Icon variant="cross" />
+            </ValidationIcon>
+            <ValidationError>{validationError}</ValidationError>
+          </>
+        )}
+        {hasError && errorMessage && <span>{errorMessage}</span>}
+      </InputStyled>
+    );
+  }
+);
 
 export default NewTextarea;
