@@ -8,8 +8,36 @@
  */
 
 import { media, space } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_400, COLOR_NEUTRO_700 } from '@/ui/settings';
+import {
+  BORDER_RADIUS,
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_200,
+  COLOR_NEUTRO_400,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700
+} from '@/ui/settings';
 import styled from 'styled-components';
+
+const StyledAnimatedStatusWrapper = styled.div`
+  transition: transform 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
+  transform: translate(0, -300px);
+
+  &.show {
+    transition: transform 1s 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
+    transform: translate(0, 0);
+  }
+
+  ${media.min('tablet')`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -300px);
+
+    &.show {
+      transform: translate(-50%, -50%);
+    }
+  `}
+`;
 
 const StyledRecordingStatus = styled.div`
   display: flex;
@@ -20,13 +48,7 @@ const StyledRecordingStatus = styled.div`
   border-radius: ${BORDER_RADIUS};
   line-height: 1.33;
   padding: ${space(1.25)} ${space(1.5)} ${space(0.875)} ${space(1)};
-  transition: transform 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
-  transform: translate(0, -300px);
-
-  &.show {
-    transition: transform 1s 0.3s cubic-bezier(0.85, -0.265, 0.215, 1.225);
-    transform: translate(0, 0);
-  }
+  transition: background, border 0.3s ease-out;
 
   &.moderator {
     padding: ${space(1.125)} ${space(1)} ${space(0.875)} ${space(1.5)};
@@ -48,6 +70,11 @@ const StyledRecordingStatus = styled.div`
 
     & > svg {
       margin-left: ${space(0.5)};
+    }
+
+    &:hover {
+      background-color: ${COLOR_NEUTRO_200};
+      border: 1px solid ${COLOR_NEUTRO_600};
     }
   }
 
@@ -94,17 +121,6 @@ const StyledRecordingStatus = styled.div`
       }
     }
   }
-
-  ${media.min('tablet')`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -300px);
-
-    &.show {
-      transform: translate(-50%, -50%);
-    }
-  `}
 `;
 
-export { StyledRecordingStatus };
+export { StyledRecordingStatus, StyledAnimatedStatusWrapper };
