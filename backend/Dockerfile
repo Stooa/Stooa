@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM php:8.1-fpm-buster as base
+FROM php:8.1-fpm-bullseye as base
 
 ARG UID=1000
 ARG GID=1000
