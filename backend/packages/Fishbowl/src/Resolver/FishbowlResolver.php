@@ -30,12 +30,14 @@ class FishbowlResolver implements QueryItemResolverInterface
     /**
      * @param mixed[] $context
      *
+     * @return Fishbowl
+     *
      * @psalm-suppress ImplementedReturnTypeMismatch
      *
      * QueryItemResolverInterface forces you to not return null, but this is the only way
      * to tell ApiPlatform that this Resolver can't return a value with this $context
      */
-    public function __invoke($item, array $context): ?Fishbowl
+    public function __invoke($item, array $context): object
     {
         if (null === $item) {
             $fishbowl = $this->repository->findBySlug($context['args']['slug']);

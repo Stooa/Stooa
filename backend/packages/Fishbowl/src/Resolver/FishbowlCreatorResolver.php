@@ -32,15 +32,17 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
     /**
      * @param mixed[] $context
      *
+     * @return Fishbowl
+     *
      * @psalm-suppress ImplementedReturnTypeMismatch
      *
      * QueryItemResolverInterface forces you to not return null, but this is the only way
      * to tell ApiPlatform that this Resolver can't return a value with this $context
      */
-    public function __invoke($item, array $context): ?Fishbowl
+    public function __invoke($item, array $context): object
     {
         if (!isset($context['args']['slug'])) {
-            return null;
+            return $item;
         }
 
         $user = $this->security->getUser();
@@ -52,7 +54,7 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
                 return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
             }
 
-            return null;
+            return $item;
         }
 
         Assert::isInstanceOf($item, Fishbowl::class);
