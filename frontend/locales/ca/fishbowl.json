@@ -152,16 +152,22 @@
         "stop": "Parar la gravació",
         "start": "Començar la gravació",
         "status": "Gravant",
+        "statusHost": "Parar la gravació",
         "startModal": {
             "title": "Estàs a punt d'iniciar la gravació",
             "experimental": "Experimental",
-            "firstBullet": "Es guardarà en la teva <span>carpeta de descàrregues</span>. Està limitada a 1 GB, uns 100 minuts.",
-            "secondBullet": "Assegura't de <span>seleccionar la pestanya actual</span>, en cas contrari la gravació no s'iniciarà.",
-            "thirdBullet": "Per a gravar el <i>fishbowl</i> has de comptar amb el <span>consentiment de tots els assistents</span>."
+            "firstBullet": "Para l'enregistrament <span>abans d'acabar el fishbowl</span> per a guardar-lo. Si tanques la finestra o pestanya del navegador no es guardarà.",
+            "secondBullet": "Per a gravar el <i>fishbowl</i> has de comptar amb el <span>consentiment de tots els assistents</span>.",
+            "thirdBullet": "Es guardarà en la teva <span>carpeta de descàrregues</span>. Està limitada a 1 GB, uns 100 minuts."
         },
         "stopModal": {
             "title": "Estàs segur que vols detenir la gravació?",
             "description": "La gravació es guardarà en la teva carpeta de descàrregues."
+        },
+        "endModal": {
+            "title": "Recorda parar l'enregistrament abans d'acabar el fishbowl.",
+            "description": "La gravació es guardarà en la teva carpeta de descàrregues.",
+            "button": "Parar la gravació"
         }
     }
 }
