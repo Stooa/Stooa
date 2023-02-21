@@ -31,7 +31,6 @@ import Conference from '@/jitsi/Conference';
 import SharedTrack from '@/jitsi/SharedTrack';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
-import Feedback from '@/components/App/Feedback';
 
 const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
@@ -218,7 +217,6 @@ const ToolBar: React.FC = () => {
         isModerator ? 'moderator' : ''
       }`}
     >
-      <Feedback />
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}

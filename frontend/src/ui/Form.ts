@@ -124,10 +124,10 @@ const InputStyled = styled.div`
 
   .dropdown-icon {
     height: ${rems(16)};
+    width: ${rems(16)};
     position: absolute;
     right: ${space(2)};
     top: ${space(2.5)};
-    width: ${rems(16)};
   }
 
   .icon,

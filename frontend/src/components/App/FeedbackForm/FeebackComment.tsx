@@ -7,31 +7,41 @@
  * file that was distributed with this source code.
  */
 
+import Button from '@/components/Common/Button';
+import NewTextarea from '@/components/Common/Fields/updated/Textarea';
 import { useForm } from 'react-hook-form';
+import { StyledCommentForm, StyledStepWrapper } from './styles';
 
-const FeedbackComment = () => {
+interface Props {
+  handleCommentFeedback: (comment: string) => void;
+}
+
+const FeedbackComment = ({ handleCommentFeedback }: Props) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors }
   } = useForm();
-  const onSubmit = data => console.log(data);
 
-  console.log(watch('example'));
+  const onSubmit = data => handleCommentFeedback(data.comment);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register('example')} />
+    <StyledStepWrapper>
+      <h4 className="medium body-sm">What can we improve?</h4>
+      <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
+        <NewTextarea label="Cuentanos más " {...(register('comment'), { required: true })} />
+        {errors.comment && <span>This field is required</span>}
 
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register('exampleRequired', { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
-
-      <input type="submit" />
-    </form>
+        <div className="actions">
+          <Button type="button" variant="subtleLink">
+            Skip
+          </Button>
+          <Button type="submit" as="input" variant="text">
+            Enviar
+          </Button>
+        </div>
+      </StyledCommentForm>
+    </StyledStepWrapper>
   );
 };
 

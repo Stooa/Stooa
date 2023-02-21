@@ -10,28 +10,26 @@
 import BadSVG from '@/ui/svg/emojis/feedback/bad.svg';
 import OkaySVG from '@/ui/svg/emojis/feedback/okay.svg';
 import LoveSVG from '@/ui/svg/emojis/feedback/love.svg';
-import { StyledLabelOption, StyledSatisfactionForm, StyledSatisfactionWrapper } from './styles';
+import { StyledLabelOption, StyledSatisfactionForm, StyledStepWrapper } from './styles';
 
 interface Props {
-  onSelectSatisfaction: (level: string) => void;
+  onSelectSatisfaction: (satisfactionLevel: 'sad' | 'neutral' | 'happy') => void;
 }
 
 const FeedbackSatisfaction = ({ onSelectSatisfaction }: Props) => {
-  const handleClick = (level: string) => {};
-
   return (
-    <StyledSatisfactionWrapper>
+    <StyledStepWrapper>
       <h4 className="body-sm medium">Give us your feedback</h4>
       <StyledSatisfactionForm>
         <div>
           <input
             type="radio"
-            id="Bad"
+            id="sad"
             name="satisfaction"
-            value="Bad"
-            onClick={() => onSelectSatisfaction('bad')}
+            value="sad"
+            onClick={() => onSelectSatisfaction('sad')}
           />
-          <StyledLabelOption htmlFor="Bad">
+          <StyledLabelOption htmlFor="sad">
             <BadSVG />
             <p>Bad</p>
           </StyledLabelOption>
@@ -40,12 +38,12 @@ const FeedbackSatisfaction = ({ onSelectSatisfaction }: Props) => {
         <div>
           <input
             type="radio"
-            id="okay"
+            id="neutral"
             name="satisfaction"
-            value="okay"
-            onClick={() => onSelectSatisfaction('okay')}
+            value="neutral"
+            onClick={() => onSelectSatisfaction('neutral')}
           />
-          <StyledLabelOption htmlFor="okay">
+          <StyledLabelOption htmlFor="neutral">
             <OkaySVG />
             <p>Okay</p>
           </StyledLabelOption>
@@ -54,18 +52,18 @@ const FeedbackSatisfaction = ({ onSelectSatisfaction }: Props) => {
         <div>
           <input
             type="radio"
-            id="awesome"
+            id="happy"
             name="satisfaction"
-            value="awesome"
-            onClick={() => onSelectSatisfaction('awesome')}
+            value="happy"
+            onClick={() => onSelectSatisfaction('happy')}
           />
-          <StyledLabelOption htmlFor="awesome">
+          <StyledLabelOption htmlFor="happy">
             <LoveSVG />
             <p>Awesome</p>
           </StyledLabelOption>
         </div>
       </StyledSatisfactionForm>
-    </StyledSatisfactionWrapper>
+    </StyledStepWrapper>
   );
 };
 

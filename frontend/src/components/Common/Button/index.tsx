@@ -24,7 +24,7 @@ interface Props extends React.ComponentProps<'button'> {
    */
   variant?: 'primary' | 'secondary' | 'text' | 'link' | 'subtleLink';
   size?: 'small' | 'medium' | 'large';
-  as?: 'button' | 'a';
+  as?: 'button' | 'a' | 'input';
   full?: boolean;
 }
 
