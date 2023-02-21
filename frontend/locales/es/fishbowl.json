@@ -156,7 +156,7 @@
         "startModal": {
             "title": "Estás a punto de iniciar la grabación",
             "experimental": "Experimental",
-            "firstBullet": "<span>Detén la grabación</span> antes de terminar el fishbowl y <span>no cierres</span> la ventana o pestaña del navegador para guardar la grabación.",
+            "firstBullet": "Detén la grabación <span>antes de terminar el fishbowl</span> para guardarla. Si cierras la ventana o pestaña del navegador no se guardará.",
             "secondBullet": "Para grabar el <i>fishbowl</i> debes contar con el <span>consentimiento de todos los asistentes</span>.",
             "thirdBullet": "La grabación se guardará en tu <span>carpeta de descargas</span>. Está limitada a 1 GB, unos 100 minutos."
         },

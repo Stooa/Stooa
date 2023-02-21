@@ -156,7 +156,7 @@
         "startModal": {
             "title": "Estàs a punt d'iniciar la gravació",
             "experimental": "Experimental",
-            "firstBullet": "<span>Para l'enregistrament</span> abans d'acabar el fishbowl i <span>no tanquis</span> la finestra o pestanya del navegador per a guardar l'enregistrament.",
+            "firstBullet": "Para l'enregistrament <span>abans d'acabar el fishbowl</span> per a guardar-lo. Si tanques la finestra o pestanya del navegador no es guardarà.",
             "secondBullet": "Per a gravar el <i>fishbowl</i> has de comptar amb el <span>consentiment de tots els assistents</span>.",
             "thirdBullet": "Es guardarà en la teva <span>carpeta de descàrregues</span>. Està limitada a 1 GB, uns 100 minuts."
         },
