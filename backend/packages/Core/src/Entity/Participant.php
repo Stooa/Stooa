@@ -41,12 +41,12 @@ class Participant implements \Stringable
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    #[Groups(['participant:read'])]
+    #[Groups(['participant:read', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?User $user = null;
 
-    #[Groups(['participant:read'])]
+    #[Groups(['participant:read', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: Guest::class, cascade: ['all'])]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?Guest $guest = null;

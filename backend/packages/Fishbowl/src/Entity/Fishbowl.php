@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Entity;
 
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
@@ -63,6 +64,7 @@ use Webmozart\Assert\Assert as MAssert;
     normalizationContext: ['groups' => ['fishbowl:read']],
     denormalizationContext: ['groups' => ['fishbowl:write']],
     paginationEnabled: false,
+    paginationItemsPerPage: 25,
     graphQlOperations: [
         new Query(
             resolver: FishbowlResolver::class,
@@ -113,7 +115,7 @@ use Webmozart\Assert\Assert as MAssert;
 )]
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
-#[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => 'exclude_null'])]
+#[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => 'exclude_null', 'startDateTime' => 'exclude_null'])]
 class Fishbowl implements \Stringable
 {
     use TimestampableEntity;
@@ -147,6 +149,7 @@ class Fishbowl implements \Stringable
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
+    #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $name = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
@@ -195,6 +198,7 @@ class Fishbowl implements \Stringable
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED])]
     #[ORM\Column(type: 'string', options: ['default' => self::STATUS_NOT_STARTED])]
+    #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private string $currentStatus = self::STATUS_NOT_STARTED;
 
     #[Assert\Type('\\DateTimeInterface')]
@@ -239,6 +243,7 @@ class Fishbowl implements \Stringable
 
     /** @var Collection<int, Feedback> */
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
+    #[Groups(['fishbowl:read'])]
     private Collection $feedbacks;
 
     public function __construct()

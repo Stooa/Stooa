@@ -33,8 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: [
         new Get(),
-        new GetCollection(),
-        new Post(),
+        new Post(security: 'is_granted(\'ROLE_USER\')'),
         new Put(),
     ],
     normalizationContext: ['groups' => ['feedback:read']],
@@ -77,24 +76,24 @@ class Feedback implements \Stringable
     #[ORM\Column(type: 'string')]
     private ?string $timezone = null;
 
-    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::SATISFACTION_SAD, self::SATISFACTION_NEUTRAL, self::SATISFACTION_HAPPY])]
     #[ORM\Column(type: 'string', options: ['default' => self::SATISFACTION_NEUTRAL])]
     private string $satisfaction = self::SATISFACTION_NEUTRAL;
 
-    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $comment = null;
 
-    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Email]
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $email = null;
 
-    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::ORIGIN_FISHBOWL, self::ORIGIN_THANK_YOU])]
     #[ORM\Column(type: 'string', options: ['default' => self::ORIGIN_FISHBOWL])]
@@ -105,7 +104,7 @@ class Feedback implements \Stringable
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private ?Fishbowl $fishbowl = null;
 
-    #[Groups(['feedback:read', 'feedback:write'])]
+    #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: Participant::class, inversedBy: 'feedbacks')]
     private ?Participant $participant = null;
 

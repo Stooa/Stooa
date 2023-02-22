@@ -22,7 +22,7 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
-class FishbowlListExtension implements QueryCollectionExtensionInterface
+    class FishbowlListExtension implements QueryCollectionExtensionInterface
 {
     public function __construct(private readonly Security $security)
     {
@@ -47,11 +47,11 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
         $queryBuilder->andWhere(sprintf('%s.host = :host', $rootAlias));
         $queryBuilder->setParameter('host', $user->getId(), 'uuid');
 
-        $queryBuilder->andWhere(sprintf('%s.currentStatus != :finished', $rootAlias));
-        $queryBuilder->setParameter('finished', Fishbowl::STATUS_FINISHED);
+//        $queryBuilder->andWhere(sprintf('%s.currentStatus != :finished', $rootAlias));
+//        $queryBuilder->setParameter('finished', Fishbowl::STATUS_FINISHED);
 
-        $queryBuilder->andWhere(sprintf('%s.startDateTime > :fiveHoursAgo', $rootAlias));
-        $queryBuilder->setParameter('fiveHoursAgo', (new \DateTimeImmutable())->modify('-5 hour'));
+//        $queryBuilder->andWhere(sprintf('%s.startDateTime > :fiveHoursAgo', $rootAlias));
+//        $queryBuilder->setParameter('fiveHoursAgo', (new \DateTimeImmutable())->modify('-5 hour'));
 
         $queryBuilder->addOrderBy(sprintf('%s.startDateTime', $rootAlias), 'ASC');
     }

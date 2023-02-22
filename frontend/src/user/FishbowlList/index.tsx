@@ -76,7 +76,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
         },
         params
       })
-      .then(response => {
+      .then(response => {than
         setFishbowls(response.data);
       })
       .catch(error => {

@@ -51,7 +51,12 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $hostToken = $this->logIn($this->host);
 
+        $fiveHoursAgo = (new \DateTimeImmutable())->modify('-5 hour');
+
         $response = static::createClient()->request('GET', '/fishbowls', [
+            'query' => [
+                'currentStatus' => Fishbowl::STATUS_FINISHED,
+            ],
             'auth_bearer' => $hostToken,
         ]);
 
