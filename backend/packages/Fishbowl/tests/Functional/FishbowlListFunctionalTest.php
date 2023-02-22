@@ -54,9 +54,6 @@ class FishbowlListFunctionalTest extends ApiTestCase
         $fiveHoursAgo = (new \DateTimeImmutable())->modify('-5 hour');
 
         $response = static::createClient()->request('GET', '/fishbowls', [
-            'query' => [
-                'currentStatus' => Fishbowl::STATUS_FINISHED,
-            ],
             'auth_bearer' => $hostToken,
         ]);
 
@@ -166,9 +163,12 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $hostToken = $this->logIn($this->host);
 
+        $fiveHoursAgo = (new \DateTimeImmutable())->modify('-5 hour');
+
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'finishDateTime[before]' => $now->format(\DateTimeInterface::ISO8601),
+                'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
+                'finishDateTime[before]' => $now->format(\DateTimeInterface::ATOM),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -213,7 +213,13 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $hostToken = $this->logIn($this->host);
 
+        $fiveHoursAgo = (new \DateTimeImmutable())->modify('-5 hour');
+
+
         $response = static::createClient()->request('GET', '/fishbowls', [
+            'query' => [
+                'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
+            ],
             'auth_bearer' => $hostToken,
         ]);
 
