@@ -18,7 +18,7 @@ interface Props {
 
 const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
   return (
-    <StyledStepWrapper>
+    <StyledStepWrapper key="satisfaction">
       <h4 className="body-sm medium">Give us your feedback</h4>
       <StyledSatisfactionForm>
         <div>

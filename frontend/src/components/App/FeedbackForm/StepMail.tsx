@@ -17,9 +17,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {
   handleMailFeedback: (email: string) => void;
+  handleSkip: () => void;
 }
 
-const StepMail = ({ handleMailFeedback }: Props) => {
+const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   const emailError = t('form:validation.email');
@@ -39,7 +40,7 @@ const StepMail = ({ handleMailFeedback }: Props) => {
   };
 
   return (
-    <StyledStepWrapper>
+    <StyledStepWrapper key="mail">
       <h4 className="medium body-sm">{t('feedback.emailTitle')}</h4>
       <p className="body-sm description">{t('feedback.emailDescription')}</p>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
@@ -53,7 +54,7 @@ const StepMail = ({ handleMailFeedback }: Props) => {
         />
 
         <div className="actions">
-          <Button type="button" variant="subtleLink">
+          <Button type="button" variant="subtleLink" onClick={handleSkip}>
             {t('feedback.skip')}
           </Button>
           <Button type="submit" variant="text">

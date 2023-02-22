@@ -7,47 +7,85 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { StyledFormWrapper } from './styles';
 import { AnimatePresence } from 'framer-motion';
 import useFeedback from '@/hooks/useFeedback';
 import StepSatisfaction from './StepSatisfaction';
 import StepComment from './StepComment';
 import StepMail from './StepMail';
+import StepEnd from './StepEnd';
+import { Fishbowl } from '@/types/api-platform';
 
-const FeedbackForm = () => {
-  const [active, setActive] = useState<'satisfaction' | 'comment' | 'mail' | 'end'>('satisfaction');
+const FeedbackForm = ({
+  variant,
+  fishbowl
+}: {
+  variant: 'fishbowl' | 'thankyou';
+  fishbowl: Fishbowl;
+}) => {
+  const [active, setActive] = useState<
+    'satisfaction' | 'commentBad' | 'commentGood' | 'mail' | 'end'
+  >('satisfaction');
 
-  const { createFeedback, updateFeedback } = useFeedback();
+  const { createFeedback, updateFeedback } = useFeedback(fishbowl);
 
   const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
     createFeedback(satisfactionLevel, 'fishbowl');
-    setActive('comment');
+    if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
+      setActive('commentBad');
+    } else {
+      setActive('commentGood');
+    }
   };
 
   const handleCommentFeedback = (comment: string) => {
-    console.log('comment', comment);
     updateFeedback({ type: 'comment', data: comment });
     setActive('mail');
   };
 
   const handleMailFeedback = (email: string) => {
-    console.log('EMAIL', email);
     updateFeedback({ type: 'email', data: email });
     setActive('end');
   };
 
+  const handleSkip = useCallback(() => {
+    switch (active) {
+      case 'commentBad':
+      case 'commentGood':
+        setActive('mail');
+        break;
+      case 'mail':
+        setActive('end');
+        break;
+      default:
+        break;
+    }
+  }, [active]);
+
   return (
-    <StyledFormWrapper>
-      <AnimatePresence>
+    <AnimatePresence mode="wait">
+      <StyledFormWrapper key="wrapper" className={variant}>
         {active === 'satisfaction' && (
           <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
         )}
-        {active === 'comment' && <StepComment handleCommentFeedback={handleCommentFeedback} />}
-        {active === 'mail' && <StepMail handleMailFeedback={handleMailFeedback} />}
-        {active === 'end' && <h2>End</h2>}
-      </AnimatePresence>
-    </StyledFormWrapper>
+        {(active === 'commentGood' || active === 'commentBad') && (
+          <StepComment
+            handleSkip={handleSkip}
+            handleCommentFeedback={handleCommentFeedback}
+            title={
+              active === 'commentGood'
+                ? 'feedback.commentWhatDidYouLike'
+                : 'feedback.commentImproveTitle'
+            }
+          />
+        )}
+        {active === 'mail' && (
+          <StepMail key="mail" handleSkip={handleSkip} handleMailFeedback={handleMailFeedback} />
+        )}
+        {active === 'end' && <StepEnd variant={variant} />}
+      </StyledFormWrapper>
+    </AnimatePresence>
   );
 };
 

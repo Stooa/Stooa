@@ -211,7 +211,7 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        <ButtonFeedback drawerOpened={participantsActive} />
+        <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

@@ -17,13 +17,14 @@ import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
-import ThankYouStyled, { Description, Time } from '@/ui/pages/thank-you';
+import ThankYouStyled, { Description, Time, StyledThankyouWrapper } from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
+import FeedbackForm from '@/components/App/FeedbackForm';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -61,122 +62,125 @@ const ThankYou = () => {
 
   return (
     <Layout title={fb.name} decorated>
-      <Time
-        as="time"
-        dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-        className="error"
-      >
-        <p data-testid="finished-fishbowl" className="body-md medium">
-          {t('finishedEvent')}
-        </p>
-        <div className="body-sm">
-          {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
-            startDate.time
-          } - ${endDate.time} ${endDate.timezone}`}
-        </div>
-      </Time>
-      {(!fb.isPrivate || fb.plainPassword) && (
-        <>
-          <h1 className="body-lg medium">{fb.name}</h1>
-          {fb.description && <Description className="body-sm">{fb.description}</Description>}
-        </>
-      )}
-      <ThankYouStyled>
-        {(!fb.isPrivate || fb.plainPassword) && (
-          <div className="share body-md medium">
-            <p>{t('share')}</p>
-            <ul>
-              <li>
-                <Link
-                  href={`whatsapp://send?text=${shareTitle} ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Whastapp',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
-                >
-                  <Whatsapp />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Linkedin',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
-                >
-                  <Linkedin />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Twitter',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
-                >
-                  <Twitter />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Share',
-                      action: 'Mail',
-                      label: `fishbowl/thankyou/${fid}`
-                    });
-                  }}
-                >
-                  <Mail />
-                </Link>
-              </li>
-            </ul>
+      <StyledThankyouWrapper>
+        <Time
+          as="time"
+          dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
+          className="error"
+        >
+          <p data-testid="finished-fishbowl" className="body-md medium">
+            {t('finishedEvent')}
+          </p>
+          <div className="body-sm">
+            {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
+              startDate.time
+            } - ${endDate.time} ${endDate.timezone}`}
           </div>
+        </Time>
+        {(!fb.isPrivate || fb.plainPassword) && (
+          <>
+            <h1 className="body-lg medium">{fb.name}</h1>
+            {fb.description && <Description className="body-sm">{fb.description}</Description>}
+          </>
         )}
+        <FeedbackForm fishbowl={data} variant="thankyou" />
+        <ThankYouStyled>
+          {(!fb.isPrivate || fb.plainPassword) && (
+            <div className="share body-md medium">
+              <p>{t('share')}</p>
+              <ul>
+                <li>
+                  <Link
+                    href={`https://wa.me/?text=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Whastapp',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Whatsapp />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}&title=${shareTitle}&mini=true`}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Linkedin',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Linkedin />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Twitter',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Twitter />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={`mailto:?subject=${shareTitle}&body=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Share',
+                        action: 'Mail',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <Mail />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
 
-        <div className="action-wrapper">
-          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-            <Button
-              size="large"
-              as="a"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Schedule Fishbowl',
-                  action: 'Thank You Page',
-                  label: `fishbowl/thankyou/${fid}`
-                });
-              }}
-            >
-              <span>{t('common:scheduleFishbowl')}</span>
-            </Button>
-          </RedirectLink>
-          <RedirectLink href={ROUTE_HOME} passHref>
-            <Button size="large" variant="secondary" as="a">
-              <span>{t('common:goHome')}</span>
-            </Button>
-          </RedirectLink>
-        </div>
-      </ThankYouStyled>
+          <div className="action-wrapper">
+            <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+              <Button
+                size="large"
+                as="a"
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Schedule Fishbowl',
+                    action: 'Thank You Page',
+                    label: `fishbowl/thankyou/${fid}`
+                  });
+                }}
+              >
+                <span>{t('common:scheduleFishbowl')}</span>
+              </Button>
+            </RedirectLink>
+            <RedirectLink href={ROUTE_HOME} passHref>
+              <Button size="large" variant="secondary" as="a">
+                <span>{t('common:goHome')}</span>
+              </Button>
+            </RedirectLink>
+          </div>
+        </ThankYouStyled>
+      </StyledThankyouWrapper>
     </Layout>
   );
 };
