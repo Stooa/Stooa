@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import { StyledCommentForm, StyledStepWrapper } from './styles';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Trans from 'next-translate/Trans';
 
 interface Props {
   handleMailFeedback: (email: string) => void;
@@ -42,15 +43,17 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
   return (
     <StyledStepWrapper key="mail">
       <h4 className="medium body-sm">{t('feedback.emailTitle')}</h4>
-      <p className="body-sm description">{t('feedback.emailDescription')}</p>
+      <p className="body-sm description">
+        <Trans i18nKey="fishbowl:feedback.emailDescription" components={{ i: <i /> }} />
+      </p>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewInput
           hasError={errors.email}
-          errorMessage={'wrong email format'}
+          errorMessage={t('form:validation.email')}
           icon="mail"
           isDirty={dirtyFields.email}
           label={t('feedback.emailPlaceholder')}
-          {...register('email', { pattern: /^\S+@\S+$/i })}
+          {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
         />
 
         <div className="actions">

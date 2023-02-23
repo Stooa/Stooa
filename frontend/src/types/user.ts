@@ -12,7 +12,10 @@ export interface User {
   guestId?: string;
   participantId?: string;
   participantSlug?: string;
-  feedbackId?: string;
+  feedback?: {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+  };
   nickname?: string;
   name?: string;
   isCurrentUser?: boolean;
@@ -48,6 +51,16 @@ export interface UserRepository {
   getUserParticipantId: () => string;
   setUserParticipantSlug: (participantSlug: string) => void;
   getUserParticipantSlug: () => string;
-  getUserFeedbackId: () => string;
-  setUserFeedbackId: (feedbackId: string) => void;
+  getUserFeedback: () => {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+  };
+  setUserFeedback: ({
+    feedbackId,
+    feedbackFishbowlSlug
+  }: {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+  }) => void;
+  hasUserGaveFeedback: (fishbowlSLug: string) => boolean;
 }

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -40,6 +40,7 @@ import ModalShareLink from '@/components/App/ModalShareLink';
 import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
+import userRepository from '@/jitsi/User';
 
 import RedRec from '@/ui/svg/rec-red.svg';
 import ButtonFeedback from '../ButtonFeedback';
@@ -85,6 +86,8 @@ const Fishbowl: FC = () => {
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
+
+  const useGaveFeedback = useMemo(() => userRepository.hasUserGaveFeedback(fid as string), [fid]);
 
   const { t } = useTranslation('fishbowl');
   const feedbackRef = useRef<HTMLDivElement>(null);
@@ -223,7 +226,9 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {!isPreFishbowl && <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />}
+        {!isPreFishbowl && !useGaveFeedback && (
+          <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />
+        )}
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

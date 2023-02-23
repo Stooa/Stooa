@@ -11,16 +11,22 @@ import BadSVG from '@/ui/svg/emojis/feedback/bad.svg';
 import OkaySVG from '@/ui/svg/emojis/feedback/okay.svg';
 import LoveSVG from '@/ui/svg/emojis/feedback/love.svg';
 import { StyledLabelOption, StyledSatisfactionForm, StyledStepWrapper } from './styles';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 
 interface Props {
   onSelectSatisfaction: (satisfactionLevel: 'sad' | 'neutral' | 'happy') => void;
 }
 
 const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
+  const { t } = useTranslation('fishbowl');
   return (
     <StyledStepWrapper key="satisfaction">
-      <h4 className="body-sm medium">Give us your feedback</h4>
-      <StyledSatisfactionForm>
+      <h4 className="body-sm medium">{t('feedback.satisfactionTitle')}</h4>
+      <p className="body-sm description">
+        <Trans i18nKey="fishbowl:feedback.satisfactionDescription" components={{ i: <i /> }} />
+      </p>
+      <StyledSatisfactionForm className="medium">
         <div>
           <input
             type="radio"
@@ -31,7 +37,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
           />
           <StyledLabelOption htmlFor="sad">
             <BadSVG />
-            <p>Bad</p>
+            {t('feedback.notMuch')}
           </StyledLabelOption>
         </div>
 
@@ -45,7 +51,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
           />
           <StyledLabelOption htmlFor="neutral">
             <OkaySVG />
-            <p>Okay</p>
+            {t('feedback.okay')}
           </StyledLabelOption>
         </div>
 
@@ -59,7 +65,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
           />
           <StyledLabelOption htmlFor="happy">
             <LoveSVG />
-            <p>Awesome</p>
+            {t('feedback.great')}
           </StyledLabelOption>
         </div>
       </StyledSatisfactionForm>

@@ -14,14 +14,28 @@ import Whatsapp from '@/ui/svg/RRSS-whatsapp.svg';
 import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
 import Twitter from '@/ui/svg/RRSS-twitter.svg';
 import Mail from '@/ui/svg/RRSS-mail.svg';
+import Image from 'next/image';
 
 const StepEnd = ({ variant }: { variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou' }) => {
   const { t } = useTranslation('fishbowl');
   return (
-    <StyledStepWrapper nopadding>
+    <StyledStepWrapper className="nopadding">
+      {variant === 'thankyou' && (
+        <Image
+          className="friend-image"
+          src="/img/friends/thankyou-friend.png"
+          alt="Thank you!"
+          width={204}
+          height={226}
+        />
+      )}
       <StyledThanksTextWrapper>
-        <h4 className="body-sm medium">{t('feedback.thanks')}</h4>
-        <p className="body-sm">{t('feedback.thanksDescription')}</p>
+        <h4 className={`medium ${variant === 'fishbowl' ? 'body-sm' : 'body-lg centered'}`}>
+          {t('feedback.thanks')} {variant === 'thankyou' && t('feedback.thanksDescription')}
+        </h4>
+        {(variant === 'fishbowl' || variant === 'fishbowl-mobile') && (
+          <p className="body-sm">{t('feedback.thanksDescription')}</p>
+        )}
       </StyledThanksTextWrapper>
       {variant === 'fishbowl' && (
         <>
