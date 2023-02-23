@@ -46,7 +46,10 @@ const useFeedback = (fishbowl: Fishbowl) => {
         } = res;
 
         if (feedback.id) {
-          userRepository.setUserFeedbackId(feedback.id);
+          userRepository.setUserFeedback({
+            feedbackId: feedback.id,
+            feedbackFishbowlSlug: fishbowl.slug
+          });
         }
 
         console.log('[STOOA] Create Feedback', res);
@@ -58,7 +61,7 @@ const useFeedback = (fishbowl: Fishbowl) => {
 
   const getFeedback = async (): Promise<Feedback | null> => {
     const auth = await getAuthToken();
-    const feedbackId = userRepository.getUserFeedbackId();
+    const { feedbackId } = userRepository.getUserFeedback();
 
     return api
       .get(feedbackId, {
@@ -79,7 +82,7 @@ const useFeedback = (fishbowl: Fishbowl) => {
   };
 
   const updateFeedback = async ({ type, data }: { type: 'email' | 'comment'; data: string }) => {
-    const feedbackId = userRepository.getUserFeedbackId();
+    const { feedbackId } = userRepository.getUserFeedback();
 
     updateFeedbackMutation({
       variables: {

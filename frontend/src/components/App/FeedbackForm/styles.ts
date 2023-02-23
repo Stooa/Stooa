@@ -66,9 +66,13 @@ const StyledStepWrapper = styled(motion.div).attrs({
   initial: 'initial',
   animate: 'animate',
   exit: 'exit'
-})<{ nopadding?: boolean }>`
-  padding: ${({ nopadding }) => (!nopadding ? `${space(2)} ${space(3)}` : `0`)};
+})`
+  padding: ${space(2)} ${space(3)};
   color: ${COLOR_NEUTRO_700};
+
+  &.nopadding {
+    padding: 0;
+  }
 
   & h4 {
     margin-bottom: ${space()};
@@ -114,6 +118,7 @@ const StyledLabelOption = styled.label`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: ${COLOR_NEUTRO_600};
 
   & svg {
     margin-bottom: ${space(1)};

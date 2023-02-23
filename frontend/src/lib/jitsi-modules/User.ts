@@ -44,8 +44,18 @@ const userRepository = (): UserRepository => {
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
   const getUserParticipantId = () => getUser()?.participantId || '';
   const getUserParticipantSlug = () => getUser()?.participantSlug || '';
-  const getUserFeedbackId = () => getUser()?.feedbackId || '';
-  const setUserFeedbackId = (feedbackId: string): void => setUser({ feedbackId });
+  const getUserFeedback = () =>
+    getUser()?.feedback || {
+      feedbackId: '',
+      feedbackFishbowlSlug: ''
+    };
+  const setUserFeedback = ({
+    feedbackId,
+    feedbackFishbowlSlug
+  }: {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+  }): void => setUser({ feedback: { feedbackId, feedbackFishbowlSlug } });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
@@ -79,7 +89,8 @@ const userRepository = (): UserRepository => {
   };
 
   const hasUserGaveFeedback = (fishbowlSlug: string): boolean => {
-    return getUserParticipantSlug() === fishbowlSlug && getUserFeedbackId() !== '';
+    const { feedbackFishbowlSlug } = getUserFeedback();
+    return feedbackFishbowlSlug === fishbowlSlug;
   };
 
   return {
@@ -104,8 +115,8 @@ const userRepository = (): UserRepository => {
     setUserNickname,
     setUserParticipantId,
     getUserParticipantId,
-    setUserFeedbackId,
-    getUserFeedbackId,
+    setUserFeedback,
+    getUserFeedback,
     setUserParticipantSlug,
     getUserParticipantSlug,
     hasUserGaveFeedback

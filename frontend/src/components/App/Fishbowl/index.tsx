@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -86,6 +86,8 @@ const Fishbowl: FC = () => {
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
+
+  const useGaveFeedback = useMemo(() => userRepository.hasUserGaveFeedback(fid as string), [fid]);
 
   const { t } = useTranslation('fishbowl');
   const feedbackRef = useRef<HTMLDivElement>(null);
@@ -224,7 +226,7 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {!isPreFishbowl && !userRepository.hasUserGaveFeedback(fid as string) && (
+        {!isPreFishbowl && !useGaveFeedback && (
           <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />
         )}
       </Main>

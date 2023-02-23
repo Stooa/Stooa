@@ -19,7 +19,7 @@ import Image from 'next/image';
 const StepEnd = ({ variant }: { variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou' }) => {
   const { t } = useTranslation('fishbowl');
   return (
-    <StyledStepWrapper nopadding>
+    <StyledStepWrapper className="nopadding">
       {variant === 'thankyou' && (
         <Image
           className="friend-image"
