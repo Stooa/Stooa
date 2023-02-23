@@ -15,7 +15,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
-import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
 import userRepository from '@/jitsi/User';
 import ThankYouStyled, {
@@ -44,10 +44,17 @@ const ThankYou = () => {
   const {
     query: { fid }
   } = router;
+
+  const {
+    loading: creatorLoading,
+    error: creatorError,
+    data: fbCreatorData
+  } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
+
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
-  if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
+  if (loading || creatorLoading) return <Loader />;
+  if (error || creatorError) return <Error message={error?.message} />;
 
   const { bySlugQueryFishbowl: fb } = data;
 
@@ -66,7 +73,8 @@ const ThankYou = () => {
   });
 
   const shareTitle = `Stooa: ${t('home:title')}`;
-  const showFeedbackForm = userSlug && userSlug === fid;
+
+  const showFeedbackForm = userSlug === (fid as string) && !fbCreatorData.isCreatorOfFishbowl;
 
   return (
     <Layout title={fb.name} decorated>

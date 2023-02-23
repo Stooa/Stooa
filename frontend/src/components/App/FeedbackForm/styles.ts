@@ -8,7 +8,13 @@
  */
 
 import { space } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import {
+  BORDER_RADIUS,
+  COLOR_NEUTRO_100,
+  COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700
+} from '@/ui/settings';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -51,6 +57,7 @@ const StyledFormWrapper = styled(motion.div).attrs({
 
   &.thankyou {
     max-width: 400px;
+    width: 100%;
     margin: 0 auto;
   }
 
@@ -82,6 +89,7 @@ const StyledStepWrapper = styled(motion.div).attrs({
   & .friend-image {
     padding: ${space(2)};
     margin: 0 auto;
+    object-fit: contain;
   }
 
   & .description {
@@ -182,8 +190,13 @@ const StyledThanksTextWrapper = styled.div`
       width: 25px;
       object-fit: cover;
       & path {
+        transition: all 0.2s ease-in-out;
         fill: ${COLOR_NEUTRO_600};
       }
+    }
+
+    & a:hover svg path {
+      fill: ${COLOR_NEUTRO_500};
     }
   }
 `;

@@ -16,6 +16,7 @@ import StepComment from './StepComment';
 import StepMail from './StepMail';
 import StepEnd from './StepEnd';
 import { Fishbowl } from '@/types/api-platform';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface Props {
   variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou';
@@ -31,6 +32,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
     >('satisfaction');
 
     const { createFeedback, updateFeedback } = useFeedback(fishbowl);
+    const { isAuthenticated } = useAuth();
 
     const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
       createFeedback(satisfactionLevel, 'fishbowl');
@@ -55,6 +57,10 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
       switch (active) {
         case 'commentBad':
         case 'commentGood':
+          if (isAuthenticated) {
+            setActive('end');
+            break;
+          }
           setActive('mail');
           break;
         case 'mail':

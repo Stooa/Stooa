@@ -53,7 +53,7 @@ const StyledButtonFeedback = styled.button<{ active: boolean }>`
 const StyledFeedbackWrapper = styled.div`
   display: none;
 
-  ${media.min('desktop')`
+  ${media.min('tablet')`
     display: block;
     position: absolute;
     bottom: ${space(0)};

@@ -38,19 +38,17 @@ const StepEnd = ({
           className="friend-image"
           src="/img/friends/thankyou-friend.png"
           alt="Thank you!"
-          width={204}
-          height={226}
+          width={150}
+          height={180}
         />
       )}
       <StyledThanksTextWrapper>
-        <h4 className={`medium ${variant === 'fishbowl' ? 'body-sm' : 'body-lg centered'}`}>
+        <h4 className={`medium ${variant !== 'thankyou' ? 'body-sm' : 'body-lg centered'}`}>
           {t('feedback.thanks')} {variant === 'thankyou' && t('feedback.thanksDescription')}
         </h4>
-        {(variant === 'fishbowl' || variant === 'fishbowl-mobile') && (
-          <p className="body-sm">{t('feedback.thanksDescription')}</p>
-        )}
+        {variant !== 'thankyou' && <p className="body-sm">{t('feedback.thanksDescription')}</p>}
       </StyledThanksTextWrapper>
-      {variant === 'fishbowl' && (
+      {variant !== 'thankyou' && (
         <>
           <hr />
           <StyledThanksTextWrapper>
