@@ -50,4 +50,5 @@ export interface UserRepository {
   getUserParticipantSlug: () => string;
   getUserFeedbackId: () => string;
   setUserFeedbackId: (feedbackId: string) => void;
+  hasUserGaveFeedback: (fishbowlSLug: string) => boolean;
 }

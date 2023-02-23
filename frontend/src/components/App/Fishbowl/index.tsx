@@ -40,6 +40,7 @@ import ModalShareLink from '@/components/App/ModalShareLink';
 import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
+import userRepository from '@/jitsi/User';
 
 import RedRec from '@/ui/svg/rec-red.svg';
 import ButtonFeedback from '../ButtonFeedback';
@@ -223,7 +224,9 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {!isPreFishbowl && <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />}
+        {!isPreFishbowl && !userRepository.hasUserGaveFeedback(fid as string) && (
+          <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />
+        )}
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

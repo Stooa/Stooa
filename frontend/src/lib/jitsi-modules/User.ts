@@ -78,6 +78,10 @@ const userRepository = (): UserRepository => {
     dispatchEvent(USER_KICKED, { participant: participant, reason: reason });
   };
 
+  const hasUserGaveFeedback = (fishbowlSlug: string): boolean => {
+    return getUserParticipantSlug() === fishbowlSlug && getUserFeedbackId() !== '';
+  };
+
   return {
     clearUser,
     getUser,
@@ -103,7 +107,8 @@ const userRepository = (): UserRepository => {
     setUserFeedbackId,
     getUserFeedbackId,
     setUserParticipantSlug,
-    getUserParticipantSlug
+    getUserParticipantSlug,
+    hasUserGaveFeedback
   };
 };
 
