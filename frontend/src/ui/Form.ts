@@ -219,12 +219,12 @@ const InputStyled = styled.div`
 
   label {
     color: ${COLOR_NEUTRO_600};
-    font-size: ${FONT_BASE_SIZE}px;
+    ${BODY_SM};
     left: ${space(2)};
     line-height: 100%;
     pointer-events: none;
     position: absolute;
-    top: ${space(2.25)};
+    top: ${space(2.45)};
     transition: 0.1s ease-out;
   }
 

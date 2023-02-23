@@ -23,7 +23,7 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, dirtyFields }
+    formState: { errors, dirtyFields, isDirty }
   } = useForm({ defaultValues: { comment: '' } });
 
   const { t } = useTranslation('fishbowl');
@@ -47,7 +47,7 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
           <Button type="button" variant="subtleLink" onClick={handleSkip}>
             {t('feedback.skip')}
           </Button>
-          <Button type="submit" variant="text">
+          <Button disabled={!isDirty} type="submit" variant="text">
             {t('feedback.send')}
           </Button>
         </div>

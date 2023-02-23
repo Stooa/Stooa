@@ -15,11 +15,24 @@ import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
 import Twitter from '@/ui/svg/RRSS-twitter.svg';
 import Mail from '@/ui/svg/RRSS-mail.svg';
 import Image from 'next/image';
+import Cross from '@/ui/svg/cross.svg';
 
-const StepEnd = ({ variant }: { variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou' }) => {
+const StepEnd = ({
+  variant,
+  handleFinish
+}: {
+  variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou';
+  handleFinish?: () => void;
+}) => {
   const { t } = useTranslation('fishbowl');
   return (
     <StyledStepWrapper className="nopadding">
+      {variant !== 'thankyou' && (
+        <button className="close" onClick={handleFinish}>
+          <Cross />
+        </button>
+      )}
+
       {variant === 'thankyou' && (
         <Image
           className="friend-image"
