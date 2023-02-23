@@ -68,9 +68,9 @@ const StyledStepWrapper = styled(motion.div).attrs({
   exit: 'exit'
 })<{ nopadding?: boolean }>`
   padding: ${({ nopadding }) => (!nopadding ? `${space(2)} ${space(3)}` : `0`)};
+  color: ${COLOR_NEUTRO_700};
 
   & h4 {
-    color: ${COLOR_NEUTRO_700};
     margin-bottom: ${space()};
   }
 

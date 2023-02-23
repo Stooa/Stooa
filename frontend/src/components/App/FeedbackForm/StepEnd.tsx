@@ -33,7 +33,9 @@ const StepEnd = ({ variant }: { variant: 'fishbowl' | 'fishbowl-mobile' | 'thank
         <h4 className={`medium ${variant === 'fishbowl' ? 'body-sm' : 'body-lg centered'}`}>
           {t('feedback.thanks')} {variant === 'thankyou' && t('feedback.thanksDescription')}
         </h4>
-        {variant === 'fishbowl' && <p className="body-sm">{t('feedback.thanksDescription')}</p>}
+        {(variant === 'fishbowl' || variant === 'fishbowl-mobile') && (
+          <p className="body-sm">{t('feedback.thanksDescription')}</p>
+        )}
       </StyledThanksTextWrapper>
       {variant === 'fishbowl' && (
         <>

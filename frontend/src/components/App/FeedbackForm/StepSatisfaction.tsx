@@ -26,7 +26,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
       <p className="body-sm description">
         <Trans i18nKey="fishbowl:feedback.satisfactionDescription" components={{ i: <i /> }} />
       </p>
-      <StyledSatisfactionForm>
+      <StyledSatisfactionForm className="medium">
         <div>
           <input
             type="radio"
