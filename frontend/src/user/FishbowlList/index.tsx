@@ -40,7 +40,11 @@ import Button from '@/components/Common/Button';
 
 import { getAuthToken } from '@/user/auth';
 import api from '@/lib/api';
-import { getIsoDateTimeWithActualTimeZone, isTimeLessThanNMinutes } from '@/lib/helpers';
+import {
+  getFiveHoursAgoDate,
+  getIsoDateTimeWithActualTimeZone,
+  isTimeLessThanNMinutes
+} from '@/lib/helpers';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { basicRevealWithDelay, bottomMobileReveal } from '@/ui/animations/motion/reveals';
 import PlusSign from '@/ui/svg/plus-sign.svg';
@@ -63,7 +67,11 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
   };
 
   const params = new URLSearchParams([
-    ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()]
+    ['startDateTime[after]', getFiveHoursAgoDate()],
+    ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
+    ['currentStatus[0]', 'not_started'],
+    ['currentStatus[1]', 'introduction'],
+    ['currentStatus[2]', 'running']
   ]);
 
   const getFishbowls = async () => {
@@ -76,7 +84,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam }) => {
         },
         params
       })
-      .then(response => {than
+      .then(response => {
         setFishbowls(response.data);
       })
       .catch(error => {

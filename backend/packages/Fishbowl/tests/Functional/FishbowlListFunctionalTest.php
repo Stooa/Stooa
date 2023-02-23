@@ -90,6 +90,9 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
+                'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
+                'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
+                'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
                 'finishDateTime[after]' => $now->format(\DateTimeInterface::ISO8601),
             ],
@@ -132,6 +135,9 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
+                'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
+                'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
+                'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
                 'finishDateTime[after]' => $now->format(\DateTimeInterface::ISO8601),
             ],
@@ -173,6 +179,9 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
+                'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
+                'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
+                'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
                 'finishDateTime[before]' => $now->format(\DateTimeInterface::ATOM),
             ],
