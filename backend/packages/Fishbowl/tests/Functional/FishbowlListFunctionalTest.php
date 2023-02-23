@@ -94,7 +94,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
-                'finishDateTime[after]' => $now->format(\DateTimeInterface::ISO8601),
+                'finishDateTime[after]' => $now->format(\DateTimeInterface::ATOM),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -139,7 +139,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
-                'finishDateTime[after]' => $now->format(\DateTimeInterface::ISO8601),
+                'finishDateTime[after]' => $now->format(\DateTimeInterface::ATOM),
             ],
             'auth_bearer' => $hostToken,
         ]);
