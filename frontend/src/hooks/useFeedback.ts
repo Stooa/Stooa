@@ -15,7 +15,7 @@ import api from '@/lib/api';
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
 import { Fishbowl } from '@/types/api-platform';
 
-const useFeedback = (fishbowl: Fishbowl) => {
+const useFeedback = (fishbowlData: Fishbowl) => {
   const [createFeedbackMutation] = useMutation(CREATE_FEEDBACK);
   const [updateFeedbackMutation] = useMutation(UPDATE_FEEDBACK);
 
@@ -24,14 +24,14 @@ const useFeedback = (fishbowl: Fishbowl) => {
     origin: 'fishbowl' | 'thankyou'
   ) => {
     const participant = userRepository.getUserParticipantId();
-    const fishbowlId = fishbowl.id;
+    const fishbowl = fishbowlData.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     createFeedbackMutation({
       variables: {
         input: {
           participant,
-          fishbowlId,
+          fishbowl,
           satisfaction,
           timezone,
           origin
@@ -48,7 +48,7 @@ const useFeedback = (fishbowl: Fishbowl) => {
         if (feedback.id) {
           userRepository.setUserFeedback({
             feedbackId: feedback.id,
-            feedbackFishbowlSlug: fishbowl.slug
+            feedbackFishbowlSlug: fishbowlData.slug
           });
         }
 
