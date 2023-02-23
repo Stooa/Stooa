@@ -150,6 +150,11 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   className="sticky-button sticky-button--feedback"
                   onClick={() => handleShowFeedbackForm()}
                 >
+                  {feedbackAlert && (
+                    <div className="alert" data-testid="permission-alert">
+                      <PermissionsAlert />
+                    </div>
+                  )}
                   <Feedback />
                   {t('feedback.buttonText')}
                 </button>

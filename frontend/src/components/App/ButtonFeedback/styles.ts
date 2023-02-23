@@ -69,9 +69,10 @@ const StyledFeedbackWrapper = styled.div`
     }
 
     & .alert {
+      transform: scale(0.8);
       position: absolute;
-      top: 2px;
-      left: 10px;
+      top: 0;
+      left: 29px;
     }
   `}
 `;

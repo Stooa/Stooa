@@ -119,13 +119,22 @@ const Selector = styled.div`
 
       text-align: left;
 
-      &.sticky-button--feedback svg {
-        & path {
-          stroke: currentColor;
+      &.sticky-button--feedback {
+        .alert {
+          transform-origin: 50% 50%;
+          transform: scale(0.8);
+          left: 6px;
+          top: 2px;
         }
 
-        & circle {
-          fill: currentColor;
+        & > svg {
+          & path {
+            stroke: currentColor;
+          }
+
+          & circle {
+            fill: currentColor;
+          }
         }
       }
 
