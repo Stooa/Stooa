@@ -35,7 +35,7 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
 };
 
 const NewInput = forwardRef<HTMLInputElement, Props>(
-  ({ label, hasError, errorMessage, isValid, isDirty, icon, ...props }, ref) => {
+  ({ label, hasError, isValid, isDirty, icon, ...props }, ref) => {
     console.log('hasError', hasError);
     return (
       <InputStyled className={icon ? 'withicon' : ''}>
