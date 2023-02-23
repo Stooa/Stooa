@@ -50,7 +50,7 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
             <ValidationError>{validationError}</ValidationError>
           </>
         )}
-        {hasError && errorMessage && <span>{errorMessage}</span>}
+        {hasError && errorMessage && <ValidationError>{errorMessage}</ValidationError>}
       </InputStyled>
     );
   }

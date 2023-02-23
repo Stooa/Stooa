@@ -8,7 +8,7 @@
  */
 
 import { media, space } from '@/ui/helpers';
-import { COLOR_NEUTRO_300, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { COLOR_NEUTRO_300, COLOR_NEUTRO_600 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledButtonFeedback = styled.button<{ active: boolean }>`
@@ -36,20 +36,17 @@ const StyledButtonFeedback = styled.button<{ active: boolean }>`
 
   & > svg {
     margin-right: ${space(0.5)};
+    & path {
+      stroke: currentColor;
+    }
+
+    & > circle {
+      fill: currentColor;
+    }
   }
 
   &:hover {
     background-color: ${COLOR_NEUTRO_300};
-    color: ${COLOR_NEUTRO_700};
-
-    & > svg path {
-      stroke: currentColor;
-    }
-
-    & > svg circle,
-    & > .chevron svg path {
-      fill: currentColor;
-    }
   }
 `;
 

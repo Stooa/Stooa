@@ -33,7 +33,7 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, errors }
+    formState: { dirtyFields, isDirty, errors }
   } = useForm({ resolver: yupResolver(schema), defaultValues: { email: '' } });
 
   const onSubmit = data => {
@@ -60,7 +60,7 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
           <Button type="button" variant="subtleLink" onClick={handleSkip}>
             {t('feedback.skip')}
           </Button>
-          <Button type="submit" variant="text">
+          <Button disabled={!isDirty} type="submit" variant="text">
             {t('feedback.send')}
           </Button>
         </div>

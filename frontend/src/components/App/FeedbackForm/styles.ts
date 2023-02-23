@@ -67,6 +67,7 @@ const StyledStepWrapper = styled(motion.div).attrs({
   animate: 'animate',
   exit: 'exit'
 })`
+  position: relative;
   padding: ${space(2)} ${space(3)};
   color: ${COLOR_NEUTRO_700};
 
@@ -85,6 +86,18 @@ const StyledStepWrapper = styled(motion.div).attrs({
 
   & .description {
     margin-bottom: ${space(2)};
+  }
+
+  & .close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: ${space(1)};
+    right: ${space(1)};
+
+    & svg path {
+      fill: ${COLOR_NEUTRO_600};
+    }
   }
 
   & hr {
@@ -142,15 +155,12 @@ const StyledCommentForm = styled.form`
     height: 100px;
   }
 
-  & textarea,
-  & input {
-    margin-bottom: ${space(2)};
-  }
-
   & .actions {
     display: flex;
     gap: ${space(2)};
     justify-content: flex-end;
+
+    padding-top: ${space(2)};
   }
 `;
 

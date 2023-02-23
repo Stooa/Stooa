@@ -20,73 +20,76 @@ import { Fishbowl } from '@/types/api-platform';
 interface Props {
   variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou';
   fishbowl: Fishbowl;
+  handleFinish?: () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 
-const FeedbackForm = forwardRef<HTMLDivElement, Props>(({ variant, fishbowl }, ref) => {
-  const [active, setActive] = useState<
-    'satisfaction' | 'commentBad' | 'commentGood' | 'mail' | 'end'
-  >('satisfaction');
+const FeedbackForm = forwardRef<HTMLDivElement, Props>(
+  ({ variant, fishbowl, handleFinish }, ref) => {
+    const [active, setActive] = useState<
+      'satisfaction' | 'commentBad' | 'commentGood' | 'mail' | 'end'
+    >('satisfaction');
 
-  const { createFeedback, updateFeedback } = useFeedback(fishbowl);
+    const { createFeedback, updateFeedback } = useFeedback(fishbowl);
 
-  const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
-    createFeedback(satisfactionLevel, 'fishbowl');
-    if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
-      setActive('commentBad');
-    } else {
-      setActive('commentGood');
-    }
-  };
+    const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
+      createFeedback(satisfactionLevel, 'fishbowl');
+      if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
+        setActive('commentBad');
+      } else {
+        setActive('commentGood');
+      }
+    };
 
-  const handleCommentFeedback = (comment: string) => {
-    updateFeedback({ type: 'comment', data: comment });
-    setActive('mail');
-  };
+    const handleCommentFeedback = (comment: string) => {
+      updateFeedback({ type: 'comment', data: comment });
+      setActive('mail');
+    };
 
-  const handleMailFeedback = (email: string) => {
-    updateFeedback({ type: 'email', data: email });
-    setActive('end');
-  };
+    const handleMailFeedback = (email: string) => {
+      updateFeedback({ type: 'email', data: email });
+      setActive('end');
+    };
 
-  const handleSkip = useCallback(() => {
-    switch (active) {
-      case 'commentBad':
-      case 'commentGood':
-        setActive('mail');
-        break;
-      case 'mail':
-        setActive('end');
-        break;
-      default:
-        break;
-    }
-  }, [active]);
+    const handleSkip = useCallback(() => {
+      switch (active) {
+        case 'commentBad':
+        case 'commentGood':
+          setActive('mail');
+          break;
+        case 'mail':
+          setActive('end');
+          break;
+        default:
+          break;
+      }
+    }, [active]);
 
-  return (
-    <AnimatePresence mode="wait">
-      <StyledFormWrapper key="wrapper" className={variant} ref={ref}>
-        {active === 'satisfaction' && (
-          <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
-        )}
-        {(active === 'commentGood' || active === 'commentBad') && (
-          <StepComment
-            handleSkip={handleSkip}
-            handleCommentFeedback={handleCommentFeedback}
-            title={
-              active === 'commentGood'
-                ? 'feedback.commentWhatDidYouLike'
-                : 'feedback.commentImproveTitle'
-            }
-          />
-        )}
-        {active === 'mail' && (
-          <StepMail key="mail" handleSkip={handleSkip} handleMailFeedback={handleMailFeedback} />
-        )}
-        {active === 'end' && <StepEnd variant={variant} />}
-      </StyledFormWrapper>
-    </AnimatePresence>
-  );
-});
+    return (
+      <AnimatePresence mode="wait">
+        <StyledFormWrapper key="wrapper" className={variant} ref={ref}>
+          {active === 'satisfaction' && (
+            <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
+          )}
+          {(active === 'commentGood' || active === 'commentBad') && (
+            <StepComment
+              handleSkip={handleSkip}
+              handleCommentFeedback={handleCommentFeedback}
+              title={
+                active === 'commentGood'
+                  ? 'feedback.commentWhatDidYouLike'
+                  : 'feedback.commentImproveTitle'
+              }
+            />
+          )}
+          {active === 'mail' && (
+            <StepMail key="mail" handleSkip={handleSkip} handleMailFeedback={handleMailFeedback} />
+          )}
+          {active === 'end' && <StepEnd handleFinish={handleFinish} variant={variant} />}
+        </StyledFormWrapper>
+      </AnimatePresence>
+    );
+  }
+);
 
 export default FeedbackForm;
