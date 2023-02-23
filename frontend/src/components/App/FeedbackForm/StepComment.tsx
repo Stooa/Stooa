@@ -38,7 +38,7 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewTextarea
           isDirty={dirtyFields.comment}
-          label="Cuentanos más "
+          label={t('feedback.commentPlaceholder')}
           {...register('comment', { required: true })}
         />
         {errors.comment && <span>This field is required</span>}

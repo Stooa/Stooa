@@ -92,6 +92,10 @@ const StyledSatisfactionForm = styled.form`
   align-items: center;
   gap: ${space(2)};
 
+  & > div {
+    flex: 1;
+  }
+
   & input[type='radio'] {
     position: absolute;
     width: 0;
