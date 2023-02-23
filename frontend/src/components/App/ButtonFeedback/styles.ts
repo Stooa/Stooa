@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { COLOR_NEUTRO_300, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
 
@@ -35,9 +35,7 @@ const StyledButtonFeedback = styled.button<{ active: boolean }>`
   }
 
   & > svg {
-    width: 18px;
-    width: 18px;
-    margin-right: ${space(1)};
+    margin-right: ${space(0.5)};
   }
 
   &:hover {
@@ -56,14 +54,26 @@ const StyledButtonFeedback = styled.button<{ active: boolean }>`
 `;
 
 const StyledFeedbackWrapper = styled.div`
-  position: fixed;
-  bottom: ${space(2)};
-  right: ${space(2)};
-  z-index: 50;
+  display: none;
 
-  &.drawer-opened {
-    right: ${space(46)};
-  }
+  ${media.min('desktop')`
+    display: block;
+    position: absolute;
+    bottom: ${space(0)};
+    right: ${space(2)};
+    z-index: 40;
+
+
+    &.drawer-opened {
+      right: ${space(46)};
+    }
+
+    & .alert {
+      position: absolute;
+      top: 2px;
+      left: 10px;
+    }
+  `}
 `;
 
 export { StyledButtonFeedback, StyledFeedbackWrapper };

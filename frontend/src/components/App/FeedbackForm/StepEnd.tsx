@@ -15,7 +15,7 @@ import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
 import Twitter from '@/ui/svg/RRSS-twitter.svg';
 import Mail from '@/ui/svg/RRSS-mail.svg';
 
-const StepEnd = ({ variant }: { variant: 'fishbowl' | 'thankyou' }) => {
+const StepEnd = ({ variant }: { variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou' }) => {
   const { t } = useTranslation('fishbowl');
   return (
     <StyledStepWrapper noPadding>

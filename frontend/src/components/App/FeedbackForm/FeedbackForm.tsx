@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useCallback, useState } from 'react';
+import { forwardRef, RefObject, useCallback, useState } from 'react';
 import { StyledFormWrapper } from './styles';
 import { AnimatePresence } from 'framer-motion';
 import useFeedback from '@/hooks/useFeedback';
@@ -17,13 +17,13 @@ import StepMail from './StepMail';
 import StepEnd from './StepEnd';
 import { Fishbowl } from '@/types/api-platform';
 
-const FeedbackForm = ({
-  variant,
-  fishbowl
-}: {
-  variant: 'fishbowl' | 'thankyou';
+interface Props {
+  variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou';
   fishbowl: Fishbowl;
-}) => {
+  ref?: RefObject<HTMLDivElement>;
+}
+
+const FeedbackForm = forwardRef<HTMLDivElement, Props>(({ variant, fishbowl }, ref) => {
   const [active, setActive] = useState<
     'satisfaction' | 'commentBad' | 'commentGood' | 'mail' | 'end'
   >('satisfaction');
@@ -65,7 +65,7 @@ const FeedbackForm = ({
 
   return (
     <AnimatePresence mode="wait">
-      <StyledFormWrapper key="wrapper" className={variant}>
+      <StyledFormWrapper key="wrapper" className={variant} ref={ref}>
         {active === 'satisfaction' && (
           <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
         )}
@@ -87,6 +87,6 @@ const FeedbackForm = ({
       </StyledFormWrapper>
     </AnimatePresence>
   );
-};
+});
 
 export default FeedbackForm;

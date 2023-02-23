@@ -33,6 +33,15 @@ const StyledFormWrapper = styled(motion.div).attrs({
   overflow: hidden;
   text-align: left;
 
+  &.fishbowl-mobile {
+    position: absolute;
+    bottom: ${space()};
+    right: calc(50% - 150px);
+
+    width: 300px;
+    z-index: 30;
+  }
+
   &.fishbowl {
     position: absolute;
     bottom: calc(100% + ${space()});
@@ -43,7 +52,6 @@ const StyledFormWrapper = styled(motion.div).attrs({
   &.thankyou {
     max-width: 400px;
     margin: 0 auto;
-    height: 200px;
   }
 
   border: 1px solid ${COLOR_NEUTRO_700};
@@ -133,7 +141,7 @@ const StyledCommentForm = styled.form`
 `;
 
 const StyledThanksTextWrapper = styled.div`
-  padding: ${space(2)} ${space(3)} ${space(1)};
+  padding: ${space(2)} ${space(3)};
 
   & .social-share {
     display: flex;

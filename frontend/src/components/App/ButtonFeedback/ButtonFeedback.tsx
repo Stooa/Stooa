@@ -10,11 +10,14 @@
 import { useRef, useState } from 'react';
 import FeedbackForm from '../FeedbackForm';
 import { StyledButtonFeedback, StyledFeedbackWrapper } from './styles';
-import Feedback from '@/ui/svg/feedback.svg';
-import Chevron from '@/ui/svg/chevron-down.svg';
 import { Fishbowl } from '@/types/api-platform';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import useTranslation from 'next-translate/useTranslation';
+import { useStooa } from '@/contexts/StooaManager';
+
+import Feedback from '@/ui/svg/feedback.svg';
+import Chevron from '@/ui/svg/chevron-down.svg';
+import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -25,6 +28,7 @@ interface Props {
 const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Props) => {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const { t } = useTranslation('fishbowl');
+  const { feedbackAlert } = useStooa();
 
   const handleOpenFeedback = () => {
     setShowFeedbackForm(!showFeedbackForm);
@@ -38,6 +42,11 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
   return (
     <StyledFeedbackWrapper ref={wrapperRef} className={drawerOpened ? 'drawer-opened' : ''}>
       {showFeedbackForm && <FeedbackForm variant="fishbowl" fishbowl={fishbowl} />}
+      {feedbackAlert && (
+        <div className="alert" data-testid="permission-alert">
+          <PermissionsAlert />
+        </div>
+      )}
       <StyledButtonFeedback
         active={showFeedbackForm}
         disabled={disabled}

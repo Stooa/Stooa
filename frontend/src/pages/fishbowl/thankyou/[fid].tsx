@@ -17,7 +17,12 @@ import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
-import ThankYouStyled, { Description, Time, StyledThankyouWrapper } from '@/ui/pages/thank-you';
+import ThankYouStyled, {
+  Description,
+  Time,
+  StyledThankyouWrapper,
+  StyledThankyouData
+} from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
@@ -63,27 +68,29 @@ const ThankYou = () => {
   return (
     <Layout title={fb.name} decorated>
       <StyledThankyouWrapper>
-        <Time
-          as="time"
-          dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-          className="error"
-        >
-          <p data-testid="finished-fishbowl" className="body-md medium">
-            {t('finishedEvent')}
-          </p>
-          <div className="body-sm">
-            {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
-              startDate.time
-            } - ${endDate.time} ${endDate.timezone}`}
-          </div>
-        </Time>
-        {(!fb.isPrivate || fb.plainPassword) && (
-          <>
-            <h1 className="body-lg medium">{fb.name}</h1>
-            {fb.description && <Description className="body-sm">{fb.description}</Description>}
-          </>
-        )}
-        <FeedbackForm fishbowl={data} variant="thankyou" />
+        <StyledThankyouData>
+          <Time
+            as="time"
+            dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
+            className="error"
+          >
+            <p data-testid="finished-fishbowl" className="body-md medium">
+              {t('finishedEvent')}
+            </p>
+            <div className="body-sm">
+              {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
+                startDate.time
+              } - ${endDate.time} ${endDate.timezone}`}
+            </div>
+          </Time>
+          {(!fb.isPrivate || fb.plainPassword) && (
+            <>
+              <h1 className="body-lg medium">{fb.name}</h1>
+              {fb.description && <Description className="body-sm">{fb.description}</Description>}
+            </>
+          )}
+          <FeedbackForm fishbowl={data} variant="thankyou" />
+        </StyledThankyouData>
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (
             <div className="share body-md medium">

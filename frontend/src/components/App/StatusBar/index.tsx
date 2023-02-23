@@ -17,11 +17,12 @@ import { useStooa } from '@/contexts/StooaManager';
 
 const StatusBar: React.FC = () => {
   const [statusClass, setStatusClass] = useState('warning');
-  const { conferenceStatus, timeStatus } = useStooa();
+  const { conferenceStatus, timeStatus, setFeedbackAlert } = useStooa();
 
   useEffect(() => {
     if (conferenceStatus === IConferenceStatus.RUNNING && timeStatus === ITimeStatus.ENDING) {
       setStatusClass('warning');
+      setFeedbackAlert(true);
     } else if (
       (conferenceStatus === IConferenceStatus.RUNNING &&
         (timeStatus === ITimeStatus.LAST_MINUTE || timeStatus === ITimeStatus.TIME_UP)) ||

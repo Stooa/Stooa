@@ -62,8 +62,15 @@ const Button = styled(ActionButton)`
 `;
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
+
+  .alert {
+    position: absolute;
+    top: -4px;
+    right: 14px;
+  }
 
   ${media.min('tablet')`
     position: relative;
@@ -95,29 +102,40 @@ const Selector = styled.div`
 
   ${scrolllbarStyle}
 
-  & .recording-button {
+  & .selector__sticky-wrapper {
     position: sticky;
-    display: flex;
-    align-items: center;
     left: 0;
     top: 0;
-    width: 100%;
-    padding: ${space()} ${space(2)};
-
     color: ${COLOR_NEUTRO_700};
     background-color: ${COLOR_NEUTRO_100};
     transition: background-color 0.2s ease-in-out;
 
-    border-bottom: 1px solid ${COLOR_NEUTRO_600};
+    & .sticky-button {
+      width: 100%;
+      padding: ${space()} ${space(2)};
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid ${COLOR_NEUTRO_600};
 
-    text-align: left;
+      text-align: left;
 
-    & svg {
-      margin-right: ${space()};
-    }
+      &.sticky-button--feedback svg {
+        & path {
+          stroke: currentColor;
+        }
 
-    &:hover {
-      background-color: ${COLOR_NEUTRO_300};
+        & circle {
+          fill: currentColor;
+        }
+      }
+
+      & svg {
+        margin-right: ${space()};
+      }
+
+      &:hover {
+        background-color: ${COLOR_NEUTRO_300};
+      }
     }
   }
 
