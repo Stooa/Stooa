@@ -9,27 +9,32 @@
 
 import Button from '@/components/Common/Button';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
+import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
 import { StyledCommentForm, StyledStepWrapper } from './styles';
 
 interface Props {
   handleCommentFeedback: (comment: string) => void;
+  handleSkip: () => void;
+  title: 'feedback.commentWhatDidYouLike' | 'feedback.commentImproveTitle';
 }
 
-const StepComment = ({ handleCommentFeedback }: Props) => {
+const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors, dirtyFields }
   } = useForm({ defaultValues: { comment: '' } });
 
+  const { t } = useTranslation('fishbowl');
+
   const onSubmit = data => {
     handleCommentFeedback(data.comment);
   };
 
   return (
-    <StyledStepWrapper>
-      <h4 className="medium body-sm">What can we improve?</h4>
+    <StyledStepWrapper key="comment">
+      <h4 className="medium body-sm">{t(title)}</h4>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewTextarea
           isDirty={dirtyFields.comment}
@@ -39,11 +44,11 @@ const StepComment = ({ handleCommentFeedback }: Props) => {
         {errors.comment && <span>This field is required</span>}
 
         <div className="actions">
-          <Button type="button" variant="subtleLink">
-            Skip
+          <Button type="button" variant="subtleLink" onClick={handleSkip}>
+            {t('feedback.skip')}
           </Button>
           <Button type="submit" variant="text">
-            Enviar
+            {t('feedback.send')}
           </Button>
         </div>
       </StyledCommentForm>

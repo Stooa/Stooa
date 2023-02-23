@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -43,6 +43,8 @@ import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
 import ButtonFeedback from '../ButtonFeedback';
+import FeedbackForm from '../FeedbackForm';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -69,7 +71,9 @@ const Fishbowl: FC = () => {
     showStartRecording,
     showStopRecording,
     setShowStartRecording,
-    setShowStopRecording
+    setShowStopRecording,
+    showFeedbackForm,
+    setShowFeedbackForm
   } = useModals();
 
   const { width } = useWindowSize();
@@ -83,9 +87,14 @@ const Fishbowl: FC = () => {
   const { fid } = useRouter().query;
 
   const { t } = useTranslation('fishbowl');
+  const feedbackRef = useRef<HTMLDivElement>(null);
 
   const isPreFishbowl =
     conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
+
+  useClickOutside(feedbackRef, () => {
+    if (showFeedbackForm) setShowFeedbackForm(false);
+  });
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -208,10 +217,13 @@ const Fishbowl: FC = () => {
             stopRecording={() => handleStopRecording()}
           />
         )}
+        {showFeedbackForm && (
+          <FeedbackForm ref={feedbackRef} fishbowl={data} variant="fishbowl-mobile" />
+        )}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        <ButtonFeedback drawerOpened={participantsActive} />
+        {!isPreFishbowl && <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />}
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

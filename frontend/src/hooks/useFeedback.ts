@@ -10,29 +10,28 @@
 import { useMutation } from '@apollo/client';
 import { CREATE_FEEDBACK, UPDATE_FEEDBACK } from '@/graphql/Feedback';
 import userRepository from '@/jitsi/User';
-import { useStooa } from '@/contexts/StooaManager';
 import { getAuthToken } from '@/user/auth';
 import api from '@/lib/api';
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
+import { Fishbowl } from '@/types/api-platform';
 
-const useFeedback = () => {
+const useFeedback = (fishbowl: Fishbowl) => {
   const [createFeedbackMutation] = useMutation(CREATE_FEEDBACK);
   const [updateFeedbackMutation] = useMutation(UPDATE_FEEDBACK);
-  const { data } = useStooa();
 
   const createFeedback = (
     satisfaction: 'sad' | 'neutral' | 'happy',
     origin: 'fishbowl' | 'thankyou'
   ) => {
     const participant = userRepository.getUserParticipantId();
-    const fishbowl = data.id;
+    const fishbowlId = fishbowl.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     createFeedbackMutation({
       variables: {
         input: {
           participant,
-          fishbowl,
+          fishbowlId,
           satisfaction,
           timezone,
           origin
@@ -61,7 +60,7 @@ const useFeedback = () => {
     const auth = await getAuthToken();
     const feedbackId = userRepository.getUserFeedbackId();
 
-    api
+    return api
       .get(feedbackId, {
         headers: {
           authorization: `${auth ? auth.authorizationString : null}`
@@ -75,9 +74,8 @@ const useFeedback = () => {
       })
       .catch(error => {
         console.error('[STOOA] Get Feedback error', error);
+        return null;
       });
-
-    return null;
   };
 
   const updateFeedback = async ({ type, data }: { type: 'email' | 'comment'; data: string }) => {

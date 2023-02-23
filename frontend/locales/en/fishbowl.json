@@ -171,7 +171,7 @@
         }
     },
     "feedback" : {
-        "feedback": "Feedback",
+        "buttonText": "Feedback",
         "satisfactionTitle": "Give us your feedback",
         "satisfactionDescription": "How satisfied are you with the fishbowl you attended?",
         "notMuch": "Not much",

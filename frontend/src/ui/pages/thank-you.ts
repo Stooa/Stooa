@@ -19,7 +19,7 @@ import {
 } from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
-  margin-top: ${space(9)};
+  /* margin-top: ${space(9)}; */
 
   .share {
     margin-bottom: ${space(4)};
@@ -58,12 +58,20 @@ const ThankYouStyled = styled.div`
   .action-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     row-gap: ${space(2)};
 
     ${media.min('tablet')`
       flex-direction: row;
       column-gap: ${space(3)};
     `}
+  }
+`;
+
+const StyledThankyouData = styled.div`
+  &.taller {
+    height: 30vh;
+    min-height: 450px;
   }
 `;
 
@@ -79,5 +87,13 @@ const Time = styled(Alert)`
   padding: ${space(2)} ${space(4)};
 `;
 
-export { Description, Time };
+const StyledThankyouWrapper = styled.div`
+  max-width: 1024px;
+
+  h1 {
+    margin-bottom: ${space(2)};
+  }
+`;
+
+export { Description, Time, StyledThankyouWrapper, StyledThankyouData };
 export default ThankYouStyled;
