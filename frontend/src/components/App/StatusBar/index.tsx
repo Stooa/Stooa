@@ -29,6 +29,7 @@ const StatusBar: React.FC = () => {
       conferenceStatus === IConferenceStatus.FINISHED
     ) {
       setStatusClass('error');
+      setFeedbackAlert(true);
     } else {
       setStatusClass('');
     }

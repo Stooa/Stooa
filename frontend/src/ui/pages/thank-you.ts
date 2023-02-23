@@ -69,8 +69,10 @@ const ThankYouStyled = styled.div`
 `;
 
 const StyledThankyouData = styled.div`
-  height: 50vh;
-  min-height: 450px;
+  &.taller {
+    height: 30vh;
+    min-height: 450px;
+  }
 `;
 
 const Description = styled.p`

@@ -17,6 +17,7 @@ import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
+import userRepository from '@/jitsi/User';
 import ThankYouStyled, {
   Description,
   Time,
@@ -37,6 +38,7 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');
+  const userSlug = userRepository.getUserParticipantSlug();
 
   const router = useRouter();
   const {
@@ -64,11 +66,12 @@ const ThankYou = () => {
   });
 
   const shareTitle = `Stooa: ${t('home:title')}`;
+  const showFeedbackForm = userSlug && userSlug === fid;
 
   return (
     <Layout title={fb.name} decorated>
       <StyledThankyouWrapper>
-        <StyledThankyouData>
+        <StyledThankyouData className={showFeedbackForm ? 'taller' : ''}>
           <Time
             as="time"
             dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
@@ -89,7 +92,7 @@ const ThankYou = () => {
               {fb.description && <Description className="body-sm">{fb.description}</Description>}
             </>
           )}
-          <FeedbackForm fishbowl={data} variant="thankyou" />
+          {showFeedbackForm && <FeedbackForm fishbowl={data} variant="thankyou" />}
         </StyledThankyouData>
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (

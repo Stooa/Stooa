@@ -60,7 +60,7 @@ const useFeedback = (fishbowl: Fishbowl) => {
     const auth = await getAuthToken();
     const feedbackId = userRepository.getUserFeedbackId();
 
-    api
+    return api
       .get(feedbackId, {
         headers: {
           authorization: `${auth ? auth.authorizationString : null}`
@@ -74,9 +74,8 @@ const useFeedback = (fishbowl: Fishbowl) => {
       })
       .catch(error => {
         console.error('[STOOA] Get Feedback error', error);
+        return null;
       });
-
-    return null;
   };
 
   const updateFeedback = async ({ type, data }: { type: 'email' | 'comment'; data: string }) => {

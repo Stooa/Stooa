@@ -18,7 +18,7 @@ import Mail from '@/ui/svg/RRSS-mail.svg';
 const StepEnd = ({ variant }: { variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou' }) => {
   const { t } = useTranslation('fishbowl');
   return (
-    <StyledStepWrapper noPadding>
+    <StyledStepWrapper nopadding>
       <StyledThanksTextWrapper>
         <h4 className="body-sm medium">{t('feedback.thanks')}</h4>
         <p className="body-sm">{t('feedback.thanksDescription')}</p>
