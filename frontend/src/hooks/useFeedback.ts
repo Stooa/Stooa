@@ -21,8 +21,9 @@ const useFeedback = (fishbowlData: Fishbowl) => {
 
   const createFeedback = (
     satisfaction: 'sad' | 'neutral' | 'happy',
-    origin: 'fishbowl' | 'thankyou'
+    origin: 'fishbowl' | 'thank-you'
   ) => {
+    console.log('---> data fishbowl', fishbowlData);
     const participant = userRepository.getUserParticipantId();
     const fishbowl = fishbowlData.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

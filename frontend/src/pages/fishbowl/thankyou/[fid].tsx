@@ -94,7 +94,9 @@ const ThankYou = () => {
             {fb.description && <Description className="body-sm">{fb.description}</Description>}
           </>
         )}
-        {showFeedbackForm && <FeedbackForm fishbowl={data} variant="thankyou" />}
+        {showFeedbackForm && (
+          <FeedbackForm fishbowl={data.bySlugQueryFishbowl} variant="thankyou" />
+        )}
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (
             <div className="share body-md medium">
