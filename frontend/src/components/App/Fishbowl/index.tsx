@@ -45,6 +45,7 @@ import RedRec from '@/ui/svg/rec-red.svg';
 import ButtonFeedback from '../ButtonFeedback';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -60,6 +61,7 @@ const Fishbowl: FC = () => {
     stopRecording,
     startRecording,
     setIsRecording,
+    setGaveFeedback,
     gaveFeedback
   } = useStooa();
 
@@ -78,6 +80,7 @@ const Fishbowl: FC = () => {
   } = useModals();
 
   const { width } = useWindowSize();
+  const { deviceType } = useNavigatorType();
 
   const [participantsActive, setParticipantsActive] = useState(
     () => (isModerator && data.isFishbowlNow) || false
@@ -155,6 +158,11 @@ const Fishbowl: FC = () => {
     setShowStartRecording(false);
   };
 
+  const handleFinishFeedback = () => {
+    setGaveFeedback(true);
+    setShowFeedbackForm(false);
+  };
+
   useEffect(() => {
     pushEventDataLayer({
       action: fid as string,
@@ -219,12 +227,17 @@ const Fishbowl: FC = () => {
           />
         )}
         {showFeedbackForm && (
-          <FeedbackForm ref={feedbackRef} fishbowl={data} variant="fishbowl-mobile" />
+          <FeedbackForm
+            handleFinish={handleFinishFeedback}
+            ref={feedbackRef}
+            fishbowl={data}
+            variant="fishbowl-mobile"
+          />
         )}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {!isPreFishbowl && !gaveFeedback && !isModerator && (
+        {!isPreFishbowl && !gaveFeedback && !isModerator && deviceType === 'Desktop' && (
           <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />
         )}
       </Main>

@@ -49,7 +49,6 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewInput
           hasError={errors.email}
-          errorMessage={t('form:validation.email')}
           icon="mail"
           isDirty={dirtyFields.email}
           label={t('feedback.emailPlaceholder')}

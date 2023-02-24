@@ -28,7 +28,6 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
     | 'mail'
     | 'world';
   hasError?: FieldError;
-  errorMessage?: string;
   isValid?: boolean;
   validationError?: string;
   isDirty?: boolean;
