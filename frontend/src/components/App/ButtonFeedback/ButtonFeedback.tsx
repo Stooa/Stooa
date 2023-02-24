@@ -58,6 +58,7 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
         active={showFeedbackForm}
         disabled={disabled}
         onClick={handleOpenFeedback}
+        data-testid="feedback-button"
       >
         <Feedback />
         <span className="text medium body-xs">{t('feedback.buttonText')}</span>
