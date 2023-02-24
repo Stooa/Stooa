@@ -22,11 +22,12 @@ interface Props {
   variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou';
   fishbowl: Fishbowl;
   handleFinish?: () => void;
+  handleGaveSatisfaction?: () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 
 const FeedbackForm = forwardRef<HTMLDivElement, Props>(
-  ({ variant, fishbowl, handleFinish }, ref) => {
+  ({ variant, fishbowl, handleFinish, handleGaveSatisfaction }, ref) => {
     const [active, setActive] = useState<
       'satisfaction' | 'commentBad' | 'commentGood' | 'mail' | 'end'
     >('satisfaction');
@@ -40,6 +41,8 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
       } else {
         createFeedback(satisfactionLevel, 'fishbowl');
       }
+
+      handleGaveSatisfaction && handleGaveSatisfaction();
 
       if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
         setActive('commentBad');

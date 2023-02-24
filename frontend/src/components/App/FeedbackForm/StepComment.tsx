@@ -39,7 +39,7 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
         <NewTextarea
           isDirty={dirtyFields.comment}
           label={t('feedback.commentPlaceholder')}
-          {...register('comment', { required: true })}
+          {...register('comment', { required: true, maxLength: 400 })}
         />
         {errors.comment && <span>This field is required</span>}
 

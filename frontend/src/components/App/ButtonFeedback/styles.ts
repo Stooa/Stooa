@@ -48,6 +48,16 @@ const StyledButtonFeedback = styled.button<{ active: boolean }>`
   &:hover {
     background-color: ${COLOR_NEUTRO_300};
   }
+
+  &:disabled {
+    opacity: 0.25;
+    background-color: transparent;
+    cursor: default;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
 `;
 
 const StyledFeedbackWrapper = styled.div`

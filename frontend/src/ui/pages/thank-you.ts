@@ -88,5 +88,5 @@ const StyledThankyouWrapper = styled.div`
   }
 `;
 
-export { Description, Time, StyledThankyouWrapper, StyledThankyouData };
+export { Description, Time, StyledThankyouWrapper };
 export default ThankYouStyled;
