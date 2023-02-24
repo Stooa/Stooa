@@ -35,7 +35,12 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
     const { isAuthenticated } = useAuth();
 
     const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
-      createFeedback(satisfactionLevel, 'fishbowl');
+      if (variant === 'thankyou') {
+        createFeedback(satisfactionLevel, 'thankyou');
+      } else {
+        createFeedback(satisfactionLevel, 'fishbowl');
+      }
+
       if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
         setActive('commentBad');
       } else {
