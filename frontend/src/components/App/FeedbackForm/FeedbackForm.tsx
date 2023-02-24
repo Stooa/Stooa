@@ -36,7 +36,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
 
     const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
       if (variant === 'thankyou') {
-        createFeedback(satisfactionLevel, 'thankyou');
+        createFeedback(satisfactionLevel, 'thank-you');
       } else {
         createFeedback(satisfactionLevel, 'fishbowl');
       }

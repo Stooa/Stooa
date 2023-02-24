@@ -100,7 +100,7 @@ const ThankYou = () => {
               {fb.description && <Description className="body-sm">{fb.description}</Description>}
             </>
           )}
-          {showFeedbackForm && <FeedbackForm fishbowl={data} variant="thankyou" />}
+          {showFeedbackForm && <FeedbackForm fishbowl={data.bySlugQueryFishbowl} variant="thankyou" />}
         </StyledThankyouData>
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (
