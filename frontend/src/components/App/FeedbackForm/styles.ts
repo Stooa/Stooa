@@ -15,6 +15,7 @@ import {
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
 } from '@/ui/settings';
+import { BODY_XS } from '@/ui/Texts';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -140,6 +141,7 @@ const StyledLabelOption = styled.label`
   justify-content: center;
   align-items: center;
   color: ${COLOR_NEUTRO_600};
+  ${BODY_XS};
 
   & svg {
     margin-bottom: ${space(1)};

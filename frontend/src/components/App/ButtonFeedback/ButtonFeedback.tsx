@@ -54,7 +54,7 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
         onClick={handleOpenFeedback}
       >
         <Feedback />
-        <span className="text medium">{t('feedback.buttonText')}</span>
+        <span className="text medium body-xs">{t('feedback.buttonText')}</span>
         <span className="chevron">
           <Chevron />
         </span>

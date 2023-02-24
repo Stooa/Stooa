@@ -19,7 +19,7 @@ import {
 } from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
-  /* margin-top: ${space(9)}; */
+  margin-top: ${space(4)};
 
   .share {
     margin-bottom: ${space(4)};
@@ -65,13 +65,6 @@ const ThankYouStyled = styled.div`
       flex-direction: row;
       column-gap: ${space(3)};
     `}
-  }
-`;
-
-const StyledThankyouData = styled.div`
-  &.taller {
-    height: 35vh;
-    min-height: 450px;
   }
 `;
 
