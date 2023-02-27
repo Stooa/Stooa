@@ -7,14 +7,49 @@
  * file that was distributed with this source code.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import ButtonFeedback from '@/components/App/ButtonFeedback';
+import { CREATE_FEEDBACK, UPDATE_FEEDBACK } from '@/graphql/Feedback';
+import { MockedProvider } from '@apollo/client/testing';
 
 import { useStooa } from '@/contexts/StooaManager';
+import { useAuth } from '@/contexts/AuthContext';
+
+const mocks = [
+  {
+    request: {
+      query: CREATE_FEEDBACK
+    },
+    result: {
+      data: {
+        feedback: {
+          id: '839183901'
+        }
+      }
+    }
+  },
+  {
+    request: {
+      query: UPDATE_FEEDBACK
+    },
+    result: {
+      data: {
+        feedback: {
+          id: '839183901'
+        }
+      }
+    }
+  }
+];
 
 jest.mock('@/contexts/StooaManager');
+jest.mock('@/contexts/AuthContext');
 
 describe('Unit test of feedback button', () => {
+  useAuth.mockReturnValue({
+    isAuthenticated: true
+  });
+
   it('It renders feedback button  when not feedback given yet', () => {
     useStooa.mockReturnValue({
       feedbackAlert: false,
@@ -51,5 +86,31 @@ describe('Unit test of feedback button', () => {
     const alert = getByTestId('permission-alert');
     expect(button).toBeInTheDocument();
     expect(alert).toBeInTheDocument();
+  });
+
+  it('It shows the feedback when clicking', () => {
+    useStooa.mockReturnValue({
+      feedbackAlert: true,
+      gaveFeedback: false,
+      setGaveFeedback: () => jest.fn()
+    });
+    const { getByTestId } = render(
+      <MockedProvider mocks={mocks}>
+        <ButtonFeedback />
+      </MockedProvider>
+    );
+    const button = getByTestId('feedback-button');
+    expect(button).toBeInTheDocument();
+
+    fireEvent(
+      button,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true
+      })
+    );
+
+    const form = getByTestId('feedback-form');
+    expect(form).toBeInTheDocument();
   });
 });
