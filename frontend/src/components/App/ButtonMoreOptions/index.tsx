@@ -135,7 +135,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
             </div>
           )}
         </Button>
-        {feedbackAlert && deviceType === 'Mobile' && (
+        {feedbackAlert && deviceType === 'Mobile' && !gaveFeedback && (
           <div className="alert" data-testid="permission-alert">
             <PermissionsAlert />
           </div>

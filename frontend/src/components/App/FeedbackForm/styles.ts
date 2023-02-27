@@ -88,7 +88,7 @@ const StyledStepWrapper = styled(motion.div).attrs({
   }
 
   & .friend-image {
-    padding: ${space(2)};
+    padding: ${space(2)} ${space(2)} 0;
     margin: 0 auto;
     object-fit: contain;
   }
