@@ -33,7 +33,9 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');
-  const userSlug = userRepository.getUserParticipantSlug();
+  const userFeedback = userRepository.getUserFeedback();
+  const thankYouFeedbackGiven = userFeedback?.fromThankYou;
+  const userSlug = userFeedback.feedbackFishbowlSlug;
 
   const router = useRouter();
   const {
@@ -69,7 +71,8 @@ const ThankYou = () => {
 
   const shareTitle = `Stooa: ${t('home:title')}`;
 
-  const showFeedbackForm = userSlug === (fid as string) && !fbCreatorData.isCreatorOfFishbowl;
+  const showFeedbackForm =
+    userSlug === (fid as string) && !fbCreatorData.isCreatorOfFishbowl && !thankYouFeedbackGiven;
 
   return (
     <Layout title={fb.name} decorated>

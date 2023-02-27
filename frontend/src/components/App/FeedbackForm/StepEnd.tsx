@@ -39,7 +39,7 @@ const StepEnd = ({
           src="/img/friends/thankyou-friend.png"
           alt="Thank you!"
           width={150}
-          height={180}
+          height={160}
         />
       )}
       <StyledThanksTextWrapper>

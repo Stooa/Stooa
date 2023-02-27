@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -45,6 +45,7 @@ import RedRec from '@/ui/svg/rec-red.svg';
 import ButtonFeedback from '../ButtonFeedback';
 import FeedbackForm from '../FeedbackForm';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -80,6 +81,13 @@ const Fishbowl: FC = () => {
 
   const { width } = useWindowSize();
   const { deviceType } = useNavigatorType();
+  const feedbackFormRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(feedbackFormRef, () => {
+    if (!gaveFeedback) {
+      setShowFeedbackForm(false);
+    }
+  });
 
   const [participantsActive, setParticipantsActive] = useState(
     () => (isModerator && data.isFishbowlNow) || false
@@ -221,6 +229,7 @@ const Fishbowl: FC = () => {
         )}
         {showFeedbackForm && (
           <FeedbackForm
+            ref={feedbackFormRef}
             handleGaveSatisfaction={() => setGaveFeedback(true)}
             handleFinish={handleFinishFeedback}
             fishbowl={data}

@@ -82,6 +82,7 @@ const Time = styled(Alert)`
 
 const StyledThankyouWrapper = styled.div`
   max-width: 1024px;
+  width: 100%;
 
   h1 {
     margin-bottom: ${space(2)};

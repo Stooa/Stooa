@@ -127,9 +127,8 @@ const ping = async (lang: string, slug: string) => {
     })
     .then(res => {
       if (res.data.response) {
-        const { participantId, participantSlug } = res.data.response;
+        const { participantId } = res.data.response;
         userRepository.setUserParticipantId(participantId);
-        userRepository.setUserParticipantSlug(participantSlug);
 
         console.log('[STOOA] Ping response', res.data.response);
       }

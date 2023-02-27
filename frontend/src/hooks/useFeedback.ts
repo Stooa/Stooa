@@ -48,7 +48,8 @@ const useFeedback = (fishbowlData: Fishbowl) => {
         if (feedback.id) {
           userRepository.setUserFeedback({
             feedbackId: feedback.id,
-            feedbackFishbowlSlug: fishbowlData.slug
+            feedbackFishbowlSlug: fishbowlData.slug,
+            fromThankYou: origin === 'thank-you'
           });
         }
 
