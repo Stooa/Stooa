@@ -35,12 +35,12 @@ const FixedButton = ({ buttonText }: { buttonText: string }) => {
   useLayoutEffect(() => {
     const billboard = document.getElementById('billboard');
 
-    if (billboard) {
+    if (billboard && observer) {
       observer.observe(billboard);
     }
 
     return () => {
-      if (billboard) {
+      if (billboard && observer) {
         observer.unobserve(billboard);
       }
     };
