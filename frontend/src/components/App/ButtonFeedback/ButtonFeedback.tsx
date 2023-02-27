@@ -27,7 +27,7 @@ interface Props {
 const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Props) => {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const { t } = useTranslation('fishbowl');
-  const { feedbackAlert, setGaveFeedback } = useStooa();
+  const { feedbackAlert, gaveFeedback, setGaveFeedback } = useStooa();
 
   const handleOpenFeedback = () => {
     setShowFeedbackForm(!showFeedbackForm);
@@ -35,15 +35,21 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
 
   const handleFinishFeedback = () => {
     setShowFeedbackForm(false);
-    setGaveFeedback(true);
   };
 
   return (
-    <StyledFeedbackWrapper className={drawerOpened ? 'drawer-opened' : ''}>
+    <StyledFeedbackWrapper
+      className={`${drawerOpened ? 'drawer-opened' : ''} ${disabled ? 'disabled' : ''}`}
+    >
       {showFeedbackForm && (
-        <FeedbackForm handleFinish={handleFinishFeedback} variant="fishbowl" fishbowl={fishbowl} />
+        <FeedbackForm
+          handleGaveSatisfaction={() => setGaveFeedback(true)}
+          handleFinish={handleFinishFeedback}
+          variant="fishbowl"
+          fishbowl={fishbowl}
+        />
       )}
-      {feedbackAlert && (
+      {feedbackAlert && !gaveFeedback && (
         <div className="alert" data-testid="permission-alert">
           <PermissionsAlert />
         </div>
@@ -52,9 +58,10 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
         active={showFeedbackForm}
         disabled={disabled}
         onClick={handleOpenFeedback}
+        data-testid="feedback-button"
       >
         <Feedback />
-        <span className="text medium">{t('feedback.buttonText')}</span>
+        <span className="text medium body-xs">{t('feedback.buttonText')}</span>
         <span className="chevron">
           <Chevron />
         </span>

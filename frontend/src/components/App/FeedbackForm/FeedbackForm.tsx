@@ -22,11 +22,12 @@ interface Props {
   variant: 'fishbowl' | 'fishbowl-mobile' | 'thankyou';
   fishbowl: Fishbowl;
   handleFinish?: () => void;
+  handleGaveSatisfaction?: () => void;
   ref?: RefObject<HTMLDivElement>;
 }
 
 const FeedbackForm = forwardRef<HTMLDivElement, Props>(
-  ({ variant, fishbowl, handleFinish }, ref) => {
+  ({ variant, fishbowl, handleFinish, handleGaveSatisfaction }, ref) => {
     const [active, setActive] = useState<
       'satisfaction' | 'commentBad' | 'commentGood' | 'mail' | 'end'
     >('satisfaction');
@@ -36,10 +37,12 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
 
     const handleSatisfactionFeedback = (satisfactionLevel: 'sad' | 'neutral' | 'happy') => {
       if (variant === 'thankyou') {
-        createFeedback(satisfactionLevel, 'thankyou');
+        createFeedback(satisfactionLevel, 'thank-you');
       } else {
         createFeedback(satisfactionLevel, 'fishbowl');
       }
+
+      handleGaveSatisfaction && handleGaveSatisfaction();
 
       if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
         setActive('commentBad');
@@ -78,7 +81,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
 
     return (
       <AnimatePresence mode="wait">
-        <StyledFormWrapper key="wrapper" className={variant} ref={ref}>
+        <StyledFormWrapper key="wrapper" className={variant} ref={ref} data-testid="feedback-form">
           {active === 'satisfaction' && (
             <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
           )}

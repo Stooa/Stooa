@@ -18,12 +18,7 @@ import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
 import userRepository from '@/jitsi/User';
-import ThankYouStyled, {
-  Description,
-  Time,
-  StyledThankyouWrapper,
-  StyledThankyouData
-} from '@/ui/pages/thank-you';
+import ThankYouStyled, { Description, Time, StyledThankyouWrapper } from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
@@ -38,7 +33,9 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');
-  const userSlug = userRepository.getUserParticipantSlug();
+  const userFeedback = userRepository.getUserFeedback();
+  const thankYouFeedbackGiven = userFeedback?.fromThankYou;
+  const userSlug = userFeedback.feedbackFishbowlSlug;
 
   const router = useRouter();
   const {
@@ -74,34 +71,35 @@ const ThankYou = () => {
 
   const shareTitle = `Stooa: ${t('home:title')}`;
 
-  const showFeedbackForm = userSlug === (fid as string) && !fbCreatorData.isCreatorOfFishbowl;
+  const showFeedbackForm =
+    userSlug === (fid as string) && !fbCreatorData.isCreatorOfFishbowl && !thankYouFeedbackGiven;
 
   return (
     <Layout title={fb.name} decorated>
       <StyledThankyouWrapper>
-        <StyledThankyouData className={showFeedbackForm ? 'taller' : ''}>
-          <Time
-            as="time"
-            dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
-            className="error"
-          >
-            <p data-testid="finished-fishbowl" className="body-md medium">
-              {t('finishedEvent')}
-            </p>
-            <div className="body-sm">
-              {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
-                startDate.time
-              } - ${endDate.time} ${endDate.timezone}`}
-            </div>
-          </Time>
-          {(!fb.isPrivate || fb.plainPassword) && (
-            <>
-              <h1 className="body-lg medium">{fb.name}</h1>
-              {fb.description && <Description className="body-sm">{fb.description}</Description>}
-            </>
-          )}
-          {showFeedbackForm && <FeedbackForm fishbowl={data} variant="thankyou" />}
-        </StyledThankyouData>
+        <Time
+          as="time"
+          dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
+          className="error"
+        >
+          <p data-testid="finished-fishbowl" className="body-md medium">
+            {t('finishedEvent')}
+          </p>
+          <div className="body-sm">
+            {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
+              startDate.time
+            } - ${endDate.time} ${endDate.timezone}`}
+          </div>
+        </Time>
+        {(!fb.isPrivate || fb.plainPassword) && (
+          <>
+            <h1 className="body-lg medium">{fb.name}</h1>
+            {fb.description && <Description className="body-sm">{fb.description}</Description>}
+          </>
+        )}
+        {showFeedbackForm && (
+          <FeedbackForm fishbowl={data.bySlugQueryFishbowl} variant="thankyou" />
+        )}
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (
             <div className="share body-md medium">

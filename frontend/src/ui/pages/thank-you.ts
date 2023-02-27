@@ -19,7 +19,7 @@ import {
 } from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
-  /* margin-top: ${space(9)}; */
+  margin-top: ${space(4)};
 
   .share {
     margin-bottom: ${space(4)};
@@ -68,13 +68,6 @@ const ThankYouStyled = styled.div`
   }
 `;
 
-const StyledThankyouData = styled.div`
-  &.taller {
-    height: 35vh;
-    min-height: 450px;
-  }
-`;
-
 const Description = styled.p`
   max-width: ${rems(620)};
   margin: ${space()} auto 0;
@@ -89,11 +82,12 @@ const Time = styled(Alert)`
 
 const StyledThankyouWrapper = styled.div`
   max-width: 1024px;
+  width: 100%;
 
   h1 {
     margin-bottom: ${space(2)};
   }
 `;
 
-export { Description, Time, StyledThankyouWrapper, StyledThankyouData };
+export { Description, Time, StyledThankyouWrapper };
 export default ThankYouStyled;

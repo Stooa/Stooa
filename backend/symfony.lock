@@ -179,9 +179,6 @@
             ".php_cs.dist"
         ]
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.3"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v3.0.0"
     },
@@ -205,9 +202,6 @@
     },
     "knplabs/knp-menu-bundle": {
         "version": "v2.3.0"
-    },
-    "laminas/laminas-code": {
-        "version": "3.4.1"
     },
     "lcobucci/clock": {
         "version": "2.0.0"

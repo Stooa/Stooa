@@ -15,6 +15,7 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
+  COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
 } from '@/ui/settings';
@@ -134,6 +135,24 @@ const Selector = styled.div`
 
           & circle {
             fill: currentColor;
+          }
+        }
+
+        &:disabled {
+          color: ${COLOR_NEUTRO_500};
+
+          & > svg {
+            & path {
+              stroke: currentColor;
+            }
+
+            & circle {
+              fill: currentColor;
+            }
+          }
+
+          &:hover {
+            background-color: ${COLOR_NEUTRO_100};
           }
         }
       }
