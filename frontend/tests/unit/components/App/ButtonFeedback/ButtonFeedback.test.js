@@ -50,7 +50,7 @@ describe('Unit test of feedback button', () => {
     isAuthenticated: true
   });
 
-  it('It renders feedback button  when not feedback given yet', () => {
+  it('It renders enabled feedback button when not feedback given yet and is not moderator', () => {
     useStooa.mockReturnValue({
       feedbackAlert: false,
       gaveFeedback: false,
@@ -88,7 +88,7 @@ describe('Unit test of feedback button', () => {
     expect(alert).toBeInTheDocument();
   });
 
-  it('It shows the feedback when clicking', () => {
+  it('It shows the feedback form when clicking', () => {
     useStooa.mockReturnValue({
       feedbackAlert: true,
       gaveFeedback: false,
