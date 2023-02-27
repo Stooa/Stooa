@@ -14,6 +14,7 @@ export interface User {
   feedback?: {
     feedbackId: string;
     feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
   };
   nickname?: string;
   name?: string;
