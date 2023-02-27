@@ -9,47 +9,13 @@
 
 import { fireEvent, render } from '@testing-library/react';
 import ButtonFeedback from '@/components/App/ButtonFeedback';
-import { CREATE_FEEDBACK, UPDATE_FEEDBACK } from '@/graphql/Feedback';
-import { MockedProvider } from '@apollo/client/testing';
 
 import { useStooa } from '@/contexts/StooaManager';
-import { useAuth } from '@/contexts/AuthContext';
-
-const mocks = [
-  {
-    request: {
-      query: CREATE_FEEDBACK
-    },
-    result: {
-      data: {
-        feedback: {
-          id: '839183901'
-        }
-      }
-    }
-  },
-  {
-    request: {
-      query: UPDATE_FEEDBACK
-    },
-    result: {
-      data: {
-        feedback: {
-          id: '839183901'
-        }
-      }
-    }
-  }
-];
 
 jest.mock('@/contexts/StooaManager');
-jest.mock('@/contexts/AuthContext');
+jest.mock('@/components/App/FeedbackForm', () => () => <div data-testid="feedback-form" />);
 
 describe('Unit test of feedback button', () => {
-  useAuth.mockReturnValue({
-    isAuthenticated: true
-  });
-
   it('It renders enabled feedback button when not feedback given yet and is not moderator', () => {
     useStooa.mockReturnValue({
       feedbackAlert: false,
@@ -94,11 +60,7 @@ describe('Unit test of feedback button', () => {
       gaveFeedback: false,
       setGaveFeedback: () => jest.fn()
     });
-    const { getByTestId } = render(
-      <MockedProvider mocks={mocks}>
-        <ButtonFeedback />
-      </MockedProvider>
-    );
+    const { getByTestId } = render(<ButtonFeedback />);
     const button = getByTestId('feedback-button');
     expect(button).toBeInTheDocument();
 
