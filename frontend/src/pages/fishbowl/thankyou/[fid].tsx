@@ -41,7 +41,8 @@ const ThankYou = () => {
 
   const userFeedback = userRepository.getUserFeedback();
   const userHasParticipated = userRepository.getUserParticipantSlug() === (fid as string);
-  const thankYouFeedbackGiven = userFeedback.feedbackFishbowlSlug === (fid as string);
+  const thankYouFeedbackGiven =
+    userFeedback.feedbackFishbowlSlug === (fid as string) && userFeedback.fromThankYou;
 
   const {
     loading: creatorLoading,
