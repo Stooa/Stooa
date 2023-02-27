@@ -11,6 +11,7 @@ export interface User {
   id?: string;
   guestId?: string;
   participantId?: string;
+  participantSlug?: string;
   feedback?: {
     feedbackId: string;
     feedbackFishbowlSlug: string;
@@ -49,6 +50,8 @@ export interface UserRepository {
   setUserNickname: (nickname: string) => void;
   setUserParticipantId: (participantId: string) => void;
   getUserParticipantId: () => string;
+  setUserParticipantSlug: (participantSlug: string) => void;
+  getUserParticipantSlug: () => string;
   getUserFeedback: () => {
     feedbackId: string;
     feedbackFishbowlSlug: string;

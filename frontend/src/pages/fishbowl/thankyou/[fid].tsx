@@ -33,14 +33,15 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');
-  const userFeedback = userRepository.getUserFeedback();
-  const thankYouFeedbackGiven = userFeedback?.fromThankYou;
-  const userSlug = userFeedback.feedbackFishbowlSlug;
 
   const router = useRouter();
   const {
     query: { fid }
   } = router;
+
+  const userFeedback = userRepository.getUserFeedback();
+  const userHasParticipated = userRepository.getUserParticipantSlug() === (fid as string);
+  const thankYouFeedbackGiven = userFeedback.feedbackFishbowlSlug === (fid as string);
 
   const {
     loading: creatorLoading,
@@ -63,6 +64,9 @@ const ThankYou = () => {
   const startDate = formatDateTime(fb.startDateTimeTz);
   const endDate = formatDateTime(fb.endDateTimeTz);
 
+  const showFeedbackForm =
+    userHasParticipated && !thankYouFeedbackGiven && !fbCreatorData.isCreatorOfFishbowl;
+
   dataLayerPush({
     event: 'GAPageView',
     pageViewUrl: `/thank-you/${fid}`,
@@ -70,9 +74,6 @@ const ThankYou = () => {
   });
 
   const shareTitle = `Stooa: ${t('home:title')}`;
-
-  const showFeedbackForm =
-    userSlug === (fid as string) && !fbCreatorData.isCreatorOfFishbowl && !thankYouFeedbackGiven;
 
   return (
     <Layout title={fb.name} decorated>

@@ -43,6 +43,7 @@ const userRepository = (): UserRepository => {
   const getUserAudioMuted = () => getUser()?.audioMuted || false;
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
   const getUserParticipantId = () => getUser()?.participantId || '';
+  const getUserParticipantSlug = () => getUser()?.participantSlug || '';
   const getUserFeedback = () =>
     getUser()?.feedback || {
       feedbackId: '',
@@ -58,6 +59,7 @@ const userRepository = (): UserRepository => {
     feedbackFishbowlSlug: string;
     fromThankYou: boolean;
   }): void => setUser({ feedback: { feedbackId, feedbackFishbowlSlug, fromThankYou } });
+  const setUserParticipantSlug = (participantSlug: string): void => setUser({ participantSlug });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
@@ -118,6 +120,8 @@ const userRepository = (): UserRepository => {
     getUserParticipantId,
     setUserFeedback,
     getUserFeedback,
+    setUserParticipantSlug,
+    getUserParticipantSlug,
     hasUserGaveFeedback
   };
 };
