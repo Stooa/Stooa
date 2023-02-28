@@ -26,7 +26,6 @@ class UserResolver implements QueryItemResolverInterface
     }
 
     /**
-     * @param User $item
      * @param mixed[] $context
      *
      * @return User

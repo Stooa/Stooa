@@ -28,12 +28,7 @@ class FishbowlResolver implements QueryItemResolverInterface
     ) {
     }
 
-    /**
-     * @param Fishbowl $item
-     * @param mixed[] $context
-     *
-     * @return Fishbowl
-     */
+    /*** @param mixed[] $context */
     public function __invoke(?object $item, array $context): object
     {
         if (null === $item) {

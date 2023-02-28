@@ -26,10 +26,7 @@ class FishbowlFinishMutationResolver implements MutationResolverInterface
     ) {
     }
 
-    /**
-     * @param Fishbowl $item
-     * @param mixed[] $context
-     */
+    /** @param mixed[] $context */
     public function __invoke(?object $item, array $context): ?Fishbowl
     {
         if (!isset($context['args']['input']['slug'])) {
