@@ -15,9 +15,7 @@ namespace App\Fishbowl\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @Annotation
- */
+#[\Attribute]
 class PrivateFishbowl extends Constraint
 {
     public string $message = 'fishbowl.private.private';
