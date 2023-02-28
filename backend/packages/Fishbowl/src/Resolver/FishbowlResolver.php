@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Resolver;
 
+use ApiPlatform\Exception\ItemNotFoundException;
 use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
@@ -32,13 +33,8 @@ class FishbowlResolver implements QueryItemResolverInterface
      * @param mixed[] $context
      *
      * @return Fishbowl
-     *
-     * @psalm-suppress ImplementedReturnTypeMismatch
-     *
-     * QueryItemResolverInterface forces you to not return null, but this is the only way
-     * to tell ApiPlatform that this Resolver can't return a value with this $context
      */
-    public function __invoke($item, array $context): object
+    public function __invoke(?object $item, array $context): object
     {
         if (null === $item) {
             $fishbowl = $this->repository->findBySlug($context['args']['slug']);
@@ -46,6 +42,8 @@ class FishbowlResolver implements QueryItemResolverInterface
             if (null !== $fishbowl) {
                 return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
             }
+
+            throw new ItemNotFoundException();
         }
 
         Assert::isInstanceOf($item, Fishbowl::class);
