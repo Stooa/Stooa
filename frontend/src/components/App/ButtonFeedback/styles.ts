@@ -66,7 +66,7 @@ const StyledFeedbackWrapper = styled.div`
   ${media.min('tablet')`
     display: block;
     position: absolute;
-    bottom: ${space(0)};
+    bottom: ${space(2)};
     right: ${space(2)};
     z-index: 40;
 

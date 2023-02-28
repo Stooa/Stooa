@@ -42,9 +42,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
-import ButtonFeedback from '../ButtonFeedback';
 import FeedbackForm from '../FeedbackForm';
-import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { useClickOutside } from '@/hooks/useClickOutside';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
@@ -80,7 +78,6 @@ const Fishbowl: FC = () => {
   } = useModals();
 
   const { width } = useWindowSize();
-  const { deviceType } = useNavigatorType();
   const feedbackFormRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(feedbackFormRef, () => {
@@ -239,13 +236,6 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {!isPreFishbowl && !isModerator && deviceType === 'Desktop' && (
-          <ButtonFeedback
-            disabled={gaveFeedback}
-            fishbowl={data}
-            drawerOpened={participantsActive}
-          />
-        )}
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

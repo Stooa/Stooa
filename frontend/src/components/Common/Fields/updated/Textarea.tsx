@@ -11,11 +11,12 @@ import { forwardRef } from 'react';
 import { InputStyled } from '@/ui/Form';
 import { ValidationError, ValidationIcon } from '@/ui/Validation';
 import Icon from '../Icon';
+import { FieldError } from 'react-hook-form';
 
 type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
   label?: string;
   legend?: string | React.ReactNode;
-  hasError?: boolean;
+  hasError?: FieldError;
   errorMessage?: string;
   isValid?: boolean;
   isInvalid?: boolean;
@@ -50,7 +51,7 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
             <ValidationError>{validationError}</ValidationError>
           </>
         )}
-        {hasError && errorMessage && <ValidationError>{errorMessage}</ValidationError>}
+        {hasError && <ValidationError>{errorMessage}</ValidationError>}
       </InputStyled>
     );
   }

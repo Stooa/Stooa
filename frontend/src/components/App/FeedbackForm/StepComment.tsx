@@ -32,17 +32,22 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
     handleCommentFeedback(data.comment);
   };
 
+  console.log(errors);
+
+  const maxLength = 400;
+
   return (
     <StyledStepWrapper data-testid="feedback-comment-step" key="comment">
       <h4 className="medium body-sm">{t(title)}</h4>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewTextarea
+          hasError={errors.comment}
+          errorMessage={t('form:validation.maxLength', { length: maxLength.toString() })}
           data-testid="feedback-comment-textarea"
           isDirty={dirtyFields.comment}
           label={t('feedback.commentPlaceholder')}
-          {...register('comment', { required: true, maxLength: 400 })}
+          {...register('comment', { required: true, maxLength })}
         />
-        {errors.comment && <span>This field is required</span>}
 
         <div className="actions">
           <Button
