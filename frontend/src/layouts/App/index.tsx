@@ -78,9 +78,7 @@ const Layout: React.FC<Props> = ({
     return <Error message={'Could not create fishbowl event'} />;
 
   if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
-
-  const isModerator = !!fbCreatorData.isCreatorOfFishbowl;
+  const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (
     <StooaProvider data={data} isModerator={isModerator}>

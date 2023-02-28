@@ -63,11 +63,13 @@ use Symfony\Component\Validator\Constraints as Assert;
             resolver: UserResolver::class,
             args: [],
             normalizationContext: ['groups' => ['user:read', 'user:self']],
-            security: 'object == user', name: 'self'
+            security: 'object == user',
+            name: 'self'
         ),
         new Mutation(
             normalizationContext: ['groups' => ['user:read', 'user:self']],
-            security: 'object == user', name: 'update'
+            security: 'object == user',
+            name: 'update'
         ),
         new Mutation(
             denormalizationContext: ['groups' => ['user:write', 'user:create']],
