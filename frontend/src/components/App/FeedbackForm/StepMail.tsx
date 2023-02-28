@@ -41,13 +41,14 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
   };
 
   return (
-    <StyledStepWrapper key="mail">
+    <StyledStepWrapper data-testid="feedback-mail-step" key="mail">
       <h4 className="medium body-sm">{t('feedback.emailTitle')}</h4>
       <p className="body-sm description">
         <Trans i18nKey="fishbowl:feedback.emailDescription" components={{ i: <i /> }} />
       </p>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewInput
+          data-testid="feedback-mail-input"
           hasError={errors.email}
           icon="mail"
           isDirty={dirtyFields.email}
@@ -56,10 +57,15 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
         />
 
         <div className="actions">
-          <Button type="button" variant="subtleLink" onClick={handleSkip}>
+          <Button data-testid="skip-mail" type="button" variant="subtleLink" onClick={handleSkip}>
             {t('feedback.skip')}
           </Button>
-          <Button disabled={!isDirty} type="submit" variant="text">
+          <Button
+            data-testid="feedback-mail-send-button"
+            disabled={!isDirty}
+            type="submit"
+            variant="text"
+          >
             {t('feedback.send')}
           </Button>
         </div>

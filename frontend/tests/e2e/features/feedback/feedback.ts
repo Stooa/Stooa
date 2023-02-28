@@ -42,6 +42,22 @@ When('writes in the comment step', () => {
   cy.get('[data-testid=feedback-comment-textarea]').type('This is a comment');
 });
 
-When('clicks on the send button', () => {
+When('clicks on the comment send button', () => {
   cy.get('[data-testid=feedback-comment-send-button]').click();
+});
+
+When('clicks on the mail send button', () => {
+  cy.get('[data-testid=feedback-mail-send-button]').click();
+});
+
+When('sees the mail step', () => {
+  cy.get('[data-testid=feedback-mail-step]').should('be.visible');
+});
+
+When('writes in the mail step', () => {
+  cy.get('[data-testid=feedback-mail-input]').type('mymail@mail.com');
+});
+
+When('skips the mail step', () => {
+  cy.get('[data-testid=skip-mail]').click();
 });
