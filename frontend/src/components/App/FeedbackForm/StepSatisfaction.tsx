@@ -35,7 +35,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
             value="sad"
             onClick={() => onSelectSatisfaction('sad')}
           />
-          <StyledLabelOption htmlFor="sad">
+          <StyledLabelOption data-testid="feedback-notmuch-button" htmlFor="sad">
             <BadSVG />
             {t('feedback.notMuch')}
           </StyledLabelOption>
@@ -49,7 +49,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
             value="neutral"
             onClick={() => onSelectSatisfaction('neutral')}
           />
-          <StyledLabelOption htmlFor="neutral">
+          <StyledLabelOption data-testid="feedback-okay-button" htmlFor="neutral">
             <OkaySVG />
             {t('feedback.okay')}
           </StyledLabelOption>
@@ -63,7 +63,7 @@ const StepSatisfaction = ({ onSelectSatisfaction }: Props) => {
             value="happy"
             onClick={() => onSelectSatisfaction('happy')}
           />
-          <StyledLabelOption htmlFor="happy">
+          <StyledLabelOption data-testid="feedback-awesome-button" htmlFor="happy">
             <LoveSVG />
             {t('feedback.great')}
           </StyledLabelOption>

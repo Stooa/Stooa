@@ -8,12 +8,40 @@
  */
 
 import { Then, When } from 'cypress-cucumber-preprocessor/steps';
-import { hasOperationName } from '../../utils/graphql-test-utils';
+// import { hasOperationName } from '../../utils/graphql-test-utils';
 
 Then('can click on the feedback button', () => {
   cy.get('[data-testid=feedback-button]').click();
 });
 
-Then('sees the feedback form', () => {
+Then('sees the end step', () => {
+  cy.get('[data-testid=feedback-end-step]').should('be.visible');
+});
+
+When('clicks on the feedback button', () => {
+  cy.get('[data-testid=feedback-button]').click();
+});
+
+When('sees the feedback form', () => {
   cy.get('[data-testid=feedback-form]').should('be.visible');
+});
+
+When('clicks the okay button', () => {
+  cy.get('[data-testid=feedback-okay-button]').click();
+});
+
+When('sees the comment step', () => {
+  cy.get('[data-testid=feedback-comment-step]').should('be.visible');
+});
+
+When('skips the comment step', () => {
+  cy.get('[data-testid=skip-comment]').click();
+});
+
+When('writes in the comment step', () => {
+  cy.get('[data-testid=feedback-comment-textarea]').type('This is a comment');
+});
+
+When('clicks on the send button', () => {
+  cy.get('[data-testid=feedback-comment-send-button]').click();
 });

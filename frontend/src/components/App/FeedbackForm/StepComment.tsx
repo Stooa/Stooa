@@ -33,10 +33,11 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
   };
 
   return (
-    <StyledStepWrapper key="comment">
+    <StyledStepWrapper data-testid="feedback-comment-step" key="comment">
       <h4 className="medium body-sm">{t(title)}</h4>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
         <NewTextarea
+          data-testid="feedback-comment-textarea"
           isDirty={dirtyFields.comment}
           label={t('feedback.commentPlaceholder')}
           {...register('comment', { required: true, maxLength: 400 })}
@@ -44,10 +45,20 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
         {errors.comment && <span>This field is required</span>}
 
         <div className="actions">
-          <Button type="button" variant="subtleLink" onClick={handleSkip}>
+          <Button
+            type="button"
+            variant="subtleLink"
+            onClick={handleSkip}
+            data-testid="skip-comment"
+          >
             {t('feedback.skip')}
           </Button>
-          <Button disabled={!isDirty} type="submit" variant="text">
+          <Button
+            data-testid="feedback-comment-send-button"
+            disabled={!isDirty}
+            type="submit"
+            variant="text"
+          >
             {t('feedback.send')}
           </Button>
         </div>
