@@ -15,7 +15,6 @@ namespace App\Fishbowl\Tests\Unit\Resolver;
 
 use ApiPlatform\Exception\ItemNotFoundException;
 use App\Core\Factory\UserFactory;
-use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Resolver\FishbowlCreatorResolver;
@@ -53,7 +52,7 @@ class FishbowlCreatorResolverTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsNullWhenSlugIsNull(): void
+    public function itThrowsExceptionWhenSlugIsNull(): void
     {
         $fishbowl = FishbowlFactory::createOne()->object();
 

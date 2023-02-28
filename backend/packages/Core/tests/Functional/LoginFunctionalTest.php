@@ -62,9 +62,9 @@ class LoginFunctionalTest extends ApiTestCase
     {
         self::bootKernel();
 
-        $response = static::createClient()->request('POST', '/login', ['json' => [
+        static::createClient()->request('POST', '/login', ['json' => [
             'email' => 'user@stooa.com',
-            'password' => '',
+            'password' => 'wrongPassword',
         ]]);
 
         $this->assertResponseStatusCodeSame(401);

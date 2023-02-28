@@ -9,8 +9,9 @@ api_platform:
     enable_entrypoint: true
     enable_docs: true
     graphql:
-        default_ide: graphql_playground
         graphql_playground:
+            enabled: false
+        graphiql:
             enabled: true
     swagger:
         versions: [3]

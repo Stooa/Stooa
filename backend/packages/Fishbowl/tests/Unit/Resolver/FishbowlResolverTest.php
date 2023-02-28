@@ -73,6 +73,6 @@ class FishbowlResolverTest extends TestCase
 
         $this->privateFishbowlService->expects($this->once())->method('decryptPrivatePassword')->with($fishbowl);
 
-        ($this->resolver)($fishbowl, $context);
+        ($this->resolver)(null, $context);
     }
 }

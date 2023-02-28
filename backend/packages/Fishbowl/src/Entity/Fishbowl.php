@@ -64,6 +64,7 @@ use Webmozart\Assert\Assert as MAssert;
     denormalizationContext: ['groups' => ['fishbowl:write']],
     paginationEnabled: false,
     graphQlOperations: [
+        new Query(),
         new Query(
             resolver: FishbowlResolver::class,
             args: ['slug' => ['type' => 'String!']],

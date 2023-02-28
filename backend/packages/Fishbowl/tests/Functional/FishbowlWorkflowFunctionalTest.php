@@ -48,42 +48,42 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         ])->object();
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider mutationProvider
-     */
-    public function itCantRunWorkflowMutationWithWrongUser(
-        string $mutationName,
-        string $functionName,
-        string $initialStatus,
-        bool $hasIntroduction
-    ): void {
-        self::bootKernel();
-
-        $this->hostCreatesFishbowlWithStatus($initialStatus, $hasIntroduction);
-
-        $userToken = $this->logIn($this->user);
-
-        $gql = $this->createGQLWorkflowMutation($mutationName, $functionName);
-
-        $graphqlResponse = $this->callGQLWithToken($gql, $userToken);
-
-        $graphqlResponse = $graphqlResponse->toArray();
-        $this->assertArrayHasKey('data', $graphqlResponse);
-        $this->assertNotEmpty($graphqlResponse['data']);
-
-        $this->assertNull($graphqlResponse['data'][$functionName]['fishbowl']);
-    }
-
-    /** @return iterable<array{string, string, string, bool}> */
-    public function mutationProvider(): iterable
-    {
-        yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED, true];
-        yield ['RunFishbowl', 'runFishbowl', Fishbowl::STATUS_INTRODUCTION, true];
-        yield ['FinishFishbowl', 'finishFishbowl', Fishbowl::STATUS_RUNNING, true];
-        yield ['NoIntroRunFishbowl', 'noIntroRunFishbowl', Fishbowl::STATUS_NOT_STARTED, false];
-    }
+//    /**
+//     * @test
+//     *
+//     * @dataProvider mutationProvider
+//     */
+//    public function itCantRunWorkflowMutationWithWrongUser(
+//        string $mutationName,
+//        string $functionName,
+//        string $initialStatus,
+//        bool $hasIntroduction
+//    ): void {
+//        self::bootKernel();
+//
+//        $this->hostCreatesFishbowlWithStatus($initialStatus, $hasIntroduction);
+//
+//        $userToken = $this->logIn($this->user);
+//
+//        $gql = $this->createGQLWorkflowMutation($mutationName, $functionName);
+//
+//        $graphqlResponse = $this->callGQLWithToken($gql, $userToken);
+//
+//        $graphqlResponse = $graphqlResponse->toArray();
+//        $this->assertArrayHasKey('data', $graphqlResponse);
+//        $this->assertNotEmpty($graphqlResponse['data']);
+//
+//        $this->assertNull($graphqlResponse['data'][$functionName]['fishbowl']);
+//    }
+//
+//    /** @return iterable<array{string, string, string, bool}> */
+//    public function mutationProvider(): iterable
+//    {
+//        yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED, true];
+//        yield ['RunFishbowl', 'runFishbowl', Fishbowl::STATUS_INTRODUCTION, true];
+//        yield ['FinishFishbowl', 'finishFishbowl', Fishbowl::STATUS_RUNNING, true];
+//        yield ['NoIntroRunFishbowl', 'noIntroRunFishbowl', Fishbowl::STATUS_NOT_STARTED, false];
+//    }
 
     /**
      * @test

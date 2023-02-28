@@ -38,8 +38,8 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
      */
     public function __invoke(?object $item, array $context): object
     {
-        if (null !== $item && !isset($context['args']['slug'])) {
-            return $item;
+        if (!isset($context['args']['slug'])) {
+            throw new ItemNotFoundException();
         }
 
         $user = $this->security->getUser();
