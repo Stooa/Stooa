@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Tests\Functional;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Factory\UserFactory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
@@ -62,9 +62,9 @@ class LoginFunctionalTest extends ApiTestCase
     {
         self::bootKernel();
 
-        $response = static::createClient()->request('POST', '/login', ['json' => [
+        static::createClient()->request('POST', '/login', ['json' => [
             'email' => 'user@stooa.com',
-            'password' => '',
+            'password' => 'wrongPassword',
         ]]);
 
         $this->assertResponseStatusCodeSame(401);
