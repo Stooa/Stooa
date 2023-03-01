@@ -34,6 +34,8 @@ final class ChangePasswordProcessor implements ProcessorInterface
      * @param mixed $data
      * @param array<mixed> $uriVariables
      * @param array<mixed> $context
+     *
+     * @return User
      */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
