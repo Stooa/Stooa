@@ -45,11 +45,9 @@ const Layout: React.FC<Props> = ({
 }) => {
   const router = useRouter();
   const { fid } = router.query;
-  const {
-    loading,
-    error,
-    data: fbCreatorData
-  } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
+  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+    variables: { slug: fid }
+  });
   const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
 
   const importJitsi = async () => {
