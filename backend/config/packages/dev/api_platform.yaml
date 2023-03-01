@@ -6,12 +6,12 @@
 # file that was distributed with this source code.
 
 api_platform:
-    metadata_backward_compatibility_layer: false
     enable_entrypoint: true
     enable_docs: true
     graphql:
-        default_ide: graphql_playground
         graphql_playground:
+            enabled: false
+        graphiql:
             enabled: true
     swagger:
         versions: [3]

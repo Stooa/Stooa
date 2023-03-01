@@ -7,7 +7,6 @@
 
 framework:
     messenger:
-        reset_on_message: true
         failure_transport: failed
         transports:
             async: '%env(MESSENGER_TRANSPORT_DSN)%'
