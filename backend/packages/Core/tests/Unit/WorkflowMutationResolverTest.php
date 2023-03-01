@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Tests\Unit;
 
-use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;

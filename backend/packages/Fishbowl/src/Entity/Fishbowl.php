@@ -51,11 +51,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-/**
- * @FutureFishbowl (groups={"fishbowl:create", "fishbowl:update"})
- *
- * @PrivateFishbowl (groups={"fishbowl:create", "fishbowl:update"})
- */
 #[ApiResource(
     operations: [
         new Get(),
@@ -68,6 +63,7 @@ use Webmozart\Assert\Assert as MAssert;
     paginationEnabled: false,
     paginationItemsPerPage: 25,
     graphQlOperations: [
+        new Query(),
         new Query(
             resolver: FishbowlResolver::class,
             args: ['slug' => ['type' => 'String!']],
@@ -119,6 +115,9 @@ use Webmozart\Assert\Assert as MAssert;
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
 #[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime' => DateFilterInterface::PARAMETER_AFTER])]
 #[ApiFilter(FilterLogic::class)]
+#[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
+#[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
+
 class Fishbowl implements \Stringable
 {
     use TimestampableEntity;

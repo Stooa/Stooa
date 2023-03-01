@@ -57,6 +57,7 @@
         "notEmpty": "This field cannot be empty",
         "wrongPassword": "Mot de passe erroné",
         "unknownErrorServer": "Problème inconnu. Veuillez actualiser la page et réessayer",
-        "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer"
+        "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer",
+        "maxLength": "Ce champ ne peut pas contenir plus de {{length}} caractères."
     }
 }

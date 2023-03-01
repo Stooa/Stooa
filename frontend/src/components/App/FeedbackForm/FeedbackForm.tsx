@@ -42,7 +42,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
         createFeedback(satisfactionLevel, 'fishbowl');
       }
 
-      handleGaveSatisfaction && handleGaveSatisfaction();
+      if (handleGaveSatisfaction) handleGaveSatisfaction();
 
       if (satisfactionLevel === 'sad' || satisfactionLevel === 'neutral') {
         setActive('commentBad');
@@ -53,7 +53,12 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
 
     const handleCommentFeedback = (comment: string) => {
       updateFeedback({ type: 'comment', data: comment });
-      setActive('mail');
+      if (isAuthenticated) {
+        setActive('end');
+        return;
+      } else {
+        setActive('mail');
+      }
     };
 
     const handleMailFeedback = (email: string) => {

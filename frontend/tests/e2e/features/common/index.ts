@@ -286,6 +286,26 @@ Given('a not owned fishbowl', () => {
   }).as('gqlFishbowlBySlugQuery');
 });
 
+Given('a not owned started fishbowl', () => {
+  startedFishbowl = true;
+  finishedFishbowl = false;
+
+  const bySlugQueryFishbowl = makeGQLCurrentNotOwnedFishbowl();
+
+  cy.setCookie('share_link', bySlugQueryFishbowl.slug);
+  cy.setCookie('on_boarding_moderator', 'true');
+
+  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+    if (hasOperationName(req, 'BySlugQueryFishbowl')) {
+      req.reply({
+        data: {
+          bySlugQueryFishbowl
+        }
+      });
+    }
+  }).as('gqlFishbowlBySlugQuery');
+});
+
 Given('a private fishbowl', () => {
   startedFishbowl = false;
   finishedFishbowl = false;

@@ -108,6 +108,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           validation={false}
           autoComplete="off"
           id="description"
+          taller
         />
         <DatePicker
           data-testid="edit-form-date"
