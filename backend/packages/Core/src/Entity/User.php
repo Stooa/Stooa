@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Action\NotFoundAction;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -63,11 +63,13 @@ use Symfony\Component\Validator\Constraints as Assert;
             resolver: UserResolver::class,
             args: [],
             normalizationContext: ['groups' => ['user:read', 'user:self']],
-            security: 'object == user', name: 'self'
+            security: 'object == user',
+            name: 'self'
         ),
         new Mutation(
             normalizationContext: ['groups' => ['user:read', 'user:self']],
-            security: 'object == user', name: 'update'
+            security: 'object == user',
+            name: 'update'
         ),
         new Mutation(
             denormalizationContext: ['groups' => ['user:write', 'user:create']],
