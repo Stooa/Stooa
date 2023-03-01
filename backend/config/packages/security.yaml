@@ -6,8 +6,6 @@
 # file that was distributed with this source code.
 
 security:
-    enable_authenticator_manager: true
-
     password_hashers:
         Sonata\UserBundle\Model\UserInterface: auto
         App\Core\Entity\User: auto
