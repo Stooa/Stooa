@@ -13,16 +13,18 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Functional;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
+
+use function Zenstruck\Foundry\faker;
+
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
-use function Zenstruck\Foundry\faker;
 
 class FishbowlDashboardListFunctionalTest extends ApiTestCase
 {
@@ -68,8 +70,6 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
 
         $this->assertResponseIsSuccessful();
 
-        var_dump($responseArray);
-
         $this->assertJsonContains([
             '@context' => '/contexts/Fishbowl',
             '@id' => '/fishbowls',
@@ -87,6 +87,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
 
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
     }
+
     private function logIn(User $user): string
     {
         $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
@@ -94,28 +95,28 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         return $jwtManager->create($user);
     }
 
-    private function createFishbowlWithFeedbacks(): void
-    {
-        $user = UserFactory::createOne([
-            'email' => 'user@stooa.com'
-        ]);
-
-        $fishbowl = FishbowlFactory::createOne([
-            'name' => 'fishbowl name',
-            'startDateTime' => new \DateTime('+ 30 minutes'),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
-            'currentStatus' => Fishbowl::STATUS_FINISHED,
-            'host' => $this->host,
-        ])->object();
-
-        FeedbackFactory::createMany(2, [
-            'fishbowl' => $fishbowl,
-            'participant' => ParticipantFactory::createOne([
-                'user' => $user
-            ])
-        ]);
-    }
+//    private function createFishbowlWithFeedbacks(): void
+//    {
+//        $user = UserFactory::createOne([
+//            'email' => 'user@stooa.com',
+//        ]);
+//
+//        $fishbowl = FishbowlFactory::createOne([
+//            'name' => 'fishbowl name',
+//            'startDateTime' => new \DateTime('+ 30 minutes'),
+//            'timezone' => 'Europe/Madrid',
+//            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+//            'currentStatus' => Fishbowl::STATUS_FINISHED,
+//            'host' => $this->host,
+//        ])->object();
+//
+//        FeedbackFactory::createMany(2, [
+//            'fishbowl' => $fishbowl,
+//            'participant' => ParticipantFactory::createOne([
+//                'user' => $user,
+//            ]),
+//        ]);
+//    }
 
     private function create50PastFishbowls(): void
     {
