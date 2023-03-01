@@ -7,7 +7,19 @@
  * file that was distributed with this source code.
  */
 
-import 'tests/unit/matchMedia.mock';
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn()
+  }))
+});
 
 import Footer from '@/components/App/Footer';
 import { render } from '@testing-library/react';
