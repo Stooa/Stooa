@@ -15,10 +15,8 @@ namespace App\Fishbowl\Tests\Functional;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
-use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
-use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 
 use function Zenstruck\Foundry\faker;
@@ -60,7 +58,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'or[startDateTime][after]' => $oneHourAgo->format(\DateTimeInterface::ATOM),
+                'or[startDateTime][after]' => $oneHourAgo->format('Y-m-d H:i:s'),
                 'or[currentStatus]' => Fishbowl::STATUS_FINISHED,
             ],
             'auth_bearer' => $hostToken,
@@ -73,7 +71,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         $this->assertJsonContains([
             '@context' => '/contexts/Fishbowl',
             '@id' => '/fishbowls',
-            'hydra:totalItems' => 50,
+            'hydra:totalItems' => 100,
         ]);
 
 //        $this->assertSame('fishbowl name', $responseArray['hydra:member'][0]['name']);

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Fishbowl\Entity;
 
 use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
-use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -42,7 +42,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Metaclass\FilterBundle\Filter\FilterLogic;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -113,8 +112,8 @@ use Webmozart\Assert\Assert as MAssert;
 )]
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
-#[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime' => DateFilterInterface::PARAMETER_AFTER])]
-#[ApiFilter(FilterLogic::class)]
+#[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime'])]
+#[ApiFilter(SearchFilter::class, properties: ['currentStatus' => 'exact'])]
 #[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 #[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 
@@ -151,7 +150,6 @@ class Fishbowl implements \Stringable
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
-    #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     private ?string $name = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
@@ -200,7 +198,6 @@ class Fishbowl implements \Stringable
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED])]
     #[ORM\Column(type: 'string', options: ['default' => self::STATUS_NOT_STARTED])]
-    #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private string $currentStatus = self::STATUS_NOT_STARTED;
 
     #[Assert\Type('\\DateTimeInterface')]
