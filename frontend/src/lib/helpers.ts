@@ -128,7 +128,7 @@ const getTimePlusOneMinute = () => {
 const removeHours = (date, hours) => {
   date.setHours(date.getHours() - hours);
   return date;
-}
+};
 
 const getIsoDateTimeWithActualTimeZone = () => {
   // FIXME: This is not working as expected.
