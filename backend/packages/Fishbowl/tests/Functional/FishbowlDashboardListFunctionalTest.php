@@ -15,8 +15,10 @@ namespace App\Fishbowl\Tests\Functional;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 
 use function Zenstruck\Foundry\faker;
@@ -44,7 +46,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
     }
 
     /** @test */
-    public function itGetsFishbowlsWithFeedbacks(): void
+    public function itGetsFinishedAndPastFishbowls(): void
     {
         $hostToken = $this->logIn($this->host);
 
@@ -52,19 +54,15 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
 
         $this->create50FinishedFishbowls();
 
-        $now = new \DateTime();
-
-        $oneHourAgo = (new \DateTimeImmutable())->modify('-1 hour');
+        $threeHoursAgo = (new \DateTimeImmutable())->modify('-3 hour');
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'or[startDateTime][after]' => $oneHourAgo->format('Y-m-d H:i:s'),
+                'or[startDateTime][after]' => $threeHoursAgo->format('Y-m-d H:i:s'),
                 'or[currentStatus]' => Fishbowl::STATUS_FINISHED,
             ],
             'auth_bearer' => $hostToken,
         ]);
-
-        $responseArray = $response->toArray();
 
         $this->assertResponseIsSuccessful();
 
@@ -86,6 +84,45 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
     }
 
+    /** @test */
+    public function itGetsFishbowlWithFeedbacks(): void
+    {
+        $hostToken = $this->logIn($this->host);
+
+        $this->createFishbowlWithFeedbacks();
+
+        $threeHoursAgo = (new \DateTimeImmutable())->modify('-3 hour');
+
+        $response = static::createClient()->request('GET', '/fishbowls', [
+            'query' => [
+                'or[startDateTime][after]' => $threeHoursAgo->format('Y-m-d H:i:s'),
+                'or[currentStatus]' => Fishbowl::STATUS_FINISHED,
+            ],
+            'auth_bearer' => $hostToken,
+        ]);
+
+        $responseArray = $response->toArray();
+
+        $this->assertResponseIsSuccessful();
+
+        $this->assertJsonContains([
+            '@context' => '/contexts/Fishbowl',
+            '@id' => '/fishbowls',
+            'hydra:totalItems' => 1,
+        ]);
+
+        $this->assertSame('fishbowl name', $responseArray['hydra:member'][0]['name']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['@id']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['@type']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['satisfaction']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['comment']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['email']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['origin']);
+        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['participant']);
+
+        $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
+    }
+
     private function logIn(User $user): string
     {
         $jwtManager = static::getContainer()->get('lexik_jwt_authentication.jwt_manager');
@@ -93,28 +130,28 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         return $jwtManager->create($user);
     }
 
-//    private function createFishbowlWithFeedbacks(): void
-//    {
-//        $user = UserFactory::createOne([
-//            'email' => 'user@stooa.com',
-//        ]);
-//
-//        $fishbowl = FishbowlFactory::createOne([
-//            'name' => 'fishbowl name',
-//            'startDateTime' => new \DateTime('+ 30 minutes'),
-//            'timezone' => 'Europe/Madrid',
-//            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
-//            'currentStatus' => Fishbowl::STATUS_FINISHED,
-//            'host' => $this->host,
-//        ])->object();
-//
-//        FeedbackFactory::createMany(2, [
-//            'fishbowl' => $fishbowl,
-//            'participant' => ParticipantFactory::createOne([
-//                'user' => $user,
-//            ]),
-//        ]);
-//    }
+    private function createFishbowlWithFeedbacks(): void
+    {
+        $user = UserFactory::createOne([
+            'email' => 'user@stooa.com',
+        ]);
+
+        $fishbowl = FishbowlFactory::createOne([
+            'name' => 'fishbowl name',
+            'startDateTime' => new \DateTime('+ 30 minutes'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'host' => $this->host,
+        ])->object();
+
+        FeedbackFactory::createMany(2, [
+            'fishbowl' => $fishbowl,
+            'participant' => ParticipantFactory::createOne([
+                'user' => $user,
+            ]),
+        ]);
+    }
 
     private function create50PastFishbowls(): void
     {
