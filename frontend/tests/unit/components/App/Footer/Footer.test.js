@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import '../../../matchMedia.mock';
+import 'tests/unit/matchMedia.mock';
 
 import Footer from '@/components/App/Footer';
 import { render } from '@testing-library/react';
