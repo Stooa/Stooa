@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import '../../../matchMedia.mock';
+
 import Footer from '@/components/App/Footer';
 import { render } from '@testing-library/react';
 import { useStooa } from '@/contexts/StooaManager';
