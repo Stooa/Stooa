@@ -22,15 +22,30 @@ type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
   isInvalid?: boolean;
   validationError?: string;
   isDirty?: boolean;
+  counter?: number;
+  lengthState?: '' | 'warning' | 'error';
 };
 
 const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
   (
-    { label, hasError, errorMessage, isValid, isInvalid, validationError, isDirty, ...props },
+    {
+      label,
+      hasError,
+      errorMessage,
+      isValid,
+      isInvalid,
+      validationError,
+      isDirty,
+      lengthState,
+      counter,
+      ...props
+    },
     ref
   ) => {
+    const showCounter = counter !== undefined && counter > 0;
+
     return (
-      <InputStyled>
+      <InputStyled className="textarea">
         <textarea
           ref={ref}
           className={`textarea ${isDirty ? 'filled' : ''} ${hasError ? 'invalid' : ''}`}
@@ -51,6 +66,7 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
             <ValidationError>{validationError}</ValidationError>
           </>
         )}
+        {showCounter && <span className={`body-xs counter ${lengthState}`}>{counter}</span>}
         {hasError && <ValidationError>{errorMessage}</ValidationError>}
       </InputStyled>
     );
