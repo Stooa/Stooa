@@ -72,15 +72,6 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
             'hydra:totalItems' => 100,
         ]);
 
-//        $this->assertSame('fishbowl name', $responseArray['hydra:member'][0]['name']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['@id']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['@type']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['satisfaction']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['comment']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['email']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['origin']);
-//        $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['participant']);
-
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
     }
 
