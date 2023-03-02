@@ -220,7 +220,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   .hide-mobile {
@@ -332,7 +332,11 @@ const GlobalStyle = createGlobalStyle`
       }
 
       &.Toastify__toast-container--bottom-center {
-        bottom: ${space(10)}
+        bottom: ${space(12)};
+
+        ${media.min('desktop')`
+          bottom: ${space(10)};
+        `}
       }
 
       & .Toastify__toast-body {

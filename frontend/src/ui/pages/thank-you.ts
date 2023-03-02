@@ -19,7 +19,7 @@ import {
 } from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
-  margin-top: ${space(9)};
+  margin-top: ${space(4)};
 
   .share {
     margin-bottom: ${space(4)};
@@ -58,6 +58,7 @@ const ThankYouStyled = styled.div`
   .action-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     row-gap: ${space(2)};
 
     ${media.min('tablet')`
@@ -79,5 +80,14 @@ const Time = styled(Alert)`
   padding: ${space(2)} ${space(4)};
 `;
 
-export { Description, Time };
+const StyledThankyouWrapper = styled.div`
+  max-width: 1024px;
+  width: 100%;
+
+  h1 {
+    margin-bottom: ${space(2)};
+  }
+`;
+
+export { Description, Time, StyledThankyouWrapper };
 export default ThankYouStyled;

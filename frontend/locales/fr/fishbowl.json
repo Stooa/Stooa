@@ -162,5 +162,24 @@
             "description": "L'enregistrement sera sauvegardé dans votre dossier de téléchargement.",
             "button": "Arrêter l'enregistrement"
         }
+    },
+    "feedback" : {
+        "buttonText": "Feedback",
+        "satisfactionTitle": "Donnez-nous votre feedback",
+        "satisfactionDescription": "Êtes-vous satisfait de cet <i>fishbowl</i> ?",
+        "notMuch": "Peu",
+        "okay": "OK",
+        "great": "Génial",
+        "commentImproveTitle": "Que pouvons-nous faire pour l'améliorer ?",
+        "commentPlaceholder": "Dites-nous votre opinion (facultatif)",
+        "commentWhatDidYouLike": "Super! Merci. Qu'avez-vous aimé à ce sujet?",
+        "emailTitle": "Restons en contact?",
+        "emailDescription": "Indiquez-nous votre e-mail pour vous contacter à propos de nouveaux <i>fishbowls</i> ou pour demander votre avis pour améliorer.",
+        "emailPlaceholder": "Email (facultatif)",
+        "thanks": "Merci!",
+        "thanksDescription": "Votre feedback nous aide à nous améliorer.",
+        "spreadTheWord": "Spread the word!",
+        "send": "Envoyez",
+        "skip": "Sauter"
     }
 }

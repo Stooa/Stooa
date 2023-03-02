@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -72,6 +72,11 @@ const StooaProvider = ({
   isModerator: boolean;
   children: JSX.Element[];
 }) => {
+  const router = useRouter();
+  const { fid } = router.query;
+
+  const useGaveFeedback = useMemo(() => userRepository.hasUserGaveFeedback(fid as string), [fid]);
+
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
@@ -83,6 +88,8 @@ const StooaProvider = ({
   const [isSharing, setIsSharing] = useState(false);
   const [clientRunning, setClientRunning] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [feedbackAlert, setFeedbackAlert] = useState(false);
+  const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
 
   const { t, lang } = useTranslation('app');
 
@@ -92,8 +99,6 @@ const StooaProvider = ({
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
-  const router = useRouter();
-  const { fid } = router.query;
 
   const sendStopRecordingEvent = () => {
     Conference.stopRecordingEvent();
@@ -427,7 +432,11 @@ const StooaProvider = ({
         startRecording,
         stopRecording,
         isRecording,
-        setIsRecording
+        setIsRecording,
+        feedbackAlert,
+        setFeedbackAlert,
+        gaveFeedback,
+        setGaveFeedback
       }}
     >
       {children}

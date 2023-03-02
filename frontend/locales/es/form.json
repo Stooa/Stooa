@@ -57,6 +57,7 @@
         "notEmpty": "Este campo no puede estar vacío",
         "wrongPassword": "Contraseña incorrecta",
         "unknownErrorServer": "Ha ocurrido un error desconocido. Prueba de nuevo.",
-        "unknownErrorInside": "¡Lo sentimos! Ocurrió un error durante el acceso. Inténtalo de nuevo."
+        "unknownErrorInside": "¡Lo sentimos! Ocurrió un error durante el acceso. Inténtalo de nuevo.",
+        "maxLength": "Este campo no puede tener más de {{length}} caracteres."
     }
 }

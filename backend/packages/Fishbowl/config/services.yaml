@@ -37,3 +37,7 @@ services:
             - { name: sonata.admin, model_class: App\Fishbowl\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
         calls:
             - [ setFishbowlService, [ '@App\Fishbowl\Service\FishbowlService' ] ]
+
+    App\Fishbowl\Admin\FeedbackAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Feedback, manager_type: orm, label: Feedbacks }

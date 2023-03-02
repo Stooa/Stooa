@@ -169,5 +169,24 @@
             "description": "La grabación se guardará en tu carpeta de descargas.",
             "button": "Parar la grabación"
         }
+    },
+    "feedback" : {
+        "buttonText": "Feedback",
+        "satisfactionTitle": "Danos feedback",
+        "satisfactionDescription": "¿Cuál es tu grado de satisfacción con este <i>fishbowl</i>?",
+        "notMuch": "Bajo",
+        "okay": "Okay",
+        "great": "Genial",
+        "commentImproveTitle": "¿Qué podemos hacer para mejorarlo?",
+        "commentPlaceholder": "Dinos lo que piensas (opcional)",
+        "commentWhatDidYouLike": "¡Excelente! Gracias. ¿Qué es lo que te gustó?",
+        "emailTitle": "¿Seguimos en contacto?",
+        "emailDescription": "Indícanos tu email para que podamos contactar contigo sobre nuevos <i>fishbowls</i> o para pedir tu opinión para mejorar.",
+        "emailPlaceholder": "Email (optional)",
+        "thanks": "¡Gracias!",
+        "thanksDescription": "Tu feedback nos ayuda a mejorar.",
+        "spreadTheWord": "Spread the word!",
+        "send": "Enviar",
+        "skip": "Saltar"
     }
 }
