@@ -44,16 +44,14 @@ const ThankYou = () => {
   const thankYouFeedbackGiven =
     userFeedback.feedbackFishbowlSlug === (fid as string) && userFeedback.fromThankYou;
 
-  const {
-    loading: creatorLoading,
-    error: creatorError,
-    data: fbCreatorData
-  } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
+  const { loading: creatorLoading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+    variables: { slug: fid }
+  });
 
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
   if (loading || creatorLoading) return <Loader />;
-  if (error || creatorError) return <Error message={error?.message || creatorError?.message} />;
+  if (error) return <Error message={error?.message} />;
 
   const { bySlugQueryFishbowl: fb } = data;
 
@@ -64,9 +62,9 @@ const ThankYou = () => {
 
   const startDate = formatDateTime(fb.startDateTimeTz);
   const endDate = formatDateTime(fb.endDateTimeTz);
+  const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
-  const showFeedbackForm =
-    userHasParticipated && !thankYouFeedbackGiven && !fbCreatorData.isCreatorOfFishbowl;
+  const showFeedbackForm = userHasParticipated && !thankYouFeedbackGiven && !isModerator;
 
   dataLayerPush({
     event: 'GAPageView',
