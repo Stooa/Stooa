@@ -168,8 +168,8 @@ class Fishbowl implements \Stringable
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
-
     private ?string $timezone = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
@@ -235,9 +235,14 @@ class Fishbowl implements \Stringable
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
+    /** @var Collection<int, Feedback> */
+    #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
+    private Collection $feedbacks;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->feedbacks = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -519,6 +524,34 @@ class Fishbowl implements \Stringable
     {
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<int, Feedback> */
+    public function getFeedbacks(): Collection
+    {
+        return $this->feedbacks;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedbacks->contains($feedback)) {
+            $this->feedbacks[] = $feedback;
+            $feedback->setFishbowl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedbacks->contains($feedback)) {
+            $this->feedbacks->removeElement($feedback);
+            if ($feedback->getFishbowl() === $this) {
+                $feedback->setFishbowl(null);
+            }
         }
 
         return $this;

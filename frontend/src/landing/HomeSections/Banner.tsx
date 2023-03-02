@@ -41,18 +41,19 @@ const Banner: React.FC = () => {
       <div id="animated-banner-morph"></div>
       <div>
         <p className="body-lg animate-item">{t('banner')}</p>
-        <RedirectLink
-          onClick={() => {
-            pushEventDataLayer({
-              category: 'Schedule Fishbowl',
-              action: 'Prefooter',
-              label: 'Prefooter'
-            });
-          }}
-          href={ROUTE_FISHBOWL_CREATE}
-          passHref
-        >
-          <Button size="large" as="a" className="animate-item cta-create-fishbowl">
+        <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+          <Button
+            onClick={() => {
+              pushEventDataLayer({
+                category: 'Schedule Fishbowl',
+                action: 'Prefooter',
+                label: 'Prefooter'
+              });
+            }}
+            size="large"
+            as="a"
+            className="animate-item cta-create-fishbowl"
+          >
             <span>{t('scheduleFishbowl')}</span>
           </Button>
         </RedirectLink>
