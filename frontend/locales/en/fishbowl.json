@@ -169,5 +169,24 @@
             "description": "The recording will be saved in your download folder.",
             "button": "Stop recording"
         }
+    },
+    "feedback" : {
+        "buttonText": "Feedback",
+        "satisfactionTitle": "Give us your feedback",
+        "satisfactionDescription": "How satisfied are you with this fishbowl?",
+        "notMuch": "Not much",
+        "okay": "Okay",
+        "great": "Awesome",
+        "commentImproveTitle": "What can we do to improve it?",
+        "commentPlaceholder": "Tell us what you think (optional)",
+        "commentWhatDidYouLike": "Great! Thanks. What did you like about it?",
+        "emailTitle": "Keep in touch?",
+        "emailDescription": "Share your email with us so that we can contact you about new fishbowls or to ask your opinion to continue improving.",
+        "emailPlaceholder": "Email (optional)",
+        "thanks": "Thank you!",
+        "thanksDescription": "Your feedback helps us to improve. ",
+        "spreadTheWord": "Spread the word!",
+        "send": "Send",
+        "skip": "Skip"
     }
 }

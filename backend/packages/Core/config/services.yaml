@@ -67,3 +67,4 @@ services:
     App\Core\Admin\GuestAdmin:
         tags:
             - { name: sonata.admin, model_class: App\Core\Entity\Guest, manager_type: orm, label: Guests }
+

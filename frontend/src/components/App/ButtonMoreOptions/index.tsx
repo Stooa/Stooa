@@ -12,6 +12,7 @@ import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import Dots from '@/ui/svg/dots-toolbar.svg';
+import Feedback from '@/ui/svg/feedback.svg';
 import Settings from '@/ui/svg/settings.svg';
 import Rec from '@/ui/svg/rec-red.svg';
 import StopRec from '@/ui/svg/stop-record.svg';
@@ -20,6 +21,8 @@ import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
 import CheckIcon from '@/ui/svg/checkmark.svg';
 import Cross from '@/ui/svg/cross.svg';
+import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
+
 import {
   Button,
   Container,
@@ -49,7 +52,8 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
-  const { setShowStopRecording, showStartRecording, setShowStartRecording } = useModals();
+  const { setShowStopRecording, showStartRecording, setShowStartRecording, setShowFeedbackForm } =
+    useModals();
   const { deviceType } = useNavigatorType();
 
   const {
@@ -63,7 +67,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording } = useStooa();
+  const { isModerator, isRecording, feedbackAlert, gaveFeedback } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -98,6 +102,10 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     }
   };
 
+  const handleShowFeedbackForm = () => {
+    setShowFeedbackForm(current => !current);
+  };
+
   // Used imperativeHandle to make the parents able to call the handleShowDevices
   // this way we keep the state inside the button config component
   useImperativeHandle(ref, () => ({
@@ -127,28 +135,52 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
             </div>
           )}
         </Button>
+        {feedbackAlert && deviceType === 'Mobile' && !gaveFeedback && (
+          <div className="alert" data-testid="permission-alert">
+            <PermissionsAlert />
+          </div>
+        )}
 
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
-            {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
-              <button
-                data-testid="recording-button"
-                className="recording-button"
-                onClick={() => handleShowRecordingModal()}
-              >
-                {isRecording ? (
-                  <>
-                    <StopRec />
-                    {t('recording.stop')}
-                  </>
-                ) : (
-                  <>
-                    <Rec />
-                    {t('recording.start')}
-                  </>
-                )}
-              </button>
-            )}
+            <div className="selector__sticky-wrapper">
+              {/* {deviceType === 'Mobile' && !prejoin && ( */}
+              {false && (
+                <button
+                  disabled={gaveFeedback}
+                  data-testid="feedback-button"
+                  className="sticky-button sticky-button--feedback"
+                  onClick={() => handleShowFeedbackForm()}
+                >
+                  {feedbackAlert && !gaveFeedback && (
+                    <div className="alert" data-testid="permission-alert">
+                      <PermissionsAlert />
+                    </div>
+                  )}
+                  <Feedback />
+                  {t('feedback.buttonText')}
+                </button>
+              )}
+              {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
+                <button
+                  data-testid="recording-button"
+                  className="sticky-button"
+                  onClick={() => handleShowRecordingModal()}
+                >
+                  {isRecording ? (
+                    <>
+                      <StopRec />
+                      {t('recording.stop')}
+                    </>
+                  ) : (
+                    <>
+                      <Rec />
+                      {t('recording.start')}
+                    </>
+                  )}
+                </button>
+              )}
+            </div>
 
             {devices.audioInputDevices.length > 0 && (
               <List>

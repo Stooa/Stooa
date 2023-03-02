@@ -34,4 +34,8 @@ export interface StooaContextValues {
   stopRecording: () => Promise<boolean>;
   isRecording: boolean;
   setIsRecording: Dispatch<SetStateAction<boolean>>;
+  feedbackAlert: boolean;
+  setFeedbackAlert: Dispatch<SetStateAction<boolean>>;
+  gaveFeedback: boolean;
+  setGaveFeedback: Dispatch<SetStateAction<boolean>>;
 }

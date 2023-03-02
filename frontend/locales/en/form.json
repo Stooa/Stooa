@@ -57,6 +57,7 @@
         "notEmpty": "This field cannot be empty",
         "wrongPassword": "Incorrect password",
         "unknownErrorServer": "Unknown problem. Please refresh the page and try again.",
-        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again."
+        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again.",
+        "maxLength": "The maximum length is {{length}} characters."
     }
 }
