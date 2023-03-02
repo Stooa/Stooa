@@ -144,7 +144,8 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             <div className="selector__sticky-wrapper">
-              {deviceType === 'Mobile' && !prejoin && (
+              {/* {deviceType === 'Mobile' && !prejoin && ( */}
+              {false && (
                 <button
                   disabled={gaveFeedback}
                   data-testid="feedback-button"

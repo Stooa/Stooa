@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c5871729317e2b82d1e54c0f2cbda84",
+    "content-hash": "ec53602c6b636b8b7f2ed79a523bfdcb",
     "packages": [
         {
             "name": "api-platform/core",
@@ -12586,16 +12586,16 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.3.9",
+            "version": "1.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "34ee324a2b8fcab680fbb3f3f3d6c86389df35ba"
+                "reference": "4cc5c6cc38e56bce7ea47c4091814e516d172dc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/34ee324a2b8fcab680fbb3f3f3d6c86389df35ba",
-                "reference": "34ee324a2b8fcab680fbb3f3f3d6c86389df35ba",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/4cc5c6cc38e56bce7ea47c4091814e516d172dc3",
+                "reference": "4cc5c6cc38e56bce7ea47c4091814e516d172dc3",
                 "shasum": ""
             },
             "require": {
@@ -12632,9 +12632,9 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.9"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.10"
             },
-            "time": "2023-02-28T13:04:23+00:00"
+            "time": "2023-03-02T10:25:13+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
@@ -15364,16 +15364,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "0506413be16dd8590f0c96fda05e0ed724daa191"
+                "reference": "9d31ae64bea443c784c0ccabeb7feb8fb809d167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/0506413be16dd8590f0c96fda05e0ed724daa191",
-                "reference": "0506413be16dd8590f0c96fda05e0ed724daa191",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/9d31ae64bea443c784c0ccabeb7feb8fb809d167",
+                "reference": "9d31ae64bea443c784c0ccabeb7feb8fb809d167",
                 "shasum": ""
             },
             "require": {
@@ -15438,7 +15438,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.28.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -15446,7 +15446,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-24T10:44:17+00:00"
+            "time": "2023-02-28T15:54:23+00:00"
         }
     ],
     "aliases": [],

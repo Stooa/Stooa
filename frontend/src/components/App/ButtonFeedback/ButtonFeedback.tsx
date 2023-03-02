@@ -39,7 +39,7 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
 
   return (
     <StyledFeedbackWrapper
-      className={`${drawerOpened ? 'drawer-opened' : ''} ${disabled ? 'disabled' : ''}`}
+      className={`${drawerOpened ? 'drawer-opened' : ''} ${disabled ? 'disabled' : ''} hidden`}
     >
       {showFeedbackForm && (
         <FeedbackForm

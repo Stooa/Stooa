@@ -67,7 +67,7 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </>
         )}
         {showCounter && <span className={`body-xs counter ${lengthState}`}>{counter}</span>}
-        {hasError && <ValidationError>{errorMessage}</ValidationError>}
+        {hasError && isDirty && <ValidationError>{errorMessage}</ValidationError>}
       </InputStyled>
     );
   }
