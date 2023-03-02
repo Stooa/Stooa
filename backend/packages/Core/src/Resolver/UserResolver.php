@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\Core\Resolver;
 
-use ApiPlatform\Core\GraphQl\Resolver\QueryItemResolverInterface;
+use ApiPlatform\Exception\ItemNotFoundException;
+use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
 use App\Core\Entity\User;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 class UserResolver implements QueryItemResolverInterface
@@ -27,12 +28,9 @@ class UserResolver implements QueryItemResolverInterface
     /**
      * @param mixed[] $context
      *
-     * @psalm-suppress ImplementedReturnTypeMismatch
-     *
-     * QueryItemResolverInterface forces you to not return null, but this is the only way
-     * to tell ApiPlatform that this Resolver can't return a value with this $context
+     * @return User
      */
-    public function __invoke($item, array $context): ?User
+    public function __invoke(?object $item, array $context): object
     {
         $user = $this->security->getUser();
 
@@ -42,6 +40,6 @@ class UserResolver implements QueryItemResolverInterface
             return $user;
         }
 
-        return null;
+        throw new ItemNotFoundException();
     }
 }

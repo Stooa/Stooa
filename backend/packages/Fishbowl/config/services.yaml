@@ -20,15 +20,16 @@ services:
         resource: ../src/Controller/
         tags: [controller.service_arguments]
 
-    App\Fishbowl\DataPersister\FishbowlDataPersister:
-        decorates: api_platform.doctrine.orm.data_persister
+    App\Fishbowl\State\FishbowlProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'
 
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\Fishbowl\DataProvider\FishbowlDataProvider:
+    App\Fishbowl\State\FishbowlStateProvider:
         bind:
-            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
+            $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:

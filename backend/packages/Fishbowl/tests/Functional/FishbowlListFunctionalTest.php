@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Functional;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
@@ -103,6 +103,46 @@ class FishbowlListFunctionalTest extends ApiTestCase
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
 
         $this->assertSame($fishbowl->getName(), $response->toArray()['hydra:member'][0]['name']);
+    }
+
+    /** @test */
+    public function itGetsPasswordInPrivateFishbowls(): void
+    {
+        $now = new \DateTime();
+
+        $fishbowl = FishbowlFactory::createOne([
+            'name' => 'fishbowl name',
+            'startDateTime' => new \DateTime('+ 30 minutes'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $this->host,
+            'isPrivate' => true,
+            'plainPassword' => 'password',
+        ])->object();
+
+        $hostToken = $this->logIn($this->host);
+
+        $response = static::createClient()->request('GET', '/fishbowls', [
+            'query' => [
+                'finishDateTime[after]' => $now->format(\DateTimeInterface::ISO8601),
+            ],
+            'auth_bearer' => $hostToken,
+        ]);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertJsonContains([
+            '@context' => '/contexts/Fishbowl',
+            '@id' => '/fishbowls',
+            '@type' => 'hydra:Collection',
+            'hydra:totalItems' => 1,
+        ]);
+
+        $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
+
+        $this->assertSame($fishbowl->getName(), $response->toArray()['hydra:member'][0]['name']);
+        $this->assertSame($fishbowl->getPlainPassword(), $response->toArray()['hydra:member'][0]['plainPassword']);
     }
 
     /** @test */

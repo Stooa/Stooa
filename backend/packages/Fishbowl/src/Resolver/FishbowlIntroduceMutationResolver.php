@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Resolver;
 
-use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -27,7 +27,7 @@ class FishbowlIntroduceMutationResolver implements MutationResolverInterface
     }
 
     /** @param mixed[] $context */
-    public function __invoke($item, array $context): ?Fishbowl
+    public function __invoke(?object $item, array $context): ?object
     {
         if (!isset($context['args']['input']['slug'])) {
             return null;

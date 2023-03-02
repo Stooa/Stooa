@@ -58,25 +58,19 @@ const Avatar: React.FC = () => {
       </button>
       {active && (
         <Dropdown>
-          <Link href={ROUTE_FISHBOWL_LIST} passHref>
-            <a className="item">
-              <List />
-              <span>
-                <Trans i18nKey="common:fishbowlList" components={{ i: <i /> }} />
-              </span>
-            </a>
+          <Link href={ROUTE_FISHBOWL_LIST} className="item">
+            <List />
+            <span>
+              <Trans i18nKey="common:fishbowlList" components={{ i: <i /> }} />
+            </span>
           </Link>
-          <Link href={ROUTE_EDIT_PROFILE} passHref>
-            <a className="item">
-              <Pencil />
-              <span>{t('editProfile')}</span>
-            </a>
+          <Link href={ROUTE_EDIT_PROFILE} className="item">
+            <Pencil />
+            <span>{t('editProfile')}</span>
           </Link>
-          <Link href={ROUTE_CHANGE_PASSWORD} passHref>
-            <a className="item">
-              <Lock />
-              <span>{t('changePassword')}</span>
-            </a>
+          <Link href={ROUTE_CHANGE_PASSWORD} className="item">
+            <Lock />
+            <span>{t('changePassword')}</span>
           </Link>
           <button className="item" onClick={logout}>
             <Logout />

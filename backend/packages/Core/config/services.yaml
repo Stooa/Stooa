@@ -27,8 +27,9 @@ services:
             - '@App\Core\OpenApi\OpenApiFactory.inner'
         autoconfigure: false
 
-    App\Core\DataPersister\UserDataPersister:
-        decorates: api_platform.doctrine.orm.data_persister
+    App\Core\State\UserProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'
 
     App\Core\Service\MailerService:
         bind:
@@ -46,10 +47,6 @@ services:
 
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
-
-    App\Fishbowl\DataProvider\FishbowlDataProvider:
-        bind:
-            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
 
     # Admin
     App\Core\Admin\UserAdmin:

@@ -10,10 +10,12 @@
 import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
+import { StyledIntroModal } from './styles';
+import Image from 'next/image';
+import { useWindowSize } from '@/hooks/useWIndowSize';
 
 interface Props {
   closeModal: () => void;
@@ -21,19 +23,68 @@ interface Props {
   disabled: boolean;
 }
 
-const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, disabled }) => {
+const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, disabled }) => {
   const { t } = useTranslation('fishbowl');
+  const { width } = useWindowSize();
 
   return (
-    <Modal>
+    <StyledIntroModal>
       <div className="content">
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
         <h2 className="title-sm">{t('introduceModal.title')}</h2>
-        <p className="description">
-          <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} />
-        </p>
+        {width && width < 768 ? (
+          <p className="description">
+            <Trans i18nKey="fishbowl:introduceModal.description" components={{ i: <i /> }} />
+          </p>
+        ) : (
+          <div className="description share">
+            <div>
+              <Image
+                src="/img/friends/reading-book.png"
+                width={146}
+                height={200}
+                alt="Stooa's friend reading a book"
+              />
+              <p>
+                <Trans
+                  i18nKey="fishbowl:introduceModal.shareScreenFirst"
+                  components={{ span: <span className="medium" /> }}
+                />
+              </p>
+            </div>
+
+            <div>
+              <Image
+                src="/img/friends/choosing.png"
+                width={186}
+                height={200}
+                alt="Stooa's friend choosing to share the screen"
+              />
+              <p>
+                <Trans
+                  i18nKey="fishbowl:introduceModal.shareScreenSecond"
+                  components={{ span: <span className="medium" /> }}
+                />
+              </p>
+            </div>
+            <div>
+              <Image
+                src="/img/friends/idea.png"
+                width={114}
+                height={200}
+                alt="Stooa's friend choosing to share the screen"
+              />
+              <p>
+                <Trans
+                  i18nKey="fishbowl:introduceModal.shareScreenThird"
+                  components={{ span: <span className="medium" /> }}
+                />
+              </p>
+            </div>
+          </div>
+        )}
         <div className="modal-footer">
           <Button size="medium" onClick={startIntroduction} disabled={disabled}>
             {t('introduceModal.button')}
@@ -43,8 +94,8 @@ const StartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction, dis
           </Button>
         </div>
       </div>
-    </Modal>
+    </StyledIntroModal>
   );
 };
 
-export default StartIntroduction;
+export default ModalStartIntroduction;

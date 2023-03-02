@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGenerator;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Extension\FishbowlListExtension;
@@ -21,7 +21,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class FishbowlListExtensionTest extends TestCase
 {

@@ -23,9 +23,10 @@ use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\FishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Translation\Translator;
 use Webmozart\Assert\Assert;
 
@@ -38,6 +39,7 @@ class FishbowlServiceTest extends TestCase
     private MockObject $participantRepository;
     private MockObject $security;
     private MockObject $translator;
+    private MockObject $logger;
 
     protected function setUp(): void
     {
@@ -47,8 +49,10 @@ class FishbowlServiceTest extends TestCase
         $this->requestStack = new RequestStack();
         $this->security = $this->createMock(Security::class);
         $this->translator = $this->createMock(Translator::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
 
         $this->service = new FishbowlService(
+            $this->logger,
             $this->fishbowlRepository,
             $this->requestStack,
             $this->security,
@@ -182,8 +186,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseFishbowlSlugDoesntExist(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $response = $this->service->ping('fishbowl-slug');
@@ -194,8 +197,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsFalseWhenFishbowlExistsButThereIsNoParticipantOrGuest(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -210,8 +212,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function itGetsTrueWhenParticipantExistsInRepository(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -282,8 +283,7 @@ class FishbowlServiceTest extends TestCase
     /** @test */
     public function createsNewGuestParticipantAndFishbowlWhenItDoesntExists(): void
     {
-        $request = new Request();
-        $request->request->set('guestId', '1');
+        $request = new Request([], [], [], [], [], [], $this->createGuestContent());
         $this->requestStack->push($request);
 
         $fishbowl = new Fishbowl();
@@ -386,5 +386,10 @@ class FishbowlServiceTest extends TestCase
         $response = $this->service->generateDefaultTitle($fishbowl);
 
         $this->assertSame($fishbowl->getName(), $response->getName());
+    }
+
+    private function createGuestContent(): string
+    {
+        return json_encode(['guestId' => '1'], \JSON_THROW_ON_ERROR);
     }
 }

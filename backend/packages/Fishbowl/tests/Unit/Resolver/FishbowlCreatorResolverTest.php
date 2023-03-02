@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit\Resolver;
 
+use ApiPlatform\Exception\ItemNotFoundException;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;
@@ -20,7 +21,7 @@ use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Zenstruck\Foundry\Test\Factories;
 
 class FishbowlCreatorResolverTest extends TestCase
@@ -51,13 +52,13 @@ class FishbowlCreatorResolverTest extends TestCase
     }
 
     /** @test */
-    public function itReturnsNullWhenSlugIsNull(): void
+    public function itThrowsExceptionWhenSlugIsNull(): void
     {
         $fishbowl = FishbowlFactory::createOne()->object();
 
-        $response = ($this->resolver)($fishbowl, []);
+        $this->expectException(ItemNotFoundException::class);
 
-        $this->assertNull($response);
+        ($this->resolver)($fishbowl, []);
     }
 
     /** @test */
@@ -79,9 +80,9 @@ class FishbowlCreatorResolverTest extends TestCase
 
         $this->fishbowlRepository->method('findBySlug')->willReturn(null);
 
-        $response = ($this->resolver)(null, $context);
+        $this->expectException(ItemNotFoundException::class);
 
-        $this->assertNull($response);
+        ($this->resolver)(null, $context);
     }
 
     /** @test */

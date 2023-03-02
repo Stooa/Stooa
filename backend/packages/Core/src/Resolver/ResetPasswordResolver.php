@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Resolver;
 
-use ApiPlatform\Core\GraphQl\Resolver\MutationResolverInterface;
+use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
 use App\Core\Model\ResetPassword;
 use App\Core\Repository\UserRepository;
 use App\Core\Service\MailerService;
@@ -31,7 +31,7 @@ class ResetPasswordResolver implements MutationResolverInterface
     }
 
     /** @param mixed[] $context */
-    public function __invoke($item, array $context): ResetPassword
+    public function __invoke(?object $item, array $context): ?object
     {
         $email = $context['args']['input']['email'];
         $locale = $context['args']['input']['locale'];

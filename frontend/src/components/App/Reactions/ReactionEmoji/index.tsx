@@ -7,10 +7,11 @@
  * file that was distributed with this source code.
  */
 
+import Tooltip from '@/components/Common/Tooltip';
 import useTranslation from 'next-translate/useTranslation';
 import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
-import { StyledEmojiReaction, StyledTooltip } from './styles';
+import { StyledEmojiReaction } from './styles';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   emoji: keyof typeof REACTION_EMOJIS;
@@ -80,9 +81,7 @@ const ReactionEmoji = ({ onClick, emoji, disabled, ...props }: Props) => {
       onMouseLeave={() => setShowTooltip(false)}
       onClick={() => (showTooltip ? setShowTooltip(false) : null)}
     >
-      <StyledTooltip className={`body-xs ${showTooltip ? 'show' : ''}`}>
-        {t(`reaction.${emoji}`)}
-      </StyledTooltip>
+      <Tooltip showTooltip={showTooltip}>{t(`reaction.${emoji}`)}</Tooltip>
 
       <StyledEmojiReaction
         data-testid={`emoji-reaction-${emoji}`}

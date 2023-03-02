@@ -24,13 +24,15 @@ export type DecodedToken = {
 };
 
 export class AuthToken {
+  readonly _token: string | undefined;
   readonly _decodedToken: DecodedToken;
   readonly _initialValues: DecodedToken = {
     context: { user: { email: '', name: '', twitter: '', linkedin: '' } },
     exp: 0
   };
 
-  constructor(readonly _token?: string) {
+  constructor(_token?: string) {
+    this._token = _token;
     this._decodedToken = this._initialValues;
     try {
       if (_token) this._decodedToken = jwtDecode(_token);

@@ -74,16 +74,14 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                     values.reason === REASON_NO_PARTICIPATING ? 'selected' : ''
                   }`}
                 >
-                  <div className="friend-image">
-                    <Image
-                      src="/img/friends/meditating.png"
-                      alt="Illustration of a friend meditating"
-                      height={146.38}
-                      width={151}
-                      quality={100}
-                      layout="intrinsic"
-                    />
-                  </div>
+                  <Image
+                    className="friend-image"
+                    src="/img/friends/meditating.png"
+                    alt="Illustration of a friend meditating"
+                    height={146.38}
+                    width={151}
+                    quality={100}
+                  />
                   <p>{t('kick.modal.options.noParticipating')}</p>
                 </div>
               </label>
@@ -94,16 +92,15 @@ const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
                     values.reason === REASON_CONDUCT_VIOLATION ? 'selected' : ''
                   }`}
                 >
-                  <div className="friend-image">
-                    <Image
-                      src="/img/friends/reading.png"
-                      alt="Illustration of a friend reading"
-                      height={146}
-                      width={140.06}
-                      quality={100}
-                      layout="intrinsic"
-                    />
-                  </div>
+                  <Image
+                    className="friend-image"
+                    src="/img/friends/reading.png"
+                    alt="Illustration of a friend reading"
+                    height={146}
+                    width={140.06}
+                    quality={100}
+                  />
+
                   <p>{t('kick.modal.options.conductViolation')}</p>
                 </div>
               </label>

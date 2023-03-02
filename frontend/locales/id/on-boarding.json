@@ -11,6 +11,10 @@
         "participantText": "<p>Ketika fishbowl dimulai, <strong>hos bisa mengenalkan dirinya sendiri.</strong> Setelah itu, seluruh partisipan akan mendapatkan izin untuk bergabung ke pembicaraan.</p>",
         "hostText": "<p>Ketika kamu memulai fishbowl, <strong>kamu bisa memulai dengan pengenalan.</strong> Kamera dan mikrofon akan nyala untuk kamu saja. Ketika kamu sudah selesai, <strong>jangan lupa memperbolehkan peserta untuk bergabung ke pembicaraan.</strong></p>"
     },
+    "shareScreen": {
+        "title": "Share your screen!",
+        "description": "<ul><li>During the introduction, you can <strong>share screen</strong>, if you need it.</li><li>This feature is <strong>only available for you</strong> as a Host and will no longer be active when you close the introduction.</li><li>You can only share screen with your computer, never with your phone.</li></ul>"
+    },
     "appControls": {
         "title": "Bagaimana saya berinteraksi?",
         "preTitle": "Kontrol Dalam Aplikasi",

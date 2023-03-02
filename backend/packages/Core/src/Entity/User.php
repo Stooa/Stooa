@@ -13,12 +13,21 @@ declare(strict_types=1);
 
 namespace App\Core\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Action\NotFoundAction;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\GraphQl\Mutation;
+use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Core\Model\ChangePasswordInput;
 use App\Core\Model\ChangePasswordLoggedInput;
 use App\Core\Repository\UserRepository;
 use App\Core\Resolver\UserResolver;
+use App\Core\State\ChangePasswordProcessor;
+use App\Core\State\ChangePasswordProcessorLogged;
+use App\Core\State\UserProcessor;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,171 +42,137 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ApiResource(
- *     normalizationContext={"groups"={"user:read"}},
- *     denormalizationContext={"groups"={"user:write"}},
- *     collectionOperations={
- *         "get"={
- *             "controller"=NotFoundAction::class,
- *             "read"=false,
- *             "output"=false,
- *         },
- *         "post"={
- *             "validation_groups"={"Default", "user:create"},
- *             "denormalization_context"={"groups"={"user:write", "user:create"}}
- *         }
- *     },
- *     itemOperations={
- *         "get"={
- *             "normalization_context"={"groups"={"user:read", "user:foreign"}}
- *         },
- *         "put"={
- *             "security"="object == user",
- *             "normalization_context"={"groups"={"user:read", "user:self"}}
- *         }
- *     },
- *     graphql={
- *         "item_query"={
- *             "normalization_context"={"groups"={"user:read", "user:foreign"}}
- *         },
- *         "self"={
- *             "item_query"=UserResolver::class,
- *             "security"="object == user",
- *             "normalization_context"={"groups"={"user:read", "user:self"}},
- *             "args"={}
- *         },
- *         "update"={
- *             "security"="object == user",
- *             "normalization_context"={"groups"={"user:read", "user:self"}}
- *         },
- *         "create"={
- *             "validation_groups"={"Default", "user:create"},
- *             "denormalization_context"={"groups"={"user:write", "user:create"}}
- *         },
- *         "changePassword"={
- *             "args"={
- *                 "token"={"type"="String!"},
- *                 "password"={"type"="String!"},
- *                 "passwordConfirmation"={"type"="String!"}
- *             },
- *             "input"=ChangePasswordInput::class
- *         },
- *         "changePasswordLogged"={
- *             "args"={
- *                 "password"={"type"="String!"},
- *                 "newPassword"={"type"="String!"},
- *                 "newPasswordConfirmation"={"type"="String!"}
- *             },
- *             "input"=ChangePasswordLoggedInput::class
- *         }
- *     }
- * )
- * @UniqueEntity(
- *     fields={"email"},
- *     message="user.email"
- * )
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
+#[ApiResource(
+    operations: [
+        new Get(normalizationContext: ['groups' => ['user:read', 'user:foreign']]),
+        new Put(normalizationContext: ['groups' => ['user:read', 'user:self']], security: 'object == user'),
+        new GetCollection(controller: NotFoundAction::class, output: false, read: false),
+        new Post(
+            denormalizationContext: ['groups' => ['user:write', 'user:create']],
+            validationContext: ['groups' => ['Default', 'user:create']]
+        ),
+    ],
+    normalizationContext: ['groups' => ['user:read']],
+    denormalizationContext: ['groups' => ['user:write']],
+    graphQlOperations: [
+        new Query(
+            normalizationContext: ['groups' => ['user:read', 'user:foreign']],
+            name: 'item_query'
+        ),
+        new Query(
+            resolver: UserResolver::class,
+            args: [],
+            normalizationContext: ['groups' => ['user:read', 'user:self']],
+            security: 'object == user',
+            name: 'self'
+        ),
+        new Mutation(
+            normalizationContext: ['groups' => ['user:read', 'user:self']],
+            security: 'object == user',
+            name: 'update'
+        ),
+        new Mutation(
+            denormalizationContext: ['groups' => ['user:write', 'user:create']],
+            validationContext: ['groups' => ['Default', 'user:create']],
+            name: 'create'
+        ),
+        new Mutation(
+            args: [
+                'token' => ['type' => 'String!'],
+                'password' => ['type' => 'String!'],
+                'passwordConfirmation' => ['type' => 'String!'],
+            ],
+            input: ChangePasswordInput::class,
+            name: 'changePassword',
+            processor: ChangePasswordProcessor::class
+        ),
+        new Mutation(
+            args: [
+                'password' => ['type' => 'String!'],
+                'newPassword' => ['type' => 'String!'],
+                'newPasswordConfirmation' => ['type' => 'String!'],
+            ],
+            input: ChangePasswordLoggedInput::class,
+            name: 'changePasswordLogged',
+            processor: ChangePasswordProcessorLogged::class
+        ),
+    ],
+    processor: UserProcessor::class
+)]
+#[UniqueEntity(fields: ['email'], message: 'user.email')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="uuid", unique=true)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    /**
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    /**
-     * @Groups({"user:read", "user:write"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['user:read', 'user:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string')]
     private ?string $surnames = null;
 
-    /**
-     * @Groups({"user:self", "user:create", "user:read"})
-     * @Assert\NotBlank
-     * @Assert\Length(max=255)
-     * @Assert\Email
-     * @ORM\Column(type="string", unique=true)
-     */
+    #[Groups(['user:self', 'user:create', 'user:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[Assert\Email]
+    #[ORM\Column(type: 'string', unique: true)]
     private ?string $email = null;
 
-    /**
-     * @var string[]
-     *
-     * @ORM\Column(type="json")
-     */
+    /** @var string[] */
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    /** @ORM\Column(type="string") */
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
-    /**
-     * @Groups({"user:create"})
-     * @Assert\IsTrue
-     * @ORM\Column(type="boolean")
-     */
+    #[Groups(['user:create'])]
+    #[Assert\IsTrue]
+    #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
 
-    /**
-     * @Groups({"user:self", "user:write"})
-     * @ORM\Column(type="boolean")
-     */
+    #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
 
-    /** @ORM\Column(type="boolean") */
+    #[ORM\Column(type: 'boolean')]
     private bool $active = false;
 
-    /**
-     * @Groups({"user:self", "user:write"})
-     * @Assert\Url
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[Assert\Url]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $linkedinProfile = null;
 
-    /**
-     * @Groups({"user:self", "user:write"})
-     * @Assert\Url
-     * @Assert\Length(max=255)
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[Assert\Url]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $twitterProfile = null;
 
-    /**
-     * @Groups({"user:self", "user:create", "user:read"})
-     * @Assert\NotNull
-     * @Assert\Length(max=255)
-     * @Assert\Locale(canonicalize=true)
-     * @ORM\Column(type="string")
-     */
+    #[Groups(['user:self', 'user:create', 'user:read'])]
+    #[Assert\NotNull]
+    #[Assert\Length(max: 255)]
+    #[Assert\Locale(canonicalize: true)]
+    #[ORM\Column(type: 'string')]
     private ?string $locale = null;
 
-    /**
-     * @var Collection<int, Fishbowl>
-     *
-     * @ORM\OneToMany(targetEntity="App\Fishbowl\Entity\Fishbowl", mappedBy="host")
-     */
+    /** @var Collection<int, Fishbowl> */
+    #[ORM\OneToMany(mappedBy: 'host', targetEntity: Fishbowl::class)]
     private Collection $fishbowls;
 
-    /**
-     * @Groups({"user:write"})
-     * @Assert\NotBlank(groups={"user:create"})
-     */
+    #[Groups(['user:write'])]
+    #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
     public function __construct()
@@ -344,7 +319,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         return $this;
     }
 
-    /** @Groups({"user:foreign"}) */
+    #[Groups(['user:foreign'])]
     public function getPublicLinkedinProfile(): ?string
     {
         if ($this->getAllowShareData()) {
@@ -366,7 +341,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         return $this;
     }
 
-    /** @Groups({"user:foreign"}) */
+    #[Groups(['user:foreign'])]
     public function getPublicTwitterProfile(): ?string
     {
         if ($this->getAllowShareData()) {
@@ -420,7 +395,6 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     {
         if ($this->fishbowls->contains($fishbowl)) {
             $this->fishbowls->removeElement($fishbowl);
-
             if ($fishbowl->getHost() === $this) {
                 $fishbowl->setHost(null);
             }

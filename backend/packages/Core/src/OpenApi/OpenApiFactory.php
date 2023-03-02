@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Core\OpenApi;
 
-use ApiPlatform\Core\OpenApi\Factory\OpenApiFactoryInterface;
-use ApiPlatform\Core\OpenApi\Model\Info;
-use ApiPlatform\Core\OpenApi\Model\MediaType;
-use ApiPlatform\Core\OpenApi\Model\Operation;
-use ApiPlatform\Core\OpenApi\Model\PathItem;
-use ApiPlatform\Core\OpenApi\Model\RequestBody;
-use ApiPlatform\Core\OpenApi\Model\Response;
-use ApiPlatform\Core\OpenApi\OpenApi;
+use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
+use ApiPlatform\OpenApi\Model\Info;
+use ApiPlatform\OpenApi\Model\MediaType;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\PathItem;
+use ApiPlatform\OpenApi\Model\RequestBody;
+use ApiPlatform\OpenApi\Model\Response;
+use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 final class OpenApiFactory implements OpenApiFactoryInterface

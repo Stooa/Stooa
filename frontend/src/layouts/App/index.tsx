@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
@@ -45,38 +45,38 @@ const Layout: React.FC<Props> = ({
 }) => {
   const router = useRouter();
   const { fid } = router.query;
-  const {
-    loading,
-    error,
-    data: fbCreatorData
-  } = useQuery(IS_FISHBOWL_CREATOR, { variables: { slug: fid } });
-  const [loadedJitsi, setLoadedJitsi] = useState(false);
+  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+    variables: { slug: fid }
+  });
+  const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
 
   const importJitsi = async () => {
+    if (loadedJitsi) return;
+
     let importedJitsiMeetJs;
+
     try {
       // @ts-expect-error: lib-jitsi-meet not found
       importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
     } catch (error) {
-      setLoadedJitsi(false);
+      return;
     }
 
-    if (!window.JitsiMeetJS) {
-      window.JitsiMeetJS = importedJitsiMeetJs;
-      setLoadedJitsi(true);
-    }
+    window.JitsiMeetJS = importedJitsiMeetJs;
+
+    setLoadedJitsi(true);
   };
 
-  importJitsi();
+  useEffect(() => {
+    importJitsi();
+  }, []);
 
   if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
     return <Error message={'Could not create fishbowl event'} />;
 
   if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
-
-  const isModerator = !!fbCreatorData.isCreatorOfFishbowl;
+  const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (
     <StooaProvider data={data} isModerator={isModerator}>
