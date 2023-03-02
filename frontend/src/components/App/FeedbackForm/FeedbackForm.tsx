@@ -86,7 +86,12 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
 
     return (
       <AnimatePresence mode="wait">
-        <StyledFormWrapper key="wrapper" className={variant} ref={ref} data-testid="feedback-form">
+        <StyledFormWrapper
+          key="wrapper"
+          className={`${variant} hidden`}
+          ref={ref}
+          data-testid="feedback-form"
+        >
           {active === 'satisfaction' && (
             <StepSatisfaction onSelectSatisfaction={handleSatisfactionFeedback} />
           )}

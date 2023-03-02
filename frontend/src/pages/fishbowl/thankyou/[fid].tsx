@@ -53,7 +53,7 @@ const ThankYou = () => {
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
   if (loading || creatorLoading) return <Loader />;
-  if (error || creatorError) return <Error message={error?.message} />;
+  if (error || creatorError) return <Error message={error?.message || creatorError?.message} />;
 
   const { bySlugQueryFishbowl: fb } = data;
 

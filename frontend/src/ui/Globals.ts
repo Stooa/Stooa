@@ -220,7 +220,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   .hide-mobile {
