@@ -157,5 +157,6 @@ export {
   getTimePlusOneMinute,
   getIsoDateTimeWithActualTimeZone,
   convertIntoClassName,
+  getTimeZoneName,
   supportsCaptureHandle
 };

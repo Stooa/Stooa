@@ -29,7 +29,16 @@ final class FishbowlController extends AbstractController
 
     public function ping(string $slug): Response
     {
-        return new JsonResponse(['response' => $this->fishbowlService->ping($slug)]);
+        $participant = $this->fishbowlService->ping($slug);
+
+        if (!$participant) {
+            return new JsonResponse(['response' => null]);
+        }
+
+        return new JsonResponse(['response' => [
+            'participantId' => '/participants/' . $participant->getId(),
+            'participantSlug' => $participant->getFishbowl()?->getSlug(),
+        ]]);
     }
 
     public function status(string $slug): Response

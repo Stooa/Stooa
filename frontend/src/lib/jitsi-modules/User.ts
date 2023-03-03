@@ -42,13 +42,31 @@ const userRepository = (): UserRepository => {
   const getUserVideoInput = () => getUser()?.videoInput || null;
   const getUserAudioMuted = () => getUser()?.audioMuted || false;
   const getUserVideoMuted = () => getUser()?.videoMuted || false;
-
+  const getUserParticipantId = () => getUser()?.participantId || '';
+  const getUserParticipantSlug = () => getUser()?.participantSlug || '';
+  const getUserFeedback = () =>
+    getUser()?.feedback || {
+      feedbackId: '',
+      feedbackFishbowlSlug: '',
+      fromThankYou: false
+    };
+  const setUserFeedback = ({
+    feedbackId,
+    feedbackFishbowlSlug,
+    fromThankYou
+  }: {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
+  }): void => setUser({ feedback: { feedbackId, feedbackFishbowlSlug, fromThankYou } });
+  const setUserParticipantSlug = (participantSlug: string): void => setUser({ participantSlug });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
   const setUserAudioMuted = (audioMuted: boolean): void => setUser({ audioMuted });
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
   const setUserNickname = (nickname: string): void => setUser({ nickname });
+  const setUserParticipantId = (participantId: string): void => setUser({ participantId });
 
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
@@ -73,6 +91,11 @@ const userRepository = (): UserRepository => {
     dispatchEvent(USER_KICKED, { participant: participant, reason: reason });
   };
 
+  const hasUserGaveFeedback = (fishbowlSlug: string): boolean => {
+    const { feedbackFishbowlSlug } = getUserFeedback();
+    return feedbackFishbowlSlug === fishbowlSlug;
+  };
+
   return {
     clearUser,
     getUser,
@@ -92,7 +115,14 @@ const userRepository = (): UserRepository => {
     setUserAudioOutput,
     setUserVideoInput,
     setUserVideoMuted,
-    setUserNickname
+    setUserNickname,
+    setUserParticipantId,
+    getUserParticipantId,
+    setUserFeedback,
+    getUserFeedback,
+    setUserParticipantSlug,
+    getUserParticipantSlug,
+    hasUserGaveFeedback
   };
 };
 

@@ -6,6 +6,7 @@
 # file that was distributed with this source code.
 
 framework:
+    http_method_override: false
     secret: '%env(APP_SECRET)%'
     session:
         handler_id: null

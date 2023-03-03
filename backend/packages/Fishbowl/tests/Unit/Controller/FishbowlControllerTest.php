@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit\Controller;
 
+use App\Core\Entity\Participant;
 use App\Fishbowl\Controller\FishbowlController;
 use App\Fishbowl\Service\FishbowlService;
 use App\Fishbowl\Service\PrivateFishbowlService;
@@ -84,9 +85,14 @@ class FishbowlControllerTest extends TestCase
     /** @test */
     public function itCallsPing(): void
     {
-        $jsonResponse = new JsonResponse(['response' => true]);
+        $participant = new Participant();
 
-        $this->fishbowlService->method('ping')->willReturn(true);
+        $jsonResponse = new JsonResponse(['response' => [
+            'participantId' => '/participants/' . $participant->getId(),
+            'participantSlug' => $participant->getFishbowl()?->getSlug(),
+        ]]);
+
+        $this->fishbowlService->method('ping')->willReturn($participant);
 
         $response = $this->controller->ping('fishbowl-slug');
 

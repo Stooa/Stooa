@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -42,6 +42,8 @@ import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
+import FeedbackForm from '../FeedbackForm';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -56,7 +58,9 @@ const Fishbowl: FC = () => {
     setParticipantToKick,
     stopRecording,
     startRecording,
-    setIsRecording
+    setIsRecording,
+    gaveFeedback,
+    setGaveFeedback
   } = useStooa();
 
   const {
@@ -68,10 +72,19 @@ const Fishbowl: FC = () => {
     showStartRecording,
     showStopRecording,
     setShowStartRecording,
-    setShowStopRecording
+    setShowStopRecording,
+    showFeedbackForm,
+    setShowFeedbackForm
   } = useModals();
 
   const { width } = useWindowSize();
+  const feedbackFormRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(feedbackFormRef, () => {
+    if (!gaveFeedback) {
+      setShowFeedbackForm(false);
+    }
+  });
 
   const [participantsActive, setParticipantsActive] = useState(
     () => (isModerator && data.isFishbowlNow) || false
@@ -144,6 +157,10 @@ const Fishbowl: FC = () => {
     setShowStartRecording(false);
   };
 
+  const handleFinishFeedback = () => {
+    setShowFeedbackForm(false);
+  };
+
   useEffect(() => {
     pushEventDataLayer({
       action: fid as string,
@@ -205,6 +222,15 @@ const Fishbowl: FC = () => {
           <ModalStopRecording
             closeModal={() => setShowStopRecording(false)}
             stopRecording={() => handleStopRecording()}
+          />
+        )}
+        {showFeedbackForm && (
+          <FeedbackForm
+            ref={feedbackFormRef}
+            handleGaveSatisfaction={() => setGaveFeedback(true)}
+            handleFinish={handleFinishFeedback}
+            fishbowl={data}
+            variant="fishbowl-mobile"
           />
         )}
 

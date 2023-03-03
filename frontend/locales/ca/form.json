@@ -56,6 +56,7 @@
         "notEmpty": "Aquest camp no pot estar buit",
         "wrongPassword": "contrasenya incorrecta",
         "unknownErrorServer": "Problema desconegut. Actualitza la pàgina i prova de nou",
-        "unknownErrorInside": "Ho sentim! Va ocórrer un error durant l'accés. Intenta-ho de nou"
+        "unknownErrorInside": "Ho sentim! Va ocórrer un error durant l'accés. Intenta-ho de nou",
+        "maxLength": "Aquest camp no pot tenir més de {{length}} caràcters."
     }
 }

@@ -48,11 +48,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-/**
- * @FutureFishbowl (groups={"fishbowl:create", "fishbowl:update"})
- *
- * @PrivateFishbowl (groups={"fishbowl:create", "fishbowl:update"})
- */
 #[ApiResource(
     operations: [
         new Get(),
@@ -64,6 +59,7 @@ use Webmozart\Assert\Assert as MAssert;
     denormalizationContext: ['groups' => ['fishbowl:write']],
     paginationEnabled: false,
     graphQlOperations: [
+        new Query(),
         new Query(
             resolver: FishbowlResolver::class,
             args: ['slug' => ['type' => 'String!']],
@@ -114,6 +110,8 @@ use Webmozart\Assert\Assert as MAssert;
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
 #[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => 'exclude_null'])]
+#[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
+#[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 class Fishbowl implements \Stringable
 {
     use TimestampableEntity;
@@ -170,8 +168,8 @@ class Fishbowl implements \Stringable
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
-
     private ?string $timezone = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
@@ -237,9 +235,14 @@ class Fishbowl implements \Stringable
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
+    /** @var Collection<int, Feedback> */
+    #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
+    private Collection $feedbacks;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->feedbacks = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -521,6 +524,34 @@ class Fishbowl implements \Stringable
     {
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<int, Feedback> */
+    public function getFeedbacks(): Collection
+    {
+        return $this->feedbacks;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedbacks->contains($feedback)) {
+            $this->feedbacks[] = $feedback;
+            $feedback->setFishbowl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedbacks->contains($feedback)) {
+            $this->feedbacks->removeElement($feedback);
+            if ($feedback->getFishbowl() === $this) {
+                $feedback->setFishbowl(null);
+            }
         }
 
         return $this;
