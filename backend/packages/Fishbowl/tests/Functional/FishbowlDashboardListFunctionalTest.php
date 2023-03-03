@@ -50,9 +50,8 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
     {
         $hostToken = $this->logIn($this->host);
 
-        $this->create50PastFishbowls();
-
-        $this->create50FinishedFishbowls();
+        $this->createMultipleFishbowls(25, Fishbowl::STATUS_RUNNING, '- 1 day');
+        $this->createMultipleFishbowls(25, Fishbowl::STATUS_FINISHED, '+ 30 minutes');
 
         $threeHoursAgo = (new \DateTimeImmutable())->modify('-3 hour');
 
@@ -64,13 +63,22 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
             'auth_bearer' => $hostToken,
         ]);
 
+        $responseArray = $response->toArray();
+
         $this->assertResponseIsSuccessful();
 
         $this->assertJsonContains([
             '@context' => '/contexts/Fishbowl',
+            '@type' => 'hydra:Collection',
             '@id' => '/fishbowls',
-            'hydra:totalItems' => 100,
+            'hydra:totalItems' => 50,
         ]);
+
+        $this->assertNotEmpty($responseArray['hydra:view']['@id']);
+        $this->assertNotEmpty($responseArray['hydra:view']['@type']);
+        $this->assertNotEmpty($responseArray['hydra:view']['hydra:first']);
+        $this->assertNotEmpty($responseArray['hydra:view']['hydra:last']);
+        $this->assertNotEmpty($responseArray['hydra:view']['hydra:next']);
 
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
     }
@@ -80,7 +88,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
     {
         $hostToken = $this->logIn($this->host);
 
-        $this->createFishbowlWithFeedbacks();
+        $this->createPrivateFishbowlWithFeedbacks();
 
         $threeHoursAgo = (new \DateTimeImmutable())->modify('-3 hour');
 
@@ -103,6 +111,9 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         ]);
 
         $this->assertSame('fishbowl name', $responseArray['hydra:member'][0]['name']);
+        $this->assertTrue($responseArray['hydra:member'][0]['isPrivate']);
+        $this->assertSame('plainPassword', $responseArray['hydra:member'][0]['plainPassword']);
+
         $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['@id']);
         $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['@type']);
         $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['satisfaction']);
@@ -121,7 +132,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         return $jwtManager->create($user);
     }
 
-    private function createFishbowlWithFeedbacks(): void
+    private function createPrivateFishbowlWithFeedbacks(): void
     {
         $user = UserFactory::createOne([
             'email' => 'user@stooa.com',
@@ -133,6 +144,8 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
             'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'isPrivate' => true,
+            'plainPassword' => 'plainPassword',
             'host' => $this->host,
         ])->object();
 
@@ -144,28 +157,15 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         ]);
     }
 
-    private function create50PastFishbowls(): void
+    private function createMultipleFishbowls(int $number, string $status, string $date): void
     {
-        FishbowlFactory::createMany(50, [
+        FishbowlFactory::createMany($number, [
             'name' => faker()->words(3, true),
             'description' => faker()->sentence(),
-            'startDateTime' => new \DateTime('- 2 day'),
+            'startDateTime' => new \DateTime($date),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
-            'currentStatus' => Fishbowl::STATUS_RUNNING,
-            'host' => $this->host,
-        ]);
-    }
-
-    private function create50FinishedFishbowls(): void
-    {
-        FishbowlFactory::createMany(50, [
-            'name' => faker()->words(3, true),
-            'description' => faker()->sentence(),
-            'startDateTime' => new \DateTime('+ 30 minutes'),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
-            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'currentStatus' => $status,
             'host' => $this->host,
         ]);
     }

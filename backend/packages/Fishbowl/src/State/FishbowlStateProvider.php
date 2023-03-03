@@ -36,7 +36,7 @@ class FishbowlStateProvider implements ProviderInterface
      *
      * @return array<Fishbowl>
      */
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): object
     {
         /** @var array<Fishbowl> $fishbowls */
         $fishbowls = $this->collectionProvider->provide($operation, $uriVariables, $context);

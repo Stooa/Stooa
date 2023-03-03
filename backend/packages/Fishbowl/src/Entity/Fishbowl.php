@@ -59,7 +59,6 @@ use Webmozart\Assert\Assert as MAssert;
     ],
     normalizationContext: ['groups' => ['fishbowl:read']],
     denormalizationContext: ['groups' => ['fishbowl:write']],
-    paginationEnabled: false,
     paginationItemsPerPage: 25,
     graphQlOperations: [
         new Query(),
