@@ -12,10 +12,6 @@
 if [ "${RESET_DATABASE:-}" = true ]; then
     echo 'Resetting database...'
 
-    # Install development dependencies to be able to use doctrine/doctrine-fixtures-bundle
-    # console commands to load fixtures after database creation
-    composer install --prefer-dist --no-progress --no-interaction --classmap-authoritative
-
     console doctrine:database:drop --no-interaction --force
     console doctrine:database:create --no-interaction
     console doctrine:schema:update --no-interaction --force
@@ -24,10 +20,6 @@ if [ "${RESET_DATABASE:-}" = true ]; then
     # Our current infrastructure does not allow to run sidecar containers to perform
     # this operation on a separate container, so we have to run it before launching php-fpm
     # exit 0
-
-    # Regenerate cache to avoid problems with dev or missing dependencies
-    rm -rf var/cache/*
-    console cache:warmup
 fi
 
 # Can be used on production environments to apply migrations to the database each time
