@@ -19,14 +19,11 @@ if [ "${RESET_DATABASE:-}" = true ]; then
     console doctrine:database:drop --no-interaction --force
     console doctrine:database:create --no-interaction
     console doctrine:schema:update --no-interaction --force
-    APP_ENV=dev console doctrine:fixtures:load --no-interaction --append
+    APP_ENV=staging console doctrine:fixtures:load --no-interaction --append
 
     # Our current infrastructure does not allow to run sidecar containers to perform
     # this operation on a separate container, so we have to run it before launching php-fpm
     # exit 0
-
-    # Install production dependencies (due to our limitations in infrastructure)
-    composer install --prefer-dist --no-progress --no-interaction --no-dev --classmap-authoritative
 
     # Regenerate cache to avoid problems with dev or missing dependencies
     rm -rf var/cache/*
