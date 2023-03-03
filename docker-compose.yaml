@@ -16,6 +16,7 @@ services:
             XDEBUG_MODE: "${XDEBUG_MODE:-off}"
             APP_ENV: "${APP_ENV:-dev}"
             APP_DEBUG: "${APP_DEBUG:-1}"
+            RESET_DATABASE: "${RESET_DATABASE:-false}"
         depends_on:
             - mysql
         volumes:
