@@ -68,11 +68,8 @@ const FormikForm = styled(Form)`
       }
     }
 
-    > *:not(:last-child) {
+    & > *:not(:last-child) {
       margin-bottom: ${space(2)};
-    }
-    > .textarea {
-      margin-bottom: ${space(4)};
     }
 
     &.submit-wrapper {
@@ -178,7 +175,21 @@ const InputStyled = styled.div`
   }
 
   &.textarea {
-    height: ${space(14)};
+    &.taller {
+      height: ${space(14)};
+    }
+
+    & .counter {
+      ${BODY_XS};
+      padding-left: ${space(2)};
+      &.warning {
+        color: #e3ae00;
+      }
+
+      &.error {
+        color: ${COLOR_RED_500};
+      }
+    }
   }
 
   input,

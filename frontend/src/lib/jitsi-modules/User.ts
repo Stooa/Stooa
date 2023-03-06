@@ -47,15 +47,19 @@ const userRepository = (): UserRepository => {
   const getUserFeedback = () =>
     getUser()?.feedback || {
       feedbackId: '',
-      feedbackFishbowlSlug: ''
+      feedbackFishbowlSlug: '',
+      fromThankYou: false
     };
   const setUserFeedback = ({
     feedbackId,
-    feedbackFishbowlSlug
+    feedbackFishbowlSlug,
+    fromThankYou
   }: {
     feedbackId: string;
     feedbackFishbowlSlug: string;
-  }): void => setUser({ feedback: { feedbackId, feedbackFishbowlSlug } });
+    fromThankYou: boolean;
+  }): void => setUser({ feedback: { feedbackId, feedbackFishbowlSlug, fromThankYou } });
+  const setUserParticipantSlug = (participantSlug: string): void => setUser({ participantSlug });
   const setUserAudioInput = (audioInput: MediaDeviceInfo): void => setUser({ audioInput });
   const setUserAudioOutput = (audioOutput: MediaDeviceInfo): void => setUser({ audioOutput });
   const setUserVideoInput = (videoInput: MediaDeviceInfo): void => setUser({ videoInput });
@@ -63,7 +67,6 @@ const userRepository = (): UserRepository => {
   const setUserVideoMuted = (videoMuted: boolean): void => setUser({ videoMuted });
   const setUserNickname = (nickname: string): void => setUser({ nickname });
   const setUserParticipantId = (participantId: string): void => setUser({ participantId });
-  const setUserParticipantSlug = (participantSlug: string): void => setUser({ participantSlug });
 
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);

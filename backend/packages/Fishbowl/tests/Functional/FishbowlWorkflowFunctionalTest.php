@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Functional;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;

@@ -48,6 +48,16 @@ const StyledButtonFeedback = styled.button<{ active: boolean }>`
   &:hover {
     background-color: ${COLOR_NEUTRO_300};
   }
+
+  &:disabled {
+    opacity: 0.25;
+    background-color: transparent;
+    cursor: default;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
 `;
 
 const StyledFeedbackWrapper = styled.div`
@@ -56,8 +66,8 @@ const StyledFeedbackWrapper = styled.div`
   ${media.min('tablet')`
     display: block;
     position: absolute;
-    bottom: ${space(0)};
-    right: ${space(2)};
+    bottom: ${space(3)};
+    right: ${space(3)};
     z-index: 40;
 
 

@@ -21,7 +21,7 @@ const useFeedback = (fishbowlData: Fishbowl) => {
 
   const createFeedback = (
     satisfaction: 'sad' | 'neutral' | 'happy',
-    origin: 'fishbowl' | 'thankyou'
+    origin: 'fishbowl' | 'thank-you'
   ) => {
     const participant = userRepository.getUserParticipantId();
     const fishbowl = fishbowlData.id;
@@ -48,7 +48,8 @@ const useFeedback = (fishbowlData: Fishbowl) => {
         if (feedback.id) {
           userRepository.setUserFeedback({
             feedbackId: feedback.id,
-            feedbackFishbowlSlug: fishbowlData.slug
+            feedbackFishbowlSlug: fishbowlData.slug,
+            fromThankYou: origin === 'thank-you'
           });
         }
 

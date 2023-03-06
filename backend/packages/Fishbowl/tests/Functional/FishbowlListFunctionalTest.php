@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Functional;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
@@ -31,7 +31,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
+        self::bootKernel();
 
         $this->host = UserFactory::createOne([
             'email' => 'host@stooa.com',
@@ -93,8 +93,8 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
-                'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
-                'finishDateTime[after]' => $now->format(\DateTimeInterface::ATOM),
+                'startDateTime[after]' => $fiveHoursAgo->format('Y-m-d H:i:s'),
+                'finishDateTime[after]' => $now->format('Y-m-d H:i:s'),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -138,8 +138,8 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
-                'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
-                'finishDateTime[after]' => $now->format(\DateTimeInterface::ATOM),
+                'startDateTime[after]' => $fiveHoursAgo->format('Y-m-d H:i:s'),
+                'finishDateTime[after]' => $now->format('Y-m-d H:i:s'),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -164,7 +164,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
     {
         $now = new \DateTime();
 
-        $fishbowl = FishbowlFactory::createOne([
+        FishbowlFactory::createOne([
             'name' => 'fishbowl name',
             'startDateTime' => new \DateTime('yesterday'),
             'timezone' => 'Europe/Madrid',
@@ -177,13 +177,13 @@ class FishbowlListFunctionalTest extends ApiTestCase
 
         $fiveHoursAgo = (new \DateTimeImmutable())->modify('-5 hour');
 
-        $response = static::createClient()->request('GET', '/fishbowls', [
+        static::createClient()->request('GET', '/fishbowls', [
             'query' => [
                 'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
-                'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
-                'finishDateTime[before]' => $now->format(\DateTimeInterface::ATOM),
+                'startDateTime[after]' => $fiveHoursAgo->format('Y-m-d H:i:s'),
+                'finishDateTime[before]' => $now->format('Y-m-d H:i:s'),
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -243,7 +243,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[0]' => Fishbowl::STATUS_INTRODUCTION,
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
-                'startDateTime[after]' => $fiveHoursAgo->format(\DateTimeInterface::ATOM),
+                'startDateTime[after]' => $fiveHoursAgo->format('Y-m-d H:i:s'),
             ],
             'auth_bearer' => $hostToken,
         ]);

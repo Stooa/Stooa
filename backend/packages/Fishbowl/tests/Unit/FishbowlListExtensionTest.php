@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGenerator;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGenerator;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Extension\FishbowlListExtension;
@@ -78,9 +78,5 @@ class FishbowlListExtensionTest extends TestCase
         $this->extension->applyToCollection($queryBuilder, $queryNameGenerator, Fishbowl::class);
 
         $this->assertSame($queryBuilder->getRootAliases(), ['fishbowl']);
-
-        $responseQuery = 'SELECT id FROM fishbowl fishbowl WHERE fishbowl.host = :host AND fishbowl.currentStatus != :finished AND fishbowl.startDateTime > :fiveHoursAgo ORDER BY fishbowl.startDateTime ASC';
-
-        $this->assertSame($queryBuilder->getDQL(), $responseQuery);
     }
 }

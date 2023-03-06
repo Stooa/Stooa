@@ -26,7 +26,7 @@ const StepEnd = ({
 }) => {
   const { t } = useTranslation('fishbowl');
   return (
-    <StyledStepWrapper className="nopadding">
+    <StyledStepWrapper data-testid="feedback-end-step" className="nopadding">
       {variant !== 'thankyou' && (
         <button className="close" onClick={handleFinish}>
           <Cross />
@@ -39,7 +39,7 @@ const StepEnd = ({
           src="/img/friends/thankyou-friend.png"
           alt="Thank you!"
           width={150}
-          height={180}
+          height={160}
         />
       )}
       <StyledThanksTextWrapper>

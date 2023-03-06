@@ -15,6 +15,7 @@ export interface User {
   feedback?: {
     feedbackId: string;
     feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
   };
   nickname?: string;
   name?: string;
@@ -54,13 +55,16 @@ export interface UserRepository {
   getUserFeedback: () => {
     feedbackId: string;
     feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
   };
   setUserFeedback: ({
     feedbackId,
-    feedbackFishbowlSlug
+    feedbackFishbowlSlug,
+    fromThankYou
   }: {
     feedbackId: string;
     feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
   }) => void;
   hasUserGaveFeedback: (fishbowlSLug: string) => boolean;
 }

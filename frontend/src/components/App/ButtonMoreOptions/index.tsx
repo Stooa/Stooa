@@ -11,8 +11,6 @@ import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
-import userRepository from '@/jitsi/User';
-
 import Dots from '@/ui/svg/dots-toolbar.svg';
 import Feedback from '@/ui/svg/feedback.svg';
 import Settings from '@/ui/svg/settings.svg';
@@ -69,7 +67,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording, feedbackAlert, data } = useStooa();
+  const { isModerator, isRecording, feedbackAlert, gaveFeedback } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -137,7 +135,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
             </div>
           )}
         </Button>
-        {feedbackAlert && deviceType === 'Mobile' && (
+        {feedbackAlert && deviceType === 'Mobile' && !gaveFeedback && (
           <div className="alert" data-testid="permission-alert">
             <PermissionsAlert />
           </div>
@@ -146,23 +144,23 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             <div className="selector__sticky-wrapper">
-              {deviceType === 'Mobile' &&
-                !prejoin &&
-                !userRepository.hasUserGaveFeedback(data.slug) && (
-                  <button
-                    data-testid="feedback-button"
-                    className="sticky-button sticky-button--feedback"
-                    onClick={() => handleShowFeedbackForm()}
-                  >
-                    {feedbackAlert && (
-                      <div className="alert" data-testid="permission-alert">
-                        <PermissionsAlert />
-                      </div>
-                    )}
-                    <Feedback />
-                    {t('feedback.buttonText')}
-                  </button>
-                )}
+              {/* {deviceType === 'Mobile' && !prejoin && ( */}
+              {false && (
+                <button
+                  disabled={gaveFeedback}
+                  data-testid="feedback-button"
+                  className="sticky-button sticky-button--feedback"
+                  onClick={() => handleShowFeedbackForm()}
+                >
+                  {feedbackAlert && !gaveFeedback && (
+                    <div className="alert" data-testid="permission-alert">
+                      <PermissionsAlert />
+                    </div>
+                  )}
+                  <Feedback />
+                  {t('feedback.buttonText')}
+                </button>
+              )}
               {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
                 <button
                   data-testid="recording-button"

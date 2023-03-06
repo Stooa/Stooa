@@ -50,7 +50,7 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
           </ValidationIcon>
         )}
         <label htmlFor={props.id || props.name}>{label}</label>
-        {hasError?.type === 'email' && (
+        {hasError && (
           <>
             <ValidationIcon>
               <Icon variant="cross" />

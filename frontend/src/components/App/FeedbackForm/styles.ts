@@ -15,6 +15,7 @@ import {
   COLOR_NEUTRO_600,
   COLOR_NEUTRO_700
 } from '@/ui/settings';
+import { BODY_XS } from '@/ui/Texts';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
@@ -87,7 +88,7 @@ const StyledStepWrapper = styled(motion.div).attrs({
   }
 
   & .friend-image {
-    padding: ${space(2)};
+    padding: ${space(2)} ${space(2)} 0;
     margin: 0 auto;
     object-fit: contain;
   }
@@ -140,6 +141,7 @@ const StyledLabelOption = styled.label`
   justify-content: center;
   align-items: center;
   color: ${COLOR_NEUTRO_600};
+  ${BODY_XS};
 
   & svg {
     margin-bottom: ${space(1)};

@@ -42,10 +42,8 @@ import useTranslation from 'next-translate/useTranslation';
 import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
-import ButtonFeedback from '../ButtonFeedback';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -61,8 +59,8 @@ const Fishbowl: FC = () => {
     stopRecording,
     startRecording,
     setIsRecording,
-    setGaveFeedback,
-    gaveFeedback
+    gaveFeedback,
+    setGaveFeedback
   } = useStooa();
 
   const {
@@ -80,7 +78,13 @@ const Fishbowl: FC = () => {
   } = useModals();
 
   const { width } = useWindowSize();
-  const { deviceType } = useNavigatorType();
+  const feedbackFormRef = useRef<HTMLDivElement>(null);
+
+  useClickOutside(feedbackFormRef, () => {
+    if (!gaveFeedback) {
+      setShowFeedbackForm(false);
+    }
+  });
 
   const [participantsActive, setParticipantsActive] = useState(
     () => (isModerator && data.isFishbowlNow) || false
@@ -91,14 +95,9 @@ const Fishbowl: FC = () => {
   const { fid } = useRouter().query;
 
   const { t } = useTranslation('fishbowl');
-  const feedbackRef = useRef<HTMLDivElement>(null);
 
   const isPreFishbowl =
     conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
-
-  useClickOutside(feedbackRef, () => {
-    if (showFeedbackForm) setShowFeedbackForm(false);
-  });
 
   useEventListener(CONFERENCE_START, () => {
     if (!isModerator) play();
@@ -159,7 +158,6 @@ const Fishbowl: FC = () => {
   };
 
   const handleFinishFeedback = () => {
-    setGaveFeedback(true);
     setShowFeedbackForm(false);
   };
 
@@ -228,8 +226,9 @@ const Fishbowl: FC = () => {
         )}
         {showFeedbackForm && (
           <FeedbackForm
+            ref={feedbackFormRef}
+            handleGaveSatisfaction={() => setGaveFeedback(true)}
             handleFinish={handleFinishFeedback}
-            ref={feedbackRef}
             fishbowl={data}
             variant="fishbowl-mobile"
           />
@@ -237,9 +236,6 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {!isPreFishbowl && !gaveFeedback && !isModerator && deviceType === 'Desktop' && (
-          <ButtonFeedback fishbowl={data} drawerOpened={participantsActive} />
-        )}
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />

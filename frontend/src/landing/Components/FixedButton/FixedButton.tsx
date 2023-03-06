@@ -11,39 +11,40 @@ import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { StyledButtonWrapper } from './styles';
+
+const options = {
+  rootMargin: '0px',
+  threshold: 0.5
+};
 
 const FixedButton = ({ buttonText }: { buttonText: string }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const showButton = entries => {
+  const showButton = useCallback(entries => {
     if (!entries[0].isIntersecting) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
-  };
+  }, []);
 
-  const billboard = document.getElementById('billboard');
-  const options = {
-    rootMargin: '0px',
-    threshold: 0.5
-  };
+  const observer = useMemo(() => new IntersectionObserver(showButton, options), [showButton]);
 
-  const observer = new IntersectionObserver(showButton, options);
+  useLayoutEffect(() => {
+    const billboard = document.getElementById('billboard');
 
-  useEffect(() => {
+    if (billboard && observer) {
+      observer.observe(billboard);
+    }
+
     return () => {
-      if (billboard) {
+      if (billboard && observer) {
         observer.unobserve(billboard);
       }
     };
-  }, []);
-
-  if (billboard) {
-    observer.observe(billboard);
-  }
+  }, [observer]);
 
   if (!isVisible) {
     return null;
