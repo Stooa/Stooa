@@ -73,19 +73,16 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
       </CardTitle>
       <div data-testid="card-info" className="card__info body-md">
         <div className="card__date">
-          <h4>Date</h4>
-          <div className="medium">
+          <div>
             {month} {day}, {year}
           </div>
-          <div className="card__time medium">{time}</div>
+          <div className="card__time">{time}</div>
         </div>
         <div className="card__duration">
-          <h4>Duration</h4>
-          <p className="medium">46 min</p>
+          <p>46 min</p>
         </div>
         <div className="card__participants">
-          <h4>Participants</h4>
-          <div className="medium">12</div>
+          <div>12</div>
         </div>
         <div className="card__chart">
           <h4>Satisfaction</h4>

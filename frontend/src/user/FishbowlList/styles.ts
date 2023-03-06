@@ -214,10 +214,6 @@ const CardStyled = styled.div`
   overflow: hidden;
 
   &.finished {
-    & ${CardTitle} {
-      font-weight: 500;
-    }
-
     .card__info {
       flex-direction: row;
       justify-content: space-between;
