@@ -64,40 +64,24 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
     setSelectedFishbowl(fishbowl);
   };
 
-  const params = useMemo(
-    () =>
-      new URLSearchParams([
-        ['startDateTime[after]', getFiveHoursAgoDate()],
-        ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
-        ['currentStatus[0]', 'not_started'],
-        ['currentStatus[1]', 'introduction'],
-        ['currentStatus[2]', 'running']
-      ]),
-    []
-  );
+  const futureParams = new URLSearchParams([
+    ['startDateTime[after]', getFiveHoursAgoDate()],
+    ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
+    ['currentStatus[0]', 'not_started'],
+    ['currentStatus[1]', 'introduction'],
+    ['currentStatus[2]', 'running']
+  ]);
+
+  const pastParams = new URLSearchParams([
+    ['currentStatus[0]', 'not_started'],
+    ['currentStatus[1]', 'introduction'],
+    ['currentStatus[2]', 'running']
+  ]);
+
+  const params = useMemo(() => (finished ? pastParams : futureParams), [finished]);
 
   const getFishbowls = useCallback(async () => {
     const auth = await getAuthToken();
-
-    api
-      .get(`/fishbowls`, {
-        headers: {
-          authorization: `${auth ? auth.authorizationString : null}`
-        },
-        params
-      })
-      .then(response => {
-        setFishbowls(response.data);
-      })
-      .catch(error => {
-        console.error('[STOOA] Fishbowl list error', error);
-        router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
-      });
-  }, [lang, router, params]);
-
-  const getFinishedFishbowls = useCallback(async () => {
-    const auth = await getAuthToken();
-
     api
       .get(`/fishbowls`, {
         headers: {
@@ -130,12 +114,8 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
   };
 
   useEffect(() => {
-    if (!finished) {
-      getFishbowls();
-      return;
-    }
-    getFinishedFishbowls();
-  }, [getFishbowls, getFinishedFishbowls, finished]);
+    getFishbowls();
+  }, [getFishbowls]);
 
   useEffect(() => {
     if (fishbowls) {
