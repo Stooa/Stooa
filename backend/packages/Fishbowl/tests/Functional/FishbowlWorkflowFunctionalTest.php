@@ -77,7 +77,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
     }
 
     /** @return iterable<array{string, string, string, bool}> */
-    public function mutationProvider(): iterable
+    public static function mutationProvider(): iterable
     {
         yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED, true];
         yield ['RunFishbowl', 'runFishbowl', Fishbowl::STATUS_INTRODUCTION, true];
@@ -115,7 +115,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
     }
 
     /** @return iterable<array{string, string, string, string, bool}> */
-    public function mutationProviderWithFinalStatus(): iterable
+    public static function mutationProviderWithFinalStatus(): iterable
     {
         yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED, Fishbowl::STATUS_INTRODUCTION, true];
         yield ['RunFishbowl', 'runFishbowl', Fishbowl::STATUS_INTRODUCTION, Fishbowl::STATUS_RUNNING, true];
@@ -153,7 +153,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
     }
 
     /** @return iterable<array{string, string, string, bool}> */
-    public function mutationHasIntroduceProvider(): iterable
+    public static function mutationHasIntroduceProvider(): iterable
     {
         yield ['IntroduceFishbowl', 'introduceFishbowl', Fishbowl::STATUS_NOT_STARTED, false];
         yield ['NoIntroRunFishbowl', 'noIntroRunFishbowl', Fishbowl::STATUS_NOT_STARTED, true];
