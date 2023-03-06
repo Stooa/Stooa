@@ -23,8 +23,15 @@ final class FeedbackFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'satisfaction' => Feedback::SATISFACTION_NEUTRAL,
-            'origin' => Feedback::ORIGIN_FISHBOWL,
+            'satisfaction' => self::faker()->randomElement([
+                Feedback::SATISFACTION_NEUTRAL,
+                Feedback::SATISFACTION_HAPPY,
+                Feedback::SATISFACTION_SAD,
+            ]),
+            'origin' => self::faker()->randomElement([
+                Feedback::ORIGIN_FISHBOWL,
+                Feedback::ORIGIN_THANK_YOU,
+            ]),
             'createdDateTime' => self::faker()->dateTime(),
             'comment' => self::faker()->words(10, true),
             'timezone' => self::faker()->timezone(),

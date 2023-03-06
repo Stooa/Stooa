@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace App\Core\DataFixtures;
 
+use App\Core\Factory\GuestFactory;
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\SonataUserUserFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -56,7 +59,38 @@ class DefaultFixtures extends Fixture
             'privacyPolicy' => true,
         ])->object();
 
-        FishbowlFactory::createMany(50, [
+        $user = UserFactory::createOne([
+            'email' => 'user@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+            'privacyPolicy' => true,
+        ])->object();
+
+        $fishbowl = FishbowlFactory::createOne([
+            'name' => 'Fishbowl with feedbacks',
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'slug' => 'fishbowl-with-feedbacks',
+            'host' => $host,
+        ])->object();
+
+        FeedbackFactory::createOne([
+            'fishbowl' => $fishbowl,
+            'participant' => ParticipantFactory::createOne([
+                'user' => $user,
+            ]),
+        ]);
+
+        FeedbackFactory::createMany(10, [
+            'fishbowl' => $fishbowl,
+            'participant' => ParticipantFactory::createOne([
+                'guest' => GuestFactory::createOne(),
+            ]),
+        ]);
+
+        FishbowlFactory::createMany(4, [
             'startDateTime' => new \DateTime('yesterday'),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
@@ -64,8 +98,8 @@ class DefaultFixtures extends Fixture
             'host' => $host,
         ]);
 
-        FishbowlFactory::createMany(50, [
-            'startDateTime' => new \DateTime(),
+        FishbowlFactory::createMany(5, [
+            'startDateTime' => new \DateTime('yesterday'),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_FINISHED,
