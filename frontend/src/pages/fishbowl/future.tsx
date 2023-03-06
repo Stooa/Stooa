@@ -21,7 +21,7 @@ const Future: NextPage = () => {
 
   return (
     <Layout>
-      <FishbowlList selectedFishbowlParam={selected as string} />
+      <FishbowlList isPastList={false} selectedFishbowlParam={selected as string} />
       <ToastContainer className="toastify-custom" />
     </Layout>
   );

@@ -50,7 +50,7 @@ import Link from 'next/link';
 
 interface Props {
   selectedFishbowlParam?: string;
-  isPastList?: boolean;
+  isPastList: boolean;
 }
 
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) => {
@@ -60,7 +60,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
-
   const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
   };

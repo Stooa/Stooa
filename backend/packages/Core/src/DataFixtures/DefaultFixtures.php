@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace App\Core\DataFixtures;
 
-use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\SonataUserUserFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
-use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -49,59 +47,29 @@ class DefaultFixtures extends Fixture
             'slug' => 'test-me-fishbowl',
         ])->object();
 
-        $secondFishbowl = FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'slug' => 'another-fishbowl',
-        ])->object();
-
-        $user = UserFactory::createOne([
-            'email' => 'user@stooa.com',
-            'password' => self::ADMIN_PASSWORD,
-            'active' => true,
-            'fishbowls' => [$secondFishbowl],
-            'privacyPolicy' => true,
-        ])->object();
-
-        UserFactory::createOne([
+        $host = UserFactory::createOne([
             'email' => 'host@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
             'fishbowls' => [$fishbowl],
             'createdAt' => new \DateTime(),
             'privacyPolicy' => true,
-        ]);
-
-        $participant = ParticipantFactory::createOne([
-            'user' => $user,
-            'fishbowl' => $fishbowl,
         ])->object();
 
-        $secondParticipant = ParticipantFactory::createOne([
-            'user' => $user,
-            'fishbowl' => $secondFishbowl,
-        ])->object();
-
-        FeedbackFactory::createOne([
-            'fishbowl' => $fishbowl,
-            'participant' => $participant,
+        FishbowlFactory::createMany(50, [
+            'startDateTime' => new \DateTime('yesterday'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $host,
         ]);
 
-        FeedbackFactory::createOne([
-            'fishbowl' => $secondFishbowl,
-            'participant' => $participant,
-        ]);
-
-        FeedbackFactory::createOne([
-            'fishbowl' => $fishbowl,
-            'participant' => $secondParticipant,
-        ]);
-
-        FeedbackFactory::createOne([
-            'fishbowl' => $secondFishbowl,
-            'participant' => $secondParticipant,
+        FishbowlFactory::createMany(50, [
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'host' => $host,
         ]);
     }
 }
