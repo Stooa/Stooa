@@ -46,13 +46,14 @@ import BackArrow from '@/ui/svg/arrow-prev.svg';
 import { BREAKPOINTS } from '@/ui/settings';
 import DetailPlaceholder from './DetailPlaceholder';
 import EmptyFishbowlList from './EmptyFishbowlList';
+import Link from 'next/link';
 
 interface Props {
   selectedFishbowlParam?: string;
-  finished?: boolean;
+  isPastList?: boolean;
 }
 
-const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
+const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [shouldShowEditForm, setShouldShowEditForm] = useState(false);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
@@ -64,21 +65,31 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
     setSelectedFishbowl(fishbowl);
   };
 
-  const futureParams = new URLSearchParams([
-    ['startDateTime[after]', getFiveHoursAgoDate()],
-    ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
-    ['currentStatus[0]', 'not_started'],
-    ['currentStatus[1]', 'introduction'],
-    ['currentStatus[2]', 'running']
-  ]);
+  const futureParams = useMemo(
+    () =>
+      new URLSearchParams([
+        ['startDateTime[after]', getFiveHoursAgoDate()],
+        ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
+        ['currentStatus[0]', 'not_started'],
+        ['currentStatus[1]', 'introduction'],
+        ['currentStatus[2]', 'running']
+      ]),
+    []
+  );
 
-  const pastParams = new URLSearchParams([
-    ['currentStatus[0]', 'not_started'],
-    ['currentStatus[1]', 'introduction'],
-    ['currentStatus[2]', 'running']
-  ]);
+  const pastParams = useMemo(
+    () =>
+      new URLSearchParams([
+        ['or[startDateTime][after]', getFiveHoursAgoDate()],
+        ['or[currentStatus]', 'finished']
+      ]),
+    []
+  );
 
-  const params = useMemo(() => (finished ? pastParams : futureParams), [finished]);
+  const params = useMemo(
+    () => (isPastList ? pastParams : futureParams),
+    [isPastList, pastParams, futureParams]
+  );
 
   const getFishbowls = useCallback(async () => {
     const auth = await getAuthToken();
@@ -143,9 +154,10 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
         <StyledListHeader>
           <div className="header__wrapper">
             <div>
-              <a
+              <Link
                 className="fishbowl-list__header-link fishbowl-list__scheduled-link"
                 data-testid="scheduled-header"
+                href={'/fishbowl/future'}
               >
                 <Trans
                   i18nKey="fishbowl-list:scheduledFishbowls"
@@ -154,10 +166,11 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
                     count: fishbowls.length
                   }}
                 />
-              </a>
-              <a
+              </Link>
+              <Link
                 className="fishbowl-list__header-link fishbowl-list__finished-link"
                 data-testid="finished-fishbowls-header"
+                href={'/fishbowl/past'}
               >
                 Finished fishbowls
                 {/* <Trans
@@ -167,7 +180,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, finished }) => {
                     count: fishbowls.length
                   }}
                 /> */}
-              </a>
+              </Link>
             </div>
             <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
               <Button

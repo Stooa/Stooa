@@ -8,22 +8,23 @@
  */
 
 import FishbowlList from '@/user/FishbowlList';
+import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 
-const List = () => {
+const Past: NextPage = () => {
   const router = useRouter();
   const { selected } = router.query;
 
   return (
     <Layout>
-      <FishbowlList selectedFishbowlParam={selected as string} />
+      <FishbowlList isPastList selectedFishbowlParam={selected as string} />
       <ToastContainer className="toastify-custom" />
     </Layout>
   );
 };
 
-export default List;
+export default Past;
