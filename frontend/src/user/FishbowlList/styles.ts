@@ -76,7 +76,7 @@ const FishbowlScrollList = styled.div`
   }
 `;
 
-const EmptyFishbowlList = styled.div`
+const StyledEmptyFishbowlList = styled.div`
   .fishbowl-list__empty-illustration {
     display: flex;
     justify-content: center;
@@ -130,14 +130,18 @@ const EmptyFishbowlList = styled.div`
   }
 `;
 
-const Header = styled.div`
+const StyledListHeader = styled.div`
   width: 100%;
   text-align: left;
   margin-bottom: ${space(2)};
 
-  .fishbowl-list__title {
+  .fishbowl-list__header-link {
     ${BODY_LG}
     font-weight: 300;
+
+    &.fishbowl-list__scheduled-link {
+      margin-right: ${space(4)};
+    }
   }
 
   .divider {
@@ -147,7 +151,7 @@ const Header = styled.div`
     display: block;
   }
 
-  div {
+  .header__wrapper {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -175,6 +179,28 @@ const Header = styled.div`
   }
 `;
 
+const CardTitle = styled.div`
+  ${BODY_MD};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
+  color: ${COLOR_NEUTRO_800};
+  overflow: ellipsis;
+  display: flex;
+
+  h4 {
+    font-weight: 500;
+  }
+
+  svg {
+    margin-right: ${space(0.5)};
+    width: ${rems(19)};
+    height: ${rems(19)};
+  }
+`;
+
 const CardStyled = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -186,6 +212,28 @@ const CardStyled = styled.div`
   box-shadow: var(--shadow-elevation-medium);
   transition: all 0.2s ease-in-out;
   overflow: hidden;
+
+  &.finished {
+    & ${CardTitle} {
+      font-weight: 500;
+    }
+
+    .card__info {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: ${space(2)};
+      text-align: left;
+
+      h4 {
+        font-weight: 300;
+      }
+    }
+
+    .card__chart-wrapper {
+      width: 50px;
+      height: 50px;
+    }
+  }
 
   .card__info {
     display: flex;
@@ -236,28 +284,6 @@ const CardStyled = styled.div`
   }
 `;
 
-const CardTitle = styled.div`
-  ${BODY_MD};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-  text-align: left;
-  color: ${COLOR_NEUTRO_800};
-  overflow: ellipsis;
-  display: flex;
-
-  h4 {
-    font-weight: 500;
-  }
-
-  svg {
-    margin-right: ${space(0.5)};
-    width: ${rems(19)};
-    height: ${rems(19)};
-  }
-`;
-
 const EditFormWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -304,7 +330,7 @@ const EditFormWrapper = styled.div`
   `}
 `;
 
-const DetailPlaceholder = styled.div`
+const StyledDetailPlaceholder = styled.div`
   &.not-selected {
     ${media.max('desktop')`
     display: none;
@@ -359,15 +385,20 @@ const MobileBackButton = styled.button`
   `}
 `;
 
+const StyledFishbowlDashboardData = styled.div`
+  padding: ${space(2)} ${space(1)};
+`;
+
 export {
   FishbowlListWrapper,
-  Header,
+  StyledListHeader,
   CardStyled,
   FishbowlScrollList,
   CardTitle,
-  EmptyFishbowlList,
+  StyledEmptyFishbowlList,
   FishbowlListContent,
   EditFormWrapper,
-  DetailPlaceholder,
-  MobileBackButton
+  StyledDetailPlaceholder,
+  MobileBackButton,
+  StyledFishbowlDashboardData
 };
