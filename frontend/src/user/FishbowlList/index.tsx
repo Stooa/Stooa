@@ -79,7 +79,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   const pastParams = useMemo(
     () =>
       new URLSearchParams([
-        ['or[startDateTime][after]', getFiveHoursAgoDate()],
+        ['or[startDateTime][before]', getFiveHoursAgoDate()],
         ['or[currentStatus]', 'finished']
       ]),
     []
