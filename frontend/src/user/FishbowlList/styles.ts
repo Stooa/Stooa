@@ -394,7 +394,67 @@ const MobileBackButton = styled.button`
 `;
 
 const StyledFishbowlDashboardData = styled.div`
-  padding: ${space(2)} ${space(1)};
+  padding: ${space(4)};
+  background-color: ${COLOR_NEUTRO_100};
+  text-align: left;
+
+  & h2 {
+    margin-bottom: ${space(2)};
+    text-align: center;
+  }
+
+  & h3 {
+    color: ${COLOR_NEUTRO_800};
+    margin-bottom: ${space(0.5)};
+    font-weight: 500;
+  }
+
+  & h4 {
+    font-weight: 500;
+  }
+
+  & .description {
+    margin-bottom: ${space(2)};
+  }
+
+  & .data {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: ${space()};
+
+    margin-bottom: ${space(2)};
+  }
+
+  & .data__title {
+    display: flex;
+    align-items: flex-end;
+    gap: ${space(0.5)};
+
+    margin-bottom: ${space(0.5)};
+
+    & h4 {
+      font-weight: 300;
+    }
+
+    & svg {
+      width: 32px !important;
+      height: 32px !important;
+    }
+  }
+
+  & .data__group {
+    & p + p {
+      margin-top: ${space(0.5)};
+    }
+  }
+
+  & .feedback {
+    & h3 {
+      color: ${COLOR_NEUTRO_700};
+      font-weight: 500;
+    }
+  }
 `;
 
 export {

@@ -7,12 +7,14 @@
  * file that was distributed with this source code.
  */
 
+import { space } from '@/ui/helpers';
 import { COLOR_NEUTRO_500 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledTitleWithDivider = styled.p`
   display: flex;
   align-items: center;
+  gap: ${space(2)};
   position: relative;
   width: 100%;
 
