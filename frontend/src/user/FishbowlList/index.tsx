@@ -57,6 +57,7 @@ interface Props {
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [shouldShowEditForm, setShouldShowEditForm] = useState(false);
+  const [paginator, setPaginator] = useState<number>(1);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
   const [fishbowlPastCount, setFishbowlPastCount] = useState<number>(0);
   const [fishbowlFutureCount, setFishbowlFutureCount] = useState<number>(0);
@@ -80,22 +81,28 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     []
   );
 
-  const pastParams = useMemo(
-    () =>
-      new URLSearchParams([
-        ['or[startDateTime][before]', getFiveHoursAgoDate()],
-        ['or[currentStatus]', 'finished'],
-        ['order[startDateTime]', 'desc']
-      ]),
-    []
-  );
+  const getFutureParams = (pageNumber: string) => {
+    return new URLSearchParams([
+      ['startDateTime[after]', getFiveHoursAgoDate()],
+      ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
+      ['currentStatus[0]', 'not_started'],
+      ['currentStatus[1]', 'introduction'],
+      ['currentStatus[2]', 'running'],
+      ['order[startDateTime]', 'asc'],
+      ['page', pageNumber]
+    ]);
+  };
 
-  const params = useMemo(
-    () => (isPastList ? pastParams : futureParams),
-    [isPastList, pastParams, futureParams]
-  );
+  const getPastParams = (pageNumber: string) => {
+    return new URLSearchParams([
+      ['or[startDateTime][before]', getFiveHoursAgoDate()],
+      ['or[currentStatus]', 'finished'],
+      ['order[startDateTime]', 'desc'],
+      ['page', pageNumber]
+    ]);
+  };
 
-  const getApiFishbowls = async params => {
+  const getApiFishbowls = async (params: URLSearchParams) => {
     const auth = await getAuthToken();
     return api
       .get(`/fishbowls`, {
@@ -106,6 +113,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         params
       })
       .then(response => {
+        console.log(response);
         return response.data;
       })
       .catch(error => {
@@ -115,21 +123,22 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   };
 
   const getFishbowls = useCallback(async () => {
+    const pastParams = getPastParams('1');
     getApiFishbowls(pastParams).then(data => {
-      console.log(data);
       setFishbowlPastCount(data['hydra:totalItems']);
       if (isPastList) {
         setFishbowls(data['hydra:member']);
       }
     });
 
+    const futureParams = getFutureParams('1');
     getApiFishbowls(futureParams).then(data => {
       setFishbowlFutureCount(data['hydra:totalItems']);
       if (!isPastList) {
         setFishbowls(data['hydra:member']);
       }
     });
-  }, [lang, router, params]);
+  }, [lang, router]);
 
   const handleUpdateFishbowl = updatedFishbowl => {
     setSelectedFishbowl(updatedFishbowl);
@@ -142,6 +151,21 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
             return { ...fishbowl, ...updatedFishbowl };
           }
         });
+      }
+    });
+  };
+
+  const loadMore = () => {
+    const newPaginator = paginator + 1;
+    const params = isPastList
+      ? getPastParams(newPaginator.toString())
+      : getFutureParams(newPaginator.toString());
+
+    getApiFishbowls(params).then(data => {
+      if (data['hydra:member']) {
+        const mergedFishbowls = [...fishbowls, ...data['hydra:member']];
+        setFishbowls(mergedFishbowls);
+        setPaginator(newPaginator);
       }
     });
   };
@@ -251,6 +275,9 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                         selected={fishbowl.id === selectedFishbowl?.id}
                       />
                     ))}
+                <button className="sticky-button" onClick={() => loadMore()}>
+                  Load more
+                </button>
               </FishbowlScrollList>
 
               <AnimatePresence>
