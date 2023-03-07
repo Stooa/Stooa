@@ -69,19 +69,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     setSelectedFishbowl(fishbowl);
   };
 
-  const futureParams = useMemo(
-    () =>
-      new URLSearchParams([
-        ['startDateTime[after]', getFiveHoursAgoDate()],
-        ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
-        ['currentStatus[0]', 'not_started'],
-        ['currentStatus[1]', 'introduction'],
-        ['currentStatus[2]', 'running'],
-        ['order[startDateTime]', 'asc']
-      ]),
-    []
-  );
-
   const getFutureParams = (pageNumber: string) => {
     return new URLSearchParams([
       ['startDateTime[after]', getFiveHoursAgoDate()],

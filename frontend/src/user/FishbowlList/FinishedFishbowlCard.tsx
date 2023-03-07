@@ -13,27 +13,7 @@ import { CardStyled, CardTitle } from '@/user/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';
 import Icon from '@/components/Common/Fields/Icon';
 import People from '@/ui/svg/people.svg';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement } from 'chart.js';
-
-ChartJS.register(ArcElement);
-
-const feedbackData = {
-  labels: ['bad', 'good', 'great'],
-  datasets: [
-    {
-      label: 'Feedback',
-      data: [12, 4, 3],
-      backgroundColor: ['#5DDBD0', '#EEDE96', '#FCBAB6'],
-      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-    }
-  ]
-};
-
-const chartOptions = {
-  responsive: true,
-  maintainAspectRatio: false
-};
+import DoughnutChart from '../DoughnutChart';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -89,7 +69,7 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div className="card__chart">
           <h4>Satisfaction</h4>
           <div className="card__chart-wrapper">
-            <Doughnut data={feedbackData} options={chartOptions} />
+            <DoughnutChart feedbackSatisfaction={{ bad: 20, okay: 50, great: 5 }} />
           </div>
         </div>
       </div>
