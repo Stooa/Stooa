@@ -59,6 +59,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
             'query' => [
                 'or[startDateTime][before]' => $threeHoursAgo->format('Y-m-d H:i:s'),
                 'or[currentStatus]' => Fishbowl::STATUS_FINISHED,
+                'order[startDateTime]' => 'desc',
             ],
             'auth_bearer' => $hostToken,
         ]);

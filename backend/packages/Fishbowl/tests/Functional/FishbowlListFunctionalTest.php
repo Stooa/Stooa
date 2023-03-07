@@ -184,6 +184,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format('Y-m-d H:i:s'),
                 'finishDateTime[before]' => $now->format('Y-m-d H:i:s'),
+                'order[startDateTime]' => 'asc',
             ],
             'auth_bearer' => $hostToken,
         ]);
@@ -244,6 +245,7 @@ class FishbowlListFunctionalTest extends ApiTestCase
                 'currentStatus[1]' => Fishbowl::STATUS_RUNNING,
                 'currentStatus[2]' => Fishbowl::STATUS_NOT_STARTED,
                 'startDateTime[after]' => $fiveHoursAgo->format('Y-m-d H:i:s'),
+                'order[startDateTime]' => 'asc',
             ],
             'auth_bearer' => $hostToken,
         ]);

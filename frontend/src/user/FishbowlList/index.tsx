@@ -71,7 +71,8 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
         ['currentStatus[0]', 'not_started'],
         ['currentStatus[1]', 'introduction'],
-        ['currentStatus[2]', 'running']
+        ['currentStatus[2]', 'running'],
+        ['order[startDateTime]', 'asc']
       ]),
     []
   );
@@ -80,7 +81,8 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     () =>
       new URLSearchParams([
         ['or[startDateTime][before]', getFiveHoursAgoDate()],
-        ['or[currentStatus]', 'finished']
+        ['or[currentStatus]', 'finished'],
+        ['order[startDateTime]', 'desc']
       ]),
     []
   );

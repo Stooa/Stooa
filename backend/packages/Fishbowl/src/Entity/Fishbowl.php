@@ -15,6 +15,7 @@ namespace App\Fishbowl\Entity;
 
 use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
@@ -112,6 +113,7 @@ use Webmozart\Assert\Assert as MAssert;
 )]
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
+#[ApiFilter(OrderFilter::class, properties: ['startDateTime'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime'])]
 #[ApiFilter(SearchFilter::class, properties: ['currentStatus' => 'exact'])]
 #[ApiFilter(FilterLogic::class)]
