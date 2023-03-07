@@ -98,7 +98,7 @@ class DefaultFixtures extends Fixture
             ]),
         ]);
 
-        FishbowlFactory::createMany(4, [
+        FishbowlFactory::createMany(24, [
             'startDateTime' => new \DateTime('yesterday'),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
@@ -106,7 +106,7 @@ class DefaultFixtures extends Fixture
             'host' => $host,
         ]);
 
-        FishbowlFactory::createMany(5, [
+        FishbowlFactory::createMany(25, [
             'startDateTime' => new \DateTime('yesterday'),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
