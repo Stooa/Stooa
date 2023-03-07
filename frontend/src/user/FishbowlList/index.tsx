@@ -176,14 +176,13 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                 data-testid="finished-fishbowls-header"
                 href={'/fishbowl/past'}
               >
-                Finished fishbowls
-                {/* <Trans
-                  i18nKey="fishbowl-list:scheduledFishbowls"
+                <Trans
+                  i18nKey="fishbowl-list:pastFishbowls"
                   components={{ i: <i />, span: <span data-testid="count" /> }}
                   values={{
                     count: fishbowls.length
                   }}
-                /> */}
+                />
               </Link>
             </div>
             <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
@@ -215,7 +214,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
               <FishbowlScrollList data-testid="fishbowl-list-wrapper">
                 {isPastList
                   ? fishbowls.map(fishbowl => (
-                      <FishbowlCard
+                      <FinishedFishbowlCard
                         onClick={fishbowl => handleClick(fishbowl)}
                         key={fishbowl.id}
                         fishbowl={fishbowl}
@@ -223,7 +222,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                       />
                     ))
                   : fishbowls.map(fishbowl => (
-                      <FinishedFishbowlCard
+                      <FishbowlCard
                         onClick={fishbowl => handleClick(fishbowl)}
                         key={fishbowl.id}
                         fishbowl={fishbowl}
