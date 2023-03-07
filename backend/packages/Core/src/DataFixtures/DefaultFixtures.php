@@ -82,6 +82,9 @@ class DefaultFixtures extends Fixture
             'currentStatus' => Fishbowl::STATUS_FINISHED,
             'slug' => 'fishbowl-with-feedbacks',
             'host' => $host,
+            'participants' => ParticipantFactory::createMany(20, [
+                'guest' => GuestFactory::createOne(),
+            ]),
         ])->object();
 
         FeedbackFactory::createOne([
@@ -104,6 +107,9 @@ class DefaultFixtures extends Fixture
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'host' => $host,
+            'participants' => ParticipantFactory::createMany(5, [
+                'user' => UserFactory::createOne(),
+            ]),
         ]);
 
         FishbowlFactory::createMany(25, [
@@ -112,6 +118,9 @@ class DefaultFixtures extends Fixture
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_FINISHED,
             'host' => $host,
+            'participants' => ParticipantFactory::createMany(10, [
+                'guest' => GuestFactory::createOne(),
+            ]),
         ]);
     }
 }

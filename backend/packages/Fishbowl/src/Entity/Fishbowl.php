@@ -220,6 +220,7 @@ class Fishbowl implements \Stringable
     private ?\DateTimeInterface $finishDateTime = null;
 
     /** @var Collection<int, Participant> */
+    #[Groups(['fishbowl:read'])]
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Participant::class, cascade: ['all'])]
     private Collection $participants;
 

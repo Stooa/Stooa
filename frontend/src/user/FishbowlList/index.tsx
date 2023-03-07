@@ -101,6 +101,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         params
       })
       .then(response => {
+        console.log(response);
         return response.data;
       })
       .catch(error => {
