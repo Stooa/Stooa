@@ -57,8 +57,9 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
 
         $response = static::createClient()->request('GET', '/fishbowls', [
             'query' => [
-                'or[startDateTime][after]' => $threeHoursAgo->format('Y-m-d H:i:s'),
+                'or[startDateTime][before]' => $threeHoursAgo->format('Y-m-d H:i:s'),
                 'or[currentStatus]' => Fishbowl::STATUS_FINISHED,
+                'order[startDateTime]' => 'desc',
             ],
             'auth_bearer' => $hostToken,
         ]);

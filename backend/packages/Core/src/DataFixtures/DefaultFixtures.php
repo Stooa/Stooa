@@ -42,21 +42,29 @@ class DefaultFixtures extends Fixture
             'roles' => [UserInterface::ROLE_SUPER_ADMIN],
         ]);
 
-        $fishbowl = FishbowlFactory::createOne([
+        $host = UserFactory::createOne([
+            'email' => 'host@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+            'createdAt' => new \DateTime(),
+            'privacyPolicy' => true,
+        ])->object();
+
+        FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'slug' => 'test-me-fishbowl',
+            'host' => $host,
         ])->object();
 
-        $host = UserFactory::createOne([
-            'email' => 'host@stooa.com',
-            'password' => self::ADMIN_PASSWORD,
-            'active' => true,
-            'fishbowls' => [$fishbowl],
-            'createdAt' => new \DateTime(),
-            'privacyPolicy' => true,
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime('+ 1 hour'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $host,
         ])->object();
 
         $user = UserFactory::createOne([

@@ -15,6 +15,7 @@ namespace App\Fishbowl\Entity;
 
 use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
@@ -42,6 +43,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Metaclass\FilterBundle\Filter\FilterLogic;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -111,8 +113,10 @@ use Webmozart\Assert\Assert as MAssert;
 )]
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
-#[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime'])]
+#[ApiFilter(OrderFilter::class, properties: ['startDateTime'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime'])]
 #[ApiFilter(SearchFilter::class, properties: ['currentStatus' => 'exact'])]
+#[ApiFilter(FilterLogic::class)]
 #[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 #[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 

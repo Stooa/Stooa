@@ -46,7 +46,5 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
 
         $queryBuilder->andWhere(sprintf('%s.host = :host', $rootAlias));
         $queryBuilder->setParameter('host', $user->getId(), 'uuid');
-
-        $queryBuilder->addOrderBy(sprintf('%s.startDateTime', $rootAlias), 'DESC');
     }
 }
