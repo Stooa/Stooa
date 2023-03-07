@@ -128,6 +128,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
       setFishbowlPastCount(data['hydra:totalItems']);
       if (isPastList) {
         setFishbowls(data['hydra:member']);
+        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
       }
     });
 
@@ -136,6 +137,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
       setFishbowlFutureCount(data['hydra:totalItems']);
       if (!isPastList) {
         setFishbowls(data['hydra:member']);
+        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
       }
     });
   }, [lang, router]);
