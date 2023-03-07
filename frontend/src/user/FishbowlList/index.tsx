@@ -98,13 +98,14 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     api
       .get(`/fishbowls`, {
         headers: {
+          'Accept': 'application/ld+json',
           authorization: `${auth ? auth.authorizationString : null}`
         },
         params
       })
       .then(response => {
         console.log('-------->', response);
-        setFishbowls(response.data);
+        setFishbowls(response.data['hydra:member']);
       })
       .catch(error => {
         console.error('[STOOA] Fishbowl list error', error);
