@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
@@ -158,10 +158,12 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
 
     getApiFishbowls(params).then(data => {
       if (data['hydra:member']) {
-        const mergedFishbowls = [...fishbowls, ...data['hydra:member']];
-        setFishbowls(mergedFishbowls);
-        setPaginator(newPaginator);
-        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+        if (fishbowls) {
+          const mergedFishbowls = [...fishbowls, ...data['hydra:member']];
+          setFishbowls(mergedFishbowls);
+          setPaginator(newPaginator);
+          setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+        }
       }
     });
   };
