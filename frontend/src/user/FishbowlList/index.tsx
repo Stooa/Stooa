@@ -47,6 +47,7 @@ import { BREAKPOINTS } from '@/ui/settings';
 import DetailPlaceholder from './DetailPlaceholder';
 import EmptyFishbowlList from './EmptyFishbowlList';
 import Link from 'next/link';
+import { FishbowlDashboardData } from './FishbowlDashboardData';
 
 interface Props {
   selectedFishbowlParam?: string;
@@ -230,8 +231,10 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                       />
                     ))}
               </FishbowlScrollList>
+
               <AnimatePresence>
                 {selectedFishbowl !== undefined &&
+                  !isPastList &&
                   (shouldShowEditForm ? (
                     <EditFormWrapper
                       as={motion.div}
@@ -276,6 +279,10 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                       onClickBack={() => setSelectedFishbowl(undefined)}
                     />
                   ))}
+
+                {selectedFishbowl !== undefined && isPastList && (
+                  <FishbowlDashboardData fishbowl={selectedFishbowl} />
+                )}
 
                 {!selectedFishbowl && (
                   <DetailPlaceholder
