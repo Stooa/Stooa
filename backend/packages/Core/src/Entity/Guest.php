@@ -45,7 +45,7 @@ class Guest implements \Stringable
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
 
     private ?UuidInterface $id = null;
-    #[Groups(['guest:create', 'guest:write'])]
+    #[Groups(['guest:create', 'guest:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
