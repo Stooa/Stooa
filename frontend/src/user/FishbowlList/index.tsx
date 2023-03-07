@@ -57,7 +57,11 @@ interface Props {
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [shouldShowEditForm, setShouldShowEditForm] = useState(false);
+  const [paginator, setPaginator] = useState<number>(1);
+  const [loadMoreDisabled, setLoadMoreDisabled] = useState<boolean>(false);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
+  const [fishbowlPastCount, setFishbowlPastCount] = useState<number>(0);
+  const [fishbowlFutureCount, setFishbowlFutureCount] = useState<number>(0);
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
@@ -78,40 +82,65 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     []
   );
 
-  const pastParams = useMemo(
-    () =>
-      new URLSearchParams([
-        ['or[startDateTime][before]', getFiveHoursAgoDate()],
-        ['or[currentStatus]', 'finished'],
-        ['order[startDateTime]', 'desc']
-      ]),
-    []
-  );
+  const getFutureParams = (pageNumber: string) => {
+    return new URLSearchParams([
+      ['startDateTime[after]', getFiveHoursAgoDate()],
+      ['finishDateTime[after]', getIsoDateTimeWithActualTimeZone()],
+      ['currentStatus[0]', 'not_started'],
+      ['currentStatus[1]', 'introduction'],
+      ['currentStatus[2]', 'running'],
+      ['order[startDateTime]', 'asc'],
+      ['page', pageNumber]
+    ]);
+  };
 
-  const params = useMemo(
-    () => (isPastList ? pastParams : futureParams),
-    [isPastList, pastParams, futureParams]
-  );
+  const getPastParams = (pageNumber: string) => {
+    return new URLSearchParams([
+      ['or[startDateTime][before]', getFiveHoursAgoDate()],
+      ['or[currentStatus]', 'finished'],
+      ['order[startDateTime]', 'desc'],
+      ['page', pageNumber]
+    ]);
+  };
 
-  const getFishbowls = useCallback(async () => {
+  const getApiFishbowls = async (params: URLSearchParams) => {
     const auth = await getAuthToken();
-    api
+    return api
       .get(`/fishbowls`, {
         headers: {
-          'Accept': 'application/ld+json',
+          Accept: 'application/ld+json',
           authorization: `${auth ? auth.authorizationString : null}`
         },
         params
       })
       .then(response => {
-        console.log('-------->', response);
-        setFishbowls(response.data['hydra:member']);
+        return response.data;
       })
       .catch(error => {
         console.error('[STOOA] Fishbowl list error', error);
         router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
       });
-  }, [lang, router, params]);
+  };
+
+  const getFishbowls = useCallback(async () => {
+    const pastParams = getPastParams('1');
+    getApiFishbowls(pastParams).then(data => {
+      setFishbowlPastCount(data['hydra:totalItems']);
+      if (isPastList) {
+        setFishbowls(data['hydra:member']);
+        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+      }
+    });
+
+    const futureParams = getFutureParams('1');
+    getApiFishbowls(futureParams).then(data => {
+      setFishbowlFutureCount(data['hydra:totalItems']);
+      if (!isPastList) {
+        setFishbowls(data['hydra:member']);
+        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+      }
+    });
+  }, [lang, router]);
 
   const handleUpdateFishbowl = updatedFishbowl => {
     setSelectedFishbowl(updatedFishbowl);
@@ -124,6 +153,22 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
             return { ...fishbowl, ...updatedFishbowl };
           }
         });
+      }
+    });
+  };
+
+  const loadMore = () => {
+    const newPaginator = paginator + 1;
+    const params = isPastList
+      ? getPastParams(newPaginator.toString())
+      : getFutureParams(newPaginator.toString());
+
+    getApiFishbowls(params).then(data => {
+      if (data['hydra:member']) {
+        const mergedFishbowls = [...fishbowls, ...data['hydra:member']];
+        setFishbowls(mergedFishbowls);
+        setPaginator(newPaginator);
+        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
       }
     });
   };
@@ -169,7 +214,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   i18nKey="fishbowl-list:scheduledFishbowls"
                   components={{ i: <i />, span: <span data-testid="count" /> }}
                   values={{
-                    count: fishbowls.length
+                    count: fishbowlFutureCount
                   }}
                 />
               </Link>
@@ -184,7 +229,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   i18nKey="fishbowl-list:pastFishbowls"
                   components={{ i: <i />, span: <span data-testid="count" /> }}
                   values={{
-                    count: fishbowls.length
+                    count: fishbowlPastCount
                   }}
                 />
               </Link>
@@ -233,6 +278,13 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                         selected={fishbowl.id === selectedFishbowl?.id}
                       />
                     ))}
+                <Button
+                  className="sticky-button"
+                  onClick={() => loadMore()}
+                  disabled={loadMoreDisabled}
+                >
+                  Load more
+                </Button>
               </FishbowlScrollList>
 
               <AnimatePresence>
