@@ -58,6 +58,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [shouldShowEditForm, setShouldShowEditForm] = useState(false);
   const [paginator, setPaginator] = useState<number>(1);
+  const [loadMoreDisabled, setLoadMoreDisabled] = useState<boolean>(false);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
   const [fishbowlPastCount, setFishbowlPastCount] = useState<number>(0);
   const [fishbowlFutureCount, setFishbowlFutureCount] = useState<number>(0);
@@ -113,7 +114,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         params
       })
       .then(response => {
-        console.log(response);
         return response.data;
       })
       .catch(error => {
@@ -166,6 +166,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         const mergedFishbowls = [...fishbowls, ...data['hydra:member']];
         setFishbowls(mergedFishbowls);
         setPaginator(newPaginator);
+        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
       }
     });
   };
@@ -275,9 +276,13 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                         selected={fishbowl.id === selectedFishbowl?.id}
                       />
                     ))}
-                <button className="sticky-button" onClick={() => loadMore()}>
+                <Button
+                  className="sticky-button"
+                  onClick={() => loadMore()}
+                  disabled={loadMoreDisabled}
+                >
                   Load more
-                </button>
+                </Button>
               </FishbowlScrollList>
 
               <AnimatePresence>
