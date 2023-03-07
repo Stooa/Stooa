@@ -115,8 +115,11 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     getApiFishbowls(pastParams).then(data => {
       setFishbowlPastCount(data['hydra:totalItems']);
       if (isPastList) {
-        setFishbowls(data['hydra:member']);
-        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+        if (data['hydra:member']) {
+          setFishbowls(data['hydra:member']);
+          setSelectedFishbowl(data['hydra:member'][0]);
+          setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+        }
       }
     });
 
@@ -124,8 +127,10 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     getApiFishbowls(futureParams).then(data => {
       setFishbowlFutureCount(data['hydra:totalItems']);
       if (!isPastList) {
-        setFishbowls(data['hydra:member']);
-        setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+        if (data['hydra:member']) {
+          setFishbowls(data['hydra:member']);
+          setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
+        }
       }
     });
   }, [lang, router]);
