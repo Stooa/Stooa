@@ -58,6 +58,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [shouldShowEditForm, setShouldShowEditForm] = useState(false);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
+  const [fishbowlCount, setFishbowlCount] = useState<number>(0);
   const { width: windowWidth } = useWindowSize();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
@@ -98,14 +99,14 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     api
       .get(`/fishbowls`, {
         headers: {
-          'Accept': 'application/ld+json',
+          Accept: 'application/ld+json',
           authorization: `${auth ? auth.authorizationString : null}`
         },
         params
       })
       .then(response => {
-        console.log('-------->', response);
         setFishbowls(response.data['hydra:member']);
+        setFishbowlCount(response.data['hydra:totalItems']);
       })
       .catch(error => {
         console.error('[STOOA] Fishbowl list error', error);
@@ -169,7 +170,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   i18nKey="fishbowl-list:scheduledFishbowls"
                   components={{ i: <i />, span: <span data-testid="count" /> }}
                   values={{
-                    count: fishbowls.length
+                    count: fishbowlCount
                   }}
                 />
               </Link>
@@ -184,7 +185,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   i18nKey="fishbowl-list:pastFishbowls"
                   components={{ i: <i />, span: <span data-testid="count" /> }}
                   values={{
-                    count: fishbowls.length
+                    count: fishbowlCount
                   }}
                 />
               </Link>
