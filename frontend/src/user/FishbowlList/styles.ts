@@ -25,12 +25,12 @@ const FishbowlListWrapper = styled.div`
   height: 100%;
   padding: ${space(3)} 0;
   width: 100%;
-  max-width: ${BREAKPOINTS.desktop}px;
+  max-width: ${BREAKPOINTS.desktopLarge}px;
 `;
 
 const FishbowlListContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
 
   &.not-empty {
@@ -137,7 +137,6 @@ const StyledListHeader = styled.div`
 
   .fishbowl-list__header-link {
     ${BODY_LG}
-    font-weight: 300;
 
     &.fishbowl-list__scheduled-link {
       margin-right: ${space(4)};
@@ -216,12 +215,25 @@ const CardStyled = styled.div`
   &.finished {
     .card__info {
       flex-direction: row;
-      justify-content: space-between;
-      gap: ${space(2)};
+      flex-wrap: wrap;
+      gap: ${space()} ${space(2)};
       text-align: left;
 
-      h4 {
+      & > div {
+        flex: 1 100px;
+      }
+
+      & h4 {
         font-weight: 300;
+      }
+
+      .card__participants {
+        display: flex;
+        align-items: center;
+
+        & svg {
+          margin-right: ${space(0.5)};
+        }
       }
     }
 

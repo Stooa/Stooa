@@ -154,7 +154,9 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
           <div className="header__wrapper">
             <div>
               <Link
-                className="fishbowl-list__header-link fishbowl-list__scheduled-link"
+                className={`fishbowl-list__header-link fishbowl-list__scheduled-link ${
+                  !isPastList ? 'medium' : ''
+                }`}
                 data-testid="scheduled-header"
                 href={'/fishbowl/future'}
               >
@@ -167,7 +169,9 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                 />
               </Link>
               <Link
-                className="fishbowl-list__header-link fishbowl-list__finished-link"
+                className={`fishbowl-list__header-link fishbowl-list__finished-link ${
+                  isPastList ? 'medium' : ''
+                }`}
                 data-testid="finished-fishbowls-header"
                 href={'/fishbowl/past'}
               >
@@ -208,18 +212,23 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
           ) : (
             <>
               <FishbowlScrollList data-testid="fishbowl-list-wrapper">
-                <FinishedFishbowlCard
-                  fishbowl={fishbowls[0]}
-                  onClick={fishbowl => handleClick(fishbowl)}
-                />
-                {fishbowls.map(fishbowl => (
-                  <FishbowlCard
-                    onClick={fishbowl => handleClick(fishbowl)}
-                    key={fishbowl.id}
-                    fishbowl={fishbowl}
-                    selected={fishbowl.id === selectedFishbowl?.id}
-                  />
-                ))}
+                {isPastList
+                  ? fishbowls.map(fishbowl => (
+                      <FishbowlCard
+                        onClick={fishbowl => handleClick(fishbowl)}
+                        key={fishbowl.id}
+                        fishbowl={fishbowl}
+                        selected={fishbowl.id === selectedFishbowl?.id}
+                      />
+                    ))
+                  : fishbowls.map(fishbowl => (
+                      <FinishedFishbowlCard
+                        onClick={fishbowl => handleClick(fishbowl)}
+                        key={fishbowl.id}
+                        fishbowl={fishbowl}
+                        selected={fishbowl.id === selectedFishbowl?.id}
+                      />
+                    ))}
               </FishbowlScrollList>
               <AnimatePresence>
                 {selectedFishbowl !== undefined &&

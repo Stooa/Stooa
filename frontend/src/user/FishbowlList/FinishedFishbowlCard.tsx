@@ -12,8 +12,9 @@ import { Fishbowl } from '@/types/api-platform';
 import { CardStyled, CardTitle } from '@/user/FishbowlList/styles';
 import { convertIntoClassName } from '@/lib/helpers';
 import Icon from '@/components/Common/Fields/Icon';
-import { Chart as ChartJS, ArcElement } from 'chart.js';
+import People from '@/ui/svg/people.svg';
 import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement } from 'chart.js';
 
 ChartJS.register(ArcElement);
 
@@ -82,7 +83,8 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
           <p>46 min</p>
         </div>
         <div className="card__participants">
-          <div>12</div>
+          <People />
+          12
         </div>
         <div className="card__chart">
           <h4>Satisfaction</h4>
