@@ -8,20 +8,32 @@
  */
 
 import TitleWithDivider from '@/components/Common/TitleWithDivider';
-import { Fishbowl } from '@/types/api-platform';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyledFishbowlDashboardData } from './styles';
 
 import Calendar from '@/ui/svg/calendar.svg';
 import Hourglass from '@/ui/svg/hourglass.svg';
 import People from '@/ui/svg/people-bigger.svg';
+import SatisfactionSummary from '../SatisfactionSummary';
+import { Fishbowl } from '@/types/api-platform';
+import useFeedback from '@/hooks/useFeedback';
+import FeedbackList from '../FeedbackList';
 
 interface Props {
   fishbowl: Fishbowl;
 }
 
 export const FishbowlDashboardData = ({ fishbowl }: Props) => {
-  console.log(fishbowl);
+  const { summarizeFeedbackSatisfacion } = useFeedback(fishbowl);
+
+  const getSatisfactionData = useCallback(() => {
+    if (!fishbowl.summarizedFeedback) {
+      return summarizeFeedbackSatisfacion();
+    } else {
+      return fishbowl.summarizedFeedback;
+    }
+  }, [fishbowl, summarizeFeedbackSatisfacion]);
+
   return (
     <StyledFishbowlDashboardData>
       <h2>Details</h2>
@@ -53,6 +65,17 @@ export const FishbowlDashboardData = ({ fishbowl }: Props) => {
       </div>
       <div className="feedback">
         <TitleWithDivider headingLevel="h3">Feedback</TitleWithDivider>
+        <SatisfactionSummary
+          personsGaveFeedback={fishbowl.feedbacks?.length || 0}
+          participants={fishbowl.participants?.length || 0}
+          satisfactionData={getSatisfactionData()}
+        />
+        {fishbowl.feedbacks && fishbowl.feedbacks?.length > 0 && (
+          <FeedbackList feedbacks={fishbowl.feedbacks} />
+        )}
+        <TitleWithDivider headingLevel="h3">
+          {fishbowl.participants?.length} Usuarios
+        </TitleWithDivider>
       </div>
     </StyledFishbowlDashboardData>
   );

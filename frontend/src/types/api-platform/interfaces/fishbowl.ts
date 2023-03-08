@@ -7,28 +7,27 @@
  * file that was distributed with this source code.
  */
 
-import {Participant} from "@/types/api-platform/interfaces/participant";
-import {Feedback} from "@/types/api-platform/interfaces/feedback";
-import {User} from "@/types/api-platform/interfaces/user";
+import { Participant } from '@/types/api-platform/interfaces/participant';
+import { Feedback } from '@/types/api-platform/interfaces/feedback';
 
 export interface Fishbowl {
-  "@id"?: string;
-  name?: string;
-  description?: string;
-  startDateTime: Date;
-  timezone: string;
-  locale: string;
-  duration: Date;
-  isFishbowlNow?: boolean;
-  hasIntroduction?: boolean;
-  isPrivate?: boolean;
-  plainPassword?: string;
-  readonly slug: string;
-  readonly host: string;
-  readonly currentStatus?: string;
-  readonly participants?: Participant[];
-  readonly feedbacks?: Feedback[];
-  readonly startDateTimeTz?: Date;
-  readonly endDateTimeTz?: Date;
-  readonly durationFormatted?: string;
+  '@id'?: string;
+  'name'?: string;
+  'description'?: string;
+  'startDateTime': Date;
+  'timezone': string;
+  'locale': string;
+  'duration': Date;
+  'isFishbowlNow'?: boolean;
+  'hasIntroduction'?: boolean;
+  'isPrivate'?: boolean;
+  'plainPassword'?: string;
+  readonly 'slug': string;
+  readonly 'host': string;
+  readonly 'currentStatus'?: string;
+  readonly 'participants'?: Participant[];
+  readonly 'feedbacks'?: Feedback[];
+  readonly 'startDateTimeTz'?: Date;
+  readonly 'endDateTimeTz'?: Date;
+  readonly 'durationFormatted'?: string;
 }

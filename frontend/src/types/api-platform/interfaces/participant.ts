@@ -7,8 +7,10 @@
  * file that was distributed with this source code.
  */
 
-export interface SatisfactionData {
-  sad: number;
-  neutral: number;
-  happy: number;
+export interface Participant {
+  "@id"?: string;
+  readonly user?: string;
+  readonly guest?: string;
+  readonly lastPing: Date;
+  readonly fishbowl: string;
 }

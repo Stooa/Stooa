@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-export interface SatisfactionData {
-  sad: number;
-  neutral: number;
-  happy: number;
+export interface Guest {
+  "@id"?: string;
+  name: string;
 }

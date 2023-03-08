@@ -17,7 +17,19 @@ module.exports = nextTranslate({
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack']
+      use: {
+        loader: '@svgr/webpack',
+        options: {
+          svgoConfig: {
+            plugins: [
+              {
+                name: 'removeViewBox',
+                active: false
+              }
+            ]
+          }
+        }
+      }
     });
     config.module.rules.push({
       test: /\.(mp3|wav)$/i,

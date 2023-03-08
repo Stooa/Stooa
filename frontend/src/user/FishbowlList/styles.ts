@@ -453,6 +453,7 @@ const StyledFishbowlDashboardData = styled.div`
     & h3 {
       color: ${COLOR_NEUTRO_700};
       font-weight: 500;
+      margin-bottom: ${space(2)};
     }
   }
 `;

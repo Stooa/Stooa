@@ -9,6 +9,7 @@
 
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement } from 'chart.js';
+import { SatisfactionData } from '@/types/feedback';
 
 ChartJS.register(ArcElement);
 
@@ -18,7 +19,7 @@ const chartOptions = {
 };
 
 interface Props {
-  feedbackSatisfaction: { bad: number; okay: number; great: number };
+  feedbackSatisfaction: SatisfactionData;
 }
 
 const DoughnutChart = ({ feedbackSatisfaction }: Props) => {
