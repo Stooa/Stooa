@@ -79,7 +79,7 @@
     "cypress-cucumber-preprocessor": "4.3.1",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
-    "eslint-config-prettier": "8.6.0",
+    "eslint-config-prettier": "8.7.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-header": "3.1.1",
     "jest": "28.1.3",
