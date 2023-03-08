@@ -21,6 +21,7 @@ interface Props {
 }
 
 export const FishbowlDashboardData = ({ fishbowl }: Props) => {
+  console.log(fishbowl);
   return (
     <StyledFishbowlDashboardData>
       <h2>Details</h2>
