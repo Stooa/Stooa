@@ -23,14 +23,14 @@ import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
-  padding: ${space(3)} 0;
+  /* padding: ${space(3)} 0; */
   width: 100%;
   max-width: ${BREAKPOINTS.desktopLarge}px;
 `;
 
 const FishbowlListContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto;
   width: 100%;
 
   &.not-empty {
@@ -38,6 +38,7 @@ const FishbowlListContent = styled.div`
   }
 
   ${media.min('desktop')`
+  grid-template-columns: 1fr 1fr;
     column-gap: ${space()};
   `}
 `;
@@ -155,6 +156,15 @@ const StyledListHeader = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: ${space(2)};
+
+    & .fishbowl-list__header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: ${space()} ${space(2)};
+      & .fishbowl-list__header-link {
+        flex: 1 170px;
+      }
+    }
   }
 
   .schedule-fishbowl {
@@ -349,7 +359,7 @@ const StyledDetailPlaceholder = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: ${rems(4)};
-  width: 470px;
+  width: 100%;
   min-height: 500px;
   background-color: ${COLOR_NEUTRO_100};
   padding: ${space(3)};

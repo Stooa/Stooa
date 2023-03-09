@@ -197,7 +197,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
       <FishbowlListWrapper>
         <StyledListHeader>
           <div className="header__wrapper">
-            <div>
+            <div className="fishbowl-list__header">
               <Link
                 className={`fishbowl-list__header-link fishbowl-list__scheduled-link ${
                   !isPastList ? 'medium' : ''
@@ -213,6 +213,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   }}
                 />
               </Link>
+
               <Link
                 className={`fishbowl-list__header-link fishbowl-list__finished-link ${
                   isPastList ? 'medium' : ''
@@ -317,7 +318,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                           </h2>
                         </div>
                         <FishbowlForm
-                          $isFull={windowWidth !== undefined && windowWidth <= BREAKPOINTS.desktop}
+                          $isFull={true}
                           selectedFishbowl={selectedFishbowl}
                           isEditForm={true}
                           onSaveCallback={handleUpdateFishbowl}
