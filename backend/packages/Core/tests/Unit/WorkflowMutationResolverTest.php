@@ -139,7 +139,7 @@ class WorkflowMutationResolverTest extends TestCase
     }
 
     /** @return iterable<array{0: class-string}> */
-    public function mutationResolverProvider(): iterable
+    public static function mutationResolverProvider(): iterable
     {
         yield [FishbowlRunMutationResolver::class];
         yield [FishbowlNoIntroRunMutationResolver::class];
@@ -148,7 +148,7 @@ class WorkflowMutationResolverTest extends TestCase
     }
 
     /** @return iterable<array{0: class-string, 1: Fishbowl::TRANSITION_*}> */
-    public function mutationResolverProviderWithTransition(): iterable
+    public static function mutationResolverProviderWithTransition(): iterable
     {
         yield [FishbowlRunMutationResolver::class, Fishbowl::TRANSITION_RUN];
         yield [FishbowlNoIntroRunMutationResolver::class, Fishbowl::TRANSITION_NO_INTRO_RUN];
