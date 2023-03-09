@@ -80,6 +80,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         $this->assertNotEmpty($responseArray['hydra:view']['hydra:first']);
         $this->assertNotEmpty($responseArray['hydra:view']['hydra:last']);
         $this->assertNotEmpty($responseArray['hydra:view']['hydra:next']);
+        $this->assertSame(25, \count($responseArray['hydra:member']));
 
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
     }
@@ -124,6 +125,52 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         $this->assertNotEmpty($responseArray['hydra:member'][0]['feedbacks'][0]['participant']);
 
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
+    }
+
+    /** @test */
+    public function itGetsOrderedFishbowls(): void
+    {
+        $hostToken = $this->logIn($this->host);
+
+        $threeHoursAgo = (new \DateTimeImmutable())->modify('-3 hour');
+
+        $first = FishbowlFactory::createOne([
+            'name' => 'first',
+            'startDateTime' => new \DateTime('now'),
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'host' => $this->host,
+        ])->object();
+
+        $second = FishbowlFactory::createOne([
+            'name' => 'second',
+            'startDateTime' => new \DateTime('yesterday'),
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'host' => $this->host,
+        ])->object();
+
+        $third = FishbowlFactory::createOne([
+            'name' => 'second',
+            'startDateTime' => new \DateTime('- 2 days'),
+            'duration' => \DateTime::createFromFormat('!H:i', '30:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'host' => $this->host,
+        ])->object();
+
+        $response = static::createClient()->request('GET', '/fishbowls', [
+            'query' => [
+                'or[startDateTime][after]' => $threeHoursAgo->format('Y-m-d H:i:s'),
+                'or[currentStatus]' => Fishbowl::STATUS_FINISHED,
+                'order[startDateTime]' => 'desc',
+
+            ],
+            'auth_bearer' => $hostToken,
+        ]);
+
+        $this->assertSame($first->getName(), $response->toArray()['hydra:member'][0]['name']);
+        $this->assertSame($second->getName(), $response->toArray()['hydra:member'][1]['name']);
+        $this->assertSame($third->getName(), $response->toArray()['hydra:member'][2]['name']);
     }
 
     private function logIn(User $user): string

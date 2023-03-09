@@ -98,7 +98,7 @@ class LoginFunctionalTest extends ApiTestCase
     }
 
     /** @return iterable<array{0: string, 1: string}> */
-    public function errorMessageProvider(): iterable
+    public static function errorMessageProvider(): iterable
     {
         yield ['es', 'Credenciales no válidas'];
         yield ['en', 'Invalid credentials'];
