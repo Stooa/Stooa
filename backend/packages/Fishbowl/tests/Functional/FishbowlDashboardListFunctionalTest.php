@@ -80,6 +80,7 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         $this->assertNotEmpty($responseArray['hydra:view']['hydra:first']);
         $this->assertNotEmpty($responseArray['hydra:view']['hydra:last']);
         $this->assertNotEmpty($responseArray['hydra:view']['hydra:next']);
+        $this->assertSame(25, \count($responseArray['hydra:member']));
 
         $this->assertMatchesResourceCollectionJsonSchema(Fishbowl::class);
     }
