@@ -22,4 +22,5 @@ coverage/
 
 .phpunit
 .phpunit.result.cache
+.phpunit.cache
 /phpunit.xml
