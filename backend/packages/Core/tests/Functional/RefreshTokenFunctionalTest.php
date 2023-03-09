@@ -232,7 +232,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
     }
 
     /** @return iterable<array{string}> */
-    public function roomProvider(): iterable
+    public static function roomProvider(): iterable
     {
         yield ['first'];
         yield ['second'];

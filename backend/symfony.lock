@@ -358,9 +358,6 @@
     "rector/rector": {
         "version": "0.12.21"
     },
-    "runroom-packages/testing": {
-        "version": "0.9.2"
-    },
     "sebastian/cli-parser": {
         "version": "1.0.0"
     },
@@ -399,9 +396,6 @@
     },
     "sebastian/recursion-context": {
         "version": "4.0.2"
-    },
-    "sebastian/resource-operations": {
-        "version": "3.0.2"
     },
     "sebastian/type": {
         "version": "2.2.1"
