@@ -10,7 +10,7 @@
 import { StyledTitleWithDivider } from './styles';
 
 interface Props {
-  children: string;
+  children: string | string[] | JSX.Element;
   headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 }
 

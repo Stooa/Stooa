@@ -18,6 +18,7 @@ import SatisfactionSummary from '../SatisfactionSummary';
 import { Fishbowl } from '@/types/api-platform';
 import useFeedback from '@/hooks/useFeedback';
 import FeedbackList from '../FeedbackList';
+import DashboardParticipantsList from '../DashboardParticipantsList';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -73,9 +74,14 @@ export const FishbowlDashboardData = ({ fishbowl }: Props) => {
         {fishbowl.feedbacks && fishbowl.feedbacks?.length > 0 && (
           <FeedbackList feedbacks={fishbowl.feedbacks} />
         )}
-        <TitleWithDivider headingLevel="h3">
-          {fishbowl.participants?.length} Usuarios
-        </TitleWithDivider>
+        {fishbowl.participants && (
+          <>
+            <TitleWithDivider headingLevel="h3">
+              {fishbowl.participants.length.toString()} Usuarios
+            </TitleWithDivider>
+            <DashboardParticipantsList participants={fishbowl.participants} />
+          </>
+        )}
       </div>
     </StyledFishbowlDashboardData>
   );

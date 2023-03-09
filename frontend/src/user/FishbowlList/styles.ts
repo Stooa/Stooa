@@ -397,6 +397,9 @@ const StyledFishbowlDashboardData = styled.div`
   padding: ${space(4)};
   background-color: ${COLOR_NEUTRO_100};
   text-align: left;
+  overflow-y: auto;
+
+  ${scrolllbarStyle};
 
   & h2 {
     margin-bottom: ${space(2)};
