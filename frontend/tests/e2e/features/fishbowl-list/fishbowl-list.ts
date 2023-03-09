@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 const date = new Date();
 const isoDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
