@@ -371,7 +371,7 @@ class FishbowlServiceTest extends TestCase
     }
 
     /** @return iterable<array{string}> */
-    public function fishbowlTitleProvider(): iterable
+    public static function fishbowlTitleProvider(): iterable
     {
         yield [''];
         yield ['   '];
