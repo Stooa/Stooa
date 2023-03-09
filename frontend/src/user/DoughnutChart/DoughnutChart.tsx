@@ -15,24 +15,30 @@ ChartJS.register(ArcElement);
 
 const chartOptions = {
   responsive: true,
-  maintainAspectRatio: false
+  cutout: '62%',
+  maintainAspectRatio: false,
+  elements: {
+    arc: {
+      borderWidth: 0
+    }
+  }
 };
 
 interface Props {
-  feedbackSatisfaction: SatisfactionData;
+  feedbackSatisfaction: SatisfactionData | null;
 }
 
 const DoughnutChart = ({ feedbackSatisfaction }: Props) => {
-  const dataInArr = Object.values(feedbackSatisfaction);
+  const dataInArr = Object.values(feedbackSatisfaction || { okay: 2, good: 4, bad: 1 });
 
   const feedbackData = {
-    labels: ['bad', 'good', 'great'],
+    labels: ['sad', 'okay', 'great'],
     datasets: [
       {
         label: 'Feedback',
         data: dataInArr,
-        backgroundColor: ['#5DDBD0', '#EEDE96', '#FCBAB6'],
-        hoverBackgroundColor: ['#5DDBD0', '#EEDE96', '#FCBAB6']
+        backgroundColor: ['#EEDE96', '#5DDBD0', '#FCBAB6'],
+        hoverBackgroundColor: ['#EEDE96', '#5DDBD0', '#FCBAB6']
       }
     ]
   };

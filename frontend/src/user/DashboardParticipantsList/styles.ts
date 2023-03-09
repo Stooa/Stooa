@@ -8,7 +8,6 @@
  */
 
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_300, COLOR_NEUTRO_500, COLOR_NEUTRO_800 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledListWrapper = styled.div``;
@@ -16,15 +15,20 @@ const StyledListWrapper = styled.div``;
 const StyledParticipantItem = styled.div`
   margin-bottom: ${space(2)};
 
+  & .participant__contacts {
+    display: flex;
+    justify-content: space-between;
+  }
+
   & .participant__socials {
     display: flex;
     gap: ${space(1)};
 
     & a {
-      & .disabled {
+      &.disabled {
         pointer-events: none;
         cursor: default;
-        opacity: 0.5;
+        opacity: 0.4;
       }
 
       & svg {

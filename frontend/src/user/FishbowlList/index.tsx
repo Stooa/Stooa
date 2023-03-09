@@ -274,6 +274,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                       />
                     ))}
                 <Button
+                  variant="link"
                   className="sticky-button"
                   onClick={() => loadMore()}
                   disabled={loadMoreDisabled}

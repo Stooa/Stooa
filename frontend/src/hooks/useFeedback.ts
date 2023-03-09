@@ -104,7 +104,7 @@ const useFeedback = (fishbowlData: Fishbowl) => {
       });
   };
 
-  const summarizeFeedbackSatisfacion = useCallback((): SatisfactionData => {
+  const summarizeFeedbackSatisfacion = useCallback((): SatisfactionData | null => {
     if (fishbowlData.feedbacks && fishbowlData.feedbacks.length > 0) {
       const summarizedFeedback = {
         neutral: 0,
@@ -118,7 +118,7 @@ const useFeedback = (fishbowlData: Fishbowl) => {
 
       return summarizedFeedback;
     }
-    return { happy: 0, neutral: 0, sad: 0 };
+    return null;
   }, [fishbowlData.feedbacks]);
 
   return {

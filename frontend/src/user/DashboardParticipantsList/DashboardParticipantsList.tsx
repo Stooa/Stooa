@@ -27,8 +27,8 @@ const DashboardParticipantsList = ({ participants }: Props) => {
             {participant.user && <p className="body-xs medium">{participant.user.name}</p>}
             {participant.guest && <p className="body-xs medium">{participant.guest.name}</p>}
             <div className="participant__contacts">
-              {participant.user && <p>{participant.user.email}</p>}
-              <div className="participant__socials">
+              <p className="body-xs">{participant.user && participant.user.email}</p>
+              <div className="participant__socials ">
                 <a
                   href={`${participant.user?.twitterProfile || ''}`}
                   target="_blank"

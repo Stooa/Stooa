@@ -26,6 +26,7 @@ interface Props {
 
 export const FishbowlDashboardData = ({ fishbowl }: Props) => {
   const { summarizeFeedbackSatisfacion } = useFeedback(fishbowl);
+  const { startDateTimeTz } = fishbowl;
 
   const getSatisfactionData = useCallback(() => {
     if (!fishbowl.summarizedFeedback) {
@@ -35,9 +36,16 @@ export const FishbowlDashboardData = ({ fishbowl }: Props) => {
     }
   }, [fishbowl, summarizeFeedbackSatisfacion]);
 
+  const startDateTime = new Date(startDateTimeTz);
+
+  const month = startDateTime.toLocaleString('default', { month: 'long' });
+  const day = startDateTime.toLocaleString('default', { day: 'numeric' });
+  const time = startDateTime.toLocaleString('default', { hour: 'numeric', minute: 'numeric' });
+  const year = startDateTime.toLocaleString('default', { year: 'numeric' });
+
   return (
     <StyledFishbowlDashboardData>
-      <h2>Details</h2>
+      <h2 className="medium">Details</h2>
       <h3>{fishbowl.name}</h3>
       <p className="description">{fishbowl.description}</p>
       <div className="data">
@@ -46,8 +54,10 @@ export const FishbowlDashboardData = ({ fishbowl }: Props) => {
             <Calendar />
             <h4>Date</h4>
           </div>
-          <p className="medium">13 September, 2023</p>
-          <p className="medium">13:00h</p>
+          <p className="medium">
+            {month} {day}, {year}
+          </p>
+          <p className="medium">{time}</p>
         </div>
         <div className="data__group">
           <div className="data__title">
@@ -74,7 +84,7 @@ export const FishbowlDashboardData = ({ fishbowl }: Props) => {
         {fishbowl.feedbacks && fishbowl.feedbacks?.length > 0 && (
           <FeedbackList feedbacks={fishbowl.feedbacks} />
         )}
-        {fishbowl.participants && (
+        {fishbowl.participants && fishbowl.participants?.length > 0 && (
           <>
             <TitleWithDivider headingLevel="h3">
               {fishbowl.participants.length.toString()} Usuarios

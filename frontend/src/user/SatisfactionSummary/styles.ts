@@ -8,7 +8,7 @@
  */
 
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_600 } from '@/ui/settings';
+import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
 import { BODY_LG, BODY_XS } from '@/ui/Texts';
 import styled from 'styled-components';
 
@@ -16,6 +16,26 @@ const StyledSummaryWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: ${space(4)};
+  position: relative;
+
+  &.empty .summary__general,
+  &.empty .summary__detail {
+    filter: grayscale(1) brightness(0.9) sepia(0.4) hue-rotate(-20deg);
+    opacity: 0.5;
+  }
+
+  & .empty__wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_NEUTRO_700};
+    padding: ${space(2)};
+
+    border-radius: ${BORDER_RADIUS};
+  }
 
   & .summary__general {
     display: flex;

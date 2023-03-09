@@ -21,5 +21,5 @@ export interface Fishbowl
   startDateTimeTz: string;
   endDateTimeTz: string;
   isPrivate: boolean;
-  summarizedFeedback?: SatisfactionData;
+  summarizedFeedback?: SatisfactionData | null;
 }

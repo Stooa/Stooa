@@ -32,23 +32,21 @@ const FeedbackList = ({ feedbacks }: Props) => {
         const Component = FeedbackSVG[feedback.satisfaction];
 
         return (
-          <>
-            <div key={feedback['@id']} className="feedback">
-              <div className="feedback__title body-md">
-                <h4 className="body-md">holahola</h4>
-                <span className="feedback__pill body-xs medium">
-                  {feedback.origin === 'thankyou' ? 'after' : 'during'}
-                </span>
-              </div>
-              {feedback.email && <p className="medium body-xs">{feedback.email}</p>}
-              {feedback.comment && <p className="feedback__comment">{feedback.comment}</p>}
-              <div className="feedback__satisfaction">
-                <Component />
-                <p className="medium body-xs">{feedback.satisfaction}</p>
-              </div>
+          <div key={feedback['@id']} className="feedback">
+            <div className="feedback__title body-md">
+              <h4 className="body-md">holahola</h4>
+              <span className="feedback__pill body-xs medium">
+                {feedback.origin === 'thankyou' ? 'after' : 'during'}
+              </span>
+            </div>
+            {feedback.email && <p className="medium body-xs">{feedback.email}</p>}
+            {feedback.comment && <p className="feedback__comment">{feedback.comment}</p>}
+            <div className="feedback__satisfaction">
+              <Component />
+              <p className="medium body-xs">{feedback.satisfaction}</p>
             </div>
             {feedbacks.length - 1 !== index && <hr className="feedback__separator" />}
-          </>
+          </div>
         );
       })}
     </StyledFeedbackWrapper>

@@ -17,7 +17,7 @@ import Okay from '@/ui/svg/emojis/feedback/okay.svg';
 import Love from '@/ui/svg/emojis/feedback/love.svg';
 
 interface Props {
-  satisfactionData: SatisfactionData;
+  satisfactionData: SatisfactionData | null;
   participants: number;
   personsGaveFeedback: number;
 }
@@ -25,7 +25,13 @@ interface Props {
 const SatisfactionSummary = ({ satisfactionData, personsGaveFeedback, participants }: Props) => {
   const { t } = useTranslation('fishbowl');
   return (
-    <StyledSummaryWrapper>
+    <StyledSummaryWrapper className={!satisfactionData ? 'empty' : ''}>
+      {!satisfactionData && (
+        <div className="empty__wrapper">
+          <p className="body-md">{t('feedback.dashboard.noFeedback')}</p>
+        </div>
+      )}
+
       <div className="summary__general">
         <div className="chart-wrapper">
           <DoughnutChart feedbackSatisfaction={satisfactionData} />
@@ -40,17 +46,17 @@ const SatisfactionSummary = ({ satisfactionData, personsGaveFeedback, participan
 
       <div className="summary__detail">
         <div>
-          <span>{satisfactionData.sad}</span>
+          <span>{satisfactionData?.sad || 0}</span>
           <Bad />
           <p>{t('feedback.notMuch')}</p>
         </div>
         <div>
-          <span>{satisfactionData.neutral}</span>
+          <span>{satisfactionData?.neutral || 0}</span>
           <Okay />
           <p>{t('feedback.okay')}</p>
         </div>
         <div>
-          <span>{satisfactionData.happy}</span>
+          <span>{satisfactionData?.happy || 0}</span>
           <Love />
           <p>{t('feedback.great')}</p>
         </div>

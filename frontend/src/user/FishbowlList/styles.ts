@@ -433,6 +433,7 @@ const StyledFishbowlDashboardData = styled.div`
     display: flex;
     align-items: flex-end;
     gap: ${space(0.5)};
+    margin-left: -5px;
 
     margin-bottom: ${space(0.5)};
 

@@ -64,11 +64,11 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
           <div className="card__time">{time}</div>
         </div>
         <div className="card__duration">
-          <p>46 min</p>
+          <p>{fishbowl.durationFormatted}h</p>
         </div>
         <div className="card__participants">
           <People />
-          12
+          {fishbowl.participants?.length || 0}
         </div>
         <div className="card__chart">
           {summarizedFeedback ? (
