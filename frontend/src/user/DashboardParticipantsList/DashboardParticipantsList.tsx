@@ -21,7 +21,6 @@ const DashboardParticipantsList = ({ participants }: Props) => {
   return (
     <StyledListWrapper>
       {participants.map(participant => {
-        console.log(participant);
         return (
           <StyledParticipantItem
             key={participant['@id']}

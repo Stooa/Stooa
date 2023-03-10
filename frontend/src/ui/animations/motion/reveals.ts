@@ -12,7 +12,10 @@ import { Variants } from 'framer-motion';
 const basicRevealWithDelay: Variants = {
   initial: {
     opacity: 0.8,
-    y: '-6px'
+    y: '-6px',
+    transition: {
+      duration: 0.4
+    }
   },
   visible: {
     opacity: 1,

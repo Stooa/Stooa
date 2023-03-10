@@ -55,7 +55,6 @@ interface Props {
 
 const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
-  const [shouldShowEditForm, setShouldShowEditForm] = useState(false);
   const [paginator, setPaginator] = useState<number>(1);
   const [loadMoreDisabled, setLoadMoreDisabled] = useState<boolean>(false);
   const [fishbowls, setFishbowls] = useState<Fishbowl[]>();
@@ -101,7 +100,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         params
       })
       .then(response => {
-        console.log(response);
         return response.data;
       })
       .catch(error => {
@@ -172,9 +170,8 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   }, [getFishbowls]);
 
   useEffect(() => {
-    if (fishbowls) {
+    if (fishbowls && isPastList) {
       if (deviceType && deviceType !== 'Mobile') {
-        console.log(deviceType);
         setSelectedFishbowl(fishbowls[0]);
       }
 
@@ -185,14 +182,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
       });
     }
   }, [fishbowls]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (selectedFishbowl && !isTimeLessThanNMinutes(selectedFishbowl.startDateTimeTz, 30)) {
-      setShouldShowEditForm(true);
-    } else {
-      setShouldShowEditForm(false);
-    }
-  }, [selectedFishbowl]);
 
   if (!fishbowls) {
     return <LoadingIcon />;
@@ -284,14 +273,14 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   onClick={() => loadMore()}
                   disabled={loadMoreDisabled}
                 >
-                  Load more
+                  {t('fishbowl-list:loadMore')}
                 </Button>
               </FishbowlScrollList>
 
               <AnimatePresence>
-                {selectedFishbowl !== undefined &&
+                {selectedFishbowl &&
                   !isPastList &&
-                  (shouldShowEditForm ? (
+                  !isTimeLessThanNMinutes(selectedFishbowl.startDateTimeTz, 30) && (
                     <EditFormWrapper
                       key="edit-form"
                       as={motion.div}
@@ -328,24 +317,23 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                         />
                       </motion.div>
                     </EditFormWrapper>
-                  ) : (
-                    <EditFormWrapper
-                      key="edit-form"
-                      as={motion.div}
-                      variants={basicRevealWithDelay}
-                      initial="initial"
-                      exit="exit"
-                      animate="visible"
-                    >
-                      <DetailPlaceholder
-                        variants={
-                          deviceType === 'Mobile' ? bottomMobileReveal : basicRevealWithDelay
-                        }
-                        selectedFishbowl={selectedFishbowl}
-                        onClickBack={() => setSelectedFishbowl(undefined)}
-                      />
-                    </EditFormWrapper>
-                  ))}
+                  )}
+
+                {!selectedFishbowl && !isPastList && deviceType === 'Desktop' && (
+                  <EditFormWrapper
+                    key="edit-form"
+                    as={motion.div}
+                    variants={basicRevealWithDelay}
+                    initial="initial"
+                    exit="exit"
+                    animate="visible"
+                  >
+                    <DetailPlaceholder
+                      selectedFishbowl={selectedFishbowl}
+                      onClickBack={() => setSelectedFishbowl(undefined)}
+                    />
+                  </EditFormWrapper>
+                )}
 
                 {selectedFishbowl !== undefined && isPastList && (
                   <EditFormWrapper
@@ -357,18 +345,11 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                     animate="visible"
                   >
                     <FishbowlDashboardData
-                      variants={deviceType === 'Mobile' ? bottomMobileReveal : basicRevealWithDelay}
+                      variants={deviceType === 'Mobile' ? bottomMobileReveal : undefined}
                       onClickBack={() => setSelectedFishbowl(undefined)}
                       fishbowl={selectedFishbowl}
                     />
                   </EditFormWrapper>
-                )}
-
-                {!selectedFishbowl && (
-                  <DetailPlaceholder
-                    selectedFishbowl={selectedFishbowl}
-                    onClickBack={() => setSelectedFishbowl(undefined)}
-                  />
                 )}
               </AnimatePresence>
             </>

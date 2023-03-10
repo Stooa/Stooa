@@ -358,12 +358,13 @@ const StyledDetailPlaceholder = styled.div`
     display: none;
     `}
   }
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: ${rems(4)};
-  width: 100%;
   min-height: 500px;
   background-color: ${COLOR_NEUTRO_100};
   padding: ${space(3)};

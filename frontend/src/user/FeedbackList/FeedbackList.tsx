@@ -15,12 +15,14 @@ import Bad from '@/ui/svg/emojis/feedback/bad.svg';
 import Okay from '@/ui/svg/emojis/feedback/okay.svg';
 import Love from '@/ui/svg/emojis/feedback/love.svg';
 import PillWithTooltip from '../PillWithTooltip';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   feedbacks: Feedback[];
 }
 
 const FeedbackList = ({ feedbacks }: Props) => {
+  const { t } = useTranslation('fishbowl');
   const FeedbackSVG = {
     sad: Bad,
     neutral: Okay,
@@ -36,8 +38,16 @@ const FeedbackList = ({ feedbacks }: Props) => {
           <div key={feedback['@id']} className="feedback">
             <div className="feedback__title body-md">
               <h4 className="body-md">holahola</h4>
-              <PillWithTooltip tooltipText="tooltip tal noseque">
-                {feedback.origin === 'thankyou' ? 'after' : 'during'}
+              <PillWithTooltip
+                tooltipText={
+                  feedback.origin === 'thankyou'
+                    ? t('feedback.dashboard.afterTooltip')
+                    : t('feedback.dashboard.duringTooltip')
+                }
+              >
+                {feedback.origin === 'thankyou'
+                  ? t('feedback.dashboard.after')
+                  : t('feedback.dashboard.during')}
               </PillWithTooltip>
             </div>
             {feedback.email && <p className="medium body-xs">{feedback.email}</p>}

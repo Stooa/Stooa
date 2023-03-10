@@ -19,7 +19,7 @@ const StyledFeedbackWrapper = styled.div`
   & .feedback__title {
     display: flex;
     align-items: baseline;
-    gap: ${space(2)};
+    gap: ${space()};
 
     margin-bottom: ${space(0.5)};
   }

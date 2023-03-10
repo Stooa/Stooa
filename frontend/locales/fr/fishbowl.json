@@ -164,7 +164,7 @@
         }
     },
     "feedback" : {
-        "buttonText": "Feedback",
+        "title": "Feedback",
         "satisfactionTitle": "Donnez-nous votre feedback",
         "satisfactionDescription": "Êtes-vous satisfait de cet <i>fishbowl</i> ?",
         "notMuch": "Peu",

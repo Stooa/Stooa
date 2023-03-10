@@ -9,5 +9,6 @@
     "noSelectedFishbowlDescription": "Select a scheduled fishbowl to start editing it.",
     "fishbowlStarted": "This fishbowl has already started or is about to start.",
     "fishbowlStartedDescription": "Fishbowls that are running or that will start in less than 30 minutes can't be edited.",
-    "back": "Go back to list"
+    "back": "Go back to list",
+    "loadMore": "Load more"
 }

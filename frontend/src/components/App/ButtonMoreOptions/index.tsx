@@ -158,7 +158,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                     </div>
                   )}
                   <Feedback />
-                  {t('feedback.buttonText')}
+                  {t('feedback.title')}
                 </button>
               )}
               {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (

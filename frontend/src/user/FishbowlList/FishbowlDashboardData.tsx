@@ -21,7 +21,7 @@ import useFeedback from '@/hooks/useFeedback';
 import FeedbackList from '../FeedbackList';
 import DashboardParticipantsList from '../DashboardParticipantsList';
 import { motion, Variants } from 'framer-motion';
-import { basicRevealWithDelay } from '@/ui/animations/motion/reveals';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -30,6 +30,7 @@ interface Props {
 }
 
 export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props) => {
+  const { t } = useTranslation('fishbowl');
   const { summarizeFeedbackSatisfacion } = useFeedback(fishbowl);
   const { startDateTimeTz } = fishbowl;
 
@@ -52,7 +53,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
     <StyledFishbowlDashboardData
       key={fishbowl.id}
       as={motion.div}
-      variants={variants || basicRevealWithDelay}
+      variants={variants}
       initial="initial"
       exit="exit"
       animate="visible"
@@ -61,7 +62,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         <MobileBackButton className="bottom" onClick={onClickBack}>
           <BackArrow />
         </MobileBackButton>
-        <h2 className="medium">Details</h2>
+        <h2 className="medium">{t('feedback.dashboard.details')}</h2>
       </div>
       <h3>{fishbowl.name}</h3>
       <p className="description">{fishbowl.description}</p>
@@ -69,7 +70,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         <div className="data__group">
           <div className="data__title">
             <Calendar />
-            <h4>Date</h4>
+            <h4>{t('form:fishbowl.day')}</h4>
           </div>
           <p className="medium">
             {month} {day}, {year}
@@ -79,20 +80,20 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         <div className="data__group">
           <div className="data__title">
             <Hourglass />
-            <h4>Duration</h4>
+            <h4>{t('form:fishbowl.duration')}</h4>
           </div>
-          <p className="medium">73min</p>
+          <p className="medium">{fishbowl.durationFormatted}</p>
         </div>
         <div className="data__group">
           <div className="data__title">
             <People />
-            <h4>Participants</h4>
+            <h4>{t('feedback.dashboard.participants')}</h4>
           </div>
-          <p className="medium">13</p>
+          <p className="medium">{fishbowl.participants?.length || 0}</p>
         </div>
       </div>
       <div className="feedback">
-        <TitleWithDivider headingLevel="h3">Feedback</TitleWithDivider>
+        <TitleWithDivider headingLevel="h3">{t('feedback.title')}</TitleWithDivider>
         <SatisfactionSummary
           personsGaveFeedback={fishbowl.feedbacks?.length || 0}
           participants={fishbowl.participants?.length || 0}

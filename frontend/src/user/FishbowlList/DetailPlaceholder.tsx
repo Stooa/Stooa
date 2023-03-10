@@ -9,7 +9,6 @@
 
 import { ROUTE_FISHBOWL } from '@/app.config';
 import RedirectLink from '@/components/Web/RedirectLink';
-import { basicRevealWithDelay } from '@/ui/animations/motion/reveals';
 import { motion, Variants } from 'framer-motion';
 import Trans from 'next-translate/Trans';
 import { StyledDetailPlaceholder } from './styles';
@@ -23,14 +22,13 @@ interface Props {
   variants?: Variants;
 }
 
-const DetailPlaceholder = ({ selectedFishbowl, onClickBack, variants }: Props) => {
+const DetailPlaceholder = ({ selectedFishbowl, onClickBack }: Props) => {
   const { t } = useTranslation('fishbowl-list');
   return (
     <StyledDetailPlaceholder
       key="detail-placeholder"
       data-testid="started-fishbowl-placeholder"
       as={motion.div}
-      variants={variants || basicRevealWithDelay}
       initial="initial"
       exit="exit"
       animate="visible"
