@@ -7,13 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
 import { BODY_LG, BODY_XS } from '@/ui/Texts';
 import styled from 'styled-components';
 
 const StyledSummaryWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: ${space(4)};
   justify-content: space-between;
   margin-bottom: ${space(4)};
   position: relative;
@@ -29,12 +31,13 @@ const StyledSummaryWrapper = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+
     color: ${COLOR_NEUTRO_100};
     background-color: ${COLOR_NEUTRO_700};
     padding: ${space(2)};
-
     border-radius: ${BORDER_RADIUS};
+
+    z-index: 1;
   }
 
   & .summary__general {
@@ -47,9 +50,14 @@ const StyledSummaryWrapper = styled.div`
     ${BODY_XS};
 
     display: flex;
+    justify-content: space-between;
     gap: ${space(4)};
     text-align: center;
     color: ${COLOR_NEUTRO_600};
+
+    ${media.max('tablet')`
+      flex: 1;
+    `}
 
     & > div {
       position: relative;

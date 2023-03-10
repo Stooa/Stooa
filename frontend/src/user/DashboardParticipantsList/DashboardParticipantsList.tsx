@@ -23,11 +23,14 @@ const DashboardParticipantsList = ({ participants }: Props) => {
       {participants.map(participant => {
         console.log(participant);
         return (
-          <StyledParticipantItem key={participant['@id']}>
-            {participant.user && <p className="body-xs medium">{participant.user.name}</p>}
-            {participant.guest && <p className="body-xs medium">{participant.guest.name}</p>}
+          <StyledParticipantItem
+            key={participant['@id']}
+            className={participant.user ? 'column' : ''}
+          >
+            {participant.user && <p className="body-sm medium">{participant.user.name}</p>}
+            {participant.guest && <p className="body-sm medium">{participant.guest.name}</p>}
             <div className="participant__contacts">
-              <p className="body-xs">{participant.user && participant.user.email}</p>
+              <p className="body-sm">{participant.user && participant.user.email}</p>
               <div className="participant__socials ">
                 <a
                   href={`${participant.user?.twitterProfile || ''}`}

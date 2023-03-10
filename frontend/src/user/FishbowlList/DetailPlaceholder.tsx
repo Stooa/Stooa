@@ -9,28 +9,28 @@
 
 import { ROUTE_FISHBOWL } from '@/app.config';
 import RedirectLink from '@/components/Web/RedirectLink';
-import { basicRevealWithDelay, bottomMobileReveal } from '@/ui/animations/motion/reveals';
-import { motion } from 'framer-motion';
+import { basicRevealWithDelay } from '@/ui/animations/motion/reveals';
+import { motion, Variants } from 'framer-motion';
 import Trans from 'next-translate/Trans';
 import { StyledDetailPlaceholder } from './styles';
 import { Fishbowl } from '@/types/api-platform';
 import Button from '@/components/Common/Button';
 import useTranslation from 'next-translate/useTranslation';
-import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 interface Props {
   selectedFishbowl: Fishbowl | undefined;
   onClickBack: () => void;
+  variants?: Variants;
 }
 
-const DetailPlaceholder = ({ selectedFishbowl, onClickBack }: Props) => {
+const DetailPlaceholder = ({ selectedFishbowl, onClickBack, variants }: Props) => {
   const { t } = useTranslation('fishbowl-list');
-  const { deviceType } = useNavigatorType();
   return (
     <StyledDetailPlaceholder
+      key="detail-placeholder"
       data-testid="started-fishbowl-placeholder"
       as={motion.div}
-      variants={deviceType !== 'Mobile' ? basicRevealWithDelay : bottomMobileReveal}
+      variants={variants || basicRevealWithDelay}
       initial="initial"
       exit="exit"
       animate="visible"

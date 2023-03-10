@@ -14,6 +14,7 @@ import { StyledFeedbackWrapper } from './styles';
 import Bad from '@/ui/svg/emojis/feedback/bad.svg';
 import Okay from '@/ui/svg/emojis/feedback/okay.svg';
 import Love from '@/ui/svg/emojis/feedback/love.svg';
+import PillWithTooltip from '../PillWithTooltip';
 
 interface Props {
   feedbacks: Feedback[];
@@ -35,9 +36,9 @@ const FeedbackList = ({ feedbacks }: Props) => {
           <div key={feedback['@id']} className="feedback">
             <div className="feedback__title body-md">
               <h4 className="body-md">holahola</h4>
-              <span className="feedback__pill body-xs medium">
+              <PillWithTooltip tooltipText="tooltip tal noseque">
                 {feedback.origin === 'thankyou' ? 'after' : 'during'}
-              </span>
+              </PillWithTooltip>
             </div>
             {feedback.email && <p className="medium body-xs">{feedback.email}</p>}
             {feedback.comment && <p className="feedback__comment">{feedback.comment}</p>}

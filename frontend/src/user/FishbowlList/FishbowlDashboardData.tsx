@@ -9,9 +9,10 @@
 
 import TitleWithDivider from '@/components/Common/TitleWithDivider';
 import React, { useCallback } from 'react';
-import { StyledFishbowlDashboardData } from './styles';
+import { MobileBackButton, StyledFishbowlDashboardData } from './styles';
 
 import Calendar from '@/ui/svg/calendar.svg';
+import BackArrow from '@/ui/svg/arrow-prev.svg';
 import Hourglass from '@/ui/svg/hourglass.svg';
 import People from '@/ui/svg/people-bigger.svg';
 import SatisfactionSummary from '../SatisfactionSummary';
@@ -19,12 +20,16 @@ import { Fishbowl } from '@/types/api-platform';
 import useFeedback from '@/hooks/useFeedback';
 import FeedbackList from '../FeedbackList';
 import DashboardParticipantsList from '../DashboardParticipantsList';
+import { motion, Variants } from 'framer-motion';
+import { basicRevealWithDelay } from '@/ui/animations/motion/reveals';
 
 interface Props {
   fishbowl: Fishbowl;
+  onClickBack: () => void;
+  variants?: Variants;
 }
 
-export const FishbowlDashboardData = ({ fishbowl }: Props) => {
+export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props) => {
   const { summarizeFeedbackSatisfacion } = useFeedback(fishbowl);
   const { startDateTimeTz } = fishbowl;
 
@@ -44,8 +49,20 @@ export const FishbowlDashboardData = ({ fishbowl }: Props) => {
   const year = startDateTime.toLocaleString('default', { year: 'numeric' });
 
   return (
-    <StyledFishbowlDashboardData>
-      <h2 className="medium">Details</h2>
+    <StyledFishbowlDashboardData
+      key={fishbowl.id}
+      as={motion.div}
+      variants={variants || basicRevealWithDelay}
+      initial="initial"
+      exit="exit"
+      animate="visible"
+    >
+      <div className="header-wrapper">
+        <MobileBackButton className="bottom" onClick={onClickBack}>
+          <BackArrow />
+        </MobileBackButton>
+        <h2 className="medium">Details</h2>
+      </div>
       <h3>{fishbowl.name}</h3>
       <p className="description">{fishbowl.description}</p>
       <div className="data">

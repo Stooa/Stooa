@@ -23,7 +23,7 @@ import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
-  /* padding: ${space(3)} 0; */
+  padding-bottom: ${space(3)};
   width: 100%;
   max-width: ${BREAKPOINTS.desktopLarge}px;
 `;
@@ -138,10 +138,6 @@ const StyledListHeader = styled.div`
 
   .fishbowl-list__header-link {
     ${BODY_LG}
-
-    &.fishbowl-list__scheduled-link {
-      margin-right: ${space(4)};
-    }
   }
 
   .divider {
@@ -156,13 +152,17 @@ const StyledListHeader = styled.div`
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: ${space(2)};
+    width: 100%;
 
     & .fishbowl-list__header {
       display: flex;
       flex-wrap: wrap;
       gap: ${space()} ${space(2)};
+      width: 50%;
       & .fishbowl-list__header-link {
-        flex: 1 170px;
+        flex: 0;
+        width: max-content;
+        white-space: nowrap;
       }
     }
   }
@@ -247,9 +247,13 @@ const CardStyled = styled.div`
       }
     }
 
-    .card__chart-wrapper {
-      width: 50px;
-      height: 50px;
+    & .card__chart {
+      height: 74px;
+
+      & .card__chart-wrapper {
+        width: 50px;
+        height: 50px;
+      }
     }
   }
 
@@ -407,9 +411,21 @@ const StyledFishbowlDashboardData = styled.div`
   padding: ${space(4)};
   background-color: ${COLOR_NEUTRO_100};
   text-align: left;
-  overflow-y: auto;
+  overflow-y: scroll;
+  height: 100%;
 
   ${scrolllbarStyle};
+
+  ${media.max('desktop')`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;`};
+
+  & .header-wrapper {
+    position: relative;
+  }
 
   & h2 {
     margin-bottom: ${space(2)};
@@ -432,6 +448,7 @@ const StyledFishbowlDashboardData = styled.div`
 
   & .data {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
     gap: ${space()};
@@ -458,6 +475,7 @@ const StyledFishbowlDashboardData = styled.div`
   }
 
   & .data__group {
+    flex: 0 120px;
     & p + p {
       margin-top: ${space(0.5)};
     }

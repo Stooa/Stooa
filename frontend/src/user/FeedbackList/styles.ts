@@ -8,7 +8,7 @@
  */
 
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_300, COLOR_NEUTRO_500, COLOR_NEUTRO_800 } from '@/ui/settings';
+import { COLOR_NEUTRO_500 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledFeedbackWrapper = styled.div`
@@ -22,13 +22,6 @@ const StyledFeedbackWrapper = styled.div`
     gap: ${space(2)};
 
     margin-bottom: ${space(0.5)};
-  }
-
-  & .feedback__pill {
-    background-color: ${COLOR_NEUTRO_300};
-    color: ${COLOR_NEUTRO_800};
-    padding: ${space(0.25)} ${space(1.25)};
-    border-radius: 40px;
   }
 
   & .feedback__comment {
@@ -48,6 +41,7 @@ const StyledFeedbackWrapper = styled.div`
     border: none;
     height: 1px;
     width: 50%;
+    margin-top: ${space(4)};
   }
 `;
 
