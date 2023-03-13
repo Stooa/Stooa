@@ -88,7 +88,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
       <AnimatePresence mode="wait">
         <StyledFormWrapper
           key="wrapper"
-          className={`${variant} hidden`}
+          className={`${variant}`}
           ref={ref}
           data-testid="feedback-form"
         >
