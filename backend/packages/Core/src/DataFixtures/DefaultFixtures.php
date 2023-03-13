@@ -86,26 +86,14 @@ class DefaultFixtures extends Fixture
             return ['participant' => ParticipantFactory::random()];
         });
 
-        FishbowlFactory::createOne([
-            'name' => 'Fishbowl with feedbacks',
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-            'currentStatus' => Fishbowl::STATUS_FINISHED,
-            'slug' => 'fishbowl-with-feedbacks',
-            'host' => $host,
-            'participants' => ParticipantFactory::randomRange(30, 40),
-            'feedbacks' => FeedbackFactory::randomRange(5, 20),
-        ])->object();
-
-        FishbowlFactory::createMany(24, function () use ($host) {
+        FishbowlFactory::createMany(25, function () use ($host) {
             return [
                 'startDateTime' => new \DateTime('yesterday'),
                 'timezone' => 'Europe/Madrid',
                 'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
                 'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
                 'host' => $host,
-                'participants' => ParticipantFactory::randomRange(0, 10),
+                'participants' => ParticipantFactory::randomRange(0, 30),
                 'feedbacks' => FeedbackFactory::randomRange(0, 10),
             ];
         });

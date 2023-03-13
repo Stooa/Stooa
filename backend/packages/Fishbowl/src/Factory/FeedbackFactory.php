@@ -33,9 +33,9 @@ final class FeedbackFactory extends ModelFactory
                 Feedback::ORIGIN_THANK_YOU,
             ]),
             'createdDateTime' => self::faker()->dateTime(),
-            'comment' => self::faker()->words(10, true),
+            'comment' => self::faker()->optional(0.6)->words(10, true),
             'timezone' => self::faker()->timezone(),
-            'email' => self::faker()->email(),
+            'email' => self::faker()->optional(0.6)->email(),
         ];
     }
 
