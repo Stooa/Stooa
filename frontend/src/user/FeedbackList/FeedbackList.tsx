@@ -44,12 +44,12 @@ const FeedbackList = ({ feedbacks }: Props) => {
               </h4>
               <PillWithTooltip
                 tooltipText={
-                  feedback.origin === 'thankyou'
+                  feedback.origin === 'thank-you'
                     ? t('feedback.dashboard.afterTooltip')
                     : t('feedback.dashboard.duringTooltip')
                 }
               >
-                {feedback.origin === 'thankyou'
+                {feedback.origin === 'thank-you'
                   ? t('feedback.dashboard.after')
                   : t('feedback.dashboard.during')}
               </PillWithTooltip>

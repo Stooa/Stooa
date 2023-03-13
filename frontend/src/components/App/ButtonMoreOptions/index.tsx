@@ -144,8 +144,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             <div className="selector__sticky-wrapper">
-              {/* {deviceType === 'Mobile' && !prejoin && ( */}
-              {false && (
+              {deviceType === 'Mobile' && !prejoin && (
                 <button
                   disabled={gaveFeedback}
                   data-testid="feedback-button"
@@ -230,7 +229,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                         onClick={handleAudioOutput}
                         value={deviceId}
                       >
-                        <CheckIcon />{' '}
+                        <CheckIcon />
                         <span>
                           {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
                         </span>
@@ -259,7 +258,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                         onClick={handleVideoInput}
                         value={deviceId}
                       >
-                        <CheckIcon />{' '}
+                        <CheckIcon />
                         <span>
                           {deviceId === 'default' ? `${t('sameAsSystem')} (${label})` : label}
                         </span>
