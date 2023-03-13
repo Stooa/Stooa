@@ -37,7 +37,11 @@ const FeedbackList = ({ feedbacks }: Props) => {
         return (
           <div key={feedback['@id']} className="feedback">
             <div className="feedback__title body-md">
-              <h4 className="body-md">holahola</h4>
+              <h4 className="body-md">
+                {feedback.participant?.user
+                  ? `${feedback.participant.user?.name} ${feedback.participant.user.surnames}`
+                  : feedback.participant?.guest?.name}
+              </h4>
               <PillWithTooltip
                 tooltipText={
                   feedback.origin === 'thankyou'

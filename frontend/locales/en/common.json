@@ -30,5 +30,7 @@
     "help": "Help",
     "legal": "Legal",
     "copyInvitation": "Copy invitation",
-    "successCopiedInvitation": "Invitation copied"
+    "successCopiedInvitation": "Invitation copied",
+    "goToPastFishbowlsTitle": "Access your finished fishbowls section for details and feedback from participants.",
+    "goToPastFishbowls": "Go to your past fishbowls"
 }

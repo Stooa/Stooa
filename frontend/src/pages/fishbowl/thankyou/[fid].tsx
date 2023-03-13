@@ -13,7 +13,12 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_NOT_FOUND,
+  ROUTE_HOME,
+  ROUTE_FISHBOWL_PAST
+} from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
@@ -99,6 +104,7 @@ const ThankYou = () => {
         {showFeedbackForm && (
           <FeedbackForm fishbowl={data.bySlugQueryFishbowl} variant="thankyou" />
         )}
+
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (
             <div className="share body-md medium">
@@ -171,28 +177,50 @@ const ThankYou = () => {
               </ul>
             </div>
           )}
-
           <div className="action-wrapper">
-            <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-              <Button
-                size="large"
-                as="a"
-                onClick={() => {
-                  pushEventDataLayer({
-                    category: 'Schedule Fishbowl',
-                    action: 'Thank You Page',
-                    label: `fishbowl/thankyou/${fid}`
-                  });
-                }}
-              >
-                <span>{t('common:scheduleFishbowl')}</span>
-              </Button>
-            </RedirectLink>
-            <RedirectLink href={ROUTE_HOME} passHref>
-              <Button size="large" variant="secondary" as="a">
-                <span>{t('common:goHome')}</span>
-              </Button>
-            </RedirectLink>
+            {isModerator ? (
+              <div>
+                <h2 className="past-title body-md medium">{t('common:goToPastFishbowlsTitle')}</h2>
+                <Link href={ROUTE_FISHBOWL_PAST} passHref>
+                  <Button
+                    size="large"
+                    as="a"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Schedule Fishbowl',
+                        action: 'Thank You Page',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <span>{t('common:goToPastFishbowls')}</span>
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <>
+                <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+                  <Button
+                    size="large"
+                    as="a"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Schedule Fishbowl',
+                        action: 'Thank You Page',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <span>{t('common:scheduleFishbowl')}</span>
+                  </Button>
+                </RedirectLink>
+                <RedirectLink href={ROUTE_HOME} passHref>
+                  <Button size="large" variant="secondary" as="a">
+                    <span>{t('common:goHome')}</span>
+                  </Button>
+                </RedirectLink>
+              </>
+            )}
           </div>
         </ThankYouStyled>
       </StyledThankyouWrapper>

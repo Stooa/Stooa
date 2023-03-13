@@ -15,11 +15,8 @@ const StyledListWrapper = styled.div``;
 const StyledParticipantItem = styled.div`
   margin-bottom: ${space(2)};
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-
-  &.column {
-    flex-direction: column;
-  }
 
   & .participant__contacts {
     display: flex;

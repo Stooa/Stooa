@@ -100,7 +100,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
         params
       })
       .then(response => {
-        console.log('--->', response.data);
         return response.data;
       })
       .catch(error => {
@@ -247,7 +246,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
 
         <FishbowlListContent className={fishbowls.length === 0 ? '' : 'not-empty'}>
           {fishbowls.length === 0 ? (
-            <EmptyFishbowlList />
+            <EmptyFishbowlList isPastList={isPastList} />
           ) : (
             <>
               <FishbowlScrollList data-testid="fishbowl-list-wrapper">
