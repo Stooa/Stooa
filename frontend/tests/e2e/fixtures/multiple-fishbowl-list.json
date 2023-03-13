@@ -1,4 +1,4 @@
-[
+{"hydra:member" : [
     {
         "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
         "@type": "Fishbowl",
@@ -56,4 +56,4 @@
         "isPrivate": false,
         "plainPassword": null
     }
-]
+]}
