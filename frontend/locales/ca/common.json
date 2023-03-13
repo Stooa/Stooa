@@ -1,6 +1,7 @@
 {
     "signin": "Log in",
-    "fishbowlList": "Llistat de <i>fishbowls</i>",
+    "futureFishbowlList": "<i>Fishbowls</i> programats",
+    "pastFishbowlList": "<i>Fishbowls</i> passats",
     "signout": "Surt",
     "register": "Registre gratuït",
     "cancel": "Cancel·la",

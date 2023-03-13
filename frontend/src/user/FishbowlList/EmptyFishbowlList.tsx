@@ -15,7 +15,7 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { StyledEmptyFishbowlList } from './styles';
 
-const EmptyFishbowlList = () => {
+const EmptyFishbowlList = ({ isPastList }: { isPastList?: boolean }) => {
   const { t } = useTranslation('fishbowl-list');
   return (
     <StyledEmptyFishbowlList data-testid="empty-list">
@@ -29,10 +29,18 @@ const EmptyFishbowlList = () => {
         <img className="single" src="/img/fishbowl-list/empty-chair.png" alt="Empty chair" />
       </div>
       <h2 className="body-lg medium">
-        <Trans i18nKey="fishbowl-list:emptyListTitle" components={{ i: <i /> }} />
+        {isPastList ? (
+          <Trans i18nKey="fishbowl-list:emptyListTitle" components={{ i: <i /> }} />
+        ) : (
+          <Trans i18nKey="fishbowl-list:emptyPastListTitle" components={{ i: <i /> }} />
+        )}
       </h2>
       <p>
-        <Trans i18nKey="fishbowl-list:emptyListDescription" components={{ i: <i /> }} />
+        {isPastList ? (
+          <Trans i18nKey="fishbowl-list:emptyListDescription" components={{ i: <i /> }} />
+        ) : (
+          <Trans i18nKey="fishbowl-list:emptyPastListDescription" components={{ i: <i /> }} />
+        )}
       </p>
       <div className="empty-actions">
         <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>

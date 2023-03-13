@@ -27,7 +27,8 @@
     "help": "Aide",
     "legal": "Mentions légales",
     "signout": "Se déconnecter",
-    "fishbowlList": "Liste des fishbowls",
+    "futureFishbowlList": "Fishbowls futurs",
+    "pastFishbowlList": "Fishbowls passés",
     "linkButton": "Copier le lien",
     "successCopiedLink": "Lien copié"
 }
