@@ -74,40 +74,30 @@ class DefaultFixtures extends Fixture
             'privacyPolicy' => true,
         ])->object();
 
-        ParticipantFactory::createMany(100, function () {
-            return ['guest' => GuestFactory::createOne()];
-        });
+        ParticipantFactory::createMany(100, fn () => ['guest' => GuestFactory::createOne()]);
 
-        ParticipantFactory::createMany(100, function () {
-            return ['user' => UserFactory::createOne()];
-        });
+        ParticipantFactory::createMany(100, fn () => ['user' => UserFactory::createOne()]);
 
-        FeedbackFactory::createMany(100, function () {
-            return ['participant' => ParticipantFactory::random()];
-        });
+        FeedbackFactory::createMany(100, fn () => ['participant' => ParticipantFactory::random()]);
 
-        FishbowlFactory::createMany(25, function () use ($host) {
-            return [
-                'startDateTime' => new \DateTime('yesterday'),
-                'timezone' => 'Europe/Madrid',
-                'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-                'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-                'host' => $host,
-                'participants' => ParticipantFactory::randomRange(0, 30),
-                'feedbacks' => FeedbackFactory::randomRange(0, 10),
-            ];
-        });
+        FishbowlFactory::createMany(25, fn () => [
+            'startDateTime' => new \DateTime('yesterday'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $host,
+            'participants' => ParticipantFactory::randomRange(0, 30),
+            'feedbacks' => FeedbackFactory::randomRange(0, 10),
+        ]);
 
-        FishbowlFactory::createMany(25, function () use ($host) {
-            return [
-                'startDateTime' => new \DateTime('yesterday'),
-                'timezone' => 'Europe/Madrid',
-                'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-                'currentStatus' => Fishbowl::STATUS_FINISHED,
-                'host' => $host,
-                'participants' => ParticipantFactory::randomRange(0, 5),
-                'feedbacks' => FeedbackFactory::randomRange(0, 10),
-            ];
-        });
+        FishbowlFactory::createMany(25, fn () => [
+            'startDateTime' => new \DateTime('yesterday'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_FINISHED,
+            'host' => $host,
+            'participants' => ParticipantFactory::randomRange(0, 5),
+            'feedbacks' => FeedbackFactory::randomRange(0, 10),
+        ]);
     }
 }
