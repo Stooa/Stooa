@@ -198,6 +198,8 @@ class FishbowlDashboardListFunctionalTest extends ApiTestCase
         ])->object();
 
         FeedbackFactory::createMany(2, [
+            'comment' => 'this is a comment',
+            'email' => 'test@email.com',
             'fishbowl' => $fishbowl,
             'participant' => ParticipantFactory::createOne([
                 'user' => $user,
