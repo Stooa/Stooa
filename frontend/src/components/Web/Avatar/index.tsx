@@ -11,7 +11,12 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_EDIT_PROFILE, ROUTE_CHANGE_PASSWORD, ROUTE_FISHBOWL_FUTURE } from '@/app.config';
+import {
+  ROUTE_EDIT_PROFILE,
+  ROUTE_CHANGE_PASSWORD,
+  ROUTE_FISHBOWL_FUTURE,
+  ROUTE_FISHBOWL_PAST
+} from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
@@ -19,6 +24,7 @@ import Logout from '@/ui/svg/logout.svg';
 import Lock from '@/ui/svg/lock.svg';
 import Pencil from '@/ui/svg/pencil.svg';
 import List from '@/ui/svg/list.svg';
+import CheckList from '@/ui/svg/check-list.svg';
 import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
 import Trans from 'next-translate/Trans';
 
@@ -61,7 +67,13 @@ const Avatar: React.FC = () => {
           <Link href={ROUTE_FISHBOWL_FUTURE} className="item">
             <List />
             <span>
-              <Trans i18nKey="common:fishbowlList" components={{ i: <i /> }} />
+              <Trans i18nKey="common:futureFishbowlList" components={{ i: <i /> }} />
+            </span>
+          </Link>
+          <Link href={ROUTE_FISHBOWL_PAST} className="item">
+            <CheckList />
+            <span>
+              <Trans i18nKey="common:pastFishbowlList" components={{ i: <i /> }} />
             </span>
           </Link>
           <Link href={ROUTE_EDIT_PROFILE} className="item">

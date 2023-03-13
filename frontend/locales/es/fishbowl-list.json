@@ -5,6 +5,8 @@
     "titleEdit": "Editar <i>fishbowl</i>",
     "emptyListTitle": "Aún no has programado ningún <i>fishbowl</i>. ¡Crea uno!",
     "emptyListDescription": "Aquí verás todos tus <i>fishbowls</i> programados.",
+    "emptyPastListTitle": "You haven't done your first fishbowl yet. Create one!",
+    "emptyPastListDescription": "This is where you will see all of your past fishbowls.",
     "noSelectedFishbowlTitle": "Ningún <i>fishbowl</i> seleccionado.",
     "noSelectedFishbowlDescription": "Selecciona uno de los <i>fishbowls</i> agendados para editarlo.",
     "fishbowlStarted": "El <i>fishbowl</i> ha comenzado o está a punto de empezar.",

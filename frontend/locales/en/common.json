@@ -1,6 +1,7 @@
 {
     "signin": "Log in",
-    "fishbowlList": "Fishbowl list",
+    "futureFishbowlList": "Future fishbowls",
+    "pastFishbowlList": "Past fishbowls",
     "signout": "Log out",
     "register": "Register for free",
     "cancel": "Cancel",

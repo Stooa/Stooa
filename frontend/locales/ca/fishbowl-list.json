@@ -4,6 +4,8 @@
     "titleEdit": "Edita la fishbowls",
     "emptyListTitle": "Encara no has programat cap fishbowl. Crea'n una!",
     "emptyListDescription": "Aquí és on veuràs totes les teves fishbowls programades.",
+    "emptyPastListTitle": "You haven't done your first fishbowl yet. Create one!",
+    "emptyPastListDescription": "This is where you will see all of your past fishbowls.",
     "noSelectedFishbowlTitle": "No s'ha seleccionat cap fishbowl.",
     "noSelectedFishbowlDescription": "Selecciona una fishbowl programada per a començar a editar-la.",
     "fishbowlStarted": "Aquesta fishbowls ja ha començat o està a punt de començar.",

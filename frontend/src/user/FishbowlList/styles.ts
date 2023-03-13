@@ -38,7 +38,9 @@ const FishbowlListContent = styled.div`
   }
 
   ${media.min('desktop')`
-  grid-template-columns: 1fr 1fr;
+    &.not-empty {
+      grid-template-columns: 1fr 1fr;
+    }
     column-gap: ${space()};
   `}
 `;
