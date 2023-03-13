@@ -54,7 +54,11 @@ const FeedbackList = ({ feedbacks }: Props) => {
                   : t('feedback.dashboard.during')}
               </PillWithTooltip>
             </div>
-            {feedback.email && <p className="medium body-xs">{feedback.email}</p>}
+            {feedback.email && (
+              <p className={`medium body-xs feedback__mail ${!feedback.comment ? 'spaced' : ''}`}>
+                {feedback.email}
+              </p>
+            )}
             {feedback.comment && <p className="feedback__comment">{feedback.comment}</p>}
             <div className="feedback__satisfaction">
               <Component />

@@ -12,11 +12,12 @@ import { StyledTitleWithDivider } from './styles';
 interface Props {
   children: string | string[] | JSX.Element;
   headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  id?: string;
 }
 
-const TitleWithDivider = ({ children, headingLevel, ...props }: Props) => {
+const TitleWithDivider = ({ children, headingLevel, id }: Props) => {
   return (
-    <StyledTitleWithDivider as={headingLevel} {...props}>
+    <StyledTitleWithDivider as={headingLevel} id={id}>
       {children}
       <span className="divider" />
     </StyledTitleWithDivider>

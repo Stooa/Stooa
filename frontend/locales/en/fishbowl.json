@@ -189,7 +189,9 @@
         "send": "Send",
         "skip": "Skip",
         "dashboard" : {
+            "satisfaction": "Satisfaction",
             "noFeedback": "No feedback received",
+            "details": "Details",
             "participants": "Participants",
             "after": "After",
             "afterTooltip": "Feedback received after the fishbowl",

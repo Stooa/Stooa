@@ -24,6 +24,10 @@ const StyledFeedbackWrapper = styled.div`
     margin-bottom: ${space(0.5)};
   }
 
+  & .feedback__mail.spaced {
+    margin-bottom: ${space(2)};
+  }
+
   & .feedback__comment {
     margin-bottom: ${space(2)};
   }

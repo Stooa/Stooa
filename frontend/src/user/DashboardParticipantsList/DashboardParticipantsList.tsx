@@ -12,12 +12,14 @@ import { StyledListWrapper, StyledParticipantItem } from './styles';
 import { Participant } from '@/types/api-platform/interfaces/participant';
 import Twitter from '@/ui/svg/twitter.svg';
 import Linkedin from '@/ui/svg/linkedin.svg';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   participants: Participant[];
 }
 
 const DashboardParticipantsList = ({ participants }: Props) => {
+  const { t } = useTranslation('fishbowl-list');
   return (
     <StyledListWrapper>
       {participants.map(participant => {
@@ -29,7 +31,9 @@ const DashboardParticipantsList = ({ participants }: Props) => {
             {participant.user && <p className="body-sm medium">{participant.user.name}</p>}
             {participant.guest && <p className="body-sm medium">{participant.guest.name}</p>}
             <div className="participant__contacts">
-              <p className="body-sm">{participant.user ? participant.user.email : 'guest user'}</p>
+              <p className="body-sm">
+                {participant.user ? participant.user.email : t('guestUser')}
+              </p>
               <div className="participant__socials ">
                 <a
                   href={`${participant.user?.twitterProfile || ''}`}

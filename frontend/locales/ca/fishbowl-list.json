@@ -10,5 +10,6 @@
     "noSelectedFishbowlDescription": "Selecciona una fishbowl programada per a començar a editar-la.",
     "fishbowlStarted": "Aquesta fishbowls ja ha començat o està a punt de començar.",
     "fishbowlStartedDescription": "Les fishbowls que estiguin funcionant o que comencin en menys de 30 minuts no es poden editar.",
-    "back": "Tornar al llistat"
+    "back": "Tornar al llistat",
+    "guestUser": "Usuari convidat"
 }

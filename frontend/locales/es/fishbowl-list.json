@@ -11,5 +11,6 @@
     "noSelectedFishbowlDescription": "Selecciona uno de los <i>fishbowls</i> agendados para editarlo.",
     "fishbowlStarted": "El <i>fishbowl</i> ha comenzado o está a punto de empezar.",
     "fishbowlStartedDescription": "Los <i>fishbowls</i> empezados o que empiecen en menos de 30 min no se pueden editar.",
-    "back": "Volver al listado"
+    "back": "Volver al listado",
+    "guestUser": "Usuario invitado"
 }

@@ -189,7 +189,8 @@
         "send": "Enviar",
         "skip": "Saltar",
         "dashboard" : {
-            "noFeedback": "No hay feedback todavía.",
+            "noFeedback": "No hay feedback recibido.",
+            "satisfaction": "Satisfacción",
             "participants": "Participantes",
             "details": "Detalles",
             "after": "Después",

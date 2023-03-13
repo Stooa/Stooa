@@ -180,6 +180,15 @@
         "thanksDescription": "Votre feedback nous aide à nous améliorer.",
         "spreadTheWord": "Spread the word!",
         "send": "Envoyez",
-        "skip": "Sauter"
+        "skip": "Sauter",
+        "dashboard" : {
+            "satisfaction": "Satisfaction",
+            "noFeedback": "No feedback received",
+            "participants": "Participants",
+            "after": "After",
+            "afterTooltip": "Feedback received after the fishbowl",
+            "during": "During",
+            "duringTooltip": "Feedback received during the fishbowl"
+        }
     }
 }

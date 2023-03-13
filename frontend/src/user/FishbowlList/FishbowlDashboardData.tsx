@@ -14,6 +14,7 @@ import { MobileBackButton, StyledFishbowlDashboardData } from './styles';
 import Calendar from '@/ui/svg/calendar.svg';
 import BackArrow from '@/ui/svg/arrow-prev.svg';
 import Hourglass from '@/ui/svg/hourglass.svg';
+import ArrowDown from '@/ui/svg/down-arrow.svg';
 import People from '@/ui/svg/people-bigger.svg';
 import SatisfactionSummary from '../SatisfactionSummary';
 import { Fishbowl } from '@/types/api-platform';
@@ -84,12 +85,17 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           </div>
           <p className="medium">{fishbowl.durationFormatted}</p>
         </div>
-        <div className="data__group">
+        <div className="data__group participants">
           <div className="data__title">
             <People />
             <h4>{t('feedback.dashboard.participants')}</h4>
           </div>
-          <p className="medium">{fishbowl.participants?.length || 0}</p>
+          <p className="medium">
+            <a href="#participants">
+              {fishbowl.participants?.length || 0}
+              <ArrowDown />
+            </a>
+          </p>
         </div>
       </div>
       <div className="feedback">
@@ -104,8 +110,8 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         )}
         {fishbowl.participants && fishbowl.participants?.length > 0 && (
           <>
-            <TitleWithDivider headingLevel="h3">
-              {fishbowl.participants.length.toString()} Usuarios
+            <TitleWithDivider headingLevel="h3" id="participants">
+              {`${fishbowl.participants.length.toString()} ${t('feedback.dashboard.participants')}`}
             </TitleWithDivider>
             <DashboardParticipantsList participants={fishbowl.participants} />
           </>

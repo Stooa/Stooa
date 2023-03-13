@@ -181,7 +181,7 @@ const ThankYou = () => {
             {isModerator ? (
               <div>
                 <h2 className="past-title body-md medium">{t('common:goToPastFishbowlsTitle')}</h2>
-                <Link href={ROUTE_FISHBOWL_PAST} passHref>
+                <Link href={ROUTE_FISHBOWL_PAST} legacyBehavior passHref>
                   <Button
                     size="large"
                     as="a"
@@ -193,7 +193,7 @@ const ThankYou = () => {
                       });
                     }}
                   >
-                    <span>{t('common:goToPastFishbowls')}</span>
+                    {t('common:goToPastFishbowls')}
                   </Button>
                 </Link>
               </div>

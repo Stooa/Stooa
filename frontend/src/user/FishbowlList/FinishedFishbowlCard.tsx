@@ -15,6 +15,7 @@ import Icon from '@/components/Common/Fields/Icon';
 import People from '@/ui/svg/people.svg';
 import DoughnutChart from '../DoughnutChart';
 import useFeedback from '@/hooks/useFeedback';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -23,7 +24,7 @@ interface Props {
 }
 
 const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
-  // const { t } = useTranslation('fishbowl-list');
+  const { t } = useTranslation('fishbowl');
   const { name, startDateTimeTz, isPrivate } = fishbowl;
   const { summarizeFeedbackSatisfacion } = useFeedback(fishbowl);
 
@@ -73,13 +74,13 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <div className="card__chart">
           {summarizedFeedback ? (
             <>
-              <h4>Satisfaction</h4>
+              <h4>{t('feedback.dashboard.satisfaction')}</h4>
               <div className="card__chart-wrapper">
                 <DoughnutChart feedbackSatisfaction={summarizedFeedback} />
               </div>
             </>
           ) : (
-            <h4>No feedback received</h4>
+            <h4>{t('feedback.dashboard.noFeedback')}</h4>
           )}
         </div>
       </div>
