@@ -67,14 +67,26 @@ class DefaultFixtures extends Fixture
             'host' => $host,
         ])->object();
 
-        $user = UserFactory::createOne([
+        UserFactory::createOne([
             'email' => 'user@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
             'privacyPolicy' => true,
         ])->object();
 
-        $fishbowl = FishbowlFactory::createOne([
+        ParticipantFactory::createMany(100, function () {
+            return ['guest' => GuestFactory::createOne()];
+        });
+
+        ParticipantFactory::createMany(100, function () {
+            return ['user' => UserFactory::createOne()];
+        });
+
+        FeedbackFactory::createMany(100, function () {
+            return ['participant' => ParticipantFactory::random()];
+        });
+
+        FishbowlFactory::createOne([
             'name' => 'Fishbowl with feedbacks',
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
@@ -82,45 +94,32 @@ class DefaultFixtures extends Fixture
             'currentStatus' => Fishbowl::STATUS_FINISHED,
             'slug' => 'fishbowl-with-feedbacks',
             'host' => $host,
-            'participants' => ParticipantFactory::createMany(20, [
-                'guest' => GuestFactory::createOne(),
-            ]),
+            'participants' => ParticipantFactory::randomRange(30, 40),
+            'feedbacks' => FeedbackFactory::randomRange(5, 20),
         ])->object();
 
-        FeedbackFactory::createOne([
-            'fishbowl' => $fishbowl,
-            'participant' => ParticipantFactory::createOne([
-                'user' => $user,
-            ]),
-        ]);
+        FishbowlFactory::createMany(24, function () use ($host) {
+            return [
+                'startDateTime' => new \DateTime('yesterday'),
+                'timezone' => 'Europe/Madrid',
+                'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+                'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+                'host' => $host,
+                'participants' => ParticipantFactory::randomRange(0, 10),
+                'feedbacks' => FeedbackFactory::randomRange(0, 10),
+            ];
+        });
 
-        FeedbackFactory::createMany(10, [
-            'fishbowl' => $fishbowl,
-            'participant' => ParticipantFactory::createOne([
-                'guest' => GuestFactory::createOne(),
-            ]),
-        ]);
-
-        FishbowlFactory::createMany(24, [
-            'startDateTime' => new \DateTime('yesterday'),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'host' => $host,
-            'participants' => ParticipantFactory::createMany(5, [
-                'user' => UserFactory::createOne(),
-            ]),
-        ]);
-
-        FishbowlFactory::createMany(25, [
-            'startDateTime' => new \DateTime('yesterday'),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-            'currentStatus' => Fishbowl::STATUS_FINISHED,
-            'host' => $host,
-            'participants' => ParticipantFactory::createMany(10, [
-                'guest' => GuestFactory::createOne(),
-            ]),
-        ]);
+        FishbowlFactory::createMany(25, function () use ($host) {
+            return [
+                'startDateTime' => new \DateTime('yesterday'),
+                'timezone' => 'Europe/Madrid',
+                'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+                'currentStatus' => Fishbowl::STATUS_FINISHED,
+                'host' => $host,
+                'participants' => ParticipantFactory::randomRange(0, 5),
+                'feedbacks' => FeedbackFactory::randomRange(0, 10),
+            ];
+        });
     }
 }
