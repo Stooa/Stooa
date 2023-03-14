@@ -53,7 +53,7 @@ class DefaultFixtures extends Fixture
         FishbowlFactory::createOne([
             'startDateTime' => new \DateTime(),
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'slug' => 'test-me-fishbowl',
             'host' => $host,
@@ -62,7 +62,7 @@ class DefaultFixtures extends Fixture
         FishbowlFactory::createOne([
             'startDateTime' => new \DateTime('+ 1 hour'),
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'host' => $host,
         ])->object();
@@ -95,7 +95,7 @@ class DefaultFixtures extends Fixture
         FishbowlFactory::createMany(25, fn (int $i) => [
             'startDateTime' => $twoDaysAgo->modify("- {$i} minutes"),
             'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'duration' => \DateTime::createFromFormat('!H:i', '03:00'),
             'currentStatus' => Fishbowl::STATUS_FINISHED,
             'host' => $host,
             'participants' => ParticipantFactory::randomRange(0, 5),
