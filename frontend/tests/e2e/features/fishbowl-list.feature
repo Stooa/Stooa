@@ -12,7 +12,7 @@ Feature: Fishbowl List
         And a list of one fishbowl
         When navigates to "/"
         And clicks on its profile
-        And clicks on "Future fishbowls" link
+        And clicks on "Scheduled fishbowls" link
         Then sees the fishbowl list page with one fishbowl
 
     Scenario: Logged users can have multiple fishbowls on its list
