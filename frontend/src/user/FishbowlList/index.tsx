@@ -198,7 +198,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   !isPastList ? 'medium' : ''
                 }`}
                 data-testid="scheduled-fishbowls-header"
-                href={'/fishbowl/future'}
+                href={'/fishbowl/finished'}
               >
                 <Trans
                   i18nKey="fishbowl-list:scheduledFishbowls"
