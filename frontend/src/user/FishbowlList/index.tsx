@@ -13,7 +13,12 @@ import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_FINISHED, ROUTE_HOME } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_FINISHED,
+  ROUTE_FISHBOWL_SCHEDULED,
+  ROUTE_HOME
+} from '@/app.config';
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 
@@ -198,7 +203,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                   !isPastList ? 'medium' : ''
                 }`}
                 data-testid="scheduled-fishbowls-header"
-                href={'/fishbowl/finished'}
+                href={ROUTE_FISHBOWL_SCHEDULED}
               >
                 <Trans
                   i18nKey="fishbowl-list:scheduledFishbowls"
