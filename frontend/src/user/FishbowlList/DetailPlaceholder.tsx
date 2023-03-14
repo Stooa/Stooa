@@ -27,7 +27,7 @@ const DetailPlaceholder = ({ selectedFishbowl, onClickBack }: Props) => {
   return (
     <StyledDetailPlaceholder
       key="detail-placeholder"
-      data-testid="started-fishbowl-placeholder"
+      data-testid="selected-placeholder"
       as={motion.div}
       initial="initial"
       exit="exit"
