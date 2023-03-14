@@ -119,7 +119,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
       setFishbowlPastCount(data['hydra:totalItems']);
       if (isPastList) {
         if (data['hydra:member']) {
-          console.log('FIRST CALL', data['hydra:member']);
           setFishbowls(data['hydra:member']);
           setLoadMoreDisabled(data['hydra:view']['hydra:next'] === undefined);
         }
@@ -162,7 +161,6 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
     getApiFishbowls(params).then(data => {
       if (data['hydra:member']) {
         if (fishbowls) {
-          console.log('LOAD MORE CALL', data['hydra:member']);
           const mergedFishbowls = [...fishbowls, ...data['hydra:member']];
           setFishbowls(mergedFishbowls);
           setPaginator(newPaginator);
