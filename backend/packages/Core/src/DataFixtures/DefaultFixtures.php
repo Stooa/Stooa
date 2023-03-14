@@ -80,8 +80,9 @@ class DefaultFixtures extends Fixture
 
         FeedbackFactory::createMany(100, fn () => ['participant' => ParticipantFactory::random()]);
 
-        FishbowlFactory::createMany(25, fn () => [
-            'startDateTime' => new \DateTime('yesterday'),
+        $yesterday = new \DateTime('- 1 days');
+        FishbowlFactory::createMany(25, fn (int $i) => [
+            'startDateTime' => $yesterday->modify("- {$i} minutes"),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
@@ -90,8 +91,9 @@ class DefaultFixtures extends Fixture
             'feedbacks' => FeedbackFactory::randomRange(0, 10),
         ]);
 
-        FishbowlFactory::createMany(25, fn () => [
-            'startDateTime' => new \DateTime('yesterday'),
+        $twoDaysAgo = new \DateTime('- 2 days');
+        FishbowlFactory::createMany(25, fn (int $i) => [
+            'startDateTime' => $twoDaysAgo->modify("- {$i} minutes"),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_FINISHED,
