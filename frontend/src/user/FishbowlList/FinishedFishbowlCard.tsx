@@ -57,19 +57,23 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         )}
         <h4>{name}</h4>
       </CardTitle>
+
       <div data-testid="card-info" className="card__info body-md">
-        <div className="card__date">
-          <div>
-            {month} {day}, {year}
+        <div className="card__details">
+          <div className="card__date">
+            <div>
+              {month} {day}, {year}
+              <span className="card__time hide-desktop"> {time}</span>
+            </div>
+            <div className="card__time hide-mobile">{time}</div>
           </div>
-          <div className="card__time">{time}</div>
-        </div>
-        <div className="card__duration">
-          <p>{fishbowl.durationFormatted}h</p>
-        </div>
-        <div className="card__participants">
-          <People />
-          {fishbowl.participants?.length || 0}
+          <div className="card__duration">
+            <p>{fishbowl.durationFormatted}h</p>
+          </div>
+          <div className="card__participants">
+            <People />
+            {fishbowl.participants?.length || 0}
+          </div>
         </div>
         <div className="card__chart">
           {summarizedFeedback ? (

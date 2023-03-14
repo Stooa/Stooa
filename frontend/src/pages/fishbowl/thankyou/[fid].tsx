@@ -17,7 +17,7 @@ import {
   ROUTE_FISHBOWL_CREATE,
   ROUTE_NOT_FOUND,
   ROUTE_HOME,
-  ROUTE_FISHBOWL_PAST
+  ROUTE_FISHBOWL_FINISHED
 } from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
@@ -184,7 +184,7 @@ const ThankYou = () => {
                 <h2 className="past-title body-md medium">
                   <Trans i18nKey="common:goToFinishedFishbowlsTitle" components={{ i: <i /> }} />
                 </h2>
-                <Link href={ROUTE_FISHBOWL_PAST} legacyBehavior passHref>
+                <Link href={ROUTE_FISHBOWL_FINISHED} legacyBehavior passHref>
                   <Button
                     size="large"
                     as="a"

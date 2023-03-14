@@ -1,7 +1,7 @@
 {
     "signin": "Log in",
     "futureFishbowlList": "<i>Fishbowls</i> programados",
-    "pastFishbowlList": "<i>Fishbowls</i> finalizados",
+    "finishedFishbowlList": "<i>Fishbowls</i> finalizados",
     "signout": "Salir",
     "register": "Registro gratuito",
     "cancel": "Cancelar",

@@ -226,13 +226,25 @@ const CardStyled = styled.div`
 
   &.finished {
     .card__info {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: ${space()} ${space(2)};
+      gap: ${space()} ${space(4)};
       text-align: left;
+      display: flex;
+      flex-direction: column;
 
-      & > div {
-        flex: 1 100px;
+      ${media.min('tablet')`
+        flex-direction: row;
+      `}
+
+      & > .card__details {
+        display: flex;
+        gap: ${space(2)};
+        flex: 3;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      & .card__chart {
+        flex: 1;
       }
 
       & h4 {

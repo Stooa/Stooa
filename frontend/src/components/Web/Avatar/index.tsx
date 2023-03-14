@@ -14,8 +14,8 @@ import useTranslation from 'next-translate/useTranslation';
 import {
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
-  ROUTE_FISHBOWL_FUTURE,
-  ROUTE_FISHBOWL_PAST
+  ROUTE_FISHBOWL_SCHEDULED,
+  ROUTE_FISHBOWL_FINISHED
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
@@ -64,16 +64,16 @@ const Avatar: React.FC = () => {
       </button>
       {active && (
         <Dropdown>
-          <Link href={ROUTE_FISHBOWL_FUTURE} className="item">
+          <Link href={ROUTE_FISHBOWL_SCHEDULED} className="item">
             <List />
             <span>
               <Trans i18nKey="common:futureFishbowlList" components={{ i: <i /> }} />
             </span>
           </Link>
-          <Link href={ROUTE_FISHBOWL_PAST} className="item">
+          <Link href={ROUTE_FISHBOWL_FINISHED} className="item">
             <CheckList />
             <span>
-              <Trans i18nKey="common:pastFishbowlList" components={{ i: <i /> }} />
+              <Trans i18nKey="common:finishedFishbowlList" components={{ i: <i /> }} />
             </span>
           </Link>
           <Link href={ROUTE_EDIT_PROFILE} className="item">

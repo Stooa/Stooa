@@ -15,16 +15,16 @@ import { ToastContainer } from 'react-toastify';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 
-const Future: NextPage = () => {
+const Finished: NextPage = () => {
   const router = useRouter();
   const { selected } = router.query;
 
   return (
     <Layout>
-      <FishbowlList isPastList={false} selectedFishbowlParam={selected as string} />
+      <FishbowlList isPastList selectedFishbowlParam={selected as string} />
       <ToastContainer className="toastify-custom" />
     </Layout>
   );
 };
 
-export default Future;
+export default Finished;
