@@ -32,7 +32,7 @@ Given('a list of empty fishbowls', () => {
         'finishDateTime[after]': isoDate
       }
     },
-    []
+    { fixture: 'empty-fishbowl-list.json' }
   ).as('getEmptyFishbowlsListQuery');
 });
 
