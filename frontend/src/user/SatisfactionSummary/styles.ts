@@ -37,7 +37,13 @@ const StyledSummaryWrapper = styled.div`
     padding: ${space(2)};
     border-radius: ${BORDER_RADIUS};
 
+    text-align: center;
+
     z-index: 1;
+
+    ${media.min('tablet')`
+      text-align: left;
+    `}
   }
 
   & .summary__general {

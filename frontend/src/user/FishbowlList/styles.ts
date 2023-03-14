@@ -241,6 +241,10 @@ const CardStyled = styled.div`
         flex: 3;
         align-items: flex-start;
         justify-content: space-between;
+
+        ${media.max('tablet')`
+          width: 100%;
+        `}
       }
 
       & .card__chart {
