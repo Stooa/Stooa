@@ -32,14 +32,14 @@ const EmptyFishbowlList = ({ isPastList }: { isPastList?: boolean }) => {
         {isPastList ? (
           <Trans i18nKey="fishbowl-list:emptyListTitle" components={{ i: <i /> }} />
         ) : (
-          <Trans i18nKey="fishbowl-list:emptyPastListTitle" components={{ i: <i /> }} />
+          <Trans i18nKey="fishbowl-list:emptyFinishedListTitle" components={{ i: <i /> }} />
         )}
       </h2>
       <p>
         {isPastList ? (
           <Trans i18nKey="fishbowl-list:emptyListDescription" components={{ i: <i /> }} />
         ) : (
-          <Trans i18nKey="fishbowl-list:emptyPastListDescription" components={{ i: <i /> }} />
+          <Trans i18nKey="fishbowl-list:emptyFinishedListDescription" components={{ i: <i /> }} />
         )}
       </p>
       <div className="empty-actions">
