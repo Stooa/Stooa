@@ -190,7 +190,14 @@
         "skip": "Saltar",
         "dashboard" : {
             "noFeedback": "No hi ha feedback",
-            "participants": "Participants"
+            "participants": "Participants",
+            "users": "usuaris",
+            "satisfaction": "Satisfaction",
+            "details": "Details",
+            "after": "Després",
+            "afterTooltip": "Feedback rebut després del fishbowl",
+            "during": "Durant",
+            "duringTooltip": "Feedback rebut durant el fishbowl"
         }
     }
 }

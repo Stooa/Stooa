@@ -45,7 +45,7 @@ When('clicks on its profile', () => {
 Then('sees the fishbowl list page with one fishbowl', () => {
   cy.wait('@getOneFishbowlsListQuery');
 
-  cy.get('[data-testid=scheduled-header]').should('exist');
+  cy.get('[data-testid=scheduled-fishbowls-header]').should('exist');
   cy.get('[data-testid=count]').should('contain', '1');
 
   cy.screenshot();
@@ -54,7 +54,7 @@ Then('sees the fishbowl list page with one fishbowl', () => {
 Then('sees the fishbowl list page with multiple fishbowls', () => {
   cy.wait('@getMultipleFishbowlsListQuery');
 
-  cy.get('[data-testid=scheduled-header]').should('exist');
+  cy.get('[data-testid=scheduled-fishbowls-header]').should('exist');
   cy.get('[data-testid=count]').should('contain', '3');
 
   cy.get('[data-testid=fishbowl-list-wrapper] h4').eq(0).should('contain', 'First fishbowl');
@@ -67,7 +67,7 @@ Then('sees the fishbowl list page with multiple fishbowls', () => {
 Then('sees the empty fishbowl list page', () => {
   cy.wait('@getEmptyFishbowlsListQuery');
 
-  cy.get('[data-testid=scheduled-header]').should('exist');
+  cy.get('[data-testid=scheduled-fishbowls-header]').should('exist');
   cy.get('[data-testid=empty-list]').should('exist');
   cy.get('[data-testid=count]').should('contain', '0');
 

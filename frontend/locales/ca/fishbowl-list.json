@@ -4,12 +4,13 @@
     "titleEdit": "Edita la fishbowls",
     "emptyListTitle": "Encara no has programat cap fishbowl. Crea'n una!",
     "emptyListDescription": "Aquí és on veuràs totes les teves fishbowls programades.",
-    "emptyPastListTitle": "You haven't done your first fishbowl yet. Create one!",
-    "emptyPastListDescription": "This is where you will see all of your past fishbowls.",
+    "emptyPastListTitle": "Aquí veuràs tots els teus <i>fishbowls</i> finalitzats.",
+    "emptyPastListDescription": "Llest per al teu pròxim fishbowl? Aquí veuràs els detalls i el feedback dels <i>fishbowls</i> finalitzats!",
     "noSelectedFishbowlTitle": "No s'ha seleccionat cap fishbowl.",
     "noSelectedFishbowlDescription": "Selecciona una fishbowl programada per a començar a editar-la.",
     "fishbowlStarted": "Aquesta fishbowls ja ha començat o està a punt de començar.",
     "fishbowlStartedDescription": "Les fishbowls que estiguin funcionant o que comencin en menys de 30 minuts no es poden editar.",
     "back": "Tornar al llistat",
+    "loadMore": "Carregar més",
     "guestUser": "Usuari convidat"
 }

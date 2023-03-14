@@ -183,8 +183,10 @@
         "skip": "Sauter",
         "dashboard" : {
             "satisfaction": "Satisfaction",
-            "noFeedback": "No feedback received",
+            "noFeedback": "Aucun commentaire reçu",
+            "details": "Détails",
             "participants": "Participants",
+            "users": "utilisateur",
             "after": "After",
             "afterTooltip": "Feedback received after the fishbowl",
             "during": "During",

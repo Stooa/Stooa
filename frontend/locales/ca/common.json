@@ -1,7 +1,7 @@
 {
     "signin": "Log in",
     "futureFishbowlList": "<i>Fishbowls</i> programats",
-    "pastFishbowlList": "<i>Fishbowls</i> passats",
+    "pastFishbowlList": "<i>Fishbowls</i> finalitzats",
     "signout": "Surt",
     "register": "Registre gratuït",
     "cancel": "Cancel·la",
@@ -31,5 +31,6 @@
     "legal": "Legal",
     "copyInvitation": "Copiar invitació",
     "successCopiedInvitation": "Invitació copiada",
-    "goToPastFishbowls": "Anar als teus Fishbowls passats"
+    "goToFinishedFishbowlsTitle": "Accedeix a la secció de <i>fishbowls</i> finalitzats per a veure els detalls i el feedback dels assistents.",
+    "goToFinishedFishbowls": "Anar als teus Fishbowls passats"
 }

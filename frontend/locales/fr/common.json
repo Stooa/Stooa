@@ -27,9 +27,10 @@
     "help": "Aide",
     "legal": "Mentions légales",
     "signout": "Se déconnecter",
-    "futureFishbowlList": "Fishbowls futurs",
-    "pastFishbowlList": "Fishbowls passés",
+    "futureFishbowlList": "Fishbowls programmés",
+    "pastFishbowlList": "Fishbowls finis",
     "linkButton": "Copier le lien",
     "successCopiedLink": "Lien copié",
-    "goToPastFishbowls": "Allez voir vos fishbowls finis"
+    "goToFinishedFishbowlsTitle": "Accédez à la section des <i>fishbowls</i> finis pour voir les détails et les commentaires des participants.",
+    "goToFinishedFishbowls": "Accédez à fishbowls finis"
 }

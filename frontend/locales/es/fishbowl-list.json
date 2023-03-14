@@ -12,5 +12,6 @@
     "fishbowlStarted": "El <i>fishbowl</i> ha comenzado o está a punto de empezar.",
     "fishbowlStartedDescription": "Los <i>fishbowls</i> empezados o que empiecen en menos de 30 min no se pueden editar.",
     "back": "Volver al listado",
+    "loadMore": "Cargar más",
     "guestUser": "Usuario invitado"
 }

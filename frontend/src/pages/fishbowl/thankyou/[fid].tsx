@@ -31,6 +31,7 @@ import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import FeedbackForm from '@/components/App/FeedbackForm';
+import Trans from 'next-translate/Trans';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -180,7 +181,9 @@ const ThankYou = () => {
           <div className="action-wrapper">
             {isModerator ? (
               <div>
-                <h2 className="past-title body-md medium">{t('common:goToPastFishbowlsTitle')}</h2>
+                <h2 className="past-title body-md medium">
+                  <Trans i18nKey="common:goToFinishedFishbowlsTitle" components={{ i: <i /> }} />
+                </h2>
                 <Link href={ROUTE_FISHBOWL_PAST} legacyBehavior passHref>
                   <Button
                     size="large"
@@ -193,7 +196,7 @@ const ThankYou = () => {
                       });
                     }}
                   >
-                    {t('common:goToPastFishbowls')}
+                    {t('common:goToFinishedFishbowls')}
                   </Button>
                 </Link>
               </div>

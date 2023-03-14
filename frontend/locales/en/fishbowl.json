@@ -193,6 +193,7 @@
             "noFeedback": "No feedback received",
             "details": "Details",
             "participants": "Participants",
+            "users": "users",
             "after": "After",
             "afterTooltip": "Feedback received after the fishbowl",
             "during": "During",

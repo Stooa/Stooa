@@ -1,7 +1,7 @@
 {
     "signin": "Log in",
-    "futureFishbowlList": "Future fishbowls",
-    "pastFishbowlList": "Past fishbowls",
+    "futureFishbowlList": "Scheduled fishbowls",
+    "pastFishbowlList": "Finished fishbowls",
     "signout": "Log out",
     "register": "Register for free",
     "cancel": "Cancel",
@@ -31,6 +31,6 @@
     "legal": "Legal",
     "copyInvitation": "Copy invitation",
     "successCopiedInvitation": "Invitation copied",
-    "goToPastFishbowlsTitle": "Access your finished fishbowls section for details and feedback from participants.",
-    "goToPastFishbowls": "Go to your past fishbowls"
+    "goToFinishedFishbowlsTitle": "Go to the finished fishbowls section to see the details and feedback from the attendees.",
+    "goToFinishedFishbowls": "Go to your past fishbowls"
 }

@@ -85,7 +85,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           </div>
           <p className="medium">{fishbowl.durationFormatted}</p>
         </div>
-        <div className="data__group participants">
+        <div className="data__group">
           <div className="data__title">
             <People />
             <h4>{t('feedback.dashboard.participants')}</h4>
@@ -93,6 +93,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           <p className="medium">
             <a href="#participants">
               {fishbowl.participants?.length || 0}
+              {t('feedback.dashboard.users')}
               <ArrowDown />
             </a>
           </p>
