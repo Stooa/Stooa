@@ -50,6 +50,8 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
   const time = startDateTime.toLocaleString('default', { hour: 'numeric', minute: 'numeric' });
   const year = startDateTime.toLocaleString('default', { year: 'numeric' });
 
+  const participantsAttended = fishbowl.participants?.length || 0;
+
   return (
     <StyledFishbowlDashboardData
       key={fishbowl.id}
@@ -92,8 +94,8 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           </div>
           <p className="medium">
             <a href="#participants">
-              {t('feedback.dashboard.users', { count: fishbowl.participants?.length || 0 })}
-              <ArrowDown />
+              {t('feedback.dashboard.users', { count: participantsAttended })}
+              {participantsAttended > 0 && <ArrowDown />}
             </a>
           </p>
         </div>
@@ -110,7 +112,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         {fishbowl.participants && fishbowl.participants?.length > 0 && (
           <>
             <TitleWithDivider headingLevel="h3" id="participants">
-              {`${fishbowl.participants.length.toString()} ${t('feedback.dashboard.participants')}`}
+              {t('feedback.dashboard.participants', { count: participantsAttended })}
             </TitleWithDivider>
             <DashboardParticipantsList participants={fishbowl.participants} />
           </>

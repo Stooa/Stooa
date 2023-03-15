@@ -195,6 +195,8 @@
             "feedbackReceived_other": "Feedbacks received",
             "details": "Details",
             "participants": "Participants",
+            "participants_one": "{{count}} Participant",
+            "participants_other": "{{count}} Participants",
             "users_zero": "No users",
             "users_one": "{{count}} user",
             "users_other": "{{count}} users",
