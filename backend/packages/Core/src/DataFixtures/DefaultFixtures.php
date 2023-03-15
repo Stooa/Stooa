@@ -81,6 +81,7 @@ class DefaultFixtures extends Fixture
         FeedbackFactory::createMany(100, fn () => ['participant' => ParticipantFactory::random()]);
 
         $yesterday = new \DateTime('- 1 days');
+
         FishbowlFactory::createMany(50, fn (int $i) => [
             'startDateTime' => $yesterday->modify("- {$i} minutes"),
             'timezone' => 'Europe/Madrid',
