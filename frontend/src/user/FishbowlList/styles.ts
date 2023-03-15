@@ -523,9 +523,11 @@ const StyledFishbowlDashboardData = styled.div`
       margin-top: ${space(0.5)};
     }
 
-    &.participants svg {
-      width: 14px;
-      height: 14px;
+    &.participants p svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 4px;
+      transform: translateY(3px);
     }
   }
 
