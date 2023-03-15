@@ -25,8 +25,8 @@ const DashboardParticipantsList = ({ participants, host }: Props) => {
 
   const createName = (participant: Participant): string | undefined => {
     return host && participant.user && participant.user['@id'] === host['@id']
-      ? `${participant?.user.name} ${t('me')}`
-      : participant.user?.name;
+      ? `${participant?.user.name} ${participant?.user.surnames} ${t('me')}`
+      : `${participant.user?.name} ${participant.user?.surnames}`;
   };
   return (
     <StyledListWrapper>
