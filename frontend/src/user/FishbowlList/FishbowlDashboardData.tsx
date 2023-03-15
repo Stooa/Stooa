@@ -23,6 +23,7 @@ import FeedbackList from '../FeedbackList';
 import DashboardParticipantsList from '../DashboardParticipantsList';
 import { motion, Variants } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -93,10 +94,10 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
             <h4>{t('feedback.dashboard.participants')}</h4>
           </div>
           <p className="medium">
-            <a href="#participants" className="body-md">
+            <Link href="#participants" className="body-md">
               {t('feedback.dashboard.users', { count: participantsAttended })}
               {participantsAttended > 0 && <ArrowDown />}
-            </a>
+            </Link>
           </p>
         </div>
       </div>
