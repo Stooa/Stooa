@@ -115,7 +115,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
             <TitleWithDivider headingLevel="h3" id="participants">
               {t('feedback.dashboard.participants', { count: participantsAttended })}
             </TitleWithDivider>
-            <DashboardParticipantsList participants={fishbowl.participants} />
+            <DashboardParticipantsList participants={fishbowl.participants} host={fishbowl.host} />
           </>
         )}
       </div>

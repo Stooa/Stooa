@@ -13,5 +13,6 @@
     "fishbowlStartedDescription": "Les fishbowls que estiguin funcionant o que comencin en menys de 30 minuts no es poden editar.",
     "back": "Tornar al llistat",
     "loadMore": "Carregar més",
-    "guestUser": "Usuari convidat"
+    "guestUser": "Usuari convidat",
+    "me": "(Jo)"
 }
