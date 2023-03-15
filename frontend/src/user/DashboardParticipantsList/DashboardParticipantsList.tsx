@@ -23,7 +23,7 @@ interface Props {
 const DashboardParticipantsList = ({ participants, host }: Props) => {
   const { t } = useTranslation('fishbowl-list');
 
-  const createName = (participant: Participant): string | undefined => {
+  const generateParticipantName = (participant: Participant): string | undefined => {
     return host && participant.user && participant.user['@id'] === host['@id']
       ? `${participant?.user.name} ${participant?.user.surnames} ${t('me')}`
       : `${participant.user?.name} ${participant.user?.surnames}`;
@@ -36,7 +36,7 @@ const DashboardParticipantsList = ({ participants, host }: Props) => {
             key={participant['@id']}
             className={participant.user ? 'column' : ''}
           >
-            {participant.user && <p className="body-sm medium">{createName(participant)}</p>}
+            {participant.user && <p className="body-sm medium">{generateParticipantName(participant)}</p>}
             {participant.guest && <p className="body-sm medium">{participant.guest.name}</p>}
             <div className="participant__contacts">
               <p className="body-sm">
