@@ -78,8 +78,6 @@ class DefaultFixtures extends Fixture
 
         ParticipantFactory::createMany(50, fn () => ['user' => UserFactory::createOne()]);
 
-        FeedbackFactory::createMany(100, fn () => ['participant' => ParticipantFactory::random()]);
-
         $yesterday = new \DateTime('- 1 days');
 
         FishbowlFactory::createMany(50, fn (int $i) => [
@@ -93,7 +91,7 @@ class DefaultFixtures extends Fixture
                 ...ParticipantFactory::createMany(rand(0, 4), fn () => ['user' => UserFactory::createOne()]),
                 ...ParticipantFactory::createMany(rand(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
             ],
-            'feedbacks' => FeedbackFactory::randomRange(0, 20),
+            'feedbacks' => FeedbackFactory::createMany(rand(0, 10), fn () => ['participant' => ParticipantFactory::random()]),
         ]);
     }
 }
