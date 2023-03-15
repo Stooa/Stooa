@@ -21,6 +21,10 @@ const StyledFeedbackWrapper = styled.div`
     align-items: baseline;
     gap: ${space()};
 
+    & h4 {
+      min-width: 6ch;
+    }
+
     margin-bottom: ${space(0.5)};
   }
 

@@ -45,7 +45,9 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
 
   return (
     <CardStyled
-      className={`finished ${selected ? 'selected-card' : ''}`}
+      className={`finished ${selected ? 'selected-card' : ''} ${
+        summarizedFeedback ? '' : 'no-feedback'
+      }`}
       onClick={handleClick}
       data-testid={convertIntoClassName(name)}
     >

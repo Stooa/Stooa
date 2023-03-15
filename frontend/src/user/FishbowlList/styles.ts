@@ -227,8 +227,12 @@ const CardStyled = styled.div`
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
+  &.no-feedback {
+    grid-template-columns: 1fr;
+  }
+
   &.finished {
-    .card__info {
+    & .card__info {
       gap: ${space()} ${space(4)};
       text-align: left;
       display: flex;
@@ -276,9 +280,6 @@ const CardStyled = styled.div`
     }
 
     & .card__chart {
-      display: flex;
-      column-gap: ${space()};
-
       & h4 {
         margin-bottom: ${space(0.5)};
       }
