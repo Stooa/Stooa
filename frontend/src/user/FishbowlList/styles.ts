@@ -214,7 +214,6 @@ const CardTitle = styled.div`
 const CardStyled = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 6fr 1fr;
   align-items: flex-end;
   column-gap: ${space(2)};
 
@@ -227,14 +226,23 @@ const CardStyled = styled.div`
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
-  &.no-feedback {
-    grid-template-columns: 1fr;
+  & .card__info {
+    text-align: left;
   }
 
   &.finished {
+    grid-template-columns: 6fr 1fr;
+
+    ${media.min('tablet')`
+      grid-template-columns: 1fr;
+    `}
+
+    &.no-feedback {
+      grid-template-columns: 1fr;
+    }
+
     & .card__info {
       gap: ${space()} ${space(4)};
-      text-align: left;
       display: flex;
       flex-wrap: wrap;
       grid-column: 1 / 2;
