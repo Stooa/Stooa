@@ -88,10 +88,10 @@ class DefaultFixtures extends Fixture
             'host' => $host,
             'participants' => [
                 ParticipantFactory::createOne(['user' => $host])->object(),
-                ...ParticipantFactory::createMany(rand(0, 4), fn () => ['user' => UserFactory::createOne()]),
-                ...ParticipantFactory::createMany(rand(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
+                ...ParticipantFactory::createMany(random_int(0, 4), fn () => ['user' => UserFactory::createOne()]),
+                ...ParticipantFactory::createMany(random_int(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
             ],
-            'feedbacks' => FeedbackFactory::createMany(rand(0, 10), fn () => ['participant' => ParticipantFactory::random()]),
+            'feedbacks' => FeedbackFactory::createMany(random_int(0, 10), fn () => ['participant' => ParticipantFactory::random()]),
         ]);
     }
 }
