@@ -18,11 +18,10 @@ import Love from '@/ui/svg/emojis/feedback/love.svg';
 
 interface Props {
   satisfactionData: SatisfactionData | null;
-  participants: number;
   personsGaveFeedback: number;
 }
 
-const SatisfactionSummary = ({ satisfactionData, personsGaveFeedback, participants }: Props) => {
+const SatisfactionSummary = ({ satisfactionData, personsGaveFeedback }: Props) => {
   const { t } = useTranslation('fishbowl');
   return (
     <StyledSummaryWrapper className={!satisfactionData ? 'empty' : ''}>
@@ -37,10 +36,12 @@ const SatisfactionSummary = ({ satisfactionData, personsGaveFeedback, participan
           <DoughnutChart feedbackSatisfaction={satisfactionData} />
         </div>
         <div>
-          <span className="body-lg">
-            {personsGaveFeedback}/{participants}
-          </span>
-          <p>Participants</p>
+          <span className="body-lg">{personsGaveFeedback}</span>
+          <p>
+            {personsGaveFeedback > 1
+              ? t('feedback.dashboard.feedbackReceived_other')
+              : t('feedback.dashboard.feedbackReceived_one')}
+          </p>
         </div>
       </div>
 

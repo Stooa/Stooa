@@ -59,7 +59,7 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
       </CardTitle>
 
       <div data-testid="card-info" className="card__info body-md">
-        <div className="card__details">
+        <div className="card__first-row">
           <div className="card__date">
             <div>
               {month} {day}, {year}
@@ -67,6 +67,8 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
             </div>
             <div className="card__time hide-mobile">{time}</div>
           </div>
+        </div>
+        <div className="card__second-row">
           <div className="card__duration">
             <p>{fishbowl.durationFormatted}h</p>
           </div>
@@ -74,20 +76,25 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
             <People />
             {fishbowl.participants?.length || 0}
           </div>
-        </div>
-        <div className="card__chart">
-          {summarizedFeedback ? (
-            <>
-              <h4>{t('feedback.dashboard.satisfaction')}</h4>
-              <div className="card__chart-wrapper">
-                <DoughnutChart feedbackSatisfaction={summarizedFeedback} />
-              </div>
-            </>
-          ) : (
-            <h4>{t('feedback.dashboard.noFeedback')}</h4>
-          )}
+          <div className="card__chart">
+            {summarizedFeedback ? (
+              <>
+                <h4>{t('feedback.dashboard.satisfaction')}</h4>
+                <div className="card__chart-wrapper hide-mobile">
+                  <DoughnutChart feedbackSatisfaction={summarizedFeedback} />
+                </div>
+              </>
+            ) : (
+              <h4>{t('feedback.dashboard.noFeedback')}</h4>
+            )}
+          </div>
         </div>
       </div>
+      {summarizedFeedback && (
+        <div className="card__mobile-chart card__chart-wrapper hide-desktop">
+          <DoughnutChart feedbackSatisfaction={summarizedFeedback} />
+        </div>
+      )}
     </CardStyled>
   );
 };

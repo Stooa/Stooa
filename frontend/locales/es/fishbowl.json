@@ -190,6 +190,8 @@
         "skip": "Saltar",
         "dashboard" : {
             "noFeedback": "No hay feedback.",
+            "feedbackReceived_one": "Feedback recibido",
+            "feedbackReceived_other": "Feedbacks recibidos",
             "satisfaction": "Satisfacción",
             "participants": "Participantes",
             "users": "usuarios",

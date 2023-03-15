@@ -191,6 +191,8 @@
         "dashboard" : {
             "satisfaction": "Satisfaction",
             "noFeedback": "No feedback received",
+            "feedbackReceived_one": "Feedback received",
+            "feedbackReceived_other": "Feedbacks received",
             "details": "Details",
             "participants": "Participants",
             "users": "users",

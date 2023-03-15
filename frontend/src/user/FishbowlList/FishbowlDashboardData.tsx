@@ -92,8 +92,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           </div>
           <p className="medium">
             <a href="#participants">
-              {fishbowl.participants?.length || 0}
-              {t('feedback.dashboard.users')}
+              {fishbowl.participants?.length || 0} {t('feedback.dashboard.users')}
               <ArrowDown />
             </a>
           </p>
@@ -103,7 +102,6 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         <TitleWithDivider headingLevel="h3">{t('feedback.title')}</TitleWithDivider>
         <SatisfactionSummary
           personsGaveFeedback={fishbowl.feedbacks?.length || 0}
-          participants={fishbowl.participants?.length || 0}
           satisfactionData={getSatisfactionData()}
         />
         {fishbowl.feedbacks && fishbowl.feedbacks?.length > 0 && (

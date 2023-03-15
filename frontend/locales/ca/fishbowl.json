@@ -190,6 +190,8 @@
         "skip": "Saltar",
         "dashboard" : {
             "noFeedback": "No hi ha feedback",
+            "feedbackReceived_one": "Feedback rebut",
+            "feedbackReceived_other": "Feedbacks rebuts",
             "participants": "Participants",
             "users": "usuaris",
             "satisfaction": "Satisfaction",

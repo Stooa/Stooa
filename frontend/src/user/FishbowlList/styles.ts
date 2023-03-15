@@ -13,7 +13,6 @@ import {
   COLOR_GREEN_500,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_500,
-  COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800
 } from '@/ui/settings';
@@ -213,10 +212,14 @@ const CardTitle = styled.div`
 `;
 
 const CardStyled = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
   position: relative;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  align-items: flex-end;
+  column-gap: ${space(2)};
+
   padding: ${space(2)} ${space(2)};
+
   background-color: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_500};
   border-radius: ${rems(8)};
@@ -229,16 +232,17 @@ const CardStyled = styled.div`
       gap: ${space()} ${space(4)};
       text-align: left;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      grid-column: 1 / 2;
 
-      ${media.min('tablet')`
-        flex-direction: row;
-      `}
+      ${media.max('tablet')`
+         flex-direction: column;
+        `}
 
-      & > .card__details {
+      & > .card__first-row {
         display: flex;
         gap: ${space(2)};
-        flex: 3;
+        flex: 1;
         align-items: flex-start;
         justify-content: space-between;
 
@@ -247,8 +251,14 @@ const CardStyled = styled.div`
         `}
       }
 
-      & .card__chart {
-        flex: 1;
+      & .card__second-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: ${space(4)};
+        width: 100%;
+
+        flex: 2;
       }
 
       & h4 {
@@ -266,22 +276,27 @@ const CardStyled = styled.div`
     }
 
     & .card__chart {
-      height: 74px;
+      display: flex;
+      column-gap: ${space()};
 
-      & .card__chart-wrapper {
-        width: 50px;
-        height: 50px;
+      & h4 {
+        margin-bottom: ${space(0.5)};
       }
     }
-  }
 
-  .card__info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    & .card__chart-wrapper {
+      width: 50px;
+      height: 50px;
+    }
 
-    .card__time span {
-      color: ${COLOR_NEUTRO_600};
+    & .card__mobile-chart {
+      grid-column: 2;
+      grid-row: 2;
+
+      &.card__chart-wrapper {
+        width: 36px;
+        height: 36px;
+      }
     }
   }
 

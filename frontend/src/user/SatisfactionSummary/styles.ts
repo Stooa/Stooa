@@ -50,6 +50,10 @@ const StyledSummaryWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: ${space(2)};
+
+    & p {
+      width: 120px;
+    }
   }
 
   & .summary__detail {
@@ -57,6 +61,7 @@ const StyledSummaryWrapper = styled.div`
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: ${space(4)};
     text-align: center;
     color: ${COLOR_NEUTRO_600};
@@ -92,8 +97,8 @@ const StyledSummaryWrapper = styled.div`
     }
 
     & svg {
-      width: 67px;
-      height: 67px;
+      width: 47px;
+      height: 47px;
     }
   }
 
