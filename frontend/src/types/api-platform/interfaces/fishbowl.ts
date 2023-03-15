@@ -9,6 +9,7 @@
 
 import { Participant } from '@/types/api-platform/interfaces/participant';
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
+import {User} from "@/types/api-platform/interfaces/user";
 
 export interface Fishbowl {
   '@id'?: string;
@@ -23,7 +24,7 @@ export interface Fishbowl {
   'isPrivate'?: boolean;
   'plainPassword'?: string;
   readonly 'slug': string;
-  readonly 'host': string;
+  readonly 'host': User|string;
   readonly 'currentStatus'?: string;
   readonly 'participants'?: Participant[];
   readonly 'feedbacks'?: Feedback[];

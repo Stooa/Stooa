@@ -13,5 +13,6 @@
     "fishbowlStartedDescription": "Fishbowls that are running or that will start in less than 30 minutes can't be edited.",
     "back": "Go back to list",
     "loadMore": "Load more",
-    "guestUser": "Guest user"
+    "guestUser": "Guest user",
+    "me": "(Me)"
 }

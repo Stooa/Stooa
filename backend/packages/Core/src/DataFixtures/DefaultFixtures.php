@@ -74,31 +74,24 @@ class DefaultFixtures extends Fixture
             'privacyPolicy' => true,
         ])->object();
 
-        ParticipantFactory::createMany(100, fn () => ['guest' => GuestFactory::createOne()]);
+        ParticipantFactory::createMany(50, fn () => ['guest' => GuestFactory::createOne()]);
 
-        ParticipantFactory::createMany(100, fn () => ['user' => UserFactory::createOne()]);
+        ParticipantFactory::createMany(50, fn () => ['user' => UserFactory::createOne()]);
 
         FeedbackFactory::createMany(100, fn () => ['participant' => ParticipantFactory::random()]);
 
         $yesterday = new \DateTime('- 1 days');
-        FishbowlFactory::createMany(25, fn (int $i) => [
+        FishbowlFactory::createMany(50, fn (int $i) => [
             'startDateTime' => $yesterday->modify("- {$i} minutes"),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
             'host' => $host,
-            'participants' => ParticipantFactory::randomRange(0, 30),
-            'feedbacks' => FeedbackFactory::randomRange(0, 10),
-        ]);
-
-        $twoDaysAgo = new \DateTime('- 2 days');
-        FishbowlFactory::createMany(25, fn (int $i) => [
-            'startDateTime' => $twoDaysAgo->modify("- {$i} minutes"),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '03:00'),
-            'currentStatus' => Fishbowl::STATUS_FINISHED,
-            'host' => $host,
-            'participants' => ParticipantFactory::randomRange(0, 5),
+            'participants' => [
+                ParticipantFactory::createOne(['user' => $host])->object(),
+                ...ParticipantFactory::createMany(rand(0, 4), fn () => ['user' => UserFactory::createOne()]),
+                ...ParticipantFactory::createMany(rand(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
+            ],
             'feedbacks' => FeedbackFactory::randomRange(0, 10),
         ]);
     }
