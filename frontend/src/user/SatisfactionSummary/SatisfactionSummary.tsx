@@ -47,17 +47,17 @@ const SatisfactionSummary = ({ satisfactionData, personsGaveFeedback }: Props) =
 
       <div className="summary__detail">
         <div>
-          <span>{satisfactionData?.sad || 0}</span>
+          <span data-testid="feedback-summary-sad">{satisfactionData?.sad || 0}</span>
           <Bad />
           <p>{t('feedback.notMuch')}</p>
         </div>
         <div>
-          <span>{satisfactionData?.neutral || 0}</span>
+          <span data-testid="feedback-summary-neutral">{satisfactionData?.neutral || 0}</span>
           <Okay />
           <p>{t('feedback.okay')}</p>
         </div>
         <div>
-          <span>{satisfactionData?.happy || 0}</span>
+          <span data-testid="feedback-summary-great">{satisfactionData?.happy || 0}</span>
           <Love />
           <p>{t('feedback.great')}</p>
         </div>
