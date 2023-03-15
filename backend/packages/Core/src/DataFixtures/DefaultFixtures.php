@@ -92,7 +92,7 @@ class DefaultFixtures extends Fixture
                 ...ParticipantFactory::createMany(rand(0, 4), fn () => ['user' => UserFactory::createOne()]),
                 ...ParticipantFactory::createMany(rand(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
             ],
-            'feedbacks' => FeedbackFactory::randomRange(0, 10),
+            'feedbacks' => FeedbackFactory::randomRange(0, 20),
         ]);
     }
 }
