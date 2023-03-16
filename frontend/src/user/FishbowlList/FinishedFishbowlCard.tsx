@@ -82,7 +82,7 @@ const FinishedFishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
             {summarizedFeedback ? (
               <>
                 <h4>{t('feedback.dashboard.satisfaction')}</h4>
-                <div className="card__chart-wrapper hide-mobile">
+                <div className="card__chart-wrapper hide-mobile" data-testid="chart-wrapper">
                   <DoughnutChart feedbackSatisfaction={summarizedFeedback} />
                 </div>
               </>

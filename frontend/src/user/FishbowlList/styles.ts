@@ -288,6 +288,7 @@ const CardStyled = styled.div`
     }
 
     & .card__chart {
+      width: 90px;
       & h4 {
         margin-bottom: ${space(0.5)};
       }

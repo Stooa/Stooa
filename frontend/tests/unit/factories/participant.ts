@@ -8,7 +8,28 @@
  */
 
 import { Participant } from '@/types/participant';
+import { Participant as ApiplatformParticipant } from '@/types/api-platform/interfaces/participant';
+import { User } from '@/types/api-platform/interfaces/user';
+// import { Guest } from '@/types/api-platform/interfaces/guest';
+
 import { faker } from '@faker-js/faker';
+
+const fakeUser: User = {
+  '@id': faker.datatype.uuid(),
+  'name': faker.name.firstName(),
+  'surnames': faker.name.lastName(),
+  'allowShareData': faker.datatype.boolean(),
+  'linkedinProfile': 'https://www.linkedin.com/in/wearestooa',
+  'twitterProfile': 'https://www.twitter.com/wearestooa',
+  'plainPassword': faker.internet.password(),
+  'email': faker.internet.email(),
+  'locale': 'es'
+};
+
+// const fakeGuest: Guest = {
+//   '@id': faker.datatype.uuid(),
+//   'name': faker.name.firstName()
+// };
 
 export const makeParticipant = (): Participant => {
   return {
@@ -24,5 +45,15 @@ export const makeParticipant = (): Participant => {
     isVideoMuted: false,
     getId: () => faker.datatype.uuid(),
     getDisplayName: () => faker.name.firstName()
+  };
+};
+
+export const makeApiplatformParticipant = (): ApiplatformParticipant => {
+  return {
+    '@id': faker.datatype.uuid(),
+    'user': fakeUser,
+    'guest': undefined,
+    'lastPing': new Date(),
+    'fishbowl': faker.datatype.uuid()
   };
 };

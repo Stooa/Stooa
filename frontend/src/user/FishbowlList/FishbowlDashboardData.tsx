@@ -53,6 +53,8 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
 
   const participantsAttended = fishbowl.participants?.length || 0;
 
+  console.log('------> JEST BITCH', fishbowl.feedbacks);
+
   return (
     <StyledFishbowlDashboardData
       key={fishbowl.id}
@@ -61,6 +63,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
       initial="initial"
       exit="exit"
       animate="visible"
+      data-testid="fishbowl-dashboard-data"
     >
       <div className="header-wrapper">
         <MobileBackButton className="bottom" onClick={onClickBack}>
@@ -108,7 +111,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           satisfactionData={getSatisfactionData()}
         />
         {fishbowl.feedbacks && fishbowl.feedbacks?.length > 0 && (
-          <FeedbackList feedbacks={fishbowl.feedbacks} />
+          <FeedbackList dataTestid="feedback-list" feedbacks={fishbowl.feedbacks} />
         )}
         {fishbowl.participants && fishbowl.participants?.length > 0 && (
           <>
