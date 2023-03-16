@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 #[ApiResource(
-    operations: [new GetCollection()],
+    operations: [new GetCollection(security: 'is_granted(\'ROLE_USER\')')],
     normalizationContext: ['groups' => ['participant:read']],
     denormalizationContext: ['groups' => ['participant:write']]
 )]

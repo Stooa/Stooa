@@ -122,7 +122,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\Column(type: 'string')]
     private ?string $surnames = null;
 
-    #[Groups(['user:self', 'user:create', 'user:read', 'fishbowl:read'])]
+    #[Groups(['user:self', 'user:create', 'user:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[Assert\Email]

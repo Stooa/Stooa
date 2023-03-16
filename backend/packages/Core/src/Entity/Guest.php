@@ -28,9 +28,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Get(),
-        new GetCollection(controller: NotFoundAction::class, output: false, read: false),
-        new Post(),
+        new Get(security: 'is_granted(\'ROLE_USER\')'),
+        new GetCollection(controller: NotFoundAction::class, security: 'is_granted(\'ROLE_USER\')', output: false, read: false),
+        new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
     normalizationContext: ['groups' => ['guest:read']],
     denormalizationContext: ['groups' => ['guest:write']],

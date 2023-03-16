@@ -16,10 +16,8 @@ namespace App\Fishbowl\Entity;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Put;
 use App\Core\Entity\Participant;
 use App\Fishbowl\Repository\FeedbackRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,10 +30,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: FeedbackRepository::class)]
 #[ApiResource(
     operations: [
-        new Get(),
-        new GetCollection(),
+        new GetCollection(security: 'is_granted(\'ROLE_USER\')'),
         new Post(security: 'is_granted(\'ROLE_USER\')'),
-        new Put(),
     ],
     normalizationContext: ['groups' => ['feedback:read']],
     denormalizationContext: ['groups' => ['feedback:write']]
