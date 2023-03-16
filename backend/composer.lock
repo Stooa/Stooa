@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "012da8f6b936545b82c133d4048cc373",
+    "content-hash": "8c5cbf27d8e6f868533baea329be13f5",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2886,6 +2886,57 @@
             "time": "2023-02-13T12:30:12+00:00"
         },
         {
+            "name": "metaclass-nl/filter-bundle",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metaclass-nl/filter-bundle.git",
+                "reference": "8c0efddcccfa2d4ee9c7884cd46e0f117643d527"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metaclass-nl/filter-bundle/zipball/8c0efddcccfa2d4ee9c7884cd46e0f117643d527",
+                "reference": "8c0efddcccfa2d4ee9c7884cd46e0f117643d527",
+                "shasum": ""
+            },
+            "require": {
+                "api-platform/core": "^2.7 || ^3.0",
+                "doctrine/orm": "^2.7",
+                "php": ">=7.2.5",
+                "symfony/http-kernel": "^4.4 || ^5.1 || ^6.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Metaclass\\FilterBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MetaClass",
+                    "homepage": "http://www.metaclass.nl/"
+                }
+            ],
+            "description": "Filter bundle for API Platform, Filter Logic",
+            "keywords": [
+                "API Platform",
+                "api-platform.com",
+                "doctrine orm",
+                "filter",
+                "logic",
+                "wherefilter"
+            ],
+            "support": {
+                "issues": "https://github.com/metaclass-nl/filter-bundle/issues",
+                "source": "https://github.com/metaclass-nl/filter-bundle/tree/v3.0.0"
+            },
+            "time": "2023-02-11T12:32:18+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.3.1",
             "source": {
@@ -4272,40 +4323,40 @@
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "4.19.0",
+            "version": "4.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "5aef2a4362e5e08031fd97e188b039f2ea3e991b"
+                "reference": "d5d53a8228591525bada8c108957027df75f971e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/5aef2a4362e5e08031fd97e188b039f2ea3e991b",
-                "reference": "5aef2a4362e5e08031fd97e188b039f2ea3e991b",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/d5d53a8228591525bada8c108957027df75f971e",
+                "reference": "d5d53a8228591525bada8c108957027df75f971e",
                 "shasum": ""
             },
             "require": {
-                "doctrine/collections": "^1.6 || ^2.0",
+                "doctrine/collections": "^1.8 || ^2.0",
                 "doctrine/common": "^2.7.1 || ^3.0",
-                "php": "^7.4 || ^8.0",
+                "php": "^8.0",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0",
                 "psr/container": "^1.0 || ^2.0",
                 "psr/log": "^1.1 || ^2.0 || ^3.0",
                 "sonata-project/cache": "^2.0",
                 "sonata-project/form-extensions": "^1.4",
-                "symfony/asset": "^4.4 || ^5.4 || ^6.0",
-                "symfony/config": "^4.4 || ^5.4 || ^6.0",
-                "symfony/console": "^4.4 || ^5.4 || ^6.0",
-                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+                "symfony/asset": "^4.4 || ^5.4 || ^6.2",
+                "symfony/config": "^4.4 || ^5.4 || ^6.2",
+                "symfony/console": "^4.4 || ^5.4 || ^6.2",
+                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.2",
+                "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.2",
                 "symfony/event-dispatcher-contracts": "^1.1 || ^2.0 || ^3.0",
-                "symfony/form": "^4.4 || ^5.4 || ^6.0",
-                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
-                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
-                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
-                "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
-                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
-                "symfony/validator": "^4.4 || ^5.4 || ^6.0",
+                "symfony/form": "^4.4 || ^5.4 || ^6.2",
+                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.2",
+                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.2",
+                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.2",
+                "symfony/options-resolver": "^4.4 || ^5.4 || ^6.2",
+                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.2",
+                "symfony/validator": "^4.4 || ^5.4 || ^6.2",
                 "twig/twig": "^2.12.1 || ^3.0"
             },
             "conflict": {
@@ -4325,13 +4376,15 @@
                 "phpstan/phpstan-symfony": "^1.0",
                 "phpunit/phpunit": "^9.5.13",
                 "psalm/plugin-phpunit": "^0.16",
-                "psalm/plugin-symfony": "^3.0",
-                "rector/rector": "^0.14",
+                "psalm/plugin-symfony": "^4.0",
+                "rector/rector": "^0.15",
                 "sonata-project/doctrine-extensions": "^1.10.1",
-                "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
-                "symfony/debug": "^4.4 || ^5.4 || ^6.0",
-                "symfony/phpunit-bridge": "^6.1",
-                "symfony/stopwatch": "^4.4 || ^5.4 || ^6.0",
+                "symfony/browser-kit": "^4.4 || ^5.4 || ^6.2",
+                "symfony/debug": "^4.4 || ^5.4 || ^6.2",
+                "symfony/phpunit-bridge": "^6.2",
+                "symfony/routing": "^4.4.12 || ^5.4 || ^6.2",
+                "symfony/stopwatch": "^4.4 || ^5.4 || ^6.2",
+                "symfony/yaml": "^4.4 || ^5.4 || ^6.2",
                 "vimeo/psalm": "^4.1"
             },
             "suggest": {
@@ -4371,7 +4424,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataBlockBundle/issues",
-                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/4.19.0"
+                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/4.20.0"
             },
             "funding": [
                 {
@@ -4391,7 +4444,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-25T08:24:56+00:00"
+            "time": "2023-03-10T17:05:08+00:00"
         },
         {
             "name": "sonata-project/cache",

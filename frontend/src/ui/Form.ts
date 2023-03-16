@@ -224,7 +224,7 @@ const InputStyled = styled.div`
   textarea {
     height: 100%;
     overflow-y: auto;
-    padding-top: ${space(3)};
+    padding-top: ${space(3.75)};
     resize: none;
   }
 

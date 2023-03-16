@@ -13,7 +13,6 @@ import {
   COLOR_GREEN_500,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_500,
-  COLOR_NEUTRO_600,
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_800
 } from '@/ui/settings';
@@ -23,9 +22,9 @@ import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
-  padding: ${space(3)} 0;
+  padding-bottom: ${space(3)};
   width: 100%;
-  max-width: ${BREAKPOINTS.desktop}px;
+  max-width: ${BREAKPOINTS.desktopLarge}px;
 `;
 
 const FishbowlListContent = styled.div`
@@ -38,6 +37,9 @@ const FishbowlListContent = styled.div`
   }
 
   ${media.min('desktop')`
+    &.not-empty {
+      grid-template-columns: 1fr 1fr;
+    }
     column-gap: ${space()};
   `}
 `;
@@ -76,7 +78,7 @@ const FishbowlScrollList = styled.div`
   }
 `;
 
-const EmptyFishbowlList = styled.div`
+const StyledEmptyFishbowlList = styled.div`
   .fishbowl-list__empty-illustration {
     display: flex;
     justify-content: center;
@@ -130,14 +132,13 @@ const EmptyFishbowlList = styled.div`
   }
 `;
 
-const Header = styled.div`
+const StyledListHeader = styled.div`
   width: 100%;
   text-align: left;
   margin-bottom: ${space(2)};
 
-  .fishbowl-list__title {
+  .fishbowl-list__header-link {
     ${BODY_LG}
-    font-weight: 300;
   }
 
   .divider {
@@ -147,11 +148,24 @@ const Header = styled.div`
     display: block;
   }
 
-  div {
+  .header__wrapper {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: ${space(2)};
+    width: 100%;
+
+    & .fishbowl-list__header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: ${space()} ${space(2)};
+      width: 50%;
+      & .fishbowl-list__header-link {
+        flex: 0;
+        width: max-content;
+        white-space: nowrap;
+      }
+    }
   }
 
   .schedule-fishbowl {
@@ -175,11 +189,36 @@ const Header = styled.div`
   }
 `;
 
+const CardTitle = styled.div`
+  ${BODY_MD};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
+  color: ${COLOR_NEUTRO_800};
+  overflow: ellipsis;
+  display: flex;
+
+  h4 {
+    font-weight: 500;
+  }
+
+  svg {
+    margin-right: ${space(0.5)};
+    width: ${rems(19)};
+    height: ${rems(19)};
+  }
+`;
+
 const CardStyled = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
   position: relative;
+  display: grid;
+  align-items: flex-end;
+  column-gap: ${space(2)};
+
   padding: ${space(2)} ${space(2)};
+
   background-color: ${COLOR_NEUTRO_100};
   border: 1px solid ${COLOR_NEUTRO_500};
   border-radius: ${rems(8)};
@@ -187,13 +226,87 @@ const CardStyled = styled.div`
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
-  .card__info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  & .card__info {
+    text-align: left;
+  }
 
-    .card__time span {
-      color: ${COLOR_NEUTRO_600};
+  &.finished {
+    grid-template-columns: 6fr 1fr;
+
+    ${media.min('tablet')`
+      grid-template-columns: 1fr;
+    `}
+
+    &.no-feedback {
+      grid-template-columns: 1fr;
+    }
+
+    & .card__info {
+      gap: ${space()} ${space(4)};
+      display: flex;
+      flex-wrap: wrap;
+      grid-column: 1 / 2;
+
+      ${media.max('tablet')`
+         flex-direction: column;
+        `}
+
+      & > .card__first-row {
+        display: flex;
+        gap: ${space(2)};
+        flex: 1;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        ${media.max('tablet')`
+          width: 100%;
+        `}
+      }
+
+      & .card__second-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: ${space(4)};
+        width: 100%;
+
+        flex: 2;
+      }
+
+      & h4 {
+        font-weight: 300;
+      }
+
+      .card__participants {
+        display: flex;
+        align-items: center;
+
+        & svg {
+          margin-right: ${space(0.5)};
+        }
+      }
+    }
+
+    & .card__chart {
+      width: 90px;
+      & h4 {
+        margin-bottom: ${space(0.5)};
+      }
+    }
+
+    & .card__chart-wrapper {
+      width: 50px;
+      height: 50px;
+    }
+
+    & .card__mobile-chart {
+      grid-column: 2;
+      grid-row: 2;
+
+      &.card__chart-wrapper {
+        width: 36px;
+        height: 36px;
+      }
     }
   }
 
@@ -233,28 +346,6 @@ const CardStyled = styled.div`
       background-color: ${COLOR_GREEN_500};
       width: 6px;
     }
-  }
-`;
-
-const CardTitle = styled.div`
-  ${BODY_MD};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-  text-align: left;
-  color: ${COLOR_NEUTRO_800};
-  overflow: ellipsis;
-  display: flex;
-
-  h4 {
-    font-weight: 500;
-  }
-
-  svg {
-    margin-right: ${space(0.5)};
-    width: ${rems(19)};
-    height: ${rems(19)};
   }
 `;
 
@@ -304,18 +395,19 @@ const EditFormWrapper = styled.div`
   `}
 `;
 
-const DetailPlaceholder = styled.div`
+const StyledDetailPlaceholder = styled.div`
   &.not-selected {
     ${media.max('desktop')`
     display: none;
     `}
   }
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: ${rems(4)};
-  width: 470px;
   min-height: 500px;
   background-color: ${COLOR_NEUTRO_100};
   padding: ${space(3)};
@@ -359,15 +451,106 @@ const MobileBackButton = styled.button`
   `}
 `;
 
+const StyledFishbowlDashboardData = styled.div`
+  padding: ${space(4)};
+  background-color: ${COLOR_NEUTRO_100};
+  text-align: left;
+  overflow-y: scroll;
+  height: 100%;
+
+  ${scrolllbarStyle};
+
+  ${media.max('desktop')`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;`};
+
+  & .header-wrapper {
+    position: relative;
+  }
+
+  & h2 {
+    margin-bottom: ${space(2)};
+    text-align: center;
+  }
+
+  & h3 {
+    color: ${COLOR_NEUTRO_800};
+    margin-bottom: ${space(0.5)};
+    font-weight: 500;
+  }
+
+  & h4 {
+    font-weight: 500;
+  }
+
+  & .description {
+    margin-bottom: ${space(2)};
+  }
+
+  & .data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: ${space()};
+
+    margin-bottom: ${space(2)};
+  }
+
+  & .data__title {
+    display: flex;
+    align-items: flex-end;
+    gap: ${space(0.5)};
+    margin-left: -5px;
+
+    margin-bottom: ${space(0.5)};
+
+    & h4 {
+      font-weight: 300;
+    }
+
+    & svg {
+      width: 32px !important;
+      height: 32px !important;
+    }
+  }
+
+  & .data__group {
+    flex: 0 120px;
+    & p + p {
+      margin-top: ${space(0.5)};
+    }
+
+    &.participants p svg {
+      width: 16px;
+      height: 16px;
+      margin-left: 4px;
+      transform: translateY(3px);
+    }
+  }
+
+  & .feedback {
+    & h3 {
+      color: ${COLOR_NEUTRO_700};
+      font-weight: 500;
+      margin-bottom: ${space(2)};
+    }
+  }
+`;
+
 export {
   FishbowlListWrapper,
-  Header,
+  StyledListHeader,
   CardStyled,
   FishbowlScrollList,
   CardTitle,
-  EmptyFishbowlList,
+  StyledEmptyFishbowlList,
   FishbowlListContent,
   EditFormWrapper,
-  DetailPlaceholder,
-  MobileBackButton
+  StyledDetailPlaceholder,
+  MobileBackButton,
+  StyledFishbowlDashboardData
 };

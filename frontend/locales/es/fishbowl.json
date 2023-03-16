@@ -171,7 +171,7 @@
         }
     },
     "feedback" : {
-        "buttonText": "Feedback",
+        "title": "Feedback",
         "satisfactionTitle": "Danos feedback",
         "satisfactionDescription": "¿Cuál es tu grado de satisfacción con este <i>fishbowl</i>?",
         "notMuch": "Bajo",
@@ -187,6 +187,23 @@
         "thanksDescription": "Tu feedback nos ayuda a mejorar.",
         "spreadTheWord": "Spread the word!",
         "send": "Enviar",
-        "skip": "Saltar"
+        "skip": "Saltar",
+        "dashboard" : {
+            "noFeedback": "Ningún feedback recibido.",
+            "feedbackReceived_one": "Feedback recibido",
+            "feedbackReceived_other": "Feedbacks recibidos",
+            "satisfaction": "Satisfacción",
+            "participants": "Participantes",
+            "participants_one": "{{count}} Participante",
+            "participants_other": "{{count}} Participantes",
+            "users_0": "Ningún usuario",
+            "users_one": "{{count}} usuario",
+            "users_other": "{{count}} usuarios",
+            "details": "Detalles",
+            "after": "Después",
+            "afterTooltip": "Feedback recibido después del fishbowl.",
+            "during": "Durante",
+            "duringTooltip": "Feedback recibido durante el fishbowl."
+        }
     }
 }

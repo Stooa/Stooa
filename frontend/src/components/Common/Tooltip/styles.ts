@@ -37,7 +37,7 @@ const StyledTooltip = styled.div`
     &.arrow::after {
       content: '';
       position: absolute;
-      bottom: 100%;
+      top: 100%;
       left: 50%;
       transform: translateX(-50%);
       border-width: 5px;
