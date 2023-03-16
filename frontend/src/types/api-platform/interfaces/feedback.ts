@@ -7,14 +7,16 @@
  * file that was distributed with this source code.
  */
 
+import { Participant } from './participant';
+
 export interface Feedback {
-  "@id"?: string;
-  timezone?: string;
-  satisfaction: string;
-  comment?: string;
-  email?: string;
-  origin?: string;
-  fishbowl?: string;
-  participant?: string;
-  readonly createdDateTime?: Date;
+  '@id'?: string;
+  'timezone'?: string;
+  'satisfaction': string;
+  'comment'?: string;
+  'email'?: string;
+  'origin'?: string;
+  'fishbowl'?: string;
+  'participant'?: Participant;
+  readonly 'createdDateTime'?: Date;
 }

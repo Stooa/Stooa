@@ -1,0 +1,101 @@
+{
+    "hydra:member" : [
+        {
+            "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a7",
+            "@type": "Fishbowl",
+            "name": "First fishbowl",
+            "description": "Ratione et maiores itaque ut debitis.",
+            "slug": "test-me-fishbowl",
+            "timezone": "Europe/Madrid",
+            "locale": "en",
+            "host": "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
+            "currentStatus": "not_started",
+            "participants": [
+                {
+                    "id": "/participants/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
+                    "user": {
+                        "id": "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
+                        "name": "Linwood",
+                        "surnames": "Hahn",
+                        "email": "host@stooa.com",
+                        "allowShareData": true,
+                        "linkedinProfile": "https://linkedin.com",
+                        "twitterProfile": "https://twitter.com"
+                    }
+                },
+                {
+                    "id": "/participants/2b8ccbf5-fbd8-4c82-9b61-44e195348406",
+                    "guest": {
+                        "id": "/guest/2b8ccbf5-fbd8-4c82-9b61-44e195348407",
+                        "name": "Guest user name"
+                    }
+                }
+            ],
+            "feedbacks": [
+                {
+                    "id": "/feedbacks/2b8ccbf5-fbd8-4c82-9b61-44e195348410",
+                    "timezone": "string",
+                    "satisfaction": "sad",
+                    "comment": "This is a comment",
+                    "email": "guest@email.com",
+                    "origin": "thank-you",
+                    "participant": {
+                        "id": "/participants/2b8ccbf5-fbd8-4c82-9b61-44e195348406",
+                        "guest": {
+                            "id": "/guest/2b8ccbf5-fbd8-4c82-9b61-44e195348407",
+                            "name": "Guest user name"
+                        }
+                    }
+                }
+            ],
+            "isFishbowlNow": false,
+            "hasIntroduction": false,
+            "startDateTimeTz": "2022-02-11T10:48:22+01:00",
+            "endDateTimeTz": "2022-02-11T12:48:22+01:00",
+            "durationFormatted": "02:00",
+            "isPrivate": false,
+            "plainPassword": null
+        },
+        {
+            "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a8",
+            "@type": "Fishbowl",
+            "name": "Second fishbowl",
+            "description": "Ratione et maiores itaque ut debitis.",
+            "slug": "second",
+            "timezone": "Europe/Madrid",
+            "locale": "en",
+            "host": "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
+            "currentStatus": "not_started",
+            "participants": [],
+            "isFishbowlNow": false,
+            "hasIntroduction": false,
+            "startDateTimeTz": "2022-02-12T10:48:22+01:00",
+            "endDateTimeTz": "2022-02-12T12:48:22+01:00",
+            "durationFormatted": "02:00",
+            "isPrivate": false,
+            "plainPassword": null
+        },
+        {
+            "id": "a34b3ba8-df6b-48f2-b41c-0ef612b432a9",
+            "@type": "Fishbowl",
+            "name": "Third fishbowl",
+            "description": "Ratione et maiores itaque ut debitis.",
+            "slug": "third",
+            "timezone": "Europe/Madrid",
+            "locale": "en",
+            "host": "/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404",
+            "currentStatus": "not_started",
+            "participants": [],
+            "isFishbowlNow": false,
+            "hasIntroduction": false,
+            "startDateTimeTz": "2022-02-13T10:48:22+01:00",
+            "endDateTimeTz": "2022-02-13T12:48:22+01:00",
+            "durationFormatted": "02:00",
+            "isPrivate": false,
+            "plainPassword": null
+        }],
+    "hydra:view": {
+        "hydra:next": []
+    },
+    "hydra:totalItems": 3
+}

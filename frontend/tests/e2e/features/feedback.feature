@@ -1,7 +1,6 @@
 Feature: Fishbowl
     As a user
     I can give my feedback
-
 #     Scenario: User can see the feedback button and the from
 #         Given a logged user
 #         And doesn't have host role

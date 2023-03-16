@@ -39,7 +39,7 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
 
   return (
     <StyledFeedbackWrapper
-      className={`${drawerOpened ? 'drawer-opened' : ''} ${disabled ? 'disabled' : ''} hidden`}
+      className={`${drawerOpened ? 'drawer-opened' : ''} ${disabled ? 'disabled' : ''}`}
     >
       {showFeedbackForm && (
         <FeedbackForm
@@ -61,7 +61,7 @@ const ButtonFeedback = ({ fishbowl, drawerOpened = false, disabled = false }: Pr
         data-testid="feedback-button"
       >
         <Feedback />
-        <span className="text medium body-xs">{t('feedback.buttonText')}</span>
+        <span className="text medium body-xs">{t('feedback.title')}</span>
         <span className="chevron">
           <Chevron />
         </span>

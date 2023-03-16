@@ -5,14 +5,14 @@ Feature: Edit fishbowl
     Scenario: Logged users can access to fishbowl list
         Given a logged user
         And a list of one fishbowl
-        When navigates to "/fishbowl/list"
+        When navigates to "/fishbowl/scheduled"
         And clicks on fishbowl card
         Then sees the fishbowl edit form full of information
 
     Scenario: Logged users can edit a fishbowl
         Given a logged user
         And a list of one fishbowl
-        When navigates to "/fishbowl/list"
+        When navigates to "/fishbowl/scheduled"
         And clicks on fishbowl card
         And writes "Updated fishbowl" in input "title"
         And writes "Updated description" in input "description"
@@ -32,13 +32,13 @@ Feature: Edit fishbowl
         Given a logged user
         And a desktop computer
         And a list of one fishbowl
-        When navigates to "/fishbowl/list"
+        When navigates to "/fishbowl/scheduled"
         Then sees the placeholder area
 
     Scenario: Logged user clicks on fishbowl that is about to start
         Given a logged user
         And a list of one fishbowl that is about to start
-        When navigates to "/fishbowl/list"
+        When navigates to "/fishbowl/scheduled"
         Then clicks on fishbowl card that is about to start
         And sees a placeholder with Enter Fishbowl button
         And clicks on placeholders Enter Fishbowl link

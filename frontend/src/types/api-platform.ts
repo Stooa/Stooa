@@ -8,6 +8,7 @@
  */
 
 import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
+import { SatisfactionData } from './feedback';
 
 export interface Fishbowl
   extends Omit<
@@ -20,4 +21,5 @@ export interface Fishbowl
   startDateTimeTz: string;
   endDateTimeTz: string;
   isPrivate: boolean;
+  summarizedFeedback?: SatisfactionData | null;
 }

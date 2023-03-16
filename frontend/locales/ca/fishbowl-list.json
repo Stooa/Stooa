@@ -1,12 +1,19 @@
 {
-    "scheduledFishbowls": "Fishbowls agendades (<span>{{count}}</span>)",
+    "scheduledFishbowls": "Fishbowls programats (<span>{{count}}</span>)",
+    "finishedFishbowls": "<i>Fishbowls</i> realitzats (<span>{{count}}</span>)",
     "enterFishbowl": "Entrar a fishbowl",
     "titleEdit": "Edita la fishbowls",
     "emptyListTitle": "Encara no has programat cap fishbowl. Crea'n una!",
     "emptyListDescription": "Aquí és on veuràs totes les teves fishbowls programades.",
+    "emptyFinishedListTitle": "Aquí veuràs els detalls i el feedback dels teus <i>fishbowls</i> finalitzats.",
+    "emptyFinishedListDescription": "Llest per al teu pròxim fishbowl?",
     "noSelectedFishbowlTitle": "No s'ha seleccionat cap fishbowl.",
     "noSelectedFishbowlDescription": "Selecciona una fishbowl programada per a començar a editar-la.",
     "fishbowlStarted": "Aquesta fishbowls ja ha començat o està a punt de començar.",
     "fishbowlStartedDescription": "Les fishbowls que estiguin funcionant o que comencin en menys de 30 minuts no es poden editar.",
-    "back": "Tornar al llistat"
+    "back": "Tornar al llistat",
+    "loadMore": "Carregar més",
+    "guestUser": "Usuari convidat",
+    "registerUser": "Usuari registrat",
+    "me": "(Jo)"
 }

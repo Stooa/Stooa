@@ -179,6 +179,11 @@ const LinkStyledButton = styled.button`
   &:focus {
     color: ${COLOR_PURPLE_600};
   }
+
+  &:disabled {
+    color: ${COLOR_NEUTRO_500};
+    pointer-events: none;
+  }
 `;
 
 const SubtleLinkStyledButton = styled.button`

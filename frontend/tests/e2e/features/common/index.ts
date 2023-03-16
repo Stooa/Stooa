@@ -173,25 +173,31 @@ Given('a list of one fishbowl that is about to start', () => {
         'finishDateTime[after]': isoCloseDate.toISOString()
       }
     },
-    [
-      {
-        id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
-        type: 'Fishbowl',
-        name: 'Fishbowl title',
-        description: 'Fishbowl description',
-        slug: 'test-me-fishbowl',
-        timezone: 'Europe/Madrid',
-        locale: 'en',
-        host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
-        currentStatus: 'not_started',
-        participants: [],
-        isFishbowlNow: false,
-        hasIntroduction: false,
-        startDateTimeTz: isoCloseDate,
-        endDateTimeTz: isoDate,
-        durationFormatted: '02:00'
-      }
-    ]
+    {
+      'hydra:member': [
+        {
+          id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
+          type: 'Fishbowl',
+          name: 'Fishbowl title',
+          description: 'Fishbowl description',
+          slug: 'test-me-fishbowl',
+          timezone: 'Europe/Madrid',
+          locale: 'en',
+          host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+          currentStatus: 'not_started',
+          participants: [],
+          isFishbowlNow: false,
+          hasIntroduction: false,
+          startDateTimeTz: isoCloseDate,
+          endDateTimeTz: isoDate,
+          durationFormatted: '02:00'
+        }
+      ],
+      'hydra:view': {
+        'hydra:next': []
+      },
+      'hydra:totalItems': 1
+    }
   ).as('getOneCloseFishbowlsListQuery');
 });
 
