@@ -17,8 +17,7 @@ import {
   ROUTE_FISHBOWL_CREATE,
   ROUTE_NOT_FOUND,
   ROUTE_HOME,
-  ROUTE_FISHBOWL_FINISHED,
-  ROUTE_FISHBOWL_SCHEDULED
+  ROUTE_FISHBOWL_FINISHED
 } from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
