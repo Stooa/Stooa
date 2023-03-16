@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { forwardRef } from 'react';
 import { StyledTitleWithDivider } from './styles';
 
 interface Props {
@@ -15,13 +16,15 @@ interface Props {
   id?: string;
 }
 
-const TitleWithDivider = ({ children, headingLevel, id }: Props) => {
-  return (
-    <StyledTitleWithDivider as={headingLevel} id={id}>
-      {children}
-      <span className="divider" />
-    </StyledTitleWithDivider>
-  );
-};
+const TitleWithDivider = forwardRef<HTMLDivElement, Props>(
+  ({ children, headingLevel, id }, ref) => {
+    return (
+      <StyledTitleWithDivider ref={ref} as={headingLevel} id={id}>
+        {children}
+        <span className="divider" />
+      </StyledTitleWithDivider>
+    );
+  }
+);
 
 export default TitleWithDivider;

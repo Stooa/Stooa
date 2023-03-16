@@ -8,7 +8,7 @@
  */
 
 import TitleWithDivider from '@/components/Common/TitleWithDivider';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { MobileBackButton, StyledFishbowlDashboardData } from './styles';
 
 import Calendar from '@/ui/svg/calendar.svg';
@@ -23,7 +23,6 @@ import FeedbackList from '../FeedbackList';
 import DashboardParticipantsList from '../DashboardParticipantsList';
 import { motion, Variants } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -55,6 +54,19 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
 
   console.log('------> JEST BITCH', fishbowl.feedbacks);
 
+  const participantsRef = useRef<HTMLDivElement>(null);
+  const dashboardWrapperRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollToParticipants = () => {
+    if (participantsRef.current && dashboardWrapperRef.current) {
+      dashboardWrapperRef.current.scrollTo({
+        top: participantsRef.current.offsetTop,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <StyledFishbowlDashboardData
       key={fishbowl.id}
@@ -64,6 +76,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
       exit="exit"
       animate="visible"
       data-testid="fishbowl-dashboard-data"
+      ref={dashboardWrapperRef}
     >
       <div className="header-wrapper">
         <MobileBackButton className="bottom" onClick={onClickBack}>
@@ -97,10 +110,10 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
             <h4>{t('feedback.dashboard.participants')}</h4>
           </div>
           <p className="medium">
-            <Link href={`#participants-${fishbowl.id}`} className="body-md">
+            <a onClick={handleScrollToParticipants} className="body-md">
               {t('feedback.dashboard.users', { count: participantsAttended })}
               {participantsAttended > 0 && <ArrowDown />}
-            </Link>
+            </a>
           </p>
         </div>
       </div>
@@ -115,7 +128,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         )}
         {fishbowl.participants && fishbowl.participants?.length > 0 && (
           <>
-            <TitleWithDivider headingLevel="h3" id={`#participants-${fishbowl.id}`}>
+            <TitleWithDivider headingLevel="h3" ref={participantsRef}>
               {t('feedback.dashboard.participants', { count: participantsAttended })}
             </TitleWithDivider>
             <DashboardParticipantsList participants={fishbowl.participants} host={fishbowl.host} />
