@@ -7,10 +7,13 @@
  * file that was distributed with this source code.
  */
 
+import { Guest } from './guest';
+import { User } from './user';
+
 export interface Participant {
-  "@id"?: string;
-  readonly user?: string;
-  readonly guest?: string;
-  readonly lastPing: Date;
-  readonly fishbowl: string;
+  '@id'?: string;
+  readonly 'user'?: User;
+  readonly 'guest'?: Guest;
+  readonly 'lastPing': Date;
+  readonly 'fishbowl': string;
 }

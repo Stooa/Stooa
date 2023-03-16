@@ -12,7 +12,7 @@ import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlPar
 import { useStateValue } from '@/contexts/AppContext';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { ping } from '@/user/auth';
-import { makeParticipant } from '../../../factories/participant';
+import { makeFishbowlParticipant } from '../../../factories/fishbowlParticipant';
 
 jest.mock('@/user/auth');
 jest.mock('@/contexts/AppContext');
@@ -72,7 +72,7 @@ describe('Pre Fishbowl Participants component', () => {
   });
 
   it('Should render one participant', async () => {
-    const newParticipant = makeParticipant();
+    const newParticipant = makeFishbowlParticipant();
 
     getApiParticipantList.mockResolvedValue([newParticipant]);
 
@@ -84,7 +84,7 @@ describe('Pre Fishbowl Participants component', () => {
   });
 
   it('Should render 10 participant', async () => {
-    const newParticipant = makeParticipant();
+    const newParticipant = makeFishbowlParticipant();
 
     getApiParticipantList.mockResolvedValue(Array(10).fill(newParticipant));
 

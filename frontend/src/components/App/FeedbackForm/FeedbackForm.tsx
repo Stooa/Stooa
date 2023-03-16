@@ -53,12 +53,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
 
     const handleCommentFeedback = (comment: string) => {
       updateFeedback({ type: 'comment', data: comment });
-      if (isAuthenticated) {
-        setActive('end');
-        return;
-      } else {
-        setActive('mail');
-      }
+      setActive('mail');
     };
 
     const handleMailFeedback = (email: string) => {
@@ -88,7 +83,7 @@ const FeedbackForm = forwardRef<HTMLDivElement, Props>(
       <AnimatePresence mode="wait">
         <StyledFormWrapper
           key="wrapper"
-          className={`${variant} hidden`}
+          className={`${variant}`}
           ref={ref}
           data-testid="feedback-form"
         >

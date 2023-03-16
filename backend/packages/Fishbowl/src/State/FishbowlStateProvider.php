@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\State;
 
+use ApiPlatform\Doctrine\Orm\Paginator;
 use ApiPlatform\Doctrine\Orm\State\CollectionProvider;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
@@ -33,12 +34,10 @@ class FishbowlStateProvider implements ProviderInterface
     /**
      * @param array<array-key, mixed> $uriVariables
      * @param array<mixed> $context
-     *
-     * @return array<Fishbowl>
      */
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): Paginator
     {
-        /** @var array<Fishbowl> $fishbowls */
+        /** @var Paginator $fishbowls */
         $fishbowls = $this->collectionProvider->provide($operation, $uriVariables, $context);
 
         foreach ($fishbowls as $fishbowl) {

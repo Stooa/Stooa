@@ -29,7 +29,8 @@ module.exports = {
     '/register': ['form', 'register'],
     '/fb/[fid]': ['fishbowl', 'app', 'form', 'on-boarding', 'on-boarding-tour'],
     '/fishbowl/create': ['fishbowl', 'form'],
-    '/fishbowl/list': ['fishbowl-list', 'fishbowl', 'form'],
+    '/fishbowl/scheduled': ['fishbowl-list', 'fishbowl', 'form'],
+    '/fishbowl/finished': ['fishbowl-list', 'fishbowl', 'form'],
     '/fishbowl/host-now': ['fishbowl'],
     '/fishbowl/detail/[fid]': ['fishbowl', 'form'],
     '/fishbowl/thankyou/[fid]': ['fishbowl', 'form', 'home']

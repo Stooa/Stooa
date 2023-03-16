@@ -13,7 +13,12 @@ import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_NOT_FOUND, ROUTE_HOME } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_NOT_FOUND,
+  ROUTE_HOME,
+  ROUTE_FISHBOWL_FINISHED
+} from '@/app.config';
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
@@ -26,6 +31,7 @@ import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import FeedbackForm from '@/components/App/FeedbackForm';
+import Trans from 'next-translate/Trans';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -63,7 +69,6 @@ const ThankYou = () => {
   const startDate = formatDateTime(fb.startDateTimeTz);
   const endDate = formatDateTime(fb.endDateTimeTz);
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
-
   const showFeedbackForm = userHasParticipated && !thankYouFeedbackGiven && !isModerator;
 
   dataLayerPush({
@@ -100,6 +105,7 @@ const ThankYou = () => {
         {showFeedbackForm && (
           <FeedbackForm fishbowl={data.bySlugQueryFishbowl} variant="thankyou" />
         )}
+
         <ThankYouStyled>
           {(!fb.isPrivate || fb.plainPassword) && (
             <div className="share body-md medium">
@@ -172,28 +178,52 @@ const ThankYou = () => {
               </ul>
             </div>
           )}
-
           <div className="action-wrapper">
-            <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-              <Button
-                size="large"
-                as="a"
-                onClick={() => {
-                  pushEventDataLayer({
-                    category: 'Schedule Fishbowl',
-                    action: 'Thank You Page',
-                    label: `fishbowl/thankyou/${fid}`
-                  });
-                }}
-              >
-                <span>{t('common:scheduleFishbowl')}</span>
-              </Button>
-            </RedirectLink>
-            <RedirectLink href={ROUTE_HOME} passHref>
-              <Button size="large" variant="secondary" as="a">
-                <span>{t('common:goHome')}</span>
-              </Button>
-            </RedirectLink>
+            {isModerator ? (
+              <div>
+                <h2 className="past-title body-md medium">
+                  <Trans i18nKey="common:goToFinishedFishbowlsTitle" components={{ i: <i /> }} />
+                </h2>
+                <Link href={`${ROUTE_FISHBOWL_FINISHED}?selected=${fid}`} legacyBehavior passHref>
+                  <Button
+                    size="large"
+                    as="a"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Schedule Fishbowl',
+                        action: 'Thank You Page',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    {t('common:goToFinishedFishbowls')}
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <>
+                <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+                  <Button
+                    size="large"
+                    as="a"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Schedule Fishbowl',
+                        action: 'Thank You Page',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    <span>{t('common:scheduleFishbowl')}</span>
+                  </Button>
+                </RedirectLink>
+                <RedirectLink href={ROUTE_HOME} passHref>
+                  <Button size="large" variant="secondary" as="a">
+                    <span>{t('common:goHome')}</span>
+                  </Button>
+                </RedirectLink>
+              </>
+            )}
           </div>
         </ThankYouStyled>
       </StyledThankyouWrapper>

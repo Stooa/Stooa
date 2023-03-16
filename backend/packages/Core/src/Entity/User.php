@@ -110,13 +110,13 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:read', 'user:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:read', 'user:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
@@ -148,13 +148,13 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\Column(type: 'boolean')]
     private bool $active = false;
 
-    #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[Groups(['user:self', 'user:write', 'user:read', 'fishbowl:read'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $linkedinProfile = null;
 
-    #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[Groups(['user:self', 'user:write', 'user:read', 'fishbowl:read'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]
