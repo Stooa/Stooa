@@ -189,7 +189,7 @@
         "send": "Enviar",
         "skip": "Saltar",
         "dashboard" : {
-            "noFeedback": "No hay feedback.",
+            "noFeedback": "Ningún feedback recibido.",
             "feedbackReceived_one": "Feedback recibido",
             "feedbackReceived_other": "Feedbacks recibidos",
             "satisfaction": "Satisfacción",

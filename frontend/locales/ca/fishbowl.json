@@ -189,7 +189,7 @@
         "send": "Enviar",
         "skip": "Saltar",
         "dashboard" : {
-            "noFeedback": "No hi ha feedback",
+            "noFeedback": "Cap feedback rebut",
             "feedbackReceived_one": "Feedback rebut",
             "feedbackReceived_other": "Feedbacks rebuts",
             "participants": "Participants",
