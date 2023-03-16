@@ -54,7 +54,7 @@ use Webmozart\Assert\Assert as MAssert;
 
 #[ApiResource(
     operations: [
-        new Get(),
+        new Get(security: 'is_granted(\'ROLE_USER\')'),
         new Put(security: 'object.getHost() == user'),
         new GetCollection(security: 'is_granted(\'ROLE_USER\')', provider: FishbowlStateProvider::class),
         new Post(security: 'is_granted(\'ROLE_USER\')'),

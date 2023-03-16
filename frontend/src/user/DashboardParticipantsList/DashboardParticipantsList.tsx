@@ -47,9 +47,7 @@ const DashboardParticipantsList = ({ participants, host }: Props) => {
               </p>
             )}
             <div className="participant__contacts">
-              <p className="body-sm">
-                {participant.user ? participant.user.email : t('guestUser')}
-              </p>
+              <p className="body-sm">{participant.user ? t('registerUser') : t('guestUser')}</p>
               <div className="participant__socials ">
                 <a
                   href={`${participant.user?.twitterProfile || ''}`}
