@@ -33,6 +33,11 @@ const Content = styled.main`
     padding: ${space(2)} ${space(5)};
     border-radius: 5px;
 
+    & svg {
+      width: 20px;
+      height: 20px;
+    }
+
     & ul {
       list-style: disc;
       text-align: left;
