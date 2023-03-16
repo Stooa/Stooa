@@ -19,10 +19,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   feedbacks: Feedback[];
-  dataTestid?: string;
 }
 
-const FeedbackList = ({ feedbacks, dataTestid }: Props) => {
+const FeedbackList = ({ feedbacks }: Props) => {
   const { t } = useTranslation('fishbowl');
   const FeedbackSVG = {
     sad: Bad,
@@ -31,7 +30,7 @@ const FeedbackList = ({ feedbacks, dataTestid }: Props) => {
   };
 
   return (
-    <StyledFeedbackWrapper data-testid={dataTestid}>
+    <StyledFeedbackWrapper data-testid="feedback-list">
       {feedbacks.map((feedback, index) => {
         const Component = FeedbackSVG[feedback.satisfaction];
 

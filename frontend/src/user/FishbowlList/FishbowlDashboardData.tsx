@@ -19,7 +19,7 @@ import People from '@/ui/svg/people-bigger.svg';
 import SatisfactionSummary from '../SatisfactionSummary';
 import { Fishbowl } from '@/types/api-platform';
 import useFeedback from '@/hooks/useFeedback';
-import FeedbackList from '../FeedbackList';
+import FeedbackList from '@/user/FeedbackList';
 import DashboardParticipantsList from '../DashboardParticipantsList';
 import { motion, Variants } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
@@ -128,7 +128,7 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
           satisfactionData={getSatisfactionData()}
         />
         {fishbowl.feedbacks && fishbowl.feedbacks?.length > 0 && (
-          <FeedbackList dataTestid="feedback-list" feedbacks={fishbowl.feedbacks} />
+          <FeedbackList feedbacks={fishbowl.feedbacks} />
         )}
         {fishbowl.participants && fishbowl.participants?.length > 0 && (
           <>

@@ -15,7 +15,7 @@ export const makeFeedback = (): Feedback => {
   return {
     '@id': faker.datatype.uuid(),
     'timezone': faker.address.timeZone(),
-    'satisfaction': 'great',
+    'satisfaction': 'sad',
     'comment': faker.lorem.sentence(4),
     'email': faker.internet.email(),
     'origin': 'thank-you',

@@ -25,8 +25,8 @@ import useFeedback from '@/hooks/useFeedback';
 jest.mock('@/hooks/useNavigatorType');
 jest.mock('@/hooks/useFeedback');
 jest.mock('@/user/SatisfactionSummary', () => () => <div />);
-jest.mock('@/user/FeedbackList', () => () => <div />);
-jest.mock('@/user/DashboardParticipantsList', () => () => <div data-testid="feedback-list" />);
+jest.mock('@/user/FeedbackList', () => () => <div data-testid="feedback-list" />);
+jest.mock('@/user/DashboardParticipantsList', () => () => <div data-testid="participant-list" />);
 
 const currentFishbowlWithFeedback = makePastFishbowl(true, true);
 const currentFishbowlWithoutParticipants = makeCurrentFishbowl(false, false);
@@ -51,7 +51,7 @@ describe('Unit test of fishbowl Dashboard', () => {
     expect(feedbackList).not.toBeInTheDocument();
   });
 
-  it('It renders fishbowl dashboard with participants ', () => {
+  it('It renders fishbowl dashboard with feedback and participants ', () => {
     useFeedback.mockReturnValue({
       createFeedback: jest.fn(),
       updateFeedback: jest.fn(),
@@ -63,7 +63,9 @@ describe('Unit test of fishbowl Dashboard', () => {
     );
     const dashboard = getByTestId('fishbowl-dashboard-data');
     const feedbackList = getByTestId('feedback-list');
+    const participantList = getByTestId('participant-list');
     expect(dashboard).toBeInTheDocument();
     expect(feedbackList).toBeInTheDocument();
+    expect(participantList).toBeInTheDocument();
   });
 });
