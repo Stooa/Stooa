@@ -7,16 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { Participant } from '@/types/api-platform/interfaces/participant';
+import { Guest } from '@/types/api-platform/interfaces/guest';
 import { faker } from '@faker-js/faker';
-import { makeUser } from './user';
 
-export const makeParticipant = (): Participant => {
+export const makeGuest = (): Guest => {
   return {
     '@id': faker.datatype.uuid(),
-    'user': makeUser(),
-    'guest': undefined,
-    'lastPing': new Date(),
-    'fishbowl': faker.datatype.uuid()
+    'name': faker.name.firstName()
   };
 };

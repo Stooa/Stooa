@@ -9,16 +9,18 @@
 
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
 import { faker } from '@faker-js/faker';
-import { makeApiplatformParticipant } from './participant';
+import { makeParticipant } from './participant';
 
-export const fakeFeedback: Feedback = {
-  '@id': faker.datatype.uuid(),
-  'timezone': faker.address.timeZone(),
-  'satisfaction': 'great',
-  'comment': faker.lorem.sentence(4),
-  'email': faker.internet.email(),
-  'origin': 'thank-you',
-  'fishbowl': faker.datatype.uuid(),
-  'participant': makeApiplatformParticipant(),
-  'createdDateTime': new Date()
+export const makeFeedback = (): Feedback => {
+  return {
+    '@id': faker.datatype.uuid(),
+    'timezone': faker.address.timeZone(),
+    'satisfaction': 'great',
+    'comment': faker.lorem.sentence(4),
+    'email': faker.internet.email(),
+    'origin': 'thank-you',
+    'fishbowl': faker.datatype.uuid(),
+    'participant': makeParticipant(),
+    'createdDateTime': new Date()
+  };
 };

@@ -9,8 +9,8 @@
 
 import { faker } from '@faker-js/faker';
 import { Fishbowl } from '@/types/api-platform';
-import { makeApiplatformParticipant } from './participant';
-import { fakeFeedback } from './feedbacks';
+import { makeFeedback } from './feedbacks';
+import { makeParticipant } from './participant';
 
 const today = new Date();
 const tomorrow = new Date(today);
@@ -18,8 +18,8 @@ tomorrow.setDate(tomorrow.getDate() + 1);
 
 const twoDaysAgo = new Date(today);
 twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-const TwoDaysAgoPlusOneHour = new Date(twoDaysAgo);
-TwoDaysAgoPlusOneHour.setHours(TwoDaysAgoPlusOneHour.getHours() + 1);
+const twoDaysAgoPlusOneHour = new Date(twoDaysAgo);
+twoDaysAgoPlusOneHour.setHours(twoDaysAgoPlusOneHour.getHours() + 1);
 
 export const makeCurrentFishbowl = (): Fishbowl => {
   return {
@@ -31,6 +31,8 @@ export const makeCurrentFishbowl = (): Fishbowl => {
     locale: 'en',
     host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
     currentStatus: 'not_started',
+    participants: [],
+    feedbacks: [],
     isFishbowlNow: true,
     hasIntroduction: false,
     startDateTimeTz: today.toString(),
@@ -42,7 +44,7 @@ export const makeCurrentFishbowl = (): Fishbowl => {
   };
 };
 
-export const makePastFishbowl = (): Fishbowl => {
+export const makePastFishbowl = (hasParticipants: boolean, hasFeedbacks: boolean): Fishbowl => {
   return {
     id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
     name: faker.lorem.words(3),
@@ -53,11 +55,11 @@ export const makePastFishbowl = (): Fishbowl => {
     host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
     currentStatus: 'not_started',
     isFishbowlNow: true,
-    participants: [makeApiplatformParticipant()],
-    feedbacks: [fakeFeedback],
+    participants: hasParticipants ? [makeParticipant()] : [],
+    feedbacks: hasFeedbacks ? [makeFeedback()] : [],
     hasIntroduction: false,
     startDateTimeTz: twoDaysAgo.toString(),
-    endDateTimeTz: TwoDaysAgoPlusOneHour.toString(),
+    endDateTimeTz: twoDaysAgoPlusOneHour.toString(),
     durationFormatted: '02:00',
     isPrivate: true,
     plainPassword: undefined,

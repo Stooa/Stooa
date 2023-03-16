@@ -26,11 +26,10 @@ jest.mock('@/hooks/useNavigatorType');
 jest.mock('@/hooks/useFeedback');
 jest.mock('@/user/SatisfactionSummary', () => () => <div />);
 jest.mock('@/user/FeedbackList', () => () => <div />);
-jest.mock('@/user/DashboardParticipantsList', () => () => <div />);
-jest.mock('@/components/Common/TitleWithDivider', () => () => <div />);
+jest.mock('@/user/DashboardParticipantsList', () => () => <div data-testid="feedback-list" />);
 
-const currentFishbowlWithFeedback = makePastFishbowl();
-const currentFishbowlWithoutParticipants = makeCurrentFishbowl();
+const currentFishbowlWithFeedback = makePastFishbowl(true, true);
+const currentFishbowlWithoutParticipants = makeCurrentFishbowl(false, false);
 
 describe('Unit test of fishbowl Dashboard', () => {
   it('It renders fishbowl dashboard without the participant list', () => {
