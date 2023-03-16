@@ -36,8 +36,16 @@ const DashboardParticipantsList = ({ participants, host }: Props) => {
             key={participant['@id']}
             className={participant.user ? 'column' : ''}
           >
-            {participant.user && <p className="body-sm medium">{generateParticipantName(participant)}</p>}
-            {participant.guest && <p className="body-sm medium">{participant.guest.name}</p>}
+            {participant.user && (
+              <p className="body-sm medium" data-testid="finished-fishbowl-participant-name">
+                {generateParticipantName(participant)}
+              </p>
+            )}
+            {participant.guest && (
+              <p className="body-sm medium" data-testid="finished-fishbowl-participant-name">
+                {participant.guest.name}
+              </p>
+            )}
             <div className="participant__contacts">
               <p className="body-sm">
                 {participant.user ? participant.user.email : t('guestUser')}

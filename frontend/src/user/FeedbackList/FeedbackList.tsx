@@ -38,7 +38,7 @@ const FeedbackList = ({ feedbacks, dataTestid }: Props) => {
         return (
           <div key={feedback['@id']} className="feedback">
             <div className="feedback__title body-md">
-              <h4 className="body-md">
+              <h4 className="body-md" data-testid="feedback-name">
                 {feedback.participant?.user
                   ? `${feedback.participant.user?.name} ${feedback.participant.user.surnames}`
                   : feedback.participant?.guest?.name}
@@ -56,14 +56,19 @@ const FeedbackList = ({ feedbacks, dataTestid }: Props) => {
               </PillWithTooltip>
             </div>
             {feedback.email && (
-              <p className={`medium body-xs feedback__mail ${!feedback.comment ? 'spaced' : ''}`}>
+              <p
+                data-testid="feedback-email"
+                className={`medium body-xs feedback__mail ${!feedback.comment ? 'spaced' : ''}`}
+              >
                 {feedback.email}
               </p>
             )}
             {feedback.comment && <p className="feedback__comment">{feedback.comment}</p>}
             <div className="feedback__satisfaction">
               <Component />
-              <p className="medium body-xs">{feedback.satisfaction}</p>
+              <p className="medium body-xs" data-testid="feedback-satisfaction">
+                {feedback.satisfaction}
+              </p>
             </div>
             {feedbacks.length - 1 !== index && <hr className="feedback__separator" />}
           </div>

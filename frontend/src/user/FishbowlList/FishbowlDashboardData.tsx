@@ -52,8 +52,6 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
 
   const participantsAttended = fishbowl.participants?.length || 0;
 
-  console.log('------> JEST BITCH', fishbowl.feedbacks);
-
   const participantsRef = useRef<HTMLDivElement>(null);
   const dashboardWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -84,8 +82,10 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
         </MobileBackButton>
         <h2 className="medium">{t('feedback.dashboard.details')}</h2>
       </div>
-      <h3>{fishbowl.name}</h3>
-      <p className="description">{fishbowl.description}</p>
+      <h3 data-testid="finished-fishbowl-name">{fishbowl.name}</h3>
+      <p className="description" data-testid="finished-fishbowl-description">
+        {fishbowl.description}
+      </p>
       <div className="data">
         <div className="data__group">
           <div className="data__title">
@@ -110,7 +110,11 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
             <h4>{t('feedback.dashboard.participants')}</h4>
           </div>
           <p className="medium">
-            <a onClick={handleScrollToParticipants} className="body-md">
+            <a
+              onClick={handleScrollToParticipants}
+              className="body-md"
+              data-testid="finished-fishbowl-participant-count"
+            >
               {t('feedback.dashboard.users', { count: participantsAttended })}
               {participantsAttended > 0 && <ArrowDown />}
             </a>
