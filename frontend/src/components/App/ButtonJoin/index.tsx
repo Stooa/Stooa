@@ -67,7 +67,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
         trackFailJoin.current = true;
       }, 15000);
     }
-  }, [conferenceStatus]);
+  }, [conferenceStatus, isGuest]);
 
   useEffect(() => {
     if (trackFailJoin.current && joined) {
