@@ -180,7 +180,7 @@ class FishbowlServiceTest extends TestCase
     public function itGetsFalseWhenThereIsNoRequest(): void
     {
         $response = $this->service->ping('fishbowl-slug');
-        $this->assertFalse($response);
+        $this->assertNull($response);
     }
 
     /** @test */
@@ -191,7 +191,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertFalse($response);
+        $this->assertNull($response);
     }
 
     /** @test */
@@ -206,7 +206,7 @@ class FishbowlServiceTest extends TestCase
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertFalse($response);
+        $this->assertNull($response);
     }
 
     /** @test */
@@ -230,7 +230,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertSame($participant, $response);
     }
 
     /** @test */
@@ -254,7 +254,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertSame($participant, $response);
     }
 
     /** @test */
@@ -277,7 +277,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertInstanceOf(Participant::class, $response);
     }
 
     /** @test */
@@ -302,7 +302,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertInstanceOf(Participant::class, $response);
     }
 
     /** @test */
@@ -371,7 +371,7 @@ class FishbowlServiceTest extends TestCase
     }
 
     /** @return iterable<array{string}> */
-    public function fishbowlTitleProvider(): iterable
+    public static function fishbowlTitleProvider(): iterable
     {
         yield [''];
         yield ['   '];

@@ -169,5 +169,41 @@
             "description": "The recording will be saved in your download folder.",
             "button": "Stop recording"
         }
+    },
+    "feedback" : {
+        "title": "Feedback",
+        "satisfactionTitle": "Give us your feedback",
+        "satisfactionDescription": "How satisfied are you with this fishbowl?",
+        "notMuch": "Not much",
+        "okay": "Okay",
+        "great": "Awesome",
+        "commentImproveTitle": "What can we do to improve it?",
+        "commentPlaceholder": "Tell us what you think (optional)",
+        "commentWhatDidYouLike": "Great! Thanks. What did you like about it?",
+        "emailTitle": "Keep in touch?",
+        "emailDescription": "Share your email with us so that we can contact you about new fishbowls or to ask your opinion to continue improving.",
+        "emailPlaceholder": "Email (optional)",
+        "thanks": "Thank you!",
+        "thanksDescription": "Your feedback helps us to improve. ",
+        "spreadTheWord": "Spread the word!",
+        "send": "Send",
+        "skip": "Skip",
+        "dashboard" : {
+            "satisfaction": "Satisfaction",
+            "noFeedback": "No feedback received",
+            "feedbackReceived_one": "Feedback received",
+            "feedbackReceived_other": "Feedbacks received",
+            "details": "Details",
+            "participants": "Participants",
+            "participants_one": "{{count}} Participant",
+            "participants_other": "{{count}} Participants",
+            "users_zero": "No users",
+            "users_one": "{{count}} user",
+            "users_other": "{{count}} users",
+            "after": "After",
+            "afterTooltip": "Feedback received after the fishbowl",
+            "during": "During",
+            "duringTooltip": "Feedback received during the fishbowl"
+        }
     }
 }

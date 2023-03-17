@@ -125,11 +125,21 @@ const getTimePlusOneMinute = () => {
 
   return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
 };
+const removeHours = (date, hours) => {
+  date.setHours(date.getHours() - hours);
+  return date;
+};
 
 const getIsoDateTimeWithActualTimeZone = () => {
   // FIXME: This is not working as expected.
   const date = new Date();
   return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
+};
+
+const getFiveHoursAgoDate = () => {
+  const fiveHoursAgo = removeHours(new Date(), 5);
+
+  return new Date(fiveHoursAgo.getTime() - fiveHoursAgo.getTimezoneOffset() * 60000).toISOString();
 };
 
 const convertIntoClassName = text => {
@@ -157,5 +167,7 @@ export {
   getTimePlusOneMinute,
   getIsoDateTimeWithActualTimeZone,
   convertIntoClassName,
-  supportsCaptureHandle
+  getTimeZoneName,
+  supportsCaptureHandle,
+  getFiveHoursAgoDate
 };

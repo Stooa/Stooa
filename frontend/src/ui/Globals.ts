@@ -64,45 +64,6 @@ const StyledLinkCss = css`
 `;
 
 const GlobalStyle = createGlobalStyle`
-  /* @font-face {
-    font-display: swap;
-    font-family: 'Geomanist';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Geomanist Regular'), url("/fonts/geomanist-regular.woff2") format("woff2"),url("fonts/geomanist-regular.woff") format("woff");
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: 'Geomanist';
-    font-style: normal;
-    font-weight: 500;
-    src: local('Geomanist Medium'), url("/fonts/geomanist-medium.woff2") format("woff2"),url("fonts/geomanist-medium.woff") format("woff");
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: 'Geomanist';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Geomanist Bold'), url("/fonts/geomanist-bold.woff2") format("woff2"),url("fonts/geomanist-bold.woff") format("woff");
-  }
-
-    @font-face {
-      font-display: swap;
-      font-family: 'Geomanist';
-      font-style: italic;
-      font-weight: 400;
-      src: local('Geomanist Italic Medium'), url("/fonts/geomanist-regular-italic.woff2") format("woff2"),url("fonts/geomanist-regular-italic.woff") format("woff");
-    }
-
-  @font-face {
-    font-display: swap;
-    font-family: 'Geomanist';
-    font-style: italic;
-    font-weight: 500;
-    src: local('Geomanist Italic Regular'), url("/fonts/geomanist-medium-italic.woff2") format("woff2"),url("fonts/geomanist-medium-italic.woff") format("woff");
-  } */
 
   *,
   *::before,
@@ -220,7 +181,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   .hide-mobile {
@@ -332,7 +293,11 @@ const GlobalStyle = createGlobalStyle`
       }
 
       &.Toastify__toast-container--bottom-center {
-        bottom: ${space(10)}
+        bottom: ${space(12)};
+
+        ${media.min('desktop')`
+          bottom: ${space(10)};
+        `}
       }
 
       & .Toastify__toast-body {

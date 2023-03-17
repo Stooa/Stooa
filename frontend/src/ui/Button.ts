@@ -148,6 +148,15 @@ const TextButton = styled.button`
   font-size: var(--fontSize);
   line-height: var(--lineHeight);
 
+  &:disabled {
+    color: ${COLOR_NEUTRO_500};
+
+    &:hover {
+      color: ${COLOR_NEUTRO_500};
+      cursor: default;
+    }
+  }
+
   &:hover {
     color: ${COLOR_PURPLE_400};
   }
@@ -169,6 +178,11 @@ const LinkStyledButton = styled.button`
 
   &:focus {
     color: ${COLOR_PURPLE_600};
+  }
+
+  &:disabled {
+    color: ${COLOR_NEUTRO_500};
+    pointer-events: none;
   }
 `;
 

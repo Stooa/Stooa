@@ -36,6 +36,7 @@ const ModalsProvider = ({
   const [showScreenSharePermissions, setShowScreenSharePermissions] = useState(false);
   const [showStartRecording, setShowStartRecording] = useState(false);
   const [showStopRecording, setShowStopRecording] = useState(false);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
   const toggleOnBoarding = (location: string) => {
     pushEventDataLayer({
@@ -81,7 +82,9 @@ const ModalsProvider = ({
         showStartRecording,
         setShowStartRecording,
         showStopRecording,
-        setShowStopRecording
+        setShowStopRecording,
+        showFeedbackForm,
+        setShowFeedbackForm
       }}
     >
       {children}

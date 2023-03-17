@@ -169,5 +169,41 @@
             "description": "La gravació es guardarà en la teva carpeta de descàrregues.",
             "button": "Parar la gravació"
         }
+    },
+    "feedback" : {
+        "title": "Feedback",
+        "satisfactionTitle": "Dona'ns feedback",
+        "satisfactionDescription": "Quin és el teu grau de satisfacció amb aquest <i>fishbowl</i>?",
+        "notMuch": "Baix",
+        "okay": "Correcte",
+        "great": "Genial",
+        "commentImproveTitle": "Què podem fer per a millorar-ho?",
+        "commentPlaceholder": "Digues-nos el que penses (opcional)",
+        "commentWhatDidYouLike": "Excel·lent! Gràcies. Què és el que et va agradar?",
+        "emailTitle": "Seguim en contacte?",
+        "emailDescription": "Indica'ns el teu email perquè puguem contactar amb tu sobre nous <i>fishbowls</i> o per a demanar la teva opinió per a millorar.",
+        "emailPlaceholder": "Email (opcional)",
+        "thanks": "Gràcies!",
+        "thanksDescription": "El teu feedback ens ajuda a millorar.",
+        "spreadTheWord": "Spread the word!",
+        "send": "Enviar",
+        "skip": "Saltar",
+        "dashboard" : {
+            "noFeedback": "Cap feedback rebut",
+            "feedbackReceived_one": "Feedback rebut",
+            "feedbackReceived_other": "Feedbacks rebuts",
+            "participants": "Participants",
+            "participants_one": "{{count}} Participant",
+            "participants_other": "{{count}} Participants",
+            "users_0": "Cap usuari",
+            "users_one": "{{count}} usuari",
+            "users_other": "{{count}} usuaris",
+            "satisfaction": "Satisfaction",
+            "details": "Details",
+            "after": "Després",
+            "afterTooltip": "Feedback rebut després del fishbowl",
+            "during": "Durant",
+            "duringTooltip": "Feedback rebut durant el fishbowl"
+        }
     }
 }

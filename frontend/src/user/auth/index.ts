@@ -125,6 +125,15 @@ const ping = async (lang: string, slug: string) => {
         'Authorization': `${auth ? auth.authorizationString : null}`
       }
     })
+    .then(res => {
+      if (res.data.response) {
+        const { participantId, participantSlug } = res.data.response;
+        userRepository.setUserParticipantId(participantId);
+        userRepository.setUserParticipantSlug(participantSlug);
+
+        console.log('[STOOA] Ping response', res.data.response);
+      }
+    })
     .catch(err => {
       const { message, response } = err;
       const status = response ? `[${response.status} ${response.statusText}]` : '[ERROR]:';
