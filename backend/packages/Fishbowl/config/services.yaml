@@ -27,9 +27,9 @@ services:
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\Fishbowl\DataProvider\FishbowlDataProvider:
+    App\Fishbowl\State\FishbowlStateProvider:
         bind:
-            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
+            $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
@@ -37,3 +37,7 @@ services:
             - { name: sonata.admin, model_class: App\Fishbowl\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
         calls:
             - [ setFishbowlService, [ '@App\Fishbowl\Service\FishbowlService' ] ]
+
+    App\Fishbowl\Admin\FeedbackAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Feedback, manager_type: orm, label: Feedbacks }

@@ -89,46 +89,57 @@ const Footer: React.FC = () => {
   return (
     <Container>
       <FooterNav>
-        <Logo className="logo" href={ROUTE_HOME} />
+        <div>
+          <Logo className="logo" href={ROUTE_HOME} />
+          <a
+            href="https://www.producthunt.com/posts/stooa?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-stooa"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=320231&theme=light&period=daily"
+              alt="Stooa - The&#0032;open&#0032;source&#0032;online&#0032;fishbowl&#0032;tool | Product Hunt"
+              style={{ marginBottom: '1rem' }}
+              width="250"
+              height="54"
+            />
+          </a>
+        </div>
         <Nav>
-          <NavTitle className="body-md bold">{APP_NAME}</NavTitle>
+          <NavTitle className="body-md bold hide-mobile">{APP_NAME}</NavTitle>
           <NavList>
             <li>
-              <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-                <a
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Schedule Fishbowl',
-                      action: 'Footer',
-                      label: 'Footer'
-                    });
-                  }}
-                >
-                  <span>{t('scheduleFishbowl')}</span>
-                </a>
+              <Link
+                href={ROUTE_FISHBOWL_CREATE}
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Schedule Fishbowl',
+                    action: 'Footer',
+                    label: 'Footer'
+                  });
+                }}
+              >
+                <span>{t('scheduleFishbowl')}</span>
               </Link>
             </li>
             <li>
-              <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-                <a
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Host Fishbowl Now',
-                      action: 'Footer',
-                      label: 'Footer'
-                    });
-                  }}
-                >
-                  <span>{t('hostFishbowlNow')}</span>
-                </a>
+              <Link
+                href={ROUTE_FISHBOWL_HOST_NOW}
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Host Fishbowl Now',
+                    action: 'Footer',
+                    label: 'Footer'
+                  });
+                }}
+              >
+                <span>{t('hostFishbowlNow')}</span>
               </Link>
             </li>
             {!isAuthenticated && (
               <>
                 <li>
-                  <Link href={`${ROUTE_REGISTER}`} passHref>
-                    <a>{t('register')}</a>
-                  </Link>
+                  <Link href={`${ROUTE_REGISTER}`}>{t('register')}</Link>
                 </li>
                 <li>
                   <RedirectLink href={ROUTE_SIGN_IN} passHref>
@@ -143,36 +154,26 @@ const Footer: React.FC = () => {
           <NavTitle className="body-md bold">{t('help')}</NavTitle>
           <NavList>
             <li>
-              <Link href={GITHUB_ISSUES} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('githubIssues')}
-                </a>
+              <Link href={GITHUB_ISSUES} target="_blank" rel="noreferrer noopener">
+                {t('githubIssues')}
               </Link>
             </li>
             <li>
-              <Link href={`mailto:${SUPPORT_EMAIL}`} passHref>
-                <a>{SUPPORT_EMAIL}</a>
+              <Link href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</Link>
+            </li>
+            <li>
+              <Link href={GITHUB_ROADMAP} target="_blank" rel="noreferrer noopener">
+                {t('roadmap')}
               </Link>
             </li>
             <li>
-              <Link href={GITHUB_ROADMAP} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('roadmap')}
-                </a>
+              <Link href={GITBOOK_DOCUMENTATION} target="_blank" rel="noreferrer noopener">
+                {t('documentation')}
               </Link>
             </li>
             <li>
-              <Link href={GITBOOK_DOCUMENTATION} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('documentation')}
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href={GITBOOK_CONDUCT} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('conductCode')}
-                </a>
+              <Link href={GITBOOK_CONDUCT} target="_blank" rel="noreferrer noopener">
+                {t('conductCode')}
               </Link>
             </li>
           </NavList>
@@ -181,33 +182,29 @@ const Footer: React.FC = () => {
           <NavTitle className="body-md bold">{t('legal')}</NavTitle>
           <NavList>
             <li>
-              <Link href={ROUTE_PRIVACY_POLICY} passHref>
-                <a>{t('privacyPolicy')}</a>
-              </Link>
+              <Link href={ROUTE_PRIVACY_POLICY}>{t('privacyPolicy')}</Link>
             </li>
             <li>
-              <Link href={ROUTE_COOKIES_POLICY} passHref>
-                <a>{t('cookiesPolicy')}</a>
-              </Link>
+              <Link href={ROUTE_COOKIES_POLICY}>{t('cookiesPolicy')}</Link>
             </li>
           </NavList>
         </Nav>
         <Nav className="social">
           {socialNetworks.map(({ name, url, component }) => (
-            <Link href={url} passHref key={name}>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => {
-                  pushEventDataLayer({
-                    category: 'Footer',
-                    action: 'RRSS',
-                    label: name
-                  });
-                }}
-              >
-                {component}
-              </a>
+            <Link
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Footer',
+                  action: 'RRSS',
+                  label: name
+                });
+              }}
+              key={name}
+            >
+              {component}
             </Link>
           ))}
         </Nav>

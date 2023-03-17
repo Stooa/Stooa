@@ -18,7 +18,7 @@
         "selectTimeZone": "Fuseau horaire",
         "advancedOptions": "Options avancées",
         "introductionLabel": "Je veux commencer le bocal en donnant une introduction.",
-        "introductionTooltip": "Lorsque vous démarrez le bocal, <span>vous pouvez commencer par faire une introduction</span>. La caméra et le microphone seront actifs juste pour vous. Lorsque vous avez terminé, <span>n'oubliez pas d'autoriser les participants à se joindre à la conversation.</span>",
+        "introductionTooltip": "Vous pouvez commencer le Fishbowl avec une introduction et vous aurez la possibilité de <span>partager votre écran</span>. Lorsque vous aurez terminé votre introduction, vous pourrez autoriser les participants à se joindre à la conversation.",
         "isPrivate": "Je veux que cet événement soit privé",
         "passwordTooltip": "Pour accéder à l'événement, il sera nécessaire d'entrer le mot de passe",
         "passwordPlaceholder": "Insérez votre mot de passe",
@@ -57,6 +57,7 @@
         "notEmpty": "This field cannot be empty",
         "wrongPassword": "Mot de passe erroné",
         "unknownErrorServer": "Problème inconnu. Veuillez actualiser la page et réessayer",
-        "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer"
+        "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer",
+        "maxLength": "Ce champ ne peut pas contenir plus de {{length}} caractères."
     }
 }

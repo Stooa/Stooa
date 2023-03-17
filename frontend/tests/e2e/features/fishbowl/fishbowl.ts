@@ -17,14 +17,6 @@ Then('sees tomorrow fishbowl information page', () => {
   cy.screenshot();
 });
 
-// Then('sees the prefishbowl page', () => {
-//   cy.get('[data-testid=prefishbowl-counter]').should('exist');
-//   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
-//   cy.get('[data-testid=prefishbowl-participants]').should('exist');
-
-//   cy.screenshot();
-// });
-
 Then('sees the password input', () => {
   cy.get('[data-testid=prejoin-password]').should('exist');
 

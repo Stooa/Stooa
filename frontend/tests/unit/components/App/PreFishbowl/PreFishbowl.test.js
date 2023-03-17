@@ -15,6 +15,10 @@ import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
 import { makeCurrentFishbowl } from '../../../factories/fishbowl';
 import { pushEventDataLayer } from '@/lib/analytics';
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 jest.mock('@/lib/analytics');
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/ModalsContext');

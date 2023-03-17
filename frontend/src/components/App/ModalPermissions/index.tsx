@@ -40,7 +40,7 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
       .then(data => {
         let audioGranted = false;
         data.forEach(track => {
-          if (track.type === 'audio') {
+          if (track.getType() === 'audio') {
             audioGranted = true;
           }
         });
@@ -62,15 +62,16 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <div className="friend-image">
-          <Image
-            src="/img/friends/hold.png"
-            alt="Illustration of friend holding a microphone icon"
-            width={138.85}
-            height={165}
-            quality={100}
-          />
-        </div>
+
+        <Image
+          className="friend-image"
+          src="/img/friends/hold.png"
+          alt="Illustration of friend holding a microphone icon"
+          width={138.85}
+          height={165}
+          quality={100}
+        />
+
         <h2 className="title-sm">
           <Trans i18nKey="fishbowl:permissionsModalTitle" />
         </h2>

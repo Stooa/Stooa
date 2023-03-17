@@ -25,7 +25,7 @@
         "selectTimeZone": "Time Zone",
         "advancedOptions": "Advanced Options",
         "introductionLabel": "I want to start the fishbowl giving an introduction",
-        "introductionTooltip": "When you start the fishbowl, <span>you can start by making an introduction.</span> The camera and microphone will be active just for you. When you're done, <span>don't forget to allow attendees to join the conversation.</span>",
+        "introductionTooltip": "You can start the Fishbowl with an introduction and you will have the option of <span>sharing your screen</span>. When you finish the intro, you can allow attendees to join the conversation.",
         "isPrivate": "I want this event to be private",
         "passwordTooltip": "Participants will be required to enter the password in order to access the event",
         "passwordPlaceholder": "Insert your password",
@@ -57,6 +57,7 @@
         "notEmpty": "This field cannot be empty",
         "wrongPassword": "Incorrect password",
         "unknownErrorServer": "Unknown problem. Please refresh the page and try again.",
-        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again."
+        "unknownErrorInside": "Sorry! An error occurred while accessing. Please try again.",
+        "maxLength": "The maximum length is {{length}} characters."
     }
 }

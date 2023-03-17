@@ -27,7 +27,7 @@ class FishbowlNoIntroRunMutationResolver implements MutationResolverInterface
     }
 
     /** @param mixed[] $context */
-    public function __invoke($item, array $context): ?Fishbowl
+    public function __invoke(?object $item, array $context): ?object
     {
         if (!isset($context['args']['input']['slug'])) {
             return null;

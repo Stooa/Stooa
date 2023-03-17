@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Action\NotFoundAction;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -25,6 +25,8 @@ use App\Core\Model\ChangePasswordInput;
 use App\Core\Model\ChangePasswordLoggedInput;
 use App\Core\Repository\UserRepository;
 use App\Core\Resolver\UserResolver;
+use App\Core\State\ChangePasswordProcessor;
+use App\Core\State\ChangePasswordProcessorLogged;
 use App\Core\State\UserProcessor;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -61,11 +63,13 @@ use Symfony\Component\Validator\Constraints as Assert;
             resolver: UserResolver::class,
             args: [],
             normalizationContext: ['groups' => ['user:read', 'user:self']],
-            security: 'object == user', name: 'self'
+            security: 'object == user',
+            name: 'self'
         ),
         new Mutation(
             normalizationContext: ['groups' => ['user:read', 'user:self']],
-            security: 'object == user', name: 'update'
+            security: 'object == user',
+            name: 'update'
         ),
         new Mutation(
             denormalizationContext: ['groups' => ['user:write', 'user:create']],
@@ -79,7 +83,8 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'passwordConfirmation' => ['type' => 'String!'],
             ],
             input: ChangePasswordInput::class,
-            name: 'changePassword'
+            name: 'changePassword',
+            processor: ChangePasswordProcessor::class
         ),
         new Mutation(
             args: [
@@ -88,7 +93,8 @@ use Symfony\Component\Validator\Constraints as Assert;
                 'newPasswordConfirmation' => ['type' => 'String!'],
             ],
             input: ChangePasswordLoggedInput::class,
-            name: 'changePasswordLogged'
+            name: 'changePasswordLogged',
+            processor: ChangePasswordProcessorLogged::class
         ),
     ],
     processor: UserProcessor::class
@@ -104,13 +110,13 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:read', 'user:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:read', 'user:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
@@ -135,20 +141,20 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
 
-    #[Groups(['user:self', 'user:write'])]
+    #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
 
     #[ORM\Column(type: 'boolean')]
     private bool $active = false;
 
-    #[Groups(['user:self', 'user:write'])]
+    #[Groups(['user:self', 'user:write', 'user:read', 'fishbowl:read'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $linkedinProfile = null;
 
-    #[Groups(['user:self', 'user:write'])]
+    #[Groups(['user:self', 'user:write', 'user:read', 'fishbowl:read'])]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', nullable: true)]

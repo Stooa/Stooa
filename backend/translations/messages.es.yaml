@@ -11,7 +11,7 @@ emails:
         subject: Bienvenido/a a Stooa!
         title: Bienvenido/a a Stooa
         subtitle: Stooa es una herramienta de conferencias abiertas online. Todo el mundo tiene voz. Únete, escucha y comparte tu conocimiento.
-        cta: Crea ahora un fishbowl
+        cta: Crea un debate ahora
         delete: Si quieres eliminar tu cuenta de Stooa, por favor, envíanos un email <a href="mailto:stooa@stooa.com?subject=Delete Stooa account">aquí</a>
     reset_password_email:
         subject: ¡Hola %name%! Hemos recibido una solicitud para restablecer tu contraseña de Stooa

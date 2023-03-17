@@ -16,6 +16,7 @@ import Button from '@/components/Common/Button';
 import { useMutation } from '@apollo/client';
 import { FINISH_FISHBOWL } from '@/graphql/Fishbowl';
 import { useRouter } from 'next/router';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   closeModal: () => void;
@@ -25,11 +26,16 @@ interface Props {
 const ModalConfirmLeaving: React.FC<Props> = ({ closeModal, handleFinished }) => {
   const { t } = useTranslation('fishbowl');
   const [loading, setLoading] = useState(false);
+  const { isRecording, stopRecording } = useStooa();
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const { fid } = useRouter().query;
 
   const finishFishbowl = () => {
     setLoading(true);
+
+    if (isRecording) {
+      stopRecording();
+    }
 
     endFishbowl({
       variables: {

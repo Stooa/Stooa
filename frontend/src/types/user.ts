@@ -10,6 +10,13 @@
 export interface User {
   id?: string;
   guestId?: string;
+  participantId?: string;
+  participantSlug?: string;
+  feedback?: {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
+  };
   nickname?: string;
   name?: string;
   isCurrentUser?: boolean;
@@ -18,6 +25,7 @@ export interface User {
   videoInput?: MediaDeviceInfo;
   audioMuted?: boolean;
   videoMuted?: boolean;
+  _role?: string;
 }
 
 export interface UserRepository {
@@ -40,4 +48,23 @@ export interface UserRepository {
   setUserVideoInput: (videoInput: MediaDeviceInfo) => void;
   setUserVideoMuted: (videoMuted: boolean) => void;
   setUserNickname: (nickname: string) => void;
+  setUserParticipantId: (participantId: string) => void;
+  getUserParticipantId: () => string;
+  setUserParticipantSlug: (participantSlug: string) => void;
+  getUserParticipantSlug: () => string;
+  getUserFeedback: () => {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
+  };
+  setUserFeedback: ({
+    feedbackId,
+    feedbackFishbowlSlug,
+    fromThankYou
+  }: {
+    feedbackId: string;
+    feedbackFishbowlSlug: string;
+    fromThankYou: boolean;
+  }) => void;
+  hasUserGaveFeedback: (fishbowlSLug: string) => boolean;
 }

@@ -17,6 +17,7 @@ import {
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_900
 } from '@/ui/settings';
+import { TYPOGRAPHY_SIZES } from './Texts';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
 
@@ -31,7 +32,7 @@ const Modal = styled.div`
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 11;
+  z-index: 50;
   overflow: scroll;
 
   ${media.min('tablet')`
@@ -49,6 +50,7 @@ const Modal = styled.div`
 
     & .friend-image {
       margin-bottom: ${space(2)};
+      margin-inline: auto;
     }
 
     &.white {
@@ -79,6 +81,10 @@ const Modal = styled.div`
 
   .description {
     margin-top: ${space(2)};
+
+    & a {
+      --font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
+    }
   }
 
   .modal-footer {

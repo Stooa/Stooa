@@ -58,8 +58,8 @@ const Form = (props: FormikProps<FormValues>) => {
       </fieldset>
       <fieldset className="form__footer">
         <p className="body-sm">
-          <Link href={ROUTE_SIGN_IN}>
-            <a className="decorated colored">{t('recover:back')}</a>
+          <Link className="decorated colored" href={ROUTE_SIGN_IN}>
+            {t('recover:back')}
           </Link>
         </p>
       </fieldset>

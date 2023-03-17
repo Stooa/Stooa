@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -26,13 +26,18 @@ import {
   unload,
   unloadKickedUser
 } from '@/lib/jitsi';
-// import Conference from '@/jitsi/Conference';
 import {
   CONFERENCE_IS_LOCKABLE,
   CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
+  MODERATOR_LEFT,
   NOTIFICATION,
+  RECORDING_START,
+  RECORDING_STOP,
+  SCREEN_SHARE_CANCELED,
+  SCREEN_SHARE_START,
+  SCREEN_SHARE_STOP,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -50,6 +55,9 @@ import { Participant } from '@/types/participant';
 import createGenericContext from '@/contexts/createGenericContext';
 import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
+import { pushEventDataLayer } from '@/lib/analytics';
+import SharedTrack from '@/jitsi/SharedTrack';
+import useVideoRecorder from '@/hooks/useVideoRecorder';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -64,6 +72,11 @@ const StooaProvider = ({
   isModerator: boolean;
   children: JSX.Element[];
 }) => {
+  const router = useRouter();
+  const { fid } = router.query;
+
+  const useGaveFeedback = useMemo(() => userRepository.hasUserGaveFeedback(fid as string), [fid]);
+
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
@@ -72,6 +85,11 @@ const StooaProvider = ({
   const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
+  const [isSharing, setIsSharing] = useState(false);
+  const [clientRunning, setClientRunning] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [feedbackAlert, setFeedbackAlert] = useState(false);
+  const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
 
   const { t, lang } = useTranslation('app');
 
@@ -81,8 +99,45 @@ const StooaProvider = ({
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
-  const router = useRouter();
-  const { fid } = router.query;
+
+  const sendStopRecordingEvent = () => {
+    Conference.stopRecordingEvent();
+    setIsRecording(false);
+  };
+
+  const closeToGigabyteLimitNotification = () => {
+    toast(t('fishbowl:recording.closeToGiga'), {
+      icon: '⚠️',
+      toastId: 'close-to-giga',
+      type: 'warning',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+  };
+
+  const recorderOptions = {
+    fileName: data.name || 'Fishbowl',
+    downloadingMessage: t('fishbowl:recording.downloading'),
+    slug: data.slug
+  };
+
+  const { startRecording: startRecordingVideoRecorder, stopRecording } = useVideoRecorder(
+    recorderOptions,
+    sendStopRecordingEvent,
+    closeToGigabyteLimitNotification
+  );
+
+  const startRecording = () => {
+    return startRecordingVideoRecorder().then(result => {
+      if (result.status === 'success') setIsRecording(true);
+      pushEventDataLayer({
+        category: 'Recording',
+        action: 'Start',
+        label: data.slug
+      });
+      return result;
+    });
+  };
 
   const startFishbowl = () => {
     const slug = { variables: { input: { slug: fid } } };
@@ -189,6 +244,40 @@ const StooaProvider = ({
     }
   });
 
+  useEventListener(SCREEN_SHARE_START, () => {
+    setIsSharing(true);
+  });
+
+  useEventListener(SCREEN_SHARE_STOP, ({ detail: { location } }) => {
+    if (isModerator) {
+      pushEventDataLayer({
+        action: location === 'app' ? 'stooa_stop_share' : 'navigator_stop_share',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+    }
+
+    SharedTrack.exitFullScreen();
+
+    setIsSharing(false);
+  });
+
+  useEventListener(SCREEN_SHARE_CANCELED, () => {
+    setIsSharing(false);
+  });
+
+  useEventListener(RECORDING_START, () => {
+    setIsRecording(true);
+  });
+
+  useEventListener(RECORDING_STOP, () => {
+    setIsRecording(false);
+  });
+
+  useEventListener(MODERATOR_LEFT, () => {
+    sendStopRecordingEvent();
+  });
+
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
@@ -250,6 +339,16 @@ const StooaProvider = ({
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
   useEffect(() => {
+    if (isModerator && isConferenceIntroducing()) {
+      pushEventDataLayer({
+        action: 'activate',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+    }
+  }, [conferenceStatus]);
+
+  useEffect(() => {
     if (
       !prejoin &&
       !initConnection &&
@@ -275,7 +374,9 @@ const StooaProvider = ({
 
   useEffect(() => {
     initializeJitsi();
+  }, []);
 
+  useEffect(() => {
     window.addEventListener('beforeunload', unload);
     window.addEventListener('unload', unload);
 
@@ -323,7 +424,19 @@ const StooaProvider = ({
         participantToKick,
         setParticipantToKick,
         getPassword,
-        setFishbowlPassword
+        setFishbowlPassword,
+        isSharing,
+        setIsSharing,
+        clientRunning,
+        setClientRunning,
+        startRecording,
+        stopRecording,
+        isRecording,
+        setIsRecording,
+        feedbackAlert,
+        setFeedbackAlert,
+        gaveFeedback,
+        setGaveFeedback
       }}
     >
       {children}

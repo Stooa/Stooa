@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { ROUTE_FISHBOWL, ROUTE_FISHBOWL_LIST } from '@/app.config';
+import { ROUTE_FISHBOWL, ROUTE_FISHBOWL_SCHEDULED } from '@/app.config';
 import Button from '@/components/Common/Button';
 import { formatDateTime, getMonthsForLocale, isTimeLessThanNMinutes } from '@/lib/helpers';
 import { Fishbowl } from '@/types/api-platform';
@@ -57,10 +57,11 @@ const FishbowlDataCard = ({ data }: Props) => {
           </Button>
         </RedirectLink>
       ) : (
-        <Link passHref href={`${ROUTE_FISHBOWL_LIST}?selected=${data.slug}`}>
-          <a className="decorated colored">
-            <Trans i18nKey="fishbowl:detail.editFishbowlDetails" components={{ i: <i /> }} />
-          </a>
+        <Link
+          href={`${ROUTE_FISHBOWL_SCHEDULED}?selected=${data.slug}`}
+          className="decorated colored"
+        >
+          <Trans i18nKey="fishbowl:detail.editFishbowlDetails" components={{ i: <i /> }} />
         </Link>
       )}
     </StyledFishbowlDataCard>

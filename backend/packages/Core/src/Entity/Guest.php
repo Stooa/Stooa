@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Entity;
 
-use ApiPlatform\Core\Action\NotFoundAction;
+use ApiPlatform\Action\NotFoundAction;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -28,9 +28,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new Get(),
-        new GetCollection(controller: NotFoundAction::class, output: false, read: false),
-        new Post(),
+        new Get(security: 'is_granted(\'ROLE_USER\')'),
+        new GetCollection(controller: NotFoundAction::class, security: 'is_granted(\'ROLE_USER\')', output: false, read: false),
+        new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
     normalizationContext: ['groups' => ['guest:read']],
     denormalizationContext: ['groups' => ['guest:write']],
@@ -43,8 +43,9 @@ class Guest implements \Stringable
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+
     private ?UuidInterface $id = null;
-    #[Groups(['guest:create', 'guest:write'])]
+    #[Groups(['guest:create', 'guest:write', 'fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]

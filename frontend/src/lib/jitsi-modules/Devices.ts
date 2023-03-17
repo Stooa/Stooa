@@ -10,10 +10,11 @@
 import { DevicesRepository } from '@/types/devices';
 import conferenceRepository from '@/jitsi/Conference';
 import localTracksRepository from '@/jitsi/LocalTracks';
+import { MediaType } from '@/types/jitsi/media';
 
 const devicesRepository = (): DevicesRepository => {
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
-    const kind = device.kind === 'audioinput' ? 'audio' : 'video';
+    const kind = device.kind === 'audioinput' ? MediaType.AUDIO : MediaType.VIDEO;
     const oldTrack =
       kind === 'audio'
         ? conferenceRepository.getLocalAudioTrack()
@@ -69,11 +70,27 @@ const devicesRepository = (): DevicesRepository => {
     return JitsiMeetJS.mediaDevices.isDevicePermissionGranted(type);
   };
 
+  const screenShare = async (): Promise<boolean> => {
+    const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
+
+    if (!newTracks) {
+      await Promise.reject('User canceled desktop track creation');
+    }
+
+    const desktopTrack = newTracks.filter(track => track.getVideoType() === 'desktop');
+
+    conferenceRepository.addTrack(desktopTrack[0], undefined);
+    conferenceRepository.startScreenShareEvent();
+
+    return Promise.resolve(true);
+  };
+
   return {
     changeDevice,
     loadDevices,
     isDevicePermissionGranted,
-    clean
+    clean,
+    screenShare
   };
 };
 
