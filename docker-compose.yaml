@@ -71,7 +71,7 @@ services:
 
     # JITSI
     xmpp:
-        image: jitsi/prosody:stable-7439-2
+        image: jitsi/prosody:stable-8319
         volumes:
             - ${CONFIG}/prosody/config:/config:Z
             - ${CONFIG}/prosody/prosody-plugins-custom:/prosody-plugins-custom:Z
@@ -142,7 +142,7 @@ services:
                     - ${XMPP_SERVER}
 
     focus:
-        image: jitsi/jicofo:stable-8044
+        image: jitsi/jicofo:stable-8319
         depends_on:
             - xmpp
         volumes:
@@ -190,7 +190,7 @@ services:
                 aliases:
                     - ${JICOFO}
     jvb:
-        image: jitsi/jvb:stable-8044
+        image: jitsi/jvb:stable-8319
         depends_on:
             - xmpp
         ports:
