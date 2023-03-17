@@ -8,7 +8,7 @@ Feature: Fishbowl
         And a fishbowl with introduction
         When navigates to fishbowl
         And can access to pre join
-        And clicks on "Join the discussion" button
+        And clicks on "Join the fishbowl" button
         And sees the prefishbowl page with introduction
         And starts fishbowl with introduction
         Then can click on screen share button

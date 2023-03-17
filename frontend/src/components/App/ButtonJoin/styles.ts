@@ -44,12 +44,17 @@ const StyledButton = styled(ActionButton)`
   .alert {
     position: absolute;
     top: 0;
-    right: -50%;
+    right: -8px;
     transition: transform 0.2s ease-in;
 
-    svg path:first-child {
-      fill: ${COLOR_RED_600};
-      transition: fill 0.1s ease-out;
+    svg {
+      width: 16px;
+      height: 16px;
+
+      & path:first-child {
+        fill: ${COLOR_RED_600};
+        transition: fill 0.1s ease-out;
+      }
     }
   }
 

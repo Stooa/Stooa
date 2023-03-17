@@ -10,6 +10,8 @@
 import seatsRepository from '@/jitsi/Seats';
 import conferenceRepository from '@/jitsi/Conference';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
+import { TRACK_ADDED } from '@/jitsi/Events';
+import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
 
 const tracksRepository = () => {
@@ -27,7 +29,7 @@ const tracksRepository = () => {
   };
 
   const _getTrackHtml = track => {
-    return document.getElementById(track.getId());
+    return document.getElementById(track.getParticipantId() + track.getType());
   };
 
   const handleElementsMutedClass = (seat, track) => {
@@ -80,13 +82,15 @@ const tracksRepository = () => {
       trackHtml.autoplay = true;
     }
 
-    trackHtml.id = track.getId();
+    trackHtml.id = track.getParticipantId() + trackType;
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
 
     await syncLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
+
+    if (!seatHtml) return;
 
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
@@ -194,7 +198,7 @@ const tracksRepository = () => {
       sharedTrackRepository.shareTrackAdded(track);
     }
 
-    console.log('[Stooa] video type change', track, videoType);
+    console.log('[STOOA] video type change', track, videoType);
   };
 
   const handleTrackAdded = track => {
@@ -232,7 +236,7 @@ const tracksRepository = () => {
 
     _create(seat, track);
 
-    console.log('[STOOA] Handle video or audio track added in seat', track, seat);
+    dispatchEvent(TRACK_ADDED, { track });
   };
 
   const handleTrackRemoved = track => {
@@ -330,6 +334,25 @@ const tracksRepository = () => {
     return false;
   };
 
+  const getAudioTracks = () => {
+    const audioTracks = [];
+    const ids = conferenceRepository.getParticipantsIds();
+
+    for (let index = 0; index < ids.length; index++) {
+      const id = ids[index];
+
+      if (tracks[id] === undefined) continue;
+
+      for (let index = 0; index < tracks[id].length; index++) {
+        if (tracks[id][index].type === 'audio') {
+          audioTracks.push(tracks[id][index]);
+        }
+      }
+    }
+
+    return audioTracks;
+  };
+
   return {
     createTracks,
     handleTrackAdded,
@@ -342,7 +365,8 @@ const tracksRepository = () => {
     disposeTracks,
     toggleAudioTrack,
     toggleVideoTrack,
-    syncLocalStorageTrack
+    syncLocalStorageTrack,
+    getAudioTracks
   };
 };
 

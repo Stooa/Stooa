@@ -18,7 +18,7 @@ const RedirectLink = ({ href, children, ...props }) => {
   const url = redirect ? `${href}?redirect=${redirect}` : href;
 
   return (
-    <Link href={url} {...props}>
+    <Link href={url} {...props} legacyBehavior>
       {children}
     </Link>
   );

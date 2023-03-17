@@ -43,7 +43,6 @@ const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction
             <div>
               <Image
                 src="/img/friends/reading-book.png"
-                objectFit="contain"
                 width={146}
                 height={200}
                 alt="Stooa's friend reading a book"
@@ -59,7 +58,6 @@ const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction
             <div>
               <Image
                 src="/img/friends/choosing.png"
-                objectFit="contain"
                 width={186}
                 height={200}
                 alt="Stooa's friend choosing to share the screen"
@@ -74,7 +72,6 @@ const ModalStartIntroduction: React.FC<Props> = ({ closeModal, startIntroduction
             <div>
               <Image
                 src="/img/friends/idea.png"
-                objectFit="contain"
                 width={114}
                 height={200}
                 alt="Stooa's friend choosing to share the screen"

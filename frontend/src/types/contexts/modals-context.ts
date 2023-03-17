@@ -25,4 +25,10 @@ export interface ModalsContextValues {
   setShowEndIntroductionModal: Dispatch<SetStateAction<boolean>>;
   showScreenSharePermissions: boolean;
   setShowScreenSharePermissions: Dispatch<SetStateAction<boolean>>;
+  showStartRecording: boolean;
+  setShowStartRecording: Dispatch<SetStateAction<boolean>>;
+  showStopRecording: boolean;
+  setShowStopRecording: Dispatch<SetStateAction<boolean>>;
+  showFeedbackForm: boolean;
+  setShowFeedbackForm: Dispatch<SetStateAction<boolean>>;
 }

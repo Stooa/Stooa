@@ -10,7 +10,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import Dots from '@/ui/svg/dots.svg';
+import Info from '@/ui/svg/info-brown.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import Trans from 'next-translate/Trans';
@@ -56,9 +56,7 @@ const FishbowlInfo: React.FC<Props> = ({ data }) => {
     <InfoStyled ref={wrapperRef}>
       <p className="title body-sm medium">{data.name}</p>
       <Icon onClick={toggleInfo} className={`${active ? 'active' : ''}`}>
-        <span className="icon-wrapper">
-          <Dots />
-        </span>
+        <Info />
       </Icon>
       {active && (
         <Description>

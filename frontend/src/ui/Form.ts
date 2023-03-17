@@ -68,11 +68,8 @@ const FormikForm = styled(Form)`
       }
     }
 
-    > *:not(:last-child) {
+    & > *:not(:last-child) {
       margin-bottom: ${space(2)};
-    }
-    > .textarea {
-      margin-bottom: ${space(4)};
     }
 
     &.submit-wrapper {
@@ -124,10 +121,10 @@ const InputStyled = styled.div`
 
   .dropdown-icon {
     height: ${rems(16)};
+    width: ${rems(16)};
     position: absolute;
     right: ${space(2)};
     top: ${space(2.5)};
-    width: ${rems(16)};
   }
 
   .icon,
@@ -178,7 +175,21 @@ const InputStyled = styled.div`
   }
 
   &.textarea {
-    height: ${space(14)};
+    &.taller {
+      height: ${space(14)};
+    }
+
+    & .counter {
+      ${BODY_XS};
+      padding-left: ${space(2)};
+      &.warning {
+        color: #e3ae00;
+      }
+
+      &.error {
+        color: ${COLOR_RED_500};
+      }
+    }
   }
 
   input,
@@ -213,18 +224,18 @@ const InputStyled = styled.div`
   textarea {
     height: 100%;
     overflow-y: auto;
-    padding-top: ${space(3)};
+    padding-top: ${space(3.75)};
     resize: none;
   }
 
   label {
     color: ${COLOR_NEUTRO_600};
-    font-size: ${FONT_BASE_SIZE}px;
+    ${BODY_SM};
     left: ${space(2)};
     line-height: 100%;
     pointer-events: none;
     position: absolute;
-    top: ${space(2.25)};
+    top: ${space(2.45)};
     transition: 0.1s ease-out;
   }
 

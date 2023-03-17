@@ -12,8 +12,10 @@ import React from 'react';
 import { Input } from '@/types/input';
 import InputField from '@/components/Common/Fields/Input';
 
-const Textarea: React.FC<Input> = props => (
-  <InputField className="textarea" as="textarea" {...props} />
+type Props = Input & { taller?: boolean };
+
+const Textarea: React.FC<Props> = ({ taller, ...props }) => (
+  <InputField className={`textarea ${taller ? 'taller' : ''}`} as="textarea" {...props} />
 );
 
 export default Textarea;

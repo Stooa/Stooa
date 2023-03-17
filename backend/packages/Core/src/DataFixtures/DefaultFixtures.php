@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace App\Core\DataFixtures;
 
+use App\Core\Factory\GuestFactory;
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\SonataUserUserFactory;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
+use App\Fishbowl\Factory\FeedbackFactory;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -39,28 +42,56 @@ class DefaultFixtures extends Fixture
             'roles' => [UserInterface::ROLE_SUPER_ADMIN],
         ]);
 
+        $host = UserFactory::createOne([
+            'email' => 'host@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+            'createdAt' => new \DateTime(),
+            'privacyPolicy' => true,
+        ])->object();
+
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'slug' => 'test-me-fishbowl',
+            'host' => $host,
+        ])->object();
+
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime('+ 1 hour'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $host,
+        ])->object();
+
         UserFactory::createOne([
             'email' => 'user@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
             'privacyPolicy' => true,
-        ]);
+        ])->object();
 
-        $fishbowl = FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
+        ParticipantFactory::createMany(50, fn () => ['guest' => GuestFactory::createOne()]);
+
+        ParticipantFactory::createMany(50, fn () => ['user' => UserFactory::createOne()]);
+
+        $yesterday = new \DateTime('- 1 days');
+
+        FishbowlFactory::createMany(50, fn (int $i) => [
+            'startDateTime' => $yesterday->modify("- {$i} minutes"),
             'timezone' => 'Europe/Madrid',
             'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
             'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'slug' => 'test-me-fishbowl',
-        ])->object();
-
-        UserFactory::createOne([
-            'email' => 'host@stooa.com',
-            'password' => self::ADMIN_PASSWORD,
-            'active' => true,
-            'fishbowls' => [$fishbowl],
-            'createdAt' => new \DateTime(),
-            'privacyPolicy' => true,
+            'host' => $host,
+            'participants' => [
+                ParticipantFactory::createOne(['user' => $host])->object(),
+                ...ParticipantFactory::createMany(random_int(0, 4), fn () => ['user' => UserFactory::createOne()]),
+                ...ParticipantFactory::createMany(random_int(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
+            ],
+            'feedbacks' => FeedbackFactory::createMany(random_int(0, 10), fn () => ['participant' => ParticipantFactory::random()]),
         ]);
     }
 }

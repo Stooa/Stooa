@@ -48,10 +48,6 @@ services:
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\Fishbowl\DataProvider\FishbowlDataProvider:
-        bind:
-            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
-
     # Admin
     App\Core\Admin\UserAdmin:
         tags:
@@ -71,3 +67,4 @@ services:
     App\Core\Admin\GuestAdmin:
         tags:
             - { name: sonata.admin, model_class: App\Core\Entity\Guest, manager_type: orm, label: Guests }
+

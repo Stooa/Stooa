@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Entity;
 
+use ApiPlatform\Doctrine\Common\Filter\DateFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -33,12 +36,14 @@ use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
 use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
 use App\Fishbowl\State\FishbowlProcessor;
+use App\Fishbowl\State\FishbowlStateProvider;
 use App\Fishbowl\Validator\Constraints\FutureFishbowl;
 use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Metaclass\FilterBundle\Filter\FilterLogic;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -47,22 +52,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-/**
- * @FutureFishbowl (groups={"fishbowl:create", "fishbowl:update"})
- *
- * @PrivateFishbowl (groups={"fishbowl:create", "fishbowl:update"})
- */
 #[ApiResource(
     operations: [
-        new Get(),
+        new Get(security: 'is_granted(\'ROLE_USER\')'),
         new Put(security: 'object.getHost() == user'),
-        new GetCollection(security: 'is_granted(\'ROLE_USER\')'),
+        new GetCollection(security: 'is_granted(\'ROLE_USER\')', provider: FishbowlStateProvider::class),
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
     normalizationContext: ['groups' => ['fishbowl:read']],
     denormalizationContext: ['groups' => ['fishbowl:write']],
-    paginationEnabled: false,
+    paginationItemsPerPage: 25,
     graphQlOperations: [
+        new Query(),
         new Query(
             resolver: FishbowlResolver::class,
             args: ['slug' => ['type' => 'String!']],
@@ -112,7 +113,13 @@ use Webmozart\Assert\Assert as MAssert;
 )]
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: FishbowlRepository::class)]
-#[ApiFilter(filterClass: DateFilter::class, properties: ['finishDateTime' => 'exclude_null'])]
+#[ApiFilter(OrderFilter::class, properties: ['startDateTime'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(DateFilter::class, properties: ['finishDateTime' => DateFilterInterface::EXCLUDE_NULL, 'startDateTime'])]
+#[ApiFilter(SearchFilter::class, properties: ['currentStatus' => 'exact'])]
+#[ApiFilter(FilterLogic::class)]
+#[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
+#[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
+
 class Fishbowl implements \Stringable
 {
     use TimestampableEntity;
@@ -129,36 +136,48 @@ class Fishbowl implements \Stringable
      *
      * @phpstan-var array<string, Fishbowl::STATUS_*> $statusChoices
      */
-    public static array $statusChoices = ['Not Started' => self::STATUS_NOT_STARTED, 'Introduction' => self::STATUS_INTRODUCTION, 'Running' => self::STATUS_RUNNING, 'Finished' => self::STATUS_FINISHED];
+    public static array $statusChoices = [
+        'Not Started' => self::STATUS_NOT_STARTED,
+        'Introduction' => self::STATUS_INTRODUCTION,
+        'Running' => self::STATUS_RUNNING,
+        'Finished' => self::STATUS_FINISHED,
+    ];
+
     #[Groups(['fishbowl:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
+
     #[Groups(['fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', unique: true)]
     private ?string $slug = null;
+
     #[Groups(['fishbowl:write', 'fishbowl:read'])]
     #[Assert\NotNull]
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $startDateTime = null;
+
     #[Groups(['fishbowl:write', 'fishbowl:read'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
     private ?string $timezone = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
@@ -172,49 +191,68 @@ class Fishbowl implements \Stringable
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'time')]
     private ?\DateTimeInterface $duration = null;
+
     #[Groups(['fishbowl:read'])]
     #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'fishbowls')]
     private ?User $host = null;
+
     #[Groups(['fishbowl:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED])]
     #[ORM\Column(type: 'string', options: ['default' => self::STATUS_NOT_STARTED])]
     private string $currentStatus = self::STATUS_NOT_STARTED;
+
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $introducedAt = null;
+
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $runnedAt = null;
+
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $finishedAt = null;
+
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $finishDateTime = null;
+
     /** @var Collection<int, Participant> */
+    #[Groups(['fishbowl:read'])]
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Participant::class, cascade: ['all'])]
     private Collection $participants;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
     private bool $isFishbowlNow = false;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
     private bool $hasIntroduction = false;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
     private bool $isPrivate = false;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $password = null;
+
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\Length(min: 8, max: 255)]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
+    /** @var Collection<int, Feedback> */
+    #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
+    #[Groups(['fishbowl:read'])]
+    private Collection $feedbacks;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->feedbacks = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -496,6 +534,34 @@ class Fishbowl implements \Stringable
     {
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<int, Feedback> */
+    public function getFeedbacks(): Collection
+    {
+        return $this->feedbacks;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedbacks->contains($feedback)) {
+            $this->feedbacks[] = $feedback;
+            $feedback->setFishbowl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedbacks->contains($feedback)) {
+            $this->feedbacks->removeElement($feedback);
+            if ($feedback->getFishbowl() === $this) {
+                $feedback->setFishbowl(null);
+            }
         }
 
         return $this;

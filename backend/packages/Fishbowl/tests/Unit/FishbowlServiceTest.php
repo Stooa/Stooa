@@ -23,6 +23,7 @@ use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\FishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -38,6 +39,7 @@ class FishbowlServiceTest extends TestCase
     private MockObject $participantRepository;
     private MockObject $security;
     private MockObject $translator;
+    private MockObject $logger;
 
     protected function setUp(): void
     {
@@ -47,8 +49,10 @@ class FishbowlServiceTest extends TestCase
         $this->requestStack = new RequestStack();
         $this->security = $this->createMock(Security::class);
         $this->translator = $this->createMock(Translator::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
 
         $this->service = new FishbowlService(
+            $this->logger,
             $this->fishbowlRepository,
             $this->requestStack,
             $this->security,
@@ -176,7 +180,7 @@ class FishbowlServiceTest extends TestCase
     public function itGetsFalseWhenThereIsNoRequest(): void
     {
         $response = $this->service->ping('fishbowl-slug');
-        $this->assertFalse($response);
+        $this->assertNull($response);
     }
 
     /** @test */
@@ -187,7 +191,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertFalse($response);
+        $this->assertNull($response);
     }
 
     /** @test */
@@ -202,7 +206,7 @@ class FishbowlServiceTest extends TestCase
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertFalse($response);
+        $this->assertNull($response);
     }
 
     /** @test */
@@ -226,7 +230,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertSame($participant, $response);
     }
 
     /** @test */
@@ -250,7 +254,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertSame($participant, $response);
     }
 
     /** @test */
@@ -273,7 +277,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertInstanceOf(Participant::class, $response);
     }
 
     /** @test */
@@ -298,7 +302,7 @@ class FishbowlServiceTest extends TestCase
 
         $response = $this->service->ping('fishbowl-slug');
 
-        $this->assertTrue($response);
+        $this->assertInstanceOf(Participant::class, $response);
     }
 
     /** @test */
@@ -367,7 +371,7 @@ class FishbowlServiceTest extends TestCase
     }
 
     /** @return iterable<array{string}> */
-    public function fishbowlTitleProvider(): iterable
+    public static function fishbowlTitleProvider(): iterable
     {
         yield [''];
         yield ['   '];

@@ -28,6 +28,9 @@ const sharedTrackRepository = () => {
     }
 
     trackHtml.autoplay = true;
+    // ID in shareTrack is different from the other tracks because
+    // is always created in the conference and we don't need it to
+    // be always uniquely identified
     trackHtml.id = track.getId();
 
     trackHtml.setAttribute('muted', '');

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Tests\Functional;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Factory\UserFactory;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Factory\FishbowlFactory;
@@ -50,7 +50,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
     {
         self::bootKernel();
 
-        $response = static::createClient()->request('POST', '/refresh-token', ['json' => [
+        static::createClient()->request('POST', '/refresh-token', ['json' => [
             'email' => 'user@stooa.com',
             'refresh_token' => 'refresh_token',
         ]]);
@@ -232,7 +232,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
     }
 
     /** @return iterable<array{string}> */
-    public function roomProvider(): iterable
+    public static function roomProvider(): iterable
     {
         yield ['first'];
         yield ['second'];
@@ -243,6 +243,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $timeZone = new \DateTimeZone('Europe/Madrid');
 
         $firstDate = new \DateTime('now', $timeZone);
+
         $firstFishbowl = FishbowlFactory::createOne([
             'startDateTime' => $firstDate,
             'timezone' => 'Europe/Madrid',

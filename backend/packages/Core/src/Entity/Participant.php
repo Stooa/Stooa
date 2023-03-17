@@ -15,7 +15,9 @@ namespace App\Core\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use App\Fishbowl\Entity\Feedback;
 use App\Fishbowl\Entity\Fishbowl;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
@@ -25,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 #[ApiResource(
-    operations: [new GetCollection()],
+    operations: [new GetCollection(security: 'is_granted(\'ROLE_USER\')')],
     normalizationContext: ['groups' => ['participant:read']],
     denormalizationContext: ['groups' => ['participant:write']]
 )]
@@ -39,12 +41,12 @@ class Participant implements \Stringable
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    #[Groups(['participant:read'])]
+    #[Groups(['participant:read', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?User $user = null;
 
-    #[Groups(['participant:read'])]
+    #[Groups(['participant:read', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: Guest::class, cascade: ['all'])]
     #[ORM\JoinColumn(referencedColumnName: 'id')]
     private ?Guest $guest = null;
@@ -59,6 +61,10 @@ class Participant implements \Stringable
     #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'participants')]
     private ?Fishbowl $fishbowl = null;
+
+    /** @var Collection<int, Feedback> */
+    #[ORM\OneToMany(mappedBy: 'participant', targetEntity: Feedback::class)]
+    private Collection $feedbacks;
 
     public function __toString(): string
     {
@@ -155,6 +161,34 @@ class Participant implements \Stringable
         }
 
         return null;
+    }
+
+    /** @return Collection<int, Feedback> */
+    public function getFeedbacks(): Collection
+    {
+        return $this->feedbacks;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedbacks->contains($feedback)) {
+            $this->feedbacks[] = $feedback;
+            $feedback->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedbacks->contains($feedback)) {
+            $this->feedbacks->removeElement($feedback);
+            if ($feedback->getParticipant() === $this) {
+                $feedback->setParticipant(null);
+            }
+        }
+
+        return $this;
     }
 
     public function isModerator(Fishbowl $fishbowl): bool

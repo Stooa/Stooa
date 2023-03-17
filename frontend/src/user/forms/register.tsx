@@ -215,7 +215,6 @@ const Register = () => {
       console.log('[STOOA] submit error', res);
     } else {
       if (prefishbowl) {
-        console.log(prefishbowl);
         pushEventDataLayer({
           action: 'Register Confirmation',
           category: 'Prefishbowl',

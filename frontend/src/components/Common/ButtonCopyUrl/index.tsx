@@ -47,7 +47,7 @@ const ButtonCopyUrl: React.FC<Props & PrivateProps> = ({
     locale === defaultLocale ? '' : `/${locale}`
   }${fbRoute}`;
 
-  const invitation = `${fbUrl}\n${t(`form:password`)}:${plainPassword}`;
+  const invitation = `${fbUrl}\n${t(`form:password`)}: ${plainPassword}`;
 
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(isPrivate ? invitation : fbUrl);

@@ -3,10 +3,16 @@
     "enterFishbowl": "Entrer dans le fishbowl",
     "emptyListTitle": "Vous n’avez pas encore programmé de fishbowls. Créez-en un !",
     "emptyListDescription": "C'est ici que vous verrez tous vos fishbowls programmés.",
+    "emptyFinishedListTitle": "Prêt pour votre prochain fishbowl ?",
+    "emptyFinishedListDescription": "Ici, vous verrez les détails et les commentaires des fishbowls finis.",
     "fishbowlStartedDescription": "Les fishbowls qui sont en cours ou qui commenceront dans moins de 30 minutes ne peuvent pas être modifiés.",
     "noSelectedFishbowlTitle": "Aucun fishbowl sélectionné.",
     "noSelectedFishbowlDescription": "Sélectionnez un fishbowl programmé pour commencer à le modifier.",
     "fishbowlStarted": "Ce fishbowl a déjà commencé ou est sur le point de commencer.",
     "back": "Retourner à la liste",
-    "titleEdit": "Modifier le fishbowl"
+    "titleEdit": "Modifier le fishbowl",
+    "loadMore": "Charger plus",
+    "guestUser": "Invité",
+    "registerUser": "Utilisateur enregistré",
+    "me": "(Moi)"
 }
