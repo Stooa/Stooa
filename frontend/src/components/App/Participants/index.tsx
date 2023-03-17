@@ -181,12 +181,8 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
           <div className="participant-list participant-list--speaking">
             <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
             <ul>
-              {speakingParticipants.map((participant, i) => (
-                <ParticipantCard
-                  participant={participant}
-                  key={`participant-speaking-${i}`}
-                  speaker={true}
-                />
+              {speakingParticipants.map(participant => (
+                <ParticipantCard participant={participant} key={participant.id} speaker={true} />
               ))}
             </ul>
           </div>
@@ -199,8 +195,8 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
               <VideoMuted className="icon-small" />
             </h3>
             <ul>
-              {roomParticipants.map((participant, i) => (
-                <ParticipantCard participant={participant} key={`participant-room-${i}`} />
+              {roomParticipants.map(participant => (
+                <ParticipantCard participant={participant} key={participant.id} />
               ))}
             </ul>
           </div>

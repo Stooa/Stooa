@@ -132,12 +132,8 @@ const PreFishbowlParticipants = () => {
           className={`${participants.length >= MAX_PLACEHOLDER_PARTICIPANTS ? 'scroll' : ''}`}
         >
           {participants.length > 0 &&
-            participants.map((participant, i) => (
-              <ParticipantCard
-                prefishbowl={true}
-                participant={participant}
-                key={`participant-${i}`}
-              />
+            participants.map(participant => (
+              <ParticipantCard prefishbowl={true} participant={participant} key={participant.id} />
             ))}
           {createPlaceholderParticipants()}
         </StyledParticipantList>

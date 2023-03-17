@@ -104,12 +104,12 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
   const showSlide = (slide: number, delay = 0.3) => {
     const items = document.querySelectorAll(`.slide[data-slide="${slide}"] .animate`);
 
-    items.forEach((item, i) => {
+    items.forEach((item, index) => {
       gsap.to(item, 1, {
         opacity: 1,
         y: 0,
         ease: 'Power3.easeOut',
-        delay: delay + 0.1 * i
+        delay: delay + 0.1 * index
       });
     });
   };

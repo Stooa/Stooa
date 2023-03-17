@@ -144,8 +144,8 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           icon="hourglass"
           autoComplete="off"
         >
-          {[...Array(9)].map((e, i) => {
-            if (i === 0) {
+          {[...Array(9)].map((e, index) => {
+            if (index === 0) {
               return (
                 <option key="hour_placeholder" value="">
                   {t('fishbowl.selectDuration')}
@@ -154,9 +154,9 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
             }
 
             const nquarters = 2;
-            const hours = Math.floor(i / nquarters);
+            const hours = Math.floor(index / nquarters);
             const quarterHours = ['00', '30'];
-            const minutes = quarterHours[i % nquarters];
+            const minutes = quarterHours[index % nquarters];
             const time = `${hours.toString().length > 1 ? hours : `0${hours}`}:${minutes}`;
 
             return (
