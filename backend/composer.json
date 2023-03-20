@@ -14,7 +14,7 @@
         "doctrine/orm": "2.14.1",
         "gedmo/doctrine-extensions": "3.11.1",
         "gesdinet/jwt-refresh-token-bundle": "1.1.1",
-        "hashids/hashids": "4.1.0",
+        "hashids/hashids": "5.0.2",
         "lexik/jwt-authentication-bundle": "2.18.1",
         "metaclass-nl/filter-bundle": "3.0.0",
         "nelmio/cors-bundle": "2.3.1",
