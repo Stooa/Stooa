@@ -19,7 +19,8 @@ import {
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
   RECORDING_START,
-  RECORDING_STOP
+  RECORDING_STOP,
+  TRANSCRIPTION_MESSAGE_RECEIVED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -126,6 +127,8 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', isModerator);
+    conference.setLocalParticipantProperty('requestingTranscription', true);
+    conference.setLocalParticipantProperty('transcription_language', 'es-ES');
 
     userRepository.setUser({ id: conference.myUserId() });
 
@@ -177,6 +180,15 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  const _handleEndpointMessageReceived = (participant, json) => {
+    console.log('[STOOA] Endpoint message received', participant, json);
+
+    if (json && json.type === 'transcription-result') {
+      const { text } = json.transcript[0];
+      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { text });
+    }
+  };
+
   const _handleMessageReceived = (id, text, timestamp) => {
     dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
@@ -206,7 +218,8 @@ const conferenceRepository = () => {
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
           DOMINANT_SPEAKER_CHANGED,
-          MESSAGE_RECEIVED
+          MESSAGE_RECEIVED,
+          ENDPOINT_MESSAGE_RECEIVED
         }
       },
       errors: {
@@ -233,6 +246,7 @@ const conferenceRepository = () => {
     conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
     conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
+    conference.on(ENDPOINT_MESSAGE_RECEIVED, _handleEndpointMessageReceived);
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
