@@ -184,8 +184,9 @@ const conferenceRepository = () => {
     console.log('[STOOA] Endpoint message received', participant, json);
 
     if (json && json.type === 'transcription-result') {
+      const voiceParticipant = json.participant;
       const { text } = json.transcript[0];
-      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { participant, text });
+      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { text, voiceParticipant });
     }
   };
 

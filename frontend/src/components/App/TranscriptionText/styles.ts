@@ -12,11 +12,9 @@ import { BORDER_RADIUS } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledTextContainer = styled.div`
-  width: minmax(200px, 50%);
+  max-width: 250px;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: ${space(12)};
+
   z-index: 50;
   & > div {
     color: white;

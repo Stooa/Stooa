@@ -10,15 +10,26 @@
 import useDebounce from '@/hooks/useDebouce';
 import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { StyledTextContainer } from './styles';
 
 const TranscriptionText = () => {
   const [textToShow, setTextToShow] = useState('');
+  const textWrapperRef = useRef<HTMLDivElement>(null);
 
-  useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, text => {
-    console.log('Sauriki text', text.detail.text);
-    setTextToShow(text.detail.text);
+  const handleTranscriptionMessageReceived = (text: string, id: string) => {
+    const seatHTML = document.querySelector(`.seat[data-id="${id}"]`);
+    const seatPosition = seatHTML?.getBoundingClientRect();
+
+    if (textWrapperRef.current && seatPosition) {
+      textWrapperRef.current.style.top = `${seatPosition?.bottom - 124}px`;
+      textWrapperRef.current.style.left = `${seatPosition?.left + 100}px`;
+    }
+  };
+
+  useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { text, voiceParticipant } }) => {
+    handleTranscriptionMessageReceived(text, voiceParticipant.id);
+    setTextToShow(text);
   });
 
   const sentText = useDebounce<string>(textToShow, 3000);
@@ -30,7 +41,9 @@ const TranscriptionText = () => {
   }, [sentText]);
 
   return (
-    <StyledTextContainer>{textToShow.length > 0 && <div>{textToShow}</div>}</StyledTextContainer>
+    <StyledTextContainer ref={textWrapperRef}>
+      {textToShow.length > 0 && <div>{textToShow}</div>}
+    </StyledTextContainer>
   );
 };
 
