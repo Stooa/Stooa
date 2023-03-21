@@ -61,7 +61,8 @@ const Fishbowl: FC = () => {
     startRecording,
     setIsRecording,
     gaveFeedback,
-    setGaveFeedback
+    setGaveFeedback,
+    isTranscriptionEnabled
   } = useStooa();
 
   const {
@@ -237,7 +238,8 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        <TranscriptionText />
+
+        {isTranscriptionEnabled && <TranscriptionText />}
       </Main>
       {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
       <OnBoardingTour />
