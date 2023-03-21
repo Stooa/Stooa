@@ -56,7 +56,7 @@
         "twig/twig": "3.5.1",
         "webmozart/assert": "1.11.0",
         "webonyx/graphql-php": "14.11.9",
-        "zenstruck/foundry": "1.30.0"
+        "zenstruck/foundry": "1.30.1"
     },
     "require-dev": {
         "doctrine/data-fixtures": "1.6.3",
