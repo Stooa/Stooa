@@ -18,6 +18,7 @@ export interface Participant {
   joined: boolean;
   isMuted: boolean;
   isVideoMuted: boolean;
+  _connectionJid: string;
   getId: () => string;
   getDisplayName: () => string;
 }

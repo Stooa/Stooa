@@ -40,6 +40,7 @@ const initialParticipant: Participant = {
   joined: false,
   isMuted: false,
   isVideoMuted: false,
+  _connectionJid: '',
   getId: () => '',
   getDisplayName: () => ''
 };
@@ -83,8 +84,13 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
   };
 
   const getConferenceParticipants = () => {
-    const typedParticipants = getParticipantList() as unknown as Participant[];
-    setParticipants(typedParticipants);
+    const participantsWithoutTranscriber = getParticipantList().filter(participant => {
+      return participant._connectionJid
+        ? !participant._connectionJid.includes('transcriber@')
+        : true;
+    }) as unknown as Participant[];
+
+    setParticipants(participantsWithoutTranscriber);
   };
 
   const toggleDrawer = () => {
