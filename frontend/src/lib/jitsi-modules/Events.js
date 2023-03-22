@@ -24,6 +24,7 @@ export const LOCALTRACK_STOPPED = 'localtrack:stopped';
 export const TRACK_ADDED = 'track:added';
 export const PERMISSION_CHANGED = 'permission:changed';
 export const REACTION_MESSAGE_RECEIVED = 'reaction:received';
+export const TRANSCRIPTION_MESSAGE_RECEIVED = 'conference:transcriptionreceived';
 export const SCREEN_SHARE_START = 'screen-share:start';
 export const SCREEN_SHARE_STOP = 'screen-share:stop';
 export const SCREEN_SHARE_CANCELED = 'screen-share:canceled';

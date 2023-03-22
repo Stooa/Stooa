@@ -9,6 +9,7 @@
 
 export interface Participant {
   id: string;
+  _connectionJid: string;
   name: string;
   linkedin: string;
   twitter: string;

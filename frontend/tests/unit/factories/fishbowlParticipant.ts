@@ -14,6 +14,7 @@ import { faker } from '@faker-js/faker';
 export const makeFishbowlParticipant = (): Participant => {
   return {
     id: faker.datatype.uuid(),
+    _connectionJid: '684hd13',
     name: faker.name.firstName(),
     linkedin: 'https://www.linkedin.com/in/wearestooa',
     twitter: 'https://www.twitter.com/wearestooa',
