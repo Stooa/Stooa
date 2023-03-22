@@ -67,7 +67,14 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording, feedbackAlert, gaveFeedback } = useStooa();
+  const {
+    isModerator,
+    isRecording,
+    feedbackAlert,
+    gaveFeedback,
+    isTranscriptionEnabled,
+    setIsTranscriptionEnabled
+  } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -104,6 +111,10 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
   const handleShowFeedbackForm = () => {
     setShowFeedbackForm(current => !current);
+  };
+
+  const handleTranscriptionToggle = () => {
+    setIsTranscriptionEnabled(current => !current);
   };
 
   // Used imperativeHandle to make the parents able to call the handleShowDevices
@@ -160,6 +171,21 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   {t('feedback.title')}
                 </button>
               )}
+
+              {!prejoin && (
+                <button
+                  disabled={gaveFeedback}
+                  data-testid="transcription-button"
+                  className="sticky-button sticky-button--transcription"
+                  onClick={() => handleTranscriptionToggle()}
+                >
+                  <Feedback />
+                  {isTranscriptionEnabled
+                    ? t('transcription.titleDisable')
+                    : t('transcription.titleEnable')}
+                </button>
+              )}
+
               {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
                 <button
                   data-testid="recording-button"

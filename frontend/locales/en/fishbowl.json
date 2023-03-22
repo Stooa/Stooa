@@ -205,5 +205,9 @@
             "during": "During",
             "duringTooltip": "Feedback received during the fishbowl"
         }
+    },
+    "transcription" : {
+        "titleDisable": "Disable transcription",
+        "titleEnable": "Enable transcription"
     }
 }

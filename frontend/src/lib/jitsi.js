@@ -94,6 +94,7 @@ const getParticipantList = () => {
   jitsiParticipants.map(participant => {
     participants.push({
       id: participant.getId(),
+      _connectionJid: participant._connectionJid,
       name: participant.getDisplayName(),
       linkedin: participant.getProperty('linkedin'),
       twitter: participant.getProperty('twitter'),

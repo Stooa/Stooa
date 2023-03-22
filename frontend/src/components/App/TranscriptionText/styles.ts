@@ -14,10 +14,8 @@ import styled from 'styled-components';
 const StyledTextContainer = styled.div`
   max-width: var(--max-width);
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: ${space(12)};
   z-index: 50;
+
   & > div {
     color: white;
     background-color: hsla(0, 0%, 0%, 0.5);
