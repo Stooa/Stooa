@@ -68,8 +68,14 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording, feedbackAlert, gaveFeedback, isTranscriptionEnabled } =
-    useStooa();
+  const {
+    isModerator,
+    isRecording,
+    feedbackAlert,
+    gaveFeedback,
+    isTranscriptionEnabled,
+    setIsTranscriptionEnabled
+  } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -110,9 +116,11 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
   const handleTranscriptionToggle = () => {
     if (isTranscriptionEnabled) {
-      Conference.disableTranscriptionEvent();
+      Conference.stopTranscriptionEvent();
+      setIsTranscriptionEnabled(false);
     } else {
-      Conference.enableTranscriptionEvent();
+      Conference.startTranscriptionEvent();
+      setIsTranscriptionEnabled(true);
     }
   };
 

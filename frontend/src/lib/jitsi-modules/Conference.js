@@ -20,9 +20,7 @@ import {
   SCREEN_SHARE_STOP,
   RECORDING_START,
   RECORDING_STOP,
-  TRANSCRIPTION_MESSAGE_RECEIVED,
-  TRANSCRIPTION_DISABLED,
-  TRANSCRIPTION_ENABLED
+  TRANSCRIPTION_MESSAGE_RECEIVED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -93,13 +91,11 @@ const conferenceRepository = () => {
       newValue
     );
 
-    console.log('----> Dude wtf', property, newValue);
+    // if (property === 'features_jigasi' && newValue !== undefined) {
+    //   dispatchEvent(newValue === true ? TRANSCRIPTION_ENABLED : TRANSCRIPTION_DISABLED);
 
-    if (property === 'features_jigasi' && newValue !== undefined) {
-      dispatchEvent(newValue === true ? TRANSCRIPTION_ENABLED : TRANSCRIPTION_DISABLED);
-
-      return;
-    }
+    //   return;
+    // }
 
     if (property === 'screenShare' && newValue !== undefined) {
       dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
@@ -407,8 +403,8 @@ const conferenceRepository = () => {
     }
   };
 
-  const enableTranscriptionEvent = () => {
-    console.log('[STOOA] Enable transcription');
+  const startTranscriptionEvent = () => {
+    console.log('[STOOA] Start transcription');
     conference.setLocalParticipantProperty('requestingTranscription', true);
   };
 
@@ -553,7 +549,7 @@ const conferenceRepository = () => {
     getParticipantsIds,
     startRecordingEvent,
     stopRecordingEvent,
-    enableTranscriptionEvent,
+    startTranscriptionEvent,
     stopTranscriptionEvent
   };
 };

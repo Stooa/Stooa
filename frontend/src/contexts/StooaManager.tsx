@@ -38,8 +38,6 @@ import {
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
-  TRANSCRIPTION_DISABLED,
-  TRANSCRIPTION_ENABLED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -191,15 +189,6 @@ const StooaProvider = ({
     if (data.isPrivate && data.plainPassword && isModerator) {
       Conference.lockConference(data.plainPassword);
     }
-  });
-
-  useEventListener(TRANSCRIPTION_ENABLED, () => {
-    console.log('TRANSCRIPTION_ENABLED');
-    setIsTranscriptionEnabled(true);
-  });
-
-  useEventListener(TRANSCRIPTION_DISABLED, () => {
-    setIsTranscriptionEnabled(false);
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
