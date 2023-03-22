@@ -126,6 +126,8 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', isModerator);
+    conference.setLocalParticipantProperty('requestingTranscription', true);
+    conference.setLocalParticipantProperty('transcription_language', 'es-ES');
 
     userRepository.setUser({ id: conference.myUserId() });
 
@@ -189,6 +191,10 @@ const conferenceRepository = () => {
     console.log('[STOOA] Password not supported');
   };
 
+  const _handleEndpointMessageReceived = (participant, json) => {
+    console.log('[STOOA] Endpoint message received', participant, json);
+  };
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -206,7 +212,8 @@ const conferenceRepository = () => {
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
           DOMINANT_SPEAKER_CHANGED,
-          MESSAGE_RECEIVED
+          MESSAGE_RECEIVED,
+          ENDPOINT_MESSAGE_RECEIVED
         }
       },
       errors: {
@@ -233,6 +240,7 @@ const conferenceRepository = () => {
     conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
     conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
+    conference.on(ENDPOINT_MESSAGE_RECEIVED, _handleEndpointMessageReceived);
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
