@@ -36,6 +36,7 @@ import { useStooa } from '@/contexts/StooaManager';
 import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
+import Conference from '@/jitsi/Conference';
 
 interface Props {
   unlabeled?: boolean;
@@ -67,14 +68,8 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const {
-    isModerator,
-    isRecording,
-    feedbackAlert,
-    gaveFeedback,
-    isTranscriptionEnabled,
-    setIsTranscriptionEnabled
-  } = useStooa();
+  const { isModerator, isRecording, feedbackAlert, gaveFeedback, isTranscriptionEnabled } =
+    useStooa();
 
   const { t } = useTranslation('fishbowl');
 
@@ -114,7 +109,11 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   };
 
   const handleTranscriptionToggle = () => {
-    setIsTranscriptionEnabled(current => !current);
+    if (isTranscriptionEnabled) {
+      Conference.disableTranscriptionEvent();
+    } else {
+      Conference.enableTranscriptionEvent();
+    }
   };
 
   // Used imperativeHandle to make the parents able to call the handleShowDevices

@@ -20,7 +20,9 @@ import {
   SCREEN_SHARE_STOP,
   RECORDING_START,
   RECORDING_STOP,
-  TRANSCRIPTION_MESSAGE_RECEIVED
+  TRANSCRIPTION_MESSAGE_RECEIVED,
+  TRANSCRIPTION_DISABLED,
+  TRANSCRIPTION_ENABLED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -91,6 +93,14 @@ const conferenceRepository = () => {
       newValue
     );
 
+    console.log('----> Dude wtf', property, newValue);
+
+    if (property === 'features_jigasi' && newValue !== undefined) {
+      dispatchEvent(newValue === true ? TRANSCRIPTION_ENABLED : TRANSCRIPTION_DISABLED);
+
+      return;
+    }
+
     if (property === 'screenShare' && newValue !== undefined) {
       dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
 
@@ -127,7 +137,7 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', isModerator);
-    conference.setLocalParticipantProperty('requestingTranscription', true);
+    conference.setLocalParticipantProperty('requestingTranscription', false);
     conference.setLocalParticipantProperty('transcription_language', 'es-ES');
 
     userRepository.setUser({ id: conference.myUserId() });
@@ -397,6 +407,16 @@ const conferenceRepository = () => {
     }
   };
 
+  const enableTranscriptionEvent = () => {
+    console.log('[STOOA] Enable transcription');
+    conference.setLocalParticipantProperty('requestingTranscription', true);
+  };
+
+  const stopTranscriptionEvent = () => {
+    console.log('[STOOA] Stop transcription');
+    conference.setLocalParticipantProperty('requestingTranscription', false);
+  };
+
   const startScreenShareEvent = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
@@ -532,7 +552,9 @@ const conferenceRepository = () => {
     getLocalTracks,
     getParticipantsIds,
     startRecordingEvent,
-    stopRecordingEvent
+    stopRecordingEvent,
+    enableTranscriptionEvent,
+    stopTranscriptionEvent
   };
 };
 
