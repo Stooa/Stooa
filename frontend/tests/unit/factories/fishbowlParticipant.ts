@@ -23,6 +23,7 @@ export const makeFishbowlParticipant = (): Participant => {
     joined: false,
     isMuted: false,
     isVideoMuted: false,
+    _connectionJid: '134618',
     getId: () => faker.datatype.uuid(),
     getDisplayName: () => faker.name.firstName()
   };
