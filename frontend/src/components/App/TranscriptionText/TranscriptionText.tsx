@@ -20,7 +20,7 @@ const TranscriptionText = () => {
   const textWrapperRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
 
-  const handleTranscriptionMessageReceived = (text: string, id: string) => {
+  const positionTranscriptMessageReceived = (id: string) => {
     const seatHTML = document.querySelector(`.seat[data-id="${id}"]`);
     const seatPosition = seatHTML?.getBoundingClientRect();
 
@@ -28,8 +28,6 @@ const TranscriptionText = () => {
       textWrapperRef.current.style.bottom = `${seatPosition?.bottom - 40}px`;
       textWrapperRef.current.style.left = `${seatPosition?.left + 100}px`;
     }
-
-    setTextToShow(text);
   };
 
   const calculateSeatWidth = useCallback((): number => {
@@ -40,7 +38,8 @@ const TranscriptionText = () => {
   }, [width]);
 
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { text, voiceParticipant } }) => {
-    handleTranscriptionMessageReceived(text, voiceParticipant.id);
+    positionTranscriptMessageReceived(voiceParticipant.id);
+    setTextToShow(text);
   });
 
   const sentText = useDebounce<string>(textToShow, 2000);
