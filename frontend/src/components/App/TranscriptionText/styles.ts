@@ -40,7 +40,7 @@ const StyledTranscribedHistory = styled.div`
 
   box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.1);
 
-  & .message {
+  & .message:not(:last-child) {
     margin-bottom: 0.5rem;
   }
 `;
