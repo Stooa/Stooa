@@ -69,6 +69,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   } = useDevices();
 
   const {
+    data,
     isModerator,
     isRecording,
     feedbackAlert,
@@ -78,6 +79,13 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   } = useStooa();
 
   const { t } = useTranslation('fishbowl');
+
+  const locales = {
+    es: 'es-ES',
+    ca: 'es-CA',
+    en: 'en-US',
+    fr: 'fr-FR'
+  };
 
   const handleAudioInput = (event: React.MouseEvent) => {
     const { value } = event.target as HTMLButtonElement;
@@ -120,6 +128,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       setIsTranscriptionEnabled(false);
     } else {
       Conference.startTranscriptionEvent();
+      Conference.changeTranscriptionLanguage(locales[data.locale]);
       setIsTranscriptionEnabled(true);
     }
   };

@@ -91,12 +91,6 @@ const conferenceRepository = () => {
       newValue
     );
 
-    // if (property === 'features_jigasi' && newValue !== undefined) {
-    //   dispatchEvent(newValue === true ? TRANSCRIPTION_ENABLED : TRANSCRIPTION_DISABLED);
-
-    //   return;
-    // }
-
     if (property === 'screenShare' && newValue !== undefined) {
       dispatchEvent(newValue === 'true' ? SCREEN_SHARE_START : SCREEN_SHARE_STOP);
 
@@ -134,7 +128,7 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', isModerator);
     conference.setLocalParticipantProperty('requestingTranscription', false);
-    conference.setLocalParticipantProperty('transcription_language', 'es-ES');
+    conference.setLocalParticipantProperty('translation_language', 'en-US');
 
     userRepository.setUser({ id: conference.myUserId() });
 
@@ -190,9 +184,7 @@ const conferenceRepository = () => {
     console.log('[STOOA] Endpoint message received', participant, json);
 
     if (json && json.type === 'transcription-result') {
-      const voiceParticipant = json.participant;
-      const { text } = json.transcript[0];
-      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { text, voiceParticipant });
+      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { data: json });
     }
   };
 
@@ -413,6 +405,14 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('requestingTranscription', false);
   };
 
+  /**
+   *
+   * @param {'es-ES' | 'en-US' | 'es-CA' | 'fr-FR'} language Language of the transcriber
+   */
+  const changeTranscriptionLanguage = language => {
+    conference.setLocalParticipantProperty('transcription_language', language);
+  };
+
   const startScreenShareEvent = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
@@ -550,7 +550,8 @@ const conferenceRepository = () => {
     startRecordingEvent,
     stopRecordingEvent,
     startTranscriptionEvent,
-    stopTranscriptionEvent
+    stopTranscriptionEvent,
+    changeTranscriptionLanguage
   };
 };
 

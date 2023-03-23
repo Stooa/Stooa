@@ -7,5 +7,10 @@
  * file that was distributed with this source code.
  */
 
-export * from './TranscriptionWrapper';
-export { default } from './TranscriptionWrapper';
+export type TranscriptionMessageType = {
+  message_id?: string;
+  user_id: string;
+  user_name: string;
+  confidence: number;
+  text: string;
+};
