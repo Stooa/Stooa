@@ -8,7 +8,8 @@
  */
 
 import { space } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_600, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { scrolllbarStyle } from '@/ui/Scrollbar';
+import { BORDER_RADIUS, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledTextContainer = styled.div`
@@ -25,20 +26,13 @@ const StyledTextContainer = styled.div`
 `;
 
 const StyledTranscribedHistory = styled.div`
-  position: absolute;
-  bottom: 24px;
-  right: 64px;
-  padding: 16px 16px;
-  width: 320px;
-  height: 150px;
+  padding: ${space(3)};
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
-  background-color: ${COLOR_NEUTRO_100};
   color: ${COLOR_NEUTRO_700};
 
-  border: 1px solid ${COLOR_NEUTRO_600};
-  border-radius: 15px;
-
-  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.1);
+  ${scrolllbarStyle};
 
   & .message:not(:last-child) {
     margin-bottom: 0.5rem;

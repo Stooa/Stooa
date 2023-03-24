@@ -36,9 +36,14 @@ const ParticipantsDrawer = styled.div`
   will-change: transform;
   z-index: 10;
 
-  & > .participant-list > h3,
-  & > .header {
+  & .participant-list > h3,
+  & .header,
+  & .transcription-wrapper {
     padding: 0 ${space(3)};
+  }
+
+  & .participants-wrapper {
+    height: 65%;
   }
 
   ${StyledButtonContext} {
@@ -75,22 +80,22 @@ const ParticipantsDrawer = styled.div`
     width: ${rems(350)};
   `}
 
-  .header {
+  & .header {
     align-items: center;
     display: flex;
     justify-content: space-between;
 
-    h2,
-    .close {
+    & h2,
+    & .close {
       color: ${COLOR_NEUTRO_700};
       opacity: 0.5;
     }
   }
 
-  .participant-list {
+  & .participant-list {
     margin: ${space(3)} 0;
 
-    h3 {
+    & h3 {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
@@ -100,6 +105,10 @@ const ParticipantsDrawer = styled.div`
         margin-left: ${space()};
       }
     }
+  }
+
+  & .transcription-wrapper {
+    height: 35%;
   }
 `;
 
