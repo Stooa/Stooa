@@ -33,7 +33,6 @@ import Switch from '@/components/Common/Fields/Switch';
 
 const initialParticipant: Participant = {
   id: '',
-  _connectionJid: '',
   name: '',
   linkedin: '',
   twitter: '',
@@ -43,6 +42,7 @@ const initialParticipant: Participant = {
   joined: false,
   isMuted: false,
   isVideoMuted: false,
+  isJigasi: false,
   getId: () => '',
   getDisplayName: () => ''
 };
@@ -87,9 +87,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
 
   const getConferenceParticipants = () => {
     const participantsWithoutTranscriber = getParticipantList().filter(participant => {
-      return participant._connectionJid
-        ? !participant._connectionJid.includes('transcriber@')
-        : true;
+      return !participant.isJigasi;
     }) as unknown as Participant[];
 
     setParticipants(participantsWithoutTranscriber);
