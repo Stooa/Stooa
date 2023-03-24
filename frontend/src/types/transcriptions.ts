@@ -8,9 +8,9 @@
  */
 
 export type TranscriptionMessageType = {
-  message_id?: string;
-  user_id: string;
-  user_name: string;
+  messageId?: string;
+  userId: string;
+  userName: string;
   confidence: number;
   text: string;
 };

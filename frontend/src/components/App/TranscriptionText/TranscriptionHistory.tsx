@@ -21,9 +21,9 @@ export const TranscriptionHistory = () => {
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
     if (!data.is_interim) {
       const messageToStore = {
-        message_id: data.message_id,
-        user_id: data.participant.id,
-        user_name: data.participant.identity_name,
+        messageId: data.message_id,
+        userId: data.participant.id,
+        userName: data.participant.identity_name,
         confidence: data.transcript[0].confidence,
         text: data.transcript[0].text
       };
@@ -44,8 +44,8 @@ export const TranscriptionHistory = () => {
       <div className="messages">
         {messageHistory.map(message => {
           return (
-            <div className="message" key={message.message_id}>
-              <h4>{message.user_name}: </h4>
+            <div className="message" key={message.messageId}>
+              <h4>{message.userName}: </h4>
               <p>{message.text}</p>
             </div>
           );

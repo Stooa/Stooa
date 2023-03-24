@@ -29,6 +29,7 @@ import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { useModals } from '@/contexts/ModalsContext';
 import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
+import Switch from '@/components/Common/Fields/Switch';
 
 const initialParticipant: Participant = {
   id: '',
@@ -184,7 +185,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
             <Cross />
           </Icon>
         </div>
-        <div className='participants-wrapper'>
+        <div className="participants-wrapper">
           {speakingParticipants.length > 0 && (
             <div className="participant-list participant-list--speaking">
               <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
@@ -216,6 +217,14 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
         </div>
         <div className="transcription-wrapper">
           <h3 className="body-md medium">Transcriptions</h3>
+          <div>
+            <Switch
+              tooltipText="translate what people is saying!"
+              label="Translate"
+              name="translate"
+            />
+            <span>Language</span>
+          </div>
           <TranscriptionHistory />
         </div>
       </ParticipantsDrawer>

@@ -44,7 +44,7 @@ export const TranscriptedText = ({ messageData, messageId }: Props) => {
   }, [calculateSeatWidth]);
 
   useEffect(() => {
-    positionTranscriptMessageReceived(messageData.user_id);
+    positionTranscriptMessageReceived(messageData.userId);
   }, []);
 
   return (
