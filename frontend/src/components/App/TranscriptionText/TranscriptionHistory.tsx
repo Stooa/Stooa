@@ -23,7 +23,7 @@ export const TranscriptionHistory = () => {
       const messageToStore = {
         message_id: data.message_id,
         user_id: data.participant.id,
-        user_name: data.participant.identity_name,
+        user_name: data.participant.identity_name ? data.participant.identity_name : data.participant.name,
         confidence: data.transcript[0].confidence,
         text: data.transcript[0].text
       };
