@@ -270,6 +270,59 @@ services:
             meet.jitsi:
                 aliases:
                     - ${JVB_SERVER}
+    jigasi:
+        image: jitsi/jigasi:${JITSI_IMAGE_VERSION:-unstable}
+        restart: ${RESTART_POLICY:-unless-stopped}
+        ports:
+            - '${JIGASI_PORT_MIN:-20000}-${JIGASI_PORT_MAX:-20050}:${JIGASI_PORT_MIN:-20000}-${JIGASI_PORT_MAX:-20050}/udp'
+        volumes:
+            - ${CONFIG}/jigasi:/config:Z
+            - ${CONFIG}/transcripts:/tmp/transcripts:Z
+        environment:
+            - ENABLE_AUTH
+            - ENABLE_GUESTS
+            - XMPP_AUTH_DOMAIN
+            - XMPP_GUEST_DOMAIN
+            - XMPP_MUC_DOMAIN
+            - XMPP_INTERNAL_MUC_DOMAIN
+            - XMPP_SERVER
+            - XMPP_PORT
+            - XMPP_DOMAIN
+            - PUBLIC_URL
+            - JIGASI_DISABLE_SIP
+            - JIGASI_SIP_URI
+            - JIGASI_SIP_PASSWORD
+            - JIGASI_SIP_SERVER
+            - JIGASI_SIP_PORT
+            - JIGASI_SIP_TRANSPORT
+            - JIGASI_SIP_DEFAULT_ROOM
+            - JIGASI_XMPP_USER
+            - JIGASI_XMPP_PASSWORD
+            - JIGASI_BREWERY_MUC
+            - JIGASI_PORT_MIN
+            - JIGASI_PORT_MAX
+            - JIGASI_HEALTH_CHECK_SIP_URI
+            - JIGASI_HEALTH_CHECK_INTERVAL
+            - JIGASI_SIP_KEEP_ALIVE_METHOD
+            - JIGASI_ENABLE_SDES_SRTP
+            - ENABLE_TRANSCRIPTIONS
+            - JIGASI_TRANSCRIBER_ADVERTISE_URL
+            - JIGASI_TRANSCRIBER_RECORD_AUDIO
+            - JIGASI_TRANSCRIBER_SEND_TXT
+            - GC_PROJECT_ID
+            - GC_PRIVATE_KEY_ID
+            - GC_PRIVATE_KEY
+            - GC_CLIENT_EMAIL
+            - GC_CLIENT_ID
+            - GC_CLIENT_CERT_URL
+            - SENTRY_DSN="${JIGASI_SENTRY_DSN:-0}"
+            - SENTRY_ENVIRONMENT
+            - SENTRY_RELEASE
+            - TZ
+        depends_on:
+            - xmpp
+        networks:
+            meet.jitsi:
     jitsi-nginx:
         image: nginx:1.23
         depends_on:
