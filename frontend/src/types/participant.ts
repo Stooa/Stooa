@@ -9,7 +9,6 @@
 
 export interface Participant {
   id: string;
-  _connectionJid: string;
   name: string;
   linkedin: string;
   twitter: string;
@@ -21,4 +20,5 @@ export interface Participant {
   isVideoMuted: boolean;
   getId: () => string;
   getDisplayName: () => string;
+  isJigasi: boolean;
 }

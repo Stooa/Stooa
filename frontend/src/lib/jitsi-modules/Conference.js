@@ -501,7 +501,8 @@ const conferenceRepository = () => {
           ? false
           : conference.getLocalParticipantProperty('joined') === 'yes',
       isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
-      isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
+      isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video'),
+      isJigasi: false
     };
   };
 

@@ -32,7 +32,6 @@ import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory'
 
 const initialParticipant: Participant = {
   id: '',
-  _connectionJid: '',
   name: '',
   linkedin: '',
   twitter: '',
@@ -42,6 +41,7 @@ const initialParticipant: Participant = {
   joined: false,
   isMuted: false,
   isVideoMuted: false,
+  isJigasi: false,
   getId: () => '',
   getDisplayName: () => ''
 };
@@ -86,9 +86,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
 
   const getConferenceParticipants = () => {
     const participantsWithoutTranscriber = getParticipantList().filter(participant => {
-      return participant._connectionJid
-        ? !participant._connectionJid.includes('transcriber@')
-        : true;
+      return !participant.isJigasi;
     }) as unknown as Participant[];
 
     setParticipants(participantsWithoutTranscriber);
@@ -184,7 +182,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
             <Cross />
           </Icon>
         </div>
-        <div className='participants-wrapper'>
+        <div className="participants-wrapper">
           {speakingParticipants.length > 0 && (
             <div className="participant-list participant-list--speaking">
               <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>

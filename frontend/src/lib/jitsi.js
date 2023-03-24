@@ -94,7 +94,6 @@ const getParticipantList = () => {
   jitsiParticipants.map(participant => {
     participants.push({
       id: participant.getId(),
-      _connectionJid: participant._connectionJid,
       name: participant.getDisplayName(),
       linkedin: participant.getProperty('linkedin'),
       twitter: participant.getProperty('twitter'),
@@ -102,7 +101,10 @@ const getParticipantList = () => {
       isCurrentUser: false,
       joined: participant.getProperty('joined') === 'yes',
       isMuted: tracksRepository.isParticipantMuted(participant, 'audio'),
-      isVideoMuted: tracksRepository.isParticipantMuted(participant, 'video')
+      isVideoMuted: tracksRepository.isParticipantMuted(participant, 'video'),
+      isJigasi: participant._properties
+        ? participant._properties.features_jigasi !== undefined
+        : false
     });
   });
 
