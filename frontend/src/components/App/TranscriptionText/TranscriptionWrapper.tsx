@@ -12,7 +12,6 @@ import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { TranscriptionMessageType } from '@/types/transcriptions';
 import { useEffect, useRef, useState } from 'react';
-import { receiveMessageOnPort } from 'worker_threads';
 import { StyledTranscribedHistory } from './styles';
 import { TranscriptedText } from './TranscriptedText';
 
