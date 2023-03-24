@@ -128,6 +128,7 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('isModerator', isModerator);
     conference.setLocalParticipantProperty('requestingTranscription', true);
     conference.setLocalParticipantProperty('transcription_language', 'es-ES');
+    conference.setLocalParticipantProperty('translation_language', 'en-US');
 
     userRepository.setUser({ id: conference.myUserId() });
 
