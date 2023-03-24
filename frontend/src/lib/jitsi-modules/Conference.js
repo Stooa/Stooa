@@ -128,7 +128,6 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', isModerator);
     conference.setLocalParticipantProperty('requestingTranscription', false);
-    conference.setLocalParticipantProperty('translation_language', 'en-US');
 
     userRepository.setUser({ id: conference.myUserId() });
 
@@ -183,7 +182,7 @@ const conferenceRepository = () => {
   const _handleEndpointMessageReceived = (participant, json) => {
     console.log('[STOOA] Endpoint message received', participant, json);
 
-    if (json && json.type === 'transcription-result') {
+    if ((json && json.type === 'transcription-result') || json.type === 'translation-result') {
       dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { data: json });
     }
   };
@@ -413,6 +412,14 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('transcription_language', language);
   };
 
+  /**
+   *
+   * @param {'es-ES' | 'en-US' | 'es-CA' | 'fr-FR'} language Language to translate to
+   */
+  const setTranslationLanguage = language => {
+    conference.setLocalParticipantProperty('translation_language', language);
+  };
+
   const startScreenShareEvent = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
@@ -552,7 +559,8 @@ const conferenceRepository = () => {
     stopRecordingEvent,
     startTranscriptionEvent,
     stopTranscriptionEvent,
-    changeTranscriptionLanguage
+    changeTranscriptionLanguage,
+    setTranslationLanguage
   };
 };
 

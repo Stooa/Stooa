@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { useStooa } from '@/contexts/StooaManager';
 import useDebounce from '@/hooks/useDebouce';
 import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
@@ -16,16 +17,21 @@ import { TranscriptedText } from './TranscriptedText';
 const TranscriptionWrapper = () => {
   const [textToShow, setTextToShow] = useState({});
   const [messagesReceived, setMessagesReceived] = useState({});
+  const { isTranslationEnabled } = useStooa();
 
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
+    if (isTranslationEnabled && data.type !== 'translation-result') {
+      return;
+    }
+
     let messageToPush = {};
     if (!messagesReceived.hasOwnProperty(data.message_id)) {
       messageToPush = {
         [data.message_id]: {
-          user_id: data.participant.id,
-          user_name: data.participant.identity_name,
-          confidence: data.transcript[0].confidence,
-          text: data.transcript[0].text
+          userId: data.participant.id,
+          userName: data.participant.identity_name,
+          ...(!isTranslationEnabled && { confidence: data.transcript[0].confidence }),
+          text: isTranslationEnabled ? data.text : data.transcript[0].text
         }
       };
       setMessagesReceived({ ...messagesReceived, ...messageToPush });
@@ -33,15 +39,15 @@ const TranscriptionWrapper = () => {
 
     if (
       (messagesReceived[data.message_id] &&
-        data.transcript[0].confidence >= messagesReceived[data.message_id].confidence) ||
+        data.transcript[0]?.confidence >= messagesReceived[data.message_id].confidence) ||
       !data.is_interim
     ) {
       messageToPush = {
         [data.message_id]: {
-          user_id: data.participant.id,
-          user_name: data.participant.identity_name,
-          confidence: data.transcript[0].confidence,
-          text: data.transcript[0].text
+          userId: data.participant.id,
+          userName: data.participant.identity_name,
+          ...(!isTranslationEnabled && { confidence: data.transcript[0].confidence }),
+          text: isTranslationEnabled ? data.text : data.transcript[0].text
         }
       };
       setMessagesReceived({ ...messagesReceived, ...messageToPush });

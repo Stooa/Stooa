@@ -26,7 +26,6 @@ import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
   bottom: 0;
-  /* height: calc(100% - ${space(14)}); */
   overflow-y: auto;
   padding: ${space(3)} 0;
   position: fixed;
@@ -43,7 +42,7 @@ const ParticipantsDrawer = styled.div`
   }
 
   & .participants-wrapper {
-    height: 65%;
+    height: 55%;
   }
 
   ${StyledButtonContext} {
@@ -108,7 +107,7 @@ const ParticipantsDrawer = styled.div`
   }
 
   & .transcription-wrapper {
-    height: 35%;
+    height: 30%;
   }
 `;
 

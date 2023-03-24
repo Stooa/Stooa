@@ -91,6 +91,7 @@ const StooaProvider = ({
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
   const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(useGaveFeedback);
+  const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
 
   const { t, lang } = useTranslation('app');
 
@@ -439,7 +440,9 @@ const StooaProvider = ({
         gaveFeedback,
         setGaveFeedback,
         isTranscriptionEnabled,
-        setIsTranscriptionEnabled
+        setIsTranscriptionEnabled,
+        isTranslationEnabled,
+        setIsTranslationEnabled
       }}
     >
       {children}

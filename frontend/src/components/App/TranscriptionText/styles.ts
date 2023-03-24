@@ -9,13 +9,13 @@
 
 import { space } from '@/ui/helpers';
 import { scrolllbarStyle } from '@/ui/Scrollbar';
-import { BORDER_RADIUS, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { BORDER_RADIUS, COLOR_NEUTRO_500, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledTextContainer = styled.div`
   max-width: var(--max-width);
   position: absolute;
-  z-index: 50;
+  z-index: 40;
 
   & > div {
     color: white;
@@ -26,11 +26,13 @@ const StyledTextContainer = styled.div`
 `;
 
 const StyledTranscribedHistory = styled.div`
-  padding: ${space(3)};
   width: 100%;
   height: 100%;
   overflow-y: auto;
   color: ${COLOR_NEUTRO_700};
+  border: 1px solid ${COLOR_NEUTRO_500};
+  border-radius: ${BORDER_RADIUS};
+  padding-inline: 0.5rem;
 
   ${scrolllbarStyle};
 

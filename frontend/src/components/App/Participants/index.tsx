@@ -29,7 +29,10 @@ import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { useModals } from '@/contexts/ModalsContext';
 import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
-import Switch from '@/components/Common/Fields/Switch';
+
+import Conference from '@/jitsi/Conference';
+import { LOCALES } from '@/lib/locales';
+import TranslateSelector from '../TranslateSelector';
 
 const initialParticipant: Participant = {
   id: '',
@@ -67,7 +70,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data, getPassword } = useStooa();
+  const { data, getPassword, setIsTranscriptionEnabled, isTranscriptionEnabled } = useStooa();
 
   const { showOnBoardingTour } = useModals();
 
@@ -108,6 +111,12 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
     if (a.isModerator) return -1;
     if (b.isModerator) return 1;
     return 0;
+  };
+
+  const handleEnableTranscription = () => {
+    Conference.startTranscriptionEvent();
+    Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
+    setIsTranscriptionEnabled(true);
   };
 
   useEffect(() => {
@@ -215,14 +224,10 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
         </div>
         <div className="transcription-wrapper">
           <h3 className="body-md medium">Transcriptions</h3>
-          <div>
-            <Switch
-              tooltipText="translate what people is saying!"
-              label="Translate"
-              name="translate"
-            />
-            <span>Language</span>
-          </div>
+          <TranslateSelector />
+          {!isTranscriptionEnabled && (
+            <button onClick={handleEnableTranscription}>Enable transcription!</button>
+          )}
           <TranscriptionHistory />
         </div>
       </ParticipantsDrawer>
