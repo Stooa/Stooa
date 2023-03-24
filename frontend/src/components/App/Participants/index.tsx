@@ -28,6 +28,7 @@ import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { useModals } from '@/contexts/ModalsContext';
+import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
 
 const initialParticipant: Participant = {
   id: '',
@@ -183,34 +184,40 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
             <Cross />
           </Icon>
         </div>
-        {speakingParticipants.length > 0 && (
-          <div className="participant-list participant-list--speaking">
-            <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
-            <ul>
-              {speakingParticipants.map((participant, i) => (
-                <ParticipantCard
-                  participant={participant}
-                  key={`participant-speaking-${i}`}
-                  speaker={true}
-                />
-              ))}
-            </ul>
-          </div>
-        )}
-        {roomParticipants.length > 0 && (
-          <div className="participant-list">
-            <h3 className="body-xs medium caps">
-              <span>{t('fishbowl:participants.attendees')}</span>
-              <MicMuted className="icon-small" />
-              <VideoMuted className="icon-small" />
-            </h3>
-            <ul>
-              {roomParticipants.map((participant, i) => (
-                <ParticipantCard participant={participant} key={`participant-room-${i}`} />
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className='participants-wrapper'>
+          {speakingParticipants.length > 0 && (
+            <div className="participant-list participant-list--speaking">
+              <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
+              <ul>
+                {speakingParticipants.map((participant, i) => (
+                  <ParticipantCard
+                    participant={participant}
+                    key={`participant-speaking-${i}`}
+                    speaker={true}
+                  />
+                ))}
+              </ul>
+            </div>
+          )}
+          {roomParticipants.length > 0 && (
+            <div className="participant-list">
+              <h3 className="body-xs medium caps">
+                <span>{t('fishbowl:participants.attendees')}</span>
+                <MicMuted className="icon-small" />
+                <VideoMuted className="icon-small" />
+              </h3>
+              <ul>
+                {roomParticipants.map((participant, i) => (
+                  <ParticipantCard participant={participant} key={`participant-room-${i}`} />
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+        <div className="transcription-wrapper">
+          <h3 className="body-md medium">Transcriptions</h3>
+          <TranscriptionHistory />
+        </div>
       </ParticipantsDrawer>
     </>
   );
