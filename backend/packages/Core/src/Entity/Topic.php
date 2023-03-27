@@ -34,6 +34,11 @@ class Topic
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string')]
+    private ?string $translationId = null;
+
     public function getId(): ?UuidInterface
     {
         return $this->id;
@@ -54,6 +59,18 @@ class Topic
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTranslationId(): ?string
+    {
+        return $this->translationId;
+    }
+
+    public function setTranslationId(?string $translationId): self
+    {
+        $this->translationId = $translationId;
 
         return $this;
     }
