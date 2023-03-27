@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { useStooa } from '@/contexts/StooaManager';
 import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { TranscriptionMessageType } from '@/types/transcriptions';
@@ -15,10 +16,15 @@ import { StyledTranscribedHistory } from './styles';
 
 export const TranscriptionHistory = () => {
   const [messageHistory, setMessageHistory] = useState<TranscriptionMessageType[]>([]);
+  const { isTranslationEnabled } = useStooa();
 
   const historyRef = useRef<HTMLDivElement>(null);
 
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
+    if (isTranslationEnabled && data.type !== 'translation-result') {
+      return;
+    }
+
     if (!data.is_interim) {
       const messageToStore = {
         messageId: data.message_id,
@@ -26,8 +32,8 @@ export const TranscriptionHistory = () => {
         userName: data.participant.identity_name
           ? data.participant.identity_name
           : data.participant.name,
-        confidence: data.transcript[0].confidence,
-        text: data.transcript[0].text
+        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
+        text: isTranslationEnabled ? data.text : data.transcript[0].text
       };
 
       setMessageHistory(current => [...current, messageToStore]);

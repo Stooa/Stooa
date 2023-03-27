@@ -11,6 +11,7 @@ import styled from 'styled-components';
 
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import {
+  BORDER_RADIUS,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
@@ -26,7 +27,6 @@ import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
   bottom: 0;
-  /* height: calc(100% - ${space(14)}); */
   overflow-y: auto;
   padding: ${space(3)} 0;
   position: fixed;
@@ -43,7 +43,7 @@ const ParticipantsDrawer = styled.div`
   }
 
   & .participants-wrapper {
-    height: 65%;
+    height: 55%;
   }
 
   ${StyledButtonContext} {
@@ -108,7 +108,23 @@ const ParticipantsDrawer = styled.div`
   }
 
   & .transcription-wrapper {
-    height: 35%;
+    position: relative;
+    height: 30%;
+
+    & .enable-button {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: ${space(0.5)} ${space(1)};
+      background-color: transparent;
+      transition: background-color 0.3s ease-out;
+      border-radius: ${BORDER_RADIUS};
+
+      &:hover {
+        background-color: ${COLOR_NEUTRO_300};
+      }
+    }
   }
 `;
 

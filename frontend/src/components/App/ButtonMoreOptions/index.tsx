@@ -37,6 +37,7 @@ import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
 import Conference from '@/jitsi/Conference';
+import { LOCALES } from '@/lib/locales';
 
 interface Props {
   unlabeled?: boolean;
@@ -80,13 +81,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
   const { t } = useTranslation('fishbowl');
 
-  const locales = {
-    es: 'es-ES',
-    ca: 'es-CA',
-    en: 'en-US',
-    fr: 'fr-FR'
-  };
-
   const handleAudioInput = (event: React.MouseEvent) => {
     const { value } = event.target as HTMLButtonElement;
     selectAudioInputDevice(value);
@@ -128,7 +122,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       setIsTranscriptionEnabled(false);
     } else {
       Conference.startTranscriptionEvent();
-      Conference.changeTranscriptionLanguage(locales[data.locale]);
+      Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
       setIsTranscriptionEnabled(true);
     }
   };
