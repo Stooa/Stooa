@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "410afee47e1e3f5ea167b04230f58c43",
+    "content-hash": "f7c5734f6705de72b670c6205191ed54",
     "packages": [
         {
             "name": "api-platform/core",
-            "version": "v3.1.5",
+            "version": "v3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "3b1d2018a525dda4f7944c8b33239ea8469f093d"
+                "reference": "a7f4e0bab83640c1e7bc17eb40c18a9729770554"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/3b1d2018a525dda4f7944c8b33239ea8469f093d",
-                "reference": "3b1d2018a525dda4f7944c8b33239ea8469f093d",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/a7f4e0bab83640c1e7bc17eb40c18a9729770554",
+                "reference": "a7f4e0bab83640c1e7bc17eb40c18a9729770554",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +166,7 @@
             ],
             "support": {
                 "issues": "https://github.com/api-platform/core/issues",
-                "source": "https://github.com/api-platform/core/tree/v3.1.5"
+                "source": "https://github.com/api-platform/core/tree/v3.1.6"
             },
             "funding": [
                 {
@@ -174,7 +174,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-20T10:14:24+00:00"
+            "time": "2023-03-24T16:45:10+00:00"
         },
         {
             "name": "async-aws/core",
