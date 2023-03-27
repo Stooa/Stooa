@@ -226,7 +226,9 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
           <h3 className="body-md medium">Transcriptions</h3>
           <TranslateSelector />
           {!isTranscriptionEnabled && (
-            <button onClick={handleEnableTranscription}>Enable transcription!</button>
+            <button className="enable-button" onClick={handleEnableTranscription}>
+              Enable transcription!
+            </button>
           )}
           <TranscriptionHistory />
         </div>

@@ -21,6 +21,10 @@ export const TranscriptionHistory = () => {
   const historyRef = useRef<HTMLDivElement>(null);
 
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
+    if (isTranslationEnabled && data.type !== 'translation-result') {
+      return;
+    }
+
     if (!data.is_interim) {
       const messageToStore = {
         messageId: data.message_id,

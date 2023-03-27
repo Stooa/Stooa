@@ -30,7 +30,7 @@ const TranscriptionWrapper = () => {
         [data.message_id]: {
           userId: data.participant.id,
           userName: data.participant.identity_name,
-          ...(!isTranslationEnabled && { confidence: data.transcript[0].confidence }),
+          confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
           text: isTranslationEnabled ? data.text : data.transcript[0].text
         }
       };

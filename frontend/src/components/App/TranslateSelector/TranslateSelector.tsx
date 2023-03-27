@@ -19,7 +19,14 @@ const TranslateSelector = () => {
   const { locale } = useRouter();
 
   const handleOnChange = () => {
-    setIsTranslationEnabled(current => !current);
+    if (isTranslationEnabled) {
+      console.log('======> STOP TRANSLATING!');
+      setIsTranslationEnabled(false);
+      Conference.stopTranslation();
+      return;
+    }
+
+    setIsTranslationEnabled(true);
     Conference.setTranslationLanguage(LOCALES[locale as string]);
   };
 

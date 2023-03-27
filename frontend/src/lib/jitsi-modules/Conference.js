@@ -420,6 +420,10 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('translation_language', language);
   };
 
+  const stopTranslation = () => {
+    conference.setLocalParticipantProperty('translation_language', null);
+  };
+
   const startScreenShareEvent = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
@@ -560,7 +564,8 @@ const conferenceRepository = () => {
     startTranscriptionEvent,
     stopTranscriptionEvent,
     changeTranscriptionLanguage,
-    setTranslationLanguage
+    setTranslationLanguage,
+    stopTranslation
   };
 };
 
