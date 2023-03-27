@@ -223,13 +223,15 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
           )}
         </div>
         <div className="transcription-wrapper">
-          <h3 className="body-md medium">Transcriptions</h3>
+          <div className="transcription__header ">
+            <h3 className="body-md medium">Transcriptions</h3>
+            {!isTranscriptionEnabled && (
+              <button className="enable-button body-md" onClick={handleEnableTranscription}>
+                Enable transcription!
+              </button>
+            )}
+          </div>
           <TranslateSelector />
-          {!isTranscriptionEnabled && (
-            <button className="enable-button" onClick={handleEnableTranscription}>
-              Enable transcription!
-            </button>
-          )}
           <TranscriptionHistory />
         </div>
       </ParticipantsDrawer>

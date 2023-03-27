@@ -112,10 +112,6 @@ const ParticipantsDrawer = styled.div`
     height: 30%;
 
     & .enable-button {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translateX(-50%);
       padding: ${space(0.5)} ${space(1)};
       background-color: transparent;
       transition: background-color 0.3s ease-out;
@@ -124,6 +120,12 @@ const ParticipantsDrawer = styled.div`
       &:hover {
         background-color: ${COLOR_NEUTRO_300};
       }
+    }
+
+    & .transcription__header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
   }
 `;
