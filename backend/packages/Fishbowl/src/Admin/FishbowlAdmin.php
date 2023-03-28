@@ -141,6 +141,7 @@ class FishbowlAdmin extends AbstractAdmin
                 ->add('hasIntroduction', BooleanType::class, [
                     'transform' => true,
                 ])
+                ->add('topics')
             ->end()
             ->with('Disabled')
                 ->add('currentStatus', ChoiceType::class, [

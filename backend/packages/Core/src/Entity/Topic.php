@@ -18,11 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[UniqueEntity(fields: ['translationId'])]
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
 class Topic implements \Stringable
 {
