@@ -92,6 +92,13 @@ const StooaProvider = ({
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
   const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(useGaveFeedback);
   const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
+  const [participantsActive, setParticipantsActive] = useState(() => {
+    console.table({ isModerator, isnow: data.isFishbowlNow });
+    if (isModerator && data.isFishbowlNow) {
+      return true;
+    }
+    return false;
+  });
 
   const { t, lang } = useTranslation('app');
 
@@ -442,7 +449,9 @@ const StooaProvider = ({
         isTranscriptionEnabled,
         setIsTranscriptionEnabled,
         isTranslationEnabled,
-        setIsTranslationEnabled
+        setIsTranslationEnabled,
+        participantsActive,
+        setParticipantsActive
       }}
     >
       {children}

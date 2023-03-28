@@ -76,7 +76,8 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     feedbackAlert,
     gaveFeedback,
     isTranscriptionEnabled,
-    setIsTranscriptionEnabled
+    setIsTranscriptionEnabled,
+    setParticipantsActive
   } = useStooa();
 
   const { t } = useTranslation('fishbowl');
@@ -123,6 +124,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     } else {
       Conference.startTranscriptionEvent();
       Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
+      setParticipantsActive(true);
       setIsTranscriptionEnabled(true);
     }
   };

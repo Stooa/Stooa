@@ -53,15 +53,12 @@ const initialParticipant: Participant = {
 interface Props {
   initialized: boolean;
   fid: string;
-  toggleParticipants: () => void;
-  opened: boolean;
 }
 
 const PING_TIMEOUT = 3500;
 
-const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, opened }) => {
+const Participants: React.FC<Props> = ({ initialized, fid }) => {
   const { t, lang } = useTranslation('fishbowl');
-  const [active, setActive] = useState(opened);
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
   const [participants, setParticipants] = useState<Participant[]>([initialParticipant]);
@@ -70,7 +67,14 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data, getPassword, setIsTranscriptionEnabled, isTranscriptionEnabled } = useStooa();
+  const {
+    data,
+    getPassword,
+    setIsTranscriptionEnabled,
+    isTranscriptionEnabled,
+    participantsActive,
+    setParticipantsActive
+  } = useStooa();
 
   const { showOnBoardingTour } = useModals();
 
@@ -98,13 +102,12 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
 
   const toggleDrawer = () => {
     pushEventDataLayer({
-      action: active ? 'Participants close' : 'Participants open',
+      action: participantsActive ? 'Participants close' : 'Participants open',
       category: 'Header',
       label: window.location.href
     });
 
-    setActive(!active);
-    toggleParticipants();
+    setParticipantsActive(current => !current);
   };
 
   const sortHost = (a: Participant, b: Participant) => {
@@ -157,8 +160,7 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
 
   useEffect(() => {
     if (showOnBoardingTour) {
-      setActive(false);
-      if (active) toggleParticipants();
+      setParticipantsActive(false);
     }
   }, [showOnBoardingTour]);
 
@@ -167,18 +169,18 @@ const Participants: React.FC<Props> = ({ initialized, fid, toggleParticipants, o
       <ParticipantsToggle
         id="participant-toggle"
         as="button"
-        className={`participant-toggle ${active ? 'active' : ''} `}
+        className={`participant-toggle ${participantsActive ? 'active' : ''} `}
         onClick={toggleDrawer}
       >
         <Curve className="curve" />
-        {active && <ChevronRight className="toggle-icon" />}
-        {!active && <ChevronLeft className="toggle-icon" />}
+        {participantsActive && <ChevronRight className="toggle-icon" />}
+        {!participantsActive && <ChevronLeft className="toggle-icon" />}
         <People />
         <span className="body-xs medium">
           {participants.length === 0 ? 1 : participants.length}
         </span>
       </ParticipantsToggle>
-      <ParticipantsDrawer className={active ? 'active' : ''}>
+      <ParticipantsDrawer className={participantsActive ? 'active' : ''}>
         <div className="header">
           <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
           <ButtonCopyUrl

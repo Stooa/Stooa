@@ -42,4 +42,6 @@ export interface StooaContextValues {
   setIsTranscriptionEnabled: Dispatch<SetStateAction<boolean>>;
   isTranslationEnabled: boolean;
   setIsTranslationEnabled: Dispatch<SetStateAction<boolean>>;
+  participantsActive: boolean;
+  setParticipantsActive: Dispatch<SetStateAction<boolean>>;
 }
