@@ -18,10 +18,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[UniqueEntity(fields: ['translationId'])]
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
-class Topic
+class Topic implements \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -34,10 +37,17 @@ class Topic
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', unique: true)]
     private ?string $translationId = null;
+
+    public function __toString(): string
+    {
+        $uid = $this->getId();
+        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
+
+        return ($this->getName() ?? '') . $stringUid;
+    }
 
     public function getId(): ?UuidInterface
     {
@@ -71,6 +81,16 @@ class Topic
     public function setTranslationId(?string $translationId): self
     {
         $this->translationId = $translationId;
+
+        return $this;
+    }
+
+    public function generateTranslationId(): self
+    {
+        if (null !== $this->name) {
+            $slugger = new AsciiSlugger();
+            $this->translationId = $slugger->slug($this->name, '_')->toString();
+        }
 
         return $this;
     }
