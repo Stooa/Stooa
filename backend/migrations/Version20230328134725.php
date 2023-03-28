@@ -19,7 +19,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230327162842 extends AbstractMigration
+final class Version20230328134725 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -30,7 +30,7 @@ final class Version20230327162842 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE fishbowl_topics (fishbowl_id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', topic_id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_7287FD0B72BD0E36 (fishbowl_id), INDEX IDX_7287FD0B1F55203D (topic_id), PRIMARY KEY(fishbowl_id, topic_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE topic (id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, translation_id VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE topic (id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, translation_id VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_9D40DE1B9CAA2B25 (translation_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE users_topics (user_id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', topic_id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_9E11C8A9A76ED395 (user_id), INDEX IDX_9E11C8A91F55203D (topic_id), PRIMARY KEY(user_id, topic_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE fishbowl_topics ADD CONSTRAINT FK_7287FD0B72BD0E36 FOREIGN KEY (fishbowl_id) REFERENCES fishbowl (id)');
         $this->addSql('ALTER TABLE fishbowl_topics ADD CONSTRAINT FK_7287FD0B1F55203D FOREIGN KEY (topic_id) REFERENCES topic (id)');
