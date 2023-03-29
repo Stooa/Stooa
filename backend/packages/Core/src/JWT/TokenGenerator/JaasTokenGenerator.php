@@ -25,6 +25,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
     public function __construct(
         private readonly string $appId,
         private readonly string $apiKey,
+        private readonly bool $transcriptionEnabled,
         private readonly HostValidator $hostValidator
     ) {
     }
@@ -36,7 +37,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         return new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),
             new HeaderPayload($this->apiKey, 'RS256', 'JWT'),
-            new FeaturesPayload(false, false, true, false, false)
+            new FeaturesPayload(false, false, $this->transcriptionEnabled, false, false)
         );
     }
 }
