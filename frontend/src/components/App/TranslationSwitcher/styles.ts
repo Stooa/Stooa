@@ -15,7 +15,6 @@ const Languages = styled.div`
   display: inline-block;
   padding: ${space()} 0;
   position: relative;
-  max-width: 20ch;
 
   &[aria-disabled='true'] {
     opacity: 0.5;

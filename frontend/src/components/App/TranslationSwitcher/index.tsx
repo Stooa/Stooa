@@ -7,9 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export const LOCALES = {
-  es: 'es-ES',
-  ca: 'es-CA',
-  en: 'en-US',
-  fr: 'fr-FR'
-};
+export * from './TranslationSwitcher';
+export { default } from './TranslationSwitcher';

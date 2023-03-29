@@ -7,20 +7,19 @@
  * file that was distributed with this source code.
  */
 
-import LanguageSwitcher from '@/components/Common/LanguageSwitcher';
 import { useStooa } from '@/contexts/StooaManager';
 import Conference from '@/jitsi/Conference';
-import { LOCALES } from '@/lib/locales';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import { useRouter } from 'next/router';
+import TranslationSwitcher from '../TranslationSwitcher';
 import { StyledTranslate } from './styles';
 
 const TranslateSelector = () => {
-  const { isTranslationEnabled, setIsTranslationEnabled } = useStooa();
+  const { isTranslationEnabled, setIsTranslationEnabled, isTranscriptionEnabled } = useStooa();
   const { locale } = useRouter();
 
   const handleOnChange = () => {
     if (isTranslationEnabled) {
-      console.log('======> STOP TRANSLATING!');
       setIsTranslationEnabled(false);
       Conference.stopTranslation();
       return;
@@ -31,14 +30,24 @@ const TranslateSelector = () => {
   };
 
   const handleChangedLanguage = (locale: string): void => {
-    Conference.setTranslationLanguage(LOCALES[locale]);
+    Conference.setTranslationLanguage(locale);
   };
 
   return (
     <StyledTranslate>
-      <input type="checkbox" onChange={handleOnChange} checked={isTranslationEnabled} />
-      <span>Traducir</span>
-      <LanguageSwitcher disabled={!isTranslationEnabled} changedLanguage={handleChangedLanguage} />
+      <div className={isTranscriptionEnabled ? '' : 'disabled'}>
+        <input
+          disabled={!isTranscriptionEnabled}
+          type="checkbox"
+          onChange={handleOnChange}
+          checked={isTranslationEnabled}
+        />
+        <span>Traducir</span>
+      </div>
+      <TranslationSwitcher
+        disabled={!isTranslationEnabled}
+        changedLanguage={handleChangedLanguage}
+      />
     </StyledTranslate>
   );
 };

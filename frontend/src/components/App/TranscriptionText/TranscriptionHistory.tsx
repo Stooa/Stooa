@@ -16,11 +16,15 @@ import { StyledTranscribedHistory } from './styles';
 
 export const TranscriptionHistory = () => {
   const [messageHistory, setMessageHistory] = useState<TranscriptionMessageType[]>([]);
-  const { isTranslationEnabled } = useStooa();
+  const { isTranslationEnabled, isTranscriptionEnabled } = useStooa();
 
   const historyRef = useRef<HTMLDivElement>(null);
 
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
+    if (!isTranscriptionEnabled) {
+      return;
+    }
+
     if (isTranslationEnabled && data.type !== 'translation-result') {
       return;
     }
@@ -29,9 +33,7 @@ export const TranscriptionHistory = () => {
       const messageToStore = {
         messageId: data.message_id,
         userId: data.participant.id,
-        userName: data.participant.identity_name
-          ? data.participant.identity_name
-          : data.participant.name,
+        userName: data.participant.name,
         confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
         text: isTranslationEnabled ? data.text : data.transcript[0].text
       };

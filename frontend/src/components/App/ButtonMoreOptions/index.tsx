@@ -37,7 +37,7 @@ import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
 import Conference from '@/jitsi/Conference';
-import { LOCALES } from '@/lib/locales';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 
 interface Props {
   unlabeled?: boolean;

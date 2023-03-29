@@ -31,8 +31,8 @@ import { useModals } from '@/contexts/ModalsContext';
 import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
 
 import Conference from '@/jitsi/Conference';
-import { LOCALES } from '@/lib/locales';
 import TranslateSelector from '../TranslateSelector';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 
 const initialParticipant: Participant = {
   id: '',

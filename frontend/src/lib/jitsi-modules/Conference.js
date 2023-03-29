@@ -404,18 +404,10 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('requestingTranscription', false);
   };
 
-  /**
-   *
-   * @param {'es-ES' | 'en-US' | 'es-CA' | 'fr-FR'} language Language of the transcriber
-   */
   const changeTranscriptionLanguage = language => {
     conference.setLocalParticipantProperty('transcription_language', language);
   };
 
-  /**
-   *
-   * @param {'es-ES' | 'en-US' | 'es-CA' | 'fr-FR'} language Language to translate to
-   */
   const setTranslationLanguage = language => {
     conference.setLocalParticipantProperty('translation_language', language);
   };

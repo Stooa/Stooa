@@ -11,7 +11,15 @@ import { space } from '@/ui/helpers';
 import styled from 'styled-components';
 
 const StyledTranslate = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${space(1)};
   margin-bottom: ${space(0.5)};
+
+  & div.disabled {
+    opacity: 0.5;
+  }
+
   & span {
     margin-right: ${space(1)};
   }

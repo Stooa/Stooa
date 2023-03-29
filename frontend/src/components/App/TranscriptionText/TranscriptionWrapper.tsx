@@ -17,9 +17,13 @@ import { TranscriptedText } from './TranscriptedText';
 const TranscriptionWrapper = () => {
   const [textToShow, setTextToShow] = useState({});
   const [messagesReceived, setMessagesReceived] = useState({});
-  const { isTranslationEnabled } = useStooa();
+  const { isTranslationEnabled, isTranscriptionEnabled } = useStooa();
 
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
+    if (!isTranscriptionEnabled) {
+      return;
+    }
+
     if (isTranslationEnabled && data.type !== 'translation-result') {
       return;
     }
@@ -29,7 +33,7 @@ const TranscriptionWrapper = () => {
       messageToPush = {
         [data.message_id]: {
           userId: data.participant.id,
-          userName: data.participant.identity_name,
+          userName: data.participant.name,
           confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
           text: isTranslationEnabled ? data.text : data.transcript[0].text
         }
