@@ -224,18 +224,20 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
             </div>
           )}
         </div>
-        <div className="transcription-wrapper">
-          <div className="transcription__header ">
-            <h3 className="body-md medium">Transcriptions</h3>
-            {!isTranscriptionEnabled && (
-              <button className="enable-button body-md" onClick={handleEnableTranscription}>
-                Enable transcription!
-              </button>
-            )}
+        {process.env.NEXT_PUBLIC_TRANSCRIPTIONS_ENABLED === 'true' && (
+          <div className="transcription-wrapper">
+            <div className="transcription__header ">
+              <h3 className="body-md medium">Transcriptions</h3>
+              {!isTranscriptionEnabled && (
+                <button className="enable-button body-md" onClick={handleEnableTranscription}>
+                  Enable transcription!
+                </button>
+              )}
+            </div>
+            <TranslateSelector />
+            <TranscriptionHistory />
           </div>
-          <TranslateSelector />
-          <TranscriptionHistory />
-        </div>
+        )}
       </ParticipantsDrawer>
     </>
   );

@@ -184,7 +184,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                 </button>
               )}
 
-              {!prejoin && (
+              {!prejoin && process.env.NEXT_PUBLIC_TRANSCRIPTIONS_ENABLED === 'true' && (
                 <button
                   disabled={gaveFeedback}
                   data-testid="transcription-button"
