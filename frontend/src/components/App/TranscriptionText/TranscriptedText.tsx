@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { useStooa } from '@/contexts/StooaManager';
 import { useWindowSize } from '@/hooks/useWIndowSize';
 import { TranscriptionMessageType } from '@/types/transcriptions';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -14,20 +15,21 @@ import { StyledTextContainer } from './styles';
 
 interface Props {
   messageData: TranscriptionMessageType;
-  messageId: string;
+  userId: string;
 }
 
-export const TranscriptedText = ({ messageData, messageId }: Props) => {
+export const TranscriptedText = ({ messageData, userId }: Props) => {
   const [maxWidth, setMaxWidth] = useState(100);
   const textRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
+  const { participantsActive } = useStooa();
 
   const calculateSeatWidth = useCallback((): number => {
     const seatHTML = document.querySelector('.seat');
     const seatPosition = seatHTML?.getBoundingClientRect();
     if (seatPosition?.width) return seatPosition?.width - 120;
     return 0;
-  }, [width]);
+  }, [width, participantsActive]);
 
   const positionTranscriptMessageReceived = (id: string) => {
     const seatHTML = document.querySelector(`.seat[data-id="${id}"]`);
@@ -44,16 +46,16 @@ export const TranscriptedText = ({ messageData, messageId }: Props) => {
   }, [calculateSeatWidth]);
 
   useEffect(() => {
-    positionTranscriptMessageReceived(messageData.userId);
+    positionTranscriptMessageReceived(userId);
   }, []);
 
   return (
     <StyledTextContainer
-      key={messageId}
+      key={userId}
       style={{ '--max-width': maxWidth + 'px' } as React.CSSProperties}
       ref={textRef}
     >
-      {messageData && <div>{messageData.text}</div>}
+      {messageData && <div dangerouslySetInnerHTML={{ __html: messageData.text }}></div>}
     </StyledTextContainer>
   );
 };

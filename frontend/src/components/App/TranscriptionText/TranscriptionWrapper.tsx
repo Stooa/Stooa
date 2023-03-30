@@ -29,6 +29,7 @@ const TranscriptionWrapper = () => {
     }
 
     let messageToPush = {};
+
     if (!messagesReceived.hasOwnProperty(data.message_id)) {
       messageToPush = {
         [data.message_id]: {
@@ -57,7 +58,14 @@ const TranscriptionWrapper = () => {
       setMessagesReceived({ ...messagesReceived, ...messageToPush });
     }
 
-    setTextToShow(messageToPush);
+    const messageToShow = {
+      [data.participant.id]: {
+        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
+        text: isTranslationEnabled ? data.text : data.transcript[0].text
+      }
+    };
+
+    setTextToShow(currentMessages => ({ ...currentMessages, ...messageToShow }));
   });
 
   const sentText = useDebounce<object>(textToShow, 3000);
@@ -70,14 +78,8 @@ const TranscriptionWrapper = () => {
 
   return (
     <>
-      {Object.keys(textToShow).map(messageId => {
-        return (
-          <TranscriptedText
-            key={messageId}
-            messageId={messageId}
-            messageData={textToShow[messageId]}
-          />
-        );
+      {Object.keys(textToShow).map(userId => {
+        return <TranscriptedText key={userId} userId={userId} messageData={textToShow[userId]} />;
       })}
     </>
   );

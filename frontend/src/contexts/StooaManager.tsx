@@ -58,6 +58,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import SharedTrack from '@/jitsi/SharedTrack';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -229,6 +230,7 @@ const StooaProvider = ({
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);
+    Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
 
     if (!isModerator) return;
 

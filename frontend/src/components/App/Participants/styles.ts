@@ -108,8 +108,10 @@ const ParticipantsDrawer = styled.div`
   }
 
   & .transcription-wrapper {
+    display: flex;
+    flex-direction: column;
     position: relative;
-    height: 30%;
+    height: 37%;
 
     & .enable-button {
       padding: ${space(0.5)} ${space(1)};

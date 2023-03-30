@@ -35,7 +35,7 @@ export const TranscriptionHistory = () => {
         userId: data.participant.id,
         userName: data.participant.name,
         confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
-        text: isTranslationEnabled ? data.text : data.transcript[0].text
+        text: decodeURIComponent(isTranslationEnabled ? data.text : data.transcript[0].text)
       };
 
       setMessageHistory(current => [...current, messageToStore]);
@@ -56,7 +56,7 @@ export const TranscriptionHistory = () => {
           return (
             <div className="message" key={message.messageId}>
               <h4>{message.userName}: </h4>
-              <p>{message.text}</p>
+              <p dangerouslySetInnerHTML={{ __html: message.text }}></p>
             </div>
           );
         })}
