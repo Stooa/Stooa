@@ -44,6 +44,7 @@ const TranscriptionWrapper = () => {
 
     if (
       (messagesReceived[data.message_id] &&
+        data.transcript &&
         data.transcript[0]?.confidence >= messagesReceived[data.message_id].confidence) ||
       !data.is_interim
     ) {
