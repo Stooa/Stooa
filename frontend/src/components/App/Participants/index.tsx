@@ -116,10 +116,15 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     return 0;
   };
 
-  const handleEnableTranscription = () => {
-    Conference.startTranscriptionEvent();
-    Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
-    setIsTranscriptionEnabled(true);
+  const handleToggleTranscriptions = () => {
+    if (!isTranscriptionEnabled) {
+      Conference.startTranscriptionEvent();
+      Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
+      setIsTranscriptionEnabled(true);
+    } else {
+      Conference.stopTranscriptionEvent();
+      setIsTranscriptionEnabled(false);
+    }
   };
 
   useEffect(() => {
@@ -228,12 +233,12 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
           <div className="transcription-wrapper">
             <div className="transcription__header ">
               <h3 className="body-md medium">Transcriptions</h3>
-              {!isTranscriptionEnabled && (
-                <button className="enable-button body-md" onClick={handleEnableTranscription}>
-                  Enable transcription!
-                </button>
-              )}
+
+              <button className="enable-button body-md" onClick={handleToggleTranscriptions}>
+                {!isTranscriptionEnabled ? 'Enable transcriptions' : 'Disable transcriptions'}
+              </button>
             </div>
+
             <TranslateSelector />
             <TranscriptionHistory />
           </div>

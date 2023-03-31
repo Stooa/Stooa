@@ -99,7 +99,7 @@ const ParticipantsDrawer = styled.div`
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      margin-bottom: ${space(2)};
+      margin-bottom: ${space(1)};
 
       svg {
         margin-left: ${space()};
@@ -110,6 +110,7 @@ const ParticipantsDrawer = styled.div`
   & .transcription-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: end;
     position: relative;
     height: 37%;
 

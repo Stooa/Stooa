@@ -49,6 +49,10 @@ export const TranscriptionHistory = () => {
     }
   }, [messageHistory]);
 
+  if (messageHistory.length === 0) {
+    return null;
+  }
+
   return (
     <StyledTranscribedHistory ref={historyRef}>
       <div className="messages">
