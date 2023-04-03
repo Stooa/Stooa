@@ -6,7 +6,7 @@
     "require": {
         "php": "^8.1",
         "ext-apcu": "*",
-        "api-platform/core": "3.1.6",
+        "api-platform/core": "3.1.7",
         "doctrine/annotations": "2.0.1",
         "doctrine/doctrine-bundle": "2.9.0",
         "doctrine/doctrine-fixtures-bundle": "3.4.2",
