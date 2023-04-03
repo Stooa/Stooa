@@ -25,15 +25,16 @@ interface Props {
   decorated?: boolean;
   navigation?: boolean;
   title?: string;
+  children: React.ReactNode;
 }
 
-const Page: React.FC<Props> = ({
+const Page = ({
   children,
   center = true,
   decorated = false,
   navigation = true,
   title = ''
-}) => (
+}: Props) => (
   <>
     <Seo title={title} />
     <Container className={decorated ? 'decorated' : ''}>
