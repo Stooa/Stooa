@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { User } from '@/types/user';
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -28,9 +28,10 @@ interface Props {
   joined: boolean;
   disabled: boolean;
   permissions: boolean;
+  children: React.ReactNode;
 }
 
-const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permissions, children }) => {
+const ButtonJoin = ({ joined, join, leave, disabled, permissions, children }: Props) => {
   const [active, setActive] = useState(true);
   const { setShowModalPermissions } = useDevices();
   const [{ conferenceStatus, isGuest }] = useStateValue();
