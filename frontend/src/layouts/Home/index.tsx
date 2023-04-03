@@ -16,9 +16,10 @@ import { Main, Container, Header as HeaderStyled } from '@/layouts/Home/styles';
 
 interface Props {
   title?: string;
+  children: React.ReactNode;
 }
 
-const Page: React.FC<Props> = ({ children, title = '' }) => {
+const Page = ({ children, title = '' }: Props) => {
   return (
     <>
       <Seo title={title} />

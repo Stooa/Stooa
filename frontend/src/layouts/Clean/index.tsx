@@ -11,7 +11,11 @@ import React from 'react';
 
 import { Container, Main } from '@/layouts/Default/styles';
 
-const Page: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Page = ({ children }: Props) => {
   return (
     <Container>
       <Main center>{children}</Main>
