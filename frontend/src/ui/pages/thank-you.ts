@@ -61,6 +61,11 @@ const ThankYouStyled = styled.div`
     justify-content: center;
     row-gap: ${space(2)};
 
+    & .past-title {
+      margin-bottom: ${space(2)};
+      color: ${COLOR_PURPLE_500};
+    }
+
     ${media.min('tablet')`
       flex-direction: row;
       column-gap: ${space(3)};

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\DataFixtures;
 
+use App\Core\Factory\GuestFactory;
 use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\SonataUserUserFactory;
 use App\Core\Factory\UserFactory;
@@ -41,67 +42,56 @@ class DefaultFixtures extends Fixture
             'roles' => [UserInterface::ROLE_SUPER_ADMIN],
         ]);
 
-        $fishbowl = FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'slug' => 'test-me-fishbowl',
-        ])->object();
-
-        $secondFishbowl = FishbowlFactory::createOne([
-            'startDateTime' => new \DateTime(),
-            'timezone' => 'Europe/Madrid',
-            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
-            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
-            'slug' => 'another-fishbowl',
-        ])->object();
-
-        $user = UserFactory::createOne([
-            'email' => 'user@stooa.com',
-            'password' => self::ADMIN_PASSWORD,
-            'active' => true,
-            'fishbowls' => [$secondFishbowl],
-            'privacyPolicy' => true,
-        ])->object();
-
-        UserFactory::createOne([
+        $host = UserFactory::createOne([
             'email' => 'host@stooa.com',
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
-            'fishbowls' => [$fishbowl],
             'createdAt' => new \DateTime(),
             'privacyPolicy' => true,
-        ]);
-
-        $participant = ParticipantFactory::createOne([
-            'user' => $user,
-            'fishbowl' => $fishbowl,
         ])->object();
 
-        $secondParticipant = ParticipantFactory::createOne([
-            'user' => $user,
-            'fishbowl' => $secondFishbowl,
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime(),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'slug' => 'test-me-fishbowl',
+            'host' => $host,
         ])->object();
 
-        FeedbackFactory::createOne([
-            'fishbowl' => $fishbowl,
-            'participant' => $participant,
-        ]);
+        FishbowlFactory::createOne([
+            'startDateTime' => new \DateTime('+ 1 hour'),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '01:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $host,
+        ])->object();
 
-        FeedbackFactory::createOne([
-            'fishbowl' => $secondFishbowl,
-            'participant' => $participant,
-        ]);
+        UserFactory::createOne([
+            'email' => 'user@stooa.com',
+            'password' => self::ADMIN_PASSWORD,
+            'active' => true,
+            'privacyPolicy' => true,
+        ])->object();
 
-        FeedbackFactory::createOne([
-            'fishbowl' => $fishbowl,
-            'participant' => $secondParticipant,
-        ]);
+        ParticipantFactory::createMany(50, fn () => ['guest' => GuestFactory::createOne()]);
 
-        FeedbackFactory::createOne([
-            'fishbowl' => $secondFishbowl,
-            'participant' => $secondParticipant,
+        ParticipantFactory::createMany(50, fn () => ['user' => UserFactory::createOne()]);
+
+        $yesterday = new \DateTime('- 1 days');
+
+        FishbowlFactory::createMany(50, fn (int $i) => [
+            'startDateTime' => $yesterday->modify("- {$i} minutes"),
+            'timezone' => 'Europe/Madrid',
+            'duration' => \DateTime::createFromFormat('!H:i', '02:00'),
+            'currentStatus' => Fishbowl::STATUS_NOT_STARTED,
+            'host' => $host,
+            'participants' => [
+                ParticipantFactory::createOne(['user' => $host])->object(),
+                ...ParticipantFactory::createMany(random_int(0, 4), fn () => ['user' => UserFactory::createOne()]),
+                ...ParticipantFactory::createMany(random_int(0, 4), fn () => ['guest' => GuestFactory::createOne()]),
+            ],
+            'feedbacks' => FeedbackFactory::createMany(random_int(0, 10), fn () => ['participant' => ParticipantFactory::random()]),
         ]);
     }
 }

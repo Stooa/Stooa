@@ -14,6 +14,8 @@ import { getAuthToken } from '@/user/auth';
 import api from '@/lib/api';
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
 import { Fishbowl } from '@/types/api-platform';
+import { useCallback } from 'react';
+import { SatisfactionData } from '@/types/feedback';
 
 const useFeedback = (fishbowlData: Fishbowl) => {
   const [createFeedbackMutation] = useMutation(CREATE_FEEDBACK);
@@ -102,10 +104,28 @@ const useFeedback = (fishbowlData: Fishbowl) => {
       });
   };
 
+  const summarizeFeedbackSatisfacion = useCallback((): SatisfactionData | null => {
+    if (fishbowlData.feedbacks && fishbowlData.feedbacks.length > 0) {
+      const summarizedFeedback = {
+        neutral: 0,
+        happy: 0,
+        sad: 0
+      };
+
+      fishbowlData.feedbacks.forEach(feedback => {
+        summarizedFeedback[feedback.satisfaction] += 1;
+      });
+
+      return summarizedFeedback;
+    }
+    return null;
+  }, [fishbowlData.feedbacks]);
+
   return {
     createFeedback,
     updateFeedback,
-    getFeedback
+    getFeedback,
+    summarizeFeedbackSatisfacion
   };
 };
 

@@ -18,7 +18,8 @@ import {
   ROUTE_SIGN_IN,
   ROUTE_REGISTER,
   ROUTE_FISHBOWL_CREATE,
-  ROUTE_FISHBOWL_LIST
+  ROUTE_FISHBOWL_FINISHED,
+  ROUTE_FISHBOWL_SCHEDULED
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import Logo from '@/components/Common/Logo';
@@ -45,7 +46,8 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
             <>
               {!createFishbowl &&
                 pathname !== ROUTE_FISHBOWL_CREATE &&
-                pathname !== ROUTE_FISHBOWL_LIST && (
+                pathname !== ROUTE_FISHBOWL_SCHEDULED &&
+                pathname !== ROUTE_FISHBOWL_FINISHED && (
                   <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                     <Button
                       className="hide-mobile"

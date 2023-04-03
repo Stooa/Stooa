@@ -99,9 +99,9 @@ Then('sees the placeholder area', () => {
 });
 
 Then('sees a placeholder with Enter Fishbowl button', () => {
-  cy.get('[data-testid=started-fishbowl-placeholder] button').should('exist');
+  cy.get('[data-testid=started-enter-fishbowl]').should('exist');
 });
 
 Then('clicks on placeholders Enter Fishbowl link', () => {
-  cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
+  cy.get('[data-testid=started-enter-fishbowl]').click({ force: true });
 });
