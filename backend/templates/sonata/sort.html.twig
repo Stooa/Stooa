@@ -1,0 +1,29 @@
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') and object.parent is not null %}
+    {% set count_prev_siblings = countPrevSiblings(object) %}
+    {% set count_next_siblings = countNextSiblings(object) %}
+    {% set enable_top_bottom_buttons = field_description.options.actions.move.enable_top_bottom_buttons ?? true %}
+
+    {% if enable_top_bottom_buttons and count_next_siblings > 1 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'bottom'}) }}" title="{{ 'move_to_bottom'|trans }}">
+            <i class="fa fa-angle-double-down"></i>
+        </a>
+    {% endif %}
+
+    {% if count_next_siblings > 0 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'down'}) }}" title="{{ 'move_down'|trans }}">
+            <i class="fa fa-angle-down"></i>
+        </a>
+    {% endif %}
+
+    {% if count_prev_siblings > 0 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'up'}) }}" title="{{ 'move_up'|trans }}">
+            <i class="fa fa-angle-up"></i>
+        </a>
+    {% endif %}
+
+    {% if enable_top_bottom_buttons and count_prev_siblings > 1 %}
+        <a class="btn btn-sm btn-default" href="{{ admin.generateObjectUrl('move', object, {'position': 'top'}) }}" title="{{ 'move_to_top'|trans }}">
+            <i class="fa fa-angle-double-up"></i>
+        </a>
+    {% endif %}
+{% endif %}

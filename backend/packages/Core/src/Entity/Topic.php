@@ -13,16 +13,20 @@ declare(strict_types=1);
 
 namespace App\Core\Entity;
 
-use App\Core\Repository\TopicRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: TopicRepository::class)]
-class Topic implements \Stringable
+#[Gedmo\Tree(type: 'nested')]
+#[ORM\Entity(repositoryClass: NestedTreeRepository::class)]
+class Topic implements TreeInterface, \Stringable
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -39,12 +43,41 @@ class Topic implements \Stringable
     #[ORM\Column(type: 'string', unique: true)]
     private ?string $translationId = null;
 
+    #[Gedmo\TreeLeft]
+    #[ORM\Column]
+    private ?int $lft = null;
+
+    #[Gedmo\TreeLevel]
+    #[ORM\Column]
+    private ?int $lvl = null;
+
+    #[Gedmo\TreeRight]
+    #[ORM\Column]
+    private ?int $rgt = null;
+
+    #[Gedmo\TreeParent]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(referencedColumnName: 'id', onDelete: 'CASCADE')]
+    private ?self $parent = null;
+
+    #[Gedmo\TreeRoot]
+    #[ORM\ManyToOne(targetEntity: self::class)]
+    #[ORM\JoinColumn(referencedColumnName: 'id', onDelete: 'CASCADE')]
+    private ?self $root = null;
+
+    /** @var Collection<int, Topic> */
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
+    #[ORM\OrderBy(['name' => 'ASC'])]
+    private Collection $children;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
+
     public function __toString(): string
     {
-        $uid = $this->getId();
-        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
-
-        return ($this->getName() ?? '') . $stringUid;
+        return trim(str_repeat('--', $this->lvl ?? 0) . ' ' . $this->name);
     }
 
     public function getId(): ?UuidInterface
@@ -69,6 +102,42 @@ class Topic implements \Stringable
         $this->name = $name;
 
         return $this;
+    }
+
+    public function setParent(self $parent = null): void
+    {
+        $this->parent = $parent;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function getRgt(): ?int
+    {
+        return $this->rgt;
+    }
+
+    public function getLft(): ?int
+    {
+        return $this->lft;
+    }
+
+    public function getLvl(): ?int
+    {
+        return $this->lvl;
+    }
+
+    public function getRoot(): ?self
+    {
+        return $this->root;
+    }
+
+    /** @return Collection<int, Topic> */
+    public function getChildren(): Collection
+    {
+        return $this->children;
     }
 
     public function getTranslationId(): ?string

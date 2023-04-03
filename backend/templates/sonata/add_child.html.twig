@@ -1,0 +1,14 @@
+{% if
+    admin.hasAccess('edit', object)
+    and admin.hasRoute('edit')
+    and (object.menu.maxDepth is null or object.lvl < object.menu.maxDepth)
+%}
+    <a
+        href="{{ admin.generateObjectUrl('create', object, actions.link_parameters|default([])) }}"
+        class="btn btn-sm btn-default delete_link"
+        title="Add Child"
+    >
+        <i class="fas fa-level-down-alt" aria-hidden="true"></i>
+        Add Child
+    </a>
+{% endif %}
