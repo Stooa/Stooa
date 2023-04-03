@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6629198d1d12ab5779c1599c4c3a02ed",
+    "content-hash": "77538d380fb17492be7f259dca27c80b",
     "packages": [
         {
             "name": "api-platform/core",
@@ -12093,16 +12093,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.15.1",
+            "version": "v3.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "d48755372a113bddb99f749e34805d83f3acfe04"
+                "reference": "d40f9436e1c448d309fa995ab9c14c5c7a96f2dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/d48755372a113bddb99f749e34805d83f3acfe04",
-                "reference": "d48755372a113bddb99f749e34805d83f3acfe04",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/d40f9436e1c448d309fa995ab9c14c5c7a96f2dc",
+                "reference": "d40f9436e1c448d309fa995ab9c14c5c7a96f2dc",
                 "shasum": ""
             },
             "require": {
@@ -12177,7 +12177,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.15.1"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.16.0"
             },
             "funding": [
                 {
@@ -12185,7 +12185,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-13T23:26:30+00:00"
+            "time": "2023-04-02T19:30:06+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -14988,16 +14988,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.2.7",
+            "version": "v6.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "680e8a2ea6b3f87aecc07a6a65a203ae573d1902"
+                "reference": "75ed64103df4f6615e15a7fe38b8111099f47416"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/680e8a2ea6b3f87aecc07a6a65a203ae573d1902",
-                "reference": "680e8a2ea6b3f87aecc07a6a65a203ae573d1902",
+                "url": "https://api.github.com/repos/symfony/process/zipball/75ed64103df4f6615e15a7fe38b8111099f47416",
+                "reference": "75ed64103df4f6615e15a7fe38b8111099f47416",
                 "shasum": ""
             },
             "require": {
@@ -15029,7 +15029,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.2.7"
+                "source": "https://github.com/symfony/process/tree/v6.2.8"
             },
             "funding": [
                 {
@@ -15045,7 +15045,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-24T10:42:00+00:00"
+            "time": "2023-03-09T16:20:02+00:00"
         },
         {
             "name": "symfony/web-profiler-bundle",
