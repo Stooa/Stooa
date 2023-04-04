@@ -65,9 +65,7 @@ const ModalShareLink: React.FC = () => {
                 locale={data.locale}
                 isPrivate={data.isPrivate}
                 plainPassword={getPassword()}
-              >
-                {t('common:copyInvitation')}
-              </ButtonCopyUrl>
+              />
             </div>
           </div>
         </Modal>
