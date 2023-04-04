@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab4f88f34fb41cb236aae72d177b419e",
+    "content-hash": "3a2bc9b8196f4cc8e837580433378a94",
     "packages": [
         {
             "name": "api-platform/core",
@@ -5119,16 +5119,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.6.1",
+            "version": "5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "1ceae024b6a273cfd8f5ebeb4e79d23d19b4ecbb"
+                "reference": "7dbd45b6e4a10ad02733d839b9ae5055363b184c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/1ceae024b6a273cfd8f5ebeb4e79d23d19b4ecbb",
-                "reference": "1ceae024b6a273cfd8f5ebeb4e79d23d19b4ecbb",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/7dbd45b6e4a10ad02733d839b9ae5055363b184c",
+                "reference": "7dbd45b6e4a10ad02733d839b9ae5055363b184c",
                 "shasum": ""
             },
             "require": {
@@ -5225,7 +5225,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.6.1"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.6.2"
             },
             "funding": [
                 {
@@ -5245,7 +5245,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-30T21:05:43+00:00"
+            "time": "2023-04-03T14:05:10+00:00"
         },
         {
             "name": "symfony/amazon-mailer",
