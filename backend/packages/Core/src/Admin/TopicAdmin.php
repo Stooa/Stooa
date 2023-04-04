@@ -69,13 +69,12 @@ class TopicAdmin extends AbstractAdmin
 
     protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
     {
-        if (!$query instanceof ProxyQuery) {
-            return $query;
+        if ($query instanceof ProxyQuery) {
+            $query->andWhere($query->getRootAliases()[0] . '.lvl = 0')
+                ->orderBy($query->getRootAliases()[0] . '.lft', 'ASC');
         }
 
-        $query->andWhere($query->getRootAliases()[0] . '.lvl = 0')
-            ->orderBy($query->getRootAliases()[0] . '.lft', 'ASC');
-
+        /* @psalm-suppress LessSpecificReturnStatement */
         return $query;
     }
 

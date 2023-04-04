@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace App\Core\Form\Type;
 
+use App\Core\Entity\Topic;
 use App\Core\Form\ChoiceList\TreeChoiceLoader;
 use Doctrine\ORM\EntityManagerInterface;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
@@ -23,6 +25,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @psalm-suppress MissingTemplateParam */
 class TreeSelectorType extends AbstractType
 {
     protected EntityManagerInterface $entityManager;
@@ -67,6 +70,7 @@ class TreeSelectorType extends AbstractType
         $resolver->setAllowedTypes('map', 'array');
     }
 
+    /** @return array<string, string> */
     public function getChoices(Options $options): array
     {
         if (null === $options['class']) {
@@ -109,8 +113,11 @@ class TreeSelectorType extends AbstractType
         return 'sonata_type_choice_field_mask';
     }
 
+    /** @return array<mixed, mixed> */
     private function getAllRootNodes(Options $options): array
     {
+        /** @var NestedTreeRepository $repository */
+        /* @phpstan-ignore-next-line */
         $repository = $this->entityManager->getRepository($options['class']);
         $rootNodes = $repository->getRootNodes();
 
@@ -124,14 +131,16 @@ class TreeSelectorType extends AbstractType
         return $nodes;
     }
 
-    private function childWalker($node, $currentNode, array &$choices, ?int $max_depth = null, int $level = 1): void
+    /** @param array<mixed, mixed> $choices */
+    private function childWalker(Topic $node, Topic $currentNode, array &$choices, ?int $max_depth = null, int $level = 1): void
     {
         if (null !== $max_depth && $level > $max_depth) {
             return;
         }
 
         foreach ($node->getChildren() as $child) {
-            $childId = $child->getId();
+            $childId = $child->getId()?->toString();
+
             \assert(null !== $childId);
 
             if ($child->getId() === $currentNode->getId()) {
@@ -142,13 +151,13 @@ class TreeSelectorType extends AbstractType
                 continue;
             }
 
-            $choices[$childId] = sprintf('%s %s', str_repeat(' - ', $level), $child->getTitle() ?? '');
+            $choices[$childId] = sprintf('%s %s', str_repeat(' - ', $level), $child->getName() ?? '');
 
             $this->childWalker($child, $currentNode, $choices, $max_depth, $level + 1);
         }
     }
 
-    private function getMaxNestedLevel($node, int $depth = 0): int
+    private function getMaxNestedLevel(Topic $node, int $depth = 0): int
     {
         $maxDepth = $depth;
         foreach ($node->getChildren() as $child) {
