@@ -71,3 +71,5 @@ services:
     App\Core\Admin\TopicAdmin:
         tags:
             - { name: sonata.admin, model_class: App\Core\Entity\Topic, manager_type: orm, label: Topics }
+        calls:
+            - [setTopicService, ['@App\Core\Service\TopicService']]

@@ -16,17 +16,25 @@ namespace App\Core\Admin;
 use App\Core\Action\MoveTreeAction;
 use App\Core\Entity\Topic;
 use App\Core\Form\Type\TreeSelectorType;
-use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use App\Core\Service\TopicService;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 /** @extends AbstractAdmin<Topic> */
 class TopicAdmin extends AbstractAdmin
 {
+    protected ?TopicService $topicService = null;
+
+    public function setTopicService(TopicService $topicService): void
+    {
+        $this->topicService = $topicService;
+    }
+
     public function prePersist($object): void
     {
         $object->generateTranslationId();
@@ -39,13 +47,7 @@ class TopicAdmin extends AbstractAdmin
         bool $allElements = false
     ): void {
         if ('delete' === $actionName) {
-            $repository = $this->getModelManager()->getEntityManager($this->getClass())->getRepository($this->getClass());
-            if ($repository instanceof NestedTreeRepository) {
-                $nodes = $repository->findBy(['id' => $idx]);
-                foreach ($nodes as $node) {
-                    $repository->removeFromTree($node);
-                }
-            }
+            $this->topicService?->removeTopics($idx);
         }
 
         parent::preBatchAction($actionName, $query, $idx, $allElements);
@@ -67,6 +69,10 @@ class TopicAdmin extends AbstractAdmin
 
     protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
     {
+        if (!$query instanceof ProxyQuery) {
+            return $query;
+        }
+
         $query->andWhere($query->getRootAliases()[0] . '.lvl = 0')
             ->orderBy($query->getRootAliases()[0] . '.lft', 'ASC');
 
@@ -121,9 +127,6 @@ class TopicAdmin extends AbstractAdmin
 
     protected function preRemove(object $object): void
     {
-        $repository = $this->getModelManager()->getEntityManager($object)->getRepository(Topic::class);
-        if ($repository instanceof NestedTreeRepository) {
-            $repository->removeFromTree($object);
-        }
+        $this->topicService?->removeFromTree($object);
     }
 }
