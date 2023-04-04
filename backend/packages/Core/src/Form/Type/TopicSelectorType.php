@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /** @psalm-suppress MissingTemplateParam */
-class TreeSelectorType extends AbstractType
+class TopicSelectorType extends AbstractType
 {
     protected EntityManagerInterface $entityManager;
 

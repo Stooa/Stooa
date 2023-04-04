@@ -15,6 +15,8 @@ namespace App\Core\Entity;
 
 interface TreeInterface
 {
+    public function getName(): ?string;
+
     public function getRgt(): ?int;
 
     public function getLft(): ?int;

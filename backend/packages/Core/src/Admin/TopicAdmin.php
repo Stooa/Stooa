@@ -15,7 +15,7 @@ namespace App\Core\Admin;
 
 use App\Core\Action\MoveTreeAction;
 use App\Core\Entity\Topic;
-use App\Core\Form\Type\TreeSelectorType;
+use App\Core\Form\Type\TopicSelectorType;
 use App\Core\Service\TopicService;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -116,7 +116,7 @@ class TopicAdmin extends AbstractAdmin
                 'box_class' => 'box box-solid box-primary',
             ])
                 ->add('name')
-                ->add('parent', TreeSelectorType::class, [
+                ->add('parent', TopicSelectorType::class, [
                     'required' => false,
                     'max_depth' => 0,
                     'subject' => $this->getSubject(),
