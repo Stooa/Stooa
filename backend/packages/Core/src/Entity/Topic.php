@@ -77,7 +77,7 @@ class Topic implements TreeInterface, \Stringable
 
     public function __toString(): string
     {
-        return trim(str_repeat('--', $this->lvl ?? 0) . ' ' . $this->name);
+        return $this->getName() ?? '';
     }
 
     public function getId(): ?UuidInterface
