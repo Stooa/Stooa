@@ -156,7 +156,7 @@ class Topic implements TreeInterface, \Stringable
     {
         if (null !== $this->name) {
             $slugger = new AsciiSlugger();
-            $this->translationId = $slugger->slug($this->name, '_')->toString();
+            $this->translationId = $slugger->slug($this->name, '_')->lower()->toString();
         }
 
         return $this;
