@@ -102,9 +102,6 @@ class TopicAdmin extends AbstractAdmin
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
-                    'move' => [
-                        'template' => 'sonata/sort.html.twig',
-                    ],
                 ],
             ]);
     }
