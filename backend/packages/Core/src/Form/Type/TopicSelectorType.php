@@ -28,11 +28,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @psalm-suppress MissingTemplateParam */
 class TopicSelectorType extends AbstractType
 {
-    protected EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(protected EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options): void
@@ -42,7 +39,7 @@ class TopicSelectorType extends AbstractType
         foreach ($options['map'] as $value => $fieldNames) {
             if (is_iterable($fieldNames)) {
                 foreach ($fieldNames as $fieldName) {
-                    $sanitizedFieldName = str_replace(['__', '.'], ['____', '__'], $fieldName);
+                    $sanitizedFieldName = str_replace(['__', '.'], ['____', '__'], (string) $fieldName);
                     $sanitizedMap[$value][] = $sanitizedFieldName;
                     $allFieldNames[] = $sanitizedFieldName;
                 }

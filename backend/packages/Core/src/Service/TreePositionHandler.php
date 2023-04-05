@@ -18,11 +18,8 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 class TreePositionHandler implements PositionHandlerInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function countNextSiblings(object $entity): int
@@ -61,7 +58,7 @@ class TreePositionHandler implements PositionHandlerInterface
 
     private function getRepository(object $entity): NestedTreeRepository
     {
-        $repository = $this->entityManager->getRepository(\get_class($entity));
+        $repository = $this->entityManager->getRepository($entity::class);
 
         if (!$repository instanceof NestedTreeRepository) {
             throw new \RuntimeException('Repository must be instance of NestedTreeRepository');

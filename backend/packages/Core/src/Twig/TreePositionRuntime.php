@@ -18,11 +18,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class TreePositionRuntime implements RuntimeExtensionInterface
 {
-    private PositionHandlerInterface $positionHandler;
-
-    public function __construct(PositionHandlerInterface $positionHandler)
+    public function __construct(private readonly PositionHandlerInterface $positionHandler)
     {
-        $this->positionHandler = $positionHandler;
     }
 
     public function countNextSiblings(object $entity): int

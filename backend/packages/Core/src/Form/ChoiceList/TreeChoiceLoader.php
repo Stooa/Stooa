@@ -22,13 +22,9 @@ class TreeChoiceLoader implements ChoiceLoaderInterface
     /** The loaded choice list. */
     private ?ArrayChoiceList $choiceList = null;
 
-    /** @var array<string, mixed> */
-    private array $choices;
-
     /** @param array<string, mixed> $choices */
-    public function __construct(array $choices)
+    public function __construct(private readonly array $choices)
     {
-        $this->choices = $choices;
     }
 
     public function loadChoiceList($value = null): ChoiceListInterface
