@@ -45,7 +45,6 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
   const scrollToBottom = () => {
     if (textRef.current) {
       const textElement = textRef.current.querySelector('#transcription-text');
-      console.log(textElement?.getBoundingClientRect().height);
       textRef.current.scrollTo(0, textElement?.getBoundingClientRect().height || 0);
     }
   };

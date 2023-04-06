@@ -207,7 +207,8 @@
         }
     },
     "transcription" : {
-        "titleDisable": "Disable transcription",
-        "titleEnable": "Enable transcription"
+        "disable": "Disable transcription",
+        "enable": "Enable transcription",
+        "loading": "Loading transcription..."
     }
 }

@@ -91,10 +91,10 @@ const StooaProvider = ({
   const [isRecording, setIsRecording] = useState(false);
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
-  const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(useGaveFeedback);
+  const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(false);
+  const [isTranscriptionLoading, setIsTranscriptionLoading] = useState(false);
   const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
   const [participantsActive, setParticipantsActive] = useState(() => {
-    console.table({ isModerator, isnow: data.isFishbowlNow });
     if (isModerator && data.isFishbowlNow) {
       return true;
     }
@@ -453,7 +453,9 @@ const StooaProvider = ({
         isTranslationEnabled,
         setIsTranslationEnabled,
         participantsActive,
-        setParticipantsActive
+        setParticipantsActive,
+        isTranscriptionLoading,
+        setIsTranscriptionLoading
       }}
     >
       {children}

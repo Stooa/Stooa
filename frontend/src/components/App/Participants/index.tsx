@@ -73,7 +73,8 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     setIsTranscriptionEnabled,
     isTranscriptionEnabled,
     participantsActive,
-    setParticipantsActive
+    setParticipantsActive,
+    isTranscriptionLoading
   } = useStooa();
 
   const { showOnBoardingTour } = useModals();
@@ -124,6 +125,17 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     } else {
       Conference.stopTranscriptionEvent();
       setIsTranscriptionEnabled(false);
+    }
+  };
+
+  const getTranscriptionText = () => {
+    if (isTranscriptionLoading) {
+      return t('transcription.loading');
+    }
+    if (isTranscriptionEnabled) {
+      return t('transcription.disable');
+    } else {
+      return t('transcription.enable');
     }
   };
 
@@ -235,7 +247,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
               <h3 className="body-md medium">Transcriptions</h3>
 
               <button className="enable-button body-md" onClick={handleToggleTranscriptions}>
-                {!isTranscriptionEnabled ? 'Enable transcriptions' : 'Disable transcriptions'}
+                {getTranscriptionText()}
               </button>
             </div>
 

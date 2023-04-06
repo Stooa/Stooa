@@ -19,6 +19,44 @@ const TranscriptionWrapper = () => {
   const [messagesReceived, setMessagesReceived] = useState({});
   const { isTranslationEnabled, isTranscriptionEnabled } = useStooa();
 
+  const pushMessage = data => {
+    const messageToPush = {
+      [data.message_id]: {
+        userId: data.participant.id,
+        userName: data.participant.name,
+        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
+        text: isTranslationEnabled ? data.text : data.transcript[0].text
+      }
+    };
+    setMessagesReceived({ ...messagesReceived, ...messageToPush });
+  };
+
+  const showSplittedMessage = data => {
+    const splittedText = data.text.match(/.{1,70}/g);
+    splittedText.forEach((text, index) => {
+      setTimeout(() => {
+        const messageToShow = {
+          [data.participant.id]: {
+            confidence: 0,
+            text
+          }
+        };
+        setTextToShow(currentMessages => ({ ...currentMessages, ...messageToShow }));
+      }, 2000 * index);
+    });
+  };
+
+  const showMessage = data => {
+    const messageToShow = {
+      [data.participant.id]: {
+        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
+        text: isTranslationEnabled ? data.text : data.transcript[0].text
+      }
+    };
+
+    setTextToShow(currentMessages => ({ ...currentMessages, ...messageToShow }));
+  };
+
   useEventListener(TRANSCRIPTION_MESSAGE_RECEIVED, ({ detail: { data } }) => {
     if (!isTranscriptionEnabled) {
       return;
@@ -28,18 +66,8 @@ const TranscriptionWrapper = () => {
       return;
     }
 
-    let messageToPush = {};
-
     if (!messagesReceived.hasOwnProperty(data.message_id)) {
-      messageToPush = {
-        [data.message_id]: {
-          userId: data.participant.id,
-          userName: data.participant.name,
-          confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
-          text: isTranslationEnabled ? data.text : data.transcript[0].text
-        }
-      };
-      setMessagesReceived({ ...messagesReceived, ...messageToPush });
+      pushMessage(data);
     }
 
     if (
@@ -48,25 +76,14 @@ const TranscriptionWrapper = () => {
         data.transcript[0]?.confidence >= messagesReceived[data.message_id].confidence) ||
       !data.is_interim
     ) {
-      messageToPush = {
-        [data.message_id]: {
-          userId: data.participant.id,
-          userName: data.participant.identity_name,
-          ...(!isTranslationEnabled && { confidence: data.transcript[0].confidence }),
-          text: isTranslationEnabled ? data.text : data.transcript[0].text
-        }
-      };
-      setMessagesReceived({ ...messagesReceived, ...messageToPush });
+      pushMessage(data);
     }
 
-    const messageToShow = {
-      [data.participant.id]: {
-        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
-        text: isTranslationEnabled ? data.text : data.transcript[0].text
-      }
-    };
-
-    setTextToShow(currentMessages => ({ ...currentMessages, ...messageToShow }));
+    if (isTranslationEnabled) {
+      showSplittedMessage(data);
+      return;
+    }
+    showMessage(data);
   });
 
   const sentText = useDebounce<object>(textToShow, 3000);
