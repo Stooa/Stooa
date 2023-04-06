@@ -71,7 +71,7 @@ const userRepository = (): UserRepository => {
   const handleUserJoin = (id: string, user: User): void => {
     users.push(user);
 
-    console.log('[STOOA] Handle userRepository join', user);
+    console.log('[STOOA] Handle userRepository join', user, id);
   };
 
   const handleUserLeft = (id: string, user: User): void => {

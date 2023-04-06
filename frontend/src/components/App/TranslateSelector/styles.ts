@@ -15,6 +15,7 @@ const StyledTranslate = styled.div`
   align-items: center;
   gap: ${space(1)};
   margin-bottom: ${space(0.5)};
+  justify-content: space-between;
 
   & div.disabled {
     opacity: 0.5;

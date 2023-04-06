@@ -16,12 +16,18 @@ const StyledTextContainer = styled.div`
   max-width: var(--max-width);
   position: absolute;
   z-index: 40;
+  color: white;
+  background-color: hsla(0, 0%, 0%, 0.5);
+  padding: ${space()} ${space(2)};
+  border-radius: ${BORDER_RADIUS};
 
-  & > div {
-    color: white;
-    background-color: hsla(0, 0%, 0%, 0.5);
-    padding: ${space()} ${space(2)};
-    border-radius: ${BORDER_RADIUS};
+  max-height: 58px;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0 !important;
   }
 `;
 

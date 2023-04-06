@@ -20,6 +20,7 @@ interface Props {
 
 export const TranscriptedText = ({ messageData, userId }: Props) => {
   const [maxWidth, setMaxWidth] = useState(100);
+  const [textToShow, setTextToShow] = useState(messageData.text);
   const textRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const { participantsActive } = useStooa();
@@ -41,6 +42,14 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     }
   };
 
+  const scrollToBottom = () => {
+    if (textRef.current) {
+      const textElement = textRef.current.querySelector('#transcription-text');
+      console.log(textElement?.getBoundingClientRect().height);
+      textRef.current.scrollTo(0, textElement?.getBoundingClientRect().height || 0);
+    }
+  };
+
   useEffect(() => {
     setMaxWidth(calculateSeatWidth());
   }, [calculateSeatWidth]);
@@ -49,13 +58,30 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     positionTranscriptMessageReceived(userId);
   }, []);
 
+  useEffect(() => {
+    scrollToBottom();
+
+    setTextToShow(messageData.text);
+
+    const timeOut = setTimeout(() => {
+      setTextToShow('');
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [messageData]);
+
+  if (!textToShow) {
+    return null;
+  }
   return (
     <StyledTextContainer
       key={userId}
       style={{ '--max-width': maxWidth + 'px' } as React.CSSProperties}
       ref={textRef}
     >
-      {messageData && <div dangerouslySetInnerHTML={{ __html: messageData.text }}></div>}
+      <div id="transcription-text" dangerouslySetInnerHTML={{ __html: textToShow }}></div>
     </StyledTextContainer>
   );
 };

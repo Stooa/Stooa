@@ -11,12 +11,16 @@ import { useStooa } from '@/contexts/StooaManager';
 import Conference from '@/jitsi/Conference';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import TranslationSwitcher from '../TranslationSwitcher';
 import { StyledTranslate } from './styles';
 
 const TranslateSelector = () => {
-  const { isTranslationEnabled, setIsTranslationEnabled, isTranscriptionEnabled } = useStooa();
   const { locale } = useRouter();
+  const { isTranslationEnabled, setIsTranslationEnabled, isTranscriptionEnabled } = useStooa();
+  const [selectedTranslationLanguage, setSelectedTranslationLanguage] = useState<string>(
+    LOCALES[locale || 'es']
+  );
 
   const handleOnChange = () => {
     if (isTranslationEnabled) {
@@ -26,10 +30,11 @@ const TranslateSelector = () => {
     }
 
     setIsTranslationEnabled(true);
-    Conference.setTranslationLanguage(LOCALES[locale as string]);
+    Conference.setTranslationLanguage(selectedTranslationLanguage);
   };
 
   const handleChangedLanguage = (locale: string): void => {
+    setSelectedTranslationLanguage(locale);
     Conference.setTranslationLanguage(locale);
   };
 

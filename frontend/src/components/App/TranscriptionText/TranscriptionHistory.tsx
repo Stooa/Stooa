@@ -34,7 +34,7 @@ export const TranscriptionHistory = () => {
         messageId: data.message_id,
         userId: data.participant.id,
         userName: data.participant.name,
-        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
+        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence || 0,
         text: decodeURIComponent(isTranslationEnabled ? data.text : data.transcript[0].text)
       };
 
@@ -44,8 +44,8 @@ export const TranscriptionHistory = () => {
 
   useEffect(() => {
     if (historyRef.current) {
-      const messageElement = historyRef.current.querySelector('.messages');
-      historyRef.current.scrollTo(0, messageElement?.getBoundingClientRect().height || 0);
+      const messagesElement = historyRef.current.querySelector('.messages');
+      historyRef.current.scrollTo(0, messagesElement?.getBoundingClientRect().height || 0);
     }
   }, [messageHistory]);
 

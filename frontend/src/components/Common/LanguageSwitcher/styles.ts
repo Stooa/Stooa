@@ -23,7 +23,7 @@ const Languages = styled.div`
   }
 
   select {
-    /* background: transparent; */
+    width: 100%;
     background-color: transparent;
     border: none;
     border-radius: 0;
@@ -31,7 +31,8 @@ const Languages = styled.div`
     cursor: pointer;
     line-height: 1.2;
     padding: 0.25rem 0.175rem;
-    padding-right: ${space(2.5)};
+    padding-inline: ${space(1)};
+    padding-inline-end: ${space(2.5)};
     transition: background-color 0.3s ease-in-out;
     border-radius: ${BORDER_RADIUS};
 
