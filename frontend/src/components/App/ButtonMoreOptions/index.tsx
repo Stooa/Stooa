@@ -124,7 +124,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       setIsTranscriptionEnabled(false);
     } else {
       Conference.startTranscriptionEvent();
-      Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
+      Conference.setTranscriptionLanguage(LOCALES[data.locale]);
       setParticipantsActive(true);
       setIsTranscriptionLoading(true);
     }

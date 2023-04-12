@@ -32,7 +32,8 @@ const TranslationSwitcher = ({ changedLanguage, disabled }: Props) => {
     const languageNames = new Intl.DisplayNames(['en'], {
       type: 'language'
     });
-    return languageNames.of(languageTag);
+    const languageTagWithoutRegionCode = languageTag.toLowerCase().split(/[_-]+/)[0];
+    return languageNames.of(languageTagWithoutRegionCode);
   }, []);
 
   const changeLanguage = (event: ChangeEvent<HTMLSelectElement>) => {

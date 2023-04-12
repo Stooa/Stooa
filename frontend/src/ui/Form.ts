@@ -374,12 +374,14 @@ const SwitchStyled = styled.div`
     visibility: hidden;
   }
 
-  .switch-checkbox[value='true'] + label .switch-button {
+  .switch-checkbox[value='true'] + label .switch-button,
+  .switch-checkbox:checked + label .switch-button {
     left: calc(100% - 3px);
     transform: translateX(-100%);
   }
 
-  .switch-checkbox[value='true'] + label {
+  .switch-checkbox[value='true'] + label,
+  .switch-checkbox:checked + label {
     background-color: ${COLOR_GREEN_500};
   }
 
@@ -403,10 +405,6 @@ const SwitchStyled = styled.div`
     font-size: ${rems(14)};
     width: fit-content;
   }
-
-  label {
-    cursor: pointer;
-  }
 `;
 
 const SwitchLabel = styled.label`
@@ -414,7 +412,6 @@ const SwitchLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   width: 42px;
   height: 22px;
   background: ${COLOR_NEUTRO_700};
@@ -434,7 +431,11 @@ const SwitchLabel = styled.label`
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
   }
 
-  &:hover .switch-button {
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+
+  &:not(.disabled):hover .switch-button {
     width: 20px;
   }
 `;

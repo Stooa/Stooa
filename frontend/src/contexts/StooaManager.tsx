@@ -230,7 +230,7 @@ const StooaProvider = ({
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);
-    Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
+    Conference.setTranscriptionLanguage(LOCALES[data.locale]);
 
     if (!isModerator) return;
 

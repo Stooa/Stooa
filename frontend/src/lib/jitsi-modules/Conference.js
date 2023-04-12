@@ -404,7 +404,7 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('requestingTranscription', false);
   };
 
-  const changeTranscriptionLanguage = language => {
+  const setTranscriptionLanguage = language => {
     conference.setLocalParticipantProperty('transcription_language', language);
   };
 
@@ -555,7 +555,7 @@ const conferenceRepository = () => {
     stopRecordingEvent,
     startTranscriptionEvent,
     stopTranscriptionEvent,
-    changeTranscriptionLanguage,
+    setTranscriptionLanguage,
     setTranslationLanguage,
     stopTranslation
   };

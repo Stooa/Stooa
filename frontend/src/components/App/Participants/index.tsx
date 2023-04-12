@@ -120,7 +120,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   const handleToggleTranscriptions = () => {
     if (!isTranscriptionEnabled) {
       Conference.startTranscriptionEvent();
-      Conference.changeTranscriptionLanguage(LOCALES[data.locale]);
+      Conference.setTranscriptionLanguage(LOCALES[data.locale]);
       setIsTranscriptionEnabled(true);
     } else {
       Conference.stopTranscriptionEvent();
