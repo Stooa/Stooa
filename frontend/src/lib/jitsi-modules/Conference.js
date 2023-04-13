@@ -20,7 +20,8 @@ import {
   SCREEN_SHARE_STOP,
   RECORDING_START,
   RECORDING_STOP,
-  TRANSCRIPTION_MESSAGE_RECEIVED
+  TRANSCRIPTION_MESSAGE_RECEIVED,
+  TRANSCRIPTION_JOINED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -101,6 +102,10 @@ const conferenceRepository = () => {
       dispatchEvent(newValue === 'true' ? RECORDING_START : RECORDING_STOP);
 
       return;
+    }
+
+    if (property === 'features_jigasi' && newValue === true) {
+      dispatchEvent(TRANSCRIPTION_JOINED);
     }
 
     if (property === 'joined') {

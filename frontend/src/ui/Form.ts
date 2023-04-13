@@ -413,6 +413,7 @@ const SwitchLabel = styled.label`
   align-items: center;
   justify-content: space-between;
   width: 42px;
+  min-width: 2.2rem;
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;

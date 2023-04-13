@@ -26,6 +26,7 @@ export const PERMISSION_CHANGED = 'permission:changed';
 export const REACTION_MESSAGE_RECEIVED = 'reaction:received';
 export const TRANSCRIPTION_ENABLED = 'conference:transcriptionenabled';
 export const TRANSCRIPTION_DISABLED = 'conference:transcriptiondisabled';
+export const TRANSCRIPTION_JOINED = 'conference:transcriberjoined';
 export const TRANSCRIPTION_MESSAGE_RECEIVED = 'conference:transcriptionreceived';
 export const SCREEN_SHARE_START = 'screen-share:start';
 export const SCREEN_SHARE_STOP = 'screen-share:stop';

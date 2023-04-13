@@ -76,7 +76,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     feedbackAlert,
     gaveFeedback,
     isTranscriptionEnabled,
-    setIsTranscriptionEnabled,
     setParticipantsActive,
     setIsTranscriptionLoading
   } = useStooa();
@@ -121,7 +120,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   const handleTranscriptionToggle = () => {
     if (isTranscriptionEnabled) {
       Conference.stopTranscriptionEvent();
-      setIsTranscriptionEnabled(false);
+      setIsTranscriptionLoading(true);
     } else {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(LOCALES[data.locale]);

@@ -87,8 +87,7 @@ const ParticipantsDrawer = styled.div`
 
     & h2,
     & .close {
-      color: ${COLOR_NEUTRO_700};
-      opacity: 0.5;
+      color: ${COLOR_NEUTRO_600};
     }
   }
 

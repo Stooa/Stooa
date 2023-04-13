@@ -38,6 +38,7 @@ import {
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
+  TRANSCRIPTION_JOINED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -287,6 +288,13 @@ const StooaProvider = ({
 
   useEventListener(MODERATOR_LEFT, () => {
     sendStopRecordingEvent();
+  });
+
+  useEventListener(TRANSCRIPTION_JOINED, () => {
+    if (isTranscriptionLoading) {
+      setIsTranscriptionLoading(false);
+      setIsTranscriptionEnabled(true);
+    }
   });
 
   const checkApIConferenceStatus = () => {

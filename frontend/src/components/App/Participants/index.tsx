@@ -74,7 +74,8 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     isTranscriptionEnabled,
     participantsActive,
     setParticipantsActive,
-    isTranscriptionLoading
+    isTranscriptionLoading,
+    setIsTranscriptionLoading
   } = useStooa();
 
   const { showOnBoardingTour } = useModals();
@@ -121,10 +122,10 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     if (!isTranscriptionEnabled) {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(LOCALES[data.locale]);
-      setIsTranscriptionEnabled(true);
+      setIsTranscriptionLoading(true);
     } else {
       Conference.stopTranscriptionEvent();
-      setIsTranscriptionEnabled(false);
+      setIsTranscriptionLoading(true);
     }
   };
 
