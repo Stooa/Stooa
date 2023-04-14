@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad8e4f50cde218b26b8470a10a109eeb",
+    "content-hash": "97918b3cb84580507bb1f7f4bb433b31",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4203,16 +4203,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.22.5",
+            "version": "4.22.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "6701b1f5cd2fa620c2e3c3347887ddb88cc6e04f"
+                "reference": "0884daf762803fc39ab4046aec71817811c88c3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/6701b1f5cd2fa620c2e3c3347887ddb88cc6e04f",
-                "reference": "6701b1f5cd2fa620c2e3c3347887ddb88cc6e04f",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/0884daf762803fc39ab4046aec71817811c88c3a",
+                "reference": "0884daf762803fc39ab4046aec71817811c88c3a",
                 "shasum": ""
             },
             "require": {
@@ -4316,7 +4316,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.22.5"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.22.6"
             },
             "funding": [
                 {
@@ -4336,7 +4336,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-30T12:29:30+00:00"
+            "time": "2023-04-12T10:06:04+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -5119,16 +5119,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.6.2",
+            "version": "5.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "7dbd45b6e4a10ad02733d839b9ae5055363b184c"
+                "reference": "16eadef5e7f16408edbe86f7a3e740a3c582d457"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/7dbd45b6e4a10ad02733d839b9ae5055363b184c",
-                "reference": "7dbd45b6e4a10ad02733d839b9ae5055363b184c",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/16eadef5e7f16408edbe86f7a3e740a3c582d457",
+                "reference": "16eadef5e7f16408edbe86f7a3e740a3c582d457",
                 "shasum": ""
             },
             "require": {
@@ -5225,7 +5225,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.6.2"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.6.3"
             },
             "funding": [
                 {
@@ -5245,7 +5245,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-03T14:05:10+00:00"
+            "time": "2023-04-12T17:24:36+00:00"
         },
         {
             "name": "symfony/amazon-mailer",
