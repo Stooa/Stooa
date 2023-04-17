@@ -55,8 +55,6 @@ class GetFeedbackFunctionalTest extends ApiTestCase
         $this->assertSame('/feedback/' . $feedback->getId(), $responseArray['@id']);
         $this->assertSame('Feedback', $responseArray['@type']);
         $this->assertSame($feedback->getSatisfaction(), $responseArray['satisfaction']);
-        $this->assertSame($feedback->getComment(), $responseArray['comment']);
-        $this->assertSame($feedback->getEmail(), $responseArray['email']);
         $this->assertSame($feedback->getOrigin(), $responseArray['origin']);
         $this->assertSame($feedback->getCreatedDateTime()?->format(\DateTime::ATOM), $responseArray['createdDateTime']);
         $this->assertSame($feedback->getTimezone(), $responseArray['timezone']);

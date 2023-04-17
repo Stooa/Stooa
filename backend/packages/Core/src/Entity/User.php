@@ -32,6 +32,10 @@ use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
@@ -171,6 +175,13 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\OneToMany(mappedBy: 'host', targetEntity: Fishbowl::class)]
     private Collection $fishbowls;
 
+    /** @var Collection<int, Topic> */
+    #[JoinTable(name: 'users_topics')]
+    #[JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+    #[InverseJoinColumn(name: 'topic_id', referencedColumnName: 'id')]
+    #[ManyToMany(targetEntity: Topic::class)]
+    private Collection $topics;
+
     #[Groups(['user:write'])]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
@@ -178,6 +189,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     public function __construct()
     {
         $this->fishbowls = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -371,6 +383,30 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     public function setLocale(string $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    /** @return Collection<int, Topic> */
+    public function getTopics(): Collection
+    {
+        return $this->topics;
+    }
+
+    public function addTopic(Topic $topic): self
+    {
+        if (!$this->topics->contains($topic)) {
+            $this->topics[] = $topic;
+        }
+
+        return $this;
+    }
+
+    public function removeTopic(Topic $topic): self
+    {
+        if ($this->topics->contains($topic)) {
+            $this->topics->removeElement($topic);
+        }
 
         return $this;
     }

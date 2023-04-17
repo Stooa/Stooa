@@ -1,0 +1,88 @@
+{% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
+
+{% block table %}
+    <table class="table table-bordered table-hover sonata-ba-list">
+        {% block table_header %}
+            {{ parent() }}
+        {% endblock %}
+
+        {% block table_body %}
+            <tbody>
+            {% if admin.datagrid.results is empty %}
+                {{ _self.navigate_child([], admin, true, 0) }}
+            {% else %}
+                {{ _self.navigate_child(admin.datagrid.results, admin, true, 0) }}
+            {% endif %}
+            </tbody>
+        {% endblock %}
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            // function to collapse children recursively
+            function collapseChildren($tr) {
+                var $child = $('tr[data-parent-id="' + $tr.data('id') + '"]');
+                $tr.find('.js-tree-toggle').removeClass('fa-minus-square').addClass('fa-plus-square');
+                $child.each(function() {
+                    var $this = $(this);
+                    $this.addClass('tree-hidden');
+                    collapseChildren($this);
+                });
+            };
+
+            // function to expand children
+            function expandChildren($tr) {
+                var $child = $('tr[data-parent-id="' + $tr.data('id') + '"]');
+                $tr.find('.js-tree-toggle').addClass('fa-minus-square').removeClass('fa-plus-square');
+                $child.each(function() {
+                    var $this = $(this);
+                    $this.removeClass('tree-hidden');
+                });
+            };
+
+            // Add click event to expand/collapse tree nodes on click on .js-tree-toggle
+            $('.js-tree-toggle').click(function() {
+                var $this = $(this);
+                var $tr = $this.closest('tr');
+
+                if ($this.hasClass('fa-plus-square')) {
+                    expandChildren($tr);
+                } else {
+                    collapseChildren($tr);
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .tree-hidden {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% macro navigate_child(collection, admin, root, depth) %}
+    {% for object in collection %}
+        <tr class="tree-node-{{ object.id }} {% if not root %} tree-hidden {% endif %}" data-lvl="{{ object.lvl }}" data-id="{{ object.id }}" {% if object.parent %} data-parent-id="{{ object.parent.id }}" {% endif %}>
+            {% for field_description in admin.list.getElements() %}
+                {% if field_description.name == constant('Sonata\\AdminBundle\\Datagrid\\ListMapper::NAME_ACTIONS') and app.request.isXmlHttpRequest %}
+                    {# NEXT_MAJOR: Remove this case in version 5 and recommend using the option `ajax_hidden` instead. #}
+                    {# Action buttons disabled in ajax view! #}
+                {% elseif field_description.getOption('ajax_hidden') == true and app.request.isXmlHttpRequest %}
+                    {# Disable fields with 'ajax_hidden' option set to true #}
+                {% else %}
+                    {{ object|render_list_element(field_description) }}
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% if object.children|length > 0 %}
+            {{ _self.navigate_child(object.children, admin, false, depth + 1) }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

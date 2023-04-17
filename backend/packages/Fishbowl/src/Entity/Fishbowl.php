@@ -27,6 +27,7 @@ use ApiPlatform\Metadata\GraphQl\Query;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Core\Entity\Participant;
+use App\Core\Entity\Topic;
 use App\Core\Entity\User;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Resolver\FishbowlCreatorResolver;
@@ -42,6 +43,10 @@ use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Metaclass\FilterBundle\Filter\FilterLogic;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -249,10 +254,18 @@ class Fishbowl implements \Stringable
     #[Groups(['fishbowl:read'])]
     private Collection $feedbacks;
 
+    /** @var Collection<int, Topic> */
+    #[JoinTable(name: 'fishbowl_topics')]
+    #[JoinColumn(name: 'fishbowl_id', referencedColumnName: 'id')]
+    #[InverseJoinColumn(name: 'topic_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ManyToMany(targetEntity: Topic::class)]
+    private Collection $topics;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -510,6 +523,30 @@ class Fishbowl implements \Stringable
     public function setFinishedAt(\DateTimeInterface $finishedAt): self
     {
         $this->finishedAt = $finishedAt;
+
+        return $this;
+    }
+
+    /** @return Collection<int, Topic> */
+    public function getTopics(): Collection
+    {
+        return $this->topics;
+    }
+
+    public function addTopic(Topic $topic): self
+    {
+        if (!$this->topics->contains($topic)) {
+            $this->topics[] = $topic;
+        }
+
+        return $this;
+    }
+
+    public function removeTopic(Topic $topic): self
+    {
+        if ($this->topics->contains($topic)) {
+            $this->topics->removeElement($topic);
+        }
 
         return $this;
     }

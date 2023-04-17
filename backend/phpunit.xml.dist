@@ -20,10 +20,9 @@ file that was distributed with this source code.
       <directory>packages/*/tests</directory>
     </testsuite>
   </testsuites>
-  <coverage/>
   <source>
     <include>
-      <directory suffix=".php">src</directory>
+      <directory suffix=".php">packages/*/src</directory>
     </include>
   </source>
 </phpunit>
