@@ -87,7 +87,8 @@ class FishbowlAdmin extends AbstractAdmin
                 ],
             ])
             ->add('isFishbowlNow')
-            ->add('hasIntroduction');
+            ->add('hasIntroduction')
+            ->add('isPrivate');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -102,6 +103,7 @@ class FishbowlAdmin extends AbstractAdmin
             ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction')
+            ->add('isPrivate')
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('endDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('duration', FieldDescriptionInterface::TYPE_TIME)
@@ -139,6 +141,9 @@ class FishbowlAdmin extends AbstractAdmin
                     'transform' => true,
                 ])
                 ->add('hasIntroduction', BooleanType::class, [
+                    'transform' => true,
+                ])
+                ->add('isPrivate', BooleanType::class, [
                     'transform' => true,
                 ])
                 ->add('topics')
