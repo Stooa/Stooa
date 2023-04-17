@@ -257,7 +257,7 @@ class Fishbowl implements \Stringable
     /** @var Collection<int, Topic> */
     #[JoinTable(name: 'fishbowl_topics')]
     #[JoinColumn(name: 'fishbowl_id', referencedColumnName: 'id')]
-    #[InverseJoinColumn(name: 'topic_id', referencedColumnName: 'id')]
+    #[InverseJoinColumn(name: 'topic_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ManyToMany(targetEntity: Topic::class)]
     private Collection $topics;
 

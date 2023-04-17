@@ -19,7 +19,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230405100805 extends AbstractMigration
+final class Version20230417102953 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -33,7 +33,7 @@ final class Version20230405100805 extends AbstractMigration
         $this->addSql('CREATE TABLE topic (id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', parent_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', root_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(255) NOT NULL, translation_id VARCHAR(255) NOT NULL, lft INT NOT NULL, lvl INT NOT NULL, rgt INT NOT NULL, UNIQUE INDEX UNIQ_9D40DE1B9CAA2B25 (translation_id), INDEX IDX_9D40DE1B727ACA70 (parent_id), INDEX IDX_9D40DE1B79066886 (root_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE users_topics (user_id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', topic_id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_9E11C8A9A76ED395 (user_id), INDEX IDX_9E11C8A91F55203D (topic_id), PRIMARY KEY(user_id, topic_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE fishbowl_topics ADD CONSTRAINT FK_7287FD0B72BD0E36 FOREIGN KEY (fishbowl_id) REFERENCES fishbowl (id)');
-        $this->addSql('ALTER TABLE fishbowl_topics ADD CONSTRAINT FK_7287FD0B1F55203D FOREIGN KEY (topic_id) REFERENCES topic (id)');
+        $this->addSql('ALTER TABLE fishbowl_topics ADD CONSTRAINT FK_7287FD0B1F55203D FOREIGN KEY (topic_id) REFERENCES topic (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE topic ADD CONSTRAINT FK_9D40DE1B727ACA70 FOREIGN KEY (parent_id) REFERENCES topic (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE topic ADD CONSTRAINT FK_9D40DE1B79066886 FOREIGN KEY (root_id) REFERENCES topic (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE users_topics ADD CONSTRAINT FK_9E11C8A9A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
