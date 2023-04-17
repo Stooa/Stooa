@@ -22,7 +22,7 @@ file that was distributed with this source code.
   </testsuites>
   <source>
     <include>
-      <directory suffix=".php">src</directory>
+      <directory suffix=".php">packages/*/src</directory>
     </include>
   </source>
 </phpunit>
