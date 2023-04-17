@@ -26,6 +26,9 @@ import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   bottom: 0;
   overflow-y: auto;
   padding: ${space(3)} 0;
@@ -106,12 +109,25 @@ const ParticipantsDrawer = styled.div`
     }
   }
 
+  & .transcription-container {
+    min-height: 80px;
+    max-height: 35%;
+
+    & hr {
+      height: 4px;
+      border: none;
+      background-color: ${COLOR_NEUTRO_200};
+      margin: 0;
+      margin-bottom: ${space()};
+    }
+  }
+
   & .transcription-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: end;
     position: relative;
-    height: 37%;
+    height: 100%;
 
     & .enable-button {
       padding: ${space(0.5)} ${space(1)};

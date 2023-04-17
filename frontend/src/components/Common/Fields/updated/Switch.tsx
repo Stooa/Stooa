@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { ReactElement, useRef, useState } from 'react';
+import React, { ReactElement, forwardRef, useRef, useState } from 'react';
 
 import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
@@ -24,55 +24,57 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   isDirty?: boolean;
 };
 
-const Switch = ({ label, tooltipText, isDirty, hasError, ...props }: Props) => {
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [arrowPosition, setArrowPosition] = useState<string>();
-  const tipToHover = useRef<HTMLDivElement>(null);
+const Switch = forwardRef<HTMLInputElement, Props>(
+  ({ label, tooltipText, isDirty, hasError, ...props }, ref) => {
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [arrowPosition, setArrowPosition] = useState<string>();
+    const tipToHover = useRef<HTMLDivElement>(null);
 
-  const handleOnMouseEnter: React.MouseEventHandler = () => {
-    if (tipToHover.current) {
-      const left = tipToHover.current.offsetLeft;
-      setArrowPosition(left + 'px');
-      setShowTooltip(true);
-    }
-  };
+    const handleOnMouseEnter: React.MouseEventHandler = () => {
+      if (tipToHover.current) {
+        const left = tipToHover.current.offsetLeft;
+        setArrowPosition(left + 'px');
+        setShowTooltip(true);
+      }
+    };
 
-  return (
-    <SwitchStyled>
-      <input className="switch-checkbox" type="checkbox" {...props} />
-      <SwitchLabel className={props.disabled ? 'disabled' : ''} htmlFor={props.id || props.name}>
-        <span className={`switch-button`} />
-      </SwitchLabel>
-      <div className="label-wrapper">
-        {label && (
-          <label htmlFor={props.id || props.name}>
-            <span className="label-text">{label}</span>
-          </label>
-        )}
-        {tooltipText && (
-          <div
-            className="icon-wrapper"
-            onClick={() => setShowTooltip(showTooltip => !showTooltip)}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={() => setShowTooltip(false)}
-            ref={tipToHover}
-          >
-            {showTooltip && (
-              <StyledIntroductionTooltip>
-                <div
-                  className="arrow"
-                  style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
-                ></div>
-                {tooltipText}
-              </StyledIntroductionTooltip>
-            )}
-            <Info />
-          </div>
-        )}
-      </div>
-      {isDirty && hasError ? <ValidationError>{hasError.message}</ValidationError> : null}
-    </SwitchStyled>
-  );
-};
+    return (
+      <SwitchStyled ref={ref}>
+        <input className="switch-checkbox" type="checkbox" {...props} />
+        <SwitchLabel className={props.disabled ? 'disabled' : ''} htmlFor={props.id || props.name}>
+          <span className={`switch-button`} />
+        </SwitchLabel>
+        <div className="label-wrapper">
+          {label && (
+            <label htmlFor={props.id || props.name}>
+              <span className="label-text">{label}</span>
+            </label>
+          )}
+          {tooltipText && (
+            <div
+              className="icon-wrapper"
+              onClick={() => setShowTooltip(showTooltip => !showTooltip)}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={() => setShowTooltip(false)}
+              ref={tipToHover}
+            >
+              {showTooltip && (
+                <StyledIntroductionTooltip>
+                  <div
+                    className="arrow"
+                    style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
+                  ></div>
+                  {tooltipText}
+                </StyledIntroductionTooltip>
+              )}
+              <Info />
+            </div>
+          )}
+        </div>
+        {isDirty && hasError ? <ValidationError>{hasError.message}</ValidationError> : null}
+      </SwitchStyled>
+    );
+  }
+);
 
 export default Switch;

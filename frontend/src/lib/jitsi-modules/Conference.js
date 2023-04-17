@@ -21,7 +21,7 @@ import {
   RECORDING_START,
   RECORDING_STOP,
   TRANSCRIPTION_MESSAGE_RECEIVED,
-  TRANSCRIPTION_JOINED
+  TRANSCRIPTION_FIRST_MESSAGE_RECEIVED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -37,6 +37,7 @@ const conferenceRepository = () => {
   let isJoined = false;
   let twitter = false;
   let linkedin = false;
+  let firstTranscriptionMessageReceived = false;
 
   const joinUser = (id, user) => {
     if (id === undefined || id === null) {
@@ -102,10 +103,6 @@ const conferenceRepository = () => {
       dispatchEvent(newValue === 'true' ? RECORDING_START : RECORDING_STOP);
 
       return;
-    }
-
-    if (property === 'features_jigasi' && newValue === true) {
-      dispatchEvent(TRANSCRIPTION_JOINED);
     }
 
     if (property === 'joined') {
@@ -188,6 +185,10 @@ const conferenceRepository = () => {
     console.log('[STOOA] Endpoint message received', participant, json);
 
     if ((json && json.type === 'transcription-result') || json.type === 'translation-result') {
+      if (!firstTranscriptionMessageReceived) {
+        dispatchEvent(TRANSCRIPTION_FIRST_MESSAGE_RECEIVED);
+        firstTranscriptionMessageReceived = true;
+      }
       dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { data: json });
     }
   };
@@ -239,7 +240,7 @@ const conferenceRepository = () => {
     conference.on(TRACK_REMOVED, tracksRepository.handleTrackRemoved);
     conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
     conference.on(USER_JOINED, userRepository.handleUserJoin);
-    conference.on(USER_LEFT, userRepository.handleUserLeft);
+    conference.on(USER_LEFT, _handleUserLeft);
     conference.on(KICKED, userRepository.handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
@@ -281,6 +282,14 @@ const conferenceRepository = () => {
   const _handlePermissionChanged = permissions => {
     if (permissions) dispatchEvent(PERMISSION_CHANGED, permissions);
     console.log('[STOOA] Permission changed');
+  };
+
+  const _handleUserLeft = (id, user) => {
+    if (user._properties?.features_jigasi) {
+      firstTranscriptionMessageReceived = false;
+    }
+
+    userRepository.handleUserLeft(id, user);
   };
 
   const initializeJitsi = () => {

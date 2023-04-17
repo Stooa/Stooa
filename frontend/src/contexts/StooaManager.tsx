@@ -38,7 +38,7 @@ import {
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
-  TRANSCRIPTION_JOINED,
+  TRANSCRIPTION_FIRST_MESSAGE_RECEIVED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -290,7 +290,7 @@ const StooaProvider = ({
     sendStopRecordingEvent();
   });
 
-  useEventListener(TRANSCRIPTION_JOINED, () => {
+  useEventListener(TRANSCRIPTION_FIRST_MESSAGE_RECEIVED, () => {
     if (isTranscriptionLoading) {
       setIsTranscriptionLoading(false);
       setIsTranscriptionEnabled(true);

@@ -359,9 +359,9 @@ const TextDivider = styled.div`
   }
 `;
 
-const SwitchStyled = styled.div`
+const SwitchStyled = styled.div<{ full?: boolean }>`
   position: relative;
-  width: 100%;
+  width: ${({ full }) => (full ? '100%' : 'auto')};
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;

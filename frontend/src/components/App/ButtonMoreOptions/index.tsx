@@ -77,10 +77,24 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     gaveFeedback,
     isTranscriptionEnabled,
     setParticipantsActive,
-    setIsTranscriptionLoading
+    setIsTranscriptionLoading,
+    isTranscriptionLoading,
+    setIsTranscriptionEnabled
   } = useStooa();
 
   const { t } = useTranslation('fishbowl');
+
+  const getTranscriptionText = () => {
+    if (isTranscriptionLoading) {
+      return t('transcription.loading');
+    }
+
+    if (isTranscriptionEnabled) {
+      return t('transcription.disable');
+    } else {
+      return t('transcription.enable');
+    }
+  };
 
   const handleAudioInput = (event: React.MouseEvent) => {
     const { value } = event.target as HTMLButtonElement;
@@ -120,7 +134,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   const handleTranscriptionToggle = () => {
     if (isTranscriptionEnabled) {
       Conference.stopTranscriptionEvent();
-      setIsTranscriptionLoading(true);
+      setIsTranscriptionEnabled(false);
     } else {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(LOCALES[data.locale]);
@@ -192,7 +206,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   onClick={() => handleTranscriptionToggle()}
                 >
                   <Feedback />
-                  {isTranscriptionEnabled ? t('transcription.disable') : t('transcription.enable')}
+                  {getTranscriptionText()}
                 </button>
               )}
 

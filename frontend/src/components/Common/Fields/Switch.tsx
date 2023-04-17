@@ -17,9 +17,10 @@ import Info from '@/ui/svg/info-brown.svg';
 type Props = {
   label: string;
   tooltipText: string | ReactElement;
+  full?: boolean;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
+const Switch: React.FC<Props> = ({ label, tooltipText, full, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [arrowPosition, setArrowPosition] = useState<string>();
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
@@ -34,7 +35,7 @@ const Switch: React.FC<Props> = ({ label, tooltipText, ...props }) => {
   };
 
   return (
-    <SwitchStyled>
+    <SwitchStyled full={full}>
       <Field
         className="switch-checkbox"
         {...field}

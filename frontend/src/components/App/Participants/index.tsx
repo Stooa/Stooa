@@ -33,6 +33,8 @@ import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory'
 import Conference from '@/jitsi/Conference';
 import TranslateSelector from '../TranslateSelector';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import Switch from '@/components/Common/Fields/updated/Switch';
+import { useForm } from 'react-hook-form';
 
 const initialParticipant: Participant = {
   id: '',
@@ -70,13 +72,15 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   const {
     data,
     getPassword,
-    setIsTranscriptionEnabled,
     isTranscriptionEnabled,
     participantsActive,
     setParticipantsActive,
     isTranscriptionLoading,
-    setIsTranscriptionLoading
+    setIsTranscriptionLoading,
+    setIsTranscriptionEnabled
   } = useStooa();
+
+  const { register } = useForm({ defaultValues: { transcript: isTranscriptionEnabled } });
 
   const { showOnBoardingTour } = useModals();
 
@@ -118,17 +122,6 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     return 0;
   };
 
-  const handleToggleTranscriptions = () => {
-    if (!isTranscriptionEnabled) {
-      Conference.startTranscriptionEvent();
-      Conference.setTranscriptionLanguage(LOCALES[data.locale]);
-      setIsTranscriptionLoading(true);
-    } else {
-      Conference.stopTranscriptionEvent();
-      setIsTranscriptionLoading(true);
-    }
-  };
-
   const getTranscriptionText = () => {
     if (isTranscriptionLoading) {
       return t('transcription.loading');
@@ -137,6 +130,18 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
       return t('transcription.disable');
     } else {
       return t('transcription.enable');
+    }
+  };
+
+  const handleOnChangeTranscription = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.checked);
+    if (event.target.checked) {
+      Conference.startTranscriptionEvent();
+      Conference.setTranscriptionLanguage(LOCALES[data.locale]);
+      setIsTranscriptionLoading(true);
+    } else {
+      Conference.stopTranscriptionEvent();
+      setIsTranscriptionEnabled(false);
     }
   };
 
@@ -199,61 +204,71 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
         </span>
       </ParticipantsToggle>
       <ParticipantsDrawer className={participantsActive ? 'active' : ''}>
-        <div className="header">
-          <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
-          <ButtonCopyUrl
-            variant="text"
-            fid={data.slug}
-            locale={data.locale}
-            isPrivate={data.isPrivate}
-            plainPassword={getPassword()}
-          />
-          <Icon onClick={toggleDrawer}>
-            <Cross />
-          </Icon>
-        </div>
-        <div className="participants-wrapper">
-          {speakingParticipants.length > 0 && (
-            <div className="participant-list participant-list--speaking">
-              <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
-              <ul>
-                {speakingParticipants.map((participant, i) => (
-                  <ParticipantCard
-                    participant={participant}
-                    key={`participant-speaking-${i}`}
-                    speaker={true}
-                  />
-                ))}
-              </ul>
-            </div>
-          )}
-          {roomParticipants.length > 0 && (
-            <div className="participant-list">
-              <h3 className="body-xs medium caps">
-                <span>{t('fishbowl:participants.attendees')}</span>
-                <MicMuted className="icon-small" />
-                <VideoMuted className="icon-small" />
-              </h3>
-              <ul>
-                {roomParticipants.map((participant, i) => (
-                  <ParticipantCard participant={participant} key={`participant-room-${i}`} />
-                ))}
-              </ul>
-            </div>
-          )}
+        <div>
+          <div className="header">
+            <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
+            <ButtonCopyUrl
+              variant="text"
+              fid={data.slug}
+              locale={data.locale}
+              isPrivate={data.isPrivate}
+              plainPassword={getPassword()}
+            />
+            <Icon onClick={toggleDrawer}>
+              <Cross />
+            </Icon>
+          </div>
+          <div className="participants-wrapper">
+            {speakingParticipants.length > 0 && (
+              <div className="participant-list participant-list--speaking">
+                <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
+                <ul>
+                  {speakingParticipants.map((participant, i) => (
+                    <ParticipantCard
+                      participant={participant}
+                      key={`participant-speaking-${i}`}
+                      speaker={true}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+            {roomParticipants.length > 0 && (
+              <div className="participant-list">
+                <h3 className="body-xs medium caps">
+                  <span>{t('fishbowl:participants.attendees')}</span>
+                  <MicMuted className="icon-small" />
+                  <VideoMuted className="icon-small" />
+                </h3>
+                <ul>
+                  {roomParticipants.map((participant, i) => (
+                    <ParticipantCard participant={participant} key={`participant-room-${i}`} />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
         {process.env.NEXT_PUBLIC_TRANSCRIPTIONS_ENABLED === 'true' && (
-          <div className="transcription-wrapper">
-            <div className="transcription__header ">
-              <h3 className="body-md medium">Transcriptions</h3>
+          <div className="transcription-container">
+            <hr />
+            <div className="transcription-wrapper">
+              <div className="transcription__header ">
+                <h3 className="body-md medium">Transcriptions</h3>
 
-              <button className="enable-button body-md" onClick={handleToggleTranscriptions}>
-                {getTranscriptionText()}
-              </button>
+                <Switch
+                  id="transcript"
+                  {...register('transcript', {
+                    onChange: event => {
+                      handleOnChangeTranscription(event);
+                    }
+                  })}
+                />
+              </div>
+
+              <TranslateSelector />
+              <TranscriptionHistory />
             </div>
-
-            <TranslateSelector />
-            <TranscriptionHistory />
           </div>
         )}
       </ParticipantsDrawer>
