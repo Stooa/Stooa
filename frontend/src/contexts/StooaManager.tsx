@@ -90,6 +90,12 @@ const StooaProvider = ({
   const [isRecording, setIsRecording] = useState(false);
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
+  const [participantsActive, setParticipantsActive] = useState(() => {
+    if (isModerator && data.isFishbowlNow) {
+      return true;
+    }
+    return false;
+  });
 
   const { t, lang } = useTranslation('app');
 
@@ -436,7 +442,9 @@ const StooaProvider = ({
         feedbackAlert,
         setFeedbackAlert,
         gaveFeedback,
-        setGaveFeedback
+        setGaveFeedback,
+        participantsActive,
+        setParticipantsActive
       }}
     >
       {children}
