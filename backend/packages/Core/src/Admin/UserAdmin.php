@@ -121,6 +121,7 @@ class UserAdmin extends AbstractAdmin
             ->add('linkedinProfile')
             ->add('twitterProfile')
             ->add('locale', LocaleType::class)
+            ->add('topics')
             ->add('active')
             ->add('plainPassword', TextType::class, [
                 'required' => $required,

@@ -32,6 +32,7 @@ sonata_admin:
                     - App\Fishbowl\Admin\FishbowlAdmin
                     - App\Core\Admin\ResetPasswordRequestAdmin
                     - App\Core\Admin\ParticipantAdmin
+                    - App\Core\Admin\TopicAdmin
                     - App\Fishbowl\Admin\FeedbackAdmin
 
 sonata_block:
