@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -60,7 +60,9 @@ const Fishbowl: FC = () => {
     startRecording,
     setIsRecording,
     gaveFeedback,
-    setGaveFeedback
+    setGaveFeedback,
+    participantsActive,
+    setParticipantsActive
   } = useStooa();
 
   const {
@@ -86,9 +88,6 @@ const Fishbowl: FC = () => {
     }
   });
 
-  const [participantsActive, setParticipantsActive] = useState(
-    () => (isModerator && data.isFishbowlNow) || false
-  );
   const [{ conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
@@ -106,10 +105,6 @@ const Fishbowl: FC = () => {
   useEventListener(SCREEN_SHARE_PERMISSIONS_DENIED, () => {
     setShowScreenSharePermissions(true);
   });
-
-  const toggleParticipants = () => {
-    setParticipantsActive(!participantsActive);
-  };
 
   const handleCloseModalPermissions = () => {
     setShowModalPermissions(false);
@@ -167,10 +162,6 @@ const Fishbowl: FC = () => {
       category: 'FishbowlReactions',
       label: 'Connect'
     });
-
-    if (width && width < BREAKPOINTS.tablet) {
-      setParticipantsActive(false);
-    }
   }, []);
 
   useEffect(() => {
@@ -181,11 +172,7 @@ const Fishbowl: FC = () => {
 
   return (
     <>
-      <Header
-        isPrefishbowl={isPreFishbowl}
-        participantsActive={participantsActive}
-        toggleParticipants={toggleParticipants}
-      />
+      <Header isPrefishbowl={isPreFishbowl} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <HackLeaveHover onMouseEnter={handleModeratorIsGonnaLeave} />
 
@@ -237,7 +224,7 @@ const Fishbowl: FC = () => {
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
       </Main>
-      {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
+      {!isPreFishbowl && <Footer />}
       <OnBoardingTour />
     </>
   );
