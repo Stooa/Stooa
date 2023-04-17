@@ -38,4 +38,6 @@ export interface StooaContextValues {
   setFeedbackAlert: Dispatch<SetStateAction<boolean>>;
   gaveFeedback: boolean;
   setGaveFeedback: Dispatch<SetStateAction<boolean>>;
+  participantsActive: boolean;
+  setParticipantsActive: Dispatch<SetStateAction<boolean>>;
 }
