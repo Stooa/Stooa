@@ -9,13 +9,7 @@
 
 import { space } from '@/ui/helpers';
 import { scrolllbarStyle } from '@/ui/Scrollbar';
-import {
-  BORDER_RADIUS,
-  COLOR_NEUTRO_200,
-  COLOR_NEUTRO_300,
-  COLOR_NEUTRO_500,
-  COLOR_NEUTRO_700
-} from '@/ui/settings';
+import { BORDER_RADIUS, COLOR_NEUTRO_200, COLOR_NEUTRO_300, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledTextContainer = styled.div`

@@ -33,7 +33,6 @@ import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory'
 
 import Conference from '@/jitsi/Conference';
 import TranslateSelector from '../TranslateSelector';
-import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import Switch from '@/components/Common/Fields/updated/Switch';
 import { useForm } from 'react-hook-form';
 import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
