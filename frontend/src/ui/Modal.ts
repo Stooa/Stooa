@@ -107,7 +107,7 @@ const StyledLeftAlignedModal = styled(Modal)`
     padding: ${space(6)} ${space(5)} ${space(3)};
 
     & h2 {
-      margin-bottom: 0;
+      margin-bottom: ${space(2)};
     }
 
     & .experimental {

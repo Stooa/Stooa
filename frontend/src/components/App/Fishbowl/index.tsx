@@ -45,6 +45,7 @@ import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import TranscriptionText from '../TranscriptionText';
+import ModalTranscription from '../ModalTranscription';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -64,7 +65,8 @@ const Fishbowl: FC = () => {
     setGaveFeedback,
     isTranscriptionEnabled,
     participantsActive,
-    setParticipantsActive
+    setParticipantsActive,
+    setIsTranscriptionLoading
   } = useStooa();
 
   const {
@@ -160,6 +162,13 @@ const Fishbowl: FC = () => {
     setShowFeedbackForm(false);
   };
 
+  const handleStartTranscription = () => {
+    Conference.startTranscriptionEvent();
+    setParticipantsActive(true);
+    setIsTranscriptionLoading(true);
+    setShowTranscriptionModal(false);
+  };
+
   useEffect(() => {
     pushEventDataLayer({
       action: fid as string,
@@ -227,7 +236,12 @@ const Fishbowl: FC = () => {
           />
         )}
 
-        {/* {showTranscriprionModal && } */}
+        {showTranscriptionModal && (
+          <ModalTranscription
+            closeModal={() => setShowTranscriptionModal(false)}
+            startTranscription={handleStartTranscription}
+          />
+        )}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />

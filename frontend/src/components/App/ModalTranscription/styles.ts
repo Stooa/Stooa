@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { space } from '@/ui/helpers';
 import { StyledLeftAlignedModal } from '@/ui/Modal';
 import styled from 'styled-components';
 

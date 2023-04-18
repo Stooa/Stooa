@@ -38,7 +38,7 @@ import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
 import Conference from '@/jitsi/Conference';
-import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { getTranscriptionLanguage } from '@/user/auth';
 
 interface Props {
   unlabeled?: boolean;
@@ -55,8 +55,13 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
-  const { setShowStopRecording, showStartRecording, setShowStartRecording, setShowFeedbackForm } =
-    useModals();
+  const {
+    setShowStopRecording,
+    setShowTranscriptionModal,
+    showStartRecording,
+    setShowStartRecording,
+    setShowFeedbackForm
+  } = useModals();
   const { deviceType } = useNavigatorType();
 
   const {
@@ -71,16 +76,15 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   } = useDevices();
 
   const {
-    data,
     isModerator,
     isRecording,
     feedbackAlert,
     gaveFeedback,
     isTranscriptionEnabled,
-    setParticipantsActive,
-    setIsTranscriptionLoading,
     isTranscriptionLoading,
-    setIsTranscriptionEnabled
+    setIsTranscriptionEnabled,
+    setParticipantsActive,
+    setIsTranscriptionLoading
   } = useStooa();
 
   const { t } = useTranslation('fishbowl');
@@ -133,14 +137,22 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   };
 
   const handleTranscriptionToggle = () => {
+    const transcriptionCookie = getTranscriptionLanguage();
+
+    if (!transcriptionCookie) {
+      setShowTranscriptionModal(true);
+      return;
+    }
+
     if (isTranscriptionEnabled) {
       Conference.stopTranscriptionEvent();
       setIsTranscriptionEnabled(false);
     } else {
       Conference.startTranscriptionEvent();
-      Conference.setTranscriptionLanguage(LOCALES[data.locale]);
+      Conference.setTranscriptionLanguage(transcriptionCookie);
       setParticipantsActive(true);
       setIsTranscriptionLoading(true);
+      setShowTranscriptionModal(false);
     }
   };
 

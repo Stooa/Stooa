@@ -13,6 +13,7 @@ import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
 import { StyledTranscriptionWrapper } from './styles';
 import InfoSVG from '@/ui/svg/info-brown.svg';
 import Tooltip from '@/components/Common/Tooltip/Tooltip';
+import { getTranscriptionLanguage, setTranscriptionLanguage } from '@/user/auth';
 
 interface Props {
   tooltip?: boolean;
@@ -21,8 +22,11 @@ interface Props {
 const TranscriptionSelector = ({ tooltip }: Props) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
+  const cookieTranscriptionLanguage = getTranscriptionLanguage();
+
   const handleChangeTranscriptionLanguage = (locale: string): void => {
     Conference.setTranscriptionLanguage(locale);
+    setTranscriptionLanguage(locale);
   };
 
   return (
@@ -34,20 +38,23 @@ const TranscriptionSelector = ({ tooltip }: Props) => {
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
         >
-          <InfoSVG />
           {tooltip && (
-            <Tooltip showTooltip={showTooltip} position="top" arrow={true}>
-              <p>
-                Select the language
-                <br />
-                you are talking
-              </p>
-            </Tooltip>
+            <>
+              <InfoSVG />
+              <Tooltip showTooltip={showTooltip} position="top" arrow={true}>
+                <p>
+                  Select the language
+                  <br />
+                  you are talking
+                </p>
+              </Tooltip>
+            </>
           )}
         </span>
       </label>
       <LanguageTranscriptionSelector
         id="transcription-language"
+        propsSelectedLanguage={cookieTranscriptionLanguage}
         changedLanguage={handleChangeTranscriptionLanguage}
       />
     </StyledTranscriptionWrapper>

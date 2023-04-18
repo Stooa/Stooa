@@ -9,7 +9,13 @@
 
 import { space } from '@/ui/helpers';
 import { scrolllbarStyle } from '@/ui/Scrollbar';
-import { BORDER_RADIUS, COLOR_NEUTRO_500, COLOR_NEUTRO_700 } from '@/ui/settings';
+import {
+  BORDER_RADIUS,
+  COLOR_NEUTRO_200,
+  COLOR_NEUTRO_300,
+  COLOR_NEUTRO_500,
+  COLOR_NEUTRO_700
+} from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledTextContainer = styled.div`
@@ -36,7 +42,8 @@ const StyledTranscribedHistory = styled.div`
   height: 100%;
   overflow-y: auto;
   color: ${COLOR_NEUTRO_700};
-  border: 1px solid ${COLOR_NEUTRO_500};
+  background-color: ${COLOR_NEUTRO_200};
+  border: 1px solid ${COLOR_NEUTRO_300};
   border-radius: ${BORDER_RADIUS};
   padding-inline: 0.5rem;
   margin-block-start: ${space(1)};

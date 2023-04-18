@@ -11,15 +11,16 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Cross from '@/ui/svg/cross.svg';
 import Button from '@/components/Common/Button';
-import Trans from 'next-translate/Trans';
+// import Trans from 'next-translate/Trans';
 import { StyledTranscriptionModal } from './styles';
+import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
 
 interface Props {
-  startRecording: () => void;
+  startTranscription: () => void;
   closeModal: () => void;
 }
 
-const ModalTranscription = ({ closeModal, startRecording }: Props) => {
+const ModalTranscription = ({ closeModal, startTranscription }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (
@@ -33,12 +34,15 @@ const ModalTranscription = ({ closeModal, startRecording }: Props) => {
           Before we start, we need you to
           <b> indicate in which language you will be participating</b> in this conversation.
         </p>
+
+        <TranscriptionSelector />
+
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
           </Button>
-          <Button onClick={startRecording} data-testid="start-recording-button">
-            {t('recording.start')}
+          <Button onClick={startTranscription} data-testid="start-recording-button">
+            Enable transcription
           </Button>
         </div>
       </div>

@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { ping } from '@/user/auth';
+import { getTranscriptionLanguage, ping } from '@/user/auth';
 import { getParticipantList } from '@/lib/jitsi';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
@@ -87,7 +87,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     defaultValues: { transcript: isTranscriptionEnabled || isTranscriptionLoading }
   });
 
-  const { showOnBoardingTour } = useModals();
+  const { showOnBoardingTour, setShowTranscriptionModal } = useModals();
 
   const pingParticipant = () => {
     ping(lang, fid);
@@ -128,9 +128,15 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   };
 
   const handleOnChangeTranscription = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const cookieTranscription = getTranscriptionLanguage();
+    if (!cookieTranscription) {
+      setShowTranscriptionModal(true);
+      return;
+    }
+
     if (event.target.checked) {
       Conference.startTranscriptionEvent();
-      Conference.setTranscriptionLanguage(LOCALES[data.locale]);
+      Conference.setTranscriptionLanguage(cookieTranscription);
       setIsTranscriptionLoading(true);
     } else {
       Conference.stopTranscriptionEvent();
