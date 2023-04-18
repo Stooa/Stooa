@@ -143,7 +143,7 @@ const ParticipantsDrawer = styled.div`
     & .transcription__header {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: ${space(1)};
     }
   }
 `;

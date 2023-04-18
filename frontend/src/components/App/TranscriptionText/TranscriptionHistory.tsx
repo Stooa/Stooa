@@ -56,7 +56,7 @@ export const TranscriptionHistory = () => {
   return (
     <StyledTranscribedHistory ref={historyRef}>
       <div className="messages">
-        {messageHistory.map(message => {
+        {messageHistory.slice(-20).map(message => {
           return (
             <div className="message" key={message.messageId}>
               <h4>{message.userName}: </h4>

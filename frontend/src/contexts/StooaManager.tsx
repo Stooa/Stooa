@@ -76,6 +76,7 @@ const StooaProvider = ({
 }) => {
   const router = useRouter();
   const { fid } = router.query;
+  const { t, lang } = useTranslation('app');
 
   const useGaveFeedback = useMemo(() => userRepository.hasUserGaveFeedback(fid as string), [fid]);
 
@@ -101,8 +102,7 @@ const StooaProvider = ({
     }
     return false;
   });
-
-  const { t, lang } = useTranslation('app');
+  const [selectedTranscriptionLanguage, setSelectedTranscriptionLanguage] = useState(LOCALES[lang]);
 
   const apiInterval = useRef<number>();
   const timeUpInterval = useRef<number>();
@@ -463,7 +463,9 @@ const StooaProvider = ({
         participantsActive,
         setParticipantsActive,
         isTranscriptionLoading,
-        setIsTranscriptionLoading
+        setIsTranscriptionLoading,
+        selectedTranscriptionLanguage,
+        setSelectedTranscriptionLanguage
       }}
     >
       {children}

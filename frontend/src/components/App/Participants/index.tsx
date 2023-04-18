@@ -23,6 +23,7 @@ import People from '@/ui/svg/people.svg';
 import Curve from '@/ui/svg/participants-curve.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
+
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
@@ -35,6 +36,8 @@ import TranslateSelector from '../TranslateSelector';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import Switch from '@/components/Common/Fields/updated/Switch';
 import { useForm } from 'react-hook-form';
+import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
+import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
 
 const initialParticipant: Participant = {
   id: '',
@@ -75,12 +78,14 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     isTranscriptionEnabled,
     participantsActive,
     setParticipantsActive,
-    isTranscriptionLoading,
     setIsTranscriptionLoading,
+    isTranscriptionLoading,
     setIsTranscriptionEnabled
   } = useStooa();
 
-  const { register } = useForm({ defaultValues: { transcript: isTranscriptionEnabled } });
+  const { register, setValue } = useForm({
+    defaultValues: { transcript: isTranscriptionEnabled || isTranscriptionLoading }
+  });
 
   const { showOnBoardingTour } = useModals();
 
@@ -122,19 +127,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     return 0;
   };
 
-  const getTranscriptionText = () => {
-    if (isTranscriptionLoading) {
-      return t('transcription.loading');
-    }
-    if (isTranscriptionEnabled) {
-      return t('transcription.disable');
-    } else {
-      return t('transcription.enable');
-    }
-  };
-
   const handleOnChangeTranscription = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.checked);
     if (event.target.checked) {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(LOCALES[data.locale]);
@@ -186,6 +179,10 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
       setParticipantsActive(false);
     }
   }, [showOnBoardingTour]);
+
+  useEffect(() => {
+    setValue('transcript', isTranscriptionEnabled || isTranscriptionLoading);
+  }, [isTranscriptionEnabled, isTranscriptionLoading]);
 
   return (
     <>
@@ -253,7 +250,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
           <div className="transcription-container">
             <hr />
             <div className="transcription-wrapper">
-              <div className="transcription__header ">
+              <div className="transcription__header">
                 <h3 className="body-md medium">Transcriptions</h3>
 
                 <Switch
@@ -264,8 +261,12 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
                     }
                   })}
                 />
-              </div>
 
+                {isTranscriptionLoading && <SpinningLoader />}
+              </div>
+              {(isTranscriptionEnabled || isTranscriptionLoading) && (
+                <TranscriptionSelector tooltip />
+              )}
               <TranslateSelector />
               <TranscriptionHistory />
             </div>

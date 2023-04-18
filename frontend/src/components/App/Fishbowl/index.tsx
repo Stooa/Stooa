@@ -78,7 +78,9 @@ const Fishbowl: FC = () => {
     setShowStartRecording,
     setShowStopRecording,
     showFeedbackForm,
-    setShowFeedbackForm
+    setShowFeedbackForm,
+    showTranscriptionModal,
+    setShowTranscriptionModal
   } = useModals();
 
   const { width } = useWindowSize();
@@ -207,12 +209,14 @@ const Fishbowl: FC = () => {
             startRecording={() => handleStartRecording()}
           />
         )}
+
         {showStopRecording && (
           <ModalStopRecording
             closeModal={() => setShowStopRecording(false)}
             stopRecording={() => handleStopRecording()}
           />
         )}
+
         {showFeedbackForm && (
           <FeedbackForm
             ref={feedbackFormRef}
@@ -222,6 +226,8 @@ const Fishbowl: FC = () => {
             variant="fishbowl-mobile"
           />
         )}
+
+        {/* {showTranscriprionModal && } */}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />

@@ -19,6 +19,7 @@ const COOKIE_REFRESH = 'refresh_token';
 const COOKIE_SHARE_LINK_COOKIE = 'share_link';
 const COOKIE_ON_BOARDING_MODERATOR = 'on_boarding_moderator';
 const COOKIE_ON_BOARDING = 'on_boarding';
+const COOKIE_TRANSCRIPTION_LANGUAGE = 'transcription_language';
 const COOKIE_REFRESH_DAYS = 30;
 const COOKIE_ON_BOARDING_DAYS = 30;
 const COOKIE_OPTIONS = { path: '/', domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN };
@@ -146,6 +147,17 @@ const isCurrentGuest = (guestId: string | null) => {
   return guestId !== null && userRepository.getUserGuestId() === guestId;
 };
 
+const getTranscriptionLanguage = () => {
+  return cookie.get(COOKIE_TRANSCRIPTION_LANGUAGE);
+};
+
+const setTranscriptionLanguage = (language: string) => {
+  cookie.set(COOKIE_TRANSCRIPTION_LANGUAGE, language, {
+    ...COOKIE_OPTIONS,
+    expires: COOKIE_REFRESH_DAYS
+  });
+};
+
 export {
   COOKIE_OPTIONS,
   COOKIE_REFRESH,
@@ -158,5 +170,7 @@ export {
   setRefreshToken,
   setToken,
   setShareLinkCookie,
-  isFishbowlShareLinkCookie
+  isFishbowlShareLinkCookie,
+  getTranscriptionLanguage,
+  setTranscriptionLanguage
 };

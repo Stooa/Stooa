@@ -21,6 +21,7 @@ import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
 import CheckIcon from '@/ui/svg/checkmark.svg';
 import Cross from '@/ui/svg/cross.svg';
+import TranscriptionSVG from '@/ui/svg/transcription-icon.svg';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 
 import {
@@ -205,7 +206,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   className="sticky-button sticky-button--transcription"
                   onClick={() => handleTranscriptionToggle()}
                 >
-                  <Feedback />
+                  <TranscriptionSVG />
                   {getTranscriptionText()}
                 </button>
               )}

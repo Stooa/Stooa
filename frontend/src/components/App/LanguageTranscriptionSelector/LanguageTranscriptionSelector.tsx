@@ -16,14 +16,20 @@ import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Languages from '@/components/Common/LanguageSwitcher/styles';
 import { SUPPORTED_LANGUAGE_TAGS } from '@/lib/supportedTranslationLanguages';
 
-interface Props {
+interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   changedLanguage?: (locale: string) => void;
   disabled?: boolean;
+  propsSelectedLanguage?: string;
 }
 
-const TranslationSwitcher = ({ changedLanguage, disabled }: Props) => {
+const LanguageTranscriptionSelector = ({
+  changedLanguage,
+  disabled,
+  propsSelectedLanguage,
+  ...props
+}: Props) => {
   const { lang } = useTranslation('common');
-  const [selectedLanguage, setSelectedLanguage] = useState(lang);
+  const [selectedLanguage, setSelectedLanguage] = useState(propsSelectedLanguage || lang);
   const selectRef = useRef<HTMLSelectElement>(null);
 
   usePersistLocaleCookie();
@@ -45,7 +51,7 @@ const TranslationSwitcher = ({ changedLanguage, disabled }: Props) => {
 
   return (
     <Languages aria-disabled={disabled}>
-      <select ref={selectRef} onChange={changeLanguage} value={selectedLanguage}>
+      <select ref={selectRef} onChange={changeLanguage} value={selectedLanguage} {...props}>
         <option value={selectedLanguage}>{getLanguageName(selectedLanguage)}</option>
         {SUPPORTED_LANGUAGE_TAGS.map(lng => {
           return (
@@ -60,4 +66,4 @@ const TranslationSwitcher = ({ changedLanguage, disabled }: Props) => {
   );
 };
 
-export default TranslationSwitcher;
+export default LanguageTranscriptionSelector;

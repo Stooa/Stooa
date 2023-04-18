@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export * from './TranslationSwitcher';
-export { default } from './TranslationSwitcher';
+export * from './SpinningLoader';
+export { default } from './SpinningLoader';

@@ -9,47 +9,32 @@
 
 import { useStooa } from '@/contexts/StooaManager';
 import Conference from '@/jitsi/Conference';
-import { LOCALES } from '@/lib/supportedTranslationLanguages';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import TranslationSwitcher from '../TranslationSwitcher';
-import { StyledTranslate } from './styles';
+import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
+import { StyledSelectorWrapper } from './styles';
 
 const TranslateSelector = () => {
-  const { locale } = useRouter();
-  const { isTranslationEnabled, setIsTranslationEnabled } = useStooa();
-  const [selectedTranslationLanguage, setSelectedTranslationLanguage] = useState<string>(
-    LOCALES[locale || 'es']
-  );
-
-  const handleOnChange = () => {
-    if (isTranslationEnabled) {
-      setIsTranslationEnabled(false);
-      Conference.stopTranslation();
-      return;
-    }
-
-    setIsTranslationEnabled(true);
-    Conference.setTranslationLanguage(selectedTranslationLanguage);
-  };
+  const { isTranslationEnabled, setIsTranslationEnabled, isTranscriptionEnabled } = useStooa();
 
   const handleChangedLanguage = (locale: string): void => {
-    setSelectedTranslationLanguage(locale);
     Conference.setTranslationLanguage(locale);
   };
 
-  const handleChangeTranscriptionLanguage = (locale: string): void => {
-    Conference.setTranscriptionLanguage(locale);
-  };
-
   return (
-    <StyledTranslate>
-      <TranslationSwitcher
+    <StyledSelectorWrapper disabled={!isTranscriptionEnabled}>
+      <div>
+        <input
+          name="translate"
+          id="translate"
+          type="checkbox"
+          onChange={() => setIsTranslationEnabled(current => !current)}
+        ></input>
+        <label htmlFor="translate">Translate</label>
+      </div>
+      <LanguageTranscriptionSelector
         disabled={!isTranslationEnabled}
         changedLanguage={handleChangedLanguage}
       />
-      <TranslationSwitcher changedLanguage={handleChangeTranscriptionLanguage} />
-    </StyledTranslate>
+    </StyledSelectorWrapper>
   );
 };
 

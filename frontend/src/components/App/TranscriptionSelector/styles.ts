@@ -10,7 +10,7 @@
 import { space } from '@/ui/helpers';
 import styled from 'styled-components';
 
-const StyledSelectorWrapper = styled.div<{ disabled?: boolean }>`
+const StyledTranscriptionWrapper = styled.div`
   display: flex;
   gap: ${space(1)};
   align-items: center;
@@ -20,20 +20,23 @@ const StyledSelectorWrapper = styled.div<{ disabled?: boolean }>`
     margin-inline-end: ${space(1)};
   }
 
+  & label {
+    display: flex;
+    align-items: center;
+    gap: ${space(1)};
+  }
+
   & .info {
     position: relative;
   }
 
-  ${({ disabled }) =>
-    disabled &&
-    `
+  & div.disabled {
     opacity: 0.5;
-    pointer-events: none;
-  `}
+  }
 
   & span {
     margin-right: ${space(1)};
   }
 `;
 
-export { StyledSelectorWrapper };
+export { StyledTranscriptionWrapper };

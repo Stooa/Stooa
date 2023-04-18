@@ -39,6 +39,7 @@ const StyledTranscribedHistory = styled.div`
   border: 1px solid ${COLOR_NEUTRO_500};
   border-radius: ${BORDER_RADIUS};
   padding-inline: 0.5rem;
+  margin-block-start: ${space(1)};
 
   ${scrolllbarStyle};
 
