@@ -19,6 +19,11 @@ const TranslateSelector = () => {
     Conference.setTranslationLanguage(locale);
   };
 
+  const handleActiveTranslate = (): void => {
+    Conference.setTranslationLanguage(null);
+    setIsTranslationEnabled(!isTranslationEnabled);
+  };
+
   return (
     <StyledSelectorWrapper disabled={!isTranscriptionEnabled}>
       <div>
@@ -26,7 +31,7 @@ const TranslateSelector = () => {
           name="translate"
           id="translate"
           type="checkbox"
-          onChange={() => setIsTranslationEnabled(current => !current)}
+          onChange={handleActiveTranslate}
         ></input>
         <label htmlFor="translate">Translate</label>
       </div>

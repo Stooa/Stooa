@@ -28,7 +28,7 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
   const calculateSeatWidth = useCallback((): number => {
     const seatHTML = document.querySelector('.seat');
     const seatPosition = seatHTML?.getBoundingClientRect();
-    if (seatPosition?.width) return seatPosition?.width - 120;
+    if (seatPosition?.width) return seatPosition?.width - 64;
     return 0;
   }, [width, participantsActive]);
 
@@ -37,8 +37,8 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     const seatPosition = seatHTML?.getBoundingClientRect();
 
     if (textRef.current && seatPosition) {
-      textRef.current.style.bottom = `${seatPosition?.bottom - 40}px`;
-      textRef.current.style.left = `${seatPosition?.left + 100}px`;
+      textRef.current.style.bottom = `${seatPosition?.bottom}px`;
+      textRef.current.style.left = `${seatPosition?.left + 32}px`;
     }
   };
 

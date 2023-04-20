@@ -32,7 +32,7 @@ const TranscriptionWrapper = () => {
   };
 
   const showSplittedMessage = data => {
-    const splittedText = data.text.match(/.{1,70}/g);
+    const splittedText = data.text.match(/.{1,85}/g);
     splittedText.forEach((text, index) => {
       setTimeout(() => {
         const messageToShow = {
@@ -42,7 +42,7 @@ const TranscriptionWrapper = () => {
           }
         };
         setTextToShow(currentMessages => ({ ...currentMessages, ...messageToShow }));
-      }, 2000 * index);
+      }, 2500 * index);
     });
   };
 
