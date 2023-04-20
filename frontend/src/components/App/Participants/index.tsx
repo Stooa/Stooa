@@ -104,7 +104,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
 
   const getConferenceParticipants = () => {
     const participantsWithoutTranscriber = getParticipantList().filter(participant => {
-      return !participant.isJigasi;
+      return participant;
     }) as unknown as Participant[];
 
     setParticipants(participantsWithoutTranscriber);
