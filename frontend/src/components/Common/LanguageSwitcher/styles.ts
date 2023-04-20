@@ -9,9 +9,9 @@
 
 import styled from 'styled-components';
 import { space, media } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_300 } from '@/ui/settings';
+import { BORDER_RADIUS, COLOR_NEUTRO_100, COLOR_NEUTRO_300 } from '@/ui/settings';
 
-const Languages = styled.div`
+const Languages = styled.div<{ backgroundColor: string }>`
   display: inline-block;
   padding: ${space()} 0;
   position: relative;
@@ -24,15 +24,16 @@ const Languages = styled.div`
 
   select {
     width: 100%;
-    background-color: transparent;
+    background-color: ${({ backgroundColor }) =>
+      backgroundColor === 'white' ? COLOR_NEUTRO_100 : 'transparent'};
     border: none;
     border-radius: 0;
     color: inherit;
     cursor: pointer;
     line-height: 1.2;
-    padding: 0.25rem 0.175rem;
-    padding-inline: ${space(1)};
-    padding-inline-end: ${space(2.5)};
+    padding-block: ${space(1)};
+    padding-inline: ${space(1.5)};
+    padding-inline-end: ${space(3)};
     transition: background-color 0.3s ease-in-out;
     border-radius: ${BORDER_RADIUS};
 
@@ -49,7 +50,7 @@ const Languages = styled.div`
     height: ${space(1.5)};
     position: absolute;
     pointer-events: none;
-    right: 4px;
+    right: 8px;
     top: calc(50%);
     transform: translateY(-50%);
     width: ${space(1.5)};

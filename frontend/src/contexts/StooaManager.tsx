@@ -38,7 +38,7 @@ import {
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
-  TRANSCRIPTION_FIRST_MESSAGE_RECEIVED,
+  TRANSCRIPTION_TRANSCRIBER_JOINED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -94,7 +94,7 @@ const StooaProvider = ({
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
   const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(false);
-  const [isTranscriptionLoading, setIsTranscriptionLoading] = useState(false);
+  const [isTranscriberJoined, setIsTranscriberJoined] = useState(false);
   const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
   const [participantsActive, setParticipantsActive] = useState(() => {
     if (isModerator && data.isFishbowlNow) {
@@ -290,11 +290,8 @@ const StooaProvider = ({
     sendStopRecordingEvent();
   });
 
-  useEventListener(TRANSCRIPTION_FIRST_MESSAGE_RECEIVED, () => {
-    if (isTranscriptionLoading) {
-      setIsTranscriptionLoading(false);
-      setIsTranscriptionEnabled(true);
-    }
+  useEventListener(TRANSCRIPTION_TRANSCRIBER_JOINED, ({ detail: { joined } }) => {
+    setIsTranscriberJoined(joined);
   });
 
   const checkApIConferenceStatus = () => {
@@ -462,8 +459,8 @@ const StooaProvider = ({
         setIsTranslationEnabled,
         participantsActive,
         setParticipantsActive,
-        isTranscriptionLoading,
-        setIsTranscriptionLoading,
+        isTranscriberJoined,
+        setIsTranscriberJoined,
         selectedTranscriptionLanguage,
         setSelectedTranscriptionLanguage
       }}

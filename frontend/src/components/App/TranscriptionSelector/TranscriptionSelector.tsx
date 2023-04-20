@@ -8,19 +8,22 @@
  */
 
 import Conference from '@/jitsi/Conference';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
 import { StyledTranscriptionWrapper } from './styles';
 import InfoSVG from '@/ui/svg/info-brown.svg';
-import Tooltip from '@/components/Common/Tooltip/Tooltip';
 import { getTranscriptionLanguage, setTranscriptionLanguage } from '@/user/auth';
+import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFullTooltip';
 
 interface Props {
   tooltip?: boolean;
+  location?: 'modal' | 'sidebar';
 }
 
-const TranscriptionSelector = ({ tooltip }: Props) => {
+const TranscriptionSelector = ({ tooltip, location }: Props) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const [arrowPosition, setArrowPosition] = useState<string>('');
+  const tipToHover = useRef<HTMLDivElement>(null);
 
   const cookieTranscriptionLanguage = getTranscriptionLanguage();
 
@@ -29,30 +32,38 @@ const TranscriptionSelector = ({ tooltip }: Props) => {
     setTranscriptionLanguage(locale);
   };
 
+  const handleOnMouseEnter: React.MouseEventHandler = () => {
+    if (tipToHover.current) {
+      const left = tipToHover.current.offsetLeft;
+      setArrowPosition(left + 'px');
+      setShowTooltip(true);
+    }
+  };
+
   return (
-    <StyledTranscriptionWrapper>
+    <StyledTranscriptionWrapper location={location}>
+      {tooltip && showTooltip && (
+        <ColoredFullTooltip
+          arrowPosition={arrowPosition}
+          text="what language are you talking bruv?"
+        />
+      )}
+
       <label>
         <p>Language</p>
-        <span
-          className="info"
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
-        >
-          {tooltip && (
-            <>
-              <InfoSVG />
-              <Tooltip showTooltip={showTooltip} position="top" arrow={true}>
-                <p>
-                  Select the language
-                  <br />
-                  you are talking
-                </p>
-              </Tooltip>
-            </>
-          )}
-        </span>
+        {tooltip && (
+          <div
+            ref={tipToHover}
+            className="info"
+            onMouseEnter={handleOnMouseEnter}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            <InfoSVG />
+          </div>
+        )}
       </label>
       <LanguageTranscriptionSelector
+        backgroundColor={location === 'modal' ? 'white' : 'transparent'}
         id="transcription-language"
         propsSelectedLanguage={cookieTranscriptionLanguage}
         changedLanguage={handleChangeTranscriptionLanguage}

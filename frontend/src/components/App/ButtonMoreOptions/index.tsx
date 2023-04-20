@@ -81,16 +81,15 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     feedbackAlert,
     gaveFeedback,
     isTranscriptionEnabled,
-    isTranscriptionLoading,
     setIsTranscriptionEnabled,
     setParticipantsActive,
-    setIsTranscriptionLoading
+    isTranscriberJoined
   } = useStooa();
 
   const { t } = useTranslation('fishbowl');
 
   const getTranscriptionText = () => {
-    if (isTranscriptionLoading) {
+    if (isTranscriptionEnabled && !isTranscriberJoined) {
       return t('transcription.loading');
     }
 
@@ -151,7 +150,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(transcriptionCookie);
       setParticipantsActive(true);
-      setIsTranscriptionLoading(true);
+      setIsTranscriptionEnabled(true);
       setShowTranscriptionModal(false);
     }
   };

@@ -45,7 +45,9 @@ import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import TranscriptionText from '../TranscriptionText';
-import ModalTranscription from '../ModalTranscription';
+import ModalTranscription from '../ModalTranscription/ModalTranscription';
+import { getTranscriptionLanguage, setTranscriptionLanguage } from '@/user/auth';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -64,9 +66,9 @@ const Fishbowl: FC = () => {
     gaveFeedback,
     setGaveFeedback,
     isTranscriptionEnabled,
+    setIsTranscriptionEnabled,
     participantsActive,
-    setParticipantsActive,
-    setIsTranscriptionLoading
+    setParticipantsActive
   } = useStooa();
 
   const {
@@ -99,7 +101,7 @@ const Fishbowl: FC = () => {
 
   const { fid } = useRouter().query;
 
-  const { t } = useTranslation('fishbowl');
+  const { t, lang } = useTranslation('fishbowl');
 
   const isPreFishbowl =
     conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
@@ -163,9 +165,15 @@ const Fishbowl: FC = () => {
   };
 
   const handleStartTranscription = () => {
+    const transcriptionCookie = getTranscriptionLanguage();
+
+    if (!transcriptionCookie) {
+      setTranscriptionLanguage(LOCALES[lang]);
+    }
+
     Conference.startTranscriptionEvent();
+    setIsTranscriptionEnabled(true);
     setParticipantsActive(true);
-    setIsTranscriptionLoading(true);
     setShowTranscriptionModal(false);
   };
 

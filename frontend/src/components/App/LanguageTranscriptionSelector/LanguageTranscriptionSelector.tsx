@@ -20,12 +20,14 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   changedLanguage?: (locale: string) => void;
   disabled?: boolean;
   propsSelectedLanguage?: string;
+  backgroundColor?: 'transparent' | 'white';
 }
 
 const LanguageTranscriptionSelector = ({
   changedLanguage,
   disabled,
   propsSelectedLanguage,
+  backgroundColor = 'transparent',
   ...props
 }: Props) => {
   const { lang } = useTranslation('common');
@@ -50,7 +52,7 @@ const LanguageTranscriptionSelector = ({
   };
 
   return (
-    <Languages aria-disabled={disabled}>
+    <Languages aria-disabled={disabled} backgroundColor={backgroundColor}>
       <select ref={selectRef} onChange={changeLanguage} value={selectedLanguage} {...props}>
         <option value={selectedLanguage}>{getLanguageName(selectedLanguage)}</option>
         {SUPPORTED_LANGUAGE_TAGS.map(lng => {

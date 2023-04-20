@@ -10,11 +10,12 @@
 import { space } from '@/ui/helpers';
 import styled from 'styled-components';
 
-const StyledTranscriptionWrapper = styled.div`
+const StyledTranscriptionWrapper = styled.div<{ location?: 'modal' | 'sidebar' }>`
   display: flex;
-  gap: ${space(1)};
+  position: relative;
+  gap: ${space(3)};
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ location }) => (location === 'modal' ? '' : 'space-between')};
 
   & input {
     margin-inline-end: ${space(1)};
@@ -34,7 +35,7 @@ const StyledTranscriptionWrapper = styled.div`
     opacity: 0.5;
   }
 
-  & span {
+  & .info {
     margin-right: ${space(1)};
   }
 `;

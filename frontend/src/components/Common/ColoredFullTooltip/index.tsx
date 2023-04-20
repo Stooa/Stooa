@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export * from './ModalTranscription';
-export { default } from './ModalTranscription';
+export * from './ColoredFullTooltip';
+export { default } from './ColoredFullTooltip';

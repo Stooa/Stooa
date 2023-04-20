@@ -40,8 +40,8 @@ export interface StooaContextValues {
   setGaveFeedback: Dispatch<SetStateAction<boolean>>;
   isTranscriptionEnabled: boolean;
   setIsTranscriptionEnabled: Dispatch<SetStateAction<boolean>>;
-  isTranscriptionLoading: boolean;
-  setIsTranscriptionLoading: Dispatch<SetStateAction<boolean>>;
+  isTranscriberJoined: boolean;
+  setIsTranscriberJoined: Dispatch<SetStateAction<boolean>>;
   isTranslationEnabled: boolean;
   setIsTranslationEnabled: Dispatch<SetStateAction<boolean>>;
   participantsActive: boolean;

@@ -21,7 +21,7 @@ import {
   RECORDING_START,
   RECORDING_STOP,
   TRANSCRIPTION_MESSAGE_RECEIVED,
-  TRANSCRIPTION_FIRST_MESSAGE_RECEIVED
+  TRANSCRIPTION_TRANSCRIBER_JOINED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
@@ -37,7 +37,6 @@ const conferenceRepository = () => {
   let isJoined = false;
   let twitter = false;
   let linkedin = false;
-  let firstTranscriptionMessageReceived = false;
 
   const joinUser = (id, user) => {
     if (id === undefined || id === null) {
@@ -116,6 +115,12 @@ const conferenceRepository = () => {
 
       leaveUser(id);
     }
+
+    if (property === 'features_jigasi' && newValue === true) {
+      dispatchEvent(TRANSCRIPTION_TRANSCRIBER_JOINED, { joined: true });
+
+      return;
+    }
   };
 
   const _handleConnectionFailed = error => {
@@ -185,10 +190,6 @@ const conferenceRepository = () => {
     console.log('[STOOA] Endpoint message received', participant, json);
 
     if ((json && json.type === 'transcription-result') || json.type === 'translation-result') {
-      if (!firstTranscriptionMessageReceived) {
-        dispatchEvent(TRANSCRIPTION_FIRST_MESSAGE_RECEIVED);
-        firstTranscriptionMessageReceived = true;
-      }
       dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { data: json });
     }
   };
@@ -286,7 +287,7 @@ const conferenceRepository = () => {
 
   const _handleUserLeft = (id, user) => {
     if (user._properties?.features_jigasi) {
-      firstTranscriptionMessageReceived = false;
+      dispatchEvent(TRANSCRIPTION_TRANSCRIBER_JOINED, { joined: false });
     }
 
     userRepository.handleUserLeft(id, user);

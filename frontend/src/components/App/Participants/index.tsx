@@ -77,13 +77,12 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     isTranscriptionEnabled,
     participantsActive,
     setParticipantsActive,
-    setIsTranscriptionLoading,
-    isTranscriptionLoading,
-    setIsTranscriptionEnabled
+    setIsTranscriptionEnabled,
+    isTranscriberJoined
   } = useStooa();
 
   const { register, setValue } = useForm({
-    defaultValues: { transcript: isTranscriptionEnabled || isTranscriptionLoading }
+    defaultValues: { transcript: isTranscriptionEnabled && isTranscriberJoined }
   });
 
   const { showOnBoardingTour, setShowTranscriptionModal } = useModals();
@@ -136,7 +135,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     if (event.target.checked) {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(cookieTranscription);
-      setIsTranscriptionLoading(true);
+      setIsTranscriptionEnabled(true);
     } else {
       Conference.stopTranscriptionEvent();
       setIsTranscriptionEnabled(false);
@@ -186,8 +185,8 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   }, [showOnBoardingTour]);
 
   useEffect(() => {
-    setValue('transcript', isTranscriptionEnabled || isTranscriptionLoading);
-  }, [isTranscriptionEnabled, isTranscriptionLoading]);
+    setValue('transcript', isTranscriptionEnabled);
+  }, [isTranscriptionEnabled]);
 
   return (
     <>
@@ -267,11 +266,9 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
                   })}
                 />
 
-                {isTranscriptionLoading && <SpinningLoader />}
+                {isTranscriptionEnabled && !isTranscriberJoined && <SpinningLoader />}
               </div>
-              {(isTranscriptionEnabled || isTranscriptionLoading) && (
-                <TranscriptionSelector tooltip />
-              )}
+              {isTranscriptionEnabled && <TranscriptionSelector tooltip />}
               <TranslateSelector />
               <TranscriptionHistory />
             </div>

@@ -10,9 +10,10 @@
 import React, { ReactElement, useRef, useState } from 'react';
 import { Field, FieldAttributes, useField } from 'formik';
 
-import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
+import { SwitchLabel, SwitchStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
 import Info from '@/ui/svg/info-brown.svg';
+import ColoredFullTooltip from '../ColoredFullTooltip/ColoredFullTooltip';
 
 type Props = {
   label: string;
@@ -22,7 +23,7 @@ type Props = {
 
 const Switch: React.FC<Props> = ({ label, tooltipText, full, ...props }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const [arrowPosition, setArrowPosition] = useState<string>();
+  const [arrowPosition, setArrowPosition] = useState<string>('');
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
   const tipToHover = useRef<HTMLDivElement>(null);
 
@@ -59,15 +60,7 @@ const Switch: React.FC<Props> = ({ label, tooltipText, full, ...props }) => {
           onMouseLeave={() => setShowTooltip(false)}
           ref={tipToHover}
         >
-          {showTooltip && (
-            <StyledIntroductionTooltip>
-              <div
-                className="arrow"
-                style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
-              ></div>
-              {tooltipText}
-            </StyledIntroductionTooltip>
-          )}
+          {showTooltip && <ColoredFullTooltip arrowPosition={arrowPosition} text={tooltipText} />}
           <Info />
         </div>
       </div>
