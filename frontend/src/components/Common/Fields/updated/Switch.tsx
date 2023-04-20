@@ -9,10 +9,11 @@
 
 import React, { ReactElement, forwardRef, useRef, useState } from 'react';
 
-import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
+import { SwitchLabel, SwitchStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
 import { FieldError } from 'react-hook-form';
 import Info from '@/ui/svg/info-brown.svg';
+import ColoredFullTooltip from '../../ColoredFullTooltip/ColoredFullTooltip';
 
 type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   tooltipText?: string | ReactElement;
@@ -59,13 +60,7 @@ const Switch = forwardRef<HTMLInputElement, Props>(
                 ref={tipToHover}
               >
                 {showTooltip && (
-                  <StyledIntroductionTooltip>
-                    <div
-                      className="arrow"
-                      style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
-                    ></div>
-                    {tooltipText}
-                  </StyledIntroductionTooltip>
+                  <ColoredFullTooltip arrowPosition={arrowPosition || ''} text={tooltipText} />
                 )}
                 <Info />
               </div>
