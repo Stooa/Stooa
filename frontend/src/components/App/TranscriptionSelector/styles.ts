@@ -16,6 +16,7 @@ const StyledTranscriptionWrapper = styled.div<{ location?: 'modal' | 'default' }
   gap: ${space(3)};
   align-items: center;
   justify-content: ${({ location }) => (location === 'modal' ? '' : 'space-between')};
+  margin-bottom: ${space(1)};
 
   & input {
     margin-inline-end: ${space(1)};

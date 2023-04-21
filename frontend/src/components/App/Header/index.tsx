@@ -17,6 +17,7 @@ import { Header as HeaderStyled } from '@/layouts/App/styles';
 import { ROUTE_HOME } from '@/app.config';
 import StatusRecording from '../StatusRecording';
 import RedRec from '@/ui/svg/rec-red.svg';
+import TranscriptionSVG from '@/ui/svg/transcription-icon.svg';
 import useTranslation from 'next-translate/useTranslation';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
@@ -35,7 +36,14 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ isPrefishbowl }) => {
-  const { data, isModerator, conferenceStatus, conferenceReady, isRecording } = useStooa();
+  const {
+    data,
+    isModerator,
+    conferenceStatus,
+    conferenceReady,
+    isRecording,
+    isTranscriptionEnabled
+  } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
   const { t } = useTranslation('fishbowl');
@@ -98,6 +106,11 @@ const Header: React.FC<Props> = ({ isPrefishbowl }) => {
               <StatusBar />
             </div>
             <Participants initialized={conferenceReady} fid={fid as string} />
+            {isTranscriptionEnabled && (
+              <div className="transcription-indicator">
+                <TranscriptionSVG />
+              </div>
+            )}
           </>
         )}
       </div>

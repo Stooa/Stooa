@@ -80,9 +80,16 @@ const Header = styled.header`
 
   .header-actions {
     justify-content: flex-end;
+    align-items: center;
 
     .actions {
       margin-right: ${space()};
+    }
+
+    .transcription-indicator {
+      position: relative;
+      margin-left: ${space(1)};
+      height: 18px;
     }
   }
 

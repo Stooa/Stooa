@@ -269,11 +269,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
                   onClick={event => {
                     handleOnChangeTranscription(event);
                   }}
-                  {...register('transcript', {
-                    // onChange: event => {
-                    //   handleOnChangeTranscription(event);
-                    // }
-                  })}
+                  {...register('transcript')}
                 />
 
                 {isTranscriptionEnabled && !isTranscriberJoined && <SpinningLoader />}

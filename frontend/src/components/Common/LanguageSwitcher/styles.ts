@@ -13,7 +13,6 @@ import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400 } from '@/ui/settings
 
 const Languages = styled.div<{ location?: 'modal' | 'default' }>`
   display: inline-block;
-  padding: ${space()} 0;
   position: relative;
   max-width: 20ch;
 

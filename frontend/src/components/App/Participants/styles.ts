@@ -144,6 +144,7 @@ const ParticipantsDrawer = styled.div`
       display: flex;
       align-items: center;
       gap: ${space(1)};
+      margin-bottom: ${space()};
     }
   }
 `;
@@ -246,10 +247,6 @@ const ParticipantsToggle = styled(StatusBox)`
   padding-right: 0;
   margin-left: ${space(1)};
 
-  &:not(.active) {
-    padding-left: 0;
-  }
-
   > * {
     position: relative;
     z-index: 1;
@@ -287,7 +284,7 @@ const ParticipantsToggle = styled(StatusBox)`
       left: 0;
       position: absolute;
       top: 0;
-      width: 160%;
+      width: 200%;
       z-index: 0;
     }
 
