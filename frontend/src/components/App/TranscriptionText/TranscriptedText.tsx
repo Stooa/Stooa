@@ -42,6 +42,8 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     }
   };
 
+  positionTranscriptMessageReceived(userId);
+
   const scrollToBottom = () => {
     if (textRef.current) {
       const textElement = textRef.current.querySelector('#transcription-text');

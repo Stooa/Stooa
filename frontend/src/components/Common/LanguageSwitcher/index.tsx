@@ -45,7 +45,7 @@ const LanguageSwitcher = ({ changedLanguage, disabled }: Props) => {
   };
 
   return (
-    <Languages backgroundColor="transparent" aria-disabled={disabled}>
+    <Languages location="default" aria-disabled={disabled}>
       <select ref={selectRef} onChange={changeLanguage} value={lang}>
         <option value={lang}>{t(`languages.${lang}`)}</option>
         {locales

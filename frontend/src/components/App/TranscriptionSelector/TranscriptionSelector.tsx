@@ -17,7 +17,7 @@ import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFu
 
 interface Props {
   tooltip?: boolean;
-  location?: 'modal' | 'sidebar';
+  location?: 'modal' | 'default';
 }
 
 const TranscriptionSelector = ({ tooltip, location }: Props) => {
@@ -63,7 +63,7 @@ const TranscriptionSelector = ({ tooltip, location }: Props) => {
         )}
       </label>
       <LanguageTranscriptionSelector
-        backgroundColor={location === 'modal' ? 'white' : 'transparent'}
+        location={location}
         id="transcription-language"
         propsSelectedLanguage={cookieTranscriptionLanguage}
         changedLanguage={handleChangeTranscriptionLanguage}

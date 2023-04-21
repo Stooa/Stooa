@@ -10,7 +10,7 @@
 import { space } from '@/ui/helpers';
 import styled from 'styled-components';
 
-const StyledTranscriptionWrapper = styled.div<{ location?: 'modal' | 'sidebar' }>`
+const StyledTranscriptionWrapper = styled.div<{ location?: 'modal' | 'default' }>`
   display: flex;
   position: relative;
   gap: ${space(3)};

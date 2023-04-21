@@ -125,20 +125,27 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     return 0;
   };
 
-  const handleOnChangeTranscription = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChangeTranscription = (event: React.MouseEvent<HTMLInputElement>) => {
     const cookieTranscription = getTranscriptionLanguage();
     if (!cookieTranscription) {
+      event.preventDefault();
       setShowTranscriptionModal(true);
       return;
     }
 
-    if (event.target.checked) {
+    const checkbox = event.target as HTMLInputElement;
+
+    if (checkbox && checkbox.checked) {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(cookieTranscription);
       setIsTranscriptionEnabled(true);
-    } else {
+      return;
+    }
+
+    if (checkbox && !checkbox.checked) {
       Conference.stopTranscriptionEvent();
       setIsTranscriptionEnabled(false);
+      return;
     }
   };
 
@@ -259,10 +266,13 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
 
                 <Switch
                   id="transcript"
+                  onClick={event => {
+                    handleOnChangeTranscription(event);
+                  }}
                   {...register('transcript', {
-                    onChange: event => {
-                      handleOnChangeTranscription(event);
-                    }
+                    // onChange: event => {
+                    //   handleOnChangeTranscription(event);
+                    // }
                   })}
                 />
 
