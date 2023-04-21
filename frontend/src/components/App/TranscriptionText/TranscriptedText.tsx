@@ -21,6 +21,7 @@ interface Props {
 export const TranscriptedText = ({ messageData, userId }: Props) => {
   const [maxWidth, setMaxWidth] = useState(100);
   const [textToShow, setTextToShow] = useState(messageData.text);
+  const [positioned, setPositioned] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   const { participantsActive } = useStooa();
@@ -39,10 +40,9 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     if (textRef.current && seatPosition) {
       textRef.current.style.top = `${seatPosition?.top + seatPosition?.height - 80 - 100}px`;
       textRef.current.style.left = `${seatPosition?.left + 32}px`;
+      setPositioned(true);
     }
   };
-
-  positionTranscriptMessageReceived(userId);
 
   const scrollToBottom = () => {
     if (textRef.current) {
@@ -57,12 +57,12 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
 
   useEffect(() => {
     positionTranscriptMessageReceived(userId);
-  }, [messageData]);
+  }, []);
 
   useEffect(() => {
-    scrollToBottom();
-
     setTextToShow(messageData.text);
+
+    scrollToBottom();
 
     const timeOut = setTimeout(() => {
       setTextToShow('');
@@ -73,7 +73,7 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     };
   }, [messageData]);
 
-  if (!textToShow) {
+  if (!textToShow && !positioned) {
     return null;
   }
   return (
