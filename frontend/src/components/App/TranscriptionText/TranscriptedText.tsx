@@ -37,7 +37,7 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     const seatPosition = seatHTML?.getBoundingClientRect();
 
     if (textRef.current && seatPosition) {
-      textRef.current.style.bottom = `${seatPosition?.bottom}px`;
+      textRef.current.style.top = `${seatPosition?.top + seatPosition?.height - 80 - 100}px`;
       textRef.current.style.left = `${seatPosition?.left + 32}px`;
     }
   };
@@ -55,7 +55,7 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
 
   useEffect(() => {
     positionTranscriptMessageReceived(userId);
-  }, []);
+  }, [messageData]);
 
   useEffect(() => {
     scrollToBottom();
