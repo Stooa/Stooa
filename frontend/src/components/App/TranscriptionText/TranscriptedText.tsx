@@ -57,9 +57,15 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
 
   useEffect(() => {
     positionTranscriptMessageReceived(userId);
+
+    return () => {
+      setPositioned(false);
+    };
   }, []);
 
   useEffect(() => {
+    positionTranscriptMessageReceived(userId);
+
     setTextToShow(messageData.text);
 
     scrollToBottom();
@@ -71,14 +77,12 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [messageData]);
+  }, [messageData, userId]);
 
-  if (textToShow.length < 1 && !positioned) {
-    return null;
-  }
   return (
     <StyledTextContainer
       key={userId}
+      className={!positioned || textToShow.length < 1 ? 'hidden' : ''}
       style={{ '--max-width': maxWidth + 'px' } as React.CSSProperties}
       ref={textRef}
     >
