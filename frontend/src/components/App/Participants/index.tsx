@@ -23,6 +23,7 @@ import People from '@/ui/svg/people.svg';
 import Curve from '@/ui/svg/participants-curve.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
+import TranscriptionSVG from '@/ui/svg/transcription-icon.svg';
 
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
@@ -210,6 +211,11 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
         <span className="body-xs medium">
           {participants.length === 0 ? 1 : participants.length}
         </span>
+        {isTranscriptionEnabled && (
+          <div className="transcription-indicator">
+            <TranscriptionSVG />
+          </div>
+        )}
       </ParticipantsToggle>
       <ParticipantsDrawer className={participantsActive ? 'active' : ''}>
         <div>

@@ -73,7 +73,7 @@ export const TranscriptedText = ({ messageData, userId }: Props) => {
     };
   }, [messageData]);
 
-  if (!textToShow && !positioned) {
+  if (textToShow.length < 1 && !positioned) {
     return null;
   }
   return (

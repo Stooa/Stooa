@@ -45,7 +45,7 @@ const TranscriptionSelector = ({ tooltip, location }: Props) => {
       {tooltip && showTooltip && (
         <ColoredFullTooltip
           arrowPosition={arrowPosition}
-          text="what language are you talking bruv?"
+          text="Please specify which language you are speaking."
         />
       )}
 

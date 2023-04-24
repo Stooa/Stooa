@@ -85,12 +85,6 @@ const Header = styled.header`
     .actions {
       margin-right: ${space()};
     }
-
-    .transcription-indicator {
-      position: relative;
-      margin-left: ${space(1)};
-      height: 18px;
-    }
   }
 
   .header-info {

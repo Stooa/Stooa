@@ -252,7 +252,13 @@ const ParticipantsToggle = styled(StatusBox)`
     z-index: 1;
   }
 
-  .curve {
+  & .transcription-indicator {
+    position: relative;
+    margin-left: ${space(1)};
+    height: 24px;
+  }
+
+  & .curve {
     display: none;
     height: auto;
     position: absolute;
@@ -267,7 +273,7 @@ const ParticipantsToggle = styled(StatusBox)`
     }
   }
 
-  .toggle-icon {
+  & .toggle-icon {
     height: ${rems(10)};
     margin-right: ${space()};
     width: ${rems(10)};
@@ -288,7 +294,7 @@ const ParticipantsToggle = styled(StatusBox)`
       z-index: 0;
     }
 
-    .curve {
+    & .curve {
       display: block;
     }
   }
