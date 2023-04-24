@@ -11,7 +11,7 @@
         "doctrine/doctrine-bundle": "2.9.1",
         "doctrine/doctrine-fixtures-bundle": "3.4.3",
         "doctrine/doctrine-migrations-bundle": "3.2.2",
-        "doctrine/orm": "2.14.2",
+        "doctrine/orm": "2.14.3",
         "gedmo/doctrine-extensions": "3.11.1",
         "gesdinet/jwt-refresh-token-bundle": "1.1.1",
         "hashids/hashids": "5.0.2",
