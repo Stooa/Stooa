@@ -30,6 +30,7 @@ const StyledTranscriptionWrapper = styled.div<{ location?: 'modal' | 'default' }
 
   & .info {
     position: relative;
+    height: 16px;
   }
 
   & div.disabled {

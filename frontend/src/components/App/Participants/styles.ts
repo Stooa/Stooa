@@ -256,6 +256,15 @@ const ParticipantsToggle = styled(StatusBox)`
     position: relative;
     margin-left: ${space(1)};
     height: 24px;
+
+    & svg {
+      & path {
+        fill: ${COLOR_NEUTRO_700};
+      }
+      & rect {
+        fill: ${COLOR_NEUTRO_100};
+      }
+    }
   }
 
   & .curve {
