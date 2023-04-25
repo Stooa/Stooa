@@ -11,17 +11,27 @@ import { useStooa } from '@/contexts/StooaManager';
 import Conference from '@/jitsi/Conference';
 import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
 import { StyledSelectorWrapper } from './styles';
+import useTranslation from 'next-translate/useTranslation';
 
 const TranslateSelector = () => {
-  const { isTranslationEnabled, setIsTranslationEnabled, isTranscriptionEnabled } = useStooa();
+  const {
+    isTranslationEnabled,
+    setIsTranslationEnabled,
+    isTranscriptionEnabled,
+    translationLanguage,
+    setTranslationLanguage
+  } = useStooa();
+
+  const { t } = useTranslation('fishbowl');
 
   const handleChangedLanguage = (locale: string): void => {
     Conference.setTranslationLanguage(locale);
+    setTranslationLanguage(locale);
   };
 
   const handleActiveTranslate = (): void => {
     Conference.setTranslationLanguage(null);
-    setIsTranslationEnabled(!isTranslationEnabled);
+    setIsTranslationEnabled(current => !current);
   };
 
   return (
@@ -33,10 +43,11 @@ const TranslateSelector = () => {
           type="checkbox"
           onChange={handleActiveTranslate}
         ></input>
-        <label htmlFor="translate">Translate</label>
+        <label htmlFor="translate">{t('transcription.translate')}</label>
       </div>
       <LanguageTranscriptionSelector
         disabled={!isTranslationEnabled}
+        propsSelectedLanguage={translationLanguage}
         changedLanguage={handleChangedLanguage}
       />
     </StyledSelectorWrapper>

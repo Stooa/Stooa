@@ -60,6 +60,7 @@ import { pushEventDataLayer } from '@/lib/analytics';
 import SharedTrack from '@/jitsi/SharedTrack';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { SupportedLanguageTag } from '@/types/transcriptions';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -96,6 +97,9 @@ const StooaProvider = ({
   const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(false);
   const [isTranscriberJoined, setIsTranscriberJoined] = useState(false);
   const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
+  const [translationLanguage, setTranslationLanguage] = useState<SupportedLanguageTag>(
+    LOCALES[lang]
+  );
   const [participantsActive, setParticipantsActive] = useState(() => {
     if (isModerator && data.isFishbowlNow) {
       return true;
@@ -462,7 +466,9 @@ const StooaProvider = ({
         isTranscriberJoined,
         setIsTranscriberJoined,
         selectedTranscriptionLanguage,
-        setSelectedTranscriptionLanguage
+        setSelectedTranscriptionLanguage,
+        translationLanguage,
+        setTranslationLanguage
       }}
     >
       {children}

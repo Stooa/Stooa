@@ -17,15 +17,15 @@ import { TranscriptedText } from './TranscriptedText';
 const TranscriptionWrapper = () => {
   const [textToShow, setTextToShow] = useState({});
   const [messagesReceived, setMessagesReceived] = useState({});
-  const { isTranslationEnabled, isTranscriptionEnabled } = useStooa();
+  const { isTranslationEnabled, isTranscriptionEnabled, translationLanguage } = useStooa();
 
   const pushMessage = data => {
     const messageToPush = {
       [data.message_id]: {
         userId: data.participant.id,
         userName: data.participant.name,
-        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
-        text: isTranslationEnabled ? data.text : data.transcript[0].text
+        confidence: isTranslationEnabled && !data.transcript ? 0 : data.transcript[0].confidence,
+        text: isTranslationEnabled && !data.transcript ? data.text : data.transcript[0].text
       }
     };
     setMessagesReceived({ ...messagesReceived, ...messageToPush });
@@ -49,8 +49,8 @@ const TranscriptionWrapper = () => {
   const showMessage = data => {
     const messageToShow = {
       [data.participant.id]: {
-        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence,
-        text: isTranslationEnabled ? data.text : data.transcript[0].text
+        confidence: isTranslationEnabled && !data.transcript ? 0 : data.transcript[0].confidence,
+        text: isTranslationEnabled && !data.transcript ? data.text : data.transcript[0].text
       }
     };
 
@@ -62,7 +62,14 @@ const TranscriptionWrapper = () => {
       return;
     }
 
-    if (isTranslationEnabled && data.type !== 'translation-result') {
+    if (
+      (isTranslationEnabled && data.type !== 'translation-result') ||
+      (!isTranslationEnabled && data.type === 'translation-result')
+    ) {
+      return;
+    }
+
+    if (isTranslationEnabled && translationLanguage !== data.language) {
       return;
     }
 

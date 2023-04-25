@@ -16,7 +16,7 @@ import { StyledTranscribedHistory } from './styles';
 
 export const TranscriptionHistory = () => {
   const [messageHistory, setMessageHistory] = useState<TranscriptionMessageType[]>([]);
-  const { isTranslationEnabled, isTranscriptionEnabled } = useStooa();
+  const { isTranslationEnabled, isTranscriptionEnabled, translationLanguage } = useStooa();
 
   const historyRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +25,14 @@ export const TranscriptionHistory = () => {
       return;
     }
 
-    if (isTranslationEnabled && data.type !== 'translation-result') {
+    if (
+      (isTranslationEnabled && data.type !== 'translation-result') ||
+      (!isTranslationEnabled && data.type === 'translation-result')
+    ) {
+      return;
+    }
+
+    if (isTranslationEnabled && translationLanguage !== data.language) {
       return;
     }
 
@@ -34,7 +41,8 @@ export const TranscriptionHistory = () => {
         messageId: data.message_id,
         userId: data.participant.id,
         userName: data.participant.name,
-        confidence: isTranslationEnabled ? 0 : data.transcript[0].confidence || 0,
+        confidence:
+          isTranslationEnabled && !data.transcript ? 0 : data.transcript[0].confidence || 0,
         text: decodeURIComponent(isTranslationEnabled ? data.text : data.transcript[0].text)
       };
 
@@ -56,7 +64,7 @@ export const TranscriptionHistory = () => {
   return (
     <StyledTranscribedHistory ref={historyRef}>
       <div className="messages">
-        {messageHistory.slice(-20).map(message => {
+        {messageHistory.map(message => {
           return (
             <div className="message" key={message.messageId}>
               <h4>{message.userName}: </h4>

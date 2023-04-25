@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import { SUPPORTED_LANGUAGE_TAGS } from '@/lib/supportedTranslationLanguages';
+
 export type TranscriptionMessageType = {
   messageId?: string;
   userId: string;
@@ -14,3 +16,5 @@ export type TranscriptionMessageType = {
   confidence: number;
   text: string;
 };
+
+export type SupportedLanguageTag = (typeof SUPPORTED_LANGUAGE_TAGS)[number];
