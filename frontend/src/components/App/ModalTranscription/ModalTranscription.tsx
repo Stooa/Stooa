@@ -14,6 +14,7 @@ import Button from '@/components/Common/Button';
 // import Trans from 'next-translate/Trans';
 import { StyledTranscriptionModal } from './styles';
 import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
+import Trans from 'next-translate/Trans';
 
 interface Props {
   startTranscription: () => void;
@@ -29,10 +30,12 @@ const ModalTranscription = ({ closeModal, startTranscription }: Props) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">In what language do you speak?</h2>
+        <h2 className="title-sm">{t('transcription.modalTitle')}</h2>
         <p className="body">
-          Before we start, we need you to
-          <b> indicate in which language you will be participating</b> in this conversation.
+          <Trans
+            i18nKey="fishbowl:transcription.modalBody"
+            components={{ span: <span className="medium" /> }}
+          />
         </p>
 
         <TranscriptionSelector location="modal" />
@@ -42,7 +45,7 @@ const ModalTranscription = ({ closeModal, startTranscription }: Props) => {
             {t('common:cancel')}
           </Button>
           <Button onClick={startTranscription} data-testid="start-recording-button">
-            Enable transcription
+            {t('transcription.enable')}
           </Button>
         </div>
       </div>

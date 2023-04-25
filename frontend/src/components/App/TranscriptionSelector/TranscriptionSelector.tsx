@@ -14,6 +14,7 @@ import { StyledTranscriptionWrapper } from './styles';
 import InfoSVG from '@/ui/svg/info-brown.svg';
 import { getTranscriptionLanguage, setTranscriptionLanguage } from '@/user/auth';
 import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFullTooltip';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   tooltip?: boolean;
@@ -24,6 +25,7 @@ const TranscriptionSelector = ({ tooltip, location }: Props) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [arrowPosition, setArrowPosition] = useState<string>('');
   const tipToHover = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation('fishbowl');
 
   const cookieTranscriptionLanguage = getTranscriptionLanguage();
 
@@ -43,14 +45,11 @@ const TranscriptionSelector = ({ tooltip, location }: Props) => {
   return (
     <StyledTranscriptionWrapper location={location}>
       {tooltip && showTooltip && (
-        <ColoredFullTooltip
-          arrowPosition={arrowPosition}
-          text="Please specify which language you are speaking."
-        />
+        <ColoredFullTooltip arrowPosition={arrowPosition} text={t('transcription.tooltip')} />
       )}
 
       <label>
-        <p>Language</p>
+        <p>{t('form:fishbowl.language')}</p>
         {tooltip && (
           <div
             ref={tipToHover}

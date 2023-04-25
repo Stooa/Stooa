@@ -268,7 +268,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
             <hr />
             <div className="transcription-wrapper">
               <div className="transcription__header">
-                <h3 className="body-md medium">Transcriptions</h3>
+                <h3 className="body-md medium">{t('transcription.title')}</h3>
 
                 <Switch
                   id="transcript"
