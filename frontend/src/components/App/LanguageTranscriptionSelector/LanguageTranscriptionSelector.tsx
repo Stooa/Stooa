@@ -37,7 +37,7 @@ const LanguageTranscriptionSelector = ({
   usePersistLocaleCookie();
 
   const getLanguageName = useCallback((languageTag: string) => {
-    const languageNames = new Intl.DisplayNames(['en'], {
+    const languageNames = new Intl.DisplayNames([lang], {
       type: 'language'
     });
     const languageTagWithoutRegionCode = languageTag.toLowerCase().split(/[_-]+/)[0];
