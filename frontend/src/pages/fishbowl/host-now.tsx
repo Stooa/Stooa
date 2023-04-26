@@ -8,7 +8,6 @@
  */
 
 import { useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
