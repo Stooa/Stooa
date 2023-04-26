@@ -28,6 +28,13 @@ const HostNow = props => {
   const router = useRouter();
   const notInitialRender = useRef(false);
   const referer = props.referer ? props.referer : '';
+  console.log('------> [STOOA] Host now referer', referer);
+  const shouldRedirect = referer.includes('/host-now') && !referer.includes('redirect');
+  console.table({
+    hostNow: referer.includes('/host-now'),
+    redirect: referer.includes('redirect'),
+    shouldRedirect
+  });
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -78,7 +85,7 @@ const HostNow = props => {
     if (notInitialRender.current) {
       return;
     }
-    if (referer.includes('/host-now') || referer.includes('/fb')) {
+    if (referer.includes('/host-now') && !referer.includes('redirect')) {
       router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
       return;
     }
