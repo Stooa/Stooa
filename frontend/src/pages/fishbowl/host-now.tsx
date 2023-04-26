@@ -22,8 +22,6 @@ import LoadingIcon from '@/components/Common/LoadingIcon';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
-
 const HostNow = props => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [, dispatch] = useStateValue();
@@ -81,15 +79,15 @@ const HostNow = props => {
     if (notInitialRender.current) {
       return;
     }
+    if (referer.includes('/host-now') || referer.includes('/fb')) {
+      router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+      return;
+    }
+
     notInitialRender.current = true;
     handleResetAppState();
     createFishbowlRequest();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  if (referer.includes('/host-now') || referer.includes('/fb')) {
-    router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
-    return <Loader />;
-  }
 
   return (
     <Layout>
