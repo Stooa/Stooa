@@ -8,6 +8,7 @@
  */
 
 import { useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
@@ -21,12 +22,15 @@ import LoadingIcon from '@/components/Common/LoadingIcon';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-const HostNow = () => {
+const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
+
+const HostNow = props => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [, dispatch] = useStateValue();
   const { lang } = useTranslation();
   const router = useRouter();
   const notInitialRender = useRef(false);
+  const referer = props.referer ? props.referer : '';
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -82,6 +86,11 @@ const HostNow = () => {
     createFishbowlRequest();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  if (referer.includes('/host-now')) {
+    router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+    return <Loader />;
+  }
+
   return (
     <Layout>
       <LoadingIcon />
@@ -90,3 +99,10 @@ const HostNow = () => {
 };
 
 export default HostNow;
+
+export async function getServerSideProps(context) {
+  const referer = context.req.headers.referer || null;
+  return {
+    props: { referer }
+  };
+}
