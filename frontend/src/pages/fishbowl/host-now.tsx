@@ -86,7 +86,7 @@ const HostNow = props => {
     createFishbowlRequest();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (referer.includes('/host-now')) {
+  if (referer.includes('/host-now') || referer.includes('/fb')) {
     router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
     return <Loader />;
   }
