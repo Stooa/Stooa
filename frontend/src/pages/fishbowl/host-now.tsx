@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
@@ -26,6 +26,7 @@ const HostNow = () => {
   const [, dispatch] = useStateValue();
   const { lang } = useTranslation();
   const router = useRouter();
+  const notInitialRender = useRef(false);
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -73,6 +74,10 @@ const HostNow = () => {
   };
 
   useEffect(() => {
+    if (notInitialRender.current) {
+      return;
+    }
+    notInitialRender.current = true;
     handleResetAppState();
     createFishbowlRequest();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

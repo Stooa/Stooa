@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
+import { ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -51,7 +51,7 @@ const FixedButton = ({ buttonText }: { buttonText: string }) => {
   } else {
     return (
       <StyledButtonWrapper>
-        <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+        <RedirectLink href={ROUTE_FISHBOWL_HOST_NOW} passHref>
           <Button
             size="large"
             as="a"
