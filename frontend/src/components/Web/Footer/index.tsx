@@ -46,6 +46,7 @@ import Instagram from '@/ui/svg/RRSS-instagram.svg';
 import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
 import Twitter from '@/ui/svg/RRSS-twitter.svg';
 import { Container, FooterCopyright, FooterNav, Nav, NavList, NavTitle } from './styles';
+import { useRouter } from 'next/router';
 
 type TSocial = {
   name: string;
@@ -57,6 +58,7 @@ const Footer: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('common');
   const currentYear = new Date().getFullYear();
+  const { pathname } = useRouter();
 
   const socialNetworks: TSocial[] = [
     {
@@ -87,7 +89,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <Container>
+    <Container className={pathname === '/' ? 'home' : ''}>
       <FooterNav>
         <div>
           <Logo className="logo" href={ROUTE_HOME} />
