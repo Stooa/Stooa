@@ -149,7 +149,9 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     } else {
       Conference.startTranscriptionEvent();
       Conference.setTranscriptionLanguage(transcriptionCookie);
-      setParticipantsActive(true);
+      if (deviceType === 'Desktop') {
+        setParticipantsActive(true);
+      }
       setIsTranscriptionEnabled(true);
       setShowTranscriptionModal(false);
     }

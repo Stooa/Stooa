@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import { scrolllbarStyle } from '@/ui/Scrollbar';
 import { BORDER_RADIUS, COLOR_NEUTRO_200, COLOR_NEUTRO_300, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
@@ -18,17 +18,27 @@ const StyledTextContainer = styled.div`
   z-index: 40;
   color: white;
   background-color: hsla(0, 0%, 0%, 0.5);
-  padding: ${space()} ${space(2)};
+  padding: ${space(0.5)} ${space(0.5)};
   border-radius: ${BORDER_RADIUS};
+  font-size: 0.75rem;
 
-  max-height: 58px;
+  max-height: 44px;
   overflow-y: auto;
+
+  backdrop-filter: blur(6px);
 
   scrollbar-width: none;
   -ms-overflow-style: none;
   &::-webkit-scrollbar {
     width: 0 !important;
   }
+
+  ${media.min('tablet')`
+    font-size: 1rem;
+    padding: ${space()} ${space(2)};
+
+    max-height: 58px;
+  `}
 `;
 
 const StyledTranscribedHistory = styled.div`
