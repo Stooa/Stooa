@@ -94,7 +94,7 @@ const Header = styled.header`
       overflow: hidden;
 
       &.transcriptions {
-        max-width: 45vw;
+        max-width: 40vw;
       }
 
       ${media.min('tablet')`
