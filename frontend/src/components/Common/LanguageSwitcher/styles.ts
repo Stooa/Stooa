@@ -8,7 +8,7 @@
  */
 
 import styled from 'styled-components';
-import { space, media } from '@/ui/helpers';
+import { space } from '@/ui/helpers';
 import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400 } from '@/ui/settings';
 
 const Languages = styled.div<{ location?: 'modal' | 'default' }>`
