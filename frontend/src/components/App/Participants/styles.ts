@@ -46,7 +46,10 @@ const ParticipantsDrawer = styled.div`
   }
 
   & .participants-wrapper {
-    height: 55%;
+    ${media.min('tablet')`
+      height: 55%;
+    `}
+    height: 45%;
   }
 
   ${StyledButtonContext} {
@@ -111,7 +114,11 @@ const ParticipantsDrawer = styled.div`
 
   & .transcription-container {
     min-height: 80px;
-    max-height: 35%;
+    max-height: 55%;
+
+    ${media.min('tablet')`
+      max-height: 35%;
+    `}
 
     & hr {
       height: 4px;

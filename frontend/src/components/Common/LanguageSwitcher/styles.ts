@@ -58,10 +58,6 @@ const Languages = styled.div<{ location?: 'modal' | 'default' }>`
       fill: currentColor;
     }
   }
-
-  ${media.max('phone')`
-    margin: ${space(1.5)} 0;
-  `}
 `;
 
 export default Languages;

@@ -41,7 +41,9 @@ const LanguageTranscriptionSelector = ({
       type: 'language'
     });
     const languageTagWithoutRegionCode = languageTag.toLowerCase().split(/[_-]+/)[0];
-    return languageNames.of(languageTagWithoutRegionCode);
+    const languageName = languageNames.of(languageTagWithoutRegionCode) || '';
+
+    return languageName.charAt(0).toUpperCase() + languageName.slice(1);
   }, []);
 
   const changeLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
