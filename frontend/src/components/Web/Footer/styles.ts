@@ -19,6 +19,12 @@ const Container = styled.footer`
   min-height: ${space(37.5)};
   padding: ${space(5)} ${space(3)};
 
+  &.home {
+    ${media.max('tablet')`
+      padding-block-end: ${space(12)};
+    `};
+  }
+
   ${media.min('tablet')`
     padding: ${space(5)} ${space(3)} ${space()};
   `};
