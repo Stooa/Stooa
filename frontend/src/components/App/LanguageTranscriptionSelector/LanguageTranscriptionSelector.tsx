@@ -53,14 +53,21 @@ const LanguageTranscriptionSelector = ({
     }
   };
 
+  const orderedTranslatedSupportedLanguages = SUPPORTED_LANGUAGE_TAGS.map(lng => {
+    return {
+      languageTag: lng,
+      languageName: getLanguageName(lng)
+    };
+  }).sort((a, b) => a.languageName.localeCompare(b.languageName));
+
   return (
     <Languages aria-disabled={disabled} location={location}>
       <select ref={selectRef} onChange={changeLanguage} value={selectedLanguage} {...props}>
         <option value={selectedLanguage}>{getLanguageName(selectedLanguage)}</option>
-        {SUPPORTED_LANGUAGE_TAGS.map(lng => {
+        {orderedTranslatedSupportedLanguages.map(({ languageTag, languageName }) => {
           return (
-            <option value={lng} key={`lang-${lng}`}>
-              {getLanguageName(lng)}
+            <option value={languageTag} key={`lang-${languageTag}`}>
+              {languageName}
             </option>
           );
         })}
