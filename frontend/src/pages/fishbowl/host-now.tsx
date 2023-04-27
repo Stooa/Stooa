@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import { CREATE_FISHBOWL } from '@/graphql/Fishbowl';
@@ -21,11 +21,14 @@ import LoadingIcon from '@/components/Common/LoadingIcon';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 
-const HostNow = () => {
+const HostNow = props => {
   const [createFishbowl] = useMutation(CREATE_FISHBOWL);
   const [, dispatch] = useStateValue();
   const { lang } = useTranslation();
   const router = useRouter();
+  const notInitialRender = useRef(false);
+  const referer = props.referer ? props.referer : '';
+  const shouldRedirectHome = referer.includes('/host-now') && !referer.includes('redirect');
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -73,6 +76,15 @@ const HostNow = () => {
   };
 
   useEffect(() => {
+    if (notInitialRender.current) {
+      return;
+    }
+    if (shouldRedirectHome) {
+      router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
+      return;
+    }
+
+    notInitialRender.current = true;
     handleResetAppState();
     createFishbowlRequest();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -85,3 +97,10 @@ const HostNow = () => {
 };
 
 export default HostNow;
+
+export async function getServerSideProps(context) {
+  const referer = context.req.headers.referer || null;
+  return {
+    props: { referer }
+  };
+}
