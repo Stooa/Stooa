@@ -33,16 +33,17 @@ interface Props {
   title: string;
   prejoin: boolean;
   className?: string;
+  children: React.ReactNode;
 }
 
-const Layout: React.FC<Props> = ({
+const Layout = ({
   className,
   data,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
   title,
   children
-}) => {
+}: Props) => {
   const router = useRouter();
   const { fid } = router.query;
   const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {

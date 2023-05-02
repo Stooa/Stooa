@@ -22,3 +22,7 @@ services:
         tags: [doctrine.event_subscriber]
         calls:
             - [setAnnotationReader, ['@annotation_reader']]
+
+    Gedmo\Tree\TreeListener:
+        calls: [[setAnnotationReader, ["@annotation_reader"]]]
+        tags: [doctrine.event_subscriber]

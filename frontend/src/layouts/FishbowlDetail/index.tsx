@@ -21,9 +21,10 @@ import {
 
 interface Props {
   navigation?: boolean;
+  children: React.ReactNode;
 }
 
-const Page: React.FC<Props> = ({ children, navigation = true }) => {
+const Page = ({ children, navigation = true }: Props) => {
   return (
     <>
       <Container>

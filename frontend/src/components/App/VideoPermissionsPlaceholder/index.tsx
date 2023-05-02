@@ -9,7 +9,11 @@
 
 import Placeholder from '@/components/App/VideoPermissionsPlaceholder/styles';
 
-const VideoPermissionsPlaceholder: React.FC = ({ children, ...props }) => (
+interface Props {
+  children: JSX.Element | JSX.Element[];
+}
+
+const VideoPermissionsPlaceholder = ({ children, ...props }: Props) => (
   <Placeholder {...props}>{children}</Placeholder>
 );
 

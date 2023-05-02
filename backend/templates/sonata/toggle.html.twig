@@ -1,0 +1,26 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    <div style="margin-left: {{ 1.5 * object.lvl }}em">
+        {% if object.children and object.children|length %}
+            <div class="btn-group">
+                <span class="js-tree-toggle btn btn-sm btn-default fas fa-plus-square"></span>
+                {% if admin.hasRoute('edit') and admin.hasAccess('edit') %}
+                    <a style="margin-left: 10px" class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', object) }}">{{ object.name }}</a>
+                {% elseif admin.hasRoute('show') and admin.hasAccess('show') %}
+                    <a style="margin-left: 10px" class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('show', object) }}">{{ object.name }}</a>
+                {% else %}
+                    <span style="margin-left: 10px">{{ object.name }}</span>
+                {% endif %}
+            </div>
+        {% else %}
+            {% if admin.hasRoute('edit') and admin.hasAccess('edit') %}
+                <a style="margin-left: 33px" class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', object) }}">{{ object.name }}</a>
+            {% elseif admin.hasRoute('show') and admin.hasAccess('show') %}
+                <a style="margin-left: 33px" class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('show', object) }}">{{ object.name }}</a>
+            {% else %}
+                {{ object.name }}
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
