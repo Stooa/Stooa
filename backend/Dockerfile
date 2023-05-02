@@ -44,8 +44,7 @@ RUN apk add --no-cache \
     fcgi \
     mariadb-client
 
-RUN addgroup -g $GID $GROUP
-RUN adduser -u $UID -D -G $GROUP $USER
+RUN adduser -u $UID -D $USER
 
 ENV PATH="/usr/app/vendor/bin:/usr/app/bin:${PATH}" \
     PHP_VERSION=${PHP_VERSION}
