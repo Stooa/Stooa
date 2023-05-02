@@ -10,9 +10,7 @@ FROM alpine:3.17 as fpm-prod
 
 ARG PHP_VERSION=81
 ARG UID=1000
-ARG GID=1000
 ARG USER=app
-ARG GROUP=app
 
 RUN apk add --no-cache \
     php${PHP_VERSION} \
