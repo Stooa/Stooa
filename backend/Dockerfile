@@ -9,6 +9,7 @@
 FROM alpine:3.17 as fpm-prod
 
 ARG PHP_VERSION=81
+ARG GID=1000
 ARG UID=1000
 ARG USER=app
 
@@ -116,4 +117,4 @@ COPY --chown=$UID:$GID --from=fpm /usr/app/public /usr/app/public
 COPY .docker/nginx-prod/default.conf.template /etc/nginx/templates/default.conf.template
 
 # Add --link when Docker for Mac supports it
-COPY --chown=$UID:$GID --from=fpm-dev /usr/app/public /usr/app/public
+COPY --chown=$UID --from=fpm-dev /usr/app/public /usr/app/public
