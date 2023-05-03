@@ -22,15 +22,15 @@ up-debug:
 	XDEBUG_MODE=debug docker compose up -d
 .PHONY: up-debug
 
-up-prod: build-prod
-	DOCKER_ENV=prod APP_ENV=prod APP_DEBUG=0 $(MAKE) compose
+up-prod:
+	RESET_DATABASE=true DOCKER_ENV=prod APP_ENV=prod APP_DEBUG=0 $(MAKE) compose
 .PHONY: up-prod
 
 compose: $(CERTS_DIR)
 	docker compose up -d
 .PHONY: compose
 
-build: halt
+build:
 	docker compose build --build-arg UID=$(UID) --build-arg GID=$(GID)
 .PHONY: build
 
