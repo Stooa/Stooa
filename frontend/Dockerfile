@@ -54,6 +54,3 @@ RUN usermod --uid $UID nginx
 RUN groupmod --non-unique --gid $GID nginx
 
 COPY .docker/nginx-prod/default.conf.template /etc/nginx/templates/default.conf.template
-
-# Add --link when Docker for Mac supports it
-COPY --chown=$UID:$GID --from=next-dev /usr/app/public public
