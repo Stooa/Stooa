@@ -62,6 +62,8 @@ WORKDIR /usr/app
 
 EXPOSE 9000
 
+ENTRYPOINT ["ash", "/usr/app/.docker/app-prod/php-fpm.sh"]
+
 # FPM-PROD
 FROM fpm-prod as fpm
 
@@ -80,8 +82,6 @@ RUN composer symfony:dump-env prod
 
 RUN console cache:warmup
 RUN console assets:install public
-
-ENTRYPOINT ["ash", "/usr/app/.docker/app-prod/php-fpm.sh"]
 
 # FPM-DEV
 FROM fpm-prod as fpm-dev
