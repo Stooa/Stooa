@@ -61,7 +61,6 @@ USER ${USER}
 WORKDIR /usr/app
 
 EXPOSE 9000
-
 ENTRYPOINT ash /usr/app/.docker/app-prod/php-fpm.sh
 
 # FPM-PROD
