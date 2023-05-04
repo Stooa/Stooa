@@ -44,4 +44,4 @@ if [ "${CONSUME_MESSAGES:-}" = true ]; then
     exit 0
 fi
 
-php-fpm81
+php-fpm${PHP_VERSION} --allow-to-run-as-root
