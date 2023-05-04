@@ -44,4 +44,4 @@ if [ "${CONSUME_MESSAGES:-}" = true ]; then
     exit 0
 fi
 
-php-fpm${PHP_VERSION}
+php-fpm81
