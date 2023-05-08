@@ -30,7 +30,11 @@ const TranslateSelector = () => {
   };
 
   const handleActiveTranslate = (): void => {
-    Conference.setTranslationLanguage(null);
+    if (!isTranslationEnabled) {
+      Conference.setTranslationLanguage(translationLanguage);
+    } else {
+      Conference.setTranslationLanguage(null);
+    }
     setIsTranslationEnabled(current => !current);
   };
 
