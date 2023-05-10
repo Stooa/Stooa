@@ -278,6 +278,7 @@ services:
         volumes:
             - ${CONFIG}/jigasi:/config:Z
             - ${CONFIG}/transcripts:/tmp/transcripts:Z
+            - ./jitsi/jigasi/custom-sip-communicator.properties:/config/custom-sip-communicator.properties:Z
         environment:
             - ENABLE_AUTH
             - ENABLE_GUESTS
