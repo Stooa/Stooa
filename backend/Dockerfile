@@ -6,47 +6,66 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM php:8.1-fpm-bullseye as base
+FROM alpine:3.17 as fpm-prod
 
-ARG UID=1000
+ARG PHP_VERSION=81
 ARG GID=1000
+ARG UID=1000
+ARG USER=app
 
-RUN usermod --uid $UID www-data
-RUN groupmod --non-unique --gid $GID www-data
-
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
-
-RUN install-php-extensions apcu bz2 gd intl opcache pdo_mysql zip gmp
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    unzip \
-    libfcgi-bin \
-    mariadb-client \
+RUN apk add --no-cache \
+    php${PHP_VERSION} \
+    php${PHP_VERSION}-apcu \
+    php${PHP_VERSION}-bz2 \
+    php${PHP_VERSION}-ctype \
+    php${PHP_VERSION}-curl \
+    php${PHP_VERSION}-dom \
+    php${PHP_VERSION}-fpm \
+    php${PHP_VERSION}-gd \
+    php${PHP_VERSION}-gmp \
+    php${PHP_VERSION}-iconv \
+    php${PHP_VERSION}-intl \
+    php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-opcache \
+    php${PHP_VERSION}-openssl \
+    php${PHP_VERSION}-pcntl \
+    php${PHP_VERSION}-pdo_mysql \
+    php${PHP_VERSION}-phar \
+    php${PHP_VERSION}-posix \
+    php${PHP_VERSION}-session \
+    php${PHP_VERSION}-simplexml \
+    php${PHP_VERSION}-sodium \
+    php${PHP_VERSION}-tokenizer \
+    php${PHP_VERSION}-xml \
+    php${PHP_VERSION}-xmlwriter \
+    php${PHP_VERSION}-zip \
     git \
-    libsodium-dev\
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+    fcgi \
+    mariadb-client
 
-ENV PATH="/usr/app/vendor/bin:/usr/app/bin:${PATH}"
+RUN adduser -u $UID -D $USER
 
-RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+ENV PATH="/usr/app/vendor/bin:/usr/app/bin:${PATH}" \
+    PHP_VERSION=${PHP_VERSION}
 
-COPY .docker/app-prod/healthcheck.sh /usr/local/bin/healthcheck
-COPY .docker/app-prod/extra.ini /usr/local/etc/php/conf.d/extra.ini
-COPY .docker/app-prod/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY .docker/app-prod/healthcheck.sh /etc/php${PHP_VERSION}/bin/healthcheck.sh
+COPY .docker/app-prod/extra.ini /etc/php${PHP_VERSION}/conf.d/extra.ini
+COPY .docker/app-prod/www.conf /etc/php${PHP_VERSION}/php-fpm.d/www.conf
 
-RUN chmod +x /usr/local/bin/healthcheck
+RUN chmod +x /etc/php${PHP_VERSION}/bin/healthcheck.sh
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 
-RUN chown $UID:$GID /var/www
-
-USER www-data
+USER ${USER}
 
 WORKDIR /usr/app
 
+EXPOSE 9000
+
+ENTRYPOINT ["ash", "/usr/app/.docker/app-prod/php-fpm.sh"]
+
 # FPM-PROD
-FROM base as fpm
+FROM fpm-prod as fpm
 
 COPY .env /usr/app/.env
 
@@ -64,22 +83,26 @@ RUN composer symfony:dump-env prod
 RUN console cache:warmup
 RUN console assets:install public
 
-ENTRYPOINT ["bash", "/usr/app/.docker/app-prod/php-fpm.sh"]
-
-
 # FPM-DEV
-FROM base as fpm-dev
+FROM fpm-prod as fpm-dev
 
 ENV XDEBUG_MODE=off
 
 USER root
 
-RUN install-php-extensions pcov xdebug
+RUN apk add --no-cache php${PHP_VERSION}-pecl-pcov --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing
 
-USER www-data
+RUN apk add --no-cache \
+    php${PHP_VERSION}-pdo_sqlite \
+    php${PHP_VERSION}-xdebug
 
-CMD ["php-fpm", "--allow-to-run-as-root"]
+COPY .docker/app-dev/50_xdebug.ini /etc/php${PHP_VERSION}/conf.d/50_xdebug.ini
+COPY .docker/app-dev/extra.ini /etc/php${PHP_VERSION}/conf.d/extra.ini
+COPY .docker/app-dev/www.conf /etc/php${PHP_VERSION}/php-fpm.d/www.conf
 
+USER ${USER}
+
+CMD php-fpm${PHP_VERSION}
 
 # NGINX
 FROM nginx:1.23 as nginx

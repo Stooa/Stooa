@@ -10,16 +10,17 @@ services:
     backend:
         build:
             context: backend
-            target: fpm-dev
+            target: fpm-${DOCKER_ENV:-dev}
         environment:
             PHP_IDE_CONFIG: serverName=localhost
             XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+            APP_ENV: "${APP_ENV:-dev}"
+            APP_DEBUG: "${APP_DEBUG:-1}"
+            RESET_DATABASE: "${RESET_DATABASE:-false}"
         depends_on:
             - mysql
         volumes:
             - ./backend:/usr/app/:cached
-            - ./backend/.docker/app-dev/extra.ini:/usr/local/etc/php/conf.d/extra.ini
-            - ./backend/.docker/app-dev/www.conf:/usr/local/etc/php-fpm.d/www.conf
         extra_hosts:
             - host.docker.internal:host-gateway
         networks:
@@ -303,10 +304,10 @@ services:
             - MYSQL_ROOT_PASSWORD
         networks:
             meet.jitsi:
-    mailhog:
-        image: mailhog/mailhog
+    mailer:
+        image: schickling/mailcatcher
         ports:
-            - 8025:8025
+            - 8025:1080
         networks:
             meet.jitsi:
 

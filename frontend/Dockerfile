@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM node:18.11 as base
+FROM node:18.11.0-bullseye as base
 
 ARG UID=1000
 ARG GID=1000
@@ -14,7 +14,7 @@ ARG GID=1000
 RUN usermod --uid $UID node
 RUN groupmod --non-unique --gid $GID node
 
-RUN apt-get update \
+RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
     git \
     && apt-get clean \

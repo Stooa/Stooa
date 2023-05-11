@@ -8,10 +8,10 @@
 AUTOLOAD = backend/vendor/autoload.php
 JITSI_CONFIG = jitsi-meet-cfg/jvb/logging.properties
 CERTS_DIR = .certs
-UID = $(shell id -u)
-GID = $(shell id -g)
+UID ?= $(shell id -u)
+GID ?= $(shell id -g)
 
-docker-exec-backend = docker compose exec backend /bin/bash -c "$1"
+docker-exec-backend = docker compose exec backend /bin/ash -c "$1"
 docker-exec-frontend = docker compose exec frontend /bin/bash -c "$1"
 
 # Docker
@@ -22,13 +22,21 @@ up-debug:
 	XDEBUG_MODE=debug docker compose up -d
 .PHONY: up-debug
 
+up-prod:
+	RESET_DATABASE=true DOCKER_ENV=prod APP_ENV=prod APP_DEBUG=0 $(MAKE) compose
+.PHONY: up-prod
+
 compose: $(CERTS_DIR)
 	docker compose up -d
 .PHONY: compose
 
-build: halt
+build:
 	docker compose build --build-arg UID=$(UID) --build-arg GID=$(GID)
 .PHONY: build
+
+build-prod:
+	DOCKER_ENV=prod $(MAKE) build
+.PHONY: build-prod
 
 halt:
 	docker compose stop
@@ -39,7 +47,7 @@ destroy:
 .PHONY: destroy
 
 ssh:
-	docker compose exec backend /bin/bash
+	docker compose exec backend /bin/ash
 .PHONY: ssh
 
 ssh-front:
