@@ -96,7 +96,6 @@ const TranscriptionWrapper = () => {
   const sentText = useDebounce<object>(textToShow, 3000);
 
   useEffect(() => {
-    console.log(textToShow);
     if (Object.keys(sentText).length > 0) {
       setTextToShow({});
     }
