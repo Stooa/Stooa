@@ -99,7 +99,9 @@ const ThankYou = () => {
         {(!fb.isPrivate || fb.plainPassword) && (
           <>
             <h1 className="body-lg medium">{fb.name}</h1>
-            {fb.description && <Description className="body-sm">{fb.description}</Description>}
+            {fb.description && (
+              <Description className="description body-sm">{fb.description}</Description>
+            )}
           </>
         )}
         {showFeedbackForm && (
