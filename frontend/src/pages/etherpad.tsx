@@ -12,13 +12,15 @@ import api from '@/lib/api';
 import {useState} from "react";
 const Page = () => {
   const [sessionId, setSessionId] = useState('');
-  const apiKey= '0d7b26f659fced90cbdb6b8ab51748b4c86970302a33b9bc371b10215fca9bd6'
+  const apiKey= '0d7b26f659fced90cbdb6b8ab51748b4c86970302a33b9bc371b10215fca9bd6';
+  const padName = 'test1234';
+  const groupMapper = '999';
   let authorId = null;
   let groupId = null;
 
   // Portal maps the internal userid to an etherpad author.
   api
-    .post(`https://localhost:8243/etherpad/api/1/createAuthorIfNotExistsFor?apikey=${apiKey}&name=Michael&groupMapper=7`)
+    .post(`https://localhost:8243/etherpad/api/1/createAuthorIfNotExistsFor?apikey=${apiKey}&name=Michael&groupMapper=${groupMapper}`)
     .then(res => {
       console.log('Author ID', res.data.data.authorID);
       authorId = res.data.data.authorID;
@@ -29,13 +31,13 @@ const Page = () => {
 
   // Portal maps the internal userid to an etherpad group:
   api
-    .post(`https://localhost:8243/etherpad/api/1/createGroupIfNotExistsFor?apikey=${apiKey}&groupMapper=7`)
+    .post(`https://localhost:8243/etherpad/api/1/createGroupIfNotExistsFor?apikey=${apiKey}&groupMapper=${groupMapper}`)
     .then(res => {
       console.log('Group ID', res.data.data.groupID);
       groupId = res.data.data.groupID;
 
       api
-        .post(`https://localhost:8243/etherpad/api/1/createGroupPad?apikey=${apiKey}&groupID=${groupId}&padName=test123&text=Hello`)
+        .post(`https://localhost:8243/etherpad/api/1/createGroupPad?apikey=${apiKey}&groupID=${groupId}&padName=${padName}&text=Hello`)
         .then(res => {
           console.log('Portal creates a pad in the userGroup', res);
         })
@@ -61,7 +63,7 @@ const Page = () => {
   if (sessionId !== '') {
     return (
       <Layout center={false} title="Etherpad">
-        <iframe src={`https://localhost:8243/etherpad/auth_session?sessionID=${sessionId}&padName=test123`} width="600" height="400"></iframe>
+        <iframe src={`https://localhost:8243/etherpad/auth_session?sessionID=${sessionId}&padName=${padName}`} width="600" height="400"></iframe>
         <iframe src={`https://localhost:8243/etherpad/p/one`} width="600" height="400"></iframe>
         <iframe
           src={`https://localhost:8243/etherpad/p/two?showChat=false&showLineNumbers=false&showControls=false&userName=Tronco`}
