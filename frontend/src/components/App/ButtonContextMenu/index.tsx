@@ -18,6 +18,7 @@ import useEventListener from '@/hooks/useEventListener';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import conferenceRepository from '@/jitsi/Conference';
+import { SendToRoomButton } from '../BreakoutRooms/SendToRoomButton';
 
 interface Props {
   className?: string;
@@ -106,6 +107,9 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
                 data-testid="kick-button"
                 onClick={() => setParticipantToKick(participant)}
               />
+            </li>
+            <li>
+              <SendToRoomButton initialParticipant={participant} />
             </li>
           </StyledContextMenu>
         )}

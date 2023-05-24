@@ -13,6 +13,7 @@ import {
   CONFERENCE_IS_LOCKABLE,
   CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
+  CONFERENCE_BREAKOUT_ROOMS_UPDATED,
   CONNECTION_ESTABLISHED_FINISHED,
   PERMISSION_CHANGED,
   REACTION_MESSAGE_RECEIVED,
@@ -189,6 +190,11 @@ const conferenceRepository = () => {
     console.log('[STOOA] Password not supported');
   };
 
+  const _handleBreakoutRoomsUpdated = () => {
+    console.log('SI NO?');
+    dispatchEvent(CONFERENCE_BREAKOUT_ROOMS_UPDATED);
+  };
+
   const _handleConnectionEstablished = async () => {
     const {
       events: {
@@ -206,7 +212,8 @@ const conferenceRepository = () => {
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
           DOMINANT_SPEAKER_CHANGED,
-          MESSAGE_RECEIVED
+          MESSAGE_RECEIVED,
+          BREAKOUT_ROOMS_UPDATED
         }
       },
       errors: {
@@ -235,6 +242,7 @@ const conferenceRepository = () => {
     conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
+    conference.on(BREAKOUT_ROOMS_UPDATED, _handleBreakoutRoomsUpdated);
 
     dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
   };
@@ -492,6 +500,43 @@ const conferenceRepository = () => {
     }
   };
 
+  // BREAKOUT ROOMS
+
+  const createBreakoutRoom = name => {
+    if (!isModerator) {
+      return;
+    }
+    try {
+      conference.getBreakoutRooms().createBreakoutRoom(name);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  const getBreakoutRooms = () => {
+    if (conference) {
+      return conference.getBreakoutRooms();
+    }
+  };
+
+  /**
+   *
+   * @param {string} participantId Participant Identification
+   * @param {string} roomId Room Identification
+   */
+  const sendParticipantToRoom = (participantId, roomId) => {
+    const rooms = getBreakoutRooms(getState);
+    const room = rooms[roomId];
+
+    if (!room) {
+      console.error(`Invalid room: ${roomId}`);
+
+      return;
+    }
+
+    conference.sendParticipantToRoom(participantId, room);
+  };
+
   return {
     addTrack,
     getLocalVideoTrack,
@@ -517,7 +562,10 @@ const conferenceRepository = () => {
     getLocalTracks,
     getParticipantsIds,
     startRecordingEvent,
-    stopRecordingEvent
+    stopRecordingEvent,
+    createBreakoutRoom,
+    getBreakoutRooms,
+    sendParticipantToRoom
   };
 };
 

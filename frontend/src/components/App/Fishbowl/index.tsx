@@ -44,6 +44,7 @@ import Conference from '@/jitsi/Conference';
 import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import BreakoutRooms from '../BreakoutRooms/BreakoutRooms';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -220,6 +221,7 @@ const Fishbowl: FC = () => {
             variant="fishbowl-mobile"
           />
         )}
+        {conferenceStatus === IConferenceStatus.RUNNING && <BreakoutRooms />}
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
