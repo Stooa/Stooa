@@ -49,6 +49,19 @@ server {
         tcp_nodelay on;
     }
 
+    # Etherpad-lite
+    location ^~ /etherpad/ {
+        proxy_buffering off;
+        proxy_cache_bypass $http_upgrade;
+
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header X-Forwarded-For $remote_addr;
+
+        proxy_pass http://etherpad.meet.jitsi:9001/;
+    }
+
     ssl_certificate /usr/app/.certs/certificate.crt;
     ssl_certificate_key /usr/app/.certs/certificate.key;
     ssl_session_timeout 1d;
@@ -67,6 +80,7 @@ server {
     http2_push_preload on;
 
     add_header X-Content-Type-Options nosniff always;
-    add_header X-Frame-Options SAMEORIGIN always;
+    #add_header X-Frame-Options SAMEORIGIN always;
+    #add_header X-Frame-Options ALLOW-FROM localhost:8343;
     add_header X-XSS-Protection "1; mode=block" always;
 }
