@@ -13,7 +13,7 @@ import {useState} from "react";
 const Page = () => {
   const [sessionId, setSessionId] = useState('');
   const apiKey= '0d7b26f659fced90cbdb6b8ab51748b4c86970302a33b9bc371b10215fca9bd6';
-  const padName = 'test1234';
+  const padName = 'test12345';
   const groupMapper = '999';
   let authorId = null;
   let groupId = null;
@@ -44,17 +44,18 @@ const Page = () => {
         .catch(err => {
           console.log('error', err);
         });
-      // Portal starts the session for the user on the group:
-      api
-        .post(`https://localhost:8243/etherpad/api/1/createSession?apikey=${apiKey}&groupID=${groupId}&authorID=${authorId}&validUntil=1690195784` )
-        .then(res => {
-          console.log('Session ID', res.data.data.sessionID);
-          setSessionId(res.data.data.sessionID);
-        })
-        .catch(err => {
-          console.log('error', err);
-        });
-
+      if (sessionId === '') {
+        // Portal starts the session for the user on the group:
+        api
+          .post(`https://localhost:8243/etherpad/api/1/createSession?apikey=${apiKey}&groupID=${groupId}&authorID=${authorId}&validUntil=1690195784` )
+          .then(res => {
+            console.log('Session ID', res.data.data.sessionID);
+            setSessionId(res.data.data.sessionID);
+          })
+          .catch(err => {
+            console.log('error', err);
+          });
+      }
     })
     .catch(err => {
       console.log('error', err);
@@ -63,8 +64,8 @@ const Page = () => {
   if (sessionId !== '') {
     return (
       <Layout center={false} title="Etherpad">
-        <iframe src={`https://localhost:8243/etherpad/auth_session?sessionID=${sessionId}&padName=${padName}`} width="600" height="400"></iframe>
-        <iframe src={`https://localhost:8243/etherpad/p/one`} width="600" height="400"></iframe>
+        <iframe src={`https://localhost:8243/etherpad/auth_session?sessionID=${sessionId}&padName=${padName}&showChat=false`} width="600" height="400"></iframe>
+        <iframe src={`https://localhost:8243/etherpad/p/one?&showChat=false`} width="600" height="400"></iframe>
         <iframe
           src={`https://localhost:8243/etherpad/p/two?showChat=false&showLineNumbers=false&showControls=false&userName=Tronco`}
           width="600" height="400"></iframe>
