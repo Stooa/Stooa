@@ -292,6 +292,8 @@ services:
     etherpad:
         image: etherpad/etherpad:1.8.6
         restart: ${RESTART_POLICY:-unless-stopped}
+#        volumes:
+#            - ./etherpad/APIKEY.txt:/opt/etherpad-lite/APIKEY.txt
         environment:
             - TITLE=${ETHERPAD_TITLE}
             - DEFAULT_PAD_TEXT=${ETHERPAD_DEFAULT_PAD_TEXT}
@@ -299,6 +301,7 @@ services:
             - SKIN_VARIANTS=${ETHERPAD_SKIN_VARIANTS}
             - SUPPRESS_ERRORS_IN_PAD_TEXT=true
             - ADMIN_PASSWORD=admin
+            - EDIT_ONLY=true
             - DB_TYPE=mysql
             - DB_HOST=mysql
             - DB_PORT=3306
