@@ -299,6 +299,13 @@ services:
             - SKIN_VARIANTS=${ETHERPAD_SKIN_VARIANTS}
             - SUPPRESS_ERRORS_IN_PAD_TEXT=true
             - ADMIN_PASSWORD=admin
+            - DB_TYPE=mysql
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_NAME=symfony
+            - DB_USER=symfony
+            - DB_PASS=symfony
+            - DB_CHARSET=utf8mb4
         networks:
             meet.jitsi:
                 aliases:
