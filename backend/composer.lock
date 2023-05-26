@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bdb625082eac0f937576bfaaa79917f0",
+    "content-hash": "c839a0fbe1df18a7d76cf9796b4f8f6f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10956,21 +10956,21 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.32.0",
+            "version": "v1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "f28383551d551bfa62cdf09c34bfbe232fd45029"
+                "reference": "3c46a2f2aa3ad8a1d74583a28a6be05e8c0a46ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/f28383551d551bfa62cdf09c34bfbe232fd45029",
-                "reference": "f28383551d551bfa62cdf09c34bfbe232fd45029",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/3c46a2f2aa3ad8a1d74583a28a6be05e8c0a46ee",
+                "reference": "3c46a2f2aa3ad8a1d74583a28a6be05e8c0a46ee",
                 "shasum": ""
             },
             "require": {
                 "doctrine/persistence": "^1.3.3|^2.0|^3.0",
-                "fakerphp/faker": "^1.5",
+                "fakerphp/faker": "^1.10",
                 "php": ">=8.0",
                 "symfony/deprecation-contracts": "^2.2|^3.0",
                 "symfony/property-access": "^5.4|^6.0",
@@ -11033,7 +11033,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.32.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -11041,7 +11041,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-11T07:28:34+00:00"
+            "time": "2023-05-23T16:21:57+00:00"
         }
     ],
     "packages-dev": [
