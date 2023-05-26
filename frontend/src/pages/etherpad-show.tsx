@@ -9,10 +9,10 @@
 import Layout from '@/layouts/Default';
 
 import api from '@/lib/api';
-import {useState} from "react";
+import { useState } from 'react';
 const EtherPadPage = () => {
   const [text, setText] = useState('');
-  const apiKey= 'b6e337ae0340f150f97668a4bd7de2add4bcfb63cc123efeba1b9b5824116f45';
+  const apiKey = 'b6e337ae0340f150f97668a4bd7de2add4bcfb63cc123efeba1b9b5824116f45';
 
   const getText = (padName: string): void => {
     api
@@ -24,7 +24,7 @@ const EtherPadPage = () => {
       .catch(err => {
         console.log('error', err);
       });
-  }
+  };
 
   getText('one');
 
