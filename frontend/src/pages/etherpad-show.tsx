@@ -12,13 +12,14 @@ import api from '@/lib/api';
 import { useState } from 'react';
 const EtherPadPage = () => {
   const [text, setText] = useState('');
-  const apiKey = 'b6e337ae0340f150f97668a4bd7de2add4bcfb63cc123efeba1b9b5824116f45';
+  const apiKey = 'ca8bf94864bd28192b3b9d7b3fc0e5d8b1d683ccd68edd04ba0663efb5b72d3e';
 
   const getText = (padName: string): void => {
     api
-      .post(`https://localhost:8243/etherpad/api/1/getText?apikey=${apiKey}&padID=${padName}`)
+      .post(`https://localhost:8243/etherpad/api/1/getText?apikey=${apiKey}&padID=g.ZEVnp2ZLyLqh0TfD\$${padName}`)
       .then(res => {
         console.log('Text', res);
+
         setText(res.data.data.text);
       })
       .catch(err => {
@@ -26,7 +27,7 @@ const EtherPadPage = () => {
       });
   };
 
-  getText('one');
+  getText('newBrandPad2');
 
   if (text !== '') {
     return (

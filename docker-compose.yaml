@@ -292,6 +292,7 @@ services:
     etherpad:
         image: etherpad/etherpad:1.8.6
         restart: ${RESTART_POLICY:-unless-stopped}
+#        command: [ "node", "node_modules/ep_etherpad-lite/node/server.js", "--apikey", "/opt/etherpad-lite/test/APIKEY.txt" ]
 #        volumes:
 #            - ./etherpad/APIKEY.txt:/opt/etherpad-lite/APIKEY.txt
         environment:

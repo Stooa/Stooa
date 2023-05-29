@@ -7,13 +7,12 @@
  * file that was distributed with this source code.
  */
 import Layout from '@/layouts/Default';
-
 import api from '@/lib/api';
 import { useEffect, useState } from 'react';
 const Page = () => {
-  const apiKey = 'b6e337ae0340f150f97668a4bd7de2add4bcfb63cc123efeba1b9b5824116f45';
-  const padName = 'newBrandPad';
-  const groupMapper = '00001';
+  const apiKey = 'ca8bf94864bd28192b3b9d7b3fc0e5d8b1d683ccd68edd04ba0663efb5b72d3e';
+  const padName = 'newBrandPad23';
+  const groupMapper = '00002';
   const name = 'Jhon';
   const [sessionId, setSessionId] = useState('');
   let authorId = null;
@@ -50,9 +49,6 @@ const Page = () => {
           .catch(err => {
             console.log('error', err);
           });
-
-        console.log('entra aquí', sessionId);
-        // Portal starts the session for the user on the group:
         api
           .post(
             `https://localhost:8243/etherpad/api/1/createSession?apikey=${apiKey}&groupID=${groupId}&authorID=${authorId}&validUntil=1690195784`
@@ -74,7 +70,7 @@ const Page = () => {
     <Layout center={false} title="Etherpad">
       <h1>{padName}</h1>
       <iframe
-        src={`https://localhost:8243/etherpad/p/${padName}?&showChat=false`}
+        src={`https://localhost:8243/etherpad/p/g.ZEVnp2ZLyLqh0TfD\$${padName}?&showChat=false`}
         width="600"
         height="400"
       ></iframe>
