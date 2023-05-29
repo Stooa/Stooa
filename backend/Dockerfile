@@ -17,7 +17,7 @@ RUN groupmod --non-unique --gid $GID www-data
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
 RUN install-php-extensions apcu bz2 gd intl opcache pdo_mysql zip gmp
-RUN apt-get update \
+RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
     unzip \
     libfcgi-bin \

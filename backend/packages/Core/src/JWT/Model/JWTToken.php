@@ -49,7 +49,7 @@ class JWTToken
             RegisteredClaims::ISSUER => $this->iss,
             RegisteredClaims::AUDIENCE => $this->aud,
             RegisteredClaims::SUBJECT => $this->sub,
-            'room' => $this->room,
+            'room' => '*',
             'context' => [
                 'user' => $this->user->toArray(),
             ],

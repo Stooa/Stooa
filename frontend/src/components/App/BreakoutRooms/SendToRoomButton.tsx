@@ -12,7 +12,7 @@ import { Participant } from '@/types/participant';
 import React, { useState } from 'react';
 
 interface Props {
-  initialParticipant: Participant;
+  initialParticipant: { _connectionJid: string };
 }
 
 export const SendToRoomButton = ({ initialParticipant }: Props) => {
@@ -20,12 +20,15 @@ export const SendToRoomButton = ({ initialParticipant }: Props) => {
   const [rooms, setRooms] = useState({});
 
   const handleButtonClick = () => {
-    setRooms(Conference.getBreakoutRooms()._rooms);
+    const { _rooms } = Conference.getBreakoutRooms();
+    console.log('LAS RUMS', _rooms);
+    setRooms(_rooms);
     setShowRooms(!showRooms);
   };
 
   const handleSendToRoom = roomId => {
-    Conference.sendParticipantToRoom(initialParticipant.id, roomId);
+    console.log('QUEEEE', initialParticipant);
+    Conference.sendParticipantToRoom(initialParticipant._connectionJid, roomId);
   };
 
   return (
@@ -34,18 +37,18 @@ export const SendToRoomButton = ({ initialParticipant }: Props) => {
         <button onClick={handleButtonClick}>Send to room</button>
       </div>
       {showRooms && rooms && (
-        <div>
+        <div
+          style={{
+            position: 'fixed',
+            top: '24px',
+            height: '204px',
+            right: '64px',
+            backgroundColor: '#ede3d5',
+            padding: '16px'
+          }}
+        >
           {Object.keys(rooms).map(room => (
-            <div
-              style={{
-                position: 'absolute',
-                top: '24px',
-                right: '64px',
-                backgroundColor: '#e1e2d5',
-                padding: '16px'
-              }}
-              key={room}
-            >
+            <div key={room} style={{ marginBottom: '16px' }}>
               {rooms[room].name} <button onClick={() => handleSendToRoom(room)}>JOIN</button>
             </div>
           ))}

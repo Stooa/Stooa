@@ -31,3 +31,4 @@ export const SCREEN_SHARE_PERMISSIONS_DENIED = 'screen-share:permissions-denied'
 export const RECORDING_START = 'recording:start';
 export const RECORDING_STOP = 'recording:stop';
 export const CONFERENCE_BREAKOUT_ROOMS_UPDATED = 'conference:breakout-rooms-updated';
+export const CONFERENCE_BREAKOUT_ROOMS_SENT_TO = 'conference:breakout-rooms-sent-to';

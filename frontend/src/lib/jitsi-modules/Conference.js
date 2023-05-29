@@ -26,12 +26,17 @@ import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
 import userRepository from '@/jitsi/User';
+import localTracksRepository from '@/jitsi/LocalTracks';
+import { join } from '../jitsi';
 
 const conferenceRepository = () => {
   let connection;
   let roomName;
   let userName;
   let conference;
+  let room;
+  let _room;
+  let _roomName;
   let isModerator = false;
   let isJoined = false;
   let twitter = false;
@@ -61,6 +66,7 @@ const conferenceRepository = () => {
    * @param {string | undefined} password
    */
   const joinConference = async () => {
+    console.log('Joining to conference ---->');
     if (conference) await conference.join();
   };
 
@@ -121,6 +127,7 @@ const conferenceRepository = () => {
   };
 
   const _handleConferenceJoin = () => {
+    console.log('HANDLE CONFERENCE JOIN ------>');
     isJoined = true;
 
     conference.setDisplayName(userName);
@@ -130,9 +137,80 @@ const conferenceRepository = () => {
 
     userRepository.setUser({ id: conference.myUserId() });
 
+    // FIXME: this is problematic
     dispatchEvent(CONFERENCE_START, { status: true, myUserId: conference.myUserId() });
 
     console.log('[STOOA] Handle conference join');
+  };
+
+  const joinRoom = async roomName => {
+    const {
+      events: {
+        conference: {
+          PARTICIPANT_CONN_STATUS_CHANGED,
+          PARTICIPANT_PROPERTY_CHANGED,
+          TRACK_ADDED,
+          TRACK_REMOVED,
+          TRACK_MUTE_CHANGED,
+          USER_JOINED,
+          USER_LEFT,
+          USER_ROLE_CHANGED,
+          KICKED,
+          CONFERENCE_JOINED,
+          CONFERENCE_FAILED,
+          CONFERENCE_ERROR,
+          DOMINANT_SPEAKER_CHANGED,
+          MESSAGE_RECEIVED,
+          BREAKOUT_ROOMS_UPDATED,
+          BREAKOUT_ROOMS_MOVE_TO_ROOM
+        }
+      },
+      errors: {
+        conference: { PASSWORD_REQUIRED, PASSWORD_NOT_SUPPORTED }
+      }
+    } = JitsiMeetJS;
+
+    _roomName = roomName;
+
+    const localTracks = await localTracksRepository.createLocalTracks();
+
+    localTracks.forEach(track => {
+      tracksRepository.syncLocalStorageTrack(track);
+    });
+
+    // initializeConnection(_roomName, true);
+    await conference.leave();
+    isJoined = false;
+
+    conference = connection.initJitsiConference(roomName, roomOptions);
+    window.conference = conference;
+
+    conference.on(PARTICIPANT_CONN_STATUS_CHANGED, _handleParticipantConnectionStatusChanged);
+    conference.on(PARTICIPANT_PROPERTY_CHANGED, _handleParticipantPropertyChanged);
+    conference.on(TRACK_ADDED, tracksRepository.handleTrackAdded);
+    conference.on(TRACK_REMOVED, tracksRepository.handleTrackRemoved);
+    conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
+    conference.on(USER_JOINED, userRepository.handleUserJoin);
+    conference.on(USER_LEFT, userRepository.handleUserLeft);
+    conference.on(KICKED, userRepository.handleUserKicked);
+    conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
+    conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
+    conference.on(CONFERENCE_ERROR, _handleConferenceError);
+    conference.on(DOMINANT_SPEAKER_CHANGED, _handleDominantSpeakerChanged);
+    conference.on(USER_ROLE_CHANGED, _handleUserRoleChanged);
+    conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
+    conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
+    conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
+    conference.addCommandListener('join', _handleCommandJoin);
+    conference.addCommandListener('leave', _handleCommandLeave);
+    conference.on(BREAKOUT_ROOMS_UPDATED, _handleBreakoutRoomsUpdated);
+    conference.on(BREAKOUT_ROOMS_MOVE_TO_ROOM, _handleBreakoutRoomMove);
+
+    // conference.join();
+    dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
+    setTimeout(() => {
+      _handleConferenceJoin();
+    }, 1000);
   };
 
   const _handleConferenceFailed = error => {
@@ -190,9 +268,15 @@ const conferenceRepository = () => {
     console.log('[STOOA] Password not supported');
   };
 
-  const _handleBreakoutRoomsUpdated = () => {
-    console.log('SI NO?');
+  const _handleBreakoutRoomsUpdated = params => {
+    console.log('UPDATED ROOM', params);
     dispatchEvent(CONFERENCE_BREAKOUT_ROOMS_UPDATED);
+  };
+
+  const _handleBreakoutRoomMove = params => {
+    console.log('MOVE TO ROOM', params);
+
+    joinRoom(params);
   };
 
   const _handleConnectionEstablished = async () => {
@@ -213,7 +297,8 @@ const conferenceRepository = () => {
           CONFERENCE_ERROR,
           DOMINANT_SPEAKER_CHANGED,
           MESSAGE_RECEIVED,
-          BREAKOUT_ROOMS_UPDATED
+          BREAKOUT_ROOMS_UPDATED,
+          BREAKOUT_ROOMS_MOVE_TO_ROOM
         }
       },
       errors: {
@@ -243,6 +328,7 @@ const conferenceRepository = () => {
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
     conference.on(BREAKOUT_ROOMS_UPDATED, _handleBreakoutRoomsUpdated);
+    conference.on(BREAKOUT_ROOMS_MOVE_TO_ROOM, _handleBreakoutRoomMove);
 
     dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
   };
@@ -439,6 +525,7 @@ const conferenceRepository = () => {
   };
 
   const getParticipants = () => {
+    console.log('---->', isJoined);
     if (isJoined) {
       return conference.getParticipants();
     }
@@ -521,12 +608,12 @@ const conferenceRepository = () => {
 
   /**
    *
-   * @param {string} participantId Participant Identification
+   * @param {string} participantJid Participant Identification
    * @param {string} roomId Room Identification
    */
-  const sendParticipantToRoom = (participantId, roomId) => {
-    const rooms = getBreakoutRooms(getState);
-    const room = rooms[roomId];
+  const sendParticipantToRoom = (participantJid, roomId) => {
+    const { _rooms } = getBreakoutRooms();
+    const room = _rooms[roomId];
 
     if (!room) {
       console.error(`Invalid room: ${roomId}`);
@@ -534,7 +621,8 @@ const conferenceRepository = () => {
       return;
     }
 
-    conference.sendParticipantToRoom(participantId, room);
+    console.log('TRYING to move this guy', participantJid, 'to room', room.jid);
+    conference.getBreakoutRooms().sendParticipantToRoom(participantJid, room.jid);
   };
 
   return {

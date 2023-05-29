@@ -100,7 +100,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
           <StyledContextMenu
             data-testid="context-menu"
             id="context-menu"
-            onMouseLeave={() => setShowContextMenu(false)}
+            // onMouseLeave={() => setShowContextMenu(false)}
           >
             <li>
               <ButtonKickUser
@@ -108,9 +108,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
                 onClick={() => setParticipantToKick(participant)}
               />
             </li>
-            <li>
-              <SendToRoomButton initialParticipant={participant} />
-            </li>
+            <li>{participant && <SendToRoomButton initialParticipant={participant} />}</li>
           </StyledContextMenu>
         )}
       </StyledButtonContext>
