@@ -75,7 +75,7 @@ const ThankYouStyled = styled.div`
 
 const Description = styled.p`
   max-width: ${rems(620)};
-  margin: ${space()} auto 0;
+  margin-inline: auto;
   text-align: center;
 `;
 
@@ -91,6 +91,10 @@ const StyledThankyouWrapper = styled.div`
 
   h1 {
     margin-bottom: ${space(2)};
+  }
+
+  .description {
+    margin-bottom: ${space(3)};
   }
 `;
 
