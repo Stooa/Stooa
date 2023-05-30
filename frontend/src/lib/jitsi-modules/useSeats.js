@@ -10,12 +10,13 @@
 import { SEATS_CHANGE, NOTIFICATION, NOTIFICATION_CLOSE, USER_MUST_LEAVE } from '@/jitsi/Events';
 import conferenceRepository from '@/jitsi/Conference';
 import { dispatchEvent, removeItem } from '@/lib/helpers';
+import { useJitsiStore } from '@/store';
 
-const seatsRepository = () => {
-  let seats = [];
+export const useSeats = () => {
+  const { seats, createSeats } = useJitsiStore();
 
   const create = number => {
-    seats = Array(number).fill(null);
+    const seats = createSeats(number);
 
     console.log('[STOOA] Seats created', number);
 
@@ -182,5 +183,3 @@ const seatsRepository = () => {
     updateDominantSpeaker
   };
 };
-
-export default seatsRepository();

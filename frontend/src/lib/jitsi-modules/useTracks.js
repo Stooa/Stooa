@@ -8,14 +8,16 @@
  */
 
 import seatsRepository from '@/jitsi/Seats';
-import conferenceRepository from '@/jitsi/Conference';
+import { useConference } from '@/jitsi/Conference';
 import sharedTrackRepository from '@/jitsi/SharedTrack';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
+import { useJitsiStore } from '@/store';
 
-const tracksRepository = () => {
-  let tracks = [];
+export const useTracks = () => {
+  const { getMyUserId, getParticipantsIds } = useConference();
+  const { getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
 
   const _playTrackHtml = trackHtml => {
     trackHtml
@@ -133,10 +135,12 @@ const tracksRepository = () => {
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
 
-      if (tracks[id] === undefined) continue;
+      const tracks = getTracksByUser(id);
 
-      for (let index = 0; index < tracks[id].length; index++) {
-        const trackHtml = _getTrackHtml(tracks[id][index]);
+      if (tracks === undefined) continue;
+
+      for (let index = 0; index < track.length; index++) {
+        const trackHtml = _getTrackHtml(track[index]);
 
         if (trackHtml !== null) {
           _playTrackHtml(trackHtml);
@@ -146,16 +150,18 @@ const tracksRepository = () => {
   };
 
   const createTracks = async (id, seat, user) => {
-    if (tracks[id] === undefined) return;
+    const tracks = getTracksByUser(id);
 
-    for (let index = 0; index < tracks[id].length; index++) {
-      const track = tracks[id][index];
+    if (tracks === undefined) return;
+
+    for (let index = 0; index < tracks.length; index++) {
+      const track = tracks[index];
       const trackType = track.getType();
 
       if (trackType === 'audio' && user?.audioMuted) {
-        await tracks[id][index].mute();
+        await tracks[index].mute();
       } else if (trackType === 'video' && user?.videoMuted) {
-        await tracks[id][index].mute();
+        await tracks[index].mute();
       }
 
       _create(seat, track, user);
@@ -166,13 +172,15 @@ const tracksRepository = () => {
 
   const removeTracks = id => {
     if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
+      id = getMyUserId();
     }
 
-    if (tracks[id] === undefined) return;
+    const tracks = getTracksByUser(id);
 
-    for (let index = 0; index < tracks[id].length; index++) {
-      _remove(tracks[id][index]);
+    if (tracks === undefined) return;
+
+    for (let index = 0; index < tracks.length; index++) {
+      _remove(tracks[index]);
     }
 
     console.log('[STOOA] Html tracks removed', id);
@@ -180,13 +188,15 @@ const tracksRepository = () => {
 
   const disposeTracks = async id => {
     if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
+      id = getMyUserId();
     }
 
-    if (tracks[id] === undefined) return;
+    const tracks = getTracksByUser(id);
 
-    for (let index = 0; index < tracks[id].length; index++) {
-      await tracks[id][index].dispose();
+    if (tracks === undefined) return;
+
+    for (let index = 0; index < tracks.length; index++) {
+      await tracks[index].dispose();
     }
 
     console.log('[STOOA] Tracks disposed', id);
@@ -224,15 +234,9 @@ const tracksRepository = () => {
   const _videoAudioTrackAdded = track => {
     const id = track.getParticipantId();
 
-    if (tracks[id] === undefined) {
-      tracks[id] = [];
-    }
+    addUserTrack(id, track);
 
-    tracks[id].push(track);
-
-    let seat;
-
-    seat = seatsRepository.getSeat(id);
+    const seat = seatsRepository.getSeat(id);
 
     _create(seat, track);
 
@@ -259,9 +263,7 @@ const tracksRepository = () => {
       _remove(track);
     }
 
-    if (tracks[id] === undefined) return;
-
-    tracks[id] = tracks[id].filter(remoteTrack => track !== remoteTrack);
+    removeUserTrack(id, track);
 
     console.log('[STOOA] Handle camera or video track removed', track, seat);
   };
@@ -279,15 +281,15 @@ const tracksRepository = () => {
   };
 
   const toggleMute = async type => {
-    const userId = conferenceRepository.getMyUserId();
+    const userId = getMyUserId();
     const seat = seatsRepository.getSeat(userId);
-    const userTracks = tracks[userId];
+    const tracks = getTracksByUser(userId);
 
-    if (userTracks === undefined) return;
+    if (tracks === undefined) return;
 
     if (seat > 0) {
-      for (let index = 0; index < userTracks.length; index++) {
-        const track = userTracks[index];
+      for (let index = 0; index < tracks.length; index++) {
+        const track = tracks[index];
         const trackIsMuted = track.isMuted();
 
         if (track.getType() === type) {
@@ -311,11 +313,9 @@ const tracksRepository = () => {
   const toggleVideoTrack = () => toggleMute('video');
 
   const isLocalParticipantMuted = (id, type) => {
-    const userTracks = tracks[id];
+    const tracks = getTracksByUser(id);
 
-    if (userTracks === undefined) return;
-
-    return tracksAreMuted(userTracks, type);
+    return tracksAreMuted(tracks, type);
   };
 
   const isParticipantMuted = (participant, type) => {
@@ -336,16 +336,15 @@ const tracksRepository = () => {
 
   const getAudioTracks = () => {
     const audioTracks = [];
-    const ids = conferenceRepository.getParticipantsIds();
+    const ids = getParticipantsIds();
 
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
+      const tracks = getTracksByUser(id);
 
-      if (tracks[id] === undefined) continue;
-
-      for (let index = 0; index < tracks[id].length; index++) {
-        if (tracks[id][index].type === 'audio') {
-          audioTracks.push(tracks[id][index]);
+      for (let index = 0; index < tracks.length; index++) {
+        if (tracks[index].type === 'audio') {
+          audioTracks.push(tracks[index]);
         }
       }
     }
@@ -369,5 +368,3 @@ const tracksRepository = () => {
     getAudioTracks
   };
 };
-
-export default tracksRepository();

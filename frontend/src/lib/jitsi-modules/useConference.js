@@ -23,25 +23,48 @@ import {
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import seatsRepository from '@/jitsi/Seats';
-import tracksRepository from '@/jitsi/Tracks';
+import { useTracks } from '@/jitsi';
 import userRepository from '@/jitsi/User';
+import { useJitsiStore } from '@/store';
 
-const conferenceRepository = () => {
-  let connection;
-  let roomName;
-  let userName;
-  let conference;
-  let isModerator = false;
-  let isJoined = false;
-  let twitter = false;
-  let linkedin = false;
+export const useConference = () => {
+  const {
+    connection,
+    conference,
+    roomName,
+    userName,
+    isModerator,
+    isJoined,
+    twitter,
+    linkedin,
+    setConnection,
+    setConference,
+    setRoomName,
+    changeUserName,
+    makeModerator,
+    join: setAsJoined,
+    leave: setAsNotJoined,
+    setTwitter,
+    setLinkedin
+  } = useJitsiStore();
+  const {
+    createTracks,
+    removeTracks,
+    isLocalParticipantMuted,
+    handleTrackAdded,
+    handleTrackMuteChanged,
+    handleTrackRemoved
+  } = useTracks();
 
   const joinUser = (id, user) => {
     if (id === undefined || id === null) {
       id = conference.myUserId();
     }
+
     const seat = seatsRepository.join(id);
-    tracksRepository.createTracks(id, seat, user);
+
+    createTracks(id, seat, user);
+
     conference.selectParticipants(seatsRepository.getIds());
 
     console.log('[STOOA] Join', id);
@@ -69,7 +92,8 @@ const conferenceRepository = () => {
     }
 
     seatsRepository.leave(id);
-    tracksRepository.removeTracks(id);
+
+    removeTracks(id);
 
     conference.selectParticipants(seatsRepository.getIds());
 
@@ -120,7 +144,7 @@ const conferenceRepository = () => {
   };
 
   const _handleConferenceJoin = () => {
-    isJoined = true;
+    setAsJoined();
 
     conference.setDisplayName(userName);
     conference.setLocalParticipantProperty('twitter', twitter);
@@ -161,7 +185,7 @@ const conferenceRepository = () => {
     const { value } = values;
     const seat = seatsRepository.join(value);
 
-    tracksRepository.createTracks(value, seat);
+    createTracks(value, seat);
     conference.selectParticipants(seatsRepository.getIds());
 
     console.log('[STOOA] Join', value);
@@ -171,7 +195,7 @@ const conferenceRepository = () => {
     const { value } = values;
 
     seatsRepository.leave(value);
-    tracksRepository.removeTracks(value);
+    removeTracks(value);
     conference.selectParticipants(seatsRepository.getIds());
 
     console.log('[STOOA] Leave', value);
@@ -214,14 +238,17 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    conference = connection.initJitsiConference(roomName, roomOptions);
+    const conference = connection.initJitsiConference(roomName, roomOptions);
+
+    setConference(conference);
+
     window.conference = conference;
 
     conference.on(PARTICIPANT_CONN_STATUS_CHANGED, _handleParticipantConnectionStatusChanged);
     conference.on(PARTICIPANT_PROPERTY_CHANGED, _handleParticipantPropertyChanged);
-    conference.on(TRACK_ADDED, tracksRepository.handleTrackAdded);
-    conference.on(TRACK_REMOVED, tracksRepository.handleTrackRemoved);
-    conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
+    conference.on(TRACK_ADDED, handleTrackAdded);
+    conference.on(TRACK_REMOVED, handleTrackRemoved);
+    conference.on(TRACK_MUTE_CHANGED, handleTrackMuteChanged);
     conference.on(USER_JOINED, userRepository.handleUserJoin);
     conference.on(USER_LEFT, userRepository.handleUserLeft);
     conference.on(KICKED, userRepository.handleUserKicked);
@@ -296,17 +323,23 @@ const conferenceRepository = () => {
     } = JitsiMeetJS;
     const auth = await getAuthToken(true, rawRoomName);
 
-    isModerator = isUserModerator;
+    if (isUserModerator) {
+      makeModerator();
+    }
 
     setUsername(auth ? auth.user : null);
 
-    roomName = getBackendSafeRoomName(rawRoomName);
+    const roomName = getBackendSafeRoomName(rawRoomName);
 
-    connection = new JitsiMeetJS.JitsiConnection(
+    setRoomName(roomName);
+
+    const connection = new JitsiMeetJS.JitsiConnection(
       null,
       auth ? auth.token : process.env.NEXT_PUBLIC_GUEST_TOKEN ?? null,
       connectionOptions(roomName)
     );
+
+    setConnection(connection);
 
     connection.addEventListener(CONNECTION_ESTABLISHED, _handleConnectionEstablished);
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
@@ -352,7 +385,8 @@ const conferenceRepository = () => {
       return;
     }
 
-    tracksRepository.handleTrackRemoved(oldTrack);
+    handleTrackRemoved(oldTrack);
+
     conference.replaceTrack(oldTrack, track);
   };
 
@@ -375,7 +409,7 @@ const conferenceRepository = () => {
     console.log('[STOOA] Leave');
 
     if (isJoined) {
-      isJoined = false;
+      setAsNotJoined();
 
       conference.leave();
       connection.disconnect();
@@ -414,11 +448,11 @@ const conferenceRepository = () => {
 
   const setUsername = user => {
     if (user) {
-      userName = user.name;
-      twitter = user.twitter;
-      linkedin = user.linkedin;
+      changeUserName(user.name);
+      setTwitter(user.twitter);
+      setLinkedin(user.linkedin);
     } else {
-      userName = userRepository.getUserNickname();
+      changeUserName(userRepository.getUserNickname());
     }
   };
 
@@ -469,8 +503,8 @@ const conferenceRepository = () => {
         conference.isJoined() === null
           ? false
           : conference.getLocalParticipantProperty('joined') === 'yes',
-      isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
-      isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video')
+      isMuted: isLocalParticipantMuted(id, 'audio'),
+      isVideoMuted: isLocalParticipantMuted(id, 'video')
     };
   };
 
@@ -520,5 +554,3 @@ const conferenceRepository = () => {
     stopRecordingEvent
   };
 };
-
-export default conferenceRepository();
