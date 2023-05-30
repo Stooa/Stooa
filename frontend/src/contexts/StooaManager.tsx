@@ -19,13 +19,7 @@ import {
   ROUTE_USER_NO_PARTICIPATING
 } from '@/app.config';
 import api from '@/lib/api';
-import {
-  initialInteraction,
-  initializeJitsi,
-  initializeConnection,
-  unload,
-  unloadKickedUser
-} from '@/lib/jitsi';
+import { initialInteraction, unload, unloadKickedUser } from '@/lib/jitsi';
 import {
   CONFERENCE_IS_LOCKABLE,
   CONFERENCE_PASSWORD_REQUIRED,
@@ -58,6 +52,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import SharedTrack from '@/jitsi/SharedTrack';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
+import { useJitsi } from '@/hooks/useJitsi';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -96,6 +91,7 @@ const StooaProvider = ({
     }
     return false;
   });
+  const { initializeConnection, initializeJitsi } = useJitsi();
 
   const { t, lang } = useTranslation('app');
 
@@ -363,7 +359,7 @@ const StooaProvider = ({
           (isConferenceIntroducing() || conferenceStatus === IConferenceStatus.RUNNING)))
     ) {
       setTimeout(() => {
-        initializeConnection(fid, isModerator);
+        initializeConnection(fid as string, isModerator);
       }, 700);
 
       window.addEventListener('mousedown', initialInteraction);

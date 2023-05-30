@@ -11,6 +11,8 @@ import conferenceRepository from '@/jitsi/Conference';
 import seatsRepository from '@/jitsi/Seats';
 import tracksRepository from '@/jitsi/Tracks';
 import localTracksRepository from '@/jitsi/LocalTracks';
+import JitsiConnection from 'lib-jitsi-meet/types/hand-crafted/JitsiConnection';
+import { Participant } from '@/types/participant';
 
 let localTracksCreated = false;
 
@@ -61,12 +63,12 @@ const initializeJitsi = () => {
   conferenceRepository.initializeJitsi();
 };
 
-const initializeConnection = (fid, isModerator) => {
+const initializeConnection = (fid, isModerator): JitsiConnection => {
   console.log('[STOOA] Initialize connection');
 
   seatsRepository.create(5);
 
-  conferenceRepository.initializeConnection(fid, isModerator);
+  return conferenceRepository.initializeConnection(fid, isModerator) as unknown as JitsiConnection;
 };
 
 const initialInteraction = event => {
@@ -85,7 +87,7 @@ const getParticipantCount = () => {
 const getParticipantList = () => {
   const jitsiParticipants = conferenceRepository.getParticipants();
   const localParticipant = conferenceRepository.getLocalParticipant();
-  const participants = [];
+  const participants: Omit<Participant, 'getId' | 'getDisplayName'>[] = [];
 
   if (null !== localParticipant) {
     participants.push(localParticipant);
