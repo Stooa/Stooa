@@ -290,7 +290,7 @@ services:
                 aliases:
                     - ${XMPP_DOMAIN}
     etherpad:
-        image: etherpad/etherpad:1.8.6
+        image: etherpad/etherpad:1.8.17
         restart: ${RESTART_POLICY:-unless-stopped}
 #        command: [ "node", "node_modules/ep_etherpad-lite/node/server.js", "--apikey", "/opt/etherpad-lite/test/APIKEY.txt" ]
 #        volumes:
@@ -309,7 +309,7 @@ services:
             - DB_NAME=symfony
             - DB_USER=symfony
             - DB_PASS=symfony
-            - DB_CHARSET=utf8mb4
+#            - DB_CHARSET=utf8mb4
         networks:
             meet.jitsi:
                 aliases:
