@@ -46,7 +46,7 @@ const BreakoutRooms = () => {
           Object.keys(rooms).map(room => (
             <div key={room}>
               {rooms[room].isMainRoom ? 'main' : rooms[room].name}{' '}
-              <button onClick={() => console.log(rooms[room])}>JOIN</button>
+              <button onClick={() => Conference.joinRoom(room)}>JOIN</button>
             </div>
           ))}
       </div>

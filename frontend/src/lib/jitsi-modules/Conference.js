@@ -66,7 +66,7 @@ const conferenceRepository = () => {
    * @param {string | undefined} password
    */
   const joinConference = async () => {
-    console.log('Joining to conference ---->');
+    console.log('Joining to conference ---->', conference);
     if (conference) await conference.join();
   };
 
@@ -126,8 +126,12 @@ const conferenceRepository = () => {
     console.error('[STOOA] Handle connection failed', error);
   };
 
+  const _handleConferenceJoinInProgress = () => {
+    console.log('[STOOA] Handle conference join in progress');
+  };
+
   const _handleConferenceJoin = () => {
-    console.log('HANDLE CONFERENCE JOIN ------>');
+    console.log('HANDLE CONFERENCE JOIN ------>', conference);
     isJoined = true;
 
     conference.setDisplayName(userName);
@@ -156,6 +160,7 @@ const conferenceRepository = () => {
           USER_LEFT,
           USER_ROLE_CHANGED,
           KICKED,
+          CONFERENCE_JOIN_IN_PROGRESS,
           CONFERENCE_JOINED,
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
@@ -193,6 +198,7 @@ const conferenceRepository = () => {
     conference.on(USER_JOINED, userRepository.handleUserJoin);
     conference.on(USER_LEFT, userRepository.handleUserLeft);
     conference.on(KICKED, userRepository.handleUserKicked);
+    conference.on(CONFERENCE_JOIN_IN_PROGRESS, _handleConferenceJoinInProgress);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
@@ -208,15 +214,16 @@ const conferenceRepository = () => {
 
     // conference.join();
     dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
-    setTimeout(() => {
-      _handleConferenceJoin();
-    }, 1000);
+    // setTimeout(() => {
+    //   _handleConferenceJoin();
+    // }, 1000);
   };
 
   const _handleConferenceFailed = error => {
     if (error === 'conference.authenticationRequired') {
       dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
     }
+    console.log('[STOOA] Conference failed', error);
   };
 
   const _handleConferenceError = error => {
@@ -274,9 +281,8 @@ const conferenceRepository = () => {
   };
 
   const _handleBreakoutRoomMove = params => {
-    console.log('MOVE TO ROOM', params);
-
-    joinRoom(params);
+    const roomId = params.split('@')[0];
+    joinRoom(roomId);
   };
 
   const _handleConnectionEstablished = async () => {
@@ -371,7 +377,7 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
+    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.DEBUG);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);
@@ -653,7 +659,8 @@ const conferenceRepository = () => {
     stopRecordingEvent,
     createBreakoutRoom,
     getBreakoutRooms,
-    sendParticipantToRoom
+    sendParticipantToRoom,
+    joinRoom
   };
 };
 

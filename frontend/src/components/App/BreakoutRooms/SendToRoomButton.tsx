@@ -27,7 +27,8 @@ export const SendToRoomButton = ({ initialParticipant }: Props) => {
   };
 
   const handleSendToRoom = roomId => {
-    console.log('QUEEEE', initialParticipant);
+    console.log('INITIAL PARTICIPANT', initialParticipant);
+    console.log('ROOM ID ---->', roomId);
     Conference.sendParticipantToRoom(initialParticipant._connectionJid, roomId);
   };
 
