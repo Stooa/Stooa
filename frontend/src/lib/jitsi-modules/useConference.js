@@ -177,8 +177,8 @@ export const useConference = () => {
   };
 
   const _handleUserRoleChanged = () => {
-    const role = conference.getRole();
-    console.log('[STOOA] User role changed', conference.getRole());
+    const role = getConference().getRole();
+    console.log('[STOOA] User role changed', getConference().getRole());
 
     if (role === 'moderator') {
       dispatchEvent(CONFERENCE_IS_LOCKABLE);
