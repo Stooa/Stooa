@@ -85,7 +85,7 @@ export const useConference = () => {
    * @param {string | undefined} password
    */
   const joinConference = async () => {
-    if (conference) await conference.join();
+    await getConference().join();
   };
 
   const leaveUser = id => {
