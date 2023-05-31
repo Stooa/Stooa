@@ -324,6 +324,8 @@ export const useTracks = () => {
   };
 
   const tracksAreMuted = (tracks, type) => {
+    if (!tracks) return false;
+
     for (let index = 0; index < tracks.length; index++) {
       if (tracks[index].type === type) {
         return tracks[index].isMuted();
