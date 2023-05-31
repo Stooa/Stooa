@@ -12,8 +12,17 @@ import { dispatchEvent, removeItem } from '@/lib/helpers';
 import { useJitsiStore } from '@/store';
 
 export const useSeats = () => {
-  const { seats, getMyUserId, createSeats, findEmptySeat, count, getOccupiedSeats, sit, stand } =
-    useJitsiStore();
+  const {
+    seats,
+    getMyUserId,
+    createSeats,
+    findEmptySeat,
+    count,
+    getOccupiedSeats,
+    sit,
+    stand,
+    findSeat
+  } = useJitsiStore();
 
   const create = number => {
     const seats = createSeats(number);
