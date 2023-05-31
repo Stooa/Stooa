@@ -8,16 +8,17 @@
  */
 
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
-import { useUser, useConference, useSeats, useSharedTrack } from '@/jitsi';
+import { useUser, useSeats, useSharedTrack } from '@/jitsi';
 import { dispatchEvent } from '@/lib/helpers';
 import { SCREEN_SHARE_CANCELED, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';
 import { MediaType } from '@/types/jitsi/media';
+import { useJitsiStore } from '@/store';
 
 export const useLocalTracks = () => {
   const { getUserAudioInput, getUserVideoInput } = useUser();
-  const { getMyUserId } = useConference();
   const { getSeat } = useSeats();
   const { removeShareTrack } = useSharedTrack();
+  const { getMyUserId } = useJitsiStore();
 
   const _handleAudioLevelChanged = (audioLevel: number): void => {
     console.log('[STOOA] Local audio level changed', audioLevel);

@@ -35,6 +35,7 @@ export const useConference = () => {
     isJoined,
     twitter,
     linkedin,
+    getMyUserId,
     setConnection,
     setConference,
     setRoomName,
@@ -395,14 +396,6 @@ export const useConference = () => {
   const getParticipantNameById = id => {
     const participant = getParticipantById(id);
     return participant ? participant.getDisplayName() : userName;
-  };
-
-  const getMyUserId = () => {
-    if (isJoined) {
-      return conference.myUserId();
-    }
-
-    return false;
   };
 
   const leave = () => {

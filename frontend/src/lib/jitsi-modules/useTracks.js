@@ -7,17 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import { useConference, useSeats, useSharedTracks } from '@/jitsi';
+import { useSeats, useSharedTracks } from '@/jitsi';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
 import { useJitsiStore } from '@/store';
 
 export const useTracks = () => {
-  const { getMyUserId } = useConference();
   const { getSeat, getIds } = useSeats();
   const { shareTrackAdded, removeShareTrack } = useSharedTracks();
-  const { getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
+  const { getMyUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
 
   const _playTrackHtml = trackHtml => {
     trackHtml
@@ -334,7 +333,7 @@ export const useTracks = () => {
     return false;
   };
 
-  const getAudioTracks = (ids) => {
+  const getAudioTracks = ids => {
     const audioTracks = [];
 
     for (let index = 0; index < ids.length; index++) {

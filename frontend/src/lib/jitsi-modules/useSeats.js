@@ -8,14 +8,12 @@
  */
 
 import { SEATS_CHANGE, NOTIFICATION, NOTIFICATION_CLOSE, USER_MUST_LEAVE } from '@/jitsi/Events';
-import { useConference } from '@/jitsi';
 import { dispatchEvent, removeItem } from '@/lib/helpers';
 import { useJitsiStore } from '@/store';
 
 export const useSeats = () => {
-  const { seats, createSeats, findEmptySeat, count, getOccupiedSeats, sit, stand } =
+  const { seats, getMyUserId, createSeats, findEmptySeat, count, getOccupiedSeats, sit, stand } =
     useJitsiStore();
-  const { getMyUserId } = useConference();
 
   const create = number => {
     const seats = createSeats(number);

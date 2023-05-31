@@ -18,8 +18,12 @@ interface JitsiSlice {
   connection: JitsiConnection | undefined;
   conference: JitsiConference | undefined;
   roomName: string | undefined;
+  isJoined: boolean;
   setConnection: (connection: JitsiConnection) => void;
   setConference: (conference: JitsiConference) => void;
+  join: () => void;
+  leave: () => void;
+  getMyUserId: () => string | false;
   setRoomName: (roomName: string) => void;
 }
 
@@ -39,13 +43,10 @@ interface TracksSlice {
 interface UserSlice {
   userName: string | undefined;
   isModerator: boolean;
-  isJoined: boolean;
   twitter: string | false;
   linkedin: string | false;
   changeUserName: (userName: string) => void;
   makeModerator: () => void;
-  join: () => void;
-  leave: () => void;
   setTwitter: (twitter: string) => void;
   setLinkedin: (linkedin: string) => void;
 }
@@ -66,12 +67,20 @@ interface FishbowlSlice {
 
 type ConsolidatedSlice = JitsiSlice & TracksSlice & UserSlice & FishbowlSlice;
 
-const createJitsiSlice: StateCreator<ConsolidatedSlice, [], [], JitsiSlice> = set => ({
+const createJitsiSlice: StateCreator<ConsolidatedSlice, [], [], JitsiSlice> = (set, get) => ({
   connection: undefined,
   conference: undefined,
+  isJoined: false,
   roomName: undefined,
   setConnection: (connection: JitsiConnection) => set({ connection }),
   setConference: (conference: JitsiConference) => set({ conference }),
+  join: () => set({ isJoined: true }),
+  leave: () => set({ isJoined: false }),
+  getMyUserId: () => {
+    const { conference, isJoined } = get();
+
+    return conference && isJoined ? conference.myUserId() : false;
+  },
   setRoomName: (roomName: string) => set({ roomName })
 });
 
@@ -103,13 +112,10 @@ const createTracksSlice: StateCreator<ConsolidatedSlice, [], [], TracksSlice> = 
 const createUserSlice: StateCreator<ConsolidatedSlice, [], [], UserSlice> = set => ({
   userName: undefined,
   isModerator: false,
-  isJoined: false,
   twitter: false,
   linkedin: false,
   changeUserName: (userName: string) => set({ userName }),
   makeModerator: () => set({ isModerator: true }),
-  join: () => set({ isJoined: true }),
-  leave: () => set({ isJoined: false }),
   setTwitter: (twitter: string) => set({ twitter }),
   setLinkedin: (linkedin: string) => set({ linkedin })
 });
