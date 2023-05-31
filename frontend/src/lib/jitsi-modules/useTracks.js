@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useSeats, useSharedTracks } from '@/jitsi';
+import { useSeats, useSharedTrack } from '@/jitsi';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
@@ -15,7 +15,7 @@ import { useJitsiStore } from '@/store';
 
 export const useTracks = () => {
   const { getSeat, getIds } = useSeats();
-  const { shareTrackAdded, removeShareTrack } = useSharedTracks();
+  const { shareTrackAdded, removeShareTrack } = useSharedTrack();
   const { getMyUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
 
   const _playTrackHtml = trackHtml => {
