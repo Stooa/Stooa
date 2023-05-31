@@ -59,7 +59,7 @@ interface FishbowlSlice {
   createSeats: (seats: number) => Array<string | undefined>;
   findSeat: (id: string) => number | undefined;
   findEmptySeat: () => number | undefined;
-  getOcuppiedSeats: () => string[];
+  getOccupiedSeats: () => string[];
   sit: (id: string, seat: number) => void;
   stand: (seat: number) => void;
   count: () => number;
@@ -152,7 +152,7 @@ const createFishbowlSlice: StateCreator<ConsolidatedSlice, [], [], FishbowlSlice
 
     return seat === 0 ? undefined : seat;
   },
-  getOcuppiedSeats: (): string[] => {
+  getOccupiedSeats: (): string[] => {
     const { seats } = get();
 
     return seats.filter(seat => seat !== undefined) as string[];
