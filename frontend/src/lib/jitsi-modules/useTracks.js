@@ -314,6 +314,8 @@ export const useTracks = () => {
   const isLocalParticipantMuted = (id, type) => {
     const tracks = getTracksByUser(id);
 
+    if (tracks === undefined) return;
+
     return tracksAreMuted(tracks, type);
   };
 
@@ -324,8 +326,6 @@ export const useTracks = () => {
   };
 
   const tracksAreMuted = (tracks, type) => {
-    if (!tracks) return false;
-
     for (let index = 0; index < tracks.length; index++) {
       if (tracks[index].type === type) {
         return tracks[index].isMuted();
