@@ -8,7 +8,7 @@
  */
 
 import { useJitsiStore } from '@/store';
-import { useConference, useTracks, useLocalTracks } from '@/jitsi';
+import { useConference, useTracks, useLocalTracks, useSeats } from '@/jitsi';
 
 export const useJitsi = () => {
   const { localTracksCreated, localTracksCreatedEvent } = useJitsiStore();
@@ -25,10 +25,11 @@ export const useJitsi = () => {
     kickParticipant: conferenceKickParticipant
   } = useConference();
   const { syncLocalStorageTrack, disposeTracks, playTracks, isParticipantMuted } = useTracks();
+  const { hasFreeSeat, create } = useSeats();
   const { createLocalTracks } = useLocalTracks();
 
   const join = async user => {
-    if (!seatsRepository.hasFreeSeat()) return;
+    if (!hasFreeSeat()) return;
 
     sendJoinEvent(user);
 
@@ -78,7 +79,7 @@ export const useJitsi = () => {
   const initializeConnection = (fid, isModerator) => {
     console.log('[STOOA] Initialize connection');
 
-    seatsRepository.create(5);
+    create(5);
 
     conferenceInitializeConnection(fid, isModerator);
   };
