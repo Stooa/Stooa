@@ -413,10 +413,6 @@ export const useConference = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
 
-  const stopScreenShareEvent = () => {
-    conference.setLocalParticipantProperty('screenShare', 'false');
-  };
-
   const startRecordingEvent = () => {
     conference.setLocalParticipantProperty('recording', 'true');
   };
@@ -539,7 +535,6 @@ export const useConference = () => {
     sendLeaveEvent,
     sendTextMessage,
     startScreenShareEvent,
-    stopScreenShareEvent,
     getLocalTracks,
     getParticipantsIds,
     startRecordingEvent,

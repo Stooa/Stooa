@@ -7,12 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import { useConference } from '@/jitsi';
 import { SCREEN_SHARE_STOP } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
+import { useJitsiStore } from '@/store';
 
 export const useSharedTrack = () => {
-  const { shareTrack, assignShareTrack, clearShareTrack, stopScreenShareEvent } = useConference();
+  const { shareTrack, conference, clearShareTrack, assignShareTrack } = useJitsiStore();
+
+  const stopScreenShareEvent = () => {
+    conference && conference.setLocalParticipantProperty('screenShare', 'false');
+  };
 
   const getShareHtmlTrack = (): HTMLElement | null => {
     return document.querySelector('#share > .share-video-wrapper');
