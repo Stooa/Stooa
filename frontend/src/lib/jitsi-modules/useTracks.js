@@ -342,6 +342,8 @@ export const useTracks = () => {
       const id = ids[index];
       const tracks = getTracksByUser(id);
 
+      if (tracks === undefined) continue;
+
       for (let index = 0; index < tracks.length; index++) {
         if (tracks[index].type === 'audio') {
           audioTracks.push(tracks[index]);
