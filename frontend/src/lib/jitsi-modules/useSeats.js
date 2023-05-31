@@ -15,7 +15,7 @@ import { useJitsiStore } from '@/store';
 export const useSeats = () => {
   const { seats, createSeats, findEmptySeat, count, getOccupiedSeats, sit, stand } =
     useJitsiStore();
-  const { getMyUserId, getParticipantNameById } = useConference();
+  const { getMyUserId } = useConference();
 
   const create = number => {
     const seats = createSeats(number);
@@ -47,7 +47,7 @@ export const useSeats = () => {
     dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat(), seatsValues: getSeats() });
   };
 
-  const join = id => {
+  const join = (id, participantName) => {
     const seat = findEmptySeat();
 
     if (seat === undefined) return;
@@ -56,7 +56,6 @@ export const useSeats = () => {
       id = getMyUserId();
     }
 
-    const participantName = getParticipantNameById(id);
     const seatHtml = document.getElementById(`seat-${seat}`);
 
     if (!seatHtml) return;

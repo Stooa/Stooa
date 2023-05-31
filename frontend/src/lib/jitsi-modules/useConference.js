@@ -61,7 +61,7 @@ export const useConference = () => {
       id = conference.myUserId();
     }
 
-    const seat = join(id);
+    const seat = join(id, getParticipantNameById(id));
 
     createTracks(id, seat, user);
 
@@ -534,7 +534,6 @@ export const useConference = () => {
     getMyUserId,
     getParticipantById,
     getParticipantCount,
-    getParticipantNameById,
     getParticipants,
     initializeJitsi,
     initializeConnection,

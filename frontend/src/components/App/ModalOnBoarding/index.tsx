@@ -13,11 +13,12 @@ import Cross from '@/ui/svg/cross.svg';
 import OnboardingModal from '@/components/App/ModalOnBoarding/styles';
 import OnBoardingSlider from '@/components/App/OnBoarding/OnBoardingSlider';
 import { useStooa } from '@/contexts/StooaManager';
-import { setOnBoardingCookie } from '@/user/auth';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 import { useModals } from '@/contexts/ModalsContext';
 
 const ModalOnboarding = () => {
   const { isModerator } = useStooa();
+  const { setOnBoardingCookie } = useUserAuth();
 
   const { toggleOnBoarding, setActiveOnBoardingTooltip, onBoardingTooltipSeen } = useModals();
 

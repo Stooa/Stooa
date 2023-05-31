@@ -14,7 +14,7 @@ import { MediaType } from '@/types/jitsi/media';
 import { useJitsiStore } from '@/store';
 
 export const useTracks = () => {
-  const { getMyUserId, getParticipantsIds } = useConference();
+  const { getMyUserId } = useConference();
   const { getSeat, getIds } = useSeats();
   const { shareTrackAdded, removeShareTrack } = useSharedTracks();
   const { getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
@@ -334,9 +334,8 @@ export const useTracks = () => {
     return false;
   };
 
-  const getAudioTracks = () => {
+  const getAudioTracks = (ids) => {
     const audioTracks = [];
-    const ids = getParticipantsIds();
 
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];

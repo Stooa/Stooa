@@ -16,7 +16,7 @@ import { MediaType } from '@/types/jitsi/media';
 import { toast } from 'react-toastify';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { supportsCaptureHandle } from '@/lib/helpers';
-import { useTracks, useLocalTracks } from '@/jitsi';
+import { useTracks, useLocalTracks, useConference } from '@/jitsi';
 
 const GIGABYTE = 1073741824;
 
@@ -71,6 +71,7 @@ const useVideoRecorder = (
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const [ranNotification, setRanNotification] = useState(false);
+  const { getParticipantsIds } = useConference();
   const { getAudioTracks } = useTracks();
   const { createLocalTrack } = useLocalTracks();
 
@@ -143,10 +144,10 @@ const useVideoRecorder = (
     audioContext.current = new AudioContext();
     audioDestination.current = audioContext.current.createMediaStreamDestination();
 
-    const audioTracks = getAudioTracks();
+    const audioTracks = getAudioTracks(getParticipantsIds());
 
     if (audioTracks.length > 0) {
-      getAudioTracks().forEach((track: JitsiTrack) => {
+      audioTracks.forEach((track: JitsiTrack) => {
         if (track.getType() === 'audio') {
           _addAudioTrackToLocalRecording(track);
         }

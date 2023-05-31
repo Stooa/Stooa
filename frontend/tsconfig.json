@@ -33,5 +33,5 @@
     "incremental": true
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "tests/**/*.ts", "tests/**/*.tsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["next-env.d.ts", "tests/**/*.ts", "tests/**/*.tsx", "src/**/*.ts", "src/**/*.tsx", "src/lib/jitsi-modules/useConference.js"]
 }
