@@ -17,7 +17,7 @@ import ButtonKickUser from '../ButtonKickUser';
 import useEventListener from '@/hooks/useEventListener';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { SEATS_CHANGE } from '@/jitsi/Events';
-import conferenceRepository from '@/jitsi/Conference';
+import { useConference } from '@/jitsi';
 
 interface Props {
   className?: string;
@@ -38,6 +38,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
   const { setParticipantToKick, conferenceReady, isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const { getParticipantById } = useConference();
 
   const isMyself = initialParticipant ? initialParticipant.isCurrentUser : false;
 
@@ -56,7 +57,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
       const participantId = seatsValues[seatNumber - 1];
 
       if (participantId) {
-        setParticipant(conferenceRepository.getParticipantById(participantId));
+        setParticipant(getParticipantById(participantId));
       } else {
         setParticipant(undefined);
       }
@@ -65,7 +66,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
 
   useEffect(() => {
     if (initialParticipant && conferenceReady) {
-      setParticipant(conferenceRepository.getParticipantById(initialParticipant.id));
+      setParticipant(getParticipantById(initialParticipant.id));
     }
   }, [conferenceReady, initialParticipant]);
 

@@ -13,7 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { ping } from '@/user/auth';
-import { getParticipantList } from '@/lib/jitsi';
+import { useJitsi } from '@/lib/useJitsi';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
 import ChevronLeft from '@/ui/svg/chevron-left.svg';
@@ -52,6 +52,7 @@ interface Props {
 const PING_TIMEOUT = 3500;
 
 const Participants: React.FC<Props> = ({ initialized, fid }) => {
+  const { getParticipantList } = useJitsi();
   const { t, lang } = useTranslation('fishbowl');
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();

@@ -8,12 +8,14 @@
  */
 
 import { SEATS_CHANGE, NOTIFICATION, NOTIFICATION_CLOSE, USER_MUST_LEAVE } from '@/jitsi/Events';
-import conferenceRepository from '@/jitsi/Conference';
+import { useConference } from '@/jitsi';
 import { dispatchEvent, removeItem } from '@/lib/helpers';
 import { useJitsiStore } from '@/store';
 
 export const useSeats = () => {
-  const { seats, createSeats } = useJitsiStore();
+  const { seats, createSeats, findEmptySeat, count, getOccupiedSeats, sit, stand } =
+    useJitsiStore();
+  const { getMyUserId, getParticipantNameById } = useConference();
 
   const create = number => {
     const seats = createSeats(number);
@@ -24,7 +26,7 @@ export const useSeats = () => {
   };
 
   const getIds = () => {
-    const ids = seats.filter(seat => seat !== null);
+    const ids = getOccupiedSeats();
 
     console.log('[STOOA] Seats occupied by', ids);
 
@@ -32,33 +34,29 @@ export const useSeats = () => {
   };
 
   const getSeat = id => {
-    if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
-    }
-
-    return seats.indexOf(id) + 1;
+    return findSeat(id ?? getMyUserId());
   };
 
   const getSeats = () => {
     return seats;
   };
 
-  const hasFreeSeat = () => getSeat(null) > 0;
+  const hasFreeSeat = () => count() > 0;
 
   const _handleDispatchEvent = () => {
     dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat(), seatsValues: getSeats() });
   };
 
   const join = id => {
-    const seat = getSeat(null);
+    const seat = findEmptySeat();
 
-    if (seat <= 0) return;
+    if (seat === undefined) return;
 
     if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
+      id = getMyUserId();
     }
 
-    const participantName = conferenceRepository.getParticipantNameById(id);
+    const participantName = getParticipantNameById(id);
     const seatHtml = document.getElementById(`seat-${seat}`);
 
     if (!seatHtml) return;
@@ -67,26 +65,21 @@ export const useSeats = () => {
     seatHtml.setAttribute('data-id', id);
     seatHtml.classList.add('user-joined');
 
-    seats[seat - 1] = id;
+    sit(id, seat);
 
     _handleDispatchEvent(id);
 
-    if (!hasFreeSeat()) {
-      const notificationUsers = removeItem(getIds(), id);
+    const count = count();
 
+    if (count === 0) {
       dispatchEvent(NOTIFICATION, {
         type: USER_MUST_LEAVE,
-        seats: notificationUsers,
+        seats: removeItem(getIds(), id),
         message: 'notification.emptySeats'
       });
     }
 
-    console.log(
-      '[STOOA] Join seat',
-      seat,
-      '| Seats left',
-      seats.reduce((carry, seat) => carry + (seat === null ? 1 : 0), 0)
-    );
+    console.log('[STOOA] Join seat', seat, '| Seats left', count);
 
     return seat;
   };
@@ -99,12 +92,12 @@ export const useSeats = () => {
 
   const leave = id => {
     if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
+      id = getMyUserId();
     }
 
     const seat = getSeat(id);
 
-    if (seat <= 0) return;
+    if (seat === undefined) return;
 
     const seatHtml = document.getElementById(`seat-${seat}`);
 
@@ -118,15 +111,11 @@ export const useSeats = () => {
       dispatchEvent(NOTIFICATION_CLOSE, { type: USER_MUST_LEAVE });
     }
 
-    seats[seat - 1] = null;
+    stand(seat);
 
     _handleDispatchEvent();
 
-    console.log(
-      '[STOOA] Leave seat',
-      seat,
-      seats.reduce((carry, seat) => carry + (seat === null ? 1 : 0), 0)
-    );
+    console.log('[STOOA] Leave seat', seat, count());
 
     return seat;
   };

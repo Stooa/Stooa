@@ -16,7 +16,6 @@ import * as Yup from 'yup';
 
 import { useStateValue } from '@/contexts/AppContext';
 import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
-import userRepository from '@/jitsi/User';
 import FormikForm from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Button from '@/components/Common/Button';
@@ -24,6 +23,7 @@ import { useStooa } from '@/contexts/StooaManager';
 import { connectWithPassword } from './connection';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useUser } from '@/jitsi';
 
 interface FormValues {
   name: string;
@@ -38,17 +38,12 @@ interface FormProps {
   isPrivate: boolean;
 }
 
-const initialValues = {
-  name: userRepository.getUserNickname(),
-  isPrivate: false,
-  password: ''
-};
-
 const Form = (props: FormProps & FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
+  const { setUser } = useUser();
 
   useEffect(() => {
-    userRepository.setUser({
+    setUser({
       guestId: ''
     });
   }, []);
@@ -69,27 +64,9 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
   );
 };
 
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props => {
-    return Yup.object({
-      name: Yup.string()
-        .matches(/[^-\s]/, {
-          excludeEmptyString: true,
-          message: props.notEmpty
-        })
-        .required(props.required),
-      password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
-    });
-  },
-  handleSubmit: async (values, actions) => {
-    actions.setSubmitting(false);
-    actions.props.onSubmit(values, actions);
-  }
-})(Form);
-
 const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   const { setFishbowlPassword, isModerator } = useStooa();
+  const { getUserNickname, setUser } = useUser();
   const [, dispatch] = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
@@ -98,6 +75,12 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
 
   const requiredError = t('validation.required');
   const notEmptyError = t('validation.notEmpty');
+
+  const initialValues = {
+    name: getUserNickname(),
+    isPrivate: false,
+    password: ''
+  };
 
   const handleDispatchJoinGuest = (): void => {
     dispatch({
@@ -126,7 +109,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
           }
         } = res;
 
-        userRepository.setUser({
+        setUser({
           guestId: id.replace('/guests/', '')
         });
 
@@ -136,7 +119,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
         console.log(error);
       });
 
-    userRepository.setUser({
+    setUser({
       nickname: name
     });
 
@@ -166,6 +149,25 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
       handleDispatchJoinGuest();
     }
   };
+
+  const FormValidation = withFormik<FormProps, FormValues>({
+    mapPropsToValues: () => initialValues,
+    validationSchema: props => {
+      return Yup.object({
+        name: Yup.string()
+          .matches(/[^-\s]/, {
+            excludeEmptyString: true,
+            message: props.notEmpty
+          })
+          .required(props.required),
+        password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
+      });
+    },
+    handleSubmit: async (values, actions) => {
+      actions.setSubmitting(false);
+      actions.props.onSubmit(values, actions);
+    }
+  })(Form);
 
   return (
     <FormValidation

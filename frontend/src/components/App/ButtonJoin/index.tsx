@@ -11,7 +11,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { User } from '@/types/user';
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/jitsi/User';
 
 import ArrowDownIcon from '@/ui/svg/arrow-down.svg';
 import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
@@ -21,6 +20,7 @@ import { useDevices } from '@/contexts/DevicesContext';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { isTimeLessThanNSeconds } from '@/lib/helpers';
+import { useUser } from '@/jitsi';
 
 interface Props {
   join: (user: User) => void;
@@ -37,6 +37,7 @@ const ButtonJoin = ({ joined, join, leave, disabled, permissions, children }: Pr
   const [{ conferenceStatus, isGuest }] = useStateValue();
   const trackFailJoin = useRef<boolean>();
   const joinedTimestamp = useRef<number>();
+  const { getUser } = useUser();
 
   const handleJoinClick = async () => {
     if (!permissions) {
@@ -50,7 +51,7 @@ const ButtonJoin = ({ joined, join, leave, disabled, permissions, children }: Pr
       label: window.location.href
     });
 
-    const userSettings = userRepository.getUser();
+    const userSettings = getUser();
 
     setActive(false);
     joined ? leave() : join(userSettings);

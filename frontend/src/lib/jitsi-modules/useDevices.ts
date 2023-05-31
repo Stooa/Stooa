@@ -8,23 +8,23 @@
  */
 
 import { DevicesRepository } from '@/types/devices';
-import conferenceRepository from '@/jitsi/Conference';
-import localTracksRepository from '@/jitsi/LocalTracks';
+import { useConference, useLocalTracks } from '@/jitsi';
 import { MediaType } from '@/types/jitsi/media';
 
-const devicesRepository = (): DevicesRepository => {
+export const useDevices = (): DevicesRepository => {
+  const { getLocalAudioTrack, getLocalVideoTrack, addTrack, startScreenShareEvent } =
+    useConference();
+  const { createLocalTrack } = useLocalTracks();
+
   const _changeInputDevice = async (device: MediaDeviceInfo): Promise<void> => {
     const kind = device.kind === 'audioinput' ? MediaType.AUDIO : MediaType.VIDEO;
-    const oldTrack =
-      kind === 'audio'
-        ? conferenceRepository.getLocalAudioTrack()
-        : conferenceRepository.getLocalVideoTrack();
+    const oldTrack = kind === 'audio' ? getLocalAudioTrack() : getLocalVideoTrack();
 
-    if (oldTrack !== undefined) {
+    if (oldTrack) {
       oldTrack.getTrack().stop();
     }
 
-    const newTracks = await localTracksRepository.createLocalTrack(kind, device.deviceId);
+    const newTracks = await createLocalTrack(kind, device.deviceId);
 
     if (newTracks.length !== 1) {
       Promise.reject('More than one track to replace');
@@ -32,7 +32,7 @@ const devicesRepository = (): DevicesRepository => {
 
     console.log('[STOOA] Device changed', device);
 
-    conferenceRepository.addTrack(newTracks[0], oldTrack);
+    addTrack(newTracks[0], oldTrack);
   };
 
   const _changeOutputDevice = (device: MediaDeviceInfo): Promise<unknown> => {
@@ -71,7 +71,7 @@ const devicesRepository = (): DevicesRepository => {
   };
 
   const screenShare = async (): Promise<boolean> => {
-    const newTracks = await localTracksRepository.createLocalTrack(MediaType.DESKTOP);
+    const newTracks = await createLocalTrack(MediaType.DESKTOP);
 
     if (!newTracks) {
       await Promise.reject('User canceled desktop track creation');
@@ -79,8 +79,8 @@ const devicesRepository = (): DevicesRepository => {
 
     const desktopTrack = newTracks.filter(track => track.getVideoType() === 'desktop');
 
-    conferenceRepository.addTrack(desktopTrack[0], undefined);
-    conferenceRepository.startScreenShareEvent();
+    addTrack(desktopTrack[0], undefined);
+    startScreenShareEvent();
 
     return Promise.resolve(true);
   };
@@ -93,5 +93,3 @@ const devicesRepository = (): DevicesRepository => {
     screenShare
   };
 };
-
-export default devicesRepository();

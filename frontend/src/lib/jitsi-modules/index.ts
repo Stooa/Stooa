@@ -8,5 +8,9 @@
  */
 
 export * from './useConference';
+export * from './useDevices';
+export * from './useLocalTracks';
+export * from './useSeats';
 export * from './useSharedTrack';
 export * from './useTracks';
+export * from './useUser';

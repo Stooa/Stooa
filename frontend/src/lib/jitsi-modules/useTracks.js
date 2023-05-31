@@ -7,9 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import seatsRepository from '@/jitsi/Seats';
-import { useConference } from '@/jitsi/Conference';
-import sharedTrackRepository from '@/jitsi/SharedTrack';
+import { useConference, useSeats, useSharedTracks } from '@/jitsi';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
@@ -17,6 +15,8 @@ import { useJitsiStore } from '@/store';
 
 export const useTracks = () => {
   const { getMyUserId, getParticipantsIds } = useConference();
+  const { getSeat, getIds } = useSeats();
+  const { shareTrackAdded, removeShareTrack } = useSharedTracks();
   const { getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
 
   const _playTrackHtml = trackHtml => {
@@ -57,7 +57,7 @@ export const useTracks = () => {
       user = JSON.parse(localStorage.getItem('user'));
     }
 
-    const seat = seatsRepository.getSeat();
+    const seat = getSeat();
 
     if (user && seat > 0 && track.isLocal()) {
       const trackType = track.getType();
@@ -130,7 +130,7 @@ export const useTracks = () => {
 
   // TO-DO: play shared tracks
   const playTracks = () => {
-    const ids = seatsRepository.getIds();
+    const ids = getIds();
 
     for (let index = 0; index < ids.length; index++) {
       const id = ids[index];
@@ -205,7 +205,7 @@ export const useTracks = () => {
   const _videoTypeChanged = (videoType, track) => {
     if (track.getVideoType() === MediaType.DESKTOP) {
       _videoAudioTrackRemoved(track);
-      sharedTrackRepository.shareTrackAdded(track);
+      shareTrackAdded(track);
     }
 
     console.log('[STOOA] video type change', track, videoType);
@@ -225,7 +225,7 @@ export const useTracks = () => {
     );
 
     if (track.getVideoType() === MediaType.DESKTOP) {
-      sharedTrackRepository.shareTrackAdded(track);
+      shareTrackAdded(track);
     } else {
       _videoAudioTrackAdded(track);
     }
@@ -236,7 +236,7 @@ export const useTracks = () => {
 
     addUserTrack(id, track);
 
-    const seat = seatsRepository.getSeat(id);
+    const seat = getSeat(id);
 
     _create(seat, track);
 
@@ -247,7 +247,7 @@ export const useTracks = () => {
     console.log('[STOOA] Handle track removed', track);
 
     if (track.getVideoType() === MediaType.DESKTOP) {
-      sharedTrackRepository.removeShareTrack(track);
+      removeShareTrack(track);
     } else {
       _videoAudioTrackRemoved(track);
     }
@@ -257,7 +257,7 @@ export const useTracks = () => {
     if (track.isLocal()) return;
 
     const id = track.getParticipantId();
-    const seat = seatsRepository.getSeat(id);
+    const seat = getSeat(id);
 
     if (seat > 0) {
       _remove(track);
@@ -273,7 +273,7 @@ export const useTracks = () => {
 
     if (track.isLocal()) return;
 
-    const seat = seatsRepository.getSeat(track.getParticipantId());
+    const seat = getSeat(track.getParticipantId());
 
     handleElementsMutedClass(seat, track);
 
@@ -282,7 +282,7 @@ export const useTracks = () => {
 
   const toggleMute = async type => {
     const userId = getMyUserId();
-    const seat = seatsRepository.getSeat(userId);
+    const seat = getSeat(userId);
     const tracks = getTracksByUser(userId);
 
     if (tracks === undefined) return;

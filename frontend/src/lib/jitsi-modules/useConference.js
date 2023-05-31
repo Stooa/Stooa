@@ -22,9 +22,7 @@ import {
   RECORDING_STOP
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
-import seatsRepository from '@/jitsi/Seats';
-import { useTracks } from '@/jitsi';
-import userRepository from '@/jitsi/User';
+import { useTracks, useSeats, useUser } from '@/jitsi';
 import { useJitsiStore } from '@/store';
 
 export const useConference = () => {
@@ -55,17 +53,19 @@ export const useConference = () => {
     handleTrackMuteChanged,
     handleTrackRemoved
   } = useTracks();
+  const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
+  const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
 
   const joinUser = (id, user) => {
     if (id === undefined || id === null) {
       id = conference.myUserId();
     }
 
-    const seat = seatsRepository.join(id);
+    const seat = join(id);
 
     createTracks(id, seat, user);
 
-    conference.selectParticipants(seatsRepository.getIds());
+    conference.selectParticipants(getIds());
 
     console.log('[STOOA] Join', id);
   };
@@ -91,17 +91,17 @@ export const useConference = () => {
       id = conference.myUserId();
     }
 
-    seatsRepository.leave(id);
+    leaveSeat(id);
 
     removeTracks(id);
 
-    conference.selectParticipants(seatsRepository.getIds());
+    conference.selectParticipants(getIds());
 
     console.log('[STOOA] User leave', id);
   };
 
   const _handleParticipantConnectionStatusChanged = (id, status) => {
-    seatsRepository.updateStatus(id, status);
+    updateStatus(id, status);
     console.log('[STOOA] Handle participant connection status changed', id, status);
   };
 
@@ -151,7 +151,7 @@ export const useConference = () => {
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', isModerator);
 
-    userRepository.setUser({ id: conference.myUserId() });
+    setUser({ id: conference.myUserId() });
 
     dispatchEvent(CONFERENCE_START, { status: true, myUserId: conference.myUserId() });
 
@@ -169,7 +169,7 @@ export const useConference = () => {
   };
 
   const _handleDominantSpeakerChanged = id => {
-    seatsRepository.updateDominantSpeaker(id);
+    updateDominantSpeaker(id);
   };
 
   const _handleUserRoleChanged = () => {
@@ -183,10 +183,10 @@ export const useConference = () => {
 
   const _handleCommandJoin = values => {
     const { value } = values;
-    const seat = seatsRepository.join(value);
+    const seat = join(value);
 
     createTracks(value, seat);
-    conference.selectParticipants(seatsRepository.getIds());
+    conference.selectParticipants(getIds());
 
     console.log('[STOOA] Join', value);
   };
@@ -194,9 +194,9 @@ export const useConference = () => {
   const _handleCommandLeave = values => {
     const { value } = values;
 
-    seatsRepository.leave(value);
+    leaveSeat(value);
     removeTracks(value);
-    conference.selectParticipants(seatsRepository.getIds());
+    conference.selectParticipants(getIds());
 
     console.log('[STOOA] Leave', value);
   };
@@ -249,9 +249,9 @@ export const useConference = () => {
     conference.on(TRACK_ADDED, handleTrackAdded);
     conference.on(TRACK_REMOVED, handleTrackRemoved);
     conference.on(TRACK_MUTE_CHANGED, handleTrackMuteChanged);
-    conference.on(USER_JOINED, userRepository.handleUserJoin);
-    conference.on(USER_LEFT, userRepository.handleUserLeft);
-    conference.on(KICKED, userRepository.handleUserKicked);
+    conference.on(USER_JOINED, handleUserJoin);
+    conference.on(USER_LEFT, handleUserLeft);
+    conference.on(KICKED, handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
@@ -452,7 +452,7 @@ export const useConference = () => {
       setTwitter(user.twitter);
       setLinkedin(user.linkedin);
     } else {
-      changeUserName(userRepository.getUserNickname());
+      changeUserName(getUserNickname());
     }
   };
 

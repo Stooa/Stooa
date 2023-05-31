@@ -7,16 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import userRepository from '@/jitsi/User';
-import conferenceRepository from '@/jitsi/Conference';
-import seatsRepository from '@/jitsi/Seats';
-import sharedTrackRepository from '@/jitsi/SharedTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
+import { useUser, useConference, useSeats, useSharedTrack } from '@/jitsi';
 import { dispatchEvent } from '@/lib/helpers';
 import { SCREEN_SHARE_CANCELED, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';
 import { MediaType } from '@/types/jitsi/media';
 
-const localTracksRepository = () => {
+export const useLocalTracks = () => {
+  const { getUserAudioInput, getUserVideoInput } = useUser();
+  const { getMyUserId } = useConference();
+  const { getSeat } = useSeats();
+  const { removeShareTrack } = useSharedTrack();
+
   const _handleAudioLevelChanged = (audioLevel: number): void => {
     console.log('[STOOA] Local audio level changed', audioLevel);
   };
@@ -27,7 +29,7 @@ const localTracksRepository = () => {
 
   const _handleLocalTrackStopped = (track: JitsiLocalTrack): void => {
     if (track && track.getVideoType() === 'desktop') {
-      sharedTrackRepository.removeShareTrack(track);
+      removeShareTrack(track);
     }
     console.log('[STOOA] Local track stopped', track);
   };
@@ -107,8 +109,8 @@ const localTracksRepository = () => {
   };
 
   const createLocalTracks = async (): Promise<JitsiLocalTrack[]> => {
-    const micDeviceId = userRepository?.getUserAudioInput()?.deviceId;
-    const cameraDeviceId = userRepository?.getUserVideoInput()?.deviceId;
+    const micDeviceId = getUserAudioInput()?.deviceId;
+    const cameraDeviceId = getUserVideoInput()?.deviceId;
 
     return JitsiMeetJS.createLocalTracks({
       devices: ['audio', 'video'],
@@ -136,8 +138,8 @@ const localTracksRepository = () => {
   };
 
   const deleteLocalVideo = (): void => {
-    const userId = conferenceRepository.getMyUserId();
-    const seatNumber = seatsRepository.getSeat(userId);
+    const userId = getMyUserId();
+    const seatNumber = getSeat(userId);
 
     if (seatNumber > 0) {
       const seatHtml = document.getElementById(`seat-${seatNumber}`);
@@ -147,5 +149,3 @@ const localTracksRepository = () => {
 
   return { createLocalTrack, createLocalTracks };
 };
-
-export default localTracksRepository();

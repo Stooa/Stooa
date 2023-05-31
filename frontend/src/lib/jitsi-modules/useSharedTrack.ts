@@ -11,7 +11,7 @@ import { useConference } from '@/jitsi';
 import { SCREEN_SHARE_STOP } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 
-export const useSharedTrackRepository = () => {
+export const useSharedTrack = () => {
   const { shareTrack, assignShareTrack, clearShareTrack, stopScreenShareEvent } = useConference();
 
   const getShareHtmlTrack = (): HTMLElement | null => {

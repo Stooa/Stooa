@@ -25,9 +25,8 @@ import Button from '@/components/Common/Button';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 import { useModals } from '@/contexts/ModalsContext';
 import ModalEndIntroduction from '../ModalEndIntroduction';
-import SharedTrack from '@/jitsi/SharedTrack';
-import Conference from '@/jitsi/Conference';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { useConference, useSharedTrack } from '@/jitsi';
 
 interface Props {
   fid: string;
@@ -37,6 +36,8 @@ interface Props {
 const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
+  const { getLocalTracks } = useConference();
+  const { removeShareTrack } = useSharedTrack();
   const [introduction, setIntroduction] = useState(false);
   const [showIntroductionModal, setShowIntroductionModal] = useState(false);
   const [showFinishModal, setShowFinishModal] = useState(false);
@@ -147,11 +148,9 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
 
   const handleStartFishbowlWhileSharing = async () => {
     setLoading(true);
-    const shareLocalTrack = Conference.getLocalTracks().filter(
-      track => track.videoType === 'desktop'
-    );
+    const shareLocalTrack = getLocalTracks().filter(track => track.getVideoType() === 'desktop');
 
-    await SharedTrack.removeShareTrack(shareLocalTrack[0]);
+    await removeShareTrack(shareLocalTrack[0]);
     setShowEndIntroductionModal(false);
     startFishbowl();
 

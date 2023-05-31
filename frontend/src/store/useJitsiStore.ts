@@ -12,6 +12,7 @@ import JitsiConference from 'lib-jitsi-meet/types/hand-crafted/JitsiConference';
 import JitsiConnection from 'lib-jitsi-meet/types/hand-crafted/JitsiConnection';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
+import { User } from '@/types/user';
 
 interface JitsiSlice {
   connection: JitsiConnection | undefined;
@@ -25,11 +26,14 @@ interface JitsiSlice {
 interface TracksSlice {
   tracks: JitsiTrack[][];
   shareTrack: JitsiLocalTrack | undefined;
+  localTracksCreated: boolean;
   getTracksByUser: (id: string) => JitsiTrack[] | undefined;
   addUserTrack: (id: string, track: JitsiTrack) => void;
   removeUserTrack: (id: string, track: JitsiTrack) => void;
   assignShareTrack: (track: JitsiLocalTrack) => void;
   clearShareTrack: () => void;
+  localTracksCreatedEvent: () => void;
+  localTracksRemovedEvent: () => void;
 }
 
 interface UserSlice {
@@ -47,8 +51,17 @@ interface UserSlice {
 }
 
 interface FishbowlSlice {
+  users: User[];
   seats: Array<string | undefined>;
-  createSeats: (number: number) => Array<string | undefined>;
+  userJoined: (user: User) => void;
+  userLeft: (user: User) => void;
+  createSeats: (seats: number) => Array<string | undefined>;
+  findSeat: (id: string) => number | undefined;
+  findEmptySeat: () => number | undefined;
+  getOcuppiedSeats: () => string[];
+  sit: (id: string, seat: number) => void;
+  stand: (seat: number) => void;
+  count: () => number;
 }
 
 type ConsolidatedSlice = JitsiSlice & TracksSlice & UserSlice & FishbowlSlice;
@@ -64,6 +77,7 @@ const createJitsiSlice: StateCreator<ConsolidatedSlice, [], [], JitsiSlice> = se
 
 const createTracksSlice: StateCreator<ConsolidatedSlice, [], [], TracksSlice> = (set, get) => ({
   tracks: [],
+  localTracksCreated: false,
   shareTrack: undefined,
   getTracksByUser: (id: string) => get().tracks[id],
   addUserTrack: (id: string, track: JitsiTrack) => {
@@ -81,7 +95,9 @@ const createTracksSlice: StateCreator<ConsolidatedSlice, [], [], TracksSlice> = 
     });
   },
   assignShareTrack: (track: JitsiLocalTrack) => set({ shareTrack: track }),
-  clearShareTrack: () => set({ shareTrack: undefined })
+  clearShareTrack: () => set({ shareTrack: undefined }),
+  localTracksCreatedEvent: () => set({ localTracksCreated: true }),
+  localTracksRemovedEvent: () => set({ localTracksCreated: false })
 });
 
 const createUserSlice: StateCreator<ConsolidatedSlice, [], [], UserSlice> = set => ({
@@ -99,12 +115,55 @@ const createUserSlice: StateCreator<ConsolidatedSlice, [], [], UserSlice> = set 
 });
 
 const createFishbowlSlice: StateCreator<ConsolidatedSlice, [], [], FishbowlSlice> = (set, get) => ({
+  users: [],
   seats: [],
-  createSeats: (number: number) => {
-    set({ seats: Array.from({ length: number }) });
+  userJoined: (user: User) => {
+    set(state => {
+      const users = [...state.users, user];
+
+      return { users };
+    });
+  },
+  userLeft: (user: User) => {
+    set(state => {
+      const users = state.users.filter(u => u.id !== user.id);
+
+      return { users };
+    });
+  },
+  createSeats: (seats: number) => {
+    set({ seats: Array.from({ length: seats }) });
 
     return get().seats;
-  }
+  },
+  findSeat: (id: string): number | undefined => {
+    const seat = get().seats.findIndex(seat => seat === id) + 1;
+
+    return seat === 0 ? undefined : seat;
+  },
+  findEmptySeat: (): number | undefined => {
+    const seat = get().seats.findIndex(seat => seat === undefined) + 1;
+
+    return seat === 0 ? undefined : seat;
+  },
+  getOcuppiedSeats: (): string[] => {
+    const { seats } = get();
+
+    return seats.filter(seat => seat !== undefined) as string[];
+  },
+  sit: (id: string, seat: number) => {
+    const { seats } = get();
+
+    seats[seat] = id;
+    set({ seats });
+  },
+  stand: (seat: number) => {
+    const { seats } = get();
+
+    seats[seat] = undefined;
+    set({ seats });
+  },
+  count: () => get().seats.filter(seat => seat !== undefined).length
 });
 
 export const useJitsiStore = create<ConsolidatedSlice>((...a) => ({
