@@ -20,7 +20,9 @@ interface JitsiSlice {
   roomName: string | undefined;
   isJoined: boolean;
   setConnection: (connection: JitsiConnection) => void;
+  getConnection: () => JitsiConnection;
   setConference: (conference: JitsiConference) => void;
+  getConference: () => JitsiConference;
   join: () => void;
   leave: () => void;
   getMyUserId: () => string | false;
@@ -73,7 +75,25 @@ const createJitsiSlice: StateCreator<ConsolidatedSlice, [], [], JitsiSlice> = (s
   isJoined: false,
   roomName: undefined,
   setConnection: (connection: JitsiConnection) => set({ connection }),
+  getConnection: () => {
+    const { connection } = get();
+
+    if (!connection) {
+      throw new Error('Connection not found');
+    }
+
+    return connection;
+  },
   setConference: (conference: JitsiConference) => set({ conference }),
+  getConference: () => {
+    const { conference } = get();
+
+    if (!conference) {
+      throw new Error('Conference not found');
+    }
+
+    return conference;
+  },
   join: () => set({ isJoined: true }),
   leave: () => set({ isJoined: false }),
   getMyUserId: () => {

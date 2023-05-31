@@ -29,7 +29,6 @@ export const useConference = () => {
   const {
     connection,
     conference,
-    roomName,
     userName,
     isModerator,
     isJoined,
@@ -37,7 +36,9 @@ export const useConference = () => {
     linkedin,
     getMyUserId,
     setConnection,
+    getConnection,
     setConference,
+    getConference,
     setRoomName,
     changeUserName,
     makeModerator,
@@ -147,6 +148,8 @@ export const useConference = () => {
   const _handleConferenceJoin = () => {
     setAsJoined();
 
+    const conference = getConference();
+
     conference.setDisplayName(userName);
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
@@ -214,7 +217,7 @@ export const useConference = () => {
     console.log('[STOOA] Password not supported');
   };
 
-  const _handleConnectionEstablished = async (connection, roomName) => {
+  const _handleConnectionEstablished = async roomName => {
     const {
       events: {
         conference: {
@@ -239,7 +242,7 @@ export const useConference = () => {
       }
     } = JitsiMeetJS;
 
-    const conference = connection.initJitsiConference(roomName, roomOptions);
+    const conference = getConnection().initJitsiConference(roomName, roomOptions);
 
     setConference(conference);
 
@@ -275,7 +278,7 @@ export const useConference = () => {
     } = JitsiMeetJS;
 
     connection.removeEventListener(CONNECTION_ESTABLISHED, () =>
-      _handleConnectionEstablished(connection)
+      _handleConnectionEstablished(roomName)
     );
     connection.removeEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.removeEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
@@ -345,7 +348,7 @@ export const useConference = () => {
     setConnection(connection);
 
     connection.addEventListener(CONNECTION_ESTABLISHED, () =>
-      _handleConnectionEstablished(connection, roomName)
+      _handleConnectionEstablished(roomName)
     );
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
