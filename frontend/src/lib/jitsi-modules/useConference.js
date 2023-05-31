@@ -214,7 +214,7 @@ export const useConference = () => {
     console.log('[STOOA] Password not supported');
   };
 
-  const _handleConnectionEstablished = async connection => {
+  const _handleConnectionEstablished = async (connection, roomName) => {
     const {
       events: {
         conference: {
@@ -345,7 +345,7 @@ export const useConference = () => {
     setConnection(connection);
 
     connection.addEventListener(CONNECTION_ESTABLISHED, () =>
-      _handleConnectionEstablished(connection)
+      _handleConnectionEstablished(connection, roomName)
     );
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
