@@ -214,7 +214,7 @@ export const useConference = () => {
     console.log('[STOOA] Password not supported');
   };
 
-  const _handleConnectionEstablished = async () => {
+  const _handleConnectionEstablished = async connection => {
     const {
       events: {
         conference: {
@@ -274,7 +274,9 @@ export const useConference = () => {
       }
     } = JitsiMeetJS;
 
-    connection.removeEventListener(CONNECTION_ESTABLISHED, _handleConnectionEstablished);
+    connection.removeEventListener(CONNECTION_ESTABLISHED, () =>
+      _handleConnectionEstablished(connection)
+    );
     connection.removeEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.removeEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
@@ -342,7 +344,9 @@ export const useConference = () => {
 
     setConnection(connection);
 
-    connection.addEventListener(CONNECTION_ESTABLISHED, _handleConnectionEstablished);
+    connection.addEventListener(CONNECTION_ESTABLISHED, () =>
+      _handleConnectionEstablished(connection)
+    );
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
