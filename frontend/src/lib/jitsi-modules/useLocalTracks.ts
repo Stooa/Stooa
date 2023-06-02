@@ -18,7 +18,7 @@ export const useLocalTracks = () => {
   const { getUserAudioInput, getUserVideoInput } = useUser();
   const { getSeat } = useSeats();
   const { removeShareTrack } = useSharedTrack();
-  const { getMyUserId } = useJitsiStore();
+  const { userId } = useJitsiStore();
 
   const _handleAudioLevelChanged = (audioLevel: number): void => {
     console.log('[STOOA] Local audio level changed', audioLevel);
@@ -139,7 +139,7 @@ export const useLocalTracks = () => {
   };
 
   const deleteLocalVideo = (): void => {
-    const seatNumber = getSeat(getMyUserId());
+    const seatNumber = getSeat(userId);
 
     if (seatNumber !== undefined) {
       const seatHtml = document.getElementById(`seat-${seatNumber}`);

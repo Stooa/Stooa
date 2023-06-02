@@ -16,7 +16,7 @@ import { useJitsiStore } from '@/store';
 export const useTracks = () => {
   const { getSeat, getIds } = useSeats();
   const { shareTrackAdded, removeShareTrack } = useSharedTrack();
-  const { getMyUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
+  const { userId: myUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
 
   const _playTrackHtml = trackHtml => {
     trackHtml
@@ -170,7 +170,7 @@ export const useTracks = () => {
   };
 
   const removeTracks = id => {
-    const userId = id ?? getMyUserId();
+    const userId = id ?? myUserId;
     const tracks = getTracksByUser(userId);
 
     if (tracks === undefined) return;
@@ -183,7 +183,7 @@ export const useTracks = () => {
   };
 
   const disposeTracks = async id => {
-    const userId = id ?? getMyUserId();
+    const userId = id ?? myUserId;
     const tracks = getTracksByUser(userId);
 
     if (tracks === undefined) return;
@@ -274,7 +274,7 @@ export const useTracks = () => {
   };
 
   const toggleMute = async type => {
-    const userId = getMyUserId();
+    const userId = myUserId;
     const seat = getSeat(userId);
     const tracks = getTracksByUser(userId);
 

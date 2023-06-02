@@ -34,7 +34,7 @@ export const useConference = () => {
     isJoined,
     twitter,
     linkedin,
-    getMyUserId,
+    userId: myUserId,
     setConnection,
     getConnection,
     setConference,
@@ -59,7 +59,7 @@ export const useConference = () => {
   const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
 
   const joinUser = (id, user) => {
-    const userId = id ?? getMyUserId();
+    const userId = id ?? myUserId;
     const seat = join(userId, getParticipantNameById(userId));
 
     createTracks(userId, seat, user);
@@ -86,7 +86,7 @@ export const useConference = () => {
   };
 
   const leaveUser = id => {
-    const userId = id ?? getMyUserId();
+    const userId = id ?? myUserId;
 
     leaveSeat(userId);
     removeTracks(userId);
@@ -471,7 +471,7 @@ export const useConference = () => {
       participantsIds.push(participant.getId());
     });
 
-    participantsIds.push(getMyUserId());
+    participantsIds.push(myUserId);
 
     return participantsIds;
   };
@@ -481,10 +481,8 @@ export const useConference = () => {
       return null;
     }
 
-    const id = getMyUserId();
-
     return {
-      id,
+      id: myUserId,
       name: userName,
       twitter,
       linkedin,
@@ -494,8 +492,8 @@ export const useConference = () => {
         conference.isJoined() === null
           ? false
           : conference.getLocalParticipantProperty('joined') === 'yes',
-      isMuted: isLocalParticipantMuted(id, 'audio'),
-      isVideoMuted: isLocalParticipantMuted(id, 'video')
+      isMuted: isLocalParticipantMuted(myUserId, 'audio'),
+      isVideoMuted: isLocalParticipantMuted(myUserId, 'video')
     };
   };
 
@@ -522,7 +520,6 @@ export const useConference = () => {
     getLocalVideoTrack,
     getLocalAudioTrack,
     getLocalParticipant,
-    getMyUserId,
     getParticipantById,
     getParticipantCount,
     getParticipants,

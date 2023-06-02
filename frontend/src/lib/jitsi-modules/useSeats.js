@@ -14,7 +14,7 @@ import { useJitsiStore } from '@/store';
 export const useSeats = () => {
   const {
     seats,
-    getMyUserId,
+    userId: myUserId,
     createSeats,
     findEmptySeat,
     count,
@@ -40,7 +40,7 @@ export const useSeats = () => {
     return ids;
   };
 
-  const getSeat = id => findSeat(id ?? getMyUserId());
+  const getSeat = id => findSeat(id ?? myUserId);
 
   const getSeats = () => {
     return seats;
@@ -53,7 +53,7 @@ export const useSeats = () => {
   };
 
   const join = (id, participantName) => {
-    const userId = id ?? getMyUserId();
+    const userId = id ?? myUserId;
     const seat = findEmptySeat();
 
     if (seat === undefined) return;
@@ -92,7 +92,7 @@ export const useSeats = () => {
       .join(' ');
 
   const leave = id => {
-    const seat = getSeat(id ?? getMyUserId());
+    const seat = getSeat(id ?? myUserId);
 
     if (seat === undefined) return;
 
