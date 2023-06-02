@@ -170,11 +170,8 @@ export const useTracks = () => {
   };
 
   const removeTracks = id => {
-    if (id === undefined) {
-      id = getMyUserId();
-    }
-
-    const tracks = getTracksByUser(id);
+    const userId = id ?? getMyUserId();
+    const tracks = getTracksByUser(userId);
 
     if (tracks === undefined) return;
 
@@ -182,15 +179,12 @@ export const useTracks = () => {
       _remove(tracks[index]);
     }
 
-    console.log('[STOOA] Html tracks removed', id);
+    console.log('[STOOA] Html tracks removed', userId);
   };
 
   const disposeTracks = async id => {
-    if (id === undefined) {
-      id = getMyUserId();
-    }
-
-    const tracks = getTracksByUser(id);
+    const userId = id ?? getMyUserId();
+    const tracks = getTracksByUser(userId);
 
     if (tracks === undefined) return;
 
@@ -198,7 +192,7 @@ export const useTracks = () => {
       await tracks[index].dispose();
     }
 
-    console.log('[STOOA] Tracks disposed', id);
+    console.log('[STOOA] Tracks disposed', userId);
   };
 
   const _videoTypeChanged = (videoType, track) => {

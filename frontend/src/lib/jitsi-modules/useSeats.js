@@ -40,9 +40,7 @@ export const useSeats = () => {
     return ids;
   };
 
-  const getSeat = id => {
-    return findSeat(id ?? getMyUserId());
-  };
+  const getSeat = id => findSeat(id ?? getMyUserId());
 
   const getSeats = () => {
     return seats;
@@ -55,32 +53,29 @@ export const useSeats = () => {
   };
 
   const join = (id, participantName) => {
+    const userId = id ?? getMyUserId();
     const seat = findEmptySeat();
 
     if (seat === undefined) return;
-
-    if (id === undefined) {
-      id = getMyUserId();
-    }
 
     const seatHtml = document.getElementById(`seat-${seat}`);
 
     if (!seatHtml) return;
 
     seatHtml.setAttribute('data-username', participantName);
-    seatHtml.setAttribute('data-id', id);
+    seatHtml.setAttribute('data-id', userId);
     seatHtml.classList.add('user-joined');
 
-    sit(id, seat);
+    sit(userId, seat);
 
-    _handleDispatchEvent(id);
+    _handleDispatchEvent(userId);
 
     const freeSeats = count();
 
     if (freeSeats === 0) {
       dispatchEvent(NOTIFICATION, {
         type: USER_MUST_LEAVE,
-        seats: removeItem(getIds(), id),
+        seats: removeItem(getIds(), userId),
         message: 'notification.emptySeats'
       });
     }
@@ -97,11 +92,7 @@ export const useSeats = () => {
       .join(' ');
 
   const leave = id => {
-    if (id === undefined) {
-      id = getMyUserId();
-    }
-
-    const seat = getSeat(id);
+    const seat = getSeat(id ?? getMyUserId());
 
     if (seat === undefined) return;
 

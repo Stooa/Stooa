@@ -59,17 +59,14 @@ export const useConference = () => {
   const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
 
   const joinUser = (id, user) => {
-    if (id === undefined || id === null) {
-      id = conference.myUserId();
-    }
+    const userId = id ?? getMyUserId();
+    const seat = join(userId, getParticipantNameById(userId));
 
-    const seat = join(id, getParticipantNameById(id));
-
-    createTracks(id, seat, user);
+    createTracks(userId, seat, user);
 
     conference.selectParticipants(getIds());
 
-    console.log('[STOOA] Join', id);
+    console.log('[STOOA] Join', userId);
   };
 
   /**
@@ -89,17 +86,14 @@ export const useConference = () => {
   };
 
   const leaveUser = id => {
-    if (id === undefined) {
-      id = conference.myUserId();
-    }
+    const userId = id ?? getMyUserId();
 
-    leaveSeat(id);
-
-    removeTracks(id);
+    leaveSeat(userId);
+    removeTracks(userId);
 
     conference.selectParticipants(getIds());
 
-    console.log('[STOOA] User leave', id);
+    console.log('[STOOA] User leave', userId);
   };
 
   const _handleParticipantConnectionStatusChanged = (id, status) => {
@@ -431,7 +425,8 @@ export const useConference = () => {
   const sendJoinEvent = user => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
-      joinUser(null, user);
+
+      joinUser(undefined, user);
     }
   };
 

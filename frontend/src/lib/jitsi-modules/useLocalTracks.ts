@@ -139,10 +139,9 @@ export const useLocalTracks = () => {
   };
 
   const deleteLocalVideo = (): void => {
-    const userId = getMyUserId();
-    const seatNumber = getSeat(userId);
+    const seatNumber = getSeat(getMyUserId());
 
-    if (seatNumber > 0) {
+    if (seatNumber !== undefined) {
       const seatHtml = document.getElementById(`seat-${seatNumber}`);
       seatHtml?.querySelector('video')?.remove();
     }
