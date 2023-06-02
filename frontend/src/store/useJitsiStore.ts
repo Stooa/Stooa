@@ -7,194 +7,36 @@
  * file that was distributed with this source code.
  */
 
-import { create, StateCreator } from 'zustand';
-import JitsiConference from 'lib-jitsi-meet/types/hand-crafted/JitsiConference';
-import JitsiConnection from 'lib-jitsi-meet/types/hand-crafted/JitsiConnection';
-import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
-import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
-import { User } from '@/types/user';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import {
+  JitsiSlice,
+  TracksSlice,
+  UserSlice,
+  FishbowlSlice,
+  createJitsiSlice,
+  createTracksSlice,
+  createUserSlice,
+  createFishbowlSlice
+} from '@/store';
 
-interface JitsiSlice {
-  connection: JitsiConnection | undefined;
-  conference: JitsiConference | undefined;
-  roomName: string | undefined;
-  isJoined: boolean;
-  setConnection: (connection: JitsiConnection) => void;
-  getConnection: () => JitsiConnection;
-  setConference: (conference: JitsiConference) => void;
-  getConference: () => JitsiConference;
-  join: () => void;
-  leave: () => void;
-  getMyUserId: () => string | false;
-  setRoomName: (roomName: string) => void;
-}
+export type JitsiStore = JitsiSlice & TracksSlice & UserSlice & FishbowlSlice;
 
-interface TracksSlice {
-  tracks: JitsiTrack[][];
-  shareTrack: JitsiLocalTrack | undefined;
-  localTracksCreated: boolean;
-  getTracksByUser: (id: string) => JitsiTrack[] | undefined;
-  addUserTrack: (id: string, track: JitsiTrack) => void;
-  removeUserTrack: (id: string, track: JitsiTrack) => void;
-  assignShareTrack: (track: JitsiLocalTrack) => void;
-  clearShareTrack: () => void;
-  localTracksCreatedEvent: () => void;
-  localTracksRemovedEvent: () => void;
-}
-
-interface UserSlice {
-  userName: string | undefined;
-  isModerator: boolean;
-  twitter: string | false;
-  linkedin: string | false;
-  changeUserName: (userName: string) => void;
-  makeModerator: () => void;
-  setTwitter: (twitter: string) => void;
-  setLinkedin: (linkedin: string) => void;
-}
-
-interface FishbowlSlice {
-  users: User[];
-  seats: Array<string | undefined>;
-  userJoined: (user: User) => void;
-  userLeft: (user: User) => void;
-  createSeats: (seats: number) => Array<string | undefined>;
-  findSeat: (id: string) => number | undefined;
-  findEmptySeat: () => number | undefined;
-  getOccupiedSeats: () => string[];
-  sit: (id: string, seat: number) => void;
-  stand: (seat: number) => void;
-  count: () => number;
-}
-
-type ConsolidatedSlice = JitsiSlice & TracksSlice & UserSlice & FishbowlSlice;
-
-const createJitsiSlice: StateCreator<ConsolidatedSlice, [], [], JitsiSlice> = (set, get) => ({
-  connection: undefined,
-  conference: undefined,
-  isJoined: false,
-  roomName: undefined,
-  setConnection: (connection: JitsiConnection) => set({ connection }),
-  getConnection: () => {
-    const { connection } = get();
-
-    if (!connection) {
-      throw new Error('Connection not found');
+export const useJitsiStore = create<JitsiStore>()(
+  devtools(
+    (...a) => ({
+      ...createJitsiSlice(...a),
+      ...createTracksSlice(...a),
+      ...createUserSlice(...a),
+      ...createFishbowlSlice(...a)
+    }),
+    {
+      name: 'Jitsi',
+      enabled: process.env.NODE_ENV === 'development',
+      features: {
+        pause: false,
+        jump: false
+      }
     }
-
-    return connection;
-  },
-  setConference: (conference: JitsiConference) => set({ conference }),
-  getConference: () => {
-    const { conference } = get();
-
-    if (!conference) {
-      throw new Error('Conference not found');
-    }
-
-    return conference;
-  },
-  join: () => set({ isJoined: true }),
-  leave: () => set({ isJoined: false }),
-  getMyUserId: () => {
-    const { conference, isJoined } = get();
-
-    return conference && isJoined ? conference.myUserId() : false;
-  },
-  setRoomName: (roomName: string) => set({ roomName })
-});
-
-const createTracksSlice: StateCreator<ConsolidatedSlice, [], [], TracksSlice> = (set, get) => ({
-  tracks: [],
-  localTracksCreated: false,
-  shareTrack: undefined,
-  getTracksByUser: (id: string) => get().tracks[id],
-  addUserTrack: (id: string, track: JitsiTrack) => {
-    set(state => {
-      const tracks = state.tracks[id] || [];
-
-      return { tracks: { ...state.tracks, [id]: [...tracks, track] } };
-    });
-  },
-  removeUserTrack: (id: string, track: JitsiTrack) => {
-    set(state => {
-      const tracks = state.tracks[id] || [];
-
-      return { tracks: { ...state.tracks, [id]: tracks.filter(t => t !== track) } };
-    });
-  },
-  assignShareTrack: (track: JitsiLocalTrack) => set({ shareTrack: track }),
-  clearShareTrack: () => set({ shareTrack: undefined }),
-  localTracksCreatedEvent: () => set({ localTracksCreated: true }),
-  localTracksRemovedEvent: () => set({ localTracksCreated: false })
-});
-
-const createUserSlice: StateCreator<ConsolidatedSlice, [], [], UserSlice> = set => ({
-  userName: undefined,
-  isModerator: false,
-  twitter: false,
-  linkedin: false,
-  changeUserName: (userName: string) => set({ userName }),
-  makeModerator: () => set({ isModerator: true }),
-  setTwitter: (twitter: string) => set({ twitter }),
-  setLinkedin: (linkedin: string) => set({ linkedin })
-});
-
-const createFishbowlSlice: StateCreator<ConsolidatedSlice, [], [], FishbowlSlice> = (set, get) => ({
-  users: [],
-  seats: [],
-  userJoined: (user: User) => {
-    set(state => {
-      const users = [...state.users, user];
-
-      return { users };
-    });
-  },
-  userLeft: (user: User) => {
-    set(state => {
-      const users = state.users.filter(u => u.id !== user.id);
-
-      return { users };
-    });
-  },
-  createSeats: (seats: number) => {
-    set({ seats: Array.from({ length: seats }) });
-
-    return get().seats;
-  },
-  findSeat: (id: string): number | undefined => {
-    const seat = get().seats.findIndex(seat => seat === id) + 1;
-
-    return seat === 0 ? undefined : seat;
-  },
-  findEmptySeat: (): number | undefined => {
-    const seat = get().seats.findIndex(seat => seat === undefined) + 1;
-
-    return seat === 0 ? undefined : seat;
-  },
-  getOccupiedSeats: (): string[] => {
-    const { seats } = get();
-
-    return seats.filter(seat => seat !== undefined) as string[];
-  },
-  sit: (id: string, seat: number) => {
-    const { seats } = get();
-
-    seats[seat] = id;
-    set({ seats });
-  },
-  stand: (seat: number) => {
-    const { seats } = get();
-
-    seats[seat] = undefined;
-    set({ seats });
-  },
-  count: () => get().seats.filter(seat => seat !== undefined).length
-});
-
-export const useJitsiStore = create<ConsolidatedSlice>((...a) => ({
-  ...createJitsiSlice(...a),
-  ...createTracksSlice(...a),
-  ...createUserSlice(...a),
-  ...createFishbowlSlice(...a)
-}));
+  )
+);

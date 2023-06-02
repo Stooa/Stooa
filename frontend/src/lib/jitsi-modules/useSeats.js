@@ -75,9 +75,9 @@ export const useSeats = () => {
 
     _handleDispatchEvent(id);
 
-    const count = count();
+    const freeSeats = count();
 
-    if (count === 0) {
+    if (freeSeats === 0) {
       dispatchEvent(NOTIFICATION, {
         type: USER_MUST_LEAVE,
         seats: removeItem(getIds(), id),
@@ -85,7 +85,7 @@ export const useSeats = () => {
       });
     }
 
-    console.log('[STOOA] Join seat', seat, '| Seats left', count);
+    console.log('[STOOA] Join seat', seat, '| Seats left', freeSeats);
 
     return seat;
   };

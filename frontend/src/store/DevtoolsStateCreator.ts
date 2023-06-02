@@ -7,6 +7,11 @@
  * file that was distributed with this source code.
  */
 
-export * from './slices';
-export * from './DevtoolsStateCreator';
-export * from './useJitsiStore';
+import { StateCreator } from 'zustand';
+
+export type DevtoolsStateCreator<T, K> = StateCreator<
+  T,
+  [['zustand/devtools', never], never],
+  [],
+  K
+>;

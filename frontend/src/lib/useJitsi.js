@@ -11,7 +11,7 @@ import { useJitsiStore } from '@/store';
 import { useConference, useTracks, useLocalTracks, useSeats } from '@/jitsi';
 
 export const useJitsi = () => {
-  const { localTracksCreated, localTracksCreatedEvent } = useJitsiStore();
+  const { localTracksCreated, localTracksCreatedEvent, localTracksRemovedEvent } = useJitsiStore();
   const {
     sendJoinEvent,
     addTrack,
@@ -48,6 +48,7 @@ export const useJitsi = () => {
   const leave = async () => {
     sendLeaveEvent();
   };
+
   /**
    * @param {Event} [event] - The event that triggered the unload
    * @param {boolean} [prevent] - If we want to prevent the unload event

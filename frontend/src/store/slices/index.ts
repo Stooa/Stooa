@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
-export * from './slices';
-export * from './DevtoolsStateCreator';
-export * from './useJitsiStore';
+export * from './FishbowlSlice';
+export * from './JitsiSlice';
+export * from './TracksSlice';
+export * from './UserSlice';
