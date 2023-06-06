@@ -35,21 +35,16 @@ export const useConference = () => {
     twitter,
     linkedin,
     userId: myUserId,
+    updateUser,
     setConnection,
     getConnection,
     setConference,
     getConference,
     setRoomName,
-    changeUserName,
-    getUserName,
     makeModerator,
     getIsModerator,
     join: setAsJoined,
-    leave: setAsNotJoined,
-    setTwitter,
-    getTwitter,
-    setLinkedin,
-    getLinkedin
+    leave: setAsNotJoined
   } = useJitsiStore();
   const {
     createTracks,
@@ -143,14 +138,26 @@ export const useConference = () => {
     console.error('[STOOA] Handle connection failed', error);
   };
 
-  const _handleConferenceJoin = () => {
+  const _handleConferenceJoin = async () => {
     setAsJoined();
+
+    const auth = await getAuthToken();
+
+    const name = auth?.user ? auth.user.name : getUserNickname();
+    const twitter = auth?.user.twitter;
+    const linkedin = auth?.user.linkedin;
+
+    updateUser({
+      name,
+      twitter,
+      linkedin
+    });
 
     const conference = getConference();
 
-    conference.setDisplayName(getUserName());
-    conference.setLocalParticipantProperty('twitter', getTwitter());
-    conference.setLocalParticipantProperty('linkedin', getLinkedin());
+    conference.setDisplayName(name);
+    conference.setLocalParticipantProperty('twitter', twitter);
+    conference.setLocalParticipantProperty('linkedin', isModerator);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
 
     setUser({ id: conference.myUserId() });
@@ -331,8 +338,6 @@ export const useConference = () => {
       makeModerator();
     }
 
-    setUsername(auth ? auth.user : null);
-
     const roomName = getBackendSafeRoomName(rawRoomName);
 
     setRoomName(roomName);
@@ -438,16 +443,6 @@ export const useConference = () => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'no');
       leaveUser();
-    }
-  };
-
-  const setUsername = user => {
-    if (user) {
-      changeUserName(user.name);
-      setTwitter(user.twitter);
-      setLinkedin(user.linkedin);
-    } else {
-      changeUserName(getUserNickname());
     }
   };
 
