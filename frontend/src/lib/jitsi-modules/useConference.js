@@ -41,11 +41,15 @@ export const useConference = () => {
     getConference,
     setRoomName,
     changeUserName,
+    getUserName,
     makeModerator,
+    getIsModerator,
     join: setAsJoined,
     leave: setAsNotJoined,
     setTwitter,
-    setLinkedin
+    getTwitter,
+    setLinkedin,
+    getLinkedin
   } = useJitsiStore();
   const {
     createTracks,
@@ -144,10 +148,10 @@ export const useConference = () => {
 
     const conference = getConference();
 
-    conference.setDisplayName(userName);
-    conference.setLocalParticipantProperty('twitter', twitter);
-    conference.setLocalParticipantProperty('linkedin', linkedin);
-    conference.setLocalParticipantProperty('isModerator', isModerator);
+    conference.setDisplayName(getUserName());
+    conference.setLocalParticipantProperty('twitter', getTwitter());
+    conference.setLocalParticipantProperty('linkedin', getLinkedin());
+    conference.setLocalParticipantProperty('isModerator', getIsModerator());
 
     setUser({ id: conference.myUserId() });
 
