@@ -64,7 +64,7 @@ export const useConference = () => {
 
     createTracks(userId, seat, user);
 
-    conference.selectParticipants(getIds());
+    getConference().selectParticipants(getIds());
 
     console.log('[STOOA] Join', userId);
   };
