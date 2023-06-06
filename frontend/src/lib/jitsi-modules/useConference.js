@@ -392,7 +392,7 @@ export const useConference = () => {
     conference.replaceTrack(oldTrack, track);
   };
 
-  const getParticipantById = id => conference.getParticipantById(id);
+  const getParticipantById = id => getConference().getParticipantById(id);
 
   const getParticipantNameById = id => {
     const participant = getParticipantById(id);
