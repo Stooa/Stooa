@@ -109,7 +109,7 @@ const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props)
             <li>
               <ButtonKickUser
                 data-testid="kick-button"
-                onClick={() => setParticipantToKick(participant)}
+                onClick={() => setParticipantToKick(participant as Participant)}
               />
             </li>
           </StyledContextMenu>
