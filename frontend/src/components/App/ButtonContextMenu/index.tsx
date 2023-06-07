@@ -18,6 +18,7 @@ import useEventListener from '@/hooks/useEventListener';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import { useConference } from '@/jitsi';
+import JitsiParticipant from 'lib-jitsi-meet/types/hand-crafted/JitsiParticipant';
 
 interface Props {
   className?: string;
@@ -34,7 +35,10 @@ type SeatsChangeEventProps = {
 
 const ButtonContextMenu = ({ className, initialParticipant, seatNumber }: Props) => {
   const [showContextMenu, setShowContextMenu] = useState(false);
-  const [participant, setParticipant] = useState<Participant | undefined>(initialParticipant);
+  // TODO: This type is not clear. JitsiParticipant is inferred from jitsilib
+  const [participant, setParticipant] = useState<Participant | JitsiParticipant | undefined>(
+    initialParticipant
+  );
   const { setParticipantToKick, conferenceReady, isModerator } = useStooa();
   const [{ fishbowlReady, conferenceStatus }] = useStateValue();
   const wrapperRef = useRef<HTMLDivElement>(null);
