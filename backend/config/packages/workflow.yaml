@@ -20,9 +20,14 @@ framework:
             places:
                 - not_started
                 - introduction
-                - running
+                - main
+                - rounds
+                - conclusion
                 - finished
             transitions:
+                to_round:
+                    from: rounds
+                    to: conclusions
                 introduce:
                     from: not_started
                     to: introduction

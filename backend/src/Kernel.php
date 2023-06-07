@@ -16,6 +16,7 @@ namespace App;
 use App\Core\JWT\TokenGenerator\JaasTokenGenerator;
 use App\Core\JWT\TokenGenerator\SelfHostedTokenGenerator;
 use App\Core\JWT\TokenGenerator\TokenGeneratorInterface;
+use App\WorldCafe\WorldCafeBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -32,6 +33,10 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
     public function registerBundles(): iterable
     {
         $contents = require $this->getProjectDir() . '/config/bundles.php';
+
+        if (false === getenv('WOLD_CAFE')) {
+            unset($contents[WorldCafeBundle::class]);
+        }
 
         /** @phpstan-var class-string<BundleInterface> $class */
         foreach ($contents as $class => $envs) {

@@ -95,7 +95,8 @@
         "psr-4": {
             "App\\": "src/",
             "App\\Core\\": "packages/Core/src/",
-            "App\\Fishbowl\\": "packages/Fishbowl/src/"
+            "App\\Fishbowl\\": "packages/Fishbowl/src/",
+            "App\\WorldCafe\\": "packages/WorldCafe/src/"
         }
     },
     "autoload-dev": {
