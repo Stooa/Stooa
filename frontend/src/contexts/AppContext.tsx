@@ -91,6 +91,15 @@ const reducer: AppContextReducer = (state, action) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { type, ...actionData } = action;
 
+  if (type === FISHBOWL_STATUS) {
+    return state.conferenceStatus !== action.conferenceStatus
+      ? {
+          ...state,
+          ...actionData
+        }
+      : state;
+  }
+
   return {
     ...state,
     ...actionData
