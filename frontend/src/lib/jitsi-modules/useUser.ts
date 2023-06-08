@@ -15,7 +15,10 @@ import { useJitsiStore } from '@/store';
 
 export const useUser = (): UserRepository => {
   const { leave } = useSeats();
-  const { userJoined, userLeft } = useJitsiStore();
+  const { userJoined, userLeft } = useJitsiStore(store => ({
+    userJoined: store.userJoined,
+    userLeft: store.userLeft
+  }));
 
   const clearUser = (): void => {
     localStorage.removeItem('user');

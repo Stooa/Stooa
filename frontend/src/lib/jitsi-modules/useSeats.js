@@ -22,7 +22,17 @@ export const useSeats = () => {
     sit,
     stand,
     findSeat
-  } = useJitsiStore();
+  } = useJitsiStore(store => ({
+    seats: store.seats,
+    userId: store.userId,
+    createSeats: store.createSeats,
+    findEmptySeat: store.findEmptySeat,
+    count: store.count,
+    getOccupiedSeats: store.getOccupiedSeats,
+    sit: store.sit,
+    stand: store.stand,
+    findSeat: store.findSeat
+  }));
 
   const create = number => {
     const seats = createSeats(number);
