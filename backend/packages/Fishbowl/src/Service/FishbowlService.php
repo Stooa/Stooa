@@ -16,6 +16,7 @@ namespace App\Fishbowl\Service;
 use App\Core\Entity\Guest;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
+use App\Core\Model\Event;
 use App\Core\Repository\GuestRepository;
 use App\Core\Repository\ParticipantRepository;
 use App\Fishbowl\Entity\Fishbowl;
@@ -76,7 +77,7 @@ class FishbowlService
         return $hashids->encode(random_int(1, 1_000_000_000));
     }
 
-    public function generateDefaultTitle(Fishbowl $fishbowl): Fishbowl
+    public function generateDefaultTitle(Fishbowl $fishbowl): Event
     {
         $fishbowlName = $fishbowl->getName();
 

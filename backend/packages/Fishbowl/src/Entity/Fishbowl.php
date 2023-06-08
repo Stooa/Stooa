@@ -370,11 +370,6 @@ class Fishbowl extends Event
         return $this;
     }
 
-    public function isFinished(): bool
-    {
-        return self::STATUS_FINISHED === $this->getCurrentStatus();
-    }
-
     public function getHostName(): ?string
     {
         if (null === $this->getHost()) {

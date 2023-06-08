@@ -35,7 +35,7 @@ abstract class Event implements EventInterface, \Stringable
     /**
      * @var array<string, string>
      *
-     * @phpstan-var array<string, Fishbowl::STATUS_*> $statusChoices
+     * @phpstan-var array<string, Event::STATUS_*> $statusChoices
      */
     public static array $statusChoices = [
         'Not Started' => self::STATUS_NOT_STARTED,
@@ -279,5 +279,10 @@ abstract class Event implements EventInterface, \Stringable
         $this->finishedAt = $finishedAt;
 
         return $this;
+    }
+
+    public function isFinished(): bool
+    {
+        return self::STATUS_FINISHED === $this->getCurrentStatus();
     }
 }

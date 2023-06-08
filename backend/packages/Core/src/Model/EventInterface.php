@@ -15,8 +15,6 @@ namespace App\Core\Model;
 
 interface EventInterface
 {
-    public function setId(string $id): self;
-
     public function getName(): ?string;
 
     public function setName(string $name): self;
@@ -54,4 +52,6 @@ interface EventInterface
     public function getCurrentStatus(): string;
 
     public function setCurrentStatus(string $status): self;
+
+    public function isFinished(): bool;
 }
