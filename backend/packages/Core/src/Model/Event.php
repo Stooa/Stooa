@@ -44,42 +44,42 @@ abstract class Event implements EventInterface, \Stringable
         'Finished' => self::STATUS_FINISHED,
     ];
 
-    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Groups(['event:read', 'event:write'])]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
     protected ?string $name = null;
 
-    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Groups(['event:read', 'event:write'])]
     #[ORM\Column(type: 'text', nullable: true)]
     protected ?string $description = null;
 
-    #[Groups(['fishbowl:read'])]
+    #[Groups(['event:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', unique: true)]
     protected ?string $slug = null;
 
-    #[Groups(['fishbowl:write', 'fishbowl:read'])]
+    #[Groups(['event:write', 'event:read'])]
     #[Assert\NotNull]
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
     protected ?\DateTimeInterface $startDateTime = null;
 
-    #[Groups(['fishbowl:write', 'fishbowl:read'])]
+    #[Groups(['event:write', 'event:read'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
     protected ?string $timezone = null;
 
-    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Groups(['event:read', 'event:write'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Locale(canonicalize: true)]
     #[ORM\Column(type: 'string')]
     protected ?string $locale = null;
 
-    #[Groups(['fishbowl:read'])]
+    #[Groups(['event:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED])]
     #[ORM\Column(type: 'string', options: ['default' => self::STATUS_NOT_STARTED])]
@@ -174,7 +174,7 @@ abstract class Event implements EventInterface, \Stringable
     }
 
     /** This is needed to add the timezone information to the `startDateTime` property. */
-    #[Groups(['fishbowl:read'])]
+    #[Groups(['event:read'])]
     public function getStartDateTimeTz(): \DateTimeImmutable
     {
         MAssert::notNull($this->startDateTime);

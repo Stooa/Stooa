@@ -65,8 +65,8 @@ use Webmozart\Assert\Assert as MAssert;
         new GetCollection(security: 'is_granted(\'ROLE_USER\')', provider: FishbowlStateProvider::class),
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
-    normalizationContext: ['groups' => ['fishbowl:read']],
-    denormalizationContext: ['groups' => ['fishbowl:write']],
+    normalizationContext: ['groups' => ['fishbowl:read', 'event:read']],
+    denormalizationContext: ['groups' => ['fishbowl:write', 'event:write']],
     paginationItemsPerPage: 25,
     graphQlOperations: [
         new Query(),
