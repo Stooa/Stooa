@@ -73,7 +73,7 @@ export const useConference = () => {
    * @param {string | undefined} password
    */
   const joinPrivateConference = async password => {
-    if (conference) await conference.join(password);
+    await getConference().join(password);
   };
 
   /**
@@ -327,12 +327,14 @@ export const useConference = () => {
   };
 
   const initializeConnection = async (rawRoomName, isUserModerator) => {
+    console.log('---> Initialize connection');
     const {
       events: {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
     const auth = await getAuthToken(true, rawRoomName);
+    console.log('auth', auth);
 
     if (isUserModerator) {
       makeModerator();
