@@ -27,7 +27,6 @@ doctrine:
                 alias: App\Fishbowl
             App\WorldCafe:
                 is_bundle: false
-                type: annotation
                 dir: '%kernel.project_dir%/packages/WorldCafe/src/Entity'
                 prefix: 'App\WorldCafe\Entity'
                 alias: App\WorldCafe
