@@ -190,14 +190,6 @@ class Fishbowl extends Event
         $this->topics = new ArrayCollection();
     }
 
-    public function __toString(): string
-    {
-        $uid = $this->getId();
-        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
-
-        return ($this->getName() ?? '') . $stringUid;
-    }
-
     public function getId(): ?UuidInterface
     {
         return $this->id;
@@ -222,6 +214,23 @@ class Fishbowl extends Event
         MAssert::notNull($this->duration);
 
         return $this->getStartDateTimeTz()->add(new \DateInterval($this->duration->format('\\P\\TG\\Hi\\M')));
+    }
+
+    public function isHappeningNow(): bool
+    {
+        $now = new \DateTimeImmutable();
+        $oneHour = new \DateInterval('PT1H');
+        $tenMinutes = new \DateInterval('PT10M');
+
+        return $now >= $this->getStartDateTimeTz()->sub($oneHour) && $now <= $this->getEndDateTimeTz()->add($tenMinutes);
+    }
+
+    public function shouldHaveEnd(int $hoursAgo = 24): bool
+    {
+        $now = new \DateTimeImmutable();
+        $hoursInterval = new \DateInterval('PT' . (string) $hoursAgo . 'H');
+
+        return $now > $this->getEndDateTimeTz()->add($hoursInterval);
     }
 
     public function calculateFinishTime(): void

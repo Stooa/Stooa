@@ -101,6 +101,14 @@ abstract class Event implements EventInterface, \Stringable
     #[ORM\Column(type: 'datetime', nullable: true)]
     protected ?\DateTimeInterface $finishDateTime = null;
 
+    public function __toString(): string
+    {
+        $uid = $this->getId();
+        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
+
+        return ($this->getName() ?? '') . $stringUid;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -226,23 +234,6 @@ abstract class Event implements EventInterface, \Stringable
         MAssert::notNull($this->finishDateTime);
 
         return $this->finishDateTime->format('H:i');
-    }
-
-    public function isHappeningNow(): bool
-    {
-        $now = new \DateTimeImmutable();
-        $oneHour = new \DateInterval('PT1H');
-        $tenMinutes = new \DateInterval('PT10M');
-
-        return $now >= $this->getStartDateTimeTz()->sub($oneHour) && $now <= $this->getEndDateTimeTz()->add($tenMinutes);
-    }
-
-    public function shouldHaveEnd(int $hoursAgo = 24): bool
-    {
-        $now = new \DateTimeImmutable();
-        $hoursInterval = new \DateInterval('PT' . (string) $hoursAgo . 'H');
-
-        return $now > $this->getEndDateTimeTz()->add($hoursInterval);
     }
 
     public function getIntroducedAt(): ?\DateTimeInterface

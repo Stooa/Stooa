@@ -41,13 +41,9 @@ interface EventInterface
 
     public function setLocale(string $locale): self;
 
-    public function getEndDateTimeTz(): \DateTimeImmutable;
-
     public function getFinishDateTime(): ?\DateTimeInterface;
 
     public function setFinishDateTime(\DateTimeInterface $finishDateTime): self;
-
-    public function calculateFinishTime(): void;
 
     public function getCurrentStatus(): string;
 
