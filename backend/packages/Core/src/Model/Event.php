@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Core\Model;
 
-use App\Core\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
-abstract class Event implements EventInterface
+#[ORM\MappedSuperclass]
+abstract class Event implements EventInterface, \Stringable
 {
     use TimestampableEntity;
 
@@ -47,64 +47,59 @@ abstract class Event implements EventInterface
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string')]
-    private ?string $name = null;
+    protected ?string $name = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description = null;
+    protected ?string $description = null;
 
     #[Groups(['fishbowl:read'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'string', unique: true)]
-    private ?string $slug = null;
+    protected ?string $slug = null;
 
     #[Groups(['fishbowl:write', 'fishbowl:read'])]
     #[Assert\NotNull]
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $startDateTime = null;
+    protected ?\DateTimeInterface $startDateTime = null;
 
     #[Groups(['fishbowl:write', 'fishbowl:read'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
-    private ?string $timezone = null;
+    protected ?string $timezone = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[Assert\Locale(canonicalize: true)]
     #[ORM\Column(type: 'string')]
-    private ?string $locale = null;
-
-    #[Groups(['fishbowl:read'])]
-    #[Assert\NotNull]
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'fishbowls')]
-    private ?User $host = null;
+    protected ?string $locale = null;
 
     #[Groups(['fishbowl:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED])]
     #[ORM\Column(type: 'string', options: ['default' => self::STATUS_NOT_STARTED])]
-    private string $currentStatus = self::STATUS_NOT_STARTED;
+    protected string $currentStatus = self::STATUS_NOT_STARTED;
 
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $introducedAt = null;
+    protected ?\DateTimeInterface $introducedAt = null;
 
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $runnedAt = null;
+    protected ?\DateTimeInterface $runnedAt = null;
 
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $finishedAt = null;
+    protected ?\DateTimeInterface $finishedAt = null;
 
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $finishDateTime = null;
+    protected ?\DateTimeInterface $finishDateTime = null;
 
     public function getName(): ?string
     {
@@ -248,18 +243,6 @@ abstract class Event implements EventInterface
         $hoursInterval = new \DateInterval('PT' . (string) $hoursAgo . 'H');
 
         return $now > $this->getEndDateTimeTz()->add($hoursInterval);
-    }
-
-    public function getHost(): ?User
-    {
-        return $this->host;
-    }
-
-    public function setHost(?User $host): self
-    {
-        $this->host = $host;
-
-        return $this;
     }
 
     public function getIntroducedAt(): ?\DateTimeInterface

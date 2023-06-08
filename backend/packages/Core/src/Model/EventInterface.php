@@ -13,13 +13,8 @@ declare(strict_types=1);
 
 namespace App\Core\Model;
 
-use App\Core\Entity\User;
-use Ramsey\Uuid\UuidInterface;
-
 interface EventInterface
 {
-    public function getId(): ?UuidInterface;
-
     public function setId(string $id): self;
 
     public function getName(): ?string;
@@ -59,8 +54,4 @@ interface EventInterface
     public function getCurrentStatus(): string;
 
     public function setCurrentStatus(string $status): self;
-
-    public function getHost(): ?User;
-
-    public function setHost(?User $host): self;
 }

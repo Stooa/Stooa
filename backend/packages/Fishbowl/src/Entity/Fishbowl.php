@@ -44,11 +44,11 @@ use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Metaclass\FilterBundle\Filter\FilterLogic;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
@@ -125,11 +125,8 @@ use Webmozart\Assert\Assert as MAssert;
 #[ApiFilter(FilterLogic::class)]
 #[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 #[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
-
-class Fishbowl extends Event implements \Stringable
+class Fishbowl extends Event
 {
-    use TimestampableEntity;
-
     #[Groups(['fishbowl:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -148,6 +145,11 @@ class Fishbowl extends Event implements \Stringable
     #[Groups(['fishbowl:read'])]
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Participant::class, cascade: ['all'])]
     private Collection $participants;
+
+    #[Groups(['fishbowl:read'])]
+    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'fishbowls')]
+    private ?User $host = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
@@ -253,6 +255,18 @@ class Fishbowl extends Event implements \Stringable
         MAssert::notNull($this->duration);
 
         return $this->duration->format('H:i');
+    }
+
+    public function getHost(): ?User
+    {
+        return $this->host;
+    }
+
+    public function setHost(?User $host): self
+    {
+        $this->host = $host;
+
+        return $this;
     }
 
     /** @return Collection<int, Topic> */
