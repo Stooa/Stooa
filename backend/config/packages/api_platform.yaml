@@ -13,7 +13,7 @@ api_platform:
             - '%kernel.project_dir%/packages/Core/src/Entity'
             - '%kernel.project_dir%/packages/Core/src/Model'
             - '%kernel.project_dir%/packages/Fishbowl/src/Entity'
-            - '%kernel.project_dir%/packages/WorldCafe/src/Entity'
+#            - '%kernel.project_dir%/packages/WorldCafe/src/Entity'
     patch_formats:
         json: ['application/merge-patch+json']
     graphql:

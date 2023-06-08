@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Model;
 
+use App\Core\Entity\User;
 use Ramsey\Uuid\UuidInterface;
 
 interface EventInterface
@@ -47,10 +48,6 @@ interface EventInterface
 
     public function setLocale(string $locale): self;
 
-    public function getDuration(): ?\DateTimeInterface;
-
-    public function setDuration(\DateTimeInterface $duration): self;
-
     public function getEndDateTimeTz(): \DateTimeImmutable;
 
     public function getFinishDateTime(): ?\DateTimeInterface;
@@ -58,4 +55,12 @@ interface EventInterface
     public function setFinishDateTime(\DateTimeInterface $finishDateTime): self;
 
     public function calculateFinishTime(): void;
+
+    public function getCurrentStatus(): string;
+
+    public function setCurrentStatus(string $status): self;
+
+    public function getHost(): ?User;
+
+    public function setHost(?User $host): self;
 }
