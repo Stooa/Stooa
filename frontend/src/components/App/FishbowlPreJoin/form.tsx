@@ -32,6 +32,7 @@ interface FormValues {
 }
 
 interface FormProps {
+  name: string;
   notEmpty: string;
   required: string;
   onSubmit: (values: FormValues, formikBag: FormikBag<FormProps, FormValues>) => void;
@@ -64,6 +65,29 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
   );
 };
 
+const FormValidation = withFormik<FormProps, FormValues>({
+  mapPropsToValues: props => ({
+    name: props.name,
+    isPrivate: false,
+    password: ''
+  }),
+  validationSchema: props => {
+    return Yup.object({
+      name: Yup.string()
+        .matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: props.notEmpty
+        })
+        .required(props.required),
+      password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
+    });
+  },
+  handleSubmit: async (values, actions) => {
+    actions.setSubmitting(false);
+    actions.props.onSubmit(values, actions);
+  }
+})(Form);
+
 const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   const { setFishbowlPassword, isModerator } = useStooa();
   const { getUserNickname, setUser } = useUser();
@@ -75,12 +99,6 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
 
   const requiredError = t('validation.required');
   const notEmptyError = t('validation.notEmpty');
-
-  const initialValues = {
-    name: getUserNickname(),
-    isPrivate: false,
-    password: ''
-  };
 
   const handleDispatchJoinGuest = (): void => {
     dispatch({
@@ -150,27 +168,9 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
     }
   };
 
-  const FormValidation = withFormik<FormProps, FormValues>({
-    mapPropsToValues: () => initialValues,
-    validationSchema: props => {
-      return Yup.object({
-        name: Yup.string()
-          .matches(/[^-\s]/, {
-            excludeEmptyString: true,
-            message: props.notEmpty
-          })
-          .required(props.required),
-        password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
-      });
-    },
-    handleSubmit: async (values, actions) => {
-      actions.setSubmitting(false);
-      actions.props.onSubmit(values, actions);
-    }
-  })(Form);
-
   return (
     <FormValidation
+      name={getUserNickname()}
       isPrivate={isPrivate}
       notEmpty={notEmptyError}
       required={requiredError}
