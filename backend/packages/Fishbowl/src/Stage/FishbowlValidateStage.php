@@ -16,7 +16,7 @@ namespace App\Fishbowl\Stage;
 use ApiPlatform\GraphQl\Resolver\Stage\ValidateStageInterface;
 use ApiPlatform\Metadata\GraphQl\Operation;
 use App\Core\Entity\User;
-use App\Fishbowl\Entity\Fishbowl;
+use App\Core\Model\Event;
 use App\Fishbowl\Service\FishbowlService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
@@ -33,7 +33,7 @@ class FishbowlValidateStage implements ValidateStageInterface
     /** @param mixed[] $context */
     public function __invoke(object $object, string $resourceClass, Operation $operation, array $context): void
     {
-        if ($object instanceof Fishbowl && null === $object->getId()) {
+        if ($object instanceof Event && null === $object->getId()) {
             $user = $this->security->getUser();
 
             if (null !== $user) {
@@ -42,7 +42,7 @@ class FishbowlValidateStage implements ValidateStageInterface
                 $object->setHost($user);
             }
 
-            $object->setSlug($this->service->generateRandomSlug($object));
+            $object->setSlug($this->service->generateRandomSlug());
 
             $object = $this->service->generateDefaultTitle($object);
         }

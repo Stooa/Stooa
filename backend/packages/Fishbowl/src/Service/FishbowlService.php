@@ -70,23 +70,23 @@ class FishbowlService
         return false;
     }
 
-    public function generateRandomSlug(Fishbowl $fishbowl): string
+    public function generateRandomSlug(): string
     {
         $hashids = new Hashids('', 10);
 
         return $hashids->encode(random_int(1, 1_000_000_000));
     }
 
-    public function generateDefaultTitle(Fishbowl $fishbowl): Event
+    public function generateDefaultTitle(Event $event): Event
     {
-        $fishbowlName = $fishbowl->getName();
+        $fishbowlName = $event->getName();
 
         if (!empty($fishbowlName) && !ctype_space($fishbowlName)) {
-            return $fishbowl;
+            return $event;
         }
 
-        return $fishbowl->setName(
-            $this->translator->trans('fishbowl.default_title', ['%name%' => $fishbowl->getHostName()], null, $fishbowl->getLocale())
+        return $event->setName(
+            $this->translator->trans('fishbowl.default_title', ['%name%' => $event->getHostName()], null, $event->getLocale())
         );
     }
 

@@ -14,14 +14,13 @@ declare(strict_types=1);
 namespace App\WorldCafe\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GraphQl\Mutation;
 use ApiPlatform\Metadata\Post;
 use App\Core\Entity\Participant;
 use App\Core\Entity\Topic;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
 use App\Fishbowl\Entity\Feedback;
-use App\Fishbowl\State\FishbowlProcessor;
-use App\Fishbowl\Validator\Constraints\FutureFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,10 +43,15 @@ use Webmozart\Assert\Assert as MAssert;
     normalizationContext: ['groups' => ['wc:read', 'event:read']],
     denormalizationContext: ['groups' => ['wc:write', 'event:write']],
     paginationItemsPerPage: 25,
-    processor: FishbowlProcessor::class
+    graphQlOperations: [
+        new Mutation(
+            security: 'is_granted(\'ROLE_USER\')',
+            validationContext: ['groups' => ['Default', 'wc:create']],
+            name: 'create'
+        ),
+    ]
 )]
 #[UniqueEntity(fields: ['slug'])]
-#[FutureFishbowl(groups: ['wc:create', 'wc:update'])]
 #[ORM\Entity]
 class WorldCafe extends Event
 {

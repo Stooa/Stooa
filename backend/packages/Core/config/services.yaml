@@ -45,9 +45,6 @@ services:
         bind:
             $key: '%env(HALITE_KEY)%'
 
-    App\Fishbowl\Stage\FishbowlValidateStage:
-        decorates: api_platform.graphql.resolver.stage.validate
-
     # Admin
     App\Core\Admin\UserAdmin:
         tags:
