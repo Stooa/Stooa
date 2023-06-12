@@ -87,14 +87,6 @@ abstract class Event implements EventInterface, \Stringable
 
     #[Assert\Type('\\DateTimeInterface')]
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected ?\DateTimeInterface $introducedAt = null;
-
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    protected ?\DateTimeInterface $runnedAt = null;
-
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime', nullable: true)]
     protected ?\DateTimeInterface $finishedAt = null;
 
     #[Assert\Type('\\DateTimeInterface')]
@@ -226,30 +218,6 @@ abstract class Event implements EventInterface, \Stringable
         MAssert::notNull($this->finishDateTime);
 
         return $this->finishDateTime->format('H:i');
-    }
-
-    public function getIntroducedAt(): ?\DateTimeInterface
-    {
-        return $this->introducedAt;
-    }
-
-    public function setIntroducedAt(\DateTimeInterface $introducedAt): self
-    {
-        $this->introducedAt = $introducedAt;
-
-        return $this;
-    }
-
-    public function getRunnedAt(): ?\DateTimeInterface
-    {
-        return $this->runnedAt;
-    }
-
-    public function setRunnedAt(\DateTimeInterface $runnedAt): self
-    {
-        $this->runnedAt = $runnedAt;
-
-        return $this;
     }
 
     public function getFinishedAt(): ?\DateTimeInterface

@@ -33,6 +33,10 @@ interface EventInterface
 
     public function getStartDateTimeTz(): \DateTimeImmutable;
 
+    public function getFinishDateTime(): ?\DateTimeInterface;
+
+    public function setFinishDateTime(\DateTimeInterface $finishDateTime): self;
+
     public function getTimezone(): ?string;
 
     public function setTimezone(string $timezone): self;
@@ -40,10 +44,6 @@ interface EventInterface
     public function getLocale(): ?string;
 
     public function setLocale(string $locale): self;
-
-    public function getFinishDateTime(): ?\DateTimeInterface;
-
-    public function setFinishDateTime(\DateTimeInterface $finishDateTime): self;
 
     public function getCurrentStatus(): string;
 

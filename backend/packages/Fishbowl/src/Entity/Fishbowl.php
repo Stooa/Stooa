@@ -127,6 +127,13 @@ use Webmozart\Assert\Assert as MAssert;
 #[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 class Fishbowl extends Event
 {
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTimeInterface $introducedAt = null;
+
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTimeInterface $runnedAt = null;
     #[Groups(['fishbowl:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -430,6 +437,30 @@ class Fishbowl extends Event
     public function setIsPrivate(bool $isPrivate): self
     {
         $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function getIntroducedAt(): ?\DateTimeInterface
+    {
+        return $this->introducedAt;
+    }
+
+    public function setIntroducedAt(\DateTimeInterface $introducedAt): self
+    {
+        $this->introducedAt = $introducedAt;
+
+        return $this;
+    }
+
+    public function getRunnedAt(): ?\DateTimeInterface
+    {
+        return $this->runnedAt;
+    }
+
+    public function setRunnedAt(\DateTimeInterface $runnedAt): self
+    {
+        $this->runnedAt = $runnedAt;
 
         return $this;
     }
