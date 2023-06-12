@@ -43,10 +43,14 @@ emails:
             ca: Català
             en: Anglès
             fr: Francès
-
+    world_cafe_created_email:
+        subject:  Hola %name%! Has creat un nou world café
 login:
     failure: Credencials no vàlides
 
 
 fishbowl:
     default_title: 'Reunió Fishbowl - %name%'
+
+world_cafe:
+    default_title: 'Reunió World Café - %name%'

@@ -15,6 +15,7 @@ namespace App\Fishbowl\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
 use App\Core\Entity\User;
+use App\Core\Service\SlugService;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\FishbowlService;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -27,7 +28,8 @@ class FishbowlSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly FishbowlService $service,
-        private readonly Security $security
+        private readonly Security $security,
+        private readonly SlugService $slugService
     ) {
     }
 
@@ -51,7 +53,7 @@ class FishbowlSubscriber implements EventSubscriberInterface
                 $object->setHost($user);
             }
 
-            $object->setSlug($this->service->generateRandomSlug($object));
+            $object->setSlug($this->slugService->generateRandomSlug());
 
             $object = $this->service->generateDefaultTitle($object);
 

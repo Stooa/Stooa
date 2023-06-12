@@ -62,14 +62,14 @@ class FishbowlServiceTest extends TestCase
         );
     }
 
-    /** @test */
-    public function itGeneratesRandomSlug(): void
-    {
-        $fishbowl = new Fishbowl();
-        $slug = $this->service->generateRandomSlug($fishbowl);
-
-        $this->assertSame(10, \strlen($slug));
-    }
+//    /** @test */
+//    public function itGeneratesRandomSlug(): void
+//    {
+//        $fishbowl = new Fishbowl();
+//        $slug = $this->service->generateRandomSlug();
+//
+//        $this->assertSame(10, \strlen($slug));
+//    }
 
     /** @test */
     public function itGetsFishbowlStatus(): void

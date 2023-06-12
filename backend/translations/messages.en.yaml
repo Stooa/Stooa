@@ -44,8 +44,13 @@ emails:
             en: English
             fr: French
 
+    world_cafe_created_email:
+        subject: Hello %name%! You have created a new world café
 login:
     failure: Invalid credentials
 
 fishbowl:
     default_title: 'Fishbowl Meeting - %name%'
+
+world_cafe:
+    default_title: 'World Café Meeting - %name%'

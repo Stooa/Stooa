@@ -21,3 +21,6 @@ emails:
 
 fishbowl:
     default_title: 'Termin Fishbowl - %name%'
+
+world_cafe:
+    default_title: 'Termin World Café - %name%'

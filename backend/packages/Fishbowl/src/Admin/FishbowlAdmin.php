@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Admin;
 
+use App\Core\Service\SlugService;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\FishbowlService;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -33,16 +34,22 @@ use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 class FishbowlAdmin extends AbstractAdmin
 {
     protected ?FishbowlService $fishbowlService = null;
+    protected ?SlugService $slugService = null;
 
     public function setFishbowlService(FishbowlService $fishbowlService): void
     {
         $this->fishbowlService = $fishbowlService;
     }
 
+    public function setSlugService(SlugService $slugService): void
+    {
+        $this->slugService = $slugService;
+    }
+
     public function prePersist($object): void
     {
-        if (null !== $this->fishbowlService) {
-            $object->setSlug($this->fishbowlService->generateRandomSlug($object));
+        if (null !== $this->fishbowlService && null !== $this->slugService) {
+            $object->setSlug($this->slugService->generateRandomSlug());
 
             $this->fishbowlService->generateDefaultTitle($object);
         }

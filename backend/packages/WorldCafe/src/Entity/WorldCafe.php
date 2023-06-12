@@ -21,6 +21,9 @@ use App\Core\Entity\Topic;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
 use App\Fishbowl\Entity\Feedback;
+use App\WorldCafe\Repository\WorldCafeRepository;
+use App\WorldCafe\State\WorldCafeProcessor;
+use App\WorldCafe\Validator\Constraints\FutureWorldCafe;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -49,10 +52,12 @@ use Webmozart\Assert\Assert as MAssert;
             validationContext: ['groups' => ['Default', 'wc:create']],
             name: 'create'
         ),
-    ]
+    ],
+    processor: WorldCafeProcessor::class
 )]
 #[UniqueEntity(fields: ['slug'])]
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: WorldCafeRepository::class)]
+#[FutureWorldCafe(groups: ['wc:create', 'wc:update'])]
 class WorldCafe extends Event
 {
     #[Groups(['wc:read'])]
@@ -89,6 +94,14 @@ class WorldCafe extends Event
         $this->participants = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
         $this->topics = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        $uid = $this->getId();
+        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
+
+        return ($this->getName() ?? '') . $stringUid;
     }
 
     public function getId(): ?UuidInterface

@@ -15,3 +15,6 @@ services:
         exclude:
             - ../src/DependencyInjection/
             - ../src/Entity/
+
+    App\WorldCafe\Stage\WorldCafeValidateStage:
+        decorates: api_platform.graphql.resolver.stage.validate

@@ -11,23 +11,23 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Stage;
+namespace App\WorldCafe\Stage;
 
 use ApiPlatform\GraphQl\Resolver\Stage\ValidateStageInterface;
 use ApiPlatform\Metadata\GraphQl\Operation;
 use App\Core\Entity\User;
 use App\Core\Service\SlugService;
-use App\Fishbowl\Entity\Fishbowl;
-use App\Fishbowl\Service\FishbowlService;
+use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Service\WorldCafeService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
-class FishbowlValidateStage implements ValidateStageInterface
+class WorldCafeValidateStage implements ValidateStageInterface
 {
     public function __construct(
         private readonly ValidateStageInterface $decorated,
         private readonly Security $security,
-        private readonly FishbowlService $service,
+        private readonly WorldCafeService $service,
         private readonly SlugService $slugService
     ) {
     }
@@ -35,7 +35,7 @@ class FishbowlValidateStage implements ValidateStageInterface
     /** @param mixed[] $context */
     public function __invoke(object $object, string $resourceClass, Operation $operation, array $context): void
     {
-        if ($object instanceof Fishbowl && null === $object->getId()) {
+        if ($object instanceof WorldCafe && null === $object->getId()) {
             $user = $this->security->getUser();
 
             if (null !== $user) {

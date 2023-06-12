@@ -21,7 +21,6 @@ use App\Core\Repository\GuestRepository;
 use App\Core\Repository\ParticipantRepository;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
-use Hashids\Hashids;
 use Psr\Log\LoggerInterface;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -70,23 +69,16 @@ class FishbowlService
         return false;
     }
 
-    public function generateRandomSlug(): string
+    public function generateDefaultTitle(Fishbowl $fishbowl): Event
     {
-        $hashids = new Hashids('', 10);
-
-        return $hashids->encode(random_int(1, 1_000_000_000));
-    }
-
-    public function generateDefaultTitle(Event $event): Event
-    {
-        $fishbowlName = $event->getName();
+        $fishbowlName = $fishbowl->getName();
 
         if (!empty($fishbowlName) && !ctype_space($fishbowlName)) {
-            return $event;
+            return $fishbowl;
         }
 
-        return $event->setName(
-            $this->translator->trans('fishbowl.default_title', ['%name%' => $event->getHostName()], null, $event->getLocale())
+        return $fishbowl->setName(
+            $this->translator->trans('fishbowl.default_title', ['%name%' => $fishbowl->getHostName()], null, $fishbowl->getLocale())
         );
     }
 

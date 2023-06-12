@@ -101,14 +101,6 @@ abstract class Event implements EventInterface, \Stringable
     #[ORM\Column(type: 'datetime', nullable: true)]
     protected ?\DateTimeInterface $finishDateTime = null;
 
-    public function __toString(): string
-    {
-        $uid = $this->getId();
-        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
-
-        return ($this->getName() ?? '') . $stringUid;
-    }
-
     public function getName(): ?string
     {
         return $this->name;

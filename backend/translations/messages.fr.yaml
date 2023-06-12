@@ -43,9 +43,15 @@ emails:
         info_start_time: Heure de début
         delete: 'Si vous souhaitez supprimer cet évènement, veuillez nous envoyer un courriel <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id : %id%">ici</a>'
         password: 'Password: %password%'
+    world_cafe_created_email:
+        subject: Bonjour %name% ! Vous avez créé un nouveau world café
+
 login:
     failure: Informations d'identification invalides.
 
 
 fishbowl:
     default_title: 'Rencontre Fishbowl - %name%'
+
+world_cafe:
+    default_title: 'Rencontre World Café - %name%'

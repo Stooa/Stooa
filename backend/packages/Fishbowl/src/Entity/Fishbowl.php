@@ -190,6 +190,14 @@ class Fishbowl extends Event
         $this->topics = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        $uid = $this->getId();
+        $stringUid = null !== $uid ? ' (' . $uid->toString() . ')' : '';
+
+        return ($this->getName() ?? '') . $stringUid;
+    }
+
     public function getId(): ?UuidInterface
     {
         return $this->id;
