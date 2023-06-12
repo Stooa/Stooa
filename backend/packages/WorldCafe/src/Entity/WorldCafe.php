@@ -61,6 +61,15 @@ use Webmozart\Assert\Assert as MAssert;
 class WorldCafe extends Event
 {
     #[Groups(['wc:read'])]
+    #[Assert\Length(max: 255)]
+    #[Assert\Choice([5, 10, 15, 20, 25])]
+    #[ORM\Column(type: 'integer', options: ['default' => 10])]
+    protected int $roundMinutes = 10;
+
+    #[Groups(['wc:read', 'wc:write'])]
+    #[ORM\Column(type: 'boolean')]
+    protected bool $hasExtraRoundTime = false;
+    #[Groups(['wc:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -129,6 +138,30 @@ class WorldCafe extends Event
     public function setHost(?User $host): self
     {
         $this->host = $host;
+
+        return $this;
+    }
+
+    public function getRoundMinutes(): int
+    {
+        return $this->roundMinutes;
+    }
+
+    public function setRoundMinutes(int $roundMinutes): self
+    {
+        $this->roundMinutes = $roundMinutes;
+
+        return $this;
+    }
+
+    public function getHasExtraRoundTime(): bool
+    {
+        return $this->hasExtraRoundTime;
+    }
+
+    public function setHasExtraRoundTime(bool $hasExtraRoundTime): self
+    {
+        $this->hasExtraRoundTime = $hasExtraRoundTime;
 
         return $this;
     }
