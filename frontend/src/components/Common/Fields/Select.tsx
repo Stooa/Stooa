@@ -28,7 +28,9 @@ const InputField: React.FC<Input> = ({
   const isInvalid = validation && meta.touched && meta.error;
 
   return (
-    <InputStyled className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}>
+    <InputStyled
+      className={`select ${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}
+    >
       {icon && <Icon variant={icon} className="icon" />}
       <Field
         {...field}

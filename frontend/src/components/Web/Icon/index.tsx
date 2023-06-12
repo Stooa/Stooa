@@ -18,24 +18,14 @@ import Mail from '@/ui/svg/mail.svg';
 import World from '@/ui/svg/world.svg';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Language from '@/ui/svg/language.svg';
+import { IconVariant } from '@/components/Common/Fields/Icon';
 
-type IIconProps = {
+type IconProps = {
   className?: string;
-  variant:
-    | 'avatar'
-    | 'calendar'
-    | 'checkmark'
-    | 'chevron-down'
-    | 'clock'
-    | 'hourglass'
-    | 'cross'
-    | 'language'
-    | 'lock'
-    | 'mail'
-    | 'world';
+  variant: IconVariant;
 };
 
-const Icon: React.FC<IIconProps> = ({ className = '', variant }) => {
+const Icon = ({ className = '', variant }: IconProps) => {
   const iconVariant = {
     'avatar': Avatar,
     'calendar': Calendar,

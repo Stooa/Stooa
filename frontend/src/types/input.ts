@@ -7,13 +7,14 @@
  * file that was distributed with this source code.
  */
 
+import { IconVariant } from '@/components/Common/Fields/Icon';
 import { FieldAttributes } from 'formik';
 
 export type Input = {
   label: string;
   variant?: 'default' | 'sm';
   help?: string;
-  icon?: 'calendar' | 'clock' | 'hourglass' | 'language' | 'lock' | 'mail' | 'world';
+  icon?: IconVariant;
   as?: 'input' | 'select' | 'textarea';
   validation?: boolean;
   autocomplete?: string;

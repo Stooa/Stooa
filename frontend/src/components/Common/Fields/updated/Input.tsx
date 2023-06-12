@@ -10,23 +10,12 @@
 import { forwardRef } from 'react';
 import { InputStyled } from '@/ui/Form';
 import { ValidationError, ValidationIcon } from '@/ui/Validation';
-import Icon from '../Icon';
+import Icon, { IconVariant } from '../Icon';
 import { FieldError } from 'react-hook-form';
 
 type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   label?: string;
-  icon?:
-    | 'avatar'
-    | 'calendar'
-    | 'checkmark'
-    | 'chevron-down'
-    | 'clock'
-    | 'hourglass'
-    | 'cross'
-    | 'language'
-    | 'lock'
-    | 'mail'
-    | 'world';
+  icon?: IconVariant;
   hasError?: FieldError;
   isValid?: boolean;
   validationError?: string;
