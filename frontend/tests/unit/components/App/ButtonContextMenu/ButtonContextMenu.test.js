@@ -11,14 +11,14 @@ import { screen, render, act, fireEvent } from '@testing-library/react';
 import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { useStateValue } from '@/contexts/AppContext';
 import { useStooa } from '@/contexts/StooaManager';
-import { useConference } from '@/jitsi/UseConference';
+import { useConference } from '@/jitsi';
 import { mapObjectArray } from '../../../test-utils';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { PARTICIPANT_TEST_CASES, SEAT_TEST_CASES } from './cases';
 
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/AppContext');
-jest.mock('@/jitsi/UseConference');
+jest.mock('@/jitsi');
 
 describe('Tests with initial participant', () => {
   const testCases = mapObjectArray(PARTICIPANT_TEST_CASES);
