@@ -21,7 +21,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Core\Entity\Participant;
 use App\Fishbowl\Repository\FeedbackRepository;
-use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Entity\WorldCoffe;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
@@ -105,9 +105,9 @@ class Feedback implements \Stringable
     private ?Fishbowl $fishbowl = null;
 
     #[Groups(['feedback:read', 'feedback:write'])]
-    #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'feedbacks')]
+    #[ORM\ManyToOne(targetEntity: WorldCoffe::class, inversedBy: 'feedbacks')]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
-    private ?WorldCafe $worldCafe = null;
+    private ?WorldCoffe $worldCafe = null;
 
     #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: Participant::class, inversedBy: 'feedbacks')]
@@ -221,12 +221,12 @@ class Feedback implements \Stringable
         return $this;
     }
 
-    public function getWorldCafe(): ?WorldCafe
+    public function getWorldCafe(): ?WorldCoffe
     {
         return $this->worldCafe;
     }
 
-    public function setWorldCafe(?WorldCafe $worldCafe): self
+    public function setWorldCafe(?WorldCoffe $worldCafe): self
     {
         $this->worldCafe = $worldCafe;
 

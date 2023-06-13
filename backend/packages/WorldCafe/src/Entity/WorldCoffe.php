@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Entity;
 
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GraphQl\Mutation;
 use ApiPlatform\Metadata\Post;
@@ -58,8 +59,15 @@ use Webmozart\Assert\Assert as MAssert;
 #[UniqueEntity(fields: ['slug'])]
 #[ORM\Entity(repositoryClass: WorldCafeRepository::class)]
 #[FutureWorldCafe(groups: ['wc:create', 'wc:update'])]
-class WorldCafe extends Event
+class WorldCoffe extends Event
 {
+    #[Groups(['wc:read'])]
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
+    private ?UuidInterface $id = null;
+
     #[Groups(['wc:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([5, 10, 15, 20, 25])]
@@ -69,12 +77,6 @@ class WorldCafe extends Event
     #[Groups(['wc:read', 'wc:write'])]
     #[ORM\Column(type: 'boolean')]
     protected bool $hasExtraRoundTime = false;
-    #[Groups(['wc:read'])]
-    #[ORM\Id]
-    #[ORM\Column(type: 'uuid', unique: true)]
-    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    private ?UuidInterface $id = null;
 
     #[Groups(['wc:read'])]
     #[Assert\NotNull]

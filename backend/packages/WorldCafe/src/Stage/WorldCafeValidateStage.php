@@ -17,7 +17,7 @@ use ApiPlatform\GraphQl\Resolver\Stage\ValidateStageInterface;
 use ApiPlatform\Metadata\GraphQl\Operation;
 use App\Core\Entity\User;
 use App\Core\Service\SlugService;
-use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Entity\WorldCoffe;
 use App\WorldCafe\Service\WorldCafeService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
@@ -35,7 +35,7 @@ class WorldCafeValidateStage implements ValidateStageInterface
     /** @param mixed[] $context */
     public function __invoke(object $object, string $resourceClass, Operation $operation, array $context): void
     {
-        if ($object instanceof WorldCafe && null === $object->getId()) {
+        if ($object instanceof WorldCoffe && null === $object->getId()) {
             $user = $this->security->getUser();
 
             if (null !== $user) {

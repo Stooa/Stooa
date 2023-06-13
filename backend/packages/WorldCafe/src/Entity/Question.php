@@ -39,8 +39,8 @@ class Question implements \Stringable
 
     #[Groups(['question:read'])]
     #[Assert\NotNull]
-    #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'questions')]
-    private ?WorldCafe $worldCafe = null;
+    #[ORM\ManyToOne(targetEntity: WorldCoffe::class, inversedBy: 'questions')]
+    private ?WorldCoffe $worldCafe = null;
 
     public function __toString(): string
     {
@@ -83,12 +83,12 @@ class Question implements \Stringable
         return $this;
     }
 
-    public function getWorldCafe(): ?WorldCafe
+    public function getWorldCafe(): ?WorldCoffe
     {
         return $this->worldCafe;
     }
 
-    public function setWorldCafe(?WorldCafe $worldCafe): self
+    public function setWorldCafe(?WorldCoffe $worldCafe): self
     {
         $this->worldCafe = $worldCafe;
 

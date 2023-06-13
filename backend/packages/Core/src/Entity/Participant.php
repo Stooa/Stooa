@@ -17,7 +17,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use App\Fishbowl\Entity\Feedback;
 use App\Fishbowl\Entity\Fishbowl;
-use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Entity\WorldCoffe;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
@@ -65,8 +65,8 @@ class Participant implements \Stringable
 
     #[Groups(['participant:read'])]
     #[Assert\NotNull]
-    #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'participants')]
-    private ?WorldCafe $worldCafe = null;
+    #[ORM\ManyToOne(targetEntity: WorldCoffe::class, inversedBy: 'participants')]
+    private ?WorldCoffe $worldCafe = null;
 
     /** @var Collection<int, Feedback> */
     #[ORM\OneToMany(mappedBy: 'participant', targetEntity: Feedback::class)]
@@ -117,12 +117,12 @@ class Participant implements \Stringable
         $this->fishbowl = $fishbowl;
     }
 
-    public function getWorldCafe(): ?WorldCafe
+    public function getWorldCafe(): ?WorldCoffe
     {
         return $this->worldCafe;
     }
 
-    public function setWorldCafe(?WorldCafe $worldCafe): void
+    public function setWorldCafe(?WorldCoffe $worldCafe): void
     {
         $this->worldCafe = $worldCafe;
     }

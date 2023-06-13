@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\WorldCafe\Service;
 
 use App\Core\Model\Event;
-use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Entity\WorldCoffe;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class WorldCafeService
@@ -24,7 +24,7 @@ class WorldCafeService
     ) {
     }
 
-    public function generateDefaultTitle(WorldCafe $worldCafe): Event
+    public function generateDefaultTitle(WorldCoffe $worldCafe): Event
     {
         $worldCafeName = $worldCafe->getName();
 
