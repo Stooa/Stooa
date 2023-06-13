@@ -12,7 +12,7 @@ import { faker } from '@faker-js/faker';
 
 export const makeGuest = (): Guest => {
   return {
-    '@id': faker.datatype.uuid(),
-    'name': faker.name.firstName()
+    '@id': faker.string.uuid(),
+    'name': faker.person.firstName()
   };
 };

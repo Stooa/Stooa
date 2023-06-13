@@ -8,12 +8,17 @@
  */
 
 import { User, UserRepository } from '@/types/user';
-import seatsRepository from '@/jitsi/Seats';
-import { dispatchEvent, removeItem } from '@/lib/helpers';
+import { useSeats } from '@/jitsi';
+import { dispatchEvent } from '@/lib/helpers';
 import { MODERATOR_LEFT, USER_KICKED } from '@/jitsi/Events';
+import { useJitsiStore } from '@/store';
 
-const userRepository = (): UserRepository => {
-  let users: User[] = [];
+export const useUser = (): UserRepository => {
+  const { leave } = useSeats();
+  const { userJoined, userLeft } = useJitsiStore(store => ({
+    userJoined: store.userJoined,
+    userLeft: store.userLeft
+  }));
 
   const clearUser = (): void => {
     localStorage.removeItem('user');
@@ -69,14 +74,14 @@ const userRepository = (): UserRepository => {
   const setUserParticipantId = (participantId: string): void => setUser({ participantId });
 
   const handleUserJoin = (id: string, user: User): void => {
-    users.push(user);
+    userJoined(user);
 
     console.log('[STOOA] Handle userRepository join', user);
   };
 
   const handleUserLeft = (id: string, user: User): void => {
-    users = removeItem(users, user);
-    seatsRepository.leave(id);
+    userLeft(user);
+    leave(id);
 
     if (user._role === 'moderator') {
       dispatchEvent(MODERATOR_LEFT);
@@ -125,5 +130,3 @@ const userRepository = (): UserRepository => {
     hasUserGaveFeedback
   };
 };
-
-export default userRepository();
