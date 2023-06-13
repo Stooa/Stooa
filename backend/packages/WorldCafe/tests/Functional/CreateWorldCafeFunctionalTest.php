@@ -47,6 +47,7 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
 
         $newWorldCafe = new WorldCafe();
         $newWorldCafe->setName('New World Café name');
+        $newWorldCafe->setDescription('Description');
 
         $response = $this->callCreateMutation($token, $newWorldCafe);
 
@@ -54,6 +55,9 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
         $this->assertNotEmpty($graphqlResponse['data']);
 
         $this->assertSame($newWorldCafe->getName(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['name']);
+        $this->assertSame($newWorldCafe->getDescription(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['description']);
+        $this->assertNotEmpty($graphqlResponse['data']['createWorldCafe']['worldCafe']['slug']);
+        $this->assertNotEmpty($graphqlResponse['data']['createWorldCafe']['worldCafe']['id']);
     }
 
     private function callCreateMutation(?string $token, WorldCafe $worldCafe): ResponseInterface
@@ -79,7 +83,7 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                 'variables' => [
                     'input' => [
                         'name' => $worldCafe->getName(),
-                        'description' => 'description',
+                        'description' => $worldCafe->getDescription(),
                         'locale' => 'en',
                         'startDateTime' => '2023-12-25T18:48:58.091Z',
                         'timezone' => 'Europe/Madrid',
@@ -90,9 +94,6 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                                 'description' => 'Question description',
                             ],
                         ],
-//                        'questions'  => [
-//                            ['id' => '/questions/93530986-bd80-4d99-82d9-11df9bc64daa']
-//                        ]
                     ],
                 ],
             ],

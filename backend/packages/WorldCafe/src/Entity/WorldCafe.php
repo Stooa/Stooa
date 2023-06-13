@@ -15,7 +15,6 @@ namespace App\WorldCafe\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GraphQl\Mutation;
-use ApiPlatform\Metadata\Post;
 use App\Core\Entity\Participant;
 use App\Core\Entity\Topic;
 use App\Core\Entity\User;
@@ -40,11 +39,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 #[ApiResource(
-    operations: [
-        new Post(security: 'is_granted(\'ROLE_USER\')'),
-    ],
-    //        normalizationContext: ['groups' => ['wc:read', 'event:read']],
-    //        denormalizationContext: ['groups' => ['wc:write', 'event:write']],
     graphQlOperations: [
         new Mutation(
             denormalizationContext: ['groups' => ['wc:create', 'event:write']],
@@ -203,7 +197,7 @@ class WorldCafe extends Event
     public function addParticipant(Participant $participant): self
     {
         if (!$this->participants->contains($participant)) {
-            $this->{$participant}[] = $participant;
+            $this->$participant[] = $participant;
             $participant->setWorldCafe($this);
         }
 
@@ -228,7 +222,7 @@ class WorldCafe extends Event
     public function addQuestion(Question $question): self
     {
         if (!$this->questions->contains($question)) {
-            $this->$question[] = $question;
+            $this->questions[] = $question;
             $question->setWorldCafe($this);
         }
 
