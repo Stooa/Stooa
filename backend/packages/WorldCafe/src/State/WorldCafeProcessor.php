@@ -17,6 +17,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Service\MailerService;
 use App\Fishbowl\Entity\Fishbowl;
+use App\WorldCafe\Entity\WorldCafe;
 
 final class WorldCafeProcessor implements ProcessorInterface
 {
@@ -36,11 +37,11 @@ final class WorldCafeProcessor implements ProcessorInterface
     {
         $result = $this->decorated->process($data, $operation, $uriVariables, $context);
 
-        if ($data instanceof Fishbowl && (
+        if ($data instanceof WorldCafe && (
             ($context['collection_operation_name'] ?? null) === 'post' ||
             ($context['graphql_operation_name'] ?? null) === 'create')
         ) {
-            $this->mailerService->sendFishbowlCreatedEmail($data);
+            $this->mailerService->sendWorldCafeCreatedEmail($data);
         }
 
         return $result;

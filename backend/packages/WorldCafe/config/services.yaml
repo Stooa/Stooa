@@ -18,3 +18,7 @@ services:
 
     App\WorldCafe\Stage\WorldCafeValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
+
+    App\WorldCafe\State\WorldCafeProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'

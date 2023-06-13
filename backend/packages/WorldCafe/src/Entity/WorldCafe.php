@@ -81,6 +81,11 @@ class WorldCafe extends Event
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'worldCafes')]
     private ?User $host = null;
 
+    /** @var Collection<int, Question> */
+    #[Groups(['wc:read'])]
+    #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Question::class, cascade: ['all'])]
+    private Collection $questions;
+
     /** @var Collection<int, Participant> */
     #[Groups(['wc:read'])]
     #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Participant::class, cascade: ['all'])]
@@ -210,6 +215,31 @@ class WorldCafe extends Event
     {
         if ($this->participants->contains($participant)) {
             $this->participants->removeElement($participant);
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<int, Question> */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->{$question}[] = $question;
+            $question->setWorldCafe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
         }
 
         return $this;

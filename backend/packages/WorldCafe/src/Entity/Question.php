@@ -37,6 +37,11 @@ class Question implements \Stringable
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
+    #[Groups(['question:read'])]
+    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'questions')]
+    private ?WorldCafe $worldCafe = null;
+
     public function __toString(): string
     {
         return $this->getName() ?? '';
@@ -74,6 +79,18 @@ class Question implements \Stringable
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getWorldCafe(): ?WorldCafe
+    {
+        return $this->worldCafe;
+    }
+
+    public function setWorldCafe(?WorldCafe $worldCafe): self
+    {
+        $this->worldCafe = $worldCafe;
 
         return $this;
     }
