@@ -7,44 +7,96 @@
  * file that was distributed with this source code.
  */
 
+import { useRef, useState } from 'react';
+
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
-import { useForm } from 'react-hook-form';
-import { StyledAddButton, StyledScrollWrapper, StyledWorldCafeForm } from './styles';
+import { SubmitHandler, set, useFieldArray, useForm } from 'react-hook-form';
+import { StyledAddButton, StyledScrollWrapper, StyledStepper, StyledWorldCafeForm } from './styles';
 import Select from '@/components/Common/Fields/updated/Select';
 import Switch from '@/components/Common/Fields/updated/Switch';
-import { useRef } from 'react';
+
+type Question = {
+  title: string;
+  description: string;
+};
+
+interface FormValues {
+  title: string;
+  description: string;
+  roundDuration: number;
+  addExtraTime: boolean;
+  questions: Question[];
+}
 
 const WorldCafeForm = () => {
+  const [step, setStep] = useState<'basics' | 'questions'>('basics');
+
   const {
     register,
+    handleSubmit,
+    control,
     formState: { errors, dirtyFields, isDirty }
-  } = useForm();
+  } = useForm<FormValues>({
+    defaultValues: {
+      title: '',
+      description: '',
+      roundDuration: 10,
+      addExtraTime: true,
+      questions: [
+        { title: 'Pregunta 1', description: '' },
+        { title: 'Pregunta 2', description: '' }
+      ]
+    }
+  });
+  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+    control,
+    name: 'questions'
+  });
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const handleAddNewTopic = () => {};
+  const handleAddNewTopic = () => {
+    append({ title: `Pregunta ${fields.length + 1}`, description: '' });
+  };
 
   const handleScrollToSlide = event => {
     event.preventDefault();
+    setStep('questions');
     wrapperRef.current && wrapperRef.current?.scrollTo({ left: 600, behavior: 'smooth' });
   };
 
+  const returnToBeginning = event => {
+    event.preventDefault();
+    setStep('basics');
+    wrapperRef.current && wrapperRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
+  };
+
+  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
+
   return (
-    <StyledWorldCafeForm>
+    <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
       <h2>World cafe form</h2>
+
+      <StyledStepper>
+        <li className={step === 'basics' ? 'medium ' : ''}>Básicos</li>
+
+        <li className={step === 'questions' ? 'medium ' : ''}>Preguntas</li>
+      </StyledStepper>
+
+      <button onClick={returnToBeginning}>return to beginning ---- </button>
+      {'  '}
       <button onClick={handleScrollToSlide}>scroll to</button>
+
       <StyledScrollWrapper ref={wrapperRef}>
         <div id="step-general">
           <NewInput label="Title" />
           <NewTextarea label="Description" />
 
-          <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
-
           <h3>Round duration</h3>
 
-          <Select label="Cada ronda dura">
+          <Select icon="clock" label="Cada ronda dura">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
@@ -61,11 +113,17 @@ const WorldCafeForm = () => {
             Siguiente
           </Button>
         </div>
+
+        {/* QUESTIONS */}
         <div id="step-questions">
           <h3>Questions</h3>
-          <NewInput label="Question 1" />
-          <NewInput label="Question 2" />
-          <NewInput label="Question 3" />
+          {fields.map((field, index) => (
+            <div key={field.id}>
+              <NewInput {...register(`questions.${index}.title`)} />
+              <NewTextarea {...register(`questions.${index}.description`)} />
+            </div>
+          ))}
+          <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
         </div>
       </StyledScrollWrapper>
     </StyledWorldCafeForm>

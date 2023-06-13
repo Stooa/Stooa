@@ -243,6 +243,13 @@ const InputStyled = styled.div`
     color: ${COLOR_NEUTRO_600};
   }
 
+  &.no-label {
+    input,
+    textarea {
+      padding: ${space(2)} ${space(2)} ${space(2)} ${space(2)};
+    }
+  }
+
   input:focus,
   input.filled,
   textarea:focus,

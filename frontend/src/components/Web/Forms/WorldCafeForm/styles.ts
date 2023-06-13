@@ -13,10 +13,6 @@ import styled from 'styled-components';
 const StyledWorldCafeForm = styled.form`
   width: 100%;
   max-width: 600px;
-
-  & > div > * + * {
-    margin-top: 1rem;
-  }
 `;
 
 const StyledAddButton = styled.button`
@@ -32,6 +28,10 @@ const StyledScrollWrapper = styled.div`
   overflow-x: hidden;
   width: 100%;
 
+  & > div > * + * {
+    margin-top: 1rem;
+  }
+
   & > #step-general,
   & > #step-questions {
     width: 100%;
@@ -39,4 +39,12 @@ const StyledScrollWrapper = styled.div`
   }
 `;
 
-export { StyledWorldCafeForm, StyledAddButton, StyledScrollWrapper };
+const StyledStepper = styled.ul`
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+export { StyledWorldCafeForm, StyledAddButton, StyledScrollWrapper, StyledStepper };
