@@ -43,9 +43,8 @@ use Webmozart\Assert\Assert as MAssert;
     operations: [
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
-    //    normalizationContext: ['groups' => ['wc:read', 'event:read']],
-    //    denormalizationContext: ['groups' => ['wc:write', 'event:write']],
-    paginationItemsPerPage: 25,
+    //        normalizationContext: ['groups' => ['wc:read', 'event:read']],
+    //        denormalizationContext: ['groups' => ['wc:write', 'event:write']],
     graphQlOperations: [
         new Mutation(
             denormalizationContext: ['groups' => ['wc:create', 'event:write']],
@@ -229,7 +228,7 @@ class WorldCafe extends Event
     public function addQuestion(Question $question): self
     {
         if (!$this->questions->contains($question)) {
-            $this->{$question}[] = $question;
+            $this->$question[] = $question;
             $question->setWorldCafe($this);
         }
 
