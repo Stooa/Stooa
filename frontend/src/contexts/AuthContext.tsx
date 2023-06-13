@@ -38,7 +38,7 @@ import {
 } from '@/user/auth';
 
 import { Auth, StatusPayload } from '@/types/contexts/auth-context';
-import userRepository from '@/jitsi/User';
+import { useUser } from '@/jitsi';
 import api from '@/lib/api';
 import { AuthToken } from '@/user/auth/authToken';
 import Layout from '@/layouts/Clean';
@@ -79,6 +79,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
+  const { setUserNickname } = useUser();
 
   const login = async (email: string, password: string) => {
     setLoading(true);
@@ -96,7 +97,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
         if (user) {
           setUser(user);
-          userRepository.setUserNickname(user.name);
+          setUserNickname(user.name);
           dispatch({
             type: 'JOIN_USER',
             isGuest: false
@@ -137,7 +138,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang }).then(() => {
       console.log('Redirected');
     });
-    userRepository.setUserNickname('');
+    setUserNickname('');
     setUser(null);
   };
 

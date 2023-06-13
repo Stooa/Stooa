@@ -30,7 +30,7 @@ import Checkbox from '@/components/Common/Fields/Checkbox';
 import RedirectLink from '@/components/Web/RedirectLink';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
-import userRepository from '@/jitsi/User';
+import { useUser } from '@/jitsi';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 import { useRouter } from 'next/router';
 
@@ -200,6 +200,7 @@ const Register = () => {
   const { login } = useAuth();
   const { t, lang } = useTranslation('form');
   const router = useRouter();
+  const { clearUser } = useUser();
   const { prefishbowl } = router.query;
 
   const requiredError = t('validation.required');
@@ -222,7 +223,7 @@ const Register = () => {
         });
       }
 
-      userRepository.clearUser();
+      clearUser();
 
       pushPageViewDataLayer({ url: '/user-registered', title: 'User registered' });
       await login(values.email, values.password);

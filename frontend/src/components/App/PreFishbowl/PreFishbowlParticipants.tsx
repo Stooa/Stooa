@@ -13,7 +13,7 @@ import { Participant } from '@/types/participant';
 import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
-import { ping } from '@/user/auth';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 import { useRouter } from 'next/router';
 import {
   StyledParticipantListWrapper,
@@ -35,6 +35,7 @@ const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 
 const PreFishbowlParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
+  const { ping } = useUserAuth();
   const { t, lang } = useTranslation('fishbowl');
   const router = useRouter();
   const { fid } = router.query;

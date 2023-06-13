@@ -7,13 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
-import conferenceRepository from '@/jitsi/Conference';
-import { SCREEN_SHARE_STOP } from './Events';
-import { dispatchEvent } from '../helpers';
+import { SCREEN_SHARE_STOP } from '@/jitsi/Events';
+import { dispatchEvent } from '@/lib/helpers';
+import { useJitsiStore } from '@/store';
 
-const sharedTrackRepository = () => {
-  let shareTrack: JitsiLocalTrack | null;
+export const useSharedTrack = () => {
+  const { shareTrack, conference, clearShareTrack, assignShareTrack } = useJitsiStore();
+
+  const stopScreenShareEvent = () => {
+    conference && conference.setLocalParticipantProperty('screenShare', 'false');
+  };
 
   const getShareHtmlTrack = (): HTMLElement | null => {
     return document.querySelector('#share > .share-video-wrapper');
@@ -41,7 +44,7 @@ const sharedTrackRepository = () => {
   };
 
   const shareTrackAdded = track => {
-    shareTrack = track;
+    assignShareTrack(track);
 
     _createShareTrack(shareTrack);
   };
@@ -56,16 +59,20 @@ const sharedTrackRepository = () => {
     if (!track || !shareTrack) return;
 
     const trackHtml = getShareHtmlTrack();
-    shareTrack = null;
+
+    clearShareTrack();
 
     if (trackHtml) {
       track.detach(trackHtml);
       const video = trackHtml.querySelector('video') as HTMLElement;
+
       if (video) trackHtml.removeChild(video);
+
       track.dispose();
 
       dispatchEvent(SCREEN_SHARE_STOP, { location: location });
-      conferenceRepository.stopScreenShareEvent();
+
+      stopScreenShareEvent();
     }
 
     console.log('[STOOA] Html screen share track removed');
@@ -77,5 +84,3 @@ const sharedTrackRepository = () => {
     exitFullScreen
   };
 };
-
-export default sharedTrackRepository();

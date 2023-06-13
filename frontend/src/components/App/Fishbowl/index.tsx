@@ -39,11 +39,11 @@ import ModalStopRecording from '@/components/App/ModalStopRecording';
 import ModalShareLink from '@/components/App/ModalShareLink';
 import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation';
-import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { useConference } from '@/jitsi';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -78,6 +78,7 @@ const Fishbowl: FC = () => {
     showFeedbackForm,
     setShowFeedbackForm
   } = useModals();
+  const { startRecordingEvent } = useConference();
 
   const { width } = useWindowSize();
   const feedbackFormRef = useRef<HTMLDivElement>(null);
@@ -148,7 +149,7 @@ const Fishbowl: FC = () => {
       position: 'bottom-center',
       autoClose: 5000
     });
-    Conference.startRecordingEvent();
+    startRecordingEvent();
     setShowStartRecording(false);
   };
 

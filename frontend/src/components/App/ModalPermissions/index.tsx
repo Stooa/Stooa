@@ -14,9 +14,9 @@ import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
-import LocalTracks from '@/jitsi/LocalTracks';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
+import { useLocalTracks } from '@/jitsi';
 
 interface Props {
   closeModal: () => void;
@@ -24,6 +24,7 @@ interface Props {
 
 const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
   const { t } = useTranslation('fishbowl');
+  const { createLocalTracks } = useLocalTracks();
 
   const fireErrorToast = () => {
     toast(<Trans i18nKey="fishbowl:permissionsModalErrorToast" components={{ br: <br /> }} />, {
@@ -36,7 +37,7 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
   };
 
   const handleRequestPermissions = () => {
-    LocalTracks.createLocalTracks()
+    createLocalTracks()
       .then(data => {
         let audioGranted = false;
         data.forEach(track => {

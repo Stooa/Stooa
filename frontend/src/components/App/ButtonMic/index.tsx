@@ -11,10 +11,10 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/jitsi/User';
 import MicMutedIcon from '@/ui/svg/mic-muted.svg';
 import MicIcon from '@/ui/svg/mic.svg';
 import Button from '@/components/App/ButtonMic/styles';
+import { useUser } from '@/jitsi';
 
 interface Props {
   joined: boolean;
@@ -24,8 +24,9 @@ interface Props {
 }
 
 const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) => {
+  const { getUserAudioMuted, setUserAudioMuted } = useUser();
   const [active, setActive] = useState(true);
-  const [muted, setMuted] = useState(userRepository.getUserAudioMuted());
+  const [muted, setMuted] = useState(getUserAudioMuted());
   const { t } = useTranslation('fishbowl');
 
   const handleOnClick = async () => {
@@ -38,7 +39,7 @@ const ButtonMic: React.FC<Props> = ({ handleMic, joined, disabled, unlabeled }) 
       label: window.location.href
     });
 
-    userRepository.setUserAudioMuted(!currentMutedState);
+    setUserAudioMuted(!currentMutedState);
     setMuted(!currentMutedState);
     typeof handleMic === 'function' && handleMic(!currentMutedState);
     setActive(true);
