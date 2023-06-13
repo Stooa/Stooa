@@ -22,3 +22,5 @@ services:
     App\WorldCafe\State\WorldCafeProcessor:
         bind:
             $decorated: '@api_platform.doctrine.orm.state.persist_processor'
+
+#    App\WorldCafe\Operation\WorldCafeSegmentNameGenerator': ~
