@@ -43,12 +43,12 @@ use Webmozart\Assert\Assert as MAssert;
     operations: [
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
-    normalizationContext: ['groups' => ['wc:read', 'event:read']],
-    denormalizationContext: ['groups' => ['wc:write', 'event:write']],
+    //    normalizationContext: ['groups' => ['wc:read', 'event:read']],
+    //    denormalizationContext: ['groups' => ['wc:write', 'event:write']],
     paginationItemsPerPage: 25,
     graphQlOperations: [
         new Mutation(
-            //            denormalizationContext: ['groups' => ['wc:write']],
+            denormalizationContext: ['groups' => ['wc:create', 'event:write']],
             security: 'is_granted(\'ROLE_USER\')',
             validationContext: ['groups' => ['Default', 'wc:create']],
             name: 'create'
@@ -61,40 +61,38 @@ use Webmozart\Assert\Assert as MAssert;
 #[FutureWorldCafe(groups: ['wc:create', 'wc:update'])]
 class WorldCafe extends Event
 {
-    #[Groups(['wc:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([5, 10, 15, 20, 25])]
     #[ORM\Column(type: 'integer', options: ['default' => 10])]
     protected int $roundMinutes = 10;
 
-    #[Groups(['wc:read', 'wc:write'])]
+    #[Groups(['wc:create'])]
     #[ORM\Column(type: 'boolean')]
     protected bool $hasExtraRoundTime = false;
-    #[Groups(['wc:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
 
-    #[Groups(['wc:read'])]
+    #[Groups(['wc:create'])]
     #[Assert\NotNull]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'worldCafes')]
     private ?User $host = null;
 
     /** @var Collection<int, Question> */
-    #[Groups(['wc:read, wc:write'])]
+    #[Groups(['wc:create'])]
     #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Question::class, cascade: ['all'])]
     private Collection $questions;
 
     /** @var Collection<int, Participant> */
-    #[Groups(['wc:read'])]
+    #[Groups(['wc:create'])]
     #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Participant::class, cascade: ['all'])]
     private Collection $participants;
 
     /** @var Collection<int, Feedback> */
+    #[Groups(['wc:create'])]
     #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Feedback::class)]
-    #[Groups(['wc:read'])]
     private Collection $feedbacks;
 
     /** @var Collection<int, Topic> */
@@ -109,6 +107,7 @@ class WorldCafe extends Event
         $this->participants = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
         $this->topics = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     public function __toString(): string
