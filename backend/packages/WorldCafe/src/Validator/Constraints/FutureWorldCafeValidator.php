@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Validator\Constraints;
 
-use App\WorldCafe\Entity\WorldCoffe;
+use App\WorldCafe\Entity\WorldCafe;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -31,8 +31,8 @@ class FutureWorldCafeValidator extends ConstraintValidator
             return;
         }
 
-        if (!$value instanceof WorldCoffe) {
-            throw new UnexpectedValueException($value, WorldCoffe::class);
+        if (!$value instanceof WorldCafe) {
+            throw new UnexpectedValueException($value, WorldCafe::class);
         }
 
         if ($this->isFromThePast($value)) {
@@ -40,7 +40,7 @@ class FutureWorldCafeValidator extends ConstraintValidator
         }
     }
 
-    private function isFromThePast(WorldCoffe $worldCafe): bool
+    private function isFromThePast(WorldCafe $worldCafe): bool
     {
         return false;
         //        return $worldCafe->getEndDateTimeTz() < new \DateTimeImmutable();

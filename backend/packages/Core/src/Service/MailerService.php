@@ -17,7 +17,7 @@ use App\Core\Entity\User;
 use App\Core\Model\ResetPassword;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\PrivateFishbowlService;
-use App\WorldCafe\Entity\WorldCoffe;
+use App\WorldCafe\Entity\WorldCafe;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -119,7 +119,7 @@ class MailerService
         }
     }
 
-    public function sendWorldCafeCreatedEmail(WorldCoffe $worldCafe): void
+    public function sendWorldCafeCreatedEmail(WorldCafe $worldCafe): void
     {
         $locale = $worldCafe->getLocale();
         $user = $worldCafe->getHost();

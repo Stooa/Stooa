@@ -13,12 +13,19 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ApiResource(
+    operations: [
+        new Post(),
+    ],
+)]
 #[ORM\Entity]
 class Question implements \Stringable
 {
@@ -30,17 +37,18 @@ class Question implements \Stringable
 
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
+    #[Groups(['question:read', 'question:write', 'wc:write'])]
     #[ORM\Column(type: 'string')]
     private ?string $name = null;
 
-    #[Groups(['question:read', 'question:write', 'wc:read'])]
+    #[Groups(['question:read', 'question:write', 'wc:write'])]
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
-    #[Groups(['question:read'])]
-    #[Assert\NotNull]
-    #[ORM\ManyToOne(targetEntity: WorldCoffe::class, inversedBy: 'questions')]
-    private ?WorldCoffe $worldCafe = null;
+    #[Groups(['question:read', 'question:write'])]
+    //    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'questions')]
+    private ?WorldCafe $worldCafe = null;
 
     public function __toString(): string
     {
@@ -83,12 +91,12 @@ class Question implements \Stringable
         return $this;
     }
 
-    public function getWorldCafe(): ?WorldCoffe
+    public function getWorldCafe(): ?WorldCafe
     {
         return $this->worldCafe;
     }
 
-    public function setWorldCafe(?WorldCoffe $worldCafe): self
+    public function setWorldCafe(?WorldCafe $worldCafe): self
     {
         $this->worldCafe = $worldCafe;
 

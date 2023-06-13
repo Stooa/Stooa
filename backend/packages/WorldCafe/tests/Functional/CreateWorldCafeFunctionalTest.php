@@ -16,7 +16,7 @@ namespace App\WorldCafe\Tests\Functional;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
-use App\WorldCafe\Entity\WorldCoffe;
+use App\WorldCafe\Entity\WorldCafe;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
@@ -45,18 +45,18 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
     {
         $token = $this->logIn($this->host);
 
-        $response = $this->callCreateMutation($token, new WorldCoffe());
+        $response = $this->callCreateMutation($token, new WorldCafe());
 
         $graphqlResponse = $response->toArray();
         var_dump($graphqlResponse);
     }
 
-    private function callCreateMutation(?string $token, WorldCoffe $worldCafe): ResponseInterface
+    private function callCreateMutation(?string $token, WorldCafe $worldCafe): ResponseInterface
     {
         $createMutation = <<<GQL
-            mutation CreateWorldCafe(\$input: createWorldCoffeInput!) {
-                createWorldCoffe(input: \$input) {
-                     worldCoffe {
+            mutation CreateWorldCafe(\$input: createWorldCafeInput!) {
+                createWorldCafe(input: \$input) {
+                     worldCafe {
                         id
                         name
                         slug
@@ -78,7 +78,10 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                         'locale' => 'en',
                         'startDateTime' => '2023-12-25T18:48:58.091Z',
                         'timezone' => 'Europe/Madrid',
-                        'hasExtraRoundTime' => true
+                        'hasExtraRoundTime' => true,
+//                        'questions'  => [
+//                            ['id' => '/questions/93530986-bd80-4d99-82d9-11df9bc64daa']
+//                        ]
                     ],
                 ],
             ],

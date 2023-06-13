@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Repository;
 
-use App\WorldCafe\Entity\WorldCoffe;
+use App\WorldCafe\Entity\WorldCafe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
-/** @extends ServiceEntityRepository<WorldCoffe> */
+/** @extends ServiceEntityRepository<WorldCafe> */
 class WorldCafeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, WorldCoffe::class);
+        parent::__construct($registry, WorldCafe::class);
     }
 
-    public function findBySlug(string $slug): ?WorldCoffe
+    public function findBySlug(string $slug): ?WorldCafe
     {
         $query = $this->createQueryBuilder('worldcafe')
             ->where('worldcafe.slug = :slug')
@@ -36,7 +36,7 @@ class WorldCafeRepository extends ServiceEntityRepository
         return $query->getOneOrNullResult();
     }
 
-    public function persist(WorldCoffe $worldCafe): void
+    public function persist(WorldCafe $worldCafe): void
     {
         $this->_em->persist($worldCafe);
         $this->_em->flush();
