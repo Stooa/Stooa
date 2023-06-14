@@ -106,7 +106,7 @@ class FishbowlAdmin extends AbstractAdmin
             ->add('description')
             ->add('host')
             ->add('currentStatus', null, [
-                'template' => 'sonata/fishbowl_status.html.twig',
+                'template' => 'sonata/event_status.html.twig',
             ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction')

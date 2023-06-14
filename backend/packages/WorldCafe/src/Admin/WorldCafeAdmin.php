@@ -105,7 +105,7 @@ class WorldCafeAdmin extends AbstractAdmin
             ->add('description')
             ->add('host')
             ->add('currentStatus', null, [
-                'template' => 'sonata/fishbowl_status.html.twig',
+                'template' => 'sonata/event_status.html.twig',
             ])
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('timezone')
@@ -142,18 +142,6 @@ class WorldCafeAdmin extends AbstractAdmin
                     'choices' => WorldCafe::$statusChoices,
                     'disabled' => true,
                     'required' => true,
-                ])
-                ->add('introducedAt', DateTimePickerType::class, [
-                    'disabled' => true,
-                    'dp_use_seconds' => false,
-                    'dp_minute_stepping' => 15,
-                    'format' => 'dd/MM/yyyy HH:mm',
-                ])
-                ->add('runnedAt', DateTimePickerType::class, [
-                    'disabled' => true,
-                    'dp_use_seconds' => false,
-                    'dp_minute_stepping' => 15,
-                    'format' => 'dd/MM/yyyy HH:mm',
                 ])
                 ->add('finishedAt', DateTimePickerType::class, [
                     'disabled' => true,
