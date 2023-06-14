@@ -16,6 +16,7 @@ framework:
                 property: 'currentStatus'
             supports:
                 - App\Fishbowl\Entity\Fishbowl
+                - App\WorldCafe\Entity\WorldCafe
             initial_marking: not_started
             places:
                 - not_started

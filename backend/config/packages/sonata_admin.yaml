@@ -30,6 +30,7 @@ sonata_admin:
                 items:
                     - App\Core\Admin\UserAdmin
                     - App\Fishbowl\Admin\FishbowlAdmin
+                    - App\WorldCafe\Admin\WorldCafeAdmin
                     - App\Core\Admin\ResetPasswordRequestAdmin
                     - App\Core\Admin\ParticipantAdmin
                     - App\Core\Admin\TopicAdmin

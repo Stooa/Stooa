@@ -23,4 +23,10 @@ services:
         bind:
             $decorated: '@api_platform.doctrine.orm.state.persist_processor'
 
-#    App\WorldCafe\Operation\WorldCafeSegmentNameGenerator': ~
+    #Admin
+    App\WorldCafe\Admin\WorldCafeAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\WorldCafe\Entity\WorldCafe, manager_type: orm, label: World Cafés }
+        calls:
+            - [ setWorldCafeService, [ '@App\WorldCafe\Service\WorldCafeService' ] ]
+            - [ setSlugService, [ '@App\Core\Service\SlugService' ] ]
