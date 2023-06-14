@@ -43,19 +43,19 @@ class WorldCafeSubscriber implements EventSubscriberInterface
         $object = $event->getControllerResult();
 
         if ($object instanceof WorldCafe && null === $object->getId()) {
-                        $user = $this->security->getUser();
+            $user = $this->security->getUser();
 
-                        if (null !== $user) {
-                            Assert::isInstanceOf($user, User::class);
+            if (null !== $user) {
+                Assert::isInstanceOf($user, User::class);
 
-                            $object->setHost($user);
-                        }
+                $object->setHost($user);
+            }
 
-                        $object->setSlug($this->slugService->generateRandomSlug());
+            $object->setSlug($this->slugService->generateRandomSlug());
 
-                        $object = $this->service->generateDefaultTitle($object);
+            $object = $this->service->generateDefaultTitle($object);
 
-                        $event->setControllerResult($object);
+            $event->setControllerResult($object);
         }
     }
 }
