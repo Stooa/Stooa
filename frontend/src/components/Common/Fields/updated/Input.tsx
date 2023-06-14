@@ -20,12 +20,16 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   isValid?: boolean;
   validationError?: string;
   isDirty?: boolean;
+  variant?: 'default' | 'large-text';
 };
 
 const NewInput = forwardRef<HTMLInputElement, Props>(
-  ({ label, hasError, isValid, isDirty, icon, ...props }, ref) => {
+  ({ label, hasError, isValid, isDirty, icon, variant = 'default', ...props }, ref) => {
     return (
-      <InputStyled className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''}`}>
+      <InputStyled
+        variant={variant}
+        className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''}`}
+      >
         {icon && <Icon variant={icon} className="icon" />}
         <input
           ref={ref}

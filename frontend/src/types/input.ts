@@ -12,7 +12,7 @@ import { FieldAttributes } from 'formik';
 
 export type Input = {
   label: string;
-  variant?: 'default' | 'sm';
+  variant?: 'default' | 'small';
   help?: string;
   icon?: IconVariant;
   as?: 'input' | 'select' | 'textarea';

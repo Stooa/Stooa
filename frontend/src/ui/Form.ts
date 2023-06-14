@@ -17,7 +17,6 @@ import {
   BREAKPOINTS,
   COLOR_GREEN_500,
   COLOR_GREEN_600,
-  COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
@@ -26,7 +25,7 @@ import {
   COLOR_RED_500,
   FONT_BASE_SIZE
 } from '@/ui/settings';
-import { BODY_SM, BODY_XS } from '@/ui/Texts';
+import { BODY_MD, BODY_SM, BODY_XS, mediumWeight } from '@/ui/Texts';
 
 interface Props {
   $isFull?: boolean;
@@ -98,12 +97,15 @@ const FormikForm = styled(Form)`
   `}
 `;
 
-const InputStyled = styled.div`
+const InputStyled = styled.div<{
+  variant?: 'default' | 'large-text';
+  placeholderStyle: 'default' | 'large-text';
+}>`
   position: relative;
   width: 100%;
 
   ${media.min('tablet')`
-    &.sm {
+    &.small {
       width: calc(50% - ${space(0.5)});
 
       input,
@@ -202,9 +204,9 @@ const InputStyled = styled.div`
     padding: ${space(2.75)} ${space(6)} ${space(0.4)} ${space(2)};
     width: 100%;
 
-    ${media.min('tablet')`
-      ${BODY_SM}
-    `}
+    ${props => (props.variant === 'large-text' ? BODY_MD : BODY_SM)};
+
+    ${props => (props.variant === 'large-text' ? mediumWeight : '')};
 
     &:focus {
       outline: none;
@@ -224,8 +226,21 @@ const InputStyled = styled.div`
   textarea {
     height: 100%;
     overflow-y: auto;
-    padding-top: ${space(3.75)};
     resize: none;
+
+    &:not(.no-label) {
+      padding-top: ${space(3.75)};
+    }
+
+    &::placeholder {
+      color: currentColor;
+      ${props => (props.placeholderStyle === 'large-text' ? BODY_MD : '')};
+      ${props => (props.placeholderStyle === 'large-text' ? mediumWeight : '')};
+    }
+
+    &:focus::placeholder {
+      color: ${COLOR_NEUTRO_500};
+    }
   }
 
   label {
@@ -243,11 +258,9 @@ const InputStyled = styled.div`
     color: ${COLOR_NEUTRO_600};
   }
 
-  &.no-label {
-    input,
-    textarea {
-      padding: ${space(2)} ${space(2)} ${space(2)} ${space(2)};
-    }
+  & input.no-label,
+  & textarea.no-label {
+    padding: ${space(2)} ${space(2)} ${space(2)} ${space(2)};
   }
 
   input:focus,
@@ -366,9 +379,9 @@ const TextDivider = styled.div`
   }
 `;
 
-const SwitchStyled = styled.div`
+const SwitchStyled = styled.div<{ full?: boolean }>`
   position: relative;
-  width: 100%;
+  width: ${({ full }) => (full ? '100%' : 'auto')};
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -381,12 +394,14 @@ const SwitchStyled = styled.div`
     visibility: hidden;
   }
 
-  .switch-checkbox[value='true'] + label .switch-button {
+  .switch-checkbox[value='true'] + label .switch-button,
+  .switch-checkbox:checked + label .switch-button {
     left: calc(100% - 3px);
     transform: translateX(-100%);
   }
 
-  .switch-checkbox[value='true'] + label {
+  .switch-checkbox[value='true'] + label,
+  .switch-checkbox:checked + label {
     background-color: ${COLOR_GREEN_500};
   }
 
@@ -421,8 +436,8 @@ const SwitchLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   width: 42px;
+  min-width: 2.2rem;
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;
@@ -441,45 +456,8 @@ const SwitchLabel = styled.label`
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
   }
 
-  &:hover .switch-button {
-    width: 20px;
-  }
-`;
-
-const StyledIntroductionTooltip = styled.div`
-  --leftPosition: 0px;
-
-  color: ${COLOR_NEUTRO_100};
-  background-color: ${COLOR_NEUTRO_700};
-  height: auto;
-  padding: ${space(1)} ${space(2)};
-  border-radius: ${rems(4)};
-  box-shadow: var(--shadow-elevation-medium);
-
-  position: absolute;
-  z-index: 10;
-  text-align: center;
-
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(100% + ${space()});
-
-  & .arrow {
-    display: none;
-    ${media.min('tablet')`
-      display: block;
-    `}
-    position: absolute;
-    bottom: -6px;
-    left: var(--leftPosition);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #e8e8e8;
-    clear: both;
-    border-color: ${COLOR_NEUTRO_700} transparent transparent;
+  &:not(.disabled) {
+    cursor: pointer;
   }
 `;
 
@@ -490,7 +468,6 @@ export {
   InputStyled,
   TextDivider,
   SwitchStyled,
-  SwitchLabel,
-  StyledIntroductionTooltip
+  SwitchLabel
 };
 export default FormikForm;

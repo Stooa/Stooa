@@ -13,13 +13,14 @@ import { StyledTitleWithDivider } from './styles';
 interface Props {
   children: string | string[] | JSX.Element;
   headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  regularWeight?: boolean;
   id?: string;
 }
 
 const TitleWithDivider = forwardRef<HTMLDivElement, Props>(
-  ({ children, headingLevel, id }, ref) => {
+  ({ children, headingLevel, id, regularWeight = false }, ref) => {
     return (
-      <StyledTitleWithDivider ref={ref} as={headingLevel} id={id}>
+      <StyledTitleWithDivider regularWeight={regularWeight} ref={ref} as={headingLevel} id={id}>
         {children}
         <span className="divider" />
       </StyledTitleWithDivider>

@@ -22,14 +22,24 @@ type Props = Omit<JSX.IntrinsicElements['select'], 'as' | 'type' | 'ref'> & {
   validationError?: string;
   isDirty?: boolean;
   help?: string;
+  variant?: 'default' | 'small';
 };
 
 const Select = forwardRef<HTMLInputElement, Props>(
-  ({ label, hasError, isValid, isDirty, icon, variant, help, ...props }, ref) => {
+  (
+    { label, hasError, isValid = true, isDirty, icon, help, variant = 'default', ...props },
+    ref
+  ) => {
     return (
-      <InputStyled className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}>
+      <InputStyled
+        ref={ref}
+        className={`${icon ? 'withicon' : ''} ${variant !== 'default' ? variant : ''}`}
+      >
         {icon && <Icon variant={icon} className="icon" />}
-        <select {...props} className={`${isDirty ? 'filled' : ''} ${!hasError ? 'invalid' : ''}`} />
+        <select
+          {...props}
+          className={`${isDirty ? 'filled' : ''} ${hasError || !isValid ? 'invalid' : ''}`}
+        />
         <label htmlFor={props.id || props.name}>{label}</label>
         <Icon variant="chevron-down" className="dropdown-icon" />
         {hasError && <ValidationError>{hasError.message}</ValidationError>}

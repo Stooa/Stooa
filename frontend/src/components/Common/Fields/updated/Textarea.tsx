@@ -14,6 +14,7 @@ import Icon from '../Icon';
 import { FieldError } from 'react-hook-form';
 
 type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
+  className?: string;
   label?: string;
   legend?: string | React.ReactNode;
   hasError?: FieldError;
@@ -24,6 +25,9 @@ type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
   isDirty?: boolean;
   counter?: number;
   lengthState?: '' | 'warning' | 'error';
+  variant?: 'default' | 'large-text';
+  placeholderStyle?: 'default' | 'large-text';
+  placeholder?: string;
 };
 
 const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
@@ -38,6 +42,10 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
       isDirty,
       lengthState,
       counter,
+      variant = 'default',
+      placeholderStyle = 'default',
+      placeholder = '',
+      className = '',
       ...props
     },
     ref
@@ -45,10 +53,13 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
     const showCounter = counter !== undefined && counter > 0;
 
     return (
-      <InputStyled className="textarea">
+      <InputStyled placeholderStyle={placeholderStyle} variant={variant} className="textarea">
         <textarea
+          placeholder={placeholder}
           ref={ref}
-          className={`textarea ${isDirty ? 'filled' : ''} ${hasError ? 'invalid' : ''}`}
+          className={`textarea ${isDirty ? 'filled' : ''} ${hasError ? 'invalid' : ''} ${
+            !label ? 'no-label' : ''
+          } ${className}`}
           aria-invalid={hasError ? 'true' : 'false'}
           {...props}
         ></textarea>
@@ -57,7 +68,7 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
             <Icon variant="checkmark" />
           </ValidationIcon>
         )}
-        <label htmlFor={props.id || props.name}>{label}</label>
+        {label && <label htmlFor={props.id || props.name}>{label}</label>}
         {isInvalid && (
           <>
             <ValidationIcon>

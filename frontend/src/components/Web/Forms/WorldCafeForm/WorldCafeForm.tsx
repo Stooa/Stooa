@@ -7,15 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
-import { SubmitHandler, set, useFieldArray, useForm } from 'react-hook-form';
-import { StyledAddButton, StyledScrollWrapper, StyledStepper, StyledWorldCafeForm } from './styles';
+import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { StyledAddButton, StyledDeleteButton, StyledStepper, StyledWorldCafeForm } from './styles';
 import Select from '@/components/Common/Fields/updated/Select';
 import Switch from '@/components/Common/Fields/updated/Switch';
+import TitleWithDivider from '@/components/Common/TitleWithDivider/TitleWithDivider';
+import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneSelector';
+import DatePicker from '@/components/Common/Fields/updated/DatePicker';
 
 type Question = {
   title: string;
@@ -25,6 +28,8 @@ type Question = {
 interface FormValues {
   title: string;
   description: string;
+  timezone: string;
+  date: Date;
   roundDuration: number;
   addExtraTime: boolean;
   questions: Question[];
@@ -37,48 +42,57 @@ const WorldCafeForm = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors, dirtyFields, isDirty }
+    formState: { errors, dirtyFields }
   } = useForm<FormValues>({
     defaultValues: {
       title: '',
       description: '',
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      date: new Date(),
       roundDuration: 10,
       addExtraTime: true,
       questions: [
-        { title: 'Pregunta 1', description: '' },
-        { title: 'Pregunta 2', description: '' }
+        { title: '', description: '' },
+        { title: '', description: '' }
       ]
     }
   });
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'questions'
   });
-
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleAddNewTopic = () => {
     append({ title: `Pregunta ${fields.length + 1}`, description: '' });
   };
 
-  const handleScrollToSlide = event => {
+  const handleDeleteTopic = (index: number) => {
+    remove(index);
+  };
+
+  const handleNextStep = event => {
     event.preventDefault();
     setStep('questions');
-    wrapperRef.current && wrapperRef.current?.scrollTo({ left: 600, behavior: 'smooth' });
   };
 
   const returnToBeginning = event => {
     event.preventDefault();
     setStep('basics');
-    wrapperRef.current && wrapperRef.current?.scrollTo({ left: 0, behavior: 'smooth' });
+  };
+
+  const handleShowDescription = event => {
+    const elementClicked = event.target;
+    const description =
+      elementClicked.parentElement.parentElement.querySelector('textarea.description');
+
+    console.log(description);
+    description.classList.add('show');
   };
 
   const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
 
   return (
     <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
-      <h2>World cafe form</h2>
-
       <StyledStepper>
         <li className={step === 'basics' ? 'medium ' : ''}>Básicos</li>
 
@@ -87,45 +101,103 @@ const WorldCafeForm = () => {
 
       <button onClick={returnToBeginning}>return to beginning ---- </button>
       {'  '}
-      <button onClick={handleScrollToSlide}>scroll to</button>
+      <button onClick={handleNextStep}>scroll to</button>
 
-      <StyledScrollWrapper ref={wrapperRef}>
-        <div id="step-general">
-          <NewInput label="Title" />
-          <NewTextarea label="Description" />
+      <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
+        <NewInput label="Title" {...register('title')} isDirty={dirtyFields.title} />
+        <NewTextarea
+          label="Description"
+          {...register('description')}
+          isDirty={dirtyFields.description}
+        />
 
-          <h3>Round duration</h3>
+        <TitleWithDivider regularWeight headingLevel="h4">
+          Opciones avanzadas
+        </TitleWithDivider>
 
-          <Select icon="clock" label="Cada ronda dura">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </Select>
+        <TimeZoneSelector
+          placeholder="Timezone"
+          label="Time zone"
+          id="timezone"
+          variant="small"
+          {...register('timezone')}
+        />
 
-          <Switch label="Añadir 5 minutos extra a la primera ronda" />
+        <DatePicker
+          placeholderText="Choose a date"
+          label="Date"
+          icon="calendar"
+          control={control}
+          name="date"
+          id="date"
+          variant="small"
+          minDate={new Date()}
+        />
 
-          <Button
-            data-testid="feedback-comment-send-button"
-            type="submit"
-            color="primary"
-            variant="text"
-          >
-            Siguiente
-          </Button>
-        </div>
+        <Button
+          data-testid="feedback-comment-send-button"
+          type="submit"
+          color="primary"
+          variant="text"
+        >
+          Siguiente
+        </Button>
+      </div>
 
-        {/* QUESTIONS */}
-        <div id="step-questions">
-          <h3>Questions</h3>
+      {/* QUESTIONS */}
+      <div id="step-questions" className={step !== 'questions' ? 'hidden' : ''}>
+        <h3>Questions</h3>
+        <div className="questions">
           {fields.map((field, index) => (
-            <div key={field.id}>
-              <NewInput {...register(`questions.${index}.title`)} />
-              <NewTextarea {...register(`questions.${index}.description`)} />
+            <div
+              className="question"
+              key={field.id}
+              onMouseDown={event => handleShowDescription(event)}
+            >
+              {fields.length > 2 && (
+                <StyledDeleteButton onClick={() => handleDeleteTopic(index)}>
+                  Delete
+                </StyledDeleteButton>
+              )}
+              <NewTextarea
+                placeholder={`Pregunta ${index + 1}`}
+                placeholderStyle="large-text"
+                variant="large-text"
+                {...register(`questions.${index}.title`)}
+              />
+              <NewTextarea
+                placeholder="Si lo necesitas, añade descripción."
+                className="description"
+                {...register(`questions.${index}.description`)}
+              />
             </div>
           ))}
-          <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
         </div>
-      </StyledScrollWrapper>
+        <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
+
+        <h3>Round duration</h3>
+
+        <Select
+          icon="clock"
+          label="Cada ronda dura"
+          {...register('roundDuration')}
+          defaultValue={10}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </Select>
+
+        <Switch
+          full
+          id="addExtraTime"
+          label="Añadir 5 minutos extra a la primera ronda"
+          tooltipText={
+            'Te recomendamos añadir 5 minutos extra en la primera ronda, las personas suelen necesitar un poco más de tiempo para entrar en acción.'
+          }
+          {...register('addExtraTime')}
+        />
+      </div>
     </StyledWorldCafeForm>
   );
 };

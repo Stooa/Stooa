@@ -120,7 +120,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           dateFormat="dd/MM/yyyy"
           icon="calendar"
           autoComplete="off"
-          variant="sm"
+          variant="small"
         />
         <DatePicker
           data-testid="edit-form-time"
@@ -134,13 +134,13 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           dateFormat="H:mm"
           icon="clock"
           autoComplete="off"
-          variant="sm"
+          variant="small"
         />
         <Select
           label={t('fishbowl.duration')}
           name="hours"
           id="hours"
-          variant="sm"
+          variant="small"
           icon="hourglass"
           autoComplete="off"
         >
@@ -208,6 +208,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           ))}
         </Select>
         <Switch
+          full
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.introductionTooltip"
@@ -218,6 +219,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="hasIntroduction"
         />
         <Switch
+          full
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.passwordTooltip"
