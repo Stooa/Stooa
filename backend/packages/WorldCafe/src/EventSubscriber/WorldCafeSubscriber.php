@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\WorldCafe\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
+use App\Core\Entity\User;
 use App\Core\Service\SlugService;
 use App\WorldCafe\Entity\WorldCafe;
 use App\WorldCafe\Service\WorldCafeService;
@@ -21,6 +22,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Webmozart\Assert\Assert;
 
 class WorldCafeSubscriber implements EventSubscriberInterface
 {

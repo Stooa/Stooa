@@ -135,7 +135,7 @@ class MailerService
                     null,
                     $locale
                 ))
-                ->htmlTemplate('emails/fishbowl-created.html.twig')
+                ->htmlTemplate('emails/world-cafe-created.html.twig')
                 ->context([
                     'name' => $user->getName(),
                     'fishbowlId' => null !== $uid ? $uid->toString() : '',
@@ -143,7 +143,6 @@ class MailerService
                     'fishbowlDescription' => $worldCafe->getDescription(),
                     'fishbowlStartDate' => $worldCafe->getStartDateTimeFormatted(),
                     'fishbowlStartTime' => $worldCafe->getStartDateTimeHourFormatted(),
-                    'fishbowlFinishTime' => $worldCafe->getFinishDateTimeHourFormatted(),
                     'fishbowlSlug' => $worldCafe->getSlug(),
                     'locale' => $locale,
                     'appUrl' => $this->appUrl,
