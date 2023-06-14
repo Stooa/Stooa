@@ -13,19 +13,21 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Operation;
 
-use ApiPlatform\Metadata\Util\Inflector;
 use ApiPlatform\Operation\PathSegmentNameGeneratorInterface;
+use Doctrine\Inflector\InflectorFactory;
 
 class WorldCafeSegmentNameGenerator implements PathSegmentNameGeneratorInterface
 {
     public function getSegmentName(string $name, bool $collection = true): string
     {
+        $inflector = InflectorFactory::create()->build();
+
         if ('WorldCafe' === $name) {
             return $collection ? 'world_cafes' : 'world_cafe';
         }
 
-        $name = Inflector::tableize($name);
+        $name = $inflector->tableize($name);
 
-        return $collection ? Inflector::pluralize($name) : $name;
+        return $collection ? $inflector->pluralize($name) : $name;
     }
 }

@@ -17,6 +17,7 @@ use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
 use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Factory\WorldCafeFactory;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
@@ -45,12 +46,7 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
     {
         $token = $this->logIn($this->host);
 
-        $newWorldCafe = new WorldCafe();
-        $newWorldCafe->setName('New World Café name');
-        $newWorldCafe->setDescription('Description');
-        $newWorldCafe->setLocale('en');
-        $newWorldCafe->setHasExtraRoundTime(true);
-        $newWorldCafe->setRoundMinutes(15);
+        $newWorldCafe = WorldCafeFactory::createOne()->object();
 
         $response = $this->callCreateMutation($token, $newWorldCafe);
 
