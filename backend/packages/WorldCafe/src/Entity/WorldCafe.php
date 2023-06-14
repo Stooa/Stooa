@@ -54,6 +54,7 @@ use Webmozart\Assert\Assert as MAssert;
 #[FutureWorldCafe(groups: ['wc:create', 'wc:update'])]
 class WorldCafe extends Event
 {
+    #[Groups(['wc:create'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([5, 10, 15, 20, 25])]
     #[ORM\Column(type: 'integer', options: ['default' => 10])]

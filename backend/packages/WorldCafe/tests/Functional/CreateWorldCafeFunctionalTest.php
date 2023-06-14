@@ -48,14 +48,20 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
         $newWorldCafe = new WorldCafe();
         $newWorldCafe->setName('New World Café name');
         $newWorldCafe->setDescription('Description');
+        $newWorldCafe->setLocale('en');
+        $newWorldCafe->setHasExtraRoundTime(true);
+        $newWorldCafe->setRoundMinutes(15);
 
         $response = $this->callCreateMutation($token, $newWorldCafe);
 
         $graphqlResponse = $response->toArray();
-        $this->assertNotEmpty($graphqlResponse['data']);
 
+        $this->assertNotEmpty($graphqlResponse['data']);
         $this->assertSame($newWorldCafe->getName(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['name']);
         $this->assertSame($newWorldCafe->getDescription(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['description']);
+        $this->assertSame($newWorldCafe->getLocale(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['locale']);
+        $this->assertSame($newWorldCafe->getHasExtraRoundTime(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['hasExtraRoundTime']);
+        $this->assertSame($newWorldCafe->getRoundMinutes(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['roundMinutes']);
         $this->assertNotEmpty($graphqlResponse['data']['createWorldCafe']['worldCafe']['slug']);
         $this->assertNotEmpty($graphqlResponse['data']['createWorldCafe']['worldCafe']['id']);
     }
@@ -72,6 +78,8 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                         description
                         locale
                         startDateTimeTz
+                        hasExtraRoundTime
+                        roundMinutes
                     }
                 }
             }
@@ -84,10 +92,11 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                     'input' => [
                         'name' => $worldCafe->getName(),
                         'description' => $worldCafe->getDescription(),
-                        'locale' => 'en',
+                        'locale' => $worldCafe->getLocale(),
                         'startDateTime' => '2023-12-25T18:48:58.091Z',
                         'timezone' => 'Europe/Madrid',
-                        'hasExtraRoundTime' => true,
+                        'hasExtraRoundTime' => $worldCafe->getHasExtraRoundTime(),
+                        'roundMinutes' => $worldCafe->getRoundMinutes(),
                         'questions' => [
                             [
                                 'name' => 'Question name',
