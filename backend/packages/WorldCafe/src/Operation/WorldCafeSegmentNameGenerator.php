@@ -20,11 +20,11 @@ class WorldCafeSegmentNameGenerator implements PathSegmentNameGeneratorInterface
 {
     public function getSegmentName(string $name, bool $collection = true): string
     {
-        $inflector = InflectorFactory::create()->build();
-
         if ('WorldCafe' === $name) {
             return $collection ? 'world_cafes' : 'world_cafe';
         }
+
+        $inflector = InflectorFactory::create()->build();
 
         $name = $inflector->tableize($name);
 
