@@ -42,6 +42,7 @@ const WorldCafeForm = () => {
     register,
     handleSubmit,
     control,
+    getValues,
     formState: { errors, dirtyFields, isValid }
   } = useForm<FormValues>({
     defaultValues: {
@@ -62,8 +63,9 @@ const WorldCafeForm = () => {
     name: 'questions'
   });
 
-  const handleAddNewTopic = () => {
-    append({ title: `Pregunta ${fields.length + 1}`, description: '' });
+  const handleAddNewTopic = event => {
+    event.preventDefault();
+    append({ title: '', description: '' });
   };
 
   const handleDeleteTopic = (index: number) => {
@@ -85,7 +87,6 @@ const WorldCafeForm = () => {
     const description =
       elementClicked.parentElement.parentElement.querySelector('textarea.description');
 
-    console.log(description);
     description.classList.add('show');
   };
 
@@ -115,10 +116,11 @@ const WorldCafeForm = () => {
 
         <TimeZoneSelector
           placeholder="Timezone"
+          name="timezone"
           label="Time zone"
-          id="timezone"
           variant="small"
-          {...register('timezone')}
+          defaultValue={getValues('timezone')}
+          register={register}
         />
 
         <DatePicker
@@ -172,7 +174,9 @@ const WorldCafeForm = () => {
             </div>
           ))}
         </div>
-        <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
+        {fields.length < 5 && (
+          <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
+        )}
 
         <h3>Round duration</h3>
 
@@ -197,12 +201,7 @@ const WorldCafeForm = () => {
           {...register('addExtraTime')}
         />
 
-        <Button
-          data-testid="world-cafe-form-submit-button"
-          disabled={!isValid}
-          type="submit"
-          variant="text"
-        >
+        <Button data-testid="world-cafe-form-submit-button" disabled={!isValid} type="submit">
           send
         </Button>
       </div>

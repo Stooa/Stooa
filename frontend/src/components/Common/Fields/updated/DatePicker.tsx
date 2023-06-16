@@ -12,7 +12,7 @@ import DatePickerField from 'react-datepicker';
 import { DatePickerStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
 import Icon, { IconVariant } from '@/components/Common/Fields/Icon';
-import { Control, Controller, FieldError } from 'react-hook-form';
+import { Controller, FieldError } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 
 type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
@@ -21,7 +21,6 @@ type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & 
   label?: string;
   hasError?: FieldError;
   isValid?: boolean;
-  selected?: Date | undefined;
   minDate?: Date | undefined;
   placeholderText: string;
   showTimeSelect?: boolean | undefined;
@@ -36,7 +35,6 @@ const DatePicker = ({
   label,
   variant = 'default',
   icon,
-  selected,
   hasError,
   isValid = true,
   control,

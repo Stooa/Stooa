@@ -13,28 +13,29 @@ import Select from '../Fields/updated/Select';
 interface Props {
   label: string;
   placeholder: string;
-  id: string;
+  name: string;
+  register: any;
   variant?: 'default' | 'small';
+  defaultValue?: string;
 }
 
 export const TimeZoneSelector = ({
   label,
   placeholder,
-  id,
   variant = 'default',
-  ...props
+  defaultValue = '',
+  register,
+  name
 }: Props) => {
   const timezones = countriesAndTimezones.getAllTimezones();
 
   return (
     <Select
-      variant={variant}
-      className="select"
-      label={label}
-      id={id}
       icon="world"
-      autoComplete="off"
-      {...props}
+      variant={variant}
+      label={label}
+      {...register(name)}
+      defaultValue={defaultValue}
     >
       <option value="">{placeholder}</option>
       {Object.keys(timezones).map((zone, index) => {

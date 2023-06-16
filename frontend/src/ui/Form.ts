@@ -99,7 +99,7 @@ const FormikForm = styled(Form)`
 
 const InputStyled = styled.div<{
   variant?: 'default' | 'large-text';
-  placeholderStyle: 'default' | 'large-text';
+  placeholderStyle?: 'default' | 'large-text';
 }>`
   position: relative;
   width: 100%;
