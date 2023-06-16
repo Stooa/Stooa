@@ -42,7 +42,7 @@ const WorldCafeForm = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors, dirtyFields }
+    formState: { errors, dirtyFields, isValid }
   } = useForm<FormValues>({
     defaultValues: {
       title: '',
@@ -100,8 +100,6 @@ const WorldCafeForm = () => {
       </StyledStepper>
 
       <button onClick={returnToBeginning}>return to beginning ---- </button>
-      {'  '}
-      <button onClick={handleNextStep}>scroll to</button>
 
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
         <NewInput label="Title" {...register('title')} isDirty={dirtyFields.title} />
@@ -139,6 +137,7 @@ const WorldCafeForm = () => {
           type="submit"
           color="primary"
           variant="text"
+          onClick={handleNextStep}
         >
           Siguiente
         </Button>
@@ -197,6 +196,15 @@ const WorldCafeForm = () => {
           }
           {...register('addExtraTime')}
         />
+
+        <Button
+          data-testid="world-cafe-form-submit-button"
+          disabled={!isValid}
+          type="submit"
+          variant="text"
+        >
+          send
+        </Button>
       </div>
     </StyledWorldCafeForm>
   );
