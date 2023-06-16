@@ -23,6 +23,4 @@ const CREATE_WORLD_CAFE = gql`
   }
 `;
 
-export {
-  CREATE_WORLD_CAFE
-};
+export { CREATE_WORLD_CAFE };

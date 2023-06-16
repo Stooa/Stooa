@@ -19,6 +19,10 @@ import Switch from '@/components/Common/Fields/updated/Switch';
 import TitleWithDivider from '@/components/Common/TitleWithDivider/TitleWithDivider';
 import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneSelector';
 import DatePicker from '@/components/Common/Fields/updated/DatePicker';
+import { useMutation } from '@apollo/client';
+import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
+import _default from 'chart.js/dist/plugins/plugin.legend';
+import title = _default.defaults.title;
 
 type Question = {
   title: string;
@@ -37,7 +41,7 @@ interface FormValues {
 
 const WorldCafeForm = () => {
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
-
+  const [createWorldCafe] = useMutation(CREATE_WORLD_CAFE);
   const {
     register,
     handleSubmit,
@@ -90,7 +94,34 @@ const WorldCafeForm = () => {
     description.classList.add('show');
   };
 
-  const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = data => {
+    console.log(data);
+    createWorldCafe({
+      variables: {
+        input: {
+          name: data.title,
+          description: data.description,
+          startDateTime: '2023-12-25T18:48:58.091Z',
+          timezone: data.timezone,
+          locale: 'en',
+          hasExtraRoundTime: true,
+          roundMinutes: 15,
+          questions: [
+            {
+              name: 'Question Title',
+              description: 'Question Description'
+            }
+          ]
+        }
+      }
+    })
+      .then(res => {
+        console.log('[STOOA] World Café created', res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
     <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
