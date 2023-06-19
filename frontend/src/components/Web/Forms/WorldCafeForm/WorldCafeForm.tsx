@@ -122,21 +122,10 @@ const WorldCafeForm = () => {
           description: data.description,
           startDateTime: '2023-12-25T18:48:58.091Z',
           timezone: data.timezone,
-<<<<<<< HEAD
           locale: data.language,
-          hasExtraRoundTime: true,
-          roundMinutes: 15,
-          questions: data.questions.map(question => ({
-            // TODO: when change to title don't map
-            name: question.title,
-            description: question.description
-          }))
-=======
-          locale: 'en',
           hasExtraRoundTime: data.addExtraTime,
           roundMinutes: data.roundDuration,
           questions: data.questions
->>>>>>> fded2de0 (Add values to world cafe mutation)
         }
       }
     })
