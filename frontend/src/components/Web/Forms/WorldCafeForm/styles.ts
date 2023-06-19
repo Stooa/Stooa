@@ -18,7 +18,9 @@ import {
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
-  COLOR_PURPLE_500
+  COLOR_NEUTRO_600,
+  COLOR_PURPLE_500,
+  COLOR_RED_600
 } from '@/ui/settings';
 import styled from 'styled-components';
 
@@ -26,30 +28,34 @@ const StyledWorldCafeForm = styled.form`
   width: 100%;
   max-width: ${BREAKPOINTS.reader}px;
 
-  & > #step-general,
-  & > #step-questions {
+  & fieldset {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-
-    & > * + * {
-      margin-top: 1em;
-    }
-
+    margin-bottom: 1.5rem;
     flex-shrink: 0;
     justify-content: space-between;
+
+    & > * + * {
+      margin-top: 1rem;
+    }
   }
 
-  & > #step-questions {
-    & > .questions {
+  & #step-questions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    & .questions {
       width: 100%;
+    }
 
-      & > .question {
-        position: relative;
+    & .question {
+      position: relative;
 
-        &:not(:last-child) {
-          margin-bottom: 2rem;
-        }
+      &:not(:last-child) {
+        margin-bottom: 2rem;
       }
     }
 
@@ -158,9 +164,27 @@ const StyledStepper = styled.ul`
 
 const StyledDeleteButton = styled.button`
   position: absolute;
-  top: 8px;
+  top: 16px;
   right: 16px;
   z-index: 1;
+  transition: color 0.2s ease-out;
+  color: ${COLOR_NEUTRO_600};
+
+  & svg {
+    pointer-events: none;
+    & path {
+      fill: currentColor;
+    }
+  }
+
+  &:hover {
+    color: ${COLOR_RED_600};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: ${COLOR_NEUTRO_500};
+  }
 `;
 
 export { StyledWorldCafeForm, StyledAddButton, StyledStepper, StyledDeleteButton };

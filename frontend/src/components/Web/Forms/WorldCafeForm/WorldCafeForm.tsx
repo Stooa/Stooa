@@ -9,6 +9,10 @@
 
 import { useState } from 'react';
 
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import useTranslation from 'next-translate/useTranslation';
+
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
@@ -21,13 +25,12 @@ import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneS
 import DatePicker from '@/components/Common/Fields/updated/DatePicker';
 import { useMutation } from '@apollo/client';
 import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
-import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import CheckmarkSVG from '@/ui/svg/checkmark.svg';
+import BinSVG from '@/ui/svg/bin.svg';
+
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
-import useTranslation from 'next-translate/useTranslation';
 
 type Question = {
   title: string;
@@ -132,6 +135,10 @@ const WorldCafeForm = () => {
 
   const handleShowDescription = event => {
     const elementClicked = event.target;
+
+    console.log(event.target);
+    if (elementClicked.classList.contains('delete')) return;
+
     const description =
       elementClicked.parentElement.parentElement.querySelector('textarea.description');
 
@@ -153,7 +160,11 @@ const WorldCafeForm = () => {
           locale: data.language,
           hasExtraRoundTime: data.addExtraTime,
           roundMinutes: data.roundDuration,
-          questions: data.questions.map((question , index)=> ({title: question.title, description: question.description, position: index }))
+          questions: data.questions.map((question, index) => ({
+            title: question.title,
+            description: question.description,
+            position: index
+          }))
         }
       }
     })
@@ -172,148 +183,158 @@ const WorldCafeForm = () => {
           <div className={`status ${step === 'questions' ? 'done' : 'highlighted'}`}>
             {step === 'questions' ? <CheckmarkSVG /> : '1'}
           </div>
-          Básicos
+          {t('worldCafe.basics')}
         </li>
 
         <div className={step === 'questions' ? 'green' : ''} />
 
         <li className={`${step === 'questions' ? 'current' : 'disabled'}`}>
           <div className={`status ${step === 'questions' ? 'highlighted' : 'current'}`}>2</div>
-          Preguntas
+          {t('worldCafe.questions')}
         </li>
       </StyledStepper>
 
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
-        <NewInput
-          label="Title"
-          {...register('title')}
-          placeholder={defaultTitle}
-          isDirty={dirtyFields.title}
-          hasError={errors.title}
-        />
+        <fieldset>
+          <NewInput
+            label="Title"
+            {...register('title')}
+            placeholder={defaultTitle}
+            isDirty={dirtyFields.title}
+            hasError={errors.title}
+          />
 
-        <NewTextarea
-          label="Description"
-          {...register('description')}
-          isDirty={dirtyFields.description}
-          hasError={errors.description}
-        />
+          <NewTextarea
+            label="Description"
+            {...register('description')}
+            isDirty={dirtyFields.description}
+            hasError={errors.description}
+          />
 
-        <DatePicker
-          placeholderText="Choose a date"
-          label="Date"
-          icon="calendar"
-          control={control}
-          name="date"
-          id="date"
-          variant="small"
-          minDate={today}
-        />
+          <DatePicker
+            placeholderText="Choose a date"
+            label="Date"
+            icon="calendar"
+            control={control}
+            name="date"
+            id="date"
+            variant="small"
+            minDate={today}
+          />
 
-        <DatePicker
-          placeholderText="Choose a time"
-          label="Empieza a las"
-          icon="clock"
-          showTimeSelect
-          showTimeSelectOnly
-          dateFormat="HH:mm"
-          control={control}
-          name="time"
-          id="time"
-          variant="small"
-          minTime={new Date()}
-          maxTime={new Date(today.setHours(23, 45))}
-          hasError={errors.time}
-        />
+          <DatePicker
+            placeholderText="Choose a time"
+            label="Empieza a las"
+            icon="clock"
+            showTimeSelect
+            showTimeSelectOnly
+            dateFormat="HH:mm"
+            control={control}
+            name="time"
+            id="time"
+            variant="small"
+            minTime={new Date()}
+            maxTime={new Date(today.setHours(23, 45))}
+            hasError={errors.time}
+          />
+        </fieldset>
 
-        <TitleWithDivider regularWeight headingLevel="h4">
-          Opciones avanzadas
-        </TitleWithDivider>
+        <fieldset>
+          <TitleWithDivider regularWeight headingLevel="h4">
+            {t('fishbowl.advancedOptions')}
+          </TitleWithDivider>
+          <TimeZoneSelector
+            placeholder="Timezone"
+            name="timezone"
+            label="Time zone"
+            defaultValue={getValues('timezone')}
+            register={register}
+          />
 
-        <TimeZoneSelector
-          placeholder="Timezone"
-          name="timezone"
-          label="Time zone"
-          defaultValue={getValues('timezone')}
-          register={register}
-        />
-
-        <Select icon="language" label="Idioma" {...register('language')}>
-          <option value="es">Castellano</option>
-          <option value="en">Inglés</option>
-          <option value="fr">Francés</option>
-          <option value="ca">Catalán</option>
-        </Select>
+          <Select icon="language" label="Idioma" {...register('language')}>
+            <option value="es">Castellano</option>
+            <option value="en">Inglés</option>
+            <option value="fr">Francés</option>
+            <option value="ca">Catalán</option>
+          </Select>
+        </fieldset>
 
         <Button
           data-testid="feedback-comment-send-button"
           type="submit"
           color="primary"
-          variant="text"
+          full
           onClick={handleNextStep}
           // disabled={!isValid}
         >
-          Siguiente
+          Añadir preguntas -&gt;
         </Button>
       </div>
 
       {/* QUESTIONS */}
       <div id="step-questions" className={step !== 'questions' ? 'hidden' : ''}>
-        <h3>Questions</h3>
-        <div className="questions">
-          {fields.map((field, index) => (
-            <div
-              className="question"
-              key={field.id}
-              onMouseDown={event => handleShowDescription(event)}
-            >
-              {fields.length > 2 && (
-                <StyledDeleteButton onClick={() => handleDeleteTopic(index)}>
-                  Delete
+        <fieldset>
+          <h3>Questions</h3>
+          <div className="questions">
+            {fields.map((field, index) => (
+              <div
+                className="question"
+                key={field.id}
+                onMouseDown={event => handleShowDescription(event)}
+              >
+                <StyledDeleteButton
+                  className="delete"
+                  disabled={fields.length < 3}
+                  onClick={() => handleDeleteTopic(index)}
+                >
+                  <BinSVG />
                 </StyledDeleteButton>
-              )}
-              <NewTextarea
-                placeholder={`Pregunta ${index + 1}`}
-                placeholderStyle="large-text"
-                variant="large-text"
-                {...register(`questions.${index}.title`)}
-              />
-              <NewTextarea
-                placeholder="Si lo necesitas, añade descripción."
-                className="description"
-                {...register(`questions.${index}.description`)}
-              />
-            </div>
-          ))}
-        </div>
-        {fields.length < 5 && (
-          <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
-        )}
 
-        <h3>Round duration</h3>
+                <NewTextarea
+                  placeholder={`Pregunta ${index + 1}`}
+                  placeholderStyle="large-text"
+                  variant="large-text"
+                  {...register(`questions.${index}.title`)}
+                />
+                <NewTextarea
+                  placeholder="Si lo necesitas, añade descripción."
+                  className="description"
+                  {...register(`questions.${index}.description`)}
+                />
+              </div>
+            ))}
+          </div>
+          {fields.length < 5 && (
+            <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
+          )}
+        </fieldset>
 
-        <Select
-          id="roundDuration"
-          icon="clock"
-          label="Cada ronda dura"
-          {...register('roundDuration')}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-          <option value="25">25</option>
-        </Select>
+        <fieldset>
+          <h3>Round duration</h3>
 
-        <Switch
-          full
-          id="addExtraTime"
-          label="Añadir 5 minutos extra a la primera ronda"
-          tooltipText={
-            'Te recomendamos añadir 5 minutos extra en la primera ronda, las personas suelen necesitar un poco más de tiempo para entrar en acción.'
-          }
-          {...register('addExtraTime')}
-        />
+          <Select
+            id="roundDuration"
+            icon="clock"
+            label="Cada ronda dura"
+            {...register('roundDuration')}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+          </Select>
+
+          <Switch
+            full
+            id="addExtraTime"
+            label="Añadir 5 minutos extra a la primera ronda"
+            tooltipText={
+              'Te recomendamos añadir 5 minutos extra en la primera ronda, las personas suelen necesitar un poco más de tiempo para entrar en acción.'
+            }
+            {...register('addExtraTime')}
+          />
+        </fieldset>
 
         <Button
           full
