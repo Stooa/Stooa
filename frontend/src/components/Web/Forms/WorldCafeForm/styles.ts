@@ -11,14 +11,12 @@ import { BODY_MD, mediumWeight } from '@/ui/Texts';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
-  COLOR_GREEN_500,
   COLOR_GREEN_600,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
-  COLOR_NEUTRO_600,
   COLOR_PURPLE_500
 } from '@/ui/settings';
 import styled from 'styled-components';

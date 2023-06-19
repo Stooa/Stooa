@@ -25,7 +25,7 @@ import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { formatDateTime } from '@/lib/helpers';
+import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 
 type Question = {
   title: string;
@@ -36,7 +36,7 @@ interface FormValues {
   title: string;
   description: string;
   date: Date;
-  time: string;
+  time: Date;
   timezone: string;
   language: string;
   roundDuration: number;
@@ -71,7 +71,7 @@ const WorldCafeForm = () => {
       description: '',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       date: new Date(),
-      time: '',
+      time: nearestQuarterHour(),
       language: 'en',
       roundDuration: 10,
       addExtraTime: true,
