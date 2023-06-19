@@ -27,7 +27,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 type Question = {
-  name: string;
+  title: string;
   description: string;
 };
 
@@ -75,8 +75,8 @@ const WorldCafeForm = () => {
       roundDuration: 10,
       addExtraTime: true,
       questions: [
-        { name: '', description: '' },
-        { name: '', description: '' }
+        { title: '', description: '' },
+        { title: '', description: '' }
       ]
     }
   });
@@ -88,7 +88,7 @@ const WorldCafeForm = () => {
 
   const handleAddNewTopic = event => {
     event.preventDefault();
-    append({ name: '', description: '' });
+    append({ title: '', description: '' });
   };
 
   const handleDeleteTopic = (index: number) => {
@@ -121,7 +121,6 @@ const WorldCafeForm = () => {
           name: data.title,
           description: data.description,
           startDateTime: '2023-12-25T18:48:58.091Z',
-          time: data.time,
           timezone: data.timezone,
 <<<<<<< HEAD
           locale: data.language,
@@ -251,7 +250,7 @@ const WorldCafeForm = () => {
                 placeholder={`Pregunta ${index + 1}`}
                 placeholderStyle="large-text"
                 variant="large-text"
-                {...register(`questions.${index}.name`)}
+                {...register(`questions.${index}.title`)}
               />
               <NewTextarea
                 placeholder="Si lo necesitas, añade descripción."

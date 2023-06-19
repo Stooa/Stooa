@@ -34,7 +34,7 @@ class Question implements \Stringable
     #[Assert\Length(max: 255)]
     #[Groups(['wc:create'])]
     #[ORM\Column(type: 'string')]
-    private ?string $name = null;
+    private ?string $title = null;
 
     #[Groups(['wc:create'])]
     #[ORM\Column(type: 'text', nullable: true)]
@@ -45,7 +45,7 @@ class Question implements \Stringable
 
     public function __toString(): string
     {
-        return $this->getName() ?? '';
+        return $this->getTitle() ?? '';
     }
 
     public function getId(): ?UuidInterface
@@ -60,14 +60,14 @@ class Question implements \Stringable
         return $this;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(?string $name): self
+    public function setTitle(?string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }
