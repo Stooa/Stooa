@@ -27,7 +27,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 type Question = {
-  title: string;
+  name: string;
   description: string;
 };
 
@@ -75,8 +75,8 @@ const WorldCafeForm = () => {
       roundDuration: 10,
       addExtraTime: true,
       questions: [
-        { title: '', description: '' },
-        { title: '', description: '' }
+        { name: '', description: '' },
+        { name: '', description: '' }
       ]
     }
   });
@@ -88,7 +88,7 @@ const WorldCafeForm = () => {
 
   const handleAddNewTopic = event => {
     event.preventDefault();
-    append({ title: '', description: '' });
+    append({ name: '', description: '' });
   };
 
   const handleDeleteTopic = (index: number) => {
@@ -123,6 +123,7 @@ const WorldCafeForm = () => {
           startDateTime: '2023-12-25T18:48:58.091Z',
           time: data.time,
           timezone: data.timezone,
+<<<<<<< HEAD
           locale: data.language,
           hasExtraRoundTime: true,
           roundMinutes: 15,
@@ -131,6 +132,12 @@ const WorldCafeForm = () => {
             name: question.title,
             description: question.description
           }))
+=======
+          locale: 'en',
+          hasExtraRoundTime: data.addExtraTime,
+          roundMinutes: data.roundDuration,
+          questions: data.questions
+>>>>>>> fded2de0 (Add values to world cafe mutation)
         }
       }
     })
@@ -244,7 +251,7 @@ const WorldCafeForm = () => {
                 placeholder={`Pregunta ${index + 1}`}
                 placeholderStyle="large-text"
                 variant="large-text"
-                {...register(`questions.${index}.title`)}
+                {...register(`questions.${index}.name`)}
               />
               <NewTextarea
                 placeholder="Si lo necesitas, añade descripción."
