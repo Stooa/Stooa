@@ -153,7 +153,7 @@ const WorldCafeForm = () => {
           locale: data.language,
           hasExtraRoundTime: data.addExtraTime,
           roundMinutes: data.roundDuration,
-          questions: data.questions
+          questions: data.questions.map((question , index)=> ({title: question.title, description: question.description, position: index }))
         }
       }
     })
