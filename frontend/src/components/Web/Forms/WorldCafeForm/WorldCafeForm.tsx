@@ -21,6 +21,7 @@ import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneS
 import DatePicker from '@/components/Common/Fields/updated/DatePicker';
 import { useMutation } from '@apollo/client';
 import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
+import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,8 +34,10 @@ type Question = {
 interface FormValues {
   title: string;
   description: string;
-  timezone: string;
   date: Date;
+  time: string;
+  timezone: string;
+  language: string;
   roundDuration: number;
   addExtraTime: boolean;
   questions: Question[];
@@ -67,6 +70,8 @@ const WorldCafeForm = () => {
       description: '',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       date: new Date(),
+      time: '',
+      language: 'en',
       roundDuration: 10,
       addExtraTime: true,
       questions: [
@@ -116,16 +121,16 @@ const WorldCafeForm = () => {
           name: data.title,
           description: data.description,
           startDateTime: '2023-12-25T18:48:58.091Z',
+          time: data.time,
           timezone: data.timezone,
-          locale: 'en',
+          locale: data.language,
           hasExtraRoundTime: true,
           roundMinutes: 15,
-          questions: [
-            {
-              name: 'Question Title',
-              description: 'Question Description'
-            }
-          ]
+          questions: data.questions.map(question => ({
+            // TODO: when change to title don't map
+            name: question.title,
+            description: question.description
+          }))
         }
       }
     })
@@ -140,11 +145,16 @@ const WorldCafeForm = () => {
   return (
     <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
       <StyledStepper>
-        <li id="basics" onClick={returnToBeginning} className={step === 'basics' ? 'medium ' : ''}>
+        <li id="basics" onClick={returnToBeginning}>
+          <div className={`status ${step === 'questions' ? 'done' : ''}`}>
+            {step === 'questions' ? <CheckmarkSVG /> : '1'}
+          </div>{' '}
           Básicos
         </li>
 
-        <li className={step === 'questions' ? 'medium ' : ''}>Preguntas</li>
+        <div />
+
+        <li className={` ${step === 'questions' ? 'current' : 'disabled'}`}>Preguntas</li>
       </StyledStepper>
 
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
@@ -159,20 +169,6 @@ const WorldCafeForm = () => {
           {...register('description')}
           isDirty={dirtyFields.description}
         />
-
-        <TitleWithDivider regularWeight headingLevel="h4">
-          Opciones avanzadas
-        </TitleWithDivider>
-
-        <TimeZoneSelector
-          placeholder="Timezone"
-          name="timezone"
-          label="Time zone"
-          variant="small"
-          defaultValue={getValues('timezone')}
-          register={register}
-        />
-
         <DatePicker
           placeholderText="Choose a date"
           label="Date"
@@ -183,6 +179,39 @@ const WorldCafeForm = () => {
           variant="small"
           minDate={new Date()}
         />
+
+        <DatePicker
+          placeholderText="Choose a time"
+          label="Empieza a las"
+          icon="clock"
+          showTimeSelect
+          showTimeSelectOnly
+          dateFormat="H:mm"
+          control={control}
+          name="time"
+          id="time"
+          variant="small"
+          minDate={new Date()}
+        />
+
+        <TitleWithDivider regularWeight headingLevel="h4">
+          Opciones avanzadas
+        </TitleWithDivider>
+
+        <TimeZoneSelector
+          placeholder="Timezone"
+          name="timezone"
+          label="Time zone"
+          defaultValue={getValues('timezone')}
+          register={register}
+        />
+
+        <Select icon="language" label="Idioma" {...register('language')}>
+          <option value="es">Castellano</option>
+          <option value="en">Inglés</option>
+          <option value="fr">Francés</option>
+          <option value="ca">Catalán</option>
+        </Select>
 
         <Button
           data-testid="feedback-comment-send-button"

@@ -7,9 +7,13 @@
  * file that was distributed with this source code.
  */
 
+import { BODY_MD, BODY_SM, mediumWeight } from '@/ui/Texts';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
+  COLOR_GREEN_500,
+  COLOR_GREEN_600,
+  COLOR_NEUTRO_100,
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
@@ -63,7 +67,7 @@ const StyledWorldCafeForm = styled.form`
 const StyledAddButton = styled.button`
   display: block;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   background-color: ${COLOR_NEUTRO_200};
   border: 1px dashed ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
@@ -80,16 +84,55 @@ const StyledAddButton = styled.button`
 const StyledStepper = styled.ul`
   display: flex;
   justify-content: space-around;
+  align-items: center;
   gap: 1rem;
   list-style: none;
   padding: 0;
   margin: 0;
   margin-bottom: 2rem;
 
-  & > li#basics {
-    cursor: pointer;
-    &:hover {
-      color: ${COLOR_PURPLE_500};
+  & div {
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid ${COLOR_NEUTRO_400};
+  }
+
+  & > li {
+    display: flex;
+    gap: 0.5rem;
+
+    &.disabled {
+      opacity: 0.5;
+    }
+
+    & > .status {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid ${COLOR_NEUTRO_400};
+      color: ${COLOR_NEUTRO_100};
+      background-color: ${COLOR_GREEN_600};
+
+      ${BODY_MD};
+      ${mediumWeight};
+
+      &.done {
+        border-color: ${COLOR_GREEN_500};
+        background-color: transparent;
+      }
+
+      & > svg {
+        padding-top: 2px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &#basics {
+      cursor: pointer;
+      &:hover {
+        color: ${COLOR_PURPLE_500};
+      }
     }
   }
 `;
@@ -97,7 +140,8 @@ const StyledStepper = styled.ul`
 const StyledDeleteButton = styled.button`
   position: absolute;
   top: 8px;
-  right: 8px;
+  right: 16px;
+  z-index: 1;
 `;
 
 export { StyledWorldCafeForm, StyledAddButton, StyledStepper, StyledDeleteButton };

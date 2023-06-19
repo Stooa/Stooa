@@ -23,10 +23,10 @@ type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & 
   isValid?: boolean;
   minDate?: Date | undefined;
   placeholderText: string;
-  showTimeSelect?: boolean | undefined;
-  showTimeSelectOnly?: boolean | undefined;
-  timeIntervals?: number | undefined;
-  dateFormat?: string | undefined;
+  showTimeSelect?: boolean;
+  showTimeSelectOnly?: boolean;
+  timeIntervals?: number;
+  dateFormat?: 'dd/MM/yyyy' | 'H:mm';
   control: any;
   name: string;
 };
@@ -39,6 +39,10 @@ const DatePicker = ({
   isValid = true,
   control,
   name,
+  dateFormat = 'dd/MM/yyyy',
+  timeIntervals = 15,
+  showTimeSelect = false,
+  showTimeSelectOnly = false,
   ...props
 }: DatePicker) => {
   // const { setFieldValue } = useFormikContext();
@@ -56,7 +60,10 @@ const DatePicker = ({
         render={({ field }) => (
           <DatePickerField
             {...props}
-            dateFormat="dd/MM/yyyy"
+            dateFormat={dateFormat}
+            timeIntervals={timeIntervals}
+            showTimeSelect={showTimeSelect}
+            showTimeSelectOnly={showTimeSelectOnly}
             autocomplete="off"
             selected={field.value}
             onChange={date => field.onChange(date)}
