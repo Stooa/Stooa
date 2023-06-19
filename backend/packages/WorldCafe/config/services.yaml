@@ -30,3 +30,7 @@ services:
         calls:
             - [ setWorldCafeService, [ '@App\WorldCafe\Service\WorldCafeService' ] ]
             - [ setSlugService, [ '@App\Core\Service\SlugService' ] ]
+
+    App\WorldCafe\Admin\QuestionAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\WorldCafe\Entity\Question, manager_type: orm, label: Questions }

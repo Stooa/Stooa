@@ -26,6 +26,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 use Sonata\Form\Type\BooleanType;
+use Sonata\Form\Type\CollectionType;
 use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
@@ -136,6 +137,14 @@ class WorldCafeAdmin extends AbstractAdmin
                     'transform' => true,
                 ])
                 ->add('topics')
+                ->add('questions', CollectionType::class, [
+                    'type_options' => [
+                        'delete' => false,
+                    ],
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                ])
             ->end()
             ->with('Disabled')
                 ->add('currentStatus', ChoiceType::class, [
