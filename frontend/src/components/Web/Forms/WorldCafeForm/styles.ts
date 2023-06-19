@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { BODY_MD, BODY_SM, mediumWeight } from '@/ui/Texts';
+import { BODY_MD, mediumWeight } from '@/ui/Texts';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
@@ -99,6 +99,7 @@ const StyledStepper = styled.ul`
 
   & > li {
     display: flex;
+    align-items: center;
     gap: 0.5rem;
 
     &.disabled {
@@ -106,8 +107,11 @@ const StyledStepper = styled.ul`
     }
 
     & > .status {
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-radius: 50%;
       border: 1px solid ${COLOR_NEUTRO_400};
       color: ${COLOR_NEUTRO_100};

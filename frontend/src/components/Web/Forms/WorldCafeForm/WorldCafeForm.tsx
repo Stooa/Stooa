@@ -288,8 +288,8 @@ const WorldCafeForm = () => {
           {...register('addExtraTime')}
         />
 
-        <Button data-testid="world-cafe-form-submit-button" disabled={!isValid} type="submit">
-          send
+        <Button full data-testid="world-cafe-form-submit-button" disabled={!isValid} type="submit">
+          Crear world cafe
         </Button>
       </div>
     </StyledWorldCafeForm>
