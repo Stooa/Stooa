@@ -13,7 +13,8 @@ import {
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
-  COLOR_NEUTRO_500
+  COLOR_NEUTRO_500,
+  COLOR_PURPLE_500
 } from '@/ui/settings';
 import styled from 'styled-components';
 
@@ -78,10 +79,19 @@ const StyledAddButton = styled.button`
 
 const StyledStepper = styled.ul`
   display: flex;
+  justify-content: space-around;
   gap: 1rem;
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-bottom: 2rem;
+
+  & > li#basics {
+    cursor: pointer;
+    &:hover {
+      color: ${COLOR_PURPLE_500};
+    }
+  }
 `;
 
 const StyledDeleteButton = styled.button`

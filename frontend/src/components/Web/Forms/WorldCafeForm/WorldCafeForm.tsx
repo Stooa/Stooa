@@ -21,8 +21,9 @@ import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneS
 import DatePicker from '@/components/Common/Fields/updated/DatePicker';
 import { useMutation } from '@apollo/client';
 import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
-import _default from 'chart.js/dist/plugins/plugin.legend';
-import title = _default.defaults.title;
+
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 type Question = {
   title: string;
@@ -42,6 +43,17 @@ interface FormValues {
 const WorldCafeForm = () => {
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
   const [createWorldCafe] = useMutation(CREATE_WORLD_CAFE);
+
+  const validationSchema = yup.object({
+    title: yup.string().matches(/[^-\s]/, {
+      excludeEmptyString: true,
+      message: 'Title cannot be empty'
+    }),
+    description: yup.string(),
+    timezone: yup.string().required('Timezone is required'),
+    date: yup.date().required('Date is required')
+  });
+
   const {
     register,
     handleSubmit,
@@ -49,6 +61,7 @@ const WorldCafeForm = () => {
     getValues,
     formState: { errors, dirtyFields, isValid }
   } = useForm<FormValues>({
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       title: '',
       description: '',
@@ -62,6 +75,7 @@ const WorldCafeForm = () => {
       ]
     }
   });
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'questions'
@@ -126,15 +140,20 @@ const WorldCafeForm = () => {
   return (
     <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
       <StyledStepper>
-        <li className={step === 'basics' ? 'medium ' : ''}>Básicos</li>
+        <li id="basics" onClick={returnToBeginning} className={step === 'basics' ? 'medium ' : ''}>
+          Básicos
+        </li>
 
         <li className={step === 'questions' ? 'medium ' : ''}>Preguntas</li>
       </StyledStepper>
 
-      <button onClick={returnToBeginning}>return to beginning ---- </button>
-
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
-        <NewInput label="Title" {...register('title')} isDirty={dirtyFields.title} />
+        <NewInput
+          label="Title"
+          {...register('title')}
+          isDirty={dirtyFields.title}
+          hasError={errors['title']}
+        />
         <NewTextarea
           label="Description"
           {...register('description')}
@@ -171,6 +190,7 @@ const WorldCafeForm = () => {
           color="primary"
           variant="text"
           onClick={handleNextStep}
+          disabled={!isValid}
         >
           Siguiente
         </Button>
