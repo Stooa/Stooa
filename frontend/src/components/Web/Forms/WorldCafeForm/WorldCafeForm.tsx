@@ -25,6 +25,7 @@ import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { formatDateTime } from '@/lib/helpers';
 
 type Question = {
   title: string;
@@ -114,13 +115,16 @@ const WorldCafeForm = () => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = data => {
+    const dayFormatted = formatDateTime(data.date);
+    const timeFormatted = formatDateTime(data.time);
+
     console.log(data);
     createWorldCafe({
       variables: {
         input: {
           name: data.title,
           description: data.description,
-          startDateTime: '2023-12-25T18:48:58.091Z',
+          startDateTime: `${dayFormatted.date} ${timeFormatted.time}`,
           timezone: data.timezone,
           locale: data.language,
           hasExtraRoundTime: data.addExtraTime,
@@ -141,15 +145,18 @@ const WorldCafeForm = () => {
     <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
       <StyledStepper>
         <li id="basics" onClick={returnToBeginning}>
-          <div className={`status ${step === 'questions' ? 'done' : ''}`}>
+          <div className={`status ${step === 'questions' ? 'done' : 'highlighted'}`}>
             {step === 'questions' ? <CheckmarkSVG /> : '1'}
-          </div>{' '}
+          </div>
           Básicos
         </li>
 
         <div />
 
-        <li className={` ${step === 'questions' ? 'current' : 'disabled'}`}>Preguntas</li>
+        <li className={`${step === 'questions' ? 'current' : 'disabled'}`}>
+          <div className={`status ${step === 'questions' ? 'highlighted' : 'current'}`}>2</div>
+          Preguntas
+        </li>
       </StyledStepper>
 
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>

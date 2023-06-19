@@ -18,6 +18,7 @@ import {
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
+  COLOR_NEUTRO_600,
   COLOR_PURPLE_500
 } from '@/ui/settings';
 import styled from 'styled-components';
@@ -103,7 +104,12 @@ const StyledStepper = styled.ul`
     gap: 0.5rem;
 
     &.disabled {
-      opacity: 0.5;
+      color: ${COLOR_NEUTRO_500};
+
+      & > .status {
+        border: 1px solid ${COLOR_NEUTRO_500};
+        background-color: transparent;
+      }
     }
 
     & > .status {
@@ -113,20 +119,22 @@ const StyledStepper = styled.ul`
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      border: 1px solid ${COLOR_NEUTRO_400};
-      color: ${COLOR_NEUTRO_100};
-      background-color: ${COLOR_GREEN_600};
+
+      &.highlighted {
+        border: 1px solid ${COLOR_GREEN_600};
+        color: ${COLOR_NEUTRO_100};
+        background-color: ${COLOR_GREEN_600};
+      }
 
       ${BODY_MD};
       ${mediumWeight};
 
       &.done {
-        border-color: ${COLOR_GREEN_500};
+        border: 1px solid ${COLOR_GREEN_600};
         background-color: transparent;
       }
 
       & > svg {
-        padding-top: 2px;
         width: 18px;
         height: 18px;
       }
