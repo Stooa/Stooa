@@ -77,6 +77,7 @@ class WorldCafe extends Event
     /** @var Collection<int, Question> */
     #[Groups(['wc:create'])]
     #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Question::class, cascade: ['all'])]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $questions;
 
     /** @var Collection<int, Participant> */

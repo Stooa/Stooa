@@ -95,8 +95,14 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                         'roundMinutes' => $worldCafe->getRoundMinutes(),
                         'questions' => [
                             [
-                                'title' => 'Question title',
-                                'description' => 'Question description',
+                                'title' => 'First Question',
+                                'description' => 'First Question description',
+                                'position' => 1,
+                            ],
+                            [
+                                'title' => 'Second Question',
+                                'description' => 'Second Question description',
+                                'position' => 2,
                             ],
                         ],
                     ],

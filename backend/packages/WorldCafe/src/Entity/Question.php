@@ -15,6 +15,8 @@ namespace App\WorldCafe\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\SortableGroup;
+use Gedmo\Mapping\Annotation\SortablePosition;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -24,6 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 class Question implements \Stringable
 {
+    #[Groups(['wc:create'])]
+    #[SortablePosition]
+    #[ORM\Column(type: 'integer', nullable: true)]
+    protected ?int $position = null;
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -40,6 +46,7 @@ class Question implements \Stringable
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
+    #[SortableGroup]
     #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'questions')]
     private ?WorldCafe $worldCafe = null;
 
@@ -82,6 +89,16 @@ class Question implements \Stringable
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): void
+    {
+        $this->position = $position;
     }
 
     public function getWorldCafe(): ?WorldCafe
