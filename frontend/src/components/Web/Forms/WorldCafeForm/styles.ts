@@ -11,6 +11,7 @@ import { BODY_MD, mediumWeight } from '@/ui/Texts';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
+  COLOR_GREEN_200,
   COLOR_GREEN_600,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_200,
@@ -61,6 +62,10 @@ const StyledWorldCafeForm = styled.form`
       }
     }
   }
+
+  & .react-datepicker__tab-loop .react-datepicker__triangle {
+    left: -10px !important;
+  }
 `;
 
 const StyledAddButton = styled.button`
@@ -93,7 +98,11 @@ const StyledStepper = styled.ul`
   & div {
     width: 100%;
     height: 1px;
-    border-top: 1px solid ${COLOR_NEUTRO_400};
+    border-top: 2px solid ${COLOR_NEUTRO_400};
+
+    &.green {
+      border-top: 2px solid ${COLOR_GREEN_200};
+    }
   }
 
   & > li {

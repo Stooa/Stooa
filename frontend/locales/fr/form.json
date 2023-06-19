@@ -59,5 +59,23 @@
         "unknownErrorServer": "Problème inconnu. Veuillez actualiser la page et réessayer",
         "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer",
         "maxLength": "Ce champ ne peut pas contenir plus de {{length}} caractères."
+    },
+    "worldCafe": {
+        "pageTitle": "Create a free World Café",
+        "basics": "Basics",
+        "questions": "Questions",
+        "descriptionPlaceholder": "If needed, add a description.",
+        "questionsTooltip": "Make sure to prepare enough questions for the number of people participating. The optimal size for rooms is between 4 and 6 participants.",
+        "defaults": {
+            "title": "World Café Meeting - {{name}}",
+            "question": "Question {{number}}"
+        },
+        "addQuestion": "Add question",
+        "roundDuration": "Round duration",
+        "roundTimeLabel": "Each round lasts",
+        "minutes": "minutes",
+        "add5MinutesLabel": "Add 5 extra minutes to the first round",
+        "add5MinutesTooltip": "We recommend adding 5 extra minutes to the first round, as people usually need a bit more time to get started.",
+        "submit": "Create World Café"
     }
 }

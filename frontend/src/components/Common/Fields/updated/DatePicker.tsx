@@ -21,12 +21,14 @@ type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & 
   label?: string;
   hasError?: FieldError;
   isValid?: boolean;
-  minDate?: Date | undefined;
+  minDate?: Date;
+  minTime?: Date;
+  maxTime?: Date;
   placeholderText: string;
   showTimeSelect?: boolean;
   showTimeSelectOnly?: boolean;
   timeIntervals?: number;
-  dateFormat?: 'dd/MM/yyyy' | 'H:mm';
+  dateFormat?: 'dd/MM/yyyy' | 'HH:mm';
   control: any;
   name: string;
 };
@@ -45,9 +47,8 @@ const DatePicker = ({
   showTimeSelectOnly = false,
   ...props
 }: DatePicker) => {
-  // const { setFieldValue } = useFormikContext();
-  // const [field, meta] = useField(props);
   const isInvalid = hasError || !isValid;
+  console.log(hasError);
 
   return (
     <DatePickerStyled
@@ -62,6 +63,7 @@ const DatePicker = ({
             {...props}
             dateFormat={dateFormat}
             timeIntervals={timeIntervals}
+            timeFormat="HH:mm"
             showTimeSelect={showTimeSelect}
             showTimeSelectOnly={showTimeSelectOnly}
             autocomplete="off"

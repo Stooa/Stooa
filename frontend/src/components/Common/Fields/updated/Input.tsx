@@ -15,6 +15,7 @@ import { FieldError } from 'react-hook-form';
 
 type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   label?: string;
+  placeholder?: string;
   icon?: IconVariant;
   hasError?: FieldError;
   isValid?: boolean;
@@ -24,7 +25,10 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
 };
 
 const NewInput = forwardRef<HTMLInputElement, Props>(
-  ({ label, hasError, isValid, isDirty, icon, variant = 'default', ...props }, ref) => {
+  (
+    { label, hasError, isValid, isDirty, icon, variant = 'default', placeholder, ...props },
+    ref
+  ) => {
     return (
       <InputStyled
         variant={variant}
@@ -32,8 +36,11 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
       >
         {icon && <Icon variant={icon} className="icon" />}
         <input
+          placeholder={placeholder}
           ref={ref}
-          className={` ${isDirty ? 'filled' : ''} ${hasError ? 'invalid' : ''}`}
+          className={` ${isDirty || (placeholder && label) ? 'filled' : ''} ${
+            hasError ? 'invalid' : ''
+          }`}
           aria-invalid={hasError ? 'true' : 'false'}
           {...props}
         />

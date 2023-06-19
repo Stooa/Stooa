@@ -26,6 +26,8 @@ import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
+import { useAuth } from '@/contexts/AuthContext';
+import useTranslation from 'next-translate/useTranslation';
 
 type Question = {
   title: string;
@@ -46,17 +48,39 @@ interface FormValues {
 
 const WorldCafeForm = () => {
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
+  const { user } = useAuth();
+  const { t } = useTranslation('form');
   const [createWorldCafe] = useMutation(CREATE_WORLD_CAFE);
+  const today = new Date();
 
   const validationSchema = yup.object({
-    title: yup.string().matches(/[^-\s]/, {
-      excludeEmptyString: true,
-      message: 'Title cannot be empty'
-    }),
-    description: yup.string(),
+    title: yup
+      .string()
+      .max(255, 'Title cannot be longer than 255 characters')
+      .matches(/[^-\s]/, {
+        excludeEmptyString: true,
+        message: 'Title cannot be empty'
+      }),
+    description: yup.string().max(500, 'Description cannot be longer than 500 characters'),
     timezone: yup.string().required('Timezone is required'),
-    date: yup.date().required('Date is required')
+    date: yup.date().required('Date is required'),
+    time: yup.date().required('Time is required'),
+    language: yup.string().required('Language is required'),
+    roundDuration: yup.number().required('Round duration is required'),
+    addExtraTime: yup.boolean(),
+    questions: yup.array().of(
+      yup.object().shape({
+        title: yup.string().required('Title is required'),
+        description: yup.string()
+      })
+    )
   });
+
+  const defaultTitle = t('worldCafe.defaults.title', {
+    name: user && user.name ? user.name.split(' ')[0] : ''
+  });
+
+  // TODO: GET ERRORS!!!
 
   const {
     register,
@@ -70,7 +94,7 @@ const WorldCafeForm = () => {
       title: '',
       description: '',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      date: new Date(),
+      date: today,
       time: nearestQuarterHour(),
       language: 'en',
       roundDuration: 10,
@@ -151,7 +175,7 @@ const WorldCafeForm = () => {
           Básicos
         </li>
 
-        <div />
+        <div className={step === 'questions' ? 'green' : ''} />
 
         <li className={`${step === 'questions' ? 'current' : 'disabled'}`}>
           <div className={`status ${step === 'questions' ? 'highlighted' : 'current'}`}>2</div>
@@ -163,14 +187,18 @@ const WorldCafeForm = () => {
         <NewInput
           label="Title"
           {...register('title')}
+          placeholder={defaultTitle}
           isDirty={dirtyFields.title}
-          hasError={errors['title']}
+          hasError={errors.title}
         />
+
         <NewTextarea
           label="Description"
           {...register('description')}
           isDirty={dirtyFields.description}
+          hasError={errors.description}
         />
+
         <DatePicker
           placeholderText="Choose a date"
           label="Date"
@@ -179,7 +207,7 @@ const WorldCafeForm = () => {
           name="date"
           id="date"
           variant="small"
-          minDate={new Date()}
+          minDate={today}
         />
 
         <DatePicker
@@ -188,12 +216,14 @@ const WorldCafeForm = () => {
           icon="clock"
           showTimeSelect
           showTimeSelectOnly
-          dateFormat="H:mm"
+          dateFormat="HH:mm"
           control={control}
           name="time"
           id="time"
           variant="small"
-          minDate={new Date()}
+          minTime={new Date()}
+          maxTime={new Date(today.setHours(23, 45))}
+          hasError={errors.time}
         />
 
         <TitleWithDivider regularWeight headingLevel="h4">
@@ -221,7 +251,7 @@ const WorldCafeForm = () => {
           color="primary"
           variant="text"
           onClick={handleNextStep}
-          disabled={!isValid}
+          // disabled={!isValid}
         >
           Siguiente
         </Button>
@@ -263,14 +293,16 @@ const WorldCafeForm = () => {
         <h3>Round duration</h3>
 
         <Select
+          id="roundDuration"
           icon="clock"
           label="Cada ronda dura"
           {...register('roundDuration')}
-          defaultValue={10}
         >
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
         </Select>
 
         <Switch
@@ -283,7 +315,13 @@ const WorldCafeForm = () => {
           {...register('addExtraTime')}
         />
 
-        <Button full data-testid="world-cafe-form-submit-button" disabled={!isValid} type="submit">
+        <Button
+          full
+          data-testid="world-cafe-form-submit-button"
+          disabled={!isValid}
+          type="submit"
+          variant="primary"
+        >
           Crear world cafe
         </Button>
       </div>
