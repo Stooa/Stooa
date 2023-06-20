@@ -48,7 +48,6 @@ const DatePicker = ({
   ...props
 }: DatePicker) => {
   const isInvalid = hasError || !isValid;
-  console.log(hasError);
 
   return (
     <DatePickerStyled

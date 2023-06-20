@@ -93,6 +93,11 @@ const StyledAddButton = styled.button`
     background-color: ${COLOR_NEUTRO_300};
     box-shadow: 0 6px 10px -6px ${COLOR_NEUTRO_500};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
 const StyledStepper = styled.ul`

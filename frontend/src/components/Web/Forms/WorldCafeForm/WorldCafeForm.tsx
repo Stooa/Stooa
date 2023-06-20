@@ -13,6 +13,8 @@ import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useTranslation from 'next-translate/useTranslation';
+import { useMutation } from '@apollo/client';
+import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
 
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
@@ -24,8 +26,7 @@ import Switch from '@/components/Common/Fields/updated/Switch';
 import TitleWithDivider from '@/components/Common/TitleWithDivider/TitleWithDivider';
 import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneSelector';
 import DatePicker from '@/components/Common/Fields/updated/DatePicker';
-import { useMutation } from '@apollo/client';
-import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
+import TitleWithFullColoredTooltip from '@/components/Common/TitleWithFullColoredTooltip/TitleWithFullColoredTooltip';
 
 import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 import BinSVG from '@/ui/svg/bin.svg';
@@ -35,15 +36,13 @@ import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
 import { ROUTE_WORLD_CAFE_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
-import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFullTooltip';
-import { TitleWithFullColoredTooltip } from '@/components/Common/TitleWithFullColoredTooltip/TitleWithFullColoredTooltip';
 
 type Question = {
   title: string;
   description: string;
 };
 
-interface FormValues {
+export interface WorldCafeFormValues {
   title: string;
   description: string;
   date: Date;
@@ -102,7 +101,7 @@ const WorldCafeForm = () => {
     control,
     getValues,
     formState: { errors, dirtyFields, isValid }
-  } = useForm<FormValues>({
+  } = useForm<WorldCafeFormValues>({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
     defaultValues: {
@@ -164,7 +163,7 @@ const WorldCafeForm = () => {
     description.classList.add('show');
   };
 
-  const onSubmit: SubmitHandler<FormValues> = data => {
+  const onSubmit: SubmitHandler<WorldCafeFormValues> = data => {
     const dayFormatted = formatDateTime(data.date);
     const timeFormatted = formatDateTime(data.time);
 
@@ -341,11 +340,10 @@ const WorldCafeForm = () => {
               </div>
             ))}
           </div>
-          {fields.length < 5 && (
-            <StyledAddButton onClick={handleAddNewTopic}>
-              + {t('worldCafe.addQuestion')}
-            </StyledAddButton>
-          )}
+
+          <StyledAddButton disabled={fields.length > 4} onClick={handleAddNewTopic}>
+            + {t('worldCafe.addQuestion')}
+          </StyledAddButton>
         </fieldset>
 
         <fieldset>

@@ -21,7 +21,7 @@ interface Props {
   tooltipText: string;
 }
 
-export const TitleWithFullColoredTooltip = ({ children, tooltipText, headingLevel }: Props) => {
+const TitleWithFullColoredTooltip = ({ children, tooltipText, headingLevel }: Props) => {
   const [arrowPosition, setArrowPosition] = useState('');
   const [showTooltip, setShowTooltip] = useState(false);
   const tipToHover = useRef<HTMLDivElement>(null);
@@ -56,3 +56,5 @@ export const TitleWithFullColoredTooltip = ({ children, tooltipText, headingLeve
     </StyledTitleWithFullColoredTooltipWrapper>
   );
 };
+
+export default TitleWithFullColoredTooltip;

@@ -25,7 +25,8 @@ import {
   ROUTE_RESET_PASSWORD,
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_SCHEDULED,
-  ROUTE_FISHBOWL_FINISHED
+  ROUTE_FISHBOWL_FINISHED,
+  ROUTE_WORLD_CAFE_CREATE
 } from '@/app.config';
 
 import {
@@ -49,6 +50,7 @@ import createGenericContext from '@/contexts/createGenericContext';
 
 const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
+  ROUTE_WORLD_CAFE_CREATE,
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_DETAIL,
   ROUTE_FISHBOWL_SCHEDULED,
