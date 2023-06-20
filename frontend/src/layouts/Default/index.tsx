@@ -31,8 +31,8 @@ interface Props {
 
 const Page = ({
   children,
-  horizontalAlign,
-  verticalAlign,
+  horizontalAlign = 'center',
+  verticalAlign = 'center',
   decorated = false,
   navigation = true,
   title = ''
