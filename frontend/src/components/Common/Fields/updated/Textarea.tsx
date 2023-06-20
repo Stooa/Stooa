@@ -35,10 +35,7 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
     {
       label,
       hasError,
-      errorMessage,
       isValid,
-      isInvalid,
-      validationError,
       isDirty,
       lengthState,
       counter,

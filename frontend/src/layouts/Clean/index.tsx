@@ -18,7 +18,9 @@ interface Props {
 const Page = ({ children }: Props) => {
   return (
     <Container>
-      <Main center>{children}</Main>
+      <Main horizontalAlign="center" verticalAlign="center">
+        {children}
+      </Main>
     </Container>
   );
 };

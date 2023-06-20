@@ -12,7 +12,7 @@ import Layout from '@/layouts/Default';
 
 const WorldcafeCreate = () => {
   return (
-    <Layout title={'Create a world Cafe'}>
+    <Layout verticalAlign="flex-start" title={'Create a world Cafe'}>
       <h1 className="title-md form-title">WORLD CAFE CREATION</h1>
       <WorldCafeForm />
     </Layout>

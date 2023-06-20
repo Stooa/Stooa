@@ -21,7 +21,8 @@ import {
 } from '@/layouts/Default/styles';
 
 interface Props {
-  center?: boolean;
+  horizontalAlign?: 'flex-start' | 'center' | 'flex-end';
+  verticalAlign?: 'flex-start' | 'center' | 'flex-end';
   decorated?: boolean;
   navigation?: boolean;
   title?: string;
@@ -30,7 +31,8 @@ interface Props {
 
 const Page = ({
   children,
-  center = true,
+  horizontalAlign = 'center',
+  verticalAlign = 'center',
   decorated = false,
   navigation = true,
   title = ''
@@ -41,7 +43,9 @@ const Page = ({
       <HeaderStyled>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main center={center}>{children}</Main>
+      <Main verticalAlign={verticalAlign} horizontalAlign={horizontalAlign}>
+        {children}
+      </Main>
       {decorated && (
         <DecorationStyled>
           <Decoration />

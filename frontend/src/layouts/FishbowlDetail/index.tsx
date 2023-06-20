@@ -31,7 +31,7 @@ const Page = ({ children, navigation = true }: Props) => {
         <HeaderStyled>
           <Header navigation={navigation} />
         </HeaderStyled>
-        <Main center>{children}</Main>
+        <Main horizontalAlign="center">{children}</Main>
         <DecorationStyled>
           <Decoration />
         </DecorationStyled>

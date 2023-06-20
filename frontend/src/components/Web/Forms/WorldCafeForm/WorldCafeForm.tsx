@@ -35,6 +35,8 @@ import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
 import { ROUTE_WORLD_CAFE_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
+import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFullTooltip';
+import { TitleWithFullColoredTooltip } from '@/components/Common/TitleWithFullColoredTooltip/TitleWithFullColoredTooltip';
 
 type Question = {
   title: string;
@@ -304,7 +306,12 @@ const WorldCafeForm = () => {
       {/* QUESTIONS */}
       <div id="step-questions" className={step !== 'questions' ? 'hidden' : ''}>
         <fieldset>
-          <h3>{t('worldCafe.questions')}</h3>
+          <TitleWithFullColoredTooltip
+            tooltipText={t('worldCafe.questionsTooltip')}
+            headingLevel="h3"
+          >
+            {t('worldCafe.questions')}
+          </TitleWithFullColoredTooltip>
           <div className="questions">
             {fields.map((field, index) => (
               <div
@@ -347,7 +354,7 @@ const WorldCafeForm = () => {
           <Select
             id="roundDuration"
             icon="clock"
-            label="Cada ronda dura"
+            label={t('worldCafe.roundTimeLabel')}
             {...register('roundDuration')}
           >
             <option value="5">5</option>

@@ -12,11 +12,9 @@ import styled, { css } from 'styled-components';
 import { space, media } from '@/ui/helpers';
 import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
 
-const flexCenter = css`
-  align-items: center;
+const flexColumn = css`
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 const Container = styled.div`
@@ -66,7 +64,10 @@ const Header = styled.header`
   justify-content: space-between;
 `;
 
-const Main = styled.main<{ center?: boolean }>`
+const Main = styled.main<{
+  horizontalAlign?: 'flex-start' | 'center' | 'flex-end';
+  verticalAlign?: 'flex-start' | 'center' | 'flex-end';
+}>`
   color: ${COLOR_NEUTRO_700};
   grid-area: Main;
   padding: ${space(2)} 0;
@@ -74,7 +75,18 @@ const Main = styled.main<{ center?: boolean }>`
   text-align: center;
   z-index: 1;
 
-  ${props => (props.center ? flexCenter : '')}
+  ${props => (props.horizontalAlign || props.verticalAlign ? flexColumn : '')}
+
+  ${props =>
+    props.horizontalAlign &&
+    css`
+      align-items: ${props.horizontalAlign};
+    `}
+  ${props =>
+    props.verticalAlign &&
+    css`
+      justify-content: ${props.verticalAlign};
+    `}
 `;
 
 export { Container, Decoration, Header, Main };
