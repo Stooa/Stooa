@@ -14,6 +14,8 @@ ARG GID=1000
 RUN usermod --uid $UID node
 RUN groupmod --non-unique --gid $GID node
 
+RUN chmod 1777 /tmp
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     git \
