@@ -8,6 +8,7 @@
  */
 
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -31,6 +32,7 @@ import BinSVG from '@/ui/svg/bin.svg';
 
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
+import { ROUTE_WORLD_CAFE_DETAIL } from '@/app.config';
 
 type Question = {
   title: string;
@@ -55,6 +57,7 @@ const WorldCafeForm = () => {
   const { t } = useTranslation('form');
   const [createWorldCafe] = useMutation(CREATE_WORLD_CAFE);
   const today = new Date();
+  const router = useRouter();
 
   const validationSchema = yup.object({
     title: yup
@@ -170,6 +173,16 @@ const WorldCafeForm = () => {
     })
       .then(res => {
         console.log('[STOOA] World Café created', res);
+
+        const {
+          data: {
+            createWorldCafe: { worldCafe }
+          }
+        } = res;
+
+        const route = `${ROUTE_WORLD_CAFE_DETAIL}/${worldCafe.slug}`;
+
+        router.push(route, route, { locale: data.language });
       })
       .catch(error => {
         console.log(error);
