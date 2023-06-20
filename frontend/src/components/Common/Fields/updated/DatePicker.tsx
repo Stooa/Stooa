@@ -12,8 +12,9 @@ import DatePickerField from 'react-datepicker';
 import { DatePickerStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
 import Icon, { IconVariant } from '@/components/Common/Fields/Icon';
-import { Controller, FieldError } from 'react-hook-form';
+import { Control, Controller, FieldError } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
+import { WorldCafeFormValues } from '@/components/Web/Forms/WorldCafeForm';
 
 type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   icon?: IconVariant;
@@ -29,7 +30,7 @@ type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & 
   showTimeSelectOnly?: boolean;
   timeIntervals?: number;
   dateFormat?: 'dd/MM/yyyy' | 'HH:mm';
-  control: any;
+  control: Control<WorldCafeFormValues>;
   name: string;
 };
 

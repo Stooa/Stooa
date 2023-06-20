@@ -9,11 +9,14 @@
 
 import WorldCafeForm from '@/components/Web/Forms/WorldCafeForm/WorldCafeForm';
 import Layout from '@/layouts/Default';
+import useTranslation from 'next-translate/useTranslation';
 
 const WorldcafeCreate = () => {
+  const { t } = useTranslation('form');
+
   return (
-    <Layout verticalAlign="flex-start" title={'Create a world Cafe'}>
-      <h1 className="title-md form-title">WORLD CAFE CREATION</h1>
+    <Layout verticalAlign="flex-start" title={t('worldCafe.pageTitle')}>
+      <h1 className="title-md form-title">{t('worldCafe.pageTitle')}</h1>
       <WorldCafeForm />
     </Layout>
   );

@@ -9,12 +9,14 @@
 
 import countriesAndTimezones from 'countries-and-timezones';
 import Select from '../Fields/updated/Select';
+import { UseFormRegister } from 'react-hook-form';
+import { WorldCafeFormValues } from '@/components/Web/Forms/WorldCafeForm';
 
 interface Props {
   label: string;
   placeholder: string;
   name: string;
-  register: any;
+  register: UseFormRegister<WorldCafeFormValues>;
   variant?: 'default' | 'small';
   defaultValue?: string;
 }

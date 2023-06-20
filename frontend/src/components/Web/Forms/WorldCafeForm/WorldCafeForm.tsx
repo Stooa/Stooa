@@ -19,7 +19,7 @@ import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
-import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { StyledAddButton, StyledDeleteButton, StyledStepper, StyledWorldCafeForm } from './styles';
 import Select from '@/components/Common/Fields/updated/Select';
 import Switch from '@/components/Common/Fields/updated/Switch';
@@ -42,7 +42,7 @@ type Question = {
   description: string;
 };
 
-export interface WorldCafeFormValues {
+interface FormValues {
   title: string;
   description: string;
   date: Date;
@@ -53,6 +53,8 @@ export interface WorldCafeFormValues {
   addExtraTime: boolean;
   questions: Question[];
 }
+
+export type WorldCafeFormValues = FormValues & FieldValues;
 
 const WorldCafeForm = () => {
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
@@ -207,7 +209,11 @@ const WorldCafeForm = () => {
   return (
     <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
       <StyledStepper>
-        <li id="basics" onClick={returnToBeginning}>
+        <li
+          id="basics"
+          className={`${step === 'basics' ? 'current' : ''}`}
+          onClick={returnToBeginning}
+        >
           <div className={`status ${step === 'questions' ? 'done' : 'highlighted'}`}>
             {step === 'questions' ? <CheckmarkSVG /> : '1'}
           </div>

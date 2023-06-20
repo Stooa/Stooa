@@ -9,7 +9,7 @@
 
 export default function handler(req, res) {
   if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'prod') {
-    res.send('User-agent: *\nAllow: /');
+    res.send('User-agent: *\nAllow: /\n Disallor: /world-cafe/*');
   } else {
     res.send('User-agent: *\nDisallow: /');
   }

@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 import { rems, space } from '@/ui/helpers';
 import { COLOR_RED_500 } from '@/ui/settings';
-import { BODY_SM, BODY_XS } from '@/ui/Texts';
+import { BODY_XS } from '@/ui/Texts';
 
 const ValidationError = styled.div`
   ${BODY_XS};

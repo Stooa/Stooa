@@ -8,6 +8,7 @@
  */
 
 import { BODY_MD, mediumWeight } from '@/ui/Texts';
+import { space } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
   BREAKPOINTS,
@@ -19,7 +20,6 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
-  COLOR_PURPLE_500,
   COLOR_RED_600
 } from '@/ui/settings';
 import styled from 'styled-components';
@@ -27,6 +27,11 @@ import styled from 'styled-components';
 const StyledWorldCafeForm = styled.form`
   width: 100%;
   max-width: ${BREAKPOINTS.reader}px;
+  padding-bottom: ${space(26)};
+
+  & h3 {
+    ${mediumWeight};
+  }
 
   & fieldset {
     width: 100%;
@@ -36,7 +41,7 @@ const StyledWorldCafeForm = styled.form`
     flex-shrink: 0;
     justify-content: space-between;
 
-    & > * + * {
+    & > * + *:not(button) {
       margin-top: 1rem;
     }
   }
@@ -88,7 +93,9 @@ const StyledAddButton = styled.button`
   transition: background-color, transform, 0.2s ease-out;
   box-shadow: 0 0 0 0 ${COLOR_NEUTRO_500};
 
-  &:hover {
+  margin-top: 2rem;
+
+  &:hover:not(:disabled) {
     transform: translateY(-2px);
     background-color: ${COLOR_NEUTRO_300};
     box-shadow: 0 6px 10px -6px ${COLOR_NEUTRO_500};
@@ -162,10 +169,10 @@ const StyledStepper = styled.ul`
       }
     }
 
-    &#basics {
+    &#basics:not(.current) {
       cursor: pointer;
       &:hover {
-        color: ${COLOR_PURPLE_500};
+        color: ${COLOR_GREEN_600};
       }
     }
   }
