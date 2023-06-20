@@ -70,7 +70,7 @@ const WorldCafeForm = () => {
       .max(255, 'Title cannot be longer than 255 characters')
       .matches(/[^-\s]/, {
         excludeEmptyString: true,
-        message: 'Title cannot be empty'
+        message: t('validation.notEmpty')
       }),
     description: yup
       .string()
@@ -339,7 +339,7 @@ const WorldCafeForm = () => {
                   {...register(`questions.${index}.title`)}
                 />
                 <NewTextarea
-                  placeholder="Si lo necesitas, añade descripción."
+                  placeholder={t('worldCafe.descriptionPlaceholder')}
                   className="description"
                   {...register(`questions.${index}.description`)}
                 />

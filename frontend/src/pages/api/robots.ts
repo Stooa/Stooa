@@ -8,9 +8,16 @@
  */
 
 export default function handler(req, res) {
+  let robotsString = 'User-agent: ';
   if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'prod') {
-    res.send('User-agent: *\nAllow: /\n Disallor: /world-cafe/*');
+    robotsString += '*\nAllow: /';
   } else {
-    res.send('User-agent: *\nDisallow: /');
+    robotsString += '*\nDisallow: /';
   }
+
+  if (process.env.NEXT_PUBLIC_WORLD_CAFE === 'false') {
+    robotsString += '\nDisallow: /world-cafe/*';
+  }
+
+  res.send(robotsString);
 }

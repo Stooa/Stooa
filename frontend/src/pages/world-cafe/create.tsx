@@ -10,9 +10,17 @@
 import WorldCafeForm from '@/components/Web/Forms/WorldCafeForm/WorldCafeForm';
 import Layout from '@/layouts/Default';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 const WorldcafeCreate = () => {
   const { t } = useTranslation('form');
+  const router = useRouter();
+
+  console.log(process.env.NEXT_PUBLIC_WORLD_CAFE);
+
+  if (process.env.NEXT_PUBLIC_WORLD_CAFE === 'false') {
+    router.push('/404');
+  }
 
   return (
     <Layout verticalAlign="flex-start" horizontalAlign="center" title={t('worldCafe.pageTitle')}>
