@@ -304,7 +304,7 @@ const WorldCafeForm = () => {
                 </StyledDeleteButton>
 
                 <NewTextarea
-                  placeholder={`Pregunta ${index + 1}`}
+                  placeholder={t('worldCafe.defaults.question', {number: index + 1})}
                   placeholderStyle="large-text"
                   variant="large-text"
                   {...register(`questions.${index}.title`)}
