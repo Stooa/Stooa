@@ -15,7 +15,6 @@ RUN usermod --uid $UID node
 RUN groupmod --non-unique --gid $GID node
 
 RUN mkdir /tmp
-
 RUN chmod 1777 /tmp
 
 RUN apt-get update \

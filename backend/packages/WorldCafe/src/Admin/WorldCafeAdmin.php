@@ -136,6 +136,7 @@ class WorldCafeAdmin extends AbstractAdmin
                 ->add('hasExtraRoundTime', BooleanType::class, [
                     'transform' => true,
                 ])
+                ->add('roundMinutes')
                 ->add('topics')
                 ->add('questions', CollectionType::class, [
                     'type_options' => [
