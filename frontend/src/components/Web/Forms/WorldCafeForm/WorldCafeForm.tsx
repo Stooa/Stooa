@@ -29,6 +29,7 @@ import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
 
 import CheckmarkSVG from '@/ui/svg/checkmark.svg';
 import BinSVG from '@/ui/svg/bin.svg';
+import ArrowRightSVG from '@/ui/svg/arrow-right.svg';
 
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
@@ -55,7 +56,7 @@ interface FormValues {
 const WorldCafeForm = () => {
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
   const { user } = useAuth();
-  const { t } = useTranslation('form');
+  const { t, lang } = useTranslation('form');
   const [createWorldCafe] = useMutation(CREATE_WORLD_CAFE);
   const today = new Date();
   const router = useRouter();
@@ -68,7 +69,13 @@ const WorldCafeForm = () => {
         excludeEmptyString: true,
         message: 'Title cannot be empty'
       }),
-    description: yup.string().max(500, 'Description cannot be longer than 500 characters'),
+    description: yup
+      .string()
+      .max(500, 'Description cannot be longer than 500 characters')
+      .matches(/[^-\s]/, {
+        excludeEmptyString: true,
+        message: 'Description cannot be empty'
+      }),
     timezone: yup.string().required('Timezone is required'),
     date: yup.date().required('Date is required'),
     time: yup.date().required('Time is required'),
@@ -77,7 +84,7 @@ const WorldCafeForm = () => {
     addExtraTime: yup.boolean(),
     questions: yup.array().of(
       yup.object().shape({
-        title: yup.string().required('Title is required'),
+        title: yup.string(),
         description: yup.string()
       })
     )
@@ -87,8 +94,6 @@ const WorldCafeForm = () => {
     name: user && user.name ? user.name.split(' ')[0] : ''
   });
 
-  // TODO: GET ERRORS!!!
-
   const {
     register,
     handleSubmit,
@@ -97,13 +102,14 @@ const WorldCafeForm = () => {
     formState: { errors, dirtyFields, isValid }
   } = useForm<FormValues>({
     resolver: yupResolver(validationSchema),
+    mode: 'onChange',
     defaultValues: {
       title: '',
       description: '',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       date: today,
       time: nearestQuarterHour(),
-      language: 'en',
+      language: lang,
       roundDuration: 10,
       addExtraTime: true,
       questions: [
@@ -117,6 +123,14 @@ const WorldCafeForm = () => {
     control,
     name: 'questions'
   });
+
+  const firstPartIsInvalid =
+    errors.title !== undefined ||
+    errors.description !== undefined ||
+    errors.date !== undefined ||
+    errors.time !== undefined ||
+    errors.timezone !== undefined ||
+    errors.language !== undefined;
 
   const handleAddNewTopic = event => {
     event.preventDefault();
@@ -140,7 +154,6 @@ const WorldCafeForm = () => {
   const handleShowDescription = event => {
     const elementClicked = event.target;
 
-    console.log(event.target);
     if (elementClicked.classList.contains('delete')) return;
 
     const description =
@@ -275,14 +288,16 @@ const WorldCafeForm = () => {
         </fieldset>
 
         <Button
-          data-testid="feedback-comment-send-button"
+          className="next-step-button"
+          data-testid="next-step-button"
           type="submit"
           color="primary"
+          size="large"
           full
           onClick={handleNextStep}
-          // disabled={!isValid}
+          disabled={firstPartIsInvalid}
         >
-          {t('worldCafe.next')}
+          {t('worldCafe.next')} <ArrowRightSVG />
         </Button>
       </div>
 
@@ -356,6 +371,7 @@ const WorldCafeForm = () => {
           data-testid="world-cafe-form-submit-button"
           disabled={!isValid}
           type="submit"
+          size="large"
           variant="primary"
         >
           {t('worldCafe.submit')}

@@ -69,6 +69,10 @@ const StyledWorldCafeForm = styled.form`
     }
   }
 
+  & .next-step-button svg {
+    height: 1rem;
+  }
+
   & .react-datepicker__tab-loop .react-datepicker__triangle {
     left: -10px !important;
   }

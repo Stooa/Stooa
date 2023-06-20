@@ -69,16 +69,15 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </ValidationIcon>
         )}
         {label && <label htmlFor={props.id || props.name}>{label}</label>}
-        {isInvalid && (
+        {hasError && (
           <>
             <ValidationIcon>
               <Icon variant="cross" />
             </ValidationIcon>
-            <ValidationError>{validationError}</ValidationError>
+            <ValidationError>{hasError.message}</ValidationError>
           </>
         )}
         {showCounter && <span className={`body-xs counter ${lengthState}`}>{counter}</span>}
-        {hasError && isDirty && <ValidationError>{errorMessage}</ValidationError>}
       </InputStyled>
     );
   }
