@@ -61,6 +61,14 @@
         "maxLength": "The maximum length is {{length}} characters."
     },
     "worldCafe": {
+        "title": "Title",
+        "day": "Date",
+        "description": "Description (optional)",
+        "timezone": "Time Zone",
+        "time": "Starts at",
+        "language": "Language",
+        "selectLanguageLabel": "Select language",
+        "advancedOptions": "Advanced Options",
         "pageTitle": "Create a free World Café",
         "basics": "Basics",
         "questions": "Questions",
@@ -76,6 +84,7 @@
         "minutes": "minutes",
         "add5MinutesLabel": "Add 5 extra minutes to the first round",
         "add5MinutesTooltip": "We recommend adding 5 extra minutes to the first round, as people usually need a bit more time to get started.",
+        "next":  "Add questions",
         "submit": "Create World Café"
     }
 }

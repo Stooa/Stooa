@@ -210,7 +210,7 @@ const WorldCafeForm = () => {
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
         <fieldset>
           <NewInput
-            label="Title"
+            label={t('worldCafe.title')}
             {...register('title')}
             placeholder={defaultTitle}
             isDirty={dirtyFields.title}
@@ -218,7 +218,7 @@ const WorldCafeForm = () => {
           />
 
           <NewTextarea
-            label="Description"
+            label={t('worldCafe.description')}
             {...register('description')}
             isDirty={dirtyFields.description}
             hasError={errors.description}
@@ -226,7 +226,7 @@ const WorldCafeForm = () => {
 
           <DatePicker
             placeholderText="Choose a date"
-            label="Date"
+            label={t('worldCafe.date')}
             icon="calendar"
             control={control}
             name="date"
@@ -237,7 +237,7 @@ const WorldCafeForm = () => {
 
           <DatePicker
             placeholderText="Choose a time"
-            label="Empieza a las"
+            label={t('worldCafe.time')}
             icon="clock"
             showTimeSelect
             showTimeSelectOnly
@@ -254,17 +254,17 @@ const WorldCafeForm = () => {
 
         <fieldset>
           <TitleWithDivider regularWeight headingLevel="h4">
-            {t('fishbowl.advancedOptions')}
+            {t('worldCafe.advancedOptions')}
           </TitleWithDivider>
           <TimeZoneSelector
             placeholder="Timezone"
             name="timezone"
-            label="Time zone"
+            label={t('worldCafe.timezone')}
             defaultValue={getValues('timezone')}
             register={register}
           />
 
-          <Select icon="language" label="Idioma" {...register('language')}>
+          <Select icon="language" label={t('worldCafe.language')} {...register('language')}>
             <option value="es">Castellano</option>
             <option value="en">Inglés</option>
             <option value="fr">Francés</option>
@@ -280,14 +280,14 @@ const WorldCafeForm = () => {
           onClick={handleNextStep}
           // disabled={!isValid}
         >
-          Añadir preguntas -&gt;
+          {t('worldCafe.next')}
         </Button>
       </div>
 
       {/* QUESTIONS */}
       <div id="step-questions" className={step !== 'questions' ? 'hidden' : ''}>
         <fieldset>
-          <h3>Questions</h3>
+          <h3>{t('worldCafe.questions')}</h3>
           <div className="questions">
             {fields.map((field, index) => (
               <div
@@ -318,12 +318,14 @@ const WorldCafeForm = () => {
             ))}
           </div>
           {fields.length < 5 && (
-            <StyledAddButton onClick={handleAddNewTopic}>+ Add topic</StyledAddButton>
+            <StyledAddButton onClick={handleAddNewTopic}>
+              + {t('worldCafe.addQuestion')}
+            </StyledAddButton>
           )}
         </fieldset>
 
         <fieldset>
-          <h3>Round duration</h3>
+          <h3>{t('worldCafe.roundDuration')}</h3>
 
           <Select
             id="roundDuration"
@@ -341,10 +343,8 @@ const WorldCafeForm = () => {
           <Switch
             full
             id="addExtraTime"
-            label="Añadir 5 minutos extra a la primera ronda"
-            tooltipText={
-              'Te recomendamos añadir 5 minutos extra en la primera ronda, las personas suelen necesitar un poco más de tiempo para entrar en acción.'
-            }
+            label={t('worldCafe.add5MinutesLabel')}
+            tooltipText={t('worldCafe.add5MinutesTooltip')}
             {...register('addExtraTime')}
           />
         </fieldset>
@@ -356,7 +356,7 @@ const WorldCafeForm = () => {
           type="submit"
           variant="primary"
         >
-          Crear world cafe
+          {t('worldCafe.submit')}
         </Button>
       </div>
     </StyledWorldCafeForm>
