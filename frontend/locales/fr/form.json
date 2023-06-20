@@ -61,22 +61,22 @@
         "maxLength": "Ce champ ne peut pas contenir plus de {{length}} caractères."
     },
     "worldCafe": {
-        "pageTitle": "Create a free World Café",
-        "basics": "Basics",
+        "pageTitle": "Créez un World Café gratuit",
+        "basics": "Bases",
         "questions": "Questions",
-        "descriptionPlaceholder": "If needed, add a description.",
-        "questionsTooltip": "Make sure to prepare enough questions for the number of people participating. The optimal size for rooms is between 4 and 6 participants.",
+        "descriptionPlaceholder": "Si nécessaire, ajoutez une description.",
+        "questionsTooltip": "Assurez-vous de préparer suffisamment de questions pour le nombre de personnes participant. La taille optimale pour les salles est de 4 à 6 participants.",
         "defaults": {
-            "title": "World Café Meeting - {{name}}",
+            "title": "Rencontre World Café - {{name}}",
             "question": "Question {{number}}"
         },
-        "addQuestion": "Add question",
-        "roundDuration": "Round duration",
-        "roundTimeLabel": "Each round lasts",
+        "addQuestion": "Ajouter une question",
+        "roundDuration": "Durée des rounds",
+        "roundTimeLabel": "Chaque round dure",
         "minutes": "minutes",
-        "add5MinutesLabel": "Add 5 extra minutes to the first round",
-        "add5MinutesTooltip": "We recommend adding 5 extra minutes to the first round, as people usually need a bit more time to get started.",
-        "next":  "Add questions",
-        "submit": "Create World Café"
+        "add5MinutesLabel": "Ajoutez 5 minutes supplémentaires à la première ronde",
+        "add5MinutesTooltip": "Nous recommandons d'ajouter 5 minutes supplémentaires à la première ronde, car les personnes ont généralement besoin d'un peu plus de temps pour se lancer.",
+        "next":  "Ajouter une question",
+        "submit": "Créer un World Café"
     }
 }

@@ -33,6 +33,7 @@ import BinSVG from '@/ui/svg/bin.svg';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
 import { ROUTE_WORLD_CAFE_DETAIL } from '@/app.config';
+import { locales } from '@/i18n';
 
 type Question = {
   title: string;
@@ -210,7 +211,7 @@ const WorldCafeForm = () => {
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
         <fieldset>
           <NewInput
-            label={t('worldCafe.title')}
+            label={t('fishbowl.title')}
             {...register('title')}
             placeholder={defaultTitle}
             isDirty={dirtyFields.title}
@@ -218,7 +219,7 @@ const WorldCafeForm = () => {
           />
 
           <NewTextarea
-            label={t('worldCafe.description')}
+            label={t('fishbowl.description')}
             {...register('description')}
             isDirty={dirtyFields.description}
             hasError={errors.description}
@@ -226,7 +227,7 @@ const WorldCafeForm = () => {
 
           <DatePicker
             placeholderText="Choose a date"
-            label={t('worldCafe.date')}
+            label={t('fishbowl.day')}
             icon="calendar"
             control={control}
             name="date"
@@ -237,7 +238,7 @@ const WorldCafeForm = () => {
 
           <DatePicker
             placeholderText="Choose a time"
-            label={t('worldCafe.time')}
+            label={t('fishbowl.time')}
             icon="clock"
             showTimeSelect
             showTimeSelectOnly
@@ -254,21 +255,22 @@ const WorldCafeForm = () => {
 
         <fieldset>
           <TitleWithDivider regularWeight headingLevel="h4">
-            {t('worldCafe.advancedOptions')}
+            {t('fishbowl.advancedOptions')}
           </TitleWithDivider>
           <TimeZoneSelector
             placeholder="Timezone"
             name="timezone"
-            label={t('worldCafe.timezone')}
+            label={t('fishbowl.timezone')}
             defaultValue={getValues('timezone')}
             register={register}
           />
 
-          <Select icon="language" label={t('worldCafe.language')} {...register('language')}>
-            <option value="es">Castellano</option>
-            <option value="en">Inglés</option>
-            <option value="fr">Francés</option>
-            <option value="ca">Catalán</option>
+          <Select icon="language" label={t('fishbowl.language')} {...register('language')}>
+            {locales.map(locale => (
+              <option value={locale} key={`locale-${locale}`}>
+                {t(`common:languages.${locale}`)}
+              </option>
+            ))}
           </Select>
         </fieldset>
 
@@ -304,7 +306,7 @@ const WorldCafeForm = () => {
                 </StyledDeleteButton>
 
                 <NewTextarea
-                  placeholder={t('worldCafe.defaults.question', {number: index + 1})}
+                  placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
                   placeholderStyle="large-text"
                   variant="large-text"
                   {...register(`questions.${index}.title`)}

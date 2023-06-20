@@ -60,22 +60,22 @@
         "maxLength": "Aquest camp no pot tenir més de {{length}} caràcters."
     },
     "worldCafe": {
-        "pageTitle": "Create a free World Café",
-        "basics": "Basics",
-        "questions": "Questions",
-        "descriptionPlaceholder": "If needed, add a description.",
-        "questionsTooltip": "Make sure to prepare enough questions for the number of people participating. The optimal size for rooms is between 4 and 6 participants.",
+        "pageTitle": "Crea un World Café gratis",
+        "basics": "Bàsics",
+        "questions": "Preguntes",
+        "descriptionPlaceholder": "Si cal, afegeix una descripció.",
+        "questionsTooltip": "Assegura't de preparar suficients preguntes per al nombre de persones que hi participaran. La mida òptima per a les sales és entre 4 i 6 participants.",
         "defaults": {
-            "title": "World Café Meeting - {{name}}",
-            "question": "Question {{number}}"
+            "title": "Reunió World Café - {{name}}",
+            "question": "Pregunta {{number}}"
         },
-        "addQuestion": "Add question",
-        "roundDuration": "Round duration",
-        "roundTimeLabel": "Each round lasts",
-        "minutes": "minutes",
-        "add5MinutesLabel": "Add 5 extra minutes to the first round",
-        "add5MinutesTooltip": "We recommend adding 5 extra minutes to the first round, as people usually need a bit more time to get started.",
-        "next":  "Add questions",
-        "submit": "Create World Café"
+        "addQuestion": "Afegir una pregunta",
+        "roundDuration": "Durada de les rondes",
+        "roundTimeLabel": "Cada ronda dura",
+        "minutes": "minuts",
+        "add5MinutesLabel": "Afegeix 5 minuts extra a la primera ronda",
+        "add5MinutesTooltip": "Us recomanem afegir 5 minuts extra a la primera ronda, ja que les persones solen necessitar una mica més de temps per posar-se en marxa.",
+        "next":  "Afegir preguntes",
+        "submit": "Crear World Café"
     }
 }

@@ -61,14 +61,6 @@
         "maxLength": "The maximum length is {{length}} characters."
     },
     "worldCafe": {
-        "title": "Title",
-        "day": "Date",
-        "description": "Description (optional)",
-        "timezone": "Time Zone",
-        "time": "Starts at",
-        "language": "Language",
-        "selectLanguageLabel": "Select language",
-        "advancedOptions": "Advanced Options",
         "pageTitle": "Create a free World Café",
         "basics": "Basics",
         "questions": "Questions",
