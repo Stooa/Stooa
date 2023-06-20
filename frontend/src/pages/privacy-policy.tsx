@@ -17,7 +17,7 @@ const Page = () => {
   const { t } = useTranslation('legals');
 
   return (
-    <Layout center={false} title={t('privacyPolicy.title')}>
+    <Layout title={t('privacyPolicy.title')}>
       <Wysiwyg>
         <h1 className="title-lg">{t('privacyPolicy.title')}</h1>
         <Trans

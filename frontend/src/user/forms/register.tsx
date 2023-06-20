@@ -77,8 +77,8 @@ const Form = (props: FormikProps<FormValues>) => {
   return (
     <FormikForm>
       <fieldset className="fieldset-inline">
-        <Input label={t('firstname')} name="firstname" type="text" variant="sm" />
-        <Input label={t('lastname')} name="lastname" type="text" variant="sm" />
+        <Input label={t('firstname')} name="firstname" type="text" variant="small" />
+        <Input label={t('lastname')} name="lastname" type="text" variant="small" />
         <Input label={t('email')} name="email" type="email" icon="mail" />
         <Input label={t('password')} name="password" type="password" icon="lock" />
       </fieldset>
