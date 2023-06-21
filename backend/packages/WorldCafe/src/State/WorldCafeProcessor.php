@@ -41,7 +41,7 @@ final class WorldCafeProcessor implements ProcessorInterface
             ($context['collection_operation_name'] ?? null) === 'post' ||
             ($context['graphql_operation_name'] ?? null) === 'create')
         ) {
-//            $this->mailerService->sendWorldCafeCreatedEmail($data);
+            $this->mailerService->sendWorldCafeCreatedEmail($data);
         }
 
         return $result;
