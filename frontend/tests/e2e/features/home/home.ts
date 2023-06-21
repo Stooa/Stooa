@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 When('clicks on its profile', () => {
   cy.get('header').within(() => {
