@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+/// <reference types="@testing-library/cypress" />
+
 import '@testing-library/cypress/add-commands';
 import '@cypress/code-coverage/support';
 import { userAuthToken } from './tokens';

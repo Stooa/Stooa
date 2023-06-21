@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 const date = new Date();
 const isoDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString();
@@ -34,12 +34,6 @@ Given('a list of empty fishbowls', () => {
     },
     { fixture: 'empty-fishbowl-list.json' }
   ).as('getEmptyFishbowlsListQuery');
-});
-
-When('clicks on its profile', () => {
-  cy.get('header').within(() => {
-    cy.findByRole('button', { name: 'Linwood Hahn' }).click({ force: true });
-  });
 });
 
 Then('sees the fishbowl list page with one fishbowl', () => {

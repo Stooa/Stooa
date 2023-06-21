@@ -18,8 +18,9 @@
     "test:e2e:run": "cypress run"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true,
-    "stepDefinitions": "tests/e2e/features"
+    "stepDefinitions": [
+      "tests/e2e/features/**/*.ts"
+    ]
   },
   "engines": {
     "node": ">=18"
@@ -65,21 +66,20 @@
     "zustand": "4.3.8"
   },
   "devDependencies": {
-    "@cypress/code-coverage": "3.10.4",
+    "@badeball/cypress-cucumber-preprocessor": "18.0.1",
+    "@cypress/code-coverage": "3.10.7",
     "@faker-js/faker": "8.0.2",
     "@runroom/design-tokens": "2.2.0",
     "@svgr/webpack": "6.5.1",
-    "@testing-library/cypress": "8.0.7",
+    "@testing-library/cypress": "9.0.0",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
-    "@types/cypress-cucumber-preprocessor": "4.0.1",
     "@types/jest": "27.4.1",
     "@types/js-cookie": "3.0.3",
     "@types/react": "18.0.38",
     "@types/react-slick": "0.23.10",
     "@typescript-eslint/eslint-plugin": "5.59.9",
-    "cypress": "9.7.0",
-    "cypress-cucumber-preprocessor": "4.3.1",
+    "cypress": "12.15.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "eslint-config-prettier": "8.8.0",
