@@ -64,6 +64,7 @@
         "pageTitle": "Créez un World Café gratuit",
         "basics": "Bases",
         "questions": "Questions",
+        "question": "Question",
         "descriptionPlaceholder": "Si nécessaire, ajoutez une description.",
         "questionsTooltip": "Assurez-vous de préparer suffisamment de questions pour le nombre de personnes participant. La taille optimale pour les salles est de 4 à 6 participants.",
         "defaults": {

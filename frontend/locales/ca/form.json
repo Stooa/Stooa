@@ -63,6 +63,7 @@
         "pageTitle": "Crea un World Café gratis",
         "basics": "Bàsics",
         "questions": "Preguntes",
+        "question": "Pregunta",
         "descriptionPlaceholder": "Si cal, afegeix una descripció.",
         "questionsTooltip": "Assegura't de preparar suficients preguntes per al nombre de persones que hi participaran. La mida òptima per a les sales és entre 4 i 6 participants.",
         "defaults": {

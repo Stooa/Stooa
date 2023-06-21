@@ -67,14 +67,14 @@ const WorldCafeForm = () => {
   const validationSchema = yup.object({
     title: yup
       .string()
-      .max(255, 'Title cannot be longer than 255 characters')
+      .max(255, t('validation.maxLength', { length: 255 }))
       .matches(/[^-\s]/, {
         excludeEmptyString: true,
         message: t('validation.notEmpty')
       }),
     description: yup
       .string()
-      .max(500, 'Description cannot be longer than 500 characters')
+      .max(500, t('validation.maxLength', { length: 500 }))
       .matches(/[^-\s]/, {
         excludeEmptyString: true,
         message: 'Description cannot be empty'
@@ -87,8 +87,14 @@ const WorldCafeForm = () => {
     addExtraTime: yup.boolean(),
     questions: yup.array().of(
       yup.object().shape({
-        title: yup.string(),
-        description: yup.string()
+        title: yup.string().matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: t('validation.notEmpty')
+        }),
+        description: yup.string().matches(/[^-\s]/, {
+          excludeEmptyString: true,
+          message: t('validation.notEmpty')
+        })
       })
     )
   });
@@ -181,7 +187,8 @@ const WorldCafeForm = () => {
           hasExtraRoundTime: data.addExtraTime,
           roundMinutes: data.roundDuration,
           questions: data.questions.map((question, index) => ({
-            title: question.title,
+            title:
+              question.title === '' ? `${t('worldCafe.question')} ${index + 1}` : question.title,
             description: question.description,
             position: index
           }))
@@ -267,8 +274,6 @@ const WorldCafeForm = () => {
             name="time"
             id="time"
             variant="small"
-            minTime={new Date()}
-            maxTime={new Date(today.setHours(23, 45))}
             hasError={errors.time}
           />
         </fieldset>
@@ -322,8 +327,15 @@ const WorldCafeForm = () => {
               <div
                 className="question"
                 key={field.id}
-                onMouseDown={event => handleShowDescription(event)}
+                onFocus={event => handleShowDescription(event)}
               >
+                <NewTextarea
+                  placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
+                  placeholderStyle="large-text"
+                  hasError={errors.questions?.[index]?.title}
+                  variant="large-text"
+                  {...register(`questions.${index}.title`)}
+                />
                 <StyledDeleteButton
                   className="delete"
                   disabled={fields.length < 3}
@@ -331,16 +343,10 @@ const WorldCafeForm = () => {
                 >
                   <BinSVG />
                 </StyledDeleteButton>
-
-                <NewTextarea
-                  placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
-                  placeholderStyle="large-text"
-                  variant="large-text"
-                  {...register(`questions.${index}.title`)}
-                />
                 <NewTextarea
                   placeholder={t('worldCafe.descriptionPlaceholder')}
                   className="description"
+                  hasError={errors.questions?.[index]?.description}
                   {...register(`questions.${index}.description`)}
                 />
               </div>

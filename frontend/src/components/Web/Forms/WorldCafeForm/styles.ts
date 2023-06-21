@@ -20,6 +20,7 @@ import {
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
   COLOR_NEUTRO_600,
+  COLOR_NEUTRO_700,
   COLOR_RED_600
 } from '@/ui/settings';
 import styled from 'styled-components';
@@ -104,6 +105,10 @@ const StyledAddButton = styled.button`
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${COLOR_NEUTRO_700};
   }
 `;
 
@@ -195,6 +200,10 @@ const StyledDeleteButton = styled.button`
 
   &:hover {
     color: ${COLOR_RED_600};
+  }
+
+  &:focus-visible {
+    outline: 1px solid ${COLOR_NEUTRO_700};
   }
 
   &:disabled {

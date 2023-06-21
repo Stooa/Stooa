@@ -64,6 +64,7 @@
         "pageTitle": "Create a free World Café",
         "basics": "Basics",
         "questions": "Questions",
+        "question": "Question",
         "descriptionPlaceholder": "If needed, add a description.",
         "questionsTooltip": "Make sure to prepare enough questions for the number of people participating. The optimal size for rooms is between 4 and 6 participants.",
         "defaults": {

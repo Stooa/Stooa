@@ -64,6 +64,7 @@
         "pageTitle": "Crea un World Café gratis",
         "basics": "Básicos",
         "questions": "Preguntas",
+        "question": "Pregunta",
         "descriptionPlaceholder": "Si lo necesitas, añade descripción.",
         "questionsTooltip": "Asegúrate de preparar suficientes preguntas para el número de personas que van a participar. Lo óptimo son salas de entre 4 y 6 participantes.",
         "defaults": {
