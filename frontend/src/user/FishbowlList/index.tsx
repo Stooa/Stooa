@@ -317,6 +317,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                             <Trans i18nKey="fishbowl-list:titleEdit" components={{ i: <i /> }} />
                           </h2>
                         </div>
+
                         <FishbowlForm
                           $isFull={true}
                           selectedFishbowl={selectedFishbowl}
