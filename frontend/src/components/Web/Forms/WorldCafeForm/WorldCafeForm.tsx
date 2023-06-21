@@ -19,7 +19,7 @@ import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
-import { FieldValues, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, set, useFieldArray, useForm } from 'react-hook-form';
 import { StyledAddButton, StyledDeleteButton, StyledStepper, StyledWorldCafeForm } from './styles';
 import Select from '@/components/Common/Fields/updated/Select';
 import Switch from '@/components/Common/Fields/updated/Switch';
@@ -59,6 +59,7 @@ export type WorldCafeFormValues = FormValues & FieldValues;
 
 const WorldCafeForm = () => {
   const [formError, setFormError] = useState();
+  const [showDescription, setShowDescription] = useState({});
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
   const { user } = useAuth();
   const { t, lang } = useTranslation('form');
@@ -162,15 +163,12 @@ const WorldCafeForm = () => {
     setStep('basics');
   };
 
-  const handleShowDescription = event => {
+  const handleShowDescription = (event, index: number) => {
     const elementSelected = event.target;
 
     if (elementSelected.classList.contains('delete')) return;
 
-    const description =
-      elementSelected.parentElement.parentElement.querySelector('textarea.description');
-
-    description.classList.add('show');
+    setShowDescription(current => ({ ...current, [index]: true }));
   };
 
   const onSubmit: SubmitHandler<WorldCafeFormValues> = data => {
@@ -333,7 +331,7 @@ const WorldCafeForm = () => {
               <div
                 className="question"
                 key={field.id}
-                onFocusCapture={event => handleShowDescription(event)}
+                onFocusCapture={event => handleShowDescription(event, index)}
               >
                 <NewTextarea
                   placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
@@ -354,7 +352,7 @@ const WorldCafeForm = () => {
 
                 <NewTextarea
                   placeholder={t('worldCafe.descriptionPlaceholder')}
-                  className="description"
+                  className={`description ${showDescription[index] ? 'show' : ''}`}
                   hasError={errors.questions?.[index]?.description}
                   {...register(`questions.${index}.description`)}
                 />

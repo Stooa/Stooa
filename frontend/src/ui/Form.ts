@@ -179,6 +179,10 @@ const InputStyled = styled.div<{
   &.textarea {
     &.taller {
       height: ${space(14)};
+
+      & textarea {
+        height: 100%;
+      }
     }
 
     & .counter {
