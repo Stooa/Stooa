@@ -9,10 +9,11 @@
 
 import { defineConfig } from 'cypress';
 import coverage from '@cypress/code-coverage/task';
+import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
 import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import browserify from '@badeball/cypress-cucumber-preprocessor/browserify';
+import createEsbuildPlugin from '@badeball/cypress-cucumber-preprocessor/esbuild';
 
 export default defineConfig({
   e2e: {
@@ -30,8 +31,8 @@ export default defineConfig({
 
       on(
         'file:preprocessor',
-        browserify(config, {
-          typescript: require.resolve('typescript')
+        createBundler({
+          plugins: [createEsbuildPlugin(config)]
         })
       );
 
