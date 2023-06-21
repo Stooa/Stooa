@@ -311,7 +311,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                             className="bottom"
                             onClick={() => setSelectedFishbowl(undefined)}
                           >
-                            {/* AVER */}
+                            {/* AVER rr r r r */}
                             <BackArrow />
                           </MobileBackButton>
                           <h2 className="title-md form-title">
