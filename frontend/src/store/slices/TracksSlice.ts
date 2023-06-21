@@ -7,19 +7,15 @@
  * file that was distributed with this source code.
  */
 
-import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import { DevtoolsStateCreator, JitsiStore } from '@/store';
 
 export interface TracksSlice {
   tracks: JitsiTrack[][];
-  shareTrack: JitsiLocalTrack | undefined;
   localTracksCreated: boolean;
   getTracksByUser: (id: string) => JitsiTrack[] | undefined;
   addUserTrack: (id: string, track: JitsiTrack) => void;
   removeUserTrack: (id: string, track: JitsiTrack) => void;
-  assignShareTrack: (track: JitsiLocalTrack) => void;
-  clearShareTrack: () => void;
   localTracksCreatedEvent: () => void;
   localTracksRemovedEvent: () => void;
 }
@@ -27,7 +23,6 @@ export interface TracksSlice {
 export const createTracksSlice: DevtoolsStateCreator<JitsiStore, TracksSlice> = (set, get) => ({
   tracks: [],
   localTracksCreated: false,
-  shareTrack: undefined,
   getTracksByUser: (id: string) => get().tracks[id],
   addUserTrack: (id: string, track: JitsiTrack) =>
     set(
@@ -49,9 +44,6 @@ export const createTracksSlice: DevtoolsStateCreator<JitsiStore, TracksSlice> = 
       false,
       { type: 'removeUserTrack', context: { id, track } }
     ),
-  assignShareTrack: (track: JitsiLocalTrack) =>
-    set({ shareTrack: track }, false, { type: 'assignShareTrack', context: { track } }),
-  clearShareTrack: () => set({ shareTrack: undefined }, false, { type: 'assignShareTrack' }),
   localTracksCreatedEvent: () =>
     set({ localTracksCreated: true }, false, { type: 'localTracksCreated' }),
   localTracksRemovedEvent: () =>
