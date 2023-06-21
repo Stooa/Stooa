@@ -36,6 +36,7 @@ import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
 import { ROUTE_WORLD_CAFE_DETAIL } from '@/app.config';
 import { locales } from '@/i18n';
+import FormError from '../FormError';
 
 type Question = {
   title: string;
@@ -57,6 +58,7 @@ interface FormValues {
 export type WorldCafeFormValues = FormValues & FieldValues;
 
 const WorldCafeForm = () => {
+  const [formError, setFormError] = useState();
   const [step, setStep] = useState<'basics' | 'questions'>('basics');
   const { user } = useAuth();
   const { t, lang } = useTranslation('form');
@@ -210,6 +212,8 @@ const WorldCafeForm = () => {
       })
       .catch(error => {
         console.log(error);
+        setFormError(error);
+        setStep('basics');
       });
   };
 
@@ -234,6 +238,8 @@ const WorldCafeForm = () => {
           {t('worldCafe.questions')}
         </li>
       </StyledStepper>
+
+      {formError && <FormError errors={formError} />}
 
       <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
         <fieldset>
