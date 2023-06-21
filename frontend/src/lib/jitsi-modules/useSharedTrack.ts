@@ -7,14 +7,15 @@
  * file that was distributed with this source code.
  */
 
+import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
 import { SCREEN_SHARE_STOP } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { useJitsiStore } from '@/store';
 
 export const useSharedTrack = () => {
-  const { shareTrack, conference, clearShareTrack, assignShareTrack } = useJitsiStore();
+  const { conference } = useJitsiStore(store => ({ conference: store.conference }));
 
-  const stopScreenShareEvent = () => {
+  const stopScreenShareEvent = (): void => {
     conference && conference.setLocalParticipantProperty('screenShare', 'false');
   };
 
@@ -22,7 +23,7 @@ export const useSharedTrack = () => {
     return document.querySelector('#share > .share-video-wrapper');
   };
 
-  const _createShareTrack = async track => {
+  const _createShareTrack = async (track: JitsiLocalTrack): Promise<void> => {
     const seatHtml = document.querySelector('#share > .share-video-wrapper');
     const trackHtml = document.createElement('video');
 
@@ -34,7 +35,7 @@ export const useSharedTrack = () => {
     // ID in shareTrack is different from the other tracks because
     // is always created in the conference and we don't need it to
     // be always uniquely identified
-    trackHtml.id = track.getId();
+    trackHtml.id = track.getId() ?? '';
 
     trackHtml.setAttribute('muted', '');
     trackHtml.setAttribute('playsinline', '');
@@ -43,24 +44,20 @@ export const useSharedTrack = () => {
     track.attach(trackHtml);
   };
 
-  const shareTrackAdded = track => {
-    assignShareTrack(track);
-
-    _createShareTrack(shareTrack);
+  const shareTrackAdded = (track: JitsiLocalTrack): void => {
+    _createShareTrack(track);
   };
 
-  const exitFullScreen = () => {
+  const exitFullScreen = (): void => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
     }
   };
 
-  const removeShareTrack = async (track, location?: string) => {
-    if (!track || !shareTrack) return;
+  const removeShareTrack = async (track: JitsiLocalTrack | undefined, location?: string) => {
+    if (!track) return;
 
     const trackHtml = getShareHtmlTrack();
-
-    clearShareTrack();
 
     if (trackHtml) {
       track.detach(trackHtml);
