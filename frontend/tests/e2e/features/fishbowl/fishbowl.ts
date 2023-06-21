@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Then } from 'cypress-cucumber-preprocessor/steps';
+import { Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Then('sees tomorrow fishbowl information page', () => {
   cy.get('[data-testid=fishbowl-name]', { timeout: 10000 }).should('exist');
