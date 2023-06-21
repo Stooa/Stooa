@@ -18,3 +18,6 @@ user:
     email: There is already a user with the email entered.
     password: The current password doesn't match
     participant: Participant should have a User or a Guest
+
+world_cafe:
+    future: The fishbowl start date is already past.

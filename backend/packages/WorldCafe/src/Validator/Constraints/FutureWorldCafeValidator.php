@@ -42,7 +42,6 @@ class FutureWorldCafeValidator extends ConstraintValidator
 
     private function isFromThePast(WorldCafe $worldCafe): bool
     {
-        return false;
-        //        return $worldCafe->getEndDateTimeTz() < new \DateTimeImmutable();
+        return $worldCafe->getStartDateTime() < new \DateTimeImmutable();
     }
 }
