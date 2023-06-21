@@ -51,7 +51,7 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
         $response = $this->callCreateMutation($token, $newWorldCafe);
 
         $graphqlResponse = $response->toArray();
-        var_dump($graphqlResponse);
+
         $this->assertNotEmpty($graphqlResponse['data']);
         $this->assertSame($newWorldCafe->getName(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['name']);
         $this->assertSame($newWorldCafe->getDescription(), $graphqlResponse['data']['createWorldCafe']['worldCafe']['description']);
