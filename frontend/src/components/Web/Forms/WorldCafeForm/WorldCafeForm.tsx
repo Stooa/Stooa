@@ -361,11 +361,11 @@ const WorldCafeForm = () => {
             label={t('worldCafe.roundTimeLabel')}
             {...register('roundDuration')}
           >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
+            <option value="5">5 {t('worldCafe.minutes')}</option>
+            <option value="10">10 {t('worldCafe.minutes')}</option>
+            <option value="15">15 {t('worldCafe.minutes')}</option>
+            <option value="20">20 {t('worldCafe.minutes')}</option>
+            <option value="25">25 {t('worldCafe.minutes')}</option>
           </Select>
 
           <Switch
