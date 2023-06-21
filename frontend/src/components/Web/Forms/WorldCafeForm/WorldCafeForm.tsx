@@ -163,12 +163,12 @@ const WorldCafeForm = () => {
   };
 
   const handleShowDescription = event => {
-    const elementClicked = event.target;
+    const elementSelected = event.target;
 
-    if (elementClicked.classList.contains('delete')) return;
+    if (elementSelected.classList.contains('delete')) return;
 
     const description =
-      elementClicked.parentElement.parentElement.querySelector('textarea.description');
+      elementSelected.parentElement.parentElement.querySelector('textarea.description');
 
     description.classList.add('show');
   };
@@ -333,7 +333,7 @@ const WorldCafeForm = () => {
               <div
                 className="question"
                 key={field.id}
-                onFocus={event => handleShowDescription(event)}
+                onFocusCapture={event => handleShowDescription(event)}
               >
                 <NewTextarea
                   placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
@@ -342,13 +342,16 @@ const WorldCafeForm = () => {
                   variant="large-text"
                   {...register(`questions.${index}.title`)}
                 />
-                <StyledDeleteButton
-                  className="delete"
-                  disabled={fields.length < 3}
-                  onClick={() => handleDeleteTopic(index)}
-                >
-                  <BinSVG />
-                </StyledDeleteButton>
+                {!errors.questions?.[index]?.title && (
+                  <StyledDeleteButton
+                    className="delete"
+                    disabled={fields.length < 3}
+                    onClick={() => handleDeleteTopic(index)}
+                  >
+                    <BinSVG />
+                  </StyledDeleteButton>
+                )}
+
                 <NewTextarea
                   placeholder={t('worldCafe.descriptionPlaceholder')}
                   className="description"
