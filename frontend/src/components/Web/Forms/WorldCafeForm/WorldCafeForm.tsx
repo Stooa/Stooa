@@ -19,7 +19,7 @@ import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
 import Button from '@/components/Common/Button';
 import NewInput from '@/components/Common/Fields/updated/Input';
 import NewTextarea from '@/components/Common/Fields/updated/Textarea';
-import { FieldValues, SubmitHandler, set, useFieldArray, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { StyledAddButton, StyledDeleteButton, StyledStepper, StyledWorldCafeForm } from './styles';
 import Select from '@/components/Common/Fields/updated/Select';
 import Switch from '@/components/Common/Fields/updated/Switch';
