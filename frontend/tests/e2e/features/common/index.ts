@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import {
   makeGQLCurrentFishbowl,
   makeGQLCurrentFishbowlWithIntroduction,
@@ -79,19 +79,19 @@ Given('a non logged user', () => {
   cy.logout();
 });
 
-When('navigates to {string}', (url = '') => {
+When('navigates to {string}', (url: string) => {
   cy.visit(url, { timeout: 10000 });
 });
 
-When('clicks on {string} link', (text = '') => {
+When('clicks on {string} link', (text: string) => {
   cy.findAllByRole('link', { name: text }).first().click({ force: true });
 });
 
-When('clicks on {string} button', (text = '') => {
+When('clicks on {string} button', (text: string) => {
   cy.findAllByRole('button', { name: text }).first().click({ force: true });
 });
 
-When('clicks on {string}', (text = '') => {
+When('clicks on {string}', (text: string) => {
   cy.contains(text).click();
 });
 
@@ -103,7 +103,7 @@ When('clicks to close modal', () => {
  * @param {string} newValue Is the user's input
  * @param {string} fieldName The field to select by name
  */
-When('writes {string} in input {string}', (newValue = '', fieldName = '') => {
+When('writes {string} in input {string}', (newValue: string, fieldName: string) => {
   cy.get(`:is(input, textarea, div)[name=${fieldName}]`).clear().type(newValue);
   modifiedValues[fieldName] = newValue;
 });
@@ -113,16 +113,15 @@ When('writes {string} in input {string}', (newValue = '', fieldName = '') => {
  * @param {string} fieldName
  * @param {string} newValue
  */
-When('modifies the fishbowl {string} selecting {string}', (fieldName = '', newValue = '') => {
+When('modifies the fishbowl {string} selecting {string}', (fieldName: string, newValue: string) => {
   cy.get(`select[name=${fieldName}]`).select(newValue);
   modifiedValues[fieldName] = newValue;
 });
 
 /**
  * This function changes the value to a checkbox type input
- * @param {string} fieldName
  */
-When('modifies the fishbowl {string} to true', (fieldName = '') => {
+When('modifies the fishbowl {string} to true', (fieldName: string) => {
   cy.get(`input[name=${fieldName}]`).click({ force: true });
   modifiedValues[fieldName] = true;
 });
@@ -131,13 +130,13 @@ When('clicks submit button', () => {
   cy.get('form').submit();
 });
 
-Then('sees {string}', (text = '') => {
+Then('sees {string}', (text: string) => {
   cy.findByText(text).should('be.visible');
 
   cy.screenshot();
 });
 
-Then('gets redirect to {string}', (url = '') => {
+Then('gets redirect to {string}', (url: string) => {
   cy.location('pathname', { timeout: 10000 }).should('eq', url);
 });
 

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 
 Given('a created Fishbowl', () => {
