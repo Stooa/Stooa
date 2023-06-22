@@ -71,6 +71,14 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         $loader->load($configDir . '/services.yaml');
         $loader->load($configDir . '/{packages}/*.yaml', 'glob');
         $loader->load($configDir . '/{packages}/' . $this->getEnvironment() . '/**/*.yaml', 'glob');
+
+        $isWorldCafeActive = $container->resolveEnvPlaceholders($container->getParameter('world_cafe'),
+            true
+        );
+
+        if ('true' === $isWorldCafeActive) {
+            $loader->load($this->getProjectDir() . '/packages/WorldCafe/config/packages/*.yaml', 'glob');
+        }
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void

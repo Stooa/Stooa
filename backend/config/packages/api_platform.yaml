@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 api_platform:
-    path_segment_name_generator: 'App\WorldCafe\Operation\WorldCafeSegmentNameGenerator'
+    path_segment_name_generator: 'App\Core\Operation\StooaSegmentNameGenerator'
     enable_entrypoint: false
     enable_docs: false
     mapping:

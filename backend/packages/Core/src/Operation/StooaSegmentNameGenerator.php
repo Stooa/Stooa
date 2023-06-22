@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\WorldCafe\Operation;
+namespace App\Core\Operation;
 
 use ApiPlatform\Operation\PathSegmentNameGeneratorInterface;
 use Doctrine\Inflector\InflectorFactory;
 
-class WorldCafeSegmentNameGenerator implements PathSegmentNameGeneratorInterface
+class StooaSegmentNameGenerator implements PathSegmentNameGeneratorInterface
 {
     public function getSegmentName(string $name, bool $collection = true): string
     {
