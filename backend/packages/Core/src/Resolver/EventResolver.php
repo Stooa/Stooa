@@ -39,6 +39,10 @@ class EventResolver implements QueryItemResolverInterface
                 return $this->privateFishbowlService->decryptPrivatePassword($event);
             }
 
+            if ($event instanceof Event) {
+                return $event;
+            }
+
             throw new ItemNotFoundException();
         }
 

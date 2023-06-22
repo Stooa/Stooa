@@ -28,6 +28,11 @@ services:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
 
+    app_world_cafe_resolver_event_resolver:
+        class: App\Core\Resolver\EventResolver
+        bind:
+            $repository: '@App\WorldCafe\Repository\WorldCafeRepository'
+
     #Admin
     App\WorldCafe\Admin\WorldCafeAdmin:
         tags:

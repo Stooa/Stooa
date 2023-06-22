@@ -15,6 +15,7 @@ namespace App\WorldCafe\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GraphQl\Mutation;
+use ApiPlatform\Metadata\GraphQl\Query;
 use App\Core\Entity\Participant;
 use App\Core\Entity\Topic;
 use App\Core\Entity\User;
@@ -39,7 +40,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Webmozart\Assert\Assert as MAssert;
 
 #[ApiResource(
+    normalizationContext: ['groups' => ['wc:read', 'event:read']],
     graphQlOperations: [
+        new Query(),
+        new Query(
+            resolver: 'app_world_cafe_resolver_event_resolver',
+            args: ['slug' => ['type' => 'String!']],
+            name: 'bySlugQuery'
+        ),
         new Mutation(
             denormalizationContext: ['groups' => ['wc:create', 'event:write']],
             security: 'is_granted(\'ROLE_USER\')',
@@ -54,13 +62,13 @@ use Webmozart\Assert\Assert as MAssert;
 #[FutureWorldCafe(groups: ['wc:create', 'wc:update'])]
 class WorldCafe extends Event
 {
-    #[Groups(['wc:create'])]
+    #[Groups(['wc:create', 'wc:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Choice([5, 10, 15, 20, 25])]
     #[ORM\Column(type: 'integer', options: ['default' => 10])]
     protected int $roundMinutes = 10;
 
-    #[Groups(['wc:create'])]
+    #[Groups(['wc:create', 'wc:read'])]
     #[ORM\Column(type: 'boolean')]
     protected bool $hasExtraRoundTime = false;
     #[ORM\Id]
