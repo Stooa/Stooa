@@ -16,6 +16,7 @@ services:
         exclude:
             - ../src/DependencyInjection/
             - ../src/Entity/
+            - ../src/Resolver/EventResolver.php
 
     App\Core\EventSubscriber\LocaleSubscriber:
         bind:

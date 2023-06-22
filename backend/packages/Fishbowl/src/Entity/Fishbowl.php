@@ -35,7 +35,6 @@ use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
 use App\Fishbowl\Resolver\FishbowlIntroduceMutationResolver;
 use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
-use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
 use App\Fishbowl\State\FishbowlProcessor;
 use App\Fishbowl\State\FishbowlStateProvider;
@@ -44,7 +43,6 @@ use App\Fishbowl\Validator\Constraints\PrivateFishbowl;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
@@ -71,7 +69,7 @@ use Webmozart\Assert\Assert as MAssert;
     graphQlOperations: [
         new Query(),
         new Query(
-            resolver: FishbowlResolver::class,
+            resolver: 'app_fishbowl_resolver_event_resolver',
             args: ['slug' => ['type' => 'String!']],
             name: 'bySlugQuery'
         ),

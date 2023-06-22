@@ -11,19 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Resolver;
+namespace App\Core\Resolver;
 
 use ApiPlatform\Exception\ItemNotFoundException;
 use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
+use App\Core\Model\Event;
+use App\Core\Model\EventRepositoryInterface;
 use App\Fishbowl\Entity\Fishbowl;
-use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\PrivateFishbowlService;
 use Webmozart\Assert\Assert;
 
-class FishbowlResolver implements QueryItemResolverInterface
+class EventResolver implements QueryItemResolverInterface
 {
     public function __construct(
-        private readonly FishbowlRepository $repository,
+        private readonly EventRepositoryInterface $repository,
         private readonly PrivateFishbowlService $privateFishbowlService
     ) {
     }
@@ -32,16 +33,16 @@ class FishbowlResolver implements QueryItemResolverInterface
     public function __invoke(?object $item, array $context): object
     {
         if (null === $item) {
-            $fishbowl = $this->repository->findBySlug($context['args']['slug']);
+            $event = $this->repository->findBySlug($context['args']['slug']);
 
-            if (null !== $fishbowl) {
-                return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
+            if ($event instanceof Fishbowl) {
+                return $this->privateFishbowlService->decryptPrivatePassword($event);
             }
 
             throw new ItemNotFoundException();
         }
 
-        Assert::isInstanceOf($item, Fishbowl::class);
+        Assert::isInstanceOf($item, Event::class);
 
         return $item;
     }

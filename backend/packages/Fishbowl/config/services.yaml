@@ -31,6 +31,11 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
+    app_fishbowl_resolver_event_resolver:
+        class: App\Core\Resolver\EventResolver
+        bind:
+            $repository: '@App\Fishbowl\Repository\FishbowlRepository'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:

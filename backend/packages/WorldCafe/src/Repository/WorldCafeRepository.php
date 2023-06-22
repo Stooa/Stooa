@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Repository;
 
+use App\Core\Model\EventRepositoryInterface;
 use App\WorldCafe\Entity\WorldCafe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
 /** @extends ServiceEntityRepository<WorldCafe> */
-class WorldCafeRepository extends ServiceEntityRepository
+class WorldCafeRepository extends ServiceEntityRepository implements EventRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
