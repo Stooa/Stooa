@@ -15,15 +15,15 @@ namespace App\WorldCafe\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use App\Core\Service\MailerService;
 use App\Fishbowl\Entity\Fishbowl;
 use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Service\WorldCafeMailService;
 
 final class WorldCafeProcessor implements ProcessorInterface
 {
     public function __construct(
         private readonly ProcessorInterface $decorated,
-        private readonly MailerService $mailerService
+        private readonly WorldCafeMailService $mailerService
     ) {
     }
 

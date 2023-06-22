@@ -23,6 +23,11 @@ services:
         bind:
             $decorated: '@api_platform.doctrine.orm.state.persist_processor'
 
+    App\WorldCafe\Service\WorldCafeMailService:
+        bind:
+            $from: '%env(MAILER_FROM)%'
+            $appUrl: '%env(APP_URL)%'
+
     #Admin
     App\WorldCafe\Admin\WorldCafeAdmin:
         tags:
