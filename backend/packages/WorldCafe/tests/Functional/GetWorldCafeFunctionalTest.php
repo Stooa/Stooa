@@ -69,10 +69,20 @@ class GetWorldCafeFunctionalTest extends ApiTestCase
         $bySlugQuery = <<<GQL
             query BySlugQueryWorldCafe(\$slug: String!) {
                 bySlugQueryWorldCafe(slug: \$slug) {
-                    id
-                    name
-                    slug
-                    locale
+                        id
+                        name
+                        slug
+                        description
+                        locale
+                        startDateTimeTz
+                        hasExtraRoundTime
+                        roundMinutes
+                        questions {
+                            id
+                            title
+                            description
+                            position
+                        }
                 }
             }
         GQL;

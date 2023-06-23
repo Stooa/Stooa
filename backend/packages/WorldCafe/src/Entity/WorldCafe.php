@@ -83,7 +83,7 @@ class WorldCafe extends Event
     private ?User $host = null;
 
     /** @var Collection<int, Question> */
-    #[Groups(['wc:create'])]
+    #[Groups(['wc:create', 'wc:read'])]
     #[ORM\OneToMany(mappedBy: 'worldCafe', targetEntity: Question::class, cascade: ['all'])]
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $questions;

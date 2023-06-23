@@ -22,14 +22,17 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ApiResource]
+#[ApiResource(
+    paginationEnabled: false,
+)]
 #[ORM\Entity]
 class Question implements \Stringable
 {
-    #[Groups(['wc:create'])]
+    #[Groups(['wc:create', 'wc:read'])]
     #[SortablePosition]
     #[ORM\Column(type: 'integer', nullable: true)]
     protected ?int $position = null;
+    #[Groups(['wc:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
@@ -38,11 +41,11 @@ class Question implements \Stringable
 
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
-    #[Groups(['wc:create'])]
+    #[Groups(['wc:create', 'wc:read'])]
     #[ORM\Column(type: 'string')]
     private ?string $title = null;
 
-    #[Groups(['wc:create'])]
+    #[Groups(['wc:create', 'wc:read'])]
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description = null;
 
