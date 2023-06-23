@@ -7,8 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { Then } from '@badeball/cypress-cucumber-preprocessor';
+import { StateCreator } from 'zustand';
 
-Then('can click on screen share button', () => {
-  cy.get('[data-testid=share-screen-button]').should('exist');
-});
+export type DevtoolsStateCreator<T, K> = StateCreator<
+  T,
+  [['zustand/devtools', never], never],
+  [],
+  K
+>;

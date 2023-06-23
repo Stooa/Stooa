@@ -39,15 +39,15 @@ import ModalStopRecording from '@/components/App/ModalStopRecording';
 import ModalShareLink from '@/components/App/ModalShareLink';
 import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation';
-import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import TranscriptionText from '../TranscriptionText';
 import ModalTranscription from '../ModalTranscription/ModalTranscription';
-import { getTranscriptionLanguage, setTranscriptionLanguage } from '@/user/auth';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { useConference } from '@/jitsi';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -86,6 +86,8 @@ const Fishbowl: FC = () => {
     showTranscriptionModal,
     setShowTranscriptionModal
   } = useModals();
+  const { startRecordingEvent } = useConference();
+  const {getTranscriptionLanguage, setTranscriptionLanguage} = useUserAuth();
 
   const { width } = useWindowSize();
   const feedbackFormRef = useRef<HTMLDivElement>(null);
@@ -156,7 +158,7 @@ const Fishbowl: FC = () => {
       position: 'bottom-center',
       autoClose: 5000
     });
-    Conference.startRecordingEvent();
+    startRecordingEvent();
     setShowStartRecording(false);
   };
 

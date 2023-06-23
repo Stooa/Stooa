@@ -24,29 +24,50 @@ import {
   TRANSCRIPTION_TRANSCRIBER_JOINED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
-import seatsRepository from '@/jitsi/Seats';
-import tracksRepository from '@/jitsi/Tracks';
-import userRepository from '@/jitsi/User';
+import { useTracks, useSeats, useUser } from '@/jitsi';
+import { useJitsiStore } from '@/store';
 
-const conferenceRepository = () => {
-  let connection;
-  let roomName;
-  let userName;
-  let conference;
-  let isModerator = false;
-  let isJoined = false;
-  let twitter = false;
-  let linkedin = false;
+export const useConference = () => {
+  const {
+    connection,
+    conference,
+    userName,
+    isModerator,
+    isJoined,
+    twitter,
+    linkedin,
+    userId: myUserId,
+    updateUser,
+    setConnection,
+    getConnection,
+    setConference,
+    getConference,
+    setRoomName,
+    makeModerator,
+    getIsModerator,
+    join: setAsJoined,
+    leave: setAsNotJoined
+  } = useJitsiStore();
+  const {
+    createTracks,
+    removeTracks,
+    isLocalParticipantMuted,
+    handleTrackAdded,
+    handleTrackMuteChanged,
+    handleTrackRemoved
+  } = useTracks();
+  const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
+  const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
 
   const joinUser = (id, user) => {
-    if (id === undefined || id === null) {
-      id = conference.myUserId();
-    }
-    const seat = seatsRepository.join(id);
-    tracksRepository.createTracks(id, seat, user);
-    conference.selectParticipants(seatsRepository.getIds());
+    const userId = id ?? myUserId;
+    const seat = join(userId, getParticipantNameById(userId));
 
-    console.log('[STOOA] Join', id);
+    createTracks(userId, seat, user);
+
+    getConference().selectParticipants(getIds());
+
+    console.log('[STOOA] Join', userId);
   };
 
   /**
@@ -54,7 +75,7 @@ const conferenceRepository = () => {
    * @param {string | undefined} password
    */
   const joinPrivateConference = async password => {
-    if (conference) await conference.join(password);
+    await getConference().join(password);
   };
 
   /**
@@ -62,24 +83,22 @@ const conferenceRepository = () => {
    * @param {string | undefined} password
    */
   const joinConference = async () => {
-    if (conference) await conference.join();
+    await getConference().join();
   };
 
   const leaveUser = id => {
-    if (id === undefined) {
-      id = conference.myUserId();
-    }
+    const userId = id ?? myUserId;
 
-    seatsRepository.leave(id);
-    tracksRepository.removeTracks(id);
+    leaveSeat(userId);
+    removeTracks(userId);
 
-    conference.selectParticipants(seatsRepository.getIds());
+    conference.selectParticipants(getIds());
 
-    console.log('[STOOA] User leave', id);
+    console.log('[STOOA] User leave', userId);
   };
 
   const _handleParticipantConnectionStatusChanged = (id, status) => {
-    seatsRepository.updateStatus(id, status);
+    updateStatus(id, status);
     console.log('[STOOA] Handle participant connection status changed', id, status);
   };
 
@@ -127,16 +146,30 @@ const conferenceRepository = () => {
     console.error('[STOOA] Handle connection failed', error);
   };
 
-  const _handleConferenceJoin = () => {
-    isJoined = true;
+  const _handleConferenceJoin = async () => {
+    setAsJoined();
 
-    conference.setDisplayName(userName);
+    const auth = await getAuthToken();
+
+    const name = auth?.user ? auth.user.name : getUserNickname();
+    const twitter = auth?.user.twitter;
+    const linkedin = auth?.user.linkedin;
+
+    updateUser({
+      name,
+      twitter,
+      linkedin
+    });
+
+    const conference = getConference();
+
+    conference.setDisplayName(name);
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
-    conference.setLocalParticipantProperty('isModerator', isModerator);
+    conference.setLocalParticipantProperty('isModerator', getIsModerator());
     conference.setLocalParticipantProperty('requestingTranscription', false);
 
-    userRepository.setUser({ id: conference.myUserId() });
+    setUser({ id: conference.myUserId() });
 
     dispatchEvent(CONFERENCE_START, { status: true, myUserId: conference.myUserId() });
 
@@ -154,12 +187,12 @@ const conferenceRepository = () => {
   };
 
   const _handleDominantSpeakerChanged = id => {
-    seatsRepository.updateDominantSpeaker(id);
+    updateDominantSpeaker(id);
   };
 
   const _handleUserRoleChanged = () => {
-    const role = conference.getRole();
-    console.log('[STOOA] User role changed', conference.getRole());
+    const role = getConference().getRole();
+    console.log('[STOOA] User role changed', getConference().getRole());
 
     if (role === 'moderator') {
       dispatchEvent(CONFERENCE_IS_LOCKABLE);
@@ -168,10 +201,10 @@ const conferenceRepository = () => {
 
   const _handleCommandJoin = values => {
     const { value } = values;
-    const seat = seatsRepository.join(value);
+    const seat = join(value);
 
-    tracksRepository.createTracks(value, seat);
-    conference.selectParticipants(seatsRepository.getIds());
+    createTracks(value, seat);
+    conference.selectParticipants(getIds());
 
     console.log('[STOOA] Join', value);
   };
@@ -179,9 +212,9 @@ const conferenceRepository = () => {
   const _handleCommandLeave = values => {
     const { value } = values;
 
-    seatsRepository.leave(value);
-    tracksRepository.removeTracks(value);
-    conference.selectParticipants(seatsRepository.getIds());
+    leaveSeat(value);
+    removeTracks(value);
+    conference.selectParticipants(getIds());
 
     console.log('[STOOA] Leave', value);
   };
@@ -206,7 +239,7 @@ const conferenceRepository = () => {
     console.log('[STOOA] Password not supported');
   };
 
-  const _handleConnectionEstablished = async () => {
+  const _handleConnectionEstablished = async roomName => {
     const {
       events: {
         conference: {
@@ -232,17 +265,20 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    conference = connection.initJitsiConference(roomName, roomOptions);
+    const conference = getConnection().initJitsiConference(roomName, roomOptions);
+
+    setConference(conference);
+
     window.conference = conference;
 
     conference.on(PARTICIPANT_CONN_STATUS_CHANGED, _handleParticipantConnectionStatusChanged);
     conference.on(PARTICIPANT_PROPERTY_CHANGED, _handleParticipantPropertyChanged);
-    conference.on(TRACK_ADDED, tracksRepository.handleTrackAdded);
-    conference.on(TRACK_REMOVED, tracksRepository.handleTrackRemoved);
-    conference.on(TRACK_MUTE_CHANGED, tracksRepository.handleTrackMuteChanged);
-    conference.on(USER_JOINED, userRepository.handleUserJoin);
-    conference.on(USER_LEFT, _handleUserLeft);
-    conference.on(KICKED, userRepository.handleUserKicked);
+    conference.on(TRACK_ADDED, handleTrackAdded);
+    conference.on(TRACK_REMOVED, handleTrackRemoved);
+    conference.on(TRACK_MUTE_CHANGED, handleTrackMuteChanged);
+    conference.on(USER_JOINED, handleUserJoin);
+    conference.on(USER_LEFT, handleUserLeft);
+    conference.on(KICKED, handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
     conference.on(CONFERENCE_ERROR, _handleConferenceError);
@@ -265,7 +301,9 @@ const conferenceRepository = () => {
       }
     } = JitsiMeetJS;
 
-    connection.removeEventListener(CONNECTION_ESTABLISHED, _handleConnectionEstablished);
+    connection.removeEventListener(CONNECTION_ESTABLISHED, () =>
+      _handleConnectionEstablished(roomName)
+    );
     connection.removeEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.removeEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
@@ -316,26 +354,34 @@ const conferenceRepository = () => {
   };
 
   const initializeConnection = async (rawRoomName, isUserModerator) => {
+    console.log('---> Initialize connection');
     const {
       events: {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
     const auth = await getAuthToken(true, rawRoomName);
+    console.log('auth', auth);
 
-    isModerator = isUserModerator;
+    if (isUserModerator) {
+      makeModerator();
+    }
 
-    setUsername(auth ? auth.user : null);
+    const roomName = getBackendSafeRoomName(rawRoomName);
 
-    roomName = getBackendSafeRoomName(rawRoomName);
+    setRoomName(roomName);
 
-    connection = new JitsiMeetJS.JitsiConnection(
+    const connection = new JitsiMeetJS.JitsiConnection(
       null,
       auth ? auth.token : process.env.NEXT_PUBLIC_GUEST_TOKEN ?? null,
       connectionOptions(roomName)
     );
 
-    connection.addEventListener(CONNECTION_ESTABLISHED, _handleConnectionEstablished);
+    setConnection(connection);
+
+    connection.addEventListener(CONNECTION_ESTABLISHED, () =>
+      _handleConnectionEstablished(roomName)
+    );
     connection.addEventListener(CONNECTION_FAILED, _handleConnectionFailed);
     connection.addEventListener(CONNECTION_DISCONNECTED, _handleConnectionDisconnected);
 
@@ -379,30 +425,23 @@ const conferenceRepository = () => {
       return;
     }
 
-    tracksRepository.handleTrackRemoved(oldTrack);
+    handleTrackRemoved(oldTrack);
+
     conference.replaceTrack(oldTrack, track);
   };
 
-  const getParticipantById = id => conference.getParticipantById(id);
+  const getParticipantById = id => getConference().getParticipantById(id);
 
   const getParticipantNameById = id => {
     const participant = getParticipantById(id);
     return participant ? participant.getDisplayName() : userName;
   };
 
-  const getMyUserId = () => {
-    if (isJoined) {
-      return conference.myUserId();
-    }
-
-    return false;
-  };
-
   const leave = () => {
     console.log('[STOOA] Leave');
 
     if (isJoined) {
-      isJoined = false;
+      setAsNotJoined();
 
       conference.leave();
       connection.disconnect();
@@ -435,10 +474,6 @@ const conferenceRepository = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
 
-  const stopScreenShareEvent = () => {
-    conference.setLocalParticipantProperty('screenShare', 'false');
-  };
-
   const startRecordingEvent = () => {
     conference.setLocalParticipantProperty('recording', 'true');
   };
@@ -450,7 +485,8 @@ const conferenceRepository = () => {
   const sendJoinEvent = user => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
-      joinUser(null, user);
+
+      joinUser(undefined, user);
     }
   };
 
@@ -458,16 +494,6 @@ const conferenceRepository = () => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'no');
       leaveUser();
-    }
-  };
-
-  const setUsername = user => {
-    if (user) {
-      userName = user.name;
-      twitter = user.twitter;
-      linkedin = user.linkedin;
-    } else {
-      userName = userRepository.getUserNickname();
     }
   };
 
@@ -495,7 +521,7 @@ const conferenceRepository = () => {
       participantsIds.push(participant.getId());
     });
 
-    participantsIds.push(getMyUserId());
+    participantsIds.push(myUserId);
 
     return participantsIds;
   };
@@ -505,10 +531,8 @@ const conferenceRepository = () => {
       return null;
     }
 
-    const id = getMyUserId();
-
     return {
-      id,
+      id: myUserId,
       name: userName,
       twitter,
       linkedin,
@@ -518,8 +542,8 @@ const conferenceRepository = () => {
         conference.isJoined() === null
           ? false
           : conference.getLocalParticipantProperty('joined') === 'yes',
-      isMuted: tracksRepository.isLocalParticipantMuted(id, 'audio'),
-      isVideoMuted: tracksRepository.isLocalParticipantMuted(id, 'video'),
+      isMuted: isLocalParticipantMuted(myUserId, 'audio'),
+      isVideoMuted: isLocalParticipantMuted(myUserId, 'video'),
       isJigasi: false
     };
   };
@@ -547,10 +571,8 @@ const conferenceRepository = () => {
     getLocalVideoTrack,
     getLocalAudioTrack,
     getLocalParticipant,
-    getMyUserId,
     getParticipantById,
     getParticipantCount,
-    getParticipantNameById,
     getParticipants,
     initializeJitsi,
     initializeConnection,
@@ -563,7 +585,6 @@ const conferenceRepository = () => {
     sendLeaveEvent,
     sendTextMessage,
     startScreenShareEvent,
-    stopScreenShareEvent,
     getLocalTracks,
     getParticipantsIds,
     startRecordingEvent,
@@ -575,5 +596,3 @@ const conferenceRepository = () => {
     stopTranslation
   };
 };
-
-export default conferenceRepository();

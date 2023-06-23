@@ -9,15 +9,14 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
-import trackRepository from '@/jitsi/Tracks';
 import useEventListener from '@/hooks/useEventListener';
 import { TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
-import localTracksRepository from '@/jitsi/LocalTracks';
 import { MediaType } from '@/types/jitsi/media';
 import { toast } from 'react-toastify';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { supportsCaptureHandle } from '@/lib/helpers';
+import { useTracks, useLocalTracks, useConference } from '@/jitsi';
 
 const GIGABYTE = 1073741824;
 
@@ -72,6 +71,9 @@ const useVideoRecorder = (
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const [ranNotification, setRanNotification] = useState(false);
+  const { getParticipantsIds } = useConference();
+  const { getAudioTracks } = useTracks();
+  const { createLocalTrack } = useLocalTracks();
 
   const recorderRef = useRef<MediaRecorder>();
   const recordingData = useRef<BlobPart[]>([]);
@@ -142,16 +144,16 @@ const useVideoRecorder = (
     audioContext.current = new AudioContext();
     audioDestination.current = audioContext.current.createMediaStreamDestination();
 
-    const audioTracks = trackRepository.getAudioTracks();
+    const audioTracks = getAudioTracks(getParticipantsIds());
 
     if (audioTracks.length > 0) {
-      trackRepository.getAudioTracks().forEach((track: JitsiTrack) => {
+      audioTracks.forEach((track: JitsiTrack) => {
         if (track.getType() === 'audio') {
           _addAudioTrackToLocalRecording(track);
         }
       });
     } else {
-      const audioLocalTrack = await localTracksRepository.createLocalTrack(MediaType.AUDIO);
+      const audioLocalTrack = await createLocalTrack(MediaType.AUDIO);
       await audioLocalTrack[0].mute();
       _addAudioTrackToLocalRecording(audioLocalTrack[0]);
     }

@@ -9,7 +9,6 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import userRepository from '@/jitsi/User';
 import { useStateValue } from '@/contexts/AppContext';
 
 import Button from '@/components/Common/Button';
@@ -24,6 +23,7 @@ import { toast } from 'react-toastify';
 import { useMutation } from '@apollo/client';
 import { NO_INTRO_RUN_FISHBOWL } from '@/graphql/Fishbowl';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { useUser } from '@/jitsi';
 
 type TProps = {
   name: string;
@@ -37,6 +37,7 @@ interface FormValues {
 const AuthUser = ({ name, isPrivate }: TProps) => {
   const { data, isModerator, setFishbowlPassword, conferenceStatus } = useStooa();
   const [, dispatch] = useStateValue();
+  const { setUser } = useUser();
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
 
   const { t } = useTranslation('form');
@@ -115,7 +116,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
     }
   };
 
-  userRepository.setUser({ guestId: '', nickname: name });
+  setUser({ guestId: '', nickname: name });
 
   return (
     <Formik

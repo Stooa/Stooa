@@ -13,7 +13,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import userRepository from '@/jitsi/User';
 
 import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layouts/Default/styles';
 import Decoration from '@/components/Web/Decoration';
@@ -33,7 +32,6 @@ import {
   Form,
   VideoContainer
 } from '@/components/App/FishbowlPreJoin/styles';
-import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
@@ -41,15 +39,18 @@ import Trans from 'next-translate/Trans';
 import { useStooa } from '@/contexts/StooaManager';
 import Image from 'next/image';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { useLocalTracks, useUser } from '@/jitsi';
 
 const FishbowlPreJoin: React.FC = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
   const { data, isModerator, conferenceStatus } = useStooa();
+  const { getUserVideoMuted } = useUser();
+  const { createLocalTracks: hookCreateLocalTracks } = useLocalTracks();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localTracks = useRef<any[]>([]);
-  const [muteVideo, setMuteVideo] = useState<boolean>(userRepository.getUserVideoMuted());
+  const [muteVideo, setMuteVideo] = useState<boolean>(getUserVideoMuted());
   const router = useRouter();
   const { t, lang } = useTranslation('common');
 
@@ -91,7 +92,7 @@ const FishbowlPreJoin: React.FC = () => {
     const createLocalTracks = async () => {
       disposeLocalTracks();
 
-      localTracks.current = await LocalTracks.createLocalTracks();
+      localTracks.current = await hookCreateLocalTracks();
 
       for (let index = 0; index < localTracks.current.length; index++) {
         const localTrack = localTracks.current[index];

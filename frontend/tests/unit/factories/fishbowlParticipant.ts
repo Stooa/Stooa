@@ -13,8 +13,8 @@ import { faker } from '@faker-js/faker';
 
 export const makeFishbowlParticipant = (): Participant => {
   return {
-    id: faker.datatype.uuid(),
-    name: faker.name.firstName(),
+    id: faker.string.uuid(),
+    name: faker.person.firstName(),
     linkedin: 'https://www.linkedin.com/in/wearestooa',
     twitter: 'https://www.twitter.com/wearestooa',
     isModerator: true,
@@ -23,8 +23,8 @@ export const makeFishbowlParticipant = (): Participant => {
     joined: false,
     isMuted: false,
     isVideoMuted: false,
-    getId: () => faker.datatype.uuid(),
-    getDisplayName: () => faker.name.firstName(),
+    getId: () => faker.string.uuid(),
+    getDisplayName: () => faker.person.firstName(),
     isJigasi: false
   };
 };

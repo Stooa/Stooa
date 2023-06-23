@@ -12,8 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { Participant } from '@/types/participant';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getTranscriptionLanguage, ping } from '@/user/auth';
-import { getParticipantList } from '@/lib/jitsi';
+import { useJitsi } from '@/lib/useJitsi';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 
 import ChevronLeft from '@/ui/svg/chevron-left.svg';
@@ -32,12 +31,13 @@ import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { useModals } from '@/contexts/ModalsContext';
 import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
 
-import Conference from '@/jitsi/Conference';
 import TranslateSelector from '../TranslateSelector';
 import Switch from '@/components/Common/Fields/updated/Switch';
 import { useForm } from 'react-hook-form';
 import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
 import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
+import { useUserAuth } from '@/user/auth/useUserAuth';
+import { useConference } from '@/jitsi/useConference';
 
 const initialParticipant: Participant = {
   id: '',
@@ -63,6 +63,9 @@ interface Props {
 const PING_TIMEOUT = 3500;
 
 const Participants: React.FC<Props> = ({ initialized, fid }) => {
+  const { getParticipantList } = useJitsi();
+  const { ping, setTranscriptionLanguage, getTranscriptionLanguage } = useUserAuth();
+
   const { t, lang } = useTranslation('fishbowl');
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
@@ -81,6 +84,8 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     setIsTranscriptionEnabled,
     isTranscriberJoined
   } = useStooa();
+
+  const { stopTranscriptionEvent, startTranscriptionEvent } = useConference();
 
   const { register, setValue } = useForm({
     defaultValues: { transcript: isTranscriptionEnabled && isTranscriberJoined }
@@ -137,14 +142,14 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     const checkbox = event.target as HTMLInputElement;
 
     if (checkbox && checkbox.checked) {
-      Conference.startTranscriptionEvent();
-      Conference.setTranscriptionLanguage(cookieTranscription);
+      startTranscriptionEvent();
+      setTranscriptionLanguage(cookieTranscription);
       setIsTranscriptionEnabled(true);
       return;
     }
 
     if (checkbox && !checkbox.checked) {
-      Conference.stopTranscriptionEvent();
+      stopTranscriptionEvent();
       setIsTranscriptionEnabled(false);
       return;
     }

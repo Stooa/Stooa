@@ -7,8 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import { Then } from '@badeball/cypress-cucumber-preprocessor';
-
-Then('can click on screen share button', () => {
-  cy.get('[data-testid=share-screen-button]').should('exist');
-});
+export * from './useConference';
+export * from './useDevices';
+export * from './useLocalTracks';
+export * from './useSeats';
+export * from './useSharedTrack';
+export * from './useTracks';
+export * from './useUser';

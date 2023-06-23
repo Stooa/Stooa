@@ -22,7 +22,6 @@ import {
 import { dataLayerPush, pushEventDataLayer } from '@/lib/analytics';
 import { GET_FISHBOWL, IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
 import { formatDateTime } from '@/lib/helpers';
-import userRepository from '@/jitsi/User';
 import ThankYouStyled, { Description, Time, StyledThankyouWrapper } from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
@@ -32,6 +31,7 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import FeedbackForm from '@/components/App/FeedbackForm';
 import Trans from 'next-translate/Trans';
+import { useUser } from '@/jitsi';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -39,14 +39,15 @@ const Error = dynamic(import('@/components/Common/Error'), { loading: () => <div
 
 const ThankYou = () => {
   const { t, lang } = useTranslation('fishbowl');
+  const { getUserFeedback, getUserParticipantSlug } = useUser();
 
   const router = useRouter();
   const {
     query: { fid }
   } = router;
 
-  const userFeedback = userRepository.getUserFeedback();
-  const userHasParticipated = userRepository.getUserParticipantSlug() === (fid as string);
+  const userFeedback = getUserFeedback();
+  const userHasParticipated = getUserParticipantSlug() === (fid as string);
   const thankYouFeedbackGiven =
     userFeedback.feedbackFishbowlSlug === (fid as string) && userFeedback.fromThankYou;
 
