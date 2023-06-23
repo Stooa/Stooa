@@ -23,4 +23,25 @@ const CREATE_WORLD_CAFE = gql`
   }
 `;
 
-export { CREATE_WORLD_CAFE };
+const GET_WORLD_CAFE = gql`
+  query BySlugQueryWorldCafe($slug: String!) {
+    bySlugQueryWorldCafe(slug: $slug) {
+      id
+      name
+      slug
+      description
+      locale
+      startDateTimeTz
+      hasExtraRoundTime
+      roundMinutes
+      questions {
+        id
+        title
+        description
+        position
+      }
+    }
+  }
+`;
+
+export { CREATE_WORLD_CAFE, GET_WORLD_CAFE };
