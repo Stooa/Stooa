@@ -37,8 +37,8 @@ import { useStooa } from '@/contexts/StooaManager';
 import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
-import Conference from '@/jitsi/Conference';
-import { getTranscriptionLanguage } from '@/user/auth';
+import { useConference } from '@/jitsi/useConference';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 
 interface Props {
   unlabeled?: boolean;
@@ -85,6 +85,11 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     setParticipantsActive,
     isTranscriberJoined
   } = useStooa();
+
+  const { stopTranscriptionEvent, startTranscriptionEvent, setConferenceTranscriptionLanguage } =
+    useConference();
+
+  const { getTranscriptionLanguageCookie } = useUserAuth();
 
   const { t } = useTranslation('fishbowl');
 
@@ -136,7 +141,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   };
 
   const handleTranscriptionToggle = () => {
-    const transcriptionCookie = getTranscriptionLanguage();
+    const transcriptionCookie = getTranscriptionLanguageCookie();
 
     if (!transcriptionCookie) {
       setShowTranscriptionModal(true);
@@ -144,11 +149,11 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     }
 
     if (isTranscriptionEnabled) {
-      Conference.stopTranscriptionEvent();
+      stopTranscriptionEvent();
       setIsTranscriptionEnabled(false);
     } else {
-      Conference.startTranscriptionEvent();
-      Conference.setTranscriptionLanguage(transcriptionCookie);
+      startTranscriptionEvent();
+      setConferenceTranscriptionLanguage(transcriptionCookie);
       if (deviceType === 'Desktop') {
         setParticipantsActive(true);
       }

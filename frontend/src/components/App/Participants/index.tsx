@@ -64,7 +64,7 @@ const PING_TIMEOUT = 3500;
 
 const Participants: React.FC<Props> = ({ initialized, fid }) => {
   const { getParticipantList } = useJitsi();
-  const { ping, setTranscriptionLanguage, getTranscriptionLanguage } = useUserAuth();
+  const { ping, setTranscriptionLanguageCookie, getTranscriptionLanguageCookie } = useUserAuth();
 
   const { t, lang } = useTranslation('fishbowl');
   const pingInterval = useRef<number>();
@@ -132,7 +132,10 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   };
 
   const handleOnChangeTranscription = (event: React.MouseEvent<HTMLInputElement>) => {
-    const cookieTranscription = getTranscriptionLanguage();
+    const cookieTranscription = getTranscriptionLanguageCookie();
+
+    console.log('PRIMO --->', cookieTranscription);
+
     if (!cookieTranscription) {
       event.preventDefault();
       setShowTranscriptionModal(true);
@@ -143,7 +146,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
 
     if (checkbox && checkbox.checked) {
       startTranscriptionEvent();
-      setTranscriptionLanguage(cookieTranscription);
+      setTranscriptionLanguageCookie(cookieTranscription);
       setIsTranscriptionEnabled(true);
       return;
     }

@@ -8,10 +8,10 @@
  */
 
 import { useStooa } from '@/contexts/StooaManager';
-import Conference from '@/jitsi/Conference';
 import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
 import { StyledSelectorWrapper } from './styles';
 import useTranslation from 'next-translate/useTranslation';
+import { useConference } from '@/jitsi/useConference';
 
 const TranslateSelector = () => {
   const {
@@ -22,18 +22,20 @@ const TranslateSelector = () => {
     setTranslationLanguage
   } = useStooa();
 
+  const { setConferenceTranslationLanguage } = useConference();
+
   const { t } = useTranslation('fishbowl');
 
   const handleChangedLanguage = (locale: string): void => {
-    Conference.setTranslationLanguage(locale);
+    setConferenceTranslationLanguage(locale);
     setTranslationLanguage(locale);
   };
 
   const handleActiveTranslate = (): void => {
     if (!isTranslationEnabled) {
-      Conference.setTranslationLanguage(translationLanguage);
+      setConferenceTranslationLanguage(translationLanguage);
     } else {
-      Conference.setTranslationLanguage(null);
+      setConferenceTranslationLanguage(null);
     }
     setIsTranslationEnabled(current => !current);
   };

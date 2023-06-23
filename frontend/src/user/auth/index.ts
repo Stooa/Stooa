@@ -68,7 +68,6 @@ export const setRefreshToken = (value: string) => {
   cookie.set(COOKIE_REFRESH, value, { ...COOKIE_OPTIONS, expires: COOKIE_REFRESH_DAYS });
 };
 
-
 export const setToken = (token: string) => {
   const auth = new AuthToken(token);
   if (auth) {

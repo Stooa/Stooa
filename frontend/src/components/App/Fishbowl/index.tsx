@@ -43,11 +43,11 @@ import useTranslation from 'next-translate/useTranslation';
 import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import TranscriptionText from '../TranscriptionText';
 import ModalTranscription from '../ModalTranscription/ModalTranscription';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import { useConference } from '@/jitsi';
 import { useUserAuth } from '@/user/auth/useUserAuth';
+import TranscriptionWrapper from '../TranscriptionText/TranscriptionWrapper';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -86,8 +86,8 @@ const Fishbowl: FC = () => {
     showTranscriptionModal,
     setShowTranscriptionModal
   } = useModals();
-  const { startRecordingEvent } = useConference();
-  const {getTranscriptionLanguage, setTranscriptionLanguage} = useUserAuth();
+  const { startRecordingEvent, startTranscriptionEvent } = useConference();
+  const { getTranscriptionLanguageCookie, setTranscriptionLanguageCookie } = useUserAuth();
 
   const { width } = useWindowSize();
   const feedbackFormRef = useRef<HTMLDivElement>(null);
@@ -167,13 +167,13 @@ const Fishbowl: FC = () => {
   };
 
   const handleStartTranscription = () => {
-    const transcriptionCookie = getTranscriptionLanguage();
+    const transcriptionCookie = getTranscriptionLanguageCookie();
 
     if (!transcriptionCookie) {
-      setTranscriptionLanguage(LOCALES[lang]);
+      setTranscriptionLanguageCookie(LOCALES[lang]);
     }
 
-    Conference.startTranscriptionEvent();
+    startTranscriptionEvent();
     setIsTranscriptionEnabled(true);
     setParticipantsActive(true);
     setShowTranscriptionModal(false);
@@ -255,7 +255,7 @@ const Fishbowl: FC = () => {
 
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
-        {isTranscriptionEnabled && <TranscriptionText />}
+        {isTranscriptionEnabled && <TranscriptionWrapper />}
       </Main>
       {!isPreFishbowl && <Footer />}
       <OnBoardingTour />

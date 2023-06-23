@@ -72,8 +72,13 @@ const StooaProvider = ({
   const { exitFullScreen } = useSharedTrack();
   const { initialInteraction, initializeJitsi, initializeConnection, unload, unloadKickedUser } =
     useJitsi();
-  const { setTranscriptionLanguage, stopRecordingEvent, lockConference, joinPrivateConference, joinConference } =
-    useConference();
+  const {
+    setConferenceTranscriptionLanguage,
+    stopRecordingEvent,
+    lockConference,
+    joinPrivateConference,
+    joinConference
+  } = useConference();
   const { fid } = router.query;
   const { t, lang } = useTranslation('app');
 
@@ -233,7 +238,7 @@ const StooaProvider = ({
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);
-    setTranscriptionLanguage(LOCALES[data.locale]);
+    setConferenceTranscriptionLanguage(LOCALES[data.locale]);
 
     if (!isModerator) return;
 

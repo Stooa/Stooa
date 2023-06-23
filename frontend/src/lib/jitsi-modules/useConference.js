@@ -277,7 +277,7 @@ export const useConference = () => {
     conference.on(TRACK_REMOVED, handleTrackRemoved);
     conference.on(TRACK_MUTE_CHANGED, handleTrackMuteChanged);
     conference.on(USER_JOINED, handleUserJoin);
-    conference.on(USER_LEFT, handleUserLeft);
+    conference.on(USER_LEFT, _handleUserLeft);
     conference.on(KICKED, handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
@@ -328,7 +328,7 @@ export const useConference = () => {
       dispatchEvent(TRANSCRIPTION_TRANSCRIBER_JOINED, { joined: false });
     }
 
-    userRepository.handleUserLeft(id, user);
+    handleUserLeft(id, user);
   };
 
   const initializeJitsi = () => {
@@ -458,11 +458,11 @@ export const useConference = () => {
     conference.setLocalParticipantProperty('requestingTranscription', false);
   };
 
-  const setTranscriptionLanguage = language => {
+  const setConferenceTranscriptionLanguage = language => {
     conference.setLocalParticipantProperty('transcription_language', language);
   };
 
-  const setTranslationLanguage = language => {
+  const setConferenceTranslationLanguage = language => {
     conference.setLocalParticipantProperty('translation_language', language);
   };
 
@@ -591,8 +591,8 @@ export const useConference = () => {
     stopRecordingEvent,
     startTranscriptionEvent,
     stopTranscriptionEvent,
-    setTranscriptionLanguage,
-    setTranslationLanguage,
+    setConferenceTranscriptionLanguage,
+    setConferenceTranslationLanguage,
     stopTranslation
   };
 };

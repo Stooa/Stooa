@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import Conference from '@/jitsi/Conference';
 import React, { useRef, useState } from 'react';
 import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
 import { StyledTranscriptionWrapper } from './styles';
 import InfoSVG from '@/ui/svg/info-brown.svg';
-import { getTranscriptionLanguage, setTranscriptionLanguage } from '@/user/auth';
 import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFullTooltip';
 import useTranslation from 'next-translate/useTranslation';
+import { useUserAuth } from '@/user/auth/useUserAuth';
+import { useConference } from '@/jitsi/useConference';
 
 interface Props {
   tooltip?: boolean;
@@ -26,12 +26,14 @@ const TranscriptionSelector = ({ tooltip, location }: Props) => {
   const [arrowPosition, setArrowPosition] = useState<string>('');
   const tipToHover = useRef<HTMLDivElement>(null);
   const { t } = useTranslation('fishbowl');
+  const { getTranscriptionLanguageCookie, setTranscriptionLanguageCookie } = useUserAuth();
+  const { setConferenceTranscriptionLanguage } = useConference();
 
-  const cookieTranscriptionLanguage = getTranscriptionLanguage();
+  const cookieTranscriptionLanguage = getTranscriptionLanguageCookie();
 
   const handleChangeTranscriptionLanguage = (locale: string): void => {
-    Conference.setTranscriptionLanguage(locale);
-    setTranscriptionLanguage(locale);
+    setConferenceTranscriptionLanguage(locale);
+    setTranscriptionLanguageCookie(locale);
   };
 
   const handleOnMouseEnter: React.MouseEventHandler = () => {
