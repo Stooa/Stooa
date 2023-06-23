@@ -38,19 +38,16 @@ class GetWorldCafeFunctionalTest extends ApiTestCase
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
         ])->object();
-
-        WorldCafeFactory::createOne([
-            'name' => 'World Cafe name',
-            'description' => 'World Cafe description',
-            'locale' => 'en',
-            'slug' => 'world-cafe-slug',
-        ]);
     }
 
     /** @test */
     public function itGetsWorldCafeBySlug(): void
     {
         $hostToken = $this->logIn($this->host);
+
+        $newWorldCafe = WorldCafeFactory::createOne([
+            'slug' => 'world-cafe-slug',
+        ])->object();
 
         $response = $this->callGQLWithToken('world-cafe-slug', $hostToken);
 
@@ -59,9 +56,17 @@ class GetWorldCafeFunctionalTest extends ApiTestCase
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
 
-        $this->assertSame($graphqlResponse['data']['bySlugQueryWorldCafe']['name'], 'World Cafe name');
-        $this->assertSame($graphqlResponse['data']['bySlugQueryWorldCafe']['slug'], 'world-cafe-slug');
-        $this->assertSame($graphqlResponse['data']['bySlugQueryWorldCafe']['locale'], 'en');
+        $this->assertSame($newWorldCafe->getName(), $graphqlResponse['data']['bySlugQueryWorldCafe']['name']);
+        $this->assertSame($newWorldCafe->getDescription(), $graphqlResponse['data']['bySlugQueryWorldCafe']['description']);
+        $this->assertSame($newWorldCafe->getLocale(), $graphqlResponse['data']['bySlugQueryWorldCafe']['locale']);
+        $this->assertSame($newWorldCafe->getHasExtraRoundTime(), $graphqlResponse['data']['bySlugQueryWorldCafe']['hasExtraRoundTime']);
+        $this->assertSame($newWorldCafe->getRoundMinutes(), $graphqlResponse['data']['bySlugQueryWorldCafe']['roundMinutes']);
+        $fistQuestion = $newWorldCafe->getQuestions()->first();
+        if (false !== $fistQuestion) {
+            $this->assertSame($fistQuestion->getTitle(), $graphqlResponse['data']['bySlugQueryWorldCafe']['questions'][0]['title']);
+            $this->assertSame($fistQuestion->getDescription(), $graphqlResponse['data']['bySlugQueryWorldCafe']['questions'][0]['description']);
+            $this->assertSame($fistQuestion->getPosition(), $graphqlResponse['data']['bySlugQueryWorldCafe']['questions'][0]['position']);
+        }
     }
 
     private function callGQLWithToken(?string $slug, string $token): ResponseInterface

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\WorldCafe\Factory;
 
-use App\Fishbowl\Entity\Fishbowl;
 use App\WorldCafe\Entity\WorldCafe;
 use Zenstruck\Foundry\ModelFactory;
 
@@ -29,10 +28,13 @@ final class WorldCafeFactory extends ModelFactory
             'startDateTime' => self::faker()->dateTime(),
             'timezone' => self::faker()->timezone(),
             'locale' => 'en',
-            'currentStatus' => self::faker()->randomElement(Fishbowl::$statusChoices),
+            'currentStatus' => self::faker()->randomElement(WorldCafe::$statusChoices),
             'slug' => self::faker()->slug(),
             'hasExtraRoundTime' => true,
             'roundMinutes' => 15,
+            'questions' => [
+                QuestionFactory::createOne()->object(),
+            ],
         ];
     }
 
