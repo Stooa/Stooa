@@ -145,7 +145,6 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
     if (!transcriptionCookie) {
       setShowTranscriptionModal(true);
-
       return;
     }
 
