@@ -134,8 +134,6 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   const handleOnChangeTranscription = (event: React.MouseEvent<HTMLInputElement>) => {
     const cookieTranscription = getTranscriptionLanguageCookie();
 
-    console.log('PRIMO --->', cookieTranscription);
-
     if (!cookieTranscription) {
       event.preventDefault();
       setShowTranscriptionModal(true);
