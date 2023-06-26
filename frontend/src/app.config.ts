@@ -26,6 +26,7 @@ export const ROUTE_FISHBOWL_SCHEDULED = '/fishbowl/scheduled';
 export const ROUTE_FISHBOWL_HOST_NOW = '/fishbowl/host-now';
 export const ROUTE_FISHBOWL_DETAIL = '/fishbowl/detail';
 export const ROUTE_FISHBOWL_THANKYOU = '/fishbowl/thankyou';
+export const ROUTE_WORLD_CAFE = '/world-cafe/';
 export const ROUTE_WORLD_CAFE_CREATE = '/world-cafe/create';
 export const ROUTE_WORLD_CAFE_DETAIL = '/world-cafe/detail';
 export const ROUTE_USER_CONDUCT_VIOLATION = '/user-conduct-violation';

@@ -34,7 +34,7 @@ import ArrowRightSVG from '@/ui/svg/arrow-right.svg';
 
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { useAuth } from '@/contexts/AuthContext';
-import { ROUTE_WORLD_CAFE_DETAIL } from '@/app.config';
+import { ROUTE_WORLD_CAFE } from '@/app.config';
 import { locales } from '@/i18n';
 import FormError from '../FormError';
 
@@ -204,7 +204,7 @@ const WorldCafeForm = () => {
           }
         } = res;
 
-        const route = `${ROUTE_WORLD_CAFE_DETAIL}/${worldCafe.slug}`;
+        const route = `${ROUTE_WORLD_CAFE}/${worldCafe.slug}`;
 
         router.push(route, route, { locale: data.language });
       })

@@ -8,7 +8,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths } from 'next';
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
@@ -37,10 +37,10 @@ const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
 const Page = () => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
+  const { fid } = router.query;
   const { lang } = useTranslation();
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
-  const { fid } = router.query;
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
   const handleJoinAsGuest = (): void => {
@@ -94,19 +94,6 @@ const Page = () => {
 };
 
 export default withIsFishbowlEnded(Page);
-
-/**
- * Workaround for:
- * [next-translate] In Next 10.x.x there is an issue related to i18n and getInitialProps.
- * We recommend to replace getInitialProps to getServerSideProps on /index.tsx.
- *
- * https://github.com/vercel/next.js/discussions/18396
- */
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {}
-  };
-};
 
 /**
  * Error: getStaticPaths is required for dynamic SSG pages and is missing for
