@@ -16,8 +16,6 @@ namespace App\Core\Tests\Unit\JWT;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
 use App\Core\JWT\CurrentUserRoom;
-use App\Fishbowl\Service\FishbowlService;
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -28,8 +26,6 @@ class CurrentUserRoomTest extends TestCase
     use Factories;
 
     private CurrentUserRoom $currentUserRoom;
-    /** @var Stub&FishbowlService */
-    private Stub $fishbowlService;
     private RequestStack $requestStack;
     private User $user;
 
@@ -43,9 +39,7 @@ class CurrentUserRoomTest extends TestCase
 
         $this->user = UserFactory::createOne()->object();
 
-        $this->fishbowlService = $this->createStub(FishbowlService::class);
-
-        $this->currentUserRoom = new CurrentUserRoom($this->requestStack, $this->fishbowlService);
+        $this->currentUserRoom = new CurrentUserRoom($this->requestStack);
     }
 
     /** @test */
@@ -57,25 +51,10 @@ class CurrentUserRoomTest extends TestCase
     }
 
     /** @test */
-    public function itGetsNullWhenFishbowlIsNotReadyToStart(): void
-    {
-        $request = new Request([], [], [], [], [], [], $this->createRoomContent('room-name'));
-        $this->requestStack->push($request);
-
-        $this->fishbowlService->method('canFishbowlStart')->willReturn(false);
-
-        $room = $this->currentUserRoom->getRoom($this->user);
-
-        $this->assertNull($room);
-    }
-
-    /** @test */
     public function itGetsRoomNameCorrectly(): void
     {
         $request = new Request([], [], [], [], [], [], $this->createRoomContent('room-name'));
         $this->requestStack->push($request);
-
-        $this->fishbowlService->method('canFishbowlStart')->willReturn(true);
 
         $room = $this->currentUserRoom->getRoom($this->user);
 
