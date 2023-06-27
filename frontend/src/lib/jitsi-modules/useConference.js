@@ -177,9 +177,12 @@ export const useConference = () => {
   };
 
   const _handleConferenceFailed = error => {
+    console.log('[STOOA] Handle conference failed', error);
+
     if (error === 'conference.authenticationRequired') {
       dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
     }
+    console.log('[STOOA] Handle conference failed', error);
   };
 
   const _handleConferenceError = error => {
@@ -204,7 +207,7 @@ export const useConference = () => {
     const seat = join(value);
 
     createTracks(value, seat);
-    conference.selectParticipants(getIds());
+    getConference().selectParticipants(getIds());
 
     console.log('[STOOA] Join', value);
   };
@@ -214,7 +217,7 @@ export const useConference = () => {
 
     leaveSeat(value);
     removeTracks(value);
-    conference.selectParticipants(getIds());
+    getConference().selectParticipants(getIds());
 
     console.log('[STOOA] Leave', value);
   };
@@ -267,8 +270,6 @@ export const useConference = () => {
 
     const conference = getConnection().initJitsiConference(roomName, roomOptions);
 
-    setConference(conference);
-
     window.conference = conference;
 
     conference.on(PARTICIPANT_CONN_STATUS_CHANGED, _handleParticipantConnectionStatusChanged);
@@ -291,6 +292,8 @@ export const useConference = () => {
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
+    setConference(conference);
+
     dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
   };
 
@@ -300,6 +303,8 @@ export const useConference = () => {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
+
+    const connection = getConnection();
 
     connection.removeEventListener(CONNECTION_ESTABLISHED, () =>
       _handleConnectionEstablished(roomName)
@@ -354,14 +359,15 @@ export const useConference = () => {
   };
 
   const initializeConnection = async (rawRoomName, isUserModerator) => {
-    console.log('---> Initialize connection');
     const {
       events: {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
+
     const auth = await getAuthToken(true, rawRoomName);
-    console.log('auth', auth);
+
+    console.log('[Stooa] Auth Token', auth);
 
     if (isUserModerator) {
       makeModerator();
