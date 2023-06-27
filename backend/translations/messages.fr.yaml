@@ -23,7 +23,7 @@ emails:
         information_help_text: Si ce n’est pas votre compte, vous pouvez supprimer votre adresse électronique de celui-ci. <br>Veuillez ne pas répondre à ce courriel avec votre mot de passe. Nous ne vous demanderons jamais votre mot de passe, et nous vous déconseillons fortement de le partager avec qui que ce soit.
     event_created_email:
         title: Et maintenant ?<br>Partagez le &lt;i&gt;fishbowl&lt;/i&gt; !
-        world_cafe_title: "Et maintenant quoi? Partagez le World Café avec vos amis!"
+        world_cafe_title: World Café créé avec succès!
         description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.\U0001F447"
         world_cafe_description: "Copiez et partagez le lien du World Café avec les participants.👇"
         social_share: "ou partagez sur:"

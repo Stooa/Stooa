@@ -24,7 +24,7 @@ emails:
     event_created_email:
         fishbowl_subject: ¡Hola %name%! Has creado un nuevo fishbowl
         world_cafe_subject: ¡Hola %name%! Has creado un nuevo World Café
-        title: ¡Bien hecho! ¿Ahora qué?<br>¡Comparte el fishbowl!</br>
+        title: ¡World Café creado con éxito!
         world_cafe_title: ¿Y ahora qué? ¡Comparte el World Café con tu gente!
         description: "Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.👇"
         world_cafe_description: "Copia y comparte el enlace del <i>World Café<i> con los asistentes.👇"
