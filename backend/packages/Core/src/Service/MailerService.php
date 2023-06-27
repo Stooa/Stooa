@@ -92,7 +92,7 @@ class MailerService
                 ->from(new Address($this->from, $this->translator->trans('emails.from', [], null, $locale)))
                 ->to((string) $user->getEmail())
                 ->subject($this->translator->trans(
-                    'emails.fishbowl_created_email.subject',
+                    'emails.event_created_email.fishbowl_subject',
                     ['%name%' => $user->getName()],
                     null,
                     $locale

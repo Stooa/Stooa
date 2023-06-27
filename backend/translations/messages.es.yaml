@@ -21,13 +21,17 @@ emails:
         button_text: Restablece tu contraseña
         information_text: Si ignoras este mensaje tu contraseña no cambiará.<br>Si no has solicitado un cambio de contraseña, <a href='mailto:%email%'>avísanos</a>.
         information_help_text: Si esta no es tu cuenta, puedes borrar tu email de ella. <br>Por favor, no contestes a este email con tu contraseña. Nosotros nunca te pediremos tu contraseña y te recomendamos que no la compartas con nadie.
-    fishbowl_created_email:
-        subject: ¡Hola %name%! Has creado un nuevo fishbowl
-        title: ¿Ahora qué?<br>¡Comparte el fishbowl!
+    event_created_email:
+        fishbowl_subject: ¡Hola %name%! Has creado un nuevo fishbowl
+        world_cafe_subject: ¡Hola %name%! Has creado un nuevo World Café
+        title: ¡Bien hecho! ¿Ahora qué?<br>¡Comparte el fishbowl!</br>
+        world_cafe_title: ¿Y ahora qué? ¡Comparte el World Café con tu gente!
         description: "Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.👇"
+        world_cafe_description: "Copia y comparte el enlace del <i>World Café<i> con los asistentes.👇"
         social_share: "o comparte en:"
         edit_details: "Recuerda que puedes <a style='text-decoration: underline;' href='%edit_link%'>editar los detalles del fishbowl</a> hasta una hora antes de que empiece."
         cta: Acceder al fishbowl
+        world_cafe_cta: Ir al evento
         info_title: Título
         info_duration: Duración
         info_description: Descripción
@@ -37,14 +41,13 @@ emails:
         info_invite: Enlace para invitar los asistentes
         info_url: Clica aquí para acceder al fishbowl
         delete: 'Si quieres borrar este fishbowl, por favor, envíanos un email <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl event with id: %id%">aquí</a>'
+        world_cafe_delete: 'Si deseas borrar este World Café, por favor envíanos un correo electrónico <a href="mailto:stooa@stooa.com?subject=Delete World Café event&body=Please delete the World Café event with id: %id%">aquí</a>'
         password: 'Password: %password%'
         languages:
             es: Español
             ca: Catalán
             en: Inglés
             fr: Francés
-    world_cafe_created_email:
-        subject: ¡Hola %name%! Has creado un nuevo world café
 login:
     failure: Credenciales no válidas
 

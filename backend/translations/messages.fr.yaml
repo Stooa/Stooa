@@ -21,19 +21,23 @@ emails:
         button_text: Réinitialiser votre mot de passe
         information_text: Si vous ignorez ce message, votre mot de passe ne sera pas modifié.<br>Si vous n’avez pas demandé la réinitialisation de votre mot de passe, <a href="mailto:%email%">faites-le-nous savoir</a>.
         information_help_text: Si ce n’est pas votre compte, vous pouvez supprimer votre adresse électronique de celui-ci. <br>Veuillez ne pas répondre à ce courriel avec votre mot de passe. Nous ne vous demanderons jamais votre mot de passe, et nous vous déconseillons fortement de le partager avec qui que ce soit.
-    fishbowl_created_email:
+    event_created_email:
         title: Et maintenant ?<br>Partagez le &lt;i&gt;fishbowl&lt;/i&gt; !
+        world_cafe_title: "Et maintenant quoi? Partagez le World Café avec vos amis!"
         description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.\U0001F447"
+        world_cafe_description: "Copiez et partagez le lien du World Café avec les participants.👇"
         social_share: "ou partagez sur:"
         edit_details: "N'oubliez pas que vous pouvez <a style='text-decoration: underline;' href='%edit_link%'>modifier les détails de l'événement</a> jusqu'à une heure avant son début."
         cta: "Accéder au fishbowl"
+        world_cafe_cta: "Aller à l'événement"
         info_url: 'Cliquez ici pour accéder au fishbowl'
         languages:
             es: espagnol
             ca: catalan
             en: anglais
             fr: française
-        subject: Bonjour %name% ! Vous avez créé un nouveau fishbowl
+        fishbowl_subject: Bonjour %name% ! Vous avez créé un nouveau fishbowl
+        world_cafe_subject: Bonjour %name% ! Vous avez créé un nouveau World Café
         info_duration: Durée
         info_description: Description
         info_language: Langue
@@ -42,10 +46,8 @@ emails:
         info_title: Titre
         info_start_time: Heure de début
         delete: 'Si vous souhaitez supprimer cet évènement, veuillez nous envoyer un courriel <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id : %id%">ici</a>'
+        world_cafe_delete: 'Si vous souhaitez supprimer ce World Café, veuillez nous envoyer un e-mail <a href="mailto:stooa@stooa.com?subject=Delete World Café event&amp;body=Please delete the World Café event with id : %id%">ici</a>'
         password: 'Password: %password%'
-    world_cafe_created_email:
-        subject: Bonjour %name% ! Vous avez créé un nouveau world café
-
 login:
     failure: Informations d'identification invalides.
 

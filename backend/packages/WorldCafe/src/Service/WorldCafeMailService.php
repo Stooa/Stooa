@@ -40,7 +40,7 @@ class WorldCafeMailService
                 ->from(new Address($this->from, $this->translator->trans('emails.from', [], null, $locale)))
                 ->to((string) $user->getEmail())
                 ->subject($this->translator->trans(
-                    'emails.world_cafe_created_email.subject',
+                    'emails.event_created_email.world_cafe_subject',
                     ['%name%' => $user->getName()],
                     null,
                     $locale
@@ -48,12 +48,12 @@ class WorldCafeMailService
                 ->htmlTemplate('emails/world-cafe-created.html.twig')
                 ->context([
                     'name' => $user->getName(),
-                    'fishbowlId' => null !== $uid ? $uid->toString() : '',
-                    'fishbowlName' => $worldCafe->getName(),
-                    'fishbowlDescription' => $worldCafe->getDescription(),
-                    'fishbowlStartDate' => $worldCafe->getStartDateTimeFormatted(),
-                    'fishbowlStartTime' => $worldCafe->getStartDateTimeHourFormatted(),
-                    'fishbowlSlug' => $worldCafe->getSlug(),
+                    'eventId' => null !== $uid ? $uid->toString() : '',
+                    'eventName' => $worldCafe->getName(),
+                    'eventDescription' => $worldCafe->getDescription(),
+                    'eventStartDate' => $worldCafe->getStartDateTimeFormatted(),
+                    'eventStartTime' => $worldCafe->getStartDateTimeHourFormatted(),
+                    'eventSlug' => $worldCafe->getSlug(),
                     'locale' => $locale,
                     'appUrl' => $this->appUrl,
                 ]);

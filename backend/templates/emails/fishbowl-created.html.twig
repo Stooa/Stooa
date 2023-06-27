@@ -21,21 +21,21 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block body %}
-    {{ macros.title('emails.fishbowl_created_email.title'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.title('emails.event_created_email.title'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
     {{ macros.spaceRow(40) }}
-    {{ macros.text('emails.fishbowl_created_email.description'|trans({}, null, locale), emailConfig, '', 'description') }}
+    {{ macros.text('emails.event_created_email.description'|trans({}, null, locale), emailConfig, '', 'description') }}
     {{ macros.spaceRow(20) }}
     {{ macros.text(urlLink|replace({ '%link%': eventLink, '%style%': emailConfig.eventLink.styles }),
         emailConfig, '', 'eventLink'
     ) }}
 
     {% if eventIsPrivate %}
-        {{ macros.text('emails.fishbowl_created_email.password'|trans({'%password%': eventPassword}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+        {{ macros.text('emails.event_created_email.password'|trans({'%password%': eventPassword}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
     {% endif %}
 
     {{ macros.spaceRow(20) }}
     {% if not eventIsPrivate %}
-        {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+        {{ macros.text('emails.event_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
 
         {% include '/emails/components/email-socials.html.twig' with {
             twitterHref: 'https://twitter.com/intent/tweet?text=' ~ eventName ~ '&url=' ~ eventLink,
@@ -59,17 +59,17 @@ file that was distributed with this source code.
         </td>
     </tr>
     {{ macros.spaceRow(20) }}
-    {{ macros.text('emails.fishbowl_created_email.edit_details'|trans({'%edit_link%': editEventLink}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.text('emails.event_created_email.edit_details'|trans({'%edit_link%': editEventLink}, null, locale), emailConfig, 'text-align:center;') }}
     {{ macros.spaceRow(55) }}
     <tr>
         <td align="center">
             {% include '/emails/components/email-button.html.twig' with {
                 link: eventLink,
-                label: 'emails.fishbowl_created_email.cta'|trans({}, null, locale)
+                label: 'emails.event_created_email.cta'|trans({}, null, locale)
             } %}
         </td>
     </tr>
     {{ macros.spaceRow(55) }}
-    {{ macros.note('emails.fishbowl_created_email.delete'|trans({'%id%': eventId, '%styles%': emailConfig.link.styles}, null, locale), emailConfig, 'text-align: center;') }}
+    {{ macros.note('emails.event_created_email.delete'|trans({'%id%': eventId, '%styles%': emailConfig.link.styles}, null, locale), emailConfig, 'text-align: center;') }}
     {{ macros.spaceRow(25) }}
 {% endblock %}
