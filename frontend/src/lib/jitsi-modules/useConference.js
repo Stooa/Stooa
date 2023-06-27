@@ -168,6 +168,8 @@ export const useConference = () => {
   };
 
   const _handleConferenceFailed = error => {
+    console.log('[STOOA] Handle conference failed', error);
+
     if (error === 'conference.authenticationRequired') {
       dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
     }
@@ -330,14 +332,15 @@ export const useConference = () => {
   };
 
   const initializeConnection = async (rawRoomName, isUserModerator) => {
-    console.log('---> Initialize connection');
     const {
       events: {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
+
     const auth = await getAuthToken(true, rawRoomName);
-    console.log('auth', auth);
+
+    console.log('[Stooa] Auth Token', auth);
 
     if (isUserModerator) {
       makeModerator();
