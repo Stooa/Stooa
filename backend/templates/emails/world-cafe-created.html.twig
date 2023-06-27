@@ -13,7 +13,7 @@ file that was distributed with this source code.
 {% extends '/emails/templates/email-base.html.twig' %}
 
 {% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
-{% set fishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
+{% set eventLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
 {% set editFishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/list?selected=' ~ fishbowlSlug %}
 
 {% block title %}
@@ -25,29 +25,28 @@ file that was distributed with this source code.
     {{ macros.spaceRow(40) }}
     {{ macros.text('emails.fishbowl_created_email.description'|trans({}, null, locale), emailConfig, '', 'description') }}
     {{ macros.spaceRow(20) }}
-    {{ macros.text(urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.fishbowlLink.styles }),
-        emailConfig, '', 'fishbowlLink'
+    {{ macros.text(urlLink|replace({ '%link%': eventLink, '%style%': emailConfig.eventLink.styles }),
+        emailConfig, '', 'eventLink'
     ) }}
-
     {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
 
     {% include '/emails/components/email-socials.html.twig' with {
-        twitterHref: 'https://twitter.com/intent/tweet?text=' ~ fishbowlName ~ '&url=' ~ fishbowlLink,
-        linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ fishbowlLink ~ '&title=' ~ fishbowlName ~ '&mini=true'
+        twitterHref: 'https://twitter.com/intent/tweet?text=' ~ fishbowlName ~ '&url=' ~ eventLink,
+        linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ eventLink ~ '&title=' ~ fishbowlName ~ '&mini=true'
     } %}
 
     {{ macros.spaceRow(20) }}
     <tr>
         <td align="center">
             <table class="create-fishbowl-data" role="presentation" align="center" cellpadding="4" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 100%; background-color: #fff; padding: 24px 32px;">
-                {{ macros.text(fishbowlName, emailConfig, 'text-align:center;', 'fishbowlCardTitle') }}
+                {{ macros.text(fishbowlName, emailConfig, 'text-align:center;', 'eventCardTitle') }}
                 {{ macros.spaceRow(10) }}
                 {% if fishbowlDescription %}
                     {{ macros.text(fishbowlDescription,emailConfig, 'text-align:center;') }}
                     {{ macros.spaceRow(10) }}
                 {% endif %}
-                {{ macros.text(fishbowlStartDate, emailConfig, 'text-align:center;', 'fishbowlCardHours') }}
-                {{ macros.text(fishbowlStartTime, emailConfig, 'text-align:center;', 'fishbowlCardHours') }}
+                {{ macros.text(fishbowlStartDate, emailConfig, 'text-align:center;', 'eventCardHours') }}
+                {{ macros.text(fishbowlStartTime, emailConfig, 'text-align:center;', 'eventCardHours') }}
             </table>
         </td>
     </tr>
@@ -55,7 +54,7 @@ file that was distributed with this source code.
     <tr>
         <td align="center">
             {% include '/emails/components/email-button.html.twig' with {
-                link: fishbowlLink,
+                link: eventLink,
                 label: 'emails.fishbowl_created_email.cta'|trans({}, null, locale)
             } %}
         </td>
