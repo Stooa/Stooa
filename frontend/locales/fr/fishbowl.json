@@ -198,5 +198,15 @@
             "during": "During",
             "duringTooltip": "Feedback received during the fishbowl"
         }
+    },
+    "transcription" : {
+        "title" : "Transcription",
+        "disable": "Cacher la transcription",
+        "enable": "Afficher la transcription",
+        "loading": "Transcription du chargement...",
+        "modalTitle": "Dans quelle langue parlez-vous?",
+        "modalBody": "Avant de commencer, nous avons besoin que vous <span>indiquiez dans quelle langue vous participerez</span> à cette conversation.",
+        "tooltip": "Merci d'indiquer la langue que vous parlez.",
+        "translate": "Traduire"
     }
 }

@@ -20,4 +20,5 @@ export interface Participant {
   isVideoMuted: boolean;
   getId: () => string;
   getDisplayName: () => string;
+  isJigasi: boolean;
 }

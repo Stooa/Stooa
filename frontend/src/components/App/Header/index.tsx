@@ -35,7 +35,14 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ isPrefishbowl }) => {
-  const { data, isModerator, conferenceStatus, conferenceReady, isRecording } = useStooa();
+  const {
+    data,
+    isModerator,
+    conferenceStatus,
+    conferenceReady,
+    isRecording,
+    isTranscriptionEnabled
+  } = useStooa();
   const router = useRouter();
   const { fid } = router.query;
   const { t } = useTranslation('fishbowl');
@@ -75,7 +82,7 @@ const Header: React.FC<Props> = ({ isPrefishbowl }) => {
           </div>
         </div>
       )}
-      <div className="header-info">
+      <div className={`header-info ${isTranscriptionEnabled ? 'transcription' : ''}`}>
         {isPrefishbowl ? (
           <Logo href={ROUTE_HOME} className="header-logo" />
         ) : (

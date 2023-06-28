@@ -100,4 +100,49 @@ const Modal = styled.div`
   }
 `;
 
+const StyledLeftAlignedModal = styled(Modal)`
+  & .content {
+    max-width: 420px;
+    text-align: left;
+    padding: ${space(6)} ${space(5)} ${space(3)};
+
+    & h2 {
+      margin-bottom: ${space(4)};
+    }
+
+    & .experimental {
+      margin-bottom: ${space(2)};
+      padding-left: 2px;
+    }
+
+    & .body {
+      margin-bottom: ${space(2)};
+    }
+
+    & ul {
+      padding-left: ${space(3)};
+      text-align: left;
+      list-style: disc;
+      margin-bottom: ${space(6)};
+
+      & li {
+        margin-bottom: ${space(2)};
+      }
+    }
+
+    & .modal-footer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: ${space(2)};
+
+      & button {
+        margin-top: 0;
+      }
+    }
+  }
+`;
+
 export default Modal;
+export { StyledLeftAlignedModal };

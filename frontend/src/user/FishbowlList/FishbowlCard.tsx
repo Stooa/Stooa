@@ -94,7 +94,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
               as="a"
               data-testid="enter-fishbowl"
               onClick={() => {
-                handleGoToFishbowl;
+                handleGoToFishbowl();
               }}
             >
               <span>{t('enterFishbowl')}</span>

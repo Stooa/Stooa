@@ -9,10 +9,11 @@
 
 import React, { ReactElement, forwardRef, useRef, useState } from 'react';
 
-import { StyledIntroductionTooltip, SwitchLabel, SwitchStyled } from '@/ui/Form';
+import { SwitchLabel, SwitchStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
 import { FieldError } from 'react-hook-form';
 import Info from '@/ui/svg/info-brown.svg';
+import ColoredFullTooltip from '../../ColoredFullTooltip/ColoredFullTooltip';
 
 type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
   tooltipText?: string | ReactElement;
@@ -44,33 +45,28 @@ const Switch = forwardRef<HTMLInputElement, Props>(
         <SwitchLabel className={props.disabled ? 'disabled' : ''} htmlFor={props.id || props.name}>
           <span className={`switch-button`} />
         </SwitchLabel>
-        <div className="label-wrapper">
-          {label && (
+        {label && (
+          <div className="label-wrapper">
             <label htmlFor={props.id || props.name}>
               <span className="label-text">{label}</span>
             </label>
-          )}
-          {tooltipText && (
-            <div
-              className="icon-wrapper"
-              onClick={() => setShowTooltip(showTooltip => !showTooltip)}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={() => setShowTooltip(false)}
-              ref={tipToHover}
-            >
-              {showTooltip && (
-                <StyledIntroductionTooltip>
-                  <div
-                    className="arrow"
-                    style={{ '--leftPosition': arrowPosition } as React.CSSProperties}
-                  ></div>
-                  {tooltipText}
-                </StyledIntroductionTooltip>
-              )}
-              <Info />
-            </div>
-          )}
-        </div>
+
+            {tooltipText && (
+              <div
+                className="icon-wrapper"
+                onClick={() => setShowTooltip(showTooltip => !showTooltip)}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={() => setShowTooltip(false)}
+                ref={tipToHover}
+              >
+                {showTooltip && (
+                  <ColoredFullTooltip arrowPosition={arrowPosition || ''} text={tooltipText} />
+                )}
+                <Info />
+              </div>
+            )}
+          </div>
+        )}
         {isDirty && hasError ? <ValidationError>{hasError.message}</ValidationError> : null}
       </SwitchStyled>
     );

@@ -19,7 +19,12 @@ import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Languages from '@/components/Common/LanguageSwitcher/styles';
 const { locales } = i18nConfig;
 
-const LanguageSwitcher = () => {
+interface Props {
+  changedLanguage?: (locale: string) => void;
+  disabled?: boolean;
+}
+
+const LanguageSwitcher = ({ changedLanguage, disabled }: Props) => {
   const { t, lang } = useTranslation('common');
   const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -27,6 +32,8 @@ const LanguageSwitcher = () => {
 
   const changeLanguage = async () => {
     if (selectRef.current) {
+      if (changedLanguage) changedLanguage(selectRef.current.value);
+
       pushEventDataLayer({
         action: 'Language Change',
         category: 'Footer',
@@ -38,7 +45,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <Languages>
+    <Languages location="default" aria-disabled={disabled}>
       <select ref={selectRef} onChange={changeLanguage} value={lang}>
         <option value={lang}>{t(`languages.${lang}`)}</option>
         {locales
