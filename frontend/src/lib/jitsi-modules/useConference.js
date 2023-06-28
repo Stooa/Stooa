@@ -157,7 +157,7 @@ export const useConference = () => {
 
     conference.setDisplayName(name);
     conference.setLocalParticipantProperty('twitter', twitter);
-    conference.setLocalParticipantProperty('linkedin', isModerator);
+    conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
 
     setUser({ id: conference.myUserId() });
@@ -171,6 +171,7 @@ export const useConference = () => {
     if (error === 'conference.authenticationRequired') {
       dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
     }
+    console.log('[STOOA] Handle conference failed', error);
   };
 
   const _handleConferenceError = error => {
@@ -195,7 +196,7 @@ export const useConference = () => {
     const seat = join(value);
 
     createTracks(value, seat);
-    conference.selectParticipants(getIds());
+    getConference().selectParticipants(getIds());
 
     console.log('[STOOA] Join', value);
   };
@@ -205,7 +206,7 @@ export const useConference = () => {
 
     leaveSeat(value);
     removeTracks(value);
-    conference.selectParticipants(getIds());
+    getConference().selectParticipants(getIds());
 
     console.log('[STOOA] Leave', value);
   };
@@ -249,8 +250,6 @@ export const useConference = () => {
 
     const conference = getConnection().initJitsiConference(roomName, roomOptions);
 
-    setConference(conference);
-
     window.conference = conference;
 
     conference.on(PARTICIPANT_CONN_STATUS_CHANGED, _handleParticipantConnectionStatusChanged);
@@ -272,6 +271,8 @@ export const useConference = () => {
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
+    setConference(conference);
+
     dispatchEvent(CONNECTION_ESTABLISHED_FINISHED);
   };
 
@@ -281,6 +282,8 @@ export const useConference = () => {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
+
+    const connection = getConnection();
 
     connection.removeEventListener(CONNECTION_ESTABLISHED, () =>
       _handleConnectionEstablished(roomName)
