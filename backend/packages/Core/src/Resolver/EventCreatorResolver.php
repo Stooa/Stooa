@@ -19,6 +19,7 @@ use App\Core\Model\Event;
 use App\Core\Model\EventRepositoryInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\PrivateFishbowlService;
+use App\WorldCafe\Entity\WorldCafe;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
@@ -47,12 +48,12 @@ class EventCreatorResolver implements QueryItemResolverInterface
         if (null === $item) {
             $event = $this->repository->findBySlug($context['args']['slug']);
 
-            if (null !== $event && $user === $event->getHost()) {
-                if ($event instanceof Fishbowl) {
+            if (null !== $event) {
+                if ($event instanceof Fishbowl && $user === $event->getHost()) {
                     return $this->privateFishbowlService->decryptPrivatePassword($event);
                 }
 
-                if ($event instanceof Event) {
+                if ($event instanceof WorldCafe && $user === $event->getHost()) {
                     return $event;
                 }
             }
