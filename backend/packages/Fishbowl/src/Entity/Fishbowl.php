@@ -31,7 +31,6 @@ use App\Core\Entity\Topic;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
 use App\Fishbowl\Repository\FishbowlRepository;
-use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
 use App\Fishbowl\Resolver\FishbowlIntroduceMutationResolver;
 use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
@@ -74,7 +73,7 @@ use Webmozart\Assert\Assert as MAssert;
             name: 'bySlugQuery'
         ),
         new Query(
-            resolver: FishbowlCreatorResolver::class,
+            resolver: 'app_fishbowl_creator_resolver_event_resolver',
             args: ['slug' => ['type' => 'String!']],
             name: 'isCreatorOf'
         ),

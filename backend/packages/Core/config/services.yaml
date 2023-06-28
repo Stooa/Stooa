@@ -17,6 +17,7 @@ services:
             - ../src/DependencyInjection/
             - ../src/Entity/
             - ../src/Resolver/EventResolver.php
+            - ../src/Resolver/EventCreatorResolver.php
 
     App\Core\EventSubscriber\LocaleSubscriber:
         bind:

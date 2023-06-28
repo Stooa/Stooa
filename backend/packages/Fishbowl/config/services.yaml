@@ -36,6 +36,11 @@ services:
         bind:
             $repository: '@App\Fishbowl\Repository\FishbowlRepository'
 
+    app_fishbowl_creator_resolver_event_resolver:
+        class: App\Core\Resolver\EventCreatorResolver
+        bind:
+            $repository: '@App\Fishbowl\Repository\FishbowlRepository'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:

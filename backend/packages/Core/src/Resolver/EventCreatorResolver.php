@@ -11,20 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Resolver;
+namespace App\Core\Resolver;
 
 use ApiPlatform\Exception\ItemNotFoundException;
 use ApiPlatform\GraphQl\Resolver\QueryItemResolverInterface;
+use App\Core\Model\Event;
+use App\Core\Model\EventRepositoryInterface;
 use App\Fishbowl\Entity\Fishbowl;
-use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\PrivateFishbowlService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
-class FishbowlCreatorResolver implements QueryItemResolverInterface
+class EventCreatorResolver implements QueryItemResolverInterface
 {
     public function __construct(
-        private readonly FishbowlRepository $repository,
+        private readonly EventRepositoryInterface $repository,
         private readonly Security $security,
         private readonly PrivateFishbowlService $privateFishbowlService
     ) {
@@ -33,7 +34,7 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
     /**
      * @param mixed[] $context
      *
-     * @return Fishbowl
+     * @return Event
      */
     public function __invoke(?object $item, array $context): object
     {
@@ -44,16 +45,22 @@ class FishbowlCreatorResolver implements QueryItemResolverInterface
         $user = $this->security->getUser();
 
         if (null === $item) {
-            $fishbowl = $this->repository->findBySlug($context['args']['slug']);
+            $event = $this->repository->findBySlug($context['args']['slug']);
 
-            if (null !== $fishbowl && $user === $fishbowl->getHost()) {
-                return $this->privateFishbowlService->decryptPrivatePassword($fishbowl);
+            if (null !== $event && $user === $event->getHost()) {
+                if ($event instanceof Fishbowl) {
+                    return $this->privateFishbowlService->decryptPrivatePassword($event);
+                }
+
+                if ($event instanceof Event) {
+                    return $event;
+                }
             }
 
             throw new ItemNotFoundException();
         }
 
-        Assert::isInstanceOf($item, Fishbowl::class);
+        Assert::isInstanceOf($item, Event::class);
 
         return $item;
     }
