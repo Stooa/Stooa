@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 

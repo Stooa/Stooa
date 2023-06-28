@@ -43,7 +43,11 @@ import useTranslation from 'next-translate/useTranslation';
 import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import ModalTranscription from '../ModalTranscription/ModalTranscription';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import { useConference } from '@/jitsi';
+import { useUserAuth } from '@/user/auth/useUserAuth';
+import TranscriptionWrapper from '../TranscriptionText/TranscriptionWrapper';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -61,6 +65,8 @@ const Fishbowl: FC = () => {
     setIsRecording,
     gaveFeedback,
     setGaveFeedback,
+    isTranscriptionEnabled,
+    setIsTranscriptionEnabled,
     participantsActive,
     setParticipantsActive
   } = useStooa();
@@ -76,9 +82,12 @@ const Fishbowl: FC = () => {
     setShowStartRecording,
     setShowStopRecording,
     showFeedbackForm,
-    setShowFeedbackForm
+    setShowFeedbackForm,
+    showTranscriptionModal,
+    setShowTranscriptionModal
   } = useModals();
-  const { startRecordingEvent } = useConference();
+  const { startRecordingEvent, startTranscriptionEvent } = useConference();
+  const { getTranscriptionLanguageCookie, setTranscriptionLanguageCookie } = useUserAuth();
 
   const { width } = useWindowSize();
   const feedbackFormRef = useRef<HTMLDivElement>(null);
@@ -94,7 +103,7 @@ const Fishbowl: FC = () => {
 
   const { fid } = useRouter().query;
 
-  const { t } = useTranslation('fishbowl');
+  const { t, lang } = useTranslation('fishbowl');
 
   const isPreFishbowl =
     conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
@@ -157,6 +166,19 @@ const Fishbowl: FC = () => {
     setShowFeedbackForm(false);
   };
 
+  const handleStartTranscription = () => {
+    const transcriptionCookie = getTranscriptionLanguageCookie();
+
+    if (!transcriptionCookie) {
+      setTranscriptionLanguageCookie(LOCALES[lang]);
+    }
+
+    startTranscriptionEvent();
+    setIsTranscriptionEnabled(true);
+    setParticipantsActive(true);
+    setShowTranscriptionModal(false);
+  };
+
   useEffect(() => {
     pushEventDataLayer({
       action: fid as string,
@@ -169,7 +191,7 @@ const Fishbowl: FC = () => {
     if (width && width < BREAKPOINTS.tablet) {
       setParticipantsActive(false);
     }
-  }, [width]);
+  }, [width, setParticipantsActive]);
 
   return (
     <>
@@ -206,12 +228,14 @@ const Fishbowl: FC = () => {
             startRecording={() => handleStartRecording()}
           />
         )}
+
         {showStopRecording && (
           <ModalStopRecording
             closeModal={() => setShowStopRecording(false)}
             stopRecording={() => handleStopRecording()}
           />
         )}
+
         {showFeedbackForm && (
           <FeedbackForm
             ref={feedbackFormRef}
@@ -222,8 +246,16 @@ const Fishbowl: FC = () => {
           />
         )}
 
+        {showTranscriptionModal && (
+          <ModalTranscription
+            closeModal={() => setShowTranscriptionModal(false)}
+            startTranscription={handleStartTranscription}
+          />
+        )}
+
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
+        {isTranscriptionEnabled && <TranscriptionWrapper />}
       </Main>
       {!isPreFishbowl && <Footer />}
       <OnBoardingTour />

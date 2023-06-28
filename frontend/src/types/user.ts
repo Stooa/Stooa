@@ -26,6 +26,9 @@ export interface User {
   audioMuted?: boolean;
   videoMuted?: boolean;
   _role?: string;
+  _properties?: {
+    features_jigasi?: boolean;
+  };
 }
 
 export interface UserRepository {

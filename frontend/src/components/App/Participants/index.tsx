@@ -22,12 +22,22 @@ import People from '@/ui/svg/people.svg';
 import Curve from '@/ui/svg/participants-curve.svg';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
+import TranscriptionSVG from '@/ui/svg/transcription-icon.svg';
+
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import { useModals } from '@/contexts/ModalsContext';
+import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
+
+import TranslateSelector from '../TranslateSelector';
+import Switch from '@/components/Common/Fields/updated/Switch';
+import { useForm } from 'react-hook-form';
+import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
+import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
 import { useUserAuth } from '@/user/auth/useUserAuth';
+import { useConference } from '@/jitsi/useConference';
 
 const initialParticipant: Participant = {
   id: '',
@@ -40,6 +50,7 @@ const initialParticipant: Participant = {
   joined: false,
   isMuted: false,
   isVideoMuted: false,
+  isJigasi: false,
   getId: () => '',
   getDisplayName: () => ''
 };
@@ -53,7 +64,7 @@ const PING_TIMEOUT = 3500;
 
 const Participants: React.FC<Props> = ({ initialized, fid }) => {
   const { getParticipantList } = useJitsi();
-  const { ping } = useUserAuth();
+  const { ping, setTranscriptionLanguageCookie, getTranscriptionLanguageCookie } = useUserAuth();
 
   const { t, lang } = useTranslation('fishbowl');
   const pingInterval = useRef<number>();
@@ -64,9 +75,23 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const { data, getPassword, participantsActive, setParticipantsActive } = useStooa();
+  const {
+    data,
+    getPassword,
+    isTranscriptionEnabled,
+    participantsActive,
+    setParticipantsActive,
+    setIsTranscriptionEnabled,
+    isTranscriberJoined
+  } = useStooa();
 
-  const { showOnBoardingTour } = useModals();
+  const { stopTranscriptionEvent, startTranscriptionEvent } = useConference();
+
+  const { register, setValue } = useForm({
+    defaultValues: { transcript: isTranscriptionEnabled && isTranscriberJoined }
+  });
+
+  const { showOnBoardingTour, setShowTranscriptionModal } = useModals();
 
   const pingParticipant = () => {
     ping(lang, fid);
@@ -83,8 +108,11 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   };
 
   const getConferenceParticipants = () => {
-    const typedParticipants = getParticipantList() as unknown as Participant[];
-    setParticipants(typedParticipants);
+    const participantsWithoutTranscriber = getParticipantList().filter(participant => {
+      return !participant.isJigasi;
+    }) as unknown as Participant[];
+
+    setParticipants(participantsWithoutTranscriber);
   };
 
   const toggleDrawer = () => {
@@ -101,6 +129,31 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     if (a.isModerator) return -1;
     if (b.isModerator) return 1;
     return 0;
+  };
+
+  const handleOnChangeTranscription = (event: React.MouseEvent<HTMLInputElement>) => {
+    const cookieTranscription = getTranscriptionLanguageCookie();
+
+    if (!cookieTranscription) {
+      event.preventDefault();
+      setShowTranscriptionModal(true);
+      return;
+    }
+
+    const checkbox = event.target as HTMLInputElement;
+
+    if (checkbox && checkbox.checked) {
+      startTranscriptionEvent();
+      setTranscriptionLanguageCookie(cookieTranscription);
+      setIsTranscriptionEnabled(true);
+      return;
+    }
+
+    if (checkbox && !checkbox.checked) {
+      stopTranscriptionEvent();
+      setIsTranscriptionEnabled(false);
+      return;
+    }
   };
 
   useEffect(() => {
@@ -145,6 +198,10 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     }
   }, [showOnBoardingTour]);
 
+  useEffect(() => {
+    setValue('transcript', isTranscriptionEnabled);
+  }, [isTranscriptionEnabled]);
+
   return (
     <>
       <ParticipantsToggle
@@ -160,47 +217,79 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
         <span className="body-xs medium">
           {participants.length === 0 ? 1 : participants.length}
         </span>
-      </ParticipantsToggle>
-      <ParticipantsDrawer className={participantsActive ? 'active' : ''}>
-        <div className="header">
-          <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
-          <ButtonCopyUrl
-            variant="text"
-            fid={data.slug}
-            locale={data.locale}
-            isPrivate={data.isPrivate}
-            plainPassword={getPassword()}
-          />
-          <Icon onClick={toggleDrawer}>
-            <Cross />
-          </Icon>
-        </div>
-        {speakingParticipants.length > 0 && (
-          <div className="participant-list participant-list--speaking">
-            <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
-            <ul>
-              {speakingParticipants.map((participant, i) => (
-                <ParticipantCard
-                  participant={participant}
-                  key={`participant-speaking-${i}`}
-                  speaker={true}
-                />
-              ))}
-            </ul>
+        {isTranscriptionEnabled && (
+          <div className="transcription-indicator">
+            <TranscriptionSVG />
           </div>
         )}
-        {roomParticipants.length > 0 && (
-          <div className="participant-list">
-            <h3 className="body-xs medium caps">
-              <span>{t('fishbowl:participants.attendees')}</span>
-              <MicMuted className="icon-small" />
-              <VideoMuted className="icon-small" />
-            </h3>
-            <ul>
-              {roomParticipants.map((participant, i) => (
-                <ParticipantCard participant={participant} key={`participant-room-${i}`} />
-              ))}
-            </ul>
+      </ParticipantsToggle>
+      <ParticipantsDrawer className={participantsActive ? 'active' : ''}>
+        <div>
+          <div className="header">
+            <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
+            <ButtonCopyUrl
+              variant="text"
+              fid={data.slug}
+              locale={data.locale}
+              isPrivate={data.isPrivate}
+              plainPassword={getPassword()}
+            />
+            <Icon onClick={toggleDrawer}>
+              <Cross />
+            </Icon>
+          </div>
+          <div className="participants-wrapper">
+            {speakingParticipants.length > 0 && (
+              <div className="participant-list participant-list--speaking">
+                <h3 className="body-xs medium caps">{t('fishbowl:participants.speaking')}</h3>
+                <ul>
+                  {speakingParticipants.map((participant, i) => (
+                    <ParticipantCard
+                      participant={participant}
+                      key={`participant-speaking-${i}`}
+                      speaker={true}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+            {roomParticipants.length > 0 && (
+              <div className="participant-list">
+                <h3 className="body-xs medium caps">
+                  <span>{t('fishbowl:participants.attendees')}</span>
+                  <MicMuted className="icon-small" />
+                  <VideoMuted className="icon-small" />
+                </h3>
+                <ul>
+                  {roomParticipants.map((participant, i) => (
+                    <ParticipantCard participant={participant} key={`participant-room-${i}`} />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+        {process.env.NEXT_PUBLIC_TRANSCRIPTIONS_ENABLED === 'true' && (
+          <div className="transcription-container">
+            <hr />
+            <div className="transcription-wrapper">
+              <div className="transcription__header">
+                <h3 className="body-md medium">{t('transcription.title')}</h3>
+
+                <Switch
+                  id="transcript"
+                  onClick={event => {
+                    handleOnChangeTranscription(event);
+                  }}
+                  {...register('transcript')}
+                />
+
+                {isTranscriptionEnabled && !isTranscriberJoined && <SpinningLoader />}
+              </div>
+              {isTranscriptionEnabled && <TranscriptionSelector tooltip />}
+              <TranslateSelector />
+              <TranscriptionHistory />
+            </div>
           </div>
         )}
       </ParticipantsDrawer>

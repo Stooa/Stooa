@@ -111,12 +111,13 @@ const Selector = styled.div`
     background-color: ${COLOR_NEUTRO_100};
     transition: background-color 0.2s ease-in-out;
 
+    border-bottom: 1px solid ${COLOR_NEUTRO_600};
+
     & .sticky-button {
       width: 100%;
       padding: ${space()} ${space(2)};
       display: flex;
       align-items: center;
-      border-bottom: 1px solid ${COLOR_NEUTRO_600};
 
       text-align: left;
 

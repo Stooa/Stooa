@@ -31,6 +31,7 @@ import {
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
+  TRANSCRIPTION_TRANSCRIBER_JOINED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -48,6 +49,8 @@ import createGenericContext from '@/contexts/createGenericContext';
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { SupportedLanguageTag } from '@/types/transcriptions';
 import { useConference, useSeats, useSharedTrack, useUser } from '@/jitsi';
 
 const TEN_MINUTES = 10;
@@ -69,9 +72,15 @@ const StooaProvider = ({
   const { exitFullScreen } = useSharedTrack();
   const { initialInteraction, initializeJitsi, initializeConnection, unload, unloadKickedUser } =
     useJitsi();
-  const { stopRecordingEvent, lockConference, joinPrivateConference, joinConference } =
-    useConference();
+  const {
+    setConferenceTranscriptionLanguage,
+    stopRecordingEvent,
+    lockConference,
+    joinPrivateConference,
+    joinConference
+  } = useConference();
   const { fid } = router.query;
+  const { t, lang } = useTranslation('app');
 
   const useGaveFeedback = useMemo(() => hasUserGaveFeedback(fid as string), [fid]);
 
@@ -88,14 +97,19 @@ const StooaProvider = ({
   const [isRecording, setIsRecording] = useState(false);
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
+  const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(false);
+  const [isTranscriberJoined, setIsTranscriberJoined] = useState(false);
+  const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
+  const [translationLanguage, setTranslationLanguage] = useState<SupportedLanguageTag>(
+    LOCALES[lang]
+  );
   const [participantsActive, setParticipantsActive] = useState(() => {
     if (isModerator && data.isFishbowlNow) {
       return true;
     }
     return false;
   });
-
-  const { t, lang } = useTranslation('app');
+  const [selectedTranscriptionLanguage, setSelectedTranscriptionLanguage] = useState(LOCALES[lang]);
 
   const apiInterval = useRef<number>();
   const timeUpInterval = useRef<number>();
@@ -224,6 +238,7 @@ const StooaProvider = ({
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);
+    setConferenceTranscriptionLanguage(LOCALES[data.locale]);
 
     if (!isModerator) return;
 
@@ -280,6 +295,10 @@ const StooaProvider = ({
 
   useEventListener(MODERATOR_LEFT, () => {
     sendStopRecordingEvent();
+  });
+
+  useEventListener(TRANSCRIPTION_TRANSCRIBER_JOINED, ({ detail: { joined } }) => {
+    setIsTranscriberJoined(joined);
   });
 
   const checkApIConferenceStatus = () => {
@@ -441,8 +460,18 @@ const StooaProvider = ({
         setFeedbackAlert,
         gaveFeedback,
         setGaveFeedback,
+        isTranscriptionEnabled,
+        setIsTranscriptionEnabled,
+        isTranslationEnabled,
+        setIsTranslationEnabled,
         participantsActive,
-        setParticipantsActive
+        setParticipantsActive,
+        isTranscriberJoined,
+        setIsTranscriberJoined,
+        selectedTranscriptionLanguage,
+        setSelectedTranscriptionLanguage,
+        translationLanguage,
+        setTranslationLanguage
       }}
     >
       {children}

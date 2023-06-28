@@ -205,5 +205,15 @@
             "during": "During",
             "duringTooltip": "Feedback received during the fishbowl"
         }
+    },
+    "transcription" : {
+        "title": "Transcription",
+        "disable": "Disable transcription",
+        "enable": "Enable transcription",
+        "loading": "Transcription loading...",
+        "modalTitle": "What language do you speak?",
+        "modalBody": "Before we start, we need you to <span>indicate in which language you will be participating</span> in this conversation.",
+        "tooltip": "Please specify what language you speak.",
+        "translate": "Translate"
     }
 }
