@@ -48,6 +48,11 @@ use Webmozart\Assert\Assert as MAssert;
             args: ['slug' => ['type' => 'String!']],
             name: 'bySlugQuery'
         ),
+        new Query(
+            resolver: 'app_world_cafe_creator_resolver_event_resolver',
+            args: ['slug' => ['type' => 'String!']],
+            name: 'isCreatorOf'
+        ),
         new Mutation(
             denormalizationContext: ['groups' => ['wc:create', 'event:write']],
             security: 'is_granted(\'ROLE_USER\')',

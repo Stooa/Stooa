@@ -33,6 +33,11 @@ services:
         bind:
             $repository: '@App\WorldCafe\Repository\WorldCafeRepository'
 
+    app_world_cafe_creator_resolver_event_resolver:
+        class: App\Core\Resolver\EventCreatorResolver
+        bind:
+            $repository: '@App\WorldCafe\Repository\WorldCafeRepository'
+
     #Admin
     App\WorldCafe\Admin\WorldCafeAdmin:
         tags:

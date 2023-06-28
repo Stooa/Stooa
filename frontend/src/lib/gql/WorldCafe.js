@@ -44,4 +44,12 @@ const GET_WORLD_CAFE = gql`
   }
 `;
 
-export { CREATE_WORLD_CAFE, GET_WORLD_CAFE };
+const IS_WORLD_CAFE_CREATOR = gql`
+  query IsCreatorOfWorldCafe($slug: String!) {
+    isCreatorOfWorldCafe(slug: $slug) {
+      currentStatus
+    }
+  }
+`;
+
+export { CREATE_WORLD_CAFE, GET_WORLD_CAFE, IS_WORLD_CAFE_CREATOR };
