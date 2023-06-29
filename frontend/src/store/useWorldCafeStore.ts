@@ -10,20 +10,29 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { WorldCafeStatus } from '@/jitsi/Status';
+import { WorldCafe } from '@/types/api-platform/interfaces/worldcafe';
 
 export interface WorldCafeState {
   status: WorldCafeStatus;
-  isPrejoin: string;
+  worldCafe: WorldCafe | undefined;
+  isPrejoin: boolean;
+  isReady: boolean;
   startWorldCafe: (status: WorldCafeStatus) => void;
+  setWorldCafe: (data: WorldCafe) => void;
 }
 
 export const useWorldCafeStore = create<WorldCafeState>()(
   devtools(
     set => ({
       status: WorldCafeStatus.NOT_STARTED,
-      isPrejoin: 'true',
+      isPrejoin: true,
+      isReady: false,
+      worldCafe: undefined,
       startWorldCafe: (status: WorldCafeStatus) => {
         set({ status }, false, { type: 'startWorldCafe' });
+      },
+      setWorldCafe: (worldCafe: WorldCafe) => {
+        set({ worldCafe }, false, { type: 'setWorldCafe' });
       }
     }),
     {

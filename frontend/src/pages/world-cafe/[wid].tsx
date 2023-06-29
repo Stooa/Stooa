@@ -8,28 +8,28 @@
  */
 
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 
 import WorldCafeLanding from '@/components/Web/WorldCafeLanding';
-import { GET_WORLD_CAFE } from '@/graphql/WorldCafe';
-import WorldCafeApp from '@/layouts/WorldCafeApp/WorldCafeApp';
-import { useQuery } from '@apollo/client';
+// import WorldCafeApp from '@/layouts/WorldCafeApp/WorldCafeApp';
+import useWorldCafeLoader from '@/hooks/useWorldCafeLoader';
+import { useRouter } from 'next/router';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 
 const Page = () => {
-  const router = useRouter();
-  const { wid } = router.query;
-  const { loading, error, data } = useQuery(GET_WORLD_CAFE, { variables: { slug: wid } });
+  const {
+    query: { wid }
+  } = useRouter();
 
-  if (loading) return <div>Loading...</div>;
+  const { loading, error } = useWorldCafeLoader(wid as string);
+
+  if (loading) return <LoadingIcon />;
   if (error) return <div>Error: {error.message}</div>;
-
-  const { bySlugQueryWorldCafe: worldCafeData } = data;
 
   return (
     <LayoutWeb>
-      <WorldCafeLanding data={worldCafeData} />
+      <WorldCafeLanding />
     </LayoutWeb>
   );
 };

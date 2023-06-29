@@ -15,13 +15,13 @@ import dynamic from 'next/dynamic';
 
 import { ROUTE_HOME, ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
-import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
+import useIsFishbowlEnded from '@/hooks/useIsFishbowlEnded';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
@@ -42,6 +42,7 @@ const Page = () => {
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
+  const { error: errorFromEnded, loaded } = useIsFishbowlEnded(fid as string);
 
   const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
@@ -65,8 +66,8 @@ const Page = () => {
     };
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
+  if (loading || !loaded) return <Loader />;
+  if (error || errorFromEnded) return <Error message={error?.message ?? ''} />;
 
   const { bySlugQueryFishbowl: fb } = data;
   const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
@@ -93,7 +94,7 @@ const Page = () => {
   );
 };
 
-export default withIsFishbowlEnded(Page);
+export default Page;
 
 /**
  * Error: getStaticPaths is required for dynamic SSG pages and is missing for

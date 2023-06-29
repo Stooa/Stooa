@@ -9,33 +9,37 @@
 
 import { formatDateTime } from '@/lib/helpers';
 import { HelpText, Time } from '../FishbowlLanding/styles';
-import { WorldCafe } from '@/types/api-platform/interfaces/worldcafe';
+// import { WorldCafe } from '@/types/api-platform/interfaces/worldcafe';
 import { Description, LandingContainer, StyledNarrowerContent } from '@/ui/pages/event-detail';
 import Alert from '@/ui/Alert';
 import Trans from 'next-translate/Trans';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import useTranslation from 'next-translate/useTranslation';
 import { ToastContainer } from 'react-toastify';
+import { useWorldCafeStore } from '@/store/useWorldCafeStore';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 
-interface Props {
-  data: WorldCafe;
-}
-
-const WorldCafeLanding = ({ data }: Props) => {
-  // TODO: CHECK IF WORLD CAFE IS READY
-  const startDate = formatDateTime(data.startDateTimeTz ?? '');
+const WorldCafeLanding = () => {
+  const { isReady: isWorldCafeReady, worldCafe } = useWorldCafeStore(state => ({
+    isReady: state.isReady,
+    worldCafe: state.worldCafe
+  }));
   const { t } = useTranslation('fishbowl');
 
-  console.log(data);
+  if (!worldCafe) {
+    return <LoadingIcon />;
+  }
+
+  const startDate = formatDateTime(worldCafe.startDateTimeTz ?? '');
 
   return (
     <LandingContainer centered>
       <ToastContainer className="toastify-custom" />
 
       <div className="event-data">
-        <h1>{data.name}</h1>
-        {data.description && (
-          <Description data-testid="worldCafe-description">{data.description}</Description>
+        <h1>{worldCafe.name}</h1>
+        {worldCafe.description && (
+          <Description data-testid="worldCafe-description">{worldCafe.description}</Description>
         )}
       </div>
       <StyledNarrowerContent>
@@ -46,15 +50,14 @@ const WorldCafeLanding = ({ data }: Props) => {
           </div>
         </Time>
 
-        {/* TODO: IF WORLD CAFE IS NOT READY! */}
-        {true && (
+        {!isWorldCafeReady && (
           <>
             <Alert className="warning body-md prewrap" block>
               <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
             </Alert>
 
             <div>
-              <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+              <ButtonCopyUrl size="large" withSvg fid={worldCafe.slug} locale={worldCafe.locale} />
               <HelpText className="body-sm">{t('copyText')}</HelpText>
             </div>
           </>
