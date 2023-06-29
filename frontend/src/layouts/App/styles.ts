@@ -64,7 +64,6 @@ const Header = styled.header`
   z-index: 50;
 
   ${media.max('tablet')`
-
       min-height: ${space(16)};
 
     &.prefishbowl{
@@ -78,20 +77,26 @@ const Header = styled.header`
     display: flex;
   }
 
-  .header-actions {
+  & .header-actions {
     justify-content: flex-end;
+    align-items: center;
 
-    .actions {
+    & .actions {
       margin-right: ${space()};
     }
   }
 
-  .header-info {
+  & .header-info {
     justify-content: flex-start;
 
-    .title {
+    & .title {
       max-width: 50vw;
       overflow: hidden;
+
+      &.transcriptions {
+        max-width: 40vw;
+      }
+
       ${media.min('tablet')`
         max-width: 30vw;
       `}

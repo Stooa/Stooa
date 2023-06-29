@@ -205,5 +205,15 @@
             "during": "Durant",
             "duringTooltip": "Feedback rebut durant el fishbowl"
         }
+    },
+    "transcription" : {
+        "title": "Transcripció",
+        "disable": "Ocultar transcripció",
+        "enable": "Mostrar transcripció",
+        "loading": "Transcripció carregant...",
+        "modalTitle": "En quin idioma parles?",
+        "modalBody": "Abans de començar, necessitem que <span>indiquis en quin idioma participaràs</span> en aquesta conversa.",
+        "tooltip": "Si us plau, indica quin idioma parles.",
+        "translate": "Traduir"
     }
 }

@@ -21,9 +21,9 @@ type Props = {
   full?: boolean;
 } & FieldAttributes<Record<string, unknown>>;
 
-const Switch: React.FC<Props> = ({ label, tooltipText, full = false, ...props }) => {
+const Switch = ({ label, tooltipText, full, ...props }: Props) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const [arrowPosition, setArrowPosition] = useState<string>();
+  const [arrowPosition, setArrowPosition] = useState<string>('');
   const [field, meta] = useField<Record<string, unknown>>({ ...props, type: 'checkbox' });
   const tipToHover = useRef<HTMLDivElement>(null);
 
@@ -60,10 +60,7 @@ const Switch: React.FC<Props> = ({ label, tooltipText, full = false, ...props })
           onMouseLeave={() => setShowTooltip(false)}
           ref={tipToHover}
         >
-          {showTooltip && (
-            <ColoredFullTooltip arrowPosition={arrowPosition || ''} text={tooltipText} />
-          )}
-
+          {showTooltip && <ColoredFullTooltip arrowPosition={arrowPosition} text={tooltipText} />}
           <Info />
         </div>
       </div>

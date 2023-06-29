@@ -17,7 +17,7 @@ const StyledTooltip = styled.div`
   align-items: center;
   justify-content: center;
 
-  height: 24px;
+  min-height: 24px;
   width: max-content;
   padding: ${space()} ${space(2)};
   color: ${COLOR_NEUTRO_100};

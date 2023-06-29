@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Core\JWT;
 
-use App\Fishbowl\Service\FishbowlService;
 use Symfony\Component\HttpFoundation\Exception\JsonException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,8 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CurrentUserRoom
 {
     public function __construct(
-        private readonly RequestStack $requestStack,
-        private readonly FishbowlService $fishbowlService
+        private readonly RequestStack $requestStack
     ) {
     }
 
@@ -41,7 +39,7 @@ class CurrentUserRoom
                 return null;
             }
 
-            if (!empty($requestArray['room']) && \is_string($requestArray['room']) && $this->fishbowlService->canFishbowlStart($requestArray['room'], $user)) {
+            if (!empty($requestArray['room']) && \is_string($requestArray['room'])) {
                 return $requestArray['room'];
             }
         }

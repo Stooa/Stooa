@@ -76,7 +76,7 @@ export const useUser = (): UserRepository => {
   const handleUserJoin = (id: string, user: User): void => {
     userJoined(user);
 
-    console.log('[STOOA] Handle userRepository join', user);
+    console.log('[STOOA] Handle userRepository join', user, id);
   };
 
   const handleUserLeft = (id: string, user: User): void => {

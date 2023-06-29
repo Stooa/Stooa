@@ -428,10 +428,6 @@ const SwitchStyled = styled.div<{ full?: boolean }>`
     font-size: ${rems(14)};
     width: fit-content;
   }
-
-  label {
-    cursor: pointer;
-  }
 `;
 
 const SwitchLabel = styled.label`
@@ -461,6 +457,10 @@ const SwitchLabel = styled.label`
 
   &:not(.disabled) {
     cursor: pointer;
+  }
+
+  &:not(.disabled):hover .switch-button {
+    width: 20px;
   }
 `;
 

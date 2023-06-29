@@ -31,4 +31,6 @@ export interface ModalsContextValues {
   setShowStopRecording: Dispatch<SetStateAction<boolean>>;
   showFeedbackForm: boolean;
   setShowFeedbackForm: Dispatch<SetStateAction<boolean>>;
+  showTranscriptionModal: boolean;
+  setShowTranscriptionModal: Dispatch<SetStateAction<boolean>>;
 }

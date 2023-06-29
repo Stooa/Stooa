@@ -24,6 +24,7 @@ export const makeFishbowlParticipant = (): Participant => {
     isMuted: false,
     isVideoMuted: false,
     getId: () => faker.string.uuid(),
-    getDisplayName: () => faker.person.firstName()
+    getDisplayName: () => faker.person.firstName(),
+    isJigasi: false
   };
 };

@@ -19,7 +19,9 @@ import {
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
   RECORDING_START,
-  RECORDING_STOP
+  RECORDING_STOP,
+  TRANSCRIPTION_MESSAGE_RECEIVED,
+  TRANSCRIPTION_TRANSCRIBER_JOINED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import { useTracks, useSeats, useUser } from '@/jitsi';
@@ -132,6 +134,12 @@ export const useConference = () => {
 
       leaveUser(id);
     }
+
+    if (property === 'features_jigasi' && newValue === true) {
+      dispatchEvent(TRANSCRIPTION_TRANSCRIBER_JOINED, { joined: true });
+
+      return;
+    }
   };
 
   const _handleConnectionFailed = error => {
@@ -159,6 +167,7 @@ export const useConference = () => {
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
+    conference.setLocalParticipantProperty('requestingTranscription', false);
 
     setUser({ id: conference.myUserId() });
 
@@ -168,6 +177,8 @@ export const useConference = () => {
   };
 
   const _handleConferenceFailed = error => {
+    console.log('[STOOA] Handle conference failed', error);
+
     if (error === 'conference.authenticationRequired') {
       dispatchEvent(CONFERENCE_PASSWORD_REQUIRED);
     }
@@ -211,6 +222,14 @@ export const useConference = () => {
     console.log('[STOOA] Leave', value);
   };
 
+  const _handleEndpointMessageReceived = (participant, json) => {
+    console.log('[STOOA] Endpoint message received', participant, json);
+
+    if ((json && json.type === 'transcription-result') || json.type === 'translation-result') {
+      dispatchEvent(TRANSCRIPTION_MESSAGE_RECEIVED, { data: json });
+    }
+  };
+
   const _handleMessageReceived = (id, text, timestamp) => {
     dispatchEvent(REACTION_MESSAGE_RECEIVED, { id, text, timestamp });
   };
@@ -240,7 +259,8 @@ export const useConference = () => {
           CONFERENCE_FAILED,
           CONFERENCE_ERROR,
           DOMINANT_SPEAKER_CHANGED,
-          MESSAGE_RECEIVED
+          MESSAGE_RECEIVED,
+          ENDPOINT_MESSAGE_RECEIVED
         }
       },
       errors: {
@@ -258,7 +278,7 @@ export const useConference = () => {
     conference.on(TRACK_REMOVED, handleTrackRemoved);
     conference.on(TRACK_MUTE_CHANGED, handleTrackMuteChanged);
     conference.on(USER_JOINED, handleUserJoin);
-    conference.on(USER_LEFT, handleUserLeft);
+    conference.on(USER_LEFT, _handleUserLeft);
     conference.on(KICKED, handleUserKicked);
     conference.on(CONFERENCE_JOINED, _handleConferenceJoin);
     conference.on(CONFERENCE_FAILED, _handleConferenceFailed);
@@ -268,6 +288,7 @@ export const useConference = () => {
     conference.on(MESSAGE_RECEIVED, _handleMessageReceived);
     conference.on(PASSWORD_REQUIRED, _handlePasswordRequired);
     conference.on(PASSWORD_NOT_SUPPORTED, _handlePasswordNotSupported);
+    conference.on(ENDPOINT_MESSAGE_RECEIVED, _handleEndpointMessageReceived);
     conference.addCommandListener('join', _handleCommandJoin);
     conference.addCommandListener('leave', _handleCommandLeave);
 
@@ -307,6 +328,14 @@ export const useConference = () => {
     console.log('[STOOA] Permission changed');
   };
 
+  const _handleUserLeft = (id, user) => {
+    if (user._properties?.features_jigasi) {
+      dispatchEvent(TRANSCRIPTION_TRANSCRIBER_JOINED, { joined: false });
+    }
+
+    handleUserLeft(id, user);
+  };
+
   const initializeJitsi = () => {
     const {
       events: {
@@ -330,14 +359,15 @@ export const useConference = () => {
   };
 
   const initializeConnection = async (rawRoomName, isUserModerator) => {
-    console.log('---> Initialize connection');
     const {
       events: {
         connection: { CONNECTION_ESTABLISHED, CONNECTION_FAILED, CONNECTION_DISCONNECTED }
       }
     } = JitsiMeetJS;
+
     const auth = await getAuthToken(true, rawRoomName);
-    console.log('auth', auth);
+
+    console.log('[Stooa] Auth Token', auth);
 
     if (isUserModerator) {
       makeModerator();
@@ -424,6 +454,28 @@ export const useConference = () => {
     }
   };
 
+  const startTranscriptionEvent = () => {
+    console.log('[STOOA] Start transcription');
+    conference.setLocalParticipantProperty('requestingTranscription', true);
+  };
+
+  const stopTranscriptionEvent = () => {
+    console.log('[STOOA] Stop transcription');
+    conference.setLocalParticipantProperty('requestingTranscription', false);
+  };
+
+  const setConferenceTranscriptionLanguage = language => {
+    conference.setLocalParticipantProperty('transcription_language', language);
+  };
+
+  const setConferenceTranslationLanguage = language => {
+    conference.setLocalParticipantProperty('translation_language', language);
+  };
+
+  const stopTranslation = () => {
+    conference.setLocalParticipantProperty('translation_language', null);
+  };
+
   const startScreenShareEvent = () => {
     conference.setLocalParticipantProperty('screenShare', 'true');
   };
@@ -497,7 +549,8 @@ export const useConference = () => {
           ? false
           : conference.getLocalParticipantProperty('joined') === 'yes',
       isMuted: isLocalParticipantMuted(myUserId, 'audio'),
-      isVideoMuted: isLocalParticipantMuted(myUserId, 'video')
+      isVideoMuted: isLocalParticipantMuted(myUserId, 'video'),
+      isJigasi: false
     };
   };
 
@@ -541,6 +594,11 @@ export const useConference = () => {
     getLocalTracks,
     getParticipantsIds,
     startRecordingEvent,
-    stopRecordingEvent
+    stopRecordingEvent,
+    startTranscriptionEvent,
+    stopTranscriptionEvent,
+    setConferenceTranscriptionLanguage,
+    setConferenceTranslationLanguage,
+    stopTranslation
   };
 };

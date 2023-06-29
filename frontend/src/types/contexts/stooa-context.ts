@@ -11,6 +11,7 @@ import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { Dispatch, SetStateAction } from 'react';
 import { Participant } from '@/types/participant';
 import { Fishbowl } from '../api-platform';
+import { SupportedLanguageTag } from '../transcriptions';
 
 export interface StooaContextValues {
   conferenceReady: boolean;
@@ -38,6 +39,16 @@ export interface StooaContextValues {
   setFeedbackAlert: Dispatch<SetStateAction<boolean>>;
   gaveFeedback: boolean;
   setGaveFeedback: Dispatch<SetStateAction<boolean>>;
+  isTranscriptionEnabled: boolean;
+  setIsTranscriptionEnabled: Dispatch<SetStateAction<boolean>>;
+  isTranscriberJoined: boolean;
+  setIsTranscriberJoined: Dispatch<SetStateAction<boolean>>;
+  isTranslationEnabled: boolean;
+  setIsTranslationEnabled: Dispatch<SetStateAction<boolean>>;
+  translationLanguage: SupportedLanguageTag;
+  setTranslationLanguage: Dispatch<SetStateAction<SupportedLanguageTag>>;
   participantsActive: boolean;
   setParticipantsActive: Dispatch<SetStateAction<boolean>>;
+  selectedTranscriptionLanguage: string;
+  setSelectedTranscriptionLanguage: Dispatch<SetStateAction<string>>;
 }

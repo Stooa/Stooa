@@ -18,6 +18,7 @@ const COOKIE_SHARE_LINK_COOKIE = 'share_link';
 const COOKIE_ON_BOARDING_MODERATOR = 'on_boarding_moderator';
 const COOKIE_ON_BOARDING = 'on_boarding';
 const COOKIE_ON_BOARDING_DAYS = 30;
+const COOKIE_TRANSCRIPTION_LANGUAGE = 'transcription_language';
 
 export const useUserAuth = () => {
   const { setUserParticipantId, setUserParticipantSlug, getUserGuestId } = useUser();
@@ -48,6 +49,17 @@ export const useUserAuth = () => {
     const cookieName = isModerator ? COOKIE_ON_BOARDING_MODERATOR : COOKIE_ON_BOARDING;
 
     return cookie.get(cookieName);
+  };
+
+  const getTranscriptionLanguageCookie = () => {
+    return cookie.get(COOKIE_TRANSCRIPTION_LANGUAGE);
+  };
+
+  const setTranscriptionLanguageCookie = (language: string) => {
+    cookie.set(COOKIE_TRANSCRIPTION_LANGUAGE, language, {
+      ...COOKIE_OPTIONS,
+      expires: 30
+    });
   };
 
   const ping = async (lang: string, slug: string) => {
@@ -95,6 +107,8 @@ export const useUserAuth = () => {
     ping,
     setOnBoardingCookie,
     setShareLinkCookie,
-    isFishbowlShareLinkCookie
+    isFishbowlShareLinkCookie,
+    getTranscriptionLanguageCookie,
+    setTranscriptionLanguageCookie
   };
 };

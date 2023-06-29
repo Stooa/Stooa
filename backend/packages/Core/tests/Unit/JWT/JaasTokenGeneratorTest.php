@@ -35,6 +35,7 @@ class JaasTokenGeneratorTest extends TestCase
     private User $user;
     private string $appId;
     private string $apiKey;
+    private bool $transcriptionEnabled;
 
     protected function setUp(): void
     {
@@ -42,12 +43,18 @@ class JaasTokenGeneratorTest extends TestCase
 
         $this->appId = 'appId';
         $this->apiKey = 'apiKey';
+        $this->transcriptionEnabled = false;
 
         $this->user = UserFactory::createOne()->object();
 
         $this->hostValidator = $this->createStub(HostValidator::class);
 
-        $this->jaasTokenGenerator = new JaasTokenGenerator($this->appId, $this->apiKey, $this->hostValidator);
+        $this->jaasTokenGenerator = new JaasTokenGenerator(
+            $this->appId,
+            $this->apiKey,
+            $this->transcriptionEnabled,
+            $this->hostValidator
+        );
     }
 
     /** @test */
