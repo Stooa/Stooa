@@ -10,16 +10,27 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
+import WorldCafeLanding from '@/components/Web/WorldCafeLanding';
+import { GET_WORLD_CAFE } from '@/graphql/WorldCafe';
+import WorldCafeApp from '@/layouts/WorldCafeApp/WorldCafeApp';
+import { useQuery } from '@apollo/client';
+
+const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 
 const Page = () => {
   const router = useRouter();
   const { wid } = router.query;
+  const { loading, error, data } = useQuery(GET_WORLD_CAFE, { variables: { slug: wid } });
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const { bySlugQueryWorldCafe: worldCafeData } = data;
 
   return (
-    <Layout>
-      <h1>{wid}</h1>
-    </Layout>
+    <LayoutWeb>
+      <WorldCafeLanding data={worldCafeData} />
+    </LayoutWeb>
   );
 };
 

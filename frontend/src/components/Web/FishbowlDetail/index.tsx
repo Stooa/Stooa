@@ -12,7 +12,7 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 
 import { Fishbowl } from '@/types/api-platform';
-import { Container } from '@/ui/pages/fishbowl-detail';
+import { Container } from '@/ui/pages/event-detail';
 import { MainGrid } from './styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import FishbowlDataCard from '@/components/Web/FishbowlDataCard';

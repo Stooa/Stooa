@@ -24,7 +24,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
-const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
+const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 const Fishbowl = dynamic(import('@/components/App/Fishbowl'), { loading: () => <div /> });
 const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
   loading: () => <div />
