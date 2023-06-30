@@ -13,13 +13,14 @@ import UrlSvg from '@/ui/svg/url.svg';
 import Check from '@/ui/svg/checkmark.svg';
 
 import { toast } from 'react-toastify';
-import { ROUTE_FISHBOWL } from '@/app.config';
+import { ROUTE_FISHBOWL, ROUTE_WORLD_CAFE } from '@/app.config';
 import { defaultLocale } from '@/i18n';
 import useTranslation from 'next-translate/useTranslation';
 import Button from '@/components/Common/Button';
 
 interface Props {
-  fid: string;
+  slug: string;
+  eventType: 'fishbowl' | 'world-cafe';
   locale: string;
   variant?: 'primary' | 'secondary' | 'text';
   size?: 'small' | 'medium' | 'large';
@@ -32,7 +33,8 @@ type PrivateProps =
   | { isPrivate: boolean; plainPassword: string };
 
 const ButtonCopyUrl = ({
-  fid,
+  slug,
+  eventType,
   locale,
   size,
   variant,
@@ -42,15 +44,15 @@ const ButtonCopyUrl = ({
   ...props
 }: Props & PrivateProps) => {
   const { t } = useTranslation('common');
-  const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
-  const fbUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${
+  const fbRoute = `${eventType === 'fishbowl' ? ROUTE_FISHBOWL : ROUTE_WORLD_CAFE}/${slug}`;
+  const finalUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${
     locale === defaultLocale ? '' : `/${locale}`
   }${fbRoute}`;
 
-  const invitation = `${fbUrl}\n${t(`form:password`)}: ${plainPassword}`;
+  const invitation = `${finalUrl}\n${t(`form:password`)}: ${plainPassword}`;
 
   const handleCopyUrl = () => {
-    navigator.clipboard.writeText(isPrivate ? invitation : fbUrl);
+    navigator.clipboard.writeText(isPrivate ? invitation : finalUrl);
     toast(t('successCopiedInvitation'), {
       icon: <Check />,
       toastId: 'link-copied',

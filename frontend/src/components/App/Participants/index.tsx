@@ -229,7 +229,8 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
             <h2 className="body-sm medium">{t('fishbowl:participants.title')}</h2>
             <ButtonCopyUrl
               variant="text"
-              fid={data.slug}
+              eventType="fishbowl"
+              slug={data.slug}
               locale={data.locale}
               isPrivate={data.isPrivate}
               plainPassword={getPassword()}

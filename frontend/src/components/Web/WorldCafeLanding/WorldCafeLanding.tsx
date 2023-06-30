@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { formatDateTime } from '@/lib/helpers';
 import { HelpText, Time } from '../FishbowlLanding/styles';
 // import { WorldCafe } from '@/types/api-platform/interfaces/worldcafe';
 import { Description, LandingContainer, StyledNarrowerContent } from '@/ui/pages/event-detail';
@@ -17,20 +16,25 @@ import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import useTranslation from 'next-translate/useTranslation';
 import { ToastContainer } from 'react-toastify';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
-import LoadingIcon from '@/components/Common/LoadingIcon';
+import Loader from '@/components/Web/Loader';
 
 const WorldCafeLanding = () => {
   const { isReady: isWorldCafeReady, worldCafe } = useWorldCafeStore(state => ({
     isReady: state.isReady,
     worldCafe: state.worldCafe
   }));
-  const { t } = useTranslation('fishbowl');
+  const { t, lang } = useTranslation('fishbowl');
 
   if (!worldCafe) {
-    return <LoadingIcon />;
+    return <Loader />;
   }
 
-  const startDate = formatDateTime(worldCafe.startDateTimeTz ?? '');
+  const dateNormalized = new Date(worldCafe.startDateTimeTz ?? '');
+
+  const dateInText = new Intl.DateTimeFormat(lang, {
+    dateStyle: 'full',
+    timeStyle: 'short'
+  }).format(dateNormalized);
 
   return (
     <LandingContainer centered>
@@ -43,11 +47,9 @@ const WorldCafeLanding = () => {
         )}
       </div>
       <StyledNarrowerContent>
-        <Time block as="time" dateTime={`${startDate.date} ${startDate.time}`}>
+        <Time block as="time">
           <p className="body-md medium">Date and Time</p>
-          <div className="body-lg">
-            {`${startDate.month} ${startDate.day}, ${startDate.year}. ${startDate.time} ${startDate.timezone}`}
-          </div>
+          <div className="body-lg">{dateInText}</div>
         </Time>
 
         {!isWorldCafeReady && (
@@ -57,7 +59,13 @@ const WorldCafeLanding = () => {
             </Alert>
 
             <div>
-              <ButtonCopyUrl size="large" withSvg fid={worldCafe.slug} locale={worldCafe.locale} />
+              <ButtonCopyUrl
+                eventType="world-cafe"
+                size="large"
+                withSvg
+                slug={worldCafe.slug}
+                locale={worldCafe.locale}
+              />
               <HelpText className="body-sm">{t('copyText')}</HelpText>
             </div>
           </>

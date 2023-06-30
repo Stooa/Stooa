@@ -50,6 +50,7 @@ const Page = () => {
 
   const shouldPrintPreJoinPage: boolean =
     (joinAsGuest || isAuthenticated) && prejoin && fishbowlReady;
+
   const shouldPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
 
   useEffect(() => {

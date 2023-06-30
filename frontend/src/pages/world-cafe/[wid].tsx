@@ -14,6 +14,7 @@ import WorldCafeLanding from '@/components/Web/WorldCafeLanding';
 import useWorldCafeLoader from '@/hooks/useWorldCafeLoader';
 import { useRouter } from 'next/router';
 import LoadingIcon from '@/components/Common/LoadingIcon';
+import JoinEvent from '@/components/Web/JoinEvent';
 
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 
@@ -30,6 +31,7 @@ const Page = () => {
   return (
     <LayoutWeb>
       <WorldCafeLanding />
+      <JoinEvent />
     </LayoutWeb>
   );
 };

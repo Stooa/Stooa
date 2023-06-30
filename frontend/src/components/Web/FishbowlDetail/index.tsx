@@ -69,7 +69,8 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
             variant={isTimeLessThanNMinutes(data.startDateTimeTz, 30) ? 'secondary' : 'primary'}
             size="large"
             withSvg
-            fid={data.slug}
+            slug={data.slug}
+            eventType="fishbowl"
             locale={data.locale}
             isPrivate={data.isPrivate}
             plainPassword={data.plainPassword as string}

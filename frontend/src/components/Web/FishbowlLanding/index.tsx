@@ -57,7 +57,13 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
             </Alert>
             {!data.isPrivate && (
               <>
-                <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+                <ButtonCopyUrl
+                  size="large"
+                  withSvg
+                  eventType="fishbowl"
+                  slug={data.slug}
+                  locale={data.locale}
+                />
                 <HelpText className="body-sm">{t('copyText')}</HelpText>
               </>
             )}
@@ -66,7 +72,8 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
                 <ButtonCopyUrl
                   size="large"
                   withSvg
-                  fid={data.slug}
+                  slug={data.slug}
+                  eventType="fishbowl"
                   locale={data.locale}
                   isPrivate
                   plainPassword={data.plainPassword}

@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 import { space, media } from '@/ui/helpers';
 
-const JoinFishbowlStyled = styled.div`
+const StyledJoinEventCta = styled.div`
   .join-buttons {
     margin: ${space(3)} 0 0;
 
@@ -33,4 +33,4 @@ const JoinFishbowlStyled = styled.div`
   }
 `;
 
-export { JoinFishbowlStyled };
+export { StyledJoinEventCta };

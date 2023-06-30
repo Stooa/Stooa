@@ -84,7 +84,8 @@ const PreFishbowl = () => {
               <ButtonCopyUrl
                 data-testid="copy-link"
                 variant="text"
-                fid={fid as string}
+                eventType="fishbowl"
+                slug={fid as string}
                 locale={lang}
                 isPrivate={data.isPrivate}
                 plainPassword={getPassword()}
