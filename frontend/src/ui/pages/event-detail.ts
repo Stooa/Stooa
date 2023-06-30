@@ -10,18 +10,19 @@
 import styled from 'styled-components';
 
 import { BREAKPOINTS } from '@/ui/settings';
-import { space, rems } from '@/ui/helpers';
+import { space } from '@/ui/helpers';
 
 const Container = styled.div<{ centered?: boolean }>`
-  margin: ${space(4)} 0 ${space(2)};
+  margin-bottom: ${space(2)};
   text-align: ${({ centered }) => (centered ? 'center' : 'left')};
   max-width: ${BREAKPOINTS.desktop}px;
   width: 100%;
 `;
 
 const Description = styled.p`
-  /* max-width: ${rems(620)}; */
+  width: 100%;
   text-align: center;
+  word-break: break-word;
 `;
 
 const LandingContainer = styled(Container)`

@@ -31,60 +31,62 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
   const endDate = formatDateTime(data.endDateTimeTz);
 
   return (
-    <LandingContainer centered>
+    <>
       <ToastContainer className="toastify-custom" />
-      <div>
-        <h1 data-testid="fishbowl-name" className="title-md">
-          {data.name}
-        </h1>
-        {data.description && (
-          <Description data-testid="fishbowl-description">{data.description}</Description>
-        )}
-      </div>
-      <StyledNarrowerContent>
-        <Time block as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
-          <p className="body-md medium">{t('dateandtime')}</p>
-          <div className="body-lg">
-            {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
-              startDate.time
-            } - ${endDate.time} ${endDate.timezone}`}
-          </div>
-        </Time>
-        {!fishbowlReady && (
-          <>
-            <Alert className="warning body-md prewrap" block>
-              <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
-            </Alert>
-            {!data.isPrivate && (
-              <>
-                <ButtonCopyUrl
-                  size="large"
-                  withSvg
-                  eventType="fishbowl"
-                  slug={data.slug}
-                  locale={data.locale}
-                />
-                <HelpText className="body-sm">{t('copyText')}</HelpText>
-              </>
-            )}
-            {data.plainPassword && (
-              <>
-                <ButtonCopyUrl
-                  size="large"
-                  withSvg
-                  slug={data.slug}
-                  eventType="fishbowl"
-                  locale={data.locale}
-                  isPrivate
-                  plainPassword={data.plainPassword}
-                />
-                <HelpText className="body-sm">{t('copyText')}</HelpText>
-              </>
-            )}
-          </>
-        )}
-      </StyledNarrowerContent>
-    </LandingContainer>
+      <LandingContainer centered>
+        <div>
+          <h1 data-testid="fishbowl-name" className="title-md">
+            {data.name}
+          </h1>
+          {data.description && (
+            <Description data-testid="fishbowl-description">{data.description}</Description>
+          )}
+        </div>
+        <StyledNarrowerContent>
+          <Time block as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
+            <p className="body-md medium">{t('dateandtime')}</p>
+            <div className="body-lg">
+              {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
+                startDate.time
+              } - ${endDate.time} ${endDate.timezone}`}
+            </div>
+          </Time>
+          {!fishbowlReady && (
+            <>
+              <Alert className="warning body-md prewrap" block>
+                <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
+              </Alert>
+              {!data.isPrivate && (
+                <>
+                  <ButtonCopyUrl
+                    size="large"
+                    withSvg
+                    eventType="fishbowl"
+                    slug={data.slug}
+                    locale={data.locale}
+                  />
+                  <HelpText className="body-sm">{t('copyText')}</HelpText>
+                </>
+              )}
+              {data.plainPassword && (
+                <>
+                  <ButtonCopyUrl
+                    size="large"
+                    withSvg
+                    slug={data.slug}
+                    eventType="fishbowl"
+                    locale={data.locale}
+                    isPrivate
+                    plainPassword={data.plainPassword}
+                  />
+                  <HelpText className="body-sm">{t('copyText')}</HelpText>
+                </>
+              )}
+            </>
+          )}
+        </StyledNarrowerContent>
+      </LandingContainer>
+    </>
   );
 };
 

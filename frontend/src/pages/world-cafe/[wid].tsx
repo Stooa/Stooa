@@ -13,7 +13,7 @@ import WorldCafeLanding from '@/components/Web/WorldCafeLanding';
 // import WorldCafeApp from '@/layouts/WorldCafeApp/WorldCafeApp';
 import useWorldCafeLoader from '@/hooks/useWorldCafeLoader';
 import { useRouter } from 'next/router';
-import LoadingIcon from '@/components/Common/LoadingIcon';
+import Loader from '@/components/Web/Loader';
 import JoinEvent from '@/components/Web/JoinEvent';
 
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
@@ -25,7 +25,7 @@ const Page = () => {
 
   const { loading, error } = useWorldCafeLoader(wid as string);
 
-  if (loading) return <LoadingIcon />;
+  if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
 
   return (

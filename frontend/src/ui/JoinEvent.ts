@@ -13,7 +13,7 @@ import { space, media } from '@/ui/helpers';
 
 const StyledJoinEventCta = styled.div`
   .join-buttons {
-    margin: ${space(3)} 0 0;
+    margin: ${space(2)} 0 0;
 
     > * {
       margin: 0 0 ${space(2)};

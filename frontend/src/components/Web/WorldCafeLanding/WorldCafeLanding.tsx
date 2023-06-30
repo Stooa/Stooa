@@ -37,41 +37,42 @@ const WorldCafeLanding = () => {
   }).format(dateNormalized);
 
   return (
-    <LandingContainer centered>
+    <>
       <ToastContainer className="toastify-custom" />
+      <LandingContainer centered>
+        <div className="event-data">
+          <h1 className="title-md">{worldCafe.name}</h1>
+          {worldCafe.description && (
+            <Description data-testid="worldCafe-description">{worldCafe.description}</Description>
+          )}
+        </div>
+        <StyledNarrowerContent>
+          <Time block as="time">
+            <p className="body-md medium">Date and Time</p>
+            <div className="body-lg">{dateInText}</div>
+          </Time>
 
-      <div className="event-data">
-        <h1>{worldCafe.name}</h1>
-        {worldCafe.description && (
-          <Description data-testid="worldCafe-description">{worldCafe.description}</Description>
-        )}
-      </div>
-      <StyledNarrowerContent>
-        <Time block as="time">
-          <p className="body-md medium">Date and Time</p>
-          <div className="body-lg">{dateInText}</div>
-        </Time>
+          {!isWorldCafeReady && (
+            <>
+              <Alert className="warning body-md prewrap" block>
+                <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
+              </Alert>
 
-        {!isWorldCafeReady && (
-          <>
-            <Alert className="warning body-md prewrap" block>
-              <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
-            </Alert>
-
-            <div>
-              <ButtonCopyUrl
-                eventType="world-cafe"
-                size="large"
-                withSvg
-                slug={worldCafe.slug}
-                locale={worldCafe.locale}
-              />
-              <HelpText className="body-sm">{t('copyText')}</HelpText>
-            </div>
-          </>
-        )}
-      </StyledNarrowerContent>
-    </LandingContainer>
+              <div>
+                <ButtonCopyUrl
+                  eventType="world-cafe"
+                  size="large"
+                  withSvg
+                  slug={worldCafe.slug}
+                  locale={worldCafe.locale}
+                />
+                <HelpText className="body-sm">{t('copyText')}</HelpText>
+              </div>
+            </>
+          )}
+        </StyledNarrowerContent>
+      </LandingContainer>
+    </>
   );
 };
 
