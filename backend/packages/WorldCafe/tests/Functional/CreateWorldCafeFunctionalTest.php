@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\WorldCafe\Tests\Functional;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\Client;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
 use App\WorldCafe\Entity\WorldCafe;
@@ -30,9 +31,13 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
     private const ADMIN_PASSWORD = '$argon2id$v=19$m=65536,t=4,p=1$37ytdOiVjLdUPFfPRDALmA$xZsJ/uHJ1nTklxYMq1WrjhEPPN2E1HOtVXAyf4rTTV0';
     private User $host;
 
+    private Client $client;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->client = static::createClient();
 
         $this->host = UserFactory::createOne([
             'email' => 'host@stooa.com',
@@ -46,9 +51,18 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
     {
         $token = $this->logIn($this->host);
 
-        $newWorldCafe = WorldCafeFactory::createOne()->object();
+        $newWorldCafe = WorldCafeFactory::createOne([
+            'locale' => 'en',
+        ])->object();
 
         $response = $this->callCreateMutation($token, $newWorldCafe);
+
+        $this->assertEmailCount(1);
+        $email = $this->getMailerMessage();
+
+        if (null !== $email) {
+            $this->assertEmailHtmlBodyContains($email, 'World Café created successfully!');
+        }
 
         $graphqlResponse = $response->toArray();
 
@@ -81,7 +95,7 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
             }
         GQL;
 
-        return static::createClient()->request('POST', '/graphql', [
+        return $this->client->request('POST', '/graphql', [
             'json' => [
                 'query' => $createMutation,
                 'variables' => [
