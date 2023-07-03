@@ -48,7 +48,7 @@ const WorldCafeLanding = () => {
         </div>
         <StyledNarrowerContent>
           <Time block as="time">
-            <p className="body-md medium">Date and Time</p>
+            <p className="body-md medium">{t('dateandtime')}</p>
             <div className="body-lg">{dateInText}</div>
           </Time>
 
