@@ -25,7 +25,7 @@ emails:
         title: Et maintenant ?<br>Partagez le &lt;i&gt;fishbowl&lt;/i&gt; !
         world_cafe_title: World Café créé avec succès!
         description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.\U0001F447"
-        world_cafe_description: "Copiez et partagez le lien du World Café avec les participants.👇"
+        world_cafe_description: "Copiez et partagez le lien du World Café avec les participants 👇"
         social_share: "ou partagez sur:"
         edit_details: "N'oubliez pas que vous pouvez <a style='text-decoration: underline;' href='%edit_link%'>modifier les détails de l'événement</a> jusqu'à une heure avant son début."
         cta: "Accéder au fishbowl"

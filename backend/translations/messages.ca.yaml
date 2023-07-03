@@ -27,7 +27,7 @@ emails:
         title: Ara què?<br>Comparteix el teu <i>fishbowl</i>!
         world_cafe_title: World Café creat amb èxit!
         description: "Copia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vols afegir a la sessió.👇"
-        world_cafe_description: "Copia i comparteix l'enllaç del World Café amb els assistents.👇"
+        world_cafe_description: "Copia i comparteix l'enllaç del World Café amb els assistents 👇"
         social_share: "o comparteix en:"
         edit_details: "Recorda que pots <a style='text-decoration: underline;' href='%edit_link%'>editar els detalls del fishbowl</a> fins un hora abans de que començe."
         cta: Accedir al fishbowl
