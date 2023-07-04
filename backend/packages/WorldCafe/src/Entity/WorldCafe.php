@@ -22,6 +22,7 @@ use App\Core\Entity\User;
 use App\Core\Model\Event;
 use App\Fishbowl\Entity\Feedback;
 use App\WorldCafe\Repository\WorldCafeRepository;
+use App\WorldCafe\Resolver\WorldCafeIntroduceMutationResolver;
 use App\WorldCafe\State\WorldCafeProcessor;
 use App\WorldCafe\Validator\Constraints\FutureWorldCafe;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -59,6 +60,12 @@ use Webmozart\Assert\Assert as MAssert;
             validationContext: ['groups' => ['Default', 'wc:create']],
             name: 'create'
         ),
+        new Mutation(
+            resolver: WorldCafeIntroduceMutationResolver::class,
+            args: ['slug' => ['type' => 'String!']],
+            validationContext: ['groups' => ['Default']],
+            name: 'introduce'
+        ),
     ],
     processor: WorldCafeProcessor::class
 )]
@@ -72,6 +79,11 @@ class WorldCafe extends Event
     #[Assert\Choice([5, 10, 15, 20, 25])]
     #[ORM\Column(type: 'integer', options: ['default' => 10])]
     protected int $roundMinutes = 10;
+
+    #[Groups(['wc:read'])]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'integer', options: ['default' => 1])]
+    protected int $currentRound = 1;
 
     #[Groups(['wc:create', 'wc:read'])]
     #[ORM\Column(type: 'boolean')]
@@ -232,6 +244,18 @@ class WorldCafe extends Event
     public function getQuestions(): Collection
     {
         return $this->questions;
+    }
+
+    public function getCurrentRound(): int
+    {
+        return $this->currentRound;
+    }
+
+    public function setCurrentRound(int $currentRound): self
+    {
+        $this->currentRound = $currentRound;
+
+        return $this;
     }
 
     public function addQuestion(Question $question): self

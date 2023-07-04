@@ -7,7 +7,7 @@
 
 framework:
     workflows:
-        fishbowl:
+        event:
             type: 'state_machine'
             audit_trail:
                 enabled: true
@@ -22,6 +22,7 @@ framework:
                 - not_started
                 - introduction
                 - running
+                - conclusions
                 - finished
             transitions:
                 introduce:
@@ -35,4 +36,10 @@ framework:
                     to: running
                 finish:
                     from: running
+                    to: finished
+                to_conclusions:
+                    from: running
+                    to: conclusions
+                conclude:
+                    from: conclusions
                     to: finished

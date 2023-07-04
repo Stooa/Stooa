@@ -11,17 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Resolver;
+namespace App\WorldCafe\Resolver;
 
 use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
 use App\Core\Model\Event;
-use App\Fishbowl\Repository\FishbowlRepository;
+use App\WorldCafe\Repository\WorldCafeRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-class FishbowlIntroduceMutationResolver implements MutationResolverInterface
+class WorldCafeIntroduceMutationResolver implements MutationResolverInterface
 {
     public function __construct(
-        private readonly FishbowlRepository $repository,
+        private readonly WorldCafeRepository $repository,
         private readonly WorkflowInterface $eventStateMachine
     ) {
     }
@@ -33,18 +33,18 @@ class FishbowlIntroduceMutationResolver implements MutationResolverInterface
             return null;
         }
 
-        $fishbowl = $this->repository->findBySlug($context['args']['input']['slug']);
+        $worldCafe = $this->repository->findBySlug($context['args']['input']['slug']);
 
-        if (null === $fishbowl) {
+        if (null === $worldCafe) {
             return null;
         }
 
-        if (!$this->eventStateMachine->can($fishbowl, Event::TRANSITION_INTRODUCE)) {
+        if (!$this->eventStateMachine->can($worldCafe, Event::TRANSITION_INTRODUCE)) {
             return null;
         }
 
-        $this->eventStateMachine->apply($fishbowl, Event::TRANSITION_INTRODUCE);
+        $this->eventStateMachine->apply($worldCafe, Event::TRANSITION_INTRODUCE);
 
-        return $fishbowl;
+        return $worldCafe;
     }
 }
