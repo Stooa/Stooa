@@ -47,14 +47,13 @@ class IntroduceWorldCafeFunctionalTest extends ApiTestCase
         $hostToken = $this->logIn($this->host);
 
         $newWorldCafe = WorldCafeFactory::createOne([
+            'currentStatus' => Event::STATUS_NOT_STARTED,
             'host' => $this->host,
         ])->object();
 
         $response = $this->callGQLWithToken($newWorldCafe->getSlug(), $hostToken);
 
         $graphqlResponse = $response->toArray();
-
-        var_dump($graphqlResponse);
 
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
