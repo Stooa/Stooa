@@ -16,6 +16,7 @@ namespace Functional;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
 use App\Core\Factory\UserFactory;
+use App\Core\Model\Event;
 use App\WorldCafe\Factory\WorldCafeFactory;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
@@ -46,11 +47,10 @@ class IntroduceWorldCafeFunctionalTest extends ApiTestCase
         $hostToken = $this->logIn($this->host);
 
         $newWorldCafe = WorldCafeFactory::createOne([
-            'slug' => 'world-cafe-slug',
             'host' => $this->host,
         ])->object();
 
-        $response = $this->callGQLWithToken('world-cafe-slug', $hostToken);
+        $response = $this->callGQLWithToken($newWorldCafe->getSlug(), $hostToken);
 
         $graphqlResponse = $response->toArray();
 
@@ -58,6 +58,8 @@ class IntroduceWorldCafeFunctionalTest extends ApiTestCase
 
         $this->assertArrayHasKey('data', $graphqlResponse);
         $this->assertNotEmpty($graphqlResponse['data']);
+
+        $this->assertSame($graphqlResponse['data']['introduceWorldCafe']['worldCafe']['currentStatus'], Event::STATUS_INTRODUCTION);
     }
 
     private function callGQLWithToken(?string $slug, string $token): ResponseInterface
