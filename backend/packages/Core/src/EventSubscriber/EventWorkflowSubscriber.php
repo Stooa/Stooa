@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\EventSubscriber;
+namespace App\Core\EventSubscriber;
 
 use App\Fishbowl\Entity\Fishbowl;
 use App\WorldCafe\Entity\WorldCafe;
@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Webmozart\Assert\Assert;
 
-class FishbowlWorkflowSubscriber implements EventSubscriberInterface
+class EventWorkflowSubscriber implements EventSubscriberInterface
 {
     public function __construct(private readonly Security $security)
     {
