@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Fishbowl\EventSubscriber;
 
 use App\Fishbowl\Entity\Fishbowl;
+use App\WorldCafe\Entity\WorldCafe;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
@@ -27,13 +28,13 @@ class FishbowlWorkflowSubscriber implements EventSubscriberInterface
 
     public function guardFishbowl(GuardEvent $event): void
     {
-        $fishbowl = $event->getSubject();
+        $eventEntity = $event->getSubject();
 
-        Assert::isInstanceOf($fishbowl, Fishbowl::class);
+        Assert::isInstanceOfAny($eventEntity, [WorldCafe::class, Fishbowl::class]);
 
         $user = $this->security->getUser();
 
-        if (null !== $user && $fishbowl->getHost() !== $user) {
+        if (null !== $user && $eventEntity->getHost() !== $user) {
             $event->setBlocked(true);
         }
     }
@@ -41,7 +42,7 @@ class FishbowlWorkflowSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'workflow.fishbowl.guard' => ['guardFishbowl'],
+            'workflow.event.guard' => ['guardFishbowl'],
         ];
     }
 }

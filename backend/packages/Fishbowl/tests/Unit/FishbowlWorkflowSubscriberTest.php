@@ -69,6 +69,6 @@ class FishbowlWorkflowSubscriberTest extends TestCase
     /** @test */
     public function itGetSubscribedEvents(): void
     {
-        $this->assertSame(['workflow.fishbowl.guard' => ['guardFishbowl']], $this->subscriber::getSubscribedEvents());
+        $this->assertSame(['workflow.event.guard' => ['guardFishbowl']], $this->subscriber::getSubscribedEvents());
     }
 }
