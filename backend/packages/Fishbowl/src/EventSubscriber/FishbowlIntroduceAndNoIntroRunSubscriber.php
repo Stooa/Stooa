@@ -17,15 +17,12 @@ use App\Core\Model\Event;
 use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
-use Webmozart\Assert\Assert;
 
 class FishbowlIntroduceAndNoIntroRunSubscriber implements EventSubscriberInterface
 {
     public function guardFishbowl(GuardEvent $event): void
     {
         $eventEntity = $event->getSubject();
-
-        Assert::isInstanceOf($eventEntity, Event::class);
 
         if ($eventEntity instanceof Fishbowl) {
             $transition = $event->getTransition();

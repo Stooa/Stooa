@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Fishbowl\Resolver;
 
 use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
-use App\Fishbowl\Entity\Fishbowl;
+use App\Core\Model\Event;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
 
@@ -39,11 +39,11 @@ class FishbowlNoIntroRunMutationResolver implements MutationResolverInterface
             return null;
         }
 
-        if (!$this->eventStateMachine->can($fishbowl, FISHBOWL::TRANSITION_NO_INTRO_RUN)) {
+        if (!$this->eventStateMachine->can($fishbowl, Event::TRANSITION_NO_INTRO_RUN)) {
             return null;
         }
 
-        $this->eventStateMachine->apply($fishbowl, FISHBOWL::TRANSITION_NO_INTRO_RUN);
+        $this->eventStateMachine->apply($fishbowl, Event::TRANSITION_NO_INTRO_RUN);
 
         return $fishbowl;
     }
