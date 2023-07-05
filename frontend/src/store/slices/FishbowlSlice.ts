@@ -55,6 +55,7 @@ export const createFishbowlSlice: DevtoolsStateCreator<JitsiStore, FishbowlSlice
 
     return get().seats;
   },
+  getSeats: () => get().seats,
   findSeat: (id: string): number | undefined => {
     const { seats } = get();
     const seat = seats.findIndex(seat => seat === id) + 1;

@@ -13,9 +13,9 @@ import { useJitsiStore } from '@/store';
 
 export const useSeats = () => {
   const {
-    seats,
     userId: myUserId,
     createSeats,
+    getSeats,
     findEmptySeat,
     count,
     getOccupiedSeats,
@@ -26,6 +26,7 @@ export const useSeats = () => {
     seats: store.seats,
     userId: store.userId,
     createSeats: store.createSeats,
+    getSeats: store.getSeats,
     findEmptySeat: store.findEmptySeat,
     count: store.count,
     getOccupiedSeats: store.getOccupiedSeats,
@@ -51,10 +52,6 @@ export const useSeats = () => {
   };
 
   const getSeat = id => findSeat(id ?? myUserId);
-
-  const getSeats = () => {
-    return seats;
-  };
 
   const hasFreeSeat = () => count() > 0;
 
