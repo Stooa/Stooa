@@ -42,7 +42,7 @@ const DevicesToolbar = styled.div`
   z-index: 2;
 `;
 
-const Form = styled.div`
+const StyledPrejoinFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,4 +98,4 @@ const VideoContainer = styled.div`
   `}
 `;
 
-export { Container, Devices, DevicesToolbar, Form, VideoContainer };
+export { Container, Devices, DevicesToolbar, StyledPrejoinFormWrapper, VideoContainer };

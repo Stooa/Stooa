@@ -88,7 +88,7 @@ const FormValidation = withFormik<FormProps, FormValues>({
   }
 })(Form);
 
-const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
+const GuestForm = ({ isPrivate }: { isPrivate: boolean }) => {
   const { setFishbowlPassword, isModerator } = useStooa();
   const { getUserNickname, setUser } = useUser();
   const [, dispatch] = useStateValue();
@@ -179,4 +179,4 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   );
 };
 
-export default Nickname;
+export default GuestForm;

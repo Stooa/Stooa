@@ -12,7 +12,6 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_HOME } from '@/app.config';
-import { useAuth } from '@/contexts/AuthContext';
 
 import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layouts/Default/styles';
 import Decoration from '@/components/Web/Decoration';
@@ -21,30 +20,27 @@ import VideoPlaceholder from '@/components/App/VideoPlaceholder';
 import ButtonMoreOptions, { ButtonHandle } from '@/components/App/ButtonMoreOptions';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
-import NicknameForm from '@/components/App/FishbowlPreJoin/form';
-import AuthUser from '@/components/App/FishbowlPreJoin/form-auth';
 
 import Modal from '@/ui/Modal';
 import {
   Container,
   Devices,
   DevicesToolbar,
-  Form,
+  StyledPrejoinFormWrapper,
   VideoContainer
-} from '@/components/App/FishbowlPreJoin/styles';
+} from '@/components/App/EventPrejoin/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Trans from 'next-translate/Trans';
-import { useStooa } from '@/contexts/StooaManager';
 import Image from 'next/image';
-import { IConferenceStatus } from '@/jitsi/Status';
 import { useLocalTracks, useUser } from '@/jitsi';
 
-const FishbowlPreJoin: React.FC = () => {
+interface Props {
+  children: React.ReactNode;
+}
+const EventPrejoin = ({ children }: Props) => {
   const { videoDevice, permissions } = useDevices();
-  const { isAuthenticated, user } = useAuth();
-  const { data, isModerator, conferenceStatus } = useStooa();
   const { getUserVideoMuted } = useUser();
   const { createLocalTracks: hookCreateLocalTracks } = useLocalTracks();
 
@@ -182,26 +178,8 @@ const FishbowlPreJoin: React.FC = () => {
               />
             </DevicesToolbar>
           </Devices>
-          <Form>
-            <h2 data-testid="pre-join-title" className="title-md ">
-              {isModerator &&
-              data.isFishbowlNow &&
-              conferenceStatus === IConferenceStatus.NOT_STARTED
-                ? t('fishbowl:prejoin.startFishbowl')
-                : t('fishbowl:prejoin.title')}
-            </h2>
-            <p className="body-md subtitle">
-              {isModerator ? (
-                t('fishbowl:prejoin.moderatorSubtitle')
-              ) : (
-                <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
-              )}
-            </p>
-            {isAuthenticated ? (
-              <AuthUser isPrivate={data.isPrivate} name={user?.name ?? ''} />
-            ) : (
-              <NicknameForm isPrivate={data.isPrivate} />
-            )}
+          <StyledPrejoinFormWrapper>
+            {children}
             <Button
               data-testid="pre-join-cancel"
               size="small"
@@ -211,7 +189,7 @@ const FishbowlPreJoin: React.FC = () => {
             >
               {t('cancel')}
             </Button>
-          </Form>
+          </StyledPrejoinFormWrapper>
         </Container>
       </Modal>
       <DecorationStyled>
@@ -221,4 +199,4 @@ const FishbowlPreJoin: React.FC = () => {
   );
 };
 
-export default FishbowlPreJoin;
+export default EventPrejoin;
