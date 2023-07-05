@@ -11,8 +11,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
-import { Fishbowl } from '@/types/api-platform';
-import { IS_FISHBOWL_CREATOR } from '@/lib/gql/Fishbowl';
 import ScriptLoader from '@/hocs/withScriptLoader';
 import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
@@ -22,11 +20,11 @@ import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
+import { IS_WORLD_CAFE_CREATOR } from '@/graphql/WorldCafe';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
 interface Props {
-  data: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   title: string;
@@ -38,10 +36,12 @@ const WorldCafeApp = ({ scriptsLoaded, scriptsLoadedSuccessfully, title, childre
   const router = useRouter();
   const { fid } = router.query;
 
-  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+  const { loading, data: IsCreatorOfWorldCafe } = useQuery(IS_WORLD_CAFE_CREATOR, {
     variables: { slug: fid }
   });
   const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
+
+  console.log('RADMONM', IsCreatorOfWorldCafe);
 
   const importJitsi = async () => {
     if (loadedJitsi) return;
@@ -66,10 +66,10 @@ const WorldCafeApp = ({ scriptsLoaded, scriptsLoadedSuccessfully, title, childre
 
   if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
-    return <Error message={'Could not create fishbowl event'} />;
+    return <Error message={'Could not create WORLDCAFE event'} />;
 
   if (loading) return <Loader />;
-  const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
+  const isModerator = !!IsCreatorOfWorldCafe && !!IsCreatorOfWorldCafe.isCreatorOfWorldCafe;
 
   return (
     <>

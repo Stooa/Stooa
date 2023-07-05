@@ -22,6 +22,7 @@ import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import useIsFishbowlEnded from '@/hooks/useIsFishbowlEnded';
+import { FishbowlFormContent } from '@/components/App/EventPrejoin/FishbowlFormContent';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
@@ -30,7 +31,7 @@ const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
   loading: () => <div />
 });
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
-const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
+const EventPrejoin = dynamic(import('@/components/App/EventPrejoin'), {
   loading: () => <div />
 });
 
@@ -85,7 +86,13 @@ const Page = () => {
       prejoin={shouldPrintPreJoinPage}
       title={fishbowlTitle}
     >
-      {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
+      {shouldPrintPreJoinPage ? (
+        <EventPrejoin>
+          <FishbowlFormContent />
+        </EventPrejoin>
+      ) : (
+        <Fishbowl />
+      )}
     </Layout>
   ) : (
     <LayoutWeb>
