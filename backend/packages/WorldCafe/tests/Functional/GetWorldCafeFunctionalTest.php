@@ -61,7 +61,10 @@ class GetWorldCafeFunctionalTest extends ApiTestCase
         $this->assertSame($newWorldCafe->getLocale(), $graphqlResponse['data']['bySlugQueryWorldCafe']['locale']);
         $this->assertSame($newWorldCafe->getHasExtraRoundTime(), $graphqlResponse['data']['bySlugQueryWorldCafe']['hasExtraRoundTime']);
         $this->assertSame($newWorldCafe->getRoundMinutes(), $graphqlResponse['data']['bySlugQueryWorldCafe']['roundMinutes']);
+        $this->assertSame($newWorldCafe->getCurrentRound(), $graphqlResponse['data']['bySlugQueryWorldCafe']['currentRound']);
+
         $fistQuestion = $newWorldCafe->getQuestions()->first();
+
         if (false !== $fistQuestion) {
             $this->assertSame($fistQuestion->getTitle(), $graphqlResponse['data']['bySlugQueryWorldCafe']['questions'][0]['title']);
             $this->assertSame($fistQuestion->getDescription(), $graphqlResponse['data']['bySlugQueryWorldCafe']['questions'][0]['description']);
@@ -82,6 +85,7 @@ class GetWorldCafeFunctionalTest extends ApiTestCase
                         startDateTimeTz
                         hasExtraRoundTime
                         roundMinutes
+                        currentRound
                         questions {
                             id
                             title

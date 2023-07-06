@@ -52,4 +52,14 @@ const IS_WORLD_CAFE_CREATOR = gql`
   }
 `;
 
-export { CREATE_WORLD_CAFE, GET_WORLD_CAFE, IS_WORLD_CAFE_CREATOR };
+const INTRODUCE_WORLD_CAFE = gql`
+  mutation IntroduceWorldCafe($input: introduceWorldCafeInput!) {
+    introduceWorldCafe(input: $input) {
+      worldCafe {
+        currentStatus
+      }
+    }
+  }
+`;
+
+export { CREATE_WORLD_CAFE, GET_WORLD_CAFE, IS_WORLD_CAFE_CREATOR, INTRODUCE_WORLD_CAFE };
