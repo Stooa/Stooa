@@ -92,14 +92,18 @@ const StyledFormWrapper = styled.div`
   width: 100%;
   padding-inline: ${space(4)};
 
+  h2 {
+    margin-bottom: -${space(1)};
+  }
+
   & > * + * {
-    margin-top: ${space(4)};
+    margin-top: ${space(3)};
   }
 `;
 
 const StyledPrejoinForm = styled.form`
   & > * + * {
-    margin-top: ${space(4)};
+    margin-top: ${space(3)};
   }
 `;
 
