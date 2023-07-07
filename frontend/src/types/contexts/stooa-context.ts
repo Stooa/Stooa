@@ -24,7 +24,8 @@ export interface StooaContextValues {
   getPassword: () => string;
   setFishbowlPassword: Dispatch<SetStateAction<string | undefined>>;
   isSharing: boolean;
-  setIsSharing: Dispatch<SetStateAction<boolean>>;
+  share: () => void;
+  stopShare: () => void;
   clientRunning: boolean;
   setClientRunning: Dispatch<SetStateAction<boolean>>;
   startRecording: () => Promise<{

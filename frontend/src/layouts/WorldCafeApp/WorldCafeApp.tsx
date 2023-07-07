@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 
 import ScriptLoader from '@/hocs/withScriptLoader';
@@ -20,7 +20,7 @@ import Seo from '@/components/Web/Seo';
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
 import { IS_WORLD_CAFE_CREATOR } from '@/graphql/WorldCafe';
-import { useJitsi } from '@/lib/useJitsi';
+import useLoadJitsi from '@/hooks/useLoadJitsi';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -43,35 +43,7 @@ const WorldCafeApp = ({
   const { loading, data: IsCreatorOfWorldCafe } = useQuery(IS_WORLD_CAFE_CREATOR, {
     variables: { slug: wid }
   });
-  const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
-  const { initializeJitsi } = useJitsi();
-
-  const importJitsi = async () => {
-    if (loadedJitsi) return;
-
-    let importedJitsiMeetJs;
-
-    try {
-      // @ts-expect-error: lib-jitsi-meet not found
-      importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
-    } catch (error) {
-      return;
-    }
-
-    window.JitsiMeetJS = importedJitsiMeetJs;
-
-    setLoadedJitsi(true);
-  };
-
-  useEffect(() => {
-    importJitsi();
-  }, []);
-
-  useEffect(() => {
-    if (loadedJitsi) {
-      initializeJitsi();
-    }
-  }, [loadedJitsi]);
+  const { loadedJitsi } = useLoadJitsi(scriptsLoaded);
 
   if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)

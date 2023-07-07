@@ -10,7 +10,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
 import useEventListener from '@/hooks/useEventListener';
-import { TRACK_ADDED } from '@/jitsi/Events';
+import { MODERATOR_LEFT, RECORDING_START, RECORDING_STOP, TRACK_ADDED } from '@/jitsi/Events';
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import { MediaType } from '@/types/jitsi/media';
 import { toast } from 'react-toastify';
@@ -60,18 +60,16 @@ const getMimeType = (): string => {
 };
 
 const useVideoRecorder = (
-  options?: {
-    fileName: string;
-    downloadingMessage: string;
-    slug: string;
-  },
-  handleStoppedFromBrowser?: () => void,
-  handleCloseToGigabyte?: () => void
+  fileName: string,
+  downloadingMessage: string,
+  closeToGigaMessage: string,
+  slug: string
 ) => {
+  const [isRecording, setIsRecording] = useState(false);
   const [stream, setStream] = useState<MediaStream>();
   const [tabMediaStream, setTabMediaStream] = useState<MediaStream>();
   const [ranNotification, setRanNotification] = useState(false);
-  const { getParticipantsIds } = useConference();
+  const { getParticipantsIds, stopRecordingEvent } = useConference();
   const { getAudioTracks } = useTracks();
   const { createLocalTrack } = useLocalTracks();
 
@@ -175,13 +173,24 @@ const useVideoRecorder = (
       recorderRef.current.addEventListener('dataavailable', dataAvailable);
 
       tabMediaStream.addEventListener('inactive', () => {
-        if (handleStoppedFromBrowser) handleStoppedFromBrowser();
+        stopRecordingEvent();
+        setIsRecording(false);
         stopRecording().catch(() => null);
       });
 
       recorderRef.current.start(5000);
+
+      setIsRecording(true);
+
+      pushEventDataLayer({
+        category: 'Recording',
+        action: 'Start',
+        label: slug
+      });
+
       return { status: 'success' };
     }
+
     return { status: 'error', type: 'no-combined-stream' };
   };
 
@@ -192,24 +201,20 @@ const useVideoRecorder = (
     const a = document.createElement('a');
     const extension = mediaType.slice(mediaType.indexOf('/') + 1, mediaType.indexOf(';'));
 
-    if (!options) return;
-
     a.style.display = 'none';
     a.href = url;
-    a.download = `${getFilename(options.fileName)}.${extension}`;
+    a.download = `${getFilename(fileName)}.${extension}`;
     a.click();
 
-    toast(options.downloadingMessage, {
+    toast(downloadingMessage, {
       icon: '📥',
       type: 'success',
       position: 'bottom-center',
       autoClose: 3000
     });
-  }, [options]);
+  }, [fileName, downloadingMessage]);
 
   const stopRecording = useCallback(async (): Promise<boolean> => {
-    if (!options) return false;
-
     return new Promise((resolve, reject) => {
       if (recorderRef.current) {
         recorderRef.current.stop();
@@ -232,7 +237,7 @@ const useVideoRecorder = (
         pushEventDataLayer({
           category: 'Recording',
           action: 'Stop',
-          label: options.slug
+          label: slug
         });
 
         setTimeout(async () => {
@@ -243,7 +248,7 @@ const useVideoRecorder = (
         reject(false);
       }
     });
-  }, [stream, tabMediaStream, options, _saveRecording]);
+  }, [stream, tabMediaStream, slug, _saveRecording]);
 
   const dataAvailable = useCallback(
     (e: BlobEvent) => {
@@ -252,17 +257,22 @@ const useVideoRecorder = (
         totalSize.current -= e.data.size;
 
         if (totalSize.current <= 100000000 && !ranNotification) {
-          if (handleCloseToGigabyte) {
-            handleCloseToGigabyte();
-            setRanNotification(true);
-          }
+          toast(closeToGigaMessage, {
+            icon: '⚠️',
+            toastId: 'close-to-giga',
+            type: 'warning',
+            position: 'bottom-center',
+            autoClose: 5000
+          });
+
+          setRanNotification(true);
         }
         if (totalSize.current <= 0) {
           stopRecording().catch(() => null);
         }
       }
     },
-    [ranNotification, handleCloseToGigabyte, stopRecording]
+    [ranNotification, stopRecording]
   );
 
   useEffect(() => {
@@ -277,9 +287,23 @@ const useVideoRecorder = (
     };
   }, [ranNotification, dataAvailable]);
 
+  useEventListener(RECORDING_START, () => {
+    setIsRecording(true);
+  });
+
+  useEventListener(RECORDING_STOP, () => {
+    setIsRecording(false);
+  });
+
+  useEventListener(MODERATOR_LEFT, () => {
+    stopRecordingEvent();
+  });
+
   return {
+    isRecording,
     startRecording,
-    stopRecording
+    stopRecording,
+    setIsRecording
   };
 };
 

@@ -24,22 +24,13 @@ import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import ReactionsButton from '../Reactions/ReactionsButton';
 import ScreenShareButton from '../ScreenShareButton';
-import { pushEventDataLayer } from '@/lib/analytics';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
-import {
-  useConference,
-  useDevices as useJitsiDevices,
-  useSharedTrack,
-  useTracks,
-  useUser
-} from '@/jitsi';
+import { useDevices as useJitsiDevices, useTracks, useUser } from '@/jitsi';
 import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 const ToolBar = () => {
   const { t } = useTranslation('fishbowl');
-  const { getLocalTracks } = useConference();
-  const { removeShareTrack } = useSharedTrack();
-  const { screenShare, changeDevice } = useJitsiDevices();
+  const { changeDevice } = useJitsiDevices();
   const { toggleAudioTrack, toggleVideoTrack } = useTracks();
   const { getUser } = useUser();
   const { join, leave } = useJitsi();
@@ -53,7 +44,8 @@ const ToolBar = () => {
     timeStatus,
     conferenceReady,
     isSharing,
-    setIsSharing,
+    share,
+    stopShare,
     clientRunning,
     isRecording,
     feedbackAlert,
@@ -68,31 +60,7 @@ const ToolBar = () => {
 
   const configButtonRef = useRef<ButtonHandle>(null);
 
-  const handleShareClick = async () => {
-    if (isSharing) {
-      const shareLocalTrack = getLocalTracks().filter(track => track.getVideoType() === 'desktop');
-
-      setIsSharing(false);
-      await removeShareTrack(shareLocalTrack[0], 'app');
-    } else {
-      pushEventDataLayer({
-        action: 'click_share',
-        category: 'Sharescreen',
-        label: window.location.href
-      });
-
-      const selectedScreen = await screenShare();
-
-      if (selectedScreen) {
-        pushEventDataLayer({
-          action: 'share',
-          category: 'Sharescreen',
-          label: window.location.href
-        });
-        setIsSharing(true);
-      }
-    }
-  };
+  const handleShareClick = () => (isSharing ? stopShare() : share());
 
   const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
