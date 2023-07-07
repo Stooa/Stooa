@@ -15,6 +15,7 @@ namespace App\Core\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use App\Core\Model\Event;
 use App\Fishbowl\Entity\Feedback;
 use App\Fishbowl\Entity\Fishbowl;
 use App\WorldCafe\Entity\WorldCafe;
@@ -207,11 +208,12 @@ class Participant implements \Stringable
         return $this;
     }
 
-    public function isModerator(Fishbowl $fishbowl): bool
+    public function isModerator(Event $event): bool
     {
         $user = $this->getUser();
-        if (null !== $this->getUser()) {
-            return $fishbowl->getHost() === $user;
+
+        if (null !== $this->getUser() && ($event instanceof Fishbowl || $event instanceof WorldCafe)) {
+            return $event->getHost() === $user;
         }
 
         return false;

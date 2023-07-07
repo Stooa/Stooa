@@ -17,6 +17,7 @@ use App\Core\Entity\Guest;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
+use App\WorldCafe\Entity\WorldCafe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
@@ -54,7 +55,7 @@ class ParticipantRepository extends ServiceEntityRepository
     }
 
     /** @return Participant[] */
-    public function getParticipants(Fishbowl $fishbowl): array
+    public function getParticipantsByFishbowl(Fishbowl $fishbowl): array
     {
         $now = new \DateTimeImmutable();
         $twentySeconds = new \DateInterval('PT20S');
@@ -63,6 +64,23 @@ class ParticipantRepository extends ServiceEntityRepository
             ->where('participant.fishbowl = :fishbowl')
             ->andWhere('participant.lastPing >= :twentySeconds')
             ->setParameter('fishbowl', $fishbowl->getId(), 'uuid')
+            ->setParameter('twentySeconds', $now->sub($twentySeconds), Types::DATETIME_IMMUTABLE)
+            ->orderBy('participant.id', 'ASC')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    /** @return Participant[] */
+    public function getParticipantsByWorldCafe(WorldCafe $worldCafe): array
+    {
+        $now = new \DateTimeImmutable();
+        $twentySeconds = new \DateInterval('PT20S');
+
+        $query = $this->createQueryBuilder('participant')
+            ->where('participant.worldCafe = :worldCafe')
+            ->andWhere('participant.lastPing >= :twentySeconds')
+            ->setParameter('worldCafe', $worldCafe->getId(), 'uuid')
             ->setParameter('twentySeconds', $now->sub($twentySeconds), Types::DATETIME_IMMUTABLE)
             ->orderBy('participant.id', 'ASC')
             ->getQuery();
