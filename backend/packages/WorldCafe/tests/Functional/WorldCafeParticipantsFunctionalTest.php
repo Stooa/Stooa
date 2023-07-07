@@ -15,13 +15,15 @@ namespace App\WorldCafe\Tests\Functional;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Core\Entity\User;
+use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
+
 use App\WorldCafe\Factory\WorldCafeFactory;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class IsCreatorOfWorldCafeFunctionalTest extends ApiTestCase
+class WorldCafeParticipantsFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;
@@ -41,45 +43,26 @@ class IsCreatorOfWorldCafeFunctionalTest extends ApiTestCase
     }
 
     /** @test */
-    public function itGetsIsCreatorOfWorldCafeBySlug(): void
+    public function itGetsWorldCafeParticipants(): void
     {
         $hostToken = $this->logIn($this->host);
 
-        $newWorldCafe = WorldCafeFactory::createOne([
-            'slug' => 'world-cafe-slug',
-            'host' => $this->host,
+        $worldCafe = WorldCafeFactory::createOne([
+           'slug' => 'world-cafe-slug',
         ])->object();
 
-        $response = $this->callGQLWithToken('world-cafe-slug', $hostToken);
-
-        $graphqlResponse = $response->toArray();
-
-        $this->assertArrayHasKey('data', $graphqlResponse);
-        $this->assertNotEmpty($graphqlResponse['data']);
-
-        $this->assertSame($newWorldCafe->getCurrentStatus(), $graphqlResponse['data']['isCreatorOfWorldCafe']['currentStatus']);
-    }
-
-    private function callGQLWithToken(?string $slug, string $token): ResponseInterface
-    {
-
-        $bySlugQuery = <<<GQL
-            query IsCreatorOfWorldCafe(\$slug: String!) {
-                isCreatorOfWorldCafe(slug: \$slug) {
-                    currentStatus
-                }
-            }
-        GQL;
-
-        return static::createClient()->request('POST', '/graphql', [
-            'json' => [
-                'query' => $bySlugQuery,
-                'variables' => [
-                    'slug' => $slug,
-                ],
-            ],
-            'auth_bearer' => $token,
+        ParticipantFactory::createMany(5, [
+            'worldCafe' => $worldCafe,
+            'lastPing' => new \DateTimeImmutable(),
         ]);
+
+        $response = static::createClient()->request('GET', '/es/world-cafe-participants/world-cafe-slug', [
+            'auth_bearer' => $hostToken,
+        ]);
+
+        $responseArray = $response->toArray();
+        var_dump($responseArray);
+        $this->assertResponseIsSuccessful();
     }
 
     private function logIn(User $user): string

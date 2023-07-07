@@ -10,3 +10,9 @@ fishbowl:
     prefix: /{_locale}
     requirements:
         _locale: en|es|ca|fr|id
+
+world_cafe:
+    resource: '@WorldCafeBundle/config/routes.yaml'
+    prefix: /{_locale}
+    requirements:
+        _locale: en|es|ca|fr|id

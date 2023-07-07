@@ -14,13 +14,22 @@ declare(strict_types=1);
 namespace App\WorldCafe\Service;
 
 use App\Core\Model\Event;
+use App\Core\Service\ParticipantService;
 use App\WorldCafe\Entity\WorldCafe;
+use App\WorldCafe\Repository\WorldCafeRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * @psalm-import-type RawParticipant from ParticipantService
+ */
 class WorldCafeService
 {
     public function __construct(
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
+        private readonly WorldCafeRepository $worldCafeRepository,
+        private readonly Security $security,
+        private readonly ParticipantService $participantService,
     ) {
     }
 
@@ -35,5 +44,18 @@ class WorldCafeService
         return $worldCafe->setName(
             $this->translator->trans('world_cafe.default_title', ['%name%' => $worldCafe->getHostName()], null, $worldCafe->getLocale())
         );
+    }
+
+    /** @return RawParticipant[] */
+    public function getParticipants(string $slug): array
+    {
+        $worldCafe = $this->worldCafeRepository->findBySlug($slug);
+        $currentUser = $this->security->getUser();
+
+        if (null === $worldCafe) {
+            return [];
+        }
+
+        return $this->participantService->buildParticipantsByWorldCafe($worldCafe, $currentUser);
     }
 }
