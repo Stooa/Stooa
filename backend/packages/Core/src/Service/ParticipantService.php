@@ -79,7 +79,7 @@ class ParticipantService
     }
 
     /** @return RawParticipant[] */
-    public function buildParticipantsBy(WorldCafe $worldCafe, ?UserInterface $currentUser): array
+    public function buildParticipantsByWorldCafe(WorldCafe $worldCafe, ?UserInterface $currentUser): array
     {
         $participants = $this->participantRepository->getParticipantsByWorldCafe($worldCafe);
 
