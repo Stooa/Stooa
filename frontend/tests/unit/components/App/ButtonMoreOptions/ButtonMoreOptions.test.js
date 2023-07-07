@@ -99,11 +99,7 @@ describe('Unit test of more options button and their options', () => {
   });
 
   it('It renders more options with recording option button when moderator', () => {
-    useStooa.mockImplementation(() => ({
-      isModerator: true
-    }));
-
-    const { getByTestId } = render(<ButtonMoreOptions />);
+    const { getByTestId } = render(<ButtonMoreOptions isModerator={true} />);
     const button = getByTestId('more-options-button');
     expect(button).toBeInTheDocument();
 

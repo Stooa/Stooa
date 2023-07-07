@@ -48,6 +48,7 @@ import { LOCALES } from '@/lib/supportedTranslationLanguages';
 import { useConference } from '@/jitsi';
 import { useUserAuth } from '@/user/auth/useUserAuth';
 import TranscriptionWrapper from '../TranscriptionText/TranscriptionWrapper';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -65,11 +66,11 @@ const Fishbowl: FC = () => {
     setIsRecording,
     gaveFeedback,
     setGaveFeedback,
-    isTranscriptionEnabled,
-    setIsTranscriptionEnabled,
     participantsActive,
     setParticipantsActive
   } = useStooa();
+
+  const { isTranscriptionEnabled, setIsTranscriptionEnabled } = useTranscriptions();
 
   const {
     showOnBoardingModal,

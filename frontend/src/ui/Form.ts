@@ -38,7 +38,7 @@ const FormikForm = styled(Form)`
   width: 100%;
 
   &:not(:last-child) {
-    margin-bottom: ${space(4)};
+    /* margin-bottom: ${space(4)}; */
   }
 
   fieldset {

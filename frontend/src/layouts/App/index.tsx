@@ -23,6 +23,7 @@ import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
+import { TranscriptionsProvider } from '@/contexts/TranscriptionContext';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -81,12 +82,14 @@ const Layout = ({
 
   return (
     <StooaProvider data={data} isModerator={isModerator}>
-      <ModalsProvider isModerator={isModerator}>
-        <DevicesProvider>
-          <Seo title={title} />
-          <Container className={className}>{children}</Container>
-        </DevicesProvider>
-      </ModalsProvider>
+      <TranscriptionsProvider>
+        <ModalsProvider isModerator={isModerator}>
+          <DevicesProvider>
+            <Seo title={title} />
+            <Container className={className}>{children}</Container>
+          </DevicesProvider>
+        </ModalsProvider>
+      </TranscriptionsProvider>
       <ToastContainer className="toastify-custom" />
     </StooaProvider>
   );

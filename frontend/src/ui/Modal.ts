@@ -48,6 +48,14 @@ const Modal = styled.div`
     position: relative;
     text-align: center;
 
+    & > * + * {
+      margin-top: ${space(2)};
+
+      & a {
+        --font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
+      }
+    }
+
     & .friend-image {
       margin-bottom: ${space(2)};
       margin-inline: auto;
@@ -76,14 +84,6 @@ const Modal = styled.div`
       path {
         fill: currentColor;
       }
-    }
-  }
-
-  .description {
-    margin-top: ${space(2)};
-
-    & a {
-      --font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
     }
   }
 

@@ -20,6 +20,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import { WorldCafeStatus } from '@/jitsi/Status';
 import EventPrejoin from '@/components/App/EventPrejoin';
+import { PrejoinWorldCafeForm } from '@/components/App/EventPrejoin/PrejoinWorldCafeForm';
 
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 const WorldCafeApp = dynamic(import('@/layouts/WorldCafeApp/WorldCafeApp'), {
@@ -47,27 +48,18 @@ const Page = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   const shouldPrintPreJoinPage: boolean = (joinAsGuest || isAuthenticated) && prejoin && isReady;
-  const shouldPrintFishbowlPage: boolean = isReady && (isAuthenticated || isGuest);
-
-  console.table({
-    joinAsGuest,
-    isAuthenticated,
-    prejoin,
-    isReady
-  });
-
-  console.log(shouldPrintPreJoinPage);
+  // const shouldPrintFishbowlPage: boolean = isReady && (isAuthenticated || isGuest);
 
   if (shouldPrintPreJoinPage && worldCafe) {
     return (
       <WorldCafeApp
+        wid={wid as string}
         className={status === WorldCafeStatus.NOT_STARTED ? 'prefishbowl' : ''}
         prejoin={shouldPrintPreJoinPage}
         title={worldCafe.name}
       >
-        <EventPrejoin>
-          <h2>NOSEQUE VENGA</h2>
-          <div>Formulario aqui nose que</div>
+        <EventPrejoin event="worldCafe">
+          <PrejoinWorldCafeForm />
         </EventPrejoin>
       </WorldCafeApp>
     );
@@ -75,7 +67,7 @@ const Page = () => {
     return (
       <LayoutWeb>
         <WorldCafeLanding />
-        <JoinEvent />
+        <JoinEvent joinAsGuest={() => setJoinAsGuest(true)} />
       </LayoutWeb>
     );
   }

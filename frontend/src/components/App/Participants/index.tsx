@@ -38,6 +38,7 @@ import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelecto
 import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
 import { useUserAuth } from '@/user/auth/useUserAuth';
 import { useConference } from '@/jitsi/useConference';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 const initialParticipant: Participant = {
   id: '',
@@ -75,15 +76,10 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   ]);
   const [roomParticipants, setRoomParticipants] = useState<Participant[]>([initialParticipant]);
 
-  const {
-    data,
-    getPassword,
-    isTranscriptionEnabled,
-    participantsActive,
-    setParticipantsActive,
-    setIsTranscriptionEnabled,
-    isTranscriberJoined
-  } = useStooa();
+  const { data, getPassword, participantsActive, setParticipantsActive } = useStooa();
+
+  const { isTranscriptionEnabled, setIsTranscriptionEnabled, isTranscriberJoined } =
+    useTranscriptions();
 
   const { stopTranscriptionEvent, startTranscriptionEvent } = useConference();
 

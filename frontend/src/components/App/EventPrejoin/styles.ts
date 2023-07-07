@@ -45,28 +45,17 @@ const DevicesToolbar = styled.div`
 const StyledPrejoinFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: ${space(3)} ${space(2)};
+  align-items: center;
+  padding: ${space(2)} ${space(2)};
   text-align: center;
   width: 100%;
-
-  input {
-    margin-bottom: ${space(3)};
-  }
-
-  h2 {
-    color: ${COLOR_NEUTRO_700};
-    margin-bottom: ${space(2)};
-  }
-
-  p.subtitle {
-    color: ${COLOR_NEUTRO_700};
-    margin-bottom: ${space(4)};
-  }
+  color: ${COLOR_NEUTRO_700};
+  gap: ${space(2)};
 
   ${media.min('tablet')`
-    padding:  ${space(15)} ${space(4)} ${space(6)} ${space(4)};
+    min-height: 520px;
+    padding: ${space(6)} ${space(4)};
   `}
 `;
 
@@ -78,7 +67,7 @@ const VideoContainer = styled.div`
   height: 35vh;
   overflow: hidden;
   width: 100%;
-  min-height: 320px;
+  min-height: 220px;
 
   .video {
     width: 100%;
@@ -94,8 +83,32 @@ const VideoContainer = styled.div`
 
   ${media.min('tablet')`
     border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
+    min-height: 320px;
     height: 100%;
   `}
 `;
 
-export { Container, Devices, DevicesToolbar, StyledPrejoinFormWrapper, VideoContainer };
+const StyledFormWrapper = styled.div`
+  width: 100%;
+  padding-inline: ${space(4)};
+
+  & > * + * {
+    margin-top: ${space(4)};
+  }
+`;
+
+const StyledPrejoinForm = styled.form`
+  & > * + * {
+    margin-top: ${space(4)};
+  }
+`;
+
+export {
+  Container,
+  Devices,
+  DevicesToolbar,
+  StyledPrejoinFormWrapper,
+  VideoContainer,
+  StyledFormWrapper,
+  StyledPrejoinForm
+};

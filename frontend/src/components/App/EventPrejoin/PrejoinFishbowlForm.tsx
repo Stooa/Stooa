@@ -15,7 +15,7 @@ import useTranslation from 'next-translate/useTranslation';
 import AuthUser from './form-auth';
 import GuestForm from './GuestForm';
 
-export const FishbowlFormContent = () => {
+export const PrejoinFishbowlForm = () => {
   const { isAuthenticated, user } = useAuth();
   const { data, isModerator, conferenceStatus } = useStooa();
   const { t } = useTranslation('common');
