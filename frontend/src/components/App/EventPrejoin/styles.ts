@@ -54,7 +54,7 @@ const StyledPrejoinFormWrapper = styled.div`
   gap: ${space(2)};
 
   ${media.min('tablet')`
-    min-height: 520px;
+    min-height: 420px;
     padding: ${space(6)} ${space(4)};
   `}
 `;
