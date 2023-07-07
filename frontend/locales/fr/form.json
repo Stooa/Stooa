@@ -78,6 +78,12 @@
         "add5MinutesLabel": "Ajoutez 5 minutes supplémentaires à la première ronde",
         "add5MinutesTooltip": "Nous recommandons d'ajouter 5 minutes supplémentaires à la première ronde, car les personnes ont généralement besoin d'un peu plus de temps pour se lancer.",
         "next":  "Ajouter une question",
-        "submit": "Créer un World Café"
+        "submit": "Créer un World Café",
+        "prejoin" : {
+            "title": "Rejoignez le World Café",
+            "description": "Si vous le souhaitez, vous pouvez configurer l'audio et la vidéo avant de commencer le World Café",
+            "join": "Rejoindre le World Café",
+            "cameraFallback": "Stooa a <span>besoin d'autorisations</span> pour accéder à <span>votre caméra et à votre microphone</span> afin que les autres puissent vous entendre et vous voir"
+        }
     }
 }

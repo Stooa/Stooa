@@ -37,9 +37,10 @@ import Image from 'next/image';
 import { useLocalTracks, useUser } from '@/jitsi';
 
 interface Props {
+  event: 'fishbowl' | 'worldCafe';
   children: React.ReactNode;
 }
-const EventPrejoin = ({ children }: Props) => {
+const EventPrejoin = ({ event, children }: Props) => {
   const { videoDevice, permissions } = useDevices();
   const { getUserVideoMuted } = useUser();
   const { createLocalTracks: hookCreateLocalTracks } = useLocalTracks();
@@ -155,7 +156,11 @@ const EventPrejoin = ({ children }: Props) => {
                   />
                   <p className="body-sm">
                     <Trans
-                      i18nKey="fishbowl:prejoin.permissions"
+                      i18nKey={
+                        event === 'fishbowl'
+                          ? 'fishbowl:prejoin.permissions'
+                          : 'form:worldCafe.prejoin.cameraFallback'
+                      }
                       components={{ span: <span className="medium" /> }}
                     />
                   </p>
@@ -175,6 +180,7 @@ const EventPrejoin = ({ children }: Props) => {
                 selectorPosition="bottom"
                 ref={configButtonRef}
                 unlabeled={true}
+                isModerator={true}
               />
             </DevicesToolbar>
           </Devices>

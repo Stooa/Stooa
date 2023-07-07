@@ -8,7 +8,6 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
 import ScriptLoader from '@/hocs/withScriptLoader';
@@ -21,6 +20,7 @@ import Seo from '@/components/Web/Seo';
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
 import { IS_WORLD_CAFE_CREATOR } from '@/graphql/WorldCafe';
+import { useJitsi } from '@/lib/useJitsi';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -29,19 +29,22 @@ interface Props {
   scriptsLoadedSuccessfully: boolean;
   title: string;
   prejoin: boolean;
+  wid: string;
   children: React.ReactNode;
 }
 
-const WorldCafeApp = ({ scriptsLoaded, scriptsLoadedSuccessfully, title, children }: Props) => {
-  const router = useRouter();
-  const { fid } = router.query;
-
+const WorldCafeApp = ({
+  scriptsLoaded,
+  scriptsLoadedSuccessfully,
+  title,
+  wid,
+  children
+}: Props) => {
   const { loading, data: IsCreatorOfWorldCafe } = useQuery(IS_WORLD_CAFE_CREATOR, {
-    variables: { slug: fid }
+    variables: { slug: wid }
   });
   const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
-
-  console.log('RADMONM', IsCreatorOfWorldCafe);
+  const { initializeJitsi } = useJitsi();
 
   const importJitsi = async () => {
     if (loadedJitsi) return;
@@ -63,6 +66,12 @@ const WorldCafeApp = ({ scriptsLoaded, scriptsLoadedSuccessfully, title, childre
   useEffect(() => {
     importJitsi();
   }, []);
+
+  useEffect(() => {
+    if (loadedJitsi) {
+      initializeJitsi();
+    }
+  }, [loadedJitsi]);
 
   if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)

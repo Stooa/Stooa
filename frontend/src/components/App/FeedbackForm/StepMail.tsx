@@ -12,7 +12,7 @@ import NewInput from '@/components/Common/Fields/updated/Input';
 import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
 import { StyledCommentForm, StyledStepWrapper } from './styles';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Trans from 'next-translate/Trans';
 
@@ -24,10 +24,8 @@ interface Props {
 const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
   const { t } = useTranslation('fishbowl');
 
-  const emailError = t('form:validation.email');
-
-  const schema = Yup.object({
-    email: Yup.string().email(emailError)
+  const schema = yup.object({
+    email: yup.string().email(t('form:validation.email'))
   });
 
   const {

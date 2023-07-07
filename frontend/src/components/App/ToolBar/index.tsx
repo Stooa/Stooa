@@ -33,8 +33,9 @@ import {
   useTracks,
   useUser
 } from '@/jitsi';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
-const ToolBar: React.FC = () => {
+const ToolBar = () => {
   const { t } = useTranslation('fishbowl');
   const { getLocalTracks } = useConference();
   const { removeShareTrack } = useSharedTrack();
@@ -53,9 +54,15 @@ const ToolBar: React.FC = () => {
     conferenceReady,
     isSharing,
     setIsSharing,
-    clientRunning
+    clientRunning,
+    isRecording,
+    feedbackAlert,
+    gaveFeedback,
+    setParticipantsActive
   } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
+  const { isTranscriptionEnabled, setIsTranscriptionEnabled, isTranscriberJoined } =
+    useTranscriptions();
   const seatsAvailable = useSeatsAvailable();
   const { deviceType } = useNavigatorType();
 
@@ -248,7 +255,22 @@ const ToolBar: React.FC = () => {
         joined={joined}
         disabled={isMuteDisabled || !permissions.video}
       />
-      <ButtonMoreOptions selectorPosition="top" ref={configButtonRef} />
+      <ButtonMoreOptions
+        selectorPosition="top"
+        ref={configButtonRef}
+        isModerator={isModerator}
+        fishbowlContext={{
+          isRecording,
+          feedbackAlert,
+          gaveFeedback,
+          setParticipantsActive
+        }}
+        trancriptionsContext={{
+          isTranscriptionEnabled,
+          setIsTranscriptionEnabled,
+          isTranscriberJoined
+        }}
+      />
     </StyledToolbar>
   );
 };
