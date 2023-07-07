@@ -16,8 +16,9 @@ namespace App\Fishbowl\Tests\Unit;
 use App\Core\Entity\Guest;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
-use App\Core\Repository\GuestRepository;
 use App\Core\Repository\ParticipantRepository;
+use App\Core\Service\GuestService;
+use App\Core\Service\ParticipantService;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use App\Fishbowl\Service\FishbowlService;
@@ -35,7 +36,8 @@ class FishbowlServiceTest extends TestCase
     private RequestStack $requestStack;
     private FishbowlService $service;
     private MockObject $fishbowlRepository;
-    private MockObject $guestRepository;
+    private MockObject $guestService;
+    private MockObject $participantService;
     private MockObject $participantRepository;
     private MockObject $security;
     private MockObject $translator;
@@ -44,7 +46,8 @@ class FishbowlServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->fishbowlRepository = $this->createMock(FishbowlRepository::class);
-        $this->guestRepository = $this->createMock(GuestRepository::class);
+        $this->guestService = $this->createMock(GuestService::class);
+        $this->participantService = $this->createMock(ParticipantService::class);
         $this->participantRepository = $this->createMock(ParticipantRepository::class);
         $this->requestStack = new RequestStack();
         $this->security = $this->createMock(Security::class);
@@ -56,20 +59,12 @@ class FishbowlServiceTest extends TestCase
             $this->fishbowlRepository,
             $this->requestStack,
             $this->security,
-            $this->guestRepository,
+            $this->guestService,
+            $this->participantService,
             $this->participantRepository,
             $this->translator
         );
     }
-
-//    /** @test */
-//    public function itGeneratesRandomSlug(): void
-//    {
-//        $fishbowl = new Fishbowl();
-//        $slug = $this->service->generateRandomSlug();
-//
-//        $this->assertSame(10, \strlen($slug));
-//    }
 
     /** @test */
     public function itGetsFishbowlStatus(): void
@@ -166,10 +161,10 @@ class FishbowlServiceTest extends TestCase
 
         $expectedResult = [$expectedParticipantArray];
 
-        $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
+        $this->fishbowlRepository->method('findBySlug')->willReturn($fishbowl);
         $this->security->method('getUser')->willReturn($user);
 
-        $this->participantRepository->method('getParticipants')->with($fishbowl)->willReturn([$participant]);
+        $this->participantService->method('buildParticipantsByFishbowl')->willReturn([$expectedParticipantArray]);
 
         $responseParticipants = $this->service->getParticipants('fishbowl-slug');
 
@@ -222,7 +217,7 @@ class FishbowlServiceTest extends TestCase
         $participant = new Participant();
 
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
-        $this->guestRepository->method('find')->with('1')->willReturn($guest);
+        $this->guestService->method('getGuest')->willReturn($guest);
 
         $this->participantRepository->method('findGuestInFishbowl')->with($fishbowl, $guest)->willReturn($participant);
 
@@ -293,7 +288,7 @@ class FishbowlServiceTest extends TestCase
         $guest->setName('test');
 
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
-        $this->guestRepository->method('find')->with('1')->willReturn($guest);
+        $this->guestService->method('getGuest')->willReturn($guest);
 
         $this->participantRepository->method('findGuestInFishbowl')->with($fishbowl, $guest)->willReturn(null);
 
