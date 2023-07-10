@@ -61,8 +61,9 @@ class WorldCafeParticipantsFunctionalTest extends ApiTestCase
         ]);
 
         $responseArray = $response->toArray();
-        var_dump($responseArray);
+
         $this->assertResponseIsSuccessful();
+        $this->assertCount(5, $responseArray['response']);
     }
 
     private function logIn(User $user): string
