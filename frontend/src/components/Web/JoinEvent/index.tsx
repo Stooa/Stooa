@@ -10,7 +10,7 @@
 import React, { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { ROUTE_FISHBOWL, ROUTE_SIGN_IN, ROUTE_WORLD_CAFE } from '@/app.config';
+import { ROUTE_SIGN_IN, ROUTE_WORLD_CAFE } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
