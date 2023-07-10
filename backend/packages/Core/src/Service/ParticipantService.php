@@ -70,6 +70,21 @@ class ParticipantService
         return $participant;
     }
 
+    public function findGuestInFishbowl(Fishbowl $fishbowl, Guest $guest): ?Participant
+    {
+        return $this->participantRepository->findGuestInFishbowl($fishbowl, $guest);
+    }
+
+    public function findUserInFishbowl(Fishbowl $fishbowl, User $user): ?Participant
+    {
+        return $this->participantRepository->findUserInFishbowl($fishbowl, $user);
+    }
+
+    public function persistParticipant(Participant $participant): void
+    {
+        $this->participantRepository->persist($participant);
+    }
+
     /** @return RawParticipant[] */
     public function buildParticipantsByFishbowl(Fishbowl $fishbowl, ?UserInterface $currentUser): array
     {

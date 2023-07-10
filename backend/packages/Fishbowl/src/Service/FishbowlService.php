@@ -16,7 +16,6 @@ namespace App\Fishbowl\Service;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
-use App\Core\Repository\ParticipantRepository;
 use App\Core\Service\GuestService;
 use App\Core\Service\ParticipantService;
 use App\Fishbowl\Entity\Fishbowl;
@@ -40,7 +39,6 @@ class FishbowlService
         private readonly Security $security,
         private readonly GuestService $guestService,
         private readonly ParticipantService $participantService,
-        private readonly ParticipantRepository $participantRepository,
         private readonly TranslatorInterface $translator
     ) {
     }
@@ -127,7 +125,7 @@ class FishbowlService
         $created = false;
 
         if (null !== $guest) {
-            $participant = $this->participantRepository->findGuestInFishbowl($fishbowl, $guest);
+            $participant = $this->participantService->findGuestInFishbowl($fishbowl, $guest);
 
             if (null === $participant) {
                 $participant = $this->participantService->createParticipantFromGuest($fishbowl, $guest);
@@ -136,7 +134,7 @@ class FishbowlService
         } else {
             Assert::isInstanceOf($user, User::class);
 
-            $participant = $this->participantRepository->findUserInFishbowl($fishbowl, $user);
+            $participant = $this->participantService->findUserInFishbowl($fishbowl, $user);
 
             if (null === $participant) {
                 $participant = $this->participantService->createParticipantFromUser($fishbowl, $user);
@@ -146,7 +144,7 @@ class FishbowlService
 
         $participant->setLastPing(new \DateTimeImmutable());
 
-        $this->participantRepository->persist($participant);
+        $this->participantService->persistParticipant($participant);
 
         if ($created) {
             $this->fishbowlRepository->persist($fishbowl);
