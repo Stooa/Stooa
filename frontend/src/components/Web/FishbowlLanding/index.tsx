@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
@@ -24,7 +23,7 @@ interface Props {
   data: Fishbowl;
 }
 
-const FishbowlLanding: React.FC<Props> = ({ data }) => {
+const FishbowlLanding = ({ data }: Props) => {
   const [{ fishbowlReady }] = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);
