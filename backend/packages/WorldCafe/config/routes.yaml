@@ -14,3 +14,8 @@ app.world_cafe.participants:
     path: /world-cafe-participants/{slug}
     controller: App\WorldCafe\Controller\WorldCafeController::participants
     methods: [GET]
+
+app.world_cafe.ping:
+    path: /ping/world-cafe/{slug}
+    controller: App\WorldCafe\Controller\WorldCafeController::ping
+    methods: [POST]

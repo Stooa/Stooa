@@ -34,4 +34,18 @@ final class WorldCafeController extends AbstractController
     {
         return new JsonResponse(['response' => $this->worldCafeService->getParticipants($slug)]);
     }
+
+    public function ping(string $slug): Response
+    {
+        $participant = $this->worldCafeService->ping($slug);
+
+        if (!$participant) {
+            return new JsonResponse(['response' => null]);
+        }
+
+        return new JsonResponse(['response' => [
+            'participantId' => '/participants/' . $participant->getId(),
+            'participantSlug' => $participant->getWorldCafe()?->getSlug(),
+        ]]);
+    }
 }

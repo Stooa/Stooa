@@ -54,6 +54,30 @@ class ParticipantRepository extends ServiceEntityRepository
         return $query->getOneOrNullResult();
     }
 
+    public function findUserInWorldCafe(WorldCafe $worldCafe, User $user): ?Participant
+    {
+        $query = $this->createQueryBuilder('participant')
+            ->where('participant.worldCafe = :worldCafe')
+            ->andWhere('participant.user = :user')
+            ->setParameter('worldCafe', $worldCafe->getId(), 'uuid')
+            ->setParameter('user', $user->getId(), 'uuid')
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findGuestInWorldCafe(WorldCafe $worldCafe, Guest $guest): ?Participant
+    {
+        $query = $this->createQueryBuilder('participant')
+            ->where('participant.worldCafe = :worldCafe')
+            ->andWhere('participant.guest = :guest')
+            ->setParameter('worldCafe', $worldCafe->getId(), 'uuid')
+            ->setParameter('guest', $guest->getId(), 'uuid')
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     /** @return Participant[] */
     public function getParticipantsByFishbowl(Fishbowl $fishbowl): array
     {

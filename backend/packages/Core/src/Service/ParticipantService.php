@@ -60,12 +60,18 @@ class ParticipantService
         return $participant;
     }
 
-    public function createParticipantFromFishbowl(Fishbowl $fishbowl): Participant
+    public function createWorldCafeParticipantFromUser(WorldCafe $worldCafe, User $user): Participant
     {
-        $participant = new Participant();
-        $participant->setFishbowl($fishbowl);
+        $participant = $this->createParticipantFromWorldCafe($worldCafe);
+        $participant->setUser($user);
 
-        $fishbowl->addParticipant($participant);
+        return $participant;
+    }
+
+    public function createWorldCafeParticipantFromGuest(WorldCafe $worldCafe, Guest $guest): Participant
+    {
+        $participant = $this->createParticipantFromWorldCafe($worldCafe);
+        $participant->setGuest($guest);
 
         return $participant;
     }
@@ -78,6 +84,16 @@ class ParticipantService
     public function findUserInFishbowl(Fishbowl $fishbowl, User $user): ?Participant
     {
         return $this->participantRepository->findUserInFishbowl($fishbowl, $user);
+    }
+
+    public function findGuestInWorldCafe(WorldCafe $worldCafe, Guest $guest): ?Participant
+    {
+        return $this->participantRepository->findGuestInWorldCafe($worldCafe, $guest);
+    }
+
+    public function findUserInWorldCafe(WorldCafe $worldCafe, User $user): ?Participant
+    {
+        return $this->participantRepository->findUserInWorldCafe($worldCafe, $user);
     }
 
     public function persistParticipant(Participant $participant): void
@@ -99,6 +115,26 @@ class ParticipantService
         $participants = $this->participantRepository->getParticipantsByWorldCafe($worldCafe);
 
         return $this->buildParticipants($participants, $worldCafe, $currentUser);
+    }
+
+    private function createParticipantFromFishbowl(Fishbowl $fishbowl): Participant
+    {
+        $participant = new Participant();
+        $participant->setFishbowl($fishbowl);
+
+        $fishbowl->addParticipant($participant);
+
+        return $participant;
+    }
+
+    private function createParticipantFromWorldCafe(WorldCafe $worldCafe): Participant
+    {
+        $participant = new Participant();
+        $participant->setWorldCafe($worldCafe);
+
+        $worldCafe->addParticipant($participant);
+
+        return $participant;
     }
 
     /**
