@@ -128,7 +128,7 @@ class FishbowlService
             $participant = $this->participantService->findGuestInFishbowl($fishbowl, $guest);
 
             if (null === $participant) {
-                $participant = $this->participantService->createParticipantFromGuest($fishbowl, $guest);
+                $participant = $this->participantService->createFishbowlParticipantFromGuest($fishbowl, $guest);
                 $created = true;
             }
         } else {
@@ -137,7 +137,7 @@ class FishbowlService
             $participant = $this->participantService->findUserInFishbowl($fishbowl, $user);
 
             if (null === $participant) {
-                $participant = $this->participantService->createParticipantFromUser($fishbowl, $user);
+                $participant = $this->participantService->createFishbowlParticipantFromUser($fishbowl, $user);
                 $created = true;
             }
         }

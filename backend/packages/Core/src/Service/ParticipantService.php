@@ -44,23 +44,23 @@ class ParticipantService
     ) {
     }
 
-    public function createParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
+    public function createFishbowlParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
     {
-        $participant = $this->createParticipant($fishbowl);
+        $participant = $this->createParticipantFromFishbowl($fishbowl);
         $participant->setUser($user);
 
         return $participant;
     }
 
-    public function createParticipantFromGuest(Fishbowl $fishbowl, Guest $guest): Participant
+    public function createFishbowlParticipantFromGuest(Fishbowl $fishbowl, Guest $guest): Participant
     {
-        $participant = $this->createParticipant($fishbowl);
+        $participant = $this->createParticipantFromFishbowl($fishbowl);
         $participant->setGuest($guest);
 
         return $participant;
     }
 
-    public function createParticipant(Fishbowl $fishbowl): Participant
+    public function createParticipantFromFishbowl(Fishbowl $fishbowl): Participant
     {
         $participant = new Participant();
         $participant->setFishbowl($fishbowl);
