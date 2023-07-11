@@ -46,6 +46,13 @@ class WorldCafeService
         );
     }
 
+    public function getWorldCafeStatus(string $slug): ?string
+    {
+        $worldCafe = $this->worldCafeRepository->findBySlug($slug);
+
+        return (null !== $worldCafe) ? strtoupper($worldCafe->getCurrentStatus()) : null;
+    }
+
     /** @return RawParticipant[] */
     public function getParticipants(string $slug): array
     {
