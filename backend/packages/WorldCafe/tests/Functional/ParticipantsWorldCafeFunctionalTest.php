@@ -23,7 +23,7 @@ use App\WorldCafe\Factory\WorldCafeFactory;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class WorldCafeParticipantsFunctionalTest extends ApiTestCase
+class ParticipantsWorldCafeFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;

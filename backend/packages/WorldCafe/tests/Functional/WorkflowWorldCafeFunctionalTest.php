@@ -22,7 +22,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
-class WorldCafeWorkflowFunctionalTest extends ApiTestCase
+class WorkflowWorldCafeFunctionalTest extends ApiTestCase
 {
     use Factories;
     use ResetDatabase;
