@@ -57,7 +57,7 @@ class PingWorldCafeFunctionalTest extends ApiTestCase
             'worldCafe' => $worldCafe,
         ])->object();
 
-        $response = static::createClient()->request('POST', '/es/ping/world-cafe/' . $worldCafe->getSlug(), [
+        $response = static::createClient()->request('POST', '/es/world-cafe-ping/' . $worldCafe->getSlug(), [
             'auth_bearer' => $hostToken,
         ]);
 
