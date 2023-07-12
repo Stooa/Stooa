@@ -8,6 +8,7 @@
  */
 
 import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
+import { WorldCafe as apiPlatformWorldCafe } from './api-platform/interfaces/worldcafe';
 import { SatisfactionData } from './feedback';
 
 export interface Fishbowl
@@ -22,4 +23,8 @@ export interface Fishbowl
   endDateTimeTz: string;
   isPrivate: boolean;
   summarizedFeedback?: SatisfactionData | null;
+}
+
+export interface WorldCafe extends Omit<apiPlatformWorldCafe, 'startDateTimeTz'> {
+  readonly startDateTimeTz: Date;
 }

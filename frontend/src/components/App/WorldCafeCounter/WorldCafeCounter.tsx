@@ -31,7 +31,7 @@ const WorldCafeCounter = ({
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
   const [intervalTimer, setIntervalTimer] = useState<number>();
 
-  const eventDate = Date.parse(startDateTimeTz);
+  const eventDate = Date.parse(startDateTimeTz.toDateString());
 
   const { t } = useTranslation('fishbowl');
 

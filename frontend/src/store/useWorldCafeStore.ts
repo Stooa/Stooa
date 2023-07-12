@@ -10,7 +10,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { WorldCafeStatus } from '@/jitsi/Status';
-import { WorldCafe } from '@/types/api-platform/interfaces/worldcafe';
+import { WorldCafe } from '@/types/api-platform';
 
 export interface WorldCafeState {
   status: WorldCafeStatus;

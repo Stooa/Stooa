@@ -32,10 +32,9 @@ interface FormValues {
 export const PrejoinForm = ({ isAuthenticated, user }: Props) => {
   const { t } = useTranslation('form');
   const [createGuest] = useMutation(CREATE_GUEST);
-  const { getUserNickname, setUser } = useUser();
+  const { setUser } = useUser();
 
-  const { isGuest, setIsPrejoin, setIsGuest } = useWorldCafeStore(state => ({
-    isGuest: state.isGuest,
+  const { setIsPrejoin, setIsGuest } = useWorldCafeStore(state => ({
     setIsGuest: state.setIsGuest,
     setIsPrejoin: state.setIsPrejoin
   }));

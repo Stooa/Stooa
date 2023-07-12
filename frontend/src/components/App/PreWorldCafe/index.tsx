@@ -89,7 +89,7 @@ const PreWorldCafe = () => {
           isModerator={isModerator}
           preEvent={true}
           data-testid="prefishbowl-counter"
-          startDateTimeTz={worldCafe.startDateTimeTz ?? worldCafe.startDateTime}
+          startDateTimeTz={worldCafe.startDateTimeTz}
           eventStatus={status}
         />
 
