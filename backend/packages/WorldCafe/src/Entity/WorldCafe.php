@@ -76,16 +76,19 @@ class WorldCafe extends Event
 {
     #[Groups(['wc:create', 'wc:read'])]
     #[Assert\Length(max: 255)]
+    #[Assert\NotNull]
     #[Assert\Choice([5, 10, 15, 20, 25])]
     #[ORM\Column(type: 'integer', options: ['default' => 10])]
     protected int $roundMinutes = 10;
 
     #[Groups(['wc:read'])]
+    #[Assert\NotNull]
     #[Assert\Length(max: 255)]
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
     protected int $currentRound = 1;
 
     #[Groups(['wc:create', 'wc:read'])]
+    #[Assert\NotNull]
     #[ORM\Column(type: 'boolean')]
     protected bool $hasExtraRoundTime = false;
     #[ORM\Id]
