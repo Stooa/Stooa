@@ -14,7 +14,6 @@ import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
 import { useUserAuth } from '@/user/auth/useUserAuth';
-import { useRouter } from 'next/router';
 import {
   StyledParticipantListWrapper,
   StyledParticipantList,
@@ -24,7 +23,6 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import { ROUTE_FISHBOWL, ROUTE_REGISTER } from '@/app.config';
 
-import { useStateValue } from '@/contexts/AppContext';
 import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
@@ -33,23 +31,25 @@ import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
 const PING_TIMEOUT = 3500;
 const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 
-const PreFishbowlParticipants = () => {
+interface Props {
+  isGuest: boolean;
+  slug: string;
+}
+
+const PreFishbowlParticipants = ({ isGuest, slug }: Props) => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { ping } = useUserAuth();
   const { t, lang } = useTranslation('fishbowl');
-  const router = useRouter();
-  const { fid } = router.query;
   const pingInterval = useRef<number>();
   const getParticipantsInterval = useRef<number>();
   const [numPlaceholderParticipants, setNumPlaceholderParticipants] = useState<number>(0);
-  const [{ isGuest }] = useStateValue();
 
   const pingParticipant = () => {
-    ping(lang, fid as string);
+    ping(lang, slug as string);
   };
 
   const getApiParticipants = () => {
-    getApiParticipantList(lang, fid as string)
+    getApiParticipantList(lang, slug as string)
       .then(participantList => {
         setParticipants(participantList);
       })
@@ -107,7 +107,7 @@ const PreFishbowlParticipants = () => {
             <p className="body-sm">{t('prefishbowl.connectWithUsers')}</p>
 
             <RedirectLink
-              href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${fid}&prefishbowl=${fid}`}
+              href={`${ROUTE_REGISTER}?redirect=${ROUTE_FISHBOWL}/${slug}&prefishbowl=${slug}`}
               passHref
             >
               <Button
@@ -115,7 +115,7 @@ const PreFishbowlParticipants = () => {
                   pushEventDataLayer({
                     action: 'Register Intention',
                     category: 'Prefishbowl',
-                    label: fid as string
+                    label: slug as string
                   });
                 }}
                 className="never-full"

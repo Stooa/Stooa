@@ -17,7 +17,7 @@ import {
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { TITLE_SM } from '@/ui/Titles';
-import { BODY_LG } from '@/ui/Texts';
+import { BODY_LG, mediumWeight } from '@/ui/Texts';
 import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const StyledFishbowlDataCard = styled.div`
@@ -54,6 +54,27 @@ const StyledFishbowlDataCard = styled.div`
     color: ${COLOR_NEUTRO_800};
   }
 
+  .question {
+    color: ${COLOR_NEUTRO_700};
+
+    &:not(:last-child) {
+      margin-bottom: ${space(4)};
+    }
+
+    & .question-title {
+      display: flex;
+      gap: ${space(2)};
+      & h3 {
+        ${mediumWeight};
+        max-width: 45ch;
+      }
+
+      & + * {
+        margin-top: ${space()};
+      }
+    }
+  }
+
   & div.date {
     color: ${COLOR_NEUTRO_800};
     margin-bottom: ${space(3)};
@@ -62,24 +83,33 @@ const StyledFishbowlDataCard = styled.div`
   & .description {
     color: ${COLOR_NEUTRO_700};
     overflow-y: scroll;
-    max-height: 5.4em;
     word-break: break-word;
 
-    ${scrolllbarStyle}
+    &.closed {
+      max-height: 5.4em;
+    }
 
-    ${media.min('tablet')`
-        max-height: 9em;
-      `}
+    & + * {
+      margin-top: ${space(3)};
+    }
+
+    ${scrolllbarStyle}
   }
 
   &.prefishbowl {
     & h2 {
-      ${TITLE_SM}
+      ${TITLE_SM};
       ${media.min('tablet')`
         ${BODY_LG}
       `}
     }
   }
+`;
+
+const StyledFishbowlDataCardScroll = styled.div`
+  ${scrolllbarStyle};
+  overflow-y: scroll;
+  max-height: 500px;
 `;
 
 const StyledFishbowlDataCardHeader = styled.div`
@@ -93,4 +123,4 @@ const StyledFishbowlDataCardHeader = styled.div`
   margin-bottom: ${space(2)};
 `;
 
-export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader };
+export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader, StyledFishbowlDataCardScroll };

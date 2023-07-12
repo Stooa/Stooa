@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_SIGN_IN, ROUTE_WORLD_CAFE } from '@/app.config';
@@ -52,7 +52,7 @@ const JoinEvent = ({ joinAsGuest }: Props) => {
     return null;
   }
 
-  const fbRoute = `${ROUTE_WORLD_CAFE}/${worldCafe.slug}`;
+  const worldCafeRoute = `${ROUTE_WORLD_CAFE}/${worldCafe.slug}`;
 
   const evaluateEventReady = () => {
     let isReady = false;
@@ -73,7 +73,7 @@ const JoinEvent = ({ joinAsGuest }: Props) => {
       <StyledJoinEventCta>
         {isAuthenticated && worldCafeReady && (
           <div className="join-buttons">
-            <RedirectLink href={fbRoute} locale={worldCafe.locale} passHref>
+            <RedirectLink href={worldCafeRoute} locale={worldCafe.locale} passHref>
               <Button size="large" variant="primary" as="a">
                 {t('joinFishbowl')}
               </Button>
@@ -87,7 +87,7 @@ const JoinEvent = ({ joinAsGuest }: Props) => {
                 {t('joinGuest')}
               </Button>
               <RedirectLink
-                href={`${ROUTE_SIGN_IN}?redirect=${fbRoute}`}
+                href={`${ROUTE_SIGN_IN}?redirect=${worldCafeRoute}`}
                 locale={worldCafe.locale}
                 passHref
               >

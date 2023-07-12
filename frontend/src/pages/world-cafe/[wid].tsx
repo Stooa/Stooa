@@ -21,6 +21,7 @@ import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import { WorldCafeStatus } from '@/jitsi/Status';
 import EventPrejoin from '@/components/App/EventPrejoin';
 import { PrejoinWorldCafeForm } from '@/components/App/EventPrejoin/PrejoinWorldCafeForm';
+import WorldCafe from '@/components/App/WorldCafe/WorldCafe';
 
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 const WorldCafeApp = dynamic(import('@/layouts/WorldCafeApp/WorldCafeApp'), {
@@ -37,30 +38,35 @@ const Page = () => {
   const { isAuthenticated } = useAuth();
 
   const { loading, error } = useWorldCafeLoader(wid as string);
-  const { isReady, prejoin, status, worldCafe } = useWorldCafeStore(store => ({
+  const { isReady, isGuest, prejoin, status, worldCafe } = useWorldCafeStore(store => ({
     worldCafe: store.worldCafe,
     isReady: store.isReady,
     prejoin: store.isPrejoin,
-    status: store.status
+    status: store.status,
+    isGuest: store.isGuest
   }));
 
   if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
 
   const shouldPrintPreJoinPage: boolean = (joinAsGuest || isAuthenticated) && prejoin && isReady;
-  // const shouldPrintFishbowlPage: boolean = isReady && (isAuthenticated || isGuest);
+  const shouldPrintWorldCafeApp: boolean = isReady && (isAuthenticated || isGuest);
 
-  if (shouldPrintPreJoinPage && worldCafe) {
+  if (shouldPrintPreJoinPage || shouldPrintWorldCafeApp) {
     return (
       <WorldCafeApp
         wid={wid as string}
         className={status === WorldCafeStatus.NOT_STARTED ? 'prefishbowl' : ''}
         prejoin={shouldPrintPreJoinPage}
-        title={worldCafe.name}
+        title={worldCafe?.name ?? ''}
       >
-        <EventPrejoin event="worldCafe">
-          <PrejoinWorldCafeForm />
-        </EventPrejoin>
+        {shouldPrintPreJoinPage ? (
+          <EventPrejoin event="worldCafe">
+            <PrejoinWorldCafeForm />
+          </EventPrejoin>
+        ) : (
+          <WorldCafe />
+        )}
       </WorldCafeApp>
     );
   } else {

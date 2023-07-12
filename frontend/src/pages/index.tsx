@@ -20,7 +20,11 @@ import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Description from '@/components/Common/Description';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_HOST_NOW,
+  ROUTE_WORLD_CAFE_CREATE
+} from '@/app.config';
 import Layout from '@/layouts/Home';
 
 import { Lottie } from '@/types/animations';
@@ -198,6 +202,18 @@ const Home = () => {
                 <span>{t('scheduleFishbowl')}</span>
               </Button>
             </RedirectLink>
+            {process.env.NEXT_PUBLIC_WORLD_CAFE === 'true' && (
+              <RedirectLink href={ROUTE_WORLD_CAFE_CREATE} passHref>
+                <Button
+                  size="large"
+                  as="a"
+                  variant="secondary"
+                  className="animate-item cta-create-fishbowl "
+                >
+                  <span>WORLD CAFE</span>
+                </Button>
+              </RedirectLink>
+            )}
           </div>
         </div>
         <div ref={previewRef} className="fishbowl-preview animate-item hide-mobile">

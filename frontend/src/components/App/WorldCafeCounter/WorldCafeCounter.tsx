@@ -7,40 +7,31 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
+import { WorldCafeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
 import LoadingDots from '@/components/Common/LoadingDots';
-import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
   preEvent?: boolean;
+  startDateTimeTz: Date;
+  isModerator: boolean;
+  eventStatus: WorldCafeStatus;
 }
 
-export const Counter = ({ preEvent = false, ...props }: Props) => {
-  const { data: fishbowlData, isModerator, conferenceStatus, timeStatus } = useStooa();
-
-  const getDateByStatus = () => {
-    if (
-      fishbowlData.isFishbowlNow &&
-      conferenceStatus === IConferenceStatus?.NOT_STARTED &&
-      isModerator
-    ) {
-      return Date.parse(fishbowlData.endDateTimeTz);
-    }
-
-    if (conferenceStatus === IConferenceStatus?.NOT_STARTED) {
-      return Date.parse(fishbowlData.startDateTimeTz);
-    }
-
-    return Date.parse(fishbowlData.endDateTimeTz);
-  };
-
+const WorldCafeCounter = ({
+  preEvent = false,
+  startDateTimeTz,
+  isModerator,
+  eventStatus,
+  ...props
+}: Props) => {
   const [completedTime, setCompletedTime] = useState<boolean>(false);
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
   const [intervalTimer, setIntervalTimer] = useState<number>();
-  const [fishbowlDate, setFishbowlDate] = useState(getDateByStatus());
+
+  const eventDate = Date.parse(startDateTimeTz);
 
   const { t } = useTranslation('fishbowl');
 
@@ -57,17 +48,7 @@ export const Counter = ({ preEvent = false, ...props }: Props) => {
   };
 
   useEffect(() => {
-    if (conferenceStatus === IConferenceStatus.RUNNING) {
-      setCompletedTime(false);
-    }
-
-    setFishbowlDate(getDateByStatus());
-
-    return () => clearInterval(intervalTimer);
-  }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    const isFinished = checkIfFinished(fishbowlDate);
+    const isFinished = checkIfFinished(eventDate);
 
     if (!isFinished) {
       setIntervalTimer(intervalValue =>
@@ -84,19 +65,16 @@ export const Counter = ({ preEvent = false, ...props }: Props) => {
     }
 
     return () => clearInterval(intervalTimer);
-  }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const isFishbowlNowAndModerator = useMemo(
-    () => fishbowlData.isFishbowlNow && isModerator,
-    [fishbowlData.isFishbowlNow, isModerator]
-  );
+  }, [completedTime]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const rendererCountdown = (): string => {
-    const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
+    const conferenceNotStarted = eventStatus === WorldCafeStatus?.NOT_STARTED;
 
-    const seconds = checkSecondsToDate(fishbowlDate);
+    const seconds = checkSecondsToDate(eventDate);
 
-    if (checkIfFinished(fishbowlDate) || seconds === 0) {
+    console.log(eventDate);
+
+    if (checkIfFinished(eventDate) || seconds === 0) {
       clearInterval(intervalTimer);
     }
 
@@ -104,13 +82,9 @@ export const Counter = ({ preEvent = false, ...props }: Props) => {
     const hours: number = Math.floor(seconds / 3600);
 
     if (seconds === 0 && conferenceNotStarted) {
-      return isModerator ? t('waitingHost') : t('waiting');
-    } else if (seconds === 0) {
-      return t('timesUp');
-    } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
-      return t('lastMinute');
+      return isModerator ? t('world-cafe:waitingHost') : t('world-cafe:eeewaiting');
     } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
-      const time = `1${t('form:fishbowl.minutes')}`;
+      const time = `1 ${t('form:fishbowl.minutes')}`;
       return t('timeToStart', { time });
     } else {
       const hoursText = t('form:fishbowl.hours');
@@ -121,13 +95,7 @@ export const Counter = ({ preEvent = false, ...props }: Props) => {
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
           : Math.floor(seconds / 60);
 
-      if (isFishbowlNowAndModerator && conferenceNotStarted) {
-        return t('timeLeft_other', { time: `${time}${minutesText}` });
-      } else {
-        return t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-          time: `${time} ${minutesText}`
-        });
-      }
+      return t('timeToStart', { time: `${time} ${minutesText}` });
     }
   };
 
@@ -138,3 +106,5 @@ export const Counter = ({ preEvent = false, ...props }: Props) => {
     </span>
   );
 };
+
+export default WorldCafeCounter;

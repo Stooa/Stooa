@@ -17,18 +17,25 @@ export interface WorldCafeState {
   worldCafe: WorldCafe | undefined;
   isPrejoin: boolean;
   isReady: boolean;
+  isGuest: boolean;
+  isModerator: boolean;
   startWorldCafe: (status: WorldCafeStatus) => void;
   setWorldCafeReady: (isReady: boolean) => void;
   setWorldCafe: (data: WorldCafe) => void;
+  setIsGuest: (isGuest: boolean) => void;
+  setIsPrejoin: (isPrejoin: boolean) => void;
+  setIsModerator: (isModerator: boolean) => void;
 }
 
 export const useWorldCafeStore = create<WorldCafeState>()(
   devtools(
-    set => ({
+    (set, get) => ({
       status: WorldCafeStatus.NOT_STARTED,
       isPrejoin: true,
       isReady: false,
+      isGuest: false,
       worldCafe: undefined,
+      isModerator: false,
       startWorldCafe: (status: WorldCafeStatus) => {
         set({ status }, false, { type: 'startWorldCafe' });
       },
@@ -37,6 +44,17 @@ export const useWorldCafeStore = create<WorldCafeState>()(
       },
       setWorldCafe: (worldCafe: WorldCafe) => {
         set({ worldCafe }, false, { type: 'setWorldCafe' });
+      },
+      setIsGuest: (isGuest: boolean) => {
+        set({ isGuest }, false, { type: 'setIsGuest' });
+      },
+      setIsPrejoin: (isPrejoin: boolean) => {
+        set({ isPrejoin }, false, { type: 'setIsPrejoin' });
+      },
+      setIsModerator: (isModerator: boolean) => {
+        if (get().isModerator !== isModerator) {
+          set({ isModerator }, false, { type: 'setIsModerator' });
+        }
       }
     }),
     {

@@ -21,6 +21,7 @@ import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
 import { IS_WORLD_CAFE_CREATOR } from '@/graphql/WorldCafe';
 import useLoadJitsi from '@/hooks/useLoadJitsi';
+import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -44,6 +45,9 @@ const WorldCafeApp = ({
     variables: { slug: wid }
   });
   const { loadedJitsi } = useLoadJitsi(scriptsLoaded);
+  const { setIsModerator } = useWorldCafeStore(state => ({
+    setIsModerator: state.setIsModerator
+  }));
 
   if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
@@ -51,6 +55,7 @@ const WorldCafeApp = ({
 
   if (loading) return <Loader />;
   const isModerator = !!IsCreatorOfWorldCafe && !!IsCreatorOfWorldCafe.isCreatorOfWorldCafe;
+  setIsModerator(isModerator);
 
   return (
     <>
