@@ -11,9 +11,9 @@ import {Question} from "@/types/api-platform/interfaces/question";
 
 export interface WorldCafe {
   "@id"?: string;
-  roundMinutes?: number;
-  currentRound?: number;
-  hasExtraRoundTime?: boolean;
+  roundMinutes: number;
+  currentRound: number;
+  hasExtraRoundTime: boolean;
   questions?: Question[];
   name?: string;
   description?: string;
