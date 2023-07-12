@@ -109,7 +109,7 @@ const PreWorldCafe = () => {
             </StyledFishbowlDataCardHeader>
 
             <StyledFishbowlDataCardScroll>
-              <h2 data-testid="fishbowl-name" className=" medium">
+              <h2 data-testid="fishbowl-name" className="medium">
                 {worldCafe.name}
               </h2>
               {worldCafe.description && (
@@ -121,7 +121,11 @@ const PreWorldCafe = () => {
                 </p>
               )}
               {worldCafe.description && worldCafe.description.length > 300 && (
-                <Button variant="link" onClick={() => setClosedDescription(state => !state)}>
+                <Button
+                  variant="link"
+                  className="see-more"
+                  onClick={() => setClosedDescription(state => !state)}
+                >
                   {closedDescription ? 'Read more' : 'Less'}
                 </Button>
               )}

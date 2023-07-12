@@ -32,10 +32,6 @@ const StyledFishbowlDataCard = styled.div`
   overflow: hidden;
   width: 100%;
 
-  * + *:not(:last-child) {
-    margin-bottom: ${space()};
-  }
-
   &::before {
     content: '';
     background-color: ${COLOR_NEUTRO_500};
@@ -52,13 +48,17 @@ const StyledFishbowlDataCard = styled.div`
 
   h2 {
     color: ${COLOR_NEUTRO_800};
+
+    & + :not(.description) {
+      margin-top: ${space(3)};
+    }
   }
 
   .question {
     color: ${COLOR_NEUTRO_700};
 
     &:not(:last-child) {
-      margin-bottom: ${space(4)};
+      margin-bottom: ${space(3)};
     }
 
     & .question-title {
@@ -82,18 +82,27 @@ const StyledFishbowlDataCard = styled.div`
 
   & .description {
     color: ${COLOR_NEUTRO_700};
-    overflow-y: scroll;
-    word-break: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 0;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    margin-bottom: ${space()};
 
     &.closed {
-      max-height: 5.4em;
+      max-height: 4.9em;
+      -webkit-line-clamp: 3;
     }
 
-    & + * {
+    & + *:not(.see-more) {
       margin-top: ${space(3)};
     }
 
     ${scrolllbarStyle}
+  }
+
+  & .see-more {
+    margin-bottom: ${space(3)};
   }
 
   &.prefishbowl {

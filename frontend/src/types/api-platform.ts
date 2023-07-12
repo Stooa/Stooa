@@ -26,5 +26,5 @@ export interface Fishbowl
 }
 
 export interface WorldCafe extends Omit<apiPlatformWorldCafe, 'startDateTimeTz'> {
-  readonly startDateTimeTz: Date;
+  readonly startDateTimeTz: string;
 }

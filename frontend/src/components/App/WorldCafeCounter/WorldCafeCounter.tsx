@@ -15,7 +15,7 @@ import LoadingDots from '@/components/Common/LoadingDots';
 
 interface Props {
   preEvent?: boolean;
-  startDateTimeTz: Date;
+  startDateTimeTz: string;
   isModerator: boolean;
   eventStatus: WorldCafeStatus;
 }
@@ -31,7 +31,7 @@ const WorldCafeCounter = ({
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
   const [intervalTimer, setIntervalTimer] = useState<number>();
 
-  const eventDate = Date.parse(startDateTimeTz.toDateString());
+  const eventDate = Date.parse(startDateTimeTz);
 
   const { t } = useTranslation('fishbowl');
 
@@ -71,8 +71,6 @@ const WorldCafeCounter = ({
     const conferenceNotStarted = eventStatus === WorldCafeStatus?.NOT_STARTED;
 
     const seconds = checkSecondsToDate(eventDate);
-
-    console.log(eventDate);
 
     if (checkIfFinished(eventDate) || seconds === 0) {
       clearInterval(intervalTimer);
