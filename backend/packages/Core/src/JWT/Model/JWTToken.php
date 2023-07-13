@@ -42,7 +42,7 @@ class JWTToken
         return $this->nbf;
     }
 
-    /** @return array<string, (\DateTimeImmutable | string | array<string, (string | array<string, mixed>)> | null)> */
+    /** @return array<string, (\DateTimeImmutable|string|array<string, (string|array<string, mixed>)>|null)> */
     public function toArray(): array
     {
         $arrayResponse = [
