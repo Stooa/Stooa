@@ -204,12 +204,7 @@ const Home = () => {
             </RedirectLink>
             {process.env.NEXT_PUBLIC_WORLD_CAFE === 'true' && (
               <RedirectLink href={ROUTE_WORLD_CAFE_CREATE} passHref>
-                <Button
-                  size="large"
-                  as="a"
-                  variant="secondary"
-                  className="animate-item cta-create-fishbowl "
-                >
+                <Button size="large" as="a" variant="secondary" className="animate-item ">
                   <span>WORLD CAFE</span>
                 </Button>
               </RedirectLink>
