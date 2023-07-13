@@ -94,7 +94,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
   };
 
   const getApiParticipants = () => {
-    getApiParticipantList(lang, fid)
+    getApiParticipantList(lang, fid, 'fishbowl')
       .then(participantList => {
         setParticipants(participantList);
       })

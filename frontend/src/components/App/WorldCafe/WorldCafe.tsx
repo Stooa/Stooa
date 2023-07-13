@@ -10,13 +10,26 @@
 import { WorldCafeStatus } from '@/jitsi/Status';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import PreWorldCafe from '../PreWorldCafe';
+import WorldCafeHeader from '../WorldCafeHeader/WorldCafeHeader';
+import { Main } from '@/layouts/App/styles';
 
 const WorldCafe = () => {
   const { status } = useWorldCafeStore();
 
   const isPrejoin = status === WorldCafeStatus.NOT_STARTED;
 
-  return <>{isPrejoin && <PreWorldCafe />}</>;
+  console.log('isPrejoin', isPrejoin);
+
+  return (
+    <>
+      <WorldCafeHeader />
+      {isPrejoin && (
+        <Main>
+          <PreWorldCafe />
+        </Main>
+      )}
+    </>
+  );
 };
 
 export default WorldCafe;

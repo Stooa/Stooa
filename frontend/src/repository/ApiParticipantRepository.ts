@@ -11,11 +11,19 @@ import api from '@/lib/api';
 import LocaleCookie from '@/lib/LocaleCookie';
 import { getAuthToken } from '@/user/auth';
 import { Participant } from '@/types/participant';
+import { EventType } from '@/types/event-types';
 
-const getApiParticipantList = async (lang: string, slug: string): Promise<Participant[]> => {
+const getApiParticipantList = async (
+  lang: string,
+  slug: string,
+  eventType: EventType
+): Promise<Participant[]> => {
   const auth = await getAuthToken();
 
-  const axiosResponse = await api.get(`${lang}/fishbowl-participants/${slug}`, {
+  const destination =
+    eventType === 'fishbowl' ? 'fishbowl-participants' : 'world-cafe-participants';
+
+  const axiosResponse = await api.get(`${lang}/${destination}/${slug}`, {
     headers: {
       'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
       'Authorization': `${auth ? auth.authorizationString : null}`

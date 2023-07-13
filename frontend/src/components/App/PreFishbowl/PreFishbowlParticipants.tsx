@@ -27,6 +27,7 @@ import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
 import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
+import { EventType } from '@/types/event-types';
 
 const PING_TIMEOUT = 3500;
 const MAX_PLACEHOLDER_PARTICIPANTS = 10;
@@ -34,9 +35,10 @@ const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 interface Props {
   isGuest: boolean;
   slug: string;
+  eventType: EventType;
 }
 
-const PreFishbowlParticipants = ({ isGuest, slug }: Props) => {
+const PreFishbowlParticipants = ({ isGuest, slug, eventType }: Props) => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { ping } = useUserAuth();
   const { t, lang } = useTranslation('fishbowl');
@@ -45,11 +47,11 @@ const PreFishbowlParticipants = ({ isGuest, slug }: Props) => {
   const [numPlaceholderParticipants, setNumPlaceholderParticipants] = useState<number>(0);
 
   const pingParticipant = () => {
-    ping(lang, slug as string);
+    ping(lang, slug as string, eventType);
   };
 
   const getApiParticipants = () => {
-    getApiParticipantList(lang, slug as string)
+    getApiParticipantList(lang, slug as string, eventType)
       .then(participantList => {
         setParticipants(participantList);
       })
@@ -134,11 +136,7 @@ const PreFishbowlParticipants = ({ isGuest, slug }: Props) => {
         >
           {participants.length > 0 &&
             participants.map((participant, i) => (
-              <ParticipantCard
-                prefishbowl={true}
-                participant={participant}
-                key={`participant-${i}`}
-              />
+              <ParticipantCard preEvent={true} participant={participant} key={`participant-${i}`} />
             ))}
           {createPlaceholderParticipants()}
         </StyledParticipantList>

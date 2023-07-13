@@ -114,7 +114,6 @@ const StyledParticipantsColumn = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 1;
-  padding-bottom: ${space(4.15)};
 `;
 
 const StyledParticipantListWrapper = styled.div`

@@ -1,4 +1,8 @@
 {
+    "startWorldCafe": "Empezar World Cafe",
     "waiting": "Esperando a que el anfitrión inicie el fishbowl",
-    "waitingHost": "Los participantes estan esperando a que inicies el World Cafe"
+    "waitingHost": "Los participantes estan esperando a que inicies el World Cafe",
+    "detail" : {
+        "cardMiniTitle": "Detalles del World Cafe"
+    }
 }

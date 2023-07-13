@@ -109,7 +109,7 @@ const PreFishbowl = () => {
         </StyledFishbowlDataWrapper>
       </StyledFishbowlInformation>
       <StyledParticipantsColumn>
-        <PreFishbowlParticipants isGuest={isGuest} slug={fid as string} />
+        <PreFishbowlParticipants eventType="fishbowl" isGuest={isGuest} slug={fid as string} />
       </StyledParticipantsColumn>
     </StyledContainer>
   );

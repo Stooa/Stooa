@@ -1,4 +1,8 @@
 {
+    "startWorldCafe": "Start World Cafe",
     "waiting": "Waiting for the host to start the World Cafe",
-    "waitingHost": "Attendees are waiting for you to start the World Cafe"
+    "waitingHost": "Attendees are waiting for you to start the World Cafe",
+    "detail" : {
+        "cardMiniTitle": "World Cafe details"
+    }
 }

@@ -29,7 +29,6 @@ import Yellow from '@/ui/svg/blobs/yellow.svg';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useModals } from '@/contexts/ModalsContext';
 import PreFishbowlParticipants from '../PreFishbowl/PreFishbowlParticipants';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import WorldCafeCounter from '../WorldCafeCounter/WorldCafeCounter';
@@ -45,17 +44,7 @@ const PreWorldCafe = () => {
     isGuest: store.isGuest
   }));
 
-  const { toggleOnBoarding } = useModals();
-
   const { t, lang } = useTranslation('fishbowl');
-
-  const handleOnBoardingClick = () => {
-    pushEventDataLayer({
-      action: 'Action',
-      category: 'onboarding'
-    });
-    toggleOnBoarding('prefishbowl');
-  };
 
   useEffect(() => {
     pushEventDataLayer({
@@ -88,16 +77,16 @@ const PreWorldCafe = () => {
         <WorldCafeCounter
           isModerator={isModerator}
           preEvent={true}
-          data-testid="prefishbowl-counter"
+          data-testid="preworldcafe-counter"
           startDateTimeTz={worldCafe.startDateTimeTz}
           eventStatus={status}
         />
 
         <StyledFishbowlDataWrapper>
-          <StyledFishbowlDataCard data-testid="prefishbowl-datacard" className="prefishbowl">
+          <StyledFishbowlDataCard data-testid="preworldcafe-datacard" className="prefishbowl">
             <StyledFishbowlDataCardHeader>
               <p className="body-xs">
-                <Trans i18nKey="fishbowl:detail.cardMiniTitle" components={{ i: <i /> }} />
+                <Trans i18nKey="world-cafe:detail.cardMiniTitle" components={{ i: <i /> }} />
               </p>
               <ButtonCopyUrl
                 data-testid="copy-link"
@@ -152,13 +141,10 @@ const PreWorldCafe = () => {
               )}
             </StyledFishbowlDataCardScroll>
           </StyledFishbowlDataCard>
-          <Button data-testid="on-boarding-button" variant="link" onClick={handleOnBoardingClick}>
-            {t('prefishbowl.onBoardingHelp')}
-          </Button>
         </StyledFishbowlDataWrapper>
       </StyledFishbowlInformation>
       <StyledParticipantsColumn>
-        <PreFishbowlParticipants isGuest={isGuest} slug={wid as string} />
+        <PreFishbowlParticipants eventType="world-cafe" isGuest={isGuest} slug={wid as string} />
       </StyledParticipantsColumn>
     </StyledContainer>
   );
