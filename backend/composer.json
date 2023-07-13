@@ -81,7 +81,7 @@
         "weirdan/doctrine-psalm-plugin": "2.8.1"
     },
     "replace": {
-        "paragonie/random_compat": "2.*",
+        "paragonie/random_compat": "^2.0",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php56": "*",
