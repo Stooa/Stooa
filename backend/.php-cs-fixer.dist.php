@@ -59,6 +59,8 @@ $config->setRules([
     'strict_param' => true,
     'php_unit_strict' => true,
     'php_unit_test_annotation' => ['style' => 'annotation'],
+    'nullable_type_declaration_for_default_null_value' => false,
+    'no_superfluous_phpdoc_tags' => false,
 ])
 ->setRiskyAllowed(true)
 ->setFinder($finder);
