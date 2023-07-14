@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "700e227b9f925040ba744163fe6716fa",
+    "content-hash": "d7bf8d60fbb464d0901f26ac7c60f6a4",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10994,16 +10994,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.33.0",
+            "version": "v1.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "3c46a2f2aa3ad8a1d74583a28a6be05e8c0a46ee"
+                "reference": "0b29af2f701da8a6a15c5daa4dbbe636a7720baf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/3c46a2f2aa3ad8a1d74583a28a6be05e8c0a46ee",
-                "reference": "3c46a2f2aa3ad8a1d74583a28a6be05e8c0a46ee",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/0b29af2f701da8a6a15c5daa4dbbe636a7720baf",
+                "reference": "0b29af2f701da8a6a15c5daa4dbbe636a7720baf",
                 "shasum": ""
             },
             "require": {
@@ -11029,7 +11029,7 @@
                 "doctrine/orm": "^2.9",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.1",
                 "symfony/framework-bundle": "^5.4|^6.0",
-                "symfony/maker-bundle": "^1.30",
+                "symfony/maker-bundle": "^1.49",
                 "symfony/phpunit-bridge": "^5.4|^6.0",
                 "symfony/translation-contracts": "^2.5|^3.0"
             },
@@ -11071,7 +11071,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.33.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.34.0"
             },
             "funding": [
                 {
@@ -11079,7 +11079,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-23T16:21:57+00:00"
+            "time": "2023-07-12T07:19:34+00:00"
         }
     ],
     "packages-dev": [
