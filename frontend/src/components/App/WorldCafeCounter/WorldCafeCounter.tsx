@@ -80,7 +80,7 @@ const WorldCafeCounter = ({
     const hours: number = Math.floor(seconds / 3600);
 
     if (seconds === 0 && conferenceNotStarted) {
-      return isModerator ? t('world-cafe:waitingHost') : t('world-cafe:eeewaiting');
+      return isModerator ? t('world-cafe:waitingHost') : t('world-cafe:waiting');
     } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
       const time = `1 ${t('form:fishbowl.minutes')}`;
       return t('timeToStart', { time });

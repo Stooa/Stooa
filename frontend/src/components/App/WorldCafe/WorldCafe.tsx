@@ -9,9 +9,10 @@
 
 import { WorldCafeStatus } from '@/jitsi/Status';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
-import PreWorldCafe from '../PreWorldCafe';
+
 import WorldCafeHeader from '../WorldCafeHeader/WorldCafeHeader';
 import { Main } from '@/layouts/App/styles';
+import PreWorldCafe from '../PreWorldCafe/PreWorldCafe';
 
 const WorldCafe = () => {
   const { status } = useWorldCafeStore();

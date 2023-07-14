@@ -26,11 +26,15 @@ const StyledFishbowlDataCard = styled.div`
   border-radius: 4px;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: ${space(2)};
   padding: ${space(2)} ${space(2)} ${space(2)} ${space(3)};
   position: relative;
   overflow: hidden;
   width: 100%;
+  max-height: 420px;
+
+  & + * {
+    margin-top: ${space(2)};
+  }
 
   &::before {
     content: '';
@@ -50,7 +54,7 @@ const StyledFishbowlDataCard = styled.div`
     color: ${COLOR_NEUTRO_800};
 
     & + :not(.description) {
-      margin-top: ${space(3)};
+      margin-top: ${space(4)};
     }
   }
 
@@ -58,11 +62,12 @@ const StyledFishbowlDataCard = styled.div`
     color: ${COLOR_NEUTRO_700};
 
     &:not(:last-child) {
-      margin-bottom: ${space(3)};
+      margin-bottom: ${space(4)};
     }
 
     & .question-title {
       display: flex;
+      justify-content: space-between;
       gap: ${space(2)};
       & h3 {
         ${mediumWeight};
@@ -95,14 +100,14 @@ const StyledFishbowlDataCard = styled.div`
     }
 
     & + *:not(.see-more) {
-      margin-top: ${space(3)};
+      margin-top: ${space(4)};
     }
 
     ${scrolllbarStyle}
   }
 
   & .see-more {
-    margin-bottom: ${space(3)};
+    margin-bottom: ${space(4)};
   }
 
   &.prefishbowl {
@@ -118,7 +123,6 @@ const StyledFishbowlDataCard = styled.div`
 const StyledFishbowlDataCardScroll = styled.div`
   ${scrolllbarStyle};
   overflow-y: scroll;
-  max-height: 500px;
 `;
 
 const StyledFishbowlDataCardHeader = styled.div`

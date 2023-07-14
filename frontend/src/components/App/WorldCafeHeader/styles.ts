@@ -20,7 +20,7 @@ const StyledWorldCafeHeader = styled.header`
   color: ${COLOR_NEUTRO_700};
   z-index: 50;
 
-  min-height: ${space(12)};
+  min-height: ${space(10)};
 `;
 
 export { StyledWorldCafeHeader };

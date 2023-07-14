@@ -15,13 +15,15 @@ import useWorldCafeLoader from '@/hooks/useWorldCafeLoader';
 import { useRouter } from 'next/router';
 import Loader from '@/components/Web/Loader';
 import JoinEvent from '@/components/Web/JoinEvent';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import { WorldCafeStatus } from '@/jitsi/Status';
 import EventPrejoin from '@/components/App/EventPrejoin';
 import { PrejoinWorldCafeForm } from '@/components/App/EventPrejoin/PrejoinWorldCafeForm';
 import WorldCafe from '@/components/App/WorldCafe/WorldCafe';
+import api from '@/lib/api';
+import useTranslation from 'next-translate/useTranslation';
 
 const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 const WorldCafeApp = dynamic(import('@/layouts/WorldCafeApp/WorldCafeApp'), {
@@ -34,17 +36,41 @@ const Page = () => {
   } = useRouter();
 
   const [joinAsGuest, setJoinAsGuest] = useState(false);
+  const { lang } = useTranslation();
+  const apiInterval = useRef<number>();
 
   const { isAuthenticated } = useAuth();
 
   const { loading, error } = useWorldCafeLoader(wid as string);
-  const { isReady, isGuest, prejoin, status, worldCafe } = useWorldCafeStore(store => ({
+  const { isReady, isGuest, prejoin, status, worldCafe, setStatus } = useWorldCafeStore(store => ({
     worldCafe: store.worldCafe,
     isReady: store.isReady,
     prejoin: store.isPrejoin,
     status: store.status,
+    setStatus: store.setStatus,
     isGuest: store.isGuest
   }));
+
+  const checkApIConferenceStatus = () => {
+    api
+      .get(`${lang}/world-cafe-status/${wid}`, {
+        headers: { 'Accept-Language': lang }
+      })
+      .then(({ data: { status } }) => {
+        setStatus(status);
+      })
+      .catch(error => {
+        console.log('[STOOA] ', error);
+      });
+  };
+
+  useEffect(() => {
+    apiInterval.current = window.setInterval(checkApIConferenceStatus, 6000);
+
+    return () => {
+      clearInterval(apiInterval.current);
+    };
+  }, [status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;

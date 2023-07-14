@@ -21,6 +21,7 @@ export interface WorldCafeState {
   isModerator: boolean;
   startWorldCafe: (status: WorldCafeStatus) => void;
   setWorldCafeReady: (isReady: boolean) => void;
+  setStatus: (status: WorldCafeStatus) => void;
   setWorldCafe: (data: WorldCafe) => void;
   setIsGuest: (isGuest: boolean) => void;
   setIsPrejoin: (isPrejoin: boolean) => void;
@@ -41,6 +42,11 @@ export const useWorldCafeStore = create<WorldCafeState>()(
       },
       setWorldCafeReady: (isReady: boolean) => {
         set({ isReady }, false, { type: 'setWorldCafeReady' });
+      },
+      setStatus: (status: WorldCafeStatus) => {
+        if (get().status !== status) {
+          set({ status }, false, { type: 'setStatus' });
+        }
       },
       setWorldCafe: (worldCafe: WorldCafe) => {
         set({ worldCafe }, false, { type: 'setWorldCafe' });
