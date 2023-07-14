@@ -27,8 +27,8 @@ class FishbowlIntroduceAndNoIntroRunSubscriber implements EventSubscriberInterfa
         if ($eventEntity instanceof Fishbowl) {
             $transition = $event->getTransition();
 
-            if ((Event::TRANSITION_INTRODUCE === $transition->getName() && !$eventEntity->getHasIntroduction()) ||
-                (Event::TRANSITION_NO_INTRO_RUN === $transition->getName() && $eventEntity->getHasIntroduction())
+            if ((Event::TRANSITION_INTRODUCE === $transition->getName() && !$eventEntity->getHasIntroduction())
+                || (Event::TRANSITION_NO_INTRO_RUN === $transition->getName() && $eventEntity->getHasIntroduction())
             ) {
                 $event->setBlocked(true);
             }

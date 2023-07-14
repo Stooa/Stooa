@@ -38,8 +38,8 @@ final class WorldCafeProcessor implements ProcessorInterface
         $result = $this->decorated->process($data, $operation, $uriVariables, $context);
 
         if ($data instanceof WorldCafe && (
-            ($context['collection_operation_name'] ?? null) === 'post' ||
-            ($context['graphql_operation_name'] ?? null) === 'create')
+            ($context['collection_operation_name'] ?? null) === 'post'
+            || ($context['graphql_operation_name'] ?? null) === 'create')
         ) {
             $this->mailerService->sendWorldCafeCreatedEmail($data);
         }

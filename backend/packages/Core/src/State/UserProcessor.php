@@ -35,8 +35,8 @@ final class UserProcessor implements ProcessorInterface
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): User
     {
         if ($data instanceof User) {
-            if (($context['collection_operation_name'] ?? null) === 'post' ||
-                ($context['graphql_operation_name'] ?? null) === 'create') {
+            if (($context['collection_operation_name'] ?? null) === 'post'
+                || ($context['graphql_operation_name'] ?? null) === 'create') {
                 $data->setActive(true);
             }
 
@@ -46,8 +46,8 @@ final class UserProcessor implements ProcessorInterface
         $result = $this->decorated->process($data, $operation, $uriVariables, $context);
 
         if ($data instanceof User && (
-            ($context['collection_operation_name'] ?? null) === 'post' ||
-            ($context['graphql_operation_name'] ?? null) === 'create')
+            ($context['collection_operation_name'] ?? null) === 'post'
+            || ($context['graphql_operation_name'] ?? null) === 'create')
         ) {
             $this->mailerService->sendWelcomeEmail($data);
         }
