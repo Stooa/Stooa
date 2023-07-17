@@ -94,7 +94,7 @@ const PreWorldCafe = () => {
               <ButtonCopyUrl
                 data-testid="copy-link"
                 variant="text"
-                eventType="fishbowl"
+                eventType="world-cafe"
                 slug={wid as string}
                 locale={lang}
               />

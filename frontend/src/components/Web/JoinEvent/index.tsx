@@ -55,12 +55,12 @@ const JoinEvent = ({ joinAsGuest }: Props) => {
   const worldCafeRoute = `${ROUTE_WORLD_CAFE}/${worldCafe.slug}`;
 
   const evaluateEventReady = () => {
-    let isReady = false;
+    let isReadyToStart = false;
     if (worldCafe.startDateTimeTz) {
-      isReady = isTimeLessThanNMinutes(worldCafe.startDateTimeTz, MINUTES_TO_START_EVENT);
+      isReadyToStart = isTimeLessThanNMinutes(worldCafe.startDateTimeTz, MINUTES_TO_START_EVENT);
     }
 
-    if (isReady) {
+    if (isReadyToStart) {
       setWorldCafeReady(true);
       window.clearInterval(intervalRef.current);
     } else {

@@ -41,7 +41,9 @@ export const useWorldCafeStore = create<WorldCafeState>()(
         set({ status }, false, { type: 'startWorldCafe' });
       },
       setWorldCafeReady: (isReady: boolean) => {
-        set({ isReady }, false, { type: 'setWorldCafeReady' });
+        if (get().isReady !== isReady) {
+          set({ isReady }, false, { type: 'setWorldCafeReady' });
+        }
       },
       setStatus: (status: WorldCafeStatus) => {
         if (get().status !== status) {

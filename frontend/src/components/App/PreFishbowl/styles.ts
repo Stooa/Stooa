@@ -24,6 +24,7 @@ const StyledContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   row-gap: ${space(4)};
   padding-inline: ${space(4)};
