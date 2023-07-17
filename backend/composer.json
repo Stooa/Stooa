@@ -78,7 +78,7 @@
         "symfony/var-dumper": "6.3.1",
         "symfony/web-profiler-bundle": "6.3.1",
         "vimeo/psalm": "5.13.1",
-        "weirdan/doctrine-psalm-plugin": "2.8.1"
+        "weirdan/doctrine-psalm-plugin": "2.9.0"
     },
     "replace": {
         "paragonie/random_compat": "^2.0",
