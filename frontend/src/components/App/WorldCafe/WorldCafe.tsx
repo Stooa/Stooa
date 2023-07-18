@@ -7,27 +7,50 @@
  * file that was distributed with this source code.
  */
 
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
 import { WorldCafeStatus } from '@/jitsi/Status';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
-
 import WorldCafeHeader from '../WorldCafeHeader/WorldCafeHeader';
 import { Main } from '@/layouts/App/styles';
 import PreWorldCafe from '../PreWorldCafe/PreWorldCafe';
 import WorldCafeMainApp from '../WorldCafeMainApp/WorldCafeMainApp';
 import { useJitsi } from '@/lib/useJitsi';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import Loader from '@/components/Web/Loader';
 
 const WorldCafe = () => {
-  const { status, isModerator, isPrejoin } = useWorldCafeStore();
+  const { status, isModerator, isPrejoin, isReady } = useWorldCafeStore();
   const [initConnection, setInitConnection] = useState(false);
   const { initialInteraction, initializeConnection } = useJitsi();
   const { wid } = useRouter().query;
 
-  const isPreevent = status === WorldCafeStatus.NOT_STARTED;
+  const isPreEvent = status === WorldCafeStatus.NOT_STARTED;
 
   useEffect(() => {
-    if (!isPreevent && !initConnection && isModerator && status === WorldCafeStatus.INTRODUCTION) {
+    const started =
+      status === WorldCafeStatus.RUNNING ||
+      status === WorldCafeStatus.INTRODUCTION ||
+      status === WorldCafeStatus.CONCLUSION;
+
+    console.table({
+      isPrejoin: !isPrejoin,
+      initConnection: !initConnection
+    });
+
+    console.table({
+      isModerator,
+      started
+    });
+
+    console.table({
+      isReady: !isReady,
+      started
+    });
+
+    // Cuando seas host y NO ESTE inicializada enchufar
+
+    if (!isPrejoin && !initConnection && started) {
       setTimeout(() => {
         initializeConnection(wid, isModerator);
       }, 700);
@@ -45,11 +68,15 @@ const WorldCafe = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, isPrejoin, isModerator]);
 
+  if (!status) {
+    <Loader />;
+  }
+
   return (
     <>
       <WorldCafeHeader />
 
-      <Main>{isPreevent ? <PreWorldCafe /> : <WorldCafeMainApp />}</Main>
+      <Main>{isPreEvent ? <PreWorldCafe /> : <WorldCafeMainApp />}</Main>
     </>
   );
 };

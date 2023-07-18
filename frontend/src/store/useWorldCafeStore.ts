@@ -13,7 +13,7 @@ import { WorldCafeStatus } from '@/jitsi/Status';
 import { WorldCafe } from '@/types/api-platform';
 
 export interface WorldCafeState {
-  status: WorldCafeStatus;
+  status: WorldCafeStatus | undefined;
   worldCafe: WorldCafe | undefined;
   isPrejoin: boolean;
   isReady: boolean;
@@ -31,7 +31,7 @@ export interface WorldCafeState {
 export const useWorldCafeStore = create<WorldCafeState>()(
   devtools(
     (set, get) => ({
-      status: WorldCafeStatus.NOT_STARTED,
+      status: undefined,
       isPrejoin: true,
       isReady: false,
       isGuest: false,

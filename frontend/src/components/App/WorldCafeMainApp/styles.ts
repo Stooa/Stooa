@@ -9,24 +9,29 @@
 
 import styled from 'styled-components';
 
-const StyledWorldCafeVideos = styled.div`
-  display: grid;
+const StyledWorldCafeVideos = styled.div<{ quantity: number }>`
+  /* display: grid;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr)); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   height: 100%;
   width: 100%;
 
   & > div {
-    width: 100%;
-    aspect-ratio: 8 / 9;
+    width: ${({ quantity }) =>
+      quantity > 6 ? `calc(100% / ${6} - 1rem)` : `calc(100% / ${quantity / 2} - 1rem)`};
+    aspect-ratio: 7/5;
     background-color: yellowgreen;
     border-radius: 0.5rem;
 
     &.host {
       background-color: yellow;
-      grid-row: 1;
-      grid-column: 1;
+      order: -1;
+      /* grid-row: 1;
+      grid-column: 1; */
     }
   }
 `;
