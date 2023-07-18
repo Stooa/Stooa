@@ -25,7 +25,7 @@ const WorldCafe = () => {
   const { initialInteraction, initializeConnection } = useJitsi();
   const { wid } = useRouter().query;
 
-  const isPreEvent = status === WorldCafeStatus.NOT_STARTED;
+  const isPreEvent = status === WorldCafeStatus.NOT_STARTED || status === undefined;
 
   useEffect(() => {
     const started =
