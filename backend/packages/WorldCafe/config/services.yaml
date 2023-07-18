@@ -28,6 +28,15 @@ services:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
 
+    app_world_cafe_participant_service:
+        class: App\Core\Service\ParticipantService
+        bind:
+            $participantRepository: '@App\Core\Repository\WorldCafeParticipantRepository'
+
+    App\WorldCafe\Service\WorldCafeService:
+        bind:
+            $participantService: '@app_world_cafe_participant_service'
+
     app_world_cafe_resolver_event_resolver:
         class: App\Core\Resolver\EventResolver
         bind:

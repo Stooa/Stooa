@@ -125,7 +125,7 @@ class FishbowlService
         $created = false;
 
         if (null !== $guest) {
-            $participant = $this->participantService->findGuestInFishbowl($fishbowl, $guest);
+            $participant = $this->participantService->findGuestInEvent($fishbowl, $guest);
 
             if (null === $participant) {
                 $participant = $this->participantService->createFishbowlParticipantFromGuest($fishbowl, $guest);
@@ -134,7 +134,7 @@ class FishbowlService
         } else {
             Assert::isInstanceOf($user, User::class);
 
-            $participant = $this->participantService->findUserInFishbowl($fishbowl, $user);
+            $participant = $this->participantService->findUserInEvent($fishbowl, $user);
 
             if (null === $participant) {
                 $participant = $this->participantService->createFishbowlParticipantFromUser($fishbowl, $user);

@@ -215,7 +215,7 @@ class FishbowlServiceTest extends TestCase
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
         $this->guestService->method('getGuest')->willReturn($guest);
 
-        $this->participantService->method('findGuestInFishbowl')->with($fishbowl, $guest)->willReturn($participant);
+        $this->participantService->method('findGuestInEvent')->with($fishbowl, $guest)->willReturn($participant);
 
         $this->participantService->expects($this->once())->method('persistParticipant')->with($participant);
 
@@ -239,7 +239,7 @@ class FishbowlServiceTest extends TestCase
 
         $this->security->method('getUser')->willReturn($user);
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
-        $this->participantService->method('findUserInFishbowl')->with($fishbowl, $user)->willReturn($participant);
+        $this->participantService->method('findUserInEvent')->with($fishbowl, $user)->willReturn($participant);
 
         $this->participantService->expects($this->once())->method('persistParticipant')->with($participant);
 
@@ -261,7 +261,7 @@ class FishbowlServiceTest extends TestCase
 
         $this->security->method('getUser')->willReturn($user);
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
-        $this->participantService->method('findUserInFishbowl')->with($fishbowl, $user)->willReturn(null);
+        $this->participantService->method('findUserInEvent')->with($fishbowl, $user)->willReturn(null);
 
         $this->participantService->expects($this->once())->method('persistParticipant');
         $this->fishbowlRepository->expects($this->once())->method('persist')->with($fishbowl);
@@ -286,7 +286,7 @@ class FishbowlServiceTest extends TestCase
         $this->fishbowlRepository->method('findBySlug')->with('fishbowl-slug')->willReturn($fishbowl);
         $this->guestService->method('getGuest')->willReturn($guest);
 
-        $this->participantService->method('findGuestInFishbowl')->with($fishbowl, $guest)->willReturn(null);
+        $this->participantService->method('findGuestInEvent')->with($fishbowl, $guest)->willReturn(null);
 
         $this->participantService->expects($this->once())->method('persistParticipant');
         $this->fishbowlRepository->expects($this->once())->method('persist')->with($fishbowl);

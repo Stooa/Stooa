@@ -31,6 +31,15 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
+    app_fishbowl_participant_service:
+        class: App\Core\Service\ParticipantService
+        bind:
+            $participantRepository: '@App\Core\Repository\FishbowlParticipantRepository'
+
+    App\Fishbowl\Service\FishbowlService:
+        bind:
+            $participantService: '@app_fishbowl_participant_service'
+
     app_fishbowl_resolver_event_resolver:
         class: App\Core\Resolver\EventResolver
         bind:

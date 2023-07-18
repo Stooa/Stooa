@@ -106,7 +106,7 @@ class WorldCafeService
         $created = false;
 
         if (null !== $guest) {
-            $participant = $this->participantService->findGuestInWorldCafe($worldCafe, $guest);
+            $participant = $this->participantService->findGuestInEvent($worldCafe, $guest);
 
             if (null === $participant) {
                 $participant = $this->participantService->createWorldCafeParticipantFromGuest($worldCafe, $guest);
@@ -115,7 +115,7 @@ class WorldCafeService
         } else {
             Assert::isInstanceOf($user, User::class);
 
-            $participant = $this->participantService->findUserInWorldCafe($worldCafe, $user);
+            $participant = $this->participantService->findUserInEvent($worldCafe, $user);
 
             if (null === $participant) {
                 $participant = $this->participantService->createWorldCafeParticipantFromUser($worldCafe, $user);

@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace App\Core\Model;
 
+use Ramsey\Uuid\UuidInterface;
+
 interface EventInterface
 {
+    public function getId(): ?UuidInterface;
+
     public function getName(): ?string;
 
     public function setName(string $name): self;

@@ -22,7 +22,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
 /** @extends ServiceEntityRepository<Participant> */
-class FishbowlParticipantRepository extends ServiceEntityRepository implements ParticipantRepositoryInterface
+class WorldCafeParticipantRepository extends ServiceEntityRepository implements ParticipantRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -32,9 +32,9 @@ class FishbowlParticipantRepository extends ServiceEntityRepository implements P
     public function findUserInEvent(EventInterface $event, User $user): ?Participant
     {
         $query = $this->createQueryBuilder('participant')
-            ->where('participant.fishbowl = :fishbowl')
+            ->where('participant.worldCafe = :worldCafe')
             ->andWhere('participant.user = :user')
-            ->setParameter('fishbowl', $event->getId(), 'uuid')
+            ->setParameter('worldCafe', $event->getId(), 'uuid')
             ->setParameter('user', $user->getId(), 'uuid')
             ->getQuery();
 
@@ -44,9 +44,9 @@ class FishbowlParticipantRepository extends ServiceEntityRepository implements P
     public function findGuestInEvent(EventInterface $event, Guest $guest): ?Participant
     {
         $query = $this->createQueryBuilder('participant')
-            ->where('participant.fishbowl = :fishbowl')
+            ->where('participant.worldCafe = :worldCafe')
             ->andWhere('participant.guest = :guest')
-            ->setParameter('fishbowl', $event->getId(), 'uuid')
+            ->setParameter('worldCafe', $event->getId(), 'uuid')
             ->setParameter('guest', $guest->getId(), 'uuid')
             ->getQuery();
 
@@ -60,9 +60,9 @@ class FishbowlParticipantRepository extends ServiceEntityRepository implements P
         $twentySeconds = new \DateInterval('PT20S');
 
         $query = $this->createQueryBuilder('participant')
-            ->where('participant.fishbowl = :fishbowl')
+            ->where('participant.worldCafe = :worldCafe')
             ->andWhere('participant.lastPing >= :twentySeconds')
-            ->setParameter('fishbowl', $event->getId(), 'uuid')
+            ->setParameter('worldCafe', $event->getId(), 'uuid')
             ->setParameter('twentySeconds', $now->sub($twentySeconds), Types::DATETIME_IMMUTABLE)
             ->orderBy('participant.id', 'ASC')
             ->getQuery();

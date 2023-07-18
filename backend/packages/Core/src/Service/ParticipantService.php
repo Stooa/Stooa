@@ -17,7 +17,7 @@ use App\Core\Entity\Guest;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
 use App\Core\Model\Event;
-use App\Core\Repository\ParticipantRepository;
+use App\Core\Repository\ParticipantRepositoryInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use App\WorldCafe\Entity\WorldCafe;
 use Ramsey\Uuid\UuidInterface;
@@ -40,13 +40,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ParticipantService
 {
     public function __construct(
-        private readonly ParticipantRepository $participantRepository,
+        private readonly ParticipantRepositoryInterface $participantRepository,
     ) {
     }
 
     public function createFishbowlParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
     {
         $participant = $this->createParticipantFromFishbowl($fishbowl);
+        $participant->setUser($user);
+
+        return $participant;
+    }
+
+    public function createWorldCafeParticipantFromUser(WorldCafe $worldCafe, User $user): Participant
+    {
+        $participant = $this->createParticipantFromWorldCafe($worldCafe);
         $participant->setUser($user);
 
         return $participant;
@@ -60,14 +68,6 @@ class ParticipantService
         return $participant;
     }
 
-    public function createWorldCafeParticipantFromUser(WorldCafe $worldCafe, User $user): Participant
-    {
-        $participant = $this->createParticipantFromWorldCafe($worldCafe);
-        $participant->setUser($user);
-
-        return $participant;
-    }
-
     public function createWorldCafeParticipantFromGuest(WorldCafe $worldCafe, Guest $guest): Participant
     {
         $participant = $this->createParticipantFromWorldCafe($worldCafe);
@@ -76,24 +76,14 @@ class ParticipantService
         return $participant;
     }
 
-    public function findGuestInFishbowl(Fishbowl $fishbowl, Guest $guest): ?Participant
+    public function findGuestInEvent(Event $event, Guest $guest): ?Participant
     {
-        return $this->participantRepository->findGuestInFishbowl($fishbowl, $guest);
+        return $this->participantRepository->findGuestInEvent($event, $guest);
     }
 
-    public function findUserInFishbowl(Fishbowl $fishbowl, User $user): ?Participant
+    public function findUserInEvent(Event $event, User $user): ?Participant
     {
-        return $this->participantRepository->findUserInFishbowl($fishbowl, $user);
-    }
-
-    public function findGuestInWorldCafe(WorldCafe $worldCafe, Guest $guest): ?Participant
-    {
-        return $this->participantRepository->findGuestInWorldCafe($worldCafe, $guest);
-    }
-
-    public function findUserInWorldCafe(WorldCafe $worldCafe, User $user): ?Participant
-    {
-        return $this->participantRepository->findUserInWorldCafe($worldCafe, $user);
+        return $this->participantRepository->findUserInEvent($event, $user);
     }
 
     public function persistParticipant(Participant $participant): void
@@ -104,7 +94,7 @@ class ParticipantService
     /** @return RawParticipant[] */
     public function buildParticipantsByFishbowl(Fishbowl $fishbowl, ?UserInterface $currentUser): array
     {
-        $participants = $this->participantRepository->getParticipantsByFishbowl($fishbowl);
+        $participants = $this->participantRepository->getParticipantsByEvent($fishbowl);
 
         return $this->buildParticipants($participants, $fishbowl, $currentUser);
     }
@@ -112,7 +102,7 @@ class ParticipantService
     /** @return RawParticipant[] */
     public function buildParticipantsByWorldCafe(WorldCafe $worldCafe, ?UserInterface $currentUser): array
     {
-        $participants = $this->participantRepository->getParticipantsByWorldCafe($worldCafe);
+        $participants = $this->participantRepository->getParticipantsByEvent($worldCafe);
 
         return $this->buildParticipants($participants, $worldCafe, $currentUser);
     }
