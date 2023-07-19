@@ -28,6 +28,23 @@ export const useJitsi = () => {
   const { hasFreeSeat, create } = useSeats();
   const { createLocalTracks } = useLocalTracks();
 
+  //TODO: Review this
+  const joinWorldCafe = async user => {
+    console.log('-----> [STOOA] Join world cafe');
+    sendJoinEvent(user);
+
+    if (!localTracksCreated) {
+      await createLocalTracks().then(tracks => {
+        tracks.forEach(async track => {
+          await syncLocalStorageTrack(track, user);
+          addTrack(track);
+        });
+
+        localTracksCreatedEvent();
+      });
+    }
+  };
+
   const join = async user => {
     if (!hasFreeSeat()) return;
 
@@ -138,6 +155,7 @@ export const useJitsi = () => {
     initializeJitsi,
     initializeConnection,
     join,
+    joinWorldCafe,
     leave,
     unload,
     kickParticipant,

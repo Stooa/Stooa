@@ -15,9 +15,9 @@ import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import Header from './Header/Header';
 import { Main } from '@/layouts/App/styles';
 import PreWorldCafe from './PreWorldCafe/PreWorldCafe';
-import VideoGrid from './VideoGrid/VideoGrid';
 import { useJitsi } from '@/lib/useJitsi';
 import Loader from '@/components/Web/Loader';
+import { ActiveWorldCafe } from './ActiveWorldCafe';
 
 const WorldCafe = () => {
   const { status, isModerator, isPrejoin, isReady } = useWorldCafeStore();
@@ -69,13 +69,13 @@ const WorldCafe = () => {
   }, [status, isPrejoin, isModerator]);
 
   if (!status) {
-    <Loader />;
+    return <Loader />;
   }
 
   return (
     <>
       <Header />
-      <Main>{isPreEvent ? <PreWorldCafe /> : <VideoGrid />}</Main>
+      <Main>{isPreEvent ? <PreWorldCafe /> : <ActiveWorldCafe />}</Main>
     </>
   );
 };
