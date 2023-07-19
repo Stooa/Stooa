@@ -18,37 +18,27 @@ import PreWorldCafe from './PreWorldCafe/PreWorldCafe';
 import { useJitsi } from '@/lib/useJitsi';
 import Loader from '@/components/Web/Loader';
 import { ActiveWorldCafe } from './ActiveWorldCafe';
+import useEventListener from '@/hooks/useEventListener';
+import { CONNECTION_ESTABLISHED_FINISHED } from '@/jitsi/Events';
+import { useConference } from '@/jitsi';
 
 const WorldCafe = () => {
   const { status, isModerator, isPrejoin, isReady } = useWorldCafeStore();
   const [initConnection, setInitConnection] = useState(false);
   const { initialInteraction, initializeConnection } = useJitsi();
   const { wid } = useRouter().query;
-
+  const { joinConference } = useConference();
   const isPreEvent = status === WorldCafeStatus.NOT_STARTED || status === undefined;
+
+  useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
+    joinConference();
+  });
 
   useEffect(() => {
     const started =
       status === WorldCafeStatus.RUNNING ||
       status === WorldCafeStatus.INTRODUCTION ||
       status === WorldCafeStatus.CONCLUSION;
-
-    console.table({
-      isPrejoin: !isPrejoin,
-      initConnection: !initConnection
-    });
-
-    console.table({
-      isModerator,
-      started
-    });
-
-    console.table({
-      isReady: !isReady,
-      started
-    });
-
-    // Cuando seas host y NO ESTE inicializada enchufar
 
     if (!isPrejoin && !initConnection && started) {
       setTimeout(() => {

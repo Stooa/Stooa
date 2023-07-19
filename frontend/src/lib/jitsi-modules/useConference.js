@@ -489,7 +489,6 @@ export const useConference = () => {
   };
 
   const sendJoinEvent = user => {
-    console.log('-----> IS JOINED?', isJoined);
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
 
