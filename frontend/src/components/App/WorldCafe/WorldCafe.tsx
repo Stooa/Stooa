@@ -12,10 +12,10 @@ import { useRouter } from 'next/router';
 
 import { WorldCafeStatus } from '@/jitsi/Status';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
-import WorldCafeHeader from '../WorldCafeHeader/WorldCafeHeader';
+import Header from './Header/Header';
 import { Main } from '@/layouts/App/styles';
-import PreWorldCafe from '../PreWorldCafe/PreWorldCafe';
-import WorldCafeMainApp from '../WorldCafeMainApp/WorldCafeMainApp';
+import PreWorldCafe from './PreWorldCafe/PreWorldCafe';
+import VideoGrid from './VideoGrid/VideoGrid';
 import { useJitsi } from '@/lib/useJitsi';
 import Loader from '@/components/Web/Loader';
 
@@ -74,9 +74,8 @@ const WorldCafe = () => {
 
   return (
     <>
-      <WorldCafeHeader />
-
-      <Main>{isPreEvent ? <PreWorldCafe /> : <WorldCafeMainApp />}</Main>
+      <Header />
+      <Main>{isPreEvent ? <PreWorldCafe /> : <VideoGrid />}</Main>
     </>
   );
 };

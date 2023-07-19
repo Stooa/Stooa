@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 
-const WorldCafeHeader = () => {
+const Header = () => {
   const { wid } = useRouter().query;
   const [introduceWorldCafe] = useMutation(INTRODUCE_WORLD_CAFE);
   const { t } = useTranslation('world-cafe');
@@ -43,4 +43,4 @@ const WorldCafeHeader = () => {
   );
 };
 
-export default WorldCafeHeader;
+export default Header;

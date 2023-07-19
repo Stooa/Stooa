@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export { default } from './WorldCafeCounter';
-export * from './WorldCafeCounter';
+export * from './VideoGrid';
+export { default } from './VideoGrid';

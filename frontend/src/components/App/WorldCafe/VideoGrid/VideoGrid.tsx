@@ -9,7 +9,7 @@
 
 import { StyledWorldCafeVideos } from './styles';
 
-const WorldCafeMainApp = () => {
+const VideoGrid = () => {
   return (
     <div>
       <h1>World café main app</h1>
@@ -44,4 +44,4 @@ const WorldCafeMainApp = () => {
   );
 };
 
-export default WorldCafeMainApp;
+export default VideoGrid;

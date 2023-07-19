@@ -20,7 +20,7 @@ interface Props {
   eventStatus: WorldCafeStatus;
 }
 
-const WorldCafeCounter = ({
+const Counter = ({
   preEvent = false,
   startDateTimeTz,
   isModerator,
@@ -105,4 +105,4 @@ const WorldCafeCounter = ({
   );
 };
 
-export default WorldCafeCounter;
+export default Counter;

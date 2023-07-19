@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export { default } from './WorldCafeHeader';
-export * from './WorldCafeHeader';
+export { default } from './Header';
+export * from './Header';

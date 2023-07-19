@@ -22,16 +22,16 @@ import {
   StyledFishbowlDataWrapper,
   StyledFishbowlInformation,
   StyledParticipantsColumn
-} from '../PreFishbowl/styles';
+} from '../../PreFishbowl/styles';
 
 import Red from '@/ui/svg/blobs/red.svg';
 import Yellow from '@/ui/svg/blobs/yellow.svg';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { pushEventDataLayer } from '@/lib/analytics';
-import PreFishbowlParticipants from '../PreFishbowl/PreFishbowlParticipants';
+import PreFishbowlParticipants from '../../PreFishbowl/PreFishbowlParticipants';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
-import WorldCafeCounter from '../WorldCafeCounter/WorldCafeCounter';
+import Counter from '../Counter/Counter';
 
 const PreWorldCafe = () => {
   const [closedDescription, setClosedDescription] = useState(true);
@@ -77,13 +77,15 @@ const PreWorldCafe = () => {
           sizes="(max-width: 1200px) 150px"
         />
 
-        <WorldCafeCounter
-          isModerator={isModerator}
-          preEvent={true}
-          data-testid="preworldcafe-counter"
-          startDateTimeTz={worldCafe.startDateTimeTz}
-          eventStatus={status}
-        />
+        {status && (
+          <Counter
+            isModerator={isModerator}
+            preEvent={true}
+            data-testid="preworldcafe-counter"
+            startDateTimeTz={worldCafe.startDateTimeTz}
+            eventStatus={status}
+          />
+        )}
 
         <StyledFishbowlDataWrapper>
           <StyledFishbowlDataCard data-testid="preworldcafe-datacard" className="prefishbowl">

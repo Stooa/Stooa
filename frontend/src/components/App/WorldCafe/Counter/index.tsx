@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export * from './WorldCafeMainApp';
-export { default } from './WorldCafeMainApp';
+export { default } from './Counter';
+export * from './Counter';
