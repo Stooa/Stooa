@@ -18,21 +18,13 @@ import PreWorldCafe from './PreWorldCafe/PreWorldCafe';
 import { useJitsi } from '@/lib/useJitsi';
 import Loader from '@/components/Web/Loader';
 import { ActiveWorldCafe } from './ActiveWorldCafe';
-import useEventListener from '@/hooks/useEventListener';
-import { CONNECTION_ESTABLISHED_FINISHED } from '@/jitsi/Events';
-import { useConference } from '@/jitsi';
 
 const WorldCafe = () => {
   const { status, isModerator, isPrejoin, isReady } = useWorldCafeStore();
   const [initConnection, setInitConnection] = useState(false);
   const { initialInteraction, initializeConnection } = useJitsi();
   const { wid } = useRouter().query;
-  const { joinConference } = useConference();
   const isPreEvent = status === WorldCafeStatus.NOT_STARTED || status === undefined;
-
-  useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
-    joinConference();
-  });
 
   useEffect(() => {
     const started =

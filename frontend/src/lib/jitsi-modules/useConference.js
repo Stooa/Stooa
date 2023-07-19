@@ -62,7 +62,7 @@ export const useConference = () => {
   const joinUser = (id, user) => {
     const userId = id ?? myUserId;
     const seat = join(userId, getParticipantNameById(userId));
-
+    console.log('-----> LLEGA HASTA AQUI <-----');
     createTracks(userId, seat, user);
 
     getConference().selectParticipants(getIds());
@@ -496,6 +496,14 @@ export const useConference = () => {
     }
   };
 
+  const sendJoinEventWorldCafe = user => {
+    if (isJoined) {
+      conference.setLocalParticipantProperty('joined', 'yes');
+
+      joinUser(undefined, user);
+    }
+  };
+
   const sendLeaveEvent = () => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'no');
@@ -588,6 +596,7 @@ export const useConference = () => {
     kickParticipant,
     leave,
     sendJoinEvent,
+    sendJoinEventWorldCafe,
     sendLeaveEvent,
     sendTextMessage,
     startScreenShareEvent,

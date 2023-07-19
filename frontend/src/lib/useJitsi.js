@@ -14,6 +14,7 @@ export const useJitsi = () => {
   const { localTracksCreated, localTracksCreatedEvent, localTracksRemovedEvent } = useJitsiStore();
   const {
     sendJoinEvent,
+    sendJoinEventWorldCafe,
     addTrack,
     sendLeaveEvent,
     leave: conferenceLeave,
@@ -31,9 +32,10 @@ export const useJitsi = () => {
   //TODO: Review this
   const joinWorldCafe = async user => {
     console.log('-----> [STOOA] Join world cafe');
-    sendJoinEvent(user);
+    sendJoinEventWorldCafe(user);
 
     if (!localTracksCreated) {
+      console.log('creating tracks -->');
       await createLocalTracks().then(tracks => {
         tracks.forEach(async track => {
           await syncLocalStorageTrack(track, user);

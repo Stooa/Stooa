@@ -7,23 +7,37 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import VideoGrid from '../VideoGrid/VideoGrid';
 import { useJitsi } from '@/lib/useJitsi';
 import { useUser } from '@/jitsi/useUser';
-
+import useEventListener from '@/hooks/useEventListener';
+import { CONFERENCE_START, CONNECTION_ESTABLISHED_FINISHED } from '@/jitsi/Events';
+import { useConference } from '@/jitsi';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
 export const ActiveWorldCafe = () => {
   const { joinWorldCafe } = useJitsi();
   const { getUser } = useUser();
+  const { joinConference } = useConference();
+  const [conferenceReady, setConferenceReady] = useState(false);
+
+  useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
+    setConferenceReady(true);
+  });
+
+  useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
+    joinConference();
+  });
 
   useEffect(() => {
     const handleJoin = async () => {
       const foo = await joinWorldCafe(getUser());
-      console.log('JOINED LETS GO', foo);
     };
 
-    handleJoin();
-  }, []);
+    if (conferenceReady) {
+      handleJoin();
+    }
+  }, [conferenceReady]);
 
   return (
     <>
