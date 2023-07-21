@@ -8,7 +8,9 @@
  */
 
 import {
+  CONFERENCE_IS_LOCKABLE,
   CONFERENCE_START,
+  CONFERENCE_START_MUTED,
   CONNECTION_ESTABLISHED_FINISHED,
   USER_LEFT_CONFERENCE
 } from '@/jitsi/Events';
@@ -26,14 +28,16 @@ export const useWorldCafeStart = () => {
   }));
   const { joinWorldCafe } = useJitsi();
   const { getUser } = useUser();
-  const { joinConference } = useConference();
+  const { joinConference, muteAudioConference } = useConference();
 
   const [conferenceReady, setConferenceReady] = useState(false);
 
-  // TODO: FIRST TIME THAT HOST CONNECTS USE THIS SHIT `setStartMutedPolicy({audio: true, video: false})`
+  useEventListener(CONFERENCE_START_MUTED, () => {
+    console.log('----> Muting audio');
+    muteAudioConference();
+  });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
-    console.log('CONFERENCE_START', myUserId);
     setConferenceReady(true);
   });
 

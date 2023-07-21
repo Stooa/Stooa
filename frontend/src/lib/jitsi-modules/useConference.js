@@ -21,7 +21,8 @@ import {
   RECORDING_START,
   RECORDING_STOP,
   TRANSCRIPTION_MESSAGE_RECEIVED,
-  TRANSCRIPTION_TRANSCRIBER_JOINED
+  TRANSCRIPTION_TRANSCRIBER_JOINED,
+  CONFERENCE_START_MUTED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import { useTracks, useSeats, useUser } from '@/jitsi';
@@ -202,6 +203,7 @@ export const useConference = () => {
 
     if (role === 'moderator') {
       dispatchEvent(CONFERENCE_IS_LOCKABLE);
+      dispatchEvent(CONFERENCE_START_MUTED);
     }
   };
 
@@ -397,11 +399,12 @@ export const useConference = () => {
     connection.connect();
   };
 
-  /**
-   *
-   * @param {string} password
-   * @returns Promise
-   */
+  const muteAudioConference = async () => {
+    if (conference) {
+      return await conference.setStartMutedPolicy({ audio: true, video: false });
+    }
+  };
+
   const lockConference = async password => {
     if (conference) {
       return await conference.lock(password);
@@ -589,6 +592,7 @@ export const useConference = () => {
     joinConference,
     joinPrivateConference,
     kickParticipant,
+    muteAudioConference,
     leave,
     sendJoinEvent,
     sendLeaveEvent,
