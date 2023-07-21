@@ -17,10 +17,11 @@ import { ROUTE_FISHBOWL, ROUTE_WORLD_CAFE } from '@/app.config';
 import { defaultLocale } from '@/i18n';
 import useTranslation from 'next-translate/useTranslation';
 import Button from '@/components/Common/Button';
+import { EventType } from '@/types/event-types';
 
 interface Props {
   slug: string;
-  eventType: 'fishbowl' | 'world-cafe';
+  eventType: EventType;
   locale: string;
   variant?: 'primary' | 'secondary' | 'text';
   size?: 'small' | 'medium' | 'large';

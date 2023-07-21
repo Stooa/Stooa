@@ -27,6 +27,7 @@ import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import { useTracks, useSeats, useUser } from '@/jitsi';
 import { useJitsiStore } from '@/store';
 import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
 export const useConference = () => {
   const {

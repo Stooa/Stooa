@@ -28,12 +28,8 @@ export const useJitsi = () => {
   const { hasFreeSeat, create } = useSeats();
   const { createLocalTracks } = useLocalTracks();
 
-  //TODO: Review this
   const joinWorldCafe = async user => {
-    console.log('-----> [STOOA] Join world cafe');
-
     if (!localTracksCreated) {
-      console.log('creating tracks -->');
       await createLocalTracks().then(tracks => {
         tracks.forEach(async track => {
           await syncLocalStorageTrack(track, user);
@@ -41,8 +37,6 @@ export const useJitsi = () => {
         });
 
         localTracksCreatedEvent();
-
-        // EVENT TO ADD PARTICIPANT WITH TRACKS ETC
       });
     }
   };
