@@ -7,4 +7,7 @@
  * file that was distributed with this source code.
  */
 
-export type EventType = 'fishbowl' | 'world-cafe';
+export const FISHBOWL = 'fishbowl';
+export const WORLD_CAFE = 'world-cafe';
+
+export type EventType = typeof FISHBOWL | typeof WORLD_CAFE;

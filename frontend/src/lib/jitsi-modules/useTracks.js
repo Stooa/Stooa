@@ -33,6 +33,12 @@ export const useTracks = () => {
     return document.getElementById(track.getParticipantId() + track.getType());
   };
 
+  /**
+   *
+   * @param {number} seat index of seat
+   * @param {htmlTrack} track HTML TRACK
+   * @returns {htmlElement | null} seatHtml
+   */
   const handleElementsMutedClass = (seat, track) => {
     const type = track.getType();
     const seatHtml = document.getElementById(`seat-${seat}`);
@@ -75,6 +81,13 @@ export const useTracks = () => {
     }
   };
 
+  /**
+   *
+   * @param {number} seat Seat index
+   * @param {htmlTrack} track HTML track
+   * @param {*} user jitsi user
+   * @returns void
+   */
   const _create = async (seat, track, user) => {
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);

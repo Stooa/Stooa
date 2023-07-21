@@ -12,6 +12,9 @@ import { useSeats } from '@/jitsi';
 import { dispatchEvent } from '@/lib/helpers';
 import { MODERATOR_LEFT, USER_KICKED } from '@/jitsi/Events';
 import { useJitsiStore } from '@/store';
+import { useWorldCafeStore } from '@/store/useWorldCafeStore';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
 export const useUser = (): UserRepository => {
   const { leave } = useSeats();
@@ -19,6 +22,8 @@ export const useUser = (): UserRepository => {
     userJoined: store.userJoined,
     userLeft: store.userLeft
   }));
+  const { setParticipant } = useWorldCafeStore();
+  const { eventType } = useEventType();
 
   const clearUser = (): void => {
     localStorage.removeItem('user');
@@ -75,13 +80,17 @@ export const useUser = (): UserRepository => {
 
   const handleUserJoin = (id: string, user: User): void => {
     userJoined(user);
+    setParticipant(id);
 
     console.log('[STOOA] Handle userRepository join', user, id);
   };
 
   const handleUserLeft = (id: string, user: User): void => {
     userLeft(user);
-    leave(id);
+    if (eventType === FISHBOWL) {
+      leave(id);
+    } else {
+    }
 
     if (user._role === 'moderator') {
       dispatchEvent(MODERATOR_LEFT);

@@ -32,7 +32,7 @@ export const useJitsi = () => {
   //TODO: Review this
   const joinWorldCafe = async user => {
     console.log('-----> [STOOA] Join world cafe');
-    sendJoinEventWorldCafe(user);
+    sendJoinEventWorldCafe(user); //JUST THE EVENT
 
     if (!localTracksCreated) {
       console.log('creating tracks -->');
@@ -43,6 +43,8 @@ export const useJitsi = () => {
         });
 
         localTracksCreatedEvent();
+
+        // EVENT TO ADD PARTICIPANT WITH TRACKS ETC
       });
     }
   };

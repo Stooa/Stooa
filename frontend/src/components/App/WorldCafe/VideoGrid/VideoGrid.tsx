@@ -7,38 +7,20 @@
  * file that was distributed with this source code.
  */
 
+import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import { StyledWorldCafeVideos } from './styles';
+import { Participant } from './Participant';
 
 const VideoGrid = () => {
+  const { participants } = useWorldCafeStore(store => ({
+    participants: store.participants
+  }));
   return (
     <div>
-      <h1>World café main app</h1>
-      <StyledWorldCafeVideos quantity={16}>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div className="host"></div>
+      <StyledWorldCafeVideos id="world-cafe-grid" quantity={16}>
+        {participants.map(userId => (
+          <Participant userId={userId} key={userId} />
+        ))}
       </StyledWorldCafeVideos>
     </div>
   );

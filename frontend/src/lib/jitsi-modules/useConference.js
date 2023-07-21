@@ -62,7 +62,7 @@ export const useConference = () => {
   const joinUser = (id, user) => {
     const userId = id ?? myUserId;
     const seat = join(userId, getParticipantNameById(userId));
-    console.log('-----> LLEGA HASTA AQUI <-----');
+    console.log('-----> joinUser <-----');
     createTracks(userId, seat, user);
 
     getConference().selectParticipants(getIds());
@@ -500,7 +500,7 @@ export const useConference = () => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
 
-      joinUser(undefined, user);
+      // joinUserWorldCafe(undefined, user);eventType
     }
   };
 

@@ -19,6 +19,7 @@ export interface WorldCafeState {
   isReady: boolean;
   isGuest: boolean;
   isModerator: boolean;
+  participants: string[];
   startWorldCafe: (status: WorldCafeStatus) => void;
   setWorldCafeReady: (isReady: boolean) => void;
   setStatus: (status: WorldCafeStatus) => void;
@@ -26,6 +27,7 @@ export interface WorldCafeState {
   setIsGuest: (isGuest: boolean) => void;
   setIsPrejoin: (isPrejoin: boolean) => void;
   setIsModerator: (isModerator: boolean) => void;
+  setParticipant: (participant: string) => void;
 }
 
 export const useWorldCafeStore = create<WorldCafeState>()(
@@ -37,6 +39,7 @@ export const useWorldCafeStore = create<WorldCafeState>()(
       isGuest: false,
       worldCafe: undefined,
       isModerator: false,
+      participants: [],
       startWorldCafe: (status: WorldCafeStatus) => {
         set({ status }, false, { type: 'startWorldCafe' });
       },
@@ -62,6 +65,18 @@ export const useWorldCafeStore = create<WorldCafeState>()(
       setIsModerator: (isModerator: boolean) => {
         if (get().isModerator !== isModerator) {
           set({ isModerator }, false, { type: 'setIsModerator' });
+        }
+      },
+      setParticipant: participant => {
+        const findParticipant = get().participants.findIndex(
+          arrParticipant => arrParticipant === participant
+        );
+
+        if (findParticipant === -1) {
+          const currentParticipants = get().participants;
+          set({ participants: [...currentParticipants, participant] }, false, {
+            type: 'setParticipant'
+          });
         }
       }
     }),

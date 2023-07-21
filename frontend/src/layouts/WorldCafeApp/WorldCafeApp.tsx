@@ -54,6 +54,7 @@ const WorldCafeApp = ({
     return <Error message={'Could not create WORLDCAFE event'} />;
 
   if (loading) return <Loader />;
+
   const isModerator = !!IsCreatorOfWorldCafe && !!IsCreatorOfWorldCafe.isCreatorOfWorldCafe;
   setIsModerator(isModerator);
 

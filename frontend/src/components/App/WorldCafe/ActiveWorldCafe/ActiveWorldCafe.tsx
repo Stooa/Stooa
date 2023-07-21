@@ -14,14 +14,19 @@ import { useUser } from '@/jitsi/useUser';
 import useEventListener from '@/hooks/useEventListener';
 import { CONFERENCE_START, CONNECTION_ESTABLISHED_FINISHED } from '@/jitsi/Events';
 import { useConference } from '@/jitsi';
-import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { useWorldCafeStore } from '@/store/useWorldCafeStore';
+
 export const ActiveWorldCafe = () => {
+  const { setParticipant } = useWorldCafeStore();
   const { joinWorldCafe } = useJitsi();
   const { getUser } = useUser();
   const { joinConference } = useConference();
   const [conferenceReady, setConferenceReady] = useState(false);
 
+  // TODO: FIRST TIME THAT HOST CONNECTS USE THIS SHIT `setStartMutedPolicy({audio: true, video: true})`
+
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
+    console.log('CONFERENCE_START', myUserId);
     setConferenceReady(true);
   });
 
@@ -29,9 +34,20 @@ export const ActiveWorldCafe = () => {
     joinConference();
   });
 
+  useEventListener('WORLDCAFE_JOIN_FOO', ({ detail: { user } }) => {
+    console.log('WORLDCAFE_JOIN_FOO', user);
+  });
+
   useEffect(() => {
+    const myUser = getUser();
+    // console.log('myUser', myUser.id);
+
     const handleJoin = async () => {
-      const foo = await joinWorldCafe(getUser());
+      await joinWorldCafe(myUser);
+
+      if (myUser.id) {
+        setParticipant(myUser.id);
+      }
     };
 
     if (conferenceReady) {
