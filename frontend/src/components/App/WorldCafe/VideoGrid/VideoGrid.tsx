@@ -12,13 +12,13 @@ import { StyledWorldCafeVideos } from './styles';
 import { Participant } from './Participant';
 
 const VideoGrid = () => {
-  const { participants } = useWorldCafeStore(store => ({
-    participants: store.participants
+  const { worldCafeParticipants } = useWorldCafeStore(store => ({
+    worldCafeParticipants: store.worldCafeParticipants
   }));
   return (
     <div>
       <StyledWorldCafeVideos id="world-cafe-grid" quantity={16}>
-        {participants.map(userId => (
+        {worldCafeParticipants.map(userId => (
           <Participant userId={userId} key={userId} />
         ))}
       </StyledWorldCafeVideos>

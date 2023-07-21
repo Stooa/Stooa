@@ -19,7 +19,7 @@ export interface WorldCafeState {
   isReady: boolean;
   isGuest: boolean;
   isModerator: boolean;
-  participants: string[];
+  worldCafeParticipants: string[];
   startWorldCafe: (status: WorldCafeStatus) => void;
   setWorldCafeReady: (isReady: boolean) => void;
   setStatus: (status: WorldCafeStatus) => void;
@@ -27,7 +27,8 @@ export interface WorldCafeState {
   setIsGuest: (isGuest: boolean) => void;
   setIsPrejoin: (isPrejoin: boolean) => void;
   setIsModerator: (isModerator: boolean) => void;
-  setParticipant: (participant: string) => void;
+  addWorldCafeParticipant: (participant: string) => void;
+  removeWorldCafeParticipant: (participant: string) => void;
 }
 
 export const useWorldCafeStore = create<WorldCafeState>()(
@@ -39,7 +40,7 @@ export const useWorldCafeStore = create<WorldCafeState>()(
       isGuest: false,
       worldCafe: undefined,
       isModerator: false,
-      participants: [],
+      worldCafeParticipants: [],
       startWorldCafe: (status: WorldCafeStatus) => {
         set({ status }, false, { type: 'startWorldCafe' });
       },
@@ -67,17 +68,26 @@ export const useWorldCafeStore = create<WorldCafeState>()(
           set({ isModerator }, false, { type: 'setIsModerator' });
         }
       },
-      setParticipant: participant => {
-        const findParticipant = get().participants.findIndex(
+      addWorldCafeParticipant: participant => {
+        const findParticipant = get().worldCafeParticipants.findIndex(
           arrParticipant => arrParticipant === participant
         );
 
         if (findParticipant === -1) {
-          const currentParticipants = get().participants;
-          set({ participants: [...currentParticipants, participant] }, false, {
+          const currentParticipants = get().worldCafeParticipants;
+          set({ worldCafeParticipants: [...currentParticipants, participant] }, false, {
             type: 'setParticipant'
           });
         }
+      },
+      removeWorldCafeParticipant: participant => {
+        const participantsWithoutRemoved = get().worldCafeParticipants.filter(
+          arrParticipant => arrParticipant !== participant
+        );
+
+        set({ worldCafeParticipants: participantsWithoutRemoved }, false, {
+          type: 'setParticipant'
+        });
       }
     }),
     {

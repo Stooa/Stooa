@@ -34,3 +34,4 @@ export const SCREEN_SHARE_CANCELED = 'screen-share:canceled';
 export const SCREEN_SHARE_PERMISSIONS_DENIED = 'screen-share:permissions-denied';
 export const RECORDING_START = 'recording:start';
 export const RECORDING_STOP = 'recording:stop';
+export const USER_LEFT_CONFERENCE = 'conference:left';

@@ -496,11 +496,9 @@ export const useConference = () => {
     }
   };
 
-  const sendJoinEventWorldCafe = user => {
+  const sendJoinEventWorldCafe = () => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'yes');
-
-      // joinUserWorldCafe(undefined, user);eventType
     }
   };
 

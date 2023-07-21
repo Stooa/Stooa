@@ -12,12 +12,19 @@ import VideoGrid from '../VideoGrid/VideoGrid';
 import { useJitsi } from '@/lib/useJitsi';
 import { useUser } from '@/jitsi/useUser';
 import useEventListener from '@/hooks/useEventListener';
-import { CONFERENCE_START, CONNECTION_ESTABLISHED_FINISHED } from '@/jitsi/Events';
+import {
+  CONFERENCE_START,
+  CONNECTION_ESTABLISHED_FINISHED,
+  USER_LEFT_CONFERENCE
+} from '@/jitsi/Events';
 import { useConference } from '@/jitsi';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 
 export const ActiveWorldCafe = () => {
-  const { setParticipant } = useWorldCafeStore();
+  const { addWorldCafeParticipant, removeWorldCafeParticipant } = useWorldCafeStore(store => ({
+    addWorldCafeParticipant: store.addWorldCafeParticipant,
+    removeWorldCafeParticipant: store.removeWorldCafeParticipant
+  }));
   const { joinWorldCafe } = useJitsi();
   const { getUser } = useUser();
   const { joinConference } = useConference();
@@ -34,8 +41,8 @@ export const ActiveWorldCafe = () => {
     joinConference();
   });
 
-  useEventListener('WORLDCAFE_JOIN_FOO', ({ detail: { user } }) => {
-    console.log('WORLDCAFE_JOIN_FOO', user);
+  useEventListener(USER_LEFT_CONFERENCE, ({ detail: { user } }) => {
+    removeWorldCafeParticipant(user._id);
   });
 
   useEffect(() => {
@@ -46,7 +53,7 @@ export const ActiveWorldCafe = () => {
       await joinWorldCafe(myUser);
 
       if (myUser.id) {
-        setParticipant(myUser.id);
+        addWorldCafeParticipant(myUser.id);
       }
     };
 
