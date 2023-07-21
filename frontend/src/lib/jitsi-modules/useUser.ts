@@ -14,7 +14,7 @@ import { MODERATOR_LEFT, USER_KICKED, USER_LEFT_CONFERENCE } from '@/jitsi/Event
 import { useJitsiStore } from '@/store';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import { useEventType } from '@/hooks/useEventType';
-import { FISHBOWL } from '@/types/event-types';
+import { FISHBOWL, WORLD_CAFE } from '@/types/event-types';
 
 export const useUser = (): UserRepository => {
   const { leave } = useSeats();
@@ -82,7 +82,9 @@ export const useUser = (): UserRepository => {
 
   const handleUserJoin = (id: string, user: User): void => {
     userJoined(user);
-    addWorldCafeParticipant(id);
+    if (eventType === WORLD_CAFE) {
+      addWorldCafeParticipant(id);
+    }
 
     console.log('[STOOA] Handle userRepository join', user, id);
   };

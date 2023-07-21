@@ -10,10 +10,7 @@
 import { COLOR_NEUTRO_300 } from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledWorldCafeVideos = styled.div<{ quantity: number }>`
-  /* display: grid;
-  grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fit, minmax(min(25rem, 100%), 1fr)); */
+const StyledWorldCafeVideos = styled.div<{ quantity?: number }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

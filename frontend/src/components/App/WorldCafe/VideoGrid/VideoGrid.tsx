@@ -17,7 +17,7 @@ const VideoGrid = () => {
   }));
   return (
     <div>
-      <StyledWorldCafeVideos id="world-cafe-grid" quantity={16}>
+      <StyledWorldCafeVideos id="world-cafe-grid">
         {worldCafeParticipants.map(userId => (
           <Participant userId={userId} key={userId} />
         ))}

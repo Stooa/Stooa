@@ -26,6 +26,7 @@ import {
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import { useTracks, useSeats, useUser } from '@/jitsi';
 import { useJitsiStore } from '@/store';
+import { useEventType } from '@/hooks/useEventType';
 
 export const useConference = () => {
   const {
@@ -58,11 +59,12 @@ export const useConference = () => {
   } = useTracks();
   const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
   const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
+  const { eventType } = useEventType();
 
   const joinUser = (id, user) => {
     const userId = id ?? myUserId;
     const seat = join(userId, getParticipantNameById(userId));
-    console.log('-----> joinUser <-----');
+
     createTracks(userId, seat, user);
 
     getConference().selectParticipants(getIds());
@@ -123,7 +125,7 @@ export const useConference = () => {
       return;
     }
 
-    if (property === 'joined') {
+    if (property === 'joined' && eventType === FISHBOWL) {
       const id = user.getId();
 
       if (newValue === 'yes') {
@@ -496,12 +498,6 @@ export const useConference = () => {
     }
   };
 
-  const sendJoinEventWorldCafe = () => {
-    if (isJoined) {
-      conference.setLocalParticipantProperty('joined', 'yes');
-    }
-  };
-
   const sendLeaveEvent = () => {
     if (isJoined) {
       conference.setLocalParticipantProperty('joined', 'no');
@@ -594,7 +590,6 @@ export const useConference = () => {
     kickParticipant,
     leave,
     sendJoinEvent,
-    sendJoinEventWorldCafe,
     sendLeaveEvent,
     sendTextMessage,
     startScreenShareEvent,

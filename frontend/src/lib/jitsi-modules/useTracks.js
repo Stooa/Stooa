@@ -12,11 +12,24 @@ import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
 import { useJitsiStore } from '@/store';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
 export const useTracks = () => {
   const { getSeat, getIds } = useSeats();
   const { shareTrackAdded, removeShareTrack } = useSharedTrack();
-  const { userId: myUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
+  const {
+    userId: myUserId,
+    getTracksByUser,
+    addUserTrack,
+    removeUserTrack
+  } = useJitsiStore(store => ({
+    userId: store.userId,
+    getTracksByUser: store.getTracksByUser,
+    addUserTrack: store.addUserTrack,
+    removeUserTrack: store.removeUserTrack
+  }));
+  const { eventType } = useEventType();
 
   const _playTrackHtml = trackHtml => {
     trackHtml
@@ -242,9 +255,10 @@ export const useTracks = () => {
 
     addUserTrack(id, track);
 
-    const seat = getSeat(id);
-
-    _create(seat, track);
+    if (eventType === FISHBOWL) {
+      const seat = getSeat(id);
+      _create(seat, track);
+    }
 
     dispatchEvent(TRACK_ADDED, { track });
   };
@@ -263,10 +277,13 @@ export const useTracks = () => {
     if (track.isLocal()) return;
 
     const id = track.getParticipantId();
-    const seat = getSeat(id);
+    let seat;
 
-    if (seat > 0) {
-      _remove(track);
+    if (eventType === FISHBOWL) {
+      seat = getSeat(id);
+      if (seat > 0) {
+        _remove(track);
+      }
     }
 
     removeUserTrack(id, track);
