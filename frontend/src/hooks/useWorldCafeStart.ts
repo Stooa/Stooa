@@ -34,7 +34,7 @@ export const useWorldCafeStart = () => {
 
   useEventListener(CONFERENCE_START_MUTED, () => {
     console.log('----> Muting audio');
-    muteAudioConference();
+    // muteAudioConference();
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
