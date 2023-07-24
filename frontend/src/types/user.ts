@@ -29,6 +29,7 @@ export interface User {
   _properties?: {
     features_jigasi?: boolean;
   };
+  getDisplayName?: () => string;
 }
 
 export interface UserRepository {

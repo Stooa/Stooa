@@ -54,14 +54,14 @@ export const useWorldCafeStart = () => {
     const myUser = getUser();
 
     const handleJoin = async () => {
-      if (myUser.id) {
-        addWorldCafeParticipant(myUser.id);
-      }
-
       try {
         await joinWorldCafe();
       } catch (error) {
         console.log('Not accepted devices', error);
+      }
+
+      if (myUser.id) {
+        addWorldCafeParticipant({ id: myUser.id, nickname: myUser.nickname ?? '' });
       }
     };
 

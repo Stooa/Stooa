@@ -30,7 +30,7 @@ export const useJitsi = () => {
 
   const joinWorldCafe = async () => {
     if (!localTracksCreated) {
-      await createLocalTracks().then(tracks => {
+      createLocalTracks().then(tracks => {
         tracks.forEach(async track => {
           addTrack(track);
         });

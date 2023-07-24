@@ -19,7 +19,7 @@ export interface WorldCafeState {
   isReady: boolean;
   isGuest: boolean;
   isModerator: boolean;
-  worldCafeParticipants: string[];
+  worldCafeParticipants: { id: string; nickname: string }[];
   startWorldCafe: (status: WorldCafeStatus) => void;
   setWorldCafeReady: (isReady: boolean) => void;
   setStatus: (status: WorldCafeStatus) => void;
@@ -27,8 +27,8 @@ export interface WorldCafeState {
   setIsGuest: (isGuest: boolean) => void;
   setIsPrejoin: (isPrejoin: boolean) => void;
   setIsModerator: (isModerator: boolean) => void;
-  addWorldCafeParticipant: (participant: string) => void;
-  removeWorldCafeParticipant: (participant: string) => void;
+  addWorldCafeParticipant: ({ id, nickname }: { id: string; nickname: string }) => void;
+  removeWorldCafeParticipant: (participantId: string) => void;
 }
 
 export const useWorldCafeStore = create<WorldCafeState>()(
@@ -70,7 +70,7 @@ export const useWorldCafeStore = create<WorldCafeState>()(
       },
       addWorldCafeParticipant: participant => {
         const findParticipant = get().worldCafeParticipants.findIndex(
-          arrParticipant => arrParticipant === participant
+          arrParticipant => arrParticipant.id === participant.id
         );
 
         if (findParticipant === -1) {
@@ -80,9 +80,9 @@ export const useWorldCafeStore = create<WorldCafeState>()(
           });
         }
       },
-      removeWorldCafeParticipant: participant => {
+      removeWorldCafeParticipant: participantId => {
         const participantsWithoutRemoved = get().worldCafeParticipants.filter(
-          arrParticipant => arrParticipant !== participant
+          arrParticipant => arrParticipant.id !== participantId
         );
 
         set({ worldCafeParticipants: participantsWithoutRemoved }, false, {
