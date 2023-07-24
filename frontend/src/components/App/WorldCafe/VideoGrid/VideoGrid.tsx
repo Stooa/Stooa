@@ -19,8 +19,6 @@ const VideoGrid = () => {
   const getMaxWidth = () => {
     let maxWidth = '100%';
 
-    console.log(worldCafeParticipants.length);
-
     if (worldCafeParticipants.length > 6) {
       maxWidth = '25%';
     } else {
