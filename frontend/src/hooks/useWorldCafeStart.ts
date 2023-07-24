@@ -10,6 +10,7 @@
 import {
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
+  PERMISSION_CHANGED,
   USER_LEFT_CONFERENCE
 } from '@/jitsi/Events';
 import useEventListener from './useEventListener';
@@ -43,14 +44,24 @@ export const useWorldCafeStart = () => {
     removeWorldCafeParticipant(user._id);
   });
 
+  useEventListener(PERMISSION_CHANGED, permissions => {
+    if (permissions.detail.audio === true || permissions.detail.video === true) {
+      joinWorldCafe();
+    }
+  });
+
   useEffect(() => {
     const myUser = getUser();
 
     const handleJoin = async () => {
-      await joinWorldCafe(myUser);
-
       if (myUser.id) {
         addWorldCafeParticipant(myUser.id);
+      }
+
+      try {
+        await joinWorldCafe();
+      } catch (error) {
+        console.log('Not accepted devices', error);
       }
     };
 

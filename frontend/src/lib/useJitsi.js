@@ -28,11 +28,10 @@ export const useJitsi = () => {
   const { hasFreeSeat, create } = useSeats();
   const { createLocalTracks } = useLocalTracks();
 
-  const joinWorldCafe = async user => {
+  const joinWorldCafe = async () => {
     if (!localTracksCreated) {
       await createLocalTracks().then(tracks => {
         tracks.forEach(async track => {
-          await syncLocalStorageTrack(track, user);
           addTrack(track);
         });
 
