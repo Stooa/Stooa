@@ -10,11 +10,14 @@
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
 import { StyledWorldCafeVideos } from './styles';
 import { Participant } from './Participant';
+import { useJitsiStore } from '@/store';
 
 const VideoGrid = () => {
   const { worldCafeParticipants } = useWorldCafeStore(store => ({
     worldCafeParticipants: store.worldCafeParticipants
   }));
+
+  const { tracks } = useJitsiStore();
 
   const getMaxWidth = () => {
     let maxWidth = '100%';
@@ -64,7 +67,7 @@ const VideoGrid = () => {
         maxHeight={getMaxHeight()}
       >
         {worldCafeParticipants.map(userId => (
-          <Participant userId={userId} key={userId} />
+          <Participant userId={userId} key={userId} tracks={tracks[userId]} />
         ))}
       </StyledWorldCafeVideos>
     </div>

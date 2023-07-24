@@ -28,8 +28,7 @@ const Header = () => {
 
   const handleStartWorldCafe = async () => {
     try {
-      const foo = await introduceWorldCafe(slug);
-      console.log(foo);
+      await introduceWorldCafe(slug);
     } catch (error) {
       console.error(`[STOOA] Error introduction: ${error}`);
     }

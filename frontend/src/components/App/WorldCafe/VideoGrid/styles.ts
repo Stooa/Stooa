@@ -7,7 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400 } from '@/ui/settings';
+import { BODY_XS } from '@/ui/Texts';
+import { TITLE_LG } from '@/ui/Titles';
+import { space } from '@/ui/helpers';
+import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400, COLOR_NEUTRO_700 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledWorldCafeVideos = styled.div<{ maxWidth: string; maxHeight: string }>`
@@ -49,6 +52,8 @@ const StyledParticipantWorldCafe = styled.div`
 const StyledVideoElement = styled.video`
   height: 100%;
   width: 100%;
+  object-fit: cover;
+  z-index: 10;
 
   &.is-local {
     transform: scale(-1, 1);
@@ -56,21 +61,34 @@ const StyledVideoElement = styled.video`
 `;
 
 const StyledParticipantName = styled.div`
+  ${BODY_XS};
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 0.5rem 1rem;
+  padding: ${space(0.5)} ${space()};
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
 
   color: white;
 
-  z-index: 10;
+  z-index: 20;
+`;
+
+const StyledPartcipantPlaceholder = styled.div`
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 0;
+
+  ${TITLE_LG};
+  color: ${COLOR_NEUTRO_700};
 `;
 
 export {
   StyledWorldCafeVideos,
   StyledParticipantWorldCafe,
   StyledVideoElement,
-  StyledParticipantName
+  StyledParticipantName,
+  StyledPartcipantPlaceholder
 };
