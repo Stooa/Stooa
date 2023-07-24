@@ -8,7 +8,6 @@
  */
 
 import {
-  CONFERENCE_IS_LOCKABLE,
   CONFERENCE_START,
   CONFERENCE_START_MUTED,
   CONNECTION_ESTABLISHED_FINISHED,
@@ -33,12 +32,12 @@ export const useWorldCafeStart = () => {
   const [conferenceReady, setConferenceReady] = useState(false);
 
   useEventListener(CONFERENCE_START_MUTED, () => {
-    console.log('----> Muting audio');
     muteAudioConference();
   });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setConferenceReady(true);
+    console.log('[Stooa] Conference started', myUserId);
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {

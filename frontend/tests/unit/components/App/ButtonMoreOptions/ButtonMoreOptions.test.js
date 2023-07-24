@@ -14,6 +14,8 @@ import { useDevices } from '@/contexts/DevicesContext';
 import ButtonMoreOptions from '@/components/App/ButtonMoreOptions';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
 jest.mock('@/contexts/StooaManager');
 jest.mock('@/contexts/ModalsContext');
@@ -22,6 +24,11 @@ jest.mock('@/hooks/useVideoRecorder');
 jest.mock('@/hooks/useNavigatorType');
 jest.mock('@/contexts/AppContext');
 jest.mock('@/lib/helpers');
+jest.mock('@/hooks/useEventType');
+
+useEventType.mockReturnValue({
+  eventType: FISHBOWL
+});
 
 const devices = {
   audioInputDevices: [

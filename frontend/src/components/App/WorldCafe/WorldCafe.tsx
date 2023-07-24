@@ -20,7 +20,7 @@ import Loader from '@/components/Web/Loader';
 import { ActiveWorldCafe } from './ActiveWorldCafe';
 
 const WorldCafe = () => {
-  const { status, isModerator, isPrejoin, isReady } = useWorldCafeStore();
+  const { status, isModerator, isPrejoin } = useWorldCafeStore();
   const [initConnection, setInitConnection] = useState(false);
   const { initialInteraction, initializeConnection } = useJitsi();
   const { wid } = useRouter().query;
