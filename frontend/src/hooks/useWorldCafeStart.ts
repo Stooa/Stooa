@@ -9,7 +9,6 @@
 
 import {
   CONFERENCE_START,
-  CONFERENCE_START_MUTED,
   CONNECTION_ESTABLISHED_FINISHED,
   USER_LEFT_CONFERENCE
 } from '@/jitsi/Events';
@@ -27,13 +26,9 @@ export const useWorldCafeStart = () => {
   }));
   const { joinWorldCafe } = useJitsi();
   const { getUser } = useUser();
-  const { joinConference, muteAudioConference } = useConference();
+  const { joinConference } = useConference();
 
   const [conferenceReady, setConferenceReady] = useState(false);
-
-  useEventListener(CONFERENCE_START_MUTED, () => {
-    muteAudioConference();
-  });
 
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setConferenceReady(true);
