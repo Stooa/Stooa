@@ -7,23 +7,30 @@
  * file that was distributed with this source code.
  */
 
-import { COLOR_NEUTRO_300 } from '@/ui/settings';
+import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400 } from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledWorldCafeVideos = styled.div<{ quantity?: number }>`
+const StyledWorldCafeVideos = styled.div<{ maxWidth: string; maxHeight: string }>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   height: 100%;
   width: 100%;
+  height: 80vh;
+  overflow-y: auto;
+  padding: 1rem;
+  border-radius: ${BORDER_RADIUS};
+
+  background-color: ${COLOR_NEUTRO_300};
 
   & > div {
-    flex: 1 1 max(300px, 20%);
-    background-color: ${COLOR_NEUTRO_300};
+    flex: 0 1 ${({ maxWidth }) => `calc(${maxWidth} - 1rem)`};
+    height: 100%;
+    max-height: ${({ maxHeight }) => maxHeight};
+    background-color: ${COLOR_NEUTRO_400};
     border-radius: 0.5rem;
-
-    max-height: 80vh;
 
     &.host {
       background-color: yellow;
@@ -40,6 +47,7 @@ const StyledParticipantWorldCafe = styled.div`
 `;
 
 const StyledVideoElement = styled.video`
+  height: 100%;
   width: 100%;
 
   &.is-local {
