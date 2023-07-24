@@ -10,7 +10,11 @@
 import { useJitsiStore } from '@/store';
 import React from 'react';
 import { VideoTrackElement } from './VideoTrackElement';
-import { StyledParticipantName, StyledParticipantWorldCafe } from './styles';
+import {
+  StyledPartcipantPlaceholder,
+  StyledParticipantName,
+  StyledParticipantWorldCafe
+} from './styles';
 import { AudioTrackElement } from './AudioTrackElement';
 import { useUser } from '@/jitsi/useUser';
 
@@ -30,6 +34,7 @@ export const Participant = ({ userId }: Props) => {
   return (
     <StyledParticipantWorldCafe data-userid={userId} id={userId}>
       <StyledParticipantName>{participantName}</StyledParticipantName>
+      <StyledPartcipantPlaceholder>JS</StyledPartcipantPlaceholder>
       {tracks?.map(track => {
         if (track.getType() === 'video') {
           return <VideoTrackElement videoTrack={track} key={track.getId()} />;
