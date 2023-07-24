@@ -58,10 +58,10 @@ const MyApp = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      console.log = function () {
-        // Not empty function
-      };
+    // if (process.env.NODE_ENV === 'production') {
+    //   console.log = function () {
+    //     // Not empty function
+    //   };
 
       pushPageViewDataLayer({ url: window.location.pathname });
       Router.events.on('routeChangeComplete', handleRouteChange);
