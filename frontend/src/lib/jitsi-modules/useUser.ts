@@ -83,7 +83,7 @@ export const useUser = (): UserRepository => {
   const handleUserJoin = (id: string, user: User): void => {
     userJoined(user);
 
-    if (eventType === WORLD_CAFE) {
+    if (eventType === WORLD_CAFE && user) {
       addWorldCafeParticipant({ id, nickname: user.getDisplayName() ?? '' });
     }
 

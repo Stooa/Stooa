@@ -11,11 +11,14 @@ import { useJitsiStore } from '@/store';
 import React from 'react';
 import { VideoTrackElement } from './VideoTrackElement';
 import {
+  StyledMutedWrapper,
   StyledPartcipantPlaceholder,
   StyledParticipantName,
   StyledParticipantWorldCafe
 } from './styles';
 import { AudioTrackElement } from './AudioTrackElement';
+import MicMuted from '@/ui/svg/mic-muted.svg';
+import VideoMuted from '@/ui/svg/video-muted.svg';
 
 interface Props {
   participant: { id: string; nickname: string };
@@ -30,11 +33,29 @@ export const Participant = ({ participant }: Props) => {
     .join('');
 
   const tracks = getTracksByUser(participant.id);
+  const isVideoMuted = tracks?.some(track => track.getType() === 'video' && track.isMuted());
+  const isAudioMuted = tracks?.some(track => track.getType() === 'audio' && track.isMuted());
 
   return (
-    <StyledParticipantWorldCafe data-userid={participant.id} id={participant.id}>
+    <StyledParticipantWorldCafe
+      data-userid={participant.id}
+      id={participant.id}
+      isVideoMuted={isVideoMuted ?? false}
+    >
       {participant.nickname && (
-        <StyledParticipantName>{participant.nickname}</StyledParticipantName>
+        <StyledParticipantName>
+          {isAudioMuted && (
+            <StyledMutedWrapper>
+              <MicMuted />
+            </StyledMutedWrapper>
+          )}
+          {isVideoMuted && (
+            <StyledMutedWrapper>
+              <VideoMuted />
+            </StyledMutedWrapper>
+          )}
+          {participant.nickname}
+        </StyledParticipantName>
       )}
       <StyledPartcipantPlaceholder>{nameInitials}</StyledPartcipantPlaceholder>
       {tracks?.map(track => {
