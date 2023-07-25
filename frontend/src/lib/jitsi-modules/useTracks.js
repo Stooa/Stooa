@@ -70,14 +70,20 @@ export const useTracks = () => {
     return null;
   };
 
+  const syncSeatLocalStorageTrack = async (track, user) => {
+    const seat = getSeat();
+
+    if (seat > 0) {
+      syncLocalStorageTrack(track, user);
+    }
+  };
+
   const syncLocalStorageTrack = async (track, user) => {
     if (!user) {
       user = JSON.parse(localStorage.getItem('user'));
     }
 
-    const seat = getSeat();
-
-    if (user && seat > 0 && track.isLocal()) {
+    if (user && track.isLocal()) {
       const trackType = track.getType();
       const userIsMuted = trackType === 'video' ? user.videoMuted : user.audioMuted;
 
@@ -113,7 +119,7 @@ export const useTracks = () => {
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
 
-    await syncLocalStorageTrack(track, user);
+    await syncSeatLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
@@ -292,13 +298,17 @@ export const useTracks = () => {
   };
 
   const handleTrackMuteChanged = async track => {
-    await syncLocalStorageTrack(track);
+    if (eventType === FISHBOWL) {
+      await syncSeatLocalStorageTrack(track);
 
-    if (track.isLocal()) return;
+      if (track.isLocal()) return;
 
-    const seat = getSeat(track.getParticipantId());
+      const seat = getSeat(track.getParticipantId());
 
-    handleElementsMutedClass(seat, track);
+      handleElementsMutedClass(seat, track);
+    } else {
+      await syncLocalStorageTrack(track);
+    }
 
     console.log('[STOOA] Handle track mute changed', track);
   };
@@ -391,6 +401,7 @@ export const useTracks = () => {
     toggleAudioTrack,
     toggleVideoTrack,
     syncLocalStorageTrack,
+    syncSeatLocalStorageTrack,
     getAudioTracks
   };
 };

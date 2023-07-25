@@ -10,7 +10,14 @@
 import { BODY_XS } from '@/ui/Texts';
 import { TITLE_LG } from '@/ui/Titles';
 import { space } from '@/ui/helpers';
-import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400, COLOR_NEUTRO_700 } from '@/ui/settings';
+import {
+  BORDER_RADIUS,
+  COLOR_NEUTRO_300,
+  COLOR_NEUTRO_400,
+  COLOR_NEUTRO_700,
+  COLOR_RED_100,
+  COLOR_RED_500
+} from '@/ui/settings';
 import styled from 'styled-components';
 
 const StyledWorldCafeVideos = styled.div<{ maxWidth: string; maxHeight: string }>`
@@ -42,11 +49,21 @@ const StyledWorldCafeVideos = styled.div<{ maxWidth: string; maxHeight: string }
   }
 `;
 
-const StyledParticipantWorldCafe = styled.div`
+const StyledParticipantWorldCafe = styled.div<{ isVideoMuted: boolean }>`
   overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
+
+  ${({ isVideoMuted }) =>
+    !isVideoMuted &&
+    `
+    order: -1;
+  `}
+
+  & :has(.is-local) {
+    order: -2;
+  }
 `;
 
 const StyledVideoElement = styled.video`
@@ -61,10 +78,15 @@ const StyledVideoElement = styled.video`
 `;
 
 const StyledParticipantName = styled.div`
+  display: flex;
+  gap: ${space(0.5)};
+  align-items: center;
+
   ${BODY_XS};
   position: absolute;
   bottom: 0;
   left: 0;
+
   padding: ${space(0.5)} ${space()};
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
@@ -72,6 +94,21 @@ const StyledParticipantName = styled.div`
   color: white;
 
   z-index: 20;
+`;
+
+const StyledMutedWrapper = styled.div`
+  position: relative;
+  width: 22px;
+  height: 22px;
+  background-color: ${COLOR_RED_100};
+  border: 1px solid ${COLOR_RED_500};
+  border-radius: 50%;
+
+  & > svg {
+    z-index: 1;
+    width: 96%;
+    height: 96%;
+  }
 `;
 
 const StyledPartcipantPlaceholder = styled.div`
@@ -90,5 +127,6 @@ export {
   StyledParticipantWorldCafe,
   StyledVideoElement,
   StyledParticipantName,
-  StyledPartcipantPlaceholder
+  StyledPartcipantPlaceholder,
+  StyledMutedWrapper
 };

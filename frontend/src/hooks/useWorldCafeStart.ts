@@ -25,7 +25,7 @@ export const useWorldCafeStart = () => {
     addWorldCafeParticipant: store.addWorldCafeParticipant,
     removeWorldCafeParticipant: store.removeWorldCafeParticipant
   }));
-  const { joinWorldCafe } = useJitsi();
+  const { addLocalTracksToJitsi } = useJitsi();
   const { getUser } = useUser();
   const { joinConference } = useConference();
 
@@ -46,7 +46,7 @@ export const useWorldCafeStart = () => {
 
   useEventListener(PERMISSION_CHANGED, permissions => {
     if (permissions.detail.audio === true || permissions.detail.video === true) {
-      joinWorldCafe();
+      addLocalTracksToJitsi();
     }
   });
 
@@ -55,7 +55,7 @@ export const useWorldCafeStart = () => {
 
     const handleJoin = async () => {
       try {
-        await joinWorldCafe();
+        await addLocalTracksToJitsi();
       } catch (error) {
         console.log('Not accepted devices', error);
       }

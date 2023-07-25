@@ -24,14 +24,21 @@ export const useJitsi = () => {
     getLocalParticipant,
     kickParticipant: conferenceKickParticipant
   } = useConference();
-  const { syncLocalStorageTrack, disposeTracks, playTracks, isParticipantMuted } = useTracks();
+  const {
+    syncSeatLocalStorageTrack,
+    syncLocalStorageTrack,
+    disposeTracks,
+    playTracks,
+    isParticipantMuted
+  } = useTracks();
   const { hasFreeSeat, create } = useSeats();
   const { createLocalTracks } = useLocalTracks();
 
-  const joinWorldCafe = async () => {
+  const addLocalTracksToJitsi = async () => {
     if (!localTracksCreated) {
       createLocalTracks().then(tracks => {
         tracks.forEach(async track => {
+          await syncLocalStorageTrack(track);
           addTrack(track);
         });
 
@@ -48,7 +55,7 @@ export const useJitsi = () => {
     if (!localTracksCreated) {
       await createLocalTracks().then(tracks => {
         tracks.forEach(async track => {
-          await syncLocalStorageTrack(track, user);
+          await syncSeatLocalStorageTrack(track, user);
           addTrack(track);
         });
 
@@ -150,7 +157,7 @@ export const useJitsi = () => {
     initializeJitsi,
     initializeConnection,
     join,
-    joinWorldCafe,
+    addLocalTracksToJitsi,
     leave,
     unload,
     kickParticipant,

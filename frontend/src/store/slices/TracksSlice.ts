@@ -9,11 +9,12 @@
 
 import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 import { DevtoolsStateCreator, JitsiStore } from '@/store';
+import JitsiRemoteTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiRemoteTrack';
 
 export interface TracksSlice {
   tracks: JitsiTrack[][];
   localTracksCreated: boolean;
-  getTracksByUser: (id: string) => JitsiTrack[] | undefined;
+  getTracksByUser: (id: string) => JitsiRemoteTrack[] | undefined;
   addUserTrack: (id: string, track: JitsiTrack) => void;
   removeUserTrack: (id: string, track: JitsiTrack) => void;
   localTracksCreatedEvent: () => void;
