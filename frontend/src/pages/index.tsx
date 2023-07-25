@@ -205,7 +205,7 @@ const Home = () => {
             {process.env.NEXT_PUBLIC_WORLD_CAFE === 'true' && (
               <RedirectLink href={ROUTE_WORLD_CAFE_CREATE} passHref>
                 <Button size="large" as="a" variant="secondary" className="animate-item world-cafe">
-                  <span>WORLD CAFÉ</span>
+                  <span>{t('scheduleWorldCafe')}</span>
                 </Button>
               </RedirectLink>
             )}
