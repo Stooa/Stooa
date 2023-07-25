@@ -85,7 +85,7 @@ export const useUser = (): UserRepository => {
 
     if (eventType === WORLD_CAFE && user) {
       // Todo Fix this temporary solution
-      setTimeout(function() {
+      setTimeout(function () {
         addWorldCafeParticipant({ id });
       }, 1000);
     }
