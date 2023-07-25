@@ -589,6 +589,7 @@ export const useConference = () => {
     getParticipantById,
     getParticipantCount,
     getParticipants,
+    getParticipantNameById,
     initializeJitsi,
     initializeConnection,
     lockConference,

@@ -61,7 +61,7 @@ export const useWorldCafeStart = () => {
       }
 
       if (myUser.id) {
-        addWorldCafeParticipant({ id: myUser.id, nickname: myUser.nickname ?? '' });
+        addWorldCafeParticipant({ id: myUser.id });
       }
     };
 

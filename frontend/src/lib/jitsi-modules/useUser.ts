@@ -83,9 +83,11 @@ export const useUser = (): UserRepository => {
   const handleUserJoin = (id: string, user: User): void => {
     userJoined(user);
 
-    // TODO: Check nickname
     if (eventType === WORLD_CAFE && user) {
-      addWorldCafeParticipant({ id, nickname: '' });
+      // Todo Fix this temporary solution
+      setTimeout(function () {
+        addWorldCafeParticipant({ id });
+      }, 1000);
     }
 
     console.log('[STOOA] Handle userRepository join', user, id);

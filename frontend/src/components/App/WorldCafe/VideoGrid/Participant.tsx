@@ -21,27 +21,37 @@ import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
 import useEventListener from '@/hooks/useEventListener';
 import { CONFERENCE_IS_MODERATOR } from '@/jitsi/Events';
+import { useConference } from '@/jitsi/useConference';
+import { useDevices } from '@/contexts/DevicesContext';
 
 interface Props {
-  participant: { id: string; nickname: string };
+  participant: { id: string };
   maxHeight: string;
   maxWidth: string;
 }
 
 export const Participant = ({ participant, maxHeight, maxWidth }: Props) => {
   const { getTracksByUser } = useJitsiStore();
+  const { getParticipantNameById } = useConference();
+  const { permissions } = useDevices();
   const isModerator = useRef(false);
 
-  const nameInitials = participant.nickname
-    .split(' ')
-    .slice(0, 2)
-    .map(string => string[0])
-    .join('')
-    .toUpperCase();
+  const nickName = getParticipantNameById(participant.id);
+
+  const nameInitials = nickName
+    ? nickName
+        .split(' ')
+        .slice(0, 2)
+        .map(string => string[0])
+        .join('')
+        .toUpperCase()
+    : '';
 
   const tracks = getTracksByUser(participant.id);
-  const isVideoMuted = tracks?.some(track => track.getType() === 'video' && track.isMuted());
-  const isAudioMuted = tracks?.some(track => track.getType() === 'audio' && track.isMuted());
+  const isVideoMuted =
+    tracks?.some(track => track.getType() === 'video' && track.isMuted()) || !permissions.video;
+  const isAudioMuted =
+    tracks?.some(track => track.getType() === 'audio' && track.isMuted()) || !permissions.audio;
 
   useEventListener(CONFERENCE_IS_MODERATOR, () => {
     isModerator.current = true;
@@ -55,7 +65,7 @@ export const Participant = ({ participant, maxHeight, maxWidth }: Props) => {
       id={participant.id}
       isVideoMuted={isVideoMuted ?? false}
     >
-      {participant.nickname && (
+      {nickName && (
         <StyledParticipantName>
           {isAudioMuted && (
             <StyledMutedWrapper>
@@ -67,7 +77,7 @@ export const Participant = ({ participant, maxHeight, maxWidth }: Props) => {
               <VideoMuted />
             </StyledMutedWrapper>
           )}
-          {participant.nickname} {isModerator.current && '(Host)'}
+          {nickName} {isModerator.current && '(Host)'}
         </StyledParticipantName>
       )}
       <StyledPartcipantPlaceholder>{nameInitials}</StyledPartcipantPlaceholder>

@@ -19,7 +19,7 @@ export interface WorldCafeState {
   isReady: boolean;
   isGuest: boolean;
   isModerator: boolean;
-  worldCafeParticipants: { id: string; nickname: string }[];
+  worldCafeParticipants: { id: string }[];
   startWorldCafe: (status: WorldCafeStatus) => void;
   setWorldCafeReady: (isReady: boolean) => void;
   setStatus: (status: WorldCafeStatus) => void;
@@ -27,7 +27,7 @@ export interface WorldCafeState {
   setIsGuest: (isGuest: boolean) => void;
   setIsPrejoin: (isPrejoin: boolean) => void;
   setIsModerator: (isModerator: boolean) => void;
-  addWorldCafeParticipant: ({ id, nickname }: { id: string; nickname: string }) => void;
+  addWorldCafeParticipant: ({ id }: { id: string }) => void;
   removeWorldCafeParticipant: (participantId: string) => void;
 }
 
