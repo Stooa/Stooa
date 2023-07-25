@@ -56,15 +56,19 @@ const VideoGrid = () => {
     return maxHeight;
   };
 
+  const maxWidth = getMaxWidth();
+  const maxHeight = getMaxHeight();
+
   return (
     <div>
-      <StyledWorldCafeVideos
-        id="world-cafe-grid"
-        maxWidth={getMaxWidth()}
-        maxHeight={getMaxHeight()}
-      >
+      <StyledWorldCafeVideos id="world-cafe-grid">
         {worldCafeParticipants.map(participant => (
-          <Participant participant={participant} key={participant.id} />
+          <Participant
+            maxHeight={maxHeight}
+            maxWidth={maxWidth}
+            participant={participant}
+            key={participant.id}
+          />
         ))}
       </StyledWorldCafeVideos>
     </div>

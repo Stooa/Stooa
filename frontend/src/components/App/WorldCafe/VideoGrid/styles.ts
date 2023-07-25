@@ -12,7 +12,7 @@ import { TITLE_LG } from '@/ui/Titles';
 import { space } from '@/ui/helpers';
 import {
   BORDER_RADIUS,
-  COLOR_NEUTRO_300,
+  COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_700,
   COLOR_RED_100,
@@ -20,7 +20,7 @@ import {
 } from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledWorldCafeVideos = styled.div<{ maxWidth: string; maxHeight: string }>`
+const StyledWorldCafeVideos = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -33,27 +33,29 @@ const StyledWorldCafeVideos = styled.div<{ maxWidth: string; maxHeight: string }
   padding: 1rem;
   border-radius: ${BORDER_RADIUS};
 
-  background-color: ${COLOR_NEUTRO_300};
-
-  & > div {
-    flex: 0 1 ${({ maxWidth }) => `calc(${maxWidth} - 1rem)`};
-    height: 100%;
-    max-height: ${({ maxHeight }) => maxHeight};
-    background-color: ${COLOR_NEUTRO_400};
-    border-radius: 0.5rem;
-
-    &.host {
-      background-color: yellow;
-      order: -1;
-    }
-  }
+  background-color: ${COLOR_NEUTRO_100};
 `;
 
-const StyledParticipantWorldCafe = styled.div<{ isVideoMuted: boolean }>`
+const StyledParticipantWorldCafe = styled.div<{
+  isVideoMuted: boolean;
+  maxWidth: string;
+  maxHeight: string;
+}>`
   overflow: hidden;
   position: relative;
   display: flex;
   align-items: center;
+
+  flex: 0 1 ${({ maxWidth }) => `calc(${maxWidth} - 1rem)`};
+  height: 100%;
+  max-height: ${({ maxHeight }) => maxHeight};
+  background-color: ${COLOR_NEUTRO_400};
+  border-radius: ${BORDER_RADIUS};
+
+  &.host {
+    background-color: yellow;
+    order: -1;
+  }
 
   ${({ isVideoMuted }) =>
     !isVideoMuted &&
@@ -89,7 +91,6 @@ const StyledParticipantName = styled.div`
 
   padding: ${space(0.5)} ${space()};
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
 
   color: white;
 

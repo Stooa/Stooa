@@ -23,9 +23,11 @@ import { useConference } from '@/jitsi';
 
 interface Props {
   participant: { id: string };
+  maxHeight: string;
+  maxWidth: string;
 }
 
-export const Participant = ({ participant }: Props) => {
+export const Participant = ({ participant, maxHeight, maxWidth }: Props) => {
   const { getTracksByUser } = useJitsiStore();
   const { getParticipantNameById } = useConference();
 
@@ -44,6 +46,8 @@ export const Participant = ({ participant }: Props) => {
 
   return (
     <StyledParticipantWorldCafe
+      maxHeight={maxHeight}
+      maxWidth={maxWidth}
       data-userid={participant.id}
       id={participant.id}
       isVideoMuted={isVideoMuted ?? false}
