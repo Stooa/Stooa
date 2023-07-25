@@ -22,9 +22,11 @@ import VideoMuted from '@/ui/svg/video-muted.svg';
 
 interface Props {
   participant: { id: string; nickname: string };
+  maxHeight: string;
+  maxWidth: string;
 }
 
-export const Participant = ({ participant }: Props) => {
+export const Participant = ({ participant, maxHeight, maxWidth }: Props) => {
   const { getTracksByUser } = useJitsiStore();
 
   const nameInitials = participant.nickname
@@ -38,6 +40,8 @@ export const Participant = ({ participant }: Props) => {
 
   return (
     <StyledParticipantWorldCafe
+      maxHeight={maxHeight}
+      maxWidth={maxWidth}
       data-userid={participant.id}
       id={participant.id}
       isVideoMuted={isVideoMuted ?? false}
