@@ -50,7 +50,7 @@ const VideoGrid = () => {
     } else if (worldCafeParticipants.length > 1 && worldCafeParticipants.length <= 8) {
       maxHeight = '50%';
     } else {
-      maxHeight = '25%';
+      maxHeight = '33%';
     }
 
     return maxHeight;

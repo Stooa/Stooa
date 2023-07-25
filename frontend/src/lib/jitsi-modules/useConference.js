@@ -22,7 +22,8 @@ import {
   RECORDING_STOP,
   TRANSCRIPTION_MESSAGE_RECEIVED,
   TRANSCRIPTION_TRANSCRIBER_JOINED,
-  CONFERENCE_START_MUTED
+  CONFERENCE_START_MUTED,
+  CONFERENCE_IS_MODERATOR
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import { useTracks, useSeats, useUser } from '@/jitsi';
@@ -197,13 +198,15 @@ export const useConference = () => {
     updateDominantSpeaker(id);
   };
 
-  const _handleUserRoleChanged = () => {
+  const _handleUserRoleChanged = (id, _role) => {
+    console.log('MY THINGS', id, _role);
     const role = getConference().getRole();
     console.log('[STOOA] User role changed', getConference().getRole());
 
     if (role === 'moderator') {
       dispatchEvent(CONFERENCE_IS_LOCKABLE);
       dispatchEvent(CONFERENCE_START_MUTED);
+      dispatchEvent(CONFERENCE_IS_MODERATOR);
     }
   };
 
