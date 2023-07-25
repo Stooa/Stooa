@@ -85,7 +85,7 @@ export const useUser = (): UserRepository => {
 
     // TODO: Check nickname
     if (eventType === WORLD_CAFE && user) {
-      addWorldCafeParticipant({ id, nickname: '' });
+      addWorldCafeParticipant({ id });
     }
 
     console.log('[STOOA] Handle userRepository join', user, id);

@@ -19,18 +19,24 @@ import {
 import { AudioTrackElement } from './AudioTrackElement';
 import MicMuted from '@/ui/svg/mic-muted.svg';
 import VideoMuted from '@/ui/svg/video-muted.svg';
+import { useConference } from '@/jitsi';
 
 interface Props {
-  participant: { id: string; nickname: string };
+  participant: { id: string };
 }
 
 export const Participant = ({ participant }: Props) => {
   const { getTracksByUser } = useJitsiStore();
+  const { getParticipantNameById } = useConference();
 
-  const nameInitials = participant.nickname
-    .split(' ')
-    .map(string => string[0])
-    .join('');
+  const nickName = getParticipantNameById(participant.id);
+
+  const nameInitials = nickName
+    ? nickName
+        .split(' ')
+        .map(string => string[0])
+        .join('')
+    : '';
 
   const tracks = getTracksByUser(participant.id);
   const isVideoMuted = tracks?.some(track => track.getType() === 'video' && track.isMuted());
@@ -42,7 +48,7 @@ export const Participant = ({ participant }: Props) => {
       id={participant.id}
       isVideoMuted={isVideoMuted ?? false}
     >
-      {participant.nickname && (
+      {nickName && (
         <StyledParticipantName>
           {isAudioMuted && (
             <StyledMutedWrapper>
@@ -54,7 +60,7 @@ export const Participant = ({ participant }: Props) => {
               <VideoMuted />
             </StyledMutedWrapper>
           )}
-          {participant.nickname}
+          {nickName}
         </StyledParticipantName>
       )}
       <StyledPartcipantPlaceholder>{nameInitials}</StyledPartcipantPlaceholder>
