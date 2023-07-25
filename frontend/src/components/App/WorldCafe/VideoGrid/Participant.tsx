@@ -33,8 +33,8 @@ export const Participant = ({ participant }: Props) => {
     .join('');
 
   const tracks = getTracksByUser(participant.id);
-  const isVideoMuted = tracks?.some(track => track.getType() === 'video' && track.getTrack().muted);
-  const isAudioMuted = tracks?.some(track => track.getType() === 'audio' && track.getTrack().muted);
+  const isVideoMuted = tracks?.some(track => track.getType() === 'video' && track.isMuted());
+  const isAudioMuted = tracks?.some(track => track.getType() === 'audio' && track.isMuted());
 
   return (
     <StyledParticipantWorldCafe
