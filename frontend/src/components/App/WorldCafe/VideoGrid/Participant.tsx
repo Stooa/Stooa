@@ -16,29 +16,26 @@ import {
   StyledParticipantWorldCafe
 } from './styles';
 import { AudioTrackElement } from './AudioTrackElement';
-import { useUser } from '@/jitsi/useUser';
-import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
 
 interface Props {
-  userId: string;
-  tracks: JitsiTrack[] | undefined;
+  participant: { id: string; nickname: string };
 }
 
-export const Participant = ({ userId, tracks }: Props) => {
-  const { getConference } = useJitsiStore();
-  const { getUser } = useUser();
+export const Participant = ({ participant }: Props) => {
+  const { getTracksByUser } = useJitsiStore();
 
-  const participantName =
-    getConference().getParticipantById(userId)?.getDisplayName() ?? getUser().nickname;
-
-  const nameInitials = participantName
+  const nameInitials = participant.nickname
     .split(' ')
     .map(string => string[0])
     .join('');
 
+  const tracks = getTracksByUser(participant.id);
+
   return (
-    <StyledParticipantWorldCafe data-userid={userId} id={userId}>
-      <StyledParticipantName>{participantName}</StyledParticipantName>
+    <StyledParticipantWorldCafe data-userid={participant.id} id={participant.id}>
+      {participant.nickname && (
+        <StyledParticipantName>{participant.nickname}</StyledParticipantName>
+      )}
       <StyledPartcipantPlaceholder>{nameInitials}</StyledPartcipantPlaceholder>
       {tracks?.map(track => {
         if (track.getType() === 'video') {
