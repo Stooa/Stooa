@@ -8,11 +8,19 @@
  */
 
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
-import { StyledWorldCafeVideos } from './styles';
+import {
+  StyledParticipantCounter,
+  StyledVideoGridHeader,
+  StyledVideoGridTitle,
+  StyledVideoGridWrapper,
+  StyledWorldCafeVideos
+} from './styles';
 import { Participant } from './Participant';
+import People from '@/ui/svg/people.svg';
 
 const VideoGrid = () => {
-  const { worldCafeParticipants } = useWorldCafeStore(store => ({
+  const { worldCafe, worldCafeParticipants } = useWorldCafeStore(store => ({
+    worldCafe: store.worldCafe,
     worldCafeParticipants: store.worldCafeParticipants
   }));
 
@@ -60,7 +68,16 @@ const VideoGrid = () => {
   const maxHeight = getMaxHeight();
 
   return (
-    <div>
+    <StyledVideoGridWrapper>
+      <StyledVideoGridHeader>
+        <StyledVideoGridTitle className="title-md medium">
+          {worldCafe?.name ?? 'WorldCafe'}
+        </StyledVideoGridTitle>
+        <StyledParticipantCounter className="medium">
+          <People />
+          {worldCafeParticipants.length}
+        </StyledParticipantCounter>
+      </StyledVideoGridHeader>
       <StyledWorldCafeVideos id="world-cafe-grid">
         {worldCafeParticipants.map(participant => (
           <Participant
@@ -71,7 +88,7 @@ const VideoGrid = () => {
           />
         ))}
       </StyledWorldCafeVideos>
-    </div>
+    </StyledVideoGridWrapper>
   );
 };
 

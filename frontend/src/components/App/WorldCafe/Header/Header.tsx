@@ -15,13 +15,15 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
+import { WorldCafeStatus } from '@/jitsi/Status';
 
 const Header = () => {
   const { wid } = useRouter().query;
   const [introduceWorldCafe] = useMutation(INTRODUCE_WORLD_CAFE);
   const { t } = useTranslation('world-cafe');
-  const { isModerator } = useWorldCafeStore(store => ({
-    isModerator: store.isModerator
+  const { isModerator, status } = useWorldCafeStore(store => ({
+    isModerator: store.isModerator,
+    status: store.status
   }));
 
   const slug = { variables: { input: { slug: wid } } };
@@ -37,7 +39,9 @@ const Header = () => {
   return (
     <StyledWorldCafeHeader>
       <Logo className="header-logo" />
-      {isModerator && <Button onClick={handleStartWorldCafe}>{t('startWorldCafe')}</Button>}
+      {isModerator && status === WorldCafeStatus.NOT_STARTED && (
+        <Button onClick={handleStartWorldCafe}>{t('startWorldCafe')}</Button>
+      )}
     </StyledWorldCafeHeader>
   );
 };

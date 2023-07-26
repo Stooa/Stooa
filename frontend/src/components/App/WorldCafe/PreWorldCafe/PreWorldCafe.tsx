@@ -48,7 +48,7 @@ const PreWorldCafe = () => {
     return [...questions].sort((a, b) => a.position - b.position);
   };
 
-  const { t, lang } = useTranslation('fishbowl');
+  const { lang } = useTranslation('fishbowl');
 
   useEffect(() => {
     pushEventDataLayer({
@@ -128,15 +128,9 @@ const PreWorldCafe = () => {
                 <div>
                   {getOrderedQuestions(worldCafe.questions).map((question, index) => (
                     <div key={index} className="question">
-                      <span className="question-title">
-                        <h3 className="body-md" data-testid="fishbowl-question">
-                          {question.title}
-                        </h3>
-                        <p>
-                          ({index === 0 ? worldCafe.roundMinutes + 5 : worldCafe.roundMinutes}{' '}
-                          {t('form:worldCafe.minutes')})
-                        </p>
-                      </span>
+                      <h3 className="body-md" data-testid="fishbowl-question">
+                        {question.title}
+                      </h3>
                       {question.description && question.description.length > 0 && (
                         <p>{question.description}</p>
                       )}

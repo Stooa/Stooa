@@ -15,10 +15,37 @@ import {
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_700,
+  COLOR_NEUTRO_800,
   COLOR_RED_100,
   COLOR_RED_500
 } from '@/ui/settings';
 import styled from 'styled-components';
+
+const StyledVideoGridWrapper = styled.div`
+  padding: 1rem;
+  border-radius: ${BORDER_RADIUS};
+  height: 80vh;
+
+  background-color: ${COLOR_NEUTRO_100};
+`;
+
+const StyledVideoGridHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledParticipantCounter = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${space(0.5)};
+  color: ${COLOR_NEUTRO_800};
+`;
+
+const StyledVideoGridTitle = styled.h1`
+  color: ${COLOR_NEUTRO_800};
+  margin-bottom: 1rem;
+`;
 
 const StyledWorldCafeVideos = styled.div`
   display: flex;
@@ -28,18 +55,15 @@ const StyledWorldCafeVideos = styled.div`
   gap: 1rem;
   height: 100%;
   width: 100%;
-  height: 80vh;
-  overflow-y: auto;
-  padding: 1rem;
-  border-radius: ${BORDER_RADIUS};
 
-  background-color: ${COLOR_NEUTRO_100};
+  overflow-y: auto;
 `;
 
 const StyledParticipantWorldCafe = styled.div<{
   isVideoMuted: boolean;
   maxWidth: string;
   maxHeight: string;
+  isModerator: boolean;
 }>`
   overflow: hidden;
   position: relative;
@@ -52,15 +76,16 @@ const StyledParticipantWorldCafe = styled.div<{
   background-color: ${COLOR_NEUTRO_400};
   border-radius: ${BORDER_RADIUS};
 
-  &.host {
-    background-color: yellow;
-    order: -1;
-  }
-
   ${({ isVideoMuted }) =>
     !isVideoMuted &&
     `
     order: -1;
+  `}
+
+  ${({ isModerator }) =>
+    isModerator &&
+    `
+    order: -2;
   `}
 
   & :has(.is-local) {
@@ -129,5 +154,9 @@ export {
   StyledVideoElement,
   StyledParticipantName,
   StyledPartcipantPlaceholder,
-  StyledMutedWrapper
+  StyledMutedWrapper,
+  StyledVideoGridWrapper,
+  StyledVideoGridTitle,
+  StyledVideoGridHeader,
+  StyledParticipantCounter
 };

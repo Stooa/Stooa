@@ -65,18 +65,12 @@ const StyledFishbowlDataCard = styled.div`
       margin-bottom: ${space(4)};
     }
 
-    & .question-title {
-      display: flex;
-      justify-content: space-between;
-      gap: ${space(2)};
-      & h3 {
-        ${mediumWeight};
-        max-width: 45ch;
-      }
+    & h3 {
+      ${mediumWeight};
+    }
 
-      & + * {
-        margin-top: ${space()};
-      }
+    & + * {
+      margin-top: ${space()};
     }
   }
 
