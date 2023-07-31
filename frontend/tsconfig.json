@@ -1,36 +1,44 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/jitsi/*": ["src/lib/jitsi-modules/*"],
-            "@/graphql/*": ["src/lib/gql/*"],
-            "@/i18n": ["i18n"],
-            "@/*": ["src/*"]
-        },
-        "skipLibCheck": true,
-        "strict": false,
-        "strictNullChecks": true,
-        "strictPropertyInitialization": true,
-        "strictFunctionTypes": true,
-        "strictBindCallApply": true,
-        "alwaysStrict": true,
-        "noImplicitThis": true,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "esModuleInterop": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "sourceMap": true,
-        "jsx": "preserve",
-        "types": ["cypress", "@testing-library/cypress"],
-        "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"],
-        "incremental": true
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/jitsi/*": ["src/lib/jitsi-modules/*"],
+      "@/jitsi": ["src/lib/jitsi-modules"],
+      "@/graphql/*": ["src/lib/gql/*"],
+      "@/i18n": ["i18n"],
+      "@/*": ["src/*"]
     },
-    "exclude": ["node_modules"],
-    "include": ["next-env.d.ts", "tests/**/*.ts", "tests/**/*.tsx","src/**/*.ts", "src/**/*.tsx"]
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "alwaysStrict": true,
+    "noImplicitThis": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "jsx": "preserve",
+    "types": ["cypress", "@testing-library/cypress"],
+    "typeRoots": ["node_modules/@types/*", "*.d.ts", "src/types/*"],
+    "incremental": true
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "next-env.d.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/lib/jitsi-modules/useConference.js"
+  ]
 }

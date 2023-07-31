@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import Check from '@/ui/svg/checkmark.svg';
 import React from 'react';
-import { kickParticipant } from '@/lib/jitsi';
+import { useJitsi } from '@/lib/useJitsi';
 import { Participant } from '@/types/participant';
 import { StyledReasonGroup } from './styles';
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -34,6 +34,7 @@ const initialValues = {
 
 const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
   const { t } = useTranslation('fishbowl');
+  const { kickParticipant } = useJitsi();
   const router = useRouter();
   const { fid } = router.query;
 

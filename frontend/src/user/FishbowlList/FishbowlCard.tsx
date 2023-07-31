@@ -86,9 +86,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
           locale={locale}
           isPrivate={isPrivate}
           plainPassword={plainPassword ?? 'error ask for the password'}
-        >
-          {t('common:copyInvitation')}
-        </ButtonCopyUrl>
+        />
         {isTimeLessThanNMinutes(startDateTime, 30) && (
           <RedirectLink href={`${ROUTE_FISHBOWL}/${slug}`} locale={locale} passHref>
             <Button
@@ -96,7 +94,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
               as="a"
               data-testid="enter-fishbowl"
               onClick={() => {
-                handleGoToFishbowl;
+                handleGoToFishbowl();
               }}
             >
               <span>{t('enterFishbowl')}</span>

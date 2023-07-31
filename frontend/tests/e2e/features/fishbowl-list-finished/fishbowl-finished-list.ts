@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Given('a list of multiple finished fishbowls', () => {
   cy.intercept(

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import useSound from 'use-sound';
 
@@ -39,11 +39,15 @@ import ModalStopRecording from '@/components/App/ModalStopRecording';
 import ModalShareLink from '@/components/App/ModalShareLink';
 import { toast } from 'react-toastify';
 import useTranslation from 'next-translate/useTranslation';
-import Conference from '@/jitsi/Conference';
 
 import RedRec from '@/ui/svg/rec-red.svg';
 import FeedbackForm from '../FeedbackForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import ModalTranscription from '../ModalTranscription/ModalTranscription';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { useConference } from '@/jitsi';
+import { useUserAuth } from '@/user/auth/useUserAuth';
+import TranscriptionWrapper from '../TranscriptionText/TranscriptionWrapper';
 
 const Header = dynamic(import('../Header'), { loading: () => <div /> });
 const Footer = dynamic(import('../Footer'), { loading: () => <div /> });
@@ -60,7 +64,11 @@ const Fishbowl: FC = () => {
     startRecording,
     setIsRecording,
     gaveFeedback,
-    setGaveFeedback
+    setGaveFeedback,
+    isTranscriptionEnabled,
+    setIsTranscriptionEnabled,
+    participantsActive,
+    setParticipantsActive
   } = useStooa();
 
   const {
@@ -74,8 +82,12 @@ const Fishbowl: FC = () => {
     setShowStartRecording,
     setShowStopRecording,
     showFeedbackForm,
-    setShowFeedbackForm
+    setShowFeedbackForm,
+    showTranscriptionModal,
+    setShowTranscriptionModal
   } = useModals();
+  const { startRecordingEvent, startTranscriptionEvent } = useConference();
+  const { getTranscriptionLanguageCookie, setTranscriptionLanguageCookie } = useUserAuth();
 
   const { width } = useWindowSize();
   const feedbackFormRef = useRef<HTMLDivElement>(null);
@@ -86,15 +98,12 @@ const Fishbowl: FC = () => {
     }
   });
 
-  const [participantsActive, setParticipantsActive] = useState(
-    () => (isModerator && data.isFishbowlNow) || false
-  );
   const [{ conferenceStatus }] = useStateValue();
   const { showModalPermissions, setShowModalPermissions } = useDevices();
 
   const { fid } = useRouter().query;
 
-  const { t } = useTranslation('fishbowl');
+  const { t, lang } = useTranslation('fishbowl');
 
   const isPreFishbowl =
     conferenceStatus === IConferenceStatus.NOT_STARTED && (!data.isFishbowlNow || !isModerator);
@@ -106,10 +115,6 @@ const Fishbowl: FC = () => {
   useEventListener(SCREEN_SHARE_PERMISSIONS_DENIED, () => {
     setShowScreenSharePermissions(true);
   });
-
-  const toggleParticipants = () => {
-    setParticipantsActive(!participantsActive);
-  };
 
   const handleCloseModalPermissions = () => {
     setShowModalPermissions(false);
@@ -153,12 +158,25 @@ const Fishbowl: FC = () => {
       position: 'bottom-center',
       autoClose: 5000
     });
-    Conference.startRecordingEvent();
+    startRecordingEvent();
     setShowStartRecording(false);
   };
 
   const handleFinishFeedback = () => {
     setShowFeedbackForm(false);
+  };
+
+  const handleStartTranscription = () => {
+    const transcriptionCookie = getTranscriptionLanguageCookie();
+
+    if (!transcriptionCookie) {
+      setTranscriptionLanguageCookie(LOCALES[lang]);
+    }
+
+    startTranscriptionEvent();
+    setIsTranscriptionEnabled(true);
+    setParticipantsActive(true);
+    setShowTranscriptionModal(false);
   };
 
   useEffect(() => {
@@ -167,25 +185,17 @@ const Fishbowl: FC = () => {
       category: 'FishbowlReactions',
       label: 'Connect'
     });
-
-    if (width && width < BREAKPOINTS.tablet) {
-      setParticipantsActive(false);
-    }
   }, []);
 
   useEffect(() => {
     if (width && width < BREAKPOINTS.tablet) {
       setParticipantsActive(false);
     }
-  }, [width]);
+  }, [width, setParticipantsActive]);
 
   return (
     <>
-      <Header
-        isPrefishbowl={isPreFishbowl}
-        participantsActive={participantsActive}
-        toggleParticipants={toggleParticipants}
-      />
+      <Header isPrefishbowl={isPreFishbowl} />
       <Main className={participantsActive ? 'drawer-open' : ''}>
         <HackLeaveHover onMouseEnter={handleModeratorIsGonnaLeave} />
 
@@ -218,12 +228,14 @@ const Fishbowl: FC = () => {
             startRecording={() => handleStartRecording()}
           />
         )}
+
         {showStopRecording && (
           <ModalStopRecording
             closeModal={() => setShowStopRecording(false)}
             stopRecording={() => handleStopRecording()}
           />
         )}
+
         {showFeedbackForm && (
           <FeedbackForm
             ref={feedbackFormRef}
@@ -234,10 +246,18 @@ const Fishbowl: FC = () => {
           />
         )}
 
+        {showTranscriptionModal && (
+          <ModalTranscription
+            closeModal={() => setShowTranscriptionModal(false)}
+            startTranscription={handleStartTranscription}
+          />
+        )}
+
         {isPreFishbowl ? <PreFishbowl /> : <Seats />}
         <ReactionsReceiver className={participantsActive ? 'drawer-open' : ''} />
+        {isTranscriptionEnabled && <TranscriptionWrapper />}
       </Main>
-      {!isPreFishbowl && <Footer participantsActive={participantsActive} />}
+      {!isPreFishbowl && <Footer />}
       <OnBoardingTour />
     </>
   );

@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -23,12 +22,9 @@ const ModeratorActions = dynamic(import('@/components/App/ModeratorActions'), {
   loading: () => <div />
 });
 
-interface Props {
-  participantsActive: boolean;
-}
-
-const Footer: React.FC<Props> = ({ participantsActive }) => {
-  const { onIntroduction, isModerator, conferenceStatus, gaveFeedback, data } = useStooa();
+const Footer = () => {
+  const { onIntroduction, isModerator, conferenceStatus, gaveFeedback, data, participantsActive } =
+    useStooa();
   const router = useRouter();
   const { fid } = router.query;
   const { deviceType } = useNavigatorType();

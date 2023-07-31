@@ -13,10 +13,10 @@ import { makeUser } from './user';
 
 export const makeParticipant = (): Participant => {
   return {
-    '@id': faker.datatype.uuid(),
+    '@id': faker.string.uuid(),
     'user': makeUser(),
     'guest': undefined,
     'lastPing': new Date(),
-    'fishbowl': faker.datatype.uuid()
+    'fishbowl': faker.string.uuid()
   };
 };

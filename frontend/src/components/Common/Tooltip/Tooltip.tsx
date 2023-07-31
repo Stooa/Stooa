@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { useEffect, useState } from 'react';
 import { StyledTooltip } from './styles';
 
 interface Props {
@@ -17,9 +18,24 @@ interface Props {
 }
 
 const Tooltip = ({ children, showTooltip, position = 'top', arrow = false }: Props) => {
+  const [hidden, setHidden] = useState(true);
+
+  useEffect(() => {
+    if (showTooltip) {
+      setHidden(false);
+      return;
+    }
+
+    if (!showTooltip) {
+      setTimeout(() => setHidden(true), 700);
+    }
+  }, [showTooltip]);
+
   return (
     <StyledTooltip
-      className={`body-xs ${showTooltip ? 'show' : ''} ${position} ${arrow ? 'arrow' : ''}`}
+      className={`body-xs ${showTooltip ? 'show' : ''} ${hidden ? 'hidden' : ''} ${position} ${
+        arrow ? 'arrow' : ''
+      }`}
     >
       {children}
     </StyledTooltip>

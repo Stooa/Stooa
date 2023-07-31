@@ -10,7 +10,6 @@
 import useDebounce from '@/hooks/useDebouce';
 import React, { useEffect, useState } from 'react';
 import { EmojiSpawner, ReactionsWrapper } from './styles';
-import conferenceRepository from '@/jitsi/Conference';
 import Reactions from '@/lib/Reactions/Reactions';
 import { REACTION_EMOJIS } from '../ReactionsEmojis';
 import ReactionEmoji from '../ReactionEmoji';
@@ -18,6 +17,7 @@ import { Reaction } from '@/types/reactions';
 import { useStooa } from '@/contexts/StooaManager';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useRouter } from 'next/router';
+import { useConference } from '@/jitsi';
 
 interface Props {
   onMouseEnter?: (mouseEvent: React.MouseEvent) => void;
@@ -31,6 +31,7 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   const [clientEmojisShown, setClientEmojisShown] = useState<Reaction[]>([]);
   const [timesClicked, setTimesClicked] = useState(0);
   const [lastLocationClicked, setLastLocationClicked] = useState(0);
+  const { sendTextMessage } = useConference();
 
   const router = useRouter();
   const { fid } = router.query;
@@ -90,7 +91,8 @@ const ReactionsSender = ({ onMouseLeave, className }: Props) => {
   useEffect(() => {
     if (debouncedEmojis.length > 0) {
       const firstTenEmojis = debouncedEmojis.slice(0, 10);
-      conferenceRepository.sendTextMessage(firstTenEmojis.join(','));
+
+      sendTextMessage(firstTenEmojis.join(','));
 
       pushEventDataLayer({
         action: fid as string,

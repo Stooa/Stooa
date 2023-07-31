@@ -138,24 +138,6 @@ const StyledParticipantListWrapper = styled.div`
         width: 16px;
         margin-left: ${space(0.5)};
       }
-
-      & svg.loader {
-        color: ${COLOR_NEUTRO_700};
-        animation: spin 1s linear infinite;
-
-        & circle {
-          opacity: 0.25;
-        }
-
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      }
     }
   }
 `;

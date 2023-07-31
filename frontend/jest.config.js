@@ -14,12 +14,13 @@ const createJestConfig = nextJest({ dir: './' });
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/tests/unit/setup/jest.setup.js'],
   moduleNameMapper: {
-    '^@/jitsi/(.*)$': '<rootDir>/src/lib/jitsi-modules/$1',
     '^@/graphql/(.*)$': '<rootDir>/src/lib/gql/$1',
     '^@/i18n': '<rootDir>/i18n.js',
     '^@/locales/(.*)$': '<rootDir>/locales/$1',
-    '^@/(.*)': '<rootDir>/src/$1',
-    '^.+\\.(svg)$': '<rootDir>/tests/unit/setup/svgMock.tsx'
+    '^.+\\.(svg)$': '<rootDir>/tests/unit/setup/svgMock.tsx',
+    '^@/jitsi/(.*)$': '<rootDir>/src/lib/jitsi-modules/$1',
+    '^@/jitsi': '<rootDir>/src/lib/jitsi-modules',
+    '^@/(.*)': '<rootDir>/src/$1'
   },
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom'

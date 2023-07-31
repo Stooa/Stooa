@@ -13,13 +13,13 @@ import { makeParticipant } from './participant';
 
 export const makeFeedback = (): Feedback => {
   return {
-    '@id': faker.datatype.uuid(),
-    'timezone': faker.address.timeZone(),
+    '@id': faker.string.uuid(),
+    'timezone': faker.location.timeZone(),
     'satisfaction': 'sad',
     'comment': faker.lorem.sentence(4),
     'email': faker.internet.email(),
     'origin': 'thank-you',
-    'fishbowl': faker.datatype.uuid(),
+    'fishbowl': faker.string.uuid(),
     'participant': makeParticipant(),
     'createdDateTime': new Date()
   };

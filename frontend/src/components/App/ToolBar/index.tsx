@@ -11,11 +11,8 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
-import { join, leave } from '@/lib/jitsi';
-import tracksRepository from '@/jitsi/Tracks';
+import { useJitsi } from '@/lib/useJitsi';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import devicesRepository from '@/jitsi/Devices';
-import userRepository from '@/jitsi/User';
 import { useStooa } from '@/contexts/StooaManager';
 import useSeatsAvailable from '@/hooks/useSeatsAvailable';
 import ButtonJoin from '@/components/App/ButtonJoin';
@@ -27,13 +24,24 @@ import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import ReactionsButton from '../Reactions/ReactionsButton';
 import ScreenShareButton from '../ScreenShareButton';
-import Conference from '@/jitsi/Conference';
-import SharedTrack from '@/jitsi/SharedTrack';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
+import {
+  useConference,
+  useDevices as useJitsiDevices,
+  useSharedTrack,
+  useTracks,
+  useUser
+} from '@/jitsi';
 
 const ToolBar: React.FC = () => {
   const { t } = useTranslation('fishbowl');
+  const { getLocalTracks } = useConference();
+  const { removeShareTrack } = useSharedTrack();
+  const { screenShare, changeDevice } = useJitsiDevices();
+  const { toggleAudioTrack, toggleVideoTrack } = useTracks();
+  const { getUser } = useUser();
+  const { join, leave } = useJitsi();
 
   const [joined, setJoined] = useState(false);
   const [joinIsInactive, setJoinIsInactive] = useState(false);
@@ -55,12 +63,10 @@ const ToolBar: React.FC = () => {
 
   const handleShareClick = async () => {
     if (isSharing) {
-      const shareLocalTrack = Conference.getLocalTracks().filter(
-        track => track.videoType === 'desktop'
-      );
+      const shareLocalTrack = getLocalTracks().filter(track => track.getVideoType() === 'desktop');
 
       setIsSharing(false);
-      await SharedTrack.removeShareTrack(shareLocalTrack[0], 'app');
+      await removeShareTrack(shareLocalTrack[0], 'app');
     } else {
       pushEventDataLayer({
         action: 'click_share',
@@ -68,7 +74,7 @@ const ToolBar: React.FC = () => {
         label: window.location.href
       });
 
-      const selectedScreen = await devicesRepository.screenShare();
+      const selectedScreen = await screenShare();
 
       if (selectedScreen) {
         pushEventDataLayer({
@@ -128,7 +134,7 @@ const ToolBar: React.FC = () => {
       configButtonRef.current.handleShowDevices(false);
     }
 
-    tracksRepository.toggleAudioTrack();
+    toggleAudioTrack();
   };
 
   const handleVideo = () => {
@@ -136,7 +142,7 @@ const ToolBar: React.FC = () => {
       configButtonRef.current.handleShowDevices(false);
     }
 
-    tracksRepository.toggleVideoTrack();
+    toggleVideoTrack();
   };
 
   const handleOutsideClick = event => {
@@ -154,33 +160,33 @@ const ToolBar: React.FC = () => {
 
   useEffect(() => {
     if (audioOutputDevice !== null) {
-      devicesRepository.changeDevice(audioOutputDevice);
+      changeDevice(audioOutputDevice);
     }
   }, [audioOutputDevice]);
 
   useEffect(() => {
     if (joined && audioInputDevice !== null) {
-      devicesRepository.changeDevice(audioInputDevice);
+      changeDevice(audioInputDevice);
     }
   }, [audioInputDevice, permissions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (joined && videoDevice !== null) {
-      devicesRepository.changeDevice(videoDevice);
+      changeDevice(videoDevice);
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (hasModeratorToSeatDuringIntroduction()) {
       console.log('[STOOA] Moderator join seat during introduction');
-      joinSeat(userRepository.getUser());
+      joinSeat(getUser());
     }
   }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (hasModeratorToSeatDuringRunning()) {
       console.log('[STOOA] Moderator join seat during running');
-      joinSeat(userRepository.getUser());
+      joinSeat(getUser());
     }
   }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
 

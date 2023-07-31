@@ -8,14 +8,35 @@
  */
 
 import { SEATS_CHANGE, NOTIFICATION, NOTIFICATION_CLOSE, USER_MUST_LEAVE } from '@/jitsi/Events';
-import conferenceRepository from '@/jitsi/Conference';
 import { dispatchEvent, removeItem } from '@/lib/helpers';
+import { useJitsiStore } from '@/store';
 
-const seatsRepository = () => {
-  let seats = [];
+export const useSeats = () => {
+  const {
+    userId: myUserId,
+    createSeats,
+    getSeats,
+    findEmptySeat,
+    count,
+    getOccupiedSeats,
+    sit,
+    stand,
+    findSeat
+  } = useJitsiStore(store => ({
+    seats: store.seats,
+    userId: store.userId,
+    createSeats: store.createSeats,
+    getSeats: store.getSeats,
+    findEmptySeat: store.findEmptySeat,
+    count: store.count,
+    getOccupiedSeats: store.getOccupiedSeats,
+    sit: store.sit,
+    stand: store.stand,
+    findSeat: store.findSeat
+  }));
 
   const create = number => {
-    seats = Array(number).fill(null);
+    const seats = createSeats(number);
 
     console.log('[STOOA] Seats created', number);
 
@@ -23,69 +44,50 @@ const seatsRepository = () => {
   };
 
   const getIds = () => {
-    const ids = seats.filter(seat => seat !== null);
+    const ids = getOccupiedSeats();
 
     console.log('[STOOA] Seats occupied by', ids);
 
     return ids;
   };
 
-  const getSeat = id => {
-    if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
-    }
+  const getSeat = id => findSeat(id ?? myUserId);
 
-    return seats.indexOf(id) + 1;
-  };
-
-  const getSeats = () => {
-    return seats;
-  };
-
-  const hasFreeSeat = () => getSeat(null) > 0;
+  const hasFreeSeat = () => count() > 0;
 
   const _handleDispatchEvent = () => {
     dispatchEvent(SEATS_CHANGE, { seats: hasFreeSeat(), seatsValues: getSeats() });
   };
 
-  const join = id => {
-    const seat = getSeat(null);
+  const join = (id, participantName) => {
+    const userId = id ?? myUserId;
+    const seat = findEmptySeat();
 
-    if (seat <= 0) return;
+    if (seat === undefined) return;
 
-    if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
-    }
-
-    const participantName = conferenceRepository.getParticipantNameById(id);
     const seatHtml = document.getElementById(`seat-${seat}`);
 
     if (!seatHtml) return;
 
     seatHtml.setAttribute('data-username', participantName);
-    seatHtml.setAttribute('data-id', id);
+    seatHtml.setAttribute('data-id', userId);
     seatHtml.classList.add('user-joined');
 
-    seats[seat - 1] = id;
+    sit(userId, seat);
 
-    _handleDispatchEvent(id);
+    _handleDispatchEvent(userId);
 
-    if (!hasFreeSeat()) {
-      const notificationUsers = removeItem(getIds(), id);
+    const freeSeats = count();
 
+    if (freeSeats === 0) {
       dispatchEvent(NOTIFICATION, {
         type: USER_MUST_LEAVE,
-        seats: notificationUsers,
+        seats: removeItem(getIds(), userId),
         message: 'notification.emptySeats'
       });
     }
 
-    console.log(
-      '[STOOA] Join seat',
-      seat,
-      '| Seats left',
-      seats.reduce((carry, seat) => carry + (seat === null ? 1 : 0), 0)
-    );
+    console.log('[STOOA] Join seat', seat, '| Seats left', freeSeats);
 
     return seat;
   };
@@ -97,13 +99,9 @@ const seatsRepository = () => {
       .join(' ');
 
   const leave = id => {
-    if (id === undefined) {
-      id = conferenceRepository.getMyUserId();
-    }
+    const seat = getSeat(id ?? myUserId);
 
-    const seat = getSeat(id);
-
-    if (seat <= 0) return;
+    if (seat === undefined) return;
 
     const seatHtml = document.getElementById(`seat-${seat}`);
 
@@ -117,15 +115,11 @@ const seatsRepository = () => {
       dispatchEvent(NOTIFICATION_CLOSE, { type: USER_MUST_LEAVE });
     }
 
-    seats[seat - 1] = null;
+    stand(seat);
 
     _handleDispatchEvent();
 
-    console.log(
-      '[STOOA] Leave seat',
-      seat,
-      seats.reduce((carry, seat) => carry + (seat === null ? 1 : 0), 0)
-    );
+    console.log('[STOOA] Leave seat', seat, count());
 
     return seat;
   };
@@ -182,5 +176,3 @@ const seatsRepository = () => {
     updateDominantSpeaker
   };
 };
-
-export default seatsRepository();

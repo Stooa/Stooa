@@ -11,7 +11,6 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import userRepository from '@/jitsi/User';
 
 import {
   ROUTE_FISHBOWL_THANKYOU,
@@ -19,13 +18,7 @@ import {
   ROUTE_USER_NO_PARTICIPATING
 } from '@/app.config';
 import api from '@/lib/api';
-import {
-  initialInteraction,
-  initializeJitsi,
-  initializeConnection,
-  unload,
-  unloadKickedUser
-} from '@/lib/jitsi';
+import { useJitsi } from '@/lib/useJitsi';
 import {
   CONFERENCE_IS_LOCKABLE,
   CONFERENCE_PASSWORD_REQUIRED,
@@ -38,6 +31,7 @@ import {
   SCREEN_SHARE_CANCELED,
   SCREEN_SHARE_START,
   SCREEN_SHARE_STOP,
+  TRANSCRIPTION_TRANSCRIBER_JOINED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
@@ -46,18 +40,18 @@ import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
-import seatsRepository from '@/jitsi/Seats';
 
 import { toast } from 'react-toastify';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import { StooaContextValues } from '@/types/contexts/stooa-context';
 import { Participant } from '@/types/participant';
 import createGenericContext from '@/contexts/createGenericContext';
-import Conference from '@/jitsi/Conference';
 import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
-import SharedTrack from '@/jitsi/SharedTrack';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
+import { LOCALES } from '@/lib/supportedTranslationLanguages';
+import { SupportedLanguageTag } from '@/types/transcriptions';
+import { useConference, useSeats, useSharedTrack, useUser } from '@/jitsi';
 
 const TEN_MINUTES = 10;
 const ONE_MINUTE = 1;
@@ -73,9 +67,22 @@ const StooaProvider = ({
   children: JSX.Element[];
 }) => {
   const router = useRouter();
+  const { hasUserGaveFeedback, clearUser } = useUser();
+  const { getIds } = useSeats();
+  const { exitFullScreen } = useSharedTrack();
+  const { initialInteraction, initializeJitsi, initializeConnection, unload, unloadKickedUser } =
+    useJitsi();
+  const {
+    setConferenceTranscriptionLanguage,
+    stopRecordingEvent,
+    lockConference,
+    joinPrivateConference,
+    joinConference
+  } = useConference();
   const { fid } = router.query;
+  const { t, lang } = useTranslation('app');
 
-  const useGaveFeedback = useMemo(() => userRepository.hasUserGaveFeedback(fid as string), [fid]);
+  const useGaveFeedback = useMemo(() => hasUserGaveFeedback(fid as string), [fid]);
 
   const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
@@ -90,8 +97,19 @@ const StooaProvider = ({
   const [isRecording, setIsRecording] = useState(false);
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
-
-  const { t, lang } = useTranslation('app');
+  const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(false);
+  const [isTranscriberJoined, setIsTranscriberJoined] = useState(false);
+  const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
+  const [translationLanguage, setTranslationLanguage] = useState<SupportedLanguageTag>(
+    LOCALES[lang]
+  );
+  const [participantsActive, setParticipantsActive] = useState(() => {
+    if (isModerator && data.isFishbowlNow) {
+      return true;
+    }
+    return false;
+  });
+  const [selectedTranscriptionLanguage, setSelectedTranscriptionLanguage] = useState(LOCALES[lang]);
 
   const apiInterval = useRef<number>();
   const timeUpInterval = useRef<number>();
@@ -101,7 +119,7 @@ const StooaProvider = ({
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
 
   const sendStopRecordingEvent = () => {
-    Conference.stopRecordingEvent();
+    stopRecordingEvent();
     setIsRecording(false);
   };
 
@@ -186,15 +204,15 @@ const StooaProvider = ({
 
   useEventListener(CONFERENCE_IS_LOCKABLE, () => {
     if (data.isPrivate && data.plainPassword && isModerator) {
-      Conference.lockConference(data.plainPassword);
+      lockConference(data.plainPassword);
     }
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
     if (data.isPrivate) {
-      Conference.joinPrivateConference(isModerator ? data.plainPassword : fishbowlPassword);
+      joinPrivateConference(isModerator ? data.plainPassword : fishbowlPassword);
     } else {
-      Conference.joinConference();
+      joinConference();
     }
   });
 
@@ -207,7 +225,7 @@ const StooaProvider = ({
         position: 'bottom-center',
         autoClose: 5000
       });
-      userRepository.clearUser();
+      clearUser();
       setInitConnection(false);
       setFishbowlPassword(undefined);
       dispatch({
@@ -220,6 +238,7 @@ const StooaProvider = ({
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);
+    setConferenceTranscriptionLanguage(LOCALES[data.locale]);
 
     if (!isModerator) return;
 
@@ -231,7 +250,7 @@ const StooaProvider = ({
       const delay = type === USER_MUST_LEAVE ? 5000 : 0;
       const autoClose = type === USER_MUST_LEAVE ? 15000 : 0;
       setTimeout(() => {
-        if (seatsRepository.getIds().length === 5) {
+        if (getIds().length === 5) {
           toast(t(message), {
             icon: '⚠️',
             toastId: 'must-leave',
@@ -257,7 +276,7 @@ const StooaProvider = ({
       });
     }
 
-    SharedTrack.exitFullScreen();
+    exitFullScreen();
 
     setIsSharing(false);
   });
@@ -276,6 +295,10 @@ const StooaProvider = ({
 
   useEventListener(MODERATOR_LEFT, () => {
     sendStopRecordingEvent();
+  });
+
+  useEventListener(TRANSCRIPTION_TRANSCRIBER_JOINED, ({ detail: { joined } }) => {
+    setIsTranscriberJoined(joined);
   });
 
   const checkApIConferenceStatus = () => {
@@ -436,7 +459,19 @@ const StooaProvider = ({
         feedbackAlert,
         setFeedbackAlert,
         gaveFeedback,
-        setGaveFeedback
+        setGaveFeedback,
+        isTranscriptionEnabled,
+        setIsTranscriptionEnabled,
+        isTranslationEnabled,
+        setIsTranslationEnabled,
+        participantsActive,
+        setParticipantsActive,
+        isTranscriberJoined,
+        setIsTranscriberJoined,
+        selectedTranscriptionLanguage,
+        setSelectedTranscriptionLanguage,
+        translationLanguage,
+        setTranslationLanguage
       }}
     >
       {children}

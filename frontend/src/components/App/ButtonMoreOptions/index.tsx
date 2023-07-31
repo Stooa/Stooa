@@ -21,6 +21,7 @@ import SpeakerIcon from '@/ui/svg/speaker.svg';
 import VideoIcon from '@/ui/svg/video.svg';
 import CheckIcon from '@/ui/svg/checkmark.svg';
 import Cross from '@/ui/svg/cross.svg';
+import TranscriptionSVG from '@/ui/svg/transcription-icon.svg';
 import PermissionsAlert from '@/ui/svg/permissions-alert.svg';
 
 import {
@@ -36,6 +37,8 @@ import { useStooa } from '@/contexts/StooaManager';
 import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
+import { useConference } from '@/jitsi/useConference';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 
 interface Props {
   unlabeled?: boolean;
@@ -52,8 +55,13 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
-  const { setShowStopRecording, showStartRecording, setShowStartRecording, setShowFeedbackForm } =
-    useModals();
+  const {
+    setShowStopRecording,
+    setShowTranscriptionModal,
+    showStartRecording,
+    setShowStartRecording,
+    setShowFeedbackForm
+  } = useModals();
   const { deviceType } = useNavigatorType();
 
   const {
@@ -67,9 +75,35 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
-  const { isModerator, isRecording, feedbackAlert, gaveFeedback } = useStooa();
+  const {
+    isModerator,
+    isRecording,
+    feedbackAlert,
+    gaveFeedback,
+    isTranscriptionEnabled,
+    setIsTranscriptionEnabled,
+    setParticipantsActive,
+    isTranscriberJoined
+  } = useStooa();
+
+  const { stopTranscriptionEvent, startTranscriptionEvent, setConferenceTranscriptionLanguage } =
+    useConference();
+
+  const { getTranscriptionLanguageCookie } = useUserAuth();
 
   const { t } = useTranslation('fishbowl');
+
+  const getTranscriptionText = () => {
+    if (isTranscriptionEnabled && !isTranscriberJoined) {
+      return t('transcription.loading');
+    }
+
+    if (isTranscriptionEnabled) {
+      return t('transcription.disable');
+    } else {
+      return t('transcription.enable');
+    }
+  };
 
   const handleAudioInput = (event: React.MouseEvent) => {
     const { value } = event.target as HTMLButtonElement;
@@ -104,6 +138,28 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
 
   const handleShowFeedbackForm = () => {
     setShowFeedbackForm(current => !current);
+  };
+
+  const handleTranscriptionToggle = () => {
+    const transcriptionCookie = getTranscriptionLanguageCookie();
+
+    if (!transcriptionCookie) {
+      setShowTranscriptionModal(true);
+      return;
+    }
+
+    if (isTranscriptionEnabled) {
+      stopTranscriptionEvent();
+      setIsTranscriptionEnabled(false);
+    } else {
+      startTranscriptionEvent();
+      setConferenceTranscriptionLanguage(transcriptionCookie);
+      if (deviceType === 'Desktop') {
+        setParticipantsActive(true);
+      }
+      setIsTranscriptionEnabled(true);
+      setShowTranscriptionModal(false);
+    }
   };
 
   // Used imperativeHandle to make the parents able to call the handleShowDevices
@@ -144,7 +200,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
         {showDevices && (
           <Selector top={selectorPosition === 'top'} bottom={selectorPosition === 'bottom'}>
             <div className="selector__sticky-wrapper">
-              {deviceType === 'Mobile' && !prejoin && (
+              {deviceType === 'Mobile' && !prejoin && !isModerator && (
                 <button
                   disabled={gaveFeedback}
                   data-testid="feedback-button"
@@ -160,6 +216,19 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
                   {t('feedback.title')}
                 </button>
               )}
+
+              {!prejoin && process.env.NEXT_PUBLIC_TRANSCRIPTIONS_ENABLED === 'true' && (
+                <button
+                  disabled={gaveFeedback}
+                  data-testid="transcription-button"
+                  className="sticky-button sticky-button--transcription"
+                  onClick={() => handleTranscriptionToggle()}
+                >
+                  <TranscriptionSVG />
+                  {getTranscriptionText()}
+                </button>
+              )}
+
               {isModerator && supportsCaptureHandle() && deviceType === 'Desktop' && !prejoin && (
                 <button
                   data-testid="recording-button"

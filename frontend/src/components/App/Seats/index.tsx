@@ -62,7 +62,12 @@ const Seats = () => {
         </div>
 
         {[...Array(5)].map((e, seat) => (
-          <Seat data-testid="seat" key={`seat-${seat + 1}`} id={`seat-${seat + 1}`}>
+          <Seat
+            className="seat"
+            data-testid="seat"
+            key={`seat-${seat + 1}`}
+            id={`seat-${seat + 1}`}
+          >
             <ButtonContextMenu seatNumber={seat + 1} className="context-button" />
 
             <div className="frame" />

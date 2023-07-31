@@ -10,7 +10,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { isCurrentGuest } from '@/user/auth';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import Linkedin from '@/ui/svg/share-linkedin.svg';
@@ -25,6 +25,7 @@ const ParticipantCard: React.FC<{
   speaker?: boolean;
   prefishbowl?: boolean;
 }> = ({ participant, prefishbowl = false }) => {
+  const { isCurrentGuest } = useUserAuth();
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 

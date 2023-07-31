@@ -12,9 +12,9 @@ import { User } from '@/types/api-platform/interfaces/user';
 
 export const makeUser = (): User => {
   return {
-    '@id': faker.datatype.uuid(),
-    'name': faker.name.firstName(),
-    'surnames': faker.name.lastName(),
+    '@id': faker.string.uuid(),
+    'name': faker.person.firstName(),
+    'surnames': faker.person.lastName(),
     'allowShareData': faker.datatype.boolean(),
     'linkedinProfile': 'https://www.linkedin.com/in/wearestooa',
     'twitterProfile': 'https://www.twitter.com/wearestooa',

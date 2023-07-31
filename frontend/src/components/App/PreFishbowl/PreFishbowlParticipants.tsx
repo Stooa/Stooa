@@ -13,7 +13,7 @@ import { Participant } from '@/types/participant';
 import useTranslation from 'next-translate/useTranslation';
 import ParticipantCard from '@/components/App/Participants/ParticipantCard';
 import People from '@/ui/svg/people.svg';
-import { ping } from '@/user/auth';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 import { useRouter } from 'next/router';
 import {
   StyledParticipantListWrapper,
@@ -24,17 +24,18 @@ import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import { ROUTE_FISHBOWL, ROUTE_REGISTER } from '@/app.config';
 
-import Loader from '@/ui/svg/spin-loader.svg';
 import { useStateValue } from '@/contexts/AppContext';
 import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
 
 const PING_TIMEOUT = 3500;
 const MAX_PLACEHOLDER_PARTICIPANTS = 10;
 
 const PreFishbowlParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
+  const { ping } = useUserAuth();
   const { t, lang } = useTranslation('fishbowl');
   const router = useRouter();
   const { fid } = router.query;
@@ -96,7 +97,7 @@ const PreFishbowlParticipants = () => {
           <div className="participant-list__counter">
             <People />
             <span className="body-xs medium" data-test-id="prefishbowl-participants-number">
-              {participants.length === 0 ? <Loader className="loader" /> : participants.length}
+              {participants.length === 0 ? <SpinningLoader /> : participants.length}
             </span>
           </div>
         </div>

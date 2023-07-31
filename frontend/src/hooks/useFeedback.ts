@@ -9,23 +9,24 @@
 
 import { useMutation } from '@apollo/client';
 import { CREATE_FEEDBACK, UPDATE_FEEDBACK } from '@/graphql/Feedback';
-import userRepository from '@/jitsi/User';
 import { getAuthToken } from '@/user/auth';
 import api from '@/lib/api';
 import { Feedback } from '@/types/api-platform/interfaces/feedback';
 import { Fishbowl } from '@/types/api-platform';
 import { useCallback } from 'react';
 import { SatisfactionData } from '@/types/feedback';
+import { useUser } from '@/jitsi';
 
 const useFeedback = (fishbowlData: Fishbowl) => {
   const [createFeedbackMutation] = useMutation(CREATE_FEEDBACK);
   const [updateFeedbackMutation] = useMutation(UPDATE_FEEDBACK);
+  const { getUserParticipantId, setUserFeedback, getUserFeedback } = useUser();
 
   const createFeedback = (
     satisfaction: 'sad' | 'neutral' | 'happy',
     origin: 'fishbowl' | 'thank-you'
   ) => {
-    const participant = userRepository.getUserParticipantId();
+    const participant = getUserParticipantId();
     const fishbowl = fishbowlData.id;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -48,7 +49,7 @@ const useFeedback = (fishbowlData: Fishbowl) => {
         } = res;
 
         if (feedback.id) {
-          userRepository.setUserFeedback({
+          setUserFeedback({
             feedbackId: feedback.id,
             feedbackFishbowlSlug: fishbowlData.slug,
             fromThankYou: origin === 'thank-you'
@@ -64,7 +65,7 @@ const useFeedback = (fishbowlData: Fishbowl) => {
 
   const getFeedback = async (): Promise<Feedback | null> => {
     const auth = await getAuthToken();
-    const { feedbackId } = userRepository.getUserFeedback();
+    const { feedbackId } = getUserFeedback();
 
     return api
       .get(feedbackId, {
@@ -85,7 +86,7 @@ const useFeedback = (fishbowlData: Fishbowl) => {
   };
 
   const updateFeedback = async ({ type, data }: { type: 'email' | 'comment'; data: string }) => {
-    const { feedbackId } = userRepository.getUserFeedback();
+    const { feedbackId } = getUserFeedback();
 
     updateFeedbackMutation({
       variables: {

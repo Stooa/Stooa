@@ -37,8 +37,8 @@ final class FishbowlProcessor implements ProcessorInterface
         $result = $this->decorated->process($data, $operation, $uriVariables, $context);
 
         if ($data instanceof Fishbowl && (
-            ($context['collection_operation_name'] ?? null) === 'post' ||
-            ($context['graphql_operation_name'] ?? null) === 'create')
+            ($context['collection_operation_name'] ?? null) === 'post'
+            || ($context['graphql_operation_name'] ?? null) === 'create')
         ) {
             $this->mailerService->sendFishbowlCreatedEmail($data);
         }

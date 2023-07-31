@@ -10,7 +10,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getOnBoardingCookie } from '@/user/auth';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 import { ModalsContextValues } from '@/types/contexts/modals-context';
 import { useStateValue } from './AppContext';
 import createGenericContext from './createGenericContext';
@@ -37,6 +37,8 @@ const ModalsProvider = ({
   const [showStartRecording, setShowStartRecording] = useState(false);
   const [showStopRecording, setShowStopRecording] = useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  const [showTranscriptionModal, setShowTranscriptionModal] = useState(false);
+  const { getOnBoardingCookie } = useUserAuth();
 
   const toggleOnBoarding = (location: string) => {
     pushEventDataLayer({
@@ -84,7 +86,9 @@ const ModalsProvider = ({
         showStopRecording,
         setShowStopRecording,
         showFeedbackForm,
-        setShowFeedbackForm
+        setShowFeedbackForm,
+        showTranscriptionModal,
+        setShowTranscriptionModal
       }}
     >
       {children}

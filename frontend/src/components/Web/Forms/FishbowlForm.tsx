@@ -208,6 +208,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           ))}
         </Select>
         <Switch
+          full
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.introductionTooltip"
@@ -218,6 +219,7 @@ const Form = (props: FormProps & FormikProps<FormValues>) => {
           name="hasIntroduction"
         />
         <Switch
+          full
           tooltipText={
             <Trans
               i18nKey="form:fishbowl.passwordTooltip"
