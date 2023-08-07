@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52e50812fdff85cba567dd4ba4a16cef",
+    "content-hash": "04f44576ea325ca999dfa59eb59ade29",
     "packages": [
         {
             "name": "api-platform/core",
@@ -10915,16 +10915,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v1.34.0",
+            "version": "v1.34.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "0b29af2f701da8a6a15c5daa4dbbe636a7720baf"
+                "reference": "65c916e31944fa9738eaf82063c879a0154e52fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/0b29af2f701da8a6a15c5daa4dbbe636a7720baf",
-                "reference": "0b29af2f701da8a6a15c5daa4dbbe636a7720baf",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/65c916e31944fa9738eaf82063c879a0154e52fa",
+                "reference": "65c916e31944fa9738eaf82063c879a0154e52fa",
                 "shasum": ""
             },
             "require": {
@@ -10992,7 +10992,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v1.34.0"
+                "source": "https://github.com/zenstruck/foundry/tree/v1.34.1"
             },
             "funding": [
                 {
@@ -11000,7 +11000,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-12T07:19:34+00:00"
+            "time": "2023-08-04T13:05:27+00:00"
         }
     ],
     "packages-dev": [
