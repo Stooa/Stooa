@@ -70,6 +70,6 @@ describe('Test of marketing landing page, with 4 listed benefits.', () => {
     expect(benefits).toHaveLength(4);
     expect(loginButton).toBeInTheDocument();
     expect(registerButton).toBeInTheDocument();
-    expect(createFishbowlButton).toHaveLength(2);
+    expect(createFishbowlButton).toHaveLength(3);
   });
 });
