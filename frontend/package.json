@@ -53,7 +53,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-datepicker": "4.11.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.43.1",
+    "react-hook-form": "7.43.1",
     "react-script-loader-hoc": "1.2.2",
     "react-slick": "0.29.0",
     "react-toastify": "8.2.0",
