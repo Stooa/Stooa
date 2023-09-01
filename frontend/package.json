@@ -26,7 +26,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@apollo/client": "3.7.13",
+    "@apollo/client": "3.8.1",
     "@hookform/resolvers": "^2.9.11",
     "@next/font": "13.1.6",
     "@types/node": "18.11.19",
