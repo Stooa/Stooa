@@ -12,7 +12,7 @@ import { render, screen } from '@testing-library/react';
 import FishbowlDataCard from '@/components/Web/FishbowlDataCard';
 
 import I18nProvider from 'next-translate/I18nProvider';
-import fishbowlES from '@/locales/es/fishbowl.json';
+import fishbowlES from 'locales/es/fishbowl.json';
 
 const HOUR_IN_MS = 1000 * 60 * 60;
 const TWO_HOURS_IN_MS = 2 * HOUR_IN_MS;
