@@ -13,7 +13,7 @@ import { ValidationError, ValidationIcon } from '@/ui/Validation';
 import Icon from '../Icon';
 import { FieldError } from 'react-hook-form';
 
-type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
+type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'ref'> & {
   label?: string;
   icon?:
     | 'avatar'

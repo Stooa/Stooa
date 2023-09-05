@@ -22,7 +22,7 @@ import * as Yup from 'yup';
 
 import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import FormikForm from '@/ui/Form';
+import StandardForm from '@/ui/Form';
 import { getAuthToken } from '@/user/auth';
 import { UPDATE_USER } from '@/lib/gql/User';
 import Input from '@/components/Common/Fields/Input';
@@ -61,7 +61,7 @@ const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
-    <FormikForm>
+    <StandardForm>
       <fieldset className="fieldset-inline">
         <Input label={t('firstname')} name="firstname" type="text" variant="sm" />
         <Input label={t('lastname')} name="lastname" type="text" variant="sm" />
@@ -94,7 +94,7 @@ const Form = (props: FormikProps<FormValues>) => {
       <fieldset>
         <SubmitBtn text={t('button.save')} disabled={props.isSubmitting} />
       </fieldset>
-    </FormikForm>
+    </StandardForm>
   );
 };
 

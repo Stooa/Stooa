@@ -21,7 +21,7 @@ import * as Yup from 'yup';
 
 import { ROUTE_SIGN_IN } from '@/app.config';
 import { RECOVER_PASSWORD } from '@/lib/gql/Password';
-import FormikForm from '@/ui/Form';
+import StandardForm from '@/ui/Form';
 import Alert from '@/ui/Alert';
 import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';
@@ -49,7 +49,7 @@ const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('form');
 
   return (
-    <FormikForm>
+    <StandardForm>
       <fieldset>
         <Input label={t('email')} name="email" type="email" icon="mail" />
       </fieldset>
@@ -63,7 +63,7 @@ const Form = (props: FormikProps<FormValues>) => {
           </Link>
         </p>
       </fieldset>
-    </FormikForm>
+    </StandardForm>
   );
 };
 

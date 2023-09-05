@@ -23,7 +23,7 @@ import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import FormikForm, { TextDivider } from '@/ui/Form';
+import StandardForm, { FormikForm, TextDivider } from '@/ui/Form';
 import Input from '@/components/Common/Fields/Input';
 import Textarea from '@/components/Common/Fields/Textarea';
 import Select from '@/components/Common/Fields/Select';

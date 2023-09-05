@@ -11,7 +11,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { useAuth } from '@/contexts/AuthContext';
 import Layout from '@/layouts/Default';
-import LogInForm from '@/user/forms/log-in';
+import Login from '@/user/forms/login';
 
 const SignIn = () => {
   const { t } = useTranslation('login');
@@ -22,7 +22,7 @@ const SignIn = () => {
   ) : (
     <Layout title={t('title')}>
       <h1 className="title-md form-title">{t('title')}</h1>
-      <LogInForm />
+      <Login />
     </Layout>
   );
 };

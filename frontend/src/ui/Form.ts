@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Form } from 'formik';
 
 import Alert from '@/ui/Alert';
@@ -31,7 +31,7 @@ interface Props {
   $isFull?: boolean;
 }
 
-const FormikForm = styled(Form)`
+const FormStyles = css`
   position: relative;
   max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
@@ -83,6 +83,9 @@ const FormikForm = styled(Form)`
   }
 
   .form__footer {
+    display: flex;
+    justify-content: center;
+    gap: ${space()};
     margin-top: ${space(3.5)};
     text-align: center;
   }
@@ -95,6 +98,14 @@ const FormikForm = styled(Form)`
       justify-content: space-between;
     }
   `}
+`;
+
+const StandardForm = styled.form`
+  ${FormStyles}
+`;
+
+const FormikForm = styled(Form)`
+  ${FormStyles}
 `;
 
 const InputStyled = styled.div`
@@ -447,6 +458,8 @@ export {
   InputStyled,
   TextDivider,
   SwitchStyled,
-  SwitchLabel
+  SwitchLabel,
+  FormikForm
 };
-export default FormikForm;
+
+export default StandardForm;

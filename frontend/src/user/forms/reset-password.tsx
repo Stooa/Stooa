@@ -21,7 +21,7 @@ import * as Yup from 'yup';
 import Input from '@/components/Common/Fields/Input';
 import { RESET_PASSWORD } from '@/lib/gql/Password';
 import { useAuth } from '@/contexts/AuthContext';
-import FormikForm from '@/ui/Form';
+import StandardForm from '@/ui/Form';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 
@@ -50,7 +50,7 @@ const Form = (props: FormikProps<FormValues>) => {
   const { t } = useTranslation('password');
 
   return (
-    <FormikForm>
+    <StandardForm>
       <fieldset>
         <Input label={t('newPassword')} name="password" type="password" icon="lock" />
         <Input
@@ -63,7 +63,7 @@ const Form = (props: FormikProps<FormValues>) => {
       <fieldset>
         <SubmitBtn text={t('changePassword')} disabled={props.isSubmitting} />
       </fieldset>
-    </FormikForm>
+    </StandardForm>
   );
 };
 
