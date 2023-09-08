@@ -330,7 +330,8 @@ const FishbowlForm = ({
             icon="calendar"
             autoComplete="off"
             variant="small"
-            {...register('day')}
+            name="day"
+            // {...register('day')}
           />
           <DatePicker
             hasError={errors.time}
@@ -345,7 +346,8 @@ const FishbowlForm = ({
             icon="clock"
             autoComplete="off"
             variant="small"
-            {...register('time')}
+            name="time"
+            // {...register('time')}
           />
           <Select
             isDirty={dirtyFields.hours}
@@ -452,7 +454,6 @@ const FishbowlForm = ({
             <NewInput
               isDirty={dirtyFields.plainPassword}
               hasError={errors.plainPassword}
-              value={watchIsPrivate ? getValues('plainPassword') : undefined}
               data-testid="fishbowl-form-passwordinput"
               placeholder={t('fishbowl.passwordPlaceholder')}
               label={t('fishbowl.passwordInputLabel')}

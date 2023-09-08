@@ -39,9 +39,9 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
         <input
           placeholder={placeholder}
           ref={ref}
-          className={` ${(props.value !== '' && props.value) || isDirty ? 'filled' : ''} ${
-            hasError ? 'invalid' : ''
-          }`}
+          className={` ${
+            (props.value !== '' && props.value) || isDirty || (label && placeholder) ? 'filled' : ''
+          } ${hasError ? 'invalid' : ''}`}
           aria-invalid={hasError ? 'true' : 'false'}
           {...props}
         />
