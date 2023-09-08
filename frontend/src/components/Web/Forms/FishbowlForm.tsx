@@ -330,7 +330,7 @@ const FishbowlForm = ({
             icon="calendar"
             autoComplete="off"
             variant="small"
-            name="day"
+            {...register('day')}
           />
           <DatePicker
             hasError={errors.time}
@@ -345,7 +345,7 @@ const FishbowlForm = ({
             icon="clock"
             autoComplete="off"
             variant="small"
-            name="time"
+            {...register('time')}
           />
           <Select
             isDirty={dirtyFields.hours}

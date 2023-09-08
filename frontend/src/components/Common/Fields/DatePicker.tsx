@@ -59,6 +59,8 @@ const DatePicker = ({
         name={name}
         render={({ field }) => (
           <DatePickerField
+            name={name}
+            id={name}
             dateFormat={dateFormat}
             timeIntervals={timeIntervals}
             timeFormat="HH:mm"
