@@ -9,37 +9,23 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { ROUTE_HOME } from '@/app.config';
 import { RESET_LOGGED_PASSWORD } from '@/lib/gql/Password';
 import StandardForm from '@/ui/Form';
-import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import NewInput from '@/components/Common/Fields/Input';
 
 interface FormValues {
   password: string;
   newPassword: string;
   newPasswordConfirmation: string;
-}
-
-interface FormProps {
-  required: string;
-  equalPassword: string;
-  minlength: string;
-  onSubmit: (any) => void;
-  changePassword: (
-    options?: MutationFunctionOptions<unknown, OperationVariables>
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
 }
 
 const initialValues = {
@@ -48,103 +34,102 @@ const initialValues = {
   newPasswordConfirmation: ''
 };
 
-const Form = (props: FormikProps<FormValues>) => {
-  const { t } = useTranslation('form');
-
-  return (
-    <StandardForm>
-      <fieldset>
-        <Input
-          label={t('password')}
-          name="password"
-          type="password"
-          autoComplete="off"
-          icon="lock"
-        />
-      </fieldset>
-      <fieldset>
-        <Input label={t('password:newPassword')} name="newPassword" type="password" />
-        <Input
-          label={t('password:passwordConfirmation')}
-          name="newPasswordConfirmation"
-          type="password"
-        />
-      </fieldset>
-      <fieldset>
-        <SubmitBtn text={t('button.changePassword')} disabled={props.isSubmitting} />
-      </fieldset>
-    </StandardForm>
-  );
-};
-
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props => {
-    return Yup.object({
-      password: Yup.string().required(props.required),
-      newPassword: Yup.string().min(6, props.minlength).required(props.required),
-      newPasswordConfirmation: Yup.string()
-        .required(props.required)
-        .oneOf([Yup.ref('newPassword'), null], props.equalPassword)
-    });
-  },
-  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
-    const { password, newPassword, newPasswordConfirmation } = values;
-
-    await props
-      .changePassword({
-        variables: {
-          input: {
-            password,
-            newPassword,
-            newPasswordConfirmation
-          }
-        }
-      })
-      .then(res => {
-        setSubmitting(false);
-        resetForm({ values: initialValues });
-        props.onSubmit(res);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
-        });
-      });
-  }
-})(Form);
-
 const RecoverPassword = () => {
   const router = useRouter();
   const [changePassword] = useMutation(RESET_LOGGED_PASSWORD);
-  const [error, setError] = useState(null);
+  const [backendErrors, setBackendErrors] = useState<Record<string, unknown>>();
   const { t, lang } = useTranslation('form');
 
-  const handleOnSubmit = async res => {
+  const requiredError = t('validation.required');
+  const equalPasswordError = t('validation.equalPassword');
+  const minlengthError = t('validation.passwordLength');
+
+  const schema = Yup.object({
+    password: Yup.string().required(requiredError),
+    newPassword: Yup.string().min(6, minlengthError).required(requiredError),
+    newPasswordConfirmation: Yup.string()
+      .required(requiredError)
+      .oneOf([Yup.ref('newPassword'), null], equalPasswordError)
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { dirtyFields, isDirty, errors, isSubmitting }
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: initialValues
+  });
+
+  const onCompletedSubmit = async res => {
     if (res.type === 'Error') {
-      setError(res.data);
+      setBackendErrors(res.data);
       console.log('[STOOA] submit error', res);
     } else {
       router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang });
     }
   };
 
-  const requiredError = t('validation.required');
-  const equalPasswordError = t('validation.equalPassword');
-  const minlengthError = t('validation.passwordLength');
+  const onSubmit = async values => {
+    const { password, newPassword, newPasswordConfirmation } = values;
+
+    await changePassword({
+      variables: {
+        input: {
+          password,
+          newPassword,
+          newPasswordConfirmation
+        }
+      }
+    })
+      .then(res => {
+        reset(initialValues);
+        onCompletedSubmit(res);
+      })
+      .catch(error => {
+        onCompletedSubmit({
+          type: 'Error',
+          data: error
+        });
+      });
+  };
 
   return (
     <>
-      {error && <FormError errors={error} />}
-      <FormValidation
-        required={requiredError}
-        equalPassword={equalPasswordError}
-        minlength={minlengthError}
-        changePassword={changePassword}
-        onSubmit={handleOnSubmit}
-      />
+      {backendErrors && <FormError errors={backendErrors} />}
+      <StandardForm onSubmit={handleSubmit(onSubmit)}>
+        <fieldset>
+          <NewInput
+            isDirty={dirtyFields.password}
+            hasError={errors.password}
+            label={t('password')}
+            type="password"
+            autoComplete="off"
+            icon="lock"
+            {...register('password')}
+          />
+        </fieldset>
+        <fieldset>
+          <NewInput
+            isDirty={dirtyFields.newPassword}
+            hasError={errors.newPassword}
+            label={t('password:newPassword')}
+            type="password"
+            {...register('newPassword')}
+          />
+          <NewInput
+            isDirty={dirtyFields.newPasswordConfirmation}
+            hasError={errors.newPasswordConfirmation}
+            label={t('password:passwordConfirmation')}
+            type="password"
+            {...register('newPasswordConfirmation')}
+          />
+        </fieldset>
+        <fieldset>
+          <SubmitBtn text={t('button.changePassword')} disabled={!isDirty || isSubmitting} />
+        </fieldset>
+      </StandardForm>
     </>
   );
 };

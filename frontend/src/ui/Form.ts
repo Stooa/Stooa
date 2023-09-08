@@ -7,8 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import styled, { css } from 'styled-components';
-import { Form } from 'formik';
+import styled from 'styled-components';
 
 import Alert from '@/ui/Alert';
 import { space, media, rems } from '@/ui/helpers';
@@ -27,13 +26,9 @@ import {
 } from '@/ui/settings';
 import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
-interface Props {
-  $isFull?: boolean;
-}
-
-const FormStyles = css`
+const StandardForm = styled.form<{ $isFull?: boolean }>`
   position: relative;
-  max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -60,8 +55,8 @@ const FormStyles = css`
 
         &.success-message-bottom {
           ${media.min('tablet')`
-            bottom: -3.5ch;
-          `}
+          bottom: -3.5ch;
+        `}
           bottom: 3.25rem;
         }
       }
@@ -91,29 +86,24 @@ const FormStyles = css`
   }
 
   ${media.min('tablet')`
-    .fieldset-inline {
-      align-items: flex-start;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-  `}
+  .fieldset-inline {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+`}
 `;
 
-const StandardForm = styled.form`
-  ${FormStyles}
-`;
-
-const FormikForm = styled(Form)`
-  ${FormStyles}
-`;
-
-const InputStyled = styled.div`
+const InputStyled = styled.div<{
+  variant?: 'default' | 'small' | 'large-text';
+  placeholderStyle?: 'default' | 'large-text';
+}>`
   position: relative;
   width: 100%;
 
   ${media.min('tablet')`
-    &.sm {
+    &.small {
       width: calc(50% - ${space(0.5)});
 
       input,
@@ -458,8 +448,7 @@ export {
   InputStyled,
   TextDivider,
   SwitchStyled,
-  SwitchLabel,
-  FormikForm
+  SwitchLabel
 };
 
 export default StandardForm;

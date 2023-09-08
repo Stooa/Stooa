@@ -7,41 +7,48 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
-import { Field, useField } from 'formik';
+import { forwardRef } from 'react';
 
 import { InputStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
-import Icon from '@/components/Common/Fields/Icon';
-import { Input } from '@/types/input';
+import Icon, { IconVariant } from '@/components/Common/Fields/Icon';
+import { FieldError } from 'react-hook-form';
 
-const InputField: React.FC<Input> = ({
-  label,
-  variant = 'default',
-  help,
-  icon,
-  validation = true,
-  ...props
-}) => {
-  const [field, meta] = useField(props);
-  const isFilled = meta.value.toString().trim().length !== 0;
-  const isInvalid = validation && meta.touched && meta.error;
-
-  return (
-    <InputStyled className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}>
-      {icon && <Icon variant={icon} className="icon" />}
-      <Field
-        {...field}
-        {...props}
-        as="select"
-        className={`${isFilled ? 'filled' : ''} ${isInvalid ? 'invalid' : ''}`}
-      />
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <Icon variant="chevron-down" className="dropdown-icon" />
-      {isInvalid && <ValidationError>{meta.error}</ValidationError>}
-      {help && <p className="help body-sm">{help}</p>}
-    </InputStyled>
-  );
+type Props = Omit<JSX.IntrinsicElements['select'], 'as' | 'type' | 'ref'> & {
+  label?: string;
+  icon?: IconVariant;
+  hasError?: FieldError;
+  isValid?: boolean;
+  isDirty?: boolean;
+  validationError?: string;
+  help?: string;
+  variant?: 'default' | 'small';
 };
 
-export default InputField;
+const Select = forwardRef<HTMLInputElement, Props>(
+  (
+    { label, hasError, isDirty, isValid = true, icon, help, variant = 'default', ...props },
+    ref
+  ) => {
+    return (
+      <InputStyled
+        ref={ref}
+        className={`${icon ? 'withicon' : ''} ${variant !== 'default' ? variant : ''}`}
+      >
+        {icon && <Icon variant={icon} className="icon" />}
+        <select
+          {...props}
+          className={`${props.value || isDirty ? 'filled' : ''} ${
+            hasError || !isValid ? 'invalid' : ''
+          }`}
+        />
+        <label htmlFor={props.id || props.name}>{label}</label>
+        <Icon variant="chevron-down" className="dropdown-icon" />
+        {hasError && <ValidationError>{hasError.message}</ValidationError>}
+        {help && <p className="help body-sm">{help}</p>}
+      </InputStyled>
+    );
+  }
+);
+
+export default Select;

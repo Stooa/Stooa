@@ -7,39 +7,78 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
-import { useField, useFormikContext } from 'formik';
 import DatePickerField from 'react-datepicker';
 
-import { DatePicker } from '@/types/input';
 import { DatePickerStyled } from '@/ui/Form';
 import { ValidationError } from '@/ui/Validation';
-import Icon from '@/components/Common/Fields/Icon';
+import Icon, { IconVariant } from '@/components/Common/Fields/Icon';
+import { Controller, FieldError, useFormContext } from 'react-hook-form';
+import DatePicker from 'react-datepicker';
 
-const Input: React.FC<DatePicker> = ({ label, variant = 'default', icon, selected, ...props }) => {
-  const { setFieldValue } = useFormikContext();
-  const [field, meta] = useField(props);
-  const isInvalid = meta.touched && meta.error;
-  const selectedValue = field.value ? field.value : selected;
+type DatePicker = Omit<JSX.IntrinsicElements['input'], 'as' | 'type' | 'ref'> & {
+  icon?: IconVariant;
+  variant?: 'default' | 'small';
+  label?: string;
+  hasError?: FieldError;
+  isValid?: boolean;
+  minDate?: Date;
+  minTime?: Date;
+  maxTime?: Date;
+  placeholderText: string;
+  showTimeSelect?: boolean;
+  showTimeSelectOnly?: boolean;
+  timeIntervals?: number;
+  dateFormat?: 'dd/MM/yyyy' | 'HH:mm';
+  name: string;
+};
+
+const DatePicker = ({
+  label,
+  variant = 'default',
+  icon,
+  hasError,
+  isValid = true,
+  name,
+  dateFormat = 'dd/MM/yyyy',
+  timeIntervals = 15,
+  showTimeSelect = false,
+  showTimeSelectOnly = false
+}: DatePicker) => {
+  const isInvalid = hasError || !isValid;
+  const data = useFormContext();
+  const { control } = data;
 
   return (
     <DatePickerStyled
       className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}
     >
       {icon && <Icon variant={icon} className="icon" />}
-      <DatePickerField
-        {...props}
-        selected={selectedValue}
-        onChange={val => setFieldValue(field.name, val)}
-        className={isInvalid ? 'invalid' : ''}
+
+      <Controller
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <DatePickerField
+            dateFormat={dateFormat}
+            timeIntervals={timeIntervals}
+            timeFormat="HH:mm"
+            showTimeSelect={showTimeSelect}
+            showTimeSelectOnly={showTimeSelectOnly}
+            autocomplete="off"
+            selected={field.value}
+            onChange={date => field.onChange(date)}
+            className={isInvalid ? 'invalid' : ''}
+          />
+        )}
       />
-      <label className="small" htmlFor={props.id || props.name}>
+
+      <label className="small" htmlFor={name}>
         {label}
       </label>
       <Icon variant="chevron-down" className="dropdown-icon" />
-      {isInvalid && <ValidationError>{meta.error}</ValidationError>}
+      {hasError && <ValidationError>{hasError.message}</ValidationError>}
     </DatePickerStyled>
   );
 };
 
-export default Input;
+export default DatePicker;

@@ -8,12 +8,7 @@
  */
 
 import { useState } from 'react';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import * as Yup from 'yup';
@@ -24,8 +19,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { pushEventDataLayer, pushPageViewDataLayer } from '@/lib/analytics';
 import { CREATE_USER } from '@/lib/gql/User';
 import StandardForm from '@/ui/Form';
-import Input from '@/components/Common/Fields/Input';
-import Checkbox from '@/components/Common/Fields/Checkbox';
 import RedirectLink from '@/components/Web/RedirectLink';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
@@ -34,7 +27,8 @@ import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetw
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/updated/Input';
+import NewInput from '@/components/Common/Fields/Input';
+import Checkbox from '@/components/Common/Fields/Checkbox';
 
 interface FormValues {
   firstname: string;
@@ -86,12 +80,14 @@ const Register = () => {
     terms: Yup.boolean().required(requiredError).oneOf([true], termsError),
     linkedin: Yup.string()
       .matches(linkedinValidator, {
-        message: urlError
+        message: urlError,
+        excludeEmptyString: true
       })
       .url(urlError),
     twitter: Yup.string()
       .matches(twitterValidator, {
-        message: urlError
+        message: urlError,
+        excludeEmptyString: true
       })
       .url(urlError)
   });
@@ -134,6 +130,7 @@ const Register = () => {
   };
 
   const handleOnSubmit = async values => {
+    console.log('[STOOA] submit', values);
     await createUser({
       variables: {
         input: {
@@ -150,7 +147,6 @@ const Register = () => {
       }
     })
       .then(res => {
-        // resetForm({ values: initialValues });
         handleCompletedCreation(res, values);
       })
       .catch(error => {
@@ -169,30 +165,57 @@ const Register = () => {
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(handleOnSubmit)}>
         <fieldset className="fieldset-inline">
-          <NewInput label={t('firstname')} name="firstname" type="text" variant="sm" />
-          <Input label={t('lastname')} name="lastname" type="text" variant="sm" />
-          <Input label={t('email')} name="email" type="email" icon="mail" />
-          <Input label={t('password')} name="password" type="password" icon="lock" />
+          <NewInput
+            hasError={errors.firstname}
+            label={t('firstname')}
+            type="text"
+            variant="small"
+            {...register('firstname')}
+          />
+          <NewInput
+            hasError={errors.lastname}
+            label={t('lastname')}
+            type="text"
+            variant="small"
+            {...register('lastname')}
+          />
+          <NewInput
+            hasError={errors.email}
+            label={t('email')}
+            type="email"
+            icon="mail"
+            {...register('email')}
+          />
+          <NewInput
+            hasError={errors.password}
+            label={t('password')}
+            type="password"
+            icon="lock"
+            {...register('password')}
+          />
         </fieldset>
         <fieldset>
           <p className="body-xs">
             <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
           </p>
-          <Input
+          <NewInput
+            isDirty={dirtyFields.twitter}
+            hasError={errors.twitter}
             label={t('register:twitter')}
-            name="twitter"
             type="text"
             help={t('register:twitterHelp')}
+            {...register('twitter')}
           />
-          <Input
+          <NewInput
+            hasError={errors.linkedin}
             label={t('register:linkedin')}
-            name="linkedin"
             type="text"
             help={t('register:linkedinHelp')}
+            {...register('linkedin')}
           />
         </fieldset>
         <fieldset>
-          <Checkbox name="terms">
+          <Checkbox id="terms" hasError={errors.terms} {...register('terms')}>
             <Trans
               i18nKey="register:terms"
               components={{
@@ -209,7 +232,7 @@ const Register = () => {
           </Checkbox>
         </fieldset>
         <fieldset>
-          <SubmitBtn text={t('register:button.register')} disabled={props.isSubmitting} />
+          <SubmitBtn text={t('register:button.register')} disabled={!isDirty || isSubmitting} />
         </fieldset>
         <fieldset className="form__footer">
           <p className="body-sm">{t('register:haveAccount')}</p>

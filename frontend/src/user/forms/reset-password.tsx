@@ -8,110 +8,33 @@
  */
 
 import { useState } from 'react';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
-import Input from '@/components/Common/Fields/Input';
 import { RESET_PASSWORD } from '@/lib/gql/Password';
 import { useAuth } from '@/contexts/AuthContext';
 import StandardForm from '@/ui/Form';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import NewInput from '@/components/Common/Fields/Input';
 
 interface FormValues {
   password: string;
   passwordConfirmation: string;
 }
 
-interface FormProps {
-  required: string;
-  equalPassword: string;
-  minlength: string;
-  onSubmit: (res: unknown, any?) => Promise<void>;
-  resetPassword: (
-    options?: MutationFunctionOptions<unknown, OperationVariables>
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  token: string;
-}
-
-const initialValues = {
-  password: '',
-  passwordConfirmation: ''
-};
-
-const Form = (props: FormikProps<FormValues>) => {
-  const { t } = useTranslation('password');
-
-  return (
-    <StandardForm>
-      <fieldset>
-        <Input label={t('newPassword')} name="password" type="password" icon="lock" />
-        <Input
-          label={t('passwordConfirmation')}
-          name="passwordConfirmation"
-          type="password"
-          icon="lock"
-        />
-      </fieldset>
-      <fieldset>
-        <SubmitBtn text={t('changePassword')} disabled={props.isSubmitting} />
-      </fieldset>
-    </StandardForm>
-  );
-};
-
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props => {
-    return Yup.object({
-      password: Yup.string().min(6, props.minlength).required(props.required),
-      passwordConfirmation: Yup.string()
-        .required(props.required)
-        .oneOf([Yup.ref('password'), null], props.equalPassword)
-    });
-  },
-  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
-    await props
-      .resetPassword({
-        variables: {
-          input: {
-            token: props.token,
-            password: values.password,
-            passwordConfirmation: values.passwordConfirmation
-          }
-        }
-      })
-      .then(res => {
-        setSubmitting(false);
-        resetForm({ values: initialValues });
-        props.onSubmit(res, values);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
-        });
-      });
-  }
-})(Form);
-
 const ResetPassword = ({ token }: { token: string }) => {
   const [resetPassword] = useMutation(RESET_PASSWORD);
-  const [error, setError] = useState(null);
+  const [backendErrors, setBackendErrors] = useState<Record<string, unknown>>();
   const { login } = useAuth();
   const { t } = useTranslation('form');
 
-  const handleOnSubmit = async (res, values) => {
+  const onSubmitCompleted = async (res, values) => {
     if (res.type === 'Error') {
-      setError(res.data);
+      setBackendErrors(res.data);
       console.log('[STOOA] submit error', res);
     } else {
       console.log('[STOOA] password changed', res);
@@ -125,7 +48,7 @@ const ResetPassword = ({ token }: { token: string }) => {
 
       await login(email, values.password).then(res => {
         if (res.type === 'Error') {
-          setError(res.data);
+          setBackendErrors(res.data);
           console.error('[STOOA LOGIN]', res);
         }
       });
@@ -136,17 +59,76 @@ const ResetPassword = ({ token }: { token: string }) => {
   const equalPasswordError = t('validation.equalPassword');
   const minlengthError = t('validation.passwordLength');
 
+  const schema = Yup.object({
+    password: Yup.string().min(6, minlengthError).required(requiredError),
+    passwordConfirmation: Yup.string()
+      .required(requiredError)
+      .oneOf([Yup.ref('password'), null], equalPasswordError)
+  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { dirtyFields, isDirty, errors, isSubmitting }
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      password: '',
+      passwordConfirmation: ''
+    }
+  });
+
+  const onSubmit = async values => {
+    await resetPassword({
+      variables: {
+        input: {
+          token: token,
+          password: values.password,
+          passwordConfirmation: values.passwordConfirmation
+        }
+      }
+    })
+      .then(res => {
+        reset({ password: '', passwordConfirmation: '' });
+        onSubmitCompleted(res, values);
+      })
+      .catch(error => {
+        onSubmitCompleted(
+          {
+            type: 'Error',
+            data: error
+          },
+          {}
+        );
+      });
+  };
+
   return (
     <>
-      {error && <FormError errors={error} />}
-      <FormValidation
-        required={requiredError}
-        equalPassword={equalPasswordError}
-        minlength={minlengthError}
-        resetPassword={resetPassword}
-        onSubmit={handleOnSubmit}
-        token={token}
-      />
+      {backendErrors && <FormError errors={backendErrors} />}
+      <StandardForm onSubmit={handleSubmit(onSubmit)}>
+        <fieldset>
+          <NewInput
+            label={t('password:newPassword')}
+            isDirty={dirtyFields.password}
+            hasError={errors.password}
+            type="password"
+            icon="lock"
+            {...register('password')}
+          />
+          <NewInput
+            label={t('password:passwordConfirmation')}
+            isDirty={dirtyFields.passwordConfirmation}
+            hasError={errors.passwordConfirmation}
+            type="password"
+            icon="lock"
+            {...register('passwordConfirmation')}
+          />
+        </fieldset>
+        <fieldset>
+          <SubmitBtn text={t('password:changePassword')} disabled={!isDirty || isSubmitting} />
+        </fieldset>
+      </StandardForm>
     </>
   );
 };

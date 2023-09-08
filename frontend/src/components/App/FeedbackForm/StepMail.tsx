@@ -8,7 +8,7 @@
  */
 
 import Button from '@/components/Common/Button';
-import NewInput from '@/components/Common/Fields/updated/Input';
+import NewInput from '@/components/Common/Fields/Input';
 import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
 import { StyledCommentForm, StyledStepWrapper } from './styles';

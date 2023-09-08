@@ -24,7 +24,7 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import { useUser } from '@/jitsi';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/updated/Input';
+import NewInput from '@/components/Common/Fields/Input';
 
 type Props = {
   name: string;

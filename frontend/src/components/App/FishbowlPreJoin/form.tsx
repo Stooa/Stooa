@@ -24,7 +24,7 @@ import { toast } from 'react-toastify';
 import { useUser } from '@/jitsi';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/updated/Input';
+import NewInput from '@/components/Common/Fields/Input';
 
 interface FormValues {
   name: string;

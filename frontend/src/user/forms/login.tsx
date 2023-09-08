@@ -19,7 +19,7 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/updated/Input';
+import NewInput from '@/components/Common/Fields/Input';
 import StandardForm from '@/ui/Form';
 
 interface FormValues {

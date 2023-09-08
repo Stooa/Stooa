@@ -318,7 +318,7 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
                           </h2>
                         </div>
                         <FishbowlForm
-                          $isFull={true}
+                          isFull={true}
                           selectedFishbowl={selectedFishbowl}
                           isEditForm={true}
                           onSaveCallback={handleUpdateFishbowl}
