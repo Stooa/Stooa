@@ -30,7 +30,6 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
     { label, hasError, isValid, icon, help, isDirty, variant = 'default', placeholder, ...props },
     ref
   ) => {
-    console.log('VAAAAALEEEEEU', props);
     return (
       <InputStyled
         variant={variant}
