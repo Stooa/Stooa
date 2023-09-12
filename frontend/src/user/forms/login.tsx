@@ -19,7 +19,7 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 import StandardForm from '@/ui/Form';
 
 interface FormValues {
@@ -43,7 +43,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: { email: '', password: '' }
@@ -65,7 +65,8 @@ const Login = () => {
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             data-testid="mail-input"
             hasError={errors.email}
             icon="mail"
@@ -73,7 +74,8 @@ const Login = () => {
             label={t('email')}
             {...register('email')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             data-testid="password-input"
             hasError={errors.password}
             icon="lock"

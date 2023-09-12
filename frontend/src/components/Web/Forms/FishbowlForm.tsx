@@ -29,7 +29,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import { Fishbowl } from '@/types/api-platform';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 import NewTextarea from '@/components/Common/Fields/Textarea';
 import DatePicker from '@/components/Common/Fields/DatePicker';
 import Select from '@/components/Common/Fields/Select';
@@ -166,7 +166,7 @@ const FishbowlForm = ({
     getValues,
     reset,
     watch,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = methods;
 
   const watchIsPrivate = watch('isPrivate');
@@ -292,12 +292,15 @@ const FishbowlForm = ({
     }
   }, [isEditForm, selectedFishbowl, reset]);
 
+  const today = new Date();
+
   return (
     <FormProvider {...methods}>
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(onSubmit)} $isFull={isFull}>
         <fieldset className="fieldset-inline">
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.title}
             hasError={errors.title}
             data-testid="edit-form-title"
@@ -313,7 +316,6 @@ const FishbowlForm = ({
             hasError={errors.description}
             data-testid="edit-form-description"
             label={t('fishbowl.description')}
-            // validation={false}
             autoComplete="off"
             id="description"
             taller
@@ -325,13 +327,12 @@ const FishbowlForm = ({
             label={t('fishbowl.day')}
             placeholderText={t('fishbowl.selectDay')}
             id="day"
-            minDate={new Date()}
             dateFormat="dd/MM/yyyy"
             icon="calendar"
             autoComplete="off"
             variant="small"
             name="day"
-            // {...register('day')}
+            minDate={today}
           />
           <DatePicker
             hasError={errors.time}
@@ -347,7 +348,7 @@ const FishbowlForm = ({
             autoComplete="off"
             variant="small"
             name="time"
-            // {...register('time')}
+            minDate={today}
           />
           <Select
             isDirty={dirtyFields.hours}
@@ -451,7 +452,7 @@ const FishbowlForm = ({
             {...register('isPrivate')}
           />
           {watchIsPrivate && (
-            <NewInput
+            <Input
               isDirty={dirtyFields.plainPassword}
               hasError={errors.plainPassword}
               data-testid="fishbowl-form-passwordinput"
@@ -472,7 +473,7 @@ const FishbowlForm = ({
           <SubmitBtn
             data-testid="fishbowl-submit"
             text={isEditForm ? t('button.modifyFishbowl') : t('button.createFishbowl')}
-            disabled={isSubmitting || !isDirty}
+            disabled={isSubmitting}
           />
         </fieldset>
       </StandardForm>

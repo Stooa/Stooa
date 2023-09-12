@@ -21,7 +21,7 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   email: string;
@@ -41,7 +41,7 @@ const RecoverPassword = () => {
     register,
     reset,
     handleSubmit,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -87,7 +87,8 @@ const RecoverPassword = () => {
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.email}
             hasError={errors.email}
             label={t('email')}

@@ -33,6 +33,7 @@ const Select = forwardRef<HTMLInputElement, Props>(
     return (
       <InputStyled
         ref={ref}
+        variant={variant}
         className={`${icon ? 'withicon' : ''} ${variant !== 'default' ? variant : ''}`}
       >
         {icon && <Icon variant={icon} className="icon" />}

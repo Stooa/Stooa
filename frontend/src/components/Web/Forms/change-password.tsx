@@ -20,7 +20,7 @@ import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   password: string;
@@ -56,7 +56,7 @@ const RecoverPassword = () => {
     register,
     handleSubmit,
     reset,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: initialValues
@@ -100,7 +100,8 @@ const RecoverPassword = () => {
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.password}
             hasError={errors.password}
             label={t('password')}
@@ -111,14 +112,16 @@ const RecoverPassword = () => {
           />
         </fieldset>
         <fieldset>
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.newPassword}
             hasError={errors.newPassword}
             label={t('password:newPassword')}
             type="password"
             {...register('newPassword')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.newPasswordConfirmation}
             hasError={errors.newPasswordConfirmation}
             label={t('password:passwordConfirmation')}

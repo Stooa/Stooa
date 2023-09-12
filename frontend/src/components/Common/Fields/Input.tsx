@@ -20,14 +20,24 @@ type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'ref'> & {
   help?: string;
   hasError?: FieldError;
   isValid?: boolean;
+  isSubmitted?: boolean;
   isDirty?: boolean;
-  validationError?: string;
   variant?: 'default' | 'small' | 'large-text';
 };
 
-const NewInput = forwardRef<HTMLInputElement, Props>(
+const Input = forwardRef<HTMLInputElement, Props>(
   (
-    { label, hasError, isValid, icon, help, isDirty, variant = 'default', placeholder, ...props },
+    {
+      label,
+      hasError,
+      isSubmitted,
+      icon,
+      help,
+      isDirty,
+      variant = 'default',
+      placeholder,
+      ...props
+    },
     ref
   ) => {
     return (
@@ -36,7 +46,7 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
         className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''}`}
       >
         {icon && <Icon variant={icon} className="icon" />}
-        <input
+        <Input
           placeholder={placeholder}
           ref={ref}
           className={` ${
@@ -45,12 +55,12 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
           aria-invalid={hasError ? 'true' : 'false'}
           {...props}
         />
-        {isValid && (
+        <label htmlFor={props.id || props.name}>{label}</label>
+        {isSubmitted && !hasError && (
           <ValidationIcon>
             <Icon variant="checkmark" />
           </ValidationIcon>
         )}
-        <label htmlFor={props.id || props.name}>{label}</label>
         {hasError && (
           <>
             <ValidationIcon>
@@ -65,4 +75,4 @@ const NewInput = forwardRef<HTMLInputElement, Props>(
   }
 );
 
-export default NewInput;
+export default Input;

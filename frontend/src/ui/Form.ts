@@ -100,18 +100,14 @@ const InputStyled = styled.div<{
   placeholderStyle?: 'default' | 'large-text';
 }>`
   position: relative;
-  width: 100%;
+  width: ${({ variant }) => (variant === 'small' ? `calc(50% - ${space(0.5)})` : '100%')};
 
   ${media.min('tablet')`
-    &.small {
-      width: calc(50% - ${space(0.5)});
-
       input,
       textarea,
       select {
-        padding-right: ${space(4.5)}
+        padding-right: ${({ variant }) => (variant === 'small' ? space(4.5) : 'initial')};
       }
-    }
   `}
 
   svg {
@@ -247,7 +243,7 @@ const InputStyled = styled.div<{
   input.filled,
   textarea:focus,
   textarea.filled {
-    + label {
+    & + label {
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 

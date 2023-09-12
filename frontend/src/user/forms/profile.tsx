@@ -25,7 +25,7 @@ import FormError from '@/components/Web/Forms/FormError';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   firstname: string;
@@ -43,8 +43,7 @@ const mapUserDataToForm = userData => {
     lastname: surnames,
     email: email,
     linkedin: linkedinProfile,
-    twitter: twitterProfile,
-    isSubmitting: false
+    twitter: twitterProfile
   };
 };
 
@@ -78,7 +77,7 @@ const Profile = ({ userData, refetch }) => {
     register,
     handleSubmit,
     reset,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -126,7 +125,7 @@ const Profile = ({ userData, refetch }) => {
       .then(async res => {
         await getAuthToken(true);
 
-        reset(values);
+        reset(values, { keepDirtyValues: true });
         onCompletedSubmit(res);
       })
       .catch(error => {
@@ -150,7 +149,8 @@ const Profile = ({ userData, refetch }) => {
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(onSubmit)}>
         <fieldset className="fieldset-inline">
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.firstname}
             hasError={errors.firstname}
             label={t('firstname')}
@@ -158,7 +158,8 @@ const Profile = ({ userData, refetch }) => {
             variant="small"
             {...register('firstname')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.lastname}
             hasError={errors.lastname}
             label={t('lastname')}
@@ -166,7 +167,8 @@ const Profile = ({ userData, refetch }) => {
             variant="small"
             {...register('lastname')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.email}
             hasError={errors.email}
             label={t('email')}
@@ -180,7 +182,8 @@ const Profile = ({ userData, refetch }) => {
           <p className="body-xs">
             <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
           </p>
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.linkedin}
             hasError={errors.linkedin}
             label={t('register:twitter')}
@@ -188,7 +191,8 @@ const Profile = ({ userData, refetch }) => {
             help={t('register:twitterHelp')}
             {...register('twitter')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.twitter}
             hasError={errors.twitter}
             label={t('register:linkedin')}

@@ -24,7 +24,7 @@ import { IConferenceStatus } from '@/jitsi/Status';
 import { useUser } from '@/jitsi';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 
 type Props = {
   name: string;
@@ -52,7 +52,7 @@ const AuthUser = ({ name, isPrivate }: Props) => {
     register,
     handleSubmit,
     setError,
-    formState: { dirtyFields, isDirty, errors }
+    formState: { dirtyFields, isDirty, errors, isSubmitted }
   } = useForm<FormValues>({ resolver: yupResolver(schema), defaultValues: { password: '' } });
 
   const startFishbowlNow = () => {
@@ -131,7 +131,8 @@ const AuthUser = ({ name, isPrivate }: Props) => {
     <StandardForm onSubmit={handleSubmit(handleOnSubmit)}>
       <fieldset className="submit-wrapper">
         {isPrivate && !isModerator && (
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             data-testid="prejoin-password"
             hasError={errors.password}
             placeholder={t('fishbowl.passwordPlaceholder')}

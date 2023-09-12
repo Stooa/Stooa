@@ -27,7 +27,7 @@ import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetw
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 import Checkbox from '@/components/Common/Fields/Checkbox';
 
 interface FormValues {
@@ -95,7 +95,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -165,28 +165,36 @@ const Register = () => {
       {backendErrors && <FormError errors={backendErrors} />}
       <StandardForm onSubmit={handleSubmit(handleOnSubmit)}>
         <fieldset className="fieldset-inline">
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.firstname}
             hasError={errors.firstname}
             label={t('firstname')}
             type="text"
             variant="small"
             {...register('firstname')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.lastname}
             hasError={errors.lastname}
             label={t('lastname')}
             type="text"
             variant="small"
             {...register('lastname')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.email}
             hasError={errors.email}
             label={t('email')}
             type="email"
             icon="mail"
             {...register('email')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.password}
             hasError={errors.password}
             label={t('password')}
             type="password"
@@ -198,7 +206,8 @@ const Register = () => {
           <p className="body-xs">
             <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
           </p>
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             isDirty={dirtyFields.twitter}
             hasError={errors.twitter}
             label={t('register:twitter')}
@@ -206,7 +215,9 @@ const Register = () => {
             help={t('register:twitterHelp')}
             {...register('twitter')}
           />
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.linkedin}
             hasError={errors.linkedin}
             label={t('register:linkedin')}
             type="text"

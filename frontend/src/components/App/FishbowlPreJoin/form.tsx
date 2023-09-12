@@ -24,7 +24,7 @@ import { toast } from 'react-toastify';
 import { useUser } from '@/jitsi';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NewInput from '@/components/Common/Fields/Input';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   name: string;
@@ -65,7 +65,7 @@ const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
     handleSubmit,
     setValue,
     setError,
-    formState: { dirtyFields, isDirty, errors, isSubmitting }
+    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: { password: '', isPrivate, name: '' }
@@ -146,9 +146,16 @@ const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
   return (
     <StandardForm onSubmit={handleSubmit(handleOnSubmit)} className="prejoin">
       <fieldset className="submit-wrapper">
-        <NewInput label={t('name')} type="text" isDirty={dirtyFields.name} {...register('name')} />
+        <Input
+          isSubmitted={isSubmitted}
+          label={t('name')}
+          type="text"
+          isDirty={dirtyFields.name}
+          {...register('name')}
+        />
         {isPrivate && (
-          <NewInput
+          <Input
+            isSubmitted={isSubmitted}
             label={t('password')}
             type="password"
             autoComplete="false"

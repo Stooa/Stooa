@@ -42,16 +42,15 @@ const DatePicker = ({
   dateFormat = 'dd/MM/yyyy',
   timeIntervals = 15,
   showTimeSelect = false,
-  showTimeSelectOnly = false
+  showTimeSelectOnly = false,
+  ...props
 }: DatePicker) => {
   const isInvalid = hasError || !isValid;
   const data = useFormContext();
   const { control } = data;
 
   return (
-    <DatePickerStyled
-      className={`${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''} datepicker`}
-    >
+    <DatePickerStyled variant={variant} className={` ${icon ? 'withicon' : ''} datepicker`}>
       {icon && <Icon variant={icon} className="icon" />}
 
       <Controller
@@ -59,6 +58,7 @@ const DatePicker = ({
         name={name}
         render={({ field }) => (
           <DatePickerField
+            {...props}
             name={name}
             id={name}
             dateFormat={dateFormat}
