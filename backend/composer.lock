@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f65732eaa9f99f69fa5785a811929c2",
+    "content-hash": "555b89ef9a14cd6b8ee6a06bcac281ba",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3486,16 +3486,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.23.1",
+            "version": "1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26"
+                "reference": "3510b0a6274cc42f7219367cb3abfc123ffa09d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/846ae76eef31c6d7790fac9bc399ecee45160b26",
-                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/3510b0a6274cc42f7219367cb3abfc123ffa09d6",
+                "reference": "3510b0a6274cc42f7219367cb3abfc123ffa09d6",
                 "shasum": ""
             },
             "require": {
@@ -3527,9 +3527,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.23.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.24.0"
             },
-            "time": "2023-08-03T16:32:59+00:00"
+            "time": "2023-09-07T20:46:32+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -11320,16 +11320,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.3.2",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "3953f23262f2bff1919fc82183ad9acb13ff62c9"
+                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/3953f23262f2bff1919fc82183ad9acb13ff62c9",
-                "reference": "3953f23262f2bff1919fc82183ad9acb13ff62c9",
+                "url": "https://api.github.com/repos/composer/semver/zipball/35e8d0af4486141bc745f23a29cc2091eb624a32",
+                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32",
                 "shasum": ""
             },
             "require": {
@@ -11379,9 +11379,9 @@
                 "versioning"
             ],
             "support": {
-                "irc": "irc://irc.freenode.org/composer",
+                "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.3.2"
+                "source": "https://github.com/composer/semver/tree/3.4.0"
             },
             "funding": [
                 {
@@ -11397,7 +11397,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-01T19:23:25+00:00"
+            "time": "2023-08-31T09:50:34+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -12741,16 +12741,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.7.2",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "b2fe4d22a5426f38e014855322200b97b5362c0d"
+                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/b2fe4d22a5426f38e014855322200b97b5362c0d",
-                "reference": "b2fe4d22a5426f38e014855322200b97b5362c0d",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
+                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
                 "shasum": ""
             },
             "require": {
@@ -12793,9 +12793,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.2"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.3"
             },
-            "time": "2023-05-30T18:13:47+00:00"
+            "time": "2023-08-12T11:01:26+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -15144,16 +15144,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "5.14.1",
+            "version": "5.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "b9d355e0829c397b9b3b47d0c0ed042a8a70284d"
+                "reference": "5c774aca4746caf3d239d9c8cadb9f882ca29352"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/b9d355e0829c397b9b3b47d0c0ed042a8a70284d",
-                "reference": "b9d355e0829c397b9b3b47d0c0ed042a8a70284d",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/5c774aca4746caf3d239d9c8cadb9f882ca29352",
+                "reference": "5c774aca4746caf3d239d9c8cadb9f882ca29352",
                 "shasum": ""
             },
             "require": {
@@ -15180,6 +15180,9 @@
                 "spatie/array-to-xml": "^2.17.0 || ^3.0",
                 "symfony/console": "^4.1.6 || ^5.0 || ^6.0",
                 "symfony/filesystem": "^5.4 || ^6.0"
+            },
+            "conflict": {
+                "nikic/php-parser": "4.17.0"
             },
             "provide": {
                 "psalm/psalm": "self.version"
@@ -15244,9 +15247,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vimeo/psalm/issues",
-                "source": "https://github.com/vimeo/psalm/tree/5.14.1"
+                "source": "https://github.com/vimeo/psalm/tree/5.15.0"
             },
-            "time": "2023-08-01T05:16:55+00:00"
+            "time": "2023-08-20T23:07:30+00:00"
         },
         {
             "name": "weirdan/doctrine-psalm-plugin",
