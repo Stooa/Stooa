@@ -77,7 +77,7 @@ const Profile = ({ userData, refetch }) => {
     register,
     handleSubmit,
     reset,
-    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -184,8 +184,8 @@ const Profile = ({ userData, refetch }) => {
           </p>
           <Input
             isSubmitted={isSubmitted}
-            isDirty={dirtyFields.linkedin}
-            hasError={errors.linkedin}
+            isDirty={dirtyFields.twitter}
+            hasError={errors.twitter}
             label={t('register:twitter')}
             type="text"
             help={t('register:twitterHelp')}
@@ -193,8 +193,8 @@ const Profile = ({ userData, refetch }) => {
           />
           <Input
             isSubmitted={isSubmitted}
-            isDirty={dirtyFields.twitter}
-            hasError={errors.twitter}
+            isDirty={dirtyFields.linkedin}
+            hasError={errors.linkedin}
             label={t('register:linkedin')}
             type="text"
             help={t('register:linkedinHelp')}
@@ -202,7 +202,7 @@ const Profile = ({ userData, refetch }) => {
           />
         </fieldset>
         <fieldset>
-          <SubmitBtn text={t('button.save')} disabled={!isDirty || isSubmitting} />
+          <SubmitBtn text={t('button.save')} disabled={isSubmitting} />
         </fieldset>
       </StandardForm>
     </>

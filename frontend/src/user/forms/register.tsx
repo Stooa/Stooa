@@ -95,7 +95,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -243,7 +243,7 @@ const Register = () => {
           </Checkbox>
         </fieldset>
         <fieldset>
-          <SubmitBtn text={t('register:button.register')} disabled={!isDirty || isSubmitting} />
+          <SubmitBtn text={t('register:button.register')} disabled={isSubmitting} />
         </fieldset>
         <fieldset className="form__footer">
           <p className="body-sm">{t('register:haveAccount')}</p>

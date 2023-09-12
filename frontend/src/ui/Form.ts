@@ -52,10 +52,11 @@ const StandardForm = styled.form<{ $isFull?: boolean }>`
         text-align: center;
         color: ${COLOR_GREEN_600};
         margin: 0;
+        left: 0;
 
         &.success-message-bottom {
           ${media.min('tablet')`
-          bottom: -3.5ch;
+          bottom: -2.5ch;
         `}
           bottom: 3.25rem;
         }

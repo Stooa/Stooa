@@ -65,7 +65,7 @@ const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
     handleSubmit,
     setValue,
     setError,
-    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: { password: '', isPrivate, name: '' }
@@ -121,7 +121,7 @@ const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
           if (res.data.response) {
             handleDispatchJoinGuest();
           } else {
-            setError('password', t('validation.wrongPassword'));
+            setError('password', { message: t('validation.wrongPassword') });
           }
         })
         .catch(error => {
@@ -165,7 +165,7 @@ const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
           />
         )}
 
-        <Button size="large" type="submit" disabled={isSubmitting || (isPrivate && !isDirty)}>
+        <Button size="large" type="submit" disabled={isSubmitting}>
           {t('fishbowl:prejoin.joinDiscussion')}
         </Button>
       </fieldset>

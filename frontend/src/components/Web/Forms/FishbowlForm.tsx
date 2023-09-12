@@ -467,14 +467,14 @@ const FishbowlForm = ({
           )}
         </fieldset>
         <fieldset>
-          {success && (
-            <span className="success-message-bottom">{t('validation.successMessage')}</span>
-          )}
           <SubmitBtn
             data-testid="fishbowl-submit"
             text={isEditForm ? t('button.modifyFishbowl') : t('button.createFishbowl')}
             disabled={isSubmitting}
           />
+          {success && (
+            <span className="success-message-bottom">{t('validation.successMessage')}</span>
+          )}
         </fieldset>
       </StandardForm>
     </FormProvider>

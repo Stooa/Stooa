@@ -43,7 +43,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: { email: '', password: '' }
@@ -89,7 +89,7 @@ const Login = () => {
           </Link>
         </fieldset>
         <fieldset>
-          <SubmitBtn text={t('login:button')} disabled={!isDirty || isSubmitting} />
+          <SubmitBtn text={t('login:button')} disabled={isSubmitting} />
         </fieldset>
         <fieldset className="form__footer">
           <p className="body-sm">{t('login:noAccount')}</p>

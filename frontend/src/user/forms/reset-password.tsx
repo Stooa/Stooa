@@ -69,7 +69,7 @@ const ResetPassword = ({ token }: { token: string }) => {
     register,
     handleSubmit,
     reset,
-    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -128,7 +128,7 @@ const ResetPassword = ({ token }: { token: string }) => {
           />
         </fieldset>
         <fieldset>
-          <SubmitBtn text={t('password:changePassword')} disabled={!isDirty || isSubmitting} />
+          <SubmitBtn text={t('password:changePassword')} disabled={isSubmitting} />
         </fieldset>
       </StandardForm>
     </>

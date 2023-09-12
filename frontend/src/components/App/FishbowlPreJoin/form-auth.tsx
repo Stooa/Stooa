@@ -52,7 +52,7 @@ const AuthUser = ({ name, isPrivate }: Props) => {
     register,
     handleSubmit,
     setError,
-    formState: { dirtyFields, isDirty, errors, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitted }
   } = useForm<FormValues>({ resolver: yupResolver(schema), defaultValues: { password: '' } });
 
   const startFishbowlNow = () => {
@@ -97,7 +97,7 @@ const AuthUser = ({ name, isPrivate }: Props) => {
           if (res.data.response) {
             handleDispatchJoin();
           } else {
-            setError('password', t('validation.wrongPassword'));
+            setError('password', { message: t('validation.wrongPassword') });
           }
         })
         .catch(error => {
@@ -149,7 +149,7 @@ const AuthUser = ({ name, isPrivate }: Props) => {
           type="submit"
           size="large"
           data-testid="prejoin-cta"
-          disabled={isPrivate && !isModerator && !isDirty}
+          disabled={isPrivate && !isModerator}
         >
           {getButtonText()}
         </Button>

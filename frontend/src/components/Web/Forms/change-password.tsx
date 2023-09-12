@@ -56,7 +56,7 @@ const RecoverPassword = () => {
     register,
     handleSubmit,
     reset,
-    formState: { dirtyFields, isDirty, errors, isSubmitting, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: initialValues
@@ -130,7 +130,7 @@ const RecoverPassword = () => {
           />
         </fieldset>
         <fieldset>
-          <SubmitBtn text={t('button.changePassword')} disabled={!isDirty || isSubmitting} />
+          <SubmitBtn text={t('button.changePassword')} disabled={isSubmitting} />
         </fieldset>
       </StandardForm>
     </>
