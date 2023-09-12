@@ -46,7 +46,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
         className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''}`}
       >
         {icon && <Icon variant={icon} className="icon" />}
-        <Input
+        <input
           placeholder={placeholder}
           ref={ref}
           className={` ${
