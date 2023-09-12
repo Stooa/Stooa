@@ -43,7 +43,9 @@ const Input = forwardRef<HTMLInputElement, Props>(
     return (
       <InputStyled
         variant={variant}
-        className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''}`}
+        className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''} ${
+          props.disabled ? 'disabled' : ''
+        }`}
       >
         {icon && <Icon variant={icon} className="icon" />}
         <input
