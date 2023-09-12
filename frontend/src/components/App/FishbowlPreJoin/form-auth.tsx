@@ -52,7 +52,7 @@ const AuthUser = ({ name, isPrivate }: Props) => {
     register,
     handleSubmit,
     setError,
-    formState: { dirtyFields, errors, isSubmitted }
+    formState: { dirtyFields, errors, isSubmitted, isSubmitting }
   } = useForm<FormValues>({ resolver: yupResolver(schema), defaultValues: { password: '' } });
 
   const startFishbowlNow = () => {
@@ -145,12 +145,7 @@ const AuthUser = ({ name, isPrivate }: Props) => {
           />
         )}
 
-        <Button
-          type="submit"
-          size="large"
-          data-testid="prejoin-cta"
-          disabled={isPrivate && !isModerator}
-        >
+        <Button type="submit" size="large" data-testid="prejoin-cta" disabled={isSubmitting}>
           {getButtonText()}
         </Button>
       </fieldset>
