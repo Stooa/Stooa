@@ -53,7 +53,7 @@
         "symfony/workflow": "6.3.4",
         "symfony/yaml": "6.3.3",
         "symfonycasts/reset-password-bundle": "1.17.0",
-        "twig/twig": "3.7.0",
+        "twig/twig": "3.7.1",
         "webmozart/assert": "1.11.0",
         "webonyx/graphql-php": "14.11.10",
         "zenstruck/foundry": "1.35.0"
