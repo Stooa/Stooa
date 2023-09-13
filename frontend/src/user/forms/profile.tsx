@@ -63,12 +63,14 @@ const Profile = ({ userData, refetch }) => {
     email: Yup.string().email(t('validation.email')).required(requiredError),
     linkedin: Yup.string()
       .matches(linkedinValidator, {
-        message: urlError
+        message: urlError,
+        excludeEmptyString: true
       })
       .url(urlError),
     twitter: Yup.string()
       .matches(twitterValidator, {
-        message: urlError
+        message: urlError,
+        excludeEmptyString: true
       })
       .url(urlError)
   });
