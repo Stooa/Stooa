@@ -43,6 +43,7 @@ const DevicesToolbar = styled.div`
 `;
 
 const Form = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,6 +69,13 @@ const Form = styled.div`
   ${media.min('tablet')`
     padding:  ${space(15)} ${space(4)} ${space(6)} ${space(4)};
   `}
+
+  & .cancel {
+    position: absolute;
+    bottom: ${space(2)};
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const VideoContainer = styled.div`
