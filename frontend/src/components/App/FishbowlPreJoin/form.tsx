@@ -148,6 +148,7 @@ const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
       <fieldset className="submit-wrapper">
         <Input
           isSubmitted={isSubmitted}
+          hasError={errors.name}
           label={t('name')}
           type="text"
           isDirty={dirtyFields.name}

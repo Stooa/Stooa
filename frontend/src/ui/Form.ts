@@ -101,6 +101,7 @@ const InputStyled = styled.div<{
   placeholderStyle?: 'default' | 'large-text';
 }>`
   position: relative;
+  width: 100%;
 
   ${media.min('tablet')`
 
