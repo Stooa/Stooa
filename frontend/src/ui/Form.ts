@@ -101,14 +101,17 @@ const InputStyled = styled.div<{
   placeholderStyle?: 'default' | 'large-text';
 }>`
   position: relative;
-  width: ${({ variant }) => (variant === 'small' ? `calc(50% - ${space(0.5)})` : '100%')};
 
   ${media.min('tablet')`
-      input,
-      textarea,
-      select {
-        padding-right: ${({ variant }) => (variant === 'small' ? space(4.5) : 'initial')};
-      }
+
+    width: ${({ variant }) => (variant === 'small' ? `calc(50% - ${space(0.5)})` : '100%')};
+
+    input,
+    textarea,
+    select {
+      padding-right: ${({ variant }) => (variant === 'small' ? space(4.5) : 'initial')};
+    }
+
   `}
 
   svg {
