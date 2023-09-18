@@ -12,8 +12,8 @@ import { useStooa } from '@/contexts/StooaManager';
 import { IConferenceStatus } from '@/jitsi/Status';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import AuthUser from './form-auth';
-import GuestForm from './GuestForm';
+import AuthUser from './FormAuth';
+import GuestForm from './Form';
 
 export const PrejoinFishbowlForm = () => {
   const { isAuthenticated, user } = useAuth();

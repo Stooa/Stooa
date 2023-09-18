@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import NewInput from '@/components/Common/Fields/updated/Input';
+import Input from '@/components/Common/Fields/Input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
@@ -101,7 +101,7 @@ export const PrejoinForm = ({ isAuthenticated, user }: Props) => {
   return (
     <StyledPrejoinForm onSubmit={handleSubmit(onSubmit)}>
       {!isAuthenticated && (
-        <NewInput
+        <Input
           label={t('name')}
           isDirty={dirtyFields.name}
           hasError={errors.name}

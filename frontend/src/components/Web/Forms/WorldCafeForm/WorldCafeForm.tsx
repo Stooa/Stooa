@@ -17,15 +17,15 @@ import { useMutation } from '@apollo/client';
 import { CREATE_WORLD_CAFE } from '@/graphql/WorldCafe';
 
 import Button from '@/components/Common/Button';
-import NewInput from '@/components/Common/Fields/updated/Input';
-import NewTextarea from '@/components/Common/Fields/updated/Textarea';
-import { FieldValues, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import Input from '@/components/Common/Fields/Input';
+import Textarea from '@/components/Common/Fields/Textarea';
+import { FieldValues, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { StyledAddButton, StyledDeleteButton, StyledStepper, StyledWorldCafeForm } from './styles';
-import Select from '@/components/Common/Fields/updated/Select';
-import Switch from '@/components/Common/Fields/updated/Switch';
+import Select from '@/components/Common/Fields/Select';
+import Switch from '@/components/Common/Fields/Switch';
 import TitleWithDivider from '@/components/Common/TitleWithDivider/TitleWithDivider';
 import { TimeZoneSelector } from '@/components/Common/TimezoneSelector/TimeZoneSelector';
-import DatePicker from '@/components/Common/Fields/updated/DatePicker';
+import DatePicker from '@/components/Common/Fields/DatePicker';
 import TitleWithFullColoredTooltip from '@/components/Common/TitleWithFullColoredTooltip/TitleWithFullColoredTooltip';
 
 import CheckmarkSVG from '@/ui/svg/checkmark.svg';
@@ -106,13 +106,7 @@ const WorldCafeForm = () => {
     name: user && user.name ? user.name.split(' ')[0] : ''
   });
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    getValues,
-    formState: { errors, dirtyFields, isValid }
-  } = useForm<WorldCafeFormValues>({
+  const methods = useForm<WorldCafeFormValues>({
     resolver: yupResolver(validationSchema),
     mode: 'onChange',
     defaultValues: {
@@ -130,6 +124,14 @@ const WorldCafeForm = () => {
       ]
     }
   });
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    getValues,
+    formState: { errors, dirtyFields, isValid }
+  } = methods;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -175,7 +177,6 @@ const WorldCafeForm = () => {
     const dayFormatted = formatDateTime(data.date);
     const timeFormatted = formatDateTime(data.time);
 
-    console.log(data);
     createWorldCafe({
       variables: {
         input: {
@@ -216,192 +217,192 @@ const WorldCafeForm = () => {
   };
 
   return (
-    <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
-      <StyledStepper>
-        <li
-          id="basics"
-          className={`${step === 'basics' ? 'current' : ''}`}
-          onClick={returnToBeginning}
-        >
-          <div className={`status ${step === 'questions' ? 'done' : 'highlighted'}`}>
-            {step === 'questions' ? <CheckmarkSVG /> : '1'}
-          </div>
-          {t('worldCafe.basics')}
-        </li>
-
-        <div className={step === 'questions' ? 'green' : ''} />
-
-        <li className={`${step === 'questions' ? 'current' : 'disabled'}`}>
-          <div className={`status ${step === 'questions' ? 'highlighted' : 'current'}`}>2</div>
-          {t('worldCafe.questions')}
-        </li>
-      </StyledStepper>
-
-      {formError && <FormError errors={formError} />}
-
-      <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
-        <fieldset>
-          <NewInput
-            label={t('fishbowl.title')}
-            {...register('title')}
-            placeholder={defaultTitle}
-            isDirty={dirtyFields.title}
-            hasError={errors.title}
-          />
-
-          <NewTextarea
-            label={t('fishbowl.description')}
-            {...register('description')}
-            isDirty={dirtyFields.description}
-            hasError={errors.description}
-          />
-
-          <DatePicker
-            placeholderText="Choose a date"
-            label={t('fishbowl.day')}
-            icon="calendar"
-            control={control}
-            name="date"
-            id="date"
-            variant="small"
-            minDate={today}
-          />
-
-          <DatePicker
-            placeholderText="Choose a time"
-            label={t('fishbowl.time')}
-            icon="clock"
-            showTimeSelect
-            showTimeSelectOnly
-            dateFormat="HH:mm"
-            control={control}
-            name="time"
-            id="time"
-            variant="small"
-            hasError={errors.time}
-          />
-        </fieldset>
-
-        <fieldset>
-          <TitleWithDivider regularWeight headingLevel="h4">
-            {t('fishbowl.advancedOptions')}
-          </TitleWithDivider>
-          <TimeZoneSelector
-            placeholder="Timezone"
-            name="timezone"
-            label={t('fishbowl.timezone')}
-            defaultValue={getValues('timezone')}
-            register={register}
-          />
-
-          <Select icon="language" label={t('fishbowl.language')} {...register('language')}>
-            {locales.map(locale => (
-              <option value={locale} key={`locale-${locale}`}>
-                {t(`common:languages.${locale}`)}
-              </option>
-            ))}
-          </Select>
-        </fieldset>
-
-        <Button
-          className="next-step-button"
-          data-testid="next-step-button"
-          type="submit"
-          color="primary"
-          size="large"
-          full
-          onClick={handleNextStep}
-          disabled={firstPartIsInvalid}
-        >
-          {t('worldCafe.next')} <ArrowRightSVG />
-        </Button>
-      </div>
-
-      {/* QUESTIONS */}
-      <div id="step-questions" className={step !== 'questions' ? 'hidden' : ''}>
-        <fieldset>
-          <TitleWithFullColoredTooltip
-            tooltipText={t('worldCafe.questionsTooltip')}
-            headingLevel="h3"
+    <FormProvider {...methods}>
+      <StyledWorldCafeForm onSubmit={handleSubmit(onSubmit)}>
+        <StyledStepper>
+          <li
+            id="basics"
+            className={`${step === 'basics' ? 'current' : ''}`}
+            onClick={returnToBeginning}
           >
+            <div className={`status ${step === 'questions' ? 'done' : 'highlighted'}`}>
+              {step === 'questions' ? <CheckmarkSVG /> : '1'}
+            </div>
+            {t('worldCafe.basics')}
+          </li>
+
+          <div className={step === 'questions' ? 'green' : ''} />
+
+          <li className={`${step === 'questions' ? 'current' : 'disabled'}`}>
+            <div className={`status ${step === 'questions' ? 'highlighted' : 'current'}`}>2</div>
             {t('worldCafe.questions')}
-          </TitleWithFullColoredTooltip>
-          <div className="questions">
-            {fields.map((field, index) => (
-              <div
-                className="question"
-                key={field.id}
-                onFocusCapture={event => handleShowDescription(event, index)}
-              >
-                <NewTextarea
-                  placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
-                  placeholderStyle="large-text"
-                  hasError={errors.questions?.[index]?.title}
-                  variant="large-text"
-                  {...register(`questions.${index}.title`)}
-                />
-                {!errors.questions?.[index]?.title && (
-                  <StyledDeleteButton
-                    className="delete"
-                    disabled={fields.length < 3}
-                    onClick={() => handleDeleteTopic(index)}
-                  >
-                    <BinSVG />
-                  </StyledDeleteButton>
-                )}
+          </li>
+        </StyledStepper>
 
-                <NewTextarea
-                  placeholder={t('worldCafe.descriptionPlaceholder')}
-                  className={`description ${showDescription[index] ? 'show' : ''}`}
-                  hasError={errors.questions?.[index]?.description}
-                  {...register(`questions.${index}.description`)}
-                />
-              </div>
-            ))}
-          </div>
+        {formError && <FormError errors={formError} />}
 
-          <StyledAddButton disabled={fields.length > 4} onClick={handleAddNewTopic}>
-            + {t('worldCafe.addQuestion')}
-          </StyledAddButton>
-        </fieldset>
+        <div id="step-general" className={step !== 'basics' ? 'hidden' : ''}>
+          <fieldset>
+            <Input
+              label={t('fishbowl.title')}
+              {...register('title')}
+              placeholder={defaultTitle}
+              isDirty={dirtyFields.title}
+              hasError={errors.title}
+            />
 
-        <fieldset>
-          <h3>{t('worldCafe.roundDuration')}</h3>
+            <Textarea
+              label={t('fishbowl.description')}
+              {...register('description')}
+              isDirty={dirtyFields.description}
+              hasError={errors.description}
+            />
 
-          <Select
-            id="roundDuration"
-            icon="clock"
-            label={t('worldCafe.roundTimeLabel')}
-            {...register('roundDuration')}
-          >
-            <option value="5">5 {t('worldCafe.minutes')}</option>
-            <option value="10">10 {t('worldCafe.minutes')}</option>
-            <option value="15">15 {t('worldCafe.minutes')}</option>
-            <option value="20">20 {t('worldCafe.minutes')}</option>
-            <option value="25">25 {t('worldCafe.minutes')}</option>
-          </Select>
+            <DatePicker
+              placeholderText="Choose a date"
+              label={t('fishbowl.day')}
+              icon="calendar"
+              name="date"
+              id="date"
+              variant="small"
+              minDate={today}
+            />
 
-          <Switch
+            <DatePicker
+              placeholderText="Choose a time"
+              label={t('fishbowl.time')}
+              icon="clock"
+              showTimeSelect
+              showTimeSelectOnly
+              dateFormat="HH:mm"
+              name="time"
+              id="time"
+              variant="small"
+              hasError={errors.time}
+            />
+          </fieldset>
+
+          <fieldset>
+            <TitleWithDivider regularWeight headingLevel="h4">
+              {t('fishbowl.advancedOptions')}
+            </TitleWithDivider>
+            <TimeZoneSelector
+              placeholder="Timezone"
+              name="timezone"
+              label={t('fishbowl.timezone')}
+              defaultValue={getValues('timezone')}
+              register={register}
+            />
+
+            <Select icon="language" label={t('fishbowl.language')} {...register('language')}>
+              {locales.map(locale => (
+                <option value={locale} key={`locale-${locale}`}>
+                  {t(`common:languages.${locale}`)}
+                </option>
+              ))}
+            </Select>
+          </fieldset>
+
+          <Button
+            className="next-step-button"
+            data-testid="next-step-button"
+            type="submit"
+            color="primary"
+            size="large"
             full
-            id="addExtraTime"
-            label={t('worldCafe.add5MinutesLabel')}
-            tooltipText={t('worldCafe.add5MinutesTooltip')}
-            {...register('addExtraTime')}
-          />
-        </fieldset>
+            onClick={handleNextStep}
+            disabled={firstPartIsInvalid}
+          >
+            {t('worldCafe.next')} <ArrowRightSVG />
+          </Button>
+        </div>
 
-        <Button
-          full
-          data-testid="world-cafe-form-submit-button"
-          disabled={!isValid}
-          type="submit"
-          size="large"
-          variant="primary"
-        >
-          {t('worldCafe.submit')}
-        </Button>
-      </div>
-    </StyledWorldCafeForm>
+        {/* QUESTIONS */}
+        <div id="step-questions" className={step !== 'questions' ? 'hidden' : ''}>
+          <fieldset>
+            <TitleWithFullColoredTooltip
+              tooltipText={t('worldCafe.questionsTooltip')}
+              headingLevel="h3"
+            >
+              {t('worldCafe.questions')}
+            </TitleWithFullColoredTooltip>
+            <div className="questions">
+              {fields.map((field, index) => (
+                <div
+                  className="question"
+                  key={field.id}
+                  onFocusCapture={event => handleShowDescription(event, index)}
+                >
+                  <Textarea
+                    placeholder={t('worldCafe.defaults.question', { number: index + 1 })}
+                    placeholderStyle="large-text"
+                    hasError={errors.questions?.[index]?.title}
+                    variant="large-text"
+                    {...register(`questions.${index}.title`)}
+                  />
+                  {!errors.questions?.[index]?.title && (
+                    <StyledDeleteButton
+                      className="delete"
+                      disabled={fields.length < 3}
+                      onClick={() => handleDeleteTopic(index)}
+                    >
+                      <BinSVG />
+                    </StyledDeleteButton>
+                  )}
+
+                  <Textarea
+                    placeholder={t('worldCafe.descriptionPlaceholder')}
+                    className={`description ${showDescription[index] ? 'show' : ''}`}
+                    hasError={errors.questions?.[index]?.description}
+                    {...register(`questions.${index}.description`)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <StyledAddButton disabled={fields.length > 4} onClick={handleAddNewTopic}>
+              + {t('worldCafe.addQuestion')}
+            </StyledAddButton>
+          </fieldset>
+
+          <fieldset>
+            <h3>{t('worldCafe.roundDuration')}</h3>
+
+            <Select
+              id="roundDuration"
+              icon="clock"
+              label={t('worldCafe.roundTimeLabel')}
+              {...register('roundDuration')}
+            >
+              <option value="5">5 {t('worldCafe.minutes')}</option>
+              <option value="10">10 {t('worldCafe.minutes')}</option>
+              <option value="15">15 {t('worldCafe.minutes')}</option>
+              <option value="20">20 {t('worldCafe.minutes')}</option>
+              <option value="25">25 {t('worldCafe.minutes')}</option>
+            </Select>
+
+            <Switch
+              full
+              id="addExtraTime"
+              label={t('worldCafe.add5MinutesLabel')}
+              tooltipText={t('worldCafe.add5MinutesTooltip')}
+              {...register('addExtraTime')}
+            />
+          </fieldset>
+
+          <Button
+            full
+            data-testid="world-cafe-form-submit-button"
+            disabled={!isValid}
+            type="submit"
+            size="large"
+            variant="primary"
+          >
+            {t('worldCafe.submit')}
+          </Button>
+        </div>
+      </StyledWorldCafeForm>
+    </FormProvider>
   );
 };
 

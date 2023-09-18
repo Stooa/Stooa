@@ -54,7 +54,7 @@ const StyledFishbowlDataCard = styled.div`
     color: ${COLOR_NEUTRO_800};
 
     & + :not(.description) {
-      margin-top: ${space(4)};
+      /* margin-top: ${space(4)}; */
     }
   }
 

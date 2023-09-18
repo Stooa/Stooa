@@ -31,7 +31,7 @@ type Props = Omit<JSX.IntrinsicElements['textarea'], 'as' | 'type' | 'ref'> & {
   taller?: boolean;
 };
 
-const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
+const Textarea = forwardRef<HTMLTextAreaElement, Props>(
   (
     {
       label,
@@ -82,4 +82,4 @@ const NewTextarea = forwardRef<HTMLTextAreaElement, Props>(
   }
 );
 
-export default NewTextarea;
+export default Textarea;
