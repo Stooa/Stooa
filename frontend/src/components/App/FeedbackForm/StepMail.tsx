@@ -8,7 +8,7 @@
  */
 
 import Button from '@/components/Common/Button';
-import NewInput from '@/components/Common/Fields/updated/Input';
+import Input from '@/components/Common/Fields/Input';
 import useTranslation from 'next-translate/useTranslation';
 import { useForm } from 'react-hook-form';
 import { StyledCommentForm, StyledStepWrapper } from './styles';
@@ -33,7 +33,7 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { dirtyFields, isDirty, errors }
+    formState: { dirtyFields, isDirty, errors, isSubmitted }
   } = useForm({ resolver: yupResolver(schema), defaultValues: { email: '' } });
 
   const onSubmit = data => {
@@ -47,7 +47,8 @@ const StepMail = ({ handleMailFeedback, handleSkip }: Props) => {
         <Trans i18nKey="fishbowl:feedback.emailDescription" components={{ i: <i /> }} />
       </p>
       <StyledCommentForm onSubmit={handleSubmit(onSubmit)}>
-        <NewInput
+        <Input
+          isSubmitted={isSubmitted}
           data-testid="feedback-mail-input"
           hasError={errors.email}
           icon="mail"

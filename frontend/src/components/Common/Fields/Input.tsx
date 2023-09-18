@@ -7,60 +7,74 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
-import { Field, useField } from 'formik';
-
-import { Input } from '@/types/input';
+import { forwardRef } from 'react';
 import { InputStyled } from '@/ui/Form';
 import { ValidationError, ValidationIcon } from '@/ui/Validation';
-import Icon from '@/components/Common/Fields/Icon';
+import Icon, { IconVariant } from './Icon';
+import { FieldError } from 'react-hook-form';
 
-const InputField: React.FC<Input> = ({
-  className = '',
-  children,
-  label,
-  variant = 'default',
-  help,
-  icon,
-  as = 'input',
-  validation = true,
-  ...props
-}) => {
-  const [field, meta] = useField(props);
-  const isFilled = meta.value ? meta.value.toString().trim().length !== 0 : false;
-  const isValid = validation && meta.touched && !meta.error;
-  const isInvalid = validation && meta.touched && meta.error;
-
-  return (
-    <InputStyled
-      className={`${className} ${variant !== 'default' ? variant : ''} ${icon ? 'withicon' : ''}`}
-    >
-      {icon && <Icon variant={icon} className="icon" />}
-      <Field
-        {...field}
-        {...props}
-        as={as}
-        className={`${isFilled || props.placeholder ? 'filled' : ''} ${isInvalid ? 'invalid' : ''}`}
-      />
-      <label htmlFor={props.id || props.name}>{label}</label>
-
-      {children && props.type === 'radio' && <div className="input-radio-wrapper">{children}</div>}
-      {isValid && (
-        <ValidationIcon>
-          <Icon variant="checkmark" />
-        </ValidationIcon>
-      )}
-      {isInvalid && (
-        <>
-          <ValidationIcon>
-            <Icon variant="cross" />
-          </ValidationIcon>
-          <ValidationError>{meta.error}</ValidationError>
-        </>
-      )}
-      {help && <p className="help body-sm">{help}</p>}
-    </InputStyled>
-  );
+type Props = Omit<JSX.IntrinsicElements['input'], 'as' | 'ref'> & {
+  label?: string;
+  placeholder?: string;
+  icon?: IconVariant;
+  help?: string;
+  hasError?: FieldError;
+  isValid?: boolean;
+  isSubmitted?: boolean;
+  isDirty?: boolean;
+  variant?: 'default' | 'small' | 'large-text';
 };
 
-export default InputField;
+const Input = forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      label,
+      hasError,
+      isSubmitted,
+      icon,
+      help,
+      isDirty,
+      variant = 'default',
+      placeholder,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <InputStyled
+        variant={variant}
+        className={`${icon ? 'withicon' : ''} ${!label ? 'no-label' : ''} ${
+          props.disabled ? 'disabled' : ''
+        }`}
+      >
+        {icon && <Icon variant={icon} className="icon" />}
+        <input
+          placeholder={placeholder}
+          ref={ref}
+          className={` ${
+            (props.value !== '' && props.value) || isDirty || (label && placeholder) ? 'filled' : ''
+          } ${hasError ? 'invalid' : ''}`}
+          aria-invalid={hasError ? 'true' : 'false'}
+          {...props}
+        />
+        <label htmlFor={props.id || props.name}>{label}</label>
+        {isSubmitted && !hasError && (
+          <ValidationIcon>
+            <Icon variant="checkmark" />
+          </ValidationIcon>
+        )}
+        {hasError && (
+          <>
+            <ValidationIcon>
+              <Icon variant="cross" />
+            </ValidationIcon>
+            <ValidationError>{hasError.message}</ValidationError>
+          </>
+        )}
+        {help && <p className="help body-sm">{help}</p>}
+      </InputStyled>
+    );
+  }
+);
+
+export default Input;
