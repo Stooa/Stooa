@@ -8,15 +8,9 @@
  */
 
 import { useState } from 'react';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
-import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { ROUTE_SIGN_IN, ROUTE_PRIVACY_POLICY } from '@/app.config';
@@ -24,15 +18,17 @@ import i18nConfig from '@/i18n';
 import { useAuth } from '@/contexts/AuthContext';
 import { pushEventDataLayer, pushPageViewDataLayer } from '@/lib/analytics';
 import { CREATE_USER } from '@/lib/gql/User';
-import FormikForm from '@/ui/Form';
-import Input from '@/components/Common/Fields/Input';
-import Checkbox from '@/components/Common/Fields/Checkbox';
+import StandardForm from '@/ui/Form';
 import RedirectLink from '@/components/Web/RedirectLink';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { useUser } from '@/jitsi';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Input from '@/components/Common/Fields/Input';
+import Checkbox from '@/components/Common/Fields/Checkbox';
 
 interface FormValues {
   firstname: string;
@@ -45,162 +41,15 @@ interface FormValues {
   isSubmitting: boolean;
 }
 
-interface FormProps {
-  required: string;
-  notEmpty: string;
-  email: string;
-  terms: string;
-  minlength: string;
-  locale: string;
-  url: string;
-  createUser: (
-    options?: MutationFunctionOptions<unknown, OperationVariables>
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  onSubmit: (res: unknown, values?: unknown) => Promise<void>;
-}
-
-const initialValues = {
-  firstname: '',
-  lastname: '',
-  email: '',
-  password: '',
-  terms: false,
-  linkedin: '',
-  twitter: '',
-  isSubmitting: false
-};
-
-const Form = (props: FormikProps<FormValues>) => {
-  const { t, lang } = useTranslation('form');
-  const privacyLink =
-    lang === i18nConfig.defaultLocale ? ROUTE_PRIVACY_POLICY : `/${lang}${ROUTE_PRIVACY_POLICY}`;
-  return (
-    <FormikForm>
-      <fieldset className="fieldset-inline">
-        <Input label={t('firstname')} name="firstname" type="text" variant="sm" />
-        <Input label={t('lastname')} name="lastname" type="text" variant="sm" />
-        <Input label={t('email')} name="email" type="email" icon="mail" />
-        <Input label={t('password')} name="password" type="password" icon="lock" />
-      </fieldset>
-      <fieldset>
-        <p className="body-xs">
-          <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
-        </p>
-        <Input
-          label={t('register:twitter')}
-          name="twitter"
-          type="text"
-          help={t('register:twitterHelp')}
-        />
-        <Input
-          label={t('register:linkedin')}
-          name="linkedin"
-          type="text"
-          help={t('register:linkedinHelp')}
-        />
-      </fieldset>
-      <fieldset>
-        <Checkbox name="terms">
-          <Trans
-            i18nKey="register:terms"
-            components={{
-              a: (
-                <a
-                  className="decorated"
-                  href={privacyLink}
-                  target="_blank"
-                  rel="noreferrer noopener nofollow"
-                />
-              )
-            }}
-          />
-        </Checkbox>
-      </fieldset>
-      <fieldset>
-        <SubmitBtn text={t('register:button.register')} disabled={props.isSubmitting} />
-      </fieldset>
-      <fieldset className="form__footer">
-        <p className="body-sm">
-          {t('register:haveAccount')}{' '}
-          <RedirectLink href={ROUTE_SIGN_IN} passHref>
-            <a className="decorated colored">{t('register:button.login')}</a>
-          </RedirectLink>
-        </p>
-      </fieldset>
-    </FormikForm>
-  );
-};
-
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props => {
-    return Yup.object({
-      firstname: Yup.string()
-        .matches(/[^-\s]/, {
-          excludeEmptyString: true,
-          message: props.notEmpty
-        })
-        .required(props.required),
-      lastname: Yup.string()
-        .matches(/[^-\s]/, {
-          excludeEmptyString: true,
-          message: props.notEmpty
-        })
-        .required(props.required),
-      email: Yup.string().email(props.email).required(props.required),
-      password: Yup.string().min(6, props.minlength).required(props.required),
-      terms: Yup.boolean().required(props.required).oneOf([true], props.terms),
-      linkedin: Yup.string()
-        .matches(linkedinValidator, {
-          message: props.url
-        })
-        .url(props.url),
-      twitter: Yup.string()
-        .matches(twitterValidator, {
-          message: props.url
-        })
-        .url(props.url)
-    });
-  },
-  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
-    await props
-      .createUser({
-        variables: {
-          input: {
-            name: values.firstname,
-            surnames: values.lastname,
-            email: values.email,
-            linkedinProfile: values.linkedin,
-            twitterProfile: values.twitter,
-            plainPassword: values.password,
-            privacyPolicy: !!values.terms,
-            locale: props.locale,
-            allowShareData: values.linkedin !== '' || values.twitter !== ''
-          }
-        }
-      })
-      .then(res => {
-        setSubmitting(false);
-        resetForm({ values: initialValues });
-        props.onSubmit(res, values);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
-        });
-      });
-  }
-})(Form);
-
 const Register = () => {
-  const [error, setError] = useState(null);
+  const { t, lang } = useTranslation('form');
+  const [backendErrors, setBackendErrors] = useState<Record<string, unknown>>();
   const [createUser] = useMutation(CREATE_USER);
   const { login } = useAuth();
-  const { t, lang } = useTranslation('form');
-  const router = useRouter();
+
   const { clearUser } = useUser();
+
+  const router = useRouter();
   const { prefishbowl } = router.query;
 
   const requiredError = t('validation.required');
@@ -210,9 +59,59 @@ const Register = () => {
   const urlError = t('validation.url');
   const notEmptyError = t('validation.notEmpty');
 
-  const handleOnSubmit = async (res, values) => {
+  const privacyLink =
+    lang === i18nConfig.defaultLocale ? ROUTE_PRIVACY_POLICY : `/${lang}${ROUTE_PRIVACY_POLICY}`;
+
+  const schema = Yup.object({
+    firstname: Yup.string()
+      .matches(/[^-\s]/, {
+        excludeEmptyString: true,
+        message: notEmptyError
+      })
+      .required(requiredError),
+    lastname: Yup.string()
+      .matches(/[^-\s]/, {
+        excludeEmptyString: true,
+        message: notEmptyError
+      })
+      .required(requiredError),
+    email: Yup.string().email(emailError).required(requiredError),
+    password: Yup.string().min(6, minlengthError).required(requiredError),
+    terms: Yup.boolean().required(requiredError).oneOf([true], termsError),
+    linkedin: Yup.string()
+      .matches(linkedinValidator, {
+        message: urlError,
+        excludeEmptyString: true
+      })
+      .url(urlError),
+    twitter: Yup.string()
+      .matches(twitterValidator, {
+        message: urlError,
+        excludeEmptyString: true
+      })
+      .url(urlError)
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      terms: false,
+      linkedin: '',
+      twitter: ''
+    }
+  });
+
+  const handleCompletedCreation = async (res, values) => {
     if (res.type === 'Error') {
-      setError(res.data);
+      setBackendErrors(res.data);
       console.log('[STOOA] submit error', res);
     } else {
       if (prefishbowl) {
@@ -230,20 +129,129 @@ const Register = () => {
     }
   };
 
+  const handleOnSubmit = async values => {
+    console.log('[STOOA] submit', values);
+    await createUser({
+      variables: {
+        input: {
+          name: values.firstname,
+          surnames: values.lastname,
+          email: values.email,
+          linkedinProfile: values.linkedin,
+          twitterProfile: values.twitter,
+          plainPassword: values.password,
+          privacyPolicy: !!values.terms,
+          locale: lang,
+          allowShareData: values.linkedin !== '' || values.twitter !== ''
+        }
+      }
+    })
+      .then(res => {
+        handleCompletedCreation(res, values);
+      })
+      .catch(error => {
+        handleCompletedCreation(
+          {
+            type: 'Error',
+            data: error
+          },
+          {}
+        );
+      });
+  };
+
   return (
     <>
-      {error && <FormError errors={error} />}
-      <FormValidation
-        notEmpty={notEmptyError}
-        required={requiredError}
-        email={emailError}
-        terms={termsError}
-        minlength={minlengthError}
-        url={urlError}
-        locale={lang}
-        createUser={createUser}
-        onSubmit={handleOnSubmit}
-      />
+      {backendErrors && <FormError errors={backendErrors} />}
+      <StandardForm onSubmit={handleSubmit(handleOnSubmit)}>
+        <fieldset className="fieldset-inline">
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.firstname}
+            hasError={errors.firstname}
+            label={t('firstname')}
+            type="text"
+            variant="small"
+            {...register('firstname')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.lastname}
+            hasError={errors.lastname}
+            label={t('lastname')}
+            type="text"
+            variant="small"
+            {...register('lastname')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.email}
+            hasError={errors.email}
+            label={t('email')}
+            type="email"
+            icon="mail"
+            {...register('email')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.password}
+            hasError={errors.password}
+            label={t('password')}
+            type="password"
+            icon="lock"
+            {...register('password')}
+          />
+        </fieldset>
+        <fieldset>
+          <p className="body-xs">
+            <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
+          </p>
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.twitter}
+            hasError={errors.twitter}
+            label={t('register:twitter')}
+            type="text"
+            help={t('register:twitterHelp')}
+            {...register('twitter')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.linkedin}
+            hasError={errors.linkedin}
+            label={t('register:linkedin')}
+            type="text"
+            help={t('register:linkedinHelp')}
+            {...register('linkedin')}
+          />
+        </fieldset>
+        <fieldset>
+          <Checkbox id="terms" hasError={errors.terms} {...register('terms')}>
+            <Trans
+              i18nKey="register:terms"
+              components={{
+                a: (
+                  <a
+                    className="decorated"
+                    href={privacyLink}
+                    target="_blank"
+                    rel="noreferrer noopener nofollow"
+                  />
+                )
+              }}
+            />
+          </Checkbox>
+        </fieldset>
+        <fieldset>
+          <SubmitBtn text={t('register:button.register')} disabled={isSubmitting} />
+        </fieldset>
+        <fieldset className="form__footer">
+          <p className="body-sm">{t('register:haveAccount')}</p>
+          <RedirectLink href={ROUTE_SIGN_IN} passHref>
+            <a className="decorated colored">{t('register:button.login')}</a>
+          </RedirectLink>
+        </fieldset>
+      </StandardForm>
     </>
   );
 };

@@ -8,7 +8,6 @@
  */
 
 import styled from 'styled-components';
-import { Form } from 'formik';
 
 import Alert from '@/ui/Alert';
 import { space, media, rems } from '@/ui/helpers';
@@ -27,13 +26,9 @@ import {
 } from '@/ui/settings';
 import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
-interface Props {
-  $isFull?: boolean;
-}
-
-const FormikForm = styled(Form)`
+const StandardForm = styled.form<{ $isFull?: boolean }>`
   position: relative;
-  max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -57,11 +52,12 @@ const FormikForm = styled(Form)`
         text-align: center;
         color: ${COLOR_GREEN_600};
         margin: 0;
+        left: 0;
 
         &.success-message-bottom {
           ${media.min('tablet')`
-            bottom: -3.5ch;
-          `}
+          bottom: -2.5ch;
+        `}
           bottom: 3.25rem;
         }
       }
@@ -83,34 +79,40 @@ const FormikForm = styled(Form)`
   }
 
   .form__footer {
+    display: flex;
+    justify-content: center;
+    gap: ${space()};
     margin-top: ${space(3.5)};
     text-align: center;
   }
 
   ${media.min('tablet')`
-    .fieldset-inline {
-      align-items: flex-start;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-  `}
+  .fieldset-inline {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+`}
 `;
 
-const InputStyled = styled.div`
+const InputStyled = styled.div<{
+  variant?: 'default' | 'small' | 'large-text';
+  placeholderStyle?: 'default' | 'large-text';
+}>`
   position: relative;
   width: 100%;
 
   ${media.min('tablet')`
-    &.sm {
-      width: calc(50% - ${space(0.5)});
 
-      input,
-      textarea,
-      select {
-        padding-right: ${space(4.5)}
-      }
+    width: ${({ variant }) => (variant === 'small' ? `calc(50% - ${space(0.5)})` : '100%')};
+
+    input,
+    textarea,
+    select {
+      padding-right: ${({ variant }) => (variant === 'small' ? space(4.5) : 'initial')};
     }
+
   `}
 
   svg {
@@ -174,7 +176,7 @@ const InputStyled = styled.div`
   }
 
   &.textarea {
-    &.taller {
+    & .taller {
       height: ${space(14)};
     }
 
@@ -246,7 +248,7 @@ const InputStyled = styled.div`
   input.filled,
   textarea:focus,
   textarea.filled {
-    + label {
+    & + label {
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
@@ -449,4 +451,5 @@ export {
   SwitchStyled,
   SwitchLabel
 };
-export default FormikForm;
+
+export default StandardForm;

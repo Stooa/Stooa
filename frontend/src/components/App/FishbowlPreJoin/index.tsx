@@ -21,7 +21,6 @@ import VideoPlaceholder from '@/components/App/VideoPlaceholder';
 import ButtonMoreOptions, { ButtonHandle } from '@/components/App/ButtonMoreOptions';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
-import NicknameForm from '@/components/App/FishbowlPreJoin/form';
 import AuthUser from '@/components/App/FishbowlPreJoin/form-auth';
 
 import Modal from '@/ui/Modal';
@@ -40,8 +39,9 @@ import { useStooa } from '@/contexts/StooaManager';
 import Image from 'next/image';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { useLocalTracks, useUser } from '@/jitsi';
+import FormGuest from '@/components/App/FishbowlPreJoin/form';
 
-const FishbowlPreJoin: React.FC = () => {
+const FishbowlPreJoin = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
   const { data, isModerator, conferenceStatus } = useStooa();
@@ -200,7 +200,7 @@ const FishbowlPreJoin: React.FC = () => {
             {isAuthenticated ? (
               <AuthUser isPrivate={data.isPrivate} name={user?.name ?? ''} />
             ) : (
-              <NicknameForm isPrivate={data.isPrivate} />
+              <FormGuest isPrivate={data.isPrivate} />
             )}
             <Button
               data-testid="pre-join-cancel"

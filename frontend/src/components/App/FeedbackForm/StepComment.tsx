@@ -8,11 +8,11 @@
  */
 
 import Button from '@/components/Common/Button';
-import NewTextarea from '@/components/Common/Fields/updated/Textarea';
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { StyledCommentForm, StyledStepWrapper } from './styles';
+import NewTextarea from '@/components/Common/Fields/Textarea';
 
 interface Props {
   handleCommentFeedback: (comment: string) => void;
