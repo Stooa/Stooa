@@ -7,28 +7,25 @@
  * file that was distributed with this source code.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
-import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import FormikForm from '@/ui/Form';
+import StandardForm from '@/ui/Form';
 import { getAuthToken } from '@/user/auth';
 import { UPDATE_USER } from '@/lib/gql/User';
-import Input from '@/components/Common/Fields/Input';
+
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 import { linkedinValidator, twitterValidator } from '@/lib/Validators/SocialNetworkValidators';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   firstname: string;
@@ -36,149 +33,67 @@ interface FormValues {
   email: string;
   linkedin: string;
   twitter: string;
-  isSubmitting: boolean;
 }
 
-interface FormProps {
-  required: string;
-  email: string;
-  minlength: string;
-  url: string;
-  onSubmit: (any) => Promise<void>;
-  initialValues: {
-    id: string;
-    linkedinProfile: string;
-    name: string;
-    surnames: string;
-    twitterProfile: string;
-  } & FormValues;
-  updateUser: (
-    options?: MutationFunctionOptions<unknown, OperationVariables>
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-}
+const mapUserDataToForm = userData => {
+  const { email, linkedinProfile, name, surnames, twitterProfile } = userData;
 
-const Form = (props: FormikProps<FormValues>) => {
-  const { t } = useTranslation('form');
-
-  return (
-    <FormikForm>
-      <fieldset className="fieldset-inline">
-        <Input label={t('firstname')} name="firstname" type="text" variant="small" />
-        <Input label={t('lastname')} name="lastname" type="text" variant="small" />
-        <Input
-          className="disabled"
-          label={t('email')}
-          name="email"
-          type="email"
-          icon="mail"
-          disabled
-        />
-      </fieldset>
-      <fieldset>
-        <p className="body-xs">
-          <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
-        </p>
-        <Input
-          label={t('register:twitter')}
-          name="twitter"
-          type="text"
-          help={t('register:twitterHelp')}
-        />
-        <Input
-          label={t('register:linkedin')}
-          name="linkedin"
-          type="text"
-          help={t('register:linkedinHelp')}
-        />
-      </fieldset>
-      <fieldset>
-        <SubmitBtn text={t('button.save')} disabled={props.isSubmitting} />
-      </fieldset>
-    </FormikForm>
-  );
+  return {
+    firstname: name,
+    lastname: surnames,
+    email: email,
+    linkedin: linkedinProfile,
+    twitter: twitterProfile
+  };
 };
 
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: props => {
-    const {
-      initialValues: { email, linkedinProfile, name, surnames, twitterProfile }
-    } = props;
-
-    return {
-      firstname: name,
-      lastname: surnames,
-      email,
-      linkedin: linkedinProfile,
-      twitter: twitterProfile,
-      isSubmitting: false
-    };
-  },
-  validationSchema: props => {
-    return Yup.object({
-      firstname: Yup.string().required(props.required),
-      lastname: Yup.string().required(props.required),
-      email: Yup.string().email(props.email).required(props.required),
-      linkedin: Yup.string()
-        .matches(linkedinValidator, {
-          message: props.url
-        })
-        .url(props.url),
-      twitter: Yup.string()
-        .matches(twitterValidator, {
-          message: props.url
-        })
-        .url(props.url)
-    });
-  },
-  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
-    const {
-      initialValues: { id }
-    } = props;
-
-    // TODO: make the values same name as initial props
-    await props
-      .updateUser({
-        variables: {
-          input: {
-            id,
-            name: values.firstname,
-            surnames: values.lastname,
-            linkedinProfile: values.linkedin,
-            twitterProfile: values.twitter
-          }
-        }
-      })
-      .then(async res => {
-        await getAuthToken(true);
-
-        resetForm({ values });
-        props.onSubmit(res);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
-        });
-      });
-  }
-})(Form);
-
 const Profile = ({ userData, refetch }) => {
+  const { t, lang } = useTranslation('form');
   const router = useRouter();
-  const [error, setError] = useState(null);
+  const [backendErrors, setBackendErrors] = useState();
   const [updateUser] = useMutation(UPDATE_USER);
   const { user, updateUser: contextUpdateUser } = useAuth();
-  const { t, lang } = useTranslation('form');
 
   const requiredError = t('validation.required');
-  const emailError = t('validation.email');
-  const minlengthError = t('validation.passwordLength');
   const urlError = t('validation.url');
 
-  const handleOnSubmit = async res => {
+  const schema = Yup.object({
+    firstname: Yup.string().required(requiredError),
+    lastname: Yup.string().required(requiredError),
+    email: Yup.string().email(t('validation.email')).required(requiredError),
+    linkedin: Yup.string()
+      .matches(linkedinValidator, {
+        message: urlError,
+        excludeEmptyString: true
+      })
+      .url(urlError),
+    twitter: Yup.string()
+      .matches(twitterValidator, {
+        message: urlError,
+        excludeEmptyString: true
+      })
+      .url(urlError)
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: '',
+      firstname: '',
+      lastname: '',
+      linkedin: '',
+      twitter: ''
+    }
+  });
+
+  const onCompletedSubmit = async res => {
     if (res.type === 'Error') {
-      setError(res.data);
+      setBackendErrors(res.data);
       console.log('[STOOA] submit error', res);
     } else {
       const {
@@ -197,19 +112,102 @@ const Profile = ({ userData, refetch }) => {
     }
   };
 
+  const onSubmit = async (values: FormValues) => {
+    await updateUser({
+      variables: {
+        input: {
+          name: values.firstname,
+          surnames: values.lastname,
+          linkedinProfile: values.linkedin,
+          twitterProfile: values.twitter,
+          id: userData.id
+        }
+      }
+    })
+      .then(async res => {
+        await getAuthToken(true);
+
+        reset(values, { keepDirtyValues: true });
+        onCompletedSubmit(res);
+      })
+      .catch(error => {
+        onCompletedSubmit({
+          type: 'Error',
+          data: error
+        });
+      });
+  };
+
+  useEffect(() => {
+    if (userData) {
+      reset(mapUserDataToForm(userData), {
+        keepDefaultValues: true
+      });
+    }
+  }, [userData, reset]);
+
   return (
-    <div>
-      {error && <FormError errors={error} />}
-      <FormValidation
-        required={requiredError}
-        email={emailError}
-        minlength={minlengthError}
-        url={urlError}
-        initialValues={userData}
-        onSubmit={handleOnSubmit}
-        updateUser={updateUser}
-      />
-    </div>
+    <>
+      {backendErrors && <FormError errors={backendErrors} />}
+      <StandardForm onSubmit={handleSubmit(onSubmit)}>
+        <fieldset className="fieldset-inline">
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.firstname}
+            hasError={errors.firstname}
+            label={t('firstname')}
+            type="text"
+            variant="small"
+            {...register('firstname')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.lastname}
+            hasError={errors.lastname}
+            label={t('lastname')}
+            type="text"
+            variant="small"
+            {...register('lastname')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.email}
+            hasError={errors.email}
+            label={t('email')}
+            type="email"
+            icon="mail"
+            disabled
+            {...register('email')}
+          />
+        </fieldset>
+        <fieldset>
+          <p className="body-xs">
+            <Trans i18nKey="register:shareAccount" components={{ strong: <strong /> }} />
+          </p>
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.twitter}
+            hasError={errors.twitter}
+            label={t('register:twitter')}
+            type="text"
+            help={t('register:twitterHelp')}
+            {...register('twitter')}
+          />
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.linkedin}
+            hasError={errors.linkedin}
+            label={t('register:linkedin')}
+            type="text"
+            help={t('register:linkedinHelp')}
+            {...register('linkedin')}
+          />
+        </fieldset>
+        <fieldset>
+          <SubmitBtn text={t('button.save')} disabled={isSubmitting} />
+        </fieldset>
+      </StandardForm>
+    </>
   );
 };
 

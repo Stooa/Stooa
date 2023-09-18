@@ -9,105 +9,49 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import {
-  FetchResult,
-  MutationFunctionOptions,
-  OperationVariables,
-  useMutation
-} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 
 import { ROUTE_SIGN_IN } from '@/app.config';
 import { RECOVER_PASSWORD } from '@/lib/gql/Password';
-import FormikForm from '@/ui/Form';
+import StandardForm from '@/ui/Form';
 import Alert from '@/ui/Alert';
-import Input from '@/components/Common/Fields/Input';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   email: string;
 }
 
-interface FormProps {
-  required: string;
-  email: string;
-  onSubmit: (any) => Promise<void>;
-  recoverPassword: (
-    options?: MutationFunctionOptions<unknown, OperationVariables>
-  ) => Promise<FetchResult<unknown, Record<string, unknown>, Record<string, unknown>>>;
-  locale: string;
-}
-
-const initialValues = {
-  email: ''
-};
-
-const Form = (props: FormikProps<FormValues>) => {
-  const { t } = useTranslation('form');
-
-  return (
-    <FormikForm>
-      <fieldset>
-        <Input label={t('email')} name="email" type="email" icon="mail" />
-      </fieldset>
-      <fieldset>
-        <SubmitBtn text={t('recover:button')} disabled={props.isSubmitting} />
-      </fieldset>
-      <fieldset className="form__footer">
-        <p className="body-sm">
-          <Link className="decorated colored" href={ROUTE_SIGN_IN}>
-            {t('recover:back')}
-          </Link>
-        </p>
-      </fieldset>
-    </FormikForm>
-  );
-};
-
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props => {
-    return Yup.object({
-      email: Yup.string().email(props.email).required(props.required)
-    });
-  },
-  handleSubmit: async (values, { props, setSubmitting, resetForm }) => {
-    await props
-      .recoverPassword({
-        variables: {
-          input: {
-            email: values.email,
-            locale: props.locale
-          }
-        }
-      })
-      .then(res => {
-        setSubmitting(false);
-        resetForm({ values: initialValues });
-        props.onSubmit(res);
-      })
-      .catch(error => {
-        setSubmitting(false);
-        props.onSubmit({
-          type: 'Error',
-          data: error
-        });
-      });
-  }
-})(Form);
-
 const RecoverPassword = () => {
+  const { t, lang } = useTranslation('form');
   const [recoverPassword] = useMutation(RECOVER_PASSWORD);
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
-  const { t, lang } = useTranslation('form');
+  const [backendErrors, setBackendErrors] = useState<Record<string, unknown>>();
 
-  const handleOnSubmit = async res => {
+  const schema = Yup.object({
+    email: Yup.string().email(t('validation.email')).required(t('validation.required'))
+  });
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: ''
+    }
+  });
+
+  const onCompletedSubmit = async res => {
     if (res.type === 'Error') {
-      setError(res.data);
+      setBackendErrors(res.data);
 
       console.log('[STOOA] submit error', res);
     } else {
@@ -115,21 +59,55 @@ const RecoverPassword = () => {
     }
   };
 
-  const requiredError = t('validation.required');
-  const emailError = t('validation.email');
+  const onSubmit = async values => {
+    await recoverPassword({
+      variables: {
+        input: {
+          email: values.email,
+          locale: lang
+        }
+      }
+    })
+      .then(res => {
+        reset({ email: '' });
+        onCompletedSubmit(res);
+      })
+      .catch(error => {
+        onCompletedSubmit({
+          type: 'Error',
+          data: error
+        });
+      });
+  };
 
   return submitted ? (
     <Alert className="success medium">{t('recover:sent')}</Alert>
   ) : (
     <>
-      {error && <FormError errors={error} />}
-      <FormValidation
-        required={requiredError}
-        email={emailError}
-        recoverPassword={recoverPassword}
-        onSubmit={handleOnSubmit}
-        locale={lang}
-      />
+      {backendErrors && <FormError errors={backendErrors} />}
+      <StandardForm onSubmit={handleSubmit(onSubmit)}>
+        <fieldset>
+          <Input
+            isSubmitted={isSubmitted}
+            isDirty={dirtyFields.email}
+            hasError={errors.email}
+            label={t('email')}
+            type="email"
+            icon="mail"
+            {...register('email')}
+          />
+        </fieldset>
+        <fieldset>
+          <SubmitBtn text={t('recover:button')} disabled={isSubmitting} />
+        </fieldset>
+        <fieldset className="form__footer">
+          <p className="body-sm">
+            <Link className="decorated colored" href={ROUTE_SIGN_IN}>
+              {t('recover:back')}
+            </Link>
+          </p>
+        </fieldset>
+      </StandardForm>
     </>
   );
 };

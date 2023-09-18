@@ -32,7 +32,7 @@ import { useModals } from '@/contexts/ModalsContext';
 import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
 
 import TranslateSelector from '../TranslateSelector';
-import Switch from '@/components/Common/Fields/updated/Switch';
+import Switch from '@/components/Common/Fields/Switch';
 import { useForm } from 'react-hook-form';
 import TranscriptionSelector from '../TranscriptionSelector/TranscriptionSelector';
 import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';

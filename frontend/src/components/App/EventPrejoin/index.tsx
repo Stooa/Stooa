@@ -40,6 +40,7 @@ interface Props {
   event: 'fishbowl' | 'worldCafe';
   children: React.ReactNode;
 }
+
 const EventPrejoin = ({ event, children }: Props) => {
   const { videoDevice, permissions } = useDevices();
   const { getUserVideoMuted } = useUser();

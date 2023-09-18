@@ -43,6 +43,7 @@ const DevicesToolbar = styled.div`
 `;
 
 const StyledPrejoinFormWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,6 +58,13 @@ const StyledPrejoinFormWrapper = styled.div`
     min-height: 420px;
     padding: ${space(6)} ${space(4)};
   `}
+
+  & .cancel {
+    position: absolute;
+    bottom: ${space(2)};
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const VideoContainer = styled.div`
