@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Serializer;
+namespace App\Core\Serializer;
 
 use App\Core\Entity\MediaObject;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
