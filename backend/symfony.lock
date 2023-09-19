@@ -840,6 +840,18 @@
     "twig/twig": {
         "version": "v3.0.4"
     },
+    "vich/uploader-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.13",
+            "ref": "1b3064c2f6b255c2bc2f56461aaeb76b11e07e36"
+        },
+        "files": [
+            "config/packages/vich_uploader.yaml"
+        ]
+    },
     "vimeo/psalm": {
         "version": "3.12.2"
     },

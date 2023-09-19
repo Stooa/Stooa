@@ -40,4 +40,5 @@ return [
     Metaclass\FilterBundle\MetaclassFilterBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true, 'staging' => true],
     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true, 'staging' => true],
+    Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
 ];
