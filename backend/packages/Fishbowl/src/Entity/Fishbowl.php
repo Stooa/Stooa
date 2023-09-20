@@ -26,6 +26,7 @@ use ApiPlatform\Metadata\GraphQl\Mutation;
 use ApiPlatform\Metadata\GraphQl\Query;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Core\Entity\MediaObject;
 use App\Core\Entity\Participant;
 use App\Core\Entity\Topic;
 use App\Core\Entity\User;
@@ -261,6 +262,10 @@ class Fishbowl implements \Stringable
     #[ManyToMany(targetEntity: Topic::class)]
     private Collection $topics;
 
+    #[ORM\ManyToOne(targetEntity: MediaObject::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(types: ['https://schema.org/image'])]
+    public ?MediaObject $image = null;
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -363,6 +368,16 @@ class Fishbowl implements \Stringable
         $this->locale = $locale;
 
         return $this;
+    }
+
+    public function getImage(): ?MediaObject
+    {
+        return $this->image;
+    }
+
+    public function setImage(?MediaObject $image): void
+    {
+        $this->image = $image;
     }
 
     /** This is needed to add the timezone information to the `startDateTime` property. */
