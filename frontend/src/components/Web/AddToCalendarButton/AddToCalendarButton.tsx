@@ -15,6 +15,7 @@ import { formatDateTime } from '@/lib/helpers';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import { StyledCalendarButtonWrapper } from './styles';
 import { useRef } from 'react';
+import Button from '@/components/Common/Button';
 
 interface Props {
   fishbowl: Fishbowl;
@@ -51,18 +52,20 @@ export const CustomAddToCalendarButton = ({ fishbowl }: Props) => {
 
   return (
     <StyledCalendarButtonWrapper>
-      <button
+      <Button
+        variant="link"
         ref={calendarButton}
         onClick={() => atcb_action(googleConfig, calendarButton.current ?? undefined)}
       >
         Google
-      </button>
-      <button
+      </Button>
+      <Button
+        variant="link"
         ref={calendarButton}
         onClick={() => atcb_action(appleConfig, calendarButton.current ?? undefined)}
       >
         Apple
-      </button>
+      </Button>
     </StyledCalendarButtonWrapper>
   );
 };

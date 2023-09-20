@@ -35,7 +35,7 @@ interface Props extends React.ComponentProps<'button'> {
  * @param size small, medium or large
  * @returns
  */
-const Button: React.ForwardRefRenderFunction<Record<string, never>, Props> = (
+const Button: React.ForwardRefRenderFunction<HTMLButtonElement, Props> = (
   { variant = 'primary', size = 'medium', children, as = 'button', full, ...props },
   ref
 ) => {
