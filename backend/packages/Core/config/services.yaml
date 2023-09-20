@@ -49,6 +49,10 @@ services:
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
+    App\Core\Service\SlackService:
+        bind:
+            $url: '%env(SLACK_WEBHOOK)%'
+
     # Admin
     App\Core\Admin\UserAdmin:
         tags:
