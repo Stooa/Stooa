@@ -26,10 +26,21 @@ type IConfig = Parameters<typeof atcb_action>[0];
 export const CustomAddToCalendarButton = ({ fishbowl }: Props) => {
   const calendarButton = useRef<HTMLButtonElement>(null);
 
-  const { month, day, year, time } = formatDateTime(fishbowl.startDateTimeTz);
-  const { time: endTime } = formatDateTime(fishbowl.endDateTimeTz);
+  const {
+    month: startMonth,
+    day: startDay,
+    year: startYear,
+    time: startTime
+  } = formatDateTime(fishbowl.startDateTimeTz);
+  const {
+    month: endMonth,
+    day: endDay,
+    year: endYear,
+    time: endTime
+  } = formatDateTime(fishbowl.endDateTimeTz);
 
-  const starDateToCalendar = `${year}-${month}-${day}`;
+  const starDateToCalendar = `${startYear}-${startMonth}-${startDay}`;
+  const endDateToCalendar = `${endYear}-${endMonth}-${endDay}`;
   const eventUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${ROUTE_FISHBOWL}/${fishbowl.slug}`;
   const eventDescription = `JOIN HERE: ${eventUrl}\n\n${fishbowl.description}`;
 
@@ -37,14 +48,14 @@ export const CustomAddToCalendarButton = ({ fishbowl }: Props) => {
     name: fishbowl.name || '',
     description: eventDescription,
     startDate: starDateToCalendar,
-    startTime: time,
+    startTime: startTime,
+    endDate: endDateToCalendar,
     endTime: endTime,
     location: eventUrl,
     organizer: 'Stooa|stooa@stooa.com',
     buttonsList: true,
     hideBackground: true,
-    hideCheckmark: true,
-    hideIconModal: true
+    hideCheckmark: true
   };
 
   const googleConfig: IConfig = { ...config, options: ['Google'] };
