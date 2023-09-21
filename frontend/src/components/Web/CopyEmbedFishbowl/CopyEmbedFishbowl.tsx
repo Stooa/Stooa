@@ -8,7 +8,10 @@
  */
 
 import { toast } from 'react-toastify';
+
 import Check from '@/ui/svg/checkmark.svg';
+import CodeSVG from '@/ui/svg/code.svg';
+import { StyledCopyEmbedButton } from './styles';
 
 interface Props {
   slug: string;
@@ -18,7 +21,7 @@ const CopyEmbedFishbowl = ({ slug }: Props) => {
   const embedToCopy = `<iframe src="${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${slug}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
   const handleCopyEmbed = () => {
     navigator.clipboard.writeText(embedToCopy);
-    toast('IFrame copiado correctamente', {
+    toast('iframe copiado correctamente', {
       icon: <Check />,
       toastId: 'link-copied',
       type: 'success',
@@ -27,7 +30,11 @@ const CopyEmbedFishbowl = ({ slug }: Props) => {
     });
   };
 
-  return <button onClick={handleCopyEmbed}> TAL NOSEQUE</button>;
+  return (
+    <StyledCopyEmbedButton onClick={handleCopyEmbed}>
+      <CodeSVG />
+    </StyledCopyEmbedButton>
+  );
 };
 
 export default CopyEmbedFishbowl;

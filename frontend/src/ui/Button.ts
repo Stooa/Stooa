@@ -77,7 +77,7 @@ const ButtonBase = styled.button<{ full?: boolean }>`
     pointer-events: none;
   }
 
-  & > svg {
+  & > * + svg {
     &:first-child {
       margin-left: ${space(0.75)};
     }
