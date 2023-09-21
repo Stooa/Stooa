@@ -5,6 +5,7 @@
     "speaker": "Haut-parleur",
     "cam": "Caméra",
     "timeLeft_one": "Il reste {{time}}",
+    "addEventToCalendarTitle": "Ajouter l'événement à votre calendrier",
     "prejoin": {
         "startFishbowl": "Démarrer le fishbowl",
         "joinDiscussion": "Participez au fishbowl",

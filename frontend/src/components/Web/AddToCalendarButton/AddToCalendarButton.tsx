@@ -52,6 +52,7 @@ export const CustomAddToCalendarButton = ({ fishbowl }: Props) => {
     endDate: endDateToCalendar,
     endTime: endTime,
     location: eventUrl,
+    timeZone: 'currentBrowser',
     organizer: 'Stooa|stooa@stooa.com',
     buttonsList: true,
     hideBackground: true,
