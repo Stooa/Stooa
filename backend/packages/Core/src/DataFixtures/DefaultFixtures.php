@@ -26,6 +26,8 @@ use Sonata\UserBundle\Model\UserInterface;
 
 class DefaultFixtures extends Fixture
 {
+    public const HOST_EMAIL = 'host@stooa.com';
+    public const ADMIN_EMAIL = 'admin@stooa.com';
     /**
      * This is the default admin password for the staging environment.
      * The password is "admin", and it is only for testing purposes.
@@ -36,14 +38,14 @@ class DefaultFixtures extends Fixture
     {
         SonataUserUserFactory::createOne([
             'username' => 'admin',
-            'email' => 'admin@localhost',
+            'email' => self::ADMIN_EMAIL,
             'password' => self::ADMIN_PASSWORD,
             'enabled' => true,
             'roles' => [UserInterface::ROLE_SUPER_ADMIN],
         ]);
 
         $host = UserFactory::createOne([
-            'email' => 'host@stooa.com',
+            'email' => self::HOST_EMAIL,
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
             'createdAt' => new \DateTime(),

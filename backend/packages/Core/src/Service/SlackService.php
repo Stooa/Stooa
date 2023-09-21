@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Service;
 
+use App\Core\DataFixtures\DefaultFixtures;
 use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -27,7 +28,7 @@ class SlackService
 
     public function sendNotification(Fishbowl $fishbowl): void
     {
-        if (!$this->validateUrl($this->slackUrl)) {
+        if (!$this->validateUrl($this->slackUrl) || $this->isFixture($fishbowl)) {
             return;
         }
 
@@ -81,5 +82,12 @@ class SlackService
     private function validateUrl(string $url): bool
     {
         return false !== filter_var($url, \FILTER_VALIDATE_URL);
+    }
+
+    private function isFixture(Fishbowl $fishbowl): bool
+    {
+        $hostEmail = $fishbowl->getHost()->getEmail();
+
+        return DefaultFixtures::ADMIN_EMAIL === $hostEmail || DefaultFixtures::HOST_EMAIL === $hostEmail;
     }
 }
