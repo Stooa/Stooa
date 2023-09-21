@@ -51,7 +51,8 @@ services:
 
     App\Core\Service\SlackService:
         bind:
-            $url: '%env(SLACK_WEBHOOK)%'
+            $slackUrl: '%env(SLACK_WEBHOOK)%'
+            $appUrl: '%env(APP_URL)%'
 
     # Admin
     App\Core\Admin\UserAdmin:
