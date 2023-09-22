@@ -146,6 +146,10 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     private bool $privacyPolicy = false;
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[ORM\Column(type: 'string')]
+    private ?string $slackWebHook = null;
+
+    #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
 
@@ -458,5 +462,17 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     public function getSalt(): ?string
     {
         return null;
+    }
+
+    public function getSlackWebHook(): ?string
+    {
+        return $this->slackWebHook;
+    }
+
+    public function setSlackWebHook(?string $slackWebHook): self
+    {
+        $this->slackWebHook = $slackWebHook;
+
+        return $this;
     }
 }

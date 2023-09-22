@@ -142,7 +142,7 @@ const Register = () => {
           plainPassword: values.password,
           privacyPolicy: !!values.terms,
           locale: lang,
-          allowShareData: values.linkedin !== '' || values.twitter !== ''
+          allowShareData: values.linkedin !== '' || values.twitter !== '',
         }
       }
     })
