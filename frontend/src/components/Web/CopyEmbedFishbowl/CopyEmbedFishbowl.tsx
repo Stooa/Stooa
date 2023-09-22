@@ -18,7 +18,7 @@ interface Props {
 }
 
 const CopyEmbedFishbowl = ({ slug }: Props) => {
-  const embedToCopy = `<iframe src="${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${slug}" width="100%" height="650" frameborder="0" allowfullscreen></iframe>`;
+  const embedToCopy = `<iframe src="${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${slug}" width="100%" allow="clipboard-read; clipboard-write; camera *;microphone *" frameborder="no" height="650" ></iframe>`;
   const handleCopyEmbed = () => {
     navigator.clipboard.writeText(embedToCopy);
     toast('iframe copiado correctamente', {
