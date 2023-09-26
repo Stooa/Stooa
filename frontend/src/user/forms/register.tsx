@@ -143,6 +143,7 @@ const Register = () => {
           privacyPolicy: !!values.terms,
           locale: lang,
           allowShareData: values.linkedin !== '' || values.twitter !== '',
+          slackWebHook: ''
         }
       }
     })

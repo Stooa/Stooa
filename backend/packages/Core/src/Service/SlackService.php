@@ -28,11 +28,13 @@ class SlackService
 
     public function sendNotification(Fishbowl $fishbowl): void
     {
-        if (!$this->validateUrl($this->slackUrl) || $this->isFixture($fishbowl)) {
+        $url = $this->getSlackUrl($fishbowl);
+
+        if (!$this->validateUrl($url) || $this->isFixture($fishbowl)) {
             return;
         }
 
-        $this->client->request('POST', $this->slackUrl, [
+        $this->client->request('POST', $url, [
             'json' => [
                 'blocks' => [
                     [
@@ -77,6 +79,11 @@ class SlackService
                 ],
             ],
         ]);
+    }
+
+    private function getSlackUrl(Fishbowl $fishbowl): string
+    {
+        return $fishbowl->getHost()->getSlackWebHook() ?: $this->slackUrl;
     }
 
     private function validateUrl(string $url): bool

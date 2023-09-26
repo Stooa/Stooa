@@ -7,16 +7,26 @@
  * file that was distributed with this source code.
  */
 
-import useTranslation from 'next-translate/useTranslation';
-
-
 import Layout from '@/layouts/Default';
+import { useQuery } from '@apollo/client';
+import { GET_SELF_USER } from '@/graphql/User';
 
 const Slack = () => {
+  const { data } = useQuery(GET_SELF_USER);
+  const slackUrl = `https://slack.com/oauth/v2/authorize?scope=incoming-webhook&amp;user_scope=&redirect_uri=${process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL}&client_id=${process.env.NEXT_PUBLIC_SLACK_CLIENT_ID}`;
+  const hasSlackWebHook = data && data.selfUser.slackWebHook;
   return (
-    <Layout title='Slack'>
-      <h1 className="title-md form-title">Slack</h1>
-      <a href="https://slack.com/oauth/v2/authorize?scope=incoming-webhook&amp;user_scope=&amp;redirect_uri=https%3A%2F%2Flocalhost:8343/slack-return&amp;client_id=2400777561.5915959351270">Add to Slack</a>
+    <Layout title="Slack">
+      <h1 className="title-md form-title">Slack notifications</h1>
+      <a className="body-md bold" href={slackUrl}>
+        {hasSlackWebHook ? 'Update slack connection' : 'Add Slack connection'}
+      </a>
+      <br></br>
+      {hasSlackWebHook && (
+        <div>
+          <b>Webhook:</b> {data.selfUser.slackWebHook}
+        </div>
+      )}
     </Layout>
   );
 };
