@@ -7,8 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import useTranslation from 'next-translate/useTranslation';
-
 import Layout from '@/layouts/Default';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
