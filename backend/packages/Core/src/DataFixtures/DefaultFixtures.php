@@ -26,8 +26,8 @@ use Sonata\UserBundle\Model\UserInterface;
 
 class DefaultFixtures extends Fixture
 {
-    public const HOST_EMAIL = 'host@stooa.com';
-    public const ADMIN_EMAIL = 'admin@stooa.com';
+    final public const HOST_EMAIL = 'host@stooa.com';
+    final public const ADMIN_EMAIL = 'admin@stooa.com';
     /**
      * This is the default admin password for the staging environment.
      * The password is "admin", and it is only for testing purposes.
