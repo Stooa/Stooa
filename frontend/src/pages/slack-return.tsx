@@ -14,6 +14,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
+import Link from 'next/link';
+import { ROUTE_SLACK } from '@/app.config';
+import Pencil from '@/ui/svg/pencil.svg';
 const Slack = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -65,6 +68,9 @@ const Slack = () => {
     <Layout title="Slack connection established">
       <h1 className="title-md form-title">Slack connection established</h1>
       <p>{response}</p>
+      <Link href={ROUTE_SLACK} className="item">
+        <span className="body-md bold">Click to return to Slack notifications</span>
+      </Link>
     </Layout>
   );
 };

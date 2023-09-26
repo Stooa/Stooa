@@ -15,7 +15,8 @@ import {
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
   ROUTE_FISHBOWL_SCHEDULED,
-  ROUTE_FISHBOWL_FINISHED
+  ROUTE_FISHBOWL_FINISHED,
+  ROUTE_SLACK
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
@@ -79,6 +80,10 @@ const Avatar: React.FC = () => {
           <Link href={ROUTE_EDIT_PROFILE} className="item">
             <Pencil />
             <span>{t('editProfile')}</span>
+          </Link>
+          <Link href={ROUTE_SLACK} className="item">
+            <Pencil />
+            <span>Slack notifications</span>
           </Link>
           <Link href={ROUTE_CHANGE_PASSWORD} className="item">
             <Lock />
