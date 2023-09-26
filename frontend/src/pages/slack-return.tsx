@@ -27,8 +27,8 @@ const Slack = () => {
         .post(
           'https://slack.com/api/oauth.v2.access',
           {
-            client_id: '2400777561.5915959351270',
-            client_secret: 'b5a8ee3e0506714e8dd9455480e5fbac',
+            client_id: 'process.env.NEXT_PUBLIC_SLACK_CLIENT_ID',
+            client_secret: 'process.env.NEXT_PUBLIC_SLACK_CLIENT_SECRET',
             code: urlParams.get('code'),
             redirect_uri: 'https://localhost:8343/slack-return'
           },
