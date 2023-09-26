@@ -147,7 +147,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'string')]
-    private ?string $slackWebHook = null;
+    private ?string $slackWebHook = '';
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
