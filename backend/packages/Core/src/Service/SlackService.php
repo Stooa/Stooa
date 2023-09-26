@@ -54,7 +54,7 @@ class SlackService
                             ],
                             [
                               'type' => 'mrkdwn',
-                              'text' => "*Created by:*\n<{$fishbowl->getHost()->getEmail()}|{$fishbowl->getHost()->getFullName()}>",
+                              'text' => "*Created by:*\n<{$fishbowl->getHost()?->getEmail()}|{$fishbowl->getHost()?->getFullName()}>",
                             ],
                         ],
 
@@ -83,7 +83,7 @@ class SlackService
 
     private function getSlackUrl(Fishbowl $fishbowl): string
     {
-        return $fishbowl->getHost()->getSlackWebHook() ?: $this->slackUrl;
+        return $fishbowl->getHost()?->getSlackWebHook() ?: $this->slackUrl;
     }
 
     private function validateUrl(string $url): bool
@@ -93,7 +93,7 @@ class SlackService
 
     private function isFixture(Fishbowl $fishbowl): bool
     {
-        $hostEmail = $fishbowl->getHost()->getEmail();
+        $hostEmail = $fishbowl->getHost()?->getEmail();
 
         return DefaultFixtures::ADMIN_EMAIL === $hostEmail || DefaultFixtures::HOST_EMAIL === $hostEmail;
     }
