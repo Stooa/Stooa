@@ -16,13 +16,12 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
 import Link from 'next/link';
 import { ROUTE_SLACK } from '@/app.config';
-import Pencil from '@/ui/svg/pencil.svg';
 const Slack = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [response, setResponse] = useState('');
   const [updateUser] = useMutation(UPDATE_USER);
-  const { loading, error, data } = useQuery(GET_SELF_USER);
+  const { data } = useQuery(GET_SELF_USER);
 
   useEffect(() => {
     if (data) {
