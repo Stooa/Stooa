@@ -30,7 +30,7 @@ const Slack = () => {
             client_id: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID,
             client_secret: process.env.NEXT_PUBLIC_SLACK_CLIENT_SECRET,
             code: urlParams.get('code'),
-            redirect_uri: 'https://localhost:8343/slack-return'
+            redirect_uri: process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL
           },
           {
             headers: {
