@@ -42,7 +42,7 @@ export const CustomAddToCalendarButton = ({ fishbowl }: Props) => {
   const starDateToCalendar = `${startYear}-${startMonth}-${startDay}`;
   const endDateToCalendar = `${endYear}-${endMonth}-${endDay}`;
   const eventUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${ROUTE_FISHBOWL}/${fishbowl.slug}`;
-  const eventDescription = `JOIN HERE: ${eventUrl}\n\n${fishbowl.description}`;
+  const eventDescription = `${eventUrl}\n\n${fishbowl.description}`;
 
   const config: IConfig = {
     name: fishbowl.name || '',
