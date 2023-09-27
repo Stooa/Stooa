@@ -27,8 +27,8 @@ const Slack = () => {
         .post(
           'https://slack.com/api/oauth.v2.access',
           {
-            client_id: 'process.env.NEXT_PUBLIC_SLACK_CLIENT_ID',
-            client_secret: 'process.env.NEXT_PUBLIC_SLACK_CLIENT_SECRET',
+            client_id: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_SLACK_CLIENT_SECRET,
             code: urlParams.get('code'),
             redirect_uri: 'https://localhost:8343/slack-return'
           },
@@ -39,6 +39,8 @@ const Slack = () => {
           }
         )
         .then(async function (response) {
+          console.log('[Stooa] slack api response', response)
+
           await updateUser({
             variables: {
               input: {

@@ -61,9 +61,25 @@ class SlackService
                     ],
                     [
                         'type' => 'section',
-                        'text' => [
-                            'type' => 'mrkdwn',
-                            'text' => "*When :*\n {$fishbowl->getStartDateTimeTz()->format('d-m-Y H:i:s')}",
+                        'fields' => [
+                            [
+                                'type' => 'mrkdwn',
+                                'text' => "*Description :*\n {$fishbowl->getDescription()}",
+                            ],
+                            [
+                                'type' => 'mrkdwn',
+                                'text' => "*Url :*\n {$fishbowl->getSlug()}",
+                            ],
+
+                        ],
+                    ],
+                    [
+                        'type' => 'section',
+                        'fields' => [
+                            [
+                                'type' => 'mrkdwn',
+                                'text' => "*When :*\n {$fishbowl->getStartDateTimeTz()->format('d-m-Y H:i:s')}",
+                            ],
                         ],
                         'accessory' => [
                             'type' => 'button',
