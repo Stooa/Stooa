@@ -14,7 +14,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
 import Link from 'next/link';
 import { ROUTE_SLACK } from '@/app.config';
-const Slack = () => {
+const SlackReturn = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [response, setResponse] = useState('');
@@ -67,11 +67,11 @@ const Slack = () => {
     <Layout title="Slack connection established">
       <h1 className="title-md form-title">Slack connection established</h1>
       <p>{response}</p>
-      <Link href={ROUTE_SLACK} className="item">
+      <a href={ROUTE_SLACK} className="item">
         <span className="body-md bold">Click to return to Slack notifications</span>
-      </Link>
+      </a>
     </Layout>
   );
 };
 
-export default Slack;
+export default SlackReturn;

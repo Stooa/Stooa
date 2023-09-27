@@ -24,6 +24,7 @@ import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Logout from '@/ui/svg/logout.svg';
 import Lock from '@/ui/svg/lock.svg';
 import Pencil from '@/ui/svg/pencil.svg';
+import Url from '@/ui/svg/url.svg';
 import List from '@/ui/svg/list.svg';
 import CheckList from '@/ui/svg/check-list.svg';
 import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
@@ -82,7 +83,7 @@ const Avatar: React.FC = () => {
             <span>{t('editProfile')}</span>
           </Link>
           <Link href={ROUTE_SLACK} className="item">
-            <Pencil />
+            <Url />
             <span>Slack notifications</span>
           </Link>
           <Link href={ROUTE_CHANGE_PASSWORD} className="item">
