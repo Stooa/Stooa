@@ -12,7 +12,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
-import Link from 'next/link';
 import { ROUTE_SLACK } from '@/app.config';
 const SlackReturn = () => {
   const queryString = window.location.search;
