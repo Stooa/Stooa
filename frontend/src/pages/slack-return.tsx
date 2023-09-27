@@ -39,7 +39,7 @@ const Slack = () => {
           }
         )
         .then(async function (response) {
-          console.log('[Stooa] slack api response', response)
+          console.log('[Stooa] slack api response', response);
 
           await updateUser({
             variables: {
