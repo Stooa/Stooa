@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c52654a048fb7925d7e377b1254ecd8",
+    "content-hash": "8a4c4d3d44df5ef829023b96774cdfad",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4169,16 +4169,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.18.3",
+            "version": "0.18.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "ba7988e3e028e68e07191d75b0d5473ac320c5e7"
+                "reference": "d99a91176b7eb7f2b6d509a6486b3661c6dfd370"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ba7988e3e028e68e07191d75b0d5473ac320c5e7",
-                "reference": "ba7988e3e028e68e07191d75b0d5473ac320c5e7",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d99a91176b7eb7f2b6d509a6486b3661c6dfd370",
+                "reference": "d99a91176b7eb7f2b6d509a6486b3661c6dfd370",
                 "shasum": ""
             },
             "require": {
@@ -4213,7 +4213,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.18.3"
+                "source": "https://github.com/rectorphp/rector/tree/0.18.4"
             },
             "funding": [
                 {
@@ -4221,20 +4221,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-12T20:18:14+00:00"
+            "time": "2023-09-25T17:07:54+00:00"
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.27.0",
+            "version": "4.27.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "939707cff48a3a49388ac5cb1d28e46c00effa15"
+                "reference": "2ae0c57def6d64f9f86d9e7d63d55c6cd573f6d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/939707cff48a3a49388ac5cb1d28e46c00effa15",
-                "reference": "939707cff48a3a49388ac5cb1d28e46c00effa15",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/2ae0c57def6d64f9f86d9e7d63d55c6cd573f6d9",
+                "reference": "2ae0c57def6d64f9f86d9e7d63d55c6cd573f6d9",
                 "shasum": ""
             },
             "require": {
@@ -4338,7 +4338,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.27.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.27.1"
             },
             "funding": [
                 {
@@ -4358,7 +4358,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-07T09:50:30+00:00"
+            "time": "2023-09-21T18:44:40+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
