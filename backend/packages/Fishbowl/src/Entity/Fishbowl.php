@@ -239,6 +239,24 @@ class Fishbowl implements \Stringable
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
+    private bool $hasInvitationInfo = false;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $invitationTitle = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $invitationSubtitle = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $invitationText = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $isPrivate = false;
 
     #[ORM\Column(type: 'text', nullable: true)]
@@ -254,6 +272,11 @@ class Fishbowl implements \Stringable
     #[Groups(['fishbowl:read'])]
     private Collection $feedbacks;
 
+    /** @var Collection<int, Attendee> */
+    #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Attendee::class)]
+    #[Groups(['fishbowl:read'])]
+    private Collection $attendees;
+
     /** @var Collection<int, Topic> */
     #[JoinTable(name: 'fishbowl_topics')]
     #[JoinColumn(name: 'fishbowl_id', referencedColumnName: 'id')]
@@ -266,6 +289,7 @@ class Fishbowl implements \Stringable
         $this->participants = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
         $this->topics = new ArrayCollection();
+        $this->attendees = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -604,6 +628,34 @@ class Fishbowl implements \Stringable
         return $this;
     }
 
+    /** @return Collection<int, Attendee> */
+    public function getAttendees(): Collection
+    {
+        return $this->attendees;
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees[] = $attendee;
+            $attendee->setFishbowl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(Attendee $attendee): self
+    {
+        if ($this->attendees->contains($attendee)) {
+            $this->attendees->removeElement($attendee);
+            if ($attendee->getFishbowl() === $this) {
+                $attendee->setFishbowl(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getIsFishbowlNow(): bool
     {
         return $this->isFishbowlNow;
@@ -688,5 +740,53 @@ class Fishbowl implements \Stringable
     public function publicFishbowlHasPassword(): bool
     {
         return false === $this->getIsPrivate() && null !== $this->getPlainPassword();
+    }
+
+    public function getHasInvitationInfo(): bool
+    {
+        return $this->hasInvitationInfo;
+    }
+
+    public function setHasInvitationInfo(bool $hasInvitationInfo): self
+    {
+        $this->hasInvitationInfo = $hasInvitationInfo;
+
+        return $this;
+    }
+
+    public function getInvitationTitle(): ?string
+    {
+        return $this->invitationTitle;
+    }
+
+    public function setInvitationTitle(?string $invitationTitle): self
+    {
+        $this->invitationTitle = $invitationTitle;
+
+        return $this;
+    }
+
+    public function getInvitationSubtitle(): ?string
+    {
+        return $this->invitationSubtitle;
+    }
+
+    public function setInvitationSubtitle(?string $invitationSubtitle): self
+    {
+        $this->invitationSubtitle = $invitationSubtitle;
+
+        return $this;
+    }
+
+    public function getInvitationText(): ?string
+    {
+        return $this->invitationText;
+    }
+
+    public function setInvitationText(?string $invitationText): self
+    {
+        $this->invitationText = $invitationText;
+
+        return $this;
     }
 }
