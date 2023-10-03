@@ -66,7 +66,10 @@ const Page = () => {
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
+  if (error) {
+    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+    return <Error message={error.message} />;
+  }
 
   const { bySlugQueryFishbowl: fb } = data;
   const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
