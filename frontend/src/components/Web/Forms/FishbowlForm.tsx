@@ -34,6 +34,7 @@ import NewTextarea from '@/components/Common/Fields/Textarea';
 import DatePicker from '@/components/Common/Fields/DatePicker';
 import Select from '@/components/Common/Fields/Select';
 import Switch from '@/components/Common/Fields/Switch';
+import RichEditor from '@/components/Common/RichEditor';
 
 interface Props {
   selectedFishbowl?: Fishbowl;
@@ -54,6 +55,7 @@ interface FormValues {
   hasIntroduction: boolean;
   isPrivate: boolean;
   plainPassword?: string;
+  editInvitation: boolean;
 }
 
 const initialValues = {
@@ -67,20 +69,10 @@ const initialValues = {
   hasIntroduction: false,
   isPrivate: false,
   plainPassword: undefined
+  // hasInvitationInfo: false
 };
 
 const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
-  // const stringDate = fishbowl.startDateTimeTz.toString();
-  // const sign = stringDate.charAt(stringDate.length - 6);
-  // const timezoneHours = parseInt(stringDate.slice(-5, -3), 10);
-  // const timezoneDifferenceInMs = timezoneHours * 60 * 60 * 1000;
-
-  // const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
-  // const adjustedTime =
-  //   timestamp + (sign === '-' ? -timezoneDifferenceInMs : timezoneDifferenceInMs);
-  // const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
-  // const formattedDate = new Date(adjustedTime + userTimezoneOffset);
-
   const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
 
   // Extract timezone difference from startDateTimeTz in minutes
@@ -106,6 +98,7 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     hasIntroduction: fishbowl.hasIntroduction ?? false,
     isPrivate: fishbowl.isPrivate,
     plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : ''
+    // hasInvitationInfo: fishbowl.hasInvitationInfo
   };
 };
 
@@ -156,6 +149,7 @@ const FishbowlForm = ({
   });
 
   const methods = useForm<FormValues>({
+    mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: { ...initialValues, language: lang, plainPassword: getRandomPassword() }
   });
@@ -466,6 +460,16 @@ const FishbowlForm = ({
               {...register('plainPassword')}
             />
           )}
+
+          {/* <Switch
+            id="hasInvitationInfo"
+            full
+            tooltipText={'Edit the content of your invitation, as the title and the body'}
+            label={'Edit invitation content.'}
+            {...register('hasInvitationInfo')}
+          /> */}
+
+          <RichEditor />
         </fieldset>
         <fieldset>
           <SubmitBtn
