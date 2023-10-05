@@ -35,6 +35,10 @@ import DatePicker from '@/components/Common/Fields/DatePicker';
 import Select from '@/components/Common/Fields/Select';
 import Switch from '@/components/Common/Fields/Switch';
 import RichEditor from '@/components/Common/RichEditor';
+import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Link from '@tiptap/extension-link';
+import Placeholder from '@tiptap/extension-placeholder';
 
 interface Props {
   selectedFishbowl?: Fishbowl;
@@ -56,6 +60,7 @@ interface FormValues {
   isPrivate: boolean;
   plainPassword?: string;
   editInvitation: boolean;
+  hasInvitationInfo: boolean;
 }
 
 const initialValues = {
@@ -68,8 +73,8 @@ const initialValues = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false,
   isPrivate: false,
-  plainPassword: undefined
-  // hasInvitationInfo: false
+  plainPassword: undefined,
+  hasInvitationInfo: false
 };
 
 const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
@@ -97,8 +102,8 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     timezone: fishbowl.timezone,
     hasIntroduction: fishbowl.hasIntroduction ?? false,
     isPrivate: fishbowl.isPrivate,
-    plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : ''
-    // hasInvitationInfo: fishbowl.hasInvitationInfo
+    plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : '',
+    hasInvitationInfo: fishbowl.hasInvitationInfo || false
   };
 };
 
@@ -163,6 +168,18 @@ const FishbowlForm = ({
     formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = methods;
 
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Link.configure({
+        openOnClick: false
+      }),
+      Placeholder.configure({
+        placeholder: 'Description (optional)'
+      })
+    ]
+  });
+
   const watchIsPrivate = watch('isPrivate');
 
   const onCompletedSubmit = res => {
@@ -213,6 +230,8 @@ const FishbowlForm = ({
   const onSubmit = async values => {
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
+
+    const html = editor.getHTML();
 
     if (isEditForm) {
       pushEventDataLayer({
@@ -461,6 +480,11 @@ const FishbowlForm = ({
             />
           )}
 
+          <TextDivider>
+            <p>Invitación</p>
+            <span></span>
+          </TextDivider>
+
           {/* <Switch
             id="hasInvitationInfo"
             full
@@ -469,7 +493,7 @@ const FishbowlForm = ({
             {...register('hasInvitationInfo')}
           /> */}
 
-          <RichEditor />
+          <RichEditor editor={editor} />
         </fieldset>
         <fieldset>
           <SubmitBtn

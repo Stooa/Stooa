@@ -29,6 +29,8 @@
     "@apollo/client": "3.8.1",
     "@hookform/resolvers": "^2.9.11",
     "@next/font": "13.1.6",
+    "@tiptap/extension-link": "^2.1.11",
+    "@tiptap/extension-placeholder": "^2.1.11",
     "@tiptap/pm": "^2.1.11",
     "@tiptap/react": "^2.1.11",
     "@tiptap/starter-kit": "^2.1.11",
