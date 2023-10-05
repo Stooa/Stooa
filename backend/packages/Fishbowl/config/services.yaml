@@ -31,6 +31,11 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
+    App\Fishbowl\Service\AttendeeMailerService:
+        bind:
+            $from: '%env(MAILER_FROM)%'
+            $appUrl: '%env(APP_URL)%'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:

@@ -43,7 +43,13 @@ emails:
             ca: Catalan
             en: English
             fr: French
-
+    new_attendee:
+        subject: Someone has joined your fishbowl
+        title: New attendee
+        subtitle: Someone has joined your fishbowl
+        name: 'Name: %name%'
+        email: 'Email: %email%'
+        fishbowl: 'Fishbowl: %fishbowl%'
 login:
     failure: Invalid credentials
 
