@@ -27,6 +27,11 @@ const StyledEditorWrapper = styled.div`
     padding-left: 1rem;
   }
 
+  & ol {
+    list-style: decimal;
+    padding-left: 1rem;
+  }
+
   .tiptap {
     min-height: 100px;
     padding: 0.5rem;
