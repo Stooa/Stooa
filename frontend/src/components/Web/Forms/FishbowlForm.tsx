@@ -325,8 +325,10 @@ const FishbowlForm = ({
   }, [isEditForm, selectedFishbowl, reset]);
 
   useEffect(() => {
-    setValue('invitationTitle', debouncedTitle);
-  }, [debouncedTitle, setValue]);
+    if (!selectedFishbowl) {
+      setValue('invitationTitle', debouncedTitle);
+    }
+  }, [debouncedTitle, setValue, selectedFishbowl]);
 
   const today = new Date();
 
