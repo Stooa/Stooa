@@ -317,7 +317,7 @@ const FishbowlForm = ({
 
   useEffect(() => {
     if (isEditForm && selectedFishbowl) {
-      const formattedFishbowl = mapSelectedFishbowl(selectedFishbowl, editor);
+      const formattedFishbowl = mapSelectedFishbowl(selectedFishbowl);
       reset(formattedFishbowl, {
         keepDefaultValues: true
       });
