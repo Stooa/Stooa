@@ -9,6 +9,12 @@
 
 import { Editor, EditorContent } from '@tiptap/react';
 import { StyledEditorWrapper, StyledToolbar, ToolbarButton } from './styles';
+import Bold from '@/ui/svg/richtext/bold.svg';
+import Italic from '@/ui/svg/richtext/italic.svg';
+import List from '@/ui/svg/richtext/bullet-list.svg';
+import OrderedList from '@/ui/svg/richtext/ordered-list.svg';
+import Link from '@/ui/svg/richtext/link.svg';
+
 import { useCallback } from 'react';
 
 interface Props {
@@ -100,35 +106,38 @@ const RichText = ({ editor }: Props) => {
           disabled={!editor.can().chain().focus().toggleBold().run()}
           className={editor.isActive('bold') ? 'is-active' : ''}
         >
-          B
+          <Bold />
         </ToolbarButton>
         <ToolbarButton
           onClick={makeItalic}
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={editor.isActive('italic') ? 'is-active' : ''}
         >
-          I
+          <Italic />
         </ToolbarButton>
         <ToolbarButton
           onClick={makeList}
           disabled={!editor.can().chain().focus().toggleBulletList().run()}
           className={editor.isActive('bulletList') ? 'is-active' : ''}
         >
-          UL
+          <List />
         </ToolbarButton>
         <ToolbarButton
           onClick={makeOrderedList}
           disabled={!editor.can().chain().focus().toggleOrderedList().run()}
           className={editor.isActive('orderedList') ? 'is-active' : ''}
         >
-          OL
+          <OrderedList />
         </ToolbarButton>
-        <ToolbarButton onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''}>
-          setLink
+        <ToolbarButton
+          onClick={!editor.isActive('link') ? setLink : unsetLink}
+          className={editor.isActive('link') ? 'is-active' : ''}
+        >
+          <Link />
         </ToolbarButton>
-        <ToolbarButton onClick={unsetLink} disabled={!editor.isActive('link')}>
+        {/* <ToolbarButton onClick={unsetLink} disabled={!editor.isActive('link')}>
           unsetLink
-        </ToolbarButton>
+        </ToolbarButton> */}
       </StyledToolbar>
       <EditorContent editor={editor} />
     </StyledEditorWrapper>

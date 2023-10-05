@@ -32,9 +32,15 @@ const StyledEditorWrapper = styled.div`
     padding-left: 1rem;
   }
 
+  & a {
+    font-size: inherit;
+    text-decoration: underline;
+  }
+
   .tiptap {
     min-height: 100px;
     padding: 0.5rem;
+    border-radius: ${BORDER_RADIUS};
 
     &:focus-visible {
       outline: ${COLOR_NEUTRO_500} 2px;
@@ -45,7 +51,8 @@ const StyledEditorWrapper = styled.div`
 
 const StyledToolbar = styled.div`
   display: flex;
-  padding: 0.5rem;
+  padding: 0.25rem;
+  gap: 0.5rem;
 
   border-bottom: 1px ${COLOR_NEUTRO_400} solid;
 `;
@@ -58,6 +65,11 @@ const ToolbarButton = styled.button`
 
   border-radius: ${BORDER_RADIUS};
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  & svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
 
   &:hover {
     background-color: ${COLOR_NEUTRO_400};
