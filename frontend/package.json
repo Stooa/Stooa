@@ -26,7 +26,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@apollo/client": "3.8.1",
+    "@apollo/client": "3.8.4",
     "@hookform/resolvers": "^2.9.11",
     "@next/font": "13.1.6",
     "@tiptap/extension-link": "^2.1.11",
@@ -74,7 +74,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "18.0.6",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
-    "@cypress/code-coverage": "3.10.7",
+    "@cypress/code-coverage": "3.10.9",
     "@faker-js/faker": "8.0.2",
     "@runroom/design-tokens": "2.2.0",
     "@svgr/webpack": "6.5.1",
