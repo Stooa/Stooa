@@ -274,6 +274,7 @@ class Fishbowl implements \Stringable
 
     /** @var Collection<int, Attendee> */
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Attendee::class)]
+    #[ORM\OrderBy(['createdDateTime' => 'ASC'])]
     #[Groups(['fishbowl:read'])]
     private Collection $attendees;
 

@@ -35,7 +35,8 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
     normalizationContext: ['groups' => ['attendee:read']],
-    denormalizationContext: ['groups' => ['attendee:write']]
+    denormalizationContext: ['groups' => ['attendee:write']],
+    order: ['createdDateTime' => 'ASC']
 )]
 class Attendee implements \Stringable
 {
