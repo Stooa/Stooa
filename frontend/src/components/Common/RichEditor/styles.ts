@@ -23,7 +23,7 @@ const StyledEditorWrapper = styled.div`
   border: 1px ${COLOR_NEUTRO_400} solid;
 
   & ul {
-    list-style: circle;
+    list-style: disc;
     padding-left: 1rem;
   }
 
@@ -58,7 +58,10 @@ const ToolbarButton = styled.button`
     background-color: ${COLOR_NEUTRO_400};
   }
 
-  &.is-active,
+  &.is-active {
+    background-color: ${COLOR_NEUTRO_400};
+  }
+
   &:disabled {
     background-color: ${COLOR_NEUTRO_400};
     color: ${COLOR_NEUTRO_500};
