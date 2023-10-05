@@ -1,0 +1,37 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends '/emails/templates/email-base.html.twig' %}
+
+{% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
+{% set fishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
+
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+
+{% block title %}{{ 'emails.new_attendee.subject'|trans({}, null, locale) }}{% endblock %}
+
+{% block body %}
+    {{ macros.title('emails.new_attendee.title'|trans({}, null, locale), emailConfig, 'text-align: center;') }}
+    {{ macros.spaceRow(20) }}
+    {{ macros.text('emails.new_attendee.subtitle'|trans({}, null, locale), emailConfig, 'text-align: center;') }}
+    {{ macros.spaceRow(45) }}
+    <tr>
+        <td>
+            {{ macros.text('emails.new_attendee.fishbowl'|trans({'%fishbowl%': fishbowlName}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+            {{ macros.text('emails.new_attendee.name'|trans({'%name%': attendeeName}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+            {{ macros.text('emails.new_attendee.email'|trans({'%email%': attendeeEmail}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+            {{ macros.text(urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.fishbowlLink.styles }),
+                emailConfig, '', 'fishbowlLink'
+            ) }}
+        </td>
+    </tr>
+    {{ macros.spaceRow(40) }}
+{% endblock %}

@@ -43,7 +43,13 @@ emails:
             ca: Catalán
             en: Inglés
             fr: Francés
-
+    new_attendee:
+        subject: Alguien se ha apuntado a tu fishbowl
+        title: Nuevo asistente
+        subtitle: Alguien se ha apuntado a tu fishbowl
+        name: 'Name: %name%'
+        email: 'Email: %email%'
+        fishbowl: 'Fishbowl: %fishbowl%'
 login:
     failure: Credenciales no válidas
 
