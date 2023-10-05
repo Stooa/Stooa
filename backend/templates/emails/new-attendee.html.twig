@@ -25,9 +25,10 @@ file that was distributed with this source code.
     {{ macros.spaceRow(45) }}
     <tr>
         <td>
-            {{ macros.text('emails.new_attendee.fishbowl'|trans({'%fishbowl%': fishbowlName}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
             {{ macros.text('emails.new_attendee.name'|trans({'%name%': attendeeName}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
             {{ macros.text('emails.new_attendee.email'|trans({'%email%': attendeeEmail}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+            {{ macros.spaceRow(20) }}
+            {{ macros.text('emails.new_attendee.fishbowl'|trans({'%fishbowl%': fishbowlName}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
             {{ macros.text(urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.fishbowlLink.styles }),
                 emailConfig, '', 'fishbowlLink'
             ) }}
