@@ -501,7 +501,9 @@ const FishbowlForm = ({
               {...register('plainPassword')}
             />
           )}
+        </fieldset>
 
+        <fieldset>
           <TextDivider>
             <p>{t('fishbowl.invitationTitle')}</p>
             <span></span>
@@ -544,6 +546,7 @@ const FishbowlForm = ({
             </>
           )}
         </fieldset>
+
         <fieldset>
           <SubmitBtn
             data-testid="fishbowl-submit"

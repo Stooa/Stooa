@@ -358,9 +358,8 @@ const EditFormWrapper = styled.div`
   border-radius: ${rems(4)};
 
   overflow-y: scroll;
-  ${media.min('desktop')`
-    overflow-y: hidden;
-  `}
+
+  ${scrolllbarStyle};
 
   .form-header {
     position: relative;
@@ -381,17 +380,18 @@ const EditFormWrapper = styled.div`
 
   ${media.max('desktop')`
     background-color: rgba(0, 0, 0, 0.5);
-  `}
-
-  ${media.min('desktop')`
-    height: 100%;
-    position: relative;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
 
     &::-webkit-scrollbar {
         display: none; /* for Chrome, Safari, and Opera */
     }
+  `}
+
+  ${media.min('desktop')`
+    height: 100%;
+    position: relative;
+
   `}
 `;
 

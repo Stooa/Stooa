@@ -66,6 +66,11 @@ const ToolbarButton = styled.button`
     background-color: ${COLOR_NEUTRO_400};
     color: ${COLOR_NEUTRO_500};
   }
+
+  &:focus-visible {
+    outline: ${COLOR_NEUTRO_500} 2px;
+    outline-style: solid;
+  }
 `;
 
 export { StyledEditorWrapper, ToolbarButton, StyledToolbar };

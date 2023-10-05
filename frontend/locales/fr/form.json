@@ -24,9 +24,8 @@
         "passwordPlaceholder": "Insérez votre mot de passe",
         "passwordInputLabel": "Mot de passe",
         "invitationTitle": "Invitation",
-        "invitationToggleLabel": "Je veux personnaliser l'invitation",
-        "invitationTooltip": "Vous pouvez personnaliser l'invitation que les participants recevront par courriel. Vous pouvez également copier le lien et l'envoyer vous-même.",
-        "invitationTitleLabel": "Titre",
+        "invitationToggleLabel": "Je veux personnaliser l'invitation à mon événement",
+"invitationTooltip": "À partir de cette invitation, les participants peuvent s'inscrire à l'événement, et vous pouvez ainsi savoir combien de personnes viendront. Vérifiez les participants depuis la page des Fishbowls programmés.",        "invitationTitleLabel": "Titre",
         "invitationSubtitleLabel": "Sous-titre (facultatif)",
         "invitationDescriptionLabel": "Description (facultatif)"
     },

@@ -31,8 +31,8 @@
         "passwordPlaceholder": "Inserta tu contraseña",
         "passwordInputLabel": "Contraseña",
         "invitationTitle": "Invitación",
-        "invitationToggleLabel": "Quiero personalizar la invitación que se enviará a los participantes",
-        "invitationTooltip": "Puedes personalizar la invitación que se enviará a los participantes. Si no la personalizas, se enviará una invitación por defecto.",
+        "invitationToggleLabel": "Quiero personalizar la invitación a mi evento",
+        "invitationTooltip": "Desde esta invitación, los participantes pueden registrarse para el evento, y de esta manera puedes saber cuántas personas vendrán. Comprueba los participantes desde la página de Fishbowls programados.",
         "invitationTitleLabel": "Título",
         "invitationSubtitleLabel": "Subtítulo (opcional)",
         "invitationDescriptionLabel": "Descripción (opcional)"
