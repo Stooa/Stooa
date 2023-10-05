@@ -108,8 +108,7 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : '',
     hasInvitationInfo: fishbowl.hasInvitationInfo || false,
     invitationTitle: fishbowl.invitationTitle || '',
-    invitationSubtitle: fishbowl.invitationSubtitle || '',
-    invitationText: fishbowl.invitationText || ''
+    invitationSubtitle: fishbowl.invitationSubtitle || ''
   };
 };
 
@@ -176,6 +175,7 @@ const FishbowlForm = ({
   } = methods;
 
   const editor = useEditor({
+    content: selectedFishbowl?.invitationText,
     extensions: [
       StarterKit,
       Link.configure({
@@ -317,7 +317,7 @@ const FishbowlForm = ({
 
   useEffect(() => {
     if (isEditForm && selectedFishbowl) {
-      const formattedFishbowl = mapSelectedFishbowl(selectedFishbowl);
+      const formattedFishbowl = mapSelectedFishbowl(selectedFishbowl, editor);
       reset(formattedFishbowl, {
         keepDefaultValues: true
       });
