@@ -39,6 +39,7 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
+import useDebounce from '@/hooks/useDebounce';
 
 interface Props {
   selectedFishbowl?: Fishbowl;
@@ -59,8 +60,10 @@ interface FormValues {
   hasIntroduction: boolean;
   isPrivate: boolean;
   plainPassword?: string;
-  editInvitation: boolean;
   hasInvitationInfo: boolean;
+  invitationTitle?: string;
+  invitationSubtitle?: string;
+  invitationText?: string;
 }
 
 const initialValues = {
@@ -103,7 +106,10 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     hasIntroduction: fishbowl.hasIntroduction ?? false,
     isPrivate: fishbowl.isPrivate,
     plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : '',
-    hasInvitationInfo: fishbowl.hasInvitationInfo || false
+    hasInvitationInfo: fishbowl.hasInvitationInfo || false,
+    invitationTitle: fishbowl.invitationTitle || '',
+    invitationSubtitle: fishbowl.invitationSubtitle || '',
+    invitationText: fishbowl.invitationText || ''
   };
 };
 
@@ -163,6 +169,7 @@ const FishbowlForm = ({
     register,
     handleSubmit,
     getValues,
+    setValue,
     reset,
     watch,
     formState: { dirtyFields, errors, isSubmitting, isSubmitted }
@@ -181,6 +188,10 @@ const FishbowlForm = ({
   });
 
   const watchIsPrivate = watch('isPrivate');
+  const watchInvitationInfo = watch('hasInvitationInfo');
+  const watchTitle = watch('title');
+
+  const debouncedTitle = useDebounce<string | undefined>(watchTitle, 500);
 
   const onCompletedSubmit = res => {
     if (res.type === 'Error') {
@@ -231,7 +242,7 @@ const FishbowlForm = ({
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
 
-    const html = editor.getHTML();
+    const html = editor ? editor.getHTML() : '';
 
     if (isEditForm) {
       pushEventDataLayer({
@@ -253,7 +264,11 @@ const FishbowlForm = ({
             isFishbowlNow: false,
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
-            plainPassword: values.isPrivate ? values.plainPassword : undefined
+            plainPassword: values.isPrivate ? values.plainPassword : undefined,
+            hasInvitationInfo: values.hasInvitationInfo,
+            invitationTitle: values.invitationTitle,
+            invitationSubtitle: values.invitationSubtitle,
+            invitationText: html
           }
         }
       })
@@ -281,7 +296,10 @@ const FishbowlForm = ({
             isPrivate: values.isPrivate,
             plainPassword:
               values.isPrivate && values.plainPassword ? values.plainPassword : undefined,
-            hasInvitationInfo: false
+            hasInvitationInfo: values.hasInvitationInfo,
+            invitationTitle: values.invitationTitle,
+            invitationSubtitle: values.invitationSubtitle,
+            invitationText: html
           }
         }
       })
@@ -305,6 +323,10 @@ const FishbowlForm = ({
       });
     }
   }, [isEditForm, selectedFishbowl, reset]);
+
+  useEffect(() => {
+    setValue('invitationTitle', debouncedTitle);
+  }, [debouncedTitle, setValue]);
 
   const today = new Date();
 
@@ -481,19 +503,46 @@ const FishbowlForm = ({
           )}
 
           <TextDivider>
-            <p>Invitación</p>
+            <p>{t('fishbowl.invitationTitle')}</p>
             <span></span>
           </TextDivider>
 
-          {/* <Switch
+          <Switch
             id="hasInvitationInfo"
             full
-            tooltipText={'Edit the content of your invitation, as the title and the body'}
-            label={'Edit invitation content.'}
+            tooltipText={t('fishbowl.invitationTooltip')}
+            label={t('fishbowl.invitationToggleLabel')}
             {...register('hasInvitationInfo')}
-          /> */}
+          />
 
-          <RichEditor editor={editor} />
+          {watchInvitationInfo && (
+            <>
+              <Input
+                isDirty={dirtyFields.invitationTitle}
+                hasError={errors.invitationTitle}
+                data-testid="fishbowl-form-invitationTitle"
+                placeholder={t('defaultTitle', { name: '' }).slice(0, -3)}
+                label={t('fishbowl.invitationTitleLabel')}
+                type="text"
+                autoComplete="off"
+                id="invitationTitle"
+                {...register('invitationTitle')}
+              />
+
+              <Input
+                isDirty={dirtyFields.invitationSubtitle}
+                hasError={errors.invitationSubtitle}
+                data-testid="fishbowl-form-invitationSubtitle"
+                label={t('fishbowl.invitationSubtitleLabel')}
+                type="text"
+                autoComplete="off"
+                id="invitationSubtitle"
+                {...register('invitationSubtitle')}
+              />
+
+              <RichEditor editor={editor} />
+            </>
+          )}
         </fieldset>
         <fieldset>
           <SubmitBtn

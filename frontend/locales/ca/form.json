@@ -29,7 +29,13 @@
         "isPrivate": "Vull que aquest esdeveniment sigui privat",
         "passwordTooltip": "Per a poder accedir a l'esdeveniment serà necessari ingressar la contrasenya",
         "passwordPlaceholder": "Introdueix la teva contrasenya",
-        "passwordInputLabel": "Contrasenya"
+        "passwordInputLabel": "Contrasenya",
+        "invitationTitle": "Invitació",
+        "invitationToggleLabel": "Vull personalitzar la invitació",
+        "invitationTooltip": "Pots personalitzar la invitació que rebran els teus convidats. Si no vols personalitzar-la, deixaràs el text per defecte.",
+        "invitationTitleLabel": "Títol",
+        "invitationSubtitleLabel": "Subtítol (opcional)",
+        "invitationDescriptionLabel": "Descripció (opcional)"
     },
     "button": {
         "login": "Entra",

@@ -29,7 +29,13 @@
         "isPrivate": "Quiero que el evento sea privado",
         "passwordTooltip": "Para poder acceder al evento será necesario ingresar la contraseña",
         "passwordPlaceholder": "Inserta tu contraseña",
-        "passwordInputLabel": "Contraseña"
+        "passwordInputLabel": "Contraseña",
+        "invitationTitle": "Invitación",
+        "invitationToggleLabel": "Quiero personalizar la invitación que se enviará a los participantes",
+        "invitationTooltip": "Puedes personalizar la invitación que se enviará a los participantes. Si no la personalizas, se enviará una invitación por defecto.",
+        "invitationTitleLabel": "Título",
+        "invitationSubtitleLabel": "Subtítulo (opcional)",
+        "invitationDescriptionLabel": "Descripción (opcional)"
     },
     "button": {
         "login": "Entra",

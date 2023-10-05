@@ -22,7 +22,13 @@
         "isPrivate": "Je veux que cet événement soit privé",
         "passwordTooltip": "Pour accéder à l'événement, il sera nécessaire d'entrer le mot de passe",
         "passwordPlaceholder": "Insérez votre mot de passe",
-        "passwordInputLabel": "Mot de passe"
+        "passwordInputLabel": "Mot de passe",
+        "invitationTitle": "Invitation",
+        "invitationToggleLabel": "Je veux personnaliser l'invitation",
+        "invitationTooltip": "Vous pouvez personnaliser l'invitation que les participants recevront par courriel. Vous pouvez également copier le lien et l'envoyer vous-même.",
+        "invitationTitleLabel": "Titre",
+        "invitationSubtitleLabel": "Sous-titre (facultatif)",
+        "invitationDescriptionLabel": "Description (facultatif)"
     },
     "button": {
         "createAccount": "Créez-en un !",
