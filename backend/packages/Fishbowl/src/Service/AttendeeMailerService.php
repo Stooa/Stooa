@@ -46,15 +46,20 @@ class AttendeeMailerService
         $locale = $user->getLocale();
 
         $email = (new TemplatedEmail())
-            ->from(new Address($this->from, $this->translator->trans('emails.new_attendee.title', [], null, $locale)))
+            ->from(new Address($this->from, $this->translator->trans('emails.new_attendee.title', ['%name%' => $attendee->getName()], null, $locale)))
             ->to((string) $user->getEmail())
-            ->subject($this->translator->trans('emails.new_attendee.subject', [], null, $locale))
+            ->subject($this->translator->trans('emails.new_attendee.subject', ['%name%' => $attendee->getName()], null, $locale))
             ->htmlTemplate('emails/new-attendee.html.twig')
             ->context([
                 'attendeeName' => $attendee->getName(),
                 'attendeeEmail' => $attendee->getEmail(),
                 'fishbowlName' => $fishbowl->getName(),
                 'fishbowlSlug' => $fishbowl->getSlug(),
+                'fishbowlDescription' => $fishbowl->getDescription(),
+                'fishbowlStartDate' => $fishbowl->getStartDateTimeFormatted(),
+                'fishbowlStartTime' => $fishbowl->getStartDateTimeHourFormatted(),
+                'fishbowlFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
+                'fishbowlDuration' => $fishbowl->getDurationFormatted(),
                 'locale' => $locale,
                 'appUrl' => $this->appUrl,
             ]);

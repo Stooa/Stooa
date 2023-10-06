@@ -44,12 +44,10 @@ emails:
             en: Inglés
             fr: Francés
     new_attendee:
-        subject: Alguien se ha apuntado a tu fishbowl
-        title: Nuevo asistente
-        subtitle: Alguien se ha apuntado a tu fishbowl
-        name: 'Name: %name%'
-        email: 'Email: %email%'
-        fishbowl: 'Fishbowl: %fishbowl%'
+        subject: '%name% se ha apuntado a tu fishbowl!'
+        title: '%name% se ha apuntado a tu fishbowl!'
+        text: '<b>%name%</b> se ha apuntado al fishbowl de <b>%fishbowl%</b>'
+        copy: 'Copia y comparte el link de este fishbowl con gente que quieres que se una a la conversación👇'
 login:
     failure: Credenciales no válidas
 
