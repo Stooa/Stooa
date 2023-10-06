@@ -84,6 +84,10 @@ const GET_FISHBOWL = gql`
       invitationTitle
       invitationSubtitle
       invitationText
+      host {
+        name
+        surnames
+      }
     }
   }
 `;
