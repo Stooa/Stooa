@@ -62,7 +62,7 @@
     "use-sound": "4.0.1",
     "webm-duration-fix": "1.0.4",
     "yup": "^0.32.11",
-    "zustand": "4.3.8"
+    "zustand": "4.3.9"
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "18.0.6",
