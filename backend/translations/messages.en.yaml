@@ -48,6 +48,12 @@ emails:
         title: '%name% has signed up for your fishbowl!'
         text: '<b>%name%</b> has signed up for the Fishbowl of <b>%fishbowl%</b>'
         copy: 'Copy and share the link to this fishbowl with people you want to join the conversation👇'
+    new_attendee_user:
+        subject: 'See you in... %fishbowl%'
+        title: 'See you in... %fishbowl%'
+        text: 'You have signed up for %fishbowl% Fishbowl, organized by %name%.'
+        copy: 'Copy and share the link to this fishbowl with people you want to join the conversation👇'
+
 login:
     failure: Invalid credentials
 
