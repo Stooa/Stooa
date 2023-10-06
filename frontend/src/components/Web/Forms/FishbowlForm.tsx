@@ -133,6 +133,8 @@ const FishbowlForm = ({
   const defaultTitle = t('defaultTitle', {
     name: user && user.name ? user.name.split(' ')[0] : ''
   });
+  const defaultInvitationTitle = t('defaultTitle', { name: '' }).slice(0, -3);
+
   const getRandomPassword = useCallback(() => {
     return Math.random().toString(36).substring(2, 10);
   }, []);
@@ -155,6 +157,15 @@ const FishbowlForm = ({
     plainPassword: Yup.string().when('isPrivate', {
       is: true,
       then: Yup.string().min(8, minimumLength).required(requiredError)
+    }),
+    hasInvitationInfo: Yup.boolean(),
+    invitationTitle: Yup.string().when('hasInvitationInfo', {
+      is: true,
+      then: Yup.string()
+    }),
+    invitationSubtitle: Yup.string().when('hasInvitationInfo', {
+      is: true,
+      then: Yup.string()
     })
   });
 
@@ -297,7 +308,8 @@ const FishbowlForm = ({
             plainPassword:
               values.isPrivate && values.plainPassword ? values.plainPassword : undefined,
             hasInvitationInfo: values.hasInvitationInfo,
-            invitationTitle: values.invitationTitle,
+            invitationTitle:
+              values.invitationTitle !== '' ? values.invitationTitle : defaultInvitationTitle,
             invitationSubtitle: values.invitationSubtitle,
             invitationText: html
           }
@@ -525,7 +537,7 @@ const FishbowlForm = ({
                 isDirty={dirtyFields.invitationTitle}
                 hasError={errors.invitationTitle}
                 data-testid="fishbowl-form-invitationTitle"
-                placeholder={t('defaultTitle', { name: '' }).slice(0, -3)}
+                placeholder={defaultInvitationTitle}
                 label={t('fishbowl.invitationTitleLabel')}
                 type="text"
                 autoComplete="off"

@@ -8,20 +8,10 @@
  */
 
 import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400, COLOR_NEUTRO_500 } from '@/ui/settings';
+
 import styled from 'styled-components';
 
-const StyledEditorWrapper = styled.div`
-  display: flex;
-  width: 100%;
-
-  flex-direction: column;
-  row-gap: 0.25rem;
-
-  background-color: ${COLOR_NEUTRO_300};
-
-  border-radius: ${BORDER_RADIUS};
-  border: 1px ${COLOR_NEUTRO_400} solid;
-
+export const StandardWYSIWYGStyles = styled.div`
   & ul {
     list-style: disc;
     padding-left: 1rem;
@@ -36,6 +26,19 @@ const StyledEditorWrapper = styled.div`
     font-size: inherit;
     text-decoration: underline;
   }
+`;
+
+const StyledEditorWrapper = styled(StandardWYSIWYGStyles)`
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  row-gap: 0.25rem;
+
+  background-color: ${COLOR_NEUTRO_300};
+
+  border-radius: ${BORDER_RADIUS};
+  border: 1px ${COLOR_NEUTRO_400} solid;
 
   .tiptap {
     min-height: 100px;

@@ -22,6 +22,7 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
+import FishbowlInvitationLanding from '@/components/Web/FishbowlInvitationLanding';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -90,8 +91,10 @@ const Page = () => {
     </Layout>
   ) : (
     <LayoutWeb>
-      <FishbowlLanding data={fb} />
-      <JoinFishbowl data={fb} joinAsGuest={handleJoinAsGuest} />
+      {/* TODO: HERE IS WHERE THE LANDING WILL GO */}
+      <FishbowlInvitationLanding fishbowl={fb} />
+      {/* <FishbowlLanding data={fb} />
+      <JoinFishbowl data={fb} joinAsGuest={handleJoinAsGuest} /> */}
     </LayoutWeb>
   );
 };
