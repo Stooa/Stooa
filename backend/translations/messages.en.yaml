@@ -48,10 +48,10 @@ emails:
         title: '%name% has signed up for your fishbowl!'
         text: '<b>%name%</b> has signed up for the Fishbowl of <b>%fishbowl%</b>'
         copy: 'Copy and share the link to this fishbowl with people you want to join the conversation👇'
-    new_attendee_user:
+    new_attendee_confirmation:
         subject: 'See you in... %fishbowl%'
         title: 'See you in... %fishbowl%'
-        text: 'You have signed up for %fishbowl% Fishbowl, organized by %name%.'
+        text: 'You have signed up for <b>%fishbowl%</b> Fishbowl, organized by <b>%name%</b>.'
         copy: 'Copy and share the link to this fishbowl with people you want to join the conversation👇'
 
 login:

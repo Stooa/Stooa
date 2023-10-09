@@ -29,6 +29,21 @@ class AttendeeCreateListener
 
     public function postPersist(Attendee $attendee, PostPersistEventArgs $event): void
     {
-        $this->attendeeMailerService->sendNewAttendeeNotification($attendee);
+        $fishbowl = $attendee->getFishbowl();
+
+        if (null === $fishbowl) {
+            return;
+        }
+
+        $host = $fishbowl->getHost();
+
+        if (null === $host) {
+            return;
+        }
+
+        $this->attendeeMailerService->sendNewAttendeeNotification($attendee, $fishbowl, $host);
+
+        $this->attendeeMailerService->sendNewAttendeeConfirmation($attendee, $fishbowl, $host);
+
     }
 }

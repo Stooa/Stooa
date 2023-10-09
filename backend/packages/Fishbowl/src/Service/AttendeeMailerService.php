@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service;
 
+use App\Core\Entity\User;
 use App\Fishbowl\Entity\Attendee;
+use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -29,30 +31,47 @@ class AttendeeMailerService
     ) {
     }
 
-    public function sendNewAttendeeNotification(Attendee $attendee): void
+    public function sendNewAttendeeNotification(Attendee $attendee, Fishbowl $fishbowl, User $host): void
     {
-        $fishbowl = $attendee->getFishbowl();
-
-        if (null === $fishbowl) {
-            return;
-        }
-
-        $user = $fishbowl->getHost();
-
-        if (null === $user) {
-            return;
-        }
-
-        $locale = $user->getLocale();
+        $locale = $host->getLocale();
 
         $email = (new TemplatedEmail())
             ->from(new Address($this->from, $this->translator->trans('emails.new_attendee.title', ['%name%' => $attendee->getName()], null, $locale)))
-            ->to((string) $user->getEmail())
+            ->to((string) $host->getEmail())
             ->subject($this->translator->trans('emails.new_attendee.subject', ['%name%' => $attendee->getName()], null, $locale))
             ->htmlTemplate('emails/new-attendee.html.twig')
             ->context([
                 'attendeeName' => $attendee->getName(),
                 'attendeeEmail' => $attendee->getEmail(),
+                'fishbowlName' => $fishbowl->getName(),
+                'fishbowlSlug' => $fishbowl->getSlug(),
+                'fishbowlDescription' => $fishbowl->getDescription(),
+                'fishbowlStartDate' => $fishbowl->getStartDateTimeFormatted(),
+                'fishbowlStartTime' => $fishbowl->getStartDateTimeHourFormatted(),
+                'fishbowlFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
+                'fishbowlDuration' => $fishbowl->getDurationFormatted(),
+                'locale' => $locale,
+                'appUrl' => $this->appUrl,
+            ]);
+
+        $this->mailer->send($email);
+    }
+
+    public function sendNewAttendeeConfirmation(Attendee $attendee, Fishbowl $fishbowl, User $host): void
+    {
+        if (null === $attendee->getEmail()) {
+            return;
+        }
+
+        $locale = $host->getLocale();
+
+        $email = (new TemplatedEmail())
+            ->from(new Address($this->from, $this->translator->trans('emails.new_attendee_confirmation.title', ['%fishbowl%' => $fishbowl->getName()], null, $locale)))
+            ->to((string) $attendee->getEmail())
+            ->subject($this->translator->trans('emails.new_attendee_confirmation.subject', ['%fishbowl%' => $fishbowl->getName()], null, $locale))
+            ->htmlTemplate('emails/new-attendee-confirmation.html.twig')
+            ->context([
+                'fishbowlHostName' => $host->getFullName(),
                 'fishbowlName' => $fishbowl->getName(),
                 'fishbowlSlug' => $fishbowl->getSlug(),
                 'fishbowlDescription' => $fishbowl->getDescription(),
