@@ -22,7 +22,7 @@ import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import StandardForm, { TextDivider } from '@/ui/Form';
+import { CreateFishbowlForm, TextDivider } from '@/ui/Form';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 
@@ -347,7 +347,7 @@ const FishbowlForm = ({
   return (
     <FormProvider {...methods}>
       {backendErrors && <FormError errors={backendErrors} />}
-      <StandardForm onSubmit={handleSubmit(onSubmit)} $isFull={isFull}>
+      <CreateFishbowlForm onSubmit={handleSubmit(onSubmit)} $isFull={isFull}>
         <fieldset className="fieldset-inline">
           <Input
             isSubmitted={isSubmitted}
@@ -571,7 +571,7 @@ const FishbowlForm = ({
             <span className="success-message-bottom">{t('validation.successMessage')}</span>
           )}
         </fieldset>
-      </StandardForm>
+      </CreateFishbowlForm>
     </FormProvider>
   );
 };

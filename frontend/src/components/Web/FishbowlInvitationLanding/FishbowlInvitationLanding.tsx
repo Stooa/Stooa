@@ -21,7 +21,7 @@ import {
 } from './styles';
 import FishbowlDataCard from '../FishbowlDataCard';
 import Image from 'next/image';
-import { RegisterInvitation } from '../Forms/RegisterInvitation';
+import RegisterInvitation from '../Forms/RegisterInvitation';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import { useEffect, useRef } from 'react';
 import { useStateValue } from '@/contexts/AppContext';
@@ -115,7 +115,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
 
         <StyledInvitationFormWrapper id="form">
           <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
-          <RegisterInvitation />
+          <RegisterInvitation fishbowl={fishbowl} />
         </StyledInvitationFormWrapper>
       </StyledInvitationContent>
       <StyledFixedFishbowlData>

@@ -28,7 +28,7 @@ import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const StandardForm = styled.form<{ $isFull?: boolean }>`
   position: relative;
-  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.reader))};
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -94,6 +94,10 @@ const StandardForm = styled.form<{ $isFull?: boolean }>`
     justify-content: space-between;
   }
 `}
+`;
+
+const CreateFishbowlForm = styled(StandardForm)`
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.reader))};
 `;
 
 const InputStyled = styled.div<{
@@ -449,7 +453,8 @@ export {
   InputStyled,
   TextDivider,
   SwitchStyled,
-  SwitchLabel
+  SwitchLabel,
+  CreateFishbowlForm
 };
 
 export default StandardForm;

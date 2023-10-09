@@ -10,8 +10,12 @@
 import Button from '@/components/Common/Button';
 import Input from '@/components/Common/Fields/Input';
 import StandardForm from '@/ui/Form';
+import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { Fishbowl } from '@/types/api-platform';
+
+import { CREATE_ATTENDEE } from '@/lib/gql/Attendee';
 
 import * as Yup from 'yup';
 
@@ -20,11 +24,12 @@ interface FormValues {
   email: string;
 }
 
-export const RegisterInvitation = () => {
+const RegisterInvitation = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   const schema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
     email: Yup.string().required('El email es obligatorio')
   });
+  const [CreateAttendeeMutation] = useMutation(CREATE_ATTENDEE);
 
   const {
     register,
@@ -37,7 +42,19 @@ export const RegisterInvitation = () => {
     defaultValues: { name: '', email: '' }
   });
 
-  const handleOnSubmit = (values: FormValues) => {};
+  const handleOnSubmit = (values: FormValues) => {
+    CreateAttendeeMutation({
+      variables: {
+        input: {
+          fishbowl: fishbowl.id,
+          name: values.name,
+          email: values.email
+        }
+      }
+    }).then(res => {
+      console.log(res);
+    });
+  };
 
   return (
     <StandardForm $isFull onSubmit={handleSubmit(handleOnSubmit)}>
@@ -70,3 +87,5 @@ export const RegisterInvitation = () => {
     </StandardForm>
   );
 };
+
+export default RegisterInvitation;
