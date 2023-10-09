@@ -25,6 +25,7 @@ import RegisterInvitation from '../Forms/RegisterInvitation';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import { useEffect, useRef } from 'react';
 import { useStateValue } from '@/contexts/AppContext';
+import Head from 'next/head';
 
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
@@ -65,8 +66,6 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
     return () => window.clearInterval(intervalRef.current);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log('RAMONEIRO', fishbowl);
-
   const startDateTime = new Date(startDateTimeTz);
 
   const localFormatDate = new Intl.DateTimeFormat(lang, {
@@ -76,52 +75,57 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
     day: 'numeric'
   }).format(startDateTime);
 
+  const pageTitle = `${invitationTitle} - ${host.name} ${host.surnames}`;
+
   return (
-    <StyledInvitationLanding>
-      <StyledInvitationContent>
-        <StyledInvitationHero>
-          <h1 className="title-lg">{invitationTitle}</h1>
-          <h2 className="title-md">{localFormatDate}</h2>
-          {invitationSubtitle && <p>{invitationSubtitle}</p>}
-          {host && (
-            <p className="body-lg">
-              {host.name} {host.surnames}
-            </p>
-          )}
-          {fishbowlReady ? (
-            <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
-          ) : (
-            <a href="#form">
-              <Button as="a" size="large">
-                Me apunto
-              </Button>
-            </a>
-          )}
-        </StyledInvitationHero>
-
-        <div className="fishbowl-preview">
-          <Image
-            src="/img/web/stooa-preview.png"
-            priority
-            alt="Stooa fishbowl event"
-            width={720}
-            height={448}
-          />
-        </div>
-
-        <StyledInventationLandingContentBody
-          dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}
-        ></StyledInventationLandingContentBody>
-
-        <StyledInvitationFormWrapper id="form">
-          <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
-          <RegisterInvitation fishbowl={fishbowl} />
-        </StyledInvitationFormWrapper>
-      </StyledInvitationContent>
-      <StyledFixedFishbowlData>
-        <FishbowlDataCard data={fishbowl} />
-      </StyledFixedFishbowlData>
-    </StyledInvitationLanding>
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={fishbowl.invitationSubtitle} />
+      </Head>
+      <StyledInvitationLanding>
+        <StyledInvitationContent>
+          <StyledInvitationHero>
+            <h1 className="title-lg">{invitationTitle}</h1>
+            <h2 className="title-md">{localFormatDate}</h2>
+            {invitationSubtitle && <p>{invitationSubtitle}</p>}
+            {host && (
+              <p className="body-lg">
+                {host.name} {host.surnames}
+              </p>
+            )}
+            {fishbowlReady ? (
+              <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
+            ) : (
+              <a href="#form">
+                <Button as="a" size="large">
+                  Me apunto
+                </Button>
+              </a>
+            )}
+          </StyledInvitationHero>
+          <div className="fishbowl-preview">
+            <Image
+              src="/img/web/stooa-preview.png"
+              priority
+              alt="Stooa fishbowl event"
+              width={720}
+              height={448}
+            />
+          </div>
+          <StyledInventationLandingContentBody
+            dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}
+          ></StyledInventationLandingContentBody>
+          <StyledInvitationFormWrapper id="form">
+            <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
+            <RegisterInvitation fishbowl={fishbowl} />
+          </StyledInvitationFormWrapper>
+        </StyledInvitationContent>
+        <StyledFixedFishbowlData>
+          <FishbowlDataCard data={fishbowl} />
+        </StyledFixedFishbowlData>
+      </StyledInvitationLanding>
+    </>
   );
 };
 

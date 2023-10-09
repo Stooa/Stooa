@@ -58,6 +58,18 @@ const Decoration = styled.div`
   }
 `;
 
+const TopDecoration = styled.div`
+  &,
+  svg {
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    z-index: 0;
+  }
+`;
+
 const Header = styled.header`
   align-items: center;
   color: ${COLOR_NEUTRO_700};
@@ -77,4 +89,4 @@ const Main = styled.main<{ center?: boolean }>`
   ${props => (props.center ? flexCenter : '')}
 `;
 
-export { Container, Decoration, Header, Main };
+export { Container, Decoration, Header, Main, TopDecoration };

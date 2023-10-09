@@ -32,8 +32,6 @@ const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
 
-  console.log(' RENDERS JOIN BUTTONS', fishbowlReady);
-
   return (
     <>
       <JoinFishbowlStyled>

@@ -18,7 +18,7 @@ const StyledInvitationLanding = styled.div`
   align-items: flex-start;
   grid-template-columns: 1fr 400px;
 
-  padding-bottom: ${space(10)};
+  padding-block: ${space(10)};
 `;
 
 const StyledInvitationContent = styled.div`
