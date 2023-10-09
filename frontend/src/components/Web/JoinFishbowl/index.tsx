@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';

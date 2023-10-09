@@ -80,7 +80,11 @@ const StyledInvitationFormWrapper = styled.div`
   text-align: left;
 `;
 
-const StyledInventationLandingContentBody = styled(StandardWYSIWYGStyles)``;
+const StyledInventationLandingContentBody = styled(StandardWYSIWYGStyles)`
+  * + p {
+    margin-top: ${space(2)};
+  }
+`;
 
 export {
   StyledInvitationContent,
