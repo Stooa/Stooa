@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
@@ -31,8 +30,6 @@ const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
-
-  console.log(' RENDERS JOIN BUTTONS', fishbowlReady);
 
   return (
     <>

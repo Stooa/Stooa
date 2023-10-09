@@ -18,7 +18,7 @@ const StyledInvitationLanding = styled.div`
   align-items: flex-start;
   grid-template-columns: 1fr 400px;
 
-  padding-bottom: ${space(10)};
+  padding-block: ${space(10)};
 `;
 
 const StyledInvitationContent = styled.div`
@@ -80,7 +80,11 @@ const StyledInvitationFormWrapper = styled.div`
   text-align: left;
 `;
 
-const StyledInventationLandingContentBody = styled(StandardWYSIWYGStyles)``;
+const StyledInventationLandingContentBody = styled(StandardWYSIWYGStyles)`
+  * + p {
+    margin-top: ${space(2)};
+  }
+`;
 
 export {
   StyledInvitationContent,
