@@ -52,11 +52,11 @@ class Attendee implements \Stringable
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $createdDateTime;
 
-    #[Groups(['attendee:write', 'attendee:read'])]
+    #[Groups(['attendee:read'])]
     #[Assert\Length(max: 255)]
     #[Assert\Timezone]
     #[ORM\Column(type: 'string')]
-    private ?string $timezone = null;
+    private ?string $timezone;
 
     #[Groups(['attendee:read', 'attendee:write', 'fishbowl:read'])]
     #[Assert\Length(max: 255)]
@@ -77,6 +77,7 @@ class Attendee implements \Stringable
     public function __construct()
     {
         $this->createdDateTime = new \DateTimeImmutable();
+        $this->timezone = date_default_timezone_get();
     }
 
     public function __toString(): string

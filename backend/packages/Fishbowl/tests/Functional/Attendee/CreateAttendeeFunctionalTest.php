@@ -81,8 +81,7 @@ class CreateAttendeeFunctionalTest extends ApiTestCase
                     'input' => [
                         'fishbowl' => '/fishbowls/' . $fishbowl->getId(),
                         'name' => 'Name Test',
-                        'email' => 'email@test.com',
-                        'timezone' => 'Europe/Madrid',
+                        'email' => 'email@test.com'
                     ],
                 ],
             ],
