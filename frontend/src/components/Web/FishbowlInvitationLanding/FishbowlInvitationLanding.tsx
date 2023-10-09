@@ -89,7 +89,9 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
       <StyledInvitationLanding>
         <StyledInvitationContent>
           <StyledInvitationHero>
-            <h1 className="title-lg">{invitationTitle}</h1>
+            <h1 data-testid="fishbowl-name" className="title-lg">
+              {invitationTitle}
+            </h1>
             <h2 className="title-md">{localFormatDate}</h2>
             {invitationSubtitle && <p>{invitationSubtitle}</p>}
             {host && (
