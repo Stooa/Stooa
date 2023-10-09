@@ -12,7 +12,9 @@ import styled from 'styled-components';
 import { space, media } from '@/ui/helpers';
 
 const JoinFishbowlStyled = styled.div`
+  width: 100%;
   .join-buttons {
+    /* max-width: 520px; */
     margin: ${space(3)} 0 0;
 
     > * {

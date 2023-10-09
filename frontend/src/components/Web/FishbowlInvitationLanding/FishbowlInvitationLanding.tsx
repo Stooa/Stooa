@@ -17,7 +17,8 @@ import {
   StyledInvitationLanding,
   StyledFixedFishbowlData,
   StyledInvitationFormWrapper,
-  StyledInventationLandingContentBody
+  StyledInventationLandingContentBody,
+  StyledMobileDataCard
 } from './styles';
 import FishbowlDataCard from '../FishbowlDataCard';
 import Image from 'next/image';
@@ -26,6 +27,7 @@ import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import { useEffect, useRef } from 'react';
 import { useStateValue } from '@/contexts/AppContext';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
@@ -79,6 +81,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
 
   return (
     <>
+      <ToastContainer className="toastify-custom" />
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={fishbowl.invitationSubtitle} />
@@ -104,6 +107,9 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               </a>
             )}
           </StyledInvitationHero>
+          <StyledMobileDataCard>
+            <FishbowlDataCard data={fishbowl} />
+          </StyledMobileDataCard>
           <div className="fishbowl-preview">
             <Image
               src="/img/web/stooa-preview.png"

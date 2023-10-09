@@ -8,7 +8,7 @@
  */
 
 import { StandardWYSIWYGStyles } from '@/components/Common/RichEditor/styles';
-import { space } from '@/ui/helpers';
+import { media, space } from '@/ui/helpers';
 import styled from 'styled-components';
 
 const StyledInvitationLanding = styled.div`
@@ -16,9 +16,14 @@ const StyledInvitationLanding = styled.div`
   display: grid;
   column-gap: ${space(10)};
   align-items: flex-start;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr;
 
+  padding-block: ${space(4)};
+
+  ${media.min('desktop')`
   padding-block: ${space(10)};
+    grid-template-columns: 1fr 400px;
+  `}
 `;
 
 const StyledInvitationContent = styled.div`
@@ -60,6 +65,7 @@ const StyledInvitationContent = styled.div`
 
 const StyledInvitationHero = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   row-gap: ${space(1.5)};
@@ -69,6 +75,10 @@ const StyledFixedFishbowlData = styled.div`
   position: sticky;
   top: ${space(4)};
   left: 0;
+
+  ${media.max('desktop')`
+      display: none ;
+  `}
 `;
 
 const StyledInvitationFormWrapper = styled.div`
@@ -78,6 +88,13 @@ const StyledInvitationFormWrapper = styled.div`
   width: 100%;
 
   text-align: left;
+`;
+
+const StyledMobileDataCard = styled.div`
+  width: 100%;
+  ${media.min('desktop')`
+    display: none;
+  `}
 `;
 
 const StyledInventationLandingContentBody = styled(StandardWYSIWYGStyles)`
@@ -92,5 +109,6 @@ export {
   StyledInvitationLanding,
   StyledFixedFishbowlData,
   StyledInvitationFormWrapper,
-  StyledInventationLandingContentBody
+  StyledInventationLandingContentBody,
+  StyledMobileDataCard
 };

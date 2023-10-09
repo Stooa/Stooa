@@ -61,12 +61,18 @@ const Decoration = styled.div`
 const TopDecoration = styled.div`
   &,
   svg {
-    top: 0;
-    left: 0;
+    width: 90%;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
     position: absolute;
     pointer-events: none;
-    width: 100%;
     z-index: 0;
+
+    ${media.min('tablet')`
+      top: 0;
+      width: 75%;
+    `}
   }
 `;
 
@@ -76,6 +82,7 @@ const Header = styled.header`
   grid-area: Header;
   display: flex;
   justify-content: space-between;
+  z-index: 1;
 `;
 
 const Main = styled.main<{ center?: boolean }>`

@@ -18,6 +18,7 @@ import { Fishbowl } from '@/types/api-platform';
 import { CREATE_ATTENDEE } from '@/lib/gql/Attendee';
 
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 interface FormValues {
   name: string;
@@ -53,6 +54,14 @@ const RegisterInvitation = ({ fishbowl }: { fishbowl: Fishbowl }) => {
       }
     }).then(res => {
       console.log(res);
+      toast('Te has registrado correctamente', {
+        toastId: 'successful-registered-attendee',
+        icon: '🎉',
+        type: 'success',
+        position: 'bottom-center',
+        autoClose: 5000,
+        delay: 2000
+      });
     });
   };
 

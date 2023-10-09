@@ -12,7 +12,7 @@ import React from 'react';
 import Header from '@/components/Web/Header';
 import Footer from '@/components/Web/Footer';
 import Decoration from '@/components/Web/Decoration';
-import TopDecorationBlob from '@/ui/svg/blobs/top-deco.svg';
+import TopDecorationBlob from '@/ui/svg/blobs/green-blob.svg';
 import {
   Container,
   Header as HeaderStyled,
