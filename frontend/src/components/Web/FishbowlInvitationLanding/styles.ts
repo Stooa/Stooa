@@ -21,11 +21,11 @@ const StyledInvitationLanding = styled.div`
   padding-bottom: ${space(10)};
 `;
 
-const StyledInvitationContent = styled(StandardWYSIWYGStyles)`
+const StyledInvitationContent = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  row-gap: ${space(10)};
+  row-gap: ${space(8)};
   width: 100%;
 
   text-align: left;
@@ -62,7 +62,7 @@ const StyledInvitationHero = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  row-gap: ${space(2)};
+  row-gap: ${space(1.5)};
 `;
 
 const StyledFixedFishbowlData = styled.div`
@@ -80,10 +80,13 @@ const StyledInvitationFormWrapper = styled.div`
   text-align: left;
 `;
 
+const StyledInventationLandingContentBody = styled(StandardWYSIWYGStyles)``;
+
 export {
   StyledInvitationContent,
   StyledInvitationHero,
   StyledInvitationLanding,
   StyledFixedFishbowlData,
-  StyledInvitationFormWrapper
+  StyledInvitationFormWrapper,
+  StyledInventationLandingContentBody
 };

@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import dynamic from 'next/dynamic';
 import Button from '@/components/Common/Button';
 import { Fishbowl } from '@/types/api-platform';
 import useTranslation from 'next-translate/useTranslation';
@@ -15,21 +16,56 @@ import {
   StyledInvitationContent,
   StyledInvitationLanding,
   StyledFixedFishbowlData,
-  StyledInvitationFormWrapper
+  StyledInvitationFormWrapper,
+  StyledInventationLandingContentBody
 } from './styles';
 import FishbowlDataCard from '../FishbowlDataCard';
 import Image from 'next/image';
 import { RegisterInvitation } from '../Forms/RegisterInvitation';
+import { isTimeLessThanNMinutes } from '@/lib/helpers';
+import { useEffect, useRef } from 'react';
+import { useStateValue } from '@/contexts/AppContext';
+
+const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
 interface Props {
   fishbowl: Fishbowl;
+  handleJoinAsGuest: () => void;
 }
 
-const FishbowlInvitationLanding = ({ fishbowl }: Props) => {
-  const { invitationTitle, invitationSubtitle, invitationText, startDateTimeTz } = fishbowl;
-  const { lang } = useTranslation();
+const MINUTE = 60 * 1000;
+const MINUTES_TO_START_FISHBOWL = 60;
 
-  console.log('RAMON ------->', fishbowl);
+const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
+  const [{ fishbowlReady }, dispatch] = useStateValue();
+  const { invitationTitle, invitationSubtitle, invitationText, startDateTimeTz, host } = fishbowl;
+  const { lang } = useTranslation();
+  const intervalRef = useRef<number>();
+
+  const evaluateFishbowlReady = () => {
+    const isReady = isTimeLessThanNMinutes(fishbowl.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
+
+    if (isReady) {
+      window.clearInterval(intervalRef.current);
+
+      dispatch({
+        type: 'FISHBOWL_READY',
+        fishbowlReady: true
+      });
+    } else {
+      console.log('[STOOA] More than 1 hour to start fishbowl');
+    }
+  };
+
+  useEffect(() => {
+    evaluateFishbowlReady();
+
+    intervalRef.current = window.setInterval(evaluateFishbowlReady, MINUTE);
+
+    return () => window.clearInterval(intervalRef.current);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  console.log('RAMONEIRO', fishbowl);
 
   const startDateTime = new Date(startDateTimeTz);
 
@@ -46,8 +82,21 @@ const FishbowlInvitationLanding = ({ fishbowl }: Props) => {
         <StyledInvitationHero>
           <h1 className="title-lg">{invitationTitle}</h1>
           <h2 className="title-md">{localFormatDate}</h2>
-          <p>{invitationSubtitle}</p>
-          <Button size="large">Me apunto</Button>
+          {invitationSubtitle && <p>{invitationSubtitle}</p>}
+          {host && (
+            <p className="body-lg">
+              {host.name} {host.surnames}
+            </p>
+          )}
+          {fishbowlReady ? (
+            <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
+          ) : (
+            <a href="#form">
+              <Button as="a" size="large">
+                Me apunto
+              </Button>
+            </a>
+          )}
         </StyledInvitationHero>
 
         <div className="fishbowl-preview">
@@ -60,9 +109,11 @@ const FishbowlInvitationLanding = ({ fishbowl }: Props) => {
           />
         </div>
 
-        <div dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}></div>
+        <StyledInventationLandingContentBody
+          dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}
+        ></StyledInventationLandingContentBody>
 
-        <StyledInvitationFormWrapper>
+        <StyledInvitationFormWrapper id="form">
           <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
           <RegisterInvitation />
         </StyledInvitationFormWrapper>
