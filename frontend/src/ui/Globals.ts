@@ -90,6 +90,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: ${FONT_BASE_SIZE}px;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -97,7 +98,6 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
-    scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
   }
 

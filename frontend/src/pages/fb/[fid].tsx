@@ -22,15 +22,14 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
-import FishbowlInvitationLanding from '@/components/Web/FishbowlInvitationLanding';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
 const Fishbowl = dynamic(import('@/components/App/Fishbowl'), { loading: () => <div /> });
-const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
+const FishbowlInvitationLanding = dynamic(import('@/components/Web/FishbowlInvitationLanding'), {
   loading: () => <div />
 });
-const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
+
 const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
   loading: () => <div />
 });
@@ -91,10 +90,7 @@ const Page = () => {
     </Layout>
   ) : (
     <LayoutWeb>
-      {/* TODO: HERE IS WHERE THE LANDING WILL GO */}
-      <FishbowlInvitationLanding fishbowl={fb} />
-      {/* <FishbowlLanding data={fb} />
-      <JoinFishbowl data={fb} joinAsGuest={handleJoinAsGuest} /> */}
+      <FishbowlInvitationLanding handleJoinAsGuest={handleJoinAsGuest} fishbowl={fb} />
     </LayoutWeb>
   );
 };

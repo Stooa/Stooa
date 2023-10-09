@@ -28,7 +28,7 @@ import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const StandardForm = styled.form<{ $isFull?: boolean }>`
   position: relative;
-  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.reader))};
   text-align: left;
   width: 100%;
 
