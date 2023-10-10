@@ -57,6 +57,7 @@ const StyledFishbowlDataCard = styled.div`
   & div.date {
     color: ${COLOR_NEUTRO_800};
     margin-bottom: ${space(3)};
+    text-align: left;
   }
 
   & .description {

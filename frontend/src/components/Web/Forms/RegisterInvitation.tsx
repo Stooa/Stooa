@@ -25,7 +25,13 @@ interface FormValues {
   email: string;
 }
 
-const RegisterInvitation = ({ fishbowl }: { fishbowl: Fishbowl }) => {
+const RegisterInvitation = ({
+  fishbowl,
+  onSubmit
+}: {
+  fishbowl: Fishbowl;
+  onSubmit: () => void;
+}) => {
   const schema = Yup.object({
     name: Yup.string().required('El nombre es obligatorio'),
     email: Yup.string().required('El email es obligatorio')
@@ -54,6 +60,7 @@ const RegisterInvitation = ({ fishbowl }: { fishbowl: Fishbowl }) => {
       }
     }).then(res => {
       console.log(res);
+      onSubmit();
       toast('Te has registrado correctamente', {
         toastId: 'successful-registered-attendee',
         icon: '🎉',

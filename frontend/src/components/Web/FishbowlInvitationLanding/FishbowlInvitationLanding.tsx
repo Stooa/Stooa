@@ -24,10 +24,11 @@ import FishbowlDataCard from '../FishbowlDataCard';
 import Image from 'next/image';
 import RegisterInvitation from '../Forms/RegisterInvitation';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStateValue } from '@/contexts/AppContext';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
@@ -40,6 +41,7 @@ const MINUTE = 60 * 1000;
 const MINUTES_TO_START_FISHBOWL = 60;
 
 const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
+  const [sentRegistration, setSentRegistration] = useState(false);
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { invitationTitle, invitationSubtitle, invitationText, startDateTimeTz, host } = fishbowl;
   const { lang } = useTranslation();
@@ -57,6 +59,12 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
       });
     } else {
       console.log('[STOOA] More than 1 hour to start fishbowl');
+    }
+  };
+
+  const onSubmit = () => {
+    if (!sentRegistration) {
+      setSentRegistration(true);
     }
   };
 
@@ -93,7 +101,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               {invitationTitle}
             </h1>
             <h2 className="title-md">{localFormatDate}</h2>
-            {invitationSubtitle && <p>{invitationSubtitle}</p>}
+            {invitationSubtitle && <p className="title-sm">{invitationSubtitle}</p>}
             {host && (
               <p className="body-lg">
                 {host.name} {host.surnames}
@@ -103,7 +111,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
             ) : (
               <a href="#form">
-                <Button as="a" size="large">
+                <Button disabled={sentRegistration} as="a" size="large">
                   Me apunto
                 </Button>
               </a>
@@ -125,12 +133,41 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
             dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}
           ></StyledInventationLandingContentBody>
           <StyledInvitationFormWrapper id="form">
-            <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
-            <RegisterInvitation fishbowl={fishbowl} />
+            {sentRegistration && (
+              <AnimatePresence>
+                <motion.h3
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="title-sm"
+                >
+                  Te has apuntado al fishbowl correctamente
+                </motion.h3>
+                <motion.div
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Image
+                    src="/img/friends/dancing.png"
+                    width={252}
+                    height={277}
+                    alt="Dancing friend"
+                  />
+                </motion.div>
+              </AnimatePresence>
+            )}
+
+            {!sentRegistration && (
+              <>
+                <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
+                <RegisterInvitation onSubmit={onSubmit} fishbowl={fishbowl} />
+              </>
+            )}
           </StyledInvitationFormWrapper>
         </StyledInvitationContent>
         <StyledFixedFishbowlData>
-          <FishbowlDataCard data={fishbowl} />
+          <FishbowlDataCard fromLanding data={fishbowl} />
         </StyledFixedFishbowlData>
       </StyledInvitationLanding>
     </>
