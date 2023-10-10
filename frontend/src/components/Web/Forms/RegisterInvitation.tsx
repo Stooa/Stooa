@@ -80,14 +80,14 @@ const RegisterInvitation = ({
           data-testid="invitation-name"
           hasError={errors.name}
           label="Nombre"
-          icon="world"
+          icon="user"
           isDirty={dirtyFields.name}
           autoComplete="off"
           {...register('name')}
         />
         <Input
           isSubmitted={isSubmitted}
-          data-testid="invitation-name"
+          data-testid="invitation-mail"
           hasError={errors.email}
           label="Mail"
           icon="mail"
