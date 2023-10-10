@@ -69,6 +69,17 @@ const StyledInvitationHero = styled.div`
   flex-direction: column;
   align-items: flex-start;
   row-gap: ${space(1.5)};
+
+  & button:disabled {
+    & svg {
+      width: 1.25rem;
+      height: 1.25rem;
+
+      & path {
+        fill: currentColor;
+      }
+    }
+  }
 `;
 
 const StyledFixedFishbowlData = styled.div`

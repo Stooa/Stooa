@@ -29,6 +29,7 @@ import { useStateValue } from '@/contexts/AppContext';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 import { AnimatePresence, motion } from 'framer-motion';
+import Check from '@/ui/svg/checkmark.svg';
 
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
@@ -111,8 +112,15 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
             ) : (
               <a href="#form">
-                <Button disabled={sentRegistration} as="a" size="large">
-                  Me apunto
+                <Button disabled={sentRegistration} size="large">
+                  {sentRegistration ? (
+                    <>
+                      Apuntado
+                      <Check />
+                    </>
+                  ) : (
+                    <>Me apunto</>
+                  )}
                 </Button>
               </a>
             )}
