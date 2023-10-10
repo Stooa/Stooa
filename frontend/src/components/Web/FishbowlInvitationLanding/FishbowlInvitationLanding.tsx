@@ -141,7 +141,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
                   exit={{ opacity: 0 }}
                   className="title-sm"
                 >
-                  Te has apuntado al fishbowl correctamente
+                  ¡Te has apuntado al fishbowl correctamente!
                 </motion.h3>
                 <motion.div
                   initial={{ y: 100, opacity: 0 }}
@@ -150,15 +150,15 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
                 >
                   <Image
                     src="/img/friends/dancing.png"
-                    width={252}
-                    height={277}
+                    width={252 / 1.2}
+                    height={277 / 1.2}
                     alt="Dancing friend"
                   />
                 </motion.div>
               </AnimatePresence>
             )}
 
-            {!sentRegistration && (
+            {!sentRegistration && !isTimeLessThanNMinutes(startDateTime, 60) && (
               <>
                 <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
                 <RegisterInvitation onSubmit={onSubmit} fishbowl={fishbowl} />

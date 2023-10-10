@@ -84,7 +84,7 @@ const StyledFixedFishbowlData = styled.div`
 const StyledInvitationFormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  row-gap: ${space(2)};
+  row-gap: ${space(3)};
   width: 100%;
 
   text-align: left;
