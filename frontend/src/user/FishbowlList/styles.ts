@@ -195,7 +195,6 @@ const CardTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-  text-align: left;
   color: ${COLOR_NEUTRO_800};
   overflow: ellipsis;
   display: flex;
@@ -226,9 +225,7 @@ const CardStyled = styled.div`
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
-  & .card__info {
-    text-align: left;
-  }
+  text-align: left;
 
   &.finished {
     grid-template-columns: 6fr 1fr;

@@ -30,6 +30,7 @@ import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 import { AnimatePresence, motion } from 'framer-motion';
 import Check from '@/ui/svg/checkmark.svg';
+import Link from 'next/link';
 
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
@@ -78,6 +79,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const startDateTime = new Date(startDateTimeTz);
+  const hour = startDateTime.getHours();
 
   const localFormatDate = new Intl.DateTimeFormat(lang, {
     weekday: 'long',
@@ -98,20 +100,25 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
       <StyledInvitationLanding>
         <StyledInvitationContent>
           <StyledInvitationHero>
+            <p className="body-md">
+              {localFormatDate} - {hour}
+            </p>
+
             <h1 data-testid="fishbowl-name" className="title-lg">
               {invitationTitle}
             </h1>
-            <h2 className="title-md">{localFormatDate}</h2>
+
             {invitationSubtitle && <p className="title-sm">{invitationSubtitle}</p>}
             {host && (
               <p className="body-lg">
                 {host.name} {host.surnames}
               </p>
             )}
+
             {fishbowlReady ? (
               <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
             ) : (
-              <a href="#form">
+              <Link href="#form">
                 <Button disabled={sentRegistration} size="large">
                   {sentRegistration ? (
                     <>
@@ -122,7 +129,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
                     <>Me apunto</>
                   )}
                 </Button>
-              </a>
+              </Link>
             )}
           </StyledInvitationHero>
           <StyledMobileDataCard>

@@ -82,7 +82,6 @@ const Header = styled.header`
   grid-area: Header;
   display: flex;
   justify-content: space-between;
-  z-index: 1;
 `;
 
 const Main = styled.main<{ center?: boolean }>`
