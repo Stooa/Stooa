@@ -36,7 +36,7 @@ const Page = ({
   title = ''
 }: Props) => (
   <>
-    <Seo title={title} />
+    {/* <Seo title={title} /> */}
     <Container className={decorated ? 'decorated' : ''}>
       <HeaderStyled>
         <Header navigation={navigation} />

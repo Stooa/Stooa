@@ -14,6 +14,7 @@ import { APP_NAME } from '@/app.config';
 
 const Seo: React.FC<{ title: string }> = ({ title = '' }) => {
   const { t } = useTranslation('common');
+  console.log(title);
 
   const metaTitle = title ? `${title} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
 

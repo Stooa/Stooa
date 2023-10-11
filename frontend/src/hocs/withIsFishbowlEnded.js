@@ -51,8 +51,8 @@ const withIsFishbowlEnded = WrappedComponent => props => {
       });
   }, []);
 
-  if (!loaded) return <Loader />;
-  if (error) return <Error message={error.message} />;
+  // if (!loaded) return <Loader />;
+  // if (error) return <Error message={error.message} />;
 
   return <WrappedComponent {...props} />;
 };

@@ -77,7 +77,6 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <DataProvider>
       <GlobalStyles />
-      <OpenGraphDefault />
       <StateProvider>
         <AuthProvider>
           <ProtectRoute>
