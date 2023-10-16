@@ -23,14 +23,16 @@ const OpenGraphDefault = ({ seoTitle, seoDescription }: Props) => {
   const ogImageSrc = 'img/web/OGimage.jpg';
   const ogImageTwitterSrc = 'img/web/OGimage-twitter.jpg';
   const metaTitle = seoTitle ? `${seoTitle} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
+  const metaDescription =
+    seoDescription && seoDescription !== '' ? seoDescription : t('og-description');
 
   return (
     <Head>
       <title>{metaTitle}</title>
       <meta property="og:title" content={metaTitle} />
-      <meta property="og:description" content={seoDescription ?? t('og-description')} />
+      <meta property="og:description" content={metaDescription} />
       <meta name="twitter:title" content={metaTitle} />
-      <meta name="twitter:description" content={seoDescription ?? t('og-description')} />
+      <meta name="twitter:description" content={metaDescription} />
 
       <meta property="og:url" content={ROUTE_HOME} />
       <meta property="og:image" content={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/${ogImageSrc}`} />
