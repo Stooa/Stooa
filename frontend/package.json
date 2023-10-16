@@ -2,7 +2,7 @@
   "name": "stooa-app",
   "license": "MPL-2.0",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "NODE_OPTIONS='--inspect --no-experimental-fetch' next dev",
     "build": "next build",
     "build-e2e": "NODE_ENV=e2e next build",
     "start": "next start",

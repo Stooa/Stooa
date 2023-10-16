@@ -23,6 +23,7 @@ import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
 import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
+import FavIconsHead from '@/components/Common/FavIconsHead';
 
 const geomanist = localFont({
   src: [
@@ -77,7 +78,8 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <DataProvider>
       <GlobalStyles />
-      <OpenGraphDefault />
+      <FavIconsHead />
+      <OpenGraphDefault seoTitle={pageProps.seoTitle} seoDescription={pageProps.seoDescription} />
       <StateProvider>
         <AuthProvider>
           <ProtectRoute>

@@ -23,7 +23,7 @@ const ErrorPage = ({ statusCode }: Props) => {
   return (
     <>
       <Head>
-        <title>{t('pageTitle')}</title> XXX
+        <title>{t('pageTitle')}</title>
       </Head>
       <h1>
         {t('title')}

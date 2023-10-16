@@ -19,7 +19,6 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
-import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
@@ -36,14 +35,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Layout = ({
-  className,
-  data,
-  scriptsLoaded,
-  scriptsLoadedSuccessfully,
-  title,
-  children
-}: Props) => {
+const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, children }: Props) => {
   const router = useRouter();
   const { fid } = router.query;
   const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
@@ -83,7 +75,6 @@ const Layout = ({
     <StooaProvider data={data} isModerator={isModerator}>
       <ModalsProvider isModerator={isModerator}>
         <DevicesProvider>
-          <Seo title={title} />
           <Container className={className}>{children}</Container>
         </DevicesProvider>
       </ModalsProvider>

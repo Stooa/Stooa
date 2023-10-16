@@ -8,7 +8,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
@@ -22,6 +22,7 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { createApolloClient } from '@/lib/apollo-client';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -96,29 +97,20 @@ const Page = () => {
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const fid = params ? params.fid : '';
+  const apolloClient = createApolloClient();
+  const { data } = await apolloClient.query({
+    query: GET_FISHBOWL,
+    variables: { slug: fid as string }
+  });
+
+  const { bySlugQueryFishbowl: fishbowl } = data;
+  const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
+
+  return {
+    props: { seoTitle: fishbowl.name, seoDescription: SEODescription }
+  };
+};
+
 export default withIsFishbowlEnded(Page);
-
-/**
- * Workaround for:
- * [next-translate] In Next 10.x.x there is an issue related to i18n and getInitialProps.
- * We recommend to replace getInitialProps to getServerSideProps on /index.tsx.
- *
- * https://github.com/vercel/next.js/discussions/18396
- */
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {}
-  };
-};
-
-/**
- * Error: getStaticPaths is required for dynamic SSG pages and is missing for
- * '/fishbowl/detail/[fid]'.
- * Read more: https://nextjs.org/docs/messages/invalid-getstaticpaths-value
- */
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking' //indicates the type of fallback
-  };
-};
