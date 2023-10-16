@@ -23,6 +23,7 @@ import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
 import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
+import Head from 'next/head';
 
 const geomanist = localFont({
   src: [
@@ -56,7 +57,8 @@ const geomanist = localFont({
 
 const MyApp = ({ Component, pageProps }) => {
   const handleRouteChange = (url: string) => pushPageViewDataLayer({ url });
-
+  const metaTitle = pageProps.metaTitle ? pageProps.metaTitle : null;
+  const metaDescription = pageProps.metaDescription ? pageProps.metaDescription : null;
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
       console.log = function () {
@@ -74,19 +76,26 @@ const MyApp = ({ Component, pageProps }) => {
     };
   }, []);
 
+
   return (
-    <DataProvider>
-      <GlobalStyles />
-      <StateProvider>
-        <AuthProvider>
-          <ProtectRoute>
-            <div className={geomanist.className}>
-              <Component {...pageProps} />
-            </div>
-          </ProtectRoute>
-        </AuthProvider>
-      </StateProvider>
-    </DataProvider>
+    <>
+      <Head>
+        <title>{pageProps.metaTitle}</title>
+        <meta name="description" content={pageProps.metaTitle} />
+      </Head>
+      <DataProvider>
+        <GlobalStyles />
+        <StateProvider>
+          <AuthProvider>
+            <ProtectRoute>
+              <div className={geomanist.className}>
+                <Component {...pageProps} />
+              </div>
+            </ProtectRoute>
+          </AuthProvider>
+        </StateProvider>
+      </DataProvider>
+    </>
   );
 };
 

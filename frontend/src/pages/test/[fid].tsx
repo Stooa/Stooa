@@ -23,9 +23,9 @@ import Head from 'next/head';
 const Page = ({ fid }: { fid: string }) => {
   return (
     <>
-      <Head>
-        <title>{fid}</title>
-      </Head>
+      {/*<Head>*/}
+      {/*  <title>{fid}</title>*/}
+      {/*</Head>*/}
       <h1>Amazing website</h1>
     </>
   );
@@ -33,19 +33,22 @@ const Page = ({ fid }: { fid: string }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const fid = params ? params.fid : '';
-  const apolloClient = createApolloClient();
-  const { data } = await apolloClient.query({
-    query: GET_FISHBOWL,
-    variables: { slug: fid as string }
-  });
+  // const apolloClient = createApolloClient();
+  // const { data } = await apolloClient.query({
+  //   query: GET_FISHBOWL,
+  //   variables: { slug: fid as string }
+  // });
 
   const SEOTitle = "Jordi sala's fishbowl - " + params.fid;
 
-  console.log(data);
+  // console.log(data);
 
   // const { bySlugQueryFishbowl: fishbowl } = data;
   return {
-    props: { fid: SEOTitle }
+    props: {
+      metaTitle: SEOTitle,
+      metaDescription: 'Esta es una descripción todo wapo'
+    }
   };
 };
 
