@@ -146,6 +146,10 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     private bool $privacyPolicy = false;
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[ORM\Column(type: 'string')]
+    private ?string $hubspotCode = '';
+
+    #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
     private bool $allowShareData = false;
 
@@ -458,5 +462,17 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     public function getSalt(): ?string
     {
         return null;
+    }
+
+    public function getHubspotCode(): ?string
+    {
+        return $this->hubspotCode;
+    }
+
+    public function setHubspotCode(?string $hubspotCode): self
+    {
+        $this->hubspotCode = $hubspotCode;
+
+        return $this;
     }
 }

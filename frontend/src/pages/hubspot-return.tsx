@@ -8,43 +8,33 @@
  */
 
 import Layout from '@/layouts/Default';
-import axios from 'axios';
-import {ROUTE_HUBSPOT} from '@/app.config';
+import { ROUTE_HUBSPOT } from '@/app.config';
 import { useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { GET_SELF_USER } from '@/graphql/User';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
 const HubspotReturn = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [response, setResponse] = useState('');
   const { data } = useQuery(GET_SELF_USER);
+  const [updateUser] = useMutation(UPDATE_USER);
 
   useEffect(() => {
     if (data) {
-      axios
-        .post(
-          'https://api.hubapi.com/oauth/v1/token',
-          {
-            grant_type: 'authorization_code',
-            client_id: process.env.NEXT_PUBLIC_HUBSPOT_CLIENT_ID,
-            client_secret: process.env.NEXT_PUBLIC_HUBSPOT_CLIENT_SECRET,
-            redirect_uri: process.env.NEXT_PUBLIC_HUBSPOT_REDIRECT_URL,
-            code: urlParams.get('code')
-          },
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'Access-Control-Allow-Origin': '*'
-            }
+      updateUser({
+        variables: {
+          input: {
+            id: data.selfUser.id,
+            hubspotCode: urlParams.get('code')
           }
-        )
-        .then(async function (response) {
-          console.log('[Stooa] Hubspot api response', response);
-
-          setResponse(JSON.stringify(response.data));
+        }
+      })
+        .then(async res => {
+          console.log('res', res);
+          setResponse(res.data.updateUser.user.hubspotCode);
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(error => {
+          console.log('error', error);
         });
     }
   }, [data]);
@@ -52,7 +42,7 @@ const HubspotReturn = () => {
   return (
     <Layout title="Hubspot connection established">
       <h1 className="title-md form-title">Hubspot connection established</h1>
-      <p>{response}</p>
+      <p>Hubspot Code: {response}</p>
       <a href={ROUTE_HUBSPOT} className="item">
         <span className="body-md bold">Click to return to Hubspot</span>
       </a>
