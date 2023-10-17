@@ -11,7 +11,7 @@ import { Given, Then } from '@badeball/cypress-cucumber-preprocessor';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 
 Given('a created Fishbowl', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'CreateFishbowl')) {
       req.reply({ fixture: 'created-fishbowl.json' });
     }
@@ -19,7 +19,7 @@ Given('a created Fishbowl', () => {
 });
 
 Given('a Fishbowl by slug', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({ fixture: 'fishbowl-by-slug.json' });
     }
