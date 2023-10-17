@@ -220,13 +220,14 @@ const ProtectRoute = ({ children }: ProtectedRouteProps) => {
   handleRedirection();
   useEffect(handleRedirection, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (loading || protectedRoutes) {
-    return (
-      <Layout>
-        <LoadingIcon />
-      </Layout>
-    );
-  }
+  // TODO: LATER
+  // if (loading || protectedRoutes) {
+  //   return (
+  //     <Layout>
+  //       <LoadingIcon />
+  //     </Layout>
+  //   );
+  // }
 
   return <>{children}</>;
 };

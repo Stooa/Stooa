@@ -22,7 +22,7 @@ const OpenGraphDefault = ({ seoTitle, seoDescription }: Props) => {
 
   const ogImageSrc = 'img/web/OGimage.jpg';
   const ogImageTwitterSrc = 'img/web/OGimage-twitter.jpg';
-  const metaTitle = seoTitle ? `${seoTitle} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
+  const metaTitle = seoTitle ? `${seoTitle} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
   const metaDescription =
     seoDescription && seoDescription !== '' ? seoDescription : t('og-description');
 

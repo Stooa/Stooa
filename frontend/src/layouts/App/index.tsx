@@ -29,7 +29,6 @@ interface Props {
   data: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
-  title: string;
   prejoin: boolean;
   className?: string;
   children: React.ReactNode;
@@ -64,11 +63,11 @@ const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, chi
     importJitsi();
   }, []);
 
-  if (!scriptsLoaded || !loadedJitsi) return <Loader />;
+  // if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
     return <Error message={'Could not create fishbowl event'} />;
 
-  if (loading) return <Loader />;
+  // if (loading) return <Loader />;
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (

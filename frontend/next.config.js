@@ -14,6 +14,7 @@ module.exports = nextTranslate({
   compress: false,
   poweredByHeader: false,
   webpack: config => {
+    config.experiments = { ...config.experiments, topLevelAwait: true };
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,

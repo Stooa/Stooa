@@ -19,10 +19,11 @@ import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 import Error from '@/components/Common/Error';
-import Loader from '@/components/Web/Loader';
+
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { createApolloClient } from '@/lib/apollo-client';
+import { Fishbowl } from '@/types/api-platform';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -35,14 +36,14 @@ const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
   loading: () => <div />
 });
 
-const Page = () => {
+const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
   const { lang } = useTranslation();
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
-  const { fid } = router.query;
-  const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
+  // const { fid } = router.query;
+  // const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
   const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
@@ -66,33 +67,39 @@ const Page = () => {
     };
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (loading) return <Loader />;
-  if (error) {
+  // if (loading) return <Loader />;
+  if (!fishbowl) {
     router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-    return <Error message={error.message} />;
+    return null;
   }
 
-  const { bySlugQueryFishbowl: fb } = data;
-  const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
+  // const { bySlugQueryFishbowl: fb } = data;
+  // const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
 
-  if (!fb) {
-    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-    return <Loader />;
-  }
+  // if (!fb) {
+  //   router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+  //   return <Loader />;
+  // }
+
+  return (
+    <LayoutWeb>
+      <FishbowlLanding data={fishbowl} />
+      <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
+    </LayoutWeb>
+  );
 
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
       className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}
-      data={fb}
+      data={fishbowl}
       prejoin={shouldPrintPreJoinPage}
-      title={fishbowlTitle}
     >
       {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
     </Layout>
   ) : (
     <LayoutWeb>
-      <FishbowlLanding data={fb} />
-      <JoinFishbowl data={fb} joinAsGuest={handleJoinAsGuest} />
+      <FishbowlLanding data={fishbowl} />
+      <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
     </LayoutWeb>
   );
 };
@@ -100,16 +107,30 @@ const Page = () => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const fid = params ? params.fid : '';
   const apolloClient = createApolloClient();
-  const { data } = await apolloClient.query({
-    query: GET_FISHBOWL,
-    variables: { slug: fid as string }
-  });
+
+  console.log('Server query ------->');
+
+  const { data } = await apolloClient
+    .query({
+      query: GET_FISHBOWL,
+      variables: { slug: fid as string }
+    })
+    .catch(error => {
+      console.log(error);
+      return { data: null };
+    });
+
+  if (!data) {
+    return {
+      props: {}
+    };
+  }
 
   const { bySlugQueryFishbowl: fishbowl } = data;
   const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
 
   return {
-    props: { seoTitle: fishbowl.name, seoDescription: SEODescription }
+    props: { seoTitle: fishbowl.name, seoDescription: SEODescription, fishbowl }
   };
 };
 

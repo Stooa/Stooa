@@ -13,8 +13,7 @@ import { getAuthToken } from '@/user/auth';
 import LocaleCookie from '@/lib/LocaleCookie';
 import { onError } from '@apollo/client/link/error';
 
-const errorLink = onError(({ graphQLErrors, networkError, response }) => {
-  console.log(response);
+const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
