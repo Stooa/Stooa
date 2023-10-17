@@ -58,7 +58,7 @@ When('saves the changes', () => {
     }
   };
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'UpdateFishbowl')) {
       req.reply({
         data: mergedValues
