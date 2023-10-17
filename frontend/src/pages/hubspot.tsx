@@ -8,10 +8,8 @@
  */
 
 import Layout from '@/layouts/Default';
-import useTranslation from 'next-translate/useTranslation';
 const Hubspot = () => {
   const hubspotUrl = `${process.env.NEXT_PUBLIC_HUBSPOT_URL}?client_id=${process.env.NEXT_PUBLIC_HUBSPOT_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_HUBSPOT_REDIRECT_URL}&scope=crm.objects.contacts.read%20crm.objects.contacts.write`;
-  const { t } = useTranslation('common');
 
   return (
     <Layout title="Hubspot">
