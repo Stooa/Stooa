@@ -40,7 +40,7 @@ export const modifiedValues = {
 };
 
 Given('a profile information', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', {
+  cy.intercept('POST', '/graphql', {
     fixture: 'self-user.json'
   }).as('gqlSelfUserQuery');
 });
@@ -50,7 +50,7 @@ Given('a logged user', () => {
 });
 
 Given('has host role', () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
       req.reply({
         data: {
@@ -64,7 +64,7 @@ Given('has host role', () => {
 });
 
 Given("doesn't have host role", () => {
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'IsCreatorOfFishbowl')) {
       req.reply({
         data: {
@@ -220,7 +220,7 @@ Given('a fishbowl', () => {
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -240,7 +240,7 @@ Given('a fishbowl with introduction', () => {
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -260,7 +260,7 @@ Given('a future fishbowl', () => {
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -280,7 +280,7 @@ Given('a not owned fishbowl', () => {
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -300,7 +300,7 @@ Given('a not owned started fishbowl', () => {
   cy.setCookie('share_link', bySlugQueryFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -320,7 +320,7 @@ Given('a private fishbowl', () => {
   cy.setCookie('share_link', bySlugQueryPrivateFishbowl.slug);
   cy.setCookie('on_boarding_moderator', 'true');
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -353,7 +353,7 @@ When('starts fishbowl with introduction', () => {
 });
 
 When('navigates to fishbowl', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
+  cy.intercept('GET', '/en/fishbowl-status/test-fishbowl', req => {
     if (!startedFishbowl && !finishedFishbowl) {
       req.reply({
         status: 'NOT_STARTED'
@@ -369,14 +369,14 @@ When('navigates to fishbowl', () => {
     }
   }).as('getFishbowlStatus');
 
-  cy.intercept('GET', 'https://localhost:8443/en/ping/test-fishbowl', {
+  cy.intercept('GET', '/en/ping/test-fishbowl', {
     statusCode: 200,
     body: {
       response: true
     }
   });
 
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-participants/test-fishbowl', {
+  cy.intercept('GET', '/en/fishbowl-participants/test-fishbowl', {
     statusCode: 200,
     body: {
       response: []
@@ -396,7 +396,7 @@ When('can access to pre join', () => {
 When('sees the prefishbowl page', () => {
   const bySlugQueryFishbowl = makeGQLCurrentFishbowl();
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
@@ -416,7 +416,7 @@ When('sees the prefishbowl page', () => {
 });
 
 When('sees the prefishbowl page with introduction', () => {
-  cy.intercept('GET', 'https://localhost:8443/en/fishbowl-status/test-fishbowl', req => {
+  cy.intercept('GET', '/en/fishbowl-status/test-fishbowl', req => {
     req.reply({
       status: 'INTRODUCTION'
     });
@@ -424,7 +424,7 @@ When('sees the prefishbowl page with introduction', () => {
 
   const bySlugQueryFishbowl = makeGQLCurrentFishbowlWithIntroduction();
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'BySlugQueryFishbowl')) {
       req.reply({
         data: {
