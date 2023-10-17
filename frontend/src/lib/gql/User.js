@@ -27,6 +27,7 @@ const UPDATE_USER = gql`
         id
         name
         surnames
+        hubspotCode
       }
     }
   }
@@ -61,6 +62,7 @@ const GET_SELF_USER = gql`
       allowShareData
       linkedinProfile
       twitterProfile
+      hubspotCode
     }
   }
 `;
