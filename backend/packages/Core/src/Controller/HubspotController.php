@@ -30,7 +30,7 @@ final class HubspotController extends AbstractController
     public function token(string $code): Response
     {
         try {
-            return new JsonResponse(['token' => $this->hubspotTokenService->token($code)]);
+            return new JsonResponse(['token' => $this->hubspotTokenService->createToken($code)]);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
