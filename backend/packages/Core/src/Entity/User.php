@@ -145,7 +145,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
 
-    #[Groups(['user:self', 'user:write', 'user:read'])]
+    #[Groups(['user:self', 'user:write'])]
     #[ORM\Column(type: 'string')]
     private ?string $hubspotRefreshToken = '';
 
@@ -474,5 +474,11 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         $this->hubspotRefreshToken = $hubspotRefreshToken;
 
         return $this;
+    }
+
+    #[Groups(['user:read'])]
+    public function getHasHubspotRefreshToken(): bool
+    {
+        return null !== $this->hubspotRefreshToken;
     }
 }

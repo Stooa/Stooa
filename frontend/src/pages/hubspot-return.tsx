@@ -10,39 +10,34 @@
 import Layout from '@/layouts/Default';
 import { ROUTE_HUBSPOT } from '@/app.config';
 import { useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
+import { useQuery } from '@apollo/client';
+import { GET_SELF_USER } from '@/graphql/User';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 const HubspotReturn = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const [response, setResponse] = useState('');
   const { data } = useQuery(GET_SELF_USER);
-  const [updateUser] = useMutation(UPDATE_USER);
-
+  const { createHubspotToken } = useUserAuth();
+  console.log(data);
   useEffect(() => {
     if (data) {
-      updateUser({
-        variables: {
-          input: {
-            id: data.selfUser.id,
-            hubspotCode: urlParams.get('code')
-          }
-        }
-      })
-        .then(async res => {
-          console.log('res', res);
-          setResponse(res.data.updateUser.user.hubspotCode);
-        })
-        .catch(error => {
-          console.log('error', error);
-        });
+      createHubspotToken(urlParams.get('code'));
+      setResponse(urlParams.get('code'));
     }
   }, [data]);
 
   return (
     <Layout title="Hubspot connection established">
       <h1 className="title-md form-title">Hubspot connection established</h1>
-      <p>Hubspot Code: {response}</p>
+      <p>
+        <b>Hubspot Code:</b> {response}
+      </p>
+      <p>
+        <b>
+          {data?.selfUser.hasHubspotRefreshToken ? 'Tiene Refresh token' : 'No tiene Refresh Token'}
+        </b>
+      </p>
       <a href={ROUTE_HUBSPOT} className="item">
         <span className="body-md bold">Click to return to Hubspot</span>
       </a>

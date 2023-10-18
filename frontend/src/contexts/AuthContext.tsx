@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import React, {useEffect, useState} from 'react';
-import {useRouter} from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
 
@@ -22,7 +22,8 @@ import {
   ROUTE_FISHBOWL_SCHEDULED,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_HOME,
-  ROUTE_HUBSPOT, ROUTE_HUBSPOT_RETURN,
+  ROUTE_HUBSPOT,
+  ROUTE_HUBSPOT_RETURN,
   ROUTE_RECOVER_PASSWORD,
   ROUTE_REGISTER,
   ROUTE_RESET_PASSWORD,
@@ -38,14 +39,14 @@ import {
   setToken
 } from '@/user/auth';
 
-import {Auth, StatusPayload} from '@/types/contexts/auth-context';
-import {useUser} from '@/jitsi';
+import { Auth, StatusPayload } from '@/types/contexts/auth-context';
+import { useUser } from '@/jitsi';
 import api from '@/lib/api';
-import {AuthToken} from '@/user/auth/authToken';
+import { AuthToken } from '@/user/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import {User} from '@/types/user';
-import {useStateValue} from '@/contexts/AppContext';
+import { User } from '@/types/user';
+import { useStateValue } from '@/contexts/AppContext';
 import createGenericContext from '@/contexts/createGenericContext';
 
 const authenticatedRoutes = [
