@@ -94,7 +94,7 @@ class UserAdmin extends AbstractAdmin
             ->addIdentifier('email')
             ->add('name')
             ->add('surnames')
-            ->add('hubspotCode')
+            ->add('hubspotRefreshToken')
             ->add('privacyPolicy')
             ->add('allowShareData', FieldDescriptionInterface::TYPE_BOOLEAN, [
                 'editable' => true,

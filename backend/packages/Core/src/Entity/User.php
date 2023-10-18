@@ -147,7 +147,7 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'string')]
-    private ?string $hubspotCode = '';
+    private ?string $hubspotRefreshToken = '';
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
@@ -464,14 +464,14 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
         return null;
     }
 
-    public function getHubspotCode(): ?string
+    public function getHubspotRefreshToken(): ?string
     {
-        return $this->hubspotCode;
+        return $this->hubspotRefreshToken;
     }
 
-    public function setHubspotCode(?string $hubspotCode): self
+    public function setHubspotRefreshToken(?string $hubspotRefreshToken): self
     {
-        $this->hubspotCode = $hubspotCode;
+        $this->hubspotRefreshToken = $hubspotRefreshToken;
 
         return $this;
     }
