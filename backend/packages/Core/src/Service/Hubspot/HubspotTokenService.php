@@ -31,7 +31,7 @@ class HubspotTokenService
     ) {
     }
 
-    public function token(string $code): ?string
+    public function createToken(string $code): ?string
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -40,7 +40,7 @@ class HubspotTokenService
             return null;
         }
 
-        $result = $this->client->request('POST', 'https://api.hubapi.com/oauth/v1/token', [
+        $result = $this->client->request('POST', "{$this->url}/token", [
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
             ],
@@ -55,7 +55,39 @@ class HubspotTokenService
 
         $responseArray = $result->toArray();
 
-        if (null === isset($responseArray['refresh_token']) || null === isset($responseArray['access_token'])) {
+        if (!isset($responseArray['refresh_token']) || !isset($responseArray['access_token'])) {
+            return null;
+        }
+
+        $this->saveRefreshToken($user, $responseArray['refresh_token']);
+
+        return $responseArray['access_token'];
+    }
+
+    public function refreshToken(): ?string
+    {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        if (null === $user || null === $user->getHubspotRefreshToken()) {
+            return null;
+        }
+
+        $result = $this->client->request('POST', "{$this->url}/token", [
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
+            ],
+            'body' => [
+                'grant_type' => 'refresh_token',
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
+                'refresh_token' => $user->getHubspotRefreshToken(),
+            ],
+        ]);
+
+        $responseArray = $result->toArray();
+
+        if (!isset($responseArray['refresh_token']) || !isset($responseArray['access_token'])) {
             return null;
         }
 
