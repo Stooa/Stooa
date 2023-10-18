@@ -7,25 +7,26 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
 
 import {
-  ROUTE_HOME,
-  ROUTE_SIGN_IN,
-  ROUTE_REGISTER,
+  ROUTE_CHANGE_PASSWORD,
+  ROUTE_EDIT_PROFILE,
   ROUTE_FISHBOWL_CREATE,
   ROUTE_FISHBOWL_DETAIL,
-  ROUTE_FISHBOWL_THANKYOU,
-  ROUTE_RECOVER_PASSWORD,
-  ROUTE_EDIT_PROFILE,
-  ROUTE_CHANGE_PASSWORD,
-  ROUTE_RESET_PASSWORD,
+  ROUTE_FISHBOWL_FINISHED,
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_SCHEDULED,
-  ROUTE_FISHBOWL_FINISHED
+  ROUTE_FISHBOWL_THANKYOU,
+  ROUTE_HOME,
+  ROUTE_HUBSPOT, ROUTE_HUBSPOT_RETURN,
+  ROUTE_RECOVER_PASSWORD,
+  ROUTE_REGISTER,
+  ROUTE_RESET_PASSWORD,
+  ROUTE_SIGN_IN
 } from '@/app.config';
 
 import {
@@ -37,14 +38,14 @@ import {
   setToken
 } from '@/user/auth';
 
-import { Auth, StatusPayload } from '@/types/contexts/auth-context';
-import { useUser } from '@/jitsi';
+import {Auth, StatusPayload} from '@/types/contexts/auth-context';
+import {useUser} from '@/jitsi';
 import api from '@/lib/api';
-import { AuthToken } from '@/user/auth/authToken';
+import {AuthToken} from '@/user/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
-import { User } from '@/types/user';
-import { useStateValue } from '@/contexts/AppContext';
+import {User} from '@/types/user';
+import {useStateValue} from '@/contexts/AppContext';
 import createGenericContext from '@/contexts/createGenericContext';
 
 const authenticatedRoutes = [
@@ -55,7 +56,9 @@ const authenticatedRoutes = [
   ROUTE_FISHBOWL_FINISHED,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_EDIT_PROFILE,
-  ROUTE_CHANGE_PASSWORD
+  ROUTE_CHANGE_PASSWORD,
+  ROUTE_HUBSPOT,
+  ROUTE_HUBSPOT_RETURN
 ];
 
 const unauthenticatedRoutes = [
