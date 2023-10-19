@@ -17,23 +17,19 @@ const mockDate = '2030-02-11T10:48:22+01:00';
 When('clicks on fishbowl card', () => {
   cy.wait('@getOneFishbowlsListQuery');
 
-  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
-
-  cy.screenshot();
+  cy.get(`[data-testid=fishbowl-title]`).click({ force: true });
 });
 
 When('clicks on fishbowl card that is about to start', () => {
   cy.wait('@getOneCloseFishbowlsListQuery');
 
-  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
+  cy.get(`[data-testid=fishbowl-title]`).click({ force: true });
 });
 
 Then('sees the fishbowl edit form full of information', () => {
   cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
   cy.get('[data-testid=edit-form-description]').should('have.value', 'Fishbowl description');
   cy.get('input[name="day"]').should('have.value', '11/02/2030');
-
-  cy.screenshot();
 });
 
 When('saves the changes', () => {
@@ -88,14 +84,10 @@ Then('sees the fishbowl list updated', () => {
     .eq(0)
     .should('contain', `${month} ${day}, ${year}`);
   cy.get('[data-testid=fishbowl-list-wrapper] .card__time').eq(0).should('contain', time);
-
-  cy.screenshot();
 });
 
 Then('sees the placeholder area', () => {
   cy.get('[data-testid=selected-placeholder]').should('exist');
-
-  cy.screenshot();
 });
 
 Then('sees a placeholder with Enter Fishbowl button', () => {
