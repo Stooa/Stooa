@@ -78,11 +78,11 @@ jobs:
                   working-directory: frontend
 
             - name: Execute Cypress E2E tests
-              uses: cypress-io/github-action@v5
+              uses: cypress-io/github-action@v6
               with:
                 install: false
-                build: npm run build-e2e
-                start: npm run start-e2e
+                build: npm run build
+                start: npm run start
                 wait-on: 'http://localhost:3000'
                 parallel: ${{ github.ref == 'refs/heads/main' }}
                 record: ${{ github.ref == 'refs/heads/main' }}

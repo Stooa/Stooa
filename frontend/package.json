@@ -4,9 +4,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "build-e2e": "NODE_ENV=e2e next build",
     "start": "next start",
-    "start-e2e": "NODE_ENV=e2e next start",
     "build-start": "next build && next start",
     "design-tokens": "design-tokens",
     "test": "jest",
