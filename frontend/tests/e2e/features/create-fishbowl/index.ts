@@ -32,6 +32,4 @@ Then('sees the fishbowl created', () => {
 
 Then('sees the fishbowl by query', () => {
   cy.wait('@gqlFishbowlBySlugQuery');
-
-  cy.screenshot();
 });

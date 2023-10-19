@@ -26,8 +26,6 @@ Then('sees the fishbowl list page with multiple finished fishbowls', () => {
   cy.get('[data-testid=finished-fishbowl-title]').eq(0).should('contain', 'First fishbowl');
   cy.get('[data-testid=finished-fishbowl-title]').eq(1).should('contain', 'Second fishbowl');
   cy.get('[data-testid=finished-fishbowl-title]').eq(2).should('contain', 'Third fishbowl');
-
-  cy.screenshot();
 });
 
 Then('sees the finished fishbowl details', () => {
@@ -50,6 +48,4 @@ Then('sees the finished fishbowl details', () => {
   cy.get('[data-testid=feedback-email]').should('contain', 'guest@email.com');
   cy.get('[data-testid=feedback-satisfaction]').should('contain', 'sad');
   cy.get('[data-testid=feedback-summary-sad]').should('contain', '1');
-
-  cy.screenshot();
 });
