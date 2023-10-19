@@ -5,6 +5,7 @@ Feature: Fishbowl
     Scenario: Host user can see the screen share button
         Given a logged user
         And has host role
+        And a desktop computer
         And a fishbowl with introduction
         When navigates to fishbowl
         And can access to pre join
