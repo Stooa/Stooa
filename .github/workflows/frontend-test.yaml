@@ -87,6 +87,7 @@ jobs:
                 parallel: ${{ github.ref == 'refs/heads/main' }}
                 record: ${{ github.ref == 'refs/heads/main' }}
                 working-directory: frontend
+                browser: chrome
               env:
                 CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
