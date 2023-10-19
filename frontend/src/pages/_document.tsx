@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import Document, { Html, Main, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import i18nConfig from '@/i18n';
 
@@ -47,7 +47,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang={documentLang(this.props)}>
-        <Head>
+        {/* <Head>
           <script
             data-cookieconsent="ignore"
             dangerouslySetInnerHTML={{
@@ -81,7 +81,7 @@ class MyDocument extends Document {
             `
             }}
           />
-        </Head>
+        </Head> */}
         <body id="stooa">
           <Main />
           <NextScript />
