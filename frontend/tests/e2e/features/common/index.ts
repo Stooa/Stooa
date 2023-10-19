@@ -132,8 +132,6 @@ When('clicks submit button', () => {
 
 Then('sees {string}', (text: string) => {
   cy.findByText(text).should('be.visible');
-
-  cy.screenshot();
 });
 
 Then('gets redirect to {string}', (url: string) => {
@@ -142,14 +140,10 @@ Then('gets redirect to {string}', (url: string) => {
 
 Then('sees the register form', () => {
   cy.findByRole('heading', { name: 'Register to get started' });
-
-  cy.screenshot();
 });
 
 Then('sees the create fishbowl form', () => {
   cy.findByRole('heading', { name: 'Create a free fishbowl' });
-
-  cy.screenshot();
 });
 
 Given('a list of one fishbowl', () => {
@@ -338,8 +332,6 @@ When('starts fishbowl', () => {
   cy.wait('@getFishbowlStatus');
 
   cy.get('[data-testid=finish-fishbowl]', { timeout: 10000 }).should('exist');
-
-  cy.screenshot();
 });
 
 When('starts fishbowl with introduction', () => {
@@ -348,8 +340,6 @@ When('starts fishbowl with introduction', () => {
   cy.contains('Start your introduction').click();
 
   startedFishbowl = true;
-
-  cy.screenshot();
 });
 
 When('navigates to fishbowl', () => {
@@ -389,8 +379,6 @@ When('navigates to fishbowl', () => {
 When('can access to pre join', () => {
   cy.get('[data-testid=pre-join-title]').should('exist');
   cy.get('[data-testid=pre-join-cancel]').should('exist');
-
-  cy.screenshot();
 });
 
 When('sees the prefishbowl page', () => {
@@ -411,8 +399,6 @@ When('sees the prefishbowl page', () => {
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
   cy.get('[data-testid=prefishbowl-participants]').should('exist');
-
-  cy.screenshot();
 });
 
 When('sees the prefishbowl page with introduction', () => {
@@ -437,8 +423,6 @@ When('sees the prefishbowl page with introduction', () => {
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
   cy.get('[data-testid=prefishbowl-participants]').should('exist');
-
-  cy.screenshot();
 });
 
 Then('finishes a fishbowl', () => {

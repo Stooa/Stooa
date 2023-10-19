@@ -4,9 +4,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "build-e2e": "NODE_ENV=e2e next build",
     "start": "next start",
-    "start-e2e": "NODE_ENV=e2e next start",
     "build-start": "next build && next start",
     "design-tokens": "design-tokens",
     "test": "jest",
@@ -67,7 +65,6 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "18.0.6",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
-    "@cypress/code-coverage": "3.10.9",
     "@faker-js/faker": "8.0.2",
     "@runroom/design-tokens": "2.2.0",
     "@svgr/webpack": "6.5.1",
@@ -79,8 +76,8 @@
     "@types/react": "18.2.25",
     "@types/react-slick": "0.23.10",
     "@typescript-eslint/eslint-plugin": "5.60.1",
-    "cypress": "13.2.0",
-    "esbuild": "0.18.20",
+    "cypress": "13.3.2",
+    "esbuild": "0.19.5",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "8.8.0",

@@ -13,14 +13,10 @@ Then('sees tomorrow fishbowl information page', () => {
   cy.get('[data-testid=fishbowl-name]', { timeout: 10000 }).should('exist');
 
   cy.get('[data-testid=fishbowl-description]', { timeout: 10000 }).should('exist');
-
-  cy.screenshot();
 });
 
 Then('sees the password input', () => {
   cy.get('[data-testid=prejoin-password]').should('exist');
-
-  cy.screenshot();
 });
 
 Then('writes the correct password', () => {
@@ -34,6 +30,4 @@ Then('writes the correct password', () => {
   cy.get('[data-testid=prejoin-cta]').click();
 
   cy.wait('@gqlPrivateFishbowlPassword');
-
-  cy.screenshot();
 });
