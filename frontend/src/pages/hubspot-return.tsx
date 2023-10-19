@@ -16,7 +16,7 @@ import { useUserAuth } from '@/user/auth/useUserAuth';
 const HubspotReturn = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const [response, setResponse] = useState('');
+  const [response, setResponse] = useState<string|null>('');
   const { data } = useQuery(GET_SELF_USER);
   const { createHubspotToken } = useUserAuth();
   console.log(data);

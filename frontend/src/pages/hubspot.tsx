@@ -38,6 +38,12 @@ const Hubspot = () => {
       <b>
         {data?.selfUser.hasHubspotRefreshToken ? 'Tiene Refresh token' : 'No tiene Refresh Token'}
       </b>
+      <br></br>
+      <a className="body-md bold" href={hubspotUrl}>
+        {data?.selfUser.hasHubspotRefreshToken ? 'Reconectar con Hubspot' : 'Conectar con Hubspot'}
+      </a>
+      <br></br>
+     {data?.selfUser.hasHubspotRefreshToken ? 'Contactos' : 'No hay contactos'}
       {contacts.map((contact, index) => {
         return (
           <div key={index}>
@@ -50,10 +56,6 @@ const Hubspot = () => {
           </div>
         );
       })}
-      <br></br>
-      <a className="body-md bold" href={hubspotUrl}>
-        {data?.selfUser.hasHubspotRefreshToken ? 'Reconectar con Hubspot' : 'Conectar con Hubspot'}
-      </a>
     </Layout>
   );
 };

@@ -15,16 +15,16 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 use App\Core\Repository\UserRepository;
+use HubSpot\Client\Auth\OAuth\Model\TokenResponseIF;
+use HubSpot\Factory;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class HubspotTokenService
 {
     public function __construct(
-        protected readonly HttpClientInterface $client,
         protected readonly Security $security,
         protected readonly UserRepository $userRepository,
-        protected readonly string $url,
         protected readonly string $redirectUrl,
         protected readonly string $clientId,
         protected readonly string $clientSecret
@@ -40,28 +40,21 @@ class HubspotTokenService
             return null;
         }
 
-        $result = $this->client->request('POST', "{$this->url}/token", [
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
-            ],
-            'body' => [
-                'grant_type' => 'authorization_code',
-                'client_id' => $this->clientId,
-                'client_secret' => $this->clientSecret,
-                'redirect_uri' => $this->redirectUrl,
-                'code' => $code,
-            ],
-        ]);
+        $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
+            'authorization_code',
+            $code,
+            $this->redirectUrl,
+            $this->clientId,
+            $this->clientSecret
+        );
 
-        $responseArray = $result->toArray();
-
-        if (!isset($responseArray['refresh_token']) || !isset($responseArray['access_token'])) {
+        if (!$tokens instanceof TokenResponseIF) {
             return null;
         }
 
-        $this->saveRefreshToken($user, $responseArray['refresh_token']);
+        $this->saveRefreshToken($user, $tokens->getRefreshToken());
 
-        return $responseArray['access_token'];
+        return $tokens->getAccessToken();
     }
 
     public function refreshToken(): ?string
@@ -73,27 +66,22 @@ class HubspotTokenService
             return null;
         }
 
-        $result = $this->client->request('POST', "{$this->url}/token", [
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
-            ],
-            'body' => [
-                'grant_type' => 'refresh_token',
-                'client_id' => $this->clientId,
-                'client_secret' => $this->clientSecret,
-                'refresh_token' => $user->getHubspotRefreshToken(),
-            ],
-        ]);
+        $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
+            'refresh_token',
+            null,
+            $this->redirectUrl,
+            $this->clientId,
+            $this->clientSecret,
+            $user->getHubspotRefreshToken()
+        );
 
-        $responseArray = $result->toArray();
-
-        if (!isset($responseArray['refresh_token']) || !isset($responseArray['access_token'])) {
+        if (!$tokens instanceof TokenResponseIF) {
             return null;
         }
 
-        $this->saveRefreshToken($user, $responseArray['refresh_token']);
+        $this->saveRefreshToken($user, $tokens->getRefreshToken());
 
-        return $responseArray['access_token'];
+        return $tokens->getAccessToken();
     }
 
     private function saveRefreshToken(User $user, string $refreshToken): void

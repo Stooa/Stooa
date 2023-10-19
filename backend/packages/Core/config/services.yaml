@@ -51,7 +51,6 @@ services:
 
     App\Core\Service\Hubspot\HubspotTokenService:
         bind:
-            $url: '%env(HUBSPOT_URL)%'
             $redirectUrl: '%env(HUBSPOT_REDIRECT_URL)%'
             $clientId: '%env(HUBSPOT_CLIENT_ID)%'
             $clientSecret: '%env(HUBSPOT_CLIENT_SECRET)%'
