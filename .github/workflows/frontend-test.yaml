@@ -85,7 +85,6 @@ jobs:
                 start: npm run start
                 wait-on: 'http://localhost:3000'
                 parallel: ${{ github.ref == 'refs/heads/main' }}
-                record: ${{ github.ref == 'refs/heads/main' }}
                 working-directory: frontend
               env:
                 CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
