@@ -84,9 +84,7 @@ jobs:
                 build: npm run build
                 start: npm run start
                 wait-on: 'http://localhost:3000'
-                parallel: ${{ github.ref == 'refs/heads/main' }}
                 working-directory: frontend
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
                 NODE_ENV: test
