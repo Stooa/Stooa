@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import Document, { Html, Main, NextScript, DocumentContext } from 'next/document';
+import Document, { Html, Main, Head, NextScript, DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import i18nConfig from '@/i18n';
 
@@ -47,41 +47,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang={documentLang(this.props)}>
-        {/* <Head>
-          <script
-            data-cookieconsent="ignore"
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-
-              gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'analytics_storage': 'denied',
-                'wait_for_update': 500
-              });
-
-              gtag('set', 'ads_data_redaction', true);
-              gtag('set', 'url_passthrough', true);
-            `
-            }}
-          />
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtm.js?id=${process.env.NEXT_PUBLIC_GTM_CODE}`}
-          />
-          <script
-            data-cookieconsent="ignore"
-            dangerouslySetInnerHTML={{
-              __html: `
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GTM_CODE}', {
-                page_path: window.location.pathname,
-              });
-            `
-            }}
-          />
-        </Head> */}
+        <Head></Head>
         <body id="stooa">
           <Main />
           <NextScript />
