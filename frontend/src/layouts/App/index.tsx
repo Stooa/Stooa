@@ -37,7 +37,7 @@ interface Props {
 const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, children }: Props) => {
   const router = useRouter();
   const { fid } = router.query;
-  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+  const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
     variables: { slug: fid }
   });
   const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
@@ -63,11 +63,10 @@ const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, chi
     importJitsi();
   }, []);
 
-  // if (!scriptsLoaded || !loadedJitsi) return <Loader />;
+  if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
     return <Error message={'Could not create fishbowl event'} />;
 
-  // if (loading) return <Loader />;
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (

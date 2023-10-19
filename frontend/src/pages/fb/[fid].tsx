@@ -9,7 +9,7 @@
 
 import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -18,7 +18,7 @@ import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
-import Error from '@/components/Common/Error';
+// import Error from '@/components/Common/Error';
 
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
@@ -80,13 +80,6 @@ const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   //   router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
   //   return <Loader />;
   // }
-
-  return (
-    <LayoutWeb>
-      <FishbowlLanding data={fishbowl} />
-      <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
-    </LayoutWeb>
-  );
 
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
