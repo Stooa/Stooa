@@ -84,6 +84,7 @@ jobs:
                 build: npm run build-e2e
                 start: npm run start-e2e
                 wait-on: 'http://localhost:3000'
+                browser: chrome
                 parallel: ${{ github.ref == 'refs/heads/main' }}
                 record: ${{ github.ref == 'refs/heads/main' }}
                 working-directory: frontend
