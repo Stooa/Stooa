@@ -17,13 +17,13 @@ const mockDate = '2030-02-11T10:48:22+01:00';
 When('clicks on fishbowl card', () => {
   cy.wait('@getOneFishbowlsListQuery');
 
-  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
+  cy.get(`[data-testid=fishbowl-title]`).click({ force: true });
 });
 
 When('clicks on fishbowl card that is about to start', () => {
   cy.wait('@getOneCloseFishbowlsListQuery');
 
-  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
+  cy.get(`[data-testid=fishbowl-title]`).click({ force: true });
 });
 
 Then('sees the fishbowl edit form full of information', () => {
