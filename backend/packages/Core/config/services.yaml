@@ -49,7 +49,7 @@ services:
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
-    App\Core\Service\Hubspot\HubspotTokenService:
+    App\Core\Service\Hubspot\TokenHubspotService:
         bind:
             $redirectUrl: '%env(HUBSPOT_REDIRECT_URL)%'
             $clientId: '%env(HUBSPOT_CLIENT_ID)%'

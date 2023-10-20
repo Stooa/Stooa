@@ -17,10 +17,10 @@ use App\Core\Entity\User;
 use HubSpot\Factory;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class HubspotContactsService
+class ContactsHubspotService
 {
     public function __construct(
-        protected readonly HubspotTokenService $hubspotTokenService,
+        protected readonly TokenHubspotService $hubspotTokenService,
         protected readonly Security $security,
     ) {
     }

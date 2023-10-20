@@ -13,15 +13,32 @@ declare(strict_types=1);
 
 namespace App\Core\Controller;
 
+use App\Core\Model\ContactHubspotDto;
+use App\Core\Service\Hubspot\CreateContactHubspotService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class CreateContactHubspotController
+final class CreateContactHubspotController extends AbstractController
 {
-    #[Route('/hubspot/contacts/create', name: 'app_create_hubspot_contact')]
-    public function create(): Response
-    {
-        return new JsonResponse(['contacts' => 'contact created']);
+    public function __construct(
+        private readonly CreateContactHubspotService $createContactHubspotService
+    ) {
+    }
+
+    #[Route('/hubspot/contacts/create', name: 'app_create_hubspot_contact', methods: ['POST'])]
+    public function create(
+        #[MapRequestPayload] ContactHubspotDto $contact
+    ): Response {
+        try {
+            $this->createContactHubspotService->create($contact->name, $contact->email);
+
+            return new JsonResponse(['contacts' => 'Contact created']);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
+
     }
 }
