@@ -84,6 +84,7 @@ jobs:
                 build: npm run build
                 start: npm run start, npm run mock-server
                 wait-on: 'http://localhost:3000, http://localhost:9090'
+                browser: chrome
                 working-directory: frontend
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
