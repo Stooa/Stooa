@@ -21,25 +21,30 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
+const buildUri = () => {
+  console.table({
+    window: typeof window === 'undefined',
+    env: process.env.NODE_ENV
+  });
+
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+    return 'https://stooa_backend-nginx';
+  }
+  if (typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
+    return 'https://backend-nginx';
+  }
+
+  return process.env.NEXT_PUBLIC_API_DOMAIN;
+};
+
 const httpLink = createHttpLink({
-  uri: `${
-    typeof window !== 'undefined' && process.env.NODE_ENV !== 'prod'
-      ? process.env.NEXT_PUBLIC_API_DOMAIN
-      : 'https://backend-nginx'
-  }/graphql`,
+  uri: `${buildUri()}/graphql`,
   credentials: 'same-origin'
 });
 
 const authLink = setContext(async (_, { headers }) => {
   const auth = await getAuthToken();
   const currentHeaders = headers ? { ...headers } : {};
-
-  console.log(
-    'THE LINK ADDRESS',
-    typeof window !== 'undefined' || process.env.NODE_ENV === 'development'
-      ? process.env.NEXT_PUBLIC_API_DOMAIN
-      : 'https://backend-nginx'
-  );
 
   return {
     headers: {
