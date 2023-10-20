@@ -13,29 +13,20 @@ declare(strict_types=1);
 
 namespace App\Core\Controller;
 
-use App\Core\Service\Hubspot\HubspotContactService;
-use App\Core\Service\Hubspot\HubspotTokenService;
+use App\Core\Service\Hubspot\HubspotContactsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-final class HubspotController extends AbstractController
+final class ContactsHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly HubspotTokenService $hubspotTokenService,
-        private readonly HubspotContactService $hubspotContactService
+        private readonly HubspotContactsService $hubspotContactService
     ) {
     }
 
-    public function token(string $code): Response
-    {
-        try {
-            return new JsonResponse(['token' => $this->hubspotTokenService->createToken($code)]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['error' => $e->getMessage()]);
-        }
-    }
-
+    #[Route('/hubspot/contacts', name: 'app.hubspot.contacts')]
     public function contacts(): Response
     {
         try {

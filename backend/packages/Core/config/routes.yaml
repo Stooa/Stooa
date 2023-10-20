@@ -5,12 +5,8 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-app.hubspot.token:
-    path: /hubspot/token/{code}
-    controller: App\Core\Controller\HubspotController::token
-    methods: [POST]
-
-app.hubspot.contacts:
-    path: /hubspot/contacts
-    controller: App\Core\Controller\HubspotController::contacts
-    methods: [GET]
+controllers:
+    resource:
+        path: '../src/Controller/'
+        namespace: App\Core\Controller
+    type: attribute

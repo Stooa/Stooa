@@ -17,7 +17,7 @@ use App\Core\Entity\User;
 use HubSpot\Factory;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class HubspotContactService
+class HubspotContactsService
 {
     public function __construct(
         protected readonly HubspotTokenService $hubspotTokenService,

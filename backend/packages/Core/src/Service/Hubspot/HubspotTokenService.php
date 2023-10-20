@@ -18,7 +18,6 @@ use App\Core\Repository\UserRepository;
 use HubSpot\Client\Auth\OAuth\Model\TokenResponseIF;
 use HubSpot\Factory;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class HubspotTokenService
 {

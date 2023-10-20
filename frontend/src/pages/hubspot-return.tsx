@@ -19,7 +19,7 @@ const HubspotReturn = () => {
   const [response, setResponse] = useState<string|null>('');
   const { data } = useQuery(GET_SELF_USER);
   const { createHubspotToken } = useUserAuth();
-  console.log(data);
+
   useEffect(() => {
     if (data) {
       createHubspotToken(urlParams.get('code'));
