@@ -23,7 +23,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const httpLink = createHttpLink({
   uri: `${
-    typeof window !== 'undefined' || process.env.NODE_ENV === 'development'
+    typeof window !== 'undefined' && process.env.NODE_ENV !== 'prod'
       ? process.env.NEXT_PUBLIC_API_DOMAIN
       : 'https://backend-nginx'
   }/graphql`,
@@ -33,6 +33,13 @@ const httpLink = createHttpLink({
 const authLink = setContext(async (_, { headers }) => {
   const auth = await getAuthToken();
   const currentHeaders = headers ? { ...headers } : {};
+
+  console.log(
+    'THE LINK ADDRESS',
+    typeof window !== 'undefined' || process.env.NODE_ENV === 'development'
+      ? process.env.NEXT_PUBLIC_API_DOMAIN
+      : 'https://backend-nginx'
+  );
 
   return {
     headers: {
