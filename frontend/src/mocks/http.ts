@@ -23,6 +23,9 @@ const port = 9090;
 
 app.use(cors({ origin: '*', optionsSuccessStatus: 200, credentials: true }));
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('ok');
+});
 app.use(createMiddleware(...handlers));
 app.use(proxy(process.env.NEXT_PUBLIC_API_DOMAIN));
 app.listen(port, () => console.log(`Mock server is running on port: ${port}`));
