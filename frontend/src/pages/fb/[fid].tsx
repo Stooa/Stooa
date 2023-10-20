@@ -42,8 +42,6 @@ const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   const { lang } = useTranslation();
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
-  // const { fid } = router.query;
-  // const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
   const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
@@ -62,24 +60,19 @@ const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
       return true;
     });
 
+    if (!fishbowl) {
+      router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+    }
+
     return () => {
       router.beforePopState(() => true);
     };
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // if (loading) return <Loader />;
   if (!fishbowl) {
-    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+    // router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
     return null;
   }
-
-  // const { bySlugQueryFishbowl: fb } = data;
-  // const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
-
-  // if (!fb) {
-  //   router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-  //   return <Loader />;
-  // }
 
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
@@ -101,8 +94,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const fid = params ? params.fid : '';
   const apolloClient = createApolloClient();
 
-  console.log('Server query ------->');
-
   const { data } = await apolloClient
     .query({
       query: GET_FISHBOWL,
@@ -121,9 +112,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   const { bySlugQueryFishbowl: fishbowl } = data;
   const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
+  const seoTitle = fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
 
   return {
-    props: { seoTitle: fishbowl.name, seoDescription: SEODescription, fishbowl }
+    props: {
+      seoTitle,
+      seoDescription: SEODescription,
+      fishbowl
+    }
   };
 };
 

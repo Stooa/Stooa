@@ -39,8 +39,6 @@ const withIsFishbowlEnded = WrappedComponent => props => {
           console.log('[STOOA] Finished fishbowl. redirecting to thankyou page');
           const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
           router.push(route, route, { locale: lang });
-        } else {
-          setLoaded(true);
         }
       })
       .catch(error => {

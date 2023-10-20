@@ -23,7 +23,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const httpLink = createHttpLink({
   uri: `${
-    typeof window !== 'undefined' ? process.env.NEXT_PUBLIC_API_DOMAIN : 'https://backend-nginx'
+    typeof window !== 'undefined' || process.env.NODE_ENV === 'development'
+      ? process.env.NEXT_PUBLIC_API_DOMAIN
+      : 'https://backend-nginx'
   }/graphql`,
   credentials: 'same-origin'
 });

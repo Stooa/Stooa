@@ -14,9 +14,10 @@
     "lint:js": "eslint src tests",
     "lint:fix": "eslint src tests --fix",
     "mock-server": "npx tsx ./src/mocks/http.ts",
-    "e2e:dev:test": "concurrently -n Dev,Cypress,MockServer -c blue,yellow,green \"npm:dev:test\" \"npm:test:e2e:dev\" \"npm:mock-server\" ",
+    "e2e:mock:dev:test": "concurrently -n Dev,Cypress,MockServer -c blue,yellow,green \"npm:dev:test\" \"npm:test:e2e:dev\" \"npm:mock-server\" ",
+    "e2e:mock:run:test": "concurrently -n Dev,Cypress,MockServer -c blue,yellow,green \"npm:dev:test\" \"npm:test:e2e:run\" \"npm:mock-server\" ",
     "test:e2e:dev": "cypress open",
-    "test:e2e:run": "cypress run"
+    "test:e2e:run": "cypress run --browser chrome"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

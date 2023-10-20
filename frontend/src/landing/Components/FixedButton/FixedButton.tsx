@@ -11,7 +11,7 @@ import { ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyledButtonWrapper } from './styles';
 
 const options = {
@@ -30,7 +30,7 @@ const FixedButton = ({ buttonText }: { buttonText: string }) => {
     }
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(showButton, options);
 
     const billboard = document.getElementById('billboard');
