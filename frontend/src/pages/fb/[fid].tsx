@@ -70,7 +70,6 @@ const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!fishbowl) {
-    // router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
     return null;
   }
 
