@@ -19,7 +19,7 @@ use HubSpot\Client\Auth\OAuth\Model\TokenResponseIF;
 use HubSpot\Factory;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class HubspotTokenService
+class TokenHubspotService
 {
     public function __construct(
         protected readonly Security $security,

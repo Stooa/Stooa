@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Controller;
 
-use App\Core\Service\Hubspot\HubspotContactsService;
+use App\Core\Service\Hubspot\ContactsHubspotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ContactsHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly HubspotContactsService $hubspotContactService
+        private readonly ContactsHubspotService $contactsHubspotService
     ) {
     }
 
@@ -30,7 +30,7 @@ final class ContactsHubspotController extends AbstractController
     public function contacts(): Response
     {
         try {
-            return new JsonResponse(['contacts' => $this->hubspotContactService->contacts()]);
+            return new JsonResponse(['contacts' => $this->contactsHubspotService->contacts()]);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }

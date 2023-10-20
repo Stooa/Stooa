@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Controller;
 
-use App\Core\Service\Hubspot\HubspotTokenService;
+use App\Core\Service\Hubspot\TokenHubspotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class TokenHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly HubspotTokenService $hubspotTokenService
+        private readonly TokenHubspotService $hubspotTokenService
     ) {
     }
 
