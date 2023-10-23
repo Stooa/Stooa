@@ -26,7 +26,7 @@ final class ContactsHubspotController extends AbstractController
     ) {
     }
 
-    #[Route('/hubspot/contacts', name: 'app.hubspot.contacts')]
+    #[Route('/hubspot/contacts', name: 'app.hubspot.contacts', methods: ['GET'])]
     public function contacts(): Response
     {
         try {

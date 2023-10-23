@@ -26,7 +26,7 @@ final class SyncContactsHubspotController extends AbstractController
     ) {
     }
 
-    #[Route('/hubspot/contacts/sync', name: 'app.hubspot.contacts', methods: ['POST'])]
+    #[Route('/hubspot/contacts/sync', name: 'app_create_hubspot_contact_sync', methods: ['POST'])]
     public function contacts(): Response
     {
         try {

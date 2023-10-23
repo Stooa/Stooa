@@ -17,13 +17,16 @@ use App\Core\Entity\User;
 use App\Core\Repository\UserRepository;
 use HubSpot\Client\Auth\OAuth\Model\TokenResponseIF;
 use HubSpot\Factory;
+use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class TokenHubspotService
 {
     public function __construct(
         protected readonly Security $security,
         protected readonly UserRepository $userRepository,
+        protected readonly CacheInterface $cache,
         protected readonly string $redirectUrl,
         protected readonly string $clientId,
         protected readonly string $clientSecret
@@ -65,22 +68,26 @@ class TokenHubspotService
             return null;
         }
 
-        $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
-            'refresh_token',
-            null,
-            $this->redirectUrl,
-            $this->clientId,
-            $this->clientSecret,
-            $user->getHubspotRefreshToken()
-        );
+        return $this->cache->get('hubspot_access_token', function (CacheItemInterface $cacheItem) use ($user) {
+            $cacheItem->expiresAfter(1500);
 
-        if (!$tokens instanceof TokenResponseIF) {
-            return null;
-        }
+            $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
+                'refresh_token',
+                null,
+                $this->redirectUrl,
+                $this->clientId,
+                $this->clientSecret,
+                $user->getHubspotRefreshToken()
+            );
 
-        $this->saveRefreshToken($user, $tokens->getRefreshToken());
+            $this->saveRefreshToken($user, $tokens->getRefreshToken());
 
-        return $tokens->getAccessToken();
+            if (!$tokens instanceof TokenResponseIF) {
+                return null;
+            }
+
+            return $tokens->getAccessToken();
+        });
     }
 
     private function saveRefreshToken(User $user, string $refreshToken): void
