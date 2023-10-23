@@ -24,17 +24,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const buildUri = () => {
   console.table({
     server: typeof window === 'undefined',
-    env: process.env.NODE_ENV,
     domain: process.env.NEXT_PUBLIC_API_DOMAIN
   });
 
-  if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-    console.log('http://backend-nginx.stooa-public');
-    return 'http://backend-nginx.stooa-public';
-  }
-  if (typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
-    console.log('https://backend-nginx');
-    return 'https://backend-nginx';
+  if (typeof window === 'undefined') {
+    return process.env.NEXT_PUBLIC_API_INTERNAL_DOMAIN;
   }
 
   return process.env.NEXT_PUBLIC_API_DOMAIN;

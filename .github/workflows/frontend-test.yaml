@@ -81,7 +81,7 @@ jobs:
               uses: cypress-io/github-action@v6
               with:
                 install: false
-                build: NODE_ENV=test npm run build
+                build: npm run build
                 start: npm run start, npm run mock-server
                 wait-on: 'http://localhost:3000, http://localhost:9090'
                 browser: chrome
