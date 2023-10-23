@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Repository;
 
+use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
@@ -34,6 +35,17 @@ class FishbowlRepository extends ServiceEntityRepository
             ->getQuery();
 
         return $query->getOneOrNullResult();
+    }
+
+    /** @return Fishbowl[] */
+    public function findAllByUser(User $user): ?array
+    {
+        $query = $this->createQueryBuilder('fishbowl')
+            ->where('fishbowl.host = :host')
+            ->setParameter('host', $user->getId(), 'uuid')
+            ->getQuery();
+
+        return $query->getResult();
     }
 
     public function persist(Fishbowl $fishbowl): void

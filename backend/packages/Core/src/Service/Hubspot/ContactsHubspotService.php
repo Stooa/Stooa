@@ -13,35 +13,21 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
-use App\Core\Entity\User;
-use HubSpot\Factory;
-use Symfony\Bundle\SecurityBundle\Security;
-
 class ContactsHubspotService
 {
     public function __construct(
-        protected readonly TokenHubspotService $hubspotTokenService,
-        protected readonly Security $security,
+        protected readonly HubspotService $hubspotService,
     ) {
     }
 
     /** @return array<mixed> */
     public function contacts(): array
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
+        $hubspot = $this->hubspotService->createHubspot();
 
-        if (null === $user) {
+        if (null === $hubspot) {
             return [];
         }
-
-        $accessToken = $this->hubspotTokenService->refreshToken();
-
-        if (null === $accessToken) {
-            return [];
-        }
-
-        $hubspot = Factory::createWithAccessToken($accessToken);
 
         $contactsPage = $hubspot->crm()->contacts()->getAll();
 
