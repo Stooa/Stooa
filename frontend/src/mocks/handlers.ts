@@ -20,6 +20,8 @@ export enum TypeOfFishbowls {
 }
 
 const today = new Date();
+today.setMinutes(today.getMinutes() + 10);
+
 const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
@@ -74,10 +76,6 @@ export const handlers = [
           ctx.data(createMockFishbowl(TypeOfFishbowls.currentWithIntroduction, req.variables.slug))
         );
       case TypeOfFishbowls.currentPrivateNotOwned:
-        console.log(
-          'RAMON',
-          createMockFishbowl(TypeOfFishbowls.currentPrivateNotOwned, req.variables.slug)
-        );
         return res(
           ctx.data(createMockFishbowl(TypeOfFishbowls.currentPrivateNotOwned, req.variables.slug))
         );
