@@ -28,7 +28,7 @@ final class CreateContactHubspotController extends AbstractController
     ) {
     }
 
-    #[Route('/hubspot/contacts/create', name: 'app_create_hubspot_contact', methods: ['POST'])]
+    #[Route('/hubspot/contacts/create', name: 'app_create_hubspot_contact_create', methods: ['POST'])]
     public function create(
         #[MapRequestPayload] ContactHubspotDto $contact
     ): Response {
