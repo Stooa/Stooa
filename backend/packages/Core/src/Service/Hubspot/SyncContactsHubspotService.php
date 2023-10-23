@@ -15,15 +15,14 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 use App\Fishbowl\Repository\FishbowlRepository;
-use HubSpot\Factory;
 use Symfony\Bundle\SecurityBundle\Security;
 
 class SyncContactsHubspotService
 {
     public function __construct(
         protected readonly TokenHubspotService $hubspotTokenService,
-        protected readonly Security $security,
-        protected readonly FishbowlRepository $fishbowlRepository
+        protected readonly FishbowlRepository $fishbowlRepository,
+        protected readonly Security $security
     ) {
     }
 
@@ -38,16 +37,10 @@ class SyncContactsHubspotService
 
         $fishbowls = $this->fishbowlRepository->findAllByUser($user);
 
-        $accessToken = $this->hubspotTokenService->refreshToken();
-
-        if (null === $accessToken) {
-            return;
-        }
-
         foreach ($fishbowls as $fishbowl) {
             $contacts = $fishbowl->getParticipants();
             foreach ($contacts as $contact) {
-                $hubspot = Factory::createWithAccessToken($accessToken);
+
             }
         }
     }

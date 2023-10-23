@@ -23,6 +23,8 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class TokenHubspotService
 {
+    public const MINUTES_25 = 1500;
+
     public function __construct(
         protected readonly Security $security,
         protected readonly UserRepository $userRepository,
@@ -59,7 +61,7 @@ class TokenHubspotService
         return $tokens->getAccessToken();
     }
 
-    public function refreshToken(): ?string
+    public function accessToken(): ?string
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -69,7 +71,7 @@ class TokenHubspotService
         }
 
         return $this->cache->get('hubspot_access_token', function (CacheItemInterface $cacheItem) use ($user) {
-            $cacheItem->expiresAfter(1500);
+            $cacheItem->expiresAfter(self::MINUTES_25);
 
             $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
                 'refresh_token',
@@ -80,11 +82,11 @@ class TokenHubspotService
                 $user->getHubspotRefreshToken()
             );
 
-            $this->saveRefreshToken($user, $tokens->getRefreshToken());
-
             if (!$tokens instanceof TokenResponseIF) {
                 return null;
             }
+
+            $this->saveRefreshToken($user, $tokens->getRefreshToken());
 
             return $tokens->getAccessToken();
         });
