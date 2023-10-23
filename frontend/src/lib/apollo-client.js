@@ -23,14 +23,16 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const buildUri = () => {
   console.table({
-    window: typeof window === 'undefined',
+    server: typeof window === 'undefined',
     env: process.env.NODE_ENV
   });
 
   if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+    console.log('https://stooa_backend-nginx');
     return 'https://stooa_backend-nginx';
   }
   if (typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
+    console.log('https://backend-nginx');
     return 'https://backend-nginx';
   }
 

@@ -41,8 +41,8 @@ import { Auth, StatusPayload } from '@/types/contexts/auth-context';
 import { useUser } from '@/jitsi';
 import api from '@/lib/api';
 import { AuthToken } from '@/user/auth/authToken';
-// import Layout from '@/layouts/Clean';
-// import LoadingIcon from '@/components/Common/LoadingIcon';
+import Layout from '@/layouts/Clean';
+import LoadingIcon from '@/components/Common/LoadingIcon';
 import { User } from '@/types/user';
 import { useStateValue } from '@/contexts/AppContext';
 import createGenericContext from '@/contexts/createGenericContext';
@@ -220,14 +220,13 @@ const ProtectRoute = ({ children }: ProtectedRouteProps) => {
   handleRedirection();
   useEffect(handleRedirection, [loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO: LATER
-  // if (loading || protectedRoutes) {
-  //   return (
-  //     <Layout>
-  //       <LoadingIcon />
-  //     </Layout>
-  //   );
-  // }
+  if (loading || protectedRoutes) {
+    return (
+      <Layout>
+        <LoadingIcon />
+      </Layout>
+    );
+  }
 
   return <>{children}</>;
 };
