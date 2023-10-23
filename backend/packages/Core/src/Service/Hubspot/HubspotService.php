@@ -35,7 +35,7 @@ class HubspotService
             return null;
         }
 
-        $accessToken = $this->tokenHubspotService->refreshToken();
+        $accessToken = $this->tokenHubspotService->accesToken();
 
         if (null === $accessToken) {
             return null;
