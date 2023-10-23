@@ -13,35 +13,38 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
-use App\Core\Entity\User;
+use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInputForCreate;
-use HubSpot\Factory;
-use Symfony\Bundle\SecurityBundle\Security;
 
 class CreateContactHubspotService
 {
     public function __construct(
-        protected readonly TokenHubspotService $tokenHubspotService,
-        protected readonly Security $security,
+        protected readonly HubspotService $hubspotService,
+        protected readonly FindContactHubspotService $findContactHubspotService
     ) {
     }
 
     public function create(string $name, string $email): void
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
+        $hubspot = $this->hubspotService->createHubspot();
 
-        if (null === $user) {
+        if (null === $hubspot) {
             return;
         }
 
-        $accessToken = $this->tokenHubspotService->refreshToken();
+        $contactId = $this->findContactHubspotService->findContact($email);
 
-        if (null === $accessToken) {
+        if (null !== $contactId) {
+            $contactInput = new SimplePublicObjectInput();
+            $contactInput->setProperties([
+                'firstname' => $name,
+                'email' => $email,
+            ]);
+
+            $hubspot->crm()->contacts()->basicApi()->update($contactId, $contactInput);
+
             return;
         }
-
-        $hubspot = Factory::createWithAccessToken($accessToken);
 
         $contactInput = new SimplePublicObjectInputForCreate();
         $contactInput->setProperties([
@@ -49,6 +52,6 @@ class CreateContactHubspotService
             'email' => $email,
         ]);
 
-        $contact = $hubspot->crm()->contacts()->basicApi()->create($contactInput);
+        $hubspot->crm()->contacts()->basicApi()->create($contactInput);
     }
 }
