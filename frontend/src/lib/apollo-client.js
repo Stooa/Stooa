@@ -28,8 +28,8 @@ const buildUri = () => {
   });
 
   if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-    console.log('https://stooa_backend-nginx');
-    return 'https://stooa_backend-nginx';
+    console.log('https://backend-nginx.stooa-public');
+    return 'https://backend-nginx.stooa-public';
   }
   if (typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
     console.log('https://backend-nginx');
