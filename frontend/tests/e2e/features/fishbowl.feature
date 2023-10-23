@@ -40,12 +40,12 @@ Feature: Fishbowl
         And clicks on "Join the fishbowl" button
         Then sees the prefishbowl page
 
-# Scenario: Non-host user can enter and sees the password input
-#     Given a logged user
-#     And doesn't have host role
-#     And a private fishbowl
-#     When navigates to fishbowl with slug
-#     And can access to pre join
-#     Then sees the password input
-#     And writes the correct password
-#     And sees the prefishbowl page
+    Scenario: Non-host user can enter and sees the password input
+        Given a logged user
+        And doesn't have host role
+        And a private fishbowl
+        When navigates to fishbowl with slug "current-not-owned-private-fishbowl"
+        And can access to pre join
+        Then sees the password input
+        And writes the correct password
+        And sees the prefishbowl page

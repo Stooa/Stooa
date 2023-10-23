@@ -20,7 +20,7 @@ Then('sees the password input', () => {
 });
 
 Then('writes the correct password', () => {
-  cy.intercept('POST', '/es/private-password/test-fishbowl', req => {
+  cy.intercept('POST', '/es/private-password/current-not-owned-private-fishbowl', req => {
     req.reply({
       response: true
     });
