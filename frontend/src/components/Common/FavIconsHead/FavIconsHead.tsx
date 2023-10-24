@@ -8,15 +8,8 @@
  */
 
 import Head from 'next/head';
-import useTranslation from 'next-translate/useTranslation';
 
-import { APP_NAME } from '@/app.config';
-
-const Seo: React.FC<{ title: string }> = ({ title = '' }) => {
-  const { t } = useTranslation('common');
-
-  const metaTitle = title ? `${title} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
-
+const FavIconsHead = () => {
   return (
     <Head>
       <link rel="icon" href="/favicon.ico" />
@@ -65,8 +58,8 @@ const Seo: React.FC<{ title: string }> = ({ title = '' }) => {
       <link rel="icon" type="image/png" href="/img/favicon/favicon-32x32.png" sizes="32x32" />
       <link rel="icon" type="image/png" href="/img/favicon/favicon-16x16.png" sizes="16x16" />
       <link rel="icon" type="image/png" href="/img/favicon/favicon-128.png" sizes="128x128" />
-      <meta name="application-name" content="&nbsp;" />
-      <meta name="msapplication-TileColor" content="#FFFFFF" />
+      <meta name="application-name" content="&nbsp; Stooa - The online fishbowl tool" />
+      <meta name="msapplication-TileColor" content="#faf8f5" />
       <meta name="msapplication-TileImage" content="img/favicon/mstile-144x144.png" />
       <meta name="msapplication-square70x70logo" content="img/favicon/mstile-70x70.png" />
       <meta name="msapplication-square150x150logo" content="img/favicon/mstile-150x150.png" />
@@ -75,14 +68,8 @@ const Seo: React.FC<{ title: string }> = ({ title = '' }) => {
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" key="charset" />
-      <meta name="description" content={t('og-description')}></meta>
-
-      <meta property="og:title" content={metaTitle} />
-      <meta name="twitter:title" content={metaTitle} />
-
-      <title key="title">{metaTitle}</title>
     </Head>
   );
 };
 
-export default Seo;
+export default FavIconsHead;
