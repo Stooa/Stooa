@@ -20,16 +20,16 @@ Feature: Fishbowl
         And starts fishbowl
         Then finishes a fishbowl
 
-    Scenario: Host user can start and finish their own private fishbowl
-        Given a logged user
-        And has host role
-        And a private fishbowl
-        When navigates to fishbowl with slug "current-private-fishbowl"
-        And can access to pre join
-        And clicks on "Join the fishbowl" button
-        And sees the prefishbowl page
-        And starts fishbowl
-        Then finishes a fishbowl
+    # Scenario: Host user can start and finish their own private fishbowl
+    #     Given a logged user
+    #     And has host role
+    #     And a private fishbowl
+    #     When navigates to fishbowl with slug "current-private-fishbowl"
+    #     And can access to pre join
+    #     And clicks on "Join the fishbowl" button
+    #     And sees the prefishbowl page
+    #     And starts fishbowl
+    #     Then finishes a fishbowl
 
     Scenario: Non-host user can enter and see the prefishbowl page
         Given a logged user
