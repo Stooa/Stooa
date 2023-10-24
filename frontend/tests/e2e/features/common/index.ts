@@ -317,18 +317,6 @@ When('sees the prefishbowl page with introduction', () => {
     });
   }).as('getIntroductionStatus');
 
-  // const bySlugQueryFishbowl = makeGQLCurrentFishbowlWithIntroduction();
-
-  // cy.intercept('POST', '/graphql', req => {
-  //   if (hasOperationName(req, 'BySlugQueryFishbowl')) {
-  //     req.reply({
-  //       data: {
-  //         bySlugQueryFishbowl
-  //       }
-  //     });
-  //   }
-  // }).as('gqlFishbowlBySlugQuery');
-
   cy.get('[data-testid=prefishbowl-counter]').should('exist');
   cy.get('[data-testid=prefishbowl-datacard]').should('exist');
   cy.get('[data-testid=prefishbowl-participants]').should('exist');

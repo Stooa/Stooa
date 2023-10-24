@@ -22,11 +22,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const buildUri = () => {
-  console.table({
-    server: typeof window === 'undefined',
-    domain: process.env.NEXT_PUBLIC_API_DOMAIN
-  });
-
   if (typeof window === 'undefined') {
     return process.env.NEXT_PUBLIC_API_INTERNAL_DOMAIN;
   }
