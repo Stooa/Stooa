@@ -58,7 +58,7 @@ interface Props {
   isPastList: boolean;
 }
 
-const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) => {
+const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
   const [selectedFishbowl, setSelectedFishbowl] = useState<Fishbowl>();
   const [paginator, setPaginator] = useState<number>(1);
   const [loadMoreDisabled, setLoadMoreDisabled] = useState<boolean>(false);
@@ -175,8 +175,8 @@ const FishbowlList: React.FC<Props> = ({ selectedFishbowlParam, isPastList }) =>
   }, [getFishbowls]);
 
   useEffect(() => {
-    if (fishbowls && isPastList) {
-      if (deviceType && deviceType !== 'Mobile') {
+    if (fishbowls) {
+      if (deviceType && deviceType !== 'Mobile' && isPastList) {
         setSelectedFishbowl(fishbowls[0]);
       }
 

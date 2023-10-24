@@ -8,8 +8,8 @@
  */
 
 import { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useQuery } from '@apollo/client';
+import { GetServerSideProps } from 'next';
+// import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -18,10 +18,12 @@ import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
-import Error from '@/components/Common/Error';
-import Loader from '@/components/Web/Loader';
+// import Error from '@/components/Common/Error';
+
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
+import { createApolloClient } from '@/lib/apollo-client';
+import { Fishbowl } from '@/types/api-platform';
 
 const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
@@ -34,14 +36,12 @@ const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
   loading: () => <div />
 });
 
-const Page = () => {
+const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
   const { lang } = useTranslation();
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
-  const { fid } = router.query;
-  const { loading, error, data } = useQuery(GET_FISHBOWL, { variables: { slug: fid } });
 
   const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
@@ -60,64 +60,65 @@ const Page = () => {
       return true;
     });
 
+    if (!fishbowl) {
+      router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
+    }
+
     return () => {
       router.beforePopState(() => true);
     };
   }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  if (loading) return <Loader />;
-  if (error) {
-    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-    return <Error message={error.message} />;
-  }
-
-  const { bySlugQueryFishbowl: fb } = data;
-  const fishbowlTitle = fb.isPrivate ? `🔒 ${fb.name}` : fb.name;
-
-  if (!fb) {
-    router.push(ROUTE_NOT_FOUND, ROUTE_NOT_FOUND, { locale: lang });
-    return <Loader />;
+  if (!fishbowl) {
+    return null;
   }
 
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
       className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}
-      data={fb}
+      data={fishbowl}
       prejoin={shouldPrintPreJoinPage}
-      title={fishbowlTitle}
     >
       {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
     </Layout>
   ) : (
     <LayoutWeb>
-      <FishbowlInvitationLanding handleJoinAsGuest={handleJoinAsGuest} fishbowl={fb} />
+      <FishbowlInvitationLanding handleJoinAsGuest={handleJoinAsGuest} fishbowl={fishbowl} />
     </LayoutWeb>
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const fid = params ? params.fid : '';
+  const apolloClient = createApolloClient();
+
+  const { data } = await apolloClient
+    .query({
+      query: GET_FISHBOWL,
+      variables: { slug: fid as string }
+    })
+    .catch(error => {
+      console.log(error);
+      return { data: null };
+    });
+
+  if (!data) {
+    return {
+      props: {}
+    };
+  }
+
+  const { bySlugQueryFishbowl: fishbowl } = data;
+  const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
+  const seoTitle = fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+
+  return {
+    props: {
+      seoTitle,
+      seoDescription: SEODescription,
+      fishbowl
+    }
+  };
+};
+
 export default withIsFishbowlEnded(Page);
-
-/**
- * Workaround for:
- * [next-translate] In Next 10.x.x there is an issue related to i18n and getInitialProps.
- * We recommend to replace getInitialProps to getServerSideProps on /index.tsx.
- *
- * https://github.com/vercel/next.js/discussions/18396
- */
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {}
-  };
-};
-
-/**
- * Error: getStaticPaths is required for dynamic SSG pages and is missing for
- * '/fishbowl/detail/[fid]'.
- * Read more: https://nextjs.org/docs/messages/invalid-getstaticpaths-value
- */
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking' //indicates the type of fallback
-  };
-};

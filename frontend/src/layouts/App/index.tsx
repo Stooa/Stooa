@@ -19,7 +19,6 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
-import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
@@ -30,23 +29,15 @@ interface Props {
   data: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
-  title: string;
   prejoin: boolean;
   className?: string;
   children: React.ReactNode;
 }
 
-const Layout = ({
-  className,
-  data,
-  scriptsLoaded,
-  scriptsLoadedSuccessfully,
-  title,
-  children
-}: Props) => {
+const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, children }: Props) => {
   const router = useRouter();
   const { fid } = router.query;
-  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+  const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
     variables: { slug: fid }
   });
   const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
@@ -76,14 +67,12 @@ const Layout = ({
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
     return <Error message={'Could not create fishbowl event'} />;
 
-  if (loading) return <Loader />;
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (
     <StooaProvider data={data} isModerator={isModerator}>
       <ModalsProvider isModerator={isModerator}>
         <DevicesProvider>
-          <Seo title={title} />
           <Container className={className}>{children}</Container>
         </DevicesProvider>
       </ModalsProvider>
