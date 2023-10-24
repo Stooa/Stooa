@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
+use App\Fishbowl\Entity\Fishbowl;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInputForCreate;
 
@@ -25,22 +26,29 @@ class CreateContactService
     ) {
     }
 
-    public function create(User $user, string $name, string $email): void
+    public function create(User $host, User $contact, Fishbowl $fishbowl): void
     {
-        $hubspot = $this->hubspotService->createHubspot($user);
+        if (null === $contactEmail = $contact->getEmail()) {
+            return;
+        }
+
+        $hubspot = $this->hubspotService->createHubspot($host);
 
         if (null === $hubspot) {
             return;
         }
 
-        $contactId = $this->findContactHubspotService->findContact($user, $email);
+        $contactId = $this->findContactHubspotService->findContact($host, $contactEmail);
+
+        $properties = [
+            'firstname' => $contact->getFullName(),
+            'email' => $contactEmail,
+            'message' => "Fishbowl: {$fishbowl->getName()}",
+        ];
 
         if (null !== $contactId) {
             $contactInput = new SimplePublicObjectInput();
-            $contactInput->setProperties([
-                'firstname' => $name,
-                'email' => $email,
-            ]);
+            $contactInput->setProperties($properties);
 
             $hubspot->crm()->contacts()->basicApi()->update($contactId, $contactInput);
 
@@ -48,10 +56,7 @@ class CreateContactService
         }
 
         $contactInput = new SimplePublicObjectInputForCreate();
-        $contactInput->setProperties([
-            'firstname' => $name,
-            'email' => $email,
-        ]);
+        $contactInput->setProperties($properties);
 
         $hubspot->crm()->contacts()->basicApi()->create($contactInput);
     }
