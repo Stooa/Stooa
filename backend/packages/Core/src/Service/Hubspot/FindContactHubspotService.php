@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
+use App\Core\Entity\User;
 use HubSpot\Client\Crm\Contacts\Model\Error;
 use HubSpot\Client\Crm\Contacts\Model\Filter;
 use HubSpot\Client\Crm\Contacts\Model\FilterGroup;
@@ -25,9 +26,9 @@ class FindContactHubspotService
     ) {
     }
 
-    public function findContact(string $email): ?string
+    public function findContact(User $user, string $email): ?string
     {
-        $hubspot = $this->hubspotService->createHubspot();
+        $hubspot = $this->hubspotService->createHubspot($user);
 
         if (null === $hubspot) {
             return null;

@@ -13,23 +13,23 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
-use App\Core\Entity\User;
+use App\Core\Entity\Participant;
+use App\Core\Repository\UserRepository;
 use App\Fishbowl\Repository\FishbowlRepository;
-use Symfony\Bundle\SecurityBundle\Security;
+use Ramsey\Uuid\UuidInterface;
 
 class SyncContactsHubspotService
 {
     public function __construct(
-        protected readonly TokenHubspotService $hubspotTokenService,
         protected readonly FishbowlRepository $fishbowlRepository,
-        protected readonly Security $security
+        protected readonly UserRepository $userRepository,
+        protected readonly CreateContactHubspotService $createContactHubspotService
     ) {
     }
 
-    public function syncContacts(): void
+    public function syncContacts(UuidInterface $userId): void
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
+        $user = $this->userRepository->findUserById($userId->toString());
 
         if (null === $user) {
             return;
@@ -37,10 +37,19 @@ class SyncContactsHubspotService
 
         $fishbowls = $this->fishbowlRepository->findAllByUser($user);
 
-        foreach ($fishbowls as $fishbowl) {
-            $contacts = $fishbowl->getParticipants();
-            foreach ($contacts as $contact) {
+        if (null === $fishbowls) {
+            return;
+        }
 
+        foreach ($fishbowls as $fishbowl) {
+            /** @var Participant[] */
+            $participants = $fishbowl->getParticipants();
+            foreach ($participants as $participant) {
+                $user = $participant->getUser();
+
+                if (null !== $user && null !== $email = $user->getEmail()) {
+                    $this->createContactHubspotService->create($user, $user->getFullName(), $email);
+                }
             }
         }
     }

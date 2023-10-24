@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
+use App\Core\Entity\User;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInputForCreate;
 
@@ -24,15 +25,15 @@ class CreateContactHubspotService
     ) {
     }
 
-    public function create(string $name, string $email): void
+    public function create(User $user, string $name, string $email): void
     {
-        $hubspot = $this->hubspotService->createHubspot();
+        $hubspot = $this->hubspotService->createHubspot($user);
 
         if (null === $hubspot) {
             return;
         }
 
-        $contactId = $this->findContactHubspotService->findContact($email);
+        $contactId = $this->findContactHubspotService->findContact($user, $email);
 
         if (null !== $contactId) {
             $contactInput = new SimplePublicObjectInput();

@@ -18,7 +18,6 @@ use App\Core\Repository\UserRepository;
 use HubSpot\Client\Auth\OAuth\Model\TokenResponseIF;
 use HubSpot\Factory;
 use Psr\Cache\CacheItemInterface;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\Cache\CacheInterface;
 
 class TokenHubspotService
@@ -26,7 +25,6 @@ class TokenHubspotService
     public const MINUTES_15 = 900;
 
     public function __construct(
-        protected readonly Security $security,
         protected readonly UserRepository $userRepository,
         protected readonly CacheInterface $cache,
         protected readonly string $redirectUrl,
@@ -35,15 +33,8 @@ class TokenHubspotService
     ) {
     }
 
-    public function createToken(string $code): ?string
+    public function createToken(User $user, string $code): ?string
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
-
-        if (null === $user) {
-            return null;
-        }
-
         $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
             'authorization_code',
             $code,
@@ -61,12 +52,9 @@ class TokenHubspotService
         return $tokens->getAccessToken();
     }
 
-    public function accessToken(): ?string
+    public function accessToken(User $user): ?string
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
-
-        if (null === $user || null === $user->getHubspotRefreshToken()) {
+        if (null === $user->getHubspotRefreshToken()) {
             return null;
         }
 

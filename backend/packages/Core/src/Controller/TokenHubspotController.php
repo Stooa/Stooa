@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace App\Core\Controller;
 
+use App\Core\Entity\User;
 use App\Core\Service\Hubspot\TokenHubspotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,15 +24,23 @@ use Symfony\Component\Routing\Annotation\Route;
 final class TokenHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly TokenHubspotService $hubspotTokenService
+        private readonly TokenHubspotService $hubspotTokenService,
+        private readonly Security $security
     ) {
     }
 
     #[Route('/hubspot/token/{code}', name: 'app.hubspot.token', methods: ['POST'])]
     public function token(string $code): Response
     {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        if (null === $user) {
+            return new JsonResponse(['error' => 'User not found']);
+        }
+
         try {
-            return new JsonResponse(['token' => $this->hubspotTokenService->createToken($code)]);
+            return new JsonResponse(['token' => $this->hubspotTokenService->createToken($user, $code)]);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
