@@ -176,7 +176,7 @@ const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
 
   useEffect(() => {
     if (fishbowls) {
-      if (deviceType && deviceType !== 'Mobile') {
+      if (deviceType && deviceType !== 'Mobile' && isPastList) {
         setSelectedFishbowl(fishbowls[0]);
       }
 
