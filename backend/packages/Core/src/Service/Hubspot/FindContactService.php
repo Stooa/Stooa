@@ -26,9 +26,9 @@ class FindContactService
     ) {
     }
 
-    public function findContact(User $user, string $email): ?string
+    public function findContact(User $host, string $email): ?string
     {
-        $hubspot = $this->hubspotService->createHubspot($user);
+        $hubspot = $this->hubspotService->createHubspot($host);
 
         if (null === $hubspot) {
             return null;
