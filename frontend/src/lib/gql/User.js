@@ -62,6 +62,7 @@ const GET_SELF_USER = gql`
       linkedinProfile
       twitterProfile
       hasHubspotRefreshToken
+      lastSyncDate
     }
   }
 `;
