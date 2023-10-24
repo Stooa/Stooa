@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
+use App\Core\Entity\User;
+
 class ContactsHubspotService
 {
     public function __construct(
@@ -21,9 +23,9 @@ class ContactsHubspotService
     }
 
     /** @return array<mixed> */
-    public function contacts(): array
+    public function contacts(User $user): array
     {
-        $hubspot = $this->hubspotService->createHubspot();
+        $hubspot = $this->hubspotService->createHubspot($user);
 
         if (null === $hubspot) {
             return [];

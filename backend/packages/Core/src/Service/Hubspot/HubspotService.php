@@ -16,26 +16,17 @@ namespace App\Core\Service\Hubspot;
 use App\Core\Entity\User;
 use HubSpot\Discovery\Discovery;
 use HubSpot\Factory;
-use Symfony\Bundle\SecurityBundle\Security;
 
 class HubspotService
 {
     public function __construct(
-        protected readonly TokenHubspotService $tokenHubspotService,
-        protected readonly Security $security
+        protected readonly TokenHubspotService $tokenHubspotService
     ) {
     }
 
-    public function createHubspot(): ?Discovery
+    public function createHubspot(User $user): ?Discovery
     {
-        /** @var User $user */
-        $user = $this->security->getUser();
-
-        if (null === $user) {
-            return null;
-        }
-
-        $accessToken = $this->tokenHubspotService->accessToken();
+        $accessToken = $this->tokenHubspotService->accessToken($user);
 
         if (null === $accessToken) {
             return null;

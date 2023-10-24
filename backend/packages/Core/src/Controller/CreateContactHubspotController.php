@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace App\Core\Controller;
 
+use App\Core\Entity\User;
 use App\Core\Model\ContactHubspotDto;
 use App\Core\Service\Hubspot\CreateContactHubspotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
@@ -24,7 +26,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class CreateContactHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly CreateContactHubspotService $createContactHubspotService
+        private readonly CreateContactHubspotService $createContactHubspotService,
+        private readonly Security $security
     ) {
     }
 
@@ -32,8 +35,15 @@ final class CreateContactHubspotController extends AbstractController
     public function create(
         #[MapRequestPayload] ContactHubspotDto $contact
     ): Response {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        if (null === $user) {
+            return new JsonResponse(['error' => 'User not found']);
+        }
+
         try {
-            $this->createContactHubspotService->create($contact->name, $contact->email);
+            $this->createContactHubspotService->create($user, $contact->name, $contact->email);
 
             return new JsonResponse(['contacts' => 'Contact created']);
         } catch (\Exception $e) {
