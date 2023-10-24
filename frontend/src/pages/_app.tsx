@@ -9,7 +9,7 @@
 
 import { useEffect } from 'react';
 import Router from 'next/router';
-import localFont from '@next/font/local';
+import localFont from 'next/font/local';
 
 import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
