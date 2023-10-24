@@ -305,9 +305,9 @@ When('can access to pre join', () => {
 });
 
 When('sees the prefishbowl page', () => {
-  cy.findByTestId('prefishbowl-counter').should('exist');
-  cy.findByTestId('prefishbowl-datacard').should('exist');
-  cy.findByTestId('prefishbowl-participants').should('exist');
+  cy.findByTestId('prefishbowl-counter', { timeout: 6000 }).should('exist');
+  cy.findByTestId('prefishbowl-datacard', { timeout: 6000 }).should('exist');
+  cy.findByTestId('prefishbowl-participants', { timeout: 6000 }).should('exist');
 });
 
 When('sees the prefishbowl page with introduction', () => {
