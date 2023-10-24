@@ -18,12 +18,12 @@ use Ramsey\Uuid\UuidInterface;
 class SyncHubspotNotification
 {
     public function __construct(
-        private readonly UuidInterface $userId,
+        private readonly UuidInterface $fishbowlId,
     ) {
     }
 
-    public function getUserId(): UuidInterface
+    public function getFishbowlId(): UuidInterface
     {
-        return $this->userId;
+        return $this->fishbowlId;
     }
 }

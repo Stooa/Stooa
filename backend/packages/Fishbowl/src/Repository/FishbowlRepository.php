@@ -37,6 +37,16 @@ class FishbowlRepository extends ServiceEntityRepository
         return $query->getOneOrNullResult();
     }
 
+    public function findById(string $id): ?Fishbowl
+    {
+        $query = $this->createQueryBuilder('fishbowl')
+            ->where('fishbowl.id = :id')
+            ->setParameter('id', $id, Types::STRING)
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
     /** @return Fishbowl[] */
     public function findAllByUser(User $user): ?array
     {
