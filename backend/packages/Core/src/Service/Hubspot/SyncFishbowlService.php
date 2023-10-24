@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\Participant;
-use App\Core\Repository\UserRepository;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Ramsey\Uuid\UuidInterface;
 
@@ -22,7 +21,6 @@ class SyncFishbowlService
 {
     public function __construct(
         protected readonly FishbowlRepository $fishbowlRepository,
-        protected readonly UserRepository $userRepository,
         protected readonly CreateContactService $createContactService
     ) {
     }
@@ -44,10 +42,10 @@ class SyncFishbowlService
         /** @var Participant[] */
         $participants = $fishbowl->getParticipants();
         foreach ($participants as $participant) {
-            $participant = $participant->getUser();
+            $user = $participant->getUser();
 
-            if (null !== $participant && null !== $email = $participant->getEmail()) {
-                $this->createContactService->create($host, $participant->getFullName(), $email);
+            if (null !== $user) {
+                $this->createContactService->create($host, $user, $fishbowl);
             }
         }
     }

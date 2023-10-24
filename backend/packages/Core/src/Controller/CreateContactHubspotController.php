@@ -16,6 +16,7 @@ namespace App\Core\Controller;
 use App\Core\Entity\User;
 use App\Core\Model\ContactHubspotDto;
 use App\Core\Service\Hubspot\CreateContactService;
+use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -43,7 +44,14 @@ final class CreateContactHubspotController extends AbstractController
         }
 
         try {
-            $this->createContactService->create($user, $contact->name, $contact->email);
+            $participant = new User();
+            $participant->setEmail($contact->email);
+            $participant->setName($contact->name);
+
+            $fishbowl = new Fishbowl();
+            $fishbowl->setName('Fishbowl created from controller');
+
+            $this->createContactService->create($user, $participant, $fishbowl);
 
             return new JsonResponse(['contacts' => 'Contact created']);
         } catch (\Exception $e) {
