@@ -12,25 +12,34 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { APP_NAME, TWITTER_USER, ROUTE_HOME } from '@/app.config';
 
-const OpenGraphDefault = () => {
+interface Props {
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
+const OpenGraphDefault = ({ seoTitle, seoDescription }: Props) => {
   const { t } = useTranslation('common');
 
   const ogImageSrc = 'img/web/OGimage.jpg';
   const ogImageTwitterSrc = 'img/web/OGimage-twitter.jpg';
-  const metaTitle = `${APP_NAME} | ${t('og-title')}`;
+  const metaTitle = seoTitle ? `${seoTitle} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
+  const metaDescription =
+    seoDescription && seoDescription !== '' ? seoDescription : t('og-description');
 
   return (
     <Head>
+      <title>{metaTitle}</title>
+      <meta property="og:title" content={metaTitle} />
+      <meta property="og:description" content={metaDescription} />
+      <meta name="twitter:title" content={metaTitle} />
+      <meta name="twitter:description" content={metaDescription} />
+
       <meta property="og:url" content={ROUTE_HOME} />
       <meta property="og:image" content={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/${ogImageSrc}`} />
       <meta property="og:site_name" content={APP_NAME} />
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:description" content={t('og-description')} />
 
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content={`@${TWITTER_USER}`} />
-      <meta name="twitter:title" content={metaTitle} />
-      <meta name="twitter:description" content={t('og-description')} />
       <meta
         name="twitter:image"
         content={`${process.env.NEXT_PUBLIC_APP_DOMAIN}/${ogImageTwitterSrc}`}

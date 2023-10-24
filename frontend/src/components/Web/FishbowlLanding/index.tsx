@@ -23,7 +23,7 @@ interface Props {
   data: Fishbowl;
 }
 
-const FishbowlLanding: React.FC<Props> = ({ data }) => {
+const FishbowlLanding = ({ data }: Props) => {
   const [{ fishbowlReady }] = useStateValue();
   const { t } = useTranslation('fishbowl');
   const startDate = formatDateTime(data.startDateTimeTz);
@@ -40,9 +40,13 @@ const FishbowlLanding: React.FC<Props> = ({ data }) => {
           <Description data-testid="fishbowl-description">{data.description}</Description>
         )}
       </StyledFishbowlData>
-      <Time as="time" dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}>
+      <Time
+        as="time"
+        suppressHydrationWarning={true}
+        dateTime={`${startDate.date} ${startDate.time} - ${endDate.time}`}
+      >
         <p className="body-md medium">{t('dateandtime')}</p>
-        <div className="body-lg">
+        <div className="body-lg" suppressHydrationWarning={true}>
           {`${t(`months.${startDate.month}`)} ${startDate.day}, ${startDate.year}. ${
             startDate.time
           } - ${endDate.time} ${endDate.timezone}`}

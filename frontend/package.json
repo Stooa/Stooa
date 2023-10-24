@@ -2,8 +2,10 @@
   "name": "stooa-app",
   "license": "MPL-2.0",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "NODE_OPTIONS='--inspect --no-experimental-fetch' next dev",
+    "dev:test": "NODE_ENV=test npm run dev",
     "build": "next build",
+    "build:test": "NODE_ENV=test next build",
     "start": "next start",
     "build-start": "next build && next start",
     "design-tokens": "design-tokens",
@@ -12,8 +14,11 @@
     "prettify": "prettier --write src tests",
     "lint:js": "eslint src tests",
     "lint:fix": "eslint src tests --fix",
+    "mock-server": "npx tsx ./src/mocks/http.ts",
+    "e2e:mock:test:dev": "concurrently -n Dev,Cypress,MockServer -c blue,yellow,green \"npm:dev:test\" \"npm:test:e2e:dev\" \"npm:mock-server\" ",
+    "e2e:mock:test:run": "concurrently -n Dev,Cypress,MockServer -c blue,yellow,green \"npm:dev:test\" \"npm:test:e2e:run\" \"npm:mock-server\" ",
     "test:e2e:dev": "cypress open",
-    "test:e2e:run": "cypress run"
+    "test:e2e:run": "cypress run --browser chrome"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
@@ -26,7 +31,6 @@
   "dependencies": {
     "@apollo/client": "3.8.5",
     "@hookform/resolvers": "^2.9.11",
-    "@next/font": "13.1.6",
     "@types/node": "18.11.19",
     "@types/styled-components": "5.1.28",
     "@types/yup": "0.29.14",
@@ -66,6 +70,7 @@
     "@badeball/cypress-cucumber-preprocessor": "18.0.6",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
     "@faker-js/faker": "8.0.2",
+    "@mswjs/http-middleware": "0.8.0",
     "@runroom/design-tokens": "2.2.0",
     "@svgr/webpack": "6.5.1",
     "@testing-library/cypress": "10.0.1",
@@ -76,6 +81,8 @@
     "@types/react": "18.2.25",
     "@types/react-slick": "0.23.10",
     "@typescript-eslint/eslint-plugin": "5.60.1",
+    "concurrently": "8.2.1",
+    "cors": "2.8.5",
     "cypress": "13.3.2",
     "esbuild": "0.19.5",
     "eslint": "8.44.0",
@@ -83,11 +90,17 @@
     "eslint-config-prettier": "8.8.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-header": "3.1.1",
+    "express": "4.18.2",
+    "express-http-proxy": "2.0.0",
     "jest": "28.1.3",
     "jest-canvas-mock": "2.5.2",
     "jest-css-modules": "2.1.0",
     "jest-environment-jsdom": "28.1.3",
     "jest-next-dynamic": "1.0.1",
+    "msw": "1.3.2",
     "prettier": "2.8.8"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
