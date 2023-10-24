@@ -15,6 +15,7 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 use App\Core\Message\SyncHubspotNotification;
+use App\Core\Repository\UserRepository;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -23,6 +24,7 @@ class SyncContactsService
     public function __construct(
         protected readonly MessageBusInterface $bus,
         protected readonly FishbowlRepository $fishbowlRepository,
+        protected readonly UserRepository $userRepository
     ) {
     }
 
@@ -41,5 +43,9 @@ class SyncContactsService
 
             $this->bus->dispatch(new SyncHubspotNotification($id));
         }
+
+        $user->setLastSyncDate(new \DateTimeImmutable());
+
+        $this->userRepository->persist($user);
     }
 }

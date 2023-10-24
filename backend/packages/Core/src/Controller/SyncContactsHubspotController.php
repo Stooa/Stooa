@@ -39,6 +39,10 @@ final class SyncContactsHubspotController extends AbstractController
             return new JsonResponse(['error' => 'User not found']);
         }
 
+        if (!$user->getHasHubspotRefreshToken()) {
+            return new JsonResponse(['error' => 'User does not have a refresh token']);
+        }
+
         $this->syncContactsService->syncContacts($user);
 
         return new JsonResponse(['response' => 'ok']);

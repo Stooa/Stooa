@@ -145,9 +145,13 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[ORM\Column(type: 'boolean')]
     private bool $privacyPolicy = false;
 
-    #[Groups(['user:self', 'user:write'])]
     #[ORM\Column(type: 'string')]
     private ?string $hubspotRefreshToken = '';
+
+    #[Groups(['user:read'])]
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $lastSyncDate = null;
 
     #[Groups(['user:self', 'user:write', 'user:read'])]
     #[ORM\Column(type: 'boolean')]
@@ -479,6 +483,18 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     #[Groups(['user:read'])]
     public function getHasHubspotRefreshToken(): bool
     {
-        return null !== $this->hubspotRefreshToken;
+        return '' !== $this->hubspotRefreshToken;
+    }
+
+    public function getLastSyncDate(): ?\DateTimeInterface
+    {
+        return $this->lastSyncDate;
+    }
+
+    public function setLastSyncDate(?\DateTimeInterface $lastSyncDate): self
+    {
+        $this->lastSyncDate = $lastSyncDate;
+
+        return $this;
     }
 }

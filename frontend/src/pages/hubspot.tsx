@@ -44,7 +44,7 @@ const Hubspot = () => {
       </a>
       <br></br>
      {data?.selfUser.hasHubspotRefreshToken ? 'Contactos' : 'No hay contactos'}
-      {contacts.map((contact, index) => {
+      {contacts?.map((contact, index) => {
         return (
           <div key={index}>
             <p>
