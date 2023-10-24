@@ -14,18 +14,17 @@ declare(strict_types=1);
 namespace App\Core\Controller;
 
 use App\Core\Entity\User;
-use App\Core\Message\SyncHubspotNotification;
+use App\Core\Service\Hubspot\SyncContactsHubspotService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 final class SyncContactsHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly MessageBusInterface $bus,
+        private readonly SyncContactsHubspotService $syncContactsHubspotService,
         private readonly Security $security
     ) {
     }
@@ -36,11 +35,11 @@ final class SyncContactsHubspotController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
-        if (null === $user || null === $userId = $user->getId()) {
+        if (null === $user) {
             return new JsonResponse(['error' => 'User not found']);
         }
 
-        $this->bus->dispatch(new SyncHubspotNotification($userId));
+        $this->syncContactsHubspotService->syncContacts($user);
 
         return new JsonResponse(['response' => 'ok']);
     }

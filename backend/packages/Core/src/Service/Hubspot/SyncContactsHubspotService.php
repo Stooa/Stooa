@@ -13,28 +13,21 @@ declare(strict_types=1);
 
 namespace App\Core\Service\Hubspot;
 
-use App\Core\Entity\Participant;
-use App\Core\Repository\UserRepository;
+use App\Core\Entity\User;
+use App\Core\Message\SyncHubspotNotification;
 use App\Fishbowl\Repository\FishbowlRepository;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class SyncContactsHubspotService
 {
     public function __construct(
+        protected readonly MessageBusInterface $bus,
         protected readonly FishbowlRepository $fishbowlRepository,
-        protected readonly UserRepository $userRepository,
-        protected readonly CreateContactHubspotService $createContactHubspotService
     ) {
     }
 
-    public function syncContacts(UuidInterface $userId): void
+    public function syncContacts(User $user): void
     {
-        $user = $this->userRepository->findUserById($userId->toString());
-
-        if (null === $user) {
-            return;
-        }
-
         $fishbowls = $this->fishbowlRepository->findAllByUser($user);
 
         if (null === $fishbowls) {
@@ -42,15 +35,11 @@ class SyncContactsHubspotService
         }
 
         foreach ($fishbowls as $fishbowl) {
-            /** @var Participant[] */
-            $participants = $fishbowl->getParticipants();
-            foreach ($participants as $participant) {
-                $user = $participant->getUser();
-
-                if (null !== $user && null !== $email = $user->getEmail()) {
-                    $this->createContactHubspotService->create($user, $user->getFullName(), $email);
-                }
+            if (null === $id = $fishbowl->getId()) {
+                continue;
             }
+
+            $this->bus->dispatch(new SyncHubspotNotification($id));
         }
     }
 }
