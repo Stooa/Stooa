@@ -17,11 +17,11 @@ use App\Core\Entity\User;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInputForCreate;
 
-class CreateContactHubspotService
+class CreateContactService
 {
     public function __construct(
         protected readonly HubspotService $hubspotService,
-        protected readonly FindContactHubspotService $findContactHubspotService
+        protected readonly FindContactService $findContactHubspotService
     ) {
     }
 

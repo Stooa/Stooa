@@ -18,7 +18,7 @@ use App\Core\Message\SyncHubspotNotification;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class SyncContactsHubspotService
+class SyncContactsService
 {
     public function __construct(
         protected readonly MessageBusInterface $bus,

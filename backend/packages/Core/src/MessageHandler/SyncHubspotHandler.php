@@ -14,19 +14,19 @@ declare(strict_types=1);
 namespace App\Core\MessageHandler;
 
 use App\Core\Message\SyncHubspotNotification;
-use App\Core\Service\Hubspot\SyncFishbowlHubspotService;
+use App\Core\Service\Hubspot\SyncFishbowlService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 class SyncHubspotHandler
 {
     public function __construct(
-        protected readonly SyncFishbowlHubspotService $syncFishbowlHubspotService
+        protected readonly SyncFishbowlService $syncFishbowlService
     ) {
     }
 
     public function __invoke(SyncHubspotNotification $message): void
     {
-        $this->syncFishbowlHubspotService->syncParticipants($message->getFishbowlId());
+        $this->syncFishbowlService->syncParticipants($message->getFishbowlId());
     }
 }

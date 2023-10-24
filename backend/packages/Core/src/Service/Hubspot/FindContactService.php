@@ -19,7 +19,7 @@ use HubSpot\Client\Crm\Contacts\Model\Filter;
 use HubSpot\Client\Crm\Contacts\Model\FilterGroup;
 use HubSpot\Client\Crm\Contacts\Model\PublicObjectSearchRequest;
 
-class FindContactHubspotService
+class FindContactService
 {
     public function __construct(
         protected readonly HubspotService $hubspotService

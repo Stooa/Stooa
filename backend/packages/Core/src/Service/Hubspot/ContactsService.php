@@ -15,7 +15,7 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 
-class ContactsHubspotService
+class ContactsService
 {
     public function __construct(
         protected readonly HubspotService $hubspotService,
