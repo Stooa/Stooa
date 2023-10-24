@@ -108,14 +108,26 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
 
-  const { bySlugQueryFishbowl: fishbowl } = data;
-  const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
-  const seoTitle = fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+  const { bySlugQueryFishbowl: fishbowl }: { bySlugQueryFishbowl: Fishbowl } = data;
+
+  const getSeoDescription = () => {
+    if (fishbowl.hasInvitationInfo) {
+      return fishbowl.invitationSubtitle;
+    }
+    return fishbowl.description !== '' ? fishbowl.description : null;
+  };
+
+  const getSeoTitle = () => {
+    if (fishbowl.hasInvitationInfo) {
+      return fishbowl.isPrivate ? `🔒 ${fishbowl.invitationTitle}` : fishbowl.invitationTitle;
+    }
+    return fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+  };
 
   return {
     props: {
-      seoTitle,
-      seoDescription: SEODescription,
+      seoTitle: getSeoTitle(),
+      seoDescription: getSeoDescription(),
       fishbowl
     }
   };
