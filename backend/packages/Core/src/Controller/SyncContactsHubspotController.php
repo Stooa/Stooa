@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Core\Controller;
 
 use App\Core\Entity\User;
-use App\Core\Service\Hubspot\SyncContactsHubspotService;
+use App\Core\Service\Hubspot\SyncContactsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class SyncContactsHubspotController extends AbstractController
 {
     public function __construct(
-        private readonly SyncContactsHubspotService $syncContactsHubspotService,
+        private readonly SyncContactsService $syncContactsService,
         private readonly Security $security
     ) {
     }
@@ -39,7 +39,7 @@ final class SyncContactsHubspotController extends AbstractController
             return new JsonResponse(['error' => 'User not found']);
         }
 
-        $this->syncContactsHubspotService->syncContacts($user);
+        $this->syncContactsService->syncContacts($user);
 
         return new JsonResponse(['response' => 'ok']);
     }
