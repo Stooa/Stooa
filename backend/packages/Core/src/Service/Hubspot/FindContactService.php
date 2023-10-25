@@ -18,6 +18,7 @@ use HubSpot\Client\Crm\Contacts\Model\Error;
 use HubSpot\Client\Crm\Contacts\Model\Filter;
 use HubSpot\Client\Crm\Contacts\Model\FilterGroup;
 use HubSpot\Client\Crm\Contacts\Model\PublicObjectSearchRequest;
+use HubSpot\Client\Crm\Contacts\Model\SimplePublicObject;
 
 class FindContactService
 {
@@ -26,7 +27,7 @@ class FindContactService
     ) {
     }
 
-    public function findContact(User $host, string $email): ?string
+    public function findContact(User $host, string $email): ?SimplePublicObject
     {
         $hubspot = $this->hubspotService->createHubspot($host);
 
@@ -42,10 +43,10 @@ class FindContactService
 
         $filterGroup = new FilterGroup();
         $filterGroup->setFilters([$filter]);
+
         $searchRequest = new PublicObjectSearchRequest();
         $searchRequest->setFilterGroups([$filterGroup]);
-
-        $searchRequest->setProperties(['email']);
+        $searchRequest->setProperties(['email', 'firstname']);
 
         $contactsPage = $hubspot->crm()->contacts()->searchApi()->doSearch($searchRequest);
 
@@ -55,6 +56,6 @@ class FindContactService
 
         $results = $contactsPage->getResults();
 
-        return isset($results[0]) ? $contactsPage->getResults()[0]->getId() : null;
+        return isset($results[0]) ? $contactsPage->getResults()[0] : null;
     }
 }
