@@ -91,6 +91,8 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
     day: 'numeric'
   }).format(startDateTime);
 
+  console.log(fishbowl);
+
   return (
     <>
       <ToastContainer className="toastify-custom" />
@@ -102,7 +104,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
             </p>
 
             <h1 data-testid="fishbowl-name" className="title-lg">
-              {invitationTitle === '' ? fishbowl.name : invitationTitle}
+              {fishbowl.hasInvitationInfo ? invitationTitle : fishbowl.name}
             </h1>
 
             {invitationSubtitle && <p className="title-sm">{invitationSubtitle}</p>}
