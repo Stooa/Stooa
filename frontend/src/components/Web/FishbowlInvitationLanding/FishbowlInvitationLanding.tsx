@@ -79,7 +79,11 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const startDateTime = new Date(startDateTimeTz);
-  const hour = startDateTime.getHours();
+
+  const hourAndMinutes = new Intl.DateTimeFormat(lang, {
+    hour: 'numeric',
+    minute: 'numeric'
+  }).format(startDateTime);
 
   const localFormatDate = new Intl.DateTimeFormat(lang, {
     weekday: 'long',
@@ -101,7 +105,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
         <StyledInvitationContent>
           <StyledInvitationHero>
             <p className="body-md">
-              {localFormatDate} - {hour}
+              {localFormatDate} - {hourAndMinutes}
             </p>
 
             <h1 data-testid="fishbowl-name" className="title-lg">
