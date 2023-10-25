@@ -31,6 +31,7 @@ const StyledFishbowlDataCard = styled.div`
   position: relative;
   overflow: hidden;
   width: 100%;
+  text-align: left;
 
   * + *:not(:last-child) {
     margin-bottom: ${space()};

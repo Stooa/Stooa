@@ -26,7 +26,6 @@ import RegisterInvitation from '../Forms/RegisterInvitation';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 import { useEffect, useRef, useState } from 'react';
 import { useStateValue } from '@/contexts/AppContext';
-import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 import { AnimatePresence, motion } from 'framer-motion';
 import Check from '@/ui/svg/checkmark.svg';
@@ -92,24 +91,18 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
     day: 'numeric'
   }).format(startDateTime);
 
-  const pageTitle = `${invitationTitle} - ${host.name} ${host.surnames}`;
-
   return (
     <>
       <ToastContainer className="toastify-custom" />
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={fishbowl.invitationSubtitle} />
-      </Head>
       <StyledInvitationLanding>
         <StyledInvitationContent>
           <StyledInvitationHero>
-            <p className="body-md">
+            <p className="body-lg">
               {localFormatDate} - {hourAndMinutes}
             </p>
 
             <h1 data-testid="fishbowl-name" className="title-lg">
-              {invitationTitle}
+              {invitationTitle === '' ? fishbowl.name : invitationTitle}
             </h1>
 
             {invitationSubtitle && <p className="title-sm">{invitationSubtitle}</p>}
