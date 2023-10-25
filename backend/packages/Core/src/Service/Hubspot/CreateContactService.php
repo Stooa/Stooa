@@ -15,6 +15,7 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 use App\Fishbowl\Entity\Fishbowl;
+use HubSpot\Client\Crm\Contacts\Model\SimplePublicObject;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInput;
 use HubSpot\Client\Crm\Contacts\Model\SimplePublicObjectInputForCreate;
 
@@ -38,7 +39,7 @@ class CreateContactService
             return;
         }
 
-        $contactId = $this->findContactHubspotService->findContact($host, $contactEmail);
+        $contactObject = $this->findContactHubspotService->findContact($host, $contactEmail);
 
         $properties = [
             'firstname' => $contact->getFullName(),
@@ -46,11 +47,11 @@ class CreateContactService
             'message' => "Fishbowl: {$fishbowl->getName()}",
         ];
 
-        if (null !== $contactId) {
+        if (null !== $contactObject && $this->isSameContact($contact, $contactObject)) {
             $contactInput = new SimplePublicObjectInput();
             $contactInput->setProperties($properties);
 
-            $hubspot->crm()->contacts()->basicApi()->update($contactId, $contactInput);
+            $hubspot->crm()->contacts()->basicApi()->update($contactObject->getId(), $contactInput);
 
             return;
         }
@@ -59,5 +60,11 @@ class CreateContactService
         $contactInput->setProperties($properties);
 
         $hubspot->crm()->contacts()->basicApi()->create($contactInput);
+    }
+
+    private function isSameContact(User $contact, SimplePublicObject $contactObject): bool
+    {
+        return $contact->getFullName() === $contactObject->getProperties()['firstname']
+            && $contact->getEmail() === $contactObject->getProperties()['email'];
     }
 }

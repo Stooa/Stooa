@@ -51,7 +51,7 @@ const Hubspot = () => {
               <b>name:</b> {contact.properties.firstname}
             </p>
             <p>
-              <b>country:</b> {contact.properties.email}
+              ({contact.properties.email})
             </p>
           </div>
         );
