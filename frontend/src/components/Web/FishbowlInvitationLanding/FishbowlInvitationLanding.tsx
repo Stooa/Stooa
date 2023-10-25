@@ -91,8 +91,6 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
     day: 'numeric'
   }).format(startDateTime);
 
-  console.log(fishbowl);
-
   return (
     <>
       <ToastContainer className="toastify-custom" />
