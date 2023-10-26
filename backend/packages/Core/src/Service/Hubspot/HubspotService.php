@@ -14,8 +14,12 @@ declare(strict_types=1);
 namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
+use HubSpot\Delay;
 use HubSpot\Discovery\Discovery;
 use HubSpot\Factory;
+use HubSpot\RetryMiddlewareFactory;
 
 class HubspotService
 {
@@ -31,7 +35,21 @@ class HubspotService
         if (null === $accessToken) {
             return null;
         }
+        $handlerStack = HandlerStack::create();
+        $handlerStack->push(
+            RetryMiddlewareFactory::createRateLimitMiddleware(
+                Delay::getConstantDelayFunction()
+            )
+        );
 
-        return Factory::createWithAccessToken($accessToken);
+        $handlerStack->push(
+            RetryMiddlewareFactory::createInternalErrorsMiddleware(
+                Delay::getExponentialDelayFunction(2)
+            )
+        );
+
+        $client = new Client(['handler' => $handlerStack]);
+
+        return Factory::createWithAccessToken($accessToken, $client);
     }
 }

@@ -84,6 +84,8 @@ class TokenHubspotService
     {
         $user->setHubspotRefreshToken($refreshToken);
 
+        $this->cache->delete('hubspot_access_token');
+
         $this->userRepository->persist($user);
     }
 }
