@@ -98,7 +98,7 @@ const StyledInvitationFormWrapper = styled.div`
   row-gap: ${space(3)};
   width: 100%;
 
-  scroll-margin-top: ${space()};
+  scroll-margin-top: ${space(4)};
 
   text-align: left;
 `;
