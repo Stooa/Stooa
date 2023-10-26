@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { BODY_SM } from '@/ui/Texts';
 import { BORDER_RADIUS, COLOR_NEUTRO_300, COLOR_NEUTRO_400, COLOR_NEUTRO_500 } from '@/ui/settings';
 
 import styled from 'styled-components';
@@ -29,6 +30,7 @@ export const StandardWYSIWYGStyles = styled.div`
 `;
 
 const StyledEditorWrapper = styled(StandardWYSIWYGStyles)`
+  ${BODY_SM};
   display: flex;
   width: 100%;
 

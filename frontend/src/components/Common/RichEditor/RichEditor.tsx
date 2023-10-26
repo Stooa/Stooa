@@ -135,9 +135,6 @@ const RichText = ({ editor }: Props) => {
         >
           <Link />
         </ToolbarButton>
-        {/* <ToolbarButton onClick={unsetLink} disabled={!editor.isActive('link')}>
-          unsetLink
-        </ToolbarButton> */}
       </StyledToolbar>
       <EditorContent editor={editor} />
     </StyledEditorWrapper>

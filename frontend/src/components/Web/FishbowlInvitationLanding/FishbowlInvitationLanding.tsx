@@ -130,7 +130,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
             {fishbowlReady ? (
               <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
             ) : (
-              <Link href="#form">
+              <Link href="#invitation-form">
                 <Button disabled={sentRegistration} size="large">
                   {sentRegistration ? (
                     <>
@@ -158,10 +158,12 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               height={448}
             />
           </div>
-          <StyledInventationLandingContentBody
-            dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}
-          ></StyledInventationLandingContentBody>
-          <StyledInvitationFormWrapper id="form">
+          {invitationText !== '' && (
+            <StyledInventationLandingContentBody
+              dangerouslySetInnerHTML={{ __html: invitationText ?? '' }}
+            ></StyledInventationLandingContentBody>
+          )}
+          <StyledInvitationFormWrapper id="invitation-form">
             {sentRegistration && (
               <AnimatePresence>
                 <motion.h3
@@ -187,12 +189,17 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               </AnimatePresence>
             )}
 
-            {!sentRegistration && !isTimeLessThanNMinutes(startDateTime, 60) && (
-              <>
-                <h3 className="title-sm">{t('invitationLanding.formTitle')}</h3>
-                <RegisterInvitation onSubmit={onSubmit} fishbowl={fishbowl} />
-              </>
-            )}
+            {!sentRegistration &&
+              !isTimeLessThanNMinutes(startDateTime, MINUTES_TO_START_FISHBOWL) && (
+                <>
+                  <h3 className="title-sm">{t('invitationLanding.formTitle')}</h3>
+                  <RegisterInvitation
+                    buttonFormText={t('invitationLanding.cta')}
+                    onSubmit={onSubmit}
+                    fishbowl={fishbowl}
+                  />
+                </>
+              )}
           </StyledInvitationFormWrapper>
         </StyledInvitationContent>
         <StyledFixedFishbowlData>

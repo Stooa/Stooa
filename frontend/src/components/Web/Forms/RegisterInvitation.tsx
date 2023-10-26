@@ -14,34 +14,39 @@ import { useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Fishbowl } from '@/types/api-platform';
+import FormError from '@/components/Web/Forms/FormError';
 
 import { CREATE_ATTENDEE } from '@/lib/gql/Attendee';
 
 import * as Yup from 'yup';
-import { toast } from 'react-toastify';
+import useTranslation from 'next-translate/useTranslation';
+import { useState } from 'react';
 
 interface FormValues {
   name: string;
   email: string;
 }
 
-const RegisterInvitation = ({
-  fishbowl,
-  onSubmit
-}: {
+interface Props {
   fishbowl: Fishbowl;
   onSubmit: () => void;
-}) => {
+  buttonFormText: string;
+}
+
+const RegisterInvitation = ({ fishbowl, onSubmit, buttonFormText }: Props) => {
+  const [backendErrors, setBackendErrors] = useState();
+  const { t } = useTranslation('form');
   const schema = Yup.object({
-    name: Yup.string().required('El nombre es obligatorio'),
-    email: Yup.string().required('El email es obligatorio')
+    name: Yup.string()
+      .required(t('validation.required'))
+      .max(255, t('validation.maxLength', { length: '255' })),
+    email: Yup.string().email().required(t('validation.required'))
   });
   const [CreateAttendeeMutation] = useMutation(CREATE_ATTENDEE);
 
   const {
     register,
     handleSubmit,
-
     formState: { dirtyFields, errors, isSubmitted }
   } = useForm<FormValues>({
     mode: 'onChange',
@@ -58,22 +63,19 @@ const RegisterInvitation = ({
           email: values.email
         }
       }
-    }).then(res => {
-      console.log(res);
-      onSubmit();
-      toast('Te has registrado correctamente', {
-        toastId: 'successful-registered-attendee',
-        icon: '🎉',
-        type: 'success',
-        position: 'bottom-center',
-        autoClose: 5000,
-        delay: 2000
+    })
+      .then(res => {
+        console.log(res);
+        onSubmit();
+      })
+      .catch(err => {
+        setBackendErrors(err);
       });
-    });
   };
 
   return (
     <StandardForm $isFull onSubmit={handleSubmit(handleOnSubmit)}>
+      {backendErrors && <FormError errors={backendErrors} />}
       <fieldset>
         <Input
           isSubmitted={isSubmitted}
@@ -98,7 +100,7 @@ const RegisterInvitation = ({
         />
       </fieldset>
       <Button type="submit" size="large">
-        Me apunto
+        {buttonFormText}
       </Button>
     </StandardForm>
   );

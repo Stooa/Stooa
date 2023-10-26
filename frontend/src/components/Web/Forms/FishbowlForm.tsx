@@ -253,7 +253,9 @@ const FishbowlForm = ({
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
 
-    const html = editor ? editor.getHTML() : '';
+    const isEmpty = editor => !editor.state.doc.textContent.trim().length;
+
+    const html = editor && !isEmpty(editor) ? editor.getHTML() : '';
 
     if (isEditForm) {
       pushEventDataLayer({
