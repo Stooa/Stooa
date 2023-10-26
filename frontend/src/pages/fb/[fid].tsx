@@ -111,7 +111,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { bySlugQueryFishbowl: fishbowl }: { bySlugQueryFishbowl: Fishbowl } = data;
 
   const getSeoDescription = () => {
-    if (fishbowl.hasInvitationInfo) {
+    if (fishbowl.invitationSubtitle) {
       return fishbowl.invitationSubtitle;
     }
     return fishbowl.description !== '' ? fishbowl.description : null;

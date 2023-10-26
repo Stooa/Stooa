@@ -30,6 +30,8 @@ import { ToastContainer } from 'react-toastify';
 import { AnimatePresence, motion } from 'framer-motion';
 import Check from '@/ui/svg/checkmark.svg';
 import Link from 'next/link';
+import { useQuery } from '@apollo/client';
+import { IS_FISHBOWL_CREATOR } from '@/graphql/Fishbowl';
 
 const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 
@@ -43,10 +45,16 @@ const MINUTES_TO_START_FISHBOWL = 60;
 
 const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
   const [sentRegistration, setSentRegistration] = useState(false);
+  const [isModeratorLanding, setIsModeratorLanding] = useState(false);
+
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { invitationTitle, invitationSubtitle, invitationText, startDateTimeTz, host } = fishbowl;
   const { lang } = useTranslation();
   const intervalRef = useRef<number>();
+
+  const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+    variables: { slug: fishbowl.slug }
+  });
 
   const evaluateFishbowlReady = () => {
     const isReady = isTimeLessThanNMinutes(fishbowl.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
@@ -77,6 +85,12 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
     return () => window.clearInterval(intervalRef.current);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    if (!isTimeLessThanNMinutes(fishbowl.startDateTimeTz, MINUTES_TO_START_FISHBOWL)) {
+      setIsModeratorLanding(!!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl);
+    }
+  }, []);
+
   const startDateTime = new Date(startDateTimeTz);
 
   const hourAndMinutes = new Intl.DateTimeFormat(lang, {
@@ -98,7 +112,8 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
         <StyledInvitationContent>
           <StyledInvitationHero>
             <p className="body-lg">
-              {localFormatDate} - {hourAndMinutes}
+              {`${localFormatDate.charAt(0).toUpperCase() + localFormatDate.slice(1)} -
+              ${hourAndMinutes}`}
             </p>
 
             <h1 data-testid="fishbowl-name" className="title-lg">
@@ -129,9 +144,11 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
               </Link>
             )}
           </StyledInvitationHero>
+
           <StyledMobileDataCard>
-            <FishbowlDataCard data={fishbowl} />
+            <FishbowlDataCard fromLanding isModerator={isModeratorLanding} data={fishbowl} />
           </StyledMobileDataCard>
+
           <div className="fishbowl-preview">
             <Image
               src="/img/web/stooa-preview.png"
@@ -179,7 +196,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
           </StyledInvitationFormWrapper>
         </StyledInvitationContent>
         <StyledFixedFishbowlData>
-          <FishbowlDataCard fromLanding data={fishbowl} />
+          <FishbowlDataCard fromLanding isModerator={isModeratorLanding} data={fishbowl} />
         </StyledFixedFishbowlData>
       </StyledInvitationLanding>
     </>
