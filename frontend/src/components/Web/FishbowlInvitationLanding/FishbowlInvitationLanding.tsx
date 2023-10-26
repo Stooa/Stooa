@@ -41,7 +41,7 @@ interface Props {
 }
 
 const MINUTE = 60 * 1000;
-const MINUTES_TO_START_FISHBOWL = 60;
+const MINUTES_TO_START_FISHBOWL = 30;
 
 const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
   const [sentRegistration, setSentRegistration] = useState(false);
@@ -49,10 +49,10 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
 
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { invitationTitle, invitationSubtitle, invitationText, startDateTimeTz, host } = fishbowl;
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation('fishbowl');
   const intervalRef = useRef<number>();
 
-  const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
     variables: { slug: fishbowl.slug }
   });
 
@@ -67,7 +67,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
         fishbowlReady: true
       });
     } else {
-      console.log('[STOOA] More than 1 hour to start fishbowl');
+      console.log('[STOOA] More than 30 minutes to start fishbowl');
     }
   };
 
@@ -86,10 +86,10 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (!isTimeLessThanNMinutes(fishbowl.startDateTimeTz, MINUTES_TO_START_FISHBOWL)) {
+    if (!loading && !isTimeLessThanNMinutes(fishbowl.startDateTimeTz, MINUTES_TO_START_FISHBOWL)) {
       setIsModeratorLanding(!!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl);
     }
-  }, []);
+  }, [loading]);
 
   const startDateTime = new Date(startDateTimeTz);
 
@@ -134,11 +134,11 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
                 <Button disabled={sentRegistration} size="large">
                   {sentRegistration ? (
                     <>
-                      Apuntado
+                      {t('invitationLanding.registered')}
                       <Check />
                     </>
                   ) : (
-                    <>Me apunto</>
+                    <>{t('invitationLanding.cta')}</>
                   )}
                 </Button>
               </Link>
@@ -170,7 +170,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
                   exit={{ opacity: 0 }}
                   className="title-sm"
                 >
-                  ¡Te has apuntado al fishbowl correctamente!
+                  {t('invitationLanding.success')}
                 </motion.h3>
                 <motion.div
                   initial={{ y: 100, opacity: 0 }}
@@ -189,7 +189,7 @@ const FishbowlInvitationLanding = ({ fishbowl, handleJoinAsGuest }: Props) => {
 
             {!sentRegistration && !isTimeLessThanNMinutes(startDateTime, 60) && (
               <>
-                <h3 className="title-sm">Apúntate al Fishbowl. ¡Es gratis!</h3>
+                <h3 className="title-sm">{t('invitationLanding.formTitle')}</h3>
                 <RegisterInvitation onSubmit={onSubmit} fishbowl={fishbowl} />
               </>
             )}

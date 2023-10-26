@@ -215,5 +215,12 @@
         "modalBody": "Before we start, we need you to <span>indicate in which language you will be participating</span> in this conversation.",
         "tooltip": "Please specify what language you speak.",
         "translate": "Translate"
+    },
+    "invitationLanding" : {
+        "cta": "I'm in!",
+        "register": "Register",
+        "registered": "You are already registered",
+        "success": "You have successfully registered",
+        "formTitle": "Sign up to the Fishbowl. It's free!"
     }
 }
