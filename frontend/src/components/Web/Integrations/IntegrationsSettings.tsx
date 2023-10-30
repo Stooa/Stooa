@@ -33,10 +33,10 @@ const IntegrationsPage = () => {
   const { code } = query;
 
   useEffect(() => {
-    if (code) {
+    if (!data?.selfUser.hasHubspotRefreshToken && code) {
       createHubspotToken(code as string);
     }
-  }, [code, createHubspotToken]);
+  }, [code, createHubspotToken, data]);
 
   return (
     <LayoutWeb>
