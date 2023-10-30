@@ -40,4 +40,4 @@ export const GITHUB_ROADMAP = `${GITHUB_BASE}/Stooa/projects/1`;
 export const GITBOOK_DOCUMENTATION = `https://docs.stooa.com`;
 export const GITBOOK_CONDUCT = `https://docs.stooa.com/documentation/code_of_conduct`;
 export const ROUTE_HUBSPOT = '/hubspot';
-export const ROUTE_HUBSPOT_RETURN = '/hubspot-return';
+export const ROUTE_HUBSPOT_RETURN = '/integrations';
