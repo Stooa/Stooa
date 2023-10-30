@@ -14,6 +14,8 @@ import styled from 'styled-components';
 
 const IntegrationsSettingsWrapper = styled.div`
   width: 500px;
+  padding-top: ${space(8)};
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,10 +24,11 @@ const IntegrationsSettingsWrapper = styled.div`
 
 const StyledIntegrationItem = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
+
   padding: ${space(2)};
-  gap: ${space(2)};
+  gap: ${space(4)};
 
   background-color: ${COLOR_NEUTRO_100};
 
@@ -49,9 +52,16 @@ const StyledItemDescription = styled.div`
   align-items: center;
 `;
 
+const StyledIntegrationContent = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export {
   IntegrationsSettingsWrapper,
   StyledIntegrationItem,
   StyledItemsWrapper,
-  StyledItemDescription
+  StyledItemDescription,
+  StyledIntegrationContent
 };

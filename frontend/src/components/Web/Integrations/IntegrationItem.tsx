@@ -8,9 +8,10 @@
  */
 
 import React from 'react';
-import { StyledIntegrationItem, StyledItemDescription } from './styles';
+import { StyledIntegrationItem, StyledItemDescription, StyledIntegrationContent } from './styles';
 
-import Link from 'next/link';
+import Button from '@/components/Common/Button';
+import { SyncHubspotContacts } from '@/repository/SyncHubspotContacts';
 
 interface Props {
   syncUrl: string;
@@ -20,13 +21,21 @@ interface Props {
 }
 
 export const IntegrationItem = ({ syncUrl, unsyncUrl, synced, children }: Props) => {
+  // TODO: If this goes to prod make a prop with actions and map then into buttons
+  const handleSyncContacts = async () => {
+    const data = await SyncHubspotContacts();
+    console.log(data);
+  };
   return (
     <StyledIntegrationItem>
-      <StyledItemDescription>{children}</StyledItemDescription>
+      <StyledIntegrationContent>
+        <StyledItemDescription>{children}</StyledItemDescription>
+        <a href={synced ? unsyncUrl : syncUrl} className="medium colored">
+          {synced ? 'Unsync' : 'Sync'}
+        </a>
+      </StyledIntegrationContent>
 
-      <Link href={synced ? unsyncUrl : syncUrl} className="medium colored">
-        {synced ? 'Unsync' : 'Sync'}
-      </Link>
+      {synced && <Button onClick={handleSyncContacts}>Vincular usuarios</Button>}
     </StyledIntegrationItem>
   );
 };
