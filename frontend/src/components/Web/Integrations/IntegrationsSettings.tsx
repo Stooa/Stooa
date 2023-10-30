@@ -46,7 +46,7 @@ const IntegrationsPage = () => {
 
         <StyledItemsWrapper>
           <IntegrationItem
-            synced={data?.selfUser.hasHubspotRefreshToken}
+            synced={data?.selfUser.hasHubspotRefreshToken || false}
             unsyncUrl="emptyfornow?"
             syncUrl={hubspotUrl}
           >
