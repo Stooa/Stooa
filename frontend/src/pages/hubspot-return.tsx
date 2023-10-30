@@ -13,10 +13,11 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_SELF_USER } from '@/graphql/User';
 import { useUserAuth } from '@/user/auth/useUserAuth';
+
 const HubspotReturn = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const [response, setResponse] = useState<string|null>('');
+  const [response, setResponse] = useState<string | null>('');
   const { data } = useQuery(GET_SELF_USER);
   const { createHubspotToken } = useUserAuth();
 

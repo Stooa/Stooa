@@ -13,6 +13,7 @@ import api from '@/lib/api';
 import LocaleCookie from '@/lib/LocaleCookie';
 import { useUser } from '@/jitsi';
 import { COOKIE_OPTIONS, getAuthToken } from '.';
+import { useCallback } from 'react';
 
 const COOKIE_SHARE_LINK_COOKIE = 'share_link';
 const COOKIE_ON_BOARDING_MODERATOR = 'on_boarding_moderator';
@@ -62,7 +63,7 @@ export const useUserAuth = () => {
     });
   };
 
-  const createHubspotToken = async (code: string) => {
+  const createHubspotToken = useCallback(async (code: string) => {
     const auth = await getAuthToken();
     api
       .post(
@@ -81,7 +82,7 @@ export const useUserAuth = () => {
       .catch(error => {
         console.log('----> error', error);
       });
-  };
+  }, []);
 
   const ping = async (lang: string, slug: string) => {
     const auth = await getAuthToken();
