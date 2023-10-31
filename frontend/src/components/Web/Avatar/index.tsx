@@ -16,7 +16,7 @@ import {
   ROUTE_CHANGE_PASSWORD,
   ROUTE_FISHBOWL_SCHEDULED,
   ROUTE_FISHBOWL_FINISHED,
-  ROUTE_HUBSPOT
+  ROUTE_INTEGRATIONS
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
@@ -30,7 +30,7 @@ import CheckList from '@/ui/svg/check-list.svg';
 import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
 import Trans from 'next-translate/Trans';
 
-const Avatar: React.FC = () => {
+const Avatar = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const { user, logout } = useAuth();
@@ -82,9 +82,9 @@ const Avatar: React.FC = () => {
             <Pencil />
             <span>{t('editProfile')}</span>
           </Link>
-          <Link href={ROUTE_HUBSPOT} className="item">
+          <Link href={ROUTE_INTEGRATIONS} className="item">
             <Url />
-            <span>Hubspot integration</span>
+            <span>Integrations</span>
           </Link>
           <Link href={ROUTE_CHANGE_PASSWORD} className="item">
             <Lock />

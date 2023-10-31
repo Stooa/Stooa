@@ -7,35 +7,49 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { StyledIntegrationItem, StyledItemDescription, StyledIntegrationContent } from './styles';
 
 import Button from '@/components/Common/Button';
-import { SyncHubspotContacts } from '@/repository/SyncHubspotContacts';
+import Hubspot from '@/lib/Integrations/Hubspot';
 
 interface Props {
   syncUrl: string;
-  unsyncUrl: string;
   children: JSX.Element | JSX.Element[];
   synced?: boolean;
+  onUnSync?: () => void;
 }
 
-export const IntegrationItem = ({ syncUrl, unsyncUrl, synced, children }: Props) => {
+export const IntegrationItem = ({ syncUrl, synced, children, onUnSync }: Props) => {
+  const [isSyncedStarted, setIsSyncedStarted] = useState(false);
+
   // TODO: If this goes to prod make a prop with actions and map then into buttons
   const handleSyncContacts = async () => {
-    const data = await SyncHubspotContacts();
-    console.log(data);
+    await Hubspot.syncHubspotContacts();
+    setIsSyncedStarted(true);
   };
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (synced) {
+      e.preventDefault();
+      onUnSync && onUnSync();
+    }
+  };
+
   return (
     <StyledIntegrationItem>
       <StyledIntegrationContent>
         <StyledItemDescription>{children}</StyledItemDescription>
-        <a href={synced ? unsyncUrl : syncUrl} className="medium colored">
+        <a href={synced ? '' : syncUrl} onClick={handleClick} className="medium colored">
           {synced ? 'Unsync' : 'Sync'}
         </a>
       </StyledIntegrationContent>
 
-      {synced && <Button onClick={handleSyncContacts}>Vincular usuarios</Button>}
+      {synced && (
+        <Button disabled={isSyncedStarted} onClick={handleSyncContacts}>
+          Vincular usuarios
+        </Button>
+      )}
     </StyledIntegrationItem>
   );
 };
