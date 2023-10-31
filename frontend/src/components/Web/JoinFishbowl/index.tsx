@@ -29,7 +29,7 @@ interface Props {
 const MINUTE = 60 * 1000;
 const MINUTES_TO_START_FISHBOWL = 60;
 
-const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
+const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
   const [{ fishbowlReady }, dispatch] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('fishbowl');
@@ -37,6 +37,7 @@ const JoinFishbowl: React.FC<Props> = ({ data, joinAsGuest }) => {
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
 
+  // TODO: CHANGE TO 1 TIMEOUT
   const evaluateFishbowlReady = () => {
     const isReady = isTimeLessThanNMinutes(data.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
 

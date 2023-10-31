@@ -12,7 +12,6 @@ import React from 'react';
 import Decoration from '@/components/Web/Decoration';
 import Footer from '@/components/Web/Footer';
 import Header from '@/components/Web/Header';
-import Seo from '@/components/Web/Seo';
 import {
   Container,
   Header as HeaderStyled,
@@ -28,15 +27,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Page = ({
-  children,
-  center = true,
-  decorated = false,
-  navigation = true,
-  title = ''
-}: Props) => (
+const Page = ({ children, center = true, decorated = false, navigation = true }: Props) => (
   <>
-    <Seo title={title} />
     <Container className={decorated ? 'decorated' : ''}>
       <HeaderStyled>
         <Header navigation={navigation} />
