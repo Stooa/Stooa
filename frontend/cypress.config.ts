@@ -8,7 +8,6 @@
  */
 
 import { defineConfig } from 'cypress';
-import coverage from '@cypress/code-coverage/task';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
 import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,8 +24,6 @@ export default defineConfig({
     video: false,
     videosFolder: 'tests/e2e/videos',
     async setupNodeEvents(on, config) {
-      coverage(on, config);
-
       await addCucumberPreprocessorPlugin(on, config);
 
       on(
