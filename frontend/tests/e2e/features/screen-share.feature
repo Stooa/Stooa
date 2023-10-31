@@ -7,7 +7,7 @@ Feature: Fishbowl
         And has host role
         And a desktop computer
         And a fishbowl with introduction
-        When navigates to fishbowl
+        When navigates to fishbowl with slug "current-with-introduction-fishbowl"
         And can access to pre join
         And clicks on "Join the fishbowl" button
         And sees the prefishbowl page with introduction

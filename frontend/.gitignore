@@ -40,6 +40,7 @@ npm-debug.log*
 # cypress
 tests/e2e/screenshots
 tests/e2e/videos
+cypress/downloads/downloads.html
 
 # typescript
 tsconfig.tsbuildinfo

@@ -11,7 +11,7 @@ import { ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { StyledButtonWrapper } from './styles';
 
 const options = {
@@ -30,9 +30,9 @@ const FixedButton = ({ buttonText }: { buttonText: string }) => {
     }
   }, []);
 
-  const observer = useMemo(() => new IntersectionObserver(showButton, options), [showButton]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(showButton, options);
 
-  useLayoutEffect(() => {
     const billboard = document.getElementById('billboard');
 
     if (billboard && observer) {
@@ -44,7 +44,7 @@ const FixedButton = ({ buttonText }: { buttonText: string }) => {
         observer.unobserve(billboard);
       }
     };
-  }, [observer]);
+  }, []);
 
   if (!isVisible) {
     return null;

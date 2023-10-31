@@ -7,4 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export { default } from '@cypress/code-coverage/middleware/nextjs';
+export * from './FavIconsHead';
+export { default } from './FavIconsHead';
