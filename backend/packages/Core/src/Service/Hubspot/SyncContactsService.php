@@ -28,7 +28,7 @@ class SyncContactsService
     ) {
     }
 
-    public function syncContacts(User $user): ?\DateTimeImmutable
+    public function syncContacts(User $user): ?User
     {
         $fishbowls = $this->fishbowlRepository->findAllByUser($user);
 
@@ -50,6 +50,6 @@ class SyncContactsService
 
         $this->userRepository->persist($user);
 
-        return $now;
+        return $user;
     }
 }
