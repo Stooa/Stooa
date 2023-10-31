@@ -1,11 +1,11 @@
 Feature: Fishbowl
-    As a user
-    I can give my feedback
+As a user
+I can give my feedback
 #     Scenario: User can see the feedback button and the from
 #         Given a logged user
 #         And doesn't have host role
 #         And a not owned started fishbowl
-#         When navigates to fishbowl
+#         When navigates to fishbowl with slug
 #         And clicks on "Join the fishbowl" button
 #         Then can click on the feedback button
 #         And sees the feedback form
@@ -14,7 +14,7 @@ Feature: Fishbowl
 #         Given a logged user
 #         And doesn't have host role
 #         And a not owned started fishbowl
-#         When navigates to fishbowl
+#         When navigates to fishbowl with slug
 #         And clicks on "Join the fishbowl" button
 #         And clicks on the feedback button
 #         And clicks the okay button
@@ -26,7 +26,7 @@ Feature: Fishbowl
 #         Given a logged user
 #         And doesn't have host role
 #         And a not owned started fishbowl
-#         When navigates to fishbowl
+#         When navigates to fishbowl with slug
 #         And clicks on "Join the fishbowl" button
 #         And clicks on the feedback button
 #         And clicks the okay button
@@ -39,7 +39,7 @@ Feature: Fishbowl
 #         Given a non logged user
 #         And doesn't have host role
 #         And a not owned started fishbowl
-#         When navigates to fishbowl
+#         When navigates to fishbowl with slug
 #         And clicks on "Join as guest user" button
 #         And writes "Guestname" in input "name"
 #         And clicks on "Join the fishbowl" button
@@ -56,7 +56,7 @@ Feature: Fishbowl
 #         Given a non logged user
 #         And doesn't have host role
 #         And a not owned started fishbowl
-#         When navigates to fishbowl
+#         When navigates to fishbowl with slug
 #         And clicks on "Join as guest user" button
 #         And writes "Guestname" in input "name"
 #         And clicks on "Join the fishbowl" button
