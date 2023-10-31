@@ -27,6 +27,8 @@ const IntegrationsPage = () => {
 
   const [syncedHubspot, setSyncedHubspot] = useState<boolean>();
   const [isSyncedStarted, setIsSyncedStarted] = useState(false);
+  const [dateFromCallback, setDateFromCallback] = useState<string>();
+
   const [confirmSyncContactsModal, setConfirmSyncContactsModal] = useState(false);
   const [confirmUnsyncHubspot, setConfirmUnsyncHubspot] = useState(false);
 
@@ -48,9 +50,10 @@ const IntegrationsPage = () => {
   };
 
   const handleSyncContacts = async () => {
-    await Hubspot.syncHubspotContacts();
+    const data = await Hubspot.syncHubspotContacts();
     setIsSyncedStarted(true);
     setConfirmSyncContactsModal(false);
+    setDateFromCallback(data.response);
   };
 
   useEffect(() => {
@@ -107,12 +110,12 @@ const IntegrationsPage = () => {
 
         <StyledItemsWrapper>
           <IntegrationItem
-            disabledSync={isSyncedStarted || data?.selfUser.lastSyncDate !== null}
+            disabledSync={isSyncedStarted || !syncedHubspot}
             synced={syncedHubspot}
             syncUrl={hubspotUrl}
             onUnSync={() => setConfirmUnsyncHubspot(true)}
             onButtonAction={() => setConfirmSyncContactsModal(true)}
-            lastSyncDate={data?.selfUser.lastSyncDate}
+            lastSyncDate={dateFromCallback ?? data?.selfUser.lastSyncDate}
           >
             <HubspotLogo />
             <span>Hubspot</span>
