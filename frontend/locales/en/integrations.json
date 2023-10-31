@@ -4,8 +4,8 @@
     "integrationItems": {
         "hubspot": {
             "title": "Hubspot",
-            "sync": "Link",
-            "unsync": "Unlink",
+            "sync": "Connect",
+            "unsync": "Disconnect",
             "syncAction": "Sync Contacts",
             "syncActionModalTitle": "Are you sure you want to sync all contacts?",
             "syncActionModalBody": "All contacts of the participants who have attended a Fishbowl organized by you will be synchronized.",
