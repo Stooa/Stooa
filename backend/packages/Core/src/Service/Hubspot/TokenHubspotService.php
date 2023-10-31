@@ -22,7 +22,7 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 class TokenHubspotService
 {
-    public const MINUTES_15 = 900;
+    final public const MINUTES_15 = 900;
 
     public function __construct(
         protected readonly UserRepository $userRepository,
