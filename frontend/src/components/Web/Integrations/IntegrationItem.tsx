@@ -7,27 +7,35 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState } from 'react';
-import { StyledIntegrationItem, StyledItemDescription, StyledIntegrationContent } from './styles';
+import {
+  StyledIntegrationItem,
+  StyledItemDescription,
+  StyledIntegrationContent,
+  StyledSyncActions
+} from './styles';
 
 import Button from '@/components/Common/Button';
-import Hubspot from '@/lib/Integrations/Hubspot';
 
 interface Props {
+  onButtonAction: () => void;
+  disabledSync: boolean;
   syncUrl: string;
   children: JSX.Element | JSX.Element[];
   synced?: boolean;
   onUnSync?: () => void;
+  lastSyncDate?: string;
 }
 
-export const IntegrationItem = ({ syncUrl, synced, children, onUnSync }: Props) => {
-  const [isSyncedStarted, setIsSyncedStarted] = useState(false);
-
+export const IntegrationItem = ({
+  syncUrl,
+  synced,
+  children,
+  onUnSync,
+  disabledSync,
+  onButtonAction,
+  lastSyncDate
+}: Props) => {
   // TODO: If this goes to prod make a prop with actions and map then into buttons
-  const handleSyncContacts = async () => {
-    await Hubspot.syncHubspotContacts();
-    setIsSyncedStarted(true);
-  };
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (synced) {
@@ -36,19 +44,42 @@ export const IntegrationItem = ({ syncUrl, synced, children, onUnSync }: Props) 
     }
   };
 
+  const formatLastSyncDateWithHour = (date: string) => {
+    const parsedDate = new Date(date);
+    const day = parsedDate.getDate();
+    const month = parsedDate.getMonth() + 1;
+    const year = parsedDate.getFullYear();
+    const hour = parsedDate.getHours();
+    const minutes = parsedDate.getMinutes();
+
+    return `${hour}:${minutes} - ${day}/${month}/${year} `;
+  };
+
   return (
     <StyledIntegrationItem>
       <StyledIntegrationContent>
         <StyledItemDescription>{children}</StyledItemDescription>
-        <a href={synced ? '' : syncUrl} onClick={handleClick} className="medium colored">
+        <a
+          href={synced ? '' : syncUrl}
+          onClick={handleClick}
+          className={`medium colored ${synced ? 'red' : ''}`}
+        >
           {synced ? 'Unsync' : 'Sync'}
         </a>
       </StyledIntegrationContent>
 
-      {synced && (
-        <Button disabled={isSyncedStarted} onClick={handleSyncContacts}>
-          Vincular usuarios
-        </Button>
+      {(synced || lastSyncDate) && (
+        <StyledSyncActions>
+          {lastSyncDate && (
+            <span>
+              Última sincronización: <br />
+              {formatLastSyncDateWithHour(lastSyncDate)}
+            </span>
+          )}
+          <Button disabled={disabledSync} onClick={onButtonAction}>
+            Sincronizar contactos
+          </Button>
+        </StyledSyncActions>
       )}
     </StyledIntegrationItem>
   );

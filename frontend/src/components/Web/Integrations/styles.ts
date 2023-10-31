@@ -9,7 +9,7 @@
 
 import { BODY_LG, mediumWeight } from '@/ui/Texts';
 import { space } from '@/ui/helpers';
-import { COLOR_NEUTRO_100, COLOR_NEUTRO_400 } from '@/ui/settings';
+import { COLOR_NEUTRO_100, COLOR_NEUTRO_400, COLOR_RED_500 } from '@/ui/settings';
 import styled from 'styled-components';
 
 const IntegrationsSettingsWrapper = styled.div`
@@ -28,7 +28,7 @@ const StyledIntegrationItem = styled.div`
   align-items: flex-end;
 
   padding: ${space(2)};
-  gap: ${space(4)};
+  gap: ${space(2)};
 
   background-color: ${COLOR_NEUTRO_100};
 
@@ -57,6 +57,22 @@ const StyledIntegrationContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & a.red {
+    color: ${COLOR_RED_500};
+  }
+`;
+
+const StyledSyncActions = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${space(2)};
+
+  padding-left: ${space(5.1)};
+
+  text-align: left;
 `;
 
 export {
@@ -64,5 +80,6 @@ export {
   StyledIntegrationItem,
   StyledItemsWrapper,
   StyledItemDescription,
-  StyledIntegrationContent
+  StyledIntegrationContent,
+  StyledSyncActions
 };
