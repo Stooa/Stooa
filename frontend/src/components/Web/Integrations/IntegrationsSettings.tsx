@@ -21,8 +21,10 @@ import Hubspot from '@/lib/Integrations/Hubspot';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import ConfirmationModal from '@/components/Common/ConfirmationModal';
+import useTranslation from 'next-translate/useTranslation';
 
 const IntegrationsPage = () => {
+  const { t } = useTranslation('integrations');
   const { query, replace } = useRouter();
 
   const [syncedHubspot, setSyncedHubspot] = useState<boolean>();
@@ -87,26 +89,26 @@ const IntegrationsPage = () => {
       {confirmSyncContactsModal && (
         <ConfirmationModal
           closeModal={() => setConfirmSyncContactsModal(false)}
-          actionText="Sync contacts"
+          actionText={t('integrationItems.hubspot.syncAction')}
           onSubmit={handleSyncContacts}
-          title="Are you sure you want to sync your contactts with hubspot?"
-          body="Se sincronizaran todos los contactos de los participantes que hayan asistido a un Fishbowl organizado por ti."
+          title={t('integrationItems.hubspot.syncActionModalTitle')}
+          body={t('integrationItems.hubspot.syncActionModalBody')}
         />
       )}
 
       {confirmUnsyncHubspot && (
         <ConfirmationModal
           closeModal={() => setConfirmUnsyncHubspot(false)}
-          actionText="Unsync"
+          actionText={t('integrationItems.hubspot.unsync')}
           onSubmit={handleUnSync}
-          title="Are you sure you want to unsync your hubspot account?"
-          body="Se eliminará la sincronización con hubspot y no podrás volver a sincronizar tu cuenta."
+          title={t('integrationItems.hubspot.unsyncActionModalTitle')}
+          body={t('integrationItems.hubspot.unsyncActionModalBody')}
         />
       )}
 
       <IntegrationsSettingsWrapper>
-        <h1>Integrations</h1>
-        <p>You can sync your Stooa account with other applications and services</p>
+        <h1>{t('title')}</h1>
+        <p>{t('subtitle')}</p>
 
         <StyledItemsWrapper>
           <IntegrationItem
@@ -118,7 +120,7 @@ const IntegrationsPage = () => {
             lastSyncDate={dateFromCallback ?? data?.selfUser.lastSyncDate}
           >
             <HubspotLogo />
-            <span>Hubspot</span>
+            <span>{t('integrationItems.hubspot.title')}</span>
           </IntegrationItem>
         </StyledItemsWrapper>
       </IntegrationsSettingsWrapper>
