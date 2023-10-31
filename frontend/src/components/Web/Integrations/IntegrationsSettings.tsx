@@ -14,42 +14,66 @@ import HubspotLogo from '@/ui/svg/hubspot.svg';
 import { useQuery } from '@apollo/client';
 import { GET_SELF_USER } from '@/graphql/User';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserAuth } from '@/user/auth/useUserAuth';
-import { ROUTE_HUBSPOT_RETURN } from '@/app.config';
+import { ROUTE_INTEGRATIONS } from '@/app.config';
+import Hubspot from '@/lib/Integrations/Hubspot';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const IntegrationsPage = () => {
-  const { query } = useRouter();
+  const { query, replace } = useRouter();
 
   const { data } = useQuery(GET_SELF_USER);
+  const [syncedHubspot, setSyncedHubspot] = useState<boolean>();
   const { createHubspotToken } = useUserAuth();
 
   const hubspotUrl = `${process.env.NEXT_PUBLIC_HUBSPOT_URL}?client_id=${
     process.env.NEXT_PUBLIC_HUBSPOT_CLIENT_ID
   }&redirect_uri=${
-    process.env.NEXT_PUBLIC_APP_DOMAIN + ROUTE_HUBSPOT_RETURN
+    process.env.NEXT_PUBLIC_APP_DOMAIN + ROUTE_INTEGRATIONS
   }&scope=crm.objects.contacts.read%20crm.objects.contacts.write`;
 
   const { code } = query;
 
+  const handleUnSync = () => {
+    Hubspot.removeHubspotSync();
+    setSyncedHubspot(false);
+  };
+
   useEffect(() => {
-    if (!data?.selfUser.hasHubspotRefreshToken && code) {
-      createHubspotToken(code as string);
+    if (!syncedHubspot && code) {
+      console.log('code', code);
+      createHubspotToken(code as string).then(() => {
+        toast('Hubspot synced successfully', {
+          type: 'success',
+          icon: '👌',
+          position: 'bottom-center',
+          autoClose: 5000
+        });
+      });
+      replace('/integrations');
+      setSyncedHubspot(true);
     }
-  }, [code, createHubspotToken, data]);
+  }, [code, createHubspotToken, syncedHubspot]);
+
+  useEffect(() => {
+    if (data?.selfUser.hasHubspotRefreshToken) {
+      setSyncedHubspot(true);
+    }
+  }, [data]);
+
+  console.log(data);
 
   return (
     <LayoutWeb>
+      <ToastContainer className="toastify-custom" />
       <IntegrationsSettingsWrapper>
         <h1>Integrations</h1>
         <p>You can sync your Stooa account with other applications and services</p>
 
         <StyledItemsWrapper>
-          <IntegrationItem
-            synced={data?.selfUser.hasHubspotRefreshToken || false}
-            unsyncUrl="emptyfornow?"
-            syncUrl={hubspotUrl}
-          >
+          <IntegrationItem synced={syncedHubspot} syncUrl={hubspotUrl} onUnSync={handleUnSync}>
             <HubspotLogo />
             <span>Hubspot</span>
           </IntegrationItem>

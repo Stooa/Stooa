@@ -27,7 +27,7 @@ import { ROUTE_FISHBOWL, ROUTE_REGISTER } from '@/app.config';
 import { useStateValue } from '@/contexts/AppContext';
 import ParticipantPlaceholder from '@/components/App/ParticipantPlaceholder';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import { getApiParticipantList } from '@/lib/ApiParticipantRepository';
 import SpinningLoader from '@/components/Common/SpinningLoader/SpinningLoader';
 
 const PING_TIMEOUT = 3500;
