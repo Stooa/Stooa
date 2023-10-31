@@ -93,10 +93,6 @@ const Modal = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-top: ${space(3)};
-
-    > *:last-child {
-      margin-top: ${space(2)};
-    }
   }
 `;
 

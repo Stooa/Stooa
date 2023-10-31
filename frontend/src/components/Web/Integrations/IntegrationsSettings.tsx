@@ -20,12 +20,17 @@ import { ROUTE_INTEGRATIONS } from '@/app.config';
 import Hubspot from '@/lib/Integrations/Hubspot';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import ConfirmationModal from '@/components/Common/ConfirmationModal';
 
 const IntegrationsPage = () => {
   const { query, replace } = useRouter();
 
-  const { data } = useQuery(GET_SELF_USER);
   const [syncedHubspot, setSyncedHubspot] = useState<boolean>();
+  const [isSyncedStarted, setIsSyncedStarted] = useState(false);
+  const [confirmSyncContactsModal, setConfirmSyncContactsModal] = useState(false);
+  const [confirmUnsyncHubspot, setConfirmUnsyncHubspot] = useState(false);
+
+  const { data } = useQuery(GET_SELF_USER);
   const { createHubspotToken } = useUserAuth();
 
   const hubspotUrl = `${process.env.NEXT_PUBLIC_HUBSPOT_URL}?client_id=${
@@ -38,7 +43,14 @@ const IntegrationsPage = () => {
 
   const handleUnSync = () => {
     Hubspot.removeHubspotSync();
+    setConfirmUnsyncHubspot(false);
     setSyncedHubspot(false);
+  };
+
+  const handleSyncContacts = async () => {
+    await Hubspot.syncHubspotContacts();
+    setIsSyncedStarted(true);
+    setConfirmSyncContactsModal(false);
   };
 
   useEffect(() => {
@@ -68,12 +80,40 @@ const IntegrationsPage = () => {
   return (
     <LayoutWeb>
       <ToastContainer className="toastify-custom" />
+
+      {confirmSyncContactsModal && (
+        <ConfirmationModal
+          closeModal={() => setConfirmSyncContactsModal(false)}
+          actionText="Sync contacts"
+          onSubmit={handleSyncContacts}
+          title="Are you sure you want to sync your contactts with hubspot?"
+          body="Se sincronizaran todos los contactos de los participantes que hayan asistido a un Fishbowl organizado por ti."
+        />
+      )}
+
+      {confirmUnsyncHubspot && (
+        <ConfirmationModal
+          closeModal={() => setConfirmUnsyncHubspot(false)}
+          actionText="Unsync"
+          onSubmit={handleUnSync}
+          title="Are you sure you want to unsync your hubspot account?"
+          body="Se eliminará la sincronización con hubspot y no podrás volver a sincronizar tu cuenta."
+        />
+      )}
+
       <IntegrationsSettingsWrapper>
         <h1>Integrations</h1>
         <p>You can sync your Stooa account with other applications and services</p>
 
         <StyledItemsWrapper>
-          <IntegrationItem synced={syncedHubspot} syncUrl={hubspotUrl} onUnSync={handleUnSync}>
+          <IntegrationItem
+            disabledSync={isSyncedStarted || data?.selfUser.lastSyncDate !== null}
+            synced={syncedHubspot}
+            syncUrl={hubspotUrl}
+            onUnSync={() => setConfirmUnsyncHubspot(true)}
+            onButtonAction={() => setConfirmSyncContactsModal(true)}
+            lastSyncDate={data?.selfUser.lastSyncDate}
+          >
             <HubspotLogo />
             <span>Hubspot</span>
           </IntegrationItem>
