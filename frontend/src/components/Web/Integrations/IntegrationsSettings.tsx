@@ -52,7 +52,20 @@ const IntegrationsPage = () => {
   };
 
   const handleSyncContacts = async () => {
-    const data = await Hubspot.syncHubspotContacts();
+    let data;
+    try {
+      data = await Hubspot.syncHubspotContacts();
+    } catch (error) {
+      data = error;
+    }
+
+    toast(t('integrationItems.hubspot.contactsSyncedSuccessfully'), {
+      type: 'success',
+      icon: '👌',
+      position: 'bottom-center',
+      autoClose: 5000
+    });
+
     setIsSyncedStarted(true);
     setConfirmSyncContactsModal(false);
     setDateFromCallback(data.response);
@@ -62,7 +75,7 @@ const IntegrationsPage = () => {
     if (!syncedHubspot && code) {
       console.log('code', code);
       createHubspotToken(code as string).then(() => {
-        toast('Hubspot synced successfully', {
+        toast(t('integrationItems.hubspot.linkedSuccessfully'), {
           type: 'success',
           icon: '👌',
           position: 'bottom-center',
