@@ -28,12 +28,12 @@ class SyncContactsService
     ) {
     }
 
-    public function syncContacts(User $user): void
+    public function syncContacts(User $user): ?\DateTimeImmutable
     {
         $fishbowls = $this->fishbowlRepository->findAllByUser($user);
 
         if (null === $fishbowls) {
-            return;
+            return null;
         }
 
         foreach ($fishbowls as $fishbowl) {
@@ -44,8 +44,12 @@ class SyncContactsService
             $this->bus->dispatch(new SyncHubspotNotification($id));
         }
 
-        $user->setLastSyncDate(new \DateTimeImmutable());
+        $now = new \DateTimeImmutable();
+
+        $user->setLastSyncDate($now);
 
         $this->userRepository->persist($user);
+
+        return $now;
     }
 }
