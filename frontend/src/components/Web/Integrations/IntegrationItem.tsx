@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import useTranslation from 'next-translate/useTranslation';
 import {
   StyledIntegrationItem,
   StyledItemDescription,
@@ -36,6 +37,7 @@ export const IntegrationItem = ({
   lastSyncDate
 }: Props) => {
   // TODO: If this goes to prod make a prop with actions and map then into buttons
+  const { t } = useTranslation('integrations');
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (synced) {
@@ -64,7 +66,7 @@ export const IntegrationItem = ({
           onClick={handleClick}
           className={`medium colored ${synced ? 'red' : ''}`}
         >
-          {synced ? 'Unsync' : 'Sync'}
+          {synced ? t('integrationItems.hubspot.unsync') : t('integrationItems.hubspot.sync')}
         </a>
       </StyledIntegrationContent>
 
@@ -72,12 +74,12 @@ export const IntegrationItem = ({
         <StyledSyncActions>
           {lastSyncDate && (
             <span>
-              Última sincronización: <br />
+              {t('integrationItems.hubspot.lastSync')} <br />
               {formatLastSyncDateWithHour(lastSyncDate)}
             </span>
           )}
           <Button disabled={disabledSync} onClick={onButtonAction}>
-            Sincronizar contactos
+            {t('integrationItems.hubspot.syncAction')}
           </Button>
         </StyledSyncActions>
       )}
