@@ -43,8 +43,8 @@ final class SyncContactsHubspotController extends AbstractController
             return new JsonResponse(['error' => 'User does not have a refresh token']);
         }
 
-        $this->syncContactsService->syncContacts($user);
+        $lastSyncDate = $this->syncContactsService->syncContacts($user);
 
-        return new JsonResponse(['response' => 'ok']);
+        return new JsonResponse(['response' => $lastSyncDate]);
     }
 }
