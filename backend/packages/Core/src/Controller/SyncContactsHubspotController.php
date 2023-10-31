@@ -45,6 +45,10 @@ final class SyncContactsHubspotController extends AbstractController
 
         $user = $this->syncContactsService->syncContacts($user);
 
-        return new JsonResponse(['response' => $user->getLastSyncDate()->format(\DateTimeInterface::ATOM)]);
+        if (null === $user || null === $lastSyncDate = $user->getLastSyncDate()) {
+            return new JsonResponse(['error' => 'User not found']);
+        }
+
+        return new JsonResponse(['response' => $lastSyncDate->format(\DateTimeInterface::ATOM)]);
     }
 }
