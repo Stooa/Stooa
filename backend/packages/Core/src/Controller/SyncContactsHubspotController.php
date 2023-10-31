@@ -45,6 +45,6 @@ final class SyncContactsHubspotController extends AbstractController
 
         $user = $this->syncContactsService->syncContacts($user);
 
-        return new JsonResponse(['response' => $user->getLastSyncDate()]);
+        return new JsonResponse(['response' => $user->getLastSyncDate()->format(\DateTimeInterface::ATOM)]);
     }
 }
