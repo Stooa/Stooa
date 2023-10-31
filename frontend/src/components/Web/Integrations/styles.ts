@@ -20,6 +20,10 @@ const IntegrationsSettingsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${space(3)};
+
+  & .subtitle {
+    text-align: left;
+  }
 `;
 
 const StyledIntegrationItem = styled.div`

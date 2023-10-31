@@ -121,7 +121,7 @@ const IntegrationsPage = () => {
 
       <IntegrationsSettingsWrapper>
         <h1>{t('title')}</h1>
-        <p>{t('subtitle')}</p>
+        <p className="subtitle">{t('subtitle')}</p>
 
         <StyledItemsWrapper>
           <IntegrationItem
