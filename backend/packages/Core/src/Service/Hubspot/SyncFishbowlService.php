@@ -44,7 +44,7 @@ class SyncFishbowlService
         foreach ($participants as $participant) {
             $user = $participant->getUser();
 
-            if (null !== $user) {
+            if (null !== $user && $user !== $host) {
                 $this->createContactService->create($host, $user, $fishbowl);
             }
         }
