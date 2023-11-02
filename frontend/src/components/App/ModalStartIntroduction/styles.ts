@@ -41,10 +41,6 @@ const StyledIntroModal = styled(Modal)`
       }
     }
   }
-
-  & .modal-footer {
-    margin-top: 0;
-  }
 `;
 
 export { StyledIntroModal };

@@ -27,8 +27,10 @@ const ModalStopRecording: React.FC<Props> = ({ closeModal, stopRecording }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t('recording.stopModal.title')}</h2>
-        <p className="body-md experimental">{t('recording.stopModal.description')}</p>
+        <div className="modal--body">
+          <h2 className="title-sm">{t('recording.stopModal.title')}</h2>
+          <p className="body-md experimental">{t('recording.stopModal.description')}</p>
+        </div>
 
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>

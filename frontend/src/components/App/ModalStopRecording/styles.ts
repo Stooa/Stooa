@@ -17,27 +17,12 @@ const StyledRecordingModal = styled(Modal)`
     text-align: left;
     padding: ${space(6)} ${space(5)} ${space(3)};
 
-    & ul {
-      padding-left: ${space(3)};
-      text-align: left;
-      list-style: disc;
-      margin-bottom: ${space(6)};
-
-      & li {
-        margin-bottom: ${space(2)};
-      }
-    }
-
     & .modal-footer {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: flex-end;
       gap: ${space(2)};
-
-      & button {
-        margin-top: 0;
-      }
     }
   }
 `;
