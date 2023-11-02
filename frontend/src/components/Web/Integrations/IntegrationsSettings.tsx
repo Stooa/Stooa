@@ -34,7 +34,7 @@ const IntegrationsPage = () => {
   const [confirmSyncContactsModal, setConfirmSyncContactsModal] = useState(false);
   const [confirmUnsyncHubspot, setConfirmUnsyncHubspot] = useState(false);
 
-  const { data } = useQuery(GET_SELF_USER);
+  const { data } = useQuery(GET_SELF_USER, { pollInterval: 1000 });
   const { createHubspotToken } = useUserAuth();
 
   const hubspotUrl = `${process.env.NEXT_PUBLIC_HUBSPOT_URL}?client_id=${
@@ -73,7 +73,6 @@ const IntegrationsPage = () => {
 
   useEffect(() => {
     if (!syncedHubspot && code) {
-      console.log('code', code);
       createHubspotToken(code as string).then(() => {
         toast(t('integrationItems.hubspot.linkedSuccessfully'), {
           type: 'success',
@@ -88,7 +87,7 @@ const IntegrationsPage = () => {
   }, [code, createHubspotToken, syncedHubspot]);
 
   useEffect(() => {
-    if (data?.selfUser.hasHubspotRefreshToken) {
+    if (data?.selfUser.hasHubspotRefreshToken && !syncedHubspot) {
       setSyncedHubspot(true);
     }
   }, [data]);
