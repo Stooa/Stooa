@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { media, space } from '@/ui/helpers';
+import { media } from '@/ui/helpers';
 import Modal from '@/ui/Modal';
 import { BREAKPOINTS } from '@/ui/settings';
 import styled from 'styled-components';
