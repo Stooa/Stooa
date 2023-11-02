@@ -7,22 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { media, space } from '@/ui/helpers';
+import { space } from '@/ui/helpers';
 import Modal from '@/ui/Modal';
-import { BREAKPOINTS } from '@/ui/settings';
+
 import styled from 'styled-components';
 
 const StyledConfirmationModal = styled(Modal)`
-  & .content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: ${space(4)};
-
-    text-align: left;
-  }
-
   & .modal-footer {
     display: flex;
     flex-direction: row;
@@ -31,13 +21,6 @@ const StyledConfirmationModal = styled(Modal)`
     gap: ${space(2)};
     margin: 0;
   }
-
-  /* ${media.min('tablet')`
-    & .content {
-      width: auto;
-      max-width: ${BREAKPOINTS.desktopXL}px;
-    }
-`} */
 `;
 
 export { StyledConfirmationModal };

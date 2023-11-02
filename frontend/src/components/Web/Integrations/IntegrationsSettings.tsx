@@ -93,8 +93,6 @@ const IntegrationsPage = () => {
     }
   }, [data]);
 
-  console.log(data);
-
   return (
     <LayoutWeb>
       <ToastContainer className="toastify-custom" />

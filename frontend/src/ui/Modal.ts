@@ -44,9 +44,13 @@ const Modal = styled.div`
     color: ${COLOR_NEUTRO_700};
     border-radius: ${BORDER_RADIUS};
     max-width: ${rems(422)};
-    padding: ${space(6)} ${space(4)};
+    padding: ${space(5)} ${space(4)};
     position: relative;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: ${space(4)};
 
     & .friend-image {
       margin-bottom: ${space(2)};
@@ -56,6 +60,12 @@ const Modal = styled.div`
     &.white {
       background-color: ${COLOR_NEUTRO_100};
     }
+  }
+
+  & .modal--body {
+    display: flex;
+    flex-direction: column;
+    gap: ${space(1)};
   }
 
   .close {
@@ -80,8 +90,6 @@ const Modal = styled.div`
   }
 
   .description {
-    margin-top: ${space(2)};
-
     & a {
       --font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
     }
@@ -90,29 +98,19 @@ const Modal = styled.div`
   .modal-footer {
     align-items: center;
     display: flex;
+    flex-direction: column;
+    gap: ${space(2)};
     justify-content: center;
     flex-direction: column;
-    margin-top: ${space(3)};
   }
 `;
 
 const StyledLeftAlignedModal = styled(Modal)`
   & .content {
-    max-width: 420px;
     text-align: left;
-    padding: ${space(6)} ${space(5)} ${space(3)};
-
-    & h2 {
-      margin-bottom: ${space(4)};
-    }
 
     & .experimental {
-      margin-bottom: ${space(2)};
       padding-left: 2px;
-    }
-
-    & .body {
-      margin-bottom: ${space(2)};
     }
 
     & ul {

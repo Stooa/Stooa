@@ -17,14 +17,6 @@ const StyledKickModal = styled(Modal)`
     width: 100%;
   }
 
-  & .subtitle {
-    margin-bottom: ${space(5)};
-  }
-
-  & .modal-footer {
-    margin: 0;
-  }
-
   ${media.min('tablet')`
   & .content {
     width: auto;
