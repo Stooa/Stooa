@@ -11,7 +11,9 @@
             "syncActionModalBody": "Es sincronitzaran tots els contactes dels participants que hagin assistit a una Fishbowl organitzada per tu.",
             "unsyncActionModalTitle": "Estàs segur que vols desvincular el teu compte de Hubspot?",
             "unsyncActionModalBody": "Podràs continuar veient els contactes carregats a Hubspot, però no es actualitzaran.",
-            "lastSync": "Última Sincronització: "
+            "lastSync": "Última Sincronització: ",
+            "linkedSuccessfully": "Hubspot vinculat amb èxit",
+            "contactsSyncedSuccessfully": "La sincronització de contactes ha començat amb èxit"
         }
     }
 }

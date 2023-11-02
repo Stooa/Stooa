@@ -71,7 +71,7 @@ export const IntegrationItem = ({
       </StyledIntegrationContent>
 
       {(synced || lastSyncDate) && (
-        <StyledSyncActions>
+        <StyledSyncActions className={lastSyncDate ? 'spaced' : ''}>
           {lastSyncDate && (
             <span>
               {t('integrationItems.hubspot.lastSync')} <br />

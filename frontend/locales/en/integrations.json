@@ -12,8 +12,8 @@
             "unsyncActionModalTitle": "Are you sure you want to unlink your Hubspot account?",
             "unsyncActionModalBody": "You will still be able to view the contacts loaded in Hubspot, but they will not be updated.",
             "lastSync": "Last Sync: ",
-            "linkedSuccessfully": "Hubspot linked Successfully",
-            "contactsSyncedSuccessfully": "Contacts synced Successfully"
+            "linkedSuccessfully": "Hubspot linked successfully",
+            "contactsSyncedSuccessfully": "Contacts syncronization started successfully"
         }
     }
 }
