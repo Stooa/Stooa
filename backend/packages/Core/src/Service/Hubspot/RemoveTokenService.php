@@ -15,13 +15,11 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 use App\Core\Repository\UserRepository;
-use Symfony\Contracts\Cache\CacheInterface;
 
 class RemoveTokenService
 {
     public function __construct(
-        protected readonly UserRepository $userRepository,
-        protected readonly CacheInterface $hubspotCache,
+        protected readonly UserRepository $userRepository
     ) {
     }
 
@@ -30,7 +28,5 @@ class RemoveTokenService
         $user->setHubspotRefreshToken('');
 
         $this->userRepository->persist($user);
-
-        $this->hubspotCache->delete('hubspot_access_token');
     }
 }

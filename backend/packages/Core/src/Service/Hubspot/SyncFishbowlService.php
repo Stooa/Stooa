@@ -16,12 +16,14 @@ namespace App\Core\Service\Hubspot;
 use App\Core\Entity\Participant;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class SyncFishbowlService
 {
     public function __construct(
         protected readonly FishbowlRepository $fishbowlRepository,
-        protected readonly CreateContactService $createContactService
+        protected readonly CreateContactService $createContactService,
+        protected readonly CacheInterface $hubspotCache,
     ) {
     }
 
@@ -38,6 +40,8 @@ class SyncFishbowlService
         if (null === $host) {
             return;
         }
+
+        $this->hubspotCache->delete('hubspot_access_token');
 
         /** @var Participant[] */
         $participants = $fishbowl->getParticipants();
