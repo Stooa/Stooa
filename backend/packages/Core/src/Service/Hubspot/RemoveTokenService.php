@@ -21,7 +21,7 @@ class RemoveTokenService
 {
     public function __construct(
         protected readonly UserRepository $userRepository,
-        protected readonly CacheInterface $cache,
+        protected readonly CacheInterface $hubspotCache,
     ) {
     }
 
@@ -31,6 +31,6 @@ class RemoveTokenService
 
         $this->userRepository->persist($user);
 
-        $this->cache->delete('hubspot_access_token');
+        $this->hubspotCache->delete('hubspot_access_token');
     }
 }
