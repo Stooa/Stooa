@@ -26,7 +26,7 @@ class TokenHubspotService
 
     public function __construct(
         protected readonly UserRepository $userRepository,
-        protected readonly CacheInterface $cache,
+        protected readonly CacheInterface $hubspotCache,
         protected readonly string $redirectUrl,
         protected readonly string $clientId,
         protected readonly string $clientSecret
@@ -58,7 +58,7 @@ class TokenHubspotService
             return null;
         }
 
-        return $this->cache->get('hubspot_access_token', function (CacheItemInterface $cacheItem) use ($user) {
+        return $this->hubspotCache->get('hubspot_access_token', function (CacheItemInterface $cacheItem) use ($user) {
             $cacheItem->expiresAfter(self::MINUTES_15);
 
             $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
@@ -84,7 +84,7 @@ class TokenHubspotService
     {
         $user->setHubspotRefreshToken($refreshToken);
 
-        $this->cache->delete('hubspot_access_token');
+        $this->hubspotCache->delete('hubspot_access_token');
 
         $this->userRepository->persist($user);
     }
