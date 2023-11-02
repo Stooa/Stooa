@@ -70,13 +70,17 @@ const StyledIntegrationContent = styled.div`
 const StyledSyncActions = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
   gap: ${space(2)};
 
   padding-left: ${space(5.1)};
 
   text-align: left;
+
+  &.spaced {
+    justify-content: space-between;
+  }
 `;
 
 export {

@@ -11,7 +11,9 @@
             "syncActionModalBody": "Tous les contacts des participants ayant assisté à une Fishbowl organisée par vous seront synchronisés.",
             "unsyncActionModalTitle": "Êtes-vous sûr de vouloir délier votre compte Hubspot ?",
             "unsyncActionModalBody": "Vous pourrez toujours consulter les contacts chargés dans Hubspot, mais ils ne seront pas mis à jour.",
-            "lastSync": "Dernière synchronisation : "
+            "lastSync": "Dernière synchronisation : ",
+            "linkedSuccessfully": "Hubspot lié avec succès",
+            "contactsSyncedSuccessfully": "La synchronisation des contacts a commencé avec succès"
         }
     }
 }
