@@ -705,4 +705,9 @@ class Fishbowl implements \Stringable
     {
         return false === $this->getIsPrivate() && null !== $this->getPlainPassword();
     }
+
+    public function getCopyName(): string
+    {
+        return "Fishbowl: {$this->getName()}";
+    }
 }

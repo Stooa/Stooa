@@ -46,7 +46,7 @@ class FindContactService
 
         $searchRequest = new PublicObjectSearchRequest();
         $searchRequest->setFilterGroups([$filterGroup]);
-        $searchRequest->setProperties(['email', 'firstname']);
+        $searchRequest->setProperties(['email', 'firstname', 'message']);
 
         $contactsPage = $hubspot->crm()->contacts()->searchApi()->doSearch($searchRequest);
 

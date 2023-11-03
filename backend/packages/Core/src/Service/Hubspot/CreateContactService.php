@@ -44,11 +44,14 @@ class CreateContactService
         $properties = [
             'firstname' => $contact->getFullName(),
             'email' => $contactEmail,
-            'message' => "Fishbowl: {$fishbowl->getName()}",
+            'message' => $fishbowl->getCopyName(),
         ];
 
         if (null !== $contactObject && $this->isSameContact($contact, $contactObject)) {
             $contactInput = new SimplePublicObjectInput();
+
+            $properties['message'] = $this->concatFishbowlName($fishbowl, $contactObject);
+
             $contactInput->setProperties($properties);
 
             $hubspot->crm()->contacts()->basicApi()->update($contactObject->getId(), $contactInput);
@@ -66,5 +69,10 @@ class CreateContactService
     {
         return $contact->getFullName() === $contactObject->getProperties()['firstname']
             && $contact->getEmail() === $contactObject->getProperties()['email'];
+    }
+
+    private function concatFishbowlName(Fishbowl $fishbowl, SimplePublicObject $contactObject): string
+    {
+        return $contactObject->getProperties()['message'] . ", {$fishbowl->getCopyName()}";
     }
 }
