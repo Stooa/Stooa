@@ -8,7 +8,7 @@
             "unsync": "Desvincular",
             "syncAction": "Sincronitzar contactes",
             "syncActionModalTitle": "Estàs segur que vols sincronitzar tots els contactes?",
-            "syncActionModalBody": "Es sincronitzaran tots els contactes dels participants que hagin assistit a una Fishbowl organitzada per tu.",
+            "syncActionModalBody": "Es sincronitzaran tots els contactes registrats dels participants que hagin assistit a una Fishbowl organitzada per tu.",
             "unsyncActionModalTitle": "Estàs segur que vols desvincular el teu compte de Hubspot?",
             "unsyncActionModalBody": "Podràs continuar veient els contactes carregats a Hubspot, però no es actualitzaran.",
             "lastSync": "Última Sincronització: ",

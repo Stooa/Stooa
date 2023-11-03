@@ -708,6 +708,6 @@ class Fishbowl implements \Stringable
 
     public function getCopyName(): string
     {
-        return "Fishbowl: {$this->getName()}";
+        return "{$this->getName()}";
     }
 }
