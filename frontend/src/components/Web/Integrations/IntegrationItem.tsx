@@ -51,8 +51,8 @@ export const IntegrationItem = ({
     const day = parsedDate.getDate();
     const month = parsedDate.getMonth() + 1;
     const year = parsedDate.getFullYear();
-    const hour = parsedDate.getHours();
-    const minutes = parsedDate.getMinutes();
+    const hour = parsedDate.getHours().toString().padStart(2, '0');
+    const minutes = parsedDate.getMinutes().toString().padStart(2, '0');
 
     return `${hour}:${minutes} - ${day}/${month}/${year} `;
   };
