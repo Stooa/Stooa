@@ -13,6 +13,10 @@ import Modal from '@/ui/Modal';
 import styled from 'styled-components';
 
 const StyledConfirmationModal = styled(Modal)`
+  & .content {
+    text-align: left;
+  }
+
   & .modal-footer {
     display: flex;
     flex-direction: row;
