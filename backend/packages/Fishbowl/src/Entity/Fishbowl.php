@@ -241,6 +241,9 @@ class Fishbowl implements \Stringable
     #[ORM\Column(type: 'boolean')]
     private bool $isPrivate = false;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isHubspotSync = false;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $password = null;
 
@@ -266,6 +269,7 @@ class Fishbowl implements \Stringable
         $this->participants = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
         $this->topics = new ArrayCollection();
+        $this->isHubspotSync = false;
     }
 
     public function __toString(): string
@@ -676,6 +680,18 @@ class Fishbowl implements \Stringable
     public function setIsPrivate(bool $isPrivate): self
     {
         $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function isHubspotSync(): bool
+    {
+        return $this->isHubspotSync;
+    }
+
+    public function setIsHubspotSync(bool $isHubspotSync): self
+    {
+        $this->isHubspotSync = $isHubspotSync;
 
         return $this;
     }

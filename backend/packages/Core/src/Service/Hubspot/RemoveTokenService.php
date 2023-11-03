@@ -15,11 +15,13 @@ namespace App\Core\Service\Hubspot;
 
 use App\Core\Entity\User;
 use App\Core\Repository\UserRepository;
+use App\Fishbowl\Repository\FishbowlRepository;
 
 class RemoveTokenService
 {
     public function __construct(
-        protected readonly UserRepository $userRepository
+        protected readonly UserRepository $userRepository,
+        protected readonly FishbowlRepository $fishbowlRepository
     ) {
     }
 
@@ -28,5 +30,17 @@ class RemoveTokenService
         $user->setHubspotRefreshToken('');
 
         $this->userRepository->persist($user);
+
+        $fishbowls = $this->fishbowlRepository->findAllByUser($user);
+
+        if (null === $fishbowls) {
+            return;
+        }
+
+        foreach ($fishbowls as $fishbowl) {
+            $fishbowl->setIsHubspotSync(false);
+
+            $this->fishbowlRepository->persist($fishbowl);
+        }
     }
 }

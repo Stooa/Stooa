@@ -31,7 +31,7 @@ class SyncFishbowlService
     {
         $fishbowl = $this->fishbowlRepository->findById($fishbowlId->toString());
 
-        if (null === $fishbowl) {
+        if (null === $fishbowl || true === $fishbowl->isHubspotSync()) {
             return;
         }
 
@@ -41,7 +41,7 @@ class SyncFishbowlService
             return;
         }
 
-        $this->hubspotCache->delete('hubspot_access_token');
+        $this->resetCache();
 
         /** @var Participant[] */
         $participants = $fishbowl->getParticipants();
@@ -52,5 +52,14 @@ class SyncFishbowlService
                 $this->createContactService->create($host, $user, $fishbowl);
             }
         }
+
+        $fishbowl->setIsHubspotSync(true);
+
+        $this->fishbowlRepository->persist($fishbowl);
+    }
+
+    private function resetCache(): void
+    {
+        $this->hubspotCache->delete('hubspot_access_token');
     }
 }
