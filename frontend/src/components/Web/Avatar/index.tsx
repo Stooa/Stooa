@@ -84,7 +84,7 @@ const Avatar = () => {
           </Link>
           <Link href={ROUTE_INTEGRATIONS} className="item">
             <Url />
-            <span>Integrations</span>
+            <span>{t('integrations')}</span>
           </Link>
           <Link href={ROUTE_CHANGE_PASSWORD} className="item">
             <Lock />
