@@ -7,8 +7,5 @@
  * file that was distributed with this source code.
  */
 
-import { ImproveMeetings } from './posts/ImproveMeets';
-
-export { ImproveMeetings };
-export * from './BlogContent';
-export { default } from './BlogContent';
+export { default } from './BlogBannerCTA';
+export * from './BlogBannerCTA';

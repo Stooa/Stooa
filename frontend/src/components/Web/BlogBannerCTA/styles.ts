@@ -7,8 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import { ImproveMeetings } from './posts/ImproveMeets';
+import styled from 'styled-components';
 
-export { ImproveMeetings };
-export * from './BlogContent';
-export { default } from './BlogContent';
+const StyledBlogBannerCTA = styled.div`
+  padding: 2rem 0;
+`;
+
+export { StyledBlogBannerCTA };

@@ -9,6 +9,18 @@
 
 import { ImproveMeetings } from './posts/ImproveMeets';
 
-export { ImproveMeetings };
-export * from './BlogContent';
-export { default } from './BlogContent';
+interface Props {
+  slug: string;
+}
+
+const BlogPosts = {
+  'improve-meetings': ImproveMeetings
+};
+
+const BlogContent = ({ slug }: Props) => {
+  const BlogComponent = BlogPosts[slug as string];
+
+  return <BlogComponent slug={slug} />;
+};
+
+export default BlogContent;

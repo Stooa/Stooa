@@ -10,19 +10,14 @@
 import { useRouter } from 'next/router';
 
 import Layout from '@/layouts/Default';
-import { ImproveMeetings } from '@/components/Web/Blog';
-
-const BlogPosts = {
-  'improve-meetings': ImproveMeetings
-};
+import BlogContent from '@/components/Web/Blog';
 
 const Blog = () => {
   const { slug } = useRouter().query;
-  const BlogComponent = BlogPosts[slug as string];
 
   return (
     <Layout>
-      <BlogComponent slug={slug as string} />
+      <BlogContent slug={slug as string} />
     </Layout>
   );
 };
