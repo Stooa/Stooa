@@ -37,7 +37,7 @@
         "symfony/dotenv": "6.3.7",
         "symfony/expression-language": "6.3.0",
         "symfony/finder": "6.3.5",
-        "symfony/flex": "2.4.0",
+        "symfony/flex": "2.4.1",
         "symfony/framework-bundle": "6.3.7",
         "symfony/http-client": "6.3.7",
         "symfony/intl": "6.3.7",
