@@ -43,7 +43,7 @@
         "symfony/intl": "6.3.7",
         "symfony/mailer": "6.3.5",
         "symfony/messenger": "6.3.7",
-        "symfony/monolog-bundle": "3.8.0",
+        "symfony/monolog-bundle": "3.10.0",
         "symfony/runtime": "6.3.2",
         "symfony/security-bundle": "6.3.7",
         "symfony/string": "6.3.5",
