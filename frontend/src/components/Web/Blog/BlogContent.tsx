@@ -81,9 +81,8 @@ const BlogContent = ({ slug }: Props) => {
 
   return (
     <>
+      <OpenGraphDefault seoTitle={title} seoDescription={selectedBlog.subtitle} />
       <Head>
-        <OpenGraphDefault seoTitle={title} seoDescription={selectedBlog.subtitle} />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -134,6 +133,7 @@ const BlogContent = ({ slug }: Props) => {
           <StyledPostContent>
             <Content />
           </StyledPostContent>
+
           <BlogInfo
             bottom
             title={title}

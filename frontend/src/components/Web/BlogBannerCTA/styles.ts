@@ -16,7 +16,7 @@ const StyledBlogBannerCTA = styled.div`
   width: 100%;
   padding: 4rem 0;
   background-color: ${COLOR_NEUTRO_100};
-  z-index: -2;
+  z-index: 1;
 
   & .banner--content {
     display: flex;

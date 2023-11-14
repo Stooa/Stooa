@@ -38,7 +38,7 @@ export const ImproveMeetings = () => {
       </section>
       <div className="image-container">
         <Image
-          src="/img/blog/improve/blog-1.png"
+          src="/img/web/blog/improve/blog-1.png"
           fill
           alt="Woman loading ice into a an old car."
           objectFit="contain"
@@ -79,7 +79,7 @@ export const ImproveMeetings = () => {
       </section>
       <div className="image-container">
         <Image
-          src="/img/blog/improve/blog-2.png"
+          src="/img/web/blog/improve/blog-2.png"
           fill
           alt="People laughing in a cinema"
           objectFit="contain"
@@ -106,20 +106,20 @@ export const ImproveMeetings = () => {
         <h3>Beneficios del Fishbowl:</h3>
         <ol>
           <li>
-            <strong>Equilibrio perfecto:</strong> Todos tienen su momento de protagonismo, evitando
-            el caos de hablar al mismo tiempo.
+            <span className="medium">Equilibrio perfecto:</span> Todos tienen su momento de
+            protagonismo, evitando el caos de hablar al mismo tiempo.
           </li>
           <li>
-            <strong>Enfoque sin distracciones:</strong> Elimina las interrupciones, manteniendo la
-            reunión centrada en las ideas esenciales.
+            <span className="medium">Enfoque sin distracciones:</span> Elimina las interrupciones,
+            manteniendo la reunión centrada en las ideas esenciales.
           </li>
           <li>
-            <strong>Participación activa:</strong> La rotación constante dentro del acuario
-            garantiza que cada miembro del equipo tenga su oportunidad de brillar.
+            <span className="medium">Participación activa:</span> La rotación constante dentro del
+            acuario garantiza que cada miembro del equipo tenga su oportunidad de brillar.
           </li>
           <li>
-            <strong>Ambiente creativo y relajado:</strong> La estructura única del Fishbowl crea un
-            espacio cómodo para compartir ideas, sin formalidades excesivas.
+            <span className="medium">Ambiente creativo y relajado:</span> La estructura única del
+            Fishbowl crea un espacio cómodo para compartir ideas, sin formalidades excesivas.
           </li>
         </ol>
       </section>

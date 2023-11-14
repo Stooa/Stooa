@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import { BODY_LG } from '@/ui/Texts';
 import { TITLE_LG, TITLE_SM } from '@/ui/Titles';
 import { media, space } from '@/ui/helpers';
 import {
@@ -40,12 +41,12 @@ const StyledBlogWrapper = styled.div`
 
   & .green-blob {
     bottom: 20%;
-    left: 0;
+    left: -180px;
   }
 
   & .purple-blob {
     top: 5%;
-    right: 0;
+    right: -40px;
   }
 
   & .yellow-blob {
@@ -55,7 +56,7 @@ const StyledBlogWrapper = styled.div`
 
   & .red-blob {
     bottom: 35%;
-    right: -70px;
+    right: -90px;
     transform: translateX(50%);
   }
 
@@ -102,12 +103,25 @@ const StyledPostContentWrapper = styled.div`
 
 const StyledPostContent = styled.div`
   font-size: 1.125rem;
-  line-height: 1.5;
+  line-height: 1.8;
   overflow: hidden;
+  color: ${COLOR_NEUTRO_800};
+
+  & h2 {
+    ${BODY_LG};
+    font-weight: 400;
+    color: ${COLOR_NEUTRO_600};
+  }
+
+  & h3 {
+    font-weight: 400;
+    font-size: 1.125rem;
+  }
 
   & .image-container {
     position: relative;
-    height: 450px;
+    aspect-ratio: 16 / 9;
+    width: 100%;
     margin-block: 2rem;
   }
 
