@@ -16,7 +16,7 @@ const Blog = () => {
   const { slug } = useRouter().query;
 
   return (
-    <Layout>
+    <Layout positionDefault>
       <BlogContent slug={slug as string} />
     </Layout>
   );

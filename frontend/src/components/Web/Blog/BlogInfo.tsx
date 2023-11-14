@@ -19,12 +19,13 @@ interface Props {
   title: string;
   author: string;
   dateAndDuration: string;
+  bottom?: boolean;
 }
 
-const BlogInfo = ({ author, dateAndDuration, title }: Props) => {
+const BlogInfo = ({ author, dateAndDuration, title, bottom }: Props) => {
   return (
-    <StyledBlogPostInfo>
-      <Image src="/img/web/stooa-logo.png" width={32} height={32} alt="Stooa logo" />
+    <StyledBlogPostInfo bottom={bottom}>
+      {!bottom && <Image src="/img/web/stooa-logo.png" width={32} height={32} alt="Stooa logo" />}
       <div className="post-info--author">
         <p className="medium">{author}</p>
         <p className="body-sm">{dateAndDuration}</p>

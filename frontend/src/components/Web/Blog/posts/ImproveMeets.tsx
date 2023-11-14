@@ -7,122 +7,128 @@
  * file that was distributed with this source code.
  */
 
-import {
-  StyledPostTitle,
-  StyledBlogWrapper,
-  StyledPostContent,
-  StyledPostContentWrapper,
-  StyledPostSubtitle
-} from '../styles';
-import Head from 'next/head';
-
-import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
-import BlogInfo from '../BlogInfo';
+import Image from 'next/image';
 
 export const ImproveMeetings = () => {
-  /** @type {import('schema-dts').Article} */
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    'headline': 'Improve online meetings',
-    'author': {
-      '@type': 'Person',
-      'name': 'Jose Saura - Stooa',
-      // The full URL must be provided, including the website's domain.
-      'url': new URL('https://stooa.com', 'https://stooa.com')
-    },
-    'image': 'https://stooa.com/img/blog/improve-meetings.png',
-    'datePublished': 1699638349,
-    'dateModified': 1699638349
-  };
-
-  const blogTitle = 'Improve online meetings with cool dynamics and tools';
-
   return (
     <>
-      <Head>
-        <OpenGraphDefault seoTitle={blogTitle} seoDescription="Un mega description mega parsero" />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      <section>
+        <p>
+          ¿Alguna vez has sentido como si estuvieras hablándole a la pantalla en lugar de a tus
+          compañeros durante las reuniones online? El silencio incómodo, las miradas perdidas en las
+          cámaras... y el famoso &quot;¿Alguien quiere añadir algo?&quot; que siempre acaba en un
+          largo silencio.
+        </p>
+        <p>
+          No estás sola. Mantener la participación y el compromiso en las reuniones virtuales es una
+          misión que muchas enfrentamos en esta era digital. ¡Pero no te preocupes! Hay formas súper
+          creativas de mejorar esto.
+        </p>
+        <p>Aquí van algunos trucos que te ayudaran…</p>
+      </section>
+      <section id="ice-breakers">
+        <h2>Icebreakers</h2>
+        <p>
+          Los icebreakers son herramientas estratégicas para construir confianza y energizar al
+          grupo, y no solo sirven para romper el hielo, sino que también te permiten estimular la
+          creatividad desde el inicio. <br />
+          Un buen icebreaker es como el café por la mañana: necesario para despertar y entrar en
+          calor. 🐠
+        </p>
+      </section>
+      <div className="image-container">
+        <Image
+          src="/img/blog/improve/blog-1.png"
+          fill
+          alt="Woman loading ice into a an old car."
+          objectFit="contain"
+          objectPosition="top"
         />
-      </Head>
-      <StyledBlogWrapper>
-        <StyledPostTitle>{blogTitle}</StyledPostTitle>
-        <StyledPostContentWrapper>
-          <StyledPostSubtitle>
-            ¿Alguna vez has sentido como si estuvieras hablándole a la pantalla en lugar de a tus
-            compañeros durante las reuniones online?
-          </StyledPostSubtitle>
-
-          <BlogInfo
-            title={blogTitle}
-            author="Jose de Stooa"
-            dateAndDuration="6 min de lectura - 10 de Noviembre"
-          />
-
-          <StyledPostContent>
-            <p>
-              ¿Alguna vez has sentido como si estuvieras hablándole a la pantalla en lugar de a tus
-              compañeros durante las reuniones online?
-            </p>
-            <p>
-              El silencio incómodo, las miradas perdidas en las cámaras... y el famoso
-              &quot;¿Alguien quiere añadir algo?&quot; que siempre acaba en un largo silencio. No
-              estás sola; mantener la participación y el engagement en los meetings virtuales es una
-              misión que muchas enfrentamos en esta era digital. ¡Pero no te preocupes! Hay formas
-              súper creativas de mejorar esto. Primero, hablemos de las herramientas que más te
-              ayudarán en tus reuniones online:
-            </p>
-            <h3>Zoom</h3>
-            <p>
-              **Zoom** es como ese viejo amigo confiable; todos lo conocen. Te permite compartir
-              pantalla, tener salas de espera y crear breakout rooms para grupos pequeños. ¿Pero
-              cuantas cámaras encendidas ves al iniciar tu reunión? Normalmente, cuando las personas
-              entran a un meeting y no tienen pensado participar, apagan la cámara y el micro.{' '}
-              <br />
-              Para solucionar esto y mejorar la participación a lo largo de la reunión, podemos
-              comenzar con un ice breaker en el que cada uno comparte su wallpaper y la historia
-              detrás de él. ¡Es una manera fácil de calentar los motores!
-            </p>
-            <h3>Butter</h3>
-            <p>
-              **Butter** es como ese compañero cool y trendy que siempre sabe cómo animar las cosas.
-              Tiene funcionalidades pensadas para la interactividad, como encuestas, temporizadores
-              y muchas más, que aun que ayuden a hacer las reuniones más dinámicas, puede hacer que
-              te parezca un poco abrumadora tanto para ti como para las personas que asisten. Por
-              eso te recomendamos que tengas claro el objetivo de la sesión y tiempo para
-              prepararla.
-            </p>
-            <h3>Stooa</h3>
-            <p>
-              **Stooa** el tercero en discordia. Te permite dejar de ser la persona que dinamiza la
-              sesión para poder centrarte en la conversación y los insights extraídos. Esta
-              herramienta tiene funcionalidades pensadas en mejorar el flujo del dialogo, como por
-              ejemplo el hecho de que solo podrás compartir pantalla durante la introducción para no
-              romper el flujo de la conversación, y no hay chat, para no desviar la atención de la
-              sesión. Es gratis y open source, y sí, y para conseguir esto somos la única
-              herramienta online que aplica la dinámica Fishbowl *(leer más link)* Esto significa
-              que todos tienen la oportunidad de participar activamente, y la conversación fluye tan
-              naturalmente como en una charla de café.
-            </p>
-            <p>
-              Ahora, déjame darte un ejemplo de ice breaker que es perfecto para Stooa. Empieza la
-              sesión lanzando una pregunta y pide a los participantes que te contesten con
-              reacciones. No solo rompes el hielo, sino que también estimulas la creatividad desde
-              el inicio. 🐠
-            </p>
-            <div>*CTA - Stooa*</div>
-            <p>
-              ¡Transforma tus monologos en dialogos! Recuerda, una buena reunión es como una buena
-              fiesta: todos deben disfrutarla y participar. Y con Stooa, estamos aquí para
-              asegurarnos de que la fiesta nunca pare. 🎉
-            </p>
-          </StyledPostContent>
-        </StyledPostContentWrapper>
-        *Gif*
-      </StyledBlogWrapper>
+      </div>
+      <section id="surveys">
+        <h2>Encuestas</h2>
+        <p>
+          Incorpora encuestas en vivo para recoger opiniones y preferencias instantáneas. Las
+          encuestas pueden ser sobre la temática de la reunión o para romper el hielo. Funcionan muy
+          bien para dar voz a todos los asistentes, y de esta forma, aumentar la participación. Por
+          ejemplo, puedes lanzar una encuesta sobre el snack favorito para las meetings o el mejor
+          meme del mes. Las encuestas son como el GPS de la reunión, te dicen por dónde va la gente
+          y mantienen a todos en ruta. ¡Y lo mejor es que todos sienten que pilotan! Puedes hacerlo
+          con herramientas como Kahot, Butter, o Google Forms.
+        </p>
+      </section>
+      <section id="agenda">
+        <h2>Agenda</h2>
+        <p>
+          Comparte una agenda detallada antes de la reunión. Asegúrate de que sea clara, concisa y
+          que destaque los puntos clave y tiempos específicos para cada tema. Esto ayuda a los
+          participantes a prepararse y a mantener la reunión enfocada y eficiente.
+        </p>
+      </section>
+      <section id="reactions">
+        <h2>Reacciones</h2>
+        <p>
+          Anima a los participantes a usar reacciones durante la reunión. Usa las reacciones como
+          confeti en un carnaval: que vuelen los pulgares arriba y los corazones cuando algo mola.
+          Es la manera más rápida de decir &quot;¡Eso es!&quot; sin cortar el rollo. En Stooa
+          solemos empezar las sesiones lanzando una pregunta y pidiendo a los participantes que
+          contesten con reacciones. Puedes preguntar qué preferirían entre dos cosas, por ejemplo:
+          no poder escuchar música nunca más 👎, o tener que escuchar música todo el tiempo 👍, y
+          pedir que reaccionen con el pulgar hacia arriba o hacia abajo.
+        </p>
+      </section>
+      <div className="image-container">
+        <Image
+          src="/img/blog/improve/blog-2.png"
+          fill
+          alt="People laughing in a cinema"
+          objectFit="contain"
+          objectPosition="top"
+        />
+      </div>
+      <section id="fishbowl">
+        <h2>Fishbowl</h2>
+        <p>
+          La dinámica del Fishbowl te permitirá dejar de ser la persona que dinamiza la sesión para
+          poder centrarte en la conversación y los insights extraídos. Esta dinámica pone el foco en
+          mejorar el flujo del diálogo, y consigue activar la participación dando a todos los
+          asistentes la oportunidad de participar activamente.
+        </p>
+        <h3>¿Cómo funciona?</h3>
+        <p>
+          El Fishbowl es como un acuario para ideas brillantes. Imagina que estas en una reunión
+          online, y en lugar de todos hablar a la vez (¡caos total!), algunos participantes se
+          encuentran en el &quot;acuario&quot; (el Fishbowl propiamente dicho) compartiendo sus
+          ideas mientras el resto observa y escucha atentamente. Los participantes que estan dentro
+          del acuario se rotan, asegurando que todos tengan la oportunidad de sumergirse en el
+          centro de la acción.
+        </p>
+        <h3>Beneficios del Fishbowl:</h3>
+        <ol>
+          <li>
+            <strong>Equilibrio perfecto:</strong> Todos tienen su momento de protagonismo, evitando
+            el caos de hablar al mismo tiempo.
+          </li>
+          <li>
+            <strong>Enfoque sin distracciones:</strong> Elimina las interrupciones, manteniendo la
+            reunión centrada en las ideas esenciales.
+          </li>
+          <li>
+            <strong>Participación activa:</strong> La rotación constante dentro del acuario
+            garantiza que cada miembro del equipo tenga su oportunidad de brillar.
+          </li>
+          <li>
+            <strong>Ambiente creativo y relajado:</strong> La estructura única del Fishbowl crea un
+            espacio cómodo para compartir ideas, sin formalidades excesivas.
+          </li>
+        </ol>
+      </section>
+      <section>
+        <p>
+          Prepárate para sumergirte en la dinámica del Fishbowl y hacer que tus reuniones online
+          sean un festín de innovación y participación. 🚀🐟
+        </p>
+      </section>
     </>
   );
 };

@@ -19,30 +19,34 @@ const BlogBannerCTA = () => {
   const { t } = useTranslation('blog');
   return (
     <StyledBlogBannerCTA>
-      <Image src="/img/friends/dancing.png" width={252} height={277} alt="" />
-      <h3>Lleva tus conversaciones online al siguiente nivel</h3>
-      <div>
-        <p className="title-sm">
-          Regístrate ahora, crea tu evento y convoca a los participantes. ¡Que empiece la
-          conversación!
-        </p>
-        <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
-          <Button
-            size="large"
-            as="a"
-            variant="primary"
-            className="animate-item cta-create-fishbowl "
-            onClick={() => {
-              pushEventDataLayer({
-                category: 'Schedule Fishbowl',
-                action: 'Blog Banner CTA',
-                label: 'Blog'
-              });
-            }}
-          >
-            <span>{t('common:scheduleFishbowl')}</span>
-          </Button>
-        </RedirectLink>
+      <div className="banner--content">
+        <div className="banner--image-title">
+          <Image src="/img/friends/dancing.png" width={252} height={277} alt="" />
+          <h3 className="title-lg">Lleva tus conversaciones online al siguiente nivel</h3>
+        </div>
+        <div className="banner--cta">
+          <p className="title-sm">
+            Regístrate ahora, crea tu evento y convoca a los participantes.¡Que empiece la
+            conversación!
+          </p>
+          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+            <Button
+              size="large"
+              as="a"
+              variant="primary"
+              className="animate-item cta-create-fishbowl "
+              onClick={() => {
+                pushEventDataLayer({
+                  category: 'Schedule Fishbowl',
+                  action: 'Blog Banner CTA',
+                  label: 'Blog'
+                });
+              }}
+            >
+              <span>{t('common:scheduleFishbowl')}</span>
+            </Button>
+          </RedirectLink>
+        </div>
       </div>
     </StyledBlogBannerCTA>
   );
