@@ -8,7 +8,6 @@
  */
 
 import Head from 'next/head';
-import { ImproveMeetings } from './posts/ImproveMeets';
 import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
 import {
   StyledBlogWrapper,
@@ -17,46 +16,15 @@ import {
   StyledPostSubtitle,
   StyledPostTitle
 } from './styles';
-import AnchorMenu, { BlogMenuItemType } from './AnchorMenu';
+import AnchorMenu from './AnchorMenu';
 import BlogInfo from './BlogInfo';
 import BlogBannerCTA from '../BlogBannerCTA';
 import Image from 'next/image';
+import { BlogPosts } from './BlogPostsData';
 
 interface Props {
   slug: string;
 }
-
-type BlogPost = {
-  title: string;
-  subtitle: string;
-  content: () => JSX.Element;
-  image: string;
-  author: string;
-  dateAndDuration: string;
-  datePublishedTimestamp: number;
-  dateModifiedTimestamp: number;
-  menuItems: BlogMenuItemType[];
-};
-
-const BlogPosts: Record<string, BlogPost> = {
-  'improve-meetings': {
-    title: 'Improve meetings',
-    subtitle: 'Subtitle',
-    content: ImproveMeetings,
-    image: '/img/blog/improve-meetings.png',
-    author: 'Jose de Stooa',
-    dateAndDuration: '6 min de lectura - 10 de Noviembre',
-    datePublishedTimestamp: 1699638349,
-    dateModifiedTimestamp: 1699638349,
-    menuItems: [
-      { anchorId: 'ice-breakers', displayText: 'Icebreakers' },
-      { anchorId: 'surveys', displayText: 'Encuestas' },
-      { anchorId: 'agenda', displayText: 'Agenda' },
-      { anchorId: 'reactions', displayText: 'Reactions' },
-      { anchorId: 'fishbowl', displayText: 'Fishbowl' }
-    ]
-  }
-};
 
 const BlogContent = ({ slug }: Props) => {
   const selectedBlog = BlogPosts[slug as string];

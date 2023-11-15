@@ -7,19 +7,30 @@
  * file that was distributed with this source code.
  */
 
-import { useRouter } from 'next/router';
-
 import Layout from '@/layouts/Default';
 import BlogContent from '@/components/Web/Blog';
+import { BlogPosts } from '@/components/Web/Blog/BlogPostsData';
+import { GetServerSideProps } from 'next';
 
-const Blog = () => {
-  const { slug } = useRouter().query;
-
+const Blog = ({ slug }) => {
   return (
     <Layout positionDefault>
       <BlogContent slug={slug as string} />
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const slug = params?.slug;
+  const selectedBlog = BlogPosts[slug as string];
+
+  return {
+    props: {
+      slug,
+      seoTitle: selectedBlog?.title,
+      seoDescription: selectedBlog?.subtitle
+    }
+  };
 };
 
 export default Blog;
