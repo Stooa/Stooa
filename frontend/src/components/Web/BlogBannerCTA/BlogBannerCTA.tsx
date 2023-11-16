@@ -22,13 +22,9 @@ const BlogBannerCTA = () => {
       <div className="banner--content">
         <div className="banner--image-title">
           <Image src="/img/friends/dancing.png" width={252} height={277} alt="" />
-          <h3 className="title-lg">Lleva tus conversaciones online al siguiente nivel</h3>
+          <h3 className="title-lg">{t('bannerText')}</h3>
         </div>
         <div className="banner--cta">
-          <p className="title-sm">
-            Regístrate ahora, crea tu evento y convoca a los participantes.¡Que empiece la
-            conversación!
-          </p>
           <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
             <Button
               size="large"

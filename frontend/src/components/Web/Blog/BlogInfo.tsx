@@ -14,6 +14,7 @@ import { pushEventDataLayer } from '@/lib/analytics';
 
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Twitter from '@/ui/svg/share-twitter.svg';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   title: string;
@@ -23,15 +24,16 @@ interface Props {
 }
 
 const BlogInfo = ({ author, dateAndDuration, title, bottom }: Props) => {
+  const { t } = useTranslation('blog');
   return (
     <StyledBlogPostInfo bottom={bottom}>
       {!bottom && <Image src="/img/web/stooa-logo.png" width={32} height={32} alt="Stooa logo" />}
       <div className="post-info--author">
         <p className="medium">{author}</p>
-        <p className="body-sm">{dateAndDuration}</p>
+        {!bottom && <p className="body-sm">{dateAndDuration}</p>}
       </div>
       <div className="post-info--share">
-        <p>Compartir</p>
+        <p>{t('share')}</p>
         <div>
           <Link
             href={`https://twitter.com/intent/tweet?text=${title}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}

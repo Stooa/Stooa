@@ -21,6 +21,7 @@ import BlogInfo from './BlogInfo';
 import BlogBannerCTA from '../BlogBannerCTA';
 import Image from 'next/image';
 import { BlogPosts } from './BlogPostsData';
+import useTranslation from 'next-translate/useTranslation';
 
 interface Props {
   slug: string;
@@ -31,32 +32,34 @@ const BlogContent = ({ slug }: Props) => {
   const Content = selectedBlog.content;
   const title = selectedBlog.title;
 
+  const { t } = useTranslation('blog');
+
   /** @type {import('schema-dts').Article} */
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    'headline': title,
+    'headline': t(title),
     'author': {
       '@type': 'Person',
       'name': selectedBlog.author,
       // The full URL must be provided, including the website's domain.
       'url': new URL('https://stooa.com', 'https://stooa.com')
     },
-    'image': 'https://stooa.com' + selectedBlog.image,
+    // 'image': 'https://stooa.com' + selectedBlog.image,
     'datePublished': selectedBlog.datePublishedTimestamp,
     'dateModified': selectedBlog.dateModifiedTimestamp
   };
 
   return (
     <>
-      <OpenGraphDefault seoTitle={title} seoDescription={selectedBlog.subtitle} />
+      <OpenGraphDefault seoTitle={t(title)} seoDescription={t(selectedBlog.subtitle)} />
       <Head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       </Head>
-      <StyledPostTitle>{title}</StyledPostTitle>
+      <StyledPostTitle>{t(title)}</StyledPostTitle>
       <StyledBlogWrapper>
         {/* BLOBS */}
         <Image
@@ -90,12 +93,12 @@ const BlogContent = ({ slug }: Props) => {
 
         <AnchorMenu items={selectedBlog.menuItems} />
         <StyledPostContentWrapper>
-          <StyledPostSubtitle>{selectedBlog.subtitle}</StyledPostSubtitle>
+          <StyledPostSubtitle>{t(selectedBlog.subtitle)}</StyledPostSubtitle>
 
           <BlogInfo
-            title={title}
-            author={selectedBlog.author}
-            dateAndDuration={selectedBlog.dateAndDuration}
+            title={t(title)}
+            author={t(selectedBlog.author)}
+            dateAndDuration={t(selectedBlog.dateAndDuration)}
           />
 
           <StyledPostContent>
@@ -104,9 +107,9 @@ const BlogContent = ({ slug }: Props) => {
 
           <BlogInfo
             bottom
-            title={title}
-            author={selectedBlog.author}
-            dateAndDuration={selectedBlog.dateAndDuration}
+            title={t(title)}
+            author={t(selectedBlog.author)}
+            dateAndDuration={t(selectedBlog.dateAndDuration)}
           />
         </StyledPostContentWrapper>
       </StyledBlogWrapper>

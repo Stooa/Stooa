@@ -108,12 +108,14 @@ const StyledPostContent = styled.div`
   color: ${COLOR_NEUTRO_800};
 
   & h2 {
-    ${BODY_LG};
+    font-size: 1.5rem;
     font-weight: 400;
     color: ${COLOR_NEUTRO_600};
   }
 
   & h3 {
+    ${BODY_LG};
+    color: ${COLOR_NEUTRO_600};
     font-weight: 400;
     font-size: 1.125rem;
   }
@@ -123,6 +125,10 @@ const StyledPostContent = styled.div`
     aspect-ratio: 16 / 9;
     width: 100%;
     margin-block: 2rem;
+  }
+
+  & a {
+    --fontSize: inherit;
   }
 
   & section + section {
@@ -140,6 +146,18 @@ const StyledPostContent = styled.div`
   & ol {
     padding-left: 1.5rem;
     list-style: decimal;
+  }
+
+  & .schedule-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block-start: 1rem;
+  }
+
+  & .article-reference {
+    margin-top: 1.5rem;
+    font-style: italic;
   }
 `;
 

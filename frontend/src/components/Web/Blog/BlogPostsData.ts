@@ -8,13 +8,13 @@
  */
 
 import { BlogMenuItemType } from './AnchorMenu';
-import { ImproveMeetings } from './posts/ImproveMeets';
+import { ImproveOnlineMeetings } from './posts/ImproveOnlineMeetings';
 
 type BlogPost = {
   title: string;
+  description: string;
   subtitle: string;
   content: () => JSX.Element;
-  image: string;
   author: string;
   dateAndDuration: string;
   datePublishedTimestamp: number;
@@ -23,21 +23,24 @@ type BlogPost = {
 };
 
 export const BlogPosts: Record<string, BlogPost> = {
-  'improve-meetings': {
-    title: 'Improve meetings',
-    subtitle: 'Subtitle',
-    content: ImproveMeetings,
-    image: '/img/blog/improve-meetings.png',
-    author: 'Jose de Stooa',
-    dateAndDuration: '6 min de lectura - 10 de Noviembre',
+  'improve-online-meetings': {
+    title: 'posts.improve-online-meetings.title',
+    description: 'posts.improve-online-meetings.description',
+    subtitle: 'posts.improve-online-meetings.subtitle',
+    content: ImproveOnlineMeetings,
+    author: 'posts.improve-online-meetings.author',
+    dateAndDuration: 'posts.improve-online-meetings.date-and-duration',
     datePublishedTimestamp: 1699638349,
     dateModifiedTimestamp: 1699638349,
     menuItems: [
-      { anchorId: 'ice-breakers', displayText: 'Icebreakers' },
-      { anchorId: 'surveys', displayText: 'Encuestas' },
-      { anchorId: 'agenda', displayText: 'Agenda' },
-      { anchorId: 'reactions', displayText: 'Reactions' },
-      { anchorId: 'fishbowl', displayText: 'Fishbowl' }
+      {
+        anchorId: 'ice-breakers',
+        displayText: 'posts.improve-online-meetings.content.icebreakers'
+      },
+      { anchorId: 'surveys', displayText: 'posts.improve-online-meetings.content.surveys' },
+      { anchorId: 'agenda', displayText: 'posts.improve-online-meetings.content.agenda' },
+      { anchorId: 'reactions', displayText: 'posts.improve-online-meetings.content.reactions' },
+      { anchorId: 'fishbowl', displayText: 'posts.improve-online-meetings.content.fishbowl' }
     ]
   }
 };

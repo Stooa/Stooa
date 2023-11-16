@@ -29,7 +29,8 @@ import {
   SUPPORT_EMAIL,
   GITHUB_BASE,
   APP_NAME,
-  ROUTE_FISHBOWL_HOST_NOW
+  ROUTE_FISHBOWL_HOST_NOW,
+  ROUTE_BLOG
 } from '@/app.config';
 
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -150,6 +151,9 @@ const Footer: React.FC = () => {
                 </li>
               </>
             )}
+            <li>
+              <Link href={`${ROUTE_BLOG}/improve-online-meetings`}>{t('blog')}</Link>
+            </li>
           </NavList>
         </Nav>
         <Nav>
