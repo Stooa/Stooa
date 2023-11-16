@@ -16,7 +16,7 @@ import {
   StyledPostSubtitle,
   StyledPostTitle
 } from './styles';
-import AnchorMenu from './AnchorMenu';
+
 import BlogInfo from './BlogInfo';
 import BlogBannerCTA from '../BlogBannerCTA';
 import Image from 'next/image';
@@ -90,8 +90,8 @@ const BlogContent = ({ slug }: Props) => {
           className="yellow-blob"
           alt=""
         />
-
-        <AnchorMenu items={selectedBlog.menuItems} />
+        {/* TODO: We need to fix some cases we don't have time to */}
+        {/* <AnchorMenu items={selectedBlog.menuItems} /> */}
         <StyledPostContentWrapper>
           <StyledPostSubtitle>{t(selectedBlog.subtitle)}</StyledPostSubtitle>
 
