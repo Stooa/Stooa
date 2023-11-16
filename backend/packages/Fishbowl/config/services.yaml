@@ -31,7 +31,12 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
-    App\Fishbowl\Service\OpenAIService:
+    App\Fishbowl\Service\SummarizeService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+            $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
+
+    App\Fishbowl\Service\ThreadsService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
 
