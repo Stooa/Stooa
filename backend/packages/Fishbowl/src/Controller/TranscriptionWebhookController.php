@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class TranscriptionWebhookController extends AbstractController
 {
-    #[Route('/webhook/transcription', name: 'webhook_transcription', methods: ['POST'])]
+    #[Route('/webhooks/transcription', name: 'webhook_transcription', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         $requestArray = $request->toArray();
@@ -33,6 +33,6 @@ final class TranscriptionWebhookController extends AbstractController
             file_put_contents($path . '/' . $sessionId . '.json', $fileContent);
         }
 
-        return new JsonResponse(['response' => $request->getContent()]);
+        return new JsonResponse(['response' => 'ok']);
     }
 }

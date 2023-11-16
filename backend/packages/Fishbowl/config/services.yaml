@@ -31,6 +31,10 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
+    App\Fishbowl\Service\OpenAIService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:
