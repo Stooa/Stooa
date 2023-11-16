@@ -9,8 +9,8 @@
 
 import Layout from '@/layouts/Default';
 import BlogContent from '@/components/Web/Blog';
-import { BlogPosts } from '@/components/Web/Blog/BlogPostsData';
 import { GetServerSideProps } from 'next';
+import getT from 'next-translate/getT';
 
 const Blog = ({ slug }) => {
   return (
@@ -20,15 +20,15 @@ const Blog = ({ slug }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, params }) => {
   const slug = params?.slug;
-  const selectedBlog = BlogPosts[slug as string];
+  const t = await getT(locale, 'blog');
 
   return {
     props: {
       slug,
-      seoTitle: selectedBlog?.title,
-      seoDescription: selectedBlog?.subtitle
+      seoTitle: t(`posts.${slug}.title`),
+      seoDescription: t(`posts.${slug}.description`)
     }
   };
 };
