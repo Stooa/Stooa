@@ -21,12 +21,26 @@ export const ImproveOnlineMeetings = () => {
     <>
       <section>
         <p>{t('posts.improve-online-meetings.content.firstBlock')}</p>
-        <p>{t('posts.improve-online-meetings.content.secondBlock')}</p>
+        <p>
+          <Trans
+            i18nKey="blog:posts.improve-online-meetings.content.secondBlock"
+            components={{
+              span: <span className="medium" />
+            }}
+          />
+        </p>
         <p>{t('posts.improve-online-meetings.content.thirdBlock')}</p>
       </section>
       <section id="ice-breakers">
         <h2>{t('posts.improve-online-meetings.content.icebreakers')}</h2>
-        <p>{t('posts.improve-online-meetings.content.fourthBlock')}</p>
+        <p>
+          <Trans
+            i18nKey="blog:posts.improve-online-meetings.content.fourthBlock"
+            components={{
+              span: <span className="medium" />
+            }}
+          />
+        </p>
         <p>{t('posts.improve-online-meetings.content.fifthBlock')}</p>
       </section>
       <div className="image-container">
@@ -40,19 +54,34 @@ export const ImproveOnlineMeetings = () => {
       </div>
       <section id="surveys">
         <h2>{t('posts.improve-online-meetings.content.surveys')}</h2>
-        <p>{t('posts.improve-online-meetings.content.sixthBlock')}</p>
+        <p>
+          <Trans
+            i18nKey="blog:posts.improve-online-meetings.content.sixthBlock"
+            components={{
+              br: <br />,
+              span: <span className="medium" />
+            }}
+          />
+        </p>
         <p>{t('posts.improve-online-meetings.content.seventhBlock')}</p>
       </section>
       <section id="agenda">
         <h2>{t('posts.improve-online-meetings.content.agenda')}</h2>
-        <p>{t('posts.improve-online-meetings.content.eighthBlock')}</p>
+        <p>
+          <Trans
+            i18nKey="blog:posts.improve-online-meetings.content.eighthBlock"
+            components={{
+              span: <span className="medium" />
+            }}
+          />
+        </p>
       </section>
       <section id="reactions">
         <h2>{t('posts.improve-online-meetings.content.reactions')}</h2>
         <p>
           <Trans
             i18nKey="blog:posts.improve-online-meetings.content.ninthBlock"
-            components={{ br: <br /> }}
+            components={{ br: <br />, span: <span className="medium" /> }}
           />
         </p>
       </section>
@@ -74,31 +103,34 @@ export const ImproveOnlineMeetings = () => {
           />
         </p>
         <h3>{t('posts.improve-online-meetings.content.howItWorks')}</h3>
-        <p>{t('posts.improve-online-meetings.content.twelfthBlock')}</p>
+        <Trans
+          i18nKey="blog:posts.improve-online-meetings.content.twelfthBlock"
+          components={{ span: <span className="medium" /> }}
+        />
         <h3>{t('posts.improve-online-meetings.content.benefits')}</h3>
         <ol>
           <li>
             <Trans
               i18nKey="blog:posts.improve-online-meetings.content.listItem1"
-              components={{ 1: <span className="medium" /> }}
+              components={{ span: <span className="medium" /> }}
             />
           </li>
           <li>
             <Trans
               i18nKey="blog:posts.improve-online-meetings.content.listItem2"
-              components={{ 1: <span className="medium" /> }}
+              components={{ span: <span className="medium" /> }}
             />
           </li>
           <li>
             <Trans
               i18nKey="blog:posts.improve-online-meetings.content.listItem3"
-              components={{ 1: <span className="medium" /> }}
+              components={{ span: <span className="medium" /> }}
             />
           </li>
           <li>
             <Trans
               i18nKey="blog:posts.improve-online-meetings.content.listItem4"
-              components={{ 1: <span className="medium" /> }}
+              components={{ span: <span className="medium" /> }}
             />
           </li>
         </ol>
@@ -125,7 +157,10 @@ export const ImproveOnlineMeetings = () => {
       <section>
         <h2>{t('posts.improve-online-meetings.content.summaryTitle')}</h2>
         <p>{t('posts.improve-online-meetings.content.fourteenthBlock')}</p>
-        <p>{t('posts.improve-online-meetings.content.sixteenthBlock')}</p>
+        <Trans
+          i18nKey="blog:posts.improve-online-meetings.content.sixteenthBlock"
+          components={{ span: <span className="medium" /> }}
+        />
       </section>
       <p>
         <Trans

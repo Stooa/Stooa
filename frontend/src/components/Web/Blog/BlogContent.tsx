@@ -22,17 +22,25 @@ import BlogBannerCTA from '../BlogBannerCTA';
 import Image from 'next/image';
 import { BlogPosts } from './BlogPostsData';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
+import { ROUTE_NOT_FOUND } from '@/app.config';
 
 interface Props {
   slug: string;
 }
 
 const BlogContent = ({ slug }: Props) => {
-  const selectedBlog = BlogPosts[slug as string];
+  const { t } = useTranslation('blog');
+  const router = useRouter();
+
+  if (!BlogPosts[slug as string]) {
+    router.push(ROUTE_NOT_FOUND);
+    return null;
+  }
+  const slugStr = slug as string;
+  const selectedBlog = BlogPosts[slugStr];
   const Content = selectedBlog.content;
   const title = selectedBlog.title;
-
-  const { t } = useTranslation('blog');
 
   /** @type {import('schema-dts').Article} */
   const schema = {

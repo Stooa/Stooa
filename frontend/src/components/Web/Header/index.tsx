@@ -37,7 +37,6 @@ const Header = ({ navigation = true }: Props) => {
   const { t, lang } = useTranslation('common');
   const { pathname } = useRouter();
   const isBlog = pathname.includes('blog');
-  console.log('Header.tsx: isBlog: ', isBlog);
 
   return (
     <>
