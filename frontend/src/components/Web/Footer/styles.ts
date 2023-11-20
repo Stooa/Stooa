@@ -43,6 +43,11 @@ const Nav = styled.nav`
       width: 100%;
     `};
 
+    & a {
+      display: inline-block;
+      height: 32px;
+    }
+
     & svg {
       width: 32px;
       height: 32px;
