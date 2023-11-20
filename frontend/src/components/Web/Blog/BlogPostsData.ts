@@ -8,7 +8,7 @@
  */
 
 import { BlogMenuItemType } from './AnchorMenu';
-import { ImproveOnlineMeetings } from './posts/ImproveOnlineMeetings';
+import { ImproveOnlineMeetings } from './posts/5tipsToImprove';
 
 type BlogPost = {
   title: string;
@@ -22,25 +22,44 @@ type BlogPost = {
   menuItems: BlogMenuItemType[];
 };
 
-export const BlogPosts: Record<string, BlogPost> = {
-  'improve-online-meetings': {
-    title: 'posts.improve-online-meetings.title',
-    description: 'posts.improve-online-meetings.description',
-    subtitle: 'posts.improve-online-meetings.subtitle',
+const BlogPostsData: Record<string, BlogPost> = {
+  '5-tips-boost-participation-online-meetings': {
+    title: 'posts.5-tips-boost-participation-online-meetings.title',
+    description: 'posts.5-tips-boost-participation-online-meetings.description',
+    subtitle: 'posts.5-tips-boost-participation-online-meetings.subtitle',
     content: ImproveOnlineMeetings,
-    author: 'posts.improve-online-meetings.author',
-    dateAndDuration: 'posts.improve-online-meetings.date-and-duration',
-    datePublishedTimestamp: 1699638349,
-    dateModifiedTimestamp: 1699638349,
+    author: 'posts.5-tips-boost-participation-online-meetings.author',
+    dateAndDuration: 'posts.5-tips-boost-participation-online-meetings.date-and-duration',
+    datePublishedTimestamp: 1700477847,
+    dateModifiedTimestamp: 1700477847,
     menuItems: [
       {
         anchorId: 'ice-breakers',
-        displayText: 'posts.improve-online-meetings.content.icebreakers'
+        displayText: 'posts.5-tips-boost-participation-online-meetings.content.icebreakers'
       },
-      { anchorId: 'surveys', displayText: 'posts.improve-online-meetings.content.surveys' },
-      { anchorId: 'agenda', displayText: 'posts.improve-online-meetings.content.agenda' },
-      { anchorId: 'reactions', displayText: 'posts.improve-online-meetings.content.reactions' },
-      { anchorId: 'fishbowl', displayText: 'posts.improve-online-meetings.content.fishbowl' }
+      {
+        anchorId: 'surveys',
+        displayText: 'posts.5-tips-boost-participation-online-meetings.content.surveys'
+      },
+      {
+        anchorId: 'agenda',
+        displayText: 'posts.5-tips-boost-participation-online-meetings.content.agenda'
+      },
+      {
+        anchorId: 'reactions',
+        displayText: 'posts.5-tips-boost-participation-online-meetings.content.reactions'
+      },
+      {
+        anchorId: 'fishbowl',
+        displayText: 'posts.5-tips-boost-participation-online-meetings.content.fishbowl'
+      }
     ]
   }
+};
+
+export const BlogPosts: Record<string, BlogPost> = {
+  '5-consejos-impulsar-participacion-reuniones-online':
+    BlogPostsData['5-tips-boost-participation-online-meetings'],
+  '5-tips-boost-participation-online-meetings':
+    BlogPostsData['5-tips-boost-participation-online-meetings']
 };

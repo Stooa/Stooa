@@ -3,12 +3,12 @@
     "bannerText": "Lleva tus conversaciones online al siguiente nivel",
     "blogCTA": "Programa tu próxima reunión en Stooa",
     "posts": {
-        "improve-online-meetings": {
+        "5-tips-boost-participation-online-meetings": {
             "title": "5 consejos para impulsar la participación en reuniones online",
             "subtitle": "Innova en tus reuniones virtuales: hablemos de técnicas efectivas para aumentar el compromiso",
             "description": "Descubre cómo mejorar tus reuniones online con nuestros 5 consejos: empecemos con técnicas efectivas para fomentar la participación, entendamos cómo romper el hielo de manera creativa, y, cerramos conociendo el potencial de la dinámica de Fishbowl.",
             "author": "Carme de Stooa",
-            "date-and-duration": "5 min lectura - 17 noviembre 2023",
+            "date-and-duration": "5 min lectura - 20 noviembre 2023",
             "content": {
                 "firstBlock": "¿Alguna vez has sentido como si estuvieras hablándole a la pantalla en lugar de a tus compañeros durante las reuniones online? El silencio incómodo, las miradas perdidas en las cámaras... y el famoso \"¿Alguien quiere añadir algo?\" que siempre acaba en un largo silencio.",
                 "secondBlock": "No estás sola. Mantener la <span>participación</span> y el <span>compromiso</span> en las reuniones virtuales es una misión a la que muchas nos enfrentamos en esta era digital. ¡Pero no te preocupes! Hay formas súper creativas de mejorar esto.",
@@ -24,7 +24,7 @@
                 "reactions": "4. Reacciones",
                 "ninthBlock": "Anima a los participantes a usar reacciones durante la reunión. Usa las reacciones como confeti en un carnaval: que vuelen los pulgares arriba y los corazones cuando algo mola. <span>Es la manera más rápida de decir \"¡Eso es!\" sin cortar el rollo.</span><br/>En Stooa solemos empezar las sesiones lanzando una pregunta y pidiendo a los participantes que contesten con reacciones. Puedes preguntar qué preferirían entre dos cosas, por ejemplo: no poder escuchar música nunca más 👎, o tener que escuchar música todo el tiempo 👍, y pedir que reaccionen con el pulgar hacia arriba o hacia abajo. ",
                 "fishbowl": "5. Fishbowl",
-                "eleventhBlock": "La dinámica del Fishbowl te permitirá dejar de ser la persona que dinamiza la sesión para poder centrarte en la conversación y los insights extraídos. Esta dinámica pone el foco en mejorar el <1>flujo del diálogo</1>, y consigue activar la participación dando a todos los asistentes la oportunidad de participar activamente.",
+                "eleventhBlock": "La dinámica del Fishbowl te permitirá dejar de ser la persona que dinamiza la sesión para poder centrarte en la conversación y los insights extraídos. Esta dinámica pone el foco en mejorar el <span>flujo del diálogo</span>, y consigue activar la participación dando a todos los asistentes la oportunidad de participar activamente.",
                 "howItWorks": "¿Cómo funciona?",
                 "twelfthBlock": "El Fishbowl es como un acuario para ideas brillantes. Imagina que estas en una reunión online, y en lugar de todos hablar a la vez (¡caos total!), algunos participantes se encuentran en el \"acuario\" (el Fishbowl propiamente dicho) <span>compartiendo sus ideas</span> mientras el resto observa y escucha atentamente. Los participantes que están dentro del acuario se rotan, asegurando que todos tengan la oportunidad de sumergirse en el centro de la acción. ",
                 "benefits": "Beneficios del Fishbowl:",
