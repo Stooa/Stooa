@@ -29,8 +29,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
   return {
     props: {
       slug,
-      seoTitle: t(currentBlog.title),
-      seoDescription: t(currentBlog.description)
+      seoTitle: currentBlog?.title ? t(currentBlog.title) : null,
+      seoDescription: currentBlog?.title ? t(currentBlog.description) : null
     }
   };
 };
