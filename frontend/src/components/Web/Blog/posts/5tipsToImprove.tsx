@@ -179,7 +179,7 @@ export const ImproveOnlineMeetings = () => {
             components={{
               a: (
                 <a
-                  href="https://www.linkedin.com/posts/carme-alcoverro_participaciaejn-tips-improve-activity-7132336250392330240-Y9nv/?utm_source=share&utm_medium=member_desktop"
+                  href="https://www.linkedin.com/pulse/5-consejos-para-impulsar-la-participaci%2525C3%2525B3n-en-online-carme-alcoverro-q26tf%3FtrackingId=%252FFIJXGpjTmWCtT710CA%252BYw%253D%253D/?trackingId=%2FFIJXGpjTmWCtT710CA%2BYw%3D%3D"
                   target="_blank"
                   rel="noreferrer"
                 />

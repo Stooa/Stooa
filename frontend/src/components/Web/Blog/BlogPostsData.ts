@@ -22,7 +22,7 @@ type BlogPost = {
   menuItems: BlogMenuItemType[];
 };
 
-const BlogPostsData: Record<string, BlogPost> = {
+export const BlogPosts: Record<string, BlogPost> = {
   '5-tips-boost-participation-online-meetings': {
     title: 'posts.5-tips-boost-participation-online-meetings.title',
     description: 'posts.5-tips-boost-participation-online-meetings.description',
@@ -55,11 +55,4 @@ const BlogPostsData: Record<string, BlogPost> = {
       }
     ]
   }
-};
-
-export const BlogPosts: Record<string, BlogPost> = {
-  '5-consejos-impulsar-participacion-reuniones-online':
-    BlogPostsData['5-tips-boost-participation-online-meetings'],
-  '5-tips-boost-participation-online-meetings':
-    BlogPostsData['5-tips-boost-participation-online-meetings']
 };

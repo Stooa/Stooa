@@ -55,7 +55,7 @@ type TSocial = {
   url: string;
 };
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('common');
   const currentYear = new Date().getFullYear();
@@ -64,27 +64,27 @@ const Footer: React.FC = () => {
   const socialNetworks: TSocial[] = [
     {
       name: 'Twitter',
-      component: <Twitter className="icon" />,
+      component: <Twitter />,
       url: `https://twitter.com/${TWITTER_USER}/`
     },
     {
       name: 'Instagram',
-      component: <Instagram className="icon" />,
+      component: <Instagram />,
       url: `https://www.instagram.com/${INSTAGRAM_USER}`
     },
     {
       name: 'LinkedIn',
-      component: <LinkedIn className="icon" />,
+      component: <LinkedIn />,
       url: `https://www.linkedin.com/company/${LINKEDIN_USER}/`
     },
     {
       name: 'Facebook',
-      component: <Facebook className="icon" />,
+      component: <Facebook />,
       url: `https://www.facebook.com/${FACEBOOK_USER}/`
     },
     {
       name: 'Github',
-      component: <Github className="icon" />,
+      component: <Github />,
       url: GITHUB_BASE
     }
   ];
@@ -199,21 +199,22 @@ const Footer: React.FC = () => {
         </Nav>
         <Nav className="social">
           {socialNetworks.map(({ name, url, component }) => (
-            <Link
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              onClick={() => {
-                pushEventDataLayer({
-                  category: 'Footer',
-                  action: 'RRSS',
-                  label: name
-                });
-              }}
-              key={name}
-            >
-              {component}
-            </Link>
+            <div key={name} className="icon">
+              <a
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Footer',
+                    action: 'RRSS',
+                    label: name
+                  });
+                }}
+              >
+                {component}
+              </a>
+            </div>
           ))}
         </Nav>
       </FooterNav>
