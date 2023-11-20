@@ -193,8 +193,8 @@ const StyledListItem = styled.li`
     box-sizing: content-box;
     align-items: center;
     display: inline-flex;
-    height: auto;
     justify-content: center;
+    height: auto;
     width: auto;
   }
 

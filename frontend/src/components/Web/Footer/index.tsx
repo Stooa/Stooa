@@ -45,7 +45,7 @@ import Facebook from '@/ui/svg/RRSS-facebook.svg';
 import Github from '@/ui/svg/RRSS-github.svg';
 import Instagram from '@/ui/svg/RRSS-instagram.svg';
 import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
-import Twitter from '@/ui/svg/RRSS-twitter.svg';
+import Twitter from '@/ui/svg/RRSS-x.svg';
 import { Container, FooterCopyright, FooterNav, Nav, NavList, NavTitle } from './styles';
 import { useRouter } from 'next/router';
 
