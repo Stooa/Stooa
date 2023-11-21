@@ -1,0 +1,45 @@
+{
+    "share": "Compartir",
+    "bannerText": "Lleva tus conversaciones online al siguiente nivel",
+    "blogCTA": "Programa tu próxima reunión en Stooa",
+    "posts": {
+        "5-tips-boost-participation-online-meetings": {
+            "title": "5 consejos para impulsar la participación en reuniones online",
+            "subtitle": "Innova en tus reuniones virtuales: hablemos de técnicas efectivas para aumentar el compromiso",
+            "description": "Descubre cómo mejorar tus reuniones online con nuestros 5 consejos: empecemos con técnicas efectivas para fomentar la participación, entendamos cómo romper el hielo de manera creativa, y, cerramos conociendo el potencial de la dinámica de Fishbowl.",
+            "author": "Carme de Stooa",
+            "date-and-duration": "5 min lectura - 20 noviembre 2023",
+            "content": {
+                "firstBlock": "¿Alguna vez has sentido como si estuvieras hablándole a la pantalla en lugar de a tus compañeros durante las reuniones online? El silencio incómodo, las miradas perdidas en las cámaras... y el famoso \"¿Alguien quiere añadir algo?\" que siempre acaba en un largo silencio.",
+                "secondBlock": "No estás sola. Mantener la <span>participación</span> y el <span>compromiso</span> en las reuniones virtuales es una misión a la que muchas nos enfrentamos en esta era digital. ¡Pero no te preocupes! Hay formas súper creativas de mejorar esto.",
+                "thirdBlock": "Aquí van algunos trucos que te ayudaran...",
+                "icebreakers": "1. Icebreakers",
+                "fourthBlock": "Empieza tus reuniones con un icebreakers. Son herramientas estratégicas muy útiles para arrancar una sesión, especialmente online, con el objetivo de construir confianza y <span>energizar al grupo</span>, y no solo sirven para romper el hielo, sino que también te permiten <span>estimular la creatividad</span> desde el inicio. Un ejemplo sencillo podría ser pedir a los asistentes que compartan su fondo de pantalla y la historia detrás de él.",
+                "fifthBlock": "Un buen icebreaker es como el café por la mañana: necesario para despertar y entrar en calor. 🐠",
+                "surveys": "2. Encuestas",
+                "sixthBlock": "Incorpora encuestas en vivo para recoger opiniones y preferencias instantáneas. Las encuestas pueden ser sobre la temática de la reunión o para romper el hielo. Funcionan muy bien para <span>dar voz a todos los asistentes</span>, y de esta forma, aumentar la participación. Por ejemplo, puedes lanzar una encuesta sobre el snack favorito para las meetings o el mejor meme del mes. Las encuestas son como el GPS de la reunión, te dicen por dónde va la gente y mantienen a todos en ruta. ¡Y lo mejor es que todos sienten que pilotan!",
+                "seventhBlock": "Puedes hacerlo con herramientas como Kahoot, Butter, o Google Forms. ",
+                "agenda": "3. Agenda y orden del día",
+                "eighthBlock": "Comparte una agenda detallada antes de la reunión. Asegúrate de que sea clara, concisa y que destaque los <span>puntos clave y tiempos</span> específicos para cada tema. Esto ayuda a los participantes a prepararse y a mantener la reunión enfocada y eficiente.",
+                "reactions": "4. Reacciones",
+                "ninthBlock": "Anima a los participantes a usar reacciones durante la reunión. Usa las reacciones como confeti en un carnaval: que vuelen los pulgares arriba y los corazones cuando algo mola. <span>Es la manera más rápida de decir \"¡Eso es!\" sin cortar el rollo.</span><br/>En Stooa solemos empezar las sesiones lanzando una pregunta y pidiendo a los participantes que contesten con reacciones. Puedes preguntar qué preferirían entre dos cosas, por ejemplo: no poder escuchar música nunca más 👎, o tener que escuchar música todo el tiempo 👍, y pedir que reaccionen con el pulgar hacia arriba o hacia abajo. ",
+                "fishbowl": "5. Fishbowl",
+                "eleventhBlock": "La dinámica del Fishbowl te permitirá dejar de ser la persona que dinamiza la sesión para poder centrarte en la conversación y los insights extraídos. Esta dinámica pone el foco en mejorar el <span>flujo del diálogo</span>, y consigue activar la participación dando a todos los asistentes la oportunidad de participar activamente.",
+                "howItWorks": "¿Cómo funciona?",
+                "twelfthBlock": "El Fishbowl es como un acuario para ideas brillantes. Imagina que estas en una reunión online, y en lugar de todos hablar a la vez (¡caos total!), algunos participantes se encuentran en el \"acuario\" (el Fishbowl propiamente dicho) <span>compartiendo sus ideas</span> mientras el resto observa y escucha atentamente. Los participantes que están dentro del acuario se rotan, asegurando que todos tengan la oportunidad de sumergirse en el centro de la acción. ",
+                "benefits": "Beneficios del Fishbowl:",
+                "listItem1": "<span>Equilibrio perfecto:</span> Todos tienen su momento de protagonismo, evitando el caos de hablar al mismo tiempo.",
+                "listItem2": "<span>Enfoque sin distracciones:</span> Elimina las interrupciones, manteniendo la reunión centrada en las ideas esenciales.",
+                "listItem3": "<span>Participación activa:</span> La rotación constante dentro del acuario garantiza que cada miembro del equipo tenga su oportunidad de brillar.",
+                "listItem4": "<span>Ambiente creativo y relajado:</span> La estructura única del Fishbowl crea un espacio cómodo para compartir ideas, sin formalidades excesivas.",
+                "thirdteenthBlock": "Prepárate para sumergirte en la dinámica del Fishbowl y hacer que tus reuniones online sean un festín de innovación y participación. Si quieres probar esta técnica online, te invitamos a programar tu próxima reunión en Stooa 🚀🐟",
+                "summaryTitle": "En resumen",
+                "fourteenthBlock": "Con estos trucos, tus reuniones serán la envidia del mundo corporativo. Introduce estos juegos, técnicas y un poco de locura, y tu equipo estará contando los minutos para conectar. ¡Que empiece la diversión!",
+                "sixteenthBlock": "Recuerda, una buena reunión es como una buena fiesta: todos deben <span>disfrutarla y participar</span>. Y con Stooa, estamos aquí para asegurarnos de que la fiesta nunca pare. 🎉",
+                "seventeenthBlock": "Y tú, ¿usas alguna de estas dinámicas en tus reuniones? ¿Cómo haces para aumentar la participación en tus reuniones online? <br/> Te estaré leyendo en los comentarios 👀",
+                "readTheArticle": "Puedes leer el <a>artículo original</a> publicado en LinkedIn por Carme Alcoverro."
+            }
+        }
+    }
+
+}

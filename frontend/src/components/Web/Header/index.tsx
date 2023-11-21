@@ -32,17 +32,19 @@ interface Props {
   navigation?: boolean;
 }
 
-const Header: React.FC<Props> = ({ navigation = true }) => {
+const Header = ({ navigation = true }: Props) => {
   const { createFishbowl, isAuthenticated } = useAuth();
   const { t, lang } = useTranslation('common');
   const { pathname } = useRouter();
+  const isBlog = pathname.includes('blog');
 
   return (
     <>
       <Logo href={ROUTE_HOME} />
+
       {navigation && (
         <Navigation>
-          {isAuthenticated ? (
+          {isAuthenticated || isBlog ? (
             <>
               {!createFishbowl &&
                 pathname !== ROUTE_FISHBOWL_CREATE &&
@@ -50,7 +52,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                 pathname !== ROUTE_FISHBOWL_FINISHED && (
                   <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                     <Button
-                      className="hide-mobile"
+                      className={!isBlog ? 'hide-mobile' : ''}
                       size="medium"
                       variant="secondary"
                       onClick={() => {
@@ -65,7 +67,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                     </Button>
                   </RedirectLink>
                 )}
-              <Avatar />
+              {!isBlog && <Avatar />}
             </>
           ) : (
             <>

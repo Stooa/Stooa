@@ -90,6 +90,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: ${FONT_BASE_SIZE}px;
+    scroll-behavior: smooth;
   }
 
   body {

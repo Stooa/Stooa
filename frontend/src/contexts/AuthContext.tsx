@@ -213,7 +213,7 @@ const ProtectRoute = ({ children }: ProtectedRouteProps) => {
         }`;
       }
       const route = pathname.toString();
-      router.push(route, route, { locale: lang });
+      router.replace(route, route, { locale: lang });
     }
   };
 

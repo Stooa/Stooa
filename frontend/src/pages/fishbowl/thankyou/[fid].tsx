@@ -25,7 +25,7 @@ import { formatDateTime } from '@/lib/helpers';
 import ThankYouStyled, { Description, Time, StyledThankyouWrapper } from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
