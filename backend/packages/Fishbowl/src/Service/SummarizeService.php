@@ -34,10 +34,6 @@ final class SummarizeService extends AbstractController
             'file' => fopen($transcriptionFile, 'r'),
         ]);
 
-        $assistantFile = $client->assistants()->files()->create($this->assistantId, [
-            'file_id' => $file->id,
-        ]);
-
         $thread = $client->threads()->createAndRun(
             [
                 'assistant_id' => $this->assistantId,
@@ -45,13 +41,13 @@ final class SummarizeService extends AbstractController
                     'messages' => [
                             [
                                 'role' => 'user',
-                                'content' => 'resume la conversacion del fichero transcription2.json teniendo en cuenta la clave "content" de cada mensaje. El resumen tiene que ser en español y conciso',
+                                'content' => 'Summarize the "content" of this JSON file\'s messages',
+                                'file_ids' => [$file->id],
                             ],
                         ],
                 ],
             ],
         );
-
 
         return $thread->threadId;
     }
