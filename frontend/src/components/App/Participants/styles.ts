@@ -196,6 +196,11 @@ const StyledListItem = styled.li`
     justify-content: center;
     height: auto;
     width: auto;
+
+    &:first-child {
+      width: 14px;
+      height: 14px;
+    }
   }
 
   span.icon {
@@ -207,10 +212,7 @@ const StyledListItem = styled.li`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
-    & > *:not(:last-child) {
-      margin-right: ${space(2)};
-    }
+    gap: ${space(2)};
 
     & a:not(.invalid):hover::after {
       ${BODY_XS}
