@@ -41,6 +41,7 @@ const BlogContent = ({ slug }: Props) => {
   const selectedBlog = BlogPosts[slugStr];
   const Content = selectedBlog.content;
   const title = selectedBlog.title;
+  const ISODate = new Date(selectedBlog.datePublishedTimestamp).toISOString();
 
   /** @type {import('schema-dts').Article} */
   const schema = {
@@ -49,13 +50,13 @@ const BlogContent = ({ slug }: Props) => {
     'headline': t(title),
     'author': {
       '@type': 'Person',
-      'name': selectedBlog.author,
+      'name': t(selectedBlog.author),
       // The full URL must be provided, including the website's domain.
       'url': new URL('https://stooa.com', 'https://stooa.com')
     },
     // 'image': 'https://stooa.com' + selectedBlog.image,
-    'datePublished': selectedBlog.datePublishedTimestamp,
-    'dateModified': selectedBlog.dateModifiedTimestamp
+    'datePublished': ISODate,
+    'dateModified': ISODate
   };
 
   return (

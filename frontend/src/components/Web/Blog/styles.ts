@@ -125,6 +125,11 @@ const StyledPostContent = styled.div`
     aspect-ratio: 16 / 9;
     width: 100%;
     margin-block: 2rem;
+
+    & img {
+      object-fit: contain;
+      object-position: top;
+    }
   }
 
   & a {
