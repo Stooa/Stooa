@@ -240,7 +240,8 @@ const FishbowlForm = ({
             isFishbowlNow: false,
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
-            plainPassword: values.isPrivate ? values.plainPassword : undefined
+            plainPassword: values.isPrivate ? values.plainPassword : undefined,
+            hasSummary: false
           }
         }
       })
@@ -267,7 +268,8 @@ const FishbowlForm = ({
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
             plainPassword:
-              values.isPrivate && values.plainPassword ? values.plainPassword : undefined
+              values.isPrivate && values.plainPassword ? values.plainPassword : undefined,
+            hasSummary: false
           }
         }
       })

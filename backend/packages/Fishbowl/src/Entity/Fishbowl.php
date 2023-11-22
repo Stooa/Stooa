@@ -104,6 +104,8 @@ use Webmozart\Assert\Assert as MAssert;
             name: 'finish'
         ),
         new Mutation(
+            normalizationContext: ['groups' => ['fishbowl:read']],
+            denormalizationContext: ['groups' => ['fishbowl:write', 'fishbowl:update']],
             security: 'object.getHost() == user',
             validationContext: ['groups' => ['Default', 'fishbowl:update']],
             name: 'update'
@@ -241,6 +243,10 @@ class Fishbowl implements \Stringable
     #[ORM\Column(type: 'boolean')]
     private bool $isPrivate = false;
 
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[ORM\Column(type: 'boolean')]
+    private bool $hasSummary = false;
+
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $password = null;
 
@@ -248,6 +254,15 @@ class Fishbowl implements \Stringable
     #[Assert\Length(min: 8, max: 255)]
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:update'])]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $conferenceId = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:update'])]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $summary = null;
 
     /** @var Collection<int, Feedback> */
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
@@ -676,6 +691,42 @@ class Fishbowl implements \Stringable
     public function setIsPrivate(bool $isPrivate): self
     {
         $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function isHasSummary(): bool
+    {
+        return $this->hasSummary;
+    }
+
+    public function setHasSummary(bool $hasSummary): self
+    {
+        $this->hasSummary = $hasSummary;
+
+        return $this;
+    }
+
+    public function getConferenceId(): ?string
+    {
+        return $this->conferenceId;
+    }
+
+    public function setConferenceId(?string $conferenceId): self
+    {
+        $this->conferenceId = $conferenceId;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
 
         return $this;
     }
