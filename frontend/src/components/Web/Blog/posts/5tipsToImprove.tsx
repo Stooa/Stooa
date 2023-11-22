@@ -48,8 +48,7 @@ export const ImproveOnlineMeetings = () => {
           src="/img/web/blog/improve/blog-1.png"
           fill
           alt="Woman loading ice into a an old car."
-          objectFit="contain"
-          objectPosition="top"
+          sizes="(max-width: 768px) 100vw, 768px"
         />
       </div>
       <section id="surveys">
@@ -90,8 +89,7 @@ export const ImproveOnlineMeetings = () => {
           src="/img/web/blog/improve/blog-2.png"
           fill
           alt="People laughing in a cinema"
-          objectFit="contain"
-          objectPosition="top"
+          sizes="(max-width: 768px) 100vw, 768px"
         />
       </div>
       <section id="fishbowl">
