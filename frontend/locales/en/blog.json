@@ -1,0 +1,45 @@
+{
+    "share": "Share",
+    "bannerText": "Take your online conversations to the next level",
+    "blogCTA": "Schedule your next meeting in Stooa",
+    "posts": {
+        "5-tips-boost-participation-online-meetings": {
+            "title": "5 tips to boost participation in online meetings",
+            "subtitle": "Innovate in your online meetings: let's talk about effective techniques to increase engagement.",
+            "description": "Discover how to improve your online meetings with our 5 tips: let's start with effective techniques to encourage participation, understand how to break the ice creatively, and we close by learning the potential of the Fishbowl dynamic.",
+            "author": "Carme from Stooa",
+            "date-and-duration": "5 min of lecture - November 20th 2023",
+            "content": {
+                "firstBlock": "Have you ever felt like you were talking to the screen instead of your colleagues during online meetings? The awkward silence, the gazes lost in the cameras... and the famous \"Does anyone want to add anything?\" that always ends in a long silence.",
+                "secondBlock": "You're not alone. Maintaining <span>participation</span> and <span>commitment</span> in online meetings is a mission many of us face in this digital era. But don't worry! There are super creative ways to improve this.",
+                "thirdBlock": "Here are some tricks that will help you...",
+                "icebreakers": "1. Icebreakers",
+                "fourthBlock": "Start your meetings with an icebreaker. They are very useful strategic tools to start a session, especially online, with the aim of building trust and <span>energizing the group</span>, and they do more than just break the ice; they also allow you to <span>stimulate creativity</span> from the beginning. A simple example could be asking participants to share their desktop background and the story behind it.",
+                "fifthBlock": "A good icebreaker is like coffee in the morning: necessary to wake up and get warm. 🐠",
+                "surveys": "2. Polls",
+                "sixthBlock": "Incorporate live polls to collect instant opinions and preferences. Polls can be about the theme of the meeting or to break the ice. They work very well to <span>give a voice to all attendees</span>, thus increasing participation.<br/>For example, you could launch a poll about the favorite snack for meetings or the best meme of the month. Polls are like the GPS of the meeting, they tell you where people are going and keep everyone on course. And the best thing is that everyone feels like they are piloting!",
+                "seventhBlock": "You can do this with tools like Kahoot, Butter, or Google Forms.",
+                "agenda": "3. Agenda and Order of the Day",
+                "eighthBlock": "Share a detailed agenda before the meeting. Make sure it is clear, concise, and highlights the <span>key points and times</span> specific to each topic. This helps participants prepare and keeps the meeting focused and efficient.",
+                "reactions": "4. Reactions",
+                "ninthBlock": "Encourage participants to use reactions during the meeting. Use reactions like confetti at a carnival: let the thumbs up and hearts fly when something is cool. <span>It's the fastest way to say \"That's it!\" without interrupting the flow</span>.<br/>At Stooa, we usually start sessions by throwing out a question and asking participants to respond with reactions. You could ask what they would prefer between two things, for example: never being able to listen to music again 👎, or having to listen to music all the time 👍, and ask them to react with a thumbs up or down.",
+                "fishbowl": "5. Fishbowl",
+                "eleventhBlock": "The Fishbowl dynamic will allow you to stop being the person who facilitates the session so you can focus on the conversation and the insights gained. This dynamic focuses on improving the <span>flow of dialogue</span>, and it manages to activate participation by giving all attendees the opportunity to actively participate.",
+                "howItWorks": "How does it work?",
+                "twelfthBlock": "The Fishbowl is like an aquarium for brilliant ideas. Imagine that you are in an online meeting, and instead of everyone talking at once (total chaos!), some participants are in the \"aquarium\" (the Fishbowl itself) <span>sharing their ideas</span> while the rest observe and listen attentively. Participants in the aquarium rotate, ensuring that everyone has the chance to dive into the center of the action.",
+                "benefits": "Benefits of the Fishbowl:",
+                "listItem1": "<span>Perfect Balance:</span> Everyone gets their moment in the spotlight, avoiding the chaos of speaking at the same time.",
+                "listItem2": "<span>Focus without Distractions:</span> It eliminates interruptions, keeping the meeting focused on the essential ideas.",
+                "listItem3": "<span>Active Participation:</span> The constant rotation inside the aquarium ensures that each team member has their chance to shine.",
+                "listItem4": "<span>Creative and Relaxed Atmosphere:</span> The unique structure of the Fishbowl creates a comfortable space to share ideas, without excessive formalities.",
+                "thirdteenthBlock": "Get ready to dive into the Fishbowl dynamic and make your online meetings a feast of innovation and participation. If you want to try this technique online, we invite you to schedule your next meeting at Stooa 🚀🐟",
+                "summaryTitle": "In summary",
+                "fourteenthBlock": "With these tricks, your meetings will be the envy of the corporate world. Introduce these games, techniques, and a little madness, and your team will be counting the minutes to connect. Let the fun begin!",
+                "sixteenthBlock": "Remember, a good meeting is like a good party: everyone must enjoy and participate. And with Stooa, we're here to make sure the party never stops. 🎉",
+                "seventeenthBlock": "And you, do you use any of these dynamics in your meetings? How do you increase participation in your online meetings?<br/> I'll be reading you in the comments 👀",
+                "readTheArticle": "You can read <a>the original article</a> published on LinkedIn by Carme Alcoverro."
+            }
+        }
+    }
+
+}

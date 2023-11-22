@@ -16,7 +16,7 @@ import { Container } from '@/ui/pages/fishbowl-detail';
 import { MainGrid } from './styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import FishbowlDataCard from '@/components/Web/FishbowlDataCard';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { toast } from 'react-toastify';

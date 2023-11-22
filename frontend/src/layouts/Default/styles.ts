@@ -23,11 +23,10 @@ const Container = styled.div`
   background-color: ${COLOR_NEUTRO_200};
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${space(6)} 1fr;
+  grid-template-rows: ${space(9)} 1fr;
   gap: 0;
   grid-template-areas: 'Header' 'Main';
-  min-height: calc(100vh - ${space(6)});
-  padding: ${space(3)};
+  min-height: calc(100vh - ${space(9)});
   position: relative;
   transition: grid-template-columns 0.25s ease-in-out;
 
@@ -40,8 +39,6 @@ const Container = styled.div`
   `}
 
   ${media.min('tablet')`
-    padding: ${space(3)} ${space(6)};
-
     &.decorated { padding-bottom: ${space(12)}; }
   `}
 `;
@@ -64,13 +61,18 @@ const Header = styled.header`
   grid-area: Header;
   display: flex;
   justify-content: space-between;
+  padding: ${space(1)} ${space(2)} 0;
+  gap: ${space(2)};
+
+  ${media.min('tablet')`
+    padding: ${space(3)} ${space(6)} 0;
+  `}
 `;
 
-const Main = styled.main<{ center?: boolean }>`
+const Main = styled.main<{ center?: boolean; positionDefault?: boolean }>`
   color: ${COLOR_NEUTRO_700};
   grid-area: Main;
-  padding: ${space(2)} 0;
-  position: relative;
+  position: ${props => (props.positionDefault ? 'static' : 'relative')};
   text-align: center;
   z-index: 1;
 
