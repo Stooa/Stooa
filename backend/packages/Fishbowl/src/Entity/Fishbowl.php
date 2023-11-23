@@ -256,11 +256,6 @@ class Fishbowl implements \Stringable
     private ?string $plainPassword = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:update'])]
-    #[Assert\Length(max: 255)]
-    #[ORM\Column(type: 'string', nullable: true)]
-    private ?string $conferenceId = null;
-
-    #[Groups(['fishbowl:read', 'fishbowl:update'])]
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $summary = null;
 
@@ -703,18 +698,6 @@ class Fishbowl implements \Stringable
     public function setHasSummary(bool $hasSummary): self
     {
         $this->hasSummary = $hasSummary;
-
-        return $this;
-    }
-
-    public function getConferenceId(): ?string
-    {
-        return $this->conferenceId;
-    }
-
-    public function setConferenceId(?string $conferenceId): self
-    {
-        $this->conferenceId = $conferenceId;
 
         return $this;
     }
