@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4b7b2d29dbb840df3cb62361219a37f",
+    "content-hash": "2d86662f659a02d47f83063e9ec898ac",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4700,16 +4700,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.28.0",
+            "version": "4.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "724c4fcec44b33c74aa3f3cc37627aa2e7890446"
+                "reference": "75d71162b5bdd590afc105bcd0e8112f4cced224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/724c4fcec44b33c74aa3f3cc37627aa2e7890446",
-                "reference": "724c4fcec44b33c74aa3f3cc37627aa2e7890446",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/75d71162b5bdd590afc105bcd0e8112f4cced224",
+                "reference": "75d71162b5bdd590afc105bcd0e8112f4cced224",
                 "shasum": ""
             },
             "require": {
@@ -4813,7 +4813,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.28.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.28.1"
             },
             "funding": [
                 {
@@ -4833,7 +4833,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-18T22:47:20+00:00"
+            "time": "2023-11-20T09:46:11+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -5055,16 +5055,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "4.14.0",
+            "version": "4.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "534837c60b06d64c06dc01eca69cfe4f944a4e94"
+                "reference": "5c36c5c76216345103375f7aa9acd1f17287c7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/534837c60b06d64c06dc01eca69cfe4f944a4e94",
-                "reference": "534837c60b06d64c06dc01eca69cfe4f944a4e94",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/5c36c5c76216345103375f7aa9acd1f17287c7ed",
+                "reference": "5c36c5c76216345103375f7aa9acd1f17287c7ed",
                 "shasum": ""
             },
             "require": {
@@ -5110,7 +5110,7 @@
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
                 "rector/rector": "^0.18",
-                "sonata-project/block-bundle": "^4.2",
+                "sonata-project/block-bundle": "^5.0",
                 "sonata-project/entity-audit-bundle": "^1.1",
                 "symfony/browser-kit": "^5.4 || ^6.2",
                 "symfony/css-selector": "^5.4 || ^6.2",
@@ -5164,7 +5164,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.14.0"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.14.1"
             },
             "funding": [
                 {
@@ -5184,7 +5184,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-23T16:21:16+00:00"
+            "time": "2023-11-19T19:22:33+00:00"
         },
         {
             "name": "sonata-project/exporter",
