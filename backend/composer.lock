@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "278590cc496eb02c0901e83f5e28168f",
+    "content-hash": "ec68a0b7d631d4d4923843e90f9a50b2",
     "packages": [
         {
             "name": "api-platform/core",
@@ -4238,16 +4238,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.28.0",
+            "version": "4.28.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "724c4fcec44b33c74aa3f3cc37627aa2e7890446"
+                "reference": "75d71162b5bdd590afc105bcd0e8112f4cced224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/724c4fcec44b33c74aa3f3cc37627aa2e7890446",
-                "reference": "724c4fcec44b33c74aa3f3cc37627aa2e7890446",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/75d71162b5bdd590afc105bcd0e8112f4cced224",
+                "reference": "75d71162b5bdd590afc105bcd0e8112f4cced224",
                 "shasum": ""
             },
             "require": {
@@ -4351,7 +4351,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.28.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.28.1"
             },
             "funding": [
                 {
@@ -4371,20 +4371,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-18T22:47:20+00:00"
+            "time": "2023-11-20T09:46:11+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "5.0.1",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "2902f4005058219e5ec04f94fd2b207ee2ee21d8"
+                "reference": "95bedc0f472f27c58fd2c9e99e810aa5bee14876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/2902f4005058219e5ec04f94fd2b207ee2ee21d8",
-                "reference": "2902f4005058219e5ec04f94fd2b207ee2ee21d8",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/95bedc0f472f27c58fd2c9e99e810aa5bee14876",
+                "reference": "95bedc0f472f27c58fd2c9e99e810aa5bee14876",
                 "shasum": ""
             },
             "require": {
@@ -4394,19 +4394,19 @@
                 "psr/container": "^1.0 || ^2.0",
                 "psr/log": "^2.0 || ^3.0",
                 "sonata-project/form-extensions": "^1.4 || ^2.0",
-                "symfony/asset": "^5.4 || ^6.2",
-                "symfony/config": "^5.4 || ^6.2",
-                "symfony/console": "^5.4 || ^6.2",
-                "symfony/dependency-injection": "^5.4 || ^6.2",
-                "symfony/event-dispatcher": "^5.4 || ^6.2",
+                "symfony/asset": "^5.4 || ^6.2 || ^7.0",
+                "symfony/config": "^5.4 || ^6.2 || ^7.0",
+                "symfony/console": "^5.4 || ^6.2 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.2 || ^7.0",
+                "symfony/event-dispatcher": "^5.4 || ^6.2 || ^7.0",
                 "symfony/event-dispatcher-contracts": "^2.0 || ^3.0",
-                "symfony/form": "^5.4 || ^6.2",
-                "symfony/framework-bundle": "^5.4 || ^6.2",
-                "symfony/http-foundation": "^5.4 || ^6.2",
-                "symfony/http-kernel": "^5.4 || ^6.2",
-                "symfony/options-resolver": "^5.4 || ^6.2",
-                "symfony/twig-bundle": "^5.4 || ^6.2",
-                "symfony/validator": "^5.4 || ^6.2",
+                "symfony/form": "^5.4 || ^6.2 || ^7.0",
+                "symfony/framework-bundle": "^5.4 || ^6.2 || ^7.0",
+                "symfony/http-foundation": "^5.4 || ^6.2 || ^7.0",
+                "symfony/http-kernel": "^5.4 || ^6.2 || ^7.0",
+                "symfony/options-resolver": "^5.4 || ^6.2 || ^7.0",
+                "symfony/twig-bundle": "^5.4 || ^6.2 || ^7.0",
+                "symfony/validator": "^5.4 || ^6.2 || ^7.0",
                 "twig/twig": "^3.0"
             },
             "conflict": {
@@ -4416,8 +4416,8 @@
                 "friendsofphp/php-cs-fixer": "^3.4",
                 "knplabs/knp-menu": "^3.1",
                 "knplabs/knp-menu-bundle": "^3.0",
-                "matthiasnoback/symfony-config-test": "^4.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+                "matthiasnoback/symfony-config-test": "^4.2 || ^5.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.1 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
@@ -4426,11 +4426,11 @@
                 "phpunit/phpunit": "^9.5.13",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.17",
-                "symfony/browser-kit": "^5.4 || ^6.2",
-                "symfony/error-handler": "^5.4 || ^6.2",
-                "symfony/phpunit-bridge": "^6.2",
-                "symfony/stopwatch": "^5.4 || ^6.2",
+                "rector/rector": "^0.18",
+                "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
+                "symfony/error-handler": "^5.4 || ^6.2 || ^7.0",
+                "symfony/phpunit-bridge": "^6.2 || ^7.0",
+                "symfony/stopwatch": "^5.4 || ^6.2 || ^7.0",
                 "vimeo/psalm": "^5.8"
             },
             "suggest": {
@@ -4465,7 +4465,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataBlockBundle/issues",
-                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/5.0.1"
+                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/5.1.0"
             },
             "funding": [
                 {
@@ -4485,7 +4485,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-22T12:48:51+00:00"
+            "time": "2023-11-23T21:14:33+00:00"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -4593,16 +4593,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "4.14.0",
+            "version": "4.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "534837c60b06d64c06dc01eca69cfe4f944a4e94"
+                "reference": "5c36c5c76216345103375f7aa9acd1f17287c7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/534837c60b06d64c06dc01eca69cfe4f944a4e94",
-                "reference": "534837c60b06d64c06dc01eca69cfe4f944a4e94",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/5c36c5c76216345103375f7aa9acd1f17287c7ed",
+                "reference": "5c36c5c76216345103375f7aa9acd1f17287c7ed",
                 "shasum": ""
             },
             "require": {
@@ -4648,7 +4648,7 @@
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
                 "rector/rector": "^0.18",
-                "sonata-project/block-bundle": "^4.2",
+                "sonata-project/block-bundle": "^5.0",
                 "sonata-project/entity-audit-bundle": "^1.1",
                 "symfony/browser-kit": "^5.4 || ^6.2",
                 "symfony/css-selector": "^5.4 || ^6.2",
@@ -4702,7 +4702,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.14.0"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.14.1"
             },
             "funding": [
                 {
@@ -4722,7 +4722,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-23T16:21:16+00:00"
+            "time": "2023-11-19T19:22:33+00:00"
         },
         {
             "name": "sonata-project/exporter",
@@ -6612,16 +6612,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v6.3.6",
+            "version": "v6.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "6af3c25eda0f2a028aeab7d81c2597dfedecd96a"
+                "reference": "b7a8098163cce87c0b6ce05d0f361dc12d5a2788"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/6af3c25eda0f2a028aeab7d81c2597dfedecd96a",
-                "reference": "6af3c25eda0f2a028aeab7d81c2597dfedecd96a",
+                "url": "https://api.github.com/repos/symfony/form/zipball/b7a8098163cce87c0b6ce05d0f361dc12d5a2788",
+                "reference": "b7a8098163cce87c0b6ce05d0f361dc12d5a2788",
                 "shasum": ""
             },
             "require": {
@@ -6689,7 +6689,7 @@
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/form/tree/v6.3.6"
+                "source": "https://github.com/symfony/form/tree/v6.3.8"
             },
             "funding": [
                 {
@@ -6705,7 +6705,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-17T11:32:53+00:00"
+            "time": "2023-11-06T10:58:05+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -9264,16 +9264,16 @@
         },
         {
             "name": "symfony/serializer",
-            "version": "v6.3.6",
+            "version": "v6.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "8c5fb7144889839751ad9680cf4f183f60f8fbce"
+                "reference": "b3ad1515a276473f7919ac97e560017284a7c4bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/8c5fb7144889839751ad9680cf4f183f60f8fbce",
-                "reference": "8c5fb7144889839751ad9680cf4f183f60f8fbce",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/b3ad1515a276473f7919ac97e560017284a7c4bf",
+                "reference": "b3ad1515a276473f7919ac97e560017284a7c4bf",
                 "shasum": ""
             },
             "require": {
@@ -9338,7 +9338,7 @@
             "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/serializer/tree/v6.3.6"
+                "source": "https://github.com/symfony/serializer/tree/v6.3.8"
             },
             "funding": [
                 {
@@ -9354,7 +9354,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-17T11:32:53+00:00"
+            "time": "2023-11-07T10:11:25+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -10498,26 +10498,26 @@
         },
         {
             "name": "twig/string-extra",
-            "version": "v3.7.1",
+            "version": "v3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/string-extra.git",
-                "reference": "7230d630a25e91cd91a2bd8e2f0e872962507eab"
+                "reference": "b0c9037d96baff79abe368dc092a59b726517548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/string-extra/zipball/7230d630a25e91cd91a2bd8e2f0e872962507eab",
-                "reference": "7230d630a25e91cd91a2bd8e2f0e872962507eab",
+                "url": "https://api.github.com/repos/twigphp/string-extra/zipball/b0c9037d96baff79abe368dc092a59b726517548",
+                "reference": "b0c9037d96baff79abe368dc092a59b726517548",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
-                "symfony/string": "^5.4|^6.0",
+                "symfony/string": "^5.4|^6.0|^7.0",
                 "symfony/translation-contracts": "^1.1|^2|^3",
-                "twig/twig": "^2.7|^3.0"
+                "twig/twig": "^3.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^5.4|^6.3"
+                "symfony/phpunit-bridge": "^6.4|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -10549,7 +10549,7 @@
                 "unicode"
             ],
             "support": {
-                "source": "https://github.com/twigphp/string-extra/tree/v3.7.1"
+                "source": "https://github.com/twigphp/string-extra/tree/v3.8.0"
             },
             "funding": [
                 {
@@ -10561,7 +10561,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-29T15:34:56+00:00"
+            "time": "2023-11-21T14:02:01+00:00"
         },
         {
             "name": "twig/twig",
