@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Controller;
 
+use App\Fishbowl\Service\TranscriptionFileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,18 +21,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class TranscriptionWebhookController extends AbstractController
 {
+    public function __construct(private readonly TranscriptionFileService $transcriptionFileService)
+    {
+
+    }
+
     #[Route('/webhooks/transcription', name: 'webhook_transcription', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse
     {
         $requestArray = $request->toArray();
 
-        if (isset($requestArray['data']['preAuthenticatedLink'])) {
-            $url = $requestArray['data']['preAuthenticatedLink'];
-            $sessionId = $requestArray['sessionId'];
-            $path = $this->getParameter('kernel.project_dir') . '/transcriptions';
-            $fileContent = file_get_contents($url);
-            file_put_contents($path . '/' . $sessionId . '.json', $fileContent);
-        }
+        $path = $this->getParameter('kernel.project_dir') . '/transcriptions';
+
+        $this->transcriptionFileService->save($requestArray, $path);
 
         return new JsonResponse(['response' => 'ok']);
     }
