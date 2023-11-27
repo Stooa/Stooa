@@ -13,3 +13,4 @@ framework:
             failed: 'doctrine://default?queue_name=failed'
         routing:
             Symfony\Component\Mailer\Messenger\SendEmailMessage: async
+            App\Fishbowl\Message\UploadTranscription: async

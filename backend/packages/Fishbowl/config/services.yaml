@@ -40,6 +40,14 @@ services:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
 
+    App\Fishbowl\Service\UploadTranscriptionService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
+    App\Fishbowl\Service\GetTranscriptionSummaryService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:

@@ -13,16 +13,19 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service;
 
+use App\Fishbowl\Message\GetTranscriptionSummary;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Messenger\MessageBusInterface;
 
-final class ThreadsService extends AbstractController
+final class GetTranscriptionSummaryService extends AbstractController
 {
     public function __construct(
-        private readonly string $apiKey
+        private readonly string $apiKey,
+        private readonly MessageBusInterface $bus
     ) {
     }
 
-    public function check(string $threadId): string
+    public function getSummary(string $threadId, string $slug): void
     {
         $client = \OpenAI::client($this->apiKey);
 
@@ -30,6 +33,9 @@ final class ThreadsService extends AbstractController
             'limit' => 10,
         ]);
 
-        return $response->data[0]->content[0]->text->value;
+        foreach ($response->data as $result) {
+            // check if the message is the one we want
+        }
+        $this->bus->dispatch(new GetTranscriptionSummary($threadId, $slug));
     }
 }

@@ -16,6 +16,7 @@ namespace App\Fishbowl\Message;
 class CreateTranscriptionThread
 {
     public function __construct(
+        private readonly string $fileId,
         private readonly string $slug,
     ) {
     }
@@ -23,5 +24,10 @@ class CreateTranscriptionThread
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function getFileId(): string
+    {
+        return $this->fileId;
     }
 }

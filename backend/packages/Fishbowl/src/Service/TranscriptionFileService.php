@@ -13,12 +13,16 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service;
 
+use App\Fishbowl\Message\UploadTranscription;
 use App\Fishbowl\Repository\FishbowlRepository;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class TranscriptionFileService
 {
-    public function __construct(private readonly FishbowlRepository $fishbowlRepository)
-    {
+    public function __construct(
+        private readonly FishbowlRepository $fishbowlRepository,
+        private readonly MessageBusInterface $bus,
+    ) {
     }
 
     /** @param array<mixed, mixed> $requestArray */
@@ -27,16 +31,14 @@ class TranscriptionFileService
         if (isset($requestArray['data']['preAuthenticatedLink'], $requestArray['fqn'])) {
             $slug = $this->getSlugFromFqn($requestArray['fqn']);
 
-            $fileContent = file_get_contents($requestArray['data']['preAuthenticatedLink']);
-
             $fileName = $slug . '.json';
 
-            file_put_contents($path . '/' . $fileName, $fileContent);
+            file_put_contents($path . '/' . $fileName, file_get_contents($requestArray['data']['preAuthenticatedLink']));
 
             $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
             if (null !== $fishbowl && $fishbowl->isHasSummary()) {
-                // todo create new message
+                $this->bus->dispatch(new UploadTranscription($slug));
             }
         }
     }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Controller;
 
-use App\Fishbowl\Service\ThreadsService;
+use App\Fishbowl\Service\CreateTranscriptionThreadService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class ThreadsController extends AbstractController
 {
-    public function __construct(private readonly ThreadsService $threadsService)
+    public function __construct(private readonly CreateTranscriptionThreadService $threadsService)
     {
 
     }
@@ -29,6 +29,6 @@ final class ThreadsController extends AbstractController
     #[Route('/openai/thread/{threadId}', name: 'openai_threads', methods: ['POST'])]
     public function __invoke(string $threadId, Request $request): JsonResponse
     {
-        return new JsonResponse(['response' => $this->threadsService->check($threadId)]);
+        return new JsonResponse(['response' => $this->threadsService->createThread($threadId)]);
     }
 }

@@ -13,15 +13,21 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Message;
 
-class ReadTranscriptionThread
+class GetTranscriptionSummary
 {
     public function __construct(
         private readonly string $threadId,
+        private readonly string $slug
     ) {
     }
 
     public function getThreadId(): string
     {
         return $this->threadId;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }
