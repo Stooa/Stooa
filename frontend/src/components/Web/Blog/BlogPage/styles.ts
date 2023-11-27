@@ -37,7 +37,7 @@ const StyledBlogContainer = styled.div`
   gap: 2em;
   width: 100%;
   max-width: 900px;
-  padding-block-start: 3em;
+  padding-block-start: 1em;
   padding-block-end: 6em;
   margin-inline: auto;
 
