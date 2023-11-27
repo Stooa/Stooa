@@ -111,7 +111,7 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "ergebnis/composer-normalize": true,
-            "php-http/discovery": true,
+            "php-http/discovery": false,
             "symfony/flex": true,
             "symfony/runtime": true
         },
