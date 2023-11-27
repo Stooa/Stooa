@@ -35,7 +35,7 @@ class TranscriptionFileService
 
             $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
-            if ($fishbowl->isHasSummary()) {
+            if (null !== $fishbowl && $fishbowl->isHasSummary()) {
                 // todo create new message
             }
         }
