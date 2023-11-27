@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e58a13b706d993cfad96da6680ae581b",
+    "content-hash": "c4b7b2d29dbb840df3cb62361219a37f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3302,12 +3302,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/client.git",
-                "reference": "a910d16f3b26e52c368f33773132c45fc2014085"
+                "reference": "18ab310131a26bbf9c0b85dd02d94a8d1ee13b00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/client/zipball/a910d16f3b26e52c368f33773132c45fc2014085",
-                "reference": "a910d16f3b26e52c368f33773132c45fc2014085",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/18ab310131a26bbf9c0b85dd02d94a8d1ee13b00",
+                "reference": "18ab310131a26bbf9c0b85dd02d94a8d1ee13b00",
                 "shasum": ""
             },
             "require": {
@@ -3322,15 +3322,15 @@
             "require-dev": {
                 "guzzlehttp/guzzle": "^7.8.0",
                 "guzzlehttp/psr7": "^2.6.1",
-                "laravel/pint": "^1.13.2",
-                "nunomaduro/collision": "^7.9.0",
-                "pestphp/pest": "^2.19.2",
-                "pestphp/pest-plugin-arch": "^2.3.3",
-                "pestphp/pest-plugin-mock": "^2.0.0",
-                "pestphp/pest-plugin-type-coverage": "^2.2.0",
-                "phpstan/phpstan": "^1.10.35",
+                "laravel/pint": "^1.13.6",
+                "mockery/mockery": "^1.6.6",
+                "nunomaduro/collision": "^7.10.0",
+                "pestphp/pest": "^2.25.0",
+                "pestphp/pest-plugin-arch": "^2.4.1",
+                "pestphp/pest-plugin-type-coverage": "^2.5.0",
+                "phpstan/phpstan": "^1.10.44",
                 "rector/rector": "^0.16.0",
-                "symfony/var-dumper": "^6.3.4"
+                "symfony/var-dumper": "^6.3.8"
             },
             "type": "library",
             "autoload": {
@@ -3386,7 +3386,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-14T08:52:43+00:00"
+            "time": "2023-11-23T13:58:11+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -3801,16 +3801,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.24.3",
+            "version": "1.24.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "12f01d214f1c73b9c91fdb3b1c415e4c70652083"
+                "reference": "6bd0c26f3786cd9b7c359675cb789e35a8e07496"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/12f01d214f1c73b9c91fdb3b1c415e4c70652083",
-                "reference": "12f01d214f1c73b9c91fdb3b1c415e4c70652083",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6bd0c26f3786cd9b7c359675cb789e35a8e07496",
+                "reference": "6bd0c26f3786cd9b7c359675cb789e35a8e07496",
                 "shasum": ""
             },
             "require": {
@@ -3842,22 +3842,22 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.24.3"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.24.4"
             },
-            "time": "2023-11-18T20:15:32+00:00"
+            "time": "2023-11-26T18:29:22+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.43",
+            "version": "1.10.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "2c4129f6ca8c7cfa870098884b8869b410a5a361"
+                "reference": "bf84367c53a23f759513985c54ffe0d0c249825b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2c4129f6ca8c7cfa870098884b8869b410a5a361",
-                "reference": "2c4129f6ca8c7cfa870098884b8869b410a5a361",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/bf84367c53a23f759513985c54ffe0d0c249825b",
+                "reference": "bf84367c53a23f759513985c54ffe0d0c249825b",
                 "shasum": ""
             },
             "require": {
@@ -3906,7 +3906,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-11-19T19:55:25+00:00"
+            "time": "2023-11-21T16:30:46+00:00"
         },
         {
             "name": "psr/cache",
@@ -4837,16 +4837,16 @@
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "5.0.1",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "2902f4005058219e5ec04f94fd2b207ee2ee21d8"
+                "reference": "95bedc0f472f27c58fd2c9e99e810aa5bee14876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/2902f4005058219e5ec04f94fd2b207ee2ee21d8",
-                "reference": "2902f4005058219e5ec04f94fd2b207ee2ee21d8",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/95bedc0f472f27c58fd2c9e99e810aa5bee14876",
+                "reference": "95bedc0f472f27c58fd2c9e99e810aa5bee14876",
                 "shasum": ""
             },
             "require": {
@@ -4856,19 +4856,19 @@
                 "psr/container": "^1.0 || ^2.0",
                 "psr/log": "^2.0 || ^3.0",
                 "sonata-project/form-extensions": "^1.4 || ^2.0",
-                "symfony/asset": "^5.4 || ^6.2",
-                "symfony/config": "^5.4 || ^6.2",
-                "symfony/console": "^5.4 || ^6.2",
-                "symfony/dependency-injection": "^5.4 || ^6.2",
-                "symfony/event-dispatcher": "^5.4 || ^6.2",
+                "symfony/asset": "^5.4 || ^6.2 || ^7.0",
+                "symfony/config": "^5.4 || ^6.2 || ^7.0",
+                "symfony/console": "^5.4 || ^6.2 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.2 || ^7.0",
+                "symfony/event-dispatcher": "^5.4 || ^6.2 || ^7.0",
                 "symfony/event-dispatcher-contracts": "^2.0 || ^3.0",
-                "symfony/form": "^5.4 || ^6.2",
-                "symfony/framework-bundle": "^5.4 || ^6.2",
-                "symfony/http-foundation": "^5.4 || ^6.2",
-                "symfony/http-kernel": "^5.4 || ^6.2",
-                "symfony/options-resolver": "^5.4 || ^6.2",
-                "symfony/twig-bundle": "^5.4 || ^6.2",
-                "symfony/validator": "^5.4 || ^6.2",
+                "symfony/form": "^5.4 || ^6.2 || ^7.0",
+                "symfony/framework-bundle": "^5.4 || ^6.2 || ^7.0",
+                "symfony/http-foundation": "^5.4 || ^6.2 || ^7.0",
+                "symfony/http-kernel": "^5.4 || ^6.2 || ^7.0",
+                "symfony/options-resolver": "^5.4 || ^6.2 || ^7.0",
+                "symfony/twig-bundle": "^5.4 || ^6.2 || ^7.0",
+                "symfony/validator": "^5.4 || ^6.2 || ^7.0",
                 "twig/twig": "^3.0"
             },
             "conflict": {
@@ -4878,8 +4878,8 @@
                 "friendsofphp/php-cs-fixer": "^3.4",
                 "knplabs/knp-menu": "^3.1",
                 "knplabs/knp-menu-bundle": "^3.0",
-                "matthiasnoback/symfony-config-test": "^4.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+                "matthiasnoback/symfony-config-test": "^4.2 || ^5.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.1 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
@@ -4888,11 +4888,11 @@
                 "phpunit/phpunit": "^9.5.13",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.17",
-                "symfony/browser-kit": "^5.4 || ^6.2",
-                "symfony/error-handler": "^5.4 || ^6.2",
-                "symfony/phpunit-bridge": "^6.2",
-                "symfony/stopwatch": "^5.4 || ^6.2",
+                "rector/rector": "^0.18",
+                "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
+                "symfony/error-handler": "^5.4 || ^6.2 || ^7.0",
+                "symfony/phpunit-bridge": "^6.2 || ^7.0",
+                "symfony/stopwatch": "^5.4 || ^6.2 || ^7.0",
                 "vimeo/psalm": "^5.8"
             },
             "suggest": {
@@ -4927,7 +4927,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataBlockBundle/issues",
-                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/5.0.1"
+                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/5.1.0"
             },
             "funding": [
                 {
@@ -4947,7 +4947,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-22T12:48:51+00:00"
+            "time": "2023-11-23T21:14:33+00:00"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -13287,16 +13287,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.3.50",
+            "version": "1.3.53",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "c94f43bd2f11c249c23b8830f54c28025468a08c"
+                "reference": "85def57e5db6ac6c8a512200c0cfadf7b6621b10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/c94f43bd2f11c249c23b8830f54c28025468a08c",
-                "reference": "c94f43bd2f11c249c23b8830f54c28025468a08c",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/85def57e5db6ac6c8a512200c0cfadf7b6621b10",
+                "reference": "85def57e5db6ac6c8a512200c0cfadf7b6621b10",
                 "shasum": ""
             },
             "require": {
@@ -13351,9 +13351,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.3.50"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.3.53"
             },
-            "time": "2023-11-17T10:51:01+00:00"
+            "time": "2023-11-21T10:31:58+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -13532,16 +13532,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.8",
+            "version": "10.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297"
+                "reference": "a56a9ab2f680246adcf3db43f38ddf1765774735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/84838eed9ded511f61dc3e8b5944a52d9017b297",
-                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/a56a9ab2f680246adcf3db43f38ddf1765774735",
+                "reference": "a56a9ab2f680246adcf3db43f38ddf1765774735",
                 "shasum": ""
             },
             "require": {
@@ -13598,7 +13598,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.8"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.9"
             },
             "funding": [
                 {
@@ -13606,7 +13606,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-15T13:31:15+00:00"
+            "time": "2023-11-23T12:23:20+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
