@@ -10,7 +10,7 @@
 import styled, { css } from 'styled-components';
 
 import { space, media } from '@/ui/helpers';
-import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { COLOR_NEUTRO_100, COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
 
 const flexCenter = css`
   align-items: center;
@@ -19,11 +19,11 @@ const flexCenter = css`
   justify-content: center;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ blogLayout?: boolean }>`
   background-color: ${COLOR_NEUTRO_200};
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${space(9)} 1fr;
+  grid-template-rows: ${({ blogLayout }) => (blogLayout ? '1fr' : `${space(9)} 1fr`)};
   gap: 0;
   grid-template-areas: 'Header' 'Main';
   min-height: calc(100vh - ${space(9)});
@@ -55,7 +55,7 @@ const Decoration = styled.div`
   }
 `;
 
-const Header = styled.header`
+const Header = styled.header<{ blogLayout?: boolean }>`
   align-items: center;
   color: ${COLOR_NEUTRO_700};
   grid-area: Header;
@@ -67,6 +67,17 @@ const Header = styled.header`
   ${media.min('tablet')`
     padding: ${space(3)} ${space(6)} 0;
   `}
+
+  ${({ blogLayout }) =>
+    blogLayout &&
+    css`
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      color: ${COLOR_NEUTRO_100};
+    `}
 `;
 
 const Main = styled.main<{ center?: boolean; positionDefault?: boolean }>`
