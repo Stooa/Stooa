@@ -10,6 +10,8 @@
 import BlogHeader from '@/components/Web/Blog/BlogHeader';
 import BlogPage from '@/components/Web/Blog/BlogPage';
 import Layout from '@/layouts/Default';
+import { GetServerSideProps } from 'next';
+import getT from 'next-translate/getT';
 
 const Blog = () => {
   return (
@@ -20,17 +22,15 @@ const Blog = () => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async ({ locale, params }) => {
-//   const t = await getT(locale, 'blog');
-//   const currentBlog = BlogPosts[slug as string];
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  const t = await getT(locale, 'blog');
 
-//   return {
-//     props: {
-//       slug,
-//       seoTitle: currentBlog?.title ? t(currentBlog.title) : null,
-//       seoDescription: currentBlog?.title ? t(currentBlog.description) : null
-//     }
-//   };
-// };
+  return {
+    props: {
+      seoTitle: 'Stooa Blog. We love, we share.',
+      seoDescription: t('blogPage.headerSubtitle')
+    }
+  };
+};
 
 export default Blog;

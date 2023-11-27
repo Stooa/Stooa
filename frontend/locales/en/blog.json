@@ -4,7 +4,8 @@
     "blogCTA": "Schedule your next meeting in Stooa",
     "blogPage": {
         "headerTitle": "We love, we share.",
-        "headerSubtitle": "At Stooa we like to talk about debate, conversation, listening to all the voices and learning from them, if you are also interested in these topics, this is your place."
+        "headerSubtitle": "At Stooa we like to talk about debate, conversation, listening to all the voices and learning from them, if you are also interested in these topics, this is your place.",
+        "lastPosts": "Last articles"
     },
     "posts": {
         "5-tips-boost-participation-online-meetings": {

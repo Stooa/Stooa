@@ -11,6 +11,7 @@ import { BlogMenuItemType } from './AnchorMenu';
 import { ImproveOnlineMeetings } from './posts/5tipsToImprove';
 
 export type BlogPost = {
+  slug: string;
   title: string;
   image: string;
   description: string;
@@ -25,6 +26,7 @@ export type BlogPost = {
 
 export const BlogPosts: Record<string, BlogPost> = {
   '5-tips-boost-participation-online-meetings': {
+    slug: '5-tips-boost-participation-online-meetings',
     title: 'posts.5-tips-boost-participation-online-meetings.title',
     image: '/img/web/blog/improve/blog-1.png',
     description: 'posts.5-tips-boost-participation-online-meetings.description',
@@ -58,6 +60,7 @@ export const BlogPosts: Record<string, BlogPost> = {
     ]
   },
   '5-tips-boost-participation-online-meetingss': {
+    slug: '5-tips-boost-participation-online-meetings',
     title: 'posts.5-tips-boost-participation-online-meetings.title',
     image: '/img/web/blog/improve/blog-1.png',
     description: 'posts.5-tips-boost-participation-online-meetings.description',
@@ -91,6 +94,7 @@ export const BlogPosts: Record<string, BlogPost> = {
     ]
   },
   '5-tips-boost-participation-online-meetiangs': {
+    slug: '5-tips-boost-participation-online-meetings',
     title: 'posts.5-tips-boost-participation-online-meetings.title',
     image: '/img/web/blog/improve/blog-1.png',
     description: 'posts.5-tips-boost-participation-online-meetings.description',
@@ -124,6 +128,7 @@ export const BlogPosts: Record<string, BlogPost> = {
     ]
   },
   '5-tips-boost-participatdion-online-meetings': {
+    slug: '5-tips-boost-participation-online-meetings',
     title: 'posts.5-tips-boost-participation-online-meetings.title',
     image: '/img/web/blog/improve/blog-1.png',
     description: 'posts.5-tips-boost-participation-online-meetings.description',

@@ -8,13 +8,10 @@
  */
 
 import { COLOR_NEUTRO_300 } from '@/ui/settings';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const StyledBlogCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  text-align: left;
   border-radius: 8px;
   flex: 1 1 320px;
   /* border: 1px solid transparent;
@@ -36,4 +33,15 @@ const StyledBlogCard = styled.div`
   }
 `;
 
-export { StyledBlogCard };
+const StyledLinkCard = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  text-align: left;
+
+  &:hover {
+    color: inherit;
+  }
+`;
+
+export { StyledBlogCard, StyledLinkCard };

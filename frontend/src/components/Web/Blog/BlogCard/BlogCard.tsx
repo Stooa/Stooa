@@ -10,7 +10,8 @@
 import useTranslation from 'next-translate/useTranslation';
 import { BlogPost } from '../BlogPostsData';
 import Image from 'next/image';
-import { StyledBlogCard } from './styles';
+import { StyledBlogCard, StyledLinkCard } from './styles';
+import { ROUTE_BLOG } from '@/app.config';
 
 interface Props {
   blogPost: BlogPost;
@@ -20,10 +21,12 @@ const BlogCard = ({ blogPost }: Props) => {
   const { t } = useTranslation('blog');
   return (
     <StyledBlogCard key={blogPost.title}>
-      <Image className="blog-card__image" src={blogPost.image} height={200} width={400} alt="" />
-      <h3 className="title-sm">{t(blogPost.title)}</h3>
-      <p className="body-lg medium">{t(blogPost.author)}</p>
-      <p className="body-sm">{t(blogPost.dateAndDuration)}</p>
+      <StyledLinkCard href={`${ROUTE_BLOG}/${blogPost.slug}`}>
+        <Image className="blog-card__image" src={blogPost.image} height={200} width={400} alt="" />
+        <h3 className="title-sm">{t(blogPost.title)}</h3>
+        <p className="body-lg medium">{t(blogPost.author)}</p>
+        <p className="body-sm">{t(blogPost.dateAndDuration)}</p>
+      </StyledLinkCard>
     </StyledBlogCard>
   );
 };
