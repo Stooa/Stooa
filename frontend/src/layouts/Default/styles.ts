@@ -77,6 +77,7 @@ const Header = styled.header<{ blogLayout?: boolean }>`
       left: 0;
       z-index: 2;
       color: ${COLOR_NEUTRO_100};
+      padding-top: 1.25rem;
     `}
 `;
 

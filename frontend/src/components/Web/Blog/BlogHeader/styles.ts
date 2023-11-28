@@ -17,13 +17,13 @@ const StyledBlogHeader = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-block-start: 10em;
+  padding-block-start: 7rem;
   padding-block-end: 7em;
   background-color: ${COLOR_PURPLE_400};
   color: ${COLOR_NEUTRO_100};
 
   ${media.min('desktop')`
-    padding-block-end: 15em;
+    padding-block-end: 12em;
   `}
 `;
 
@@ -37,19 +37,19 @@ const StyledBlogHeaderContent = styled.div`
   padding-inline: 2em;
   text-align: left;
 
-  p {
-    max-width: 50ch;
-  }
-
-  & img {
-    ${media.max('desktop')`
+  ${media.max('desktop')`
+    & img {
       display: none;
-    `};
-  }
+    }
+  `};
 `;
 
 const StyledBlogHeaderTitle = styled.div`
   flex: 1 1 600px;
+
+  p {
+    max-width: 50ch;
+  }
 `;
 
 export { StyledBlogHeader, StyledBlogHeaderContent, StyledBlogHeaderTitle };

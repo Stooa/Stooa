@@ -18,8 +18,7 @@ const BlogHeader = () => {
       <StyledBlogHeaderContent>
         <StyledBlogHeaderTitle>
           <h1 className="title-display">{t('blogPage.headerTitle')}</h1>
-          {t('blogPage.headerSubtitle')}
-          <p className="body-lg"></p>
+          <p className="body-lg">{t('blogPage.headerSubtitle')}</p>
         </StyledBlogHeaderTitle>
         <Image src="/img/friends/computer-no-bg.png" width="160" height="200" alt="" />
       </StyledBlogHeaderContent>

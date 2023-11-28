@@ -7,7 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import { COLOR_NEUTRO_300 } from '@/ui/settings';
+import { TITLE_MD, TITLE_SM } from '@/ui/Titles';
+import { media } from '@/ui/helpers';
+import { COLOR_NEUTRO_300, COLOR_NEUTRO_600 } from '@/ui/settings';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -42,6 +44,19 @@ const StyledLinkCard = styled(Link)`
   &:hover {
     color: inherit;
   }
+
+  &:hover h3 {
+    color: ${COLOR_NEUTRO_600};
+  }
 `;
 
-export { StyledBlogCard, StyledLinkCard };
+const StyledCardTitle = styled.h3`
+  ${TITLE_MD};
+  font-weight: 500;
+
+  ${media.min('tablet')`
+    ${TITLE_SM}
+  `}
+`;
+
+export { StyledBlogCard, StyledLinkCard, StyledCardTitle };

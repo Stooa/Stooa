@@ -19,8 +19,9 @@ const StyledBlogPage = styled.div`
     display: block;
     position: absolute;
     width: 100%;
-    top: -9vw;
+    top: -6.6vw;
     left: 0;
+    z-index: 0;
   }
 `;
 
@@ -37,12 +38,14 @@ const StyledBlogContainer = styled.div`
   gap: 2em;
   width: 100%;
   max-width: 900px;
-  padding-block-start: 1em;
   padding-block-end: 6em;
   margin-inline: auto;
+  z-index: 1;
+  padding-inline: 2em;
+  padding-block-start: 2em;
 
-  ${media.max('desktop')`
-    padding-inline: 2em;
+  ${media.min('desktop')`
+    padding-inline: initial;
   `}
 `;
 

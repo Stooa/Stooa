@@ -12,13 +12,15 @@ import { StyledBlogContainer, StyledBlogList, StyledBlogPage } from './styles';
 import BlogCard from '../BlogCard';
 import BlogWave from '@/ui/svg/waves/blog-wave.svg';
 import BlogBannerCTA from '../../BlogBannerCTA';
+import useTranslation from 'next-translate/useTranslation';
 
 const BlogPage = () => {
+  const { t } = useTranslation('blog');
   return (
     <StyledBlogPage>
       <BlogWave className="wave" />
       <StyledBlogContainer>
-        <h2 className="title-md">Últimos artículos</h2>
+        <h2 className="title-md">{t('blogPage.lastPosts')}</h2>
         <StyledBlogList>
           {Object.keys(BlogPosts).map(post => {
             return <BlogCard key={post} blogPost={BlogPosts[post]} />;
