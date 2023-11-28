@@ -26,9 +26,11 @@ final class SummarizeController extends AbstractController
 
     }
 
-    #[Route('/openai/summarize', name: 'openai_summarize', methods: ['POST'])]
-    public function __invoke(Request $request): JsonResponse
+    #[Route('/openai/summarize/{slug}', name: 'openai_summarize', methods: ['POST'])]
+    public function __invoke(string $slug, Request $request): JsonResponse
     {
-        return new JsonResponse(['response' => $this->openAIService->create()]);
+        $this->openAIService->create($slug);
+
+        return new JsonResponse(['response' => 'File upload']);
     }
 }

@@ -13,17 +13,27 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service;
 
+use App\Fishbowl\Message\UploadTranscription;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class SummarizeService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
-        private readonly string $assistantId
+        private readonly string $assistantId,
+        private readonly MessageBusInterface $bus
     ) {
     }
 
-    public function create(): string
+    public function create(string $slug): void
+    {
+        $client = \OpenAI::client($this->apiKey);
+
+        $this->bus->dispatch(new UploadTranscription($slug));
+    }
+
+    public function old(): string
     {
         $client = \OpenAI::client($this->apiKey);
 

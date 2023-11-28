@@ -103,7 +103,7 @@ class FishbowlAdmin extends AbstractAdmin
             ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction')
-            ->add('conferenceId')
+            ->add('summary')
             ->add('isPrivate')
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
             ->add('endDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)

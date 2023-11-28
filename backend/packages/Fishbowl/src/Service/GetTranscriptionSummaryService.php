@@ -14,14 +14,17 @@ declare(strict_types=1);
 namespace App\Fishbowl\Service;
 
 use App\Fishbowl\Message\GetTranscriptionSummary;
+use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class GetTranscriptionSummaryService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
-        private readonly MessageBusInterface $bus
+        private readonly MessageBusInterface $bus,
+        private readonly FishbowlRepository $fishbowlRepository
     ) {
     }
 
@@ -35,7 +38,7 @@ final class GetTranscriptionSummaryService extends AbstractController
         );
 
         if ('completed' !== $run->status) {
-            return 'The transcription is not ready yet';
+            return $this->retry($runId, $threadId, $slug);
         }
 
         $response = $client->threads()->messages()->list($threadId, [
@@ -45,13 +48,31 @@ final class GetTranscriptionSummaryService extends AbstractController
         foreach ($response->data as $messageResponse) {
             foreach ($messageResponse->content as $content) {
                 if ('text' === $content->type) {
-                    return $content->text->value;
+                    $this->saveSummary($content->text->value, $slug);
                 }
             }
         }
 
+        return $this->retry($runId, $threadId, $slug);
+    }
+
+    private function retry(string $runId, string $threadId, string $slug): string
+    {
+        $this->bus->dispatch(new GetTranscriptionSummary($runId, $threadId, $slug), [
+            new DelayStamp(3000),
+        ]);
+
         return 'The transcription is not ready yet';
-        //
-        //        $this->bus->dispatch(new GetTranscriptionSummary($threadId, $slug));
+    }
+
+    private function saveSummary(string $summary, string $slug): void
+    {
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
+
+        if (null !== $fishbowl) {
+            $fishbowl->setSummary($summary);
+
+            $this->fishbowlRepository->persist($fishbowl);
+        }
     }
 }
