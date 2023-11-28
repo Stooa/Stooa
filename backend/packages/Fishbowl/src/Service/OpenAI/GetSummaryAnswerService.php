@@ -11,15 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Service;
+namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\GetTranscriptionSummary;
+use App\Fishbowl\Message\GetSummaryAnswerOpenAI;
 use App\Fishbowl\Repository\FishbowlRepository;
+use OpenAI\Responses\Threads\Messages\ThreadMessageResponseContentTextObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
+use Webmozart\Assert\Assert;
 
-final class GetTranscriptionSummaryService extends AbstractController
+final class GetSummaryAnswerService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
@@ -47,7 +49,7 @@ final class GetTranscriptionSummaryService extends AbstractController
 
         foreach ($response->data as $messageResponse) {
             foreach ($messageResponse->content as $content) {
-                if ('text' === $content->type) {
+                if ($content instanceof ThreadMessageResponseContentTextObject) {
                     $this->saveSummary($content->text->value, $slug);
                 }
             }
@@ -58,7 +60,7 @@ final class GetTranscriptionSummaryService extends AbstractController
 
     private function retry(string $runId, string $threadId, string $slug): string
     {
-        $this->bus->dispatch(new GetTranscriptionSummary($runId, $threadId, $slug), [
+        $this->bus->dispatch(new GetSummaryAnswerOpenAI($runId, $threadId, $slug), [
             new DelayStamp(3000),
         ]);
 

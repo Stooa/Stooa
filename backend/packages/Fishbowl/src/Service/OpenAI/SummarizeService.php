@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Service;
+namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\UploadTranscription;
+use App\Fishbowl\Message\UploadFileOpenAI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -30,7 +30,7 @@ final class SummarizeService extends AbstractController
     {
         $client = \OpenAI::client($this->apiKey);
 
-        $this->bus->dispatch(new UploadTranscription($slug));
+        $this->bus->dispatch(new UploadFileOpenAI($slug));
     }
 
     public function old(): string

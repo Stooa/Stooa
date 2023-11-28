@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\MessageHandler;
 
-use App\Fishbowl\Message\UploadTranscription;
-use App\Fishbowl\Service\UploadTranscriptionService;
+use App\Fishbowl\Message\UploadFileOpenAI;
+use App\Fishbowl\Service\OpenAI\UploadFileService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class UploadTranscriptionHandler
+class UploadFileOpenAIHandler
 {
-    public function __construct(private readonly UploadTranscriptionService $uploadTranscriptionService)
+    public function __construct(private readonly UploadFileService $uploadFileService)
     {
     }
 
-    public function __invoke(UploadTranscription $message): void
+    public function __invoke(UploadFileOpenAI $message): void
     {
-        $this->uploadTranscriptionService->upload($message->getSlug());
+        $this->uploadFileService->upload($message->getSlug());
     }
 }

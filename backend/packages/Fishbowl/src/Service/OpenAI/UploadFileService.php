@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Service;
+namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\CreateTranscriptionThread;
+use App\Fishbowl\Message\AskSummaryOpenAI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class UploadTranscriptionService extends AbstractController
+final class UploadFileService extends AbstractController
 {
     public function __construct(
         private readonly MessageBusInterface $bus,
@@ -38,6 +38,6 @@ final class UploadTranscriptionService extends AbstractController
             'file' => fopen($transcriptionFile, 'r'),
         ]);
 
-        $this->bus->dispatch(new CreateTranscriptionThread($file->id, $slug));
+        $this->bus->dispatch(new AskSummaryOpenAI($file->id, $slug));
     }
 }

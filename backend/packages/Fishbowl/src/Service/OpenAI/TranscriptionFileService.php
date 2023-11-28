@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Service;
+namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\UploadTranscription;
+use App\Fishbowl\Message\UploadFileOpenAI;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -38,7 +38,7 @@ class TranscriptionFileService
             $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
             if (null !== $fishbowl && $fishbowl->isHasSummary()) {
-                $this->bus->dispatch(new UploadTranscription($slug));
+                $this->bus->dispatch(new UploadFileOpenAI($slug));
             }
         }
     }

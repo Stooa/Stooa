@@ -13,11 +13,23 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Message;
 
-class UploadTranscription
+class GetSummaryAnswerOpenAI
 {
     public function __construct(
-        private readonly string $slug,
+        private readonly string $runId,
+        private readonly string $threadId,
+        private readonly string $slug
     ) {
+    }
+
+    public function runId(): string
+    {
+        return $this->runId;
+    }
+
+    public function getThreadId(): string
+    {
+        return $this->threadId;
     }
 
     public function getSlug(): string

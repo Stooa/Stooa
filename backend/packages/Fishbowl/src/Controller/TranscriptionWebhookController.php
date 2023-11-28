@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Controller;
 
-use App\Fishbowl\Service\TranscriptionFileService;
+use App\Fishbowl\Service\OpenAI\TranscriptionFileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

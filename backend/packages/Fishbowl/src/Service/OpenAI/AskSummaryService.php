@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Fishbowl\Service;
+namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\GetTranscriptionSummary;
+use App\Fishbowl\Message\GetSummaryAnswerOpenAI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class CreateTranscriptionThreadService extends AbstractController
+final class AskSummaryService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
@@ -47,6 +47,6 @@ final class CreateTranscriptionThreadService extends AbstractController
             ],
         );
 
-        $this->bus->dispatch(new GetTranscriptionSummary($thread->id, $thread->threadId, $slug));
+        $this->bus->dispatch(new GetSummaryAnswerOpenAI($thread->id, $thread->threadId, $slug));
     }
 }

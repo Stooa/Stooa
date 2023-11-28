@@ -31,21 +31,21 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
-    App\Fishbowl\Service\SummarizeService:
+    App\Fishbowl\Service\OpenAI\SummarizeService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
             $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
 
-    App\Fishbowl\Service\CreateTranscriptionThreadService:
+    App\Fishbowl\Service\OpenAI\AskSummaryService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
             $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
 
-    App\Fishbowl\Service\UploadTranscriptionService:
+    App\Fishbowl\Service\OpenAI\UploadFileService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
 
-    App\Fishbowl\Service\GetTranscriptionSummaryService:
+    App\Fishbowl\Service\OpenAI\GetSummaryAnswerService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
 
