@@ -24,7 +24,7 @@ class UploadTranscriptionHandler
     {
     }
 
-    public function __invoke(UploadTranscription $message)
+    public function __invoke(UploadTranscription $message): void
     {
         $this->uploadTranscriptionService->upload($message->getSlug());
     }

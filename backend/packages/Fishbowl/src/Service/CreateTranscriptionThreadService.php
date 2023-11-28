@@ -47,6 +47,6 @@ final class CreateTranscriptionThreadService extends AbstractController
             ],
         );
 
-        $this->bus->dispatch(new GetTranscriptionSummary($thread->id, $slug));
+        $this->bus->dispatch(new GetTranscriptionSummary($thread->id, $thread->threadId, $slug));
     }
 }

@@ -16,9 +16,15 @@ namespace App\Fishbowl\Message;
 class GetTranscriptionSummary
 {
     public function __construct(
+        private readonly string $runId,
         private readonly string $threadId,
         private readonly string $slug
     ) {
+    }
+
+    public function runId(): string
+    {
+        return $this->runId;
     }
 
     public function getThreadId(): string

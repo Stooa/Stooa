@@ -14,17 +14,18 @@ declare(strict_types=1);
 namespace App\Fishbowl\MessageHandler;
 
 use App\Fishbowl\Message\GetTranscriptionSummary;
+use App\Fishbowl\Service\GetTranscriptionSummaryService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
 class GetTranscriptionSummaryHandler
 {
-    public function __construct()
+    public function __construct(private readonly GetTranscriptionSummaryService $getTranscriptionSummaryService)
     {
     }
 
-    public function __invoke(GetTranscriptionSummary $message)
+    public function __invoke(GetTranscriptionSummary $message): void
     {
-
+        $this->getTranscriptionSummaryService->getSummary($message->runId(), $message->getThreadId(), $message->getSlug());
     }
 }

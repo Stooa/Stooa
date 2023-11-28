@@ -49,6 +49,6 @@ final class SummarizeService extends AbstractController
             ],
         );
 
-        return $thread->threadId;
+        return $thread->id . '/' . $thread->threadId;
     }
 }

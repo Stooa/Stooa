@@ -24,7 +24,7 @@ class CreateTranscriptionThreadHandler
     {
     }
 
-    public function __invoke(CreateTranscriptionThread $message)
+    public function __invoke(CreateTranscriptionThread $message): void
     {
         $this->createTranscriptionThreadService->createThread($message->getFileId(), $message->getSlug());
     }

@@ -25,17 +25,33 @@ final class GetTranscriptionSummaryService extends AbstractController
     ) {
     }
 
-    public function getSummary(string $threadId, string $slug): void
+    public function getSummary(string $runId, string $threadId, string $slug): string
     {
         $client = \OpenAI::client($this->apiKey);
 
+        $run = $client->threads()->runs()->retrieve(
+            threadId: $threadId,
+            runId: $runId,
+        );
+
+        if ('completed' !== $run->status) {
+            return 'The transcription is not ready yet';
+        }
+
         $response = $client->threads()->messages()->list($threadId, [
-            'limit' => 10,
+            'limit' => 1,
         ]);
 
-        foreach ($response->data as $result) {
-            // check if the message is the one we want
+        foreach ($response->data as $messageResponse) {
+            foreach ($messageResponse->content as $content) {
+                if ('text' === $content->type) {
+                    return $content->text->value;
+                }
+            }
         }
-        $this->bus->dispatch(new GetTranscriptionSummary($threadId, $slug));
+
+        return 'The transcription is not ready yet';
+        //
+        //        $this->bus->dispatch(new GetTranscriptionSummary($threadId, $slug));
     }
 }

@@ -36,9 +36,10 @@ services:
             $apiKey: '%env(OPENAI_API_KEY)%'
             $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
 
-    App\Fishbowl\Service\ThreadsService:
+    App\Fishbowl\Service\CreateTranscriptionThreadService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
+            $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
 
     App\Fishbowl\Service\UploadTranscriptionService:
         bind:
