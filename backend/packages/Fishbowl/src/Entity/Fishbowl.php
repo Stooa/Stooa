@@ -255,7 +255,7 @@ class Fishbowl implements \Stringable
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
-    #[Groups(['fishbowl:read', 'fishbowl:update'])]
+    #[Groups(['fishbowl:read'])]
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $summary = null;
 

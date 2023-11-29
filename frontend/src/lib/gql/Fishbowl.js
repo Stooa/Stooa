@@ -78,6 +78,7 @@ const GET_FISHBOWL = gql`
       isPrivate
       plainPassword
       hasSummary
+      summary
     }
   }
 `;
