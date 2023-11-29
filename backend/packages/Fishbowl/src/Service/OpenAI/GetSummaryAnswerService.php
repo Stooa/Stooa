@@ -19,7 +19,6 @@ use OpenAI\Responses\Threads\Messages\ThreadMessageResponseContentTextObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
-use Webmozart\Assert\Assert;
 
 final class GetSummaryAnswerService extends AbstractController
 {
@@ -30,7 +29,7 @@ final class GetSummaryAnswerService extends AbstractController
     ) {
     }
 
-    public function getSummary(string $runId, string $threadId, string $slug): string
+    public function getSummary(string $runId, string $threadId, string $slug): void
     {
         $client = \OpenAI::client($this->apiKey);
 
@@ -40,7 +39,7 @@ final class GetSummaryAnswerService extends AbstractController
         );
 
         if ('completed' !== $run->status) {
-            return $this->retry($runId, $threadId, $slug);
+            $this->retry($runId, $threadId, $slug);
         }
 
         $response = $client->threads()->messages()->list($threadId, [
@@ -54,17 +53,13 @@ final class GetSummaryAnswerService extends AbstractController
                 }
             }
         }
-
-        return $this->retry($runId, $threadId, $slug);
     }
 
-    private function retry(string $runId, string $threadId, string $slug): string
+    private function retry(string $runId, string $threadId, string $slug): void
     {
         $this->bus->dispatch(new GetSummaryAnswerOpenAI($runId, $threadId, $slug), [
             new DelayStamp(3000),
         ]);
-
-        return 'The transcription is not ready yet';
     }
 
     private function saveSummary(string $summary, string $slug): void
