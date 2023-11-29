@@ -31,9 +31,9 @@ class TranscriptionFileService
         if (isset($requestArray['data']['preAuthenticatedLink'], $requestArray['fqn'])) {
             $slug = $this->getSlugFromFqn($requestArray['fqn']);
 
-            $fileName = $slug . '.json';
+            $fileName = $path . '/' . $slug . '.json';
 
-            file_put_contents($path . '/' . $fileName, file_get_contents($requestArray['data']['preAuthenticatedLink']));
+            file_put_contents($fileName, file_get_contents($requestArray['data']['preAuthenticatedLink']));
 
             $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 

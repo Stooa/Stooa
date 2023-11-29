@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Message;
 
-class GetSummaryAnswerOpenAI
+class GetSummaryOpenAI
 {
     public function __construct(
         private readonly string $runId,

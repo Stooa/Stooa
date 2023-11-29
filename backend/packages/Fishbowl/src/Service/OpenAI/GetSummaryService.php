@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\GetSummaryAnswerOpenAI;
+use App\Fishbowl\Message\GetSummaryOpenAI;
 use App\Fishbowl\Repository\FishbowlRepository;
 use OpenAI\Responses\Threads\Messages\ThreadMessageResponseContentTextObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
 
-final class GetSummaryAnswerService extends AbstractController
+final class GetSummaryService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
@@ -57,7 +57,7 @@ final class GetSummaryAnswerService extends AbstractController
 
     private function retry(string $runId, string $threadId, string $slug): void
     {
-        $this->bus->dispatch(new GetSummaryAnswerOpenAI($runId, $threadId, $slug), [
+        $this->bus->dispatch(new GetSummaryOpenAI($runId, $threadId, $slug), [
             new DelayStamp(3000),
         ]);
     }

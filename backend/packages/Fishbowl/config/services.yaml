@@ -45,7 +45,7 @@ services:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
 
-    App\Fishbowl\Service\OpenAI\GetSummaryAnswerService:
+    App\Fishbowl\Service\OpenAI\GetSummaryService:
         bind:
             $apiKey: '%env(OPENAI_API_KEY)%'
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\GetSummaryAnswerOpenAI;
+use App\Fishbowl\Message\GetSummaryOpenAI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -47,6 +47,6 @@ final class AskSummaryService extends AbstractController
             ],
         );
 
-        $this->bus->dispatch(new GetSummaryAnswerOpenAI($thread->id, $thread->threadId, $slug));
+        $this->bus->dispatch(new GetSummaryOpenAI($thread->id, $thread->threadId, $slug));
     }
 }
