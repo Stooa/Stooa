@@ -9,6 +9,7 @@
 
 import { BlogMenuItemType } from './AnchorMenu';
 import { ImproveOnlineMeetings } from './posts/5tipsToImprove';
+import { InnovativeRetroDynamics } from './posts/3innovativeRetroDynamics';
 
 type BlogPost = {
   title: string;
@@ -19,7 +20,7 @@ type BlogPost = {
   dateAndDuration: string;
   datePublishedTimestamp: number;
   dateModifiedTimestamp: number;
-  menuItems: BlogMenuItemType[];
+  menuItems?: BlogMenuItemType[];
 };
 
 export const BlogPosts: Record<string, BlogPost> = {
@@ -54,5 +55,15 @@ export const BlogPosts: Record<string, BlogPost> = {
         displayText: 'posts.5-tips-boost-participation-online-meetings.content.fishbowl'
       }
     ]
+  },
+  '3-innovative-dynamics-for-retros': {
+    title: 'posts.3-innovative-dynamics-for-retros.title',
+    description: 'posts.3-innovative-dynamics-for-retros.description',
+    subtitle: 'posts.3-innovative-dynamics-for-retros.subtitle',
+    content: InnovativeRetroDynamics,
+    author: 'posts.3-innovative-dynamics-for-retros.author',
+    dateAndDuration: 'posts.3-innovative-dynamics-for-retros.date-and-duration',
+    datePublishedTimestamp: 1701252055,
+    dateModifiedTimestamp: 1701252055
   }
 };
