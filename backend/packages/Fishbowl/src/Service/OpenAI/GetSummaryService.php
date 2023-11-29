@@ -68,6 +68,7 @@ final class GetSummaryService extends AbstractController
 
         if (null !== $fishbowl) {
             $fishbowl->setSummary($summary);
+            $fishbowl->setSummaryUpdatedAt(new \DateTimeImmutable());
 
             $this->fishbowlRepository->persist($fishbowl);
         }

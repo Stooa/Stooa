@@ -259,6 +259,10 @@ class Fishbowl implements \Stringable
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $summary = null;
 
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $summaryUpdatedAt = null;
+
     /** @var Collection<int, Feedback> */
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
     #[Groups(['fishbowl:read'])]
@@ -710,6 +714,18 @@ class Fishbowl implements \Stringable
     public function setSummary(?string $summary): self
     {
         $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getSummaryUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->summaryUpdatedAt;
+    }
+
+    public function setSummaryUpdatedAt(?\DateTimeInterface $summaryUpdatedAt): self
+    {
+        $this->summaryUpdatedAt = $summaryUpdatedAt;
 
         return $this;
     }
