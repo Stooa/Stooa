@@ -10,7 +10,7 @@
 import Image from 'next/image';
 import { StyledBlogBannerCTA } from './styles';
 import RedirectLink from '../RedirectLink';
-import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
+import { ROUTE_HOME } from '@/app.config';
 import Button from '@/components/Common/Button';
 import { pushEventDataLayer } from '@/lib/analytics';
 import useTranslation from 'next-translate/useTranslation';
@@ -25,7 +25,7 @@ const BlogBannerCTA = () => {
           <h3 className="title-lg">{t('bannerText')}</h3>
         </div>
         <div className="banner--cta">
-          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+          <RedirectLink href={ROUTE_HOME} passHref>
             <Button
               size="large"
               as="a"
@@ -33,7 +33,7 @@ const BlogBannerCTA = () => {
               className="animate-item cta-create-fishbowl "
               onClick={() => {
                 pushEventDataLayer({
-                  category: 'Schedule Fishbowl',
+                  category: 'Home',
                   action: 'Blog Banner CTA',
                   label: 'Blog'
                 });

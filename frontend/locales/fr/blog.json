@@ -13,7 +13,7 @@
             "subtitle": "Innovate in your online meetings: let's talk about effective techniques to increase engagement.",
             "description": "Discover how to improve your online meetings with our 5 tips: let's start with effective techniques to encourage participation, understand how to break the ice creatively, and we close by learning the potential of the Fishbowl dynamic.",
             "author": "Carme from Stooa",
-            "date-and-duration": "5 min of lecture - November 20th 2023",
+            "date-and-duration": "5 min read - November 20 2023",
             "content": {
                 "firstBlock": "Have you ever felt like you were talking to the screen instead of your colleagues during online meetings? The awkward silence, the gazes lost in the cameras... and the famous \"Does anyone want to add anything?\" that always ends in a long silence.",
                 "secondBlock": "You're not alone. Maintaining <span>participation</span> and <span>commitment</span> in online meetings is a mission many of us face in this digital era. But don't worry! There are super creative ways to improve this.",
@@ -43,6 +43,34 @@
                 "sixteenthBlock": "Remember, a good meeting is like a good party: everyone must enjoy and participate. And with Stooa, we're here to make sure the party never stops. 🎉",
                 "seventeenthBlock": "And you, do you use any of these dynamics in your meetings? How do you increase participation in your online meetings?<br/> I'll be reading you in the comments 👀",
                 "readTheArticle": "You can read <a>the original article</a> published on LinkedIn by Carme Alcoverro."
+            }
+        },
+        "3-innovative-dynamics-for-retros": {
+            "title": "3 Innovative dynamics for your team retrospectives",
+            "subtitle": "Transform your agile retrospectives with these three innovative dynamics",
+            "description": "Explore three creative dynamics to enhance your agile team retrospectives: The Starfish, The Dartboard, and The Agile Aquarium with Stooa or Fishbowl. Ideal for Scrum and Kanban methodologies in online environments.",
+            "author": "Guido from Stooa",
+            "date-and-duration": "5 min read - November 29 2023",
+            "content": {
+                "firstBlock": "Agile team retrospectives are crucial for development and continuous improvement. To take these sessions to a new level, let me introduce you to three creative dynamics that we integrate into Scrum and Kanban methodologies, along with an innovative digital approach in Fishbowl using the free tool Stooa.",
+                "theStarfish": "🌟 The Starfish 🌟",
+                "starfishObjective": "<span>Objective</span>: Identify practices to continue, start, stop, increase, and decrease.",
+                "starfishHowItWorks": "<span>How it's done</span>: Use a five-pointed star to represent each category. The team adds post-its in each category and then spends the necessary time to discuss each point of the star, depending on the number of items to discuss and their importance.",
+                "starfishBenefits": "<span>Ideal for</span>: Teams looking for a comprehensive view of their performance.",
+                "bullseye": "🎯 The Dartboard 🎯",
+                "bullseyeObjective": "<span>Objective</span>: Focus on specific goals and strategies to achieve them.",
+                "bullseyeHowItWorks": "<span>How it's done</span>: Create a dartboard with circles representing different focus areas. Team members add post-its in each region of the board, depending on their importance, and then discuss improvements and make them actionable in each area. I recommend not using too many circles to keep the session manageable.",
+                "bullseyeBenefits": "<span>Ideal for</span>: Teams that need to concentrate on specific areas of improvement.",
+                "bullseyeTime": "<span>Recommended Time/Duration</span>: 1 hour, dedicating between 10 and 15 minutes to each circle.",
+                "bullseyeTip": "I share you an example of the concepts that can go inside the circles of each target: Technical performance, teamwork and communication, innovation and learning, and finally user experience.",
+                "fishbowl": "🐠 The Agile Aquarium with Stooa  🐠",
+                "fishbowlObjective": "<span>Objective</span>: Promote a deep and structured discussion in a digital environment, including all voices and viewpoints of the team.",
+                "fishbowlHowItWorks": "<span>How it's done</span>: Implement the Fishbowl dynamics, and if it's online, I recommend using Stooa, a free, open-source unconference tool that doesn't require downloading. Arrange participants in an inner circle (where the debate takes place) and an outer circle (where they observe the debate) within the virtual space. Anyone from the outer circle can freely enter the inner circle whenever they need to contribute their perspective to the conversation. This facilitates participation in a fluid and organised manner <span>without the need for moderation</span>, allowing the conversation to remain <span>focused on the central topic</span> and encouraging diversity of voices involved.",
+                "fishbowlBenefits": "<span>Ideal for</span>: Remote or hybrid teams looking to improve communication and obtain multiple perspectives.",
+                "alreadyKnew": "Were you familiar with these dynamics? My favorite is the Aquarium with Stooa. It offers a different kind of retrospective that generates incredibly enriching conversations. If you've read this far, thank you for your time! If you have any cool dynamics that work for you in team retrospectives, I'd love to hear about them.",
+                "tryStooa": "I also encourage you to try the Stooa tool for your next agile retrospective! We've developed this easy-to-use, completely free, and open-source tool.",
+                "feedback": "And if you have any feedback to share with me, I'd be delighted to read it :)",
+                "originalPost": "You can read and comment in the <a>original article</a> published in LinkedIn by Guido."
             }
         }
     }
