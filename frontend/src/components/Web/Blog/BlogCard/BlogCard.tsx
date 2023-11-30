@@ -22,7 +22,14 @@ const BlogCard = ({ blogPost }: Props) => {
   return (
     <StyledBlogCard key={blogPost.title}>
       <StyledLinkCard href={`${ROUTE_BLOG}/${blogPost.slug}`}>
-        <Image className="blog-card__image" src={blogPost.image} height={200} width={400} alt="" />
+        <Image
+          priority
+          className="blog-card__image"
+          src={blogPost.image}
+          height={220}
+          width={400}
+          alt=""
+        />
         <StyledCardTitle>{t(blogPost.title)}</StyledCardTitle>
         <p className="body-lg medium">{t(blogPost.author)}</p>
         <p className="body-sm">{t(blogPost.dateAndDuration)}</p>
