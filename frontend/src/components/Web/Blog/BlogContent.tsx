@@ -8,7 +8,6 @@
  */
 
 import Head from 'next/head';
-import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
 import {
   StyledBlogWrapper,
   StyledPostContent,
@@ -61,7 +60,6 @@ const BlogContent = ({ slug }: Props) => {
 
   return (
     <>
-      <OpenGraphDefault seoTitle={t(title)} seoDescription={t(selectedBlog.subtitle)} />
       <Head>
         <script
           type="application/ld+json"

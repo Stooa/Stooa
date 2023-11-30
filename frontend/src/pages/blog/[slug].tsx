@@ -30,7 +30,8 @@ export const getServerSideProps: GetServerSideProps = async ({ locale, params })
     props: {
       slug,
       seoTitle: currentBlog?.title ? t(currentBlog.title) : null,
-      seoDescription: currentBlog?.title ? t(currentBlog.description) : null
+      seoDescription: currentBlog?.title ? t(currentBlog.description) : null,
+      ogImage: currentBlog?.image ? currentBlog.image : null
     }
   };
 };
