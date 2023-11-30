@@ -42,7 +42,7 @@ const Page = ({
       <HeaderStyled blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main positionDefault={positionDefault} center={center}>
+      <Main positionDefault={positionDefault} center={center} blogLayout={blogLayout}>
         {children}
       </Main>
       {decorated && (

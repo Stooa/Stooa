@@ -81,12 +81,14 @@ const Header = styled.header<{ blogLayout?: boolean }>`
     `}
 `;
 
-const Main = styled.main<{ center?: boolean; positionDefault?: boolean }>`
+const Main = styled.main<{ center?: boolean; positionDefault?: boolean; blogLayout?: boolean }>`
   color: ${COLOR_NEUTRO_700};
   grid-area: Main;
   position: ${props => (props.positionDefault ? 'static' : 'relative')};
   text-align: center;
   z-index: 1;
+
+  padding-bottom: ${({ blogLayout }) => (blogLayout ? '0' : space(12))};
 
   ${props => (props.center ? flexCenter : '')}
 `;
