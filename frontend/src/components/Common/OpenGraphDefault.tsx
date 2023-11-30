@@ -15,12 +15,13 @@ import { APP_NAME, TWITTER_USER, ROUTE_HOME } from '@/app.config';
 interface Props {
   seoTitle?: string;
   seoDescription?: string;
+  ogImage?: string;
 }
 
-const OpenGraphDefault = ({ seoTitle, seoDescription }: Props) => {
+const OpenGraphDefault = ({ seoTitle, seoDescription, ogImage }: Props) => {
   const { t } = useTranslation('common');
 
-  const ogImageSrc = 'img/web/OGimage.jpg';
+  const ogImageSrc = ogImage ?? 'img/web/OGimage.jpg';
   const ogImageTwitterSrc = 'img/web/OGimage-twitter.jpg';
   const metaTitle = seoTitle ? `${seoTitle} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
   const metaDescription =

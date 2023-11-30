@@ -15,6 +15,7 @@ type BlogPost = {
   title: string;
   description: string;
   subtitle: string;
+  image: string;
   content: () => JSX.Element;
   author: string;
   dateAndDuration: string;
@@ -28,6 +29,7 @@ export const BlogPosts: Record<string, BlogPost> = {
     title: 'posts.5-tips-boost-participation-online-meetings.title',
     description: 'posts.5-tips-boost-participation-online-meetings.description',
     subtitle: 'posts.5-tips-boost-participation-online-meetings.subtitle',
+    image: '/img/web/blog/improve/improve-og.jpg',
     content: ImproveOnlineMeetings,
     author: 'posts.5-tips-boost-participation-online-meetings.author',
     dateAndDuration: 'posts.5-tips-boost-participation-online-meetings.date-and-duration',
@@ -60,6 +62,7 @@ export const BlogPosts: Record<string, BlogPost> = {
     title: 'posts.3-innovative-dynamics-for-retros.title',
     description: 'posts.3-innovative-dynamics-for-retros.description',
     subtitle: 'posts.3-innovative-dynamics-for-retros.subtitle',
+    image: '/img/web/blog/retros/darts-og.jpg',
     content: InnovativeRetroDynamics,
     author: 'posts.3-innovative-dynamics-for-retros.author',
     dateAndDuration: 'posts.3-innovative-dynamics-for-retros.date-and-duration',
