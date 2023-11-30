@@ -22,7 +22,7 @@ const OpenGraphDefault = ({ seoTitle, seoDescription, ogImage }: Props) => {
   const { t } = useTranslation('common');
 
   const ogImageSrc = ogImage ?? 'img/web/OGimage.jpg';
-  const ogImageTwitterSrc = 'img/web/OGimage-twitter.jpg';
+  const ogImageTwitterSrc = ogImage ?? 'img/web/OGimage-twitter.jpg';
   const metaTitle = seoTitle ? `${seoTitle} | ${APP_NAME}` : `${APP_NAME} | ${t('og-title')}`;
   const metaDescription =
     seoDescription && seoDescription !== '' ? seoDescription : t('og-description');
