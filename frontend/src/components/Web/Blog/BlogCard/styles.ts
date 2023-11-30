@@ -16,15 +16,9 @@ import styled from 'styled-components';
 const StyledBlogCard = styled.div`
   border-radius: 8px;
   flex: 1 1 320px;
-  /* border: 1px solid transparent;
-  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-  padding: 1em; */
 
   &:hover {
     cursor: pointer;
-    /* background-color: ${COLOR_NEUTRO_300};
-    border: 1px solid hsla(0, 0%, 0%, 0.1);
-    transition: background-color 0.2s ease-in-out, border-color 0.2s 0.15s ease-out; */
   }
 
   & .blog-card__image {
@@ -32,6 +26,7 @@ const StyledBlogCard = styled.div`
     object-fit: cover;
     object-position: top;
     border-radius: 8px;
+    background-color: ${COLOR_NEUTRO_300};
   }
 `;
 
