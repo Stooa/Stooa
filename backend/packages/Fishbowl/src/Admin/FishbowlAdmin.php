@@ -103,6 +103,7 @@ class FishbowlAdmin extends AbstractAdmin
             ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction')
+            ->add('hasSummary')
             ->add('summary')
             ->add('summaryUpdatedAt')
             ->add('isPrivate')
@@ -149,6 +150,8 @@ class FishbowlAdmin extends AbstractAdmin
                     'transform' => true,
                 ])
                 ->add('topics')
+                ->add('hasSummary')
+                ->add('summary')
             ->end()
             ->with('Disabled')
                 ->add('currentStatus', ChoiceType::class, [
