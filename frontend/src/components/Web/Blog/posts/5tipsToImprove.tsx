@@ -11,7 +11,7 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import RedirectLink from '../../RedirectLink';
-import { ROUTE_FISHBOWL_CREATE } from '@/app.config';
+import { ROUTE_HOME } from '@/app.config';
 import Button from '@/components/Common/Button';
 import { pushEventDataLayer } from '@/lib/analytics';
 
@@ -136,14 +136,14 @@ export const ImproveOnlineMeetings = () => {
         </ol>
         <p>{t('posts.5-tips-boost-participation-online-meetings.content.thirdteenthBlock')}</p>
         <div className="schedule-cta centered">
-          <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
+          <RedirectLink href={ROUTE_HOME} passHref>
             <Button
               size="large"
               as="a"
               className="animate-item cta-create-fishbowl "
               onClick={() => {
                 pushEventDataLayer({
-                  category: 'Schedule Fishbowl',
+                  category: 'Home',
                   action: 'Improve online meetings',
                   label: 'Blog'
                 });
