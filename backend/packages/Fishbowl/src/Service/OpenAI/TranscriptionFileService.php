@@ -13,40 +13,27 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\UploadFileOpenAI;
+use App\Fishbowl\Message\OpenAI\AskSummaryOpenAI;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class TranscriptionFileService
 {
     public function __construct(
+        private readonly UploadFileService $uploadFileService,
         private readonly FishbowlRepository $fishbowlRepository,
         private readonly MessageBusInterface $bus,
     ) {
     }
 
-    /** @param array<mixed, mixed> $requestArray */
-    public function save(array $requestArray, string $path): void
+    public function save(string $transcriptionUrl, string $slug): void
     {
-        if (isset($requestArray['data']['preAuthenticatedLink'], $requestArray['fqn'])) {
-            $slug = $this->getSlugFromFqn($requestArray['fqn']);
+        $fileId = $this->uploadFileService->upload($transcriptionUrl);
 
-            $fileName = $path . '/' . $slug . '.json';
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
-            file_put_contents($fileName, file_get_contents($requestArray['data']['preAuthenticatedLink']));
-
-            $fishbowl = $this->fishbowlRepository->findBySlug($slug);
-
-            if (null !== $fishbowl && $fishbowl->isHasSummary()) {
-                $this->bus->dispatch(new UploadFileOpenAI($slug));
-            }
+        if (null !== $fishbowl && $fishbowl->isHasSummary()) {
+            $this->bus->dispatch(new AskSummaryOpenAI($fileId, $slug));
         }
-    }
-
-    private function getSlugFromFqn(string $fqn): string
-    {
-        $urlParts = explode('/', $fqn);
-
-        return end($urlParts);
     }
 }

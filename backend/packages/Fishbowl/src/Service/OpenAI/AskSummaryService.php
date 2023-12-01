@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\GetSummaryOpenAI;
+use App\Fishbowl\Message\OpenAI\GetSummaryOpenAI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class AskSummaryService extends AbstractController
 {
@@ -47,6 +48,8 @@ final class AskSummaryService extends AbstractController
             ],
         );
 
-        $this->bus->dispatch(new GetSummaryOpenAI($thread->id, $thread->threadId, $slug));
+        $this->bus->dispatch(new GetSummaryOpenAI($thread->id, $thread->threadId, $slug), [
+            new DelayStamp(10000),
+        ]);
     }
 }

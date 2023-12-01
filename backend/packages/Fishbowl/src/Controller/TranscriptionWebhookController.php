@@ -31,10 +31,20 @@ final class TranscriptionWebhookController extends AbstractController
     {
         $requestArray = $request->toArray();
 
-        $path = $this->getParameter('kernel.project_dir') . '/transcriptions';
+        if (isset($requestArray['data']['preAuthenticatedLink'], $requestArray['fqn'])) {
 
-        $this->transcriptionFileService->save($requestArray, $path);
+            $slug = $this->getSlugFromFqn($requestArray['fqn']);
+
+            $this->transcriptionFileService->save($requestArray['data']['preAuthenticatedLink'], $slug);
+        }
 
         return new JsonResponse(['response' => 'ok']);
+    }
+
+    private function getSlugFromFqn(string $fqn): string
+    {
+        $urlParts = explode('/', $fqn);
+
+        return end($urlParts);
     }
 }

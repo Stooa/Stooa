@@ -13,18 +13,15 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\GetSummaryOpenAI;
 use App\Fishbowl\Repository\FishbowlRepository;
 use OpenAI\Responses\Threads\Messages\ThreadMessageResponseContentTextObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DelayStamp;
+use Symfony\Component\Messenger\Exception\RecoverableMessageHandlingException;
 
 final class GetSummaryService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
-        private readonly MessageBusInterface $bus,
         private readonly FishbowlRepository $fishbowlRepository
     ) {
     }
@@ -39,7 +36,7 @@ final class GetSummaryService extends AbstractController
         );
 
         if ('completed' !== $run->status) {
-            $this->retry($runId, $threadId, $slug);
+            throw new RecoverableMessageHandlingException('Run is not completed');
         }
 
         $response = $client->threads()->messages()->list($threadId, [
@@ -53,13 +50,6 @@ final class GetSummaryService extends AbstractController
                 }
             }
         }
-    }
-
-    private function retry(string $runId, string $threadId, string $slug): void
-    {
-        $this->bus->dispatch(new GetSummaryOpenAI($runId, $threadId, $slug), [
-            new DelayStamp(3000),
-        ]);
     }
 
     private function saveSummary(string $summary, string $slug): void

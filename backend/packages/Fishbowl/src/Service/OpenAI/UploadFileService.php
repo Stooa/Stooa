@@ -13,31 +13,33 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Message\AskSummaryOpenAI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class UploadFileService extends AbstractController
 {
     public function __construct(
-        private readonly MessageBusInterface $bus,
+        private readonly HttpClientInterface $client,
         private readonly string $apiKey
     ) {
     }
 
-    public function upload(string $slug): void
+    public function upload(string $transcriptionUrl): string
     {
+        $response = $this->client->request('GET', $transcriptionUrl);
+
+        $filesystem = new Filesystem();
+        $file = $filesystem->tempnam('/tmp', 'transcription_', '.json');
+        $filesystem->appendToFile($file, $response->getContent());
+
         $client = \OpenAI::client($this->apiKey);
 
-        $fileName = $slug . '.json';
-
-        $transcriptionFile = $this->getParameter('kernel.project_dir') . '/transcriptions/' . $fileName;
-
-        $file = $client->files()->upload([
+        $uploadedFile = $client->files()->upload([
             'purpose' => 'assistants',
-            'file' => fopen($transcriptionFile, 'r'),
+            'file' => fopen($file, 'r'),
         ]);
 
-        $this->bus->dispatch(new AskSummaryOpenAI($file->id, $slug));
+        return $uploadedFile->id;
     }
 }

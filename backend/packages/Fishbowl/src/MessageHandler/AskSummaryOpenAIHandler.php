@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\MessageHandler;
 
-use App\Fishbowl\Message\AskSummaryOpenAI;
+use App\Fishbowl\Message\OpenAI\AskSummaryOpenAI;
 use App\Fishbowl\Service\OpenAI\AskSummaryService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
