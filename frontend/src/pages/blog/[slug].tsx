@@ -15,7 +15,7 @@ import { BlogPosts } from '@/components/Web/Blog/BlogPostsData';
 
 const Blog = ({ slug }) => {
   return (
-    <Layout positionDefault>
+    <Layout positionDefault blogLayout>
       <BlogContent slug={slug as string} />
     </Layout>
   );

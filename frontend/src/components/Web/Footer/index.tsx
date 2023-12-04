@@ -152,9 +152,7 @@ const Footer = () => {
               </>
             )}
             <li>
-              <Link href={`${ROUTE_BLOG}/5-tips-boost-participation-online-meetings`}>
-                {t('blog')}
-              </Link>
+              <Link href={`${ROUTE_BLOG}`}>{t('blog')}</Link>
             </li>
           </NavList>
         </Nav>
