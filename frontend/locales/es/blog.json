@@ -2,6 +2,11 @@
     "share": "Compartir",
     "bannerText": "Lleva tus conversaciones online al siguiente nivel",
     "blogCTA": "Programa tu próxima reunión en Stooa",
+    "blogPage": {
+        "headerTitle": "We love, we share",
+        "headerSubtitle": "En Stooa nos gusta hablar de debate, conversación, de escuchar todas las voces y aprender de ellas, si a ti también te interesan estos temas, este es tu sitio.",
+        "lastPosts": "Últimos artículos"
+    },
     "posts": {
         "5-tips-boost-participation-online-meetings": {
             "title": "5 consejos para impulsar la participación en reuniones online",

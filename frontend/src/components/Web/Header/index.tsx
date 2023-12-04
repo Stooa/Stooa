@@ -54,7 +54,7 @@ const Header = ({ navigation = true }: Props) => {
                     <Button
                       className={!isBlog ? 'hide-mobile' : ''}
                       size="medium"
-                      variant="secondary"
+                      variant="secondary-darker"
                       onClick={() => {
                         pushEventDataLayer({
                           category: 'Schedule Fishbowl',
