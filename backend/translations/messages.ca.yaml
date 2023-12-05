@@ -50,4 +50,3 @@ login:
 
 fishbowl:
     default_title: 'Reunió Fishbowl - %name%'
-    openai_prompt: Aquest fitxer conté una conversa entre diverses persones. Aquesta conversa està continguda en un array amb la clau "messages". Utilitza la informació que està dins de "content" per esbrinar de què han pogut parlar. Feu un resum d'aquesta conversa.

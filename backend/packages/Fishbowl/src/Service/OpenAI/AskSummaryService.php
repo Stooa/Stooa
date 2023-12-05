@@ -18,7 +18,6 @@ use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class AskSummaryService extends AbstractController
 {
@@ -26,7 +25,6 @@ final class AskSummaryService extends AbstractController
         private readonly string $apiKey,
         private readonly string $assistantId,
         private readonly MessageBusInterface $bus,
-        private readonly TranslatorInterface $translator,
         private readonly FishbowlRepository $fishbowlRepository
     ) {
     }
@@ -50,7 +48,7 @@ final class AskSummaryService extends AbstractController
                     'messages' => [
                         [
                             'role' => 'user',
-                            'content' => $this->translator->trans('fishbowl.openai_prompt', [], null, $fishbowl->getLocale()),
+                            'content' => 'Summarize this transcribed conversation in it\'s spoken language.',
                             'file_ids' => [$file->id],
                         ],
                     ],

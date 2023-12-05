@@ -49,4 +49,3 @@ login:
 
 fishbowl:
     default_title: 'Reunión Fishbowl - %name%'
-    openai_prompt: Este fichero contiene una conversación entre varias personas. Esta conversación está contenida en un array con la clave "messages". Utiliza la información que está dentro de "content" para averiguar de qué han podido hablar. Realiza un resumen de esta conversación.
