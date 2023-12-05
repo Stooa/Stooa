@@ -26,7 +26,7 @@ import { ModalsProvider } from '@/contexts/ModalsContext';
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
 interface Props {
-  data: Fishbowl;
+  fishbowl: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
   prejoin: boolean;
@@ -34,7 +34,13 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, children }: Props) => {
+const Layout = ({
+  className,
+  fishbowl,
+  scriptsLoaded,
+  scriptsLoadedSuccessfully,
+  children
+}: Props) => {
   const router = useRouter();
   const { fid } = router.query;
   const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
@@ -70,7 +76,7 @@ const Layout = ({ className, data, scriptsLoaded, scriptsLoadedSuccessfully, chi
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (
-    <StooaProvider data={data} isModerator={isModerator}>
+    <StooaProvider fishbowl={fishbowl} isModerator={isModerator}>
       <ModalsProvider isModerator={isModerator}>
         <DevicesProvider>
           <Container className={className}>{children}</Container>
