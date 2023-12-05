@@ -19,23 +19,25 @@ import { useAuth } from '@/contexts/AuthContext';
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { createApolloClient } from '@/lib/apollo-client';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl as FishbowlType } from '@/types/api-platform';
 
-const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
+import Fishbowl from '@/components/App/Fishbowl';
+import JoinFishbowl from '@/components/Web/JoinFishbowl';
+import Layout from '@/layouts/App';
+
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
-const Fishbowl = dynamic(import('@/components/App/Fishbowl'), { loading: () => <div /> });
 const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
   loading: () => <div />
 });
-const JoinFishbowl = dynamic(import('@/components/Web/JoinFishbowl'), { loading: () => <div /> });
 const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
   loading: () => <div />
 });
 
-const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
+const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
   const { lang } = useTranslation();
+
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
 
@@ -72,7 +74,7 @@ const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
       className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}
-      data={fishbowl}
+      fishbowl={fishbowl}
       prejoin={shouldPrintPreJoinPage}
     >
       {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
