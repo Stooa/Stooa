@@ -26,6 +26,7 @@ interface Props {
   title?: string;
   children: React.ReactNode;
   positionDefault?: boolean;
+  blogLayout?: boolean;
 }
 
 const Page = ({
@@ -33,14 +34,15 @@ const Page = ({
   center = true,
   decorated = false,
   navigation = true,
-  positionDefault
+  positionDefault,
+  blogLayout
 }: Props) => (
   <>
-    <Container className={decorated ? 'decorated' : ''}>
-      <HeaderStyled>
+    <Container blogLayout={blogLayout} className={decorated ? 'decorated' : ''}>
+      <HeaderStyled blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main positionDefault={positionDefault} center={center}>
+      <Main positionDefault={positionDefault} center={center} blogLayout={blogLayout}>
         {children}
       </Main>
       {decorated && (
