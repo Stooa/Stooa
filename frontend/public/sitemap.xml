@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+<url>
+  <loc>https://www.stooa.com/</loc>
+   <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/es" />
+   <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/fr" />
+   <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/ca" />
+  <lastmod>2023-12-04T09:12:27+00:00</lastmod>
+</url>
+
+<url>
+  <loc>https://www.stooa.com/blog</loc>
+  <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/es/blog" />
+    <link
+    rel="alternate"
+    hreflang="fr"
+    href="https://www.stooa.com/fr/blog" />
+    <link
+    rel="alternate"
+    hreflang="ca"
+    href="https://www.stooa.com/ca/blog" />
+  <lastmod>2023-12-04T09:12:27+00:00</lastmod>
+</url>
+
+<url>
+  <loc>https://www.stooa.com/blog/5-tips-boost-participation-online-meetings</loc>
+  <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/es/blog/5-tips-boost-participation-online-meetings" />
+  <link
+    rel="alternate"
+    hreflang="fr"
+    href="https://www.stooa.com/fr/blog/5-tips-boost-participation-online-meetings" />
+  <link
+    rel="alternate"
+    hreflang="ca"
+    href="https://www.stooa.com/ca/blog/5-tips-boost-participation-online-meetings" />
+  <lastmod>2023-12-04T09:12:27+00:00</lastmod>
+</url>
+
+<url>
+  <loc>https://www.stooa.com/blog/3-innovative-dynamics-for-retros</loc>
+  <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/es/blog/3-innovative-dynamics-for-retros" />
+  <link
+    rel="alternate"
+    hreflang="fr"
+    href="https://www.stooa.com/fr/blog/3-innovative-dynamics-for-retros" />
+  <link
+    rel="alternate"
+    hreflang="ca"
+    href="https://www.stooa.com/ca/blog/3-innovative-dynamics-for-retros" />
+  <lastmod>2023-12-04T09:12:27+00:00</lastmod>
+</url>
+
+<url>
+  <loc>https://www.stooa.com/cookies-policy</loc>
+  <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/es/cookies-policy" />
+  <link
+    rel="alternate"
+    hreflang="fr"
+    href="https://www.stooa.com/fr/cookies-policy" />
+  <link
+    rel="alternate"
+    hreflang="ca"
+    href="https://www.stooa.com/ca/cookies-policy" />
+  <lastmod>2023-12-04T09:12:27+00:00</lastmod>
+</url>
+
+<url>
+  <loc>https://www.stooa.com/privacy-policy</loc>
+  <link
+    rel="alternate"
+    hreflang="es"
+    href="https://www.stooa.com/es/privacy-policy" />
+  <link
+    rel="alternate"
+    hreflang="fr"
+    href="https://www.stooa.com/fr/privacy-policy" />
+  <link
+    rel="alternate"
+    hreflang="ca"
+    href="https://www.stooa.com/ca/privacy-policy" />
+  <lastmod>2023-12-04T09:12:27+00:00</lastmod>
+</url>
+
+
+</urlset>
