@@ -14,16 +14,20 @@ declare(strict_types=1);
 namespace App\Fishbowl\Service\OpenAI;
 
 use App\Fishbowl\Message\OpenAI\GetSummaryOpenAI;
+use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DelayStamp;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class AskSummaryService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
         private readonly string $assistantId,
-        private readonly MessageBusInterface $bus
+        private readonly MessageBusInterface $bus,
+        private readonly TranslatorInterface $translator,
+        private readonly FishbowlRepository $fishbowlRepository
     ) {
     }
 
@@ -33,6 +37,12 @@ final class AskSummaryService extends AbstractController
 
         $file = $client->files()->retrieve($fileId);
 
+        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
+
+        if (null === $fishbowl) {
+            return;
+        }
+
         $thread = $client->threads()->createAndRun(
             [
                 'assistant_id' => $this->assistantId,
@@ -40,7 +50,7 @@ final class AskSummaryService extends AbstractController
                     'messages' => [
                         [
                             'role' => 'user',
-                            'content' => 'Summarize the "content" of this JSON file\'s messages',
+                            'content' => $this->translator->trans('fishbowl.openai_prompt', [], null, $fishbowl->getLocale()),
                             'file_ids' => [$file->id],
                         ],
                     ],

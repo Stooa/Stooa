@@ -49,3 +49,4 @@ login:
 
 fishbowl:
     default_title: 'Fishbowl Meeting - %name%'
+    openai_prompt: This file contains a conversation between several people. This conversation is contained in an array with the key "messages". Use the information inside "content" to find out what they could have talked about. Make a summary of that conversation.
