@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -8,15 +9,15 @@
 
 <url>
   <loc>https://www.stooa.com/</loc>
-   <link
+   <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/es" />
-   <link
+   <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/fr" />
-   <link
+   <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/ca" />
@@ -25,15 +26,15 @@
 
 <url>
   <loc>https://www.stooa.com/blog</loc>
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/es/blog" />
-    <link
+    <xhtml:link
     rel="alternate"
     hreflang="fr"
     href="https://www.stooa.com/fr/blog" />
-    <link
+    <xhtml:link
     rel="alternate"
     hreflang="ca"
     href="https://www.stooa.com/ca/blog" />
@@ -42,15 +43,15 @@
 
 <url>
   <loc>https://www.stooa.com/blog/5-tips-boost-participation-online-meetings</loc>
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/es/blog/5-tips-boost-participation-online-meetings" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="fr"
     href="https://www.stooa.com/fr/blog/5-tips-boost-participation-online-meetings" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="ca"
     href="https://www.stooa.com/ca/blog/5-tips-boost-participation-online-meetings" />
@@ -59,15 +60,15 @@
 
 <url>
   <loc>https://www.stooa.com/blog/3-innovative-dynamics-for-retros</loc>
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/es/blog/3-innovative-dynamics-for-retros" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="fr"
     href="https://www.stooa.com/fr/blog/3-innovative-dynamics-for-retros" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="ca"
     href="https://www.stooa.com/ca/blog/3-innovative-dynamics-for-retros" />
@@ -76,15 +77,15 @@
 
 <url>
   <loc>https://www.stooa.com/cookies-policy</loc>
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/es/cookies-policy" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="fr"
     href="https://www.stooa.com/fr/cookies-policy" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="ca"
     href="https://www.stooa.com/ca/cookies-policy" />
@@ -93,15 +94,15 @@
 
 <url>
   <loc>https://www.stooa.com/privacy-policy</loc>
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="es"
     href="https://www.stooa.com/es/privacy-policy" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="fr"
     href="https://www.stooa.com/fr/privacy-policy" />
-  <link
+  <xhtml:link
     rel="alternate"
     hreflang="ca"
     href="https://www.stooa.com/ca/privacy-policy" />
