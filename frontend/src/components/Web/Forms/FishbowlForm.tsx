@@ -165,7 +165,7 @@ const FishbowlForm = ({
 
   const watchIsPrivate = watch('isPrivate');
 
-  const handleSummaryOnClick = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handleSummaryOnClick = () => {
     if (getValues('hasSummary') === false && setShowModal) {
       setShowModal(true);
     }
