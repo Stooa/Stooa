@@ -29,7 +29,12 @@
         "isPrivate": "Vull que aquest esdeveniment sigui privat",
         "passwordTooltip": "Per a poder accedir a l'esdeveniment serà necessari ingressar la contrasenya",
         "passwordPlaceholder": "Introdueix la teva contrasenya",
-        "passwordInputLabel": "Contrasenya"
+        "passwordInputLabel": "Contrasenya",
+        "AITitle": "Inteligència Artificial",
+        "hasSummaryLabel": "Vull que la Intel·ligència Artificial generi un resum de la conversa",
+        "hasSummaryTooltip": "Guardaremos las transcripciones de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
+        "AIDataPrivacyTitle": "Privacitat de les dades",
+        "AIDataPrivacyDescription": "Al activar el resum amb la IA, estas acceptant que Stooa guarde la teva conversa per a poder crear un resum."
     },
     "button": {
         "login": "Entra",

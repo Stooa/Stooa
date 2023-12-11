@@ -18,7 +18,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const ModalStopRecording: React.FC<Props> = ({ closeModal, stopRecording }) => {
+const ModalStopRecording = ({ closeModal, stopRecording }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (

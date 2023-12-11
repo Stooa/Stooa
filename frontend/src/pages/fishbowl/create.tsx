@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Layout from '@/layouts/Default';
@@ -16,9 +16,12 @@ import { useStateValue } from '@/contexts/AppContext';
 
 import { IConferenceStatus } from '@/jitsi/Status';
 
+import ModalEnableAiSummary from '@/components/App/ModalEnableAiSummary';
+
 const Create = () => {
   const { t } = useTranslation('fishbowl');
   const [, dispatch] = useStateValue();
+  const [showAIPrivacyModal, setShowAIPrivacyModal] = useState(false);
 
   useEffect(() => {
     dispatch({
@@ -33,8 +36,11 @@ const Create = () => {
 
   return (
     <Layout title={t('title')}>
+      {showAIPrivacyModal && (
+        <ModalEnableAiSummary closeModal={() => setShowAIPrivacyModal(false)} />
+      )}
       <h1 className="title-md form-title">{t('title')}</h1>
-      <FishbowlForm />
+      <FishbowlForm setShowModal={setShowAIPrivacyModal} />
     </Layout>
   );
 };
