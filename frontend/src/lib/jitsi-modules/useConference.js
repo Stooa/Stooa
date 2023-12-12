@@ -456,7 +456,7 @@ export const useConference = () => {
 
   const startTranscriptionEvent = () => {
     console.log('[STOOA] Start transcription');
-    conference.setLocalParticipantProperty('requestingTranscription', true);
+    getConference().setLocalParticipantProperty('requestingTranscription', true);
   };
 
   const stopTranscriptionEvent = () => {
