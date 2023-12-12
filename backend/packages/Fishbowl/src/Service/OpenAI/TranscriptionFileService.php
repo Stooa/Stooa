@@ -16,6 +16,7 @@ namespace App\Fishbowl\Service\OpenAI;
 use App\Fishbowl\Message\OpenAI\AskSummaryOpenAI;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 class TranscriptionFileService
 {
@@ -33,7 +34,9 @@ class TranscriptionFileService
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 
         if (null !== $fishbowl && $fishbowl->isHasSummary()) {
-            $this->bus->dispatch(new AskSummaryOpenAI($fileId, $slug));
+            $this->bus->dispatch(new AskSummaryOpenAI($fileId, $slug), [
+                new DelayStamp(5000),
+            ]);
         }
     }
 }
