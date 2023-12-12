@@ -35,7 +35,7 @@ class TranscriptionFileService
 
         if (null !== $fishbowl && $fishbowl->isHasSummary()) {
             $this->bus->dispatch(new AskSummaryOpenAI($fileId, $slug), [
-                new DelayStamp(5000),
+                new DelayStamp(10000),
             ]);
         }
     }
