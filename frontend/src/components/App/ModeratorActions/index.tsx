@@ -36,7 +36,7 @@ interface Props {
 const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [, dispatch] = useStateValue();
   const [loading, setLoading] = useState(false);
-  const { getLocalTracks, startTranscriptionEvent } = useConference();
+  const { getLocalTracks } = useConference();
   const { removeShareTrack } = useSharedTrack();
   const [introduction, setIntroduction] = useState(false);
   const [showIntroductionModal, setShowIntroductionModal] = useState(false);
@@ -45,15 +45,8 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
   const [endFishbowl] = useMutation(FINISH_FISHBOWL);
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('fishbowl');
-  const {
-    data,
-    isModerator,
-    isSharing,
-    clientRunning,
-    setClientRunning,
-    isRecording,
-    stopRecording
-  } = useStooa();
+  const { data, isSharing, clientRunning, setClientRunning, isRecording, stopRecording } =
+    useStooa();
   const { permissions, setShowModalPermissions } = useDevices();
   const { showEndIntroductionModal, setShowEndIntroductionModal } = useModals();
 
@@ -70,12 +63,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
     setShowFinishModal(!showFinishModal);
   };
 
-  const enableTranscriptions = () => {
-    if (isModerator && data.hasSummary) {
-      startTranscriptionEvent();
-    }
-  };
-
   const startIntroduction = () => {
     setLoading(true);
 
@@ -83,7 +70,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
       type: 'FISHBOWL_STARTED',
       fishbowlStarted: true
     });
-    enableTranscriptions();
   };
 
   const startFishbowl = () => {
@@ -111,7 +97,6 @@ const ModeratorActions: React.FC<Props> = ({ fid, conferenceStatus }) => {
         type: 'FISHBOWL_STARTED',
         fishbowlStarted: true
       });
-      enableTranscriptions();
 
       try {
         runWithoutIntroFishbowl(slug)
