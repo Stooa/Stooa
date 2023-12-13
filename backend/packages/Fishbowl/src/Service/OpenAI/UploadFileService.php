@@ -28,10 +28,16 @@ final class UploadFileService extends AbstractController
     public function upload(string $transcriptionUrl): string
     {
         $response = $this->client->request('GET', $transcriptionUrl);
+        $transcription = $response->getContent();
 
         $filesystem = new Filesystem();
         $file = $filesystem->tempnam('/tmp', 'transcription_', '.json');
-        $filesystem->appendToFile($file, $response->getContent());
+        $filesystem->appendToFile($file, $this->cleanTranscription($transcription));
+
+        if (filesize($file) < 1200) {
+            $file = $filesystem->tempnam('/tmp', 'transcription_', '.json');
+            $filesystem->appendToFile($file, $transcription);
+        }
 
         $client = \OpenAI::client($this->apiKey);
 
@@ -41,5 +47,26 @@ final class UploadFileService extends AbstractController
         ]);
 
         return $uploadedFile->id;
+    }
+
+    private function cleanTranscription(string $json): string
+    {
+        $jsonArray = json_decode($json, true);
+
+        $removeKeys = ['roomAddress', 'meetingFqn', 'sessionId', 'timestamp', 'messageType'];
+
+        foreach ($removeKeys as $key) {
+            unset($jsonArray[$key]);
+        }
+
+        $removeKeys = ['jid', 'timestamp', 'avatarUrl', 'messageId'];
+
+        foreach ($jsonArray['messages'] as $index => $message) {
+            foreach ($removeKeys as $key) {
+                unset($jsonArray['messages'][$index][$key]);
+            }
+        }
+
+        return json_encode($jsonArray, \JSON_THROW_ON_ERROR);
     }
 }
