@@ -41,11 +41,19 @@ const StyledCardTitleWithIcon = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.5em;
+  margin-bottom: 0.5em;
+
+  & > svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
 `;
 
 const StyledThankyouAICard = styled(StyledBorderCard)`
   max-width: 360px;
+  gap: 1.25em;
   align-items: center;
+  margin: 0 auto;
 `;
 
 const StyledAITooltip = styled(StyledBorderCard)`

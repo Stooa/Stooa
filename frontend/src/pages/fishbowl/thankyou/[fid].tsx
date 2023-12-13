@@ -103,20 +103,52 @@ const ThankYou = () => {
             } - ${endDate.time} ${endDate.timezone}`}
           </div>
         </Time>
-        {(!fb.isPrivate || fb.plainPassword) && (
-          <>
+
+        {(!fb.isPrivate || isModerator || userHasParticipated) && (
+          <div>
             <h1 className="body-lg medium">{fb.name}</h1>
             {fb.description && (
               <Description className="description body-sm">{fb.description}</Description>
             )}
-          </>
+          </div>
         )}
+
         {showFeedbackForm && (
           <FeedbackForm fishbowl={data.bySlugQueryFishbowl} variant="thankyou" />
         )}
 
+        {isModerator && fb.hasSummary && (
+          <StyledThankyouAICard>
+            <div>
+              <StyledCardTitleWithIcon>
+                <AISummary />
+                <h3 className="body-md medium">Generando el resumen con IA</h3>
+              </StyledCardTitleWithIcon>
+              <p className="body-md">
+                Se esta generando el resumen, lo tendrás disponible en unos instantes en tu sección
+                de Fishbowls finalizados. También podrás ver los detalles y el feedback de los
+                asistentes.
+              </p>
+            </div>
+            <Link href={`${ROUTE_FISHBOWL_FINISHED}?selected=${fid}`} legacyBehavior passHref>
+              <Button
+                as="a"
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Schedule Fishbowl',
+                    action: 'Thank You Page',
+                    label: `fishbowl/thankyou/${fid}`
+                  });
+                }}
+              >
+                {t('common:goToFinishedFishbowls')}
+              </Button>
+            </Link>
+          </StyledThankyouAICard>
+        )}
+
         <ThankYouStyled>
-          {(!fb.isPrivate || fb.plainPassword) && (
+          {(!fb.isPrivate || isModerator || userHasParticipated) && (
             <div className="share body-md medium">
               <p>{t('share')}</p>
               <ul>
@@ -188,7 +220,7 @@ const ThankYou = () => {
             </div>
           )}
           <div className="action-wrapper">
-            {isModerator && !fb.hasSummary ? (
+            {isModerator && !fb.hasSummary && (
               <div>
                 <h2 className="past-title body-md medium">
                   <Trans i18nKey="common:goToFinishedFishbowlsTitle" components={{ i: <i /> }} />
@@ -209,34 +241,6 @@ const ThankYou = () => {
                   </Button>
                 </Link>
               </div>
-            ) : (
-              <StyledThankyouAICard>
-                <div>
-                  <StyledCardTitleWithIcon>
-                    <AISummary />
-                    <h3 className="body-md medium">Generando el resumen con IA</h3>
-                  </StyledCardTitleWithIcon>
-                  <p className="body-md">
-                    Se esta generando el resumen, lo tendrás disponible en unos instantes en tu
-                    sección de Fishbowls finalizados. También podrás ver los detalles y el feedback
-                    de los asistentes.
-                  </p>
-                </div>
-                <Link href={`${ROUTE_FISHBOWL_FINISHED}?selected=${fid}`} legacyBehavior passHref>
-                  <Button
-                    as="a"
-                    onClick={() => {
-                      pushEventDataLayer({
-                        category: 'Schedule Fishbowl',
-                        action: 'Thank You Page',
-                        label: `fishbowl/thankyou/${fid}`
-                      });
-                    }}
-                  >
-                    {t('common:goToFinishedFishbowls')}
-                  </Button>
-                </Link>
-              </StyledThankyouAICard>
             )}
 
             {!isModerator && (
