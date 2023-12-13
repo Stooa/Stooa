@@ -34,7 +34,7 @@ final class UploadFileService extends AbstractController
         $file = $filesystem->tempnam('/tmp', 'transcription_', '.json');
         $filesystem->appendToFile($file, $this->cleanTranscription($transcription));
 
-        if (filesize($file) < 1200) {
+        if (filesize($file) < 1100) {
             $file = $filesystem->tempnam('/tmp', 'transcription_', '.json');
             $filesystem->appendToFile($file, $transcription);
         }
