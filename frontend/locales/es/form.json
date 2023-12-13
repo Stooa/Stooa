@@ -32,7 +32,7 @@
         "passwordInputLabel": "Contraseña",
         "AITitle": "Inteligència Artificial",
         "hasSummaryLabel": "Vull que la Intel·ligència Artificial generi un resum de la conversa",
-        "hasSummaryTooltip": "Guardaremos las transcripciones de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
+        "hasSummaryTooltip": "Guardaremos la transcripción de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
         "AIDataPrivacyTitle": "Privacidad de datos",
         "AIDataPrivacyDescription": "Al activar el resumen con IA, estás aceptando que Stooa guarde la transcripción de la conversación para poder realiar un resumen con OpenAI GPT"
     },
