@@ -193,6 +193,8 @@ const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
   } else {
     return (
       <FishbowlListWrapper>
+        {/* FISHBOWL AI SUMMARY */}
+
         <StyledListHeader>
           <div className="header__wrapper">
             <div className="fishbowl-list__header">

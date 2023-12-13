@@ -87,6 +87,11 @@ const Time = styled(Alert)`
 `;
 
 const StyledThankyouWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ${space(3.5)};
   max-width: 1024px;
   width: 100%;
 
