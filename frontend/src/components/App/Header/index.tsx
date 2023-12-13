@@ -17,8 +17,9 @@ import { Header as HeaderStyled } from '@/layouts/App/styles';
 import { ROUTE_HOME } from '@/app.config';
 import StatusRecording from '../StatusRecording';
 import RedRec from '@/ui/svg/rec-red.svg';
-import AISummary from '@/ui/svg/ai-summary.svg';
+
 import useTranslation from 'next-translate/useTranslation';
+import { AISummaryIcon } from '../AISummaryIcon';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
@@ -90,7 +91,7 @@ const Header = ({ isPrefishbowl }: Props) => {
           <>
             <FishbowlInfo />
             <OnBoardingButton />
-            {data.hasSummary && <AISummary />}
+            {data.hasSummary && <AISummaryIcon />}
           </>
         )}
       </div>

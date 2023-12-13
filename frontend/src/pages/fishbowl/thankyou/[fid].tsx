@@ -27,11 +27,17 @@ import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
 import Twitter from '@/ui/svg/x.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
+import AISummary from '@/ui/svg/ai-summary.svg';
+
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
 import FeedbackForm from '@/components/App/FeedbackForm';
 import Trans from 'next-translate/Trans';
 import { useUser } from '@/jitsi';
+import {
+  StyledCardTitleWithIcon,
+  StyledThankyouAICard
+} from '@/components/App/AISummaryIcon/styles';
 
 const Layout = dynamic(import('@/layouts/Default'), { loading: () => <div /> });
 const Loader = dynamic(import('@/components/Web/Loader'), { loading: () => <div /> });
@@ -182,7 +188,7 @@ const ThankYou = () => {
             </div>
           )}
           <div className="action-wrapper">
-            {isModerator ? (
+            {isModerator && !fb.hasSummary ? (
               <div>
                 <h2 className="past-title body-md medium">
                   <Trans i18nKey="common:goToFinishedFishbowlsTitle" components={{ i: <i /> }} />
@@ -204,6 +210,36 @@ const ThankYou = () => {
                 </Link>
               </div>
             ) : (
+              <StyledThankyouAICard>
+                <div>
+                  <StyledCardTitleWithIcon>
+                    <AISummary />
+                    <h3 className="body-md medium">Generando el resumen con IA</h3>
+                  </StyledCardTitleWithIcon>
+                  <p className="body-md">
+                    Se esta generando el resumen, lo tendrás disponible en unos instantes en tu
+                    sección de Fishbowls finalizados. También podrás ver los detalles y el feedback
+                    de los asistentes.
+                  </p>
+                </div>
+                <Link href={`${ROUTE_FISHBOWL_FINISHED}?selected=${fid}`} legacyBehavior passHref>
+                  <Button
+                    as="a"
+                    onClick={() => {
+                      pushEventDataLayer({
+                        category: 'Schedule Fishbowl',
+                        action: 'Thank You Page',
+                        label: `fishbowl/thankyou/${fid}`
+                      });
+                    }}
+                  >
+                    {t('common:goToFinishedFishbowls')}
+                  </Button>
+                </Link>
+              </StyledThankyouAICard>
+            )}
+
+            {!isModerator && (
               <>
                 <RedirectLink href={ROUTE_FISHBOWL_CREATE} passHref>
                   <Button
