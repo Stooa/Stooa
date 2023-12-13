@@ -155,6 +155,7 @@ const Footer = styled.footer`
   grid-area: Footer;
   position: relative;
   z-index: 40;
+  color: ${COLOR_NEUTRO_700};
 
   ${media.min('tablet')`
     display: grid;
