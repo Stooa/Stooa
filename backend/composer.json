@@ -52,7 +52,7 @@
         "symfony/validator": "6.3.8",
         "symfony/workflow": "6.3.4",
         "symfony/yaml": "6.3.8",
-        "symfonycasts/reset-password-bundle": "1.18.0",
+        "symfonycasts/reset-password-bundle": "1.19.0",
         "twig/twig": "3.8.0",
         "webmozart/assert": "1.11.0",
         "webonyx/graphql-php": "14.11.10",
