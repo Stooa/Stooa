@@ -40,7 +40,7 @@ interface Props {
   isFull?: boolean;
   isEditForm?: boolean;
   onSaveCallback?: (data: Fishbowl) => void;
-  setShowModal?: (value: boolean) => void;
+  setShowPrivacyModal?: (value: boolean) => void;
 }
 
 interface FormValues {
@@ -107,7 +107,7 @@ const FishbowlForm = ({
   isFull = false,
   isEditForm = false,
   onSaveCallback,
-  setShowModal
+  setShowPrivacyModal
 }: Props) => {
   const { t, lang } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
@@ -166,8 +166,8 @@ const FishbowlForm = ({
   const watchIsPrivate = watch('isPrivate');
 
   const handleSummaryOnClick = () => {
-    if (getValues('hasSummary') === false && setShowModal) {
-      setShowModal(true);
+    if (getValues('hasSummary') === false && setShowPrivacyModal) {
+      setShowPrivacyModal(true);
     }
   };
 

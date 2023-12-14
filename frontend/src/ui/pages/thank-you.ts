@@ -19,8 +19,6 @@ import {
 } from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
-  margin-top: ${space(4)};
-
   .share {
     margin-bottom: ${space(4)};
 

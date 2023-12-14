@@ -144,5 +144,16 @@ const StyledLeftAlignedModal = styled(Modal)`
   }
 `;
 
+const StyledAiSummaryModal = styled(StyledLeftAlignedModal)`
+  & .content {
+    max-width: 600px;
+  }
+
+  & .summary {
+    max-height: 70svh;
+    overflow-y: scroll;
+  }
+`;
+
 export default Modal;
-export { StyledLeftAlignedModal };
+export { StyledLeftAlignedModal, StyledAiSummaryModal };

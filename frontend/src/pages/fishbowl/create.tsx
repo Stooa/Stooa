@@ -40,7 +40,7 @@ const Create = () => {
         <ModalEnableAiSummary closeModal={() => setShowAIPrivacyModal(false)} />
       )}
       <h1 className="title-md form-title">{t('title')}</h1>
-      <FishbowlForm setShowModal={setShowAIPrivacyModal} />
+      <FishbowlForm setShowPrivacyModal={setShowAIPrivacyModal} />
     </Layout>
   );
 };
