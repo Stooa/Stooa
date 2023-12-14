@@ -35,11 +35,11 @@ const ModalAISummary = ({ closeModal, title, summary }: Props) => {
   };
 
   const getBackSpaces = (summary: string) => {
-    return summary
-      .split('\n')
-      .map((item: string, index: number) => (
-        <p key={index} dangerouslySetInnerHTML={{ __html: item }} />
-      ));
+    return summary.split('\n').map((item: string, index: number) => {
+      if (item !== '\r') {
+        return <p key={index}>{item}</p>;
+      }
+    });
   };
 
   return (

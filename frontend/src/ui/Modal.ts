@@ -154,6 +154,10 @@ const StyledAiSummaryModal = styled(StyledLeftAlignedModal)`
     max-height: 70svh;
     overflow-y: scroll;
 
+    & p + p {
+      margin-top: 1rem;
+    }
+
     ${scrolllbarStyle};
   }
 `;
