@@ -34,6 +34,14 @@ const ModalAISummary = ({ closeModal, title, summary }: Props) => {
     });
   };
 
+  const getBackSpaces = (summary: string) => {
+    return summary
+      .split('\n')
+      .map((item: string, index: number) => (
+        <p key={index} dangerouslySetInnerHTML={{ __html: item }} />
+      ));
+  };
+
   return (
     <StyledAiSummaryModal>
       <div className="content">
@@ -41,7 +49,7 @@ const ModalAISummary = ({ closeModal, title, summary }: Props) => {
           <Cross />
         </button>
         <h2 className="title-sm">{title}</h2>
-        <p className="summary">{summary}</p>
+        <div className="summary">{getBackSpaces(summary)}</div>
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}
