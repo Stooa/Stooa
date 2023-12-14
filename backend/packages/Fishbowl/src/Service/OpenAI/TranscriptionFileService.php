@@ -29,7 +29,11 @@ class TranscriptionFileService
 
     public function save(string $transcriptionUrl, string $slug): void
     {
-        $fileId = $this->uploadFileService->upload($transcriptionUrl);
+        $fileId = $this->uploadFileService->upload($transcriptionUrl, $slug);
+
+        if ('' === $fileId) {
+            return;
+        }
 
         $fishbowl = $this->fishbowlRepository->findBySlug($slug);
 

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service\OpenAI;
 
-use App\Fishbowl\Repository\FishbowlRepository;
 use OpenAI\Responses\Threads\Messages\ThreadMessageResponseContentTextObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Exception\RecoverableMessageHandlingException;
@@ -22,7 +21,7 @@ final class GetSummaryService extends AbstractController
 {
     public function __construct(
         private readonly string $apiKey,
-        private readonly FishbowlRepository $fishbowlRepository
+        private readonly FishbowlSummaryService $fishbowlSummaryService
     ) {
     }
 
@@ -46,21 +45,9 @@ final class GetSummaryService extends AbstractController
         foreach ($response->data as $messageResponse) {
             foreach ($messageResponse->content as $content) {
                 if ($content instanceof ThreadMessageResponseContentTextObject) {
-                    $this->saveSummary($content->text->value, $slug);
+                    $this->fishbowlSummaryService->saveSummary($content->text->value, $slug);
                 }
             }
-        }
-    }
-
-    private function saveSummary(string $summary, string $slug): void
-    {
-        $fishbowl = $this->fishbowlRepository->findBySlug($slug);
-
-        if (null !== $fishbowl) {
-            $fishbowl->setSummary($summary);
-            $fishbowl->setSummaryUpdatedAt(new \DateTimeImmutable());
-
-            $this->fishbowlRepository->persist($fishbowl);
         }
     }
 }
