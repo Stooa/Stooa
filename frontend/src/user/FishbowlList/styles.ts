@@ -491,6 +491,10 @@ const StyledFishbowlDashboardData = styled.div`
     margin-bottom: ${space(2)};
   }
 
+  & .summary-button {
+    margin-bottom: ${space(2)};
+  }
+
   & .data {
     display: flex;
     flex-wrap: wrap;
