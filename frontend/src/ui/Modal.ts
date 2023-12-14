@@ -18,6 +18,7 @@ import {
   COLOR_NEUTRO_900
 } from '@/ui/settings';
 import { TYPOGRAPHY_SIZES } from './Texts';
+import { scrolllbarStyle } from './Scrollbar';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
 
@@ -152,6 +153,8 @@ const StyledAiSummaryModal = styled(StyledLeftAlignedModal)`
   & .summary {
     max-height: 70svh;
     overflow-y: scroll;
+
+    ${scrolllbarStyle};
   }
 `;
 

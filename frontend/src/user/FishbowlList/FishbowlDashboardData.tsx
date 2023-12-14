@@ -16,6 +16,8 @@ import BackArrow from '@/ui/svg/arrow-prev.svg';
 import Hourglass from '@/ui/svg/hourglass.svg';
 import ArrowDown from '@/ui/svg/down-arrow.svg';
 import People from '@/ui/svg/people-bigger.svg';
+import AISummary from '@/ui/svg/ai-summary.svg';
+
 import SatisfactionSummary from '../SatisfactionSummary';
 import { Fishbowl } from '@/types/api-platform';
 import useFeedback from '@/hooks/useFeedback';
@@ -64,6 +66,8 @@ export const FishbowlDashboardData = ({
   const participantsRef = useRef<HTMLDivElement>(null);
   const dashboardWrapperRef = useRef<HTMLDivElement>(null);
 
+  const summaryInProgress = hasSummary && !fishbowl.summary;
+
   const handleScrollToParticipants = () => {
     if (participantsRef.current && dashboardWrapperRef.current) {
       dashboardWrapperRef.current.scrollTo({
@@ -97,10 +101,15 @@ export const FishbowlDashboardData = ({
       </p>
       <Button
         className="summary-button"
-        disabled={!hasSummary || (hasSummary && fishbowl.summary?.length === 0)}
+        disabled={!hasSummary || summaryInProgress}
         onClick={handleShowAISummaryModal}
       >
-        Resumen IA
+        {summaryInProgress
+          ? t('feedback.dashboard.summaryInProgress')
+          : t('feedback.dashboard.summary')}
+        <span>
+          <AISummary />
+        </span>
       </Button>
       <div className="data">
         <div className="data__group">
