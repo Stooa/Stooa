@@ -45,6 +45,7 @@ const UPDATE_FISHBOWL = gql`
         hasIntroduction
         isPrivate
         plainPassword
+        hasSummary
       }
     }
   }

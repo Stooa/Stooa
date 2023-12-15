@@ -241,7 +241,7 @@ const FishbowlForm = ({
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
             plainPassword: values.isPrivate ? values.plainPassword : undefined,
-            hasSummary: false
+            hasSummary: values.hasSummary
           }
         }
       })
