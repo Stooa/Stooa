@@ -48,7 +48,7 @@ final class AskSummaryService extends AbstractController
                     'messages' => [
                         [
                             'role' => 'user',
-                            'content' => 'Summarize all topics about this transcribed conversation in it’s spoken language.',
+                            'content' => 'Summarize this transcribed conversation in it’s spoken language.',
                             'file_ids' => [$file->id],
                         ],
                     ],
