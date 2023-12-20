@@ -10,6 +10,7 @@
 import { BlogMenuItemType } from './AnchorMenu';
 import { ImproveOnlineMeetings } from './posts/5tipsToImprove';
 import { InnovativeRetroDynamics } from './posts/3innovativeRetroDynamics';
+import { ComparingOnlineMeetings } from './posts/ComparingOnlineMeetings';
 
 export type BlogPost = {
   slug: string;
@@ -26,6 +27,18 @@ export type BlogPost = {
 };
 
 export const BlogPosts: Record<string, BlogPost> = {
+  'comparing-online-meetings-stooa-fishbowl': {
+    slug: 'comparing-online-meetings-stooa-fishbowl',
+    title: 'posts.comparing-online-meetings-stooa-fishbowl.title',
+    image: '/img/web/blog/compare/dog-fishbowl.jpeg',
+    description: 'posts.comparing-online-meetings-stooa-fishbowl.description',
+    subtitle: 'posts.comparing-online-meetings-stooa-fishbowl.subtitle',
+    content: ComparingOnlineMeetings,
+    author: 'posts.comparing-online-meetings-stooa-fishbowl.author',
+    dateAndDuration: 'posts.comparing-online-meetings-stooa-fishbowl.date-and-duration',
+    datePublishedTimestamp: 1702893825,
+    dateModifiedTimestamp: 1702893825
+  },
   '3-innovative-dynamics-for-retros': {
     slug: '3-innovative-dynamics-for-retros',
     title: 'posts.3-innovative-dynamics-for-retros.title',

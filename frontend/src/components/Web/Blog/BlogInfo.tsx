@@ -53,7 +53,7 @@ const BlogInfo = ({ author, dateAndDuration, title, bottom }: Props) => {
             <Twitter />
           </Link>
           <Link
-            href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}${pathname}&title=${title}&mini=true`}
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}${pathname}`}
             target="_blank"
             rel="noreferrer"
             onClick={() => {

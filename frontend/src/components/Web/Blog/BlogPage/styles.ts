@@ -30,6 +30,10 @@ const StyledBlogList = styled.div`
   flex-wrap: wrap;
   column-gap: 4.5rem;
   row-gap: 3em;
+
+  .empty {
+    flex: 1 1 320px;
+  }
 `;
 
 const StyledBlogContainer = styled.div`

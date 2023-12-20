@@ -25,6 +25,7 @@ const BlogPage = () => {
           {Object.keys(BlogPosts).map(post => {
             return <BlogCard key={post} blogPost={BlogPosts[post]} />;
           })}
+          <div className="empty"></div>
         </StyledBlogList>
       </StyledBlogContainer>
       <BlogBannerCTA />
