@@ -40,3 +40,4 @@ export const GITHUB_ROADMAP = `${GITHUB_BASE}/Stooa/projects/1`;
 export const GITBOOK_DOCUMENTATION = `https://docs.stooa.com`;
 export const GITBOOK_CONDUCT = `https://docs.stooa.com/documentation/code_of_conduct`;
 export const ROUTE_INTEGRATIONS = '/integrations';
+export const ROUTE_BLOG = '/blog';

@@ -25,15 +25,26 @@ interface Props {
   navigation?: boolean;
   title?: string;
   children: React.ReactNode;
+  positionDefault?: boolean;
+  blogLayout?: boolean;
 }
 
-const Page = ({ children, center = true, decorated = false, navigation = true }: Props) => (
+const Page = ({
+  children,
+  center = true,
+  decorated = false,
+  navigation = true,
+  positionDefault,
+  blogLayout
+}: Props) => (
   <>
-    <Container className={decorated ? 'decorated' : ''}>
-      <HeaderStyled>
+    <Container blogLayout={blogLayout} className={decorated ? 'decorated' : ''}>
+      <HeaderStyled blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main center={center}>{children}</Main>
+      <Main positionDefault={positionDefault} center={center} blogLayout={blogLayout}>
+        {children}
+      </Main>
       {decorated && (
         <DecorationStyled>
           <Decoration />
