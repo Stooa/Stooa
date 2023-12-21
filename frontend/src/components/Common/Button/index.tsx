@@ -13,6 +13,7 @@ import {
   LinkStyledButton,
   PrimaryButton,
   SecondaryButton,
+  SecondaryButtonDarker,
   SIZES,
   SubtleLinkStyledButton,
   TextButton
@@ -22,7 +23,7 @@ interface Props extends React.ComponentProps<'button'> {
   /**
    * Select one of the variants, it will change color and major style
    */
-  variant?: 'primary' | 'secondary' | 'text' | 'link' | 'subtleLink';
+  variant?: 'primary' | 'secondary' | 'secondary-darker' | 'text' | 'link' | 'subtleLink';
   size?: 'small' | 'medium' | 'large';
   as?: 'button' | 'a';
   full?: boolean;
@@ -46,6 +47,8 @@ const Button: React.ForwardRefRenderFunction<Record<string, never>, Props> = (
     Component = PrimaryButton;
   } else if (variant === 'secondary') {
     Component = SecondaryButton;
+  } else if (variant === 'secondary-darker') {
+    Component = SecondaryButtonDarker;
   } else if (variant === 'text') {
     Component = TextButton;
   } else if (variant === 'link') {

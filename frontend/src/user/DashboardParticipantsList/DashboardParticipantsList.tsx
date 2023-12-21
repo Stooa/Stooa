@@ -10,7 +10,7 @@
 import { StyledListWrapper, StyledParticipantItem } from './styles';
 
 import { Participant } from '@/types/api-platform/interfaces/participant';
-import Twitter from '@/ui/svg/twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import Linkedin from '@/ui/svg/linkedin.svg';
 import useTranslation from 'next-translate/useTranslation';
 import { User } from '@/types/api-platform/interfaces/user';

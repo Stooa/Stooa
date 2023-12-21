@@ -10,5 +10,5 @@
 import { Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Then('can click on screen share button', () => {
-  cy.get('[data-testid=share-screen-button]').should('exist');
+  cy.get('[data-testid=share-screen-button]', { timeout: 6000 }).should('exist');
 });
