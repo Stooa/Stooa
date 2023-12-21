@@ -12,7 +12,6 @@ import React from 'react';
 import Decoration from '@/components/Web/Decoration';
 import Footer from '@/components/Web/Footer';
 import Header from '@/components/Web/Header';
-import Seo from '@/components/Web/Seo';
 import {
   Container,
   Header as HeaderStyled,
@@ -26,6 +25,8 @@ interface Props {
   navigation?: boolean;
   title?: string;
   children: React.ReactNode;
+  positionDefault?: boolean;
+  blogLayout?: boolean;
 }
 
 const Page = ({
@@ -33,15 +34,17 @@ const Page = ({
   center = true,
   decorated = false,
   navigation = true,
-  title = ''
+  positionDefault,
+  blogLayout
 }: Props) => (
   <>
-    <Seo title={title} />
-    <Container className={decorated ? 'decorated' : ''}>
-      <HeaderStyled>
+    <Container blogLayout={blogLayout} className={decorated ? 'decorated' : ''}>
+      <HeaderStyled blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main center={center}>{children}</Main>
+      <Main positionDefault={positionDefault} center={center} blogLayout={blogLayout}>
+        {children}
+      </Main>
       {decorated && (
         <DecorationStyled>
           <Decoration />

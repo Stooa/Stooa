@@ -190,6 +190,7 @@ const StyledThanksTextWrapper = styled.div`
 
     & svg {
       width: 25px;
+      height: 25px;
       object-fit: cover;
       & path {
         transition: all 0.2s ease-in-out;

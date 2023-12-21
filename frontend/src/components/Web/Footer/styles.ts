@@ -38,10 +38,20 @@ const Container = styled.footer`
 
 const Nav = styled.nav`
   &.social {
-    ${media.between('tablet', 'desktop')`
+    ${media.max('desktop')`
       margin: ${space(2)} 0 0;
       width: 100%;
     `};
+
+    & a {
+      display: inline-block;
+      height: 32px;
+    }
+
+    & svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 `;
 

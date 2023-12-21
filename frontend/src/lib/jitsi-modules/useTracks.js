@@ -262,8 +262,6 @@ export const useTracks = () => {
   };
 
   const handleTrackMuteChanged = async track => {
-    await syncLocalStorageTrack(track);
-
     if (track.isLocal()) return;
 
     const seat = getSeat(track.getParticipantId());

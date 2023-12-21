@@ -25,7 +25,7 @@ import { formatDateTime } from '@/lib/helpers';
 import ThankYouStyled, { Description, Time, StyledThankyouWrapper } from '@/ui/pages/thank-you';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import Mail from '@/ui/svg/share-mail.svg';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import Whatsapp from '@/ui/svg/share-whatsapp.svg';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Button from '@/components/Common/Button';
@@ -71,6 +71,7 @@ const ThankYou = () => {
   const endDate = formatDateTime(fb.endDateTimeTz);
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
   const showFeedbackForm = userHasParticipated && !thankYouFeedbackGiven && !isModerator;
+  const shouldPrivateDataShow = userHasParticipated || isModerator;
 
   dataLayerPush({
     event: 'GAPageView',
@@ -97,7 +98,7 @@ const ThankYou = () => {
             } - ${endDate.time} ${endDate.timezone}`}
           </div>
         </Time>
-        {(!fb.isPrivate || fb.plainPassword) && (
+        {(!fb.isPrivate || shouldPrivateDataShow) && (
           <>
             <h1 className="body-lg medium">{fb.name}</h1>
             {fb.description && (
@@ -110,7 +111,7 @@ const ThankYou = () => {
         )}
 
         <ThankYouStyled>
-          {(!fb.isPrivate || fb.plainPassword) && (
+          {(!fb.isPrivate || shouldPrivateDataShow) && (
             <div className="share body-md medium">
               <p>{t('share')}</p>
               <ul>
