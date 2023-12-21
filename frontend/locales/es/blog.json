@@ -99,6 +99,33 @@
                 "conclusion": "Conclusión: sumérgete en el Fishbowl",
                 "conclusionDescription": "Así que ahí lo tienes. Las reuniones Fishbowl de Stooa no son solo otra forma de dialogar en línea; son un enfoque revolucionario para hacer que <span>cada voz sea escuchada</span> y cada reunión sea importante. ¿Listo para saltar al Fishbowl y ver la diferencia por ti mismo?"
             }
+        },
+        "conduct-large-group-online-meetings": {
+            "title": "¿Como hacer un debate online con más de 20 personas?",
+            "subtitle": "Te cuento los secretos para guiar conversaciones en grupos grandes gracias a Stooa y la metodología Fishbowl",
+            "description": "Descubre cómo Stooa puede ayudarte a transformar tus reuniones con grupos grandes. Te explico todo sobre la metodología Fishbowl y te doy consejos para debates online efectivos.",
+            "author": "Carme de Stooa",
+            "date-and-duration": "6 min lectura - 21 diciembre 2023",
+            "content": {
+                "introBlock": "Desde hace unos meses, estoy compaginando mi vida de Product Designer con las funciones de Scrum master del equipo de Producto Digital Stooa. La suma de estos dos roles y mi frustración con las reuniones poco eficientes, me ha llevado a investigar cómo puedo mejorar mis skills de moderación para que las reuniones que organizo sean un éxito.",
+                "introBlock2": "<span>¿Te ha pasado que organizar una reunión con un montón de gente parece misión imposible?</span> Hay personas que no participan, otros que monopolizan la conversación y otros que se van de tema todo el rato… Entre las cosas que he aprendido hasta el momento, hoy quiero hablarte de una herramienta que me ha ayudado mucho, en reuniones incluso de más de 20 personas!",
+               "aboutStooa": "Vamos a hablar de <span>Stooa</span>.",
+               "largeWithStooa": "Stooa nos permite hacer debates con grupos grandes (aunque yo lo uso con grupos de +8 personas y también funciona perfectamente) y escuchar todas las voces, evitando tener que “levantar la mano” o tener un moderador que tenga que ir dando la palabra a los diferentes asistentes. La última vez que lo use, <span>nos juntamos 23 personas y fue todo un éxito</span>. Te cuento cómo fue:",
+               "preparation": "1. Preparación previa",
+               "chooseItem": "<span>Elegir el tema:</span> Creo que un buen debate empieza con un tema que apasione. Yo siempre busco algo que despierte <span>curiosidad y ganas de participar</span>. En este caso hablamos de Planet Centric Design 🌱, con personas de mi equipo y con las que comparto rol.",
+               "dayItem": "<span>Día y hora:</span> cuando tengas el tema, busca un día y una hora para la sesión, y añade una breve descripción de los <span>objetivos de la sesión 🎯</span>. En mi caso, hable del tema que íbamos a debatir e invité a los asistentes a echar un ojo a la herramienta, para que se sintieran cómodos y no perder tiempo haciendo un onboarding a las personas que nunca la habían probado.",
+               "theDay": "2. El día de la verdad: ¡todos a debatir!",
+               "metodology": "<span>La metodología Fishbowl:</span> Stooa nos ayuda a tener conversaciones fluidas, y debates automoderados <span>basados en el método Fishbowl</span> 🐠.<br/> Y, ¿qué es un Fishbowl? Es una dinámica de grupo que facilita cualquier tipo de actividad en el que la participación es esencial.<br/> <span>¿Cómo funciona?</span> Pues es muy sencillo: tenemos 5 sillas y para participar en el diálogo tendrás que ocupar una de las sillas libres. Cualquier asistente puede ocupar una silla libre en cualquier momento para participar. Si todas las sillas están ocupadas alguien que ya haya participado deberá dejar su asiento libre.<br/> <a>Te animo a probarlo</a> para descubrir lo sencillo que es.",
+               "moderationitem": "<span>La importancia de la moderación:</span> Aquí entro yo, aunque la dinámica del Fishbowl permite tener conversaciones sin la figura de un moderador, en mi experiencia habitualmente nos vamos del tema cuando no hay un encargado de guiar el debate. Personalmente me preparo preguntas sobre el tema y las voy soltando cuando veo que estamos repitiendo las mismas ideas o nos estamos alejando demasiado. Para una buena moderación, es importante tener claro el objetivo de la sesión y dar voz a todos los asistentes.",
+               "makeThemParticipate": "3. Hacer que todos participen:",
+               "icebreakersItems": "Para mi, la mejor forma de activar la participación son los <span>icebreakers</span> ❄️, te dejo algunos consejos para mejorar la participación en mi <a>ultimo post</a>.",
+               "activeManagement": "4. Gestión efectiva de tiempos y feedback:",
+               "timeForEveryoneItem": "<span>Tiempo para todos:</span> es genial ver cómo las personas entran y salen, aportando diferentes puntos de vista. Aunque cuando veo que alguien esta acaparando la conversación, me gusta lanzar preguntas abiertas para fomentar que otros entren y nos cuenten sus ideas.",
+               "closingItem": "<span>Cierre:</span> cuando el debate es interesante el tiempo se pasa volando, pero es importante guardar unos minutos al final para hacer un buen cierre. Según los objetivos de la reunión igual tenéis que hablar de next steps, o dejar constancia de la decisión a la que habéis llegado en la sesión. Lo que nunca puede faltar es un recap de los highlights más importantes que han salido para que todos nos llevemos lo mejor del debate.",
+               "feedbackItem": "<span>Feedback:</span> También, antes de cerrar la reunión, pido a los asistentes que dejen feedback para poder mejorar sesión a sesión 💬. Stooa tiene una funcionalidad exclusiva para eso, y como organizadora de la sesión puedes ver un resumen de cómo ha ido y de todo el feedback que te han dejado. Para mi es una de las cosas que más me ha ayudado a mejorar las reuniones, sin duda.",
+               "inSummary": "En resumen",
+               "inSummaryText": "Organizar y moderar un debate online con una multitud puede sonar aterrador, pero te prometo que con Stooa y un poco de creatividad, ¡es una experiencia increíble! Y tú, ¿cómo llevas tus debates online? ¿Has probado alguna vez algo así? ¡Cuéntame! Me encantaría saber cómo lo haces. 🌟"
+            }
         }
     }
 

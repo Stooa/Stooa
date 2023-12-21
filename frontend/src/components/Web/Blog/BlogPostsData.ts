@@ -11,6 +11,7 @@ import { BlogMenuItemType } from './AnchorMenu';
 import { ImproveOnlineMeetings } from './posts/5tipsToImprove';
 import { InnovativeRetroDynamics } from './posts/3innovativeRetroDynamics';
 import { ComparingOnlineMeetings } from './posts/ComparingOnlineMeetings';
+import { ConductLargeGroupMeetings } from './posts/ConductLargeGroupMeetings';
 
 export type BlogPost = {
   slug: string;
@@ -27,6 +28,18 @@ export type BlogPost = {
 };
 
 export const BlogPosts: Record<string, BlogPost> = {
+  'conduct-large-group-online-meetings': {
+    slug: 'conduct-large-group-online-meetings',
+    title: 'posts.conduct-large-group-online-meetings.title',
+    image: '/img/web/blog/conduct/women-meeting.jpg',
+    description: 'posts.conduct-large-group-online-meetings.description',
+    subtitle: 'posts.conduct-large-group-online-meetings.subtitle',
+    content: ConductLargeGroupMeetings,
+    author: 'posts.conduct-large-group-online-meetings.author',
+    dateAndDuration: 'posts.conduct-large-group-online-meetings.date-and-duration',
+    datePublishedTimestamp: 1702893825,
+    dateModifiedTimestamp: 1702893825
+  },
   'comparing-online-meetings-stooa-fishbowl': {
     slug: 'comparing-online-meetings-stooa-fishbowl',
     title: 'posts.comparing-online-meetings-stooa-fishbowl.title',

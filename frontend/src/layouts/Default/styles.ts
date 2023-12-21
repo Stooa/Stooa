@@ -55,7 +55,7 @@ const Decoration = styled.div`
   }
 `;
 
-const Header = styled.header<{ blogLayout?: boolean }>`
+const Header = styled.header<{ blogLayout?: boolean; blogPost?: boolean }>`
   align-items: center;
   color: ${COLOR_NEUTRO_700};
   grid-area: Header;
@@ -76,9 +76,11 @@ const Header = styled.header<{ blogLayout?: boolean }>`
       top: 0;
       left: 0;
       z-index: 2;
-      color: ${COLOR_NEUTRO_100};
       padding-top: 1.25rem;
     `}
+
+    color: ${({ blogPost, blogLayout }) =>
+    blogPost && blogLayout ? COLOR_NEUTRO_700 : COLOR_NEUTRO_100};
 `;
 
 const Main = styled.main<{ center?: boolean; positionDefault?: boolean; blogLayout?: boolean }>`

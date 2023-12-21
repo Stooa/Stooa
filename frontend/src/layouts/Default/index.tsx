@@ -27,6 +27,7 @@ interface Props {
   children: React.ReactNode;
   positionDefault?: boolean;
   blogLayout?: boolean;
+  blogPost?: boolean;
 }
 
 const Page = ({
@@ -35,11 +36,12 @@ const Page = ({
   decorated = false,
   navigation = true,
   positionDefault,
-  blogLayout
+  blogLayout,
+  blogPost
 }: Props) => (
   <>
     <Container blogLayout={blogLayout} className={decorated ? 'decorated' : ''}>
-      <HeaderStyled blogLayout={blogLayout}>
+      <HeaderStyled blogPost={blogPost} blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
       <Main positionDefault={positionDefault} center={center} blogLayout={blogLayout}>
