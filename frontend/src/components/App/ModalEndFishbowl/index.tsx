@@ -41,8 +41,10 @@ const EndFishbowl: React.FC<Props> = ({
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t(title)}</h2>
-        <p className="description">{t(description)}</p>
+        <div className="modal--body">
+          <h2 className="title-sm">{t(title)}</h2>
+          <p className="description">{t(description)}</p>
+        </div>
         <div className="modal-footer">
           {isRecording ? (
             <Button onClick={stopRecording} disabled={disabled}>

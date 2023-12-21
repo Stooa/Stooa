@@ -30,14 +30,16 @@ const ModalKickUser: React.FC<Props> = ({ closeModal, onSubmit, participant }) =
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">
-          {t('kick.modal.title', {
-            userName: participant.getDisplayName()
-          })}
-        </h2>
-        <p className="body-sm subtitle">
-          <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
-        </p>
+        <div className="modal--body">
+          <h2 className="title-sm">
+            {t('kick.modal.title', {
+              userName: participant.getDisplayName()
+            })}
+          </h2>
+          <p className="body-sm subtitle">
+            <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
+          </p>
+        </div>
         <KickReasonForm participant={participant} onCompletedSubmit={onSubmit} />
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>

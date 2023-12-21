@@ -63,6 +63,8 @@ const GET_SELF_USER = gql`
       linkedinProfile
       twitterProfile
       slackWebHook
+      hasHubspotRefreshToken
+      lastSyncDate
     }
   }
 `;
