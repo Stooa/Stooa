@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { StyledPrefishbowlParticipant } from '@/components/App/PreFishbowl/styles';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 
 const ParticipantPlaceholder = props => {

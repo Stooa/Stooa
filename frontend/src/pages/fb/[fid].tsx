@@ -9,7 +9,6 @@
 
 import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
-// import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -18,28 +17,28 @@ import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
-// import Error from '@/components/Common/Error';
 
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { createApolloClient } from '@/lib/apollo-client';
-import { Fishbowl } from '@/types/api-platform';
+import { Fishbowl as FishbowlType } from '@/types/api-platform';
 
-const Layout = dynamic(import('@/layouts/App'), { loading: () => <div /> });
+import Fishbowl from '@/components/App/Fishbowl';
+import Layout from '@/layouts/App';
+
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
-const Fishbowl = dynamic(import('@/components/App/Fishbowl'), { loading: () => <div /> });
 const FishbowlInvitationLanding = dynamic(import('@/components/Web/FishbowlInvitationLanding'), {
   loading: () => <div />
 });
-
 const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
   loading: () => <div />
 });
 
-const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
+const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
   const router = useRouter();
   const { lang } = useTranslation();
+
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
 
@@ -76,7 +75,7 @@ const Page = ({ fishbowl }: { fishbowl: Fishbowl }) => {
   return shouldPrintPreJoinPage || shouldPrintFishbowlPage ? (
     <Layout
       className={conferenceStatus === IConferenceStatus.NOT_STARTED ? 'prefishbowl' : ''}
-      data={fishbowl}
+      fishbowl={fishbowl}
       prejoin={shouldPrintPreJoinPage}
     >
       {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
@@ -108,7 +107,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
 
-  const { bySlugQueryFishbowl: fishbowl }: { bySlugQueryFishbowl: Fishbowl } = data;
+  const { bySlugQueryFishbowl: fishbowl }: { bySlugQueryFishbowl: FishbowlType } = data;
 
   const getSeoDescription = () => {
     if (fishbowl.invitationSubtitle) {

@@ -79,7 +79,11 @@ const MyApp = ({ Component, pageProps }) => {
     <DataProvider>
       <GlobalStyles />
       <FavIconsHead />
-      <OpenGraphDefault seoTitle={pageProps.seoTitle} seoDescription={pageProps.seoDescription} />
+      <OpenGraphDefault
+        ogImage={pageProps.ogImage}
+        seoTitle={pageProps.seoTitle}
+        seoDescription={pageProps.seoDescription}
+      />
       <StateProvider>
         <AuthProvider>
           <ProtectRoute>
