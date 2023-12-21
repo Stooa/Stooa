@@ -480,6 +480,8 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     public function setSlackWebHook(?string $slackWebHook): self
     {
         $this->slackWebHook = $slackWebHook;
+    }
+
     public function getHubspotRefreshToken(): ?string
     {
         return $this->hubspotRefreshToken;
