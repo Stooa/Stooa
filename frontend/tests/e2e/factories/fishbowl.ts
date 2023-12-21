@@ -22,7 +22,12 @@ export const makeGQLTomorrowFishbowl = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     isFishbowlNow: false,
     hasIntroduction: false,
@@ -43,7 +48,12 @@ export const makeGQLCurrentFishbowlWithIntroduction = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     isFishbowlNow: false,
     hasIntroduction: true,
@@ -64,7 +74,12 @@ export const makeGQLCurrentFishbowl = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     isFishbowlNow: false,
     hasIntroduction: false,
@@ -85,7 +100,12 @@ export const makeGQLCurrentPrivateFishbowl = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     isFishbowlNow: false,
     hasIntroduction: false,
@@ -106,7 +126,12 @@ export const makeGQLCurrentNotOwnedFishbowl = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf7-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     isFishbowlNow: false,
     hasIntroduction: false,

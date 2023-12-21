@@ -21,6 +21,10 @@ export interface Fishbowl {
   'duration': Date;
   'isFishbowlNow'?: boolean;
   'hasIntroduction'?: boolean;
+  'hasInvitationInfo'?: boolean;
+  'invitationTitle'?: string;
+  'invitationSubtitle'?: string;
+  'invitationText'?: string;
   'isPrivate'?: boolean;
   'plainPassword'?: string;
   readonly 'slug': string;

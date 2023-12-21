@@ -98,7 +98,6 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
-    scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
   }
 

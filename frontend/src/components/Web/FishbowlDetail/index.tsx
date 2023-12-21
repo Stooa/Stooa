@@ -31,7 +31,7 @@ interface Props {
   data: Fishbowl;
 }
 
-const FishbowlDetail: React.FC<Props> = ({ data }) => {
+const FishbowlDetail = ({ data }: Props) => {
   const { t } = useTranslation('form');
   const shareTitle = `${data.name}.`;
 
@@ -131,7 +131,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
           </ul>
         </div>
         <div className="right-column">
-          <FishbowlDataCard data={data} />
+          <FishbowlDataCard isModerator data={data} />
           <p className="body-xs">
             <Trans i18nKey="fishbowl:detail.mailInfo" components={{ i: <i /> }} />
           </p>

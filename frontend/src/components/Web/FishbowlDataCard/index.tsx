@@ -21,15 +21,19 @@ import { StyledFishbowlDataCard } from './styles';
 
 interface Props {
   data: Fishbowl;
+  fromLanding?: boolean;
+  isModerator?: boolean;
 }
 
-const FishbowlDataCard = ({ data }: Props) => {
+const FishbowlDataCard = ({ data, fromLanding, isModerator }: Props) => {
   const { time: startTime } = formatDateTime(data.startDateTimeTz);
   const { day, year, time: endTime } = formatDateTime(data.endDateTimeTz);
   const { locale } = useRouter();
   const { t } = useTranslation('form');
 
   const monthName = getMonthsForLocale(locale)[new Date(data.startDateTimeTz).getMonth()];
+
+  const isLessThan30Minutes = isTimeLessThanNMinutes(data.startDateTimeTz, 30);
 
   return (
     <StyledFishbowlDataCard>
@@ -50,13 +54,15 @@ const FishbowlDataCard = ({ data }: Props) => {
         <p className="body-sm">{`${startTime} - ${endTime}`}</p>
       </div>
 
-      {isTimeLessThanNMinutes(data.startDateTimeTz, 30) ? (
+      {!fromLanding && isTimeLessThanNMinutes(data.startDateTimeTz, 30) && (
         <RedirectLink href={`${ROUTE_FISHBOWL}/${data.slug}`} locale={data.locale} passHref>
           <Button size="large" as="a" data-testid="enter-fishbowl">
             <span>{t('button.enterFishbowl')}</span>
           </Button>
         </RedirectLink>
-      ) : (
+      )}
+
+      {isModerator && !isLessThan30Minutes && (
         <Link
           href={`${ROUTE_FISHBOWL_SCHEDULED}?selected=${data.slug}`}
           className="decorated colored"

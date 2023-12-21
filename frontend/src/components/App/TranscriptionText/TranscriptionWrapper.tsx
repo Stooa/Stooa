@@ -8,7 +8,7 @@
  */
 
 import { useStooa } from '@/contexts/StooaManager';
-import useDebounce from '@/hooks/useDebouce';
+import useDebounce from '@/hooks/useDebounce';
 import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { useEffect, useState } from 'react';
