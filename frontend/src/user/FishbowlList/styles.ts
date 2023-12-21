@@ -196,7 +196,6 @@ const CardTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-  text-align: left;
   color: ${COLOR_NEUTRO_800};
   overflow: ellipsis;
   display: flex;
@@ -227,9 +226,7 @@ const CardStyled = styled.div`
   transition: all 0.2s ease-in-out;
   overflow: hidden;
 
-  & .card__info {
-    text-align: left;
-  }
+  text-align: left;
 
   &.finished {
     grid-template-columns: 6fr 1fr;
@@ -359,9 +356,8 @@ const EditFormWrapper = styled.div`
   border-radius: ${rems(4)};
 
   overflow-y: scroll;
-  ${media.min('desktop')`
-    overflow-y: hidden;
-  `}
+
+  ${scrolllbarStyle};
 
   .form-header {
     position: relative;
@@ -382,17 +378,18 @@ const EditFormWrapper = styled.div`
 
   ${media.max('desktop')`
     background-color: rgba(0, 0, 0, 0.5);
-  `}
-
-  ${media.min('desktop')`
-    height: 100%;
-    position: relative;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
 
     &::-webkit-scrollbar {
         display: none; /* for Chrome, Safari, and Opera */
     }
+  `}
+
+  ${media.min('desktop')`
+    height: 100%;
+    position: relative;
+
   `}
 `;
 

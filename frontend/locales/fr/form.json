@@ -22,7 +22,12 @@
         "isPrivate": "Je veux que cet événement soit privé",
         "passwordTooltip": "Pour accéder à l'événement, il sera nécessaire d'entrer le mot de passe",
         "passwordPlaceholder": "Insérez votre mot de passe",
-        "passwordInputLabel": "Mot de passe"
+        "passwordInputLabel": "Mot de passe",
+        "invitationTitle": "Invitation",
+        "invitationToggleLabel": "Je veux personnaliser l'invitation à mon événement",
+"invitationTooltip": "À partir de cette invitation, les participants peuvent s'inscrire à l'événement, et vous pouvez ainsi savoir combien de personnes viendront. Vérifiez les participants depuis la page des Fishbowls programmés.",        "invitationTitleLabel": "Titre",
+        "invitationSubtitleLabel": "Sous-titre (facultatif)",
+        "invitationDescriptionLabel": "Description (facultatif)"
     },
     "button": {
         "createAccount": "Créez-en un !",

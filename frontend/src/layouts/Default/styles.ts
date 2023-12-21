@@ -55,6 +55,24 @@ const Decoration = styled.div`
   }
 `;
 
+const TopDecoration = styled.div`
+  &,
+  svg {
+    width: 90%;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+
+    ${media.min('tablet')`
+      top: 0;
+      width: 75%;
+    `}
+  }
+`;
+
 const Header = styled.header<{ blogLayout?: boolean }>`
   align-items: center;
   color: ${COLOR_NEUTRO_700};
@@ -93,4 +111,4 @@ const Main = styled.main<{ center?: boolean; positionDefault?: boolean; blogLayo
   ${props => (props.center ? flexCenter : '')}
 `;
 
-export { Container, Decoration, Header, Main };
+export { Container, Decoration, Header, Main, TopDecoration };

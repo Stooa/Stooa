@@ -24,11 +24,10 @@ import { createApolloClient } from '@/lib/apollo-client';
 import { Fishbowl as FishbowlType } from '@/types/api-platform';
 
 import Fishbowl from '@/components/App/Fishbowl';
-import JoinFishbowl from '@/components/Web/JoinFishbowl';
 import Layout from '@/layouts/App';
 
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
-const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
+const FishbowlInvitationLanding = dynamic(import('@/components/Web/FishbowlInvitationLanding'), {
   loading: () => <div />
 });
 const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
@@ -83,8 +82,7 @@ const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
     </Layout>
   ) : (
     <LayoutWeb>
-      <FishbowlLanding data={fishbowl} />
-      <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
+      <FishbowlInvitationLanding handleJoinAsGuest={handleJoinAsGuest} fishbowl={fishbowl} />
     </LayoutWeb>
   );
 };
@@ -109,14 +107,26 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
 
-  const { bySlugQueryFishbowl: fishbowl } = data;
-  const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
-  const seoTitle = fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+  const { bySlugQueryFishbowl: fishbowl }: { bySlugQueryFishbowl: FishbowlType } = data;
+
+  const getSeoDescription = () => {
+    if (fishbowl.invitationSubtitle) {
+      return fishbowl.invitationSubtitle;
+    }
+    return fishbowl.description !== '' ? fishbowl.description : null;
+  };
+
+  const getSeoTitle = () => {
+    if (fishbowl.hasInvitationInfo) {
+      return fishbowl.isPrivate ? `🔒 ${fishbowl.invitationTitle}` : fishbowl.invitationTitle;
+    }
+    return fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+  };
 
   return {
     props: {
-      seoTitle,
-      seoDescription: SEODescription,
+      seoTitle: getSeoTitle(),
+      seoDescription: getSeoDescription(),
       fishbowl
     }
   };
