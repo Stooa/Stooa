@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Whatsapp from '@/ui/svg/RRSS-whatsapp.svg';
 import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
-import Twitter from '@/ui/svg/RRSS-twitter.svg';
+import Twitter from '@/ui/svg/RRSS-x.svg';
 import Mail from '@/ui/svg/RRSS-mail.svg';
 import Image from 'next/image';
 import Cross from '@/ui/svg/cross.svg';
