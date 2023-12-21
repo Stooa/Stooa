@@ -1,0 +1,19 @@
+{
+    "title": "Integraciones",
+    "subtitle": "Puedes vincular tu cuenta de Stooa con otras aplicaciones y servicios para iniciar sesión más rápido, para ver mejor los enlaces y mucho más.",
+    "integrationItems": {
+        "hubspot": {
+            "title": "Hubspot",
+            "sync": "Vincular",
+            "unsync": "Desvincular",
+            "syncAction": "Sincronizar contactos",
+            "syncActionModalTitle": "¿Estas seguro de que quieres sincronizar todos los contactos?",
+            "syncActionModalBody": "Se sincronizaran todos los participantes registrados que hayan asistido a un Fishbowl organizado por ti.",
+            "unsyncActionModalTitle": "¿Estas seguro de que quieres desvincular tu cuenta de Hubspot?",
+            "unsyncActionModalBody": "Podrás seguir viendo los contactos cargados en Hubspot, pero no se actualizaran.",
+            "lastSync": "Última sincronización: ",
+            "linkedSuccessfully": "Hubspot vinculado con éxito",
+            "contactsSyncedSuccessfully": "La sincronización de contactos ha comenzado con éxito"
+        }
+    }
+}

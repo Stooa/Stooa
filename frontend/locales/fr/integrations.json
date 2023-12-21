@@ -1,0 +1,19 @@
+{
+    "title": "Intégrations",
+    "subtitle": "Vous pouvez lier votre compte Stooa à d'autres applications et services pour vous connecter plus rapidement, accéder plus facilement aux liens et profiter de nombreux autres avantages.",
+    "integrationItems": {
+        "hubspot": {
+            "title": "Hubspot",
+            "sync": "Lier",
+            "unsync": "Délier",
+            "syncAction": "Synchroniser les contacts",
+            "syncActionModalTitle": "Êtes-vous sûr de vouloir synchroniser tous les contacts ?",
+            "syncActionModalBody": "Tous les contacts des participants ayant assisté à une Fishbowl organisée par vous seront synchronisés.",
+            "unsyncActionModalTitle": "Êtes-vous sûr de vouloir délier votre compte Hubspot ?",
+            "unsyncActionModalBody": "Vous pourrez toujours consulter les contacts chargés dans Hubspot, mais ils ne seront pas mis à jour.",
+            "lastSync": "Dernière synchronisation : ",
+            "linkedSuccessfully": "Hubspot lié avec succès",
+            "contactsSyncedSuccessfully": "La synchronisation des contacts a commencé avec succès"
+        }
+    }
+}

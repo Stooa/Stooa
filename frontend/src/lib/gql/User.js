@@ -61,6 +61,8 @@ const GET_SELF_USER = gql`
       allowShareData
       linkedinProfile
       twitterProfile
+      hasHubspotRefreshToken
+      lastSyncDate
     }
   }
 `;

@@ -15,20 +15,22 @@ import {
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD,
   ROUTE_FISHBOWL_SCHEDULED,
-  ROUTE_FISHBOWL_FINISHED
+  ROUTE_FISHBOWL_FINISHED,
+  ROUTE_INTEGRATIONS
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import AvatarIcon from '@/ui/svg/avatar.svg';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Logout from '@/ui/svg/logout.svg';
 import Lock from '@/ui/svg/lock.svg';
+import Url from '@/ui/svg/url.svg';
 import Pencil from '@/ui/svg/pencil.svg';
 import List from '@/ui/svg/list.svg';
 import CheckList from '@/ui/svg/check-list.svg';
 import { Avatar as AvatarStyled, Dropdown } from '@/components/Web/Avatar/styles';
 import Trans from 'next-translate/Trans';
 
-const Avatar: React.FC = () => {
+const Avatar = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const { user, logout } = useAuth();
@@ -79,6 +81,10 @@ const Avatar: React.FC = () => {
           <Link href={ROUTE_EDIT_PROFILE} className="item">
             <Pencil />
             <span>{t('editProfile')}</span>
+          </Link>
+          <Link href={ROUTE_INTEGRATIONS} className="item">
+            <Url />
+            <span>{t('integrations')}</span>
           </Link>
           <Link href={ROUTE_CHANGE_PASSWORD} className="item">
             <Lock />

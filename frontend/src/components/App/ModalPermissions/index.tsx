@@ -22,7 +22,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
+const ModalPermissions = ({ closeModal }: Props) => {
   const { t } = useTranslation('fishbowl');
   const { createLocalTracks } = useLocalTracks();
 
@@ -73,12 +73,14 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
           quality={100}
         />
 
-        <h2 className="title-sm">
-          <Trans i18nKey="fishbowl:permissionsModalTitle" />
-        </h2>
-        <p className="description">
-          <Trans i18nKey="fishbowl:permissionsModalDescription" components={{ i: <i /> }} />
-        </p>
+        <div className="modal--body">
+          <h2 className="title-sm">
+            <Trans i18nKey="fishbowl:permissionsModalTitle" />
+          </h2>
+          <p className="description">
+            <Trans i18nKey="fishbowl:permissionsModalDescription" components={{ i: <i /> }} />
+          </p>
+        </div>
         <div className="modal-footer">
           <Button size="large" onClick={handleRequestPermissions}>
             <Trans

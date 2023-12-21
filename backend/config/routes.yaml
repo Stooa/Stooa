@@ -10,3 +10,6 @@ fishbowl:
     prefix: /{_locale}
     requirements:
         _locale: en|es|ca|fr|id
+
+core:
+    resource: '@CoreBundle/config/routes.yaml'
