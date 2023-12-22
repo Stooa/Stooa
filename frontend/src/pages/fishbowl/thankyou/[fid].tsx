@@ -77,6 +77,7 @@ const ThankYou = () => {
   const endDate = formatDateTime(fb.endDateTimeTz);
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
   const showFeedbackForm = userHasParticipated && !thankYouFeedbackGiven && !isModerator;
+  const shouldPrivateDataShow = userHasParticipated || isModerator;
 
   dataLayerPush({
     event: 'GAPageView',
@@ -104,13 +105,13 @@ const ThankYou = () => {
           </div>
         </Time>
 
-        {(!fb.isPrivate || isModerator || userHasParticipated) && (
-          <div>
+        {(!fb.isPrivate || shouldPrivateDataShow) && (
+          <>
             <h1 className="body-lg medium">{fb.name}</h1>
             {fb.description && (
               <Description className="description body-sm">{fb.description}</Description>
             )}
-          </div>
+          </>
         )}
 
         {showFeedbackForm && (
@@ -148,7 +149,7 @@ const ThankYou = () => {
         )}
 
         <ThankYouStyled>
-          {(!fb.isPrivate || isModerator || userHasParticipated) && (
+          {(!fb.isPrivate || shouldPrivateDataShow) && (
             <div className="share body-md medium">
               <p>{t('share')}</p>
               <ul>
