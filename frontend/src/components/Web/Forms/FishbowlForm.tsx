@@ -176,7 +176,6 @@ const FishbowlForm = ({
   const methods = useForm<FormValues>({
     mode: 'onChange',
     resolver: yupResolver(schema),
-    mode: 'onChange',
     defaultValues: { ...initialValues, language: lang, plainPassword: getRandomPassword() }
   });
 
