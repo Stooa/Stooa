@@ -759,6 +759,10 @@ class Fishbowl implements \Stringable
     public function setIsHubspotSync(bool $isHubspotSync): self
     {
         $this->isHubspotSync = $isHubspotSync;
+
+        return $this;
+    }
+
     public function isHasSummary(): bool
     {
         return $this->hasSummary;
