@@ -83,7 +83,12 @@ const Header = styled.header<{ blogLayout?: boolean; blogPost?: boolean }>`
     blogPost && blogLayout ? COLOR_NEUTRO_700 : COLOR_NEUTRO_100};
 `;
 
-const Main = styled.main<{ center?: boolean; positionDefault?: boolean; blogLayout?: boolean }>`
+const Main = styled.main<{
+  center?: boolean;
+  positionDefault?: boolean;
+  blogLayout?: boolean;
+  blogPost?: boolean;
+}>`
   color: ${COLOR_NEUTRO_700};
   grid-area: Main;
   position: ${props => (props.positionDefault ? 'static' : 'relative')};
@@ -91,6 +96,7 @@ const Main = styled.main<{ center?: boolean; positionDefault?: boolean; blogLayo
   z-index: 1;
 
   padding-bottom: ${({ blogLayout }) => (blogLayout ? '0' : space(12))};
+  padding-top: ${({ blogPost }) => (blogPost ? space(12) : '0')};
 
   ${props => (props.center ? flexCenter : '')}
 `;

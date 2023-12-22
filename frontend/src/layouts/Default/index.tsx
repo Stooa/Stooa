@@ -44,7 +44,12 @@ const Page = ({
       <HeaderStyled blogPost={blogPost} blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
-      <Main positionDefault={positionDefault} center={center} blogLayout={blogLayout}>
+      <Main
+        positionDefault={positionDefault}
+        blogPost={blogPost}
+        center={center}
+        blogLayout={blogLayout}
+      >
         {children}
       </Main>
       {decorated && (
