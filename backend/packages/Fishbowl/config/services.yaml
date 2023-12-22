@@ -36,6 +36,19 @@ services:
             $from: '%env(MAILER_FROM)%'
             $appUrl: '%env(APP_URL)%'
 
+    App\Fishbowl\Service\OpenAI\AskSummaryService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+            $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
+
+    App\Fishbowl\Service\OpenAI\UploadFileService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
+    App\Fishbowl\Service\OpenAI\GetSummaryService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:

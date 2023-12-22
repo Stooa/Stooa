@@ -35,7 +35,12 @@
         "invitationTooltip": "Desde esta invitación, los participantes pueden registrarse para el evento, y de esta manera puedes saber cuántas personas vendrán. Comprueba los participantes desde la página de Fishbowls programados.",
         "invitationTitleLabel": "Título",
         "invitationSubtitleLabel": "Subtítulo (opcional)",
-        "invitationDescriptionLabel": "Descripción (opcional)"
+        "invitationDescriptionLabel": "Descripción (opcional)",
+        "AITitle": "Inteligència Artificial",
+        "hasSummaryLabel": "Quiero que se genere un resumen con inteligencia artificial.",
+        "hasSummaryTooltip": "Guardaremos la transcripción de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
+        "AIDataPrivacyTitle": "Privacidad de datos",
+        "AIDataPrivacyDescription": "Al activar el resumen con IA, estás aceptando que Stooa guarde la transcripción de la conversación para poder realiar un resumen con OpenAI GPT"
     },
     "button": {
         "login": "Entra",

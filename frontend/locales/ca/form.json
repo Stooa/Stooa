@@ -34,7 +34,12 @@
         "invitationToggleLabel": "Vull personalitzar la invitació al meu esdeveniment",
         "invitationTooltip": "Des d'aquesta invitació, els participants poden inscriure's a l'esdeveniment, i d'aquesta manera pots saber quantes persones vindran. Comproveu els participants des de la pàgina de Fishbowls programats.",        "invitationTitleLabel": "Títol",
         "invitationSubtitleLabel": "Subtítol (opcional)",
-        "invitationDescriptionLabel": "Descripció (opcional)"
+        "invitationDescriptionLabel": "Descripció (opcional)",
+        "AITitle": "Inteligència Artificial",
+        "hasSummaryLabel": "Vull que la Intel·ligència Artificial generi un resum de la conversa",
+        "hasSummaryTooltip": "Guardaremos las transcripciones de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
+        "AIDataPrivacyTitle": "Privacitat de les dades",
+        "AIDataPrivacyDescription": "Al activar el resum amb la IA, estas acceptant que Stooa guarde la teva conversa per a poder crear un resum."
     },
     "button": {
         "login": "Entra",

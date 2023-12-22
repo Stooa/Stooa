@@ -103,6 +103,9 @@ class FishbowlAdmin extends AbstractAdmin
             ])
             ->add('isFishbowlNow')
             ->add('hasIntroduction')
+            ->add('hasSummary')
+            ->add('summary')
+            ->add('summaryUpdatedAt')
             ->add('isPrivate')
             ->add('hasInvitationInfo')
             ->add('startDateTimeTz', FieldDescriptionInterface::TYPE_DATETIME)
@@ -148,6 +151,8 @@ class FishbowlAdmin extends AbstractAdmin
                     'transform' => true,
                 ])
                 ->add('topics')
+                ->add('hasSummary')
+                ->add('summary')
             ->end()
             ->with('Landing')
                 ->add('hasInvitationInfo', BooleanType::class, [

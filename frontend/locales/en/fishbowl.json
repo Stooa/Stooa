@@ -204,7 +204,9 @@
             "after": "After",
             "afterTooltip": "Feedback received after the fishbowl",
             "during": "During",
-            "duringTooltip": "Feedback received during the fishbowl"
+            "duringTooltip": "Feedback received during the fishbowl",
+            "summaryInProgress": "Generating AI Summary",
+            "summary": "AI summary"
         }
     },
     "transcription" : {

@@ -52,6 +52,7 @@ import EmptyFishbowlList from './EmptyFishbowlList';
 import Link from 'next/link';
 import { FishbowlDashboardData } from './FishbowlDashboardData';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
+import ModalAISummary from '@/components/App/ModalAISummary';
 
 interface Props {
   selectedFishbowlParam?: string;
@@ -68,6 +69,7 @@ const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
   const { deviceType } = useNavigatorType();
   const { t, lang } = useTranslation('fishbowl-list');
   const router = useRouter();
+  const [showAISummaryModal, setShowAISummaryModal] = useState(false);
 
   const handleClick = (fishbowl: Fishbowl) => {
     setSelectedFishbowl(fishbowl);
@@ -137,6 +139,10 @@ const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
     });
   }, [lang, router]);
 
+  const handleShowAISummaryModal = () => {
+    setShowAISummaryModal(true);
+  };
+
   const handleUpdateFishbowl = updatedFishbowl => {
     setSelectedFishbowl(updatedFishbowl);
     setFishbowls(currentFishbowls => {
@@ -193,6 +199,15 @@ const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
   } else {
     return (
       <FishbowlListWrapper>
+        {/* FISHBOWL AI SUMMARY */}
+        {showAISummaryModal && (
+          <ModalAISummary
+            title={selectedFishbowl?.name ?? ''}
+            summary={selectedFishbowl?.summary ?? ''}
+            closeModal={() => setShowAISummaryModal(false)}
+          />
+        )}
+
         <StyledListHeader>
           <div className="header__wrapper">
             <div className="fishbowl-list__header">
@@ -373,6 +388,8 @@ const FishbowlList = ({ selectedFishbowlParam, isPastList }: Props) => {
                       variants={deviceType === 'Mobile' ? bottomMobileReveal : undefined}
                       onClickBack={() => setSelectedFishbowl(undefined)}
                       fishbowl={selectedFishbowl}
+                      hasSummary={selectedFishbowl.hasSummary}
+                      handleShowAISummaryModal={handleShowAISummaryModal}
                     />
                   </EditFormWrapper>
                 )}

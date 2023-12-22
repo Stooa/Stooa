@@ -56,7 +56,8 @@ const HostNow = props => {
           isFishbowlNow: true,
           hasIntroduction: false,
           isPrivate: false,
-          hasInvitationInfo: false
+          hasInvitationInfo: false,
+          hasSummary: false
         }
       }
     })

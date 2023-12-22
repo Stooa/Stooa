@@ -10,6 +10,7 @@ fishbowl:
     prefix: /{_locale}
     requirements:
         _locale: en|es|ca|fr|id
-
 core:
     resource: '@CoreBundle/config/routes.yaml'
+fishbowl_controller:
+    resource: '@FishbowlBundle/config/webhook.yaml'

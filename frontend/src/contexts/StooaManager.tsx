@@ -77,7 +77,8 @@ const StooaProvider = ({
     stopRecordingEvent,
     lockConference,
     joinPrivateConference,
-    joinConference
+    joinConference,
+    startTranscriptionEvent
   } = useConference();
   const { fid } = router.query;
   const { t, lang } = useTranslation('app');
@@ -362,6 +363,13 @@ const StooaProvider = ({
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
 
+  const enableTranscriptions = () => {
+    if (!isModerator && !fishbowl.hasSummary) {
+      return;
+    }
+    startTranscriptionEvent();
+  };
+
   useEffect(() => {
     if (fishbowlQuery) {
       const { bySlugQueryFishbowl: fishbowlData } = fishbowlQuery;
@@ -395,6 +403,10 @@ const StooaProvider = ({
       window.addEventListener('keydown', initialInteraction);
 
       setInitConnection(true);
+    }
+
+    if (fishbowlStarted && conferenceReady) {
+      enableTranscriptions();
     }
 
     return () => {

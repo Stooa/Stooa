@@ -46,6 +46,7 @@ interface Props {
   isFull?: boolean;
   isEditForm?: boolean;
   onSaveCallback?: (data: Fishbowl) => void;
+  setShowPrivacyModal?: (value: boolean) => void;
 }
 
 interface FormValues {
@@ -64,6 +65,7 @@ interface FormValues {
   invitationTitle?: string;
   invitationSubtitle?: string;
   invitationText?: string;
+  hasSummary: boolean;
 }
 
 const initialValues = {
@@ -77,7 +79,8 @@ const initialValues = {
   hasIntroduction: false,
   isPrivate: false,
   plainPassword: undefined,
-  hasInvitationInfo: false
+  hasInvitationInfo: false,
+  hasSummary: false
 };
 
 const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
@@ -108,7 +111,8 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : '',
     hasInvitationInfo: fishbowl.hasInvitationInfo || false,
     invitationTitle: fishbowl.invitationTitle || '',
-    invitationSubtitle: fishbowl.invitationSubtitle || ''
+    invitationSubtitle: fishbowl.invitationSubtitle || '',
+    hasSummary: fishbowl.hasSummary ?? false
   };
 };
 
@@ -116,7 +120,8 @@ const FishbowlForm = ({
   selectedFishbowl,
   isFull = false,
   isEditForm = false,
-  onSaveCallback
+  onSaveCallback,
+  setShowPrivacyModal
 }: Props) => {
   const { t, lang } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
@@ -141,7 +146,6 @@ const FishbowlForm = ({
 
   const requiredError = t('validation.required');
   const minimumLength = t('validation.fishbowlPasswordLength');
-  // const dateError = t('validation.date');
 
   const schema = Yup.object({
     title: Yup.string().matches(/[^-\s]/, {
@@ -172,6 +176,7 @@ const FishbowlForm = ({
   const methods = useForm<FormValues>({
     mode: 'onChange',
     resolver: yupResolver(schema),
+    mode: 'onChange',
     defaultValues: { ...initialValues, language: lang, plainPassword: getRandomPassword() }
   });
 
@@ -203,6 +208,12 @@ const FishbowlForm = ({
   const watchTitle = watch('title');
 
   const debouncedTitle = useDebounce<string | undefined>(watchTitle, 500);
+
+  const handleSummaryOnClick = () => {
+    if (getValues('hasSummary') === false && setShowPrivacyModal) {
+      setShowPrivacyModal(true);
+    }
+  };
 
   const onCompletedSubmit = res => {
     if (res.type === 'Error') {
@@ -281,7 +292,8 @@ const FishbowlForm = ({
             hasInvitationInfo: values.hasInvitationInfo,
             invitationTitle: values.invitationTitle,
             invitationSubtitle: values.invitationSubtitle,
-            invitationText: html
+            invitationText: html,
+            hasSummary: values.hasSummary
           }
         }
       })
@@ -313,7 +325,8 @@ const FishbowlForm = ({
             invitationTitle:
               values.invitationTitle !== '' ? values.invitationTitle : defaultInvitationTitle,
             invitationSubtitle: values.invitationSubtitle,
-            invitationText: html
+            invitationText: html,
+            hasSummary: values.hasSummary
           }
         }
       })
@@ -563,6 +576,25 @@ const FishbowlForm = ({
           )}
         </fieldset>
 
+        <fieldset>
+          <TextDivider>
+            <p>{t('fishbowl.AITitle')}</p>
+            <span></span>
+          </TextDivider>
+          <Switch
+            onClick={handleSummaryOnClick}
+            id="hasSummary"
+            full
+            tooltipText={
+              <Trans
+                i18nKey="form:fishbowl.hasSummaryTooltip"
+                components={{ span: <span className="medium" /> }}
+              />
+            }
+            label={t('fishbowl.hasSummaryLabel')}
+            {...register('hasSummary')}
+          />
+        </fieldset>
         <fieldset>
           <SubmitBtn
             data-testid="fishbowl-submit"

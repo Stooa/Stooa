@@ -5,6 +5,7 @@
     "signout": "Salir",
     "register": "Registro gratuito",
     "cancel": "Cancelar",
+    "modalAccept": "Aceptar",
     "cta": "Crear un debate",
     "scheduleFishbowl": "Agendar un fishbowl",
     "hostFishbowlNow": "Empezar un fishbowl ahora",
@@ -32,7 +33,7 @@
     "copyInvitation": "Copiar invitación",
     "successCopiedInvitation": "Invitación copiada",
     "goToFinishedFishbowlsTitle": "Accede a la sección de <i>fishbowls</i> finalizados para ver los detalles y el feedback de los asistentes.",
-    "goToFinishedFishbowls": "Ves a tus fishbowls finalizados",
+    "goToFinishedFishbowls": "Ir a tus fishbowls finalizados",
     "integrations": "Integraciones",
     "blog": "Blog"
 }

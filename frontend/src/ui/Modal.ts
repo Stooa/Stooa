@@ -18,6 +18,7 @@ import {
   COLOR_NEUTRO_900
 } from '@/ui/settings';
 import { TYPOGRAPHY_SIZES } from './Texts';
+import { scrolllbarStyle } from './Scrollbar';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
 
@@ -138,5 +139,22 @@ const StyledLeftAlignedModal = styled(Modal)`
   }
 `;
 
+const StyledAiSummaryModal = styled(StyledLeftAlignedModal)`
+  & .content {
+    max-width: 600px;
+  }
+
+  & .summary {
+    max-height: 70svh;
+    overflow-y: scroll;
+
+    & p + p {
+      margin-top: 1rem;
+    }
+
+    ${scrolllbarStyle};
+  }
+`;
+
 export default Modal;
-export { StyledLeftAlignedModal };
+export { StyledLeftAlignedModal, StyledAiSummaryModal };
