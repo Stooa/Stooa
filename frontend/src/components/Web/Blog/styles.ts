@@ -128,7 +128,6 @@ const StyledPostContent = styled.div`
 
     & img {
       object-fit: cover;
-      object-position: top;
       border-radius: 8px;
     }
   }
