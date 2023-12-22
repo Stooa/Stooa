@@ -40,6 +40,7 @@ interface Props {
   isFull?: boolean;
   isEditForm?: boolean;
   onSaveCallback?: (data: Fishbowl) => void;
+  setShowPrivacyModal?: (value: boolean) => void;
 }
 
 interface FormValues {
@@ -54,6 +55,7 @@ interface FormValues {
   hasIntroduction: boolean;
   isPrivate: boolean;
   plainPassword?: string;
+  hasSummary: boolean;
 }
 
 const initialValues = {
@@ -66,21 +68,11 @@ const initialValues = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false,
   isPrivate: false,
-  plainPassword: undefined
+  plainPassword: undefined,
+  hasSummary: false
 };
 
 const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
-  // const stringDate = fishbowl.startDateTimeTz.toString();
-  // const sign = stringDate.charAt(stringDate.length - 6);
-  // const timezoneHours = parseInt(stringDate.slice(-5, -3), 10);
-  // const timezoneDifferenceInMs = timezoneHours * 60 * 60 * 1000;
-
-  // const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
-  // const adjustedTime =
-  //   timestamp + (sign === '-' ? -timezoneDifferenceInMs : timezoneDifferenceInMs);
-  // const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
-  // const formattedDate = new Date(adjustedTime + userTimezoneOffset);
-
   const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
 
   // Extract timezone difference from startDateTimeTz in minutes
@@ -105,7 +97,8 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     timezone: fishbowl.timezone,
     hasIntroduction: fishbowl.hasIntroduction ?? false,
     isPrivate: fishbowl.isPrivate,
-    plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : ''
+    plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : '',
+    hasSummary: fishbowl.hasSummary ?? false
   };
 };
 
@@ -113,7 +106,8 @@ const FishbowlForm = ({
   selectedFishbowl,
   isFull = false,
   isEditForm = false,
-  onSaveCallback
+  onSaveCallback,
+  setShowPrivacyModal
 }: Props) => {
   const { t, lang } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
@@ -136,7 +130,6 @@ const FishbowlForm = ({
 
   const requiredError = t('validation.required');
   const minimumLength = t('validation.fishbowlPasswordLength');
-  // const dateError = t('validation.date');
 
   const schema = Yup.object({
     title: Yup.string().matches(/[^-\s]/, {
@@ -157,6 +150,7 @@ const FishbowlForm = ({
 
   const methods = useForm<FormValues>({
     resolver: yupResolver(schema),
+    mode: 'onChange',
     defaultValues: { ...initialValues, language: lang, plainPassword: getRandomPassword() }
   });
 
@@ -170,6 +164,12 @@ const FishbowlForm = ({
   } = methods;
 
   const watchIsPrivate = watch('isPrivate');
+
+  const handleSummaryOnClick = () => {
+    if (getValues('hasSummary') === false && setShowPrivacyModal) {
+      setShowPrivacyModal(true);
+    }
+  };
 
   const onCompletedSubmit = res => {
     if (res.type === 'Error') {
@@ -240,7 +240,8 @@ const FishbowlForm = ({
             isFishbowlNow: false,
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
-            plainPassword: values.isPrivate ? values.plainPassword : undefined
+            plainPassword: values.isPrivate ? values.plainPassword : undefined,
+            hasSummary: values.hasSummary
           }
         }
       })
@@ -267,7 +268,8 @@ const FishbowlForm = ({
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
             plainPassword:
-              values.isPrivate && values.plainPassword ? values.plainPassword : undefined
+              values.isPrivate && values.plainPassword ? values.plainPassword : undefined,
+            hasSummary: values.hasSummary
           }
         }
       })
@@ -465,6 +467,25 @@ const FishbowlForm = ({
               {...register('plainPassword')}
             />
           )}
+        </fieldset>
+        <fieldset>
+          <TextDivider>
+            <p>{t('fishbowl.AITitle')}</p>
+            <span></span>
+          </TextDivider>
+          <Switch
+            onClick={handleSummaryOnClick}
+            id="hasSummary"
+            full
+            tooltipText={
+              <Trans
+                i18nKey="form:fishbowl.hasSummaryTooltip"
+                components={{ span: <span className="medium" /> }}
+              />
+            }
+            label={t('fishbowl.hasSummaryLabel')}
+            {...register('hasSummary')}
+          />
         </fieldset>
         <fieldset>
           <SubmitBtn

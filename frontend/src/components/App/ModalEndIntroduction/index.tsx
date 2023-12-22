@@ -21,7 +21,7 @@ interface Props {
   disabled: boolean;
 }
 
-const ModalEndIntroduction: React.FC<Props> = ({ closeModal, startFishbowl, disabled }) => {
+const ModalEndIntroduction = ({ closeModal, startFishbowl, disabled }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (

@@ -18,6 +18,8 @@
         "lexik/jwt-authentication-bundle": "2.19.0",
         "metaclass-nl/filter-bundle": "3.0.0",
         "nelmio/cors-bundle": "2.3.1",
+        "nyholm/psr7": "1.8.1",
+        "openai-php/client": "0.8.x-dev",
         "paragonie/halite": "5.1.0",
         "ramsey/uuid": "4.7.5",
         "ramsey/uuid-doctrine": "2.0.0",
@@ -109,6 +111,7 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "ergebnis/composer-normalize": true,
+            "php-http/discovery": false,
             "symfony/flex": true,
             "symfony/runtime": true
         },

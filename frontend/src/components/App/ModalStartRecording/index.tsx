@@ -19,7 +19,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const ModalStartRecording: React.FC<Props> = ({ closeModal, startRecording }) => {
+const ModalStartRecording = ({ closeModal, startRecording }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (

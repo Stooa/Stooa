@@ -21,7 +21,7 @@ interface Props {
   participant: Participant;
 }
 
-const ModalKickUser: React.FC<Props> = ({ closeModal, onSubmit, participant }) => {
+const ModalKickUser = ({ closeModal, onSubmit, participant }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (

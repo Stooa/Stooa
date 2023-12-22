@@ -491,6 +491,21 @@ const StyledFishbowlDashboardData = styled.div`
     margin-bottom: ${space(2)};
   }
 
+  & .summary-button {
+    display: flex;
+    align-items: center;
+    gap: ${space(0.5)};
+    margin-bottom: ${space(2)};
+
+    & span {
+      padding-top: 2px;
+
+      & svg path {
+        fill: currentColor;
+      }
+    }
+  }
+
   & .data {
     display: flex;
     flex-wrap: wrap;

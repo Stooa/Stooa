@@ -456,24 +456,24 @@ export const useConference = () => {
 
   const startTranscriptionEvent = () => {
     console.log('[STOOA] Start transcription');
-    conference.setLocalParticipantProperty('requestingTranscription', true);
+    getConference().setLocalParticipantProperty('requestingTranscription', true);
   };
 
   const stopTranscriptionEvent = () => {
     console.log('[STOOA] Stop transcription');
-    conference.setLocalParticipantProperty('requestingTranscription', false);
+    getConference().setLocalParticipantProperty('requestingTranscription', false);
   };
 
   const setConferenceTranscriptionLanguage = language => {
-    conference.setLocalParticipantProperty('transcription_language', language);
+    getConference().setLocalParticipantProperty('transcription_language', language);
   };
 
   const setConferenceTranslationLanguage = language => {
-    conference.setLocalParticipantProperty('translation_language', language);
+    getConference().setLocalParticipantProperty('translation_language', language);
   };
 
   const stopTranslation = () => {
-    conference.setLocalParticipantProperty('translation_language', null);
+    getConference().setLocalParticipantProperty('translation_language', null);
   };
 
   const startScreenShareEvent = () => {
