@@ -10,6 +10,7 @@
     "joinMember": "Entrar com a usuari registrat *",
     "joinMemberNote": "* Permet contactar amb la resta d'assistents",
     "copySuccess": "Enllaç copiat!",
+    "addEventToCalendarTitle": "Afegeix al teu calendari",
     "detail": {
         "shareTitle": "Ben fet! I ara què? <br/>Comparteix el <i>fishbowl</i> amb la teva gent!",
         "shareSubtitle": "Deixa que la conversa flueixi! Còpia i comparteix el link d'aquest <i>fishbowl</i> amb les persones que vols que s'uneixin a la conversa.",

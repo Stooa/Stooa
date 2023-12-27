@@ -34,6 +34,7 @@
     "@types/node": "18.11.19",
     "@types/styled-components": "5.1.28",
     "@types/yup": "0.29.14",
+    "add-to-calendar-button": "^2.4.3",
     "axios": "1.3.6",
     "chart.js": "^4.2.1",
     "countries-and-timezones": "3.3.0",
