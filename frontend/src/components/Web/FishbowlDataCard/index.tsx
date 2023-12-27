@@ -18,6 +18,7 @@ import { formatDateTime, getMonthsForLocale, isTimeLessThanNMinutes } from '@/li
 import { Fishbowl } from '@/types/api-platform';
 import RedirectLink from '../RedirectLink';
 import { StyledFishbowlDataCard } from './styles';
+import AddToCalendarButton from '../AddToCalendarButton';
 
 interface Props {
   data: Fishbowl;
@@ -52,9 +53,15 @@ const FishbowlDataCard = ({ data, fromLanding, isModerator }: Props) => {
           monthName.charAt(0).toUpperCase() + monthName.slice(1)
         } ${day}, ${year}`}</p>
         <p className="body-sm">{`${startTime} - ${endTime}`}</p>
+
+        {fromLanding && isLessThan30Minutes && (
+          <p className="body-sm">
+            Add to calendar <AddToCalendarButton fishbowl={data} />
+          </p>
+        )}
       </div>
 
-      {!fromLanding && isTimeLessThanNMinutes(data.startDateTimeTz, 30) && (
+      {!fromLanding && isLessThan30Minutes && (
         <RedirectLink href={`${ROUTE_FISHBOWL}/${data.slug}`} locale={data.locale} passHref>
           <Button size="large" as="a" data-testid="enter-fishbowl">
             <span>{t('button.enterFishbowl')}</span>

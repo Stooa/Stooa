@@ -7,15 +7,14 @@
  * file that was distributed with this source code.
  */
 
+import { BODY_SM } from '@/ui/Texts';
 import styled from 'styled-components';
 
 const StyledCalendarButtonWrapper = styled.div`
+  ${BODY_SM};
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
-
-  margin-bottom: 2rem;
 `;
 
 export { StyledCalendarButtonWrapper };

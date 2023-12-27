@@ -36,7 +36,7 @@
         "invitationTitleLabel": "Título",
         "invitationSubtitleLabel": "Subtítulo (opcional)",
         "invitationDescriptionLabel": "Descripción (opcional)",
-        "AITitle": "Inteligència Artificial",
+        "AITitle": "Inteligencia Artificial",
         "hasSummaryLabel": "Quiero que se genere un resumen con inteligencia artificial.",
         "hasSummaryTooltip": "Guardaremos la transcripción de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
         "AIDataPrivacyTitle": "Privacidad de datos",
