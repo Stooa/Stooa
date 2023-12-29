@@ -44,7 +44,7 @@ const StyledItemsWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: ${space(2)};
+  gap: ${space(3)};
 `;
 
 const StyledItemDescription = styled.div`

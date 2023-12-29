@@ -56,6 +56,7 @@ const Decoration = styled.div`
 `;
 
 const TopDecoration = styled.div`
+  z-index: 0;
   &,
   svg {
     width: 90%;
@@ -79,11 +80,12 @@ const Header = styled.header<{ blogLayout?: boolean }>`
   grid-area: Header;
   display: flex;
   justify-content: space-between;
-  padding: ${space(1)} ${space(2)} 0;
+  padding: 0 ${space(2)} 0;
   gap: ${space(2)};
+  z-index: 10;
 
   ${media.min('tablet')`
-    padding: ${space(3)} ${space(6)} 0;
+    padding: 0 ${space(6)} 0;
   `}
 
   ${({ blogLayout }) =>

@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import LayoutWeb from '@/layouts/FishbowlDetail';
+import { useEffect, useState } from 'react';
 import { IntegrationsSettingsWrapper, StyledItemsWrapper } from './styles';
+
+import LayoutWeb from '@/layouts/FishbowlDetail';
 import { IntegrationItem } from './IntegrationItem';
-import HubspotLogo from '@/ui/svg/hubspot.svg';
 import { useQuery } from '@apollo/client';
 import { GET_SELF_USER } from '@/graphql/User';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useUserAuth } from '@/user/auth/useUserAuth';
 import { ROUTE_INTEGRATIONS } from '@/app.config';
 import Hubspot from '@/lib/Integrations/Hubspot';
@@ -22,6 +22,9 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import ConfirmationModal from '@/components/Common/ConfirmationModal';
 import useTranslation from 'next-translate/useTranslation';
+
+import HubspotLogo from '@/ui/svg/hubspot.svg';
+import SlackLogo from '@/ui/svg/slack-logo.svg';
 
 const IntegrationsPage = () => {
   const { t } = useTranslation('integrations');
@@ -33,9 +36,13 @@ const IntegrationsPage = () => {
 
   const [confirmSyncContactsModal, setConfirmSyncContactsModal] = useState(false);
   const [confirmUnsyncHubspot, setConfirmUnsyncHubspot] = useState(false);
+  const [confirmUnsyncSlack, setConfirmUnsyncSlack] = useState(false);
+
+  const slackUrl = `https://slack.com/oauth/v2/authorize?scope=incoming-webhook&amp;user_scope=&redirect_uri=${process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL}&client_id=${process.env.NEXT_PUBLIC_SLACK_CLIENT_ID}`;
 
   const { data } = useQuery(GET_SELF_USER, { pollInterval: 1000 });
   const { createHubspotToken } = useUserAuth();
+  const [syncedSlack, setSyncedSlack] = useState<boolean>(data?.selfUser.slackWebHook);
 
   const hubspotUrl = `${process.env.NEXT_PUBLIC_HUBSPOT_URL}?client_id=${
     process.env.NEXT_PUBLIC_HUBSPOT_CLIENT_ID
@@ -45,10 +52,15 @@ const IntegrationsPage = () => {
 
   const { code } = query;
 
-  const handleUnSync = () => {
+  const handleHubspotUnsync = () => {
     Hubspot.removeHubspotSync();
     setConfirmUnsyncHubspot(false);
     setSyncedHubspot(false);
+  };
+
+  const handleSlackUnsync = () => {
+    setConfirmUnsyncSlack(false);
+    setSyncedSlack(false);
   };
 
   const handleSyncContacts = async () => {
@@ -90,6 +102,10 @@ const IntegrationsPage = () => {
     if (data?.selfUser.hasHubspotRefreshToken && !syncedHubspot) {
       setSyncedHubspot(true);
     }
+
+    if (data?.selfUser.slackWebHook && !syncedSlack) {
+      setSyncedSlack(true);
+    }
   }, [data]);
 
   return (
@@ -110,9 +126,19 @@ const IntegrationsPage = () => {
         <ConfirmationModal
           closeModal={() => setConfirmUnsyncHubspot(false)}
           actionText={t('integrationItems.hubspot.unsync')}
-          onSubmit={handleUnSync}
+          onSubmit={handleHubspotUnsync}
           title={t('integrationItems.hubspot.unsyncActionModalTitle')}
           body={t('integrationItems.hubspot.unsyncActionModalBody')}
+        />
+      )}
+
+      {confirmUnsyncSlack && (
+        <ConfirmationModal
+          closeModal={() => setConfirmUnsyncSlack(false)}
+          actionText={t('integrationItems.hubspot.unsync')}
+          onSubmit={handleSlackUnsync}
+          title={t('integrationItems.slack.unsyncActionModalTitle')}
+          body={t('integrationItems.slack.unsyncActionModalBody')}
         />
       )}
 
@@ -122,6 +148,7 @@ const IntegrationsPage = () => {
 
         <StyledItemsWrapper>
           <IntegrationItem
+            integration="hubspot"
             disabledSync={isSyncedStarted || !syncedHubspot}
             synced={syncedHubspot}
             syncUrl={hubspotUrl}
@@ -131,6 +158,17 @@ const IntegrationsPage = () => {
           >
             <HubspotLogo />
             <span>{t('integrationItems.hubspot.title')}</span>
+          </IntegrationItem>
+
+          <IntegrationItem
+            integration="slack"
+            disabledSync={isSyncedStarted || !syncedSlack}
+            synced={syncedSlack}
+            syncUrl={slackUrl}
+            onUnSync={() => setConfirmUnsyncSlack(true)}
+          >
+            <SlackLogo />
+            <span>{t('integrationItems.slack.title')}</span>
           </IntegrationItem>
         </StyledItemsWrapper>
       </IntegrationsSettingsWrapper>

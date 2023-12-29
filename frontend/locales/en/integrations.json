@@ -14,6 +14,12 @@
             "lastSync": "Last Sync: ",
             "linkedSuccessfully": "Hubspot linked successfully",
             "contactsSyncedSuccessfully": "Contacts syncronization started successfully"
+        },
+        "slack": {
+            "title": "Slack",
+            "sync": "Connect",
+            "unsync": "Disconnect",
+            "linkedSuccessfully": "Slack linked successfully"
         }
     }
 }

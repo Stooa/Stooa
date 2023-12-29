@@ -18,13 +18,14 @@ import {
 import Button from '@/components/Common/Button';
 
 interface Props {
-  onButtonAction: () => void;
+  onButtonAction?: () => void;
   disabledSync: boolean;
   syncUrl: string;
   children: JSX.Element | JSX.Element[];
   synced?: boolean;
   onUnSync?: () => void;
   lastSyncDate?: string;
+  integration: 'slack' | 'hubspot';
 }
 
 export const IntegrationItem = ({
@@ -34,7 +35,8 @@ export const IntegrationItem = ({
   onUnSync,
   disabledSync,
   onButtonAction,
-  lastSyncDate
+  lastSyncDate,
+  integration
 }: Props) => {
   // TODO: If this goes to prod make a prop with actions and map then into buttons
   const { t } = useTranslation('integrations');
@@ -66,20 +68,20 @@ export const IntegrationItem = ({
           onClick={handleClick}
           className={`medium colored ${synced ? 'red' : ''}`}
         >
-          {synced ? t('integrationItems.hubspot.unsync') : t('integrationItems.hubspot.sync')}
+          {synced ? t('unsync') : t('sync')}
         </a>
       </StyledIntegrationContent>
 
-      {(synced || lastSyncDate) && (
+      {(synced || lastSyncDate) && integration === 'hubspot' && (
         <StyledSyncActions className={lastSyncDate ? 'spaced' : ''}>
           {lastSyncDate && (
             <span>
-              {t('integrationItems.hubspot.lastSync')} <br />
+              {t(`integrationItems.${integration}.lastSync`)} <br />
               {formatLastSyncDateWithHour(lastSyncDate)}
             </span>
           )}
           <Button disabled={disabledSync} onClick={onButtonAction}>
-            {t('integrationItems.hubspot.syncAction')}
+            {t(`integrationItems.${integration}.syncAction`)}
           </Button>
         </StyledSyncActions>
       )}
