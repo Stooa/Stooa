@@ -78,7 +78,7 @@
             "subtitle": "Explore the world of Stooa's fishbowl meetings and how they compare to traditional discussion methods for online communication.",
             "description": "Have you ever felt that online meetings can be boring or, worse, complete chaos? Holding a meeting with many people and making it a pleasant experience is not easy. In this post, we will explore the different dynamics that we can adapt in our online meetings.",
             "author": "Jose from Stooa",
-            "date-and-duration": "5 min read - Diciembre 18 2023",
+            "date-and-duration": "5 min read - December 18 2023",
             "content": {
                 "introBlock": "Imagine this: you're in another online meeting, watching the clock tick by while everyone talks over each other. It's not exactly productive, right? To avoid this, dynamics have been developed with the aim of improving certain aspects of meetings over time. ",
                 "introBlock2": "That's where Stooa comes in; we've created an online tool around the Fishbowl dynamic. This method is not just a \"cool\" name; it's a game changer in how we connect and communicate in the digital space. But, what are <span>the main differences</span> between the Fishbowl and other group discussion methods/dynamics?",
@@ -98,6 +98,34 @@
                 "realLifeVideo": "Here you have our <a>remote recruitment video</a>.",
                 "conclusion": "Conclusion: Dive into the Fishbowl",
                 "conclusionDescription": "So there you have it. Stooa's Fishbowl meetings are not just another way to dialogue online; they are a revolutionary approach to <span>making every voice heard</span> and every meeting matter. Ready to jump into the Fishbowl and see the difference for yourself?"
+            }
+        },
+        "conduct-large-group-online-meetings": {
+            "title": "How to conduct an online debate with more than 20 people?",
+            "subtitle": "I'll tell you the secrets to facilitate conversations in large groups with Stooa and the Fishbowl methodology",
+            "description": "Discover how Stooa can help you transform your meetings with large groups. I'll explain everything about the Fishbowl methodology and provide you with tips for effective online discussions.",
+            "author": "Carme from Stooa",
+            "date-and-duration": "6 min read - December 21 2023",
+            "content": {
+                "introBlock": "For some months now, I've been juggling my life as a Product Designer with the responsibilities of a Scrum Master on Stooa's Digital Product team. The combination of these two roles plus my frustration with inefficient meetings led me to explore how I can enhance my moderation skills to ensure successful gatherings.",
+                "introBlock2": "<span>Have you ever found organizing a meeting with a bunch of people to be a mission impossible?</span> Some don't participate, others dominate the conversation, and some constantly veer off-topic... Among the things I've learned, today I want to tell you about a tool that has greatly helped me, even in meetings with over 20 people!",
+               "aboutStooa": "Let's talk about <span>Stooa</span>.",
+               "largeWithStooa": "Stooa enables us to have disscusions with large groups (I've used it with groups of +8 people, and it works perfectly) and ensures that every voice is heard, eliminating the need to \"raise your hand\" or have a moderator pass the floor to different attendees. The last time I used it, <span>we gathered 23 people, and it was a complete success</span>. Let me tell you how it went:",
+               "preparation": "1. Preparation in advance",
+               "chooseItem": "<span>Choosing the topic:</span> I believe a good discussion starts with a captivating topic. I always look for something that <span>sparks curiosity and a desire to participate</span>. In this case, we discussed Planet Centric Design 🌱, with colleagues from my team who share the same role.",
+               "dayItem": "<span>Date and time:</span> Once you have the topic, find a suitable date and time for the session and include a brief description of the <span>session's objectives </span>🎯. In my case, I talked about the topic we were going to debate and invited attendees to take a look at the tool so they could feel comfortable and avoid wasting time onboarding those who had never used it before.",
+               "theDay": "2. The D-Day: Let's all discuss!",
+               "metodology": "<span>The Fishbowl methodology:</span> Stooa helps us have smooth conversations and self-moderated debates based on the <span>Fishbowl method</span> 🐠.<br/> And, <span>what is a Fishbowl?</span> It's a group dynamic that facilitates any activity where participation is essential. .<br/> <span>How does it work?</span> Well, it's very simple: we have 5 chairs, and to participate in the dialogue, you'll need to occupy one of the available chairs. Any attendee can take an empty chair at any time to participate. If all the chairs are occupied, someone who has already participated will have to vacate their seat. ",
+               "tryIt": "<a>I encourage you to try it</a> to discover how simple it is.",
+               "moderationitem": "<span>The importance of moderation:</span> This is where I come in. Although the Fishbowl dynamics allow for conversations without the presence of a moderator, in my experience, we often veer off-topic when there's no one guiding the discussion. Personally, I prepare questions about the topic and release them when I see that we're repeating the same ideas or straying too far. For effective moderation, it's crucial to have a clear session objective and give voice to all attendees.",
+               "makeThemParticipate": "3. Encouraging everyone to participate:",
+               "icebreakersItems": "For me, the best way to activate participation is through <span>icebreakers</span> ❄️. I share some tips to improve the participation in <a>my latest post</a>.",
+               "activeManagement": "4. Effective time management and feedback:",
+               "timeForEveryoneItem": "<span>Time for everyone:</span> It's fantastic to see people coming and going, contributing different viewpoints. But when I see someone dominating the conversation, I like to pose open-ended questions to encourage others to join and share their ideas.",
+               "closingItem": "<span>Closure:</span> When the discussion is engaging, time flies, but it's essential to allocate a few minutes at the end for a good conclusion. Depending on the meeting's objectives, you might need to discuss next steps or document the decisions made during the session. What should never be missing is a recap of the most important highlights so that everyone takes away the best from the discussion.",
+               "feedbackItem": "<span>Feedback:</span> Also, before closing the meeting, I ask attendees to provide feedback to help me improve session by session  💬. Stooa has an exclusive feature for that, and as the session organizer, you can see a summary of how it went and all the feedback you received. For me, it's one of the things that has helped me improve meetings the most, without a doubt.",
+               "inSummary": "In Summary",
+               "inSummaryText": "Organizing and moderating an online debate with a multitude may sound daunting, but I promise you that with Stooa and a bit of creativity, it's an incredible experience! How about you? How do you handle your online debates? Have you ever tried something like this? Tell me! I'd love to hear about your experiences and make these online debates a space for connection and creativity. 🌟"
             }
         }
     }

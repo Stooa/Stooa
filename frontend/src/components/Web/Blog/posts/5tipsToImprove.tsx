@@ -46,6 +46,7 @@ export const ImproveOnlineMeetings = () => {
       <div className="image-container">
         <Image
           src="/img/web/blog/improve/blog-1.png"
+          objectPosition="top"
           fill
           alt="Woman loading ice into a an old car."
           sizes="(max-width: 768px) 100vw, 768px"
