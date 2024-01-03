@@ -181,7 +181,7 @@ const IntegrationsPage = () => {
       {confirmUnsyncSlack && (
         <ConfirmationModal
           closeModal={() => setConfirmUnsyncSlack(false)}
-          actionText={t('integrationItems.hubspot.unsync')}
+          actionText={t('integrationItems.slack.unsync')}
           onSubmit={handleSlackUnsync}
           title={t('integrationItems.slack.unsyncActionModalTitle')}
           body={t('integrationItems.slack.unsyncActionModalBody')}

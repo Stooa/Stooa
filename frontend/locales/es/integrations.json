@@ -16,6 +16,8 @@
             "contactsSyncedSuccessfully": "La sincronización de contactos ha comenzado con éxito"
         },
         "slack": {
+            "sync": "Vincular",
+            "unsync": "Desvincular",
             "title": "Slack",
             "linkedSuccessfully": "Slack vinculado con éxito",
             "notSuccessfully": "No se ha podido vincular Slack con su cuenta.",
