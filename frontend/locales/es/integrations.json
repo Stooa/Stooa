@@ -17,7 +17,8 @@
         },
         "slack": {
             "title": "Slack",
-            "linkedSuccessfully": "Slack linked successfully",
+            "linkedSuccessfully": "Slack vinculado con éxito",
+            "notSuccessfully": "No se ha podido vincular Slack con su cuenta.",
             "unsyncActionModalTitle": "¿Estas seguro de que quieres desvincular tu canal de slack?",
             "unsyncActionModalBody": "Ya no recibirás notificaciones de los Fishbowls que organices."
         }

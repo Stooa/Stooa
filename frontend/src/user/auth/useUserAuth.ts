@@ -84,6 +84,29 @@ export const useUserAuth = () => {
       });
   }, []);
 
+  const createSlackWebHook = useCallback(async (code: string) => {
+    const auth = await getAuthToken();
+    api
+      .post(
+        `/slack/token`,
+        {
+          webhook: code
+        },
+        {
+          headers: {
+            'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
+            'Authorization': `${auth ? auth.authorizationString : null}`
+          }
+        }
+      )
+      .then(res => {
+        console.log('----> response', res.data);
+      })
+      .catch(error => {
+        console.log('----> error', error);
+      });
+  }, []);
+
   const ping = async (lang: string, slug: string) => {
     const auth = await getAuthToken();
     const params = new FormData();
@@ -132,6 +155,7 @@ export const useUserAuth = () => {
     isFishbowlShareLinkCookie,
     getTranscriptionLanguageCookie,
     setTranscriptionLanguageCookie,
-    createHubspotToken
+    createHubspotToken,
+    createSlackWebHook
   };
 };

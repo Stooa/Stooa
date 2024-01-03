@@ -19,7 +19,8 @@
             "title": "Slack",
             "sync": "Connect",
             "unsync": "Disconnect",
-            "linkedSuccessfully": "Slack linked successfully"
+            "linkedSuccessfully": "Slack linked successfully",
+            "notSuccessfully": "Slack not linked successfully"
         }
     }
 }

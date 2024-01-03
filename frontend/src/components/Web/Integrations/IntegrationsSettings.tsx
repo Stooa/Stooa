@@ -11,9 +11,10 @@ import { useEffect, useState } from 'react';
 import { IntegrationsSettingsWrapper, StyledItemsWrapper } from './styles';
 
 import LayoutWeb from '@/layouts/FishbowlDetail';
+import axios from 'axios';
 import { IntegrationItem } from './IntegrationItem';
-import { useQuery } from '@apollo/client';
-import { GET_SELF_USER } from '@/graphql/User';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_SELF_USER, UPDATE_USER } from '@/graphql/User';
 import { useRouter } from 'next/router';
 import { useUserAuth } from '@/user/auth/useUserAuth';
 import { ROUTE_INTEGRATIONS } from '@/app.config';
@@ -41,7 +42,7 @@ const IntegrationsPage = () => {
   const slackUrl = `https://slack.com/oauth/v2/authorize?scope=incoming-webhook&amp;user_scope=&redirect_uri=${process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL}&client_id=${process.env.NEXT_PUBLIC_SLACK_CLIENT_ID}`;
 
   const { data } = useQuery(GET_SELF_USER, { pollInterval: 1000 });
-  const { createHubspotToken } = useUserAuth();
+  const { createHubspotToken, createSlackWebHook } = useUserAuth();
   const [syncedSlack, setSyncedSlack] = useState<boolean>(data?.selfUser.slackWebHook);
 
   const hubspotUrl = `${process.env.NEXT_PUBLIC_HUBSPOT_URL}?client_id=${
@@ -50,7 +51,7 @@ const IntegrationsPage = () => {
     process.env.NEXT_PUBLIC_APP_DOMAIN + ROUTE_INTEGRATIONS
   }&scope=crm.objects.contacts.read%20crm.objects.contacts.write`;
 
-  const { code } = query;
+  const { code, state } = query;
 
   const handleHubspotUnsync = () => {
     Hubspot.removeHubspotSync();
@@ -61,6 +62,7 @@ const IntegrationsPage = () => {
   const handleSlackUnsync = () => {
     setConfirmUnsyncSlack(false);
     setSyncedSlack(false);
+    createSlackWebHook('');
   };
 
   const handleSyncContacts = async () => {
@@ -84,7 +86,7 @@ const IntegrationsPage = () => {
   };
 
   useEffect(() => {
-    if (!syncedHubspot && code) {
+    if (!syncedHubspot && code && state === undefined) {
       createHubspotToken(code as string).then(() => {
         toast(t('integrationItems.hubspot.linkedSuccessfully'), {
           type: 'success',
@@ -95,6 +97,50 @@ const IntegrationsPage = () => {
       });
       replace('/integrations');
       setSyncedHubspot(true);
+    }
+
+    if (!syncedSlack && code && state !== undefined) {
+      axios
+        .post(
+          'https://slack.com/api/oauth.v2.access',
+          {
+            client_id: process.env.NEXT_PUBLIC_SLACK_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_SLACK_CLIENT_SECRET,
+            code: code,
+            redirect_uri: process.env.NEXT_PUBLIC_SLACK_REDIRECT_URL
+          },
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }
+        )
+        .then(async function (response) {
+          console.log('[Stooa] slack api response', response);
+
+          if (response.data.incoming_webhook) {
+            createSlackWebHook(response.data.incoming_webhook.url).then(() => {
+              toast(t('integrationItems.slack.linkedSuccessfully'), {
+                type: 'success',
+                icon: '👌',
+                position: 'bottom-center',
+                autoClose: 5000
+              });
+            });
+          } else {
+            toast(t('integrationItems.slack.notSuccessfully'), {
+              type: 'error',
+              icon: '👌',
+              position: 'bottom-center',
+              autoClose: 5000
+            });
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      replace('/integrations');
     }
   }, [code, createHubspotToken, syncedHubspot]);
 
