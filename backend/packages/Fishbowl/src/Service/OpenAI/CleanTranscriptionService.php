@@ -17,7 +17,7 @@ class CleanTranscriptionService
 {
     public function clean(string $json): string
     {
-        $jsonArray = json_decode($json, true);
+        $jsonArray = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
         $removeKeys = ['roomAddress', 'meetingFqn', 'sessionId', 'timestamp', 'messageType'];
 
