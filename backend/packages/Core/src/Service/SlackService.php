@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace App\Core\Service;
 
 use App\Core\DataFixtures\DefaultFixtures;
-use App\Core\Entity\User;
-use App\Core\Repository\UserRepository;
 use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class SlackService
 {
     public function __construct(
-        protected readonly UserRepository $userRepository,
         protected readonly HttpClientInterface $client,
         protected readonly string $slackUrl,
         protected readonly string $appUrl
@@ -98,15 +95,6 @@ class SlackService
                 ],
             ],
         ]);
-    }
-
-    public function setUserWebHook(User $user, string $webHook): string
-    {
-        $user->setSlackWebHook($webHook);
-
-        $this->userRepository->persist($user);
-
-        return $webHook;
     }
 
     private function getSlackUrl(Fishbowl $fishbowl): string

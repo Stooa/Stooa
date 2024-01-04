@@ -15,7 +15,7 @@ namespace App\Core\Controller;
 
 use App\Core\Entity\User;
 use App\Core\Model\SlackWebhookDto;
-use App\Core\Service\SlackService;
+use App\Core\Service\SlackWebHookService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class WebHookSlackController extends AbstractController
 {
     public function __construct(
-        private readonly SlackService $slackService,
+        private readonly SlackWebHookService $slackWebHookService,
         private readonly Security $security
     ) {
     }
@@ -43,7 +43,7 @@ final class WebHookSlackController extends AbstractController
         }
 
         try {
-            return new JsonResponse(['token' => $this->slackService->setUserWebHook($user, $slackWebhookDto->webhook)]);
+            return new JsonResponse(['token' => $this->slackWebHookService->setUserWebHook($user, $slackWebhookDto->webhook)]);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
