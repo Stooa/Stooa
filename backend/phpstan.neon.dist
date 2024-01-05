@@ -27,7 +27,7 @@ parameters:
     symfony:
         container_xml_path: '%rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml'
     treatPhpDocTypesAsCertain: false
-    checkGenericClassInNonGenericObjectType: false
+    checkGenericClassInNonGenericObjectType: true
     checkMissingIterableValueType: true
     checkMissingVarTagTypehint: true
     checkMissingTypehints: true

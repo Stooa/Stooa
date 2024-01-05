@@ -18,9 +18,15 @@ use ApiPlatform\State\ProcessorInterface;
 use App\Core\Service\MailerService;
 use App\Fishbowl\Entity\Fishbowl;
 
+/**
+ * @implements ProcessorInterface<Fishbowl>
+ */
 final class FishbowlProcessor implements ProcessorInterface
 {
     public function __construct(
+        /**
+         * @var ProcessorInterface<Fishbowl>
+         */
         private readonly ProcessorInterface $decorated,
         private readonly MailerService $mailerService
     ) {
