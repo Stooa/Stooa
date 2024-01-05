@@ -119,14 +119,14 @@ class FishbowlAdmin extends AbstractAdmin
                 ->add('name')
                 ->add('description')
                 ->add('startDateTime', DateTimePickerType::class, [
-//                    'dp_use_seconds' => false,
-//                    'dp_minute_stepping' => 15,
+                    'dp_use_seconds' => false,
+                    'dp_minute_stepping' => 15,
                     'format' => 'dd/MM/yyyy HH:mm',
                 ])
                 ->add('duration', DateTimePickerType::class, [
-//                    'dp_pick_date' => false,
-//                    'dp_use_seconds' => false,
-//                    'dp_minute_stepping' => 15,
+                    'dp_pick_date' => false,
+                    'dp_use_seconds' => false,
+                    'dp_minute_stepping' => 15,
                     'format' => 'HH:mm',
                 ])
                 ->add('timezone', TimezoneType::class, [
@@ -156,20 +156,20 @@ class FishbowlAdmin extends AbstractAdmin
                 ])
                 ->add('introducedAt', DateTimePickerType::class, [
                     'disabled' => true,
-//                    'dp_use_seconds' => false,
-//                    'dp_minute_stepping' => 15,
+                    'dp_use_seconds' => false,
+                    'dp_minute_stepping' => 15,
                     'format' => 'dd/MM/yyyy HH:mm',
                 ])
                 ->add('runnedAt', DateTimePickerType::class, [
                     'disabled' => true,
-//                    'dp_use_seconds' => false,
-//                    'dp_minute_stepping' => 15,
+                    'dp_use_seconds' => false,
+                    'dp_minute_stepping' => 15,
                     'format' => 'dd/MM/yyyy HH:mm',
                 ])
                 ->add('finishedAt', DateTimePickerType::class, [
                     'disabled' => true,
-//                    'dp_use_seconds' => false,
-//                    'dp_minute_stepping' => 15,
+                    'dp_use_seconds' => false,
+                    'dp_minute_stepping' => 15,
                     'format' => 'dd/MM/yyyy HH:mm',
                 ])
                 ->add('slug', null, [

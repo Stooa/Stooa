@@ -26,7 +26,7 @@
         "sonata-project/doctrine-extensions": "2.3.0",
         "sonata-project/doctrine-orm-admin-bundle": "4.15.0",
         "sonata-project/exporter": "3.3.0",
-        "sonata-project/form-extensions": "2.3.0",
+        "sonata-project/form-extensions": "1.20.0",
         "sonata-project/twig-extensions": "2.4.0",
         "sonata-project/user-bundle": "5.10.0",
         "symfony/amazon-mailer": "6.4.2",
