@@ -61,7 +61,7 @@ const Header = styled.header<{ blogLayout?: boolean; whiteLogo?: boolean }>`
   grid-area: Header;
   display: flex;
   justify-content: space-between;
-  padding: ${space(1)} ${space(2)} 0;
+  padding: ${space(1)} ${space(3)} 0;
   gap: ${space(2)};
 
   ${media.min('tablet')`
@@ -96,6 +96,10 @@ const Main = styled.main<{
   padding-top: ${({ blogPost }) => (blogPost ? space(12) : '0')};
 
   ${props => (props.center ? flexCenter : '')}
+
+  ${media.max('tablet')`
+    padding-inline: ${({ blogLayout }) => (blogLayout ? 'initial' : space(3))};
+  `}
 `;
 
 export { Container, Decoration, Header, Main };
