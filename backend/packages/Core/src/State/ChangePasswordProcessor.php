@@ -21,6 +21,9 @@ use App\Core\Security\PasswordEncoderService;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @implements ProcessorInterface<User>
+ */
 final class ChangePasswordProcessor implements ProcessorInterface
 {
     public function __construct(

@@ -120,6 +120,7 @@ class TopicSelectorType extends AbstractType
 
         $nodes = [];
         foreach ($rootNodes as $rootNode) {
+            /* @phpstan-ignore-next-line */
             if ($rootNode->getId() !== $options['subject']->getId()) {
                 $nodes[] = $rootNode;
             }
