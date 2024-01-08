@@ -19,11 +19,13 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 class TopicService
 {
+    /** @var NestedTreeRepository<Topic> */
     protected NestedTreeRepository $repository;
 
     public function __construct(
         protected readonly EntityManagerInterface $entityManager
     ) {
+        /** @psalm-suppress PropertyTypeCoercion */
         $this->repository = $entityManager->getRepository(Topic::class);
     }
 

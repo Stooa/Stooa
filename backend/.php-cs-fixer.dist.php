@@ -61,6 +61,7 @@ $config->setRules([
     'php_unit_test_annotation' => ['style' => 'annotation'],
     'nullable_type_declaration_for_default_null_value' => false,
     'no_superfluous_phpdoc_tags' => false,
+    'phpdoc_to_comment' => ['ignored_tags' => ['psalm-suppress', 'phpstan-ignore-next-line', 'todo']],
 ])
 ->setRiskyAllowed(true)
 ->setFinder($finder);
