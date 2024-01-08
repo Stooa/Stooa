@@ -11,7 +11,8 @@ import React from 'react';
 
 import Footer from '@/components/Web/Footer';
 import Header from '@/components/Web/Header';
-import { Main, Container, Header as HeaderStyled } from '@/layouts/Home/styles';
+import { Main, Container } from '@/layouts/Home/styles';
+import { Header as HeaderStyled } from '@/layouts/Default/styles';
 
 interface Props {
   title?: string;
