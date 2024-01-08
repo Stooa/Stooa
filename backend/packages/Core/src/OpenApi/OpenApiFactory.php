@@ -76,7 +76,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
                 ],
             ],
         ];
-
+        /** @psalm-suppress InvalidArgument */
         $loginOperation = (new Operation('postCredentialsItem'))
             ->withTags(['Token'])
             ->withSummary('Get JWT token to login.')
@@ -89,6 +89,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
                 ])),
             ]);
 
+        /** @psalm-suppress InvalidArgument */
         $refreshTokenOperation = (new Operation('postRefreshCredentialsItem'))
             ->withTags(['Token'])
             ->withSummary('Get JWT token.')

@@ -188,12 +188,6 @@
     "hashids/hashids": {
         "version": "4.0.0"
     },
-    "jms/metadata": {
-        "version": "2.3.0"
-    },
-    "jms/serializer": {
-        "version": "3.8.0"
-    },
     "justinrainbow/json-schema": {
         "version": "5.2.10"
     },

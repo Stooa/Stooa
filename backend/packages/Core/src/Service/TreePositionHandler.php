@@ -56,6 +56,7 @@ class TreePositionHandler implements PositionHandlerInterface
         }
     }
 
+    /** @return NestedTreeRepository<object> */
     private function getRepository(object $entity): NestedTreeRepository
     {
         $repository = $this->entityManager->getRepository($entity::class);
