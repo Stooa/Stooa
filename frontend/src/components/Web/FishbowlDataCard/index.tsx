@@ -54,7 +54,7 @@ const FishbowlDataCard = ({ data, fromLanding, isModerator }: Props) => {
         } ${day}, ${year}`}</p>
         <p className="body-sm">{`${startTime} - ${endTime}`}</p>
 
-        {fromLanding && isLessThan30Minutes && (
+        {fromLanding && !isLessThan30Minutes && (
           <p className="body-sm">
             Add to calendar <AddToCalendarButton fishbowl={data} />
           </p>
