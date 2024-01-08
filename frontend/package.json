@@ -29,7 +29,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@apollo/client": "3.8.5",
+    "@apollo/client": "3.8.8",
     "@hookform/resolvers": "^2.9.11",
     "@tiptap/extension-link": "^2.1.11",
     "@tiptap/extension-placeholder": "^2.1.11",
@@ -86,7 +86,7 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@types/jest": "27.4.1",
-    "@types/js-cookie": "3.0.4",
+    "@types/js-cookie": "3.0.6",
     "@types/react": "18.2.25",
     "@types/react-slick": "0.23.10",
     "@typescript-eslint/eslint-plugin": "5.60.1",

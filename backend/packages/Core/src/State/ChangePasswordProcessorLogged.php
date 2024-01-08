@@ -21,6 +21,9 @@ use App\Core\Security\PasswordEncoderService;
 use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
+/**
+ * @implements ProcessorInterface<User>
+ */
 final class ChangePasswordProcessorLogged implements ProcessorInterface
 {
     public function __construct(

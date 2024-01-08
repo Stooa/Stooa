@@ -15,6 +15,7 @@ import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 import { useStateValue } from '@/contexts/AppContext';
 
 import { IConferenceStatus } from '@/jitsi/Status';
+import { StyledCreateFishbowlWrapper } from '@/ui/Form';
 
 import ModalEnableAiSummary from '@/components/App/ModalEnableAiSummary';
 
@@ -39,8 +40,11 @@ const Create = () => {
       {showAIPrivacyModal && (
         <ModalEnableAiSummary closeModal={() => setShowAIPrivacyModal(false)} />
       )}
-      <h1 className="title-md form-title">{t('title')}</h1>
-      <FishbowlForm setShowPrivacyModal={setShowAIPrivacyModal} />
+
+      <StyledCreateFishbowlWrapper>
+        <h1 className="title-md form-title">{t('title')}</h1>
+        <FishbowlForm />
+      </StyledCreateFishbowlWrapper>
     </Layout>
   );
 };
