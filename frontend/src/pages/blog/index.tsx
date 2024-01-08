@@ -15,7 +15,7 @@ import getT from 'next-translate/getT';
 
 const Blog = () => {
   return (
-    <Layout positionDefault blogLayout>
+    <Layout positionDefault blogLayout whiteLogo>
       <BlogHeader />
       <BlogPage />
     </Layout>

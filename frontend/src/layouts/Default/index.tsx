@@ -28,6 +28,7 @@ interface Props {
   positionDefault?: boolean;
   blogLayout?: boolean;
   blogPost?: boolean;
+  whiteLogo?: boolean;
 }
 
 const Page = ({
@@ -37,11 +38,12 @@ const Page = ({
   navigation = true,
   positionDefault,
   blogLayout,
-  blogPost
+  blogPost,
+  whiteLogo
 }: Props) => (
   <>
     <Container blogLayout={blogLayout} className={decorated ? 'decorated' : ''}>
-      <HeaderStyled blogPost={blogPost} blogLayout={blogLayout}>
+      <HeaderStyled whiteLogo={whiteLogo} blogLayout={blogLayout}>
         <Header navigation={navigation} />
       </HeaderStyled>
       <Main
