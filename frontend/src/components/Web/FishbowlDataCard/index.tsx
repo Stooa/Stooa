@@ -56,7 +56,7 @@ const FishbowlDataCard = ({ data, fromLanding, isModerator }: Props) => {
 
         {fromLanding && !isLessThan30Minutes && (
           <p className="body-sm">
-            Add to calendar <AddToCalendarButton fishbowl={data} />
+            {t('fishbowl:addEventToCalendarTitle')} <AddToCalendarButton fishbowl={data} />
           </p>
         )}
       </div>
