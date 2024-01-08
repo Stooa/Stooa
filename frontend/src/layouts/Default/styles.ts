@@ -82,7 +82,6 @@ const Header = styled.header<{ blogLayout?: boolean; whiteLogo?: boolean }>`
   justify-content: space-between;
   padding: ${space(1)} ${space(3)} 0;
   gap: ${space(2)};
-  z-index: 10;
 
   ${media.min('tablet')`
     padding: 0 ${space(6)} 0;
