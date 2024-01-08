@@ -55,7 +55,7 @@
         "symfonycasts/reset-password-bundle": "1.20.1",
         "twig/twig": "3.8.0",
         "webmozart/assert": "1.11.0",
-        "webonyx/graphql-php": "14.11.10",
+        "webonyx/graphql-php": "15.8.1",
         "zenstruck/foundry": "1.36.1"
     },
     "require-dev": {
