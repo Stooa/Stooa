@@ -130,7 +130,7 @@ const IntegrationsPage = () => {
           } else {
             toast(t('integrationItems.slack.notSuccessfully'), {
               type: 'error',
-              icon: '👌',
+              icon: '👎',
               position: 'bottom-center',
               autoClose: 5000
             });
