@@ -19,8 +19,6 @@ import {
 } from '@/ui/settings';
 
 const ThankYouStyled = styled.div`
-  margin-top: ${space(4)};
-
   .share {
     margin-bottom: ${space(4)};
 
@@ -58,6 +56,7 @@ const ThankYouStyled = styled.div`
   .action-wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     row-gap: ${space(2)};
 
@@ -86,6 +85,11 @@ const Time = styled(Alert)`
 `;
 
 const StyledThankyouWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ${space(3.5)};
   max-width: 1024px;
   width: 100%;
 

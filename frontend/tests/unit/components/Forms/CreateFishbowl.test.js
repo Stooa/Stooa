@@ -26,6 +26,16 @@ jest.mock('next/router', () => ({
   }
 }));
 
+jest.mock('@tiptap/react', () => ({
+  useEditor() {
+    return {};
+  }
+}));
+
+jest.mock('@/components/Common/RichEditor', () => () => {
+  return <mock-modal data-testid="modal" />;
+});
+
 jest.mock('@/contexts/AuthContext', () => ({
   useAuth() {
     return {};

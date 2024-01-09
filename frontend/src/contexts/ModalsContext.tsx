@@ -38,6 +38,7 @@ const ModalsProvider = ({
   const [showStopRecording, setShowStopRecording] = useState(false);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [showTranscriptionModal, setShowTranscriptionModal] = useState(false);
+
   const { getOnBoardingCookie } = useUserAuth();
 
   const toggleOnBoarding = (location: string) => {

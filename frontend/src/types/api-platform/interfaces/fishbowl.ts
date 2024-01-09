@@ -21,12 +21,18 @@ export interface Fishbowl {
   'duration': Date;
   'isFishbowlNow'?: boolean;
   'hasIntroduction'?: boolean;
+  'hasInvitationInfo'?: boolean;
+  'invitationTitle'?: string;
+  'invitationSubtitle'?: string;
+  'invitationText'?: string;
   'isPrivate'?: boolean;
+  'hasSummary'?: boolean;
   'plainPassword'?: string;
   readonly 'slug': string;
   readonly 'host': User|string;
   readonly 'currentStatus'?: string;
   readonly 'participants'?: Participant[];
+  readonly 'summary'?: string;
   readonly 'feedbacks'?: Feedback[];
   readonly 'startDateTimeTz'?: Date;
   readonly 'endDateTimeTz'?: Date;

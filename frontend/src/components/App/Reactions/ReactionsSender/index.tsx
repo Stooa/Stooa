@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import useDebounce from '@/hooks/useDebouce';
+import useDebounce from '@/hooks/useDebounce';
 import React, { useEffect, useState } from 'react';
 import { EmojiSpawner, ReactionsWrapper } from './styles';
 import Reactions from '@/lib/Reactions/Reactions';

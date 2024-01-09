@@ -94,11 +94,13 @@ class UserAdmin extends AbstractAdmin
             ->addIdentifier('email')
             ->add('name')
             ->add('surnames')
+            ->add('hubspotRefreshToken')
             ->add('privacyPolicy')
             ->add('allowShareData', FieldDescriptionInterface::TYPE_BOOLEAN, [
                 'editable' => true,
             ])
             ->add('locale')
+            ->add('slackWebHook')
             ->add('active', FieldDescriptionInterface::TYPE_BOOLEAN, [
                 'editable' => true,
             ]);

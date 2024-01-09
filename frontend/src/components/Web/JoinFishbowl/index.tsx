@@ -7,14 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { Fishbowl } from '@/types/api-platform';
 import { ROUTE_FISHBOWL, ROUTE_SIGN_IN } from '@/app.config';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
-import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
 import { JoinFishbowlStyled } from '@/components/Web/JoinFishbowl/styles';
 import Button from '@/components/Common/Button';
@@ -26,40 +24,12 @@ interface Props {
   isCreator?: boolean;
 }
 
-const MINUTE = 60 * 1000;
-const MINUTES_TO_START_FISHBOWL = 60;
-
 const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
-  const [{ fishbowlReady }, dispatch] = useStateValue();
+  const [{ fishbowlReady }] = useStateValue();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('fishbowl');
-  const intervalRef = useRef<number>();
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
-
-  // TODO: CHANGE TO 1 TIMEOUT
-  const evaluateFishbowlReady = () => {
-    const isReady = isTimeLessThanNMinutes(data.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
-
-    if (isReady) {
-      window.clearInterval(intervalRef.current);
-
-      dispatch({
-        type: 'FISHBOWL_READY',
-        fishbowlReady: true
-      });
-    } else {
-      console.log('[STOOA] More than 1 hour to start fishbowl');
-    }
-  };
-
-  useEffect(() => {
-    evaluateFishbowlReady();
-
-    intervalRef.current = window.setInterval(evaluateFishbowlReady, MINUTE);
-
-    return () => window.clearInterval(intervalRef.current);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

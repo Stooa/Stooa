@@ -10,6 +10,7 @@
     "joinMember": "Entrar com a usuari registrat *",
     "joinMemberNote": "* Permet contactar amb la resta d'assistents",
     "copySuccess": "Enllaç copiat!",
+    "addEventToCalendarTitle": "Afegeix al teu calendari",
     "detail": {
         "shareTitle": "Ben fet! I ara què? <br/>Comparteix el <i>fishbowl</i> amb la teva gent!",
         "shareSubtitle": "Deixa que la conversa flueixi! Còpia i comparteix el link d'aquest <i>fishbowl</i> amb les persones que vols que s'uneixin a la conversa.",
@@ -203,7 +204,9 @@
             "after": "Després",
             "afterTooltip": "Feedback rebut després del fishbowl",
             "during": "Durant",
-            "duringTooltip": "Feedback rebut durant el fishbowl"
+            "duringTooltip": "Feedback rebut durant el fishbowl",
+            "summaryInProgress": "Generant resum IA",
+            "summary": "Resum IA"
         }
     },
     "transcription" : {
@@ -215,5 +218,12 @@
         "modalBody": "Abans de començar, necessitem que <span>indiquis en quin idioma participaràs</span> en aquesta conversa.",
         "tooltip": "Si us plau, indica quin idioma parles.",
         "translate": "Traduir"
+    },
+    "invitationLanding" : {
+        "cta": "Hi participo!",
+        "register": "Inscriure's",
+        "registered": "Ja estàs inscrit",
+        "success": "T'has inscrit amb èxit",
+        "formTitle": "Inscriu-te al Fishbowl. És gratuït!"
     }
 }
