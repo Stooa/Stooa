@@ -40,7 +40,7 @@
     "file-loader": "6.2.0",
     "framer-motion": "8.5.5",
     "graphql": "16.8.1",
-    "gsap": "3.12.2",
+    "gsap": "3.12.4",
     "hoist-non-react-statics": "3.3.2",
     "intro.js": "6.0.0",
     "intro.js-react": "0.7.1",
