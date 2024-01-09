@@ -142,7 +142,7 @@ const IntegrationsPage = () => {
 
       replace('/integrations');
     }
-  }, [code, createHubspotToken, syncedHubspot]);
+  }, [code, createHubspotToken, syncedHubspot, syncedSlack, state]);
 
   useEffect(() => {
     if (data?.selfUser.hasHubspotRefreshToken && !syncedHubspot) {

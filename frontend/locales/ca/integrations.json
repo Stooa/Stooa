@@ -1,6 +1,9 @@
 {
     "title": "Integracions",
     "subtitle": "Pots vincular el teu compte de Stooa amb altres aplicacions i serveis per iniciar sessió més ràpidament, accedir als enllaços més còmodament i gaudir de molts altres avantatges.",
+    "sync": "Vincular",
+    "unsync": "Desvincular",
+    "lastSync": "Última sincronización: ",
     "integrationItems": {
         "hubspot": {
             "title": "Hubspot",
@@ -11,9 +14,15 @@
             "syncActionModalBody": "Es sincronitzaran tots els participants registrats que hagin assistit a una Fishbowl organitzada per tu.",
             "unsyncActionModalTitle": "Estàs segur que vols desvincular el teu compte de Hubspot?",
             "unsyncActionModalBody": "Podràs continuar veient els contactes carregats a Hubspot, però no es actualitzaran.",
-            "lastSync": "Última Sincronització: ",
             "linkedSuccessfully": "Hubspot vinculat amb èxit",
             "contactsSyncedSuccessfully": "La sincronització de contactes ha començat amb èxit"
+        },
+        "slack": {
+            "title": "Slack",
+            "linkedSuccessfully": "Slack vinculat amb exit",
+            "notSuccessfully": "No s'ha pogut vincular Slack con su cuenta.",
+            "unsyncActionModalTitle": "¿Estas seguro de que quieres desvincular tu canal de slack?",
+            "unsyncActionModalBody": "Ya no recibirás notificaciones de los Fishbowls que organices."
         }
     }
 }

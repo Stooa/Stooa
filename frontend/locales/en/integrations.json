@@ -3,6 +3,7 @@
     "subtitle": "You can link your Stooa account with other applications and services to log in faster, access links more conveniently, and enjoy many other benefits.",
     "sync": "Connect",
     "unsync": "Disconnect",
+    "lastSync": "Last Sync: ",
     "integrationItems": {
         "hubspot": {
             "title": "Hubspot",
@@ -13,7 +14,6 @@
             "syncActionModalBody": "All registered participants who have attended a Fishbowl organized by you will be synchronized.",
             "unsyncActionModalTitle": "Are you sure you want to unlink your Hubspot account?",
             "unsyncActionModalBody": "You will still be able to view the contacts loaded in Hubspot, but they will not be updated.",
-            "lastSync": "Last Sync: ",
             "linkedSuccessfully": "Hubspot linked successfully",
             "contactsSyncedSuccessfully": "Contacts syncronization started successfully"
         },

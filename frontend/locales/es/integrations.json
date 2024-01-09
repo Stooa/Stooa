@@ -7,6 +7,8 @@
     "integrationItems": {
         "hubspot": {
             "title": "Hubspot",
+            "sync": "Vincular",
+            "unsync": "Desvincular",
             "syncAction": "Sincronizar contactos",
             "syncActionModalTitle": "¿Estas seguro de que quieres sincronizar todos los contactos?",
             "syncActionModalBody": "Se sincronizaran todos los participantes registrados que hayan asistido a un Fishbowl organizado por ti.",
@@ -16,8 +18,6 @@
             "contactsSyncedSuccessfully": "La sincronización de contactos ha comenzado con éxito"
         },
         "slack": {
-            "sync": "Vincular",
-            "unsync": "Desvincular",
             "title": "Slack",
             "linkedSuccessfully": "Slack vinculado con éxito",
             "notSuccessfully": "No se ha podido vincular Slack con su cuenta.",
