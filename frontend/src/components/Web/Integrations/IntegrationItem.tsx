@@ -76,7 +76,7 @@ export const IntegrationItem = ({
         <StyledSyncActions className={lastSyncDate ? 'spaced' : ''}>
           {lastSyncDate && (
             <span>
-              {t(`integrationItems.${integration}.lastSync`)} <br />
+              {t(`integrationItems.lastSync`)} <br />
               {formatLastSyncDateWithHour(lastSyncDate)}
             </span>
           )}

@@ -49,10 +49,12 @@ const FishbowlDataCard = ({ data, fromLanding, isModerator }: Props) => {
       )}
 
       <div className="date">
-        <p className="body-sm" data-testid="date-with-month">{`${
-          monthName.charAt(0).toUpperCase() + monthName.slice(1)
-        } ${day}, ${year}`}</p>
-        <p className="body-sm">{`${startTime} - ${endTime}`}</p>
+        <div>
+          <p className="body-sm" data-testid="date-with-month">{`${
+            monthName.charAt(0).toUpperCase() + monthName.slice(1)
+          } ${day}, ${year}`}</p>
+          <p className="body-sm">{`${startTime} - ${endTime}`}</p>
+        </div>
 
         {fromLanding && !isLessThan30Minutes && (
           <p className="body-sm">

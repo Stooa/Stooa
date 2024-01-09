@@ -23,6 +23,7 @@ import { scrolllbarStyle } from '@/ui/Scrollbar';
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
   display: flex;
+  gap: ${space()};
   border-radius: 4px;
   flex-direction: column;
   align-items: flex-start;
@@ -32,10 +33,6 @@ const StyledFishbowlDataCard = styled.div`
   overflow: hidden;
   width: 100%;
   text-align: left;
-
-  * + *:not(:last-child) {
-    margin-bottom: ${space()};
-  }
 
   &::before {
     content: '';
@@ -48,16 +45,19 @@ const StyledFishbowlDataCard = styled.div`
   }
 
   .card-subtitle {
-    margin-bottom: ${space(3)};
+    margin-bottom: ${space()};
   }
 
   h2 {
     color: ${COLOR_NEUTRO_800};
   }
 
-  & div.date {
+  & .date {
+    display: flex;
+    flex-direction: column;
+    gap: ${space()};
     color: ${COLOR_NEUTRO_800};
-    margin-bottom: ${space(3)};
+    padding-bottom: ${space(2)};
     text-align: left;
   }
 
