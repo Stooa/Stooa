@@ -459,9 +459,15 @@ export const useConference = () => {
     getConference().setLocalParticipantProperty('requestingTranscription', true);
   };
 
-  const stopTranscriptionEvent = () => {
+  /**
+   *
+   * @param {boolean} hasSummary True if the transcription has AI summary
+   */
+  const stopTranscriptionEvent = hasSummary => {
     console.log('[STOOA] Stop transcription');
-    getConference().setLocalParticipantProperty('requestingTranscription', false);
+    if (!hasSummary) {
+      getConference().setLocalParticipantProperty('requestingTranscription', false);
+    }
   };
 
   const setConferenceTranscriptionLanguage = language => {

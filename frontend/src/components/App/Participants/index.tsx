@@ -150,7 +150,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     }
 
     if (checkbox && !checkbox.checked) {
-      stopTranscriptionEvent();
+      stopTranscriptionEvent(!!data.hasSummary);
       setIsTranscriptionEnabled(false);
       return;
     }
