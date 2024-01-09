@@ -74,7 +74,7 @@
     "@runroom/design-tokens": "2.2.0",
     "@svgr/webpack": "6.5.1",
     "@testing-library/cypress": "10.0.1",
-    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
     "@types/jest": "27.4.1",
     "@types/js-cookie": "3.0.6",
