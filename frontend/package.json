@@ -34,7 +34,7 @@
     "@types/node": "18.11.19",
     "@types/styled-components": "5.1.34",
     "@types/yup": "0.29.14",
-    "axios": "1.6.0",
+    "axios": "1.6.5",
     "chart.js": "^4.2.1",
     "countries-and-timezones": "3.3.0",
     "file-loader": "6.2.0",
