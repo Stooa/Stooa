@@ -18,9 +18,13 @@ use ApiPlatform\State\ProcessorInterface;
 use App\WorldCafe\Entity\WorldCafe;
 use App\WorldCafe\Service\WorldCafeMailService;
 
+/**
+ * @implements ProcessorInterface<WorldCafe>
+ */
 final class WorldCafeProcessor implements ProcessorInterface
 {
     public function __construct(
+        /** @var ProcessorInterface<WorldCafe> */
         private readonly ProcessorInterface $decorated,
         private readonly WorldCafeMailService $mailerService
     ) {
