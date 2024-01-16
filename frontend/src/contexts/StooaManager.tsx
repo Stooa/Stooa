@@ -29,7 +29,7 @@ import {
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
 import { IConferenceStatus } from '@/jitsi/Status';
-import { INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
+import { GET_FISHBOWL, INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
 

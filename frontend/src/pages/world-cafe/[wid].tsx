@@ -10,7 +10,6 @@
 import dynamic from 'next/dynamic';
 
 import WorldCafeLanding from '@/components/Web/WorldCafeLanding';
-// import WorldCafeApp from '@/layouts/WorldCafeApp/WorldCafeApp';
 import useWorldCafeLoader from '@/hooks/useWorldCafeLoader';
 import { useRouter } from 'next/router';
 import Loader from '@/components/Web/Loader';

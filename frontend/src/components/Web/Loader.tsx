@@ -13,7 +13,7 @@ import LoadingIcon from '@/components/Common/LoadingIcon';
 
 const Loading = () => {
   return (
-    <Layout>
+    <Layout center>
       <LoadingIcon />
     </Layout>
   );

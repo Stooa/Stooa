@@ -15,13 +15,13 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
-import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
 import { IS_WORLD_CAFE_CREATOR } from '@/graphql/WorldCafe';
 import useLoadJitsi from '@/hooks/useLoadJitsi';
 import { useWorldCafeStore } from '@/store/useWorldCafeStore';
+import OpenGraphDefault from '@/components/Common/OpenGraphDefault';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -37,9 +37,9 @@ interface Props {
 const WorldCafeApp = ({
   scriptsLoaded,
   scriptsLoadedSuccessfully,
-  title,
   wid,
-  children
+  children,
+  title
 }: Props) => {
   const { loading, data: IsCreatorOfWorldCafe } = useQuery(IS_WORLD_CAFE_CREATOR, {
     variables: { slug: wid }
@@ -60,9 +60,9 @@ const WorldCafeApp = ({
 
   return (
     <>
+      <OpenGraphDefault seoTitle={title} />
       <ModalsProvider isModerator={isModerator}>
         <DevicesProvider>
-          <Seo title={title} />
           <Container>{children}</Container>
         </DevicesProvider>
       </ModalsProvider>

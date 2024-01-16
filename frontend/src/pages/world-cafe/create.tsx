@@ -15,7 +15,7 @@ const WorldcafeCreate = () => {
   const { t } = useTranslation('form');
 
   return (
-    <Layout verticalAlign="flex-start" horizontalAlign="center" title={t('worldCafe.pageTitle')}>
+    <Layout title={t('worldCafe.pageTitle')}>
       <h1 className="title-md form-title">{t('worldCafe.pageTitle')}</h1>
       <WorldCafeForm />
     </Layout>
