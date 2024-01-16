@@ -15,7 +15,6 @@ namespace App\WorldCafe\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
-use App\Fishbowl\Entity\Fishbowl;
 use App\WorldCafe\Entity\WorldCafe;
 use App\WorldCafe\Service\WorldCafeMailService;
 
@@ -31,7 +30,7 @@ final class WorldCafeProcessor implements ProcessorInterface
      * @param array<mixed> $context
      * @param array<mixed> $uriVariables
      *
-     * @return Fishbowl
+     * @return WorldCafe
      */
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = [])
     {

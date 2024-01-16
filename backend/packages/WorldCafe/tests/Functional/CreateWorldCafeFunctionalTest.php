@@ -103,7 +103,7 @@ class CreateWorldCafeFunctionalTest extends ApiTestCase
                         'name' => $worldCafe->getName(),
                         'description' => $worldCafe->getDescription(),
                         'locale' => $worldCafe->getLocale(),
-                        'startDateTime' => '2023-12-25T18:48:58.091Z',
+                        'startDateTime' => '2038-12-25T18:48:58.091Z',
                         'timezone' => $worldCafe->getTimezone(),
                         'hasExtraRoundTime' => $worldCafe->getHasExtraRoundTime(),
                         'roundMinutes' => $worldCafe->getRoundMinutes(),
