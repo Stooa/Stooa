@@ -172,7 +172,7 @@ abstract class Event implements EventInterface, \Stringable
         MAssert::notNull($this->startDateTime);
         MAssert::notNull($this->timezone);
 
-        return new \DateTimeImmutable($this->startDateTime->format('Y-m-d H:i:s'), new \DateTimeZone($this->timezone));
+        return new \DateTimeImmutable($this->startDateTime->format('Y-m-d H:i:s'), new \DateTimeZone($this->timezone ?: 'UTC'));
     }
 
     public function getFinishDateTime(): ?\DateTimeInterface
