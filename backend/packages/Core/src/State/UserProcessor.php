@@ -19,9 +19,15 @@ use App\Core\Entity\User;
 use App\Core\Security\PasswordEncoderService;
 use App\Core\Service\MailerService;
 
+/**
+ * @implements ProcessorInterface<User>
+ */
 final class UserProcessor implements ProcessorInterface
 {
     public function __construct(
+        /**
+         * @var ProcessorInterface<User>
+         */
         private readonly ProcessorInterface $decorated,
         private readonly PasswordEncoderService $passwordEncoder,
         private readonly MailerService $mailerService

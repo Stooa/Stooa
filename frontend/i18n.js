@@ -35,7 +35,9 @@ module.exports = {
     '/fishbowl/detail/[fid]': ['fishbowl', 'form'],
     '/fishbowl/thankyou/[fid]': ['fishbowl', 'form', 'home'],
     '/world-cafe/create': ['form'],
-    '/world-cafe/[wid]': ['fishbowl', 'form', 'world-cafe']
+    '/world-cafe/[wid]': ['fishbowl', 'form', 'world-cafe'],
+    '/blog': ['blog', 'home'],
+    '/blog/[slug]': ['blog', 'home']
   },
   loadLocaleFrom: async (lang, ns) => {
     const locales = await require(`./locales/${lang}/${ns}.json`);

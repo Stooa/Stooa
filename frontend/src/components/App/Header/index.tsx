@@ -35,10 +35,9 @@ interface Props {
   isPrefishbowl?: boolean;
 }
 
-const Header: React.FC<Props> = ({ isPrefishbowl }) => {
+const Header = ({ isPrefishbowl }: Props) => {
   const { data, isModerator, conferenceStatus, conferenceReady, isRecording } = useStooa();
   const { isTranscriptionEnabled } = useTranscriptions();
-
   const router = useRouter();
   const { fid } = router.query;
   const { t } = useTranslation('fishbowl');

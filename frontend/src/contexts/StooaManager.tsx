@@ -8,7 +8,7 @@
  */
 
 import { useEffect, useState, useRef, useMemo } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -49,11 +49,11 @@ import useScreenShare from '@/hooks/useScreenShare';
 const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
 const StooaProvider = ({
-  data,
+  fishbowl,
   isModerator,
   children
 }: {
-  data: Fishbowl;
+  fishbowl: Fishbowl;
   isModerator: boolean;
   children: JSX.Element[] | JSX.Element;
 }) => {
@@ -82,7 +82,7 @@ const StooaProvider = ({
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
 
   const [participantsActive, setParticipantsActive] = useState(() => {
-    if (isModerator && data.isFishbowlNow) {
+    if (isModerator && fishbowl.isFishbowlNow) {
       return true;
     }
     return false;
@@ -90,22 +90,27 @@ const StooaProvider = ({
 
   const apiInterval = useRef<number>();
 
+  const { data: fishbowlQuery } = useQuery(GET_FISHBOWL, {
+    variables: { slug: fid },
+    skip: !isModerator
+  });
+
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
-  const { timeStatus } = useTimeStatus(data, conferenceStatus);
+  const { timeStatus } = useTimeStatus(fishbowlQuery, conferenceStatus);
   const { isSharing, share, stopShare } = useScreenShare(isModerator);
 
   const { isRecording, setIsRecording, startRecording, stopRecording } = useVideoRecorder(
-    data.name || 'Fishbowl',
+    fishbowlQuery.name || 'Fishbowl',
     t('fishbowl:recording.downloading'),
     t('fishbowl:recording.closeToGiga'),
-    data.slug
+    fishbowlQuery.slug
   );
 
   const startFishbowl = () => {
     const slug = { variables: { input: { slug: fid } } };
-    if (data.hasIntroduction) {
+    if (fishbowl.hasIntroduction) {
       try {
         introduceFishbowl(slug);
       } catch (error) {
@@ -121,11 +126,7 @@ const StooaProvider = ({
   };
 
   const getPassword = (): string => {
-    if (isModerator) {
-      return data.plainPassword as string;
-    } else {
-      return fishbowlPassword ?? '';
-    }
+    return fishbowlPassword ?? '';
   };
 
   useEventListener(USER_KICKED, async ({ detail: { reason, participant } }) => {
@@ -149,21 +150,21 @@ const StooaProvider = ({
   });
 
   useEventListener(CONFERENCE_IS_LOCKABLE, () => {
-    if (data.isPrivate && data.plainPassword && isModerator) {
-      lockConference(data.plainPassword);
+    if (fishbowl.isPrivate && fishbowl.plainPassword && isModerator) {
+      lockConference(fishbowl.plainPassword);
     }
   });
 
   useEventListener(CONNECTION_ESTABLISHED_FINISHED, () => {
-    if (data.isPrivate) {
-      joinPrivateConference(isModerator ? data.plainPassword : fishbowlPassword);
+    if (fishbowl.isPrivate) {
+      joinPrivateConference(isModerator ? fishbowl.plainPassword : fishbowlPassword);
     } else {
       joinConference();
     }
   });
 
   useEventListener(CONFERENCE_PASSWORD_REQUIRED, () => {
-    if (data.isPrivate && !fishbowlPassword && !data.plainPassword) {
+    if (fishbowl.isPrivate && !fishbowlPassword && !fishbowl.plainPassword) {
       toast(t('form:validation.unknownErrorInside'), {
         icon: '⚠️',
         toastId: 'error-inside',
@@ -184,7 +185,7 @@ const StooaProvider = ({
   useEventListener(CONFERENCE_START, ({ detail: { myUserId } }) => {
     setMyUserId(myUserId);
     setConferenceReady(true);
-    setConferenceTranscriptionLanguage(LOCALES[data.locale]);
+    setConferenceTranscriptionLanguage(LOCALES[fishbowl.locale]);
 
     if (!isModerator) return;
 
@@ -226,13 +227,20 @@ const StooaProvider = ({
   };
 
   const isConferenceIntroducing = (): boolean => {
-    if (data.hasIntroduction) {
+    if (fishbowl.hasIntroduction) {
       return conferenceStatus === IConferenceStatus.INTRODUCTION;
     }
     return false;
   };
 
   const onIntroduction = conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator;
+
+  useEffect(() => {
+    if (fishbowlQuery) {
+      const { bySlugQueryFishbowl: fishbowlData } = fishbowlQuery;
+      setFishbowlPassword(fishbowlData.plainPassword);
+    }
+  }, [fishbowlQuery]);
 
   useEffect(() => {
     if (isModerator && isConferenceIntroducing()) {
@@ -290,7 +298,7 @@ const StooaProvider = ({
       value={{
         conferenceReady,
         conferenceStatus,
-        data,
+        data: fishbowl,
         isModerator,
         onIntroduction,
         timeStatus,

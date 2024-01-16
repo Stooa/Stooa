@@ -22,9 +22,14 @@ import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const FishbowlListWrapper = styled.div`
   height: 100%;
+  padding-top: ${space(5)};
   padding-bottom: ${space(3)};
   width: 100%;
   max-width: ${BREAKPOINTS.desktopLarge}px;
+
+  ${media.min('tablet')`
+    padding-inline: ${space(3)};
+  `}
 `;
 
 const FishbowlListContent = styled.div`

@@ -21,7 +21,7 @@ interface Props {
   data: Fishbowl;
 }
 
-const FishbowlInfo: React.FC<Props> = ({ data }) => {
+const FishbowlInfo = ({ data }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
   const { getPassword } = useStooa();

@@ -68,7 +68,7 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
             <Icon variant="lock" />
           </span>
         )}
-        <h4>{name}</h4>
+        <h4 data-testid="fishbowl-title">{name}</h4>
       </CardTitle>
 
       <div data-testid="card-info" className="card__info">

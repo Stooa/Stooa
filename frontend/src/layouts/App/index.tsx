@@ -19,7 +19,6 @@ import Error from '@/components/Common/Error';
 import Loader from '@/components/Web/Loader';
 import { Container } from '@/layouts/App/styles';
 import { DevicesProvider } from '@/contexts/DevicesContext';
-import Seo from '@/components/Web/Seo';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
@@ -29,10 +28,9 @@ import useLoadJitsi from '@/hooks/useLoadJitsi';
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
 interface Props {
-  data: Fishbowl;
+  fishbowl: Fishbowl;
   scriptsLoaded: boolean;
   scriptsLoadedSuccessfully: boolean;
-  title: string;
   prejoin: boolean;
   className?: string;
   children: React.ReactNode;
@@ -40,15 +38,14 @@ interface Props {
 
 const Layout = ({
   className,
-  data,
+  fishbowl,
   scriptsLoaded,
   scriptsLoadedSuccessfully,
-  title,
   children
 }: Props) => {
   const router = useRouter();
   const { fid } = router.query;
-  const { loading, data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
+  const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
     variables: { slug: fid }
   });
   const { loadedJitsi } = useLoadJitsi(scriptsLoaded);
@@ -57,15 +54,13 @@ const Layout = ({
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
     return <Error message={'Could not create fishbowl event'} />;
 
-  if (loading) return <Loader />;
   const isModerator = !!fbCreatorData && !!fbCreatorData.isCreatorOfFishbowl;
 
   return (
-    <StooaProvider data={data} isModerator={isModerator}>
+    <StooaProvider fishbowl={fishbowl} isModerator={isModerator}>
       <TranscriptionsProvider>
         <ModalsProvider isModerator={isModerator}>
           <DevicesProvider>
-            <Seo title={title} />
             <Container className={className}>{children}</Container>
           </DevicesProvider>
         </ModalsProvider>

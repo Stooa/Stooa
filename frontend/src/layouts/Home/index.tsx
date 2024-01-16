@@ -9,20 +9,19 @@
 
 import React from 'react';
 
-import Seo from '@/components/Web/Seo';
 import Footer from '@/components/Web/Footer';
 import Header from '@/components/Web/Header';
-import { Main, Container, Header as HeaderStyled } from '@/layouts/Home/styles';
+import { Main, Container } from '@/layouts/Home/styles';
+import { Header as HeaderStyled } from '@/layouts/Default/styles';
 
 interface Props {
   title?: string;
   children: React.ReactNode;
 }
 
-const Page = ({ children, title = '' }: Props) => {
+const Page = ({ children }: Props) => {
   return (
     <>
-      <Seo title={title} />
       <Container>
         <HeaderStyled>
           <Header />

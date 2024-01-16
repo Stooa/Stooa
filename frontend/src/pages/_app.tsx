@@ -9,7 +9,7 @@
 
 import { useEffect } from 'react';
 import Router from 'next/router';
-import localFont from '@next/font/local';
+import localFont from 'next/font/local';
 
 import 'react-datepicker/dist/react-datepicker.min.css';
 import 'slick-carousel/slick/slick.css';
@@ -23,6 +23,7 @@ import { AuthProvider, ProtectRoute } from '@/contexts/AuthContext';
 import { pushPageViewDataLayer } from '@/lib/analytics';
 import DataProvider from '@/lib/apollo-client';
 import GlobalStyles from '@/ui/Globals';
+import FavIconsHead from '@/components/Common/FavIconsHead';
 
 const geomanist = localFont({
   src: [
@@ -77,7 +78,12 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <DataProvider>
       <GlobalStyles />
-      <OpenGraphDefault />
+      <FavIconsHead />
+      <OpenGraphDefault
+        ogImage={pageProps.ogImage}
+        seoTitle={pageProps.seoTitle}
+        seoDescription={pageProps.seoDescription}
+      />
       <StateProvider>
         <AuthProvider>
           <ProtectRoute>

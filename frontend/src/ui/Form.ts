@@ -359,6 +359,10 @@ const FormError = styled(Alert)`
   margin-bottom: ${space(2)};
 `;
 
+const StyledCreateFishbowlWrapper = styled.div`
+  padding-top: ${space(4)};
+`;
+
 const TextDivider = styled.div`
   display: flex;
   align-items: center;
@@ -470,7 +474,8 @@ export {
   InputStyled,
   TextDivider,
   SwitchStyled,
-  SwitchLabel
+  SwitchLabel,
+  StyledCreateFishbowlWrapper
 };
 
 export default StandardForm;

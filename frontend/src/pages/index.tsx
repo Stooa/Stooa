@@ -239,7 +239,7 @@ const Home = () => {
           <div className="youtube-wrapper">
             <Image
               className="red-blob"
-              src="/img/web/red-blob.png"
+              src="/img/web/blobs/red-blob.png"
               alt="Red blob floating around"
               width={457}
               height={408}

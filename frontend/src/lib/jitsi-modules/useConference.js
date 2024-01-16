@@ -372,7 +372,7 @@ export const useConference = () => {
 
     const auth = await getAuthToken(true, rawRoomName);
 
-    console.log('[Stooa] Auth Token', auth);
+    console.log('[STOOA] Auth Token', auth);
 
     if (isUserModerator) {
       makeModerator();

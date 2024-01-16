@@ -31,8 +31,7 @@ import {
   COLOR_RED_600,
   COLOR_YELLOW_100,
   COLOR_YELLOW_500,
-  FONT_BASE_SIZE,
-  FONT_PRIMARY
+  FONT_BASE_SIZE
 } from '@/ui/settings';
 import { getIconCSS } from '@/ui/Icons';
 
@@ -90,15 +89,16 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: ${FONT_BASE_SIZE}px;
+    scroll-behavior: smooth;
   }
 
   body {
-    /* font-family: ${FONT_PRIMARY}; */
     line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
   }
 
   ul:not([class]),

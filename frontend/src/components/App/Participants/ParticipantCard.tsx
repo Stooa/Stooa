@@ -14,7 +14,7 @@ import { useUserAuth } from '@/user/auth/useUserAuth';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import Linkedin from '@/ui/svg/share-linkedin.svg';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import { Participant } from '@/types/participant';
 import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';

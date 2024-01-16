@@ -37,6 +37,7 @@ const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
 
   const fbRoute = `${ROUTE_FISHBOWL}/${data.slug}`;
 
+  // TODO: CHANGE TO 1 TIMEOUT
   const evaluateFishbowlReady = () => {
     const isReady = isTimeLessThanNMinutes(data.startDateTimeTz, MINUTES_TO_START_FISHBOWL);
 

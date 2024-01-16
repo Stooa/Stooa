@@ -12,7 +12,7 @@ import useTranslation from 'next-translate/useTranslation';
 import PasswordForm from '@/components/Web/Forms/change-password';
 import Layout from '@/layouts/Default';
 
-const EditProfile = () => {
+const ChangePassword = () => {
   const { t } = useTranslation('change-password');
 
   return (
@@ -23,4 +23,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default ChangePassword;

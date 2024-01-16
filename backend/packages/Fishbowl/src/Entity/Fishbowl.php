@@ -219,6 +219,64 @@ class Fishbowl extends Event
         return (string) $this->getName();
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description = null): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStartDateTime(): ?\DateTimeInterface
+    {
+        return $this->startDateTime;
+    }
+
+    public function setStartDateTime(\DateTimeInterface $startDateTime): self
+    {
+        $this->startDateTime = $startDateTime;
+
+        return $this;
+    }
+
+    public function getTimezone(): ?string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(string $timezone): self
+    {
+        $this->timezone = $timezone;
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /** This is needed to add the timezone information to the `startDateTime` property. */
+    #[Groups(['fishbowl:read'])]
+    public function getStartDateTimeTz(): \DateTimeImmutable
+    {
+        MAssert::notNull($this->startDateTime);
+        MAssert::notNull($this->timezone);
+
+        return new \DateTimeImmutable($this->startDateTime->format('Y-m-d H:i:s'), new \DateTimeZone($this->timezone ?: 'UTC'));
+    }
+
     /** This is needed to calculate the end time with the `timezone` information. */
     #[Groups(['fishbowl:read'])]
     public function getEndDateTimeTz(): \DateTimeImmutable

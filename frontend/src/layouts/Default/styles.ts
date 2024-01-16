@@ -10,22 +10,23 @@
 import styled, { css } from 'styled-components';
 
 import { space, media } from '@/ui/helpers';
-import { COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
+import { COLOR_NEUTRO_100, COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
 
-const flexColumn = css`
+const flexCenter = css`
+  align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ blogLayout?: boolean }>`
   background-color: ${COLOR_NEUTRO_200};
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: ${space(6)} 1fr;
+  grid-template-rows: ${({ blogLayout }) => (blogLayout ? '1fr' : `${space(9)} 1fr`)};
   gap: 0;
   grid-template-areas: 'Header' 'Main';
-  min-height: calc(100vh - ${space(6)});
-  padding: ${space(3)};
+  min-height: calc(100vh - ${space(9)});
   position: relative;
   transition: grid-template-columns 0.25s ease-in-out;
 
@@ -38,8 +39,6 @@ const Container = styled.div`
   `}
 
   ${media.min('tablet')`
-    padding: ${space(3)} ${space(6)};
-
     &.decorated { padding-bottom: ${space(12)}; }
   `}
 `;
@@ -56,37 +55,51 @@ const Decoration = styled.div`
   }
 `;
 
-const Header = styled.header`
+const Header = styled.header<{ blogLayout?: boolean; whiteLogo?: boolean }>`
   align-items: center;
-  color: ${COLOR_NEUTRO_700};
+  color: ${({ whiteLogo }) => (whiteLogo ? COLOR_NEUTRO_100 : COLOR_NEUTRO_700)};
   grid-area: Header;
   display: flex;
   justify-content: space-between;
+  padding: ${space(1)} ${space(3)} 0;
+  gap: ${space(2)};
+
+  ${media.min('tablet')`
+    padding: ${space(3)} ${space(6)} 0;
+  `}
+
+  ${({ blogLayout }) =>
+    blogLayout &&
+    css`
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      padding-top: 1.25rem;
+    `}
 `;
 
 const Main = styled.main<{
-  horizontalAlign?: 'flex-start' | 'center' | 'flex-end';
-  verticalAlign?: 'flex-start' | 'center' | 'flex-end';
+  center?: boolean;
+  positionDefault?: boolean;
+  blogLayout?: boolean;
+  blogPost?: boolean;
 }>`
   color: ${COLOR_NEUTRO_700};
   grid-area: Main;
-  padding: ${space(2)} 0;
-  position: relative;
+  position: ${props => (props.positionDefault ? 'static' : 'relative')};
   text-align: center;
   z-index: 1;
 
-  ${props => (props.horizontalAlign || props.verticalAlign ? flexColumn : '')}
+  padding-bottom: ${({ blogLayout }) => (blogLayout ? '0' : space(12))};
+  padding-top: ${({ blogPost }) => (blogPost ? space(12) : '0')};
 
-  ${props =>
-    props.horizontalAlign &&
-    css`
-      align-items: ${props.horizontalAlign};
-    `}
-  ${props =>
-    props.verticalAlign &&
-    css`
-      justify-content: ${props.verticalAlign};
-    `}
+  ${props => (props.center ? flexCenter : '')}
+
+  ${media.max('tablet')`
+    padding-inline: ${({ blogLayout }) => (blogLayout ? 'initial' : space(3))};
+  `}
 `;
 
 export { Container, Decoration, Header, Main };

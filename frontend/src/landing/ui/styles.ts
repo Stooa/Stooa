@@ -48,7 +48,7 @@ const Billboard = styled.div`
 
   .billboard-text {
     width: 100%;
-    padding: 0 ${space(4)};
+    padding: 0 ${space(3)};
 
     & p + p {
       margin-top: ${space(2)};
