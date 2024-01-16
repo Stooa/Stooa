@@ -98,14 +98,14 @@ const StooaProvider = ({
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
-  const { timeStatus } = useTimeStatus(fishbowlQuery, conferenceStatus);
+  const { timeStatus } = useTimeStatus(fishbowl, conferenceStatus);
   const { isSharing, share, stopShare } = useScreenShare(isModerator);
 
   const { isRecording, setIsRecording, startRecording, stopRecording } = useVideoRecorder(
-    fishbowlQuery.name || 'Fishbowl',
+    fishbowl.name || 'Fishbowl',
     t('fishbowl:recording.downloading'),
     t('fishbowl:recording.closeToGiga'),
-    fishbowlQuery.slug
+    fishbowl.slug
   );
 
   const startFishbowl = () => {
