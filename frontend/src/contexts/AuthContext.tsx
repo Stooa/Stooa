@@ -224,7 +224,7 @@ const ProtectRoute = ({ children }: ProtectedRouteProps) => {
 
   if (loading || protectedRoutes) {
     return (
-      <Layout>
+      <Layout center>
         <LoadingIcon />
       </Layout>
     );
