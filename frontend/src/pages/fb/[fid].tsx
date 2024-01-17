@@ -91,7 +91,7 @@ const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
       )}
     </Layout>
   ) : (
-    <LayoutWeb>
+    <LayoutWeb center>
       <FishbowlLanding data={fishbowl} />
       <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
     </LayoutWeb>

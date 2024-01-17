@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { GetStaticProps } from 'next';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -314,16 +313,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/**
- * Workaround for:
- * [next-translate] In Next 10.x.x there is an issue related to i18n and getInitialProps.
- * We recommend to replace getInitialProps to getServerSideProps on /index.tsx.
- *
- * https://github.com/vercel/next.js/discussions/18396
- */
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {}
-  };
-};

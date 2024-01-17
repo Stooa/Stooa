@@ -12,7 +12,7 @@ import styled, { css } from 'styled-components';
 import { space, media } from '@/ui/helpers';
 import { COLOR_NEUTRO_100, COLOR_NEUTRO_200, COLOR_NEUTRO_700 } from '@/ui/settings';
 
-const flexCenter = css`
+export const flexCenter = css`
   display: flex;
   align-items: center;
   flex-direction: column;

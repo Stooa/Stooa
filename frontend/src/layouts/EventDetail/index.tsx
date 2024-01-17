@@ -22,16 +22,17 @@ import {
 interface Props {
   navigation?: boolean;
   children: React.ReactNode;
+  center?: boolean;
 }
 
-const Page = ({ children, navigation = true }: Props) => {
+const Page = ({ children, navigation = true, center }: Props) => {
   return (
     <>
       <Container>
         <HeaderStyled>
           <Header navigation={navigation} />
         </HeaderStyled>
-        <Main>{children}</Main>
+        <Main center={center}>{children}</Main>
         <DecorationStyled>
           <Decoration />
         </DecorationStyled>
