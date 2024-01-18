@@ -79,6 +79,11 @@ const StyledFishbowlDataCard = styled.div`
   }
 `;
 
+const StyledFishbowlDataCardScroll = styled.div`
+  ${scrolllbarStyle};
+  overflow-y: scroll;
+`;
+
 const StyledFishbowlDataCardHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -90,4 +95,4 @@ const StyledFishbowlDataCardHeader = styled.div`
   margin-bottom: ${space(2)};
 `;
 
-export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader };
+export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader, StyledFishbowlDataCardScroll };
