@@ -17,24 +17,21 @@ import {
   COLOR_NEUTRO_800
 } from '@/ui/settings';
 import { TITLE_SM } from '@/ui/Titles';
-import { BODY_LG, mediumWeight } from '@/ui/Texts';
+import { BODY_LG } from '@/ui/Texts';
 import { scrolllbarStyle } from '@/ui/Scrollbar';
 
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
   display: flex;
-  border-radius: 4px;
   flex-direction: column;
   align-items: flex-start;
+  gap: ${space(1)};
+  border-radius: 4px;
+  margin-bottom: ${space(2)};
   padding: ${space(2)} ${space(2)} ${space(2)} ${space(3)};
   position: relative;
   overflow: hidden;
   width: 100%;
-  max-height: 420px;
-
-  & + * {
-    margin-top: ${space(2)};
-  }
 
   &::before {
     content: '';
@@ -47,76 +44,39 @@ const StyledFishbowlDataCard = styled.div`
   }
 
   .card-subtitle {
-    margin-bottom: ${space(3)};
+    padding-bottom: ${space(2)};
   }
 
   h2 {
     color: ${COLOR_NEUTRO_800};
-
-    & + :not(.description) {
-      /* margin-top: ${space(4)}; */
-    }
-  }
-
-  .question {
-    color: ${COLOR_NEUTRO_700};
-
-    &:not(:last-child) {
-      margin-bottom: ${space(4)};
-    }
-
-    & h3 {
-      ${mediumWeight};
-    }
-
-    & + * {
-      margin-top: ${space()};
-    }
   }
 
   & div.date {
     color: ${COLOR_NEUTRO_800};
-    margin-bottom: ${space(3)};
+    padding-bottom: ${space(2)};
   }
 
   & .description {
     color: ${COLOR_NEUTRO_700};
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 0;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    margin-bottom: ${space()};
-
-    &.closed {
-      max-height: 4.9em;
-      -webkit-line-clamp: 3;
-    }
-
-    & + *:not(.see-more) {
-      margin-top: ${space(4)};
-    }
+    overflow-y: scroll;
+    max-height: 5.4em;
+    word-break: break-word;
 
     ${scrolllbarStyle}
-  }
 
-  & .see-more {
-    margin-bottom: ${space(4)};
+    ${media.min('tablet')`
+        max-height: 9em;
+      `}
   }
 
   &.prefishbowl {
     & h2 {
-      ${TITLE_SM};
+      ${TITLE_SM}
       ${media.min('tablet')`
         ${BODY_LG}
       `}
     }
   }
-`;
-
-const StyledFishbowlDataCardScroll = styled.div`
-  ${scrolllbarStyle};
-  overflow-y: scroll;
 `;
 
 const StyledFishbowlDataCardHeader = styled.div`
@@ -130,4 +90,4 @@ const StyledFishbowlDataCardHeader = styled.div`
   margin-bottom: ${space(2)};
 `;
 
-export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader, StyledFishbowlDataCardScroll };
+export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader };
