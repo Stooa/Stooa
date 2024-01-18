@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.8.10",
-    "@hookform/resolvers": "^2.9.11",
+    "@hookform/resolvers": "^3.0.0",
     "@types/node": "18.11.19",
     "@types/styled-components": "5.1.34",
     "@types/yup": "0.29.14",
