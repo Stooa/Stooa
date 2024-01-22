@@ -96,7 +96,7 @@ const Page = () => {
     );
   } else {
     return (
-      <LayoutWeb>
+      <LayoutWeb center>
         <WorldCafeLanding />
         <JoinEvent joinAsGuest={() => setJoinAsGuest(true)} />
       </LayoutWeb>
