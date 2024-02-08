@@ -69,7 +69,7 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "18.0.6",
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
-    "@faker-js/faker": "8.0.2",
+    "@faker-js/faker": "8.4.1",
     "@mswjs/http-middleware": "0.8.0",
     "@runroom/design-tokens": "2.2.0",
     "@svgr/webpack": "6.5.1",
