@@ -196,7 +196,7 @@
             "participants": "Participantes",
             "participants_one": "{{count}} Participante",
             "participants_other": "{{count}} Participantes",
-            "users_0": "Ningún usuario",
+            "users_zero": "Ningún usuario",
             "users_one": "{{count}} usuario",
             "users_other": "{{count}} usuarios",
             "details": "Detalles",

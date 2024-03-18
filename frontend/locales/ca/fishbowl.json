@@ -195,7 +195,7 @@
             "participants": "Participants",
             "participants_one": "{{count}} Participant",
             "participants_other": "{{count}} Participants",
-            "users_0": "Cap usuari",
+            "users_zero": "Cap usuari",
             "users_one": "{{count}} usuari",
             "users_other": "{{count}} usuaris",
             "satisfaction": "Satisfaction",
