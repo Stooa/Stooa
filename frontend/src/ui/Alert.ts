@@ -73,7 +73,7 @@ const Alert = styled.div<{ block?: boolean }>`
   color: ${COLOR_NEUTRO_700};
   display: ${({ block }) => (block ? 'block' : 'flex')};
   justify-content: center;
-  margin: ${space()} auto;
+  margin-inline: auto;
   overflow-x: auto;
   padding: ${space(1.125)} ${space(1.5)} ${space(0.875)};
   text-align: center;

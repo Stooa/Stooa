@@ -59,5 +59,31 @@
         "unknownErrorServer": "Ha ocurrido un error desconocido. Prueba de nuevo.",
         "unknownErrorInside": "¡Lo sentimos! Ocurrió un error durante el acceso. Inténtalo de nuevo.",
         "maxLength": "Este campo no puede tener más de {{length}} caracteres."
+    },
+    "worldCafe": {
+        "pageTitle": "Crea un World Café gratis",
+        "basics": "Básicos",
+        "questions": "Preguntas",
+        "question": "Pregunta",
+        "descriptionPlaceholder": "Si lo necesitas, añade descripción.",
+        "questionsTooltip": "Asegúrate de preparar suficientes preguntas para el número de personas que van a participar. Lo óptimo son salas de entre 4 y 6 participantes.",
+        "defaults": {
+            "title": "Reunión World Café - {{name}}",
+            "question": "Pregunta {{number}}"
+        },
+        "addQuestion": "Añadir pregunta",
+        "roundDuration": "Duración de rondas",
+        "roundTimeLabel": "Cada ronda dura",
+        "minutes": "minutos",
+        "add5MinutesLabel": "Añadir 5 minutos extra a la primera ronda",
+        "add5MinutesTooltip": "Te recomendamos añadir 5 minutos extra en la primera ronda, las personas suelen necesitar un poco más de tiempo para entrar en acción.",
+        "next":  "Añadir preguntas",
+        "submit": "Crear World Café",
+        "prejoin" : {
+            "title": "Únete al World Café",
+            "description": "Si quieres, puedes configurar el audio y el video antes de comenzar el World Café",
+            "join": "Unirse al World Café",
+            "cameraFallback": "Stooa <span>necesita permisos</span> para acceder a tu <span>cámara y micrófono</span> para que todos puedan escucharte y verte"
+        }
     }
 }

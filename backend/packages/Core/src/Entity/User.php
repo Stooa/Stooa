@@ -29,6 +29,7 @@ use App\Core\State\ChangePasswordProcessor;
 use App\Core\State\ChangePasswordProcessorLogged;
 use App\Core\State\UserProcessor;
 use App\Fishbowl\Entity\Fishbowl;
+use App\WorldCafe\Entity\WorldCafe;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -174,6 +175,10 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
     /** @var Collection<int, Fishbowl> */
     #[ORM\OneToMany(mappedBy: 'host', targetEntity: Fishbowl::class)]
     private Collection $fishbowls;
+
+    /** @var Collection<int, WorldCafe> */
+    #[ORM\OneToMany(mappedBy: 'host', targetEntity: WorldCafe::class)]
+    private Collection $worldCafes;
 
     /** @var Collection<int, Topic> */
     #[JoinTable(name: 'users_topics')]
@@ -433,6 +438,34 @@ class User implements UserInterface, \Stringable, PasswordAuthenticatedUserInter
             $this->fishbowls->removeElement($fishbowl);
             if ($fishbowl->getHost() === $this) {
                 $fishbowl->setHost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<int, WorldCafe> */
+    public function getWorldCafes(): Collection
+    {
+        return $this->worldCafes;
+    }
+
+    public function addWorldCafe(WorldCafe $worldCafe): self
+    {
+        if (!$this->worldCafes->contains($worldCafe)) {
+            $this->worldCafes[] = $worldCafe;
+            $worldCafe->setHost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorldCafe(WorldCafe $worldCafe): self
+    {
+        if ($this->worldCafes->contains($worldCafe)) {
+            $this->worldCafes->removeElement($worldCafe);
+            if ($worldCafe->getHost() === $this) {
+                $worldCafe->setHost(null);
             }
         }
 

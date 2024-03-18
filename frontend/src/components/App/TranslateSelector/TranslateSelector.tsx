@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { useStooa } from '@/contexts/StooaManager';
 import LanguageTranscriptionSelector from '../LanguageTranscriptionSelector';
 import { StyledSelectorWrapper } from './styles';
 import useTranslation from 'next-translate/useTranslation';
 import { useConference } from '@/jitsi/useConference';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 const TranslateSelector = () => {
   const {
@@ -20,7 +20,7 @@ const TranslateSelector = () => {
     isTranscriptionEnabled,
     translationLanguage,
     setTranslationLanguage
-  } = useStooa();
+  } = useTranscriptions();
 
   const { setConferenceTranslationLanguage } = useConference();
 

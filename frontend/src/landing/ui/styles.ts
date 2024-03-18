@@ -145,6 +145,10 @@ const Billboard = styled.div`
         margin-bottom: 0;
       }
     `}
+
+    & .world-cafe {
+      margin-left: 1rem;
+    }
   }
 
   #scroll-indicator {

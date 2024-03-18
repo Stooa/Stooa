@@ -16,9 +16,9 @@ import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
 
-import { JoinFishbowlStyled } from '@/components/Web/JoinFishbowl/styles';
 import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
+import { StyledJoinEventCta } from '@/ui/JoinEvent';
 
 interface Props {
   data: Fishbowl;
@@ -63,7 +63,7 @@ const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
 
   return (
     <>
-      <JoinFishbowlStyled>
+      <StyledJoinEventCta>
         {isAuthenticated && fishbowlReady && (
           <div className="join-buttons">
             <RedirectLink href={fbRoute} locale={data.locale} passHref>
@@ -92,7 +92,7 @@ const JoinFishbowl = ({ data, joinAsGuest }: Props) => {
             <p className="body-xs">{t('joinMemberNote')}</p>
           </>
         )}
-      </JoinFishbowlStyled>
+      </StyledJoinEventCta>
     </>
   );
 };

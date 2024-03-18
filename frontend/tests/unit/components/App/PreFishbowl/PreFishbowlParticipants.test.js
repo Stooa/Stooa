@@ -50,7 +50,9 @@ describe('Pre Fishbowl Participants component', () => {
     const { ping } = useUserAuth();
     useStateValue.mockReturnValue([{ isGuest: true }]);
 
-    const { getByTestId, getAllByTestId } = render(<PreFishbowlParticipants />);
+    const { getByTestId, getAllByTestId } = render(
+      <PreFishbowlParticipants isGuest={true} slug={'slug'} />
+    );
 
     const preFishbowlParticipants = getByTestId('prefishbowl-participants');
     expect(preFishbowlParticipants).toBeInTheDocument();
@@ -68,7 +70,7 @@ describe('Pre Fishbowl Participants component', () => {
 
   it('Should render component as host', () => {
     const { ping } = useUserAuth();
-    const { queryByTestId } = render(<PreFishbowlParticipants />);
+    const { queryByTestId } = render(<PreFishbowlParticipants isGuest={false} slug={'slug'} />);
 
     const preFishbowlRegister = queryByTestId('prefishbowl-register');
     expect(preFishbowlRegister).not.toBeInTheDocument();
@@ -83,7 +85,7 @@ describe('Pre Fishbowl Participants component', () => {
 
     getApiParticipantList.mockResolvedValue([newParticipant]);
 
-    const { getByTestId } = render(<PreFishbowlParticipants />);
+    const { getByTestId } = render(<PreFishbowlParticipants isGuest={false} slug={'slug'} />);
 
     const participantCard = await waitFor(() => getByTestId('mock-participant-card'));
 
@@ -95,7 +97,7 @@ describe('Pre Fishbowl Participants component', () => {
 
     getApiParticipantList.mockResolvedValue(Array(10).fill(newParticipant));
 
-    const { getAllByTestId } = render(<PreFishbowlParticipants />);
+    const { getAllByTestId } = render(<PreFishbowlParticipants isGuest={false} slug={'slug'} />);
 
     const participantCard = await waitFor(() => getAllByTestId('mock-participant-card'));
 

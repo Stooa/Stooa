@@ -23,7 +23,7 @@ const StyledTooltip = styled.div`
 
   position: absolute;
   z-index: 10;
-  text-align: center;
+  text-align: left;
 
   width: 100%;
   left: 50%;

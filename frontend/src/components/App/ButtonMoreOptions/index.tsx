@@ -33,15 +33,30 @@ import {
   Selector
 } from '@/components/App/ButtonMoreOptions/styles';
 import { useDevices } from '@/contexts/DevicesContext';
-import { useStooa } from '@/contexts/StooaManager';
+
 import { useModals } from '@/contexts/ModalsContext';
 import { useNavigatorType } from '@/hooks/useNavigatorType';
 import { supportsCaptureHandle } from '@/lib/helpers';
 import { useConference } from '@/jitsi/useConference';
 import { useUserAuth } from '@/user/auth/useUserAuth';
+import { StooaContextValues } from '@/types/contexts/stooa-context';
+import { TranscriptionsContextValues } from '@/types/contexts/transcriptions-context';
+
+type FishbowlContextPick = Pick<
+  StooaContextValues,
+  'isRecording' | 'feedbackAlert' | 'gaveFeedback' | 'setParticipantsActive'
+>;
+
+type TranscriptionsPick = Pick<
+  TranscriptionsContextValues,
+  'isTranscriptionEnabled' | 'setIsTranscriptionEnabled' | 'isTranscriberJoined'
+>;
 
 interface Props {
   unlabeled?: boolean;
+  isModerator: boolean;
+  fishbowlContext?: FishbowlContextPick;
+  trancriptionsContext?: TranscriptionsPick;
   selectorPosition?: 'top' | 'bottom';
   prejoin?: boolean;
 }
@@ -51,7 +66,7 @@ type ButtonHandle = {
 };
 
 const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
-  { unlabeled, selectorPosition, prejoin },
+  { unlabeled, selectorPosition, prejoin, isModerator, fishbowlContext, trancriptionsContext },
   ref
 ) => {
   const [showDevices, setShowDevices] = useState(false);
@@ -62,6 +77,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     setShowStartRecording,
     setShowFeedbackForm
   } = useModals();
+
   const { deviceType } = useNavigatorType();
 
   const {
@@ -75,16 +91,14 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     permissions
   } = useDevices();
 
+  const { isRecording, feedbackAlert, gaveFeedback, setParticipantsActive } = fishbowlContext || {};
+
   const {
-    isModerator,
-    isRecording,
-    feedbackAlert,
-    gaveFeedback,
     isTranscriptionEnabled,
     setIsTranscriptionEnabled,
-    setParticipantsActive,
+
     isTranscriberJoined
-  } = useStooa();
+  } = trancriptionsContext || {};
 
   const { stopTranscriptionEvent, startTranscriptionEvent, setConferenceTranscriptionLanguage } =
     useConference();
@@ -141,24 +155,26 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   };
 
   const handleTranscriptionToggle = () => {
-    const transcriptionCookie = getTranscriptionLanguageCookie();
+    if (setIsTranscriptionEnabled) {
+      const transcriptionCookie = getTranscriptionLanguageCookie();
 
-    if (!transcriptionCookie) {
-      setShowTranscriptionModal(true);
-      return;
-    }
-
-    if (isTranscriptionEnabled) {
-      stopTranscriptionEvent();
-      setIsTranscriptionEnabled(false);
-    } else {
-      startTranscriptionEvent();
-      setConferenceTranscriptionLanguage(transcriptionCookie);
-      if (deviceType === 'Desktop') {
-        setParticipantsActive(true);
+      if (!transcriptionCookie) {
+        setShowTranscriptionModal(true);
+        return;
       }
-      setIsTranscriptionEnabled(true);
-      setShowTranscriptionModal(false);
+
+      if (isTranscriptionEnabled) {
+        stopTranscriptionEvent();
+        setIsTranscriptionEnabled(false);
+      } else {
+        startTranscriptionEvent();
+        setConferenceTranscriptionLanguage(transcriptionCookie);
+        if (deviceType === 'Desktop' && setParticipantsActive) {
+          setParticipantsActive(true);
+        }
+        setIsTranscriptionEnabled(true);
+        setShowTranscriptionModal(false);
+      }
     }
   };
 

@@ -18,3 +18,6 @@ user:
     email: Ya existe un usuario con el email introducido.
     password: La contraseña actual no es correcta
     participant: Un participant deu tenir un objecte User o Guest
+
+world_cafe:
+    future: La fecha inicio del World Café ya ha pasado.

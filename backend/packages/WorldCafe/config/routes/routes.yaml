@@ -1,0 +1,21 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+app.world_cafe.status:
+    path: /world-cafe-status/{slug}
+    controller: App\WorldCafe\Controller\WorldCafeController::status
+    methods: [GET]
+
+app.world_cafe.participants:
+    path: /world-cafe-participants/{slug}
+    controller: App\WorldCafe\Controller\WorldCafeController::participants
+    methods: [GET]
+
+app.world_cafe.ping:
+    path: /world-cafe-ping/{slug}
+    controller: App\WorldCafe\Controller\WorldCafeController::ping
+    methods: [POST]

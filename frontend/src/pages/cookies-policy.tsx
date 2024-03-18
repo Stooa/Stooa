@@ -32,7 +32,7 @@ const CookiesPolicy = () => {
   }, []);
 
   return (
-    <Layout center={false} title={t('cookiesPolicy.title')}>
+    <Layout title={t('cookiesPolicy.title')}>
       <Wysiwyg>
         <h1 className="title-lg">{t('cookiesPolicy.title')}</h1>
         <div id="cookies-container" />

@@ -1,0 +1,60 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\WorldCafe\:
+        resource: ../src/
+        exclude:
+            - ../src/DependencyInjection/
+            - ../src/Entity/
+
+    App\WorldCafe\Stage\WorldCafeValidateStage:
+        decorates: api_platform.graphql.resolver.stage.validate
+
+    App\WorldCafe\State\WorldCafeProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'
+
+    App\WorldCafe\Service\WorldCafeMailService:
+        bind:
+            $from: '%env(MAILER_FROM)%'
+            $appUrl: '%env(APP_URL)%'
+
+    app_world_cafe_participant_service:
+        class: App\Core\Service\ParticipantService
+        bind:
+            $participantRepository: '@App\Core\Repository\WorldCafeParticipantRepository'
+
+    App\WorldCafe\Service\WorldCafeService:
+        bind:
+            $participantService: '@app_world_cafe_participant_service'
+
+    app_world_cafe_resolver_event_resolver:
+        class: App\Core\Resolver\EventResolver
+        bind:
+            $repository: '@App\WorldCafe\Repository\WorldCafeRepository'
+
+    app_world_cafe_creator_resolver_event_resolver:
+        class: App\Core\Resolver\EventCreatorResolver
+        bind:
+            $repository: '@App\WorldCafe\Repository\WorldCafeRepository'
+
+    #Admin
+    App\WorldCafe\Admin\WorldCafeAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\WorldCafe\Entity\WorldCafe, manager_type: orm, label: World Cafés }
+        calls:
+            - [ setWorldCafeService, [ '@App\WorldCafe\Service\WorldCafeService' ] ]
+            - [ setSlugService, [ '@App\Core\Service\SlugService' ] ]
+
+    App\WorldCafe\Admin\QuestionAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\WorldCafe\Entity\Question, manager_type: orm, label: Questions }

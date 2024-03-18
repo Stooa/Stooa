@@ -23,7 +23,7 @@ final class TopicFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'name' => $name = self::faker()->words(4, true),
+            'name' => self::faker()->words(4, true),
         ];
     }
 

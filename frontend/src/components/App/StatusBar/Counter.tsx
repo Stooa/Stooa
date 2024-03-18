@@ -15,10 +15,10 @@ import LoadingDots from '@/components/Common/LoadingDots';
 import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
-  prefishbowl?: boolean;
+  preEvent?: boolean;
 }
 
-export const Counter = ({ prefishbowl = false, ...props }: Props) => {
+export const Counter = ({ preEvent = false, ...props }: Props) => {
   const { data: fishbowlData, isModerator, conferenceStatus, timeStatus } = useStooa();
 
   const getDateByStatus = () => {
@@ -125,7 +125,7 @@ export const Counter = ({ prefishbowl = false, ...props }: Props) => {
         return t('timeLeft_other', { time: `${time}${minutesText}` });
       } else {
         return t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-          time: `${time}${minutesText}`
+          time: `${time} ${minutesText}`
         });
       }
     }
@@ -134,7 +134,7 @@ export const Counter = ({ prefishbowl = false, ...props }: Props) => {
   return (
     <span {...props} className="body-xs medium counter">
       {timeToDisplay}
-      {prefishbowl && <LoadingDots />}
+      {preEvent && <LoadingDots />}
     </span>
   );
 };

@@ -17,7 +17,7 @@ use App\Core\Entity\Participant;
 use App\Core\Factory\GuestFactory;
 use App\Core\Factory\ParticipantFactory;
 use App\Core\Factory\UserFactory;
-use App\Core\Repository\ParticipantRepository;
+use App\Core\Repository\FishbowlParticipantRepository;
 use App\Fishbowl\Factory\FishbowlFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -28,7 +28,7 @@ class ParticipantRepositoryTest extends KernelTestCase
     use Factories;
     use ResetDatabase;
 
-    private ParticipantRepository $participantRepository;
+    private FishbowlParticipantRepository $participantRepository;
 
     /**
      * @psalm-suppress InternalMethod
@@ -41,7 +41,7 @@ class ParticipantRepositoryTest extends KernelTestCase
     {
         parent::bootKernel();
 
-        $this->participantRepository = static::getContainer()->get(ParticipantRepository::class);
+        $this->participantRepository = static::getContainer()->get(FishbowlParticipantRepository::class);
     }
 
     /** @test */
@@ -55,7 +55,7 @@ class ParticipantRepositoryTest extends KernelTestCase
            'user' => $user,
         ]);
 
-        $participant = $this->participantRepository->findUserInFishbowl($fishbowl, $user);
+        $participant = $this->participantRepository->findUserInEvent($fishbowl, $user);
         $this->assertInstanceOf(Participant::class, $participant);
     }
 
@@ -70,7 +70,7 @@ class ParticipantRepositoryTest extends KernelTestCase
             'guest' => $guest,
         ]);
 
-        $participant = $this->participantRepository->findGuestInFishbowl($fishbowl, $guest);
+        $participant = $this->participantRepository->findGuestInEvent($fishbowl, $guest);
         $this->assertInstanceOf(Participant::class, $participant);
     }
 }

@@ -10,6 +10,16 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nextTranslate = require('next-translate');
 
+let redirectConfig = [];
+
+if (process.env.NEXT_PUBLIC_WORLD_CAFE === 'false') {
+  redirectConfig.push({
+    source: '/world-cafe/:path*',
+    destination: '/',
+    permanent: false
+  });
+}
+
 module.exports = nextTranslate({
   compress: false,
   poweredByHeader: false,
@@ -54,6 +64,9 @@ module.exports = nextTranslate({
         destination: '/api/robots'
       }
     ];
+  },
+  async redirects() {
+    return redirectConfig;
   },
   compiler: {
     reactRemoveProperties: process.env.NODE_ENV === 'production',

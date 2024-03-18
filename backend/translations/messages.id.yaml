@@ -14,7 +14,7 @@ emails:
         expire_text: Ingatlah bahwa tautan ini akan kadaluwarsa dalam 1 jam.
         subject: Halo %name%! Kita mendapatkan permintaan untuk mengatur ulang kata sandi Stooa milikmu
         information_text: Jika kamu mengabaikan pesan ini, kata sandimu tidak akan diubah.<br>Jika kamu tidak meminta sebuah atur ulang kata sandi, <a href="mailto:%email%">beritahu kami</a>.
-    fishbowl_created_email:
+    event_created_email:
         title: Sekarang apa?<br>Bagikan fishbowl-nya!
         info_title: Judul
         info_duration: Durasi
@@ -28,7 +28,8 @@ emails:
             en: Inggris
             es: Spanyol
             ca: Katala
-        subject: Halo %name%! Kamu telah membuat sebuah fishbowl yang baru
+        fishbowl_subject: Halo %name%! Kamu telah membuat sebuah fishbowl yang baru
+        world_cafe_subject: Halo %name%! Kamu telah membuat sebuah World Café yang baru
         delete: 'Jika kamu ingin menghapus fishbowl ini, mohon kirim surel ke <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id: %id%">sini</a>'
         description: 'Salin dan bagikan tautan fishbowl ini ke orang-orang yang kamu ingin mereka bergabung ke pembicaraan.👇'
         password: 'Password: %password%'

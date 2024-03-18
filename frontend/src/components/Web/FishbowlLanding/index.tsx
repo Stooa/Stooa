@@ -14,7 +14,7 @@ import Trans from 'next-translate/Trans';
 import { Fishbowl } from '@/types/api-platform';
 import { useStateValue } from '@/contexts/AppContext';
 import { formatDateTime } from '@/lib/helpers';
-import { Description } from '@/ui/pages/fishbowl-detail';
+import { Description } from '@/ui/pages/event-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
 import { ToastContainer } from 'react-toastify';
@@ -59,16 +59,23 @@ const FishbowlLanding = ({ data }: Props) => {
           </StyledDetailAlert>
           {!data.isPrivate && (
             <>
-              <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />
+              <ButtonCopyUrl
+                eventType="fishbowl"
+                size="large"
+                withSvg
+                slug={data.slug}
+                locale={data.locale}
+              />
               <HelpText className="body-sm">{t('copyText')}</HelpText>
             </>
           )}
           {data.plainPassword && (
             <>
               <ButtonCopyUrl
+                eventType="fishbowl"
                 size="large"
                 withSvg
-                fid={data.slug}
+                slug={data.slug}
                 locale={data.locale}
                 isPrivate
                 plainPassword={data.plainPassword}

@@ -23,18 +23,15 @@ import { scrolllbarStyle } from '@/ui/Scrollbar';
 const StyledFishbowlDataCard = styled.div`
   background-color: ${COLOR_NEUTRO_100};
   display: flex;
-  border-radius: 4px;
   flex-direction: column;
   align-items: flex-start;
+  gap: ${space(1)};
+  border-radius: 4px;
   margin-bottom: ${space(2)};
   padding: ${space(2)} ${space(2)} ${space(2)} ${space(3)};
   position: relative;
   overflow: hidden;
   width: 100%;
-
-  * + *:not(:last-child) {
-    margin-bottom: ${space()};
-  }
 
   &::before {
     content: '';
@@ -47,7 +44,7 @@ const StyledFishbowlDataCard = styled.div`
   }
 
   .card-subtitle {
-    margin-bottom: ${space(3)};
+    padding-bottom: ${space(2)};
   }
 
   h2 {
@@ -56,7 +53,7 @@ const StyledFishbowlDataCard = styled.div`
 
   & div.date {
     color: ${COLOR_NEUTRO_800};
-    margin-bottom: ${space(3)};
+    padding-bottom: ${space(2)};
   }
 
   & .description {
@@ -82,6 +79,11 @@ const StyledFishbowlDataCard = styled.div`
   }
 `;
 
+const StyledFishbowlDataCardScroll = styled.div`
+  ${scrolllbarStyle};
+  overflow-y: scroll;
+`;
+
 const StyledFishbowlDataCardHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -93,4 +95,4 @@ const StyledFishbowlDataCardHeader = styled.div`
   margin-bottom: ${space(2)};
 `;
 
-export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader };
+export { StyledFishbowlDataCard, StyledFishbowlDataCardHeader, StyledFishbowlDataCardScroll };

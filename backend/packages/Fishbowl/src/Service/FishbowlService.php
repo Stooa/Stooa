@@ -13,37 +13,22 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Service;
 
-use App\Core\Entity\Guest;
 use App\Core\Entity\Participant;
 use App\Core\Entity\User;
-use App\Core\Repository\GuestRepository;
-use App\Core\Repository\ParticipantRepository;
+use App\Core\Model\Event;
+use App\Core\Service\GuestService;
+use App\Core\Service\ParticipantService;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
-use Hashids\Hashids;
 use Psr\Log\LoggerInterface;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\HttpFoundation\Exception\JsonException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @psalm-type RawParticipant = array{
- *     id: UuidInterface|null,
- *     lastPing: \DateTimeInterface|null,
- *     name: string|null,
- *     twitter: string|null,
- *     linkedin: string|null,
- *     isModerator: bool,
- *     isCurrentUser: bool,
- *     guestId: string|null,
- *     joined: bool,
- *     isMuted: bool
- * }
+ * @psalm-import-type RawParticipant from ParticipantService
  */
 class FishbowlService
 {
@@ -52,8 +37,8 @@ class FishbowlService
         private readonly FishbowlRepository $fishbowlRepository,
         private readonly RequestStack $requestStack,
         private readonly Security $security,
-        private readonly GuestRepository $guestRepository,
-        private readonly ParticipantRepository $participantRepository,
+        private readonly GuestService $guestService,
+        private readonly ParticipantService $participantService,
         private readonly TranslatorInterface $translator
     ) {
     }
@@ -69,14 +54,7 @@ class FishbowlService
         return false;
     }
 
-    public function generateRandomSlug(Fishbowl $fishbowl): string
-    {
-        $hashids = new Hashids('', 10);
-
-        return $hashids->encode(random_int(1, 1_000_000_000));
-    }
-
-    public function generateDefaultTitle(Fishbowl $fishbowl): Fishbowl
+    public function generateDefaultTitle(Fishbowl $fishbowl): Event
     {
         $fishbowlName = $fishbowl->getName();
 
@@ -113,11 +91,7 @@ class FishbowlService
             return [];
         }
 
-        return $this->buildParticipants(
-            $this->participantRepository->getParticipants($fishbowl),
-            $fishbowl,
-            $currentUser
-        );
+        return $this->participantService->buildParticipantsByFishbowl($fishbowl, $currentUser);
     }
 
     public function ping(string $slug): ?Participant
@@ -130,7 +104,7 @@ class FishbowlService
             return null;
         }
 
-        $guest = $this->getGuest($request);
+        $guest = $this->guestService->getGuest($request);
         $user = $this->security->getUser();
 
         if (null === $user && null === $guest) {
@@ -151,93 +125,31 @@ class FishbowlService
         $created = false;
 
         if (null !== $guest) {
-            $participant = $this->participantRepository->findGuestInFishbowl($fishbowl, $guest);
+            $participant = $this->participantService->findGuestInEvent($fishbowl, $guest);
 
             if (null === $participant) {
-                $participant = $this->createParticipantFromGuest($fishbowl, $guest);
+                $participant = $this->participantService->createFishbowlParticipantFromGuest($fishbowl, $guest);
                 $created = true;
             }
         } else {
             Assert::isInstanceOf($user, User::class);
 
-            $participant = $this->participantRepository->findUserInFishbowl($fishbowl, $user);
+            $participant = $this->participantService->findUserInEvent($fishbowl, $user);
 
             if (null === $participant) {
-                $participant = $this->createParticipantFromUser($fishbowl, $user);
+                $participant = $this->participantService->createFishbowlParticipantFromUser($fishbowl, $user);
                 $created = true;
             }
         }
 
         $participant->setLastPing(new \DateTimeImmutable());
 
-        $this->participantRepository->persist($participant);
+        $this->participantService->persistParticipant($participant);
 
         if ($created) {
             $this->fishbowlRepository->persist($fishbowl);
         }
 
         return $participant;
-    }
-
-    private function createParticipantFromUser(Fishbowl $fishbowl, User $user): Participant
-    {
-        $participant = $this->createParticipant($fishbowl);
-        $participant->setUser($user);
-
-        return $participant;
-    }
-
-    private function createParticipantFromGuest(Fishbowl $fishbowl, Guest $guest): Participant
-    {
-        $participant = $this->createParticipant($fishbowl);
-        $participant->setGuest($guest);
-
-        return $participant;
-    }
-
-    private function getGuest(Request $request): ?Guest
-    {
-        try {
-            $requestArray = $request->toArray();
-        } catch (JsonException) {
-            return null;
-        }
-
-        if (!empty($requestArray['guestId'])) {
-            return $this->guestRepository->find($requestArray['guestId']);
-        }
-
-        return null;
-    }
-
-    private function createParticipant(Fishbowl $fishbowl): Participant
-    {
-        $participant = new Participant();
-        $participant->setFishbowl($fishbowl);
-
-        $fishbowl->addParticipant($participant);
-
-        return $participant;
-    }
-
-    /**
-     * @param Participant[] $participants
-     *
-     * @return RawParticipant[]
-     */
-    private function buildParticipants(array $participants, Fishbowl $fishbowl, ?UserInterface $currentUser): array
-    {
-        return array_map(fn (Participant $participant) => [
-            'id' => $participant->getId(),
-            'lastPing' => $participant->getLastPing(),
-            'name' => $participant->getUserName(),
-            'twitter' => $participant->getPublicTwitterProfile(),
-            'linkedin' => $participant->getPublicLinkedinAccount(),
-            'isModerator' => $participant->isModerator($fishbowl),
-            'isCurrentUser' => $participant->isCurrentUser($currentUser),
-            'guestId' => $participant->getGuestId(),
-            'joined' => false,
-            'isMuted' => false,
-        ], $participants);
     }
 }

@@ -13,33 +13,33 @@ file that was distributed with this source code.
 {% extends '/emails/templates/email-base.html.twig' %}
 
 {% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
-{% set fishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
-{% set editFishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/scheduled?selected=' ~ fishbowlSlug %}
+{% set eventLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ eventSlug %}
+{% set editEventLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/scheduled?selected=' ~ eventSlug %}
 
 {% block title %}
     {{ 'emails.fishbowl_created_email.title'|trans({}, null, locale) }}
 {% endblock %}
 
 {% block body %}
-    {{ macros.title('emails.fishbowl_created_email.title'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.title('emails.event_created_email.title'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
     {{ macros.spaceRow(40) }}
-    {{ macros.text('emails.fishbowl_created_email.description'|trans({}, null, locale), emailConfig, '', 'description') }}
+    {{ macros.text('emails.event_created_email.description'|trans({}, null, locale), emailConfig, '', 'description') }}
     {{ macros.spaceRow(20) }}
-    {{ macros.text(urlLink|replace({ '%link%': fishbowlLink, '%style%': emailConfig.fishbowlLink.styles }),
-        emailConfig, '', 'fishbowlLink'
+    {{ macros.text(urlLink|replace({ '%link%': eventLink, '%style%': emailConfig.eventLink.styles }),
+        emailConfig, '', 'eventLink'
     ) }}
 
-    {% if fishbowlIsPrivate %}
-        {{ macros.text('emails.fishbowl_created_email.password'|trans({'%password%': fishbowlPassword}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
+    {% if eventIsPrivate %}
+        {{ macros.text('emails.event_created_email.password'|trans({'%password%': eventPassword}, null, locale), emailConfig, 'text-align:center; font-weight: 700; font-size: 20px;') }}
     {% endif %}
 
     {{ macros.spaceRow(20) }}
-    {% if not fishbowlIsPrivate %}
-        {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {% if not eventIsPrivate %}
+        {{ macros.text('emails.event_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
 
         {% include '/emails/components/email-socials.html.twig' with {
-            twitterHref: 'https://twitter.com/intent/tweet?text=' ~ fishbowlName ~ '&url=' ~ fishbowlLink,
-            linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ fishbowlLink ~ '&title=' ~ fishbowlName ~ '&mini=true'
+            twitterHref: 'https://twitter.com/intent/tweet?text=' ~ eventName ~ '&url=' ~ eventLink,
+            linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ eventLink ~ '&title=' ~ eventName ~ '&mini=true'
         } %}
     {% endif %}
 
@@ -47,29 +47,29 @@ file that was distributed with this source code.
     <tr>
         <td align="center">
             <table class="create-fishbowl-data" role="presentation" align="center" cellpadding="4" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 100%; background-color: #fff; padding: 24px 32px;">
-                {{ macros.text(fishbowlName, emailConfig, 'text-align:center;', 'fishbowlCardTitle') }}
+                {{ macros.text(eventName, emailConfig, 'text-align:center;', 'eventCardTitle') }}
                 {{ macros.spaceRow(10) }}
-                {% if fishbowlDescription %}
-                    {{ macros.text(fishbowlDescription,emailConfig, 'text-align:center;') }}
+                {% if eventDescription %}
+                    {{ macros.text(eventDescription,emailConfig, 'text-align:center;') }}
                     {{ macros.spaceRow(10) }}
                 {% endif %}
-                {{ macros.text(fishbowlStartDate, emailConfig, 'text-align:center;', 'fishbowlCardHours') }}
-                {{ macros.text(fishbowlStartTime ~ ' - ' ~ fishbowlFinishTime, emailConfig, 'text-align:center;', 'fishbowlCardHours') }}
+                {{ macros.text(eventStartDate, emailConfig, 'text-align:center;', 'eventCardHours') }}
+                {{ macros.text(eventStartTime ~ ' - ' ~ eventFinishTime, emailConfig, 'text-align:center;', 'eventCardHours') }}
             </table>
         </td>
     </tr>
     {{ macros.spaceRow(20) }}
-    {{ macros.text('emails.fishbowl_created_email.edit_details'|trans({'%edit_link%': editFishbowlLink}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.text('emails.event_created_email.edit_details'|trans({'%edit_link%': editEventLink}, null, locale), emailConfig, 'text-align:center;') }}
     {{ macros.spaceRow(55) }}
     <tr>
         <td align="center">
             {% include '/emails/components/email-button.html.twig' with {
-                link: fishbowlLink,
-                label: 'emails.fishbowl_created_email.cta'|trans({}, null, locale)
+                link: eventLink,
+                label: 'emails.event_created_email.cta'|trans({}, null, locale)
             } %}
         </td>
     </tr>
     {{ macros.spaceRow(55) }}
-    {{ macros.note('emails.fishbowl_created_email.delete'|trans({'%id%': fishbowlId, '%styles%': emailConfig.link.styles}, null, locale), emailConfig, 'text-align: center;') }}
+    {{ macros.note('emails.event_created_email.delete'|trans({'%id%': eventId, '%styles%': emailConfig.link.styles}, null, locale), emailConfig, 'text-align: center;') }}
     {{ macros.spaceRow(25) }}
 {% endblock %}

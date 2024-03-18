@@ -29,11 +29,11 @@ class FishbowlTransitionsSubscriber implements EventSubscriberInterface
     {
         $fishbowl = $event->getSubject();
 
-        Assert::isInstanceOf($fishbowl, Fishbowl::class);
+        if ($fishbowl instanceof Fishbowl) {
+            $fishbowl->setIntroducedAt(new \DateTimeImmutable());
 
-        $fishbowl->setIntroducedAt(new \DateTimeImmutable());
-
-        $this->repository->persist($fishbowl);
+            $this->repository->persist($fishbowl);
+        }
     }
 
     public function onNoIntroductionRun(Event $event): void
@@ -72,10 +72,10 @@ class FishbowlTransitionsSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): iterable
     {
         return [
-            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_INTRODUCE => 'onIntroduction',
-            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_NO_INTRO_RUN => 'onNoIntroductionRun',
-            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_RUN => 'onRun',
-            'workflow.fishbowl.transition.' . Fishbowl::TRANSITION_FINISH => 'onFinish',
+            'workflow.event.transition.' . Fishbowl::TRANSITION_INTRODUCE => 'onIntroduction',
+            'workflow.event.transition.' . Fishbowl::TRANSITION_NO_INTRO_RUN => 'onNoIntroductionRun',
+            'workflow.event.transition.' . Fishbowl::TRANSITION_RUN => 'onRun',
+            'workflow.event.transition.' . Fishbowl::TRANSITION_FINISH => 'onFinish',
         ];
     }
 }

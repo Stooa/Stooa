@@ -82,7 +82,8 @@ const FishbowlCard = ({ fishbowl, selected, onClick }: Props) => {
         <ButtonCopyUrl
           data-testid="copy-link"
           variant="text"
-          fid={slug}
+          eventType="fishbowl"
+          slug={slug}
           locale={locale}
           isPrivate={isPrivate}
           plainPassword={plainPassword ?? 'error ask for the password'}

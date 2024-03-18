@@ -23,7 +23,6 @@ export const useSeats = () => {
     stand,
     findSeat
   } = useJitsiStore(store => ({
-    seats: store.seats,
     userId: store.userId,
     createSeats: store.createSeats,
     getSeats: store.getSeats,

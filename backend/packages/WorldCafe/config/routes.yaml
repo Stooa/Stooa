@@ -1,0 +1,12 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+world_cafe:
+    resource: 'routes/routes.yaml'
+    prefix: /{_locale}
+    requirements:
+        _locale: en|es|ca|fr|id

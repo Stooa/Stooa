@@ -16,6 +16,7 @@ namespace App\Fishbowl\Stage;
 use ApiPlatform\GraphQl\Resolver\Stage\ValidateStageInterface;
 use ApiPlatform\Metadata\GraphQl\Operation;
 use App\Core\Entity\User;
+use App\Core\Service\SlugService;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Service\FishbowlService;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -26,7 +27,8 @@ class FishbowlValidateStage implements ValidateStageInterface
     public function __construct(
         private readonly ValidateStageInterface $decorated,
         private readonly Security $security,
-        private readonly FishbowlService $service
+        private readonly FishbowlService $service,
+        private readonly SlugService $slugService
     ) {
     }
 
@@ -42,7 +44,7 @@ class FishbowlValidateStage implements ValidateStageInterface
                 $object->setHost($user);
             }
 
-            $object->setSlug($this->service->generateRandomSlug($object));
+            $object->setSlug($this->slugService->generateRandomSlug());
 
             $object = $this->service->generateDefaultTitle($object);
         }

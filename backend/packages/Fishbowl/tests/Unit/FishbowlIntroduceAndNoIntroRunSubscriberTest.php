@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit;
 
+use App\Core\Model\Event;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\EventSubscriber\FishbowlIntroduceAndNoIntroRunSubscriber;
 use App\Fishbowl\Factory\FishbowlFactory;
@@ -65,8 +66,8 @@ class FishbowlIntroduceAndNoIntroRunSubscriberTest extends TestCase
     public function itGetSubscribedEvents(): void
     {
         $this->assertSame([
-                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
-                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
+                'workflow.event.guard.' . Event::TRANSITION_INTRODUCE => ['guardFishbowl'],
+                'workflow.event.guard.' . Event::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
             ],
             $this->subscriber::getSubscribedEvents()
         );

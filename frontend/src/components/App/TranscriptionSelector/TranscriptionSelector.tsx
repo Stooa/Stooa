@@ -15,7 +15,7 @@ import ColoredFullTooltip from '@/components/Common/ColoredFullTooltip/ColoredFu
 import useTranslation from 'next-translate/useTranslation';
 import { useUserAuth } from '@/user/auth/useUserAuth';
 import { useConference } from '@/jitsi/useConference';
-import { useStooa } from '@/contexts/StooaManager';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 interface Props {
   tooltip?: boolean;
@@ -29,7 +29,7 @@ const TranscriptionSelector = ({ tooltip, location }: Props) => {
   const { t } = useTranslation('fishbowl');
   const { getTranscriptionLanguageCookie, setTranscriptionLanguageCookie } = useUserAuth();
   const { setConferenceTranscriptionLanguage } = useConference();
-  const { setSelectedTranscriptionLanguage } = useStooa();
+  const { setSelectedTranscriptionLanguage } = useTranscriptions();
 
   const cookieTranscriptionLanguage = getTranscriptionLanguageCookie();
 

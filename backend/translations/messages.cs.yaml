@@ -14,8 +14,8 @@ emails:
         button_text: Obnovení hesla
         information_text: Pokud tuto zprávu ignorujete, vaše heslo nebude změněno.<br>Pokud jste o změnu hesla nepožádali, <a href="mailto:%email%">dejte nám vědět</a>.
         information_help_text: Pokud to není váš účet, můžete z něj odstranit svůj e-mail. <br>Neodpovídejte na tento e-mail a uvádějte své heslo. Nikdy vás nebudeme žádat o heslo a důrazně vás nedoporučujeme je s nikým sdílet.
-    fishbowl_created_email:
-        subject: Ahoj %name%! Vytvořili jste nové akvárium
+    event_created_email:
+        fishbowl_subject: Ahoj %name%! Vytvořili jste nové akvárium
         title: Výborně!
         description: 'Podívejte se na detaily svého nového akvária:'
         social_share: "or share in:"

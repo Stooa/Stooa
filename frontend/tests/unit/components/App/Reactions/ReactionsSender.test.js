@@ -10,7 +10,10 @@
 import { render, fireEvent } from '@testing-library/react';
 import ReactionsSender from '@/components/App/Reactions/ReactionsSender';
 import { useStooa } from '@/contexts/StooaManager';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
+jest.mock('@/hooks/useEventType');
 jest.mock('@/contexts/StooaManager');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
@@ -18,6 +21,10 @@ const useRouter = jest.spyOn(require('next/router'), 'useRouter');
 useRouter.mockImplementation(() => ({
   query: ''
 }));
+
+useEventType.mockReturnValue({
+  eventType: FISHBOWL
+});
 
 describe('Reactions sender component', () => {
   it('It renders the component as moderator', () => {

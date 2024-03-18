@@ -22,15 +22,17 @@ import { StyledListItem } from '../Participants/styles';
 
 const StyledContainer = styled.div`
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   row-gap: ${space(4)};
+  padding-inline: ${space(4)};
 
   ${media.min('desktopLarge')`
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
     row-gap: ${space(8)};
-    column-gap: ${space(8)};
+    column-gap: ${space(15)};
     padding-top: ${space(6)};
   `}
 
@@ -70,6 +72,8 @@ const StyledFishbowlInformation = styled.div`
   align-items: center;
   padding: 0;
   z-index: 1;
+  width: 100%;
+  max-width: ${space(80)};
 
   & > .counter {
     ${TITLE_MD}
@@ -99,14 +103,12 @@ const StyledFishbowlInformation = styled.div`
   & > button {
     align-self: flex-start;
   }
-
-  ${media.min('tablet')`
-    padding: ${space(2)} ${space(8)} 0;
-  `}
 `;
 
 const StyledParticipantsColumn = styled.div`
   display: flex;
+  max-width: ${space(80)};
+  width: 100%;
   flex-direction: column;
   align-items: center;
   z-index: 1;
@@ -114,7 +116,6 @@ const StyledParticipantsColumn = styled.div`
 
 const StyledParticipantListWrapper = styled.div`
   width: 100%;
-  max-width: 620px;
 
   border: 1px solid ${COLOR_NEUTRO_300};
   border-radius: 4px;

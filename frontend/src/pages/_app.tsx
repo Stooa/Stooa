@@ -60,9 +60,9 @@ const MyApp = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      console.log = function () {
-        // Not empty function
-      };
+      // console.log = function () {
+      //   // Not empty function
+      // };
 
       pushPageViewDataLayer({ url: window.location.pathname });
       Router.events.on('routeChangeComplete', handleRouteChange);

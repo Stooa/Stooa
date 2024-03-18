@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { media, space } from '@/ui/helpers';
 
 const Wrapper = styled.div<{ small?: boolean; reader?: boolean }>`
+  background-color: red !important;
   margin: 0 auto;
   max-width: ${({ reader }) => (reader ? '70ch' : '95vw')};
   width: 100%;

@@ -21,11 +21,14 @@ import {
   RECORDING_START,
   RECORDING_STOP,
   TRANSCRIPTION_MESSAGE_RECEIVED,
-  TRANSCRIPTION_TRANSCRIBER_JOINED
+  TRANSCRIPTION_TRANSCRIBER_JOINED,
+  CONFERENCE_START_MUTED
 } from '@/jitsi/Events';
 import { connectionOptions, initOptions, roomOptions } from '@/jitsi/Globals';
 import { useTracks, useSeats, useUser } from '@/jitsi';
 import { useJitsiStore } from '@/store';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
 export const useConference = () => {
   const {
@@ -58,6 +61,7 @@ export const useConference = () => {
   } = useTracks();
   const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
   const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
+  const { eventType } = useEventType();
 
   const joinUser = (id, user) => {
     const userId = id ?? myUserId;
@@ -123,7 +127,7 @@ export const useConference = () => {
       return;
     }
 
-    if (property === 'joined') {
+    if (property === 'joined' && eventType === FISHBOWL) {
       const id = user.getId();
 
       if (newValue === 'yes') {
@@ -199,6 +203,7 @@ export const useConference = () => {
 
     if (role === 'moderator') {
       dispatchEvent(CONFERENCE_IS_LOCKABLE);
+      dispatchEvent(CONFERENCE_START_MUTED);
     }
   };
 
@@ -394,11 +399,12 @@ export const useConference = () => {
     connection.connect();
   };
 
-  /**
-   *
-   * @param {string} password
-   * @returns Promise
-   */
+  const muteAudioConference = async () => {
+    if (conference) {
+      return await conference.setStartMutedPolicy({ audio: true, video: false });
+    }
+  };
+
   const lockConference = async password => {
     if (conference) {
       return await conference.lock(password);
@@ -580,12 +586,14 @@ export const useConference = () => {
     getParticipantById,
     getParticipantCount,
     getParticipants,
+    getParticipantNameById,
     initializeJitsi,
     initializeConnection,
     lockConference,
     joinConference,
     joinPrivateConference,
     kickParticipant,
+    muteAudioConference,
     leave,
     sendJoinEvent,
     sendLeaveEvent,

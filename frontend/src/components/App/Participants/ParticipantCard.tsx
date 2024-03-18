@@ -20,11 +20,13 @@ import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';
 import { getLinkedinUsername, getTwitterUsername } from '@/lib/Validators/SocialNetworkValidators';
 
-const ParticipantCard: React.FC<{
+interface Props {
   participant: Participant;
   speaker?: boolean;
-  prefishbowl?: boolean;
-}> = ({ participant, prefishbowl = false }) => {
+  preEvent?: boolean;
+}
+
+const ParticipantCard = ({ participant, preEvent = false }: Props) => {
   const { isCurrentGuest } = useUserAuth();
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
@@ -34,7 +36,7 @@ const ParticipantCard: React.FC<{
 
   return (
     <StyledListItem
-      className={`participant ${prefishbowl ? 'prefishbowl' : ''}`}
+      className={`participant ${preEvent ? 'prefishbowl' : ''}`}
       data-id={id}
       title={name}
     >
@@ -55,7 +57,7 @@ const ParticipantCard: React.FC<{
             onClick={() => {
               pushEventDataLayer({
                 action: 'Twitter',
-                category: prefishbowl ? 'Prefishbowl' : 'Participants',
+                category: preEvent ? 'Prefishbowl' : 'Participants',
                 label: window.location.href
               });
             }}
@@ -77,7 +79,7 @@ const ParticipantCard: React.FC<{
             onClick={() => {
               pushEventDataLayer({
                 action: 'Linkedin',
-                category: prefishbowl ? 'Prefishbowl' : 'Participants',
+                category: preEvent ? 'Prefishbowl' : 'Participants',
                 label: window.location.href
               });
             }}
@@ -93,7 +95,7 @@ const ParticipantCard: React.FC<{
             <Linkedin />
           </span>
         )}
-        <ButtonContextMenu initialParticipant={participant} />
+        {!preEvent && <ButtonContextMenu initialParticipant={participant} />}
       </div>
     </StyledListItem>
   );

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit\Resolver;
 
+use App\Core\Resolver\EventResolver;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;
-use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +25,7 @@ class FishbowlResolverTest extends TestCase
 {
     use Factories;
 
-    private FishbowlResolver $resolver;
+    private EventResolver $resolver;
     /** @var MockObject&FishbowlRepository */
     private MockObject $fishbowlRepository;
     /** @var MockObject&PrivateFishbowlService */
@@ -37,7 +37,7 @@ class FishbowlResolverTest extends TestCase
 
         $this->privateFishbowlService = $this->createMock(PrivateFishbowlService::class);
         $this->fishbowlRepository = $this->createMock(FishbowlRepository::class);
-        $this->resolver = new FishbowlResolver(
+        $this->resolver = new EventResolver(
             $this->fishbowlRepository,
             $this->privateFishbowlService
         );

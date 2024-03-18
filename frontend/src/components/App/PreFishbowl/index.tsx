@@ -32,11 +32,13 @@ import Image from 'next/image';
 import { useEffect } from 'react';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { useModals } from '@/contexts/ModalsContext';
+import { useStateValue } from '@/contexts/AppContext';
 
 const PreFishbowl = () => {
   const router = useRouter();
   const { fid } = router.query;
   const { data, getPassword } = useStooa();
+  const [{ isGuest }] = useStateValue();
   const { toggleOnBoarding } = useModals();
 
   const { t, lang } = useTranslation('fishbowl');
@@ -73,7 +75,7 @@ const PreFishbowl = () => {
             quality={100}
           />
         </div>
-        <Counter prefishbowl={true} data-testid="prefishbowl-counter" />
+        <Counter preEvent={true} data-testid="prefishbowl-counter" />
 
         <StyledFishbowlDataWrapper>
           <StyledFishbowlDataCard data-testid="prefishbowl-datacard" className="prefishbowl">
@@ -84,7 +86,8 @@ const PreFishbowl = () => {
               <ButtonCopyUrl
                 data-testid="copy-link"
                 variant="text"
-                fid={fid as string}
+                eventType="fishbowl"
+                slug={fid as string}
                 locale={lang}
                 isPrivate={data.isPrivate}
                 plainPassword={getPassword()}
@@ -106,7 +109,7 @@ const PreFishbowl = () => {
         </StyledFishbowlDataWrapper>
       </StyledFishbowlInformation>
       <StyledParticipantsColumn>
-        <PreFishbowlParticipants />
+        <PreFishbowlParticipants eventType="fishbowl" isGuest={isGuest} slug={fid as string} />
       </StyledParticipantsColumn>
     </StyledContainer>
   );

@@ -70,17 +70,6 @@ const initialValues = {
 };
 
 const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
-  // const stringDate = fishbowl.startDateTimeTz.toString();
-  // const sign = stringDate.charAt(stringDate.length - 6);
-  // const timezoneHours = parseInt(stringDate.slice(-5, -3), 10);
-  // const timezoneDifferenceInMs = timezoneHours * 60 * 60 * 1000;
-
-  // const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
-  // const adjustedTime =
-  //   timestamp + (sign === '-' ? -timezoneDifferenceInMs : timezoneDifferenceInMs);
-  // const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
-  // const formattedDate = new Date(adjustedTime + userTimezoneOffset);
-
   const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
 
   // Extract timezone difference from startDateTimeTz in minutes

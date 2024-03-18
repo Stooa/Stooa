@@ -11,29 +11,30 @@ import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_HOME, ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
-import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
+
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
 
-import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { createApolloClient } from '@/lib/apollo-client';
 import { Fishbowl as FishbowlType } from '@/types/api-platform';
 
+import { PrejoinFishbowlForm } from '@/components/App/EventPrejoin/PrejoinFishbowlForm';
 import Fishbowl from '@/components/App/Fishbowl';
 import JoinFishbowl from '@/components/Web/JoinFishbowl';
-import Layout from '@/layouts/App';
-
-const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
 const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
   loading: () => <div />
 });
-const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
+const EventPrejoin = dynamic(import('@/components/App/EventPrejoin'), {
   loading: () => <div />
 });
+
+import Layout from '@/layouts/App';
+const LayoutWeb = dynamic(import('@/layouts/EventDetail'), { loading: () => <div /> });
 
 const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
   const [joinAsGuest, setJoinAsGuest] = useState(false);
@@ -42,6 +43,7 @@ const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
 
   const [{ fishbowlReady, isGuest, prejoin, conferenceStatus }] = useStateValue();
   const { isAuthenticated } = useAuth();
+  // const { error: errorFromEnded, loaded } = useIsFishbowlEnded(fid as string);
 
   const handleJoinAsGuest = (): void => {
     setJoinAsGuest(true);
@@ -49,6 +51,7 @@ const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
 
   const shouldPrintPreJoinPage: boolean =
     (joinAsGuest || isAuthenticated) && prejoin && fishbowlReady;
+
   const shouldPrintFishbowlPage: boolean = fishbowlReady && (isAuthenticated || isGuest);
 
   useEffect(() => {
@@ -79,10 +82,16 @@ const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
       fishbowl={fishbowl}
       prejoin={shouldPrintPreJoinPage}
     >
-      {shouldPrintPreJoinPage ? <FishbowlPreJoin /> : <Fishbowl />}
+      {shouldPrintPreJoinPage ? (
+        <EventPrejoin event="fishbowl">
+          <PrejoinFishbowlForm />
+        </EventPrejoin>
+      ) : (
+        <Fishbowl />
+      )}
     </Layout>
   ) : (
-    <LayoutWeb>
+    <LayoutWeb center>
       <FishbowlLanding data={fishbowl} />
       <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
     </LayoutWeb>
@@ -122,4 +131,4 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-export default withIsFishbowlEnded(Page);
+export default Page;

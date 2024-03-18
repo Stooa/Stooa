@@ -92,7 +92,7 @@ class MailerService
                 ->from(new Address($this->from, $this->translator->trans('emails.from', [], null, $locale)))
                 ->to((string) $user->getEmail())
                 ->subject($this->translator->trans(
-                    'emails.fishbowl_created_email.subject',
+                    'emails.event_created_email.fishbowl_subject',
                     ['%name%' => $user->getName()],
                     null,
                     $locale
@@ -100,16 +100,16 @@ class MailerService
                 ->htmlTemplate('emails/fishbowl-created.html.twig')
                 ->context([
                     'name' => $user->getName(),
-                    'fishbowlId' => null !== $uid ? $uid->toString() : '',
-                    'fishbowlName' => $fishbowl->getName(),
-                    'fishbowlDescription' => $fishbowl->getDescription(),
-                    'fishbowlStartDate' => $fishbowl->getStartDateTimeFormatted(),
-                    'fishbowlStartTime' => $fishbowl->getStartDateTimeHourFormatted(),
-                    'fishbowlFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
-                    'fishbowlDuration' => $fishbowl->getDurationFormatted(),
-                    'fishbowlSlug' => $fishbowl->getSlug(),
-                    'fishbowlPassword' => $this->privateFishbowlService->decryptPrivatePassword($fishbowl)->getPlainPassword(),
-                    'fishbowlIsPrivate' => $fishbowl->getIsPrivate(),
+                    'eventId' => null !== $uid ? $uid->toString() : '',
+                    'eventName' => $fishbowl->getName(),
+                    'eventDescription' => $fishbowl->getDescription(),
+                    'eventStartDate' => $fishbowl->getStartDateTimeFormatted(),
+                    'eventStartTime' => $fishbowl->getStartDateTimeHourFormatted(),
+                    'eventFinishTime' => $fishbowl->getFinishDateTimeHourFormatted(),
+                    'eventDuration' => $fishbowl->getDurationFormatted(),
+                    'eventSlug' => $fishbowl->getSlug(),
+                    'eventPassword' => $this->privateFishbowlService->decryptPrivatePassword($fishbowl)->getPlainPassword(),
+                    'eventIsPrivate' => $fishbowl->getIsPrivate(),
                     'locale' => $locale,
                     'appUrl' => $this->appUrl,
                 ]);

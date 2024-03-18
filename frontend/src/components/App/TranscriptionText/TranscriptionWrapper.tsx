@@ -7,17 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import { useStooa } from '@/contexts/StooaManager';
 import useDebounce from '@/hooks/useDebouce';
 import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { useEffect, useState } from 'react';
 import { TranscriptedText } from './TranscriptedText';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 const TranscriptionWrapper = () => {
   const [textToShow, setTextToShow] = useState({});
   const [messagesReceived, setMessagesReceived] = useState({});
-  const { isTranslationEnabled, isTranscriptionEnabled, translationLanguage } = useStooa();
+  const { isTranslationEnabled, isTranscriptionEnabled, translationLanguage } = useTranscriptions();
 
   const pushMessage = data => {
     const messageToPush = {

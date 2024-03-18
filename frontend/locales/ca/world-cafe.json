@@ -1,0 +1,8 @@
+{
+    "startWorldCafe": "Iniciar World Café",
+    "waiting": "Esperant que l'amfitrió iniciï el World Café",
+    "waitingHost": "Els assistents estan esperant a que iniciïs el World Café",
+    "detail" : {
+        "cardMiniTitle": "Detalls del World Café"
+    }
+}

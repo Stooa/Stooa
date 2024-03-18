@@ -15,8 +15,8 @@ import usePersistLocaleCookie from '@/hooks/usePersistLocaleCookie';
 import { pushEventDataLayer } from '@/lib/analytics';
 import i18nConfig from '@/i18n';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
+import Languages from './styles';
 
-import Languages from '@/components/Common/LanguageSwitcher/styles';
 const { locales } = i18nConfig;
 
 interface Props {

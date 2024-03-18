@@ -13,6 +13,7 @@ import api from '@/lib/api';
 import LocaleCookie from '@/lib/LocaleCookie';
 import { useUser } from '@/jitsi';
 import { COOKIE_OPTIONS, getAuthToken } from '.';
+import { EventType } from '@/types/event-types';
 
 const COOKIE_SHARE_LINK_COOKIE = 'share_link';
 const COOKIE_ON_BOARDING_MODERATOR = 'on_boarding_moderator';
@@ -62,7 +63,7 @@ export const useUserAuth = () => {
     });
   };
 
-  const ping = async (lang: string, slug: string) => {
+  const ping = async (lang: string, slug: string, eventType: EventType = 'fishbowl') => {
     const auth = await getAuthToken();
     const params = new FormData();
     const guestId = getUserGuestId();
@@ -71,8 +72,10 @@ export const useUserAuth = () => {
       params.append('guestId', guestId);
     }
 
+    const pingDestination = eventType === 'fishbowl' ? 'ping' : 'world-cafe-ping';
+
     api
-      .post(`${lang}/ping/${slug}`, params, {
+      .post(`${lang}/${pingDestination}/${slug}`, params, {
         headers: {
           'Accept-Language': LocaleCookie.getCurrentLocaleCookie(),
           'Authorization': `${auth ? auth.authorizationString : null}`

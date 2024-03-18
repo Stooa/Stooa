@@ -33,15 +33,15 @@ const Container = styled.div<{ drawer?: boolean }>`
   }
 
   ${media.min('tablet')`
-  grid-template-rows: ${space(10)} 1fr ${space(10)};
+    grid-template-rows: ${space(10)} 1fr ${space(10)};
 
-  & > header {
-    padding-inline: ${space(3)};
-  }
+    & > header {
+      padding-inline: ${space(3)};
+    }
 
-  & > main {
-      padding-left: ${space(3)};
-      padding-right: ${space(3)};
+    & > main {
+        padding-left: ${space(3)};
+        padding-right: ${space(3)};
     }
   `}
 

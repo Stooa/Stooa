@@ -9,7 +9,7 @@ emails:
         subject: Willkommen bei Stooa!
         title: Willkommen bei Stooa
         subtitle: Stooa ist ein Online-Werkzeug für Unkonferenzen. Jeder hat eine Stimme. Nehmen Sie teil, hören Sie zu und teilen Sie Ihr Wissen mit anderen.
-    fishbowl_created_email:
+    event_created_email:
         info_title: Titel
         info_language: Sprache
         info_start_date: Startdatum
@@ -21,3 +21,6 @@ emails:
 
 fishbowl:
     default_title: 'Termin Fishbowl - %name%'
+
+world_cafe:
+    default_title: 'Termin World Café - %name%'

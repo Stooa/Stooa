@@ -16,6 +16,7 @@ namespace App;
 use App\Core\JWT\TokenGenerator\JaasTokenGenerator;
 use App\Core\JWT\TokenGenerator\SelfHostedTokenGenerator;
 use App\Core\JWT\TokenGenerator\TokenGeneratorInterface;
+use App\WorldCafe\WorldCafeBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -32,6 +33,10 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
     public function registerBundles(): iterable
     {
         $contents = require $this->getProjectDir() . '/config/bundles.php';
+
+        if ('false' === $_ENV['WORLD_CAFE']) {
+            unset($contents[WorldCafeBundle::class]);
+        }
 
         /** @phpstan-var class-string<BundleInterface> $class */
         foreach ($contents as $class => $envs) {
@@ -66,6 +71,14 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         $loader->load($configDir . '/services.yaml');
         $loader->load($configDir . '/{packages}/*.yaml', 'glob');
         $loader->load($configDir . '/{packages}/' . $this->getEnvironment() . '/**/*.yaml', 'glob');
+
+        $isWorldCafeActive = $container->resolveEnvPlaceholders($container->getParameter('world_cafe'),
+            true
+        );
+
+        if ('true' === $isWorldCafeActive) {
+            $loader->load($this->getProjectDir() . '/packages/WorldCafe/config/packages/*.yaml', 'glob');
+        }
     }
 
     protected function configureRoutes(RoutingConfigurator $routes): void
@@ -75,5 +88,11 @@ final class Kernel extends BaseKernel implements CompilerPassInterface
         $routes->import($configDir . '/routes.yaml');
         $routes->import($configDir . '/{routes}/*.yaml');
         $routes->import($configDir . '/{routes}/' . $this->getEnvironment() . '/**/*.yaml');
+
+        $isWorldCafeActive = $this->container->getParameter('world_cafe');
+
+        if ('true' === $isWorldCafeActive) {
+            $routes->import($this->getProjectDir() . '/packages/WorldCafe/config/routes.yaml');
+        }
     }
 }

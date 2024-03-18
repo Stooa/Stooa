@@ -21,13 +21,17 @@ emails:
         button_text: Reset your password
         information_text: If you ignore this message, your password won't be changed.<br>If you didn't request a password reset, <a href='mailto:%email%'>let us know</a>.
         information_help_text: If this is not your account you can remove your email from it. <br>Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.
-    fishbowl_created_email:
-        subject: Hello %name%! You have created a new fishbowl
-        title: Now what?<br>Share the fishbowl!
+    event_created_email:
+        fishbowl_subject: Hello %name%! You have created a new fishbowl
+        world_cafe_subject: Hello %name%! You have created a new World Café
+        title: Now what?<br>Share the fishbowl!</br>
+        world_cafe_title: World Café created successfully!
         description: "Copy and share the link of this fishbowl with the people you want to join the conversation.👇"
+        world_cafe_description: "Copy and share the World Café link with the attendees 👇"
         social_share: "or share in:"
         edit_details: "Remember that you can <a style='text-decoration: underline;' href='%edit_link%'>edit the event details</a> up until one hour before it starts."
         cta: Access the fishbowl
+        world_cafe_cta: Go to the event
         info_title: Title
         info_duration: Duration
         info_description: Description
@@ -37,15 +41,18 @@ emails:
         info_invite: Link to invite attendees
         info_url: Click here to access the fishbowl
         delete: 'If you want to delete this fishbowl please email us <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl event with id: %id%">here</a>'
+        world_cafe_delete: 'If you want to erase this World Café, please send us an email <a href="mailto:stooa@stooa.com?subject=Delete World Café event&body=Please delete the World Café event with id: %id%">here</a>'
         password: 'Password: %password%'
         languages:
             es: Spanish
             ca: Catalan
             en: English
             fr: French
-
 login:
     failure: Invalid credentials
 
 fishbowl:
     default_title: 'Fishbowl Meeting - %name%'
+
+world_cafe:
+    default_title: 'World Café Meeting - %name%'

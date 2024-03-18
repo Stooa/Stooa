@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Repository;
 
+use App\Core\Model\EventRepositoryInterface;
 use App\Fishbowl\Entity\Fishbowl;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
 /** @extends ServiceEntityRepository<Fishbowl> */
-class FishbowlRepository extends ServiceEntityRepository
+class FishbowlRepository extends ServiceEntityRepository implements EventRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

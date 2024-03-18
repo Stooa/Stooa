@@ -14,6 +14,14 @@ export enum IConferenceStatus {
   FINISHED = 'FINISHED'
 }
 
+export enum WorldCafeStatus {
+  NOT_STARTED = 'NOT_STARTED',
+  INTRODUCTION = 'INTRODUCTION',
+  RUNNING = 'RUNNING',
+  CONCLUSION = 'CONCLUSION',
+  FINISHED = 'FINISHED'
+}
+
 export enum ITimeStatus {
   DEFAULT = 'DEFAULT',
   ENDING = 'ENDING',
