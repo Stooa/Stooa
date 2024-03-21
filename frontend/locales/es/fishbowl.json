@@ -91,7 +91,7 @@
         "description": "Si habéis acabado, recuerda finalizar el fishbowl para todos."
     },
     "participants": {
-        "title": "Asistentes al fishbowl",
+        "title": "Participantes en la sala",
         "attendees": "Oyentes",
         "speaking": "Hablando ahora"
     },
@@ -100,7 +100,7 @@
         "title": "¡Invita a más personas!",
         "description": "¡Haz que la conversación fluya! Copia y comparte el enlace de este <i>fishbowl</i> con las personas que quieras que se unan a la sesión."
     },
-    "fishbowlDescription":{
+    "fishbowlDescription": {
         "shareText": "Copia y comparte el link para invitar a más personas a este <i>fishbowl</i>."
     },
     "kick": {
@@ -120,7 +120,7 @@
     "permissionsModalTitle": "Permisos necesarios",
     "permissionsModalDescription": "Si quieres ocupar una silla para decir algo, Stooa necesita permisos para acceder a tu micrófono, para que el resto de participantes te escuche.",
     "permissionsModalButton": "Solicitar acceso",
-    "permissionsModalErrorToast" : "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar.",
+    "permissionsModalErrorToast": "Parece que tienes bloqueados los permisos del micrófono desde el navegador.<br/>Intenta recargar la página para continuar.",
     "permissionsNotGranted": "Permisos no concedidos.",
     "reaction": {
         "agree": "De acuerdo",
@@ -136,7 +136,7 @@
         "onBoardingHelp": "¿No tienes claro cómo funciona un fishbowl? Haz clic aquí",
         "connectWithUsers": "Para conectar con las personas en la sala a través de tus RRSS, regístrate en Stooa."
     },
-    "screenSharePermissionsModal" : {
+    "screenSharePermissionsModal": {
         "title": "Tu pantalla no se puede compartir",
         "description": "Es posible que Google Chrome no tenga permiso para grabar la pantalla en tu ordenador. <a>Ve a Preferencias de sistema.</a>"
     },
@@ -170,7 +170,7 @@
             "button": "Parar la grabación"
         }
     },
-    "feedback" : {
+    "feedback": {
         "title": "Feedback",
         "satisfactionTitle": "Danos feedback",
         "satisfactionDescription": "¿Cuál es tu grado de satisfacción con este <i>fishbowl</i>?",
@@ -188,7 +188,7 @@
         "spreadTheWord": "Spread the word!",
         "send": "Enviar",
         "skip": "Saltar",
-        "dashboard" : {
+        "dashboard": {
             "noFeedback": "Ningún feedback recibido.",
             "feedbackReceived_one": "Feedback recibido",
             "feedbackReceived_other": "Feedbacks recibidos",
@@ -206,7 +206,7 @@
             "duringTooltip": "Feedback recibido durante el fishbowl."
         }
     },
-    "transcription" : {
+    "transcription": {
         "title": "Transcripción",
         "disable": "Ocultar transcripción",
         "enable": "Mostrar transcripción",
