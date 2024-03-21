@@ -1,0 +1,10 @@
+{
+    "pageTitle": "Błąd strony",
+    "description": "Proszę <a>wyślij mi wiadomość e-mail</a> jeżeli myślisz, że coś jest nie tak ze stroną.",
+    "title": "Błąd strony",
+    "404": {
+        "pageTitle": "404",
+        "title": "Wygląda na to, że nie ma tu niczego (ani nikogo 👀).",
+        "text": "Tutaj znajduje się kilka pomocnych linków:"
+    }
+}

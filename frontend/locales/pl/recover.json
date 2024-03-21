@@ -1,0 +1,9 @@
+{
+    "title": "Przywracanie hasła",
+    "description": "Podaj swój adres e-mail, a my wyślemy Ci instrukcję wygenerowania nowego hasła.",
+    "placeholder": "Adres e-mail",
+    "email": "Adres e-mail",
+    "button": "Wyślij instrukcje",
+    "sent": "Wysłaliśmy ci wiadomość e-mail z instrukcjami odzyskiwania hasła.",
+    "back": "Wróć do logowania"
+}
