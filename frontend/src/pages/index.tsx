@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import { GetStaticProps } from 'next';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -20,7 +19,11 @@ import Button from '@/components/Common/Button';
 import RedirectLink from '@/components/Web/RedirectLink';
 import Description from '@/components/Common/Description';
 
-import { ROUTE_FISHBOWL_CREATE, ROUTE_FISHBOWL_HOST_NOW } from '@/app.config';
+import {
+  ROUTE_FISHBOWL_CREATE,
+  ROUTE_FISHBOWL_HOST_NOW,
+  ROUTE_WORLD_CAFE_CREATE
+} from '@/app.config';
 import Layout from '@/layouts/Home';
 
 import { Lottie } from '@/types/animations';
@@ -198,6 +201,13 @@ const Home = () => {
                 <span>{t('scheduleFishbowl')}</span>
               </Button>
             </RedirectLink>
+            {process.env.NEXT_PUBLIC_WORLD_CAFE === 'true' && (
+              <RedirectLink href={ROUTE_WORLD_CAFE_CREATE} passHref>
+                <Button size="large" as="a" variant="secondary" className="animate-item world-cafe">
+                  <span>{t('scheduleWorldCafe')}</span>
+                </Button>
+              </RedirectLink>
+            )}
           </div>
         </div>
         <div ref={previewRef} className="fishbowl-preview animate-item hide-mobile">
@@ -303,16 +313,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/**
- * Workaround for:
- * [next-translate] In Next 10.x.x there is an issue related to i18n and getInitialProps.
- * We recommend to replace getInitialProps to getServerSideProps on /index.tsx.
- *
- * https://github.com/vercel/next.js/discussions/18396
- */
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {}
-  };
-};

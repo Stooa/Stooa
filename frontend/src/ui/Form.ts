@@ -24,7 +24,7 @@ import {
   COLOR_RED_500,
   FONT_BASE_SIZE
 } from '@/ui/settings';
-import { BODY_SM, BODY_XS } from '@/ui/Texts';
+import { BODY_MD, BODY_SM, BODY_XS, mediumWeight } from '@/ui/Texts';
 
 const StandardForm = styled.form<{ $isFull?: boolean }>`
   position: relative;
@@ -33,7 +33,7 @@ const StandardForm = styled.form<{ $isFull?: boolean }>`
   width: 100%;
 
   &:not(:last-child) {
-    margin-bottom: ${space(4)};
+    /* margin-bottom: ${space(4)}; */
   }
 
   fieldset {
@@ -178,6 +178,10 @@ const InputStyled = styled.div<{
   &.textarea {
     & .taller {
       height: ${space(14)};
+
+      & textarea {
+        height: 100%;
+      }
     }
 
     & .counter {
@@ -203,9 +207,9 @@ const InputStyled = styled.div<{
     padding: ${space(2.75)} ${space(6)} ${space(0.4)} ${space(2)};
     width: 100%;
 
-    ${media.min('tablet')`
-      ${BODY_SM}
-    `}
+    ${props => (props.variant === 'large-text' ? BODY_MD : BODY_SM)};
+
+    ${props => (props.variant === 'large-text' ? mediumWeight : '')};
 
     &:focus {
       outline: none;
@@ -223,10 +227,22 @@ const InputStyled = styled.div<{
   }
 
   textarea {
-    height: 100%;
     overflow-y: auto;
-    padding-top: ${space(3.75)};
     resize: none;
+
+    &:not(.no-label) {
+      padding-top: ${space(3.75)};
+    }
+
+    &::placeholder {
+      color: currentColor;
+      ${props => (props.placeholderStyle === 'large-text' ? BODY_MD : '')};
+      ${props => (props.placeholderStyle === 'large-text' ? mediumWeight : '')};
+    }
+
+    &:focus::placeholder {
+      color: ${COLOR_NEUTRO_500};
+    }
   }
 
   label {
@@ -242,6 +258,11 @@ const InputStyled = styled.div<{
 
   input::placeholder {
     color: ${COLOR_NEUTRO_600};
+  }
+
+  & input.no-label,
+  & textarea.no-label {
+    padding: ${space(2)} ${space(2)} ${space(2)} ${space(2)};
   }
 
   input:focus,

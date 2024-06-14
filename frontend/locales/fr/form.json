@@ -59,5 +59,31 @@
         "unknownErrorServer": "Problème inconnu. Veuillez actualiser la page et réessayer",
         "unknownErrorInside": "Désolé ! Une erreur s'est produite lors de l'accès. Veuillez réessayer",
         "maxLength": "Ce champ ne peut pas contenir plus de {{length}} caractères."
+    },
+    "worldCafe": {
+        "pageTitle": "Créez un World Café gratuit",
+        "basics": "Bases",
+        "questions": "Questions",
+        "question": "Question",
+        "descriptionPlaceholder": "Si nécessaire, ajoutez une description.",
+        "questionsTooltip": "Assurez-vous de préparer suffisamment de questions pour le nombre de personnes participant. La taille optimale pour les salles est de 4 à 6 participants.",
+        "defaults": {
+            "title": "Rencontre World Café - {{name}}",
+            "question": "Question {{number}}"
+        },
+        "addQuestion": "Ajouter une question",
+        "roundDuration": "Durée des rounds",
+        "roundTimeLabel": "Chaque round dure",
+        "minutes": "minutes",
+        "add5MinutesLabel": "Ajoutez 5 minutes supplémentaires à la première ronde",
+        "add5MinutesTooltip": "Nous recommandons d'ajouter 5 minutes supplémentaires à la première ronde, car les personnes ont généralement besoin d'un peu plus de temps pour se lancer.",
+        "next":  "Ajouter une question",
+        "submit": "Créer un World Café",
+        "prejoin" : {
+            "title": "Rejoignez le World Café",
+            "description": "Si vous le souhaitez, vous pouvez configurer l'audio et la vidéo avant de commencer le World Café",
+            "join": "Rejoindre le World Café",
+            "cameraFallback": "Stooa a <span>besoin d'autorisations</span> pour accéder à <span>votre caméra et à votre microphone</span> afin que les autres puissent vous entendre et vous voir"
+        }
     }
 }

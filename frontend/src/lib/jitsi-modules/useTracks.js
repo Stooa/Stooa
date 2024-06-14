@@ -12,11 +12,24 @@ import { TRACK_ADDED } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { MediaType } from '@/types/jitsi/media';
 import { useJitsiStore } from '@/store';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL } from '@/types/event-types';
 
 export const useTracks = () => {
   const { getSeat, getIds } = useSeats();
   const { shareTrackAdded, removeShareTrack } = useSharedTrack();
-  const { userId: myUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
+  const {
+    userId: myUserId,
+    getTracksByUser,
+    addUserTrack,
+    removeUserTrack
+  } = useJitsiStore(store => ({
+    userId: store.userId,
+    getTracksByUser: store.getTracksByUser,
+    addUserTrack: store.addUserTrack,
+    removeUserTrack: store.removeUserTrack
+  }));
+  const { eventType } = useEventType();
 
   const _playTrackHtml = trackHtml => {
     trackHtml
@@ -33,6 +46,12 @@ export const useTracks = () => {
     return document.getElementById(track.getParticipantId() + track.getType());
   };
 
+  /**
+   *
+   * @param {number} seat index of seat
+   * @param {htmlTrack} track HTML TRACK
+   * @returns {htmlElement | null} seatHtml
+   */
   const handleElementsMutedClass = (seat, track) => {
     const type = track.getType();
     const seatHtml = document.getElementById(`seat-${seat}`);
@@ -51,14 +70,20 @@ export const useTracks = () => {
     return null;
   };
 
+  const syncSeatLocalStorageTrack = async (track, user) => {
+    const seat = getSeat();
+
+    if (seat > 0) {
+      syncLocalStorageTrack(track, user);
+    }
+  };
+
   const syncLocalStorageTrack = async (track, user) => {
     if (!user) {
       user = JSON.parse(localStorage.getItem('user'));
     }
 
-    const seat = getSeat();
-
-    if (user && seat > 0 && track.isLocal()) {
+    if (user && track.isLocal()) {
       const trackType = track.getType();
       const userIsMuted = trackType === 'video' ? user.videoMuted : user.audioMuted;
 
@@ -75,6 +100,13 @@ export const useTracks = () => {
     }
   };
 
+  /**
+   *
+   * @param {number} seat Seat index
+   * @param {htmlTrack} track HTML track
+   * @param {*} user jitsi user
+   * @returns void
+   */
   const _create = async (seat, track, user) => {
     const trackType = track.getType();
     const trackHtml = document.createElement(trackType);
@@ -87,7 +119,7 @@ export const useTracks = () => {
 
     if (track.isLocal()) trackHtml.classList.add('is-local');
 
-    await syncLocalStorageTrack(track, user);
+    await syncSeatLocalStorageTrack(track, user);
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
@@ -229,9 +261,10 @@ export const useTracks = () => {
 
     addUserTrack(id, track);
 
-    const seat = getSeat(id);
-
-    _create(seat, track);
+    if (eventType === FISHBOWL) {
+      const seat = getSeat(id);
+      _create(seat, track);
+    }
 
     dispatchEvent(TRACK_ADDED, { track });
   };
@@ -250,10 +283,13 @@ export const useTracks = () => {
     if (track.isLocal()) return;
 
     const id = track.getParticipantId();
-    const seat = getSeat(id);
+    let seat;
 
-    if (seat > 0) {
-      _remove(track);
+    if (eventType === FISHBOWL) {
+      seat = getSeat(id);
+      if (seat > 0) {
+        _remove(track);
+      }
     }
 
     removeUserTrack(id, track);
@@ -262,11 +298,17 @@ export const useTracks = () => {
   };
 
   const handleTrackMuteChanged = async track => {
-    if (track.isLocal()) return;
+    if (eventType === FISHBOWL) {
+      await syncSeatLocalStorageTrack(track);
 
-    const seat = getSeat(track.getParticipantId());
+      if (track.isLocal()) return;
 
-    handleElementsMutedClass(seat, track);
+      const seat = getSeat(track.getParticipantId());
+
+      handleElementsMutedClass(seat, track);
+    } else {
+      await syncLocalStorageTrack(track);
+    }
 
     console.log('[STOOA] Handle track mute changed', track);
   };
@@ -359,6 +401,7 @@ export const useTracks = () => {
     toggleAudioTrack,
     toggleVideoTrack,
     syncLocalStorageTrack,
+    syncSeatLocalStorageTrack,
     getAudioTracks
   };
 };

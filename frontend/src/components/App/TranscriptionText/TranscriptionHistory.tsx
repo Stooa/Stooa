@@ -7,16 +7,16 @@
  * file that was distributed with this source code.
  */
 
-import { useStooa } from '@/contexts/StooaManager';
 import useEventListener from '@/hooks/useEventListener';
 import { TRANSCRIPTION_MESSAGE_RECEIVED } from '@/jitsi/Events';
 import { TranscriptionMessageType } from '@/types/transcriptions';
 import { useEffect, useRef, useState } from 'react';
 import { StyledTranscribedHistory } from './styles';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 export const TranscriptionHistory = () => {
   const [messageHistory, setMessageHistory] = useState<TranscriptionMessageType[]>([]);
-  const { isTranslationEnabled, isTranscriptionEnabled, translationLanguage } = useStooa();
+  const { isTranslationEnabled, isTranscriptionEnabled, translationLanguage } = useTranscriptions();
 
   const historyRef = useRef<HTMLDivElement>(null);
 

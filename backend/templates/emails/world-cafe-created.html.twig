@@ -1,0 +1,65 @@
+{#
+
+This file is part of the Stooa codebase.
+
+(c) 2020 - present Runroom SL
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% import '/emails/helpers/email-macros.html.twig' as macros %}
+{% extends '/emails/templates/email-base.html.twig' %}
+
+{% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
+{% set eventLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/world-cafe/' ~ eventSlug %}
+
+{% block title %}
+    {{ 'emails.event_created_email.world_cafe_title'|trans({}, null, locale) }}
+{% endblock %}
+
+{% block body %}
+    {{ macros.title('emails.event_created_email.world_cafe_title'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+    {{ macros.spaceRow(40) }}
+    {{ macros.text('emails.event_created_email.world_cafe_description'|trans({}, null, locale), emailConfig, '', 'description') }}
+    {{ macros.spaceRow(20) }}
+    {{ macros.text(urlLink|replace({ '%link%': eventLink, '%style%': emailConfig.eventLink.styles }),
+        emailConfig, '', 'eventLink'
+    ) }}
+    {{ macros.spaceRow(20) }}
+    {{ macros.text('emails.event_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
+
+    {% include '/emails/components/email-socials.html.twig' with {
+        twitterHref: 'https://twitter.com/intent/tweet?text=' ~ eventName ~ '&url=' ~ eventLink,
+        linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ eventLink ~ '&title=' ~ eventName ~ '&mini=true'
+    } %}
+
+    {{ macros.spaceRow(20) }}
+    <tr>
+        <td align="center">
+            <table class="create-fishbowl-data" role="presentation" align="center" cellpadding="4" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 100%; background-color: #fff; padding: 24px 32px;">
+                {{ macros.text(eventName, emailConfig, 'text-align:center;', 'eventCardTitle') }}
+                {{ macros.spaceRow(10) }}
+                {% if eventDescription %}
+                    {{ macros.text(eventDescription,emailConfig, 'text-align:center;') }}
+                    {{ macros.spaceRow(10) }}
+                {% endif %}
+                {{ macros.text(eventStartDate, emailConfig, 'text-align:center;', 'eventCardHours') }}
+                {{ macros.text(eventStartTime, emailConfig, 'text-align:center;', 'eventCardHours') }}
+            </table>
+        </td>
+    </tr>
+    {{ macros.spaceRow(55) }}
+    <tr>
+        <td align="center">
+            {% include '/emails/components/email-button.html.twig' with {
+                link: eventLink,
+                label: 'emails.event_created_email.world_cafe_cta'|trans({}, null, locale)
+            } %}
+        </td>
+    </tr>
+    {{ macros.spaceRow(55) }}
+    {{ macros.note('emails.event_created_email.world_cafe_delete'|trans({'%id%': eventId, '%styles%': emailConfig.link.styles}, null, locale), emailConfig, 'text-align: center;') }}
+    {{ macros.spaceRow(25) }}
+{% endblock %}

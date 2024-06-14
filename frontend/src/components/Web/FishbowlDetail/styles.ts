@@ -23,7 +23,7 @@ const MainGrid = styled.div`
     grid-template-columns: 1fr 1fr;
   `}
 
-  * + *:not(:last-child) {
+  & + *:not(:last-child) {
     margin-bottom: ${space(1)};
   }
 

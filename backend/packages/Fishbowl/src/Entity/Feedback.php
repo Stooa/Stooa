@@ -21,6 +21,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Core\Entity\Participant;
 use App\Fishbowl\Repository\FeedbackRepository;
+use App\WorldCafe\Entity\WorldCafe;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
@@ -28,7 +29,6 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: FeedbackRepository::class)]
 #[ApiResource(
     operations: [
         new Get(security: 'is_granted(\'ROLE_USER\')'),
@@ -38,6 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     normalizationContext: ['groups' => ['feedback:read']],
     denormalizationContext: ['groups' => ['feedback:write']]
 )]
+#[ORM\Entity(repositoryClass: FeedbackRepository::class)]
 class Feedback implements \Stringable
 {
     final public const ORIGIN_FISHBOWL = 'fishbowl';
@@ -102,6 +103,11 @@ class Feedback implements \Stringable
     #[ORM\ManyToOne(targetEntity: Fishbowl::class, inversedBy: 'feedbacks')]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
     private ?Fishbowl $fishbowl = null;
+
+    #[Groups(['feedback:read', 'feedback:write'])]
+    #[ORM\ManyToOne(targetEntity: WorldCafe::class, inversedBy: 'feedbacks')]
+    #[ApiFilter(SearchFilter::class, strategy: 'exact')]
+    private ?WorldCafe $worldCafe = null;
 
     #[Groups(['feedback:read', 'feedback:write', 'fishbowl:read'])]
     #[ORM\ManyToOne(targetEntity: Participant::class, inversedBy: 'feedbacks')]
@@ -211,6 +217,18 @@ class Feedback implements \Stringable
     public function setFishbowl(?Fishbowl $fishbowl): self
     {
         $this->fishbowl = $fishbowl;
+
+        return $this;
+    }
+
+    public function getWorldCafe(): ?WorldCafe
+    {
+        return $this->worldCafe;
+    }
+
+    public function setWorldCafe(?WorldCafe $worldCafe): self
+    {
+        $this->worldCafe = $worldCafe;
 
         return $this;
     }

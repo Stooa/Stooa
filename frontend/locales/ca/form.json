@@ -8,7 +8,7 @@
     "haveAccount": "Ja tens un compte?",
     "noAccount": "No tens compte?",
     "fishbowl": {
-        "title": "Titul",
+        "title": "Títol",
         "day": "Data",
         "selectDay": "Selecciona el dia",
         "time": "Comença a les",
@@ -58,5 +58,31 @@
         "unknownErrorServer": "Problema desconegut. Actualitza la pàgina i prova de nou",
         "unknownErrorInside": "Ho sentim! Va ocórrer un error durant l'accés. Intenta-ho de nou",
         "maxLength": "Aquest camp no pot tenir més de {{length}} caràcters."
+    },
+    "worldCafe": {
+        "pageTitle": "Crea un World Café gratis",
+        "basics": "Bàsics",
+        "questions": "Preguntes",
+        "question": "Pregunta",
+        "descriptionPlaceholder": "Si cal, afegeix una descripció.",
+        "questionsTooltip": "Assegura't de preparar suficients preguntes per al nombre de persones que hi participaran. La mida òptima per a les sales és entre 4 i 6 participants.",
+        "defaults": {
+            "title": "Reunió World Café - {{name}}",
+            "question": "Pregunta {{number}}"
+        },
+        "addQuestion": "Afegir una pregunta",
+        "roundDuration": "Durada de les rondes",
+        "roundTimeLabel": "Cada ronda dura",
+        "minutes": "minuts",
+        "add5MinutesLabel": "Afegeix 5 minuts extra a la primera ronda",
+        "add5MinutesTooltip": "Us recomanem afegir 5 minuts extra a la primera ronda, ja que les persones solen necessitar una mica més de temps per posar-se en marxa.",
+        "next":  "Afegir preguntes",
+        "submit": "Crear World Café",
+        "prejoin" : {
+            "title": "Uneix-te al World Café",
+            "description": "Si vols pots configurar la teva càmera i el teu micròfon abans de començar",
+            "join": "Uneix-te al World Café",
+            "cameraFallback": "Stooa <span>necessita permisos</span> per accedir a la teva <span>càmera i micròfon</span> perquè tothom pugui escoltar-te i veure't"
+        }
     }
 }

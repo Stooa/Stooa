@@ -16,6 +16,8 @@ services:
         exclude:
             - ../src/DependencyInjection/
             - ../src/Entity/
+            - ../src/Resolver/EventResolver.php
+            - ../src/Resolver/EventCreatorResolver.php
 
     App\Core\EventSubscriber\LocaleSubscriber:
         bind:
@@ -45,9 +47,6 @@ services:
     App\Core\Encryption\HalitePasswordEncryption:
         bind:
             $key: '%env(HALITE_KEY)%'
-
-    App\Fishbowl\Stage\FishbowlValidateStage:
-        decorates: api_platform.graphql.resolver.stage.validate
 
     # Admin
     App\Core\Admin\UserAdmin:

@@ -31,12 +31,32 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
+    app_fishbowl_participant_service:
+        class: App\Core\Service\ParticipantService
+        bind:
+            $participantRepository: '@App\Core\Repository\FishbowlParticipantRepository'
+
+    App\Fishbowl\Service\FishbowlService:
+        bind:
+            $participantService: '@app_fishbowl_participant_service'
+
+    app_fishbowl_resolver_event_resolver:
+        class: App\Core\Resolver\EventResolver
+        bind:
+            $repository: '@App\Fishbowl\Repository\FishbowlRepository'
+
+    app_fishbowl_creator_resolver_event_resolver:
+        class: App\Core\Resolver\EventCreatorResolver
+        bind:
+            $repository: '@App\Fishbowl\Repository\FishbowlRepository'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:
             - { name: sonata.admin, model_class: App\Fishbowl\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
         calls:
             - [ setFishbowlService, [ '@App\Fishbowl\Service\FishbowlService' ] ]
+            - [ setSlugService, [ '@App\Core\Service\SlugService' ] ]
 
     App\Fishbowl\Admin\FeedbackAdmin:
         tags:

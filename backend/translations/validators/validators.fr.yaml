@@ -18,3 +18,5 @@ fishbowl:
         private: The password field can not be empty in private fishbowls.
         public: The password field must be empty in public fishbowls.
 
+world_cafe:
+    future: La date de début de l'opération est déjà passée.

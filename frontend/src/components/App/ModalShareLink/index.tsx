@@ -60,9 +60,10 @@ const ModalShareLink: React.FC = () => {
             </p>
             <div className="modal-footer">
               <ButtonCopyUrl
+                eventType="fishbowl"
+                slug={fid as string}
                 withSvg
                 variant="primary"
-                fid={fid as string}
                 locale={data.locale}
                 isPrivate={data.isPrivate}
                 plainPassword={getPassword()}

@@ -18,3 +18,6 @@ user:
   email: Ja existeix un usuari amb el correu electrònic introduït.
   password: La contrasenya actual no és correcta
   participant: El participant ha de tenir un Usuari o un Convidat
+
+world_cafe:
+    future: La data d'inici del fishbowl ja va passar.

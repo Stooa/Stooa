@@ -7,7 +7,7 @@
 
 framework:
     workflows:
-        fishbowl:
+        event:
             type: 'state_machine'
             audit_trail:
                 enabled: true
@@ -16,11 +16,13 @@ framework:
                 property: 'currentStatus'
             supports:
                 - App\Fishbowl\Entity\Fishbowl
+                - App\WorldCafe\Entity\WorldCafe
             initial_marking: not_started
             places:
                 - not_started
                 - introduction
                 - running
+                - conclusions
                 - finished
             transitions:
                 introduce:
@@ -34,4 +36,10 @@ framework:
                     to: running
                 finish:
                     from: running
+                    to: finished
+                to_conclusions:
+                    from: running
+                    to: conclusions
+                conclude:
+                    from: conclusions
                     to: finished

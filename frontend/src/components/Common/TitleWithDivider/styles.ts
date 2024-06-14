@@ -11,12 +11,13 @@ import { space } from '@/ui/helpers';
 import { COLOR_NEUTRO_500 } from '@/ui/settings';
 import styled from 'styled-components';
 
-const StyledTitleWithDivider = styled.p`
+const StyledTitleWithDivider = styled.p<{ regularWeight: boolean }>`
   display: flex;
   align-items: center;
   gap: ${space(2)};
   position: relative;
   width: 100%;
+  font-weight: ${({ regularWeight }) => (regularWeight ? 'normal' : '500')};
 
   & span {
     flex-grow: 1;

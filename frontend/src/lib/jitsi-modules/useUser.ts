@@ -10,8 +10,11 @@
 import { User, UserRepository } from '@/types/user';
 import { useSeats } from '@/jitsi';
 import { dispatchEvent } from '@/lib/helpers';
-import { MODERATOR_LEFT, USER_KICKED } from '@/jitsi/Events';
+import { MODERATOR_LEFT, USER_KICKED, USER_LEFT_CONFERENCE } from '@/jitsi/Events';
 import { useJitsiStore } from '@/store';
+import { useWorldCafeStore } from '@/store/useWorldCafeStore';
+import { useEventType } from '@/hooks/useEventType';
+import { FISHBOWL, WORLD_CAFE } from '@/types/event-types';
 
 export const useUser = (): UserRepository => {
   const { leave } = useSeats();
@@ -19,6 +22,10 @@ export const useUser = (): UserRepository => {
     userJoined: store.userJoined,
     userLeft: store.userLeft
   }));
+  const { addWorldCafeParticipant } = useWorldCafeStore(store => ({
+    addWorldCafeParticipant: store.addWorldCafeParticipant
+  }));
+  const { eventType } = useEventType();
 
   const clearUser = (): void => {
     localStorage.removeItem('user');
@@ -76,12 +83,23 @@ export const useUser = (): UserRepository => {
   const handleUserJoin = (id: string, user: User): void => {
     userJoined(user);
 
+    if (eventType === WORLD_CAFE && user) {
+      // Todo Fix this temporary solution
+      setTimeout(function () {
+        addWorldCafeParticipant({ id });
+      }, 1000);
+    }
+
     console.log('[STOOA] Handle userRepository join', user, id);
   };
 
   const handleUserLeft = (id: string, user: User): void => {
     userLeft(user);
-    leave(id);
+    if (eventType === FISHBOWL) {
+      leave(id);
+    } else {
+      dispatchEvent(USER_LEFT_CONFERENCE, { user: user });
+    }
 
     if (user._role === 'moderator') {
       dispatchEvent(MODERATOR_LEFT);

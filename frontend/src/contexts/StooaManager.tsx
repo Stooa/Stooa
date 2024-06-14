@@ -24,20 +24,12 @@ import {
   CONFERENCE_PASSWORD_REQUIRED,
   CONFERENCE_START,
   CONNECTION_ESTABLISHED_FINISHED,
-  MODERATOR_LEFT,
   NOTIFICATION,
-  RECORDING_START,
-  RECORDING_STOP,
-  SCREEN_SHARE_CANCELED,
-  SCREEN_SHARE_START,
-  SCREEN_SHARE_STOP,
-  TRANSCRIPTION_TRANSCRIBER_JOINED,
   USER_KICKED,
   USER_MUST_LEAVE
 } from '@/jitsi/Events';
-import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
+import { IConferenceStatus } from '@/jitsi/Status';
 import { GET_FISHBOWL, INTRODUCE_FISHBOWL, NO_INTRO_RUN_FISHBOWL } from '@/lib/gql/Fishbowl';
-import { isTimeLessThanNMinutes, isTimeUp } from '@/lib/helpers';
 import { useStateValue } from '@/contexts/AppContext';
 import useEventListener from '@/hooks/useEventListener';
 
@@ -50,11 +42,10 @@ import { Fishbowl } from '@/types/api-platform';
 import { pushEventDataLayer } from '@/lib/analytics';
 import useVideoRecorder from '@/hooks/useVideoRecorder';
 import { LOCALES } from '@/lib/supportedTranslationLanguages';
-import { SupportedLanguageTag } from '@/types/transcriptions';
-import { useConference, useSeats, useSharedTrack, useUser } from '@/jitsi';
+import { useConference, useSeats, useUser } from '@/jitsi';
+import useTimeStatus from '@/hooks/useTimeStatus';
+import useScreenShare from '@/hooks/useScreenShare';
 
-const TEN_MINUTES = 10;
-const ONE_MINUTE = 1;
 const [useStooa, StooaContextProvider] = createGenericContext<StooaContextValues>();
 
 const StooaProvider = ({
@@ -64,17 +55,14 @@ const StooaProvider = ({
 }: {
   fishbowl: Fishbowl;
   isModerator: boolean;
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
 }) => {
   const router = useRouter();
   const { hasUserGaveFeedback, clearUser } = useUser();
   const { getIds } = useSeats();
-  const { exitFullScreen } = useSharedTrack();
-  const { initialInteraction, initializeJitsi, initializeConnection, unload, unloadKickedUser } =
-    useJitsi();
+  const { initialInteraction, initializeConnection, unload, unloadKickedUser } = useJitsi();
   const {
     setConferenceTranscriptionLanguage,
-    stopRecordingEvent,
     lockConference,
     joinPrivateConference,
     joinConference
@@ -84,35 +72,23 @@ const StooaProvider = ({
 
   const useGaveFeedback = useMemo(() => hasUserGaveFeedback(fid as string), [fid]);
 
-  const [timeStatus, setTimeStatus] = useState<ITimeStatus>(ITimeStatus.DEFAULT);
   const [myUserId, setMyUserId] = useState(null);
   const [initConnection, setInitConnection] = useState(false);
   const [conferenceReady, setConferenceReady] = useState(false);
-  const [tenMinuteToastSent, seTenMinuteToastSent] = useState(false);
-  const [lastMinuteToastSent, setLastMinuteToastSent] = useState(false);
   const [participantToKick, setParticipantToKick] = useState<Participant>();
   const [fishbowlPassword, setFishbowlPassword] = useState<string>();
-  const [isSharing, setIsSharing] = useState(false);
   const [clientRunning, setClientRunning] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
   const [feedbackAlert, setFeedbackAlert] = useState(false);
   const [gaveFeedback, setGaveFeedback] = useState(useGaveFeedback);
-  const [isTranscriptionEnabled, setIsTranscriptionEnabled] = useState(false);
-  const [isTranscriberJoined, setIsTranscriberJoined] = useState(false);
-  const [isTranslationEnabled, setIsTranslationEnabled] = useState(false);
-  const [translationLanguage, setTranslationLanguage] = useState<SupportedLanguageTag>(
-    LOCALES[lang]
-  );
+
   const [participantsActive, setParticipantsActive] = useState(() => {
     if (isModerator && fishbowl.isFishbowlNow) {
       return true;
     }
     return false;
   });
-  const [selectedTranscriptionLanguage, setSelectedTranscriptionLanguage] = useState(LOCALES[lang]);
 
   const apiInterval = useRef<number>();
-  const timeUpInterval = useRef<number>();
 
   const { data: fishbowlQuery } = useQuery(GET_FISHBOWL, {
     variables: { slug: fid },
@@ -122,45 +98,15 @@ const StooaProvider = ({
   const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const [introduceFishbowl] = useMutation(INTRODUCE_FISHBOWL);
   const [{ fishbowlStarted, conferenceStatus, prejoin }, dispatch] = useStateValue();
+  const { timeStatus } = useTimeStatus(fishbowl, conferenceStatus);
+  const { isSharing, share, stopShare } = useScreenShare(isModerator);
 
-  const sendStopRecordingEvent = () => {
-    stopRecordingEvent();
-    setIsRecording(false);
-  };
-
-  const closeToGigabyteLimitNotification = () => {
-    toast(t('fishbowl:recording.closeToGiga'), {
-      icon: '⚠️',
-      toastId: 'close-to-giga',
-      type: 'warning',
-      position: 'bottom-center',
-      autoClose: 5000
-    });
-  };
-
-  const recorderOptions = {
-    fileName: fishbowl.name || 'Fishbowl',
-    downloadingMessage: t('fishbowl:recording.downloading'),
-    slug: fishbowl.slug
-  };
-
-  const { startRecording: startRecordingVideoRecorder, stopRecording } = useVideoRecorder(
-    recorderOptions,
-    sendStopRecordingEvent,
-    closeToGigabyteLimitNotification
+  const { isRecording, setIsRecording, startRecording, stopRecording } = useVideoRecorder(
+    fishbowl.name || 'Fishbowl',
+    t('fishbowl:recording.downloading'),
+    t('fishbowl:recording.closeToGiga'),
+    fishbowl.slug
   );
-
-  const startRecording = () => {
-    return startRecordingVideoRecorder().then(result => {
-      if (result.status === 'success') setIsRecording(true);
-      pushEventDataLayer({
-        category: 'Recording',
-        action: 'Start',
-        label: fishbowl.slug
-      });
-      return result;
-    });
-  };
 
   const startFishbowl = () => {
     const slug = { variables: { input: { slug: fid } } };
@@ -264,44 +210,6 @@ const StooaProvider = ({
     }
   });
 
-  useEventListener(SCREEN_SHARE_START, () => {
-    setIsSharing(true);
-  });
-
-  useEventListener(SCREEN_SHARE_STOP, ({ detail: { location } }) => {
-    if (isModerator) {
-      pushEventDataLayer({
-        action: location === 'app' ? 'stooa_stop_share' : 'navigator_stop_share',
-        category: 'Sharescreen',
-        label: window.location.href
-      });
-    }
-
-    exitFullScreen();
-
-    setIsSharing(false);
-  });
-
-  useEventListener(SCREEN_SHARE_CANCELED, () => {
-    setIsSharing(false);
-  });
-
-  useEventListener(RECORDING_START, () => {
-    setIsRecording(true);
-  });
-
-  useEventListener(RECORDING_STOP, () => {
-    setIsRecording(false);
-  });
-
-  useEventListener(MODERATOR_LEFT, () => {
-    sendStopRecordingEvent();
-  });
-
-  useEventListener(TRANSCRIPTION_TRANSCRIBER_JOINED, ({ detail: { joined } }) => {
-    setIsTranscriberJoined(joined);
-  });
-
   const checkApIConferenceStatus = () => {
     api
       .get(`${lang}/fishbowl-status/${fid}`, {
@@ -316,41 +224,6 @@ const StooaProvider = ({
       .catch(error => {
         console.log('[STOOA] ', error);
       });
-  };
-
-  const checkIsTimeUp = () => {
-    if (isTimeUp(fishbowl.endDateTimeTz)) {
-      clearInterval(timeUpInterval.current);
-      setTimeStatus(ITimeStatus.TIME_UP);
-    } else if (isTimeLessThanNMinutes(fishbowl.endDateTimeTz, ONE_MINUTE + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING && !lastMinuteToastSent) {
-        const message = t('notification.oneMinuteLeft');
-        toast(message, {
-          icon: '⏳',
-          type: 'error',
-          toastId: 'one-minute',
-          position: 'bottom-center',
-          delay: 5000,
-          autoClose: 10000
-        });
-        setLastMinuteToastSent(true);
-      }
-      setTimeStatus(ITimeStatus.LAST_MINUTE);
-    } else if (isTimeLessThanNMinutes(fishbowl.endDateTimeTz, TEN_MINUTES + 1)) {
-      if (conferenceStatus === IConferenceStatus.RUNNING && !tenMinuteToastSent) {
-        const message = t('notification.tenMinutesLeft');
-        toast(message, {
-          icon: '⏳',
-          type: 'warning',
-          toastId: 'ten-minute',
-          position: 'bottom-center',
-          delay: 3000,
-          autoClose: 10000
-        });
-        seTenMinuteToastSent(true);
-      }
-      setTimeStatus(ITimeStatus.ENDING);
-    }
   };
 
   const isConferenceIntroducing = (): boolean => {
@@ -404,20 +277,6 @@ const StooaProvider = ({
   }, [fishbowlStarted, conferenceReady, conferenceStatus, prejoin]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    initializeJitsi();
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', unload);
-    window.addEventListener('unload', unload);
-
-    return () => {
-      window.removeEventListener('beforeunload', unload);
-      window.removeEventListener('unload', unload);
-    };
-  }, []);
-
-  useEffect(() => {
     if (conferenceStatus === IConferenceStatus.FINISHED) {
       unload().then(function () {
         const route = `${ROUTE_FISHBOWL_THANKYOU}/${fid}`;
@@ -427,21 +286,12 @@ const StooaProvider = ({
   }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    checkIsTimeUp();
-
-    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
     apiInterval.current = window.setInterval(checkApIConferenceStatus, 6000);
 
     return () => {
-      clearInterval(timeUpInterval.current);
       clearInterval(apiInterval.current);
     };
   }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    clearInterval(timeUpInterval.current);
-    timeUpInterval.current = window.setInterval(checkIsTimeUp, 1000);
-  }, [tenMinuteToastSent, lastMinuteToastSent]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <StooaContextProvider
@@ -457,7 +307,8 @@ const StooaProvider = ({
         getPassword,
         setFishbowlPassword,
         isSharing,
-        setIsSharing,
+        share,
+        stopShare,
         clientRunning,
         setClientRunning,
         startRecording,
@@ -468,18 +319,8 @@ const StooaProvider = ({
         setFeedbackAlert,
         gaveFeedback,
         setGaveFeedback,
-        isTranscriptionEnabled,
-        setIsTranscriptionEnabled,
-        isTranslationEnabled,
-        setIsTranslationEnabled,
         participantsActive,
-        setParticipantsActive,
-        isTranscriberJoined,
-        setIsTranscriberJoined,
-        selectedTranscriptionLanguage,
-        setSelectedTranscriptionLanguage,
-        translationLanguage,
-        setTranslationLanguage
+        setParticipantsActive
       }}
     >
       {children}

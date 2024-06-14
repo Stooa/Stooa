@@ -63,9 +63,10 @@ const FishbowlInfo = ({ data }: Props) => {
           <p className="body-sm medium description__title">{data.name}</p>
           <p className="info-text body-xs">{data.description}</p>
           <ButtonCopyUrl
+            eventType="fishbowl"
+            slug={data.slug}
             variant="secondary"
             size="medium"
-            fid={data.slug}
             locale={data.locale}
             isPrivate={data.isPrivate}
             plainPassword={getPassword()}

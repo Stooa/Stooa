@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\Tests\Unit;
 
+use App\Core\EventSubscriber\EventWorkflowSubscriber;
 use App\Core\Factory\UserFactory;
-use App\Fishbowl\EventSubscriber\FishbowlWorkflowSubscriber;
 use App\Fishbowl\Factory\FishbowlFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -30,12 +30,12 @@ class FishbowlWorkflowSubscriberTest extends TestCase
 
     /** @var MockObject&Security */
     private MockObject $security;
-    private FishbowlWorkflowSubscriber $subscriber;
+    private EventWorkflowSubscriber $subscriber;
 
     protected function setUp(): void
     {
         $this->security = $this->createMock(Security::class);
-        $this->subscriber = new FishbowlWorkflowSubscriber($this->security);
+        $this->subscriber = new EventWorkflowSubscriber($this->security);
     }
 
     /** @test */
@@ -69,6 +69,6 @@ class FishbowlWorkflowSubscriberTest extends TestCase
     /** @test */
     public function itGetSubscribedEvents(): void
     {
-        $this->assertSame(['workflow.fishbowl.guard' => ['guardFishbowl']], $this->subscriber::getSubscribedEvents());
+        $this->assertSame(['workflow.event.guard' => ['guardFishbowl']], $this->subscriber::getSubscribedEvents());
     }
 }

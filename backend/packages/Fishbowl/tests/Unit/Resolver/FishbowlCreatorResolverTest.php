@@ -15,9 +15,9 @@ namespace App\Fishbowl\Tests\Unit\Resolver;
 
 use ApiPlatform\Exception\ItemNotFoundException;
 use App\Core\Factory\UserFactory;
+use App\Core\Resolver\EventCreatorResolver;
 use App\Fishbowl\Factory\FishbowlFactory;
 use App\Fishbowl\Repository\FishbowlRepository;
-use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Service\PrivateFishbowlService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ class FishbowlCreatorResolverTest extends TestCase
 {
     use Factories;
 
-    private FishbowlCreatorResolver $resolver;
+    private EventCreatorResolver $resolver;
     /** @var MockObject&FishbowlRepository */
     private MockObject $fishbowlRepository;
     /** @var MockObject&PrivateFishbowlService */
@@ -44,7 +44,7 @@ class FishbowlCreatorResolverTest extends TestCase
         $this->fishbowlRepository = $this->createMock(FishbowlRepository::class);
         $this->security = $this->createMock(Security::class);
 
-        $this->resolver = new FishbowlCreatorResolver(
+        $this->resolver = new EventCreatorResolver(
             $this->fishbowlRepository,
             $this->security,
             $this->privateFishbowlService

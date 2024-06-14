@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
@@ -22,6 +22,8 @@ import { DevicesProvider } from '@/contexts/DevicesContext';
 
 import { ToastContainer } from 'react-toastify';
 import { ModalsProvider } from '@/contexts/ModalsContext';
+import { TranscriptionsProvider } from '@/contexts/TranscriptionContext';
+import useLoadJitsi from '@/hooks/useLoadJitsi';
 
 const scripts = ['https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'];
 
@@ -46,28 +48,7 @@ const Layout = ({
   const { data: fbCreatorData } = useQuery(IS_FISHBOWL_CREATOR, {
     variables: { slug: fid }
   });
-  const [loadedJitsi, setLoadedJitsi] = useState(!!window.JitsiMeetJS);
-
-  const importJitsi = async () => {
-    if (loadedJitsi) return;
-
-    let importedJitsiMeetJs;
-
-    try {
-      // @ts-expect-error: lib-jitsi-meet not found
-      importedJitsiMeetJs = (await import('lib-jitsi-meet')).default;
-    } catch (error) {
-      return;
-    }
-
-    window.JitsiMeetJS = importedJitsiMeetJs;
-
-    setLoadedJitsi(true);
-  };
-
-  useEffect(() => {
-    importJitsi();
-  }, []);
+  const { loadedJitsi } = useLoadJitsi(scriptsLoaded);
 
   if (!scriptsLoaded || !loadedJitsi) return <Loader />;
   if (!scriptsLoadedSuccessfully || !loadedJitsi)
@@ -77,11 +58,13 @@ const Layout = ({
 
   return (
     <StooaProvider fishbowl={fishbowl} isModerator={isModerator}>
-      <ModalsProvider isModerator={isModerator}>
-        <DevicesProvider>
-          <Container className={className}>{children}</Container>
-        </DevicesProvider>
-      </ModalsProvider>
+      <TranscriptionsProvider>
+        <ModalsProvider isModerator={isModerator}>
+          <DevicesProvider>
+            <Container className={className}>{children}</Container>
+          </DevicesProvider>
+        </ModalsProvider>
+      </TranscriptionsProvider>
       <ToastContainer className="toastify-custom" />
     </StooaProvider>
   );

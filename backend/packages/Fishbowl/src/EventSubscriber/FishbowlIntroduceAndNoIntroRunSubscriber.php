@@ -13,33 +13,33 @@ declare(strict_types=1);
 
 namespace App\Fishbowl\EventSubscriber;
 
+use App\Core\Model\Event;
 use App\Fishbowl\Entity\Fishbowl;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\GuardEvent;
-use Webmozart\Assert\Assert;
 
 class FishbowlIntroduceAndNoIntroRunSubscriber implements EventSubscriberInterface
 {
     public function guardFishbowl(GuardEvent $event): void
     {
-        $fishbowl = $event->getSubject();
+        $eventEntity = $event->getSubject();
 
-        Assert::isInstanceOf($fishbowl, Fishbowl::class);
+        if ($eventEntity instanceof Fishbowl) {
+            $transition = $event->getTransition();
 
-        $transition = $event->getTransition();
-
-        if ((Fishbowl::TRANSITION_INTRODUCE === $transition->getName() && !$fishbowl->getHasIntroduction())
-            || (Fishbowl::TRANSITION_NO_INTRO_RUN === $transition->getName() && $fishbowl->getHasIntroduction())
-        ) {
-            $event->setBlocked(true);
+            if ((Event::TRANSITION_INTRODUCE === $transition->getName() && !$eventEntity->getHasIntroduction())
+                || (Event::TRANSITION_NO_INTRO_RUN === $transition->getName() && $eventEntity->getHasIntroduction())
+            ) {
+                $event->setBlocked(true);
+            }
         }
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
-            'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
+            'workflow.event.guard.' . Event::TRANSITION_INTRODUCE => ['guardFishbowl'],
+            'workflow.event.guard.' . Event::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
         ];
     }
 }

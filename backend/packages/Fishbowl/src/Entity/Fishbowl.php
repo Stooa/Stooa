@@ -29,12 +29,11 @@ use ApiPlatform\Metadata\Put;
 use App\Core\Entity\Participant;
 use App\Core\Entity\Topic;
 use App\Core\Entity\User;
+use App\Core\Model\Event;
 use App\Fishbowl\Repository\FishbowlRepository;
-use App\Fishbowl\Resolver\FishbowlCreatorResolver;
 use App\Fishbowl\Resolver\FishbowlFinishMutationResolver;
 use App\Fishbowl\Resolver\FishbowlIntroduceMutationResolver;
 use App\Fishbowl\Resolver\FishbowlNoIntroRunMutationResolver;
-use App\Fishbowl\Resolver\FishbowlResolver;
 use App\Fishbowl\Resolver\FishbowlRunMutationResolver;
 use App\Fishbowl\State\FishbowlProcessor;
 use App\Fishbowl\State\FishbowlStateProvider;
@@ -47,7 +46,6 @@ use Doctrine\ORM\Mapping\InverseJoinColumn;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Metaclass\FilterBundle\Filter\FilterLogic;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
@@ -64,18 +62,18 @@ use Webmozart\Assert\Assert as MAssert;
         new GetCollection(security: 'is_granted(\'ROLE_USER\')', provider: FishbowlStateProvider::class),
         new Post(security: 'is_granted(\'ROLE_USER\')'),
     ],
-    normalizationContext: ['groups' => ['fishbowl:read']],
-    denormalizationContext: ['groups' => ['fishbowl:write']],
+    normalizationContext: ['groups' => ['fishbowl:read', 'event:read']],
+    denormalizationContext: ['groups' => ['fishbowl:write', 'event:write']],
     paginationItemsPerPage: 25,
     graphQlOperations: [
         new Query(),
         new Query(
-            resolver: FishbowlResolver::class,
+            resolver: 'app_fishbowl_resolver_event_resolver',
             args: ['slug' => ['type' => 'String!']],
             name: 'bySlugQuery'
         ),
         new Query(
-            resolver: FishbowlCreatorResolver::class,
+            resolver: 'app_fishbowl_creator_resolver_event_resolver',
             args: ['slug' => ['type' => 'String!']],
             name: 'isCreatorOf'
         ),
@@ -124,71 +122,21 @@ use Webmozart\Assert\Assert as MAssert;
 #[ApiFilter(FilterLogic::class)]
 #[FutureFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
 #[PrivateFishbowl(groups: ['fishbowl:create', 'fishbowl:update'])]
-
-class Fishbowl implements \Stringable
+class Fishbowl extends Event
 {
-    use TimestampableEntity;
-    final public const TRANSITION_INTRODUCE = 'introduce';
-    final public const TRANSITION_RUN = 'run';
-    final public const TRANSITION_NO_INTRO_RUN = 'no_intro_run';
-    final public const TRANSITION_FINISH = 'finish';
-    final public const STATUS_NOT_STARTED = 'not_started';
-    final public const STATUS_INTRODUCTION = 'introduction';
-    final public const STATUS_RUNNING = 'running';
-    final public const STATUS_FINISHED = 'finished';
-    /**
-     * @var array<string, string>
-     *
-     * @phpstan-var array<string, Fishbowl::STATUS_*> $statusChoices
-     */
-    public static array $statusChoices = [
-        'Not Started' => self::STATUS_NOT_STARTED,
-        'Introduction' => self::STATUS_INTRODUCTION,
-        'Running' => self::STATUS_RUNNING,
-        'Finished' => self::STATUS_FINISHED,
-    ];
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTimeInterface $introducedAt = null;
 
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTimeInterface $runnedAt = null;
     #[Groups(['fishbowl:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
     private ?UuidInterface $id = null;
-
-    #[Groups(['fishbowl:read', 'fishbowl:write'])]
-    #[Assert\Length(max: 255)]
-    #[ORM\Column(type: 'string')]
-    private ?string $name = null;
-
-    #[Groups(['fishbowl:read', 'fishbowl:write'])]
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description = null;
-
-    #[Groups(['fishbowl:read'])]
-    #[Assert\NotBlank]
-    #[Assert\Length(max: 255)]
-    #[ORM\Column(type: 'string', unique: true)]
-    private ?string $slug = null;
-
-    #[Groups(['fishbowl:write', 'fishbowl:read'])]
-    #[Assert\NotNull]
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $startDateTime = null;
-
-    #[Groups(['fishbowl:write', 'fishbowl:read'])]
-    #[Assert\NotNull]
-    #[Assert\Length(max: 255)]
-    #[Assert\Timezone]
-    #[ORM\Column(type: 'string')]
-    private ?string $timezone = null;
-
-    #[Groups(['fishbowl:read', 'fishbowl:write'])]
-    #[Assert\NotNull]
-    #[Assert\Length(max: 255)]
-    #[Assert\Locale(canonicalize: true)]
-    #[ORM\Column(type: 'string')]
-    private ?string $locale = null;
 
     #[ApiProperty(openapiContext: ['format' => 'string'])]
     #[Groups(['fishbowl:write', 'fishbowl:read'])]
@@ -197,37 +145,15 @@ class Fishbowl implements \Stringable
     #[ORM\Column(type: 'time')]
     private ?\DateTimeInterface $duration = null;
 
-    #[Groups(['fishbowl:read'])]
-    #[Assert\NotNull]
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'fishbowls')]
-    private ?User $host = null;
-
-    #[Groups(['fishbowl:read'])]
-    #[Assert\Length(max: 255)]
-    #[Assert\Choice([self::STATUS_NOT_STARTED, self::STATUS_INTRODUCTION, self::STATUS_RUNNING, self::STATUS_FINISHED])]
-    #[ORM\Column(type: 'string', options: ['default' => self::STATUS_NOT_STARTED])]
-    private string $currentStatus = self::STATUS_NOT_STARTED;
-
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $introducedAt = null;
-
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $runnedAt = null;
-
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $finishedAt = null;
-
-    #[Assert\Type('\\DateTimeInterface')]
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $finishDateTime = null;
-
     /** @var Collection<int, Participant> */
     #[Groups(['fishbowl:read'])]
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Participant::class, cascade: ['all'])]
     private Collection $participants;
+
+    #[Groups(['fishbowl:read'])]
+    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'fishbowls')]
+    private ?User $host = null;
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
@@ -284,30 +210,6 @@ class Fishbowl implements \Stringable
     public function setId(string $id): self
     {
         $this->id = Uuid::fromString($id);
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -384,16 +286,21 @@ class Fishbowl implements \Stringable
         return $this->getStartDateTimeTz()->add(new \DateInterval($this->duration->format('\\P\\TG\\Hi\\M')));
     }
 
-    public function getFinishDateTime(): ?\DateTimeInterface
+    public function isHappeningNow(): bool
     {
-        return $this->finishDateTime;
+        $now = new \DateTimeImmutable();
+        $oneHour = new \DateInterval('PT1H');
+        $tenMinutes = new \DateInterval('PT10M');
+
+        return $now >= $this->getStartDateTimeTz()->sub($oneHour) && $now <= $this->getEndDateTimeTz()->add($tenMinutes);
     }
 
-    public function setFinishDateTime(\DateTimeInterface $finishDateTime): self
+    public function shouldHaveEnd(int $hoursAgo = 24): bool
     {
-        $this->finishDateTime = $finishDateTime;
+        $now = new \DateTimeImmutable();
+        $hoursInterval = new \DateInterval('PT' . (string) $hoursAgo . 'H');
 
-        return $this;
+        return $now > $this->getEndDateTimeTz()->add($hoursInterval);
     }
 
     public function calculateFinishTime(): void
@@ -417,18 +324,6 @@ class Fishbowl implements \Stringable
         return $this;
     }
 
-    public function getCurrentStatus(): string
-    {
-        return $this->currentStatus;
-    }
-
-    public function setCurrentStatus(string $status): self
-    {
-        $this->currentStatus = $status;
-
-        return $this;
-    }
-
     /**
      * This is needed to avoid the default normalizer for \DateTime object,
      * instead we just want to output the time part of the `duration` property.
@@ -441,44 +336,6 @@ class Fishbowl implements \Stringable
         return $this->duration->format('H:i');
     }
 
-    public function getStartDateTimeFormatted(): string
-    {
-        MAssert::notNull($this->startDateTime);
-
-        return $this->startDateTime->format('F d, Y');
-    }
-
-    public function getStartDateTimeHourFormatted(): string
-    {
-        MAssert::notNull($this->startDateTime);
-
-        return $this->startDateTime->format('H:i');
-    }
-
-    public function getFinishDateTimeHourFormatted(): string
-    {
-        MAssert::notNull($this->finishDateTime);
-
-        return $this->finishDateTime->format('H:i');
-    }
-
-    public function isHappeningNow(): bool
-    {
-        $now = new \DateTimeImmutable();
-        $oneHour = new \DateInterval('PT1H');
-        $tenMinutes = new \DateInterval('PT10M');
-
-        return $now >= $this->getStartDateTimeTz()->sub($oneHour) && $now <= $this->getEndDateTimeTz()->add($tenMinutes);
-    }
-
-    public function shouldHaveEnd(int $hoursAgo = 24): bool
-    {
-        $now = new \DateTimeImmutable();
-        $hoursInterval = new \DateInterval('PT' . (string) $hoursAgo . 'H');
-
-        return $now > $this->getEndDateTimeTz()->add($hoursInterval);
-    }
-
     public function getHost(): ?User
     {
         return $this->host;
@@ -487,42 +344,6 @@ class Fishbowl implements \Stringable
     public function setHost(?User $host): self
     {
         $this->host = $host;
-
-        return $this;
-    }
-
-    public function getIntroducedAt(): ?\DateTimeInterface
-    {
-        return $this->introducedAt;
-    }
-
-    public function setIntroducedAt(\DateTimeInterface $introducedAt): self
-    {
-        $this->introducedAt = $introducedAt;
-
-        return $this;
-    }
-
-    public function getRunnedAt(): ?\DateTimeInterface
-    {
-        return $this->runnedAt;
-    }
-
-    public function setRunnedAt(\DateTimeInterface $runnedAt): self
-    {
-        $this->runnedAt = $runnedAt;
-
-        return $this;
-    }
-
-    public function getFinishedAt(): ?\DateTimeInterface
-    {
-        return $this->finishedAt;
-    }
-
-    public function setFinishedAt(\DateTimeInterface $finishedAt): self
-    {
-        $this->finishedAt = $finishedAt;
 
         return $this;
     }
@@ -628,11 +449,6 @@ class Fishbowl implements \Stringable
         return $this;
     }
 
-    public function isFinished(): bool
-    {
-        return self::STATUS_FINISHED === $this->getCurrentStatus();
-    }
-
     public function getHostName(): ?string
     {
         if (null === $this->getHost()) {
@@ -676,6 +492,30 @@ class Fishbowl implements \Stringable
     public function setIsPrivate(bool $isPrivate): self
     {
         $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function getIntroducedAt(): ?\DateTimeInterface
+    {
+        return $this->introducedAt;
+    }
+
+    public function setIntroducedAt(\DateTimeInterface $introducedAt): self
+    {
+        $this->introducedAt = $introducedAt;
+
+        return $this;
+    }
+
+    public function getRunnedAt(): ?\DateTimeInterface
+    {
+        return $this->runnedAt;
+    }
+
+    public function setRunnedAt(\DateTimeInterface $runnedAt): self
+    {
+        $this->runnedAt = $runnedAt;
 
         return $this;
     }

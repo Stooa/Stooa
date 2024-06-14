@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Fishbowl\Resolver;
 
 use ApiPlatform\GraphQl\Resolver\MutationResolverInterface;
+use App\Core\Model\Event;
 use App\Fishbowl\Entity\Fishbowl;
 use App\Fishbowl\Repository\FishbowlRepository;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -22,7 +23,7 @@ class FishbowlFinishMutationResolver implements MutationResolverInterface
 {
     public function __construct(
         private readonly FishbowlRepository $repository,
-        private readonly WorkflowInterface $fishbowlStateMachine
+        private readonly WorkflowInterface $eventStateMachine
     ) {
     }
 
@@ -39,11 +40,11 @@ class FishbowlFinishMutationResolver implements MutationResolverInterface
             return null;
         }
 
-        if (!$this->fishbowlStateMachine->can($fishbowl, FISHBOWL::TRANSITION_FINISH)) {
+        if (!$this->eventStateMachine->can($fishbowl, Event::TRANSITION_FINISH)) {
             return null;
         }
 
-        $this->fishbowlStateMachine->apply($fishbowl, FISHBOWL::TRANSITION_FINISH);
+        $this->eventStateMachine->apply($fishbowl, Event::TRANSITION_FINISH);
 
         return $fishbowl;
     }

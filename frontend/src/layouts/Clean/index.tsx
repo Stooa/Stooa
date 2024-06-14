@@ -13,12 +13,13 @@ import { Container, Main } from '@/layouts/Default/styles';
 
 interface Props {
   children: React.ReactNode;
+  center?: boolean;
 }
 
-const Page = ({ children }: Props) => {
+const Page = ({ children, center }: Props) => {
   return (
     <Container>
-      <Main center>{children}</Main>
+      <Main center={center}>{children}</Main>
     </Container>
   );
 };

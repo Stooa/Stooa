@@ -24,6 +24,9 @@ parameters:
         - packages/Fishbowl/src
         - packages/Fishbowl/config
         - packages/Fishbowl/tests
+        - packages/WorldCafe
+        - packages/WorldCafe/src
+        - packages/WorldCafe/config
     symfony:
         container_xml_path: '%rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml'
     treatPhpDocTypesAsCertain: false

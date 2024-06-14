@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import Alert from '@/ui/Alert';
 import { space } from '@/ui/helpers';
 import { COLOR_PURPLE_400, COLOR_NEUTRO_300, COLOR_NEUTRO_400, BREAKPOINTS } from '@/ui/settings';
-import { Container } from '@/ui/pages/fishbowl-detail';
+import { Container } from '@/ui/pages/event-detail';
 
 const Time = styled(Alert)`
   background-color: ${COLOR_NEUTRO_300};

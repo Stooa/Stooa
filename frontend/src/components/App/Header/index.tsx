@@ -18,6 +18,7 @@ import { ROUTE_HOME } from '@/app.config';
 import StatusRecording from '../StatusRecording';
 import RedRec from '@/ui/svg/rec-red.svg';
 import useTranslation from 'next-translate/useTranslation';
+import { useTranscriptions } from '@/contexts/TranscriptionContext';
 
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
 const StatusBar = dynamic(import('@/components/App/StatusBar'), { loading: () => <div /> });
@@ -35,14 +36,8 @@ interface Props {
 }
 
 const Header = ({ isPrefishbowl }: Props) => {
-  const {
-    data,
-    isModerator,
-    conferenceStatus,
-    conferenceReady,
-    isRecording,
-    isTranscriptionEnabled
-  } = useStooa();
+  const { data, isModerator, conferenceStatus, conferenceReady, isRecording } = useStooa();
+  const { isTranscriptionEnabled } = useTranscriptions();
   const router = useRouter();
   const { fid } = router.query;
   const { t } = useTranslation('fishbowl');

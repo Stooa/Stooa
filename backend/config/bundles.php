@@ -14,6 +14,7 @@ declare(strict_types=1);
 return [
     App\Core\CoreBundle::class => ['all' => true],
     App\Fishbowl\FishbowlBundle::class => ['all' => true],
+    App\WorldCafe\WorldCafeBundle::class => ['all' => true],
     ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],

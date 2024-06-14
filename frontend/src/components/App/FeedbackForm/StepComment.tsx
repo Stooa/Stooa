@@ -54,6 +54,7 @@ const StepComment = ({ handleCommentFeedback, handleSkip, title }: Props) => {
     });
     return () => subscription.unsubscribe();
   }, [watch]);
+
   return (
     <StyledStepWrapper data-testid="feedback-comment-step" key="comment">
       <h4 className="medium body-sm">{t(title)}</h4>
