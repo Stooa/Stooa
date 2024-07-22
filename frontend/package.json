@@ -71,7 +71,7 @@
     "@bahmutov/cypress-esbuild-preprocessor": "2.2.0",
     "@faker-js/faker": "8.0.2",
     "@mswjs/http-middleware": "0.8.0",
-    "@runroom/design-tokens": "2.2.0",
+    "@runroom/design-tokens": "2.5.7",
     "@svgr/webpack": "6.5.1",
     "@testing-library/cypress": "10.0.1",
     "@testing-library/jest-dom": "5.16.5",
