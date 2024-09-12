@@ -62,7 +62,7 @@ const ButtonCopyUrl = ({
 
   return (
     <Button size={size} variant={variant} onClick={handleCopyUrl} {...props}>
-      {t('copyInvitation')}
+      <span>{t('copyInvitation')}</span>
       {withSvg && <UrlSvg />}
     </Button>
   );

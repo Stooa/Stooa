@@ -39,7 +39,7 @@ fi
 if [ "${CONSUME_MESSAGES:-}" = true ]; then
     echo 'Consume messages...'
 
-    console messenger:consume async --time-limit=3600 -vv >&1
+    console messenger:consume async async_openai --time-limit=3600 -vv >&1
 
     exit 0
 fi

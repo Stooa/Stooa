@@ -11,24 +11,21 @@ import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-
 import { ROUTE_HOME, ROUTE_NOT_FOUND } from '@/app.config';
 import { GET_FISHBOWL } from '@/lib/gql/Fishbowl';
 import withIsFishbowlEnded from '@/hocs/withIsFishbowlEnded';
 import { useStateValue } from '@/contexts/AppContext';
 import { useAuth } from '@/contexts/AuthContext';
-
 import useTranslation from 'next-translate/useTranslation';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { createApolloClient } from '@/lib/apollo-client';
 import { Fishbowl as FishbowlType } from '@/types/api-platform';
 
 import Fishbowl from '@/components/App/Fishbowl';
-import JoinFishbowl from '@/components/Web/JoinFishbowl';
 import Layout from '@/layouts/App';
 
 const LayoutWeb = dynamic(import('@/layouts/FishbowlDetail'), { loading: () => <div /> });
-const FishbowlLanding = dynamic(import('@/components/Web/FishbowlLanding'), {
+const FishbowlInvitationLanding = dynamic(import('@/components/Web/FishbowlInvitationLanding'), {
   loading: () => <div />
 });
 const FishbowlPreJoin = dynamic(import('@/components/App/FishbowlPreJoin'), {
@@ -83,8 +80,7 @@ const Page = ({ fishbowl }: { fishbowl: FishbowlType }) => {
     </Layout>
   ) : (
     <LayoutWeb>
-      <FishbowlLanding data={fishbowl} />
-      <JoinFishbowl data={fishbowl} joinAsGuest={handleJoinAsGuest} />
+      <FishbowlInvitationLanding handleJoinAsGuest={handleJoinAsGuest} fishbowl={fishbowl} />
     </LayoutWeb>
   );
 };
@@ -109,14 +105,26 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
 
-  const { bySlugQueryFishbowl: fishbowl } = data;
-  const SEODescription = fishbowl.description !== '' ? fishbowl.description : null;
-  const seoTitle = fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+  const { bySlugQueryFishbowl: fishbowl }: { bySlugQueryFishbowl: FishbowlType } = data;
+
+  const getSeoDescription = () => {
+    if (fishbowl.invitationSubtitle) {
+      return fishbowl.invitationSubtitle;
+    }
+    return fishbowl.description !== '' ? fishbowl.description : null;
+  };
+
+  const getSeoTitle = () => {
+    if (fishbowl.hasInvitationInfo) {
+      return fishbowl.isPrivate ? `🔒 ${fishbowl.invitationTitle}` : fishbowl.invitationTitle;
+    }
+    return fishbowl.isPrivate ? `🔒 ${fishbowl.name}` : fishbowl.name;
+  };
 
   return {
     props: {
-      seoTitle,
-      seoDescription: SEODescription,
+      seoTitle: getSeoTitle(),
+      seoDescription: getSeoDescription(),
       fishbowl
     }
   };

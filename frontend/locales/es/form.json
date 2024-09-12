@@ -29,7 +29,18 @@
         "isPrivate": "Quiero que el evento sea privado",
         "passwordTooltip": "Para poder acceder al evento será necesario ingresar la contraseña",
         "passwordPlaceholder": "Inserta tu contraseña",
-        "passwordInputLabel": "Contraseña"
+        "passwordInputLabel": "Contraseña",
+        "invitationTitle": "Invitación",
+        "invitationToggleLabel": "Quiero personalizar la invitación a mi evento",
+        "invitationTooltip": "Desde esta invitación, los participantes pueden registrarse para el evento, y de esta manera puedes saber cuántas personas vendrán. Comprueba los participantes desde la página de Fishbowls programados.",
+        "invitationTitleLabel": "Título",
+        "invitationSubtitleLabel": "Subtítulo (opcional)",
+        "invitationDescriptionLabel": "Descripción (opcional)",
+        "AITitle": "Inteligencia Artificial",
+        "hasSummaryLabel": "Quiero que se genere un resumen con inteligencia artificial.",
+        "hasSummaryTooltip": "Guardaremos la transcripción de la conversación para poder generar un resumen que encontrarás en el Dashboard, junto al feedback y los asistentes.",
+        "AIDataPrivacyTitle": "Privacidad de datos",
+        "AIDataPrivacyDescription": "Al activar el resumen con IA, estás aceptando que Stooa guarde la transcripción de la conversación para poder realiar un resumen con OpenAI GPT"
     },
     "button": {
         "login": "Entra",

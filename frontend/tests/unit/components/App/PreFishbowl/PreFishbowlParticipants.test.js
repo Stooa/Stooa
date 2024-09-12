@@ -10,13 +10,13 @@
 import { render, waitFor } from '@testing-library/react';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 import { useStateValue } from '@/contexts/AppContext';
-import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import { getApiParticipantList } from '@/lib/ApiParticipantRepository';
 import { useUserAuth } from '@/user/auth/useUserAuth';
 import { makeFishbowlParticipant } from '../../../factories/fishbowlParticipant';
 
 jest.mock('@/user/auth');
 jest.mock('@/contexts/AppContext');
-jest.mock('@/repository/ApiParticipantRepository');
+jest.mock('@/lib/ApiParticipantRepository');
 jest.mock('@/components/App/ParticipantPlaceholder', () => () => (
   <mock-participant-placeholder data-testid="mock-placeholder" />
 ));

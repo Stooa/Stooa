@@ -43,7 +43,16 @@ emails:
             ca: Catalán
             en: Inglés
             fr: Francés
-
+    new_attendee:
+        subject: '%name% se ha apuntado a tu fishbowl!'
+        title: '%name% se ha apuntado a tu fishbowl!'
+        text: '<b>%name%</b> se ha apuntado al fishbowl de <b>%fishbowl%</b>'
+        copy: 'Copia y comparte el link de este fishbowl con gente que quieres que se una a la conversación👇'
+    new_attendee_confirmation:
+        subject: 'Nos vemos en... %fishbowl%'
+        title: 'Nos vemos en... %fishbowl%'
+        text: 'Te has apuntado al Fishbowl de <b>%fishbowl%</b>, organizado por <b>%name%</b>.'
+        copy: 'Copia y comparte el link de este fishbowl con gente que quieres que se una a la conversación👇'
 login:
     failure: Credenciales no válidas
 

@@ -98,6 +98,10 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
             'locale' => 'es',
             'timezone' => 'Europe/Madrid',
             'hasIntroduction' => true,
+            'hasInvitationInfo' => true,
+            'invitationTitle' => 'Invitation title',
+            'invitationSubtitle' => 'Invitation subtitle',
+            'invitationText' => 'Invitation text',
         ])->object();
 
         $response = $this->callGQLWithToken($hostedFishbowl->getId(), $hostToken, $newFishbowl);
@@ -111,7 +115,10 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
         $this->assertSame($newFishbowl->getDescription(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['description']);
         $this->assertSame($newFishbowl->getLocale(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['locale']);
         $this->assertSame($newFishbowl->getTimezone(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['timezone']);
-        $this->assertSame($newFishbowl->getHasIntroduction(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['hasIntroduction']);
+        $this->assertSame($newFishbowl->getHasInvitationInfo(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['hasInvitationInfo']);
+        $this->assertSame($newFishbowl->getInvitationTitle(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['invitationTitle']);
+        $this->assertSame($newFishbowl->getInvitationSubtitle(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['invitationSubtitle']);
+        $this->assertSame($newFishbowl->getInvitationText(), $graphqlResponse['data']['updateFishbowl']['fishbowl']['invitationText']);
     }
 
     private function callGQLWithToken(?UuidInterface $id, string $token, Fishbowl $newFishbowl): ResponseInterface
@@ -126,6 +133,10 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
                         startDateTimeTz
                         timezone
                         hasIntroduction
+                        hasInvitationInfo
+                        invitationTitle
+                        invitationSubtitle
+                        invitationText
                     }
                 }
             }
@@ -149,6 +160,10 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
                         'startDateTime' => $startDateTime,
                         'timezone' => $newFishbowl->getTimezone(),
                         'hasIntroduction' => $newFishbowl->getHasIntroduction(),
+                        'hasInvitationInfo' => $newFishbowl->getHasInvitationInfo(),
+                        'invitationTitle' => $newFishbowl->getInvitationTitle(),
+                        'invitationSubtitle' => $newFishbowl->getInvitationSubtitle(),
+                        'invitationText' => $newFishbowl->getInvitationText(),
                     ],
                 ],
             ],

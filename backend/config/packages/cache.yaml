@@ -7,3 +7,5 @@
 
 framework:
     cache:
+        app: cache.adapter.filesystem
+        system: cache.adapter.system

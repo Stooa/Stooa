@@ -96,6 +96,10 @@ const StandardForm = styled.form<{ $isFull?: boolean }>`
 `}
 `;
 
+const CreateFishbowlForm = styled(StandardForm)`
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.reader))};
+`;
+
 const InputStyled = styled.div<{
   variant?: 'default' | 'small' | 'large-text';
   placeholderStyle?: 'default' | 'large-text';
@@ -454,6 +458,7 @@ export {
   TextDivider,
   SwitchStyled,
   SwitchLabel,
+  CreateFishbowlForm,
   StyledCreateFishbowlWrapper
 };
 

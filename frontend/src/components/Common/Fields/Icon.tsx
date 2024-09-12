@@ -18,6 +18,7 @@ import Mail from '@/ui/svg/mail.svg';
 import World from '@/ui/svg/world.svg';
 import ChevronDown from '@/ui/svg/chevron-down.svg';
 import Language from '@/ui/svg/language.svg';
+import User from '@/ui/svg/user.svg';
 
 export type IconVariant =
   | 'avatar'
@@ -30,7 +31,8 @@ export type IconVariant =
   | 'language'
   | 'lock'
   | 'mail'
-  | 'world';
+  | 'world'
+  | 'user';
 
 type IconProps = {
   className?: string;
@@ -49,7 +51,8 @@ const Icon = ({ className = '', variant }: IconProps) => {
     'language': Language,
     'lock': Lock,
     'mail': Mail,
-    'world': World
+    'world': World,
+    'user': User
   };
 
   const IconComponent = iconVariant[variant];

@@ -7,24 +7,20 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { pushEventDataLayer } from '@/lib/analytics';
 import Info from '@/ui/svg/info-brown.svg';
 import InfoStyled, { Description, Icon } from '@/components/App/FishbowlInfo/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import Trans from 'next-translate/Trans';
-import { Fishbowl } from '@/types/api-platform';
 import { useStooa } from '@/contexts/StooaManager';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
-interface Props {
-  data: Fishbowl;
-}
-
-const FishbowlInfo = ({ data }: Props) => {
+const FishbowlInfo = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
-  const { getPassword } = useStooa();
+  const { getPassword, data } = useStooa();
 
   const toggleInfo = () => {
     pushEventDataLayer({
@@ -36,30 +32,34 @@ const FishbowlInfo = ({ data }: Props) => {
     setActive(!active);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
+  useClickOutside(wrapperRef, () => {
+    toggleInfo();
+  });
 
-      if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
-        toggleInfo();
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     const target = event.target as HTMLElement;
 
-    document.addEventListener('mousedown', handleClickOutside);
+  //     if (active && wrapperRef.current && !wrapperRef.current.contains(target)) {
+  //       toggleInfo();
+  //     }
+  //   };
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
+  //   document.addEventListener('mousedown', handleClickOutside);
+
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, [wrapperRef, active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <InfoStyled ref={wrapperRef}>
+    <InfoStyled>
       <p className="title body-sm medium">{data.name}</p>
       <Icon onClick={toggleInfo} className={`${active ? 'active' : ''}`}>
         <Info />
       </Icon>
       {active && (
-        <Description>
+        <Description ref={wrapperRef}>
           <p className="body-sm medium description__title">{data.name}</p>
           <p className="info-text body-xs">{data.description}</p>
           <ButtonCopyUrl
