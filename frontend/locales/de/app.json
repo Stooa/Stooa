@@ -1,5 +1,12 @@
 {
-    "seatAvailable": "Sitzplatz verfügbar",
+    "seatAvailable": "Platz verfügbar",
     "timeup": "Abgeschlossen!",
-    "timeleft": "zu beenden"
+    "timeleft": "zu beenden",
+    "notification": {
+        "emptySeats": "Die Plätze der Fishbowl-Diskussion sind voll. Wenn du schon teilgenommen hast, mach deinen Platz für andere frei.",
+        "tenMinutesLeft": "Noch 10 Minuten bis zum Ende der Fishbowl.👀",
+        "joinAfterIntroduction": "⚠️   Nach der Einführung kannst du am Gespräch teilnehmen",
+        "oneMinuteLeft": "Noch 1 Minuten bis zum Ende der Fishbowl 🚨"
+    },
+    "loading": "Nimm an der Fishbowl teil"
 }
