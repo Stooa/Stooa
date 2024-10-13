@@ -3,7 +3,7 @@
     "timeup": "Dokončeno!",
     "timeleft": "dokončit",
     "notification": {
-        "emptySeats": "Akvárium je plné ⚠️ Pokud jste se již zúčastnili, uvolněte prosím své místo.",
+        "emptySeats": "Fishbowl je plný. Pokud jste se již zúčastnili, uvolněte prosím své místo.",
         "tenMinutesLeft": "Zbývá 10 minut na dokončení akvária 👀",
         "oneMinuteLeft": "Zbývá 1 minuta na dokončení akvária 🚨",
         "joinAfterIntroduction": "⚠️ Po úvodu se můžete připojit ke konverzaci"

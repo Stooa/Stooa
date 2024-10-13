@@ -1,1 +1,26 @@
-{}
+{
+    "definition": {
+        "description": "<p>Fishbowl je <strong>skupinová dynamika</strong>, která usnadňuje konverzace, debaty a jakýkoli typ aktivity, na níž je <strong>účast nezbytná pro její rozvoj</strong>.</p><p>To je ideální metodou dialogu pro komunity, vzdělávací prostředí nebo společnosti, které chtějí zlepšit zkušenosti svých zaměstnanců.</p>",
+        "title": "Co je metoda fishbowl?"
+    },
+    "keybenefits": {
+        "first": {
+            "description": "Všichni účastníci se cítí zapojeni, udržují pozornost a mohou vstoupit do fishbowlu a vystoupit z něj podle toho, jak chtějí vstoupit do rozhovoru. Hierarchie je odstraněna a úroveň zapojení účastníků se zvyšuje.",
+            "title": "Více účasti"
+        },
+        "third": {
+            "title": "Sdílené znalosti",
+            "description": "V průběhu rozhovoru se objevují názory účastníků a témata, která je nejvíce zajímají, jsou probírána do hloubky z různých úhlů pohledu."
+        },
+        "second": {
+            "title": "Plynulost a automatická facilitace",
+            "description": "Konverzace mezi účastníky probíhá spontánně bez potřeby moderátora. Nástroj se přizpůsobí metodě a vede uživatele, přičemž uvádí časy a kroky, které je třeba dodržet."
+        },
+        "fourth": {
+            "title": "Neformální spojení",
+            "description": "Účastníci se mohou podělit o své zkušenosti, seznámit se s ostatními účastníky a vytvořit si vlastní síť neformálních nebo profesních kontaktů."
+        }
+    },
+    "title": "Plynulé a participativní online dialogy",
+    "banner": "Vytvořte si bezplatnou aktivitu Fishbowl a pozvěte účastníky. Konverzace může začít!"
+}

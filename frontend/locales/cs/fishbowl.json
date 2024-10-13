@@ -1,1 +1,69 @@
-{}
+{
+    "joinMemberNote": "* Umožňuje kontaktovat ostatní účastníky",
+    "preTitle": "Výborně!",
+    "preSubtitle": "Podívejte se na detaily svého nového fishbowlu:",
+    "title": "Vytvoření volného fishbowl",
+    "dateandtime": "Datum a čas",
+    "copyText": "Zkopírujte a sdílejte odkaz na fishbowl s účastníky",
+    "accessMsg": "Přístup do fishbowl bude povolen <strong>jednu hodinu</strong> před plánovaným začátkem.",
+    "joinFishbowl": "Přejít do fishbowl",
+    "joinGuest": "Připojte se jako hostující uživatel",
+    "joinMember": "Připojit se jako registrovaný uživatel *",
+    "copySuccess": "Odkaz zkopírován do schránky!",
+    "prejoin": {
+        "title": "Připojte se k dialogu"
+    },
+    "months": {
+        "01": "Leden",
+        "02": "Únor",
+        "03": "Březen",
+        "04": "Duben",
+        "05": "Květen",
+        "06": "Červen",
+        "07": "Červenec",
+        "08": "Srpen",
+        "09": "Září",
+        "10": "Říjen",
+        "11": "Listopad",
+        "12": "Prosinec"
+    },
+    "sameAsSystem": "Stejné jako systémové nastavení",
+    "videoUnmute": "Spustit video",
+    "videoMute": "Zastavit video",
+    "full": "Úplné znění",
+    "join": "Zapojte se do diskuse",
+    "leave": "Opustit diskusi",
+    "mute": "Ztlumit",
+    "introduceModal": {
+        "button": "Začněte s úvodem",
+        "description": "Aktivuje se kamera, takže můžete účastníkům říct pár slov, než otevřete fishbowl. Poté můžete uživatele pustit do konverzace.",
+        "title": "Poskytněte úvodní informace"
+    },
+    "endModal": {
+        "title": "Ukončit fishbowl",
+        "description": "Opravdu chcete ukončit tento fishbow?",
+        "button": "Potvrdit"
+    },
+    "cam": "Kamera",
+    "waiting": "Čekání na hostitele, aby spustil fishbowl",
+    "timesUp": "Čas vypršel",
+    "timeToStart": "{{time}} do zahájení",
+    "share": "Dejte ostatním vědět o Stooa!",
+    "settings": "Další možnosti",
+    "mic": "Mikrofon",
+    "speaker": "Reproduktor",
+    "timeLeft_one": "{{time}} zbývá",
+    "timeLeft_other": "{{time}} zbývá",
+    "lastMinute": "Poslední minuta",
+    "startFishbowl": "Spuštění fishbowl",
+    "allowUsers": "Umožnit účastníkům zapojit se do konverzace",
+    "endFishbowl": "Ukončit fishbowl",
+    "finishedEvent": "Fishbowl skončil",
+    "participants": {
+        "attendees": "Posluchači",
+        "speaking": "Právě hovoří",
+        "title": "Lidé v místnosti"
+    },
+    "waitingHost": "Účastníci čekají, až spustíte fishbowl",
+    "unmute": "Zrušit ztlumení"
+}

@@ -1,0 +1,22 @@
+emails:
+    welcome_email:
+        subject: Witamy w Stooa!
+        title: Witamy w Stooa
+        cta: Utwórz dyskusję
+    fishbowl_created_email:
+        info_title: Tytuł
+        info_duration: Czas trwania
+        info_description: Opis
+        info_language: Język
+        languages:
+            es: Hiszpański
+            ca: Kataloński
+            en: Angielski
+        info_start_time: Godzina rozpoczęcia
+        info_start_date: Data rozpoczęcia
+        info_invite: Link do zapraszania uczestników
+    from: Stooa
+    reset_password_email:
+        button_text: Zresetuj swoje hasło
+        title: Witaj %name%!
+        expire_text: Pamiętaj, że link wygaśnie za 1 godzinę.

@@ -1,1 +1,9 @@
-{}
+user:
+    email: Uživatel se zadaným e-mailem již existuje.
+    participant: Účastník by měl být Uživatel nebo Host
+    valid_token: Token není platný nebo jeho platnost vypršela.
+    same_user: Heslo se neshoduje s vaším aktuálním heslem.
+    password: Aktuální heslo neodpovídá
+fishbowl:
+    overlap: Fishbowl se překryje jiným fishbowlem.
+    future: Datum zahájení Fishbowl již uplynulo.

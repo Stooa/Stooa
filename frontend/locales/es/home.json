@@ -7,12 +7,12 @@
     "tryNow": "Probar ahora",
     "definition": {
         "title": "¿Qué es el método fishbowl?",
-        "description": "<p>Un fishbowl es una <strong>dinámica de grupo</strong> que facilita las conversaciones, debates y cualquier tipo de actividad en el que <strong>la participación es esencial para su desarrollo </strong>.</p><p>Es un método de diálogo ideal para comunidades, entornos educativos, o compañías que buscan mejorar la experiencia de sus empleados.</p>"
+        "description": "<p>Un fishbowls es una <strong>dinámica de grupo</strong> que facilita conversaciones, debates y cualquier tipo de actividad en la que <strong>la participación sea fundamental para su desarrollo</strong>.</p><p>Es un método de diálogo ideal para comunidades, entornos educativos o empresas que buscan mejorar la experiencia de sus empleados.</p>"
     },
     "howOnlineDebates": "¿Cómo conseguimos debates online fluidos y participativos con grupos grandes?",
     "howStooa": {
-        "title" : "¿Cómo funciona Stooa?",
-        "subtitle" : "¡És muy sencillo!",
+        "title": "¿Cómo funciona Stooa?",
+        "subtitle": "¡És muy sencillo!",
         "firstBulletTitle": "5 sillas para dialogar",
         "firstBulletSub": "Para participar en el diálogo tendrás que ocupar una de las sillas.",
         "secondBulletTitle": "1 Silla libre para potenciar la participación",

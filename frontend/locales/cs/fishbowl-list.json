@@ -1,1 +1,12 @@
-{}
+{
+    "scheduledFishbowls": "Plánované fishbowly (<span>{{count}}</span>)",
+    "fishbowlStartedDescription": "Fishbowly, které právě probíhají nebo které začnou za méně než 30 minut, nelze upravovat.",
+    "back": "Zpět na seznam",
+    "fishbowlStarted": "Tento fishbowl již začal nebo se chystá začít.",
+    "noSelectedFishbowlDescription": "Výběrem naplánovaného fishbowlu zahájíte jeho úpravy.",
+    "enterFishbowl": "Vstup do fishbowlu",
+    "emptyListTitle": "Ještě jste nenaplánovali žádné fishbowly. Vytvořte jeden!",
+    "emptyListDescription": "Zde se zobrazí všechny naplánované fishbowly.",
+    "titleEdit": "Upravit fishbowl",
+    "noSelectedFishbowlTitle": "Není vybrán žádný fishbowl."
+}
