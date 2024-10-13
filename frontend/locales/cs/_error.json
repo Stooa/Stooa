@@ -1,1 +1,10 @@
-{}
+{
+    "404": {
+        "title": "Zdá se, že tu nemůžeme nic (ani nikoho 👀) najít.",
+        "pageTitle": "404",
+        "text": "Zde je několik užitečných odkazů:"
+    },
+    "pageTitle": "Chyba stránky",
+    "title": "Chyba stránky",
+    "description": "Pokud si myslíte, že je něco rozbité, pošlete mi prosím <a> e-mail</a>."
+}
