@@ -29,7 +29,7 @@ final class ChangePasswordProcessor implements ProcessorInterface
     public function __construct(
         private readonly PasswordEncoderService $passwordEncoder,
         private readonly ResetPasswordHelperInterface $helper,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
     ) {
     }
 

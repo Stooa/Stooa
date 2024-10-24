@@ -49,7 +49,7 @@ class UpdateFishbowlFunctionalTest extends ApiTestCase
         $hostToken = $this->logIn($this->host);
 
         $newFishbowl = FishbowlFactory::createOne([
-           'name' => 'New fishbowl name',
+            'name' => 'New fishbowl name',
         ])->object();
 
         $response = $this->callGQLWithToken($fishbowlWithoutHost->getId(), $hostToken, $newFishbowl);

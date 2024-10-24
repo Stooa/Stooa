@@ -22,7 +22,7 @@ class FishbowlNoIntroRunMutationResolver implements MutationResolverInterface
 {
     public function __construct(
         private readonly FishbowlRepository $repository,
-        private readonly WorkflowInterface $fishbowlStateMachine
+        private readonly WorkflowInterface $fishbowlStateMachine,
     ) {
     }
 
@@ -39,11 +39,11 @@ class FishbowlNoIntroRunMutationResolver implements MutationResolverInterface
             return null;
         }
 
-        if (!$this->fishbowlStateMachine->can($fishbowl, FISHBOWL::TRANSITION_NO_INTRO_RUN)) {
+        if (!$this->fishbowlStateMachine->can($fishbowl, Fishbowl::TRANSITION_NO_INTRO_RUN)) {
             return null;
         }
 
-        $this->fishbowlStateMachine->apply($fishbowl, FISHBOWL::TRANSITION_NO_INTRO_RUN);
+        $this->fishbowlStateMachine->apply($fishbowl, Fishbowl::TRANSITION_NO_INTRO_RUN);
 
         return $fishbowl;
     }

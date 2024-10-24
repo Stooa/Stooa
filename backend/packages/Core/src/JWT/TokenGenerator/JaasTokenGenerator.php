@@ -26,7 +26,7 @@ final class JaasTokenGenerator implements TokenGeneratorInterface
         private readonly string $appId,
         private readonly string $apiKey,
         private readonly bool $transcriptionEnabled,
-        private readonly HostValidator $hostValidator
+        private readonly HostValidator $hostValidator,
     ) {
     }
 

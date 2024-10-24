@@ -27,7 +27,7 @@ final class UserPayload implements PayloadInterface
         User $user,
         private readonly bool $moderator,
         private readonly ?UuidInterface $id = null,
-        private readonly ?string $avatar = null
+        private readonly ?string $avatar = null,
     ) {
         $this->name = $user->getFullName();
         $this->email = $user->getEmail();

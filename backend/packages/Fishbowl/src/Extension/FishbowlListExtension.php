@@ -34,7 +34,7 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         Operation $operation = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (Fishbowl::class !== $resourceClass || null === $user = $this->security->getUser()) {
             return;
@@ -44,7 +44,7 @@ class FishbowlListExtension implements QueryCollectionExtensionInterface
 
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
-        $queryBuilder->andWhere(sprintf('%s.host = :host', $rootAlias));
+        $queryBuilder->andWhere(\sprintf('%s.host = :host', $rootAlias));
         $queryBuilder->setParameter('host', $user->getId(), 'uuid');
     }
 }

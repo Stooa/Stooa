@@ -26,7 +26,7 @@ class FishbowlValidateStage implements ValidateStageInterface
     public function __construct(
         private readonly ValidateStageInterface $decorated,
         private readonly Security $security,
-        private readonly FishbowlService $service
+        private readonly FishbowlService $service,
     ) {
     }
 

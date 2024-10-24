@@ -28,7 +28,7 @@ final class FishbowlProcessor implements ProcessorInterface
          * @var ProcessorInterface<Fishbowl>
          */
         private readonly ProcessorInterface $decorated,
-        private readonly MailerService $mailerService
+        private readonly MailerService $mailerService,
     ) {
     }
 

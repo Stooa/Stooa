@@ -30,7 +30,7 @@ final class UserProcessor implements ProcessorInterface
          */
         private readonly ProcessorInterface $decorated,
         private readonly PasswordEncoderService $passwordEncoder,
-        private readonly MailerService $mailerService
+        private readonly MailerService $mailerService,
     ) {
     }
 

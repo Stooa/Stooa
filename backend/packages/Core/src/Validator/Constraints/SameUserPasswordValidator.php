@@ -29,7 +29,7 @@ class SameUserPasswordValidator extends ConstraintValidator
     public function __construct(
         private readonly Security $security,
         private readonly UserRepository $userRepository,
-        private readonly UserPasswordHasherInterface $passwordEncoder
+        private readonly UserPasswordHasherInterface $passwordEncoder,
     ) {
     }
 
