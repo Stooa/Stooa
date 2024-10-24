@@ -22,7 +22,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 /**
- * @implements ProcessorInterface<User>
+ * @implements ProcessorInterface<User, User>
  */
 final class ChangePasswordProcessorLogged implements ProcessorInterface
 {
