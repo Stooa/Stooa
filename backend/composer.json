@@ -50,7 +50,7 @@
         "symfony/translation": "6.4.12",
         "symfony/twig-bundle": "6.4.12",
         "symfony/validator": "6.4.12",
-        "symfony/workflow": "v6.4.8",
+        "symfony/workflow": "6.4.8",
         "symfony/yaml": "6.4.12",
         "symfonycasts/reset-password-bundle": "1.22.0",
         "twig/twig": "3.14.0",
