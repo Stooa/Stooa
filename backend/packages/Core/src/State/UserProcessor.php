@@ -20,13 +20,13 @@ use App\Core\Security\PasswordEncoderService;
 use App\Core\Service\MailerService;
 
 /**
- * @implements ProcessorInterface<User>
+ * @implements ProcessorInterface<User, User>
  */
 final class UserProcessor implements ProcessorInterface
 {
     public function __construct(
         /**
-         * @var ProcessorInterface<User>
+         * @var ProcessorInterface<User, User>
          */
         private readonly ProcessorInterface $decorated,
         private readonly PasswordEncoderService $passwordEncoder,

@@ -19,13 +19,13 @@ use App\Core\Service\MailerService;
 use App\Fishbowl\Entity\Fishbowl;
 
 /**
- * @implements ProcessorInterface<Fishbowl>
+ * @implements ProcessorInterface<Fishbowl, Fishbowl>
  */
 final class FishbowlProcessor implements ProcessorInterface
 {
     public function __construct(
         /**
-         * @var ProcessorInterface<Fishbowl>
+         * @var ProcessorInterface<Fishbowl, Fishbowl>
          */
         private readonly ProcessorInterface $decorated,
         private readonly MailerService $mailerService,
