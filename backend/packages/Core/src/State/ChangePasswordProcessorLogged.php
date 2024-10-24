@@ -22,14 +22,14 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Webmozart\Assert\Assert;
 
 /**
- * @implements ProcessorInterface<User>
+ * @implements ProcessorInterface<User, User>
  */
 final class ChangePasswordProcessorLogged implements ProcessorInterface
 {
     public function __construct(
         private readonly Security $security,
         private readonly PasswordEncoderService $passwordEncoder,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
     ) {
     }
 

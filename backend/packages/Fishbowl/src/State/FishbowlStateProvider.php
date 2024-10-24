@@ -27,7 +27,7 @@ class FishbowlStateProvider implements ProviderInterface
 {
     public function __construct(
         private readonly PrivateFishbowlService $privateFishbowlService,
-        private readonly CollectionProvider $collectionProvider
+        private readonly CollectionProvider $collectionProvider,
     ) {
     }
 

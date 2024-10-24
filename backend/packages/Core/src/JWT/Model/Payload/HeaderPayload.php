@@ -18,7 +18,7 @@ final class HeaderPayload implements PayloadInterface
     public function __construct(
         private readonly string $kid,
         private readonly string $alg,
-        private readonly string $typ
+        private readonly string $typ,
     ) {
     }
 

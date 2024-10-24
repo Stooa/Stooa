@@ -44,7 +44,7 @@ class TopicAdmin extends AbstractAdmin
         string $actionName,
         ProxyQueryInterface $query,
         array &$idx,
-        bool $allElements = false
+        bool $allElements = false,
     ): void {
         if ('delete' === $actionName) {
             $this->topicService?->removeTopics($idx);

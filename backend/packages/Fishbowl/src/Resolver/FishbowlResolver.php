@@ -24,7 +24,7 @@ class FishbowlResolver implements QueryItemResolverInterface
 {
     public function __construct(
         private readonly FishbowlRepository $repository,
-        private readonly PrivateFishbowlService $privateFishbowlService
+        private readonly PrivateFishbowlService $privateFishbowlService,
     ) {
     }
 

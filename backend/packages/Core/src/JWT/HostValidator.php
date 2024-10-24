@@ -22,7 +22,7 @@ class HostValidator
 {
     public function __construct(
         private readonly FishbowlRepository $fishbowlRepository,
-        private readonly CurrentUserRoom $currentUserRoom
+        private readonly CurrentUserRoom $currentUserRoom,
     ) {
     }
 
