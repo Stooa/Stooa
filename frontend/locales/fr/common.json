@@ -15,7 +15,8 @@
         "en": "Anglais",
         "es": "Espagnol",
         "fr": "Français",
-        "id": "Indonésien"
+        "id": "Indonésien",
+        "cs": "Tchèque"
     },
     "conductCode": "Code de conduite",
     "githubIssues": "Problèmes Github",
