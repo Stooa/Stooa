@@ -4,11 +4,15 @@ emails:
         title: Hallo %name%!
         button_text: Ihr Passwort zurücksetzen
         description: 'Um Ihr Passwort zurückzusetzen, besuchen Sie bitte den folgenden Link:'
+        subject: Hallo %name%! Wir haben eine Nachricht mit der Bitte erhalten, Ihr Stooa-Passwort zurückzusetzen.
+        information_text: Wenn Sie diese Nachricht ignorieren, wird Ihr Passwort nicht geändert.<br>Wenn Sie keine Passwortrücksetzung beantragt haben, <a href="mailto:%email%">lassen Sie es uns wissen</a>.
     from: Stooa
     welcome_email:
         subject: Willkommen bei Stooa!
         title: Willkommen bei Stooa
         subtitle: Stooa ist ein Online-Werkzeug für Unkonferenzen. Jeder hat eine Stimme. Nehmen Sie teil, hören Sie zu und teilen Sie Ihr Wissen mit anderen.
+        delete: Wenn Sie Ihren Zugang zu Stoa löschen wollen, schreiben Sie uns eine <a href="mailto:stooa@stooa.com?subject=Delete Stooa account">E-Mail</a>.
+        cta: Erstellen Sie jetzt eine Diskussion
     fishbowl_created_email:
         info_title: Titel
         info_language: Sprache

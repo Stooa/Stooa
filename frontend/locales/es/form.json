@@ -24,7 +24,7 @@
         "timezone": "Zona horaria",
         "selectTimeZone": "Selecciona zona horaria",
         "advancedOptions": "Opciones avanzadas",
-        "introductionLabel": "Quiero comenzar el fishbowl con una introducción.",
+        "introductionLabel": "Quiero empezar el fishbowl dando una introducción",
         "introductionTooltip": "Puedes iniciar el Fishbowl con una introducción y tendrás la opción de <span>compartir pantalla</span>. Cuando termines tu intro, podrás permitir al resto de asistentes que se unan a la conversación.",
         "isPrivate": "Quiero que el evento sea privado",
         "passwordTooltip": "Para poder acceder al evento será necesario ingresar la contraseña",

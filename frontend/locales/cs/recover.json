@@ -1,5 +1,9 @@
 {
     "title": "Obnovení hesla",
     "description": "Zadejte svůj e-mail a my vám zašleme pokyny k vygenerování nového hesla.",
-    "email": "E-mail"
+    "email": "E-mail",
+    "placeholder": "E-mail",
+    "button": "Odeslat pokyny",
+    "back": "Zpět na přihlášení",
+    "sent": "Právě jsme vám zaslali e-mail s pokyny k obnovení hesla."
 }

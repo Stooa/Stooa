@@ -1,1 +1,26 @@
-{}
+{
+    "hostIntroduction": {
+        "participantText": "<p>Když fishbowl začne, <strong>moderátor se může představit.</strong> Poté budou mít všichni účastníci oprávnění připojit se ke konverzaci.</p>",
+        "title": "Co se stane teď?",
+        "preTitle": "Úvodní slovo hostitele",
+        "hostText": "<p>Když spustíte fishbowl, <strong>můžete začít úvodem.</strong> Kamera a mikrofon budou aktivní pouze pro vás. Až budete hotovi, <strong>nezapomeňte povolit účastníkům, aby se připojili ke konverzaci.</strong></p>"
+    },
+    "appControls": {
+        "text": "<div><ul><li><strong>Připojte se ke konverzaci</strong> a <strong>konverzaci ukončete</strong> pomocí zeleného a červeného tlačítka.</li><li>Ovládejte mikrofon pomocí tlačítka <strong>Zapnout/vypnout zvuk</strong>.</li><li>Spojte se <strong>s účastníky</strong> přístupem k jejich profilům Linkedin a Twitter (pokud je poskytli).</li></ul></div>",
+        "preTitle": "Ovládací prvky v aplikaci",
+        "title": "Jak mohu interagovat?"
+    },
+    "end": {
+        "hostText": "<p>Když <strong> zbývá 1 minuta </strong> na dokončení fishbowlu, zobrazí se v pravém horním rohu oznámení. Když k tomu dojde, <strong>přístup ke konverzaci bude uzavřen</strong> všem účastníkům kromě vás. Je čas zavřít fishbowl a rozloučit se s účastníky.</p>",
+        "participantText": "<p>Vpravo nahoře si všimnete, že fishbowlu zbývá <strong>1 minuta.</strong> Jakmile k tomu dojde, <strong>přístup ke konverzaci bude uzavřen pro všechny účastníky</strong>, kromě hostitele.</p>",
+        "title": "Všechny dobré věci mají svůj konec...",
+        "preTitle": "Konec Fishbowlu"
+    },
+    "skip": "Přeskočit na fishbowl",
+    "done": "Mám vše připraveno!",
+    "new": {
+        "title": "Jste tu noví? Nebojte se!",
+        "text": "<p>Ve fishbowl je k dispozici 5 míst, kde probíhá konverzace. Pokud je volné místo, můžete se do konverzace kdykoli připojit. Pouze jedno pravidlo: <strong>místo musí být vždy volné.</strong></p><p>Pokud je všech 5 míst obsazeno a vy jste se již zúčastnili, nechte své místo volné, aby mohl přispět i zbytek .</p>"
+    },
+    "tooltip": "👆🏼 Průvodce vstupem najdete na otazníku kdykoliv!"
+}

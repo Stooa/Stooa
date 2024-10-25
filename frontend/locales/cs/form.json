@@ -1,1 +1,52 @@
-{}
+{
+    "fishbowl": {
+        "introductionTooltip": "Fishbowl můžete zahájit úvodem a budete mít možnost <span>sdílet svou obrazovku</span>. Po dokončení úvodu můžete účastníkům umožnit, aby se připojili ke konverzaci.",
+        "duration": "trvání",
+        "language": "Jazyk",
+        "hours": "h",
+        "selectDuration": "trvání",
+        "selectLanguageLabel": "Vyberte jazyk",
+        "description": "Popis (volitelně)",
+        "timezone": "Časová zóna",
+        "selectTimeZone": "Časová zóna",
+        "advancedOptions": "Pokročilé možnosti",
+        "title": "Název",
+        "minutes": "min",
+        "day": "Datum",
+        "selectDay": "Vyberte den",
+        "time": "Začíná v",
+        "selectTime": "Zvolte čas",
+        "introductionLabel": "Chci začít fishbowl úvodem"
+    },
+    "button": {
+        "login": "Přihlášení",
+        "register": "Další",
+        "createAccount": "Vytvořte si ho!",
+        "createFishbowl": "Vytvořit fishbowl",
+        "modifyFishbowl": "Uložit změny",
+        "recoverPassword": "Odeslat odkaz pro obnovení",
+        "enterFishbowl": "Vstupte do fishbowlu",
+        "save": "Uložit",
+        "changePassword": "Změnit heslo"
+    },
+    "validation": {
+        "title": "Nesprávný název. Vložte prosím téma konverzace",
+        "terms": "Musíte souhlasit s podmínkami a pravidly",
+        "url": "Toto není platná url adresa",
+        "twitter": "Uživatelské jméno na Twitteru by mělo začínat @",
+        "required": "Toto pole je povinné",
+        "email": "Neplatná e-mailová adresa",
+        "date": "Formát data je neplatný: dd/mm/rrrr",
+        "passwordLength": "Heslo musí mít nejméně 6 znaků",
+        "successMessage": "Změny uloženy",
+        "equalPassword": "Obě hesla se musí shodovat"
+    },
+    "defaultTitle": "Fishbowl Schůzka - {{name}}",
+    "firstname": "Jméno",
+    "lastname": "Příjmení",
+    "email": "E-mail",
+    "password": "Heslo",
+    "name": "Vaše jméno",
+    "haveAccount": "Už máte účet?",
+    "noAccount": "Nemáte účet?"
+}

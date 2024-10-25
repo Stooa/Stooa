@@ -4,7 +4,7 @@ emails:
         subject: Vítejte ve Stooa!
         title: Vítejte ve Stooa
         subtitle: Stooa je nekonferenční online nástroj. Každý má svůj hlas. Připojte se, poslouchejte a sdílejte své znalosti s ostatními.
-        cta: Vytvořte si akvárium
+        cta: Vytvořte diskusi
         delete: Pokud chcete smazat svůj účet Stooa, napište nám <a href="mailto:stooa@stooa.com?subject=Delete Stooa účet">zde</a>
     reset_password_email:
         subject: Ahoj %name%! Obdrželi jsme žádost o obnovení vašeho hesla Stooa
@@ -16,8 +16,8 @@ emails:
         information_help_text: Pokud to není váš účet, můžete z něj odstranit svůj e-mail. <br>Neodpovídejte na tento e-mail a uvádějte své heslo. Nikdy vás nebudeme žádat o heslo a důrazně vás nedoporučujeme je s nikým sdílet.
     fishbowl_created_email:
         subject: Ahoj %name%! Vytvořili jste nové akvárium
-        title: Výborně!
-        description: 'Podívejte se na detaily svého nového akvária:'
+        title: Co teď?<br>Sdílejte fishbowl!
+        description: 'Zkopírujte a sdílejte odkaz na tento fishbowl s lidmi, kteří se chtějí připojit ke konverzaci 👇'
         social_share: "or share in:"
         edit_details: "Remember that you can <a style='text-decoration: underline;' href='%edit_link%'>edit the event details</a> up until one hour before it starts."
         cta: "Go to the event"
