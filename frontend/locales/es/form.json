@@ -19,13 +19,13 @@
         "minutes": "min",
         "minutesShort": "m",
         "duration": "Duración",
-        "selectDuration": "Selecciona la duración",
+        "selectDuration": "Duración",
         "description": "Descripción (opcional)",
         "timezone": "Zona horaria",
-        "selectTimeZone": "Selecciona zona horaria",
+        "selectTimeZone": "Zona horaria",
         "advancedOptions": "Opciones avanzadas",
-        "introductionLabel": "Quiero comenzar el fishbowl con una introducción.",
-        "introductionTooltip": "Cuando inicies el Fishbowl, <span>podrás comenzar haciendo una introducción.</span> La cámara y el micrófono estarán activos solo para ti. Cuando termines, <span>no olvides permitir a los asistentes unirse a la conversación.</span>",
+        "introductionLabel": "Quiero empezar el fishbowl dando una introducción",
+        "introductionTooltip": "Puedes iniciar el Fishbowl con una introducción y tendrás la opción de <span>compartir pantalla</span>. Cuando termines tu intro, podrás permitir al resto de asistentes que se unan a la conversación.",
         "isPrivate": "Quiero que el evento sea privado",
         "passwordTooltip": "Para poder acceder al evento será necesario ingresar la contraseña",
         "passwordPlaceholder": "Inserta tu contraseña",
@@ -57,6 +57,7 @@
         "notEmpty": "Este campo no puede estar vacío",
         "wrongPassword": "Contraseña incorrecta",
         "unknownErrorServer": "Ha ocurrido un error desconocido. Prueba de nuevo.",
-        "unknownErrorInside": "¡Lo sentimos! Ocurrió un error durante el acceso. Inténtalo de nuevo."
+        "unknownErrorInside": "¡Lo sentimos! Ocurrió un error durante el acceso. Inténtalo de nuevo.",
+        "maxLength": "Este campo no puede tener más de {{length}} caracteres."
     }
 }

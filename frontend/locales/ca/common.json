@@ -1,10 +1,12 @@
 {
     "signin": "Log in",
     "fishbowlList": "Llistat de &lt;i&gt;fishbowls&lt;/i&gt;",
+    "futureFishbowlList": "<i>Fishbowls</i> programats",
+    "finishedFishbowlList": "<i>Fishbowls</i> finalitzats",
     "signout": "Surt",
     "register": "Registre gratuït",
     "cancel": "Cancel·la",
-    "cta": "Crear un fishbowl",
+    "cta": "Crear un debat",
     "scheduleFishbowl": "Agendar un fishbowl",
     "hostFishbowlNow": "Començar un fishbowl ara",
     "editProfile": "Edita el teu perfil",
@@ -13,8 +15,8 @@
     "privacyPolicy": "Política de privacitat",
     "cookiesPolicy": "Política de Cookies",
     "copyright": "Stooa © %year%. Tots els drets reservats",
-    "og-title": "El fishbowl online",
-    "og-description": "Stooa permet una conversa fluida i participativa amb facilitació automàtica basada en el mètode fishbowl.",
+    "og-title": "Debats en línia fluids i participatius",
+    "og-description": "Stooa és una plataforma online que permet converses fluides i participatives per a grans grups basada en el mètode fishbowl.",
     "languages": {
         "en": "Anglès",
         "es": "Castellà",
@@ -29,5 +31,8 @@
     "help": "Ajuda",
     "legal": "Legal",
     "copyInvitation": "Copiar invitació",
-    "successCopiedInvitation": "Invitació copiada"
+    "successCopiedInvitation": "Invitació copiada",
+    "goToFinishedFishbowlsTitle": "Accedeix a la secció de <i>fishbowls</i> finalitzats per a veure els detalls i el feedback dels assistents.",
+    "goToFinishedFishbowls": "Anar als teus Fishbowls passats",
+    "blog": "Blog"
 }

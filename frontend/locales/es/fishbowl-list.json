@@ -1,12 +1,19 @@
 {
-    "scheduledFishbowls": "<i>Fishbowls</i> agendados (<span>{{count}}</span>)",
+    "scheduledFishbowls": "<i>Fishbowls</i> programados (<span>{{count}}</span>)",
+    "finishedFishbowls": "<i>Fishbowls</i> realizados (<span>{{count}}</span>)",
     "enterFishbowl": "Entrar al fishbowl",
     "titleEdit": "Editar <i>fishbowl</i>",
-    "emptyListTitle": "Aún no has programado ningún <i>fishbowl</i>. ¡Crea uno!",
+    "emptyListTitle": "Aún no has programado ningún fishbowls. ¡Crea uno!",
     "emptyListDescription": "Aquí verás todos tus <i>fishbowls</i> programados.",
+    "emptyFinishedListTitle": "¿Listo para tu próximo <i>fishbowl</i>?",
+    "emptyFinishedListDescription": "Aquí verás los detalles y el feedback de los fishbowls finalizados.",
     "noSelectedFishbowlTitle": "Ningún <i>fishbowl</i> seleccionado.",
     "noSelectedFishbowlDescription": "Selecciona uno de los <i>fishbowls</i> agendados para editarlo.",
     "fishbowlStarted": "El <i>fishbowl</i> ha comenzado o está a punto de empezar.",
     "fishbowlStartedDescription": "Los <i>fishbowls</i> empezados o que empiecen en menos de 30 min no se pueden editar.",
-    "back": "Volver al listado"
+    "back": "Volver al listado",
+    "loadMore": "Cargar más",
+    "guestUser": "Usuario invitado",
+    "registerUser": "Usuario registrado",
+    "me": "(Yo)"
 }

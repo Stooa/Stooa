@@ -11,6 +11,7 @@ import styled from 'styled-components';
 
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import {
+  BORDER_RADIUS,
   COLOR_NEUTRO_100,
   COLOR_NEUTRO_200,
   COLOR_NEUTRO_300,
@@ -25,8 +26,10 @@ import { BODY_MD, BODY_SM, BODY_XS } from '@/ui/Texts';
 
 const ParticipantsDrawer = styled.div`
   background: ${COLOR_NEUTRO_100};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   bottom: 0;
-  /* height: calc(100% - ${space(14)}); */
   overflow-y: auto;
   padding: ${space(3)} 0;
   position: fixed;
@@ -36,9 +39,17 @@ const ParticipantsDrawer = styled.div`
   will-change: transform;
   z-index: 10;
 
-  & > .participant-list > h3,
-  & > .header {
+  & .participant-list > h3,
+  & .header,
+  & .transcription-wrapper {
     padding: 0 ${space(3)};
+  }
+
+  & .participants-wrapper {
+    ${media.min('tablet')`
+      height: 55%;
+    `}
+    height: 45%;
   }
 
   ${StyledButtonContext} {
@@ -75,30 +86,72 @@ const ParticipantsDrawer = styled.div`
     width: ${rems(350)};
   `}
 
-  .header {
+  & .header {
     align-items: center;
     display: flex;
     justify-content: space-between;
 
-    h2,
-    .close {
-      color: ${COLOR_NEUTRO_700};
-      opacity: 0.5;
+    & h2,
+    & .close {
+      color: ${COLOR_NEUTRO_600};
     }
   }
 
-  .participant-list {
+  & .participant-list {
     margin: ${space(3)} 0;
 
-    h3 {
+    & h3 {
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
-      margin-bottom: ${space(2)};
+      margin-bottom: ${space(1)};
 
       svg {
         margin-left: ${space()};
       }
+    }
+  }
+
+  & .transcription-container {
+    min-height: 80px;
+    max-height: 55%;
+
+    ${media.min('tablet')`
+      max-height: 35%;
+    `}
+
+    & hr {
+      height: 4px;
+      border: none;
+      background-color: ${COLOR_NEUTRO_200};
+      margin: 0;
+      margin-bottom: ${space()};
+    }
+  }
+
+  & .transcription-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    position: relative;
+    height: 100%;
+
+    & .enable-button {
+      padding: ${space(0.5)} ${space(1)};
+      background-color: transparent;
+      transition: background-color 0.3s ease-out;
+      border-radius: ${BORDER_RADIUS};
+
+      &:hover {
+        background-color: ${COLOR_NEUTRO_300};
+      }
+    }
+
+    & .transcription__header {
+      display: flex;
+      align-items: center;
+      gap: ${space(1)};
+      margin-bottom: ${space()};
     }
   }
 `;
@@ -140,9 +193,14 @@ const StyledListItem = styled.li`
     box-sizing: content-box;
     align-items: center;
     display: inline-flex;
-    height: auto;
     justify-content: center;
+    height: auto;
     width: auto;
+
+    &:first-child {
+      width: 14px;
+      height: 14px;
+    }
   }
 
   span.icon {
@@ -154,10 +212,7 @@ const StyledListItem = styled.li`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
-    & > *:not(:last-child) {
-      margin-right: ${space(2)};
-    }
+    gap: ${space(2)};
 
     & a:not(.invalid):hover::after {
       ${BODY_XS}
@@ -201,16 +256,27 @@ const ParticipantsToggle = styled(StatusBox)`
   padding-right: 0;
   margin-left: ${space(1)};
 
-  &:not(.active) {
-    padding-left: 0;
-  }
-
   > * {
     position: relative;
     z-index: 1;
   }
 
-  .curve {
+  & .transcription-indicator {
+    position: relative;
+    margin-left: ${space(1)};
+    height: 24px;
+
+    & svg {
+      & path {
+        fill: ${COLOR_NEUTRO_700};
+      }
+      & rect {
+        fill: ${COLOR_NEUTRO_100};
+      }
+    }
+  }
+
+  & .curve {
     display: none;
     height: auto;
     position: absolute;
@@ -225,7 +291,7 @@ const ParticipantsToggle = styled(StatusBox)`
     }
   }
 
-  .toggle-icon {
+  & .toggle-icon {
     height: ${rems(10)};
     margin-right: ${space()};
     width: ${rems(10)};
@@ -242,11 +308,11 @@ const ParticipantsToggle = styled(StatusBox)`
       left: 0;
       position: absolute;
       top: 0;
-      width: 160%;
+      width: 200%;
       z-index: 0;
     }
 
-    .curve {
+    & .curve {
       display: block;
     }
   }

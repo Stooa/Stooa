@@ -19,6 +19,12 @@ const Container = styled.footer`
   min-height: ${space(37.5)};
   padding: ${space(5)} ${space(3)};
 
+  &.home {
+    ${media.max('tablet')`
+      padding-block-end: ${space(12)};
+    `};
+  }
+
   ${media.min('tablet')`
     padding: ${space(5)} ${space(3)} ${space()};
   `};
@@ -31,22 +37,27 @@ const Container = styled.footer`
 `;
 
 const Nav = styled.nav`
-  min-width: 20%;
-
   &.social {
-    ${media.min('tablet')`
-      text-align: right;
-    `};
-
-    ${media.between('tablet', 'desktop')`
+    ${media.max('desktop')`
       margin: ${space(2)} 0 0;
       width: 100%;
     `};
+
+    & a {
+      display: inline-block;
+      height: 32px;
+    }
+
+    & svg {
+      width: 32px;
+      height: 32px;
+    }
   }
 `;
 
 const NavTitle = styled.div`
-  margin: 0 0 ${space(2)};
+  margin-top: 9px;
+  margin-bottom: ${space(2)};
 `;
 
 const NavList = styled.ul`
@@ -68,9 +79,14 @@ const NavList = styled.ul`
 `;
 
 const FooterNav = styled.section`
+  & .logo {
+    margin-bottom: ${space(2)};
+  }
+
   ${media.min('tablet')`
     align-items: flex-start;
     display: flex;
+    gap: 0 ${space(4)};
     flex-wrap: wrap;
     justify-content: space-between;
     padding: ${space(2)} 0 0;

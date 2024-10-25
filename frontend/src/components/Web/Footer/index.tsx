@@ -29,7 +29,8 @@ import {
   SUPPORT_EMAIL,
   GITHUB_BASE,
   APP_NAME,
-  ROUTE_FISHBOWL_HOST_NOW
+  ROUTE_FISHBOWL_HOST_NOW,
+  ROUTE_BLOG
 } from '@/app.config';
 
 import { pushEventDataLayer } from '@/lib/analytics';
@@ -44,8 +45,9 @@ import Facebook from '@/ui/svg/RRSS-facebook.svg';
 import Github from '@/ui/svg/RRSS-github.svg';
 import Instagram from '@/ui/svg/RRSS-instagram.svg';
 import LinkedIn from '@/ui/svg/RRSS-linkedin.svg';
-import Twitter from '@/ui/svg/RRSS-twitter.svg';
+import Twitter from '@/ui/svg/RRSS-x.svg';
 import { Container, FooterCopyright, FooterNav, Nav, NavList, NavTitle } from './styles';
+import { useRouter } from 'next/router';
 
 type TSocial = {
   name: string;
@@ -53,82 +55,94 @@ type TSocial = {
   url: string;
 };
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation('common');
   const currentYear = new Date().getFullYear();
+  const { pathname } = useRouter();
 
   const socialNetworks: TSocial[] = [
     {
       name: 'Twitter',
-      component: <Twitter className="icon" />,
+      component: <Twitter />,
       url: `https://twitter.com/${TWITTER_USER}/`
     },
     {
       name: 'Instagram',
-      component: <Instagram className="icon" />,
+      component: <Instagram />,
       url: `https://www.instagram.com/${INSTAGRAM_USER}`
     },
     {
       name: 'LinkedIn',
-      component: <LinkedIn className="icon" />,
+      component: <LinkedIn />,
       url: `https://www.linkedin.com/company/${LINKEDIN_USER}/`
     },
     {
       name: 'Facebook',
-      component: <Facebook className="icon" />,
+      component: <Facebook />,
       url: `https://www.facebook.com/${FACEBOOK_USER}/`
     },
     {
       name: 'Github',
-      component: <Github className="icon" />,
+      component: <Github />,
       url: GITHUB_BASE
     }
   ];
 
   return (
-    <Container>
+    <Container className={pathname === '/' ? 'home' : ''}>
       <FooterNav>
-        <Logo className="logo" href={ROUTE_HOME} />
+        <div>
+          <Logo className="logo" href={ROUTE_HOME} />
+          <a
+            href="https://www.producthunt.com/posts/stooa?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-stooa"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=320231&theme=light&period=daily"
+              alt="Stooa - The&#0032;open&#0032;source&#0032;online&#0032;fishbowl&#0032;tool | Product Hunt"
+              style={{ marginBottom: '1rem' }}
+              width="250"
+              height="54"
+            />
+          </a>
+        </div>
         <Nav>
-          <NavTitle className="body-md bold">{APP_NAME}</NavTitle>
+          <NavTitle className="body-md bold hide-mobile">{APP_NAME}</NavTitle>
           <NavList>
             <li>
-              <Link href={ROUTE_FISHBOWL_CREATE} passHref>
-                <a
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Schedule Fishbowl',
-                      action: 'Footer',
-                      label: 'Footer'
-                    });
-                  }}
-                >
-                  <span>{t('scheduleFishbowl')}</span>
-                </a>
+              <Link
+                href={ROUTE_FISHBOWL_CREATE}
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Schedule Fishbowl',
+                    action: 'Footer',
+                    label: 'Footer'
+                  });
+                }}
+              >
+                <span>{t('scheduleFishbowl')}</span>
               </Link>
             </li>
             <li>
-              <Link href={ROUTE_FISHBOWL_HOST_NOW} passHref>
-                <a
-                  onClick={() => {
-                    pushEventDataLayer({
-                      category: 'Host Fishbowl Now',
-                      action: 'Footer',
-                      label: 'Footer'
-                    });
-                  }}
-                >
-                  <span>{t('hostFishbowlNow')}</span>
-                </a>
+              <Link
+                href={ROUTE_FISHBOWL_HOST_NOW}
+                onClick={() => {
+                  pushEventDataLayer({
+                    category: 'Host Fishbowl Now',
+                    action: 'Footer',
+                    label: 'Footer'
+                  });
+                }}
+              >
+                <span>{t('hostFishbowlNow')}</span>
               </Link>
             </li>
             {!isAuthenticated && (
               <>
                 <li>
-                  <Link href={`${ROUTE_REGISTER}`} passHref>
-                    <a>{t('register')}</a>
-                  </Link>
+                  <Link href={`${ROUTE_REGISTER}`}>{t('register')}</Link>
                 </li>
                 <li>
                   <RedirectLink href={ROUTE_SIGN_IN} passHref>
@@ -137,42 +151,35 @@ const Footer: React.FC = () => {
                 </li>
               </>
             )}
+            <li>
+              <Link href={`${ROUTE_BLOG}`}>{t('blog')}</Link>
+            </li>
           </NavList>
         </Nav>
         <Nav>
           <NavTitle className="body-md bold">{t('help')}</NavTitle>
           <NavList>
             <li>
-              <Link href={GITHUB_ISSUES} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('githubIssues')}
-                </a>
+              <Link href={GITHUB_ISSUES} target="_blank" rel="noreferrer noopener">
+                {t('githubIssues')}
               </Link>
             </li>
             <li>
-              <Link href={`mailto:${SUPPORT_EMAIL}`} passHref>
-                <a>{SUPPORT_EMAIL}</a>
+              <Link href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</Link>
+            </li>
+            <li>
+              <Link href={GITHUB_ROADMAP} target="_blank" rel="noreferrer noopener">
+                {t('roadmap')}
               </Link>
             </li>
             <li>
-              <Link href={GITHUB_ROADMAP} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('roadmap')}
-                </a>
+              <Link href={GITBOOK_DOCUMENTATION} target="_blank" rel="noreferrer noopener">
+                {t('documentation')}
               </Link>
             </li>
             <li>
-              <Link href={GITBOOK_DOCUMENTATION} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('documentation')}
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href={GITBOOK_CONDUCT} passHref>
-                <a target="_blank" rel="noreferrer noopener">
-                  {t('conductCode')}
-                </a>
+              <Link href={GITBOOK_CONDUCT} target="_blank" rel="noreferrer noopener">
+                {t('conductCode')}
               </Link>
             </li>
           </NavList>
@@ -181,21 +188,18 @@ const Footer: React.FC = () => {
           <NavTitle className="body-md bold">{t('legal')}</NavTitle>
           <NavList>
             <li>
-              <Link href={ROUTE_PRIVACY_POLICY} passHref>
-                <a>{t('privacyPolicy')}</a>
-              </Link>
+              <Link href={ROUTE_PRIVACY_POLICY}>{t('privacyPolicy')}</Link>
             </li>
             <li>
-              <Link href={ROUTE_COOKIES_POLICY} passHref>
-                <a>{t('cookiesPolicy')}</a>
-              </Link>
+              <Link href={ROUTE_COOKIES_POLICY}>{t('cookiesPolicy')}</Link>
             </li>
           </NavList>
         </Nav>
         <Nav className="social">
           {socialNetworks.map(({ name, url, component }) => (
-            <Link href={url} passHref key={name}>
+            <div key={name} className="icon">
               <a
+                href={url}
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => {
@@ -208,7 +212,7 @@ const Footer: React.FC = () => {
               >
                 {component}
               </a>
-            </Link>
+            </div>
           ))}
         </Nav>
       </FooterNav>

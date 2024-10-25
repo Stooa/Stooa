@@ -8,7 +8,7 @@
     "privacyPolicy": "Kebijakan Privasi",
     "cookiesPolicy": "Kebijakan Kuki",
     "copyright": "Stooa © %year%. Hak cipta dimiliki",
-    "og-title": "Alat fishbowl daring",
+    "og-title": "Diskusi online yang lancar dan partisipatif",
     "languages": {
         "en": "Inggris",
         "es": "Spanyol",
@@ -24,6 +24,5 @@
     "cancel": "Batal",
     "conductCode": "Kode Etik",
     "editProfile": "Sunting profil",
-    "og-description": "Stooa memungkinkan pembicaraan yang lancar dan partisipatif dengan fasilitas otomatis yang berdasarkan metode fishbowl.",
-    "fishbowlList": "Daftar fishbowl"
+    "og-description": "Stooa memungkinkan pembicaraan yang lancar dan partisipatif dengan fasilitas otomatis yang berdasarkan metode fishbowl."
 }

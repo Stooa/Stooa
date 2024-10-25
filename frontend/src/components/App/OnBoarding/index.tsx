@@ -14,16 +14,17 @@ import Cross from '@/ui/svg/cross.svg';
 import QuestionMark from '@/ui/svg/questionmark.svg';
 import OnboardingWrapper, { Icon, Tooltip } from '@/components/App/OnBoarding/styles';
 import { useStooa } from '@/contexts/StooaManager';
+import { useModals } from '@/contexts/ModalsContext';
 
 const OnBoarding = () => {
+  const { isModerator } = useStooa();
   const {
-    isModerator,
     activeOnBoardingTooltip,
     setActiveOnBoardingTooltip,
     toggleOnBoarding,
     setOnBoardingTooltipSeen,
     setShowOnBoardingTour
-  } = useStooa();
+  } = useModals();
   const { t } = useTranslation('on-boarding');
 
   const handleClick = (): void => {

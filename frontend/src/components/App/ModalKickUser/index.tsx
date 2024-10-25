@@ -38,7 +38,7 @@ const ModalKickUser: React.FC<Props> = ({ closeModal, onSubmit, participant }) =
         <p className="body-sm subtitle">
           <Trans i18nKey="fishbowl:kick.modal.description" components={{ i: <i /> }} />
         </p>
-        <KickReasonForm participant={participant} onSubmit={onSubmit} />
+        <KickReasonForm participant={participant} onCompletedSubmit={onSubmit} />
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}

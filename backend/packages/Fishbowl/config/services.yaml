@@ -1,0 +1,43 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Fishbowl\:
+        resource: ../src/
+        exclude:
+            - ../src/DependencyInjection/
+            - ../src/Entity/
+
+    App\Fishbowl\Controller\:
+        resource: ../src/Controller/
+        tags: [controller.service_arguments]
+
+    App\Fishbowl\State\FishbowlProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'
+
+    App\Fishbowl\Stage\FishbowlValidateStage:
+        decorates: api_platform.graphql.resolver.stage.validate
+
+    App\Fishbowl\State\FishbowlStateProvider:
+        bind:
+            $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
+
+    #Admin
+    App\Fishbowl\Admin\FishbowlAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Fishbowl, manager_type: orm, label: Fishbowls }
+        calls:
+            - [ setFishbowlService, [ '@App\Fishbowl\Service\FishbowlService' ] ]
+
+    App\Fishbowl\Admin\FeedbackAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Feedback, manager_type: orm, label: Feedbacks }

@@ -18,7 +18,8 @@ import {
   ROUTE_SIGN_IN,
   ROUTE_REGISTER,
   ROUTE_FISHBOWL_CREATE,
-  ROUTE_FISHBOWL_LIST
+  ROUTE_FISHBOWL_FINISHED,
+  ROUTE_FISHBOWL_SCHEDULED
 } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
 import Logo from '@/components/Common/Logo';
@@ -31,26 +32,29 @@ interface Props {
   navigation?: boolean;
 }
 
-const Header: React.FC<Props> = ({ navigation = true }) => {
+const Header = ({ navigation = true }: Props) => {
   const { createFishbowl, isAuthenticated } = useAuth();
   const { t, lang } = useTranslation('common');
   const { pathname } = useRouter();
+  const isBlog = pathname.includes('blog');
 
   return (
     <>
       <Logo href={ROUTE_HOME} />
+
       {navigation && (
         <Navigation>
-          {isAuthenticated ? (
+          {isAuthenticated || isBlog ? (
             <>
               {!createFishbowl &&
                 pathname !== ROUTE_FISHBOWL_CREATE &&
-                pathname !== ROUTE_FISHBOWL_LIST && (
+                pathname !== ROUTE_FISHBOWL_SCHEDULED &&
+                pathname !== ROUTE_FISHBOWL_FINISHED && (
                   <RedirectLink href={ROUTE_FISHBOWL_CREATE} locale={lang} passHref>
                     <Button
-                      className="hide-mobile"
+                      className={!isBlog ? 'hide-mobile' : ''}
                       size="medium"
-                      variant="secondary"
+                      variant="secondary-darker"
                       onClick={() => {
                         pushEventDataLayer({
                           category: 'Schedule Fishbowl',
@@ -63,7 +67,7 @@ const Header: React.FC<Props> = ({ navigation = true }) => {
                     </Button>
                   </RedirectLink>
                 )}
-              <Avatar />
+              {!isBlog && <Avatar />}
             </>
           ) : (
             <>

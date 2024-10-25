@@ -14,7 +14,7 @@ file that was distributed with this source code.
 
 {% set urlLink = '<a href="%link%" style="%style%">%link%</a>' %}
 {% set fishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fb/' ~ fishbowlSlug %}
-{% set editFishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/list?selected=' ~ fishbowlSlug %}
+{% set editFishbowlLink = appUrl ~ (locale is same as('en') ? '': ('/' ~ locale)) ~ '/fishbowl/scheduled?selected=' ~ fishbowlSlug %}
 
 {% block title %}
     {{ 'emails.fishbowl_created_email.title'|trans({}, null, locale) }}

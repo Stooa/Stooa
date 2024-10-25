@@ -179,9 +179,6 @@
             ".php_cs.dist"
         ]
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.3"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v3.0.0"
     },
@@ -191,12 +188,6 @@
     "hashids/hashids": {
         "version": "4.0.0"
     },
-    "jms/metadata": {
-        "version": "2.3.0"
-    },
-    "jms/serializer": {
-        "version": "3.8.0"
-    },
     "justinrainbow/json-schema": {
         "version": "5.2.10"
     },
@@ -205,9 +196,6 @@
     },
     "knplabs/knp-menu-bundle": {
         "version": "v2.3.0"
-    },
-    "laminas/laminas-code": {
-        "version": "3.4.1"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -229,6 +217,9 @@
     },
     "localheinz/diff": {
         "version": "1.1.1"
+    },
+    "metaclass-nl/filter-bundle": {
+        "version": "v3.0.0"
     },
     "monolog/monolog": {
         "version": "2.1.1"
@@ -256,9 +247,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.6.0"
-    },
-    "openlss/lib-array2xml": {
-        "version": "1.0.0"
     },
     "phar-io/manifest": {
         "version": "1.0.3"
@@ -364,9 +352,6 @@
     "rector/rector": {
         "version": "0.12.21"
     },
-    "runroom-packages/testing": {
-        "version": "0.9.2"
-    },
     "sebastian/cli-parser": {
         "version": "1.0.0"
     },
@@ -405,9 +390,6 @@
     },
     "sebastian/recursion-context": {
         "version": "4.0.2"
-    },
-    "sebastian/resource-operations": {
-        "version": "3.0.2"
     },
     "sebastian/type": {
         "version": "2.2.1"
@@ -461,9 +443,6 @@
     },
     "sonata-project/user-bundle": {
         "version": "4.6.0"
-    },
-    "stella-maris/clock": {
-        "version": "0.1.4"
     },
     "symfony/amazon-mailer": {
         "version": "4.4",
@@ -860,9 +839,6 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
-    },
-    "webmozart/path-util": {
-        "version": "2.3.0"
     },
     "webonyx/graphql-php": {
         "version": "v14.0.2"

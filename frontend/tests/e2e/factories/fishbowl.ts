@@ -24,7 +24,7 @@ export const makeGQLTomorrowFishbowl = (): Fishbowl => {
     locale: 'en',
     host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
     currentStatus: 'not_started',
-    isFishbowlNow: true,
+    isFishbowlNow: false,
     hasIntroduction: false,
     startDateTimeTz: tomorrow.toString(),
     endDateTimeTz: tomorrow.toString(),
@@ -32,6 +32,27 @@ export const makeGQLTomorrowFishbowl = (): Fishbowl => {
     isPrivate: false,
     plainPassword: undefined,
     startDateTime: tomorrow
+  };
+};
+
+export const makeGQLCurrentFishbowlWithIntroduction = (): Fishbowl => {
+  return {
+    id: 'a34b3ba8-df6b-48f2-b41c-0ef612b432a7',
+    name: faker.lorem.words(3),
+    description: faker.lorem.words(10),
+    slug: 'test-fishbowl',
+    timezone: 'Europe/Madrid',
+    locale: 'en',
+    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    currentStatus: 'not_started',
+    isFishbowlNow: false,
+    hasIntroduction: true,
+    startDateTimeTz: today.toString(),
+    endDateTimeTz: tomorrow.toString(),
+    durationFormatted: '02:00',
+    isPrivate: false,
+    plainPassword: undefined,
+    startDateTime: today
   };
 };
 
@@ -45,7 +66,7 @@ export const makeGQLCurrentFishbowl = (): Fishbowl => {
     locale: 'en',
     host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
     currentStatus: 'not_started',
-    isFishbowlNow: true,
+    isFishbowlNow: false,
     hasIntroduction: false,
     startDateTimeTz: today.toString(),
     endDateTimeTz: tomorrow.toString(),
@@ -66,7 +87,7 @@ export const makeGQLCurrentPrivateFishbowl = (): Fishbowl => {
     locale: 'en',
     host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
     currentStatus: 'not_started',
-    isFishbowlNow: true,
+    isFishbowlNow: false,
     hasIntroduction: false,
     startDateTimeTz: today.toString(),
     endDateTimeTz: tomorrow.toString(),
@@ -87,7 +108,7 @@ export const makeGQLCurrentNotOwnedFishbowl = (): Fishbowl => {
     locale: 'en',
     host: '/users/2b8ccbf7-fbd8-4c82-9b61-44e195348404',
     currentStatus: 'not_started',
-    isFishbowlNow: true,
+    isFishbowlNow: false,
     hasIntroduction: false,
     startDateTimeTz: today.toString(),
     endDateTimeTz: tomorrow.toString(),

@@ -12,21 +12,23 @@ declare(strict_types=1);
  */
 
 use Rector\Config\RectorConfig;
-use Rector\Php71\Rector\FuncCall\CountOnNullRector;
+use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Set\ValueObject\LevelSetList;
+use Rector\Symfony\Set\SymfonySetList;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
+        __DIR__ . '/packages/Core/src',
+        __DIR__ . '/packages/Core/tests',
+        __DIR__ . '/packages/Fishbowl/src',
+        __DIR__ . '/packages/Fishbowl/tests',
     ]);
     $rectorConfig->importNames();
-    $rectorConfig->disableImportShortClasses();
-    $rectorConfig->skip([
-        CountOnNullRector::class,
-    ]);
+    $rectorConfig->importShortClasses(false);
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_81,
+        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
     ]);
 };

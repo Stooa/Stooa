@@ -1,1 +1,26 @@
-{}
+{
+    "privacyPolicy": "Ochrana osobních údajů",
+    "cookiesPolicy": "Zásady používání cookies",
+    "copyright": "Stooa © %year%. Všechna práva vyhrazena",
+    "og-title": "Plynulé a participativní online diskuse",
+    "og-description": "Stooa je online platforma, která umožňuje plynulé a participativní rozhovory pro velké skupiny založené na metodě fishbowl.",
+    "roadmap": "Plán rozvoje",
+    "documentation": "Dokumentace",
+    "conductCode": "Kodex chování",
+    "githubIssues": "Github Issues",
+    "signin": "Přihlásit se",
+    "cta": "Vytvořit diskusi",
+    "signout": "Odhlásit se",
+    "register": "Registrujte se zdarma",
+    "cancel": "Zrušit",
+    "editProfile": "Upravit profil",
+    "changePassword": "Změnit heslo",
+    "goHome": "Přejít na hlavní stránku",
+    "languages": {
+        "en": "Angličtina",
+        "es": "Španělština",
+        "ca": "Katalánština"
+    },
+    "help": "Nápověda",
+    "legal": "Právní stránky"
+}

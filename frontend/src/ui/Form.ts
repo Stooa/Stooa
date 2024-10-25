@@ -8,7 +8,6 @@
  */
 
 import styled from 'styled-components';
-import { Form } from 'formik';
 
 import Alert from '@/ui/Alert';
 import { space, media, rems } from '@/ui/helpers';
@@ -17,7 +16,6 @@ import {
   BREAKPOINTS,
   COLOR_GREEN_500,
   COLOR_GREEN_600,
-  COLOR_NEUTRO_100,
   COLOR_NEUTRO_300,
   COLOR_NEUTRO_400,
   COLOR_NEUTRO_500,
@@ -28,13 +26,9 @@ import {
 } from '@/ui/settings';
 import { BODY_SM, BODY_XS } from '@/ui/Texts';
 
-interface Props {
-  $isFull?: boolean;
-}
-
-const FormikForm = styled(Form)`
+const StandardForm = styled.form<{ $isFull?: boolean }>`
   position: relative;
-  max-width: ${({ $isFull }: Props) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
+  max-width: ${({ $isFull }) => ($isFull ? 'none' : rems(BREAKPOINTS.form))};
   text-align: left;
   width: 100%;
 
@@ -58,21 +52,19 @@ const FormikForm = styled(Form)`
         text-align: center;
         color: ${COLOR_GREEN_600};
         margin: 0;
+        left: 0;
 
         &.success-message-bottom {
           ${media.min('tablet')`
-            bottom: -3.5ch;
-          `}
+          bottom: -2.5ch;
+        `}
           bottom: 3.25rem;
         }
       }
     }
 
-    > *:not(:last-child) {
+    & > *:not(:last-child) {
       margin-bottom: ${space(2)};
-    }
-    > .textarea {
-      margin-bottom: ${space(4)};
     }
 
     &.submit-wrapper {
@@ -87,34 +79,40 @@ const FormikForm = styled(Form)`
   }
 
   .form__footer {
+    display: flex;
+    justify-content: center;
+    gap: ${space()};
     margin-top: ${space(3.5)};
     text-align: center;
   }
 
   ${media.min('tablet')`
-    .fieldset-inline {
-      align-items: flex-start;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-  `}
+  .fieldset-inline {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+`}
 `;
 
-const InputStyled = styled.div`
+const InputStyled = styled.div<{
+  variant?: 'default' | 'small' | 'large-text';
+  placeholderStyle?: 'default' | 'large-text';
+}>`
   position: relative;
   width: 100%;
 
   ${media.min('tablet')`
-    &.sm {
-      width: calc(50% - ${space(0.5)});
 
-      input,
-      textarea,
-      select {
-        padding-right: ${space(4.5)}
-      }
+    width: ${({ variant }) => (variant === 'small' ? `calc(50% - ${space(0.5)})` : '100%')};
+
+    input,
+    textarea,
+    select {
+      padding-right: ${({ variant }) => (variant === 'small' ? space(4.5) : 'initial')};
     }
+
   `}
 
   svg {
@@ -124,10 +122,10 @@ const InputStyled = styled.div`
 
   .dropdown-icon {
     height: ${rems(16)};
+    width: ${rems(16)};
     position: absolute;
     right: ${space(2)};
     top: ${space(2.5)};
-    width: ${rems(16)};
   }
 
   .icon,
@@ -178,7 +176,21 @@ const InputStyled = styled.div`
   }
 
   &.textarea {
-    height: ${space(14)};
+    & .taller {
+      height: ${space(14)};
+    }
+
+    & .counter {
+      ${BODY_XS};
+      padding-left: ${space(2)};
+      &.warning {
+        color: #e3ae00;
+      }
+
+      &.error {
+        color: ${COLOR_RED_500};
+      }
+    }
   }
 
   input,
@@ -213,18 +225,18 @@ const InputStyled = styled.div`
   textarea {
     height: 100%;
     overflow-y: auto;
-    padding-top: ${space(3)};
+    padding-top: ${space(3.75)};
     resize: none;
   }
 
   label {
     color: ${COLOR_NEUTRO_600};
-    font-size: ${FONT_BASE_SIZE}px;
+    ${BODY_SM};
     left: ${space(2)};
     line-height: 100%;
     pointer-events: none;
     position: absolute;
-    top: ${space(2.25)};
+    top: ${space(2.45)};
     transition: 0.1s ease-out;
   }
 
@@ -236,7 +248,7 @@ const InputStyled = styled.div`
   input.filled,
   textarea:focus,
   textarea.filled {
-    + label {
+    & + label {
       color: ${COLOR_NEUTRO_700};
       top: ${space(1.3)};
 
@@ -326,6 +338,10 @@ const FormError = styled(Alert)`
   margin-bottom: ${space(2)};
 `;
 
+const StyledCreateFishbowlWrapper = styled.div`
+  padding-top: ${space(4)};
+`;
+
 const TextDivider = styled.div`
   display: flex;
   align-items: center;
@@ -348,9 +364,9 @@ const TextDivider = styled.div`
   }
 `;
 
-const SwitchStyled = styled.div`
+const SwitchStyled = styled.div<{ full?: boolean }>`
   position: relative;
-  width: 100%;
+  width: ${({ full }) => (full ? '100%' : 'auto')};
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -363,12 +379,14 @@ const SwitchStyled = styled.div`
     visibility: hidden;
   }
 
-  .switch-checkbox[value='true'] + label .switch-button {
+  .switch-checkbox[value='true'] + label .switch-button,
+  .switch-checkbox:checked + label .switch-button {
     left: calc(100% - 3px);
     transform: translateX(-100%);
   }
 
-  .switch-checkbox[value='true'] + label {
+  .switch-checkbox[value='true'] + label,
+  .switch-checkbox:checked + label {
     background-color: ${COLOR_GREEN_500};
   }
 
@@ -392,10 +410,6 @@ const SwitchStyled = styled.div`
     font-size: ${rems(14)};
     width: fit-content;
   }
-
-  label {
-    cursor: pointer;
-  }
 `;
 
 const SwitchLabel = styled.label`
@@ -403,8 +417,8 @@ const SwitchLabel = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   width: 42px;
+  min-width: 2.2rem;
   height: 22px;
   background: ${COLOR_NEUTRO_700};
   border-radius: 50px;
@@ -423,45 +437,12 @@ const SwitchLabel = styled.label`
     box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
   }
 
-  &:hover .switch-button {
-    width: 20px;
+  &:not(.disabled) {
+    cursor: pointer;
   }
-`;
 
-const StyledIntroductionTooltip = styled.div`
-  --leftPosition: 0px;
-
-  color: ${COLOR_NEUTRO_100};
-  background-color: ${COLOR_NEUTRO_700};
-  height: auto;
-  padding: ${space(1)} ${space(2)};
-  border-radius: ${rems(4)};
-  box-shadow: var(--shadow-elevation-medium);
-
-  position: absolute;
-  z-index: 10;
-  text-align: center;
-
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(100% + ${space()});
-
-  & .arrow {
-    display: none;
-    ${media.min('tablet')`
-      display: block;
-    `}
-    position: absolute;
-    bottom: -6px;
-    left: var(--leftPosition);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #e8e8e8;
-    clear: both;
-    border-color: ${COLOR_NEUTRO_700} transparent transparent;
+  &:not(.disabled):hover .switch-button {
+    width: 20px;
   }
 `;
 
@@ -473,6 +454,7 @@ export {
   TextDivider,
   SwitchStyled,
   SwitchLabel,
-  StyledIntroductionTooltip
+  StyledCreateFishbowlWrapper
 };
-export default FormikForm;
+
+export default StandardForm;

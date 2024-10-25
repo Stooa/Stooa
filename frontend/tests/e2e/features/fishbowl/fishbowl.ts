@@ -7,41 +7,27 @@
  * file that was distributed with this source code.
  */
 
-import { Then } from 'cypress-cucumber-preprocessor/steps';
+import { Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Then('sees tomorrow fishbowl information page', () => {
   cy.get('[data-testid=fishbowl-name]', { timeout: 10000 }).should('exist');
 
   cy.get('[data-testid=fishbowl-description]', { timeout: 10000 }).should('exist');
-
-  cy.screenshot();
-});
-
-Then('sees the prefishbowl page', () => {
-  cy.get('[data-testid=prefishbowl-counter]').should('exist');
-  cy.get('[data-testid=prefishbowl-datacard]').should('exist');
-  cy.get('[data-testid=prefishbowl-participants]').should('exist');
-
-  cy.screenshot();
 });
 
 Then('sees the password input', () => {
   cy.get('[data-testid=prejoin-password]').should('exist');
-
-  cy.screenshot();
 });
 
 Then('writes the correct password', () => {
-  cy.intercept('POST', 'https://localhost:8443/es/private-password/test-fishbowl', req => {
+  cy.intercept('POST', '/es/private-password/current-not-owned-private-fishbowl', req => {
     req.reply({
       response: true
     });
   }).as('gqlPrivateFishbowlPassword');
 
   cy.get('[data-testid=prejoin-password]').type('stooa123');
-  cy.get('[data-testid=prejoin-enterFishbowl]').click();
+  cy.get('[data-testid=prejoin-cta]').click();
 
   cy.wait('@gqlPrivateFishbowlPassword');
-
-  cy.screenshot();
 });

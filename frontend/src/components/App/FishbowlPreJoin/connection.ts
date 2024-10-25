@@ -8,7 +8,7 @@
  */
 
 import api from '@/lib/api';
-import { getAuthToken } from '@/lib/auth';
+import { getAuthToken } from '@/user/auth';
 
 export const connectWithPassword = async (
   password: string,

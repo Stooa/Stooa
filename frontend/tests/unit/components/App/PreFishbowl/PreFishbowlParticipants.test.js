@@ -11,10 +11,10 @@ import { render, waitFor } from '@testing-library/react';
 import PreFishbowlParticipants from '@/components/App/PreFishbowl/PreFishbowlParticipants';
 import { useStateValue } from '@/contexts/AppContext';
 import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
-import { ping } from '@/lib/auth';
-import { makeParticipant } from '../../../factories/participant';
+import { useUserAuth } from '@/user/auth/useUserAuth';
+import { makeFishbowlParticipant } from '../../../factories/fishbowlParticipant';
 
-jest.mock('@/lib/auth');
+jest.mock('@/user/auth');
 jest.mock('@/contexts/AppContext');
 jest.mock('@/repository/ApiParticipantRepository');
 jest.mock('@/components/App/ParticipantPlaceholder', () => () => (
@@ -23,6 +23,11 @@ jest.mock('@/components/App/ParticipantPlaceholder', () => () => (
 jest.mock('@/components/App/Participants/ParticipantCard', () => () => (
   <mock-participant-card data-testid="mock-participant-card" />
 ));
+jest.mock('@/user/auth/useUserAuth');
+
+useUserAuth.mockReturnValue({
+  ping: jest.fn()
+});
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
@@ -42,6 +47,7 @@ beforeEach(async () => {
 
 describe('Pre Fishbowl Participants component', () => {
   it('Should render component as guest user', () => {
+    const { ping } = useUserAuth();
     useStateValue.mockReturnValue([{ isGuest: true }]);
 
     const { getByTestId, getAllByTestId } = render(<PreFishbowlParticipants />);
@@ -61,6 +67,7 @@ describe('Pre Fishbowl Participants component', () => {
   });
 
   it('Should render component as host', () => {
+    const { ping } = useUserAuth();
     const { queryByTestId } = render(<PreFishbowlParticipants />);
 
     const preFishbowlRegister = queryByTestId('prefishbowl-register');
@@ -72,7 +79,7 @@ describe('Pre Fishbowl Participants component', () => {
   });
 
   it('Should render one participant', async () => {
-    const newParticipant = makeParticipant();
+    const newParticipant = makeFishbowlParticipant();
 
     getApiParticipantList.mockResolvedValue([newParticipant]);
 
@@ -84,7 +91,7 @@ describe('Pre Fishbowl Participants component', () => {
   });
 
   it('Should render 10 participant', async () => {
-    const newParticipant = makeParticipant();
+    const newParticipant = makeFishbowlParticipant();
 
     getApiParticipantList.mockResolvedValue(Array(10).fill(newParticipant));
 

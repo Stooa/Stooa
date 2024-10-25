@@ -14,108 +14,113 @@ import * as Yup from 'yup';
 import { REASON_CONDUCT_VIOLATION, REASON_NO_PARTICIPATING } from '@/lib/Reasons';
 import Check from '@/ui/svg/checkmark.svg';
 import React from 'react';
-import { kickParticipant } from '@/lib/jitsi';
+import { useJitsi } from '@/lib/useJitsi';
 import { Participant } from '@/types/participant';
 import { StyledReasonGroup } from './styles';
 import { pushEventDataLayer } from '@/lib/analytics';
-import { Formik, Form, Field } from 'formik';
 import Button from '@/components/Common/Button';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface FormProps {
   participant: Participant;
-  onSubmit: () => void;
+  onCompletedSubmit: () => void;
 }
 
-const initialValues = {
-  reason: REASON_NO_PARTICIPATING
-};
-
-const KickReasonForm = ({ participant, onSubmit }: FormProps) => {
+const KickReasonForm = ({ participant, onCompletedSubmit }: FormProps) => {
   const { t } = useTranslation('fishbowl');
+  const { kickParticipant } = useJitsi();
   const router = useRouter();
   const { fid } = router.query;
 
+  const schema = Yup.object().shape({
+    reason: Yup.string().required('Required message')
+  });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { isSubmitting }
+  } = useForm<{ reason: string }>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      reason: REASON_NO_PARTICIPATING
+    }
+  });
+
+  const whatchReason = watch('reason');
+
+  const onSubmit = async values => {
+    if (participant && values.reason) {
+      pushEventDataLayer({
+        action: fid as string,
+        category: 'Kick',
+        label: values.reason === REASON_CONDUCT_VIOLATION ? 'hard' : 'soft'
+      });
+
+      kickParticipant(participant.getId(), values.reason);
+      toast(t('kick.successMessage'), {
+        icon: <Check />,
+        toastId: 'kick-success',
+        type: 'success',
+        position: 'bottom-center',
+        autoClose: 5000
+      });
+    }
+    onCompletedSubmit();
+  };
+
   return (
     <>
-      <Formik
-        validationSchema={Yup.object({
-          reason: Yup.string().required('Required message')
-        })}
-        initialValues={initialValues}
-        onSubmit={async values => {
-          if (participant && values.reason) {
-            pushEventDataLayer({
-              action: fid as string,
-              category: 'Kick',
-              label: values.reason === REASON_CONDUCT_VIOLATION ? 'hard' : 'soft'
-            });
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <StyledReasonGroup role="group" aria-labelledby="reasons-radio-group">
+          <label>
+            <input type="radio" value={REASON_NO_PARTICIPATING} {...register('reason')} />
+            <div
+              className={`reason-card ${
+                whatchReason === REASON_NO_PARTICIPATING ? 'selected' : ''
+              }`}
+            >
+              <Image
+                className="friend-image"
+                src="/img/friends/meditating.png"
+                alt="Illustration of a friend meditating"
+                height={146.38}
+                width={151}
+                quality={100}
+              />
+              <p>{t('kick.modal.options.noParticipating')}</p>
+            </div>
+          </label>
+          <label>
+            <input type="radio" value={REASON_CONDUCT_VIOLATION} {...register('reason')} />
+            <div
+              className={`reason-card ${
+                whatchReason === REASON_CONDUCT_VIOLATION ? 'selected' : ''
+              }`}
+            >
+              <Image
+                className="friend-image"
+                src="/img/friends/reading.png"
+                alt="Illustration of a friend reading"
+                height={146}
+                width={140.06}
+                quality={100}
+              />
 
-            kickParticipant(participant.getId(), values.reason);
-            toast(t('kick.successMessage'), {
-              icon: <Check />,
-              toastId: 'kick-success',
-              type: 'success',
-              position: 'bottom-center',
-              autoClose: 5000
-            });
-          }
-          onSubmit();
-        }}
-      >
-        {({ values }) => (
-          <Form>
-            <StyledReasonGroup role="group" aria-labelledby="reasons-radio-group">
-              <label>
-                <Field type="radio" name="reason" value={REASON_NO_PARTICIPATING} />
-                <div
-                  className={`reason-card ${
-                    values.reason === REASON_NO_PARTICIPATING ? 'selected' : ''
-                  }`}
-                >
-                  <div className="friend-image">
-                    <Image
-                      src="/img/friends/meditating.png"
-                      alt="Illustration of a friend meditating"
-                      height={146.38}
-                      width={151}
-                      quality={100}
-                      layout="intrinsic"
-                    />
-                  </div>
-                  <p>{t('kick.modal.options.noParticipating')}</p>
-                </div>
-              </label>
-              <label>
-                <Field type="radio" name="reason" value={REASON_CONDUCT_VIOLATION} />
-                <div
-                  className={`reason-card ${
-                    values.reason === REASON_CONDUCT_VIOLATION ? 'selected' : ''
-                  }`}
-                >
-                  <div className="friend-image">
-                    <Image
-                      src="/img/friends/reading.png"
-                      alt="Illustration of a friend reading"
-                      height={146}
-                      width={140.06}
-                      quality={100}
-                      layout="intrinsic"
-                    />
-                  </div>
-                  <p>{t('kick.modal.options.conductViolation')}</p>
-                </div>
-              </label>
-            </StyledReasonGroup>
-            <fieldset>
-              <Button size="large" type="submit">
-                {t('kick.modal.button')}
-              </Button>
-            </fieldset>
-          </Form>
-        )}
-      </Formik>
+              <p>{t('kick.modal.options.conductViolation')}</p>
+            </div>
+          </label>
+        </StyledReasonGroup>
+        <fieldset>
+          <Button size="large" type="submit" disabled={isSubmitting}>
+            {t('kick.modal.button')}
+          </Button>
+        </fieldset>
+      </form>
     </>
   );
 };

@@ -31,7 +31,7 @@ type PrivateProps =
   | { isPrivate?: false; plainPassword?: never }
   | { isPrivate: boolean; plainPassword: string };
 
-const ButtonCopyUrl: React.FC<Props & PrivateProps> = ({
+const ButtonCopyUrl = ({
   fid,
   locale,
   size,
@@ -40,14 +40,14 @@ const ButtonCopyUrl: React.FC<Props & PrivateProps> = ({
   isPrivate,
   plainPassword,
   ...props
-}) => {
+}: Props & PrivateProps) => {
   const { t } = useTranslation('common');
   const fbRoute = `${ROUTE_FISHBOWL}/${fid}`;
   const fbUrl = `${process.env.NEXT_PUBLIC_APP_DOMAIN}${
     locale === defaultLocale ? '' : `/${locale}`
   }${fbRoute}`;
 
-  const invitation = `${fbUrl}\n${t(`form:password`)}:${plainPassword}`;
+  const invitation = `${fbUrl}\n${t(`form:password`)}: ${plainPassword}`;
 
   const handleCopyUrl = () => {
     navigator.clipboard.writeText(isPrivate ? invitation : fbUrl);

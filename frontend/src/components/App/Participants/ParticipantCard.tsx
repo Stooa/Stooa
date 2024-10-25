@@ -10,11 +10,11 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { isCurrentGuest } from '@/lib/auth';
+import { useUserAuth } from '@/user/auth/useUserAuth';
 import { pushEventDataLayer } from '@/lib/analytics';
 
 import Linkedin from '@/ui/svg/share-linkedin.svg';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import { Participant } from '@/types/participant';
 import ButtonContextMenu from '@/components/App/ButtonContextMenu';
 import { StyledListItem } from './styles';
@@ -25,6 +25,7 @@ const ParticipantCard: React.FC<{
   speaker?: boolean;
   prefishbowl?: boolean;
 }> = ({ participant, prefishbowl = false }) => {
+  const { isCurrentGuest } = useUserAuth();
   const { id, name, isModerator, twitter, linkedin, isCurrentUser, guestId } = participant;
   const isMyself = guestId ? isCurrentGuest(guestId) : isCurrentUser;
 
@@ -49,23 +50,21 @@ const ParticipantCard: React.FC<{
       </div>
       <div className="social">
         {twitter ? (
-          <Link href={twitter} passHref>
-            <a
-              onClick={() => {
-                pushEventDataLayer({
-                  action: 'Twitter',
-                  category: prefishbowl ? 'Prefishbowl' : 'Participants',
-                  label: window.location.href
-                });
-              }}
-              href={twitter}
-              target="_blank"
-              rel="noreferrer"
-              className={`icon ${twitterUsername ? 'twitter' : 'invalid'}`}
-              data-username={`@${twitterUsername}`}
-            >
-              <Twitter />
-            </a>
+          <Link
+            href={twitter}
+            onClick={() => {
+              pushEventDataLayer({
+                action: 'Twitter',
+                category: prefishbowl ? 'Prefishbowl' : 'Participants',
+                label: window.location.href
+              });
+            }}
+            target="_blank"
+            rel="noreferrer"
+            className={`icon ${twitterUsername ? 'twitter' : 'invalid'}`}
+            data-username={`@${twitterUsername}`}
+          >
+            <Twitter />
           </Link>
         ) : (
           <span className="icon">
@@ -73,22 +72,21 @@ const ParticipantCard: React.FC<{
           </span>
         )}
         {linkedin ? (
-          <Link href={linkedin} passHref>
-            <a
-              onClick={() => {
-                pushEventDataLayer({
-                  action: 'Linkedin',
-                  category: prefishbowl ? 'Prefishbowl' : 'Participants',
-                  label: window.location.href
-                });
-              }}
-              target="_blank"
-              rel="noreferrer"
-              className={`icon ${linkedinUsername ? 'linkedin' : 'invalid'}`}
-              data-username={linkedinUsername}
-            >
-              <Linkedin />
-            </a>
+          <Link
+            href={linkedin}
+            onClick={() => {
+              pushEventDataLayer({
+                action: 'Linkedin',
+                category: prefishbowl ? 'Prefishbowl' : 'Participants',
+                label: window.location.href
+              });
+            }}
+            target="_blank"
+            rel="noreferrer"
+            className={`icon ${linkedinUsername ? 'linkedin' : 'invalid'}`}
+            data-username={linkedinUsername}
+          >
+            <Linkedin />
           </Link>
         ) : (
           <span className="icon">

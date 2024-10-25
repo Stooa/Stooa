@@ -9,20 +9,24 @@
 
 import useTranslation from 'next-translate/useTranslation';
 
-import userRepository from '@/jitsi/User';
 import { useStateValue } from '@/contexts/AppContext';
 
 import Button from '@/components/Common/Button';
-import FormikForm from '@/ui/Form';
-import Input from '@/components/Common/Fields/Input';
-import { Formik, FormikHelpers } from 'formik';
+import StandardForm from '@/ui/Form';
 import * as Yup from 'yup';
 import { useStooa } from '@/contexts/StooaManager';
 import { connectWithPassword } from './connection';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useMutation } from '@apollo/client';
+import { NO_INTRO_RUN_FISHBOWL } from '@/graphql/Fishbowl';
+import { IConferenceStatus } from '@/jitsi/Status';
+import { useUser } from '@/jitsi';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Input from '@/components/Common/Fields/Input';
 
-type TProps = {
+type Props = {
   name: string;
   isPrivate: boolean;
 };
@@ -31,11 +35,49 @@ interface FormValues {
   password: string;
 }
 
-const AuthUser = ({ name, isPrivate }: TProps) => {
-  const { isModerator, setFishbowlPassword } = useStooa();
+const AuthUser = ({ name, isPrivate }: Props) => {
+  const { data, isModerator, setFishbowlPassword, conferenceStatus } = useStooa();
   const [, dispatch] = useStateValue();
+  const { setUser } = useUser();
+  const [runWithoutIntroFishbowl] = useMutation(NO_INTRO_RUN_FISHBOWL);
   const { t } = useTranslation('form');
   const { fid } = useRouter().query;
+
+  const schema = Yup.object({
+    password:
+      isPrivate && !isModerator ? Yup.string().required(t('validation.required')) : Yup.string()
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { dirtyFields, errors, isSubmitted, isSubmitting }
+  } = useForm<FormValues>({ resolver: yupResolver(schema), defaultValues: { password: '' } });
+
+  const startFishbowlNow = () => {
+    try {
+      const slug = { variables: { input: { slug: fid } } };
+
+      runWithoutIntroFishbowl(slug)
+        .then(() => {
+          console.log('[STOOA] run fishbowl without introduction');
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(`[STOOA] Error run fishbowl without introduction: ${error}`);
+    }
+  };
+
+  const handleDispatchStartFishbowlNow = () => {
+    dispatch({
+      type: 'START_FISHBOWL_NOW',
+      prejoin: false,
+      fishbowlStarted: true
+    });
+  };
 
   const handleDispatchJoin = (): void => {
     dispatch({
@@ -45,10 +87,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
     });
   };
 
-  const handleOnSubmit: (
-    values: FormValues,
-    formikHelpers: FormikHelpers<FormValues>
-  ) => void | Promise<void> = (values, { setErrors }) => {
+  const handleOnSubmit = values => {
     if (isPrivate && values.password && !isModerator) {
       setFishbowlPassword(values.password);
 
@@ -58,7 +97,7 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
           if (res.data.response) {
             handleDispatchJoin();
           } else {
-            setErrors({ password: t('validation.wrongPassword') });
+            setError('password', { message: t('validation.wrongPassword') });
           }
         })
         .catch(error => {
@@ -70,45 +109,47 @@ const AuthUser = ({ name, isPrivate }: TProps) => {
             autoClose: 5000
           });
         });
+    } else if (data.isFishbowlNow && conferenceStatus === IConferenceStatus.NOT_STARTED) {
+      handleDispatchStartFishbowlNow();
+      startFishbowlNow();
     } else {
       handleDispatchJoin();
     }
   };
 
-  userRepository.setUser({ nickname: name });
+  const getButtonText = () => {
+    if (isModerator && data.isFishbowlNow && conferenceStatus === IConferenceStatus.NOT_STARTED) {
+      return t('fishbowl:prejoin.startFishbowl');
+    } else {
+      return t('fishbowl:prejoin.joinDiscussion');
+    }
+  };
+
+  setUser({ guestId: '', nickname: name });
 
   return (
-    <Formik
-      onSubmit={handleOnSubmit}
-      initialValues={{
-        password: ''
-      }}
-      validationSchema={Yup.object({
-        password:
-          isPrivate && !isModerator ? Yup.string().required(t('validation.required')) : Yup.string()
-      })}
-    >
-      <FormikForm>
-        <fieldset className="submit-wrapper">
-          {isPrivate && !isModerator && (
-            <Input
-              data-testid="prejoin-password"
-              placeholder={t('fishbowl.passwordPlaceholder')}
-              label={t('fishbowl.passwordInputLabel')}
-              name="password"
-              type="password"
-              autoComplete="off"
-              id="password"
-              icon="lock"
-            />
-          )}
+    <StandardForm onSubmit={handleSubmit(handleOnSubmit)}>
+      <fieldset className="submit-wrapper">
+        {isPrivate && !isModerator && (
+          <Input
+            isSubmitted={isSubmitted}
+            data-testid="prejoin-password"
+            hasError={errors.password}
+            placeholder={t('fishbowl.passwordPlaceholder')}
+            label={t('fishbowl.passwordInputLabel')}
+            icon="lock"
+            isDirty={dirtyFields.password}
+            autoComplete="off"
+            type="password"
+            {...register('password')}
+          />
+        )}
 
-          <Button type="submit" size="large" data-testid="prejoin-enterFishbowl">
-            {t('button.enterFishbowl')}
-          </Button>
-        </fieldset>
-      </FormikForm>
-    </Formik>
+        <Button type="submit" size="large" data-testid="prejoin-cta" disabled={isSubmitting}>
+          {getButtonText()}
+        </Button>
+      </fieldset>
+    </StandardForm>
   );
 };
 

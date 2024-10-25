@@ -15,7 +15,7 @@ framework:
                 type: 'method'
                 property: 'currentStatus'
             supports:
-                - App\Entity\Fishbowl
+                - App\Fishbowl\Entity\Fishbowl
             initial_marking: not_started
             places:
                 - not_started

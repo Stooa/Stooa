@@ -24,7 +24,8 @@ import {
   ROUTE_CHANGE_PASSWORD,
   ROUTE_RESET_PASSWORD,
   ROUTE_FISHBOWL_HOST_NOW,
-  ROUTE_FISHBOWL_LIST
+  ROUTE_FISHBOWL_SCHEDULED,
+  ROUTE_FISHBOWL_FINISHED
 } from '@/app.config';
 
 import {
@@ -34,12 +35,12 @@ import {
   getAuthToken,
   setRefreshToken,
   setToken
-} from '@/lib/auth';
+} from '@/user/auth';
 
-import { Auth, StatusPayload } from '@/types/auth-context';
-import userRepository from '@/jitsi/User';
+import { Auth, StatusPayload } from '@/types/contexts/auth-context';
+import { useUser } from '@/jitsi';
 import api from '@/lib/api';
-import { AuthToken } from '@/lib/auth/authToken';
+import { AuthToken } from '@/user/auth/authToken';
 import Layout from '@/layouts/Clean';
 import LoadingIcon from '@/components/Common/LoadingIcon';
 import { User } from '@/types/user';
@@ -50,7 +51,8 @@ const authenticatedRoutes = [
   ROUTE_FISHBOWL_CREATE,
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_DETAIL,
-  ROUTE_FISHBOWL_LIST,
+  ROUTE_FISHBOWL_SCHEDULED,
+  ROUTE_FISHBOWL_FINISHED,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_EDIT_PROFILE,
   ROUTE_CHANGE_PASSWORD
@@ -77,6 +79,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
   const [loginStatus, setLoginStatus] = useState<null | StatusPayload>(null);
   const [createFishbowl, setCreateFishbowl] = useState(false);
+  const { setUserNickname } = useUser();
 
   const login = async (email: string, password: string) => {
     setLoading(true);
@@ -94,7 +97,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
         if (user) {
           setUser(user);
-          userRepository.setUserNickname(user.name);
+          setUserNickname(user.name);
           dispatch({
             type: 'JOIN_USER',
             isGuest: false
@@ -135,7 +138,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     router.push(ROUTE_HOME, ROUTE_HOME, { locale: lang }).then(() => {
       console.log('Redirected');
     });
-    userRepository.setUserNickname('');
+    setUserNickname('');
     setUser(null);
   };
 
@@ -210,7 +213,7 @@ const ProtectRoute = ({ children }: ProtectedRouteProps) => {
         }`;
       }
       const route = pathname.toString();
-      router.push(route, route, { locale: lang });
+      router.replace(route, route, { locale: lang });
     }
   };
 

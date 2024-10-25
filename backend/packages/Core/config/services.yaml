@@ -1,0 +1,76 @@
+# This file is part of the Stooa codebase.
+#
+# (c) 2020 - present Runroom SL
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # App
+    App\Core\:
+        resource: ../src/
+        exclude:
+            - ../src/DependencyInjection/
+            - ../src/Entity/
+
+    App\Core\EventSubscriber\LocaleSubscriber:
+        bind:
+            $locales: '%locales%'
+
+    App\Core\OpenApi\OpenApiFactory:
+        decorates: api_platform.openapi.factory
+        arguments:
+            - '@App\Core\OpenApi\OpenApiFactory.inner'
+        autoconfigure: false
+
+    App\Core\State\UserProcessor:
+        bind:
+            $decorated: '@api_platform.doctrine.orm.state.persist_processor'
+
+    App\Core\Service\MailerService:
+        bind:
+            $from: '%env(MAILER_FROM)%'
+            $appUrl: '%env(APP_URL)%'
+
+    App\Core\JWT\TokenGenerator\JaasTokenGenerator:
+        bind:
+            $appId: '%env(JAAS_APP_ID)%'
+            $apiKey: '%env(JAAS_API_KEY)%'
+            $transcriptionEnabled: '%env(bool:TRANSCRIPTION_ENABLED)%'
+
+    App\Core\Encryption\HalitePasswordEncryption:
+        bind:
+            $key: '%env(HALITE_KEY)%'
+
+    App\Fishbowl\Stage\FishbowlValidateStage:
+        decorates: api_platform.graphql.resolver.stage.validate
+
+    # Admin
+    App\Core\Admin\UserAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Core\Entity\User, manager_type: orm, label: Users }
+        calls:
+            - [setPasswordEncoder, ['@App\Core\Security\PasswordEncoderService']]
+            - [setMailerService, ['@App\Core\Service\MailerService']]
+
+    App\Core\Admin\ResetPasswordRequestAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Core\Entity\ResetPasswordRequest, manager_type: orm, label: Reset Password Requests }
+
+    App\Core\Admin\ParticipantAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Core\Entity\Participant, manager_type: orm, label: Participants }
+
+    App\Core\Admin\GuestAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Core\Entity\Guest, manager_type: orm, label: Guests }
+
+    App\Core\Admin\TopicAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Core\Entity\Topic, manager_type: orm, label: Topics }
+        calls:
+            - [setTopicService, ['@App\Core\Service\TopicService']]

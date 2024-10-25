@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
 import { hasOperationName } from '../../utils/graphql-test-utils';
 
 import { modifiedValues } from '../common';
@@ -17,23 +17,19 @@ const mockDate = '2030-02-11T10:48:22+01:00';
 When('clicks on fishbowl card', () => {
   cy.wait('@getOneFishbowlsListQuery');
 
-  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
-
-  cy.screenshot();
+  cy.get(`[data-testid=fishbowl-title]`).click({ force: true });
 });
 
 When('clicks on fishbowl card that is about to start', () => {
   cy.wait('@getOneCloseFishbowlsListQuery');
 
-  cy.get(`[data-testid=Fishbowl-title]`).click({ force: true });
+  cy.get(`[data-testid=fishbowl-title]`).click({ force: true });
 });
 
 Then('sees the fishbowl edit form full of information', () => {
   cy.get('[data-testid=edit-form-title]').should('have.value', 'Fishbowl title');
   cy.get('[data-testid=edit-form-description]').should('have.value', 'Fishbowl description');
   cy.get('input[name="day"]').should('have.value', '11/02/2030');
-
-  cy.screenshot();
 });
 
 When('saves the changes', () => {
@@ -58,7 +54,7 @@ When('saves the changes', () => {
     }
   };
 
-  cy.intercept('POST', 'https://localhost:8443/graphql', req => {
+  cy.intercept('POST', '/graphql', req => {
     if (hasOperationName(req, 'UpdateFishbowl')) {
       req.reply({
         data: mergedValues
@@ -88,20 +84,16 @@ Then('sees the fishbowl list updated', () => {
     .eq(0)
     .should('contain', `${month} ${day}, ${year}`);
   cy.get('[data-testid=fishbowl-list-wrapper] .card__time').eq(0).should('contain', time);
-
-  cy.screenshot();
 });
 
 Then('sees the placeholder area', () => {
   cy.get('[data-testid=selected-placeholder]').should('exist');
-
-  cy.screenshot();
 });
 
 Then('sees a placeholder with Enter Fishbowl button', () => {
-  cy.get('[data-testid=started-fishbowl-placeholder] button').should('exist');
+  cy.get('[data-testid=started-enter-fishbowl]').should('exist');
 });
 
 Then('clicks on placeholders Enter Fishbowl link', () => {
-  cy.get('[data-testid=started-fishbowl-placeholder] a').click({ force: true });
+  cy.get('[data-testid=started-enter-fishbowl]').click({ force: true });
 });

@@ -83,13 +83,17 @@ const StyledFishbowlInformation = styled.div`
   }
 
   & > .friend {
-    width: 125px;
+    width: 180px;
     margin-bottom: ${space(2)};
     align-self: center;
 
     ${media.min('desktop')`
       width: auto;
     `}
+
+    & > img {
+      object-fit: contain;
+    }
   }
 
   & > button {
@@ -133,24 +137,6 @@ const StyledParticipantListWrapper = styled.div`
       & :last-child {
         width: 16px;
         margin-left: ${space(0.5)};
-      }
-
-      & svg.loader {
-        color: ${COLOR_NEUTRO_700};
-        animation: spin 1s linear infinite;
-
-        & circle {
-          opacity: 0.25;
-        }
-
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
       }
     }
   }

@@ -10,12 +10,18 @@
 import { fireEvent, render } from '@testing-library/react';
 import PreFishbowl from '@/components/App/PreFishbowl';
 import { useStooa } from '@/contexts/StooaManager';
+import { useModals } from '@/contexts/ModalsContext';
 import { IConferenceStatus, ITimeStatus } from '@/lib/jitsi-modules/Status';
 import { makeCurrentFishbowl } from '../../../factories/fishbowl';
 import { pushEventDataLayer } from '@/lib/analytics';
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 jest.mock('@/lib/analytics');
 jest.mock('@/contexts/StooaManager');
+jest.mock('@/contexts/ModalsContext');
 jest.mock('@/components/App/PreFishbowl/PreFishbowlParticipants', () => () => (
   <mock-pre-fishbowl-participants data-testid="mock-participants" />
 ));
@@ -39,10 +45,13 @@ beforeEach(() => {
   useStooa.mockReturnValue({
     isModerator: false,
     data: currentFishbowl,
-    toggleOnBoarding: jest.fn(),
     timeStatus: ITimeStatus.DEFAULT,
     conferenceStatus: IConferenceStatus.NOT_STARTED,
     getPassword: jest.fn()
+  });
+
+  useModals.mockReturnValue({
+    toggleOnBoarding: jest.fn()
   });
 });
 

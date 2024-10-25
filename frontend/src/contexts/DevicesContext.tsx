@@ -9,30 +9,36 @@
 
 import { useState, useEffect } from 'react';
 import { Devices, DevicesCtx } from '@/types/devices';
-import userRepository from '@/jitsi/User';
-import devicesRepository from '@/jitsi/Devices';
 import { parseDevices } from '@/lib/helpers';
 import useEventListener from '@/hooks/useEventListener';
 import { PERMISSION_CHANGED } from '@/jitsi/Events';
 import createGenericContext from '@/contexts/createGenericContext';
+import { useDevices as useJitsiDevices, useUser } from '@/jitsi';
 
 const [useDevices, DevicesContextProvider] = createGenericContext<DevicesCtx>();
 
 const DevicesProvider = ({ children }) => {
+  const {
+    getUserAudioOutput,
+    getUserAudioInput,
+    getUserVideoInput,
+    setUserAudioOutput,
+    setUserAudioInput,
+    setUserVideoInput
+  } = useUser();
+  const { isDevicePermissionGranted, loadDevices, clean } = useJitsiDevices();
   const [devices, setDevices] = useState<Devices>({
     audioOutputDevices: [],
     audioInputDevices: [],
     videoDevices: []
   });
   const [audioOutputDevice, setAudioOutputDevice] = useState<MediaDeviceInfo | null>(
-    userRepository.getUserAudioOutput()
+    getUserAudioOutput()
   );
   const [audioInputDevice, setAudioInputDevice] = useState<MediaDeviceInfo | null>(
-    userRepository.getUserAudioInput()
+    getUserAudioInput()
   );
-  const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo | null>(
-    userRepository.getUserVideoInput()
-  );
+  const [videoDevice, setVideoDevice] = useState<MediaDeviceInfo | null>(getUserVideoInput());
   const [permissions, setPermissions] = useState({
     audio: true,
     video: true
@@ -41,8 +47,8 @@ const DevicesProvider = ({ children }) => {
 
   const _getPermissions = async () => {
     return {
-      audio: await devicesRepository.isDevicePermissionGranted('audio'),
-      video: await devicesRepository.isDevicePermissionGranted('video')
+      audio: await isDevicePermissionGranted('audio'),
+      video: await isDevicePermissionGranted('video')
     };
   };
 
@@ -86,7 +92,7 @@ const DevicesProvider = ({ children }) => {
       return;
     }
 
-    userRepository.setUserAudioOutput(device);
+    setUserAudioOutput(device);
     setAudioOutputDevice(device);
   };
 
@@ -97,7 +103,7 @@ const DevicesProvider = ({ children }) => {
       return;
     }
 
-    userRepository.setUserAudioInput(device);
+    setUserAudioInput(device);
     setAudioInputDevice(device);
   };
 
@@ -108,7 +114,7 @@ const DevicesProvider = ({ children }) => {
       return;
     }
 
-    userRepository.setUserVideoInput(device);
+    setUserVideoInput(device);
     setVideoDevice(device);
   };
 
@@ -123,7 +129,7 @@ const DevicesProvider = ({ children }) => {
       devices.audioOutputDevices.length > 0 &&
       (audioOutputDevice === null || !_hasDevice(audioOutputDevice, devices.audioOutputDevices))
     ) {
-      userRepository.setUserAudioOutput(devices.audioOutputDevices[0]);
+      setUserAudioOutput(devices.audioOutputDevices[0]);
       setAudioOutputDevice(devices.audioOutputDevices[0]);
     }
 
@@ -131,7 +137,7 @@ const DevicesProvider = ({ children }) => {
       devices.audioInputDevices.length > 0 &&
       (audioInputDevice === null || !_hasDevice(audioInputDevice, devices.audioInputDevices))
     ) {
-      userRepository.setUserAudioInput(devices.audioInputDevices[0]);
+      setUserAudioInput(devices.audioInputDevices[0]);
       setAudioInputDevice(devices.audioInputDevices[0]);
     }
 
@@ -139,7 +145,7 @@ const DevicesProvider = ({ children }) => {
       devices.videoDevices.length > 0 &&
       (videoDevice === null || !_hasDevice(videoDevice, devices.videoDevices))
     ) {
-      userRepository.setUserVideoInput(devices.videoDevices[0]);
+      setUserVideoInput(devices.videoDevices[0]);
       setVideoDevice(devices.videoDevices[0]);
     }
 
@@ -153,10 +159,10 @@ const DevicesProvider = ({ children }) => {
   }, [devices]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    devicesRepository.loadDevices(_devicesChangedEvent);
+    loadDevices(_devicesChangedEvent);
 
     return () => {
-      devicesRepository.clean(_devicesChangedEvent);
+      clean(_devicesChangedEvent);
     };
   }, []);
 

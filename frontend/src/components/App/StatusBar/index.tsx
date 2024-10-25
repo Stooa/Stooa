@@ -13,30 +13,23 @@ import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import { StatusBox } from '@/components/App/Fishbowl/styles';
 import HourGlass from '@/ui/svg/hourglass-countdown.svg';
 import { Counter } from '@/components/App/StatusBar/Counter';
-import { Fishbowl } from '@/types/api-platform';
+import { useStooa } from '@/contexts/StooaManager';
 
-interface Props {
-  isModerator: boolean;
-  data: Fishbowl;
-  timeStatus: ITimeStatus;
-  conferenceStatus: IConferenceStatus;
-}
-
-const StatusBar: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceStatus }) => {
+const StatusBar: React.FC = () => {
   const [statusClass, setStatusClass] = useState('warning');
+  const { conferenceStatus, timeStatus, setFeedbackAlert } = useStooa();
 
   useEffect(() => {
-    if (
-      conferenceStatus === IConferenceStatus.NOT_STARTED ||
-      (conferenceStatus === IConferenceStatus.RUNNING && timeStatus === ITimeStatus.ENDING)
-    ) {
+    if (conferenceStatus === IConferenceStatus.RUNNING && timeStatus === ITimeStatus.ENDING) {
       setStatusClass('warning');
+      setFeedbackAlert(true);
     } else if (
       (conferenceStatus === IConferenceStatus.RUNNING &&
         (timeStatus === ITimeStatus.LAST_MINUTE || timeStatus === ITimeStatus.TIME_UP)) ||
       conferenceStatus === IConferenceStatus.FINISHED
     ) {
       setStatusClass('error');
+      setFeedbackAlert(true);
     } else {
       setStatusClass('');
     }
@@ -45,12 +38,7 @@ const StatusBar: React.FC<Props> = ({ isModerator, data, timeStatus, conferenceS
   return (
     <StatusBox className={statusClass}>
       <HourGlass />
-      <Counter
-        isModerator={isModerator}
-        fishbowlData={data}
-        timeStatus={timeStatus}
-        conferenceStatus={conferenceStatus}
-      />
+      <Counter />
     </StatusBox>
   );
 };

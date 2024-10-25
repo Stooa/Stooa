@@ -12,12 +12,12 @@ import styled from 'styled-components';
 import { COLOR_NEUTRO_700 } from '@/ui/settings';
 
 const LogoStyled = styled.div`
-  color: ${COLOR_NEUTRO_700};
+  color: inherit;
   font-size: 26px;
   font-weight: 700;
 
   &:hover {
-    color: ${COLOR_NEUTRO_700};
+    color: inherit;
   }
 
   &:focus {

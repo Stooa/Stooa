@@ -33,16 +33,14 @@ const UserConductViolationPage = () => {
   return (
     <Layout title={t('pageTitle')}>
       <Content>
-        <div className="friend-image">
-          <Image
-            src="/img/friends/reading.png"
-            alt="Illustration of a friend reading"
-            height={146 * 1.5}
-            width={140.06 * 1.5}
-            quality={100}
-            layout="intrinsic"
-          />
-        </div>
+        <Image
+          className="friend-image"
+          src="/img/friends/reading.png"
+          alt="Illustration of a friend reading"
+          height={146 * 1.5}
+          width={140.06 * 1.5}
+          quality={100}
+        />
 
         <h1 className="title-sm">{t('title')}</h1>
         <p className="body-lg">{t('description')}</p>

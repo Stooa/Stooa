@@ -22,6 +22,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import onBoardingDataWithIntroduction from '@/components/App/OnBoarding/dataWithIntroduction.json';
 import onBoardingDataWithoutIntroduction from '@/components/App/OnBoarding/dataWithoutIntroduction.json';
+import { useModals } from '@/contexts/ModalsContext';
 
 interface Arrow {
   currentSlide?: number;
@@ -53,9 +54,9 @@ const NextArrow = ({ currentSlide, slideCount, children, ...props }: Arrow) => (
 
 const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) => {
   const sliderRef = useRef<SlickSlider>(null);
-  // const [onBoardingData, setOnBoardingData] = useState([]);
   const { t } = useTranslation('on-boarding');
-  const { data: fishbowlData, showOnBoardingModal, isModerator } = useStooa();
+  const { data: fishbowlData, isModerator } = useStooa();
+  const { showOnBoardingModal } = useModals();
 
   let onBoardingData;
   if (fishbowlData.hasIntroduction) {
@@ -131,28 +132,18 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
     else showSlide(0);
   }, [showOnBoardingModal]);
 
-  // useEffect(() => {
-  //   if (fishbowlData.hasIntroduction) {
-  //     setOnBoardingData(onBoardingDataWithIntroduction[isModerator ? 'moderator' : 'participant']);
-  //   } else {
-  //     setOnBoardingData(
-  //       onBoardingDataWithoutIntroduction[isModerator ? 'moderator' : 'participant']
-  //     );
-  //   }
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <Slider>
       <SlickSlider {...SLIDE_SETTINGS} ref={sliderRef}>
         {onBoardingData.map((item, i) => (
           <Slide
-            key={`slide-${i}`}
+            key={item}
             className={`${isModerator ? 'moderator' : 'participant'} slide slide-${i}`}
             data-slide={i}
           >
             <div className="left">
               <div className="animate">
-                {item.pretitle && <p>{t(item.preTitle)}</p>}
+                {item.preTitle && <p>{t(item.preTitle)}</p>}
                 {item.title && <h2 className="title-md">{t(item.title)}</h2>}
                 {item.text && (
                   <Trans
@@ -178,9 +169,21 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
               </div>
             </div>
             <div className="right">
-              {item.img1 && <img className="animate img-1" src={item.img1} alt="" />}{' '}
+              {item.img1 && (
+                <img
+                  className="animate img-1"
+                  src={item.img1}
+                  alt="Image explaining the onboarding"
+                />
+              )}
               {/* eslint-disable-line @next/next/no-img-element */}
-              {item.img2 && <img className="animate img-2" src={item.img2} alt="" />}{' '}
+              {item.img2 && (
+                <img
+                  className="animate img-2"
+                  src={item.img2}
+                  alt="Image explaining the onboarding"
+                />
+              )}
               {/* eslint-disable-line @next/next/no-img-element */}
             </div>
           </Slide>

@@ -1,6 +1,6 @@
 {
     "step1": {
-        "title": "Salut!",
+        "title": "Salut !",
         "text": "Voici quelques conseils pour rendre votre expérience fishbowl fluide."
     },
     "step2": {
@@ -13,7 +13,7 @@
         "textIntroduction": "Dès que l'introduction est terminée vous pouvez occuper une chaise ou la libérer à l'aide des boutons verts et rouges. Ne vous inquiétez pas : lorsque vous quitterez votre siège, vous serez toujours dans la salle en train d'écouter les autres !"
     },
     "step4": {
-        "title": "Networking",
+        "title": "Réseautage",
         "text": "Rencontrez et connectez-vous avec les personnes présentes dans la salle via votre profil sur Linkedin et Twitter (si indiqué)"
     },
     "next": "Suivante",

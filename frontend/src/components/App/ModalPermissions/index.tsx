@@ -14,9 +14,9 @@ import Modal from '@/ui/Modal';
 import Cross from '@/ui/svg/cross.svg';
 import Trans from 'next-translate/Trans';
 import Button from '@/components/Common/Button';
-import LocalTracks from '@/jitsi/LocalTracks';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
+import { useLocalTracks } from '@/jitsi';
 
 interface Props {
   closeModal: () => void;
@@ -24,6 +24,7 @@ interface Props {
 
 const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
   const { t } = useTranslation('fishbowl');
+  const { createLocalTracks } = useLocalTracks();
 
   const fireErrorToast = () => {
     toast(<Trans i18nKey="fishbowl:permissionsModalErrorToast" components={{ br: <br /> }} />, {
@@ -36,11 +37,11 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
   };
 
   const handleRequestPermissions = () => {
-    LocalTracks.createLocalTracks()
+    createLocalTracks()
       .then(data => {
         let audioGranted = false;
         data.forEach(track => {
-          if (track.type === 'audio') {
+          if (track.getType() === 'audio') {
             audioGranted = true;
           }
         });
@@ -62,15 +63,16 @@ const ModalPermissions: React.FC<Props> = ({ closeModal }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <div className="friend-image">
-          <Image
-            src="/img/friends/hold.png"
-            alt="Illustration of friend holding a microphone icon"
-            width={138.85}
-            height={165}
-            quality={100}
-          />
-        </div>
+
+        <Image
+          className="friend-image"
+          src="/img/friends/hold.png"
+          alt="Illustration of friend holding a microphone icon"
+          width={138.85}
+          height={165}
+          quality={100}
+        />
+
         <h2 className="title-sm">
           <Trans i18nKey="fishbowl:permissionsModalTitle" />
         </h2>

@@ -44,24 +44,28 @@ const StyledButton = styled(ActionButton)`
   .alert {
     position: absolute;
     top: 0;
-    right: -50%;
+    right: -8px;
     transition: transform 0.2s ease-in;
 
-    svg path:first-child {
-      fill: ${COLOR_RED_600};
-      transition: fill 0.1s ease-out;
+    svg {
+      width: 16px;
+      height: 16px;
+
+      & path:first-child {
+        fill: ${COLOR_RED_600};
+        transition: fill 0.1s ease-out;
+      }
     }
   }
 
   .text {
     color: ${COLOR_GREEN_500};
-    padding-top: 3.125px;
+    padding-top: 2px;
 
     ${BODY_XS}
     line-height: 1.1;
 
     ${media.min('tablet')`
-      padding-top: 2px;
       ${BODY_SM}
       line-height: 1.1;
     `}

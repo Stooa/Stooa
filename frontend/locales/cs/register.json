@@ -1,3 +1,14 @@
 {
-    "title": "Registrujte se a začněte"
+    "title": "Registrujte se a začněte",
+    "shareAccount": "Pokud byste chtěli sdílet své profily na <strong>Twitteru</strong> nebo <strong>Linkedin</strong> s ostatními účastníky, vyplňte následující pole.",
+    "linkedin": "Linkedin URL (volitelné)",
+    "twitter": "Twitter URL (volitelné)",
+    "linkedinHelp": "Zkopírujte a vložte URL svého profilu Linkedin",
+    "twitterHelp": "Zkopírujte a vložte URL svého profilu Twitter",
+    "haveAccount": "Jste již zaregistrováni?",
+    "button": {
+        "register": "Zaregistrujte se zdarma",
+        "login": "Přihlaste se"
+    },
+    "terms": "Vytvořením tohoto účtu souhlasíte s našimi <a>Smluvními podmínkami a Zásadami ochrany osobních údajů</a>."
 }

@@ -18,6 +18,7 @@ import {
   COLOR_PURPLE_400,
   COLOR_PURPLE_500,
   COLOR_PURPLE_600,
+  COLOR_PURPLE_700,
   COLOR_RED_400,
   COLOR_RED_500,
   COLOR_RED_600
@@ -142,11 +143,35 @@ const SecondaryButton = styled(ButtonBase)`
   }
 `;
 
+const SecondaryButtonDarker = styled(ButtonBase)`
+  background-color: ${COLOR_PURPLE_200};
+  color: ${COLOR_PURPLE_500};
+
+  &:hover {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_500};
+  }
+
+  &:focus {
+    color: ${COLOR_NEUTRO_100};
+    background-color: ${COLOR_PURPLE_700};
+  }
+`;
+
 const TextButton = styled.button`
   ${mediumWeight};
   color: ${COLOR_PURPLE_500};
   font-size: var(--fontSize);
   line-height: var(--lineHeight);
+
+  &:disabled {
+    color: ${COLOR_NEUTRO_500};
+
+    &:hover {
+      color: ${COLOR_NEUTRO_500};
+      cursor: default;
+    }
+  }
 
   &:hover {
     color: ${COLOR_PURPLE_400};
@@ -170,6 +195,11 @@ const LinkStyledButton = styled.button`
   &:focus {
     color: ${COLOR_PURPLE_600};
   }
+
+  &:disabled {
+    color: ${COLOR_NEUTRO_500};
+    pointer-events: none;
+  }
 `;
 
 const SubtleLinkStyledButton = styled.button`
@@ -180,6 +210,7 @@ const SubtleLinkStyledButton = styled.button`
 export {
   PrimaryButton,
   SecondaryButton,
+  SecondaryButtonDarker,
   TextButton,
   LinkStyledButton,
   SubtleLinkStyledButton,

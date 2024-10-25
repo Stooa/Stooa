@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM php:8.1-fpm-buster as base
+FROM php:8.1-fpm-bullseye as base
 
 ARG UID=1000
 ARG GID=1000
@@ -16,7 +16,7 @@ RUN groupmod --non-unique --gid $GID www-data
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
-RUN install-php-extensions apcu bz2 gd intl opcache pdo_mysql zip gmp
+RUN install-php-extensions apcu bz2 gd intl opcache pdo_mysql zip gmp pcntl
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     unzip \
@@ -82,7 +82,7 @@ CMD ["php-fpm", "--allow-to-run-as-root"]
 
 
 # NGINX
-FROM nginx:1.21 as nginx
+FROM nginx:1.23 as nginx
 
 ARG UID=1000
 ARG GID=1000

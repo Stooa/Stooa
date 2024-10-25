@@ -7,33 +7,35 @@
  * file that was distributed with this source code.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
 import useTranslation from 'next-translate/useTranslation';
-import { Fishbowl } from '@/types/api-platform';
 import LoadingDots from '@/components/Common/LoadingDots';
+import { useStooa } from '@/contexts/StooaManager';
 
 interface Props {
-  fishbowlData: Fishbowl;
-  timeStatus: ITimeStatus;
-  conferenceStatus: IConferenceStatus;
-  isModerator: boolean;
   prefishbowl?: boolean;
 }
 
-export const Counter = ({
-  fishbowlData,
-  timeStatus,
-  conferenceStatus,
-  isModerator,
-  prefishbowl = false,
-  ...props
-}: Props) => {
-  const getDateByStatus = () =>
-    conferenceStatus === IConferenceStatus?.NOT_STARTED
-      ? Date.parse(fishbowlData.startDateTimeTz)
-      : Date.parse(fishbowlData.endDateTimeTz);
+export const Counter = ({ prefishbowl = false, ...props }: Props) => {
+  const { data: fishbowlData, isModerator, conferenceStatus, timeStatus } = useStooa();
+
+  const getDateByStatus = () => {
+    if (
+      fishbowlData.isFishbowlNow &&
+      conferenceStatus === IConferenceStatus?.NOT_STARTED &&
+      isModerator
+    ) {
+      return Date.parse(fishbowlData.endDateTimeTz);
+    }
+
+    if (conferenceStatus === IConferenceStatus?.NOT_STARTED) {
+      return Date.parse(fishbowlData.startDateTimeTz);
+    }
+
+    return Date.parse(fishbowlData.endDateTimeTz);
+  };
 
   const [completedTime, setCompletedTime] = useState<boolean>(false);
   const [timeToDisplay, setTimeToDisplay] = useState<string>('Loading');
@@ -84,9 +86,13 @@ export const Counter = ({
     return () => clearInterval(intervalTimer);
   }, [fishbowlDate, completedTime, timeStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const isFishbowlNowAndModerator = useMemo(
+    () => fishbowlData.isFishbowlNow && isModerator,
+    [fishbowlData.isFishbowlNow, isModerator]
+  );
+
   const rendererCountdown = (): string => {
     const conferenceNotStarted = conferenceStatus === IConferenceStatus?.NOT_STARTED;
-    let timeLeftText;
 
     const seconds = checkSecondsToDate(fishbowlDate);
 
@@ -98,14 +104,14 @@ export const Counter = ({
     const hours: number = Math.floor(seconds / 3600);
 
     if (seconds === 0 && conferenceNotStarted) {
-      timeLeftText = isModerator ? t('waitingHost') : t('waiting');
+      return isModerator ? t('waitingHost') : t('waiting');
     } else if (seconds === 0) {
-      timeLeftText = t('timesUp');
+      return t('timesUp');
     } else if ((minutes <= 1 && hours === 0) || timeStatus === ITimeStatus.LAST_MINUTE) {
-      timeLeftText = t('lastMinute');
+      return t('lastMinute');
     } else if (minutes === 0 && hours === 0 && conferenceNotStarted) {
       const time = `1${t('form:fishbowl.minutes')}`;
-      timeLeftText = t('timeToStart', { time });
+      return t('timeToStart', { time });
     } else {
       const hoursText = t('form:fishbowl.hours');
       const minutesText = hours > 0 ? t('form:fishbowl.minutesShort') : t('form:fishbowl.minutes');
@@ -114,12 +120,15 @@ export const Counter = ({
         hours > 0 && seconds >= 3600
           ? `${hours}${hoursText}:${minutes >= 10 ? minutes : `0${minutes}`}`
           : Math.floor(seconds / 60);
-      timeLeftText = t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
-        time: `${time}${minutesText}`
-      });
-    }
 
-    return timeLeftText;
+      if (isFishbowlNowAndModerator && conferenceNotStarted) {
+        return t('timeLeft_other', { time: `${time}${minutesText}` });
+      } else {
+        return t(conferenceNotStarted ? 'timeToStart' : 'timeLeft_other', {
+          time: `${time}${minutesText}`
+        });
+      }
+    }
   };
 
   return (

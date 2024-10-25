@@ -7,11 +7,10 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { User } from '@/types/user';
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/jitsi/User';
 
 import ArrowDownIcon from '@/ui/svg/arrow-down.svg';
 import ArrowUpIcon from '@/ui/svg/arrow-up.svg';
@@ -21,6 +20,7 @@ import { useDevices } from '@/contexts/DevicesContext';
 import { useStateValue } from '@/contexts/AppContext';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { isTimeLessThanNSeconds } from '@/lib/helpers';
+import { useUser } from '@/jitsi';
 
 interface Props {
   join: (user: User) => void;
@@ -28,14 +28,16 @@ interface Props {
   joined: boolean;
   disabled: boolean;
   permissions: boolean;
+  children: React.ReactNode;
 }
 
-const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permissions, children }) => {
+const ButtonJoin = ({ joined, join, leave, disabled, permissions, children }: Props) => {
   const [active, setActive] = useState(true);
   const { setShowModalPermissions } = useDevices();
   const [{ conferenceStatus, isGuest }] = useStateValue();
   const trackFailJoin = useRef<boolean>();
   const joinedTimestamp = useRef<number>();
+  const { getUser } = useUser();
 
   const handleJoinClick = async () => {
     if (!permissions) {
@@ -49,7 +51,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
       label: window.location.href
     });
 
-    const userSettings = userRepository.getUser();
+    const userSettings = getUser();
 
     setActive(false);
     joined ? leave() : join(userSettings);
@@ -67,7 +69,7 @@ const ButtonJoin: React.FC<Props> = ({ joined, join, leave, disabled, permission
         trackFailJoin.current = true;
       }, 15000);
     }
-  }, [conferenceStatus]);
+  }, [conferenceStatus, isGuest]);
 
   useEffect(() => {
     if (trackFailJoin.current && joined) {

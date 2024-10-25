@@ -11,19 +11,20 @@ import { useEffect } from 'react';
 
 import { useMutation } from '@apollo/client';
 import useTranslation from 'next-translate/useTranslation';
-import { withFormik, FormikProps, FormikBag } from 'formik';
 import * as Yup from 'yup';
 
 import { useStateValue } from '@/contexts/AppContext';
 import { CREATE_GUEST } from '@/lib/gql/Fishbowl';
-import userRepository from '@/jitsi/User';
-import FormikForm from '@/ui/Form';
-import Input from '@/components/Common/Fields/Input';
+import StandardForm from '@/ui/Form';
 import Button from '@/components/Common/Button';
 import { useStooa } from '@/contexts/StooaManager';
 import { connectWithPassword } from './connection';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useUser } from '@/jitsi';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Input from '@/components/Common/Fields/Input';
 
 interface FormValues {
   name: string;
@@ -31,63 +32,9 @@ interface FormValues {
   password?: string;
 }
 
-interface FormProps {
-  notEmpty: string;
-  required: string;
-  onSubmit: (values: FormValues, formikBag: FormikBag<FormProps, FormValues>) => void;
-  isPrivate: boolean;
-}
-
-const initialValues = {
-  name: userRepository.getUserNickname(),
-  isPrivate: false,
-  password: ''
-};
-
-const Form = (props: FormProps & FormikProps<FormValues>) => {
-  const { t } = useTranslation('form');
-
-  useEffect(() => {
-    userRepository.setUser({
-      guestId: ''
-    });
-  }, []);
-
-  return (
-    <FormikForm className="prejoin">
-      <fieldset className="submit-wrapper">
-        <Input label={t('name')} name="name" type="text" />
-        {props.isPrivate && <Input label={t('password')} name="password" type="password" />}
-
-        <Button size="large" type="submit" disabled={props.isSubmitting}>
-          {t('button.enterFishbowl')}
-        </Button>
-      </fieldset>
-    </FormikForm>
-  );
-};
-
-const FormValidation = withFormik<FormProps, FormValues>({
-  mapPropsToValues: () => initialValues,
-  validationSchema: props => {
-    return Yup.object({
-      name: Yup.string()
-        .matches(/[^-\s]/, {
-          excludeEmptyString: true,
-          message: props.notEmpty
-        })
-        .required(props.required),
-      password: props.isPrivate ? Yup.string().required(props.required) : Yup.string()
-    });
-  },
-  handleSubmit: async (values, actions) => {
-    actions.setSubmitting(false);
-    actions.props.onSubmit(values, actions);
-  }
-})(Form);
-
-const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
+const FormGuest = ({ isPrivate }: { isPrivate: boolean }) => {
   const { setFishbowlPassword, isModerator } = useStooa();
+  const { getUserNickname, setUser } = useUser();
   const [, dispatch] = useStateValue();
   const [createGuest] = useMutation(CREATE_GUEST);
   const { t } = useTranslation('form');
@@ -97,6 +44,33 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
   const requiredError = t('validation.required');
   const notEmptyError = t('validation.notEmpty');
 
+  useEffect(() => {
+    setUser({
+      guestId: ''
+    });
+  }, []);
+
+  const schema = Yup.object({
+    name: Yup.string()
+      .matches(/[^-\s]/, {
+        excludeEmptyString: true,
+        message: notEmptyError
+      })
+      .required(requiredError),
+    password: isPrivate ? Yup.string().required(requiredError) : Yup.string()
+  });
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    formState: { dirtyFields, errors, isSubmitting, isSubmitted }
+  } = useForm<FormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: { password: '', isPrivate, name: '' }
+  });
+
   const handleDispatchJoinGuest = (): void => {
     dispatch({
       type: 'JOIN_GUEST',
@@ -105,7 +79,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
     });
   };
 
-  const handleOnSubmit: FormProps['onSubmit'] = async (values, { setErrors }) => {
+  const handleOnSubmit = async values => {
     const { name = '' } = values;
 
     createGuest({
@@ -124,7 +98,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
           }
         } = res;
 
-        userRepository.setUser({
+        setUser({
           guestId: id.replace('/guests/', '')
         });
 
@@ -134,7 +108,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
         console.log(error);
       });
 
-    userRepository.setUser({
+    setUser({
       nickname: name
     });
 
@@ -147,7 +121,7 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
           if (res.data.response) {
             handleDispatchJoinGuest();
           } else {
-            setErrors({ password: t('validation.wrongPassword') });
+            setError('password', { message: t('validation.wrongPassword') });
           }
         })
         .catch(error => {
@@ -165,14 +139,39 @@ const Nickname = ({ isPrivate }: { isPrivate: boolean }) => {
     }
   };
 
+  useEffect(() => {
+    setValue('name', getUserNickname(), { shouldDirty: true });
+  }, []);
+
   return (
-    <FormValidation
-      isPrivate={isPrivate}
-      notEmpty={notEmptyError}
-      required={requiredError}
-      onSubmit={handleOnSubmit}
-    />
+    <StandardForm onSubmit={handleSubmit(handleOnSubmit)} className="prejoin">
+      <fieldset className="submit-wrapper">
+        <Input
+          isSubmitted={isSubmitted}
+          hasError={errors.name}
+          label={t('name')}
+          type="text"
+          isDirty={dirtyFields.name}
+          {...register('name')}
+        />
+        {isPrivate && (
+          <Input
+            isSubmitted={isSubmitted}
+            label={t('password')}
+            type="password"
+            autoComplete="false"
+            isDirty={dirtyFields.password}
+            hasError={errors.password}
+            {...register('password')}
+          />
+        )}
+
+        <Button size="large" type="submit" disabled={isSubmitting}>
+          {t('fishbowl:prejoin.joinDiscussion')}
+        </Button>
+      </fieldset>
+    </StandardForm>
   );
 };
 
-export default Nickname;
+export default FormGuest;

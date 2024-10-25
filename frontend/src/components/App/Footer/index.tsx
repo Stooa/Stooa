@@ -7,13 +7,14 @@
  * file that was distributed with this source code.
  */
 
-import React from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
 import { useStooa } from '@/contexts/StooaManager';
 import { Footer as FooterStyled } from '@/layouts/App/styles';
 import IntroNotification from '@/components/App/IntroNotification';
+import ButtonFeedback from '../ButtonFeedback';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
 
 const ToolBar = dynamic(import('@/components/App/ToolBar'), { loading: () => <div /> });
 const Logo = dynamic(import('@/components/Common/Logo'), { loading: () => <div /> });
@@ -21,14 +22,12 @@ const ModeratorActions = dynamic(import('@/components/App/ModeratorActions'), {
   loading: () => <div />
 });
 
-interface Props {
-  participantsActive: boolean;
-}
-
-const Footer: React.FC<Props> = ({ participantsActive }) => {
-  const { onIntroduction, isModerator, conferenceStatus } = useStooa();
+const Footer = () => {
+  const { onIntroduction, isModerator, conferenceStatus, gaveFeedback, data, participantsActive } =
+    useStooa();
   const router = useRouter();
   const { fid } = router.query;
+  const { deviceType } = useNavigatorType();
 
   return (
     <FooterStyled className={participantsActive ? 'drawer-open' : ''}>
@@ -46,6 +45,9 @@ const Footer: React.FC<Props> = ({ participantsActive }) => {
       <div className="user-actions">
         <ToolBar />
       </div>
+      {!isModerator && deviceType === 'Desktop' && (
+        <ButtonFeedback disabled={gaveFeedback} fishbowl={data} drawerOpened={participantsActive} />
+      )}
     </FooterStyled>
   );
 };

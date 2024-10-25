@@ -1,0 +1,22 @@
+{
+    "step3": {
+        "textIntroduction": "Jakmile skončí úvodní část, můžete se připojit a opustit místo pomocí zeleného a červeného tlačítka. Nebojte se, opuštěním místa budete stále v místnosti a budete poslouchat ostatní řečníky!",
+        "text": "Připojte se a opusťte místo pomocí zeleného a červeného tlačítka. Nebojte se, opuštěním místa budete stále v místnosti a budete poslouchat ostatní řečníky!",
+        "title": "Jak mohu získat místo?"
+    },
+    "step4": {
+        "title": "Síťování",
+        "text": "Zjistěte více informací a spojte se s účastníky prostřednictvím jejich profilů na Linkedin a Twitteru (pokud jsou k dispozici)"
+    },
+    "next": "Další",
+    "previous": "Zpět",
+    "done": "Hotovo",
+    "step1": {
+        "title": "Zdravíme vás!",
+        "text": "Zde je několik tipů, které vám pomohou připravit se na zážitek ve „fishbowl“."
+    },
+    "step2": {
+        "title": "Pět míst",
+        "text": "Těchto 5 míst je vám k dispozici, abyste se mohli připojit ke konverzaci, kdykoli budete mít co říct. Až skončíte, opusťte své místo, aby se mohli zapojit další lidé!"
+    }
+}

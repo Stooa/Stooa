@@ -1,10 +1,11 @@
 {
     "signin": "Log in",
-    "fishbowlList": "Fishbowl list",
+    "futureFishbowlList": "Scheduled fishbowls",
+    "finishedFishbowlList": "Finished fishbowls",
     "signout": "Log out",
     "register": "Register for free",
     "cancel": "Cancel",
-    "cta": "Create a fishbowl",
+    "cta": "Create a discussion",
     "scheduleFishbowl": "Schedule a fishbowl",
     "hostFishbowlNow": "Host a fishbowl now",
     "editProfile": "Edit profile",
@@ -13,8 +14,8 @@
     "privacyPolicy": "Privacy policy",
     "cookiesPolicy": "Cookies policy",
     "copyright": "Stooa © %year%. All rights reserved",
-    "og-title": "The online fishbowl tool",
-    "og-description": "Stooa enables fluent and participatory conversation with automatic facilitation based on the fishbowl method.",
+    "og-title": "Fluid and participative online discussions",
+    "og-description": "Stooa is an online platform that allows fluid and participatory conversations for large groups based on the fishbowl method.",
     "languages": {
         "en": "English",
         "es": "Spanish",
@@ -29,5 +30,8 @@
     "help": "Help",
     "legal": "Legal",
     "copyInvitation": "Copy invitation",
-    "successCopiedInvitation": "Invitation copied"
+    "successCopiedInvitation": "Invitation copied",
+    "goToFinishedFishbowlsTitle": "Go to the finished fishbowls section to see the details and feedback from the attendees.",
+    "goToFinishedFishbowls": "Go to your past fishbowls",
+    "blog": "Blog"
 }

@@ -28,10 +28,12 @@ sonata_admin:
             stooa:
                 label: Stooa
                 items:
-                    - App\Admin\UserAdmin
-                    - App\Admin\FishbowlAdmin
-                    - App\Admin\ResetPasswordRequestAdmin
-                    - App\Admin\ParticipantAdmin
+                    - App\Core\Admin\UserAdmin
+                    - App\Fishbowl\Admin\FishbowlAdmin
+                    - App\Core\Admin\ResetPasswordRequestAdmin
+                    - App\Core\Admin\ParticipantAdmin
+                    - App\Core\Admin\TopicAdmin
+                    - App\Fishbowl\Admin\FeedbackAdmin
 
 sonata_block:
     http_cache: false

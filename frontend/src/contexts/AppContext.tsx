@@ -18,6 +18,7 @@ const FISHBOWL_ENDED = 'FISHBOWL_ENDED';
 const JOIN_GUEST = 'JOIN_GUEST';
 const JOIN_USER = 'JOIN_USER';
 const PREJOIN_RESET = 'PREJOIN_RESET';
+const START_FISHBOWL_NOW = 'START_FISHBOWL_NOW';
 
 interface State {
   fishbowlReady: boolean;
@@ -29,6 +30,12 @@ interface State {
 
 type fishbowlStartedAction = {
   type: typeof FISHBOWL_STARTED;
+  fishbowlStarted: boolean;
+};
+
+type startFishbowlNow = {
+  type: typeof START_FISHBOWL_NOW;
+  prejoin: boolean;
   fishbowlStarted: boolean;
 };
 
@@ -75,13 +82,23 @@ type Actions =
   | fishbowlEndedAction
   | joinGuestAction
   | joinUserAction
-  | prejoinResetAction;
+  | prejoinResetAction
+  | startFishbowlNow;
 
 type AppContextReducer = Reducer<State, Actions>;
 
 const reducer: AppContextReducer = (state, action) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { type, ...actionData } = action;
+
+  if (type === FISHBOWL_STATUS) {
+    return state.conferenceStatus !== action.conferenceStatus
+      ? {
+          ...state,
+          ...actionData
+        }
+      : state;
+  }
 
   return {
     ...state,
@@ -94,7 +111,7 @@ const initialState: State = {
   fishbowlStarted: false,
   isGuest: false,
   prejoin: true,
-  conferenceStatus: IConferenceStatus?.NOT_STARTED
+  conferenceStatus: IConferenceStatus.NOT_STARTED
 };
 
 const [useStateValue, StateContextProvider] = createGenericContext<[State, Dispatch<Actions>]>();

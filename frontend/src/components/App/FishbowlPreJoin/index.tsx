@@ -13,16 +13,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ROUTE_HOME } from '@/app.config';
 import { useAuth } from '@/contexts/AuthContext';
-import userRepository from '@/jitsi/User';
 
 import { Header as HeaderStyled, Decoration as DecorationStyled } from '@/layouts/Default/styles';
 import Decoration from '@/components/Web/Decoration';
 import Header from '@/components/Web/Header';
 import VideoPlaceholder from '@/components/App/VideoPlaceholder';
-import ButtonConfig, { ButtonConfigHandle } from '@/components/App/ButtonConfig';
+import ButtonMoreOptions, { ButtonHandle } from '@/components/App/ButtonMoreOptions';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
-import NicknameForm from '@/components/App/FishbowlPreJoin/form';
 import AuthUser from '@/components/App/FishbowlPreJoin/form-auth';
 
 import Modal from '@/ui/Modal';
@@ -33,26 +31,30 @@ import {
   Form,
   VideoContainer
 } from '@/components/App/FishbowlPreJoin/styles';
-import LocalTracks from '@/jitsi/LocalTracks';
 import { useDevices } from '@/contexts/DevicesContext';
 import Button from '@/components/Common/Button';
 import VideoPermissionsPlaceholder from '../VideoPermissionsPlaceholder';
 import Trans from 'next-translate/Trans';
 import { useStooa } from '@/contexts/StooaManager';
 import Image from 'next/image';
+import { IConferenceStatus } from '@/jitsi/Status';
+import { useLocalTracks, useUser } from '@/jitsi';
+import FormGuest from '@/components/App/FishbowlPreJoin/form';
 
-const FishbowlPreJoin: React.FC = () => {
+const FishbowlPreJoin = () => {
   const { videoDevice, permissions } = useDevices();
   const { isAuthenticated, user } = useAuth();
-  const { data } = useStooa();
+  const { data, isModerator, conferenceStatus } = useStooa();
+  const { getUserVideoMuted } = useUser();
+  const { createLocalTracks: hookCreateLocalTracks } = useLocalTracks();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const localTracks = useRef<any[]>([]);
-  const [muteVideo, setMuteVideo] = useState<boolean>(userRepository.getUserVideoMuted());
+  const [muteVideo, setMuteVideo] = useState<boolean>(getUserVideoMuted());
   const router = useRouter();
   const { t, lang } = useTranslation('common');
 
-  const configButtonRef = useRef<ButtonConfigHandle>(null);
+  const configButtonRef = useRef<ButtonHandle>(null);
 
   const disposeLocalTracks = () => {
     for (let index = 0; index < localTracks.current.length; index++) {
@@ -90,7 +92,7 @@ const FishbowlPreJoin: React.FC = () => {
     const createLocalTracks = async () => {
       disposeLocalTracks();
 
-      localTracks.current = await LocalTracks.createLocalTracks();
+      localTracks.current = await hookCreateLocalTracks();
 
       for (let index = 0; index < localTracks.current.length; index++) {
         const localTrack = localTracks.current[index];
@@ -147,15 +149,14 @@ const FishbowlPreJoin: React.FC = () => {
               <VideoPlaceholder />
               {!permissions.video && (
                 <VideoPermissionsPlaceholder>
-                  <div className="friend-image">
-                    <Image
-                      src="/img/friends/computer.png"
-                      alt="Illustration of friend using computer"
-                      width={178.26}
-                      height={172.64}
-                      quality={100}
-                    />
-                  </div>
+                  <Image
+                    className="friend-image"
+                    src="/img/friends/computer.png"
+                    alt="Illustration of friend using computer"
+                    width={200}
+                    height={172.64}
+                    quality={100}
+                  />
                   <p className="body-sm">
                     <Trans
                       i18nKey="fishbowl:prejoin.permissions"
@@ -173,20 +174,33 @@ const FishbowlPreJoin: React.FC = () => {
                 unlabeled={true}
               />
               <ButtonMic joined={true} disabled={!permissions.audio} unlabeled={true} />
-              <ButtonConfig selectorPosition="bottom" ref={configButtonRef} unlabeled={true} />
+              <ButtonMoreOptions
+                prejoin
+                selectorPosition="bottom"
+                ref={configButtonRef}
+                unlabeled={true}
+              />
             </DevicesToolbar>
           </Devices>
           <Form>
             <h2 data-testid="pre-join-title" className="title-md ">
-              {t('fishbowl:prejoin.title')}
+              {isModerator &&
+              data.isFishbowlNow &&
+              conferenceStatus === IConferenceStatus.NOT_STARTED
+                ? t('fishbowl:prejoin.startFishbowl')
+                : t('fishbowl:prejoin.title')}
             </h2>
             <p className="body-md subtitle">
-              <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+              {isModerator ? (
+                t('fishbowl:prejoin.moderatorSubtitle')
+              ) : (
+                <Trans i18nKey="fishbowl:prejoin.subtitle" components={{ br: <br /> }} />
+              )}
             </p>
             {isAuthenticated ? (
               <AuthUser isPrivate={data.isPrivate} name={user?.name ?? ''} />
             ) : (
-              <NicknameForm isPrivate={data.isPrivate} />
+              <FormGuest isPrivate={data.isPrivate} />
             )}
             <Button
               data-testid="pre-join-cancel"

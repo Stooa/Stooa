@@ -29,14 +29,17 @@ module.exports = {
     '/register': ['form', 'register'],
     '/fb/[fid]': ['fishbowl', 'app', 'form', 'on-boarding', 'on-boarding-tour'],
     '/fishbowl/create': ['fishbowl', 'form'],
-    '/fishbowl/list': ['fishbowl-list', 'fishbowl', 'form'],
+    '/fishbowl/scheduled': ['fishbowl-list', 'fishbowl', 'form'],
+    '/fishbowl/finished': ['fishbowl-list', 'fishbowl', 'form'],
     '/fishbowl/host-now': ['fishbowl'],
     '/fishbowl/detail/[fid]': ['fishbowl', 'form'],
-    '/fishbowl/thankyou/[fid]': ['fishbowl', 'form', 'home']
+    '/fishbowl/thankyou/[fid]': ['fishbowl', 'form', 'home'],
+    '/blog': ['blog', 'home'],
+    '/blog/[slug]': ['blog', 'home']
   },
   loadLocaleFrom: async (lang, ns) => {
-    const locales = await import(`./locales/${lang}/${ns}.json`).then((m) => m.default);
-    const defaultLocales = await import(`./locales/${DEFAULT_LOCALE}/${ns}.json`).then((m) => m.default);
+    const locales = await require(`./locales/${lang}/${ns}.json`);
+    const defaultLocales = await require(`./locales/${DEFAULT_LOCALE}/${ns}.json`);
     return { ...defaultLocales, ...locales };
   }
 };

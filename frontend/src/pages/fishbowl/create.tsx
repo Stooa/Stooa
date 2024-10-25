@@ -15,6 +15,7 @@ import FishbowlForm from '@/components/Web/Forms/FishbowlForm';
 import { useStateValue } from '@/contexts/AppContext';
 
 import { IConferenceStatus } from '@/jitsi/Status';
+import { StyledCreateFishbowlWrapper } from '@/ui/Form';
 
 const Create = () => {
   const { t } = useTranslation('fishbowl');
@@ -33,8 +34,10 @@ const Create = () => {
 
   return (
     <Layout title={t('title')}>
-      <h1 className="title-md form-title">{t('title')}</h1>
-      <FishbowlForm />
+      <StyledCreateFishbowlWrapper>
+        <h1 className="title-md form-title">{t('title')}</h1>
+        <FishbowlForm />
+      </StyledCreateFishbowlWrapper>
     </Layout>
   );
 };

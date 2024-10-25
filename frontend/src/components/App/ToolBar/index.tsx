@@ -7,35 +7,85 @@
  * file that was distributed with this source code.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { User } from '@/types/user';
-import { join, leave } from '@/lib/jitsi';
-import tracksRepository from '@/jitsi/Tracks';
+import { useJitsi } from '@/lib/useJitsi';
 import { IConferenceStatus, ITimeStatus } from '@/jitsi/Status';
-import devicesRepository from '@/jitsi/Devices';
-import userRepository from '@/jitsi/User';
 import { useStooa } from '@/contexts/StooaManager';
 import useSeatsAvailable from '@/hooks/useSeatsAvailable';
 import ButtonJoin from '@/components/App/ButtonJoin';
 import ButtonMic from '@/components/App/ButtonMic';
 import ButtonVideo from '@/components/App/ButtonVideo';
-import ButtonConfig, { ButtonConfigHandle } from '@/components/App/ButtonConfig';
+import ButtonMoreOptions, { ButtonHandle } from '@/components/App/ButtonMoreOptions';
 import { StyledToolbar } from '@/components/App/ToolBar/styles';
 import { useDevices } from '@/contexts/DevicesContext';
 import useEventListener from '@/hooks/useEventListener';
 import ReactionsButton from '../Reactions/ReactionsButton';
+import ScreenShareButton from '../ScreenShareButton';
+import { pushEventDataLayer } from '@/lib/analytics';
+import { useNavigatorType } from '@/hooks/useNavigatorType';
+import {
+  useConference,
+  useDevices as useJitsiDevices,
+  useSharedTrack,
+  useTracks,
+  useUser
+} from '@/jitsi';
 
 const ToolBar: React.FC = () => {
+  const { t } = useTranslation('fishbowl');
+  const { getLocalTracks } = useConference();
+  const { removeShareTrack } = useSharedTrack();
+  const { screenShare, changeDevice } = useJitsiDevices();
+  const { toggleAudioTrack, toggleVideoTrack } = useTracks();
+  const { getUser } = useUser();
+  const { join, leave } = useJitsi();
+
   const [joined, setJoined] = useState(false);
   const [joinIsInactive, setJoinIsInactive] = useState(false);
-  const { data, isModerator, conferenceStatus, timeStatus, conferenceReady } = useStooa();
+  const {
+    data,
+    isModerator,
+    conferenceStatus,
+    timeStatus,
+    conferenceReady,
+    isSharing,
+    setIsSharing,
+    clientRunning
+  } = useStooa();
   const { videoDevice, audioInputDevice, audioOutputDevice, permissions } = useDevices();
   const seatsAvailable = useSeatsAvailable();
-  const { t } = useTranslation('fishbowl');
+  const { deviceType } = useNavigatorType();
 
-  const configButtonRef = useRef<ButtonConfigHandle>(null);
+  const configButtonRef = useRef<ButtonHandle>(null);
+
+  const handleShareClick = async () => {
+    if (isSharing) {
+      const shareLocalTrack = getLocalTracks().filter(track => track.getVideoType() === 'desktop');
+
+      setIsSharing(false);
+      await removeShareTrack(shareLocalTrack[0], 'app');
+    } else {
+      pushEventDataLayer({
+        action: 'click_share',
+        category: 'Sharescreen',
+        label: window.location.href
+      });
+
+      const selectedScreen = await screenShare();
+
+      if (selectedScreen) {
+        pushEventDataLayer({
+          action: 'share',
+          category: 'Sharescreen',
+          label: window.location.href
+        });
+        setIsSharing(true);
+      }
+    }
+  };
 
   const joinSeat = async (user: User) => {
     setJoinIsInactive(true);
@@ -84,7 +134,7 @@ const ToolBar: React.FC = () => {
       configButtonRef.current.handleShowDevices(false);
     }
 
-    tracksRepository.toggleAudioTrack();
+    toggleAudioTrack();
   };
 
   const handleVideo = () => {
@@ -92,7 +142,7 @@ const ToolBar: React.FC = () => {
       configButtonRef.current.handleShowDevices(false);
     }
 
-    tracksRepository.toggleVideoTrack();
+    toggleVideoTrack();
   };
 
   const handleOutsideClick = event => {
@@ -110,33 +160,33 @@ const ToolBar: React.FC = () => {
 
   useEffect(() => {
     if (audioOutputDevice !== null) {
-      devicesRepository.changeDevice(audioOutputDevice);
+      changeDevice(audioOutputDevice);
     }
   }, [audioOutputDevice]);
 
   useEffect(() => {
     if (joined && audioInputDevice !== null) {
-      devicesRepository.changeDevice(audioInputDevice);
+      changeDevice(audioInputDevice);
     }
   }, [audioInputDevice, permissions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (joined && videoDevice !== null) {
-      devicesRepository.changeDevice(videoDevice);
+      changeDevice(videoDevice);
     }
   }, [videoDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (hasModeratorToSeatDuringIntroduction()) {
       console.log('[STOOA] Moderator join seat during introduction');
-      joinSeat(userRepository.getUser());
+      joinSeat(getUser());
     }
   }, [conferenceStatus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (hasModeratorToSeatDuringRunning()) {
       console.log('[STOOA] Moderator join seat during running');
-      joinSeat(userRepository.getUser());
+      joinSeat(getUser());
     }
   }, [conferenceReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -144,6 +194,7 @@ const ToolBar: React.FC = () => {
     !conferenceReady ||
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator) ||
+    (conferenceStatus === IConferenceStatus.INTRODUCTION && joined && isModerator) ||
     (timeStatus === ITimeStatus.TIME_UP && !isModerator && !joined) ||
     (!joined && !seatsAvailable) ||
     joinIsInactive;
@@ -154,12 +205,24 @@ const ToolBar: React.FC = () => {
     conferenceStatus === IConferenceStatus.NOT_STARTED ||
     (conferenceStatus === IConferenceStatus.INTRODUCTION && !isModerator);
 
+  const showShareScreenButton = useMemo(
+    () =>
+      isModerator &&
+      conferenceStatus === IConferenceStatus.INTRODUCTION &&
+      deviceType === 'Desktop',
+    [conferenceStatus, isModerator, deviceType]
+  );
+
   const isReactionsEnabled = conferenceStatus !== IConferenceStatus.NOT_STARTED;
 
   const joinLabel = joined ? t('leave') : !seatsAvailable ? t('full') : t('join');
 
   return (
-    <StyledToolbar className={isModerator ? 'moderator' : ''}>
+    <StyledToolbar
+      className={`${conferenceStatus === IConferenceStatus.INTRODUCTION ? 'introduction' : ''} ${
+        isModerator ? 'moderator' : ''
+      }`}
+    >
       <ButtonJoin
         permissions={joined ? true : permissions.audio}
         joined={joined}
@@ -169,6 +232,15 @@ const ToolBar: React.FC = () => {
       >
         {joinLabel}
       </ButtonJoin>
+      {showShareScreenButton && (
+        <ScreenShareButton
+          className="screen-share-button"
+          data-testid="share-screen-button"
+          isSharing={isSharing}
+          onClick={handleShareClick}
+          disabled={clientRunning}
+        />
+      )}
       <ReactionsButton disabled={!isReactionsEnabled} />
       <ButtonMic handleMic={handleMic} joined={joined} disabled={isMuteDisabled} />
       <ButtonVideo
@@ -176,7 +248,7 @@ const ToolBar: React.FC = () => {
         joined={joined}
         disabled={isMuteDisabled || !permissions.video}
       />
-      <ButtonConfig selectorPosition="top" ref={configButtonRef} />
+      <ButtonMoreOptions selectorPosition="top" ref={configButtonRef} />
     </StyledToolbar>
   );
 };

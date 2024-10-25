@@ -19,6 +19,7 @@ import StepTooltip from '@/components/App/OnBoardingTour/StepTooltip';
 import useTranslation from 'next-translate/useTranslation';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { StepsProps } from 'intro.js-react';
+import { useModals } from '@/contexts/ModalsContext';
 
 const Steps = dynamic<StepsProps>(() => import('intro.js-react').then(mod => mod.Steps), {
   ssr: false
@@ -32,16 +33,14 @@ type step = {
 };
 
 const OnBoardingTour = () => {
+  const { isModerator, data, conferenceReady, conferenceStatus } = useStooa();
+
   const {
-    isModerator,
-    data,
-    conferenceReady,
-    conferenceStatus,
     showOnBoardingTour,
     setShowOnBoardingTour,
     setActiveOnBoardingTooltip,
     onBoardingTooltipSeen
-  } = useStooa();
+  } = useModals();
 
   const { t } = useTranslation('on-boarding-tour');
 

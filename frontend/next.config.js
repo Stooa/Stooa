@@ -7,13 +7,35 @@
  * file that was distributed with this source code.
  */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const nextTranslate = require('next-translate');
 
 module.exports = nextTranslate({
-  webpack: (config, { isServer, webpack }) => {
+  compress: false,
+  poweredByHeader: false,
+  webpack: config => {
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack']
+      test: /\.svg$/i,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  name: 'preset-default',
+                  params: {
+                    overrides: {
+                      // disable plugins
+                      removeViewBox: false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
     });
     config.module.rules.push({
       test: /\.(mp3|wav)$/i,
@@ -24,5 +46,18 @@ module.exports = nextTranslate({
       ]
     });
     return config;
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/robots.txt',
+        destination: '/api/robots'
+      }
+    ];
+  },
+  compiler: {
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
+    styledComponents: true
+  },
+  swcMinify: true
 });

@@ -11,9 +11,15 @@ import ButtonJoin from '@/components/App/ButtonJoin';
 import { useStateValue } from '@/contexts/AppContext';
 import { fireEvent, render } from '@testing-library/react';
 import { pushEventDataLayer } from '@/lib/analytics';
+import { useUser } from '@/jitsi';
 
 jest.mock('@/lib/analytics');
+jest.mock('@/jitsi');
 jest.mock('@/contexts/AppContext');
+
+useUser.mockReturnValue({
+  getUser: jest.fn()
+});
 
 jest.mock('@/contexts/DevicesContext', () => ({
   useDevices() {

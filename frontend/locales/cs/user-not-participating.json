@@ -1,8 +1,8 @@
 {
-    "pageTitle": "Are you still there?",
-    "title": "Are you still there?",
-    "description": "The host considers that you are occupying a seat of the fishbowl without participating.",
-    "firstReason": "If you just want to listen to the conversation, there's no need to occupy a seat of the fishbowl.",
-    "secondReason": "If you are here due to technical problems, remember that you have to give access to microphone permissions so that the rest of the participants can hear you.",
-    "backButton": "Got it, I want to go back to the room."
+    "pageTitle": "Jste stále tady?",
+    "title": "Jste stále tady?",
+    "description": "Hostitel se domnívá, že obsazujete místo ve fishbowl, aniž byste se ho zúčastnili.",
+    "firstReason": "Pokud chcete jen poslouchat konverzaci, není třeba obsazovat místo ve fishbowl.",
+    "secondReason": "Pokud jste zde kvůli technickým problémům, nezapomeňte, že musíte povolit přístup k mikrofonu, aby vás ostatní účastníci slyšeli.",
+    "backButton": "Chápu, chci se vrátit do místnosti"
 }

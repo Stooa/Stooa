@@ -15,9 +15,13 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            App\Core:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/packages/Core/src/Entity'
+                prefix: 'App\Core\Entity'
+                alias: App\Core
+            App\Fishbowl:
+                is_bundle: false
+                dir: '%kernel.project_dir%/packages/Fishbowl/src/Entity'
+                prefix: 'App\Fishbowl\Entity'
+                alias: App\Fishbowl

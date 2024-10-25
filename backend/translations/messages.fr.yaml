@@ -10,7 +10,7 @@ emails:
     welcome_email:
         subject: 'Bienvenue dans Stooa !'
         title: Bienvenue dans Stooa
-        cta: Créez un fishbowl maintenant
+        cta: Créez un discussion maintenant
         subtitle: Stooa est un outil en ligne de non-conférence. Tout le monde peut s’exprimer. Rejoignez, écoutez et partagez vos connaissances avec d’autres.
         delete: Si vous souhaitez supprimer votre compte Stooa, veuillez nous envoyer un courriel <a href="mailto:stooa@stooa.com?subject=Delete Stooa account">ici</a>
     reset_password_email:
@@ -22,8 +22,8 @@ emails:
         information_text: Si vous ignorez ce message, votre mot de passe ne sera pas modifié.<br>Si vous n’avez pas demandé la réinitialisation de votre mot de passe, <a href="mailto:%email%">faites-le-nous savoir</a>.
         information_help_text: Si ce n’est pas votre compte, vous pouvez supprimer votre adresse électronique de celui-ci. <br>Veuillez ne pas répondre à ce courriel avec votre mot de passe. Nous ne vous demanderons jamais votre mot de passe, et nous vous déconseillons fortement de le partager avec qui que ce soit.
     fishbowl_created_email:
-        title: Et maintenant?<br>Partagez le <i>fishbowl</i> !
-        description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.👇"
+        title: Et maintenant ?<br>Partagez le &lt;i&gt;fishbowl&lt;/i&gt; !
+        description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.\U0001F447"
         social_share: "ou partagez sur:"
         edit_details: "N'oubliez pas que vous pouvez <a style='text-decoration: underline;' href='%edit_link%'>modifier les détails de l'événement</a> jusqu'à une heure avant son début."
         cta: "Accéder au fishbowl"

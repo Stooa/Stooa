@@ -18,6 +18,12 @@ parameters:
         - src
         - config
         - tests
+        - packages/Core/src
+        - packages/Core/config
+        - packages/Core/tests
+        - packages/Fishbowl/src
+        - packages/Fishbowl/config
+        - packages/Fishbowl/tests
     symfony:
         container_xml_path: '%rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml'
     treatPhpDocTypesAsCertain: false

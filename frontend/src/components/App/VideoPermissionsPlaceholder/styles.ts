@@ -27,7 +27,6 @@ const Placeholder = styled.div`
   width: 100%;
 
   & > .friend-image {
-    width: 120px;
     margin-bottom: ${space(2)};
   }
 

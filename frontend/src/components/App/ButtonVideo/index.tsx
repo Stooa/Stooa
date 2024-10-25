@@ -11,10 +11,10 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { pushEventDataLayer } from '@/lib/analytics';
-import userRepository from '@/jitsi/User';
 import VideoIcon from '@/ui/svg/video.svg';
 import VideoMutedIcon from '@/ui/svg/video-muted.svg';
 import Button from '@/components/App/ButtonVideo/styles';
+import { useUser } from '@/jitsi';
 
 interface Props {
   joined: boolean;
@@ -24,8 +24,9 @@ interface Props {
 }
 
 const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled }) => {
+  const { getUserVideoMuted, setUserVideoMuted } = useUser();
   const [active, setActive] = useState(true);
-  const [muted, setMuted] = useState(userRepository.getUserVideoMuted());
+  const [muted, setMuted] = useState(getUserVideoMuted());
   const { t } = useTranslation('fishbowl');
 
   const handleOnClick = async () => {
@@ -38,7 +39,7 @@ const ButtonVideo: React.FC<Props> = ({ handleVideo, joined, disabled, unlabeled
       label: window.location.href
     });
 
-    userRepository.setUserVideoMuted(!currentMutedState);
+    setUserVideoMuted(!currentMutedState);
     setMuted(!currentMutedState);
     typeof handleVideo === 'function' && handleVideo(!currentMutedState);
     setActive(true);

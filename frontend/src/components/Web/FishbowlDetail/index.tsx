@@ -16,7 +16,7 @@ import { Container } from '@/ui/pages/fishbowl-detail';
 import { MainGrid } from './styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import FishbowlDataCard from '@/components/Web/FishbowlDataCard';
-import Twitter from '@/ui/svg/share-twitter.svg';
+import Twitter from '@/ui/svg/x.svg';
 import Linkedin from '@/ui/svg/share-linkedin.svg';
 import { pushEventDataLayer } from '@/lib/analytics';
 import { toast } from 'react-toastify';
@@ -82,6 +82,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
               <Link
                 href={`https://www.linkedin.com/shareArticle?url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}&title=${shareTitle}&mini=true`}
                 passHref
+                legacyBehavior
               >
                 <a
                   target="_blank"
@@ -104,6 +105,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
               <Link
                 href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}`}
                 passHref
+                legacyBehavior
               >
                 <a
                   target="_blank"

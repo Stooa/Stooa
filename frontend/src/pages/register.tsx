@@ -11,7 +11,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { useAuth } from '@/contexts/AuthContext';
 import Layout from '@/layouts/Default';
-import RegisterForm from '@/components/Web/Forms/register';
+import RegisterForm from '@/user/forms/register';
 
 const Register = () => {
   const { t } = useTranslation('register');

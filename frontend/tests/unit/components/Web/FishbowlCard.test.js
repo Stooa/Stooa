@@ -8,7 +8,7 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import FishbowlCard from '@/components/App/FishbowlList/FishbowlCard';
+import FishbowlCard from '@/user/FishbowlList/FishbowlCard';
 
 const TWENTY_MINUTES_IN_MS = 20 * 60 * 1000;
 const HOUR_IN_MS = 1000 * 60 * 60;

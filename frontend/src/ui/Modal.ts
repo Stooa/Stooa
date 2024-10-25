@@ -17,6 +17,7 @@ import {
   COLOR_NEUTRO_700,
   COLOR_NEUTRO_900
 } from '@/ui/settings';
+import { TYPOGRAPHY_SIZES } from './Texts';
 
 const N900_RGB = hexToRgb(COLOR_NEUTRO_900);
 
@@ -31,7 +32,7 @@ const Modal = styled.div`
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 11;
+  z-index: 50;
   overflow: scroll;
 
   ${media.min('tablet')`
@@ -49,6 +50,7 @@ const Modal = styled.div`
 
     & .friend-image {
       margin-bottom: ${space(2)};
+      margin-inline: auto;
     }
 
     &.white {
@@ -79,6 +81,10 @@ const Modal = styled.div`
 
   .description {
     margin-top: ${space(2)};
+
+    & a {
+      --font-size: ${TYPOGRAPHY_SIZES.body_md.fontSize};
+    }
   }
 
   .modal-footer {
@@ -94,4 +100,49 @@ const Modal = styled.div`
   }
 `;
 
+const StyledLeftAlignedModal = styled(Modal)`
+  & .content {
+    max-width: 420px;
+    text-align: left;
+    padding: ${space(6)} ${space(5)} ${space(3)};
+
+    & h2 {
+      margin-bottom: ${space(4)};
+    }
+
+    & .experimental {
+      margin-bottom: ${space(2)};
+      padding-left: 2px;
+    }
+
+    & .body {
+      margin-bottom: ${space(2)};
+    }
+
+    & ul {
+      padding-left: ${space(3)};
+      text-align: left;
+      list-style: disc;
+      margin-bottom: ${space(6)};
+
+      & li {
+        margin-bottom: ${space(2)};
+      }
+    }
+
+    & .modal-footer {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: ${space(2)};
+
+      & button {
+        margin-top: 0;
+      }
+    }
+  }
+`;
+
 export default Modal;
+export { StyledLeftAlignedModal };

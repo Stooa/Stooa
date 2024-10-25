@@ -1,12 +1,12 @@
 {
     "title": "Stooa",
-    "version": "1.2.0",
+    "version": "1.6.0",
     "devDependencies": {
         "auto-changelog": "2.4.0"
     },
     "auto-changelog": {
         "template": "keepachangelog",
         "unreleased": false,
-        "commitLimit": false
+        "commitLimit": 0
     }
 }

@@ -7,12 +7,12 @@
  * file that was distributed with this source code.
  */
 
-import { Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 When('access to a current fishbowl', () => {
-  cy.visit('/en/fb/test-fishbowl', { timeout: 10000 });
+  cy.visit('/en/fb/test-fishbowl', { timeout: 15000 });
 
-  cy.contains('Enter fishbowl').click();
+  cy.contains('Join discussion').click();
 });
 
 Then('can click on reactions', () => {
