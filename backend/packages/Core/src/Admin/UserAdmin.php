@@ -99,6 +99,7 @@ class UserAdmin extends AbstractAdmin
                 'editable' => true,
             ])
             ->add('locale')
+            ->add('slackWebHook')
             ->add('active', FieldDescriptionInterface::TYPE_BOOLEAN, [
                 'editable' => true,
             ]);
