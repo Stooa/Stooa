@@ -34,6 +34,7 @@ module.exports = {
     '/fishbowl/host-now': ['fishbowl'],
     '/fishbowl/detail/[fid]': ['fishbowl', 'form'],
     '/fishbowl/thankyou/[fid]': ['fishbowl', 'form', 'home'],
+    '/integrations': ['integrations'],
     '/blog': ['blog', 'home'],
     '/blog/[slug]': ['blog', 'home']
   },

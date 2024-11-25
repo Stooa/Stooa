@@ -36,7 +36,29 @@ map $sent_http_content_type $expires {
 server {
     listen 80;
 
-    return 301 https://$host:8443$request_uri;
+    root /usr/app/public;
+
+    client_max_body_size 0;
+
+    location / {
+        try_files $uri /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass backend:9000;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_cache_valid 5m;
+
+        internal;
+    }
 }
 
 server {

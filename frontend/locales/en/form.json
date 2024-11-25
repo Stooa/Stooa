@@ -29,7 +29,18 @@
         "isPrivate": "I want this event to be private",
         "passwordTooltip": "Participants will be required to enter the password in order to access the event",
         "passwordPlaceholder": "Insert your password",
-        "passwordInputLabel": "Password"
+        "passwordInputLabel": "Password",
+        "invitationTitle": "Invitation",
+        "invitationToggleLabel": "I want to personalize my event invitation",
+        "invitationTooltip": "From this invitation, participants can sign up for the event, and this way you can know how many people will come. Check the participants from the scheduled Fishbowls page.",
+        "invitationTitleLabel": "Title",
+        "invitationSubtitleLabel": "Subtitle (optional)",
+        "invitationDescriptionLabel": "Description (optional)",
+        "AITitle": "Artificial intelligence",
+        "hasSummaryLabel": "I want to generate a summary of the conversation with OpenAI GPT model",
+        "hasSummaryTooltip": "We will save the transcriptions of the conversation and generate a summary that you could download at the Dashboard next to the feedback and assistants.",
+        "AIDataPrivacyTitle": "Data privacy",
+        "AIDataPrivacyDescription": "We will save the transcriptions of the conversation and generate a summary that you could download at the Dashboard next to the feedback and assistants."
     },
     "button": {
         "login": "Log in",

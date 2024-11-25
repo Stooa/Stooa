@@ -22,7 +22,7 @@ import { CREATE_FISHBOWL, UPDATE_FISHBOWL } from '@/lib/gql/Fishbowl';
 import { formatDateTime, nearestQuarterHour } from '@/lib/helpers';
 import { pushEventDataLayer } from '@/lib/analytics';
 
-import StandardForm, { TextDivider } from '@/ui/Form';
+import { CreateFishbowlForm, TextDivider } from '@/ui/Form';
 import SubmitBtn from '@/components/Web/SubmitBtn';
 import FormError from '@/components/Web/Forms/FormError';
 
@@ -34,12 +34,19 @@ import NewTextarea from '@/components/Common/Fields/Textarea';
 import DatePicker from '@/components/Common/Fields/DatePicker';
 import Select from '@/components/Common/Fields/Select';
 import Switch from '@/components/Common/Fields/Switch';
+import RichEditor from '@/components/Common/RichEditor';
+import { useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Link from '@tiptap/extension-link';
+import Placeholder from '@tiptap/extension-placeholder';
+import useDebounce from '@/hooks/useDebounce';
 
 interface Props {
   selectedFishbowl?: Fishbowl;
   isFull?: boolean;
   isEditForm?: boolean;
   onSaveCallback?: (data: Fishbowl) => void;
+  setShowPrivacyModal?: (value: boolean) => void;
 }
 
 interface FormValues {
@@ -54,6 +61,11 @@ interface FormValues {
   hasIntroduction: boolean;
   isPrivate: boolean;
   plainPassword?: string;
+  hasInvitationInfo: boolean;
+  invitationTitle?: string;
+  invitationSubtitle?: string;
+  invitationText?: string;
+  hasSummary: boolean;
 }
 
 const initialValues = {
@@ -66,21 +78,12 @@ const initialValues = {
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   hasIntroduction: false,
   isPrivate: false,
-  plainPassword: undefined
+  plainPassword: undefined,
+  hasInvitationInfo: false,
+  hasSummary: false
 };
 
 const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
-  // const stringDate = fishbowl.startDateTimeTz.toString();
-  // const sign = stringDate.charAt(stringDate.length - 6);
-  // const timezoneHours = parseInt(stringDate.slice(-5, -3), 10);
-  // const timezoneDifferenceInMs = timezoneHours * 60 * 60 * 1000;
-
-  // const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
-  // const adjustedTime =
-  //   timestamp + (sign === '-' ? -timezoneDifferenceInMs : timezoneDifferenceInMs);
-  // const userTimezoneOffset = new Date().getTimezoneOffset() * 60000;
-  // const formattedDate = new Date(adjustedTime + userTimezoneOffset);
-
   const timestamp = new Date(fishbowl.startDateTimeTz).getTime();
 
   // Extract timezone difference from startDateTimeTz in minutes
@@ -105,7 +108,11 @@ const mapSelectedFishbowl = (fishbowl: Fishbowl): FormValues => {
     timezone: fishbowl.timezone,
     hasIntroduction: fishbowl.hasIntroduction ?? false,
     isPrivate: fishbowl.isPrivate,
-    plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : ''
+    plainPassword: fishbowl.isPrivate ? fishbowl.plainPassword : '',
+    hasInvitationInfo: fishbowl.hasInvitationInfo || false,
+    invitationTitle: fishbowl.invitationTitle || '',
+    invitationSubtitle: fishbowl.invitationSubtitle || '',
+    hasSummary: fishbowl.hasSummary ?? false
   };
 };
 
@@ -113,7 +120,8 @@ const FishbowlForm = ({
   selectedFishbowl,
   isFull = false,
   isEditForm = false,
-  onSaveCallback
+  onSaveCallback,
+  setShowPrivacyModal
 }: Props) => {
   const { t, lang } = useTranslation('form');
   const timezones = countriesAndTimezones.getAllTimezones();
@@ -130,13 +138,14 @@ const FishbowlForm = ({
   const defaultTitle = t('defaultTitle', {
     name: user && user.name ? user.name.split(' ')[0] : ''
   });
+  const defaultInvitationTitle = t('defaultTitle', { name: '' }).slice(0, -3);
+
   const getRandomPassword = useCallback(() => {
     return Math.random().toString(36).substring(2, 10);
   }, []);
 
   const requiredError = t('validation.required');
   const minimumLength = t('validation.fishbowlPasswordLength');
-  // const dateError = t('validation.date');
 
   const schema = Yup.object({
     title: Yup.string().matches(/[^-\s]/, {
@@ -152,10 +161,20 @@ const FishbowlForm = ({
     plainPassword: Yup.string().when('isPrivate', {
       is: true,
       then: Yup.string().min(8, minimumLength).required(requiredError)
+    }),
+    hasInvitationInfo: Yup.boolean(),
+    invitationTitle: Yup.string().when('hasInvitationInfo', {
+      is: true,
+      then: Yup.string()
+    }),
+    invitationSubtitle: Yup.string().when('hasInvitationInfo', {
+      is: true,
+      then: Yup.string()
     })
   });
 
   const methods = useForm<FormValues>({
+    mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: { ...initialValues, language: lang, plainPassword: getRandomPassword() }
   });
@@ -164,12 +183,36 @@ const FishbowlForm = ({
     register,
     handleSubmit,
     getValues,
+    setValue,
     reset,
     watch,
     formState: { dirtyFields, errors, isSubmitting, isSubmitted }
   } = methods;
 
+  const editor = useEditor({
+    content: selectedFishbowl?.invitationText,
+    extensions: [
+      StarterKit,
+      Link.configure({
+        openOnClick: false
+      }),
+      Placeholder.configure({
+        placeholder: 'Description (optional)'
+      })
+    ]
+  });
+
   const watchIsPrivate = watch('isPrivate');
+  const watchInvitationInfo = watch('hasInvitationInfo');
+  const watchTitle = watch('title');
+
+  const debouncedTitle = useDebounce<string | undefined>(watchTitle, 500);
+
+  const handleSummaryOnClick = () => {
+    if (getValues('hasSummary') === false && setShowPrivacyModal) {
+      setShowPrivacyModal(true);
+    }
+  };
 
   const onCompletedSubmit = res => {
     if (res.type === 'Error') {
@@ -220,6 +263,10 @@ const FishbowlForm = ({
     const dayFormatted = formatDateTime(values.day);
     const timeFormatted = formatDateTime(values.time);
 
+    const isEmpty = editor => !editor.state.doc.textContent.trim().length;
+
+    const html = editor && !isEmpty(editor) ? editor.getHTML() : '';
+
     if (isEditForm) {
       pushEventDataLayer({
         category: 'Modify Fishbowl',
@@ -240,7 +287,12 @@ const FishbowlForm = ({
             isFishbowlNow: false,
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
-            plainPassword: values.isPrivate ? values.plainPassword : undefined
+            plainPassword: values.isPrivate ? values.plainPassword : undefined,
+            hasInvitationInfo: values.hasInvitationInfo,
+            invitationTitle: values.invitationTitle,
+            invitationSubtitle: values.invitationSubtitle,
+            invitationText: html,
+            hasSummary: values.hasSummary
           }
         }
       })
@@ -267,7 +319,13 @@ const FishbowlForm = ({
             hasIntroduction: values.hasIntroduction,
             isPrivate: values.isPrivate,
             plainPassword:
-              values.isPrivate && values.plainPassword ? values.plainPassword : undefined
+              values.isPrivate && values.plainPassword ? values.plainPassword : undefined,
+            hasInvitationInfo: values.hasInvitationInfo,
+            invitationTitle:
+              values.invitationTitle !== '' ? values.invitationTitle : defaultInvitationTitle,
+            invitationSubtitle: values.invitationSubtitle,
+            invitationText: html,
+            hasSummary: values.hasSummary
           }
         }
       })
@@ -292,12 +350,18 @@ const FishbowlForm = ({
     }
   }, [isEditForm, selectedFishbowl, reset]);
 
+  useEffect(() => {
+    if (!selectedFishbowl) {
+      setValue('invitationTitle', debouncedTitle);
+    }
+  }, [debouncedTitle, setValue, selectedFishbowl]);
+
   const today = new Date();
 
   return (
     <FormProvider {...methods}>
       {backendErrors && <FormError errors={backendErrors} />}
-      <StandardForm onSubmit={handleSubmit(onSubmit)} $isFull={isFull}>
+      <CreateFishbowlForm onSubmit={handleSubmit(onSubmit)} $isFull={isFull}>
         <fieldset className="fieldset-inline">
           <Input
             isSubmitted={isSubmitted}
@@ -466,6 +530,70 @@ const FishbowlForm = ({
             />
           )}
         </fieldset>
+
+        <fieldset>
+          <TextDivider>
+            <p>{t('fishbowl.invitationTitle')}</p>
+            <span></span>
+          </TextDivider>
+
+          <Switch
+            id="hasInvitationInfo"
+            full
+            tooltipText={t('fishbowl.invitationTooltip')}
+            label={t('fishbowl.invitationToggleLabel')}
+            {...register('hasInvitationInfo')}
+          />
+
+          {watchInvitationInfo && (
+            <>
+              <Input
+                isDirty={dirtyFields.invitationTitle}
+                hasError={errors.invitationTitle}
+                data-testid="fishbowl-form-invitationTitle"
+                placeholder={defaultInvitationTitle}
+                label={t('fishbowl.invitationTitleLabel')}
+                type="text"
+                autoComplete="off"
+                id="invitationTitle"
+                {...register('invitationTitle')}
+              />
+
+              <Input
+                isDirty={dirtyFields.invitationSubtitle}
+                hasError={errors.invitationSubtitle}
+                data-testid="fishbowl-form-invitationSubtitle"
+                label={t('fishbowl.invitationSubtitleLabel')}
+                type="text"
+                autoComplete="off"
+                id="invitationSubtitle"
+                {...register('invitationSubtitle')}
+              />
+
+              <RichEditor editor={editor} />
+            </>
+          )}
+        </fieldset>
+
+        <fieldset>
+          <TextDivider>
+            <p>{t('fishbowl.AITitle')}</p>
+            <span></span>
+          </TextDivider>
+          <Switch
+            onClick={handleSummaryOnClick}
+            id="hasSummary"
+            full
+            tooltipText={
+              <Trans
+                i18nKey="form:fishbowl.hasSummaryTooltip"
+                components={{ span: <span className="medium" /> }}
+              />
+            }
+            label={t('fishbowl.hasSummaryLabel')}
+            {...register('hasSummary')}
+          />
+        </fieldset>
         <fieldset>
           <SubmitBtn
             data-testid="fishbowl-submit"
@@ -476,7 +604,7 @@ const FishbowlForm = ({
             <span className="success-message-bottom">{t('validation.successMessage')}</span>
           )}
         </fieldset>
-      </StandardForm>
+      </CreateFishbowlForm>
     </FormProvider>
   );
 };

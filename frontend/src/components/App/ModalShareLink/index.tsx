@@ -54,10 +54,12 @@ const ModalShareLink: React.FC = () => {
             <button className="close" onClick={closeModal}>
               <Cross />
             </button>
-            <h2 className="title-sm">{t('shareModal.title')}</h2>
-            <p className="description">
-              <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
-            </p>
+            <div className="modal--body">
+              <h2 className="title-sm">{t('shareModal.title')}</h2>
+              <p className="description">
+                <Trans i18nKey="fishbowl:shareModal.description" components={{ i: <i /> }} />
+              </p>
+            </div>
             <div className="modal-footer">
               <ButtonCopyUrl
                 withSvg

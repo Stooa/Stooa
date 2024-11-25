@@ -49,6 +49,17 @@ services:
     App\Fishbowl\Stage\FishbowlValidateStage:
         decorates: api_platform.graphql.resolver.stage.validate
 
+    App\Core\Service\SlackService:
+        bind:
+            $slackUrl: '%env(SLACK_WEBHOOK)%'
+            $appUrl: '%env(APP_URL)%'
+
+    App\Core\Service\Hubspot\TokenHubspotService:
+        bind:
+            $redirectUrl: '%env(HUBSPOT_REDIRECT_URL)%'
+            $clientId: '%env(HUBSPOT_CLIENT_ID)%'
+            $clientSecret: '%env(HUBSPOT_CLIENT_SECRET)%'
+
     # Admin
     App\Core\Admin\UserAdmin:
         tags:

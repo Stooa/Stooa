@@ -25,12 +25,13 @@ import Button from '@/components/Common/Button';
 import { ROUTE_FISHBOWL } from '@/app.config';
 import useTranslation from 'next-translate/useTranslation';
 import { isTimeLessThanNMinutes } from '@/lib/helpers';
+import CopyEmbedFishbowl from '../CopyEmbedFishbowl';
 
 interface Props {
   data: Fishbowl;
 }
 
-const FishbowlDetail: React.FC<Props> = ({ data }) => {
+const FishbowlDetail = ({ data }: Props) => {
   const { t } = useTranslation('form');
   const shareTitle = `${data.name}.`;
 
@@ -124,10 +125,13 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
                 </a>
               </Link>
             </li>
+            <li>
+              <CopyEmbedFishbowl slug={data.slug} />
+            </li>
           </ul>
         </div>
         <div className="right-column">
-          <FishbowlDataCard data={data} />
+          <FishbowlDataCard isModerator data={data} />
           <p className="body-xs">
             <Trans i18nKey="fishbowl:detail.mailInfo" components={{ i: <i /> }} />
           </p>

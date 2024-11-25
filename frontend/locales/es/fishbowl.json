@@ -10,6 +10,7 @@
     "joinMember": "Entrar como usuario registrado *",
     "joinMemberNote": "* Permite contactar con el resto de asistentes",
     "copySuccess": "¡Enlace copiado!",
+    "addEventToCalendarTitle": "Añade el evento a tu calendario",
     "detail": {
         "shareTitle": "¡Bien hecho! ¿Y ahora qué?<br/>¡Comparte el <i>fishbowl</i> con tu gente!",
         "shareSubtitle": "¡Deja que la conversación fluya! Copia y comparte el link de este <i>fishbowl</i> con las personas que quieres que se unan a la conversación.",
@@ -203,7 +204,9 @@
             "after": "Después",
             "afterTooltip": "Feedback recibido después del fishbowl.",
             "during": "Durante",
-            "duringTooltip": "Feedback recibido durante el fishbowl."
+            "duringTooltip": "Feedback recibido durante el fishbowl.",
+            "summaryInProgress": "Generando resumen con IA",
+            "summary": "Resumen IA"
         }
     },
     "transcription": {
@@ -215,5 +218,12 @@
         "modalBody": "Antes de comenzar, necesitamos que <span>indiques en qué idioma participarás</span> en esta conversación.",
         "tooltip": "Por favor, indica qué idioma hablas.",
         "translate": "Traducir"
+    },
+    "invitationLanding" : {
+        "cta": "¡Me apunto!",
+        "register": "¡Me apunto!",
+        "registered": "Ya estás apuntado",
+        "success": "Te has apuntado con éxito",
+        "formTitle": "Apúntate al Fishbowl. ¡Es gratis!"
     }
 }

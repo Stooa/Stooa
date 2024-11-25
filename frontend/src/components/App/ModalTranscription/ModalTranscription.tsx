@@ -30,13 +30,15 @@ const ModalTranscription = ({ closeModal, startTranscription }: Props) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t('transcription.modalTitle')}</h2>
-        <p className="body">
-          <Trans
-            i18nKey="fishbowl:transcription.modalBody"
-            components={{ span: <span className="medium" /> }}
-          />
-        </p>
+        <div className="modal--body">
+          <h2 className="title-sm">{t('transcription.modalTitle')}</h2>
+          <p className="body">
+            <Trans
+              i18nKey="fishbowl:transcription.modalBody"
+              components={{ span: <span className="medium" /> }}
+            />
+          </p>
+        </div>
 
         <TranscriptionSelector location="modal" />
 

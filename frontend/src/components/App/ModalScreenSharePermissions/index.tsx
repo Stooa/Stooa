@@ -19,7 +19,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const ModalScreenSharePermissions: React.FC<Props> = ({ closeModal }) => {
+const ModalScreenSharePermissions = ({ closeModal }: Props) => {
   const { t } = useTranslation('fishbowl');
 
   return (
@@ -28,22 +28,24 @@ const ModalScreenSharePermissions: React.FC<Props> = ({ closeModal }) => {
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t('screenSharePermissionsModal.title')}</h2>
-        <p className="description">
-          <Trans
-            i18nKey="fishbowl:screenSharePermissionsModal.description"
-            components={{
-              a: (
-                <a
-                  className="colored decorated"
-                  href="x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                />
-              )
-            }}
-          />
-        </p>
+        <div className="modal--body">
+          <h2 className="title-sm">{t('screenSharePermissionsModal.title')}</h2>
+          <p className="description">
+            <Trans
+              i18nKey="fishbowl:screenSharePermissionsModal.description"
+              components={{
+                a: (
+                  <a
+                    className="colored decorated"
+                    href="x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                )
+              }}
+            />
+          </p>
+        </div>
         <div className="modal-footer">
           <Button variant="subtleLink" onClick={closeModal}>
             {t('common:cancel')}

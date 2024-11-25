@@ -29,7 +29,12 @@ export const makeCurrentFishbowl = (): Fishbowl => {
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     participants: [],
     feedbacks: [],
@@ -52,7 +57,12 @@ export const makePastFishbowl = (hasParticipants: boolean, hasFeedbacks: boolean
     slug: 'test-fishbowl',
     timezone: 'Europe/Madrid',
     locale: 'en',
-    host: '/users/2b8ccbf5-fbd8-4c82-9b61-44e195348404',
+    host: {
+      email: faker.internet.email(),
+      locale: 'en',
+      name: faker.person.firstName(),
+      surnames: faker.person.lastName()
+    },
     currentStatus: 'not_started',
     isFishbowlNow: true,
     participants: hasParticipants ? [makeParticipant()] : [],
