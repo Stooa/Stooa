@@ -51,8 +51,8 @@ class ParticipantRepositoryTest extends KernelTestCase
         $user = UserFactory::createOne()->object();
 
         ParticipantFactory::createOne([
-           'fishbowl' => $fishbowl,
-           'user' => $user,
+            'fishbowl' => $fishbowl,
+            'user' => $user,
         ]);
 
         $participant = $this->participantRepository->findUserInFishbowl($fishbowl, $user);

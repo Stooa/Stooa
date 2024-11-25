@@ -27,7 +27,7 @@ class FishbowlSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly FishbowlService $service,
-        private readonly Security $security
+        private readonly Security $security,
     ) {
     }
 

@@ -30,7 +30,7 @@ class MailerService
         private readonly TranslatorInterface $translator,
         private readonly PrivateFishbowlService $privateFishbowlService,
         private readonly string $from,
-        private readonly string $appUrl
+        private readonly string $appUrl,
     ) {
     }
 

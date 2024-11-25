@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CurrentUserRoom
 {
     public function __construct(
-        private readonly RequestStack $requestStack
+        private readonly RequestStack $requestStack,
     ) {
     }
 

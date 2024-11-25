@@ -26,7 +26,7 @@ class ResetPasswordResolver implements MutationResolverInterface
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly MailerService $mailerService,
-        private readonly ResetPasswordHelperInterface $helper
+        private readonly ResetPasswordHelperInterface $helper,
     ) {
     }
 

@@ -149,7 +149,7 @@ class TopicSelectorType extends AbstractType
                 continue;
             }
 
-            $choices[$childId] = sprintf('%s %s', str_repeat(' - ', $level), $child->getName() ?? '');
+            $choices[$childId] = \sprintf('%s %s', str_repeat(' - ', $level), $child->getName() ?? '');
 
             $this->childWalker($child, $currentNode, $choices, $max_depth, $level + 1);
         }
