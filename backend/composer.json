@@ -39,7 +39,7 @@
         "symfony/finder": "6.4.0",
         "symfony/flex": "2.4.3",
         "symfony/framework-bundle": "6.4.2",
-        "symfony/http-client": "6.4.2",
+        "symfony/http-client": "6.4.15",
         "symfony/intl": "6.4.2",
         "symfony/mailer": "6.4.2",
         "symfony/messenger": "6.4.0",
