@@ -20,7 +20,7 @@ use ParagonIE\HiddenString\HiddenString;
 class HalitePasswordEncryption implements PasswordEncryptionInterface
 {
     public function __construct(
-        private readonly string $key
+        private readonly string $key,
     ) {
     }
 

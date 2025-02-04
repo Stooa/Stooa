@@ -57,7 +57,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         string $mutationName,
         string $functionName,
         string $initialStatus,
-        bool $hasIntroduction
+        bool $hasIntroduction,
     ): void {
         self::bootKernel();
 
@@ -95,7 +95,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         string $functionName,
         string $initialStatus,
         string $finalStatus,
-        bool $hasIntroduction
+        bool $hasIntroduction,
     ): void {
         self::bootKernel();
 
@@ -132,7 +132,7 @@ class FishbowlWorkflowFunctionalTest extends ApiTestCase
         string $mutationName,
         string $functionName,
         string $initialStatus,
-        bool $hasIntroduction
+        bool $hasIntroduction,
     ): void {
         self::bootKernel();
 

@@ -28,7 +28,7 @@ class JWTToken
         private readonly UserPayload $user,
         private readonly ?\DateTimeImmutable $nbf = null,
         private readonly ?HeaderPayload $headerPayload = null,
-        private readonly ?FeaturesPayload $features = null
+        private readonly ?FeaturesPayload $features = null,
     ) {
     }
 

@@ -23,7 +23,7 @@ class TopicService
     protected NestedTreeRepository $repository;
 
     public function __construct(
-        protected readonly EntityManagerInterface $entityManager
+        protected readonly EntityManagerInterface $entityManager,
     ) {
         /** @psalm-suppress PropertyTypeCoercion */
         $this->repository = $entityManager->getRepository(Topic::class);

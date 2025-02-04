@@ -16,20 +16,21 @@ namespace App\Core\State;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Core\Entity\User;
+use App\Core\Model\ChangePasswordInput;
 use App\Core\Repository\UserRepository;
 use App\Core\Security\PasswordEncoderService;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @implements ProcessorInterface<User>
+ * @implements ProcessorInterface<ChangePasswordInput, User>
  */
 final class ChangePasswordProcessor implements ProcessorInterface
 {
     public function __construct(
         private readonly PasswordEncoderService $passwordEncoder,
         private readonly ResetPasswordHelperInterface $helper,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
     ) {
     }
 

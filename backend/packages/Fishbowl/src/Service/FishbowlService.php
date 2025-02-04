@@ -54,7 +54,7 @@ class FishbowlService
         private readonly Security $security,
         private readonly GuestRepository $guestRepository,
         private readonly ParticipantRepository $participantRepository,
-        private readonly TranslatorInterface $translator
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

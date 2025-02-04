@@ -65,9 +65,9 @@ class FishbowlIntroduceAndNoIntroRunSubscriberTest extends TestCase
     public function itGetSubscribedEvents(): void
     {
         $this->assertSame([
-                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
-                'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
-            ],
+            'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_INTRODUCE => ['guardFishbowl'],
+            'workflow.fishbowl.guard.' . Fishbowl::TRANSITION_NO_INTRO_RUN => ['guardFishbowl'],
+        ],
             $this->subscriber::getSubscribedEvents()
         );
     }

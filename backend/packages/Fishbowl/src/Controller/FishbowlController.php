@@ -23,7 +23,7 @@ final class FishbowlController extends AbstractController
 {
     public function __construct(
         private readonly FishbowlService $fishbowlService,
-        private readonly PrivateFishbowlService $privateFishbowlService
+        private readonly PrivateFishbowlService $privateFishbowlService,
     ) {
     }
 
