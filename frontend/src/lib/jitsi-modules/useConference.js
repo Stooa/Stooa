@@ -463,7 +463,6 @@ export const useConference = () => {
         .dial('jitsi_meet_transcribe')
         .catch(e => {
           console.log('[STOOA] Error start dial transcription', e.message);
-          getConference().setLocalParticipantProperty('requestingTranscription', false);
         });
     }
   };
