@@ -65,8 +65,6 @@ export const useConference = () => {
 
     createTracks(userId, seat, user);
 
-    getConference().selectParticipants(getIds());
-
     console.log('[STOOA] Join', userId);
   };
 
@@ -91,8 +89,6 @@ export const useConference = () => {
 
     leaveSeat(userId);
     removeTracks(userId);
-
-    conference.selectParticipants(getIds());
 
     console.log('[STOOA] User leave', userId);
   };
@@ -456,7 +452,19 @@ export const useConference = () => {
 
   const startTranscriptionEvent = () => {
     console.log('[STOOA] Start transcription');
+
     getConference().setLocalParticipantProperty('requestingTranscription', true);
+
+    console.log('[STOOA] transcription status', getConference().getTranscriptionStatus());
+
+    if (getConference().getTranscriptionStatus() === 'OFF') {
+      console.log('[STOOA] Start dial transcription');
+      getConference().dial('jitsi_meet_transcribe')
+        .catch((e) => {
+          console.log('[STOOA] Error start dial transcription');
+          getConference().setLocalParticipantProperty('requestingTranscription', false);
+        });
+    }
   };
 
   /**
@@ -471,6 +479,7 @@ export const useConference = () => {
   };
 
   const setConferenceTranscriptionLanguage = language => {
+    console.log('[STOOA] Set conference transcription language', language);
     getConference().setLocalParticipantProperty('transcription_language', language);
   };
 
