@@ -459,9 +459,10 @@ export const useConference = () => {
 
     if (getConference().getTranscriptionStatus() === 'OFF') {
       console.log('[STOOA] Start dial transcription');
-      getConference().dial('jitsi_meet_transcribe')
-        .catch((e) => {
-          console.log('[STOOA] Error start dial transcription');
+      getConference()
+        .dial('jitsi_meet_transcribe')
+        .catch(e => {
+          console.log('[STOOA] Error start dial transcription', e.message);
           getConference().setLocalParticipantProperty('requestingTranscription', false);
         });
     }
