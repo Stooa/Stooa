@@ -10,6 +10,7 @@
     "joinMember": "Join as a registered user *",
     "joinMemberNote": "* Allows you to contact the rest of the attendees",
     "copySuccess": "Link copied to clipboard!",
+    "addEventToCalendarTitle": "Add event to calendar",
     "detail": {
         "shareTitle": "Well done! Now what? <br/>Share the fishbowl with your friends!",
         "shareSubtitle": "Let the conversation flow! Copy and share the link to this fishbowl with the people you want to join the conversation.",
@@ -203,7 +204,9 @@
             "after": "After",
             "afterTooltip": "Feedback received after the fishbowl",
             "during": "During",
-            "duringTooltip": "Feedback received during the fishbowl"
+            "duringTooltip": "Feedback received during the fishbowl",
+            "summaryInProgress": "Generating AI Summary",
+            "summary": "AI summary"
         }
     },
     "transcription" : {
@@ -215,5 +218,12 @@
         "modalBody": "Before we start, we need you to <span>indicate in which language you will be participating</span> in this conversation.",
         "tooltip": "Please specify what language you speak.",
         "translate": "Translate"
+    },
+    "invitationLanding" : {
+        "cta": "I'm in!",
+        "register": "Register",
+        "registered": "You are already registered",
+        "success": "You have successfully registered",
+        "formTitle": "Sign up to the Fishbowl. It's free!"
     }
 }

@@ -4,6 +4,7 @@
     "finishedFishbowlList": "Finished fishbowls",
     "signout": "Log out",
     "register": "Register for free",
+    "modalAccept": "Accept",
     "cancel": "Cancel",
     "cta": "Create a discussion",
     "scheduleFishbowl": "Schedule a fishbowl",
@@ -34,5 +35,6 @@
     "successCopiedInvitation": "Invitation copied",
     "goToFinishedFishbowlsTitle": "Go to the finished fishbowls section to see the details and feedback from the attendees.",
     "goToFinishedFishbowls": "Go to your past fishbowls",
+    "integrations": "Integrations",
     "blog": "Blog"
 }

@@ -76,6 +76,7 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
   } = useDevices();
 
   const {
+    data,
     isModerator,
     isRecording,
     feedbackAlert,
@@ -149,7 +150,8 @@ const ButtonMoreOptions: React.ForwardRefRenderFunction<ButtonHandle, Props> = (
     }
 
     if (isTranscriptionEnabled) {
-      stopTranscriptionEvent();
+      stopTranscriptionEvent(!!data.hasSummary);
+
       setIsTranscriptionEnabled(false);
     } else {
       startTranscriptionEvent();

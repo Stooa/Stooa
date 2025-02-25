@@ -61,8 +61,10 @@ const ModalConfirmLeaving: React.FC<Props> = ({ closeModal, handleFinished }) =>
         <button className="close" onClick={closeModal}>
           <Cross />
         </button>
-        <h2 className="title-sm">{t('confirmLeaving.title')}</h2>
-        <p className="description">{t('confirmLeaving.description')}</p>
+        <div className="modal--body">
+          <h2 className="title-sm">{t('confirmLeaving.title')}</h2>
+          <p className="description">{t('confirmLeaving.description')}</p>
+        </div>
         <div className="modal-footer">
           <Button onClick={() => finishFishbowl()} className="error" disabled={loading}>
             {t('endFishbowl')}

@@ -16,6 +16,8 @@ import BackArrow from '@/ui/svg/arrow-prev.svg';
 import Hourglass from '@/ui/svg/hourglass.svg';
 import ArrowDown from '@/ui/svg/down-arrow.svg';
 import People from '@/ui/svg/people-bigger.svg';
+import AISummary from '@/ui/svg/ai-summary.svg';
+
 import SatisfactionSummary from '../SatisfactionSummary';
 import { Fishbowl } from '@/types/api-platform';
 import useFeedback from '@/hooks/useFeedback';
@@ -23,14 +25,23 @@ import FeedbackList from '@/user/FeedbackList';
 import DashboardParticipantsList from '../DashboardParticipantsList';
 import { motion, Variants } from 'framer-motion';
 import useTranslation from 'next-translate/useTranslation';
+import Button from '@/components/Common/Button';
 
 interface Props {
   fishbowl: Fishbowl;
   onClickBack: () => void;
   variants?: Variants;
+  hasSummary?: boolean;
+  handleShowAISummaryModal?: () => void;
 }
 
-export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props) => {
+export const FishbowlDashboardData = ({
+  fishbowl,
+  onClickBack,
+  variants,
+  hasSummary,
+  handleShowAISummaryModal
+}: Props) => {
   const { t } = useTranslation('fishbowl');
   const { summarizeFeedbackSatisfacion } = useFeedback(fishbowl);
   const { startDateTimeTz } = fishbowl;
@@ -54,6 +65,8 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
 
   const participantsRef = useRef<HTMLDivElement>(null);
   const dashboardWrapperRef = useRef<HTMLDivElement>(null);
+
+  const summaryInProgress = hasSummary && !fishbowl.summary;
 
   const handleScrollToParticipants = () => {
     if (participantsRef.current && dashboardWrapperRef.current) {
@@ -86,6 +99,18 @@ export const FishbowlDashboardData = ({ fishbowl, onClickBack, variants }: Props
       <p className="description" data-testid="finished-fishbowl-description">
         {fishbowl.description}
       </p>
+      <Button
+        className="summary-button"
+        disabled={!hasSummary || summaryInProgress}
+        onClick={handleShowAISummaryModal}
+      >
+        {summaryInProgress
+          ? t('feedback.dashboard.summaryInProgress')
+          : t('feedback.dashboard.summary')}
+        <span>
+          <AISummary />
+        </span>
+      </Button>
       <div className="data">
         <div className="data__group">
           <div className="data__title">

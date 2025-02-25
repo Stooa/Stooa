@@ -55,7 +55,9 @@ const HostNow = props => {
           locale: lang,
           isFishbowlNow: true,
           hasIntroduction: false,
-          isPrivate: false
+          isPrivate: false,
+          hasInvitationInfo: false,
+          hasSummary: false
         }
       }
     })

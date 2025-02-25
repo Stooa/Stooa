@@ -23,6 +23,7 @@ const CREATE_FISHBOWL = gql`
         isFishbowlNow
         hasIntroduction
         isPrivate
+        hasSummary
       }
     }
   }
@@ -44,6 +45,11 @@ const UPDATE_FISHBOWL = gql`
         hasIntroduction
         isPrivate
         plainPassword
+        hasInvitationInfo
+        invitationTitle
+        invitationSubtitle
+        invitationText
+        hasSummary
       }
     }
   }
@@ -76,6 +82,16 @@ const GET_FISHBOWL = gql`
       currentStatus
       isPrivate
       plainPassword
+      hasInvitationInfo
+      invitationTitle
+      invitationSubtitle
+      invitationText
+      host {
+        name
+        surnames
+      }
+      hasSummary
+      summary
     }
   }
 `;

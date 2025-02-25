@@ -18,6 +18,7 @@ import { Description } from '@/ui/pages/fishbowl-detail';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { HelpText, LandingContainer, StyledDetailAlert, StyledFishbowlData, Time } from './styles';
 import { ToastContainer } from 'react-toastify';
+import { CustomAddToCalendarButton } from '../AddToCalendarButton';
 
 interface Props {
   data: Fishbowl;
@@ -57,6 +58,8 @@ const FishbowlLanding = ({ data }: Props) => {
           <StyledDetailAlert className="warning body-md prewrap" block>
             <Trans i18nKey="fishbowl:accessMsg" components={{ strong: <strong /> }} />
           </StyledDetailAlert>
+          <h3 className="medium">{t('addEventToCalendarTitle')}</h3>
+          <CustomAddToCalendarButton fishbowl={data} />
           {!data.isPrivate && (
             <>
               <ButtonCopyUrl size="large" withSvg fid={data.slug} locale={data.locale} />

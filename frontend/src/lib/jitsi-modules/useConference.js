@@ -65,8 +65,6 @@ export const useConference = () => {
 
     createTracks(userId, seat, user);
 
-    getConference().selectParticipants(getIds());
-
     console.log('[STOOA] Join', userId);
   };
 
@@ -91,8 +89,6 @@ export const useConference = () => {
 
     leaveSeat(userId);
     removeTracks(userId);
-
-    conference.selectParticipants(getIds());
 
     console.log('[STOOA] User leave', userId);
   };
@@ -456,24 +452,43 @@ export const useConference = () => {
 
   const startTranscriptionEvent = () => {
     console.log('[STOOA] Start transcription');
-    conference.setLocalParticipantProperty('requestingTranscription', true);
+
+    getConference().setLocalParticipantProperty('requestingTranscription', true);
+
+    console.log('[STOOA] transcription status', getConference().getTranscriptionStatus());
+
+    if (getConference().getTranscriptionStatus() === 'OFF') {
+      console.log('[STOOA] Start dial transcription');
+      getConference()
+        .dial('jitsi_meet_transcribe')
+        .catch(e => {
+          console.log('[STOOA] Error start dial transcription', e.message);
+        });
+    }
   };
 
-  const stopTranscriptionEvent = () => {
+  /**
+   *
+   * @param {boolean} hasSummary True if the transcription has AI summary
+   */
+  const stopTranscriptionEvent = hasSummary => {
     console.log('[STOOA] Stop transcription');
-    conference.setLocalParticipantProperty('requestingTranscription', false);
+    if (!hasSummary) {
+      getConference().setLocalParticipantProperty('requestingTranscription', false);
+    }
   };
 
   const setConferenceTranscriptionLanguage = language => {
-    conference.setLocalParticipantProperty('transcription_language', language);
+    console.log('[STOOA] Set conference transcription language', language);
+    getConference().setLocalParticipantProperty('transcription_language', language);
   };
 
   const setConferenceTranslationLanguage = language => {
-    conference.setLocalParticipantProperty('translation_language', language);
+    getConference().setLocalParticipantProperty('translation_language', language);
   };
 
   const stopTranslation = () => {
-    conference.setLocalParticipantProperty('translation_language', null);
+    getConference().setLocalParticipantProperty('translation_language', null);
   };
 
   const startScreenShareEvent = () => {

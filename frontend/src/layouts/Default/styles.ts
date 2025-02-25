@@ -55,6 +55,25 @@ const Decoration = styled.div`
   }
 `;
 
+const TopDecoration = styled.div`
+  z-index: 0;
+  &,
+  svg {
+    width: 90%;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+
+    ${media.min('tablet')`
+      top: 0;
+      width: 75%;
+    `}
+  }
+`;
+
 const Header = styled.header<{ blogLayout?: boolean; whiteLogo?: boolean }>`
   align-items: center;
   color: ${({ whiteLogo }) => (whiteLogo ? COLOR_NEUTRO_100 : COLOR_NEUTRO_700)};
@@ -65,7 +84,7 @@ const Header = styled.header<{ blogLayout?: boolean; whiteLogo?: boolean }>`
   gap: ${space(2)};
 
   ${media.min('tablet')`
-    padding: ${space(3)} ${space(6)} 0;
+    padding: 0 ${space(6)} 0;
   `}
 
   ${({ blogLayout }) =>
@@ -102,4 +121,4 @@ const Main = styled.main<{
   `}
 `;
 
-export { Container, Decoration, Header, Main };
+export { Container, Decoration, Header, Main, TopDecoration };

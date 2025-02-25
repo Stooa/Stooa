@@ -8,12 +8,13 @@
  */
 
 import { Fishbowl as apiPlatformFishbowl } from './api-platform/interfaces/fishbowl';
+import { User } from './api-platform/interfaces/user';
 import { SatisfactionData } from './feedback';
 
 export interface Fishbowl
   extends Omit<
     apiPlatformFishbowl,
-    '@id' | 'slug' | 'startDateTimeTz' | 'endDateTimeTz' | 'isPrivate' | 'duration'
+    '@id' | 'slug' | 'startDateTimeTz' | 'endDateTimeTz' | 'isPrivate' | 'duration' | 'host'
   > {
   id?: string;
   readonly slug: string;
@@ -22,4 +23,5 @@ export interface Fishbowl
   endDateTimeTz: string;
   isPrivate: boolean;
   summarizedFeedback?: SatisfactionData | null;
+  host: User;
 }

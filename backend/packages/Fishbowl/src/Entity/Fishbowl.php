@@ -104,6 +104,8 @@ use Webmozart\Assert\Assert as MAssert;
             name: 'finish'
         ),
         new Mutation(
+            normalizationContext: ['groups' => ['fishbowl:read']],
+            denormalizationContext: ['groups' => ['fishbowl:write', 'fishbowl:update']],
             security: 'object.getHost() == user',
             validationContext: ['groups' => ['Default', 'fishbowl:update']],
             name: 'update'
@@ -239,7 +241,32 @@ class Fishbowl implements \Stringable
 
     #[Groups(['fishbowl:read', 'fishbowl:write'])]
     #[ORM\Column(type: 'boolean')]
+    private bool $hasInvitationInfo = false;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $invitationTitle = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $invitationSubtitle = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $invitationText = null;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[ORM\Column(type: 'boolean')]
     private bool $isPrivate = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $isHubspotSync = false;
+
+    #[Groups(['fishbowl:read', 'fishbowl:write'])]
+    #[ORM\Column(type: 'boolean')]
+    private bool $hasSummary = false;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $password = null;
@@ -249,10 +276,24 @@ class Fishbowl implements \Stringable
     #[Assert\NotBlank(groups: ['user:create'])]
     private ?string $plainPassword = null;
 
+    #[Groups(['fishbowl:read'])]
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $summary = null;
+
+    #[Assert\Type('\\DateTimeInterface')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $summaryUpdatedAt = null;
+
     /** @var Collection<int, Feedback> */
     #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Feedback::class)]
     #[Groups(['fishbowl:read'])]
     private Collection $feedbacks;
+
+    /** @var Collection<int, Attendee> */
+    #[ORM\OneToMany(mappedBy: 'fishbowl', targetEntity: Attendee::class)]
+    #[ORM\OrderBy(['createdDateTime' => 'ASC'])]
+    #[Groups(['fishbowl:read'])]
+    private Collection $attendees;
 
     /** @var Collection<int, Topic> */
     #[JoinTable(name: 'fishbowl_topics')]
@@ -266,6 +307,8 @@ class Fishbowl implements \Stringable
         $this->participants = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
         $this->topics = new ArrayCollection();
+        $this->attendees = new ArrayCollection();
+        $this->isHubspotSync = false;
     }
 
     public function __toString(): string
@@ -604,6 +647,34 @@ class Fishbowl implements \Stringable
         return $this;
     }
 
+    /** @return Collection<int, Attendee> */
+    public function getAttendees(): Collection
+    {
+        return $this->attendees;
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees[] = $attendee;
+            $attendee->setFishbowl($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(Attendee $attendee): self
+    {
+        if ($this->attendees->contains($attendee)) {
+            $this->attendees->removeElement($attendee);
+            if ($attendee->getFishbowl() === $this) {
+                $attendee->setFishbowl(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getIsFishbowlNow(): bool
     {
         return $this->isFishbowlNow;
@@ -680,6 +751,54 @@ class Fishbowl implements \Stringable
         return $this;
     }
 
+    public function isHubspotSync(): bool
+    {
+        return $this->isHubspotSync;
+    }
+
+    public function setIsHubspotSync(bool $isHubspotSync): self
+    {
+        $this->isHubspotSync = $isHubspotSync;
+
+        return $this;
+    }
+
+    public function isHasSummary(): bool
+    {
+        return $this->hasSummary;
+    }
+
+    public function setHasSummary(bool $hasSummary): self
+    {
+        $this->hasSummary = $hasSummary;
+
+        return $this;
+    }
+
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    public function getSummaryUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->summaryUpdatedAt;
+    }
+
+    public function setSummaryUpdatedAt(?\DateTimeInterface $summaryUpdatedAt): self
+    {
+        $this->summaryUpdatedAt = $summaryUpdatedAt;
+
+        return $this;
+    }
+
     public function privateFishbowlHasPassword(): bool
     {
         return true === $this->getIsPrivate() && (null === $this->getPlainPassword() || '' === $this->getPlainPassword());
@@ -688,5 +807,58 @@ class Fishbowl implements \Stringable
     public function publicFishbowlHasPassword(): bool
     {
         return false === $this->getIsPrivate() && null !== $this->getPlainPassword();
+    }
+
+    public function getHasInvitationInfo(): bool
+    {
+        return $this->hasInvitationInfo;
+    }
+
+    public function setHasInvitationInfo(bool $hasInvitationInfo): self
+    {
+        $this->hasInvitationInfo = $hasInvitationInfo;
+
+        return $this;
+    }
+
+    public function getInvitationTitle(): ?string
+    {
+        return $this->invitationTitle;
+    }
+
+    public function setInvitationTitle(?string $invitationTitle): self
+    {
+        $this->invitationTitle = $invitationTitle;
+
+        return $this;
+    }
+
+    public function getInvitationSubtitle(): ?string
+    {
+        return $this->invitationSubtitle;
+    }
+
+    public function setInvitationSubtitle(?string $invitationSubtitle): self
+    {
+        $this->invitationSubtitle = $invitationSubtitle;
+
+        return $this;
+    }
+
+    public function getInvitationText(): ?string
+    {
+        return $this->invitationText;
+    }
+
+    public function setInvitationText(?string $invitationText): self
+    {
+        $this->invitationText = $invitationText;
+
+        return $this;
+    }
+
+    public function getCopyName(): string
+    {
+        return "{$this->getName()}";
     }
 }

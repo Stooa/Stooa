@@ -96,7 +96,6 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     min-height: 100vh;
     overflow-x: hidden;
-    scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
   }
@@ -233,7 +232,7 @@ const GlobalStyle = createGlobalStyle`
 
 
       &.Toastify__toast-container {
-        --toastify-z-index: 30;
+        --toastify-z-index: 50;
         ${media.max('tablet')`
           width: 92%;
           left: 50%;

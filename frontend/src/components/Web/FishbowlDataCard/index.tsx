@@ -18,18 +18,23 @@ import { formatDateTime, getMonthsForLocale, isTimeLessThanNMinutes } from '@/li
 import { Fishbowl } from '@/types/api-platform';
 import RedirectLink from '../RedirectLink';
 import { StyledFishbowlDataCard } from './styles';
+import AddToCalendarButton from '../AddToCalendarButton';
 
 interface Props {
   data: Fishbowl;
+  fromLanding?: boolean;
+  isModerator?: boolean;
 }
 
-const FishbowlDataCard = ({ data }: Props) => {
+const FishbowlDataCard = ({ data, fromLanding, isModerator }: Props) => {
   const { time: startTime } = formatDateTime(data.startDateTimeTz);
   const { day, year, time: endTime } = formatDateTime(data.endDateTimeTz);
   const { locale } = useRouter();
   const { t } = useTranslation('form');
 
   const monthName = getMonthsForLocale(locale)[new Date(data.startDateTimeTz).getMonth()];
+
+  const isLessThan30Minutes = isTimeLessThanNMinutes(data.startDateTimeTz, 30);
 
   return (
     <StyledFishbowlDataCard>
@@ -44,19 +49,29 @@ const FishbowlDataCard = ({ data }: Props) => {
       )}
 
       <div className="date">
-        <p className="body-sm" data-testid="date-with-month">{`${
-          monthName.charAt(0).toUpperCase() + monthName.slice(1)
-        } ${day}, ${year}`}</p>
-        <p className="body-sm">{`${startTime} - ${endTime}`}</p>
+        <div>
+          <p className="body-sm" data-testid="date-with-month">{`${
+            monthName.charAt(0).toUpperCase() + monthName.slice(1)
+          } ${day}, ${year}`}</p>
+          <p className="body-sm">{`${startTime} - ${endTime}`}</p>
+        </div>
+
+        {fromLanding && !isLessThan30Minutes && (
+          <p className="body-sm">
+            {t('fishbowl:addEventToCalendarTitle')} <AddToCalendarButton fishbowl={data} />
+          </p>
+        )}
       </div>
 
-      {isTimeLessThanNMinutes(data.startDateTimeTz, 30) ? (
+      {!fromLanding && isLessThan30Minutes && (
         <RedirectLink href={`${ROUTE_FISHBOWL}/${data.slug}`} locale={data.locale} passHref>
           <Button size="large" as="a" data-testid="enter-fishbowl">
             <span>{t('button.enterFishbowl')}</span>
           </Button>
         </RedirectLink>
-      ) : (
+      )}
+
+      {isModerator && !isLessThan30Minutes && (
         <Link
           href={`${ROUTE_FISHBOWL_SCHEDULED}?selected=${data.slug}`}
           className="decorated colored"

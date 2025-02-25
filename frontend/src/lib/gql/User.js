@@ -27,6 +27,7 @@ const UPDATE_USER = gql`
         id
         name
         surnames
+        slackWebHook
       }
     }
   }
@@ -61,6 +62,9 @@ const GET_SELF_USER = gql`
       allowShareData
       linkedinProfile
       twitterProfile
+      slackWebHook
+      hasHubspotRefreshToken
+      lastSyncDate
     }
   }
 `;

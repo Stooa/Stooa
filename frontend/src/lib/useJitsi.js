@@ -118,9 +118,7 @@ export const useJitsi = () => {
         joined: participant.getProperty('joined') === 'yes',
         isMuted: isParticipantMuted(participant, 'audio'),
         isVideoMuted: isParticipantMuted(participant, 'video'),
-        isJigasi: participant._properties
-          ? participant._properties.features_jigasi !== undefined
-          : false
+        isJigasi: participant._properties ? participant._properties.has('features_jigasi') : false
       });
     });
 

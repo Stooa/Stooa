@@ -34,6 +34,7 @@ sonata_admin:
                     - App\Core\Admin\ParticipantAdmin
                     - App\Core\Admin\TopicAdmin
                     - App\Fishbowl\Admin\FeedbackAdmin
+                    - App\Fishbowl\Admin\AttendeeAdmin
 
 sonata_block:
     http_cache: false

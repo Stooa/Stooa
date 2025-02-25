@@ -27,7 +27,7 @@ import TranscriptionSVG from '@/ui/svg/transcription-icon.svg';
 import { ParticipantsDrawer, ParticipantsToggle, Icon } from '@/components/App/Participants/styles';
 import ButtonCopyUrl from '@/components/Common/ButtonCopyUrl';
 import { useStooa } from '@/contexts/StooaManager';
-import { getApiParticipantList } from '@/repository/ApiParticipantRepository';
+import { getApiParticipantList } from '@/lib/ApiParticipantRepository';
 import { useModals } from '@/contexts/ModalsContext';
 import { TranscriptionHistory } from '../TranscriptionText/TranscriptionHistory';
 
@@ -150,7 +150,7 @@ const Participants: React.FC<Props> = ({ initialized, fid }) => {
     }
 
     if (checkbox && !checkbox.checked) {
-      stopTranscriptionEvent();
+      stopTranscriptionEvent(!!data.hasSummary);
       setIsTranscriptionEnabled(false);
       return;
     }

@@ -31,6 +31,24 @@ services:
         bind:
             $collectionProvider: '@api_platform.doctrine.orm.state.collection_provider'
 
+    App\Fishbowl\Service\AttendeeMailerService:
+        bind:
+            $from: '%env(MAILER_FROM)%'
+            $appUrl: '%env(APP_URL)%'
+
+    App\Fishbowl\Service\OpenAI\AskSummaryService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+            $assistantId: '%env(OPENAI_ASSISTANT_ID)%'
+
+    App\Fishbowl\Service\OpenAI\UploadFileService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
+    App\Fishbowl\Service\OpenAI\GetSummaryService:
+        bind:
+            $apiKey: '%env(OPENAI_API_KEY)%'
+
     #Admin
     App\Fishbowl\Admin\FishbowlAdmin:
         tags:
@@ -41,3 +59,7 @@ services:
     App\Fishbowl\Admin\FeedbackAdmin:
         tags:
             - { name: sonata.admin, model_class: App\Fishbowl\Entity\Feedback, manager_type: orm, label: Feedbacks }
+
+    App\Fishbowl\Admin\AttendeeAdmin:
+        tags:
+            - { name: sonata.admin, model_class: App\Fishbowl\Entity\Attendee, manager_type: orm, label: Attendees }

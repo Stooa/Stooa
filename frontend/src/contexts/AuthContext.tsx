@@ -7,25 +7,28 @@
  * file that was distributed with this source code.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import cookie from 'js-cookie';
 
 import {
-  ROUTE_HOME,
-  ROUTE_SIGN_IN,
-  ROUTE_REGISTER,
+  ROUTE_CHANGE_PASSWORD,
+  ROUTE_EDIT_PROFILE,
   ROUTE_FISHBOWL_CREATE,
   ROUTE_FISHBOWL_DETAIL,
-  ROUTE_FISHBOWL_THANKYOU,
-  ROUTE_RECOVER_PASSWORD,
-  ROUTE_EDIT_PROFILE,
-  ROUTE_CHANGE_PASSWORD,
-  ROUTE_RESET_PASSWORD,
+  ROUTE_FISHBOWL_FINISHED,
   ROUTE_FISHBOWL_HOST_NOW,
   ROUTE_FISHBOWL_SCHEDULED,
-  ROUTE_FISHBOWL_FINISHED
+  ROUTE_SLACK,
+  ROUTE_SLACK_RETURN,
+  ROUTE_FISHBOWL_THANKYOU,
+  ROUTE_HOME,
+  ROUTE_INTEGRATIONS,
+  ROUTE_RECOVER_PASSWORD,
+  ROUTE_REGISTER,
+  ROUTE_RESET_PASSWORD,
+  ROUTE_SIGN_IN
 } from '@/app.config';
 
 import {
@@ -55,7 +58,10 @@ const authenticatedRoutes = [
   ROUTE_FISHBOWL_FINISHED,
   ROUTE_FISHBOWL_THANKYOU,
   ROUTE_EDIT_PROFILE,
-  ROUTE_CHANGE_PASSWORD
+  ROUTE_CHANGE_PASSWORD,
+  ROUTE_SLACK,
+  ROUTE_SLACK_RETURN,
+  ROUTE_INTEGRATIONS
 ];
 
 const unauthenticatedRoutes = [

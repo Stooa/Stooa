@@ -17,7 +17,10 @@
                 "endDateTimeTz": "15142131234124",
                 "durationFormatted": "02:00",
                 "isPrivate": true,
-                "plainPassword": null
+                "plainPassword": null,
+                "hasInvitationInfo": true,
+                "invitationTitle": "Custom fishbowl title",
+                "invitationText": ""
             }
         }
     }
