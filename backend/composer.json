@@ -20,7 +20,7 @@
         "metaclass-nl/filter-bundle": "3.0.0",
         "nelmio/cors-bundle": "2.4.0",
         "nyholm/psr7": "1.8.1",
-        "openai-php/client": "0.8.1",
+        "openai-php/client": "^0.10.1",
         "paragonie/halite": "5.1.0",
         "ramsey/uuid": "4.7.5",
         "ramsey/uuid-doctrine": "2.0.0",

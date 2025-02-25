@@ -49,7 +49,14 @@ final class AskSummaryService extends AbstractController
                         [
                             'role' => 'user',
                             'content' => 'Summarize this transcribed conversation in it’s spoken language.',
-                            'file_ids' => [$file->id],
+                            'attachments' => [
+                                [
+                                    'file_id' => $file->id,
+                                    'tools' => [
+                                        ['type' => 'file_search'],
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
