@@ -25,5 +25,14 @@
         "cs": "Čeština"
     },
     "help": "Nápověda",
-    "legal": "Právní stránky"
+    "legal": "Právní stránky",
+    "finishedFishbowlList": "Dokončené fishbowls",
+    "scheduleFishbowl": "Naplánovat fishbowl",
+    "hostFishbowlNow": "Uspořádat fishbowl právě teď",
+    "successCopiedInvitation": "Pozvánka zkopírována",
+    "futureFishbowlList": "Plánované fishbowls",
+    "copyInvitation": "Kopírovat pozvánku",
+    "goToFinishedFishbowls": "Přejděte na své minulé fishbowls",
+    "blog": "Blog",
+    "goToFinishedFishbowlsTitle": "Podrobnosti a zpětnou vazbu od účastníků naleznete v sekci dokončené fishbowls."
 }

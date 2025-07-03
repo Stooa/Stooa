@@ -70,7 +70,7 @@
     "finishedEvent": "El fishbowl ha finalizado",
     "introduceModal": {
         "title": "Haz una introducción",
-        "description": "Tu cámara se activará para que puedas decir unas palabras a los asistentes antes de abrir el <i>fishbowl</i>. Después podrás permitir a los usuarios unirse a la conversación.",
+        "description": "Tu cámara se activará para que puedas decir unas palabras a los asistentes antes de abrir el fishbowl. Después podrás permitir a los usuarios unirse a la conversación.",
         "shareScreenFirst": "Es tu momento para <span>dirigir unas palabras</span> al resto de asistentes antes de abrir el fishbowl.",
         "shareScreenSecond": "También podrás <span>compartir tu pantalla</span> para dotar de contenido visual a tu introducción.",
         "shareScreenThird": "<span>Cuando acabes</span>, podrás permitir al resto de asistentes unirse a la conversación.",
