@@ -1,14 +1,14 @@
 {
     "title": "Daftar untuk memulai",
     "linkedin": "URL Linkedin (opsional)",
-    "twitter": "URL Twitter (opsional)",
+    "twitter": "URL X (opsional)",
     "linkedinHelp": "Salin dan tempel URL profil Linkedin milikmu",
-    "twitterHelp": "Salin dan tempel URL profil Twitter milikmu",
+    "twitterHelp": "Salin dan tempel URL profil X milikmu",
     "haveAccount": "Sudah daftar?",
     "button": {
         "register": "Daftar gratis",
         "login": "Masuk"
     },
     "terms": "Dengan membuat akun ini, kamu setuju kepada <a>Ketentuan Layanan dan Kebijakan Privasi</a>.",
-    "shareAccount": "Jika kamu ingin membagikan profil <strong>Twitter</strong> atau <strong>Linkedin</strong> milikmu dengan peserta lainnya, isi bagian berikut."
+    "shareAccount": "Jika kamu ingin membagikan profil <strong>X</strong> atau <strong>Linkedin</strong> milikmu dengan peserta lainnya, isi bagian berikut."
 }

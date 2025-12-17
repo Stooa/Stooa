@@ -3,7 +3,7 @@
     "validation": {
         "terms": "Sie müssen die Allgemeinen Geschäftsbedingungen akzeptieren",
         "email": "Ungültige E-Mail-Adresse",
-        "twitter": "Der Twitter-Benutzername sollte mit @ beginnen",
+        "twitter": "Der X-Benutzername sollte mit @ beginnen",
         "required": "Dieses Feld wird benötigt",
         "date": "Das Format des Datums ist ungültig: tt.mm.jjjj",
         "passwordLength": "Das Passwort muss mindestens 6 Zeichen lang sein",

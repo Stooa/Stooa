@@ -18,7 +18,7 @@
     "appControls": {
         "title": "How can I interact?",
         "preTitle": "In-App Controls",
-        "text": "<div><ul><li><strong>Join the conversation</strong> and <strong>exit the conversation</strong> using the green and red buttons.</li><li>Control the microphone using the button <strong>Unmute/Mute</strong>.</li><li>Connect <strong>with attendees</strong> by accessing their Linkedin and Twitter profiles (if they have provided them).</li></ul></div>"
+        "text": "<div><ul><li><strong>Join the conversation</strong> and <strong>exit the conversation</strong> using the green and red buttons.</li><li>Control the microphone using the button <strong>Unmute/Mute</strong>.</li><li>Connect <strong>with attendees</strong> by accessing their Linkedin and X profiles (if they have provided them).</li></ul></div>"
     },
     "end": {
         "title": "All good things have an end...",
