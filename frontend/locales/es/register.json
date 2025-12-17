@@ -1,10 +1,10 @@
 {
     "title": "Regístrate para empezar",
-    "shareAccount": "Si quieres compartir tu perfil de <strong>Twitter</strong> o <strong>Linkedin</strong> con el resto de asistentes, completa los siguientes campos.",
+    "shareAccount": "Si quieres compartir tu perfil de <strong>X</strong> o <strong>Linkedin</strong> con el resto de asistentes, completa los siguientes campos.",
     "linkedin": "Linkedin URL (opcional)",
-    "twitter": "Twitter URL (opcional)",
+    "twitter": "X URL (opcional)",
     "linkedinHelp": "Copia y pega la URL de tu perfil de Linkedin",
-    "twitterHelp": "Copia y pega la URL de tu perfil de Twitter",
+    "twitterHelp": "Copia y pega la URL de tu perfil de X",
     "haveAccount": "¿Ya tienes una cuenta?",
     "button": {
         "register": "Regístrate gratis",

@@ -1,10 +1,10 @@
 {
     "title": "Registrieren Sie sich, um loszulegen",
     "linkedinHelp": "Kopieren Sie Ihr Linkedin-URL-Profil und fügen Sie es ein",
-    "twitterHelp": "Kopieren Sie Ihr Twitter-URL-Profil und fügen Sie es ein",
+    "twitterHelp": "Kopieren Sie Ihr X-URL-Profil und fügen Sie es ein",
     "haveAccount": "Bereits registriert?",
-    "shareAccount": "Wenn Sie Ihre <strong>Twitter</strong>- oder <strong>Linkedin</strong>-Profile mit anderen Teilnehmern teilen möchten, füllen Sie bitte die folgenden Felder aus.",
-    "twitter": "Twitter-URL (optional)",
+    "shareAccount": "Wenn Sie Ihre <strong>X</strong>- oder <strong>Linkedin</strong>-Profile mit anderen Teilnehmern teilen möchten, füllen Sie bitte die folgenden Felder aus.",
+    "twitter": "X-URL (optional)",
     "linkedin": "Linkedin-URL (optional)",
     "button": {
         "register": "Kostenlos registrieren",

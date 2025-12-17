@@ -2,13 +2,13 @@
     "title": "Inscrivez-vous pour commencer",
     "linkedin": "URL de Linkedin (facultatif)",
     "linkedinHelp": "Copiez et collez l'URL de votre profil Linkedin",
-    "shareAccount": "Si vous souhaitez partager vos profils <strong>Twitter</strong> ou <strong>Linkedin</strong> avec les autres participants, remplissez les champs suivants.",
-    "twitter": "URL de Twitter (facultatif)",
+    "shareAccount": "Si vous souhaitez partager vos profils <strong>X</strong> ou <strong>Linkedin</strong> avec les autres participants, remplissez les champs suivants.",
+    "twitter": "URL de X (facultatif)",
     "haveAccount": "Déjà inscrit(e) ?",
     "button": {
         "register": "S'inscrire gratuitement",
         "login": "Se connecter"
     },
     "terms": "En créant ce compte, vous acceptez nos <a>Termes et conditions et la politique de confidentialité</a>.",
-    "twitterHelp": "Copiez et collez l'URL de votre profil Twitter"
+    "twitterHelp": "Copiez et collez l'URL de votre profil X"
 }

@@ -33,7 +33,7 @@
         "passwordLength": "Kata sandi harus mempunyai 6 karakter atau lebih",
         "terms": "Kamu harus menyetujui ketentuan layanan",
         "url": "Ini bukanlah URL yang valid",
-        "twitter": "Nama pengguna Twitter harus mulai dengan @",
+        "twitter": "Nama pengguna X harus mulai dengan @",
         "required": "Bagian ini diperlukan",
         "date": "Format tanggal tidak valid: hh/bb/tttt",
         "equalPassword": "Dua kata sandi tersebut harus sama",
