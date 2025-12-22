@@ -6,7 +6,7 @@
 # file that was distributed with this source code.
 
 # BASE
-FROM node:18.11 as base
+FROM node:18.17 as base
 
 ARG UID=1000
 ARG GID=1000
