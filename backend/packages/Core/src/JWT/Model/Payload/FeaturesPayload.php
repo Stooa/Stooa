@@ -19,8 +19,7 @@ final class FeaturesPayload implements PayloadInterface
         private readonly bool $recording,
         private readonly bool $livestreaming,
         private readonly bool $transcription,
-        private readonly bool $outboundCall,
-        private readonly bool $sipOutboundCall
+        private readonly bool $outboundCall
     ) {
     }
 

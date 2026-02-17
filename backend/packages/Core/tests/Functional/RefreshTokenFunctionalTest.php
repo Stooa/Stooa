@@ -103,13 +103,13 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $this->assertSame($decodedToken['roles'], [UserInterface::ROLE_DEFAULT]);
         $this->assertSame($decodedToken['context'], [
             'user' => [
+                'moderator' => 'false',
                 'name' => 'Name Surnames',
                 'email' => 'user@stooa.com',
                 'twitter' => 'https//www.twitter.com/test',
                 'linkedin' => 'https://www.linkedin.com/test',
-                'moderator' => false,
                 'id' => null,
-                'avatar' => null,
+                'avatar' => '',
             ],
         ]);
     }
