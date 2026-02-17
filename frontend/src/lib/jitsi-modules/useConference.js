@@ -65,7 +65,11 @@ export const useConference = () => {
 
     createTracks(userId, seat, user);
 
-    getConference()?.selectParticipants?.(getIds());
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in joinUser:', error);
+    }
 
     console.log('[STOOA] Join', userId);
   };
@@ -92,7 +96,11 @@ export const useConference = () => {
     leaveSeat(userId);
     removeTracks(userId);
 
-    conference?.selectParticipants?.(getIds());
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in leaveUser:', error);
+    }
 
     console.log('[STOOA] User leave', userId);
   };
@@ -207,7 +215,11 @@ export const useConference = () => {
     const seat = join(value);
 
     createTracks(value, seat);
-    getConference()?.selectParticipants?.(getIds());
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in _handleCommandJoin:', error);
+    }
 
     console.log('[STOOA] Join', value);
   };
@@ -217,7 +229,11 @@ export const useConference = () => {
 
     leaveSeat(value);
     removeTracks(value);
-    getConference()?.selectParticipants?.(getIds());
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in _handleCommandLeave:', error);
+    }
 
     console.log('[STOOA] Leave', value);
   };
