@@ -205,7 +205,13 @@ export const useTracks = () => {
   };
 
   const handleTrackAdded = track => {
-    console.log('[STOOA] Handle track added', track);
+    console.error('[STOOA DEBUG] Handle track added', {
+      participantId: track.getParticipantId(),
+      type: track.getType(),
+      videoType: track.getVideoType(),
+      isLocal: track.isLocal(),
+      muted: track.isMuted()
+    });
 
     const {
       events: {
@@ -230,6 +236,7 @@ export const useTracks = () => {
     addUserTrack(id, track);
 
     const seat = getSeat(id);
+    console.error('[STOOA DEBUG] _videoAudioTrackAdded', { id, hasSeat: !!seat, trackType: track.getType() });
 
     _create(seat, track);
 
