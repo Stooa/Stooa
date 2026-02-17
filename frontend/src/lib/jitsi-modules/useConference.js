@@ -57,7 +57,7 @@ export const useConference = () => {
     handleTrackRemoved
   } = useTracks();
   const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
-  const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
+  const { join, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
 
   const updateReceiverConstraints = () => {
     try {
