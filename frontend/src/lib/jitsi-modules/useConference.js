@@ -65,7 +65,7 @@ export const useConference = () => {
 
     createTracks(userId, seat, user);
 
-    getConference().selectParticipants(getIds());
+    getConference()?.selectParticipants?.(getIds());
 
     console.log('[STOOA] Join', userId);
   };
@@ -92,7 +92,7 @@ export const useConference = () => {
     leaveSeat(userId);
     removeTracks(userId);
 
-    conference.selectParticipants(getIds());
+    conference?.selectParticipants?.(getIds());
 
     console.log('[STOOA] User leave', userId);
   };
@@ -207,7 +207,7 @@ export const useConference = () => {
     const seat = join(value);
 
     createTracks(value, seat);
-    getConference().selectParticipants(getIds());
+    getConference()?.selectParticipants?.(getIds());
 
     console.log('[STOOA] Join', value);
   };
@@ -217,7 +217,7 @@ export const useConference = () => {
 
     leaveSeat(value);
     removeTracks(value);
-    getConference().selectParticipants(getIds());
+    getConference()?.selectParticipants?.(getIds());
 
     console.log('[STOOA] Leave', value);
   };
@@ -367,8 +367,6 @@ export const useConference = () => {
 
     const auth = await getAuthToken(true, rawRoomName);
 
-    console.log('[STOOA] Auth Token', auth);
-
     if (isUserModerator) {
       makeModerator();
     }
@@ -382,7 +380,6 @@ export const useConference = () => {
       auth ? auth.token : process.env.NEXT_PUBLIC_GUEST_TOKEN ?? null,
       connectionOptions(roomName)
     );
-
     setConnection(connection);
 
     connection.addEventListener(CONNECTION_ESTABLISHED, () =>
