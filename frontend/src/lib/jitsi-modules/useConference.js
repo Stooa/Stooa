@@ -172,10 +172,7 @@ export const useConference = () => {
     const conference = getConference();
 
     conference.setDisplayName(name);
-    conference.setReceiverConstraints({
-      lastN: -1,
-      defaultConstraints: { maxHeight: 720 }
-    });
+    conference.setLastN(-1);
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
