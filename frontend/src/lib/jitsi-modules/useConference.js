@@ -59,24 +59,17 @@ export const useConference = () => {
   const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
   const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
 
-  const updateReceiverConstraints = () => {
-    try {
-      getConference().setReceiverConstraints({
-        lastN: -1,
-        defaultConstraints: { maxHeight: 720 },
-        selectedEndpoints: getIds()
-      });
-    } catch (error) {
-      console.warn('[STOOA] setReceiverConstraints failed:', error);
-    }
-  };
-
   const joinUser = (id, user) => {
     const userId = id ?? myUserId;
     const seat = join(userId, getParticipantNameById(userId));
 
     createTracks(userId, seat, user);
-    updateReceiverConstraints();
+
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in joinUser:', error);
+    }
 
     console.log('[STOOA] Join', userId);
   };
@@ -102,7 +95,12 @@ export const useConference = () => {
 
     leaveSeat(userId);
     removeTracks(userId);
-    updateReceiverConstraints();
+
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in leaveUser:', error);
+    }
 
     console.log('[STOOA] User leave', userId);
   };
@@ -174,7 +172,10 @@ export const useConference = () => {
     const conference = getConference();
 
     conference.setDisplayName(name);
-    updateReceiverConstraints();
+    conference.setReceiverConstraints({
+      lastN: -1,
+      defaultConstraints: { maxHeight: 720 }
+    });
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
@@ -218,7 +219,12 @@ export const useConference = () => {
     const seat = join(value);
 
     createTracks(value, seat);
-    updateReceiverConstraints();
+
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in _handleCommandJoin:', error);
+    }
 
     console.log('[STOOA] Join', value);
   };
@@ -228,7 +234,12 @@ export const useConference = () => {
 
     leaveSeat(value);
     removeTracks(value);
-    updateReceiverConstraints();
+
+    try {
+      getConference().selectParticipants(getIds());
+    } catch (error) {
+      console.warn('[STOOA] selectParticipants failed in _handleCommandLeave:', error);
+    }
 
     console.log('[STOOA] Leave', value);
   };
