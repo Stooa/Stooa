@@ -66,10 +66,7 @@ export const useConference = () => {
     createTracks(userId, seat, user);
 
     try {
-      const conf = getConference();
-      const ids = getIds();
-      console.error('[STOOA DEBUG] selectParticipants joinUser - ids:', ids, 'hasMethod:', typeof conf.selectParticipants);
-      conf.selectParticipants(ids);
+      getConference().selectParticipants(getIds());
     } catch (error) {
       console.warn('[STOOA] selectParticipants failed in joinUser:', error);
     }
@@ -175,6 +172,10 @@ export const useConference = () => {
     const conference = getConference();
 
     conference.setDisplayName(name);
+    conference.setReceiverConstraints({
+      lastN: -1,
+      defaultConstraints: { maxHeight: 720 }
+    });
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
@@ -366,7 +367,7 @@ export const useConference = () => {
       }
     } = JitsiMeetJS;
 
-    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.TRACE);
+    JitsiMeetJS.setLogLevel(JitsiMeetJS.logLevels.ERROR);
     JitsiMeetJS.init(initOptions);
 
     JitsiMeetJS.mediaDevices.addEventListener(PERMISSION_PROMPT_IS_SHOWN, _handlePermissionIsShown);

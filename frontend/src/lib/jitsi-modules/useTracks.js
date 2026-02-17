@@ -22,15 +22,10 @@ export const useTracks = () => {
     trackHtml
       .play()
       .then(() => {
-        console.error('[STOOA DEBUG] Playing track OK', trackHtml.id, {
-          videoWidth: trackHtml.videoWidth,
-          videoHeight: trackHtml.videoHeight,
-          readyState: trackHtml.readyState,
-          hasSrcObject: !!trackHtml.srcObject
-        });
+        console.log('[STOOA] Playing track', trackHtml.id);
       })
       .catch(error => {
-        console.error('[STOOA DEBUG] Problem with auto play', trackHtml.id, error);
+        console.log('[STOOA] Problem with auto play', error);
       });
   };
 
@@ -96,38 +91,18 @@ export const useTracks = () => {
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
-    console.error('[STOOA DEBUG] _create', {
-      seat,
-      trackType,
-      participantId: track.getParticipantId(),
-      isLocal: track.isLocal(),
-      seatHtmlFound: !!seatHtml,
-      seatHtmlId: `seat-${seat}`,
-      domElementExists: !!document.getElementById(`seat-${seat}`)
-    });
-
     if (!seatHtml) return;
 
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
       trackHtml.setAttribute('playsinline', '');
       if (seatHtml) {
-        const videoWrapper = seatHtml.querySelector('.video-wrapper');
-        console.error('[STOOA DEBUG] Attaching video to wrapper', { hasWrapper: !!videoWrapper, seatId: `seat-${seat}` });
-        videoWrapper.appendChild(trackHtml);
+        seatHtml.querySelector('.video-wrapper').appendChild(trackHtml);
       }
     } else {
       seatHtml.appendChild(trackHtml);
     }
     track.attach(trackHtml);
-
-    console.error('[STOOA DEBUG] After attach', {
-      id: trackHtml.id,
-      hasSrcObject: !!trackHtml.srcObject,
-      srcObjectTracks: trackHtml.srcObject ? trackHtml.srcObject.getTracks().map(t => ({ kind: t.kind, enabled: t.enabled, readyState: t.readyState })) : [],
-      dimensions: `${trackHtml.videoWidth}x${trackHtml.videoHeight}`,
-      parentElement: trackHtml.parentElement?.id
-    });
 
     if (!track.isLocalAudioTrack()) {
       _playTrackHtml(trackHtml);
@@ -230,13 +205,7 @@ export const useTracks = () => {
   };
 
   const handleTrackAdded = track => {
-    console.error('[STOOA DEBUG] Handle track added', {
-      participantId: track.getParticipantId(),
-      type: track.getType(),
-      videoType: track.getVideoType(),
-      isLocal: track.isLocal(),
-      muted: track.isMuted()
-    });
+    console.log('[STOOA] Handle track added', track);
 
     const {
       events: {
@@ -261,7 +230,6 @@ export const useTracks = () => {
     addUserTrack(id, track);
 
     const seat = getSeat(id);
-    console.error('[STOOA DEBUG] _videoAudioTrackAdded', { id, hasSeat: !!seat, trackType: track.getType() });
 
     _create(seat, track);
 
