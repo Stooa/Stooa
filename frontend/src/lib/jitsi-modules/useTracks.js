@@ -22,10 +22,15 @@ export const useTracks = () => {
     trackHtml
       .play()
       .then(() => {
-        console.log('[STOOA] Playing track', trackHtml.id);
+        console.error('[STOOA DEBUG] Playing track OK', trackHtml.id, {
+          videoWidth: trackHtml.videoWidth,
+          videoHeight: trackHtml.videoHeight,
+          readyState: trackHtml.readyState,
+          hasSrcObject: !!trackHtml.srcObject
+        });
       })
       .catch(error => {
-        console.log('[STOOA] Problem with auto play', error);
+        console.error('[STOOA DEBUG] Problem with auto play', trackHtml.id, error);
       });
   };
 
@@ -115,6 +120,14 @@ export const useTracks = () => {
       seatHtml.appendChild(trackHtml);
     }
     track.attach(trackHtml);
+
+    console.error('[STOOA DEBUG] After attach', {
+      id: trackHtml.id,
+      hasSrcObject: !!trackHtml.srcObject,
+      srcObjectTracks: trackHtml.srcObject ? trackHtml.srcObject.getTracks().map(t => ({ kind: t.kind, enabled: t.enabled, readyState: t.readyState })) : [],
+      dimensions: `${trackHtml.videoWidth}x${trackHtml.videoHeight}`,
+      parentElement: trackHtml.parentElement?.id
+    });
 
     if (!track.isLocalAudioTrack()) {
       _playTrackHtml(trackHtml);
