@@ -91,13 +91,25 @@ export const useTracks = () => {
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
+    console.error('[STOOA DEBUG] _create', {
+      seat,
+      trackType,
+      participantId: track.getParticipantId(),
+      isLocal: track.isLocal(),
+      seatHtmlFound: !!seatHtml,
+      seatHtmlId: `seat-${seat}`,
+      domElementExists: !!document.getElementById(`seat-${seat}`)
+    });
+
     if (!seatHtml) return;
 
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');
       trackHtml.setAttribute('playsinline', '');
       if (seatHtml) {
-        seatHtml.querySelector('.video-wrapper').appendChild(trackHtml);
+        const videoWrapper = seatHtml.querySelector('.video-wrapper');
+        console.error('[STOOA DEBUG] Attaching video to wrapper', { hasWrapper: !!videoWrapper, seatId: `seat-${seat}` });
+        videoWrapper.appendChild(trackHtml);
       }
     } else {
       seatHtml.appendChild(trackHtml);
