@@ -24,15 +24,14 @@ final class FeaturesPayload implements PayloadInterface
     ) {
     }
 
-    /** @return array<string, bool> */
+    /** @return array<string, string> */
     public function toArray(): array
     {
         return [
-            'livestreaming' => $this->livestreaming,
-            'outbound-call' => $this->outboundCall,
-            'transcription' => $this->transcription,
-            'sip-outbound-call' => $this->sipOutboundCall,
-            'recording' => $this->recording,
+            'recording' => $this->recording ? 'true' : 'false',
+            'livestreaming' => $this->livestreaming ? 'true' : 'false',
+            'transcription' => $this->transcription ? 'true' : 'false',
+            'outbound-call' => $this->outboundCall ? 'true' : 'false',
         ];
     }
 }
