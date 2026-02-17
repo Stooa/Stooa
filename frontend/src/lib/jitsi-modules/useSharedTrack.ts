@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
+import JitsiLocalTrack from 'modules/RTC/JitsiLocalTrack';
 import { SCREEN_SHARE_STOP } from '@/jitsi/Events';
 import { dispatchEvent } from '@/lib/helpers';
 import { useJitsiStore } from '@/store';

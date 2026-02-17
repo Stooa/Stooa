@@ -11,7 +11,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import fixWebmDuration from 'webm-duration-fix';
 import useEventListener from '@/hooks/useEventListener';
 import { TRACK_ADDED } from '@/jitsi/Events';
-import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
+import JitsiTrack from 'modules/RTC/JitsiTrack';
 import { MediaType } from '@/types/jitsi/media';
 import { toast } from 'react-toastify';
 import { pushEventDataLayer } from '@/lib/analytics';

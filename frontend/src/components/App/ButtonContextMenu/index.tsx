@@ -18,7 +18,7 @@ import useEventListener from '@/hooks/useEventListener';
 import { IConferenceStatus } from '@/jitsi/Status';
 import { SEATS_CHANGE } from '@/jitsi/Events';
 import { useConference } from '@/jitsi';
-import JitsiParticipant from 'lib-jitsi-meet/types/hand-crafted/JitsiParticipant';
+import JitsiParticipant from 'JitsiParticipant';
 
 interface Props {
   className?: string;

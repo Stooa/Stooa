@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import JitsiTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiTrack';
+import JitsiTrack from 'modules/RTC/JitsiTrack';
 import { DevtoolsStateCreator, JitsiStore } from '@/store';
 
 export interface TracksSlice {
