@@ -10,3 +10,8 @@
 /.php-cs-fixer.cache
 jitsi-meet-cfg
 /node_modules
+
+# Claude
+.claude/settings.local.json
+.claude/*.local.*
+.claude.local.md
