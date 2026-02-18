@@ -39,13 +39,13 @@ const BlogInfo = ({ author, dateAndDuration, title, bottom }: Props) => {
         <p>{t('share')}</p>
         <div>
           <Link
-            href={`https://twitter.com/intent/tweet?text=${title}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}${pathname}`}
+            href={`https://x.com/intent/post?text=${title}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}${pathname}`}
             target="_blank"
             rel="noreferrer"
             onClick={() => {
               pushEventDataLayer({
                 category: 'Share',
-                action: 'Twitter',
+                action: 'X',
                 label: `blog`
               });
             }}

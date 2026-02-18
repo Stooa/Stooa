@@ -38,7 +38,7 @@ file that was distributed with this source code.
         {{ macros.text('emails.fishbowl_created_email.social_share'|trans({}, null, locale), emailConfig, 'text-align:center;') }}
 
         {% include '/emails/components/email-socials.html.twig' with {
-            twitterHref: 'https://twitter.com/intent/tweet?text=' ~ fishbowlName ~ '&url=' ~ fishbowlLink,
+            twitterHref: 'https://x.com/intent/post?text=' ~ fishbowlName ~ '&url=' ~ fishbowlLink,
             linkedinHref: 'https://www.linkedin.com/shareArticle?url=' ~ fishbowlLink ~ '&title=' ~ fishbowlName ~ '&mini=true'
         } %}
     {% endif %}

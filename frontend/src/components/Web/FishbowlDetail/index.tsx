@@ -103,7 +103,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
             </li>
             <li>
               <Link
-                href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}`}
+                href={`https://x.com/intent/post?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}/fb/${data.slug}`}
                 passHref
                 legacyBehavior
               >
@@ -113,7 +113,7 @@ const FishbowlDetail: React.FC<Props> = ({ data }) => {
                   onClick={() => {
                     pushEventDataLayer({
                       category: 'Share',
-                      action: 'Twitter',
+                      action: 'X',
                       label: `fishbowl/detail/${data.slug}`
                     });
                   }}

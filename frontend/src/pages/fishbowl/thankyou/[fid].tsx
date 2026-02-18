@@ -149,13 +149,13 @@ const ThankYou = () => {
                 </li>
                 <li>
                   <Link
-                    href={`https://twitter.com/intent/tweet?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                    href={`https://x.com/intent/post?text=${shareTitle}&url=${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
                     target="_blank"
                     rel="noreferrer"
                     onClick={() => {
                       pushEventDataLayer({
                         category: 'Share',
-                        action: 'Twitter',
+                        action: 'X',
                         label: `fishbowl/thankyou/${fid}`
                       });
                     }}

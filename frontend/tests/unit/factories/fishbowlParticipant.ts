@@ -16,7 +16,7 @@ export const makeFishbowlParticipant = (): Participant => {
     id: faker.string.uuid(),
     name: faker.person.firstName(),
     linkedin: 'https://www.linkedin.com/in/wearestooa',
-    twitter: 'https://www.twitter.com/wearestooa',
+    twitter: 'https://x.com/wearestooa',
     isModerator: true,
     isCurrentUser: true,
     guestId: '',

@@ -17,7 +17,7 @@ export const makeUser = (): User => {
     'surnames': faker.person.lastName(),
     'allowShareData': faker.datatype.boolean(),
     'linkedinProfile': 'https://www.linkedin.com/in/wearestooa',
-    'twitterProfile': 'https://www.twitter.com/wearestooa',
+    'twitterProfile': 'https://x.com/wearestooa',
     'plainPassword': faker.internet.password(),
     'email': faker.internet.email(),
     'locale': 'es'

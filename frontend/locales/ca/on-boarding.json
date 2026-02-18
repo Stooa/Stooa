@@ -18,7 +18,7 @@
     "appControls": {
         "title": "Com puc interactuar?",
         "preTitle": "Controls de l'aplicació",
-        "text": "<div><ul><li><strong>Uneix-te a la conversa</strong> i <strong>surt de la conversa</strong> fent servir els botons verd i vermell.</li><li>Controla el micròfon usant el botó <strong>Activar/Silenciar</strong>.</li><li>Connecta <strong>amb els assistents</strong> accedint als seus perfils de Linkedin i Twitter (en cas que els hagin proporcionat).</li></ul></div>"
+        "text": "<div><ul><li><strong>Uneix-te a la conversa</strong> i <strong>surt de la conversa</strong> fent servir els botons verd i vermell.</li><li>Controla el micròfon usant el botó <strong>Activar/Silenciar</strong>.</li><li>Connecta <strong>amb els assistents</strong> accedint als seus perfils de Linkedin i X (en cas que els hagin proporcionat).</li></ul></div>"
     },
     "end": {
         "title": "Totes les coses bones tenen un final...",

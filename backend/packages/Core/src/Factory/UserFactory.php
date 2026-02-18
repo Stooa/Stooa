@@ -32,7 +32,7 @@ final class UserFactory extends ModelFactory
             'allowShareData' => true,
             'active' => self::faker()->boolean(),
             'linkedinProfile' => 'https://www.linkedin.com/in/wearestooa',
-            'twitterProfile' => 'https://www.twitter.com/wearestooa',
+            'twitterProfile' => 'https://x.com/wearestooa',
             'locale' => 'en',
             'createdAt' => self::faker()->dateTime(),
             'updatedAt' => self::faker()->dateTime(),

@@ -70,7 +70,7 @@ const StepEnd = ({
                   <LinkedIn />
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=Mira qué app he encontrado ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
+                  href={`https://x.com/intent/post?text=Mira qué app he encontrado ${process.env.NEXT_PUBLIC_APP_DOMAIN}`}
                   target="_blank"
                   rel="noreferrer"
                 >

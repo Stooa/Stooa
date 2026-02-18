@@ -51,7 +51,7 @@
         "fishbowlPasswordLength": "La contraseña debe tener 8 caracteres o más",
         "terms": "Debes aceptar los términos y condiciones",
         "url": "La url no es válida",
-        "twitter": "El usuario de Twitter debe comenzar por @",
+        "twitter": "El usuario de X debe comenzar por @",
         "equalPassword": "Las dos contraseñas deben ser iguales",
         "successMessage": "Tus cambios se han guardado",
         "notEmpty": "Este campo no puede estar vacío",
