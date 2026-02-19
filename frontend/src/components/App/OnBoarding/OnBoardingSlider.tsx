@@ -105,7 +105,8 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
     const items = document.querySelectorAll(`.slide[data-slide="${slide}"] .animate`);
 
     items.forEach((item, i) => {
-      gsap.to(item, 1, {
+      gsap.to(item, {
+        duration: 1,
         opacity: 1,
         y: 0,
         ease: 'Power3.easeOut',
@@ -118,7 +119,8 @@ const OnBoardingSlider = ({ skipOnBoarding }: { skipOnBoarding: () => void }) =>
     const items = document.querySelectorAll(`.slide[data-slide="${slide}"] .animate`);
 
     items.forEach(item => {
-      gsap.to(item, 0, {
+      gsap.to(item, {
+        duration: 0,
         opacity: 0,
         y: 30,
         ease: 'none',
