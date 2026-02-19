@@ -19,14 +19,9 @@ export const useTracks = () => {
   const { userId: myUserId, getTracksByUser, addUserTrack, removeUserTrack } = useJitsiStore();
 
   const _playTrackHtml = trackHtml => {
-    trackHtml
-      .play()
-      .then(() => {
-        console.log('[STOOA] Playing track', trackHtml.id);
-      })
-      .catch(error => {
-        console.log('[STOOA] Problem with auto play', error);
-      });
+    trackHtml.play().catch(error => {
+      console.log('[STOOA] Problem with auto play', error);
+    });
   };
 
   const _getTrackHtml = track => {
@@ -91,7 +86,9 @@ export const useTracks = () => {
 
     const seatHtml = handleElementsMutedClass(seat, track);
 
-    if (!seatHtml) return;
+    if (!seatHtml) {
+      return;
+    }
 
     if (trackType === 'video') {
       trackHtml.setAttribute('muted', '');

@@ -31,18 +31,18 @@ export const useJitsi = () => {
   const join = async user => {
     if (!hasFreeSeat()) return;
 
-    sendJoinEvent(user);
-
     if (!localTracksCreated) {
-      await createLocalTracks().then(tracks => {
-        tracks.forEach(async track => {
-          await syncLocalStorageTrack(track, user);
-          addTrack(track);
-        });
+      const tracks = await createLocalTracks();
 
-        localTracksCreatedEvent();
-      });
+      for (const track of tracks) {
+        await syncLocalStorageTrack(track, user);
+        await addTrack(track);
+      }
+
+      localTracksCreatedEvent();
     }
+
+    sendJoinEvent(user);
   };
 
   const leave = async () => {

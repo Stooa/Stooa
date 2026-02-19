@@ -76,8 +76,6 @@ export const useConference = () => {
 
     createTracks(userId, seat, user);
     updateReceiverConstraints();
-
-    console.log('[STOOA] Join', userId);
   };
 
   /**
@@ -434,13 +432,12 @@ export const useConference = () => {
     }
 
     if (oldTrack === undefined) {
-      conference.addTrack(track);
-      return;
+      return conference.addTrack(track);
     }
 
     handleTrackRemoved(oldTrack);
 
-    conference.replaceTrack(oldTrack, track);
+    return conference.replaceTrack(oldTrack, track);
   };
 
   const getParticipantById = id => getConference().getParticipantById(id);
@@ -544,6 +541,13 @@ export const useConference = () => {
       return null;
     }
 
+    let joined = false;
+    try {
+      joined = conference.getLocalParticipantProperty('joined') === 'yes';
+    } catch {
+      // Conference may be in the process of leaving
+    }
+
     return {
       id: myUserId,
       name: userName,
@@ -551,10 +555,7 @@ export const useConference = () => {
       linkedin,
       isModerator,
       isCurrentUser: true,
-      joined:
-        conference.isJoined() === null
-          ? false
-          : conference.getLocalParticipantProperty('joined') === 'yes',
+      joined,
       isMuted: isLocalParticipantMuted(myUserId, 'audio'),
       isVideoMuted: isLocalParticipantMuted(myUserId, 'video'),
       isJigasi: false
