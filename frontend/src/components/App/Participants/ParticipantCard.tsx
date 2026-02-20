@@ -54,7 +54,7 @@ const ParticipantCard: React.FC<{
             href={twitter}
             onClick={() => {
               pushEventDataLayer({
-                action: 'Twitter',
+                action: 'X',
                 category: prefishbowl ? 'Prefishbowl' : 'Participants',
                 label: window.location.href
               });

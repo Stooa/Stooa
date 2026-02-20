@@ -18,7 +18,7 @@
     "appControls": {
         "title": "Bagaimana saya berinteraksi?",
         "preTitle": "Kontrol Dalam Aplikasi",
-        "text": "<div><ul><li><strong>Gabung pembicaraan</strong> dan <strong>keluar dari pembicaraan</strong> menggunakan tombol hijau dan merah.</li><li>Kontrol mikrofon menggunakan tombol <strong>Tidak bisukan/Bisukan</strong>.</li><li>Terhubung <strong>dengan peserta</strong> dengan mengakses profil Linkedin dan Twitter mereke (jika mereka menyediakannya).</li></ul></div>"
+        "text": "<div><ul><li><strong>Gabung pembicaraan</strong> dan <strong>keluar dari pembicaraan</strong> menggunakan tombol hijau dan merah.</li><li>Kontrol mikrofon menggunakan tombol <strong>Tidak bisukan/Bisukan</strong>.</li><li>Terhubung <strong>dengan peserta</strong> dengan mengakses profil Linkedin dan X mereke (jika mereka menyediakannya).</li></ul></div>"
     },
     "end": {
         "title": "Semua hal yang bagus ada akhirnya...",

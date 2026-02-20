@@ -35,17 +35,17 @@ final class UserPayload implements PayloadInterface
         $this->linkedin = $user->getPublicLinkedinProfile();
     }
 
-    /** @return array<string, string|bool|UuidInterface|null> */
+    /** @return array<string, string|UuidInterface|null> */
     public function toArray(): array
     {
         return [
+            'moderator' => $this->moderator ? 'true' : 'false',
             'name' => $this->name,
             'email' => $this->email,
             'twitter' => $this->twitter,
             'linkedin' => $this->linkedin,
-            'moderator' => $this->moderator,
             'id' => $this->id,
-            'avatar' => $this->avatar,
+            'avatar' => $this->avatar ?? '',
         ];
     }
 }

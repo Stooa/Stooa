@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import JitsiLocalTrack from 'lib-jitsi-meet/types/hand-crafted/modules/RTC/JitsiLocalTrack';
+import JitsiLocalTrack from 'modules/RTC/JitsiLocalTrack';
 import { useUser, useSeats, useSharedTrack } from '@/jitsi';
 import { dispatchEvent } from '@/lib/helpers';
 import { SCREEN_SHARE_CANCELED, SCREEN_SHARE_PERMISSIONS_DENIED } from '@/jitsi/Events';

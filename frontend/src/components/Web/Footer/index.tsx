@@ -63,9 +63,9 @@ const Footer = () => {
 
   const socialNetworks: TSocial[] = [
     {
-      name: 'Twitter',
+      name: 'X',
       component: <Twitter />,
-      url: `https://twitter.com/${TWITTER_USER}/`
+      url: `https://x.com/${TWITTER_USER}/`
     },
     {
       name: 'Instagram',

@@ -57,17 +57,25 @@ export const useConference = () => {
     handleTrackRemoved
   } = useTracks();
   const { setUser, handleUserJoin, handleUserLeft, handleUserKicked, getUserNickname } = useUser();
-  const { join, getIds, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
+  const { join, leave: leaveSeat, updateStatus, updateDominantSpeaker } = useSeats();
+
+  const updateReceiverConstraints = () => {
+    try {
+      getConference().setReceiverConstraints({
+        lastN: -1,
+        defaultConstraints: { maxHeight: 720 }
+      });
+    } catch (error) {
+      console.warn('[STOOA] setReceiverConstraints failed:', error);
+    }
+  };
 
   const joinUser = (id, user) => {
     const userId = id ?? myUserId;
     const seat = join(userId, getParticipantNameById(userId));
 
     createTracks(userId, seat, user);
-
-    getConference().selectParticipants(getIds());
-
-    console.log('[STOOA] Join', userId);
+    updateReceiverConstraints();
   };
 
   /**
@@ -91,8 +99,7 @@ export const useConference = () => {
 
     leaveSeat(userId);
     removeTracks(userId);
-
-    conference.selectParticipants(getIds());
+    updateReceiverConstraints();
 
     console.log('[STOOA] User leave', userId);
   };
@@ -164,6 +171,7 @@ export const useConference = () => {
     const conference = getConference();
 
     conference.setDisplayName(name);
+    updateReceiverConstraints();
     conference.setLocalParticipantProperty('twitter', twitter);
     conference.setLocalParticipantProperty('linkedin', linkedin);
     conference.setLocalParticipantProperty('isModerator', getIsModerator());
@@ -207,7 +215,7 @@ export const useConference = () => {
     const seat = join(value);
 
     createTracks(value, seat);
-    getConference().selectParticipants(getIds());
+    updateReceiverConstraints();
 
     console.log('[STOOA] Join', value);
   };
@@ -217,7 +225,7 @@ export const useConference = () => {
 
     leaveSeat(value);
     removeTracks(value);
-    getConference().selectParticipants(getIds());
+    updateReceiverConstraints();
 
     console.log('[STOOA] Leave', value);
   };
@@ -367,8 +375,6 @@ export const useConference = () => {
 
     const auth = await getAuthToken(true, rawRoomName);
 
-    console.log('[STOOA] Auth Token', auth);
-
     if (isUserModerator) {
       makeModerator();
     }
@@ -382,7 +388,6 @@ export const useConference = () => {
       auth ? auth.token : process.env.NEXT_PUBLIC_GUEST_TOKEN ?? null,
       connectionOptions(roomName)
     );
-
     setConnection(connection);
 
     connection.addEventListener(CONNECTION_ESTABLISHED, () =>
@@ -427,13 +432,12 @@ export const useConference = () => {
     }
 
     if (oldTrack === undefined) {
-      conference.addTrack(track);
-      return;
+      return conference.addTrack(track);
     }
 
     handleTrackRemoved(oldTrack);
 
-    conference.replaceTrack(oldTrack, track);
+    return conference.replaceTrack(oldTrack, track);
   };
 
   const getParticipantById = id => getConference().getParticipantById(id);
@@ -537,6 +541,13 @@ export const useConference = () => {
       return null;
     }
 
+    let joined = false;
+    try {
+      joined = conference.getLocalParticipantProperty('joined') === 'yes';
+    } catch {
+      // Conference may be in the process of leaving
+    }
+
     return {
       id: myUserId,
       name: userName,
@@ -544,10 +555,7 @@ export const useConference = () => {
       linkedin,
       isModerator,
       isCurrentUser: true,
-      joined:
-        conference.isJoined() === null
-          ? false
-          : conference.getLocalParticipantProperty('joined') === 'yes',
+      joined,
       isMuted: isLocalParticipantMuted(myUserId, 'audio'),
       isVideoMuted: isLocalParticipantMuted(myUserId, 'video'),
       isJigasi: false

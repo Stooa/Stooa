@@ -19,20 +19,18 @@ final class FeaturesPayload implements PayloadInterface
         private readonly bool $recording,
         private readonly bool $livestreaming,
         private readonly bool $transcription,
-        private readonly bool $outboundCall,
-        private readonly bool $sipOutboundCall
+        private readonly bool $outboundCall
     ) {
     }
 
-    /** @return array<string, bool> */
+    /** @return array<string, string> */
     public function toArray(): array
     {
         return [
-            'livestreaming' => $this->livestreaming,
-            'outbound-call' => $this->outboundCall,
-            'transcription' => $this->transcription,
-            'sip-outbound-call' => $this->sipOutboundCall,
-            'recording' => $this->recording,
+            'recording' => $this->recording ? 'true' : 'false',
+            'livestreaming' => $this->livestreaming ? 'true' : 'false',
+            'transcription' => $this->transcription ? 'true' : 'false',
+            'outbound-call' => $this->outboundCall ? 'true' : 'false',
         ];
     }
 }

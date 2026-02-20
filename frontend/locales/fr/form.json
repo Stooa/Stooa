@@ -51,7 +51,7 @@
         "date": "Le format de la date est invalide : jj/mm/aaaa",
         "terms": "Vous devez accepter les termes et conditions",
         "url": "Ce n'est pas une URL valide",
-        "twitter": "Le nom d'utilisateur Twitter doit commencer par @",
+        "twitter": "Le nom d'utilisateur X doit commencer par @",
         "equalPassword": "Les deux mots de passe doivent correspondre",
         "successMessage": "Changements enregistrés",
         "notEmpty": "This field cannot be empty",

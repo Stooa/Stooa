@@ -40,7 +40,7 @@ class RefreshTokenFunctionalTest extends ApiTestCase
             'password' => self::ADMIN_PASSWORD,
             'active' => true,
             'linkedinProfile' => 'https://www.linkedin.com/test',
-            'twitterProfile' => 'https//www.twitter.com/test',
+            'twitterProfile' => 'https://x.com/test',
             'allowShareData' => true,
         ]);
     }
@@ -103,13 +103,13 @@ class RefreshTokenFunctionalTest extends ApiTestCase
         $this->assertSame($decodedToken['roles'], [UserInterface::ROLE_DEFAULT]);
         $this->assertSame($decodedToken['context'], [
             'user' => [
+                'moderator' => 'false',
                 'name' => 'Name Surnames',
                 'email' => 'user@stooa.com',
-                'twitter' => 'https//www.twitter.com/test',
+                'twitter' => 'https://x.com/test',
                 'linkedin' => 'https://www.linkedin.com/test',
-                'moderator' => false,
                 'id' => null,
-                'avatar' => null,
+                'avatar' => '',
             ],
         ]);
     }

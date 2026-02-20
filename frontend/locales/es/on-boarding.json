@@ -18,7 +18,7 @@
     "appControls": {
         "title": "¿Cómo puedo interactuar?",
         "preTitle": "Controles de la aplicación",
-        "text": "<div><ul><li><strong>Únete a la conversación</strong> y <strong>sal de la conversación</strong> usando los botones verde y rojo.</li><li>Controla el micrófono usando el botón <strong>Activar/Silenciar</strong>.</li><li>Conecta <strong>con los asistentes</strong> accediendo a sus perfiles de Linkedin y Twitter (en caso de que los hayan proporcionado).</li></ul></div>"
+        "text": "<div><ul><li><strong>Únete a la conversación</strong> y <strong>sal de la conversación</strong> usando los botones verde y rojo.</li><li>Controla el micrófono usando el botón <strong>Activar/Silenciar</strong>.</li><li>Conecta <strong>con los asistentes</strong> accediendo a sus perfiles de Linkedin y X (en caso de que los hayan proporcionado).</li></ul></div>"
     },
     "end": {
         "title": "Todas las cosas buenas tienen un final...",

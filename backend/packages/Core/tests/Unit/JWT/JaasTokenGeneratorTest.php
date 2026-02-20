@@ -70,7 +70,7 @@ class JaasTokenGeneratorTest extends TestCase
         $expectedToken = new JWTToken('chat', 'jitsi', $this->appId, '*', $userPayload,
             new \DateTimeImmutable('-10 seconds'),
             new HeaderPayload($this->apiKey, 'RS256', 'JWT'),
-            new FeaturesPayload(false, false, false, false, false)
+            new FeaturesPayload(false, false, false, false)
         );
 
         $expectedNbf = $expectedToken->getNbf();

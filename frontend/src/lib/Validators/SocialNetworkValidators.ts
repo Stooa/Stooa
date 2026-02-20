@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-const twitterValidator = /^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$/gm;
+const twitterValidator =
+  /^https?:\/\/(?:www\.)?(?:twitter\.com|x\.com)\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$/gm;
 
 const linkedinValidator =
   /^(?:http(s)?:\/\/)?(?:[\w]+\.)?linkedin\.com\/(?:pub|in|profile|company)?(?:\/*)([\w\-\.]*)/gm;

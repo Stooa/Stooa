@@ -1,10 +1,10 @@
 {
     "title": "Registra't per començar",
-    "shareAccount": "Si vols compartir el teu perfil de <strong>Twitter</strong> o <strong>Linkedin</strong> amb la resta d'assistents, omple els següents camps.",
+    "shareAccount": "Si vols compartir el teu perfil de <strong>X</strong> o <strong>Linkedin</strong> amb la resta d'assistents, omple els següents camps.",
     "linkedin": "Linkedin URL (opcional)",
-    "twitter": "Twitter URL (opcional)",
+    "twitter": "X URL (opcional)",
     "linkedinHelp": "Copia i enganxa la URL del teu perfil de Linkedin",
-    "twitterHelp": "Copia i enganxa la URL del teu perfil de Twitter",
+    "twitterHelp": "Copia i enganxa la URL del teu perfil de X (ex. https://x.com/usuari)",
     "haveAccount": "Ja tens un compte?",
     "button": {
         "register": "Registra't de forma gratuïta",

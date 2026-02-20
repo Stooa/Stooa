@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import JitsiConference from 'lib-jitsi-meet/types/hand-crafted/JitsiConference';
-import JitsiConnection from 'lib-jitsi-meet/types/hand-crafted/JitsiConnection';
+import JitsiConference from 'JitsiConference';
+import JitsiConnection from 'JitsiConnection';
 import { DevtoolsStateCreator, JitsiStore } from '@/store';
 
 export interface JitsiSlice {

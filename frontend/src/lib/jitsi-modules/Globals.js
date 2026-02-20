@@ -14,8 +14,12 @@ const connectionOptions = roomName => ({
     authdomain: process.env.NEXT_PUBLIC_XMPP_AUTH_DOMAIN,
     muc: process.env.NEXT_PUBLIC_XMPP_MUC_DOMAIN
   },
-  serviceUrl: `wss://${process.env.NEXT_PUBLIC_JITSI_HOST}/xmpp-websocket?room=${process.env.NEXT_PUBLIC_JITSI_ROOM_PREFIX}${roomName}`,
-  deploymentInfo: {}
+  serviceUrl: `wss://${process.env.NEXT_PUBLIC_JITSI_HOST}/${process.env.NEXT_PUBLIC_JITSI_ROOM_PREFIX}xmpp-websocket?room=${roomName}`,
+  websocketKeepAliveUrl: `https://${process.env.NEXT_PUBLIC_JITSI_HOST}/${process.env.NEXT_PUBLIC_JITSI_ROOM_PREFIX}_unlock?room=${roomName}`,
+  deploymentInfo: {},
+  flags: {
+    ssrcRewritingEnabled: true
+  }
 });
 
 const initOptions = { disableAudioLevels: true };

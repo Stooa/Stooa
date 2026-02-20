@@ -6,7 +6,7 @@
         "hostText": "<p>Když spustíte fishbowl, <strong>můžete začít úvodem.</strong> Kamera a mikrofon budou aktivní pouze pro vás. Až budete hotovi, <strong>nezapomeňte povolit účastníkům, aby se připojili ke konverzaci.</strong></p>"
     },
     "appControls": {
-        "text": "<div><ul><li><strong>Připojte se ke konverzaci</strong> a <strong>konverzaci ukončete</strong> pomocí zeleného a červeného tlačítka.</li><li>Ovládejte mikrofon pomocí tlačítka <strong>Zapnout/vypnout zvuk</strong>.</li><li>Spojte se <strong>s účastníky</strong> přístupem k jejich profilům Linkedin a Twitter (pokud je poskytli).</li></ul></div>",
+        "text": "<div><ul><li><strong>Připojte se ke konverzaci</strong> a <strong>konverzaci ukončete</strong> pomocí zeleného a červeného tlačítka.</li><li>Ovládejte mikrofon pomocí tlačítka <strong>Zapnout/vypnout zvuk</strong>.</li><li>Spojte se <strong>s účastníky</strong> přístupem k jejich profilům Linkedin a X (pokud je poskytli).</li></ul></div>",
         "preTitle": "Ovládací prvky v aplikaci",
         "title": "Jak mohu interagovat?"
     },

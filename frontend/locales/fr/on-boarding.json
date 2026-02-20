@@ -18,7 +18,7 @@
     "appControls": {
         "title": "Comment puis-je interagir ?",
         "preTitle": "Contrôles intégrés à l’appli",
-        "text": "<div><ul><li><strong>Rejoignez la conversation</strong> et <strong>quittez la conversation</strong> à l’aide des boutons vert et rouge.</li><li>Contrôlez le microphone à l’aide du bouton <strong>Activer/Désactiver le son</strong>.</li><li>Connectez-vous <strong>avec les participants</strong> en accédant à leurs profils Linkedin et Twitter (s’ils les ont fournis).</li></ul></div>"
+        "text": "<div><ul><li><strong>Rejoignez la conversation</strong> et <strong>quittez la conversation</strong> à l’aide des boutons vert et rouge.</li><li>Contrôlez le microphone à l’aide du bouton <strong>Activer/Désactiver le son</strong>.</li><li>Connectez-vous <strong>avec les participants</strong> en accédant à leurs profils Linkedin et X (s'ils les ont fournis).</li></ul></div>"
     },
     "end": {
         "preTitle": "La fin du fishbowl",
