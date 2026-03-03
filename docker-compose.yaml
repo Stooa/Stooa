@@ -346,7 +346,7 @@ services:
 
     # EXTRA
     mysql:
-        image: mysql:8.0
+        image: mysql:8.4
         ports:
             - 8336:3306
         environment:
