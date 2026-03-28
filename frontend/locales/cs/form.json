@@ -16,7 +16,12 @@
         "selectDay": "Vyberte den",
         "time": "Začíná v",
         "selectTime": "Zvolte čas",
-        "introductionLabel": "Chci začít fishbowl úvodem"
+        "introductionLabel": "Chci začít fishbowl úvodem",
+        "minutesShort": "m",
+        "isPrivate": "Chci, aby tato událost byla soukromá",
+        "passwordTooltip": "Účastníci budou muset zadat heslo, aby se mohli dostat k události",
+        "passwordPlaceholder": "Vložte heslo",
+        "passwordInputLabel": "Heslo"
     },
     "button": {
         "login": "Přihlášení",
@@ -39,7 +44,13 @@
         "date": "Formát data je neplatný: dd/mm/rrrr",
         "passwordLength": "Heslo musí mít nejméně 6 znaků",
         "successMessage": "Změny uloženy",
-        "equalPassword": "Obě hesla se musí shodovat"
+        "equalPassword": "Obě hesla se musí shodovat",
+        "fishbowlPasswordLength": "Heslo musí mít 8 znaků nebo více",
+        "notEmpty": "Toto pole musí být vyplněno",
+        "wrongPassword": "Nesprávné heslo",
+        "unknownErrorServer": "Neznámý problém. Obnovte stránku a zkuste to znovu.",
+        "unknownErrorInside": "Omlouváme se! Při přístupu došlo k chybě. Zkuste to prosím znovu.",
+        "maxLength": "Maximální délka je {{length}} znaků."
     },
     "defaultTitle": "Fishbowl Schůzka - {{name}}",
     "firstname": "Jméno",
