@@ -50,7 +50,7 @@
     "cam": "Càmera",
     "prejoin": {
         "startFishbowl": "Iniciar fishbowl",
-        "joinDiscussion":  "Uneix-te al fishbowl",
+        "joinDiscussion": "Uneix-te al fishbowl",
         "title": "Uneix-te al diàleg",
         "moderatorSubtitle": "Si vols pots configurar l'àudio i el vídeo abans d'iniciar el fishbowl.",
         "subtitle": "Entraràs a la sala com a públic.<br/>Una vegada dins, si vols participar activament en la conversa hauràs d'ocupar una cadira del fishbowl.",
@@ -70,7 +70,7 @@
     "finishedEvent": "El fishbowl ha finalitzat",
     "introduceModal": {
         "title": "Fes una introducció",
-        "description": "La teva càmera s'activarà perquè que pugis dir unes paraules abans del <i>fishbowl</i>. Després podràs permetre als usuaris unir-se a la conversa.",
+        "description": "La teva càmera s'activarà perquè que pugis dir unes paraules abans del fishbowl. Després podràs permetre als usuaris unir-se a la conversa.",
         "shareScreenFirst": "És el teu moment per a <span>dirigir unes paraules</span> als assistents abans d'obrir el fishbowl.",
         "shareScreenSecond": "També podràs <span>compartir la teva pantalla</span> per a dotar de contingut visual a la teva introducció.",
         "shareScreenThird": "<span>Quan acabis</span>, podràs permetre a la resta d’assistents unir-se a la conversa.",
@@ -120,7 +120,7 @@
     "permissionsModalTitle": "Permisos necessaris",
     "permissionsModalDescription": "Si vols ocupar una cadira per a dir alguna cosa, Stooa necessita permisos per a accedir al teu micròfon, perquè la resta de participants t'escolti.",
     "permissionsModalButton": "Sol·licitar accés",
-    "permissionsModalErrorToast" : "Sembla que tens bloquejats els permisos del micròfon des del navegador.<br/>Intenta recarregar la pàgina per a continuar.",
+    "permissionsModalErrorToast": "Sembla que tens bloquejats els permisos del micròfon des del navegador.<br/>Intenta recarregar la pàgina per a continuar.",
     "permissionsNotGranted": "Permisos no concedits.",
     "reaction": {
         "agree": "D'acord",
@@ -136,7 +136,7 @@
         "onBoardingHelp": "No tens clar com funciona un fishbowl? Fes clic aquí",
         "connectWithUsers": "Per a connectar amb les persones a la sala a través de les teves RRSS, registra't en Stooa."
     },
-    "screenSharePermissionsModal" : {
+    "screenSharePermissionsModal": {
         "title": "La teva pantalla no es pot compartir",
         "description": "És possible que Google Chrome no tingui permís per a gravar la pantalla en el teu ordinador. <a>Ves a Preferències de sistema.</a>"
     },
@@ -170,7 +170,7 @@
             "button": "Parar la gravació"
         }
     },
-    "feedback" : {
+    "feedback": {
         "title": "Feedback",
         "satisfactionTitle": "Dona'ns feedback",
         "satisfactionDescription": "Quin és el teu grau de satisfacció amb aquest <i>fishbowl</i>?",
@@ -188,7 +188,7 @@
         "spreadTheWord": "Spread the word!",
         "send": "Enviar",
         "skip": "Saltar",
-        "dashboard" : {
+        "dashboard": {
             "noFeedback": "Cap feedback rebut",
             "feedbackReceived_one": "Feedback rebut",
             "feedbackReceived_other": "Feedbacks rebuts",
@@ -206,7 +206,7 @@
             "duringTooltip": "Feedback rebut durant el fishbowl"
         }
     },
-    "transcription" : {
+    "transcription": {
         "title": "Transcripció",
         "disable": "Ocultar transcripció",
         "enable": "Mostrar transcripció",
