@@ -23,7 +23,7 @@ emails:
         information_help_text: Si ce n’est pas votre compte, vous pouvez supprimer votre adresse électronique de celui-ci. <br>Veuillez ne pas répondre à ce courriel avec votre mot de passe. Nous ne vous demanderons jamais votre mot de passe, et nous vous déconseillons fortement de le partager avec qui que ce soit.
     fishbowl_created_email:
         title: Et maintenant ?<br>Partagez le &lt;i&gt;fishbowl&lt;/i&gt; !
-        description: "Copiez et partagez le lien de ce <i>fishbowl</i> avec les personnes que vous souhaitez inviter à participer à la session.\U0001F447"
+        description: "Copiez et partagez le lien de ce fishbowl avec les personnes que vous souhaitez inviter à participer à la session.👇"
         social_share: "ou partagez sur:"
         edit_details: "N'oubliez pas que vous pouvez <a style='text-decoration: underline;' href='%edit_link%'>modifier les détails de l'événement</a> jusqu'à une heure avant son début."
         cta: "Accéder au fishbowl"
