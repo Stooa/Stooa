@@ -19,12 +19,12 @@ emails:
         description: 'Per restablir la seva contrasenya, segueix el següent enllaç:'
         expire_text: Recorda que aquest enllaç expirarà en 1h.
         button_text: Restableix la teva contrasenya
-        information_text: Si ignores aquest missatge, la teva contrasenya no canviarà.<br>Si no has sol·licitat un canvi de contrasenya, <a href='mailto:%email%'>avisa'ns</a>.
+        information_text: Si ignores aquest missatge, la teva contrasenya no canviarà.<br>Si no has sol·licitat un canvi de contrasenya, <a href="mailto:%email%">avisa'ns</a>.
         information_help_text: Si aquest no és el teu compte, pots esborrar el teu email. <br>Si us plau, no responguis a aquest email amb la teva contrasenya. Nosaltres mai et demanarem la teva contrasenya i et recomanem que no la comparteixis amb ningú.
     fishbowl_created_email:
         subject: Hola %name%! Has creat un nou fishbowl
-        title: Ara què?<br>Comparteix el teu <i>fishbowl</i>!
-        description: "Copia i comparteix l'enllaç d'aquest <i>fishbowl</i> amb les persones que vols afegir a la sessió.👇"
+        title: Ara què?<br>Comparteix el teu fishbowl!
+        description: "Copia i comparteix l'enllaç d'aquest fishbowl amb les persones que vols afegir a la sessió.👇"
         social_share: "o comparteix en:"
         edit_details: "Recorda que pots <a style='text-decoration: underline;' href='%edit_link%'>editar els detalls del fishbowl</a> fins un hora abans de que començe."
         cta: Accedir al fishbowl
@@ -36,7 +36,7 @@ emails:
         info_start_time: Hora d'inici
         info_invite: Enllaç per convidar els assistents
         info_url: Clica aquí per accedir al fishbowl
-        delete: 'Si vols eliminar aquest fishbowl, si us plau, envia''ns un email <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl event with id: %id%">aquí</a>'
+        delete: 'Si vols eliminar aquest fishbowl, si us plau, envia''ns un email <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id: %id%">aquí</a>'
         password: 'Password: %password%'
         languages:
             es: Espanyol
