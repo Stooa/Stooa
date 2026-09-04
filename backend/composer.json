@@ -45,7 +45,7 @@
         "symfony/messenger": "6.4.0",
         "symfony/monolog-bundle": "3.10.0",
         "symfony/runtime": "6.4.0",
-        "symfony/security-bundle": "6.4.2",
+        "symfony/security-bundle": "6.4.10",
         "symfony/string": "6.4.2",
         "symfony/translation": "6.4.2",
         "symfony/twig-bundle": "6.4.0",
