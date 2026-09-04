@@ -73,7 +73,7 @@
     "@mswjs/http-middleware": "0.8.0",
     "@runroom/design-tokens": "2.5.7",
     "@svgr/webpack": "6.5.1",
-    "@testing-library/cypress": "10.1.0",
+    "@testing-library/cypress": "10.1.3",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
     "@types/jest": "27.5.2",
