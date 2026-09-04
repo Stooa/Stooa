@@ -51,7 +51,7 @@
         "symfony/twig-bundle": "6.4.0",
         "symfony/validator": "6.4.2",
         "symfony/workflow": "6.4.2",
-        "symfony/yaml": "6.4.0",
+        "symfony/yaml": "6.4.40",
         "symfonycasts/reset-password-bundle": "1.20.1",
         "twig/twig": "3.8.0",
         "webmozart/assert": "1.11.0",
