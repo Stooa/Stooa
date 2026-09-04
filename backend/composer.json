@@ -44,7 +44,7 @@
         "symfony/mailer": "6.4.2",
         "symfony/messenger": "6.4.0",
         "symfony/monolog-bundle": "3.10.0",
-        "symfony/runtime": "6.4.0",
+        "symfony/runtime": "6.4.14",
         "symfony/security-bundle": "6.4.2",
         "symfony/string": "6.4.2",
         "symfony/translation": "6.4.2",
