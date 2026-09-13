@@ -14,22 +14,16 @@ declare(strict_types=1);
 namespace App\Fishbowl\EventSubscriber;
 
 use App\Fishbowl\Entity\Fishbowl;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
-class FishbowlDoctrineSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(event: Events::preUpdate, priority: 500, connection: 'default')]
+#[AsDoctrineListener(event: Events::prePersist, priority: 500, connection: 'default')]
+class FishbowlDoctrineSubscriber
 {
-    /** @return array<int, string> */
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::prePersist,
-            Events::preUpdate,
-        ];
-    }
-
-    public function preUpdate(LifecycleEventArgs $args): void
+    public function preUpdate(PreUpdateEventArgs $args): void
     {
         $fishbowl = $args->getObject();
 
@@ -40,7 +34,7 @@ class FishbowlDoctrineSubscriber implements EventSubscriberInterface
         $fishbowl->calculateFinishTime();
     }
 
-    public function prePersist(LifecycleEventArgs $args): void
+    public function prePersist(PrePersistEventArgs $args): void
     {
         $fishbowl = $args->getObject();
 
