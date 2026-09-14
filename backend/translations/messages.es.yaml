@@ -19,12 +19,12 @@ emails:
         description: 'Para restablecer tu contraseña, sigue el siguiente enlace:'
         expire_text: Recuerda que este enlace expirará en 1h.
         button_text: Restablece tu contraseña
-        information_text: Si ignoras este mensaje tu contraseña no cambiará.<br>Si no has solicitado un cambio de contraseña, <a href='mailto:%email%'>avísanos</a>.
+        information_text: Si ignoras este mensaje tu contraseña no cambiará.<br>Si no has solicitado un cambio de contraseña, <a href="mailto:%email%">avísanos</a>.
         information_help_text: Si esta no es tu cuenta, puedes borrar tu email de ella. <br>Por favor, no contestes a este email con tu contraseña. Nosotros nunca te pediremos tu contraseña y te recomendamos que no la compartas con nadie.
     fishbowl_created_email:
         subject: ¡Hola %name%! Has creado un nuevo fishbowl
         title: ¿Ahora qué?<br>¡Comparte el fishbowl!
-        description: "Copia y comparte el link de este <i>fishbowl</i> con gente que quieres que se una a la conversación.👇"
+        description: "Copia y comparte el link de este fishbowl con gente que quieres que se una a la conversación.👇"
         social_share: "o comparte en:"
         edit_details: "Recuerda que puedes <a style='text-decoration: underline;' href='%edit_link%'>editar los detalles del fishbowl</a> hasta una hora antes de que empiece."
         cta: Acceder al fishbowl
@@ -36,7 +36,7 @@ emails:
         info_start_time: Hora de inicio
         info_invite: Enlace para invitar los asistentes
         info_url: Clica aquí para acceder al fishbowl
-        delete: 'Si quieres borrar este fishbowl, por favor, envíanos un email <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&body=Please delete the fishbowl event with id: %id%">aquí</a>'
+        delete: 'Si quieres borrar este fishbowl, por favor, envíanos un email <a href="mailto:stooa@stooa.com?subject=Delete fishbowl event&amp;body=Please delete the fishbowl event with id: %id%">aquí</a>'
         password: 'Password: %password%'
         languages:
             es: Español

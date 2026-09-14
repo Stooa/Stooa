@@ -22,5 +22,9 @@
         "title": "Jste tu noví? Nebojte se!",
         "text": "<p>Ve fishbowl je k dispozici 5 míst, kde probíhá konverzace. Pokud je volné místo, můžete se do konverzace kdykoli připojit. Pouze jedno pravidlo: <strong>místo musí být vždy volné.</strong></p><p>Pokud je všech 5 míst obsazeno a vy jste se již zúčastnili, nechte své místo volné, aby mohl přispět i zbytek .</p>"
     },
-    "tooltip": "👆🏼 Průvodce vstupem najdete na otazníku kdykoliv!"
+    "tooltip": "👆🏼 Průvodce vstupem najdete na otazníku kdykoliv!",
+    "shareScreen": {
+        "title": "Sdílejte obrazovku!",
+        "description": "<ul><li>Během úvodu můžete <strong>sdílet obrazovku</strong>, pokud to potřebujete.</li><li>Tato funkce je <strong>k dispozici pouze pro vás</strong> jako hostitele a po zavření úvodu již nebude aktivní.</li><li>Obrazovku můžete sdílet pouze s počítačem, nikdy ne s telefonem.</li></ul>"
+    }
 }
