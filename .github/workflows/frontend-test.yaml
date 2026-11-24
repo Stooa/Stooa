@@ -78,12 +78,12 @@ jobs:
                   working-directory: frontend
 
             - name: Execute Cypress E2E tests
-              uses: cypress-io/github-action@v6
+              uses: cypress-io/github-action@v7.4.10
               with:
                 install: false
                 build: npm run build
                 start: npm run start, npm run mock-server
-                wait-on: 'http://127.0.0.1:3000, http://127.0.0.1:9090'
+                wait-on: 'http://localhost:3000, http://localhost:9090'
                 browser: chrome
                 working-directory: frontend
               env:
