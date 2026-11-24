@@ -83,7 +83,7 @@ jobs:
                 install: false
                 build: npm run build
                 start: npm run start, npm run mock-server
-                wait-on: 'http://localhost:3000, http://localhost:9090'
+                wait-on: 'http://127.0.0.1:3000, http://127.0.0.1:9090'
                 browser: chrome
                 working-directory: frontend
               env:
