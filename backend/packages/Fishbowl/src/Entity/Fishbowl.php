@@ -560,7 +560,7 @@ class Fishbowl implements \Stringable
     public function addParticipant(Participant $participant): self
     {
         if (!$this->participants->contains($participant)) {
-            $this->{$participant}[] = $participant;
+            $this->participants[] = $participant;
             $participant->setFishbowl($this);
         }
 
