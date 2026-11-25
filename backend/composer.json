@@ -4,7 +4,7 @@
     "license": "MPL-2.0",
     "type": "project",
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "ext-apcu": "*",
         "api-platform/core": "3.2.10",
         "doctrine/annotations": "2.0.1",
